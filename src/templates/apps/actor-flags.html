@@ -2,7 +2,7 @@
 	<p class="notes">{{localize 'SFRPG.FlagsInstructions'}}</p>
 
     {{#each flags as |fs section|}}
-    <h3 class="form-header">{{localize section}}</h3>
+    <h3 class="form-header noborder">{{localize section}}</h3>
     {{#each fs as |flag key|}}
 
     <div class="form-group">
@@ -28,6 +28,7 @@
     </div>
     {{/each}}
     {{/each}}
+    <p>{{localize 'SFRPG.FlagsEmptySolarian'}}</p>
 
     <button type="submit" name="submit">
         <i class="far fa-save"></i> {{localize 'SFRPG.FlagsSave'}}

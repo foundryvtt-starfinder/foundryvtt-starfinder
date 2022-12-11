@@ -1,4 +1,5 @@
-import { DiceSFRPG, RollContext } from "../dice.js";
+import { DiceSFRPG } from "../dice.js";
+import RollContext from "../rolls/rollcontext.js";
 
 /*
 The following hooks were added:
@@ -68,7 +69,7 @@ export class CombatSFRPG extends Combat {
 
         if (eventData.isNewPhase) {
             if (this.round.resetInitiative) {
-                const updates = this.data.combatants.map(c => { return {
+                const updates = this.combatants.map(c => { return {
                     _id: c.id,
                     initiative: null
                 }});
@@ -100,12 +101,12 @@ export class CombatSFRPG extends Combat {
                 break;
         }
 
-        const combatants = this.data.combatants;
-        const scene = game.scenes.get(this.data.scene);
+        const combatants = this.combatants;
+        const scene = game.scenes.get(this.scene);
         const players = game.users.players;
         const settings = game.settings.get("core", Combat.CONFIG_SETTING);
         const turns = this.combatants.contents.sort(sortMethod === "asc" ? this._sortCombatantsAsc : this._sortCombatants);
-        this.data.turn = Math.clamped(this.data.turn, CombatSFRPG.HiddenTurn, turns.length-1);
+        this.turn = Math.clamped(this.turn, CombatSFRPG.HiddenTurn, turns.length-1);
 
         return this.turns = turns;
     }
@@ -116,7 +117,7 @@ export class CombatSFRPG extends Combat {
         }
         
         let nextRound = this.round;
-        let nextPhase = this.data.flags.sfrpg.phase;
+        let nextPhase = this.flags.sfrpg.phase;
         let nextTurn = this.turn - 1;
 
         const currentPhase = this.getCurrentPhase();
@@ -131,7 +132,7 @@ export class CombatSFRPG extends Combat {
                 nextTurn = -1;
                 for (let [index, combatant] of turnEntries) {
                     if (index >= this.turn) continue;
-                    if (!combatant.data.defeated) {
+                    if (!combatant.defeated) {
                         nextTurn = index;
                         break;
                     }
@@ -156,7 +157,7 @@ export class CombatSFRPG extends Combat {
             }
         }
 
-        if (nextPhase !== this.data.flags.sfrpg.phase || nextRound !== this.round) {
+        if (nextPhase !== this.flags.sfrpg.phase || nextRound !== this.round) {
             const newPhase = this.getPhases()[nextPhase];
             if (newPhase.iterateTurns) {
                 if (this.settings.skipDefeated) {
@@ -176,11 +177,11 @@ export class CombatSFRPG extends Combat {
         }
         
         let nextRound = this.round;
-        let nextPhase = this.data.flags.sfrpg.phase;
+        let nextPhase = this.flags.sfrpg.phase;
         let nextTurn = this.turn + 1;
 
         const phases = this.getPhases();
-        const currentPhase = phases[this.data.flags.sfrpg.phase];
+        const currentPhase = phases[this.flags.sfrpg.phase];
         if (currentPhase.resetInitiative && this.hasCombatantsWithoutInitiative()) {
             ui.notifications.error(game.i18n.format(CombatSFRPG.errors.missingInitiative), {permanent: false});
             return;
@@ -190,7 +191,7 @@ export class CombatSFRPG extends Combat {
             if (this.settings.skipDefeated) {
                 for (let [index, combatant] of this.turns.entries()) {
                     if (index < nextTurn) continue;
-                    if (!combatant.data.defeated) {
+                    if (!combatant.defeated) {
                         nextTurn = index;
                         break;
                     }
@@ -230,7 +231,7 @@ export class CombatSFRPG extends Combat {
             }
         }
 
-        if (nextPhase !== this.data.flags.sfrpg.phase) {
+        if (nextPhase !== this.flags.sfrpg.phase) {
             const newPhase = phases[nextPhase];
             if (newPhase.iterateTurns) {
                 if (this.settings.skipDefeated) {
@@ -255,7 +256,7 @@ export class CombatSFRPG extends Combat {
         let nextPhase = 0;
         let nextTurn = 0;
 
-        if (this.data.flags.sfrpg.phase === 0 && this.turn <= indexOfFirstUndefeatedCombatant) {
+        if (this.flags.sfrpg.phase === 0 && this.turn <= indexOfFirstUndefeatedCombatant) {
             nextRound = Math.max(1, this.round - 1);
         }
 
@@ -294,13 +295,13 @@ export class CombatSFRPG extends Combat {
 
     async _handleUpdate(nextRound, nextPhase, nextTurn) {
         const phases = this.getPhases();
-        const currentPhase = phases[this.data.flags.sfrpg.phase];
+        const currentPhase = phases[this.flags.sfrpg.phase];
         const newPhase = phases[nextPhase];
 
         const eventData = {
             combat: this,
             isNewRound: nextRound != this.round,
-            isNewPhase: nextRound != this.round || nextPhase != this.data.flags.sfrpg.phase,
+            isNewPhase: nextRound != this.round || nextPhase != this.flags.sfrpg.phase,
             isNewTurn: (nextRound != this.round && phases[nextPhase].iterateTurns) || nextTurn != this.turn,
             oldRound: this.round,
             newRound: nextRound,
@@ -331,7 +332,7 @@ export class CombatSFRPG extends Combat {
 
         if (eventData.isNewPhase) {
             if (newPhase.resetInitiative) {
-                const updates = this.data.combatants.map(c => { return {
+                const updates = this.combatants.map(c => { return {
                     _id: c.id,
                     initiative: null
                 }});
@@ -345,7 +346,7 @@ export class CombatSFRPG extends Combat {
     async _notifyBeforeUpdate(eventData) {
         //console.log(["_notifyBeforeUpdate", eventData]);
         //console.log([isNewRound, isNewPhase, isNewTurn]);
-        //console.log([this.round, this.data.flags.sfrpg.phase, this.turn]);
+        //console.log([this.round, this.flags.sfrpg.phase, this.turn]);
 
         Hooks.callAll("onBeforeUpdateCombat", eventData);
     }
@@ -353,12 +354,12 @@ export class CombatSFRPG extends Combat {
     async _notifyAfterUpdate(eventData) {
         //console.log(["_notifyAfterUpdate", eventData]);
         //console.log([isNewRound, isNewPhase, isNewTurn]);
-        //console.log([this.round, this.data.flags.sfrpg.phase, this.turn]);
+        //console.log([this.round, this.flags.sfrpg.phase, this.turn]);
 
         const combatType = this.getCombatType();
         const combatChatSetting = game.settings.get('sfrpg', `${combatType}ChatCards`);
 
-        if (eventData.isNewRound && combatChatSetting !== "disabled") {
+        if (eventData.isNewRound && (combatChatSetting !== "disabled" || combatChatSetting === "roundsTurns")) {
             //console.log(`Starting new round! New phase is ${eventData.newPhase.name}, it is now the turn of: ${eventData.newCombatant?.name || "the GM"}!`);
             await this._printNewRoundChatCard(eventData);
         }
@@ -368,7 +369,7 @@ export class CombatSFRPG extends Combat {
             await this._printNewPhaseChatCard(eventData);
         }
         
-        if (eventData.newCombatant && combatChatSetting === "enabled") {
+        if (eventData.newCombatant && (combatChatSetting === "enabled" || combatChatSetting === "roundsTurns")) {
             //console.log(`[${eventData.newPhase.name}] It is now the turn of: ${eventData.newCombatant?.name || "the GM"}!`);
             await this._printNewTurnChatCard(eventData);
         }
@@ -480,6 +481,7 @@ export class CombatSFRPG extends Combat {
         const chatData = {
             type: CONST.CHAT_MESSAGE_TYPES.OTHER,
             speaker: ChatMessage.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
+            whisper: eventData.newCombatant.hidden ? ChatMessage.getWhisperRecipients("GM") : [],            
             content: html
         };
 
@@ -487,7 +489,7 @@ export class CombatSFRPG extends Combat {
     }
 
     getCombatType() {
-        return this.data.flags?.sfrpg?.combatType || "normal";
+        return this.flags?.sfrpg?.combatType || "normal";
     }
 
     getCombatName() {
@@ -515,12 +517,12 @@ export class CombatSFRPG extends Combat {
     }
 
     getCurrentPhase() {
-        return this.getPhases()[this.data.flags?.sfrpg?.phase || 0];
+        return this.getPhases()[this.flags?.sfrpg?.phase || 0];
     }
 
     hasCombatantsWithoutInitiative() {
         for (let [index, combatant] of this.turns.entries()) {
-            if ((!this.settings.skipDefeated || !combatant.data.defeated) && !combatant.initiative) {
+            if ((!this.settings.skipDefeated || !combatant.defeated) && !combatant.initiative) {
                 return true;
             }
         }
@@ -529,7 +531,7 @@ export class CombatSFRPG extends Combat {
 
     getIndexOfFirstUndefeatedCombatant() {
         for (let [index, combatant] of this.turns.entries()) {
-            if (!combatant.data.defeated) {
+            if (!combatant.defeated) {
                 return index;
             }
         }
@@ -539,7 +541,7 @@ export class CombatSFRPG extends Combat {
     getIndexOfLastUndefeatedCombatant() {
         const turnEntries = Array.from(new Set(this.turns.entries())).reverse();
         for (let [index, combatant] of turnEntries) {
-            if (!combatant.data.defeated) {
+            if (!combatant.defeated) {
                 return index;
             }
         }
@@ -552,19 +554,15 @@ export class CombatSFRPG extends Combat {
 
     _getInitiativeFormula(combatant) {
         if (this.getCombatType() === "starship") {
-            return "1d20 + @skills.pil.mod"
+            return "1d20 + @pilot.skills.pil.mod"
         }
         else {
-            return "1d20 + @attributes.init.total";
+            return "1d20 + @combatant.attributes.init.total";
         }
     }
 
     async _getInitiativeRoll(combatant, formula) {
-        const rollContext = new RollContext();
-        rollContext.addContext("combatant", combatant.actor);
-        rollContext.setMainContext("combatant");
-
-        combatant.actor.setupRollContexts(rollContext);
+        const rollContext = RollContext.createActorRollContext(combatant.actor, {actorKey: "combatant"});
 
         const parts = [];
 
@@ -573,6 +571,9 @@ export class CombatSFRPG extends Combat {
             rollContext.setMainContext("pilot");
         } else {
             parts.push("@combatant.attributes.init.total");
+            if (game.settings.get("sfrpg", "useInitiativeTiebreaker")) {
+                parts.push(combatant.actor.system.attributes.init.total / 100);
+            }
         }
     
         const rollResult = await DiceSFRPG.createRoll({
@@ -587,78 +588,79 @@ export class CombatSFRPG extends Combat {
 
     async rollInitiative(ids, {formula=null, updateTurn=true, messageOptions={}}={}) {
   
-      // Structure input data
-      ids = typeof ids === "string" ? [ids] : ids;
-      const currentId = this.combatant?.id;
-      let rollMode = messageOptions.rollMode || game.settings.get("core", "rollMode");
-  
-      // Iterate over Combatants, performing an initiative roll for each
-      const updates = [];
-      const messages = [];
-      let isFirst = true;
-      for (const id of ids) {
-        // Get Combatant data
-        const combatant = this.combatants.get(id);
-        if ( !combatant?.isOwner ) return results;
-  
-        // Roll initiative
-        const combatantInitiativeFormula = formula || this._getInitiativeFormula(combatant);
-        const roll = await this._getInitiativeRoll(combatant, combatantInitiativeFormula);
-        if (!roll) {
-            continue;
+        // Structure input data
+        ids = typeof ids === "string" ? [ids] : ids;
+        const currentId = this.combatant?.id;
+        let rollMode = messageOptions.rollMode || game.settings.get("core", "rollMode");
+    
+        // Iterate over Combatants, performing an initiative roll for each
+        const updates = [];
+        const messages = [];
+        let isFirst = true;
+        for (const id of ids) {
+            // Get Combatant data
+            const combatant = this.combatants.get(id);
+            if ( !combatant?.isOwner ) return results;
+    
+            // Roll initiative
+            const roll = await this._getInitiativeRoll(combatant, "");
+            if (!roll) {
+                continue;
+            }
+            updates.push({_id: id, initiative: roll.total});
+    
+            // Construct chat message data
+            let messageData = mergeObject({
+            speaker: {
+                scene: game.scenes.current?.id,
+                actor: combatant.actor ? combatant.actor.id : null,
+                token: combatant.token.id,
+                alias: combatant.token.name
+            },
+            flavor: `${combatant.token.name} rolls for Initiative!`,
+            flags: {"core.initiativeRoll": true}
+            }, messageOptions);
+
+            const preparedRollExplanation = DiceSFRPG.formatFormula(roll.flags.sfrpg.finalFormula.formula);
+            const rollContent = await roll.render();
+            const insertIndex = rollContent.indexOf(`<section class="tooltip-part">`);
+            const explainedRollContent = rollContent.substring(0, insertIndex) + preparedRollExplanation + rollContent.substring(insertIndex);
+
+            rollMode = roll.options?.rollMode ?? rollMode;
+
+            const chatData = {
+                flavor: messageData.flavor,
+                speaker: messageData.speaker,
+                flags: messageData.flags,
+                content: explainedRollContent,
+                rollMode: combatant.hidden && (rollMode === "roll") ? "gmroll" : rollMode,
+                roll: roll,
+                type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+                sound: CONFIG.sounds.dice
+            };
+
+            if ( !isFirst ) {
+                chatData.sound = null;   // Only play 1 sound for the whole set
+            }
+            isFirst = false;
+            messages.push(chatData);
         }
-        updates.push({_id: id, initiative: roll.total});
-  
-        // Construct chat message data
-        let messageData = mergeObject({
-          speaker: {
-            scene: canvas.scene.id,
-            actor: combatant.actor ? combatant.actor.id : null,
-            token: combatant.token.id,
-            alias: combatant.token.name
-          },
-          flavor: `${combatant.token.name} rolls for Initiative!`,
-          flags: {"core.initiativeRoll": true}
-        }, messageOptions);
-
-        const preparedRollExplanation = DiceSFRPG.formatFormula(roll.flags.sfrpg.finalFormula.formula);
-        const rollContent = await roll.render();
-        const insertIndex = rollContent.indexOf(`<section class="tooltip-part">`);
-        const explainedRollContent = rollContent.substring(0, insertIndex) + preparedRollExplanation + rollContent.substring(insertIndex);
-
-        const chatData = {
-            flavor: messageData.flavor,
-            speaker: messageData.speaker,
-            flags: messageData.flags,
-            content: explainedRollContent,
-            rollMode: combatant.hidden && (rollMode === "roll") ? "gmroll" : rollMode,
-            roll: roll,
-            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-            sound: CONFIG.sounds.dice
-        };
-
-        if ( !isFirst ) {
-            chatData.sound = null;   // Only play 1 sound for the whole set
+        
+        if ( !updates.length ) return this;
+    
+        // Update multiple combatants
+        await this.updateEmbeddedDocuments("Combatant", updates);
+    
+        // Ensure the turn order remains with the same combatant
+        if ( updateTurn && currentId ) {
+            await this.update({turn: this.turns.findIndex(t => t.id === currentId)});
         }
-        isFirst = false;
-        messages.push(chatData);
-      }
-      
-      if ( !updates.length ) return this;
-  
-      // Update multiple combatants
-      await this.updateEmbeddedDocuments("Combatant", updates);
-  
-      // Ensure the turn order remains with the same combatant
-      if ( updateTurn && currentId ) {
-        await this.update({turn: this.turns.findIndex(t => t.id === currentId)});
-      }
-  
-      // Create multiple chat messages
-      await CONFIG.ChatMessage.documentClass.create(messages);
-  
-      // Return the updated Combat
-      return this;
+    
+        // Create multiple chat messages
+        await CONFIG.ChatMessage.documentClass.create(messages);
+    
+        // Return the updated Combat
+        return this;
     }
 
     _getPilotForStarship(starshipActor) {
@@ -683,7 +685,7 @@ export class CombatSFRPG extends Combat {
 }
 
 async function onConfigClicked(combat, direction) {
-    const combatType = combat.data.flags?.sfrpg?.combatType || "normal";
+    const combatType = combat.flags?.sfrpg?.combatType || "normal";
     const types = ["normal", "starship", "vehicleChase"];
     const indexOf = types.indexOf(combatType);
     const wrappedIndex = (types.length + indexOf + direction) % types.length;
@@ -700,21 +702,21 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
         return;
     }
 
-    const header = html.find('#combat-round');
+    const header = html.find('.combat-tracker-header');
     const footer = html.find('.directory-footer');
 
     const roundHeader = header.find('h3');
     const originalHtml = roundHeader.html();
 
-    if (activeCombat.data.round) {
+    if (activeCombat.round) {
         const phases = activeCombat.getPhases();
         if (phases.length > 1) {
-            roundHeader.replaceWith(`<div>${originalHtml}<h4>${game.i18n.format(activeCombat.getCurrentPhase().name)}</h4></div>`);
+            roundHeader.replaceWith(`<div>${originalHtml}<h4 class="combat-type">${game.i18n.format(activeCombat.getCurrentPhase().name)}</h4></div>`);
         }
     } else {
         const prevCombatTypeButton = `<a class="combat-type-prev" title="${game.i18n.format("SFRPG.Combat.EncounterTracker.SelectPrevType")}"><i class="fas fa-caret-left"></i></a>`;
         const nextCombatTypeButton = `<a class="combat-type-next" title="${game.i18n.format("SFRPG.Combat.EncounterTracker.SelectNextType")}"><i class="fas fa-caret-right"></i></a>`;
-        roundHeader.replaceWith(`<div>${originalHtml}<h4>${prevCombatTypeButton} &nbsp; ${activeCombat.getCombatName()} &nbsp; ${nextCombatTypeButton}</h4></div>`);
+        roundHeader.replaceWith(`<div>${originalHtml}<h4 class="combat-type">${prevCombatTypeButton} &nbsp; ${activeCombat.getCombatName()} &nbsp; ${nextCombatTypeButton}</h4></div>`);
         
         // Handle button clicks
         const configureButtonPrev = header.find('.combat-type-prev');

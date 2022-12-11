@@ -1,40 +1,40 @@
 {
+  "_id": "qbKzyS9YiTO6OTvg",
   "name": "Quick Fix",
   "type": "starshipAction",
-  "data": {
-    "description": {
-      "value": "<h2>Normal effect</h2><p>If you have at least 12 ranks in Engineering, you can try to repair a system quickly by spending 1 Resolve Point and attempting an Engineering check (DC = 20 + 1-1/2 × your starship’s tier). If successful, you remove the critical damage condition from one system for 1 hour (allowing it to function as if it had taken no critical damage), after which time it must be repaired as normal.</p><h2>Critical effect</h2><p>Your inspired engineering results in a lasting repair, removing the critical damage condition from the system for 1 day instead of for 1 hour.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "CRB",
+  "flags": {},
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
     "type": "",
-    "role": "engineer",
-    "order": 40,
-    "phase": {
-      "name": "Engineering phase",
-      "tooltip": "This action can be used during the engineering phase of combat."
+    "dc": {
+      "resolve": true,
+      "value": "20 + floor(1.5 * @ship.details.tier)"
     },
-    "isPush": false,
-    "resolvePointCost": 1,
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<h2>Normal effect</h2><p>If you have at least 12 ranks in Engineering, you can try to repair a system quickly by spending 1 Resolve Point and attempting an Engineering check (DC = 20 + 1-1/2 × your starship’s tier). If successful, you remove the critical damage condition from one system for 1 hour (allowing it to function as if it had taken no critical damage), after which time it must be repaired as normal.</p><h2>Critical effect</h2><p>Your inspired engineering results in a lasting repair, removing the critical damage condition from the system for 1 day instead of for 1 hour.</p>"
+    },
+    "effectCritical": "Your inspired engineering results in a lasting repair, removing the critical damage condition from the system for 1 day instead of for 1 hour.",
+    "effectNormal": "If you have at least 12 ranks in Engineering, you can try to repair a system quickly by spending 1 Resolve Point and attempting an Engineering check (DC = 20 + 1-1/2 × your starship’s tier). If successful, you remove the critical damage condition from one system for 1 hour (allowing it to function as if it had taken no critical damage), after which time it must be repaired as normal.",
     "formula": [
       {
         "name": "Engineering",
         "formula": "@engineer.skills.eng.mod"
       }
     ],
+    "isPush": false,
+    "order": 40,
+    "phase": {
+      "name": "Engineering phase",
+      "tooltip": "This action can be used during the engineering phase of combat."
+    },
+    "resolvePointCost": 1,
+    "role": "engineer",
+    "selectorKey": "engineer",
     "selectors": [
       "engineer"
     ],
-    "selectorKey": "engineer",
-    "dc": {
-      "value": "20 + floor(1.5 * @ship.details.tier)",
-      "resolve": true
-    },
-    "effectNormal": "If you have at least 12 ranks in Engineering, you can try to repair a system quickly by spending 1 Resolve Point and attempting an Engineering check (DC = 20 + 1-1/2 × your starship’s tier). If successful, you remove the critical damage condition from one system for 1 hour (allowing it to function as if it had taken no critical damage), after which time it must be repaired as normal.",
-    "effectCritical": "Your inspired engineering results in a lasting repair, removing the critical damage condition from the system for 1 day instead of for 1 hour."
-  },
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "qbKzyS9YiTO6OTvg"
+    "source": "CRB"
+  }
 }

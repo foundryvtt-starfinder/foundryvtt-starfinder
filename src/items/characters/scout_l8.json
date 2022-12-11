@@ -2,128 +2,1012 @@
   "_id": "B6wIE92BgcY7ZdLY",
   "name": "Scout L8",
   "type": "drone",
-  "data": {
-    "abilities": {
-      "str": {
-        "value": 10,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "base": 10
+  "effects": [],
+  "flags": {},
+  "img": "icons/svg/mystery-man.svg",
+  "items": [
+    {
+      "_id": "sXGo7LbSlwQWfyic",
+      "name": "Hover Drone",
+      "type": "chassis",
+      "effects": [],
+      "flags": {},
+      "img": "systems/sfrpg/icons/classes/hover_drone.webp",
+      "sort": 100000,
+      "system": {
+        "type": "",
+        "abilityIncreaseStats": {
+          "first": "dex",
+          "second": "wis"
+        },
+        "abilityMods": {
+          "parts": []
+        },
+        "abilityScores": {
+          "cha": 6,
+          "con": "-",
+          "dex": 16,
+          "int": 6,
+          "str": 6,
+          "wis": 8
+        },
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"Y4ajp13ACVnzaS5s\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Drone Chassis</a></p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl01_LabelName\">The smallest of the chassis options, the hover drone is made from a lightweight frame equipped with miniature hoverjets, rotors, turbofans, or a similar form of aerial propulsion (small legs or wheels provide propulsion on land). This drone can fly at a good pace and avoid obstacles, but it is not very stealthy.</span></p>\n<h2>Initial Mods</h2>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl01_LabelName\"><a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"KiseyOPy3VaVldlw\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Flight System (Ex)</a> (x2, included in its speed), <a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"dDZLj7L4psee7UZc\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Weapon Mount (Ex)</a></span></p>\n<h2>Bonus Skill Unit</h2>\n<p>Acrobatics <a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"6cm9UHSlmWPU9QQe\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Skill Unit (Ex)</a></p>"
+        },
+        "eac": 11,
+        "fort": "slow",
+        "kac": 11,
+        "levels": 8,
+        "modifiers": [],
+        "ref": "fast",
+        "size": "tiny",
+        "source": "",
+        "speed": {
+          "special": "fly 30 ft. (average)",
+          "value": 30
+        },
+        "will": "slow"
+      }
+    },
+    {
+      "_id": "8oFyX6T9kexGZDYR",
+      "name": "Weapon Focus (Combat)",
+      "type": "feat",
+      "effects": [],
+      "flags": {},
+      "img": "systems/sfrpg/icons/feats/weapon_focus.webp",
+      "sort": 100000,
+      "system": {
+        "type": "",
+        "ability": "",
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": null,
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>You have increased training in a particular weapon type, making it easier to hit your target.<br><strong>Prerequisites</strong>: Proficiency with selected weapon type.</p>\n<hr>\n<p><span id=\"ctl00_MainContent_DataListTypes_ctl00_LabelName\"><strong>Benefit</strong>: Chose one weapon type (small arms, longarms, heavy weapons, etc.). You gain a +1 bonus to attack rolls with that weapon type. If your base attack bonus is at least 3 lower than your character level (or your mechanic’s class level, if you are a drone), you gain a +2 bonus instead.</span></p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": ""
+        },
+        "formula": "",
+        "isActive": null,
+        "modifiers": [
+          {
+            "_id": "d647bc9f-f4a8-405b-b65d-9bd57647bfeb",
+            "name": "Weapon Focus (Combat)",
+            "type": "untyped",
+            "condition": "",
+            "effectType": "weapon-attacks",
+            "enabled": true,
+            "modifier": "1",
+            "modifierType": "constant",
+            "notes": "",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": "smallA"
+          }
+        ],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": null,
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": "negate"
+        },
+        "source": "Core Rulebook",
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "uses": {
+          "max": 0,
+          "per": "",
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "yVqPs8pYraQtifTT",
+      "name": "Mobility (Combat)",
+      "type": "feat",
+      "effects": [],
+      "flags": {},
+      "img": "systems/sfrpg/icons/feats/mobility.webp",
+      "sort": 200000,
+      "system": {
+        "type": "",
+        "ability": "",
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": null,
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>You can easily move past dangerous foes.<br><strong>Prerequisites</strong>: Dex 13.</p>\n<hr>\n<p><span id=\"ctl00_MainContent_DataListTypes_ctl00_LabelName\"><strong>Benefit</strong>: You gain a +4 bonus to your Armor Class against attacks of opportunity that you provoke by leaving a threatened square.</span></p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": ""
+        },
+        "formula": "",
+        "isActive": null,
+        "modifiers": [],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": null,
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": "negate"
+        },
+        "source": "Core Rulebook",
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "uses": {
+          "max": 0,
+          "per": "",
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "8IS4yKSerGEio9iS",
+      "name": "Laser pistol, corona",
+      "type": "weapon",
+      "effects": [],
+      "flags": {},
+      "img": "systems/sfrpg/icons/equipment/weapons/laser-pistol-azimuth.webp",
+      "sort": 100000,
+      "system": {
+        "type": "",
+        "ability": "dex",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "rwak",
+        "activation": {
+          "type": "none",
+          "condition": "",
+          "cost": null
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": null,
+          "value": null
+        },
+        "attackBonus": 0,
+        "attributes": {
+          "ac": {
+            "value": "5"
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": "17"
+          },
+          "hp": {
+            "max": "33",
+            "value": 33
+          },
+          "size": "medium",
+          "sturdy": true
+        },
+        "attuned": false,
+        "bulk": "L",
+        "capacity": {
+          "max": 20,
+          "value": 20
+        },
+        "chatFlavor": "",
+        "container": {
+          "contents": [],
+          "isOpen": true,
+          "storage": [
+            {
+              "type": "slot",
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 6,
+              "subtype": "fusion",
+              "weightProperty": "level"
+            },
+            {
+              "type": "slot",
+              "acceptsType": [
+                "goods"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 1,
+              "subtype": "",
+              "weightProperty": ""
+            }
+          ]
+        },
+        "critical": {
+          "effect": "Burn 1d4",
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "2d4",
+              "operator": "",
+              "types": {
+                "fire": true
+              }
+            }
+          ]
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>The laser pistol is possibly the most common small arm used by explorers, guards, mercenaries, and traders. Laser pistols are light and reliable, yet they still deal a respectable amount of damage.</p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": ""
+        },
+        "equippable": false,
+        "equipped": true,
+        "formula": "",
+        "identified": true,
+        "isActive": null,
+        "level": 6,
+        "modifiers": [],
+        "price": 4270,
+        "proficient": true,
+        "properties": {
+          "aeon": false,
+          "amm": false,
+          "analog": false,
+          "antibiological": false,
+          "archaic": false,
+          "aurora": false,
+          "automatic": false,
+          "blast": false,
+          "block": false,
+          "boost": false,
+          "breach": false,
+          "breakdown": false,
+          "bright": false,
+          "cluster": false,
+          "conceal": false,
+          "deconstruct": false,
+          "deflect": false,
+          "disarm": false,
+          "double": false,
+          "drainCharge": false,
+          "echo": false,
+          "entangle": false,
+          "explode": false,
+          "extinguish": false,
+          "feint": false,
+          "fiery": false,
+          "firstArc": false,
+          "flexibleLine": false,
+          "force": false,
+          "freeHands": false,
+          "fueled": false,
+          "grapple": false,
+          "gravitation": false,
+          "guided": false,
+          "harrying": false,
+          "holyWater": false,
+          "hybrid": false,
+          "ignite": false,
+          "indirect": false,
+          "injection": false,
+          "integrated": false,
+          "line": false,
+          "living": false,
+          "lockdown": false,
+          "mind-affecting": false,
+          "mine": false,
+          "mire": false,
+          "modal": false,
+          "necrotic": false,
+          "nonlethal": false,
+          "one": true,
+          "operative": false,
+          "penetrating": false,
+          "polarize": false,
+          "polymorphic": false,
+          "powered": false,
+          "professional": false,
+          "punchGun": false,
+          "qreload": false,
+          "radioactive": false,
+          "reach": false,
+          "recall": false,
+          "regrowth": false,
+          "relic": false,
+          "reposition": false,
+          "shape": false,
+          "shells": false,
+          "shield": false,
+          "sniper": false,
+          "stun": false,
+          "subtle": false,
+          "sunder": false,
+          "swarm": false,
+          "tail": false,
+          "teleportive": false,
+          "thought": false,
+          "throttle": false,
+          "thrown": false,
+          "trip": false,
+          "two": false,
+          "unbalancing": false,
+          "underwater": false,
+          "unwieldy": false,
+          "variantBoost": false,
+          "wideLine": false
+        },
+        "quantity": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "ft",
+          "value": 90
+        },
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "source": "CRB pg. 173",
+        "special": "",
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "usage": {
+          "per": "shot",
+          "value": 1
+        },
+        "uses": {
+          "max": null,
+          "per": "",
+          "value": null
+        },
+        "weaponCategory": "laser",
+        "weaponType": "smallA"
+      }
+    },
+    {
+      "_id": "HmyZJzetIcn6L9O3",
+      "name": "Shot on the Run (Combat)",
+      "type": "feat",
+      "effects": [],
+      "flags": {},
+      "img": "systems/sfrpg/icons/feats/shot_on_the_run.webp",
+      "sort": 300000,
+      "system": {
+        "type": "",
+        "ability": "",
+        "actionType": "",
+        "activation": {
+          "type": "full",
+          "condition": "",
+          "cost": 1
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": null,
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>You can move, fire a ranged weapon, and move again before your foes can react.<br><strong>Prerequisites</strong>: Dex 15, Mobility, base attack bonus +4.</p>\n<hr>\n<p><span id=\"ctl00_MainContent_DataListTypes_ctl00_LabelName\"><strong>Benefit</strong>: As a full action, you can move up to your speed and make a single ranged attack at any point during your movement. If you have the trick attack class feature, you can take your movement from trick attack at any time during a trick attack (see page 93) with a ranged weapon (instead of only before).<br></span></p>\n<p><span id=\"ctl00_MainContent_DataListTypes_ctl00_LabelName\"><strong>Normal</strong>: You can move only before or after an attack with a ranged weapon, not both.</span></p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": ""
+        },
+        "formula": "",
+        "isActive": null,
+        "modifiers": [],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": null,
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": "negate"
+        },
+        "source": "Core Rulebook",
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "uses": {
+          "max": 0,
+          "per": "",
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "pHTIIELa0UbcCrHM",
+      "name": "Camera (Ex)",
+      "type": "mod",
+      "effects": [],
+      "flags": {},
+      "img": "systems/sfrpg/icons/classes/camera.webp",
+      "sort": 100000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "additionalMovement": "",
+        "additionalSenses": "",
+        "arms": {
+          "armType": "general",
+          "number": 0
+        },
+        "bonusSkill": "",
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"QsCRXffpsDoMvPnT\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Basic Mods</a></p>\n        <p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl02_LabelName\">Your drone has a camera that you can see through using your custom rig as long as your drone is within range. The camera has ordinary sight, and is capable of seeing whatever an ordinary @Compendium[sfrpg.races.AMBcyDZDtJ1OOzh3]{Human} could see. The camera can also record up to 1 hour of footage, which can be downloaded and viewed using your custom rig.</span></p>"
+        },
+        "isArmorSlot": false,
+        "isFree": false,
+        "maxInstalls": 1,
+        "modifiers": [],
+        "shieldProficiency": "",
+        "source": "",
+        "weaponProficiency": ""
+      }
+    },
+    {
+      "_id": "hGa0aBb9bNIkbV0V",
+      "name": "Enhanced Armor (Ex)",
+      "type": "mod",
+      "effects": [],
+      "flags": {},
+      "img": "systems/sfrpg/icons/classes/enhanced_armor.webp",
+      "sort": 0,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "additionalMovement": "",
+        "additionalSenses": "",
+        "arms": {
+          "armType": "general",
+          "number": 0
+        },
+        "bonusSkill": "",
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"QsCRXffpsDoMvPnT\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Basic Mods</a></p>\n        <p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl06_LabelName\">Your drone gains a +2 bonus to its AC. At 11th level, you can choose this mod a second time as an advanced mod.</span></p>"
+        },
+        "isArmorSlot": false,
+        "isFree": false,
+        "maxInstalls": 2,
+        "modifiers": [
+          {
+            "_id": "87f207d1-4425-4617-9be2-a38cf360a4a0",
+            "name": "AC Bonus",
+            "type": "untyped",
+            "condition": "",
+            "effectType": "ac",
+            "enabled": true,
+            "modifier": 2,
+            "modifierType": "constant",
+            "notes": "",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": "both"
+          }
+        ],
+        "shieldProficiency": "",
+        "source": "",
+        "weaponProficiency": ""
+      }
+    },
+    {
+      "_id": "ibTrrIaEuEPcvMi0",
+      "name": "Enhanced Senses (Ex; Drone)",
+      "type": "mod",
+      "effects": [],
+      "flags": {},
+      "img": "systems/sfrpg/icons/classes/enhanced_senses_drone.webp",
+      "sort": -100000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "additionalMovement": "",
+        "additionalSenses": "low-light vision 60; darkvision 60",
+        "arms": {
+          "armType": "general",
+          "number": 0
+        },
+        "bonusSkill": "acr",
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"QsCRXffpsDoMvPnT\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Basic Mods</a></p>\n        <p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl07_LabelName\">Your drone gains low-light vision, darkvision to 60 feet, and a +2 insight bonus to Perception skill checks. If your drone has the camera mod, the camera gains these senses as well.</span></p>"
+        },
+        "isArmorSlot": false,
+        "isFree": false,
+        "maxInstalls": 1,
+        "modifiers": [
+          {
+            "_id": "8cfd3643-78d0-4e68-9d47-f113eea04f2a",
+            "name": "New Modifier",
+            "type": "insight",
+            "condition": "",
+            "effectType": "skill",
+            "enabled": true,
+            "modifier": 2,
+            "modifierType": "constant",
+            "notes": "",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": "per"
+          }
+        ],
+        "shieldProficiency": "",
+        "source": "",
+        "weaponProficiency": "sarms"
+      }
+    },
+    {
+      "_id": "7BOUK3W9WT9TNZf7",
+      "name": "Flight System (Ex)",
+      "type": "mod",
+      "effects": [],
+      "flags": {},
+      "img": "systems/sfrpg/icons/classes/flight_system.webp",
+      "sort": -50000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "additionalMovement": "flight (1/2 land speed; average) 10 min/day",
+        "additionalSenses": "",
+        "arms": {
+          "armType": "general",
+          "number": null
+        },
+        "bonusSkill": "",
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"cQtmz297P5g6g5xv\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Advanced Mods</a></p>\n        <p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl30_LabelName\">Your drone gains a fly speed equal to half its land speed with average maneuverability for up to 10 minutes per day. This duration need not be continuous, but it must be used in 1-minute increments. You can select this mod a second time; in this case, the drone’s fly speed increases to its full land speed, and there is no limit on the amount of time it can fly.</span></p>"
+        },
+        "isArmorSlot": false,
+        "isFree": false,
+        "maxInstalls": 1,
+        "modifiers": [],
+        "shieldProficiency": "",
+        "source": "",
+        "weaponProficiency": ""
+      }
+    },
+    {
+      "_id": "3GsPBdqPFOLP1trO",
+      "name": "Hardened AI (Ex)",
+      "type": "mod",
+      "effects": [],
+      "flags": {},
+      "img": "systems/sfrpg/icons/classes/hardened_ai.webp",
+      "sort": -25000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "additionalMovement": "",
+        "additionalSenses": "",
+        "arms": {
+          "armType": "general",
+          "number": 0
+        },
+        "bonusSkill": "",
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>&gt;@Compendium[sfrpg.class-features.QsCRXffpsDoMvPnT]{Basic Mods}</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl10_LabelName\">Your drone’s AI is secured against outside influence. Any attempt to hack your drone takes a –4 penalty, and your drone receives a +4 insight bonus to saving throws against spells or effects that attempt to take control of the drone or otherwise dictate its actions.</span></p>"
+        },
+        "isArmorSlot": false,
+        "isFree": false,
+        "maxInstalls": 1,
+        "modifiers": [],
+        "shieldProficiency": "",
+        "source": "",
+        "weaponProficiency": ""
+      }
+    },
+    {
+      "_id": "fEhUIdkoBLqaTTPJ",
+      "name": "Weapon Mount (Ex)",
+      "type": "mod",
+      "effects": [],
+      "flags": {},
+      "img": "systems/sfrpg/icons/classes/weapon_mount.webp",
+      "sort": -37500,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "additionalMovement": "",
+        "additionalSenses": "",
+        "arms": {
+          "armType": "ranged",
+          "number": 1
+        },
+        "bonusSkill": "per",
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"QsCRXffpsDoMvPnT\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Basic Mods</a></p>\n                <p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl25_LabelName\">You can affix a small arm or another one-handed ranged weapon on your drone, allowing it to wield that weapon and attack with it. This weapon cannot be disarmed. Mounting a longarm, a heavy weapon, or another two-handed ranged weapon requires two weapon mounts. A weapon mount can hold up to two batteries, two magazines, or two of another type of ammunition for the affixed weapon, provided this ammunition is of light bulk or less. Multiple weapon mounts used to affix a single two-handed weapon count as a single weapon mount for the purpose of how much ammunition it can hold. The drone reloads these batteries or magazines automatically, which takes the usual amount of time for the weapon. Spent batteries or magazines are stored within the drone. You can replace all of a weapon mount’s batteries or magazines as a move action. You must purchase separately or already have the weapon and ammunition for use with a weapon mount. You can replace the weapon with any other weapon that meets the criteria for your mount (for example, if you have two weapon mounts, you could replace a longarm with a heavy weapon). Swapping out a weapon in a weapon mount requires use of your custom rig and 1 hour of work. You can select this mod multiple times, each time adding an additional weapon mount to the drone.</span></p>"
+        },
+        "isArmorSlot": false,
+        "isFree": false,
+        "maxInstalls": 1,
+        "modifiers": [],
+        "shieldProficiency": "",
+        "source": "",
+        "weaponProficiency": "sarms"
+      }
+    }
+  ],
+  "prototypeToken": {
+    "name": "Scout L8",
+    "actorId": "B6wIE92BgcY7ZdLY",
+    "actorLink": false,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": ""
+    },
+    "displayBars": 20,
+    "displayName": 20,
+    "disposition": -1,
+    "flags": {},
+    "height": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 360,
+      "animation": {
+        "type": null,
+        "intensity": 5,
+        "reverse": false,
+        "speed": 5
       },
-      "dex": {
-        "value": 10,
+      "attenuation": 0.5,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "contrast": 0,
+      "darkness": {
+        "max": 1,
+        "min": 0
+      },
+      "dim": 0,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "shadows": 0
+    },
+    "lockRotation": false,
+    "randomImg": false,
+    "rotation": 0,
+    "scale": 1,
+    "sight": {
+      "angle": 360,
+      "attenuation": 0.1,
+      "brightness": 1,
+      "color": null,
+      "contrast": 0,
+      "enabled": false,
+      "range": 0,
+      "saturation": 0,
+      "visionMode": "basic"
+    },
+    "texture": {
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": null
+    },
+    "width": 1
+  },
+  "system": {
+    "abilities": {
+      "cha": {
+        "base": 10,
         "min": 3,
         "misc": 0,
         "mod": 0,
-        "base": 10
+        "value": 10
       },
       "con": {
-        "value": 10,
+        "base": 10,
         "min": 3,
         "misc": 0,
         "mod": 0,
-        "base": 10
+        "value": 10
+      },
+      "dex": {
+        "base": 10,
+        "min": 3,
+        "misc": 0,
+        "mod": 0,
+        "value": 10
       },
       "int": {
-        "value": 10,
+        "base": 10,
         "min": 3,
         "misc": 0,
         "mod": 0,
-        "base": 10
+        "value": 10
+      },
+      "str": {
+        "base": 10,
+        "min": 3,
+        "misc": 0,
+        "mod": 0,
+        "value": 10
       },
       "wis": {
-        "value": 10,
+        "base": 10,
         "min": 3,
         "misc": 0,
         "mod": 0,
-        "base": 10
-      },
-      "cha": {
-        "value": 10,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "base": 10
+        "value": 10
       }
     },
     "attributes": {
-      "eac": {
-        "min": 0,
-        "value": 10,
-        "tooltip": []
-      },
-      "kac": {
-        "min": 0,
-        "value": 10,
-        "tooltip": []
-      },
-      "cmd": {
-        "min": 0,
-        "value": 10,
-        "tooltip": []
-      },
-      "hp": {
-        "min": 0,
-        "max": 10,
-        "value": 80,
-        "temp": null,
-        "tempmax": null,
-        "tooltip": []
-      },
-      "sp": {
-        "min": 0,
-        "max": 10,
-        "value": 0,
-        "tooltip": []
-      },
-      "rp": {
-        "min": 0,
-        "max": 10,
-        "value": 0,
-        "tooltip": []
-      },
-      "init": {
-        "value": 0,
-        "bonus": 0,
-        "total": 0,
-        "tooltip": []
-      },
-      "fort": {
-        "value": 0,
-        "bonus": 0,
-        "misc": 0,
-        "tooltip": []
-      },
-      "reflex": {
-        "value": 0,
-        "bonus": 0,
-        "misc": 0,
-        "tooltip": []
-      },
-      "will": {
-        "value": 0,
-        "bonus": 0,
-        "misc": 0,
-        "tooltip": []
-      },
-      "baseAttackBonus": {
-        "value": 0,
-        "rolledMods": [],
-        "tooltip": []
-      },
-      "bab": 0,
-      "arms": 2,
-      "space": "",
-      "reach": "",
-      "speed": {
-        "value": "30 ft",
-        "special": ""
-      },
-      "keyability": "",
       "armorSlots": {
         "current": 0,
         "max": 0
+      },
+      "arms": 2,
+      "bab": 0,
+      "baseAttackBonus": {
+        "rolledMods": [],
+        "tooltip": [],
+        "value": 0
+      },
+      "cmd": {
+        "min": 0,
+        "tooltip": [],
+        "value": 10
+      },
+      "eac": {
+        "min": 0,
+        "tooltip": [],
+        "value": 10
+      },
+      "fort": {
+        "bonus": 0,
+        "misc": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "hp": {
+        "max": 10,
+        "min": 0,
+        "temp": null,
+        "tempmax": null,
+        "tooltip": [],
+        "value": 80
+      },
+      "init": {
+        "bonus": 0,
+        "tooltip": [],
+        "total": 0,
+        "value": 0
+      },
+      "kac": {
+        "min": 0,
+        "tooltip": [],
+        "value": 10
+      },
+      "keyability": "",
+      "reach": "",
+      "reflex": {
+        "bonus": 0,
+        "misc": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "rp": {
+        "max": 10,
+        "min": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "sp": {
+        "max": 10,
+        "min": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "space": "",
+      "speed": {
+        "burrowing": {
+          "base": 0
+        },
+        "climbing": {
+          "base": 0
+        },
+        "flying": {
+          "base": 0
+        },
+        "land": {
+          "base": 30
+        },
+        "mainMovement": "land",
+        "special": "",
+        "swimming": {
+          "base": 0
+        }
       },
       "weaponMounts": {
         "melee": {
@@ -134,332 +1018,14 @@
           "current": 0,
           "max": 0
         }
+      },
+      "will": {
+        "bonus": 0,
+        "misc": 0,
+        "tooltip": [],
+        "value": 0
       }
     },
-    "details": {
-      "alignment": "",
-      "race": "",
-      "class": "",
-      "biography": {
-        "value": "<h2>SPECIAL ABILITIES</h2>\n<p><strong>Mobility </strong>Scout gains a +4 bonus to its AC against attacks of opportunity it provokes by leaving a threatened square.</p>\n<hr />\n<p><strong>Shot on the Run</strong> As a full action, Scout can move up to its speed, making one ranged attack at any point during its movement.</p>\n<p>&nbsp;</p>\n<h2>DRONE MODS</h2>\n<p><strong>Camera </strong>As long as Scout is within range of Quig&rsquo;s expert rig (5 miles), Quig can see through Scout&rsquo;s senses (in addition to whatever a typical human can see).</p>\n<hr />\n<p><strong>Enhanced Armor</strong> Scout gains +2 to its AC (this has been added to its EAC and KAC above).</p>\n<hr />\n<p><strong>Enhanced Senses</strong> Scout gains low-light vision and darkvision, which also operate through its camera.</p>\n<hr />\n<p><strong>Flight System Scout</strong> has a flight system included in its chassis. This grants it the flight listed with its speed.</p>\n<hr />\n<p><strong>Hardened AI</strong> Checks to hack Scout take a &ndash;4 penalty.</p>\n<hr />\n<p><strong>Weapon Mount</strong> Scout has a corona laser pistol, which can be fired 20 times before Quig must recharge or replace its battery</p>",
-        "public": "",
-        "fullBodyImage": "",
-        "dateOfBirth": "",
-        "age": 0,
-        "height": "",
-        "weight": "",
-        "otherVisuals": "",
-        "gmNotes": null
-      },
-      "deity": "",
-      "level": {
-        "value": 1,
-        "min": 1,
-        "max": 20
-      },
-      "chassis": "",
-      "owner": "Quig L4",
-      "environment": "",
-      "organization": ""
-    },
-    "skillpoints": {
-      "used": 0,
-      "max": 0,
-      "tooltip": []
-    },
-    "skills": {
-      "acr": {
-        "ability": "dex",
-        "min": 0,
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 0,
-        "enabled": true,
-        "isTrainedOnly": false,
-        "hasArmorCheckPenalty": true
-      },
-      "ath": {
-        "ability": "str",
-        "min": 0,
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 0,
-        "enabled": true,
-        "isTrainedOnly": false,
-        "hasArmorCheckPenalty": true
-      },
-      "blu": {
-        "ability": "cha",
-        "min": 0,
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 0,
-        "enabled": false,
-        "isTrainedOnly": false,
-        "hasArmorCheckPenalty": false
-      },
-      "com": {
-        "ability": "int",
-        "min": 0,
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 0,
-        "enabled": true,
-        "isTrainedOnly": true,
-        "hasArmorCheckPenalty": false
-      },
-      "cul": {
-        "ability": "int",
-        "min": 0,
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 0,
-        "enabled": false,
-        "isTrainedOnly": true,
-        "hasArmorCheckPenalty": false
-      },
-      "dip": {
-        "ability": "cha",
-        "min": 0,
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 0,
-        "enabled": false,
-        "isTrainedOnly": false,
-        "hasArmorCheckPenalty": false
-      },
-      "dis": {
-        "ability": "cha",
-        "min": 0,
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 0,
-        "enabled": false,
-        "isTrainedOnly": false,
-        "hasArmorCheckPenalty": false
-      },
-      "eng": {
-        "ability": "int",
-        "min": 0,
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 0,
-        "enabled": true,
-        "isTrainedOnly": true,
-        "hasArmorCheckPenalty": false
-      },
-      "int": {
-        "ability": "cha",
-        "min": 0,
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 0,
-        "enabled": false,
-        "isTrainedOnly": false,
-        "hasArmorCheckPenalty": false
-      },
-      "lsc": {
-        "ability": "int",
-        "min": 0,
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 0,
-        "enabled": false,
-        "isTrainedOnly": true,
-        "hasArmorCheckPenalty": false
-      },
-      "med": {
-        "ability": "int",
-        "min": 0,
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 0,
-        "enabled": false,
-        "isTrainedOnly": true,
-        "hasArmorCheckPenalty": false
-      },
-      "mys": {
-        "ability": "wis",
-        "min": 0,
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 0,
-        "enabled": false,
-        "isTrainedOnly": true,
-        "hasArmorCheckPenalty": false
-      },
-      "per": {
-        "ability": "wis",
-        "min": 0,
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 0,
-        "enabled": true,
-        "isTrainedOnly": false,
-        "hasArmorCheckPenalty": false
-      },
-      "phs": {
-        "ability": "int",
-        "min": 0,
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 0,
-        "enabled": false,
-        "isTrainedOnly": true,
-        "hasArmorCheckPenalty": false
-      },
-      "pil": {
-        "ability": "dex",
-        "min": 0,
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 0,
-        "enabled": false,
-        "isTrainedOnly": false,
-        "hasArmorCheckPenalty": false
-      },
-      "pro": {
-        "ability": "int",
-        "min": 0,
-        "ranks": 0,
-        "value": 3,
-        "misc": 0,
-        "mod": 0,
-        "enabled": false,
-        "isTrainedOnly": true,
-        "hasArmorCheckPenalty": false,
-        "subname": ""
-      },
-      "sen": {
-        "ability": "wis",
-        "min": 0,
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 0,
-        "enabled": false,
-        "isTrainedOnly": false,
-        "hasArmorCheckPenalty": false
-      },
-      "sle": {
-        "ability": "dex",
-        "min": 0,
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 0,
-        "enabled": false,
-        "isTrainedOnly": true,
-        "hasArmorCheckPenalty": true
-      },
-      "ste": {
-        "ability": "dex",
-        "min": 0,
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 0,
-        "enabled": true,
-        "isTrainedOnly": false,
-        "hasArmorCheckPenalty": true
-      },
-      "sur": {
-        "ability": "wis",
-        "min": 0,
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 0,
-        "enabled": false,
-        "isTrainedOnly": false,
-        "hasArmorCheckPenalty": false
-      }
-    },
-    "traits": {
-      "size": "Medium",
-      "senses": "",
-      "languages": {
-        "value": [],
-        "custom": ""
-      },
-      "di": {
-        "value": [],
-        "custom": ""
-      },
-      "dr": {
-        "value": [],
-        "custom": ""
-      },
-      "dv": {
-        "value": [],
-        "custom": ""
-      },
-      "ci": {
-        "value": [],
-        "custom": ""
-      },
-      "damageReduction": {
-        "value": 0,
-        "negatedBy": ""
-      },
-      "sr": 0,
-      "weaponProf": {
-        "value": [
-          "sarms"
-        ],
-        "custom": ""
-      }
-    },
-    "currency": {
-      "credit": 0,
-      "upb": 0
-    },
-    "spells": {
-      "spell0": {
-        "value": 0,
-        "max": 0
-      },
-      "spell1": {
-        "value": 0,
-        "max": 0
-      },
-      "spell2": {
-        "value": 0,
-        "max": 0
-      },
-      "spell3": {
-        "value": 0,
-        "max": 0
-      },
-      "spell4": {
-        "value": 0,
-        "max": 0
-      },
-      "spell5": {
-        "value": 0,
-        "max": 0
-      },
-      "spell6": {
-        "value": 0,
-        "max": 0
-      }
-    },
-    "modifiers": [],
     "conditions": {
       "asleep": false,
       "bleeding": false,
@@ -500,865 +1066,349 @@
     "counterClasses": {
       "values": {}
     },
+    "currency": {
+      "credit": 0,
+      "upb": 0
+    },
+    "details": {
+      "alignment": "",
+      "biography": {
+        "age": 0,
+        "dateOfBirth": "",
+        "fullBodyImage": "",
+        "gmNotes": null,
+        "height": "",
+        "otherVisuals": "",
+        "public": "",
+        "value": "<h2>SPECIAL ABILITIES</h2>\n<p><strong>Mobility </strong>Scout gains a +4 bonus to its AC against attacks of opportunity it provokes by leaving a threatened square.</p>\n<hr />\n<p><strong>Shot on the Run</strong> As a full action, Scout can move up to its speed, making one ranged attack at any point during its movement.</p>\n<p>&nbsp;</p>\n<h2>DRONE MODS</h2>\n<p><strong>Camera </strong>As long as Scout is within range of Quig&rsquo;s expert rig (5 miles), Quig can see through Scout&rsquo;s senses (in addition to whatever a typical human can see).</p>\n<hr />\n<p><strong>Enhanced Armor</strong> Scout gains +2 to its AC (this has been added to its EAC and KAC above).</p>\n<hr />\n<p><strong>Enhanced Senses</strong> Scout gains low-light vision and darkvision, which also operate through its camera.</p>\n<hr />\n<p><strong>Flight System Scout</strong> has a flight system included in its chassis. This grants it the flight listed with its speed.</p>\n<hr />\n<p><strong>Hardened AI</strong> Checks to hack Scout take a &ndash;4 penalty.</p>\n<hr />\n<p><strong>Weapon Mount</strong> Scout has a corona laser pistol, which can be fired 20 times before Quig must recharge or replace its battery</p>",
+        "weight": ""
+      },
+      "chassis": "",
+      "class": "",
+      "deity": "",
+      "environment": "",
+      "level": {
+        "max": 20,
+        "min": 1,
+        "value": 1
+      },
+      "organization": "",
+      "owner": "Quig L4",
+      "race": ""
+    },
+    "modifiers": [],
     "resources": {
       "primary": {
-        "value": 0,
+        "lr": 0,
         "max": 0,
         "sr": 0,
-        "lr": 0
+        "value": 0
       },
       "secondary": {
-        "value": 0,
+        "lr": 0,
         "max": 0,
         "sr": 0,
-        "lr": 0
+        "value": 0
       },
       "tertiary": {
-        "value": 0,
+        "lr": 0,
         "max": 0,
         "sr": 0,
-        "lr": 0
+        "value": 0
+      }
+    },
+    "skillpoints": {
+      "max": 0,
+      "tooltip": [],
+      "used": 0
+    },
+    "skills": {
+      "acr": {
+        "ability": "dex",
+        "enabled": true,
+        "hasArmorCheckPenalty": true,
+        "isTrainedOnly": false,
+        "min": 0,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      },
+      "ath": {
+        "ability": "str",
+        "enabled": true,
+        "hasArmorCheckPenalty": true,
+        "isTrainedOnly": false,
+        "min": 0,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      },
+      "blu": {
+        "ability": "cha",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": false,
+        "min": 0,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      },
+      "com": {
+        "ability": "int",
+        "enabled": true,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": true,
+        "min": 0,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      },
+      "cul": {
+        "ability": "int",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": true,
+        "min": 0,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      },
+      "dip": {
+        "ability": "cha",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": false,
+        "min": 0,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      },
+      "dis": {
+        "ability": "cha",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": false,
+        "min": 0,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      },
+      "eng": {
+        "ability": "int",
+        "enabled": true,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": true,
+        "min": 0,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      },
+      "int": {
+        "ability": "cha",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": false,
+        "min": 0,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      },
+      "lsc": {
+        "ability": "int",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": true,
+        "min": 0,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      },
+      "med": {
+        "ability": "int",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": true,
+        "min": 0,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      },
+      "mys": {
+        "ability": "wis",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": true,
+        "min": 0,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      },
+      "per": {
+        "ability": "wis",
+        "enabled": true,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": false,
+        "min": 0,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      },
+      "phs": {
+        "ability": "int",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": true,
+        "min": 0,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      },
+      "pil": {
+        "ability": "dex",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": false,
+        "min": 0,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      },
+      "pro": {
+        "ability": "int",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": true,
+        "min": 0,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "subname": "",
+        "value": 3
+      },
+      "sen": {
+        "ability": "wis",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": false,
+        "min": 0,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      },
+      "sle": {
+        "ability": "dex",
+        "enabled": false,
+        "hasArmorCheckPenalty": true,
+        "isTrainedOnly": true,
+        "min": 0,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      },
+      "ste": {
+        "ability": "dex",
+        "enabled": true,
+        "hasArmorCheckPenalty": true,
+        "isTrainedOnly": false,
+        "min": 0,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      },
+      "sur": {
+        "ability": "wis",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": false,
+        "min": 0,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      }
+    },
+    "spells": {
+      "spell0": {
+        "max": 0,
+        "value": 0
+      },
+      "spell1": {
+        "max": 0,
+        "value": 0
+      },
+      "spell2": {
+        "max": 0,
+        "value": 0
+      },
+      "spell3": {
+        "max": 0,
+        "value": 0
+      },
+      "spell4": {
+        "max": 0,
+        "value": 0
+      },
+      "spell5": {
+        "max": 0,
+        "value": 0
+      },
+      "spell6": {
+        "max": 0,
+        "value": 0
+      }
+    },
+    "traits": {
+      "ci": {
+        "custom": "",
+        "value": []
+      },
+      "damageReduction": {
+        "negatedBy": "",
+        "value": 0
+      },
+      "di": {
+        "custom": "",
+        "value": []
+      },
+      "dr": {
+        "custom": "",
+        "value": []
+      },
+      "dv": {
+        "custom": "",
+        "value": []
+      },
+      "languages": {
+        "custom": "",
+        "value": []
+      },
+      "senses": "",
+      "size": "Medium",
+      "sr": 0,
+      "weaponProf": {
+        "custom": "",
+        "value": [
+          "sarms"
+        ]
       }
     }
-  },
-  "flags": {},
-  "img": "",
-  "token": {
-    "flags": {},
-    "name": "Scout L8",
-    "displayName": 0,
-    "img": "",
-    "tint": null,
-    "width": 1,
-    "height": 1,
-    "scale": 1,
-    "lockRotation": false,
-    "rotation": 0,
-    "vision": false,
-    "dimSight": 0,
-    "brightSight": 0,
-    "dimLight": 0,
-    "brightLight": 0,
-    "sightAngle": 360,
-    "lightAngle": 360,
-    "lightAlpha": 1,
-    "lightAnimation": {
-      "speed": 5,
-      "intensity": 5
-    },
-    "actorId": "B6wIE92BgcY7ZdLY",
-    "actorLink": false,
-    "disposition": -1,
-    "displayBars": 0,
-    "bar1": {},
-    "bar2": {},
-    "randomImg": false
-  },
-  "items": [
-    {
-      "_id": "sXGo7LbSlwQWfyic",
-      "name": "Hover Drone",
-      "type": "chassis",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"Y4ajp13ACVnzaS5s\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Drone Chassis</a></p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl01_LabelName\">The smallest of the chassis options, the hover drone is made from a lightweight frame equipped with miniature hoverjets, rotors, turbofans, or a similar form of aerial propulsion (small legs or wheels provide propulsion on land). This drone can fly at a good pace and avoid obstacles, but it is not very stealthy.</span></p>\n<h2>Initial Mods</h2>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl01_LabelName\"><a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"KiseyOPy3VaVldlw\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Flight System (Ex)</a> (x2, included in its speed), <a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"dDZLj7L4psee7UZc\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Weapon Mount (Ex)</a></span></p>\n<h2>Bonus Skill Unit</h2>\n<p>Acrobatics <a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"6cm9UHSlmWPU9QQe\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Skill Unit (Ex)</a></p>",
-          "unidentified": ""
-        },
-        "source": "",
-        "type": "",
-        "modifiers": [],
-        "levels": 8,
-        "size": "tiny",
-        "speed": {
-          "value": 30,
-          "special": "fly 30 ft. (average)"
-        },
-        "eac": 11,
-        "kac": 11,
-        "fort": "slow",
-        "ref": "fast",
-        "will": "slow",
-        "abilityScores": {
-          "str": 6,
-          "dex": 16,
-          "con": "-",
-          "int": 6,
-          "wis": 8,
-          "cha": 6
-        },
-        "abilityIncreaseStats": {
-          "first": "dex",
-          "second": "wis"
-        },
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": 100000,
-      "flags": {},
-      "img": "systems/sfrpg/icons/classes/hover_drone.png",
-      "effects": []
-    },
-    {
-      "_id": "8oFyX6T9kexGZDYR",
-      "name": "Weapon Focus (Combat)",
-      "type": "feat",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p>You have increased training in a particular weapon type, making it easier to hit your target.<br><strong>Prerequisites</strong>: Proficiency with selected weapon type.</p>\n<hr>\n<p><span id=\"ctl00_MainContent_DataListTypes_ctl00_LabelName\"><strong>Benefit</strong>: Chose one weapon type (small arms, longarms, heavy weapons, etc.). You gain a +1 bonus to attack rolls with that weapon type. If your base attack bonus is at least 3 lower than your character level (or your mechanic’s class level, if you are a drone), you gain a +2 bonus instead.</span></p>",
-          "unidentified": ""
-        },
-        "source": "Core Rulebook",
-        "type": "",
-        "activation": {
-          "type": "",
-          "cost": 0,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "target": {
-          "value": "",
-          "type": ""
-        },
-        "area": {
-          "value": null,
-          "units": null,
-          "shape": "",
-          "effect": ""
-        },
-        "range": {
-          "value": null,
-          "units": null,
-          "additional": "",
-          "per": ""
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "isActive": null,
-        "ability": "",
-        "actionType": "",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "parts": [],
-          "effect": ""
-        },
-        "damage": {
-          "parts": []
-        },
-        "formula": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": "negate"
-        },
-        "descriptors": [],
-        "modifiers": [
-          {
-            "name": "Weapon Focus (Combat)",
-            "modifier": "1",
-            "type": "untyped",
-            "effectType": "weapon-attacks",
-            "valueAffected": "smallA",
-            "enabled": true,
-            "source": "",
-            "notes": "",
-            "modifierType": "constant",
-            "condition": "",
-            "subtab": "misc",
-            "_id": "d647bc9f-f4a8-405b-b65d-9bd57647bfeb"
-          }
-        ],
-        "requirements": "",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 100000,
-      "flags": {},
-      "img": "systems/sfrpg/icons/feats/weapon_focus.png",
-      "effects": []
-    },
-    {
-      "_id": "yVqPs8pYraQtifTT",
-      "name": "Mobility (Combat)",
-      "type": "feat",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p>You can easily move past dangerous foes.<br><strong>Prerequisites</strong>: Dex 13.</p>\n<hr>\n<p><span id=\"ctl00_MainContent_DataListTypes_ctl00_LabelName\"><strong>Benefit</strong>: You gain a +4 bonus to your Armor Class against attacks of opportunity that you provoke by leaving a threatened square.</span></p>",
-          "unidentified": ""
-        },
-        "source": "Core Rulebook",
-        "type": "",
-        "activation": {
-          "type": "",
-          "cost": 0,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "target": {
-          "value": "",
-          "type": ""
-        },
-        "area": {
-          "value": null,
-          "units": null,
-          "shape": "",
-          "effect": ""
-        },
-        "range": {
-          "value": null,
-          "units": null,
-          "additional": "",
-          "per": ""
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "isActive": null,
-        "ability": "",
-        "actionType": "",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "parts": [],
-          "effect": ""
-        },
-        "damage": {
-          "parts": []
-        },
-        "formula": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": "negate"
-        },
-        "descriptors": [],
-        "modifiers": [],
-        "requirements": "",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 200000,
-      "flags": {},
-      "img": "systems/sfrpg/icons/feats/mobility.png",
-      "effects": []
-    },
-    {
-      "_id": "8IS4yKSerGEio9iS",
-      "name": "Laser pistol, corona",
-      "type": "weapon",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p>The laser pistol is possibly the most common small arm used by explorers, guards, mercenaries, and traders. Laser pistols are light and reliable, yet they still deal a respectable amount of damage.</p>",
-          "unidentified": ""
-        },
-        "source": "CRB pg. 173",
-        "type": "",
-        "quantity": 1,
-        "bulk": "L",
-        "price": 4270,
-        "level": 6,
-        "attuned": false,
-        "equipped": true,
-        "equippable": false,
-        "identified": true,
-        "attributes": {
-          "sturdy": true,
-          "customBuilt": false,
-          "size": "medium",
-          "dex": {
-            "mod": ""
-          },
-          "hp": {
-            "value": 33,
-            "max": "33"
-          },
-          "hardness": {
-            "value": "17"
-          },
-          "ac": {
-            "value": "5"
-          }
-        },
-        "activation": {
-          "type": "none",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "target": {
-          "value": "",
-          "type": ""
-        },
-        "area": {
-          "value": null,
-          "units": null,
-          "shape": "",
-          "effect": ""
-        },
-        "range": {
-          "value": 90,
-          "units": "ft",
-          "additional": "",
-          "per": ""
-        },
-        "uses": {
-          "value": null,
-          "max": null,
-          "per": ""
-        },
-        "isActive": null,
-        "ability": "dex",
-        "actionType": "rwak",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "parts": [],
-          "effect": "Burn 1d4"
-        },
-        "damage": {
-          "parts": [
-            [
-              "2d4",
-              "fire"
-            ]
-          ]
-        },
-        "formula": "",
-        "save": {
-          "type": "",
-          "dc": "",
-          "descriptor": "negate"
-        },
-        "descriptors": [],
-        "capacity": {
-          "value": 20,
-          "max": 20
-        },
-        "usage": {
-          "value": 1,
-          "per": "shot"
-        },
-        "modifiers": [],
-        "container": {
-          "contents": [],
-          "storage": [
-            {
-              "type": "slot",
-              "subtype": "fusion",
-              "amount": 6,
-              "acceptsType": [
-                "fusion"
-              ],
-              "affectsEncumbrance": true,
-              "weightProperty": "level"
-            },
-            {
-              "type": "slot",
-              "subtype": "",
-              "amount": 1,
-              "acceptsType": [
-                "goods"
-              ],
-              "weightProperty": "",
-              "affectsEncumbrance": true
-            }
-          ],
-          "isOpen": true
-        },
-        "weaponType": "smallA",
-        "weaponCategory": "laser",
-        "special": "",
-        "properties": {
-          "one": true,
-          "two": false,
-          "amm": false,
-          "analog": false,
-          "archaic": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "bright": false,
-          "disarm": false,
-          "entangle": false,
-          "explode": false,
-          "injection": false,
-          "line": false,
-          "nonlethal": false,
-          "operative": false,
-          "penetrating": false,
-          "powered": false,
-          "qreload": false,
-          "reach": false,
-          "sniper": false,
-          "stun": false,
-          "thrown": false,
-          "trip": false,
-          "unwieldy": false,
-          "aeon": false,
-          "antibiological": false,
-          "aurora": false,
-          "breach": false,
-          "breakdown": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "holyWater": false,
-          "hybrid": false,
-          "ignite": false,
-          "indirect": false,
-          "integrated": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "polarize": false,
-          "polymorphic": false,
-          "professional": false,
-          "punchGun": false,
-          "radioactive": false,
-          "recall": false,
-          "regrowth": false,
-          "relic": false,
-          "reposition": false,
-          "shape": false,
-          "shells": false,
-          "shield": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "unbalancing": false,
-          "underwater": false,
-          "variantBoost": false,
-          "wideLine": false
-        },
-        "proficient": true,
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": 100000,
-      "flags": {},
-      "img": "systems/sfrpg/icons/equipment/weapons/laser-pistol-azimuth.jpg",
-      "effects": []
-    },
-    {
-      "_id": "HmyZJzetIcn6L9O3",
-      "name": "Shot on the Run (Combat)",
-      "type": "feat",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p>You can move, fire a ranged weapon, and move again before your foes can react.<br><strong>Prerequisites</strong>: Dex 15, Mobility, base attack bonus +4.</p>\n<hr>\n<p><span id=\"ctl00_MainContent_DataListTypes_ctl00_LabelName\"><strong>Benefit</strong>: As a full action, you can move up to your speed and make a single ranged attack at any point during your movement. If you have the trick attack class feature, you can take your movement from trick attack at any time during a trick attack (see page 93) with a ranged weapon (instead of only before).<br></span></p>\n<p><span id=\"ctl00_MainContent_DataListTypes_ctl00_LabelName\"><strong>Normal</strong>: You can move only before or after an attack with a ranged weapon, not both.</span></p>",
-          "unidentified": ""
-        },
-        "source": "Core Rulebook",
-        "type": "",
-        "activation": {
-          "type": "full",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "target": {
-          "value": "",
-          "type": ""
-        },
-        "area": {
-          "value": null,
-          "units": null,
-          "shape": "",
-          "effect": ""
-        },
-        "range": {
-          "value": null,
-          "units": null,
-          "additional": "",
-          "per": ""
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "isActive": null,
-        "ability": "",
-        "actionType": "",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "parts": [],
-          "effect": ""
-        },
-        "damage": {
-          "parts": []
-        },
-        "formula": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": "negate"
-        },
-        "descriptors": [],
-        "modifiers": [],
-        "requirements": "",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 300000,
-      "flags": {},
-      "img": "systems/sfrpg/icons/feats/shot_on_the_run.png",
-      "effects": []
-    },
-    {
-      "_id": "pHTIIELa0UbcCrHM",
-      "name": "Camera (Ex)",
-      "type": "mod",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"QsCRXffpsDoMvPnT\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Basic Mods</a></p>\n        <p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl02_LabelName\">Your drone has a camera that you can see through using your custom rig as long as your drone is within range. The camera has ordinary sight, and is capable of seeing whatever an ordinary @Compendium[sfrpg.races.AMBcyDZDtJ1OOzh3]{Human} could see. The camera can also record up to 1 hour of footage, which can be downloaded and viewed using your custom rig.</span></p>",
-          "unidentified": ""
-        },
-        "source": "",
-        "type": "",
-        "modifiers": [],
-        "maxInstalls": 1,
-        "isFree": false,
-        "additionalMovement": "",
-        "arms": {
-          "number": 0,
-          "armType": "general"
-        },
-        "isArmorSlot": false,
-        "weaponProficiency": "",
-        "shieldProficiency": "",
-        "additionalSenses": "",
-        "bonusSkill": "",
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": 100000,
-      "flags": {},
-      "img": "systems/sfrpg/icons/classes/camera.png",
-      "effects": []
-    },
-    {
-      "_id": "hGa0aBb9bNIkbV0V",
-      "name": "Enhanced Armor (Ex)",
-      "type": "mod",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"QsCRXffpsDoMvPnT\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Basic Mods</a></p>\n        <p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl06_LabelName\">Your drone gains a +2 bonus to its AC. At 11th level, you can choose this mod a second time as an advanced mod.</span></p>",
-          "unidentified": ""
-        },
-        "source": "",
-        "type": "",
-        "modifiers": [
-          {
-            "name": "AC Bonus",
-            "modifier": 2,
-            "type": "untyped",
-            "effectType": "ac",
-            "valueAffected": "both",
-            "enabled": true,
-            "source": "",
-            "notes": "",
-            "modifierType": "constant",
-            "condition": "",
-            "subtab": "misc",
-            "_id": "87f207d1-4425-4617-9be2-a38cf360a4a0"
-          }
-        ],
-        "maxInstalls": 2,
-        "isFree": false,
-        "additionalMovement": "",
-        "arms": {
-          "number": 0,
-          "armType": "general"
-        },
-        "isArmorSlot": false,
-        "weaponProficiency": "",
-        "shieldProficiency": "",
-        "additionalSenses": "",
-        "bonusSkill": "",
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": 0,
-      "flags": {},
-      "img": "systems/sfrpg/icons/classes/enhanced_armor.png",
-      "effects": []
-    },
-    {
-      "_id": "ibTrrIaEuEPcvMi0",
-      "name": "Enhanced Senses (Ex; Drone)",
-      "type": "mod",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"QsCRXffpsDoMvPnT\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Basic Mods</a></p>\n        <p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl07_LabelName\">Your drone gains low-light vision, darkvision to 60 feet, and a +2 insight bonus to Perception skill checks. If your drone has the camera mod, the camera gains these senses as well.</span></p>",
-          "unidentified": ""
-        },
-        "source": "",
-        "type": "",
-        "modifiers": [
-          {
-            "name": "New Modifier",
-            "modifier": 2,
-            "type": "insight",
-            "effectType": "skill",
-            "valueAffected": "per",
-            "enabled": true,
-            "source": "",
-            "notes": "",
-            "modifierType": "constant",
-            "condition": "",
-            "subtab": "misc",
-            "_id": "8cfd3643-78d0-4e68-9d47-f113eea04f2a"
-          }
-        ],
-        "maxInstalls": 1,
-        "isFree": false,
-        "additionalMovement": "",
-        "arms": {
-          "number": 0,
-          "armType": "general"
-        },
-        "isArmorSlot": false,
-        "weaponProficiency": "sarms",
-        "shieldProficiency": "",
-        "additionalSenses": "low-light vision 60; darkvision 60",
-        "bonusSkill": "acr",
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": -100000,
-      "flags": {},
-      "img": "systems/sfrpg/icons/classes/enhanced_senses_drone.png",
-      "effects": []
-    },
-    {
-      "_id": "7BOUK3W9WT9TNZf7",
-      "name": "Flight System (Ex)",
-      "type": "mod",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"cQtmz297P5g6g5xv\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Advanced Mods</a></p>\n        <p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl30_LabelName\">Your drone gains a fly speed equal to half its land speed with average maneuverability for up to 10 minutes per day. This duration need not be continuous, but it must be used in 1-minute increments. You can select this mod a second time; in this case, the drone’s fly speed increases to its full land speed, and there is no limit on the amount of time it can fly.</span></p>",
-          "unidentified": ""
-        },
-        "source": "",
-        "type": "",
-        "modifiers": [],
-        "maxInstalls": 1,
-        "isFree": false,
-        "additionalMovement": "flight (1/2 land speed; average) 10 min/day",
-        "arms": {
-          "number": null,
-          "armType": "general"
-        },
-        "isArmorSlot": false,
-        "weaponProficiency": "",
-        "shieldProficiency": "",
-        "additionalSenses": "",
-        "bonusSkill": "",
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": -50000,
-      "flags": {},
-      "img": "systems/sfrpg/icons/classes/flight_system.png",
-      "effects": []
-    },
-    {
-      "_id": "3GsPBdqPFOLP1trO",
-      "name": "Hardened AI (Ex)",
-      "type": "mod",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p>&gt;@Compendium[sfrpg.class-features.QsCRXffpsDoMvPnT]{Basic Mods}</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl10_LabelName\">Your drone’s AI is secured against outside influence. Any attempt to hack your drone takes a –4 penalty, and your drone receives a +4 insight bonus to saving throws against spells or effects that attempt to take control of the drone or otherwise dictate its actions.</span></p>",
-          "unidentified": ""
-        },
-        "source": "",
-        "type": "",
-        "modifiers": [],
-        "maxInstalls": 1,
-        "isFree": false,
-        "additionalMovement": "",
-        "arms": {
-          "number": 0,
-          "armType": "general"
-        },
-        "isArmorSlot": false,
-        "weaponProficiency": "",
-        "shieldProficiency": "",
-        "additionalSenses": "",
-        "bonusSkill": "",
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": -25000,
-      "flags": {},
-      "img": "systems/sfrpg/icons/classes/hardened_ai.png",
-      "effects": []
-    },
-    {
-      "_id": "fEhUIdkoBLqaTTPJ",
-      "name": "Weapon Mount (Ex)",
-      "type": "mod",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"QsCRXffpsDoMvPnT\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Basic Mods</a></p>\n                <p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl25_LabelName\">You can affix a small arm or another one-handed ranged weapon on your drone, allowing it to wield that weapon and attack with it. This weapon cannot be disarmed. Mounting a longarm, a heavy weapon, or another two-handed ranged weapon requires two weapon mounts. A weapon mount can hold up to two batteries, two magazines, or two of another type of ammunition for the affixed weapon, provided this ammunition is of light bulk or less. Multiple weapon mounts used to affix a single two-handed weapon count as a single weapon mount for the purpose of how much ammunition it can hold. The drone reloads these batteries or magazines automatically, which takes the usual amount of time for the weapon. Spent batteries or magazines are stored within the drone. You can replace all of a weapon mount’s batteries or magazines as a move action. You must purchase separately or already have the weapon and ammunition for use with a weapon mount. You can replace the weapon with any other weapon that meets the criteria for your mount (for example, if you have two weapon mounts, you could replace a longarm with a heavy weapon). Swapping out a weapon in a weapon mount requires use of your custom rig and 1 hour of work. You can select this mod multiple times, each time adding an additional weapon mount to the drone.</span></p>",
-          "unidentified": ""
-        },
-        "source": "",
-        "type": "",
-        "modifiers": [],
-        "maxInstalls": 1,
-        "isFree": false,
-        "additionalMovement": "",
-        "arms": {
-          "number": 1,
-          "armType": "ranged"
-        },
-        "isArmorSlot": false,
-        "weaponProficiency": "sarms",
-        "shieldProficiency": "",
-        "additionalSenses": "",
-        "bonusSkill": "per",
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": -37500,
-      "flags": {},
-      "img": "systems/sfrpg/icons/classes/weapon_mount.png",
-      "effects": []
-    }
-  ],
-  "effects": []
+  }
 }

@@ -1,4 +1,4 @@
-import { ActorItemHelper, getChildItems, getItemContainer, setItemContainer } from "../../actor/actor-inventory.js"
+import { ActorItemHelper, getChildItems, getItemContainer, setItemContainer } from "../../actor/actor-inventory-utils.js"
 
 export const ItemCapacityMixin = (superclass) => class extends superclass {
     /**
@@ -7,13 +7,13 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
     hasCapacity() {
         if (this.type === "starshipWeapon") {
             return (
-                this.data.data.weaponType === "tracking"
-                || this.data.data.special["mine"]
-                || this.data.data.special["transposition"]
-                || this.data.data.special["orbital"]
-                || this.data.data.special["rail"]
-                || this.data.data.special["forcefield"]
-                || this.data.data.special["limited"]
+                this.system.weaponType === "tracking"
+                || this.system.special["mine"]
+                || this.system.special["transposition"]
+                || this.system.special["orbital"]
+                || this.system.special["rail"]
+                || this.system.special["forcefield"]
+                || this.system.special["limited"]
             );
         }
 
@@ -24,7 +24,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
      * Returns whether or not this item requires capacity items (typically ammunition) or not
      */
     requiresCapacityItem() {
-        const itemData = this.data.data;
+        const itemData = this.system;
         return (this.type !== "ammunition" && itemData.ammunitionType);
     }
 
@@ -58,8 +58,8 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
             return capacityItem?.getCurrentCapacity() || 0;
         }
 
-        const itemData = this.data.data;
-        if (this.type === "ammunition" && !this.data.data.useCapacity) {
+        const itemData = this.system;
+        if (this.type === "ammunition" && !this.system.useCapacity) {
             return itemData.quantity;
         } else {
             return itemData.capacity?.value;
@@ -83,10 +83,10 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
 
         const updatedCapacity = Math.max(0, currentCapacity - consumedAmount);
 
-        if (this.type === "ammunition" && !this.data.data.useCapacity) {
-            return this.update({'data.quantity': updatedCapacity});
+        if (this.type === "ammunition" && !this.system.useCapacity) {
+            return this.update({'system.quantity': updatedCapacity});
         } else {
-            return this.update({'data.capacity.value': updatedCapacity});
+            return this.update({'system.capacity.value': updatedCapacity});
         }
     }
 
@@ -95,11 +95,11 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
      * Can return null if there is no maximum capacity.
      */
     getMaxCapacity() {
-        if (this.type === "ammunition" && !this.data.data.useCapacity) {
+        if (this.type === "ammunition" && !this.system.useCapacity) {
             return null;
         }
         
-        const itemData = this.data.data;
+        const itemData = this.system;
         const maxCapacity = itemData.capacity?.max;
         return maxCapacity;
     }
@@ -108,13 +108,13 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
      * Attempts to reload the item's capacity.
      */
     reload() {
-        const itemData = this.data.data;
+        const itemData = this.system;
         const currentCapacity = this.getCurrentCapacity();
         const maxCapacity = this.getMaxCapacity();
 
         if (currentCapacity >= maxCapacity) {
             // No need to reload if already at max capacity.
-            ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Weapon.AlreadyFullyLoaded", {name: this.data.name}));
+            ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Weapon.AlreadyFullyLoaded", {name: this.name}));
             return false;
         }
 
@@ -124,8 +124,11 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
             
             // Find more items matching ammunition type
             const matchingItems = this.actor.items
-                .filter(x => x.type === "ammunition" && x.data.data.ammunitionType === itemData.ammunitionType && ((x.getCurrentCapacity() > currentCapacity && x.getMaxCapacity() <= maxCapacity) || !x.data.data.useCapacity))
-                .filter(x => getItemContainer(this.actor.data.items, x) == null)
+                .filter(x => x.type === "ammunition" && x.system.ammunitionType === itemData.ammunitionType && ((x.getCurrentCapacity() > currentCapacity && x.getMaxCapacity() <= maxCapacity) || !x.system.useCapacity))
+                .filter(x => {
+                    const container = getItemContainer(this.actor.items, x);
+                    return !container || container.type === "container";
+                })
                 .sort((firstEl, secondEl) => secondEl.getCurrentCapacity() - firstEl.getCurrentCapacity() );
 
             if (matchingItems.length > 0) {
@@ -136,7 +139,9 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
                 const sceneId = this.actor.isToken ? this.actor.token.parent.id : null;
                 const itemHelper = new ActorItemHelper(this.actor.id, tokenId, sceneId);
 
-                if (newAmmunition.data.data.useCapacity || capacityItem == null) {
+                const originalContainer = getItemContainer(this.actor.items, newAmmunition);
+
+                if (newAmmunition.system.useCapacity || capacityItem == null) {
                     if (capacityItem) {
                         updatePromise = setItemContainer(itemHelper, capacityItem, null, 1);
                     }
@@ -147,7 +152,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
                         });
                     } else {
                         let totalAmountLoaded = 1;
-                        if (!newAmmunition.data.data.useCapacity) {
+                        if (!newAmmunition.system.useCapacity) {
                             totalAmountLoaded = Math.min(maxCapacity, newAmmunition.getCurrentCapacity());
                         }
 
@@ -156,16 +161,23 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
                 } else {
                     updatePromise = this._internalQuantityReload(currentCapacity, maxCapacity, capacityItem, newAmmunition);
                 }
+
+                if (updatePromise && originalContainer) {
+                    ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Weapon.ReloadFromContainer", {name: this.name, ammoName: newAmmunition.name, containerName: originalContainer.name}), {permanent: true});
+                }
+
             } else {
-                ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Weapon.NoAmmunitionAvailable", {name: this.data.name}));
+                ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Weapon.NoAmmunitionAvailable", {name: this.name}));
             }
         } else {
-            updatePromise = this.update({'data.capacity.value': maxCapacity});
+            updatePromise = this.update({'system.capacity.value': maxCapacity});
         }
 
         if (updatePromise) {
             updatePromise.then(() => {
                 this._postReloadMessage();
+
+                Hooks.callAll("itemReloaded", {actor: this.actor, item: this});
             });
         }
 
@@ -182,11 +194,11 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
 
             const updates = [];
             if (capacityItem) {
-                updates.push({_id: capacityItem.id, "data.quantity": currentItemCapacity});
+                updates.push({_id: capacityItem.id, "system.quantity": currentItemCapacity});
             }
 
             if (newAmmunition && ammunitionItemCapacity > 0) {
-                updates.push({_id: newAmmunition.id, "data.quantity": ammunitionItemCapacity});
+                updates.push({_id: newAmmunition.id, "system.quantity": ammunitionItemCapacity});
             }
 
             const updatePromise = this.actor.updateEmbeddedDocuments("Item", updates);

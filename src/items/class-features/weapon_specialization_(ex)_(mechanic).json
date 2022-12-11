@@ -1,117 +1,117 @@
 {
   "_id": "lOqPFn93aueiBQst",
   "name": "Weapon Specialization (Ex) (Mechanic)",
-  "permission": {
-    "default": 0,
-    "QqVQDajn5ZN4kl25": 3
-  },
   "type": "feat",
-  "data": {
-    "description": {
-      "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.classes\" data-id=\"HNCQFSPw4DVTATHv\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Mechanic</a></p>\n        <p>You gain the Weapon Specialization feat as a bonus feat for each weapon type this class grants you proficiency with.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "Mechanic",
+  "flags": {},
+  "img": "systems/sfrpg/images/cup/gameplay/mechanic.webp",
+  "permission": {
+    "QqVQDajn5ZN4kl25": 3,
+    "default": 0
+  },
+  "system": {
     "type": "",
-    "activation": {
-      "type": "",
-      "cost": 0,
-      "condition": ""
-    },
-    "duration": {
-      "value": null,
-      "units": ""
-    },
-    "target": {
-      "value": null,
-      "type": ""
-    },
-    "area": {
-      "value": null,
-      "units": "",
-      "shape": "",
-      "effect": ""
-    },
-    "range": {
-      "value": null,
-      "units": "",
-      "additional": "",
-      "per": ""
-    },
-    "uses": {
-      "value": 0,
-      "max": 0,
-      "per": null
-    },
     "ability": null,
     "actionType": "",
+    "activation": {
+      "type": "",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "",
+      "value": null
+    },
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
-      "parts": [],
-      "effect": ""
+      "effect": "",
+      "parts": []
     },
     "damage": {
       "parts": []
     },
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.classes\" data-id=\"HNCQFSPw4DVTATHv\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Mechanic</a></p>\n        <p>You gain the Weapon Specialization feat as a bonus feat for each weapon type this class grants you proficiency with.</p>"
+    },
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": null
+    },
     "formula": "",
+    "modifiers": [
+      {
+        "_id": "309e09f2-b155-4a7c-ac20-bee89333af65",
+        "name": "Weapon Specialization Mechanic",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-damage",
+        "enabled": true,
+        "modifier": "floor(@details.level.value / 2)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "smallA"
+      },
+      {
+        "_id": "e9fd3a0e-d5eb-4338-b43e-6e9d90f25b8f",
+        "name": "Weapon Specialization Mech.",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-damage",
+        "enabled": true,
+        "modifier": "@details.level.value",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "basicM"
+      },
+      {
+        "_id": "73455d1d-1f74-43b9-9068-3ceb77462dc4",
+        "name": "Weapon Specialization Mech.",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-property-damage",
+        "enabled": true,
+        "modifier": "-ceil(@details.level.value / 2)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "operative"
+      }
+    ],
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "",
+      "value": null
+    },
+    "recharge": {
+      "charged": false,
+      "value": null
+    },
+    "requirements": "3rd Level",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "descriptors": [],
-    "modifiers": [
-      {
-        "name": "Weapon Specialization Mechanic",
-        "modifier": "floor(@details.level.value / 2)",
-        "type": "untyped",
-        "effectType": "weapon-damage",
-        "valueAffected": "smallA",
-        "enabled": true,
-        "source": "",
-        "notes": "",
-        "modifierType": "constant",
-        "condition": "",
-        "subtab": "misc",
-        "_id": "309e09f2-b155-4a7c-ac20-bee89333af65"
-      },
-      {
-        "name": "Weapon Specialization Mech.",
-        "modifier": "@details.level.value",
-        "type": "untyped",
-        "effectType": "weapon-damage",
-        "valueAffected": "basicM",
-        "enabled": true,
-        "source": "",
-        "notes": "",
-        "modifierType": "constant",
-        "condition": "",
-        "subtab": "misc",
-        "_id": "e9fd3a0e-d5eb-4338-b43e-6e9d90f25b8f"
-      },
-      {
-        "name": "Weapon Specialization Mech.",
-        "modifier": "-ceil(@details.level.value / 2)",
-        "type": "untyped",
-        "effectType": "weapon-property-damage",
-        "valueAffected": "operative",
-        "enabled": true,
-        "source": "",
-        "notes": "",
-        "modifierType": "constant",
-        "condition": "",
-        "subtab": "misc",
-        "_id": "73455d1d-1f74-43b9-9068-3ceb77462dc4"
-      }
-    ],
-    "requirements": "3rd Level",
-    "recharge": {
-      "value": null,
-      "charged": false
+    "source": "Mechanic",
+    "target": {
+      "type": "",
+      "value": null
+    },
+    "uses": {
+      "max": 0,
+      "per": null,
+      "value": 0
     }
-  },
-  "flags": {},
-  "img": "systems/sfrpg/images/cup/gameplay/mechanic.png"
+  }
 }

@@ -1,56 +1,60 @@
 {
+  "_id": "FF1R5IDe7Mo77QzT",
   "name": "Plasma missile, ionized",
+  "type": "ammunition",
+  "effects": [],
+  "flags": {},
+  "img": "systems/sfrpg/icons/equipment/weapons/imds_missile_launcher.webp",
   "permission": {
     "default": 0,
     "xW89szGpnlIv5gCs": 3
   },
-  "type": "ammunition",
-  "data": {
-    "description": {
-      "chat": "",
-      "gmnotes": "",
-      "short": "",
-      "value": "<p>Compatible with any weapon that can use missiles as ammunition, plasma missiles deal additional damage beyond even their analog counterparts, and come with an increased price tag to match. Ionized plasma missiles are the most common, while stellar plasma missiles and HED (high energy density) plasma missiles deal increased amounts of damage.</p>",
-      "unidentified": ""
-    },
-    "source": "ARM, p. 25",
+  "system": {
     "type": "",
-    "quantity": 1,
-    "bulk": "1",
-    "price": 6700,
-    "level": 11,
-    "identified": true,
+    "ammunitionType": "missile",
     "attributes": {
-      "sturdy": true,
+      "ac": {
+        "value": "5"
+      },
       "customBuilt": false,
-      "size": "medium",
       "dex": {
         "mod": ""
-      },
-      "hp": {
-        "value": 45,
-        "max": "45"
       },
       "hardness": {
         "value": "25"
       },
-      "ac": {
-        "value": "5"
-      }
+      "hp": {
+        "max": "45",
+        "value": 45
+      },
+      "size": "medium",
+      "sturdy": true
     },
+    "bulk": "1",
     "damage": {
       "parts": [
-        [
-          "8d8",
-          "electricity+fire"
-        ]
+        {
+          "formula": "8d8",
+          "operator": "and",
+          "types": {
+            "electricity": true,
+            "fire": true
+          }
+        }
       ]
     },
-    "ammunitionType": "missile",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>Compatible with any weapon that can use missiles as ammunition, plasma missiles deal additional damage beyond even their analog counterparts, and come with an increased price tag to match. Ionized plasma missiles are the most common, while stellar plasma missiles and HED (high energy density) plasma missiles deal increased amounts of damage.</p>"
+    },
+    "identified": true,
+    "level": 11,
+    "price": 6700,
+    "quantity": 1,
+    "source": "ARM, p. 25",
     "useCapacity": false
-  },
-  "flags": {},
-  "img": "systems/sfrpg/icons/equipment/weapons/imds_missile_launcher.png",
-  "effects": [],
-  "_id": "FF1R5IDe7Mo77QzT"
+  }
 }

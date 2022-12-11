@@ -1,40 +1,40 @@
 {
+  "_id": "9mCZxidXk8Txsdoz",
   "name": "Lead Boarding Party",
   "type": "starshipAction",
-  "data": {
-    "description": {
-      "value": "<h2>Normal effect</h2><p>You accompany a boarding party, granting it a major advantage. Add an insight bonus equal to your key ability score’s modifier to the boarding party’s boarding attack modifier. If the boarding attack succeeds, you can choose which system takes critical damage.</p><h2>Critical effect</h2><p>Your assault team inflicts devastating damage to a nearby system. You inflict critical damage to an additional starship system, determined randomly.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "SOM",
+  "flags": {},
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
     "type": "",
-    "role": "openCrew",
-    "order": 50,
-    "phase": {
-      "name": "Engineering phase, Open",
-      "tooltip": "Open crew actions occur at the beginning of the engineering phase, before any other actions occur. All open crew actions occur simultaneously and can be resolved in any order the GM sees fit. Each open crew action can be performed only once per round."
+    "dc": {
+      "resolve": false,
+      "value": "Target starship's tier (rounded down) + Target starship's security modifier + Target starship's training modifier"
     },
-    "isPush": false,
-    "resolvePointCost": 0,
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<h2>Normal effect</h2><p>You accompany a boarding party, granting it a major advantage. Add an insight bonus equal to your key ability score’s modifier to the boarding party’s boarding attack modifier. If the boarding attack succeeds, you can choose which system takes critical damage.</p><h2>Critical effect</h2><p>Your assault team inflicts devastating damage to a nearby system. You inflict critical damage to an additional starship system, determined randomly.</p>"
+    },
+    "effectCritical": "Your assault team inflicts devastating damage to a nearby system. You inflict critical damage to an additional starship system, determined randomly.",
+    "effectNormal": "You accompany a boarding party, granting it a major advantage. Add an insight bonus equal to your key ability score’s modifier to the boarding party’s boarding attack modifier. If the boarding attack succeeds, you can choose which system takes critical damage.",
     "formula": [
       {
         "name": "Boarding Attack",
         "formula": "@ship.boardingParty.tier + @ship.boardingParty.complement.mod + @ship.boardingParty.training.mod"
       }
     ],
+    "isPush": false,
+    "order": 50,
+    "phase": {
+      "name": "Engineering phase, Open",
+      "tooltip": "Open crew actions occur at the beginning of the engineering phase, before any other actions occur. All open crew actions occur simultaneously and can be resolved in any order the GM sees fit. Each open crew action can be performed only once per round."
+    },
+    "resolvePointCost": 0,
+    "role": "openCrew",
+    "selectorKey": "openCrew",
     "selectors": [
       "openCrew"
     ],
-    "selectorKey": "openCrew",
-    "dc": {
-      "value": "Target starship's tier (rounded down) + Target starship's security modifier + Target starship's training modifier",
-      "resolve": false
-    },
-    "effectNormal": "You accompany a boarding party, granting it a major advantage. Add an insight bonus equal to your key ability score’s modifier to the boarding party’s boarding attack modifier. If the boarding attack succeeds, you can choose which system takes critical damage.",
-    "effectCritical": "Your assault team inflicts devastating damage to a nearby system. You inflict critical damage to an additional starship system, determined randomly."
-  },
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "9mCZxidXk8Txsdoz"
+    "source": "SOM"
+  }
 }

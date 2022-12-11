@@ -18,12 +18,12 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-            <h3 class="form-header">{{ localize "SFRPG.Items.Weapon.Details" }}</h3>
+            <h3 class="form-header noborder">{{ localize "SFRPG.Items.Weapon.Details" }}</h3>
 
             {{!-- Weapon Type --}}
             <div class="form-group">
                 <label>{{ localize "SFRPG.Items.Weapon.Type" }}</label>
-                <select name="data.weaponType">
+                <select name="system.weaponType">
                     {{#select itemData.weaponType}}
                     {{#each config.weaponTypes as |name type|}}
                     <option value="{{type}}">{{name}}</option>
@@ -35,7 +35,7 @@
             {{!-- Weapon Category --}}
             <div class="form-group">
                 <label>{{ localize "SFRPG.Items.Weapon.Category" }}</label>
-                <select name="data.weaponCategory">
+                <select name="system.weaponCategory">
                     {{#select itemData.weaponCategory}}
                     <option value="">Unspecified</option>
                     {{#each config.weaponCategories as |name type|}}
@@ -53,29 +53,31 @@
                 <label>{{ localize "SFRPG.Items.Weapon.Properties" }}</label>
                 {{#each config.weaponProperties as |name prop|}}
                 <!-- If there's a tooltip entry set for this weapon property we set a Tippy tooltip -->
-                <label class="checkbox" {{#if (lookup ../config.weaponPropertiesTooltips prop)}} data-tippy-content='{{lookup ../config.weaponPropertiesTooltips prop}}' {{/if}}>
-                    <input type="checkbox" name="data.properties.{{prop}}" {{checked (lookup ../itemData.properties prop)}} /> {{ name }}
+                <label class="checkbox" {{#if (lookup ../config.weaponPropertiesTooltips prop)}} data-tippy-content='<strong>{{ name }}</strong><br/>{{lookup ../config.weaponPropertiesTooltips prop}}' {{/if}}>
+                    <input type="checkbox" name="system.properties.{{prop}}" {{checked (lookup ../itemData.properties prop)}} /> {{ name }}
                 </label>
                 {{/each}}
             </div>
 
+            {{!-- Special Materials Template --}}
+            {{> "systems/sfrpg/templates/items/parts/item-special-materials.html"}}
+
             <br />
 
-            <h3 class="form-header">{{ localize "SFRPG.Items.Weapon.Usage" }}</h3>
+            <h3 class="form-header noborder">{{ localize "SFRPG.Items.Weapon.Usage" }}</h3>
 
             {{!-- Item Activation Template --}}
             {{> "systems/sfrpg/templates/items/parts/item-activation.html"}}
 
             <br />
 
-            <h3 class="form-header">{{ localize "SFRPG.Items.Weapon.Attack" }}</h3>
+            <h3 class="form-header noborder">{{ localize "SFRPG.Items.Weapon.Attack" }}</h3>
 
             {{!-- Item Action Template --}}
             {{> "systems/sfrpg/templates/items/parts/item-action.html"}}
 
             <br />
 
-            <h3 class="form-header">{{ localize "SFRPG.CapacityUsage" }}</h3>
             {{> "systems/sfrpg/templates/items/parts/item-capacity.html"}}
 
             <br />

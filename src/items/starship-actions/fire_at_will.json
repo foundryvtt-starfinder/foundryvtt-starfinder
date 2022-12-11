@@ -1,37 +1,37 @@
 {
+  "_id": "gTnq68hXhcwfMhfO",
   "name": "Fire At Will",
   "type": "starshipAction",
-  "data": {
-    "description": {
-      "value": "<h2>Normal effect</h2><p>You can fire any two starship weapons, regardless of their arc. Each attack is made at a –4 penalty.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "CRB",
+  "flags": {},
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
     "type": "",
-    "role": "gunner",
+    "dc": null,
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<h2>Normal effect</h2><p>You can fire any two starship weapons, regardless of their arc. Each attack is made at a –4 penalty.</p>"
+    },
+    "effectCritical": "",
+    "effectNormal": "You can fire any two starship weapons, regardless of their arc. Each attack is made at a –4 penalty.",
+    "formula": [
+      {
+        "name": "Gunnery",
+        "formula": "max(@gunner.attributes.baseAttackBonus.value, @gunner.skills.pil.ranks, @gunner.skills.gun.mod) + @gunner.abilities.dex.mod - 4"
+      }
+    ],
+    "isPush": true,
     "order": 0,
     "phase": {
       "name": "Gunnery phase",
       "tooltip": "This action can be taken only during the gunnery phase."
     },
-    "isPush": true,
     "resolvePointCost": 0,
-    "formula": [
-      {
-        "name": "Gunnery",
-        "formula": "max(@gunner.attributes.baseAttackBonus.value, @gunner.skills.pil.ranks) + @gunner.abilities.dex.mod - 4"
-      }
-    ],
+    "role": "gunner",
+    "selectorKey": "gunner",
     "selectors": [
       "gunner"
     ],
-    "selectorKey": "gunner",
-    "dc": null,
-    "effectNormal": "You can fire any two starship weapons, regardless of their arc. Each attack is made at a –4 penalty.",
-    "effectCritical": ""
-  },
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "gTnq68hXhcwfMhfO"
+    "source": "CRB"
+  }
 }

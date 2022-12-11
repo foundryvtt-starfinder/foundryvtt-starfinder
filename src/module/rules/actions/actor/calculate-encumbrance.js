@@ -3,6 +3,8 @@ import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../..
 export default function (engine) {
     engine.closures.add("calculateEncumbrance", (fact, context) => {
         const data = fact.data;
+        const actor = fact.actor;
+        const actorData = actor.system;
 
         let tooltip = [];
         if (data.encumbrance) {
@@ -20,8 +22,11 @@ export default function (engine) {
                 return 0;
             }
 
-            let roll = new Roll(bonus.modifier.toString(), data).evaluate({maximize: true});
-            let computedBonus = roll.total;
+            let computedBonus = 0;
+            try {
+                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                computedBonus = roll.total;
+            } catch {}
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
@@ -75,6 +80,21 @@ export default function (engine) {
             tooltip: encumbrance.tooltip,
             rolledMods: encumbrance.rolledMods
         };
+
+        const _computeEncumbrance = (totalWeight, actorData) => {
+            const enc = {
+                max: actorData.attributes.encumbrance.max,
+                tooltip: actorData.attributes.encumbrance.tooltip,
+                value: totalWeight
+            };
+    
+            enc.pct = Math.min(enc.value * 100 / enc.max, 99);
+            enc.encumbered = enc.pct > 50;
+            return enc;
+        };
+
+        actorData.encumbrance = _computeEncumbrance(actorData.bulk, actorData);
+        data.encumbrance = actorData.encumbrance;
 
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] });

@@ -1,38 +1,38 @@
 {
+  "_id": "sUkNIfIG9WNC3F3A",
   "name": "Audacious Gambit",
   "type": "starshipAction",
-  "data": {
-    "description": {
-      "value": "<h2>Normal effect</h2><p>If you have at least 12 ranks in Piloting, you can spend 1 Resolve Point and attempt a Piloting check (DC = 20 + 1-1/2 × your starship’s tier) to pull off complex maneuvers. You can move your starship up to its speed, treating its distance between turns as if it were 2 lower (minimum 0). You can also fly through hexes occupied by enemy vessels without provoking free attacks. At the end of your starship’s movement, you can rotate your starship to face in any direction. If you fail the check, you instead move as if you had taken the fly action (but still lose the Resolve Point).</p><h2>Critical effect</h2><p>Your incredible maneuvering leaves enemy gunners confounded. You gain a +4 circumstance bonus to your ship’s AC and TL until the start of the next round.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "CRB",
+  "flags": {},
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
     "type": "",
-    "role": "pilot",
-    "order": 40,
-    "phase": {
-      "name": "Helm phase",
-      "tooltip": "This action can be taken only during the helm phase."
+    "dc": {
+      "resolve": true,
+      "value": "20 + floor(1.5 * @ship.details.tier)"
     },
-    "isPush": false,
-    "resolvePointCost": 1,
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<h2>Normal effect</h2><p>If you have at least 12 ranks in Piloting, you can spend 1 Resolve Point and attempt a Piloting check (DC = 20 + 1-1/2 × your starship’s tier) to pull off complex maneuvers. You can move your starship up to its speed, treating its distance between turns as if it were 2 lower (minimum 0). You can also fly through hexes occupied by enemy vessels without provoking free attacks. At the end of your starship’s movement, you can rotate your starship to face in any direction. If you fail the check, you instead move as if you had taken the fly action (but still lose the Resolve Point).</p><h2>Critical effect</h2><p>Your incredible maneuvering leaves enemy gunners confounded. You gain a +4 circumstance bonus to your ship’s AC and TL until the start of the next round.</p>"
+    },
+    "effectCritical": "Your incredible maneuvering leaves enemy gunners confounded. You gain a +4 circumstance bonus to your ship’s AC and TL until the start of the next round.",
+    "effectNormal": "If you have at least 12 ranks in Piloting, you can spend 1 Resolve Point and attempt a Piloting check (DC = 20 + 1-1/2 × your starship’s tier) to pull off complex maneuvers. You can move your starship up to its speed, treating its distance between turns as if it were 2 lower (minimum 0). You can also fly through hexes occupied by enemy vessels without provoking free attacks. At the end of your starship’s movement, you can rotate your starship to face in any direction. If you fail the check, you instead move as if you had taken the fly action (but still lose the Resolve Point).",
     "formula": [
       {
         "name": "Piloting",
         "formula": "@pilot.skills.pil.mod + @ship.attributes.pilotingBonus.value"
       }
     ],
-    "selectors": [],
-    "selectorKey": "pilot",
-    "dc": {
-      "value": "20 + floor(1.5 * @ship.details.tier)",
-      "resolve": true
+    "isPush": false,
+    "order": 40,
+    "phase": {
+      "name": "Helm phase",
+      "tooltip": "This action can be taken only during the helm phase."
     },
-    "effectNormal": "If you have at least 12 ranks in Piloting, you can spend 1 Resolve Point and attempt a Piloting check (DC = 20 + 1-1/2 × your starship’s tier) to pull off complex maneuvers. You can move your starship up to its speed, treating its distance between turns as if it were 2 lower (minimum 0). You can also fly through hexes occupied by enemy vessels without provoking free attacks. At the end of your starship’s movement, you can rotate your starship to face in any direction. If you fail the check, you instead move as if you had taken the fly action (but still lose the Resolve Point).",
-    "effectCritical": "Your incredible maneuvering leaves enemy gunners confounded. You gain a +4 circumstance bonus to your ship’s AC and TL until the start of the next round."
-  },
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "sUkNIfIG9WNC3F3A"
+    "resolvePointCost": 1,
+    "role": "pilot",
+    "selectorKey": "pilot",
+    "selectors": [],
+    "source": "CRB"
+  }
 }

@@ -1,109 +1,72 @@
 {
+  "_id": "vykJRkGhMst60uoQ",
   "name": "Excavation drill, helical",
   "type": "weapon",
-  "data": {
-    "description": {
-      "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Excavation drills are a core hand tool for miners across the galaxy. Some claim that @Compendium[sfrpg.races.SaWDXnfaX24Iuuuz]{Dwarf} mining engineers poached from Ulrikka Clanholdings initially designed these drills, as Ulrikka has previously produced similar designs. @Compendium[sfrpg.races.SaWDXnfaX24Iuuuz]{Dwarf} knights have long used these drills in combat, as have gladiators, who often use them to put on bizarre and grisly shows. Utility and industrial models see extensive use in demolition and mining, while helical and volute drills are essential for some star-metal mining, where hard ore requires a tougher tool. Gyroidal drills are restricted, special-operations tools predominantly used to breach starship hulls during rescue or military boarding operations.</span></p>",
-      "chat": "",
-      "unidentified": "",
-      "gmnotes": ""
-    },
-    "source": "AP #34 pg. 44",
+  "augmentation": false,
+  "consumable": false,
+  "container": false,
+  "effects": [],
+  "equipment": false,
+  "flags": {},
+  "fusion": true,
+  "goods": false,
+  "hybrid": false,
+  "img": "systems/sfrpg/icons/equipment/technological%20items/lazer-drill.webp",
+  "magic": false,
+  "shield": false,
+  "spell": false,
+  "storage": {
+    "type": "slot",
+    "affectsEncumbrance": true,
+    "amount": 10,
+    "subtype": "fusion",
+    "weightProperty": "level"
+  },
+  "system": {
     "type": "",
-    "quantity": 1,
-    "bulk": "2",
-    "price": 18000,
-    "level": 10,
-    "attuned": false,
-    "equipped": false,
-    "equippable": true,
-    "identified": true,
+    "ability": "str",
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "kac",
+    "actionType": "mwak",
+    "activation": {
+      "type": "action",
+      "condition": "",
+      "cost": 1
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "none",
+      "value": null
+    },
+    "attackBonus": 0,
     "attributes": {
-      "sturdy": true,
+      "ac": {
+        "value": ""
+      },
       "customBuilt": false,
-      "size": "medium",
       "dex": {
         "mod": ""
-      },
-      "hp": {
-        "value": 45,
-        "max": ""
       },
       "hardness": {
         "value": ""
       },
-      "ac": {
-        "value": ""
-      }
+      "hp": {
+        "max": "",
+        "value": 45
+      },
+      "size": "medium",
+      "sturdy": true
     },
-    "activation": {
-      "type": "action",
-      "cost": 1,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "target": {
-      "value": "",
-      "type": ""
-    },
-    "area": {
-      "value": null,
-      "units": "none",
-      "shape": "",
-      "effect": ""
-    },
-    "range": {
-      "value": null,
-      "units": "none",
-      "additional": "",
-      "per": ""
-    },
-    "uses": {
-      "value": null,
-      "max": null,
-      "per": ""
-    },
-    "isActive": null,
-    "ability": "str",
-    "actionType": "mwak",
-    "attackBonus": 0,
-    "chatFlavor": "unwieldy, shatter, professional (miner)",
-    "critical": {
-      "parts": [
-        [
-          "2d6",
-          ""
-        ]
-      ],
-      "effect": "Bleed"
-    },
-    "damage": {
-      "parts": [
-        [
-          "5d8",
-          "piercing"
-        ]
-      ]
-    },
-    "formula": "",
-    "save": {
-      "type": "",
-      "dc": "",
-      "descriptor": "negate"
-    },
-    "descriptors": [],
+    "attuned": false,
+    "bulk": "2",
     "capacity": {
-      "value": 20,
-      "max": 20
+      "max": 20,
+      "value": 20
     },
-    "usage": {
-      "value": 2,
-      "per": "shot"
-    },
-    "modifiers": [],
+    "chatFlavor": "unwieldy, shatter, professional (miner)",
     "container": {
       "contents": [
         {
@@ -111,38 +74,74 @@
           "index": 0
         }
       ],
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
-          "subtype": "fusion",
-          "amount": 10,
           "acceptsType": [
             "fusion"
           ],
           "affectsEncumbrance": true,
+          "amount": 10,
+          "subtype": "fusion",
           "weightProperty": "level"
         },
         {
           "type": "slot",
-          "subtype": "ammunitionSlot",
-          "amount": 1,
           "acceptsType": [
             "ammunition"
           ],
           "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "ammunitionSlot",
           "weightProperty": ""
         }
-      ],
-      "isOpen": true
+      ]
     },
-    "weaponType": "advancedM",
-    "weaponCategory": "uncategorized",
-    "special": "",
+    "critical": {
+      "effect": "Bleed",
+      "parts": [
+        {
+          "formula": "2d6",
+          "operator": "",
+          "types": {}
+        }
+      ]
+    },
+    "damage": {
+      "parts": [
+        {
+          "formula": "5d8",
+          "operator": "",
+          "types": {
+            "piercing": true
+          }
+        }
+      ]
+    },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "unidentified": "",
+      "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Excavation drills are a core hand tool for miners across the galaxy. Some claim that @Compendium[sfrpg.races.SaWDXnfaX24Iuuuz]{Dwarf} mining engineers poached from Ulrikka Clanholdings initially designed these drills, as Ulrikka has previously produced similar designs. @Compendium[sfrpg.races.SaWDXnfaX24Iuuuz]{Dwarf} knights have long used these drills in combat, as have gladiators, who often use them to put on bizarre and grisly shows. Utility and industrial models see extensive use in demolition and mining, while helical and volute drills are essential for some star-metal mining, where hard ore requires a tougher tool. Gyroidal drills are restricted, special-operations tools predominantly used to breach starship hulls during rescue or military boarding operations.</span></p>"
+    },
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": ""
+    },
+    "equippable": true,
+    "equipped": false,
+    "formula": "",
+    "identified": true,
+    "isActive": null,
+    "level": 10,
+    "modifiers": [],
+    "price": 18000,
+    "proficient": false,
     "properties": {
-      "one": false,
-      "two": true,
-      "amm": true,
       "aeon": false,
+      "amm": true,
       "analog": false,
       "antibiological": false,
       "archaic": false,
@@ -191,6 +190,7 @@
       "modal": false,
       "necrotic": false,
       "nonlethal": false,
+      "one": false,
       "operative": false,
       "penetrating": false,
       "polarize": false,
@@ -220,41 +220,46 @@
       "throttle": false,
       "thrown": false,
       "trip": false,
+      "two": true,
       "unbalancing": false,
       "underwater": false,
       "unwieldy": true,
       "variantBoost": false,
       "wideLine": false
     },
-    "proficient": false,
-    "abilityMods": {
-      "parts": []
-    }
+    "quantity": 1,
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "none",
+      "value": null
+    },
+    "save": {
+      "type": "",
+      "dc": "",
+      "descriptor": "negate"
+    },
+    "source": "AP #34 pg. 44",
+    "special": "",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "usage": {
+      "per": "shot",
+      "value": 2
+    },
+    "uses": {
+      "max": null,
+      "per": "",
+      "value": null
+    },
+    "weaponCategory": "uncategorized",
+    "weaponType": "advancedM"
   },
-  "flags": {},
-  "img": "systems/sfrpg/icons/equipment/technological%20items/lazer-drill.jpg",
-  "effects": [],
-  "storage": {
-    "type": "slot",
-    "subtype": "fusion",
-    "amount": 10,
-    "weightProperty": "level",
-    "affectsEncumbrance": true
-  },
-  "weapon": false,
-  "equipment": false,
-  "consumable": false,
-  "goods": false,
-  "container": false,
-  "hybrid": false,
-  "magic": false,
   "technological": false,
-  "fusion": true,
   "upgrade": false,
-  "spell": false,
-  "augmentation": false,
-  "shield": false,
-  "weaponAccessory": false,
   "vehicleAttack": false,
-  "_id": "vykJRkGhMst60uoQ"
+  "weapon": false,
+  "weaponAccessory": false
 }

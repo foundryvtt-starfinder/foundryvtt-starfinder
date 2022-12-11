@@ -33,6 +33,10 @@ button {
   flex: 1;
 }
 
+a.content-link, a.inline-roll {
+  line-height: 1.6em;
+}
+
 /* ----------------------------------------- */
 /*  All SFRPG Apps                           */
 /* ----------------------------------------- */
@@ -83,7 +87,7 @@ button {
   }
 
   // Checkbox Labels
-  label.checkbox {
+  label.checkbox, label.radio {
     flex: auto;
     margin: 0;
     line-height: 20px;
@@ -91,9 +95,15 @@ button {
     text-align: right;
     input[type="checkbox"] {
       height: auto;
-      margin: 0 5px 0;
+      margin: 0 3px;
       position: relative;
       top: 3px;
+    }
+    input[type="radio"] {
+        height: auto;
+        margin: 0 4px;
+        position: relative;
+        top: 3px;
     }
   }
 
@@ -135,11 +145,11 @@ button {
     border-top: @borderGroove;
     border-bottom: @borderGroove;
   }
-  
+
   .form-rest {
     margin-bottom: 7px
   }
-  
+
   .form-repair {
     margin-bottom: 7px
   }
@@ -229,9 +239,9 @@ button {
   }
 
   // Rollable Links
-  .editable .rollable:hover {
+  .editable .inline:hover {
     color: #000;
-    text-shadow: 0 0 10px red;
+    text-shadow: 0 0 10px #00a0ff;
     cursor: pointer;
   }
 
@@ -348,6 +358,7 @@ button {
       // margin: 0 24px;
       color: #fff;
       // border-bottom: 3px solid @colorBeige;
+      flex: 1;
 
       &.active {
         // border-bottom: 3px solid @colorCrimson;
@@ -360,7 +371,7 @@ button {
     flex: 0 0 @navHeight;
     margin-bottom: 5px;
     .exo2();
-    
+
     .item {
       height: 30px;
       line-height: 32px;
@@ -468,25 +479,13 @@ button {
 /* ------------------------------------------- */
 #combat-tracker {
   .counter-image-relative {
-    position: relative;
+    height: 72px;
+    line-height: 24px;
   }
 }
 
-.counter-token-management{
-  position:absolute;
-  bottom: -2px;
-  left:10px;
-  height:25px;
-  vertical-align: middle;
-  z-index: 200 !important;
-
-  div.counter-token{
-    background-color:rgba(0,0,0,0.5);
-    text-align: center;
-    vertical-align: middle;
-    line-height: normal;
-    border-radius: 5px;
-  }
+#combat li.combatant .combatant-control-counter {
+  padding-left: 8px;
 }
 
 .counter-token{
@@ -501,10 +500,11 @@ button {
 
   p {
     display: inline-block;
-    width: 15px !important;
     height: 20px !important;
     margin:0 !important;
+    padding-left: 4px;
     vertical-align: middle;
+    color: #EEE;
   }
 }
 

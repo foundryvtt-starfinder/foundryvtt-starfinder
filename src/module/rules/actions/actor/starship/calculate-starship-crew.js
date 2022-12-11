@@ -1,6 +1,7 @@
 export default function (engine) {
     engine.closures.add("calculateStarshipCrew", (fact, context) => {
         const data = fact.data;
+        const actor = fact.actor;
 
         data.crew = mergeObject(data.crew, {
             captain: {
@@ -81,7 +82,34 @@ export default function (engine) {
             }
         }, {overwrite: false});
 
-        for (let [key, crew] of Object.entries(data.crew)) {
+        const crewActors = {
+            captain: {
+                actors: []
+            },
+            chiefMate: {
+                actors: []
+            },
+            engineer: {
+                actors: []
+            },
+            gunner: {
+                actors: []
+            },
+            magicOfficer: {
+                actors: []
+            },
+            passenger: {
+                actors: []
+            },
+            pilot: {
+                actors: []
+            },
+            scienceOfficer: {
+                actors: []
+            }
+        };
+
+        for (const [key, crew] of Object.entries(data.crew)) {
             if (key === "npcData" || key === "useNPCCrew") {
                 continue;
             }
@@ -90,7 +118,6 @@ export default function (engine) {
                 crew.actorIds = []
             }
 
-            crew.actors = [];
             const deadActors = [];
             for (const crewActorId of crew.actorIds) {
                 const foundCrew = game?.actors?.get(crewActorId);
@@ -99,11 +126,11 @@ export default function (engine) {
                     continue;
                 }
 
-                crew.actors.push(foundCrew);
+                crewActors[key].actors.push(foundCrew);
             }
 
             if (deadActors.length > 0) {
-                console.log(`Found ${deadActors.length} non-existent actors for starship '${fact.actor?.data?.name || fact.actorId}', crew type: ${key}`);
+                console.log(`Found ${deadActors.length} non-existent actors for starship '${fact.actor?.name || fact.actorId}', crew type: ${key}`);
                 for (const deadActorId of deadActors) {
                     const deadActorIndex = crew.actorIds.indexOf(deadActorId);
                     if (deadActorIndex > -1) {
@@ -112,6 +139,8 @@ export default function (engine) {
                 }
             }
         }
+
+        actor.crew = crewActors;
 
         return fact;
     });

@@ -2,93 +2,118 @@
   "_id": "lop1wIJ0m6dbuN6I",
   "name": "Hazard",
   "type": "spell",
-  "data": {
-    "description": {
-      "value": "<p style=\"text-align: justify;\">When you cast this spell, choose acid, cold, electricity, fire, or sonic. The spell gains that descriptor. You summon a minor hazard from an alternate reality, creating a splash of acid rain, a blast of freezing air, a static electric discharge, a burst of fire, or a roar of thunder. Each creature in the area must succeed at a Reflex save or take 1d3 damage of the chosen type.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "COM pg. 136",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.sfrpg.spells.lop1wIJ0m6dbuN6I"
+    }
+  },
+  "img": "systems/sfrpg/icons/spells/hazard.webp",
+  "system": {
     "type": "",
+    "ability": "",
+    "abilityMods": {
+      "parts": []
+    },
+    "actionType": "save",
     "activation": {
       "type": "action",
-      "cost": 1,
-      "condition": ""
-    },
-    "duration": {
-      "value": "1 round",
-      "units": ""
-    },
-    "target": {
-      "value": "",
-      "type": ""
-    },
-    "area": {
-      "value": 5,
-      "units": "ft",
-      "shape": "sphere",
-      "effect": ""
-    },
-    "range": {
-      "value": 25,
-      "units": "ft",
-      "additional": "5",
-      "per": "2 levels"
-    },
-    "uses": {
-      "value": null,
-      "max": null,
-      "per": ""
-    },
-    "ability": "",
-    "actionType": "save",
-    "attackBonus": 0,
-    "chatFlavor": "",
-    "critical": {
-      "parts": [],
-      "effect": ""
-    },
-    "damage": {
-      "parts": [
-        [
-          "1d3",
-          ""
-        ]
-      ]
-    },
-    "formula": "",
-    "save": {
-      "type": "reflex",
-      "dc": "",
-      "descriptor": "negate"
-    },
-    "descriptors": [],
-    "modifiers": [],
-    "level": 0,
-    "school": "evo",
-    "sr": true,
-    "dismissible": false,
-    "concentration": false,
-    "materials": {
-      "value": "",
-      "consumed": false,
-      "cost": 0,
-      "supply": 0
-    },
-    "preparation": {
-      "mode": "",
-      "prepared": false
+      "condition": "",
+      "cost": 1
     },
     "allowedClasses": {
       "myst": false,
       "tech": false,
       "wysh": true
     },
-    "abilityMods": {
+    "area": {
+      "effect": "burst",
+      "shape": "sphere",
+      "units": "ft",
+      "value": 5
+    },
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "concentration": false,
+    "critical": {
+      "effect": "",
       "parts": []
+    },
+    "damage": {
+      "parts": [
+        {
+          "formula": "1d3",
+          "operator": "",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
+    },
+    "damageNotes": "",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>When you cast this spell, choose acid, cold, electricity, fire, or sonic. The spell gains that descriptor. You summon a minor hazard from an alternate reality, creating a splash of acid rain, a blast of freezing air, a static electric discharge, a burst of fire, or a roar of thunder. Each creature in the area must succeed at a Reflex save or take 1d3 damage of the chosen type.</p>"
+    },
+    "descriptors": [],
+    "dismissible": false,
+    "duration": {
+      "units": "",
+      "value": "1 round"
+    },
+    "formula": "",
+    "isActive": null,
+    "isVariableLevel": false,
+    "level": 0,
+    "materials": {
+      "consumed": false,
+      "cost": 0,
+      "supply": 0,
+      "value": ""
+    },
+    "modifiers": [],
+    "preparation": {
+      "mode": "",
+      "prepared": false
+    },
+    "range": {
+      "additional": "5 ft.",
+      "per": "2 levels",
+      "units": "ft",
+      "value": 25
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "descriptor": "negate"
+    },
+    "scaling": {
+      "d3": true,
+      "d6": false
+    },
+    "school": "evo",
+    "source": "COM pg. 136",
+    "sr": true,
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": null,
+      "per": "",
+      "value": null
     }
-  },
-  "flags": {},
-  "img": "systems/sfrpg/icons/spells/hazard.png",
-  "effects": []
+  }
 }

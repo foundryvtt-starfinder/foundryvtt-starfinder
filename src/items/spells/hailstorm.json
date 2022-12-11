@@ -1,98 +1,130 @@
 {
+  "_id": "8Uv0VEIs6PAuZVf6",
   "name": "Hailstorm",
   "type": "spell",
-  "data": {
-    "description": {
-      "value": "<p>A barrage of fist-sized hailstones pelts the area. Creatures that enter or start their turn in the area during the first round of the spell take 6d8 cold damage and 7d8 bludgeoning damage. For the remaining duration of the spell, heavy snow and sleet rain down in the area. Until the spell is dismissed or until the end of the duration, this area provides concealment, creatures inside it take a &ndash;4 penalty to Perception checks, and the entire area is considered difficult terrain.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "AA4 pg. 119",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.sfrpg.spells.8Uv0VEIs6PAuZVf6"
+    }
+  },
+  "img": "systems/sfrpg/icons/feats/focused_sense.webp",
+  "system": {
     "type": "",
+    "ability": "",
+    "abilityMods": {
+      "parts": []
+    },
+    "actionType": "save",
     "activation": {
       "type": "action",
-      "cost": 1,
-      "condition": ""
-    },
-    "duration": {
-      "value": "1 round/level (D)",
-      "units": ""
-    },
-    "target": {
-      "value": "",
-      "type": ""
-    },
-    "area": {
-      "value": 20,
-      "units": "ft",
-      "shape": "cylinder",
-      "effect": ""
-    },
-    "range": {
-      "value": 400,
-      "units": "ft",
-      "additional": "40 ft.",
-      "per": "level"
-    },
-    "uses": {
-      "value": null,
-      "max": null,
-      "per": ""
-    },
-    "ability": "",
-    "actionType": "save",
-    "attackBonus": 0,
-    "chatFlavor": "",
-    "critical": {
-      "parts": [],
-      "effect": ""
-    },
-    "damage": {
-      "parts": [
-        [
-          "6d8",
-          "cold"
-        ],
-        [
-          "7d8",
-          "bludgeoning"
-        ]
-      ]
-    },
-    "formula": "",
-    "save": {
-      "type": "reflex",
-      "dc": "",
-      "descriptor": "half"
-    },
-    "descriptors": [],
-    "modifiers": [],
-    "level": 5,
-    "school": "con",
-    "sr": true,
-    "dismissible": true,
-    "concentration": false,
-    "materials": {
-      "value": "",
-      "consumed": false,
-      "cost": 0,
-      "supply": 0
-    },
-    "preparation": {
-      "mode": "",
-      "prepared": false
+      "condition": "",
+      "cost": 1
     },
     "allowedClasses": {
       "myst": true,
       "tech": false,
       "wysh": true
     },
-    "abilityMods": {
+    "area": {
+      "effect": "",
+      "shape": "cylinder",
+      "units": "ft",
+      "value": 20
+    },
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "concentration": false,
+    "critical": {
+      "effect": "",
       "parts": []
+    },
+    "damage": {
+      "parts": [
+        {
+          "formula": "6d8",
+          "operator": "and",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": true,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "formula": "7d8",
+          "operator": "",
+          "types": {
+            "acid": false,
+            "bludgeoning": true,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
+    },
+    "damageNotes": "",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>A barrage of fist-sized hailstones pelts the area. Creatures that enter or start their turn in the area during the first round of the spell take 6d8 cold damage and 7d8 bludgeoning damage. For the remaining duration of the spell, heavy snow and sleet rain down in the area. Until the spell is dismissed or until the end of the duration, this area provides concealment, creatures inside it take a &ndash;4 penalty to Perception checks, and the entire area is considered difficult terrain.</p>"
+    },
+    "descriptors": [],
+    "dismissible": true,
+    "duration": {
+      "units": "",
+      "value": "1 round/level (D)"
+    },
+    "formula": "",
+    "isActive": null,
+    "isVariableLevel": false,
+    "level": 5,
+    "materials": {
+      "consumed": false,
+      "cost": 0,
+      "supply": 0,
+      "value": ""
+    },
+    "modifiers": [],
+    "preparation": {
+      "mode": "",
+      "prepared": false
+    },
+    "range": {
+      "additional": "40 ft.",
+      "per": "level",
+      "units": "ft",
+      "value": 400
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "descriptor": "half"
+    },
+    "school": "con",
+    "source": "AA4 pg. 119",
+    "sr": true,
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": null,
+      "per": "",
+      "value": null
     }
-  },
-  "flags": {},
-  "img": "systems/sfrpg/icons/feats/focused_sense.png",
-  "effects": [],
-  "_id": "8Uv0VEIs6PAuZVf6"
+  }
 }

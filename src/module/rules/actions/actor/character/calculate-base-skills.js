@@ -6,7 +6,7 @@ export default function (engine) {
         const classes = fact.classes;
 
         const classSkills = classes.reduce((prev, cls) => {
-            const classData = cls.data.data;
+            const classData = cls.system;
 
             Object.entries(classData.csk).filter(s => s[1]).forEach((skill) => {
                 prev[skill[0]] = 3;
@@ -17,7 +17,7 @@ export default function (engine) {
 
         let themeMod = {};
 
-        const themeData = theme?.data?.data;
+        const themeData = theme?.system;
         if (themeData)
         {
             if (themeData.skill !== "" && !Object.keys(classSkills).includes(themeData.skill)) {

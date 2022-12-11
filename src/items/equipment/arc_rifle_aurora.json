@@ -2,190 +2,160 @@
   "_id": "SlghNytpthIz3BP8",
   "name": "Arc rifle, aurora",
   "type": "weapon",
-  "data": {
-    "description": {
-      "value": "<p>Arc rifles fire deadly electrical blasts and have a longer range than arc pistols. Like arc pistols, arc rifles can stun targets that are not killed outright by the electricity damage.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "CRB pg. 176",
+  "img": "systems/sfrpg/icons/equipment/weapons/arc-emitter-advanced.webp",
+  "system": {
     "type": "",
-    "quantity": 1,
-    "bulk": "2",
-    "price": 24500,
-    "level": 11,
-    "attuned": false,
-    "equipped": false,
-    "identified": true,
+    "ability": "dex",
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "eac",
+    "actionType": "rwak",
+    "activation": {
+      "type": "none",
+      "condition": "",
+      "cost": null
+    },
+    "ammunitionType": "charge",
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "none",
+      "value": null
+    },
+    "attackBonus": 0,
     "attributes": {
-      "sturdy": true,
+      "ac": {
+        "value": "5"
+      },
       "customBuilt": false,
-      "size": "medium",
       "dex": {
         "mod": ""
-      },
-      "hp": {
-        "value": 48,
-        "max": "48"
       },
       "hardness": {
         "value": "27"
       },
-      "ac": {
-        "value": "5"
-      }
+      "hp": {
+        "max": "48",
+        "value": 48
+      },
+      "size": "medium",
+      "sturdy": true
     },
-    "activation": {
-      "type": "none",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "target": {
-      "value": "",
-      "type": ""
-    },
-    "area": {
-      "value": null,
-      "units": "none",
-      "shape": "",
-      "effect": ""
-    },
-    "range": {
-      "value": 70,
-      "units": "ft",
-      "additional": "",
-      "per": ""
-    },
-    "uses": {
-      "value": null,
-      "max": null,
-      "per": ""
-    },
-    "isActive": null,
-    "ability": "dex",
-    "actionType": "rwak",
-    "attackBonus": 0,
-    "chatFlavor": "",
-    "critical": {
-      "parts": [
-        [
-          "2d6",
-          "electricity"
-        ]
-      ],
-      "effect": "Arc 2d6"
-    },
-    "damage": {
-      "parts": [
-        [
-          "2d12",
-          "electricity"
-        ]
-      ]
-    },
-    "formula": "",
-    "save": {
-      "type": "",
-      "dc": "",
-      "descriptor": "negate"
-    },
-    "descriptors": [],
+    "attuned": false,
+    "bulk": "2",
     "capacity": {
-      "value": 40,
-      "max": 40
+      "max": 40,
+      "value": 40
     },
-    "usage": {
-      "value": 1,
-      "per": "shot"
-    },
-    "modifiers": [],
+    "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": 1,
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
-          "subtype": "fusion",
-          "amount": 11,
           "acceptsType": [
             "fusion"
           ],
           "affectsEncumbrance": true,
+          "amount": 11,
+          "subtype": "fusion",
           "weightProperty": "level"
         },
         {
           "type": "slot",
-          "subtype": "",
-          "amount": 1,
           "acceptsType": [
             "goods"
           ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "",
           "weightMultiplier": 1,
-          "weightProperty": "",
-          "affectsEncumbrance": true
+          "weightProperty": ""
         },
         {
           "type": "slot",
-          "subtype": "ammunitionSlot",
-          "amount": 1,
           "acceptsType": [
             "ammunition"
           ],
           "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "ammunitionSlot",
           "weightProperty": ""
         }
-      ],
-      "isOpen": true
+      ]
     },
-    "weaponType": "longA",
-    "weaponCategory": "shock",
-    "special": "",
+    "critical": {
+      "effect": "Arc 2d6",
+      "parts": [
+        {
+          "formula": "2d6",
+          "operator": "",
+          "types": {
+            "electricity": true
+          }
+        }
+      ]
+    },
+    "damage": {
+      "parts": [
+        {
+          "formula": "2d12",
+          "operator": "",
+          "types": {
+            "electricity": true
+          }
+        }
+      ]
+    },
+    "damageNotes": "",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>Arc rifles fire deadly electrical blasts and have a longer range than arc pistols. Like arc pistols, arc rifles can stun targets that are not killed outright by the electricity damage.</p>"
+    },
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": ""
+    },
+    "equippable": false,
+    "equipped": false,
+    "formula": "",
+    "identified": true,
+    "isActive": null,
+    "level": 11,
+    "modifiers": [],
+    "price": 24500,
+    "proficient": false,
     "properties": {
-      "one": false,
-      "two": true,
+      "aeon": false,
       "amm": false,
       "analog": false,
+      "antibiological": false,
       "archaic": false,
+      "aurora": false,
       "automatic": false,
       "blast": false,
       "block": false,
       "boost": false,
-      "bright": false,
-      "disarm": false,
-      "entangle": false,
-      "explode": false,
-      "injection": false,
-      "line": false,
-      "living": false,
-      "mind-affecting": false,
-      "nonlethal": false,
-      "operative": false,
-      "penetrating": false,
-      "powered": false,
-      "qreload": false,
-      "radioactive": false,
-      "reach": false,
-      "sniper": false,
-      "stun": true,
-      "subtle": false,
-      "thrown": false,
-      "trip": false,
-      "unwieldy": false,
-      "aeon": false,
-      "antibiological": false,
-      "aurora": false,
       "breach": false,
       "breakdown": false,
+      "bright": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
       "deflect": false,
+      "disarm": false,
       "double": false,
       "drainCharge": false,
       "echo": false,
+      "entangle": false,
+      "explode": false,
       "extinguish": false,
       "feint": false,
       "fiery": false,
@@ -199,43 +169,87 @@
       "guided": false,
       "harrying": false,
       "holyWater": false,
+      "hybrid": false,
       "ignite": false,
       "indirect": false,
+      "injection": false,
       "integrated": false,
+      "line": false,
+      "living": false,
       "lockdown": false,
+      "mind-affecting": false,
       "mine": false,
       "mire": false,
       "modal": false,
       "necrotic": false,
+      "nonlethal": false,
+      "one": false,
+      "operative": false,
+      "penetrating": false,
       "polarize": false,
       "polymorphic": false,
+      "powered": false,
       "professional": false,
       "punchGun": false,
+      "qreload": false,
+      "radioactive": false,
+      "reach": false,
       "recall": false,
+      "regrowth": false,
       "relic": false,
       "reposition": false,
       "shape": false,
       "shells": false,
       "shield": false,
+      "sniper": false,
+      "stun": true,
+      "subtle": false,
       "sunder": false,
       "swarm": false,
       "tail": false,
       "teleportive": false,
       "thought": false,
       "throttle": false,
+      "thrown": false,
+      "trip": false,
+      "two": true,
+      "unbalancing": false,
       "underwater": false,
+      "unwieldy": false,
       "variantBoost": false,
-      "wideLine": false,
-      "hybrid": false,
-      "regrowth": false,
-      "unbalancing": false
+      "wideLine": false
     },
-    "proficient": false,
-    "abilityMods": {
-      "parts": []
-    }
-  },
-  "flags": {},
-  "img": "systems/sfrpg/icons/equipment/weapons/arc-emitter-advanced.jpg",
-  "effects": []
+    "quantity": 1,
+    "quantityPerPack": 1,
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "ft",
+      "value": 70
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "",
+      "dc": "",
+      "descriptor": "negate"
+    },
+    "source": "CRB pg. 176",
+    "special": "",
+    "specialMaterials": {},
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "usage": {
+      "per": "shot",
+      "value": 1
+    },
+    "uses": {
+      "max": null,
+      "per": "",
+      "value": null
+    },
+    "weaponCategory": "shock",
+    "weaponType": "longA"
+  }
 }

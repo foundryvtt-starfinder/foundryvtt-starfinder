@@ -29,6 +29,9 @@
     </div>    
     <div class="form-group modifier-value-affected">
         <label for="valueAffected">{{localize "SFRPG.ModifierValueAffectedLabel"}}</label>
+        {{#if (eq modifier.effectType "actor-resource")}}
+        <input type="text" name="valueAffected" value="{{modifier.valueAffected}}" data-tippy-content="{{localize "SFRPG.ModifierValueAffectedTooltip"}}">
+        {{else}}
         <select name="valueAffected" data-tippy-content="{{localize "SFRPG.ModifierValueAffectedTooltip"}}">
             {{#select modifier.valueAffected}}
             {{#if (eq modifier.effectType "ac")}}
@@ -73,6 +76,10 @@
             {{#each config.weaponProperties as |name key|}}
             <option value="{{key}}">{{name}}</option>
             {{/each}}
+            {{else if (eq modifier.effectType "weapon-category-attacks")}}
+            {{#each config.weaponCategories as |name key|}}
+            <option value="{{key}}">{{name}}</option>
+            {{/each}}
             {{else if (eq modifier.effectType "weapon-damage")}}
             {{#each config.weaponTypes as |name key|}}
             <option value="{{key}}">{{name}}</option>
@@ -81,11 +88,28 @@
             {{#each config.weaponProperties as |name key|}}
             <option value="{{key}}">{{name}}</option>
             {{/each}}
+            {{else if (eq modifier.effectType "weapon-category-damage")}}
+            {{#each config.weaponCategories as |name key|}}
+            <option value="{{key}}">{{name}}</option>
+            {{/each}}
+            {{else if (eq modifier.effectType "specific-speed")}}
+            {{#each config.speeds as |speed key|}}
+            <option value="{{key}}">{{speed}}</option>
+            {{/each}}
+            {{else if (eq modifier.effectType "damage-reduction")}}
+            {{#each config.damageReductionTypes as |name key|}}
+            <option value="{{key}}">{{name}}</option>
+            {{/each}}
+            {{else if (eq modifier.effectType "energy-resistance")}}
+            {{#each config.energyResistanceTypes as |name key|}}
+            <option value="{{key}}">{{name}}</option>
+            {{/each}}
             {{else}}
             <option value=""></option>
             {{/if}}
             {{/select}}
         </select>
+        {{/if}}
     </div>
     <div class="form-group modifier-modifier-type">
         <label for="modifierType">{{localize "SFRPG.ModifierModifierTypeLabel"}}</label>

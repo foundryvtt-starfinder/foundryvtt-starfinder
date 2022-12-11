@@ -1,27 +1,41 @@
 <form id="spell-config-form">
-    <p>Configure how you would like to cast the <strong>{{item.name}}</strong> spell.</p>
+    <p>{{localize "SFRPG.SpellCasting.Header" spellName=item.name}}
 
-    {{#unless canCast}}
-    <p type="note">You are not able to cast this spell as you have no available spell slots.</p>
-    {{else}}
+    {{#if includedClasses}}
+    <div class="form-group">
+        <label>{{localize "SFRPG.SpellCasting.AllowedClasses"}}</label>
+        <div class="form-fields stacked">
+            {{#each item.system.allowedClasses as |isAllowed allowedClass|}}
+                {{#if isAllowed}}
+                    <label class="checkbox"><input type="checkbox" name="" {{checked isAllowed}} disabled /> {{lookup ../config.spellcastingClasses allowedClass}}</label>
+                {{/if}}
+            {{/each}}
+        </div>
+    </div>
+    {{/if}}
 
     <div class="form-group">
-        <label>Cast at Level</label>
+        <label>{{localize "SFRPG.SpellCasting.ConsumeSlot"}}</label>
         <div class="form-fields">
-            <select name="level">
-                {{#select item.data.level}}
-                {{#each spellLevels as |l|}}
-                <option value="{{l.level}}" {{#unless l.canCast}}disabled{{/unless}}>{{l.label}}</option>
+            <label class="checkbox"><input type="checkbox" name="consume" {{checked consume}} {{#unless hasSlots}}disabled{{/unless}} /> {{localize "SFRPG.SpellCasting.ConsumeSlotYes"}}</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>{{localize "SFRPG.SpellCasting.SelectSpellSlot"}}</label>
+        <div class="form-fields">
+            <select name="level" {{#unless hasSlots}}disabled{{/unless}}>
+                {{#select item.system.level}}
+                {{#each spellLevels as |spellSlot|}}
+                <option value="{{@key}}">{{spellSlot.label}}</option>
                 {{/each}}
                 {{/select}}
             </select>
         </div>
     </div>
-
-    {{#if canUpcast}}
-    <div class="form-group">
-        <label class="checkbox">Consume Spell Slot? <input type="checkbox" name="consume" {{checked consume}}/></label>
-    </div>
-    {{/if}}
+    
+    {{#unless hasSlots}}
+    <p type="note" style="color: #c00;">{{localize "SFRPG.SpellCasting.ErrorNoSlot"}}</p>
     {{/unless}}
+
 </form>

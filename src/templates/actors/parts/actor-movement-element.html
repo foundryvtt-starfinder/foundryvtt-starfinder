@@ -1,0 +1,66 @@
+<li class="attribute speed" {{#if expand}}style="height: {{expandedSpeedBoxHeight}}px;"{{/if}} data-tippy-content="<strong>{{ localize "SFRPG.Speed" }}</strong><br>@attributes.speed.land.value<br>@attributes.speed.flying.value<br>@attributes.speed.flying.maneuverability<br>@attributes.speed.swimming.value<br>@attributes.speed.burrowing.value<br>@attributes.speed.climbing.value<br>@attributes.speed.special{{#if system.attributes.speed.special}}<br><br>{{localize "SFRPG.ActorSheet.Attributes.Speed.Types.Special"}}: {{system.attributes.speed.special}}{{/if}}<br><br>{{#each system.attributes.speed.tooltip as |tip|}}{{tip}}<br>{{/each}}">
+    <h4 class="attribute-name box-title">
+        {{ localize "SFRPG.Speed" }}
+        {{#unless disableEdit}}
+        <a class="config-button" data-action="movement" title="Movement speed"><i class="fas fa-cog"></i></a>
+        {{/unless}}
+    </h4>
+{{#unless expand}}
+    <div class="attribute-value">
+        {{#if (eq system.attributes.speed.mainMovement "land")}}
+            <span>{{system.attributes.speed.land.value}}</span> {{ localize "SFRPG.Units.Speed" }}
+        {{else if (eq system.attributes.speed.mainMovement "burrowing")}}
+            <span>{{system.attributes.speed.burrowing.value}}</span> {{ localize "SFRPG.Units.Speed" }}
+        {{else if (eq system.attributes.speed.mainMovement "climbing")}}
+            <span>{{system.attributes.speed.climbing.value}}</span> {{ localize "SFRPG.Units.Speed" }}
+        {{else if (eq system.attributes.speed.mainMovement "flying")}}
+            <span>{{system.attributes.speed.flying.value}}</span> {{ localize "SFRPG.Units.Speed" }}
+        {{else if (eq system.attributes.speed.mainMovement "swimming")}}
+            <span>{{system.attributes.speed.swimming.value}}</span> {{ localize "SFRPG.Units.Speed" }}
+        {{else if (eq system.attributes.speed.mainMovement "special")}}
+            <input type="text" class="speed" name="system.attributes.speed.special"
+                value="{{system.attributes.speed.special}}"
+                placeholder="{{ localize 'SFRPG.SpeedSpecial' }}" disabled />
+        {{/if}}
+    </div>
+    <footer class="attribute-footer">
+        {{#if (eq system.attributes.speed.mainMovement "land")}}
+            {{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Land" }}
+        {{else if (eq system.attributes.speed.mainMovement "burrowing")}}
+            {{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Burrowing" }}
+        {{else if (eq system.attributes.speed.mainMovement "climbing")}}
+            {{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Climbing" }}
+        {{else if (eq system.attributes.speed.mainMovement "flying")}}
+            {{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Flying" }} ({{lookup config.flightManeuverability system.attributes.speed.flying.maneuverability}})
+        {{else if (eq system.attributes.speed.mainMovement "swimming")}}
+            {{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Swimming" }}
+        {{else if (eq system.attributes.speed.mainMovement "special")}}
+            {{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Special" }}
+        {{/if}}
+    </footer>
+{{/unless}}
+{{#if expand}}
+<div class="attribute-value">
+    <ul>
+        {{#if (gt system.attributes.speed.land.value 0)}}
+            <li>{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Land" }}: <span>{{system.attributes.speed.land.value}}</span> {{ localize "SFRPG.Units.Speed" }}</li>
+        {{/if}}
+        {{#if (gt system.attributes.speed.burrowing.value 0)}}
+            <li>{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Burrowing" }}: <span>{{system.attributes.speed.burrowing.value}}</span> {{ localize "SFRPG.Units.Speed" }}</li>
+        {{/if}}
+        {{#if (gt system.attributes.speed.climbing.value 0)}}
+            <li>{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Climbing" }}: <span>{{system.attributes.speed.climbing.value}}</span> {{ localize "SFRPG.Units.Speed" }}</li>
+        {{/if}}
+        {{#if (gt system.attributes.speed.flying.value 0)}}
+            <li>{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Flying" }} ({{lookup config.flightManeuverability system.attributes.speed.flying.maneuverability}}): <span>{{system.attributes.speed.flying.value}}</span> {{ localize "SFRPG.Units.Speed" }}</li>
+        {{/if}}
+        {{#if (gt system.attributes.speed.swimming.value 0)}}
+            <li>{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Swimming" }}: <span>{{system.attributes.speed.swimming.value}}</span> {{ localize "SFRPG.Units.Speed" }}</li>
+        {{/if}}
+        {{#if system.attributes.speed.special}}
+            <li>{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Special" }}: {{system.attributes.speed.special}}</li>
+        {{/if}}
+    </ul>
+</div>
+{{/if}}
+</li>

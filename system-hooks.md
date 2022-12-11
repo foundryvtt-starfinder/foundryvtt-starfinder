@@ -2,6 +2,25 @@
 
 The Starfinder system has a couple of its own hooks available for module/macro developers.
 
+## General Hooks
+
+### onBeforeRoll
+Name: onBeforeRoll
+
+Called when: Whenever the system makes a roll.
+
+Arguments: Object with three keys: formula, data, options.
+* formula: String that describes the roll formula.
+* data: Data to be passed along into the roll.
+* options: Options to be passed along into the roll.
+
+Example usage:
+```javascript
+Hooks.on("onBeforeRoll", (rollData) => {
+    rollData.formula = rollData.formula + " + 1";
+});
+```
+
 ## Actor Hooks
 
 ### onActorSetCondition
@@ -19,6 +38,29 @@ Example usage:
 ```javascript
 Hooks.on("onActorSetCondition", ({actor, item, conditionName, enabled}) => {
     console.log(['Actor condition', actor, item, conditionName, enabled]);
+});
+```
+
+### onActorRest
+Name: onActorRest
+
+Called when: Whenever an actor does a short rest (10 min rest), a long rest (8 hour rest), or if they are repaired (Drone only).
+
+Arguments: Object with several keys: actor, restType, deltaHitpoints, deltaStamina, deltaResolve, updateData, updateItems.
+* actor: The actor who is performing the rest.
+* restType: Supported values are "short", "long", or "repair", depending on the type of rest.
+* deltaHitpoints (optional): The amount of hitpoints gained during this rest.
+* deltaStamina (optional): The amount of stamina gained during this rest.
+* deltaResolve (optional): The amount of resolve points gained during this rest.
+* deltaSpellSlots (optional): The amount of spell slots gained during this rest.
+* restoredAbilityDamages (optional): The amount of ability damage removed during this rest.
+* updateData: The updated data as written to the actor's entity.
+* updateItems: Array of items that have been updated for this rest.
+
+Example usage:
+```javascript
+Hooks.on("onActorRest", ({actor, restType, deltaHitpoints, deltaStamina, deltaResolve, updateData, updateItems}) => {
+    console.log(['Actor condition', actor, restType, deltaHitpoints, deltaStamina, deltaResolve, updateData, updateItems]);
 });
 ```
 
@@ -60,6 +102,39 @@ Example usage:
 ```javascript
 Hooks.on("attackDamage", ({actor, item, roll, isCritical, formula, rollMetadata}) => {
     console.log(['damaged', actor, item, roll, isCritical, formula, rollMetadata]);
+});
+```
+
+### itemActivationChanged
+Name: itemActivationChanged
+
+Called when: Whenever an item is activated or deactivated.
+
+Arguments: Object with three keys: actor, item, isActive.
+* actor: The actor who owns the item that is being activated or deactivated.
+* item: The item that is being activated or deactivated.
+* isActive: Boolean value indicating whether the item is being activated (true) or deactivated (false).
+
+Example usage:
+```javascript
+Hooks.on("itemActivationChanged", ({actor, item, isActive}) => {
+    console.log(['activatedOrDeactivated', actor, item, isActive]);
+});
+```
+
+### itemReloaded
+Name: itemReloaded
+
+Called when: Whenever an item is reloaded, using the reload button on the character sheet.
+
+Arguments: Object with two keys: actor, item.
+* actor: The actor who owns the item that is being reloaded.
+* item: The item that is being reloaded.
+
+Example usage:
+```javascript
+Hooks.on("itemReloaded", ({actor, item}) => {
+    console.log(['reloaded', actor, item]);
 });
 ```
 

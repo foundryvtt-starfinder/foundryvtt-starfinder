@@ -3,7 +3,7 @@
     <ol class="inventory-list">
         <li class="item flexrow inventory-header modifiers-header">
             <div class="item-name modifier-name flexrow">
-                <h3>{{localize "SFRPG.ModifierNameLabel"}}</h3>
+                <h3 class="noborder">{{localize "SFRPG.ModifierNameLabel"}}</h3>
             </div>
 
             <div class="item-detail modifier-mod">{{localize "SFRPG.ModifierTitle"}}</div>
@@ -64,6 +64,10 @@
                         {{lookup ../config.weaponTypes modifier.valueAffected}}
                     {{else if (eq modifier.effectType "weapon-property-damage")}}
                         {{lookup ../config.weaponProperties modifier.valueAffected}}
+                    {{else if (eq modifier.effectType "specific-speed")}}
+                        {{lookup ../../config.speeds modifier.valueAffected}}
+                    {{else if (eq modifier.effectType "actor-resource")}}
+                        <h4>{{~modifier.valueAffected~}}</h4>
                     {{else}}
                     {{!-- Nothing --}}
                     {{/if}}

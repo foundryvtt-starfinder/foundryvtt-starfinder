@@ -19,10 +19,10 @@
                     {{labels.featType}}
                 </li>
                 <li>
-                    <input type="text" name="data.requirements" value="{{itemData.requirements}}" placeholder="{{ localize "SFRPG.Items.Feat.Requirements" }}"/>
+                    <input type="text" name="system.requirements" value="{{itemData.requirements}}" placeholder="{{ localize "SFRPG.Items.Feat.Requirements" }}"/>
                 </li>
                 <li>
-                    <input type="text" name="data.source" value="{{itemData.source}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Source" }}"/>
+                    <input type="text" name="system.source" value="{{itemData.source}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Source" }}"/>
                 </li>
             </ul>
         </div>
@@ -44,7 +44,7 @@
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
-            <h3 class="form-header">{{ localize "SFRPG.Items.Feat.FeatureUsage" }}</h3>
+            <h3 class="form-header noborder">{{ localize "SFRPG.Items.Feat.FeatureUsage" }}</h3>
 
             {{!-- Item Activation Template --}}
             {{> "systems/sfrpg/templates/items/parts/item-activation.html"}}
@@ -55,18 +55,23 @@
                 <label>{{ localize "SFRPG.Items.Feat.ActionRecharge" }}</label>
                 <div class="form-fields">
                     <span>{{ localize "SFRPG.Items.Feat.RechargeOn" }}</span>
-                    <input type="text" name="data.recharge.value" value="{{itemData.recharge.value}}"
+                    <input type="text" name="system.recharge.value" value="{{itemData.recharge.value}}"
                            data-dtype="Number" placeholder="1d6 Result"/>
                     <label class="checkbox">
                         {{ localize "SFRPG.Items.Feat.Charged" }}
-                        <input type="checkbox" name="data.recharge.charged" {{checked itemData.recharge.charged}}/>
+                        <input type="checkbox" name="system.recharge.charged" {{checked itemData.recharge.charged}}/>
                     </label>
                 </div>
             </div>
             {{/if}}
+            
+            {{!-- Descriptors Selector --}}
+            {{> "systems/sfrpg/templates/items/parts/item-descriptors.html"}}
+            
+            <br />
 
             {{!-- Item Action Template --}}
-            <h3 class="form-header">{{ localize "SFRPG.Items.Feat.FeatureAttack" }}</h3>
+            <h3 class="form-header noborder">{{ localize "SFRPG.Items.Feat.FeatureAttack" }}</h3>
             {{> "systems/sfrpg/templates/items/parts/item-action.html"}}
         </div>
 

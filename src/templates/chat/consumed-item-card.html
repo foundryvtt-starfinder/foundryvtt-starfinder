@@ -1,0 +1,28 @@
+<div class="sfrpg chat-card weapon-card" data-actor-id="{{actor.id}}" data-item-id="{{item._id}}" {{#if tokenId}}data-token-id="{{tokenId}}"{{/if}}>
+    <header class="card-header flexrow">
+        <img src="{{item.img}}" title="{{item.name}}" width="36" height="36"/>
+        <h3 class="item-name noborder">{{item.name}}</h3>
+    </header>
+
+    <div class="card-content">
+        {{#if (or system.description.value system.description.short)}}
+            {{#if system.description.short}}
+                {{{system.description.short}}}
+            {{else}}
+                {{{system.description.value}}}
+            {{/if}}
+        {{/if}}
+    </div>
+
+    {{#if hasSave}}
+    <div class="card-buttons">
+        <button type="button" data-action="save" data-type="{{system.save.type}}">{{ localize "SFRPG.Save" }} {{labels.save}}</button>
+    </div>
+    {{/if}}
+
+    <footer class="card-footer">
+        {{#each system.properties}}
+        <span>{{this.name}}</span>
+        {{/each}}
+    </footer>
+</div>

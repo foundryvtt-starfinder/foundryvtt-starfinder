@@ -1,50 +1,169 @@
 {
+  "_id": "rkAaaAsUx3JlpGMc",
   "name": "Skyboat",
   "type": "vehicle",
-  "data": {
-    "conditions": {},
-    "details": {
-      "level": 2,
-      "price": 1400,
-      "description": {
-        "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">Built with lighter-than-air ballast chambers and a bare minimum of hover technology, skyboats rely on sails to soar through the clouds of @Compendium[sfrpg.setting.ac6z5Rqyx0oLzvVf]{Liavara}, leaving virtually no chemical or energy waste to disturb the delicate ecosystem.</span></p>",
-        "chat": "",
-        "unidentified": ""
-      },
-      "source": "AP #28 pg. 45"
-    },
-    "crew": {
-      "useNPCCrew": false,
-      "pilot": {
-        "limit": 1,
-        "actorIds": []
-      },
-      "complement": {
-        "limit": 0,
-        "actorIds": []
-      },
-      "passenger": {
-        "limit": 3,
-        "actorIds": []
+  "effects": [],
+  "flags": {},
+  "img": "icons/svg/mystery-man.svg",
+  "items": [
+    {
+      "_id": "IFQG4V1jH9iw8fZK",
+      "name": "Collision (Ram)",
+      "type": "vehicleAttack",
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 100000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "2*(5d4)",
+              "operator": "",
+              "types": {
+                "bludgeoning": true
+              }
+            }
+          ]
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>As a full action, you can pilot a vehicle at up to its full speed in a straight line at its current heading and try to ram one creature or object at the end of the movement, dealing double the vehicle&rsquo;s collision damage to the target and half the vehicle&rsquo;s collision damage to your vehicle. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see page 228).</p>\n<p>Movement during a ram action has all the same restrictions as the race action and requires the same Piloting checks. If you fail any Piloting check during the movement, you fail to ram your target.</p>\n<p>&nbsp;</p>\n<p>If the target of the ram action is a creature, it can attempt a Reflex saving throw against the vehicle&rsquo;s collision DC to avoid being hit. If the target of the ram action is another vehicle, the pilot of the defending vehicle can attempt a Piloting check to avoid being hit, with a DC equal to the result of your Piloting check. The attacker wins ties.</p>"
+        },
+        "modifiers": [],
+        "save": {
+          "type": "reflex",
+          "dc": "11",
+          "descriptor": "negate"
+        },
+        "source": ""
       }
     },
-    "hangarBay": {
-      "limit": 0,
-      "actorIds": []
+    {
+      "_id": "ZNQw4yfixdMSttws",
+      "name": "Collision (Run Over)",
+      "type": "vehicleAttack",
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 200000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "5d4",
+              "operator": "",
+              "types": {
+                "bludgeoning": true
+              }
+            }
+          ]
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>As a full action, you can pilot a vehicle at up to double its drive speed and run over any creatures at least two size categories smaller than the vehicle during this movement. Those creatures take bludgeoning damage equal to the vehicle&rsquo;s collision damage, but can each attempt a Reflex save against the vehicle&rsquo;s collision DC to take half damage. Roll the damage only once and apply it to each creature, rather than rolling separately for each. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see Vehicles on page 228).</p>\n<p>When you take a run over action, the vehicle takes damage equal to half the damage rolled for each creature it runs over. If the vehicle becomes unable to proceed due to this damage, it ceases moving. You can still set the vehicle&rsquo;s heading at the end of this movement as normal.</p>\n<p>&nbsp;</p>\n<p>A vehicle taking the run over action can damage a creature no more than once per round, no matter how many times its movement takes it over a target creature. The vehicle can run over objects of the appropriate size with the same effects, though they don&rsquo;t receive saving throws unless they are piloted or otherwise animate.</p>"
+        },
+        "modifiers": [],
+        "save": {
+          "type": "reflex",
+          "dc": "11",
+          "descriptor": "half"
+        },
+        "source": ""
+      }
+    }
+  ],
+  "prototypeToken": {
+    "name": "Skyboat",
+    "actorId": "cp0WRVNIJEAgf286",
+    "actorLink": false,
+    "bar1": {
+      "attribute": "attributes.hp"
     },
-    "attributes": {
-      "size": "large",
-      "type": "air",
-      "dimensions": {
-        "width": "10",
-        "length": "15",
-        "height": "3"
+    "bar2": {
+      "attribute": ""
+    },
+    "displayBars": 20,
+    "displayName": 20,
+    "disposition": 0,
+    "flags": {},
+    "height": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 360,
+      "animation": {
+        "type": null,
+        "intensity": 5,
+        "reverse": false,
+        "speed": 5
       },
-      "speed": {
-        "drive": "20 ft  (fly and hover)",
-        "full": "200 ft  (fly and hover)",
-        "mph": "22 mph (fly and hover)",
-        "type": ""
+      "attenuation": 0.5,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "contrast": 0,
+      "darkness": {
+        "max": 1,
+        "min": 0
+      },
+      "dim": 0,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "shadows": 0
+    },
+    "lockRotation": false,
+    "randomImg": false,
+    "rotation": 0,
+    "scale": 1,
+    "sight": {
+      "angle": 360,
+      "attenuation": 0.1,
+      "brightness": 1,
+      "color": null,
+      "contrast": 0,
+      "enabled": false,
+      "range": 0,
+      "saturation": 0,
+      "visionMode": "basic"
+    },
+    "texture": {
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": null
+    },
+    "width": 1
+  },
+  "system": {
+    "attributes": {
+      "type": "air",
+      "cover": "none",
+      "dimensions": {
+        "height": "3",
+        "length": "15",
+        "width": "10"
       },
       "eac": {
         "value": 13
@@ -52,140 +171,60 @@
       "expansionBays": {
         "value": 0
       },
+      "hardness": 5,
+      "hp": {
+        "max": 20,
+        "threshold": 10,
+        "value": 20
+      },
       "kac": {
         "value": 15
       },
-      "cover": "none",
-      "hp": {
-        "value": 20,
-        "max": 20,
-        "threshold": 10
-      },
-      "hardness": 5,
       "modifiers": {
-        "piloting": "0",
-        "attackStopped": "0",
+        "attackFullSpeed": "-2",
         "attackMoving": "-1",
-        "attackFullSpeed": "-2"
+        "attackStopped": "0",
+        "piloting": "0"
       },
-      "systems": [],
-      "special": []
-    }
-  },
-  "flags": {},
-  "token": {
-    "flags": {},
-    "name": "Skyboat",
-    "displayName": 0,
-    "img": "icons/svg/mystery-man.svg",
-    "tint": null,
-    "width": 1,
-    "height": 1,
-    "scale": 1,
-    "lockRotation": false,
-    "rotation": 0,
-    "vision": false,
-    "dimSight": 0,
-    "brightSight": 0,
-    "dimLight": 0,
-    "brightLight": 0,
-    "sightAngle": 360,
-    "lightAngle": 360,
-    "lightAlpha": 1,
-    "lightAnimation": {
-      "speed": 5,
-      "intensity": 5
-    },
-    "actorId": "cp0WRVNIJEAgf286",
-    "actorLink": false,
-    "disposition": -1,
-    "displayBars": 0,
-    "bar1": {},
-    "bar2": {},
-    "randomImg": false
-  },
-  "items": [
-    {
-      "_id": "IFQG4V1jH9iw8fZK",
-      "name": "Collision (Ram)",
-      "type": "vehicleAttack",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p>As a full action, you can pilot a vehicle at up to its full speed in a straight line at its current heading and try to ram one creature or object at the end of the movement, dealing double the vehicle&rsquo;s collision damage to the target and half the vehicle&rsquo;s collision damage to your vehicle. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see page 228).</p>\n<p>Movement during a ram action has all the same restrictions as the race action and requires the same Piloting checks. If you fail any Piloting check during the movement, you fail to ram your target.</p>\n<p>&nbsp;</p>\n<p>If the target of the ram action is a creature, it can attempt a Reflex saving throw against the vehicle&rsquo;s collision DC to avoid being hit. If the target of the ram action is another vehicle, the pilot of the defending vehicle can attempt a Piloting check to avoid being hit, with a DC equal to the result of your Piloting check. The attacker wins ties.</p>",
-          "unidentified": ""
-        },
-        "source": "",
+      "size": "large",
+      "special": [],
+      "speed": {
         "type": "",
-        "modifiers": [],
-        "damage": {
-          "parts": [
-            [
-              "2*(5d4)",
-              "bludgeoning"
-            ]
-          ]
-        },
-        "save": {
-          "type": "reflex",
-          "dc": "11",
-          "descriptor": "negate"
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "drive": "20 ft  (fly and hover)",
+        "full": "200 ft  (fly and hover)",
+        "mph": "22 mph (fly and hover)"
       },
-      "sort": 100000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
+      "systems": []
     },
-    {
-      "_id": "ZNQw4yfixdMSttws",
-      "name": "Collision (Run Over)",
-      "type": "vehicleAttack",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p>As a full action, you can pilot a vehicle at up to double its drive speed and run over any creatures at least two size categories smaller than the vehicle during this movement. Those creatures take bludgeoning damage equal to the vehicle&rsquo;s collision damage, but can each attempt a Reflex save against the vehicle&rsquo;s collision DC to take half damage. Roll the damage only once and apply it to each creature, rather than rolling separately for each. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see Vehicles on page 228).</p>\n<p>When you take a run over action, the vehicle takes damage equal to half the damage rolled for each creature it runs over. If the vehicle becomes unable to proceed due to this damage, it ceases moving. You can still set the vehicle&rsquo;s heading at the end of this movement as normal.</p>\n<p>&nbsp;</p>\n<p>A vehicle taking the run over action can damage a creature no more than once per round, no matter how many times its movement takes it over a target creature. The vehicle can run over objects of the appropriate size with the same effects, though they don&rsquo;t receive saving throws unless they are piloted or otherwise animate.</p>",
-          "unidentified": ""
-        },
-        "source": "",
-        "type": "",
-        "modifiers": [],
-        "damage": {
-          "parts": [
-            [
-              "5d4",
-              "bludgeoning"
-            ]
-          ]
-        },
-        "save": {
-          "type": "reflex",
-          "dc": "11",
-          "descriptor": "half"
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+    "conditions": {},
+    "crew": {
+      "complement": {
+        "actorIds": [],
+        "limit": 0
       },
-      "sort": 200000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
+      "passenger": {
+        "actorIds": [],
+        "limit": 3
+      },
+      "pilot": {
+        "actorIds": [],
+        "limit": 1
+      },
+      "useNPCCrew": false
+    },
+    "details": {
+      "description": {
+        "chat": "",
+        "unidentified": "",
+        "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">Built with lighter-than-air ballast chambers and a bare minimum of hover technology, skyboats rely on sails to soar through the clouds of @Compendium[sfrpg.setting.ac6z5Rqyx0oLzvVf]{Liavara}, leaving virtually no chemical or energy waste to disturb the delicate ecosystem.</span></p>"
+      },
+      "level": 2,
+      "price": 1400,
+      "source": "AP #28 pg. 45"
+    },
+    "hangarBay": {
+      "actorIds": [],
+      "limit": 0
     }
-  ],
-  "effects": [],
-  "_id": "rkAaaAsUx3JlpGMc"
+  }
 }

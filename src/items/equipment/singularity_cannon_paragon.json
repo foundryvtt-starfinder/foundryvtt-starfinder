@@ -1,147 +1,132 @@
 {
+  "_id": "NYlKW1J4cS6B4ebs",
   "name": "Singularity cannon, paragon",
   "type": "weapon",
-  "data": {
-    "description": {
-      "value": "<p>By capturing, studying, and dissecting deadfall stalkers&mdash;all at considerable cost in blood and credits&mdash;the @Compendium[sfrpg.races.3kLK4WKPqNvFTwIB]{Drow} manufacturer Arabani Arms Ltd. has created powerful cannons able to create gravitational singularities at a distant point. These instantaneous black holes tear apart nearby matter and, in the process, hurl away any victims who can&rsquo;t clear the area. The singularity typically lasts for a split-second, yet slivers of the microscopic black hole can adhere to unlucky targets, painfully anchoring their bodies in place.</p>\n<p><strong>Gravitation</strong>: 20 ft.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "AA4 pg. 30",
+  "img": "systems/sfrpg/icons/equipment/weapons/autobeam_rifle_advanced.webp",
+  "system": {
     "type": "",
-    "quantity": 1,
-    "bulk": "3",
-    "price": 555000,
-    "level": 19,
-    "attuned": false,
-    "equipped": false,
-    "identified": true,
+    "ability": "dex",
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "eac",
+    "actionType": "rwak",
+    "activation": {
+      "type": "action",
+      "condition": "",
+      "cost": 1
+    },
+    "ammunitionType": "",
+    "area": {
+      "effect": "burst",
+      "shape": "sphere",
+      "units": "ft",
+      "value": 10
+    },
+    "attackBonus": 0,
     "attributes": {
-      "sturdy": true,
+      "ac": {
+        "value": "5"
+      },
       "customBuilt": false,
-      "size": "medium",
       "dex": {
         "mod": ""
-      },
-      "hp": {
-        "value": 102,
-        "max": "102"
       },
       "hardness": {
         "value": "43"
       },
-      "ac": {
-        "value": "5"
-      }
+      "hp": {
+        "max": "102",
+        "value": 102
+      },
+      "size": "medium",
+      "sturdy": true
     },
-    "activation": {
-      "type": "action",
-      "cost": 1,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "target": {
-      "value": "",
-      "type": ""
-    },
-    "area": {
-      "value": 10,
-      "units": "ft",
-      "shape": "sphere",
-      "effect": "burst"
-    },
-    "range": {
-      "value": 50,
-      "units": "ft",
-      "additional": "",
-      "per": ""
-    },
-    "uses": {
-      "value": null,
-      "max": null,
-      "per": ""
-    },
-    "isActive": null,
-    "ability": "dex",
-    "actionType": "rwak",
-    "attackBonus": 0,
-    "chatFlavor": "",
-    "critical": {
-      "parts": [],
-      "effect": "Bind"
-    },
-    "damage": {
-      "parts": [
-        [
-          "6d10",
-          "bludgeoning"
-        ]
-      ]
-    },
-    "formula": "",
-    "save": {
-      "type": "reflex",
-      "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
-      "descriptor": "half"
-    },
-    "descriptors": [],
+    "attuned": false,
+    "bulk": "3",
     "capacity": {
-      "value": 80,
-      "max": 80
+      "max": 80,
+      "value": 80
     },
-    "usage": {
-      "value": 8,
-      "per": "round"
-    },
-    "modifiers": [],
+    "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": 1,
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
-          "subtype": "fusion",
-          "amount": 19,
           "acceptsType": [
             "fusion"
           ],
           "affectsEncumbrance": true,
+          "amount": 19,
+          "subtype": "fusion",
           "weightProperty": "level"
         },
         {
           "type": "slot",
-          "subtype": "",
-          "amount": 1,
           "acceptsType": [
             "goods"
           ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "",
           "weightMultiplier": 1,
-          "weightProperty": "",
-          "affectsEncumbrance": true
+          "weightProperty": ""
         },
         {
           "type": "slot",
-          "subtype": "ammunitionSlot",
-          "amount": 1,
           "acceptsType": [
             "ammunition"
           ],
           "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "ammunitionSlot",
           "weightProperty": ""
         }
-      ],
-      "isOpen": true
+      ]
     },
-    "weaponType": "heavy",
-    "weaponCategory": "uncategorized",
-    "special": "",
+    "critical": {
+      "effect": "Bind",
+      "parts": []
+    },
+    "damage": {
+      "parts": [
+        {
+          "formula": "6d10",
+          "operator": "",
+          "types": {
+            "bludgeoning": true
+          }
+        }
+      ]
+    },
+    "damageNotes": "",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>By capturing, studying, and dissecting deadfall stalkers&mdash;all at considerable cost in blood and credits&mdash;the @Compendium[sfrpg.races.3kLK4WKPqNvFTwIB]{Drow} manufacturer Arabani Arms Ltd. has created powerful cannons able to create gravitational singularities at a distant point. These instantaneous black holes tear apart nearby matter and, in the process, hurl away any victims who can&rsquo;t clear the area. The singularity typically lasts for a split-second, yet slivers of the microscopic black hole can adhere to unlucky targets, painfully anchoring their bodies in place.</p>\n<p><strong>Gravitation</strong>: 20 ft.</p>"
+    },
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": ""
+    },
+    "equippable": false,
+    "equipped": false,
+    "formula": "",
+    "identified": true,
+    "isActive": null,
+    "level": 19,
+    "modifiers": [],
+    "price": 555000,
+    "proficient": false,
     "properties": {
-      "one": false,
-      "two": true,
-      "amm": false,
       "aeon": false,
+      "amm": false,
       "analog": false,
       "antibiological": false,
       "archaic": false,
@@ -190,6 +175,7 @@
       "modal": false,
       "necrotic": false,
       "nonlethal": false,
+      "one": false,
       "operative": false,
       "penetrating": false,
       "polarize": false,
@@ -218,19 +204,44 @@
       "throttle": false,
       "thrown": false,
       "trip": false,
+      "two": true,
       "unbalancing": false,
       "underwater": false,
       "unwieldy": true,
       "variantBoost": false,
       "wideLine": false
     },
-    "proficient": false,
-    "abilityMods": {
-      "parts": []
-    }
-  },
-  "flags": {},
-  "img": "systems/sfrpg/icons/equipment/weapons/autobeam_rifle_advanced.png",
-  "effects": [],
-  "_id": "NYlKW1J4cS6B4ebs"
+    "quantity": 1,
+    "quantityPerPack": 1,
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "ft",
+      "value": 50
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "reflex",
+      "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
+      "descriptor": "half"
+    },
+    "source": "AA4 pg. 30",
+    "special": "",
+    "specialMaterials": {},
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "usage": {
+      "per": "round",
+      "value": 8
+    },
+    "uses": {
+      "max": null,
+      "per": "",
+      "value": null
+    },
+    "weaponCategory": "uncategorized",
+    "weaponType": "heavy"
+  }
 }

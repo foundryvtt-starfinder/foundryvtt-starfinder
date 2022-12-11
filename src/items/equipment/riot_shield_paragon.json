@@ -1,113 +1,268 @@
 {
+  "_id": "s6ZJmByLDeANrd5f",
   "name": "Riot Shield, Paragon",
-  "permission": {
-    "default": 0,
-    "umHu8DFnCrMQVZ37": 3
-  },
   "type": "shield",
-  "data": {
-    "description": {
-      "value": "<p><span id=\"ctl00_MainContent_DetailedOutput\">A riot shield is a large slab of advanced material, normally thin layers of nanocarbon over plastics and resins, and often including a transparent aluminum view port. A hand wielding a riot shield cannot be used for anything else, and changing your grip from carrying a riot shield to wielding it, or vice versa, requires a move action. Pulling out a riot shield from storage or putting one away also requires a move action. If you are wielding a riot shield, you gain a +2 bonus to any bull rush combat maneuver you attempt.<br></span></p>\n<p><span id=\"ctl00_MainContent_DetailedOutput\">When you wield a basic riot shield, it grants you a +1 shield bonus to AC. If you are proficient with a riot shield, as a move action you can align the shield against a specific foe, which does not increase your AC but does allow certain armor upgrades you may have in your shield to function. The field and advanced riot shields increase the shield bonus you receive when aligned against a target to +2, the elite riot shield increases it to +3, and the paragon riot shield increases the bonus to +4.</span></p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "Character Operation Manual",
+  "img": "systems/sfrpg/icons/equipment/armor/riot-shield-paragon.webp",
+  "system": {
     "type": "",
-    "quantity": 1,
-    "bulk": "2",
-    "price": 900000,
-    "level": 20,
-    "attuned": false,
-    "equipped": false,
-    "identified": true,
-    "attributes": {
-      "sturdy": true
-    },
-    "activation": {
-      "type": "",
-      "cost": 0,
-      "condition": ""
-    },
-    "duration": {
-      "value": null,
-      "units": ""
-    },
-    "target": {
-      "value": null,
-      "type": ""
-    },
-    "area": {
-      "value": null,
-      "units": "",
-      "shape": "",
-      "effect": ""
-    },
-    "range": {
-      "value": null,
-      "units": "",
-      "additional": "",
-      "per": ""
-    },
-    "uses": {
-      "value": 0,
-      "max": 0,
-      "per": null
-    },
-    "ability": null,
-    "actionType": "mwak",
-    "attackBonus": 0,
-    "chatFlavor": "",
-    "critical": {
-      "parts": [],
-      "effect": ""
-    },
-    "damage": {
+    "ability": "",
+    "abilityMods": {
       "parts": []
     },
-    "formula": "",
-    "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": ""
-    },
-    "descriptors": [],
-    "dex": 6,
     "acp": -2,
-    "bonus": {
-      "wielded": 1,
-      "aligned": 4
+    "actionTarget": "",
+    "actionType": "mwak",
+    "activation": {
+      "type": "",
+      "condition": "",
+      "cost": 0
     },
-    "proficient": false,
+    "ammunitionType": "",
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "",
+      "value": null
+    },
+    "attackBonus": 0,
+    "attributes": {
+      "ac": {
+        "value": ""
+      },
+      "customBuilt": false,
+      "dex": {
+        "mod": ""
+      },
+      "hardness": {
+        "value": ""
+      },
+      "hp": {
+        "max": "",
+        "value": 105
+      },
+      "size": "medium",
+      "sturdy": true
+    },
+    "attuned": false,
+    "bonus": {
+      "aligned": 4,
+      "wielded": 1
+    },
+    "bulk": "2",
+    "capacity": {
+      "max": 0,
+      "value": 0
+    },
+    "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
-          "subtype": "armorUpgrade",
-          "amount": 1,
           "acceptsType": [
             "upgrade"
           ],
           "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "armorUpgrade",
           "weightProperty": "slots"
         },
         {
           "type": "slot",
-          "subtype": "fusion",
-          "amount": 0,
           "acceptsType": [
             "fusion"
           ],
           "affectsEncumbrance": true,
+          "amount": 0,
+          "subtype": "fusion",
           "weightProperty": "level"
         }
       ]
     },
+    "critical": {
+      "effect": "",
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "damageNotes": "",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p><span id=\"ctl00_MainContent_DetailedOutput\">A riot shield is a large slab of advanced material, normally thin layers of nanocarbon over plastics and resins, and often including a transparent aluminum view port. A hand wielding a riot shield cannot be used for anything else, and changing your grip from carrying a riot shield to wielding it, or vice versa, requires a move action. Pulling out a riot shield from storage or putting one away also requires a move action. If you are wielding a riot shield, you gain a +2 bonus to any bull rush combat maneuver you attempt.<br></span></p>\n<p><span id=\"ctl00_MainContent_DetailedOutput\"></span></p>"
+    },
+    "descriptors": [],
+    "dex": 6,
+    "duration": {
+      "units": "",
+      "value": null
+    },
+    "equippable": true,
+    "equipped": false,
+    "formula": "",
+    "identified": true,
+    "isActive": null,
+    "level": 20,
+    "modifiers": [
+      {
+        "_id": "2497b75c-055c-4219-9069-09c822ec6f4a",
+        "name": "Riot Shield - Combat maneuver",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-attacks",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "If you are wielding a riot shield, you gain a +2 bonus to any bull rush combat maneuver you attempt.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "acr"
+      }
+    ],
+    "price": 900000,
+    "proficient": false,
     "properties": {
-      "nonlethal": true
+      "aeon": false,
+      "amm": false,
+      "analog": false,
+      "antibiological": false,
+      "archaic": false,
+      "aurora": false,
+      "automatic": false,
+      "blast": false,
+      "block": false,
+      "boost": false,
+      "breach": false,
+      "breakdown": false,
+      "bright": false,
+      "buttressing": false,
+      "cluster": false,
+      "conceal": false,
+      "deconstruct": false,
+      "deflect": false,
+      "disarm": false,
+      "double": false,
+      "drainCharge": false,
+      "echo": false,
+      "entangle": false,
+      "explode": false,
+      "extinguish": false,
+      "feint": false,
+      "fiery": false,
+      "firstArc": false,
+      "flexibleLine": false,
+      "force": false,
+      "freeHands": false,
+      "fueled": false,
+      "gearArray": false,
+      "grapple": false,
+      "gravitation": false,
+      "guided": false,
+      "harrying": false,
+      "holyWater": false,
+      "hybrid": false,
+      "ignite": false,
+      "indirect": false,
+      "injection": false,
+      "integrated": false,
+      "line": false,
+      "living": false,
+      "lockdown": false,
+      "mind-affecting": false,
+      "mine": false,
+      "mire": false,
+      "modal": false,
+      "necrotic": false,
+      "nonlethal": true,
+      "one": false,
+      "operative": false,
+      "penetrating": false,
+      "polarize": false,
+      "polymorphic": false,
+      "powered": false,
+      "professional": false,
+      "propel": false,
+      "punchGun": false,
+      "qreload": false,
+      "radioactive": false,
+      "reach": false,
+      "recall": false,
+      "regrowth": false,
+      "relic": false,
+      "reposition": false,
+      "scramble": false,
+      "shape": false,
+      "shatter": false,
+      "shells": false,
+      "shield": false,
+      "sniper": false,
+      "stun": false,
+      "subtle": false,
+      "sunder": false,
+      "swarm": false,
+      "tail": false,
+      "teleportive": false,
+      "thought": false,
+      "throttle": false,
+      "thrown": false,
+      "thruster": false,
+      "trip": false,
+      "two": false,
+      "unbalancing": false,
+      "underwater": false,
+      "unwieldy": false,
+      "variantBoost": false,
+      "wideLine": false
+    },
+    "quantity": 1,
+    "quantityPerPack": 1,
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "",
+      "value": null
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "",
+      "dc": "",
+      "descriptor": "negate"
+    },
+    "source": "Character Operation Manual",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
+    "target": {
+      "type": "",
+      "value": null
+    },
+    "usage": {
+      "per": "",
+      "value": 0
+    },
+    "uses": {
+      "max": 0,
+      "per": null,
+      "value": 0
     }
-  },
-  "flags": {},
-  "img": "systems/sfrpg/icons/equipment/armor/riot-shield-paragon.jpg",
-  "_id": "s6ZJmByLDeANrd5f"
+  }
 }

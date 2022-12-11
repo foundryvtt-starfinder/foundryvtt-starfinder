@@ -5,22 +5,49 @@
             {{#if prefixTable}}
             {{ lookup prefixTable item.type }}:
             {{/if}}
-            {{item.name}}
+            {{#if (not (eq item.type "actorResource"))}}
+                {{item.name}}
+            {{else}}
+            <div class="actor-resource-name">
+                <div>
+                    <label class="name-label">{{item.name}}</label>
+                </div>
+                <div>
+                    {{#if (and (eq item.type "actorResource") item.actorResourceData)}}
+                    <label class="value-label">@resources.{{item.system.type}}.{{item.system.subType}}.value</label>
+                    {{else}}
+                    <label class="error">{{localize "SFRPG.ItemSheet.ActorResource.ErrorIncompleteData"}}</label>
+                    {{/if}}
+                </div>
+            </div>
+            {{/if}}
         </h4>
-        {{#if (and item.data.piloting.usedAsPilot item.data.isActive)}}
+        {{#if (and item.system.piloting.usedAsPilot item.system.isActive)}}
         <div class="vehicle-system-action flexcol">
-            <button class="tag roll-piloting">{{localize "SFRPG.VehicleSheet.Systems.RollPiloting"}}</button>
+            <button type="button" class="tag roll-piloting">{{localize "SFRPG.VehicleSheet.Systems.RollPiloting"}}</button>
+        </div>
+        {{/if}}
+        {{#if (and (eq item.type "actorResource") item.actorResourceData)}}
+        <div class="actor-resource-values">
+            <div>
+                <label class="actor-resource-base-label">{{localize "SFRPG.ItemSheet.ActorResource.UsageBaseValue"}}:</label>
+                <input class="actor-resource-base-input" data-resource-id="{{item._id}}" type="text" name="" value="{{item.system.base}}" data-dtype="Number"/>
+            </div>
+            <div>
+                <label class="actor-resource-computed-label">{{localize "SFRPG.ItemSheet.ActorResource.UsageComputedValue"}}:</label>
+                <span>{{item.actorResourceData.value}}</span>
+            </div>
         </div>
         {{/if}}
     </div>
 
     {{#if section.hasActions}}
     <div class="item-detail item-action">
-        {{#if (and item.isVehicleSystem item.data.canBeActivated)}}
-            {{#if item.data.isActive}}
-            <button class="tag vehicle-system-deactivate">{{localize "SFRPG.ActorSheet.Inventory.Item.Deactivate"}}</button>
+        {{#if (and item.isVehicleSystem item.system.canBeActivated)}}
+            {{#if item.system.isActive}}
+            <button type="button" class="tag vehicle-system-deactivate">{{localize "SFRPG.ActorSheet.Inventory.Item.Deactivate"}}</button>
             {{else}}
-            <button class="tag vehicle-system-activate">{{localize "SFRPG.ActorSheet.Inventory.Item.Activate"}}</button>
+            <button type="button" class="tag vehicle-system-activate">{{localize "SFRPG.ActorSheet.Inventory.Item.Activate"}}</button>
             {{/if}}
         {{/if}}
     </div>

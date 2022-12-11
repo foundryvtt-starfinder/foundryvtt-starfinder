@@ -1,0 +1,183 @@
+{
+  "_id": "fU9wHAJRbEpdook8",
+  "name": "Drawback (Mechanized Niche)",
+  "type": "feat",
+  "_stats": {
+    "coreVersion": "10.288",
+    "createdTime": 1667176712266,
+    "lastModifiedBy": "SPRszH5sDdJlGxJn",
+    "modifiedTime": 1667244032766,
+    "systemId": "sfrpg",
+    "systemVersion": "0.21.0"
+  },
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "type": "",
+    "ability": "",
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "",
+    "actionType": "other",
+    "activation": {
+      "type": "",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "",
+      "value": 0
+    },
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "effect": "",
+      "parts": []
+    },
+    "damage": {
+      "parts": [
+        {
+          "name": "",
+          "formula": "(floor(@classes.evolutionist.levels / 2) + @resources.evolutionist.evolutionTrack.value)",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
+    },
+    "damageNotes": "",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.NdImg3Bt0PzTvwgt]{Mechanized (Niche)}</p>\n<p>While you have at least 1 MP the first time per round you take either type of damage you chose for your instinct (above), you take additional damage equal to half your evolutionist level + your MP total.</p>\n<p>If you have 3 or more MP you become increasingly robotic. You&rsquo;re treated as both a construct and your creature type&mdash; whichever type allows an ability to affect you for abilities that only affect one type, and whichever is worse for abilities that affect both types. Such effects continue to affect you even if you have fewer than 3 MP later in the effect&rsquo;s duration. In addition, you can&rsquo;t gain morale bonuses and you take a penalty equal to half your MP total, rounded up, to Charisma-based skill checks except Intimidate.</p>"
+    },
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
+    "duration": {
+      "units": "",
+      "value": null
+    },
+    "formula": "",
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "e4873d0b-31a2-44c3-a43c-43d0bbd0ab52",
+        "name": "Drawback (Mechanized Niche)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "max": 0,
+        "modifier": "-(lookupRange(@resources.evolutionist.evolutionTrack.value, 0, 3, ceil(@resources.evolutionist.evolutionTrack.value / 2)))",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "blu"
+      },
+      {
+        "_id": "1fd76534-da47-4d53-b463-4c72131ebeda",
+        "name": "Drawback (Mechanized Niche)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "max": 0,
+        "modifier": "-(lookupRange(@resources.evolutionist.evolutionTrack.value, 0, 3, ceil(@resources.evolutionist.evolutionTrack.value / 2)))",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "dip"
+      },
+      {
+        "_id": "98fa1bec-4816-4d2d-b558-bf72d424b5df",
+        "name": "Drawback (Mechanized Niche)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "max": 0,
+        "modifier": "-(lookupRange(@resources.evolutionist.evolutionTrack.value, 0, 3, ceil(@resources.evolutionist.evolutionTrack.value / 2)))",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "dis"
+      }
+    ],
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "",
+      "value": null
+    },
+    "recharge": {
+      "charged": false,
+      "value": null
+    },
+    "requirements": "1st Level (Evolutionist)",
+    "rollNotes": "",
+    "save": {
+      "type": "",
+      "dc": "",
+      "descriptor": "negate"
+    },
+    "source": "IS, pg. 14",
+    "target": {
+      "type": "",
+      "value": null
+    },
+    "uses": {
+      "max": 0,
+      "per": null,
+      "value": 0
+    }
+  }
+}

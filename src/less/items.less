@@ -1,7 +1,6 @@
 @import "./variables.less";
 .sfrpg.sheet.item {
   min-height: 420px;
-  max-height: 700px;
 
   /* ----------------------------------------- */
   /*  Sheet Header                             */
@@ -249,6 +248,7 @@
   /* ----------------------------------------- */
 
   h4.damage-header,
+  h4.visualization-header,
   h4.ability-adjustments-header {
     margin: 0;
     padding: 0;
@@ -257,13 +257,30 @@
     color: @colorOlive;
   }
 
+  ol.damage-parts,
+  ol.visualization-parts {
+    border-top: groove 2px #fff;
+
+    img.part-image {
+      flex: 0 0 50px;
+      height: 50px;
+    }
+  }
+
+  li.damage-part,
+  li.visualization-part {
+    border-bottom: groove 2px #fff;
+  }
+
   .damage-parts,
+  .visualization-parts,
   .ability-adjustment-parts {
     list-style: none;
     margin: 0;
     padding: 0;
 
     .damage-part,
+    .visualization-part,
     .ability-adjustment-part {
       flex: 0 0 100%;
       padding: 0;
@@ -274,17 +291,53 @@
         margin-left: 5px;
         flex: 1;
       }
+
+      .visualization-part-mode {
+        flex: 0 0 220px;
+        line-height: 20px;
+
+        span {
+          margin: 0px 0px 0px 4px;
+        }
+
+        select {
+          margin-top: 1px;
+          margin-bottom: 1px;
+          margin-left: 0px;
+          margin-right: 2px;
+        }
+      }
+
+      .visualization-part-middle {
+        flex: 0 0 58px;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .visualization-part-title {
+        justify-content: center;
+      }
+
+      .visualization-part-delete {
+        flex: 0 0 30px;
+      }
+    }
+
+    .visualization-part {
+      padding-bottom: 4px;
     }
   }
 
   .damage-control,
+  .visualization-control,
   .ability-adjustments-control {
     line-height: 24px;
     color: @colorTan;
     text-align: right;
   }
 
-  .damage-control {
+  .damage-control,
+  .visualization-control {
     width: 18px;
     flex: 0 0 18px;
     float: right;    
@@ -309,7 +362,7 @@
   /* ----------------------------------------- */
   /*  Item Actions                             */
   /* ----------------------------------------- */
-
+  .item-descriptors label.checkbox,
   .weapon-properties label.checkbox {
     flex: 0 0 130px;
   }
@@ -344,9 +397,11 @@
         }
 
         .item-image {
-          flex: 0 0 45px;
-          background-size: 45px;
-          margin-right: 5px;
+            flex: 0 0 45px;
+            margin-right: 5px;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
         h4 {
@@ -354,11 +409,11 @@
         }
 
         &:hover .item-image {
-          background-image: url("/icons/svg/d20-grey.svg") !important;
+          background-image: url("../../icons/svg/d20-grey.svg") !important;
         }
 
         .item-image:hover {
-          background-image: url("/icons/svg/d20-black.svg") !important;
+          background-image: url("../../icons/svg/d20-black.svg") !important;
         }
 
         .item-action {
@@ -484,6 +539,25 @@
       padding: 0.25em 0.5em;
       border-top: 1px solid @colorFaint;
     }
+  }
+
+  .spells-known {
+    th {
+      text-align: center;
+
+      &.class-level {
+        width: 60px;
+      }
+    }
+
+    td {
+      text-align: center;
+    }
+  }
+
+  .error {
+    color: #c00;
+    text-align: left;
   }
 
 }

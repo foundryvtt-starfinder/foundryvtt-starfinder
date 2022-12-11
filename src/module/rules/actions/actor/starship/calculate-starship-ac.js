@@ -1,11 +1,12 @@
 export default function(engine) {
     engine.closures.add("calculateStarshipArmorClass", (fact, context) => {
         const data = fact.data;
+        const actor = fact.actor;
 
-        const pilot = (data.crew?.pilot?.actors) ? data.crew?.pilot?.actors[0] : null;
+        const pilot = (actor.crew?.pilot?.actors) ? actor.crew?.pilot?.actors[0] : null;
         const sizeMod = CONFIG.SFRPG.starshipSizeMod[data.details.size] || 0;
 
-        let pilotingRanks = pilot?.data?.data?.skills?.pil?.ranks || 0;
+        let pilotingRanks = pilot?.system?.skills?.pil?.ranks || 0;
         if (data.crew.useNPCCrew) {
             pilotingRanks = data.crew.npcData?.pilot?.skills?.pil?.ranks || 0;
         }
@@ -45,15 +46,15 @@ export default function(engine) {
         let armorItemData = null;
         if (armorItems && armorItems.length > 0) {
             armorItem = armorItems[0];
-            armorItemData = armorItem.data.data;
+            armorItemData = armorItem.system;
         }
 
         const shieldItems = fact.items.filter(x => x.type === "starshipShield");
         let shieldItem = null;
         let shieldItemData = null;
-        if (shieldItems && shieldItems.length > 0 && shieldItems[0].data.data.isDeflector) {
+        if (shieldItems && shieldItems.length > 0 && shieldItems[0].system.isDeflector) {
             shieldItem = shieldItems[0];
-            shieldItemData = shieldItem.data.data;
+            shieldItemData = shieldItem.system;
         }
 
         /** Apply bonuses. */

@@ -1,50 +1,693 @@
 {
+  "_id": "9SNsWDZ3iLOTokla",
   "name": "Biped Walker",
   "type": "vehicle",
-  "data": {
-    "conditions": {},
-    "details": {
-      "level": 3,
-      "price": 3860,
-      "description": {
-        "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">Used by planetary military forces, this two-legged walker has advanced digital stabilizers that ensure balance.</span></p>",
-        "chat": "",
-        "unidentified": ""
-      },
-      "source": "AP #24 pg. 51"
-    },
-    "crew": {
-      "useNPCCrew": false,
-      "pilot": {
-        "limit": 1,
-        "actorIds": []
-      },
-      "complement": {
-        "limit": 0,
-        "actorIds": []
-      },
-      "passenger": {
-        "limit": 0,
-        "actorIds": []
+  "effects": [],
+  "flags": {},
+  "img": "icons/svg/mystery-man.svg",
+  "items": [
+    {
+      "_id": "6hYEGXGbezExRSQD",
+      "name": "Collision (Ram)",
+      "type": "vehicleAttack",
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 100000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "2*(5d4)",
+              "operator": "",
+              "types": {
+                "bludgeoning": true
+              }
+            }
+          ]
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>As a full action, you can pilot a vehicle at up to its full speed in a straight line at its current heading and try to ram one creature or object at the end of the movement, dealing double the vehicle&rsquo;s collision damage to the target and half the vehicle&rsquo;s collision damage to your vehicle. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see page 228).</p>\n<p>Movement during a ram action has all the same restrictions as the race action and requires the same Piloting checks. If you fail any Piloting check during the movement, you fail to ram your target.</p>\n<p>&nbsp;</p>\n<p>If the target of the ram action is a creature, it can attempt a Reflex saving throw against the vehicle&rsquo;s collision DC to avoid being hit. If the target of the ram action is another vehicle, the pilot of the defending vehicle can attempt a Piloting check to avoid being hit, with a DC equal to the result of your Piloting check. The attacker wins ties.</p>"
+        },
+        "modifiers": [],
+        "save": {
+          "type": "reflex",
+          "dc": "12",
+          "descriptor": "negate"
+        },
+        "source": ""
       }
     },
-    "hangarBay": {
-      "limit": 0,
-      "actorIds": []
+    {
+      "_id": "LS40UB61zorcVeSs",
+      "name": "Collision (Run Over)",
+      "type": "vehicleAttack",
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 200000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "5d4",
+              "operator": "",
+              "types": {
+                "bludgeoning": true
+              }
+            }
+          ]
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>As a full action, you can pilot a vehicle at up to double its drive speed and run over any creatures at least two size categories smaller than the vehicle during this movement. Those creatures take bludgeoning damage equal to the vehicle&rsquo;s collision damage, but can each attempt a Reflex save against the vehicle&rsquo;s collision DC to take half damage. Roll the damage only once and apply it to each creature, rather than rolling separately for each. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see Vehicles on page 228).</p>\n<p>When you take a run over action, the vehicle takes damage equal to half the damage rolled for each creature it runs over. If the vehicle becomes unable to proceed due to this damage, it ceases moving. You can still set the vehicle&rsquo;s heading at the end of this movement as normal.</p>\n<p>&nbsp;</p>\n<p>A vehicle taking the run over action can damage a creature no more than once per round, no matter how many times its movement takes it over a target creature. The vehicle can run over objects of the appropriate size with the same effects, though they don&rsquo;t receive saving throws unless they are piloted or otherwise animate.</p>"
+        },
+        "modifiers": [],
+        "save": {
+          "type": "reflex",
+          "dc": "12",
+          "descriptor": "half"
+        },
+        "source": ""
+      }
     },
-    "attributes": {
-      "size": "large",
-      "type": "land",
-      "dimensions": {
-        "width": "4",
-        "length": "4",
-        "height": "7"
+    {
+      "_id": "ude6lenbqgWPYHuw",
+      "name": "Planetary comm unit",
+      "type": "vehicleSystem",
+      "effects": [],
+      "flags": {},
+      "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.webp",
+      "sort": 500000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "canBeActivated": true,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListTechItems_ctl00_LabelName\">A personal comm unit is pocket-sized device that combines a minor portable computer (treat as a tier-0 computer with no upgrades or modules) and a cellular communication device, allowing wireless communication with other comm units in both audio- and text-based formats at planetary range (see page 272). A personal comm unit also includes a calculator, a flashlight (increases the light level one step in a 15-foot cone), and several entertainment options (including games and access to any local infospheres). You can upgrade a personal comm unit to function as some other devices (such as full computers and scanners) by spending credits equal to 110% of the additional device&rsquo;s price.</span></p>\n<p>&nbsp;</p>"
+        },
+        "isActive": false,
+        "piloting": {
+          "piloting": "0",
+          "usedAsPilot": false
+        },
+        "source": "CRB pg. 218"
+      }
+    },
+    {
+      "_id": "VdtQuxDYnp9VPSpW",
+      "name": "Autocontrol",
+      "type": "vehicleSystem",
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 300000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "canBeActivated": true,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p><span id=\"ctl00_MainContent_DetailedOutput\">Some vehicles have autocontrol, which enables you to spend your actions on tasks other than piloting, but is far less capable than an autopilot. You can engage autocontrol as a swift action after taking a drive or race action, and it lasts until it is disengaged (also a swift action) or until the vehicle is no longer capable of moving. When you&rsquo;re using autocontrol, the vehicle becomes uncontrolled, but each round it moves in a straight line for the same distance and at the same heading and speed as the last pilot action (moving as if taking two drive actions if drive was the last action the pilot took, or as a race action if that was the last action the pilot took). The autocontrol uses the result of the pilot&rsquo;s most recent Piloting check as the result of its Piloting checks.</span></p>"
+        },
+        "isActive": false,
+        "piloting": {
+          "piloting": 0,
+          "usedAsPilot": false
+        },
+        "source": "CRB pg. 280"
+      }
+    },
+    {
+      "_id": "rlhIo1jaFGFacc9I",
+      "name": "Anchor pistol, voltaic",
+      "type": "weapon",
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 300000,
+      "system": {
+        "type": "",
+        "ability": "dex",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "rwak",
+        "activation": {
+          "type": "none",
+          "condition": "",
+          "cost": null
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "none",
+          "value": null
+        },
+        "attackBonus": 0,
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": true
+        },
+        "attuned": false,
+        "bulk": "L",
+        "capacity": {
+          "max": 40,
+          "value": 40
+        },
+        "chatFlavor": "Nonlethal",
+        "container": {
+          "contents": [],
+          "isOpen": true,
+          "storage": [
+            {
+              "type": "slot",
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 4,
+              "subtype": "fusion",
+              "weightProperty": "level"
+            }
+          ]
+        },
+        "critical": {
+          "effect": "Bind",
+          "parts": [
+            [
+              "",
+              ""
+            ]
+          ]
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "1d6",
+              "operator": "",
+              "types": {
+                "electricity": true
+              }
+            }
+          ]
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": ""
+        },
+        "equippable": true,
+        "equipped": true,
+        "formula": "",
+        "identified": true,
+        "isActive": null,
+        "level": 4,
+        "modifiers": [],
+        "price": 2100,
+        "proficient": true,
+        "properties": {
+          "aeon": false,
+          "amm": true,
+          "analog": false,
+          "antibiological": false,
+          "archaic": false,
+          "aurora": false,
+          "automatic": false,
+          "blast": false,
+          "block": false,
+          "boost": false,
+          "breach": false,
+          "breakdown": false,
+          "bright": false,
+          "cluster": false,
+          "conceal": false,
+          "deconstruct": false,
+          "deflect": false,
+          "disarm": false,
+          "double": false,
+          "drainCharge": false,
+          "echo": false,
+          "entangle": false,
+          "explode": false,
+          "extinguish": false,
+          "feint": false,
+          "fiery": false,
+          "firstArc": false,
+          "flexibleLine": false,
+          "force": false,
+          "freeHands": false,
+          "fueled": false,
+          "grapple": false,
+          "gravitation": false,
+          "guided": false,
+          "harrying": false,
+          "holyWater": false,
+          "hybrid": false,
+          "ignite": false,
+          "indirect": false,
+          "injection": false,
+          "integrated": false,
+          "line": false,
+          "living": false,
+          "lockdown": false,
+          "mind-affecting": false,
+          "mine": false,
+          "mire": false,
+          "modal": false,
+          "necrotic": false,
+          "nonlethal": true,
+          "one": true,
+          "operative": false,
+          "penetrating": false,
+          "polarize": false,
+          "polymorphic": false,
+          "powered": false,
+          "professional": false,
+          "punchGun": false,
+          "qreload": false,
+          "radioactive": false,
+          "reach": false,
+          "recall": false,
+          "regrowth": false,
+          "relic": false,
+          "reposition": false,
+          "shape": false,
+          "shatter": false,
+          "shells": false,
+          "shield": false,
+          "sniper": false,
+          "stun": false,
+          "subtle": false,
+          "sunder": false,
+          "swarm": false,
+          "tail": false,
+          "teleportive": false,
+          "thought": false,
+          "throttle": false,
+          "thrown": false,
+          "trip": false,
+          "two": false,
+          "unbalancing": false,
+          "underwater": false,
+          "unwieldy": false,
+          "variantBoost": false,
+          "wideLine": false
+        },
+        "quantity": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "ft",
+          "value": 40
+        },
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "source": "AR",
+        "special": "",
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "usage": {
+          "per": "shot",
+          "value": 2
+        },
+        "uses": {
+          "max": 0,
+          "per": "",
+          "value": 2
+        },
+        "weaponCategory": "shock",
+        "weaponType": "smallA"
+      }
+    },
+    {
+      "_id": "LCm6fKxE1B5Ysqwj",
+      "name": "NIL grenade launcher, merc",
+      "type": "weapon",
+      "effects": [],
+      "flags": {},
+      "img": "systems/sfrpg/icons/equipment/weapons/nil-grenade-launcher-merc.webp",
+      "sort": 200000,
+      "system": {
+        "type": "",
+        "ability": "dex",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "rwak",
+        "activation": {
+          "type": "none",
+          "condition": "",
+          "cost": null
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": null,
+          "value": null
+        },
+        "attackBonus": 0,
+        "attributes": {
+          "ac": {
+            "value": "5"
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": "7"
+          },
+          "hp": {
+            "max": "18",
+            "value": 18
+          },
+          "size": "medium",
+          "sturdy": true
+        },
+        "attuned": false,
+        "bulk": "2",
+        "capacity": {
+          "max": 6,
+          "value": 6
+        },
+        "chatFlavor": "",
+        "container": {
+          "contents": [],
+          "isOpen": true,
+          "storage": [
+            {
+              "type": "slot",
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 1,
+              "subtype": "fusion",
+              "weightProperty": "level"
+            },
+            {
+              "type": "slot",
+              "acceptsType": [
+                "goods"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 1,
+              "subtype": "",
+              "weightProperty": ""
+            }
+          ]
+        },
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">NIL (an acronym for “neutronic individual launcher”) grenade launchers are the most common grenade launcher available on the market. NILs can be fitted with any sort of grenade as ammunition. Grenades are loaded individually, rather than in magazines. You can load different types of grenades into a NIL grenade launcher, and you can select which grenade to fire as part of the action used to make an attack.&nbsp;</span></p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": ""
+        },
+        "equippable": true,
+        "equipped": true,
+        "formula": "",
+        "identified": true,
+        "isActive": null,
+        "level": 1,
+        "modifiers": [],
+        "price": 280,
+        "proficient": true,
+        "properties": {
+          "aeon": false,
+          "amm": false,
+          "analog": false,
+          "antibiological": false,
+          "archaic": false,
+          "aurora": false,
+          "automatic": false,
+          "blast": false,
+          "block": false,
+          "boost": false,
+          "breach": false,
+          "breakdown": false,
+          "bright": false,
+          "cluster": false,
+          "conceal": false,
+          "deconstruct": false,
+          "deflect": false,
+          "disarm": false,
+          "double": false,
+          "drainCharge": false,
+          "echo": false,
+          "entangle": false,
+          "explode": false,
+          "extinguish": false,
+          "feint": false,
+          "fiery": false,
+          "firstArc": false,
+          "flexibleLine": false,
+          "force": false,
+          "freeHands": false,
+          "fueled": false,
+          "grapple": false,
+          "gravitation": false,
+          "guided": false,
+          "harrying": false,
+          "holyWater": false,
+          "hybrid": false,
+          "ignite": false,
+          "indirect": false,
+          "injection": false,
+          "integrated": false,
+          "line": false,
+          "living": false,
+          "lockdown": false,
+          "mind-affecting": false,
+          "mine": false,
+          "mire": false,
+          "modal": false,
+          "necrotic": false,
+          "nonlethal": false,
+          "one": false,
+          "operative": false,
+          "penetrating": false,
+          "polarize": false,
+          "polymorphic": false,
+          "powered": false,
+          "professional": false,
+          "punchGun": false,
+          "qreload": false,
+          "radioactive": false,
+          "reach": false,
+          "recall": false,
+          "regrowth": false,
+          "relic": false,
+          "reposition": false,
+          "shape": false,
+          "shatter": false,
+          "shells": false,
+          "shield": false,
+          "sniper": false,
+          "stun": false,
+          "subtle": false,
+          "sunder": false,
+          "swarm": false,
+          "tail": false,
+          "teleportive": false,
+          "thought": false,
+          "throttle": false,
+          "thrown": false,
+          "trip": false,
+          "two": true,
+          "unbalancing": false,
+          "underwater": false,
+          "unwieldy": false,
+          "variantBoost": false,
+          "wideLine": false
+        },
+        "quantity": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "ft",
+          "value": 60
+        },
+        "save": {
+          "type": "reflex",
+          "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
+          "descriptor": "half"
+        },
+        "source": "CRB pg. 178",
+        "special": "",
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "usage": {
+          "per": "shot",
+          "value": 1
+        },
+        "uses": {
+          "max": null,
+          "per": "",
+          "value": null
+        },
+        "weaponCategory": "uncategorized",
+        "weaponType": "heavy"
+      }
+    }
+  ],
+  "prototypeToken": {
+    "name": "Biped Walker",
+    "actorId": "8nVYpHNJazD7CwHm",
+    "actorLink": false,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": ""
+    },
+    "displayBars": 20,
+    "displayName": 20,
+    "disposition": 0,
+    "flags": {},
+    "height": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 360,
+      "animation": {
+        "type": null,
+        "intensity": 5,
+        "reverse": false,
+        "speed": 5
       },
-      "speed": {
-        "drive": "35 ft",
-        "full": "350 ft",
-        "mph": "40 mph",
-        "type": ""
+      "attenuation": 0.5,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "contrast": 0,
+      "darkness": {
+        "max": 1,
+        "min": 0
+      },
+      "dim": 0,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "shadows": 0
+    },
+    "lockRotation": false,
+    "randomImg": false,
+    "rotation": 0,
+    "scale": 1,
+    "sight": {
+      "angle": 360,
+      "attenuation": 0.1,
+      "brightness": 1,
+      "color": null,
+      "contrast": 0,
+      "enabled": false,
+      "range": 0,
+      "saturation": 0,
+      "visionMode": "basic"
+    },
+    "texture": {
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": null
+    },
+    "width": 1
+  },
+  "system": {
+    "attributes": {
+      "type": "land",
+      "controlSkill": "pil",
+      "cover": "partial",
+      "dimensions": {
+        "height": "7",
+        "length": "4",
+        "width": "4"
       },
       "eac": {
         "value": 13
@@ -52,662 +695,61 @@
       "expansionBays": {
         "value": 0
       },
+      "hardness": 6,
+      "hp": {
+        "max": 40,
+        "threshold": 20,
+        "value": 40
+      },
       "kac": {
         "value": 15
       },
-      "cover": "partial",
-      "hp": {
-        "value": 40,
-        "max": 40,
-        "threshold": 20
-      },
-      "hardness": 6,
       "modifiers": {
-        "piloting": "-3",
-        "attackStopped": "0",
-        "attackMoving": "-3",
+        "athletics": "",
         "attackFullSpeed": "-6",
-        "athletics": ""
+        "attackMoving": "-3",
+        "attackStopped": "0",
+        "piloting": "-3"
       },
-      "systems": [],
+      "size": "large",
       "special": [],
-      "controlSkill": "pil"
+      "speed": {
+        "type": "",
+        "drive": "35 ft",
+        "full": "350 ft",
+        "mph": "40 mph"
+      },
+      "systems": []
+    },
+    "conditions": {},
+    "crew": {
+      "complement": {
+        "actorIds": [],
+        "limit": 0
+      },
+      "passenger": {
+        "actorIds": [],
+        "limit": 0
+      },
+      "pilot": {
+        "actorIds": [],
+        "limit": 1
+      },
+      "useNPCCrew": false
+    },
+    "details": {
+      "description": {
+        "chat": "",
+        "unidentified": "",
+        "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">Used by planetary military forces, this two-legged walker has advanced digital stabilizers that ensure balance.</span></p>"
+      },
+      "level": 3,
+      "price": 3860,
+      "source": "AP #24 pg. 51"
+    },
+    "hangarBay": {
+      "actorIds": [],
+      "limit": 0
     }
-  },
-  "flags": {},
-  "token": {
-    "flags": {},
-    "name": "Biped Walker",
-    "displayName": 0,
-    "img": "icons/svg/mystery-man.svg",
-    "tint": null,
-    "width": 1,
-    "height": 1,
-    "scale": 1,
-    "lockRotation": false,
-    "rotation": 0,
-    "vision": false,
-    "dimSight": 0,
-    "brightSight": 0,
-    "dimLight": 0,
-    "brightLight": 0,
-    "sightAngle": 360,
-    "lightAngle": 360,
-    "lightAlpha": 1,
-    "lightAnimation": {
-      "speed": 5,
-      "intensity": 5
-    },
-    "actorId": "8nVYpHNJazD7CwHm",
-    "actorLink": false,
-    "disposition": -1,
-    "displayBars": 0,
-    "bar1": {},
-    "bar2": {},
-    "randomImg": false
-  },
-  "items": [
-    {
-      "_id": "6hYEGXGbezExRSQD",
-      "name": "Collision (Ram)",
-      "type": "vehicleAttack",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p>As a full action, you can pilot a vehicle at up to its full speed in a straight line at its current heading and try to ram one creature or object at the end of the movement, dealing double the vehicle&rsquo;s collision damage to the target and half the vehicle&rsquo;s collision damage to your vehicle. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see page 228).</p>\n<p>Movement during a ram action has all the same restrictions as the race action and requires the same Piloting checks. If you fail any Piloting check during the movement, you fail to ram your target.</p>\n<p>&nbsp;</p>\n<p>If the target of the ram action is a creature, it can attempt a Reflex saving throw against the vehicle&rsquo;s collision DC to avoid being hit. If the target of the ram action is another vehicle, the pilot of the defending vehicle can attempt a Piloting check to avoid being hit, with a DC equal to the result of your Piloting check. The attacker wins ties.</p>",
-          "unidentified": ""
-        },
-        "source": "",
-        "type": "",
-        "modifiers": [],
-        "damage": {
-          "parts": [
-            [
-              "2*(5d4)",
-              "bludgeoning"
-            ]
-          ]
-        },
-        "save": {
-          "type": "reflex",
-          "dc": "12",
-          "descriptor": "negate"
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": 100000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "_id": "LS40UB61zorcVeSs",
-      "name": "Collision (Run Over)",
-      "type": "vehicleAttack",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p>As a full action, you can pilot a vehicle at up to double its drive speed and run over any creatures at least two size categories smaller than the vehicle during this movement. Those creatures take bludgeoning damage equal to the vehicle&rsquo;s collision damage, but can each attempt a Reflex save against the vehicle&rsquo;s collision DC to take half damage. Roll the damage only once and apply it to each creature, rather than rolling separately for each. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see Vehicles on page 228).</p>\n<p>When you take a run over action, the vehicle takes damage equal to half the damage rolled for each creature it runs over. If the vehicle becomes unable to proceed due to this damage, it ceases moving. You can still set the vehicle&rsquo;s heading at the end of this movement as normal.</p>\n<p>&nbsp;</p>\n<p>A vehicle taking the run over action can damage a creature no more than once per round, no matter how many times its movement takes it over a target creature. The vehicle can run over objects of the appropriate size with the same effects, though they don&rsquo;t receive saving throws unless they are piloted or otherwise animate.</p>",
-          "unidentified": ""
-        },
-        "source": "",
-        "type": "",
-        "modifiers": [],
-        "damage": {
-          "parts": [
-            [
-              "5d4",
-              "bludgeoning"
-            ]
-          ]
-        },
-        "save": {
-          "type": "reflex",
-          "dc": "12",
-          "descriptor": "half"
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": 200000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "_id": "ude6lenbqgWPYHuw",
-      "name": "Planetary comm unit",
-      "type": "vehicleSystem",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p><span id=\"ctl00_MainContent_DataListTechItems_ctl00_LabelName\">A personal comm unit is pocket-sized device that combines a minor portable computer (treat as a tier-0 computer with no upgrades or modules) and a cellular communication device, allowing wireless communication with other comm units in both audio- and text-based formats at planetary range (see page 272). A personal comm unit also includes a calculator, a flashlight (increases the light level one step in a 15-foot cone), and several entertainment options (including games and access to any local infospheres). You can upgrade a personal comm unit to function as some other devices (such as full computers and scanners) by spending credits equal to 110% of the additional device&rsquo;s price.</span></p>\n<p>&nbsp;</p>",
-          "unidentified": ""
-        },
-        "source": "CRB pg. 218",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": false,
-          "piloting": "0"
-        },
-        "canBeActivated": true,
-        "isActive": false,
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": 500000,
-      "flags": {},
-      "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.jpg",
-      "effects": []
-    },
-    {
-      "_id": "VdtQuxDYnp9VPSpW",
-      "name": "Autocontrol",
-      "type": "vehicleSystem",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p><span id=\"ctl00_MainContent_DetailedOutput\">Some vehicles have autocontrol, which enables you to spend your actions on tasks other than piloting, but is far less capable than an autopilot. You can engage autocontrol as a swift action after taking a drive or race action, and it lasts until it is disengaged (also a swift action) or until the vehicle is no longer capable of moving. When you&rsquo;re using autocontrol, the vehicle becomes uncontrolled, but each round it moves in a straight line for the same distance and at the same heading and speed as the last pilot action (moving as if taking two drive actions if drive was the last action the pilot took, or as a race action if that was the last action the pilot took). The autocontrol uses the result of the pilot&rsquo;s most recent Piloting check as the result of its Piloting checks.</span></p>",
-          "unidentified": ""
-        },
-        "source": "CRB pg. 280",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": false,
-          "piloting": 0
-        },
-        "canBeActivated": true,
-        "isActive": false,
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": 300000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "_id": "rlhIo1jaFGFacc9I",
-      "name": "Anchor pistol, voltaic",
-      "type": "weapon",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "",
-          "unidentified": ""
-        },
-        "source": "AR",
-        "type": "",
-        "quantity": 1,
-        "bulk": "L",
-        "price": 2100,
-        "level": 4,
-        "attuned": false,
-        "equipped": true,
-        "equippable": true,
-        "identified": true,
-        "attributes": {
-          "sturdy": true,
-          "customBuilt": false,
-          "size": "medium",
-          "dex": {
-            "mod": ""
-          },
-          "hp": {
-            "value": 6,
-            "max": ""
-          },
-          "hardness": {
-            "value": ""
-          },
-          "ac": {
-            "value": ""
-          }
-        },
-        "activation": {
-          "type": "none",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "target": {
-          "value": "",
-          "type": ""
-        },
-        "area": {
-          "value": null,
-          "units": "none",
-          "shape": "",
-          "effect": ""
-        },
-        "range": {
-          "value": 40,
-          "units": "ft",
-          "additional": "",
-          "per": ""
-        },
-        "uses": {
-          "value": 2,
-          "max": 0,
-          "per": ""
-        },
-        "isActive": null,
-        "ability": "dex",
-        "actionType": "rwak",
-        "attackBonus": 0,
-        "chatFlavor": "Nonlethal",
-        "critical": {
-          "parts": [
-            [
-              "",
-              ""
-            ]
-          ],
-          "effect": "Bind"
-        },
-        "damage": {
-          "parts": [
-            [
-              "1d6",
-              "electricity"
-            ]
-          ]
-        },
-        "formula": "",
-        "save": {
-          "type": "",
-          "dc": "",
-          "descriptor": "negate"
-        },
-        "descriptors": [],
-        "capacity": {
-          "value": 40,
-          "max": 40
-        },
-        "usage": {
-          "value": 2,
-          "per": "shot"
-        },
-        "modifiers": [],
-        "container": {
-          "contents": [],
-          "storage": [
-            {
-              "type": "slot",
-              "subtype": "fusion",
-              "amount": 4,
-              "acceptsType": [
-                "fusion"
-              ],
-              "affectsEncumbrance": true,
-              "weightProperty": "level"
-            }
-          ],
-          "isOpen": true
-        },
-        "weaponType": "smallA",
-        "weaponCategory": "shock",
-        "special": "",
-        "properties": {
-          "one": true,
-          "two": false,
-          "amm": true,
-          "analog": false,
-          "archaic": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "bright": false,
-          "disarm": false,
-          "entangle": false,
-          "explode": false,
-          "injection": false,
-          "line": false,
-          "living": false,
-          "mind-affecting": false,
-          "nonlethal": true,
-          "operative": false,
-          "penetrating": false,
-          "powered": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "thrown": false,
-          "trip": false,
-          "unwieldy": false,
-          "aeon": false,
-          "antibiological": false,
-          "aurora": false,
-          "breach": false,
-          "breakdown": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "holyWater": false,
-          "ignite": false,
-          "indirect": false,
-          "integrated": false,
-          "lockdown": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "polarize": false,
-          "polymorphic": false,
-          "professional": false,
-          "punchGun": false,
-          "recall": false,
-          "relic": false,
-          "reposition": false,
-          "shape": false,
-          "shells": false,
-          "shield": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "underwater": false,
-          "variantBoost": false,
-          "wideLine": false,
-          "hybrid": false,
-          "regrowth": false,
-          "shatter": false,
-          "unbalancing": false
-        },
-        "proficient": true,
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": 300000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "_id": "LCm6fKxE1B5Ysqwj",
-      "name": "NIL grenade launcher, merc",
-      "type": "weapon",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">NIL (an acronym for “neutronic individual launcher”) grenade launchers are the most common grenade launcher available on the market. NILs can be fitted with any sort of grenade as ammunition. Grenades are loaded individually, rather than in magazines. You can load different types of grenades into a NIL grenade launcher, and you can select which grenade to fire as part of the action used to make an attack.&nbsp;</span></p>",
-          "unidentified": ""
-        },
-        "source": "CRB pg. 178",
-        "type": "",
-        "quantity": 1,
-        "bulk": "2",
-        "price": 280,
-        "level": 1,
-        "attuned": false,
-        "equipped": true,
-        "equippable": true,
-        "identified": true,
-        "attributes": {
-          "sturdy": true,
-          "customBuilt": false,
-          "size": "medium",
-          "dex": {
-            "mod": ""
-          },
-          "hp": {
-            "value": 18,
-            "max": "18"
-          },
-          "hardness": {
-            "value": "7"
-          },
-          "ac": {
-            "value": "5"
-          }
-        },
-        "activation": {
-          "type": "none",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "target": {
-          "value": "",
-          "type": ""
-        },
-        "area": {
-          "value": null,
-          "units": null,
-          "shape": "",
-          "effect": ""
-        },
-        "range": {
-          "value": 60,
-          "units": "ft",
-          "additional": "",
-          "per": ""
-        },
-        "uses": {
-          "value": null,
-          "max": null,
-          "per": ""
-        },
-        "isActive": null,
-        "ability": "dex",
-        "actionType": "rwak",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "parts": [],
-          "effect": ""
-        },
-        "damage": {
-          "parts": []
-        },
-        "formula": "",
-        "save": {
-          "type": "reflex",
-          "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
-          "descriptor": "half"
-        },
-        "descriptors": [],
-        "capacity": {
-          "value": 6,
-          "max": 6
-        },
-        "usage": {
-          "value": 1,
-          "per": "shot"
-        },
-        "modifiers": [],
-        "container": {
-          "contents": [],
-          "storage": [
-            {
-              "type": "slot",
-              "subtype": "fusion",
-              "amount": 1,
-              "acceptsType": [
-                "fusion"
-              ],
-              "affectsEncumbrance": true,
-              "weightProperty": "level"
-            },
-            {
-              "type": "slot",
-              "subtype": "",
-              "amount": 1,
-              "acceptsType": [
-                "goods"
-              ],
-              "weightProperty": "",
-              "affectsEncumbrance": true
-            }
-          ],
-          "isOpen": true
-        },
-        "weaponType": "heavy",
-        "weaponCategory": "uncategorized",
-        "special": "",
-        "properties": {
-          "one": false,
-          "two": true,
-          "amm": false,
-          "analog": false,
-          "archaic": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "bright": false,
-          "disarm": false,
-          "entangle": false,
-          "explode": false,
-          "injection": false,
-          "line": false,
-          "nonlethal": false,
-          "operative": false,
-          "penetrating": false,
-          "powered": false,
-          "qreload": false,
-          "reach": false,
-          "sniper": false,
-          "stun": false,
-          "thrown": false,
-          "trip": false,
-          "unwieldy": false,
-          "radioactive": false,
-          "subtle": false,
-          "aeon": false,
-          "antibiological": false,
-          "aurora": false,
-          "breach": false,
-          "breakdown": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "holyWater": false,
-          "hybrid": false,
-          "ignite": false,
-          "indirect": false,
-          "integrated": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "polarize": false,
-          "polymorphic": false,
-          "professional": false,
-          "punchGun": false,
-          "recall": false,
-          "regrowth": false,
-          "relic": false,
-          "reposition": false,
-          "shape": false,
-          "shells": false,
-          "shield": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "unbalancing": false,
-          "underwater": false,
-          "variantBoost": false,
-          "wideLine": false,
-          "shatter": false
-        },
-        "proficient": true,
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": 200000,
-      "flags": {},
-      "img": "systems/sfrpg/icons/equipment/weapons/nil-grenade-launcher-merc.jpg",
-      "effects": []
-    }
-  ],
-  "effects": [],
-  "_id": "9SNsWDZ3iLOTokla"
+  }
 }

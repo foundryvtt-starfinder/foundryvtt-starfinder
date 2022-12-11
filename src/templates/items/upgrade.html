@@ -15,14 +15,14 @@
         {{> "systems/sfrpg/templates/items/parts/item-description.html"}}
 
         <div class="tab details" data-group="primary" data-tab="details">
-            <h3 class="form-header">{{ localize "SFRPG.Items.Upgrade.ArmorUpgradeDetails" }}</h3>
+            <h3 class="form-header noborder">{{ localize "SFRPG.Items.Upgrade.ArmorUpgradeDetails" }}</h3>
             <div class="form-group">
                 <label>{{ localize "SFRPG.Items.Upgrade.Slots" }}</label>
-                <input type="text" name="data.slots" value="{{itemData.slots}}" data-dtype="Number" />
+                <input type="text" name="system.slots" value="{{itemData.slots}}" data-dtype="Number" />
             </div>
             <div class="form-group">
                 <label>{{ localize "SFRPG.Items.Upgrade.AllowedArmorType" }}</label>
-                <select name="data.allowedArmorType">
+                <select name="system.allowedArmorType">
                     {{#select itemData.allowedArmorType}}
                     <option value="any">{{ localize "SFRPG.Items.Upgrade.Any" }}</option>
                     {{#each config.allowedArmorTypes as |allowedArmorType k|}}
@@ -32,12 +32,19 @@
                 </select>
             </div>
 
-            <h3 class="form-header">{{ localize "SFRPG.CapacityUsage" }}</h3>
+            <br />
+
             {{> "systems/sfrpg/templates/items/parts/item-capacity.html"}}
 
             <br />
 
             {{> "systems/sfrpg/templates/items/parts/physical-item-details.html"}}
+            
+            <br />
+
+            {{!-- Container Template --}}
+            {{> "systems/sfrpg/templates/items/parts/container-details.html" message="SFRPG.Items.Equipment.ContainerTooltip"}}
+            
         </div>
 
         {{!-- Modifiers Tab --}}

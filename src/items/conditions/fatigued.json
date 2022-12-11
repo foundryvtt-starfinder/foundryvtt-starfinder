@@ -1,189 +1,189 @@
 {
+  "_id": "JGFn4MrDZ6X5vrzU",
   "name": "Fatigued",
   "type": "feat",
-  "data": {
-    "description": {
-      "value": "<p style=\"text-align: justify;\">&gt;@Compendium[sfrpg.rules.0yJjfyvWg5pDLcVR]{Conditions}</p>\n<hr />\n<p style=\"text-align: justify;\">You can neither run nor charge, and you take a &ndash;1 penalty to your Armor Class, attack rolls, melee damage rolls, Reflex saving throws, initiative checks, and Strength- and Dexterity-based skill and ability checks.</p>\n<p style=\"text-align: justify;\">The amount of bulk you can carry without becoming @Compendium[sfrpg.conditions.OwZA6flUQPH0jPA0]{Encumbered} is reduced by 1.</p>\n<p style=\"text-align: justify;\">If you are fatigued, doing an activity that would normally cause fatigue causes you to become @Compendium[sfrpg.conditions.33ynSbmexuxC3cAQ]{Exhausted} instead.</p>\n<p style=\"text-align: justify;\">After 8 hours of complete rest, you are no longer fatigued.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "CRB.276",
+  "effects": [],
+  "flags": {},
+  "img": "systems/sfrpg/icons/conditions/fatigued.webp",
+  "system": {
     "type": "",
+    "ability": "int",
+    "abilityMods": {
+      "parts": []
+    },
+    "actionType": "",
     "activation": {
       "type": "",
-      "cost": 0,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "target": {
-      "value": "",
-      "type": ""
+      "condition": "",
+      "cost": 0
     },
     "area": {
-      "value": null,
-      "units": null,
+      "effect": "",
       "shape": "",
-      "effect": ""
-    },
-    "range": {
-      "value": null,
       "units": null,
-      "additional": "",
-      "per": ""
+      "value": null
     },
-    "uses": {
-      "value": 0,
-      "max": 0,
-      "per": ""
-    },
-    "isActive": null,
-    "ability": "int",
-    "actionType": "",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
-      "parts": [],
-      "effect": ""
+      "effect": "",
+      "parts": []
     },
     "damage": {
       "parts": []
     },
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<p>&gt;@Compendium[sfrpg.rules.0yJjfyvWg5pDLcVR]{Conditions}</p>\n<hr />\n<p>You can neither run nor charge, and you take a &ndash;1 penalty to your Armor Class, attack rolls, melee damage rolls, Reflex saving throws, initiative checks, and Strength- and Dexterity-based skill and ability checks.</p>\n<p>The amount of bulk you can carry without becoming @Compendium[sfrpg.conditions.OwZA6flUQPH0jPA0]{Encumbered} is reduced by 1.</p>\n<p>If you are already fatigued and would gain the fatigued condition, you lose the fatigued condition and are @Compendium[sfrpg.conditions.33ynSbmexuxC3cAQ]{Exhausted} for the total duration of all fatiguing effects.</p>\n<p>After 8 hours of complete rest, you are no longer fatigued.</p>"
+    },
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": ""
+    },
     "formula": "",
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "9a31d03e-3a10-40b1-99ec-7958b4b166f0",
+        "name": "Fatigued",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": true,
+        "modifier": -1,
+        "modifierType": "constant",
+        "notes": "",
+        "source": "Condition",
+        "subtab": "misc",
+        "valueAffected": "both"
+      },
+      {
+        "_id": "56c19806-7626-4804-9229-8572c8065f78",
+        "name": "Fatigued",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-attacks",
+        "enabled": true,
+        "modifier": -1,
+        "modifierType": "constant",
+        "notes": "",
+        "source": "Condition",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "41867c1e-b0a5-4ecf-bb7d-c163c4b72db4",
+        "name": "Fatigued",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "melee-damage",
+        "enabled": true,
+        "modifier": -1,
+        "modifierType": "constant",
+        "notes": "",
+        "source": "Condition",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "8587ec88-3bdd-473c-8ef0-b154ddb9a681",
+        "name": "Fatigued",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "save",
+        "enabled": true,
+        "modifier": -1,
+        "modifierType": "constant",
+        "notes": "",
+        "source": "Condition",
+        "subtab": "misc",
+        "valueAffected": "reflex"
+      },
+      {
+        "_id": "bc9009e4-a377-4037-b4f4-e1acca4770d6",
+        "name": "Fatigued",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "initiative",
+        "enabled": true,
+        "modifier": -1,
+        "modifierType": "constant",
+        "notes": "",
+        "source": "Condition",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "4e2ace7a-9d40-4955-abd7-dc5195aa1d31",
+        "name": "Fatigued",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "ability-skills",
+        "enabled": true,
+        "modifier": -1,
+        "modifierType": "constant",
+        "notes": "",
+        "source": "Condition",
+        "subtab": "misc",
+        "valueAffected": "str"
+      },
+      {
+        "_id": "fb55db32-8cd6-4240-ac6e-3d14a105c2e6",
+        "name": "Fatigued",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "ability-skills",
+        "enabled": true,
+        "modifier": -1,
+        "modifierType": "constant",
+        "notes": "",
+        "source": "Condition",
+        "subtab": "misc",
+        "valueAffected": "dex"
+      },
+      {
+        "_id": "e285adc2-8cd2-4619-bc93-0dbeaf19a12f",
+        "name": "Fatigued",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "bulk",
+        "enabled": true,
+        "max": -2,
+        "modifier": "-2",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "Fatigued",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": null,
+      "value": null
+    },
+    "recharge": {
+      "charged": false,
+      "value": null
+    },
+    "requirements": "Condition",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": "negate"
     },
-    "descriptors": [],
-    "modifiers": [
-      {
-        "name": "Fatigued",
-        "modifier": -1,
-        "type": "untyped",
-        "effectType": "ac",
-        "valueAffected": "both",
-        "enabled": true,
-        "source": "Condition",
-        "notes": "",
-        "modifierType": "constant",
-        "condition": "",
-        "subtab": "misc",
-        "_id": "9a31d03e-3a10-40b1-99ec-7958b4b166f0"
-      },
-      {
-        "name": "Fatigued",
-        "modifier": -1,
-        "type": "untyped",
-        "effectType": "all-attacks",
-        "valueAffected": "",
-        "enabled": true,
-        "source": "Condition",
-        "notes": "",
-        "modifierType": "constant",
-        "condition": "",
-        "subtab": "misc",
-        "_id": "56c19806-7626-4804-9229-8572c8065f78"
-      },
-      {
-        "name": "Fatigued",
-        "modifier": -1,
-        "type": "untyped",
-        "effectType": "melee-damage",
-        "valueAffected": "",
-        "enabled": true,
-        "source": "Condition",
-        "notes": "",
-        "modifierType": "constant",
-        "condition": "",
-        "subtab": "misc",
-        "_id": "41867c1e-b0a5-4ecf-bb7d-c163c4b72db4"
-      },
-      {
-        "name": "Fatigued",
-        "modifier": -1,
-        "type": "untyped",
-        "effectType": "save",
-        "valueAffected": "reflex",
-        "enabled": true,
-        "source": "Condition",
-        "notes": "",
-        "modifierType": "constant",
-        "condition": "",
-        "subtab": "misc",
-        "_id": "8587ec88-3bdd-473c-8ef0-b154ddb9a681"
-      },
-      {
-        "name": "Fatigued",
-        "modifier": -1,
-        "type": "untyped",
-        "effectType": "initiative",
-        "valueAffected": "",
-        "enabled": true,
-        "source": "Condition",
-        "notes": "",
-        "modifierType": "constant",
-        "condition": "",
-        "subtab": "misc",
-        "_id": "bc9009e4-a377-4037-b4f4-e1acca4770d6"
-      },
-      {
-        "name": "Fatigued",
-        "modifier": -1,
-        "type": "untyped",
-        "effectType": "ability-skills",
-        "valueAffected": "str",
-        "enabled": true,
-        "source": "Condition",
-        "notes": "",
-        "modifierType": "constant",
-        "condition": "",
-        "subtab": "misc",
-        "_id": "4e2ace7a-9d40-4955-abd7-dc5195aa1d31"
-      },
-      {
-        "name": "Fatigued",
-        "modifier": -1,
-        "type": "untyped",
-        "effectType": "ability-skills",
-        "valueAffected": "dex",
-        "enabled": true,
-        "source": "Condition",
-        "notes": "",
-        "modifierType": "constant",
-        "condition": "",
-        "subtab": "misc",
-        "_id": "fb55db32-8cd6-4240-ac6e-3d14a105c2e6"
-      },
-      {
-        "name": "Fatigued",
-        "modifier": "-2",
-        "type": "untyped",
-        "effectType": "bulk",
-        "valueAffected": "",
-        "enabled": true,
-        "source": "Fatigued",
-        "notes": "",
-        "modifierType": "constant",
-        "condition": "",
-        "subtab": "misc",
-        "max": -2,
-        "_id": "e285adc2-8cd2-4619-bc93-0dbeaf19a12f"
-      }
-    ],
-    "requirements": "Condition",
-    "recharge": {
-      "value": null,
-      "charged": false
+    "source": "CRB.276",
+    "target": {
+      "type": "",
+      "value": ""
     },
-    "abilityMods": {
-      "parts": []
+    "uses": {
+      "max": 0,
+      "per": "",
+      "value": 0
     }
-  },
-  "flags": {},
-  "img": "systems/sfrpg/icons/conditions/fatigued.png",
-  "effects": [],
-  "_id": "JGFn4MrDZ6X5vrzU"
+  }
 }

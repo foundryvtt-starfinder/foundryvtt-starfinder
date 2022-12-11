@@ -13,15 +13,15 @@
                 <input type="checkbox" 
                        class="condition {{name}}" 
                        data-condition="{{name}}" 
-                       name="data.conditions.{{name}}" 
-                       {{checked (lookup ../../data.conditions name)}} /> {{condition}}
+                       name="system.conditions.{{name}}" 
+                       {{checked (lookup ../../system.conditions name)}} /> {{condition}}
             </label>
             {{/each}}
         </div>
 
         <ol class="inventory-list">
             <li class="inventory-header flexrow">
-                <h3 class="item-name flexrow">Conditions</h3>
+                <h3 class="item-name noborder flexrow">Conditions</h3>
         
                 {{#if ../isOwner}}
                 <div class="item-controls">
@@ -44,7 +44,7 @@
         <ol class="inventory-list">
             <li class="item flexrow inventory-header modifiers-header">
                 <div class="item-name modifier-name flexrow">
-                    <h3>{{localize "SFRPG.ModifierNameLabel"}}</h3>
+                    <h3 class="noborder">{{localize "SFRPG.ModifierNameLabel"}}</h3>
                 </div>
 
                 <div class="item-detail modifier-mod">{{localize "SFRPG.ModifierTitle"}}</div>
@@ -68,10 +68,10 @@
                     </div>
 
                     <div class="item-detail modifier-mod">
-                        {{#if (eq modifier.modifierType "constant")}}
-                        {{ellipsis (numberFormat modifier.modifier decimals=0 sign=true) 10}}
-                        {{else}}
+                        {{#if (or (ne modifier.modifierType "constant") (isNaN modifier.modifier))}}
                         {{ellipsis modifier.modifier 12}}
+                        {{else}}
+                        {{ellipsis (numberFormat modifier.modifier decimals=0 sign=true) 10}}
                         {{/if}}
                     </div>
                     <div class="item-detail modifier-type">
@@ -107,19 +107,39 @@
                             {{lookup ../../config.weaponTypes modifier.valueAffected}}
                         {{else if (eq modifier.effectType "weapon-property-attacks")}}
                             {{lookup ../../config.weaponProperties modifier.valueAffected}}
+                        {{else if (eq modifier.effectType "weapon-category-attacks")}}
+                            {{lookup ../../config.weaponCategories modifier.valueAffected}}
                         {{else if (eq modifier.effectType "weapon-damage")}}
                             {{lookup ../../config.weaponTypes modifier.valueAffected}}
                         {{else if (eq modifier.effectType "weapon-property-damage")}}
                             {{lookup ../../config.weaponProperties modifier.valueAffected}}
+                        {{else if (eq modifier.effectType "weapon-category-damage")}}
+                            {{lookup ../../config.weaponCategories modifier.valueAffected}}
+                        {{else if (eq modifier.effectType "specific-speed")}}
+                            {{lookup ../../config.speeds modifier.valueAffected}}
+                        {{else if (eq modifier.effectType "actor-resource")}}
+                            <h4>{{~modifier.valueAffected~}}</h4>
+                        {{else if (eq modifier.effectType "damage-reduction")}}
+                            {{#if (eq modifier.valueAffected "custom")}}
+                                {{modifier.notes}}
+                            {{else}}
+                                {{lookup ../../config.damageReductionTypes modifier.valueAffected}}
+                            {{/if}}
+                        {{else if (eq modifier.effectType "energy-resistance")}}
+                            {{#if (eq modifier.valueAffected "custom")}}
+                                {{modifier.notes}}
+                            {{else}}
+                                {{lookup ../../config.energyResistanceTypes modifier.valueAffected}}
+                            {{/if}}
                         {{else}}
                         {{!-- Nothing --}}
                         {{/if}}
                     </div>
                     {{#if ../../isOwner}}
                     <div class="item-controls">
-                        <a class="item-control modifier-toggle" data-tippy-content="Toggle Modifier">{{#if modifier.enabled}}<i class="far fa-check-square">{{else}}<i class="far fa-square"></i>{{/if}}</i></a>
-                        <a class="item-control modifier-edit" data-tippy-content="Edit Modifier"><i class="fas fa-edit"></i></a>
-                        <a class="item-control modifier-delete" data-tippy-content="Delete Modifier"><i class="fas fa-trash"></i></a>
+                        <a class="item-control modifier-toggle" {{createTippy title="SFRPG.ActorSheet.Modifiers.Tooltips.ToggleModifier" subtitle="SFRPG.ActorSheet.Modifiers.Tooltips.ToggleModifierTooltip"}}>{{#if modifier.enabled}}<i class="far fa-check-square">{{else}}<i class="far fa-square"></i>{{/if}}</i></a>
+                        <a class="item-control modifier-edit" {{createTippy title="SFRPG.ActorSheet.Modifiers.Tooltips.EditModifier" subtitle="SFRPG.ActorSheet.Modifiers.Tooltips.EditModifierTooltip"}}><i class="fas fa-edit"></i></a>
+                        <a class="item-control modifier-delete" {{createTippy title="SFRPG.ActorSheet.Modifiers.Tooltips.DeleteModifier" subtitle="SFRPG.ActorSheet.Modifiers.Tooltips.DeleteModifierTooltip"}}><i class="fas fa-trash"></i></a>
                     </div>
                     {{/if}}
                 </li>
@@ -131,7 +151,7 @@
     {{/each}}
 </section>
 
-{{#if isNPC}}
+{{#if (eq actor.type "npc")}}
 <div class="warningFooter">
     <label>{{localize "SFRPG.NPCSheet.Interface.Conditions.Warning"}}</label>
 </div>

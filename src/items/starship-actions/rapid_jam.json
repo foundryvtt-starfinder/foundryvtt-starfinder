@@ -1,40 +1,40 @@
 {
+  "_id": "JomStKwZWIbTDLif",
   "name": "Rapid Jam",
   "type": "starshipAction",
-  "data": {
-    "description": {
-      "value": "<h2>Normal effect</h2><p>You can activate any two of your starship’s ECM modules, regardless of their arc. Each check attempted with these modules this round takes a –4 penalty.</p><h2>Critical effect</h2><p>Your powerful ECM module disrupts enemy targeting computers. Gunners aboard the target starship also take a –2 penalty to gunnery checks during this round.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "SOM",
+  "flags": {},
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
     "type": "",
-    "role": "scienceOfficer",
-    "order": 23,
-    "phase": {
-      "name": "Gunnery phase",
-      "tooltip": "This action can be taken only during the gunnery phase."
+    "dc": {
+      "resolve": false,
+      "value": "Target ship's Target Lock score + 2 if shields are up."
     },
-    "isPush": true,
-    "resolvePointCost": 0,
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<h2>Normal effect</h2><p>You can activate any two of your starship’s ECM modules, regardless of their arc. Each check attempted with these modules this round takes a –4 penalty.</p><h2>Critical effect</h2><p>Your powerful ECM module disrupts enemy targeting computers. Gunners aboard the target starship also take a –2 penalty to gunnery checks during this round.</p>"
+    },
+    "effectCritical": "Your powerful ECM module disrupts enemy targeting computers. Gunners aboard the target starship also take a –2 penalty to gunnery checks during this round.",
+    "effectNormal": "You can activate any two of your starship’s ECM modules, regardless of their arc. Each check attempted with these modules this round takes a  –4 penalty.",
     "formula": [
       {
         "name": "Computers",
         "formula": "@scienceOfficer.skills.com.ranks + @scienceOfficer.abilities.int.mod - 4"
       }
     ],
+    "isPush": true,
+    "order": 23,
+    "phase": {
+      "name": "Gunnery phase",
+      "tooltip": "This action can be taken only during the gunnery phase."
+    },
+    "resolvePointCost": 0,
+    "role": "scienceOfficer",
+    "selectorKey": "scienceOfficer",
     "selectors": [
       "scienceOfficer"
     ],
-    "selectorKey": "scienceOfficer",
-    "dc": {
-      "value": "Target ship's Target Lock score + 2 if shields are up.",
-      "resolve": false
-    },
-    "effectNormal": "You can activate any two of your starship’s ECM modules, regardless of their arc. Each check attempted with these modules this round takes a  –4 penalty.",
-    "effectCritical": "Your powerful ECM module disrupts enemy targeting computers. Gunners aboard the target starship also take a –2 penalty to gunnery checks during this round."
-  },
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "JomStKwZWIbTDLif"
+    "source": "SOM"
+  }
 }

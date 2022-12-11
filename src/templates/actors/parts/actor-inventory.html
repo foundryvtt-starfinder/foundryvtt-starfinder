@@ -1,15 +1,15 @@
 {{#if (not isNPC)}}
 <div class="inventory-filters">
     <ol class="currency flexrow">
-        <h3>
+        <h3 class="noborder">
             {{localize "SFRPG.InventoryCurrency"}}
             <i class="fas fa-coins"></i>
         </h3>
         <label class="denomination" data-tippy-content="{{localize "SFRPG.ActorSheet.Inventory.ItemValue.Tooltip"}}">{{localize "SFRPG.ActorSheet.Inventory.ItemValue.Label"}}</label>
-        <label class="denomination currency-value" data-tippy-content="{{localize "SFRPG.ActorSheet.Inventory.ItemValue.Tooltip"}}">{{inventoryValue}}</label>
-        {{#each data.currency as |v k|}}
+        <label class="denomination currency-value" {{createTippy title="SFRPG.ActorSheet.Inventory.ItemValue.Label" subtitle="SFRPG.ActorSheet.Inventory.ItemValue.Tooltip" tooltips=system.wealth.tooltip}}>{{currencyFormat system.wealth.total}}</label>
+        {{#each system.currency as |v k|}}
         <label class="denomination {{k}}">{{ lookup ../config.currencies k }}</label>
-        <input type="text" name="data.currency.{{k}}" value="{{v}}" data-dtype="Number"/>
+        <input type="text" name="system.currency.{{k}}" value="{{v}}" data-dtype="Number"/>
         {{/each}}
     </ol>
 </div>
@@ -18,7 +18,7 @@
 <ol class="inventory-list">
 {{#each sections as |section sid|}}
     <li class="inventory-header flexrow">
-        <h3 class="item-name flexrow">{{section.label}}</h3>
+        <h3 class="item-name noborder flexrow">{{section.label}}</h3>
 
         {{#if ../isCharacter}}
         <div class="item-detail item-weight">{{localize "SFRPG.InventoryBulk"}}</div>
@@ -48,7 +48,7 @@
 
 
 {{#if (or isCharacter isDrone) }}
-{{#with encumbrance}}
+{{#with system.encumbrance}}
 <div class="encumbrance {{#if encumbered}}encumbered{{/if}}" data-tippy-content="<strong>{{ localize "SFRPG.ActorSheet.Inventory.Encumbrance.Encumbrance" }}</strong><br/>@attributes.encumbrance.max<br/><br/>{{#each tooltip as |tip|}}{{tip}}<br/>{{/each}}">
     <span class="encumbrance-bar" style="width:{{pct}}%"></span>
     <span class="encumbrance-label">{{value}} / {{max}}</span>

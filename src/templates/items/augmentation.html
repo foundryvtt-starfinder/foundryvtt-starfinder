@@ -17,12 +17,12 @@
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
-            <h3 class="form-header">{{ localize "SFRPG.Items.Augmentation.Details" }}</h3>
+            <h3 class="form-header noborder">{{ localize "SFRPG.Items.Augmentation.Details" }}</h3>
 
             <div class="form-group">
                 <label>{{ localize "SFRPG.Items.Augmentation.Type" }}</label>
                 <div class="form-fields">
-                    <select name="data.type">
+                    <select name="system.type">
                         {{#select itemData.type}}
                         {{#each config.augmentationTypes as |augmentation type|}}
                         <option value="{{type}}">{{augmentation}}</option>
@@ -35,7 +35,7 @@
             <div class="form-group">
                 <label>{{ localize "SFRPG.Items.Augmentation.System" }}</label>
                 <div class="form-fields">
-                    <select name="data.system">
+                    <select name="system.system">
                         {{#select itemData.system}}
                         {{#each config.augmentationSytems as |system key|}}
                         <option value="{{key}}">{{system}}</option>
@@ -45,9 +45,18 @@
                 </div>
             </div>
 
+            {{!-- Equipment Status --}}
+            {{> "systems/sfrpg/templates/items/parts/item-status.html"}}
+
             <br />
 
             {{> "systems/sfrpg/templates/items/parts/physical-item-details.html"}}
+            
+            <br />
+
+            {{!-- Container Template --}}
+            {{> "systems/sfrpg/templates/items/parts/container-details.html" message="SFRPG.Items.Equipment.ContainerTooltip"}}
+            
         </div>
 
         {{!-- Modifiers Tab --}}

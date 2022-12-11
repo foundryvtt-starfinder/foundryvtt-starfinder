@@ -11,7 +11,7 @@ export default function (engine) {
         data.attributes.weaponMounts.ranged.current = 0;
         if (fact.weapons) {
             for (let weapon of fact.weapons) {
-                const weaponData = weapon.data.data;
+                const weaponData = weapon.system;
 
                 let mountCost = 1;
                 if (weaponData.properties.two) {

@@ -11,32 +11,32 @@
                 </h1>
 
                 <div class="charlevel">
-                    <div class="level">
+                    <div class="level" {{createTippy title="CR" subtitle="@details.cr"}}>
                         <label>CR</label>
-                        <input name="data.details.cr" type="text" value="{{labels.cr}}" placeholder="1" />
+                        <input name="system.details.cr" type="text" value="{{labels.cr}}" placeholder="1" />
                     </div>
                     <div class="experience">
-                        <span>{{data.details.xp.value}} XP</span>
+                        <span>{{system.details.xp.value}} XP</span>
                     </div>
                 </div>
             </div>
             <ul class="summary-row1">
                 <li>
-                    <input type="text" name="data.details.raceAndGrafts" value="{{data.details.raceAndGrafts}}" placeholder="{{localize "SFRPG.NPCSheet.Header.RaceAndGraftsPlaceHolderText"}}" />
+                    <input type="text" name="system.details.raceAndGrafts" value="{{system.details.raceAndGrafts}}" placeholder="{{localize "SFRPG.NPCSheet.Header.RaceAndGraftsPlaceHolderText"}}" />
                 </li>
                 <li>
-                    <input type="text" name="data.details.source" value="{{data.details.source}}" placeholder="{{localize "SFRPG.NPCSheet.Header.SourcePlaceHolderText"}}" />
+                    <input type="text" name="system.details.source" value="{{system.details.source}}" placeholder="{{localize "SFRPG.NPCSheet.Header.SourcePlaceHolderText"}}" />
                 </li>
             </ul>
             <ul class="summary-row2">
                 <li>
-                    <input type="text" name="data.details.alignment" value="{{data.details.alignment}}" placeholder="{{localize "SFRPG.NPCSheet.Header.AlignmentPlaceHolderText"}}" />
+                    <input type="text" name="system.details.alignment" value="{{system.details.alignment}}" placeholder="{{localize "SFRPG.NPCSheet.Header.AlignmentPlaceHolderText"}}" />
                 </li>
                 <li>
-                    <input type="text" name="data.details.type" value="{{data.details.type}}" placeholder="{{localize "SFRPG.NPCSheet.Header.TypePlaceHolderText"}}" />
+                    <input type="text" name="system.details.type" value="{{system.details.type}}" placeholder="{{localize "SFRPG.NPCSheet.Header.TypePlaceHolderText"}}" />
                 </li>
                 <li>
-                    <input type="text" name="data.details.aura" value="{{data.details.aura}}" placeholder="{{localize "SFRPG.NPCSheet.Header.AuraPlaceHolderText"}}" />
+                    <input type="text" name="system.details.subtype" value="{{system.details.subtype}}" placeholder="{{localize "SFRPG.NPCSheet.Header.SubtypePlaceHolderText"}}" />
                 </li>
             </ul>
         </div>
@@ -49,7 +49,7 @@
         <a class="item" data-tab="features">{{ localize "SFRPG.Features" }}</a>
         <a class="item" data-tab="spellbook">{{ localize "SFRPG.SpellBook.Spellbook" }}</a>
         <a class="item" data-tab="modifiers">{{localize "SFRPG.NPCSheet.Interface.Navigation.Conditions"}}</a>
-        <a class="item" data-tab="biography" {{#if (and isGM data.details.biography.gmNotes)}}data-tippy-content="{{localize "SFRPG.ActorSheet.Biography.TooltipGM"}}"{{/if}}>{{ localize "SFRPG.About" }} {{#if (and isGM data.details.biography.gmNotes)}} (!){{/if}}</a>
+        <a class="item" data-tab="biography" {{#if (and isGM system.details.biography.gmNotes)}}data-tippy-content="{{localize "SFRPG.ActorSheet.Biography.TooltipGM"}}"{{/if}}>{{ localize "SFRPG.About" }} {{#if (and isGM system.details.biography.gmNotes)}} (!){{/if}}</a>
     </nav>
 
     {{!-- NPC Sheet Body --}}
@@ -58,10 +58,10 @@
 
             {{!-- Ability Scores --}}
             <ul class="ability-scores flexrow">
-                {{#each data.abilities as |ability id|}}
+                {{#each system.abilities as |ability id|}}
                 <li class="ability {{#if ability.proficient}}proficient{{/if}}" data-ability="{{id}}">
                     <h4 class="ability-name box-title rollable">{{ability.label}}</h4>
-                    <input class="ability-score" name="data.abilities.{{id}}.mod" type="text"
+                    <input class="ability-score" name="system.abilities.{{id}}.mod" type="text"
                         value="{{numberFormat ability.mod decimals=0 sign=true}}" data-dtype="Number" placeholder="0" />
                 </li>
                 {{/each}}
@@ -69,25 +69,25 @@
 
             {{!-- Skills --}}
             <ul class="skills-list">
-                {{#each data.skills as |skill s|}}
+                {{#each system.skills as |skill s|}}
                 {{#if skill.enabled}}
                 <li class="skill flexrow {{#if skill.value}}proficient{{/if}}" data-skill="{{s}}" data-tippy-content="<strong>{{skill.label}}</strong>{{#if (or skill.isTrainedOnly skill.hasArmorCheckPenalty)}}<br>(<em>{{#if skill.hasArmorCheckPenalty}}Armor Check Penalty{{/if}}{{#if (and skill.isTrainedOnly skill.hasArmorCheckPenalty)}}; {{/if}}{{#if skill.isTrainedOnly}}Trained Only{{/if}}</em>){{/if}}<br>Modifier: @skills.{{s}}.mod<br/>Ranks: @skills.{{s}}.ranks<br/><br>{{#each skill.tooltip as |tip|}}{{tip}}<br>{{/each}}" data-skill="{{s}}">
-                    <input type="hidden" name="data.skills.{{s}}.value" value="{{skill.value}}" data-dtype="Number" />
+                    <input type="hidden" name="system.skills.{{s}}.value" value="{{skill.value}}" data-dtype="Number" />
                     <h4 class="skill-name rollable">
                         {{skill.label}}
                     </h4>
-                    <input class="skill-mod" type="text" name="data.skills.{{s}}.mod" data-dtype="Number" value="{{numberFormat skill.mod decimals=0 sign=true}}" />
+                    <input class="skill-mod" type="text" name="system.skills.{{s}}.mod" data-dtype="Number" value="{{numberFormat skill.mod decimals=0 sign=true}}" />
                 </li>
                 {{/if}}
                 {{/each}}
                 <li class="flexrow">
                     <div class="form-group">
-                        <button id="add-skills"><i class="fas fa-plus"></i> {{localize "SFRPG.ToggleSkillsButtonLabel"}}</button>
+                        <button type="button" id="add-skills"><i class="fas fa-plus"></i> {{localize "SFRPG.ToggleSkillsButtonLabel"}}</button>
                     </div>
                 </li>
                 <li class="flexrow">
                     <div class="form-group">
-                        <button id="add-profession"><i class="fas fa-plus"></i> {{localize "SFRPG.AddProfessionButtonText"}}</button>
+                        <button type="button" id="add-profession"><i class="fas fa-plus"></i> {{localize "SFRPG.AddProfessionButtonText"}}</button>
                     </div>
                 </li>
                 <li class="flexrow">
@@ -104,10 +104,10 @@
                     <li class="attribute health">
                         <h4 class="attribute-name box-title rollable">{{ localize "SFRPG.Health" }}</h4>
                         <div class="attribute-value multiple">
-                            <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}"
+                            <input name="system.attributes.hp.value" type="text" value="{{system.attributes.hp.value}}"
                                 data-dtype="Number" placeholder="10" />
                             <span class="sep"> / </span>
-                            <input name="data.attributes.hp.max" type="text" value="{{data.attributes.hp.max}}"
+                            <input name="system.attributes.hp.max" type="text" value="{{system.attributes.hp.max}}"
                                 data-dtype="Number" placeholder="10" />
                         </div>
                     </li>
@@ -115,10 +115,10 @@
                     <li class="attribute health">
                         <h4 class="attribute-name box-title">{{ localize "SFRPG.Stamina"}}</h4>
                         <div class="attribute-value multiple">
-                            <input name="data.attributes.sp.value" type="text" value="{{data.attributes.sp.value}}"
+                            <input name="system.attributes.sp.value" type="text" value="{{system.attributes.sp.value}}"
                                 data-dtype="Number" placeholder="10" />
                             <span class="sep"> / </span>
-                            <input name="data.attributes.sp.max" type="text" value="{{data.attributes.sp.max}}"
+                            <input name="system.attributes.sp.max" type="text" value="{{system.attributes.sp.max}}"
                                 data-dtype="Number" placeholder="10" />
                         </div>
                     </li>
@@ -126,7 +126,7 @@
                     <li class="attribute">
                         <h4 class="attribute-name box-title">{{ localize "SFRPG.EnergyArmorClass" }}</h4>
                         <div class="attribute-value">
-                            <input name="data.attributes.eac.value" type="text" value="{{data.attributes.eac.value}}"
+                            <input name="system.attributes.eac.value" type="text" value="{{system.attributes.eac.value}}"
                                 data-dtype="Number" placeholder="10" />
                         </div>
                     </li>
@@ -134,7 +134,7 @@
                     <li class="attribute">
                         <h4 class="attribute-name box-title">{{ localize "SFRPG.KineticArmorClass" }}</h4>
                         <div class="attribute-value">
-                            <input name="data.attributes.kac.value" type="text" value="{{data.attributes.kac.value}}"
+                            <input name="system.attributes.kac.value" type="text" value="{{system.attributes.kac.value}}"
                                 data-dtype="Number" placeholder="10" />
                         </div>
                     </li>
@@ -145,52 +145,42 @@
                     <li class="attribute">
                         <h4 class="attribute-name box-title">{{ localize "SFRPG.Resolve"}}</h4>
                         <div class="attribute-value multiple">
-                            <input name="data.attributes.rp.value" type="text" value="{{data.attributes.rp.value}}"
+                            <input name="system.attributes.rp.value" type="text" value="{{system.attributes.rp.value}}"
                                 data-dtype="Number" placeholder="10" />
                             <span class="sep"> / </span>
-                            <input name="data.attributes.rp.max" type="text" value="{{data.attributes.rp.max}}"
+                            <input name="system.attributes.rp.max" type="text" value="{{system.attributes.rp.max}}"
                                 data-dtype="Number" placeholder="10" />
                         </div>
                     </li>
                     <li class="attribute initiative">
                         <h4 class="attribute-name box-title">{{ localize "SFRPG.InitiativeLabel" }}</h4>
                         <div class="attribute-value">
-                            <input type="text" data-dtype="Number" name="data.attributes.init.total" value="{{numberFormat data.attributes.init.total decimals=0 sign=true}}" />
+                            <input type="text" data-dtype="Number" name="system.attributes.init.total" value="{{numberFormat system.attributes.init.total decimals=0 sign=true}}" />
                         </div>
                     </li>
-                    <li class="attribute">
-                        <h4 class="attribute-name box-title">{{ localize "SFRPG.Speed" }}</h4>
-                        <div class="attribute-value">
-                            <input name="data.attributes.speed.value" type="text"
-                                value="{{data.attributes.speed.value}}" placeholder="0" />
-                        </div>
-                        <footer class="attribute-footer">
-                            <input type="text" class="speed" name="data.attributes.speed.special"
-                                value="{{data.attributes.speed.special}}"
-                                placeholder="{{ localize 'SFRPG.SpeedSpecial' }}" />
-                        </footer>
-                    </li>
+                    
+                    {{> "systems/sfrpg/templates/actors/parts/actor-movement-element.html"}}
                 </ul>
 
                 <ul class="attributes flexrow">
                     <li class="attribute save" data-save="fort">
                         <h4 class="attribute-name save-name box-title rollable">{{localize "SFRPG.FortitudeSave"}}</h4>
                         <div class="attribute-value">
-                            <input type="text" data-dtype="Number" name="data.attributes.fort.bonus" value="{{numberFormat data.attributes.fort.bonus decimals=0 sign=true}}" />
+                            <input type="text" data-dtype="Number" name="system.attributes.fort.bonus" value="{{numberFormat system.attributes.fort.bonus decimals=0 sign=true}}" />
                         </div>
                     </li>
 
                     <li class="attribute save" data-save="reflex">
                         <h4 class="attribute-name save-name box-title rollable">{{localize "SFRPG.ReflexSave"}}</h4>
                         <div class="attribute-value">
-                            <input type="text" data-dtype="Number" name="data.attributes.reflex.bonus" value="{{numberFormat data.attributes.reflex.bonus decimals=0 sign=true}}" />
+                            <input type="text" data-dtype="Number" name="system.attributes.reflex.bonus" value="{{numberFormat system.attributes.reflex.bonus decimals=0 sign=true}}" />
                         </div>
                     </li>
 
                     <li class="attribute save" data-save="will">
                         <h4 class="attribute-name save-name box-title rollable">{{localize "SFRPG.WillSave"}}</h4>
                         <div class="attribute-value">
-                            <input type="text" data-dtype="Number" name="data.attributes.will.bonus" value="{{numberFormat data.attributes.will.bonus decimals=0 sign=true}}" />
+                            <input type="text" data-dtype="Number" name="system.attributes.will.bonus" value="{{numberFormat system.attributes.will.bonus decimals=0 sign=true}}" />
                         </div>
                     </li>
                 </ul>
@@ -201,6 +191,13 @@
 
                 {{!-- Traits --}}
                 {{> "systems/sfrpg/templates/actors/parts/actor-traits.html"}}
+
+                {{!-- Conversion --}}
+                <div class="counters flexrow">
+                    <div class="form-group">
+                        <button type="button" id="duplicate-new-style-npc" data-tippy-content="{{localize "SFRPG.NPCSheet.Interface.DuplicateNewStyle.ButtonTooltip"}}"><i class="fas fa-plus"></i>{{localize "SFRPG.NPCSheet.Interface.DuplicateNewStyle.Button"}}</button>
+                    </div>
+                </div>
             </section>
         </div>
 

@@ -2,11 +2,13 @@ import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../..
 
 export default function (engine) {
     engine.closures.add("calculateSkillArmorCheckPenalty", (fact, context) => {
-        const armorData = fact.armor?.data?.data;
+        const armors = fact.armors?.length > 0 ? fact.armors : null;
         const shields = fact.shields;
         const skills = fact.data.skills;
         const modifiers = fact.modifiers;
 
+        const worstArmor = armors?.reduce((armor, worstArmor) => (armor.system?.armor?.acp || 0) < (worstArmor.system?.armor?.acp || 0) ? armor : worstArmor);
+        const armorData = worstArmor?.system;
         const hasLightArmor = armorData?.armor?.type === "light";
         const hasHeavyArmor = armorData?.armor?.type === "heavy";
 
@@ -21,8 +23,11 @@ export default function (engine) {
                 return 0;
             }
 
-            let roll = new Roll(bonus.modifier.toString(), data).evaluate({maximize: true});
-            let computedBonus = roll.total;
+            let computedBonus = 0;
+            try {
+                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                computedBonus = roll.total;
+            } catch {}
 
             let mod = 0;
             if (bonus.valueAffected === "acp-light" && hasLightArmor) {
@@ -84,14 +89,14 @@ export default function (engine) {
                     skill.tooltip.push(game.i18n.format("SFRPG.ACPTooltip", {
                         type: "Armor",
                         mod: acp.signedString(),
-                        source: fact.armor?.data.name
+                        source: worstArmor.name
                     }));
                 }
             }
 
             if (shields) {
                 shields.forEach(shield => {
-                    const shieldData = shield.data.data;
+                    const shieldData = shield.system;
 
                     if (shieldData?.acp) {
                         let acp = parseInt(shieldData.acp);

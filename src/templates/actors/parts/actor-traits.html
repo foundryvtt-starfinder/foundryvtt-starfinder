@@ -1,24 +1,24 @@
 <div class="traits">
-    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.Size"}}</strong><br/>@data.traits.size">
+    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.Size"}}</strong><br/>@system.traits.size">
         <label>{{localize "SFRPG.Size"}}</label>
         {{#if (not isDrone)}}
-        <select class="actor-size" name="data.traits.size">
-            {{#select data.traits.size}}
+        <select class="actor-size" name="system.traits.size">
+            {{#select system.traits.size}}
             {{#each config.actorSizes as |label size|}}
                 <option value="{{size}}">{{label}}</option>
             {{/each}}
             {{/select}}
         </select>
         {{else}}
-        <span class="value">{{data.traits.size}}</span>
+        <span class="value">{{system.traits.size}}</span>
         {{/if}}
     </div>
 
     {{#if (not isDrone)}}
-    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.KeyAbility"}}</strong><br/>@data.attributes.keyability">
+    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.KeyAbility"}}</strong><br/>@system.attributes.keyability">
         <label>{{localize "SFRPG.KeyAbility"}}</label>
-        <select class="actor-keyability" name="data.attributes.keyability">
-            {{#select data.attributes.keyability}}
+        <select class="actor-keyability" name="system.attributes.keyability">
+            {{#select system.attributes.keyability}}
             <option value="">Choose One</option>
             {{#each config.abilities as |label abl|}}
                 <option value="{{abl}}">{{label}}</option>
@@ -28,113 +28,149 @@
     </div>
     {{/if}}
 
-    <div class="form-group {{#unless data.traits.senses}}inactive{{/unless}}" data-tippy-content="<strong>{{localize "SFRPG.Senses"}}</strong><br/>@data.traits.senses">
-        <label>{{localize "SFRPG.Senses"}}</label>
+    <div class="form-group {{#unless system.traits.senses}}inactive{{/unless}}" data-tippy-content="<strong>{{localize "SFRPG.SensesTypes.Senses"}}</strong><br/>@system.traits.senses">
+        <label>{{localize "SFRPG.SensesTypes.Senses"}}</label>
         {{#if (not isDrone)}}
-        <input type="text" name="data.traits.senses" value="{{data.traits.senses}}" placeholder="{{localize "SFRPG.None"}}"/>
+        <input type="text" name="system.traits.senses" value="{{system.traits.senses}}" placeholder="{{localize "SFRPG.None"}}"/>
         {{else}}
-        <span class="value">{{data.traits.senses}}</span>
+        <span class="value">{{system.traits.senses}}</span>
         {{/if}}
     </div>
 
     {{#if (not isDrone)}}
-    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.NumberOfArms"}}</strong><br/>@data.attributes.arms">
+    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.NumberOfArms"}}</strong><br/>@system.attributes.arms">
         <label>{{localize "SFRPG.NumberOfArms"}}</label>
-        <input type="text" name="data.attributes.arms" value="{{data.attributes.arms}}" placeholder="2" />
+        <input type="text" name="system.attributes.arms" value="{{system.attributes.arms}}" placeholder="2" />
     </div>
-    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.Space"}}</strong><br/>@data.attributes.space">
+    
+    {{#if isCharacter}}
+    <div class="form-group" {{createTippy title="SFRPG.ActorSheet.Traits.MagicalItems" subtitle="@magicalItems.worn<br/>@magicalItems.max" tooltips=system.magicalItems.tooltip}}>
+        <label>{{localize "SFRPG.ActorSheet.Traits.MagicalItems"}}</label>
+        <span type="text" {{#if (gt system.magicalItems.worn system.magicalItems.max)}}class="error"{{/if}} style="text-align: center;">{{system.magicalItems.worn}}</span>
+        <span class="sep">/</span>
+        <span type="text" style="text-align: center;">{{system.magicalItems.max}}</span>
+    </div>
+    {{/if}}
+
+    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.Space"}}</strong><br/>@system.attributes.space">
         <label>{{localize "SFRPG.Space"}}</label>
-        <input type="text" name="data.attributes.space" value="{{data.attributes.space}}" placeholder="5" />
+        <input type="text" name="system.attributes.space" value="{{system.attributes.space}}" placeholder="5" />
     </div>
-    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.Reach"}}</strong><br/>@data.attributes.reach">
+    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.Reach"}}</strong><br/>@system.attributes.reach">
         <label>{{localize "SFRPG.Reach"}}</label>
-        <input type="text" name="data.attributes.reach" value="{{data.attributes.reach}}" placeholder="0" />
+        <input type="text" name="system.attributes.reach" value="{{system.attributes.reach}}" placeholder="0" />
     </div>
     {{else}}
-    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.DroneSheet.Traits.GeneralPurposeArms"}}</strong><br/>@data.attributes.arms">
+    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.DroneSheet.Traits.GeneralPurposeArms"}}</strong><br/>@system.attributes.arms">
         <label>{{localize "SFRPG.DroneSheet.Traits.GeneralPurposeArms"}}</label>
-        <span class="value">{{data.attributes.arms}}</span>
+        <span class="value">{{system.attributes.arms}}</span>
     </div>
-    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.DroneSheet.Traits.MeleeWeaponMounts"}}</strong><br/>@data.attributes.weaponMounts.melee.max">
+    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.DroneSheet.Traits.MeleeWeaponMounts"}}</strong><br/>@system.attributes.weaponMounts.melee.max">
         <label>{{localize "SFRPG.DroneSheet.Traits.MeleeWeaponMounts"}}</label>
-        <span class="value">{{data.attributes.weaponMounts.melee.max}}</span>
+        <span class="value">{{system.attributes.weaponMounts.melee.max}}</span>
     </div>
-    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.DroneSheet.Traits.RangedWeaponMounts"}}</strong><br/>@data.attributes.weaponMounts.ranged.max">
+    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.DroneSheet.Traits.RangedWeaponMounts"}}</strong><br/>@system.attributes.weaponMounts.ranged.max">
         <label>{{localize "SFRPG.DroneSheet.Traits.RangedWeaponMounts"}}</label>
-        <span class="value">{{data.attributes.weaponMounts.ranged.max}}</span>
+        <span class="value">{{system.attributes.weaponMounts.ranged.max}}</span>
     </div>
     {{/if}}
     
     {{#if isDrone}}
-    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.SFRPG.DroneSheet.Traits.ArmorSlots"}}</strong><br/>@data.attributes.armorSlots.current<br/>@data.attributes.armorSlots.max">
+    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.SFRPG.DroneSheet.Traits.ArmorSlots"}}</strong><br/>@system.attributes.armorSlots.current<br/>@system.attributes.armorSlots.max">
         <label>{{localize "SFRPG.DroneSheet.Traits.ArmorSlots"}}</label>
-        <span class="value">{{data.attributes.armorSlots.current}}</span>
+        <span class="value">{{system.attributes.armorSlots.current}}</span>
         <span class="sep">/</span>
-        <span class="value">{{data.attributes.armorSlots.max}}</span>
+        <span class="value">{{system.attributes.armorSlots.max}}</span>
     </div>
     {{/if}}
-    
-    {{#if (not isDrone)}}
-    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.SpellResistance"}}</strong><br/>@data.traits.sr">
-        <label>{{localize "SFRPG.SpellResistance"}}</label>
-        <input type="text" name="data.traits.sr" value="{{data.traits.sr}}" data-dtype="Number" />
-    </div>
-    {{/if}}
-    
-    <div class="form-group damage-reduction" data-tippy-content="<strong>{{localize "SFRPG.DamageReduction"}}</strong><br/>@data.traits.damageReduction.value<br/>@data.traits.damageReduction.negatedBy">
-        <label>{{localize "SFRPG.DamageReduction"}}</label>
-        <input type="text" name="data.traits.damageReduction.value" value="{{data.traits.damageReduction.value}}" data-dtype="Number" />
-        <span class="sep">/</span>
-        <input type="text" name="data.traits.damageReduction.negatedBy" value="{{data.traits.damageReduction.negatedBy}}" />
-    </div>
 
     {{#if (not isDrone)}}
-    <div class="form-group {{data.traits.languages.cssClass}}">
-        <label for="data.traits.languages">{{localize "SFRPG.Languages"}}</label>
+    <div class="form-group {{system.traits.languages.cssClass}}">
+        <label for="system.traits.languages">{{localize "SFRPG.Languages"}}</label>
         <ul class="traits-list">
-        {{#each data.traits.languages.selected as |v k|}}
+        {{#each system.traits.languages.selected as |v k|}}
             <li class="tag {{k}}">{{v}}</li>
         {{/each}}
         </ul>
         <a class="trait-selector" data-options="languages"><i class="fas fa-edit"></i></a>
     </div>
     {{/if}}
+    
+    {{#if (not isDrone)}}
+    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.SpellResistance"}}</strong><br/>@system.traits.sr">
+        <label>{{localize "SFRPG.SpellResistance"}}</label>
+        <input type="text" name="system.traits.sr" value="{{system.traits.sr}}" data-dtype="Number" />
+    </div>
+    {{else}}
+    <div class="form-group" {{createTippy title="SFRPG.SpellResistance" subtitle="@traits.spellResistance.value" tooltips=system.traits.spellResistance.tooltip}}>
+        <label>{{localize "SFRPG.SpellResistance"}}</label>
+        <span class="value">{{system.traits.spellResistance.value}}</span>
+    </div>
+    {{/if}}
+    
+    <div class="form-group damage-reduction" {{createTippy title="SFRPG.Damage.Reduction" subtitle="@traits.damageMitigation.damageReductionFirst.value<br/>@traits.damageMitigation.damageReductionFirst.negatedBy" tooltips=system.traits.damageMitigation.damageReductionTooltip}}>
+        <label>{{localize "SFRPG.Damage.Reduction"}}</label>
+        {{#if system.traits.damageMitigation.damageReductionFirst}}
+            {{#with system.traits.damageMitigation.damageReductionFirst}}
+            <span type="text" style="text-align: center;">{{value}}</span>
+            <span class="sep">/</span>
+            <span type="text" style="text-align: center;">
+                {{#if (eq negatedBy "")}}
+                    -
+                {{else}}
+                    {{#if (lookup ../config.damageReductionTypes negatedBy)}}
+                        {{lookup ../config.damageReductionTypes negatedBy}}
+                    {{else}}
+                        {{negatedBy}}
+                    {{/if}}
+                {{/if}}
+            </span>
+            {{/with}}
+        {{else}}
+        <span type="text" style="text-align: center;">0</span>
+        <span class="sep">/</span>
+        <span type="text" style="text-align: center;">-</span>
+    {{/if}}
+    </div>
 
-    <div class="form-group {{data.traits.dr.cssClass}}">
-        <label for="data.traits.dr">{{localize "SFRPG.DamRes"}}</label>
+    <div class="form-group {{system.traits.dr.cssClass}}">
+        <label for="system.traits.dr">{{localize "SFRPG.Damage.Resistances"}}</label>
         <ul class="traits-list">
-        {{#each data.traits.dr.selected as |v k|}}
-            <li class="tag {{k}}">{{v}}</li>
+        {{#each system.traits.damageMitigation.energyResistance as |erModifier damageType|}}
+            {{#if (eq damageType "custom")}}
+            <li class="tag {{damageType}}">{{erModifier.source.notes}} {{erModifier.value}}</li>
+            {{else}}
+                <li class="tag {{damageType}}">{{lookup ../config.energyResistanceTypes damageType}} {{erModifier.value}}</li>
+            {{/if}}
         {{/each}}
         </ul>
-        <a class="trait-selector" data-options="energyDamageTypes"><i class="fas fa-edit"></i></a>
     </div>
 
     {{#if (not isDrone)}}
-    <div class="form-group {{data.traits.dv.cssClass}}">
-        <label for="data.traits.dv">{{localize "SFRPG.DamVuln"}}</label>
+    <div class="form-group {{system.traits.dv.cssClass}}">
+        <label for="system.traits.dv">{{localize "SFRPG.Damage.Vulnerabilities"}}</label>
         <ul class="traits-list">
-        {{#each data.traits.dv.selected as |v k|}}
+        {{#each system.traits.dv.selected as |v k|}}
             <li class="tag {{k}}">{{v}}</li>
         {{/each}}
         </ul>
         <a class="trait-selector" data-options="damageTypes"><i class="fas fa-edit"></i></a>
     </div>
 
-    <div class="form-group {{data.traits.di.cssClass}}">
-        <label for="data.traits.di">{{localize "SFRPG.DamImm"}}</label>
+    <div class="form-group {{system.traits.di.cssClass}}">
+        <label for="system.traits.di">{{localize "SFRPG.Damage.Immunities"}}</label>
         <ul class="traits-list">
-        {{#each data.traits.di.selected as |v k|}}
+        {{#each system.traits.di.selected as |v k|}}
             <li class="tag {{k}}">{{v}}</li>
         {{/each}}
         </ul>
         <a class="trait-selector" data-options="damageTypes"><i class="fas fa-edit"></i></a>
     </div>
 
-    <div class="form-group {{data.traits.ci.cssClass}}">
-        <label for="data.traits.ci">{{localize "SFRPG.ConImm"}}</label>
+    <div class="form-group {{system.traits.ci.cssClass}}">
+        <label for="system.traits.ci">{{localize "SFRPG.ConImm"}}</label>
         <ul class="traits-list">
-        {{#each data.traits.ci.selected as |v k|}}
+        {{#each system.traits.ci.selected as |v k|}}
             <li class="tag {{k}}">{{v}}</li>
         {{/each}}
         </ul>
@@ -143,29 +179,44 @@
     {{/if}}
 
     {{#if (or isCharacter isDrone)}}
-    <div class="form-group {{data.traits.weaponProf.cssClass}}">
-        <label for="data.traits.weaponProf">{{localize "SFRPG.TraitWeaponProf"}}</label>
-        <ul class="traits-list">
-        {{#each data.traits.weaponProf.selected as |v k|}}
-            <li class="tag {{k}}">{{v}}</li>
-        {{/each}}
-        </ul>
-        <a class="trait-selector" data-options="weaponProficiencies"><i class="fas fa-edit"></i></a>
-    </div>
+        <div class="form-group {{system.traits.weaponProf.cssClass}}">
+            <label for="system.traits.weaponProf">{{localize "SFRPG.TraitWeaponProf"}}</label>
+            <ul class="traits-list">
+            {{#each system.traits.weaponProf.selected as |v k|}}
+                <li class="tag {{k}}">{{v}}</li>
+            {{/each}}
+            </ul>
+            <a class="trait-selector" data-options="weaponProficiencies"><i class="fas fa-edit"></i></a>
+        </div>
 
-    {{#if isCharacter}}
-    <div class="form-group {{data.traits.armorProf.cssClass}}">
-        <label for="data.traits.armorProf">{{localize "SFRPG.TraitArmorProf"}}</label>
-        <ul class="traits-list">
-        {{#each data.traits.armorProf.selected as |v k|}}
-            <li class="tag {{k}}">{{v}}</li>
-        {{/each}}
-        </ul>
-        <a class="trait-selector" data-options="armorProficiencies"><i class="fas fa-edit"></i></a>
+        {{#if isCharacter}}
+        <div class="form-group {{system.traits.armorProf.cssClass}}">
+            <label for="system.traits.armorProf">{{localize "SFRPG.TraitArmorProf"}}</label>
+            <ul class="traits-list">
+            {{#each system.traits.armorProf.selected as |v k|}}
+                <li class="tag {{k}}">{{v}}</li>
+            {{/each}}
+            </ul>
+            <a class="trait-selector" data-options="armorProficiencies"><i class="fas fa-edit"></i></a>
+        </div>
+        {{/if}}
+    {{/if}}
+
+    {{#if isNPC}}
+    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.NPCSheet.Header.AuraPlaceHolderText"}}</strong><br/>@system.details.aura">
+        <label>{{localize "SFRPG.NPCSheet.Header.AuraPlaceHolderText"}}</label>
+        <input type="text" name="system.details.aura" value="{{system.details.aura}}" />
+    </div>
+    <div class="form-group" {{createTippy title="SFRPG.NPCSheet.Header.AbilityDC" subtitle="@attributes.abilityDC.value" tooltips="SFRPG.NPCSheet.Header.AbilityDCTooltip"}}>
+        <label>{{localize "SFRPG.NPCSheet.Header.AbilityDC"}}</label>
+        <input type="text" name="system.attributes.abilityDC.base" value="{{system.attributes.abilityDC.base}}" placeholder="0"/>
+    </div>
+    <div class="form-group" {{createTippy title="SFRPG.NPCSheet.Header.BaseSpellDC" subtitle="@attributes.baseSpellDC.value" tooltips="SFRPG.NPCSheet.Header.BaseSpellDCTooltip"}}>
+        <label>{{localize "SFRPG.NPCSheet.Header.BaseSpellDC"}}</label>
+        <input type="text" name="system.attributes.baseSpellDC.base" value="{{system.attributes.baseSpellDC.base}}" placeholder="0"/>
     </div>
     {{/if}}
-    {{/if}}
-
+    
     {{#if (not isDrone)}}
     <div class="form-group ">
         <label>{{localize "SFRPG.SpecialTraits"}}</label>

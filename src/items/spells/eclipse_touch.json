@@ -1,94 +1,116 @@
 {
+  "_id": "d1xNSsN14NfHaws7",
   "name": "Eclipse Touch",
   "type": "spell",
-  "data": {
-    "description": {
-      "value": "<p>In the darkened halls of the Eclipse Academy, only the most ruthless students survive. By touching the target (usually requiring a melee attack roll against the target&rsquo;s EAC, but you can add your key ability score modifier instead of your Strength modifier if it is higher), you inflict bludgeoning damage that has the force descriptor to your opponent. Casting this spell does not provoke an attack of opportunity.</p>\n<p><br />The spell deals force damage and has additional effects on a critical hit, depending on the spell&rsquo;s level. @Compendium[sfrpg.conditions.aAQ6SW6iK0EVq8Ce]{Staggered} and wound effects allow a saving throw.</p>\n<p><br /><strong>1st</strong>:&nbsp;3d6 B; critical @Compendium[sfrpg.conditions.aAQ6SW6iK0EVq8Ce]{Staggered}<br /><strong>2nd</strong>:&nbsp;4d6 B; critical @Compendium[sfrpg.conditions.aAQ6SW6iK0EVq8Ce]{Staggered}<br /><strong>3rd</strong>:&nbsp;6d8 B; critical @Compendium[sfrpg.conditions.aAQ6SW6iK0EVq8Ce]{Staggered}<br /><strong>4th</strong>:&nbsp;8d8 B; critical wound<br /><strong>5th</strong>:&nbsp;11d10 B; critical wound<br /><strong>6th</strong>:&nbsp;16d10 B; critical wound</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "AP #30 pg. 52",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.sfrpg.spells.d1xNSsN14NfHaws7"
+    }
+  },
+  "img": "systems/sfrpg/icons/spells/fatigue.webp",
+  "system": {
     "type": "",
+    "ability": "",
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "eac",
+    "actionType": "msak",
     "activation": {
       "type": "action",
-      "cost": 1,
-      "condition": ""
-    },
-    "duration": {
-      "value": "instantaneous",
-      "units": ""
-    },
-    "target": {
-      "value": "One creature or object",
-      "type": ""
-    },
-    "area": {
-      "value": null,
-      "units": null,
-      "shape": "",
-      "effect": ""
-    },
-    "range": {
-      "value": null,
-      "units": "touch",
-      "additional": "",
-      "per": ""
-    },
-    "uses": {
-      "value": null,
-      "max": null,
-      "per": ""
-    },
-    "ability": "",
-    "actionType": "msak",
-    "attackBonus": 0,
-    "chatFlavor": "",
-    "critical": {
-      "parts": [],
-      "effect": "Staggered"
-    },
-    "damage": {
-      "parts": [
-        [
-          "3d6",
-          "bludgeoning"
-        ]
-      ]
-    },
-    "formula": "",
-    "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": "partial"
-    },
-    "descriptors": [],
-    "modifiers": [],
-    "level": 1,
-    "school": "evo",
-    "sr": true,
-    "dismissible": false,
-    "concentration": false,
-    "materials": {
-      "value": "",
-      "consumed": false,
-      "cost": 0,
-      "supply": 0
-    },
-    "preparation": {
-      "mode": "",
-      "prepared": false
+      "condition": "",
+      "cost": 1
     },
     "allowedClasses": {
       "myst": true,
       "tech": false,
       "wysh": false
     },
-    "abilityMods": {
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "none",
+      "value": null
+    },
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "concentration": false,
+    "critical": {
+      "effect": "Staggered",
       "parts": []
+    },
+    "damage": {
+      "parts": [
+        {
+          "name": "",
+          "formula": "3d6",
+          "types": {
+            "acid": false,
+            "bludgeoning": true,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
+    },
+    "damageNotes": "",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>In the darkened halls of the Eclipse Academy, only the most ruthless students survive. By touching the target (usually requiring a melee attack roll against the target&rsquo;s EAC, but you can add your key ability score modifier instead of your Strength modifier if it is higher), you inflict bludgeoning damage that has the force descriptor to your opponent. Casting this spell does not provoke an attack of opportunity.</p>\n<p>The spell deals force damage and has additional effects on a critical hit, depending on the spell&rsquo;s level. @Compendium[sfrpg.conditions.aAQ6SW6iK0EVq8Ce]{Staggered} and wound effects allow a saving throw.</p>\n<p><strong>1st</strong>:&nbsp;3d6 B; critical @Compendium[sfrpg.conditions.aAQ6SW6iK0EVq8Ce]{Staggered}<br /><strong>2nd</strong>:&nbsp;4d6 B; critical @Compendium[sfrpg.conditions.aAQ6SW6iK0EVq8Ce]{Staggered}<br /><strong>3rd</strong>:&nbsp;6d8 B; critical @Compendium[sfrpg.conditions.aAQ6SW6iK0EVq8Ce]{Staggered}<br /><strong>4th</strong>:&nbsp;8d8 B; critical wound<br /><strong>5th</strong>:&nbsp;11d10 B; critical wound<br /><strong>6th</strong>:&nbsp;16d10 B; critical wound</p>"
+    },
+    "descriptors": [],
+    "dismissible": false,
+    "duration": {
+      "units": "",
+      "value": "instantaneous"
+    },
+    "formula": "",
+    "isActive": null,
+    "isVariableLevel": true,
+    "level": 1,
+    "materials": {
+      "consumed": false,
+      "cost": 0,
+      "supply": 0,
+      "value": ""
+    },
+    "modifiers": [],
+    "preparation": {
+      "mode": "",
+      "prepared": false
+    },
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "touch",
+      "value": null
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "fort",
+      "dc": "",
+      "descriptor": "partial"
+    },
+    "school": "evo",
+    "source": "AP #30 pg. 52",
+    "sr": true,
+    "target": {
+      "type": "",
+      "value": "One creature or object"
+    },
+    "uses": {
+      "max": null,
+      "per": "",
+      "value": null
     }
-  },
-  "flags": {},
-  "effects": [],
-  "_id": "d1xNSsN14NfHaws7",
-  "img": "systems/sfrpg/icons/spells/fatigue.PNG"
+  }
 }

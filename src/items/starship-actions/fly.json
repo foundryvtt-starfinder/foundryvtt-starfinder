@@ -1,35 +1,35 @@
 {
+  "_id": "HzOXH8vFMCgBnMjg",
   "name": "Fly",
   "type": "starshipAction",
-  "data": {
-    "description": {
-      "value": "<h2>Normal effect</h2><p>You move your starship up to its speed and can make any turns allowed by its maneuverability. This doesn’t require a skill check.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "CRB",
+  "flags": {},
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
     "type": "",
-    "role": "pilot",
-    "order": 0,
-    "phase": {
-      "name": "Helm phase",
-      "tooltip": "This action can be taken only during the helm phase."
+    "dc": null,
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<h2>Normal effect</h2><p>You move your starship up to its speed and can make any turns allowed by its maneuverability. This doesn’t require a skill check.</p>"
     },
-    "isPush": false,
-    "resolvePointCost": 0,
+    "effectCritical": "",
+    "effectNormal": "You move your starship up to its speed and can make any turns allowed by its maneuverability. This doesn’t require a skill check.",
     "formula": [
       {
         "name": "Piloting",
         "formula": "@pilot.skills.pil.mod + @ship.attributes.pilotingBonus.value"
       }
     ],
-    "selectors": [],
+    "isPush": false,
+    "order": 0,
+    "phase": {
+      "name": "Helm phase",
+      "tooltip": "This action can be taken only during the helm phase."
+    },
+    "resolvePointCost": 0,
+    "role": "pilot",
     "selectorKey": "pilot",
-    "dc": null,
-    "effectNormal": "You move your starship up to its speed and can make any turns allowed by its maneuverability. This doesn’t require a skill check.",
-    "effectCritical": ""
-  },
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "HzOXH8vFMCgBnMjg"
+    "selectors": [],
+    "source": "CRB"
+  }
 }

@@ -1,22 +1,22 @@
 {
+  "_id": "usI8JwlwHEtwjHSy",
   "name": "Manual Realignment",
   "type": "starshipAction",
-  "data": {
-    "description": {
-      "value": "<h2>Normal effect</h2><p>Manual realignment of the ship’s sensors to better focus on an opposing starship can help the science officer get better results when using the ship’s sensors to glean information about the other vessel. Attempt an Acrobatics or Athletics check (DC = 10 + 1-1/2 × your starship’s tier). If you succeed and the science officer also succeeds at their check to perform the scan action, they receive one additional piece of information, as though their result were 5 higher. If you fail the check by 10 or more, you knock the sensors out of alignment altogether, and no check to scan can be attempted this round as the system recalibrate.</p><h2>Critical effect</h2><p>Your assistance makes the science officer’s scan easier to perform. The next time a science officer attempts a Computers check to scan, they can roll twice and take the better result.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "COM",
+  "flags": {},
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
     "type": "",
-    "role": "chiefMate",
-    "order": 20,
-    "phase": {
-      "name": "Helm phase",
-      "tooltip": "This action can be taken only during the helm phase."
+    "dc": {
+      "resolve": true,
+      "value": "10 + floor(1.5 * @ship.details.tier)"
     },
-    "isPush": false,
-    "resolvePointCost": 0,
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<h2>Normal effect</h2><p>Manual realignment of the ship’s sensors to better focus on an opposing starship can help the science officer get better results when using the ship’s sensors to glean information about the other vessel. Attempt an Acrobatics or Athletics check (DC = 10 + 1-1/2 × your starship’s tier). If you succeed and the science officer also succeeds at their check to perform the scan action, they receive one additional piece of information, as though their result were 5 higher. If you fail the check by 10 or more, you knock the sensors out of alignment altogether, and no check to scan can be attempted this round as the system recalibrate.</p><h2>Critical effect</h2><p>Your assistance makes the science officer’s scan easier to perform. The next time a science officer attempts a Computers check to scan, they can roll twice and take the better result.</p>"
+    },
+    "effectCritical": "Your assistance makes the science officer’s scan easier to perform. The next time a science officer attempts a Computers check to scan, they can roll twice and take the better result.",
+    "effectNormal": "Manual realignment of the ship’s sensors to better focus on an opposing starship can help the science officer get better results when using the ship’s sensors to glean information about the other vessel. Attempt an Acrobatics or Athletics check (DC = 10 + 1-1/2 × your starship’s tier). If you succeed and the science officer also succeeds at their check to perform the scan action, they receive one additional piece of information, as though their result were 5 higher. If you fail the check by 10 or more, you knock the sensors out of alignment altogether, and no check to scan can be attempted this round as the system recalibrate.",
     "formula": [
       {
         "name": "Acrobatics",
@@ -27,18 +27,18 @@
         "formula": "@chiefMate.skills.ath.mod"
       }
     ],
+    "isPush": false,
+    "order": 20,
+    "phase": {
+      "name": "Helm phase",
+      "tooltip": "This action can be taken only during the helm phase."
+    },
+    "resolvePointCost": 0,
+    "role": "chiefMate",
+    "selectorKey": "chiefMate",
     "selectors": [
       "chiefMate"
     ],
-    "selectorKey": "chiefMate",
-    "dc": {
-      "value": "10 + floor(1.5 * @ship.details.tier)",
-      "resolve": true
-    },
-    "effectNormal": "Manual realignment of the ship’s sensors to better focus on an opposing starship can help the science officer get better results when using the ship’s sensors to glean information about the other vessel. Attempt an Acrobatics or Athletics check (DC = 10 + 1-1/2 × your starship’s tier). If you succeed and the science officer also succeeds at their check to perform the scan action, they receive one additional piece of information, as though their result were 5 higher. If you fail the check by 10 or more, you knock the sensors out of alignment altogether, and no check to scan can be attempted this round as the system recalibrate.",
-    "effectCritical": "Your assistance makes the science officer’s scan easier to perform. The next time a science officer attempts a Computers check to scan, they can roll twice and take the better result."
-  },
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "usI8JwlwHEtwjHSy"
+    "source": "COM"
+  }
 }

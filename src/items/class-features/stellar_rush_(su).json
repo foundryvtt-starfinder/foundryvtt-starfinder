@@ -1,77 +1,94 @@
 {
   "_id": "FO46CaKK5TYs39aI",
   "name": "Stellar Rush (Su)",
-  "permission": {
-    "default": 0,
-    "QqVQDajn5ZN4kl25": 3
-  },
   "type": "feat",
-  "data": {
-    "description": {
-      "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"G7p2YIGFTAU6uGjL\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Stellar Revelation</a></p>\n        <p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl16_LabelName\">As a standard action, you can wreathe yourself in stellar fire and make a charge without the penalties (see page 248).<br><br>When you are attuned or fully attuned, you can substitute a bull rush for the melee attack at the end of the charge. Whether or not you succeed at the bull rush, the target takes 2d6 fire damage (Reflex half). This damage increases by 1d6 at 6th level and every 2 levels thereafter.</span></p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "Solarian",
+  "img": "systems/sfrpg/icons/classes/stellar_rush.webp",
+  "system": {
     "type": "",
+    "ability": "",
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "",
+    "actionType": "save",
     "activation": {
       "type": "action",
-      "cost": 1,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "target": {
-      "value": "",
-      "type": ""
+      "condition": "",
+      "cost": 1
     },
     "area": {
-      "value": null,
-      "units": "none",
+      "effect": "",
       "shape": "",
-      "effect": ""
-    },
-    "range": {
-      "value": null,
       "units": "none",
-      "additional": "",
-      "per": ""
+      "value": null
     },
-    "uses": {
-      "value": 0,
-      "max": 0,
-      "per": ""
-    },
-    "ability": null,
-    "actionType": "",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
-      "parts": [],
-      "effect": ""
+      "effect": "",
+      "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "",
+          "formula": "(lookupRange(@classes.solarian.levels, 0, 2, 2, 6, 3, 8, 4, 10, 5, 12, 6, 14, 7, 16, 8, 18, 9, 20, 10))d6",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
     },
-    "formula": "",
-    "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": ""
+    "damageNotes": "",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>&gt;@Compendium[sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p><sub style=\"font-family: var(--font-primary);\"><img style=\"border: 1px solid var(--color-border-dark);\" src=\"systems/sfrpg/images/cup/gameplay/photon.webp\" alt=\"\" width=\"20\" height=\"20\" /></sub>&nbsp;Photon Revelation<br />As a standard action, you can wreathe yourself in stellar fire and make a charge without the penalties (see page 248).</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl16_LabelName\">When you are attuned or fully attuned, you can substitute a bull rush for the melee attack at the end of the charge. If you attempt this bull rush, the target takes 2d6 fire damage (Reflex half), regardless of whether you succeed. This damage increases by 1d6 at 6th level and every 2 levels thereafter.</span></p>"
     },
     "descriptors": [],
-    "modifiers": [],
-    "requirements": "2nd Level",
-    "recharge": {
-      "value": null,
-      "charged": false
+    "duration": {
+      "units": "",
+      "value": ""
     },
-    "abilityMods": {
-      "parts": []
+    "formula": "",
+    "isActive": null,
+    "modifiers": [],
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "none",
+      "value": null
+    },
+    "recharge": {
+      "charged": false,
+      "value": null
+    },
+    "requirements": "2nd Level",
+    "rollNotes": "",
+    "save": {
+      "type": "reflex",
+      "dc": "10+floor(@classes.solarian.levels/2) + @abilities.cha.mod",
+      "descriptor": "half"
+    },
+    "source": "CRB pg. 104",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": 0,
+      "per": "",
+      "value": 0
     }
-  },
-  "flags": {},
-  "img": "systems/sfrpg/icons/classes/stellar_rush.png"
+  }
 }

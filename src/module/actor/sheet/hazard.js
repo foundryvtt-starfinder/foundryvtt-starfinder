@@ -1,7 +1,12 @@
-import { DiceSFRPG, RollContext } from "../../dice.js";
+import { DiceSFRPG } from "../../dice.js";
+import RollContext from "../../rolls/rollcontext.js";
 import { ActorSheetSFRPG } from "./base.js";
 
 export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
+    constructor(...args) {
+        super(...args);
+    }
+
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             classes: ["sfrpg", "sheet", "actor", "hazard"],
@@ -13,6 +18,15 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
     get template() {
         if (!game.user.isGM && this.actor.limited) return "systems/sfrpg/templates/actors/hazard-sheet-limited.html";
         return "systems/sfrpg/templates/actors/hazard-sheet-full.html";
+    }
+
+    async getData() {
+        const data = super.getData();
+
+        // Enrich text editors
+        data.enrichedDescription = await TextEditor.enrichHTML(this.object.system.details.description.value, {async: true});
+
+        return data;
     }
 
     activateListeners(html) {
@@ -50,45 +64,41 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
         event.preventDefault();
 
         const name = game.i18n.format("SFRPG.HazardSheet.Rolls.Fortitude", {name: this.actor.name});
-        return await this._performRoll(event, name, this.actor.data.data.attributes.fort.value, false);
+        return await this._performRoll(event, name, this.actor.system.attributes.fort.value, false);
     }
 
     async _onReflexSaveClicked(event) {
         event.preventDefault();
 
         const name = game.i18n.format("SFRPG.HazardSheet.Rolls.Reflex", {name: this.actor.name});
-        return await this._performRoll(event, name, this.actor.data.data.attributes.reflex.value, false);
+        return await this._performRoll(event, name, this.actor.system.attributes.reflex.value, false);
     }
 
     async _onWillSaveClicked(event) {
         event.preventDefault();
 
         const name = game.i18n.format("SFRPG.HazardSheet.Rolls.Will", {name: this.actor.name});
-        return await this._performRoll(event, name, this.actor.data.data.attributes.will.value, false);
+        return await this._performRoll(event, name, this.actor.system.attributes.will.value, false);
     }
 
     async _onAttackClicked(event) {
         event.preventDefault();
 
         const name = game.i18n.format("SFRPG.HazardSheet.Rolls.Attack", {name: this.actor.name});
-        return await this._performRoll(event, name, this.actor.data.data.attributes.baseAttackBonus.value, true);
+        return await this._performRoll(event, name, this.actor.system.attributes.baseAttackBonus.value, true);
     }
 
     async _onDamageClicked(event) {
         event.preventDefault();
 
-        if (this.actor.data.data.attributes.damage.value) {
-            const rollContext = new RollContext();
-            rollContext.addContext("main", this.actor);
-            rollContext.setMainContext("main");
-    
-            this.actor.setupRollContexts(rollContext);
+        if (this.actor.system.attributes.damage.value) {
+            const rollContext = RollContext.createActorRollContext(this.actor);
     
             const name = game.i18n.format("SFRPG.HazardSheet.Rolls.Damage", {name: this.actor.name});
             return DiceSFRPG.damageRoll({
                 event: event,
                 rollContext: rollContext,
-                parts: [this.actor.data.data.attributes.damage.value],
+                parts: [{ formula: this.actor.system.attributes.damage.value }],
                 title: name,
                 flavor: name,
                 speaker: ChatMessage.getSpeaker({ actor: this.actor }),
@@ -108,11 +118,7 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
     }
 
     _performRoll(event, rollName, rollValue, isAttack) {
-        const rollContext = new RollContext();
-        rollContext.addContext("main", this.actor);
-        rollContext.setMainContext("main");
-
-        this.actor.setupRollContexts(rollContext);
+        const rollContext = RollContext.createActorRollContext(this.actor);
 
         return DiceSFRPG.d20Roll({
             event: event,

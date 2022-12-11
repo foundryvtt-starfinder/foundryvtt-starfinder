@@ -1,4 +1,4 @@
-import { ItemBrowserSFRPG } from './item-browser.js';
+import { DocumentBrowserSFRPG } from './document-browser.js';
 import { SFRPG } from "../config.js"
 
 const starshipComponentTypes = {
@@ -21,7 +21,7 @@ const starshipComponentTypes = {
     "starshipWeapon": "SFRPG.Items.Categories.StarshipWeapons"
 };
 
-class StarshipBrowserSFRPG extends ItemBrowserSFRPG {
+class StarshipBrowserSFRPG extends DocumentBrowserSFRPG {
     static get defaultOptions() {
         const options = super.defaultOptions;
         options.title = game.i18n.format("SFRPG.Browsers.StarshipBrowser.Title");
@@ -115,7 +115,8 @@ class StarshipBrowserSFRPG extends ItemBrowserSFRPG {
                 label: game.i18n.format("SFRPG.Browsers.StarshipBrowser.ComponentType"),
                 content: starshipComponentTypes,
                 filter: (element, filters) => { return this._filterComponentType(element, filters); },
-                activeFilters: this.filters?.starshipComponentTypes?.activeFilters || []
+                activeFilters: this.filters?.starshipComponentTypes?.activeFilters || [],
+                type: "multi-select"
             }
         };
 
@@ -124,14 +125,16 @@ class StarshipBrowserSFRPG extends ItemBrowserSFRPG {
                 label: game.i18n.format("SFRPG.Browsers.StarshipBrowser.WeaponType"),
                 content: SFRPG.starshipWeaponTypes,
                 filter: (element, filters) => { return this._filterWeaponType(element, filters); },
-                activeFilters: this.filters.starshipWeaponTypes?.activeFilters || []
+                activeFilters: this.filters.starshipWeaponTypes?.activeFilters || [],
+                type: "multi-select"
             }
 
             filters.starshipWeaponClass = {
                 label: game.i18n.format("SFRPG.Browsers.StarshipBrowser.WeaponClass"),
                 content: SFRPG.starshipWeaponClass,
                 filter: (element, filters) => { return this._filterWeaponClass(element, filters); },
-                activeFilters: this.filters.starshipWeaponClass?.activeFilters || []
+                activeFilters: this.filters.starshipWeaponClass?.activeFilters || [],
+                type: "multi-select"
             }
         }
 
@@ -169,14 +172,14 @@ class StarshipBrowserSFRPG extends ItemBrowserSFRPG {
         let compendium = element.dataset.entryCompendium;
         let itemId = element.dataset.entryId;
         let item = this.items.find(x => x.compendium === compendium && x._id === itemId);
-        return item && (item.type !== "starshipWeapon" || filters.includes(item.data.weaponType));
+        return item && (item.type !== "starshipWeapon" || filters.includes(item.system.weaponType));
     }
 
     _filterWeaponClass(element, filters) {
         let compendium = element.dataset.entryCompendium;
         let itemId = element.dataset.entryId;
         let item = this.items.find(x => x.compendium === compendium && x._id === itemId);
-        return item && (item.type !== "starshipWeapon" || filters.includes(item.data.class));
+        return item && (item.type !== "starshipWeapon" || filters.includes(item.system.class));
     }
 
     openSettings() {

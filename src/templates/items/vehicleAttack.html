@@ -17,7 +17,7 @@
             {{!-- Item Summary --}}
             <ul class="summary flexrow">
                 <li class="wide" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.SourceTooltip" }}">
-                <input type="text" name="data.source" value="{{itemData.source}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Source" }}"/>
+                <input type="text" name="system.source" value="{{itemData.source}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Source" }}"/>
                 </li>
             </ul>
 
@@ -59,20 +59,45 @@
             </h4>
             <ol class="damage-parts form-group">
                 {{#each itemData.damage.parts as |part i| }}
-                <li class="damage-part flexrow" data-damage-part="{{i}}">
-                    <input type="text" name="data.damage.parts.{{i}}.0" value="{{lookup this "0"}}"/>
-                    <select name="data.damage.parts.{{i}}.1">
-                        {{#select (lookup this "1") }}
-                        <option value="">None</option>
-                        {{#each ../config.weaponDamageTypes as |name type|}}
-                        <option value="{{type}}">{{name}}</option>
-                        {{/each}}
-                        {{#each ../config.healingTypes as |name type|}}
-                        <option value="{{type}}">{{name}}</option>
-                        {{/each}}
-                        {{/select}}
-                    </select>
-                    <a class="damage-control delete-damage"><i class="fas fa-minus"></i></a>
+                <li class="damage-part flexcol" data-damage-part="{{i}}">
+                    <div class="damage-part-formula form-group flexrow">
+                        <input type="text" name="system.damage.parts.{{i}}.formula" value="{{lookup this "formula"}}"/>
+                        <a class="damage-control delete-damage"><i class="fas fa-minus"></i></a>
+                    </div>
+                    <div class="damage-part-type form-group stacked">
+                        <div class="form-group form-group-stacked">
+                            <label>{{localize "Energy Damage"}}</label>
+                            {{#each ../config.energyDamageTypes as |name type|}}
+                            <label class="checkbox">
+                                <input type="checkbox" name="system.damage.parts.{{i}}.types.{{type}}" {{checked (lookup (lookup (lookup ../../itemData.damage.parts i) "types") type)}} />{{name}}
+                            </label>
+                            {{/each}}
+                        </div>
+                        <div class="form-group form-group-stacked">
+                            <label>{{localize "Kinetic Damage"}}</label>
+                            {{#each ../config.kineticDamageTypes as |name type|}}
+                            <label class="checkbox">
+                                <input type="checkbox" name="system.damage.parts.{{i}}.types.{{type}}" {{checked (lookup (lookup (lookup ../../itemData.damage.parts i) "types") type)}} />{{name}}
+                            </label>
+                            {{/each}}
+                        </div>
+                        <div class="form-group form-group-stacked">
+                            <label>{{localize "SFRPG.HealingTypesHealing"}}</label>
+                            <label class="checkbox">
+                                <input type="checkbox" name="system.damage.parts.{{i}}.types.healing" {{checked (lookup (lookup (lookup ../../itemData.damage.parts i) "types") "healing")}} />{{localize "SFRPG.HealingTypesHealing"}}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="damage-part-operator form-group flexrow" data-tippy-content="When an item or ablity does multiple types of damage, this will determine if both damage types apply, or if only one or the other apply.">
+                        <label>{{localize "Damage Operator"}}</label>
+                        <select name="system.damage.parts.{{i}}.operator">
+                            {{#select (lookup this "operator")}}
+                            <option value=""></option>
+                            <option value="and">{{localize "And"}}</option>
+                            <option value="or">{{localize "Or"}}</option>
+                            {{/select}}
+                        </select>
+                    </div>
                 </li>
                 {{/each}}
             </ol>
@@ -81,7 +106,7 @@
             <div class="form-group input-select">
                 <label>{{ localize "SFRPG.VehicleAttackSheet.Details.IgnoresHardness" }}</label>
                 <div class="form-fields">
-                    <input type="text" name="data.ignoresHardness" value="{{itemData.ignoresHardness}}" data-dtype="String" placeholder="0"/>
+                    <input type="text" name="system.ignoresHardness" value="{{itemData.ignoresHardness}}" data-dtype="String" placeholder="0"/>
                 </div>
             </div>
 
@@ -89,8 +114,8 @@
             <div class="form-group input-select">
                 <label>{{ localize "SFRPG.Items.Action.SavingThrow" }}</label>
                 <div class="form-fields">
-                    <input type="text" name="data.save.dc" value="{{itemData.save.dc}}" data-dtype="String" placeholder="{{placeholders.saveDC.formula}}"/>
-                    <select name="data.save.type">
+                    <input type="text" name="system.save.dc" value="{{itemData.save.dc}}" data-dtype="String" placeholder="{{placeholders.saveDC.formula}}"/>
+                    <select name="system.save.type">
                         {{#select itemData.save.type}}
                         <option value=""></option>
                         {{#each config.saves as |save s|}}
@@ -98,7 +123,7 @@
                         {{/each}}
                         {{/select}}
                     </select>
-                    <select name="data.save.descriptor">
+                    <select name="system.save.descriptor">
                         {{#select itemData.save.descriptor}}
                         {{#each config.saveDescriptors as |descriptor k|}}
                         <option value="{{k}}">{{descriptor}}</option>

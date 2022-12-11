@@ -1,37 +1,37 @@
 {
+  "_id": "XPBs4pSEl3XYXBE1",
   "name": "Precise Targeting",
   "type": "starshipAction",
-  "data": {
-    "description": {
-      "value": "<h2>Normal effect</h2><p>At 12th level, you can perform a very precise strike by spending 1 Resolve Point and firing one starship weapon at a single target. If the attack hits and the enemy ship’s shields on that quadrant are depleted before your attack, you deal critical damage to a random system. If the attack would normally cause critical damage, the normal critical damage applies as well (meaning your attack could potentially deal critical damage multiple times; determine which system is damaged as normal each time).</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "CRB",
+  "flags": {},
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
     "type": "",
-    "role": "gunner",
+    "dc": null,
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<h2>Normal effect</h2><p>At 12th level, you can perform a very precise strike by spending 1 Resolve Point and firing one starship weapon at a single target. If the attack hits and the enemy ship’s shields on that quadrant are depleted before your attack, you deal critical damage to a random system. If the attack would normally cause critical damage, the normal critical damage applies as well (meaning your attack could potentially deal critical damage multiple times; determine which system is damaged as normal each time).</p>"
+    },
+    "effectCritical": "",
+    "effectNormal": "At 12th level, you can perform a very precise strike by spending 1 Resolve Point and firing one starship weapon at a single target. If the attack hits and the enemy ship’s shields on that quadrant are depleted before your attack, you deal critical damage to a random system. If the attack would normally cause critical damage, the normal critical damage applies as well (meaning your attack could potentially deal critical damage multiple times; determine which system is damaged as normal each time).",
+    "formula": [
+      {
+        "name": "Gunnery",
+        "formula": "max(@gunner.attributes.baseAttackBonus.value, @gunner.skills.pil.ranks, @gunner.skills.gun.mod) + @gunner.abilities.dex.mod"
+      }
+    ],
+    "isPush": false,
     "order": 30,
     "phase": {
       "name": "Gunnery phase",
       "tooltip": "This action can be taken only during the gunnery phase."
     },
-    "isPush": false,
     "resolvePointCost": 1,
-    "formula": [
-      {
-        "name": "Gunnery",
-        "formula": "max(@gunner.attributes.baseAttackBonus.value, @gunner.skills.pil.ranks) + @gunner.abilities.dex.mod"
-      }
-    ],
+    "role": "gunner",
+    "selectorKey": "gunner",
     "selectors": [
       "gunner"
     ],
-    "selectorKey": "gunner",
-    "dc": null,
-    "effectNormal": "At 12th level, you can perform a very precise strike by spending 1 Resolve Point and firing one starship weapon at a single target. If the attack hits and the enemy ship’s shields on that quadrant are depleted before your attack, you deal critical damage to a random system. If the attack would normally cause critical damage, the normal critical damage applies as well (meaning your attack could potentially deal critical damage multiple times; determine which system is damaged as normal each time).",
-    "effectCritical": ""
-  },
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "XPBs4pSEl3XYXBE1"
+    "source": "CRB"
+  }
 }

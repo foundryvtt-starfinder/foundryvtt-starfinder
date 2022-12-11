@@ -1,94 +1,192 @@
 {
+  "_id": "nffP8Mq7rJ8Rskb9",
   "name": "Mystic Cure",
   "type": "spell",
-  "data": {
-    "description": {
-      "value": "<p style=\"text-align: justify;\">With a touch, you heal and invigorate your target, restoring a number of Hit Points. If the target regains all of its Hit Points as a result of this healing, you can apply the remaining healing to yourself, as long as you are a living creature. On the other hand, if this isn’t enough to restore all the target’s Hit Points, you can transfer any number of your own Hit Points to the target, healing the target that amount. You can’t transfer more Hit Points than you have or more Hit Points than the target is missing.<br><br>Mystic cure&nbsp;restores a number of Hit Points to your target depending on the spell’s level.<br><br><strong>1st:</strong> 1d8 + your Wisdom modifier<br><strong>2nd:</strong> 3d8 + your Wisdom modifier<br><strong>3rd:</strong> 5d8 + your Wisdom modifier<br><strong>4th:</strong> 7d8 + your Wisdom modifier<br><strong>5th:</strong> 9d8 + your Wisdom modifier<br><strong>6th:</strong> 11d8 + your Wisdom modifier<br><br>In addition, unlike most healing, when you cast&nbsp;mystic cure&nbsp;as a spell of 4th-level or higher, you have two options to enhance its effects. The first option is to restore an extra 5d8 Hit Points with a 4th-level mystic cure spell, an extra 7d8 Hit Points with a 5th-level mystic cure spell, or an extra 9d8 Hit Points with a 6th-level mystic cure spell. The second option is to bring a target that died within 2 rounds back to life. In addition to healing such a creature, the spell returns the target to life, and the target takes a temporary negative level for 24 hours. This spell can’t resuscitate creatures slain by death effects, creatures turned into undead, or creatures whose bodies were destroyed, significantly mutilated, disintegrated, and so on.<br><br>Casting this spell doesn’t provoke attacks of opportunity.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "CRB pg. 367",
+  "img": "systems/sfrpg/icons/spells/mystic_cure.webp",
+  "system": {
     "type": "",
+    "ability": "",
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "",
+    "actionType": "heal",
     "activation": {
       "type": "action",
-      "cost": 1,
-      "condition": ""
+      "condition": "",
+      "cost": 1
     },
-    "duration": {
-      "value": "instantaneous",
-      "units": ""
-    },
-    "target": {
-      "value": "one living creature",
-      "type": ""
+    "allowedClasses": {
+      "myst": true,
+      "precog": false,
+      "tech": false,
+      "wysh": false
     },
     "area": {
-      "value": null,
-      "units": null,
+      "effect": "",
       "shape": "",
-      "effect": ""
+      "units": "none",
+      "value": null
     },
-    "range": {
-      "value": null,
-      "units": "touch",
-      "additional": "",
-      "per": ""
-    },
-    "uses": {
-      "value": null,
-      "max": null,
-      "per": ""
-    },
-    "ability": "",
-    "actionType": "heal",
     "attackBonus": 0,
     "chatFlavor": "",
+    "concentration": false,
     "critical": {
-      "parts": [],
-      "effect": ""
+      "effect": "",
+      "parts": []
     },
     "damage": {
       "parts": [
-        [
-          "1d8 + @abilities.wis.mod",
-          "healing"
-        ]
+        {
+          "name": "Healing",
+          "formula": "lookupRange(@item.level, 1, 2, 3, 3, 5, 4, 7, 5, 9, 6, 11)d8 + @abilities.wis.mod",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": true,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "4th level Extra Healing",
+          "formula": "4d8",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": true,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "5th Level Extra Healing",
+          "formula": "7d8",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": true,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "6th Level Extra Healing",
+          "formula": "9d8",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": true,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
       ]
     },
+    "damageNotes": "If the target regains all of its Hit Points as a result of this healing, you can apply the remaining healing to yourself, as long as you are a living creature. On the other hand, if this isn’t enough to restore all the target’s Hit Points, you can transfer any number of your own Hit Points to the target, healing the target that amount.",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>With a touch, you heal and invigorate your target, restoring a number of Hit Points. If the target regains all of its Hit Points as a result of this healing, you can apply the remaining healing to yourself, as long as you are a living creature. On the other hand, if this isn&rsquo;t enough to restore all the target&rsquo;s Hit Points, you can transfer any number of your own Hit Points to the target, healing the target that amount. You can&rsquo;t transfer more Hit Points than you have or more Hit Points than the target is missing.</p>\n<p><em>Mystic cure</em> restores a number of Hit Points to your target depending on the spell&rsquo;s level.</p>\n<p><strong>1st:</strong> 1d8 + your Wisdom modifier<br /><strong>2nd:</strong> 3d8 + your Wisdom modifier<br /><strong>3rd:</strong> 5d8 + your Wisdom modifier<br /><strong>4th:</strong> 7d8 + your Wisdom modifier<br /><strong>5th:</strong> 9d8 + your Wisdom modifier<br /><strong>6th:</strong> 11d8 + your Wisdom modifier</p>\n<p>In addition, unlike most healing, when you cast <em>mystic cure</em> as a spell of 4th-level or higher, you have two options to enhance its effects. The first option is to restore an extra 5d8 Hit Points with a 4th-level mystic cure spell, an extra 7d8 Hit Points with a 5th-level <em>mystic cure</em> spell, or an extra 9d8 Hit Points with a 6th-level <em>mystic cure</em> spell. The second option is to bring a target that died within 2 rounds back to life. In addition to healing such a creature, the spell returns the target to life, and the target takes a temporary negative level for 24 hours. This spell can&rsquo;t resuscitate creatures slain by death effects, creatures turned into undead, or creatures whose bodies were destroyed, significantly mutilated, disintegrated, and so on.</p>\n<p>Casting this spell doesn&rsquo;t provoke attacks of opportunity.</p>"
+    },
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
+    "dismissible": false,
+    "duration": {
+      "units": "",
+      "value": "instantaneous"
+    },
     "formula": "",
+    "isActive": null,
+    "isVariableLevel": true,
+    "level": 1,
+    "materials": {
+      "consumed": false,
+      "cost": 0,
+      "supply": 0,
+      "value": ""
+    },
+    "modifiers": [],
+    "preparation": {
+      "mode": "",
+      "prepared": false
+    },
+    "prepared": true,
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "touch",
+      "value": null
+    },
+    "rollNotes": "",
     "save": {
       "type": "will",
       "dc": "",
       "descriptor": "harmless"
     },
-    "descriptors": [],
-    "modifiers": [],
-    "level": 1,
     "school": "con",
+    "source": "CRB pg. 367",
     "sr": true,
-    "dismissible": false,
-    "concentration": false,
-    "materials": {
-      "value": "",
-      "consumed": false,
-      "cost": 0,
-      "supply": 0
+    "target": {
+      "type": "",
+      "value": "one living creature"
     },
-    "preparation": {
-      "mode": "",
-      "prepared": false
-    },
-    "allowedClasses": {
-      "myst": true,
-      "tech": false,
-      "wysh": false
-    },
-    "abilityMods": {
-      "parts": []
+    "uses": {
+      "max": null,
+      "per": "",
+      "value": null
     }
-  },
-  "flags": {},
-  "img": "systems/sfrpg/icons/spells/mystic_cure.PNG",
-  "effects": [],
-  "_id": "nffP8Mq7rJ8Rskb9"
+  }
 }

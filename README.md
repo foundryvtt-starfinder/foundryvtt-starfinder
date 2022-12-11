@@ -2,8 +2,6 @@
 
 This is a game system definition of the Starfinder RPG for the awesome [Foundry Virtual Tabletop](http://foundryvtt.com/).
 
-_The latest version of the Starfinder system is compatible with FoundryVTT version 0.8.6 or later._
-
 ## Join the discussion
 
 If you have quesions or just want to chat about all things Starfinder, then join us on the official FoundryVTT discord server [here](https://discord.gg/QyAeMy4Dyu).
@@ -13,12 +11,14 @@ If you wish to use Starfinder with older versions of FoundryVTT, the following t
 - FoundryVTT v0.5.5 or earlier: The latest supported Starfinder system version is v0.2.2
 - FoundryVTT v0.5.6 till v0.6.6: The latest supported Starfinder system version is v0.5.1
 - FoundryVTT v0.7.0 till v0.7.10: The latest supported Starfinder system version is v0.10.0.0
-- FoundryVTT v0.8.3 and up: The latest supported Starfinder system version is v0.11.2
+- FoundryVTT v0.8.0 till v9.269: The latest supported Starfinder system version is v0.18.3
+- FoundryVTT v9.269 till v9.280: The latest supported Starfinder system version is v0.19.2
+- FoundryVTT v10 and up: The latest supported Starfinder system version is [the current version](https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/releases/latest)
 
 Please keep in mind the Starfinder system identifier changed with Starfinder system version v0.3 from 'starfinder' to 'sfrpg'. If you have a world older than this version, you will have to update your world.json file to reflect this, or your world will not load.
 
 ## Installation
-1. Download the current release that is compatible with your version of Foundry VTT from the [releases tab](https://github.com/wildj79/foundryvtt-starfinder/releases). Unzip the files and place them in the data folder for your installation. See [http://foundryvtt.com/pages/hosting.html#where-do-i-put-my-data](http://foundryvtt.com/pages/hosting.html#where-do-i-put-my-data) for more details about where your data is stored for Foundry. Make sure to put the files in a folder named `sfrpg` in the `systems` directory. _NOTE: This is no longer the perfered method of installing modules. Please use the module browser within foundry._
+1. Download the current release that is compatible with your version of Foundry VTT from the [releases tab](https://github.com/wildj79/foundryvtt-starfinder/releases). Unzip the files and place them in the data folder for your installation. See [https://foundryvtt.com/article/configuration#where-user-data](https://foundryvtt.com/article/configuration#where-user-data) for more details about where your data is stored for Foundry. Make sure to put the files in a folder named `sfrpg` in the `systems` directory. _NOTE: This is no longer the perfered method of installing modules. Please use the module browser within foundry._
 2. Copy this link and use Foundry's Module manager to install it: `https://raw.githubusercontent.com/wildj79/foundryvtt-starfinder/master/src/system.json`
 
 ## Use
@@ -42,7 +42,7 @@ Instead of the Active Effects, as introduced in FoundryVTT v0.7, Starfinder uses
 
 ## Bugs and Issues
 
-If you have any issues or concerns, please don't hesitate to open an issue on the tracker [https://github.com/wildj79/foundryvtt-starfinder/issues](https://github.com/wildj79/foundryvtt-starfinder/issues) or reach out to me on the Foundry discord server: `wildj79#0980`.
+If you have any issues or concerns, please don't hesitate to open an issue on the tracker [https://github.com/wildj79/foundryvtt-starfinder/issues](https://github.com/wildj79/foundryvtt-starfinder/issues) or reach out to us on the Foundry discord server: #starfinder, where either the community or `wildj79#0980` and `Deepflame#0875` can help out.
 
 ## Legal
 

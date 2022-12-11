@@ -1,0 +1,178 @@
+{
+  "_id": "kNLInMV3b11ijrE2",
+  "name": "Negative Level",
+  "type": "actorResource",
+  "effects": [],
+  "flags": {},
+  "img": "icons/svg/skull.svg",
+  "system": {
+    "type": "NegativeLevels",
+    "abilityMods": {
+      "parts": []
+    },
+    "base": 0,
+    "combatTracker": {
+      "displayAbsoluteValue": false,
+      "show": false,
+      "showOwnerAndGMOnly": false,
+      "visualization": []
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>If you have 1 or more negative levels, you take certain penalties and might even die. For each negative level you have, you take a cumulative &ndash;1 penalty to your ability checks, your AC, attack rolls (including combat maneuvers), saving throws, and skill checks. In addition, you reduce your current and total Hit Points and Stamina Points by 5 for each negative level you have. You are also treated as 1 level lower for the purpose of level-dependent variables (such as spellcasting) for each negative level you have. If you are a spellcaster, you do not lose any spell slots as a result of negative levels. If your negative levels equal your total character level (or CR, for monsters), you die.</p>\n<p>Negative levels are temporary, unless the effect that bestows them specifies they are permanent. If you have temporary negative levels, you can attempt a saving throw each day to remove those negative levels. The DC is the same as the DC of the effect that caused the negative levels. If you have negative levels from multiple sources, you must attempt a separate saving throw to remove the negative levels from each source.</p>\n<p>If an effect imposes permanent negative levels, they are treated just like temporary negative levels, but you do not receive a saving throw each day to remove them. Permanent negative levels can be removed through spells such as @Compendium[sfrpg.spells.usqy3VusjjgEnM9N]{Restoration}. If you die, permanent negative levels remain even after you are restored to life. If your permanent negative levels equal your total number of class levels (or CR, for monsters), and you are brought back to life using spells such as @Compendium[sfrpg.spells.nffP8Mq7rJ8Rskb9]{Mystic Cure} or @Compendium[sfrpg.spells.IRUPIVT101SvIK6l]{Raise Dead}, you remain alive for 3 rounds but then die again if you have not also benefited from a <em>restoration&nbsp;</em>spell or similar effect within that time.</p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "64189fa6-a166-47a6-88a9-5cb270c79a0f",
+        "name": "Negative Levels - Ability Checks",
+        "type": "untyped",
+        "condition": "",
+        "container": {
+          "actorId": "ruej4ADTcN5ob0R1",
+          "itemId": "k6DUDdbQfRGUpFrR"
+        },
+        "effectType": "ability-checks",
+        "enabled": true,
+        "max": -2,
+        "modifier": "-(@resources.NegativeLevels.Number.value)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "Negative Levels",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "4f66bccb-d573-4d4d-9d7a-fe7e65dc8a84",
+        "name": "Negative Levels - AC",
+        "type": "untyped",
+        "condition": "",
+        "container": {
+          "actorId": "ruej4ADTcN5ob0R1",
+          "itemId": "k6DUDdbQfRGUpFrR"
+        },
+        "effectType": "ac",
+        "enabled": true,
+        "max": -2,
+        "modifier": "-(@resources.NegativeLevels.Number.value)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "Negative Levels",
+        "subtab": "misc",
+        "valueAffected": "both"
+      },
+      {
+        "_id": "de4be9b3-946a-45d2-9f72-e8e1f6c466b5",
+        "name": "Negative Levels - Attack Rolls",
+        "type": "untyped",
+        "condition": "",
+        "container": {
+          "actorId": "ruej4ADTcN5ob0R1",
+          "itemId": "k6DUDdbQfRGUpFrR"
+        },
+        "effectType": "all-attacks",
+        "enabled": true,
+        "max": -2,
+        "modifier": "-(@resources.NegativeLevels.Number.value)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "Negative Levels",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "d7107e77-b05d-48fd-b7f3-8eb9094e0cc3",
+        "name": "Negative Levels - Saving Throws",
+        "type": "untyped",
+        "condition": "",
+        "container": {
+          "actorId": "ruej4ADTcN5ob0R1",
+          "itemId": "k6DUDdbQfRGUpFrR"
+        },
+        "effectType": "saves",
+        "enabled": true,
+        "max": -2,
+        "modifier": "-(@resources.NegativeLevels.Number.value)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "Negativ eLevels",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "33b97119-cd5e-4ec4-ab21-d8c56c56e6c4",
+        "name": "Negative Levels - Skill Checls",
+        "type": "untyped",
+        "condition": "",
+        "container": {
+          "actorId": "ruej4ADTcN5ob0R1",
+          "itemId": "k6DUDdbQfRGUpFrR"
+        },
+        "effectType": "all-skills",
+        "enabled": true,
+        "max": -2,
+        "modifier": "-(@resources.NegativeLevels.Number.value)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "Negative Levels",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "5e4d87c5-ec75-40b6-b1e9-9100c89b0127",
+        "name": "Negative Levels - HP",
+        "type": "untyped",
+        "condition": "",
+        "container": {
+          "actorId": "ruej4ADTcN5ob0R1",
+          "itemId": "k6DUDdbQfRGUpFrR"
+        },
+        "effectType": "hit-points",
+        "enabled": true,
+        "max": -10,
+        "modifier": "-(@resources.NegativeLevels.Number.value*5)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "Negative Levels",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "a719302a-fe67-4e8f-9a6e-9c74e988bfb2",
+        "name": "Negative Levels - SP",
+        "type": "untyped",
+        "condition": "",
+        "container": {
+          "actorId": "ruej4ADTcN5ob0R1",
+          "itemId": "k6DUDdbQfRGUpFrR"
+        },
+        "effectType": "stamina-points",
+        "enabled": true,
+        "max": -10,
+        "modifier": "-(@resources.NegativeLevels.Number.value*5)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "Negative Levels",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
+    "range": {
+      "max": 20,
+      "min": 0,
+      "mode": "post"
+    },
+    "source": "CRB pg. 252",
+    "stage": "early",
+    "subType": "Number"
+  }
+}

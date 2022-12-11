@@ -19,12 +19,14 @@ export const SFRPGEffectType = Object.freeze({
     WEAPON_ATTACKS: "weapon-attacks",
     ALL_ATTACKS: "all-attacks",
     WEAPON_PROPERTY_ATTACKS: "weapon-property-attacks",
+    WEAPON_CATEGORY_ATTACKS: "weapon-category-attacks",
     RANGED_DAMAGE: "ranged-damage",
     MELEE_DAMAGE: "melee-damage",
     SPELL_DAMAGE: "spell-damage",
     WEAPON_DAMAGE: "weapon-damage",
     ALL_DAMAGE: "all-damage",
     WEAPON_PROPERTY_DAMAGE: "weapon-property-damage",
+    WEAPON_CATEGORY_DAMAGE: "weapon-category-damage",
     BASE_ATTACK_BONUS: "base-attack-bonus",
     AC: "ac",
     CMD: "cmd",
@@ -35,7 +37,11 @@ export const SFRPGEffectType = Object.freeze({
     ALL_SKILLS: "all-skills",
     SAVES: "saves",
     SAVE: "save",
+    SPELL_SAVE_DC: "spell-save-dc",
     SPEED: "speed",
+    ALL_SPEEDS: "all-speeds",
+    SPECIFIC_SPEED: "specific-speed",
+    MULTIPLY_ALL_SPEEDS: "multiply-all-speeds",
     DAMAGE: "damage",
     ABILITY_CHECKS: "ability-checks",
     ABILITY_CHECK: "ability-check",
@@ -50,7 +56,9 @@ export const SFRPGEffectType = Object.freeze({
     SPELL_RESISTANCE: "spell-resistance",
     DAMAGE_REDUCTION: "damage-reduction",
     BULK: "bulk",
-    BULK_CALCULATION: "bulk-calculation"
+    BULK_CALCULATION: "bulk-calculation",
+    ACTOR_RESOURCE: "actor-resource",
+    ENERGY_RESISTANCE: "energy-resistance"
 });
 
 export const SFRPGModifierType = Object.freeze({

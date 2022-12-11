@@ -1,77 +1,108 @@
 {
   "_id": "dXYaeTjwjT4Yr4Rk",
   "name": "Channel Skill (Su)",
-  "permission": {
-    "default": 0,
-    "QqVQDajn5ZN4kl25": 3
-  },
   "type": "feat",
-  "data": {
-    "description": {
-      "value": "<p>&gt;@Compendium[sfrpg.classes.bItuvukGHbObTApr]{Mystic}</p>\n<p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\">You draw strange feelings, instincts, knowledge, and urges from your connection, augmenting your prowess in certain tasks. Each connection has two skills associated with it. You gain a +1 insight bonus to skill checks with your connection’s associated skills. This bonus increases by 1 at 5th level and every 3 levels thereafter.</span></p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "Mystic",
+  "flags": {},
+  "img": "systems/sfrpg/icons/classes/channel_skill.webp",
+  "permission": {
+    "QqVQDajn5ZN4kl25": 3,
+    "default": 0
+  },
+  "system": {
     "type": "",
+    "ability": null,
+    "abilityMods": {
+      "parts": []
+    },
+    "actionType": "",
     "activation": {
       "type": "",
-      "cost": 0,
-      "condition": ""
-    },
-    "duration": {
-      "value": null,
-      "units": ""
-    },
-    "target": {
-      "value": null,
-      "type": ""
+      "condition": "",
+      "cost": 0
     },
     "area": {
-      "value": null,
-      "units": "",
+      "effect": "",
       "shape": "",
-      "effect": ""
-    },
-    "range": {
-      "value": null,
       "units": "",
-      "additional": "",
-      "per": ""
+      "value": null
     },
-    "uses": {
-      "value": 0,
-      "max": 0,
-      "per": null
-    },
-    "ability": null,
-    "actionType": "",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
-      "parts": [],
-      "effect": ""
+      "effect": "",
+      "parts": []
     },
     "damage": {
       "parts": []
     },
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<p>&gt;@Compendium[sfrpg.classes.bItuvukGHbObTApr]{Mystic}</p>\n<p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\">You draw strange feelings, instincts, knowledge, and urges from your connection, augmenting your prowess in certain tasks. Each connection has two skills associated with it. You gain a +1 insight bonus to skill checks with your connection&rsquo;s associated skills. This bonus increases by 1 at 5th level and every 3 levels thereafter.</span></p>\n<p><em>Within the Modifiers tab, change the two modifier's Specific Effect Value to the two associated skills</em></p>"
+    },
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": null
+    },
     "formula": "",
+    "modifiers": [
+      {
+        "_id": "3d95111e-3c97-4999-b894-b83b7346f45b",
+        "name": "Channel Skill (Su)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@classes.mystic.levels, 0, 2, 1, 5, 2, 8, 3, 11, 4, 14, 5, 17, 6, 20, 7)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "acr"
+      },
+      {
+        "_id": "f86e514d-7bd2-4c2d-8a1b-96515aa89886",
+        "name": "Channel Skill (Su)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@classes.mystic.levels, 0, 2, 1, 5, 2, 8, 3, 11, 4, 14, 5, 17, 6, 20, 7)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "ath"
+      }
+    ],
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "",
+      "value": null
+    },
+    "recharge": {
+      "charged": false,
+      "value": null
+    },
+    "requirements": "2nd Level",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "descriptors": [],
-    "modifiers": [],
-    "requirements": "2nd Level",
-    "recharge": {
-      "value": null,
-      "charged": false
+    "source": "Mystic",
+    "target": {
+      "type": "",
+      "value": null
     },
-    "abilityMods": {
-      "parts": []
+    "uses": {
+      "max": 0,
+      "per": null,
+      "value": 0
     }
-  },
-  "flags": {},
-  "img": "systems/sfrpg/icons/classes/channel_skill.png"
+  }
 }

@@ -7,7 +7,7 @@ export default function (engine) {
         const modifiers = fact.modifiers;
         const races = fact.races;
 
-        const themeData = fact?.theme?.data?.data;
+        const themeData = fact?.theme?.system;
 
         const addModifier = (bonus, data, item, localizationKey) => {
             if (bonus.modifierType === SFRPGModifierType.FORMULA) {
@@ -20,8 +20,11 @@ export default function (engine) {
                 return 0;
             }
 
-            let roll = new Roll(bonus.modifier.toString(), data).evaluate({maximize: true});
-            let computedBonus = roll.total;
+            let computedBonus = 0;
+            try {
+                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                computedBonus = roll.total;
+            } catch {}
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
@@ -45,7 +48,7 @@ export default function (engine) {
 
         let racesMod = {};
         for (let race of races) {
-            const raceData = race.data.data;
+            const raceData = race.system;
             for(let raceMod of raceData.abilityMods.parts) {
                 racesMod[raceMod[1]] = racesMod[raceMod[1]] !== undefined ? racesMod[raceMod[1]] + raceMod[0] : raceMod[0];
             }
@@ -54,7 +57,7 @@ export default function (engine) {
         let abilityScoreIncreasesMod = {};
         const asis = fact.asis?.filter(x => x.type === "asi") || [];
         for (let asi of asis) {
-            const asiData = asi.data.data;
+            const asiData = asi.system;
 
             for (let ability of Object.keys(SFRPG.abilities)) {
                 if (asiData.abilities[ability]) {

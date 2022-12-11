@@ -3,11 +3,13 @@
         "TypeCharacter": "Spielercharakter",
         "TypeDrone": "Drohne",
         "TypeHazard": "Hazard",
-        "TypeNpc": "Nichtspielercharakter",
+        "TypeNpc": "Old Style Nichtspielercharakter",
+        "TypeNpc2": "Nichtspielercharakter",
         "TypeStarship": "Raumschiff",
         "TypeVehicle": "Fahrzeug"
     },
     "ITEM": {
+        "TypeActorresource": "Actor Resource",
         "TypeAmmunition": "Ammunition",
         "TypeArchetypes": "Archetyp",
         "TypeAsi": "Attributswertsteigerung",
@@ -53,14 +55,26 @@
         "TypeWeaponaccessory": "Weapon Accessory"
     },
     "SFRPG": {
+        "ACPTooltip": "Rüstungsmalus: {mod} ({source})",
+        "ACTooltipArmorACMod": "Rüstungsmodifikator: {armor} ({name})",
+        "ACTooltipBase": "Rüstungsklasse: {base}",
+        "ACTooltipBonus": "{type} Bonus: {mod} ({source})",
+        "ACTooltipMaxDex": "Geschicklichkeitsmodifikator: {maxDex} (max armor: {armorMax}, max shield: {shieldMax})",
+        "ACTooltipNotProficientMod": "Penalty for armor non-proficiency: {profMod}",
+        "ACTooltipNotProficientShield": "Penalty for shield non-proficiency: {profMod}",
+        "ACTooltipShieldACMod": "Shield Modifier: {shield} ({name})",
+        "ACvsCombatManeuversLabel": "KRK + 8",
+        "ACvsCombatManeuversTitle": "RK gegen Kampfmanöver",
         "AbilityActivationTypesDay": "Tag",
         "AbilityActivationTypesFull": "Volle Aktion",
         "AbilityActivationTypesHour": "Stunde",
         "AbilityActivationTypesMinute": "Minute",
         "AbilityActivationTypesMove": "Bewegungsaktion",
         "AbilityActivationTypesNone": "Keine",
+        "AbilityActivationTypesNoneButton": "Activate",
         "AbilityActivationTypesOther": "Andere Aktionen",
         "AbilityActivationTypesReaction": "Reaktion",
+        "AbilityActivationTypesRound": "Round",
         "AbilityActivationTypesSpecial": "Spezial",
         "AbilityActivationTypesStandard": "Standard-Aktion",
         "AbilityActivationTypesSwift": "Schnelle Aktion",
@@ -81,14 +95,15 @@
         "AbilityPenaltyTooltip": "Attributsmalus: {mod}",
         "AbilityScoreBase": "Attributswert",
         "AbilityScoreBaseTooltip": "Attributswert: {mod}",
+        "AbilityScoreBonusModifiedTooltip": "{type} bonus: {mod} (computed from {base}) ({source})",
         "AbilityScoreBonusTooltip": "{type} Bonus: {mod} ({source})",
+        "AbilityScoreGenericTooltip": "{score} Ability Score: {value} ({source})",
         "AbilityScoreIncreaseTooltip": "Attributswertsteigerung: {mod}",
         "AbilityScoreRaceTooltip": "Volk: {mod}",
         "AbilityScoreThemeTooltip": "Charaktermotiv: {mod}",
-        "About": "About",
         "AbilityStr": "Stärke",
         "AbilityWis": "Weisheit",
-        "ACPTooltip": "Rüstungsmalus: {mod} ({source})",
+        "About": "About",
         "ActionAbil": "Attributswurf",
         "ActionHeal": "Heilen",
         "ActionMSAK": "Nahkampfzauber",
@@ -98,17 +113,29 @@
         "ActionRWAK": "Fernkampfwaffenangriff",
         "ActionSave": "Rettungswurf",
         "ActionUtil": "Unterstützung",
-        "ACTooltipArmorACMod": "Rüstungsmodifikator: {armor} ({name})",
-        "ACTooltipBase": "Rüstungsklasse: {base}",
-        "ACTooltipBonus": "{type} Bonus: {mod} ({source})",
-        "ACTooltipMaxDex": "Geschicklichkeitsmodifikator: {maxDex} (max armor: {armorMax}, max shield: {shieldMax})",
-        "ACTooltipNotProficientMod": "Penalty for armor non-proficiency: {profMod}",
-        "ACTooltipNotProficientShield": "Penalty for shield non-proficiency: {profMod}",
-        "ACTooltipShieldACMod": "Shield Modifier: {shield} ({name})",
         "ActorSheet": {
             "Attributes": {
                 "Skills": {
                     "SkillRanks": "Fertigkeitsränge"
+                },
+                "Speed": {
+                    "Flight": {
+                        "Average": "Average",
+                        "Clumsy": "Clumsy",
+                        "Perfect": "Perfect"
+                    },
+                    "MainMovementType": "Main Movement",
+                    "MovementSpeedNamedTitle": "Movement Speed: {name}",
+                    "MovementSpeedTitle": "Movement Speed",
+                    "Types": {
+                        "All": "All speeds",
+                        "Burrowing": "Burrowing",
+                        "Climbing": "Climbing",
+                        "Flying": "Flying",
+                        "Land": "Land",
+                        "Special": "Special",
+                        "Swimming": "Swimming"
+                    }
                 }
             },
             "Biography": {
@@ -116,8 +143,14 @@
                 "AgePlaceholder": "e.g. 19",
                 "DateOfBirth": "Date of birth",
                 "DateOfBirthPlaceholder": "e.g. 6th of Gozran, 300 AG",
+                "Deity": "Deity",
+                "DeityPlaceholder": "e.g. Pharasma",
+                "GenderPronouns": "Gender/Pronouns",
+                "GenderPronounsPlaceholder": "e.g. They/Them",
                 "Height": "Height",
                 "HeightPlaceholder": "e.g. 5'4\"",
+                "HomeWorld": "Home World",
+                "HomeWorldPlaceholder": "e.g. Akiton",
                 "ImageTooltip": "This is a full body image you can set for this character. The dimensions should be 200x250 pixels, or 4:5 aspect ratio.",
                 "OtherVisuals": "Appearance",
                 "TabBio": "Biography",
@@ -130,6 +163,7 @@
             "Features": {
                 "Categories": {
                     "ActiveFeats": "Active Feats",
+                    "ActorResources": "Actor Resources",
                     "Archetypes": "Archetypes",
                     "Classes": "Classes",
                     "PassiveFeats": "Passive Feats",
@@ -181,9 +215,13 @@
                     "DetailsHeader": "Details des Behälters",
                     "EquippedBulkMultiplier": "Lastmultiplikator wenn ausgerüstet",
                     "EquippedBulkMultiplierTooltip": "Dieser Multiplikator wird verwendet, um die Last des aktuellen Gegenstandes zu verändern, wenn er ausgerüstet ist.<br/>Wenn du diesen Wert auf 0 setzt, wird der aktuelle Gegenstand nicht zur Belastung des Akteurs gezählt, wenn er ausgerüstet ist.",
+                    "IncludeContentsInWealthCalculation": "Contents affect character wealth",
+                    "IncludeContentsInWealthCalculationCheckbox": "Contained items are counted towards character wealth.",
+                    "IncludeContentsInWealthCalculationTooltip": "If disabled, contained items no longer affect character wealth.",
                     "Open": "Open",
                     "OpenTooltip": "Open this container's fold-out listing.",
                     "StorageIdentifier": "Lagerbezeichnung",
+                    "StorageIdentifierAmmunitionSlot": "Ammunition Slot",
                     "StorageIdentifierArmorUpgrade": "Rüstungsverbesserungsplatz",
                     "StorageIdentifierFusion": "Fusion",
                     "StorageIdentifierItem": "Gegenstandsplatz",
@@ -234,35 +272,51 @@
                     "Label": "Vermögen:",
                     "Tooltip": "Diese Zahl stellt den Gesamtwert aller Gegenstände auf dieser Liste dar."
                 },
+                "Wealth": {
+                    "Currency": "{currency}: {amount}",
+                    "EstimatedLevel": "Estimated level by wealth: {estimatedLevel} (Up to {valueAtLevel})",
+                    "Expected": "Expected wealth by character level: {expectedWealth}",
+                    "Inventory": "Inventory: {amount}"
+                },
                 "Weapon": {
                     "AlreadyFullyLoaded": "The weapon {name} is already fully loaded.",
                     "NoAmmunitionAvailable": "You have no ammunition available for the weapon {name}.",
-                    "Reload": "Waffe nachladen"
+                    "Reload": "Waffe nachladen",
+                    "ReloadFromContainer": "The weapon {name} was reloaded with {ammoName} pulled from the container {containerName}. Double-check your action economy."
                 }
             },
             "Modifiers": {
                 "EffectTypes": {
+                    "ActorResource": "Actor Resource",
                     "AllAttackDamage": "Alle Angriffsschäden",
                     "AllAttackRolls": "Alle Angriffswürfe",
+                    "AllSpeeds": "All Speeds",
                     "BAB": "GAB",
                     "BaseAttackBonus": "Grundangriffsbonus",
+                    "DamageReduction": "Damage Reduction",
                     "Encumbrance": "Traglast",
-                    "Hitpoints": "Trefferpunkte",
+                    "EnergyResistance": "Energy Resistance",
                     "HP": "TP",
+                    "Hitpoints": "Trefferpunkte",
                     "MeleeAttackDamage": "Nahkampfschaden",
                     "MeleeAttackRolls": "Nahkampfangriffswürfe",
+                    "MultiplyAllSpeeds": "All Speeds Multiplier",
+                    "RP": "RP",
                     "RangedAttackDamage": "Fernkampfschaden",
                     "RangedAttackRolls": "Fernkampfangriffswürfe",
                     "Resolve": "Reservepunkte",
-                    "RP": "RP",
-                    "Skillpoints": "Fertigkeitspunkte",
-                    "SkillRanks": "Fertigkeitsränge",
                     "SP": "AP",
+                    "SkillRanks": "Fertigkeitsränge",
+                    "Skillpoints": "Fertigkeitspunkte",
+                    "SpecificSpeed": "Specific Speed",
                     "SpecificWeaponAttackDamage": "Schaden mit spezifischer Waffe",
                     "SpecificWeaponAttackRolls": "Angriffswürfe mit spezifischer Waffe",
                     "SpellAttackDamage": "Zauberschaden",
                     "SpellAttackRolls": "Zauberangriffswürfe",
+                    "SpellSaveDC": "Spell Save DC",
                     "Stamina": "Ausdauerpunkte",
+                    "WeaponCategoryAttackRolls": "Weapon Category Attack Rolls",
+                    "WeaponCategoryDamage": "Weapon Category Damage",
                     "WeaponPropertyAttackRolls": "Weapon Property Attack Rolls",
                     "WeaponPropertyDamage": "Schaden durch Waffeneigenschaft"
                 },
@@ -273,7 +327,14 @@
                 "Tooltips": {
                     "BonusSkillpoints": "{type} Bonus: {mod} ({source})",
                     "ClassSkillpoints": "{class} Fertigkeitspunkte: {total}",
-                    "SkillRank": "{type} Ränge: {mod} ({source})"
+                    "DeleteModifier": "Delete modifier",
+                    "DeleteModifierTooltip": "Delete this modifier.",
+                    "EditModifier": "Edit modifier",
+                    "EditModifierTooltip": "Open the modifier editor for this modifier.",
+                    "SkillRank": "{type} Ränge: {mod} ({source})",
+                    "Speed": "{speed}: {type} {mod} ({source})",
+                    "ToggleModifier": "Toggle modifier",
+                    "ToggleModifierTooltip": "Toggle a modifier on and off. Disabled modifiers do not affect the character."
                 },
                 "UI": {
                     "LongFormula": "Langformel"
@@ -282,12 +343,13 @@
             "Skills": {
                 "RightClickHint": "Right click a skill for more properties."
             },
+            "Traits": {
+                "MagicalItems": "Worn Magical Items"
+            },
             "UI": {
                 "ErrorNoCharges": "{name} has no charges remaining."
             }
         },
-        "ACvsCombatManeuversLabel": "KMV",
-        "ACvsCombatManeuversTitle": "RK gegen Kampfmanöver",
         "AddLabel": "Hinzufügen",
         "AddProfessionButtonText": "Beruf hinzufügen",
         "AlignmentCE": "Chaotisch Böse",
@@ -302,6 +364,7 @@
         "AlignmentTN": "Neutral",
         "AllowedClasses": {
             "Myst": "Aspirant",
+            "Precog": "Precog",
             "Tech": "Technomagier",
             "Wysh": "Hexer"
         },
@@ -353,6 +416,18 @@
         "Biography": "Biografie",
         "Biotech": "Biotechnologie",
         "Browsers": {
+            "AlienArchiveBrowser": {
+                "BrowserFilterAlignment": "Filter by Alignment",
+                "BrowserFilterCR": "Filter by CR",
+                "BrowserFilterHP": "Filter by HP",
+                "BrowserFilterOrganizationSize": "Filter by Organization Size",
+                "BrowserFilterSize": "Filter by Size",
+                "BrowserFilterType": "Filter by Type",
+                "BrowserSortMethodCR": "CR",
+                "BrowserSortMethodHP": "HP",
+                "Button": "Alien Archive",
+                "Title": "Browse Alien Archive"
+            },
             "EquipmentBrowser": {
                 "BrowserSortMethodLevel": "Stufe",
                 "Button": "Ausrüstung",
@@ -389,10 +464,16 @@
                 "WeaponType": "Weapon Type"
             }
         },
+        "CMDBaseTooltip": "Grundwert: 8",
+        "CMDKACModTooltip": "KRK: {kac}",
+        "CMDModiferTooltip": "{type} Bonus: {mod} ({source})",
         "CancelButtonLabel": "Abbrechen",
         "Canvas": {
             "Interface": {
                 "NoTargetTokenForItemDrop": "Das Ziel ist keine Spielfigur, Objekt kann nicht abgelegt werden!"
+            },
+            "TokenHud": {
+                "RemoveAll": "Remove All"
             }
         },
         "Capacity": {
@@ -401,6 +482,7 @@
                 "Day": "Tag",
                 "Hour": "Stunde",
                 "Minute": "Minute",
+                "Minute10": "10 Minutes",
                 "Round": "Kampfrunde",
                 "Shot": "Schuss"
             }
@@ -425,7 +507,8 @@
                 "ApplyHealing": "Apply Healing",
                 "DamageAndAHalf": "1.5x Damage",
                 "DoubleDamage": "Double Damage",
-                "HalfDamage": "Half Damage"
+                "HalfDamage": "Half Damage",
+                "NoToken": "Cannot apply: No token selected!"
             },
             "ItemActivation": {
                 "Activates": "Activates",
@@ -437,23 +520,21 @@
         },
         "ClassArmorProf": "Umgang mit Rüstungen",
         "ClassBABProgression": "Progression des Grundangriffsbonus",
-        "Classes": {
-            "IsCasterClass": "Handelt es sich bei der Klasse um einen Zauberwirker?"
-        },
         "ClassFortSaveProgression": "Progression der Zähigkeitsrettungswürfe",
         "ClassHPPerLevel": "Trefferpunkte pro Stufe",
         "ClassKeyAbilityScore": "Schlüsselattributswert",
         "ClassLevelLabel": "Klassenstufen",
         "ClassReflexSaveProgression": "Progression der Reflexrettungswürfe",
+        "ClassSPPerlevel": "Ausdauerpunkte pro Stufe",
         "ClassSkillRanksPerlevel": "Fertigkeitsränge pro Stufe",
         "ClassSkills": "Klassenfertigkeiten",
-        "ClassSPPerlevel": "Ausdauerpunkte pro Stufe",
+        "ClassSpellcastingAbility": "Spellcasting Ability",
         "ClassWeaponProf": "Umgang mit Waffen",
         "ClassWillSaveProgression": "Progression der Willerettungswürfe",
+        "Classes": {
+            "IsCasterClass": "Handelt es sich bei der Klasse um einen Zauberwirker?"
+        },
         "Close": "Nah",
-        "CMDBaseTooltip": "Grundwert: 8",
-        "CMDKACModTooltip": "KRK: {kac}",
-        "CMDModiferTooltip": "{type} Bonus: {mod} ({source})",
         "Combat": {
             "ChatCards": {
                 "Footer": "{combatType} - {combatPhase} Phase",
@@ -538,6 +619,7 @@
             }
         },
         "ComingSoon": "Kommt demnächst!",
+        "ConImm": "Immunitäten gegen Zustände",
         "ConditionsAsleep": "Schlafend",
         "ConditionsBleeding": "Blutend",
         "ConditionsBlinded": "Geblendet",
@@ -559,6 +641,7 @@
         "ConditionsFrightened": "Verängstigt",
         "ConditionsGrappled": "Ringend",
         "ConditionsHelpless": "Hilflos",
+        "ConditionsInvisible": "Invisible",
         "ConditionsNauseated": "Übelkeit",
         "ConditionsOffKilter": "Haltlos",
         "ConditionsOffTarget": "Abgelenkt",
@@ -573,7 +656,6 @@
         "ConditionsStaggered": "Wankend",
         "ConditionsStunned": "Betäubt",
         "ConditionsUnconscious": "Bewusstlos",
-        "ConImm": "Immunitäten gegen Zustände",
         "ConsumableTypes": {
             "Ampoule": "Zauberampullen",
             "Drugs": "Drogen",
@@ -602,49 +684,92 @@
             "UPBs": "UPBs"
         },
         "Cybernetic": "Kybernetisch",
-        "Damage": "Schaden",
-        "DamageReduction": "Schadensreduktion",
-        "DamageTypesAcid": "Säure",
-        "DamageTypesAcidAndBludgeoning": "Säure & Wucht",
-        "DamageTypesAcidAndElectricity": "Säure & Elektrizität",
-        "DamageTypesAcidAndFire": "Säure & Feuer",
-        "DamageTypesAcidAndPiercing": "Säure & Stich",
-        "DamageTypesAcidAndSlashing": "Säure & Hieb",
-        "DamageTypesAcidOrFire": "Säure | Feuer",
-        "DamageTypesAcidOrSlashing": "Säure | Hieb",
-        "DamageTypesBludgeoning": "Wucht",
-        "DamageTypesBludgeoningAndCold": "Wucht & Kälte",
-        "DamageTypesBludgeoningAndElectricity": "Wucht & Elektrizität",
-        "DamageTypesBludgeoningAndFire": "Wucht & Feuer",
-        "DamageTypesBludgeoningAndSonic": "Wucht & Schall",
-        "DamageTypesCold": "Kälte",
-        "DamageTypesColdAndPiercing": "Kälte & Stich",
-        "DamageTypesColdAndSlashing": "Kälte & Hieb",
-        "DamageTypesColdOrFire": "Kälte | Feuer",
-        "DamageTypesElectricity": "Elektrizität",
-        "DamageTypesElectricityAndFire": "Elektrizität & Feuer",
-        "DamageTypesElectricityAndPiercing": "Elektrizität & Stich",
-        "DamageTypesElectricityAndSlashing": "Elektrizität & Hieb",
-        "DamageTypesFire": "Feuer",
-        "DamageTypesFireAndForce": "Feuer & Energie",
-        "DamageTypesFireAndPiercing": "Feuer & Stich",
-        "DamageTypesFireAndSlashing": "Feuer & Hieb",
-        "DamageTypesFireOrSlashing": "Feuer | Hieb",
-        "DamageTypesFireOrSonic": "Feuer | Schall",
-        "DamageTypesForce": "Energie",
-        "DamageTypesNonlethal": "Nichttödlich",
-        "DamageTypesPiercing": "Stich",
-        "DamageTypesPiercingAndSonic": "Stich & Schall",
-        "DamageTypesRadiation": "Strahlung",
-        "DamageTypesSlashing": "Hieb",
-        "DamageTypesSlashingAndPiercing": "Hieb & Stich",
-        "DamageTypesSlashingAndSonic": "Hieb & Schall",
-        "DamageTypesSonic": "Schall",
-        "DamImm": "Immunitäten gegenüber Schaden",
-        "DamRes": "Energieresistenzen",
-        "DamVuln": "Schwächen gegenüber Schaden",
+        "Damage": {
+            "Immunities": "Immunitäten gegenüber Schaden",
+            "MinimumDamage": "Minimum Damage",
+            "PartIndex": "Part {partIndex} of {partCount}",
+            "Reduction": "Schadensreduktion",
+            "Resistances": "Energieresistenzen",
+            "Title": "Schaden",
+            "Types": {
+                "Acid": "Säure",
+                "Bludgeoning": "Wucht",
+                "Cold": "Kälte",
+                "Custom": "Custom",
+                "DamageGroup": "Damage Group {group}",
+                "DamageGroupTooltip": "If damage sections share a group, you may only enable one from that group when making a damage roll. You may freely enable/disable damage sections that lack a group.",
+                "Electricity": "Elektrizität",
+                "Fire": "Feuer",
+                "Force": "Energie",
+                "GrouplessDamage": "Groupless Damage",
+                "Hint": "This is a list of damage types that apply to this damage roll.",
+                "Nonlethal": "Nichttödlich",
+                "Operators": {
+                    "And": "und",
+                    "Or": "oder"
+                },
+                "Piercing": "Stich",
+                "Radiation": "Strahlung",
+                "Slashing": "Hieb",
+                "Sonic": "Schall",
+                "Title": "Schadensarten"
+            },
+            "Vulnerabilities": "Schwächen gegenüber Schaden"
+        },
         "Description": "Beschreibung",
         "DescriptionShort": "Short Description",
+        "Descriptors": {
+            "Acid": "Acid",
+            "Air": "Air",
+            "Calling": "Calling",
+            "CallingDescription": "A calling effect transports a creature from another plane to the plane you are on. The effect grants the creature the one-time ability to return to its plane of origin, although the effect might limit the circumstances under which this is possible. Creatures who are called die if they are killed on the new plane. A called creature can’t be dispelled, even if it was called by magical means.",
+            "Chaotic": "Chaotic",
+            "Charm": "Charm",
+            "CharmDescription": "A charm effect changes how the subject views you. This gives you the ability to befriend and suggest courses of action to another creature, but its servitude is not absolute or mindless. Essentially, a charmed character retains free will but makes choices according to a skewed view of the world.<br><br>A charmed creature retains its original alignment and allegiances, generally with the exception that it now regards the person who charmed it as a dear friend and gives great weight to that character’s suggestions and directions. A charmed creature does not volunteer information or tactics that its master doesn’t ask for. A charmed creature never obeys a command that is obviously suicidal or grievously harmful to it.<br><br>A creature fights friends it had before being charmed only if they threaten its new friend. Even then, it uses the least lethal means at its disposal, for it wishes to resolve the conflict without causing real harm.<br><br>A charmed creature can attempt an opposed Charisma check against its master in order to resist instructions or commands that would make it do something it wouldn’t normally do even for a close friend. If it succeeds at this check, it decides not to go along with that particular order but remains charmed. If the creature’s master commands it to perform an action that the creature would be vehemently opposed to, it can attempt a new saving throw to break free of its master’s influence altogether.<br><br>If a charmed creature is openly attacked by the character who charmed it or by that character’s apparent allies, it is automatically freed of the spell or effect.",
+            "Cold": "Cold",
+            "Compulsion": "Compulsion",
+            "CompulsionDescription": "A compulsion effect overrides the subject’s free will in some way, forcing the subject to act in some manner or changing the way its mind works.",
+            "Creation": "Creation",
+            "CreationDescription": "A creation effect manipulates matter to create an object or creature in the place the creator designates. If the effect has a duration other than instantaneous, magic or some other energy holds the creation together, but when the duration ends, the created creature or object vanishes without a trace. If the effect has an instantaneous duration, the created object or creature does not depend on any outside energy for its existence, so it lasts indefinitely once created.",
+            "Curse": "Curse",
+            "Darkness": "Darkness",
+            "Death": "Death",
+            "Descriptors": "Descriptors",
+            "Disease": "Disease",
+            "Earth": "Earth",
+            "Electricity": "Electricity",
+            "Emotion": "Emotion",
+            "Evil": "Evil",
+            "Fear": "Fear",
+            "Fire": "Fire",
+            "Force": "Force",
+            "ForceDescription": "A force effect deals full damage to incorporeal creatures and blocks their movement. It also blocks the sense through ability.",
+            "Good": "Good",
+            "Healing": "Healing",
+            "LanguageDependent": "Language Dependent",
+            "LanguageDependentDescription": "A language-dependent effect uses intelligible language (either audible, visual, or telepathic) as a medium for communication. If you cannot communicate with the target or the target cannot understand what you are communicating, the effect fails to affect that target.",
+            "Lawful": "Lawful",
+            "Light": "Light",
+            "MindAffecting": "Mind Affecting",
+            "MindAffectingDescription": "A mind-affecting effect works only against creatures with an Intelligence score of 1 or higher.",
+            "Pain": "Pain",
+            "PainDescription": "A pain effect causes unpleasant sensations but not permanent physical damage. Creatures that are immune to effects that require a Fortitude save are immune to pain effects.",
+            "Poison": "Poison",
+            "Polymorph": "Polymorph",
+            "Radiation": "Radiation",
+            "Scrying": "Scrying",
+            "ScryingDescription": "A scrying effect creates an invisible magical sensor that sends you information while the effect lasts. Unless noted otherwise, the sensor has the same sensory abilities that you have naturally, but not any sensory abilities you gain from other spells or technology. The sensor is a separate, independent source of sensory input for you, and thus it functions normally even if you have been blinded or deafened or otherwise suffer sensory impairment.<br><br>A creature can notice a scrying sensor with a successful Perception check (DC = 20 + the spell or effect’s level). The sensor can be dispelled as if it were an active spell. Lead sheeting, force fields, and some exotic materials and magical protections block scrying effects; if that is the case, you can sense that the effect has been blocked.",
+            "SenseDependent": "Sense Dependent",
+            "SenseDependentDescription": "A sense-dependent effect has either audible or visual elements, requiring sight or hearing to have any effect. For this kind of effect to affect that target, you must be able to either see or hear the target, and the target must be able to either see or hear you.",
+            "Shadow": "Shadow",
+            "ShadowDescription": "A shadow effect creates something that is partially real from an amalgamation of extradimensional energy. Damage dealt by a shadow effect is real.",
+            "Sonic": "Sonic",
+            "Summoning": "Summoning",
+            "SummoningDescription": "A summoning effect instantly brings a creature or object to a place you designate. When the effect ends or is dispelled, a summoned creature is instantly sent back to where it came from (typically another plane, but not always), but a summoned object is not sent back unless the effect description specifically indicates otherwise. A summoned creature also goes away if it is killed or if its Hit Points drop to 0, but it is not really dead. It takes 24 hours for the creature to reform in the place from which it was summoned, during which time it can’t be summoned again.<br><br>When a summoning effect ends and the summoned creature disappears, all spells it has cast expire. A summoned creature cannot use any innate summoning abilities it may have.",
+            "Teleportation": "Teleportation",
+            "TeleportationDescription": "A teleportation effect involves instantaneous travel through the Astral Plane (see page 471). Anything that blocks astral travel also blocks teleportation unless the specific effect notes otherwise, and teleportation effects work within the Drift.",
+            "Water": "Water"
+        },
         "Details": "Details",
         "Dialogs": {
             "InputDialog": {
@@ -657,9 +782,11 @@
             "Chassis": {
                 "Details": {
                     "AbilityScores": {
+                        "Charisma": "Base Charisma",
                         "Dexterity": "Grundgeschicklichkeit",
                         "Header": "Attributswert",
                         "Increases": "Attributswertsteigerung",
+                        "Intelligence": "Base Intelligence",
                         "Strength": "Grundstärke",
                         "Wisdom": "Grundweisheit"
                     },
@@ -747,6 +874,7 @@
                         "BonusSkill": "Zusätzliche Fertigkeit",
                         "Header": "Andere Effekte",
                         "SpeedSpecial": "Spezielle Bewegungsrate",
+                        "SpellResistance": "Spell resistance",
                         "WeaponProficiency": "Umgang mit Waffen"
                     }
                 },
@@ -778,6 +906,7 @@
         "FeaturesFilter": "Filter",
         "FeaturesUsage": "Verbrauch",
         "FlagDeprecationNotice": "<strong>ANMERKUNG:</strong> Diese Werte werden durch das neue Modifikatorensystem ersetzt und in einer zukünftigen Version entfernt. Es wird empfohlen, diese Werte abzuwählen und sie als Modifikatoren auf der Registerkarte 'Modifikatoren' hinzuzufügen.",
+        "FlagsEmptySolarian": "There are no special traits at the moment. If you're looking for Solarian Attunement, use the new Actor Resource system within the Stellar Mode class feature.",
         "FlagsInstructions": "Konfiguriere die Charakterzüge und -eigenschaften, die das Verhalten des Starfinder-Systems feiner abstimmen.",
         "FlagsSave": "Spezielle Merkmale aktualisieren",
         "FlagsTitle": "Spezielle Merkmale konfigurieren",
@@ -873,6 +1002,7 @@
         "InitiativeLabel": "Initiative",
         "InitiativeModiferLabel": "Modifikator",
         "InitiativeModiferTooltip": "{type} Bonus: {mod} ({source})",
+        "InvalidItem": "{name} is an invalid Item for a {target}.",
         "InvalidStarshipItem": "{name} ist ein ungültiger Gegenstand für ein Raumschiff.",
         "Inventory": "Inventar",
         "InventoryAdd": "Hinzufügen",
@@ -883,6 +1013,7 @@
         "InventoryUsage": "Nutzung",
         "IronWillHint": "Charaktertalent welches +2 auf Willerettungswürfe gibt",
         "IronWillLabel": "Eiserner Wille",
+        "ItemBonusTooltip": "Item bonus: {mod} ({source})",
         "ItemCollectionSheet": {
             "ItemCollectionLocked": "Dieser Behälter ist verschlossen und lässt sich nicht öffnen.",
             "Settings": {
@@ -893,254 +1024,75 @@
                 "LockedTooltip": "<strong>Verschlossen</strong><br/>Das Verschließen eines Behälters verhindert den Zugriff durch die Spieler."
             }
         },
-        "ItemNoUses": "{name} hat keine Munition mehr!",
-        "Items": {
-            "ACP": "Rüstungsmalus",
-            "Action": {
-                "AbilityModifier": "Attributsmodifikator",
-                "ActionType": "Aktionstyp",
-                "AttackRollBonus": "Angriffswurfbonus",
-                "ChatMessageFlavor": "Text für Chatnachricht",
-                "CriticalDamageFormula": "Kritische Schadensformel",
-                "CriticalEffect": "Kritischer Effekt",
-                "CriticalHealingFormula": "Kritische Heilungsformel",
-                "DamageFormula": "Schadensformel",
-                "HealingFormula": "Heilungsformel",
-                "OtherFormula": "Andere Formel",
-                "SavingThrow": "Rettungswurf"
-            },
-            "Activation": {
-                "ActivationCondition": "Aktivierungsvoraussetzungen",
-                "ActivationCost": "Aktivierungskosten",
-                "Area": "Bereich",
-                "Duration": "Dauer",
-                "LimitedUses": "Begrenzte Nutzungen",
-                "Range": "Reichweite",
-                "Target": "Ziel"
-            },
-            "Ammunition": {
-                "AmmunitionType": "Ammunition Type",
-                "Capacity": "Capacity Settings",
-                "Details": "Ammunition Details",
-                "Type": {
-                    "Arrows": "Arrows",
-                    "Charges": "Charges",
-                    "Darts": "Darts",
-                    "Flares": "Flares",
-                    "Fuel": "Fuel",
-                    "HeavyRounds": "Heavy Rounds",
-                    "LongarmAndSniperRounds": "Longarm and Sniper Rounds",
-                    "Missiles": "Missiles",
-                    "None": "None",
-                    "Rockets": "Rockets",
-                    "SmallArmRounds": "Small Arm Rounds",
-                    "Shells": "Shells"
-                },
-                "UseCapacity": "Use Capacity"
-            },
-            "Attuned": "Verbunden",
-            "Augmentation": {
-                "Details": "Aufwertungsdetails",
-                "System": "Körperbereich",
-                "Type": "Typ"
-            },
-            "Capacity": {
-                "Capacity": "Magazin",
-                "CapacityMaxTooltip": "Die maximale Anzahl von Ladungen, die dieser Gegenstand aufnehmen kann",
-                "CapacityValueTooltip": "Die aktuelle Anzahl der Ladungen",
-                "HeaderTooltip": "Die Anzahl der Patronen, Ladungen, usw..., die von diesem Gegenstand aufgenommen werden können (z.B. die Anzahl der Ladungen, die eine Batterie aufnehmen kann)",
-                "Usage": "Verbrauch",
-                "UsageTooltip": "Die Anzahl der Ladungen, Munitionseinheiten, usw., die verbraucht werden, wenn dieser Gegenstand verwendet wird.",
-                "UsageValueTooltip": "Die Zeiteinheit, die verwendet wird, um festzustellen, wann die Ladung des Gegenstandes verbraucht ist."
-            },
-            "Categories": {
-                "AbilityScoreIncrease": "Attributswertsteigerung",
-                "Archetypes": "Archetypen",
-                "Armor": "Armor",
-                "Ammunition": "Ammunition",
-                "ArmorUpgrades": "Rüstungsverbesserungen",
-                "Augmentations": "Aufwertungen",
-                "Classes": "Klassen",
-                "Consumables": "Verbrauchsmaterialien",
-                "Containers": "Behälter",
-                "DroneChassis": "Drohnenchassis",
-                "DroneMods": "Drohnenmodifikationen",
-                "Equipment": "Ausrüstung",
-                "Feats": "Talente",
-                "Goods": "Waren",
-                "HybridItems": "Hybride Gegenstände",
-                "MagicItems": "Magische Gegenstände",
-                "MiscellaneousItems": "Sonstige Gegenstände",
-                "Races": "Rassen",
-                "Shields": "Schilde",
-                "Spells": "Zauber",
-                "StarshipAblativeArmors": "Starship Ablative Armors",
-                "StarshipArmors": "Starship Armors",
-                "StarshipComputers": "Starship Computers",
-                "StarshipCrewQuarters": "Starship Crew Quarters",
-                "StarshipDefensiveCountermeasures": "Starship Defensive Countermeasures",
-                "StarshipDriftEngine": "Starship Drift Engine",
-                "StarshipExpansionBays": "Starship Expansion Bays",
-                "StarshipFortifiedHulls": "Starship Fortified Hulls",
-                "StarshipFrames": "Raumschiffgrundstrukturen",
-                "StarshipOtherSystems": "Starship Other Systems",
-                "StarshipPowerCores": "Starship Power Cores",
-                "StarshipReinforcedBulkheads": "Starship Reinforced Bulkheads",
-                "StarshipSecuritySystems": "Starship Security Systems",
-                "StarshipSensors": "Starship Sensors",
-                "StarshipShields": "Starship Shields",
-                "StarshipThrusters": "Starship Thrusters",
-                "StarshipWeapons": "Raumschiffwaffen",
-                "TechnologicalItems": "Technische Gegenstände",
-                "Themes": "Motive",
-                "VehicleAttacks": "Vehicle Attacks",
-                "VehicleSystems": "Vehicle Systems",
-                "WeaponAccessories": "Weapon Accessories",
-                "WeaponFusions": "Waffenfusionen",
-                "Weapons": "Waffen"
-            },
-            "Consumable": {
-                "Action": "Aktion für Verbrauchsmaterial",
-                "DestroyWhenEmpty": "Zerstören wenn leer",
-                "OnUse": "Wird bei Benutzung verbraucht",
-                "Type": "Verbrauchsmaterialart",
-                "Usage": "Verbrauchsmaterialverwendung"
-            },
-            "Description": {
-                "Bulk": "Last",
-                "Hands": "Hände",
-                "Level": "Stufe",
-                "Price": "Preis",
-                "Quantity": "Menge",
-                "QuantityPerPack": "Pack size"
-            },
-            "Equipment": {
-                "Action": "Aktion für Ausrüstung",
-                "Category": "Ausrüstungsart",
-                "ContainerTooltip": "Die Ausrüstung kann typischerweise Rüstungsverbesserungen oder andere Gegenstände enthalten. Erhöhe die Lagerkapazität, um das Hinzufügen von Inhalten zu ermöglichen.",
-                "EAC": "Energetische Rüstungsklasse",
-                "KAC": "Kinetische Rüstungsklasse",
-                "PowerArmorDetails": "Servorüstungsdetails",
-                "SpeedAdjustment": "Bewegungsrateanpassung"
-            },
-            "EquipmentStatus": "Ausrüstungszustand",
-            "EquipmentUsage": "Ausrüstungsverbrauch",
-            "Equippable": "Equippable",
-            "Equipped": "Ausgerüstet",
-            "Feat": {
-                "ActionRecharge": "Aufladungsaktion",
-                "Charged": "Aufgeladen",
-                "FeatureAttack": "Fähigkeitsangriff",
-                "FeatureUsage": "Fähigkeitsanwendung",
-                "RechargeOn": "Aufladen durch",
-                "Requirements": "Voraussetzungen"
-            },
-            "Hybrid": {
-                "Details": "Hybrid Item Details"
-            },
-            "Identified": "Identifiziert",
-            "Magic": {
-                "Details": "Magic Item Details"
-            },
-            "MaxDex": "Max. Geschicklichkeitsmodifikator",
-            "NotProficient": "Not Proficient",
-            "Proficient": "Im Umgang geübt",
-            "Shield": {
-                "AcMaxDex": "Max dex bonus: {maxDex}",
-                "ACP": "ACP: {acp}",
-                "Action": "Schildaktion",
-                "Aligned": "Ausgerichtet",
-                "ArmorCheck": "Armor check penalty: {acp}",
-                "Bonus": "Schildbonus",
-                "Bonuses": "Wielded bonus: {wielded} / Aligned bonus: {aligned}",
-                "Details": "Schilddetails",
-                "Dex": "Dex: {dex}",
-                "Shield": "Shield",
-                "ShieldBonus": "Shield: {wielded} / {aligned}",
-                "Wielded": "Angelegt"
-            },
-            "ShipWeapon": {
-                "Activated": "Aktiviert",
-                "AttackBonus": "Angriffsbonus",
-                "BpCost": "Baupunktekosten",
-                "ItemType": "Raumschiffwaffe",
-                "Mounted": "Montiert",
-                "NotMounted": "Not Mounted",
-                "PowerCost": "Energiekerneinheiten",
-                "Range": "Reichweite",
-                "ReloadCost": "10 minutes",
-                "Source": "Quelle",
-                "Speed": "Speed: {speed} hexes",
-                "WeaponArc": "Schussbereich der Waffe",
-                "WeaponClass": "Waffenklassifikation",
-                "WeaponStatus": "Waffenzustand"
-            },
-            "Spell": {
-                "AllowedClasses": "Erlaubte Klassen",
-                "Casting": "Zauberwirken",
-                "Concentration": "Konzentration",
-                "Consumed": "Verbraucht",
-                "Cost": "Kosten (Cr)",
-                "Details": "Zauberdetails",
-                "Dismissible": "Aufhebbar",
-                "Effects": "Zaubereffekt",
-                "Level": "Zaubergrad",
-                "PreparationMode": "Zaubervorbereitungsmethode",
-                "Prepared": "Vorbereitet",
-                "Properties": "Zaubereigenschaften",
-                "Resistance": "Zauberwiderstand",
-                "School": "Zauberschule",
-                "SpellcastingMaterials": "Zaubermaterialien",
-                "Supply": "Supply"
-            },
-            "Technological": {
-                "Details": "Technological Item Details"
-            },
-            "Theme": {
-                "AbilityAdjustment": "Attributssanpassung",
-                "Details": "Charaktermotivdetails",
-                "Skill": "Fertigkeit"
-            },
-            "Unlimited": "Unbegrenzt",
-            "Upgrade": {
-                "AllowedArmorType": "Erlaubte Rüstungsart",
-                "Any": "Beliebig",
-                "ArmorUpgradeDetails": "Rüstungsverbesserungsdetails",
-                "Slots": "Plätze"
-            },
-            "VehicleAttack": {
-                "Type": "Vehicle Attack"
-            },
-            "VehicleSystem": {
-                "Type": "Vehicle System"
-            },
-            "Weapon": {
-                "Attack": "Waffenangriff",
-                "Category": "Waffenkategorie",
-                "Details": "Waffendetails",
-                "Properties": "Waffeneigenschaften",
-                "Type": "Waffenart",
-                "Usage": "Waffenverwendung"
-            },
-            "WeaponAccessory": {
-                "SupportedType": {
-                    "Any": "Any",
-                    "HeavyWeapon": "Heavy weapon",
-                    "MeleeWeapon": "Melee weapon",
-                    "MeleeWeaponSA": "Melee weapon & Smallarm",
-                    "Projectile": "Projectile",
-                    "RailedWeapon": "Railed weapon",
-                    "RailedWeaponSA": "Railed weapon & Smallarm",
-                    "SmallArm": "Smallarm"
-                }
-            }
-        },
+        "ItemNoAmmo": "{name} hat keine Munition mehr!",
         "ItemSheet": {
             "AbilityScoreIncrease": {
                 "Header": "Attributswertsteigerung",
                 "Instruction": "* Kreuze 4 Attribute an, die erhöht werden sollen.",
                 "ItemName": "Attributswertsteigerung: Stufe {level}",
                 "Label": "Attribute"
+            },
+            "ActorResource": {
+                "Base": "Base value",
+                "BaseTooltip": "(Required) The base value defines the base value of this resource. Modifiers may alter it.<br/>Attribute: @resources.type.subtype.base",
+                "CombatTracker": "Combat Tracker settings",
+                "DisplayAbsoluteValue": "Display Absolute Value",
+                "DisplayAbsoluteValueTooltip": "Should the displayed value in the combat tracker be absolute? i.e. -1 is displayed as 1, -2 as 2, etc.",
+                "Enabled": "Enabled",
+                "EnabledTooltip": "If unchecked this resource will not produce a key in the resources data format, nor will it have automation running on it.",
+                "ErrorDisabled": "Resource is currently disabled.",
+                "ErrorIncompleteData": "Resource is missing type, subType, or base value.",
+                "ErrorMissingFields": "Please fill in any of the missing fields.",
+                "ErrorNoBase": "Base value is a required field.",
+                "ErrorNoSubType": "Subtype is a required field.",
+                "ErrorNoType": "Type is a required field.",
+                "Header": "Resource Properties",
+                "Range": "Value range",
+                "RangeMode": "Range mode",
+                "RangeModeImmediate": "Immediate",
+                "RangeModePost": "Post",
+                "RangeModeTooltip": "(Advanced) Defines whether the range limitations are applied only after the modifiers are all processed, or for each modifier as they are being processed.<br/><br/>For example, if the range is set to maximum of 1, and the base value is 0, and you have a modifier of +2, and a modifier of -1, the different modes would work as follows:<br/><br/>Post: 0 + 2 - 1 would output 1, which does not exceed the range maximum.<br/><br/>Immediate: 0 + 2 - 1 would output 0. Because 0 + 2 is 2, which exceeds the range maximum of 1, so it gets clamped to 1. Then -1 is applied, producing 0.",
+                "RangeTooltip": "(Optional) Minimum and maximum values for this resource.<br/>The value cannot be lower than the range minimum, nor can it be higher than the range maximum.",
+                "ShowInCombatTracker": "Show in Combat Tracker",
+                "ShowInCombatTrackerTooltip": "If enabled, this resource will be visible in the combat tracker for quick reference.",
+                "ShowOwnerAndGMOnly": "Only shown for Owner and GM",
+                "ShowOwnerAndGMOnlyTooltip": "If enabled, this resource will only be visible in the combat tracker for the sheet owner and the GM.",
+                "Stage": "Calculation Stage",
+                "StageEarly": "Early",
+                "StageLate": "Late",
+                "StageTooltip": "The calculation stage affects when the modifiers for this resource are calculated.<br/><br/><strong>Early</strong><br/>Early actor resources are calculated before any of the other automations are run. At this point, all the computed actor values are not yet valid, such as strength modifier, fortitude save bonus, etc. Actor resources computed at this stage can be used in modifiers that affect actor attributes.<br/><br/><strong>Late</strong><br/>Late actor resources are calculated at the very end of the actor's modifiers. This means you can include the computed values of the actor into the actor resource. You will not be able to include late actor resources in a calculation that affect the actors attributes constantly. You can still use them in situational modifiers, however.",
+                "SubType": "Subtype",
+                "SubTypeTooltip": "(Required) Subtype makes up the second half of the resource identifier.<br/>For example: @resources.type.subtype.value",
+                "Type": "Type",
+                "TypeTooltip": "(Required) Type makes up the first half of the resource identifier.<br/>For example: @resources.type.subtype.value",
+                "Usage": "Attribute usage",
+                "UsageBaseValue": "Base value",
+                "UsageComputedValue": "Computed value",
+                "UsageTooltip": "What follows are a couple of example attributes how you may be able to access this resource in formulas:",
+                "Visualizations": "Conditional Visualization",
+                "VisualizationsIntro": "If resource value is..",
+                "VisualizationsModeEqual": "equal to",
+                "VisualizationsModeGreaterThan": "greater than",
+                "VisualizationsModeGreaterThanEqual": "greather than or equal to",
+                "VisualizationsModeLesserThan": "lesser than",
+                "VisualizationsModeLesserThanEqual": "lesser than or equal to",
+                "VisualizationsModeNotEqual": "not equal to",
+                "VisualizationsThen": "Then:",
+                "VisualizationsTitle": "Title:"
+            },
+            "Class": {
+                "SpellCasting": {
+                    "ClassLevel": "Class Level",
+                    "Header": "Spellcasting",
+                    "IsCaster": "Spellcaster",
+                    "KeyAbilityScore": "Key Ability Score",
+                    "SpellsKnown": "Spells Known",
+                    "SpellsKnownHeader": "Spells Known (by spell level)",
+                    "SpellsPerDay": "Spells Per Day",
+                    "SpellsPerDayBonus": "Bonus Spells Per Day",
+                    "SpellsPerDayBonusHeader": "Bonus Spells Per Day (by spell level)",
+                    "SpellsPerDayHeader": "Spells Per Day (by spell level)"
+                }
             },
             "Consumables": {
                 "Category": "Art des Verbrauchsmaterials"
@@ -1339,6 +1291,299 @@
                 "ContainerTooltip": "Waffen können in der Regel Waffenfusionen und Waffenverbesserungen enthalten. Erhöhen Sie die Lagerkapazität, um zusätzliche Verbesserungen und Fusionen zu ermöglichen."
             }
         },
+        "Items": {
+            "ACP": "Rüstungsmalus",
+            "Action": {
+                "AbilityModifier": "Attributsmodifikator",
+                "ActionTarget": {
+                    "ChatMessage": " against {actionTarget}",
+                    "EAC": "EAC",
+                    "KAC": "KAC",
+                    "KAC8": "KAC +8",
+                    "None": "No target",
+                    "Other": "Other",
+                    "StarshipAC": "AC",
+                    "StarshipTL": "TL",
+                    "Tag": "Targets: {actionTarget}",
+                    "Title": "Action Target",
+                    "Tooltip": "If this action targets a specific property, you can configure that here."
+                },
+                "ActionType": "Aktionstyp",
+                "AddDamageSection": "Add damage section",
+                "AddDamageSectionTooltip": "Add another damage section to this item.",
+                "AttackRollBonus": "Angriffswurfbonus",
+                "ChatMessageFlavor": "Text für Chatnachricht",
+                "CriticalDamageFormula": "Kritische Schadensformel",
+                "CriticalDamageHeader": "Critical Damage Sections",
+                "CriticalEffect": "Kritischer Effekt",
+                "CriticalHealingFormula": "Kritische Heilungsformel",
+                "DamageFormula": "Schadensformel",
+                "DamageFormulaTooltip": "The damage roll for this damage section.",
+                "DamageHeader": "Damage Sections",
+                "DamageName": "Damage Name",
+                "DamageNameTooltip": "A name you can specify to easily reference this attack element.",
+                "DamageNotes": "Damage Notes",
+                "DamageNotesTooltip": "The damage notes are displayed on the damage roll chat card. This is a great way to put helpful reminders, especially for GMs with complicated NPCs.",
+                "DamageSection": "Damage Section {section}",
+                "HealingFormula": "Heilungsformel",
+                "OtherFormula": "Andere Formel",
+                "RollNotes": "Roll Notes",
+                "RollNotesTooltip": "The roll notes are displayed on the action roll chat card. This is a great way to put helpful reminders, especially for GMs with complicated NPCs.",
+                "SavingThrow": "Rettungswurf",
+                "TitleAction": "Action",
+                "TitleActivation": "Activation"
+            },
+            "Activation": {
+                "ActivationCondition": "Aktivierungsvoraussetzungen",
+                "ActivationCost": "Aktivierungskosten",
+                "Area": "Bereich",
+                "Duration": "Dauer",
+                "LimitedUses": "Begrenzte Nutzungen",
+                "Range": "Reichweite",
+                "Target": "Ziel"
+            },
+            "Ammunition": {
+                "AmmunitionType": "Ammunition Type",
+                "Capacity": "Capacity Settings",
+                "Details": "Ammunition Details",
+                "Type": {
+                    "Arrows": "Arrows",
+                    "Caustrol": "Caustrol",
+                    "Charges": "Charges",
+                    "Darts": "Darts",
+                    "Flares": "Flares",
+                    "Flechettes": "Flechettes",
+                    "Fuel": "Fuel",
+                    "HeavyRounds": "Heavy Rounds",
+                    "LongarmAndSniperRounds": "Longarm and Sniper Rounds",
+                    "Missiles": "Missiles",
+                    "MoodGoo": "Mood Goo",
+                    "Nanites": "Nanites",
+                    "Nets": "Nets",
+                    "None": "None",
+                    "Rockets": "Rockets",
+                    "Sclerites": "Sclerites",
+                    "Shells": "Shells",
+                    "SmallArmRounds": "Small Arm Rounds",
+                    "Thasphalt": "Thasphalt",
+                    "ThasteronPellets": "Thasteron Pellets"
+                },
+                "UseCapacity": "Use Capacity"
+            },
+            "Attuned": "Verbunden",
+            "Augmentation": {
+                "Details": "Aufwertungsdetails",
+                "System": "Körperbereich",
+                "Type": "Typ"
+            },
+            "Capacity": {
+                "Capacity": "Magazin",
+                "CapacityMaxTooltip": "Die maximale Anzahl von Ladungen, die dieser Gegenstand aufnehmen kann",
+                "CapacityValueTooltip": "Die aktuelle Anzahl der Ladungen",
+                "HeaderTooltip": "Die Anzahl der Patronen, Ladungen, usw..., die von diesem Gegenstand aufgenommen werden können (z.B. die Anzahl der Ladungen, die eine Batterie aufnehmen kann)",
+                "Usage": "Verbrauch",
+                "UsageTooltip": "Die Anzahl der Ladungen, Munitionseinheiten, usw., die verbraucht werden, wenn dieser Gegenstand verwendet wird.",
+                "UsageValueTooltip": "Die Zeiteinheit, die verwendet wird, um festzustellen, wann die Ladung des Gegenstandes verbraucht ist."
+            },
+            "Categories": {
+                "AbilityScoreIncrease": "Attributswertsteigerung",
+                "Ammunition": "Ammunition",
+                "Archetypes": "Archetypen",
+                "Armor": "Armor",
+                "ArmorUpgrades": "Rüstungsverbesserungen",
+                "Augmentations": "Aufwertungen",
+                "Classes": "Klassen",
+                "Consumables": "Verbrauchsmaterialien",
+                "Containers": "Behälter",
+                "DroneChassis": "Drohnenchassis",
+                "DroneMods": "Drohnenmodifikationen",
+                "Equipment": "Ausrüstung",
+                "Feats": "Talente",
+                "Goods": "Waren",
+                "HybridItems": "Hybride Gegenstände",
+                "MagicItems": "Magische Gegenstände",
+                "MiscellaneousItems": "Sonstige Gegenstände",
+                "Races": "Rassen",
+                "Shields": "Schilde",
+                "Spells": "Zauber",
+                "StarshipAblativeArmors": "Starship Ablative Armors",
+                "StarshipArmors": "Starship Armors",
+                "StarshipComputers": "Starship Computers",
+                "StarshipCrewQuarters": "Starship Crew Quarters",
+                "StarshipDefensiveCountermeasures": "Starship Defensive Countermeasures",
+                "StarshipDriftEngine": "Starship Drift Engine",
+                "StarshipExpansionBays": "Starship Expansion Bays",
+                "StarshipFortifiedHulls": "Starship Fortified Hulls",
+                "StarshipFrames": "Raumschiffgrundstrukturen",
+                "StarshipOtherSystems": "Starship Other Systems",
+                "StarshipPowerCores": "Starship Power Cores",
+                "StarshipReinforcedBulkheads": "Starship Reinforced Bulkheads",
+                "StarshipSecuritySystems": "Starship Security Systems",
+                "StarshipSensors": "Starship Sensors",
+                "StarshipShields": "Starship Shields",
+                "StarshipThrusters": "Starship Thrusters",
+                "StarshipWeapons": "Raumschiffwaffen",
+                "TechnologicalItems": "Technische Gegenstände",
+                "Themes": "Motive",
+                "VehicleAttacks": "Vehicle Attacks",
+                "VehicleSystems": "Vehicle Systems",
+                "WeaponAccessories": "Weapon Accessories",
+                "WeaponFusions": "Waffenfusionen",
+                "Weapons": "Waffen"
+            },
+            "Consumable": {
+                "Action": "Aktion für Verbrauchsmaterial",
+                "DestroyWhenEmpty": "Zerstören wenn leer",
+                "ErrorNoUses": "{name} has no uses left!",
+                "OnUse": "Wird bei Benutzung verbraucht",
+                "Type": "Verbrauchsmaterialart",
+                "Usage": "Verbrauchsmaterialverwendung",
+                "UseAction": "Use",
+                "UseChatMessage": "Uses {consumableName}."
+            },
+            "Description": {
+                "Bulk": "Last",
+                "Hands": "Hände",
+                "Level": "Stufe",
+                "Price": "Preis",
+                "Quantity": "Menge",
+                "QuantityPerPack": "Pack size",
+                "QuantityPerPackTooltip": "Pack size is used to define how many of one item you buy for the full price. For example, you buy 30 small arm rounds at the cost of 40 credits. This helps with performing bulk and wealth calculations, as well as ammunition tracking."
+            },
+            "Equipment": {
+                "Action": "Aktion für Ausrüstung",
+                "Category": "Ausrüstungsart",
+                "ContainerTooltip": "Die Ausrüstung kann typischerweise Rüstungsverbesserungen oder andere Gegenstände enthalten. Erhöhe die Lagerkapazität, um das Hinzufügen von Inhalten zu ermöglichen.",
+                "EAC": "Energetische Rüstungsklasse",
+                "KAC": "Kinetische Rüstungsklasse",
+                "PowerArmorDetails": "Servorüstungsdetails",
+                "SpeedAdjustment": "Bewegungsrateanpassung"
+            },
+            "EquipmentStatus": "Ausrüstungszustand",
+            "EquipmentUsage": "Ausrüstungsverbrauch",
+            "Equippable": "Equippable",
+            "Equipped": "Ausgerüstet",
+            "Feat": {
+                "ActionRecharge": "Aufladungsaktion",
+                "Charged": "Aufgeladen",
+                "FeatureAttack": "Fähigkeitsangriff",
+                "FeatureUsage": "Fähigkeitsanwendung",
+                "RechargeOn": "Aufladen durch",
+                "Requirements": "Voraussetzungen"
+            },
+            "Goods": {
+                "Details": "Goods Details"
+            },
+            "Hybrid": {
+                "Details": "Hybrid Item Details"
+            },
+            "Identified": "Identifiziert",
+            "Magic": {
+                "Details": "Magic Item Details",
+                "LimitedWear": "Magical Item Worn Limit",
+                "LimitedWearCheckbox": "This item counts towards the worn magical item limit.",
+                "LimitedWearExceeded": "You have equipped too many magical items!"
+            },
+            "MaxDex": "Max. Geschicklichkeitsmodifikator",
+            "NotProficient": "Not Proficient",
+            "Proficient": "Im Umgang geübt",
+            "Shield": {
+                "ACP": "ACP: {acp}",
+                "AcMaxDex": "Max dex bonus: {maxDex}",
+                "Action": "Schildaktion",
+                "Aligned": "Ausgerichtet",
+                "ArmorCheck": "Armor check penalty: {acp}",
+                "Bonus": "Schildbonus",
+                "Bonuses": "Wielded bonus: {wielded} / Aligned bonus: {aligned}",
+                "Details": "Schilddetails",
+                "Dex": "Dex: {dex}",
+                "Shield": "Shield",
+                "ShieldBonus": "Shield: {wielded} / {aligned}",
+                "Wielded": "Angelegt"
+            },
+            "ShipWeapon": {
+                "Activated": "Aktiviert",
+                "AttackBonus": "Angriffsbonus",
+                "BpCost": "Baupunktekosten",
+                "ItemType": "Raumschiffwaffe",
+                "Mounted": "Montiert",
+                "NotMounted": "Not Mounted",
+                "PowerCost": "Energiekerneinheiten",
+                "Range": "Reichweite",
+                "ReloadCost": "10 minutes",
+                "Source": "Quelle",
+                "Speed": "Speed: {speed} hexes",
+                "WeaponArc": "Schussbereich der Waffe",
+                "WeaponClass": "Waffenklassifikation",
+                "WeaponStatus": "Waffenzustand"
+            },
+            "SpecialMaterials": {
+                "Title": "Special Materials"
+            },
+            "Spell": {
+                "AllowedClasses": "Erlaubte Klassen",
+                "Casting": "Zauberwirken",
+                "Concentration": "Konzentration",
+                "ConcentrationTooltip": "This spell requires concentration.<br/>You must use the 'Concentrate to Maintain Spell' action (CRB pg. 246) to maintain it.",
+                "Consumed": "Verbraucht",
+                "Cost": "Kosten (Cr)",
+                "Details": "Zauberdetails",
+                "Dismissible": "Aufhebbar",
+                "Effects": "Zaubereffekt",
+                "ErrorNoUses": "Failed to cast this spell as it has no uses remaining. Click this message to dismiss it.",
+                "IsVariableLevel": "Is Variable Level?",
+                "IsVariableLevelYes": "Yes",
+                "Level": "Zaubergrad",
+                "PreparationMode": "Zaubervorbereitungsmethode",
+                "Prepared": "Vorbereitet",
+                "Properties": "Zaubereigenschaften",
+                "Resistance": "Zauberwiderstand",
+                "School": "Zauberschule",
+                "SpellcastingMaterials": "Zaubermaterialien",
+                "Supply": "Supply"
+            },
+            "Technological": {
+                "Details": "Technological Item Details"
+            },
+            "Theme": {
+                "AbilityAdjustment": "Attributssanpassung",
+                "Details": "Charaktermotivdetails",
+                "Skill": "Fertigkeit"
+            },
+            "Unlimited": "Unbegrenzt",
+            "Upgrade": {
+                "AllowedArmorType": "Erlaubte Rüstungsart",
+                "Any": "Beliebig",
+                "ArmorUpgradeDetails": "Rüstungsverbesserungsdetails",
+                "Slots": "Plätze"
+            },
+            "VehicleAttack": {
+                "Type": "Vehicle Attack"
+            },
+            "VehicleSystem": {
+                "Type": "Vehicle System"
+            },
+            "Weapon": {
+                "Attack": "Waffenangriff",
+                "Category": "Waffenkategorie",
+                "Details": "Waffendetails",
+                "Properties": "Waffeneigenschaften",
+                "Type": "Waffenart",
+                "Usage": "Waffenverwendung"
+            },
+            "WeaponAccessory": {
+                "SupportedType": {
+                    "Any": "Any",
+                    "HeavyWeapon": "Heavy weapon",
+                    "MeleeWeapon": "Melee weapon",
+                    "MeleeWeaponSA": "Melee weapon & Smallarm",
+                    "Projectile": "Projectile",
+                    "RailedWeapon": "Railed weapon",
+                    "RailedWeaponSA": "Railed weapon & Smallarm",
+                    "SmallArm": "Smallarm"
+                }
+            }
+        },
         "KeyAbility": "Schlüsselattribut",
         "KineticArmorClass": "Kinetische RK",
         "Languages": "Sprachen",
@@ -1377,6 +1622,29 @@
         "LanguagesYsoki": "Ysokisch",
         "LevelLabel": "Zaubergrad",
         "LevelLabelText": "Stufe",
+        "Levels": {
+            "0": "0",
+            "1": "1st",
+            "10": "10th",
+            "11": "11th",
+            "12": "12th",
+            "13": "13th",
+            "14": "14th",
+            "15": "15th",
+            "16": "16th",
+            "17": "17th",
+            "18": "18th",
+            "19": "19th",
+            "2": "2nd",
+            "20": "20th",
+            "3": "3rd",
+            "4": "4th",
+            "5": "5th",
+            "6": "6th",
+            "7": "7th",
+            "8": "8th",
+            "9": "9th"
+        },
         "LightningReflexesHint": "Charaktertalent welches +2 auf Reflexrettüngswürfe gibt",
         "LightningReflexesLabel": "Blitzschnelle Reflexe",
         "LimitedUsePeriodsCharges": "Ladungen",
@@ -1415,18 +1683,19 @@
         "MigrationEndMigration": "Die Migration des Starfinder-Systems auf die Version {systemVersion} war erfolgreich!",
         "MigrationErrorMessage": "Es gab einen Fehler bei der Migration Ihrer Starfinder-Daten. Du hast ein Backup gemacht, richtig?",
         "MigrationSuccessfulMessage": "Deine Starfinder-Daten wurden erfolgreich auf die aktuelle Version migriert.",
+        "MigrationSuccessfulRefreshMessage": "Your Starfinder data was successfully migrated to the current version.<br/><br/>Please refresh your game to finalize migration.",
         "ModifierACPEffectingArmorTypeAll": "Alle Rüstungen",
         "ModifierACPEffectingArmorTypeHeavy": "Nur schwere Rüstungen",
         "ModifierACPEffectingArmorTypeLight": "Nur leichte Rüstungen",
         "ModifierACPEffectingArmorTypePower": "Nur Servorüstungen",
         "ModifierAppTitle": "Modifikator bearbeiten: {name}",
         "ModifierArmorClassBoth": "Beide",
+        "ModifierEffectTypeAC": "Rüstungsklasse",
+        "ModifierEffectTypeACP": "Rüstungsmalus",
         "ModifierEffectTypeAbilityCheck": "Attributsprüfung",
         "ModifierEffectTypeAbilityChecks": "Attributsprüfungen",
         "ModifierEffectTypeAbilityScore": "Attributswert",
         "ModifierEffectTypeAbilitySkills": "Attributsfertigkeiten",
-        "ModifierEffectTypeAC": "Rüstungsklasse",
-        "ModifierEffectTypeACP": "Rüstungsmalus",
         "ModifierEffectTypeAllSkills": "Alle Fertigkeiten",
         "ModifierEffectTypeCMD": "RK ggn. Kampfmanöver",
         "ModifierEffectTypeHeaderLabel": "Betroffenes Attribut",
@@ -1446,16 +1715,10 @@
         "ModifierNameTooltip": "Der Name des Modifikators",
         "ModifierNotesLabel": "Notizen",
         "ModifierNotesTooltip": "Beliebige weitere Notizen über den Modifikator",
-        "Modifiers": "Modifikatoren",
         "ModifierSaveHighest": "Höchster",
         "ModifierSaveLowest": "Niedrigster",
-        "ModifiersConditionsTabLabel": "Zustände",
-        "ModifiersItemTabLabel": "Gegenstand",
-        "ModifiersMiscTabLabel": "Sonstiges",
         "ModifierSourceLabel": "Quelle",
         "ModifierSourceTooltip": "Woher kommt dieser Modifikator? Von einem Gegenstand? Von einem Zauberspruch? Von einem anderen Charakter?",
-        "ModifiersPermanentTabLabel": "Permanent",
-        "ModifiersTemporaryTabLabel": "Temporär",
         "ModifierTitle": "Modifikator",
         "ModifierTypeAbility": "Fähigkeit",
         "ModifierTypeArmor": "Rüstung",
@@ -1470,15 +1733,25 @@
         "ModifierTypeLuck": "Glück",
         "ModifierTypeMorale": "Moral",
         "ModifierTypeRacial": "Volk",
+        "ModifierTypeResistance": "Resistance",
         "ModifierTypeTooltip": "Die Art des Modifikators. Wird verwendet, um herauszufinden, welcher Modifikator zu verwenden ist, wenn mehrere Modifikatoren vom gleichen Typ sind (normalerweise der höchste).",
         "ModifierTypeUntyped": "Nicht typisiert",
         "ModifierValueAffectedHeaderLabel": "Betroffener Wert",
         "ModifierValueAffectedLabel": "Spezifischer betroffener Wert",
         "ModifierValueAffectedTooltip": "Dies bestimmt einen Wert, der genutzt wird, wenn das Attribut viele mögliche Werte hat",
-        "Necrograft": "Nekrotransplantate",
-        "None": "Keine",
-        "Notes": "Notizen",
+        "Modifiers": "Modifikatoren",
+        "ModifiersConditionsTabLabel": "Zustände",
+        "ModifiersItemTabLabel": "Gegenstand",
+        "ModifiersMiscTabLabel": "Sonstiges",
+        "ModifiersPermanentTabLabel": "Permanent",
+        "ModifiersTemporaryTabLabel": "Temporär",
         "NPCSheet": {
+            "Biography": {
+                "Organization": {
+                    "GroupSize": "Organization size",
+                    "GroupSizeTooltip": "The organization size goes from the smallest typical group (usually 1) to the largest typical group. This is used primarily by the alien browser to find creatures that match the group size filter."
+                }
+            },
             "Features": {
                 "Actions": "Actions",
                 "ActiveItems": "Active Feats",
@@ -1487,22 +1760,37 @@
                 "Features": "Passive Feats"
             },
             "Header": {
+                "AbilityDC": "Ability DC",
+                "AbilityDCTooltip": "The ability DC this NPC has. All of the NPCs abilities that have a saving throw associated with them typically use this value, unless they are spells.<br/><br/>This might not be properly integrated into every ability yet.",
                 "AlignmentPlaceHolderText": "NG",
                 "AuraPlaceHolderText": "Aura",
+                "BaseSpellDC": "Base Spell DC",
+                "BaseSpellDCTooltip": "The base spell DC this NPC has. All of the NPCs spells that have a saving throw associated with them typically use this value, plus the spell level.",
                 "NamePlaceHolderText": "Charaktername",
                 "RaceAndGraftsPlaceHolderText": "Geschlecht, Volk, und Klasse/Transplantate",
                 "SourcePlaceHolderText": "Quelle",
-                "TypePlaceHolderText": "Art (Unterart)"
+                "SubtypePlaceHolderText": "Unterart",
+                "TypePlaceHolderText": "Art"
             },
             "Interface": {
                 "Conditions": {
-                    "Warning": "* NSCs unterstützen noch keine automatischen Berechnungen der Modifikatoren!"
+                    "Warning": "Old Style NPCs do not support automatic modifier calculations, convert this NPC to the new style using the duplicate button on the Attributes tab."
                 },
                 "CreateItem": {
                     "Button": "Objekt erstellen",
                     "Name": "Neues Objekt",
                     "Note": "Wähle die Art des Objektes, das du erstellen möchtest.",
                     "Title": "Neues Objekt erstellen"
+                },
+                "DuplicateNewStyle": {
+                    "Button": "Duplicate as new style NPC",
+                    "ButtonTooltip": "Clicking this button will create a new style NPC actor sheet, duplicating the data and items on this actor.",
+                    "DialogCancelButton": "Cancel",
+                    "DialogMessage": "You are duplicating an unlinked token actor, do you wish to create the new style NPC using the unlinked actor data, or the original sheet data?",
+                    "DialogOriginalActorButton": "Duplicate Original Actor",
+                    "DialogTitle": "Use original actor?",
+                    "DialogUnlinkedActorButton": "Duplicate Unlinked Actor",
+                    "ErrorCreateActor": "Something went wrong converting this actor. Check your user role permissions.<br/><br/>Click to dismiss."
                 },
                 "Navigation": {
                     "Conditions": "Zustände"
@@ -1512,6 +1800,9 @@
                 "Inventory": "Inventory"
             }
         },
+        "Necrograft": "Nekrotransplantate",
+        "None": "Keine",
+        "Notes": "Notizen",
         "NpcToggleSkillsDialogTitle": "NSC-Fertigkeiten umschalten",
         "NumberOfArms": "Anzahl der Arme",
         "Organization": "Organization",
@@ -1536,26 +1827,53 @@
         "RepairDroneDialogTitle": "Drohne reparieren",
         "RepairDroneUnnecessary": "{name} hat bereits volle Trefferpunkte, eine Reparatur ist nicht notwendig.",
         "Resolve": "Reserve",
-        "RestButton": "Rast",
-        "RestCancel": "Abbrechen",
-        "RestL": "Lange Rast",
-        "RestS": "Kurze Rast",
-        "RestSActionHeader": "Einen Reservepunkt verwenden?",
-        "RestSChatMessage": "{name} macht eine kurze 10-minütige Rast.",
-        "RestSChatMessageRestored": "{name} nimmt eine kurze 10-minütige Rast und verwendet dabei {spentRP} Reservepunkt(e), um {regainedSP} Ausdauerpunkt(e) wiederherzustellen.",
-        "RestSDescription": "Eine kurze Rast einlegen? Bei einer kurzen Rast verwendest du einen Reservepunkt, um alle Ausdauerpunkte wiederherzustellen.",
-        "RestSTitle": "Kurze 10-minütige Rast",
+        "Rest": {
+            "Button": "Rast",
+            "Cancel": "Abbrechen",
+            "Long": {
+                "ChatMessage": {
+                    "AbilityDamage": "Reduced {ability} damage by {amount}",
+                    "Header": "{name} takes a full night's rest and recovers:",
+                    "HeaderNoRecovery": "{name} takes a full night's rest.",
+                    "HitPoints": "{deltaHP} Hit points",
+                    "Item": "The item '{itemName}' has recharged its uses.",
+                    "ResolvePoints": "{deltaRP} Resolve points",
+                    "SpellSlots": "{deltaSS} Spell slots",
+                    "StaminaPoints": "{deltaSP} Stamina points"
+                },
+                "Dialog": {
+                    "Description": "<p>Take a night's rest?</p><p>On a night's rest you will recover 1 hit point per character level, all stamina points, all resolve points, class resources, limited use item charges, and spell slots.</p>",
+                    "Title": "Night's Rest"
+                },
+                "Title": "Lange Rast"
+            },
+            "Short": {
+                "ActionHeader": "Einen Reservepunkt verwenden?",
+                "ChatMessage": {
+                    "Message": "{name} macht eine kurze 10-minütige Rast.",
+                    "Restored": "{name} nimmt eine kurze 10-minütige Rast und verwendet dabei {spentRP} Reservepunkt(e), um {regainedSP} Ausdauerpunkt(e) wiederherzustellen."
+                },
+                "DialogDescription": "Eine kurze Rast einlegen? Bei einer kurzen Rast verwendest du einen Reservepunkt, um alle Ausdauerpunkte wiederherzustellen.",
+                "DialogTitle": "Kurze 10-minütige Rast",
+                "Title": "Kurze Rast"
+            }
+        },
         "Rolls": {
             "AttackRoll": "Attack Roll",
             "AttackRollFull": "Attack Roll - {name}",
             "Character": {
                 "Charge": "Charge",
+                "ChargeTooltip": "After moving, you can make a single melee attack. You take a –2 penalty to the attack roll and a –2 penalty to your AC until the start of your next turn.",
                 "FightDefensively": "Fight Defensively",
+                "FightDefensivelyTooltip": "You take penalty to attack rolls this round to gain a +2 bonus to your AC until the start of your next turn.",
                 "Flanking": "Flanking",
+                "FlankingTooltip": "When making a melee attack, you gain a bonus to attack rolls if your opponent is threatened by another creature on its opposite border or opposite corner.",
                 "FullAttack": "Full Attack",
+                "FullAttackTooltip": "You can spend a full action to make two attacks, each with a penalty to the attack rolls.",
                 "HarryingFire": "Harrying Fire bonus",
                 "HarryingFireTooltip": "Enable this bonus when attacking a target affected by Harrying Fire.",
-                "Nonlethal": "Nonlethal"
+                "Nonlethal": "Nonlethal",
+                "NonlethalTooltip": "You can use a weapon that deals lethal damage to deal nonlethal damage instead, but you take a penalty to your attack roll."
             },
             "DamageRoll": "Schadenswurf",
             "DamageRollFull": "Schadenswurf - {name}",
@@ -1574,17 +1892,28 @@
                 "SituationalBonusTooltip": "Are there any additional bonuses that apply to this roll? (For example, range increments)"
             },
             "Dice": {
+                "AbilityCheckTitle": "Ability Check - {label}",
                 "Advantage": "Advantage",
                 "AdvantageTooltip": "Roll with advantage.",
                 "CriticalDamage": "Critical",
                 "CriticalDamageTooltip": "Roll critical damage.",
+                "CriticalEffect": "Critical Effect: {criticalEffect}",
+                "CriticalFlavor": "{title} (Critical)",
+                "CriticalFlavorWithEffect": "{title} (Critical; {criticalEffect})",
+                "CriticalHit": "Critical Hit",
                 "Disadvantage": "Disadvantage",
                 "DisadvantageTooltip": "Roll with disadvantage.",
+                "Formula": {
+                    "AdditionalBonus": " {bonus} [Additional Bonus]"
+                },
                 "Normal": "Normal",
                 "NormalDamage": "Normal",
                 "NormalDamageTooltip": "Roll normal damage.",
                 "NormalTooltip": "Normal roll.",
-                "Roll": "Roll"
+                "Roll": "Roll",
+                "SaveTitle": "Save - {label}",
+                "SkillCheckTitle": "Skill Check - {skill}",
+                "SkillCheckTitleWithProfession": "Skill Check - {skill} ({profession})"
             },
             "HealingRoll": "Heilungswurf",
             "HealingRollFull": "Heilungswurf - {name}",
@@ -1627,6 +1956,7 @@
         },
         "Save": "Speichern",
         "SaveAbilityModTooltip": "Attributsmodifikator: {mod} ({ability})",
+        "SaveBaseModifier": "Base Save: {base}",
         "SaveClassModTooltip": "Klassenmodifikator: {mod} ({class})",
         "SaveDescriptorDisbelieve": "anzweifeln",
         "SaveDescriptorHalf": "halb",
@@ -1638,12 +1968,16 @@
         "SaveModifiersTooltip": "{type} Bonus: {mod} ({source})",
         "SaveProgressionFast": "Schnell",
         "SaveProgressionSlow": "Langsam",
-        "SenesBL": "Blindsicht",
-        "SenesBS": "Blindgespür",
-        "SenesDark": "Dunkelsicht",
-        "SenesLLV": "Dämmersicht",
-        "Senses": "Sinne",
-        "SensesST": "Hindurchspüren",
+        "SensesTypes": {
+            "GlobalIlluminationThresholdMessage": "<strong>Starfinder System</strong><br />It is recommended to keep the Global Illumination Threshold enabled in order for features such as Low Light Vision to function correctly.",
+            "Senses": "Sinne",
+            "SensesBL": "Blindsicht",
+            "SensesBS": "Blindgespür",
+            "SensesDark": "Dunkelsicht",
+            "SensesLLV": "Dämmersicht",
+            "SensesLLVDark": "Dämmersicht & Dunkelsicht",
+            "SensesST": "Hindurchspüren"
+        },
         "Settings": {
             "Advantage": {
                 "Hint": "Erlaubt es, beim Würfeln die Vor- oder Nachteile umzuschalten.",
@@ -1652,6 +1986,10 @@
             "AlwaysShowQuantity": {
                 "Hint": "Always shows the quantity of items, even if it is 0 or 1. You will have to refresh your window before this change will take effect.",
                 "Name": "Always show item quantity"
+            },
+            "AutoAddUnarmedStrike": {
+                "Hint": "When checked, the unarmed strike item will be automatically added to any new player character actors.",
+                "Name": "Automatically add Unarmed Strike to new characters"
             },
             "AutoCollapseCard": {
                 "Hint": "Klappt die Beschreibungen der Objektkarten im Chat-Protokoll automatisch zusammen",
@@ -1666,10 +2004,25 @@
                     "Disabled": "Deaktiviert",
                     "Enabled": "Runden, Phasen und Züge",
                     "OnlyRounds": "Nur Runden",
-                    "RoundsPhases": "Runden und Phasen"
+                    "RoundsPhases": "Runden und Phasen",
+                    "RoundsTurns": "Rounds and turns"
                 },
                 "VehicleChaseHint": "Lege fest, welche Chatkarten für Kämpfe im Fahrzeugkampf angezeigt werden.",
                 "VehicleChaseName": "Fahrzeugverfolgungsjagden"
+            },
+            "CombatTiebreaker": {
+                "Hint": "Automatically add the initiative modifier divided by 100 to the roll, to help with tie breakers.",
+                "Name": "Initiative Roll Tie Breaker"
+            },
+            "CurrencyLocale": {
+                "Hint": "What locale to use for currency displays in inventory popups, etc.",
+                "Name": "Currency Locale"
+            },
+            "DamageRoundingAdvantage": {
+                "Hint": "In the case of fractional damage, alternate rounding up or down in the advantage of the attacker, or the defender.",
+                "Name": "Damage Rounding Advantage",
+                "ValueAttacker": "Attacker",
+                "ValueDefender": "Defender"
             },
             "DamageWithAttack": {
                 "Hint": "Automatically follow up an attack roll with a damage roll.",
@@ -1691,6 +2044,14 @@
                 "Hint": "Enables the Galactic Trade subsystem, allowing the maximum BP on a ship to be 5% higher than normal, and adds BPs to the ship inventory as credits.",
                 "Name": "Enable Galactic Trade"
             },
+            "SFRPGTheme": {
+                "Hint": "When enabled, a few minor tweaks to Foundry's colours will be made to match Starfinder's colour scheme.",
+                "Name": "Custom SFRPG theme"
+            },
+            "ScalingCantrips": {
+                "Hint": "Enables the Scaling Cantrips variant rule from Galactic Magic pg. 88. Changing this setting will alter the formulas of all affected spells on all actors, so can take a while if you have lots.",
+                "Name": "Enable Scaling Cantrips"
+            },
             "StarshipActionsCrit": {
                 "Hint": "Display state for the critical effect of starship actions.",
                 "Name": "Starship Actions Critical Effect",
@@ -1703,6 +2064,10 @@
             "StarshipActionsSource": {
                 "Hint": "Compendium key containing the starship action definitions.",
                 "Name": "Starship Actions Source Compendium"
+            },
+            "TokenConditionLabels": {
+                "Hint": "Adds text labels to the token conditions.",
+                "Name": "Token condition labels"
             },
             "UseCustomChatCard": {
                 "Hint": "Schaltet zwischen den neuen benutzerdefinierten Chat-Karten und den ursprünglichen um.",
@@ -1873,6 +2238,7 @@
         "SkillDip": "Diplomatie",
         "SkillDis": "Verkleiden",
         "SkillEng": "Technik",
+        "SkillGun": "Gunnery",
         "SkillInt": "Einschüchtern",
         "SkillLsc": "Biowissenschaften",
         "SkillMed": "Medizin",
@@ -1884,13 +2250,8 @@
         "SkillProficiencyLevelClassSkill": "Klassenfertigkeit",
         "SkillPsc": "Naturwissenschaften",
         "SkillSen": "Motiv erkennen",
-        "SkillsHeaderAbility": "Attribut",
-        "SkillsHeaderModifier": "Modifikator",
-        "SkillsHeaderName": "Name",
-        "SkillsHeaderRanks": "Ränge",
         "SkillSle": "Fingerfertigkeit",
         "SkillSte": "Heimlichkeit",
-        "SkillsToggleHeader": "Fertigkeiten",
         "SkillSur": "Überlebenskunst",
         "SkillTooltipAbilityMod": "Attributsmodifikator: {abilityMod} ({abilityAbbr})",
         "SkillTooltipMiscMod": "Sonstige Modifikatoren: {mod}",
@@ -1898,10 +2259,31 @@
         "SkillTooltipThemeMod": "Charaktermotivmodifikator: {mod}",
         "SkillTooltipTrainedClassSkill": "Modifikator für geübte Klassenfertigkeiten: {mod}",
         "SkillTrainedOnly": "Nur geübt",
+        "SkillsHeaderAbility": "Attribut",
+        "SkillsHeaderModifier": "Modifikator",
+        "SkillsHeaderName": "Name",
+        "SkillsHeaderRanks": "Ränge",
+        "SkillsToggleHeader": "Fertigkeiten",
         "SortByFilterLevel": "Stufe",
         "SortByFilterName": "Name",
         "Space": "Angriffsfläche",
         "Special": "Spezial",
+        "SpecialMaterials": {
+            "Abysium": "Abysium",
+            "Adamantine": "Adamantine Alloy",
+            "ColdIron": "Cold Iron",
+            "Diatha": "Diatha",
+            "Djezet": "Djezet",
+            "Horacalcum": "Horacalcum",
+            "Inubrix": "Inubrix",
+            "Khefak": "Khefak Armor",
+            "Noqual": "Noqual",
+            "Nyblantine": "Nyblantine",
+            "PurpleCores": "Purple Cores",
+            "Siccatite": "Siccatite",
+            "Silver": "Silver",
+            "Voidglass": "Voidglass"
+        },
         "SpecialTraits": "Spezialmerkmale",
         "Speed": "Bewegungsrate",
         "SpeedSpecial": "Spezielle Bewegungsrate",
@@ -1926,14 +2308,26 @@
             "EditItem": "Objekt bearbeiten",
             "NoSpells": "Keine Zaubersprüche für diese Auswahl von Filtern gefunden.",
             "SearchSpell": "Zauber suchen",
-            "Spellbook": "Zauberbuch",
             "SpellCastingAbility": "Zauberattribut",
             "SpellSchool": "Zauberschule",
             "SpellUsage": "Zeitaufwand",
+            "Spellbook": "Zauberbuch",
             "Uses": "Anwendungen"
         },
         "SpellBrowserSearchHint": "",
         "SpellCantripLabel": "Zaubertrick",
+        "SpellCasting": {
+            "AllowedClasses": "Allowed Classes",
+            "ButtonCast": "Cast",
+            "ConsumeSlot": "Consume Spell Slot?",
+            "ConsumeSlotYes": "Yes",
+            "ErrorNoSlot": "You are not able to cast this spell using spell slots, as you have no available spell slots. You may opt to cast it without consuming any spell slots.",
+            "Header": "Configure how you would like to cast the {spellName} spell.",
+            "SelectSpellSlot": "Cast with Spell Slot",
+            "SpellLabelClass": "{className} - {spellSlot} ({remainingSlots} Slots)",
+            "SpellLabelGeneral": "{spellSlot} ({remainingSlots} Slots)",
+            "Title": "{spellName}: Spell Configuration"
+        },
         "SpellPreparationModesAlways": "Immer verfügbar",
         "SpellPreparationModesInnate": "Angeborenes Zauberwirken",
         "SpellResistance": "Zauberresistenz",
@@ -1977,6 +2371,7 @@
                 "Header": "Starship Crew",
                 "IsNPCCrew": "Is NPC crew",
                 "MagicOfficers": "Magische Offiziere",
+                "NPCGunnerRanksMessage": "While ranks aren't relevant to an NPC's gunnery modifier, some statblocks may include the Gunner's level, which you can store here. You can otherwise safely leave this box blank.",
                 "Passengers": "Passagiere",
                 "Pilot": "Pilot",
                 "ScienceOfficers": "Wissenschaftsoffiziere",
@@ -2032,6 +2427,8 @@
                 "AblativeTooHighTooltip": "Either the total of installed ablative is too high, or the sum total of current ablative score is too high.",
                 "ShieldHighestTooHigh": "One or more quadrants exceed limits!",
                 "ShieldHighestTooHighTooltip": "Ein Schildquadrant darf nicht mehr als 70% der gesamten Schildzuweisung betragen, da das für jeden Schild verfügbare Minimum 10% betragen muss. (Weitere Informationen finden Sie im Grundregelwerk auf S. 302)",
+                "ShieldTotalTooHigh": "Shield total exceeds maximum!",
+                "ShieldTotalTooHighTooltip": "The total sum of shields exceeds the shield's maximum output.",
                 "Shields": {
                     "Aft": "Achternschilde",
                     "Conventional": "Shields",
@@ -2040,9 +2437,7 @@
                     "Header": "Schilde",
                     "Port": "Backbordschilde",
                     "Starboard": "Steuerbordschilde"
-                },
-                "ShieldTotalTooHigh": "Shield total exceeds maximum!",
-                "ShieldTotalTooHighTooltip": "The total sum of shields exceeds the shield's maximum output."
+                }
             },
             "Features": {
                 "ExpansionBays": "Expansion Bays ({current} / {max})",
@@ -2074,10 +2469,10 @@
             },
             "Header": {
                 "BP": "BP",
-                "CriticalThreshold": "Critical Threshold",
                 "CT": "CT",
-                "DamageThreshold": "Damage Threshold",
+                "CriticalThreshold": "Critical Threshold",
                 "DT": "DT",
+                "DamageThreshold": "Damage Threshold",
                 "FrameMissing": "Fehlende Grundstruktur",
                 "HullPointIncrementTooltip": "This is the number of hull points that are added when the ship reaches tier 4 (and every 4 tiers after)",
                 "Max": "Max",
@@ -2104,8 +2499,8 @@
                 "Base": "Base: 10",
                 "ComputerBonus": "Computer Bonus: {mod} ({source})",
                 "MiscModifier": "Misc modifier: {value}",
-                "PilotingBonus": "Piloting Bonus: {value}",
                 "PilotSkillBonus": "Pilot Skill Bonus: {value}",
+                "PilotingBonus": "Piloting Bonus: {value}",
                 "SizeModifier": "Size modifier: {value}",
                 "UnevenAblative": "Uneven Ablative: {mod}"
             },
@@ -2162,15 +2557,19 @@
         "TempHPMaxPlaceHolderText": "+Max",
         "TempHPPlaceHolderText": "+Temp",
         "ThemePlaceHolderText": "Charaktermotiv",
+        "Tippy": {
+            "Attributes": "Attributes:",
+            "ErrorNoTitle": "You must define a title for the tooltip."
+        },
         "ToggleSkillsButtonLabel": "Fertigkeiten umschalten",
         "Touch": "Berührung",
         "TraitArmorProf": "Umgang mit Rüstungen",
         "TraitWeaponProf": "Umgang mit Waffen",
+        "UPBs": "UPB's",
         "Units": {
             "Speed": "ft."
         },
         "Unlimited": "Unbegrenzt",
-        "UPBs": "UPB's",
         "VehicleAttackSheet": {
             "Details": {
                 "IgnoresHardness": "Ignores hardness"
@@ -2181,28 +2580,6 @@
             "Header": {
                 "Save": "Save DC",
                 "SaveTooltip": "<strong>Save DC</strong><br/>This is the saving throw modifier for this attack."
-            }
-        },
-        "Vehicles": {
-            "VehicleCoverTypes": {
-                "Cover": "Deckung",
-                "None": "Keine",
-                "Partial": "Teilweise Deckung",
-                "Soft": "Weiche Deckung",
-                "Improved": "Improved cover",
-                "Total": "Vollständige Deckung"
-            },
-            "VehicleTypes": {
-                "Air": "Luft",
-                "Hover": "Hover",
-                "Land": "Land",
-                "Landa": "Land und Luft",
-                "Landatw": "Land, air, tunneling and water",
-                "Landaw": "Land, air and water",
-                "Landt": "Land and tunneling",
-                "Landtw": "Land, tunneling and water",
-                "Landw": "Land und Wasser",
-                "Water": "Wasser"
             }
         },
         "VehicleSheet": {
@@ -2297,8 +2674,6 @@
         "VehicleSystemSheet": {
             "CanBeActivated": "Can be activated",
             "CanBeActivatedTooltip": "This system has an activated state.",
-            "isActivated": "Is activated",
-            "isActivatedTooltip": "Is currently activated",
             "Piloting": "Piloting",
             "PilotingTooltip": "The Piloting modifier to apply when using this system to pilot.",
             "Senses": "Senses",
@@ -2306,7 +2681,31 @@
             "UseForSenses": "Use for Senses",
             "UseForSensesTooltip": "This system can be used to make perception checks.",
             "UseToPilot": "Use to Pilot",
-            "UseToPilotTooltip": "This system can be used to make piloting rolls when activated."
+            "UseToPilotTooltip": "This system can be used to make piloting rolls when activated.",
+            "isActivated": "Is activated",
+            "isActivatedTooltip": "Is currently activated"
+        },
+        "Vehicles": {
+            "VehicleCoverTypes": {
+                "Cover": "Deckung",
+                "Improved": "Improved cover",
+                "None": "Keine",
+                "Partial": "Teilweise Deckung",
+                "Soft": "Weiche Deckung",
+                "Total": "Vollständige Deckung"
+            },
+            "VehicleTypes": {
+                "Air": "Luft",
+                "Hover": "Hover",
+                "Land": "Land",
+                "Landa": "Land und Luft",
+                "Landatw": "Land, air, tunneling and water",
+                "Landaw": "Land, air and water",
+                "Landt": "Land and tunneling",
+                "Landtw": "Land, tunneling and water",
+                "Landw": "Land und Wasser",
+                "Water": "Wasser"
+            }
         },
         "WeaponCategoriesCryo": "Kryowaffen",
         "WeaponCategoriesDisintegrator": "Auflösungswaffen",
@@ -2340,7 +2739,7 @@
         "WeaponProficiencySniper": "Scharfschützenwaffen",
         "WeaponProficiencySpecial": "Spezialwaffen",
         "WeaponPropertiesAeon": "Aionen",
-        "WeaponPropertiesAeonTooltip": "A weapon that has the aeon special property includes a socket that can house an aeon stone. As a standard action, you can slot an aeon stone into the socket or remove it. You can slot an aeon stone into a weapon only if the weapon has an item level equal to or greater than the aeon stone’s item level. You don’t benefit from the stone’s normal abilities while the stone is slotted into a weapon. Instead, an aeon weapon with a slotted aeon stone gains the boost weapon special property, provided it doesn’t have the blast or unwieldy properties. The amount of the boost’s damage increase is dependent on the item level of the slotted aeon stone, as follows: level 1–5, 1d4; levels 6–10, 1d6; levels 11–15, 1d8; levels 16–20, 1d10.\n\nA slotted aeon stone has a number of charges per day equal to the stone’s item level. Utilizing the boost special property the stone provides spends charges from the stone equal to the weapon’s usage value. If the stone lacks enough charges, the boost attempt has no effect. An aeon stone that has had any daily charges expended in this way turns a dull color and doesn’t confer its usual benefits if removed from the aeon weapon.",
+        "WeaponPropertiesAeonTooltip": "A weapon that has the aeon special property includes a socket that can house an aeon stone. As a standard action, you can slot an aeon stone into the socket or remove it. You can slot an aeon stone into a weapon only if the weapon has an item level equal to or greater than the aeon stone’s item level. You don’t benefit from the stone’s normal abilities while the stone is slotted into a weapon. Instead, an aeon weapon with a slotted aeon stone gains the boost weapon special property, provided it doesn’t have the blast or unwieldy properties. The amount of the boost’s damage increase is dependent on the item level of the slotted aeon stone, as follows: level 1–5, 1d4; levels 6–10, 1d6; levels 11–15, 1d8; levels 16–20, 1d10.<br><br>A slotted aeon stone has a number of charges per day equal to the stone’s item level. Utilizing the boost special property the stone provides spends charges from the stone equal to the weapon’s usage value. If the stone lacks enough charges, the boost attempt has no effect. An aeon stone that has had any daily charges expended in this way turns a dull color and doesn’t confer its usual benefits if removed from the aeon weapon.",
         "WeaponPropertiesAmmunition": "Munition",
         "WeaponPropertiesAnalog": "Analog",
         "WeaponPropertiesAnalogTooltip": "This weapon does not use any advanced electronics, computer systems, or electrical power sources. It is immune to abilities that target technology. While this use of the word “analog” is not technically correct when referring to technology, use of the term in this way has become common throughout the Pact Worlds.",
@@ -2351,9 +2750,9 @@
         "WeaponPropertiesAurora": "Aurora",
         "WeaponPropertiesAuroraTooltip": "When an aurora weapon strikes a target, the creature glows with a soft luminescence for 1 minute. This negates invisibility effects and makes it impossible for the target to gain concealment from or hide in areas of shadow or darkness.",
         "WeaponPropertiesAutomatic": "Automatisch",
-        "WeaponPropertiesAutomaticTooltip": "In addition to making ranged attacks normally, a weapon with this special property can fire in fully automatic mode. No action is required to toggle a weapon between making normal ranged attacks and using automatic mode.\n\nWhen you make a full attack with a weapon in automatic mode, you can attack in a cone with a range of half the weapon’s range increment. This uses all the weapon’s remaining ammunition. Roll one attack against each target in the cone, starting with those closest to you. Attacks made with a weapon in automatic mode can’t score critical hits. Roll damage only once, and apply it to all targets struck. Each attack against an individual creature in the cone uses up the same amount of ammunition or charges as taking two shots, and once you no longer have enough ammunition to attack another target, you stop making attacks.\n\nFor example, if you were using a tactical X-gen gun with 27 rounds remaining, you would target the nearest 6 creatures in the cone and use up all 27 rounds.\n\nIf more than one creature is equidistant and you don’t have enough cartridges remaining to shoot at all equidistant creatures, determine randomly which one you target. You can’t avoid shooting at allies in the cone, nor can you shoot any creature more than once, even if you have enough cartridges to fire more shots than you have targets. Attacks in automatic mode take the same penalties as other full attacks.",
+        "WeaponPropertiesAutomaticTooltip": "In addition to making ranged attacks normally, a weapon with this special property can fire in fully automatic mode. No action is required to toggle a weapon between making normal ranged attacks and using automatic mode.<br><br>When you make a full attack with a weapon in automatic mode, you can attack in a cone with a range of half the weapon’s range increment. This uses all the weapon’s remaining ammunition. Roll one attack against each target in the cone, starting with those closest to you. Attacks made with a weapon in automatic mode can’t score critical hits. Roll damage only once, and apply it to all targets struck. Each attack against an individual creature in the cone uses up the same amount of ammunition or charges as taking two shots, and once you no longer have enough ammunition to attack another target, you stop making attacks.<br><br>For example, if you were using a tactical X-gen gun with 27 rounds remaining, you would target the nearest 6 creatures in the cone and use up all 27 rounds.<br><br>If more than one creature is equidistant and you don’t have enough cartridges remaining to shoot at all equidistant creatures, determine randomly which one you target. You can’t avoid shooting at allies in the cone, nor can you shoot any creature more than once, even if you have enough cartridges to fire more shots than you have targets. Attacks in automatic mode take the same penalties as other full attacks.",
         "WeaponPropertiesBlast": "Kegel",
-        "WeaponPropertiesBlastTooltip": "This weapon fires in a cone that extends only to its first range increment. You can’t use it to attack creatures beyond that range.\nFor each attack you make with a weapon with the blast special property, roll one attack against each target in the cone, starting with those closest to you. Each attack takes a –2 penalty in addition to other penalties, such as the penalty to all attacks during a full attack. Roll damage only once for all targets. If you roll one or more critical hits, roll the extra critical damage only once (or any other special effects on a critical hit that require you to roll) and apply it to each creature against which you score a critical hit. You can’t avoid shooting at allies in the cone, nor can you shoot any creature more than once.\n\nAttacks with blast weapons ignore concealment. A blast weapon doesn’t benefit from feats or abilities that increase the damage of a single attack (such as the operative’s trick attack). Ammunition for blast weapons is designed for blast attacks, so you spend the usage amount only once for each cone of attacks.",
+        "WeaponPropertiesBlastTooltip": "This weapon fires in a cone that extends only to its first range increment. You can’t use it to attack creatures beyond that range.\nFor each attack you make with a weapon with the blast special property, roll one attack against each target in the cone, starting with those closest to you. Each attack takes a –2 penalty in addition to other penalties, such as the penalty to all attacks during a full attack. Roll damage only once for all targets. If you roll one or more critical hits, roll the extra critical damage only once (or any other special effects on a critical hit that require you to roll) and apply it to each creature against which you score a critical hit. You can’t avoid shooting at allies in the cone, nor can you shoot any creature more than once.<br><br>Attacks with blast weapons ignore concealment. A blast weapon doesn’t benefit from feats or abilities that increase the damage of a single attack (such as the operative’s trick attack). Ammunition for blast weapons is designed for blast attacks, so you spend the usage amount only once for each cone of attacks.",
         "WeaponPropertiesBlock": "Blockierend",
         "WeaponPropertiesBlockTooltip": "Only melee weapons can have the block special property, which represents some kind of guard or crossbar that can protect you from attacks by a foe you strike in melee. When you successfully strike a target with a melee attack using such a weapon, you gain a +1 enhancement bonus to your AC for 1 round against melee attacks from that target.",
         "WeaponPropertiesBoost": "Überladbar",
@@ -2364,10 +2763,10 @@
         "WeaponPropertiesBreakdownTooltip": "A breakdown weapon can be taken apart into multiple small pieces. While broken down, the weapon is treated as especially small or easy to hide for the purpose of Sleight of Hand’s hide object task and can fit into spaces that can typically hold only items of light bulk (including a ysoki’s cheek pouches). It takes 1 minute to take apart or reassemble a breakdown weapon.",
         "WeaponPropertiesBright": "Leuchtend",
         "WeaponPropertiesBrightTooltip": "Attacks with bright weapons illuminate the area within 20 feet of your target for 1 round following the attack, increasing the illumination level by one step, to a maximum of normal light.",
+        "WeaponPropertiesButtressing": "Buttressing",
+        "WeaponPropertiesButtressingTooltip": "When activated, this weapon exudes subtle static charges that tightly bind nearby objects to one another, granting them additional resilience from incoming attacks. After you make an attack with this weapon you: increase the AC bonus you gain from cover by 1, increase the hardness of objects within 5 feet of you by an amount equal to 1/4 x the weapon's item level, and gain a +1 bonus to your KAC to resist combat maneuvers. These benefits last until you move or until the beginning of your next turn, whichever comes first. Objects that are moved from their space lose this benefit immediately. The effects of multiple buttressing weapon attacks don't stack with each other.",
         "WeaponPropertiesCluster": "Cluster",
         "WeaponPropertiesClusterTooltip": "A cluster weapon is a form of grenade launcher that can fire a single grenade or (if loaded with appropriate grenades) can expend two identical grenades as a single attack. In the latter case, the grenades act as a single grenade of the same type (with a single attack roll, dealing damage only once, and so on), except its radius is increased by the listed amount listed and the save DC of any effects created by the grenade is calculated using the cluster weapon’s item level if it is higher than the grenade’s item level. Attempting to fire two nonidentical grenades results in an error code and the weapon does not fire.",
-        "WeaponsPropertiesConceal": "Conceal",
-        "WeaponsPropertiesConcealTooltip": "A weapon with the conceal special property is considered especially small or easy to hide for purposes of Slight of Hand’s hide object task, granting you a +4 circumstance bonus to skill checks to hide object.",
         "WeaponPropertiesDeconstruct": "Deconstruct",
         "WeaponPropertiesDeconstructTooltip": "The target of a weapon with the deconstruct special property takes the listed amount of acid damage every round until the target succeeds at a Reflex save to end the damage. This functions as the burning condition, except as noted and that the ongoing damage is also ended if the target takes any amount of electricity damage.",
         "WeaponPropertiesDeflect": "Deflect",
@@ -2375,7 +2774,7 @@
         "WeaponPropertiesDisarm": "Entwaffnen",
         "WeaponPropertiesDisarmTooltip": "When you attempt a disarm combat maneuver while wielding a weapon with the disarm special property, you gain a +2 bonus to your attack roll.",
         "WeaponPropertiesDouble": "Double",
-        "WeaponPropertiesDoubleTooltip": "A double weapon has two different weapons placed end to end so you can attack with either easily without changing your grip. For the purpose of the Multi-Weapon Fighting feat, a double weapon is treated as two or more operative melee weapons. A double weapon is not treated as an operative weapon for any other purpose unless it has the operative weapon special property.\n\nSome double weapons have ends that deal different damage types. When making a single attack with such a weapon, you can choose which damage type to deal, but if you make more than one attack in the same round, at least one of those attacks must be made with the second damage type. The weapon category of a double weapon that deals more than one damage type is based on the first damage type listed. If its second damage type causes it to be considered a different weapon category when dealing that damage, that category is listed in parentheses. For example, a double weapon in the flame category that deals 1d6 fire damage or 1d6 cold damage lists “double (cryo)” to indicate that when it is used to deal cold damage, it is treated as a weapon in the cryo category.",
+        "WeaponPropertiesDoubleTooltip": "A double weapon has two different weapons placed end to end so you can attack with either easily without changing your grip. For the purpose of the Multi-Weapon Fighting feat, a double weapon is treated as two or more operative melee weapons. A double weapon is not treated as an operative weapon for any other purpose unless it has the operative weapon special property.<br><br>Some double weapons have ends that deal different damage types. When making a single attack with such a weapon, you can choose which damage type to deal, but if you make more than one attack in the same round, at least one of those attacks must be made with the second damage type. The weapon category of a double weapon that deals more than one damage type is based on the first damage type listed. If its second damage type causes it to be considered a different weapon category when dealing that damage, that category is listed in parentheses. For example, a double weapon in the flame category that deals 1d6 fire damage or 1d6 cold damage lists “double (cryo)” to indicate that when it is used to deal cold damage, it is treated as a weapon in the cryo category.",
         "WeaponPropertiesDrainCharge": "Drain Charge",
         "WeaponPropertiesDrainChargeTooltip": "When a weapon with the drain charge weapon special property hits an enemy that has a natural attack that deals electricity damage (an attack not dependent on armor upgrades, spells, spell-like abilities, or carried weapons or equipment), it siphons off some of that target’s inherent electricity and regains the number of charges listed in the weapon’s usage entry.",
         "WeaponPropertiesEcho": "Echo",
@@ -2400,6 +2799,8 @@
         "WeaponPropertiesFreeHandsTooltip": "A free hands weapon is unbalanced or otherwise awkward to use. This difficulty in using the weapon can be negated by moving the listed number of hands that are not holding anything or being used for any other purpose as counterweights. You wield a free hands weapon using the normal number of hands, but if you have the listed number of free hands available while wielding it, the weapon is not considered unwieldy. For example, a kasatha wielding a flame spinner in two of her hands while her other two hands remain empty treats the weapon as though it does not have the unwieldy weapon special property.",
         "WeaponPropertiesFueled": "Fueled",
         "WeaponPropertiesFueledTooltip": "A fueled weapon has an integrated petrol tank and must be activated to function properly. This works like the powered weapon special property, except it uses petrol as a fuel source instead of a battery. Unlike a battery, petrol is permanently expended upon use and must be purchased rather than recharged.",
+        "WeaponPropertiesGearArray": "Gear Array",
+        "WeaponPropertiesGearArrayTooltip": "Your nanites shape themselves into a single piece of equipment, such as a weapon, tool, or cybernetic augmentation.",
         "WeaponPropertiesGrapple": "Grapple",
         "WeaponPropertiesGrappleTooltip": "When wielding a grapple weapon, you can use it to perform a grapple combat maneuver without having your hands free. When you do so, you gain a +2 bonus to the attack roll, and if you roll a natural 20 on the attack roll, you apply the weapon’s critical hit effect (if any) to the target.",
         "WeaponPropertiesGravitation": "Gravitation",
@@ -2418,12 +2819,14 @@
         "WeaponPropertiesIndirectTooltip": "An indirect weapon uses a wireless signal along with a multistage firing system, internal telemetry, bimetallic fluctuation, magnetic guidance, or some other system to make it appear as if a shot from the weapon had been fired from a different location. This reduces the penalty to Stealth checks for sniping by 10.",
         "WeaponPropertiesInjection": "Injektion",
         "WeaponPropertiesInjectionTooltip": "This weapon or its ammunition can be filled with a drug; a contact, ingested, inhaled, or injury poison; or a medicinal compound. On a successful attack with the weapon (either the first attack if it’s a melee weapon or an attack with the relevant piece of ammunition if it’s a ranged weapon), the weapon automatically injects the target with the substance. Refilling the weapon with a new substance acts as reloading it and is a move action. Each different injectable material must be bought separately and can be used in any weapon with the injection special property. See page 231 for rules and prices for drugs, medicinals, and poisons.",
+        "WeaponPropertiesInstrumental": "Instrumental",
+        "WeaponPropertiesInstrumentalTooltip": "A weapon with this property can also be used as a basic musical instrument (Armory 105). The size of this instrument’s battery is the same as that of the weapon’s, and it can be used as a weapon (with the charge usage indicated) or an instrument (where it uses 1 charge every 10 minutes). If the weapon is 8th level or higher, it also functions instead as a euphonic musical instrument (Armory 106).",
         "WeaponPropertiesIntegrated": "Integrated",
         "WeaponPropertiesIntegratedTooltip": "An integrated weapon can be wielded normally or installed in an armor upgrade slot. When properly installed, the weapon is considered to be wielded without needing to assign a number of hands to wield it. An integrated weapon requires the listed number of armor slots for proper installation. An android or any other creature with the upgrade slot racial ability cannot combine its racial upgrade slot with armor upgrade slots to install an integrated weapon. Installing, removing, or replacing an integrated weapon in a suit of armor takes 10 minutes, as if it were an armor upgrade.",
         "WeaponPropertiesLine": "Linie",
         "WeaponPropertiesLineTooltip": "This weapon fires a projectile in a straight line that pierces through multiple creatures or obstacles. When attacking with such a weapon, make a single attack roll and compare it to the relevant Armor Class of all creatures and objects in a line extending to the weapon’s listed range increment. Roll damage only once. The weapon hits all targets with an AC equal to or lower than the attack roll. However, if an attack fails to damage a creature or obstacle hit in the line (typically due to damage reduction or hardness), the path is stopped and the attack doesn’t damage creatures farther away. A line weapon can’t damage targets beyond its listed range. If you score a critical hit, that effect applies only to the first target hit in the line, and you roll the critical damage separately. If multiple creatures are equally close, you choose which one takes the effects of the critical hit. A line weapon doesn’t benefit from feats or abilities that increase the damage of a single attack (such as the operative’s trick attack).",
         "WeaponPropertiesLiving": "Living",
-        "WeaponPropertiesLivingTooltip": "Unlike simpler forms of biotech, a living weapon is not just organic material—it’s actually a simple living organism. The core function of a living weapon is based on the same scientific principles as manufactured weapons, but come about as part of its natural development and body function.\n\nA living weapon can be affected by spells that target creatures, though it is mindless, incapable of independent action, and has no ability scores other than Constitution (which is always equal to its item level). It is subject to poisons and diseases, though it does not need to breath and is always protected as well as a creature with active environmental protection from armor. If it is forced to make a saving throw, its save bonus is always equal to its item level. If it suffers a condition that would normally cause it to take a penalty to attacks, damage, or save DCs, those penalties apply to any attack or effect created with it. Living weapons “eat” by absorbing part of the charges or fuel (or energy from some other form of ammunition) when fired. They do not sleep or breathe, cannot communicate in any way, are immune to pain effects due to their incredibly simple nervous systems, and are mindless.\n\nIf damaged, a living weapon can regain Hit Points from effects that restore Hit Points to living creatures, such as a mystic cure spell, and it regains a number of Hit Points equal to its item level each day. You can use the Life Science or Medicine skill instead of Engineering to repair a living weapon.",
+        "WeaponPropertiesLivingTooltip": "Unlike simpler forms of biotech, a living weapon is not just organic material—it’s actually a simple living organism. The core function of a living weapon is based on the same scientific principles as manufactured weapons, but come about as part of its natural development and body function.<br><br>A living weapon can be affected by spells that target creatures, though it is mindless, incapable of independent action, and has no ability scores other than Constitution (which is always equal to its item level). It is subject to poisons and diseases, though it does not need to breath and is always protected as well as a creature with active environmental protection from armor. If it is forced to make a saving throw, its save bonus is always equal to its item level. If it suffers a condition that would normally cause it to take a penalty to attacks, damage, or save DCs, those penalties apply to any attack or effect created with it. Living weapons “eat” by absorbing part of the charges or fuel (or energy from some other form of ammunition) when fired. They do not sleep or breathe, cannot communicate in any way, are immune to pain effects due to their incredibly simple nervous systems, and are mindless.<br><br>If damaged, a living weapon can regain Hit Points from effects that restore Hit Points to living creatures, such as a mystic cure spell, and it regains a number of Hit Points equal to its item level each day. You can use the Life Science or Medicine skill instead of Engineering to repair a living weapon.",
         "WeaponPropertiesLockdown": "Lockdown",
         "WeaponPropertiesLockdownTooltip": "A construct reduced to 0 Hit Points by a lockdown weapon is not destroyed but simply immobilized until it regains 1 or more Hit Points.",
         "WeaponPropertiesMindAffecting": "Mind-Affecting",
@@ -2449,9 +2852,11 @@
         "WeaponPropertiesPolymorphic": "Polymorphic",
         "WeaponPropertiesPolymorphicTooltip": "Melee weapons with the polymorphic weapon special property are made of a multitude of linked scales that can be reconfigured with a gesture. The wielder can cause the scales to flatten, form several contiguous sharp edges, or stand upright as a series of points. As a swift action or once as part of a full action, a creature wielding a polymorphic weapon can change its damage type from bludgeoning, slashing, or piercing to another of those types.",
         "WeaponPropertiesPowered": "Energetisch",
-        "WeaponPropertiesPoweredTooltip": "A melee weapon with an internal battery that must be charged to function has the powered special property, which lists its capacity and usage. Unlike with a ranged weapon, the usage is for 1 minute of operation rather than per attack, though using a powered weapon for less than 1 full minute still expends 1 full usage. The number of charges expended is equal to the usage × the number of minutes the weapon is used, rounded up to the nearest minute. You can activate the power of the weapon as part of the action used to make an attack with it, and it automatically deactivates after 1 minute.\n\nAs with ranged weapons, you can recharge the battery of a powered melee weapon using a generator or a recharging station, or you can purchase new batteries for it. If you try to attack with a powered weapon that’s out of charges, it functions as an improvised weapon (see page 169).",
+        "WeaponPropertiesPoweredTooltip": "A melee weapon with an internal battery that must be charged to function has the powered special property, which lists its capacity and usage. Unlike with a ranged weapon, the usage is for 1 minute of operation rather than per attack, though using a powered weapon for less than 1 full minute still expends 1 full usage. The number of charges expended is equal to the usage × the number of minutes the weapon is used, rounded up to the nearest minute. You can activate the power of the weapon as part of the action used to make an attack with it, and it automatically deactivates after 1 minute.<br><br>As with ranged weapons, you can recharge the battery of a powered melee weapon using a generator or a recharging station, or you can purchase new batteries for it. If you try to attack with a powered weapon that’s out of charges, it functions as an improvised weapon (see page 169).",
         "WeaponPropertiesProfessional": "Professional",
         "WeaponPropertiesProfessionalTooltip": "A professional weapon is a tool used in a specialized trade that nevertheless has tremendous damaging potential. When using a professional weapon, you gain a +2 insight bonus to checks with the listed Profession skill (or to checks with similar skills that could reasonably use that weapon as part of the profession, subject to the GM’s discretion). If you have a number of ranks in the listed Profession skill equal to the item level, you are considered proficient with that weapon, even if you would not normally be. This proficiency never counts toward prerequisites of any kind.",
+        "WeaponPropertiesPropel": "Propel",
+        "WeaponPropertiesPropelTooltip": "These weapons move affected targets the listed distance away from the origin point of the effect. A target that succeeds at a Reflex save (DC = 10 + 1/2 the weapon’s item level + the wielder’s Dexterity modifier) isn’t moved. If the movement would cause the target to move through a wall, object, or another barrier, the target creature stops moving and falls prone.",
         "WeaponPropertiesPunchGun": "Punch Gun",
         "WeaponPropertiesPunchGunTooltip": "A punch gun weapon is a small ranged weapon outfitted with a pressure-sensitive firing mechanism that is affixed to a glove or a similar item. Unlike most ranged weapons, which discharge when a trigger is pulled, a punch gun fires when sufficient pressure is placed upon its barrel. All punch gun projectile weapons have a range equal to their wielder’s natural reach. Although these are ranged attacks, they do not provoke attacks of opportunity.",
         "WeaponPropertiesQuickReload": "Schnell nachladen",
@@ -2468,6 +2873,8 @@
         "WeaponPropertiesRelicTooltip": "These rare items are bits of lost technology or unique items less powerful than artifacts. A relic has an item level but can be sold for 100% of the item’s price (like trade goods). A relic cannot be crafted without the means of a specific formula, which is almost always long lost, and often requires specific materials. A relic that became understood well enough to be reproduced, standardized, and mass-marketed might lose its relic status. Unlike normal weapons, relic weapons do not come fully loaded with ammunition unless they say so.",
         "WeaponPropertiesReposition": "Reposition",
         "WeaponPropertiesRepositionTooltip": "When you attempt a reposition combat maneuver with this weapon, you gain a +2 bonus to your attack roll.",
+        "WeaponPropertiesScramble": "Scramble",
+        "WeaponPropertiesScrambleTooltip": "A weapon with the scramble special property disrupts a creature’s telepathic or hive mind abilities briefly. When a creature takes damage from a weapon with the scramble property, that creature must succeed at a Fortitude save (DC = 10 + half the weapon’s level + the wielder’s Int modifier) or lose its ability to communicate telepathically until the end of your next turn. Abilities that depend on telepathic communication, such as the Swarm mind ability, also don’t function during this time.",
         "WeaponPropertiesShape": "Shape",
         "WeaponPropertiesShapeTooltip": "A weapon with the shape special property has a complex targeting array that allows it to target specified areas. If you make a single attack as a full action with such a weapon, you can exclude the listed number of squares from within this weapon’s area of effect. This means you can avoid shooting an ally in the area of a blast weapon’s effect, for example.",
         "WeaponPropertiesShatter": "Shatter",
@@ -2485,7 +2892,7 @@
         "WeaponPropertiesSunder": "Sunder",
         "WeaponPropertiesSunderTooltip": "When you attempt a sunder combat maneuver while wielding a weapon with the sunder weapon special property, you gain a +2 bonus to your attack roll.",
         "WeaponPropertiesSwarm": "Swarm",
-        "WeaponPropertiesSwarmTooltip": "A weapon with this special property is virtually indistinguishable from Swarm technology and requires a special Swarm battery to use efficiently. The weapon can use other batteries, but usage doubles when doing so.\n\nIn addition to the energy drawback, a Swarm weapon attracts the attention of nearby Swarm creatures. They can sense such a weapon as if using blindsense with a range of 30 feet. Swarm components have been observed fixating on wielders of this technology during battle, with little else to explain such a violent focus. If the Swarm wins the conflict, the surviving components destroy these weapons.",
+        "WeaponPropertiesSwarmTooltip": "A weapon with this special property is virtually indistinguishable from Swarm technology and requires a special Swarm battery to use efficiently. The weapon can use other batteries, but usage doubles when doing so.<br><br>In addition to the energy drawback, a Swarm weapon attracts the attention of nearby Swarm creatures. They can sense such a weapon as if using blindsense with a range of 30 feet. Swarm components have been observed fixating on wielders of this technology during battle, with little else to explain such a violent focus. If the Swarm wins the conflict, the surviving components destroy these weapons.",
         "WeaponPropertiesTail": "Tail",
         "WeaponPropertiesTailTooltip": "If you have a tail (or similar taillike appendage), you can wear a weapon with the tail weapon special property on your tail, rather than wield it in your hand. Attaching or removing a tail weapon is a full action, and once it’s installed, you wield the weapon without using your hands.",
         "WeaponPropertiesTeleportive": "Teleportive",
@@ -2496,6 +2903,8 @@
         "WeaponPropertiesThrottleTooltip": "A throttle weapon deals damage only when it is used to grapple a foe, automatically dealing damage with every successful grapple combat maneuver. These are considered attacks for abilities that can increase a weapon’s damage (such as trick attack). All throttle weapons are also grapple weapons. While a target is successfully being grappled with a throttle weapon, it cannot use its airways to speak or make vocalizations of any kind (though other forms of making noise work normally).",
         "WeaponPropertiesThrown": "Geworfen",
         "WeaponPropertiesThrownTooltip": "Ranged weapons that must be thrown and melee weapons that can be thrown as a ranged attack have the thrown special property and a listed range increment. You apply your Strength modifier to damage rolls for thrown attacks. After you throw a weapon, it lands near your target and you must recover it if you want to attack with it again.",
+        "WeaponPropertiesThruster": "Thruster",
+        "WeaponPropertiesThrusterTooltip": "This weapon produces controlled bursts of forceful energy, which you can direct toward enhancing your athletic exploits. As part of the action you use to fly, jump, or perform the bull rush combat maneuver, you can expend ammunition or charges equal to the weapon's usage to boost that action. When used to fly, this burst grants you a +2 enhanceent bonus to one Acrobatics check made to fly that round. When used to jump, this burst grants you an enhancement bonus to that Athletics check equal to the weapon's item level. When used to perform a bull rush, this burst grants you a +2 bonus to your attack roll.",
         "WeaponPropertiesTrip": "Zu Fall bringen",
         "WeaponPropertiesTripTooltip": "When you attempt a trip combat maneuver while wielding a weapon with this property, you gain a +2 bonus to your attack roll.",
         "WeaponPropertiesTwoHanded": "Zweihand",
@@ -2503,38 +2912,13 @@
         "WeaponPropertiesUnbalancing": "Unbalancing",
         "WeaponPropertiesUnbalancingTooltip": "This weapon pushes foes off-balance. When you deal damage with this weapon, the target is flat-footed against the next attack that targets it before the start of your next turn. Anything that causes a critical hit to be treated as a normal hit, such as fortification, grants immunity to this special property.",
         "WeaponPropertiesUnderwater": "Underwater",
-        "WeaponPropertiesUnderwaterTooltip": "Like residents of most water worlds, kalos create their own versions of common weapons, redesigned to function better underwater. These weapons have the following special property and generally cost 10% more.\n\nUnderwater: A weapon with this special property that is used underwater ignores the –2 penalty to attack rolls and deals full damage.",
+        "WeaponPropertiesUnderwaterTooltip": "Like residents of most water worlds, kalos create their own versions of common weapons, redesigned to function better underwater. These weapons have the following special property and generally cost 10% more.<br><br>Underwater: A weapon with this special property that is used underwater ignores the –2 penalty to attack rolls and deals full damage.",
         "WeaponPropertiesUnwieldy": "Unhandlich",
         "WeaponPropertiesUnwieldyTooltip": "Weapons with the unwieldy special property are large and awkward, can’t be fired without cooling down first, or are otherwise difficult to use with repeated attacks. You can’t use an unwieldy weapon as part of a full attack (or any other action in which you could make multiple attacks), you can’t attack with it more than once per round, and you can’t use it to make an attack of opportunity.",
         "WeaponPropertiesVariantBoost": "Variant Boost",
         "WeaponPropertiesVariantBoostTooltip": "A weapon with the variant boost special property acts as a weapon with the boost special property, except boosting the weapon does not expend additional charges and the weapon can be boosted only the listed number of times per day.",
         "WeaponPropertiesWideLine": "Wide Line",
         "WeaponPropertiesWideLineTooltip": "A wide line weapon functions as a weapon with the line weapon special property, except the line is 10 feet wide. When determining the squares that are in the path of a line, note which squares that line would normally pass through, and extend the area to one side of the line (your choice) so that the line is 2 squares wide. For an obstacle to block the path of a line, it must block the line’s full width; otherwise, the line continues (at full width) beyond the obstacle.",
-        "WeaponSpecial": {
-            "Analog": "Analog",
-            "Archaic": "Archaisch",
-            "Auto": "Automatisch",
-            "Blast": "Kegel",
-            "Block": "Blockierend",
-            "Boost": "Überladbar",
-            "Bright": "Leuchtend",
-            "Disarm": "Entwaffnen",
-            "Entangle": "Verstricken",
-            "Exploade": "Explosion",
-            "Injection": "Injektion",
-            "Line": "Linie",
-            "Nonlethal": "Nichttödlich",
-            "Operative": "Agent",
-            "Penetrating": "Durchschlagend",
-            "Powered": "Energetisch",
-            "Quickreload": "Schnell nachladen",
-            "Reach": "Reichweite",
-            "Sniper": "Scharfschütze",
-            "Stun": "Betäubung",
-            "Thrown": "Geworfen",
-            "Trip": "Zu Fall bringen",
-            "Unwieldy": "Unhandlich"
-        },
         "WeaponTypesAdvMelee": "Fortschrittliche Nahkampfwaffen",
         "WeaponTypesBasicMelee": "Einfache Nahkampfwaffen",
         "WeaponTypesGrenades": "Granaten",
@@ -2544,6 +2928,8 @@
         "WeaponTypesSniper": "Scharfschützenwaffen",
         "WeaponTypesSolarian": "Solarier-Waffenkristalle",
         "WeaponTypesSpecial": "Spezialwaffen",
+        "WeaponsPropertiesConceal": "Conceal",
+        "WeaponsPropertiesConcealTooltip": "A weapon with the conceal special property is considered especially small or easy to hide for purposes of Slight of Hand’s hide object task, granting you a +4 circumstance bonus to skill checks to hide object.",
         "WillSave": "Wille"
     }
 }

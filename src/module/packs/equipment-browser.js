@@ -1,4 +1,4 @@
-import { ItemBrowserSFRPG } from './item-browser.js';
+import { DocumentBrowserSFRPG } from './document-browser.js';
 import { SFRPG } from "../config.js"
 
 const equipmentTypes = {
@@ -20,7 +20,7 @@ const equipmentTypes = {
     "weaponAccessory": "SFRPG.Items.Categories.WeaponAccessories"
 };
 
-class EquipmentBrowserSFRPG extends ItemBrowserSFRPG {
+class EquipmentBrowserSFRPG extends DocumentBrowserSFRPG {
     static get defaultOptions() {
         const options = super.defaultOptions;
         options.title = game.i18n.format("SFRPG.Browsers.EquipmentBrowser.Title");
@@ -73,7 +73,8 @@ class EquipmentBrowserSFRPG extends ItemBrowserSFRPG {
                 label: game.i18n.format("SFRPG.Browsers.EquipmentBrowser.ItemType"),
                 content: equipmentTypes,
                 filter: (element, filters) => { return this._filterItemType(element, filters); },
-                activeFilters: this.filters?.equipmentTypes?.activeFilters || []
+                activeFilters: this.filters?.equipmentTypes?.activeFilters || [],
+                type: "multi-select"
             }
         };
 
@@ -82,14 +83,16 @@ class EquipmentBrowserSFRPG extends ItemBrowserSFRPG {
                 label: game.i18n.format("SFRPG.Browsers.EquipmentBrowser.WeaponType"),
                 content: CONFIG.SFRPG.weaponTypes,
                 filter: (element, filters) => { return this._filterWeaponType(element, filters); },
-                activeFilters: this.filters.weaponTypes?.activeFilters || []
+                activeFilters: this.filters.weaponTypes?.activeFilters || [],
+                type: "multi-select"
             }
 
             filters.weaponCategories = {
                 label: game.i18n.format("SFRPG.Browsers.EquipmentBrowser.WeaponCategories"),
                 content: CONFIG.SFRPG.weaponCategories,
                 filter: (element, filters) => { return this._filterWeaponCategory(element, filters); },
-                activeFilters: this.filters.weaponCategories?.activeFilters || []
+                activeFilters: this.filters.weaponCategories?.activeFilters || [],
+                type: "multi-select"
             }
         }
 
@@ -98,7 +101,8 @@ class EquipmentBrowserSFRPG extends ItemBrowserSFRPG {
                 label: game.i18n.format("SFRPG.Browsers.EquipmentBrowser.EquipmentType"),
                 content: CONFIG.SFRPG.armorTypes,
                 filter: (element, filters) => { return this._filterArmorType(element, filters); },
-                activeFilters: this.filters.armorTypes?.activeFilters || []
+                activeFilters: this.filters.armorTypes?.activeFilters || [],
+                type: "multi-select"
             }
         }
 
@@ -131,21 +135,21 @@ class EquipmentBrowserSFRPG extends ItemBrowserSFRPG {
         let compendium = element.dataset.entryCompendium;
         let itemId = element.dataset.entryId;
         let item = this.items.find(x => x.compendium === compendium && x._id === itemId);
-        return item && (item.type !== "weapon" || filters.includes(item.data.weaponType));
+        return item && (item.type !== "weapon" || filters.includes(item.system.weaponType));
     }
 
     _filterWeaponCategory(element, filters) {
         let compendium = element.dataset.entryCompendium;
         let itemId = element.dataset.entryId;
         let item = this.items.find(x => x.compendium === compendium && x._id === itemId);
-        return item && (item.type !== "weapon" || filters.includes(item.data.weaponCategory || "uncategorized"));
+        return item && (item.type !== "weapon" || filters.includes(item.system.weaponCategory || "uncategorized"));
     }
 
     _filterArmorType(element, filters) {
         let compendium = element.dataset.entryCompendium;
         let itemId = element.dataset.entryId;
         let item = this.items.find(x => x.compendium === compendium && x._id === itemId);
-        return item && (item.type !== "equipment" || filters.includes(item.data.armor?.type));
+        return item && (item.type !== "equipment" || filters.includes(item.system.armor?.type));
     }
 
     openSettings() {

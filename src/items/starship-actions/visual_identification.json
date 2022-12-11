@@ -1,22 +1,22 @@
 {
+  "_id": "0U3Voy2pxhR4g6W6",
   "name": "Visual Identification",
   "type": "starshipAction",
-  "data": {
-    "description": {
-      "value": "<h2>Normal effect</h2><p>You use your ship’s visual sensors to get a much closer look at an opponent’s starship and see if you recognize the technology used to make the ship or if you remember some specific technical details of its make and model. Attempt a Computers, Engineering, or Perception check (DC = 10 + 1-1/2 × the tier of the starship being examined). If you succeed, you learn the first unknown piece of information on the list below (all basic information, all defenses, or information about one weapon). Information already obtained from a science officer’s scan action or a quick rescan minor action is not unknown. You learn only one unknown piece of information, regardless of your total check result. Subsequent successful checks reveal new pieces of information, continuing down the list below.<br/>Basic Information: Size, speed, and maneuverability.<br/>Defenses: Total Hull Points, total Shield Points, and power core PCU value.<br/>Weapon: Information about one weapon, including its firing arc and the damage it deals, selected at random. Repeat this entry until all the starship’s weapons are revealed. You can take this action only if no science officer actions have been taken during the helm phase (including visual identification and quick rescan).</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "COM",
+  "flags": {},
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
     "type": "",
-    "role": "minorCrew",
-    "order": 30,
-    "phase": {
-      "name": "Helm phase",
-      "tooltip": "This action can be taken only during the helm phase."
+    "dc": {
+      "resolve": false,
+      "value": "10 + 1-1/2 * Target Ship Tier"
     },
-    "isPush": false,
-    "resolvePointCost": 0,
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<h2>Normal effect</h2><p>You use your ship’s visual sensors to get a much closer look at an opponent’s starship and see if you recognize the technology used to make the ship or if you remember some specific technical details of its make and model. Attempt a Computers, Engineering, or Perception check (DC = 10 + 1-1/2 × the tier of the starship being examined). If you succeed, you learn the first unknown piece of information on the list below (all basic information, all defenses, or information about one weapon). Information already obtained from a science officer’s scan action or a quick rescan minor action is not unknown. You learn only one unknown piece of information, regardless of your total check result. Subsequent successful checks reveal new pieces of information, continuing down the list below.<br/>Basic Information: Size, speed, and maneuverability.<br/>Defenses: Total Hull Points, total Shield Points, and power core PCU value.<br/>Weapon: Information about one weapon, including its firing arc and the damage it deals, selected at random. Repeat this entry until all the starship’s weapons are revealed. You can take this action only if no science officer actions have been taken during the helm phase (including visual identification and quick rescan).</p>"
+    },
+    "effectCritical": "",
+    "effectNormal": "You use your ship’s visual sensors to get a much closer look at an opponent’s starship and see if you recognize the technology used to make the ship or if you remember some specific technical details of its make and model. If you succeed, you learn the first unknown piece of information on the list below. Information already obtained from a science officer’s scan action or a quick rescan minor action is not unknown. You learn only one unknown piece of information, regardless of your total check result. Subsequent successful checks reveal new pieces of information, continuing down the list available in @Compendium[sfrpg.starship-actions.0U3Voy2pxhR4g6W6]. You can take this action only if no science officer actions have been taken during the helm phase (including visual identification and quick rescan).",
     "formula": [
       {
         "name": "Computers",
@@ -31,18 +31,18 @@
         "formula": "@minorCrew.skills.per.mod"
       }
     ],
+    "isPush": false,
+    "order": 30,
+    "phase": {
+      "name": "Helm phase",
+      "tooltip": "This action can be taken only during the helm phase."
+    },
+    "resolvePointCost": 0,
+    "role": "minorCrew",
+    "selectorKey": "minorCrew",
     "selectors": [
       "minorCrew"
     ],
-    "selectorKey": "minorCrew",
-    "dc": {
-      "value": "10 + 1-1/2 * Target Ship Tier",
-      "resolve": false
-    },
-    "effectNormal": "You use your ship’s visual sensors to get a much closer look at an opponent’s starship and see if you recognize the technology used to make the ship or if you remember some specific technical details of its make and model. If you succeed, you learn the first unknown piece of information on the list below. Information already obtained from a science officer’s scan action or a quick rescan minor action is not unknown. You learn only one unknown piece of information, regardless of your total check result. Subsequent successful checks reveal new pieces of information, continuing down the list available in @Compendium[sfrpg.starship-actions.0U3Voy2pxhR4g6W6]. You can take this action only if no science officer actions have been taken during the helm phase (including visual identification and quick rescan).",
-    "effectCritical": ""
-  },
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "0U3Voy2pxhR4g6W6"
+    "source": "COM"
+  }
 }

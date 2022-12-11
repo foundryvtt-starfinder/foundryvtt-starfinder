@@ -6,6 +6,14 @@
   /* ----------------------------------------- */
 
   .sheet-header {
+    .summary {
+      li {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+    
     .header-background {
       background: #235683;
       background: @blueGradientBackground;
@@ -99,6 +107,7 @@
 
       .avatar {
         flex: 0 0 250px;
+        object-fit: contain;
       }
 
       .singleFlex {
@@ -166,6 +175,14 @@
     border-bottom: 1px solid @colorBeige;
   }
 
+  .rollable {
+    cursor: pointer;
+
+    &:hover {
+      text-shadow: 0 0 10px red;
+    }
+  }
+
   /* ----------------------------------------- */
   /*  Attributes                               */
   /* ----------------------------------------- */
@@ -176,13 +193,17 @@
     padding: 0;
 
     li.attribute {
-      height: 70px;
+      min-height: 70px;
       margin: 0 5px;
       border: @borderGroove;
       border-radius: 4px;
       //.nodesto();
       .exo2();
       text-align: center;
+
+      &.cmd {//CMD is larger to fit "KAC + 8" label
+        margin: 0 3px;
+      }
 
       .attribute-name {
         flex: 0 0 18px;
@@ -215,13 +236,17 @@
         &.multiple {
           input { max-width: 33%; }
         }
+
+        ul, li {
+          list-style-type: none;
+          line-height: 13px;
+        }
       }
 
       .attribute-footer {
         flex: 0 0 18px;
         margin-top: -1px;
         line-height: 18px;
-        font-family: "Signika", "Palatino Linotype", serif;
         font-size: 12px;
       }
     }
@@ -526,6 +551,7 @@
       color: @colorOlive;
       font-size: 18px;
       margin: 0;
+      border: none;
     }
 
     &.spellbook-filters {
@@ -579,6 +605,7 @@
 
       &.small {
         line-height: 25px;
+        margin-left: 11px;
       }
 
       &.container {
@@ -597,9 +624,11 @@
 
         .item-image,
         .crew-image {
-          flex: 0 0 45px;
-          background-size: 45px;
-          margin-right: 5px;
+            flex: 0 0 45px;
+            margin-right: 5px;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
 
           &.small {
             flex: 0 0 25px;
@@ -613,11 +642,11 @@
         }
 
         &:hover .item-image {
-          background-image: url("/icons/svg/d20-grey.svg") !important;
+          background-image: url("../../icons/svg/d20-grey.svg") !important;
         }
 
         .item-image:hover {
-          background-image: url("/icons/svg/d20-black.svg") !important;
+          background-image: url("../../icons/svg/d20-black.svg") !important;
         }
 
         .item-action {
@@ -652,6 +681,50 @@
             }
           }
 
+          .use {
+            width: auto;
+            background: @sfrpgYellow;
+            color: #000;
+            cursor: pointer;
+
+            &:hover, &:focus{
+              box-shadow: 0 0 5px @sfrpgYellow;
+            }
+          }
+        }
+
+        .actor-resource-name {
+          flex: 0 0 calc(100% - 282px);
+          line-height: 21px;
+
+          .name-label {
+            display: inline-block;
+            width: calc(100%);
+          }
+
+          .value-label {
+            display: inline-block;
+            width: calc(100%);
+          }
+        }
+
+        .actor-resource-values {
+          flex: 0 0 180px;
+          line-height: 21px;
+
+          .actor-resource-base-label {
+            display: inline-block;
+            width: 105px;
+          }
+
+          .actor-resource-base-input {
+            width: 70px;
+          }
+
+          .actor-resource-computed-label {
+            display: inline-block;
+            width: 109px;
+          }
         }
       }
       
@@ -691,6 +764,7 @@
         padding-left: 5px;
         font-size: 13px;
         font-weight: bold;
+        border: none;
       }
 
       .item-controls a.item-create,
@@ -714,6 +788,7 @@
       text-align: center;
       border-right: 1px solid @colorFaint;
       &:last-child { border-right: none; }
+      white-space: nowrap;
   
       .featDeactivate, .vehicle-system-deactivate {
         background: @sfrpgRed;
@@ -725,6 +800,10 @@
         background: @sfrpgGreen;
         color: #fff;
         cursor: pointer;
+
+        &:hover, &:focus{
+          box-shadow: 0 0 5px @sfrpgGreen;
+        }
       }
     }
 
@@ -743,9 +822,10 @@
 
     .item-list-child {
       list-style: none;
-      width: 97%;
-      margin: 0 0 0 3%;
+      width: 99%;
+      margin: 0 0 0 7px;
       padding: 0;
+      border-left: 2px dashed @sfrpgRed;
     }
 
     // Item Control Buttons
@@ -816,13 +896,47 @@
     }
   }
 
+  .spell-class {
+    line-height: 14px;
+    display: inline-block;
+    text-align: center;
+    padding: 0 5px;
+    padding-top: 1px;
+    color: @colorFaint;
+    background: rgb(21, 92, 155);
+    border: 1px solid transparent;
+    border-radius: 8px;
+
+    input {
+      color: @colorFaint;
+    }
+  }
+
   .spell-slots,
   .spell-comps {
-    flex: 0 0 60px;
+    flex: none;
+    padding: 0 5px;
     font-size: 12px;
     text-align: center;
     color: @colorTan;
     border-right: 1px solid @colorFaint;
+
+    &.fit-classes {
+      width: calc(100% - 430px);
+      text-align: right;
+    }
+  }
+  
+  .spell-component {
+    display: inline-block;
+    text-align: center;
+    padding-top: 1px;
+    width: 16px;
+    line-height: 14px;
+    color: #c9c7b8;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid transparent;
+    border-radius: 8px;
   }
 
   .spell-slots {

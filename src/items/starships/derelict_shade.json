@@ -1,63 +1,751 @@
 {
   "_id": "ayVH8MPoicDA2qhQ",
   "name": "Derelict Shade",
-  "img": "icons/svg/mystery-man.svg",
-  "permission": {
-    "default": 0,
-    "SZHYoxgMlFX3BRiu": 3
-  },
   "type": "starship",
-  "data": {
-    "modifiers": [],
-    "conditions": {},
-    "details": {
-      "tier": 4,
-      "model": "",
-      "frame": "",
-      "size": "",
-      "notes": "<p><strong>&nbsp;Fearsome: </strong>Once every 1d4 rounds, the creature can attempt the taunt captain crew action using its good skill bonus.</p>\n<hr />\n<p><strong>Teleportation: </strong>On its turn during the helm phase, in lieu of its standard movement, the creature can select an empty space within 5 hexes and teleport to that space with a facing of its choice. Once it uses this ability, it can&rsquo;t use it again for 1d4 rounds.</p>\n<hr />\n<p><strong>Living Starship (Ex) </strong>A derelict shade is an undead creature so immense that it functions as a starship (and thus engages only in starship combat). The ghostly remnants of the crew members, functioning as a unified whole, can take engineer, gunner, magic officerCOM, and pilot actions using the bonuses, level, and ranks listed above. Modifiers for its size, speed, and maneuverability have already been factored into its statistics. Use the following table to determine the effects when a derelict shade takes critical damage.</p>\n<table style=\"width: 69.6288%;\" border=\"1\">\n<tbody>\n<tr>\n<td style=\"width: 5.57295%;\"><strong>D%</strong></td>\n<td style=\"width: 10.3439%;\">&nbsp;<strong>SYSTEM</strong></td>\n<td style=\"width: 83.6533%;\">&nbsp;<strong>EFFECT</strong></td>\n</tr>\n<tr>\n<td style=\"width: 5.57295%;\">1&ndash;30</td>\n<td style=\"width: 10.3439%;\">&nbsp;Weapons array</td>\n<td style=\"width: 83.6533%;\">Randomly determine one arc containing weapons; condition applies to all gunner actions using weapons in that arc.&nbsp;</td>\n</tr>\n<tr>\n<td style=\"width: 5.57295%;\">31&ndash;60</td>\n<td style=\"width: 10.3439%;\">Propulsion&nbsp;</td>\n<td style=\"width: 83.6533%;\">&nbsp;Condition applies to all pilot actions.</td>\n</tr>\n<tr>\n<td style=\"width: 5.57295%;\">61&ndash;90</td>\n<td style=\"width: 10.3439%;\">Marrow</td>\n<td style=\"width: 83.6533%;\">Condition applies to all engineer and magic officer actions, except when patching or repairing the marrow.</td>\n</tr>\n<tr>\n<td style=\"width: 5.57295%;\">91&ndash;100</td>\n<td style=\"width: 10.3439%;\">Core&dagger;</td>\n<td style=\"width: 83.6533%;\">During the next round, each of the derelict shade&rsquo;s attempted actions has a 25% chance of failure.</td>\n</tr>\n</tbody>\n</table>\n<p>&nbsp; &dagger; A derelict shade&rsquo;s core doesn&rsquo;t gain critical damage conditions.</p>\n<hr />\n<p><strong>Shadeswarm (Ex)</strong> When using its teleportation ability to appear adjacent to a starship that has no shields remaining in one or more quadrants, a derelict shade can attempt a check using its gunnery bonus as part of using its teleportation. If the result is equal to or greater than the adjacent ship&rsquo;s AC, any living crew members aboard the starship are swarmed by spirits from the derelict shade. Each affected creature must succeed at a DC 11 Will save or be unable to act until after the next round&rsquo;s helm phase.</p>\n<hr />\n<p><strong>Ghosts in the Machine (Ex)&nbsp;</strong>A derelict shade&rsquo;s weaponry carries fragments of its crew&rsquo;s souls. If the derelict shade deals Hull Point damage to an enemy ship, these fragments infect the ship&rsquo;s systems and cause one randomly determined system to gain the glitching condition until the end of the next round, regardless of the amount of damage dealt. If the damage dealt would already give the system the glitching condition, it instead gains the malfunctioning condition until the end of the next round. A system that is already malfunctioning or wrecked is not affected.</p>\n<hr />\n<p><strong>Void Adaptation (Su) </strong></p>\n<p><strong>Source</strong><em> Alien Archive</em> 2 pg. 154</p>\n<p>A creature with void adaptation is inured to the void of outer space and has the following abilities:</p>\n<ul>\n<li>Immunity to cosmic rays.</li>\n<li>Immunity to the environmental effects of vacuum.</li>\n<li>No breath.</li>\n</ul>",
-      "modifiers": {
-        "value": [],
-        "custom": ""
+  "effects": [],
+  "flags": {},
+  "img": "icons/svg/mystery-man.svg",
+  "items": [
+    {
+      "_id": "preAsv3Lqg4GjQO0",
+      "name": "New StarshipFrame",
+      "type": "starshipFrame",
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 100000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "cost": null,
+        "costMultipliedBySize": false,
+        "crew": {
+          "maximum": 4,
+          "minimum": 4
+        },
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageThreshold": {
+          "base": 0
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "expansionBays": 0,
+        "hitpoints": {
+          "base": 72,
+          "increment": 18
+        },
+        "isPowered": true,
+        "maneuverability": "good",
+        "modifiers": [],
+        "pcu": null,
+        "size": "small",
+        "source": "SOM, p. 130",
+        "weaponMounts": {
+          "aft": {
+            "capitalSlots": 0,
+            "heavySlots": 0,
+            "lightSlots": 1,
+            "spinalSlots": 0
+          },
+          "forward": {
+            "capitalSlots": 0,
+            "heavySlots": 0,
+            "lightSlots": 1,
+            "spinalSlots": 0
+          },
+          "port": {
+            "capitalSlots": 0,
+            "heavySlots": 0,
+            "lightSlots": 0,
+            "spinalSlots": 0
+          },
+          "starboard": {
+            "capitalSlots": 0,
+            "heavySlots": 0,
+            "lightSlots": 0,
+            "spinalSlots": 0
+          },
+          "turret": {
+            "capitalSlots": 0,
+            "heavySlots": 0,
+            "lightSlots": 1,
+            "spinalSlots": 0
+          }
+        }
       }
     },
-    "currency": {
-      "bp": 0,
-      "upb": 0
+    {
+      "_id": "lX1JEVLfoX9LCehH",
+      "name": "Basic Shields 60",
+      "type": "starshipShield",
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 200000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "armorBonus": 0,
+        "cost": 5,
+        "costMultipliedBySize": false,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "defenseValue": 0,
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "isDeflector": false,
+        "isPowered": true,
+        "modifiers": [],
+        "pcu": 15,
+        "regeneration": 1,
+        "shieldPoints": 60,
+        "source": "CRB pg. 302",
+        "targetLockBonus": 0
+      }
     },
+    {
+      "_id": "NQPyIuxpmUElM7NZ",
+      "name": "New StarshipPowerCore",
+      "type": "starshipPowerCore",
+      "effects": [],
+      "flags": {},
+      "sort": 300000,
+      "system": {
+        "type": "",
+        "cost": null,
+        "costMultipliedBySize": false,
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "isPowered": true,
+        "modifiers": [],
+        "pcu": null,
+        "source": "",
+        "supportedSizes": []
+      }
+    },
+    {
+      "_id": "bSv9phxFOHpYzjjC",
+      "name": "Speed 8",
+      "type": "starshipThruster",
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 400000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "cost": null,
+        "costMultipliedBySize": false,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "isBooster": false,
+        "isEnabled": true,
+        "isPowered": true,
+        "modifiers": [],
+        "pcu": null,
+        "pilotingModifier": 0,
+        "source": "",
+        "speed": 8,
+        "supportedSize": "small"
+      }
+    },
+    {
+      "_id": "AB6EwdrARw4lKuON",
+      "name": "Howling Souls",
+      "type": "starshipWeapon",
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 100000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "ac",
+        "attackBonus": "0",
+        "capacity": {
+          "max": null,
+          "value": null
+        },
+        "class": "light",
+        "cost": 0,
+        "costMultipliedBySize": false,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "3d4",
+              "operator": "",
+              "types": {}
+            }
+          ]
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "isPowered": true,
+        "modifiers": [],
+        "mount": {
+          "activated": false,
+          "arc": "forward",
+          "mounted": true
+        },
+        "pcu": 0,
+        "range": "medium",
+        "source": "CRB pg. 302",
+        "special": {
+          "anchoring": false,
+          "array": false,
+          "automated": false,
+          "broad": true,
+          "bugging": false,
+          "burrowing": false,
+          "buster": false,
+          "connecting": false,
+          "deathField": false,
+          "deployed": false,
+          "drone": false,
+          "emp": false,
+          "flakArea": false,
+          "forceField": false,
+          "gravityTether": false,
+          "gravityWell": false,
+          "hacking": false,
+          "immobilize": false,
+          "intimidating": false,
+          "irradiateH": false,
+          "irradiateL": false,
+          "irradiateM": false,
+          "jamming": false,
+          "limited": false,
+          "line": false,
+          "mine": false,
+          "mystical": false,
+          "navScram": false,
+          "numbing": true,
+          "orbital": false,
+          "pod": false,
+          "point": false,
+          "quantum": false,
+          "radiant": false,
+          "rail": false,
+          "ramming": false,
+          "redirect": false,
+          "restricted": false,
+          "ripper": false,
+          "scatterscan": false,
+          "smart": false,
+          "smoldering": false,
+          "spore": false,
+          "suspending": false,
+          "sustained": false,
+          "teleportation": false,
+          "tractor": false,
+          "transposition": false,
+          "vandalDrones": false,
+          "volatile": false,
+          "vortex": false
+        },
+        "speed": 0,
+        "weaponType": "direct"
+      }
+    },
+    {
+      "_id": "ppGHNAC6vyVA115u",
+      "name": "Soul Fragments",
+      "type": "starshipWeapon",
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 200000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "ac",
+        "attackBonus": "0",
+        "capacity": {
+          "max": null,
+          "value": null
+        },
+        "class": "light",
+        "cost": 0,
+        "costMultipliedBySize": false,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "3d4",
+              "operator": "",
+              "types": {}
+            }
+          ]
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "isPowered": true,
+        "modifiers": [],
+        "mount": {
+          "activated": false,
+          "arc": "aft",
+          "mounted": true
+        },
+        "pcu": 0,
+        "range": "medium",
+        "source": "CRB pg. 302",
+        "special": {
+          "anchoring": false,
+          "array": false,
+          "automated": false,
+          "broad": true,
+          "bugging": false,
+          "burrowing": false,
+          "buster": false,
+          "connecting": false,
+          "deathField": false,
+          "deployed": false,
+          "drone": false,
+          "emp": false,
+          "flakArea": false,
+          "forceField": false,
+          "gravityTether": false,
+          "gravityWell": false,
+          "hacking": false,
+          "immobilize": false,
+          "intimidating": false,
+          "irradiateH": false,
+          "irradiateL": false,
+          "irradiateM": false,
+          "jamming": false,
+          "limited": false,
+          "line": false,
+          "mine": false,
+          "mystical": false,
+          "navScram": false,
+          "numbing": false,
+          "orbital": false,
+          "pod": false,
+          "point": false,
+          "quantum": false,
+          "radiant": false,
+          "rail": false,
+          "ramming": false,
+          "redirect": false,
+          "restricted": false,
+          "ripper": false,
+          "scatterscan": false,
+          "smart": false,
+          "smoldering": false,
+          "spore": false,
+          "suspending": false,
+          "sustained": false,
+          "teleportation": false,
+          "tractor": false,
+          "transposition": false,
+          "vandalDrones": false,
+          "volatile": false,
+          "vortex": false
+        },
+        "speed": 0,
+        "weaponType": "direct"
+      }
+    },
+    {
+      "_id": "NgEW6UkQJWqTcyWa",
+      "name": "Soul Fragments",
+      "type": "starshipWeapon",
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 500000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "ac",
+        "attackBonus": "0",
+        "capacity": {
+          "max": null,
+          "value": null
+        },
+        "class": "light",
+        "cost": 0,
+        "costMultipliedBySize": false,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "3d4",
+              "operator": "",
+              "types": {}
+            }
+          ]
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "isPowered": true,
+        "modifiers": [],
+        "mount": {
+          "activated": false,
+          "arc": "turret",
+          "mounted": true
+        },
+        "pcu": 0,
+        "range": "medium",
+        "source": "CRB pg. 302",
+        "special": {
+          "anchoring": false,
+          "array": false,
+          "automated": false,
+          "broad": true,
+          "bugging": false,
+          "burrowing": false,
+          "buster": false,
+          "connecting": false,
+          "deathField": false,
+          "deployed": false,
+          "drone": false,
+          "emp": false,
+          "flakArea": false,
+          "forceField": false,
+          "gravityTether": false,
+          "gravityWell": false,
+          "hacking": false,
+          "immobilize": false,
+          "intimidating": false,
+          "irradiateH": false,
+          "irradiateL": false,
+          "irradiateM": false,
+          "jamming": false,
+          "limited": false,
+          "line": false,
+          "mine": false,
+          "mystical": false,
+          "navScram": false,
+          "numbing": false,
+          "orbital": false,
+          "pod": false,
+          "point": false,
+          "quantum": false,
+          "radiant": false,
+          "rail": false,
+          "ramming": false,
+          "redirect": false,
+          "restricted": false,
+          "ripper": false,
+          "scatterscan": false,
+          "smart": false,
+          "smoldering": false,
+          "spore": false,
+          "suspending": false,
+          "sustained": false,
+          "teleportation": false,
+          "tractor": false,
+          "transposition": false,
+          "vandalDrones": false,
+          "volatile": false,
+          "vortex": false
+        },
+        "speed": 0,
+        "weaponType": "direct"
+      }
+    }
+  ],
+  "permission": {
+    "SZHYoxgMlFX3BRiu": 3,
+    "default": 0
+  },
+  "prototypeToken": {
+    "name": "Derelict Shade",
+    "actorId": "ayVH8MPoicDA2qhQ",
+    "actorLink": false,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": "attributes.shields"
+    },
+    "displayBars": 20,
+    "displayName": 20,
+    "disposition": 0,
+    "flags": {},
+    "height": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 360,
+      "animation": {
+        "type": null,
+        "intensity": 5,
+        "reverse": false,
+        "speed": 5
+      },
+      "attenuation": 0.5,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "contrast": 0,
+      "darkness": {
+        "max": 1,
+        "min": 0
+      },
+      "dim": 0,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "shadows": 0
+    },
+    "lockRotation": false,
+    "mirrorX": false,
+    "mirrorY": false,
+    "randomImg": false,
+    "rotation": 0,
+    "scale": 1,
+    "sight": {
+      "angle": 360,
+      "attenuation": 0.1,
+      "brightness": 1,
+      "color": null,
+      "contrast": 0,
+      "enabled": false,
+      "range": 0,
+      "saturation": 0,
+      "visionMode": "basic"
+    },
+    "texture": {
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": null
+    },
+    "width": 1
+  },
+  "sort": 100001,
+  "system": {
+    "attributes": {
+      "ac": {
+        "misc": 0,
+        "value": 10
+      },
+      "complement": {
+        "max": 1,
+        "min": 0,
+        "value": 0
+      },
+      "computer": {
+        "value": 0
+      },
+      "criticalThreshold": {
+        "value": 10
+      },
+      "damageThreshold": {
+        "value": 0
+      },
+      "drift": {
+        "value": 0
+      },
+      "expansionBays": {
+        "value": 0
+      },
+      "hp": {
+        "increment": 10,
+        "max": 0,
+        "value": 90
+      },
+      "maneuverability": "",
+      "mounts": {
+        "aft": [],
+        "forward": [],
+        "port": [],
+        "starboard": [],
+        "turret": []
+      },
+      "pilotingBonus": {
+        "value": 0
+      },
+      "power": {
+        "max": 0,
+        "value": 0
+      },
+      "shields": {
+        "aft": {
+          "max": 0,
+          "value": 0
+        },
+        "forward": {
+          "max": 0,
+          "value": 0
+        },
+        "max": 0,
+        "port": {
+          "max": 0,
+          "value": 0
+        },
+        "starboard": {
+          "max": 0,
+          "value": 0
+        },
+        "value": 0
+      },
+      "speed": {
+        "value": 5
+      },
+      "systems": {
+        "engines": {
+          "affectedRoles": {
+            "pilot": true
+          },
+          "mod": 0,
+          "status": "nominal"
+        },
+        "lifeSupport": {
+          "affectedRoles": {
+            "captain": true
+          },
+          "mod": 0,
+          "status": "nominal"
+        },
+        "powerCore": {
+          "affectedRoles": {
+            "captain": true,
+            "chiefMate": true,
+            "engineer": true,
+            "gunner": true,
+            "magicOfficer": true,
+            "minorCrew": true,
+            "openCrew": true,
+            "pilot": true,
+            "scienceOfficer": true
+          },
+          "mod": 0,
+          "status": "nominal"
+        },
+        "sensors": {
+          "affectedRoles": {
+            "scienceOfficer": true
+          },
+          "mod": 0,
+          "status": "nominal"
+        },
+        "weaponsArrayAft": {
+          "affectedRoles": {
+            "gunner": true
+          },
+          "mod": 0,
+          "status": "nominal"
+        },
+        "weaponsArrayForward": {
+          "affectedRoles": {
+            "gunner": true
+          },
+          "mod": 0,
+          "status": "nominal"
+        },
+        "weaponsArrayPort": {
+          "affectedRoles": {
+            "gunner": true
+          },
+          "mod": 0,
+          "status": "nominal"
+        },
+        "weaponsArrayStarboard": {
+          "affectedRoles": {
+            "gunner": true
+          },
+          "mod": 0,
+          "status": "nominal"
+        }
+      },
+      "targetLock": {
+        "misc": 0,
+        "value": 10
+      }
+    },
+    "conditions": {},
     "crew": {
-      "useNPCCrew": false,
       "captain": {
-        "limit": 1,
-        "actorIds": []
+        "actorIds": [],
+        "limit": 1
       },
       "chiefMate": {
-        "limit": -1,
-        "actorIds": []
+        "actorIds": [],
+        "limit": -1
       },
       "engineer": {
-        "limit": -1,
-        "actorIds": []
+        "actorIds": [],
+        "limit": -1
       },
       "gunner": {
-        "limit": 0,
-        "actorIds": []
+        "actorIds": [],
+        "limit": 0
       },
       "magicOfficer": {
-        "limit": -1,
-        "actorIds": []
-      },
-      "passenger": {
-        "limit": -1,
-        "actorIds": []
-      },
-      "pilot": {
-        "limit": 1,
-        "actorIds": []
-      },
-      "scienceOfficer": {
-        "limit": -1,
-        "actorIds": []
+        "actorIds": [],
+        "limit": -1
       },
       "npcData": {
         "captain": {
@@ -95,759 +783,106 @@
           "numberOfUses": null,
           "skills": {}
         }
-      }
+      },
+      "passenger": {
+        "actorIds": [],
+        "limit": -1
+      },
+      "pilot": {
+        "actorIds": [],
+        "limit": 1
+      },
+      "scienceOfficer": {
+        "actorIds": [],
+        "limit": -1
+      },
+      "useNPCCrew": false
     },
-    "attributes": {
-      "maneuverability": "",
-      "pilotingBonus": {
-        "value": 0
-      },
-      "computer": {
-        "value": 0
-      },
-      "drift": {
-        "value": 0
-      },
-      "ac": {
-        "value": 10,
-        "misc": 0
-      },
-      "targetLock": {
-        "value": 10,
-        "misc": 0
-      },
-      "hp": {
-        "value": 90,
-        "max": 0,
-        "increment": 10
-      },
-      "damageThreshold": {
-        "value": 0
-      },
-      "criticalThreshold": {
-        "value": 10
-      },
-      "shields": {
-        "forward": {
-          "value": 0,
-          "max": 0
-        },
-        "aft": {
-          "value": 0,
-          "max": 0
-        },
-        "starboard": {
-          "value": 0,
-          "max": 0
-        },
-        "port": {
-          "value": 0,
-          "max": 0
-        },
-        "value": 0,
-        "max": 0
-      },
-      "speed": {
-        "value": 5
-      },
-      "power": {
-        "value": 0,
-        "max": 0
-      },
-      "complement": {
-        "min": 0,
-        "max": 1,
-        "value": 0
-      },
-      "expansionBays": {
-        "value": 0
-      },
-      "mounts": {
-        "forward": [],
-        "aft": [],
-        "starboard": [],
-        "port": [],
-        "turret": []
-      },
-      "systems": {
-        "lifeSupport": {
-          "status": "nominal",
-          "affectedRoles": {
-            "captain": true
-          },
-          "mod": 0
-        },
-        "sensors": {
-          "status": "nominal",
-          "affectedRoles": {
-            "scienceOfficer": true
-          },
-          "mod": 0
-        },
-        "weaponsArrayForward": {
-          "status": "nominal",
-          "affectedRoles": {
-            "gunner": true
-          },
-          "mod": 0
-        },
-        "weaponsArrayPort": {
-          "status": "nominal",
-          "affectedRoles": {
-            "gunner": true
-          },
-          "mod": 0
-        },
-        "weaponsArrayStarboard": {
-          "status": "nominal",
-          "affectedRoles": {
-            "gunner": true
-          },
-          "mod": 0
-        },
-        "weaponsArrayAft": {
-          "status": "nominal",
-          "affectedRoles": {
-            "gunner": true
-          },
-          "mod": 0
-        },
-        "engines": {
-          "status": "nominal",
-          "affectedRoles": {
-            "pilot": true
-          },
-          "mod": 0
-        },
-        "powerCore": {
-          "status": "nominal",
-          "affectedRoles": {
-            "captain": true,
-            "pilot": true,
-            "gunner": true,
-            "engineer": true,
-            "scienceOfficer": true,
-            "magicOfficer": true,
-            "chiefMate": true,
-            "openCrew": true,
-            "minorCrew": true
-          },
-          "mod": 0
-        }
-      }
+    "currency": {
+      "bp": 0,
+      "upb": 0
     },
+    "details": {
+      "frame": "",
+      "model": "",
+      "modifiers": {
+        "custom": "",
+        "value": []
+      },
+      "notes": "<p><strong>&nbsp;Fearsome: </strong>Once every 1d4 rounds, the creature can attempt the taunt captain crew action using its good skill bonus.</p>\n<hr />\n<p><strong>Teleportation: </strong>On its turn during the helm phase, in lieu of its standard movement, the creature can select an empty space within 5 hexes and teleport to that space with a facing of its choice. Once it uses this ability, it can&rsquo;t use it again for 1d4 rounds.</p>\n<hr />\n<p><strong>Living Starship (Ex) </strong>A derelict shade is an undead creature so immense that it functions as a starship (and thus engages only in starship combat). The ghostly remnants of the crew members, functioning as a unified whole, can take engineer, gunner, magic officerCOM, and pilot actions using the bonuses, level, and ranks listed above. Modifiers for its size, speed, and maneuverability have already been factored into its statistics. Use the following table to determine the effects when a derelict shade takes critical damage.</p>\n<table style=\"width: 69.6288%;\" border=\"1\">\n<tbody>\n<tr>\n<td style=\"width: 5.57295%;\"><strong>D%</strong></td>\n<td style=\"width: 10.3439%;\">&nbsp;<strong>SYSTEM</strong></td>\n<td style=\"width: 83.6533%;\">&nbsp;<strong>EFFECT</strong></td>\n</tr>\n<tr>\n<td style=\"width: 5.57295%;\">1&ndash;30</td>\n<td style=\"width: 10.3439%;\">&nbsp;Weapons array</td>\n<td style=\"width: 83.6533%;\">Randomly determine one arc containing weapons; condition applies to all gunner actions using weapons in that arc.&nbsp;</td>\n</tr>\n<tr>\n<td style=\"width: 5.57295%;\">31&ndash;60</td>\n<td style=\"width: 10.3439%;\">Propulsion&nbsp;</td>\n<td style=\"width: 83.6533%;\">&nbsp;Condition applies to all pilot actions.</td>\n</tr>\n<tr>\n<td style=\"width: 5.57295%;\">61&ndash;90</td>\n<td style=\"width: 10.3439%;\">Marrow</td>\n<td style=\"width: 83.6533%;\">Condition applies to all engineer and magic officer actions, except when patching or repairing the marrow.</td>\n</tr>\n<tr>\n<td style=\"width: 5.57295%;\">91&ndash;100</td>\n<td style=\"width: 10.3439%;\">Core&dagger;</td>\n<td style=\"width: 83.6533%;\">During the next round, each of the derelict shade&rsquo;s attempted actions has a 25% chance of failure.</td>\n</tr>\n</tbody>\n</table>\n<p>&nbsp; &dagger; A derelict shade&rsquo;s core doesn&rsquo;t gain critical damage conditions.</p>\n<hr />\n<p><strong>Shadeswarm (Ex)</strong> When using its teleportation ability to appear adjacent to a starship that has no shields remaining in one or more quadrants, a derelict shade can attempt a check using its gunnery bonus as part of using its teleportation. If the result is equal to or greater than the adjacent ship&rsquo;s AC, any living crew members aboard the starship are swarmed by spirits from the derelict shade. Each affected creature must succeed at a DC 11 Will save or be unable to act until after the next round&rsquo;s helm phase.</p>\n<hr />\n<p><strong>Ghosts in the Machine (Ex)&nbsp;</strong>A derelict shade&rsquo;s weaponry carries fragments of its crew&rsquo;s souls. If the derelict shade deals Hull Point damage to an enemy ship, these fragments infect the ship&rsquo;s systems and cause one randomly determined system to gain the glitching condition until the end of the next round, regardless of the amount of damage dealt. If the damage dealt would already give the system the glitching condition, it instead gains the malfunctioning condition until the end of the next round. A system that is already malfunctioning or wrecked is not affected.</p>\n<hr />\n<p><strong>Void Adaptation (Su) </strong></p>\n<p><strong>Source</strong><em> Alien Archive</em> 2 pg. 154</p>\n<p>A creature with void adaptation is inured to the void of outer space and has the following abilities:</p>\n<ul>\n<li>Immunity to cosmic rays.</li>\n<li>Immunity to the environmental effects of vacuum.</li>\n<li>No breath.</li>\n</ul>",
+      "size": "",
+      "tier": 4
+    },
+    "modifiers": [],
     "quadrants": {
-      "forward": {
-        "ac": {
-          "value": 10,
-          "misc": 0
+      "aft": {
+        "ablative": {
+          "max": null,
+          "value": null
         },
-        "targetLock": {
-          "value": 10,
-          "misc": 0
+        "ac": {
+          "misc": 0,
+          "value": 10
         },
         "shields": {
           "value": null
         },
+        "targetLock": {
+          "misc": 0,
+          "value": 10
+        }
+      },
+      "forward": {
         "ablative": {
-          "value": null,
-          "max": null
+          "max": null,
+          "value": null
+        },
+        "ac": {
+          "misc": 0,
+          "value": 10
+        },
+        "shields": {
+          "value": null
+        },
+        "targetLock": {
+          "misc": 0,
+          "value": 10
         }
       },
       "port": {
-        "ac": {
-          "value": 10,
-          "misc": 0
+        "ablative": {
+          "max": null,
+          "value": null
         },
-        "targetLock": {
-          "value": 10,
-          "misc": 0
+        "ac": {
+          "misc": 0,
+          "value": 10
         },
         "shields": {
           "value": null
         },
-        "ablative": {
-          "value": null,
-          "max": null
+        "targetLock": {
+          "misc": 0,
+          "value": 10
         }
       },
       "starboard": {
-        "ac": {
-          "value": 10,
-          "misc": 0
+        "ablative": {
+          "max": null,
+          "value": null
         },
-        "targetLock": {
-          "value": 10,
-          "misc": 0
+        "ac": {
+          "misc": 0,
+          "value": 10
         },
         "shields": {
           "value": null
         },
-        "ablative": {
-          "value": null,
-          "max": null
-        }
-      },
-      "aft": {
-        "ac": {
-          "value": 10,
-          "misc": 0
-        },
         "targetLock": {
-          "value": 10,
-          "misc": 0
-        },
-        "shields": {
-          "value": null
-        },
-        "ablative": {
-          "value": null,
-          "max": null
+          "misc": 0,
+          "value": 10
         }
       }
     }
-  },
-  "sort": 100001,
-  "flags": {},
-  "token": {
-    "flags": {},
-    "name": "Derelict Shade",
-    "displayName": 50,
-    "img": "icons/svg/mystery-man.svg",
-    "tint": "",
-    "width": 1,
-    "height": 1,
-    "scale": 1,
-    "mirrorX": false,
-    "mirrorY": false,
-    "lockRotation": false,
-    "rotation": 0,
-    "vision": false,
-    "dimSight": 0,
-    "brightSight": 0,
-    "dimLight": 0,
-    "brightLight": 0,
-    "sightAngle": 360,
-    "lightAngle": 360,
-    "lightColor": "",
-    "lightAlpha": 1,
-    "lightAnimation": {
-      "type": "",
-      "speed": 5,
-      "intensity": 5
-    },
-    "actorId": "ayVH8MPoicDA2qhQ",
-    "actorLink": false,
-    "disposition": -1,
-    "displayBars": 50,
-    "bar1": {
-      "attribute": "attributes.hp"
-    },
-    "bar2": {
-      "attribute": "attributes.shields"
-    },
-    "randomImg": false
-  },
-  "items": [
-    {
-      "_id": "preAsv3Lqg4GjQO0",
-      "name": "New StarshipFrame",
-      "type": "starshipFrame",
-      "data": {
-        "cost": null,
-        "costMultipliedBySize": false,
-        "pcu": null,
-        "isPowered": true,
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "",
-          "unidentified": ""
-        },
-        "source": "SOM, p. 130",
-        "type": "",
-        "modifiers": [],
-        "size": "small",
-        "maneuverability": "good",
-        "hitpoints": {
-          "base": 72,
-          "increment": 18
-        },
-        "damageThreshold": {
-          "base": 0
-        },
-        "weaponMounts": {
-          "forward": {
-            "lightSlots": 1,
-            "heavySlots": 0,
-            "capitalSlots": 0,
-            "spinalSlots": 0
-          },
-          "aft": {
-            "lightSlots": 1,
-            "heavySlots": 0,
-            "capitalSlots": 0,
-            "spinalSlots": 0
-          },
-          "port": {
-            "lightSlots": 0,
-            "heavySlots": 0,
-            "capitalSlots": 0,
-            "spinalSlots": 0
-          },
-          "starboard": {
-            "lightSlots": 0,
-            "heavySlots": 0,
-            "capitalSlots": 0,
-            "spinalSlots": 0
-          },
-          "turret": {
-            "lightSlots": 1,
-            "heavySlots": 0,
-            "capitalSlots": 0,
-            "spinalSlots": 0
-          }
-        },
-        "expansionBays": 0,
-        "crew": {
-          "minimum": 4,
-          "maximum": 4
-        },
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": 100000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "_id": "lX1JEVLfoX9LCehH",
-      "name": "Basic Shields 60",
-      "type": "starshipShield",
-      "data": {
-        "cost": 5,
-        "costMultipliedBySize": false,
-        "pcu": 15,
-        "isPowered": true,
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "",
-          "unidentified": ""
-        },
-        "source": "CRB pg. 302",
-        "type": "",
-        "modifiers": [],
-        "isDeflector": false,
-        "shieldPoints": 60,
-        "regeneration": 1,
-        "defenseValue": 0,
-        "armorBonus": 0,
-        "targetLockBonus": 0,
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": 200000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "_id": "NQPyIuxpmUElM7NZ",
-      "name": "New StarshipPowerCore",
-      "type": "starshipPowerCore",
-      "data": {
-        "cost": null,
-        "costMultipliedBySize": false,
-        "pcu": null,
-        "isPowered": true,
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "",
-          "unidentified": ""
-        },
-        "source": "",
-        "type": "",
-        "modifiers": [],
-        "supportedSizes": []
-      },
-      "sort": 300000,
-      "flags": {},
-      "effects": []
-    },
-    {
-      "_id": "bSv9phxFOHpYzjjC",
-      "name": "Speed 8",
-      "type": "starshipThruster",
-      "data": {
-        "cost": null,
-        "costMultipliedBySize": false,
-        "pcu": null,
-        "isPowered": true,
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "",
-          "unidentified": ""
-        },
-        "source": "",
-        "type": "",
-        "modifiers": [],
-        "supportedSize": "small",
-        "speed": 8,
-        "pilotingModifier": 0,
-        "isBooster": false,
-        "isEnabled": true,
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": 400000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "_id": "AB6EwdrARw4lKuON",
-      "name": "Howling Souls",
-      "type": "starshipWeapon",
-      "data": {
-        "cost": 0,
-        "costMultipliedBySize": false,
-        "pcu": 0,
-        "isPowered": true,
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "",
-          "unidentified": ""
-        },
-        "source": "CRB pg. 302",
-        "type": "",
-        "modifiers": [],
-        "range": "medium",
-        "class": "light",
-        "weaponType": "direct",
-        "speed": 0,
-        "attackBonus": "0",
-        "damage": {
-          "parts": [
-            [
-              "3d4"
-            ]
-          ]
-        },
-        "special": {
-          "array": false,
-          "broad": true,
-          "emp": false,
-          "irradiateL": false,
-          "irradiateM": false,
-          "irradiateH": false,
-          "limited": false,
-          "line": false,
-          "point": false,
-          "quantum": false,
-          "ripper": false,
-          "tractor": false,
-          "vortex": false,
-          "anchoring": false,
-          "automated": false,
-          "bugging": false,
-          "burrowing": false,
-          "buster": false,
-          "connecting": false,
-          "deathField": false,
-          "deployed": false,
-          "drone": false,
-          "flakArea": false,
-          "forceField": false,
-          "gravityTether": false,
-          "gravityWell": false,
-          "hacking": false,
-          "immobilize": false,
-          "intimidating": false,
-          "jamming": false,
-          "mine": false,
-          "mystical": false,
-          "navScram": false,
-          "numbing": true,
-          "orbital": false,
-          "pod": false,
-          "radiant": false,
-          "rail": false,
-          "ramming": false,
-          "redirect": false,
-          "restricted": false,
-          "scatterscan": false,
-          "smart": false,
-          "smoldering": false,
-          "spore": false,
-          "suspending": false,
-          "sustained": false,
-          "teleportation": false,
-          "transposition": false,
-          "vandalDrones": false,
-          "volatile": false
-        },
-        "mount": {
-          "mounted": true,
-          "arc": "forward",
-          "activated": false
-        },
-        "capacity": {
-          "value": null,
-          "max": null
-        },
-        "abilityMods": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        }
-      },
-      "sort": 100000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "_id": "ppGHNAC6vyVA115u",
-      "name": "Soul Fragments",
-      "type": "starshipWeapon",
-      "data": {
-        "cost": 0,
-        "costMultipliedBySize": false,
-        "pcu": 0,
-        "isPowered": true,
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "",
-          "unidentified": ""
-        },
-        "source": "CRB pg. 302",
-        "type": "",
-        "modifiers": [],
-        "range": "medium",
-        "class": "light",
-        "weaponType": "direct",
-        "speed": 0,
-        "attackBonus": "0",
-        "damage": {
-          "parts": [
-            [
-              "3d4"
-            ]
-          ]
-        },
-        "special": {
-          "array": false,
-          "broad": true,
-          "emp": false,
-          "irradiateL": false,
-          "irradiateM": false,
-          "irradiateH": false,
-          "limited": false,
-          "line": false,
-          "point": false,
-          "quantum": false,
-          "ripper": false,
-          "tractor": false,
-          "vortex": false,
-          "anchoring": false,
-          "automated": false,
-          "bugging": false,
-          "burrowing": false,
-          "buster": false,
-          "connecting": false,
-          "deathField": false,
-          "deployed": false,
-          "drone": false,
-          "flakArea": false,
-          "forceField": false,
-          "gravityTether": false,
-          "gravityWell": false,
-          "hacking": false,
-          "immobilize": false,
-          "intimidating": false,
-          "jamming": false,
-          "mine": false,
-          "mystical": false,
-          "navScram": false,
-          "numbing": false,
-          "orbital": false,
-          "pod": false,
-          "radiant": false,
-          "rail": false,
-          "ramming": false,
-          "redirect": false,
-          "restricted": false,
-          "scatterscan": false,
-          "smart": false,
-          "smoldering": false,
-          "spore": false,
-          "suspending": false,
-          "sustained": false,
-          "teleportation": false,
-          "transposition": false,
-          "vandalDrones": false,
-          "volatile": false
-        },
-        "mount": {
-          "mounted": true,
-          "arc": "aft",
-          "activated": false
-        },
-        "capacity": {
-          "value": null,
-          "max": null
-        },
-        "abilityMods": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        }
-      },
-      "sort": 200000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "_id": "NgEW6UkQJWqTcyWa",
-      "name": "Soul Fragments",
-      "type": "starshipWeapon",
-      "data": {
-        "cost": 0,
-        "costMultipliedBySize": false,
-        "pcu": 0,
-        "isPowered": true,
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "",
-          "unidentified": ""
-        },
-        "source": "CRB pg. 302",
-        "type": "",
-        "modifiers": [],
-        "range": "medium",
-        "class": "light",
-        "weaponType": "direct",
-        "speed": 0,
-        "attackBonus": "0",
-        "damage": {
-          "parts": [
-            [
-              "3d4"
-            ]
-          ]
-        },
-        "special": {
-          "array": false,
-          "broad": true,
-          "emp": false,
-          "irradiateL": false,
-          "irradiateM": false,
-          "irradiateH": false,
-          "limited": false,
-          "line": false,
-          "point": false,
-          "quantum": false,
-          "ripper": false,
-          "tractor": false,
-          "vortex": false,
-          "anchoring": false,
-          "automated": false,
-          "bugging": false,
-          "burrowing": false,
-          "buster": false,
-          "connecting": false,
-          "deathField": false,
-          "deployed": false,
-          "drone": false,
-          "flakArea": false,
-          "forceField": false,
-          "gravityTether": false,
-          "gravityWell": false,
-          "hacking": false,
-          "immobilize": false,
-          "intimidating": false,
-          "jamming": false,
-          "mine": false,
-          "mystical": false,
-          "navScram": false,
-          "numbing": false,
-          "orbital": false,
-          "pod": false,
-          "radiant": false,
-          "rail": false,
-          "ramming": false,
-          "redirect": false,
-          "restricted": false,
-          "scatterscan": false,
-          "smart": false,
-          "smoldering": false,
-          "spore": false,
-          "suspending": false,
-          "sustained": false,
-          "teleportation": false,
-          "transposition": false,
-          "vandalDrones": false,
-          "volatile": false
-        },
-        "mount": {
-          "mounted": true,
-          "arc": "turret",
-          "activated": false
-        },
-        "capacity": {
-          "value": null,
-          "max": null
-        },
-        "abilityMods": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        }
-      },
-      "sort": 500000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    }
-  ],
-  "effects": []
+  }
 }

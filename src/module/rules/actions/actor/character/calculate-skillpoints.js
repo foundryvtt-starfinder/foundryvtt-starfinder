@@ -26,8 +26,11 @@ export default function (engine) {
                 return 0;
             }
 
-            let roll = new Roll(bonus.modifier.toString(), data).evaluate({maximize: true});
-            let computedBonus = roll.total;
+            let computedBonus = 0;
+            try {
+                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                computedBonus = roll.total;
+            } catch {}
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
@@ -98,7 +101,7 @@ export default function (engine) {
         let skillpointsMax = 0;
         let totalLevel = 0;
         for (const cls of classes) {
-            const classData = cls.data.data;
+            const classData = cls.system;
 
             const classBonus = classData.levels * (intModifier + classData.skillRanks.value);
             skillpointsMax += classBonus;

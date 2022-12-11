@@ -22,7 +22,7 @@ export default function() {
             y: origin.y,
             distance: 1,
             direction: 0,
-            fillColor: game.user.data.color || "#FF0000"
+            fillColor: game.user.color || "#FF0000"
         };
 
         if (tool === "cone") data["angle"] = 90;
@@ -52,14 +52,14 @@ export default function() {
             let ratio = canvas.dimensions.size / canvas.dimensions.distance;
 
             // Update the shape data
-            if (["cone", "circle"].includes(template.data.t)) {
+            if (["cone", "circle"].includes(template.document.t)) {
                 const direction = ray.angle;
-                template.data.direction = Math.toDegrees(Math.floor((direction + (Math.PI * 0.125)) / (Math.PI * 0.25)) * (Math.PI * 0.25));
+                template.document.direction = Math.toDegrees(Math.floor((direction + (Math.PI * 0.125)) / (Math.PI * 0.25)) * (Math.PI * 0.25));
                 const distance = ray.distance / ratio;
-                template.data.distance = Math.floor(distance / canvas.dimensions.distance) * canvas.dimensions.distance;
+                template.document.distance = Math.floor(distance / canvas.dimensions.distance) * canvas.dimensions.distance;
             } else {
-                template.data.direction = Math.toDegrees(ray.angle);
-                template.data.distance = ray.distance / ratio;
+                template.document.direction = Math.toDegrees(ray.angle);
+                template.document.distance = ray.distance / ratio;
             }
 
             template.refresh();
@@ -69,7 +69,7 @@ export default function() {
 
     const _measuredTemplateOriginalHightlightGrid = MeasuredTemplate.prototype.highlightGrid;
     MeasuredTemplate.prototype.highlightGrid = function () {
-        if (!game.settings.get("sfrpg", "useStarfinderAOETemplates") || !["circle", "cone"].includes(this.data.t)) return _measuredTemplateOriginalHightlightGrid.call(this);
+        if (!game.settings.get("sfrpg", "useStarfinderAOETemplates") || !["circle", "cone"].includes(this.document.t)) return _measuredTemplateOriginalHightlightGrid.call(this);
 
         const grid = canvas.grid;
         const d = canvas.dimensions;
@@ -80,21 +80,21 @@ export default function() {
         if (!this.id || !this.shape) return;
 
         // Clear existing highlight
-        const hl = grid.getHighlightLayer(`Template.${this.id}`);
+        const hl = grid.getHighlightLayer(`MeasuredTemplate.${this.id}`);
         hl.clear();
 
         // Get number of rows and columns
-        let nr = Math.ceil(((this.data.distance * 1.5) / d.distance) / (d.size / grid.h));
-        let nc = Math.ceil(((this.data.distance * 1.5) / d.distance) / (d.size / grid.w));
+        let nr = Math.ceil(((this.document.distance * 1.5) / d.distance) / (d.size / grid.h));
+        let nc = Math.ceil(((this.document.distance * 1.5) / d.distance) / (d.size / grid.w));
 
         // Get the center of the grid position occupied by the template
-        let x = this.data.x;
-        let y = this.data.y;
+        let x = this.document.x;
+        let y = this.document.y;
 
         let [cx, cy] = grid.getCenter(x, y);
         let [col0, row0] = grid.grid.getGridPositionFromPixels(cx, cy);
-        let minAngle = (360 + ((this.data.direction - this.data.angle * 0.5) % 360)) % 360;
-        let maxAngle = (360 + ((this.data.direction + this.data.angle * 0.5) % 360)) % 360;
+        let minAngle = (360 + ((this.document.direction - this.document.angle * 0.5) % 360)) % 360;
+        let maxAngle = (360 + ((this.document.direction + this.document.angle * 0.5) % 360)) % 360;
 
         const within_angle = function (min, max, value) {
             min = (360 + min % 360) % 360;
@@ -126,14 +126,14 @@ export default function() {
         let originOffset = {x: 0, y: 0};
         // Offset measurment for cones
         // Offset is to ensure that cones only start measuring from cell borders
-        if (this.data.t === "cone") {
+        if (this.document.t === "cone") {
             // Degrees anticlockwise from pointing right. In 45-degree increments from 0 to 360
-            const dir = (this.data.direction >= 0 ? 360 - this.data.direction : -this.data.direction) % 360;
+            const dir = (this.document.direction >= 0 ? 360 - this.document.direction : -this.document.direction) % 360;
 
             // If we're not on a border for x, offset by 0.5 or -0.5 to the border of the cell in the direction we're looking on X axis
-            let xOffset = this.data.x % d.size !== 0 ? Math.sign(1 * (Math.round(Math.cos(degtorad(dir)) * 100)) / 100) / 2 : 0; // turns 1/0/-1 to 0.5/0/-0.5
+            let xOffset = this.document.x % d.size !== 0 ? Math.sign(1 * (Math.round(Math.cos(degtorad(dir)) * 100)) / 100) / 2 : 0; // turns 1/0/-1 to 0.5/0/-0.5
             // Same for Y, but cos Y goes down on screens, we invert
-            let yOffset = this.data.y % d.size !== 0 ? -Math.sign(1 * (Math.round(Math.sin(degtorad(dir)) * 100)) / 100) / 2 : 0;
+            let yOffset = this.document.y % d.size !== 0 ? -Math.sign(1 * (Math.round(Math.sin(degtorad(dir)) * 100)) / 100) / 2 : 0;
 
             originOffset.x = xOffset;
             originOffset.y = yOffset;
@@ -141,8 +141,8 @@ export default function() {
 
         // Point we are measuring distances from
         let origin = {
-            x: this.data.x + (originOffset.x * d.size),
-            y: this.data.y + (originOffset.y * d.size)
+            x: this.document.x + (originOffset.x * d.size),
+            y: this.document.y + (originOffset.y * d.size)
         };
 
         for (let a = -nc; a < nc; a++) {
@@ -156,7 +156,7 @@ export default function() {
                 let ray = new Ray(origin, {x: cellCenterX, y: cellCenterY});
 
                 let rayAngle = (360 + (ray.angle / (Math.PI / 180)) % 360) % 360;
-                if (this.data.t === "cone" && ray.distance > 0 && !within_angle(minAngle, maxAngle, rayAngle)) {
+                if (this.document.t === "cone" && ray.distance > 0 && !within_angle(minAngle, maxAngle, rayAngle)) {
                     continue;
                 }
 
@@ -164,7 +164,7 @@ export default function() {
                 let destination = { x: cellCenterX, y: cellCenterY };
 
                 let distance = measureDistance(destination, origin);
-                if (distance <= this.data.distance) {
+                if (distance <= this.document.distance) {
                     grid.grid.highlightGridPosition(hl, { x: gx, y: gy, color: fc, border: bc });
                 }
             }

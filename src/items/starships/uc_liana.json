@@ -1,71 +1,1434 @@
 {
   "_id": "pR65WxALKzNQZvYW",
   "name": "UC Liana",
-  "img": "icons/svg/mystery-man.svg",
-  "permission": {
-    "default": 0,
-    "SZHYoxgMlFX3BRiu": 3
-  },
   "type": "starship",
-  "data": {
-    "modifiers": [],
-    "conditions": {},
-    "details": {
-      "tier": 8,
-      "model": "",
-      "frame": "",
-      "size": "",
-      "notes": "",
-      "modifiers": {
-        "value": [],
-        "custom": ""
+  "effects": [],
+  "flags": {},
+  "img": "icons/svg/mystery-man.svg",
+  "items": [
+    {
+      "_id": "VeIDv0qY1V7vvUka",
+      "name": "New StarshipFrame",
+      "type": "starshipFrame",
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 100000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "cost": null,
+        "costMultipliedBySize": false,
+        "crew": {
+          "maximum": 5,
+          "minimum": 5
+        },
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageThreshold": {
+          "base": 0
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "expansionBays": 4,
+        "hitpoints": {
+          "base": 45,
+          "increment": 15
+        },
+        "isPowered": true,
+        "maneuverability": "good",
+        "modifiers": [],
+        "pcu": null,
+        "size": "medium",
+        "source": "AP#20, p. 51",
+        "weaponMounts": {
+          "aft": {
+            "capitalSlots": 0,
+            "heavySlots": 0,
+            "lightSlots": 0,
+            "spinalSlots": 0
+          },
+          "forward": {
+            "capitalSlots": 0,
+            "heavySlots": 0,
+            "lightSlots": 1,
+            "spinalSlots": 0
+          },
+          "port": {
+            "capitalSlots": 0,
+            "heavySlots": 0,
+            "lightSlots": 1,
+            "spinalSlots": 0
+          },
+          "starboard": {
+            "capitalSlots": 0,
+            "heavySlots": 0,
+            "lightSlots": 1,
+            "spinalSlots": 0
+          },
+          "turret": {
+            "capitalSlots": 0,
+            "heavySlots": 0,
+            "lightSlots": 2,
+            "spinalSlots": 0
+          }
+        }
       }
     },
-    "currency": {
-      "bp": 0,
-      "upb": 0
+    {
+      "_id": "6W1v3Drt6JWuMsUu",
+      "name": "M12 thrusters",
+      "type": "starshipThruster",
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 200000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "cost": 6,
+        "costMultipliedBySize": false,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "isBooster": false,
+        "isEnabled": true,
+        "isPowered": true,
+        "modifiers": [],
+        "pcu": 80,
+        "pilotingModifier": -1,
+        "source": "CRB pg. 297",
+        "speed": 12,
+        "supportedSize": "medium"
+      }
     },
+    {
+      "_id": "bB2fDzTzba7EqPDQ",
+      "name": "Medium Shields 160",
+      "type": "starshipShield",
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 300000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "armorBonus": 0,
+        "cost": 20,
+        "costMultipliedBySize": false,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "defenseValue": 0,
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "isDeflector": false,
+        "isPowered": true,
+        "modifiers": [],
+        "pcu": 45,
+        "regeneration": 8,
+        "shieldPoints": 160,
+        "source": "CRB pg. 302",
+        "targetLockBonus": 0
+      }
+    },
+    {
+      "_id": "vY7ASUPhhNg55KSw",
+      "name": "Light EMP cannon",
+      "type": "starshipWeapon",
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 400000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "ac",
+        "attackBonus": "0",
+        "capacity": {
+          "max": null,
+          "value": null
+        },
+        "class": "light",
+        "cost": 8,
+        "costMultipliedBySize": false,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "special",
+              "operator": "",
+              "types": {}
+            }
+          ]
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "isPowered": true,
+        "modifiers": [],
+        "mount": {
+          "activated": false,
+          "arc": "forward",
+          "mounted": true
+        },
+        "pcu": 10,
+        "range": "short",
+        "source": "CRB pg. 302",
+        "special": {
+          "anchoring": false,
+          "array": false,
+          "automated": false,
+          "broad": false,
+          "bugging": false,
+          "burrowing": false,
+          "buster": false,
+          "connecting": false,
+          "deathField": false,
+          "deployed": false,
+          "drone": false,
+          "emp": true,
+          "flakArea": false,
+          "forceField": false,
+          "gravityTether": false,
+          "gravityWell": false,
+          "hacking": false,
+          "immobilize": false,
+          "intimidating": false,
+          "irradiateH": false,
+          "irradiateL": false,
+          "irradiateM": false,
+          "jamming": false,
+          "limited": false,
+          "line": false,
+          "mine": false,
+          "mystical": false,
+          "navScram": false,
+          "numbing": false,
+          "orbital": false,
+          "pod": false,
+          "point": false,
+          "quantum": false,
+          "radiant": false,
+          "rail": false,
+          "ramming": false,
+          "redirect": false,
+          "restricted": false,
+          "ripper": false,
+          "scatterscan": false,
+          "smart": false,
+          "smoldering": false,
+          "spore": false,
+          "suspending": false,
+          "sustained": false,
+          "teleportation": false,
+          "tractor": false,
+          "transposition": false,
+          "vandalDrones": false,
+          "volatile": false,
+          "vortex": false
+        },
+        "speed": 0,
+        "weaponType": "direct"
+      }
+    },
+    {
+      "_id": "YM76D6wIEcOGEpdr",
+      "name": "Light spore torpedo launcher",
+      "type": "starshipWeapon",
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 500000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "tl",
+        "attackBonus": "0",
+        "capacity": {
+          "max": 5,
+          "value": 5
+        },
+        "class": "light",
+        "cost": 5,
+        "costMultipliedBySize": false,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "3d6",
+              "operator": "",
+              "types": {}
+            }
+          ]
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": null
+        },
+        "isPowered": true,
+        "modifiers": [],
+        "mount": {
+          "arc": "port",
+          "mounted": true
+        },
+        "pcu": 5,
+        "range": "medium",
+        "source": "PW pg. 153",
+        "special": {
+          "anchoring": false,
+          "array": false,
+          "automated": false,
+          "broad": false,
+          "bugging": false,
+          "burrowing": false,
+          "buster": false,
+          "connecting": false,
+          "deathField": false,
+          "deployed": false,
+          "drone": false,
+          "emp": false,
+          "flakArea": false,
+          "forceField": false,
+          "gravityTether": false,
+          "gravityWell": false,
+          "hacking": false,
+          "immobilize": false,
+          "intimidating": false,
+          "irradiateH": false,
+          "irradiateL": false,
+          "irradiateM": false,
+          "jamming": false,
+          "limited": true,
+          "line": false,
+          "mine": false,
+          "mystical": false,
+          "navScram": false,
+          "numbing": false,
+          "orbital": false,
+          "pod": false,
+          "point": false,
+          "quantum": false,
+          "radiant": false,
+          "rail": false,
+          "ramming": false,
+          "redirect": false,
+          "restricted": false,
+          "ripper": false,
+          "scatterscan": false,
+          "smart": false,
+          "smoldering": false,
+          "spore": true,
+          "suspending": false,
+          "sustained": false,
+          "teleportation": false,
+          "tractor": false,
+          "transposition": false,
+          "vandalDrones": false,
+          "volatile": false,
+          "vortex": false
+        },
+        "speed": 14,
+        "weaponType": "tracking"
+      }
+    },
+    {
+      "_id": "lwt82lboBeADPSPn",
+      "name": "Light spore torpedo launcher",
+      "type": "starshipWeapon",
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 600000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "tl",
+        "attackBonus": "0",
+        "capacity": {
+          "max": 5,
+          "value": 5
+        },
+        "class": "light",
+        "cost": 5,
+        "costMultipliedBySize": false,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "3d6",
+              "operator": "",
+              "types": {}
+            }
+          ]
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": null
+        },
+        "isPowered": true,
+        "modifiers": [],
+        "mount": {
+          "arc": "starboard",
+          "mounted": true
+        },
+        "pcu": 5,
+        "range": "medium",
+        "source": "PW pg. 153",
+        "special": {
+          "anchoring": false,
+          "array": false,
+          "automated": false,
+          "broad": false,
+          "bugging": false,
+          "burrowing": false,
+          "buster": false,
+          "connecting": false,
+          "deathField": false,
+          "deployed": false,
+          "drone": false,
+          "emp": false,
+          "flakArea": false,
+          "forceField": false,
+          "gravityTether": false,
+          "gravityWell": false,
+          "hacking": false,
+          "immobilize": false,
+          "intimidating": false,
+          "irradiateH": false,
+          "irradiateL": false,
+          "irradiateM": false,
+          "jamming": false,
+          "limited": true,
+          "line": false,
+          "mine": false,
+          "mystical": false,
+          "navScram": false,
+          "numbing": false,
+          "orbital": false,
+          "pod": false,
+          "point": false,
+          "quantum": false,
+          "radiant": false,
+          "rail": false,
+          "ramming": false,
+          "redirect": false,
+          "restricted": false,
+          "ripper": false,
+          "scatterscan": false,
+          "smart": false,
+          "smoldering": false,
+          "spore": true,
+          "suspending": false,
+          "sustained": false,
+          "teleportation": false,
+          "tractor": false,
+          "transposition": false,
+          "vandalDrones": false,
+          "volatile": false,
+          "vortex": false
+        },
+        "speed": 14,
+        "weaponType": "tracking"
+      }
+    },
+    {
+      "_id": "x4kM6I7x4ezZNBoA",
+      "name": "Connecting tendril",
+      "type": "starshipWeapon",
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 700000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "ac",
+        "attackBonus": "0",
+        "capacity": {
+          "max": null,
+          "value": null
+        },
+        "class": "light",
+        "cost": 10,
+        "costMultipliedBySize": false,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "3d6",
+              "operator": "",
+              "types": {}
+            }
+          ]
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": null
+        },
+        "isPowered": true,
+        "modifiers": [],
+        "mount": {
+          "arc": "turret",
+          "mounted": true
+        },
+        "pcu": 10,
+        "range": "short",
+        "source": "AP #20 pg. 49",
+        "special": {
+          "anchoring": false,
+          "array": false,
+          "automated": false,
+          "broad": false,
+          "bugging": false,
+          "burrowing": true,
+          "buster": false,
+          "connecting": true,
+          "deathField": false,
+          "deployed": false,
+          "drone": false,
+          "emp": false,
+          "flakArea": false,
+          "forceField": false,
+          "gravityTether": false,
+          "gravityWell": false,
+          "hacking": false,
+          "immobilize": false,
+          "intimidating": false,
+          "irradiateH": false,
+          "irradiateL": false,
+          "irradiateM": false,
+          "jamming": false,
+          "limited": false,
+          "line": false,
+          "mine": false,
+          "mystical": true,
+          "navScram": false,
+          "numbing": false,
+          "orbital": false,
+          "pod": false,
+          "point": false,
+          "quantum": false,
+          "radiant": false,
+          "rail": false,
+          "ramming": false,
+          "redirect": false,
+          "restricted": false,
+          "ripper": false,
+          "scatterscan": false,
+          "smart": false,
+          "smoldering": false,
+          "spore": false,
+          "suspending": false,
+          "sustained": false,
+          "teleportation": false,
+          "tractor": false,
+          "transposition": false,
+          "vandalDrones": false,
+          "volatile": false,
+          "vortex": false
+        },
+        "speed": 0,
+        "weaponType": "direct"
+      }
+    },
+    {
+      "_id": "AUwi5SHXw5RALE5d",
+      "name": "Connecting tendril",
+      "type": "starshipWeapon",
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 800000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "ac",
+        "attackBonus": "0",
+        "capacity": {
+          "max": null,
+          "value": null
+        },
+        "class": "light",
+        "cost": 10,
+        "costMultipliedBySize": false,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "3d6",
+              "operator": "",
+              "types": {}
+            }
+          ]
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": null
+        },
+        "isPowered": true,
+        "modifiers": [],
+        "mount": {
+          "arc": "turret",
+          "mounted": true
+        },
+        "pcu": 10,
+        "range": "short",
+        "source": "AP #20 pg. 49",
+        "special": {
+          "anchoring": false,
+          "array": false,
+          "automated": false,
+          "broad": false,
+          "bugging": false,
+          "burrowing": true,
+          "buster": false,
+          "connecting": true,
+          "deathField": false,
+          "deployed": false,
+          "drone": false,
+          "emp": false,
+          "flakArea": false,
+          "forceField": false,
+          "gravityTether": false,
+          "gravityWell": false,
+          "hacking": false,
+          "immobilize": false,
+          "intimidating": false,
+          "irradiateH": false,
+          "irradiateL": false,
+          "irradiateM": false,
+          "jamming": false,
+          "limited": false,
+          "line": false,
+          "mine": false,
+          "mystical": true,
+          "navScram": false,
+          "numbing": false,
+          "orbital": false,
+          "pod": false,
+          "point": false,
+          "quantum": false,
+          "radiant": false,
+          "rail": false,
+          "ramming": false,
+          "redirect": false,
+          "restricted": false,
+          "ripper": false,
+          "scatterscan": false,
+          "smart": false,
+          "smoldering": false,
+          "spore": false,
+          "suspending": false,
+          "sustained": false,
+          "teleportation": false,
+          "tractor": false,
+          "transposition": false,
+          "vandalDrones": false,
+          "volatile": false,
+          "vortex": false
+        },
+        "speed": 0,
+        "weaponType": "direct"
+      }
+    },
+    {
+      "_id": "WHPussTrCOMN1ALG",
+      "name": "Pulse Red",
+      "type": "starshipPowerCore",
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 900000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "cost": 17,
+        "costMultipliedBySize": false,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "isPowered": true,
+        "modifiers": [],
+        "pcu": 175,
+        "source": "CRB pg. 296",
+        "supportedSizes": [
+          "medium",
+          "small",
+          "tiny"
+        ]
+      }
+    },
+    {
+      "_id": "FaJT7etkWrROvaUq",
+      "name": "Signal Booster",
+      "type": "starshipDriftEngine",
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 1000000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "cost": 5,
+        "costMultipliedBySize": true,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "engineRating": 2,
+        "isPowered": true,
+        "maxSize": "huge",
+        "modifiers": [],
+        "pcu": 100,
+        "source": "CRB pg. 298"
+      }
+    },
+    {
+      "_id": "mMyGVMv8EicX3cuK",
+      "name": "Advanced long-range sensors",
+      "type": "starshipSensor",
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 1100000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "cost": 14,
+        "costMultipliedBySize": false,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "isPowered": true,
+        "modifier": 4,
+        "modifiers": [],
+        "pcu": null,
+        "range": "long",
+        "source": "CRB pg. 301"
+      }
+    },
+    {
+      "_id": "79Ht9yz0fpfDA7YE",
+      "name": "Algal Shielding",
+      "type": "starshipOtherSystem",
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 1200000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "cost": 2,
+        "costMultipliedBySize": true,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>The algal shielding system can be installed only in a biomechanical starship.</p>\n<p>The hull of a vessel with algal shielding has a layer made of water-filled, valved chambers that circulate blue-green algae through the ship, interfacing with the life-support system and most living parts of the ship. This supplemental circulatory system has two functions. First, the algae act as a radiation buffer. When a biomechanical starship with algal shielding takes damage from a weapon with the irradiate special property (Core Rulebook 304), the algal shielding grants a +2 circumstance bonus to saving throws against radiation and other @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Poisons} introduced to the shipâ€™s internal atmosphere. This system also functions as one hydroponic garden (Pact Worlds 153). If a critical damage effect causes a vesselâ€™s life-support system to become malfunctioning or wrecked, the algal shielding provides no benefit until the life-support systemâ€™s condition is improved to glitching or normal.</p>"
+        },
+        "isPowered": true,
+        "modifiers": [],
+        "pcu": 0,
+        "source": "SOM pg. 27"
+      }
+    },
+    {
+      "_id": "7mCWKxSMZaV2po3Y",
+      "name": "Common crew quarters",
+      "type": "starshipCrewQuarter",
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 1300000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "cost": null,
+        "costMultipliedBySize": false,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p><span class=\"fontstyle0\">Common crew quarters are the most basic type. They consist of simple bunks (sometimes folding out from the side of a hallway) or other similarly austere places to rest. Crew members who sleep in common quarters usually keep their personal possessions in a footlocker. Common crew quarters also include a communal bathroom (which includes a military-style shower) and a tiny galley (big enough to prepare only the most basic of meals). Starships with crews numbering in the dozens or hundreds often have massive barracks where crew members sleep in shifts</span> .</p>"
+        },
+        "isPowered": true,
+        "modifiers": [],
+        "pcu": null,
+        "source": "CRB pg. 298"
+      }
+    },
+    {
+      "_id": "pZbMfs0QvngVzyCx",
+      "name": "Biocamouflage",
+      "type": "starshipOtherSystem",
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 1400000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "cost": 2,
+        "costMultipliedBySize": true,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "A biomechanical ship with a biocamouflage system can appear to be an astronomical body rather than a starship. A vessel that can land can instead appear to be a geological formation rather than a starship. To appear to be either, the starship must move in a straight trajectory, engaging in no turns or other maneuvers an astronomical body could not duplicate; the DC to scan the starship then increases by 5. If the check to scan the camouflaged ship fails, the scanner believes the ship is an astronomical body or geological object, taking a â€“4 penalty to further scans while the belief endures. This belief ends as soon as the camouflaged starship makes any maneuver or change in speed impossible for the object the starship is believed to be."
+        },
+        "isPowered": true,
+        "modifiers": [],
+        "pcu": 5,
+        "source": "AP #20 pg. 47"
+      }
+    },
+    {
+      "_id": "YWbtnK0RSJiIBUfd",
+      "name": "Mk 4 armor",
+      "type": "starshipArmor",
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 1500000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "armorBonus": 4,
+        "cost": 5,
+        "costMultipliedBySize": true,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "isPowered": true,
+        "modifiers": [],
+        "pcu": null,
+        "source": "CRB pg. 297",
+        "targetLockPenalty": 0,
+        "turnDistancePenalty": 0
+      }
+    },
+    {
+      "_id": "TadBhXuIWlsEZfTM",
+      "name": "Mk 6 defenses",
+      "type": "starshipDefensiveCountermeasure",
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 1600000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "cost": 11,
+        "costMultipliedBySize": false,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "isPowered": true,
+        "modifiers": [],
+        "pcu": 5,
+        "source": "CRB pg. 297",
+        "targetLockBonus": 6
+      }
+    },
+    {
+      "_id": "xYq6LuzUJ80zhb14",
+      "name": "Mk 2 tetranode",
+      "type": "starshipComputer",
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 1700000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "cost": 16,
+        "costMultipliedBySize": false,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "isPowered": true,
+        "modifier": 2,
+        "modifiers": [],
+        "nodes": 4,
+        "pcu": 15,
+        "source": "CRB pg. 297"
+      }
+    },
+    {
+      "_id": "QzmJ8U17xybtI9Vx",
+      "name": "Root System",
+      "type": "starshipOtherSystem",
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 1800000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "cost": 2,
+        "costMultipliedBySize": true,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>A biomechanical starship must usually be in proximity to a star to use its self-repair functions, but not so with a root system. A vessel that has a root system can instead attach to a planet, asteroid, or other astronomical body to acquire materials and energy for self‑repair. Larger ships can use a root system to carry such self-repair fuel with the craft. Such use of available material is usually enough for self-repair to function as normal, subject to GM discretion.</p>"
+        },
+        "isPowered": true,
+        "modifiers": [],
+        "pcu": 5,
+        "source": "AP #20 pg. 48"
+      }
+    },
+    {
+      "_id": "fTdEFaFezG4a35Wc",
+      "name": "Arcane laboratory",
+      "type": "starshipExpansionBay",
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 1900000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "cost": 1,
+        "costMultipliedBySize": false,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "An arcane laboratory contains all the tools and space necessary to craft magic items (see page 235), though the crafter must still provide the necessary raw materials. Such a laboratory reduces the crafting time by half"
+        },
+        "isPowered": true,
+        "modifiers": [],
+        "pcu": 1,
+        "source": "CRB pg. 300"
+      }
+    },
+    {
+      "_id": "6082Woo0zf23c0g2",
+      "name": "Hydroponic Garden",
+      "type": "starshipExpansionBay",
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 2000000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "cost": 5,
+        "costMultipliedBySize": false,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "This space holds an entirely self-sustaining garden, complete with oxygen recycling, food production, and lighting that fosters advanced growth. A hydroponic garden takes up two expansion bays and can provide food for up to 10 Medium-sized creatures indefinitely, even if the rest of the vessel is without full power or propulsion. Multiple hydroponic gardens can be linked together to form one massive garden space."
+        },
+        "isPowered": true,
+        "modifiers": [],
+        "pcu": 0,
+        "source": "PW pg. 153"
+      }
+    },
+    {
+      "_id": "I1shrE2AOt9eaL15",
+      "name": "Science lab",
+      "type": "starshipExpansionBay",
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 2100000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "cost": 1,
+        "costMultipliedBySize": false,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "A science lab contains scientific apparatuses and other laboratory equipment to aid in the research of certain topics. A general science lab provides a +1 circumstance bonus to Life Science and Physical Science checks (and is called a general science lab), a life science lab provides a +2 circumstance bonus to Life Science checks, and a physical science lab provides a +2 circumstance bonus to Physical Science checks. The lab type is chosen when the expansion bay is converted."
+        },
+        "isPowered": true,
+        "modifiers": [],
+        "pcu": 2,
+        "source": "CRB pg. 300"
+      }
+    },
+    {
+      "_id": "TbD0Kth2azo70CRi",
+      "name": "Tech workshop",
+      "type": "starshipExpansionBay",
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 2200000,
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "cost": 1,
+        "costMultipliedBySize": false,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "A tech workshop contains all the space and tools necessary to craft technological items (see page 235), though the crafter must still provide the necessary raw materials. Such a workshop reduces the crafting time by half"
+        },
+        "isPowered": true,
+        "modifiers": [],
+        "pcu": 3,
+        "source": "CRB pg. 300"
+      }
+    }
+  ],
+  "permission": {
+    "SZHYoxgMlFX3BRiu": 3,
+    "default": 0
+  },
+  "prototypeToken": {
+    "name": "UC Liana",
+    "actorId": "pR65WxALKzNQZvYW",
+    "actorLink": false,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": "attributes.shields"
+    },
+    "displayBars": 20,
+    "displayName": 20,
+    "disposition": 0,
+    "flags": {},
+    "height": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 360,
+      "animation": {
+        "type": null,
+        "intensity": 5,
+        "reverse": false,
+        "speed": 5
+      },
+      "attenuation": 0.5,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "contrast": 0,
+      "darkness": {
+        "max": 1,
+        "min": 0
+      },
+      "dim": 0,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "shadows": 0
+    },
+    "lockRotation": false,
+    "mirrorX": false,
+    "mirrorY": false,
+    "randomImg": false,
+    "rotation": 0,
+    "scale": 1,
+    "sight": {
+      "angle": 360,
+      "attenuation": 0.1,
+      "brightness": 1,
+      "color": null,
+      "contrast": 0,
+      "enabled": false,
+      "range": 0,
+      "saturation": 0,
+      "visionMode": "basic"
+    },
+    "texture": {
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": null
+    },
+    "width": 1
+  },
+  "sort": 100001,
+  "system": {
+    "attributes": {
+      "ac": {
+        "misc": 0,
+        "value": 10
+      },
+      "complement": {
+        "max": 1,
+        "min": 0,
+        "value": 0
+      },
+      "computer": {
+        "value": 0
+      },
+      "criticalThreshold": {
+        "value": 10
+      },
+      "damageThreshold": {
+        "value": 0
+      },
+      "drift": {
+        "value": 0
+      },
+      "expansionBays": {
+        "value": 0
+      },
+      "hp": {
+        "increment": 10,
+        "max": 0,
+        "value": 75
+      },
+      "maneuverability": "",
+      "mounts": {
+        "aft": [],
+        "forward": [],
+        "port": [],
+        "starboard": [],
+        "turret": []
+      },
+      "pilotingBonus": {
+        "value": 0
+      },
+      "power": {
+        "max": 0,
+        "value": 0
+      },
+      "shields": {
+        "aft": {
+          "max": 0,
+          "value": 0
+        },
+        "forward": {
+          "max": 0,
+          "value": 0
+        },
+        "max": 0,
+        "port": {
+          "max": 0,
+          "value": 0
+        },
+        "starboard": {
+          "max": 0,
+          "value": 0
+        },
+        "value": 0
+      },
+      "speed": {
+        "value": 5
+      },
+      "systems": {
+        "engines": {
+          "affectedRoles": {
+            "pilot": true
+          },
+          "mod": 0,
+          "status": "nominal"
+        },
+        "lifeSupport": {
+          "affectedRoles": {
+            "captain": true
+          },
+          "mod": 0,
+          "status": "nominal"
+        },
+        "powerCore": {
+          "affectedRoles": {
+            "captain": true,
+            "chiefMate": true,
+            "engineer": true,
+            "gunner": true,
+            "magicOfficer": true,
+            "minorCrew": true,
+            "openCrew": true,
+            "pilot": true,
+            "scienceOfficer": true
+          },
+          "mod": 0,
+          "status": "nominal"
+        },
+        "sensors": {
+          "affectedRoles": {
+            "scienceOfficer": true
+          },
+          "mod": 0,
+          "status": "nominal"
+        },
+        "weaponsArrayAft": {
+          "affectedRoles": {
+            "gunner": true
+          },
+          "mod": 0,
+          "status": "nominal"
+        },
+        "weaponsArrayForward": {
+          "affectedRoles": {
+            "gunner": true
+          },
+          "mod": 0,
+          "status": "nominal"
+        },
+        "weaponsArrayPort": {
+          "affectedRoles": {
+            "gunner": true
+          },
+          "mod": 0,
+          "status": "nominal"
+        },
+        "weaponsArrayStarboard": {
+          "affectedRoles": {
+            "gunner": true
+          },
+          "mod": 0,
+          "status": "nominal"
+        }
+      },
+      "targetLock": {
+        "misc": 0,
+        "value": 10
+      }
+    },
+    "conditions": {},
     "crew": {
-      "useNPCCrew": true,
       "captain": {
-        "limit": 1,
         "actorIds": [],
-        "actors": []
+        "actors": [],
+        "limit": 1
       },
       "chiefMate": {
-        "limit": -1,
         "actorIds": [],
-        "actors": []
+        "actors": [],
+        "limit": -1
       },
       "engineer": {
-        "limit": -1,
         "actorIds": [],
-        "actors": []
+        "actors": [],
+        "limit": -1
       },
       "gunner": {
-        "limit": 5,
         "actorIds": [],
-        "actors": []
+        "actors": [],
+        "limit": 5
       },
       "magicOfficer": {
-        "limit": -1,
         "actorIds": [],
-        "actors": []
-      },
-      "passenger": {
-        "limit": -1,
-        "actorIds": [],
-        "actors": []
-      },
-      "pilot": {
-        "limit": 1,
-        "actorIds": [],
-        "actors": []
-      },
-      "scienceOfficer": {
-        "limit": -1,
-        "actorIds": [],
-        "actors": []
+        "actors": [],
+        "limit": -1
       },
       "npcData": {
         "captain": {
@@ -73,48 +1436,48 @@
           "numberOfUses": 1,
           "skills": {
             "blu": {
-              "isTrainedOnly": false,
-              "hasArmorCheckPenalty": false,
-              "value": 0,
-              "misc": 0,
-              "ranks": 8,
               "ability": "int",
-              "subname": "",
+              "enabled": true,
+              "hasArmorCheckPenalty": false,
+              "isTrainedOnly": false,
+              "misc": 0,
               "mod": 21,
-              "enabled": true
+              "ranks": 8,
+              "subname": "",
+              "value": 0
             },
             "dip": {
-              "isTrainedOnly": false,
-              "hasArmorCheckPenalty": false,
-              "value": 0,
-              "misc": 0,
-              "ranks": 8,
               "ability": "int",
-              "subname": "",
+              "enabled": true,
+              "hasArmorCheckPenalty": false,
+              "isTrainedOnly": false,
+              "misc": 0,
               "mod": 16,
-              "enabled": true
+              "ranks": 8,
+              "subname": "",
+              "value": 0
             },
             "mys": {
-              "isTrainedOnly": false,
-              "hasArmorCheckPenalty": false,
-              "value": 0,
-              "misc": 0,
-              "ranks": 8,
               "ability": "int",
-              "subname": "",
+              "enabled": true,
+              "hasArmorCheckPenalty": false,
+              "isTrainedOnly": false,
+              "misc": 0,
               "mod": 16,
-              "enabled": true
+              "ranks": 8,
+              "subname": "",
+              "value": 0
             },
             "pil": {
-              "isTrainedOnly": false,
-              "hasArmorCheckPenalty": false,
-              "value": 0,
-              "misc": 0,
-              "ranks": 8,
               "ability": "int",
-              "subname": "",
+              "enabled": true,
+              "hasArmorCheckPenalty": false,
+              "isTrainedOnly": false,
+              "misc": 0,
               "mod": 16,
-              "enabled": true
+              "ranks": 8,
+              "subname": "",
+              "value": 0
             }
           }
         },
@@ -128,15 +1491,15 @@
           "numberOfUses": 1,
           "skills": {
             "eng": {
-              "isTrainedOnly": false,
-              "hasArmorCheckPenalty": false,
-              "value": 0,
-              "misc": 0,
-              "ranks": 8,
               "ability": "int",
-              "subname": "",
+              "enabled": true,
+              "hasArmorCheckPenalty": false,
+              "isTrainedOnly": false,
+              "misc": 0,
               "mod": 21,
-              "enabled": true
+              "ranks": 8,
+              "subname": "",
+              "value": 0
             }
           }
         },
@@ -144,16 +1507,16 @@
           "abilities": {},
           "numberOfUses": 1,
           "skills": {
-            "pil": {
-              "isTrainedOnly": false,
-              "hasArmorCheckPenalty": false,
-              "value": 0,
-              "misc": 0,
-              "ranks": 8,
+            "gun": {
               "ability": "int",
-              "subname": "",
+              "enabled": true,
+              "hasArmorCheckPenalty": false,
+              "isTrainedOnly": false,
+              "misc": 0,
               "mod": 14,
-              "enabled": true
+              "ranks": 8,
+              "subname": "",
+              "value": 0
             }
           }
         },
@@ -167,15 +1530,15 @@
           "numberOfUses": 1,
           "skills": {
             "pil": {
-              "isTrainedOnly": false,
-              "hasArmorCheckPenalty": false,
-              "value": 0,
-              "misc": 0,
-              "ranks": 8,
               "ability": "int",
-              "subname": "",
+              "enabled": true,
+              "hasArmorCheckPenalty": false,
+              "isTrainedOnly": false,
+              "misc": 0,
               "mod": 21,
-              "enabled": true
+              "ranks": 8,
+              "subname": "",
+              "value": 0
             }
           }
         },
@@ -184,1443 +1547,121 @@
           "numberOfUses": 1,
           "skills": {
             "com": {
-              "isTrainedOnly": false,
-              "hasArmorCheckPenalty": false,
-              "value": 0,
-              "misc": 0,
-              "ranks": 8,
               "ability": "int",
-              "subname": "",
+              "enabled": true,
+              "hasArmorCheckPenalty": false,
+              "isTrainedOnly": false,
+              "misc": 0,
               "mod": 21,
-              "enabled": true
+              "ranks": 8,
+              "subname": "",
+              "value": 0
             }
           }
         }
-      }
+      },
+      "passenger": {
+        "actorIds": [],
+        "actors": [],
+        "limit": -1
+      },
+      "pilot": {
+        "actorIds": [],
+        "actors": [],
+        "limit": 1
+      },
+      "scienceOfficer": {
+        "actorIds": [],
+        "actors": [],
+        "limit": -1
+      },
+      "useNPCCrew": true
     },
-    "attributes": {
-      "maneuverability": "",
-      "pilotingBonus": {
-        "value": 0
-      },
-      "computer": {
-        "value": 0
-      },
-      "drift": {
-        "value": 0
-      },
-      "ac": {
-        "value": 10,
-        "misc": 0
-      },
-      "targetLock": {
-        "value": 10,
-        "misc": 0
-      },
-      "hp": {
-        "value": 75,
-        "max": 0,
-        "increment": 10
-      },
-      "damageThreshold": {
-        "value": 0
-      },
-      "criticalThreshold": {
-        "value": 10
-      },
-      "shields": {
-        "forward": {
-          "value": 0,
-          "max": 0
-        },
-        "aft": {
-          "value": 0,
-          "max": 0
-        },
-        "starboard": {
-          "value": 0,
-          "max": 0
-        },
-        "port": {
-          "value": 0,
-          "max": 0
-        },
-        "value": 0,
-        "max": 0
-      },
-      "speed": {
-        "value": 5
-      },
-      "power": {
-        "value": 0,
-        "max": 0
-      },
-      "complement": {
-        "min": 0,
-        "max": 1,
-        "value": 0
-      },
-      "expansionBays": {
-        "value": 0
-      },
-      "mounts": {
-        "forward": [],
-        "aft": [],
-        "starboard": [],
-        "port": [],
-        "turret": []
-      },
-      "systems": {
-        "lifeSupport": {
-          "status": "nominal",
-          "affectedRoles": {
-            "captain": true
-          },
-          "mod": 0
-        },
-        "sensors": {
-          "status": "nominal",
-          "affectedRoles": {
-            "scienceOfficer": true
-          },
-          "mod": 0
-        },
-        "weaponsArrayForward": {
-          "status": "nominal",
-          "affectedRoles": {
-            "gunner": true
-          },
-          "mod": 0
-        },
-        "weaponsArrayPort": {
-          "status": "nominal",
-          "affectedRoles": {
-            "gunner": true
-          },
-          "mod": 0
-        },
-        "weaponsArrayStarboard": {
-          "status": "nominal",
-          "affectedRoles": {
-            "gunner": true
-          },
-          "mod": 0
-        },
-        "weaponsArrayAft": {
-          "status": "nominal",
-          "affectedRoles": {
-            "gunner": true
-          },
-          "mod": 0
-        },
-        "engines": {
-          "status": "nominal",
-          "affectedRoles": {
-            "pilot": true
-          },
-          "mod": 0
-        },
-        "powerCore": {
-          "status": "nominal",
-          "affectedRoles": {
-            "captain": true,
-            "pilot": true,
-            "gunner": true,
-            "engineer": true,
-            "scienceOfficer": true,
-            "magicOfficer": true,
-            "chiefMate": true,
-            "openCrew": true,
-            "minorCrew": true
-          },
-          "mod": 0
-        }
-      }
+    "currency": {
+      "bp": 0,
+      "upb": 0
     },
+    "details": {
+      "frame": "",
+      "model": "",
+      "modifiers": {
+        "custom": "",
+        "value": []
+      },
+      "notes": "",
+      "size": "",
+      "tier": 8
+    },
+    "modifiers": [],
     "quadrants": {
-      "forward": {
-        "ac": {
-          "value": 10,
-          "misc": 0
+      "aft": {
+        "ablative": {
+          "max": null,
+          "value": null
         },
-        "targetLock": {
-          "value": 10,
-          "misc": 0
+        "ac": {
+          "misc": 0,
+          "value": 10
         },
         "shields": {
           "value": null
         },
+        "targetLock": {
+          "misc": 0,
+          "value": 10
+        }
+      },
+      "forward": {
         "ablative": {
-          "value": null,
-          "max": null
+          "max": null,
+          "value": null
+        },
+        "ac": {
+          "misc": 0,
+          "value": 10
+        },
+        "shields": {
+          "value": null
+        },
+        "targetLock": {
+          "misc": 0,
+          "value": 10
         }
       },
       "port": {
-        "ac": {
-          "value": 10,
-          "misc": 0
+        "ablative": {
+          "max": null,
+          "value": null
         },
-        "targetLock": {
-          "value": 10,
-          "misc": 0
+        "ac": {
+          "misc": 0,
+          "value": 10
         },
         "shields": {
           "value": null
         },
-        "ablative": {
-          "value": null,
-          "max": null
+        "targetLock": {
+          "misc": 0,
+          "value": 10
         }
       },
       "starboard": {
-        "ac": {
-          "value": 10,
-          "misc": 0
+        "ablative": {
+          "max": null,
+          "value": null
         },
-        "targetLock": {
-          "value": 10,
-          "misc": 0
+        "ac": {
+          "misc": 0,
+          "value": 10
         },
         "shields": {
           "value": null
         },
-        "ablative": {
-          "value": null,
-          "max": null
-        }
-      },
-      "aft": {
-        "ac": {
-          "value": 10,
-          "misc": 0
-        },
         "targetLock": {
-          "value": 10,
-          "misc": 0
-        },
-        "shields": {
-          "value": null
-        },
-        "ablative": {
-          "value": null,
-          "max": null
+          "misc": 0,
+          "value": 10
         }
       }
     }
-  },
-  "sort": 100001,
-  "flags": {},
-  "token": {
-    "flags": {},
-    "name": "UC Liana",
-    "displayName": 50,
-    "img": "icons/svg/mystery-man.svg",
-    "tint": "",
-    "width": 1,
-    "height": 1,
-    "scale": 1,
-    "mirrorX": false,
-    "mirrorY": false,
-    "lockRotation": false,
-    "rotation": 0,
-    "vision": false,
-    "dimSight": 0,
-    "brightSight": 0,
-    "dimLight": 0,
-    "brightLight": 0,
-    "sightAngle": 360,
-    "lightAngle": 360,
-    "lightColor": "",
-    "lightAlpha": 1,
-    "lightAnimation": {
-      "type": "",
-      "speed": 5,
-      "intensity": 5
-    },
-    "actorId": "pR65WxALKzNQZvYW",
-    "actorLink": false,
-    "disposition": -1,
-    "displayBars": 50,
-    "bar1": {
-      "attribute": "attributes.hp"
-    },
-    "bar2": {
-      "attribute": "attributes.shields"
-    },
-    "randomImg": false
-  },
-  "items": [
-    {
-      "_id": "VeIDv0qY1V7vvUka",
-      "name": "New StarshipFrame",
-      "type": "starshipFrame",
-      "data": {
-        "cost": null,
-        "costMultipliedBySize": false,
-        "pcu": null,
-        "isPowered": true,
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "",
-          "unidentified": ""
-        },
-        "source": "AP#20, p. 51",
-        "type": "",
-        "modifiers": [],
-        "size": "medium",
-        "maneuverability": "good",
-        "hitpoints": {
-          "base": 45,
-          "increment": 15
-        },
-        "damageThreshold": {
-          "base": 0
-        },
-        "weaponMounts": {
-          "forward": {
-            "lightSlots": 1,
-            "heavySlots": 0,
-            "capitalSlots": 0,
-            "spinalSlots": 0
-          },
-          "aft": {
-            "lightSlots": 0,
-            "heavySlots": 0,
-            "capitalSlots": 0,
-            "spinalSlots": 0
-          },
-          "port": {
-            "lightSlots": 1,
-            "heavySlots": 0,
-            "capitalSlots": 0,
-            "spinalSlots": 0
-          },
-          "starboard": {
-            "lightSlots": 1,
-            "heavySlots": 0,
-            "capitalSlots": 0,
-            "spinalSlots": 0
-          },
-          "turret": {
-            "lightSlots": 2,
-            "heavySlots": 0,
-            "capitalSlots": 0,
-            "spinalSlots": 0
-          }
-        },
-        "expansionBays": 4,
-        "crew": {
-          "minimum": 5,
-          "maximum": 5
-        },
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": 100000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "_id": "6W1v3Drt6JWuMsUu",
-      "name": "M12 thrusters",
-      "type": "starshipThruster",
-      "data": {
-        "cost": 6,
-        "costMultipliedBySize": false,
-        "pcu": 80,
-        "isPowered": true,
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "",
-          "unidentified": ""
-        },
-        "source": "CRB pg. 297",
-        "type": "",
-        "modifiers": [],
-        "supportedSize": "medium",
-        "speed": 12,
-        "pilotingModifier": -1,
-        "isBooster": false,
-        "isEnabled": true,
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": 200000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "_id": "bB2fDzTzba7EqPDQ",
-      "name": "Medium Shields 160",
-      "type": "starshipShield",
-      "data": {
-        "cost": 20,
-        "costMultipliedBySize": false,
-        "pcu": 45,
-        "isPowered": true,
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "",
-          "unidentified": ""
-        },
-        "source": "CRB pg. 302",
-        "type": "",
-        "modifiers": [],
-        "isDeflector": false,
-        "shieldPoints": 160,
-        "regeneration": 8,
-        "defenseValue": 0,
-        "armorBonus": 0,
-        "targetLockBonus": 0,
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": 300000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "_id": "vY7ASUPhhNg55KSw",
-      "name": "Light EMP cannon",
-      "type": "starshipWeapon",
-      "data": {
-        "cost": 8,
-        "costMultipliedBySize": false,
-        "pcu": 10,
-        "isPowered": true,
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "",
-          "unidentified": ""
-        },
-        "source": "CRB pg. 302",
-        "type": "",
-        "modifiers": [],
-        "range": "short",
-        "class": "light",
-        "weaponType": "direct",
-        "speed": 0,
-        "attackBonus": "0",
-        "damage": {
-          "parts": [
-            [
-              "special"
-            ]
-          ]
-        },
-        "special": {
-          "array": false,
-          "broad": false,
-          "emp": true,
-          "irradiateL": false,
-          "irradiateM": false,
-          "irradiateH": false,
-          "limited": false,
-          "line": false,
-          "point": false,
-          "quantum": false,
-          "ripper": false,
-          "tractor": false,
-          "vortex": false,
-          "anchoring": false,
-          "automated": false,
-          "bugging": false,
-          "burrowing": false,
-          "buster": false,
-          "connecting": false,
-          "deathField": false,
-          "deployed": false,
-          "drone": false,
-          "flakArea": false,
-          "forceField": false,
-          "gravityTether": false,
-          "gravityWell": false,
-          "hacking": false,
-          "immobilize": false,
-          "intimidating": false,
-          "jamming": false,
-          "mine": false,
-          "mystical": false,
-          "navScram": false,
-          "numbing": false,
-          "orbital": false,
-          "pod": false,
-          "radiant": false,
-          "rail": false,
-          "ramming": false,
-          "redirect": false,
-          "restricted": false,
-          "scatterscan": false,
-          "smart": false,
-          "smoldering": false,
-          "spore": false,
-          "suspending": false,
-          "sustained": false,
-          "teleportation": false,
-          "transposition": false,
-          "vandalDrones": false,
-          "volatile": false
-        },
-        "mount": {
-          "mounted": true,
-          "arc": "forward",
-          "activated": false
-        },
-        "capacity": {
-          "value": null,
-          "max": null
-        },
-        "abilityMods": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        }
-      },
-      "sort": 400000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "_id": "YM76D6wIEcOGEpdr",
-      "name": "Light spore torpedo launcher",
-      "type": "starshipWeapon",
-      "data": {
-        "cost": 5,
-        "costMultipliedBySize": false,
-        "pcu": 5,
-        "isPowered": true,
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": null,
-          "unidentified": ""
-        },
-        "source": "PW pg. 153",
-        "type": "",
-        "modifiers": [],
-        "range": "medium",
-        "class": "light",
-        "weaponType": "tracking",
-        "speed": 14,
-        "attackBonus": "0",
-        "damage": {
-          "parts": [
-            [
-              "3d6"
-            ]
-          ]
-        },
-        "special": {
-          "anchoring": false,
-          "array": false,
-          "automated": false,
-          "broad": false,
-          "bugging": false,
-          "burrowing": false,
-          "buster": false,
-          "connecting": false,
-          "deathField": false,
-          "deployed": false,
-          "drone": false,
-          "emp": false,
-          "flakArea": false,
-          "forceField": false,
-          "gravityTether": false,
-          "gravityWell": false,
-          "hacking": false,
-          "immobilize": false,
-          "intimidating": false,
-          "irradiateL": false,
-          "irradiateM": false,
-          "irradiateH": false,
-          "jamming": false,
-          "limited": true,
-          "line": false,
-          "mine": false,
-          "mystical": false,
-          "navScram": false,
-          "numbing": false,
-          "orbital": false,
-          "pod": false,
-          "point": false,
-          "quantum": false,
-          "radiant": false,
-          "rail": false,
-          "ramming": false,
-          "redirect": false,
-          "restricted": false,
-          "ripper": false,
-          "scatterscan": false,
-          "smart": false,
-          "smoldering": false,
-          "spore": true,
-          "suspending": false,
-          "sustained": false,
-          "teleportation": false,
-          "tractor": false,
-          "transposition": false,
-          "vandalDrones": false,
-          "volatile": false,
-          "vortex": false
-        },
-        "mount": {
-          "mounted": true,
-          "arc": "port"
-        },
-        "capacity": {
-          "value": 5,
-          "max": 5
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": 500000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "_id": "lwt82lboBeADPSPn",
-      "name": "Light spore torpedo launcher",
-      "type": "starshipWeapon",
-      "data": {
-        "cost": 5,
-        "costMultipliedBySize": false,
-        "pcu": 5,
-        "isPowered": true,
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": null,
-          "unidentified": ""
-        },
-        "source": "PW pg. 153",
-        "type": "",
-        "modifiers": [],
-        "range": "medium",
-        "class": "light",
-        "weaponType": "tracking",
-        "speed": 14,
-        "attackBonus": "0",
-        "damage": {
-          "parts": [
-            [
-              "3d6"
-            ]
-          ]
-        },
-        "special": {
-          "anchoring": false,
-          "array": false,
-          "automated": false,
-          "broad": false,
-          "bugging": false,
-          "burrowing": false,
-          "buster": false,
-          "connecting": false,
-          "deathField": false,
-          "deployed": false,
-          "drone": false,
-          "emp": false,
-          "flakArea": false,
-          "forceField": false,
-          "gravityTether": false,
-          "gravityWell": false,
-          "hacking": false,
-          "immobilize": false,
-          "intimidating": false,
-          "irradiateL": false,
-          "irradiateM": false,
-          "irradiateH": false,
-          "jamming": false,
-          "limited": true,
-          "line": false,
-          "mine": false,
-          "mystical": false,
-          "navScram": false,
-          "numbing": false,
-          "orbital": false,
-          "pod": false,
-          "point": false,
-          "quantum": false,
-          "radiant": false,
-          "rail": false,
-          "ramming": false,
-          "redirect": false,
-          "restricted": false,
-          "ripper": false,
-          "scatterscan": false,
-          "smart": false,
-          "smoldering": false,
-          "spore": true,
-          "suspending": false,
-          "sustained": false,
-          "teleportation": false,
-          "tractor": false,
-          "transposition": false,
-          "vandalDrones": false,
-          "volatile": false,
-          "vortex": false
-        },
-        "mount": {
-          "mounted": true,
-          "arc": "starboard"
-        },
-        "capacity": {
-          "value": 5,
-          "max": 5
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": 600000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "_id": "x4kM6I7x4ezZNBoA",
-      "name": "Connecting tendril",
-      "type": "starshipWeapon",
-      "data": {
-        "cost": 10,
-        "costMultipliedBySize": false,
-        "pcu": 10,
-        "isPowered": true,
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": null,
-          "unidentified": ""
-        },
-        "source": "AP #20 pg. 49",
-        "type": "",
-        "modifiers": [],
-        "range": "short",
-        "class": "light",
-        "weaponType": "direct",
-        "speed": 0,
-        "attackBonus": "0",
-        "damage": {
-          "parts": [
-            [
-              "3d6"
-            ]
-          ]
-        },
-        "special": {
-          "anchoring": false,
-          "array": false,
-          "automated": false,
-          "broad": false,
-          "bugging": false,
-          "burrowing": true,
-          "buster": false,
-          "connecting": true,
-          "deathField": false,
-          "deployed": false,
-          "drone": false,
-          "emp": false,
-          "flakArea": false,
-          "forceField": false,
-          "gravityTether": false,
-          "gravityWell": false,
-          "hacking": false,
-          "immobilize": false,
-          "intimidating": false,
-          "irradiateL": false,
-          "irradiateM": false,
-          "irradiateH": false,
-          "jamming": false,
-          "limited": false,
-          "line": false,
-          "mine": false,
-          "mystical": true,
-          "navScram": false,
-          "numbing": false,
-          "orbital": false,
-          "pod": false,
-          "point": false,
-          "quantum": false,
-          "radiant": false,
-          "rail": false,
-          "ramming": false,
-          "redirect": false,
-          "restricted": false,
-          "ripper": false,
-          "scatterscan": false,
-          "smart": false,
-          "smoldering": false,
-          "spore": false,
-          "suspending": false,
-          "sustained": false,
-          "teleportation": false,
-          "tractor": false,
-          "transposition": false,
-          "vandalDrones": false,
-          "volatile": false,
-          "vortex": false
-        },
-        "mount": {
-          "mounted": true,
-          "arc": "turret"
-        },
-        "capacity": {
-          "value": null,
-          "max": null
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": 700000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "_id": "AUwi5SHXw5RALE5d",
-      "name": "Connecting tendril",
-      "type": "starshipWeapon",
-      "data": {
-        "cost": 10,
-        "costMultipliedBySize": false,
-        "pcu": 10,
-        "isPowered": true,
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": null,
-          "unidentified": ""
-        },
-        "source": "AP #20 pg. 49",
-        "type": "",
-        "modifiers": [],
-        "range": "short",
-        "class": "light",
-        "weaponType": "direct",
-        "speed": 0,
-        "attackBonus": "0",
-        "damage": {
-          "parts": [
-            [
-              "3d6"
-            ]
-          ]
-        },
-        "special": {
-          "anchoring": false,
-          "array": false,
-          "automated": false,
-          "broad": false,
-          "bugging": false,
-          "burrowing": true,
-          "buster": false,
-          "connecting": true,
-          "deathField": false,
-          "deployed": false,
-          "drone": false,
-          "emp": false,
-          "flakArea": false,
-          "forceField": false,
-          "gravityTether": false,
-          "gravityWell": false,
-          "hacking": false,
-          "immobilize": false,
-          "intimidating": false,
-          "irradiateL": false,
-          "irradiateM": false,
-          "irradiateH": false,
-          "jamming": false,
-          "limited": false,
-          "line": false,
-          "mine": false,
-          "mystical": true,
-          "navScram": false,
-          "numbing": false,
-          "orbital": false,
-          "pod": false,
-          "point": false,
-          "quantum": false,
-          "radiant": false,
-          "rail": false,
-          "ramming": false,
-          "redirect": false,
-          "restricted": false,
-          "ripper": false,
-          "scatterscan": false,
-          "smart": false,
-          "smoldering": false,
-          "spore": false,
-          "suspending": false,
-          "sustained": false,
-          "teleportation": false,
-          "tractor": false,
-          "transposition": false,
-          "vandalDrones": false,
-          "volatile": false,
-          "vortex": false
-        },
-        "mount": {
-          "mounted": true,
-          "arc": "turret"
-        },
-        "capacity": {
-          "value": null,
-          "max": null
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": 800000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "_id": "WHPussTrCOMN1ALG",
-      "name": "Pulse Red",
-      "type": "starshipPowerCore",
-      "data": {
-        "cost": 17,
-        "costMultipliedBySize": false,
-        "pcu": 175,
-        "isPowered": true,
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "",
-          "unidentified": ""
-        },
-        "source": "CRB pg. 296",
-        "type": "",
-        "modifiers": [],
-        "supportedSizes": [
-          "medium",
-          "small",
-          "tiny"
-        ],
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": 900000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "_id": "FaJT7etkWrROvaUq",
-      "name": "Signal Booster",
-      "type": "starshipDriftEngine",
-      "data": {
-        "cost": 5,
-        "costMultipliedBySize": true,
-        "pcu": 100,
-        "isPowered": true,
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "",
-          "unidentified": ""
-        },
-        "source": "CRB pg. 298",
-        "type": "",
-        "modifiers": [],
-        "engineRating": 2,
-        "maxSize": "huge",
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": 1000000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "_id": "mMyGVMv8EicX3cuK",
-      "name": "Advanced long-range sensors",
-      "type": "starshipSensor",
-      "data": {
-        "cost": 14,
-        "costMultipliedBySize": false,
-        "pcu": null,
-        "isPowered": true,
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "",
-          "unidentified": ""
-        },
-        "source": "CRB pg. 301",
-        "type": "",
-        "modifiers": [],
-        "modifier": 4,
-        "range": "long",
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": 1100000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "_id": "79Ht9yz0fpfDA7YE",
-      "name": "Algal Shielding",
-      "type": "starshipOtherSystem",
-      "data": {
-        "cost": 2,
-        "costMultipliedBySize": true,
-        "pcu": 0,
-        "isPowered": true,
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p>The algal shielding system can be installed only in a biomechanical starship.</p>\n<p>The hull of a vessel with algal shielding has a layer made of water-filled, valved chambers that circulate blue-green algae through the ship, interfacing with the life-support system and most living parts of the ship. This supplemental circulatory system has two functions. First, the algae act as a radiation buffer. When a biomechanical starship with algal shielding takes damage from a weapon with the irradiate special property (Core Rulebook 304), the algal shielding grants a +2 circumstance bonus to saving throws against radiation and other @Compendium[sfrpg.rules.aKqRtg165rAly1Cc]{Poisons} introduced to the shipâ€™s internal atmosphere. This system also functions as one hydroponic garden (Pact Worlds 153). If a critical damage effect causes a vesselâ€™s life-support system to become malfunctioning or wrecked, the algal shielding provides no benefit until the life-support systemâ€™s condition is improved to glitching or normal.</p>",
-          "unidentified": ""
-        },
-        "source": "SOM pg. 27",
-        "type": "",
-        "modifiers": [],
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": 1200000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "_id": "7mCWKxSMZaV2po3Y",
-      "name": "Common crew quarters",
-      "type": "starshipCrewQuarter",
-      "data": {
-        "cost": null,
-        "costMultipliedBySize": false,
-        "pcu": null,
-        "isPowered": true,
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p><span class=\"fontstyle0\">Common crew quarters are the most basic type. They consist of simple bunks (sometimes folding out from the side of a hallway) or other similarly austere places to rest. Crew members who sleep in common quarters usually keep their personal possessions in a footlocker. Common crew quarters also include a communal bathroom (which includes a military-style shower) and a tiny galley (big enough to prepare only the most basic of meals). Starships with crews numbering in the dozens or hundreds often have massive barracks where crew members sleep in shifts</span> .</p>",
-          "unidentified": ""
-        },
-        "source": "CRB pg. 298",
-        "type": "",
-        "modifiers": [],
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": 1300000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "_id": "pZbMfs0QvngVzyCx",
-      "name": "Biocamouflage",
-      "type": "starshipOtherSystem",
-      "data": {
-        "cost": 2,
-        "costMultipliedBySize": true,
-        "pcu": 5,
-        "isPowered": true,
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "A biomechanical ship with a biocamouflage system can appear to be an astronomical body rather than a starship. A vessel that can land can instead appear to be a geological formation rather than a starship. To appear to be either, the starship must move in a straight trajectory, engaging in no turns or other maneuvers an astronomical body could not duplicate; the DC to scan the starship then increases by 5. If the check to scan the camouflaged ship fails, the scanner believes the ship is an astronomical body or geological object, taking a â€“4 penalty to further scans while the belief endures. This belief ends as soon as the camouflaged starship makes any maneuver or change in speed impossible for the object the starship is believed to be.",
-          "unidentified": ""
-        },
-        "source": "AP #20 pg. 47",
-        "type": "",
-        "modifiers": [],
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": 1400000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "_id": "YWbtnK0RSJiIBUfd",
-      "name": "Mk 4 armor",
-      "type": "starshipArmor",
-      "data": {
-        "cost": 5,
-        "costMultipliedBySize": true,
-        "pcu": null,
-        "isPowered": true,
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "",
-          "unidentified": ""
-        },
-        "source": "CRB pg. 297",
-        "type": "",
-        "modifiers": [],
-        "armorBonus": 4,
-        "targetLockPenalty": 0,
-        "turnDistancePenalty": 0,
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": 1500000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "_id": "TadBhXuIWlsEZfTM",
-      "name": "Mk 6 defenses",
-      "type": "starshipDefensiveCountermeasure",
-      "data": {
-        "cost": 11,
-        "costMultipliedBySize": false,
-        "pcu": 5,
-        "isPowered": true,
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "",
-          "unidentified": ""
-        },
-        "source": "CRB pg. 297",
-        "type": "",
-        "modifiers": [],
-        "targetLockBonus": 6,
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": 1600000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "_id": "xYq6LuzUJ80zhb14",
-      "name": "Mk 2 tetranode",
-      "type": "starshipComputer",
-      "data": {
-        "cost": 16,
-        "costMultipliedBySize": false,
-        "pcu": 15,
-        "isPowered": true,
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "",
-          "unidentified": ""
-        },
-        "source": "CRB pg. 297",
-        "type": "",
-        "modifiers": [],
-        "modifier": 2,
-        "nodes": 4,
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": 1700000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "_id": "QzmJ8U17xybtI9Vx",
-      "name": "Root System",
-      "type": "starshipOtherSystem",
-      "data": {
-        "cost": 2,
-        "costMultipliedBySize": true,
-        "pcu": 5,
-        "isPowered": true,
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p>A biomechanical starship must usually be in proximity to a star to use its self-repair functions, but not so with a root system. A vessel that has a root system can instead attach to a planet, asteroid, or other astronomical body to acquire materials and energy for self‑repair. Larger ships can use a root system to carry such self-repair fuel with the craft. Such use of available material is usually enough for self-repair to function as normal, subject to GM discretion.</p>",
-          "unidentified": ""
-        },
-        "source": "AP #20 pg. 48",
-        "type": "",
-        "modifiers": [],
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": 1800000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "_id": "fTdEFaFezG4a35Wc",
-      "name": "Arcane laboratory",
-      "type": "starshipExpansionBay",
-      "data": {
-        "cost": 1,
-        "costMultipliedBySize": false,
-        "pcu": 1,
-        "isPowered": true,
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "An arcane laboratory contains all the tools and space necessary to craft magic items (see page 235), though the crafter must still provide the necessary raw materials. Such a laboratory reduces the crafting time by half",
-          "unidentified": ""
-        },
-        "source": "CRB pg. 300",
-        "type": "",
-        "modifiers": [],
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": 1900000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "_id": "6082Woo0zf23c0g2",
-      "name": "Hydroponic Garden",
-      "type": "starshipExpansionBay",
-      "data": {
-        "cost": 5,
-        "costMultipliedBySize": false,
-        "pcu": 0,
-        "isPowered": true,
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "This space holds an entirely self-sustaining garden, complete with oxygen recycling, food production, and lighting that fosters advanced growth. A hydroponic garden takes up two expansion bays and can provide food for up to 10 Medium-sized creatures indefinitely, even if the rest of the vessel is without full power or propulsion. Multiple hydroponic gardens can be linked together to form one massive garden space.",
-          "unidentified": ""
-        },
-        "source": "PW pg. 153",
-        "type": "",
-        "modifiers": [],
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": 2000000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "_id": "I1shrE2AOt9eaL15",
-      "name": "Science lab",
-      "type": "starshipExpansionBay",
-      "data": {
-        "cost": 1,
-        "costMultipliedBySize": false,
-        "pcu": 2,
-        "isPowered": true,
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "A science lab contains scientific apparatuses and other laboratory equipment to aid in the research of certain topics. A general science lab provides a +1 circumstance bonus to Life Science and Physical Science checks (and is called a general science lab), a life science lab provides a +2 circumstance bonus to Life Science checks, and a physical science lab provides a +2 circumstance bonus to Physical Science checks. The lab type is chosen when the expansion bay is converted.",
-          "unidentified": ""
-        },
-        "source": "CRB pg. 300",
-        "type": "",
-        "modifiers": [],
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": 2100000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "_id": "TbD0Kth2azo70CRi",
-      "name": "Tech workshop",
-      "type": "starshipExpansionBay",
-      "data": {
-        "cost": 1,
-        "costMultipliedBySize": false,
-        "pcu": 3,
-        "isPowered": true,
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "A tech workshop contains all the space and tools necessary to craft technological items (see page 235), though the crafter must still provide the necessary raw materials. Such a workshop reduces the crafting time by half",
-          "unidentified": ""
-        },
-        "source": "CRB pg. 300",
-        "type": "",
-        "modifiers": [],
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "sort": 2200000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    }
-  ],
-  "effects": []
+  }
 }

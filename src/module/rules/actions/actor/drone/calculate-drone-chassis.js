@@ -12,11 +12,11 @@ export default function (engine) {
         }
 
         if (activeChassis) {
-            const chassisData = activeChassis.data.data;
-            
+            const chassisData = activeChassis.system;
+
             data.traits.size = SFRPG.actorSizes[chassisData.size];
-            data.attributes.speed.value = chassisData.speed.value;
-            data.attributes.speed.special = chassisData.speed.special;
+            data.attributes.speed = mergeObject(data.attributes.speed, chassisData.speed, {overwrite: true});
+            data.attributes.speed.special = "";
 
             let droneLevel = chassisData.levels;
             droneLevel = Math.max(1, Math.min(droneLevel, 20));

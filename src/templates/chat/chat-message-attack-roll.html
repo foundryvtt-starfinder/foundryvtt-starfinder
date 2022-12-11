@@ -7,8 +7,8 @@
             {{#if item.img }}<img src="{{item.img}}" />{{/if}}
             <p class="card-buttons damage">
                 {{#if item.img }}<span>{{item.name}}</span>{{else}}<h2>{{flavor}}</h2>{{/if}}
-                {{#if hasDamage }}<button data-action="damage">Damage</button>{{/if}}
-                {{#if hasSave}}<button class="chat-button-save" data-action="save" data-type="{{item.data.data.save.type}}">{{item.labels.save}}</button>{{/if}}
+                {{#if hasDamage }}<button type="button" data-action="damage">Damage</button>{{/if}}
+                {{#if hasSave}}<button type="button" class="chat-button-save" data-action="save" data-type="{{item.system.save.type}}">{{item.labels.save}}</button>{{/if}}
              </p>
         </div>
     </div>
@@ -16,7 +16,8 @@
     <div class="chard-card-custom-details">
         <ul>
             {{#if item.labels.range }}<li>Range : {{item.labels.range}}</li>{{/if}}
-            {{#if hasCapacity }}<li>Ammo : {{ammoLeft}}/{{item.data.data.capacity.max}}</li>{{/if}}
+            {{#if hasCapacity }}<li>Ammo : {{ammoLeft}}/{{item.system.capacity.max}}</li>{{/if}}
         </ul>
     </div>
 </div>
+{{{rollContent}}}
