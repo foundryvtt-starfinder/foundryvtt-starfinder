@@ -255,17 +255,17 @@ export class DiceSFRPG {
             //         speaker: speaker,
             //         content: flavor
             //     };
-        
+
             //     ChatMessage.create(chatData, { chatBubble: true });
             // }
 
             const itemContext = rollContext.allContexts['item'];
             const htmlData = [{ name: "rollNotes", value: itemContext?.system?.rollNotes }];
 
-            let useCustomCard = game.settings.get("sfrpg", "useCustomChatCards") && chatMessage;
+            let useCustomCard = game.settings.get("sfrpg", "useCustomChatCards");
             let errorToThrow = null;
             if (useCustomCard && chatMessage) {
-                //Push the roll to the ChatBox
+                // Push the roll to the ChatBox
                 const customData = {
                     title: flavor,
                     rollContext:  rollContext,
@@ -284,7 +284,7 @@ export class DiceSFRPG {
                     errorToThrow = error;
                 }
             }
-            
+
             if (!useCustomCard && chatMessage) {
                 const messageData = {
                     flavor: flavor,
