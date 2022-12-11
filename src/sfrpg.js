@@ -11,7 +11,6 @@ import { preloadHandlebarsTemplates } from "./module/templates.js";
 import { registerSystemSettings } from "./module/settings.js";
 import { measureDistances, canvasHandlerV10 } from "./module/canvas.js";
 import { ActorSFRPG } from "./module/actor/actor.js";
-import { preUpdateActorEvent, preUpdateTokenEvent, updateActorEvent } from "./module/actor/actor.js";
 import { initializeRemoteInventory, ActorItemHelper } from "./module/actor/actor-inventory-utils.js";
 import { ActorSheetSFRPGCharacter } from "./module/actor/sheet/character.js";
 import { ActorSheetSFRPGDrone } from "./module/actor/sheet/drone.js";
@@ -675,8 +674,3 @@ Hooks.on("renderSidebarTab", async (app, html) => {
         }
     }
 });
-
-//Render floating HP values on damage
-Hooks.on('preUpdateActor', preUpdateActorEvent);
-Hooks.on('preUpdateToken', preUpdateTokenEvent);
-Hooks.on('updateActor', updateActorEvent);

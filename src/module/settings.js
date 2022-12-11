@@ -224,70 +224,74 @@ export const registerSystemSettings = function() {
         default: true,
         type: Boolean
     });
-    
-    //Floating Number settings
-        game.settings.registerMenu("sfrpg", "floatingHP", {
-            name: "SFRPG.Settings.FloatingHP.Menu.Label",
-            label: "SFRPG.Settings.FloatingHP.Button",
-            hint: "SFRPG.Settings.FloatingHP.Hint",
-            icon: "fas fa-heart",
-            type: floatingNumberMenu
-        });
-        
-        game.settings.register("sfrpg", "floatingHP", {
-            scope: "world",
-            config: false,
-            type: Boolean,
-            default: true
-        });
-            
-        game.settings.register("sfrpg", "limitByCriteria", {
-            scope: "world",
-            config: false,
-            type: Boolean,
-            default: false
-        });
-            
-        game.settings.register("sfrpg", "canSeeBars", {
-            scope: "world",
-            config: false,
-            type: Boolean
-        });
-        
-        game.settings.register("sfrpg", "canSeeName", {
-            scope: "world",
-            config: false,
-            type: Boolean
-        });
-            
-        game.settings.register("sfrpg", "minPerm", {
-            scope: "world",
-            config: false,
-            type: String,
-            default: "LIMITED"
-        });
+
+    // Floating Number settings
+    game.settings.registerMenu("sfrpg", "floatingHP", {
+        name: "SFRPG.Settings.FloatingHP.Menu.Label",
+        label: "SFRPG.Settings.FloatingHP.Button",
+        hint: "SFRPG.Settings.FloatingHP.Hint",
+        icon: "fas fa-heart",
+        type: floatingNumberMenu
+    });
+
+    game.settings.register("sfrpg", "floatingHP", {
+        scope: "world",
+        config: false,
+        type: Boolean,
+        default: true
+    });
+
+    game.settings.register("sfrpg", "limitByCriteria", {
+        scope: "world",
+        config: false,
+        type: Boolean,
+        default: false
+    });
+
+    game.settings.register("sfrpg", "canSeeBars", {
+        scope: "world",
+        config: false,
+        type: Boolean
+    });
+
+    game.settings.register("sfrpg", "canSeeName", {
+        scope: "world",
+        config: false,
+        type: Boolean
+    });
+
+    game.settings.register("sfrpg", "minPerm", {
+        scope: "world",
+        config: false,
+        type: String,
+        default: "LIMITED"
+    });
 };
 
 class floatingNumberMenu extends FormApplication {
     constructor(...args) {
         super(...args);
     }
-    
+
     getData() {
-        let perms = {
-            "LIMITED": "PERMISSION.LIMITED",
-            "OBSERVER": "PERMISSION.OBSERVER",
-            "OWNER": "PERMISSION.OWNER",
+        let data = super.getData();
+        data.perms = {
+            "LIMITED": "OWNERSHIP.LIMITED",
+            "OBSERVER": "OWNERSHIP.OBSERVER",
+            "OWNER": "OWNERSHIP.OWNER"
         };
-        
-        return mergeObject(super.getData, {
-            perms: perms
-        });
-        
-    };
-    
+
+        data.floatingToggle = game.settings.get("sfrpg", "floatingHP");
+        data.limitByCriteria = game.settings.get("sfrpg", "limitByCriteria");
+        data.minPerm = game.settings.get("sfrpg", "minPerm");
+        data.canSeeName = game.settings.get("sfrpg", "canSeeName");
+        data.canSeeBars = game.settings.get("sfrpg", "canSeeBars");
+
+        return data;
+    }
+
     static get defaultOptions() {
-            return mergeObject(super.defaultOptions, {
+        return mergeObject(super.defaultOptions, {
             classes: ['form'],
             popOut: true,
             template: `systems/sfrpg/templates/apps/floatinghp.html`,
@@ -295,22 +299,17 @@ class floatingNumberMenu extends FormApplication {
             title: 'SFRPG.Settings.FloatingHP.Menu.Label',
             width: 600
         });
-    };
-  
+    }
+
     activateListeners(html) {
         super.activateListeners(html);
-        document.getElementById("floating-toggle").checked = game.settings.get("sfrpg", "floatingHP");
-        document.getElementById("limit-by-criteria").checked = game.settings.get("sfrpg", "limitByCriteria");
-        document.getElementById("min-perm").value = game.settings.get("sfrpg", "minPerm");
-        document.getElementById("can-see-name").checked = game.settings.get("sfrpg", "canSeeName");
-        document.getElementById("can-see-bars").checked = game.settings.get("sfrpg", "canSeeBars");
-    };
-    
+    }
+
     async _updateObject(event, formData) {
         game.settings.set("sfrpg", "floatingHP", formData["floating-toggle"]);
         game.settings.set("sfrpg", "limitByCriteria", formData["limit-by-criteria"]);
         game.settings.set("sfrpg", "minPerm", formData["min-perm"]);
         game.settings.set("sfrpg", "canSeeName", formData["can-see-name"]);
         game.settings.set("sfrpg", "canSeeBars", formData["can-see-bars"]);
-    };
-};
+    }
+}

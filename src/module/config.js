@@ -190,7 +190,7 @@ SFRPG.damageTypes = {
 SFRPG.damageTypeOperators = {
     "and": "SFRPG.Damage.Types.Operators.And",
     "or": "SFRPG.Damage.Types.Operators.Or"
-}
+};
 
 SFRPG.descriptors = {
     "acid": "SFRPG.Descriptors.Acid",
@@ -208,7 +208,6 @@ SFRPG.descriptors = {
     "earth": "SFRPG.Descriptors.Earth",
     "electricity": "SFRPG.Descriptors.Electricity",
     "emotion": "SFRPG.Descriptors.Emotion",
-    "earth": "SFRPG.Descriptors.Earth",
     "evil": "SFRPG.Descriptors.Evil",
     "fear": "SFRPG.Descriptors.Fear",
     "fire": "SFRPG.Descriptors.Fire",
@@ -229,7 +228,7 @@ SFRPG.descriptors = {
     "sonic": "SFRPG.Descriptors.Sonic",
     "summoning": "SFRPG.Descriptors.Summoning",
     "teleportation": "SFRPG.Descriptors.Teleportation",
-    "water": "SFRPG.Descriptors.Water",
+    "water": "SFRPG.Descriptors.Water"
 };
 
 SFRPG.descriptorsTooltips = {
@@ -246,7 +245,7 @@ SFRPG.descriptorsTooltips = {
     "shadow": "SFRPG.Descriptors.ShadowDescription",
     "summoning": "SFRPG.Descriptors.SummoningDescription",
     "teleportation": "SFRPG.Descriptors.TeleportationDescription"
-}
+};
 
 SFRPG.weaponDamageTypes = {
     "acid": "SFRPG.DamageTypesAcid",
@@ -256,7 +255,7 @@ SFRPG.weaponDamageTypes = {
     "acid+piercing": "SFRPG.DamageTypesAcidAndPiercing",
     "acid+slashing": "SFRPG.DamageTypesAcidAndSlashing",
     "acid|fire": "SFRPG.DamageTypesAcidOrFire",
-    "acid|slashing": "SFRPG.DamageTypesAcidOrSlashing",    
+    "acid|slashing": "SFRPG.DamageTypesAcidOrSlashing",
     "cold": "SFRPG.DamageTypesCold",
     "cold+piercing": "SFRPG.DamageTypesColdAndPiercing",
     "cold+slashing": "SFRPG.DamageTypesColdAndSlashing",
@@ -644,7 +643,7 @@ SFRPG.spellAreaEffects = {
     "burst"    : "SFRPG.SpellAreaEffects.Burst",
     "emanation": "SFRPG.SpellAreaEffects.Emanation",
     "spread"   : "SFRPG.SpellAreaEffects.Spread"
-}
+};
 
 // Weapon critical hit effects
 SFRPG.weaponCriticalHitEffects = {
@@ -750,7 +749,7 @@ SFRPG.itemSizes = {
 };
 
 /**
- * The amount of space on a 5ft grid square that a 
+ * The amount of space on a 5ft grid square that a
  * token of a specific size takes.
  * @type {Object}
  */
@@ -827,11 +826,11 @@ SFRPG.conditionTypes = {
 SFRPG.languages = {
     "abyssal": "SFRPG.LanguagesAbyssal",
     "akiton": "SFRPG.LanguagesAkitonian",
-    "aklo": "SFRPG.LanguagesAklo",	
+    "aklo": "SFRPG.LanguagesAklo",
     "aquan": "SFRPG.LanguagesAquan",
     "arkanen": "SFRPG.LanguagesArkanen",
     "auran": "SFRPG.LanguagesAuran",
-    "azlanti": "SFRPG.LanguagesAzlanti",	
+    "azlanti": "SFRPG.LanguagesAzlanti",
     "brethedan": "SFRPG.LanguagesBrethedan",
     "castrovelian": "SFRPG.LanguagesCastrovelian",
     "celestial": "SFRPG.LanguagesCelestial",
@@ -839,20 +838,20 @@ SFRPG.languages = {
     "draconic": "SFRPG.LanguagesDraconic",
     "drow": "SFRPG.LanguagesDrow",
     "dwarven": "SFRPG.LanguagesDwarven",
-    "elven": "SFRPG.LanguagesElven",	
+    "elven": "SFRPG.LanguagesElven",
     "eoxian": "SFRPG.LanguagesEoxian",
     "gnome": "SFRPG.LanguagesGnome",
     "goblin": "SFRPG.LanguagesGoblin",
     "halfling": "SFRPG.LanguagesHalfling",
     "ignan": "SFRPG.LanguagesIgnan",
     "infernal": "SFRPG.LanguagesInfernal",
-    "kalo": "SFRPG.LanguagesKalo",	
+    "kalo": "SFRPG.LanguagesKalo",
     "kasatha": "SFRPG.LanguagesKasatha",
     "Nchaki": "SFRPG.LanguagesNchaki",
     "orc": "SFRPG.LanguagesOrc",
     "sarcesian": "SFRPG.LanguagesSarcesian",
     "shirren": "SFRPG.LanguagesShirren",
-    "shobhad": "SFRPG.LanguagesShobhad",	
+    "shobhad": "SFRPG.LanguagesShobhad",
     "terran": "SFRPG.LanguagesTerran",
     "triaxian": "SFRPG.LanguagesTriaxian",
     "vercite": "SFRPG.LanguagesVercite",
@@ -908,7 +907,7 @@ SFRPG.augmentationSytems = {
     "throat": "SFRPG.AugThroat"
 };
 
-/*--------------------------------*
+/* --------------------------------*
  * NPC properties and values *
  *--------------------------------*/
 SFRPG.npctypes = {
@@ -927,7 +926,7 @@ SFRPG.npctypes = {
     "vermin": "Vermin"
 };
 
-/*--------------------------------*
+/* --------------------------------*
  * Starship properties and values *
  *--------------------------------*/
 SFRPG.maneuverability = {
@@ -1061,7 +1060,7 @@ SFRPG.starshipSizeMod = {
     "colossal": -8
 };
 
-/*--------------------------------*
+/* --------------------------------*
  * Vehicle properties and values *
  *--------------------------------*/
 
@@ -1536,7 +1535,7 @@ SFRPG.conditionsCausingFlatFooted = ["blinded", "cowering", "off-kilter", "pinne
 
 // TODO localize
 SFRPG.characterFlags = {
-    /*"solarianAttunement": {
+    /* "solarianAttunement": {
         name: "Solarian Attunement",
         hint: "You can enabled the management of attenument inside the combat tracker.",
         section: "SFRPG.CharacterFlagsSectionClassFeatures",
@@ -1566,7 +1565,7 @@ SFRPG.counterClassesLabel = {
 };
 
 SFRPG.droneHitpointsPerLevel = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 190, 210, 230];
-SFRPG.droneResolveMethod = (droneLevel) => { return (droneLevel >= 10 ? Math.floor(droneLevel / 2) : 0); }
+SFRPG.droneResolveMethod = (droneLevel) => { return (droneLevel >= 10 ? Math.floor(droneLevel / 2) : 0); };
 SFRPG.droneACBonusPerLevel = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
 SFRPG.droneBABBonusPerLevel = [1, 2, 3, 3, 4, 5, 6, 6, 7, 8, 9, 9, 10, 11, 12, 12, 13, 14, 15, 15];
 SFRPG.droneGoodSaveBonusPerLevel = [2, 3, 3, 3, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 8, 8, 8, 9, 9, 9];
@@ -1819,4 +1818,44 @@ SFRPG.skillCompendium = {
     "sle": "Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.qVEW9HjXQN0ok879",
     "ste": "Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.5h3iePfJaeQMc3Qr",
     "sur": "Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.UDTsEIldhXTn0VJA"
+};
+
+SFRPG.floatingHPValues = {
+    hpKeys: ['value', 'temp'],
+    shieldKeys: ['aft', 'starboard', 'forward', 'port'],
+    value: { // Main HP value
+        label: 'HP',
+        positive: { fill: 0x00FF00 },
+        negative: { fill: 0xFF0000 }
+    },
+    temp: { // Temp HP
+        label: 'temp',
+        positive: { fill: 0x55FF00 },
+        negative: { fill: 0xFF3300 }
+    },
+    stamina: {
+        label: 'stamina',
+        positive: { fill: 0x00fba5 },
+        negative: { fill: 0xfb3500 }
+    },
+    'shields.aft': {
+        label: 'Sh.A.',
+        positive: { fill: 0x9696ff },
+        negative: { fill: 0xd90069 }
+    },
+    'shields.port': {
+        label: 'Sh.P.',
+        positive: { fill: 0x9696ff },
+        negative: { fill: 0xd90069 }
+    },
+    'shields.forward': {
+        label: 'Sh.F.',
+        positive: { fill: 0x9696ff },
+        negative: { fill: 0xd90069 }
+    },
+    'shields.starboard': {
+        label: 'Sh.S.',
+        positive: { fill: 0x9696ff },
+        negative: { fill: 0xd90069 }
+    }
 };
