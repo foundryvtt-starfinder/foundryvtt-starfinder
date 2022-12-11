@@ -519,6 +519,8 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             title:  game.i18n.format("SFRPG.Rolls.Dice.AbilityCheckTitle", {label: label}),
             flavor: null,
             speaker: ChatMessage.getSpeaker({ actor: this }),
+            chatMessage: options.chatMessage,
+            onClose: options.onClose,									
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
@@ -546,6 +548,8 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             title: game.i18n.format("SFRPG.Rolls.Dice.SaveTitle", {label: label}),
             flavor: null,
             speaker: ChatMessage.getSpeaker({ actor: this }),
+            chatMessage: options.chatMessage,
+            onClose: options.onClose,							
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
@@ -571,6 +575,8 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                 rollData: this.getRollData() ?? {}
             }),
             speaker: ChatMessage.getSpeaker({ actor: this }),
+            chatMessage: options.chatMessage,
+            onClose: options.onClose,									
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
@@ -628,6 +634,8 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             title: game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitle", {skill: CONFIG.SFRPG.skills["pil"]}),
             flavor: null,
             speaker: ChatMessage.getSpeaker({ actor: this }),
+            chatMessage: options.chatMessage,
+            onClose: options.onClose,									
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null

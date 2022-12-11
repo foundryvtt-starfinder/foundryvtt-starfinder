@@ -162,7 +162,7 @@ export class DiceSFRPG {
     * @param {DialogOptions}        data.dialogOptions Modal dialog options
     */
     static async d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true, rollOptions = {},
-        critical = 20, fumble = 1, onClose, dialogOptions }) {
+        critical = 20, fumble = 1, chatMessage = true, onClose, dialogOptions }) {
 
         flavor = `${title}${(flavor ? " <br> " + flavor : "")}`;
         
@@ -255,7 +255,7 @@ export class DiceSFRPG {
             //         speaker: speaker,
             //         content: flavor
             //     };
-        
+
             //     ChatMessage.create(chatData, { chatBubble: true });
             // }
 
@@ -264,8 +264,8 @@ export class DiceSFRPG {
 
             let useCustomCard = game.settings.get("sfrpg", "useCustomChatCards");
             let errorToThrow = null;
-            if (useCustomCard) {
-                //Push the roll to the ChatBox
+            if (useCustomCard && chatMessage) {
+                // Push the roll to the ChatBox
                 const customData = {
                     title: flavor,
                     rollContext:  rollContext,
@@ -284,8 +284,8 @@ export class DiceSFRPG {
                     errorToThrow = error;
                 }
             }
-            
-            if (!useCustomCard) {
+
+            if (!useCustomCard && chatMessage) {
                 const messageData = {
                     flavor: flavor,
                     speaker: speaker,
@@ -461,7 +461,7 @@ export class DiceSFRPG {
     * @param {onDamageDialogClosed} data.onClose       Callback for actions to take when the dialog form is closed
     * @param {Object}               data.dialogOptions Modal dialog options
     */
-    static async damageRoll({ event = new Event(''), parts, criticalData, rollContext, title, speaker, flavor, onClose, dialogOptions }) {
+    static async damageRoll({ event = new Event(''), parts, criticalData, rollContext, title, speaker, flavor, chatMessage = true, onClose, dialogOptions }) {
         flavor = `${title}${(flavor ? " - " + flavor : "")}`;
 
         if (!rollContext?.isValid()) {
@@ -754,8 +754,8 @@ export class DiceSFRPG {
 
             let useCustomCard = game.settings.get("sfrpg", "useCustomChatCards");
             let errorToThrow = null;
-            if (useCustomCard) {
-                //Push the roll to the ChatBox
+            if (useCustomCard && chatMessage) {
+                // Push the roll to the ChatBox
                 const customData = {
                     title: finalFlavor,
                     rollContext:  rollContext,
@@ -779,8 +779,8 @@ export class DiceSFRPG {
                     errorToThrow = error;
                 }
             }
-            
-            if (!useCustomCard) {
+
+            if (!useCustomCard && chatMessage) {
                 let rollContent = await roll.render({ htmlData: htmlData });
 
                 const messageData = {
@@ -807,7 +807,7 @@ export class DiceSFRPG {
                         messageData.flags.specialMaterials = itemContext.entity.system.specialMaterials;
                     }
                 }
-                
+
                 ChatMessage.create(messageData);
             }
 
