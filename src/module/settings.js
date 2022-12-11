@@ -241,6 +241,13 @@ export const registerSystemSettings = function() {
         default: true
     });
 
+    game.settings.register("sfrpg", "verboseFloatyText", {
+        scope: "world",
+        config: false,
+        type: Boolean,
+        default: false
+    });
+
     game.settings.register("sfrpg", "limitByCriteria", {
         scope: "world",
         config: false,
@@ -282,6 +289,7 @@ class floatingNumberMenu extends FormApplication {
         };
 
         data.floatingToggle = game.settings.get("sfrpg", "floatingHP");
+        data.verboseFloatyText = game.settings.get("sfrpg", "verboseFloatyText");
         data.limitByCriteria = game.settings.get("sfrpg", "limitByCriteria");
         data.minPerm = game.settings.get("sfrpg", "minPerm");
         data.canSeeName = game.settings.get("sfrpg", "canSeeName");
@@ -306,10 +314,11 @@ class floatingNumberMenu extends FormApplication {
     }
 
     async _updateObject(event, formData) {
-        game.settings.set("sfrpg", "floatingHP", formData["floating-toggle"]);
-        game.settings.set("sfrpg", "limitByCriteria", formData["limit-by-criteria"]);
-        game.settings.set("sfrpg", "minPerm", formData["min-perm"]);
-        game.settings.set("sfrpg", "canSeeName", formData["can-see-name"]);
-        game.settings.set("sfrpg", "canSeeBars", formData["can-see-bars"]);
+        await game.settings.set("sfrpg", "floatingHP", formData["floating-toggle"]);
+        await game.settings.set("sfrpg", "verboseFloatyText", formData["verbose-floaty-text"]);
+        await game.settings.set("sfrpg", "limitByCriteria", formData["limit-by-criteria"]);
+        await game.settings.set("sfrpg", "minPerm", formData["min-perm"]);
+        await game.settings.set("sfrpg", "canSeeName", formData["can-see-name"]);
+        await game.settings.set("sfrpg", "canSeeBars", formData["can-see-bars"]);
     }
 }

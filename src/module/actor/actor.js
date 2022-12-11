@@ -1073,7 +1073,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                     jitter: 0.3
                 };
 
-                const localized = game.i18n.localize(`SFRPG.FloatingHP.${cfg.label}`);
+                const localized = game.i18n.localize(game.settings.get("sfrpg", "verboseFloatyText")
+                    ? `SFRPG.FloatingHPVerbose.${cfg.label}`
+                    : `SFRPG.FloatingHP.${cfg.label}`);
                 canvas.interface.createScrollingText(t.center, `${localized} ${value.signedString()}`, floaterData);
             }
         }

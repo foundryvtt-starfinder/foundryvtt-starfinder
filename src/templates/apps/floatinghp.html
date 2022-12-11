@@ -10,6 +10,11 @@
         <p class="notes">{{localize "SFRPG.Settings.FloatingHP.Menu.LimitByCriteria.Hint"}}</p>
     </div>
     <div class="form-group">
+        <label for="verbose-floaty-text">{{localize "SFRPG.Settings.FloatingHP.Menu.VerboseFloatyText.Name"}}</label>
+        <input type="checkbox" name="verbose-floaty-text" id="verbose-floaty-text" {{checked verboseFloatyText}}>
+        <p class="notes">{{localize "SFRPG.Settings.FloatingHP.Menu.VerboseFloatyText.Hint"}}</p>
+    </div>
+    <div class="form-group">
         <label for="min-perm">{{localize "SFRPG.Settings.FloatingHP.Menu.MinPerm.Name"}}</label>
         <select name="min-perm" id="min-perm">
             {{selectOptions perms localize=true selected=minPerm }}
