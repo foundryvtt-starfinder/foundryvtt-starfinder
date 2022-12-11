@@ -235,7 +235,6 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             changed.system.attributes.rp.value = clampedRP;
         }
 
-
         this.floatingHpOnPreUpdate(this, changed, options, user);
 
         return super._preUpdate(changed, options, user);
