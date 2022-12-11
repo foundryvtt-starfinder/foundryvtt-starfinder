@@ -589,7 +589,7 @@
                 <ol class="crew-item-list">
                     {{#if (greaterThan (length role.skills) 0)}}
                     <li class="crew small flexrow" data-role="{{roleId}}">
-                        <div class="crew-name flexrow">
+                        <div class="crew-name flexrow crew-list-npc">
                         </div>
                         <div class="flexrow">
                             <div class="form-fields">
@@ -602,8 +602,8 @@
                         <div class="crew-controls"></div>
                     </li>
                     {{#each role.skills as |skill skillId|}}
-                    <li class="crew small flexrow" data-role="{{roleId}}" data-skill="{{skillId}}">
-                        <div class="crew-name flexrow">
+                    <li class="crew small flexrow crew-list-npc" data-role="{{roleId}}" data-skill="{{skillId}}">
+                        <div class="crew-name flexrow crew-list-npc">
                         {{#unless (eq (skillId) "gun")}}
                             <h4>{{ lookup ../../config.skills skillId }}</h4>
                         {{else}}
