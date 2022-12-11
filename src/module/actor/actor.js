@@ -95,7 +95,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
 
     /** @override */
-    render(force, context={}) {
+    render(force, context = {}) {
         /** Clear out deleted item sheets. */
         const keysToDelete = [];
         for (const [appId, app] of Object.entries(this.apps)) {
@@ -235,8 +235,16 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             changed.system.attributes.rp.value = clampedRP;
         }
 
+        this.floatingHpOnPreUpdate(this, changed, options, user);
+
         return super._preUpdate(changed, options, user);
 
+    }
+
+    /** @inheritdoc */
+    _onUpdate(data, options, userId) {
+        super._onUpdate(data, options, userId);
+        this.floatingHpOnUpdate(this, data, options, userId);
     }
 
     async useSpell(item, { configureDialog = true } = {}) {
@@ -506,7 +514,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         const rollContext = RollContext.createActorRollContext(this);
 
         // Include ability check bonus only if it's not 0
-        if(abl.abilityCheckBonus) {
+        if (abl.abilityCheckBonus) {
             parts.push('@abilityCheckBonus');
             data.abilityCheckBonus = abl.abilityCheckBonus;
         }
@@ -561,9 +569,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         const rollContext = RollContext.createActorRollContext(this);
         const parts = [`@skills.${skillId}.mod`];
 
-        const title = skillId.includes('pro') ?
-            game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitleWithProfession", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)], profession: skill.subname }) :
-            game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitle", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)] });
+        const title = skillId.includes('pro')
+            ? game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitleWithProfession", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)], profession: skill.subname })
+            : game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitle", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)] });
 
         return await DiceSFRPG.d20Roll({
             event: options.event,
@@ -607,7 +615,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             rollContext.addContext("system", system, system.system);
             parts.push(`@system.piloting.piloting`);
         }
-        else if(!role || !actorId) {
+        else if (!role || !actorId) {
             // Add pilot's piloting modifier
             parts.push(`@pilot.skills.pil.mod`);
         }
@@ -958,9 +966,155 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             }
         }
     }
+
+    /** -------------------
+    *
+    * Floating HP functions
+    *
+    ---------------------- */
+
+    /** Calculate deltas in the pre-method in order to access the old value.
+     * The delta is then passed onwards to the regular update method on the options object.
+     * @param {ActorSFRPG} doc The updated actor, containing the old values
+     * @param {Object} diff An update object containing the new values
+     * @param {Object} options An object, to which the delta is appended to
+     * @param {String} _userId The ID of the current user
+     */
+    floatingHpOnPreUpdate(doc, diff, options, _userId) {
+        if (!game.settings.get("sfrpg", "floatingHP")) return;
+
+        const dhp = this.diffHealth(diff.system, doc.system, doc.type);
+        if (dhp && Object.keys(dhp).length) options._hpDiffs = dhp;
+    }
+
+    /** Initiate rendering of the floating numbers
+     * @param {ActorSFRPG} doc
+     * @param {Object} diff
+     * @param {Object} options
+     * @param {String} _userId
+     */
+    floatingHpOnUpdate(actor, _data, options, _userId) {
+        const dhp = options._hpDiffs;
+        if (!dhp) return;
+        const tokens = actor.getActiveTokens();
+        if (!tokens) return;
+
+        this.renderFloaters(tokens, dhp);
+    }
+
+    /**
+     * Build HP diffs.
+     * @param {Object} actorData The data of the updated actor, post-update
+     * @param {Object} old The data of the updated actor, pre-update
+     * @param {String} type The actor's type
+     * @return {Object} An object containing the key of the updated value, and the diff
+     */
+    diffHealth(actorData, old, type) {
+        if (!actorData) return;
+
+        const diff = {};
+
+        const newhp = actorData.attributes?.hp || null;
+        const stamina = actorData.attributes?.sp || null;
+        const shields = actorData.quadrants || null;
+
+        if (newhp) {
+            const oldhp = old.attributes.hp;
+            SFRPG.floatingHPValues.hpKeys.forEach(k => { // Check in both standard and temp HP
+                const delta = this.getDelta(k, newhp, oldhp);
+                if (delta !== 0) diff[k] = delta;
+            });
+        } else if (stamina) {
+            const oldStamina = old.attributes.sp;
+            const delta = this.getDelta('value', stamina, oldStamina);
+            if (delta !== 0) diff.stamina = delta;
+        } else if (shields) {
+            const oldShields = old.quadrants;
+            SFRPG.floatingHPValues.shieldKeys.forEach(k => { // Check in all shield quadrants
+                const delta = this.getDelta('value', shields[k]?.shields, oldShields[k].shields);
+                if (delta !== 0) diff[`shields.${k}`] = delta;
+            });
+        }
+
+        return diff;
+    }
+
+    /**
+     *
+     * @param {String} key The key with which to access the value of the relevant object (e.g hp, stamina, shields)
+     * @param {Object} update The update object from the update method, containing only the updated value
+     * @param {Object} data The old data from the relevant object, containing the entire object
+     * @returns {Number} The difference between the old value and the new value
+     */
+
+    getDelta(key, update, data) {
+        if (update?.[key] === undefined) return 0;
+        const oldValue = data[key],
+            newValue = update[key] ?? oldValue,
+            delta = newValue - oldValue;
+        return delta;
+    }
+
+    /**
+     * Async to allow the calling functions to not care when this finishes
+     * @param {TokenSFRPG[]} tokens An array of tokens matching the updated actor
+     * @param {Object} hpDiffs An object containing the key of the updated value, and the diff
+     */
+    async renderFloaters(tokens, hpDiffs) {
+        for (const t of tokens) {
+            if (!this.testPermission(t)) continue;
+
+            for (const [key, value] of Object.entries(hpDiffs)) {
+                if (value === 0) continue; // Skip deltas of 0
+                const cfg = SFRPG.floatingHPValues[key];
+                const percentMax = Math.clamped(Math.abs(value) / t.actor.system.attributes.hp.max, 0, 1);
+                const sign = (value < 0) ? 'negative' : 'positive';
+                const floaterData = {
+                    anchor: CONST.TEXT_ANCHOR_POINTS.CENTER,
+                    direction: (value < 0) ? CONST.TEXT_ANCHOR_POINTS.BOTTOM : CONST.TEXT_ANCHOR_POINTS.TOP,
+                    duration: 1000 + (1500 * percentMax),
+                    fontSize: 16 + (32 * percentMax),
+                    fill: cfg[sign].fill,
+                    stroke: 0x000000,
+                    strokeThickness: 4,
+                    jitter: 0.3
+                };
+
+                const localized = game.i18n.localize(game.settings.get("sfrpg", "verboseFloatyText")
+                    ? `SFRPG.FloatingHPVerbose.${cfg.label}`
+                    : `SFRPG.FloatingHP.${cfg.label}`);
+                canvas.interface.createScrollingText(t.center, `${localized} ${value.signedString()}`, floaterData);
+            }
+        }
+    }
+
+    /**
+     * @param {Token} token
+     * @returns {Boolean} Whether the user can see the floater, given the settings
+     */
+    testPermission(token) {
+        if (!token.actor) return false; // Sanity check
+
+        const limitByCriteria = game.settings.get("sfrpg", "limitByCriteria");
+        if (!limitByCriteria) return true;
+
+        const minPerm = game.settings.get("sfrpg", "minPerm");
+        const user = game.users.current;
+        if (token.actor.testUserPermission(user, CONST.DOCUMENT_OWNERSHIP_LEVELS[`${minPerm}`])) return true;
+
+        const visibleOptions = [CONST.TOKEN_DISPLAY_MODES.ALWAYS, CONST.TOKEN_DISPLAY_MODES.HOVER];
+        const canSeeBars = game.settings.get("sfrpg", "canSeeBars");
+        if (canSeeBars && visibleOptions.includes(token.document.displayBars)) return true;
+
+        const canSeeName = game.settings.get("sfrpg", "canSeeName");
+        if (canSeeName && visibleOptions.includes(token.document.displayName)) return true;
+
+        return false;
+    }
+
 }
 
-Hooks.on("afterClosureProcessed", async (closureName, fact) => {
+Hooks.on("afterClosureProcessed", async(closureName, fact) => {
     if (closureName === "process-actors") {
         await fact.actor.processItemData();
     }
