@@ -2,9 +2,13 @@
   "_id": "CnkE8FbGMyCgC9zB",
   "name": "Injury Echo",
   "type": "spell",
-  "effects": [],
-  "flags": {
-    "core": {}
+  "_stats": {
+    "coreVersion": "10.291",
+    "createdTime": 1670782034341,
+    "lastModifiedBy": "eBWLT1Ze8MOMpLeF",
+    "modifiedTime": 1670782401708,
+    "systemId": "sfrpg",
+    "systemVersion": "0.22.0"
   },
   "img": "systems/sfrpg/icons/spells/battle_link_lesser.webp",
   "system": {
@@ -42,8 +46,41 @@
     "damage": {
       "parts": [
         {
-          "name": "",
+          "name": "Bludgeoning",
           "formula": "1d6",
+          "group": 0,
+          "types": {
+            "acid": false,
+            "bludgeoning": true,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Piercing",
+          "formula": "1d6",
+          "group": 0,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": true,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Slashing",
+          "formula": "1d3",
+          "group": 0,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -52,7 +89,7 @@
             "fire": false,
             "healing": false,
             "piercing": false,
-            "slashing": false,
+            "slashing": true,
             "sonic": false
           }
         }
@@ -66,7 +103,44 @@
       "unidentified": "",
       "value": "<p>You manifest an injury from the target&rsquo;s future or past. Choose bludgeoning, piercing, or slashing when you cast this spell. The target must succeed at a Will saving throw or take 1d6 damage of the chosen type.</p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
     "dismissible": false,
     "duration": {
       "units": "",

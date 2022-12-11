@@ -1,7 +1,7 @@
 import { SFRPG } from "./config.js";
-import { _onScalingCantripsSettingChanges } from "./item/item.js";
+import { ItemSFRPG } from "./item/item.js";
 
-export const registerSystemSettings = function () {
+export const registerSystemSettings = function() {
     game.settings.register("sfrpg", "diagonalMovement", {
         name: "SFRPG.Settings.DiagonalMovementRule.Name",
         hint: "SFRPG.Settings.DiagonalMovementRule.Hint",
@@ -76,7 +76,7 @@ export const registerSystemSettings = function () {
         default: true,
         type: Boolean
     });
-    
+
     game.settings.register("sfrpg", "autoAddUnarmedStrike", {
         name: "SFRPG.Settings.AutoAddUnarmedStrike.Name",
         hint: "SFRPG.Settings.AutoAddUnarmedStrike.Hint",
@@ -103,18 +103,18 @@ export const registerSystemSettings = function () {
         default: false,
         type: Boolean
     });
-    
+
     game.settings.register("sfrpg", "scalingCantrips", {
-    name: "SFRPG.Settings.ScalingCantrips.Name",
+        name: "SFRPG.Settings.ScalingCantrips.Name",
         hint: "SFRPG.Settings.ScalingCantrips.Hint",
-    scope: "world",
-    config: true,
-    default: false,
-    type: Boolean,
-    onChange: () => {
-        _onScalingCantripsSettingChanges() 
-    }
-});    
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
+        onChange: () => {
+            ItemSFRPG._onScalingCantripsSettingChanges();
+        }
+    });
 
     for (let combatType of SFRPG.combatTypes) {
         const capitalizedCombatType = combatType[0].toUpperCase() + combatType.slice(1);
