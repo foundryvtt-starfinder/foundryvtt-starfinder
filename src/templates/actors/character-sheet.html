@@ -148,6 +148,9 @@
                 <li class="skill flexrow {{#if skill.value}}proficient{{/if}}" data-tippy-content="<strong>{{skill.label}}</strong>{{#if (or skill.isTrainedOnly skill.hasArmorCheckPenalty)}}<br>(<em>{{#if skill.hasArmorCheckPenalty}}Armor Check Penalty{{/if}}{{#if (and skill.isTrainedOnly skill.hasArmorCheckPenalty)}}; {{/if}}{{#if skill.isTrainedOnly}}Trained Only{{/if}}</em>){{/if}}<br/>Modifier: @skills.{{s}}.mod<br/>Ranks: @skills.{{s}}.ranks<br/><br/>{{#each skill.tooltip as |tip|}}{{tip}}<br>{{/each}}" data-skill="{{s}}">
                     <input type="hidden" name="system.skills.{{s}}.value" value="{{skill.value}}" data-dtype="Number" />
                     <a class="proficiency-toggle skill-proficiency" title="{{skill.hover}}">{{{skill.icon}}}</a>
+                    <a title="Compendium" class="compendium-link" data-skill-id="{{s}}">
+                        <i class="fas fa-book compendium-icon"></i>
+                    </a>
                     <h4 class="skill-name rollable">
                         {{skill.label}}
                         {{#if skill.isTrainedOnly}}<span>&dagger;</span>{{/if}}
