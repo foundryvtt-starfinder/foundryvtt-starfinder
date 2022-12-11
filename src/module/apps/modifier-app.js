@@ -151,6 +151,14 @@ export default class SFRPGModifierApplication extends FormApplication {
                         affectedValue.append(`<option value="${weapons[0]}">${weapons[1]}</option>`);
                     }
                     break;
+                case SFRPGEffectType.WEAPON_CATEGORY_ATTACKS:
+                case SFRPGEffectType.WEAPON_CATEGORY_DAMAGE:
+                    affectedValue.prop('disabled', false);
+                    affectedValue.find('option').remove();
+                    for (const weapons of Object.entries(CONFIG.SFRPG.weaponCategories)) {
+                        affectedValue.append(`<option value="${weapons[0]}">${weapons[1]}</option>`);
+                    }
+                    break;
                 case SFRPGEffectType.SPECIFIC_SPEED:
                     affectedValue.prop('disabled', false);
                     affectedValue.find('option').remove();
@@ -220,8 +228,10 @@ export default class SFRPGModifierApplication extends FormApplication {
                 break;
             case SFRPGEffectType.WEAPON_ATTACKS:
             case SFRPGEffectType.WEAPON_PROPERTY_ATTACKS:
+            case SFRPGEffectType.WEAPON_CATEGORY_ATTACKS:
             case SFRPGEffectType.WEAPON_DAMAGE:
             case SFRPGEffectType.WEAPON_PROPERTY_DAMAGE:
+            case SFRPGEffectType.WEAPON_CATEGORY_DAMAGE:
             case SFRPGEffectType.SPECIFIC_SPEED:
             case SFRPGEffectType.DAMAGE_REDUCTION:
             case SFRPGEffectType.ENERGY_RESISTANCE:
@@ -269,19 +279,19 @@ export default class SFRPGModifierApplication extends FormApplication {
     }
 
     async _updateModifierData(formData) {
-        const modifiers = duplicate(this.actor.data.data.modifiers);
+        const modifiers = duplicate(this.actor.system.modifiers);
         const modifier = modifiers.find(mod => mod._id === this.modifier._id);
 
         const formula = formData['modifier'];
         if (formula) {
-            const roll = Roll.create(formula, this.owningActor?.data?.data || this.actor.data.data);
-            modifier.max = roll.evaluate({maximize: true}).total;
+            const roll = Roll.create(formula, this.owningActor?.system || this.actor.system);
+            modifier.max = await roll.evaluate({maximize: true}).total;
         } else {
             modifier.max = 0;
         }
 
         mergeObject(modifier, formData);
         
-        return this.actor.update({'data.modifiers': modifiers});
+        return this.actor.update({'system.modifiers': modifiers});
     }
 }

@@ -12,7 +12,7 @@ export default function (engine) {
         }
 
         if (activeChassis) {
-            const chassisData = activeChassis.data.data;
+            const chassisData = activeChassis.system;
 
             data.traits.size = SFRPG.actorSizes[chassisData.size];
             data.attributes.speed = mergeObject(data.attributes.speed, chassisData.speed, {overwrite: true});

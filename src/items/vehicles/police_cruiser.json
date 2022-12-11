@@ -2,77 +2,6 @@
   "_id": "gzAVgUEm67eK4R0p",
   "name": "Police Cruiser",
   "type": "vehicle",
-  "data": {
-    "attributes": {
-      "type": "landA",
-      "cover": "improved",
-      "dimensions": {
-        "height": "5",
-        "length": "10",
-        "width": "10"
-      },
-      "eac": {
-        "value": 17
-      },
-      "expansionBays": {
-        "value": 0
-      },
-      "hardness": 7,
-      "hp": {
-        "max": 50,
-        "threshold": 25,
-        "value": 50
-      },
-      "kac": {
-        "value": 19
-      },
-      "modifiers": {
-        "attackFullSpeed": "-4",
-        "attackMoving": "-2",
-        "attackStopped": "0",
-        "piloting": "+2"
-      },
-      "size": "large",
-      "special": [],
-      "speed": {
-        "type": "",
-        "drive": "25 ft",
-        "full": "650 ft",
-        "mph": "75 mph (ground and fly)"
-      },
-      "systems": []
-    },
-    "conditions": {},
-    "crew": {
-      "complement": {
-        "actorIds": [],
-        "limit": 0
-      },
-      "passenger": {
-        "actorIds": [],
-        "limit": 3
-      },
-      "pilot": {
-        "actorIds": [],
-        "limit": 1
-      },
-      "useNPCCrew": false
-    },
-    "details": {
-      "description": {
-        "chat": "",
-        "unidentified": "",
-        "value": ""
-      },
-      "level": 4,
-      "price": 6195,
-      "source": "CRB pg. 229"
-    },
-    "hangarBay": {
-      "actorIds": [],
-      "limit": 0
-    }
-  },
   "effects": [],
   "flags": {},
   "img": "icons/svg/mystery-man.svg",
@@ -80,7 +9,10 @@
     {
       "name": "Collision (Ram)",
       "type": "vehicleAttack",
-      "data": {
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "system": {
         "type": "",
         "abilityMods": {
           "parts": []
@@ -112,15 +44,15 @@
           "descriptor": "negate"
         },
         "source": ""
-      },
-      "effects": [],
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg"
+      }
     },
     {
       "name": "Collision (Run Over)",
       "type": "vehicleAttack",
-      "data": {
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "system": {
         "type": "",
         "abilityMods": {
           "parts": []
@@ -152,15 +84,15 @@
           "descriptor": "half"
         },
         "source": ""
-      },
-      "effects": [],
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg"
+      }
     },
     {
       "name": "Planetary comm unit",
       "type": "vehicleSystem",
-      "data": {
+      "effects": [],
+      "flags": {},
+      "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.webp",
+      "system": {
         "type": "",
         "abilityMods": {
           "parts": []
@@ -184,15 +116,15 @@
           "usedAsPilot": false
         },
         "source": "CRB pg. 218"
-      },
-      "effects": [],
-      "flags": {},
-      "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.webp"
+      }
     },
     {
       "name": "Autopilot",
       "type": "vehicleSystem",
-      "data": {
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "system": {
         "type": "",
         "abilityMods": {
           "parts": []
@@ -216,10 +148,7 @@
           "usedAsPilot": true
         },
         "source": "CRB pg. 280"
-      },
-      "effects": [],
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg"
+      }
     },
     {
       "name": "Autodisabler (Ex)",
@@ -227,7 +156,24 @@
       "augmentation": false,
       "consumable": false,
       "container": false,
-      "data": {
+      "effects": [],
+      "equipment": false,
+      "flags": {},
+      "fusion": true,
+      "goods": false,
+      "hybrid": false,
+      "img": "icons/svg/mystery-man.svg",
+      "magic": false,
+      "shield": false,
+      "spell": false,
+      "storage": {
+        "type": "slot",
+        "affectsEncumbrance": true,
+        "amount": 0,
+        "subtype": "fusion",
+        "weightProperty": "level"
+      },
+      "system": {
         "type": "",
         "ability": "",
         "abilityMods": {
@@ -440,23 +386,6 @@
         "weaponCategory": "uncategorized",
         "weaponType": "longA"
       },
-      "effects": [],
-      "equipment": false,
-      "flags": {},
-      "fusion": true,
-      "goods": false,
-      "hybrid": false,
-      "img": "icons/svg/mystery-man.svg",
-      "magic": false,
-      "shield": false,
-      "spell": false,
-      "storage": {
-        "type": "slot",
-        "affectsEncumbrance": true,
-        "amount": 0,
-        "subtype": "fusion",
-        "weightProperty": "level"
-      },
       "technological": false,
       "upgrade": false,
       "vehicleAttack": false,
@@ -465,35 +394,138 @@
       "weaponAccessory": false
     }
   ],
-  "token": {
+  "prototypeToken": {
     "name": "Police Cruiser",
     "actorId": "du70cDxePiZWpZ99",
     "actorLink": false,
-    "bar1": {},
-    "bar2": {},
-    "brightLight": 0,
-    "brightSight": 0,
-    "dimLight": 0,
-    "dimSight": 0,
-    "displayBars": 0,
-    "displayName": 0,
-    "disposition": -1,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": ""
+    },
+    "displayBars": 20,
+    "displayName": 20,
+    "disposition": 0,
     "flags": {},
     "height": 1,
-    "img": "icons/svg/mystery-man.svg",
-    "lightAlpha": 1,
-    "lightAngle": 360,
-    "lightAnimation": {
-      "intensity": 5,
-      "speed": 5
+    "light": {
+      "alpha": 0.5,
+      "angle": 360,
+      "animation": {
+        "type": null,
+        "intensity": 5,
+        "reverse": false,
+        "speed": 5
+      },
+      "attenuation": 0.5,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "contrast": 0,
+      "darkness": {
+        "max": 1,
+        "min": 0
+      },
+      "dim": 0,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "shadows": 0
     },
     "lockRotation": false,
     "randomImg": false,
     "rotation": 0,
     "scale": 1,
-    "sightAngle": 360,
-    "tint": null,
-    "vision": false,
+    "sight": {
+      "angle": 360,
+      "attenuation": 0.1,
+      "brightness": 1,
+      "color": null,
+      "contrast": 0,
+      "enabled": false,
+      "range": 0,
+      "saturation": 0,
+      "visionMode": "basic"
+    },
+    "texture": {
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": null
+    },
     "width": 1
+  },
+  "system": {
+    "attributes": {
+      "type": "landA",
+      "cover": "improved",
+      "dimensions": {
+        "height": "5",
+        "length": "10",
+        "width": "10"
+      },
+      "eac": {
+        "value": 17
+      },
+      "expansionBays": {
+        "value": 0
+      },
+      "hardness": 7,
+      "hp": {
+        "max": 50,
+        "threshold": 25,
+        "value": 50
+      },
+      "kac": {
+        "value": 19
+      },
+      "modifiers": {
+        "attackFullSpeed": "-4",
+        "attackMoving": "-2",
+        "attackStopped": "0",
+        "piloting": "+2"
+      },
+      "size": "large",
+      "special": [],
+      "speed": {
+        "type": "",
+        "drive": "25 ft",
+        "full": "650 ft",
+        "mph": "75 mph (ground and fly)"
+      },
+      "systems": []
+    },
+    "conditions": {},
+    "crew": {
+      "complement": {
+        "actorIds": [],
+        "limit": 0
+      },
+      "passenger": {
+        "actorIds": [],
+        "limit": 3
+      },
+      "pilot": {
+        "actorIds": [],
+        "limit": 1
+      },
+      "useNPCCrew": false
+    },
+    "details": {
+      "description": {
+        "chat": "",
+        "unidentified": "",
+        "value": ""
+      },
+      "level": 4,
+      "price": 6195,
+      "source": "CRB pg. 229"
+    },
+    "hangarBay": {
+      "actorIds": [],
+      "limit": 0
+    }
   }
 }

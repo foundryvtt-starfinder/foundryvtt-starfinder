@@ -27,7 +27,7 @@ export default function (engine) {
         try {
             const classes = fact.classes;
             for (const cls of classes) {
-                const classData = cls.data.data;
+                const classData = cls.system;
 
                 for (const [key, value] of Object.entries(classData.proficiencies.weapon)) {
                     if (value && !data.traits.weaponProf.value.includes(key)) {

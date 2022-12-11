@@ -11,20 +11,20 @@
                 <div class="charlevel"  data-tippy-content="{{localize "SFRPG.ShipTierLabel"}}<br />@details.tier" >
                     <div class="level noxp">
                         <label>{{localize "SFRPG.ShipTierLabel"}} </label>
-                        <input name="data.details.tier" type="text" value="{{labels.tier}}" placeholder="1" />
+                        <input name="system.details.tier" type="text" value="{{labels.tier}}" placeholder="1" />
                     </div>
                 </div>
             </div>
 
             <ul class="summary">
                 <li data-tippy-content="{{localize "SFRPG.ShipModelLabel"}}<br />@details.model">
-                    <input type="text" name="data.details.model" value="{{data.details.model}}" placeholder="{{localize "SFRPG.ShipModelLabel"}}" />
+                    <input type="text" name="system.details.model" value="{{system.details.model}}" placeholder="{{localize "SFRPG.ShipModelLabel"}}" />
                 </li>
                 <li data-tippy-content="{{localize "SFRPG.ShipFrameLabel"}}<br />@details.frame">
                     {{#if activeFrame}}<span>{{activeFrame.name}}</span>{{else}}<span class="no-frame">{{localize "SFRPG.StarshipSheet.Header.FrameMissing"}}</span>{{/if}}
                 </li>
                 <li data-tippy-content="{{ localize "SFRPG.Size"}}<br />@details.size">
-                    <span>{{localize "SFRPG.StarshipSheet.Header.Size" size=data.details.size}}</span>
+                    <span>{{localize "SFRPG.StarshipSheet.Header.Size" size=system.details.size}}</span>
                 </li>
             </ul>
 
@@ -32,13 +32,13 @@
                 <li class="attribute health" data-tippy-content="{{ localize "SFRPG.HullPoints" }}<br />@attributes.hp.value<br />@attributes.hp.max">
                     <h4 class="attribute-name box-title">{{ localize "SFRPG.HullPoints" }}</h4>
                     <div class="attribute-value multiple">
-                        <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}"
+                        <input name="system.attributes.hp.value" type="text" value="{{system.attributes.hp.value}}"
                             data-dtype="Number" placeholder="10" />
                         <span class="sep"> / </span>
-                        <label>{{data.attributes.hp.max}}</label>
+                        <label>{{system.attributes.hp.max}}</label>
                     </div>
                     <footer class="attribute-footer">
-                        <span data-tippy-content="{{localize "SFRPG.StarshipSheet.Header.HullPointIncrementTooltip"}}">{{data.attributes.hp.increment}}</span>
+                        <span data-tippy-content="{{localize "SFRPG.StarshipSheet.Header.HullPointIncrementTooltip"}}">{{system.attributes.hp.increment}}</span>
                     </footer>
                 </li>
                 <li class="attribute">
@@ -49,19 +49,19 @@
                             <label>{{localize "SFRPG.StarshipSheet.Header.Value"}}</label>
                             <label>{{localize "SFRPG.StarshipSheet.Header.Max"}}</label>
                         </li>
-                        <li class="flexrow" data-tippy-content="{{ localize "SFRPG.StarshipSheet.Attributes.Power" }}<br/>@attributes.power.value<br/>@attributes.power.max<br/><br/>{{ localize "SFRPG.StarshipSheet.Attributes.PowerConsumption" }}:<br/>{{#each data.attributes.power.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                        <li class="flexrow" data-tippy-content="{{ localize "SFRPG.StarshipSheet.Attributes.Power" }}<br/>@attributes.power.value<br/>@attributes.power.max<br/><br/>{{ localize "SFRPG.StarshipSheet.Attributes.PowerConsumption" }}:<br/>{{#each system.attributes.power.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                             {{#if hasPower}}
                             <label>{{localize "SFRPG.StarshipSheet.Header.PCU"}}</label>
-                            <label>{{data.attributes.power.value}}</label>
-                            <label>{{data.attributes.power.max}}</label>
+                            <label>{{system.attributes.power.value}}</label>
+                            <label>{{system.attributes.power.max}}</label>
                             {{else}}
                             <label class="error" style="flex: 3; font-size: 12px;">{{localize "SFRPG.StarshipSheet.Attributes.PowerMissing"}}</label>
                             {{/if}}
                         </li>
-                        <li class="flexrow" data-tippy-content="{{ localize "SFRPG.StarshipSheet.Attributes.BuildPoints" }}<br/>@attributes.bp.value<br/>@attributes.bp.max<br/><br/>{{ localize "SFRPG.StarshipSheet.Attributes.BuildPointsUsage" }}:<br/>{{#each data.attributes.bp.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                        <li class="flexrow" data-tippy-content="{{ localize "SFRPG.StarshipSheet.Attributes.BuildPoints" }}<br/>@attributes.bp.value<br/>@attributes.bp.max<br/><br/>{{ localize "SFRPG.StarshipSheet.Attributes.BuildPointsUsage" }}:<br/>{{#each system.attributes.bp.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                             <label>{{localize "SFRPG.StarshipSheet.Header.BP"}}</label>
-                            <label>{{data.attributes.bp.value}}</label>
-                            <label>{{data.attributes.bp.max}}</label>
+                            <label>{{system.attributes.bp.value}}</label>
+                            <label>{{system.attributes.bp.max}}</label>
                         </li>
                     </ol>
                 </li>
@@ -72,31 +72,31 @@
                             <label></label>
                             <label>{{localize "SFRPG.StarshipSheet.Header.Value"}}</label>
                         </li>
-                        <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Header.DamageThreshold"}}<br/>@attributes.damageThreshold.value<br/><br/>{{#each data.attributes.damageThreshold.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                        <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Header.DamageThreshold"}}<br/>@attributes.damageThreshold.value<br/><br/>{{#each system.attributes.damageThreshold.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                             <label>{{localize "SFRPG.StarshipSheet.Header.DT"}}</label>
-                            <label>{{data.attributes.damageThreshold.value}}</label>
+                            <label>{{system.attributes.damageThreshold.value}}</label>
                         </li>
-                        <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Header.CriticalThreshold"}}<br/>@attributes.criticalThreshold.value<br/><br/>{{#each data.attributes.criticalThreshold.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                        <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Header.CriticalThreshold"}}<br/>@attributes.criticalThreshold.value<br/><br/>{{#each system.attributes.criticalThreshold.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                             <label>{{localize "SFRPG.StarshipSheet.Header.CT"}}</label>
-                            <label>{{data.attributes.criticalThreshold.value}}</label>
+                            <label>{{system.attributes.criticalThreshold.value}}</label>
                         </li>
                     </ol>
                 </li>
                 <li class="attribute">
-                    <h4 class="attribute-name box-title" data-tippy-content="{{localize "SFRPG.StarshipSheet.Header.Movement.Maneuverability"}}<br/>@attributes.maneuverability<br/><br/>{{localize "SFRPG.StarshipSheet.Header.Movement.ManeuverabilityTooltip" maneuverability=(capitalize data.attributes.maneuverability)}}">{{localize "SFRPG.StarshipSheet.Header.Movement.Title"}}</h4>
+                    <h4 class="attribute-name box-title" data-tippy-content="{{localize "SFRPG.StarshipSheet.Header.Movement.Maneuverability"}}<br/>@attributes.maneuverability<br/><br/>{{localize "SFRPG.StarshipSheet.Header.Movement.ManeuverabilityTooltip" maneuverability=(capitalize system.attributes.maneuverability)}}">{{localize "SFRPG.StarshipSheet.Header.Movement.Title"}}</h4>
                     <ol class="attribute-multibox">
                         {{#if hasThrusters}}
                         <li class="box-header flexrow">
                             <label></label>
                             <label>{{localize "SFRPG.StarshipSheet.Header.Value"}}</label>
                         </li>
-                        <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Header.Movement.Speed"}}<br/>@attributes.speed.value<br/><br/>{{#each data.attributes.speed.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                        <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Header.Movement.Speed"}}<br/>@attributes.speed.value<br/><br/>{{#each system.attributes.speed.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                             <label>{{localize "SFRPG.StarshipSheet.Header.Movement.Speed"}}</label>
-                            <label>{{data.attributes.speed.value}}</label>
+                            <label>{{system.attributes.speed.value}}</label>
                         </li>
-                        <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Header.Movement.Turn"}}<br/>@attributes.turn.value<br/><br/>{{#each data.attributes.turn.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                        <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Header.Movement.Turn"}}<br/>@attributes.turn.value<br/><br/>{{#each system.attributes.turn.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                             <label>{{localize "SFRPG.StarshipSheet.Header.Movement.Turn"}}</label>
-                            <label>{{data.attributes.turn.value}}</label>
+                            <label>{{system.attributes.turn.value}}</label>
                         </li>
                         {{else}}
                         <li class="flexrow">
@@ -123,43 +123,43 @@
     <section class="sheet-body">
         <div class="tab details" data-group="primary" data-tab="details">
             <div class="flexcol">
-                <h3 class="form-header">{{ localize "SFRPG.Attributes"}}</h3>
+                <h3 class="form-header noborder">{{ localize "SFRPG.Attributes"}}</h3>
                 <ul class="attributes flexrow">
                     <li class="attribute" data-tippy-content="{{ localize "SFRPG.StarshipSheet.Attributes.Complement" }}<br />@attributes.complement.min<br />@attributes.complement.max">
                         <h4 class="attribute-name box-title">{{ localize "SFRPG.StarshipSheet.Attributes.Complement" }}</h4>
                         <div class="attribute-value multiple">
-                            <span data-tippy-content="{{ localize "SFRPG.StarshipSheet.Attributes.ComplementMin" }}">{{data.attributes.complement.min}}</span>
+                            <span data-tippy-content="{{ localize "SFRPG.StarshipSheet.Attributes.ComplementMin" }}">{{system.attributes.complement.min}}</span>
                             <span class="sep"> / </span>
-                            <span data-tippy-content="{{ localize "SFRPG.StarshipSheet.Attributes.ComplementMax" }}">{{data.attributes.complement.max}}</span>
+                            <span data-tippy-content="{{ localize "SFRPG.StarshipSheet.Attributes.ComplementMax" }}">{{system.attributes.complement.max}}</span>
                         </div>
                     </li>
-                    <li class="attribute" data-tippy-content="{{ localize "SFRPG.StarshipSheet.Attributes.DriftRating" }}<br />@attributes.drift.value<br/><br/>{{#each data.attributes.drift.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                    <li class="attribute" data-tippy-content="{{ localize "SFRPG.StarshipSheet.Attributes.DriftRating" }}<br />@attributes.drift.value<br/><br/>{{#each system.attributes.drift.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                         <h4 class="attribute-name box-title">{{ localize "SFRPG.StarshipSheet.Attributes.DriftRating" }}</h4>
                         <div class="attribute-value">
-                            {{#if (eq data.attributes.drift.value 0)}}
+                            {{#if (eq system.attributes.drift.value 0)}}
                             {{localize "SFRPG.StarshipSheet.Attributes.DriftNotAvailable"}}
                             {{else}}
-                            <span class="ability-mod">{{data.attributes.drift.value}}</span>
+                            <span class="ability-mod">{{system.attributes.drift.value}}</span>
                             {{/if}}
                         </div>
                     </li>
                 </ul>
             </div>
             <div class="flexcol">
-                <h3 class="form-header">{{localize "SFRPG.StarshipSheet.Quadrants.Header"}}</h3>
+                <h3 class="form-header noborder">{{localize "SFRPG.StarshipSheet.Quadrants.Header"}}</h3>
                 <ul class="attributes flexrow">
                     <li class="attribute defenses">
                         <h4 class="attribute-name box-title">{{localize "SFRPG.StarshipSheet.Sides.Forward"}}</h4>
-                        <div class="attribute-value flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Shields.Forward"}}<br />@quadrants.forward.shields.value{{#if data.hasDeflectorShields}}<br />@quadrants.forward.shields.max{{/if}}">
-                            <label class="name rightAligned">{{#if data.hasDeflectorShields}}{{localize "SFRPG.StarshipSheet.Details.Shields.Deflector"}}{{else}}{{localize "SFRPG.StarshipSheet.Details.Shields.Conventional"}}{{/if}}&nbsp;</label>
-                            {{#if data.hasShields}}
-                            {{#if data.hasDeflectorShields}}
-                            <input type="text" class="quadrantDefense" name="data.quadrants.forward.shields.value" value="{{data.quadrants.forward.shields.value}}" data-dtype="Number" placeholder="0" />
+                        <div class="attribute-value flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Shields.Forward"}}<br />@quadrants.forward.shields.value{{#if system.hasDeflectorShields}}<br />@quadrants.forward.shields.max{{/if}}">
+                            <label class="name rightAligned">{{#if system.hasDeflectorShields}}{{localize "SFRPG.StarshipSheet.Details.Shields.Deflector"}}{{else}}{{localize "SFRPG.StarshipSheet.Details.Shields.Conventional"}}{{/if}}&nbsp;</label>
+                            {{#if system.hasShields}}
+                            {{#if system.hasDeflectorShields}}
+                            <input type="text" class="quadrantDefense" name="system.quadrants.forward.shields.value" value="{{system.quadrants.forward.shields.value}}" data-dtype="Number" placeholder="0" />
                             <label>/</label>
-                            <label class="quadrantText">{{data.quadrants.forward.shields.max}}</label>
+                            <label class="quadrantText">{{system.quadrants.forward.shields.max}}</label>
                             <label></label>
                             {{else}}
-                            <input type="text" class="quadrantDefense" name="data.quadrants.forward.shields.value" value="{{data.quadrants.forward.shields.value}}" data-dtype="Number" placeholder="0" />
+                            <input type="text" class="quadrantDefense" name="system.quadrants.forward.shields.value" value="{{system.quadrants.forward.shields.value}}" data-dtype="Number" placeholder="0" />
                             <label class="quadrantFiller"></label>
                             {{/if}}
                             {{else}}
@@ -168,10 +168,10 @@
                         </div>
                         <div class="attribute-value flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Ablative.Forward"}}<br />@quadrants.forward.ablative.value">
                             <label class="name rightAligned">{{localize "SFRPG.StarshipSheet.Details.Ablative.Header"}}&nbsp;</label>
-                            {{#if data.hasAblativeArmor}}
-                            <input type="text" class="quadrantDefense" name="data.quadrants.forward.ablative.value" value="{{data.quadrants.forward.ablative.value}}" data-dtype="Number" placeholder="0" />
+                            {{#if system.hasAblativeArmor}}
+                            <input type="text" class="quadrantDefense" name="system.quadrants.forward.ablative.value" value="{{system.quadrants.forward.ablative.value}}" data-dtype="Number" placeholder="0" />
                             <label>/</label>
-                            <input type="text" class="quadrantDefense" name="data.quadrants.forward.ablative.max" value="{{data.quadrants.forward.ablative.max}}" data-dtype="Number" placeholder="0" />
+                            <input type="text" class="quadrantDefense" name="system.quadrants.forward.ablative.max" value="{{system.quadrants.forward.ablative.max}}" data-dtype="Number" placeholder="0" />
                             <label></label>
                             {{else}}
                             <label class="notInstalled">{{localize "SFRPG.StarshipSheet.Quadrants.NotAvailable"}}</label>
@@ -183,30 +183,30 @@
                                 <label>{{localize "SFRPG.StarshipSheet.Header.Value"}}</label>
                                 <label>{{localize "SFRPG.StarshipSheet.Header.Misc"}}</label>
                             </li>
-                            <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Quadrants.ArmorClass"}}<br/>@quadrants.forward.ac.value<br/>@quadrants.forward.ac.misc<br/><br/>{{#each data.quadrants.forward.ac.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                            <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Quadrants.ArmorClass"}}<br/>@quadrants.forward.ac.value<br/>@quadrants.forward.ac.misc<br/><br/>{{#each system.quadrants.forward.ac.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                                 <label>AC</label>
-                                <label>{{data.quadrants.forward.ac.value}}</label>
-                                <input type="text" name="data.quadrants.forward.ac.misc" value="{{numberFormat data.quadrants.forward.ac.misc decimals=0 sign=true}}" data-dtype="Number" placeholder="+Misc" />
+                                <label>{{system.quadrants.forward.ac.value}}</label>
+                                <input type="text" name="system.quadrants.forward.ac.misc" value="{{numberFormat system.quadrants.forward.ac.misc decimals=0 sign=true}}" data-dtype="Number" placeholder="+Misc" />
                             </li>
-                            <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Quadrants.TargetLock"}}<br/>@quadrants.forward.targetLock.value<br/>@quadrants.forward.targetLock.misc<br/><br/>{{#each data.quadrants.forward.targetLock.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                            <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Quadrants.TargetLock"}}<br/>@quadrants.forward.targetLock.value<br/>@quadrants.forward.targetLock.misc<br/><br/>{{#each system.quadrants.forward.targetLock.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                                 <label>TL</label>
-                                <label>{{data.quadrants.forward.targetLock.value}}</label>
-                                <input type="text" name="data.quadrants.forward.targetLock.misc" value="{{numberFormat data.quadrants.forward.targetLock.misc decimals=0 sign=true}}" data-dtype="Number" placeholder="+Misc" />
+                                <label>{{system.quadrants.forward.targetLock.value}}</label>
+                                <input type="text" name="system.quadrants.forward.targetLock.misc" value="{{numberFormat system.quadrants.forward.targetLock.misc decimals=0 sign=true}}" data-dtype="Number" placeholder="+Misc" />
                             </li>
                         </ol>
                     </li>
                     <li class="attribute defenses">
                         <h4 class="attribute-name box-title">{{localize "SFRPG.StarshipSheet.Sides.Port"}}</h4>
-                        <div class="attribute-value flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Shields.Port"}}<br />@quadrants.port.shields.value{{#if data.hasDeflectorShields}}<br />@quadrants.port.shields.max{{/if}}">
-                            <label class="name rightAligned">{{#if data.hasDeflectorShields}}{{localize "SFRPG.StarshipSheet.Details.Shields.Deflector"}}{{else}}{{localize "SFRPG.StarshipSheet.Details.Shields.Conventional"}}{{/if}}&nbsp;</label>
-                            {{#if data.hasShields}}
-                            {{#if data.hasDeflectorShields}}
-                            <input type="text" class="quadrantDefense" name="data.quadrants.port.shields.value" value="{{data.quadrants.port.shields.value}}" data-dtype="Number" placeholder="0" />
+                        <div class="attribute-value flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Shields.Port"}}<br />@quadrants.port.shields.value{{#if system.hasDeflectorShields}}<br />@quadrants.port.shields.max{{/if}}">
+                            <label class="name rightAligned">{{#if system.hasDeflectorShields}}{{localize "SFRPG.StarshipSheet.Details.Shields.Deflector"}}{{else}}{{localize "SFRPG.StarshipSheet.Details.Shields.Conventional"}}{{/if}}&nbsp;</label>
+                            {{#if system.hasShields}}
+                            {{#if system.hasDeflectorShields}}
+                            <input type="text" class="quadrantDefense" name="system.quadrants.port.shields.value" value="{{system.quadrants.port.shields.value}}" data-dtype="Number" placeholder="0" />
                             <label>/</label>
-                            <label class="quadrantText">{{data.quadrants.port.shields.max}}</label>
+                            <label class="quadrantText">{{system.quadrants.port.shields.max}}</label>
                             <label></label>
                             {{else}}
-                            <input type="text" class="quadrantDefense" name="data.quadrants.port.shields.value" value="{{data.quadrants.port.shields.value}}" data-dtype="Number" placeholder="0" />
+                            <input type="text" class="quadrantDefense" name="system.quadrants.port.shields.value" value="{{system.quadrants.port.shields.value}}" data-dtype="Number" placeholder="0" />
                             <label class="quadrantFiller"></label>
                             {{/if}}
                             {{else}}
@@ -215,10 +215,10 @@
                         </div>
                         <div class="attribute-value flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Ablative.Port"}}<br />@quadrants.port.ablative.value">
                             <label class="name rightAligned">{{localize "SFRPG.StarshipSheet.Details.Ablative.Header"}}&nbsp;</label>
-                            {{#if data.hasAblativeArmor}}
-                            <input type="text" class="quadrantDefense" name="data.quadrants.port.ablative.value" value="{{data.quadrants.port.ablative.value}}" data-dtype="Number" placeholder="0" />
+                            {{#if system.hasAblativeArmor}}
+                            <input type="text" class="quadrantDefense" name="system.quadrants.port.ablative.value" value="{{system.quadrants.port.ablative.value}}" data-dtype="Number" placeholder="0" />
                             <label>/</label>
-                            <input type="text" class="quadrantDefense" name="data.quadrants.port.ablative.max" value="{{data.quadrants.port.ablative.max}}" data-dtype="Number" placeholder="0" />
+                            <input type="text" class="quadrantDefense" name="system.quadrants.port.ablative.max" value="{{system.quadrants.port.ablative.max}}" data-dtype="Number" placeholder="0" />
                             <label></label>
                             {{else}}
                             <label class="notInstalled">{{localize "SFRPG.StarshipSheet.Quadrants.NotAvailable"}}</label>
@@ -230,30 +230,30 @@
                                 <label>{{localize "SFRPG.StarshipSheet.Header.Value"}}</label>
                                 <label>{{localize "SFRPG.StarshipSheet.Header.Misc"}}</label>
                             </li>
-                            <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Quadrants.ArmorClass"}}<br/>@quadrants.port.ac.value<br/>@quadrants.port.ac.misc<br/><br/>{{#each data.quadrants.port.ac.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                            <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Quadrants.ArmorClass"}}<br/>@quadrants.port.ac.value<br/>@quadrants.port.ac.misc<br/><br/>{{#each system.quadrants.port.ac.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                                 <label>AC</label>
-                                <label>{{data.quadrants.port.ac.value}}</label>
-                                <input type="text" name="data.quadrants.port.ac.misc" value="{{numberFormat data.quadrants.port.ac.misc decimals=0 sign=true}}" data-dtype="Number" placeholder="+Misc" />
+                                <label>{{system.quadrants.port.ac.value}}</label>
+                                <input type="text" name="system.quadrants.port.ac.misc" value="{{numberFormat system.quadrants.port.ac.misc decimals=0 sign=true}}" data-dtype="Number" placeholder="+Misc" />
                             </li>
-                            <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Quadrants.TargetLock"}}<br/>@quadrants.port.targetLock.value<br/>@quadrants.port.targetLock.misc<br/><br/>{{#each data.quadrants.port.targetLock.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                            <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Quadrants.TargetLock"}}<br/>@quadrants.port.targetLock.value<br/>@quadrants.port.targetLock.misc<br/><br/>{{#each system.quadrants.port.targetLock.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                                 <label>TL</label>
-                                <label>{{data.quadrants.port.targetLock.value}}</label>
-                                <input type="text" name="data.quadrants.port.targetLock.misc" value="{{numberFormat data.quadrants.port.targetLock.misc decimals=0 sign=true}}" data-dtype="Number" placeholder="+Misc" />
+                                <label>{{system.quadrants.port.targetLock.value}}</label>
+                                <input type="text" name="system.quadrants.port.targetLock.misc" value="{{numberFormat system.quadrants.port.targetLock.misc decimals=0 sign=true}}" data-dtype="Number" placeholder="+Misc" />
                             </li>
                         </ol>
                     </li>
                     <li class="attribute defenses">
                         <h4 class="attribute-name box-title">{{localize "SFRPG.StarshipSheet.Sides.Starboard"}}</h4>
-                        <div class="attribute-value flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Shields.Starboard"}}<br />@quadrants.starboard.shields.value{{#if data.hasDeflectorShields}}<br />@quadrants.starboard.shields.max{{/if}}">
-                            <label class="name rightAligned">{{#if data.hasDeflectorShields}}{{localize "SFRPG.StarshipSheet.Details.Shields.Deflector"}}{{else}}{{localize "SFRPG.StarshipSheet.Details.Shields.Conventional"}}{{/if}}&nbsp;</label>
-                            {{#if data.hasShields}}
-                            {{#if data.hasDeflectorShields}}
-                            <input type="text" class="quadrantDefense" name="data.quadrants.starboard.shields.value" value="{{data.quadrants.starboard.shields.value}}" data-dtype="Number" placeholder="0" />
+                        <div class="attribute-value flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Shields.Starboard"}}<br />@quadrants.starboard.shields.value{{#if system.hasDeflectorShields}}<br />@quadrants.starboard.shields.max{{/if}}">
+                            <label class="name rightAligned">{{#if system.hasDeflectorShields}}{{localize "SFRPG.StarshipSheet.Details.Shields.Deflector"}}{{else}}{{localize "SFRPG.StarshipSheet.Details.Shields.Conventional"}}{{/if}}&nbsp;</label>
+                            {{#if system.hasShields}}
+                            {{#if system.hasDeflectorShields}}
+                            <input type="text" class="quadrantDefense" name="system.quadrants.starboard.shields.value" value="{{system.quadrants.starboard.shields.value}}" data-dtype="Number" placeholder="0" />
                             <label>/</label>
-                            <label class="quadrantText">{{data.quadrants.starboard.shields.max}}</label>
+                            <label class="quadrantText">{{system.quadrants.starboard.shields.max}}</label>
                             <label></label>
                             {{else}}
-                            <input type="text" class="quadrantDefense" name="data.quadrants.starboard.shields.value" value="{{data.quadrants.starboard.shields.value}}" data-dtype="Number" placeholder="0" />
+                            <input type="text" class="quadrantDefense" name="system.quadrants.starboard.shields.value" value="{{system.quadrants.starboard.shields.value}}" data-dtype="Number" placeholder="0" />
                             <label class="quadrantFiller"></label>
                             {{/if}}
                             {{else}}
@@ -262,10 +262,10 @@
                         </div>
                         <div class="attribute-value flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Ablative.Starboard"}}<br />@quadrants.starboard.ablative.value">
                             <label class="name rightAligned">{{localize "SFRPG.StarshipSheet.Details.Ablative.Header"}}&nbsp;</label>
-                            {{#if data.hasAblativeArmor}}
-                            <input type="text" class="quadrantDefense" name="data.quadrants.starboard.ablative.value" value="{{data.quadrants.starboard.ablative.value}}" data-dtype="Number" placeholder="0" />
+                            {{#if system.hasAblativeArmor}}
+                            <input type="text" class="quadrantDefense" name="system.quadrants.starboard.ablative.value" value="{{system.quadrants.starboard.ablative.value}}" data-dtype="Number" placeholder="0" />
                             <label>/</label>
-                            <input type="text" class="quadrantDefense" name="data.quadrants.starboard.ablative.max" value="{{data.quadrants.starboard.ablative.max}}" data-dtype="Number" placeholder="0" />
+                            <input type="text" class="quadrantDefense" name="system.quadrants.starboard.ablative.max" value="{{system.quadrants.starboard.ablative.max}}" data-dtype="Number" placeholder="0" />
                             <label></label>
                             {{else}}
                             <label class="notInstalled">{{localize "SFRPG.StarshipSheet.Quadrants.NotAvailable"}}</label>
@@ -277,32 +277,32 @@
                                 <label>{{localize "SFRPG.StarshipSheet.Header.Value"}}</label>
                                 <label>{{localize "SFRPG.StarshipSheet.Header.Misc"}}</label>
                             </li>
-                            <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Quadrants.ArmorClass"}}<br/>@quadrants.starboard.ac.value<br/>@quadrants.starboard.ac.misc<br/><br/>{{#each data.quadrants.starboard.ac.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                            <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Quadrants.ArmorClass"}}<br/>@quadrants.starboard.ac.value<br/>@quadrants.starboard.ac.misc<br/><br/>{{#each system.quadrants.starboard.ac.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                                 <label>AC</label>
-                                <label>{{data.quadrants.starboard.ac.value}}</label>
-                                <input type="text" name="data.quadrants.starboard.ac.misc"
-                                    value="{{numberFormat data.quadrants.starboard.ac.misc decimals=0 sign=true}}" data-dtype="Number"
+                                <label>{{system.quadrants.starboard.ac.value}}</label>
+                                <input type="text" name="system.quadrants.starboard.ac.misc"
+                                    value="{{numberFormat system.quadrants.starboard.ac.misc decimals=0 sign=true}}" data-dtype="Number"
                                     placeholder="+Misc" />
                             </li>
-                            <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Quadrants.TargetLock"}}<br/>@quadrants.starboard.targetLock.value<br/>@quadrants.starboard.targetLock.misc<br/><br/>{{#each data.quadrants.starboard.targetLock.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                            <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Quadrants.TargetLock"}}<br/>@quadrants.starboard.targetLock.value<br/>@quadrants.starboard.targetLock.misc<br/><br/>{{#each system.quadrants.starboard.targetLock.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                                 <label>TL</label>
-                                <label>{{data.quadrants.starboard.targetLock.value}}</label>
-                                <input type="text" name="data.quadrants.starboard.targetLock.misc" value="{{numberFormat data.quadrants.starboard.targetLock.misc decimals=0 sign=true}}" data-dtype="Number" placeholder="+Misc" />
+                                <label>{{system.quadrants.starboard.targetLock.value}}</label>
+                                <input type="text" name="system.quadrants.starboard.targetLock.misc" value="{{numberFormat system.quadrants.starboard.targetLock.misc decimals=0 sign=true}}" data-dtype="Number" placeholder="+Misc" />
                             </li>
                         </ol>
                     </li>
                     <li class="attribute defenses">
                         <h4 class="attribute-name box-title">{{localize "SFRPG.StarshipSheet.Sides.Aft"}}</h4>
-                        <div class="attribute-value flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Shields.Aft"}}<br />@quadrants.aft.shields.value{{#if data.hasDeflectorShields}}<br />@quadrants.aft.shields.max{{/if}}">
-                            <label class="name rightAligned">{{#if data.hasDeflectorShields}}{{localize "SFRPG.StarshipSheet.Details.Shields.Deflector"}}{{else}}{{localize "SFRPG.StarshipSheet.Details.Shields.Conventional"}}{{/if}}&nbsp;</label>
-                            {{#if data.hasShields}}
-                            {{#if data.hasDeflectorShields}}
-                            <input type="text" class="quadrantDefense" name="data.quadrants.aft.shields.value" value="{{data.quadrants.aft.shields.value}}" data-dtype="Number" placeholder="0" />
+                        <div class="attribute-value flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Shields.Aft"}}<br />@quadrants.aft.shields.value{{#if system.hasDeflectorShields}}<br />@quadrants.aft.shields.max{{/if}}">
+                            <label class="name rightAligned">{{#if system.hasDeflectorShields}}{{localize "SFRPG.StarshipSheet.Details.Shields.Deflector"}}{{else}}{{localize "SFRPG.StarshipSheet.Details.Shields.Conventional"}}{{/if}}&nbsp;</label>
+                            {{#if system.hasShields}}
+                            {{#if system.hasDeflectorShields}}
+                            <input type="text" class="quadrantDefense" name="system.quadrants.aft.shields.value" value="{{system.quadrants.aft.shields.value}}" data-dtype="Number" placeholder="0" />
                             <label>/</label>
-                            <label class="quadrantText">{{data.quadrants.aft.shields.max}}</label>
+                            <label class="quadrantText">{{system.quadrants.aft.shields.max}}</label>
                             <label></label>
                             {{else}}
-                            <input type="text" class="quadrantDefense" name="data.quadrants.aft.shields.value" value="{{data.quadrants.aft.shields.value}}" data-dtype="Number" placeholder="0" />
+                            <input type="text" class="quadrantDefense" name="system.quadrants.aft.shields.value" value="{{system.quadrants.aft.shields.value}}" data-dtype="Number" placeholder="0" />
                             <label class="quadrantFiller"></label>
                             {{/if}}
                             {{else}}
@@ -311,10 +311,10 @@
                         </div>
                         <div class="attribute-value flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Ablative.Aft"}}<br />@quadrants.aft.ablative.value">
                             <label class="name rightAligned">{{localize "SFRPG.StarshipSheet.Details.Ablative.Header"}}&nbsp;</label>
-                            {{#if data.hasAblativeArmor}}
-                            <input type="text" class="quadrantDefense" name="data.quadrants.aft.ablative.value" value="{{data.quadrants.aft.ablative.value}}" data-dtype="Number" placeholder="0" />
+                            {{#if system.hasAblativeArmor}}
+                            <input type="text" class="quadrantDefense" name="system.quadrants.aft.ablative.value" value="{{system.quadrants.aft.ablative.value}}" data-dtype="Number" placeholder="0" />
                             <label>/</label>
-                            <input type="text" class="quadrantDefense" name="data.quadrants.aft.ablative.max" value="{{data.quadrants.aft.ablative.max}}" data-dtype="Number" placeholder="0" />
+                            <input type="text" class="quadrantDefense" name="system.quadrants.aft.ablative.max" value="{{system.quadrants.aft.ablative.max}}" data-dtype="Number" placeholder="0" />
                             <label></label>
                             {{else}}
                             <label class="notInstalled">{{localize "SFRPG.StarshipSheet.Quadrants.NotAvailable"}}</label>
@@ -326,55 +326,55 @@
                                 <label>{{localize "SFRPG.StarshipSheet.Header.Value"}}</label>
                                 <label>{{localize "SFRPG.StarshipSheet.Header.Misc"}}</label>
                             </li>
-                            <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Quadrants.ArmorClass"}}<br/>@quadrants.aft.ac.value<br/>@quadrants.aft.ac.misc<br/><br/>{{#each data.quadrants.aft.ac.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                            <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Quadrants.ArmorClass"}}<br/>@quadrants.aft.ac.value<br/>@quadrants.aft.ac.misc<br/><br/>{{#each system.quadrants.aft.ac.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                                 <label>AC</label>
-                                <label>{{data.quadrants.aft.ac.value}}</label>
-                                <input type="text" name="data.quadrants.aft.ac.misc" value="{{numberFormat data.quadrants.aft.ac.misc decimals=0 sign=true}}" data-dtype="Number" placeholder="+Misc" />
+                                <label>{{system.quadrants.aft.ac.value}}</label>
+                                <input type="text" name="system.quadrants.aft.ac.misc" value="{{numberFormat system.quadrants.aft.ac.misc decimals=0 sign=true}}" data-dtype="Number" placeholder="+Misc" />
                             </li>
-                            <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Quadrants.TargetLock"}}<br/>@quadrants.aft.targetLock.value<br/>@quadrants.aft.targetLock.misc<br/><br/>{{#each data.quadrants.aft.targetLock.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                            <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Quadrants.TargetLock"}}<br/>@quadrants.aft.targetLock.value<br/>@quadrants.aft.targetLock.misc<br/><br/>{{#each system.quadrants.aft.targetLock.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                                 <label>TL</label>
-                                <label>{{data.quadrants.aft.targetLock.value}}</label>
-                                <input type="text" name="data.quadrants.aft.targetLock.misc" value="{{numberFormat data.quadrants.aft.targetLock.misc decimals=0 sign=true}}" data-dtype="Number" placeholder="+Misc" />
+                                <label>{{system.quadrants.aft.targetLock.value}}</label>
+                                <input type="text" name="system.quadrants.aft.targetLock.misc" value="{{numberFormat system.quadrants.aft.targetLock.misc decimals=0 sign=true}}" data-dtype="Number" placeholder="+Misc" />
                             </li>
                         </ol>
                     </li>
                 </ul>
             </div>
             
-            {{#if (or data.hasAblativeArmor (and data.hasShields (not data.hasDeflectorShields)))}}
+            {{#if (or system.hasAblativeArmor (and system.hasShields (not system.hasDeflectorShields)))}}
             <div class="flexcol traits">
                 <div class="flexrow">
                     <div class="flexcol">
-                        {{#if (and data.hasShields (not data.hasDeflectorShields))}}
+                        {{#if (and system.hasShields (not system.hasDeflectorShields))}}
                         <div>
                             <label>&nbsp;&nbsp;{{localize "SFRPG.StarshipSheet.Quadrants.ShieldHeader"}}</label>
-                            <span>({{data.attributes.shields.value}} / {{data.attributes.shields.max}})</span>
+                            <span>({{system.attributes.shields.value}} / {{system.attributes.shields.max}})</span>
                             <span>- {{localize "SFRPG.StarshipSheet.Quadrants.EvenDistribution"}}:</span>
-                            <span>{{data.attributes.shields.evenDistribution}}</span>
+                            <span>{{system.attributes.shields.evenDistribution}}</span>
                             <span>- {{localize "SFRPG.StarshipSheet.Quadrants.QuadrantLimit"}}:</span>
-                            <span>{{data.attributes.shields.limit}}</span>
-                            {{#if (greaterThan data.attributes.shields.value data.attributes.shields.max)}}
+                            <span>{{system.attributes.shields.limit}}</span>
+                            {{#if (greaterThan system.attributes.shields.value system.attributes.shields.max)}}
                             <span> - </span>
                             <label class="error" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.ShieldTotalTooHighTooltip"}}">{{localize "SFRPG.StarshipSheet.Details.ShieldTotalTooHigh"}}</label>
                             {{else}}
-                            {{#if (greaterThan data.attributes.shields.highest data.attributes.shields.limit)}}
+                            {{#if (greaterThan system.attributes.shields.highest system.attributes.shields.limit)}}
                             <span> - </span>
                             <label class="error" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.ShieldHighestTooHighTooltip"}}">{{localize "SFRPG.StarshipSheet.Details.ShieldHighestTooHigh"}}</label>
                             {{/if}}
                             {{/if}}
                         </div>
                         {{/if}}
-                        {{#if data.hasAblativeArmor}}
+                        {{#if system.hasAblativeArmor}}
                         <div>
                             <label>&nbsp;&nbsp;{{localize "SFRPG.StarshipSheet.Quadrants.AblativeHeader"}}</label>
-                            <span>({{data.attributes.ablative.value}} / {{data.attributes.ablative.total}} / {{data.attributes.ablative.max}})</span>
+                            <span>({{system.attributes.ablative.value}} / {{system.attributes.ablative.total}} / {{system.attributes.ablative.max}})</span>
                             <span>- {{localize "SFRPG.StarshipSheet.Quadrants.EvenDistribution"}}:</span>
-                            <span>{{data.attributes.ablative.evenDistribution}}</span>
-                            {{#if (greaterThan data.attributes.ablative.max (mult data.attributes.hp.max 2))}}
+                            <span>{{system.attributes.ablative.evenDistribution}}</span>
+                            {{#if (greaterThan system.attributes.ablative.max (mult system.attributes.hp.max 2))}}
                             <span> - </span>
                             <label class="error" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.AblativeExceedsHullTooltip"}}">{{localize "SFRPG.StarshipSheet.Details.AblativeExceedsHull"}}</label>
                             {{else}}
-                            {{#if (or (greaterThan data.attributes.ablative.value data.attributes.ablative.max) (greaterThan data.attributes.ablative.total data.attributes.ablative.max))}}
+                            {{#if (or (greaterThan system.attributes.ablative.value system.attributes.ablative.max) (greaterThan system.attributes.ablative.total system.attributes.ablative.max))}}
                             <span> - </span>
                             <label class="error" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.AblativeTooHighTooltip"}}">{{localize "SFRPG.StarshipSheet.Details.AblativeTooHigh"}}</label>
                             {{/if}}
@@ -387,13 +387,13 @@
             {{/if}}
                         
             <div class="flexcol traits">
-                <h3 class="form-header">{{localize "SFRPG.StarshipSheet.Critical.Header"}}</h3>
+                <h3 class="form-header noborder">{{localize "SFRPG.StarshipSheet.Critical.Header"}}</h3>
                 <div class="flexrow">
                     <div class="flexcol">
                         <div class="form-group">
-                            <label for="data.attributes.systems.lifeSupport.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.LifeSupport"}} <a class="critical-edit" data-system="lifeSupport" title="{{localize "SFRPG.StarshipSheet.Critical.Edit"}}"><i class="fas fa-edit"></i></a></label>
-                            <select name="data.attributes.systems.lifeSupport.value">
-                                {{#select data.attributes.systems.lifeSupport.value}}
+                            <label for="system.attributes.systems.lifeSupport.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.LifeSupport"}} <a class="critical-edit" data-system="lifeSupport" title="{{localize "SFRPG.StarshipSheet.Critical.Edit"}}"><i class="fas fa-edit"></i></a></label>
+                            <select name="system.attributes.systems.lifeSupport.value">
+                                {{#select system.attributes.systems.lifeSupport.value}}
                                 {{#each config.starshipSystemStatus as |status statusKey|}}
                                 <option value="{{statusKey}}">{{status}}</option>
                                 {{/each}}
@@ -401,9 +401,9 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="data.attributes.systems.sensors.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.Sensors"}} <a class="critical-edit" data-system="sensors" title="{{localize "SFRPG.StarshipSheet.Critical.Edit"}}"><i class="fas fa-edit"></i></a></label>
-                            <select name="data.attributes.systems.sensors.value">
-                                {{#select data.attributes.systems.sensors.value}}
+                            <label for="system.attributes.systems.sensors.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.Sensors"}} <a class="critical-edit" data-system="sensors" title="{{localize "SFRPG.StarshipSheet.Critical.Edit"}}"><i class="fas fa-edit"></i></a></label>
+                            <select name="system.attributes.systems.sensors.value">
+                                {{#select system.attributes.systems.sensors.value}}
                                 {{#each config.starshipSystemStatus as |status statusKey|}}
                                 <option value="{{statusKey}}">{{status}}</option>
                                 {{/each}}
@@ -411,9 +411,9 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="data.attributes.systems.engines.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.Engines"}} <a class="critical-edit" data-system="engines" title="{{localize "SFRPG.StarshipSheet.Critical.Edit"}}"><i class="fas fa-edit"></i></a></label>
-                            <select name="data.attributes.systems.engines.value">
-                                {{#select data.attributes.systems.engines.value}}
+                            <label for="system.attributes.systems.engines.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.Engines"}} <a class="critical-edit" data-system="engines" title="{{localize "SFRPG.StarshipSheet.Critical.Edit"}}"><i class="fas fa-edit"></i></a></label>
+                            <select name="system.attributes.systems.engines.value">
+                                {{#select system.attributes.systems.engines.value}}
                                 {{#each config.starshipSystemStatus as |status statusKey|}}
                                 <option value="{{statusKey}}">{{status}}</option>
                                 {{/each}}
@@ -421,9 +421,9 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="data.attributes.systems.powerCore.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.PowerCore"}} <a class="critical-edit" data-system="powerCore" title="{{localize "SFRPG.StarshipSheet.Critical.Edit"}}"><i class="fas fa-edit"></i></a></label>
-                            <select name="data.attributes.systems.powerCore.value">
-                                {{#select data.attributes.systems.powerCore.value}}
+                            <label for="system.attributes.systems.powerCore.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.PowerCore"}} <a class="critical-edit" data-system="powerCore" title="{{localize "SFRPG.StarshipSheet.Critical.Edit"}}"><i class="fas fa-edit"></i></a></label>
+                            <select name="system.attributes.systems.powerCore.value">
+                                {{#select system.attributes.systems.powerCore.value}}
                                 {{#each config.starshipSystemStatus as |status statusKey|}}
                                 <option value="{{statusKey}}">{{status}}</option>
                                 {{/each}}
@@ -433,9 +433,9 @@
                     </div>
                     <div class="flexcol">
                         <div class="form-group">
-                            <label for="data.attributes.systems.weaponsArrayForward.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.WeaponsArrayForward"}} <a class="critical-edit" data-system="weaponsArrayForward" title="{{localize "SFRPG.StarshipSheet.Critical.Edit"}}"><i class="fas fa-edit"></i></a></label>
-                            <select name="data.attributes.systems.weaponsArrayForward.value">
-                                {{#select data.attributes.systems.weaponsArrayForward.value}}
+                            <label for="system.attributes.systems.weaponsArrayForward.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.WeaponsArrayForward"}} <a class="critical-edit" data-system="weaponsArrayForward" title="{{localize "SFRPG.StarshipSheet.Critical.Edit"}}"><i class="fas fa-edit"></i></a></label>
+                            <select name="system.attributes.systems.weaponsArrayForward.value">
+                                {{#select system.attributes.systems.weaponsArrayForward.value}}
                                 {{#each config.starshipSystemStatus as |status statusKey|}}
                                 <option value="{{statusKey}}">{{status}}</option>
                                 {{/each}}
@@ -443,9 +443,9 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="data.attributes.systems.weaponsArrayPort.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.WeaponsArrayPort"}} <a class="critical-edit" data-system="weaponsArrayPort" title="{{localize "SFRPG.StarshipSheet.Critical.Edit"}}"><i class="fas fa-edit"></i></a></label>
-                            <select name="data.attributes.systems.weaponsArrayPort.value">
-                                {{#select data.attributes.systems.weaponsArrayPort.value}}
+                            <label for="system.attributes.systems.weaponsArrayPort.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.WeaponsArrayPort"}} <a class="critical-edit" data-system="weaponsArrayPort" title="{{localize "SFRPG.StarshipSheet.Critical.Edit"}}"><i class="fas fa-edit"></i></a></label>
+                            <select name="system.attributes.systems.weaponsArrayPort.value">
+                                {{#select system.attributes.systems.weaponsArrayPort.value}}
                                 {{#each config.starshipSystemStatus as |status statusKey|}}
                                 <option value="{{statusKey}}">{{status}}</option>
                                 {{/each}}
@@ -453,9 +453,9 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="data.attributes.systems.weaponsArrayStarboard.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.WeaponsArrayStarboard"}} <a class="critical-edit" data-system="weaponsArrayStarboard" title="{{localize "SFRPG.StarshipSheet.Critical.Edit"}}"><i class="fas fa-edit"></i></a></label>
-                            <select name="data.attributes.systems.weaponsArrayStarboard.value">
-                                {{#select data.attributes.systems.weaponsArrayStarboard.value}}
+                            <label for="system.attributes.systems.weaponsArrayStarboard.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.WeaponsArrayStarboard"}} <a class="critical-edit" data-system="weaponsArrayStarboard" title="{{localize "SFRPG.StarshipSheet.Critical.Edit"}}"><i class="fas fa-edit"></i></a></label>
+                            <select name="system.attributes.systems.weaponsArrayStarboard.value">
+                                {{#select system.attributes.systems.weaponsArrayStarboard.value}}
                                 {{#each config.starshipSystemStatus as |status statusKey|}}
                                 <option value="{{statusKey}}">{{status}}</option>
                                 {{/each}}
@@ -463,9 +463,9 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="data.attributes.systems.weaponsArrayAft.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.WeaponsArrayAft"}} <a class="critical-edit" data-system="WeaponsArrayAft" title="{{localize "SFRPG.StarshipSheet.Critical.Edit"}}"><i class="fas fa-edit"></i></a></label>
-                            <select name="data.attributes.systems.weaponsArrayAft.value">
-                                {{#select data.attributes.systems.weaponsArrayAft.value}}
+                            <label for="system.attributes.systems.weaponsArrayAft.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.WeaponsArrayAft"}} <a class="critical-edit" data-system="WeaponsArrayAft" title="{{localize "SFRPG.StarshipSheet.Critical.Edit"}}"><i class="fas fa-edit"></i></a></label>
+                            <select name="system.attributes.systems.weaponsArrayAft.value">
+                                {{#select system.attributes.systems.weaponsArrayAft.value}}
                                 {{#each config.starshipSystemStatus as |status statusKey|}}
                                 <option value="{{statusKey}}">{{status}}</option>
                                 {{/each}}
@@ -482,7 +482,7 @@
                 {{#each arcs as |section|}}
                 <li class="item flexrow inventory-header{{#if section.dataset.isDisabled}} disabled{{/if}}">
                     <div class="item-name flexrow">
-                        <h3>{{section.label}}</h3>
+                        <h3 class="noborder">{{section.label}}</h3>
                     </div>
                     {{#if (and ../isOwner section.dataset.allowAdd)}}
                     <div class="item-controls">
@@ -507,9 +507,9 @@
                             {{/if}}
                         </div>
 
-                        {{#if item.hasCapacity}}
+                        {{#if item.config.hasCapacity}}
                         <div class="item-detail item-uses">
-                            {{item.capacityCurrent}} / {{item.capacityMaximum}}
+                            {{item.config.capacityCurrent}} / {{item.config.capacityMaximum}}
                             {{#if ../../isOwner}}
                             &nbsp;
                             <a class="item-control reload" title="{{localize "SFRPG.ActorSheet.Inventory.Weapon.Reload"}}"><i class="fas fa-redo"></i></a>
@@ -539,20 +539,20 @@
         <div class="tab crew" data-group="primary" data-tab="crew">
             <div class="crew-settings flexrow">
                 <ol class="settings flexrow">
-                    <h3>
+                    <h3 class="noborder">
                         {{localize "SFRPG.StarshipSheet.Crew.Header"}}
                         <i class="fas fa-users"></i>
                     </h3>
                     {{#if isGM}}
                     <label class="checkbox">
                         <label><b>{{localize "SFRPG.StarshipSheet.Crew.CrewSetting"}}</b></label>
-                        <input type="checkbox" name="data.crew.useNPCCrew" {{checked data.crew.useNPCCrew}}/>{{localize "SFRPG.StarshipSheet.Crew.IsNPCCrew"}}
+                        <input type="checkbox" name="system.crew.useNPCCrew" {{checked system.crew.useNPCCrew}}/>{{localize "SFRPG.StarshipSheet.Crew.IsNPCCrew"}}
                     </label>
                     {{/if}}
                 </ol>
             </div>
 
-            {{#unless data.crew.useNPCCrew}}
+            {{#unless system.crew.useNPCCrew}}
             <ol class="crew-list">
                 {{#each crew as |role|}}
                 <li class="flexrow crew-header {{role.cssClass}}" {{#each role.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>{{role.label}}</li>
@@ -560,7 +560,7 @@
                     {{#each role.actors as |actor a|}}
                     <li class="crew flexrow draggable" data-actor-id="{{actor.id}}">
                         <div class="crew-name flexrow">
-                            <div class="crew-image" style="background-image: url({{actor.data.img}})"></div>
+                            <div class="crew-image" style="background-image: url({{actor.img}})"></div>
                             <a class="crew-view"><h4>{{actor.name}}</h4></a>
                         </div>
                         <div class="crew-controls">
@@ -573,9 +573,9 @@
             </ol>
             {{else}}
             <ol class="crew-list">
-                {{#each data.crew.npcData as |role roleId|}}
+                {{#each system.crew.npcData as |role roleId|}}
                 <li class="flexrow crew-header" data-role="{{roleId}}">
-                    <h3 class="crew-name flexrow">{{ localize (lookup ../config.starshipRoleNames roleId) }}</h3>
+                    <h3 class="crew-name noborder flexrow">{{ localize (lookup ../config.starshipRoleNames roleId) }}</h3>
                     <div class="flexrow">
                         <label>{{localize "SFRPG.StarshipSheet.Crew.ActionsPerRound"}}</label>
                         <input type="text" class="crew-role-numberOfUses" value="{{role.numberOfUses}}" data-dtype="Number" placeholder="0" />
@@ -648,12 +648,12 @@
                 <ol class="action-list">
                     {{#each role.actions as |action|}}
                     <li class="action flexrow small" data-action-id="{{action.id}}">
-                        <div class="action-name flexrow rollable" id="{{action.id}}" data-tippy-content="<strong>{{localize action.name}}</strong><br/>{{localize "SFRPG.StarshipSheet.Actions.Tooltips.NormalEffect"}}:<br/>{{localize action.data.data.effectNormal}}<br/><br/>{{localize "SFRPG.StarshipSheet.Actions.Tooltips.CriticalEffect"}}:<br/>{{localize action.data.data.effectCritical}}">
+                        <div class="action-name flexrow rollable" id="{{action.id}}" data-tippy-content="<strong>{{localize action.name}}</strong><br/>{{localize "SFRPG.StarshipSheet.Actions.Tooltips.NormalEffect"}}:<br/>{{localize action.system.effectNormal}}<br/><br/>{{localize "SFRPG.StarshipSheet.Actions.Tooltips.CriticalEffect"}}:<br/>{{localize action.system.effectCritical}}">
                             <div class="action-image small" style="background-image: url({{action.img}})"></div>
                             <h4>{{localize action.name}}</h4>
                         </div>
-                        <div class="action-phase flexrow" data-tippy-content="<strong>{{localize action.data.data.phase.name}}</strong><br/>{{localize action.data.data.phase.tooltip}}{{#if action.data.data.isPush}}<br/><br/><strong>{{localize "SFRPG.StarshipSheet.Actions.Tooltips.Push"}}</strong><br/>{{localize "SFRPG.StarshipSheet.Actions.Tooltips.PushTooltip"}}{{/if}}">{{action.data.data.phase.name}}{{#if action.data.data.isPush}} ({{localize "SFRPG.StarshipSheet.Actions.Tooltips.Push"}}){{/if}}</div>
-                        <div class="action-resolve flexrow">{{#if (greaterThan action.data.data.resolvePointCost 0)}}{{action.data.data.resolvePointCost}}{{/if}}</div>
+                        <div class="action-phase flexrow" data-tippy-content="<strong>{{localize action.system.phase.name}}</strong><br/>{{localize action.system.phase.tooltip}}{{#if action.system.isPush}}<br/><br/><strong>{{localize "SFRPG.StarshipSheet.Actions.Tooltips.Push"}}</strong><br/>{{localize "SFRPG.StarshipSheet.Actions.Tooltips.PushTooltip"}}{{/if}}">{{action.system.phase.name}}{{#if action.system.isPush}} ({{localize "SFRPG.StarshipSheet.Actions.Tooltips.Push"}}){{/if}}</div>
+                        <div class="action-resolve flexrow">{{#if (greaterThan action.system.resolvePointCost 0)}}{{action.system.resolvePointCost}}{{/if}}</div>
                     </li>
                     {{/each}}
                 </ol>
@@ -668,7 +668,14 @@
 
         {{!-- Biography Tab --}}
         <div class="tab biography flexcol" data-group="primary" data-tab="notes">
-            {{editorPlus content=data.details.notes target="data.details.notes" button=true isOwner=isOwner editable=editable rolls=false rollData=data}}
+            {{editor
+                enrichedDescription
+                target="system.details.notes"
+                button=true
+                editable=editable
+                engine="prosemirror"
+                collaborate="true"
+            }}
         </div>
     </section>
 

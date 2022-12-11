@@ -2,7 +2,8 @@
   "_id": "pU0CWqU8mTq6nmUW",
   "name": "Moon Splinter, Gibbous",
   "type": "weapon",
-  "data": {
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
     "type": "",
     "ability": "dex",
     "abilityMods": {
@@ -15,10 +16,11 @@
       "condition": "",
       "cost": 1
     },
+    "ammunitionType": "",
     "area": {
       "effect": "",
       "shape": "",
-      "units": null,
+      "units": "none",
       "value": null
     },
     "attackBonus": 0,
@@ -49,6 +51,8 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
@@ -79,28 +83,40 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "2d6",
-          "operator": "and",
           "types": {
+            "acid": false,
             "bludgeoning": true,
-            "cold": true
+            "cold": true,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>Certain elven and @Compendium[sfrpg.races.5uBvbTEiUu1ckQwk]{Gnome} families have long cultivated magical trees that draw power from the First World, and living branches of these magnificent trees can be fashioned into weapons known as moon splinters. Through some sort of interplanar connection, a moon splinter absorbs cold and moisture from the First World to create glowing shards of ice that vibrate with extradimensional energy. Its wielders can then stimulate the wood’s telekinetic magic with a battery, propelling the ice with supernatural force; with each successive strike, the strength of the vibrations increases.<br>The bark of a moon splinter gleams with First World frost. Crescent moon splinters are leafy, while gibbous moon splinters grow buds, and full moon splinters bloom with flowers. A new moon splinter is bare, but it glows with arcane sigils that vary in color and shape and are believed to be influenced by the presence of nearby ley lines.</p>"
+      "value": "<p>Certain elven and @Compendium[sfrpg.races.5uBvbTEiUu1ckQwk]{Gnome} families have long cultivated magical trees that draw power from the First World, and living branches of these magnificent trees can be fashioned into weapons known as moon splinters. Through some sort of interplanar connection, a moon splinter absorbs cold and moisture from the First World to create glowing shards of ice that vibrate with extradimensional energy. Its wielders can then stimulate the wood&rsquo;s telekinetic magic with a battery, propelling the ice with supernatural force; with each successive strike, the strength of the vibrations increases.<br />The bark of a moon splinter gleams with First World frost. Crescent moon splinters are leafy, while gibbous moon splinters grow buds, and full moon splinters bloom with flowers. A new moon splinter is bare, but it glows with arcane sigils that vary in color and shape and are believed to be influenced by the presence of nearby ley lines.</p>\n<p><strong>Polarize:</strong> 1d6</p>"
     },
     "descriptors": [],
     "duration": {
       "units": "",
       "value": "polarize 1d6"
     },
+    "equippable": false,
     "equipped": false,
     "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 9,
     "modifiers": [],
     "price": 13000,
@@ -119,6 +135,7 @@
       "breach": false,
       "breakdown": false,
       "bright": true,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -137,6 +154,7 @@
       "force": true,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
@@ -163,6 +181,7 @@
       "polymorphic": false,
       "powered": false,
       "professional": false,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
@@ -171,7 +190,9 @@
       "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
+      "shatter": false,
       "shells": false,
       "shield": false,
       "sniper": false,
@@ -184,6 +205,7 @@
       "thought": false,
       "throttle": false,
       "thrown": false,
+      "thruster": false,
       "trip": false,
       "two": false,
       "unbalancing": false,
@@ -193,19 +215,37 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
       "value": 60
     },
+    "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
     "source": "",
     "special": "",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
@@ -221,7 +261,5 @@
     },
     "weaponCategory": "cryo",
     "weaponType": "smallA"
-  },
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg"
+  }
 }

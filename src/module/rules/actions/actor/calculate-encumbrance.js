@@ -4,7 +4,7 @@ export default function (engine) {
     engine.closures.add("calculateEncumbrance", (fact, context) => {
         const data = fact.data;
         const actor = fact.actor;
-        const actorData = actor.data.data;
+        const actorData = actor.system;
 
         let tooltip = [];
         if (data.encumbrance) {
@@ -93,8 +93,8 @@ export default function (engine) {
             return enc;
         };
 
-        actor.data.encumbrance = _computeEncumbrance(actor.data.bulk, actorData);
-        data.encumbrance = actor.data.encumbrance;
+        actorData.encumbrance = _computeEncumbrance(actorData.bulk, actorData);
+        data.encumbrance = actorData.encumbrance;
 
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] });

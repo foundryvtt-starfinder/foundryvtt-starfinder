@@ -2,7 +2,8 @@
   "_id": "AzPSAjadmGjORGe6",
   "name": "Skipshot pistol, paragon",
   "type": "weapon",
-  "data": {
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
     "type": "",
     "ability": "dex",
     "abilityMods": {
@@ -15,6 +16,7 @@
       "condition": "",
       "cost": null
     },
+    "ammunitionType": "roundS",
     "area": {
       "effect": "",
       "shape": "",
@@ -22,6 +24,24 @@
       "value": null
     },
     "attackBonus": 0,
+    "attributes": {
+      "ac": {
+        "value": ""
+      },
+      "customBuilt": false,
+      "dex": {
+        "mod": ""
+      },
+      "hardness": {
+        "value": ""
+      },
+      "hp": {
+        "max": "",
+        "value": 6
+      },
+      "size": "medium",
+      "sturdy": true
+    },
     "attuned": false,
     "bulk": "L",
     "capacity": {
@@ -31,6 +51,8 @@
     "chatFlavor": "Teleportive",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
@@ -55,28 +77,33 @@
       ]
     },
     "critical": {
-      "effect": "Bleed",
-      "parts": [
-        {
-          "formula": "5d6",
-          "operator": "",
-          "types": {}
-        }
-      ]
+      "effect": "Bleed 5d6",
+      "parts": []
     },
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "11d4",
-          "operator": "",
           "types": {
-            "piercing": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": true,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": ""
     },
@@ -85,9 +112,11 @@
       "units": "",
       "value": ""
     },
+    "equippable": false,
     "equipped": false,
     "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 17,
     "modifiers": [],
     "price": 216500,
@@ -106,6 +135,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -124,11 +154,13 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
       "harrying": false,
       "holyWater": false,
+      "hybrid": false,
       "ignite": false,
       "indirect": false,
       "injection": false,
@@ -149,14 +181,18 @@
       "polymorphic": false,
       "powered": false,
       "professional": false,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
       "reach": false,
       "recall": false,
+      "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
+      "shatter": false,
       "shells": false,
       "shield": false,
       "sniper": false,
@@ -169,27 +205,47 @@
       "thought": false,
       "throttle": false,
       "thrown": false,
+      "thruster": false,
       "trip": false,
       "two": false,
+      "unbalancing": false,
       "underwater": false,
       "unwieldy": false,
       "variantBoost": false,
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
       "value": 60
     },
+    "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "source": "NS",
     "special": "",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
@@ -203,9 +259,7 @@
       "per": "",
       "value": 1
     },
+    "weaponCategory": "uncategorized",
     "weaponType": "smallA"
-  },
-  "flags": {},
-  "folder": null,
-  "img": "icons/svg/mystery-man.svg"
+  }
 }

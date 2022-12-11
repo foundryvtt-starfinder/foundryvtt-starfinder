@@ -1,0 +1,155 @@
+{
+  "_id": "tePbHFGHTAfelghY",
+  "name": "Brutal Slash",
+  "type": "feat",
+  "_stats": {
+    "coreVersion": "10.288",
+    "createdTime": 1668818697460,
+    "lastModifiedBy": "SPRszH5sDdJlGxJn",
+    "modifiedTime": 1668919771975,
+    "systemId": "sfrpg",
+    "systemVersion": "0.21.0"
+  },
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "type": "",
+    "ability": "",
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "",
+    "actionType": "other",
+    "activation": {
+      "type": "",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "none",
+      "value": null
+    },
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "effect": "",
+      "parts": []
+    },
+    "damage": {
+      "parts": [
+        {
+          "name": "Bleed damage",
+          "formula": "(lookupRange(@attributes.baseAttackBonus.value, 1, 13, 2))d8 + @details.level.value",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
+    },
+    "damageNotes": "",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>You use your finely honed natural attacks to rend an enemy to pieces.</p><p><strong>Prerequisites:</strong> Str 17, Dex 13, base attack bonus +6, @UUID[Compendium.sfrpg.feats.2DHR3hmjSror4Q4t]{Rending Slash}</p><hr><p><strong>Benefit:</strong> When your @UUID[Compendium.sfrpg.equipment.AWo4DU0s18agsFtJ]{unarmed strike} inflicts bleed damage using your Rending Slash feat, that unarmed strike deals additional slashing damage equal to half your character level. The bleed damage caused by Rending Slash increases to 1d8 + half your character level, or 2d8 + half your character level if your base attack bonus is +13 or higher.</p>"
+    },
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
+    "duration": {
+      "units": "",
+      "value": ""
+    },
+    "formula": "",
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "f436bd1d-5f66-4b42-8bcc-7889a6db73dd",
+        "name": "Brutal Slash",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-damage",
+        "enabled": false,
+        "max": 0,
+        "modifier": "floor(@details.level.value / 2)",
+        "modifierType": "formula",
+        "notes": "When your unarmed strike inflicts bleed damage using your Rending Slash feat, that unarmed strike deals additional slashing damage equal to half your character level.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "basicM"
+      }
+    ],
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "none",
+      "value": null
+    },
+    "recharge": {
+      "charged": false,
+      "value": null
+    },
+    "requirements": "",
+    "rollNotes": "",
+    "save": {
+      "type": "",
+      "dc": "",
+      "descriptor": "negate"
+    },
+    "source": "IS, pg. 135",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": null,
+      "per": "",
+      "value": null
+    }
+  }
+}

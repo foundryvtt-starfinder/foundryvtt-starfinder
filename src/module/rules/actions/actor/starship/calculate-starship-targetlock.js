@@ -3,10 +3,10 @@ export default function (engine) {
         const data = fact.data;
         const actor = fact.actor;
 
-        const pilot = (actor.data.crew?.pilot?.actors) ? actor.data.crew?.pilot?.actors[0] : null;
+        const pilot = (actor.crew?.pilot?.actors) ? actor.crew?.pilot?.actors[0] : null;
         const sizeMod = CONFIG.SFRPG.starshipSizeMod[data.details.size] || 0;
 
-        let pilotingRanks = pilot?.data?.data?.skills?.pil?.ranks || 0;
+        let pilotingRanks = pilot?.system?.skills?.pil?.ranks || 0;
         if (data.crew.useNPCCrew) {
             pilotingRanks = data.crew.npcData?.pilot?.skills?.pil?.ranks || 0;
         }
@@ -61,7 +61,7 @@ export default function (engine) {
 
         const shieldItems = fact.items.filter(x => x.type === "starshipShield");
         let shieldItem = null;
-        if (shieldItems && shieldItems.length > 0 && shieldItems[0].data.isDeflector) {
+        if (shieldItems && shieldItems.length > 0 && shieldItems[0].system.isDeflector) {
             shieldItem = shieldItems[0];
         }
 
@@ -83,7 +83,7 @@ export default function (engine) {
         }
 
         if (defensiveCountermeasureItem) {
-            const defensiveCountermeasureData = defensiveCountermeasureItem.data.data;
+            const defensiveCountermeasureData = defensiveCountermeasureItem.system;
             addScore(data.quadrants.forward.targetLock, defensiveCountermeasureItem.name, defensiveCountermeasureData.targetLockBonus, false);
             addScore(data.quadrants.port.targetLock, defensiveCountermeasureItem.name, defensiveCountermeasureData.targetLockBonus, false);
             addScore(data.quadrants.starboard.targetLock, defensiveCountermeasureItem.name, defensiveCountermeasureData.targetLockBonus, false);
@@ -103,7 +103,7 @@ export default function (engine) {
         if (aftTL?.misc < 0 || aftTL?.misc > 0) addScore(data.quadrants.aft.targetLock, "SFRPG.StarshipSheet.Modifiers.MiscModifier", aftTL.misc);
 
         if (shieldItem) {
-            const shieldData = shieldItem.data.data;
+            const shieldData = shieldItem.system;
             if (shieldData.isDeflector) {
                 if (data.quadrants.forward.shields.value > 0) addScore(data.quadrants.forward.targetLock, shieldItem.name, shieldData.armorBonus, false);
                 if (data.quadrants.port.shields.value > 0) addScore(data.quadrants.port.targetLock, shieldItem.name, shieldData.armorBonus, false);
@@ -113,7 +113,7 @@ export default function (engine) {
         }
 
         if (armorItem) {
-            const armorItemData = armorItem.data.data;
+            const armorItemData = armorItem.system;
             if (armorItemData.targetLockPenalty < 0 || armorItemData.targetLockPenalty > 0) {
                 addScore(data.quadrants.forward.targetLock, armorItem.name, armorItemData.targetLockPenalty, false);
                 addScore(data.quadrants.port.targetLock, armorItem.name, armorItemData.targetLockPenalty, false);
@@ -123,7 +123,7 @@ export default function (engine) {
         }
 
         if (ablativeArmorItem) {
-            const ablativeArmorData = ablativeArmorItem.data.data;
+            const ablativeArmorData = ablativeArmorItem.system;
             if (ablativeArmorData.targetLockPenalty < 0 || ablativeArmorData.targetLockPenalty > 0) {
                 addScore(data.quadrants.forward.targetLock, ablativeArmorItem.name, ablativeArmorData.targetLockPenalty, false);
                 addScore(data.quadrants.port.targetLock, ablativeArmorItem.name, ablativeArmorData.targetLockPenalty, false);

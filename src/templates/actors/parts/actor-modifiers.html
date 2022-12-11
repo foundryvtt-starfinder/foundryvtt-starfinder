@@ -13,15 +13,15 @@
                 <input type="checkbox" 
                        class="condition {{name}}" 
                        data-condition="{{name}}" 
-                       name="data.conditions.{{name}}" 
-                       {{checked (lookup ../../data.conditions name)}} /> {{condition}}
+                       name="system.conditions.{{name}}" 
+                       {{checked (lookup ../../system.conditions name)}} /> {{condition}}
             </label>
             {{/each}}
         </div>
 
         <ol class="inventory-list">
             <li class="inventory-header flexrow">
-                <h3 class="item-name flexrow">Conditions</h3>
+                <h3 class="item-name noborder flexrow">Conditions</h3>
         
                 {{#if ../isOwner}}
                 <div class="item-controls">
@@ -44,7 +44,7 @@
         <ol class="inventory-list">
             <li class="item flexrow inventory-header modifiers-header">
                 <div class="item-name modifier-name flexrow">
-                    <h3>{{localize "SFRPG.ModifierNameLabel"}}</h3>
+                    <h3 class="noborder">{{localize "SFRPG.ModifierNameLabel"}}</h3>
                 </div>
 
                 <div class="item-detail modifier-mod">{{localize "SFRPG.ModifierTitle"}}</div>
@@ -107,10 +107,14 @@
                             {{lookup ../../config.weaponTypes modifier.valueAffected}}
                         {{else if (eq modifier.effectType "weapon-property-attacks")}}
                             {{lookup ../../config.weaponProperties modifier.valueAffected}}
+                        {{else if (eq modifier.effectType "weapon-category-attacks")}}
+                            {{lookup ../../config.weaponCategories modifier.valueAffected}}
                         {{else if (eq modifier.effectType "weapon-damage")}}
                             {{lookup ../../config.weaponTypes modifier.valueAffected}}
                         {{else if (eq modifier.effectType "weapon-property-damage")}}
                             {{lookup ../../config.weaponProperties modifier.valueAffected}}
+                        {{else if (eq modifier.effectType "weapon-category-damage")}}
+                            {{lookup ../../config.weaponCategories modifier.valueAffected}}
                         {{else if (eq modifier.effectType "specific-speed")}}
                             {{lookup ../../config.speeds modifier.valueAffected}}
                         {{else if (eq modifier.effectType "actor-resource")}}

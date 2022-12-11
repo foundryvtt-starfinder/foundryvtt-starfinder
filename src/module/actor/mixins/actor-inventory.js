@@ -6,7 +6,7 @@ export const ActorInventoryMixin = (superclass) => class extends superclass {
      * @returns {Item} The parent item of the item, or null if not contained.
      */
     getContainingItem(item) {
-        return this.items.find(x => x.data.data.container?.contents?.find(y => y.id === item.id) !== undefined);
+        return this.items.find(x => x.system.container?.contents?.find(y => y.id === item.id) !== undefined);
     }
 
     /**

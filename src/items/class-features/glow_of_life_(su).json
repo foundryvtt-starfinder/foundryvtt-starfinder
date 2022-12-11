@@ -2,13 +2,15 @@
   "_id": "QpPsiuPYHIBL3V7p",
   "name": "Glow of Life (Su)",
   "type": "feat",
-  "data": {
+  "img": "systems/sfrpg/icons/classes/glow_of_life.webp",
+  "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
-    "actionType": "",
+    "actionTarget": "",
+    "actionType": "other",
     "activation": {
       "type": "move",
       "condition": "",
@@ -27,12 +29,31 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "",
+          "formula": "(lookupRange(@resources.solarian.stellarMode.value, (@classes.solarian.levels * 2), 1, (@classes.solarian.levels * 3)))",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": true,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"G7p2YIGFTAU6uGjL\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Stellar Revelation</a></p>\n                <p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl27_LabelName\">As a move action, you can spend 1 Resolve Point to recover a number of Hit Points equal to twice your solarian level. Once you use this revelation, you can’t use it again until the next time you regain Stamina Points after a 10-minute rest.<br><br>When you are attuned or fully attuned, increase the amount you heal with this revelation to three times your solarian level.</span></p>"
+      "value": "<p>&gt;@Compendium[sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl07_LabelName\" style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\"><sub style=\"font-family: var(--font-primary);\"><img style=\"border: 1px solid var(--color-border-dark);\" src=\"systems/sfrpg/images/cup/gameplay/photon.webp\" alt=\"\" width=\"20\" height=\"20\" /></sub><span style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\">&nbsp;</span></span><span id=\"ctl00_MainContent_DataListTalentsAll_ctl07_LabelName\">Photon Revelation<br /></span>As a move action, you can spend 1 Resolve Point to recover a number of Hit Points equal to twice your solarian level. Once you use this revelation, you can&rsquo;t use it again until the next time you regain Stamina Points after a 10-minute rest.</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl27_LabelName\"><br />When you are attuned or fully attuned, increase the amount you heal with this revelation to three times your solarian level.</span></p>"
     },
     "descriptors": [],
     "duration": {
@@ -40,6 +61,7 @@
       "value": ""
     },
     "formula": "",
+    "isActive": null,
     "modifiers": [],
     "range": {
       "additional": "",
@@ -52,10 +74,11 @@
       "value": null
     },
     "requirements": "6th Level",
+    "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "source": "Solarian",
     "target": {
@@ -67,11 +90,5 @@
       "per": "",
       "value": 0
     }
-  },
-  "flags": {},
-  "img": "systems/sfrpg/icons/classes/glow_of_life.webp",
-  "permission": {
-    "QqVQDajn5ZN4kl25": 3,
-    "default": 0
   }
 }

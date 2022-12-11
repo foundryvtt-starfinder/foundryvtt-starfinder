@@ -2,7 +2,8 @@
   "_id": "zZwrA4SusXXoAYRu",
   "name": "Acid lancer, liquefier-class",
   "type": "weapon",
-  "data": {
+  "img": "systems/sfrpg/icons/equipment/weapons/salamander-class_flamethrower.webp",
+  "system": {
     "type": "",
     "ability": "dex",
     "abilityMods": {
@@ -15,6 +16,7 @@
       "condition": "",
       "cost": null
     },
+    "ammunitionType": "caustrol",
     "area": {
       "effect": "",
       "shape": "line",
@@ -49,6 +51,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -91,16 +94,27 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "8d4",
-          "operator": "",
           "types": {
-            "acid": true
+            "acid": true,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>In addition to collecting the valuable composites the creature leaves behind, some entrepreneurs enter surnochs&rsquo; territory to hunt and kill them for their acid-producing glands and spines. These components can be made into heavy weapons known as acid lancers, which shoot jets of caustic fluid. A wielder of an acid lancer can squeeze the gland located near the trigger to give her next shot an extra boost of damaging acid. Acid lancers use a special synthetic acid called caustrol for ammunition, which has the same price and comes in the same size containers as petrol.</p>\n<p><strong>Boost</strong>: 1d8</p>"
     },
@@ -109,6 +123,7 @@
       "units": "",
       "value": ""
     },
+    "equippable": false,
     "equipped": false,
     "formula": "",
     "identified": true,
@@ -131,6 +146,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -149,6 +165,7 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
@@ -175,6 +192,7 @@
       "polymorphic": false,
       "powered": false,
       "professional": false,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
@@ -183,7 +201,9 @@
       "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
+      "shatter": false,
       "shells": false,
       "shield": false,
       "sniper": false,
@@ -196,6 +216,7 @@
       "thought": false,
       "throttle": false,
       "thrown": false,
+      "thruster": false,
       "trip": false,
       "two": true,
       "unbalancing": false,
@@ -205,12 +226,14 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "none",
       "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": "",
@@ -218,12 +241,28 @@
     },
     "source": "AA1 pg. 109",
     "special": "",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
     },
     "usage": {
-      "per": "round",
+      "per": "shot",
       "value": 8
     },
     "uses": {
@@ -233,8 +272,5 @@
     },
     "weaponCategory": "uncategorized",
     "weaponType": "heavy"
-  },
-  "effects": [],
-  "flags": {},
-  "img": "systems/sfrpg/icons/equipment/weapons/salamander-class_flamethrower.webp"
+  }
 }

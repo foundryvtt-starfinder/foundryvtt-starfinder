@@ -16,13 +16,13 @@
 
             <ul class="summary">
                 <li>
-                    <input type="text" name="data.source" value="{{itemData.source}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Source" }}"/>
+                    <input type="text" name="system.source" value="{{itemData.source}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Source" }}"/>
                 </li>
                 <li>
-                    <input type="text" name="data.type" value="{{itemData.type}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Type" }}" />
+                    <input type="text" name="system.type" value="{{itemData.type}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Type" }}" />
                 </li>
                 <li>
-                    <input type="text" name="data.subtype" value="{{itemData.subtype}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Subtype" }}" />
+                    <input type="text" name="system.subtype" value="{{itemData.subtype}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Subtype" }}" />
                 </li>
             </ul>
         </div>
@@ -43,12 +43,12 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-            <h3 class="form-header">{{localize "SFRPG.RacialTraits"}}</h3>
+            <h3 class="form-header noborder">{{localize "SFRPG.RacialTraits"}}</h3>
             {{!-- Hit points --}}
             <div class="form-group">
                 <label>{{localize "SFRPG.RaceHitPoints"}}</label>
                 <div class="form-fields">
-                    <input type="text" name="data.hp.value" value="{{itemData.hp.value}}" data-dtype="Number" />
+                    <input type="text" name="system.hp.value" value="{{itemData.hp.value}}" data-dtype="Number" />
                 </div>
             </div>
 
@@ -56,7 +56,7 @@
             <div class="form-group">
                 <label>{{localize "SFRPG.RaceSize"}}</label>
                 <div class="form-fields">
-                    <select name="data.size">
+                    <select name="system.size">
                         {{#select itemData.size}}
                         {{#each config.actorSizes as |name val|}}
                         <option value="{{val}}">{{name}}</option>
@@ -66,7 +66,7 @@
                 </div>
             </div>
 
-            <h3 class="form-header">{{localize "SFRPG.RaceAbilityAdjustments"}}</h3>
+            <h3 class="form-header noborder">{{localize "SFRPG.RaceAbilityAdjustments"}}</h3>
             {{!-- Ability Adjustments Formula --}}
             <h4 class="ability-adjustments-header">
                 <a class="ability-adjustments-control add-ability-adjustment"><i class="fas fa-plus"></i> {{localize "SFRPG.RaceAddAbilityAdjustment"}}</a>
@@ -74,8 +74,8 @@
             <ol class="ability-adjustment-parts form-group">
                 {{#each itemData.abilityMods.parts as |part i| }}
                 <li class="ability-adjustment-part flexrow" data-ability-adjustment="{{i}}">
-                    <input type="text" name="data.abilityMods.parts.{{i}}.0" data-dtype="Number" value="{{numberFormat (lookup this "0") decimals=0 sign=true}}"/>
-                    <select name="data.abilityMods.parts.{{i}}.1">
+                    <input type="text" name="system.abilityMods.parts.{{i}}.0" data-dtype="Number" value="{{numberFormat (lookup this "0") decimals=0 sign=true}}"/>
+                    <select name="system.abilityMods.parts.{{i}}.1">
                         {{#select (lookup this "1") }}
                         <option value="">{{ localize "SFRPG.None" }}</option>
                         {{#each ../config.abilities as |name val|}}

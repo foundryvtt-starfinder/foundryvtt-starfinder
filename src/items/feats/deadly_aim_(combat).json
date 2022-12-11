@@ -2,7 +2,13 @@
   "_id": "1P1O0BHojSINAbRg",
   "name": "Deadly Aim (Combat)",
   "type": "feat",
-  "data": {
+  "flags": {},
+  "img": "systems/sfrpg/icons/feats/deadly_aim.webp",
+  "permission": {
+    "QKfICymYNdnzinV1": 3,
+    "default": 0
+  },
+  "system": {
     "type": "",
     "ability": null,
     "actionType": "",
@@ -69,7 +75,7 @@
         "effectType": "all-damage",
         "enabled": false,
         "max": 1,
-        "modifier": "max(1, @attributes.bab/2)",
+        "modifier": "max(1, floor(@attributes.baseAttackBonus.value/2))",
         "modifierType": "formula",
         "notes": "When you take the attack or full attack action with weapons, you can take a penalty to your attack rolls. If you do, those attacks deal additional damage.",
         "source": "",
@@ -103,11 +109,5 @@
       "per": null,
       "value": 0
     }
-  },
-  "flags": {},
-  "img": "systems/sfrpg/icons/feats/deadly_aim.webp",
-  "permission": {
-    "QKfICymYNdnzinV1": 3,
-    "default": 0
   }
 }

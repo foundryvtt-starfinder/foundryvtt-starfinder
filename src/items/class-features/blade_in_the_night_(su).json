@@ -2,12 +2,14 @@
   "_id": "bHLI9eZWk2iuDogP",
   "name": "Blade in the Night (Su)",
   "type": "feat",
-  "data": {
+  "img": "systems/sfrpg/images/cup/gameplay/graviton.webp",
+  "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "move",
@@ -29,10 +31,13 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@Compendium[sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl03_LabelName\">You have learned how to damage your foes not just with light, but also with the absence of light. As a move action, you can choose a creature within 30 feet of you. For 1 round, or until you leave graviton mode, you gain a +1 bonus to weapon damage rolls against that creature. This bonus damage increases by 1 at 8th level and every 6 levels thereafter. While attuned or fully attuned, this bonus damage instead increases by 1 at 4th level and every 4 levels thereafter.</span></p>"
+      "value": "<p>&gt;@Compendium[sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p><sub style=\"font-family: var(--font-primary);\"><img style=\"border: 1px solid var(--color-border-dark);\" src=\"systems/sfrpg/images/cup/gameplay/graviton.webp\" alt=\"\" width=\"20\" height=\"20\" />&nbsp;</sub>Graviton Revelation<br /><span id=\"ctl00_MainContent_DataListTalentsAll_ctl03_LabelName\"><span style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\">You</span>&nbsp;ha</span><span id=\"ctl00_MainContent_DataListTalentsAll_ctl03_LabelName\">ve learned how to damage your foes not just with light, but also with the absence of light. As a move action, you can choose a creature within 30 feet of you. For 1 round, or until you leave graviton mode, you gain a +1 bonus to weapon damage rolls against that creature. This bonus damage increases by 1 at 8th level and every 6 levels thereafter. While attuned or fully attuned, this bonus damage instead increases by 1 at 4th level and every 4 levels thereafter.</span></p>"
     },
     "descriptors": [],
     "duration": {
@@ -40,22 +45,40 @@
       "value": ""
     },
     "formula": "",
-    "modifiers": [],
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "a98d9064-b4f4-4a32-8dda-a984f7f4f407",
+        "name": "Blade in the Night (Su)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-damage",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@classes.solarian.levels, 0, 2, 1, 8, 2, 14, 3, 20, 4) + (lookupRange(@resources.solarian.stellarMode.value, (lookupRange(@classes.solarian.levels, 0, 4, 1, 8, 2, 12, 3, 16, 4, 20, 5)), 0, 0))",
+        "modifierType": "formula",
+        "notes": "For 1 round, or until you leave graviton mode, you gain a +1 bonus to weapon damage rolls against chosen creature.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": 30
     },
     "recharge": {
       "charged": false,
       "value": null
     },
     "requirements": "2nd Level",
+    "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "source": "Solarian",
     "target": {
@@ -67,11 +90,5 @@
       "per": "",
       "value": 0
     }
-  },
-  "flags": {},
-  "img": "systems/sfrpg/images/cup/gameplay/graviton.webp",
-  "permission": {
-    "QqVQDajn5ZN4kl25": 3,
-    "default": 0
   }
 }

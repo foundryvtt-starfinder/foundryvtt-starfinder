@@ -2,12 +2,14 @@
   "_id": "9WEHzzi4iCib2ja5",
   "name": "Gravity Boost (Su)",
   "type": "feat",
-  "data": {
+  "img": "systems/sfrpg/icons/classes/gravity_boost.webp",
+  "system": {
     "type": "",
     "ability": null,
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "",
@@ -17,7 +19,7 @@
     "area": {
       "effect": "",
       "shape": "",
-      "units": null,
+      "units": "none",
       "value": null
     },
     "attackBonus": 0,
@@ -29,10 +31,13 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"G7p2YIGFTAU6uGjL\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Stellar Revelation</a></p>\n        <p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl11_LabelName\">You can increase or reduce the gravitational attraction between yourself and the terrain around you. You can add a bonus equal to one-third your solarian level (minimum +1) to Athletics checks to climb, jump, or swim as part of the action you take to attempt the skill check. In addition, as a reaction when you are falling, you can reduce the falling damage you take by half. At 6th level, you can move along vertical surfaces and even upside down along ceilings for 1 round. This functions as <em>spider climb</em>, but it leaves your hands free and you can also run. You must end your movement on a surface that can support you normally. If you end your movement while you are standing on a vertical surface or ceiling, you fall unless you succeed at an Athletics check to climb to remain in position.<br><br>When you are attuned or fully attuned, the bonus you gain from this revelation to checks to climb, jump, or swim doubles.</span></p>"
+      "value": "<p>&gt;@Compendium[sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p><sub style=\"font-family: var(--font-primary);\"><img style=\"border: 1px solid var(--color-border-dark);\" src=\"systems/sfrpg/images/cup/gameplay/graviton.webp\" alt=\"\" width=\"20\" height=\"20\" />&nbsp;</sub>Graviton Revelation<br />You can increase or reduce the gravitational attraction between yourself and the terrain around you. You can add a bonus equal to one-third your solarian level (minimum +1) to Athletics checks to climb, jump, or swim as part of the action you take to attempt the skill check. In addition, as a reaction when you are falling, you can reduce the falling damage you take by half. At 6th level, you can move along vertical surfaces and even upside down along ceilings for 1 round. This functions as spider climb, but it leaves your hands free and you can also run. You must end your movement on a surface that can support you normally. If you end your movement while you are standing on a vertical surface or ceiling, you fall unless you succeed at an Athletics check to climb to remain in position.</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl11_LabelName\"><br />When you are attuned or fully attuned, the bonus you gain from this revelation to checks to climb, jump, or swim doubles.</span></p>"
     },
     "descriptors": [],
     "duration": {
@@ -40,11 +45,32 @@
       "value": ""
     },
     "formula": "",
-    "modifiers": [],
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "cd964b3c-5a14-4514-8f7e-8e5bf8adf9dc",
+        "name": "Gravity Boost (Su)",
+        "type": "untyped",
+        "condition": "",
+        "container": {
+          "actorId": "Qs2gOWidvlhDWFVK",
+          "itemId": "XFLwZMa0SSAe6heF"
+        },
+        "effectType": "skill",
+        "enabled": true,
+        "max": 6,
+        "modifier": "(max(1, floor(@classes.solarian.levels / 3))) * (lookupRange(@resources.solarian.stellarMode.value, 2, 0, 1))",
+        "modifierType": "formula",
+        "notes": "You can add this bonus to Athletics checks to climb, jump, or swim as part of the action you take to attempt the skill check.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "ath"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
-      "units": null,
+      "units": "none",
       "value": null
     },
     "recharge": {
@@ -52,6 +78,7 @@
       "value": null
     },
     "requirements": "2nd Level",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
@@ -67,11 +94,5 @@
       "per": "",
       "value": 0
     }
-  },
-  "flags": {},
-  "img": "systems/sfrpg/icons/classes/gravity_boost.webp",
-  "permission": {
-    "QqVQDajn5ZN4kl25": 3,
-    "default": 0
   }
 }

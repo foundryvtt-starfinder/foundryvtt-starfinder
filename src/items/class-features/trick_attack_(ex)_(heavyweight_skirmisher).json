@@ -1,0 +1,154 @@
+{
+  "_id": "1faS656a2tgP5hxh",
+  "name": "Trick Attack (Ex) (Heavyweight Skirmisher)",
+  "type": "feat",
+  "_stats": {
+    "coreVersion": "10.288",
+    "createdTime": 1668108673529,
+    "lastModifiedBy": "SPRszH5sDdJlGxJn",
+    "modifiedTime": 1668121205399,
+    "systemId": "sfrpg",
+    "systemVersion": "0.21.0"
+  },
+  "img": "systems/sfrpg/icons/classes/trick_attack.webp",
+  "system": {
+    "type": "",
+    "ability": null,
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "",
+    "actionType": "",
+    "activation": {
+      "type": "full",
+      "condition": "",
+      "cost": 1
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "none",
+      "value": null
+    },
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "effect": "",
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "damageNotes": "",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>&gt; @Compendium[sfrpg.classes.uf8ADOAeBrtUkPVl]{Operative}</p>\n<p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\">You can trick or startle a foe and then attack when she drops her guard. As a full action, you can move up to your speed. Whether or not you moved, you can then make an attack with a melee weapon with the operative special property or with any small arm. Just before making your attack, attempt a Bluff, Intimidate, or Stealth check (or a check associated with your specialization; see page 94) with a DC equal to 20 + your target&rsquo;s CR. If you succeed at the check, you deal 1d4 additional damage and the target is @Compendium[sfrpg.conditions.MZ8OoH1GE9qDMyCD]{Flat-Footed} against your attack. This damage increases to 1d8 at 3rd level, to 3d8 at 5th level, and by an additional 1d8 every 2 levels thereafter. You can&rsquo;t use this ability with a weapon that has the unwieldy special property or that requires a full action to make a single attack.</span></p>\n<h3>Heavyweight Skirmisher</h3>\n<p>You can perform trick attacks with a wider array of weapons, referred to here as &ldquo;skirmisher weapons.&rdquo; A skirmisher weapon is any weapon you&rsquo;re wielding and proficient with that doesn&rsquo;t target multiple creatures, have the unwieldy property, or require a full action to make a single attack. If you succeed at the trick attack skill check, you can reroll one of the attack&rsquo;s damage dice and use the higher result. At 7th, 11th, 15th, 17th, and 19th levels, you can reroll one additional damage die (maximum 6 dice) and use the higher result for each. You don&rsquo;t deal additional trick attack damage until 5th level, but you can apply that additional damage to attacks with skirmisher weapons. At 5th level, your additional trick attack damage is 1d6. This increases to 2d6 at 9th level, 2d8 at 13th level, and 2d10 at 17th level. For any operative abilities that require you use an operative weapon, you can also use those abilities with melee skirmisher weapons.</p>\n<p>&nbsp;</p>\n<p><em>In the Modifiers tab, change the skill bonus to match your Specialization's skill check bonus.</em></p>\n<p>&nbsp;</p>"
+    },
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
+    "duration": {
+      "units": "",
+      "value": ""
+    },
+    "formula": "",
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "be46a457-9a64-459c-bd3d-acf79ede8393",
+        "name": "Trick Attack skill bonus",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "max": 4,
+        "modifier": "4",
+        "modifierType": "constant",
+        "notes": "Skill Bonus for Trick Attack. Change the values to match your specialization",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "acr"
+      },
+      {
+        "_id": "81c0dc16-b076-48be-b097-14a63a88cfe4",
+        "name": "Trick Attack damage",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-damage",
+        "enabled": true,
+        "max": 0,
+        "modifier": "(lookupRange(@classes.operative.levels, 0, 5, 1, 9, 2))d(lookupRange(@classes.operative.levels, 0, 5, 6, 13, 8, 17, 10))",
+        "modifierType": "formula",
+        "notes": "Apply if Trick Attack skill check was succesful, and weapon is a skirmisher weapon. A skirmisher weapon is any weapon you’re wielding and proficient with that doesn’t target multiple creatures, have the unwieldy property, or require a full action to make a single attack.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "operative"
+      }
+    ],
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "none",
+      "value": null
+    },
+    "recharge": {
+      "charged": false,
+      "value": null
+    },
+    "requirements": "1st Level",
+    "rollNotes": "",
+    "save": {
+      "type": "",
+      "dc": null,
+      "descriptor": ""
+    },
+    "source": "Operative",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": 0,
+      "per": "",
+      "value": 0
+    }
+  }
+}

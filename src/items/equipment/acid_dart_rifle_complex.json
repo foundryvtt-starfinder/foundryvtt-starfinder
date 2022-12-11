@@ -2,7 +2,8 @@
   "_id": "jNCGp4PHoke6975j",
   "name": "Acid dart rifle, complex",
   "type": "weapon",
-  "data": {
+  "img": "systems/sfrpg/icons/equipment/weapons/acid_dart_rifle_tactical.webp",
+  "system": {
     "type": "",
     "ability": "dex",
     "abilityMods": {
@@ -15,6 +16,7 @@
       "condition": "",
       "cost": null
     },
+    "ammunitionType": "dart",
     "area": {
       "effect": "",
       "shape": "",
@@ -49,6 +51,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -91,17 +94,27 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "4d8",
-          "operator": "and",
           "types": {
             "acid": true,
-            "piercing": true
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": true,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>An acid dart rifle has a nonreactive polymer reservoir that can be filled with whatever acid the wielder desires. The automatic loading process fills the rifle darts with acid as they are moved into the chamber. Dual acid dart rifles fire two darts simultaneously, while complex acid dart rifles hold concentrated doses of acid.</p>"
     },
@@ -110,6 +123,7 @@
       "units": "",
       "value": ""
     },
+    "equippable": false,
     "equipped": false,
     "formula": "",
     "identified": true,
@@ -132,6 +146,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -150,6 +165,7 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
@@ -176,6 +192,7 @@
       "polymorphic": false,
       "powered": false,
       "professional": false,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
@@ -184,7 +201,9 @@
       "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
+      "shatter": false,
       "shells": false,
       "shield": false,
       "sniper": false,
@@ -197,6 +216,7 @@
       "thought": false,
       "throttle": false,
       "thrown": false,
+      "thruster": false,
       "trip": false,
       "two": true,
       "unbalancing": false,
@@ -206,12 +226,14 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
       "value": 80
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": "",
@@ -219,6 +241,22 @@
     },
     "source": "CRB pg. 176",
     "special": "",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
@@ -234,8 +272,5 @@
     },
     "weaponCategory": "projectile",
     "weaponType": "longA"
-  },
-  "effects": [],
-  "flags": {},
-  "img": "systems/sfrpg/icons/equipment/weapons/acid_dart_rifle_tactical.webp"
+  }
 }

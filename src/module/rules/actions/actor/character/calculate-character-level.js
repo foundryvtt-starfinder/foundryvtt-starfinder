@@ -16,7 +16,7 @@ export default function (engine) {
         }
 
         for (const cls of classes) {
-            const classData = cls.data.data;
+            const classData = cls.system;
 
             const classLevel = classData.levels;
             const tooltip = game.i18n.format("SFRPG.CharacterLevelsTooltip", {

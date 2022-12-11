@@ -13,7 +13,7 @@ function tryResolveModifier(modifier, rollContext) {
     if (result.hadError) {
         return 0;
     }
-    return result.result;
+    return result.total;
 }
 
 export default function (engine) {

@@ -2,23 +2,26 @@
   "_id": "N6B7tQK6AssfGrud",
   "name": "Gravity Shield, Field",
   "type": "shield",
-  "data": {
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
     "type": "",
-    "ability": null,
+    "ability": "str",
     "abilityMods": {
       "parts": []
     },
     "acp": -1,
+    "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
-      "type": "",
+      "type": "action",
       "condition": "",
       "cost": 0
     },
+    "ammunitionType": "",
     "area": {
       "effect": "",
       "shape": "",
-      "units": "",
+      "units": "none",
       "value": null
     },
     "attackBonus": 0,
@@ -53,6 +56,8 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
@@ -81,10 +86,44 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "",
+          "formula": "1d3 + @abilities.str.mod",
+          "types": {
+            "acid": false,
+            "bludgeoning": true,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "",
+          "formula": "1d3 + @abilities.str.mod",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": true,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>As they were invented by the copaxi of Tabrid Minor (page 106), most gravity shields appear to be crafted of large pieces of coral. A gravity shield is a hybrid item that can mimic the gravity-manipulating powers of copi. You can use a gravity shield to make a special unarmed attack that does not count as archaic and can deal your choice of either bludgeoning or piercing damage.<br />In addition, three times per day as a standard action, you can increase the relative gravity of the shield and attempt a disarm combat maneuver against an adjacent opponent. If you are successful, the disarmed item sticks to your shield for 1 round before it falls to the ground, during which time you can use a swift action to retrieve the item with a free hand. The basic and field gravity shields grant a +1 circumstance bonus to the disarm attack roll and the advanced and elite gravity shields grant a +2 circumstance bonus to the disarm attack roll.</p>"
     },
@@ -92,46 +131,169 @@
     "dex": 4,
     "duration": {
       "units": "",
-      "value": null
+      "value": ""
     },
     "equippable": true,
     "equipped": false,
     "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 9,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "ed19551f-d82e-462f-ac7b-7fee31380d0c",
+        "name": "Gravity Shield - Combat maneuver",
+        "type": "circumstance",
+        "condition": "",
+        "effectType": "all-attacks",
+        "enabled": false,
+        "max": 1,
+        "modifier": "1",
+        "modifierType": "formula",
+        "notes": "Three times per day as a standard action, you can increase the relative gravity of your shield and attempt a disarm combat maneuver against an adjacent opponent. If you are successful, the disarmed item sticks to your shield for 1 round before it falls to the ground, during which time you can use a swift action to retrieve the item with a free hand.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "acr"
+      }
+    ],
     "price": 13500,
     "proficient": false,
     "properties": {
-      "nonlethal": true
+      "aeon": false,
+      "amm": false,
+      "analog": false,
+      "antibiological": false,
+      "archaic": false,
+      "aurora": false,
+      "automatic": false,
+      "blast": false,
+      "block": false,
+      "boost": false,
+      "breach": false,
+      "breakdown": false,
+      "bright": false,
+      "buttressing": false,
+      "cluster": false,
+      "conceal": false,
+      "deconstruct": false,
+      "deflect": false,
+      "disarm": false,
+      "double": false,
+      "drainCharge": false,
+      "echo": false,
+      "entangle": false,
+      "explode": false,
+      "extinguish": false,
+      "feint": false,
+      "fiery": false,
+      "firstArc": false,
+      "flexibleLine": false,
+      "force": false,
+      "freeHands": false,
+      "fueled": false,
+      "gearArray": false,
+      "grapple": false,
+      "gravitation": false,
+      "guided": false,
+      "harrying": false,
+      "holyWater": false,
+      "hybrid": false,
+      "ignite": false,
+      "indirect": false,
+      "injection": false,
+      "integrated": false,
+      "line": false,
+      "living": false,
+      "lockdown": false,
+      "mind-affecting": false,
+      "mine": false,
+      "mire": false,
+      "modal": false,
+      "necrotic": false,
+      "nonlethal": true,
+      "one": false,
+      "operative": false,
+      "penetrating": false,
+      "polarize": false,
+      "polymorphic": false,
+      "powered": false,
+      "professional": false,
+      "propel": false,
+      "punchGun": false,
+      "qreload": false,
+      "radioactive": false,
+      "reach": false,
+      "recall": false,
+      "regrowth": false,
+      "relic": false,
+      "reposition": false,
+      "scramble": false,
+      "shape": false,
+      "shatter": false,
+      "shells": false,
+      "shield": false,
+      "sniper": false,
+      "stun": false,
+      "subtle": false,
+      "sunder": false,
+      "swarm": false,
+      "tail": false,
+      "teleportive": false,
+      "thought": false,
+      "throttle": false,
+      "thrown": false,
+      "thruster": false,
+      "trip": false,
+      "two": false,
+      "unbalancing": false,
+      "underwater": false,
+      "unwieldy": false,
+      "variantBoost": false,
+      "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
+      "units": "none",
       "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "source": "",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "usage": {
       "per": "",
       "value": 0
     },
     "uses": {
-      "max": 0,
-      "per": null,
-      "value": 0
+      "max": 3,
+      "per": "day",
+      "value": 3
     }
-  },
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg"
+  }
 }

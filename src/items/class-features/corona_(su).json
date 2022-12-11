@@ -2,13 +2,15 @@
   "_id": "BehQeoPVENIv8Xg3",
   "name": "Corona (Su)",
   "type": "feat",
-  "data": {
+  "img": "systems/sfrpg/icons/classes/corona.webp",
+  "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
-    "actionType": "",
+    "actionTarget": "",
+    "actionType": "other",
     "activation": {
       "type": "action",
       "condition": "",
@@ -27,12 +29,46 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "Melee counter damage",
+          "formula": "(lookupRange(@classes.solarian.levels, 0, 6, 2, 12, 3, 18, 4))d6",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Attuned damage",
+          "formula": "(lookupRange(@resources.solarian.stellarMode.value, 0, 1, floor(@classes.solarian.levels / 2)))",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@Compendium[sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl21_LabelName\">As a standard action, you can surround your body with an envelope of fiery plasma. You gain cold resistance 10, and any adjacent creature that hits you with a natural weapon or a melee weapon takes 2d6 fire damage. The corona lasts for 1 round or until you leave photon mode. At 12th level, the damage increases to 3d6 and the cold resistance increases to 15. At 18th level, the damage increases to 4d6 and the cold resistance increases to 20.<br><br>When you are attuned or fully attuned, any creature that starts its turn adjacent to you while your corona is in effect takes fire damage equal to half your solarian level.</span></p>"
+      "value": "<p>&gt;@Compendium[sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl07_LabelName\" style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\"><sub style=\"font-family: var(--font-primary);\"><img style=\"border: 1px solid var(--color-border-dark);\" src=\"systems/sfrpg/images/cup/gameplay/photon.webp\" alt=\"\" width=\"20\" height=\"20\" /></sub><span style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\">&nbsp;</span></span><span id=\"ctl00_MainContent_DataListTalentsAll_ctl07_LabelName\">Photon Revelation<br /></span>As a standard action, you can surround your body with an envelope of fiery plasma. You gain cold resistance 10, and any adjacent creature that hits you with a natural weapon or a melee weapon takes 2d6 fire damage. The corona lasts for 1 round or until you leave photon mode. At 12th level, the damage increases to 3d6 and the cold resistance increases to 15. At 18th level, the damage increases to 4d6 and the cold resistance increases to 20.</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl21_LabelName\"><br />When you are attuned or fully attuned, any creature that starts its turn adjacent to you while your corona is in effect takes fire damage equal to half your solarian level.</span></p>"
     },
     "descriptors": [],
     "duration": {
@@ -40,7 +76,24 @@
       "value": ""
     },
     "formula": "",
-    "modifiers": [],
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "efaa2a05-6f95-4918-a23a-fe8757370d14",
+        "name": "New Modifier",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": true,
+        "max": 0,
+        "modifier": "(lookupRange(@classes.solarian.levels, 0, 6, 10, 12, 15, 18, 20))",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "cold"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -52,10 +105,11 @@
       "value": null
     },
     "requirements": "6th Level",
+    "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "source": "Solarian",
     "target": {
@@ -67,11 +121,5 @@
       "per": "",
       "value": 0
     }
-  },
-  "flags": {},
-  "img": "systems/sfrpg/icons/classes/corona.webp",
-  "permission": {
-    "QqVQDajn5ZN4kl25": 3,
-    "default": 0
   }
 }

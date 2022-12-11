@@ -2,19 +2,21 @@
   "_id": "ksxWNthDyNPTIqtN",
   "name": "Needler rifle",
   "type": "weapon",
-  "data": {
+  "img": "systems/sfrpg/icons/equipment/weapons/needler-rifle.webp",
+  "system": {
     "type": "",
     "ability": "dex",
     "abilityMods": {
       "parts": []
     },
-    "actionTarget": "eac",
+    "actionTarget": "kac",
     "actionType": "rwak",
     "activation": {
       "type": "none",
       "condition": "",
       "cost": null
     },
+    "ammunitionType": "dart",
     "area": {
       "effect": "",
       "shape": "",
@@ -49,6 +51,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -91,24 +94,36 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "1d6",
-          "operator": "",
           "types": {
-            "fire": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": true,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Like the needler pistol, this injection gun can be fitted with cartridges containing medicine or @Compendium[sfrpg.rules.aKqRtg165rAly1Cc]{Poison}. The needler rifle fires darts much farther than its smaller counterpart.&nbsp;</span></p>"
+      "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Like the needler pistol, this injection gun can be fitted with cartridges containing medicine or @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Poison}. The needler rifle fires darts much farther than its smaller counterpart.&nbsp;</span></p>"
     },
     "descriptors": [],
     "duration": {
       "units": "",
       "value": ""
     },
+    "equippable": false,
     "equipped": false,
     "formula": "",
     "identified": true,
@@ -131,6 +146,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -149,6 +165,7 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
@@ -184,6 +201,7 @@
       "relic": false,
       "reposition": false,
       "shape": false,
+      "shatter": false,
       "shells": false,
       "shield": false,
       "sniper": false,
@@ -196,6 +214,7 @@
       "thought": false,
       "throttle": false,
       "thrown": false,
+      "thruster": false,
       "trip": false,
       "two": true,
       "unbalancing": false,
@@ -205,12 +224,14 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
       "value": 60
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": "",
@@ -218,12 +239,27 @@
     },
     "source": "CRB pg. 177",
     "special": "",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
     },
     "usage": {
-      "per": "round",
+      "per": "shot",
       "value": 1
     },
     "uses": {
@@ -233,8 +269,5 @@
     },
     "weaponCategory": "uncategorized",
     "weaponType": "longA"
-  },
-  "effects": [],
-  "flags": {},
-  "img": "systems/sfrpg/icons/equipment/weapons/needler-rifle.webp"
+  }
 }

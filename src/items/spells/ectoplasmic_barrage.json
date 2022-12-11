@@ -2,7 +2,10 @@
   "_id": "3I4iNxI1qfObcKPF",
   "name": "Ectoplasmic Barrage",
   "type": "spell",
-  "data": {
+  "effects": [],
+  "flags": {},
+  "img": "systems/sfrpg/icons/spells/ectoplasmic_barrage.webp",
+  "system": {
     "type": "",
     "ability": "dex",
     "abilityMods": {
@@ -17,6 +20,7 @@
     },
     "allowedClasses": {
       "myst": true,
+      "precog": false,
       "tech": false,
       "wysh": true
     },
@@ -36,8 +40,8 @@
     "damage": {
       "parts": [
         {
-          "name": "",
-          "formula": "2d6",
+          "name": "First Projectile",
+          "formula": "lookupRange(@item.level, 2, 2, 4, 3, 7, 4, 10, 5, 13, 6, 15)d6",
           "types": {
             "acid": false,
             "bludgeoning": true,
@@ -51,8 +55,8 @@
           }
         },
         {
-          "name": "",
-          "formula": "2d6",
+          "name": "Second Projectile",
+          "formula": "lookupRange(@item.level, 2, 2, 4, 3, 7, 4, 10, 5, 13, 6, 15)d6",
           "types": {
             "acid": false,
             "bludgeoning": true,
@@ -120,12 +124,5 @@
       "per": "",
       "value": null
     }
-  },
-  "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.sfrpg.spells.3I4iNxI1qfObcKPF"
-    }
-  },
-  "img": "systems/sfrpg/icons/spells/ectoplasmic_barrage.webp"
+  }
 }

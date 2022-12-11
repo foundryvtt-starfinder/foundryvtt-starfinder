@@ -1,5 +1,13 @@
+//This script deletes _id, flags, sort and effects from exported JSONs, and cleans up the file names to match existing JSONs, useful if you're overriting existing items. Copy this script into the folder with your JSONs, then open CMD in that folder (type "cmd" in the Windows Explorer address bar) and type "node item_cleaner.js"
+
 const fs = require('fs');
 const dataPath = ".";
+
+let sanitize = null;
+try {
+    sanitize = require("sanitize-filename");
+} catch (err) {   
+}   
 
 try {
     fs.readdir(dataPath, 'utf8', (err, files) => {
@@ -29,6 +37,11 @@ try {
                     } catch (err) {
                         console.log(err)
                     };
+                    try {
+                        delete toClean.effects;
+                    } catch (err) {
+                        console.log(err)
+                    };
                     
                 if (!fs.existsSync("./Clean")) {
                     fs.mkdir("./Clean", (err) => {
@@ -39,14 +52,22 @@ try {
                 };
                     
                 const output = JSON.stringify(toClean, null, 2);
-                const name = toClean.name.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g).map(x => x.toLowerCase()).join('_');
+                let filename = toClean.name;
+                if (sanitize) {
+                     filename = sanitize(filename);
+                }
+                filename = filename.replace(/[\s]/g, "_");
+                filename = filename.replace(/[,;]/g, "");
+                filename = filename.toLowerCase();
 
-                fs.writeFileSync(`Clean/${name}.json`, output);
+
+                fs.writeFileSync(`Clean/${filename}.json`, output);
                  
                 console.log(`Cleaned ${toClean.name}`);
             };
             
         };
+        console.log(`\nFinished cleaning; cleaned files are in the Clean folder.`)
     });
     
 } catch (err) {

@@ -221,10 +221,12 @@ SFRPG.descriptors = {
     "mind-affecting": "SFRPG.Descriptors.MindAffecting",
     "pain": "SFRPG.Descriptors.Pain",
     "poison": "SFRPG.Descriptors.Poison",
+    "polymorph": "SFRPG.Descriptors.Polymorph",
     "radiation": "SFRPG.Descriptors.Radiation",
     "scrying": "SFRPG.Descriptors.Scrying",
     "sense-dependent": "SFRPG.Descriptors.SenseDependent",
     "shadow": "SFRPG.Descriptors.Shadow",
+    "sonic": "SFRPG.Descriptors.Sonic",
     "summoning": "SFRPG.Descriptors.Summoning",
     "teleportation": "SFRPG.Descriptors.Teleportation",
     "water": "SFRPG.Descriptors.Water",
@@ -295,7 +297,13 @@ SFRPG.ammunitionTypes = {
     "rocket": "SFRPG.Items.Ammunition.Type.Rockets",
     "shell": "SFRPG.Items.Ammunition.Type.Shells",
     "flare": "SFRPG.Items.Ammunition.Type.Flares",
-    "nanite": "SFRPG.Items.Ammunition.Type.Nanites"
+    "flechettes": "SFRPG.Items.Ammunition.Type.Flechettes",
+    "nanite": "SFRPG.Items.Ammunition.Type.Nanites",
+    "caustrol": "SFRPG.Items.Ammunition.Type.Caustrol",
+    "sclerite": "SFRPG.Items.Ammunition.Type.Sclerites",
+    "moodGoo": "SFRPG.Items.Ammunition.Type.MoodGoo",
+    "thasphalt": "SFRPG.Items.Ammunition.Type.Thasphalt",
+    "thasteronPellets": "SFRPG.Items.Ammunition.Type.ThasteronPellets"
 };
 
 SFRPG.distanceUnits = {
@@ -338,11 +346,11 @@ SFRPG.limitedUsePeriods = {
 };
 
 SFRPG.senses = {
-    "bs": "SFRPG.SenesBS",
-    "bl": "SFRPG.SenesBL",
-    "dark": "SFRPG.SenesDark",
-    "llv": "SFRPG.SenesLLV",
-    "st": "SFRPG.SensesST"
+    "bs": "SFRPG.SensesTypes.SensesBS",
+    "bl": "SFRPG.SensesTypes.SensesBL",
+    "dark": "SFRPG.SensesTypes.SensesDark",
+    "llv": "SFRPG.SensesTypes.SensesLLV",
+    "st": "SFRPG.SensesTypes.SensesST"
 };
 
 SFRPG.skills = {
@@ -438,9 +446,11 @@ SFRPG.weaponProperties = {
     "harrying": "SFRPG.WeaponPropertiesHarrying",
     "holyWater": "SFRPG.WeaponPropertiesHolyWater",
     "hybrid": "SFRPG.WeaponPropertiesHybrid",
+    "hydrodynamic": "SFRPG.WeaponPropertiesHydrodynamic",
     "ignite": "SFRPG.WeaponPropertiesIgnite",
     "indirect": "SFRPG.WeaponPropertiesIndirect",
     "injection": "SFRPG.WeaponPropertiesInjection",
+    "instrumental": "SFRPG.WeaponPropertiesInstrumental",
     "integrated": "SFRPG.WeaponPropertiesIntegrated",
     "line": "SFRPG.WeaponPropertiesLine",
     "living": "SFRPG.WeaponPropertiesLiving",
@@ -531,9 +541,11 @@ SFRPG.weaponPropertiesTooltips = {
     "harrying": "SFRPG.WeaponPropertiesHarryingTooltip",
     "holyWater": "SFRPG.WeaponPropertiesHolyWaterTooltip",
     "hybrid": "SFRPG.WeaponPropertiesHybridTooltip",
+    "hydrodynamic": "SFRPG.WeaponPropertiesHydrodynamicTooltip",
     "ignite": "SFRPG.WeaponPropertiesIgniteTooltip",
     "indirect": "SFRPG.WeaponPropertiesIndirectTooltip",
     "injection": "SFRPG.WeaponPropertiesInjectionTooltip",
+    "instrumental": "SFRPG.WeaponPropertiesInstrumentalTooltip",
     "integrated": "SFRPG.WeaponPropertiesIntegratedTooltip",
     "line": "SFRPG.WeaponPropertiesLineTooltip",
     "living": "SFRPG.WeaponPropertiesLivingTooltip",
@@ -795,6 +807,7 @@ SFRPG.conditionTypes = {
     "frightened": "SFRPG.ConditionsFrightened",
     "grappled": "SFRPG.ConditionsGrappled",
     "helpless": "SFRPG.ConditionsHelpless",
+    "invisible": "SFRPG.ConditionsInvisible",
     "nauseated": "SFRPG.ConditionsNauseated",
     "off-kilter": "SFRPG.ConditionsOffKilter",
     "off-target": "SFRPG.ConditionsOffTarget",
@@ -812,39 +825,39 @@ SFRPG.conditionTypes = {
 };
 
 SFRPG.languages = {
-	"abyssal": "SFRPG.LanguagesAbyssal",
-	"akiton": "SFRPG.LanguagesAkitonian",
-	"aklo": "SFRPG.LanguagesAklo",	
-	"aquan": "SFRPG.LanguagesAquan",
-	"arkanen": "SFRPG.LanguagesArkanen",
-	"auran": "SFRPG.LanguagesAuran",
-	"azlanti": "SFRPG.LanguagesAzlanti",	
-	"brethedan": "SFRPG.LanguagesBrethedan",
-	"castrovelian": "SFRPG.LanguagesCastrovelian",
-	"celestial": "SFRPG.LanguagesCelestial",
-	"common": "SFRPG.LanguagesCommon",
-	"draconic": "SFRPG.LanguagesDraconic",
-	"drow": "SFRPG.LanguagesDrow",
-	"dwarven": "SFRPG.LanguagesDwarven",
-	"elven": "SFRPG.LanguagesElven",	
-	"eoxian": "SFRPG.LanguagesEoxian",
-	"gnome": "SFRPG.LanguagesGnome",
-	"goblin": "SFRPG.LanguagesGoblin",
-	"halfling": "SFRPG.LanguagesHalfling",
-	"ignan": "SFRPG.LanguagesIgnan",
-	"infernal": "SFRPG.LanguagesInfernal",
-	"kalo": "SFRPG.LanguagesKalo",	
-	"kasatha": "SFRPG.LanguagesKasatha",
-	"Nchaki": "SFRPG.LanguagesNchaki",
-	"orc": "SFRPG.LanguagesOrc",
-	"sarcesian": "SFRPG.LanguagesSarcesian",
-	"shirren": "SFRPG.LanguagesShirren",
-	"shobhad": "SFRPG.LanguagesShobhad",	
-	"terran": "SFRPG.LanguagesTerran",
-	"triaxian": "SFRPG.LanguagesTriaxian",
-	"vercite": "SFRPG.LanguagesVercite",
-	"vesk": "SFRPG.LanguagesVesk",
-	"ysoki": "SFRPG.LanguagesYsoki"
+    "abyssal": "SFRPG.LanguagesAbyssal",
+    "akiton": "SFRPG.LanguagesAkitonian",
+    "aklo": "SFRPG.LanguagesAklo",	
+    "aquan": "SFRPG.LanguagesAquan",
+    "arkanen": "SFRPG.LanguagesArkanen",
+    "auran": "SFRPG.LanguagesAuran",
+    "azlanti": "SFRPG.LanguagesAzlanti",	
+    "brethedan": "SFRPG.LanguagesBrethedan",
+    "castrovelian": "SFRPG.LanguagesCastrovelian",
+    "celestial": "SFRPG.LanguagesCelestial",
+    "common": "SFRPG.LanguagesCommon",
+    "draconic": "SFRPG.LanguagesDraconic",
+    "drow": "SFRPG.LanguagesDrow",
+    "dwarven": "SFRPG.LanguagesDwarven",
+    "elven": "SFRPG.LanguagesElven",	
+    "eoxian": "SFRPG.LanguagesEoxian",
+    "gnome": "SFRPG.LanguagesGnome",
+    "goblin": "SFRPG.LanguagesGoblin",
+    "halfling": "SFRPG.LanguagesHalfling",
+    "ignan": "SFRPG.LanguagesIgnan",
+    "infernal": "SFRPG.LanguagesInfernal",
+    "kalo": "SFRPG.LanguagesKalo",	
+    "kasatha": "SFRPG.LanguagesKasatha",
+    "Nchaki": "SFRPG.LanguagesNchaki",
+    "orc": "SFRPG.LanguagesOrc",
+    "sarcesian": "SFRPG.LanguagesSarcesian",
+    "shirren": "SFRPG.LanguagesShirren",
+    "shobhad": "SFRPG.LanguagesShobhad",	
+    "terran": "SFRPG.LanguagesTerran",
+    "triaxian": "SFRPG.LanguagesTriaxian",
+    "vercite": "SFRPG.LanguagesVercite",
+    "vesk": "SFRPG.LanguagesVesk",
+    "ysoki": "SFRPG.LanguagesYsoki"
 };
 
 SFRPG.augmentationTypes = {
@@ -1143,12 +1156,14 @@ SFRPG.modifierEffectTypes = {
     "weapon-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpecificWeaponAttackRolls",
     "all-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllAttackRolls",
     "weapon-property-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.WeaponPropertyAttackRolls",
+    "weapon-category-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.WeaponCategoryAttackRolls",
     "ranged-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.RangedAttackDamage",
     "melee-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.MeleeAttackDamage",
     "spell-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpellAttackDamage",
     "weapon-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpecificWeaponAttackDamage",
     "all-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllAttackDamage",
     "weapon-property-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.WeaponPropertyDamage",
+    "weapon-category-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.WeaponCategoryDamage",
     "bulk": "SFRPG.ActorSheet.Modifiers.EffectTypes.Encumbrance",
     "all-speeds": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllSpeeds",
     "specific-speed": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpecificSpeed",
@@ -1295,6 +1310,11 @@ SFRPG.statusEffects = [
         id: "helpless",
         label: "SFRPG.ConditionsHelpless",
         icon: "systems/sfrpg/icons/conditions/helpless.webp"
+    },
+    {
+        id: "invisible",
+        label: "SFRPG.ConditionsInvisible",
+        icon: "systems/sfrpg/icons/conditions/invisible.webp"
     },
     {
         id: "nauseated",
@@ -1562,6 +1582,7 @@ SFRPG.capacityUsagePer = {
     "minute": "SFRPG.Capacity.UsagePer.Minute",
     "minute10": "SFRPG.Capacity.UsagePer.Minute10",
     "hour": "SFRPG.Capacity.UsagePer.Hour",
+    "hour8": "SFRPG.Capacity.UsagePer.Hour8",
     "day": "SFRPG.Capacity.UsagePer.Day"
 };
 
@@ -1775,4 +1796,27 @@ SFRPG.characterWealthByLevel = {
     18: 1700000,
     19: 2550000,
     20: 3775000
+};
+
+SFRPG.skillCompendium = {
+    "acr": "Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.3QdtsfnVJsHEdrt0",
+    "ath": "Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.iLlBAZBfHJMZQRQx",
+    "blu": "Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.GcVVfpQ79HdcMqBt",
+    "com": "Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.IqOCYDKd9NgBwowp",
+    "cul": "Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.LeZmnFwnlB89ovBB",
+    "dip": "Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.1tzIBDaDAO4hmX5C",
+    "dis": "Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.aayAhTaRzitONs5U",
+    "eng": "Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.76u4HnGcAlySicb4",
+    "int": "Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.6fqgiVqlA7u9jS4i",
+    "lsc": "Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.tVUA3IPcOfyU1g19",
+    "med": "Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.d4fcGwOcrsuYrwGH",
+    "mys": "Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.HXcmgteT2OegqFrB",
+    "per": "Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.gZlg2ZKze0erNLmP",
+    "pro": "Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.bD4kmdFU7wwsenOf",
+    "phs": "Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.w7NNLCayniMsh3ne",
+    "pil": "Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.2xZnjhTSiLu0uoXB",
+    "sen": "Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.nBrYkGfNBJAHe0xJ",
+    "sle": "Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.qVEW9HjXQN0ok879",
+    "ste": "Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.5h3iePfJaeQMc3Qr",
+    "sur": "Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.UDTsEIldhXTn0VJA"
 };

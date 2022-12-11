@@ -2,7 +2,9 @@
   "_id": "IPDN3VDLTrrMFE2g",
   "name": "Injection Expert (Ex)",
   "type": "feat",
-  "data": {
+  "flags": {},
+  "img": "systems/sfrpg/icons/equipment/weapons/acid_dart_rifle_complexe.webp",
+  "system": {
     "type": "",
     "ability": null,
     "abilityMods": {
@@ -32,7 +34,7 @@
     "description": {
       "chat": "",
       "unidentified": "",
-      "value": "<p>&gt;@Compendium[sfrpg.classes.PSHcGB4UFgMSiF4V]{Biohacker}</p>\n<p>You are proficient with weapons with the injection weapon special property, as long as the weapon has not gained that weapon special property through a weapon fusion, spell, class feature, or similar ability or effect. At 2nd level, you gain a +1 bonus to attack rolls with these weapons. At 9th level, that bonus increases to +2, and at 18th level it increases to +3.<br><br>When you hit an ally with such a weapon, you can avoid dealing damage to that ally, while still affecting the ally with the biohack booster or inhibitor, @Compendium[sfrpg.rules.aKqRtg165rAly1Cc]{Drug}, medicinal compound, poison, serum, or other substance that was loaded into the injection weapon. When you fire a weapon with the injection special property and you have multiple types of ammunition loaded into the weapon, you choose which type of ammunition you fire when you attempt the attack.</p>"
+      "value": "<p>&gt;@Compendium[sfrpg.classes.PSHcGB4UFgMSiF4V]{Biohacker}</p>\n<p>You are proficient with weapons with the injection weapon special property, as long as the weapon has not gained that weapon special property through a weapon fusion, spell, class feature, or similar ability or effect. At 2nd level, you gain a +1 bonus to attack rolls with these weapons. At 9th level, that bonus increases to +2, and at 18th level it increases to +3.</p>\n<p>When you hit an ally with such a weapon, you can avoid dealing damage to that ally, while still affecting the ally with the biohack booster or inhibitor, @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Drug}, medicinal compound, poison, serum, or other substance that was loaded into the injection weapon. When you fire a weapon with the injection special property and you have multiple types of ammunition loaded into the weapon, you choose which type of ammunition you fire when you attempt the attack.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -40,7 +42,23 @@
       "value": null
     },
     "formula": "",
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "90c712c0-02db-4676-a2d0-7e3ec1b9c861",
+        "name": "Injection Expert",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-property-attacks",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@classes.biohacker.levels,0,2,1,9,2,18,3)",
+        "modifierType": "constant",
+        "notes": "You are proficient with weapons with the injection weapon special property, as long as the weapon has not gained that weapon special property through a weapon fusion, spell, class feature, or similar ability or effect. At 2nd level, you gain a +1 bonus to attack rolls with these weapons. At 9th level, that bonus increases to +2, and at 18th level it increases to +3.",
+        "source": "Injection Expert; Biohacker",
+        "subtab": "misc",
+        "valueAffected": "injection"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -67,11 +85,5 @@
       "per": null,
       "value": 0
     }
-  },
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "permission": {
-    "QqVQDajn5ZN4kl25": 3,
-    "default": 0
   }
 }

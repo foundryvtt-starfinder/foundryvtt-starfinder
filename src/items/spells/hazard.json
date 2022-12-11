@@ -2,12 +2,22 @@
   "_id": "lop1wIJ0m6dbuN6I",
   "name": "Hazard",
   "type": "spell",
-  "data": {
+  "_stats": {
+    "coreVersion": "10.291",
+    "createdTime": 1670782011200,
+    "lastModifiedBy": "eBWLT1Ze8MOMpLeF",
+    "modifiedTime": 1670782210364,
+    "systemId": "sfrpg",
+    "systemVersion": "0.22.0"
+  },
+  "img": "systems/sfrpg/icons/spells/hazard.webp",
+  "system": {
     "type": "",
     "ability": "",
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "action",
@@ -16,6 +26,7 @@
     },
     "allowedClasses": {
       "myst": false,
+      "precog": false,
       "tech": false,
       "wysh": true
     },
@@ -35,8 +46,73 @@
     "damage": {
       "parts": [
         {
+          "name": "Acid",
           "formula": "1d3",
-          "operator": "",
+          "group": 0,
+          "types": {
+            "acid": true,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Cold",
+          "formula": "1d3",
+          "group": 0,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": true,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Electricity",
+          "formula": "1d3",
+          "group": 0,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": true,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Fire",
+          "formula": "1d3",
+          "group": 0,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Sonic",
+          "formula": "1d3",
+          "group": 0,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -46,7 +122,7 @@
             "healing": false,
             "piercing": false,
             "slashing": false,
-            "sonic": false
+            "sonic": true
           }
         }
       ]
@@ -59,7 +135,44 @@
       "unidentified": "",
       "value": "<p>When you cast this spell, choose acid, cold, electricity, fire, or sonic. The spell gains that descriptor. You summon a minor hazard from an alternate reality, creating a splash of acid rain, a blast of freezing air, a static electric discharge, a burst of fire, or a roar of thunder. Each creature in the area must succeed at a Reflex save or take 1d3 damage of the chosen type.</p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
     "dismissible": false,
     "duration": {
       "units": "",
@@ -108,12 +221,5 @@
       "per": "",
       "value": null
     }
-  },
-  "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.sfrpg.spells.lop1wIJ0m6dbuN6I"
-    }
-  },
-  "img": "systems/sfrpg/icons/spells/hazard.webp"
+  }
 }

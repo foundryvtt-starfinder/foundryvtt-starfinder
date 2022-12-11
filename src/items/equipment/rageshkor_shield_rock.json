@@ -2,19 +2,22 @@
   "_id": "YrhnoKdY9lqaSLuZ",
   "name": "Rageshkor shield, rock",
   "type": "shield",
-  "data": {
+  "img": "icons/equipment/shield/heater-steel-worn.webp",
+  "system": {
     "type": "",
     "ability": "str",
     "abilityMods": {
       "parts": []
     },
     "acp": -1,
+    "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
       "type": "",
       "condition": "",
       "cost": 0
     },
+    "ammunitionType": "",
     "area": {
       "effect": "",
       "shape": "",
@@ -53,6 +56,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -86,18 +90,29 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "1d3 + @abilities.str.mod",
-          "operator": "",
           "types": {
-            "bludgeoning": true
+            "acid": false,
+            "bludgeoning": true,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>Vesk have used rageshkor frill plates for shields since ancient times. In the post-Gap era, vesk have developed high-tech versions of these shields that incorporate synthetic padding, alloyed fittings, and more to augment the natural materials while maintaining the shields&rsquo; cultural value. Although these shields can be purchased, a carrier in vesk territory should expect to be asked whether the shield was truly won (harvested from a rageshkor the wielder defeated), where the clash occurred, and how the battle fared. An earned rageshkor shield is a prestige piece that can win a warrior much respect.</p>\n<h3>Rock Rageshkor Shield</h3>\n<p>This roughly ovular shield is made of big rock rageshkor frill plates. The shield can be used to make unarmed attacks that don&rsquo;t count as archaic. It also functions as if it had a mk 1 thermal capacitor installed, and this &ldquo;upgrade&rdquo; can be enhanced to higher model numbers without occupying the shield&rsquo;s other upgrade slot.</p>"
+      "value": "<p>Vesk have used rageshkor frill plates for shields since ancient times. In the post-Gap era, vesk have developed high-tech versions of these shields that incorporate synthetic padding, alloyed fittings, and more to augment the natural materials while maintaining the shields&rsquo; cultural value. Although these shields can be purchased, a carrier in vesk territory should expect to be asked whether the shield was truly won (harvested from a rageshkor the wielder defeated), where the clash occurred, and how the battle fared. An earned rageshkor shield is a prestige piece that can win a warrior much respect.</p>\n<h3>Rock Rageshkor Shield</h3>\n<p>This roughly ovular shield is made of big rock rageshkor frill plates. The shield can be used to make unarmed attacks that don&rsquo;t count as archaic. It also functions as if it had a @Compendium[sfrpg.equipment.GlvKAoIQSImVLkFC]{Thermal capacitor, mk 1} installed, and this &ldquo;upgrade&rdquo; can be enhanced to higher model numbers without occupying the shield&rsquo;s other upgrade slot.</p>\n<p><br /><em>Edit modifiers in Modifier tab to enhance Thermal capacitor bonuses.</em></p>"
     },
     "descriptors": [],
     "dex": 4,
@@ -111,7 +126,38 @@
     "identified": true,
     "isActive": null,
     "level": 12,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "60997c97-71ca-469a-9972-582447f330d0",
+        "name": "Rageshkor shield",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": true,
+        "max": 5,
+        "modifier": "5",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "fire"
+      },
+      {
+        "_id": "901427db-3798-48a7-8202-85c5a7b3f351",
+        "name": "Rageshkor shield",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": true,
+        "max": 5,
+        "modifier": "5",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "cold"
+      }
+    ],
     "price": 37500,
     "proficient": false,
     "properties": {
@@ -128,6 +174,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -146,6 +193,7 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
@@ -172,6 +220,7 @@
       "polymorphic": false,
       "powered": false,
       "professional": false,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
@@ -180,7 +229,9 @@
       "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
+      "shatter": false,
       "shells": false,
       "shield": false,
       "sniper": false,
@@ -193,6 +244,7 @@
       "thought": false,
       "throttle": false,
       "thrown": false,
+      "thruster": false,
       "trip": false,
       "two": false,
       "unbalancing": false,
@@ -202,18 +254,36 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "",
       "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": "",
       "descriptor": "negate"
     },
     "source": "AA4 pg. 97",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": null
@@ -227,8 +297,5 @@
       "per": null,
       "value": 0
     }
-  },
-  "effects": [],
-  "flags": {},
-  "img": "icons/equipment/shield/heater-steel-worn.webp"
+  }
 }

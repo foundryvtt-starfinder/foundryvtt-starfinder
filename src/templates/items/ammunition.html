@@ -16,12 +16,12 @@
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
-            <h3 class="form-header">{{ localize "SFRPG.Items.Ammunition.Details" }}</h3>
+            <h3 class="form-header noborder">{{ localize "SFRPG.Items.Ammunition.Details" }}</h3>
 
             <div class="form-group">
                 <label>{{ localize "SFRPG.Items.Ammunition.AmmunitionType" }}</label>
                 <div class="form-fields">
-                    <select name="data.ammunitionType">
+                    <select name="system.ammunitionType">
                         {{#select itemData.ammunitionType}}
                         <option value="">{{ localize "SFRPG.Items.Ammunition.Type.None" }}</option>
                         {{#each config.ammunitionTypes as |ammunition type|}}
@@ -36,12 +36,12 @@
                 <label>{{ localize "SFRPG.Items.Ammunition.Capacity" }}</label>
                 <div class="form-fields">
                     <label class="checkbox">
-                        <input type="checkbox" name="data.useCapacity" {{checked itemData.useCapacity}} /> {{ localize "SFRPG.Items.Ammunition.UseCapacity" }}
+                        <input type="checkbox" name="system.useCapacity" {{checked itemData.useCapacity}} /> {{ localize "SFRPG.Items.Ammunition.UseCapacity" }}
                     </label>
-                    {{#if data.data.useCapacity}}
-                    <input type="text" name="data.capacity.value" value="{{itemData.capacity.value}}" data-dtype="Number"/>
+                    {{#if itemData.useCapacity}}
+                    <input type="text" name="system.capacity.value" value="{{itemData.capacity.value}}" data-dtype="Number"/>
                     <span class="sep"> / </span>
-                    <input type="text" name="data.capacity.max" value="{{itemData.capacity.max}}" data-dtype="Number"/>
+                    <input type="text" name="system.capacity.max" value="{{itemData.capacity.max}}" data-dtype="Number"/>
                     {{/if}}
                 </div>
             </div>

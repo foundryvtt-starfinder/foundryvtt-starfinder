@@ -63,7 +63,7 @@
         "ACTooltipNotProficientMod": "Malus de non-maîtrise d'armure : {profMod}",
         "ACTooltipNotProficientShield": "Malus de non-maîtrise de bouclier : {profMod}",
         "ACTooltipShieldACMod": "Modificateur de bouclier: {shield} ({name})",
-        "ACvsCombatManeuversLabel": "MDC",
+        "ACvsCombatManeuversLabel": "CAC + 8",
         "ACvsCombatManeuversTitle": "AC VS Manoeuvres de combat",
         "AbilityActivationTypesDay": "Jour",
         "AbilityActivationTypesFull": "Action C.",
@@ -143,8 +143,14 @@
                 "AgePlaceholder": "ex: 19",
                 "DateOfBirth": "Date de naissance",
                 "DateOfBirthPlaceholder": "ex: 6 Gozran 300 AF",
+                "Deity": "Deity",
+                "DeityPlaceholder": "e.g. Pharasma",
+                "GenderPronouns": "Gender/Pronouns",
+                "GenderPronounsPlaceholder": "e.g. They/Them",
                 "Height": "Taille",
                 "HeightPlaceholder": "ex: 1m68",
+                "HomeWorld": "Home World",
+                "HomeWorldPlaceholder": "e.g. Akiton",
                 "ImageTooltip": "Vous pouvez définir ici une image de plein pied illustrant votre personnage. Les dimensions devraient être de 200x250 pixels, ou 4:5 de ratio d'aspect.",
                 "OtherVisuals": "Apparence",
                 "TabBio": "Biographie",
@@ -309,6 +315,8 @@
                     "SpellAttackRolls": "Jet d'attaque de sort",
                     "SpellSaveDC": "DD de sauvegarde de sort",
                     "Stamina": "Endurance",
+                    "WeaponCategoryAttackRolls": "Weapon Category Attack Rolls",
+                    "WeaponCategoryDamage": "Weapon Category Damage",
                     "WeaponPropertyAttackRolls": "Jet d'attaque d'arme",
                     "WeaponPropertyDamage": "Dégats des armes"
                 },
@@ -473,6 +481,7 @@
                 "Action": "Action",
                 "Day": "Jour",
                 "Hour": "Heure",
+                "Hour8": "8 Hours",
                 "Minute": "Minute",
                 "Minute10": "10 minutes",
                 "Round": "Round de combat",
@@ -633,6 +642,7 @@
         "ConditionsFrightened": "Effrayé",
         "ConditionsGrappled": "Agrippé",
         "ConditionsHelpless": "Sans défense",
+        "ConditionsInvisible": "Invisible",
         "ConditionsNauseated": "Nauséeux",
         "ConditionsOffKilter": "En apesanteur",
         "ConditionsOffTarget": "Imprécis",
@@ -687,9 +697,12 @@
                 "Bludgeoning": "Contondant",
                 "Cold": "Froid",
                 "Custom": "Personnalisé",
+                "DamageGroup": "Damage Group {group}",
+                "DamageGroupTooltip": "If damage sections share a group, you may only enable one from that group when making a damage roll. You may freely enable/disable damage sections that lack a group.",
                 "Electricity": "Electricité",
                 "Fire": "Feu",
                 "Force": "Force",
+                "GrouplessDamage": "Groupless Damage",
                 "Hint": "Liste de types de dégâts qui s'appliquent sur ce jet de dégâts.",
                 "Nonlethal": "Non létal",
                 "Operators": {
@@ -743,6 +756,7 @@
             "Pain": "Pain",
             "PainDescription": "A pain effect causes unpleasant sensations but not permanent physical damage. Creatures that are immune to effects that require a Fortitude save are immune to pain effects.",
             "Poison": "Poison",
+            "Polymorph": "Polymorph",
             "Radiation": "Radiation",
             "Scrying": "Scrying",
             "ScryingDescription": "A scrying effect creates an invisible magical sensor that sends you information while the effect lasts. Unless noted otherwise, the sensor has the same sensory abilities that you have naturally, but not any sensory abilities you gain from other spells or technology. The sensor is a separate, independent source of sensory input for you, and thus it functions normally even if you have been blinded or deafened or otherwise suffer sensory impairment.<br><br>A creature can notice a scrying sensor with a successful Perception check (DC = 20 + the spell or effect’s level). The sensor can be dispelled as if it were an active spell. Lead sheeting, force fields, and some exotic materials and magical protections block scrying effects; if that is the case, you can sense that the effect has been blocked.",
@@ -750,6 +764,7 @@
             "SenseDependentDescription": "A sense-dependent effect has either audible or visual elements, requiring sight or hearing to have any effect. For this kind of effect to affect that target, you must be able to either see or hear the target, and the target must be able to either see or hear you.",
             "Shadow": "Shadow",
             "ShadowDescription": "A shadow effect creates something that is partially real from an amalgamation of extradimensional energy. Damage dealt by a shadow effect is real.",
+            "Sonic": "Sonic",
             "Summoning": "Summoning",
             "SummoningDescription": "A summoning effect instantly brings a creature or object to a place you designate. When the effect ends or is dispelled, a summoned creature is instantly sent back to where it came from (typically another plane, but not always), but a summoned object is not sent back unless the effect description specifically indicates otherwise. A summoned creature also goes away if it is killed or if its Hit Points drop to 0, but it is not really dead. It takes 24 hours for the creature to reform in the place from which it was summoned, during which time it can’t be summoned again.<br><br>When a summoning effect ends and the summoned creature disappears, all spells it has cast expire. A summoned creature cannot use any innate summoning abilities it may have.",
             "Teleportation": "Teleportation",
@@ -1343,18 +1358,25 @@
                 "Details": "Détails de la munition",
                 "Type": {
                     "Arrows": "Flèches",
+                    "Caustrol": "Caustrol",
                     "Charges": "Charges",
                     "Darts": "Flèchettes",
                     "Flares": "Flares",
+                    "Flechettes": "Flechettes",
                     "Fuel": "Combustible",
                     "HeavyRounds": "Balles pour armes lourdes",
                     "LongarmAndSniperRounds": "Balles pour armes longues et de précisions",
                     "Missiles": "Missiles",
+                    "MoodGoo": "Mood Goo",
                     "Nanites": "Nanites",
+                    "Nets": "Nets",
                     "None": "Aucun",
                     "Rockets": "Roquettes",
+                    "Sclerites": "Sclerites",
                     "Shells": "Balles",
-                    "SmallArmRounds": "Balles pour armes légères"
+                    "SmallArmRounds": "Balles pour armes légères",
+                    "Thasphalt": "Thasphalt",
+                    "ThasteronPellets": "Thasteron Pellets"
                 },
                 "UseCapacity": "Utiliser la capacité"
             },
@@ -1458,6 +1480,9 @@
                 "FeatureUsage": "Utilisation du trait",
                 "RechargeOn": "Recharge",
                 "Requirements": "Prérequis"
+            },
+            "Goods": {
+                "Details": "Goods Details"
             },
             "Hybrid": {
                 "Details": "Détails de l'élément hybride"
@@ -1953,12 +1978,16 @@
         "SaveModifiersTooltip": "{type} Bonus: {mod} ({source})",
         "SaveProgressionFast": "Rapide",
         "SaveProgressionSlow": "Lente",
-        "SenesBL": "Vision aveugle",
-        "SenesBS": "Perception aveugle",
-        "SenesDark": "Vision dans le noir",
-        "SenesLLV": "Vision nocturne",
-        "Senses": "Sens",
-        "SensesST": "Perception Pénétrante",
+        "SensesTypes": {
+            "GlobalIlluminationThresholdMessage": "<strong>Starfinder System</strong><br />It is recommended to keep the Global Illumination Threshold enabled in order for features such as Low Light Vision to function correctly.",
+            "Senses": "Sens",
+            "SensesBL": "Vision aveugle",
+            "SensesBS": "Perception aveugle",
+            "SensesDark": "Vision dans le noir",
+            "SensesLLV": "Vision nocturne",
+            "SensesLLVDark": "Vision nocturne & Vision dans le noir",
+            "SensesST": "Perception Pénétrante"
+        },
         "Settings": {
             "Advantage": {
                 "Hint": "Basculer les avantages ou désavantages sur les lancers de dés.",
@@ -1967,6 +1996,10 @@
             "AlwaysShowQuantity": {
                 "Hint": "Indique toujours la quantité des éléments, même si c'est 0 ou 1. Vous devrez rafraîchir votre fenêtre avant que ce changement ne prenne effet.",
                 "Name": "Toujours montrer les quantités"
+            },
+            "AutoAddUnarmedStrike": {
+                "Hint": "When checked, the unarmed strike item will be automatically added to any new player character actors.",
+                "Name": "Automatically add Unarmed Strike to new characters"
             },
             "AutoCollapseCard": {
                 "Hint": "Plier automatiquement les descriptions des fiches d'articles dans le journal de discussion",
@@ -2048,6 +2081,10 @@
             "GalacticTrade": {
                 "Hint": "Active le sous-système de commerce galactique, ce qui permet d'augmenter de 5 % le nombre maximal de BP d'un navire et d'ajouter des BP à l'inventaire du navire sous forme de crédits.",
                 "Name": "Activer le commerce galactique"
+            },
+            "SFRPGTheme": {
+                "Hint": "When enabled, a few minor tweaks to Foundry's colours will be made to match Starfinder's colour scheme.",
+                "Name": "Custom SFRPG theme"
             },
             "ScalingCantrips": {
                 "Hint": "Enables the Scaling Cantrips variant rule from Galactic Magic pg. 88. Changing this setting will alter the formulas of all affected spells on all actors, so can take a while if you have lots.",
@@ -2814,12 +2851,16 @@
         "WeaponPropertiesHolyWaterTooltip": "Une arme à eau bénite est imprégnée des bénédictions d’au moins une divinité orientée vers le bien (le plus souvent Hylax, Iomédae ou Sarenraé au sein des Mondes du Pacte ; mais les fidèles de n’importe quelle divinité d’alignement Bon peuvent créer une telle arme). Elles n’infligent des dégâts qu’aux morts-vivants (quel que soit leur alignement) et aux extérieurs avec le sous-type Mal et même ces créatures ne subissent aucun effet (et ne révèlent aucun signe de leur véritable nature si ce n’est pas évident) si elles réussissent un jet de sauvegarde. Fabriquer des grenades à eau bénite nécessite la bénédiction d’un prêtre d’une divinité d’alignement Bon mais la grenade en elle-même peut être fabriquée par n’importe qui quel que soit son alignement.",
         "WeaponPropertiesHybrid": "Hybride",
         "WeaponPropertiesHybridTooltip": "A weapon with this special property is a hybrid item, incorporating both magic and technology into its design. It counts as a magical weapon and gains the analog weapon special property. It consumes ammunition and battery charges normally.",
+        "WeaponPropertiesHydrodynamic": "Hydrodynamic",
+        "WeaponPropertiesHydrodynamicTooltip": "This weapon can be thrown underwater effectively, taking no penalty to attack rolls or damage for underwater combat.",
         "WeaponPropertiesIgnite": "Ignition",
         "WeaponPropertiesIgniteTooltip": "Les armes avec la propriété spéciale ignition utilisent un accélérant pour provoquer de petits feux intenses sur leurs cibles. Une cible touchée par une arme avec cette propriété spéciale doit réussir un jet de Réflexes (DD = 20 + 1/2 le niveau de l’objet + votre bonus de Dextérité) ou subir l’état enflammé (Livre de règles page 275) et les dégâts indiqués. Subir plusieurs fois l’état enflammé à cause de cette propriété spéciale n’augmente pas les dégâts de feu, vous ne subissez à chaque round que les dégâts d’ignition indiqués les plus élevés. Un personnage qui subit l’état enflammé à cause d’une autre source (comme l’effet critique combustion, même à cause d’une arme avec ignition) ajoute ces dégâts aux dégâts de feu qu’il subit à chaque round. Mettre un terme à l’état enflammé éteint toutes les sources de dégâts dues à cet état.",
         "WeaponPropertiesIndirect": "Indirecte",
         "WeaponPropertiesIndirectTooltip": "Une arme indirecte utilise un signal sans fil couplé à un système de tir à plusieurs étapes, une télémétrie interne, une fluctuation bimétallique, un guidage magnétique ou tout autre système qui permet de donner l’impression que le tir provient d’un autre endroit. Cela réduit de 10 points le malus pour les tests de Discrétion pour les tirs de précision.",
         "WeaponPropertiesInjection": "Injection",
         "WeaponPropertiesInjectionTooltip": "Cette arme, ou cette munition, peut être remplie avec une drogue, un poison ou un produit médicinal. Avec une attaque réussie (soit la première attaque si c’est une arme de corps à corps ou une attaque avec la bonne munition si c’est une attaque à distance), l’arme injecte automatiquement le produit dans la cible.<br><br>Remplir l’arme avec une nouvelle substance revient à la recharger et il s’agit d’une action de mouvement. Chaque substance injectable différente doit être achetée séparément et peut être utilisée dans n’importe quelle arme avec cette propriété spéciale. Voir page 231 pour les règles et les coûts des drogues, poisons et produits médicinaux.",
+        "WeaponPropertiesInstrumental": "Instrumental",
+        "WeaponPropertiesInstrumentalTooltip": "A weapon with this property can also be used as a basic musical instrument (Armory 105). The size of this instrument’s battery is the same as that of the weapon’s, and it can be used as a weapon (with the charge usage indicated) or an instrument (where it uses 1 charge every 10 minutes). If the weapon is 8th level or higher, it also functions instead as a euphonic musical instrument (Armory 106).",
         "WeaponPropertiesIntegrated": "Intégrée",
         "WeaponPropertiesIntegratedTooltip": "Une arme indirecte utilise un signal sans fil couplé à un système de tir à plusieurs étapes, une télémétrie interne, une fluctuation bimétallique, un guidage magnétique ou tout autre système qui permet de donner l’impression que le tir provient d’un autre endroit. Cela réduit de 10 points le malus pour les tests de Discrétion pour les tirs de précision.",
         "WeaponPropertiesLine": "Ligne",

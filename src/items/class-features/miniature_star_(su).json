@@ -2,13 +2,15 @@
   "_id": "WqbHK6rJL7fWUVvF",
   "name": "Miniature Star (Su)",
   "type": "feat",
-  "data": {
+  "img": "systems/sfrpg/icons/classes/miniature_star.webp",
+  "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
-    "actionType": "",
+    "actionTarget": "",
+    "actionType": "other",
     "activation": {
       "type": "action",
       "condition": "",
@@ -27,12 +29,31 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "",
+          "formula": "(floor(@classes.solarian.levels / 2))d6",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"UVNOjH2ERlQjcGnU\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Zenith Revelation</a></p>\n        <p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl55_LabelName\">When you’re fully photon-attuned, you can create a simulacrum of a star as a standard action. The star is a 10-foot-radius sphere that fills your square (or one square of your space, if you’re larger than Medium) and all squares within 5 feet of that space. Any creature that starts its turn in the same space as the star takes 1d6 fire damage for every 2 solarian levels you have, and any creature that starts its turn outside the star but within 5 feet of it takes half that damage. At 17th level, you can create your star simulacrum as a 15-foot-radius sphere that affects your square and all squares within 10 feet of that space (a total of 21 squares).<br><br>Creatures can move through the star, but it exerts a gravitational pull, and any creature inside it or within 5 feet of it must spend twice as much movement for each square of movement that takes it away from the center of the star. The star remains for 1d4+1 rounds, and stays in place even if you later move. You are immune to all effects of your own miniature star.</span></p>"
+      "value": "<p>&gt;@Compendium[sfrpg.class-features.UVNOjH2ERlQjcGnU]{Zenith Revelation}</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl53_LabelName\" style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\"><span id=\"ctl00_MainContent_DataListTalentsAll_ctl07_LabelName\" style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\"><sub style=\"font-family: var(--font-primary);\"><img style=\"border: 1px solid var(--color-border-dark);\" src=\"systems/sfrpg/images/cup/gameplay/photon.webp\" alt=\"\" width=\"20\" height=\"20\" /></sub></span></span><span id=\"ctl00_MainContent_DataListTalentsAll_ctl53_LabelName\"><span id=\"ctl00_MainContent_DataListTalentsAll_ctl07_LabelName\">&nbsp;</span></span><span id=\"ctl00_MainContent_DataListTalentsAll_ctl53_LabelName\">Photon Revelation<br /></span>When you&rsquo;re fully photon-attuned, you can create a simulacrum of a star as a standard action. The star is a 10-foot-radius sphere that fills your square (or one square of your space, if you&rsquo;re larger than Medium) and all squares within 5 feet of that space. Any creature that starts its turn in the same space as the star takes 1d6 fire damage for every 2 solarian levels you have, and any creature that starts its turn outside the star but within 5 feet of it takes half that damage. At 17th level, you can create your star simulacrum as a 15-foot-radius sphere that affects your square and all squares within 10 feet of that space (a total of 21 squares).</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl55_LabelName\">Creatures can move through the star, but it exerts a gravitational pull, and any creature inside it or within 5 feet of it must spend twice as much movement for each square of movement that takes it away from the center of the star. The star remains for 1d4+1 rounds, and stays in place even if you later move. You are immune to all effects of your own miniature star.</span></p>"
     },
     "descriptors": [],
     "duration": {
@@ -40,6 +61,7 @@
       "value": ""
     },
     "formula": "",
+    "isActive": null,
     "modifiers": [],
     "range": {
       "additional": "",
@@ -52,10 +74,11 @@
       "value": null
     },
     "requirements": "Zenith Revelation",
+    "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "source": "Solarian",
     "target": {
@@ -67,11 +90,5 @@
       "per": "",
       "value": 0
     }
-  },
-  "flags": {},
-  "img": "systems/sfrpg/icons/classes/miniature_star.webp",
-  "permission": {
-    "QqVQDajn5ZN4kl25": 3,
-    "default": 0
   }
 }
