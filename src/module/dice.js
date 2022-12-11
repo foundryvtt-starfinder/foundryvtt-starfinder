@@ -752,7 +752,7 @@ export class DiceSFRPG {
             htmlData.push({ name: "damage-parts", value: JSON.stringify(tempParts) });
             htmlData.push({ name: "rollNotes", value: itemContext?.data?.damageNotes });
 
-            let useCustomCard = game.settings.get("sfrpg", "useCustomChatCards") && chatMessage;
+            let useCustomCard = game.settings.get("sfrpg", "useCustomChatCards");
             let errorToThrow = null;
             if (useCustomCard && chatMessage) {
                 // Push the roll to the ChatBox
