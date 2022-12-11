@@ -230,7 +230,16 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         //   0        1          2    3     4       5          6      7           8          9               10            11               12             13     14
         let [forward, starboard, aft, port, turret, unmounted, frame, powerCores, thrusters, primarySystems, otherSystems, securitySystems, expansionBays, cargo, actorResources] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
-            if (!item.config) item.config = {};
+            if (!item.config) item.config = {
+                isStack: item.system.quantity ? item.system.quantity > 1 : false,
+                isOpen: item.type === "container" ? item.system.container.isOpen : true,
+                isOnCooldown: item.system.recharge && !!item.system.recharge.value && (item.system.recharge.charged === false),
+                hasAttack: ["mwak", "rwak", "msak", "rsak"].includes(item.system.actionType) && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
+                hasDamage: item.system.damage?.parts && item.system.damage.parts.length > 0 && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
+                hasUses: item.canBeUsed(),
+                isCharged: !item.hasUses || item.getRemainingUses() <= 0 || !item.isOnCooldown,
+                hasCapacity: item.hasCapacity()
+            };
 
             if (item.type === "actorResource") {
                 this._prepareActorResource(item, actorData);
@@ -264,8 +273,8 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         data.inventory = inventory;
 
         for (const item of cargo) {
-            item.isStack = item.system.quantity ? item.system.quantity > 1 : false;
-            item.isOpen = item.system.container?.isOpen === undefined ? true : item.system.container.isOpen;
+            item.config.isStack = item.system.quantity ? item.system.quantity > 1 : false;
+            item.config.isOpen = item.system.container?.isOpen === undefined ? true : item.system.container.isOpen;
         }
 
         const weapons = [].concat(forward, starboard, port, aft, turret);

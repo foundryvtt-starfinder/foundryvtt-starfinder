@@ -63,7 +63,7 @@ function computeCompoundBulkForItem(item, contents) {
         personalBulk: personalBulk,
         contentBulk: contentBulk,
         totalBulk: personalBulk + contentBulk
-    }
+    };
 
     item.itemBulk = itemBulk;
 
