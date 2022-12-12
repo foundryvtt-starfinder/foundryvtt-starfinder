@@ -55,9 +55,9 @@
             <div class="item-detail item-action">
                 {{#if (eq item.type "container")}}
                     {{#if item.config.isOpen}}
-                        <a class="item-control toggle-container" title="{{localize "SFRPG.ActorSheet.Inventory.Container.CloseTooltip"}}"><i class="fas fa-arrow-up"> {{localize "SFRPG.ActorSheet.Inventory.Container.Close"}}</i></a>
+                        <a class="item-control toggle-container" title="{{localize "SFRPG.ActorSheet.Inventory.Container.CloseTooltip"}}"><i class="fas fa-arrow-up"></i> {{localize "SFRPG.ActorSheet.Inventory.Container.Close"}}</a>
                     {{else}}
-                        <a class="item-control toggle-container" title="{{localize "SFRPG.ActorSheet.Inventory.Container.OpenTooltip"}}"><i class="fas fa-arrow-down"> {{localize "SFRPG.ActorSheet.Inventory.Container.Open"}}</i></a>
+                        <a class="item-control toggle-container" title="{{localize "SFRPG.ActorSheet.Inventory.Container.OpenTooltip"}}"><i class="fas fa-arrow-down"></i> {{localize "SFRPG.ActorSheet.Inventory.Container.Open"}}</a>
                     {{/if}}
                 {{else if item.config.hasUses}}
                     {{item.system.usage.value}} / {{item.system.usage.per}}
