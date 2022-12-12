@@ -320,20 +320,21 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
 
         if (!damage.isHealing) {
             /** Update temp hitpoints */
-            let newTempHP = Math.clamped(originalTempHP - remainingUndealtDamage, 0, actorData.attributes.hp.tempmax);
+            let newTempHP = Math.clamped(originalTempHP - remainingUndealtDamage, 0,
+                actorData.attributes.hp.tempmax ? actorData.attributes.hp.tempmax : actorData.attributes.hp.temp);
             remainingUndealtDamage = remainingUndealtDamage - (originalTempHP - newTempHP);
 
             if (newTempHP <= 0) {
                 newTempHP = null;
                 actorUpdate['system.attributes.hp.tempmax'] = null;
             }
-            
+
             actorUpdate["system.attributes.hp.temp"] = newTempHP;
 
             /** Update stamina points */
             const newSP = Math.clamped(originalSP - remainingUndealtDamage, 0, actorData.attributes.sp.max);
             remainingUndealtDamage = remainingUndealtDamage - (originalSP - newSP);
-            
+
             actorUpdate["system.attributes.sp.value"] = newSP;
 
             /** Update hitpoints */
@@ -354,25 +355,25 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
 
                 actorUpdate["system.attributes.hp.value"] = newHP;
             }
-            
+
             if (damage.healSettings.healsStamina) {
                 const newSP = Math.clamped(originalSP + remainingUndealtDamage, 0, actorData.attributes.sp.max);
                 remainingUndealtDamage = remainingUndealtDamage - (newSP - originalSP);
 
                 actorUpdate["system.attributes.sp.value"] = newSP;
             }
-            
+
             if (damage.healSettings.healsTemporaryHitpoints) {
                 const newTempHP = Math.clamped(originalTempHP + remainingUndealtDamage, 0, actorData.attributes.hp.tempmax);
                 remainingUndealtDamage = remainingUndealtDamage - (newTempHP - originalTempHP);
-                
+
                 actorUpdate["system.attributes.hp.temp"] = newTempHP;
             }
         }
 
         const promise = this.update(actorUpdate);
         return promise;
-   }
+    }
 
     /**
     * Checks whether an actor is immune to a specific damage type.
