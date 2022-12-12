@@ -48,9 +48,9 @@ function getManifest() {
     return json;
 }
 
-/********************/
+/** ******************/
 /*		BUILD		*/
-/********************/
+/** ******************/
 
 /**
  * Build Less
@@ -81,7 +81,7 @@ async function copyFiles() {
         `${name}.js`,
         'module.json',
         'system.json',
-        'template.json',
+        'template.json'
     ];
     try {
         for (const file of statics) {
@@ -97,7 +97,7 @@ async function copyFiles() {
 
 /**
  * Copy only those files that we want to watch while developing.
- * 
+ *
  * Over time, with the inclusion of tons of images and icons, the number
  * of files that are being copied over to the dist folder has increased by
  * a large amount. This was causing the watch process to slow to a crawl while
@@ -114,7 +114,7 @@ async function copyWatchFiles() {
         `${name}.js`,
         'module.json',
         'system.json',
-        'template.json',
+        'template.json'
     ];
     try {
         for (const file of statics) {
@@ -129,7 +129,7 @@ async function copyWatchFiles() {
 }
 
 /**
- * Does the same as copyFiles, except it only moves the 
+ * Does the same as copyFiles, except it only moves the
  * README, OGL, and LICENSE files. These aren't needed for
  * development, but they should be in the package.
  */
@@ -186,9 +186,9 @@ function buildWatch() {
  */
 function JSONstringifyOrder( obj, space, sortingMode = "default" )
 {
-    var allKeys = [];
-    var seen = {};
-    JSON.stringify(obj, function (key, value) {
+    let allKeys = [];
+    let seen = {};
+    JSON.stringify(obj, function(key, value) {
         if (!(key in seen)) {
             allKeys.push(key);
             seen[key] = null;
@@ -196,7 +196,7 @@ function JSONstringifyOrder( obj, space, sortingMode = "default" )
         return value;
     });
     allKeys.sort();
-    
+
     if (sortingMode === "item") {
         // Ensure name is after _id, and type is after name.
         const idIndex = allKeys.indexOf("_id");
@@ -213,7 +213,7 @@ function JSONstringifyOrder( obj, space, sortingMode = "default" )
             allKeys.splice(idIndex + 2, 0, "type");
         }
     }
-    
+
     return JSON.stringify(obj, allKeys, space);
 }
 
@@ -221,7 +221,10 @@ function JSONstringifyOrder( obj, space, sortingMode = "default" )
  * Unpack existing db files into json files.
  */
 async function unpack(sourceDatabase, outputDirectory) {
-    await fs.mkdir(`${outputDirectory}`, { recursive: true }, (err) => { if (err) throw err; });
+    fs.mkdir(`${outputDirectory}`, { recursive: true }, (err) => {
+        if (err)
+            throw err;
+    });
 
     let db = new AsyncNedb({ filename: sourceDatabase, autoload: true });
     let items = await db.asyncFind({});
@@ -234,7 +237,7 @@ async function unpack(sourceDatabase, outputDirectory) {
         filename = filename.toLowerCase();
 
         let targetFile = `${outputDirectory}/${filename}.json`;
-        await fs.writeFileSync(targetFile, jsonOutput, { "flag": "w" });
+        fs.writeFileSync(targetFile, jsonOutput, { "flag": "w" });
     }
 }
 
@@ -242,12 +245,12 @@ async function unpackPacks() {
     console.log(`Unpacking all packs`);
 
     let sourceDir = "./src/packs";
-    let files = await fs.readdirSync(sourceDir);
+    let files = fs.readdirSync(sourceDir);
     for (let file of files) {
         if (limitToPack && !file.includes(limitToPack)) {
             continue;
         }
-        
+
         if (file.endsWith(".db")) {
             let fileWithoutExt = file.substr(0, file.length - 3);
             let unpackDir = `./src/items/${fileWithoutExt}`;
@@ -256,7 +259,7 @@ async function unpackPacks() {
             console.log(`Processing ${fileWithoutExt}`);
 
             console.log(`> Cleaning up ${unpackDir}`);
-            await fs.rmdirSync(unpackDir, { recursive: true });
+            fs.rmdirSync(unpackDir, { recursive: true });
 
             console.log(`> Unpacking ${sourceFile} into ${unpackDir}`);
             await unpack(sourceFile, unpackDir);
@@ -273,9 +276,9 @@ async function unpackPacks() {
 /**
  * Cook db source json files into .db files with nedb
  */
-var cookErrorCount = 0;
-var cookAborted = false;
-var packErrors = {};
+let cookErrorCount = 0;
+let cookAborted = false;
+let packErrors = {};
 var limitToPack = null;
 async function cookPacksNoFormattingCheck() {
     await cookWithOptions({ formattingCheck: false });
@@ -285,9 +288,9 @@ async function cookPacks(params) {
 }
 async function cookWithOptions(options = { formattingCheck: true }) {
     console.log(`Cooking db files`);
-    for (let i = 3; i<process.argv.length; i++) {
+    for (let i = 3; i < process.argv.length; i++) {
         if (process.argv[i] === '--pack') {
-            limitToPack = process.argv[i+1];
+            limitToPack = process.argv[i + 1];
             i++;
         }
     }
@@ -300,7 +303,7 @@ async function cookWithOptions(options = { formattingCheck: true }) {
     packErrors = {};
 
     let sourceDir = "./src/items";
-    let directories = await fs.readdirSync(sourceDir);
+    let directories = fs.readdirSync(sourceDir);
     for (let directory of directories) {
         let itemSourceDir = `${sourceDir}/${directory}`;
         let outputFile = `./src/packs/${directory}.db`;
@@ -312,17 +315,17 @@ async function cookWithOptions(options = { formattingCheck: true }) {
         if (!limitToPack || directory === limitToPack) {
             if (fs.existsSync(outputFile)) {
                 console.log(`> Removing ${outputFile}`);
-                await fs.unlinkSync(outputFile);
+                fs.unlinkSync(outputFile);
             }
-            
+
             db = new AsyncNedb({ filename: outputFile, autoload: true });
         }
 
         console.log(`> Reading files in ${itemSourceDir}`);
-        let files = await fs.readdirSync(itemSourceDir);
+        let files = fs.readdirSync(itemSourceDir);
         for (let file of files) {
             let filePath = `${itemSourceDir}/${file}`;
-            let jsonInput = await fs.readFileSync(filePath);
+            let jsonInput = fs.readFileSync(filePath);
             try {
                 jsonInput = JSON.parse(jsonInput);
 
@@ -353,7 +356,7 @@ async function cookWithOptions(options = { formattingCheck: true }) {
                     // Skip if a journal
                     jsonInput.img = "icons/svg/mystery-man.svg";
                 }
-                
+
                 const movingActorTypes = ["character", "drone", "npc"];
                 if (movingActorTypes.includes(jsonInput.type)) {
                     tryMigrateActorSpeed(jsonInput);
@@ -385,14 +388,14 @@ async function cookWithOptions(options = { formattingCheck: true }) {
 
     if (options.formattingCheck === true) {
         console.log(`\nStarting formatting check.`);
-        formattingCheck(allItems)
+        formattingCheck(allItems);
     }
     else {
         console.log(`\n*Skipping* formatting check.`);
     }
 
     console.log(`\nStarting consistency check.`);
-    consistencyCheck(allItems, compendiumMap)
+    consistencyCheck(allItems, compendiumMap);
 
     console.log(`\nUpdating items with updated IDs.\n`);
 
@@ -417,7 +420,7 @@ function regularExpressionForFindingItemsInCache(cache) {
 function ensureTokenDefaults(item) {
     if (!item) return;
     if (!item.prototypeToken) return;
-    
+
     // Did not add Character because iconics come in multiple levels, and we don't want to include level in the name.
     const actorTypes = ["npc", "starship", "vehicle", "npc2", "hazard"];
 
@@ -429,20 +432,20 @@ function ensureTokenDefaults(item) {
     item.prototypeToken.sight.enabled = false; // Sight is disabled for NPCs by default
     item.prototypeToken.bar1.attribute = "attributes.hp"; // Most tokens have hp as their first bat
     item.prototypeToken.bar2.attribute = ""; // The 2nd bar is set per token type
-    item.prototypeToken.disposition = -1 // Hostile by default
-    item.prototypeToken.displayBars = 20; //Show bars on hover
-    item.prototypeToken.displayName = 20; //Show name on hover
+    item.prototypeToken.disposition = -1; // Hostile by default
+    item.prototypeToken.displayBars = 20; // Show bars on hover
+    item.prototypeToken.displayName = 20; // Show name on hover
 
     if (["npc", "npc2"].includes(item.type) && item.system.attributes.rp.max > 0) {
         item.prototypeToken.bar2.attribute = "attributes.rp"; // If the NPC has resolve points, set them as the 2nd bar
     } else if (item.type === "character") {
         item.prototypeToken.disposition = 1; // Friendly
-        item.prototypeToken.bar2.attribute = "attributes.sp"; //2nd bar as stamina
+        item.prototypeToken.bar2.attribute = "attributes.sp"; // 2nd bar as stamina
     } else if (item.type === "starship") {
         item.prototypeToken.disposition = 0; // Neutral
-        item.prototypeToken.bar2.attribute = "attributes.shields"; //2nd bar as shields
+        item.prototypeToken.bar2.attribute = "attributes.shields"; // 2nd bar as shields
     } else if (item.type === "vehicle") {
-        item.prototypeToken.disposition = 0; //Neutral
+        item.prototypeToken.disposition = 0; // Neutral
     }
 }
 
@@ -452,7 +455,7 @@ function tryMigrateActorSpeed(jsonInput) {
     if (speedValue) {
         let baseSpeed = speedValue;
         if (baseSpeed && isNaN(baseSpeed)) {
-            baseSpeed = baseSpeed.replace(/\D/g,'');
+            baseSpeed = baseSpeed.replace(/\D/g, '');
             baseSpeed = Number(baseSpeed);
         }
 
@@ -460,7 +463,7 @@ function tryMigrateActorSpeed(jsonInput) {
         if (!baseSpeed || isNaN(baseSpeed)) {
             baseSpeed = 30;
         }
-        
+
         jsonInput.system.attributes.speed = {
             land: { base: 0 },
             flying: { base: 0 },
@@ -470,7 +473,7 @@ function tryMigrateActorSpeed(jsonInput) {
             special: "",
             mainMovement: "land"
         };
-        
+
         const lowercaseSpeedValue = speedValue.toLowerCase();
         if (lowercaseSpeedValue.includes("climb")) {
             jsonInput.system.attributes.speed.climbing.base = baseSpeed;
@@ -488,9 +491,9 @@ function tryMigrateActorSpeed(jsonInput) {
             jsonInput.system.attributes.speed.land.base = baseSpeed;
             jsonInput.system.attributes.speed.mainMovement = "land";
         }
-        
+
         let finalSpecial = "";
-        if (speedValue != baseSpeed) {
+        if (speedValue !== baseSpeed) {
             finalSpecial += "original base: " + speedValue.trim();
         }
         if (specialValue) {
@@ -499,7 +502,7 @@ function tryMigrateActorSpeed(jsonInput) {
             }
             finalSpecial += specialValue.trim();
         }
-        
+
         jsonInput.system.attributes.speed.special = finalSpecial;
     }
 }
@@ -513,11 +516,11 @@ function tryMigrateActorSpeed(jsonInput) {
 // conditions / setting cache and regular expression are generated during beginning of cooking and used during formatting checks
 var conditionsCache = {};
 var settingCache = {};
-var conditionsRegularExpression;
-var settingRegularExpression;
-var poisonAndDiseasesRegularExpression = new RegExp("(poison|disease)", "g");
-var validArmorTypes = ["light", "power", "heavy", "shield"];
-var validCreatureSizes = ["fine", "diminutive", "tiny", "small", "medium", "large", "huge", "gargantuan", "colossal"];
+let conditionsRegularExpression;
+let settingRegularExpression;
+let poisonAndDiseasesRegularExpression = new RegExp("(poison|disease)", "g");
+let validArmorTypes = ["light", "power", "heavy", "shield"];
+let validCreatureSizes = ["fine", "diminutive", "tiny", "small", "medium", "large", "huge", "gargantuan", "colossal"];
 function formattingCheck(allItems) {
     for (const item of allItems) {
         const data = item;
@@ -526,14 +529,14 @@ function formattingCheck(allItems) {
         if (!data || !data.system || !data.type) {
             continue; // Malformed data or journal entry - outside the scope of the formatting check
         }
-        
+
         // We only check formatting of aliens, vehicles & equipment for now
         if (data.type === "npc" || data.type === "npc2") {
             // NOTE: `checkEcology` off by default as it currently produces hundreds of errors.
-            formattingCheckAlien(data, pack, item.file, { checkLinks: true, checkEcology: false })
+            formattingCheckAlien(data, pack, item.file, { checkLinks: true, checkEcology: false });
         }
         else if (data.type === "equipment") {
-            formattingCheckItems(data, pack, item.file, { checkImage: true, checkSource: true, checkPrice: true, checkLevel: true, checkLinks: true })
+            formattingCheckItems(data, pack, item.file, { checkImage: true, checkSource: true, checkPrice: true, checkLevel: true, checkLinks: true });
         }
         else if (data.type === "vehicle") {
             formattingCheckVehicle(data, pack, item.file, { checkLinks: true });
@@ -588,7 +591,7 @@ function formattingCheckRace(data, pack, file, options = { checkLinks: true }) {
 
     // Check biography for references to conditions
     if (options.checkLinks) {
-        let description = data.system.description.value
+        let description = data.system.description.value;
         let result = searchDescriptionForUnlinkedCondition(description);
         if (result.found) {
             addWarningForPack(`${file}: Found reference to ${result.match} in description without link.`, pack);
@@ -609,11 +612,11 @@ function formattingCheckAlien(data, pack, file, options = { checkLinks: true, ch
         return;
     }
     // Validate HP values
-    else if (data.system.attributes.hp.value != data.system.attributes.hp.max) {
+    else if (data.system.attributes.hp.value !== data.system.attributes.hp.max) {
         addWarningForPack(`${file}: HP value not entered correctly.`, pack);
     }
     // Validate SP values
-    if (data.system.attributes.sp.value != data.system.attributes.sp.max) {
+    if (data.system.attributes.sp.value !== data.system.attributes.sp.max) {
         addWarningForPack(`${file}: SP value not entered correctly.`, pack);
     }
 
@@ -659,7 +662,7 @@ function formattingCheckAlien(data, pack, file, options = { checkLinks: true, ch
     }
 
     if (options.checkLinks === true) {
-        let description = data.system.details.biography.value
+        let description = data.system.details.biography.value;
         // Check biography for references to conditions
         let conditionResult = searchDescriptionForUnlinkedCondition(description);
         if (conditionResult.found) {
@@ -674,7 +677,7 @@ function formattingCheckAlien(data, pack, file, options = { checkLinks: true, ch
 
     // Validate items
     for (i in data.items) {
-        formattingCheckItems(data.items[i], pack, file, { checkImage: true, checkSource: false, checkPrice: false, checkLinks: options.checkLinks })
+        formattingCheckItems(data.items[i], pack, file, { checkImage: true, checkSource: false, checkPrice: false, checkLinks: options.checkLinks });
     }
 }
 
@@ -687,8 +690,8 @@ function formattingCheckItems(data, pack, file, options = { checkImage: true, ch
 
     // Validate image
     if (options.checkImage) {
-        if (data.img && // Only validate if img is set
-            !data.img.startsWith("systems") && !data.img.startsWith("icons")) {
+        if (data.img // Only validate if img is set
+            && !data.img.startsWith("systems") && !data.img.startsWith("icons")) {
             addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}.`, pack);
         }
     }
@@ -723,10 +726,10 @@ function formattingCheckItems(data, pack, file, options = { checkImage: true, ch
     }
 
     // If armor
-    let armor = data.system.armor
+    let armor = data.system.armor;
     if (armor) {
         // Validate armor type
-        let armorType = data.system.armor.type
+        let armorType = data.system.armor.type;
         if (!validArmorTypes.includes(armorType)) {
             addWarningForPack(`${file}: Improperly formatted armor type field "${armorType}.`, pack);
         }
@@ -734,7 +737,7 @@ function formattingCheckItems(data, pack, file, options = { checkImage: true, ch
 
     // Validate links
     if (options.checkLinks) {
-        let description = data.system.description.value
+        let description = data.system.description.value;
 
         if (description) {
 
@@ -759,7 +762,7 @@ function formattingCheckItems(data, pack, file, options = { checkImage: true, ch
 
 function formattingCheckWeapons(data, pack, file) {
 
-    let lowecaseName = data.name.toLowerCase()
+    let lowecaseName = data.name.toLowerCase();
     if (lowecaseName.includes("multiattack")) {
         // Should be [MultiATK]
         addWarningForPack(`${file}: Improperly formatted multiattack name field "${data.name}.`, pack);
@@ -812,7 +815,7 @@ function formattingCheckVehicle(data, pack, file, options = { checkLinks: true }
 
     // Check description for references to conditions
     if (options.checkLinks) {
-        let description = data.system.details.description.value
+        let description = data.system.details.description.value;
         if (description) {
             let result = searchDescriptionForUnlinkedCondition(description);
             if (result.found) {
@@ -826,7 +829,7 @@ function formattingCheckVehicle(data, pack, file, options = { checkLinks: true }
 
     // Validate items
     for (i in data.items) {
-        formattingCheckItems(data.items[i], pack, file, { checkImage: true, checkSource: false, checkPrice: false, checkLinks: options.checkLinks })
+        formattingCheckItems(data.items[i], pack, file, { checkImage: true, checkSource: false, checkPrice: false, checkLinks: options.checkLinks });
     }
 }
 
@@ -852,9 +855,9 @@ function formattingCheckSpell(data, pack, file, options = { checkLinks: true }) 
         addWarningForPack(`${file}: Improperly formatted source field "${source}.`, pack);
     }
 
-    //Check spell description for unlinked references to conditions
+    // Check spell description for unlinked references to conditions
     if (options.checkLinks === true) {
-        let description = data.system.description.value
+        let description = data.system.description.value;
 
         // Check references to conditions
         let conditionResult = searchDescriptionForUnlinkedReference(description, conditionsRegularExpression);
@@ -886,7 +889,7 @@ function formattingCheckFeat(data, pack, file, options = { checkLinks: true }) {
     // feat)
 
     if (options.checkLinks === true) {
-        let description = data.system.description.value
+        let description = data.system.description.value;
         // Check description for references to conditions
         let conditionResult = searchDescriptionForUnlinkedReference(description, conditionsRegularExpression);
         if (conditionResult.found) {
@@ -910,7 +913,7 @@ function searchDescriptionForUnlinkedCondition(description) {
 function searchDescriptionForUnlinkedReference(description, regularExpression) {
 
     let matches = [...description.matchAll(regularExpression)];
-    //Found a potential reference to a condition
+    // Found a potential reference to a condition
     if (matches && matches.length > 0) {
         // Capture the character before and after each match and use some basic heuristics to decide if it's an linked condition in the description
         for (let match of matches) {
@@ -925,7 +928,7 @@ function searchDescriptionForUnlinkedReference(description, regularExpression) {
             let characterAfter = description.substring(characterAfterIndex, characterAfterIndex + 1);
             let delimiterCharacters = [">", "<", ";", ",", "/", "(", ")", "."];
 
-            var unlinkedReferenceFound = false;
+            let unlinkedReferenceFound = false;
             // If surrounded by { and } we assume it is linked and continue
             if (characterBefore === "{" && characterAfter === "}") {
                 continue;
@@ -939,14 +942,14 @@ function searchDescriptionForUnlinkedReference(description, regularExpression) {
             else if (delimiterCharacters.includes(characterBefore) && (delimiterCharacters.includes(characterAfter) || characterAfter === " ")) {
                 // The condition was found between two delimiters, most likely in the contents of an html tag.
                 // Or it was found at the tail of a delimiter followed by a space (at the end of a comma separated list.
-                unlinkedReferenceFound = true
+                unlinkedReferenceFound = true;
             }
-                // Condition was found after a space but right before a delimiting character, like the end of a sentence.
+            // Condition was found after a space but right before a delimiting character, like the end of a sentence.
             // Or hugging opening brackets, or the start of a comma separated list.
             else if ((delimiterCharacters.includes(characterBefore) || characterBefore === " ") && delimiterCharacters.includes(characterAfter)) {
                 unlinkedReferenceFound = true;
             }
-                // This is a simple rule of thumb which checks of the word in question is surrounded by `&nbsp;`. In this case we'll ignore,
+            // This is a simple rule of thumb which checks of the word in question is surrounded by `&nbsp;`. In this case we'll ignore,
             // as this can be used to escape a condition word (ie. `Burning`) in an otherwise unrelated context (ie. `... the Burning Archipelago...`)
             else if (characterBefore === ";" && characterAfter === "&") {
                 unlinkedReferenceFound = false;
@@ -972,16 +975,16 @@ function isSourceValid(source) {
     const StarfinderAdventureSourceMatch =  [...source.matchAll(/SA:\S+ pg\. [\d]+/g)];
 
     if (CoreBooksSourceMatch && CoreBooksSourceMatch.length > 0) {
-       // ✅ formatted Core book source
-       return true;
+        // ✅ formatted Core book source
+        return true;
     }
     else if (AlienArchiveSourceMatch && AlienArchiveSourceMatch.length > 0) {
-       // ✅ formatted Alien Archives source
-       return true;
+        // ✅ formatted Alien Archives source
+        return true;
     }
     else if (AdventurePathSourceMatch && AdventurePathSourceMatch.length > 0) {
-       // ✅ formatted Adventure path source
-       return true;
+        // ✅ formatted Adventure path source
+        return true;
     }
     else if (StarfinderSocietySourceMatch && StarfinderSocietySourceMatch.length > 0) {
         // ✅ formatted Starfinder Society source
@@ -993,7 +996,7 @@ function isSourceValid(source) {
     }
     else if (source === "ACD") {
         //  ✅ formatted Alien Card Deck source
-        return true
+        return true;
     }
 
     return false;
@@ -1054,7 +1057,7 @@ function consistencyCheck(allItems, compendiumMap) {
         if (compendiumMatch && compendiumMatch.length > 0) {
             for (let otherItem of compendiumMatch) {
                 let link = otherItem[1];
-                let otherItemName = (otherItem.length == 4) ? otherItem[3] || link : link;
+                let otherItemName = (otherItem.length === 4) ? otherItem[3] || link : link;
 
                 let linkParts = link.split('.');
                 if (linkParts.length !== 3) {
@@ -1080,7 +1083,7 @@ function consistencyCheck(allItems, compendiumMap) {
                 }
 
                 // @Compendium links to the same compendium could be @Item links instead.
-                /*if (otherPack === pack) {
+                /* if (otherPack === pack) {
                     if (!(pack in packErrors)) {
                         packErrors[pack] = [];
                     }
@@ -1099,11 +1102,11 @@ function consistencyCheck(allItems, compendiumMap) {
                 }
 
                 // @Compendium links must link to a valid item ID.
-                var itemExists = false;
+                let itemExists = false;
                 if (otherItemId in compendiumMap[otherPack]) {
                     itemExists = true;
                 } else {
-                    let foundItem = allItems.find(x => x.pack === otherPack && (x.name == otherItemId || x.name == otherItemName));
+                    let foundItem = allItems.find(x => x.pack === otherPack && (x.name === otherItemId || x.name === otherItemName));
                     itemExists = foundItem !== null;
                 }
 
@@ -1138,36 +1141,36 @@ async function postCook() {
     return 0;
 }
 
-/********************/
+/** ******************/
 /*   LOCALIZATION   */
-/********************/
+/** ******************/
 async function copyLocalization() {
     console.log(`Opening localization files`);
-    
+
     const itemSourceDir = "./src/lang";
-    const files = await fs.readdirSync(itemSourceDir);
-    
+    const files = fs.readdirSync(itemSourceDir);
+
     // First we sort the JSON keys alphabetically
     console.log(`Sorting keys`);
     for (const filePath of files) {
         console.log(`> ${filePath}`);
-        const fileRaw = await fs.readFileSync(itemSourceDir + "/" + filePath);
+        const fileRaw = fs.readFileSync(itemSourceDir + "/" + filePath);
         const fileJson = JSON.parse(fileRaw);
-        
+
         const outRaw = JSONstringifyOrder(fileJson, 4);
-        await fs.writeFileSync(itemSourceDir + "/" + filePath, outRaw);
+        fs.writeFileSync(itemSourceDir + "/" + filePath, outRaw);
     }
     console.log(``);
-    
+
     // Get original file data
     const englishFilePath = "./src/lang/en.json";
-    const englishRaw = await fs.readFileSync(englishFilePath);
+    const englishRaw = fs.readFileSync(englishFilePath);
     const englishJson = JSON.parse(englishRaw);
-    
+
     const germanFilePath = "./src/lang/de.json";
-    const germanRaw = await fs.readFileSync(germanFilePath);
+    const germanRaw = fs.readFileSync(germanFilePath);
     const germanJson = JSON.parse(germanRaw);
-    
+
     // Then we ensure all languages are in sync with English
     console.log(`Ensuring language files are in sync with English`);
     for (const filePath of files) {
@@ -1175,45 +1178,45 @@ async function copyLocalization() {
         if (isEnglish) {
             continue;
         }
-        
+
         console.log(`> ${filePath}`);
-        
-        const languageRaw = await fs.readFileSync(itemSourceDir + "/" + filePath);
+
+        const languageRaw = fs.readFileSync(itemSourceDir + "/" + filePath);
         const languageJson = JSON.parse(languageRaw);
-        
+
         let copiedJson = JSON.parse(JSON.stringify(englishJson));
         mergeDeep(copiedJson, languageJson);
-        
+
         const outRaw = JSONstringifyOrder(copiedJson, 4);
-        await fs.writeFileSync(itemSourceDir + "/" + filePath, outRaw);
+        fs.writeFileSync(itemSourceDir + "/" + filePath, outRaw);
     }
 }
 
 function isObject(item) {
-  return (item && typeof item === 'object' && !Array.isArray(item));
+    return (item && typeof item === 'object' && !Array.isArray(item));
 }
 
 function mergeDeep(target, ...sources) {
-  if (!sources.length) return target;
-  const source = sources.shift();
+    if (!sources.length) return target;
+    const source = sources.shift();
 
-  if (isObject(target) && isObject(source)) {
-    for (const key in source) {
-      if (isObject(source[key])) {
-        if (!target[key]) Object.assign(target, { [key]: {} });
-        mergeDeep(target[key], source[key]);
-      } else {
-        Object.assign(target, { [key]: source[key] });
-      }
+    if (isObject(target) && isObject(source)) {
+        for (const key in source) {
+            if (isObject(source[key])) {
+                if (!target[key]) Object.assign(target, { [key]: {} });
+                mergeDeep(target[key], source[key]);
+            } else {
+                Object.assign(target, { [key]: source[key] });
+            }
+        }
     }
-  }
 
-  return mergeDeep(target, ...sources);
+    return mergeDeep(target, ...sources);
 }
 
-/********************/
+/** ******************/
 /*		CLEAN		*/
-/********************/
+/** ******************/
 
 /**
  * Remove built files from `dist` folder
@@ -1257,9 +1260,9 @@ async function clean() {
     }
 }
 
-/********************/
+/** ******************/
 /*		LINK		*/
-/********************/
+/** ******************/
 
 /**
  * Link build to User Data folder
@@ -1270,14 +1273,14 @@ async function linkUserData() {
 
     let destDir;
     try {
-        if (			
-            fs.existsSync(path.resolve('.', 'dist', 'module.json')) ||
-            fs.existsSync(path.resolve('.', 'src', 'module.json'))
-        ) {		
+        if (
+            fs.existsSync(path.resolve('.', 'dist', 'module.json'))
+            || fs.existsSync(path.resolve('.', 'src', 'module.json'))
+        ) {
             destDir = 'modules';
         } else if (
-            fs.existsSync(path.resolve('.', 'dist', 'system.json')) ||
-            fs.existsSync(path.resolve('.', 'src', 'system.json'))
+            fs.existsSync(path.resolve('.', 'dist', 'system.json'))
+            || fs.existsSync(path.resolve('.', 'src', 'system.json'))
         ) {
             destDir = 'systems';
         } else {
@@ -1294,7 +1297,7 @@ async function linkUserData() {
                 throw Error('User Data path invalid, no Data directory found');
 
             linkDir = path.join(config.dataPath, 'Data', destDir, name);
-            
+
         } else {
             throw Error('No User Data path defined in foundryconfig.json');
         }
@@ -1318,9 +1321,9 @@ async function linkUserData() {
 }
 
 
-/********************/
+/** ******************/
 /*	COPY USER DATA	*/
-/********************/
+/** ******************/
 
 /**
  * Copy build to User Data folder (for Docker - doesn't like symlinks)
@@ -1332,13 +1335,13 @@ async function copyUserData() {
     let destDir;
     try {
         if (
-            fs.existsSync(path.resolve('.', 'dist', 'module.json')) ||
-            fs.existsSync(path.resolve('.', 'src', 'module.json'))
+            fs.existsSync(path.resolve('.', 'dist', 'module.json'))
+            || fs.existsSync(path.resolve('.', 'src', 'module.json'))
         ) {
             destDir = 'modules';
         } else if (
-            fs.existsSync(path.resolve('.', 'dist', 'system.json')) ||
-            fs.existsSync(path.resolve('.', 'src', 'system.json'))
+            fs.existsSync(path.resolve('.', 'dist', 'system.json'))
+            || fs.existsSync(path.resolve('.', 'src', 'system.json'))
         ) {
             destDir = 'systems';
         } else {
@@ -1378,9 +1381,9 @@ async function copyUserData() {
     }
 }
 
-/*********************/
+/** *******************/
 /*		PACKAGE		 */
-/*********************/
+/** *******************/
 
 /**
  * Package build
@@ -1425,9 +1428,9 @@ async function packageBuild() {
     }
 }
 
-/*********************/
+/** *******************/
 /*		PACKAGE		 */
-/*********************/
+/** *******************/
 
 /**
  * Update version and URLs in the manifest JSON
