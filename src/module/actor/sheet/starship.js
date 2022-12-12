@@ -241,6 +241,11 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
                 hasCapacity: item.hasCapacity()
             };
 
+            if (item.config.hasCapacity) {
+                item.config.capacityCurrent = item.getCurrentCapacity();
+                item.config.capacityMaximum = item.getMaxCapacity();
+            }
+
             if (item.type === "actorResource") {
                 this._prepareActorResource(item, actorData);
             }
