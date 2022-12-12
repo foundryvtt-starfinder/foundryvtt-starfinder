@@ -287,7 +287,8 @@ export default function (engine) {
                     { closure: "calculateAbilityCheckModifiers", stackModifiers: "stackModifiers"},
                     { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" },
                     { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" },
-                    "calculateDamageMitigation"
+                    "calculateDamageMitigation",
+                    "calculateBulkAndWealth"
                 ]
             },
             {
@@ -311,7 +312,8 @@ export default function (engine) {
                     { closure: "calculateSaveModifiers", stackModifiers: "stackModifiers"},
                     { closure: "calculateSkillModifiers", stackModifiers: "stackModifiers" },
                     { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" },
-                    "calculateDamageMitigation"
+                    "calculateDamageMitigation",
+                    "calculateBulkAndWealth"
                 ]
             },
             {
