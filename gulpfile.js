@@ -1133,7 +1133,11 @@ async function postCook() {
     }
 
     if (!cookAborted) {
-        console.log(chalk.greenBright(`\nCompendiums cooked with ${cookErrorCount} errors!\nDon't forget to restart Foundry to refresh compendium data!\n`));
+        if (cookErrorCount > 0) {
+            console.log(chalk.redBright(`\nCompendiums cooked with ${chalk.bold(cookErrorCount)} errors. Please check the files listed above and try again.`));
+        } else {
+            console.log(chalk.greenBright(`\nCompendiums cooked with ${cookErrorCount} errors!\nDon't forget to restart Foundry to refresh compendium data!\n`));
+        }
     } else {
         throw Error(chalk.redBright(`\nCook aborted after ${cookErrorCount} critical errors!\n`));
     }
