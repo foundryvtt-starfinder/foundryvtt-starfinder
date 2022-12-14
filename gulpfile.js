@@ -221,7 +221,10 @@ function JSONstringifyOrder( obj, space, sortingMode = "default" )
  * Unpack existing db files into json files.
  */
 async function unpack(sourceDatabase, outputDirectory) {
-    await fs.mkdir(`${outputDirectory}`, { recursive: true }, (err) => { if (err) throw err; });
+    fs.mkdir(`${outputDirectory}`, { recursive: true }, (err) => {
+        if (err)
+            throw err;
+    });
 
     let db = new AsyncNedb({ filename: sourceDatabase, autoload: true });
     let items = await db.asyncFind({});
@@ -234,7 +237,7 @@ async function unpack(sourceDatabase, outputDirectory) {
         filename = filename.toLowerCase();
 
         let targetFile = `${outputDirectory}/${filename}.json`;
-        await fs.writeFileSync(targetFile, jsonOutput, { "flag": "w" });
+        fs.writeFileSync(targetFile, jsonOutput, { "flag": "w" });
     }
 }
 
@@ -242,7 +245,7 @@ async function unpackPacks() {
     console.log(`Unpacking all packs`);
 
     let sourceDir = "./src/packs";
-    let files = await fs.readdirSync(sourceDir);
+    let files = fs.readdirSync(sourceDir);
     for (let file of files) {
         if (limitToPack && !file.includes(limitToPack)) {
             continue;
@@ -256,7 +259,7 @@ async function unpackPacks() {
             console.log(`Processing ${fileWithoutExt}`);
 
             console.log(`> Cleaning up ${unpackDir}`);
-            await fs.rmdirSync(unpackDir, { recursive: true });
+            fs.rmdirSync(unpackDir, { recursive: true });
 
             console.log(`> Unpacking ${sourceFile} into ${unpackDir}`);
             await unpack(sourceFile, unpackDir);
@@ -284,7 +287,9 @@ async function cookPacks(params) {
     await cookWithOptions({parameters: params, formattingCheck: true});
 }
 async function cookWithOptions(options = { formattingCheck: true }) {
+
     console.log(chalk.blueBright(`Cooking db files`));
+
     for (let i = 3; i < process.argv.length; i++) {
         if (process.argv[i] === '--pack') {
             limitToPack = process.argv[i + 1];
@@ -300,7 +305,7 @@ async function cookWithOptions(options = { formattingCheck: true }) {
     packErrors = {};
 
     let sourceDir = "./src/items";
-    let directories = await fs.readdirSync(sourceDir);
+    let directories = fs.readdirSync(sourceDir);
     for (let directory of directories) {
         let itemSourceDir = `${sourceDir}/${directory}`;
         let outputFile = `./src/packs/${directory}.db`;
@@ -312,17 +317,17 @@ async function cookWithOptions(options = { formattingCheck: true }) {
         if (!limitToPack || directory === limitToPack) {
             if (fs.existsSync(outputFile)) {
                 console.log(`> Removing ${outputFile}`);
-                await fs.unlinkSync(outputFile);
+                fs.unlinkSync(outputFile);
             }
 
             db = new AsyncNedb({ filename: outputFile, autoload: true });
         }
 
         console.log(`> Reading files in ${itemSourceDir}`);
-        let files = await fs.readdirSync(itemSourceDir);
+        let files = fs.readdirSync(itemSourceDir);
         for (let file of files) {
             let filePath = `${itemSourceDir}/${file}`;
-            let jsonInput = await fs.readFileSync(filePath);
+            let jsonInput = fs.readFileSync(filePath);
             try {
                 jsonInput = JSON.parse(jsonInput);
 
@@ -1142,27 +1147,27 @@ async function copyLocalization() {
     console.log(`Opening localization files`);
 
     const itemSourceDir = "./src/lang";
-    const files = await fs.readdirSync(itemSourceDir);
+    const files = fs.readdirSync(itemSourceDir);
 
     // First we sort the JSON keys alphabetically
     console.log(`Sorting keys`);
     for (const filePath of files) {
         console.log(`> ${filePath}`);
-        const fileRaw = await fs.readFileSync(itemSourceDir + "/" + filePath);
+        const fileRaw = fs.readFileSync(itemSourceDir + "/" + filePath);
         const fileJson = JSON.parse(fileRaw);
 
         const outRaw = JSONstringifyOrder(fileJson, 4);
-        await fs.writeFileSync(itemSourceDir + "/" + filePath, outRaw);
+        fs.writeFileSync(itemSourceDir + "/" + filePath, outRaw);
     }
     console.log(``);
 
     // Get original file data
     const englishFilePath = "./src/lang/en.json";
-    const englishRaw = await fs.readFileSync(englishFilePath);
+    const englishRaw = fs.readFileSync(englishFilePath);
     const englishJson = JSON.parse(englishRaw);
 
     const germanFilePath = "./src/lang/de.json";
-    const germanRaw = await fs.readFileSync(germanFilePath);
+    const germanRaw = fs.readFileSync(germanFilePath);
     const germanJson = JSON.parse(germanRaw);
 
     // Then we ensure all languages are in sync with English
@@ -1175,14 +1180,14 @@ async function copyLocalization() {
 
         console.log(`> ${filePath}`);
 
-        const languageRaw = await fs.readFileSync(itemSourceDir + "/" + filePath);
+        const languageRaw = fs.readFileSync(itemSourceDir + "/" + filePath);
         const languageJson = JSON.parse(languageRaw);
 
         let copiedJson = JSON.parse(JSON.stringify(englishJson));
         mergeDeep(copiedJson, languageJson);
 
         const outRaw = JSONstringifyOrder(copiedJson, 4);
-        await fs.writeFileSync(itemSourceDir + "/" + filePath, outRaw);
+        fs.writeFileSync(itemSourceDir + "/" + filePath, outRaw);
     }
 }
 

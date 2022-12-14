@@ -320,25 +320,26 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
 
         if (!damage.isHealing) {
             /** Update temp hitpoints */
-            let newTempHP = Math.clamped(originalTempHP - remainingUndealtDamage, 0, actorData.attributes.hp.tempmax);
-            remainingUndealtDamage = remainingUndealtDamage - (originalTempHP - newTempHP);
+            let newTempHP = Math.clamped(originalTempHP - remainingUndealtDamage, 0,
+                actorData.attributes.hp.tempmax || actorData.attributes.hp.temp);
+            remainingUndealtDamage -= (originalTempHP - newTempHP);
 
             if (newTempHP <= 0) {
                 newTempHP = null;
                 actorUpdate['system.attributes.hp.tempmax'] = null;
             }
-            
+
             actorUpdate["system.attributes.hp.temp"] = newTempHP;
 
             /** Update stamina points */
             const newSP = Math.clamped(originalSP - remainingUndealtDamage, 0, actorData.attributes.sp.max);
-            remainingUndealtDamage = remainingUndealtDamage - (originalSP - newSP);
-            
+            remainingUndealtDamage -= (originalSP - newSP);
+
             actorUpdate["system.attributes.sp.value"] = newSP;
 
             /** Update hitpoints */
             const newHP = Math.clamped(originalHP - remainingUndealtDamage, 0, actorData.attributes.hp.max);
-            remainingUndealtDamage = remainingUndealtDamage - (originalHP - newHP);
+            remainingUndealtDamage -= (originalHP - newHP);
 
             actorUpdate["system.attributes.hp.value"] = newHP;
 
@@ -350,29 +351,29 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         } else {
             if (damage.healSettings.healsHitpoints) {
                 const newHP = Math.clamped(originalHP + remainingUndealtDamage, 0, actorData.attributes.hp.max);
-                remainingUndealtDamage = remainingUndealtDamage - (newHP - originalHP);
+                remainingUndealtDamage -= (newHP - originalHP);
 
                 actorUpdate["system.attributes.hp.value"] = newHP;
             }
-            
+
             if (damage.healSettings.healsStamina) {
                 const newSP = Math.clamped(originalSP + remainingUndealtDamage, 0, actorData.attributes.sp.max);
-                remainingUndealtDamage = remainingUndealtDamage - (newSP - originalSP);
+                remainingUndealtDamage -= (newSP - originalSP);
 
                 actorUpdate["system.attributes.sp.value"] = newSP;
             }
-            
+
             if (damage.healSettings.healsTemporaryHitpoints) {
                 const newTempHP = Math.clamped(originalTempHP + remainingUndealtDamage, 0, actorData.attributes.hp.tempmax);
-                remainingUndealtDamage = remainingUndealtDamage - (newTempHP - originalTempHP);
-                
+                remainingUndealtDamage -= (newTempHP - originalTempHP);
+
                 actorUpdate["system.attributes.hp.temp"] = newTempHP;
             }
         }
 
         const promise = this.update(actorUpdate);
         return promise;
-   }
+    }
 
     /**
     * Checks whether an actor is immune to a specific damage type.
