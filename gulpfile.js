@@ -597,7 +597,9 @@ function formattingCheckRace(data, pack, file, options = { checkLinks: true }) {
         let description = data.system.description.value;
         let result = searchDescriptionForUnlinkedCondition(description);
         if (result.found) {
-            addWarningForPack(`${chalk.bold(file)}: Found reference to ${result.match} in description without link.`, pack);
+            for (let match of result.foundWords) {
+                addWarningForPack(`${chalk.bold(file)}: Found reference to ${chalk.bold(match)} in description without link.`, pack);
+            }
         }
     }
 }
@@ -664,12 +666,16 @@ function formattingCheckAlien(data, pack, file, options = { checkLinks: true, ch
         // Check biography for references to conditions
         let conditionResult = searchDescriptionForUnlinkedCondition(description);
         if (conditionResult.found) {
-            addWarningForPack(`${chalk.bold(file)}: Found reference to ${chalk.bold(conditionResult.match)} in biography without link.`, pack);
+            for (let match of conditionResult.foundWords) {
+                addWarningForPack(`${chalk.bold(file)}: Found reference to ${chalk.bold(match)} in biography without link.`, pack);
+            }
         }
         // Check biography for references to the setting
         let settingResult = searchDescriptionForUnlinkedReference(description, settingRegularExpression);
         if (settingResult.found) {
-            addWarningForPack(`${chalk.bold(file)}: Found reference to ${chalk.bold(settingResult.match)} in description without link.`, pack);
+            for (let match of settingResult.foundWords) {
+                addWarningForPack(`${chalk.bold(file)}: Found reference to ${chalk.bold(match)} in description without link.`, pack);
+            }
         }
     }
 
@@ -742,13 +748,17 @@ function formattingCheckItems(data, pack, file, options = { checkImage: true, ch
             // Check description for references to conditions
             let conditionResult = searchDescriptionForUnlinkedReference(description, conditionsRegularExpression);
             if (conditionResult.found) {
-                addWarningForPack(`${chalk.bold(file)}: Found reference to ${chalk.bold(conditionResult.match)} in description without link.`, pack);
+                for (let match of conditionResult.foundWords) {
+                    addWarningForPack(`${chalk.bold(file)}: Found reference to ${chalk.bold(match)} in description without link.`, pack);
+                }
             }
 
             // Check description for references to poisons / diseases
             let poisonResult = searchDescriptionForUnlinkedReference(description, poisonAndDiseasesRegularExpression);
             if (poisonResult.found) {
-                addWarningForPack(`${chalk.bold(file)}: Found reference to ${chalk.bold(poisonResult.match)} in description without link.`, pack);
+                for (let match of poisonResult.foundWords) {
+                    addWarningForPack(`${chalk.bold(file)}: Found reference to ${chalk.bold(match)} in description without link.`, pack);
+                }
             }
         }
         else {
@@ -817,7 +827,9 @@ function formattingCheckVehicle(data, pack, file, options = { checkLinks: true }
         if (description) {
             let result = searchDescriptionForUnlinkedCondition(description);
             if (result.found) {
-                addWarningForPack(`${chalk.bold(file)}: Found reference to ${chalk.bold(result.match)} in description without link.`, pack);
+                for (let match of result.foundWords) {
+                    addWarningForPack(`${chalk.bold(file)}: Found reference to ${chalk.bold(match)} in description without link.`, pack);
+                }
             }
         }
         else {
@@ -860,12 +872,16 @@ function formattingCheckSpell(data, pack, file, options = { checkLinks: true }) 
         // Check references to conditions
         let conditionResult = searchDescriptionForUnlinkedReference(description, conditionsRegularExpression);
         if (conditionResult.found) {
-            addWarningForPack(`${chalk.bold(file)}: Found reference to ${chalk.bold(conditionResult.match)} in description without link.`, pack);
+            for (let match of settingResult.foundWords) {
+                addWarningForPack(`${chalk.bold(file)}: Found reference to ${chalk.bold(match)} in description without link.`, pack);
+            }
         }
         // Check references to the setting
         let settingResult = searchDescriptionForUnlinkedReference(description, settingRegularExpression);
         if (settingResult.found) {
-            addWarningForPack(`${chalk.bold(file)}: Found reference to ${chalk.bold(settingResult.match)} in description without link.`, pack);
+            for (let match of settingResult.foundWords) {
+                addWarningForPack(`${chalk.bold(file)}: Found reference to ${chalk.bold(match)} in description without link.`, pack);
+            }
         }
     }
 }
@@ -891,12 +907,16 @@ function formattingCheckFeat(data, pack, file, options = { checkLinks: true }) {
         // Check description for references to conditions
         let conditionResult = searchDescriptionForUnlinkedReference(description, conditionsRegularExpression);
         if (conditionResult.found) {
-            addWarningForPack(`${chalk.bold(file)}: Found reference to ${chalk.bold(conditionResult.match)} in description without link.`, pack);
+            for (let match of conditionResult.foundWords) {
+                addWarningForPack(`${chalk.bold(file)}: Found reference to ${chalk.bold(match)} in description without link.`, pack);
+            }
         }
         // Check description for references to the setting
         let settingResult = searchDescriptionForUnlinkedReference(description, settingRegularExpression);
         if (settingResult.found) {
-            addWarningForPack(`${chalk.bold(file)}: Found reference to ${chalk.bold(settingResult.match)} in description without link.`, pack);
+            for (let match of settingResult.foundWords) {
+                addWarningForPack(`${chalk.bold(file)}: Found reference to ${chalk.bold(match)} in description without link.`, pack);
+            }
         }
     }
 }
@@ -911,6 +931,7 @@ function searchDescriptionForUnlinkedCondition(description) {
 function searchDescriptionForUnlinkedReference(description, regularExpression) {
 
     let matches = [...description.matchAll(regularExpression)];
+    let foundWords = [];
     // Found a potential reference to a condition
     if (matches && matches.length > 0) {
         // Capture the character before and after each match and use some basic heuristics to decide if it's an linked condition in the description
@@ -935,17 +956,20 @@ function searchDescriptionForUnlinkedReference(description, regularExpression) {
             // it should be contained in a link to the compendium like this `@Compendium[sfrpg.spells.YDXegEus8p0BnsH1]{Invisibility}`
             else if (characterBefore === " " && characterAfter === " ") {
                 unlinkedReferenceFound = true;
+                foundWords.push(conditionWord);
             }
             // If potentially within the contents of a tag or surrounded by delimiting characters
             else if (delimiterCharacters.includes(characterBefore) && (delimiterCharacters.includes(characterAfter) || characterAfter === " ")) {
                 // The condition was found between two delimiters, most likely in the contents of an html tag.
                 // Or it was found at the tail of a delimiter followed by a space (at the end of a comma separated list.
                 unlinkedReferenceFound = true;
+                foundWords.push(conditionWord);
             }
             // Condition was found after a space but right before a delimiting character, like the end of a sentence.
             // Or hugging opening brackets, or the start of a comma separated list.
             else if ((delimiterCharacters.includes(characterBefore) || characterBefore === " ") && delimiterCharacters.includes(characterAfter)) {
                 unlinkedReferenceFound = true;
+                foundWords.push(conditionWord);
             }
             // This is a simple rule of thumb which checks of the word in question is surrounded by `&nbsp;`. In this case we'll ignore,
             // as this can be used to escape a condition word (ie. `Burning`) in an otherwise unrelated context (ie. `... the Burning Archipelago...`)
