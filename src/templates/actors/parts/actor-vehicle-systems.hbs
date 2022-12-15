@@ -1,0 +1,39 @@
+{{#unless noFilters}}
+<div class="inventory-filters">
+    <ul class="filter-list flexrow" data-filter="features">
+        <li class="filter-title">{{localize "SFRPG.FeaturesFilter"}}</li>
+        <li class="filter-item" data-filter="action">{{localize "SFRPG.ActorSheet.Features.Filters.Action"}}</li>
+        <li class="filter-item" data-filter="bonus">{{localize "SFRPG.ActorSheet.Features.Filters.Bonus"}}</li>
+        <li class="filter-item" data-filter="reaction">{{localize "SFRPG.ActorSheet.Features.Filters.Reaction"}}</li>
+    </ul>
+</div>
+{{/unless}}
+
+<ol class="vehicle-system-list">
+    {{#each sections as |section sid|}}
+    <li class="inventory-header flexrow">
+        <h3 class="item-name noborder flexrow">{{section.label}}</h3>
+
+        {{#if section.hasActions}}
+        <div class="item-detail item-uses">{{localize "SFRPG.VehicleSheet.Systems.Piloting"}}</div>
+        <div class="item-detail item-action">{{localize "SFRPG.FeaturesUsage"}}</div>
+        {{/if}}
+
+        {{#if ../isOwner}}
+        <div class="item-controls">
+            {{#if section.dataset.type}}
+            <a class="item-control item-create" title="Create Item" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
+            <i class="fas fa-plus"></i> {{localize "SFRPG.FeaturesAdd"}}
+            </a>
+            {{/if}}
+        </div>
+        {{/if}}
+    </li>
+
+    <ol class="item-list">
+        {{#each section.items as |item iid|}}
+        {{> "systems/sfrpg/templates/actors/parts/actor-vehicle-system-item.hbs" ../../this section=section item=item}}
+        {{/each}}
+    </ol>
+    {{/each}}
+</ol>

@@ -7,7 +7,7 @@ import { packLoader } from './pack-loader.js';
 export class DocumentBrowserSFRPG extends Application {
     static get defaultOptions() {
         const options = super.defaultOptions;
-        options.template = 'systems/sfrpg/templates/packs/document-browser.html';
+        options.template = 'systems/sfrpg/templates/packs/document-browser.hbs';
         options.classes = options.classes.concat(['sfrpg', 'document-browser-window']);
         options.title = game.i18n.format("SFRPG.Browsers.ItemBrowser.Title");
         options.width = 800;

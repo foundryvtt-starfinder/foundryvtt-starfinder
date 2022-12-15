@@ -296,7 +296,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Render the chat card template
         const templateType = ["tool", "consumable"].includes(this.type) ? this.type : "item";
-        const template = `systems/sfrpg/templates/chat/${templateType}-card.html`;
+        const template = `systems/sfrpg/templates/chat/${templateType}-card.hbs`;
         const html = await renderTemplate(template, templateData);
         const rollMode = game.settings.get("core", "rollMode");
 
@@ -1354,7 +1354,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 hasOtherFormula: this.hasOtherFormula
             };
 
-            const template = `systems/sfrpg/templates/chat/consumed-item-card.html`;
+            const template = `systems/sfrpg/templates/chat/consumed-item-card.hbs`;
             const html = await renderTemplate(template, templateData);
 
             const flavor = game.i18n.format("SFRPG.Items.Consumable.UseChatMessage", {consumableName: this.name});

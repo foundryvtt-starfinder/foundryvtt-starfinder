@@ -22,8 +22,8 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
 
     get template() {
         const path = "systems/sfrpg/templates/actors/";
-        if (!game.user.isGM && this.actor.limited) return path + "limited-sheet.html";
-        return path + "drone-sheet.html";
+        if (!game.user.isGM && this.actor.limited) return path + "limited-sheet.hbs";
+        return path + "drone-sheet.hbs";
     }
 
     getData() {

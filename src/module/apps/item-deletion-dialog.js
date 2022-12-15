@@ -26,7 +26,7 @@ export class ItemDeletionDialog extends Dialog {
 
     static async show(itemName, containsItems, confirmationCallback) {
         ItemDeletionDialog.recursiveDelete = false;
-        const html = await renderTemplate("systems/sfrpg/templates/apps/item-deletion-dialog.html", {
+        const html = await renderTemplate("systems/sfrpg/templates/apps/item-deletion-dialog.hbs", {
             message: game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DeleteConfirmationMessage", { itemName: itemName }),
             containsItems: containsItems,
             recursiveDelete: ItemDeletionDialog.recursiveDelete
