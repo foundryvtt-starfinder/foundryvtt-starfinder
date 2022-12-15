@@ -81,7 +81,7 @@ export class InputDialog extends Dialog {
             InputDialog.values[key].value = InputDialog.values[key].placeholder;
         }
 
-        const html = await renderTemplate("systems/sfrpg/templates/apps/input-dialog.html", {
+        const html = await renderTemplate("systems/sfrpg/templates/apps/input-dialog.hbs", {
             message: message,
             inputs: inputData
         });

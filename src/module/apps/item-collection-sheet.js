@@ -22,7 +22,7 @@ export class ItemCollectionSheet extends DocumentSheet {
             classes: defaultOptions.classes.concat(['sfrpg', 'actor', 'sheet', 'npc']),
             height: 720,
             width: 720,
-            template: "systems/sfrpg/templates/apps/item-collection-sheet.html",
+            template: "systems/sfrpg/templates/apps/item-collection-sheet.hbs",
             closeOnSubmit: false,
             submitOnClose: true,
             submitOnChange: true,

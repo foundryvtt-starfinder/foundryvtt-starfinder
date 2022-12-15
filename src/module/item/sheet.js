@@ -60,7 +60,7 @@ export class ItemSheetSFRPG extends ItemSheet {
      */
     get template() {
         const path = "systems/sfrpg/templates/items";
-        return `${path}/${this.item.type}.html`;
+        return `${path}/${this.item.type}.hbs`;
     }
 
     /* -------------------------------------------- */

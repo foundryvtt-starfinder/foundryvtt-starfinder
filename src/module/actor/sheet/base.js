@@ -512,7 +512,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             };
 
             let templateData = {upper: "Item", lower: "item", types: types},
-                dlg = await renderTemplate(`systems/sfrpg/templates/apps/localized-entity-create.html`, templateData);
+                dlg = await renderTemplate(`systems/sfrpg/templates/apps/localized-entity-create.hbs`, templateData);
 
             new Dialog({
                 title: game.i18n.format("SFRPG.NPCSheet.Interface.CreateItem.Title"),

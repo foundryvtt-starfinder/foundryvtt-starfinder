@@ -4,7 +4,7 @@ export class ActorSheetFlags extends DocumentSheet {
         return mergeObject(options, {
             id: "actor-flags",
             classes: ["sfrpg"],
-            template: "systems/sfrpg/templates/apps/actor-flags.html",
+            template: "systems/sfrpg/templates/apps/actor-flags.hbs",
             width: 500,
             closeOnSubmit: true
         });

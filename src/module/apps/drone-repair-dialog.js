@@ -34,7 +34,7 @@ export class DroneRepairDialog extends Dialog {
 
     static async droneRepairDialog({actor, improvedRepairFeat=false}={}) {
         DroneRepairDialog.restoreStaminaPoints = false;
-        const html = await renderTemplate("systems/sfrpg/templates/apps/drone-repair.html");
+        const html = await renderTemplate("systems/sfrpg/templates/apps/drone-repair.hbs");
         return new Promise(resolve => {
             const dlg = new this(actor, {
                 title: game.i18n.format("SFRPG.RepairDroneDialogTitle"),
