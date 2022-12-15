@@ -979,6 +979,7 @@ function searchDescriptionForUnlinkedReference(description, regularExpression) {
 
         }
         if (foundWords.length > 0) {
+            foundWords = [...new Set(foundWords)]; // Remove duplicates; only link the first instance
             return { found: true, foundWords: foundWords };
         }
     }
