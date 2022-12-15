@@ -953,9 +953,10 @@ function searchDescriptionForUnlinkedReference(description, regularExpression) {
                 unlinkedReferenceFound = false;
             }
 
-            if (unlinkedReferenceFound) {
-                return { found: true, match: conditionWord };
-            }
+        }
+        if (foundWords.length > 0) {
+            foundWords = [...new Set(foundWords)]; // Remove duplicates; only link the first instance
+            return { found: true, foundWords: foundWords };
         }
     }
     return { found: false };
