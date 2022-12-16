@@ -34,7 +34,7 @@ export class ShortRestDialog extends Dialog {
 
     static async shortRestDialog({actor, canRestoreStaminaPoints=true}={}) {
         ShortRestDialog.restoreStaminaPoints = false;
-        const html = await renderTemplate("systems/sfrpg/templates/apps/short-rest.html");
+        const html = await renderTemplate("systems/sfrpg/templates/apps/short-rest.hbs");
         return new Promise(resolve => {
             const dlg = new this(actor, {
                 title: game.i18n.format("SFRPG.Rest.Short.DialogTitle"),

@@ -81,7 +81,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                     templateData.sceneId = this.actor.token.parent.id;
                 }
 
-                const template = `systems/sfrpg/templates/chat/item-action-card.html`;
+                const template = `systems/sfrpg/templates/chat/item-action-card.hbs`;
                 const htmlPromise = renderTemplate(template, templateData);
                 htmlPromise.then((html) => {
                     // Create the chat message
@@ -123,7 +123,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                         templateData.sceneId = this.actor.token.parent.id;
                     }
         
-                    const template = `systems/sfrpg/templates/chat/item-action-card.html`;
+                    const template = `systems/sfrpg/templates/chat/item-action-card.hbs`;
                     const htmlPromise = renderTemplate(template, templateData);
         
                     htmlPromise.then((html) => {

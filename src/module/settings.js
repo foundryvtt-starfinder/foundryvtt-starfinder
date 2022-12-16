@@ -302,7 +302,7 @@ class floatingNumberMenu extends FormApplication {
         return mergeObject(super.defaultOptions, {
             classes: ['form'],
             popOut: true,
-            template: `systems/sfrpg/templates/apps/floatinghp.html`,
+            template: `systems/sfrpg/templates/apps/floatinghp.hbs`,
             id: 'floating-hp',
             title: 'SFRPG.Settings.FloatingHP.Menu.Label',
             width: 600
