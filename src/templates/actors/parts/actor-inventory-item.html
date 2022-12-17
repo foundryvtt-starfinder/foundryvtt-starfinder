@@ -24,7 +24,7 @@
                 </div>
                 {{/if}}
             </div>
-            
+
             {{#unless onlyControls}}
             {{#if isCharacter}}
             <div class="item-detail item-weight">
@@ -49,6 +49,8 @@
                     {{else}}
                         {{children.length}} / {{getTotalStorageCapacity item}} {{localize "SFRPG.ActorSheet.Inventory.Container.CapacityLabelItems"}}
                     {{/if}}
+                {{else if item.system.uses.max}}
+                    {{item.system.uses.value}} / {{item.system.uses.max}}
                 {{/if}}
             </div>
 
@@ -59,8 +61,16 @@
                     {{else}}
                         <a class="item-control toggle-container" title="{{localize "SFRPG.ActorSheet.Inventory.Container.OpenTooltip"}}"><i class="fas fa-arrow-down"> {{localize "SFRPG.ActorSheet.Inventory.Container.Open"}}</i></a>
                     {{/if}}
-                {{else if item.config.hasUses}}
+                {{else if item.system.usage.per}}
                     {{item.system.usage.value}} / {{item.system.usage.per}}
+                {{else if item.system.activation.type}}
+                    {{#unless (eq item.type "consumable") }} <!-- Don't show action buttons on consumables because it interacts weirdly with their usage -->
+                        {{#if item.system.isActive}}
+                        <button type="button" class="tag featDeactivate">{{localize "SFRPG.ActorSheet.Inventory.Item.Deactivate"}}</button>
+                        {{else}}
+                        <button type="button" class="tag featActivate">{{item.labels.activation}}</button>
+                        {{/if}}
+                    {{/unless}}
                 {{/if}}
             </div>
             {{/unless}}
