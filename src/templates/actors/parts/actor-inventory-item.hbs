@@ -6,7 +6,7 @@
                     {{item.name}}
                 </h4>
                 {{#if (and isOwner (or (eq item.type "consumable") (or item.config.hasAttack item.config.hasDamage)))}}
-                <div class="item-action flexcol">
+                <div class="item-action {{#if item.parentItem}}flexrow flexnowrap{{else}}flexcol{{/if}}">
                     {{#if (eq item.type "consumable")}}
                         <button type="button" class="tag use">{{localize "SFRPG.Items.Consumable.UseAction"}}</button>
                     {{else}}
