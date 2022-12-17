@@ -932,6 +932,7 @@ function searchDescriptionForUnlinkedReference(description, regularExpression) {
 
     let matches = [...description.matchAll(regularExpression)];
     let foundWords = [];
+    let alreadyLinked = [];
     // Found a potential reference to a condition
     if (matches && matches.length > 0) {
         // Capture the character before and after each match and use some basic heuristics to decide if it's an linked condition in the description
@@ -950,26 +951,27 @@ function searchDescriptionForUnlinkedReference(description, regularExpression) {
             let unlinkedReferenceFound = false;
             // If surrounded by { and } we assume it is linked and continue
             if (characterBefore === "{" && characterAfter === "}") {
+                alreadyLinked.push(conditionWord);
                 continue;
             }
             // If the condition is surrounded by spaces, it is unlinked
             // it should be contained in a link to the compendium like this `@Compendium[sfrpg.spells.YDXegEus8p0BnsH1]{Invisibility}`
             else if (characterBefore === " " && characterAfter === " ") {
                 unlinkedReferenceFound = true;
-                foundWords.push(conditionWord);
+                if (!alreadyLinked.includes(conditionWord)) foundWords.push(conditionWord);
             }
             // If potentially within the contents of a tag or surrounded by delimiting characters
             else if (delimiterCharacters.includes(characterBefore) && (delimiterCharacters.includes(characterAfter) || characterAfter === " ")) {
                 // The condition was found between two delimiters, most likely in the contents of an html tag.
                 // Or it was found at the tail of a delimiter followed by a space (at the end of a comma separated list.
                 unlinkedReferenceFound = true;
-                foundWords.push(conditionWord);
+                if (!alreadyLinked.includes(conditionWord)) foundWords.push(conditionWord);
             }
             // Condition was found after a space but right before a delimiting character, like the end of a sentence.
             // Or hugging opening brackets, or the start of a comma separated list.
             else if ((delimiterCharacters.includes(characterBefore) || characterBefore === " ") && delimiterCharacters.includes(characterAfter)) {
                 unlinkedReferenceFound = true;
-                foundWords.push(conditionWord);
+                if (!alreadyLinked.includes(conditionWord)) foundWords.push(conditionWord);
             }
             // This is a simple rule of thumb which checks of the word in question is surrounded by `&nbsp;`. In this case we'll ignore,
             // as this can be used to escape a condition word (ie. `Burning`) in an otherwise unrelated context (ie. `... the Burning Archipelago...`)
