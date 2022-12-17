@@ -190,13 +190,13 @@ export class DocumentBrowserSFRPG extends Application {
         const itemCategory = $(event.currentTarget).attr('data-item-category');
         const items = this[itemCategory];
         let item = items.find(x => x._id === itemId);
+        const pack = game.packs.get(item.pack);
 
-        if (!item.pack) {
+        if (!pack) {
             event.preventDefault();
             return false;
         }
 
-        const pack = game.packs.get(item.pack);
         const document = await pack.getDocument(itemId);
 
         // const rawData = {
