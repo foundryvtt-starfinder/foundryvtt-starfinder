@@ -921,7 +921,7 @@ SFRPG.npctypes = {
     "monstrous humanoid": "Monstrous Humanoid",
     "ooze": "Ooze",
     "outsider": "Outsider",
-    "planet": "Plant",
+    "plant": "Plant",
     "undead": "Undead",
     "vermin": "Vermin"
 };

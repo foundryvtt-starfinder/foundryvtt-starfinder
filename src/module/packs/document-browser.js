@@ -31,7 +31,7 @@ export class DocumentBrowserSFRPG extends Application {
                 }
             ].concat(buttons);
         }
-        return buttons
+        return buttons;
     }
 
     activateListeners(html) {
@@ -39,30 +39,35 @@ export class DocumentBrowserSFRPG extends Application {
         html.on('click', '.clear-filters', ev => {
             this.resetFilters(html);
             this.filterItems(html.find('li'));
-        }); // show item card
+        });
 
-        html.on('click', '.item-edit', ev => {
-            const itemId = $(ev.currentTarget).parents('.item').attr('data-entry-id');
-            const itemCategory = $(ev.currentTarget).parents('.item').attr('data-item-category');
+        // show item card
+        html.on('click', '.item-edit', async(ev) => {
+            const itemId = $(ev.currentTarget).parents('.item')
+                .attr('data-entry-id');
+            const itemCategory = $(ev.currentTarget).parents('.item')
+                .attr('data-item-category');
             const items = this[itemCategory];
             let item = items.find(x => x._id === itemId);
-            const pack = game.packs.find(p => p.collection === item.compendium);
-            item = pack.getDocument(itemId).then(item => {
-                item.sheet.render(true);
-            });
-        }); //show actor card
+            const pack = game.packs.get(item.pack);
+            const doc = await pack.getDocument(itemId);
+            doc.sheet.render(true);
+        });
 
-        html.on('click', '.actor-edit', ev => {
-            const actorId = $(ev.currentTarget).parents('.item').attr('data-entry-id');
-            const actorCategory = $(ev.currentTarget).parents('.item').attr('data-actor-category');
+        // show actor card
+        html.on('click', '.actor-edit', async(ev) => {
+            const actorId = $(ev.currentTarget).parents('.item')
+                .attr('data-entry-id');
+            const actorCategory = $(ev.currentTarget).parents('.item')
+                .attr('data-actor-category');
             const actors = this[actorCategory];
-            let actor = actors[actorId];
-            const pack = game.packs.find(p => p.collection === actor.compendium);
-            actor = pack.getDocument(actorId).then(npc => {
-                npc.sheet.render(true);
-            });
-        }); // make draggable
+            let actor = actors.find(x => x._id === actorId);
+            const pack = get.packs.get(actor.pack);
+            const doc = await pack.getDocument(actorId);
+            doc.sheet.render(true);
+        });
 
+        // make draggable
         html.on('click', '.item-sort-link', ev => {
             const sortKey = $(ev.currentTarget).attr('data-key');
             const sortingControl = $(".sortingControl");
@@ -75,18 +80,21 @@ export class DocumentBrowserSFRPG extends Application {
             li.addEventListener('dragstart', event => {
                 this._onDragStart(event, li);
             }, false);
-        }); // toggle visibility of filter containers
+        });
 
+        // toggle visibility of filter containers
         html.on('click', '.filtercontainer h3', ev => {
             $(ev.target.nextElementSibling).toggle(100);
-        }); // toggle hints
+        });
 
+        // toggle hints
         html.on('mousedown', 'input[name=textFilter]', ev => {
             if (event.which == 3) {
                 $(html.find('.hint')).toggle(100);
             }
-        }); // sort item list
+        });
 
+        // sort item list
         html.on('change', 'select[name=sortorder]', ev => {
             const itemList = html.find('li');
             const sortedList = this.sortItems(itemList, ev.target.value);
@@ -96,8 +104,9 @@ export class DocumentBrowserSFRPG extends Application {
             for (const element of sortedList) {
                 ol[0].append(element);
             }
-        }); // activating or deactivating filters
+        });
 
+        // activating or deactivating filters
         html.on('change paste', 'input[name=textFilter]', ev => {
             this.sorters.text = ev.target.value;
             this.filterItems(html.find('li'));
@@ -177,15 +186,18 @@ export class DocumentBrowserSFRPG extends Application {
     }
 
     async _onDragStart(event, li) {
-        const packName = li.getAttribute('data-entry-compendium');
-        const pack = game.packs.find(p => p.collection === packName);
+        const itemId = $(event.currentTarget).attr('data-entry-id');
+        const itemCategory = $(event.currentTarget).attr('data-item-category');
+        const items = this[itemCategory];
+        let item = items.find(x => x._id === itemId);
 
-        if (!pack) {
+        if (!item.pack) {
             event.preventDefault();
             return false;
         }
 
-        const document = await pack.getDocument(li.getAttribute('data-entry-id'));
+        const pack = game.packs.get(item.pack);
+        const document = await pack.getDocument(itemId);
 
         // const rawData = {
         //     type: pack.documentName,
@@ -266,7 +278,7 @@ export class DocumentBrowserSFRPG extends Application {
             for (let item of content) {
                 const itemData = {
                     _id: item._id,
-                    compendium: item.pack,
+                    pack: pack.collection,
                     img: item.img,
                     name: item.name,
                     system: item.system,
@@ -317,7 +329,10 @@ export class DocumentBrowserSFRPG extends Application {
                     const targetValue = string.split(':')[1].trim();
                     const targetStat = string.split(':')[0].trim();
 
-                    if ($(element).find(`input[name=${targetStat}]`).val().toLowerCase().indexOf(targetValue) == -1) {
+                    if ($(element).find(`input[name=${targetStat}]`)
+                        .val()
+                        .toLowerCase()
+                        .indexOf(targetValue) == -1) {
                         return false;
                     }
                 }
@@ -325,7 +340,9 @@ export class DocumentBrowserSFRPG extends Application {
         }
 
         if (this.sorters.castingtime != 'null') {
-            const castingtime = $(element).find('input[name=time]').val().toLowerCase();
+            const castingtime = $(element).find('input[name=time]')
+                .val()
+                .toLowerCase();
 
             if (castingtime != this.sorters.castingtime) {
                 return false;
@@ -395,21 +412,21 @@ export class DocumentBrowserSFRPG extends Application {
 
     onFiltersUpdated(html) {
         if (this.refreshFilters) {
-          const filterContainers = html.find('.filtercontainer');
-          const filterParent = filterContainers[0]?.parentElement;
+            const filterContainers = html.find('.filtercontainer');
+            const filterParent = filterContainers[0]?.parentElement;
 
-          for (const filterContainer of filterContainers) {
-              filterContainer.remove();
-          }
+            for (const filterContainer of filterContainers) {
+                filterContainer.remove();
+            }
 
-          this.filters = this.getFilters();
-          for (const filterKey of Object.keys(this.filters)) {
-              const filter = this.filters[filterKey];
-              const generatedHTML = this.generateFilterHTML(filterKey, filter);
-              filterParent.insertAdjacentHTML('beforeend', generatedHTML);
-          }
+            this.filters = this.getFilters();
+            for (const filterKey of Object.keys(this.filters)) {
+                const filter = this.filters[filterKey];
+                const generatedHTML = this.generateFilterHTML(filterKey, filter);
+                filterParent.insertAdjacentHTML('beforeend', generatedHTML);
+            }
 
-          this.filterItems(html.find('li'));
+            this.filterItems(html.find('li'));
         }
     }
 
@@ -438,7 +455,7 @@ export class DocumentBrowserSFRPG extends Application {
     }
 
     initializeSettings(defaultAllowedCompendiums = null) {
-    const configuration = this.getConfigurationProperties();
+        const configuration = this.getConfigurationProperties();
         const entityType = this.entityType;
 
         game.settings.register('sfrpg', configuration.settings, {

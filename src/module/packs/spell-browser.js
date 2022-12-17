@@ -1,5 +1,5 @@
 import { DocumentBrowserSFRPG } from './document-browser.js';
-import { SFRPG } from "../config.js"
+import { SFRPG } from "../config.js";
 
 class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
     static get defaultOptions() {
@@ -10,8 +10,8 @@ class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
 
     getConfigurationProperties() {
         return {
-          label: game.i18n.format("SFRPG.Browsers.SpellBrowser.Title"),
-          settings: "spellBrowser"
+            label: game.i18n.format("SFRPG.Browsers.SpellBrowser.Title"),
+            settings: "spellBrowser"
         };
     }
 
@@ -33,8 +33,10 @@ class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     _sortByLevel(elementA, elementB) {
-        const aVal = parseInt($(elementA).find('input[name=level]').val());
-        const bVal = parseInt($(elementB).find('input[name=level]').val());
+        const aVal = parseInt($(elementA).find('input[name=level]')
+            .val());
+        const bVal = parseInt($(elementB).find('input[name=level]')
+            .val());
         if (aVal < bVal) return -1;
         if (aVal > bVal) return 1;
 
@@ -84,19 +86,19 @@ class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
     _filterLevels(element, filters) {
         let compendium = element.dataset.entryCompendium;
         let itemId = element.dataset.entryId;
-        let item = this.items.find(x => x.compendium === compendium && x._id === itemId);
-        let itemLevel = item ? JSON.stringify(item.system.level) : "null";
+        let item = this.items.find(x => x.pack === compendium && x._id === itemId);
+        let itemLevel = item ? item?.system?.level.toString() : null;
         return item && filters.includes(itemLevel);
     }
 
     _filterClasses(element, filters) {
         let compendium = element.dataset.entryCompendium;
         let itemId = element.dataset.entryId;
-        let item = this.items.find(x => x.compendium === compendium && x._id === itemId);
+        let item = this.items.find(x => x.pack === compendium && x._id === itemId);
         if (!item) return false;
 
         for (let allowedClass of filters) {
-            if (item.system.allowedClasses[allowedClass]) {
+            if (item.system?.allowedClasses[allowedClass]) {
                 return true;
             }
         }
@@ -106,8 +108,8 @@ class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
     _filterSchools(element, filters) {
         let compendium = element.dataset.entryCompendium;
         let itemId = element.dataset.entryId;
-        let item = this.items.find(x => x.compendium === compendium && x._id === itemId);
-        return item && filters.includes(item.system.school);
+        let item = this.items.find(x => x.pack === compendium && x._id === itemId);
+        return item && filters.includes(item.system?.school);
     }
 }
 

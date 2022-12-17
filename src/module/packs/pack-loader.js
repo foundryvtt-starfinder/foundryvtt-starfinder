@@ -22,14 +22,40 @@ export class PackLoader {
 
             if (!data) {
                 const pack = game.packs.get(packId);
+                console.log(pack);
                 progress.advance(`Loading ${pack.metadata.label}`);
 
                 if (pack.documentName === entityType) {
-                    const content = await pack.getDocuments();
+                    const fields = [
+                        "type",
+                        "system.level"
+                    ];
+                    if (entityType === "Actor") {
+                        fields.push(...[
+                            "system.details.cr",
+                            "system.attributes.hp.max",
+                            "system.details.type",
+                            "system.traits.size",
+                            "system.details.organizationSize",
+                            "system.details.alignment"
+                        ]);
+                    } else {
+                        fields.push(...[
+                            "system.pcu",
+                            "system.cost",
+                            "system.weaponCategory",
+                            "system.weaponType",
+                            "system.school",
+                            "system.allowedClasses"
+                        ]);
+                    }
+                    const content = await pack.getIndex({"fields": fields });
+                    console.log(content);
                     data = this.loadedPacks[entityType][packId] = {
-                      pack,
-                      content
+                        pack,
+                        content
                     };
+                    console.log(data);
                 } else {
                     continue;
                 }
