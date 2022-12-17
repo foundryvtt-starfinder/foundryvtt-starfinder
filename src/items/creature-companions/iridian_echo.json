@@ -3,13 +3,16 @@
   "name": "Iridian Echo",
   "type": "npc2",
   "_stats": {
-    "coreVersion": "10.290",
+    "coreVersion": "10.291",
     "createdTime": 1666738343703,
-    "lastModifiedBy": "nAGIIjYeOTKZPBrt",
-    "modifiedTime": 1668654452595,
+    "lastModifiedBy": "SPRszH5sDdJlGxJn",
+    "modifiedTime": 1671234492049,
     "systemId": "sfrpg",
-    "systemVersion": "0.20.3"
+    "systemVersion": "0.22.0"
   },
+  "effects": [],
+  "flags": {},
+  "folder": null,
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
@@ -104,7 +107,7 @@
           "parts": [
             {
               "name": "",
-              "formula": "@abilities.str.mod",
+              "formula": "@abilities.str.mod + (lookupRange(@details.cr, 0, 1, 1, 9, 3, 10, 2, 13, 6, 15, 5, 16, 6, 17, 8, 19, 9, 20, 13))d(lookupRange(@details.cr, 0, 1, 4, 6, 6, 7, 8, 8, 12, 9, 4, 10, 8, 11, 10, 12, 12, 13, 4, 14, 6, 15, 8, 17, 6, 18, 8, 20, 6)) + (@details.cr)",
               "types": {
                 "acid": false,
                 "bludgeoning": true,
@@ -288,12 +291,12 @@
       "name": "Creature Companion - Iridian Echo",
       "type": "feat",
       "_stats": {
-        "coreVersion": "10.288",
+        "coreVersion": "10.291",
         "createdTime": 1666738399852,
-        "lastModifiedBy": "DQ2No2U3tu4dZzr5",
-        "modifiedTime": 1667631075200,
+        "lastModifiedBy": "SPRszH5sDdJlGxJn",
+        "modifiedTime": 1671234492049,
         "systemId": "sfrpg",
-        "systemVersion": "0.20.3"
+        "systemVersion": "0.22.0"
       },
       "effects": [],
       "flags": {
@@ -372,10 +375,12 @@
           "mind-affecting": false,
           "pain": false,
           "poison": false,
+          "polymorph": false,
           "radiation": false,
           "scrying": false,
           "sense-dependent": false,
           "shadow": false,
+          "sonic": false,
           "summoning": false,
           "teleportation": false,
           "water": false
@@ -393,7 +398,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "X84H1uknGYlrRvUx",
+              "actorId": "BH7yNWerTlm9bHWT",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ac",
@@ -412,7 +417,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "X84H1uknGYlrRvUx",
+              "actorId": "BH7yNWerTlm9bHWT",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ac",
@@ -431,7 +436,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "X84H1uknGYlrRvUx",
+              "actorId": "BH7yNWerTlm9bHWT",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "save",
@@ -450,7 +455,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "X84H1uknGYlrRvUx",
+              "actorId": "BH7yNWerTlm9bHWT",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "save",
@@ -469,7 +474,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "X84H1uknGYlrRvUx",
+              "actorId": "BH7yNWerTlm9bHWT",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "save",
@@ -488,7 +493,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "X84H1uknGYlrRvUx",
+              "actorId": "BH7yNWerTlm9bHWT",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ability-score",
@@ -507,7 +512,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "X84H1uknGYlrRvUx",
+              "actorId": "BH7yNWerTlm9bHWT",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ability-score",
@@ -526,7 +531,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "X84H1uknGYlrRvUx",
+              "actorId": "BH7yNWerTlm9bHWT",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ability-score",
@@ -545,7 +550,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "X84H1uknGYlrRvUx",
+              "actorId": "BH7yNWerTlm9bHWT",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "all-skills",
@@ -564,32 +569,13 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "X84H1uknGYlrRvUx",
+              "actorId": "BH7yNWerTlm9bHWT",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "all-attacks",
             "enabled": true,
             "max": 0,
             "modifier": "lookupRange(@details.cr, 0, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 9, 8, 10, 9, 11, 10, 13, 11, 14, 13, 16, 14, 17, 15, 18, 16, 19, 17, 20, 18, 21, 19, 23)",
-            "modifierType": "constant",
-            "notes": "",
-            "source": "",
-            "subtab": "misc",
-            "valueAffected": "acr"
-          },
-          {
-            "_id": "a0389005-fc87-47dd-829d-f49bebf79ec5",
-            "name": "Creature Companion - Damage",
-            "type": "untyped",
-            "condition": "",
-            "container": {
-              "actorId": "X84H1uknGYlrRvUx",
-              "itemId": "FTDQ7caOAQoT2E45"
-            },
-            "effectType": "all-damage",
-            "enabled": true,
-            "max": 0,
-            "modifier": "(lookupRange(@details.cr, 0, 1, 1, 9, 3, 10, 2, 13, 6, 15, 5, 16, 6, 17, 8, 19, 9, 20, 13))d(lookupRange(@details.cr, 0, 1, 4, 6, 6, 7, 8, 8, 12, 9, 4, 10, 8, 11, 10, 12, 12, 13, 4, 14, 6, 15, 8, 17, 6, 18, 8, 20, 6)) + (@details.cr)",
             "modifierType": "constant",
             "notes": "",
             "source": "",
@@ -631,12 +617,12 @@
       "name": "Bitter Beam (Su)",
       "type": "feat",
       "_stats": {
-        "coreVersion": "10.290",
+        "coreVersion": "10.291",
         "createdTime": 1667630991084,
-        "lastModifiedBy": "nAGIIjYeOTKZPBrt",
-        "modifiedTime": 1668654452595,
+        "lastModifiedBy": "SPRszH5sDdJlGxJn",
+        "modifiedTime": 1671234478282,
         "systemId": "sfrpg",
-        "systemVersion": "0.20.3"
+        "systemVersion": "0.22.0"
       },
       "effects": [],
       "flags": {},
@@ -676,7 +662,8 @@
           "parts": [
             {
               "name": "",
-              "formula": "",
+              "formula": "(lookupRange(@details.cr, 0, 1, 1, 9, 3, 10, 2, 13, 6, 15, 5, 16, 6, 17, 8, 19, 9, 20, 13))d(lookupRange(@details.cr, 0, 1, 4, 6, 6, 7, 8, 8, 12, 9, 4, 10, 8, 11, 10, 12, 12, 13, 4, 14, 6, 15, 8, 17, 6, 18, 8, 20, 6)) + (@details.cr)",
+              "group": null,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -727,10 +714,12 @@
           "mind-affecting": false,
           "pain": false,
           "poison": false,
+          "polymorph": false,
           "radiation": false,
           "scrying": false,
           "sense-dependent": false,
           "shadow": false,
+          "sonic": false,
           "summoning": false,
           "teleportation": false,
           "water": false
@@ -901,6 +890,9 @@
       }
     }
   ],
+  "ownership": {
+    "default": 0
+  },
   "prototypeToken": {
     "name": "Iridian Echo",
     "actorLink": false,
@@ -909,7 +901,7 @@
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": "attributes.sp"
     },
     "detectionModes": [],
     "displayBars": 20,
@@ -965,6 +957,7 @@
     },
     "width": 1
   },
+  "sort": 0,
   "system": {
     "abilities": {
       "cha": {

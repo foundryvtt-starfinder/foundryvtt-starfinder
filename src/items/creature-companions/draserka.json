@@ -6,7 +6,7 @@
     "coreVersion": "10.291",
     "createdTime": 1666738343703,
     "lastModifiedBy": "SPRszH5sDdJlGxJn",
-    "modifiedTime": 1671226570598,
+    "modifiedTime": 1671234300560,
     "systemId": "sfrpg",
     "systemVersion": "0.22.0"
   },
@@ -107,7 +107,7 @@
           "parts": [
             {
               "name": "",
-              "formula": "@abilities.str.mod",
+              "formula": "@abilities.str.mod + (lookupRange(@details.cr, 0, 1, 1, 9, 3, 10, 2, 13, 6, 15, 5, 16, 6, 17, 8, 19, 9, 20, 13))d(lookupRange(@details.cr, 0, 1, 4, 6, 6, 7, 8, 8, 12, 9, 4, 10, 8, 11, 10, 12, 12, 13, 4, 14, 6, 15, 8, 17, 6, 18, 8, 20, 6)) + (@details.cr)",
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -294,7 +294,7 @@
         "coreVersion": "10.291",
         "createdTime": 1666738399852,
         "lastModifiedBy": "SPRszH5sDdJlGxJn",
-        "modifiedTime": 1671226570598,
+        "modifiedTime": 1671234276859,
         "systemId": "sfrpg",
         "systemVersion": "0.22.0"
       },
@@ -398,7 +398,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "Rrt8JTvNLJG6Q1RD",
+              "actorId": "VMrQIWvfcnxaU4fT",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ac",
@@ -417,7 +417,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "Rrt8JTvNLJG6Q1RD",
+              "actorId": "VMrQIWvfcnxaU4fT",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ac",
@@ -436,7 +436,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "Rrt8JTvNLJG6Q1RD",
+              "actorId": "VMrQIWvfcnxaU4fT",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "save",
@@ -455,7 +455,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "Rrt8JTvNLJG6Q1RD",
+              "actorId": "VMrQIWvfcnxaU4fT",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "save",
@@ -474,7 +474,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "Rrt8JTvNLJG6Q1RD",
+              "actorId": "VMrQIWvfcnxaU4fT",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "save",
@@ -493,7 +493,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "Rrt8JTvNLJG6Q1RD",
+              "actorId": "VMrQIWvfcnxaU4fT",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ability-score",
@@ -512,7 +512,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "Rrt8JTvNLJG6Q1RD",
+              "actorId": "VMrQIWvfcnxaU4fT",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ability-score",
@@ -531,7 +531,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "Rrt8JTvNLJG6Q1RD",
+              "actorId": "VMrQIWvfcnxaU4fT",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ability-score",
@@ -550,7 +550,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "Rrt8JTvNLJG6Q1RD",
+              "actorId": "VMrQIWvfcnxaU4fT",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "all-skills",
@@ -569,32 +569,13 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "Rrt8JTvNLJG6Q1RD",
+              "actorId": "VMrQIWvfcnxaU4fT",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "all-attacks",
             "enabled": true,
             "max": 0,
             "modifier": "lookupRange(@details.cr, 0, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 9, 8, 10, 9, 11, 10, 13, 11, 14, 13, 16, 14, 17, 15, 18, 16, 19, 17, 20, 18, 21, 19, 23)",
-            "modifierType": "constant",
-            "notes": "",
-            "source": "",
-            "subtab": "misc",
-            "valueAffected": "acr"
-          },
-          {
-            "_id": "a0389005-fc87-47dd-829d-f49bebf79ec5",
-            "name": "Creature Companion - Damage",
-            "type": "untyped",
-            "condition": "",
-            "container": {
-              "actorId": "Rrt8JTvNLJG6Q1RD",
-              "itemId": "FTDQ7caOAQoT2E45"
-            },
-            "effectType": "all-damage",
-            "enabled": true,
-            "max": 0,
-            "modifier": "(lookupRange(@details.cr, 0, 1, 1, 9, 3, 10, 2, 13, 6, 15, 5, 16, 6, 17, 8, 19, 9, 20, 13))d(lookupRange(@details.cr, 0, 1, 4, 6, 6, 7, 8, 8, 12, 9, 4, 10, 8, 11, 10, 12, 12, 13, 4, 14, 6, 15, 8, 17, 6, 18, 8, 20, 6)) + (@details.cr)",
             "modifierType": "constant",
             "notes": "",
             "source": "",
@@ -681,7 +662,7 @@
           "parts": [
             {
               "name": "",
-              "formula": "",
+              "formula": "(lookupRange(@details.cr, 0, 1, 1, 9, 3, 10, 2, 13, 6, 15, 5, 16, 6, 17, 8, 19, 9, 20, 13))d(lookupRange(@details.cr, 0, 1, 4, 6, 6, 7, 8, 8, 12, 9, 4, 10, 8, 11, 10, 12, 12, 13, 4, 14, 6, 15, 8, 17, 6, 18, 8, 20, 6)) + (@details.cr)",
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -917,7 +898,7 @@
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": "attributes.sp"
     },
     "detectionModes": [],
     "displayBars": 20,
@@ -1208,7 +1189,7 @@
         "weight": ""
       },
       "class": "",
-      "cr": 1,
+      "cr": 7,
       "environment": "",
       "organization": "",
       "organizationSize": {
