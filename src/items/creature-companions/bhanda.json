@@ -3,13 +3,16 @@
   "name": "Bhanda",
   "type": "npc2",
   "_stats": {
-    "coreVersion": "10.290",
+    "coreVersion": "10.291",
     "createdTime": 1666738343703,
-    "lastModifiedBy": "nAGIIjYeOTKZPBrt",
-    "modifiedTime": 1668646973800,
+    "lastModifiedBy": "SPRszH5sDdJlGxJn",
+    "modifiedTime": 1671234243639,
     "systemId": "sfrpg",
-    "systemVersion": "0.20.3"
+    "systemVersion": "0.22.0"
   },
+  "effects": [],
+  "flags": {},
+  "folder": null,
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
@@ -17,12 +20,12 @@
       "name": "Bite (P)",
       "type": "weapon",
       "_stats": {
-        "coreVersion": "10.288",
+        "coreVersion": "10.291",
         "createdTime": 1667027117382,
-        "lastModifiedBy": "DQ2No2U3tu4dZzr5",
-        "modifiedTime": 1667701699971,
+        "lastModifiedBy": "SPRszH5sDdJlGxJn",
+        "modifiedTime": 1671234130684,
         "systemId": "sfrpg",
-        "systemVersion": "0.20.3"
+        "systemVersion": "0.22.0"
       },
       "effects": [],
       "flags": {},
@@ -104,7 +107,8 @@
           "parts": [
             {
               "name": "",
-              "formula": "@abilities.str.mod",
+              "formula": "@abilities.str.mod + (lookupRange(@details.cr, 0, 1, 1, 9, 3, 10, 2, 13, 6, 15, 5, 16, 6, 17, 8, 19, 9, 20, 13))d(lookupRange(@details.cr, 0, 1, 4, 6, 6, 7, 8, 8, 12, 9, 4, 10, 8, 11, 10, 12, 12, 13, 4, 14, 6, 15, 8, 17, 6, 18, 8, 20, 6)) + (@details.cr)",
+              "group": null,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -181,9 +185,11 @@
           "harrying": false,
           "holyWater": false,
           "hybrid": false,
+          "hydrodynamic": false,
           "ignite": false,
           "indirect": false,
           "injection": false,
+          "instrumental": false,
           "integrated": false,
           "line": false,
           "living": false,
@@ -288,12 +294,12 @@
       "name": "Creature Companion - Bhanda",
       "type": "feat",
       "_stats": {
-        "coreVersion": "10.288",
+        "coreVersion": "10.291",
         "createdTime": 1666738399852,
-        "lastModifiedBy": "DQ2No2U3tu4dZzr5",
-        "modifiedTime": 1667702934152,
+        "lastModifiedBy": "SPRszH5sDdJlGxJn",
+        "modifiedTime": 1671234243639,
         "systemId": "sfrpg",
-        "systemVersion": "0.20.3"
+        "systemVersion": "0.22.0"
       },
       "effects": [],
       "flags": {
@@ -342,7 +348,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>@UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.gTHswZ0FBafS7ru0]{Creature Companion}</p>\n<p>Bhandas are slender, pale, lemur-like creatures that mimic the hunting cry of a winged apex predator to flush out prey.</p>\n<h2 class=\"title\">Bhanda</h2>\n<p>Levels 4-11</p>\n<p>Small magical beast<br><strong>Senses</strong>&nbsp;darkvision 60 ft., low-light vision<br><strong>Good Save</strong>&nbsp;Ref;&nbsp;<strong>Poor Saves</strong>&nbsp;Fort, Will<br><strong>Speed</strong>&nbsp;30 ft., climb 20 ft.<br><strong>Melee Attack</strong>&nbsp;bite (P)<br><strong>Space</strong>&nbsp;5 ft.&nbsp;<strong>Reach</strong>&nbsp;5 ft.<br><strong>Ability Modifiers</strong>&nbsp;Dex, Cha</p>\n<h3 class=\"title\">Special Abilities</h3>\n<p><strong>Horrific Shriek (Su)</strong> Every 1d4 rounds, a bhanda can shriek as a standard action. All creatures within 30 feet except for you must succeed at a Will saving throw (DC = 10 + half the bhanda&rsquo;s level + the bhanda&rsquo;s Charisma modifier) or gain the shaken condition for 1 round. Creatures that fail their saving throw against a bhanda&rsquo;s horrific shriek can&rsquo;t be affected by that bhanda&rsquo;s horrific shriek for 24 hours.</p>\n<p><strong>Unnerving Gaze (Su)</strong>&nbsp;As long as your bhanda is adjacent to you, you gain a +2 circumstance bonus to Intimidate checks against creatures within 30 ft. that can see your bhanda, and the DC of any spell you cast with the fear descriptor increases by 1.</p>\n<p><br><em>HP Max must be manually adjusted. HP value can be found on the @UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.FqsTa05DBVMfsvxy#creature-companion-statistics]{Creature Companion Statistics Table}</em></p>"
+          "value": "<p>@UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.gTHswZ0FBafS7ru0]{Creature Companion}</p><p>Bhandas are slender, pale, lemur-like creatures that mimic the hunting cry of a winged apex predator to flush out prey.</p><h2 class=\"title\">Bhanda</h2><p>Levels 4-11</p><p>Small magical beast<br><strong>Senses</strong> darkvision 60 ft., low-light vision<br><strong>Good Save</strong> Ref; <strong>Poor Saves</strong> Fort, Will<br><strong>Speed</strong> 30 ft., climb 20 ft.<br><strong>Melee Attack</strong> bite (P)<br><strong>Space</strong> 5 ft. <strong>Reach</strong> 5 ft.<br><strong>Ability Modifiers</strong> Dex, Cha</p><h3 class=\"title\">Special Abilities</h3><p><strong>Horrific Shriek (Su)</strong> Every 1d4 rounds, a bhanda can shriek as a standard action. All creatures within 30 feet except for you must succeed at a Will saving throw (DC = 10 + half the bhanda’s level + the bhanda’s Charisma modifier) or gain the shaken condition for 1 round. Creatures that fail their saving throw against a bhanda’s horrific shriek can’t be affected by that bhanda’s horrific shriek for 24 hours.</p><p><strong>Unnerving Gaze (Su)</strong> As long as your bhanda is adjacent to you, you gain a +2 circumstance bonus to Intimidate checks against creatures within 30 ft. that can see your bhanda, and the DC of any spell you cast with the fear descriptor increases by 1.</p><p><br><em>HP Max must be manually adjusted. HP value can be found on the @UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.FqsTa05DBVMfsvxy#creature-companion-statistics]{Creature Companion Statistics Table}</em></p>"
         },
         "descriptors": {
           "acid": false,
@@ -372,10 +378,12 @@
           "mind-affecting": false,
           "pain": false,
           "poison": false,
+          "polymorph": false,
           "radiation": false,
           "scrying": false,
           "sense-dependent": false,
           "shadow": false,
+          "sonic": false,
           "summoning": false,
           "teleportation": false,
           "water": false
@@ -393,7 +401,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "cxMomBo42R8On479",
+              "actorId": "BQhGfcnKJ0eYf0Yy",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ac",
@@ -412,7 +420,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "cxMomBo42R8On479",
+              "actorId": "BQhGfcnKJ0eYf0Yy",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ac",
@@ -431,7 +439,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "cxMomBo42R8On479",
+              "actorId": "BQhGfcnKJ0eYf0Yy",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "save",
@@ -450,7 +458,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "cxMomBo42R8On479",
+              "actorId": "BQhGfcnKJ0eYf0Yy",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "save",
@@ -469,7 +477,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "cxMomBo42R8On479",
+              "actorId": "BQhGfcnKJ0eYf0Yy",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "save",
@@ -488,7 +496,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "cxMomBo42R8On479",
+              "actorId": "BQhGfcnKJ0eYf0Yy",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ability-score",
@@ -507,7 +515,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "cxMomBo42R8On479",
+              "actorId": "BQhGfcnKJ0eYf0Yy",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ability-score",
@@ -526,7 +534,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "cxMomBo42R8On479",
+              "actorId": "BQhGfcnKJ0eYf0Yy",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ability-score",
@@ -545,7 +553,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "cxMomBo42R8On479",
+              "actorId": "BQhGfcnKJ0eYf0Yy",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "all-skills",
@@ -564,32 +572,13 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "cxMomBo42R8On479",
+              "actorId": "BQhGfcnKJ0eYf0Yy",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "all-attacks",
             "enabled": true,
             "max": 0,
             "modifier": "lookupRange(@details.cr, 0, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 9, 8, 10, 9, 11, 10, 13, 11, 14, 13, 16, 14, 17, 15, 18, 16, 19, 17, 20, 18, 21, 19, 23)",
-            "modifierType": "constant",
-            "notes": "",
-            "source": "",
-            "subtab": "misc",
-            "valueAffected": "acr"
-          },
-          {
-            "_id": "a0389005-fc87-47dd-829d-f49bebf79ec5",
-            "name": "Creature Companion - Damage",
-            "type": "untyped",
-            "condition": "",
-            "container": {
-              "actorId": "cxMomBo42R8On479",
-              "itemId": "FTDQ7caOAQoT2E45"
-            },
-            "effectType": "all-damage",
-            "enabled": true,
-            "max": 0,
-            "modifier": "(lookupRange(@details.cr, 0, 1, 1, 9, 3, 10, 2, 13, 6, 15, 5, 16, 6, 17, 8, 19, 9, 20, 13))d(lookupRange(@details.cr, 0, 1, 4, 6, 6, 7, 8, 8, 12, 9, 4, 10, 8, 11, 10, 12, 12, 13, 4, 14, 6, 15, 8, 17, 6, 18, 8, 20, 6)) + (@details.cr)",
             "modifierType": "constant",
             "notes": "",
             "source": "",
@@ -885,6 +874,9 @@
       }
     }
   ],
+  "ownership": {
+    "default": 0
+  },
   "prototypeToken": {
     "name": "Bhanda",
     "actorLink": false,
@@ -949,6 +941,7 @@
     },
     "width": 1
   },
+  "sort": 0,
   "system": {
     "abilities": {
       "cha": {
@@ -1142,6 +1135,7 @@
       "frightened": false,
       "grappled": false,
       "helpless": false,
+      "invisible": false,
       "nauseated": false,
       "off-kilter": false,
       "off-target": false,
@@ -1182,7 +1176,7 @@
         "weight": ""
       },
       "class": "",
-      "cr": 1,
+      "cr": 4,
       "environment": "",
       "organization": "",
       "organizationSize": {
