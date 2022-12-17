@@ -63,7 +63,7 @@
                     <h4 class="ability-name new-box-title rollable" data-tippy-content="<strong>{{ability.label}}</strong><br>@abilities.{{id}}.mod<br><br>{{#each ability.tooltip as |tip|}}{{tip}}<br>{{/each}}">{{ability.label}}</h4>
                     <div class="ability-modifiers flexrow">
                         <span class="ability-mod"></span>
-                        <div class="ability-center" data-tippy-content="<strong>{{ability.label}}</strong><br>@abilities.{{id}}.mod<br><br>{{#each ability.tooltip as |tip|}}{{tip}}<br>{{/each}}">{{ability.mod}}</div>
+                        <div class="ability-center" data-tippy-content="<strong>{{ability.label}}</strong><br>@abilities.{{id}}.mod<br><br>{{#each ability.tooltip as |tip|}}{{tip}}<br>{{/each}}">{{numberFormat ability.mod decimals=0 sign=true}}</div>
                         <input class="ability-base" data-tippy-content="<strong>{{localize "SFRPG.AbilityScoreBase"}}</strong><br>@abilities.{{id}}.base" name="system.abilities.{{id}}.base" type="text" value="{{ability.base}}" data-dtype="Number" placeholder="0"/>
                     </div>
                 </li>
@@ -157,7 +157,7 @@
                         <h4 class="attribute-name new-box-title">{{ localize "SFRPG.InitiativeLabel" }}</h4>
                         <div class="attrib-modifiers flexrow">
                             <span class="attrib-mod"></span>
-                            <div class="attrib-center">{{system.attributes.init.total}}</div>
+                            <div class="attrib-center">{{numberFormat system.attributes.init.total decimals=0 sign=true}}</div>
                             <input class="attrib-base" name="system.attributes.init.value" type="text" value="{{system.attributes.init.value}}" data-dtype="Number" placeholder="10"/>
                         </div>
                     </li>
@@ -170,8 +170,8 @@
                         <h4 class="attribute-name save-name box-title rollable">{{localize "SFRPG.FortitudeSave"}}</h4>
                         <div class="attrib-modifiers flexrow">
                             <span class="attrib-mod"></span>
-                            <div class="attrib-center">{{system.attributes.fort.bonus}}</div>
-                            <input class="attrib-base" name="system.attributes.fort.base" type="text" value="{{numberFormat system.attributes.fort.base decimals=0 sign=true}}" data-dtype="Number" placeholder="0"/>
+                            <div class="attrib-center">{{numberFormat system.attributes.fort.bonus decimals=0 sign=true}}</div>
+                            <input class="attrib-base" name="system.attributes.fort.base" type="text" value="{{system.attributes.fort.base}}" data-dtype="Number" placeholder="0"/>
                         </div>
                     </li>
 
@@ -179,8 +179,8 @@
                         <h4 class="attribute-name save-name box-title rollable">{{localize "SFRPG.ReflexSave"}}</h4>
                         <div class="attrib-modifiers flexrow">
                             <span class="attrib-mod"></span>
-                            <div class="attrib-center">{{system.attributes.reflex.bonus}}</div>
-                            <input class="attrib-base" name="system.attributes.reflex.base" type="text" value="{{numberFormat system.attributes.reflex.base decimals=0 sign=true}}" data-dtype="Number" placeholder="0"/>
+                            <div class="attrib-center">{{numberFormat system.attributes.reflex.bonus decimals=0 sign=true}}</div>
+                            <input class="attrib-base" name="system.attributes.reflex.base" type="text" value="{{system.attributes.reflex.base}}" data-dtype="Number" placeholder="0"/>
                         </div>
                     </li>
 
@@ -188,8 +188,8 @@
                         <h4 class="attribute-name save-name box-title rollable">{{localize "SFRPG.WillSave"}}</h4>
                         <div class="attrib-modifiers flexrow">
                             <span class="attrib-mod"></span>
-                            <div class="attrib-center">{{system.attributes.will.bonus}}</div>
-                            <input class="attrib-base" name="system.attributes.will.base" type="text" value="{{numberFormat system.attributes.will.base decimals=0 sign=true}}" data-dtype="Number" placeholder="0"/>
+                            <div class="attrib-center">{{numberFormat system.attributes.will.bonus decimals=0 sign=true}}</div>
+                            <input class="attrib-base" name="system.attributes.will.base" type="text" value="{{system.attributes.will.base}}" data-dtype="Number" placeholder="0"/>
                         </div>
                     </li>
                 </ul>
