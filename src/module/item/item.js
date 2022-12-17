@@ -87,22 +87,22 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             labels.eac = data.armor.eac ? `${data.armor.eac} EAC` : "";
             labels.kac = data.armor.kac ? `${data.armor.kac} KAC` : "";
         }
-        
+
         // Activated Items
         if (data.hasOwnProperty("activation")) {
 
             // Ability Activation Label
             let act = data.activation || {};
             if (act) {
-                if (act.type === "none"){
+                if (act.type === "none") {
                     labels.activation = game.i18n.localize("SFRPG.AbilityActivationTypesNoneButton");
-                }                 
+                }
                 else {
                     labels.activation = [
                         act.cost,
                         C.abilityActivationTypes[act.type]
                     ].filterJoin(" ");
-                }                
+                }
             }
 
             let tgt = data.target || {};
@@ -134,7 +134,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         if (data.hasOwnProperty("actionType")) {
             // Damage
             let dam = data.damage || {};
-            if (dam.parts) labels.damage = dam.parts.map(d => d[0]).join(" + ").replace(/\+ -/g, "- ");
+            if (dam.parts) labels.damage = dam.parts.map(d => d[0]).join(" + ")
+                .replace(/\+ -/g, "- ");
         }
 
         // Assign labels and return the Item
@@ -155,12 +156,12 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     }
 
     /**
-     * Check to ensure that this item has a modifiers data object set, if not then set it. 
+     * Check to ensure that this item has a modifiers data object set, if not then set it.
      * These will always be needed from hence forth, so we'll just make sure that they always exist.
-     * 
+     *
      * @param {Object}      data The item data to check against.
      * @param {String|Null} prop A specific property name to check.
-     * 
+     *
      * @returns {Object}         The modified data object with the modifiers data object added.
      */
     _ensureHasModifiers(data, prop = null) {
@@ -182,16 +183,16 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      * @returns {boolean|void}        Explicitly return false to prevent creation of this Document
      */
     async _preCreate(data, options, user) {
-        let updates = {}
+        let updates = {};
 
         if (this.type === "class") {
             updates["system.slug"] = this.name.slugify({replacement: "_", strict: true});
         }
 
-        this.updateSource(updates)
-        
-        return super._preCreate(data, options, user)
-    };
+        this.updateSource(updates);
+
+        return super._preCreate(data, options, user);
+    }
 
     /* -------------------------------------------- */
 
@@ -242,20 +243,20 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
                     if (shouldShowEx) {
                         let tagStartIndex = descriptionText.indexOf(startTagEx);
-                        while (tagStartIndex != -1) {
+                        while (tagStartIndex !== -1) {
                             descriptionText = descriptionText.replace(startTagEx, "");
                             tagStartIndex = descriptionText.indexOf(startTagEx);
                         }
 
                         let tagEndIndex = descriptionText.indexOf(endTagEx);
-                        while (tagEndIndex != -1) {
+                        while (tagEndIndex !== -1) {
                             descriptionText = descriptionText.replace(endTagEx, "");
                             tagEndIndex = descriptionText.indexOf(endTagEx);
                         }
                     } else {
                         let tagStartIndex = descriptionText.indexOf(startTagEx);
                         let tagEndIndex = descriptionText.indexOf(endTagEx);
-                        while (tagStartIndex != -1 && tagEndIndex != -1) {
+                        while (tagStartIndex !== -1 && tagEndIndex !== -1) {
                             descriptionText = descriptionText.substr(0, tagStartIndex) + descriptionText.substr(tagEndIndex + endTagEx.length);
                             tagStartIndex = descriptionText.indexOf(startTagEx);
                             tagEndIndex = descriptionText.indexOf(endTagEx);
@@ -264,20 +265,20 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
                     if (shouldShowInc) {
                         let tagStartIndex = descriptionText.indexOf(startTagInc);
-                        while (tagStartIndex != -1) {
+                        while (tagStartIndex !== -1) {
                             descriptionText = descriptionText.replace(startTagInc, "");
                             tagStartIndex = descriptionText.indexOf(startTagInc);
                         }
 
                         let tagEndIndex = descriptionText.indexOf(endTagInc);
-                        while (tagEndIndex != -1) {
+                        while (tagEndIndex !== -1) {
                             descriptionText = descriptionText.replace(endTagInc, "");
                             tagEndIndex = descriptionText.indexOf(endTagInc);
                         }
                     } else {
                         let tagStartIndex = descriptionText.indexOf(startTagInc);
                         let tagEndIndex = descriptionText.indexOf(endTagInc);
-                        while (tagStartIndex != -1 && tagEndIndex != -1) {
+                        while (tagStartIndex !== -1 && tagEndIndex !== -1) {
                             descriptionText = descriptionText.substr(0, tagStartIndex) + descriptionText.substr(tagEndIndex + endTagInc.length);
                             tagStartIndex = descriptionText.indexOf(startTagInc);
                             tagEndIndex = descriptionText.indexOf(endTagInc);
@@ -295,7 +296,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Render the chat card template
         const templateType = ["tool", "consumable"].includes(this.type) ? this.type : "item";
-        const template = `systems/sfrpg/templates/chat/${templateType}-card.html`;
+        const template = `systems/sfrpg/templates/chat/${templateType}-card.hbs`;
         const html = await renderTemplate(template, templateData);
         const rollMode = game.settings.get("core", "rollMode");
 
@@ -304,11 +305,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             user: game.user.id,
             type: CONST.CHAT_MESSAGE_TYPES.OTHER,
             content: html,
-            flags: { 
-                level: this.system.level, 
+            flags: {
+                level: this.system.level,
                 core: {
                     canPopout: true
-                } 
+                }
             },
             rollMode: rollMode,
             speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor})
@@ -401,7 +402,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const containedItems = [];
         while (itemsToTest.length > 0) {
             const itemToTest = itemsToTest.shift();
-            
+
             const contents = itemToTest?.system?.container?.contents;
             if (contents) {
                 for (const content of contents) {
@@ -525,7 +526,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         let armorType = "";
 
         if (data.armorType === 'any') {
-            armorType = "Any"
+            armorType = "Any";
         } else {
             armorType = CONFIG.SFRPG.armorTypes[data.armorType];
         }
@@ -639,12 +640,12 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
     _vehicleSystemChatData(data, label, props) {
 
-        if (data.senses &&  data.senses.usedForSenses == true) {
+        if (data.senses &&  data.senses.usedForSenses) {
             // We deliminate the senses by `,` and present each sense as a separate property
             let sensesDeliminated = data.senses.senses.split(",");
             for (let index = 0; index < sensesDeliminated.length; index++)
             {
-                var sense = sensesDeliminated[index];
+                let sense = sensesDeliminated[index];
                 props.push(sense);
             }
         }
@@ -657,7 +658,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     /**
      * Place an attack roll using an item (weapon, feat, spell, or equipment)
      * Rely upon the DiceSFRPG.d20Roll logic for the core implementation
-     * 
+     *
      * Supported options:
      * disableDamageAfterAttack: If the system setting "Roll damage with attack" is enabled, setting this flag to true will disable this behavior.
      * disableDeductAmmo: Setting this to true will prevent ammo being deducted if applicable.
@@ -678,12 +679,12 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         let abl = itemData.ability;
         if (!abl && (this.actor.type === "npc" || this.actor.type === "npc2")) abl = "";
         else if (!abl && (this.type === "spell")) abl = actorData.attributes.spellcasting || "int";
-        else if (itemData.properties?.operative && actorData.abilities.dex.value > actorData.abilities.str.value) abl = "dex"
-        else if (!abl) abl = "str";        
+        else if (itemData.properties?.operative && actorData.abilities.dex.value > actorData.abilities.str.value) abl = "dex";
+        else if (!abl) abl = "str";
 
         // Define Roll parts
         const parts = [];
-        
+
         if (Number.isNumeric(itemData.attackBonus) && itemData.attackBonus !== 0) parts.push("@item.attackBonus");
         if (abl) parts.push(`@abilities.${abl}.mod`);
         if (["character", "drone"].includes(this.actor.type)) parts.push("@attributes.baseAttackBonus.value");
@@ -759,7 +760,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Define Critical threshold
         const critThreshold = 20;
-        //if ( this.type === "weapon" ) critThreshold = this.actor.getFlag("sfrpg", "weaponCriticalThreshold") || 20;
+        // if ( this.type === "weapon" ) critThreshold = this.actor.getFlag("sfrpg", "weaponCriticalThreshold") || 20;
 
         const rollOptions = {};
 
@@ -778,18 +779,18 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         rollData.item = itemData;
         const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
 
-        //Warn the user if there is no ammo left
+        // Warn the user if there is no ammo left
         const usage = itemData.usage?.value || 0;
         const availableCapacity = this.getCurrentCapacity();
         if (availableCapacity < usage) {
             ui.notifications.warn(game.i18n.format("SFRPG.ItemNoAmmo", {name: this.name}));
         }
-        
+
         const rollContext = RollContext.createItemRollContext(this, this.actor, {itemData: itemData});
 
         /** Create additional modifiers. */
         const additionalModifiers = duplicate(SFRPG.globalAttackRollModifiers);
-        
+
         /** Apply bonus rolled mods from relevant attack roll formula modifiers. */
         for (const rolledMod of rolledMods) {
             additionalModifiers.push({
@@ -809,6 +810,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             flavor: TextEditor.enrichHTML(this.system?.chatFlavor, {async: false}),
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             critical: critThreshold,
+            chatMessage: options.chatMessage,
             rollOptions: rollOptions,
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
@@ -824,7 +826,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      * @param {Html} html The html from the dailog
      * @param {Array} parts The parts of the roll
      * @param {Object} data The data
-     * 
+     *
      * Supported options:
      * disableDamageAfterAttack: If the system setting "Roll damage with attack" is enabled, setting this flag to true will disable this behavior.
      * disableDeductAmmo: Setting this to true will prevent ammo being deducted if applicable.
@@ -863,22 +865,22 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     /**
      * Place an attack roll for a starship using an item.
      * @param {Object} options Options to pass to the attack roll
-     * 
+     *
      * Supported options:
      * disableDamageAfterAttack: If the system setting "Roll damage with attack" is enabled, setting this flag to true will disable this behavior.
      * disableDeductAmmo: Setting this to true will prevent ammo being deducted if applicable.
      */
     async _rollStarshipAttack(options = {}) {
         let parts = [];
-        if (this.actor.system.crew.useNPCCrew) { //If NPC, use the gunnery skill bonus
-            parts = ["@gunner.skills.gun.mod"]
-        } else if (this.system.weaponType === "ecm") { //If the weapon is an ECM weapon and not an NPC, use Computers ranks + Int (NPC ECM weapons still use gunnery)
-            parts = ["@scienceOfficer.skills.com.ranks", "@scienceOfficer.abilities.int.mod"]
-        } else { //If not an ECM weapon and not an NPC, use BAB/Piloting + Dex
-            parts = ["max(@gunner.attributes.baseAttackBonus.value, @gunner.skills.pil.ranks)", "@gunner.abilities.dex.mod"]
-        };
+        if (this.actor.system.crew.useNPCCrew) { // If NPC, use the gunnery skill bonus
+            parts = ["@gunner.skills.gun.mod"];
+        } else if (this.system.weaponType === "ecm") { // If the weapon is an ECM weapon and not an NPC, use Computers ranks + Int (NPC ECM weapons still use gunnery)
+            parts = ["@scienceOfficer.skills.com.ranks", "@scienceOfficer.abilities.int.mod"];
+        } else { // If not an ECM weapon and not an NPC, use BAB/Piloting + Dex
+            parts = ["max(@gunner.attributes.baseAttackBonus.value, @gunner.skills.pil.ranks)", "@gunner.abilities.dex.mod"];
+        }
         const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
-        
+
         if (this.hasCapacity()) {
             if (this.getCurrentCapacity() <= 0) {
                 ui.notifications.warn(game.i18n.format("SFRPG.StarshipSheet.Weapons.NoCapacity"));
@@ -906,7 +908,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.Broadside"), modifier: "-2", enabled: false} }
         ];
 
-        const attackBonus = parseInt(this.system.attackBonus)
+        const attackBonus = parseInt(this.system.attackBonus);
         if (attackBonus) parts.push("@item.attackBonus");
 
         rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
@@ -926,6 +928,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             title: title,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             critical: 20,
+            chatMessage: options.chatMessage,						
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
@@ -955,7 +958,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     async _rollVehicleAttack(options = {}) {
 
         // TODO: Take vehicle's negative attack modifiers
-        const parts = []
+        const parts = [];
 
         const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
 
@@ -973,6 +976,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             title: title,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             critical: 20,
+            chatMessage: options.chatMessage,						
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
@@ -1002,7 +1006,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      */
     async rollDamage({ event } = {}, options = {}) {
         const itemData  = this.system;
-        const actorData = this.actor.getRollData(); //this.actor.system;
+        const actorData = this.actor.getRollData(); // this.actor.system;
         const isWeapon  = ["weapon", "shield"].includes(this.type);
         const isHealing = this.system.actionType === "heal";
 
@@ -1024,10 +1028,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         for (const part of parts) {
             part.isDamageSection = true;
         }
-        
+
         const acceptedModifiers = [SFRPGEffectType.ALL_DAMAGE];
-        
-        console.log(this.system.actionType);
+
         if (["msak", "rsak"].includes(this.system.actionType) || (this.type === "spell"  && this.system.actionType === "save")) {
             acceptedModifiers.push(SFRPGEffectType.SPELL_DAMAGE);
         } else if (this.system.actionType === "rwak") {
@@ -1074,7 +1077,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 return;
             }
 
-            //console.log(`Adding ${bonus.name} with ${bonus.modifier}`);
+            // console.log(`Adding ${bonus.name} with ${bonus.modifier}`);
             let computedBonus = bonus.modifier;
             parts.push({ formula: computedBonus, explanation: bonus.name });
             return computedBonus;
@@ -1114,16 +1117,16 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 title = game.i18n.format("SFRPG.Rolls.DamageRollFull", {name: this.name});
             }
         }
-        
+
         const rollContext = RollContext.createItemRollContext(this, this.actor, {itemData: itemData, ownerData: rollData});
 
         /** Create additional modifiers. */
         const additionalModifiers = [];
-        
+
         if (itemData.properties?.archaic && isWeapon) {
             additionalModifiers.push({bonus: { name: game.i18n.format("SFRPG.WeaponPropertiesArchaic"), modifier: "-5", enabled: true, notes: game.i18n.format("SFRPG.WeaponPropertiesArchaicTooltip") } });
         }
-        
+
         for (const rolledMod of rolledMods) {
             additionalModifiers.push({
                 bonus: rolledMod
@@ -1144,6 +1147,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             title: title,
             flavor: (TextEditor.enrichHTML(options?.flavorOverride, {async: false}) ?? TextEditor.enrichHTML(itemData.chatFlavor, {async: false})) || null,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            chatMessage: options.chatMessage,						
             dialogOptions: {
                 width: 400,
                 top: event ? event.clientY - 80 : null,
@@ -1161,7 +1165,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const itemData = this.system;
 
         if (!this.hasDamage) {
-            ui.notifications.error(game.i18n.localize("SFRPG.VehicleAttackSheet.Errors.NoDamage"))
+            ui.notifications.error(game.i18n.localize("SFRPG.VehicleAttackSheet.Errors.NoDamage"));
         }
 
         const parts = itemData.damage.parts.map(part => part);
@@ -1189,6 +1193,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             rollContext: rollContext,
             title: title,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            chatMessage: options.chatMessage,						
             dialogOptions: {
                 skipUI: true,
                 width: 400,
@@ -1238,6 +1243,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             rollContext: rollContext,
             title: title,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            chatMessage: options.chatMessage,
             dialogOptions: {
                 width: 400,
                 top: event ? event.clientY - 80 : null,
@@ -1282,7 +1288,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Define Roll Data
         const rollContext = RollContext.createItemRollContext(this, this.actor, {itemData: itemData});
-    
+
         const title = game.i18n.localize(`SFRPG.Items.Action.OtherFormula`);
         const rollResult = await DiceSFRPG.createRoll({
             rollContext: rollContext,
@@ -1299,6 +1305,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         ChatMessage.create({
             flavor: `${title}${(itemData.chatFlavor ? " - " + itemData.chatFlavor : "")}`,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            chatMessage: options.chatMessage,
             content: content,
             rollMode: game.settings.get("core", "rollMode"),
             roll: rollResult.roll,
@@ -1323,7 +1330,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         if (itemData.actionType && itemData.actionType !== "save") {
             options = options || {};
             options.flavorOverride = game.i18n.format("SFRPG.Items.Consumable.UseChatMessage", {consumableName: this.name});
-            
+
             const result = await this.rollDamage({}, options);
             if (!result[0]) {
                 // Roll was cancelled, don't consume.
@@ -1332,7 +1339,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         } else {
             let htmlOptions = { secrets: this.actor?.isOwner || true, rollData: this };
             htmlOptions.rollData.owner = this.actor?.system;
-    
+
             // Basic template rendering data
             const token = this.actor.token;
             const templateData = {
@@ -1347,11 +1354,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 hasOtherFormula: this.hasOtherFormula
             };
 
-            const template = `systems/sfrpg/templates/chat/consumed-item-card.html`;
+            const template = `systems/sfrpg/templates/chat/consumed-item-card.hbs`;
             const html = await renderTemplate(template, templateData);
 
             const flavor = game.i18n.format("SFRPG.Items.Consumable.UseChatMessage", {consumableName: this.name});
-    
+
             // Basic chat message data
             const chatData = {
                 user: game.user.id,
@@ -1361,7 +1368,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 flags: { level: this.system.level },
                 speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor})
             };
-    
+
             // Toggle default roll mode
             const rollMode = game.settings.get("core", "rollMode");
             if (["gmroll", "blindroll"].includes(rollMode)) {
@@ -1370,7 +1377,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             if (rollMode === "blindroll") {
                 chatData["blind"] = true;
             }
-    
+
             // Create the chat message
             ChatMessage.create(chatData, { displaySheet: false });
         }
@@ -1382,7 +1389,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
             // Deduct an item quantity
             if (remainingUses <= 1 && quantity >= 1) {
-                quantity = quantity - 1;
+                quantity -= 1;
                 this.update({
                     'system.quantity': Math.max(quantity, 0),
                     'system.uses.value': (quantity === 0) ? 0 : this.getMaxUses()
@@ -1470,7 +1477,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         let item = chatCardActor.items.get(card.dataset.itemId);
 
         // Adjust item to level, if required
-        if (typeof(message.flags.level) !== 'undefined' && message.flags.level !== item.system.level) {
+        if (typeof (message.flags.level) !== 'undefined' && message.flags.level !== item.system.level) {
             const newItemData = duplicate(item);
             newItemData.system.level = message.flags.level;
 
@@ -1576,10 +1583,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         if (controlled.length === 1) return controlled[0].actor;
         else throw new Error(`You must designate a specific Token as the roll target`);
     }
-    
+
     /**
      * Add a modifier to this actor.
-     * 
+     *
      * @param {Object}        data               The data needed to create the modifier
      * @param {String}        data.name          The name of this modifier. Used to identify the modfier.
      * @param {Number|String} data.modifier      The modifier value.
@@ -1595,15 +1602,15 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      * @param {String|null}   data.id            Override the randomly generated id with this.
      */
     async addModifier({
-        name = "", 
-        modifier = 0, 
-        type = SFRPGModifierTypes.UNTYPED, 
-        modifierType = SFRPGModifierType.CONSTANT, 
+        name = "",
+        modifier = 0,
+        type = SFRPGModifierTypes.UNTYPED,
+        modifierType = SFRPGModifierType.CONSTANT,
         effectType = SFRPGEffectType.SKILL,
         subtab = "misc",
-        valueAffected = "", 
-        enabled = true, 
-        source = "", 
+        valueAffected = "",
+        enabled = true,
+        source = "",
         notes = "",
         condition = "",
         id = null
@@ -1633,18 +1640,18 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
     /**
      * Delete a modifier for this Actor.
-     * 
+     *
      * @param {String} id The id for the modifier to delete
      */
     async deleteModifier(id) {
         const modifiers = this.system.modifiers.filter(mod => mod._id !== id);
-        
+
         await this.update({"system.modifiers": modifiers});
     }
 
     /**
      * Edit a modifier for an Actor.
-     * 
+     *
      * @param {String} id The id for the modifier to edit
      */
     editModifier(id) {
@@ -1653,69 +1660,94 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         new SFRPGModifierApplication(modifier, this, {}, this.actor).render(true);
     }
-}
 
-export async function _onScalingCantripsSettingChanges() {
-    const d3scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d(lookupRange(@details.cl.value,3,7,4))+lookupRange(@details.cl.value,0,3,floor(@details.level.value/2))";
-    const d6scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+lookupRange(@details.cl.value,0,3,floor(@details.level.value/2))";
-    const npcd3scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d(lookupRange(@details.cr,3,7,4))+lookupRange(@details.cr,0,3,floor(@details.cr/2))";
-    const npcd6scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+lookupRange(@details.cr,0,3,floor(@details.cr/2))";
-    
-    const setting = (game.settings.get("sfrpg", "scalingCantrips"));
-    let count = 0;
-    let actorCount = 0;
-    
-    for (let actor of game.actors.contents) {
-        const isNPC = ['npc','npc2'].includes(actor.type);
-        
-        let updates = [];
-        let params = await (actor.items).filter(i => i.system.scaling?.d3 || i.system.scaling?.d6);
-        if (params.length > 0) {
-            updates = params.map( (currentValue) => {
-                return {_id: currentValue.id, "system.damage.parts": currentValue.system.damage.parts, scaling: currentValue.system.scaling};
-            })
-        
-            for (let currentValue of updates) {
-                if (currentValue.scaling.d3) {
-                    currentValue['system.damage.parts'][0].formula = (setting) ? ((isNPC) ? npcd3scaling : d3scaling) : "1d3";
-                } else if (currentValue.scaling.d6) {
-                    currentValue['system.damage.parts'][0].formula = (setting) ? ((isNPC) ? npcd6scaling : d6scaling) : "1d6";
+    static async _onScalingCantripsSettingChanges() {
+        const d3scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d(lookupRange(@details.cl.value,3,7,4))+lookupRange(@details.cl.value,0,3,floor(@details.level.value/2))";
+        const d6scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+lookupRange(@details.cl.value,0,3,floor(@details.level.value/2))";
+        const npcd3scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d(lookupRange(@details.cr,3,7,4))+lookupRange(@details.cr,0,3,floor(@details.cr/2))";
+        const npcd6scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+lookupRange(@details.cr,0,3,floor(@details.cr/2))";
+
+        const setting = game.settings.get("sfrpg", "scalingCantrips");
+        let count = 0;
+        let actorCount = 0;
+
+        for (let actor of game.actors.contents) {
+            const isNPC = ['npc', 'npc2'].includes(actor.type);
+
+            let updates = [];
+            let params = actor.items.filter(i => i.system.scaling?.d3 || i.system.scaling?.d6);
+            if (params.length > 0) {
+                updates = params.map( (currentValue) => {
+                    return {
+                        _id: currentValue.id,
+                        "system.damage.parts": currentValue.system.damage.parts,
+                        scaling: currentValue.system.scaling
+                    };
+                });
+
+                for (let currentValue of updates) {
+                    if (currentValue.scaling.d3) {
+                        currentValue['system.damage.parts'].forEach(i => {
+                            if (setting) {
+                                if (isNPC) {
+                                    i.formula = npcd3scaling;
+                                } else {
+                                    i.formula = d3scaling;
+                                }
+                            } else {
+                                i.formula = "1d3";
+                            }
+                        });
+                    } else if (currentValue.scaling.d6) {
+                        currentValue['system.damage.parts'].forEach(i => {
+                            if (setting) {
+                                if (isNPC) {
+                                    i.formula = npcd6scaling;
+                                } else {
+                                    i.formula = d6scaling;
+                                }
+                            } else {
+                                i.formula = "1d6";
+                            }
+                        });
+                    }
+
+                    delete currentValue.scaling;
                 }
-                
-                delete currentValue.scaling;
+
+                await actor.updateEmbeddedDocuments("Item", updates);
+                count += params.length;
+                actorCount += 1;
             }
-        await actor.updateEmbeddedDocuments("Item", updates);
-        count += params.length;
-        actorCount += 1;
+        }
+        const message = `Starfinder | Updated ${count} spells to use ${(setting) ? "scaling" : "default"} formulas on ${actorCount} actors.`;
+        ui.notifications.info(message);
+    }
+
+    static async _onScalingCantripDrop(addedItem, targetActor) {
+        const d3scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d(lookupRange(@details.cl.value,3,7,4))+lookupRange(@details.cl.value,0,3,floor(@details.level.value/2))";
+        const d6scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+lookupRange(@details.cl.value,0,3,floor(@details.level.value/2))";
+        const npcd3scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d(lookupRange(@details.cr,3,7,4))+lookupRange(@details.cr,0,3,floor(@details.cr/2))";
+        const npcd6scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+lookupRange(@details.cr,0,3,floor(@details.cr/2))";
+
+        const isNPC = ['npc', 'npc2'].includes(targetActor.actor.type);
+
+        if (addedItem.system.scaling?.d3) {
+
+            const updates = duplicate(addedItem.system.damage.parts);
+            updates.forEach(i => i.formula = (isNPC) ? npcd3scaling : d3scaling);
+
+            await addedItem.update({"system.damage.parts": updates});
+            console.log(`Starfinder | Updated ${addedItem.name} to use the ${ (isNPC) ? 'NPC ' : ""}d3 scaling formula.`);
+
+        } else if (addedItem.system.scaling?.d6) {
+
+            const updates = duplicate(addedItem.system.damage.parts);
+            updates.forEach(i => i.formula = (isNPC) ? npcd6scaling : d6scaling);
+
+            await addedItem.update({"system.damage.parts": updates});
+            console.log(`Starfinder | Updated ${addedItem.name} to use the ${ (isNPC) ? "NPC " : ""}d6 scaling formula.`);
         }
     }
-    const message = `Starfinder | Updated ${count} spells to use ${(setting) ? "scaling" : "default"} formulas on ${actorCount} actors.`;
-    console.log(message);
-    ui.notifications.info(message);
 }
 
-export async function _onScalingCantripDrop(addedItem, targetActor) {
-    const d3scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d(lookupRange(@details.cl.value,3,7,4))+lookupRange(@details.cl.value,0,3,floor(@details.level.value/2))";
-    const d6scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+lookupRange(@details.cl.value,0,3,floor(@details.level.value/2))";
-    const npcd3scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d(lookupRange(@details.cr,3,7,4))+lookupRange(@details.cr,0,3,floor(@details.cr/2))";
-    const npcd6scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+lookupRange(@details.cr,0,3,floor(@details.cr/2))";
-    
-    const isNPC = ['npc','npc2'].includes(targetActor.actor.type);
-    
-    if (addedItem.system.scaling?.d3) {
-    
-        const updates = duplicate(addedItem.system.damage.parts);
-        updates[0].formula = (isNPC) ? npcd3scaling : d3scaling;
-        
-        await addedItem.update({"system.damage.parts": updates});
-        console.log(`Starfinder | Updated ${addedItem.name} to use the ${ (isNPC) ? 'NPC ' : ""}d3 scaling formula.`);
-        
-    } else if (addedItem.system.scaling?.d6) {
-        
-        const updates = duplicate(addedItem.system.damage.parts);
-        updates[0].formula = (isNPC) ? npcd6scaling : d6scaling;
-        
-        await addedItem.update({"system.damage.parts": updates});
-        console.log(`Starfinder | Updated ${addedItem.name} to use the ${ (isNPC) ? "NPC " : ""}d6 scaling formula.`);
-    }  
-}

@@ -2,10 +2,16 @@
   "_id": "gkmkA4cyDvRsB3c5",
   "name": "Stellar Mode (Su)",
   "type": "actorResource",
+  "_stats": {
+    "coreVersion": "10.291",
+    "createdTime": 1670286555744,
+    "lastModifiedBy": "SPRszH5sDdJlGxJn",
+    "modifiedTime": 1670442801471,
+    "systemId": "sfrpg",
+    "systemVersion": "0.22.0"
+  },
   "effects": [],
-  "flags": {},
   "img": "systems/sfrpg/icons/classes/stellar_mode.webp",
-  "sort": 0,
   "system": {
     "type": "solarian",
     "abilityMods": {
@@ -15,6 +21,7 @@
     "combatTracker": {
       "displayAbsoluteValue": true,
       "show": true,
+      "showOwnerAndGMOnly": false,
       "visualization": [
         {
           "image": "systems/sfrpg/icons/classes/graviton.webp",
@@ -65,14 +72,18 @@
     "modifiers": [
       {
         "_id": "b30de22c-de6e-449d-974d-db923781673d",
-        "name": "Graviton Mode",
+        "name": "Stellar Graviton Mode",
         "type": "insight",
         "condition": "",
+        "container": {
+          "actorId": "Qs2gOWidvlhDWFVK",
+          "itemId": "NxS5NUKYRje7laLu"
+        },
         "effectType": "save",
-        "enabled": true,
+        "enabled": false,
         "max": 0,
         "modifier": "(max(0, 0 - sign(@resources.solarian.stellarMode.value)) * (1 + floor(@classes.solarian.levels / 9)))",
-        "modifierType": "constant",
+        "modifierType": "formula",
         "notes": "",
         "source": "",
         "subtab": "misc",
@@ -80,14 +91,18 @@
       },
       {
         "_id": "68446282-59b2-4413-8b55-377a3f704d99",
-        "name": "Photon Mode",
+        "name": "Stellar Photon Mode",
         "type": "insight",
         "condition": "",
+        "container": {
+          "actorId": "Qs2gOWidvlhDWFVK",
+          "itemId": "NxS5NUKYRje7laLu"
+        },
         "effectType": "all-damage",
-        "enabled": true,
+        "enabled": false,
         "max": 0,
         "modifier": "(max(0, sign(@resources.solarian.stellarMode.value)) * (1 + floor(@classes.solarian.levels / 6)))",
-        "modifierType": "constant",
+        "modifierType": "formula",
         "notes": "",
         "source": "",
         "subtab": "misc",
@@ -100,6 +115,7 @@
       "mode": "immediate"
     },
     "source": "",
+    "stage": "early",
     "subType": "stellarMode"
   }
 }

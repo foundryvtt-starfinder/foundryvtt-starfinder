@@ -1,3 +1,62 @@
+# v0.21.1 - Interstellar Innovators
+
+This is a small hotfix release to clean up some issues from v0.21.0, and also continue our data entry of Interstellar Species
+
+## Comependium Updates
+* Add feats from IS
+* Add remaining class features from IS
+
+## Core system improvements
+* Automate operative weapon property
+
+## Bugfixes
+* Ensure `slug` generation occurs correctly, so old class items will still work,
+* Added a `slug` to Evolutionist.
+* Fixed a bug that caused battery capacity to be uneditable
+* Saving throw spells now correctly add modifiers to spell damage.
+
+# v0.21.0 - Interstellar Innovators
+
+Oh hi! I do these now. This update primarily brings the new Evolutionist class from Interstellar species, as well as a few fixes and new shinies for V10.
+
+## Interstellar Species Classes
+Iankid has added the entirety of the Evolutionist class, as well as the entire alternate class features section. Note that all the new species feature are **not** in this update but will be coming soon!
+
+## Vision Modes
+Darkvision and Low-light vision can now be set as vision modes on tokens, and affect light on the canvas as the rules describe. Additionally, the Blinded and newly added Invisible condition will cause a token to become appropriately blind or invisible. This is only the beginning of our foray into the new V10 features, so stay tuned!
+
+## Rules Journals
+Also new for V10, we have updated our rules journal entries to use the new V10 journal layouts. This allows for easier navigation, and allows for more granular linking in items to relevant rules entries.
+
+## Compendium Updates
+* Added the Tromin races
+* Updated Entropic Strike to be a weapon
+* Updated Anactie wingbot with the correct speed
+* Zeitgeist, Third Eye and Voidwalker Mystic Connections. Embrace the Void Spell - Kae
+* Shock and Awe fighting style added to the fighting Style item's list - Nick
+* Added Swarm Fleetfury spaceship - bglad (bglad#0722)
+* Updated Mystic Cure formula - Iankid
+* Added Beastblood theme - Mr. Cerberus
+* Added space creatures: Telelith(Blinking and Swarming); Giant Space Tardigrade; Gwahled; Novaspawn; Stellar Protozoa; Vermelith; Voraij; Alinoisos; Cerebrex; Updated Zoaphorix. - Uldirone (Uldirone#7536)
+* Updated Telepathic Message to include Precog in classes (SCMNomad#6789)
+
+## Core system improvements
+* Add sonic and polymorph descripts
+* Add the instrumental weapon properties
+* Added a new system setting to automatically give new PCs the unarmed strike item
+* Added modifers for attack rolls and damage based on weapon category
+* Added a `slug` field to classes to ensure localised versions are still compatible with modifiers.
+* Added a custom SFRPG theme, which changes some of Foundry's colours and images
+* Combatants hidden in the combat tracker will now whisper the chat message announcing their turn to the GM.
+* Text editors on Actor sheets now use ProseMirror, allowing for collaborative editing.
+
+## Bugfixes
+* Fixed 5/5/5 ruler displaying `NaN`
+* Fixed ASI sheets being unable to open.
+* Fixed NPC biography text not displaying.
+* Fixed formulas not working in damage mitigation modifiers (Syberic)
+* Various CSS fixes
+
 # v0.20.3 - Starfinder Hotfix
 
 Just a quick hotfix to correct an issue with drone sheets. They can now be opened normally.

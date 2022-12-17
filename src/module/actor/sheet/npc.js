@@ -28,11 +28,11 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
 
     get template() {
         const path = "systems/sfrpg/templates/actors/";
-        if (!game.user.isGM && this.actor.limited) return path + "limited-sheet.html";
+        if (!game.user.isGM && this.actor.limited) return path + "limited-sheet.hbs";
         if (this.actor.type === "npc") {
-            return path + "npc-sheet.html";
+            return path + "npc-sheet.hbs";
         } else {
-            return path + "npc2-sheet.html";
+            return path + "npc2-sheet.hbs";
         }
     }
 
@@ -97,6 +97,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
 
             item.config = {
                 isStack: item.system.quantity ? item.system.quantity > 1 : false,
+                isOpen: item.type === "container" ? item.system.container.isOpen : true,
                 isOnCooldown: item.system.recharge && !!item.system.recharge.value && (item.system.recharge.charged === false),
                 hasAttack: ["mwak", "rwak", "msak", "rsak"].includes(item.system.actionType) && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
                 hasDamage: item.system.damage?.parts && item.system.damage.parts.length > 0 && (!["weapon", "shield"].includes(item.type) || item.system.equipped),

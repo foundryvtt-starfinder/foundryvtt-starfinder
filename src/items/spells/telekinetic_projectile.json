@@ -2,8 +2,14 @@
   "_id": "Ua6LvAS3vBdNk5EB",
   "name": "Telekinetic Projectile",
   "type": "spell",
-  "effects": [],
-  "flags": {},
+  "_stats": {
+    "coreVersion": "10.291",
+    "createdTime": 1670782559887,
+    "lastModifiedBy": "eBWLT1Ze8MOMpLeF",
+    "modifiedTime": 1670782566729,
+    "systemId": "sfrpg",
+    "systemVersion": "0.22.0"
+  },
   "img": "systems/sfrpg/icons/spells/telekinetic_projectile.webp",
   "system": {
     "type": "",
@@ -11,6 +17,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "kac",
     "actionType": "rsak",
     "activation": {
       "type": "action",
@@ -19,13 +26,14 @@
     },
     "allowedClasses": {
       "myst": true,
+      "precog": false,
       "tech": false,
       "wysh": false
     },
     "area": {
       "effect": "",
       "shape": "",
-      "units": null,
+      "units": "none",
       "value": null
     },
     "attackBonus": 0,
@@ -38,26 +46,77 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "1d6",
-          "operator": "",
+          "group": null,
           "types": {
-            "bludgeoning": true
+            "acid": false,
+            "bludgeoning": true,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>You fling an object weighing up to 5 pounds (less than 1 bulk) at the target, making a ranged attack against its KAC. If you hit, you deal 1d6 bludgeoning damage to both the target and the object. The type of object thrown doesn’t change the damage type or any other properties of the attack.</p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
     "dismissible": false,
     "duration": {
       "units": "",
       "value": "instantaneous"
     },
     "formula": "",
+    "isActive": null,
+    "isVariableLevel": false,
     "level": 0,
     "materials": {
       "consumed": false,
@@ -76,9 +135,10 @@
       "units": "ft",
       "value": 25
     },
+    "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
     "scaling": {

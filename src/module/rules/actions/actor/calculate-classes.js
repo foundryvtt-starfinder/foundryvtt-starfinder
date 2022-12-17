@@ -12,17 +12,17 @@ export default function (engine) {
             const className = classData.slug || cls.name.slugify({replacement: "_", strict: true});
             const keyAbilityScore = classData.kas || "str";
             const spellAbility = classData.spellAbility || "cha";
-			// Default to cha in order for Spell-like abilities to work correctly out of the box
-            
+            // Default to cha in order for Spell-like abilities to work correctly out of the box
+
             const classInfo = {
                 keyAbilityMod: data.abilities[keyAbilityScore].mod,
                 levels: classData.levels,
+                spellAbility: spellAbility,
                 keyAbilityScore: keyAbilityScore,
                 skillRanksPerLevel: classData.skillRanks.value,
-                isCaster: classData.isCaster,
-                spellAbility: spellAbility
+                isCaster: classData.isCaster
             };
-            
+
             data.classes[className] = classInfo;
 
             if (classInfo.isCaster) {

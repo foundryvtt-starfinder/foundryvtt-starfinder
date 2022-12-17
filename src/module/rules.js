@@ -33,6 +33,7 @@ import calculateCmd                     from './rules/actions/actor/calculate-cm
 import calculateDamageMitigation        from './rules/actions/actor/calculate-damage-mitigation.js';
 import calculateCmdModifiers            from './rules/actions/actor/calculate-cmd-modifiers.js';
 import calculateClasses                 from './rules/actions/actor/calculate-classes.js';
+import calculateClassDC                 from './rules/actions/actor/calculate-class-dc.js';
 import calculateEncumbrance             from './rules/actions/actor/calculate-encumbrance.js';
 import calculateInitiativeModifiers     from './rules/actions/actor/calculate-initiative-modifiers.js';
 import calculateMovementSpeeds          from './rules/actions/actor/calculate-movement-speeds.js';
@@ -75,8 +76,8 @@ import calculateNpc2BaseSaves           from './rules/actions/actor/npc2/calcula
 import calculateNpc2Initiative          from './rules/actions/actor/npc2/calculate-npc2-initiative.js';
 import calculateNpc2BaseSkills          from './rules/actions/actor/npc2/calculate-npc2-skills.js';
 // Starship rules
-import calculateStarshipFrame           from './rules/actions/actor/starship/calculate-starship-frame.js'
-import calculateStarshipComputer        from './rules/actions/actor/starship/calculate-starship-computer.js'
+import calculateStarshipFrame           from './rules/actions/actor/starship/calculate-starship-frame.js';
+import calculateStarshipComputer        from './rules/actions/actor/starship/calculate-starship-computer.js';
 import calculateStarshipArmorClass      from './rules/actions/actor/starship/calculate-starship-ac.js';
 import calculateStarshipCrew            from './rules/actions/actor/starship/calculate-starship-crew.js';
 import calculateStarshipCriticalStatus  from './rules/actions/actor/starship/calculate-starship-critical-status.js';
@@ -122,6 +123,7 @@ export default function (engine) {
     calculateCmdModifiers(engine);
     calculateBaseSkills(engine);
     calculateClasses(engine);
+    calculateClassDC(engine);
     calculateSkillModifiers(engine);
     calculateSkillArmorCheckPenalty(engine);
     calculateAbilityCheckModifiers(engine);
@@ -195,7 +197,7 @@ export default function (engine) {
     isActorType(engine);
     isModifierType(engine);
     stackModifiers(engine);
-    
+
     engine.add({
         name: "process-actors",
         description: "Take all of the actor data and process it by actor type.",
@@ -211,6 +213,7 @@ export default function (engine) {
                     { closure: "calculateBaseAbilityScore", stackModifiers: "stackModifiers" },
                     { closure: "calculateBaseAbilityModifier", stackModifiers: "stackModifiers" },
                     "calculateBaseArmorClass",
+                    "calculateClassDC",
                     { closure: "calculateArmorModifiers", stackModifiers: "stackModifiers" },
                     { closure: "calculateBaseAttackBonus", stackModifiers: "stackModifiers" },
                     { closure: "calculateBaseAttackBonusModifier", stackModifiers: "stackModifiers" },
@@ -284,7 +287,8 @@ export default function (engine) {
                     { closure: "calculateAbilityCheckModifiers", stackModifiers: "stackModifiers"},
                     { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" },
                     { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" },
-                    "calculateDamageMitigation"
+                    "calculateDamageMitigation",
+                    "calculateBulkAndWealth"
                 ]
             },
             {
@@ -308,7 +312,8 @@ export default function (engine) {
                     { closure: "calculateSaveModifiers", stackModifiers: "stackModifiers"},
                     { closure: "calculateSkillModifiers", stackModifiers: "stackModifiers" },
                     { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" },
-                    "calculateDamageMitigation"
+                    "calculateDamageMitigation",
+                    "calculateBulkAndWealth"
                 ]
             },
             {

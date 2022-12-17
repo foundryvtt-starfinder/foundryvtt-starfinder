@@ -18,8 +18,8 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     }
 
     get template() {
-        if (!game.user.isGM && this.actor.limited) return "systems/sfrpg/templates/actors/vehicle-sheet-limited.html";
-        return "systems/sfrpg/templates/actors/vehicle-sheet-full.html";
+        if (!game.user.isGM && this.actor.limited) return "systems/sfrpg/templates/actors/vehicle-sheet-limited.hbs";
+        return "systems/sfrpg/templates/actors/vehicle-sheet-full.hbs";
     }
 
     async getData() {
@@ -490,7 +490,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             action: "SFRPG.ChatCard.ItemActivation.Deactivates"
         };
 
-        const template = `systems/sfrpg/templates/chat/item-action-card.html`;
+        const template = `systems/sfrpg/templates/chat/item-action-card.hbs`;
         const html = await renderTemplate(template, templateData);
 
         // Create the chat message
@@ -532,7 +532,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             hasSave: item.hasSave
         };
 
-        const template = `systems/sfrpg/templates/chat/item-action-card.html`;
+        const template = `systems/sfrpg/templates/chat/item-action-card.hbs`;
         const html = await renderTemplate(template, templateData);
 
         // Create the chat message
