@@ -22,7 +22,7 @@
         {{#if ../isOwner}}
         <div class="item-controls">
             {{#if section.dataset.type}}
-            <a class="item-control item-create" title="Create Item" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
+            <a class="item-control item-create" title="{{localize "SFRPG.ActorSheet.Features.Create"}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
                 <i class="fas fa-plus"></i> {{localize "SFRPG.FeaturesAdd"}}
             </a>
             {{/if}}
