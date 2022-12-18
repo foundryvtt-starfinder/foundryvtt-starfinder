@@ -2,6 +2,7 @@ import { TraitSelectorSFRPG } from "../../apps/trait-selector.js";
 import { ActorSheetFlags } from "../../apps/actor-flags.js";
 import { ActorMovementConfig } from "../../apps/movement-config.js";
 import { getSpellBrowser } from "../../packs/spell-browser.js";
+import { getEquipmentBrowser } from "../../packs/equipment-browser.js";
 
 import { moveItemBetweenActorsAsync, getFirstAcceptableStorageIndex, ActorItemHelper, containsItems } from "../actor-inventory-utils.js";
 import { RPC } from "../../rpc.js";
@@ -11,7 +12,6 @@ import { InputDialog } from "../../apps/input-dialog.js";
 import { SFRPG } from "../../config.js";
 
 import { ItemSFRPG } from "../../item/item.js";
-import { getEquipmentBrowser } from "../../packs/equipment-browser.js";
 /**
  * Extend the basic ActorSheet class to do all the SFRPG things!
  * This sheet is an Abstract layer which is not used.
@@ -571,25 +571,42 @@ export class ActorSheetSFRPG extends ActorSheet {
         };
         let browser;
         let activeFilters = {};
+
         switch (filterType) {
-        case 'weapon' || 'shield' || 'equipment' || 'ammunition' || 'consumable' || 'goods'
-            || 'container' || 'technological,magic,hybrid' || 'fusion,upgrade,weaponAccessory' || 'augmentation':
+        case 'weapon':
+        case 'shield':
+        case 'equipment':
+        case 'ammunition':
+        case 'consumable':
+        case 'goods':
+        case 'container':
+        case 'technological,magic,hybrid':
+        case 'fusion,upgrade,weaponAccessory':
+        case 'augmentation':
             browser = getEquipmentBrowser();
-            activeFilters.equipmentTypes = [
-                filterType
-            ];
+            activeFilters.equipmentTypes = filterType.split(',');
             break;
         case 'spell':
             browser = getSpellBrowser();
             activeFilters.levels = [event.currentTarget.dataset.level];
             // eslint-disable-next-line no-case-declarations
-            let classes = JSON.parse(event.currentTarget.dataset.classes);
-            activeFilters.classes = [];
-            for (let spellFilterI = 0; spellFilterI < classes.length; spellFilterI++) {
-                activeFilters.classes.push(classesToFilters[classes[spellFilterI].key]);
+            let classes = event.currentTarget.dataset.classes;
+            if (classes) {
+                classes = classes.split(',');
+                activeFilters.classes = [];
+                for (let spellFilterI = 0; spellFilterI < classes.length; spellFilterI++) {
+                    activeFilters.classes.push(classesToFilters[classes[spellFilterI]]);
+                }
             }
+
             break;
-        case 'class' || 'race' || 'theme' || 'asi' || 'archetypes' || 'feat' || 'actorResource':
+        case 'class':
+        case 'race':
+        case 'theme':
+        case 'asi':
+        case 'archetypes':
+        case 'feat':
+        case 'actorResource':
             // TODO: wait for Features Browser then implement this.
             break;
 
@@ -611,6 +628,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             browser.filters[activeFiltersKeys[filterI]].activeFilters = activeFilters[activeFiltersKeys[filterI]];
         }
 
+        browser.refreshFilters = true;
         browser.onFiltersUpdated(html);
     }
 

@@ -51,7 +51,8 @@
             <a class="item-control item-create" title="{{localize "SFRPG.SpellBook.CreateSpell"}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
                 <i class="fas fa-plus"></i> {{localize "SFRPG.SpellBook.Add"}}
             </a>
-            <a class="item-control item-browser" title="{{localize "SFRPG.SpellBook.CreateFromCompendium"}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}} data-classes="{{json section.classes}}">
+            <a class="item-control item-browser" title="{{localize "SFRPG.SpellBook.CreateFromCompendium"}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}
+            data-classes="{{#each section.classes as |Class|}}{{Class.key}},{{/each}}">
                 <i class="fas fa-cog"></i> {{localize "SFRPG.InventoryAdd"}}
             </a>
             {{/if}}
