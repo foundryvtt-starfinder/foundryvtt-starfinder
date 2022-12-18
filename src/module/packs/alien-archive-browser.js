@@ -52,7 +52,6 @@ class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
 
                 // 1/3 and 1/2 CR aliens have special strings used to describe their CR rather than using the float value
                 if (itemData.system.details.cr == (1 / 3)) {
-                    console.log(itemData.system.details.cr == (1 / 3));
                     itemData.system.crDisplay = "1/3";
                 }
                 else if (itemData.system.details.cr == (1 / 2)) {
