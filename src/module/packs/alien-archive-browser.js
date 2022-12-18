@@ -40,8 +40,6 @@ class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
 
                 const itemData = {
                     uuid: `Compendium.${pack.collection}.${item._id}`,
-                    _id: item._id,
-                    pack: pack.collection,
                     img: item.img,
                     name: item.name,
                     system: item.system,
