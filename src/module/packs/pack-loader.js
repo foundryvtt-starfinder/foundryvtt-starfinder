@@ -25,10 +25,33 @@ export class PackLoader {
                 progress.advance(`Loading ${pack.metadata.label}`);
 
                 if (pack.documentName === entityType) {
-                    const content = await pack.getDocuments();
+                    const fields = [
+                        "type",
+                        "system.level"
+                    ];
+                    if (entityType === "Actor") {
+                        fields.push(...[
+                            "system.details.cr",
+                            "system.attributes.hp.max",
+                            "system.details.type",
+                            "system.traits.size",
+                            "system.details.organizationSize",
+                            "system.details.alignment"
+                        ]);
+                    } else {
+                        fields.push(...[
+                            "system.pcu",
+                            "system.cost",
+                            "system.weaponCategory",
+                            "system.weaponType",
+                            "system.school",
+                            "system.allowedClasses"
+                        ]);
+                    }
+                    const content = await pack.getIndex({"fields": fields });
                     data = this.loadedPacks[entityType][packId] = {
-                      pack,
-                      content
+                        pack,
+                        content
                     };
                 } else {
                     continue;
