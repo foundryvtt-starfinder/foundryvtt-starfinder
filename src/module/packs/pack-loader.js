@@ -22,7 +22,6 @@ export class PackLoader {
 
             if (!data) {
                 const pack = game.packs.get(packId);
-                console.log(pack);
                 progress.advance(`Loading ${pack.metadata.label}`);
 
                 if (pack.documentName === entityType) {
@@ -50,12 +49,10 @@ export class PackLoader {
                         ]);
                     }
                     const content = await pack.getIndex({"fields": fields });
-                    console.log(content);
                     data = this.loadedPacks[entityType][packId] = {
                         pack,
                         content
                     };
-                    console.log(data);
                 } else {
                     continue;
                 }

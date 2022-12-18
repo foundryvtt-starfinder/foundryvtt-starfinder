@@ -84,17 +84,15 @@ class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     _filterLevels(element, filters) {
-        let compendium = element.dataset.entryCompendium;
-        let itemId = element.dataset.entryId;
-        let item = this.items.find(x => x.pack === compendium && x._id === itemId);
+        let itemUuid = element.dataset.entryUuid;
+        let item = this.items.find(x => x.uuid === itemUuid);
         let itemLevel = item ? item?.system?.level.toString() : null;
         return item && filters.includes(itemLevel);
     }
 
     _filterClasses(element, filters) {
-        let compendium = element.dataset.entryCompendium;
-        let itemId = element.dataset.entryId;
-        let item = this.items.find(x => x.pack === compendium && x._id === itemId);
+        let itemUuid = element.dataset.entryUuid;
+        let item = this.items.find(x => x.uuid === itemUuid);
         if (!item) return false;
 
         for (let allowedClass of filters) {
@@ -106,9 +104,8 @@ class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     _filterSchools(element, filters) {
-        let compendium = element.dataset.entryCompendium;
-        let itemId = element.dataset.entryId;
-        let item = this.items.find(x => x.pack === compendium && x._id === itemId);
+        let itemUuid = element.dataset.entryUuid;
+        let item = this.items.find(x => x.uuid === itemUuid);
         return item && filters.includes(item.system?.school);
     }
 }

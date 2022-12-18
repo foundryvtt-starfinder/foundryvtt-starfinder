@@ -43,27 +43,17 @@ export class DocumentBrowserSFRPG extends Application {
 
         // show item card
         html.on('click', '.item-edit', async(ev) => {
-            const itemId = $(ev.currentTarget).parents('.item')
-                .attr('data-entry-id');
-            const itemCategory = $(ev.currentTarget).parents('.item')
-                .attr('data-item-category');
-            const items = this[itemCategory];
-            let item = items.find(x => x._id === itemId);
-            const pack = game.packs.get(item.pack);
-            const doc = await pack.getDocument(itemId);
+            const itemUuid = $(ev.currentTarget).parents('.item')
+                .attr('data-entry-uuid');
+            const doc = await fromUuid(itemUuid);
             doc.sheet.render(true);
         });
 
         // show actor card
         html.on('click', '.actor-edit', async(ev) => {
             const actorId = $(ev.currentTarget).parents('.item')
-                .attr('data-entry-id');
-            const actorCategory = $(ev.currentTarget).parents('.item')
-                .attr('data-actor-category');
-            const actors = this[actorCategory];
-            let actor = actors.find(x => x._id === actorId);
-            const pack = get.packs.get(actor.pack);
-            const doc = await pack.getDocument(actorId);
+                .attr('data-entry-uuid');
+            const doc = await fromUuid(actorId);
             doc.sheet.render(true);
         });
 
@@ -185,26 +175,14 @@ export class DocumentBrowserSFRPG extends Application {
         });
     }
 
-    async _onDragStart(event, li) {
-        const itemId = $(event.currentTarget).attr('data-entry-id');
-        const itemCategory = $(event.currentTarget).attr('data-item-category');
-        const items = this[itemCategory];
-        let item = items.find(x => x._id === itemId);
-        const pack = game.packs.get(item.pack);
+    _onDragStart(event, li) {
+        const itemUuid = $(event.currentTarget).attr('data-entry-uuid');
 
-        if (!pack) {
-            event.preventDefault();
-            return false;
-        }
+        const rawData = {
+            type: this.entityType,
+            uuid: itemUuid
+        };
 
-        const document = await pack.getDocument(itemId);
-
-        // const rawData = {
-        //     type: pack.documentName,
-        //     pack: pack.collection,
-        //     id: li.getAttribute('data-entry-id')
-        // };
-        const rawData = document.toDragData();
         const data = JSON.stringify(rawData);
 
         event.dataTransfer.setData('text/plain', data);
@@ -277,8 +255,7 @@ export class DocumentBrowserSFRPG extends Application {
 
             for (let item of content) {
                 const itemData = {
-                    _id: item._id,
-                    pack: pack.collection,
+                    uuid: `Compendium.${pack.collection}.${item._id}`,
                     img: item.img,
                     name: item.name,
                     system: item.system,

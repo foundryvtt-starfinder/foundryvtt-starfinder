@@ -127,30 +127,26 @@ class EquipmentBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     _filterItemType(element, filters) {
-        let compendium = element.dataset.entryCompendium;
-        let itemId = element.dataset.entryId;
-        let item = this.items.find(x => x.pack === compendium && x._id === itemId);
+        let itemUuid = element.dataset.entryUuid;
+        let item = this.items.find(x => x.uuid === itemUuid);
         return item && filters.includes(item.type);
     }
 
     _filterWeaponType(element, filters) {
-        let compendium = element.dataset.entryCompendium;
-        let itemId = element.dataset.entryId;
-        let item = this.items.find(x => x.pack === compendium && x._id === itemId);
+        let itemUuid = element.dataset.entryUuid;
+        let item = this.items.find(x => x.uuid === itemUuid);
         return item && (item.type !== "weapon" || filters.includes(item.system.weaponType));
     }
 
     _filterWeaponCategory(element, filters) {
-        let compendium = element.dataset.entryCompendium;
-        let itemId = element.dataset.entryId;
-        let item = this.items.find(x => x.pack === compendium && x._id === itemId);
+        let itemUuid = element.dataset.entryUuid;
+        let item = this.items.find(x => x.uuid === itemUuid);
         return item && (item.type !== "weapon" || filters.includes(item.system.weaponCategory || "uncategorized"));
     }
 
     _filterArmorType(element, filters) {
-        let compendium = element.dataset.entryCompendium;
-        let itemId = element.dataset.entryId;
-        let item = this.items.find(x => x.pack === compendium && x._id === itemId);
+        let itemUuid = element.dataset.entryUuid;
+        let item = this.items.find(x => x.uuid === itemUuid);
         return item && (item.type !== "equipment" || filters.includes(item.system.armor?.type));
     }
 

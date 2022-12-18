@@ -1,5 +1,5 @@
 import { DocumentBrowserSFRPG } from './document-browser.js';
-import { SFRPG } from "../config.js"
+import { SFRPG } from "../config.js";
 
 const starshipComponentTypes = {
     "starshipAblativeArmor": "SFRPG.Items.Categories.StarshipAblativeArmors",
@@ -30,8 +30,8 @@ class StarshipBrowserSFRPG extends DocumentBrowserSFRPG {
 
     getConfigurationProperties() {
         return {
-          label: game.i18n.format("SFRPG.Browsers.StarshipBrowser.Title"),
-          settings: "starshipBrowser"
+            label: game.i18n.format("SFRPG.Browsers.StarshipBrowser.Title"),
+            settings: "starshipBrowser"
         };
     }
 
@@ -58,8 +58,10 @@ class StarshipBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     _sortByPCU(elementA, elementB) {
-        const rawValA = $(elementA).find('input[name=pcu]').val();
-        const rawValB = $(elementB).find('input[name=pcu]').val();
+        const rawValA = $(elementA).find('input[name=pcu]')
+            .val();
+        const rawValB = $(elementB).find('input[name=pcu]')
+            .val();
 
         let aVal = parseInt(rawValA);
         if (Number.isNaN(aVal)) {
@@ -84,8 +86,10 @@ class StarshipBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     _sortByBP(elementA, elementB) {
-        const rawValA = $(elementA).find('input[name=cost]').val();
-        const rawValB = $(elementB).find('input[name=cost]').val();
+        const rawValA = $(elementA).find('input[name=cost]')
+            .val();
+        const rawValB = $(elementB).find('input[name=cost]')
+            .val();
 
         let aVal = parseInt(rawValA);
         if (Number.isNaN(aVal)) {
@@ -127,7 +131,7 @@ class StarshipBrowserSFRPG extends DocumentBrowserSFRPG {
                 filter: (element, filters) => { return this._filterWeaponType(element, filters); },
                 activeFilters: this.filters.starshipWeaponTypes?.activeFilters || [],
                 type: "multi-select"
-            }
+            };
 
             filters.starshipWeaponClass = {
                 label: game.i18n.format("SFRPG.Browsers.StarshipBrowser.WeaponClass"),
@@ -135,7 +139,7 @@ class StarshipBrowserSFRPG extends DocumentBrowserSFRPG {
                 filter: (element, filters) => { return this._filterWeaponClass(element, filters); },
                 activeFilters: this.filters.starshipWeaponClass?.activeFilters || [],
                 type: "multi-select"
-            }
+            };
         }
 
         return filters;
@@ -162,23 +166,20 @@ class StarshipBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     _filterComponentType(element, filters) {
-        let compendium = element.dataset.entryCompendium;
-        let itemId = element.dataset.entryId;
-        let item = this.items.find(x => x.pack === compendium && x._id === itemId);
+        let itemId = element.dataset.entryUuid;
+        let item = this.items.find(x => x.uuid === itemId);
         return item && filters.includes(item.type);
     }
 
     _filterWeaponType(element, filters) {
-        let compendium = element.dataset.entryCompendium;
-        let itemId = element.dataset.entryId;
-        let item = this.items.find(x => x.pack === compendium && x._id === itemId);
+        let itemId = element.dataset.entryUuid;
+        let item = this.items.find(x => x.uuid === itemId);
         return item && (item.type !== "starshipWeapon" || filters.includes(item.system.weaponType));
     }
 
     _filterWeaponClass(element, filters) {
-        let compendium = element.dataset.entryCompendium;
-        let itemId = element.dataset.entryId;
-        let item = this.items.find(x => x.pack === compendium && x._id === itemId);
+        let itemId = element.dataset.entryUuid;
+        let item = this.items.find(x => x.uuid === itemId);
         return item && (item.type !== "starshipWeapon" || filters.includes(item.system.class));
     }
 
