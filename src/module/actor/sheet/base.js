@@ -2,6 +2,7 @@ import { TraitSelectorSFRPG } from "../../apps/trait-selector.js";
 import { ActorSheetFlags } from "../../apps/actor-flags.js";
 import { ActorMovementConfig } from "../../apps/movement-config.js";
 import { getSpellBrowser } from "../../packs/spell-browser.js";
+import { getEquipmentBrowser } from "../../packs/equipment-browser.js";
 
 import { moveItemBetweenActorsAsync, getFirstAcceptableStorageIndex, ActorItemHelper, containsItems } from "../actor-inventory-utils.js";
 import { RPC } from "../../rpc.js";
@@ -218,6 +219,9 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         // Create New Item
         html.find('.item-create').click(ev => this._onItemCreate(ev));
+
+        // Get New Item from Browser
+        html.find('.item-browser').click(event => this._onOpenBrowser(event));
 
         // Update Inventory Item
         html.find('.item-edit').click(ev => {
@@ -554,6 +558,98 @@ export class ActorSheetSFRPG extends ActorSheet {
 
     onBeforeCreateNewItem(itemData) {
 
+    }
+
+    async _onOpenBrowser(event) {
+        event.preventDefault();
+        const filterType = event.currentTarget.dataset.type;
+        const classesToFilters = {
+            'mystic': 'myst',
+            'precog': 'precog',
+            'technomancer': 'tech',
+            'witchwarper': 'wysh'
+        };
+        let browser;
+        let activeFilters = {};
+
+        switch (filterType) {
+        case 'weapon':
+        case 'shield':
+        case 'equipment':
+        case 'ammunition':
+        case 'consumable':
+        case 'goods':
+        case 'container':
+        case 'technological,magic,hybrid':
+        case 'fusion,upgrade,weaponAccessory':
+        case 'augmentation':
+            browser = getEquipmentBrowser();
+            activeFilters.equipmentTypes = filterType.split(',');
+            break;
+        case 'spell':
+            browser = getSpellBrowser();
+            activeFilters.levels = [event.currentTarget.dataset.level];
+            // eslint-disable-next-line no-case-declarations
+            let classes = event.currentTarget.dataset.classes;
+            if (classes) {
+                classes = classes.split(',');
+                activeFilters.classes = [];
+                for (let spellFilterI = 0; spellFilterI < classes.length; spellFilterI++) {
+                    activeFilters.classes.push(classesToFilters[classes[spellFilterI]]);
+                }
+            }
+
+            break;
+        case 'class':
+        case 'race':
+        case 'theme':
+        case 'asi':
+        case 'archetypes':
+        case 'feat':
+        case 'actorResource':
+            // TODO: wait for Features Browser then implement this.
+            break;
+
+        default:
+            browser = getEquipmentBrowser();
+            break;
+        }
+
+        if (!browser._element) {
+            browser.render(true);
+        }
+
+        await this.waitForElem(`#app-${browser.appId}`);
+        const html = browser.element;
+        browser.resetFilters(html);
+
+        const activeFiltersKeys = Object.keys(activeFilters);
+        for (let filterI = 0; filterI < activeFiltersKeys.length; filterI++) {
+            browser.filters[activeFiltersKeys[filterI]].activeFilters = activeFilters[activeFiltersKeys[filterI]];
+        }
+
+        browser.refreshFilters = true;
+        browser.onFiltersUpdated(html);
+    }
+
+    waitForElem(selector) {
+        return new Promise(resolve => {
+            if (document.querySelector(selector)) {
+                return resolve(document.querySelector(selector));
+            }
+
+            const observer = new MutationObserver(mutations => {
+                if (document.querySelector(selector)) {
+                    resolve(document.querySelector(selector));
+                    observer.disconnect();
+                }
+            });
+
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+        });
     }
 
     /**

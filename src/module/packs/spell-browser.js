@@ -55,18 +55,21 @@ class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
                 label: game.i18n.format("SFRPG.Browsers.SpellBrowser.BrowserFilterLevel"),
                 content: SFRPG.spellLevels,
                 filter: (element, filters) => { return this._filterLevels(element, filters); },
+                activeFilters: this.filters?.levels?.activeFilters || [],
                 type: "multi-select"
             },
             classes: {
                 label: game.i18n.format("SFRPG.Browsers.SpellBrowser.BrowserFilterClass"),
                 content: SFRPG.spellcastingClasses,
                 filter: (element, filters) => { return this._filterClasses(element, filters); },
+                activeFilters: this.filters?.classes?.activeFilters || [],
                 type: "multi-select"
             },
             schools: {
                 label: game.i18n.format("SFRPG.Browsers.SpellBrowser.BrowserFilterSchool"),
                 content: SFRPG.spellSchools,
                 filter: (element, filters) => { return this._filterSchools(element, filters); },
+                activeFilters: this.filters?.schools?.activeFilters || [],
                 type: "multi-select"
             }
         };

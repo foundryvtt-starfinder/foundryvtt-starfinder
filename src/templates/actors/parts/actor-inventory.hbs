@@ -28,10 +28,13 @@
         <div class="item-detail item-action">{{localize "SFRPG.InventoryUsage"}}</div>
 
         {{#if ../isOwner}}
-        <div class="item-controls">
+        <div class="item-controls item-controls-browser">
             {{#if section.allowAdd}}
             <a class="item-control item-create" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Create"}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
-                <i class="fas fa-plus"></i> {{localize "SFRPG.InventoryAdd"}}
+                <i class="fas fa-plus"></i>
+            </a>
+            <a class="item-control item-browser" title="{{localize "SFRPG.ActorSheet.Inventory.Item.CreateFromCompendium"}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
+                <i class="fas fa-book"></i>
             </a>
             {{/if}}
         </div>
