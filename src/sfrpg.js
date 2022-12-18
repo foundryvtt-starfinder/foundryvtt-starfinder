@@ -665,7 +665,6 @@ function setupHandlebars() {
         const formattedValue = moneyFormatter.format(value);
         return formattedValue;
     });
-
 }
 
 Hooks.on("renderSidebarTab", async (app, html) => {
