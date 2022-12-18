@@ -46,14 +46,14 @@
         <div class="spell-school">{{localize "SFRPG.SpellBook.SpellSchool"}}</div>
         <div class="spell-action">{{localize "SFRPG.SpellBook.SpellUsage"}}</div>
 
-        <div class="item-controls">
+        <div class="item-controls item-controls-browser">
             {{#if section.canCreate}}
             <a class="item-control item-create" title="{{localize "SFRPG.SpellBook.CreateSpell"}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
-                <i class="fas fa-plus"></i> {{localize "SFRPG.SpellBook.Add"}}
+                <i class="fas fa-plus"></i>
             </a>
             <a class="item-control item-browser" title="{{localize "SFRPG.SpellBook.CreateFromCompendium"}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}
             data-classes="{{#each section.classes as |Class|}}{{Class.key}},{{/each}}">
-                <i class="fas fa-cog"></i> {{localize "SFRPG.InventoryAdd"}}
+                <i class="fas fa-book"></i>
             </a>
             {{/if}}
         </div>

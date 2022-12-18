@@ -768,11 +768,19 @@
       }
 
       .item-controls a.item-create,
-      .item-controls a.item-browser,
       .item-controls a.modifier-create,
       .crew-controls a.crew-create,
       .crew-controls a.skill-create {
         flex: 0 0 100%;
+      }
+      
+      .item-controls.item-controls-browser {
+          flex-wrap: nowrap;
+          justify-content: space-evenly;
+          
+          a.item-browser, a.item-create {
+          flex: 0 0 40%;
+        }
       }
     }
 
