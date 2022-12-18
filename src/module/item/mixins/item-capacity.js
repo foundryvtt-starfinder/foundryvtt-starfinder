@@ -224,7 +224,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
             cost: game.i18n.format("SFRPG.AbilityActivationTypesMove")
         };
 
-        const template = `systems/sfrpg/templates/chat/item-action-card.html`;
+        const template = `systems/sfrpg/templates/chat/item-action-card.hbs`;
         const renderPromise = renderTemplate(template, templateData);
         renderPromise.then((html) => {
             // Create the chat message

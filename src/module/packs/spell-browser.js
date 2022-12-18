@@ -1,5 +1,5 @@
 import { DocumentBrowserSFRPG } from './document-browser.js';
-import { SFRPG } from "../config.js"
+import { SFRPG } from "../config.js";
 
 class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
     static get defaultOptions() {
@@ -10,8 +10,8 @@ class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
 
     getConfigurationProperties() {
         return {
-          label: game.i18n.format("SFRPG.Browsers.SpellBrowser.Title"),
-          settings: "spellBrowser"
+            label: game.i18n.format("SFRPG.Browsers.SpellBrowser.Title"),
+            settings: "spellBrowser"
         };
     }
 
@@ -33,8 +33,10 @@ class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     _sortByLevel(elementA, elementB) {
-        const aVal = parseInt($(elementA).find('input[name=level]').val());
-        const bVal = parseInt($(elementB).find('input[name=level]').val());
+        const aVal = parseInt($(elementA).find('input[name=level]')
+            .val());
+        const bVal = parseInt($(elementB).find('input[name=level]')
+            .val());
         if (aVal < bVal) return -1;
         if (aVal > bVal) return 1;
 
@@ -53,18 +55,21 @@ class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
                 label: game.i18n.format("SFRPG.Browsers.SpellBrowser.BrowserFilterLevel"),
                 content: SFRPG.spellLevels,
                 filter: (element, filters) => { return this._filterLevels(element, filters); },
+                activeFilters: this.filters?.levels?.activeFilters || [],
                 type: "multi-select"
             },
             classes: {
                 label: game.i18n.format("SFRPG.Browsers.SpellBrowser.BrowserFilterClass"),
                 content: SFRPG.spellcastingClasses,
                 filter: (element, filters) => { return this._filterClasses(element, filters); },
+                activeFilters: this.filters?.classes?.activeFilters || [],
                 type: "multi-select"
             },
             schools: {
                 label: game.i18n.format("SFRPG.Browsers.SpellBrowser.BrowserFilterSchool"),
                 content: SFRPG.spellSchools,
                 filter: (element, filters) => { return this._filterSchools(element, filters); },
+                activeFilters: this.filters?.schools?.activeFilters || [],
                 type: "multi-select"
             }
         };
@@ -82,21 +87,19 @@ class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     _filterLevels(element, filters) {
-        let compendium = element.dataset.entryCompendium;
-        let itemId = element.dataset.entryId;
-        let item = this.items.find(x => x.compendium === compendium && x._id === itemId);
-        let itemLevel = item ? JSON.stringify(item.system.level) : "null";
+        let itemUuid = element.dataset.entryUuid;
+        let item = this.items.find(x => x.uuid === itemUuid);
+        let itemLevel = item ? item?.system?.level.toString() : null;
         return item && filters.includes(itemLevel);
     }
 
     _filterClasses(element, filters) {
-        let compendium = element.dataset.entryCompendium;
-        let itemId = element.dataset.entryId;
-        let item = this.items.find(x => x.compendium === compendium && x._id === itemId);
+        let itemUuid = element.dataset.entryUuid;
+        let item = this.items.find(x => x.uuid === itemUuid);
         if (!item) return false;
 
         for (let allowedClass of filters) {
-            if (item.system.allowedClasses[allowedClass]) {
+            if (item.system?.allowedClasses[allowedClass]) {
                 return true;
             }
         }
@@ -104,10 +107,9 @@ class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     _filterSchools(element, filters) {
-        let compendium = element.dataset.entryCompendium;
-        let itemId = element.dataset.entryId;
-        let item = this.items.find(x => x.compendium === compendium && x._id === itemId);
-        return item && filters.includes(item.system.school);
+        let itemUuid = element.dataset.entryUuid;
+        let item = this.items.find(x => x.uuid === itemUuid);
+        return item && filters.includes(item.system?.school);
     }
 }
 

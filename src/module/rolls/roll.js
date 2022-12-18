@@ -41,9 +41,9 @@ export default class SFRPGRoll extends Roll {
     }
 
     /** @inheritdoc */
-    static CHAT_TEMPLATE = "systems/sfrpg/templates/dice/roll.html";
+    static CHAT_TEMPLATE = "systems/sfrpg/templates/dice/roll.hbs";
     /** @inheritdoc */
-    static TOOLTIP_TEMPLATE = "systems/sfrpg/templates/dice/tooltip.html";
+    static TOOLTIP_TEMPLATE = "systems/sfrpg/templates/dice/tooltip.hbs";
 
     /** @override */
     async render(chatOptions={}) {

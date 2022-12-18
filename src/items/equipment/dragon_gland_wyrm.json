@@ -2,18 +2,43 @@
   "_id": "5lYDbbYeB2D7MXQw",
   "name": "Dragon gland, wyrm",
   "type": "augmentation",
+  "_stats": {
+    "coreVersion": "10.291",
+    "createdTime": null,
+    "lastModifiedBy": "SPRszH5sDdJlGxJn",
+    "modifiedTime": 1671295524863,
+    "systemId": "sfrpg",
+    "systemVersion": "0.22.0"
+  },
   "effects": [],
   "flags": {},
+  "folder": null,
   "img": "icons/creatures/abilities/dragon-fire-breath-orange.webp",
-  "permission": {
+  "ownership": {
     "default": 0,
     "xW89szGpnlIv5gCs": 3
   },
+  "sort": 0,
   "system": {
     "type": "biotech",
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
+    "actionType": "save",
+    "activation": {
+      "type": "action",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "burst",
+      "shape": "cone",
+      "units": "ft",
+      "value": 15
+    },
+    "attackBonus": 0,
     "attributes": {
       "ac": {
         "value": ""
@@ -27,34 +52,89 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": 51
       },
       "size": "medium",
       "sturdy": false
     },
     "attuned": false,
     "bulk": "L",
+    "chatFlavor": "",
+    "container": {
+      "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
+      "storage": []
+    },
     "critical": {
+      "effect": "",
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "",
+          "formula": "18d6",
+          "group": null,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>You implant an arcanicus gland modified to function for a creature of your race at the back of your throat. You can trigger this gland as a standard action to expel a breath weapon in a 15- foot cone as an extraordinary ability. Choose the damage type when the organ is biocrafted, picking from the following list: acid, cold, electricity, or fire. You are not harmed by using your own breath weapon. Once you&rsquo;ve used your breath weapon, you can&rsquo;t use it again until you&rsquo;ve rested for 10 minutes to regain Stamina Points, though you can spend 1 Resolve Point at any point to recharge it immediately.</p>\n<p>A wyrmling dragon gland deals 3d6 damage, a standard gland deals 9d6 damage, and a wyrm gland deals 18d6 damage. Targets in the area can attempt a Reflex save (DC = 10 + half your level + your Constitution modifier) to take only half damage.</p>\n<p>@Compendium[sfrpg.equipment.FAt6V9HDubZ9ZivD]{Dragon breath, wyrm}</p>\n<p>&nbsp;</p>"
+      "value": "<p>You implant an arcanicus gland modified to function for a creature of your race at the back of your throat. You can trigger this gland as a standard action to expel a breath weapon in a 15- foot cone as an extraordinary ability. Choose the damage type when the organ is biocrafted, picking from the following list: acid, cold, electricity, or fire. You are not harmed by using your own breath weapon. Once you’ve used your breath weapon, you can’t use it again until you’ve rested for 10 minutes to regain Stamina Points, though you can spend 1 Resolve Point at any point to recharge it immediately.</p><p>A wyrmling dragon gland deals 3d6 damage, a standard gland deals 9d6 damage, and a wyrm gland deals 18d6 damage. Targets in the area can attempt a Reflex save (DC = 10 + half your level + your Constitution modifier) to take only half damage.</p>"
     },
-    "equippable": false,
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": ""
+    },
+    "equippable": true,
     "equipped": false,
+    "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 16,
     "modifiers": [],
     "price": 181500,
     "quantity": 1,
+    "quantityPerPack": 1,
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "none",
+      "value": null
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "reflex",
+      "dc": "10 + floor(@details.level.value / 2) + @abilities.con.mod",
+      "descriptor": "half"
+    },
     "source": "CRB, p. 211",
-    "system": "throat"
+    "system": "throat",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": 1,
+      "per": "sr",
+      "value": 1
+    }
   }
 }

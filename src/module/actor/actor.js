@@ -34,6 +34,17 @@ import { hasDiceTerms } from "../utilities.js";
 export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewMixin, ActorDamageMixin, ActorInventoryMixin, ActorModifiersMixin, ActorResourcesMixin, ActorRestMixin) {
 
     constructor(data, context) {
+        // Set module art if available. This applies art to actors viewed or created from compendiums.
+        if (context.pack && data._id) {
+            const art = game.sfrpg.compendiumArt.map.get(`Compendium.${context.pack}.${data._id}`);
+            if (art) {
+                data.img = art.actor;
+                const tokenArt = typeof art.token === "string"
+                    ? { img: art.token } // If just a path, set it as img
+                    : { ...art.token }; // If not a path, it must contain scale too, so spread it
+                data.prototypeToken = mergeObject(data.prototypeToken ?? {}, tokenArt);
+            }
+        }
         super(data, context);
         // console.log(`Constructor for actor named ${data.name} of type ${data.type}`);
     }

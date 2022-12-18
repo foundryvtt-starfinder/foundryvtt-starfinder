@@ -398,7 +398,7 @@ export class CombatSFRPG extends Combat {
         };
 
         // Render the chat card template
-        const template = `systems/sfrpg/templates/chat/combat-card.html`;
+        const template = `systems/sfrpg/templates/chat/combat-card.hbs`;
         const html = await renderTemplate(template, templateData);
 
         // Create the chat message
@@ -436,7 +436,7 @@ export class CombatSFRPG extends Combat {
         };
 
         // Render the chat card template
-        const template = `systems/sfrpg/templates/chat/combat-card.html`;
+        const template = `systems/sfrpg/templates/chat/combat-card.hbs`;
         const html = await renderTemplate(template, templateData);
 
         // Create the chat message
@@ -474,7 +474,7 @@ export class CombatSFRPG extends Combat {
         };
 
         // Render the chat card template
-        const template = `systems/sfrpg/templates/chat/combat-card.html`;
+        const template = `systems/sfrpg/templates/chat/combat-card.hbs`;
         const html = await renderTemplate(template, templateData);
 
         // Create the chat message

@@ -3,13 +3,16 @@
   "name": "Eshar",
   "type": "npc2",
   "_stats": {
-    "coreVersion": "10.290",
+    "coreVersion": "10.291",
     "createdTime": 1666738343703,
-    "lastModifiedBy": "nAGIIjYeOTKZPBrt",
-    "modifiedTime": 1668649012340,
+    "lastModifiedBy": "SPRszH5sDdJlGxJn",
+    "modifiedTime": 1671234347193,
     "systemId": "sfrpg",
-    "systemVersion": "0.20.3"
+    "systemVersion": "0.22.0"
   },
+  "effects": [],
+  "flags": {},
+  "folder": null,
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
@@ -104,7 +107,7 @@
           "parts": [
             {
               "name": "",
-              "formula": "@abilities.str.mod",
+              "formula": "@abilities.str.mod + (lookupRange(@details.cr, 0, 1, 1, 9, 3, 10, 2, 13, 6, 15, 5, 16, 6, 17, 8, 19, 9, 20, 13))d(lookupRange(@details.cr, 0, 1, 4, 6, 6, 7, 8, 8, 12, 9, 4, 10, 8, 11, 10, 12, 12, 13, 4, 14, 6, 15, 8, 17, 6, 18, 8, 20, 6)) + (@details.cr)",
               "types": {
                 "acid": false,
                 "bludgeoning": true,
@@ -288,12 +291,12 @@
       "name": "Creature Companion - Eshar",
       "type": "feat",
       "_stats": {
-        "coreVersion": "10.290",
+        "coreVersion": "10.291",
         "createdTime": 1666738399852,
-        "lastModifiedBy": "nAGIIjYeOTKZPBrt",
-        "modifiedTime": 1668648725405,
+        "lastModifiedBy": "SPRszH5sDdJlGxJn",
+        "modifiedTime": 1671234343126,
         "systemId": "sfrpg",
-        "systemVersion": "0.20.3"
+        "systemVersion": "0.22.0"
       },
       "effects": [],
       "flags": {
@@ -342,7 +345,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>@UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.gTHswZ0FBafS7ru0]{Creature Companion}</p>\n<p>Eshars are hulking, serpentine beasts from the expansive, sandy deserts of the tidally locked planet Verces. They are used for battle, transportation, and even for sport, in an elaborate zone-capturing game that can last for days.</p>\n<h2 class=\"title\">Eshar</h2>\n<p>Levels 10-20</p>\n<p>Huge animal<br><strong>Senses</strong>&nbsp;blindsight (vibration) 60 ft., low-light vision<br><strong>Good Save</strong>&nbsp;Fort;&nbsp;<strong>Poor Saves</strong>&nbsp;Ref, Will<br><strong>Defensive Abilities</strong>&nbsp;ferocity;&nbsp;<strong>Resistances</strong>&nbsp;fire 5<br><strong>Weaknesses</strong>&nbsp;vulnerable to cold<br><strong>Speed</strong>&nbsp;30 ft.; burrow 60 ft.<br><strong>Melee Attack</strong>&nbsp;tail (B)<br><strong>Space</strong>&nbsp;15 ft.&nbsp;<strong>Reach</strong>&nbsp;10 ft.<br><strong>Ability Modifiers</strong>&nbsp;Con, Dex</p>\n<h3 class=\"title\">Special Abilities</h3>\n<p><strong>Lie in Wait (Ex)</strong> While mounted on your eshar companion, you can remain burrowed in sand or loose dirt for up to 1 hour, and if combat begins during this time, you gain a +4 circumstance bonus to any skill check (normally Perception or Stealth) to determine whether you act in a surprise round.</p>\n<p><strong>Screech (Ex)</strong>&nbsp;As a standard action, an eshar can unleash a terrifying screech, causing each creature within 30 feet to become shaken for 1d4 rounds unless it succeeds at a Will saving throw (DC = 10 + 1-1/2 &times; the eshar&rsquo;s level). Regardless of whether a creature succeeds at this check, it is immune to that eshar&rsquo;s screech for 24 hours. Eshars are immune to the screech ability of other eshars, and you are immune to the screech of your own eshar companion.</p>\n<p><span id=\"ctl00_MainContent_DetailedOutput\"></span></p>\n<p><em>HP Max must be manually adjusted. HP value can be found on the @UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.FqsTa05DBVMfsvxy#creature-companion-statistics]{Creature Companion Statistics Table}</em></p>"
+          "value": "<p>@UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.gTHswZ0FBafS7ru0]{Creature Companion}</p><p>Eshars are hulking, serpentine beasts from the expansive, sandy deserts of the tidally locked planet @UUID[Compendium.sfrpg.setting.f24qKgU5Wh5LLJyh]{Verces}. They are used for battle, transportation, and even for sport, in an elaborate zone-capturing game that can last for days.</p><h2 class=\"title\">Eshar</h2><p>Levels 10-20</p><p>Huge animal<br><strong>Senses</strong> blindsight (vibration) 60 ft., low-light vision<br><strong>Good Save</strong> Fort; <strong>Poor Saves</strong> Ref, Will<br><strong>Defensive Abilities</strong> ferocity; <strong>Resistances</strong> fire 5<br><strong>Weaknesses</strong> vulnerable to cold<br><strong>Speed</strong> 30 ft.; burrow 60 ft.<br><strong>Melee Attack</strong> tail (B)<br><strong>Space</strong> 15 ft. <strong>Reach</strong> 10 ft.<br><strong>Ability Modifiers</strong> Con, Dex</p><h3 class=\"title\">Special Abilities</h3><p><strong>Lie in Wait (Ex)</strong> While mounted on your eshar companion, you can remain burrowed in sand or loose dirt for up to 1 hour, and if combat begins during this time, you gain a +4 circumstance bonus to any skill check (normally Perception or Stealth) to determine whether you act in a surprise round.</p><p><strong>Screech (Ex)</strong> As a standard action, an eshar can unleash a terrifying screech, causing each creature within 30 feet to become shaken for 1d4 rounds unless it succeeds at a Will saving throw (DC = 10 + 1-1/2 × the eshar’s level). Regardless of whether a creature succeeds at this check, it is immune to that eshar’s screech for 24 hours. Eshars are immune to the screech ability of other eshars, and you are immune to the screech of your own eshar companion.</p><p></p><p><em>HP Max must be manually adjusted. HP value can be found on the @UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.FqsTa05DBVMfsvxy#creature-companion-statistics]{Creature Companion Statistics Table}</em></p>"
         },
         "descriptors": {
           "acid": false,
@@ -372,10 +375,12 @@
           "mind-affecting": false,
           "pain": false,
           "poison": false,
+          "polymorph": false,
           "radiation": false,
           "scrying": false,
           "sense-dependent": false,
           "shadow": false,
+          "sonic": false,
           "summoning": false,
           "teleportation": false,
           "water": false
@@ -393,7 +398,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "SqTV5SqvvaO2k8iN",
+              "actorId": "7TcCXmCYUTYPvgqV",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ac",
@@ -412,7 +417,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "SqTV5SqvvaO2k8iN",
+              "actorId": "7TcCXmCYUTYPvgqV",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ac",
@@ -431,7 +436,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "SqTV5SqvvaO2k8iN",
+              "actorId": "7TcCXmCYUTYPvgqV",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "save",
@@ -450,7 +455,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "SqTV5SqvvaO2k8iN",
+              "actorId": "7TcCXmCYUTYPvgqV",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "save",
@@ -469,7 +474,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "SqTV5SqvvaO2k8iN",
+              "actorId": "7TcCXmCYUTYPvgqV",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "save",
@@ -488,7 +493,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "SqTV5SqvvaO2k8iN",
+              "actorId": "7TcCXmCYUTYPvgqV",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ability-score",
@@ -507,7 +512,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "SqTV5SqvvaO2k8iN",
+              "actorId": "7TcCXmCYUTYPvgqV",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ability-score",
@@ -526,7 +531,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "SqTV5SqvvaO2k8iN",
+              "actorId": "7TcCXmCYUTYPvgqV",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ability-score",
@@ -545,7 +550,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "SqTV5SqvvaO2k8iN",
+              "actorId": "7TcCXmCYUTYPvgqV",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "all-skills",
@@ -564,7 +569,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "SqTV5SqvvaO2k8iN",
+              "actorId": "7TcCXmCYUTYPvgqV",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "all-attacks",
@@ -578,31 +583,12 @@
             "valueAffected": "acr"
           },
           {
-            "_id": "a0389005-fc87-47dd-829d-f49bebf79ec5",
-            "name": "Creature Companion - Damage",
-            "type": "untyped",
-            "condition": "",
-            "container": {
-              "actorId": "SqTV5SqvvaO2k8iN",
-              "itemId": "FTDQ7caOAQoT2E45"
-            },
-            "effectType": "all-damage",
-            "enabled": true,
-            "max": 0,
-            "modifier": "(lookupRange(@details.cr, 0, 1, 1, 9, 3, 10, 2, 13, 6, 15, 5, 16, 6, 17, 8, 19, 9, 20, 13))d(lookupRange(@details.cr, 0, 1, 4, 6, 6, 7, 8, 8, 12, 9, 4, 10, 8, 11, 10, 12, 12, 13, 4, 14, 6, 15, 8, 17, 6, 18, 8, 20, 6)) + (@details.cr)",
-            "modifierType": "constant",
-            "notes": "",
-            "source": "",
-            "subtab": "misc",
-            "valueAffected": "acr"
-          },
-          {
             "_id": "8119019f-03c1-4b93-95f0-c9c2179644d7",
             "name": "Eshar",
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "SqTV5SqvvaO2k8iN",
+              "actorId": "7TcCXmCYUTYPvgqV",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "energy-resistance",
@@ -1037,6 +1023,9 @@
       }
     }
   ],
+  "ownership": {
+    "default": 0
+  },
   "prototypeToken": {
     "name": "Eshar",
     "actorLink": false,
@@ -1101,6 +1090,7 @@
     },
     "width": 3
   },
+  "sort": 0,
   "system": {
     "abilities": {
       "cha": {
@@ -1294,6 +1284,7 @@
       "frightened": false,
       "grappled": false,
       "helpless": false,
+      "invisible": false,
       "nauseated": false,
       "off-kilter": false,
       "off-target": false,
@@ -1330,11 +1321,11 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<p>Eshars are hulking, serpentine beasts from the expansive, sandy deserts of the tidally locked planet Verces. They are used for battle, transportation, and even for sport, in an elaborate zone-capturing game that can last for days.</p>\n<h2 class=\"title\">Eshar</h2>\n<p>Levels 10-20</p>\n<p>Huge animal<br><strong>Senses</strong>&nbsp;blindsight (vibration) 60 ft., low-light vision<br><strong>Good Save</strong>&nbsp;Fort;&nbsp;<strong>Poor Saves</strong>&nbsp;Ref, Will<br><strong>Defensive Abilities</strong>&nbsp;ferocity;&nbsp;<strong>Resistances</strong>&nbsp;fire 5<br><strong>Weaknesses</strong>&nbsp;vulnerable to cold<br><strong>Speed</strong>&nbsp;30 ft.; burrow 60 ft.<br><strong>Melee Attack</strong>&nbsp;tail (B)<br><strong>Space</strong>&nbsp;15 ft.&nbsp;<strong>Reach</strong>&nbsp;10 ft.<br><strong>Ability Modifiers</strong>&nbsp;Con, Dex</p>",
+        "value": "<p>Eshars are hulking, serpentine beasts from the expansive, sandy deserts of the tidally locked planet @UUID[Compendium.sfrpg.setting.f24qKgU5Wh5LLJyh]{Verces}. They are used for battle, transportation, and even for sport, in an elaborate zone-capturing game that can last for days.</p><h2 class=\"title\">Eshar</h2><p>Levels 10-20</p><p>Huge animal<br><strong>Senses</strong> blindsight (vibration) 60 ft., low-light vision<br><strong>Good Save</strong> Fort; <strong>Poor Saves</strong> Ref, Will<br><strong>Defensive Abilities</strong> ferocity; <strong>Resistances</strong> fire 5<br><strong>Weaknesses</strong> vulnerable to cold<br><strong>Speed</strong> 30 ft.; burrow 60 ft.<br><strong>Melee Attack</strong> tail (B)<br><strong>Space</strong> 15 ft. <strong>Reach</strong> 10 ft.<br><strong>Ability Modifiers</strong> Con, Dex</p>",
         "weight": ""
       },
       "class": "",
-      "cr": 1,
+      "cr": 10,
       "environment": "",
       "organization": "",
       "organizationSize": {

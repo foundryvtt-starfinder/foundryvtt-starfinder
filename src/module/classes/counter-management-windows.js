@@ -17,7 +17,7 @@ export class CounterManagementWindows extends Dialog {
         let counterClassesLabel = CONFIG.SFRPG.counterClassesLabel;
 
         const Actor = game.actors.get(actorId);
-        const htmlContent = await renderTemplate("systems/sfrpg/templates/classes/counter-management.html", {
+        const htmlContent = await renderTemplate("systems/sfrpg/templates/classes/counter-management.hbs", {
             counter: Actor.system.counterClasses.values[targetClasses].count,
             labelClasses: game.i18n.localize(counterClassesLabel[targetClasses]),
             currentPosition: Actor.system.counterClasses.values[targetClasses].position,

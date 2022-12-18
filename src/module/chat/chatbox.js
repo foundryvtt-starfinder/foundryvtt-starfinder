@@ -99,7 +99,7 @@ export default class SFRPGCustomChatMessage {
     }
 
     static async _render(roll, data, options) {
-        const templateName = "systems/sfrpg/templates/chat/chat-message-attack-roll.html";
+        const templateName = "systems/sfrpg/templates/chat/chat-message-attack-roll.hbs";
         let rollContent = await roll.render({htmlData: data.htmlData});
 
         // Insert the damage type string if possible.

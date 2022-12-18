@@ -78,7 +78,7 @@ export default class RollDialog extends Dialog {
     }
 
     get template() {
-        return "systems/sfrpg/templates/chat/roll-dialog.html";
+        return "systems/sfrpg/templates/chat/roll-dialog.hbs";
     }
 
     async _render(...args) {

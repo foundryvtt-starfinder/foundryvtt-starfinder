@@ -16,8 +16,8 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
     }
 
     get template() {
-        if (!game.user.isGM && this.actor.limited) return "systems/sfrpg/templates/actors/hazard-sheet-limited.html";
-        return "systems/sfrpg/templates/actors/hazard-sheet-full.html";
+        if (!game.user.isGM && this.actor.limited) return "systems/sfrpg/templates/actors/hazard-sheet-limited.hbs";
+        return "systems/sfrpg/templates/actors/hazard-sheet-full.hbs";
     }
 
     async getData() {
