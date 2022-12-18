@@ -52,6 +52,7 @@ class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
 
                 // 1/3 and 1/2 CR aliens have special strings used to describe their CR rather than using the float value
                 if (itemData.system.details.cr == (1 / 3)) {
+                    console.log(itemData.system.details.cr == (1 / 3));
                     itemData.system.crDisplay = "1/3";
                 }
                 else if (itemData.system.details.cr == (1 / 2)) {
@@ -85,10 +86,24 @@ class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     _sortByCR(elementA, elementB) {
-        const aVal = parseFloat($(elementA).find('input[name=cr]')
-            .val());
-        const bVal = parseFloat($(elementB).find('input[name=cr]')
-            .val());
+        let aVal = $(elementA).find('input[name=cr]')
+            .val();
+        let bVal = $(elementB).find('input[name=cr]')
+            .val();
+
+        if (aVal.includes("/")) {
+            const slashSplit = aVal.split("/");
+            aVal = Number(slashSplit[0] / slashSplit[1]);
+        } else {
+            aVal = Number(aVal);
+        }
+        if (bVal.includes("/")) {
+            const slashSplit = bVal.split("/");
+            bVal = Number(slashSplit[0] / slashSplit[1]);
+        } else {
+            bVal = Number(bVal);
+        }
+
         if (aVal < bVal) return -1;
         if (aVal > bVal) return 1;
 

@@ -130,7 +130,14 @@ export class DocumentBrowserSFRPG extends Application {
             const filterSplit = ev.target.name.split(/-/);
             const filterType = filterSplit[0];
             const filterTarget = filterSplit[1];
-            let filterValue = Number(ev.target.value);
+            let filterValue = ev.target.value;
+            if (filterValue.includes("/")) {
+                const slashSplit = filterValue.split("/");
+                filterValue = Number(slashSplit[0] / slashSplit[1]);
+            } else {
+                filterValue = Number(filterValue);
+            }
+
             if (Number.isNaN(filterValue)) {
                 filterValue = 0;
             }
@@ -148,7 +155,10 @@ export class DocumentBrowserSFRPG extends Application {
         html.on('change paste', 'input[class=valueFilter]', ev => {
             const filterSplit = ev.target.name.split(/-/);
             const filterType = filterSplit[0];
-            let filterValue = Number(ev.target.value);
+            let filterValue = ev.target.value;
+            if (!filterValue.includes("/")) {
+                filterValue = Number(filterValue);
+            }
             if (Number.isNaN(filterValue)) {
                 filterValue = 0;
             }
