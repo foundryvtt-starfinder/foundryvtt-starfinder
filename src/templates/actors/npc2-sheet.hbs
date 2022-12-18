@@ -63,7 +63,7 @@
                     <h4 class="ability-name new-box-title rollable" data-tippy-content="<strong>{{ability.label}}</strong><br>@abilities.{{id}}.mod<br><br>{{#each ability.tooltip as |tip|}}{{tip}}<br>{{/each}}">{{ability.label}}</h4>
                     <div class="ability-modifiers flexrow">
                         <span class="ability-mod"></span>
-                        <div class="ability-center" data-tippy-content="<strong>{{ability.label}}</strong><br>@abilities.{{id}}.mod<br><br>{{#each ability.tooltip as |tip|}}{{tip}}<br>{{/each}}">{{numberFormat ability.mod decimals=0 sign=true}}</div>
+                        <div class="ability-center" data-tippy-content="<strong>{{ability.label}}</strong><br>@abilities.{{id}}.mod<br><br>{{#each ability.tooltip as |tip|}}{{tip}}<br>{{/each}}">{{#if ability.mod}}{{numberFormat ability.mod decimals=0 sign=true}}{{else}}+0{{/if}}</div>
                         <input class="ability-base" data-tippy-content="<strong>{{localize "SFRPG.AbilityScoreBase"}}</strong><br>@abilities.{{id}}.base" name="system.abilities.{{id}}.base" type="text" value="{{ability.base}}" data-dtype="Number" placeholder="0"/>
                     </div>
                 </li>
