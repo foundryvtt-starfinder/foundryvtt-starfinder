@@ -64,7 +64,7 @@
                 {{else if item.system.usage.per}}
                     {{item.system.usage.value}} / {{item.system.usage.per}}
                 {{else if item.system.activation.type}}
-                    {{#unless (eq item.type "consumable") }} <!-- Don't show action buttons on consumables because it interacts weirdly with their usage -->
+                    {{#unless (or (eq item.type "consumable")(and (eq item.system.activation.type "none")(eq item.type "weapon")) ) }} <!-- Don't show action buttons on consumables because it interacts weirdly with their usage -->
                         {{#if item.system.isActive}}
                         <button type="button" class="tag featDeactivate">{{localize "SFRPG.ActorSheet.Inventory.Item.Deactivate"}}</button>
                         {{else}}
