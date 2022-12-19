@@ -1,10 +1,10 @@
 {{#if (not isNPC)}}
 <div class="inventory-filters">
     <ol class="currency flexrow">
-        <h3 class="noborder">
+        <h4 class="attribute-name box-title">
             {{localize "SFRPG.InventoryCurrency"}}
             <i class="fas fa-coins"></i>
-        </h3>
+        </h4>
         <label class="denomination" data-tippy-content="{{localize "SFRPG.ActorSheet.Inventory.ItemValue.Tooltip"}}">{{localize "SFRPG.ActorSheet.Inventory.ItemValue.Label"}}</label>
         <label class="denomination currency-value" {{createTippy title="SFRPG.ActorSheet.Inventory.ItemValue.Label" subtitle="SFRPG.ActorSheet.Inventory.ItemValue.Tooltip" tooltips=system.wealth.tooltip}}>{{currencyFormat system.wealth.total}}</label>
         {{#each system.currency as |v k|}}
