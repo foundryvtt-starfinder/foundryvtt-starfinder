@@ -13,7 +13,7 @@ export default class RollTree {
 
     /**
      * Method used to build the roll data needed for a Roll.
-     * 
+     *
      * @param {string} formula The formula for the Roll
      * @param {RollContext} contexts The data context for this roll
      * @param {onRollBuilt} callback Function called when the Roll is built.
@@ -68,11 +68,11 @@ export default class RollTree {
                         finalSectionFormula.finalRoll = finalSectionFormula.finalRoll.replace("<damageSection>", damageSectionFormula);
                         finalSectionFormula.formula = finalSectionFormula.formula.replace("<damageSection>", damageSectionFormula);
                     }
-        
+
                     if (this.options.debug) {
                         console.log([`Final roll results outcome`, formula, allRolledMods, finalSectionFormula]);
                     }
-        
+
                     if (callback) {
                         if (parts.length > 1) {
                             const partIndex = parts.indexOf(part);
@@ -120,7 +120,7 @@ export default class RollTree {
                         finalSectionFormula.finalRoll = finalSectionFormula.finalRoll.replace("<damageSection>", damageSectionFormula);
                         finalSectionFormula.formula = finalSectionFormula.formula.replace("<damageSection>", damageSectionFormula);
                     }
-        
+
                     bonus = bonus.trim();
                     if (bonus) {
                         const operators = ['+', '-', '*', '/'];
@@ -131,7 +131,7 @@ export default class RollTree {
                         finalSectionFormula.finalRoll += " " + bonus;
                         finalSectionFormula.formula += game.i18n.format("SFRPG.Rolls.Dice.Formula.AdditionalBonus", { "bonus": bonus });
                     }
-        
+
                     if (this.options.debug) {
                         console.log([`Final roll results outcome`, formula, allRolledMods, finalSectionFormula]);
                     }
@@ -183,7 +183,7 @@ export default class RollTree {
 
         this.nodes[this.formula] = this.rootNode;
         this.rootNode.populate(this.nodes, this.contexts);
-        
+
         const allRolledMods = RollTree.getAllRolledModifiers(this.nodes);
         const availableModifiers = [].concat(allRolledMods.map(x => x.referenceModifier));
         return availableModifiers;
@@ -199,15 +199,15 @@ export default class RollTree {
             return new Promise((resolve) => { resolve([firstButton, defaultRollMode, ""]); });
         }
         return RollDialog.showRollDialog(
-            this, 
-            formula, 
-            contexts, 
-            availableModifiers, 
-            this.options.mainDie, 
+            this,
+            formula,
+            contexts,
+            availableModifiers,
+            this.options.mainDie,
             {
-                buttons: this.options.buttons, 
-                defaultButton: this.options.defaultButton, 
-                title: this.options.title, 
+                buttons: this.options.buttons,
+                defaultButton: this.options.defaultButton,
+                title: this.options.title,
                 dialogOptions: this.options.dialogOptions,
                 parts: this.options.parts?.filter(x => x.isDamageSection)
             });

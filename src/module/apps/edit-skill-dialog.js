@@ -3,7 +3,7 @@
  * @type {Dialog}
  */
 export class AddEditSkillDialog extends Dialog {
-    constructor(skill, dialogData={}, options={}) {
+    constructor(skill, dialogData = {}, options = {}) {
         super(dialogData, options);
         this.options.classes = ["sfrpg", "dialog"];
 

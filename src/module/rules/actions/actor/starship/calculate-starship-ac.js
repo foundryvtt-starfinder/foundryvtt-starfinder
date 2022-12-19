@@ -65,7 +65,7 @@ export default function(engine) {
             } else {
                 target.tooltip.push(`${title}: ${value}`);
             }
-        }
+        };
 
         if (pilotingRanks > 0) {
             addScore(data.quadrants.forward.ac, "SFRPG.StarshipSheet.Modifiers.PilotSkillBonus", pilotingRanks);
@@ -99,9 +99,9 @@ export default function(engine) {
             if (data.quadrants.port.shields.value > 0) addScore(data.quadrants.port.ac, shieldItem.name, shieldItemData.armorBonus, false);
             if (data.quadrants.starboard.shields.value > 0) addScore(data.quadrants.starboard.ac, shieldItem.name, shieldItemData.armorBonus, false);
             if (data.quadrants.aft.shields.value > 0) addScore(data.quadrants.aft.ac, shieldItem.name, shieldItemData.armorBonus, false);
-            
+
         }
-        
+
         return fact;
     });
 }

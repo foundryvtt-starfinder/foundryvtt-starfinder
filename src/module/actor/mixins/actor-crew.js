@@ -10,7 +10,7 @@ export const ActorCrewMixin = (superclass) => class extends superclass {
         }
         return null;
     }
-    
+
     getCrewRoleForActor(actorId) {
         const dataSource = this;
         const acceptedActorTypes = ["starship", "vehicle"];
@@ -50,4 +50,4 @@ export const ActorCrewMixin = (superclass) => class extends superclass {
 
         return duplicate(this.system.crew[role]);
     }
-}
+};

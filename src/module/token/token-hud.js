@@ -3,7 +3,7 @@ export class SFRPGTokenHUD extends TokenHUD {
     /**
      * @override
      * Calls setCondition from the SFRPG actor
-     * @param {Event} event 
+     * @param {Event} event
      * @param {any} param1 contains overlay boolean
      * @returns {Boolean} the new enabled state of the condition
      */
@@ -50,7 +50,7 @@ export class SFRPGTokenHUD extends TokenHUD {
         return result;
     }
 
-    //#endregion Overrides
+    // #endregion Overrides
 
     /**
      * Modifies the status effects (conditions) formatting
@@ -70,8 +70,10 @@ export class SFRPGTokenHUD extends TokenHUD {
 
             for (const image of allStatusImages) {
                 const name      = $(image).attr('title');
-                const nameLabel = $('<div>').addClass('condition-name').html(name);
-                const container = $('<div>').addClass('condition').attr('title', name);
+                const nameLabel = $('<div>').addClass('condition-name')
+                    .html(name);
+                const container = $('<div>').addClass('condition')
+                    .attr('title', name);
 
                 // Insert the container and append the image and the name inside
                 container.insertAfter(image)
@@ -84,7 +86,9 @@ export class SFRPGTokenHUD extends TokenHUD {
         const label = game.i18n.localize("SFRPG.Canvas.TokenHud.RemoveAll");
         const content = game.settings.get('sfrpg', 'tokenConditionLabels') ? `${label} <i class="fas fa-times-circle" />` : `<i class="fas fa-times-circle" />`;
 
-        const button = $('<div>').addClass('remove-all').attr('title', label).html(content)
+        const button = $('<div>').addClass('remove-all')
+            .attr('title', label)
+            .html(content)
             .on("click", SFRPGTokenHUD.onRemoveAllConditions.bind(this));
 
         const gridContainer = $('.col.right .control-icon[data-action="effects"] .status-effects', html);

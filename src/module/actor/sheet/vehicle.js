@@ -26,11 +26,11 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         const data = super.getData();
 
         let lvl = parseFloat(data.system.details.level || 0);
-        let levels = { 0: "0", 0.25: "1/4", [1/3]: "1/3", 0.5: "1/2" };
+        let levels = { 0: "0", 0.25: "1/4", [1 / 3]: "1/3", 0.5: "1/2" };
         data.labels["level"] = lvl >= 1 ? String(lvl) : levels[lvl] || 1;
 
-        this._getCrewData(data)
-        this._getHangarBayData(data)
+        this._getCrewData(data);
+        this._getHangarBayData(data);
 
         // Encrich text editors
         data.enrichedDescription = await TextEditor.enrichHTML(this.object.system.details.description.value, {async: true});
@@ -45,7 +45,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
      */
     async _getCrewData(data) {
         let crewData = this.actor.system.crew;
-        
+
         const pilotActors = crewData.pilot.actorIds.map(crewId => game.actors.get(crewId));
         const complementActors = crewData.complement.actorIds.map(crewId => game.actors.get(crewId));
         const passengerActors = crewData.passenger.actorIds.map(crewId => game.actors.get(crewId));
@@ -78,7 +78,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
     /**
      * Organize and classify items for vehicle sheets.
-     * 
+     *
      * @param {Object} data Data for the sheet
      * @private
      */
@@ -112,7 +112,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             return arr;
         }, [ [], [], [], []]);
 
-        this.processItemContainment(attacks, function (itemType, itemData) {
+        this.processItemContainment(attacks, function(itemType, itemData) {
             // NOTE: We only flag `vehicleAttack` type items as having damage as weapon rolls won't work from the
             // vehicle sheet until we can assign passengers and access their dexterity modifiers.
             if (itemData.item.type === "vehicleAttack") {
@@ -121,7 +121,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             }
             inventory.inventory.items.push(itemData);
         });
-        data.inventory = inventory
+        data.inventory = inventory;
 
         const features = {
             primarySystems: { label: game.i18n.localize("SFRPG.VehicleSheet.Hangar.PrimarySystems"), items: primarySystems, hasActions: true, dataset: { type: "vehicleSystem" } },
@@ -179,13 +179,13 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
     /**
      * This method is called upon form submission after form data is validated
-     * 
+     *
      * @param {Event} event The initial triggering submission event
      * @param {Object} formData The object of validated form data with which to update the object
      * @private
      */
     _updateObject(event, formData) {
-        const levels = { "1/4": 0.25, "1/3": 1/3, "1/2": 0.5 };
+        const levels = { "1/4": 0.25, "1/3": 1 / 3, "1/2": 0.5 };
         let v = "system.details.level";
         let lvl = formData[v];
         lvl = levels[lvl] || parseFloat(lvl);
@@ -271,7 +271,6 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         return duplicate(itemData);
     }
 
-
     /**
      * Handles drop events for the Hangar Bay list
      *
@@ -300,7 +299,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         return true;
     }
 
-        /**
+    /**
      * Handles drop events for the Passenger list
      *
      * @param {Event}  event The originating drop event
@@ -366,7 +365,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         //     id: actor.id,
         //     data: actor.data
         // };
-        
+
         const dragData = actor.toDragData();
 
         if (this.actor.isToken) dragData.tokenId = actorId;
@@ -391,7 +390,8 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     async _onRemoveFromHangarBar(event) {
         event.preventDefault();
 
-        const actorId = $(event.currentTarget).parents('.crew').data('actorId');
+        const actorId = $(event.currentTarget).parents('.crew')
+            .data('actorId');
 
         if (!this.actor.system?.hangarBay.actorIds) {
             return null;
@@ -412,7 +412,8 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     async _onRemoveFromCrew(event) {
         event.preventDefault();
 
-        const actorId = $(event.currentTarget).parents('.crew').data('actorId');
+        const actorId = $(event.currentTarget).parents('.crew')
+            .data('actorId');
         this.actor.removeFromCrew(actorId);
     }
 
@@ -424,7 +425,8 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     async _onActorView(event) {
         event.preventDefault();
 
-        const actorId = $(event.currentTarget).parents('.crew').data('actorId');
+        const actorId = $(event.currentTarget).parents('.crew')
+            .data('actorId');
         let actor = game.actors.get(actorId);
         actor.sheet.render(true);
     }
@@ -437,10 +439,11 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     async _onRollPassengerPilotingSkill(event) {
         event.preventDefault();
 
-        const actorId = $(event.currentTarget).parents('.crew').data('actorId');
+        const actorId = $(event.currentTarget).parents('.crew')
+            .data('actorId');
         const role = this.actor.getCrewRoleForActor(actorId);
 
-        await this.actor.rollVehiclePilotingSkill(role,actorId);
+        await this.actor.rollVehiclePilotingSkill(role, actorId);
     }
 
     /**

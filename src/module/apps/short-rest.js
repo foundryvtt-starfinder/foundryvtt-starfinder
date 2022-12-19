@@ -3,7 +3,7 @@
  * @type {Dialog}
  */
 export class ShortRestDialog extends Dialog {
-    constructor(actor, dialogData={}, options={}) {
+    constructor(actor, dialogData = {}, options = {}) {
         super(dialogData, options);
         this.options.classes = ["sfrpg", "dialog"];
 
@@ -13,7 +13,7 @@ export class ShortRestDialog extends Dialog {
          */
         this.actor = actor;
     }
-    
+
     activateListeners(html) {
         super.activateListeners(html);
 
@@ -32,7 +32,7 @@ export class ShortRestDialog extends Dialog {
         ShortRestDialog.restoreStaminaPoints = restoreStaminaCheckbox.checked;
     }
 
-    static async shortRestDialog({actor, canRestoreStaminaPoints=true}={}) {
+    static async shortRestDialog({actor, canRestoreStaminaPoints = true} = {}) {
         ShortRestDialog.restoreStaminaPoints = false;
         const html = await renderTemplate("systems/sfrpg/templates/apps/short-rest.hbs");
         return new Promise(resolve => {
@@ -63,7 +63,7 @@ export class ShortRestDialog extends Dialog {
    * @param {ActorSFRPG} actor
    * @return {Promise}
    */
-    static async longRestDialog({actor}={}) {
+    static async longRestDialog({actor} = {}) {
         const content = game.i18n.localize("SFRPG.Rest.Long.Dialog.Description");
 
         return new Promise((resolve, reject) => {

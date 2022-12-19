@@ -1,14 +1,14 @@
 import { SFRPG } from "../../../../config.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../../modifiers/types.js";
 
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateNPC2Abilities", (fact, context) => {
         const data = fact.data;
         const modifiers = fact.modifiers;
 
         const filteredMods = modifiers.filter(mod => {
             return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.ABILITY_SCORE].includes(mod.effectType);
-        })
+        });
 
         const addModifier = (bonus, data, item, localizationKey) => {
             if (bonus.modifierType === SFRPGModifierType.FORMULA) {
@@ -38,18 +38,18 @@ export default function (engine) {
                     source: bonus.name
                 }));
             }
-            
+
             return computedBonus;
         };
 
         for (const [abl, ability] of Object.entries(data.abilities)) {
             ability.mod = ability.base;
-            
+
             ability.tooltip = [];
             ability.tooltip.push(game.i18n.format("SFRPG.AbilityModifierBase", { mod: ability.base }));
 
             const abilityMods = context.parameters.stackModifiers.process(
-                filteredMods.filter(mod => mod.valueAffected === abl), 
+                filteredMods.filter(mod => mod.valueAffected === abl),
                 context
             );
 

@@ -104,7 +104,6 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         });
     }
 
-
     /** @override */
     render(force, context = {}) {
         /** Clear out deleted item sheets. */
@@ -539,7 +538,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             flavor: null,
             speaker: ChatMessage.getSpeaker({ actor: this }),
             chatMessage: options.chatMessage,
-            onClose: options.onClose,									
+            onClose: options.onClose,
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
@@ -568,7 +567,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             flavor: null,
             speaker: ChatMessage.getSpeaker({ actor: this }),
             chatMessage: options.chatMessage,
-            onClose: options.onClose,							
+            onClose: options.onClose,
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
@@ -595,7 +594,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             }),
             speaker: ChatMessage.getSpeaker({ actor: this }),
             chatMessage: options.chatMessage,
-            onClose: options.onClose,									
+            onClose: options.onClose,
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
@@ -654,7 +653,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             flavor: null,
             speaker: ChatMessage.getSpeaker({ actor: this }),
             chatMessage: options.chatMessage,
-            onClose: options.onClose,									
+            onClose: options.onClose,
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
@@ -1125,7 +1124,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
 }
 
-Hooks.on("afterClosureProcessed", async(closureName, fact) => {
+Hooks.on("afterClosureProcessed", async (closureName, fact) => {
     if (closureName === "process-actors") {
         await fact.actor.processItemData();
     }

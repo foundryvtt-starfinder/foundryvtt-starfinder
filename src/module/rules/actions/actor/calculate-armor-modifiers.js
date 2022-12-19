@@ -1,12 +1,12 @@
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
 
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateArmorModifiers", (fact, context) => {
         const data = fact.data;
         const modifiers = fact.modifiers;
         const eac = data.attributes.eac;
         const kac = data.attributes.kac;
-        
+
         eac.tooltip = eac.tooltip ?? [];
         kac.tooltip = kac.tooltip ?? [];
 
@@ -34,14 +34,14 @@ export default function (engine) {
                     source: bonus.name
                 }));
             }
-            
+
             return computedBonus;
         };
 
         let armorMods = modifiers.filter(mod => {
             return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.AC].includes(mod.effectType);
         });
-        
+
         let eacMods = context.parameters.stackModifiers.process(armorMods.filter(mod => ["eac", "both"].includes(mod.valueAffected)), context);
         let kacMods = context.parameters.stackModifiers.process(armorMods.filter(mod => ["kac", "both"].includes(mod.valueAffected)), context);
 

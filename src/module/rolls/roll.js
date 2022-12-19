@@ -2,7 +2,7 @@
 /**
  * A data structure for outputing any metadata that is rendered at the bottom
  * of a Roll chat card.
- * 
+ *
  * @typedef {Object} Tag
  * @property {string} tag Text that will be addeded as a class on an HTMLElement
  * @property {string} text The text rendered on the card.
@@ -10,7 +10,7 @@
 
 /**
  * A structure for passing data into an HTML for for use in data- attributes.
- * 
+ *
  * @typedef {Object} HtmlData
  * @property {string} name The name of the data property sans data-
  * @property {string} value The value of the data property.
@@ -18,11 +18,11 @@
 
 /**
  * A custom implementation for the foundry {@link Roll} class.
- * 
+ *
  * @inheritdoc
  */
 export default class SFRPGRoll extends Roll {
-    constructor(formula, data={}, options={}) {
+    constructor(formula, data = {}, options = {}) {
         const rollData = {
             formula: formula,
             data: data,
@@ -46,7 +46,7 @@ export default class SFRPGRoll extends Roll {
     static TOOLTIP_TEMPLATE = "systems/sfrpg/templates/dice/tooltip.hbs";
 
     /** @override */
-    async render(chatOptions={}) {
+    async render(chatOptions = {}) {
         chatOptions = foundry.utils.mergeObject({
             user: game.user.id,
             flavor: null,
@@ -58,7 +58,7 @@ export default class SFRPGRoll extends Roll {
         if (chatOptions?.breakdown) this.breakdown = chatOptions.breakdown;
         if (chatOptions?.tags) this.tags = chatOptions.tags;
         if (chatOptions?.htmlData) this.htmlData = chatOptions.htmlData;
-    
+
         // Execute the roll, if needed
         if (!this._evaluated) this.evaluate();
 
@@ -74,7 +74,7 @@ export default class SFRPGRoll extends Roll {
             htmlData: this.htmlData,
             rollNotes: this.htmlData?.find(x => x.name === "rollNotes")?.value
         };
-    
+
         // Render the roll display template
         return renderTemplate(chatOptions.template, chatData);
     }

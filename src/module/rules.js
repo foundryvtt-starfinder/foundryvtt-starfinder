@@ -96,7 +96,7 @@ import calculateVehiclePassengers   from './rules/actions/actor/vehicle/calculat
 // Item rules
 import calculateSaveDC from './rules/actions/item/calculate-save-dc.js';
 
-export default function (engine) {
+export default function(engine) {
     console.log("Starfinder | [SETUP] Registering rules");
 
     // Actions

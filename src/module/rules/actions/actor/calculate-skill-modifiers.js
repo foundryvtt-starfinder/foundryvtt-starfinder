@@ -1,6 +1,6 @@
 import { SFRPGModifierType, SFRPGModifierTypes, SFRPGEffectType } from "../../../modifiers/types.js";
 
-export default function (engine) {
+export default function(engine) {
     engine.closures.add('calculateSkillModifiers', (fact, context) => {
         const skills = fact.data.skills;
         const flags = fact.flags;
@@ -30,7 +30,7 @@ export default function (engine) {
                     source: bonus.name
                 }));
             }
-            
+
             return computedBonus;
         };
 
@@ -45,10 +45,9 @@ export default function (engine) {
                 if (mod.effectType === SFRPGEffectType.ALL_SKILLS) return true;
                 else if (mod.effectType === SFRPGEffectType.SKILL && skl === mod.valueAffected) return true;
                 else if (mod.effectType === SFRPGEffectType.ABILITY_SKILLS && skill.ability === mod.valueAffected) return true;
-                
+
                 return false;
             }), context);
-
 
             let accumulator = Object.entries(mods).reduce((sum, mod) => {
                 if (mod[1] === null || mod[1].length < 1) return sum;
@@ -63,7 +62,7 @@ export default function (engine) {
 
                 return sum;
             }, 0);
-            
+
             skill.mod += accumulator;
         }
 

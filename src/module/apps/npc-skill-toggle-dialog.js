@@ -1,5 +1,5 @@
 /**
- * A specialized Dialog for toggling which skills are 
+ * A specialized Dialog for toggling which skills are
  * visible on the NPC sheet.
  * @type {Dialog}
  * @param {Object} data The data used by the dialog
@@ -20,9 +20,9 @@ export class NpcSkillToggleDialog extends Dialog {
 
     /**
      * Factory method used to create the dialog.
-     * 
+     *
      * @param {Object} skills The list of skills for an NPC Actor
-     * @returns {Promis<FormData>} Returns a Promise which resolves to 
+     * @returns {Promis<FormData>} Returns a Promise which resolves to
      * the dialog FormData once the workflow has been completed.
      */
     static async create(skills = {}) {

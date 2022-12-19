@@ -3,7 +3,7 @@ import { SFRPG } from "../../config.js";
 
 /**
  * An Actor sheet for NPC type characters in the SFRPG system.
- * 
+ *
  * Extends the base ActorSheetSFRPG class.
  * @type {ActorSheetSFRPG}
  */
@@ -39,7 +39,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
     /** @override */
     activateListeners(html) {
         super.activateListeners(html);
-        
+
         html.find('.reload').click(this._onReloadWeapon.bind(this));
         html.find('#add-skills').click(this._toggleSkills.bind(this));
         html.find('#duplicate-new-style-npc').click(this._duplicateAsNewStyleNPC.bind(this));
@@ -59,7 +59,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         data.enrichedBiography = await TextEditor.enrichHTML(this.object.system.details.biography.value, {async: true});
 
         let cr = parseFloat(data.system.details.cr || 0);
-        let crs = { 0: "0", 0.125: "1/8", [1/6]: "1/6", 0.25: "1/4", [1/3]: "1/3", 0.5: "1/2" };
+        let crs = { 0: "0", 0.125: "1/8", [1 / 6]: "1/6", 0.25: "1/4", [1 / 3]: "1/3", 0.5: "1/2" };
         data.labels["cr"] = cr >= 1 ? String(cr) : crs[cr] || 1;
 
         return data;
@@ -67,12 +67,12 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
 
     /**
      * Toggle the visibility of skills on the NPC sheet.
-     * 
+     *
      * @param {Event} event The originating click event
      */
     _toggleSkills(event) {
         event.preventDefault();
-        
+
         this.actor.toggleNpcSkills();
     }
 
@@ -103,7 +103,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
                 hasDamage: item.system.damage?.parts && item.system.damage.parts.length > 0 && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
                 hasUses: item.canBeUsed(),
                 isCharged: !item.hasUses || item.getRemainingUses() <= 0 || !item.isOnCooldown,
-                hasCapacity: item.hasCapacity(),
+                hasCapacity: item.hasCapacity()
             };
 
             if (item.config.hasCapacity) {
@@ -183,7 +183,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
 
         features.resources.items = actorResources;
 
-        this.processItemContainment(itemsToProcess, function (itemType, itemData) {
+        this.processItemContainment(itemsToProcess, function(itemType, itemData) {
             inventory.inventory.items.push(itemData);
         });
 
@@ -200,7 +200,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
                 if (modifier.subtab === "permanent") arr[0].push(modifier);
                 else if (modifier.subtab === "conditions") arr[3].push(modifier);
                 else arr[1].push(modifier); // Any unspecific categories go into temporary.
-    
+
                 return arr;
             }, [[], [], [], [], []]);
 
@@ -217,13 +217,13 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
 
     /**
      * This method is called upon form submission after form data is validated
-     * 
+     *
      * @param {Event} event The initial triggering submission event
      * @param {Object} formData The object of validated form data with which to update the object
      * @private
      */
     _updateObject(event, formData) {
-        const crs = { "1/8": 0.125, "1/6": 1/6, "1/4": 0.25, "1/3": 1/3, "1/2": 0.5 };
+        const crs = { "1/8": 0.125, "1/6": 1 / 6, "1/4": 0.25, "1/3": 1 / 3, "1/2": 0.5 };
         let crv = "system.details.cr";
         let cr = formData[crv];
         cr = crs[cr] || parseFloat(cr);
@@ -233,7 +233,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         return super._updateObject(event, formData);
     }
 
-    static async _selectActorData({yes, no, cancel, render, defaultYes=true, rejectClose=false, options={width: 600}}={}) {
+    static async _selectActorData({yes, no, cancel, render, defaultYes = true, rejectClose = false, options = {width: 600}} = {}) {
         return new Promise((resolve, reject) => {
             const dialog = new Dialog({
                 title: game.i18n.localize("SFRPG.NPCSheet.Interface.DuplicateNewStyle.DialogTitle"),
@@ -268,7 +268,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
                 close: () => {
                     if ( rejectClose ) reject("The confirmation Dialog was closed without a choice being made");
                     else resolve(null);
-                },
+                }
             }, options);
             dialog.render(true);
         });
@@ -293,7 +293,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
             if (useOriginalActor === null) {
                 return;
             }
-            
+
             if (useOriginalActor === true) {
                 const originalActor = game.actors.get(this.token.actor.id);
                 if (originalActor) {

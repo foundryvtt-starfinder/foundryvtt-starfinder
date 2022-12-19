@@ -1,7 +1,7 @@
-import { DiceSFRPG } from "../../../dice.js"
+import { DiceSFRPG } from "../../../dice.js";
 import RollContext from "../../../rolls/rollcontext.js";
 
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateSaveDC", (fact, context) => {
         const item = fact.item;
         const itemData = item;
@@ -9,7 +9,7 @@ export default function (engine) {
 
         const actor = fact.owner.actor;
         const actorData = fact.owner.actorData;
-        const classes = actor.items.filter(item => item.type === "class")
+        const classes = actor.items.filter(item => item.type === "class");
 
         if (data.actionType) {
 
@@ -20,7 +20,7 @@ export default function (engine) {
                 if (!dcFormula) {
                     const ownerKeyAbilityId = actorData?.attributes.keyability  || classes[0]?.system.kas;
                     const itemKeyAbilityId = data.ability;
-                    const spellbookSpellAbility = actorData?.attributes.spellcasting
+                    const spellbookSpellAbility = actorData?.attributes.spellcasting;
                     const classSpellAbility = classes[0]?.system.spellAbility;
 
                     const abilityKey = itemKeyAbilityId || spellbookSpellAbility || classSpellAbility || ownerKeyAbilityId;
@@ -75,7 +75,7 @@ export default function (engine) {
 
                 if (!computedSave) {
                     item.labels.save = 10;
-                    item.labels.saveFormula = 10;    
+                    item.labels.saveFormula = 10;
                 }
             }
         }

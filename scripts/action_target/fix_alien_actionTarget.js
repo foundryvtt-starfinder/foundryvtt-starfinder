@@ -15,18 +15,18 @@ try {
                 encoding: 'utf8',
                 flag: 'r+'
             });
-            
+
             const alien = JSON.parse(json);
             const alienWeapons = (alien.items).filter(i => i.type === "weapon");
-            
+
             for (let weapons of alienWeapons) {
-                
+
                 const oldActionTarget = weapons.data.actionTarget;
-                
+
                 const hasForceProperty = weapons.data.properties?.force || false;
                 const isGrenade = weapons.data.weaponType === "grenade";
                 let hasKineticDamage = false;
-                
+
                 for (const damagePart of weapons.data.damage.parts) {
                     const isKineticDamage = (damagePart.types?.bludgeoning || damagePart.types?.piercing || damagePart.types?.slashing);
                     if (isKineticDamage) {
@@ -34,7 +34,7 @@ try {
                         break;
                     }
                 }
-                
+
                 if (isGrenade) {
                     weapons.data.actionTarget = "";
                 } else if (hasKineticDamage && !hasForceProperty) {
@@ -47,16 +47,16 @@ try {
                     const output = JSON.stringify(alien, null, 2);
 
                     fs.writeFileSync(`${dataPath}/${file}`, output);
-                    
+
                     count += 1;
                 }
             }
-        alienCount += 1;
+            alienCount += 1;
         }
-        
+
         console.log(`Found, and migrated, ${count} ${itemType} weapons in ${alienCount} aliens.`);
     });
-    
+
 } catch (err) {
     console.log(err);
 }
