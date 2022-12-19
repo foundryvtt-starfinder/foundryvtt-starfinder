@@ -1,11 +1,11 @@
 /**
  * Define a set of template paths to pre-load
- * 
+ *
  * Pre-loaded templates are compiled and cached for fast access when rendering
- * 
+ *
  * @returns {Promise}
  */
-export const preloadHandlebarsTemplates = async function () {
+export const preloadHandlebarsTemplates = async function() {
     const templatePaths = [
         // Actor Sheet Partials
         "systems/sfrpg/templates/actors/parts/actor-biography.hbs",

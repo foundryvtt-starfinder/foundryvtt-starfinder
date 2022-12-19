@@ -1,6 +1,6 @@
 import { ActorSFRPG } from "./actor/actor.js";
 
-export const addChatMessageContextOptions = function (html, options) {
+export const addChatMessageContextOptions = function(html, options) {
     const canApply = li => canvas.tokens?.controlled?.length && li.find(".dice-roll").length;
     const noToken = li => !(canvas.tokens?.controlled?.length) && li.find(".dice-roll").length;
     options.push(
@@ -43,4 +43,4 @@ export const addChatMessageContextOptions = function (html, options) {
     );
 
     return options;
-}
+};

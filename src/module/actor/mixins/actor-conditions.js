@@ -1,4 +1,4 @@
-import { SFRPG } from "../../config.js"
+import { SFRPG } from "../../config.js";
 
 export const ActorConditionsMixin = (superclass) => class extends superclass {
     /**
@@ -82,7 +82,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
 
         // Update condition item
         const conditionItem = this.getCondition(conditionName);
-        
+
         if (enabled) {
             if (!conditionItem) {
                 const compendium = game.packs.find(element => element.title.includes("Conditions"));
@@ -102,7 +102,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
                                 });
                             }
                         });
-                        
+
                         return promise;
                     }
                 }
@@ -153,11 +153,11 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
                 break;
             }
         }
-        
+
         if (shouldBeFlatfooted !== this.hasCondition(flatFooted)) {
             return this.setCondition(flatFooted, shouldBeFlatfooted);
         }
 
         return null;
     }
-}
+};

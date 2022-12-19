@@ -1101,7 +1101,6 @@ export class ActorSheetSFRPG extends ActorSheet {
             return;
         }
 
-
         let itemData = null;
         if (parsedDragData.type !== 'ItemCollection') {
             itemData = await Item.fromDropData(parsedDragData);
@@ -1250,7 +1249,6 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         console.log("Unknown item source: " + JSON.stringify(parsedDragData));
     }
-
 
     processItemContainment(items, pushItemFn) {
         const preprocessedItems = [];

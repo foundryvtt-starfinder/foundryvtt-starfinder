@@ -2,7 +2,7 @@
  * A helper Dialog subclass for entering values.
  * Opens an input dialog that allows the user to enter 1 or more fields. Supports entry validation.
  * Call using InputDialog.show()
- * 
+ *
  * Usage example:
  * InputDialog.show("Enter a value", "Please enter values", {
             cookies: {
@@ -25,13 +25,13 @@
  * @type {Dialog}
  */
 export class InputDialog extends Dialog {
-    constructor(inputData, dialogData={}, options={}) {
+    constructor(inputData, dialogData = {}, options = {}) {
         super(dialogData, options);
         this.options.classes = ["sfrpg", "dialog"];
 
         this.inputData = inputData;
     }
-    
+
     activateListeners(html) {
         super.activateListeners(html);
 
@@ -53,7 +53,7 @@ export class InputDialog extends Dialog {
         const inputValue = InputDialog.values[key];
         inputValue.value = inputElement.value;
         if (inputValue.validator) {
-            let isValid = inputValue.validator(inputValue.value)
+            let isValid = inputValue.validator(inputValue.value);
             if (!isValid) {
                 let message = game.i18n.format("SFRPG.Dialogs.InputDialog.SingleFieldInvalid", { fieldName: inputValue.name });
                 ui.notifications.error(message);

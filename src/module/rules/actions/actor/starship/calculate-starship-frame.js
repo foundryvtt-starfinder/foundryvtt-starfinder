@@ -1,11 +1,11 @@
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes} from "../../../../modifiers/types.js";
 
-export default function (engine) {
+export default function(engine) {
     engine.closures.add( "calculateStarshipFrame", (fact, context) => {
         const data = fact.data;
         const modifiers = fact.modifiers;
         const frames = fact.frames;
-        
+
         const maneuverabilityMap = {
             "clumsy" : { pilotingBonus: -2, turn: 4 },
             "poor"   : { pilotingBonus: -1, turn: 3 },
@@ -270,7 +270,7 @@ export default function (engine) {
             data.attributes.bp.value += bpCost;
             data.attributes.bp.tooltip.push(`${component.name}: ${bpCost}`);
         }
-        
+
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] } );
 }

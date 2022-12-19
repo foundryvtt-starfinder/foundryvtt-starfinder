@@ -13,7 +13,7 @@ export default class RollNode {
         this.variableTooltips = null;
         this.options = options;
     }
-        
+
     populate(nodes, contexts) {
         if (this.isVariable) {
             const [context, remainingVariable] = RollNode.getContextForVariable(this.formula, contexts);
@@ -72,12 +72,12 @@ export default class RollNode {
         }
         return this.nodeContext;
     }
-            
+
     resolve(depth = 0) {
         if (this.resolvedValue) {
             return this.resolvedValue;
         } else {
-            //console.log(['Resolving', depth, this]);
+            // console.log(['Resolving', depth, this]);
             this.resolvedValue = {
                 finalRoll: "",
                 formula: ""
@@ -134,14 +134,14 @@ export default class RollNode {
                     const regexp = new RegExp(fullVariable, "gi");
                     const variable = fullVariable.substring(1);
                     const existingNode = this.childNodes[variable];
-                    //console.log(["testing var", depth, this, fullVariable, variable, existingNode]);
+                    // console.log(["testing var", depth, this, fullVariable, variable, existingNode]);
                     if (existingNode) {
                         const childResolution = existingNode.resolve(depth + 1);
                         valueString = valueString.replace(regexp, childResolution.finalRoll);
                         formulaString = formulaString.replace(regexp, childResolution.formula);
-                        //console.log(['Result', depth, childResolution, valueString, formulaString]);
+                        // console.log(['Result', depth, childResolution, valueString, formulaString]);
                     } else {
-                        //console.log(['Result', depth, "0"]);
+                        // console.log(['Result', depth, "0"]);
                         valueString = valueString.replace(regexp, "0");
                         formulaString = formulaString.replace(regexp, "0");
                     }
@@ -171,11 +171,11 @@ export default class RollNode {
                 this.resolvedValue.finalRoll = valueString;
                 this.resolvedValue.formula = formulaString;
             }
-            //console.log(["Resolved", depth, this, this.resolvedValue]);
+            // console.log(["Resolved", depth, this, this.resolvedValue]);
             return this.resolvedValue;
         }
     }
-            
+
     static getContextForVariable(variable, contexts) {
         if (variable[0] === '@') {
             variable = variable.substring(1);
@@ -184,15 +184,15 @@ export default class RollNode {
         const firstToken = variable.split('.')[0];
 
         if (contexts.allContexts[firstToken]) {
-            //console.log(["getContextForVariable", variable, contexts, contexts.allContexts[firstToken]]);
+            // console.log(["getContextForVariable", variable, contexts, contexts.allContexts[firstToken]]);
             return [contexts.allContexts[firstToken], variable.substring(firstToken.length + 1)];
         }
 
         const context = (contexts.mainContext ? contexts.allContexts[contexts.mainContext] : null);
-        //console.log(["getContextForVariable", variable, contexts, context]);
+        // console.log(["getContextForVariable", variable, contexts, context]);
         return [context, variable];
     }
-        
+
     static getRolledModifiers(variable, context) {
         let variableString = variable + ".rolledMods";
         let variableRolledMods = RollNode._readValue(context.data, variableString);
@@ -200,10 +200,10 @@ export default class RollNode {
             variableString = variable.substring(0, variable.lastIndexOf('.')) + ".rolledMods";
             variableRolledMods = RollNode._readValue(context.data, variableString);
         }
-        //console.log(["getRolledModifiers", variable, context, variableString, variableRolledMods]);
-        return variableRolledMods || []
+        // console.log(["getRolledModifiers", variable, context, variableString, variableRolledMods]);
+        return variableRolledMods || [];
     }
-        
+
     static getTooltips(variable, context) {
         let variableString = variable + ".tooltip";
         let variableRolledMods = RollNode._readValue(context.data, variableString);
@@ -211,12 +211,12 @@ export default class RollNode {
             variableString = variable.substring(0, variable.lastIndexOf('.')) + ".tooltip";
             variableRolledMods = RollNode._readValue(context.data, variableString);
         }
-        //console.log(["getRolledModifiers", variable, context, variableString, variableRolledMods]);
-        return variableRolledMods || []
+        // console.log(["getRolledModifiers", variable, context, variableString, variableRolledMods]);
+        return variableRolledMods || [];
     }
 
     static _readValue(object, key) {
-        //console.log(["_readValue", key, object]);
+        // console.log(["_readValue", key, object]);
         if (!object || !key) return null;
 
         const tokens = key.split('.');

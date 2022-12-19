@@ -112,7 +112,7 @@ export default class RollDialog extends Dialog {
         if (this.parts?.length > 0) {
             data.hasDamageTypes = true;
 
-            for(const part of this.parts) {
+            for (const part of this.parts) {
                 const partIndex = this.parts.indexOf(part);
 
                 // If there is no name, create the placeholder name
@@ -127,11 +127,12 @@ export default class RollDialog extends Dialog {
                 // Create type string out of localized parts
                 let typeString = "";
                 if (part.types && !foundry.utils.isEmpty(part.types)) {
-                    typeString = `${(Object.entries(part.types).filter(type => type[1]).map(type => SFRPG.damageTypes[type[0]]).join(` & `))}`;
+                    typeString = `${(Object.entries(part.types).filter(type => type[1])
+                        .map(type => SFRPG.damageTypes[type[0]])
+                        .join(` & `))}`;
                 }
                 part.type = typeString;
             }
-
 
             data.formula = this.formula;
             if (this.parts?.length === 1) {
@@ -236,7 +237,6 @@ export default class RollDialog extends Dialog {
 
         selectedGroup.forEach(i => i.enabled = false);
         selectedGroup[selectorId].enabled = event.currentTarget.checked;
-
 
         // this.render(null, false);
     }

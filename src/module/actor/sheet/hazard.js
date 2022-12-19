@@ -44,7 +44,7 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
         await super._render(...args);
 
         const textAreas = this._element.find('textarea');
-        for (let i = 0; i<textAreas.length; i++) {
+        for (let i = 0; i < textAreas.length; i++) {
             const textArea = textAreas[i];
             textArea.style.height = textArea.scrollHeight + "px";
         }
@@ -53,7 +53,7 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
     /**
      * Organize and classify items for hazard sheets.
      * Hazards don't need items, but this function is required because base.js calls it.
-     * 
+     *
      * @param {Object} data Data for the sheet
      */
     _prepareItems(data) {
@@ -93,7 +93,7 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
 
         if (this.actor.system.attributes.damage.value) {
             const rollContext = RollContext.createActorRollContext(this.actor);
-    
+
             const name = game.i18n.format("SFRPG.HazardSheet.Rolls.Damage", {name: this.actor.name});
             return DiceSFRPG.damageRoll({
                 event: event,

@@ -9,7 +9,7 @@ export default class CounterManagement {
                 if (!currentActor) {
                     continue;
                 }
-                
+
                 const displayedResources = currentActor.getResourcesForCombatTracker();
                 if (displayedResources.length === 0) {
                     continue;
@@ -36,42 +36,42 @@ export default class CounterManagement {
                     if (displayedResource.system.combatTracker.visualization) {
                         for (const visualizationEntry of displayedResource.system.combatTracker.visualization) {
                             switch (visualizationEntry.mode) {
-                                case 'eq':
-                                    if (resourceValue === visualizationEntry.value) {
-                                        title = visualizationEntry.title || title;
-                                        image = visualizationEntry.image || image;
-                                    }
-                                    break;
-                                case 'neq':
-                                    if (resourceValue !== visualizationEntry.value) {
-                                        title = visualizationEntry.title || title;
-                                        image = visualizationEntry.image || image;
-                                    }
-                                    break;
-                                case 'gt':
-                                    if (resourceValue > visualizationEntry.value) {
-                                        title = visualizationEntry.title || title;
-                                        image = visualizationEntry.image || image;
-                                    }
-                                    break;
-                                case 'gte':
-                                    if (resourceValue >= visualizationEntry.value) {
-                                        title = visualizationEntry.title || title;
-                                        image = visualizationEntry.image || image;
-                                    }
-                                    break;
-                                case 'lt':
-                                    if (resourceValue < visualizationEntry.value) {
-                                        title = visualizationEntry.title || title;
-                                        image = visualizationEntry.image || image;
-                                    }
-                                    break;
-                                case 'lte':
-                                    if (resourceValue <= visualizationEntry.value) {
-                                        title = visualizationEntry.title || title;
-                                        image = visualizationEntry.image || image;
-                                    }
-                                    break;
+                            case 'eq':
+                                if (resourceValue === visualizationEntry.value) {
+                                    title = visualizationEntry.title || title;
+                                    image = visualizationEntry.image || image;
+                                }
+                                break;
+                            case 'neq':
+                                if (resourceValue !== visualizationEntry.value) {
+                                    title = visualizationEntry.title || title;
+                                    image = visualizationEntry.image || image;
+                                }
+                                break;
+                            case 'gt':
+                                if (resourceValue > visualizationEntry.value) {
+                                    title = visualizationEntry.title || title;
+                                    image = visualizationEntry.image || image;
+                                }
+                                break;
+                            case 'gte':
+                                if (resourceValue >= visualizationEntry.value) {
+                                    title = visualizationEntry.title || title;
+                                    image = visualizationEntry.image || image;
+                                }
+                                break;
+                            case 'lt':
+                                if (resourceValue < visualizationEntry.value) {
+                                    title = visualizationEntry.title || title;
+                                    image = visualizationEntry.image || image;
+                                }
+                                break;
+                            case 'lte':
+                                if (resourceValue <= visualizationEntry.value) {
+                                    title = visualizationEntry.title || title;
+                                    image = visualizationEntry.image || image;
+                                }
+                                break;
                             }
                         }
                     }
@@ -95,9 +95,12 @@ export default class CounterManagement {
                 $combatantHtml.find('.token-image').before('<div id="foundry-elements" class="flexrow"></div>');
                 const $div = $combatantHtml.find('#foundry-elements');
 
-                $combatantHtml.find('.token-image').detach().appendTo($div);
-                $combatantHtml.find('.token-name').detach().appendTo($div);
-                $combatantHtml.find('.token-initiative').detach().appendTo($div);
+                $combatantHtml.find('.token-image').detach()
+                    .appendTo($div);
+                $combatantHtml.find('.token-name').detach()
+                    .appendTo($div);
+                $combatantHtml.find('.token-initiative').detach()
+                    .appendTo($div);
 
                 $div.after('<div id="counter-tokens" class=""></div>');
                 const $counterTokens = $combatantHtml.find('#counter-tokens');

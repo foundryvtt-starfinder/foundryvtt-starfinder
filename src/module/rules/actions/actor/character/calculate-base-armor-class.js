@@ -1,4 +1,4 @@
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateBaseArmorClass", (fact, context) => {
         const data = fact.data;
         const armors = fact.armors?.length > 0 ? fact.armors : null;
@@ -21,8 +21,8 @@ export default function (engine) {
             let maxArmorDex = worstDexArmorData?.armor.dex ?? Number.MAX_SAFE_INTEGER;
 
             const maxDex = Math.min(data.abilities.dex.mod, maxArmorDex, maxShieldDex);
-            const maxDexTooltip = game.i18n.format("SFRPG.ACTooltipMaxDex", { 
-                maxDex: maxDex.signedString(), 
+            const maxDexTooltip = game.i18n.format("SFRPG.ACTooltipMaxDex", {
+                maxDex: maxDex.signedString(),
                 armorMax: worstDexArmorData?.armor.dex?.signedString() ?? game.i18n.localize("SFRPG.Items.Unlimited"),
                 shieldMax: shieldMinDex?.system.dex?.signedString() ?? game.i18n.localize("SFRPG.Items.Unlimited")
             });
@@ -66,7 +66,7 @@ export default function (engine) {
 
             if (bestEACArmor) {
                 const armorData = bestEACArmor.system;
-                
+
                 armorEac.value = armorData?.armor?.eac || 0;
 
                 const armorType = armorData?.armor?.type || "lgt"; // Assume light if no type selected.
@@ -97,7 +97,7 @@ export default function (engine) {
 
             let shieldBonus       = 0;
             let totalShieldBonus  = 0;
-            
+
             if (shields) {
                 shields.forEach(shield => {
                     const shieldData = shield.system;
@@ -124,7 +124,7 @@ export default function (engine) {
             // Max Dex
             eac.maxDex = maxDex;
             kac.maxDex = maxDex;
-            
+
             if (armorEac.armor) eac.tooltip.push(game.i18n.format("SFRPG.ACTooltipArmorACMod", { armor: armorEac.value.signedString(), name: armorEac.name }));
             if (shields) shields.forEach(shield => eac.tooltip.push(game.i18n.format("SFRPG.ACTooltipShieldACMod", { shield: (shield.system.bonus.wielded || 0).signedString(), name: shield.name })));
             eac.tooltip.push(maxDexTooltip);

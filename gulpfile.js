@@ -1350,7 +1350,6 @@ async function linkUserData() {
     }
 }
 
-
 /** ******************/
 /*	COPY USER DATA	*/
 /** ******************/

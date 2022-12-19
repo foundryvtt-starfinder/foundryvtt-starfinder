@@ -2,7 +2,7 @@
  * A helper Dialog subclass for selecting values.
  * Opens an choice dialog that allows the user to select 1 or more fields.
  * Call using ChoiceDialog.show()
- * 
+ *
  * Usage example:
  * ChoiceDialog.show("Select an option", "Please select the option(s) you would like to use.", {
             option1: {
@@ -24,13 +24,13 @@
  * @type {Dialog}
  */
 export class ChoiceDialog extends Dialog {
-    constructor(inputData, dialogData={}, options={}) {
+    constructor(inputData, dialogData = {}, options = {}) {
         super(dialogData, options);
         this.options.classes = ["sfrpg", "dialog"];
 
         this.inputData = inputData;
     }
-    
+
     activateListeners(html) {
         super.activateListeners(html);
 

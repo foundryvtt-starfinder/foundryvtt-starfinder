@@ -2,14 +2,14 @@ export default function setupVision() {
     setupVisionModes();
     setDefaultIlluminationThreshold();
     globalIlluminationThresholdTooltip();
-    setupConditions()
+    setupConditions();
 }
 
 function setupVisionModes() {
-    //Set global illumination luminosity to dim light, so LLV will see it as bright
+    // Set global illumination luminosity to dim light, so LLV will see it as bright
     CONFIG.Canvas.globalLightConfig.luminosity = 0.5;
 
-    //Override core darkvision
+    // Override core darkvision
     CONFIG.Canvas.visionModes.darkvision = new VisionMode({
         id: "darkvision",
         label: "SFRPG.SensesTypes.SensesDark",
@@ -111,8 +111,8 @@ function globalIlluminationThresholdTooltip() {
     Hooks.on("renderSceneConfig", (config, html) => {
         const darknessSlider = html[0].querySelector("input[name='globalLightThreshold']").nextElementSibling;
 
-        const tooltip = 
-        `<i data-tooltip="${ game.i18n.localize("SFRPG.SensesTypes.GlobalIlluminationThresholdMessage") }"
+        const tooltip
+        = `<i data-tooltip="${ game.i18n.localize("SFRPG.SensesTypes.GlobalIlluminationThresholdMessage") }"
          class="fas fa-lightbulb" 
          style="flex: 0; padding-left: 2px">`;
         darknessSlider.insertAdjacentHTML("afterend", tooltip);

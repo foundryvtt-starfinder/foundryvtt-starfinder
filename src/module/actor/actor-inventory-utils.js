@@ -14,7 +14,7 @@ export function initializeRemoteInventory() {
 /**
  * Adds the specified quantity of a given item to an actor. Returns the (possibly newly created) item on the target actor.
  * Will not add child items, those will have to be added manually at a later iteration.
- * 
+ *
  * @param {ActorItemHelper} targetActor Actor to add the item to.
  * @param {Item} item Item to add.
  * @param {Number} quantity Quantity of the item to add.
@@ -43,7 +43,7 @@ export async function addItemToActorAsync(targetActor, itemToAdd, quantity, targ
             desiredParent = targetActor.findItem(x => x.system.container?.contents && x.system.container.contents.find(y => y.id === targetItem._id));
         }
     }
-    
+
     let addedItem = null;
     if (targetActor.isToken) {
         const created = await Entity.prototype.createEmbeddedDocuments.call(targetActor.actor, "Item", [newItemData], {temporary: true});
@@ -66,7 +66,7 @@ export async function addItemToActorAsync(targetActor, itemToAdd, quantity, targ
 
 /**
  * Removes the specified quantity of a given item from an actor.
- * 
+ *
  * @param {ActorItemHelper} sourceActor Actor that owns the item.
  * @param {Item} item Item to remove.
  * @param {Number} quantity Number of items to remove, if quantity is greater than or equal to the item quantity, the item will be removed from the actor.
@@ -88,7 +88,7 @@ export async function removeItemFromActorAsync(sourceActor, itemToRemove, quanti
 
 /**
  * Moves an item from one actor to another, adjusting its container settings appropriately.
- * 
+ *
  * @param {ActorItemHelper} sourceActor The source actor.
  * @param {Item} itemToMove Item to be moved.
  * @param {ActorItemHelper} targetActor The target actor.
@@ -136,7 +136,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
             let newItemData = duplicate(itemToMove);
             delete newItemData.id;
             newItemData.system.quantity = quantity;
-            
+
             itemToMove = await targetActor.createItem(newItemData);
             itemToMove = targetActor.getItem(itemToMove[0].id);
         }
@@ -216,14 +216,14 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
 
             const duplicatedData = duplicate(itemToCreate.item);
             duplicatedData.system.equipped = false;
-            
+
             items.push({item: duplicatedData, children: contents, parent: itemToCreate.parent});
         }
 
         if (targetItem) {
             if (canMerge(targetItem, itemToMove)) {
                 const updateResult = await targetActor.updateItem(targetItem._id, {'system.quantity': parseInt(targetItem.system.quantity) + parseInt(quantity)});
-                
+
                 if (isFullMove) {
                     const itemsToRemove = items.map(x => x.item._id);
                     await sourceActor.deleteItem(itemsToRemove);
@@ -268,7 +268,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
         }
 
         const updatesToPerform = [];
-        for (let i = 0; i<items.length; i++) {
+        for (let i = 0; i < items.length; i++) {
             const itemToTest = items[i];
             const itemToUpdate = createResult[i];
 
@@ -280,7 +280,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
                 });
 
                 let newContents = duplicate(itemToUpdate.system.container.contents);
-                for (let j = 0; j<indexMap.length; j++) {
+                for (let j = 0; j < indexMap.length; j++) {
                     const index = indexMap[j];
                     if (index === -1) {
                         newContents[j].id = "deleteme";
@@ -355,10 +355,10 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
 
 /**
  * Changes the item's container on an actor.
- * 
- * @param {ActorItemHelper} actorItemHelper 
- * @param {Item} item 
- * @param {Item} container 
+ *
+ * @param {ActorItemHelper} actorItemHelper
+ * @param {Item} item
+ * @param {Item} container
  */
 export async function setItemContainer(actorItemHelper, item, container, quantity = null) {
     return await moveItemBetweenActorsAsync(actorItemHelper, item, actorItemHelper, container, quantity);
@@ -366,7 +366,7 @@ export async function setItemContainer(actorItemHelper, item, container, quantit
 
 /**
  * Tests if a given item contains any items.
- * 
+ *
  * @param {Item} item Item to test.
  * @returns {Boolean} Boolean whether or not this item contains anything.
  */
@@ -376,7 +376,7 @@ export function containsItems(item) {
 
 /**
  * Returns an array of child items for a given item on an actor.
- * 
+ *
  * @param {Actor} actorItemHelper ActorItemHelper for whom's items to test.
  * @param {Item} item Item to get the children of.
  * @returns {Array} An array of child items.
@@ -389,7 +389,7 @@ export function getChildItems(actorItemHelper, item) {
 
 /**
  * Returns the containing item for a given item.
- * 
+ *
  * @param {Array} items Array of items to test, typically actor.items.
  * @param {Item} item Item to find the parent of.
  * @returns {Item} The parent item of the item, or null if not contained.
@@ -400,12 +400,12 @@ export function getItemContainer(items, item) {
 
 /**
  * Checks if two given items can be merged.
- * @param {Item} itemA 
- * @param {Item} itemB 
+ * @param {Item} itemA
+ * @param {Item} itemB
  */
 function canMerge(itemA, itemB) {
     if (!itemA || !itemB) {
-        console.log(`Can't merge because of null-items: itemA: ${itemA}, itemB: ${itemB}`)
+        console.log(`Can't merge because of null-items: itemA: ${itemA}, itemB: ${itemB}`);
         return false;
     }
     if (itemA.name !== itemB.name || itemA.type !== itemB.type) {
@@ -449,17 +449,17 @@ export function getFirstAcceptableStorageIndex(container, itemToAdd) {
     for (const storageOption of container.system.container.storage) {
         index += 1;
         if (storageOption.amount == 0) {
-            //console.log(`Skipping storage ${index} because it has a 0 amount.`);
+            // console.log(`Skipping storage ${index} because it has a 0 amount.`);
             continue;
         }
 
         if (!storageOption.acceptsType.includes(itemToAdd.type)) {
-            //console.log(`Skipping storage ${index} because it doesn't accept ${itemToAdd.type}.`);
+            // console.log(`Skipping storage ${index} because it doesn't accept ${itemToAdd.type}.`);
             continue;
         }
 
         if (storageOption.weightProperty && !itemToAdd.system[storageOption.weightProperty]) {
-            //console.log(`Skipping storage ${index} because it does not match the weight settings.`);
+            // console.log(`Skipping storage ${index} because it does not match the weight settings.`);
             continue;
         }
 
@@ -470,7 +470,7 @@ export function getFirstAcceptableStorageIndex(container, itemToAdd) {
             if (storageOption.weightProperty === "items" || itemsTypes.includes(storageOption.subtype)) {
                 const numItemsInStorage = storedItemLinks.length;
                 if (numItemsInStorage >= storageOption.amount) {
-                    //console.log(`Skipping storage ${index} because it has too many items in the slots already. (${numItemsInStorage} / ${storageOption.amount})`);
+                    // console.log(`Skipping storage ${index} because it has too many items in the slots already. (${numItemsInStorage} / ${storageOption.amount})`);
                     continue;
                 }
             } else {
@@ -480,7 +480,7 @@ export function getFirstAcceptableStorageIndex(container, itemToAdd) {
                 }, itemToAdd.system[storageOption.weightProperty]);
 
                 if (totalStoredAmount > storageOption.amount) {
-                    //console.log(`Skipping storage ${index} because it has too many items in the slots already. (${totalStoredAmount} / ${storageOption.amount})`);
+                    // console.log(`Skipping storage ${index} because it has too many items in the slots already. (${totalStoredAmount} / ${storageOption.amount})`);
                     continue;
                 }
             }
@@ -494,12 +494,12 @@ export function getFirstAcceptableStorageIndex(container, itemToAdd) {
 
 function acceptsItem(containerItem, itemToAdd, actor) {
     if (!containerItem || !itemToAdd) {
-        //console.log("Rejected because container or item is null");
+        // console.log("Rejected because container or item is null");
         return false;
     }
 
     if (!(itemToAdd.type in SFRPG.containableTypes)) {
-        //console.log("Rejected because item is not a containable item: " + itemToAdd.type);
+        // console.log("Rejected because item is not a containable item: " + itemToAdd.type);
         return false;
     }
 
@@ -520,7 +520,7 @@ function acceptsItem(containerItem, itemToAdd, actor) {
     }
 
     if (wouldCreateParentCycle(itemToAdd, containerItem, actor)) {
-        //console.log("Rejected because adding this item would create a cycle");
+        // console.log("Rejected because adding this item would create a cycle");
         return false;
     }
 
@@ -555,7 +555,7 @@ function wouldCreateParentCycle(item, container, actor) {
     return false;
 }
 
-/******************************************************************************
+/** ****************************************************************************
  * RPC handlers
  ******************************************************************************/
 export async function onCreateItemCollection(message) {
@@ -587,10 +587,10 @@ export async function onCreateItemCollection(message) {
         }
     }]);
 
-    /*createdTokenPromise.then((createdTokens) => {
+    /* createdTokenPromise.then((createdTokens) => {
         const createdToken = createdTokens[0];
         console.log(createdToken);
-        
+
         createdToken.createEmbeddedDocuments("Item", payload.itemData);
     });*/
     return createdTokenPromise;
@@ -666,7 +666,7 @@ async function onItemDraggedToCollection(message) {
         newItems = items.concat(newItems);
         const update = {
             "flags.sfrpg.itemCollection.items": newItems
-        }
+        };
         await target.token.document.update(update);
     }
 }
@@ -725,7 +725,7 @@ async function onItemCollectionItemDraggedToPlayer(message) {
     }
 
     const createdItems = await target.createItem(data.draggedItems);
-    for (let i = 0; i<createdItems.length; i++) {
+    for (let i = 0; i < createdItems.length; i++) {
         const newItem = createdItems[i];
         const originalItem = data.draggedItems[i];
         originalItem._id = oldIds[i];
@@ -789,11 +789,11 @@ async function onInventoryWarningReceived(message) {
     ui.notifications.info(game.i18n.format(message.payload));
 }
 
-/******************************************************************************
+/** ****************************************************************************
  * Helper classes
  ******************************************************************************/
 
- /**
+/**
   * A helper class that takes an actor, token, and scene id and neatly wraps the
   * item interfaces so that they go to the right actor data. Unlinked tokens thus
   * remain unlinked from the parent actor, while linked tokens will share with
@@ -816,7 +816,7 @@ export class ActorItemHelper {
                 this.actor = this.token.actor;
             }
         }
-        
+
         if (!this.actor && actorId) {
             this.actor = game.actors.get(actorId);
         }
@@ -830,7 +830,7 @@ export class ActorItemHelper {
 
     /**
      * Parses a new ActorItemHelper out of an object containing actorId, tokenId, and sceneId.
-     * @param {Object} actorReferenceObject 
+     * @param {Object} actorReferenceObject
      */
     static FromObject(actorReferenceObject, options = {}) {
         return new ActorItemHelper(actorReferenceObject.actorId, actorReferenceObject.tokenId, actorReferenceObject.sceneId, options);
@@ -959,7 +959,7 @@ export class ActorItemHelper {
             // Migrate original format
             const migrate = propertiesToTest.filter(x => itemData.hasOwnProperty(x));
             if (migrate.length > 0) {
-                //console.log(migrate);
+                // console.log(migrate);
 
                 const container = {
                     contents: (itemData.container?.contents || itemData.contents || []).map(x => { return { id: x.id, index: 0 }; }),
@@ -1023,7 +1023,7 @@ export class ActorItemHelper {
             // Migrate intermediate format
             if (itemData.container?.contents?.length > 0) {
                 if (itemData.container.contents[0] instanceof String) {
-                    for (let i = 0; i<itemData.container.contents.length; i++) {
+                    for (let i = 0; i < itemData.container.contents.length; i++) {
                         itemData.container.contents[i] = {id: itemData.container.contents[0], index: 0};
                     }
 
@@ -1079,7 +1079,7 @@ export class ActorItemHelper {
             const result = this.actor.updateEmbeddedDocuments("Item", migrations);
             return result;
         }
-        
+
         return null;
     }
 }

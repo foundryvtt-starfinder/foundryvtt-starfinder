@@ -42,7 +42,7 @@ export class DocumentBrowserSFRPG extends Application {
         });
 
         // show item card
-        html.on('click', '.item-edit', async(ev) => {
+        html.on('click', '.item-edit', async (ev) => {
             const itemUuid = $(ev.currentTarget).parents('.item')
                 .attr('data-entry-uuid');
             const doc = await fromUuid(itemUuid);
@@ -50,7 +50,7 @@ export class DocumentBrowserSFRPG extends Application {
         });
 
         // show actor card
-        html.on('click', '.actor-edit', async(ev) => {
+        html.on('click', '.actor-edit', async (ev) => {
             const actorId = $(ev.currentTarget).parents('.item')
                 .attr('data-entry-uuid');
             const doc = await fromUuid(actorId);

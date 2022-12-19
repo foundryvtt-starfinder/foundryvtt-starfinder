@@ -1,4 +1,4 @@
-import { ActorSheetSFRPG } from "./base.js"
+import { ActorSheetSFRPG } from "./base.js";
 import { SFRPG } from "../../config.js";
 
 export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
@@ -13,8 +13,8 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         const options = super.defaultOptions;
         mergeObject(options, {
             classes: ['sfrpg', 'sheet', 'actor', 'drone'],
-            width: 715,
-            //height: 830
+            width: 715
+            // height: 830
         });
 
         return options;
@@ -34,7 +34,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
 
     /**
      * Organize and classify items for character sheets.
-     * 
+     *
      * @param {Object} data Data for the sheet
      * @private
      */
@@ -44,8 +44,10 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         let weaponLabel = "";
         if (data.system.attributes.weaponMounts.melee.max > 0 && data.system.attributes.weaponMounts.ranged.max > 0) {
             weaponLabel = game.i18n.format("SFRPG.DroneSheet.Inventory.Weapons.Both", {
-                meleeCurrent: data.system.attributes.weaponMounts.melee.current, meleeMax: data.system.attributes.weaponMounts.melee.max,
-                rangedCurrent: data.system.attributes.weaponMounts.ranged.current, rangedMax: data.system.attributes.weaponMounts.ranged.max
+                meleeCurrent: data.system.attributes.weaponMounts.melee.current,
+                meleeMax: data.system.attributes.weaponMounts.melee.max,
+                rangedCurrent: data.system.attributes.weaponMounts.ranged.current,
+                rangedMax: data.system.attributes.weaponMounts.ranged.max
             });
         } else if (data.system.attributes.weaponMounts.melee.max > 0) {
             weaponLabel = game.i18n.format("SFRPG.DroneSheet.Inventory.Weapons.MeleeOnly", {
@@ -73,7 +75,12 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         };
 
         //   0      1      2        3     4               5
-        let [items, feats, chassis, mods, conditionItems, actorResources] = data.items.reduce((arr, item) => {
+        let [items,
+            feats,
+            chassis,
+            mods,
+            conditionItems,
+            actorResources] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
 
             item.config = {
@@ -83,7 +90,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
                 hasDamage: item.system.damage?.parts && item.system.damage.parts.length > 0 && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
                 hasUses: item.canBeUsed(),
                 isCharged: !item.hasUses || item.getRemainingUses() <= 0 || !item.isOnCooldown,
-                hasCapacity: item.hasCapacity(),
+                hasCapacity: item.hasCapacity()
             };
 
             if (item.config.hasCapacity) {
@@ -109,13 +116,13 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
             else arr[0].push(item); // items
             return arr;
         }, [[], [], [], [], [], []]);
-        
-        this.processItemContainment(items, function (itemType, itemData) {
+
+        this.processItemContainment(items, function(itemType, itemData) {
             if (itemType === "weapon") {
                 if (itemData.item.system.equipped) {
                     inventory[itemType].items.push(itemData);
                 } else {
-                    inventory["cargo"].items.push(itemData);    
+                    inventory["cargo"].items.push(itemData);
                 }
             } else if (itemType === "upgrade") {
                 inventory[itemType].items.push(itemData);
@@ -182,7 +189,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
 
     /**
      * Activate event listeners using the prepared sheet HTML
-     * 
+     *
      * @param {JQuery} html The prepared HTML object ready to be rendered into the DOM
      */
     activateListeners(html) {
@@ -190,7 +197,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
 
         if (!this.options.editable) return;
 
-        //html.find('.toggle-prepared').click(this._onPrepareItem.bind(this));
+        // html.find('.toggle-prepared').click(this._onPrepareItem.bind(this));
         html.find('.reload').click(this._onReloadWeapon.bind(this));
 
         html.find('.repair').click(this._onRepair.bind(this));
@@ -202,7 +209,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
 
     /**
      * Add a modifer to this actor.
-     * 
+     *
      * @param {Event} event The originating click event
      */
     _onModifierCreate(event) {
@@ -217,20 +224,20 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
 
     /**
      * Delete a modifier from the actor.
-     * 
+     *
      * @param {Event} event The originating click event
      */
     async _onModifierDelete(event) {
         event.preventDefault();
         const target = $(event.currentTarget);
         const modifierId = target.closest('.item.modifier').data('modifierId');
-        
+
         await this.actor.deleteModifier(modifierId);
     }
 
     /**
      * Edit a modifier for an actor.
-     * 
+     *
      * @param {Event} event The orginating click event
      */
     _onModifierEdit(event) {
@@ -244,7 +251,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
 
     /**
      * Toggle a modifier to be enabled or disabled.
-     * 
+     *
      * @param {Event} event The originating click event
      */
     async _onToggleModifierEnabled(event) {
@@ -261,7 +268,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
 
     /**
      * Handle toggling the prepared status of an Owned Itme within the Actor
-     * 
+     *
      * @param {Event} event The triggering click event
      */
     _onPrepareItem(event) {

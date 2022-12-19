@@ -3,7 +3,7 @@
  * @type {Dialog}
  */
 export class ItemDeletionDialog extends Dialog {
-    constructor(itemName, containsItems, confirmationCallback, dialogData={}, options={}) {
+    constructor(itemName, containsItems, confirmationCallback, dialogData = {}, options = {}) {
         super(dialogData, options);
         this.options.classes = ["sfrpg", "dialog"];
 
@@ -11,7 +11,7 @@ export class ItemDeletionDialog extends Dialog {
         this.containsItems = containsItems;
         this.confirmationCallback = confirmationCallback;
     }
-    
+
     activateListeners(html) {
         super.activateListeners(html);
 

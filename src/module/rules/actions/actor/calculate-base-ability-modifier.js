@@ -1,6 +1,6 @@
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
 
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateBaseAbilityModifier", (fact, context) => {
         const data = fact.data;
         const modifiers = fact.modifiers;
@@ -29,18 +29,18 @@ export default function (engine) {
                     source: bonus.name
                 }));
             }
-            
+
             return computedBonus;
         };
 
         const filteredMods = modifiers.filter(mod => {
             return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.ABILITY_MODIFIER, SFRPGEffectType.ABILITY_MODIFIERS].includes(mod.effectType);
-        })
+        });
 
         for (let [abl, ability] of Object.entries(data.abilities)) {
 
             const abilityMods = context.parameters.stackModifiers.process(
-                filteredMods.filter(mod => mod.valueAffected === abl || mod.effectType === SFRPGEffectType.ABILITY_MODIFIERS), 
+                filteredMods.filter(mod => mod.valueAffected === abl || mod.effectType === SFRPGEffectType.ABILITY_MODIFIERS),
                 context
             );
 

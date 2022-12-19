@@ -1,4 +1,4 @@
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateSpellsPerDay", (fact, context) => {
         const data = fact.data;
         const classes = fact.classes;
@@ -8,7 +8,7 @@ export default function (engine) {
 
         const computeSpellsPerDay = (spellLevel, classData, spellAbilityMod) => {
             let totalSpells = 0;
-            
+
             try {
                 totalSpells += classData.spellsPerDay[classData.levels][spellLevel] || 0;
             } catch {}
@@ -22,7 +22,7 @@ export default function (engine) {
             }
 
             return totalSpells;
-        }
+        };
 
         for (const cls of classes) {
             const classData = cls.system;
@@ -30,7 +30,7 @@ export default function (engine) {
             const className = cls.name.slugify({replacement: "_", strict: true});
             const keyAbilityScore = classData.kas || "str";
             const spellAbilityScore =  classData.spellAbility || classData.kas || "str";
-            
+
             const classInfo = {
                 keyAbilityMod: data.abilities[keyAbilityScore].mod,
                 levels: classData.levels,
