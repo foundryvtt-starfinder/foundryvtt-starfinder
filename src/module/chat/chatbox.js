@@ -1,5 +1,6 @@
 import { DiceSFRPG } from "../dice.js";
 import { SFRPG } from "../config.js";
+import { ItemSFRPG } from "../item/item.js";
 
 /**
  * Helper class to handle the display of chatBox
@@ -48,9 +49,8 @@ export default class SFRPGCustomChatMessage {
             }
         }
 
-        /** Set up variables */
-        const hasCapacity = item.hasCapacity();
-        const currentCapacity = item.getCurrentCapacity();
+        const hasCapacity = item instanceof ItemSFRPG ? item.hasCapacity() : null;
+        const currentCapacity = item instanceof ItemSFRPG ? item.getCurrentCapacity() : null;
         const options = {
             item: item,
             hasDamage: data.rollType !== "damage" && (item.hasDamage || false),

@@ -569,6 +569,10 @@ export class ActorSheetSFRPG extends ActorSheet {
 
     }
 
+    /**
+     * open and prefilter a compendium browser depending on it's environment.
+     * @param {Event} event The originating click event
+     */
     async _onOpenBrowser(event) {
         event.preventDefault();
         const filterType = event.currentTarget.dataset.type;
@@ -628,7 +632,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             browser.render(true);
         }
 
-        await this.waitForElem(`#app-${browser.appId}`);
+        await this._waitForElem(`#app-${browser.appId}`);
         const html = browser.element;
         browser.resetFilters(html);
 
@@ -641,7 +645,12 @@ export class ActorSheetSFRPG extends ActorSheet {
         browser.onFiltersUpdated(html);
     }
 
-    waitForElem(selector) {
+    /**
+     * helper function to set a mutation observer to check if an Element exists yet
+     * @param {String} selector the selector string that defines the element (querySelector)
+     * @returns {Promise} a promise to await until the desired element exists
+     */
+    _waitForElem(selector) {
         return new Promise(resolve => {
             if (document.querySelector(selector)) {
                 return resolve(document.querySelector(selector));
