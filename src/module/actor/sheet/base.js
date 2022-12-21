@@ -1239,6 +1239,26 @@ export class ActorSheetSFRPG extends ActorSheet {
         } else {
             const sidebarItem = itemData;
 
+            if (sidebarItem.system.modifiers) {
+                const modifiers = duplicate(sidebarItem.system.modifiers);
+
+                for (let modifiersI = 0; modifiersI < modifiers.length; modifiersI++) {
+                    const modifier = modifiers[modifiersI];
+
+                    const formula = modifier.modifier;
+                    if (formula) {
+                        const roll = Roll.create(formula, targetActor.actor.system);
+                        modifier.max = await roll.evaluate({maximize: true}).total;
+                    } else {
+                        modifier.max = 0;
+                    }
+                }
+
+                // await targetActor.updateItem(addedItem.id, {id: addedItem.id, 'system.modifiers': modifiers});
+
+                await sidebarItem.update({'system.modifiers': modifiers});
+            }
+
             const addedItemResult = await targetActor.createItem(duplicate(sidebarItem));
             if (addedItemResult.length > 0) {
                 const addedItem = targetActor.getItem(addedItemResult[0].id);
@@ -1258,24 +1278,6 @@ export class ActorSheetSFRPG extends ActorSheet {
 
                     const update = { id: targetContainer.id, "system.container.contents": newContents };
                     await targetActor.updateItem(targetContainer.id, update);
-                }
-
-                if (addedItem.system.modifiers) {
-                    const modifiers = duplicate(addedItem.system.modifiers);
-
-                    for (let modifiersI = 0; modifiersI < modifiers.length; modifiersI++) {
-                        const modifier = modifiers[modifiersI];
-
-                        const formula = modifier.modifier;
-                        if (formula) {
-                            const roll = Roll.create(formula, this.actor.system);
-                            modifier.max = await roll.evaluate({maximize: true}).total;
-                        } else {
-                            modifier.max = 0;
-                        }
-                    }
-
-                    await this.actor.update({'system.modifiers': modifiers});
                 }
 
                 return addedItem;

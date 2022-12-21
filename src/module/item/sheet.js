@@ -639,7 +639,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         const formula = modifier.modifier;
         if (formula) {
-            const roll = Roll.create(formula, this.owningActor?.system || this.actor.system);
+            const roll = Roll.create(formula, this.item.system);
             modifier.max = await roll.evaluate({maximize: true}).total;
         } else {
             modifier.max = 0;
