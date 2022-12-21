@@ -440,6 +440,15 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         const modifiers = duplicate(this.actor.system.modifiers);
         const modifier = modifiers.find(mod => mod._id === modifierId);
+
+        const formula = modifier.modifier;
+        if (formula) {
+            const roll = Roll.create(formula, this.actor.system);
+            modifier.max = await roll.evaluate({maximize: true}).total;
+        } else {
+            modifier.max = 0;
+        }
+
         modifier.enabled = !modifier.enabled;
 
         await this.actor.update({'system.modifiers': modifiers});
@@ -1240,6 +1249,24 @@ export class ActorSheetSFRPG extends ActorSheet {
 
                     const update = { id: targetContainer.id, "system.container.contents": newContents };
                     await targetActor.updateItem(targetContainer.id, update);
+                }
+
+                if (addedItem.system.modifiers) {
+                    const modifiers = duplicate(addedItem.system.modifiers);
+
+                    for (let modifiersI = 0; modifiersI < modifiers.length; modifiersI++) {
+                        const modifier = modifiers[modifiersI];
+
+                        const formula = modifier.modifier;
+                        if (formula) {
+                            const roll = Roll.create(formula, this.actor.system);
+                            modifier.max = await roll.evaluate({maximize: true}).total;
+                        } else {
+                            modifier.max = 0;
+                        }
+                    }
+
+                    await this.actor.update({'system.modifiers': modifiers});
                 }
 
                 return addedItem;

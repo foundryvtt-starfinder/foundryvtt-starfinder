@@ -636,6 +636,15 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         const modifiers = duplicate(this.item.system.modifiers);
         const modifier = modifiers.find(mod => mod._id === modifierId);
+
+        const formula = modifier.modifier;
+        if (formula) {
+            const roll = Roll.create(formula, this.owningActor?.system || this.actor.system);
+            modifier.max = await roll.evaluate({maximize: true}).total;
+        } else {
+            modifier.max = 0;
+        }
+
         modifier.enabled = !modifier.enabled;
 
         await this.item.update({
