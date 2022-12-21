@@ -1,7 +1,7 @@
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
 
 export default function(engine) {
-    engine.closures.add("calculateSaveModifiers", (fact, context) => {
+    engine.closures.add("calculateSaveModifiers", async (fact, context) => {
         const data = fact.data;
         const flags = fact.flags;
         const fort = data.attributes.fort;
@@ -63,17 +63,17 @@ export default function(engine) {
             return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.SAVE, SFRPGEffectType.SAVES].includes(mod.effectType);
         });
 
-        const fortMods = context.parameters.stackModifiers.process(filteredMods.filter(mod => [
+        const fortMods = await context.parameters.stackModifiers.process(filteredMods.filter(mod => [
             "highest",
             "lowest",
             "fort"
         ].includes(mod.valueAffected) || mod.effectType === SFRPGEffectType.SAVES), context);
-        const reflexMods = context.parameters.stackModifiers.process(filteredMods.filter(mod => [
+        const reflexMods = await context.parameters.stackModifiers.process(filteredMods.filter(mod => [
             "highest",
             "lowest",
             "reflex"
         ].includes(mod.valueAffected) || mod.effectType === SFRPGEffectType.SAVES), context);
-        const willMods = context.parameters.stackModifiers.process(filteredMods.filter(mod => [
+        const willMods = await context.parameters.stackModifiers.process(filteredMods.filter(mod => [
             "highest",
             "lowest",
             "will"

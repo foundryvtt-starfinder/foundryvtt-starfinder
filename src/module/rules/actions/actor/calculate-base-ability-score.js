@@ -2,7 +2,7 @@ import { SFRPG } from "../../../config.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
 
 export default function(engine) {
-    engine.closures.add("calculateBaseAbilityScore", (fact, context) => {
+    engine.closures.add("calculateBaseAbilityScore", async (fact, context) => {
         const data = fact.data;
         const modifiers = fact.modifiers;
         const races = fact.races;
@@ -72,7 +72,7 @@ export default function(engine) {
 
         for (let [abl, ability] of Object.entries(data.abilities)) {
 
-            const abilityMods = context.parameters.stackModifiers.process(
+            const abilityMods = await context.parameters.stackModifiers.process(
                 filteredMods.filter(mod => mod.valueAffected === abl),
                 context
             );

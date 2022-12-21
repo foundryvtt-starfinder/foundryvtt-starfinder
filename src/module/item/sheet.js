@@ -639,6 +639,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         const formula = modifier.modifier;
         if (formula) {
+            // TODO: test this this.item should be the actor if not try to get the actor here
             const roll = Roll.create(formula, this.item.system);
             modifier.max = await roll.evaluate({maximize: true}).total;
         } else {

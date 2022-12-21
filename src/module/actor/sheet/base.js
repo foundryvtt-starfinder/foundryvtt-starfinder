@@ -1254,8 +1254,6 @@ export class ActorSheetSFRPG extends ActorSheet {
                     }
                 }
 
-                // await targetActor.updateItem(addedItem.id, {id: addedItem.id, 'system.modifiers': modifiers});
-
                 await sidebarItem.update({'system.modifiers': modifiers});
             }
 

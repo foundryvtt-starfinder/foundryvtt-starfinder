@@ -1,7 +1,7 @@
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../../modifiers/types.js";
 
 export default function(engine) {
-    engine.closures.add("calculateDroneResolve", (fact, context) => {
+    engine.closures.add("calculateDroneResolve", async (fact, context) => {
         const data = fact.data;
 
         const addModifier = (bonus, data, item, localizationKey) => {
@@ -38,7 +38,7 @@ export default function(engine) {
         let filteredModifiers = fact.modifiers.filter(mod => {
             return (mod.enabled || mod.modifierType === "formula") && mod.effectType == SFRPGEffectType.RESOLVE_POINTS;
         });
-        filteredModifiers = context.parameters.stackModifiers.process(filteredModifiers, context);
+        filteredModifiers = await context.parameters.stackModifiers.process(filteredModifiers, context);
 
         let bonus = Object.entries(filteredModifiers).reduce((sum, mod) => {
             if (mod[1] === null || mod[1].length < 1) return sum;

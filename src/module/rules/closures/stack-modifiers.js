@@ -14,7 +14,23 @@ export default class StackModifiers extends Closure {
      * @returns {Object}          An object containing only those modifiers allowed
      *                            based on the stacking rules.
      */
-    process(modifiers, context) {
+    async process(modifiers, context) {
+
+        if (modifiers.length > 0) {
+            for (let modifiersI = 0; modifiersI < modifiers.length; modifiersI++) {
+                const modifier = modifiers[modifiersI];
+                const actor = game.actors.get(modifier.container.actorId);
+
+                const formula = modifier.modifier;
+                if (formula) {
+                    const roll = Roll.create(formula, actor.system);
+                    modifier.max = await roll.evaluate({maximize: true}).total;
+                } else {
+                    modifier.max = 0;
+                }
+            }
+        }
+
         let [abilityMods,
             armorMods,
             baseMods,
