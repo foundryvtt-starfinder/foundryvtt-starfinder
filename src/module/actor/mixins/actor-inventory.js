@@ -29,7 +29,7 @@ export const ActorInventoryMixin = (superclass) => class extends superclass {
                     Hooks.callAll("afterItemsProcessed", {actor: actor});
                     if (actor.sheet?.rendered) {
                         actor.sheet?.clearTooltips();
-                        // actor.sheet?.render(false); I don't think removing this breaks anything, but if items
+                        // actor.sheet?.render(false); I don't think removing this breaks anything, but if items break, blame this
                     }
                 });
         }
