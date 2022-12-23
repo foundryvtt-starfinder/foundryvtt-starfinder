@@ -254,11 +254,106 @@ function sanitizeJSON(jsonInput) {
         );
     };
 
+    // Clean up description HTML
+    const cleanDescription = (description) => {
+        if (!description) {
+            return "";
+        }
+
+        const $description = (() => {
+            try {
+                return $(
+                    description.startsWith("<p>") && /<\/(?:p|ol|ul|table)>$/.test(description)
+                        ? description
+                        : `<p>${description}</p>`
+                );
+            } catch (error) {
+                console.error(error);
+                throw Error(`Failed to parse description of ${jsonInput.name} (${jsonInput._id}):\n${description}`);
+            }
+        })();
+
+        // Strip out span tags from AoN copypasta
+        const selectors = [
+            "span[class*='fontstyle']",
+            "span[id*='ctl00']"
+        ];
+        for (const selector of selectors) {
+            $description.find(selector).each((_i, span) => {
+                $(span)
+                    .contents()
+                    .unwrap(selector)
+                    .each((_j, node) => {
+                        if (node.nodeName === "#text") {
+                            node.textContent = node.textContent.trim();
+                        }
+                    });
+            });
+        }
+
+        // Remove needless classes from AoN/PDF copypasta
+        const classes = [
+            "p.title",
+            "h1.title",
+            "h2.title",
+            "h3.title",
+            "h4.title",
+            "p[style='text-align']"
+        ];
+
+        for (const selector of classes) {
+            $description.find(selector).each((_i, el) => {
+                if (selector.includes(".")) {
+                    $(el).removeClass("title");
+                } else {
+                    $(el).removeAttr("style");
+                }
+            });
+        }
+
+        $description.find("i[class*='fas']").remove();
+        const fakeLink = $description.find("a.entity-link");
+        if (fakeLink.length > 0) {
+            fakeLink.each((index, el) => {
+                const element = $(el);
+                const compendium = element.data("pack");
+                const id = element.data("id");
+                const text = element.text().trim();
+                const uuid = `@UUID[Compendium.${compendium}.${id}]{${text}}`;
+                element.replaceWith(uuid);
+            });
+        }
+
+        return $("<div>")
+            .append($description)
+            .html()
+            .replace(/<([hb]r)>/g, "<$1 />") // Prefer self-closing tags
+            .replace(/ {2,}/g, " ")
+            .replace(/<p> ?<\/p>/g, "")
+            .replace(/<\/p> ?<p>/g, "</p>\n<p>")
+            .replace(/<p>[ \r\n]+/g, "<p>")
+            .replace(/[ \r\n]+<\/p>/g, "</p>")
+            .replace(/<(?:b|strong)>\s*/g, "<strong>")
+            .replace(/\s*<\/(?:b|strong)>/g, "</strong>")
+            .replace(/(<\/strong>)(\w)/g, "$1 $2")
+            .replace(/<br \/>+/g, "</p><p>")
+            .replace(/(<p>&nbsp;<\/p>)/g, "")
+            .replace(/(<p><\/p>)/g, "")
+            .trim();
+    };
+
     treeShake(jsonInput);
 
     if (jsonInput.items) {
         for (let item of jsonInput.items) {
             treeShake(item);
+            if ("system" in item) {
+                if ("description" in item.system) {
+                    item.system.description.value = cleanDescription(item.system.description.value);
+                } else if ("details" in item.system && "description" in item.system.details) {
+                    item.system.details.description.value = cleanDescription(item.system.details.description.value);
+                }
+            }
         }
     }
 
@@ -293,91 +388,11 @@ function sanitizeJSON(jsonInput) {
         }
     }
 
-    // Clean up description HTML
-    const cleanDescription = (description) => {
-        if (!description) {
-            return "";
-        }
-
-        const $description = (() => {
-            try {
-                return $(
-                    description.startsWith("<p>") && /<\/(?:p|ol|ul|table)>$/.test(description)
-                        ? description
-                        : `<p>${description}</p>`
-                );
-            } catch (error) {
-                console.error(error);
-                throw Error(`Failed to parse description of ${jsonInput.name} (${jsonInput._id}):\n${description}`);
-            }
-        })();
-
-        // Strip out span tags from AoN copypasta
-        const selectors = [
-            "span[class*='fontstyle']",
-            "span[id*='ctl00']",
-            "p[style*='text-align']",
-            ".title"
-        ];
-        for (const selector of selectors) {
-            $description.find(selector).each((_i, span) => {
-                $(span)
-                    .contents()
-                    .unwrap(selector)
-                    .each((_j, node) => {
-                        if (node.nodeName === "#text") {
-                            node.textContent = node.textContent.trim();
-                        }
-                    });
-            });
-        }
-
-        $description.find("i[class*='fas']").remove();
-        const fakeLink = $description.find("a.entity-link");
-        if (fakeLink.length > 0) {
-            fakeLink.each((index, el) => {
-                const compendium = el.data("pack");
-                const id = el.data("id");
-                const text = el.text().trim();
-                const uuid = `@UUID[Compendium.${compendium}.${id}{${text}}]`;
-                el.replaceWith(uuid);
-            });
-        }
-
-        return $("<div>")
-            .append($description)
-            .html()
-            .replace(/<([hb]r)>/g, "<$1 />") // Prefer self-closing tags
-            .replace(/ {2,}/g, " ")
-            .replace(/<p> ?<\/p>/g, "")
-            .replace(/<\/p> ?<p>/g, "</p>\n<p>")
-            .replace(/<p>[ \r\n]+/g, "<p>")
-            .replace(/[ \r\n]+<\/p>/g, "</p>")
-            .replace(/<(?:b|strong)>\s*/g, "<strong>")
-            .replace(/\s*<\/(?:b|strong)>/g, "</strong>")
-            .replace(/(<\/strong>)(\w)/g, "$1 $2")
-            .replace(/(<p>&nbsp;<\/p>)/g, "")
-            .replace(/(<p><\/p>)/g, "")
-            .trim();
-    };
-
     if ("system" in jsonInput) {
         if ("description" in jsonInput.system) {
             jsonInput.system.description.value = cleanDescription(jsonInput.system.description.value);
         } else if ("details" in jsonInput.system && "description" in jsonInput.system.details) {
             jsonInput.system.details.description.value = cleanDescription(jsonInput.system.details.description.value);
-        }
-    }
-
-    if (jsonInput.items) {
-        for (let item of jsonInput.items) {
-            if ("system" in item) {
-                if ("description" in item.system) {
-                    item.system.description.value = cleanDescription(item.system.description.value);
-                } else if ("details" in item.system && "description" in item.system.details) {
-                    item.system.details.description.value = cleanDescription(item.system.details.description.value);
-                }
-            }
         }
     }
 
@@ -572,7 +587,7 @@ async function cookWithOptions(options = { formattingCheck: true }) {
 
     console.log(`\nUpdating items with updated IDs.\n`);
 
-    await unpackPacks(undefined, true);
+    await unpackPacks(true);
 
     console.log(`\nCook finished with ${cookErrorCount} errors.\n`);
 
