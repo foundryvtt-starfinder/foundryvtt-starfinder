@@ -42,6 +42,15 @@ export default function(engine) {
         for (let [skl, skill] of Object.entries(skills)) {
             skill.rolledMods = null;
             const mods = await context.parameters.stackModifiers.process(filteredMods.filter(mod => {
+                // temporary workaround to fix modifiers with mod "0" if the situational mod is higher.
+                if (mod.modifierType === SFRPGModifierType.FORMULA) {
+                    if (skill.rolledMods) {
+                        skill.rolledMods.push({mod: mod.modifier, bonus: mod});
+                    } else {
+                        skill.rolledMods = [{mod: mod.modifier, bonus: mod}];
+                    }
+                    return false;
+                }
                 if (mod.effectType === SFRPGEffectType.ALL_SKILLS) return true;
                 else if (mod.effectType === SFRPGEffectType.SKILL && skl === mod.valueAffected) return true;
                 else if (mod.effectType === SFRPGEffectType.ABILITY_SKILLS && skill.ability === mod.valueAffected) return true;
