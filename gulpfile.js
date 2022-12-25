@@ -781,9 +781,9 @@ function formattingCheckAlien(data, pack, file, options = { checkLinks: true, ch
         addWarningForPack(`${chalk.bold(file)}: Name is not well formatted "${data.name}.`, pack);
     }
     // Validate attributes
-    // Validate HP & Stamina Points
-    if (!data.system.attributes || !data.system.attributes.hp || !data.system.attributes.sp) {
-        addWarningForPack(`${chalk.bold(file)}: Missing HP/SP values.`, pack);
+    // Validate HP exists
+    if (!data.system.attributes || !data.system.attributes.hp) {
+        addWarningForPack(`${chalk.bold(file)}: Missing HP values.`, pack);
         return;
     }
     // Validate HP values
