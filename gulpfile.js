@@ -231,19 +231,8 @@ function sanitizeJSON(jsonInput) {
         delete item.ownership;
         delete item.effects;
 
-        // Clear rogue flags from modules
-        for (const flag in item.flags) {
-            if (!["core", "sfrpg"].includes(flag)) {
-                delete item.flags.flag;
-            }
-        }
         delete item.flags?.exportSource;
         delete item.flags?.sourceId;
-
-        // If flags is empty, delete it
-        if ((typeof item.flags === "object" && item.flags !== null) && Object.entries(item?.flags)?.length === 0) {
-            delete item.flags;
-        }
 
         // Remove leading or trailing spaces
         item.name = item.name.trim();
@@ -252,10 +241,18 @@ function sanitizeJSON(jsonInput) {
             "https://assets.forge-vtt.com/bazaar/systems/sfrpg/assets/",
             "systems/sfrpg/"
         );
+
+        if (item.type === "npc2" && !item?.system?.attributes?.sp?.max > 0) {
+            delete item?.system?.attributes?.sp;
+        }
+
+        if (item.type === "npc2" && !item?.system?.attributes?.rp?.max > 0) {
+            delete item?.system?.attributes?.rp;
+        }
     };
 
     // Clean up description HTML
-    const cleanDescription = (description) => {
+    const _cleanDescription = (description) => {
         if (!description) {
             return "";
         }
@@ -276,7 +273,8 @@ function sanitizeJSON(jsonInput) {
         // Strip out span tags from AoN copypasta
         const selectors = [
             "span[class*='fontstyle']",
-            "span[id*='ctl00']"
+            "span[id*='ctl00']",
+            "div"
         ];
         for (const selector of selectors) {
             $description.find(selector).each((_i, span) => {
@@ -291,26 +289,25 @@ function sanitizeJSON(jsonInput) {
             });
         }
 
-        // Remove needless classes from AoN/PDF copypasta
+        // Remove other needless classes from AoN/PDF copypasta
         const classes = [
-            "p.title",
-            "h1.title",
-            "h2.title",
-            "h3.title",
-            "h4.title",
-            "p[style='text-align']"
+            "*.title",
+            "p[style='text-align: justify;']",
+            "li[style='text-align: justify;']",
+            "*[title*='Page']"
         ];
 
         for (const selector of classes) {
-            $description.find(selector).each((_i, el) => {
-                if (selector.includes(".")) {
-                    $(el).removeClass("title");
-                } else {
-                    $(el).removeAttr("style");
-                }
+            $description.closest(selector).each((_i, el) => {
+                $(el)
+                    .removeClass("title")
+                    .removeAttr("style title")
+                    .filter('[class=""]')
+                    .removeAttr('class');
             });
         }
 
+        // Replace erroneously copied links with actually working ones
         $description.find("i[class*='fas']").remove();
         const fakeLink = $description.find("a.entity-link");
         if (fakeLink.length > 0) {
@@ -324,40 +321,72 @@ function sanitizeJSON(jsonInput) {
             });
         }
 
+        // Standardise descriptions with regex
         return $("<div>")
             .append($description)
             .html()
+            .replace(/@Compendium\[/g, "@UUID[Compendium.") // Replace @Compendium links with @UUID links
             .replace(/<([hb]r)>/g, "<$1 />") // Prefer self-closing tags
-            .replace(/ {2,}/g, " ")
-            .replace(/<p> ?<\/p>/g, "")
-            .replace(/<\/p> ?<p>/g, "</p>\n<p>")
-            .replace(/<p>[ \r\n]+/g, "<p>")
-            .replace(/[ \r\n]+<\/p>/g, "</p>")
-            .replace(/<(?:b|strong)>\s*/g, "<strong>")
-            .replace(/\s*<\/(?:b|strong)>/g, "</strong>")
-            .replace(/(<\/strong>)(\w)/g, "$1 $2")
-            .replace(/<br \/>+/g, "</p><p>")
-            .replace(/(<p>&nbsp;<\/p>)/g, "")
-            .replace(/(<p><\/p>)/g, "")
+            .replace(/ {2,}/g, " ") // Replace double or more spaces with a single space
+            .replace(/<p> ?<\/p>/g, "") // Delete empty <p> tags
+            .replace(/<\/p> ?<p>/g, "</p>\n<p>") // Replace any spaces between <p> tags with a line feed
+            .replace(/<p>[ \r\n]+/g, "<p>") // Remove any newlines within <p> tags
+            .replace(/[ \r\n]+<\/p>/g, "</p>") // Remove any newlines within <p> tags
+            .replace(/<(?:b|strong)>\s*/g, "<strong>") // Remove whitespace at the start of <strong> tags
+            .replace(/\s*<\/(?:b|strong)>/g, "</strong>") // Remove whitespace at the end of <strong> tags
+            .replace(/(<\/strong>)(\w)/g, "$1 $2") // Add a space after the end of <strong> tags
+            .replace(/(<br \/>){1,}/g, "</p>\n<p>") // Replace any number of <br /> tags with <p> tags
+            .replace(/(<p>&nbsp;<\/p>)/g, "") // Delete paragraphs with only a non-breaking space
+            .replace(/(窶・)/g, "—") // For some reason these two characters often appear in place of an em dash
             .trim();
     };
 
+    const sanitizeDescription = (item) => {
+        if ("system" in item) {
+            if ("description" in item.system) {
+                item.system.description.value = _cleanDescription(item.system.description.value);
+                if (item.system.description.short) {
+                    item.system.description.short = _cleanDescription(item.system.description.short);
+                }
+            } else if ("details" in item.system) {
+                if ("description" in item.system.details) {
+                    item.system.details.description.value = _cleanDescription(item.system.details.description.value);
+                    if (item.system.details.description.short) {
+                        item.system.details.description.short = _cleanDescription(item.system.details.description.short);
+                    }
+                } else if ("biography" in item.system.details) {
+                    item.system.details.biography.value = _cleanDescription(item.system.details.biography.value);
+                }
+            }
+        }
+    };
+
+    const cleanFlags = (item) => {
+        // Clear rogue flags from modules
+        for (const flag in item.flags) {
+            if (!["core", "sfrpg"].includes(flag)) {
+                delete item.flags[flag];
+            }
+        }
+        // If flags is empty, delete it
+        if ((typeof item.flags === "object" && item.flags !== null) && Object.entries(item?.flags)?.length === 0) {
+            delete item.flags;
+        }
+    };
+
     treeShake(jsonInput);
+    cleanFlags(jsonInput);
+    sanitizeDescription(jsonInput);
 
     if (jsonInput.items) {
         for (let item of jsonInput.items) {
             treeShake(item);
-            if ("system" in item) {
-                if ("description" in item.system) {
-                    item.system.description.value = cleanDescription(item.system.description.value);
-                } else if ("details" in item.system && "description" in item.system.details) {
-                    item.system.details.description.value = cleanDescription(item.system.details.description.value);
-                }
-            }
+            cleanFlags(item);
+            sanitizeDescription(item);
         }
     }
 
-    if (jsonInput.prototypeToken) {
+    if ("prototypeToken" in jsonInput) {
 
         // No "character" because iconics come in multiple levels, and we don't want to include level in the token name.
         const actorTypes = ["npc", "starship", "vehicle", "npc2", "hazard"];
@@ -374,7 +403,7 @@ function sanitizeJSON(jsonInput) {
         jsonInput.prototypeToken.displayBars = 20; // Show bars on hover
         jsonInput.prototypeToken.displayName = 20; // Show name on hover
 
-        if (["npc", "npc2"].includes(jsonInput.type) && jsonInput.system.attributes.rp.max > 0) {
+        if (["npc", "npc2"].includes(jsonInput.type) && jsonInput.system?.attributes?.rp?.max > 0) {
             jsonInput.prototypeToken.bar2.attribute = "attributes.rp"; // If the NPC has resolve points, set them as the 2nd bar
         } else if (jsonInput.type === "character") {
             jsonInput.prototypeToken.disposition = 1; // Friendly
@@ -386,14 +415,8 @@ function sanitizeJSON(jsonInput) {
         } else if (jsonInput.type === "vehicle") {
             jsonInput.prototypeToken.disposition = 0; // Neutral
         }
-    }
 
-    if ("system" in jsonInput) {
-        if ("description" in jsonInput.system) {
-            jsonInput.system.description.value = cleanDescription(jsonInput.system.description.value);
-        } else if ("details" in jsonInput.system && "description" in jsonInput.system.details) {
-            jsonInput.system.details.description.value = cleanDescription(jsonInput.system.details.description.value);
-        }
+        cleanFlags(jsonInput.prototypeToken);
     }
 
     return jsonInput;
@@ -430,7 +453,7 @@ async function gulpUnpackPacks(done, partOfCook = false) {
 
 async function unpackPacks(partOfCook = false) {
     let sourceDir = partOfCook ? "./src/packs" : `${getConfig().dataPath.replaceAll("\\", "/")}/data/systems/sfrpg/packs`;
-    console.log(`Unpacking all packs from ${sourceDir}`);
+    console.log(`Unpacking ${partOfCook ? "" : "and sanitizing "}all packs from ${sourceDir}`);
 
     let files = fs.readdirSync(sourceDir);
     for (let file of files) {
@@ -510,7 +533,7 @@ async function cookWithOptions(options = { formattingCheck: true }) {
             db = new AsyncNedb({ filename: outputFile, autoload: true });
         }
 
-        console.log(`> Reading files in ${itemSourceDir}`);
+        console.log(`> Reading and sanitizing files in ${itemSourceDir}`);
         let files = fs.readdirSync(itemSourceDir);
         for (let file of files) {
             let filePath = `${itemSourceDir}/${file}`;
