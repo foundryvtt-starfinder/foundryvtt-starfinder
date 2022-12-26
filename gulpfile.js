@@ -276,6 +276,7 @@ function sanitizeJSON(jsonInput) {
         })();
 
         // Strip out span tags from AoN copypasta
+        // TODO: div doesn't seem to work consistently
         const selectors = [
             "span[class*='fontstyle']",
             "span[id*='ctl00']",
@@ -297,16 +298,16 @@ function sanitizeJSON(jsonInput) {
         // Remove other needless classes from AoN/PDF copypasta
         const classes = [
             "*.title",
-            "p[style='text-align: justify;']",
-            "li[style='text-align: justify;']",
+            "p[style*='text-align: justify']",
+            "li[style*='text-align: justify']",
             "*[title*='Page']"
         ];
 
         for (const selector of classes) {
-            $description.closest(selector).each((_i, el) => {
+            $description.find(selector).each((_i, el) => {
                 $(el)
-                    .removeClass("title")
                     .removeAttr("style title")
+                    .removeClass("title")
                     .filter('[class=""]')
                     .removeAttr('class');
             });
