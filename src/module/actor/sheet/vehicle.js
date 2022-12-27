@@ -23,7 +23,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     }
 
     async getData() {
-        const data = super.getData();
+        const data = await super.getData();
 
         let lvl = parseFloat(data.system.details.level || 0);
         let levels = { 0: "0", 0.25: "1/4", [1 / 3]: "1/3", 0.5: "1/2" };
