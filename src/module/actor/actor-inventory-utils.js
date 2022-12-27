@@ -600,7 +600,7 @@ async function onItemDraggedToCollection(message) {
     const data = message.payload;
 
     const target = ActorItemHelper.FromObject(data.target);
-    const items = target.token.flags.sfrpg.itemCollection.items;
+    const items = target.token.document.flags.sfrpg.itemCollection.items;
 
     let targetContainer = null;
     if (data.containerId) {
