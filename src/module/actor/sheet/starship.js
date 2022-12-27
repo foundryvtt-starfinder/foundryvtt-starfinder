@@ -33,7 +33,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
     }
 
     async getData() {
-        const data = super.getData();
+        const data = await super.getData();
 
         let tier = parseFloat(data.system.details.tier || 0);
         let tiers = { 0: "0", 0.25: "1/4", [1 / 3]: "1/3", 0.5: "1/2" };
