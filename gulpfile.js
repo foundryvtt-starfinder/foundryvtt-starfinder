@@ -298,9 +298,10 @@ function sanitizeJSON(jsonInput) {
         // Remove other needless classes from AoN/PDF copypasta
         const classes = [
             "*.title",
-            "p[style*='text-align: justify']",
-            "li[style*='text-align: justify']",
-            "*[title*='Page']"
+            "*[style*='text-align: justify']",
+            "*[title*='Page']",
+            "*[style*='font-family']",
+            "*[style*='font-size']"
         ];
 
         for (const selector of classes) {
@@ -308,7 +309,7 @@ function sanitizeJSON(jsonInput) {
                 $(el)
                     .removeAttr("style title")
                     .removeClass("title")
-                    .filter('[class=""]')
+                    .filter('*[class=""]')
                     .removeAttr('class');
             });
         }
