@@ -224,8 +224,10 @@ function JSONstringifyOrder( obj, space, sortingMode = "default" ) {
 
 /**
  * Cleans compendium entries of superfluous data, sanitizes HTML and applies some defaults to prototype tokens
+ * Some parts adapted from PF2e: https://github.com/foundryvtt/pf2e/blob/master/packs/scripts/extract.ts
+ * Under the Apache 2.0 License: https://www.apache.org/licenses/LICENSE-2.0
  * @param {Object} jsonInput An object representing the current JSON being unpacked/cooked
- * @returns {Object}
+ * @returns {Object} A sanitized object
  */
 function sanitizeJSON(jsonInput) {
     const treeShake = (item) => {
