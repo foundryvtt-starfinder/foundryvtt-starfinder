@@ -8,6 +8,9 @@ Damage sections on weapons can now be assigned to groups. You can only enable on
 ## Floating text
 Applying damage to tokens will now show a floating number of the amount of damage dealt, as well as the resource (HP/SP) it affected. This is particularly useful on starships, as it shows you which arc was hit.
 
+## Compendium module artwork
+Courtesy of the PF2e system, we have implemented the ability to apply artwork to creatures in the compendium through pre-defined maps in modules, this allows things like token packs to be possible, and for individual users to build their own for personal use.
+
 ## Compendium browser improvements
 Skills now have a button to quickly take you to the rules journal for that skill, and the inventory and spellbook pages now have buttons on each header to quickly open the compendium browser and show only items relevant for that header. Lastly, the compendium browsers will open and load much faster.
 
