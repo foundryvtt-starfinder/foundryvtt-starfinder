@@ -8,6 +8,12 @@ const less = require('gulp-less');
 const path = require('path');
 const sanitize = require("sanitize-filename");
 const stringify = require('json-stringify-pretty-compact');
+const jsdom = require("jsdom");
+
+const { JSDOM } = jsdom;
+const { window } = new JSDOM();
+
+const $ = require("jquery")(window);
 
 const SFRPG_LESS = ["src/less/*.less"];
 
@@ -184,8 +190,7 @@ function buildWatch() {
 /**
  * Sorts the keys in a JSON object, which should make it easier to find data keys.
  */
-function JSONstringifyOrder( obj, space, sortingMode = "default" )
-{
+function JSONstringifyOrder( obj, space, sortingMode = "default" ) {
     let allKeys = [];
     let seen = {};
     JSON.stringify(obj, function(key, value) {
@@ -218,9 +223,261 @@ function JSONstringifyOrder( obj, space, sortingMode = "default" )
 }
 
 /**
+ * Cleans compendium entries of superfluous data, sanitizes HTML and applies some defaults to prototype tokens
+ * @param {Object} jsonInput An object representing the current JSON being unpacked/cooked
+ * @returns {Object}
+ */
+function sanitizeJSON(jsonInput) {
+    const treeShake = (item) => {
+        delete item.sort;
+        delete item.folder;
+        delete item._stats;
+        delete item.permission;
+        delete item.ownership;
+        delete item.effects;
+
+        delete item.flags?.exportSource;
+        delete item.flags?.sourceId;
+
+        // Remove leading or trailing spaces
+        item.name = item.name.trim();
+        // Replace forge URLs
+        item.img &&= item.img.replace(
+            "https://assets.forge-vtt.com/bazaar/systems/sfrpg/assets/",
+            "systems/sfrpg/"
+        );
+
+        if (item.type === "npc2" && !item?.system?.attributes?.sp?.max > 0) {
+            delete item?.system?.attributes?.sp;
+        }
+
+        if (item.type === "npc2" && !item?.system?.attributes?.rp?.max > 0) {
+            delete item?.system?.attributes?.rp;
+        }
+    };
+
+    // Clean up description HTML
+    const _cleanDescription = (description) => {
+        if (!description) {
+            return "";
+        }
+
+        const $description = (() => {
+            try {
+                return $(
+                    description.startsWith("<p>") && /<\/(?:p|ol|ul|table)>$/.test(description)
+                        ? description
+                        : `<p>${description}</p>`
+                );
+            } catch (error) {
+                console.error(error);
+                throw Error(`Failed to parse description of ${jsonInput.name} (${jsonInput._id}):\n${description}`);
+            }
+        })();
+
+        // Strip out span tags from AoN copypasta
+        // TODO: div doesn't seem to work consistently
+        const selectors = [
+            "span[class*='fontstyle']",
+            "span[id*='ctl00']",
+            "div"
+        ];
+        for (const selector of selectors) {
+            $description.find(selector).each((_i, span) => {
+                $(span)
+                    .contents()
+                    .unwrap(selector)
+                    .each((_j, node) => {
+                        if (node.nodeName === "#text") {
+                            node.textContent = node.textContent.trim();
+                        }
+                    });
+            });
+        }
+
+        // Remove other needless classes from AoN/PDF copypasta
+        const classes = [
+            "*.title",
+            "*[style*='text-align: justify']",
+            "*[title*='Page']",
+            "*[style*='font-family']",
+            "*[style*='font-size']"
+        ];
+
+        for (const selector of classes) {
+            $description.find(selector).each((_i, el) => {
+                $(el)
+                    .removeAttr("style title")
+                    .removeClass("title")
+                    .filter('*[class=""]')
+                    .removeAttr('class');
+            });
+        }
+
+        // Replace erroneously copied links with actually working ones
+        $description.find("i[class*='fas']").remove();
+        const fakeLink = $description.find("a.entity-link");
+        if (fakeLink.length > 0) {
+            fakeLink.each((index, el) => {
+                const element = $(el);
+                const compendium = element.data("pack");
+                const id = element.data("id");
+                const text = element.text().trim();
+                const uuid = `@UUID[Compendium.${compendium}.${id}]{${text}}`;
+                element.replaceWith(uuid);
+            });
+        }
+
+        // Standardise descriptions with regex
+        return $("<div>")
+            .append($description)
+            .html()
+            .replace(/@Compendium\[/g, "@UUID[Compendium.") // Replace @Compendium links with @UUID links
+            .replace(/<([hb]r)>/g, "<$1 />") // Prefer self-closing tags
+            .replace(/ {2,}/g, " ") // Replace double or more spaces with a single space
+            .replace(/<(div|p)>\s*<\/(div|p)>/g, "") // Delete empty <p>s and <div>s
+            .replace(/<\/p>\s*<p>/g, "</p>\n<p>") // Replace any spaces between <p>s with a newline
+            .replace(/<p>[ \r\n]+/g, "<p>") // Remove any newlines at the start of <p>
+            .replace(/[ \r\n]+<\/p>/g, "</p>") // Remove any newlines at the end of <p>
+            .replace(/<(?:b|strong)>\s*/g, "<strong>") // Remove whitespace at the start of <strong> tags
+            .replace(/\s*<\/(?:b|strong)>/g, "</strong>") // Remove whitespace at the end of <strong> tags
+            .replace(/(<\/strong>)(\w)/g, "$1 $2") // Add a space after the end of <strong> tags
+            .replace(/(<p>&nbsp;<\/p>)/g, "") // Delete paragraphs with only a non-breaking space
+            .replace(/(<br \/>)+/g, "</p>\n<p>") // Replace any number of <br /> tags with <p>s
+            .replace(/(\n)+/g, "\n") // Replace any number of newlines with a single one
+            .replace(/(窶・)/g, "—") // For some reason these two characters often appear in place of an em dash
+            .trim();
+    };
+
+    const sanitizeDescription = (item) => {
+        if ("system" in item) {
+            if ("description" in item.system) {
+                item.system.description.value = _cleanDescription(item.system.description.value);
+                if (item.system.description.short) {
+                    item.system.description.short = _cleanDescription(item.system.description.short);
+                }
+            } else if ("details" in item.system) {
+                if ("description" in item.system.details) {
+                    item.system.details.description.value = _cleanDescription(item.system.details.description.value);
+                    if (item.system.details.description.short) {
+                        item.system.details.description.short = _cleanDescription(item.system.details.description.short);
+                    }
+                } else if ("biography" in item.system.details) {
+                    item.system.details.biography.value = _cleanDescription(item.system.details.biography.value);
+                }
+            }
+        }
+    };
+
+    const cleanFlags = (item) => {
+        // Clear rogue flags from modules
+        for (const flag in item.flags) {
+            if (!["core", "sfrpg"].includes(flag)) {
+                delete item.flags[flag];
+            }
+        }
+
+        // If core or sfrpg is empty, delete it
+        if ((typeof item?.flags?.core === "object" && item?.flags?.core !== null) && Object.entries(item?.flags?.core)?.length === 0) {
+            delete item.flags.core;
+        }
+
+        if ((typeof item?.flags?.sfrpg === "object" && item?.flags?.sfrpg !== null) && Object.entries(item?.flags?.sfrpg)?.length === 0) {
+            delete item.flags.sfrpg;
+        }
+
+        // If flags is now empty, delete it entirely
+        if ((typeof item.flags === "object" && item.flags !== null) && Object.entries(item?.flags)?.length === 0) {
+            delete item.flags;
+        }
+    };
+
+    treeShake(jsonInput);
+    cleanFlags(jsonInput);
+    sanitizeDescription(jsonInput);
+
+    if (jsonInput.items) {
+        for (let item of jsonInput.items) {
+            treeShake(item);
+            cleanFlags(item);
+            sanitizeDescription(item);
+        }
+    }
+
+    if ("prototypeToken" in jsonInput) {
+        const sizeLookup = {
+            "fine": 1,
+            "diminutive": 1,
+            "tiny": 1,
+            "small": 1,
+            "medium": 1,
+            "large": 2,
+            "huge": 3,
+            "gargantuan": 4,
+            "colossal": 6
+        };
+
+        // No "character" because iconics come in multiple levels, and we don't want to include level in the token name.
+        const actorTypes = [
+            "npc",
+            "starship",
+            "vehicle",
+            "npc2",
+            "hazard"
+        ];
+
+        delete jsonInput.prototypeToken.actorId;
+        delete jsonInput.prototypeToken.actorData;
+
+        // Ensure token name is the same as the actor name, if applicable
+        if (actorTypes.includes(jsonInput.type)) {
+            jsonInput.prototypeToken.name = jsonInput.name;
+        }
+
+        jsonInput.prototypeToken.sight.enabled = false; // Sight is disabled for NPCs by default
+        jsonInput.prototypeToken.bar1.attribute = "attributes.hp"; // Most tokens have hp as their first bar
+        jsonInput.prototypeToken.bar2.attribute = ""; // The 2nd bar is set per token type
+        jsonInput.prototypeToken.disposition = -1; // Hostile by default
+        jsonInput.prototypeToken.displayBars = 20; // Show bars on hover
+        jsonInput.prototypeToken.displayName = 20; // Show name on hover
+
+        if (["npc", "npc2"].includes(jsonInput.type)) {
+            if (jsonInput.system?.attributes?.rp?.max > 0) {
+                jsonInput.prototypeToken.bar2.attribute = "attributes.rp"; // If the NPC has resolve points, set them as the 2nd bar
+            }
+
+            let size = sizeLookup[jsonInput.system.traits.size]; // Set size to match actor's
+            jsonInput.prototypeToken.width = size;
+            jsonInput.prototypeToken.height = size;
+        } else if (jsonInput.type === "character") {
+            jsonInput.prototypeToken.disposition = 1; // Friendly
+            jsonInput.prototypeToken.bar2.attribute = "attributes.sp"; // 2nd bar as stamina
+            jsonInput.prototypeToken.sight.enabled = true;
+
+            let size = sizeLookup[jsonInput.system.traits.size];
+            jsonInput.prototypeToken.width = size;
+            jsonInput.prototypeToken.height = size;
+        } else if (jsonInput.type === "starship") {
+            jsonInput.prototypeToken.disposition = 0; // Neutral
+            jsonInput.prototypeToken.bar2.attribute = "attributes.shields"; // 2nd bar as shields
+        } else if (jsonInput.type === "vehicle") {
+            jsonInput.prototypeToken.disposition = 0; // Neutral
+
+            let size = sizeLookup[jsonInput.system.attributes.size];
+            jsonInput.prototypeToken.width = size;
+            jsonInput.prototypeToken.height = size;
+        }
+
+        cleanFlags(jsonInput.prototypeToken);
+    }
+
+    return jsonInput;
+}
+
+/**
  * Unpack existing db files into json files.
  */
-async function unpack(sourceDatabase, outputDirectory) {
+async function unpack(sourceDatabase, outputDirectory, partOfCook = false) {
     fs.mkdir(`${outputDirectory}`, { recursive: true }, (err) => {
         if (err)
             throw err;
@@ -230,7 +487,8 @@ async function unpack(sourceDatabase, outputDirectory) {
     let items = await db.asyncFind({});
 
     for (let item of items) {
-        let jsonOutput = JSONstringifyOrder(item, 2, "item");
+        let cleanItem = partOfCook ? item : sanitizeJSON(item);
+        let jsonOutput = JSONstringifyOrder(cleanItem, 2, "item");
         let filename = sanitize(item.name);
         filename = filename.replace(/[\s]/g, "_");
         filename = filename.replace(/[,;]/g, "");
@@ -241,10 +499,14 @@ async function unpack(sourceDatabase, outputDirectory) {
     }
 }
 
-async function unpackPacks() {
-    console.log(`Unpacking all packs`);
+async function gulpUnpackPacks(done, partOfCook = false) {
+    await unpackPacks(partOfCook);
+}
 
-    let sourceDir = "./src/packs";
+async function unpackPacks(partOfCook = false) {
+    let sourceDir = partOfCook ? "./src/packs" : `${getConfig().dataPath.replaceAll("\\", "/")}/data/systems/sfrpg/packs`;
+    console.log(`Unpacking ${partOfCook ? "" : "and sanitizing "}all packs from ${sourceDir}`);
+
     let files = fs.readdirSync(sourceDir);
     for (let file of files) {
         if (limitToPack && !file.includes(limitToPack)) {
@@ -262,7 +524,7 @@ async function unpackPacks() {
             fs.rmdirSync(unpackDir, { recursive: true });
 
             console.log(`> Unpacking ${sourceFile} into ${unpackDir}`);
-            await unpack(sourceFile, unpackDir);
+            await unpack(sourceFile, unpackDir, partOfCook);
 
             console.log(chalk.greenBright(`> Done.`));
         }
@@ -279,7 +541,7 @@ async function unpackPacks() {
 let cookErrorCount = 0;
 let cookAborted = false;
 let packErrors = {};
-var limitToPack = null;
+let limitToPack = null;
 async function cookPacksNoFormattingCheck() {
     await cookWithOptions({ formattingCheck: false });
 }
@@ -323,7 +585,7 @@ async function cookWithOptions(options = { formattingCheck: true }) {
             db = new AsyncNedb({ filename: outputFile, autoload: true });
         }
 
-        console.log(`> Reading files in ${itemSourceDir}`);
+        console.log(`> Reading and sanitizing files in ${itemSourceDir}`);
         let files = fs.readdirSync(itemSourceDir);
         for (let file of files) {
             let filePath = `${itemSourceDir}/${file}`;
@@ -350,8 +612,8 @@ async function cookWithOptions(options = { formattingCheck: true }) {
             }
 
             if (!limitToPack || directory === limitToPack) {
-                // For actors, we should double-check the token names are set correctly.
-                ensureTokenDefaults(jsonInput);
+                // sanitize the incoming JSON
+                sanitizeJSON(jsonInput);
 
                 // Fix missing images
                 if (!jsonInput.img && !jsonInput.pages) {
@@ -391,8 +653,7 @@ async function cookWithOptions(options = { formattingCheck: true }) {
     if (options.formattingCheck === true) {
         console.log(`\nStarting formatting check.`);
         formattingCheck(allItems);
-    }
-    else {
+    } else {
         console.log(`\n*Skipping* formatting check.`);
     }
 
@@ -401,7 +662,7 @@ async function cookWithOptions(options = { formattingCheck: true }) {
 
     console.log(`\nUpdating items with updated IDs.\n`);
 
-    await unpackPacks();
+    await unpackPacks(true);
 
     console.log(`\nCook finished with ${cookErrorCount} errors.\n`);
 
@@ -416,39 +677,6 @@ function regularExpressionForFindingItemsInCache(cache) {
     regularExpressionSubstring = conditionNames.join("|");
 
     return new RegExp("(" + regularExpressionSubstring + ")", "g");
-}
-
-// Ensures tokens have some sane values.
-function ensureTokenDefaults(item) {
-    if (!item) return;
-    if (!item.prototypeToken) return;
-
-    // Did not add Character because iconics come in multiple levels, and we don't want to include level in the name.
-    const actorTypes = ["npc", "starship", "vehicle", "npc2", "hazard"];
-
-    // Ensure token name is the same as the actor name, if applicable
-    if (actorTypes.includes(item.type)) {
-        item.prototypeToken.name = item.name;
-    }
-
-    item.prototypeToken.sight.enabled = false; // Sight is disabled for NPCs by default
-    item.prototypeToken.bar1.attribute = "attributes.hp"; // Most tokens have hp as their first bat
-    item.prototypeToken.bar2.attribute = ""; // The 2nd bar is set per token type
-    item.prototypeToken.disposition = -1; // Hostile by default
-    item.prototypeToken.displayBars = 20; // Show bars on hover
-    item.prototypeToken.displayName = 20; // Show name on hover
-
-    if (["npc", "npc2"].includes(item.type) && item.system.attributes.rp.max > 0) {
-        item.prototypeToken.bar2.attribute = "attributes.rp"; // If the NPC has resolve points, set them as the 2nd bar
-    } else if (item.type === "character") {
-        item.prototypeToken.disposition = 1; // Friendly
-        item.prototypeToken.bar2.attribute = "attributes.sp"; // 2nd bar as stamina
-    } else if (item.type === "starship") {
-        item.prototypeToken.disposition = 0; // Neutral
-        item.prototypeToken.bar2.attribute = "attributes.shields"; // 2nd bar as shields
-    } else if (item.type === "vehicle") {
-        item.prototypeToken.disposition = 0; // Neutral
-    }
 }
 
 function tryMigrateActorSpeed(jsonInput) {
@@ -516,8 +744,8 @@ function tryMigrateActorSpeed(jsonInput) {
  * would cause significant harm to the usability of the entry.
  */
 // conditions / setting cache and regular expression are generated during beginning of cooking and used during formatting checks
-var conditionsCache = {};
-var settingCache = {};
+let conditionsCache = {};
+let settingCache = {};
 let conditionsRegularExpression;
 let settingRegularExpression;
 let poisonAndDiseasesRegularExpression = new RegExp("(poison|disease)", "g");
@@ -537,20 +765,15 @@ function formattingCheck(allItems) {
         if (itemData.type === "npc" || itemData.type === "npc2") {
             // NOTE: `checkEcology` off by default as it currently produces hundreds of errors.
             formattingCheckAlien(itemData, pack, item.file, { checkLinks: true, checkEcology: false });
-        }
-        else if (itemData.type === "equipment") {
+        } else if (itemData.type === "equipment") {
             formattingCheckItems(itemData, pack, item.file, { checkImage: true, checkSource: true, checkPrice: true, checkLevel: true, checkLinks: true });
-        }
-        else if (itemData.type === "vehicle") {
+        } else if (itemData.type === "vehicle") {
             formattingCheckVehicle(itemData, pack, item.file, { checkLinks: true });
-        }
-        else if (itemData.type === "spell") {
+        } else if (itemData.type === "spell") {
             formattingCheckSpell(itemData, pack, item.file, { checkLinks: true });
-        }
-        else if (itemData.type === "race") {
+        } else if (itemData.type === "race") {
             formattingCheckRace(itemData, pack, item.file, { checkLinks: true });
-        }
-        else if (itemData.type === "feat") {
+        } else if (itemData.type === "feat") {
             formattingCheckFeat(itemData, pack, item.file, { checkLinks: true });
         }
     }
@@ -572,8 +795,7 @@ function formattingCheckRace(data, pack, file, options = { checkLinks: true }) {
         if (!validCreatureSizes.includes(data.system.size)) {
             addWarningForPack(`${chalk.bold(file)}: Size value not entered correctly.`, pack);
         }
-    }
-    else {
+    } else {
         addWarningForPack(`${chalk.bold(file)}: Size value not entered correctly.`, pack);
     }
 
@@ -611,9 +833,9 @@ function formattingCheckAlien(data, pack, file, options = { checkLinks: true, ch
         addWarningForPack(`${chalk.bold(file)}: Name is not well formatted "${data.name}.`, pack);
     }
     // Validate attributes
-    // Validate HP & Stamina Points
-    if (!data.system.attributes || !data.system.attributes.hp || !data.system.attributes.sp) {
-        addWarningForPack(`${chalk.bold(file)}: Missing HP/SP values.`, pack);
+    // Validate HP exists
+    if (!data.system.attributes || !data.system.attributes.hp) {
+        addWarningForPack(`${chalk.bold(file)}: Missing HP values.`, pack);
         return;
     }
     // Validate HP values
@@ -760,8 +982,7 @@ function formattingCheckItems(data, pack, file, options = { checkImage: true, ch
                     addWarningForPack(`${chalk.bold(file)}: Found reference to ${chalk.bold(match)} in description without link.`, pack);
                 }
             }
-        }
-        else {
+        } else {
             // Item has no description
         }
     }
@@ -779,8 +1000,7 @@ function formattingCheckWeapons(data, pack, file) {
 
         if (data.name.includes("[MultiATK] ")) {
             // Looks good, contains the proper multi-attack prefix and a space
-        }
-        else {
+        } else {
             // Anything else is close, but is slightly off
             addWarningForPack(`${chalk.bold(file)}: Improperly formatted multiattack name field "${chalk.bold(data.name)}.`, pack);
         }
@@ -831,8 +1051,7 @@ function formattingCheckVehicle(data, pack, file, options = { checkLinks: true }
                     addWarningForPack(`${chalk.bold(file)}: Found reference to ${chalk.bold(match)} in description without link.`, pack);
                 }
             }
-        }
-        else {
+        } else {
             // Vehicle has no description
         }
     }
@@ -955,7 +1174,7 @@ function searchDescriptionForUnlinkedReference(description, regularExpression) {
                 continue;
             }
             // If the condition is surrounded by spaces, it is unlinked
-            // it should be contained in a link to the compendium like this `@Compendium[sfrpg.spells.YDXegEus8p0BnsH1]{Invisibility}`
+            // it should be contained in a link to the compendium like this `@UUID[Compendium.sfrpg.spells.YDXegEus8p0BnsH1]{Invisibility}`
             else if (characterBefore === " " && characterAfter === " ") {
                 unlinkedReferenceFound = true;
                 if (!alreadyLinked.includes(conditionWord)) foundWords.push(conditionWord);
@@ -1002,24 +1221,19 @@ function isSourceValid(source) {
     if (CoreBooksSourceMatch && CoreBooksSourceMatch.length > 0) {
         // ✅ formatted Core book source
         return true;
-    }
-    else if (AlienArchiveSourceMatch && AlienArchiveSourceMatch.length > 0) {
+    } else if (AlienArchiveSourceMatch && AlienArchiveSourceMatch.length > 0) {
         // ✅ formatted Alien Archives source
         return true;
-    }
-    else if (AdventurePathSourceMatch && AdventurePathSourceMatch.length > 0) {
+    } else if (AdventurePathSourceMatch && AdventurePathSourceMatch.length > 0) {
         // ✅ formatted Adventure path source
         return true;
-    }
-    else if (StarfinderSocietySourceMatch && StarfinderSocietySourceMatch.length > 0) {
+    } else if (StarfinderSocietySourceMatch && StarfinderSocietySourceMatch.length > 0) {
         // ✅ formatted Starfinder Society source
         return true;
-    }
-    else if (StarfinderAdventureSourceMatch && StarfinderAdventureSourceMatch.length > 0) {
+    } else if (StarfinderAdventureSourceMatch && StarfinderAdventureSourceMatch.length > 0) {
         // ✅ formatted Starfinder Adventure source
         return true;
-    }
-    else if (source === "ACD") {
+    } else if (source === "ACD") {
         //  ✅ formatted Alien Card Deck source
         return true;
     }
@@ -1059,7 +1273,7 @@ function consistencyCheck(allItems, compendiumMap) {
                 if (!(pack in packErrors)) {
                     packErrors[pack] = [];
                 }
-                packErrors[pack].push(`${chalk.bold(item.file)}: Using @Item to reference to '${chalk.bold(localItemName)}' (with id: ${chalk.bold(localItemId)}), @Item is not allowed in compendiums. Please use '${chalk.bold('@Compendium[sfrpg.' + pack + "." + localItemId + "]")}' instead.`);
+                packErrors[pack].push(`${chalk.bold(item.file)}: Using @Item to reference to '${chalk.bold(localItemName)}' (with id: ${chalk.bold(localItemId)}), @Item is not allowed in compendiums. Please use '${chalk.bold('@UUID[Compendium.sfrpg.' + pack + "." + localItemId + "]")}' instead.`);
                 cookErrorCount++;
             }
         }
@@ -1074,32 +1288,39 @@ function consistencyCheck(allItems, compendiumMap) {
                 if (!(pack in packErrors)) {
                     packErrors[pack] = [];
                 }
-                packErrors[pack].push(`${chalk.bold(item.file)}: Using @JournalEntry to reference to '${chalk.bold(localItemName)}' (with id: ${chalk.bold(localItemId)}), @JournalEntry is not allowed in compendiums. Please use '${chalk.bold('@Compendium[sfrpg.' + pack + "." + localItemId + "]")}' instead.`);
+                packErrors[pack].push(`${chalk.bold(item.file)}: Using @JournalEntry to reference to '${chalk.bold(localItemName)}' (with id: ${chalk.bold(localItemId)}), @JournalEntry is not allowed in compendiums. Please use '${chalk.bold('@UUID[Compendium.sfrpg.' + pack + "." + localItemId + "]")}' instead.`);
                 cookErrorCount++;
             }
         }
 
-        let compendiumMatch = [...desc.matchAll(/@Compendium\[([^\]]*)]({([^}]*)})?/gm)];
+        let compendiumMatch = [...desc.matchAll(/@UUID\[([^\]]*)]({([^}]*)})?/gm)];
         if (compendiumMatch && compendiumMatch.length > 0) {
             for (let otherItem of compendiumMatch) {
                 let link = otherItem[1];
-                let otherItemName = (otherItem.length === 4) ? otherItem[3] || link : link;
+                let otherItemName = otherItem[4] || link;
 
                 let linkParts = link.split('.');
-                if (linkParts.length !== 3) {
+                // Skip links to journal entry pages
+                // @UUID[Compendium.sfrpg.some-pack.abcxyz.JournalEntryPage.abcxyz]
+                if (linkParts.length === 6) {
+                    continue;
+                }
+                if (linkParts.length !== 4) {
                     if (!(pack in packErrors)) {
                         packErrors[pack] = [];
                     }
-                    packErrors[pack].push(`${chalk.bold(item.file)}: Compendium link to '${chalk.bold(link)}' is not valid. It does not have enough segments in the link. Expected format is sfrpg.compendiumName.itemId.`);
+                    packErrors[pack].push(`${chalk.bold(item.file)}: Compendium link to '${chalk.bold(link)}' is not valid. It does not have enough segments in the link. Expected format is Compendium.sfrpg.compendiumName.itemId.`);
                     cookErrorCount++;
                     continue;
                 }
 
-                let system = linkParts[0];
-                let otherPack = linkParts[1];
-                let otherItemId = linkParts[2];
+                // @UUID[Compendium.sfrpg.some-pack.abcxyz]
+                //      [0]         [1]   [2]       [3]
+                let system = linkParts[1];
+                let otherPack = linkParts[2];
+                let otherItemId = linkParts[3];
 
-                // @Compendium links must link to sfrpg compendiums.
+                // @UUID links must link to sfrpg compendiums.
                 if (system !== "sfrpg") {
                     if (!(pack in packErrors)) {
                         packErrors[pack] = [];
@@ -1108,7 +1329,7 @@ function consistencyCheck(allItems, compendiumMap) {
                     cookErrorCount++;
                 }
 
-                // @Compendium links to the same compendium could be @Item links instead.
+                // @UUID links to the same compendium could be @Item links instead.
                 /* if (otherPack === pack) {
                     if (!(pack in packErrors)) {
                         packErrors[pack] = [];
@@ -1117,7 +1338,7 @@ function consistencyCheck(allItems, compendiumMap) {
                     cookErrorCount++;
                 }*/
 
-                // @Compendium links must link to a valid compendium.
+                // @UUID links must link to a valid compendium.
                 if (!(otherPack in compendiumMap)) {
                     if (!(pack in packErrors)) {
                         packErrors[pack] = [];
@@ -1127,7 +1348,7 @@ function consistencyCheck(allItems, compendiumMap) {
                     continue;
                 }
 
-                // @Compendium links must link to a valid item ID.
+                // @UUID links must link to a valid item ID.
                 let itemExists = false;
                 if (otherItemId in compendiumMap[otherPack]) {
                     itemExists = true;
@@ -1575,5 +1796,5 @@ exports.publish = gulp.series(
 exports.copyLocalization = copyLocalization;
 exports.cook = gulp.series(cookPacks, clean, execBuild, postCook);
 exports.cookNoFormattingCheck = gulp.series(cookPacksNoFormattingCheck, clean, execBuild, postCook);
-exports.unpack = unpackPacks;
+exports.unpack = gulpUnpackPacks;
 exports.default = gulp.series(clean, execBuild);
