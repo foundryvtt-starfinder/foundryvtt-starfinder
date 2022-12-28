@@ -175,6 +175,14 @@
     border-bottom: 1px solid @colorBeige;
   }
 
+  .rollable {
+    cursor: pointer;
+
+    &:hover {
+      text-shadow: 0 0 10px red;
+    }
+  }
+
   /* ----------------------------------------- */
   /*  Attributes                               */
   /* ----------------------------------------- */
@@ -185,13 +193,17 @@
     padding: 0;
 
     li.attribute {
-      height: 70px;
+      min-height: 70px;
       margin: 0 5px;
       border: @borderGroove;
       border-radius: 4px;
       //.nodesto();
       .exo2();
       text-align: center;
+
+      &.cmd {//CMD is larger to fit "KAC + 8" label
+        margin: 0 3px;
+      }
 
       .attribute-name {
         flex: 0 0 18px;
@@ -543,12 +555,12 @@
     }
 
     &.spellbook-filters {
-      flex: 0 0 40px;
+      flex: 0 0 29px;
     }
 
     .currency {
       list-style: none;
-      margin: 4px 0 8px;
+      margin: 0;
       padding: 0;
       font-size: 12px;
 
@@ -760,6 +772,15 @@
       .crew-controls a.crew-create,
       .crew-controls a.skill-create {
         flex: 0 0 100%;
+      }
+      
+      .item-controls.item-controls-browser {
+          flex-wrap: nowrap;
+          justify-content: space-evenly;
+          
+          a.item-browser, a.item-create {
+          flex: 0 0 40%;
+        }
       }
     }
 

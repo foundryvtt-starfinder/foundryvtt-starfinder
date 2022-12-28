@@ -2,13 +2,11 @@
   "_id": "MjO5gIWQAbjsVCGp",
   "name": "Bloodbrother",
   "type": "npc2",
-  "flags": {},
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "name": "Fast Healing 5",
       "type": "feat",
-      "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -77,7 +75,6 @@
     {
       "name": "Slam (plus 1d6 C And Grab)",
       "type": "weapon",
-      "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -256,7 +253,6 @@
     {
       "name": "Cold (Su)",
       "type": "feat",
-      "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -285,7 +281,7 @@
         "description": {
           "chat": "",
           "unidentified": "",
-          "value": "A bloodbrother’s body generates intense cold, dealing 1d6 cold damage to any creature that hits it with a natural weapon or unarmed strike and to any creature the bloodbrother hits with its slam attack. A creature that begins its turn @Compendium[sfrpg.conditions.4AkWDHGM6gHDepHN]{Grappled} by a bloodbrother also takes this damage."
+          "value": "<p>A bloodbrother’s body generates intense cold, dealing 1d6 cold damage to any creature that hits it with a natural weapon or unarmed strike and to any creature the bloodbrother hits with its slam attack. A creature that begins its turn @UUID[Compendium.sfrpg.conditions.4AkWDHGM6gHDepHN]{Grappled} by a bloodbrother also takes this damage.</p>"
         },
         "descriptors": [],
         "duration": {
@@ -325,7 +321,6 @@
     {
       "name": "Rib Cage Prison (Su)",
       "type": "feat",
-      "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -354,7 +349,7 @@
         "description": {
           "chat": "",
           "unidentified": "",
-          "value": "If a bloodbrother begins its turn grappling a creature that is Large or smaller, it can attempt a grapple combat maneuver as a standard action to transfer the creature into its rib cage prison. A creature in a bloodbrother’s rib cage prison has the @Compendium[sfrpg.conditions.4AkWDHGM6gHDepHN]{Grappled} condition. As a reaction, a bloodbrother can force a creature in its rib cage prison to attempt a DC 15 Fortitude saving throw; on a failed save, the creature takes 1 point of Constitution damage. Any round that a creature in its rib cage prison takes this Constitution damage, the bloodbrother gains fast healing 5 for that round only; the above statistics assume a bloodbrother has a Small animal with a current Constitution score of 5 (its maximum Constitution score is 10) trapped in its rib cage prison at the beginning of combat. A bloodbrother can have only one creature in its rib cage prison at a time; if it imprisons a new creature, it must release the creature currently in its rib cage. Releasing a creature does not require an action."
+          "value": "<p>If a bloodbrother begins its turn grappling a creature that is Large or smaller, it can attempt a grapple combat maneuver as a standard action to transfer the creature into its rib cage prison. A creature in a bloodbrother’s rib cage prison has the @UUID[Compendium.sfrpg.conditions.4AkWDHGM6gHDepHN]{Grappled} condition. As a reaction, a bloodbrother can force a creature in its rib cage prison to attempt a DC 15 Fortitude saving throw; on a failed save, the creature takes 1 point of Constitution damage. Any round that a creature in its rib cage prison takes this Constitution damage, the bloodbrother gains fast healing 5 for that round only; the above statistics assume a bloodbrother has a Small animal with a current Constitution score of 5 (its maximum Constitution score is 10) trapped in its rib cage prison at the beginning of combat. A bloodbrother can have only one creature in its rib cage prison at a time; if it imprisons a new creature, it must release the creature currently in its rib cage. Releasing a creature does not require an action.</p>"
         },
         "descriptors": [],
         "duration": {
@@ -392,6 +387,67 @@
       }
     }
   ],
+  "prototypeToken": {
+    "name": "Bloodbrother",
+    "actorLink": false,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": ""
+    },
+    "displayBars": 20,
+    "displayName": 20,
+    "disposition": -1,
+    "height": 3,
+    "light": {
+      "alpha": 0.5,
+      "angle": 360,
+      "animation": {
+        "type": null,
+        "intensity": 5,
+        "reverse": false,
+        "speed": 5
+      },
+      "attenuation": 0.5,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "contrast": 0,
+      "darkness": {
+        "max": 1,
+        "min": 0
+      },
+      "dim": 0,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "shadows": 0
+    },
+    "lockRotation": false,
+    "randomImg": false,
+    "rotation": 0,
+    "scale": 1,
+    "sight": {
+      "angle": 360,
+      "attenuation": 0.1,
+      "brightness": 1,
+      "color": null,
+      "contrast": 0,
+      "enabled": false,
+      "range": 0,
+      "saturation": 0,
+      "visionMode": "basic"
+    },
+    "texture": {
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": null
+    },
+    "width": 3
+  },
   "system": {
     "abilities": {
       "cha": {
@@ -487,18 +543,6 @@
         "tooltip": [],
         "value": 0
       },
-      "rp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
-      "sp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
       "space": "15 ft.",
       "speed": {
         "burrowing": {
@@ -542,7 +586,7 @@
       "aura": "",
       "biography": {
         "public": "",
-        "value": "<h2>Description</h2>\n<h3>Description</h3>\n<p>Usually confined to the glaciers that float upon the seas of Darkside-the side of tidally locked @Compendium[sfrpg.setting.f24qKgU5Wh5LLJyh]{Verces} that’s always turned away from the sun and thus never feels its heat- the abominations known as bloodbrothers hunt smaller creatures for their vital essences.<br/><br/>Measuring over 15 feet tall and 11 feet long, a bloodbrother looks like a millipede or some other armored, wormlike arthropod from the waist down. Its upper half resembles that of a muscular humanoid with a set of bony appendages protruding from a cavity in its chest. This ersatz rib cage can open like a fanged mouth, and when a bloodbrother places captured prey within it, the bones clamp down on the creature while the walls of the enclosure exude thin tendrilous suckers. These suckers tap into the prey’s circulatory system. Rather than simply drinking its blood, though, the bloodbrother uses the trapped creature as an auxiliary heart, absorbing blood-borne nutrients and using the prey’s metabolism to help it heat and feed itself. Prey can be kept alive in this way for months, until all its stored energy has been used up and the bloodbrother lets the lifeless husk fall to the ground.<br/><br/>A bloodbrother that hasn’t fed in a long time is almost sheer white, its chitinous exterior drying out and splitting like the husk of a coconut into hairlike fibers-the better to hold on to snow and disguise the creature for its ambushes. Once it’s successfully implanted a victim, however, its body takes on a purplish hue as it has rejuvenated with the flow of blood and vital fluids, while its fibrous hair lies back down and seals itself into smooth scales once more. This renewed appearance lasts for as long as the bloodbrother holds a victim and for several weeks thereafter.<br/><br/>Bloodbrothers’ gruesome feeding habits mean that intelligent creatures with any knowledge of the magical beasts usually flee from them or kill them on sight. However, a hungry bloodbrother’s fur is too stringy to be used as a pelt, and its meat tastes foul, meaning that hunting them provides nothing but a sense of bravado. As a result, the bloodbrother population on @Compendium[sfrpg.setting.f24qKgU5Wh5LLJyh]{Verces} has remained steady-and luckily small-for millennia. Their need for regular victims in an environment hostile to most life means that bloodbrothers usually live alone, though they may occasionally gather into small packs called clans. Even during times when prey is scarce, these bloodbrothers don’t cannibalize one another. Instead, they migrate toward more inhabited areas, fearlessly taking on overwhelming odds if it means refreshing the blood in their veins.<br/><br/>Despite their name-a moniker assigned to them not by themselves but by humanoid Vercites-bloodbrothers have no sense of gender, and they reproduce asexually. At a certain point in a bloodbrother’s life, a handful of small, furry nodules appears along its spine. Biologists disagree on the exact conditions that cause this; some believe it is a rise in temperature, while others posit that reproduction requires specific nutrients in the blood of the creature’s most recent victim. As the months pass, the buds grow in size (and furriness) until they are about a foot across. Then, with a series of sickening squelches, these bulbs fall off the parent bloodbrother into the surrounding snow and ice. A few moments later, they uncurl into several immature bloodbrothers that are eager to entrap their first victims (usually tiny mammals or birds). In less than a year, a young bloodbrother reaches its full size and ferocity.<br/><br/>Despite their horrific and merciless nature, bloodbrothers are not mere beasts and are actually as intelligent as the average @Compendium[sfrpg.races.AMBcyDZDtJ1OOzh3]{Human}. This facet of their nature is often overlooked due to both their lack of tool use and their apparent lack of interest in communication with other races. “Interest” is the operative word here, for while bloodbrothers have no language of their own, they appear to be able to understand those of others- they simply don’t care to speak. Communication with other members of a clan is conducted entirely through actions, physical touch, and some form of advanced intuition into the other’s needs, perhaps aided by pheromones or other signals not yet detected by researchers.<br/><br/>Bloodbrothers typically make their home in ice caves or stone caverns, patrolling the surrounding area for easy-to-capture prey. In the case of a clan, one member typically stays behind to protect the caves and any offspring therein, while those hunting return with an extra captive or two for them. When resting, the bloodbrothers slither onto one another to form one large pile. The blood-drained corpses of their pray lie scattered about the caves, eventually getting buried in the snow and ice, and trackers are quick to recognize a bloodbrother clan’s lair by the massive number of bones that can be found poking from the floor and walls.</p>\n<p>&nbsp;</p>\n<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any cold (@Compendium[sfrpg.setting.f24qKgU5Wh5LLJyh]{Verces})</p>\n<p>&nbsp;</p>\n<h3>Organization</h3>\n<p>solitary, pair, or clan (3-6)</p>\n<p>&nbsp;</p>\n"
+        "value": "<h2>Description</h2>\n<h3>Description</h3>\n<p>Usually confined to the glaciers that float upon the seas of Darkside-the side of tidally locked @UUID[Compendium.sfrpg.setting.f24qKgU5Wh5LLJyh]{Verces} that’s always turned away from the sun and thus never feels its heat- the abominations known as bloodbrothers hunt smaller creatures for their vital essences.</p>\n<p>Measuring over 15 feet tall and 11 feet long, a bloodbrother looks like a millipede or some other armored, wormlike arthropod from the waist down. Its upper half resembles that of a muscular humanoid with a set of bony appendages protruding from a cavity in its chest. This ersatz rib cage can open like a fanged mouth, and when a bloodbrother places captured prey within it, the bones clamp down on the creature while the walls of the enclosure exude thin tendrilous suckers. These suckers tap into the prey’s circulatory system. Rather than simply drinking its blood, though, the bloodbrother uses the trapped creature as an auxiliary heart, absorbing blood-borne nutrients and using the prey’s metabolism to help it heat and feed itself. Prey can be kept alive in this way for months, until all its stored energy has been used up and the bloodbrother lets the lifeless husk fall to the ground.</p>\n<p>A bloodbrother that hasn’t fed in a long time is almost sheer white, its chitinous exterior drying out and splitting like the husk of a coconut into hairlike fibers-the better to hold on to snow and disguise the creature for its ambushes. Once it’s successfully implanted a victim, however, its body takes on a purplish hue as it has rejuvenated with the flow of blood and vital fluids, while its fibrous hair lies back down and seals itself into smooth scales once more. This renewed appearance lasts for as long as the bloodbrother holds a victim and for several weeks thereafter.</p>\n<p>Bloodbrothers’ gruesome feeding habits mean that intelligent creatures with any knowledge of the magical beasts usually flee from them or kill them on sight. However, a hungry bloodbrother’s fur is too stringy to be used as a pelt, and its meat tastes foul, meaning that hunting them provides nothing but a sense of bravado. As a result, the bloodbrother population on @UUID[Compendium.sfrpg.setting.f24qKgU5Wh5LLJyh]{Verces} has remained steady-and luckily small-for millennia. Their need for regular victims in an environment hostile to most life means that bloodbrothers usually live alone, though they may occasionally gather into small packs called clans. Even during times when prey is scarce, these bloodbrothers don’t cannibalize one another. Instead, they migrate toward more inhabited areas, fearlessly taking on overwhelming odds if it means refreshing the blood in their veins.</p>\n<p>Despite their name-a moniker assigned to them not by themselves but by humanoid Vercites-bloodbrothers have no sense of gender, and they reproduce asexually. At a certain point in a bloodbrother’s life, a handful of small, furry nodules appears along its spine. Biologists disagree on the exact conditions that cause this; some believe it is a rise in temperature, while others posit that reproduction requires specific nutrients in the blood of the creature’s most recent victim. As the months pass, the buds grow in size (and furriness) until they are about a foot across. Then, with a series of sickening squelches, these bulbs fall off the parent bloodbrother into the surrounding snow and ice. A few moments later, they uncurl into several immature bloodbrothers that are eager to entrap their first victims (usually tiny mammals or birds). In less than a year, a young bloodbrother reaches its full size and ferocity.</p>\n<p>Despite their horrific and merciless nature, bloodbrothers are not mere beasts and are actually as intelligent as the average @UUID[Compendium.sfrpg.races.AMBcyDZDtJ1OOzh3]{Human}. This facet of their nature is often overlooked due to both their lack of tool use and their apparent lack of interest in communication with other races. “Interest” is the operative word here, for while bloodbrothers have no language of their own, they appear to be able to understand those of others- they simply don’t care to speak. Communication with other members of a clan is conducted entirely through actions, physical touch, and some form of advanced intuition into the other’s needs, perhaps aided by pheromones or other signals not yet detected by researchers.</p>\n<p>Bloodbrothers typically make their home in ice caves or stone caverns, patrolling the surrounding area for easy-to-capture prey. In the case of a clan, one member typically stays behind to protect the caves and any offspring therein, while those hunting return with an extra captive or two for them. When resting, the bloodbrothers slither onto one another to form one large pile. The blood-drained corpses of their pray lie scattered about the caves, eventually getting buried in the snow and ice, and trackers are quick to recognize a bloodbrother clan’s lair by the massive number of bones that can be found poking from the floor and walls.</p>\n<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any cold (@UUID[Compendium.sfrpg.setting.f24qKgU5Wh5LLJyh]{Verces})</p>\n<h3>Organization</h3>\n<p>solitary, pair, or clan (3-6)</p>\n</section>"
       },
       "class": "",
       "cr": 7,
@@ -826,33 +870,5 @@
       "size": "huge",
       "sr": 0
     }
-  },
-  "token": {
-    "name": "Bloodbrother",
-    "actorData": {},
-    "actorId": "rCzeY07mUKRC2NUM",
-    "actorLink": false,
-    "bar1": {},
-    "bar2": {},
-    "brightLight": 0,
-    "brightSight": 0,
-    "dimLight": 0,
-    "dimSight": 0,
-    "displayBars": 0,
-    "displayName": 0,
-    "disposition": -1,
-    "flags": {},
-    "height": 1,
-    "img": "icons/svg/mystery-man.svg",
-    "lightAlpha": 1,
-    "lightAngle": 360,
-    "lockRotation": false,
-    "randomImg": false,
-    "rotation": 0,
-    "scale": 1,
-    "sightAngle": 360,
-    "tint": null,
-    "vision": false,
-    "width": 1
   }
 }

@@ -2,7 +2,7 @@
  * Class to open the right windows to manage all counter classes
  */
 export class CounterManagementWindows extends Dialog {
-    constructor(dialogData={}, options={}) {
+    constructor(dialogData = {}, options = {}) {
         super(dialogData, options);
         this.options.classes = ["sfrpg", "dialog"];
         this.windows = null;
@@ -17,25 +17,25 @@ export class CounterManagementWindows extends Dialog {
         let counterClassesLabel = CONFIG.SFRPG.counterClassesLabel;
 
         const Actor = game.actors.get(actorId);
-        const htmlContent = await renderTemplate("systems/sfrpg/templates/classes/counter-management.html", {
+        const htmlContent = await renderTemplate("systems/sfrpg/templates/classes/counter-management.hbs", {
             counter: Actor.system.counterClasses.values[targetClasses].count,
             labelClasses: game.i18n.localize(counterClassesLabel[targetClasses]),
             currentPosition: Actor.system.counterClasses.values[targetClasses].position,
             classes: targetClasses,
             actorId:actorId,
             combatantId:combatantId,
-            config: CONFIG.SFRPG,
+            config: CONFIG.SFRPG
         });
 
         return new Promise((resolve, reject) => {
             this.windows = new this({
-                    title: game.i18n.localize('SFRPG.CounterClassesManagementWindowsTitles'),
-                    content: htmlContent,
-                    buttons: {},
-                    default: 'save'
-                }, {
-                    title:game.i18n.localize('SFRPG.CounterClassesManagementWindowsTitles'),
-                    width:496
+                title: game.i18n.localize('SFRPG.CounterClassesManagementWindowsTitles'),
+                content: htmlContent,
+                buttons: {},
+                default: 'save'
+            }, {
+                title:game.i18n.localize('SFRPG.CounterClassesManagementWindowsTitles'),
+                width:496
             });
             this.windows.render(true);
         });
@@ -58,7 +58,7 @@ export class CounterManagementWindows extends Dialog {
 
             classesToUpdate['solarianAttunement'] = {
                 'count': 0,
-                'position': targetClasses,
+                'position': targetClasses
             };
 
             Actor.update({
@@ -69,7 +69,7 @@ export class CounterManagementWindows extends Dialog {
             $(".counter-management-counter-input").attr('value', 0);
         });
 
-        //Button to add 1 to counter
+        // Button to add 1 to counter
         let addButton = html.find('.counter-management-button button[name=counter-management-button-add]');
         addButton.click(event => {
             event.preventDefault();
@@ -78,7 +78,7 @@ export class CounterManagementWindows extends Dialog {
             const classesToUpdate = {};
 
             if (Actor.system.counterClasses.values[dataset.managementClasses].count < 3 || !(dataset.managementClasses == 'solarianAttunement')) {
-                const newCounter = Actor.system.counterClasses.values[dataset.managementClasses].count +1;
+                const newCounter = Actor.system.counterClasses.values[dataset.managementClasses].count + 1;
                 classesToUpdate[dataset.managementClasses] = {
                     'count': newCounter,
                     'position': Actor.system.counterClasses.values[dataset.managementClasses].position
@@ -91,9 +91,9 @@ export class CounterManagementWindows extends Dialog {
                     "system.counterClasses.values": classesToUpdate
                 });
             }
-        })
+        });
 
-        //Button to remove 1 to counter
+        // Button to remove 1 to counter
         let removeButton = html.find('.counter-management-button button[name=counter-management-button-remove]');
         removeButton.click(event => {
             event.preventDefault();
@@ -102,7 +102,7 @@ export class CounterManagementWindows extends Dialog {
             const classesToUpdate = {};
 
             if (Actor.system.counterClasses.values[dataset.managementClasses].count > 0) {
-                 classesToUpdate[dataset.managementClasses] = {
+                classesToUpdate[dataset.managementClasses] = {
                     'count': Actor.system.counterClasses.values[dataset.managementClasses].count - 1,
                     'position': Actor.system.counterClasses.values[dataset.managementClasses].position
                 };
@@ -114,6 +114,6 @@ export class CounterManagementWindows extends Dialog {
                     "system.counterClasses.values": classesToUpdate
                 });
             }
-        })
+        });
     }
 }

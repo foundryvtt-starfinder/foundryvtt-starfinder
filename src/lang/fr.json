@@ -63,7 +63,7 @@
         "ACTooltipNotProficientMod": "Malus de non-maîtrise d'armure : {profMod}",
         "ACTooltipNotProficientShield": "Malus de non-maîtrise de bouclier : {profMod}",
         "ACTooltipShieldACMod": "Modificateur de bouclier: {shield} ({name})",
-        "ACvsCombatManeuversLabel": "MDC",
+        "ACvsCombatManeuversLabel": "CAC + 8",
         "ACvsCombatManeuversTitle": "AC VS Manoeuvres de combat",
         "AbilityActivationTypesDay": "Jour",
         "AbilityActivationTypesFull": "Action C.",
@@ -262,6 +262,7 @@
                 "Item": {
                     "Activate": "Activer",
                     "Create": "Créer un objet",
+                    "CreateFromCompendium": "Add item from Compendium",
                     "Deactivate": "Désactiver",
                     "Delete": "Supprimer l'objet",
                     "Edit": "Éditer l'objet",
@@ -481,6 +482,7 @@
                 "Action": "Action",
                 "Day": "Jour",
                 "Hour": "Heure",
+                "Hour8": "8 Hours",
                 "Minute": "Minute",
                 "Minute10": "10 minutes",
                 "Round": "Round de combat",
@@ -696,9 +698,12 @@
                 "Bludgeoning": "Contondant",
                 "Cold": "Froid",
                 "Custom": "Personnalisé",
+                "DamageGroup": "Damage Group {group}",
+                "DamageGroupTooltip": "If damage sections share a group, you may only enable one from that group when making a damage roll. You may freely enable/disable damage sections that lack a group.",
                 "Electricity": "Electricité",
                 "Fire": "Feu",
                 "Force": "Force",
+                "GrouplessDamage": "Groupless Damage",
                 "Hint": "Liste de types de dégâts qui s'appliquent sur ce jet de dégâts.",
                 "Nonlethal": "Non létal",
                 "Operators": {
@@ -907,6 +912,24 @@
         "FlagsInstructions": "Configurez les caractéristiques et traits de caractère qui déterminent les comportements du système.",
         "FlagsSave": "Mettre à jour les traits spéciaux.",
         "FlagsTitle": "Configurer des traits spéciaux.",
+        "FloatingHP": {
+            "HP": "HP",
+            "Sh.A.": "Sh.A.",
+            "Sh.F.": "Sh.F.",
+            "Sh.P.": "Sh.P.",
+            "Sh.S.": "Sh.S.",
+            "stamina": "SP",
+            "temp": "Temp"
+        },
+        "FloatingHPVerbose": {
+            "HP": "HP",
+            "Sh.A.": "Aft Shields",
+            "Sh.F.": "Forward Shields",
+            "Sh.P.": "Port Shields",
+            "Sh.S.": "Starboard Shields",
+            "stamina": "SP",
+            "temp": "Temp"
+        },
         "FortitudeSave": "Vigueur",
         "Ft": "Pieds",
         "GreatFortitudeHint": "Ajoute 2 au jet de sauvegarde de Vigueur",
@@ -2037,6 +2060,38 @@
                 "Hint": "Supprimer la barre d'expérience des feuilles de personnage.",
                 "Name": "Désactiver le suivi de l'expérience"
             },
+            "FloatingHP": {
+                "Button": "Configure Floating Number Settings",
+                "Hint": "Configure the floating numbers that appear on a token when their HP/SP is changed.",
+                "Menu": {
+                    "CanSeeBars": {
+                        "Hint": "Users that can see the token's resource bars will be able to see floating numbers.",
+                        "Name": "Can see resource bars?"
+                    },
+                    "CanSeeName": {
+                        "Hint": "Users that can see the token's name will be able to see floating numbers.",
+                        "Name": "Can see name?"
+                    },
+                    "Enabled": {
+                        "Hint": "Enable floating numbers when a token's HP/SP is changed.",
+                        "Name": "Enable Floating Numbers?"
+                    },
+                    "Label": "Floating Number Settings",
+                    "LimitByCriteria": {
+                        "Hint": "When enabled, users will only be shown floating numbers if they meet at least one of the criteria below. When disabled, floating numbers will be shown to all users.",
+                        "Name": "Limit by criteria?"
+                    },
+                    "MinPerm": {
+                        "Hint": "Users with this permission or higher over the token will be able to see floating numbers.",
+                        "Name": "Minimum Permission"
+                    },
+                    "VerboseFloatyText": {
+                        "Hint": "When enabled, the full names of shield arcs will be displayed.",
+                        "Name": "Verbose Mode"
+                    }
+                },
+                "Name": "Floating Number Settings"
+            },
             "GalacticTrade": {
                 "Hint": "Active le sous-système de commerce galactique, ce qui permet d'augmenter de 5 % le nombre maximal de BP d'un navire et d'ajouter des BP à l'inventaire du navire sous forme de crédits.",
                 "Name": "Activer le commerce galactique"
@@ -2301,6 +2356,7 @@
             "AttributesNone": "Aucun",
             "Browse": "Parcourir le Livre de Sorts",
             "CreateSpell": "Créer un Sort",
+            "CreateFromCompendium": "Add Spell from Compendium",
             "DeleteItem": "Supprimer un élément",
             "EditItem": "Editer un élément",
             "NoSpells": "Aucun sort trouvé pour ce set de filtres.",
@@ -2810,6 +2866,8 @@
         "WeaponPropertiesHolyWaterTooltip": "Une arme à eau bénite est imprégnée des bénédictions d’au moins une divinité orientée vers le bien (le plus souvent Hylax, Iomédae ou Sarenraé au sein des Mondes du Pacte ; mais les fidèles de n’importe quelle divinité d’alignement Bon peuvent créer une telle arme). Elles n’infligent des dégâts qu’aux morts-vivants (quel que soit leur alignement) et aux extérieurs avec le sous-type Mal et même ces créatures ne subissent aucun effet (et ne révèlent aucun signe de leur véritable nature si ce n’est pas évident) si elles réussissent un jet de sauvegarde. Fabriquer des grenades à eau bénite nécessite la bénédiction d’un prêtre d’une divinité d’alignement Bon mais la grenade en elle-même peut être fabriquée par n’importe qui quel que soit son alignement.",
         "WeaponPropertiesHybrid": "Hybride",
         "WeaponPropertiesHybridTooltip": "A weapon with this special property is a hybrid item, incorporating both magic and technology into its design. It counts as a magical weapon and gains the analog weapon special property. It consumes ammunition and battery charges normally.",
+        "WeaponPropertiesHydrodynamic": "Hydrodynamic",
+        "WeaponPropertiesHydrodynamicTooltip": "This weapon can be thrown underwater effectively, taking no penalty to attack rolls or damage for underwater combat.",
         "WeaponPropertiesIgnite": "Ignition",
         "WeaponPropertiesIgniteTooltip": "Les armes avec la propriété spéciale ignition utilisent un accélérant pour provoquer de petits feux intenses sur leurs cibles. Une cible touchée par une arme avec cette propriété spéciale doit réussir un jet de Réflexes (DD = 20 + 1/2 le niveau de l’objet + votre bonus de Dextérité) ou subir l’état enflammé (Livre de règles page 275) et les dégâts indiqués. Subir plusieurs fois l’état enflammé à cause de cette propriété spéciale n’augmente pas les dégâts de feu, vous ne subissez à chaque round que les dégâts d’ignition indiqués les plus élevés. Un personnage qui subit l’état enflammé à cause d’une autre source (comme l’effet critique combustion, même à cause d’une arme avec ignition) ajoute ces dégâts aux dégâts de feu qu’il subit à chaque round. Mettre un terme à l’état enflammé éteint toutes les sources de dégâts dues à cet état.",
         "WeaponPropertiesIndirect": "Indirecte",

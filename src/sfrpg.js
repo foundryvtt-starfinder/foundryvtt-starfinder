@@ -49,7 +49,6 @@ import { TraitSelectorSFRPG } from './module/apps/trait-selector.js';
 import { SFRPGHealingSetting, SFRPGDamage } from "./module/actor/mixins/actor-damage.js";
 
 import { initializeBrowsers } from "./module/packs/browsers.js";
-import { } from "./module/combat/combat.js";
 import SFRPGRoll from "./module/rolls/roll.js";
 import SFRPGTokenDocument from "./module/token/tokendocument.js";
 import RollDialog from "./module/apps/roll-dialog.js";
@@ -58,15 +57,16 @@ import RollContext from "./module/rolls/rollcontext.js";
 import RollTree from "./module/rolls/rolltree.js";
 import { SFRPGTokenHUD } from "./module/token/token-hud.js";
 import setupVision from "./module/vision.js";
+import registerCompendiumArt from "./module/utils/compendium-art.js";
 
 let initTime = null;
 
-Hooks.once('init', async function () {
+Hooks.once('init', async function() {
     initTime = (new Date()).getTime();
     console.log(`Starfinder | [INIT] Initializing the Starfinder System`);
 
     console.log(
-`__________________________________________________
+        `__________________________________________________
  ____  _              __ _           _
 / ___|| |_ __ _ _ __ / _(_)_ __   __| | ___ _ __
 \\___ \\| __/ _\` | '__| |_| | '_ \\ / _\` |/ _ \\ '__|
@@ -92,7 +92,7 @@ Hooks.once('init', async function () {
             ActorSheetSFRPGVehicle,
             // Item Sheets
             ItemCollectionSheet,
-            ItemSheetSFRPG,            
+            ItemSheetSFRPG,
             // Dialogs
             ActorMovementConfig,
             AddEditSkillDialog,
@@ -103,12 +103,13 @@ Hooks.once('init', async function () {
             RollDialog,
             NpcSkillToggleDialog,
             SpellCastDialog,
-            ShortRestDialog,                        
+            ShortRestDialog,
             // Misc
-            ActorSheetFlags,            
-            SFRPGModifierApplication,            
+            ActorSheetFlags,
+            SFRPGModifierApplication,
             TraitSelectorSFRPG
         },
+        compendiumArt: { map: new Map(), refresh: registerCompendiumArt },
         config: SFRPG,
         dice: DiceSFRPG,
         documents: { ActorSFRPG, ItemSFRPG, CombatSFRPG },
@@ -163,15 +164,15 @@ Hooks.once('init', async function () {
     CONFIG.Dice.rolls.unshift(SFRPGRoll);
 
     CONFIG.Token.documentClass = SFRPGTokenDocument;
-    
+
     CONFIG.fontDefinitions["Exo2"] = {
         editor: true,
         fonts: [
-        {urls: ["../systems/sfrpg/fonts/Exo2-VariableFont_wght.ttf"]},
-        {urls: ["../systems/sfrpg/fonts/Exo2-Italic-VariableFont_wght.ttf"], weight: 700}
+            {urls: ["../systems/sfrpg/fonts/Exo2-VariableFont_wght.ttf"]},
+            {urls: ["../systems/sfrpg/fonts/Exo2-Italic-VariableFont_wght.ttf"], weight: 700}
         ]
     };
-    
+
     CONFIG.defaultFontFamily = "Exo 2";
 
     CONFIG.canvasTextStyle = new PIXI.TextStyle({
@@ -196,7 +197,7 @@ Hooks.once('init', async function () {
     registerSystemSettings();
 
     if (game.settings.get("sfrpg", "sfrpgTheme")) {
-        const logo = document.querySelector("#logo")
+        const logo = document.querySelector("#logo");
         logo.src = "systems/sfrpg/images/starfinder_icon.webp";
         logo.style.width = "92px";
         logo.style.height = "92px";
@@ -212,9 +213,9 @@ Hooks.once('init', async function () {
 
         Hooks.on("renderPause", () => {
             const paused = document.querySelector("figure#pause");
-            const icon = paused.children[0]
+            const icon = paused.children[0];
             icon.src = "systems/sfrpg/images/cup/organizations/starfinder_society.webp";
-        })        
+        });
     }
 
     console.log("Starfinder | [INIT] Registering sheets");
@@ -236,7 +237,7 @@ Hooks.once('init', async function () {
     console.log(`Starfinder | [INIT] Done (operation took ${finishTime - initTime} ms)`);
 });
 
-Hooks.once("setup", function () {
+Hooks.once("setup", function() {
     console.log(`Starfinder | [SETUP] Setting up Starfinder System subsystems`);
     const setupTime = (new Date()).getTime();
 
@@ -256,22 +257,78 @@ Hooks.once("setup", function () {
 
     console.log("Starfinder | [SETUP] Localizing global arrays");
     const toLocalize = [
-        "abilities", "abilityActivationTypes", "acpEffectingArmorType", "actionTargets", "actionTargetsStarship", "actorSizes", "actorTypes", "alignments",
-            "alignmentsNPC", "ammunitionTypes", "armorProficiencies", "armorTypes", "augmentationSytems", "augmentationTypes",
+        "abilities",
+        "abilityActivationTypes",
+        "acpEffectingArmorType",
+        "actionTargets",
+        "actionTargetsStarship",
+        "actorSizes",
+        "actorTypes",
+        "alignments",
+        "alignmentsNPC",
+        "ammunitionTypes",
+        "armorProficiencies",
+        "armorTypes",
+        "augmentationSytems",
+        "augmentationTypes",
         "babProgression",
-        "capacityUsagePer", "conditionTypes", "consumableTypes", "containableTypes", "currencies",
-        "damageReductionTypes", "damageTypeOperators", "damageTypes", "distanceUnits", "descriptors", "descriptorsTooltips",
-        "energyDamageTypes", "energyResistanceTypes",
-        "featTypes", "flightManeuverability",
+        "capacityUsagePer",
+        "conditionTypes",
+        "consumableTypes",
+        "containableTypes",
+        "currencies",
+        "damageReductionTypes",
+        "damageTypeOperators",
+        "damageTypes",
+        "distanceUnits",
+        "descriptors",
+        "descriptorsTooltips",
+        "energyDamageTypes",
+        "energyResistanceTypes",
+        "featTypes",
+        "flightManeuverability",
         "healingTypes",
-        "itemActionTypes", "itemTypes",
+        "itemActionTypes",
+        "itemTypes",
         "kineticDamageTypes",
-        "languages", "limitedUsePeriods",
-        "maneuverability", "modifierArmorClassAffectedValues", "modifierEffectTypes", "modifierType", "modifierTypes",
-        "saveDescriptors", "saveProgression", "saves", "senses", "skillProficiencyLevels", "skills", "specialMaterials", "speeds", "spellAreaEffects", "spellAreaShapes", "spellcastingClasses", "spellLevels", "spellPreparationModes",
-            "starshipArcs", "starshipRoles", "starshipSizes", "starshipSystemStatus", "starshipWeaponClass", "starshipWeaponProperties", "starshipWeaponRanges", "starshipWeaponTypes",
-        "vehicleCoverTypes", "vehicleSizes", "vehicleTypes",
-        "weaponCategories", "weaponCriticalHitEffects", "weaponDamageTypes", "weaponProficiencies", "weaponProperties", "weaponPropertiesTooltips", "weaponTypes"
+        "languages",
+        "limitedUsePeriods",
+        "maneuverability",
+        "modifierArmorClassAffectedValues",
+        "modifierEffectTypes",
+        "modifierType",
+        "modifierTypes",
+        "saveDescriptors",
+        "saveProgression",
+        "saves",
+        "senses",
+        "skillProficiencyLevels",
+        "skills",
+        "specialMaterials",
+        "speeds",
+        "spellAreaEffects",
+        "spellAreaShapes",
+        "spellcastingClasses",
+        "spellLevels",
+        "spellPreparationModes",
+        "starshipArcs",
+        "starshipRoles",
+        "starshipSizes",
+        "starshipSystemStatus",
+        "starshipWeaponClass",
+        "starshipWeaponProperties",
+        "starshipWeaponRanges",
+        "starshipWeaponTypes",
+        "vehicleCoverTypes",
+        "vehicleSizes",
+        "vehicleTypes",
+        "weaponCategories",
+        "weaponCriticalHitEffects",
+        "weaponDamageTypes",
+        "weaponProficiencies",
+        "weaponProperties",
+        "weaponPropertiesTooltips",
+        "weaponTypes"
     ];
 
     for (let o of toLocalize) {
@@ -318,6 +375,9 @@ Hooks.once("ready", async () => {
     console.log("Starfinder | [SETUP] Setting up Vision Modes");
     setupVision();
 
+    console.log("Starfinder | [READY] Applying artwork from modules to compendiums");
+    registerCompendiumArt();
+
     if (game.user.isGM) {
         const currentSchema = game.settings.get('sfrpg', 'worldSchemaVersion') ?? 0;
         const systemSchema = Number(game.system.flags.sfrpg.schema);
@@ -333,12 +393,13 @@ Hooks.once("ready", async () => {
                     } else {
                         ui.notifications.info(game.i18n.localize("SFRPG.MigrationSuccessfulMessage"), {permanent: true});
                     }
-                }).catch((error) => {
+                })
+                .catch((error) => {
                     ui.notifications.error(game.i18n.localize("SFRPG.MigrationErrorMessage"), {permanent: true});
                     console.error(error);
                 });
         }
-    
+
         console.log("Starfinder | [READY] Checking items for container updates");
         if (migrationPromise) {
             migrationPromise.then(async () => {
@@ -351,7 +412,7 @@ Hooks.once("ready", async () => {
 
     const finishTime = (new Date()).getTime();
     console.log(`Starfinder | [READY] Done (operation took ${finishTime - readyTime} ms)`);
-    
+
     const startupDuration = finishTime - initTime;
     console.log(`Starfinder | [STARTUP] Total launch took ${Number(startupDuration / 1000).toFixed(2)} seconds.`);
 });
@@ -386,7 +447,7 @@ async function migrateOldContainers() {
     }
 }
 
-Hooks.on("canvasInit", function () {
+Hooks.on("canvasInit", function() {
     canvas.grid.diagonalRule = game.settings.get("sfrpg", "diagonalMovement");
     SquareGrid.prototype.measureDistances = measureDistances;
 });
@@ -408,9 +469,9 @@ Hooks.on("hotbarDrop", (bar, data, slot) => {
 
 function registerMathFunctions() {
     Math.lookup = function(value) {
-        for (let i = 1; i<arguments.length - 1; i+=2) {
+        for (let i = 1; i < arguments.length - 1; i += 2) {
             if (arguments[i] === value) {
-                return arguments[i+1];
+                return arguments[i + 1];
             }
         }
         return 0;
@@ -418,7 +479,7 @@ function registerMathFunctions() {
 
     Math.lookupRange = function(value, lowestValue) {
         let baseValue = lowestValue;
-        for (let i = 2; i<arguments.length - 1; i+=2) {
+        for (let i = 2; i < arguments.length - 1; i += 2) {
             if (arguments[i] > value) {
                 return baseValue;
             }
@@ -431,7 +492,7 @@ function registerMathFunctions() {
 /**
  * Create a Macro form an Item drop.
  * Get an existing item macro if one exists, otherwise create a new one.
- * 
+ *
  * @param {Object} data The item data
  * @param {number} slot The hotbar slot to use
  * @returns {Promise}
@@ -467,7 +528,7 @@ function rollItemMacro(itemName) {
 }
 
 function setupHandlebars() {
-    Handlebars.registerHelper("length", function (value) {
+    Handlebars.registerHelper("length", function(value) {
         if (value instanceof Array) {
             return value.length;
         } else if (value instanceof Object) {
@@ -476,36 +537,36 @@ function setupHandlebars() {
         return 0;
     });
 
-    Handlebars.registerHelper("not", function (value) {
-        return !Boolean(value);
+    Handlebars.registerHelper("not", function(value) {
+        return !value;
     });
 
-    Handlebars.registerHelper("add", function (v1, v2, options) {
+    Handlebars.registerHelper("add", function(v1, v2, options) {
         'use strict';
         return v1 + v2;
     });
 
-    Handlebars.registerHelper("sub", function (v1, v2, options) {
+    Handlebars.registerHelper("sub", function(v1, v2, options) {
         'use strict';
         return v1 - v2;
     });
 
-    Handlebars.registerHelper("mult", function (v1, v2, options) {
+    Handlebars.registerHelper("mult", function(v1, v2, options) {
         'use strict';
         return v1 * v2;
     });
 
-    Handlebars.registerHelper("div", function (v1, v2, options) {
+    Handlebars.registerHelper("div", function(v1, v2, options) {
         'use strict';
         return v1 / v2;
     });
 
-    Handlebars.registerHelper("isNull", function (value) {
+    Handlebars.registerHelper("isNull", function(value) {
         if (value === 0) return false;
-        return !Boolean(value);
+        return !value;
     });
 
-    Handlebars.registerHelper('greaterThan', function (v1, v2, options) {
+    Handlebars.registerHelper('greaterThan', function(v1, v2, options) {
         'use strict';
         if (v1 > v2) {
             return true;
@@ -513,12 +574,12 @@ function setupHandlebars() {
         return false;
     });
 
-    Handlebars.registerHelper("isNaN", function (value) {
+    Handlebars.registerHelper("isNaN", function(value) {
         const valueNumber = Number(value);
         return Number.isNaN(valueNumber);
     });
 
-    Handlebars.registerHelper('ellipsis', function (displayedValue, limit) {
+    Handlebars.registerHelper('ellipsis', function(displayedValue, limit) {
         let str = displayedValue.toString();
         if (str.length <= limit) {
             return str;
@@ -526,7 +587,7 @@ function setupHandlebars() {
         return str.substring(0, limit) + '…';
     });
 
-    Handlebars.registerHelper('formatBulk', function (bulk) {
+    Handlebars.registerHelper('formatBulk', function(bulk) {
         const reduced = bulk / 10;
         if (reduced < 0.1) {
             return "-";
@@ -535,7 +596,7 @@ function setupHandlebars() {
         } else return Math.floor(reduced);
     });
 
-    Handlebars.registerHelper('getTotalStorageCapacity', function (item) {
+    Handlebars.registerHelper('getTotalStorageCapacity', function(item) {
         let totalCapacity = 0;
         if (item?.system?.container?.storage && item.system.container.storage.length > 0) {
             for (let storage of item.system.container.storage) {
@@ -545,15 +606,15 @@ function setupHandlebars() {
         return totalCapacity;
     });
 
-    Handlebars.registerHelper('getStarfinderBoolean', function (settingName) {
+    Handlebars.registerHelper('getStarfinderBoolean', function(settingName) {
         return game.settings.get('sfrpg', settingName);
     });
 
-    Handlebars.registerHelper('capitalize', function (value) {
+    Handlebars.registerHelper('capitalize', function(value) {
         return value.capitalize();
     });
 
-    Handlebars.registerHelper('contains', function (container, value) {
+    Handlebars.registerHelper('contains', function(container, value) {
         if (!container || !value) return false;
 
         if (container instanceof Array) {
@@ -567,38 +628,38 @@ function setupHandlebars() {
         return false;
     });
 
-    Handlebars.registerHelper('console', function (value) {
+    Handlebars.registerHelper('console', function(value) {
         console.log(value);
     });
 
-    Handlebars.registerHelper('indexOf', function (array, value, zeroBased = true) {
+    Handlebars.registerHelper('indexOf', function(array, value, zeroBased = true) {
         const index = array.indexOf(value);
         if (index < 0) return index;
         return index + (zeroBased ? 0 : 1);
     });
 
-    Handlebars.registerHelper('append', function (left, right) {
+    Handlebars.registerHelper('append', function(left, right) {
         return left + right;
     });
 
     /** Returns null if 0 is entered. */
-    Handlebars.registerHelper('modToScoreRange', function (value) {
+    Handlebars.registerHelper('modToScoreRange', function(value) {
         const score = 10 + value * 2;
-        return `${score}-${score+1}`;
+        return `${score}-${score + 1}`;
     });
 
     /** Returns null if 0 is entered. */
-    Handlebars.registerHelper('nullOrNonZero', function (value) {
+    Handlebars.registerHelper('nullOrNonZero', function(value) {
         if (value === 0) return null;
         return value;
     });
 
     /** Returns the value based on whether left is null or not. */
-    Handlebars.registerHelper('leftOrRight', function (left, right) {
+    Handlebars.registerHelper('leftOrRight', function(left, right) {
         return left || right;
     });
 
-    Handlebars.registerHelper('createTippy', function (options) {
+    Handlebars.registerHelper('createTippy', function(options) {
         const title = options.hash['title'];
         const subtitle = options.hash['subtitle'];
         const attributes = options.hash['attributes'];
@@ -615,7 +676,7 @@ function setupHandlebars() {
         if (attributes) {
             const printableAttributes = [];
             if (attributes instanceof Array) {
-                for(const attrib of attributes) {
+                for (const attrib of attributes) {
                     printableAttributes.push(attrib);
                 }
             } else if (attributes instanceof Object) {
@@ -635,7 +696,7 @@ function setupHandlebars() {
         if (tooltips) {
             const printabletooltips = [];
             if (tooltips instanceof Array) {
-                for(const tooltip of tooltips) {
+                for (const tooltip of tooltips) {
                     printabletooltips.push(game.i18n.localize(tooltip));
                 }
             } else {
@@ -654,7 +715,7 @@ function setupHandlebars() {
         return new Handlebars.SafeString(html);
     });
 
-    Handlebars.registerHelper('currencyFormat', function (value) {
+    Handlebars.registerHelper('currencyFormat', function(value) {
         const currencyLocale = game.settings.get('sfrpg', 'currencyLocale');
         const moneyFormatter  = new Intl.NumberFormat(currencyLocale);
         const formattedValue = moneyFormatter.format(value);

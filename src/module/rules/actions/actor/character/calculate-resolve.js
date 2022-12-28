@@ -1,6 +1,6 @@
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../../modifiers/types.js";
 
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateResolve", (fact, context) => {
         const data = fact.data;
 
@@ -28,7 +28,7 @@ export default function (engine) {
                     source: bonus.name
                 }));
             }
-            
+
             return computedBonus;
         };
 
@@ -100,7 +100,7 @@ export default function (engine) {
 
             return sum;
         }, 0);
-        
+
         rpMax += bonus;
 
         data.attributes.rp.max = rpMax;

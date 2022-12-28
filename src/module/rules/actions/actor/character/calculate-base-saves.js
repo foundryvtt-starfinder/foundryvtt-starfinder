@@ -1,4 +1,4 @@
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateBaseSaves", (fact, context) => {
         const data = fact.data;
         const classes = fact.classes;
@@ -14,7 +14,7 @@ export default function (engine) {
         for (const cls of classes) {
             const classData = cls.system;
 
-            let slowSave = Math.floor(classData.levels * (1/3));
+            let slowSave = Math.floor(classData.levels * (1 / 3));
             let fastSave = Math.floor(classData.levels * 0.5) + 2;
 
             fortSave += classData.fort === "slow" ? slowSave : fastSave;

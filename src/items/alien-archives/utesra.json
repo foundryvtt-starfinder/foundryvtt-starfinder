@@ -2,18 +2,13 @@
   "_id": "jrMerazdrpnv5iEa",
   "name": "Utesra",
   "type": "npc2",
-  "effects": [],
-  "flags": {},
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "_id": "Boj5YzX4CjzUP4tj",
       "name": "Bite",
       "type": "weapon",
-      "effects": [],
-      "flags": {},
       "img": "icons/svg/mystery-man.svg",
-      "sort": 100000,
       "system": {
         "type": "",
         "ability": "",
@@ -230,10 +225,7 @@
       "_id": "GMDvDREWOCwHI2LB",
       "name": "Shock Tendril (grab)",
       "type": "weapon",
-      "effects": [],
-      "flags": {},
       "img": "icons/svg/mystery-man.svg",
-      "sort": 200000,
       "system": {
         "type": "",
         "ability": "",
@@ -313,7 +305,7 @@
         "description": {
           "chat": "",
           "unidentified": "",
-          "value": "An utesra can lash with its electrically charged dorsal stalk. This attack lets the utesra ensnare the target per the grab ability, though the attack result is compared to the target’s EAC to determine whether the creature is @Compendium[sfrpg.conditions.4AkWDHGM6gHDepHN]{Grappled} or @Compendium[sfrpg.conditions.XgK4EdO5D3Fj3iWz]{Pinned}. Anytime the utesra renews the grapple, it also deals the tendril’s damage and repositions the target 5 feet closer to the utesra, plus 5 more feet for every 5 by which the attack exceeds the target’s EAC + 4. If the target ends the forced movement within the utesra’s normal reach, it can bite the target as a move action. A creature can sever a shock tendril by dealing 20 points of slashing damage to it (the tendril has the same AC as the utesra). An utesra can regenerate a severed tendril over the course of a week."
+          "value": "<p>An utesra can lash with its electrically charged dorsal stalk. This attack lets the utesra ensnare the target per the grab ability, though the attack result is compared to the target’s EAC to determine whether the creature is @UUID[Compendium.sfrpg.conditions.4AkWDHGM6gHDepHN]{Grappled} or @UUID[Compendium.sfrpg.conditions.XgK4EdO5D3Fj3iWz]{Pinned}. Anytime the utesra renews the grapple, it also deals the tendril’s damage and repositions the target 5 feet closer to the utesra, plus 5 more feet for every 5 by which the attack exceeds the target’s EAC + 4. If the target ends the forced movement within the utesra’s normal reach, it can bite the target as a move action. A creature can sever a shock tendril by dealing 20 points of slashing damage to it (the tendril has the same AC as the utesra). An utesra can regenerate a severed tendril over the course of a week.</p>"
         },
         "descriptors": [],
         "duration": {
@@ -450,10 +442,7 @@
       "_id": "hrFcJ4KCbZpUkASt",
       "name": "Strobe (Ex)",
       "type": "feat",
-      "effects": [],
-      "flags": {},
       "img": "icons/svg/mystery-man.svg",
-      "sort": 400000,
       "system": {
         "type": "",
         "ability": "",
@@ -484,7 +473,7 @@
         "description": {
           "chat": "",
           "unidentified": "",
-          "value": "<p>As a standard action, an utesra can flicker one or more of its dorsal stalks until the beginning of its next turn, creating subtle, calming electromagnetic vibrations. The utesra can maintain this strobing each round as a move action. Any creature other than an utesra within 60 feet of the utesra and able to see the display becomes fascinated (Will DC 13 negates) for as long as the utesra continues to strobe, though threatening actions can potentially break the effect as normal. A creature that succeeds at this saving throw is immune to the strobe of utesras (but not utesra phylarchs) for 24 hours. The utesra can&rsquo;t concurrently use a stalk to create a shock tendril and to strobe.</p>"
+          "value": "<p>As a standard action, an utesra can flicker one or more of its dorsal stalks until the beginning of its next turn, creating subtle, calming electromagnetic vibrations. The utesra can maintain this strobing each round as a move action. Any creature other than an utesra within 60 feet of the utesra and able to see the display becomes fascinated (Will DC 13 negates) for as long as the utesra continues to strobe, though threatening actions can potentially break the effect as normal. A creature that succeeds at this saving throw is immune to the strobe of utesras (but not utesra phylarchs) for 24 hours. The utesra can’t concurrently use a stalk to create a shock tendril and to strobe.</p>"
         },
         "descriptors": [],
         "duration": {
@@ -523,6 +512,69 @@
       }
     }
   ],
+  "prototypeToken": {
+    "name": "Utesra",
+    "actorLink": false,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": ""
+    },
+    "displayBars": 20,
+    "displayName": 20,
+    "disposition": -1,
+    "height": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 360,
+      "animation": {
+        "type": null,
+        "intensity": 5,
+        "reverse": false,
+        "speed": 5
+      },
+      "attenuation": 0.5,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "contrast": 0,
+      "darkness": {
+        "max": 1,
+        "min": 0
+      },
+      "dim": 0,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "shadows": 0
+    },
+    "lockRotation": false,
+    "mirrorX": false,
+    "mirrorY": false,
+    "randomImg": false,
+    "rotation": 0,
+    "scale": 1,
+    "sight": {
+      "angle": 360,
+      "attenuation": 0.1,
+      "brightness": 1,
+      "color": null,
+      "contrast": 0,
+      "enabled": false,
+      "range": 0,
+      "saturation": 0,
+      "visionMode": "basic"
+    },
+    "texture": {
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": null
+    },
+    "width": 1
+  },
   "system": {
     "abilities": {
       "cha": {
@@ -623,18 +675,6 @@
         "tooltip": [],
         "value": 0
       },
-      "rp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
-      "sp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
       "space": "5 ft.",
       "speed": {
         "burrowing": {
@@ -715,7 +755,7 @@
       "aura": "",
       "biography": {
         "public": "",
-        "value": "<h2>Description</h2>\n<p>Utesras evolved on the rain-ravaged planet of Gaskar III in Near Space. Often simply called &ldquo;cliff anglers,&rdquo; they are insectile predators adapted to clinging to wet escarpments and luring prey within reach using hypnotic light displays. A series of electrocyte-dense organs run along an utresa&rsquo;s thorax, head, and hunting tendrils, allowing the creature to sense its surroundings with sonarlike pulses, create soft flashes of light and direct painful shocks. The haunting lights have spawned cautionary tales that mirror those of the will-o&rsquo;-wisp, warning travelers against wandering toward the promise of lights spotted in the rain and fog.</p>\n<p>Utesras are obligate parasitoids, able to reproduce only by incubating their eggs in others&rsquo; flesh. The common utesra is merely a voracious larval form of the organism, and only after feeding consistently and molting repeatedly does the larva develop into an adult, referred to as an utesra phylarch. Phylarches incapacitate larger prey to lay their eggs in, typically abandoning the host in a relatively dry location until the eggs can hatch. In rare cases a phylarch even shadows its hosts for days, chasing off other predators like an ill-intentioned guardian.</p>\n<p>Although stealthy, utesras favor ambushes over patiently stalking victims. However, ongoing settlement of their longstanding habitat has led to an increase in aggressive and opportunistic behavior. In addition to utesras increasingly breaking into small houses on Gaskar III, several medical evacuations of utesras&rsquo; victims have accidentally spread the vermin beyond that planet. Most infamously, a crew of biological surveyors attempted to flee to @Compendium[sfrpg.setting.hepqXl6gFvs5sDQu]{Absalom Station} after being attacked by a phylarch, but by the time the starship emerged from the Drift, juvenile utesras had hatched and overrun the ship, killing its crew.</p>\n<p>The ship later crashed into @Compendium[sfrpg.setting.gzXT0xwsj8kQAoj0]{Akiton}, and the surviving&nbsp;utesras have since spread along the planet&rsquo;s Edaio Rift as an&nbsp;invasive species&mdash;especially in the cliff city of Maro, where&nbsp;they prey upon humanoids. The creatures&rsquo; affinity for cliffs&nbsp;has even resulted in their taking over old skyscrapers and&nbsp;other artificial structures to form deadly hunting platforms&nbsp;where their haunting lures blend in with other urban lights.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any hill, mountain, or urban</p>\n<p>&nbsp;</p>\n<h3>Organization</h3>\n<p>solitary, pair, or scintillation (3&ndash;8)</p>\n<p>&nbsp;</p>\n</section>"
+        "value": "<h2>Description</h2>\n<p>Utesras evolved on the rain-ravaged planet of Gaskar III in Near Space. Often simply called “cliff anglers,” they are insectile predators adapted to clinging to wet escarpments and luring prey within reach using hypnotic light displays. A series of electrocyte-dense organs run along an utresa’s thorax, head, and hunting tendrils, allowing the creature to sense its surroundings with sonarlike pulses, create soft flashes of light and direct painful shocks. The haunting lights have spawned cautionary tales that mirror those of the will-o’-wisp, warning travelers against wandering toward the promise of lights spotted in the rain and fog.</p>\n<p>Utesras are obligate parasitoids, able to reproduce only by incubating their eggs in others’ flesh. The common utesra is merely a voracious larval form of the organism, and only after feeding consistently and molting repeatedly does the larva develop into an adult, referred to as an utesra phylarch. Phylarches incapacitate larger prey to lay their eggs in, typically abandoning the host in a relatively dry location until the eggs can hatch. In rare cases a phylarch even shadows its hosts for days, chasing off other predators like an ill-intentioned guardian.</p>\n<p>Although stealthy, utesras favor ambushes over patiently stalking victims. However, ongoing settlement of their longstanding habitat has led to an increase in aggressive and opportunistic behavior. In addition to utesras increasingly breaking into small houses on Gaskar III, several medical evacuations of utesras’ victims have accidentally spread the vermin beyond that planet. Most infamously, a crew of biological surveyors attempted to flee to @UUID[Compendium.sfrpg.setting.hepqXl6gFvs5sDQu]{Absalom Station} after being attacked by a phylarch, but by the time the starship emerged from the Drift, juvenile utesras had hatched and overrun the ship, killing its crew.</p>\n<p>The ship later crashed into @UUID[Compendium.sfrpg.setting.gzXT0xwsj8kQAoj0]{Akiton}, and the surviving&nbsp;utesras have since spread along the planet’s Edaio Rift as an&nbsp;invasive species—especially in the cliff city of Maro, where&nbsp;they prey upon humanoids. The creatures’ affinity for cliffs&nbsp;has even resulted in their taking over old skyscrapers and&nbsp;other artificial structures to form deadly hunting platforms&nbsp;where their haunting lures blend in with other urban lights.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any hill, mountain, or urban</p>\n<h3>Organization</h3>\n<p>solitary, pair, or scintillation (3–8)</p>\n</section>"
       },
       "class": "",
       "cr": 5,
@@ -1019,44 +1059,5 @@
       "size": "medium",
       "sr": 0
     }
-  },
-  "token": {
-    "name": "Utesra",
-    "actorId": "duCrvsOiif0cuK9d",
-    "actorLink": false,
-    "bar1": {
-      "attribute": "attributes.hp"
-    },
-    "bar2": {
-      "attribute": ""
-    },
-    "brightLight": 0,
-    "brightSight": 0,
-    "dimLight": 0,
-    "dimSight": 0,
-    "displayBars": 40,
-    "displayName": 0,
-    "disposition": -1,
-    "flags": {},
-    "height": 1,
-    "img": "icons/svg/mystery-man.svg",
-    "lightAlpha": 1,
-    "lightAngle": 360,
-    "lightAnimation": {
-      "type": "",
-      "intensity": 5,
-      "speed": 5
-    },
-    "lightColor": "",
-    "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
-    "randomImg": false,
-    "rotation": 0,
-    "scale": 1,
-    "sightAngle": 360,
-    "tint": "",
-    "vision": false,
-    "width": 1
   }
 }

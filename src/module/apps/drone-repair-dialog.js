@@ -3,7 +3,7 @@
  * @type {Dialog}
  */
 export class DroneRepairDialog extends Dialog {
-    constructor(actor, dialogData={}, options={}) {
+    constructor(actor, dialogData = {}, options = {}) {
         super(dialogData, options);
         this.options.classes = ["sfrpg", "dialog"];
 
@@ -13,7 +13,7 @@ export class DroneRepairDialog extends Dialog {
          */
         this.actor = actor;
     }
-    
+
     activateListeners(html) {
         super.activateListeners(html);
 
@@ -32,9 +32,9 @@ export class DroneRepairDialog extends Dialog {
         DroneRepairDialog.improvedRepairFeat = improvedRepairFeatCheckbox.checked;
     }
 
-    static async droneRepairDialog({actor, improvedRepairFeat=false}={}) {
+    static async droneRepairDialog({actor, improvedRepairFeat = false} = {}) {
         DroneRepairDialog.restoreStaminaPoints = false;
-        const html = await renderTemplate("systems/sfrpg/templates/apps/drone-repair.html");
+        const html = await renderTemplate("systems/sfrpg/templates/apps/drone-repair.hbs");
         return new Promise(resolve => {
             const dlg = new this(actor, {
                 title: game.i18n.format("SFRPG.RepairDroneDialogTitle"),

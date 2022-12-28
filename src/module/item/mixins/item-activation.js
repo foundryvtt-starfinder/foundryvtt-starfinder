@@ -18,7 +18,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
     canBeUsed() {
         return this.getRemainingUses() > 0 && this.getMaxUses() > 0;
     }
-    
+
     canBeActivated() {
         const itemData = this.system;
         if (this.type === "vehicleSystem") {
@@ -32,11 +32,11 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
         const itemData = this.system;
         return itemData.isActive;
     }
-    
+
     setActive(active) {
         // Only true and false are accepted.
         if (active !== true && active !== false) {
-            console.log(`Entering an invalid value ${active} for item.setActive()! Only true or false are allowed.`)
+            console.log(`Entering an invalid value ${active} for item.setActive()! Only true or false are allowed.`);
             return;
         }
 
@@ -61,7 +61,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
 
         const updatePromise = this.update(updateData);
         const rollMode = game.settings.get("core", "rollMode");
-        
+
         if (active) {
             updatePromise.then(() => {
                 // Render the chat card template
@@ -81,7 +81,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                     templateData.sceneId = this.actor.token.parent.id;
                 }
 
-                const template = `systems/sfrpg/templates/chat/item-action-card.html`;
+                const template = `systems/sfrpg/templates/chat/item-action-card.hbs`;
                 const htmlPromise = renderTemplate(template, templateData);
                 htmlPromise.then((html) => {
                     // Create the chat message
@@ -110,7 +110,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
             });
         } else {
             if (this.system.duration.value || this.system.uses.max > 0) {
-               updatePromise.then(() => {
+                updatePromise.then(() => {
                     // Render the chat card template
                     const templateData = {
                         actor: this.actor,
@@ -122,10 +122,10 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                         templateData.tokenId = this.actor.token.id;
                         templateData.sceneId = this.actor.token.parent.id;
                     }
-        
-                    const template = `systems/sfrpg/templates/chat/item-action-card.html`;
+
+                    const template = `systems/sfrpg/templates/chat/item-action-card.hbs`;
                     const htmlPromise = renderTemplate(template, templateData);
-        
+
                     htmlPromise.then((html) => {
                         // Create the chat message
                         const chatData = {
@@ -145,7 +145,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                         if (rollMode === "selfroll") {
                             chatData["whisper"] = ChatMessage.getWhisperRecipients(game.user.name);
                         }
-            
+
                         ChatMessage.create(chatData, { displaySheet: false });
                     });
 
@@ -156,4 +156,4 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
 
         return updatePromise;
     }
-}
+};

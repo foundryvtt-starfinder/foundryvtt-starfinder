@@ -81,43 +81,43 @@ export class SFRPGDamage {
 
     /**
      * Creates a new SFRPGDamage object.
-     * 
+     *
      * @param {Number} damageAmount The amount of damage dealt.
      * @param {Array or String} damageTypes (Optional, default empty) Either a string or array object containing comma or semi-colon separated strings, e.g.: "fire, piercing", or "f;p", or ["f", "p"], or ["fire", "piercing"]. If left empty, untyped damage is applied.
      * @param {Bool} isCritical (Optional, default false) A boolean value indicating if this damage was critical damage.
      * @param {Array} properties (Optional, default empty) An array containing any additional damage properties, e.g.: ["adamantine", "line", "ripper"]; See SFRPG.specialMaterials, SFRPG.weaponProperties, and SFRPG.starshipWeaponProperties
      */
-     static createDamage(damageAmount, damageTypes = [], isCritical = false, properties = []) {
-         const parsedDamageTypes = [];
-         if (damageTypes.constructor === String) {
-             const splitTypes = damageTypes.trim().split(/([^,;])+/gi);
-             for (const type of splitTypes) {
-                 if (type === ',' || type === ';') {
-                     continue;
-                 }
-                 
-                 const trimmedType = SFRPGDamage.parseDamageType(type);
-                 if (trimmedType) {
+    static createDamage(damageAmount, damageTypes = [], isCritical = false, properties = []) {
+        const parsedDamageTypes = [];
+        if (damageTypes.constructor === String) {
+            const splitTypes = damageTypes.trim().split(/([^,;])+/gi);
+            for (const type of splitTypes) {
+                if (type === ',' || type === ';') {
+                    continue;
+                }
+
+                const trimmedType = SFRPGDamage.parseDamageType(type);
+                if (trimmedType) {
                     parsedDamageTypes.push(trimmedType);
-                 }
-             }
-         } else if (damageTypes.constructor === Array) {
-             for (const damageTypeEntry of damageTypes) {
+                }
+            }
+        } else if (damageTypes.constructor === Array) {
+            for (const damageTypeEntry of damageTypes) {
                 const trimmedType = SFRPGDamage.parseDamageType(damageTypeEntry);
                 if (trimmedType) {
                     parsedDamageTypes.push(trimmedType);
                 }
-             }
-         } else {
+            }
+        } else {
             throw `SFRPGDamage.createDamage provided with invalid damageTypes, received ${damageType.constructor}, expected String or Array.`;
-         }
+        }
 
-         const damageObject = new SFRPGDamage();
-         damageObject.rawAmount = damageAmount;
-         damageObject.damageTypes = parsedDamageTypes;
-         damageObject.bIsCritical = isCritical;
-         damageObject.properties = properties;
-         return damageObject;
+        const damageObject = new SFRPGDamage();
+        damageObject.rawAmount = damageAmount;
+        damageObject.damageTypes = parsedDamageTypes;
+        damageObject.bIsCritical = isCritical;
+        damageObject.properties = properties;
+        return damageObject;
     }
 
     static createHeal(healedAmount, healSettings = SFRPGHealingSetting.defaultHealing) {
@@ -133,14 +133,14 @@ export class SFRPGDamage {
 
     /**
      * Tries to recognize a damage type and provide it in a consistent scheme.
-     * 
+     *
      * @param {String} damageType A string containing 1 damage type, e.g. "f", "fire", "Fire", "F".
      */
     static parseDamageType(damageType) {
         if (damageType.constructor !== String) {
             throw `parseDamageType provided with invalid type, received ${damageType.constructor}, expected String.`;
         }
-        
+
         const acronymToDamageMap = {
             "a": "acid",
             "b": "bludgeoning",
@@ -165,10 +165,10 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
     /**
      * A utility method used to apply damage to any selected tokens when an option
      * is selected from a chat card context menu.
-     * 
+     *
      * @param {JQuery} html The jQuery object representing the chat card.
      * @param {Number} multiplier A number used to multiply the damage being applied
-     * @returns {Promise<any[]>} 
+     * @returns {Promise<any[]>}
      */
     static async applyDamageFromContextMenu(html, multiplier) {
         if (html?.length < 1) {
@@ -217,9 +217,9 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
                 isCritical,
                 properties
             );
-    
+
             damage.multiplier = multiplier;
-    
+
             return this._applyToSelectedActors(damage);
         }
     }
@@ -228,7 +228,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         const promises = [];
         for (const controlledToken of canvas.tokens?.controlled) {
             const actor = controlledToken.actor;
-            const promise = actor.applyDamage(damage)
+            const promise = actor.applyDamage(damage);
 
             if (promise) {
                 promises.push(promise);
@@ -240,35 +240,35 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
 
     /**
      * Applies damage to the Actor.
-     * 
+     *
      * @param {SFRPGDamage} damage The damage object to be applied to this actor.
      */
     async applyDamage(damage) {
         if (damage.constructor !== SFRPGDamage) {
-            throw `actor.applyDamage received an invalid damage object, received ${damage.constructor}, expected SFRPGDamage.`
+            throw `actor.applyDamage received an invalid damage object, received ${damage.constructor}, expected SFRPGDamage.`;
         }
 
-        //console.log(['Applying damage', damage.toString(), damage]);
+        // console.log(['Applying damage', damage.toString(), damage]);
 
         switch (this.type) {
-            case 'starship':
-                return this._applyStarshipDamage(damage);
-            case 'vehicle':
-                return this._applyVehicleDamage(damage);
-            default:
-                return this._applyActorDamage(damage);
+        case 'starship':
+            return this._applyStarshipDamage(damage);
+        case 'vehicle':
+            return this._applyVehicleDamage(damage);
+        default:
+            return this._applyActorDamage(damage);
         }
     }
 
     /**
     * Apply damage to an Actor.
-    * 
+    *
     * @param {SFRPGDamage} damage A SFRPGDamage object, describing the damage to be dealt.
     * @returns A Promise that resolves to the updated Actor
     */
     async _applyActorDamage(damage) {
         if (damage.constructor !== SFRPGDamage) {
-            throw `actor._applyActorDamage received an invalid damage object, received ${damage.constructor}, expected SFRPGDamage.`
+            throw `actor._applyActorDamage received an invalid damage object, received ${damage.constructor}, expected SFRPGDamage.`;
         }
 
         const actorUpdate = {};
@@ -284,7 +284,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
                 let totalAppliedDamage = damage.amount / damage.damageTypes.length;
 
                 if (this.isVulnerableToDamageType(damageType)) {
-                    totalAppliedDamage = totalAppliedDamage * 1.5;
+                    totalAppliedDamage *= 1.5;
                 }
 
                 const resistance = this.getDamageMitigationForDamageType(damageType, damage);
@@ -320,25 +320,26 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
 
         if (!damage.isHealing) {
             /** Update temp hitpoints */
-            let newTempHP = Math.clamped(originalTempHP - remainingUndealtDamage, 0, actorData.attributes.hp.tempmax);
-            remainingUndealtDamage = remainingUndealtDamage - (originalTempHP - newTempHP);
+            let newTempHP = Math.clamped(originalTempHP - remainingUndealtDamage, 0,
+                actorData.attributes.hp.tempmax || actorData.attributes.hp.temp);
+            remainingUndealtDamage -= (originalTempHP - newTempHP);
 
             if (newTempHP <= 0) {
                 newTempHP = null;
                 actorUpdate['system.attributes.hp.tempmax'] = null;
             }
-            
+
             actorUpdate["system.attributes.hp.temp"] = newTempHP;
 
             /** Update stamina points */
             const newSP = Math.clamped(originalSP - remainingUndealtDamage, 0, actorData.attributes.sp.max);
-            remainingUndealtDamage = remainingUndealtDamage - (originalSP - newSP);
-            
+            remainingUndealtDamage -= (originalSP - newSP);
+
             actorUpdate["system.attributes.sp.value"] = newSP;
 
             /** Update hitpoints */
             const newHP = Math.clamped(originalHP - remainingUndealtDamage, 0, actorData.attributes.hp.max);
-            remainingUndealtDamage = remainingUndealtDamage - (originalHP - newHP);
+            remainingUndealtDamage -= (originalHP - newHP);
 
             actorUpdate["system.attributes.hp.value"] = newHP;
 
@@ -350,33 +351,33 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         } else {
             if (damage.healSettings.healsHitpoints) {
                 const newHP = Math.clamped(originalHP + remainingUndealtDamage, 0, actorData.attributes.hp.max);
-                remainingUndealtDamage = remainingUndealtDamage - (newHP - originalHP);
+                remainingUndealtDamage -= (newHP - originalHP);
 
                 actorUpdate["system.attributes.hp.value"] = newHP;
             }
-            
+
             if (damage.healSettings.healsStamina) {
                 const newSP = Math.clamped(originalSP + remainingUndealtDamage, 0, actorData.attributes.sp.max);
-                remainingUndealtDamage = remainingUndealtDamage - (newSP - originalSP);
+                remainingUndealtDamage -= (newSP - originalSP);
 
                 actorUpdate["system.attributes.sp.value"] = newSP;
             }
-            
+
             if (damage.healSettings.healsTemporaryHitpoints) {
                 const newTempHP = Math.clamped(originalTempHP + remainingUndealtDamage, 0, actorData.attributes.hp.tempmax);
-                remainingUndealtDamage = remainingUndealtDamage - (newTempHP - originalTempHP);
-                
+                remainingUndealtDamage -= (newTempHP - originalTempHP);
+
                 actorUpdate["system.attributes.hp.temp"] = newTempHP;
             }
         }
 
         const promise = this.update(actorUpdate);
         return promise;
-   }
+    }
 
     /**
     * Checks whether an actor is immune to a specific damage type.
-    * 
+    *
     * @param {string} damageType The damage type to evaluate.
     * @returns True if the actor is immune to this damage type
     */
@@ -386,7 +387,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
 
     /**
     * Checks whether an actor is vulnerable to a specific damage type.
-    * 
+    *
     * @param {string} damageType The damage type to evaluate.
     * @returns True if the actor is immune to this damage type
     */
@@ -396,12 +397,12 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
 
     /**
     * Returns the amount of damage mitigation for a given damage type.
-    * 
+    *
     * @param {string} damageType The damage type to evaluate.
     * @param {SFRPGDamage} damage (Optional, default null) A damage object from which the damage type originates. Damage reduction is not negated if this is not specified.
     * @returns Amount of damage mitigation applied.
     */
-     getDamageMitigationForDamageType(damageType, damage = null) {
+    getDamageMitigationForDamageType(damageType, damage = null) {
         const damageMitigation = this.system.traits.damageMitigation;
         if (!damageMitigation) {
             return 0;
@@ -426,34 +427,34 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         }
 
         return 0;
-   }
+    }
 
     /**
     * Apply damage to a Vehicle Actor.
-    * 
+    *
     * @param {object} damage A SFRPGDamage object, describing the damage to be dealt.
     * @returns A Promise that resolves to the updated Vehicle
     */
     async _applyVehicleDamage(damage) {
         if (damage.constructor !== SFRPGDamage) {
-            throw `actor._applyVehicleDamage received an invalid damage object, received ${damage.constructor}, expected SFRPGDamage.`
+            throw `actor._applyVehicleDamage received an invalid damage object, received ${damage.constructor}, expected SFRPGDamage.`;
         }
-        
+
         ui.notifications.warn("Cannot currently apply damage to vehicles using the context menu");
         return null;
     }
 
     /**
     * Apply damage to a Starship Actor.
-    * 
+    *
     * @param {object} damage A SFRPGDamage object, describing the damage to be dealt.
     * @returns A Promise that resolves to the updated Starship
     */
     async _applyStarshipDamage(damage) {
         if (damage.constructor !== SFRPGDamage) {
-            throw `actor._applyStarshipDamage received an invalid damage object, received ${damage.constructor}, expected SFRPGDamage.`
+            throw `actor._applyStarshipDamage received an invalid damage object, received ${damage.constructor}, expected SFRPGDamage.`;
         }
-        
+
         if (damage.isHealing) {
             ui.notifications.warn("Cannot currently apply healing to starships using the context menu.");
             return null;
@@ -508,7 +509,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         const newData = duplicate(originalData);
 
         let remainingUndealtDamage = damage.amount;
-        
+
         if (remainingUndealtDamage % 1 !== 0) {
             const damageRoundingAdvantage = game.settings.get("sfrpg", "damageRoundingAdvantage");
             if (damageRoundingAdvantage === "defender") {
@@ -517,10 +518,10 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
                 remainingUndealtDamage = Math.ceil(remainingUndealtDamage);
             }
         }
-        
+
         const hasDeflectorShields = this.system.hasDeflectorShields;
         const hasAblativeArmor = this.system.hasAblativeArmor;
-        
+
         if (hasDeflectorShields) {
             if (originalData.shields.value > 0) {
                 // Deflector shields are twice as effective against attacks from melee, ramming, and ripper starship weapons, so the starship ignores double the amount of damage from such attacks.
@@ -534,17 +535,17 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
             }
         } else {
             newData.shields.value = Math.max(0, originalData.shields.value - remainingUndealtDamage);
-            remainingUndealtDamage = remainingUndealtDamage - (originalData.shields.value - newData.shields.value);
+            remainingUndealtDamage -= (originalData.shields.value - newData.shields.value);
         }
 
         if (hasAblativeArmor) {
             newData.ablative.value = Math.max(0, originalData.ablative.value - remainingUndealtDamage);
-            remainingUndealtDamage = remainingUndealtDamage - (originalData.ablative.value - newData.ablative.value);
+            remainingUndealtDamage -= (originalData.ablative.value - newData.ablative.value);
         }
 
         const originalHullPoints = this.system.attributes.hp.value;
         const newHullPoints = Math.clamped(originalHullPoints - remainingUndealtDamage, 0, this.system.attributes.hp.max);
-        remainingUndealtDamage = remainingUndealtDamage - (originalHullPoints - newHullPoints);
+        remainingUndealtDamage -= (originalHullPoints - newHullPoints);
 
         /** Deflector shields only drop in efficiency when the ship takes hull point damage. */
         if (hasDeflectorShields) {
@@ -597,4 +598,4 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         const promise = this.update(actorUpdate);
         return promise;
     }
-}
+};

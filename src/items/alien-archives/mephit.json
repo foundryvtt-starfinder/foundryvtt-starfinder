@@ -2,17 +2,12 @@
   "_id": "uLwlgW5IIDPsSYke",
   "name": "Mephit",
   "type": "npc2",
-  "effects": [],
-  "flags": {},
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "_id": "wFjd9CHOeIIt2p2f",
       "name": "Fast Healing 2",
       "type": "feat",
-      "effects": [],
-      "flags": {},
-      "sort": 100000,
       "system": {
         "type": "",
         "ability": null,
@@ -82,9 +77,6 @@
       "_id": "MoGjU5tHXoJG6N7s",
       "name": "Claws",
       "type": "weapon",
-      "effects": [],
-      "flags": {},
-      "sort": 200000,
       "system": {
         "type": "",
         "ability": "",
@@ -212,9 +204,6 @@
       "_id": "6WOObDMxwuB2RYMp",
       "name": "Breath Weapons",
       "type": "weapon",
-      "effects": [],
-      "flags": {},
-      "sort": 400000,
       "system": {
         "type": "",
         "ability": "str",
@@ -420,6 +409,69 @@
       }
     }
   ],
+  "prototypeToken": {
+    "name": "Mephit",
+    "actorLink": false,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": ""
+    },
+    "displayBars": 20,
+    "displayName": 20,
+    "disposition": -1,
+    "height": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 360,
+      "animation": {
+        "type": null,
+        "intensity": 5,
+        "reverse": false,
+        "speed": 5
+      },
+      "attenuation": 0.5,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "contrast": 0,
+      "darkness": {
+        "max": 1,
+        "min": 0
+      },
+      "dim": 0,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "shadows": 0
+    },
+    "lockRotation": false,
+    "mirrorX": false,
+    "mirrorY": false,
+    "randomImg": false,
+    "rotation": 0,
+    "scale": 1,
+    "sight": {
+      "angle": 360,
+      "attenuation": 0.1,
+      "brightness": 1,
+      "color": null,
+      "contrast": 0,
+      "enabled": false,
+      "range": 0,
+      "saturation": 0,
+      "visionMode": "basic"
+    },
+    "texture": {
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": null
+    },
+    "width": 1
+  },
   "system": {
     "abilities": {
       "cha": {
@@ -520,18 +572,6 @@
         "tooltip": [],
         "value": 0
       },
-      "rp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
-      "sp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
       "space": "",
       "speed": {
         "burrowing": {
@@ -611,7 +651,7 @@
       "aura": "",
       "biography": {
         "public": "",
-        "value": "<h2>Description</h2>\n<h3>Description</h3>\n<p>Mephits arise from the detritus and soul-stuff of the planes, much like elementals, springing forth fully formed without parents. Regardless, some mephits take gendered identities, mimicking other creatures. More willful and often more cruel than elementals, mephits are tricksters, thieves, and bullies. Like most such beings, however, mephits back down when a powerful opponent confronts them.<br/><br/>Working as enforcers or messengers for mightier denizens of the Elemental Planes, especially genies, mephits are common on the Elemental Planes. Most cities on those planes are infested with mephits running errands, scamming visitors, or pestering locals. These creatures also congregate anywhere on the Material Plane where the Elemental Planes bleed over or strong elemental forces occur.<br/><br/>The typical mephit is about 3 feet tall. The creature’s weight depends on what it’s made of.<br/><br/>To create a mephit, use the stats above and one of the following grafts.</p>\n<p>&nbsp;</p>\n<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any (Elemental Planes)</p>\n<p>&nbsp;</p>\n<h3>Organization</h3>\n<p>solitary, pair, gang (3-6), or mob (7-12)</p>\n<p>&nbsp;</p>\n"
+        "value": "<h2>Description</h2>\n<h3>Description</h3>\n<p>Mephits arise from the detritus and soul-stuff of the planes, much like elementals, springing forth fully formed without parents. Regardless, some mephits take gendered identities, mimicking other creatures. More willful and often more cruel than elementals, mephits are tricksters, thieves, and bullies. Like most such beings, however, mephits back down when a powerful opponent confronts them.</p>\n<p>Working as enforcers or messengers for mightier denizens of the Elemental Planes, especially genies, mephits are common on the Elemental Planes. Most cities on those planes are infested with mephits running errands, scamming visitors, or pestering locals. These creatures also congregate anywhere on the Material Plane where the Elemental Planes bleed over or strong elemental forces occur.</p>\n<p>The typical mephit is about 3 feet tall. The creature’s weight depends on what it’s made of.</p>\n<p>To create a mephit, use the stats above and one of the following grafts.</p>\n<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any (Elemental Planes)</p>\n<h3>Organization</h3>\n<p>solitary, pair, gang (3-6), or mob (7-12)</p>\n</section>"
       },
       "class": "",
       "cr": 3,
@@ -914,44 +954,5 @@
       "size": "small",
       "sr": 0
     }
-  },
-  "token": {
-    "name": "Mephit",
-    "actorId": "sOscyk3vP9omiawd",
-    "actorLink": false,
-    "bar1": {
-      "attribute": "attributes.hp"
-    },
-    "bar2": {
-      "attribute": ""
-    },
-    "brightLight": 0,
-    "brightSight": 0,
-    "dimLight": 0,
-    "dimSight": 0,
-    "displayBars": 40,
-    "displayName": 0,
-    "disposition": 0,
-    "flags": {},
-    "height": 1,
-    "img": "icons/svg/mystery-man.svg",
-    "lightAlpha": 1,
-    "lightAngle": 360,
-    "lightAnimation": {
-      "type": "",
-      "intensity": 5,
-      "speed": 5
-    },
-    "lightColor": "",
-    "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
-    "randomImg": false,
-    "rotation": 0,
-    "scale": 1,
-    "sightAngle": 360,
-    "tint": "",
-    "vision": false,
-    "width": 1
   }
 }

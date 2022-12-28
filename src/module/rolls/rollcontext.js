@@ -56,7 +56,7 @@ export default class RollContext {
 
         return result;
     }
-            
+
     getContextForVariable(variable) {
         if (variable[0] === '@') {
             variable = variable.substring(1);
@@ -65,12 +65,12 @@ export default class RollContext {
         const firstToken = variable.split('.')[0];
 
         if (this.allContexts[firstToken]) {
-            //console.log(["getContextForVariable", variable, contexts, contexts.allContexts[firstToken]]);
+            // console.log(["getContextForVariable", variable, contexts, contexts.allContexts[firstToken]]);
             return [this.allContexts[firstToken], variable.substring(firstToken.length + 1)];
         }
 
         const context = (this.mainContext ? this.allContexts[this.mainContext] : null);
-        //console.log(["getContextForVariable", variable, contexts, context]);
+        // console.log(["getContextForVariable", variable, contexts, context]);
         return [context, variable];
     }
 
@@ -97,7 +97,7 @@ export default class RollContext {
     }
 
     static _readValue(object, key) {
-        //console.log(["_readValue", key, object]);
+        // console.log(["_readValue", key, object]);
         if (!object || !key) return null;
 
         const tokens = key.split('.');
@@ -133,7 +133,7 @@ export default class RollContext {
 
             itemOwningActor.setupRollContexts(rollContext);
         }
-        
+
         return rollContext;
     }
 }

@@ -1,6 +1,6 @@
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../../modifiers/types.js";
 
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateStamina", (fact, context) => {
         const data = fact.data;
 
@@ -28,7 +28,7 @@ export default function (engine) {
                     source: bonus.name
                 }));
             }
-            
+
             return computedBonus;
         };
 
@@ -58,7 +58,7 @@ export default function (engine) {
         }
 
         spMax = Math.max(spMax, 0);
-        
+
         // Iterate through any modifiers that affect SP
         let filteredModifiers = fact.modifiers.filter(mod => {
             return (mod.enabled || mod.modifierType === "formula") && mod.effectType == SFRPGEffectType.STAMINA_POINTS;
@@ -78,9 +78,9 @@ export default function (engine) {
 
             return sum;
         }, 0);
-        
+
         spMax += bonus;
-        
+
         data.attributes.sp.max = spMax;
 
         return fact;

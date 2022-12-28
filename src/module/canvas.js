@@ -1,7 +1,7 @@
 import { moveItemBetweenActorsAsync, onCreateItemCollection, ActorItemHelper } from "./actor/actor-inventory-utils.js";
 import { ItemCollectionSheet } from "./apps/item-collection-sheet.js";
 
-import { RPC } from "./rpc.js"
+import { RPC } from "./rpc.js";
 
 Hooks.on('canvasReady', onCanvasReady);
 Hooks.on('createToken', onTokenCreated);
@@ -10,7 +10,7 @@ Hooks.on('updateToken', onTokenUpdated);
 function onCanvasReady(...args) {
     if (!canvas.initialized) { return; }
     for (const placeable of canvas.tokens.placeables) {
-		if (placeable.document.getFlag("sfrpg", "itemCollection")) {
+        if (placeable.document.getFlag("sfrpg", "itemCollection")) {
             setupLootCollectionTokenInteraction(placeable, false);
         }
     }
@@ -48,12 +48,12 @@ function trySetupLootToken(token) {
 /**
  * Override the default Grid measurement function to add additional distance for subsequent diagonal moves
  * See BaseGrid.measureDistance for more details.
- * 
+ *
  * @param {Object[]} segments The starting position
  * @param {Object} options The ending position
  * @returns {Number[]} An Array of distance measurmements for each segment
  */
-export const measureDistances = function(segments, options={}) {
+export const measureDistances = function(segments, options = {}) {
     if (!canvas.initialized) { return; }
     if (!options?.gridSpaces) {
         return BaseGrid.prototype.measureDistances.call(this, segments, options);
@@ -62,7 +62,7 @@ export const measureDistances = function(segments, options={}) {
     let nDiagonal = 0;
     const rule = this.parent.diagonalRule;
     const d = canvas.dimensions;
-    
+
     return segments.map(s => {
         let r = s.ray;
 
@@ -85,7 +85,7 @@ export const measureDistances = function(segments, options={}) {
 
 /**
  * Places an item collection on the canvas as a token for players to interact with.
- * 
+ *
  * @param {Integer} x X Coordinate to place the item at.
  * @param {Integer} y Y Coordinate to place the item at.
  * @param {Boolean} deleteIfEmpty Should this Token be deleted when its last item is removed?
@@ -113,7 +113,7 @@ function placeItemCollectionOnCanvas(x, y, itemData, deleteIfEmpty) {
             deleteIfEmpty: deleteIfEmpty,
             locked: false
         }
-    }
+    };
 
     if (game.user.isGM) {
         const messageData = {
@@ -152,7 +152,7 @@ function openLootCollectionSheet(event) {
     if (!relevantToken.apps) {
         relevantToken.apps = {};
     }
-    
+
     const lootCollectionSheet = new ItemCollectionSheet(relevantToken.document);
     lootCollectionSheet.options.viewPermission = -1;
     lootCollectionSheet.render(true);
@@ -211,11 +211,11 @@ async function handleCanvasDropAsync(canvas, data) {
                 sourceActor.deleteItem(idsToDrop);
             }
         }
-        
+
         return;
     }
 
-    const target = new ActorItemHelper(targetActor.id, targetActor.token.id, targetActor.token.parent.id)
+    const target = new ActorItemHelper(targetActor.id, targetActor.token.id, targetActor.token.parent.id);
 
     if (sourceItem) {
         moveItemBetweenActorsAsync(sourceActor, sourceItem, target);
@@ -232,11 +232,11 @@ export function canvasHandlerV10(canvas, data) {
 
     if (data.type === "Item") {
         if (!canvas.initialized) { return true; }
-        //console.log("Canvas::handleItemDrop()");
-        
+        // console.log("Canvas::handleItemDrop()");
+
         handleCanvasDropAsync(canvas, data).then(_ => {});
         return false;
     }
-    
+
     return true;
 }

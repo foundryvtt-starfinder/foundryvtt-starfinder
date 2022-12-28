@@ -2,17 +2,12 @@
   "_id": "UhTAEaez78nPCvXy",
   "name": "Polyphonic Gel",
   "type": "npc2",
-  "effects": [],
-  "flags": {},
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "_id": "dRF31EZib3uuHSeS",
       "name": "Pseudopod",
       "type": "weapon",
-      "effects": [],
-      "flags": {},
-      "sort": 100000,
       "system": {
         "type": "",
         "ability": "",
@@ -140,10 +135,7 @@
       "_id": "Af9PwsxZNCunzOS1",
       "name": "Attach",
       "type": "feat",
-      "effects": [],
-      "flags": {},
       "img": "icons/svg/mystery-man.svg",
-      "sort": 200000,
       "system": {
         "type": "",
         "ability": "",
@@ -174,7 +166,7 @@
         "description": {
           "chat": "",
           "unidentified": "",
-          "value": "<p>(EX)</p>\n<p>The creature can attempt a special attack against KAC as a standard action. If it succeeds, it deals no damage, but it adheres to its target. Once attached, the creature gains a +4 bonus to its AC (from cover) and a +2 circumstance bonus to melee attacks, but it can attack only the creature to which it is attached. An attached creature can’t move (though it moves with its target), take actions that require two hands, or make attacks of opportunity. An attached creature can be removed with a successful Strength check (DC = 10 + 1-1/2 × the creature’s CR) made as a move action, or it can remove itself from its target as a move action.</p>\n<hr>\n<p>&nbsp;</p>"
+          "value": "<p>(EX)</p>\n<p>The creature can attempt a special attack against KAC as a standard action. If it succeeds, it deals no damage, but it adheres to its target. Once attached, the creature gains a +4 bonus to its AC (from cover) and a +2 circumstance bonus to melee attacks, but it can attack only the creature to which it is attached. An attached creature can’t move (though it moves with its target), take actions that require two hands, or make attacks of opportunity. An attached creature can be removed with a successful Strength check (DC = 10 + 1-1/2 × the creature’s CR) made as a move action, or it can remove itself from its target as a move action.</p>\n<hr />"
         },
         "descriptors": [],
         "duration": {
@@ -216,9 +208,6 @@
       "_id": "zKS9pNSCu3ItOwEw",
       "name": "Resonant Vibrations (Ex)",
       "type": "feat",
-      "effects": [],
-      "flags": {},
-      "sort": 400000,
       "system": {
         "type": "",
         "ability": null,
@@ -252,7 +241,7 @@
         "description": {
           "chat": "",
           "unidentified": "",
-          "value": "<p>When the polyphonic gel deals sonic damage to a creature it&rsquo;s attached to, it deals an equal amount of sonic damage to the target&rsquo;s armor as well. This damage ignores half of the armor&rsquo;s hardness, rounded up.&nbsp;</p>"
+          "value": "<p>When the polyphonic gel deals sonic damage to a creature it’s attached to, it deals an equal amount of sonic damage to the target’s armor as well. This damage ignores half of the armor’s hardness, rounded up.&nbsp;</p>"
         },
         "descriptors": [],
         "duration": {
@@ -294,10 +283,7 @@
       "_id": "sDmDVVtPcMA3GZAm",
       "name": "Amplify Frequency (Ex)",
       "type": "feat",
-      "effects": [],
-      "flags": {},
       "img": "icons/svg/mystery-man.svg",
-      "sort": 200000,
       "system": {
         "type": "",
         "ability": null,
@@ -328,7 +314,7 @@
         "description": {
           "chat": "",
           "unidentified": "",
-          "value": "Whenever a polyphonic plasm would take sonic damage, it absorbs that energy instead. The stored vibrations amplify the creature’s sonic waves, increasing damage dealt by the ooze’s next pseudopod attack before the end of its next turn by 2d6."
+          "value": "<p>Whenever a polyphonic plasm would take sonic damage, it absorbs that energy instead. The stored vibrations amplify the creature’s sonic waves, increasing damage dealt by the ooze’s next pseudopod attack before the end of its next turn by 2d6.</p>"
         },
         "descriptors": [],
         "duration": {
@@ -383,6 +369,69 @@
       }
     }
   ],
+  "prototypeToken": {
+    "name": "Polyphonic Gel",
+    "actorLink": false,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": ""
+    },
+    "displayBars": 20,
+    "displayName": 20,
+    "disposition": -1,
+    "height": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 360,
+      "animation": {
+        "type": null,
+        "intensity": 5,
+        "reverse": false,
+        "speed": 5
+      },
+      "attenuation": 0.5,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "contrast": 0,
+      "darkness": {
+        "max": 1,
+        "min": 0
+      },
+      "dim": 0,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "shadows": 0
+    },
+    "lockRotation": false,
+    "mirrorX": false,
+    "mirrorY": false,
+    "randomImg": false,
+    "rotation": 0,
+    "scale": 1,
+    "sight": {
+      "angle": 360,
+      "attenuation": 0.1,
+      "brightness": 1,
+      "color": null,
+      "contrast": 0,
+      "enabled": false,
+      "range": 0,
+      "saturation": 0,
+      "visionMode": "basic"
+    },
+    "texture": {
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": null
+    },
+    "width": 1
+  },
   "system": {
     "abilities": {
       "cha": {
@@ -483,18 +532,6 @@
         "tooltip": [],
         "value": 0
       },
-      "rp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
-      "sp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
       "space": "",
       "speed": {
         "burrowing": {
@@ -575,7 +612,7 @@
       "aura": "",
       "biography": {
         "public": "",
-        "value": "<h2>Description</h2>\n<p>A polyphonic gel resembles smoked glass that pulses with multicolored lights in time to an unpredictable rhythm. This ooze is actually an organic, semi-fluid mass of millions of flexible fibers that constantly vibrate to produce audible frequencies, ranging from hauntingly beautiful to shrill and discordant. These captivating displays often lure observers who mistake their performances and languidly extended pseudopods for friendly gestures. Such observers soon discover that the gels&rsquo; bodies course with sonic vibrations that can devastate flesh, bone, and steel as well as break prey into edible chunks.</p>\n<p>Although polyphonic gels seem to draw some nutrition out of physical material, they primarily feed on sound. When feeding, a gel sends out countless pulses that resonate off their prey&rsquo;s body, the echoes fueling their metabolism. Each absorbed sound also helps the gel form new fibers, like a brain forging fresh neurons while learning, as the sounds create each fiber and shape its texture. In this way, polyphonic gels gradually grow&mdash;physically and in their sound vocabulary&mdash;when exposed to new sounds.</p>\n<p>Polyphonic gels can survive indefinitely if exposed to periodic sound, like a noisy fan or the rush of a waterfall. However, they grow only when supplied a range of sounds and materials to absorb. In practice, the mindless oozes manifest cravings for different sounds that drive them to search for novel prey or specific material types. Polyphonic gels sometimes slither frantically past other food sources in search of a specific type of crystal or pitch of dwarven scream. Previously docile specimens kept in captivity for study often develop these cravings, too. Despite their keepers&rsquo; best attempts to provide a balanced diet, the oozes&rsquo; desires can lead to catastrophic breakouts when they disintegrate their holding cells. When fed a varied diet, polyphonic gels can grow with extraordinary speed, doubling in size in a matter of days. Conversely, those oozes deprived of sound altogether (including any trapped in the vacuum of space) starve and gradually wither.</p>\n<p>Polyphonic gels can serve as a repository of sounds. In practice, they might repeat their prey&rsquo;s garbled last words, crooning nonsense phrases with the haunting voices of the departed. Theoretically, though, it should be possible to elicit specific sounds from these oozes by isolating the key fibers, agitating them, and recording the output. Engineering tests have managed only small successes to date, however, and most consider anything more as impractical.</p>\n<p>Early in life, a polyphonic gel spans about 2&ndash;3 feet in diameter and weighs a mere 20 pounds. It grows in proportion to its sound absorption and reaches polyphonic plasm status when it spans almost 10 feet across and weighs 400 pounds. Beyond this size, the oozes rarely dedicate nutrients to additional growth, instead focusing on reproduction by budding a new gel that carries away a fraction of its parent&rsquo;s sonic repertoire. Even when independent, gels tend to shadow their parent plasms until lured away by tempting new stimuli. Gels of all sizes periodically seek each other out, forming concerts of a dozen or more gels that sing to each other for days on end. The purpose of these gatherings remains unknown. They rarely result in growth, and since the oozes lack any true nervous tissue (much less minds), it seems unclear if these gatherings hold social value for the creatures, though they appear visibly calmed afterward. However, the gels often turn on anyone who interrupts their songs.</p>\n<p>Despite the dangers associated with polyphonic gels, they&rsquo;re easy to detect and slow-moving, allowing careful xenobiologists and other researchers to study them with relative ease. Some Shelynites consider the oozes sacred, believing the creatures&rsquo; songs encode messages from the Eternal Rose herself. Worshippers have compiled years-long recordings and distributed them across Pact Worlds infospheres for free, and while the acolytes try to decode these soundscapes to understand their goddess, digital music artists have shamelessly sampled the files in hundreds of songs. These musical byproducts as well as the alien tones that only the gels can create only reinforce the Shelynites&rsquo; belief that polyphonic gels sing with divine will. Some priests happily shepherd these oozes across alien landscapes to help their charges learn new music. Though the priests might have good intentions, the wild and willful gels regularly escape to pursue some distant tune or tone. With so many incidents, several Pact Worlds have condemned and criminalized this expression of Shelyn&rsquo;s faith.</p>\n<h3>Polyphonic Buffer Augmentation</h3>\n<p>Bioengineers studying polyphonic gels have synthesized an inorganic compound that can stymie echolocation and disperse destructive sound waves.</p>\n<p>Designed from a synthetic protoplasm that deadens and bends&nbsp;sonic vibrations, this skin graft gives you sonic resistance&nbsp;5. In addition, you can activate the graft to emit constant,&nbsp;erratic vibrations that interfere with blindsense (sound) and&nbsp;blindsight (sound). While activated, creatures can detect you&nbsp;with blindsense (sound) at only one-third the normal range,&nbsp;whereas creatures with blindsight (sound) gain only the&nbsp;benefits of blindsense when detecting you. The graft remains&nbsp;activated for 5 minutes or until deactivated, after which it&nbsp;can&rsquo;t be activated again until you rest for 10 minutes to regain&nbsp;Stamina Points, though you can spend 1 Resolve Point to&nbsp;recharge it immediately.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any land</p>\n<p>&nbsp;</p>\n<h3>Organization</h3>\n<p>solitary, pair, or concert (3-12)</p>\n<p>&nbsp;</p>"
+        "value": "<h2>Description</h2>\n<p>A polyphonic gel resembles smoked glass that pulses with multicolored lights in time to an unpredictable rhythm. This ooze is actually an organic, semi-fluid mass of millions of flexible fibers that constantly vibrate to produce audible frequencies, ranging from hauntingly beautiful to shrill and discordant. These captivating displays often lure observers who mistake their performances and languidly extended pseudopods for friendly gestures. Such observers soon discover that the gels’ bodies course with sonic vibrations that can devastate flesh, bone, and steel as well as break prey into edible chunks.</p>\n<p>Although polyphonic gels seem to draw some nutrition out of physical material, they primarily feed on sound. When feeding, a gel sends out countless pulses that resonate off their prey’s body, the echoes fueling their metabolism. Each absorbed sound also helps the gel form new fibers, like a brain forging fresh neurons while learning, as the sounds create each fiber and shape its texture. In this way, polyphonic gels gradually grow—physically and in their sound vocabulary—when exposed to new sounds.</p>\n<p>Polyphonic gels can survive indefinitely if exposed to periodic sound, like a noisy fan or the rush of a waterfall. However, they grow only when supplied a range of sounds and materials to absorb. In practice, the mindless oozes manifest cravings for different sounds that drive them to search for novel prey or specific material types. Polyphonic gels sometimes slither frantically past other food sources in search of a specific type of crystal or pitch of dwarven scream. Previously docile specimens kept in captivity for study often develop these cravings, too. Despite their keepers’ best attempts to provide a balanced diet, the oozes’ desires can lead to catastrophic breakouts when they disintegrate their holding cells. When fed a varied diet, polyphonic gels can grow with extraordinary speed, doubling in size in a matter of days. Conversely, those oozes deprived of sound altogether (including any trapped in the vacuum of space) starve and gradually wither.</p>\n<p>Polyphonic gels can serve as a repository of sounds. In practice, they might repeat their prey’s garbled last words, crooning nonsense phrases with the haunting voices of the departed. Theoretically, though, it should be possible to elicit specific sounds from these oozes by isolating the key fibers, agitating them, and recording the output. Engineering tests have managed only small successes to date, however, and most consider anything more as impractical.</p>\n<p>Early in life, a polyphonic gel spans about 2–3 feet in diameter and weighs a mere 20 pounds. It grows in proportion to its sound absorption and reaches polyphonic plasm status when it spans almost 10 feet across and weighs 400 pounds. Beyond this size, the oozes rarely dedicate nutrients to additional growth, instead focusing on reproduction by budding a new gel that carries away a fraction of its parent’s sonic repertoire. Even when independent, gels tend to shadow their parent plasms until lured away by tempting new stimuli. Gels of all sizes periodically seek each other out, forming concerts of a dozen or more gels that sing to each other for days on end. The purpose of these gatherings remains unknown. They rarely result in growth, and since the oozes lack any true nervous tissue (much less minds), it seems unclear if these gatherings hold social value for the creatures, though they appear visibly calmed afterward. However, the gels often turn on anyone who interrupts their songs.</p>\n<p>Despite the dangers associated with polyphonic gels, they’re easy to detect and slow-moving, allowing careful xenobiologists and other researchers to study them with relative ease. Some Shelynites consider the oozes sacred, believing the creatures’ songs encode messages from the Eternal Rose herself. Worshippers have compiled years-long recordings and distributed them across Pact Worlds infospheres for free, and while the acolytes try to decode these soundscapes to understand their goddess, digital music artists have shamelessly sampled the files in hundreds of songs. These musical byproducts as well as the alien tones that only the gels can create only reinforce the Shelynites’ belief that polyphonic gels sing with divine will. Some priests happily shepherd these oozes across alien landscapes to help their charges learn new music. Though the priests might have good intentions, the wild and willful gels regularly escape to pursue some distant tune or tone. With so many incidents, several Pact Worlds have condemned and criminalized this expression of Shelyn’s faith.</p>\n<h3>Polyphonic Buffer Augmentation</h3>\n<p>Bioengineers studying polyphonic gels have synthesized an inorganic compound that can stymie echolocation and disperse destructive sound waves.</p>\n<p>Designed from a synthetic protoplasm that deadens and bends&nbsp;sonic vibrations, this skin graft gives you sonic resistance&nbsp;5. In addition, you can activate the graft to emit constant,&nbsp;erratic vibrations that interfere with blindsense (sound) and&nbsp;blindsight (sound). While activated, creatures can detect you&nbsp;with blindsense (sound) at only one-third the normal range,&nbsp;whereas creatures with blindsight (sound) gain only the&nbsp;benefits of blindsense when detecting you. The graft remains&nbsp;activated for 5 minutes or until deactivated, after which it&nbsp;can’t be activated again until you rest for 10 minutes to regain&nbsp;Stamina Points, though you can spend 1 Resolve Point to&nbsp;recharge it immediately.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any land</p>\n<h3>Organization</h3>\n<p>solitary, pair, or concert (3-12)</p>"
       },
       "class": "",
       "cr": 0.5,
@@ -877,44 +914,5 @@
       "size": "small",
       "sr": 0
     }
-  },
-  "token": {
-    "name": "Polyphonic Gel",
-    "actorId": "mrxIzzwXhQboc3a1",
-    "actorLink": false,
-    "bar1": {
-      "attribute": "attributes.hp"
-    },
-    "bar2": {
-      "attribute": ""
-    },
-    "brightLight": 0,
-    "brightSight": 0,
-    "dimLight": 0,
-    "dimSight": 0,
-    "displayBars": 40,
-    "displayName": 0,
-    "disposition": -1,
-    "flags": {},
-    "height": 1,
-    "img": "icons/svg/mystery-man.svg",
-    "lightAlpha": 1,
-    "lightAngle": 360,
-    "lightAnimation": {
-      "type": "",
-      "intensity": 5,
-      "speed": 5
-    },
-    "lightColor": "",
-    "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
-    "randomImg": false,
-    "rotation": 0,
-    "scale": 1,
-    "sightAngle": 360,
-    "tint": "",
-    "vision": false,
-    "width": 1
   }
 }

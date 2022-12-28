@@ -13,7 +13,6 @@
       "_id": "mMsMljvHISrlpX43",
       "name": "Poisonous Bristles (Su)",
       "type": "feat",
-      "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -53,7 +52,7 @@
         "description": {
           "chat": "",
           "unidentified": "",
-          "value": "Bristles of shadow extend from between the tenebrous worm’s armored plates. Each time a creature within 10 feet of the worm attacks it, several of these bristles reactively shoot off at the attacker. The attacker must succeed at a DC 16 Reflex save or take 1d4 piercing damage and be exposed to tenebrous worm @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{poison} (see below). An attacker that strikes the worm with an unarmed strike or grapples the worm is automatically damaged and exposed to the @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{poison}."
+          "value": "<p>Bristles of shadow extend from between the tenebrous worm’s armored plates. Each time a creature within 10 feet of the worm attacks it, several of these bristles reactively shoot off at the attacker. The attacker must succeed at a DC 16 Reflex save or take 1d4 piercing damage and be exposed to tenebrous worm @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{poison} (see below). An attacker that strikes the worm with an unarmed strike or grapples the worm is automatically damaged and exposed to the @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{poison}.</p>"
         },
         "descriptors": [],
         "duration": {
@@ -94,7 +93,6 @@
       "_id": "OeFuli9BkPMGHdNZ",
       "name": "Bite (plus Shadow Acid)",
       "type": "weapon",
-      "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -288,7 +286,6 @@
       "_id": "djBBl2uYNElSO5Sm",
       "name": "Tenebrous Worm Poison",
       "type": "feat",
-      "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -320,7 +317,7 @@
         "description": {
           "chat": "",
           "unidentified": "",
-          "value": "<p><strong>Type</strong>&nbsp;@UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{poison} (injury);&nbsp;<strong>Save</strong>&nbsp;Fortitude DC 16<br><strong>Track</strong>&nbsp;Dexterity (special);&nbsp;<strong>Frequency</strong>&nbsp;1/round for 6 rounds<br><strong>Effect</strong>&nbsp;progression track is Healthy—Sluggish—Stiffened—Staggered—Immobile; no end state.<br><strong>Cure</strong>&nbsp;2 consecutive saves</p>"
+          "value": "<p><strong>Type</strong>&nbsp;@UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{poison} (injury);&nbsp;<strong>Save</strong>&nbsp;Fortitude DC 16</p>\n<p><strong>Track</strong>&nbsp;Dexterity (special);&nbsp;<strong>Frequency</strong>&nbsp;1/round for 6 rounds</p>\n<p><strong>Effect</strong>&nbsp;progression track is Healthy—Sluggish—Stiffened—Staggered—Immobile; no end state.</p>\n<p><strong>Cure</strong>&nbsp;2 consecutive saves</p>"
         },
         "descriptors": [],
         "duration": {
@@ -358,6 +355,69 @@
       }
     }
   ],
+  "prototypeToken": {
+    "name": "Tenebrous Worm",
+    "actorLink": false,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": ""
+    },
+    "displayBars": 20,
+    "displayName": 20,
+    "disposition": -1,
+    "height": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 360,
+      "animation": {
+        "type": null,
+        "intensity": 5,
+        "reverse": false,
+        "speed": 5
+      },
+      "attenuation": 0.5,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "contrast": 0,
+      "darkness": {
+        "max": 1,
+        "min": 0
+      },
+      "dim": 0,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "shadows": 0
+    },
+    "lockRotation": false,
+    "mirrorX": false,
+    "mirrorY": false,
+    "randomImg": false,
+    "rotation": 0,
+    "scale": 1,
+    "sight": {
+      "angle": 360,
+      "attenuation": 0.1,
+      "brightness": 1,
+      "color": null,
+      "contrast": 0,
+      "enabled": false,
+      "range": 0,
+      "saturation": 0,
+      "visionMode": "basic"
+    },
+    "texture": {
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": null
+    },
+    "width": 1
+  },
   "system": {
     "abilities": {
       "cha": {
@@ -453,18 +513,6 @@
         "tooltip": [],
         "value": 0
       },
-      "rp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
-      "sp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
       "space": "0",
       "speed": {
         "burrowing": {
@@ -508,7 +556,7 @@
       "aura": "",
       "biography": {
         "public": "",
-        "value": "<h2>Description</h2>\n<p>A tenebrous worm is the larval stage of the gloomwing, but this young creature is more dangerous than the adult. When young hatch from the eggs a gloomwing lays in an unfortunate victim, the strongest among the hatchlings sometimes kills and eats its siblings. Other times, the larvae remain together in a pack or scatter into the surrounding environment to hunt. Tenebrous worms crave flesh, and they eat it in whatever form they find, it’s already carrion or living prey they’ve hunted down.<br><br>A tenebrous worm’s belly is pale to the point of translucence, and its organs churn with shadowy fluids visible through its segmented carapace. As the worm grows, these liquids mix and partially solidify, poking out between the creature’s plates to form poisonous bristles. A similar substance fills a reservoir near its mandibles, but this substance turns flesh to shadow that the worm consumes to supplement its diet of meat.<br><br>When a tenebrous worm has fed enough, it finds a hiding place where it can spin a cocoon of shadowy silk. This chrysalis absorbs surrounding light, reducing nonmagical bright and normal light to dim light in a radius of 20 feet. A tenebrous worm transforms inside the cocoon, emerging after several days as a gloomwing. The cocoon’s remains, tattered gray sheets of silk, lose their light-absorbing properties.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any land (Shadow Plane)</p>\n<p>&nbsp;</p>\n<h3>Organization</h3>\n<p>solitary, pair, swarm (3-6)</p>\n<p>&nbsp;</p>\n</section>"
+        "value": "<h2>Description</h2>\n<p>A tenebrous worm is the larval stage of the gloomwing, but this young creature is more dangerous than the adult. When young hatch from the eggs a gloomwing lays in an unfortunate victim, the strongest among the hatchlings sometimes kills and eats its siblings. Other times, the larvae remain together in a pack or scatter into the surrounding environment to hunt. Tenebrous worms crave flesh, and they eat it in whatever form they find, it’s already carrion or living prey they’ve hunted down.</p>\n<p>A tenebrous worm’s belly is pale to the point of translucence, and its organs churn with shadowy fluids visible through its segmented carapace. As the worm grows, these liquids mix and partially solidify, poking out between the creature’s plates to form poisonous bristles. A similar substance fills a reservoir near its mandibles, but this substance turns flesh to shadow that the worm consumes to supplement its diet of meat.</p>\n<p>When a tenebrous worm has fed enough, it finds a hiding place where it can spin a cocoon of shadowy silk. This chrysalis absorbs surrounding light, reducing nonmagical bright and normal light to dim light in a radius of 20 feet. A tenebrous worm transforms inside the cocoon, emerging after several days as a gloomwing. The cocoon’s remains, tattered gray sheets of silk, lose their light-absorbing properties.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any land (Shadow Plane)</p>\n<h3>Organization</h3>\n<p>solitary, pair, swarm (3-6)</p>\n</section>"
       },
       "class": "",
       "cr": 8,
@@ -786,40 +834,5 @@
       "size": "medium",
       "sr": 0
     }
-  },
-  "token": {
-    "name": "Tenebrous Worm",
-    "actorData": {},
-    "actorId": "VVy9FSdtyGnRkVOO",
-    "actorLink": false,
-    "bar1": {
-      "attribute": "attributes.hp"
-    },
-    "bar2": {
-      "attribute": ""
-    },
-    "brightLight": 0,
-    "brightSight": 0,
-    "dimLight": 0,
-    "dimSight": 0,
-    "displayBars": 40,
-    "displayName": 0,
-    "disposition": -1,
-    "flags": {},
-    "height": 1,
-    "img": "icons/svg/mystery-man.svg",
-    "lightAlpha": 1,
-    "lightAngle": 360,
-    "lightColor": "",
-    "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
-    "randomImg": false,
-    "rotation": 0,
-    "scale": 1,
-    "sightAngle": 360,
-    "tint": "",
-    "vision": false,
-    "width": 1
   }
 }

@@ -6,7 +6,7 @@ import RollTree from "./rolls/rolltree.js";
 // Type definitions for documentation.
 /**
  * A data structure for storing data about damage types
- * 
+ *
  * @typedef {Object} DamageType
  * @property {String[]} types    An array of damage types.
  * @property {string}   operator An operator that determines how damage is split between multiple types.
@@ -14,7 +14,7 @@ import RollTree from "./rolls/rolltree.js";
 
 /**
  * A data structure for storing damage statistics.
- * 
+ *
  * @typedef {Object} DamagePart
  * @property {string}                     formula  The roll formula to use.
  * @property {{[key: string]: boolean}}   types    A set of key value pairs that determines the available damage types.
@@ -23,7 +23,7 @@ import RollTree from "./rolls/rolltree.js";
 
 /**
  * A data structure to define critical damage.
- * 
+ *
  * @typedef {Object} CriticalDamage
  * @property {string}       effect The critical damage effect.
  * @property {DamagePart[]} parts  Any damage rolls used with this critical
@@ -31,7 +31,7 @@ import RollTree from "./rolls/rolltree.js";
 
 /**
  * The data for a foundry Speaker
- * 
+ *
  * @typedef {Object} SpeakerData
  * @property {string} scene The internal ID for the associated scene.
  * @property {string} actor The internal ID for the associated actor.
@@ -41,10 +41,10 @@ import RollTree from "./rolls/rolltree.js";
 
 /**
  * Options that can be passed into a foundry Dialog.
- * 
+ *
  * @typedef {Object} DialogOptions
  * @property {boolean}  [jQuery]          Whether to provide jQuery objects to callback functions (if true)
- *                                        or play HTMLElement instances (if false). This is currently true by 
+ *                                        or play HTMLElement instances (if false). This is currently true by
  *                                        default but in the future will become false by default.
  * @property {string}   [baseApplication] A named "base application" which generates an additional hook
  * @property {number}   [width]           The default pixel width for the rendered HTML
@@ -62,13 +62,13 @@ import RollTree from "./rolls/rolltree.js";
  * @property {string[]} [scrollY]         A list of unique CSS selectors which target containers that should
  *                                        have their vertical scroll positions preserved during a re-render.
  * @property {TabsConfiguration[]} [tabs] An array of tabbed container configurations which should be enabled
- *                                        for the application. 
+ *                                        for the application.
  * @property {boolean}  [skipUI]          Should this dialog be skipped?
  */
 
 /**
  * Temporary data structure used to hold the final formula and explanation for a Roll.
- * 
+ *
  * @typedef {Object} FinalFormula
  * @property {string} finalRoll The finalized forumla used in the Roll
  * @property {string} formula   The summarized explanation of the roll formula
@@ -76,7 +76,7 @@ import RollTree from "./rolls/rolltree.js";
 
 /**
  * The results of a Roll
- * 
+ *
  * @typedef {Object} RollResult
  * @property {Roll}         roll    The data for the roll
  * @property {FinalFormula} formula The finalized formula used in the roll
@@ -85,7 +85,7 @@ import RollTree from "./rolls/rolltree.js";
 /**
  * A data structure for outputing any metadata that is rendered at the bottom
  * of a Roll chat card.
- * 
+ *
  * @typedef {Object} Tag
  * @property {string} tag Text that will be addeded as a class on an HTMLElement
  * @property {string} text The text rendered on the card.
@@ -93,7 +93,7 @@ import RollTree from "./rolls/rolltree.js";
 
 /**
  * A structure for passing data into an HTML for for use in data- attributes.
- * 
+ *
  * @typedef {Object} HtmlData
  * @property {string} name The name of the data property sans data-
  * @property {string} value The value of the data property.
@@ -101,7 +101,7 @@ import RollTree from "./rolls/rolltree.js";
 
 /**
  * An optional modifer that can be added to a roll.
- * 
+ *
  * @typedef {Object} Modifier
  * @property {string}  name     The name of the modifer.
  * @property {boolean} enabled  Whether this modifier is enabled or not.
@@ -111,7 +111,7 @@ import RollTree from "./rolls/rolltree.js";
 
 /**
  * Function called when the attack roll dialog is closed.
- * 
+ *
  * @callback onD20DialogClosed
  * @param {Roll}         roll         The data for the roll.
  * @param {string}       formula      The formula used in the roll.
@@ -121,7 +121,7 @@ import RollTree from "./rolls/rolltree.js";
 
 /**
  * Function called when the damage roll dialog is closed.
- * 
+ *
  * @callback onDamageDialogClosed
  * @param {Roll}         roll         The data for the roll.
  * @param {string}       formula      The formula used in the roll.
@@ -131,7 +131,7 @@ import RollTree from "./rolls/rolltree.js";
 
 /**
  * Called when a roll is built.
- * 
+ *
  * @async
  * @callback onRollBuilt
  * @param {string}       button           The name of the button clicked.
@@ -147,7 +147,7 @@ export class DiceSFRPG {
     * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
     * This chooses the default options of a normal attack with no bonus, Advantage, or Disadvantage respectively
     *
-    * @param {Object}               data               The parameters passed into the method   
+    * @param {Object}               data               The parameters passed into the method
     * @param {Event|JQuery.Event}   [data.event]       The triggering event which initiated the roll
     * @param {string[]}             data.parts         The dice roll component parts, excluding the initial d20
     * @param {RollContext}          data.rollContext   The contextual data for this roll
@@ -162,10 +162,10 @@ export class DiceSFRPG {
     * @param {DialogOptions}        data.dialogOptions Modal dialog options
     */
     static async d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true, rollOptions = {},
-        critical = 20, fumble = 1, onClose, dialogOptions }) {
+        critical = 20, fumble = 1, chatMessage = true, onClose, dialogOptions }) {
 
         flavor = `${title}${(flavor ? " <br> " + flavor : "")}`;
-        
+
         if (!rollContext?.isValid()) {
             console.log(['Invalid rollContext', rollContext]);
             return null;
@@ -228,7 +228,8 @@ export class DiceSFRPG {
 
             finalFormula.finalRoll = dieRoll + " + " + finalFormula.finalRoll;
             finalFormula.formula = dieRoll + " + " + finalFormula.formula;
-            finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ").trim();
+            finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
+                .trim();
             finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
             const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
 
@@ -255,7 +256,7 @@ export class DiceSFRPG {
             //         speaker: speaker,
             //         content: flavor
             //     };
-        
+
             //     ChatMessage.create(chatData, { chatBubble: true });
             // }
 
@@ -264,8 +265,8 @@ export class DiceSFRPG {
 
             let useCustomCard = game.settings.get("sfrpg", "useCustomChatCards");
             let errorToThrow = null;
-            if (useCustomCard) {
-                //Push the roll to the ChatBox
+            if (useCustomCard && chatMessage) {
+                // Push the roll to the ChatBox
                 const customData = {
                     title: flavor,
                     rollContext:  rollContext,
@@ -284,8 +285,8 @@ export class DiceSFRPG {
                     errorToThrow = error;
                 }
             }
-            
-            if (!useCustomCard) {
+
+            if (!useCustomCard && chatMessage) {
                 const messageData = {
                     flavor: flavor,
                     speaker: speaker,
@@ -319,7 +320,7 @@ export class DiceSFRPG {
     *
     * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
     * This chooses the default options of a normal attack with no bonus, Advantage, or Disadvantage respectively (Only available for d20 rolls)
-    * 
+    *
     * Returns a promise that will return an object containing roll and formula.
     *
     * @param {Object}             data               The parameters passed into the method.
@@ -338,7 +339,7 @@ export class DiceSFRPG {
     * @returns {Promise<RollResult>|Promise} Returns the roll's result or an empty promise.
     */
     static async createRoll({ event = new Event(''), rollFormula = null, parts, rollContext, title, mainDie = "d20", advantage = true, critical = 20, fumble = 1, breakdown = "", tags = [], dialogOptions, useRawStrings = false }) {
-        
+
         if (!rollContext?.isValid()) {
             console.log(['Invalid rollContext', rollContext]);
             return null;
@@ -389,7 +390,7 @@ export class DiceSFRPG {
                 const rollObject = Roll.create(finalFormula.finalRoll, { breakdown, tags, skipUI: true });
                 let roll = await rollObject.evaluate({async: true});
                 roll.options.rollMode = rollMode;
-    
+
                 // Flag critical thresholds
                 for (let d of roll.dice) {
                     if (d.faces === 20) {
@@ -408,7 +409,7 @@ export class DiceSFRPG {
                         resolve(null);
                         return;
                     }
-                    
+
                     if (mainDie) {
                         const dieRoll = "1" + mainDie;
                         if (mainDie == "d20") {
@@ -418,18 +419,19 @@ export class DiceSFRPG {
                                 dieRoll = "2d20kh";
                             }
                         }
-        
+
                         finalFormula.finalRoll = dieRoll + " + " + finalFormula.finalRoll;
                         finalFormula.formula = dieRoll + " + " + finalFormula.formula;
                     }
 
-                    finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ").trim();
+                    finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
+                        .trim();
                     finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
-    
+
                     const rollObject = Roll.create(finalFormula.finalRoll, { breakdown, tags });
                     const roll = await rollObject.evaluate({async: true});
                     roll.options.rollMode = rollMode;
-            
+
                     // Flag critical thresholds
                     for (let d of roll.dice) {
                         if (d.faces === 20) {
@@ -437,7 +439,7 @@ export class DiceSFRPG {
                             d.options.fumble = fumble;
                         }
                     }
-    
+
                     resolve({roll: roll, formula: finalFormula});
                 });
             });
@@ -461,7 +463,7 @@ export class DiceSFRPG {
     * @param {onDamageDialogClosed} data.onClose       Callback for actions to take when the dialog form is closed
     * @param {Object}               data.dialogOptions Modal dialog options
     */
-    static async damageRoll({ event = new Event(''), parts, criticalData, rollContext, title, speaker, flavor, onClose, dialogOptions }) {
+    static async damageRoll({ event = new Event(''), parts, criticalData, rollContext, title, speaker, flavor, chatMessage = true, onClose, dialogOptions }) {
         flavor = `${title}${(flavor ? " - " + flavor : "")}`;
 
         if (!rollContext?.isValid()) {
@@ -602,7 +604,7 @@ export class DiceSFRPG {
                         damageTypeString += ", ";
                     }
                     damageTypeString += shortText;
-                    
+
                     if (!tags.some(t => t.tag === tag && t.text === text))
                         tags.push({ tag: tag, text: text });
                 }
@@ -615,7 +617,7 @@ export class DiceSFRPG {
             //     for (const damageType of damageTypes) {
             //         const tag = "damage-type-" + damageType.types.join(`-${damageType.operator}-`);
             //         const text = damageType.types.map(type => SFRPG.damageTypes[type]).join(` ${SFRPG.damageTypeOperators[damageType.operator]} `);
-                    
+
             //         tags.push({ tag: tag, text: text });
             //     }
             // }
@@ -675,16 +677,17 @@ export class DiceSFRPG {
                     finalFormula.finalRoll = finalFormula.finalRoll + " + " + finalFormula.finalRoll;
                     finalFormula.formula = finalFormula.formula + " + " + finalFormula.formula;
                 }
-                
+
                 let tempFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": finalFlavor });
-                
+
                 if (criticalData !== undefined) {
                     if (criticalData?.effect?.trim().length > 0) {
                         tempFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavorWithEffect", { "title": finalFlavor, "criticalEffect": criticalData.effect });
                         tags.push({ tag: "critical-effect", text: game.i18n.format("SFRPG.Rolls.Dice.CriticalEffect", {"criticalEffect": criticalData.effect })});
                     }
 
-                    let critRoll = criticalData.parts?.filter(x => x.formula?.trim().length > 0).map(x => x.formula).join("+") ?? "";
+                    let critRoll = criticalData.parts?.filter(x => x.formula?.trim().length > 0).map(x => x.formula)
+                        .join("+") ?? "";
                     if (critRoll.length > 0) {
                         finalFormula.finalRoll = finalFormula.finalRoll + " + " + critRoll;
                         finalFormula.formula = finalFormula.formula + " + " + critRoll;
@@ -701,23 +704,24 @@ export class DiceSFRPG {
                 if (part.partIndex) {
                     finalFlavor += ` (${part.partIndex})`;
                 }
-                //const originalTypes = duplicate(damageTypes);
-                //damageTypes = [getDamageTypeForPart(part)];
-                //console.log([originalTypes, damageTypes]);
+                // const originalTypes = duplicate(damageTypes);
+                // damageTypes = [getDamageTypeForPart(part)];
+                // console.log([originalTypes, damageTypes]);
             }
-            
-            finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ").trim();
+
+            finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
+                .trim();
             finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
             const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
 
             const rollObject = Roll.create(finalFormula.finalRoll, { tags: tags, breakdown: preparedRollExplanation });
             let roll = await rollObject.evaluate({async: true});
-            
-            //CRB pg. 240, < 1 damage returns 1 non-lethal damage.
+
+            // CRB pg. 240, < 1 damage returns 1 non-lethal damage.
             if (roll._total < 1) {
                 roll._total = 1;
                 const nonlethal = tags.find(e => e.tag === "weapon-properties nonlethal");
-                
+
                 if (itemContext.type !== "starshipWeapon") {
                     if (nonlethal) {
                         nonlethal.text += ` (${game.i18n.localize("SFRPG.Damage.MinimumDamage")})`;
@@ -730,7 +734,7 @@ export class DiceSFRPG {
             }
 
             // Associate the damage types for this attack to the first DiceTerm
-            // for the roll. 
+            // for the roll.
             const die = roll.dice && roll.dice.length > 0 ? roll.dice[0] : null;
 
             if (die) {
@@ -754,8 +758,8 @@ export class DiceSFRPG {
 
             let useCustomCard = game.settings.get("sfrpg", "useCustomChatCards");
             let errorToThrow = null;
-            if (useCustomCard) {
-                //Push the roll to the ChatBox
+            if (useCustomCard && chatMessage) {
+                // Push the roll to the ChatBox
                 const customData = {
                     title: finalFlavor,
                     rollContext:  rollContext,
@@ -779,8 +783,8 @@ export class DiceSFRPG {
                     errorToThrow = error;
                 }
             }
-            
-            if (!useCustomCard) {
+
+            if (!useCustomCard && chatMessage) {
                 let rollContent = await roll.render({ htmlData: htmlData });
 
                 const messageData = {
@@ -807,7 +811,7 @@ export class DiceSFRPG {
                         messageData.flags.specialMaterials = itemContext.entity.system.specialMaterials;
                     }
                 }
-                
+
                 ChatMessage.create(messageData);
             }
 
@@ -838,7 +842,7 @@ export class DiceSFRPG {
 
     /**
      * Hightlight rolls that are considered critical successes or failures.
-     * 
+     *
      * @param {ChatMessage} message            The ChatMessage document being rendered
      * @param {JQuery}      html               The pending HTML as a jQuery object
      * @param {Object}      data               The input data provided for template rendering
@@ -853,7 +857,7 @@ export class DiceSFRPG {
      */
     static highlightCriticalSuccessFailure(message, html, data) {
         if (!message.isRoll || !message.isContentVisible) return;
-    
+
         let roll = message.rolls[0];
         if (!roll.dice.length) return;
         for (let d of roll.dice) {
@@ -866,7 +870,7 @@ export class DiceSFRPG {
 
     /**
      * Add damage types for damage rolls to the chat card.
-     * 
+     *
      * @param {ChatMessage} message            The ChatMessage document being rendered
      * @param {JQuery}      html               The pending HTML as a jQuery object
      * @param {Object}      data               The input data provided for template rendering

@@ -1,7 +1,7 @@
 import { SFRPG } from "../../../config.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes} from "../../../modifiers/types.js";
 
-export default function (engine) {
+export default function(engine) {
     engine.closures.add( "calculateMovementSpeeds", (fact, context) => {
         const data = fact.data;
         const armors = fact.armors?.length > 0 ? fact.armors : null;
@@ -28,11 +28,11 @@ export default function (engine) {
                     source: bonus.name
                 }));
             }
-            
+
             return computedBonus;
         };
 
-        const slowestArmor = armors?.reduce((armor, worstArmor) => (armor.system?.armor?.speedAdjust || 0) < (worstArmor.system?.armor?.speedAdjust || 0) ? armor : worstArmor);;
+        const slowestArmor = armors?.reduce((armor, worstArmor) => (armor.system?.armor?.speedAdjust || 0) < (worstArmor.system?.armor?.speedAdjust || 0) ? armor : worstArmor);
         const armorSpeed = slowestArmor?.system?.armor?.speedAdjust || 0;
         if (armorSpeed) {
             data.attributes.speed.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Modifiers.Tooltips.Speed", {
@@ -42,7 +42,7 @@ export default function (engine) {
                 source: slowestArmor.name
             }));
         }
-        
+
         for (const speedKey of Object.keys(SFRPG.speeds)) {
             if (speedKey === "special") {
                 continue;
@@ -54,7 +54,7 @@ export default function (engine) {
                 return (mod.enabled || mod.modifierType === "formula") && (mod.effectType === SFRPGEffectType.ALL_SPEEDS || (mod.effectType === SFRPGEffectType.SPECIFIC_SPEED && mod.valueAffected === speedKey));
             });
             filteredModifiers = context.parameters.stackModifiers.process(filteredModifiers, context);
-    
+
             let filteredMultiplyModifiers = fact.modifiers.filter(mod => {
                 return (mod.enabled || mod.modifierType === "formula") && mod.effectType === SFRPGEffectType.MULTIPLY_ALL_SPEEDS;
             });
@@ -62,7 +62,7 @@ export default function (engine) {
 
             const bonus = Object.entries(filteredModifiers).reduce((sum, mod) => {
                 if (mod[1] === null || mod[1].length < 1) return sum;
-    
+
                 if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
                     for (const bonus of mod[1]) {
                         sum += addModifier(bonus, data, data.attributes.speed, "SFRPG.ActorSheet.Modifiers.Tooltips.Speed", speedKey);
@@ -70,13 +70,13 @@ export default function (engine) {
                 } else {
                     sum += addModifier(mod[1], data, data.attributes.speed, "SFRPG.ActorSheet.Modifiers.Tooltips.Speed", speedKey);
                 }
-    
+
                 return sum;
             }, 0);
 
             data.attributes.speed[speedKey].value = Math.max(0, baseValue + armorSpeed + bonus);
 
-            for(const modifier of Object.values(filteredMultiplyModifiers)) {
+            for (const modifier of Object.values(filteredMultiplyModifiers)) {
                 if (!modifier || !modifier.length) {
                     continue;
                 }
@@ -88,10 +88,10 @@ export default function (engine) {
                         } else {
                             data.attributes.speed.rolledMods = [{mod: modifierBonus.modifier, bonus: modifierBonus}];
                         }
-        
+
                         return 0;
                     }
-        
+
                     const roll = Roll.create(modifierBonus.modifier.toString(), data).evaluate({maximize: true});
                     const computedBonus = roll.total;
 

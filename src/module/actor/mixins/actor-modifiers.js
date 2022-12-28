@@ -1,31 +1,31 @@
 import { SFRPGModifierType, SFRPGModifierTypes, SFRPGEffectType } from "../../modifiers/types.js";
 import SFRPGModifier from "../../modifiers/modifier.js";
 import SFRPGModifierApplication from "../../apps/modifier-app.js";
-import { getItemContainer } from "../actor-inventory-utils.js"
+import { getItemContainer } from "../actor-inventory-utils.js";
 
 export const ActorModifiersMixin = (superclass) => class extends superclass {
 
     /**
-     * Check to ensure that this actor has a modifiers data object set, if not then set it. 
+     * Check to ensure that this actor has a modifiers data object set, if not then set it.
      * These will always be needed from hence forth, so we'll just make sure that they always exist.
-     * 
+     *
      * @param {Object}      data The actor data to check against.
      * @param {String|Null} prop A specific property name to check.
-     * 
+     *
      * @returns {Object}         The modified data object with the modifiers data object added.
      */
     _ensureHasModifiers(data, prop = null) {
         if (!hasProperty(data, "modifiers")) {
-            //console.log(`Starfinder | ${this.name} does not have the modifiers data object, attempting to create them...`);
+            // console.log(`Starfinder | ${this.name} does not have the modifiers data object, attempting to create them...`);
             data.modifiers = [];
         }
 
         return data;
     }
-    
+
     /**
      * Add a modifier to this actor.
-     * 
+     *
      * @param {Object}        data               The data needed to create the modifier
      * @param {String}        data.name          The name of this modifier. Used to identify the modfier.
      * @param {Number|String} data.modifier      The modifier value.
@@ -40,16 +40,16 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
      * @param {String}        data.condition     The condition, if any, that this modifier is associated with.
      * @param {String|null}   data.id            Override the randomly generated id with this.
      */
-     async addModifier({
-        name = "", 
-        modifier = 0, 
-        type = SFRPGModifierTypes.UNTYPED, 
-        modifierType = SFRPGModifierType.CONSTANT, 
+    async addModifier({
+        name = "",
+        modifier = 0,
+        type = SFRPGModifierTypes.UNTYPED,
+        modifierType = SFRPGModifierType.CONSTANT,
         effectType = SFRPGEffectType.SKILL,
         subtab = "misc",
-        valueAffected = "", 
-        enabled = true, 
-        source = "", 
+        valueAffected = "",
+        enabled = true,
+        source = "",
         notes = "",
         condition = "",
         id = null
@@ -77,18 +77,18 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
 
     /**
      * Delete a modifier for this Actor.
-     * 
+     *
      * @param {String} id The id for the modifier to delete
      */
     async deleteModifier(id) {
         const modifiers = this.system.modifiers.filter(mod => mod._id !== id);
-        
+
         await this.update({"system.modifiers": modifiers});
     }
 
     /**
      * Edit a modifier for an Actor.
-     * 
+     *
      * @param {String} id The id for the modifier to edit
      */
     editModifier(id) {
@@ -100,7 +100,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
 
     /**
      * Returns an array of all modifiers on this actor. This will include items such as equipment, feat, classes, race, theme, etc.
-     * 
+     *
      * @param {Boolean} ignoreTemporary Should we ignore temporary modifiers? Defaults to false.
      * @param {Boolean} ignoreEquipment Should we ignore equipment modifiers? Defaults to false.
      */
@@ -119,59 +119,59 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
 
             let modifiersToConcat = [];
             switch (item.type) {
-                // Armor upgrades are only valid if they are slotted into an equipped armor
-                case "upgrade":
-                    {
-                        if (!ignoreEquipment) {
-                            const container = getItemContainer(this.items, item);
-                            if (container && container.type === "equipment" && container.system.equipped) {
-                                modifiersToConcat = itemModifiers;
-                            }
-                        }
-                        break;
-                    }
-
-                // Weapon upgrades (Fusions and accessories) are only valid if they are slotted into an equipped weapon
-                case "fusion":
-                case "weaponAccessory":
-                    {
-                        if (!ignoreEquipment) {
-                            const container = getItemContainer(this.items, item);
-                            if (container && container.type === "weapon" && container.system.equipped) {
-                                modifiersToConcat = itemModifiers;
-                            }
-                        }
-                        break;
-                    }
-
-                // Feats are only active when they are passive, or activated
-                case "feat":
-                    if (itemData.activation?.type === "" || itemData.isActive) {
+            // Armor upgrades are only valid if they are slotted into an equipped armor
+            case "upgrade":
+            {
+                if (!ignoreEquipment) {
+                    const container = getItemContainer(this.items, item);
+                    if (container && container.type === "equipment" && container.system.equipped) {
                         modifiersToConcat = itemModifiers;
                     }
-                    break;
+                }
+                break;
+            }
+
+            // Weapon upgrades (Fusions and accessories) are only valid if they are slotted into an equipped weapon
+            case "fusion":
+            case "weaponAccessory":
+            {
+                if (!ignoreEquipment) {
+                    const container = getItemContainer(this.items, item);
+                    if (container && container.type === "weapon" && container.system.equipped) {
+                        modifiersToConcat = itemModifiers;
+                    }
+                }
+                break;
+            }
+
+            // Feats are only active when they are passive, or activated
+            case "feat":
+                if (itemData.activation?.type === "" || itemData.isActive) {
+                    modifiersToConcat = itemModifiers;
+                }
+                break;
 
                 // Special handling for equipment, shield, and weapon
-                case "equipment":
-                case "shield":
-                case "weapon":
-                    if (!ignoreEquipment && itemData.equipped) {
-                        modifiersToConcat = itemModifiers;
-                    }
-                    break;
+            case "equipment":
+            case "shield":
+            case "weapon":
+                if (!ignoreEquipment && itemData.equipped) {
+                    modifiersToConcat = itemModifiers;
+                }
+                break;
 
-                case "actorResource":
-                    if (itemData.enabled && itemData.type && itemData.subType && (itemData.base || itemData.base === 0)) {
-                        modifiersToConcat = itemModifiers;
-                    }
-                    break;
+            case "actorResource":
+                if (itemData.enabled && itemData.type && itemData.subType && (itemData.base || itemData.base === 0)) {
+                    modifiersToConcat = itemModifiers;
+                }
+                break;
 
                 // Everything else
-                default:
-                    if (!itemData.equippable || itemData.equipped) {
-                        modifiersToConcat = itemModifiers;
-                    }
-                    break;
+            default:
+                if (!itemData.equippable || itemData.equipped) {
+                    modifiersToConcat = itemModifiers;
+                }
+                break;
             }
 
             if (modifiersToConcat && modifiersToConcat.length > 0) {
@@ -188,4 +188,4 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
         }
         return allModifiers;
     }
-}
+};

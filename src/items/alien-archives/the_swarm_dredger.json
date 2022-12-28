@@ -13,7 +13,6 @@
       "_id": "zwqenlJ2iglh4ENV",
       "name": "Swarm Mind (Ex)",
       "type": "feat",
-      "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -45,7 +44,7 @@
         "description": {
           "chat": "",
           "unidentified": "",
-          "value": "Members of the Swarm are bound together into a singular hive mind by a blend of exuded pheromones, imperceptible movements of antennae and limbs, electrostatic fields, and telepathic communication. All Swarm creatures with 30 feet of each other are in constant communication; if one is aware of a threat, all are. (Such awareness can spread along a “chain” of Swarm creatures under appropriate circumstances, potentially alerting distant Swarm creatures). In addition, once per round when within 30 feet of another Swarm creature, a Swarm creature can roll twice and take the better result on a saving throw against a mind-affecting effect."
+          "value": "<p>Members of the Swarm are bound together into a singular hive mind by a blend of exuded pheromones, imperceptible movements of antennae and limbs, electrostatic fields, and telepathic communication. All Swarm creatures with 30 feet of each other are in constant communication; if one is aware of a threat, all are. (Such awareness can spread along a “chain” of Swarm creatures under appropriate circumstances, potentially alerting distant Swarm creatures). In addition, once per round when within 30 feet of another Swarm creature, a Swarm creature can roll twice and take the better result on a saving throw against a mind-affecting effect.</p>"
         },
         "descriptors": [],
         "duration": {
@@ -86,7 +85,6 @@
       "_id": "kGc5cXdueLOS11cK",
       "name": "Attach",
       "type": "feat",
-      "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -118,7 +116,7 @@
         "description": {
           "chat": "",
           "unidentified": "",
-          "value": "<h3>(EX)</h3>\n<h3>The creature can attempt a special attack against KAC as a standard action. If it succeeds, it deals no damage, but it adheres to its target. Once attached, the creature gains a +4 bonus to its AC (from cover) and a +2 circumstance bonus to melee attacks, but it can attack only the creature to which it is attached. An attached creature can’t move (though it moves with its target), take actions that require two hands, or make attacks of opportunity. An attached creature can be removed with a successful Strength check (DC = 10 + 1-1/2 × the creature’s CR) made as a move action, or it can remove itself from its target as a move action.</h3>\n<hr>\n<h3>&nbsp;</h3>"
+          "value": "<h3>(EX)</h3>\n<h3>The creature can attempt a special attack against KAC as a standard action. If it succeeds, it deals no damage, but it adheres to its target. Once attached, the creature gains a +4 bonus to its AC (from cover) and a +2 circumstance bonus to melee attacks, but it can attack only the creature to which it is attached. An attached creature can’t move (though it moves with its target), take actions that require two hands, or make attacks of opportunity. An attached creature can be removed with a successful Strength check (DC = 10 + 1-1/2 × the creature’s CR) made as a move action, or it can remove itself from its target as a move action.</h3>\n<hr />\n<h3>&nbsp;</h3>"
         },
         "descriptors": [],
         "duration": {
@@ -159,7 +157,6 @@
       "_id": "14msG76WP52HklIP",
       "name": "Claw",
       "type": "weapon",
-      "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -348,6 +345,69 @@
       }
     }
   ],
+  "prototypeToken": {
+    "name": "The Swarm, Dredger",
+    "actorLink": false,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": ""
+    },
+    "displayBars": 20,
+    "displayName": 20,
+    "disposition": -1,
+    "height": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 360,
+      "animation": {
+        "type": null,
+        "intensity": 5,
+        "reverse": false,
+        "speed": 5
+      },
+      "attenuation": 0.5,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "contrast": 0,
+      "darkness": {
+        "max": 1,
+        "min": 0
+      },
+      "dim": 0,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "shadows": 0
+    },
+    "lockRotation": false,
+    "mirrorX": false,
+    "mirrorY": false,
+    "randomImg": false,
+    "rotation": 0,
+    "scale": 1,
+    "sight": {
+      "angle": 360,
+      "attenuation": 0.1,
+      "brightness": 1,
+      "color": null,
+      "contrast": 0,
+      "enabled": false,
+      "range": 0,
+      "saturation": 0,
+      "visionMode": "basic"
+    },
+    "texture": {
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": null
+    },
+    "width": 1
+  },
   "system": {
     "abilities": {
       "cha": {
@@ -443,18 +503,6 @@
         "tooltip": [],
         "value": 0
       },
-      "rp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
-      "sp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
       "space": "0",
       "speed": {
         "burrowing": {
@@ -498,7 +546,7 @@
       "aura": "",
       "biography": {
         "public": "",
-        "value": "<h2>Description</h2>\n<p>Among the more insectile Swarm components, these creatures each have a swept-back, segmented carapace and a set of three mandibles covered in hooked barbs. A Swarm dredger uses these barbs to firmly attach itself to its foe and then cuts into the prey’s flesh with one of its claws. It can also use these claws to burrow through clay, dirt, or mud. Though a Swarm dredger’s head is different from its Swarm brethren, it does have segmented visual organs at the base of its “neck” protected by ridges in its carapace. It can see in the dark with these eyes and it bristles with hundreds of tiny, nearly invisible setae that sense vibrations in the nearby air.<br><br>The Swarm uses dredgers like mobile tools, digging trenches to divert rivers and streams, creating shafts to important resources collected by other Swarm, and burrowing behind enemy lines to cause chaos for larger Swarm components to take advantage of. Swarm dredgers never act alone, and a large enough pack of them can quickly alter the terrain of a battlefield, forming furrows and dugouts to hinder anyone attempting to use land-based vehicles against the Swarm.<br><br>A typical Swarm dredger is approximately 3 feet long and has a black, red, and orange carapace.</p>\n<section>\n<h2>The Swarm</h2>\n<p>Originally an insectile race called the kucharn, the Swarm is now a single-minded collective with a desire to consume all things and absorb their best qualities into itself. The Swarm moves from planet to planet in tremendous organic hive-ships, reducing each so-called “feeder world” to a barren husk incapable of supporting life, and occasionally altering its own DNA in the process to take on qualities from that world’s species. Once it has consumed everything of use on a planet, the Swarm moves on, not bothering to hold territory.<br><br>Ironically, one of the most violent races in the galaxy also birthed one of the most peaceful, as a mutation within a sub-hive gave life to the shirrens, who broke away to form a new species. The Swarm is notorious not just because of the invasion that finally ended hostilities between the Pact Worlds and the Veskarium, but also thanks to the warnings of shirrens, who understand the Swarm’s might and its hunger as no other race can.<br><br>While individual components of the Swarm have some form of intelligence—or at least a set of complex programmed behaviors that resembles intellect—they cannot generally be reasoned with in any fashion. Swarm components rarely communicate with other creatures, as they see every alien entity as either a food source or a threat. The Swarm’s morale is unbreakable, and while individual components might retreat for tactical reasons, fear is utterly unknown to the Swarm and its components.<br><br>The Swarm rarely wields manufactured weapons, instead integrating biotechnology grown or grafted onto component creatures. Because of its constant genetic upgrading and experimentation, the Swarm encompasses components with a wide variety of shapes, sizes, and capabilities, from the mighty dreadlancers to the microscopic, bloodstream-infesting toxicytes.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<p>&nbsp;</p>\n<h3>Organization</h3>\n<p>pair or pack (3-12)</p>\n<p>&nbsp;</p>\n</section>"
+        "value": "<h2>Description</h2>\n<p>Among the more insectile Swarm components, these creatures each have a swept-back, segmented carapace and a set of three mandibles covered in hooked barbs. A Swarm dredger uses these barbs to firmly attach itself to its foe and then cuts into the prey’s flesh with one of its claws. It can also use these claws to burrow through clay, dirt, or mud. Though a Swarm dredger’s head is different from its Swarm brethren, it does have segmented visual organs at the base of its “neck” protected by ridges in its carapace. It can see in the dark with these eyes and it bristles with hundreds of tiny, nearly invisible setae that sense vibrations in the nearby air.</p>\n<p>The Swarm uses dredgers like mobile tools, digging trenches to divert rivers and streams, creating shafts to important resources collected by other Swarm, and burrowing behind enemy lines to cause chaos for larger Swarm components to take advantage of. Swarm dredgers never act alone, and a large enough pack of them can quickly alter the terrain of a battlefield, forming furrows and dugouts to hinder anyone attempting to use land-based vehicles against the Swarm.</p>\n<p>A typical Swarm dredger is approximately 3 feet long and has a black, red, and orange carapace.</p>\n<section>\n<h2>The Swarm</h2>\n<p>Originally an insectile race called the kucharn, the Swarm is now a single-minded collective with a desire to consume all things and absorb their best qualities into itself. The Swarm moves from planet to planet in tremendous organic hive-ships, reducing each so-called “feeder world” to a barren husk incapable of supporting life, and occasionally altering its own DNA in the process to take on qualities from that world’s species. Once it has consumed everything of use on a planet, the Swarm moves on, not bothering to hold territory.</p>\n<p>Ironically, one of the most violent races in the galaxy also birthed one of the most peaceful, as a mutation within a sub-hive gave life to the shirrens, who broke away to form a new species. The Swarm is notorious not just because of the invasion that finally ended hostilities between the Pact Worlds and the Veskarium, but also thanks to the warnings of shirrens, who understand the Swarm’s might and its hunger as no other race can.</p>\n<p>While individual components of the Swarm have some form of intelligence—or at least a set of complex programmed behaviors that resembles intellect—they cannot generally be reasoned with in any fashion. Swarm components rarely communicate with other creatures, as they see every alien entity as either a food source or a threat. The Swarm’s morale is unbreakable, and while individual components might retreat for tactical reasons, fear is utterly unknown to the Swarm and its components.</p>\n<p>The Swarm rarely wields manufactured weapons, instead integrating biotechnology grown or grafted onto component creatures. Because of its constant genetic upgrading and experimentation, the Swarm encompasses components with a wide variety of shapes, sizes, and capabilities, from the mighty dreadlancers to the microscopic, bloodstream-infesting toxicytes.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<h3>Organization</h3>\n<p>pair or pack (3-12)</p>\n</section>"
       },
       "class": "",
       "cr": 0.5,
@@ -777,40 +825,5 @@
       "size": "small",
       "sr": 0
     }
-  },
-  "token": {
-    "name": "The Swarm, Dredger",
-    "actorData": {},
-    "actorId": "Uql1PJRlPrVsZaCS",
-    "actorLink": false,
-    "bar1": {
-      "attribute": "attributes.hp"
-    },
-    "bar2": {
-      "attribute": ""
-    },
-    "brightLight": 0,
-    "brightSight": 0,
-    "dimLight": 0,
-    "dimSight": 0,
-    "displayBars": 40,
-    "displayName": 0,
-    "disposition": -1,
-    "flags": {},
-    "height": 1,
-    "img": "icons/svg/mystery-man.svg",
-    "lightAlpha": 1,
-    "lightAngle": 360,
-    "lightColor": "",
-    "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
-    "randomImg": false,
-    "rotation": 0,
-    "scale": 1,
-    "sightAngle": 360,
-    "tint": "",
-    "vision": false,
-    "width": 1
   }
 }

@@ -2,17 +2,12 @@
   "_id": "T9DRfdi5iTE9ww5H",
   "name": "Oblivion Shade",
   "type": "npc2",
-  "effects": [],
-  "flags": {},
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "_id": "xTTlzLzZ2EgCQTi4",
       "name": "Incorporeal",
       "type": "feat",
-      "effects": [],
-      "flags": {},
-      "sort": 100000,
       "system": {
         "type": "",
         "ability": null,
@@ -81,9 +76,6 @@
       "_id": "0IZ6tVvrB4BEDisz",
       "name": "Incorporeal Touch",
       "type": "weapon",
-      "effects": [],
-      "flags": {},
-      "sort": 200000,
       "system": {
         "type": "",
         "ability": "",
@@ -306,9 +298,6 @@
       "_id": "ppQmEw7UgddDZoGv",
       "name": "Create Spawn (Su)",
       "type": "feat",
-      "effects": [],
-      "flags": {},
-      "sort": 300000,
       "system": {
         "type": "",
         "ability": null,
@@ -339,7 +328,7 @@
         "description": {
           "chat": "",
           "unidentified": "",
-          "value": "A living humanoid creature killed by an oblivion shade’s incorporeal touch must attempt a DC 18 Will saving throw just before it is killed. If it fails, it becomes an oblivion shade spawn under the control of the original oblivion shade in 1d4 rounds. An oblivion shade spawn usually has a CR that is 3 lower than that of the original oblivion shade."
+          "value": "<p>A living humanoid creature killed by an oblivion shade’s incorporeal touch must attempt a DC 18 Will saving throw just before it is killed. If it fails, it becomes an oblivion shade spawn under the control of the original oblivion shade in 1d4 rounds. An oblivion shade spawn usually has a CR that is 3 lower than that of the original oblivion shade.</p>"
         },
         "descriptors": [],
         "duration": {
@@ -380,10 +369,7 @@
       "_id": "QD2FaZR1TCll3SXC",
       "name": "Unliving",
       "type": "feat",
-      "effects": [],
-      "flags": {},
       "img": "icons/svg/mystery-man.svg",
-      "sort": 400000,
       "system": {
         "type": "",
         "ability": null,
@@ -414,7 +400,7 @@
         "description": {
           "chat": "",
           "unidentified": "",
-          "value": "<p>(EX)</p>\n<p>The creature has no Constitution score or modifier. Any DCs or other statistics that rely on a Constitution score treat the creature as having a score of 10 (+0). The creature is immediately destroyed when it reaches 0 Hit Points. An unliving creature doesn’t heal damage naturally, but a construct can be repaired with the right tools. Spells such as make whole can heal constructs, and magic effects can heal undead. An unliving creature with fast healing (see page 154) still benefits from that ability. Unliving creatures don’t breathe, eat, or sleep. They can’t be raised or resurrected, except through the use of miracle, wish, or a similar effect that specifically works on unliving creatures.</p>\n<hr>\n<p>&nbsp;</p>"
+          "value": "<p>(EX)</p>\n<p>The creature has no Constitution score or modifier. Any DCs or other statistics that rely on a Constitution score treat the creature as having a score of 10 (+0). The creature is immediately destroyed when it reaches 0 Hit Points. An unliving creature doesn’t heal damage naturally, but a construct can be repaired with the right tools. Spells such as make whole can heal constructs, and magic effects can heal undead. An unliving creature with fast healing (see page 154) still benefits from that ability. Unliving creatures don’t breathe, eat, or sleep. They can’t be raised or resurrected, except through the use of miracle, wish, or a similar effect that specifically works on unliving creatures.</p>\n<hr />"
         },
         "descriptors": [],
         "duration": {
@@ -455,9 +441,6 @@
       "_id": "mNWccLAC6bpkzx82",
       "name": "Void Leap (Su)",
       "type": "feat",
-      "effects": [],
-      "flags": {},
-      "sort": 500000,
       "system": {
         "type": "",
         "ability": null,
@@ -526,6 +509,69 @@
       }
     }
   ],
+  "prototypeToken": {
+    "name": "Oblivion Shade",
+    "actorLink": false,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": ""
+    },
+    "displayBars": 20,
+    "displayName": 20,
+    "disposition": -1,
+    "height": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 360,
+      "animation": {
+        "type": null,
+        "intensity": 5,
+        "reverse": false,
+        "speed": 5
+      },
+      "attenuation": 0.5,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "contrast": 0,
+      "darkness": {
+        "max": 1,
+        "min": 0
+      },
+      "dim": 0,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "shadows": 0
+    },
+    "lockRotation": false,
+    "mirrorX": false,
+    "mirrorY": false,
+    "randomImg": false,
+    "rotation": 0,
+    "scale": 1,
+    "sight": {
+      "angle": 360,
+      "attenuation": 0.1,
+      "brightness": 1,
+      "color": null,
+      "contrast": 0,
+      "enabled": false,
+      "range": 0,
+      "saturation": 0,
+      "visionMode": "basic"
+    },
+    "texture": {
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": null
+    },
+    "width": 1
+  },
   "system": {
     "abilities": {
       "cha": {
@@ -621,18 +667,6 @@
         "tooltip": [],
         "value": 0
       },
-      "rp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
-      "sp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
       "space": "",
       "speed": {
         "burrowing": {
@@ -712,7 +746,7 @@
       "aura": "",
       "biography": {
         "public": "",
-        "value": "<h2>Description</h2>\n<p>A kind of incorporeal undead, an oblivion shade comes into existence when an evil being dies in the throes of utter nihilism. With that negativity burning in its heart, the miserable soul rises again as an oblivion shade.<br /><br />Oblivion shades are animate expressions of entropy, able to disintegrate matter with a touch. Though their bodies melt away to nearly nothing, victims killed by oblivion shades often find their souls twisted, becoming oblivion shade spawn under the thrall of the original undead.<br /><br />Most oblivion shades embrace devotion to @Compendium[sfrpg.setting.JpQpQbdXNOX6aTVG]{The Devourer}. Some function as soldiers of the Star-Eater&rsquo;s cults, while others act as revered mystics and sages of the most faithful choirs. A few create their own sects by slaughtering innocents to create spawn. These &ldquo;invisible choirs&rdquo; are looked upon with fear and awe even by other cultists of @Compendium[sfrpg.setting.JpQpQbdXNOX6aTVG]{The Devourer}.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<p>&nbsp;</p>\n<h3>Organization</h3>\n<p>solitary or cabal (1-2 with 4-20 oblivion shade spawn)</p>\n<p>&nbsp;</p>\n</section>"
+        "value": "<h2>Description</h2>\n<p>A kind of incorporeal undead, an oblivion shade comes into existence when an evil being dies in the throes of utter nihilism. With that negativity burning in its heart, the miserable soul rises again as an oblivion shade.</p>\n<p>Oblivion shades are animate expressions of entropy, able to disintegrate matter with a touch. Though their bodies melt away to nearly nothing, victims killed by oblivion shades often find their souls twisted, becoming oblivion shade spawn under the thrall of the original undead.</p>\n<p>Most oblivion shades embrace devotion to @UUID[Compendium.sfrpg.setting.JpQpQbdXNOX6aTVG]{The Devourer}. Some function as soldiers of the Star-Eater’s cults, while others act as revered mystics and sages of the most faithful choirs. A few create their own sects by slaughtering innocents to create spawn. These “invisible choirs” are looked upon with fear and awe even by other cultists of @UUID[Compendium.sfrpg.setting.JpQpQbdXNOX6aTVG]{The Devourer}.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<h3>Organization</h3>\n<p>solitary or cabal (1-2 with 4-20 oblivion shade spawn)</p>\n</section>"
       },
       "class": "",
       "cr": 8,
@@ -990,44 +1024,5 @@
       "size": "medium",
       "sr": 0
     }
-  },
-  "token": {
-    "name": "Oblivion Shade",
-    "actorId": "8mHc96Womh7T3CQ6",
-    "actorLink": false,
-    "bar1": {
-      "attribute": "attributes.hp"
-    },
-    "bar2": {
-      "attribute": ""
-    },
-    "brightLight": 0,
-    "brightSight": 0,
-    "dimLight": 0,
-    "dimSight": 0,
-    "displayBars": 40,
-    "displayName": 0,
-    "disposition": 0,
-    "flags": {},
-    "height": 1,
-    "img": "icons/svg/mystery-man.svg",
-    "lightAlpha": 1,
-    "lightAngle": 360,
-    "lightAnimation": {
-      "type": "",
-      "intensity": 5,
-      "speed": 5
-    },
-    "lightColor": "",
-    "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
-    "randomImg": false,
-    "rotation": 0,
-    "scale": 1,
-    "sightAngle": 360,
-    "tint": "",
-    "vision": false,
-    "width": 1
   }
 }

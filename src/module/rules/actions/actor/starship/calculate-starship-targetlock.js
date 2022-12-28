@@ -1,4 +1,4 @@
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateStarshipTargetLock", (fact, context) => {
         const data = fact.data;
         const actor = fact.actor;
@@ -10,7 +10,7 @@ export default function (engine) {
         if (data.crew.useNPCCrew) {
             pilotingRanks = data.crew.npcData?.pilot?.skills?.pil?.ranks || 0;
         }
-        
+
         /** Set up base values. */
         const forwardTL = duplicate(data.quadrants.forward.targetLock);
         data.quadrants.forward.targetLock = {
@@ -73,7 +73,7 @@ export default function (engine) {
             } else {
                 target.tooltip.push(`${title}: ${value}`);
             }
-        }
+        };
 
         if (pilotingRanks > 0) {
             addScore(data.quadrants.forward.targetLock, "SFRPG.StarshipSheet.Modifiers.PilotSkillBonus", pilotingRanks);

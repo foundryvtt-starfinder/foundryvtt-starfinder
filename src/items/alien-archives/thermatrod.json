@@ -13,7 +13,6 @@
       "_id": "PDQ6myFgBXAFiS9H",
       "name": "Melting Aura (Ex)",
       "type": "feat",
-      "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -53,7 +52,7 @@
         "description": {
           "chat": "",
           "unidentified": "",
-          "value": "A creature that begins its turn within 5 feet of a thermatrod takes 1d4 fire damage from the creature’s intense internal temperature."
+          "value": "<p>A creature that begins its turn within 5 feet of a thermatrod takes 1d4 fire damage from the creature’s intense internal temperature.</p>"
         },
         "descriptors": [],
         "duration": {
@@ -93,7 +92,6 @@
     {
       "name": "Slam",
       "type": "weapon",
-      "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -272,7 +270,6 @@
     {
       "name": "Slag Barrage (Ex)",
       "type": "feat",
-      "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -304,7 +301,7 @@
         "description": {
           "chat": "",
           "unidentified": "",
-          "value": "As a full action, a thermatrod can spray a portion of its core at a grid intersection within 60 feet. All creatures within 10 feet of this intersection take 2d6 fire damage and gain the @Compendium[sfrpg.conditions.aAQ6SW6iK0EVq8Ce]{Staggered} condition as the spray of molten stone and metal hardens. A target can attempt a DC 14 Reflex save to halve the damage and negate the @Compendium[sfrpg.conditions.aAQ6SW6iK0EVq8Ce]{Staggered} condition. Otherwise, the @Compendium[sfrpg.conditions.aAQ6SW6iK0EVq8Ce]{Staggered} condition lasts for 1 minute unless the target or an adjacent creature uses a full action to peel off enough rock and stone for the target to be able to move."
+          "value": "<p>As a full action, a thermatrod can spray a portion of its core at a grid intersection within 60 feet. All creatures within 10 feet of this intersection take 2d6 fire damage and gain the @UUID[Compendium.sfrpg.conditions.aAQ6SW6iK0EVq8Ce]{Staggered} condition as the spray of molten stone and metal hardens. A target can attempt a DC 14 Reflex save to halve the damage and negate the @UUID[Compendium.sfrpg.conditions.aAQ6SW6iK0EVq8Ce]{Staggered} condition. Otherwise, the @UUID[Compendium.sfrpg.conditions.aAQ6SW6iK0EVq8Ce]{Staggered} condition lasts for 1 minute unless the target or an adjacent creature uses a full action to peel off enough rock and stone for the target to be able to move.</p>"
         },
         "descriptors": [],
         "duration": {
@@ -344,7 +341,6 @@
     {
       "name": "Earth Glide",
       "type": "feat",
-      "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -376,7 +372,7 @@
         "description": {
           "chat": "",
           "unidentified": "",
-          "value": "<h3>(EX)</h3>\n<h3>When the creature burrows, it can pass through dirt, stone, or almost any other sort of earth except metal as easily as a fish swims through water. If protected against fire damage, it can even glide through lava. Its burrowing leaves behind no tunnel or hole, nor does it create any ripple or other sign of its presence.</h3>\n<hr>\n<h3>&nbsp;</h3>"
+          "value": "<h3>(EX)</h3>\n<h3>When the creature burrows, it can pass through dirt, stone, or almost any other sort of earth except metal as easily as a fish swims through water. If protected against fire damage, it can even glide through lava. Its burrowing leaves behind no tunnel or hole, nor does it create any ripple or other sign of its presence.</h3>\n<hr />\n<h3>&nbsp;</h3>"
         },
         "descriptors": [],
         "duration": {
@@ -414,6 +410,69 @@
       }
     }
   ],
+  "prototypeToken": {
+    "name": "Thermatrod",
+    "actorLink": false,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": ""
+    },
+    "displayBars": 20,
+    "displayName": 20,
+    "disposition": -1,
+    "height": 2,
+    "light": {
+      "alpha": 0.5,
+      "angle": 360,
+      "animation": {
+        "type": null,
+        "intensity": 5,
+        "reverse": false,
+        "speed": 5
+      },
+      "attenuation": 0.5,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "contrast": 0,
+      "darkness": {
+        "max": 1,
+        "min": 0
+      },
+      "dim": 0,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "shadows": 0
+    },
+    "lockRotation": false,
+    "mirrorX": false,
+    "mirrorY": false,
+    "randomImg": false,
+    "rotation": 0,
+    "scale": 1,
+    "sight": {
+      "angle": 360,
+      "attenuation": 0.1,
+      "brightness": 1,
+      "color": null,
+      "contrast": 0,
+      "enabled": false,
+      "range": 0,
+      "saturation": 0,
+      "visionMode": "basic"
+    },
+    "texture": {
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": null
+    },
+    "width": 2
+  },
   "system": {
     "abilities": {
       "cha": {
@@ -509,18 +568,6 @@
         "tooltip": [],
         "value": 0
       },
-      "rp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
-      "sp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
       "space": "10 ft.",
       "speed": {
         "burrowing": {
@@ -564,7 +611,7 @@
       "aura": "Melting Aura - 5 Feet",
       "biography": {
         "public": "",
-        "value": "<h2>Description</h2>\n<p>Mystics believe that the planets on which thermatrods are found have connections to the Elemental Planes of Earth and Fire. But however much the creatures may resemble elemental inhabitants of those planes, they are simply silicon-based beasts that thrive in extreme heat.<br><br>A thermatrod uses a knuckle-walking quadrupedal gait resembling that of a gorilla, but it can also stand on its back legs or use its arms to climb. Its torso is a mix of several types of molten stone and metal, allowing the thermatrod to digest heavy minerals inedible to most living creatures; Pact Worlds scientists don’t fully understand how the thermatrod’s silicon core maintains this intense heat. A thermatrod’s cooler backside is made of several interlocking raised hexagonal plates, which resemble basalt columns. Due to this makeup, thermatrods can weigh over a dozen tons.<br><br>Like that of most silicon-based life, the thermatrod’s chemical makeup didn’t allow it to evolve sensory organs, meaning it is both blind and deaf. However, the fine crystalline matrices in the creature’s head allow it to sense both heat and tremors. While its head is absent eyes and a nose, it does have a dripping maw, which the beast uses to eat loose stones it finds on the ground.<br><br>A typical thermatrod is 10 feet tall and weighs over 1 ton.</p>\n<p>&nbsp;</p>\n<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any warm mountains</p>\n<p>&nbsp;</p>\n<h3>Organization</h3>\n<p>solitary or pair</p>\n<p>&nbsp;</p>\n</section>"
+        "value": "<h2>Description</h2>\n<p>Mystics believe that the planets on which thermatrods are found have connections to the Elemental Planes of Earth and Fire. But however much the creatures may resemble elemental inhabitants of those planes, they are simply silicon-based beasts that thrive in extreme heat.</p>\n<p>A thermatrod uses a knuckle-walking quadrupedal gait resembling that of a gorilla, but it can also stand on its back legs or use its arms to climb. Its torso is a mix of several types of molten stone and metal, allowing the thermatrod to digest heavy minerals inedible to most living creatures; Pact Worlds scientists don’t fully understand how the thermatrod’s silicon core maintains this intense heat. A thermatrod’s cooler backside is made of several interlocking raised hexagonal plates, which resemble basalt columns. Due to this makeup, thermatrods can weigh over a dozen tons.</p>\n<p>Like that of most silicon-based life, the thermatrod’s chemical makeup didn’t allow it to evolve sensory organs, meaning it is both blind and deaf. However, the fine crystalline matrices in the creature’s head allow it to sense both heat and tremors. While its head is absent eyes and a nose, it does have a dripping maw, which the beast uses to eat loose stones it finds on the ground.</p>\n<p>A typical thermatrod is 10 feet tall and weighs over 1 ton.</p>\n<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any warm mountains</p>\n<h3>Organization</h3>\n<p>solitary or pair</p>\n</section>"
       },
       "class": "",
       "cr": 3,
@@ -844,40 +891,5 @@
       "size": "large",
       "sr": 0
     }
-  },
-  "token": {
-    "name": "Thermatrod",
-    "actorData": {},
-    "actorId": "1kbu1txJvL5pbCWQ",
-    "actorLink": false,
-    "bar1": {
-      "attribute": "attributes.hp"
-    },
-    "bar2": {
-      "attribute": ""
-    },
-    "brightLight": 0,
-    "brightSight": 0,
-    "dimLight": 0,
-    "dimSight": 0,
-    "displayBars": 40,
-    "displayName": 0,
-    "disposition": -1,
-    "flags": {},
-    "height": 1,
-    "img": "icons/svg/mystery-man.svg",
-    "lightAlpha": 1,
-    "lightAngle": 360,
-    "lightColor": "",
-    "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
-    "randomImg": false,
-    "rotation": 0,
-    "scale": 1,
-    "sightAngle": 360,
-    "tint": "",
-    "vision": false,
-    "width": 1
   }
 }

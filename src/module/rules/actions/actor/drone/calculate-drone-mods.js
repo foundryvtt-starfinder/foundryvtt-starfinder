@@ -1,4 +1,4 @@
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateDroneMods", (fact, context) => {
         const data = fact.data;
         const mods = fact.mods;
@@ -61,7 +61,7 @@ export default function (engine) {
                         mod: srValue.signedString(),
                         source: mod.name
                     });
-        
+
                     data.traits.spellResistance.tooltip.push(tooltip);
                 }
             }
@@ -78,15 +78,15 @@ export default function (engine) {
                     mod: skill.value.signedString(),
                     source: mod.name
                 });
-    
+
                 skill.tooltip.push(tooltip);
-    
+
                 tooltip = game.i18n.format("SFRPG.SkillModifierTooltip", {
                     type: "Mechanic Level",
                     mod: skill.ranks.signedString(),
                     source: mod.name
                 });
-    
+
                 skill.tooltip.push(tooltip);
             }
         }

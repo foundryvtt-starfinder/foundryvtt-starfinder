@@ -2,13 +2,11 @@
   "_id": "e7Z5VGr7VReS1dBq",
   "name": "Scrap-Bot",
   "type": "npc2",
-  "flags": {},
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "name": "Slam",
       "type": "weapon",
-      "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -214,7 +212,6 @@
     {
       "name": "Semi-auto pistol, tactical",
       "type": "weapon",
-      "flags": {},
       "img": "systems/sfrpg/icons/equipment/weapons/semi-auto-pistol-tactical.webp",
       "system": {
         "type": "",
@@ -361,7 +358,6 @@
     {
       "name": "Base Frame (Ex)",
       "type": "feat",
-      "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -433,7 +429,6 @@
     {
       "name": "Small Arm Rounds (18/30)",
       "type": "goods",
-      "flags": {},
       "img": "systems/sfrpg/icons/equipment/weapons/rounds-small-arm.webp",
       "system": {
         "type": "",
@@ -451,7 +446,7 @@
         "description": {
           "chat": "",
           "unidentified": "",
-          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Cased rounds are housed in magazines, which can be fitted into the appropriate weapon.&nbsp;</span></p>\n<p><strong>Capacity:</strong> 30</p>"
+          "value": "<p>Cased rounds are housed in magazines, which can be fitted into the appropriate weapon.</p>\n<p><strong>Capacity:</strong> 30</p>"
         },
         "equipped": false,
         "identified": true,
@@ -465,7 +460,6 @@
     {
       "name": "Unliving",
       "type": "feat",
-      "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -497,7 +491,7 @@
         "description": {
           "chat": "",
           "unidentified": "",
-          "value": "<h3>(EX)</h3>\n<h3>The creature has no Constitution score or modifier. Any DCs or other statistics that rely on a Constitution score treat the creature as having a score of 10 (+0). The creature is immediately destroyed when it reaches 0 Hit Points. An unliving creature doesn’t heal damage naturally, but a construct can be repaired with the right tools. Spells such as make whole can heal constructs, and magic effects can heal undead. An unliving creature with fast healing (see page 154) still benefits from that ability. Unliving creatures don’t breathe, eat, or sleep. They can’t be raised or resurrected, except through the use of miracle, wish, or a similar effect that specifically works on unliving creatures.</h3>\n<hr>\n<h3>&nbsp;</h3>"
+          "value": "<h3>(EX)</h3>\n<h3>The creature has no Constitution score or modifier. Any DCs or other statistics that rely on a Constitution score treat the creature as having a score of 10 (+0). The creature is immediately destroyed when it reaches 0 Hit Points. An unliving creature doesn’t heal damage naturally, but a construct can be repaired with the right tools. Spells such as make whole can heal constructs, and magic effects can heal undead. An unliving creature with fast healing (see page 154) still benefits from that ability. Unliving creatures don’t breathe, eat, or sleep. They can’t be raised or resurrected, except through the use of miracle, wish, or a similar effect that specifically works on unliving creatures.</h3>\n<hr />\n<h3>&nbsp;</h3>"
         },
         "descriptors": [],
         "duration": {
@@ -535,6 +529,69 @@
       }
     }
   ],
+  "prototypeToken": {
+    "name": "Scrap-Bot",
+    "actorLink": false,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": ""
+    },
+    "displayBars": 20,
+    "displayName": 20,
+    "disposition": -1,
+    "height": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 360,
+      "animation": {
+        "type": null,
+        "intensity": 5,
+        "reverse": false,
+        "speed": 5
+      },
+      "attenuation": 0.5,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "contrast": 0,
+      "darkness": {
+        "max": 1,
+        "min": 0
+      },
+      "dim": 0,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "shadows": 0
+    },
+    "lockRotation": false,
+    "mirrorX": false,
+    "mirrorY": false,
+    "randomImg": false,
+    "rotation": 0,
+    "scale": 1,
+    "sight": {
+      "angle": 360,
+      "attenuation": 0.1,
+      "brightness": 1,
+      "color": null,
+      "contrast": 0,
+      "enabled": false,
+      "range": 0,
+      "saturation": 0,
+      "visionMode": "basic"
+    },
+    "texture": {
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": null
+    },
+    "width": 1
+  },
   "system": {
     "abilities": {
       "cha": {
@@ -630,18 +687,6 @@
         "tooltip": [],
         "value": 0
       },
-      "rp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
-      "sp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
       "space": "0",
       "speed": {
         "burrowing": {
@@ -685,7 +730,7 @@
       "aura": "",
       "biography": {
         "public": "",
-        "value": "<p>When a consumer-grade robot breaks down, malfunctions, or becomes obsolete, it might be sent to the nearest recycling center or trash heap. If the owner fails to use proper shutdown procedures prior to disposal, automated self-preservation subroutines sometimes kick in before the machine’s destruction, prompting it to escape its fate. With no home to return to, these cast-off robots subsist in the dark corners of cities, space stations, and massive starships across the galaxy. Collectively known as scrap-bots, they come in endless shapes and styles, but they share a drive to continue existing and mistrust of the civilization that discarded them.<br><br>Scrap-bots that find one another band together for security, living in packs that search for useful tech to replace their malfunctioning components. Dirty, rusting, and cobbled together from mismatched parts, most scrap-bots are seen as little more than pests that other members of society ignore. This social condition makes scrap-bots ideal informants and lookouts for criminals, who buy their loyalty with parts and fresh batteries. Willing to perform almost any task for such pay, scrap-bots have an uncanny devotion to each other. In their optical sensors, the galaxy has two kinds of beings. That divide is between scrap-bots and “users”—those who make, use, and dispose of technology without care. Scrapbots are @Compendium[sfrpg.conditions.XeRGqHVtcZ7vsgJ0]{Prone} to distrust all users, although other outcasts have an easier time earning scrap-bot trust and respect.<br><br>In combat, individual scrap-bots pose little threat and prefer to flee or acquiesce to an aggressor rather than face destruction. However, as their numbers grow, so does their boldness. Presented with an opportunity posing minimal risk, a scrap-bot gang might resort to assault, burglary, and robbery to acquire what the group needs.<br><br>The scrap-bots presented here are only an array of several possibilities. Different configurations and combinations of those designs exist. Mightier scrap-bots might also be found in industrial areas in decline, such as the abandoned refineries of @Compendium[sfrpg.setting.gzXT0xwsj8kQAoj0]{Akiton}.</p>"
+        "value": "<p>When a consumer-grade robot breaks down, malfunctions, or becomes obsolete, it might be sent to the nearest recycling center or trash heap. If the owner fails to use proper shutdown procedures prior to disposal, automated self-preservation subroutines sometimes kick in before the machine’s destruction, prompting it to escape its fate. With no home to return to, these cast-off robots subsist in the dark corners of cities, space stations, and massive starships across the galaxy. Collectively known as scrap-bots, they come in endless shapes and styles, but they share a drive to continue existing and mistrust of the civilization that discarded them.</p>\n<p>Scrap-bots that find one another band together for security, living in packs that search for useful tech to replace their malfunctioning components. Dirty, rusting, and cobbled together from mismatched parts, most scrap-bots are seen as little more than pests that other members of society ignore. This social condition makes scrap-bots ideal informants and lookouts for criminals, who buy their loyalty with parts and fresh batteries. Willing to perform almost any task for such pay, scrap-bots have an uncanny devotion to each other. In their optical sensors, the galaxy has two kinds of beings. That divide is between scrap-bots and “users”—those who make, use, and dispose of technology without care. Scrapbots are @UUID[Compendium.sfrpg.conditions.XeRGqHVtcZ7vsgJ0]{Prone} to distrust all users, although other outcasts have an easier time earning scrap-bot trust and respect.</p>\n<p>In combat, individual scrap-bots pose little threat and prefer to flee or acquiesce to an aggressor rather than face destruction. However, as their numbers grow, so does their boldness. Presented with an opportunity posing minimal risk, a scrap-bot gang might resort to assault, burglary, and robbery to acquire what the group needs.</p>\n<p>The scrap-bots presented here are only an array of several possibilities. Different configurations and combinations of those designs exist. Mightier scrap-bots might also be found in industrial areas in decline, such as the abandoned refineries of @UUID[Compendium.sfrpg.setting.gzXT0xwsj8kQAoj0]{Akiton}.</p>"
       },
       "class": "",
       "cr": 0.5,
@@ -966,40 +1011,5 @@
       "size": "medium",
       "sr": 0
     }
-  },
-  "token": {
-    "name": "Scrap-Bot",
-    "actorData": {},
-    "actorId": "RDM8Oipu9qciztNN",
-    "actorLink": false,
-    "bar1": {
-      "attribute": "attributes.hp"
-    },
-    "bar2": {
-      "attribute": ""
-    },
-    "brightLight": 0,
-    "brightSight": 0,
-    "dimLight": 0,
-    "dimSight": 60,
-    "displayBars": 40,
-    "displayName": 40,
-    "disposition": -1,
-    "flags": {},
-    "height": 1,
-    "img": "icons/svg/mystery-man.svg",
-    "lightAlpha": 1,
-    "lightAngle": 360,
-    "lightColor": "",
-    "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
-    "randomImg": false,
-    "rotation": 0,
-    "scale": 1,
-    "sightAngle": 360,
-    "tint": "",
-    "vision": false,
-    "width": 1
   }
 }

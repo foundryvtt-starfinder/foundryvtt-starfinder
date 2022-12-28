@@ -2,13 +2,11 @@
   "_id": "UuGUQbjDslEIj5PR",
   "name": "Shodrav",
   "type": "npc2",
-  "flags": {},
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "name": "Bite",
       "type": "weapon",
-      "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -128,7 +126,6 @@
     {
       "name": "Shadow Tendril (Su)",
       "type": "weapon",
-      "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -191,7 +188,7 @@
         "description": {
           "chat": "",
           "unidentified": "",
-          "value": "A shodrav’s shadow tendril targets EAC."
+          "value": "<p>A shodrav’s shadow tendril targets EAC.</p>"
         },
         "descriptors": [],
         "duration": {
@@ -240,7 +237,6 @@
     {
       "name": "Create Darkness",
       "type": "feat",
-      "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -272,7 +268,7 @@
         "description": {
           "chat": "",
           "unidentified": "",
-          "value": "<h3>(SU)</h3>\n<h3>As a standard action, the creature can create a 20-foot-radius area of darkness centered on itself, which negates the effects of all nonmagical light sources in that area. This darkness lasts for a number of minutes equal to the creature’s CR, and the creature can dismiss the effect as a standard action. The darkness doesn’t move with the creature. Unless otherwise noted, any magic source of light can increase the light level in the area as normal.</h3>\n<hr>\n<h3>&nbsp;</h3>"
+          "value": "<h3>(SU)</h3>\n<h3>As a standard action, the creature can create a 20-foot-radius area of darkness centered on itself, which negates the effects of all nonmagical light sources in that area. This darkness lasts for a number of minutes equal to the creature’s CR, and the creature can dismiss the effect as a standard action. The darkness doesn’t move with the creature. Unless otherwise noted, any magic source of light can increase the light level in the area as normal.</h3>\n<hr />\n<h3>&nbsp;</h3>"
         },
         "descriptors": [],
         "duration": {
@@ -312,7 +308,6 @@
     {
       "name": "Shadow Jaunt (Su)",
       "type": "feat",
-      "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -341,7 +336,7 @@
         "description": {
           "chat": "",
           "unidentified": "",
-          "value": "A shodrav can move from the Shadow Plane to any coterminous plane, and vice versa, using 10 feet of movement."
+          "value": "<p>A shodrav can move from the Shadow Plane to any coterminous plane, and vice versa, using 10 feet of movement.</p>"
         },
         "descriptors": [],
         "duration": {
@@ -381,7 +376,6 @@
     {
       "name": "Surprise Action (Ex)",
       "type": "feat",
-      "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -410,7 +404,7 @@
         "description": {
           "chat": "",
           "unidentified": "",
-          "value": "A shodrav that can act during a surprise round can take its full round of actions."
+          "value": "<p>A shodrav that can act during a surprise round can take its full round of actions.</p>"
         },
         "descriptors": [],
         "duration": {
@@ -450,7 +444,6 @@
     {
       "name": "Planar Sight (Su)",
       "type": "feat",
-      "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -482,7 +475,7 @@
         "description": {
           "chat": "",
           "unidentified": "",
-          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">A shodrav can see from the Shadow Plane into any coterminous plane, and vice versa.</span></p>"
+          "value": "<p>A shodrav can see from the Shadow Plane into any coterminous plane, and vice versa.</p>"
         },
         "descriptors": [],
         "duration": {
@@ -520,6 +513,69 @@
       }
     }
   ],
+  "prototypeToken": {
+    "name": "Shodrav",
+    "actorLink": false,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": ""
+    },
+    "displayBars": 20,
+    "displayName": 20,
+    "disposition": -1,
+    "height": 2,
+    "light": {
+      "alpha": 0.5,
+      "angle": 360,
+      "animation": {
+        "type": null,
+        "intensity": 5,
+        "reverse": false,
+        "speed": 5
+      },
+      "attenuation": 0.5,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "contrast": 0,
+      "darkness": {
+        "max": 1,
+        "min": 0
+      },
+      "dim": 0,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "shadows": 0
+    },
+    "lockRotation": false,
+    "mirrorX": false,
+    "mirrorY": false,
+    "randomImg": false,
+    "rotation": 0,
+    "scale": 1,
+    "sight": {
+      "angle": 360,
+      "attenuation": 0.1,
+      "brightness": 1,
+      "color": null,
+      "contrast": 0,
+      "enabled": false,
+      "range": 0,
+      "saturation": 0,
+      "visionMode": "basic"
+    },
+    "texture": {
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": null
+    },
+    "width": 2
+  },
   "system": {
     "abilities": {
       "cha": {
@@ -615,18 +671,6 @@
         "tooltip": [],
         "value": 0
       },
-      "rp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
-      "sp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
       "space": "10 ft.",
       "speed": {
         "burrowing": {
@@ -670,7 +714,7 @@
       "aura": "",
       "biography": {
         "public": "",
-        "value": "A shodrav resembles a bizarre theropod with three oval eyes and long flaps of skin dangling to each side of its fanged mouth. Countless tendrils of semitangible shadow weave through the shodrav’s pallid body, leaving tubular openings like the burrowing of worms through flesh. These tendrils can cause similar wounds in a shodrav’s prey, sucking away life force before the shodrav devours the flesh.<br><br>While prey bleeds from wounds dealt by a shodrav’s tendrils, anyone looking through such a wound from either the Material Plane or the Shadow Plane sees the corresponding area on the opposite plane. These bizarre openings remain should a victim die from its injuries. Unscrupulous scholars and Kuthite zealots seek corpses that bear these windows to the Shadow Plane, harvesting the affected parts to create magic items.<br><br>Native to the Shadow Plane, shodravs distort the boundary between their home plane and other planes when they continuously inhabit areas where the Shadow Plane borders another. As the barrier thins, other creatures might inadvertently cross between the planes. In time, the veil can cease to exist altogether, with the Plane of Shadow’s features overwriting those of the corresponding area on the bordering plane. Older and stronger shodravs can affect greater areas, but only rarely an area wider than a large structure.<br><br>Shodravs prefer prey from the Material Plane, and often make lairs in Shadow Plane regions that border it, remaining until their native territories have displaced the Material Plane counterparts. Before the transformation is complete, a shodrav’s hidden presence can be inferred by mysterious disappearances or the unexplained presence of other creatures from the Shadow Plane. If a shodrav leaves its lair for an extended time, the region slowly returns to normal as the dimensional barriers re-form.<br><br>The average shodrav is 8 feet tall and 15 feet long, counting its tail. It weighs 750 pounds.</p>"
+        "value": "<p>A shodrav resembles a bizarre theropod with three oval eyes and long flaps of skin dangling to each side of its fanged mouth. Countless tendrils of semitangible shadow weave through the shodrav’s pallid body, leaving tubular openings like the burrowing of worms through flesh. These tendrils can cause similar wounds in a shodrav’s prey, sucking away life force before the shodrav devours the flesh.</p>\n<p>While prey bleeds from wounds dealt by a shodrav’s tendrils, anyone looking through such a wound from either the Material Plane or the Shadow Plane sees the corresponding area on the opposite plane. These bizarre openings remain should a victim die from its injuries. Unscrupulous scholars and Kuthite zealots seek corpses that bear these windows to the Shadow Plane, harvesting the affected parts to create magic items.</p>\n<p>Native to the Shadow Plane, shodravs distort the boundary between their home plane and other planes when they continuously inhabit areas where the Shadow Plane borders another. As the barrier thins, other creatures might inadvertently cross between the planes. In time, the veil can cease to exist altogether, with the Plane of Shadow’s features overwriting those of the corresponding area on the bordering plane. Older and stronger shodravs can affect greater areas, but only rarely an area wider than a large structure.</p>\n<p>Shodravs prefer prey from the Material Plane, and often make lairs in Shadow Plane regions that border it, remaining until their native territories have displaced the Material Plane counterparts. Before the transformation is complete, a shodrav’s hidden presence can be inferred by mysterious disappearances or the unexplained presence of other creatures from the Shadow Plane. If a shodrav leaves its lair for an extended time, the region slowly returns to normal as the dimensional barriers re-form.</p>\n<p>The average shodrav is 8 feet tall and 15 feet long, counting its tail. It weighs 750 pounds.</p>"
       },
       "class": "",
       "cr": 11,
@@ -949,40 +993,5 @@
       "size": "large",
       "sr": 0
     }
-  },
-  "token": {
-    "name": "Shodrav",
-    "actorData": {},
-    "actorId": "K6HQnZCnHdzCfQ8N",
-    "actorLink": false,
-    "bar1": {
-      "attribute": "attributes.hp"
-    },
-    "bar2": {
-      "attribute": ""
-    },
-    "brightLight": 0,
-    "brightSight": 0,
-    "dimLight": 0,
-    "dimSight": 0,
-    "displayBars": 40,
-    "displayName": 40,
-    "disposition": -1,
-    "flags": {},
-    "height": 1,
-    "img": "icons/svg/mystery-man.svg",
-    "lightAlpha": 1,
-    "lightAngle": 360,
-    "lightColor": "",
-    "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
-    "randomImg": false,
-    "rotation": 0,
-    "scale": 1,
-    "sightAngle": 360,
-    "tint": "",
-    "vision": false,
-    "width": 1
   }
 }

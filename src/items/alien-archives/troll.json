@@ -13,7 +13,6 @@
       "_id": "ti14QhUzbfLTRfgN",
       "name": "Regeneration 5 - Acid Or Fire",
       "type": "feat",
-      "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -45,7 +44,7 @@
         "description": {
           "chat": "",
           "unidentified": "",
-          "value": "<p>The creature regains Hit Points at the start of its turn, as with fast healing (see page 151), but it can’t die as long as its regeneration is still functioning (although creatures with regeneration still fall unconscious when their Hit Points reach 0). Certain attacks, typically those that deal acid or fire damage, cause a creature’s regeneration to stop functioning for 1 round. During this round, the creature doesn’t regain Hit Points and can die normally. The creature’s stat block describes the types of damage that suppress the regeneration.<br><br>Regeneration doesn’t restore Hit Points lost from starvation, thirst, or suffocation. Creatures with regeneration can regrow lost portions of their bodies and can reattach severed body parts if they are recovered within 1 hour of severing. Severed parts that aren’t reattached wither and decompose normally.<br><br>A creature usually must have a Constitution score or modifier to have this ability.</p>"
+          "value": "<p>The creature regains Hit Points at the start of its turn, as with fast healing (see page 151), but it can’t die as long as its regeneration is still functioning (although creatures with regeneration still fall unconscious when their Hit Points reach 0). Certain attacks, typically those that deal acid or fire damage, cause a creature’s regeneration to stop functioning for 1 round. During this round, the creature doesn’t regain Hit Points and can die normally. The creature’s stat block describes the types of damage that suppress the regeneration.</p>\n<p>Regeneration doesn’t restore Hit Points lost from starvation, thirst, or suffocation. Creatures with regeneration can regrow lost portions of their bodies and can reattach severed body parts if they are recovered within 1 hour of severing. Severed parts that aren’t reattached wither and decompose normally.</p>\n<p>A creature usually must have a Constitution score or modifier to have this ability.</p>"
         },
         "descriptors": [],
         "duration": {
@@ -85,7 +84,6 @@
     {
       "name": "Bite",
       "type": "weapon",
-      "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -264,7 +262,6 @@
     {
       "name": "Claw",
       "type": "weapon",
-      "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -451,7 +448,6 @@
     {
       "name": "Maul (Ex)",
       "type": "feat",
-      "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -483,7 +479,7 @@
         "description": {
           "chat": "",
           "unidentified": "",
-          "value": "If the troll hits the same target with two claw attacks during the same turn, it can attempt a bite attack against that target with a -6 penalty to the attack roll."
+          "value": "<p>If the troll hits the same target with two claw attacks during the same turn, it can attempt a bite attack against that target with a -6 penalty to the attack roll.</p>"
         },
         "descriptors": [],
         "duration": {
@@ -523,7 +519,6 @@
     {
       "name": "Tracking",
       "type": "feat",
-      "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -555,7 +550,7 @@
         "description": {
           "chat": "",
           "unidentified": "",
-          "value": "<h3>(EX)</h3>\n<h3>The creature can use the Perception skill to perform the follow tracks task of the Survival skill with the listed sense. The sense is usually related to a type of signature that most creatures leave behind, such as a scent or heat trail. The creature might gain a bonus or penalty to its Perception check to follow tracks depending on the strength of the quarry’s signature, at the GM’s discretion. It is possible for stronger signatures to completely mask other signatures, making following tracks with a weaker signature very difficult.</h3>\n<hr>\n<h3>&nbsp;</h3>"
+          "value": "<h3>(EX)</h3>\n<h3>The creature can use the Perception skill to perform the follow tracks task of the Survival skill with the listed sense. The sense is usually related to a type of signature that most creatures leave behind, such as a scent or heat trail. The creature might gain a bonus or penalty to its Perception check to follow tracks depending on the strength of the quarry’s signature, at the GM’s discretion. It is possible for stronger signatures to completely mask other signatures, making following tracks with a weaker signature very difficult.</h3>\n<hr />\n<h3>&nbsp;</h3>"
         },
         "descriptors": [],
         "duration": {
@@ -593,6 +588,69 @@
       }
     }
   ],
+  "prototypeToken": {
+    "name": "Troll",
+    "actorLink": false,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": ""
+    },
+    "displayBars": 20,
+    "displayName": 20,
+    "disposition": -1,
+    "height": 2,
+    "light": {
+      "alpha": 0.5,
+      "angle": 360,
+      "animation": {
+        "type": null,
+        "intensity": 5,
+        "reverse": false,
+        "speed": 5
+      },
+      "attenuation": 0.5,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "contrast": 0,
+      "darkness": {
+        "max": 1,
+        "min": 0
+      },
+      "dim": 0,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "shadows": 0
+    },
+    "lockRotation": false,
+    "mirrorX": false,
+    "mirrorY": false,
+    "randomImg": false,
+    "rotation": 0,
+    "scale": 1,
+    "sight": {
+      "angle": 360,
+      "attenuation": 0.1,
+      "brightness": 1,
+      "color": null,
+      "contrast": 0,
+      "enabled": false,
+      "range": 0,
+      "saturation": 0,
+      "visionMode": "basic"
+    },
+    "texture": {
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": null
+    },
+    "width": 2
+  },
   "system": {
     "abilities": {
       "cha": {
@@ -688,18 +746,6 @@
         "tooltip": [],
         "value": 0
       },
-      "rp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
-      "sp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
       "space": "10 ft.",
       "speed": {
         "burrowing": {
@@ -743,7 +789,7 @@
       "aura": "",
       "biography": {
         "public": "",
-        "value": "<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<p>&nbsp;</p>\n<h3>Organization</h3>\n<p>solitary or gang (2-4)</p>\n<p>&nbsp;</p>\n"
+        "value": "<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<h3>Organization</h3>\n<p>solitary or gang (2-4)</p>\n</section>"
       },
       "class": "",
       "cr": 5,
@@ -1021,40 +1067,5 @@
       "size": "large",
       "sr": 0
     }
-  },
-  "token": {
-    "name": "Troll",
-    "actorData": {},
-    "actorId": "rtaPBEEsoL2HlHuK",
-    "actorLink": false,
-    "bar1": {
-      "attribute": "attributes.hp"
-    },
-    "bar2": {
-      "attribute": ""
-    },
-    "brightLight": 0,
-    "brightSight": 0,
-    "dimLight": 0,
-    "dimSight": 0,
-    "displayBars": 40,
-    "displayName": 0,
-    "disposition": -1,
-    "flags": {},
-    "height": 1,
-    "img": "icons/svg/mystery-man.svg",
-    "lightAlpha": 1,
-    "lightAngle": 360,
-    "lightColor": "",
-    "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
-    "randomImg": false,
-    "rotation": 0,
-    "scale": 1,
-    "sightAngle": 360,
-    "tint": "",
-    "vision": false,
-    "width": 1
   }
 }
