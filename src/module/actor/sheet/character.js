@@ -28,17 +28,13 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
     }
 
     async getData() {
-        const sheetData = super.getData();
+        const sheetData = await super.getData();
 
         let hp = sheetData.system.attributes.hp;
         if (hp.temp === 0) delete hp.temp;
         if (hp.tempmax === 0) delete hp.tempmax;
 
         sheetData["disableExperience"] = game.settings.get("sfrpg", "disableExperienceTracking");
-
-        // Enrich text editors
-        sheetData.enrichedBiography = await TextEditor.enrichHTML(this.object.system.details.biography.value, {async: true});
-        sheetData.enrichedGMNotes = await TextEditor.enrichHTML(this.object.system.details.biography.gmNotes, {async: true});
 
         return sheetData;
     }

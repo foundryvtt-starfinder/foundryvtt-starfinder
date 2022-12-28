@@ -55,7 +55,7 @@ export class ActorSheetSFRPG extends ActorSheet {
     /**
      * Add some extra data when rendering the sheet to reduce the amount of logic required within the template.
      */
-    getData() {
+    async getData() {
         const isOwner = this.document.isOwner;
         const data = {
             actor: this.actor,
@@ -80,8 +80,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         data.labels = this.actor.labels || {};
         data.filters = this._filters;
 
-        if (!data.system?.details?.biography?.fullBodyImage)
-        {
+        if (!data.system?.details?.biography?.fullBodyImage) {
             this.actor.system = mergeObject(this.actor.system, {
                 details: {
                     biography: {
@@ -153,6 +152,10 @@ export class ActorSheetSFRPG extends ActorSheet {
         }
 
         this._prepareItems(data);
+
+        // Enrich text editors. The below are used for character, drone and npc(2). Other types use editors defined in their class.
+        data.enrichedBiography = await TextEditor.enrichHTML(this.object.system.details.biography.value, {async: true});
+        data.enrichedGMNotes = await TextEditor.enrichHTML(this.object.system.details.biography.gmNotes, {async: true});
 
         return data;
     }
@@ -748,9 +751,9 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         if (item.type === "spell") {
             return this.actor.useSpell(item, {configureDialog: !event.shiftKey});
+        } else {
+            return item.roll();
         }
-
-        else return item.roll();
     }
 
     /**

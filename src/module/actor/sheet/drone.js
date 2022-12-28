@@ -26,8 +26,8 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         return path + "drone-sheet.hbs";
     }
 
-    getData() {
-        const sheetData = super.getData();
+    async getData() {
+        const sheetData = await super.getData();
 
         return sheetData;
     }
