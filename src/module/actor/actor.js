@@ -1126,7 +1126,6 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
 Hooks.on("afterClosureProcessed", async (closureName, fact) => {
     if (closureName === "process-actors") {
-        fact.actor.sheet?.render(false);
         await fact.actor.processItemData();
     }
 });
