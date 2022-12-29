@@ -1,7 +1,7 @@
 import { SFRPGModifierType, SFRPGEffectType, SFRPGModifierTypes } from "../../../modifiers/types.js";
 
 export default function(engine) {
-    engine.closures.add("calculateInitiativeModifiers", async (fact, context) => {
+    engine.closures.add("calculateInitiativeModifiers", (fact, context) => {
         const data = fact.data;
         const init = data.attributes.init;
         const modifiers = fact.modifiers;
@@ -38,7 +38,7 @@ export default function(engine) {
             return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.INITIATIVE].includes(mod.effectType);
         });
 
-        const mods = await context.parameters.stackModifiers.process(filteredMods, context);
+        const mods = context.parameters.stackModifiers.process(filteredMods, context);
 
         const mod = Object.entries(mods).reduce((prev, curr) => {
             if (curr[1] === null || curr[1].length < 1) return prev;

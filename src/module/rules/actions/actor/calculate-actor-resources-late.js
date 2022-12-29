@@ -1,7 +1,7 @@
 import { SFRPGModifierType, SFRPGModifierTypes, SFRPGEffectType } from "../../../modifiers/types.js";
 
 export default function(engine) {
-    engine.closures.add('calculateActorResourcesLate', async (fact, context) => {
+    engine.closures.add('calculateActorResourcesLate', (fact, context) => {
         const data = fact.data;
         const actorResources = fact.actorResources.filter(x => x.system.stage === "late");
         const modifiers = fact.modifiers;
@@ -45,7 +45,7 @@ export default function(engine) {
             if (resourceData.enabled && resourceData.type && resourceData.subType && (resourceData.base || resourceData.base === 0)) {
                 const modifierKey = `${resourceData.type}.${resourceData.subType}`;
                 const filteredMods = actorResourceMods.filter(mod => mod.valueAffected === modifierKey);
-                const processedMods = await context.parameters.stackModifiers.process(filteredMods, context);
+                const processedMods = context.parameters.stackModifiers.process(filteredMods, context);
 
                 if (!data.resources) {
                     data.resources = {};

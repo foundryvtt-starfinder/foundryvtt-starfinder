@@ -1,7 +1,7 @@
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
 
 export default function(engine) {
-    engine.closures.add("calculateBaseAbilityModifier", async (fact, context) => {
+    engine.closures.add("calculateBaseAbilityModifier", (fact, context) => {
         const data = fact.data;
         const modifiers = fact.modifiers;
 
@@ -39,7 +39,7 @@ export default function(engine) {
 
         for (let [abl, ability] of Object.entries(data.abilities)) {
 
-            const abilityMods = await context.parameters.stackModifiers.process(
+            const abilityMods = context.parameters.stackModifiers.process(
                 filteredMods.filter(mod => mod.valueAffected === abl || mod.effectType === SFRPGEffectType.ABILITY_MODIFIERS),
                 context
             );

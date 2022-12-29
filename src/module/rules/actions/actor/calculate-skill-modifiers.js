@@ -1,22 +1,17 @@
 import { SFRPGModifierType, SFRPGModifierTypes, SFRPGEffectType } from "../../../modifiers/types.js";
 
 export default function(engine) {
-    engine.closures.add('calculateSkillModifiers', async (fact, context) => {
+    engine.closures.add('calculateSkillModifiers', (fact, context) => {
         const skills = fact.data.skills;
         const flags = fact.flags;
         const modifiers = fact.modifiers;
 
         const addModifier = (bonus, data, item, localizationKey) => {
-            if (bonus.modifierType === SFRPGModifierType.FORMULA) {
-                if (item.rolledMods) {
-                    item.rolledMods.push({mod: bonus.modifier, bonus: bonus});
-                } else {
-                    item.rolledMods = [{mod: bonus.modifier, bonus: bonus}];
-                }
-
-                return 0;
+            if (item.calculatedMods) {
+                item.calculatedMods.push({mod: bonus.modifier, bonus: bonus});
+            } else {
+                item.calculatedMods = [{mod: bonus.modifier, bonus: bonus}];
             }
-
             let computedBonus = 0;
             try {
                 const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
@@ -41,7 +36,7 @@ export default function(engine) {
         // Skills
         for (let [skl, skill] of Object.entries(skills)) {
             skill.rolledMods = null;
-            const mods = await context.parameters.stackModifiers.process(filteredMods.filter(mod => {
+            const mods = context.parameters.stackModifiers.process(filteredMods.filter(mod => {
                 // temporary workaround to fix modifiers with mod "0" if the situational mod is higher.
                 if (mod.modifierType === SFRPGModifierType.FORMULA) {
                     if (skill.rolledMods) {

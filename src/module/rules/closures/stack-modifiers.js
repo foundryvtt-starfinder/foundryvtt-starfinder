@@ -14,7 +14,7 @@ export default class StackModifiers extends Closure {
      * @returns {Object}          An object containing only those modifiers allowed
      *                            based on the stacking rules.
      */
-    async process(modifiers, context) {
+    process(modifiers, context) {
 
         if (modifiers.length > 0) {
             for (let modifiersI = 0; modifiersI < modifiers.length; modifiersI++) {
@@ -24,7 +24,8 @@ export default class StackModifiers extends Closure {
                 const formula = modifier.modifier;
                 if (formula) {
                     const roll = Roll.create(formula, actor.system);
-                    modifier.max = await roll.evaluate({maximize: true}).total;
+                    // modifier.max = await roll.evaluate({maximize: true}).total;
+                    modifier.max = roll.total;
                 } else {
                     modifier.max = 0;
                 }

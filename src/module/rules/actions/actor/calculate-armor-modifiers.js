@@ -1,7 +1,7 @@
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
 
 export default function(engine) {
-    engine.closures.add("calculateArmorModifiers", async (fact, context) => {
+    engine.closures.add("calculateArmorModifiers", (fact, context) => {
         const data = fact.data;
         const modifiers = fact.modifiers;
         const eac = data.attributes.eac;
@@ -42,8 +42,8 @@ export default function(engine) {
             return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.AC].includes(mod.effectType);
         });
 
-        let eacMods = await context.parameters.stackModifiers.process(armorMods.filter(mod => ["eac", "both"].includes(mod.valueAffected)), context);
-        let kacMods = await context.parameters.stackModifiers.process(armorMods.filter(mod => ["kac", "both"].includes(mod.valueAffected)), context);
+        let eacMods = context.parameters.stackModifiers.process(armorMods.filter(mod => ["eac", "both"].includes(mod.valueAffected)), context);
+        let kacMods = context.parameters.stackModifiers.process(armorMods.filter(mod => ["kac", "both"].includes(mod.valueAffected)), context);
 
         let eacMod = Object.entries(eacMods).reduce((sum, curr) => {
             if (curr[1] === null || curr[1].length < 1) return sum;

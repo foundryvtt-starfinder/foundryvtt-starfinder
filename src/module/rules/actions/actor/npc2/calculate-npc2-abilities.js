@@ -2,7 +2,7 @@ import { SFRPG } from "../../../../config.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../../modifiers/types.js";
 
 export default function(engine) {
-    engine.closures.add("calculateNPC2Abilities", async (fact, context) => {
+    engine.closures.add("calculateNPC2Abilities", (fact, context) => {
         const data = fact.data;
         const modifiers = fact.modifiers;
 
@@ -48,7 +48,7 @@ export default function(engine) {
             ability.tooltip = [];
             ability.tooltip.push(game.i18n.format("SFRPG.AbilityModifierBase", { mod: ability.base }));
 
-            const abilityMods = await context.parameters.stackModifiers.process(
+            const abilityMods = context.parameters.stackModifiers.process(
                 filteredMods.filter(mod => mod.valueAffected === abl),
                 context
             );

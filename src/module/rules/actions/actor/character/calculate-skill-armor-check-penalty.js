@@ -1,7 +1,7 @@
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../../modifiers/types.js";
 
 export default function(engine) {
-    engine.closures.add("calculateSkillArmorCheckPenalty", async (fact, context) => {
+    engine.closures.add("calculateSkillArmorCheckPenalty", (fact, context) => {
         const armors = fact.armors?.length > 0 ? fact.armors : null;
         const shields = fact.shields;
         const skills = fact.data.skills;
@@ -60,7 +60,7 @@ export default function(engine) {
             rolledMods: []
         };
 
-        const mods = await context.parameters.stackModifiers.process(acpMods, context);
+        const mods = context.parameters.stackModifiers.process(acpMods, context);
         let mod = Object.entries(mods).reduce((sum, mod) => {
             if (mod[1] === null || mod[1].length < 1) return sum;
 

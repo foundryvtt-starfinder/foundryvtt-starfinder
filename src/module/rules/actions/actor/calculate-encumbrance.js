@@ -1,7 +1,7 @@
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
 
 export default function(engine) {
-    engine.closures.add("calculateEncumbrance", async (fact, context) => {
+    engine.closures.add("calculateEncumbrance", (fact, context) => {
         const data = fact.data;
         const actor = fact.actor;
         const actorData = actor.system;
@@ -50,7 +50,7 @@ export default function(engine) {
         let filteredModifiers = fact.modifiers.filter(mod => {
             return (mod.enabled || mod.modifierType === "formula") && mod.effectType == SFRPGEffectType.BULK;
         });
-        filteredModifiers = await context.parameters.stackModifiers.process(filteredModifiers, context);
+        filteredModifiers = context.parameters.stackModifiers.process(filteredModifiers, context);
 
         let encumbrance = {
             value: 0,

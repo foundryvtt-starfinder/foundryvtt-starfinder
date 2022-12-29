@@ -1,7 +1,7 @@
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../../modifiers/types.js";
 
 export default function(engine) {
-    engine.closures.add("calculateSkillpoints", async (fact, context) => {
+    engine.closures.add("calculateSkillpoints", (fact, context) => {
         const data = fact.data;
         const skills = fact.data.skills;
         const classes = fact.classes;
@@ -50,7 +50,7 @@ export default function(engine) {
         let skillPointModifiers = fact.modifiers.filter(mod => {
             return (mod.enabled || mod.modifierType === "formula") && mod.effectType === SFRPGEffectType.SKILL_POINTS;
         });
-        skillPointModifiers = await context.parameters.stackModifiers.process(skillPointModifiers, context);
+        skillPointModifiers = context.parameters.stackModifiers.process(skillPointModifiers, context);
 
         const skillPointModifierBonus = Object.entries(skillPointModifiers).reduce((sum, mod) => {
             if (mod[1] === null || mod[1].length < 1) return sum;
@@ -74,7 +74,7 @@ export default function(engine) {
 
         for (let [key, skill] of Object.entries(skills)) {
             skill.rolledMods = null;
-            const mods = await context.parameters.stackModifiers.process(skillRankModifiers.filter(mod => {
+            const mods = context.parameters.stackModifiers.process(skillRankModifiers.filter(mod => {
                 if (mod.effectType !== SFRPGEffectType.SKILL_RANKS) return false;
                 else if (key !== mod.valueAffected) return false;
 
