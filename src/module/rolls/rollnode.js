@@ -11,6 +11,7 @@ export default class RollNode {
         this.parentNode = parentNode;
         this.nodeContext = null;
         this.variableTooltips = null;
+        this.calculatedMods = null;
         this.options = options;
     }
 
@@ -20,6 +21,7 @@ export default class RollNode {
             this.nodeContext = context;
 
             const availableRolledMods = RollNode.getRolledModifiers(remainingVariable, this.getContext());
+            this.calculatedMods = RollNode.getCalculatedModifiers(remainingVariable, this.getContext());
             this.variableTooltips = RollNode.getTooltips(remainingVariable, this.getContext());
 
             for (const mod of availableRolledMods) {
@@ -73,14 +75,16 @@ export default class RollNode {
         return this.nodeContext;
     }
 
-    resolve(depth = 0) {
+    resolve(depth = 0, rollMods) {
         if (this.resolvedValue) {
             return this.resolvedValue;
         } else {
             // console.log(['Resolving', depth, this]);
             this.resolvedValue = {
                 finalRoll: "",
-                formula: ""
+                formula: "",
+                rollMods: rollMods,
+                baseValue: this.baseValue
             };
 
             if (this.isVariable && !this.baseValue) {
@@ -202,6 +206,16 @@ export default class RollNode {
         }
         // console.log(["getRolledModifiers", variable, context, variableString, variableRolledMods]);
         return variableRolledMods || [];
+    }
+
+    static getCalculatedModifiers(variable, context) {
+        let variableString = variable + ".calculatedMods";
+        let variableCalculatedMods = RollNode._readValue(context.data, variableString);
+        if (!variableCalculatedMods) {
+            variableString = variable.substring(0, variable.lastIndexOf('.')) + ".calculatedMods";
+            variableCalculatedMods = RollNode._readValue(context.data, variableString);
+        }
+        return variableCalculatedMods || [];
     }
 
     static getTooltips(variable, context) {

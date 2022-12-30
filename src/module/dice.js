@@ -2,6 +2,7 @@ import SFRPGCustomChatMessage from "./chat/chatbox.js";
 import { SFRPG } from "./config.js";
 import RollContext from "./rolls/rollcontext.js";
 import RollTree from "./rolls/rolltree.js";
+import StackModifiers from "./rules/closures/stack-modifiers.js";
 
 // Type definitions for documentation.
 /**
@@ -238,7 +239,33 @@ export class DiceSFRPG {
                 tags.push({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget: rollOptions.actionTargetSource[rollOptions.actionTarget]}) });
             }
 
-            const rollObject = Roll.create(finalFormula.finalRoll, { breakdown: preparedRollExplanation, tags: tags });
+            let stackModifiers = new StackModifiers();
+            const stackedMods = await stackModifiers.processSituationalMods(finalFormula.rollMods, this.contexts);
+
+            // TODO: get ALL rollnodes from the rolltree thing (this.nodes) into here so we can add them here.
+            let rollString = finalFormula.baseValue || '';
+            const stackedModsArray = Object.keys(stackedMods);
+            for (let stackModsI = 0; stackModsI < stackedModsArray.length; stackModsI++) {
+                const modType = stackedMods[stackedModsArray[stackModsI]];
+                if (modType === null || modType === undefined) {
+                    continue;
+                }
+                if (modType instanceof Array) {
+                    for (let modTypeI = 0; modTypeI < modType.length; modTypeI++) {
+                        const modifier = modType[modTypeI];
+                        rollString += `${modifier.max.toString()}+`;
+                    }
+                } else {
+                    rollString += `${modType.max.toString()}+`;
+                }
+            }
+
+            rollString = dieRoll + " + " + rollString;
+            rollString = rollString.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
+                .trim();
+            rollString = rollString.endsWith("+") ? rollString.substring(0, rollString.length - 1).trim() : rollString;
+
+            const rollObject = Roll.create(rollString, { breakdown: preparedRollExplanation, tags: tags });
             rollObject.options.rollOptions = rollOptions;
             let roll = await rollObject.evaluate({async: true});
 

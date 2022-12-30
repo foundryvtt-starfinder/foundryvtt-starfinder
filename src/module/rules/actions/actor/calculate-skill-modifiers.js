@@ -12,11 +12,7 @@ export default function(engine) {
             } else {
                 item.calculatedMods = [{mod: bonus.modifier, bonus: bonus}];
             }
-            let computedBonus = 0;
-            try {
-                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
-                computedBonus = roll.total;
-            } catch {}
+            let computedBonus = bonus.max;
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {

@@ -1,6 +1,7 @@
 import RollNode from "./rollnode.js";
 import RollContext from "./rollcontext.js";
 import RollDialog from "../apps/roll-dialog.js";
+import StackModifiers from "../rules/closures/stack-modifiers.js";
 
 export default class RollTree {
     constructor(options = {}) {
@@ -9,6 +10,7 @@ export default class RollTree {
         /** @type {RollNode} */
         this.nodes = {};
         this.options = options;
+        this.rollMods = [];
     }
 
     /**
@@ -45,7 +47,7 @@ export default class RollTree {
             }
         }
 
-        const allRolledMods = this.populate();
+        const allRolledMods = await this.populate();
 
         if (this.options.skipUI) {
             const button = this.options.defaultButton || (this.options.buttons ? (Object.values(this.options.buttons)[0].id ?? Object.values(this.options.buttons)[0].label) : "roll");
@@ -58,7 +60,7 @@ export default class RollTree {
             }
 
             const parts = this.options.parts?.filter(x => x.isDamageSection);
-            const finalRollFormula = this.rootNode.resolve();
+            const finalRollFormula = this.rootNode.resolve(0, this.rollMods);
             if (parts?.length > 0) {
                 for (const part of parts) {
                     const finalSectionFormula = duplicate(finalRollFormula);
@@ -109,7 +111,7 @@ export default class RollTree {
                 }
             }
 
-            const finalRollFormula = this.rootNode.resolve();
+            const finalRollFormula = this.rootNode.resolve(0, this.rollMods);
             const enabledParts = parts?.filter(x => x.enabled);
             if (enabledParts?.length > 0) {
                 for (const part of enabledParts) {
@@ -172,7 +174,7 @@ export default class RollTree {
         return uiPromise;
     }
 
-    populate() {
+    async populate() {
         if (this.options.debug) {
             console.log(`Resolving '${this.formula}'`);
             console.log(duplicate(this.contexts));
@@ -185,6 +187,18 @@ export default class RollTree {
         this.rootNode.populate(this.nodes, this.contexts);
 
         const allRolledMods = RollTree.getAllRolledModifiers(this.nodes);
+
+        for (const [key, value] of Object.entries(this.nodes)) {
+            if (value.referenceModifier) {
+                this.rollMods.push(value.referenceModifier);
+            }
+            if (value.calculatedMods) {
+                for (let calcModsI = 0; calcModsI < value.calculatedMods.length; calcModsI++) {
+                    this.rollMods.push(value.calculatedMods[calcModsI].bonus);
+                }
+            }
+        }
+
         const availableModifiers = [].concat(allRolledMods.map(x => x.referenceModifier));
         return availableModifiers;
     }
