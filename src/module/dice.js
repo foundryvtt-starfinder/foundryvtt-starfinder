@@ -558,7 +558,7 @@ export class DiceSFRPG {
             }
         }
 
-        if (damageSections) {
+        if (damageSections.length > 0) {
             finalParts.splice(0, 0, "<damageSection>");
         }
 
@@ -699,7 +699,7 @@ export class DiceSFRPG {
                 finalFlavor = tempFlavor;
             }
 
-            if (part.name) {
+            if (part?.name) {
                 finalFlavor += `: ${part.name}`;
                 if (part.partIndex) {
                     finalFlavor += ` (${part.partIndex})`;
