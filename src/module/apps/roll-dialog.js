@@ -102,12 +102,22 @@ export default class RollDialog extends Dialog {
         data.rollMode = this.rollMode;
         data.rollModes = CONFIG.Dice.rollModes;
         data.additionalBonus = this.additionalBonus;
-        data.availableModifiers = this.availableModifiers || [];
+        data.availableModifiers = duplicate(this.availableModifiers) || [];
         data.hasModifiers = data.availableModifiers.length > 0;
         data.hasSelectors = this.contexts.selectors && this.contexts.selectors.length > 0;
         data.selectors = this.selectors;
         data.contexts = this.contexts;
         data.damageGroups = this.damageGroups;
+
+        for (const modifier of data.availableModifiers) {
+            // Clean up the formula
+            const mainContext = data.contexts?.mainContext;
+            const simplerRoll = Roll.create(modifier.modifier, data.contexts?.allContexts[mainContext].data);
+            if (modifier.modifier.replace(/\s/g, '') !== simplerRoll.simplifiedFormula.replace(/\s/g, '')) {
+                modifier.originalFormula = modifier.modifier;
+                modifier.modifier = simplerRoll.simplifiedFormula;
+            }
+        }
 
         if (this.parts?.length > 0) {
             data.hasDamageTypes = true;
@@ -133,8 +143,12 @@ export default class RollDialog extends Dialog {
                 }
                 part.type = typeString;
 
+                // Clean up the formula
                 const simplerRoll = Roll.create(part.formula);
-                part.formula = simplerRoll.simplifiedFormula;
+                if (part.formula !== simplerRoll.simplifiedFormula) {
+                    part.originalFormula = part.formula;
+                    part.formula = simplerRoll.simplifiedFormula;
+                }
             }
 
             data.formula = this.formula;
