@@ -132,6 +132,9 @@ export default class RollDialog extends Dialog {
                         .join(` & `))}`;
                 }
                 part.type = typeString;
+
+                const simplerRoll = Roll.create(part.formula);
+                part.formula = simplerRoll.simplifiedFormula;
             }
 
             data.formula = this.formula;

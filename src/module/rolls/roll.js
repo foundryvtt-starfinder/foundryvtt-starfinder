@@ -40,6 +40,24 @@ export default class SFRPGRoll extends Roll {
         this.htmlData = rollData.data.htmlData;
     }
 
+    /**
+     * Return a prettified formula of the roll with Math terms such as "floor()" and "lookupRange()" resolved.
+     *
+     * Used for before the prettified formula created by Roll.evaluate() is available.
+     * @type {string}
+     */
+    get simplifiedFormula() {
+        if (this._evaluated) return this.formula;
+        const newterms = this.terms.map(t => {
+            if (t instanceof OperatorTerm || t instanceof StringTerm) return t;
+            if (t.isDeterministic) {
+                return new NumericTerm({number: Roll.safeEval(t.expression)});
+            }
+            return t;
+        });
+        return Roll.fromTerms(newterms).formula;
+    }
+
     /** @inheritdoc */
     static CHAT_TEMPLATE = "systems/sfrpg/templates/dice/roll.hbs";
     /** @inheritdoc */
