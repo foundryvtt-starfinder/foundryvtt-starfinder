@@ -51,7 +51,13 @@ export default class SFRPGRoll extends Roll {
         const newterms = this.terms.map(t => {
             if (t instanceof OperatorTerm || t instanceof StringTerm) return t;
             if (t.isDeterministic) {
-                return new NumericTerm({number: Roll.safeEval(t.expression)});
+                let total = 0;
+                try {
+                    total = t?.total || Roll.safeEval(t.expression);
+                } catch {
+                    total = Roll.safeEval(t.expression);
+                }
+                return new NumericTerm({number: total});
             }
             return t;
         });
