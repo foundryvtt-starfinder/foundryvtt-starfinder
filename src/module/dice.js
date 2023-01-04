@@ -241,12 +241,16 @@ export class DiceSFRPG {
                 if (modType instanceof Array) {
                     for (let modTypeI = 0; modTypeI < modType.length; modTypeI++) {
                         const modifier = modType[modTypeI];
-                        rollString += `${modifier.max.toString()}+`;
                         rootNode = this._removeModifierNodes(rootNode, modType);
+                        if (modifier.enabled) {
+                            rollString += `${modifier.max.toString()}+`;
+                        }
                     }
                 } else {
-                    rollString += `${modType.max.toString()}+`;
                     rootNode = this._removeModifierNodes(rootNode, modType);
+                    if (modType.enabled) {
+                        rollString += `${modType.max.toString()}+`;
+                    }
                 }
             }
 
