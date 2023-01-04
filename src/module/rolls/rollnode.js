@@ -84,7 +84,8 @@ export default class RollNode {
                 finalRoll: "",
                 formula: "",
                 rollMods: rollMods,
-                baseValue: this.baseValue
+                baseValue: this.baseValue,
+                baseMod: {}
             };
 
             if (this.isVariable && !this.baseValue) {
@@ -178,6 +179,107 @@ export default class RollNode {
             // console.log(["Resolved", depth, this, this.resolvedValue]);
             return this.resolvedValue;
         }
+    }
+
+    resolveTest(depth = 0) {
+        // console.log(['Resolving', depth, this]);
+        this.resolvedValue = {
+            finalRoll: "",
+            formula: "",
+            baseMod: {}
+        };
+
+        if (this.isVariable && !this.baseValue) {
+            this.baseValue = "0";
+        }
+
+        if (this.baseValue) {
+            if (this.baseValue !== "n/a") {
+                const joinedTooltips = this.variableTooltips.join(',\n');
+
+                this.resolvedValue.finalRoll = this.baseValue;
+                this.resolvedValue.formula = this.baseValue + "[";
+                if (this.options.useRawStrings) {
+                    this.resolvedValue.formula += (this.referenceModifier?.name || "@" + this.formula);
+                } else {
+                    this.resolvedValue.formula += "<span";
+                    if (joinedTooltips) {
+                        this.resolvedValue.formula += ` title="${joinedTooltips}"`;
+                    }
+                    this.resolvedValue.formula += `>`;
+                    this.resolvedValue.formula += (this.referenceModifier?.name || "@" + this.formula);
+                    this.resolvedValue.formula += `</span>`;
+                }
+                this.resolvedValue.formula += "]";
+            }
+
+            // formula
+            const enabledChildNodes = Object.values(this.childNodes).filter(x => x.isEnabled);
+            for (const childNode of enabledChildNodes) {
+                const childResolution = childNode.resolveTest(depth + 1);
+                if (this.resolvedValue.finalRoll !== "") {
+                    this.resolvedValue.finalRoll += " + ";
+                }
+                this.resolvedValue.finalRoll += childResolution.finalRoll;
+
+                if (this.resolvedValue.formula !== "") {
+                    this.resolvedValue.formula += " + ";
+                }
+
+                if (childResolution.formula.endsWith("]")) {
+                    this.resolvedValue.formula += childResolution.formula;
+                } else {
+                    this.resolvedValue.formula += childResolution.formula + `[${childNode.referenceModifier.name}]`;
+                }
+            }
+        } else {
+            let valueString = this.formula;
+            let formulaString = this.formula;
+            const variableMatches = new Set(formulaString.match(/@([a-zA-Z.0-9_\-]+)/g));
+
+            for (const fullVariable of variableMatches) {
+                const regexp = new RegExp(fullVariable, "gi");
+                const variable = fullVariable.substring(1);
+                const existingNode = this.childNodes[variable];
+                // console.log(["testing var", depth, this, fullVariable, variable, existingNode]);
+                if (existingNode) {
+                    const childResolution = existingNode.resolveTest(depth + 1);
+                    valueString = valueString.replace(regexp, childResolution.finalRoll);
+                    formulaString = formulaString.replace(regexp, childResolution.formula);
+                    // console.log(['Result', depth, childResolution, valueString, formulaString]);
+                } else {
+                    // console.log(['Result', depth, "0"]);
+                    valueString = valueString.replace(regexp, "0");
+                    formulaString = formulaString.replace(regexp, "0");
+                }
+            }
+
+            valueString = valueString.trim();
+            while (valueString.endsWith("+")) {
+                valueString = valueString.substring(0, valueString.length - 1).trim();
+            }
+
+            /** Remove any naming from the valueString. */
+            let limit = 5;
+            while (valueString.includes("[") && valueString.includes("]") && limit > 0) {
+                const openIndex = valueString.indexOf("[");
+                const closeIndex = valueString.indexOf("]");
+                if (closeIndex > openIndex) {
+                    valueString = valueString.substring(0, openIndex) + valueString.substring(closeIndex + 1);
+                }
+                limit--;
+            }
+
+            formulaString = formulaString.trim();
+            while (formulaString.endsWith("+")) {
+                formulaString = formulaString.substring(0, formulaString.length - 1).trim();
+            }
+
+            this.resolvedValue.finalRoll = valueString;
+            this.resolvedValue.formula = formulaString;
+        }
+        // console.log(["Resolved", depth, this, this.resolvedValue]);
+        return this.resolvedValue;
     }
 
     static getContextForVariable(variable, contexts) {

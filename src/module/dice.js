@@ -212,13 +212,14 @@ export class DiceSFRPG {
         const formula = parts.map(partMapper).join(" + ");
 
         const tree = new RollTree(options);
-        return tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormula) => {
+        return tree.buildRollTest(formula, rollContext, async (button, rollMode, finalFormulaTest, node, rollMods, bonus) => {
             if (button === "cancel") {
                 if (onClose) {
                     onClose(null, null, null);
                 }
                 return null;
             }
+            let rootNode = node;
 
             let dieRoll = "1d20";
             if (button === "disadvantage") {
@@ -227,7 +228,35 @@ export class DiceSFRPG {
                 dieRoll = "2d20kh";
             }
 
-            finalFormula.finalRoll = dieRoll + " + " + finalFormula.finalRoll;
+            let stackModifiers = new StackModifiers();
+            const stackedMods = await stackModifiers.processSituationalMods(rollMods, this.contexts);
+
+            let rollString = '';
+            const stackedModsArray = Object.keys(stackedMods);
+            for (let stackModsI = 0; stackModsI < stackedModsArray.length; stackModsI++) {
+                const modType = stackedMods[stackedModsArray[stackModsI]];
+                if (modType === null || modType === undefined) {
+                    continue;
+                }
+                if (modType instanceof Array) {
+                    for (let modTypeI = 0; modTypeI < modType.length; modTypeI++) {
+                        const modifier = modType[modTypeI];
+                        rollString += `${modifier.max.toString()}+`;
+                        rootNode = this._removeModifierNodes(rootNode, modType);
+                    }
+                } else {
+                    rollString += `${modType.max.toString()}+`;
+                    rootNode = this._removeModifierNodes(rootNode, modType);
+                }
+            }
+
+            rollString = rollString.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
+                .trim();
+            rollString = rollString.endsWith("+") ? rollString.substring(0, rollString.length - 1).trim() : rollString;
+
+            const finalFormula = rootNode.resolveTest(0, rollMods);
+
+            finalFormula.finalRoll = `${dieRoll} + ${finalFormula.finalRoll} + ${rollString}`;
             finalFormula.formula = dieRoll + " + " + finalFormula.formula;
             finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
                 .trim();
@@ -239,33 +268,7 @@ export class DiceSFRPG {
                 tags.push({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget: rollOptions.actionTargetSource[rollOptions.actionTarget]}) });
             }
 
-            let stackModifiers = new StackModifiers();
-            const stackedMods = await stackModifiers.processSituationalMods(finalFormula.rollMods, this.contexts);
-
-            // TODO: get ALL rollnodes from the rolltree thing (this.nodes) into here so we can add them here.
-            let rollString = finalFormula.baseValue || '';
-            const stackedModsArray = Object.keys(stackedMods);
-            for (let stackModsI = 0; stackModsI < stackedModsArray.length; stackModsI++) {
-                const modType = stackedMods[stackedModsArray[stackModsI]];
-                if (modType === null || modType === undefined) {
-                    continue;
-                }
-                if (modType instanceof Array) {
-                    for (let modTypeI = 0; modTypeI < modType.length; modTypeI++) {
-                        const modifier = modType[modTypeI];
-                        rollString += `${modifier.max.toString()}+`;
-                    }
-                } else {
-                    rollString += `${modType.max.toString()}+`;
-                }
-            }
-
-            rollString = dieRoll + " + " + rollString;
-            rollString = rollString.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
-                .trim();
-            rollString = rollString.endsWith("+") ? rollString.substring(0, rollString.length - 1).trim() : rollString;
-
-            const rollObject = Roll.create(rollString, { breakdown: preparedRollExplanation, tags: tags });
+            const rollObject = Roll.create(finalFormula.finalRoll, { breakdown: preparedRollExplanation, tags: tags });
             rollObject.options.rollOptions = rollOptions;
             let roll = await rollObject.evaluate({async: true});
 
@@ -1004,5 +1007,24 @@ export class DiceSFRPG {
         }
 
         return resolveResult;
+    }
+
+    /**
+     * returns the rootNode with removed childnodes that match the modifier.
+     * @param {RollNode} rootNode
+     * @param {Object} modifier
+     */
+    static _removeModifierNodes(rootNode, modifier) {
+        let node = rootNode;
+        const childKeys = Object.keys(node.childNodes);
+        for (let nodeI = 0; nodeI < childKeys.length; nodeI++) {
+            const childNode = node.childNodes[childKeys[nodeI]];
+            if (childNode.referenceModifier?._id === modifier._id) {
+                delete node.childNodes[childKeys[nodeI]];
+            } else if (Object.keys(childNode.childNodes).length > 0) {
+                node = this._removeModifierNodes(childNode, modifier).parentNode;
+            }
+        }
+        return node;
     }
 }
