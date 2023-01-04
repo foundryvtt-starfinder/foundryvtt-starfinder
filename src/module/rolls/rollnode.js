@@ -1,3 +1,5 @@
+import { SFRPG } from "../config";
+
 export default class RollNode {
     constructor(tree, formula, baseValue, referenceModifier, isVariable, isEnabled, parentNode = null, options = {}) {
         this.tree = tree;
@@ -185,7 +187,7 @@ export default class RollNode {
         // console.log(['Resolving', depth, this]);
         this.resolvedValue = {
             finalRoll: "",
-            formula: "",
+            formula: ""
         };
 
         if (this.isVariable && !this.baseValue) {
@@ -194,7 +196,7 @@ export default class RollNode {
 
         if (this.baseValue) {
             if (this.baseValue !== "n/a") {
-                const constantMods = rollMods.filter(mod => mod.modifierType === 'constant');
+                const constantMods = rollMods.filter(mod => mod.modifierType === SFRPG.modifierType.constant);
                 const modSum = constantMods.reduce((accumulator, value) => accumulator + value.max, 0);
                 this.baseValue = (Number(this.baseValue) - modSum).toString();
 
