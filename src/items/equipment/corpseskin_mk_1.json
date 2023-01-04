@@ -5,9 +5,24 @@
   "img": "icons/commodities/biological/hand-clawed-blue.webp",
   "system": {
     "type": "necrograft",
+    "ability": null,
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
+    "actionType": "",
+    "activation": {
+      "type": "",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "",
+      "value": 0
+    },
+    "attackBonus": 0,
     "attributes": {
       "ac": {
         "value": ""
@@ -28,27 +43,126 @@
     },
     "attuned": false,
     "bulk": "-",
+    "chatFlavor": "",
+    "container": {
+      "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
+      "storage": []
+    },
     "critical": {
+      "effect": "",
       "parts": []
     },
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>Perhaps as much a fashion statement as an augmentation, corpseskin replaces living skin with mummified flesh. Corpseskin insulates against cold, though it lacks the sensitivity of living flesh. You gain an amount of cold resistance equal to the necrograft’s mark. If you have cold resistance from your racial traits that is equal to or greater than that from your corpseskin (and doesn’t explicitly stack with other sources of energy resistance), adding corpseskin increases the value of that cold resistance by 1. If you have cold resistance from your racial traits of a value less than that of your corpseskin, the value of the cold resistance from your corpseskin increases by 1.</p>\n<p>Regardless of your corpseskin’s model, you take a –2 penalty to Perception checks based primarily on touch and gain a +2 enhancement bonus to saving throws against pain effects. The necrograft grants a +5 competence bonus to Disguise checks to impersonate corporeal, non-skeletal undead, but it increases the DC of disguising yourself as a living creature by 5 (in addition to any other modifiers). In addition, corpseskin protects against radiation as armor of its item level (Core Rulebook 198).</p>"
+      "value": "<p>Perhaps as much a fashion statement as an augmentation, corpseskin replaces living skin with mummified flesh. Corpseskin insulates against cold, though it lacks the sensitivity of living flesh. You gain an amount of cold resistance equal to the necrograft’s mark. If you have cold resistance from your racial traits that is equal to or greater than that from your corpseskin (and doesn’t explicitly stack with other sources of energy resistance), adding corpseskin increases the value of that cold resistance by 1. If you have cold resistance from your racial traits of a value less than that of your corpseskin, the value of the cold resistance from your corpseskin increases by 1.</p>\n<p>Regardless of your corpseskin’s model, you take a –2 penalty to @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.gZlg2ZKze0erNLmP]{Perception} checks based primarily on touch and gain a +2 enhancement bonus to saving throws against pain effects. The necrograft grants a +5 competence bonus to Disguise checks to impersonate corporeal, non-skeletal undead, but it increases the DC of disguising yourself as a living creature by 5 (in addition to any other modifiers). In addition, corpseskin protects against radiation as armor of its item level (@UUID[Compendium.sfrpg.rules.WP7hddXW4mLXXXOg.JournalEntryPage.8bxhPYw9heXqKHYD#radiation]{Core Rulebook 198}).</p>\n<p><em>Adjust cold resistance modifier in the Modifiers tab, if racial traits provide cold resistance</em></p>"
     },
-    "equippable": false,
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": null
+    },
+    "equippable": true,
     "equipped": false,
+    "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 1,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "f07182fa-7b46-4428-89d8-bf967b1b10a9",
+        "name": "Corpseskin, Mk 1",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": true,
+        "max": 1,
+        "modifier": "1",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "cold"
+      },
+      {
+        "_id": "e2f01f07-0c10-417d-8562-11a4c851d1d1",
+        "name": "Corpseskin, Mk 1",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": -2,
+        "modifier": "-2",
+        "modifierType": "formula",
+        "notes": "You take a –2 penalty to Perception checks based primarily on touch.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "per"
+      },
+      {
+        "_id": "f1021274-f257-4ffd-af28-5e687a35238d",
+        "name": "Corpseskin, Mk 1",
+        "type": "enhancement",
+        "condition": "",
+        "effectType": "saves",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "You gain a +2 enhancement bonus to saving throws against pain effects.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "02a815f6-0695-477d-8a66-edc4697c68f7",
+        "name": "Corpseskin, Mk 1",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 5,
+        "modifier": "5",
+        "modifierType": "formula",
+        "notes": "The necrograft grants a +5 competence bonus to Disguise checks to impersonate corporeal, non-skeletal undead, but it increases the DC of disguising yourself as a living creature by 5 (in addition to any other modifiers).",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "dis"
+      }
+    ],
     "price": 200,
     "quantity": 1,
-    "source": "ARM, p. 95",
-    "system": "skin"
+    "quantityPerPack": 1,
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "",
+      "value": null
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "",
+      "dc": null,
+      "descriptor": ""
+    },
+    "source": "ARM pg. 95",
+    "system": "skin",
+    "target": {
+      "type": "",
+      "value": null
+    },
+    "uses": {
+      "max": 0,
+      "per": null,
+      "value": 0
+    }
   }
 }
