@@ -181,12 +181,11 @@ export default class RollNode {
         }
     }
 
-    resolveTest(depth = 0) {
+    resolveTest(depth = 0, rollMods) {
         // console.log(['Resolving', depth, this]);
         this.resolvedValue = {
             finalRoll: "",
             formula: "",
-            baseMod: {}
         };
 
         if (this.isVariable && !this.baseValue) {
@@ -195,6 +194,10 @@ export default class RollNode {
 
         if (this.baseValue) {
             if (this.baseValue !== "n/a") {
+                const constantMods = rollMods.filter(mod => mod.modifierType === 'constant');
+                const modSum = constantMods.reduce((accumulator, value) => accumulator + value.max, 0);
+                this.baseValue = (Number(this.baseValue) - modSum).toString();
+
                 const joinedTooltips = this.variableTooltips.join(',\n');
 
                 this.resolvedValue.finalRoll = this.baseValue;
@@ -216,7 +219,7 @@ export default class RollNode {
             // formula
             const enabledChildNodes = Object.values(this.childNodes).filter(x => x.isEnabled);
             for (const childNode of enabledChildNodes) {
-                const childResolution = childNode.resolveTest(depth + 1);
+                const childResolution = childNode.resolveTest(depth + 1, rollMods);
                 if (this.resolvedValue.finalRoll !== "") {
                     this.resolvedValue.finalRoll += " + ";
                 }
@@ -243,7 +246,7 @@ export default class RollNode {
                 const existingNode = this.childNodes[variable];
                 // console.log(["testing var", depth, this, fullVariable, variable, existingNode]);
                 if (existingNode) {
-                    const childResolution = existingNode.resolveTest(depth + 1);
+                    const childResolution = existingNode.resolveTest(depth + 1, rollMods);
                     valueString = valueString.replace(regexp, childResolution.finalRoll);
                     formulaString = formulaString.replace(regexp, childResolution.formula);
                     // console.log(['Result', depth, childResolution, valueString, formulaString]);
