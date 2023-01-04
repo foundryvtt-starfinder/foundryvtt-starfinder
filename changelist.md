@@ -1,3 +1,20 @@
+# v0.22.1 - Hotfix
+This is just a small hotfix mainly to fix the floating numbers settings window from opening, with a few other tweaks that accumulated in the meantime.
+
+## System improvements
+* Added a new item type and section on starship sheets for Starship Special Abilities.
+* Altered the layout of ASI sheets slightly to reference rules text.
+
+## Bugfixes
+* The floating numbers settings window now opens.
+* The pause icon of the custom SFRPG theme can now be correctly overridden by modules.
+* Restored hazard damage rolls, and removed some redundant flavour text. 
+
+## Compendium improvements
+* Replaced several incorrect attribute references in spells.
+* Added Fire Support.
+* Added Philosopher's Stings & Rift Rifles.
+
 # v0.22.0
 
 This update bring a slew of minor-to-moderate new features and continued data entry of Interstellar Species, plus a (hopefully) final batch of V10 fixes.
