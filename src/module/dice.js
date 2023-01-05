@@ -212,7 +212,7 @@ export class DiceSFRPG {
         const formula = parts.map(partMapper).join(" + ");
 
         const tree = new RollTree(options);
-        return tree.buildRollTest(formula, rollContext, async (button, rollMode, finalFormulaTest, node, rollMods, bonus) => {
+        return tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormulaTest, node, rollMods, bonus) => {
             if (button === "cancel") {
                 if (onClose) {
                     onClose(null, null, null);
@@ -258,7 +258,7 @@ export class DiceSFRPG {
                 .trim();
             rollString = rollString.endsWith("+") ? rollString.substring(0, rollString.length - 1).trim() : rollString;
 
-            const finalFormula = rootNode.resolveTest(0, rollMods);
+            const finalFormula = rootNode.resolveForRoll(0, rollMods);
 
             finalFormula.finalRoll = `${dieRoll} + ${finalFormula.finalRoll} + ${rollString}`;
             finalFormula.formula = dieRoll + " + " + finalFormula.formula;
