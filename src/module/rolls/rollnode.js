@@ -1,4 +1,4 @@
-import { SFRPG } from "../config";
+import { SFRPGModifierType } from "../modifiers/types.js";
 
 export default class RollNode {
     constructor(tree, formula, baseValue, referenceModifier, isVariable, isEnabled, parentNode = null, options = {}) {
@@ -196,7 +196,7 @@ export default class RollNode {
 
         if (this.baseValue) {
             if (this.baseValue !== "n/a") {
-                const constantMods = rollMods.filter(mod => mod.modifierType === SFRPG.modifierType.constant);
+                const constantMods = rollMods.filter(mod => mod.modifierType === SFRPGModifierType.CONSTANT);
                 const modSum = constantMods.reduce((accumulator, value) => accumulator + value.max, 0);
                 this.baseValue = (Number(this.baseValue) - modSum).toString();
                 const joinedTooltips = this.variableTooltips.join(',\n');

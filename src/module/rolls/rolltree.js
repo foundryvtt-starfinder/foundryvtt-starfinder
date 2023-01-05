@@ -90,7 +90,7 @@ export default class RollTree {
                 }
 
                 if (callback) {
-                    await callback(button, rollMode, finalRollFormula, this.rootNode, this.rollMods, bonus);
+                    await callback(button, rollMode, finalRollFormula, this.rootNode, this.rollMods, 0);
                 }
             }
 
