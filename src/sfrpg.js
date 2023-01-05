@@ -210,12 +210,6 @@ Hooks.once('init', async function() {
         r.style.setProperty("--color-shadow-primary", "#00a0ff");
         r.style.setProperty("--color-shadow-highlight", "#00a0ff");
         r.style.setProperty("--sfrpg-theme-blue", "#235683");
-
-        Hooks.on("renderPause", () => {
-            const paused = document.querySelector("figure#pause");
-            const icon = paused.children[0];
-            icon.src = "systems/sfrpg/images/cup/organizations/starfinder_society.webp";
-        });
     }
 
     console.log("Starfinder | [INIT] Registering sheets");
@@ -733,5 +727,14 @@ Hooks.on("renderSidebarTab", async (app, html) => {
                 systemSection.innerHTML += textToAdd;
             }
         }
+    }
+});
+
+// Set this hook up outside of init for the sake of module compatibility.
+Hooks.on("renderPause", () => {
+    if (game.settings.get("sfrpg", "sfrpgTheme")) {
+        const paused = document.querySelector("figure#pause");
+        const icon = paused.children[0];
+        icon.src = "systems/sfrpg/images/cup/organizations/starfinder_society.webp";
     }
 });

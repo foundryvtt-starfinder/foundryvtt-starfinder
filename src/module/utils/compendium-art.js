@@ -2,7 +2,11 @@ import isObject from "./is-object.js";
 
 /**
  * THIS CODE WAS ENTIRELY, COMPLETELY, AND UTTERLY STOLEN FROM THE PF2E SYSTEM. PLEASE FORGIVE ME SHARK.
- *
+ * PF2e version: https://github.com/foundryvtt/pf2e/blob/master/src/scripts/register-module-art.ts
+ * The PF2e version is licensed under the Apache 2.0 license: https://www.apache.org/licenses/LICENSE-2.0
+ */
+
+/**
  * Pull actor and token art from module.json files, which will replace default images on compendium actors and their
  * prototype tokens.
  *
@@ -17,7 +21,7 @@ import isObject from "./is-object.js";
  *        "scale": 2
  *      }
  *    },
- *    "2qbiJSmMCDVdaRrR": {
+ *    "74I5mQmMMiZWJ7jf": {
  *      "actor": "systems/sfrpg/images/starfinder_icon.webp",
  *      "token": "systems/sfrpg/images/starfinder_icon.webp"
  *      }
@@ -54,6 +58,11 @@ export default async function registerCompendiumArt() {
     }
 }
 
+/**
+ *
+ * @param {object|string|null} art Either an art mapping object, or a file path to a JSON.
+ * @returns {object|null} An art object, or null
+ */
 async function getArtMap(art) {
     if (!art) {
         return null;
@@ -79,6 +88,11 @@ async function getArtMap(art) {
     return null;
 }
 
+/**
+ *
+ * @param {object} record An art object
+ * @returns {boolean} Whether the object is a valid compendium art object or not
+ */
 function isModuleArt(record) {
     return (
         isObject(record) // Ensure the map is an object

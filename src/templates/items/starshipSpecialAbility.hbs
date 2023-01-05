@@ -1,0 +1,37 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Item Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img" />
+
+        <div class="header-details flexrow">
+            <h1 class="charname">
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.ItemName" }}" />
+            </h1>
+
+            <div class="item-subtitle">
+                <h4 class="item-type">{{ localize "ITEM.TypeStarshipspecialability" }}</h4>
+                <span class="item-status">{{itemStatus}}</span>
+            </div>
+
+            <ul class="summary">
+                <li>
+                    <input type="text" name="system.source" value="{{itemData.source}}" placeholder="{{ localize "SFRPG.Items.ShipWeapon.Source" }}" />
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "SFRPG.Description" }}</a>
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        {{> "systems/sfrpg/templates/items/parts/item-description.hbs"}}
+
+    </section>
+</form>
