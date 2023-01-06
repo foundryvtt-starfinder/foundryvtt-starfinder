@@ -1073,11 +1073,15 @@ export class DiceSFRPG {
         // Combine the unannotated numerical bonuses into a single new NumericTerm.
         if ( unannotated.length ) {
             const staticBonus = Roll.safeEval(Roll.getFormula(unannotated));
-            // if ( staticBonus === 0 ) return [...annotated];
+            if ( staticBonus === 0 ) return [...annotated];
 
             // If the staticBonus is greater than 0, add a "+" operator so the formula remains valid.
             if ( staticBonus > 0 ) simplified.push(new OperatorTerm({ operator: "+"}));
-            simplified.push(new NumericTerm({ number: staticBonus} ));
+            simplified.push(new NumericTerm({ number: staticBonus }));
+
+            if (simplified[simplified.length - 1].operator === "+" && simplified[simplified.length - 1].number === 0) {
+                simplified.splice(2);
+            }
         }
         return [...simplified, ...annotated];
     }
