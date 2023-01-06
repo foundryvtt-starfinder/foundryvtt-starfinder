@@ -240,6 +240,8 @@ function sanitizeJSON(jsonInput) {
 
         delete item.flags?.exportSource;
         delete item.flags?.sourceId;
+        delete item.flags?.core?.exportSource;
+        delete item.flags?.core?.sourceId;
 
         // Remove leading or trailing spaces
         item.name = item.name.trim();
@@ -247,6 +249,10 @@ function sanitizeJSON(jsonInput) {
         item.img &&= item.img.replace(
             "https://assets.forge-vtt.com/bazaar/systems/sfrpg/assets/",
             "systems/sfrpg/"
+        );
+        item.img &&= item.img.replace(
+            "https://assets.forge-vtt.com/bazaar/core/",
+            ""
         );
 
         if (item.type === "npc2" && !item?.system?.attributes?.sp?.max > 0) {
@@ -318,7 +324,7 @@ function sanitizeJSON(jsonInput) {
 
         // Replace erroneously copied links with actually working ones
         $description.find("i[class*='fas']").remove();
-        const fakeLink = $description.find("a.entity-link");
+        const fakeLink = $description.find("a.entity-link, a.content-link");
         if (fakeLink.length > 0) {
             fakeLink.each((index, el) => {
                 const element = $(el);
@@ -344,6 +350,9 @@ function sanitizeJSON(jsonInput) {
             .replace(/<(?:b|strong)>\s*/g, "<strong>") // Remove whitespace at the start of <strong> tags
             .replace(/\s*<\/(?:b|strong)>/g, "</strong>") // Remove whitespace at the end of <strong> tags
             .replace(/(<\/strong>)(\w)/g, "$1 $2") // Add a space after the end of <strong> tags
+            .replace(/<(em)>\s*/g, "<em>") // Remove whitespace at the start of <em> tags
+            .replace(/\s*<\/(em)>/g, "</em>") // Remove whitespace at the end of <em> tags
+            .replace(/(<\/em>)(\w)/g, "$1 $2") // Add a space after the end of <em> tags
             .replace(/(<p>&nbsp;<\/p>)/g, "") // Delete paragraphs with only a non-breaking space
             .replace(/(<br \/>)+/g, "</p>\n<p>") // Replace any number of <br /> tags with <p>s
             .replace(/(\n)+/g, "\n") // Replace any number of newlines with a single one
