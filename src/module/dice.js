@@ -1079,9 +1079,6 @@ export class DiceSFRPG {
             if ( staticBonus > 0 ) simplified.push(new OperatorTerm({ operator: "+"}));
             simplified.push(new NumericTerm({ number: staticBonus }));
 
-            if (simplified[simplified.length - 1].operator === "+" && simplified[simplified.length - 1].number === 0) {
-                simplified.splice(2);
-            }
         }
         return [...simplified, ...annotated];
     }
