@@ -320,7 +320,7 @@ function sanitizeJSON(jsonInput) {
 
         // Replace erroneously copied links with actually working ones
         $description.find("i[class*='fas']").remove();
-        const fakeLink = $description.find("a.entity-link");
+        const fakeLink = $description.find("a.entity-link, a.content-link");
         if (fakeLink.length > 0) {
             fakeLink.each((index, el) => {
                 const element = $(el);
