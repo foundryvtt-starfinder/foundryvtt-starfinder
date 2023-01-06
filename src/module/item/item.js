@@ -1,13 +1,13 @@
+import SFRPGModifierApplication from "../apps/modifier-app.js";
+import { SFRPG } from "../config.js";
+import { DiceSFRPG } from "../dice.js";
+import SFRPGModifier from "../modifiers/modifier.js";
+import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../modifiers/types.js";
+import RollContext from "../rolls/rollcontext.js";
+import StackModifiers from "../rules/closures/stack-modifiers.js";
 import { Mix } from "../utils/custom-mixer.js";
 import { ItemActivationMixin } from "./mixins/item-activation.js";
 import { ItemCapacityMixin } from "./mixins/item-capacity.js";
-import { DiceSFRPG } from "../dice.js";
-import RollContext from "../rolls/rollcontext.js";
-import { SFRPG } from "../config.js";
-import { SFRPGModifierType, SFRPGModifierTypes, SFRPGEffectType } from "../modifiers/types.js";
-import SFRPGModifier from "../modifiers/modifier.js";
-import SFRPGModifierApplication from "../apps/modifier-app.js";
-import StackModifiers from "../rules/closures/stack-modifiers.js";
 
 export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityMixin) {
 
@@ -96,8 +96,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             if (act) {
                 if (act.type === "none") {
                     labels.activation = game.i18n.localize("SFRPG.AbilityActivationTypesNoneButton");
-                }
-                else {
+                } else {
                     labels.activation = [
                         act.cost,
                         C.abilityActivationTypes[act.type]
@@ -643,8 +642,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         if (data.senses &&  data.senses.usedForSenses) {
             // We deliminate the senses by `,` and present each sense as a separate property
             let sensesDeliminated = data.senses.senses.split(",");
-            for (let index = 0; index < sensesDeliminated.length; index++)
-            {
+            for (let index = 0; index < sensesDeliminated.length; index++) {
                 let sense = sensesDeliminated[index];
                 props.push(sense);
             }
@@ -688,8 +686,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         if (Number.isNumeric(itemData.attackBonus) && itemData.attackBonus !== 0) parts.push("@item.attackBonus");
         if (abl) parts.push(`@abilities.${abl}.mod`);
         if (["character", "drone"].includes(this.actor.type)) parts.push("@attributes.baseAttackBonus.value");
-        if (isWeapon)
-        {
+        if (isWeapon) {
             const procifiencyKey = SFRPG.weaponTypeProficiency[this.system.weaponType];
             const proficient = itemData.proficient || this.actor?.system?.traits?.weaponProf?.value?.includes(procifiencyKey);
             if (!proficient) {
@@ -900,9 +897,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         /** Create additional modifiers. */
         const additionalModifiers = [
             {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.ComputerBonus"), modifier: "@ship.attributes.computer.value", enabled: false} },
-            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.CaptainDemand"), modifier: "4", enabled: false} },
-            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.CaptainEncouragement"), modifier: "2", enabled: false} },
-            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.ScienceOfficerLockOn"), modifier: "2", enabled: false} },
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.CaptainDemand"), modifier: "+4", enabled: false} },
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.CaptainEncouragement"), modifier: "+2", enabled: false} },
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.ScienceOfficerLockOn"), modifier: "+2", enabled: false} },
             {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.SnapShot"), modifier: "-2", enabled: false} },
             {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.FireAtWill"), modifier: "-4", enabled: false} },
             {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.Broadside"), modifier: "-2", enabled: false} }
@@ -1215,7 +1212,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             throw new Error("you may not make a Damage Roll with this item");
         }
 
-        const parts = itemData.damage.parts.map(part => part);
+        const parts = duplicate(itemData.damage.parts.map(part => part));
         for (const part of parts) {
             part.isDamageSection = true;
         }
@@ -1552,8 +1549,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             const scene = game.scenes.get(sceneId);
             if (scene) {
                 const tokenData = scene.getEmbeddedDocument("Token", tokenId);
-                if (tokenData)
-                {
+                if (tokenData) {
                     const token = new Token(tokenData);
                     chatCardActor = token.actor;
                 }

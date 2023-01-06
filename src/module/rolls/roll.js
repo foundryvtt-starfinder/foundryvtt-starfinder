@@ -8,6 +8,8 @@
  * @property {string} text The text rendered on the card.
  */
 
+import { DiceSFRPG } from "../dice.js";
+
 /**
  * A structure for passing data into an HTML for for use in data- attributes.
  *
@@ -38,6 +40,30 @@ export default class SFRPGRoll extends Roll {
         this.breakdown = rollData.data.breakdown;
         /** @type {HtmlData[]} */
         this.htmlData = rollData.data.htmlData;
+    }
+
+    /**
+     * Return a prettified formula of the roll with Math terms such as "floor()" and "lookupRange()" resolved.
+     *
+     * Used for before the prettified formula created by Roll.evaluate() is available.
+     * @type {string}
+     */
+    get simplifiedFormula() {
+        if (this._evaluated) return this.formula;
+        const newterms = this.terms.map(t => {
+            if (t instanceof OperatorTerm || t instanceof StringTerm) return t;
+            if (t.isDeterministic) {
+                let total = 0;
+                try {
+                    total = t?.total || Roll.safeEval(t.expression);
+                } catch {
+                    total = Roll.safeEval(t.expression);
+                }
+                return new NumericTerm({number: total});
+            }
+            return t;
+        });
+        return DiceSFRPG.simplifyRollFormula(Roll.fromTerms(newterms).formula) || "0";
     }
 
     /** @inheritdoc */
