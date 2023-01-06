@@ -125,7 +125,7 @@ export default class RollDialog extends Dialog {
             }
 
             // Make a simplified roll
-            const simplerRoll = Roll.create(modifier.modifier, context).simplifiedFormula || 0;
+            const simplerRoll = Roll.create(modifier.modifier, context).simplifiedFormula;
             if (modifier.modifier[0] === "+") modifier.modifier = modifier.modifier.slice(1);
 
             // If it actually was simplified, append the original modififer for use on the tooltip.

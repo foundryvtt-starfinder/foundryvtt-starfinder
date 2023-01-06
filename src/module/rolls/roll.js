@@ -63,7 +63,7 @@ export default class SFRPGRoll extends Roll {
             }
             return t;
         });
-        return DiceSFRPG.simplifyRollFormula(Roll.fromTerms(newterms).formula);
+        return DiceSFRPG.simplifyRollFormula(Roll.fromTerms(newterms).formula) || "0";
     }
 
     /** @inheritdoc */
