@@ -250,6 +250,10 @@ function sanitizeJSON(jsonInput) {
             "https://assets.forge-vtt.com/bazaar/systems/sfrpg/assets/",
             "systems/sfrpg/"
         );
+        item.img &&= item.img.replace(
+            "https://assets.forge-vtt.com/bazaar/core/",
+            ""
+        );
 
         if (item.type === "npc2" && !item?.system?.attributes?.sp?.max > 0) {
             delete item?.system?.attributes?.sp;
