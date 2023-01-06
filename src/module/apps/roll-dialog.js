@@ -96,8 +96,8 @@ export default class RollDialog extends Dialog {
         }
     }
 
-    getData() {
-        const data = super.getData();
+    async getData() {
+        const data = await super.getData();
         data.formula = this.formula;
         data.rollMode = this.rollMode;
         data.rollModes = CONFIG.Dice.rollModes;
@@ -124,11 +124,18 @@ export default class RollDialog extends Dialog {
                 }, {});
             }
 
-            const simplerRoll = Roll.create(modifier.modifier, context);
-            if (modifier.modifier.replace(/\s/g, '') !== simplerRoll.simplifiedFormula.replace(/\s/g, '')) {
+            // Make a simplified roll
+            const simplerRoll = Roll.create(modifier.modifier, context).simplifiedFormula;
+            if (modifier.modifier[0] === "+") modifier.modifier = modifier.modifier.slice(1);
+
+            // If it actually was simplified, append the original modififer for use on the tooltip.
+            if (modifier.modifier !== simplerRoll) {
                 modifier.originalFormula = modifier.modifier;
-                modifier.modifier = simplerRoll.simplifiedFormula;
             }
+
+            // Sign that string
+            const numMod = Number(simplerRoll);
+            modifier.modifier = numMod ? numMod.signedString() : simplerRoll;
         }
 
         if (this.parts?.length > 0) {
@@ -156,10 +163,10 @@ export default class RollDialog extends Dialog {
                 part.type = typeString;
 
                 // Clean up the formula
-                const simplerRoll = Roll.create(part.formula);
-                if (part.formula !== simplerRoll.simplifiedFormula) {
+                const simplerRoll = Roll.create(part.formula).simplifiedFormula;
+                if (part.formula !== simplerRoll) {
                     part.originalFormula = part.formula;
-                    part.formula = simplerRoll.simplifiedFormula;
+                    part.formula = simplerRoll;
                 }
             }
 

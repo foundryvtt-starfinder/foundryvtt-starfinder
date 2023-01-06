@@ -8,6 +8,8 @@
  * @property {string} text The text rendered on the card.
  */
 
+import { DiceSFRPG } from "../dice.js";
+
 /**
  * A structure for passing data into an HTML for for use in data- attributes.
  *
@@ -61,7 +63,7 @@ export default class SFRPGRoll extends Roll {
             }
             return t;
         });
-        return Roll.fromTerms(newterms).formula;
+        return DiceSFRPG.simplifyRollFormula(Roll.fromTerms(newterms).formula);
     }
 
     /** @inheritdoc */
