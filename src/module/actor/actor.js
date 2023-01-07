@@ -39,8 +39,14 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             if (art) {
                 data.img = art.actor;
                 const tokenArt = typeof art.token === "string"
-                    ? { img: art.token } // If just a path, set it as img
-                    : { ...art.token }; // If not a path, it must contain scale too, so spread it
+                    ? { texture: { src: art.token } }
+                    : {
+                        texture: {
+                            src: art.token.img,
+                            scaleX: art.token.scale,
+                            scaleY: art.token.scale
+                        }
+                    };
                 data.prototypeToken = mergeObject(data.prototypeToken ?? {}, tokenArt);
             }
         }
