@@ -61,14 +61,41 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         return data;
     }
 
+    /** @override */
+    render(force, context = {}) {
+        /** Clear out deleted item sheets. */
+        const keysToDelete = [];
+        for (const [appId, app] of Object.entries(this.apps)) {
+            if (app instanceof ItemSheetSFRPG) {
+                const item = app.object;
+                if (!this.items.find(x => x.id === item.id)) {
+                    keysToDelete.push(appId);
+                }
+            }
+        }
+        if (keysToDelete.length > 0) {
+            for (const key of keysToDelete) {
+                delete this.apps[key];
+            }
+        }
+
+        /** Now render this actor. */
+        return super.render(force, context);
+    }
+
     /**
      * Augment the basic actor data with additional dynamic data.
      *
      * @param {Object} actorData The data for the actor
      * @returns {Promise} A promise for the automation process triggered at the end.
      */
-    prepareData() {
-        super.prepareData();
+    prepareBaseData() {
+        super.prepareBaseData();
+
+        // Populate objects we strip out in cook/unpack
+        for (const condition of Object.keys(SFRPG.conditions)) {
+            this.system.conditions[condition] ??= false;
+        }
 
         this._ensureHasModifiers(this.system);
         const modifiers = this.getAllModifiers();
@@ -107,35 +134,8 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             frames,
             actorResources
         });
+
     }
-
-    /** @override */
-    render(force, context = {}) {
-        /** Clear out deleted item sheets. */
-        const keysToDelete = [];
-        for (const [appId, app] of Object.entries(this.apps)) {
-            if (app instanceof ItemSheetSFRPG) {
-                const item = app.object;
-                if (!this.items.find(x => x.id === item.id)) {
-                    keysToDelete.push(appId);
-                }
-            }
-        }
-        if (keysToDelete.length > 0) {
-            for (const key of keysToDelete) {
-                delete this.apps[key];
-            }
-        }
-
-        /** Now render this actor. */
-        return super.render(force, context);
-    }
-
-    /**
-     * TODO: Use these two methods to properly setup actor data for use
-     * in the new Active Effects API.
-     */
-    prepareBaseData() { super.prepareBaseData(); }
     prepareDerivedData() { super.prepareDerivedData(); }
 
     /**
