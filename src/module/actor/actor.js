@@ -1,3 +1,7 @@
+import { ChoiceDialog } from "../apps/choice-dialog.js";
+import { AddEditSkillDialog } from "../apps/edit-skill-dialog.js";
+import { NpcSkillToggleDialog } from "../apps/npc-skill-toggle-dialog.js";
+import { SpellCastDialog } from "../apps/spell-cast-dialog.js";
 import { SFRPG } from "../config.js";
 import { DiceSFRPG } from "../dice.js";
 import RollContext from "../rolls/rollcontext.js";
@@ -9,15 +13,10 @@ import { ActorInventoryMixin } from "./mixins/actor-inventory.js";
 import { ActorModifiersMixin } from "./mixins/actor-modifiers.js";
 import { ActorResourcesMixin } from "./mixins/actor-resources.js";
 import { ActorRestMixin } from "./mixins/actor-rest.js";
-import { ChoiceDialog } from "../apps/choice-dialog.js";
-import { SpellCastDialog } from "../apps/spell-cast-dialog.js";
-import { AddEditSkillDialog } from "../apps/edit-skill-dialog.js";
-import { NpcSkillToggleDialog } from "../apps/npc-skill-toggle-dialog.js";
 
-import { } from "./crew-update.js";
-import { ItemSheetSFRPG } from "../item/sheet.js";
 import { ItemSFRPG } from "../item/item.js";
-import { hasDiceTerms } from "../utilities.js";
+import { ItemSheetSFRPG } from "../item/sheet.js";
+import { } from "./crew-update.js";
 
 /**
  * A data structure for storing damage statistics.
@@ -40,8 +39,14 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             if (art) {
                 data.img = art.actor;
                 const tokenArt = typeof art.token === "string"
-                    ? { img: art.token } // If just a path, set it as img
-                    : { ...art.token }; // If not a path, it must contain scale too, so spread it
+                    ? { texture: { src: art.token } }
+                    : {
+                        texture: {
+                            src: art.token.img,
+                            scaleX: art.token.scale,
+                            scaleY: art.token.scale
+                        }
+                    };
                 data.prototypeToken = mergeObject(data.prototypeToken ?? {}, tokenArt);
             }
         }
@@ -56,14 +61,41 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         return data;
     }
 
+    /** @override */
+    render(force, context = {}) {
+        /** Clear out deleted item sheets. */
+        const keysToDelete = [];
+        for (const [appId, app] of Object.entries(this.apps)) {
+            if (app instanceof ItemSheetSFRPG) {
+                const item = app.object;
+                if (!this.items.find(x => x.id === item.id)) {
+                    keysToDelete.push(appId);
+                }
+            }
+        }
+        if (keysToDelete.length > 0) {
+            for (const key of keysToDelete) {
+                delete this.apps[key];
+            }
+        }
+
+        /** Now render this actor. */
+        return super.render(force, context);
+    }
+
     /**
      * Augment the basic actor data with additional dynamic data.
      *
      * @param {Object} actorData The data for the actor
      * @returns {Promise} A promise for the automation process triggered at the end.
      */
-    prepareData() {
-        super.prepareData();
+    prepareBaseData() {
+        super.prepareBaseData();
+
+        // Populate objects we strip out in cook/unpack
+        for (const condition of Object.keys(SFRPG.conditions)) {
+            this.system.conditions[condition] ??= false;
+        }
 
         this._ensureHasModifiers(this.system);
         const modifiers = this.getAllModifiers();
@@ -102,35 +134,8 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             frames,
             actorResources
         });
+
     }
-
-    /** @override */
-    render(force, context = {}) {
-        /** Clear out deleted item sheets. */
-        const keysToDelete = [];
-        for (const [appId, app] of Object.entries(this.apps)) {
-            if (app instanceof ItemSheetSFRPG) {
-                const item = app.object;
-                if (!this.items.find(x => x.id === item.id)) {
-                    keysToDelete.push(appId);
-                }
-            }
-        }
-        if (keysToDelete.length > 0) {
-            for (const key of keysToDelete) {
-                delete this.apps[key];
-            }
-        }
-
-        /** Now render this actor. */
-        return super.render(force, context);
-    }
-
-    /**
-     * TODO: Use these two methods to properly setup actor data for use
-     * in the new Active Effects API.
-     */
-    prepareBaseData() { super.prepareBaseData(); }
     prepareDerivedData() { super.prepareDerivedData(); }
 
     /**
@@ -624,12 +629,10 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         if (system) {
             rollContext.addContext("system", system, system.system);
             parts.push(`@system.piloting.piloting`);
-        }
-        else if (!role || !actorId) {
+        } else if (!role || !actorId) {
             // Add pilot's piloting modifier
             parts.push(`@pilot.skills.pil.mod`);
-        }
-        else {
+        } else {
             const passengerId = this.system.crew[role].actorIds.find(id => id === actorId);
             let passenger = game.actors.get(passengerId);
             let actorData = null;
@@ -889,8 +892,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                     rollContext.addContext("pilot", pilotActor, pilotData);
                 }
             }
-        }
-        else if (actorData.type === "starship") {
+        } else if (actorData.type === "starship") {
             if (!crewData.useNPCCrew) {
                 /** Add player captain if available. */
                 if (crewActorData.captain?.actors?.length > 0) {
