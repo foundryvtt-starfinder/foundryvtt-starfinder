@@ -212,7 +212,7 @@ export class DiceSFRPG {
         const formula = parts.map(partMapper).join(" + ");
 
         const tree = new RollTree(options);
-        return tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormulaTest, node, rollMods, bonus) => {
+        return tree.buildRoll(formula, rollContext, async (button, rollMode, unusedFinalFormula, node, rollMods, bonus) => {
             if (button === "cancel") {
                 if (onClose) {
                     onClose(null, null, null);
@@ -229,28 +229,41 @@ export class DiceSFRPG {
             }
 
             let stackModifiers = new StackModifiers();
-            const stackedMods = await stackModifiers.processSituationalMods(rollMods, this.contexts);
+            const stackedMods = await stackModifiers.processSituationalMods(rollMods.filter(mod => {
+                if (mod.enabled) return true;
+            }), this.contexts);
 
             let rollString = '';
+            let formulaString = '';
             const stackedModsArray = Object.keys(stackedMods);
             for (let stackModsI = 0; stackModsI < stackedModsArray.length; stackModsI++) {
-                const modType = stackedMods[stackedModsArray[stackModsI]];
-                if (modType === null || modType === undefined) {
+                const stackModifier = stackedMods[stackedModsArray[stackModsI]];
+                if (stackModifier === null || stackModifier === undefined) {
                     continue;
                 }
-                if (modType instanceof Array) {
-                    for (let modTypeI = 0; modTypeI < modType.length; modTypeI++) {
-                        const modifier = modType[modTypeI];
-                        rootNode = this._removeModifierNodes(rootNode, modType);
-                        if (modifier.enabled) {
-                            rollString += `${modifier.max.toString()}+`;
-                        }
+                if (stackModifier instanceof Array) {
+                    for (let stackModifierI = 0; stackModifierI < stackModifier.length; stackModifierI++) {
+                        const modifier = stackModifier[stackModifierI];
+                        rootNode = this._removeModifierNodes(rootNode, stackModifier);
+                        rollString += `${modifier.max.toString()}+`;
+                        // TODO:
+                        /*
+                            add title to the span f.e.:
+                            title="${game.i18n.format(localizationKey, type: modifier.type.capitalize(),mod: modifier.max.signedString(),source: modifier.name)}"
+                            but in order to do that we will need the localization key for the current modifier which we do not have at this point. Maybe we will have to pass it down from the modifier calculation lol.
+                        */
+                        formulaString += `${modifier.max.toString()}[<span>${modifier.name}</span>]`;
                     }
                 } else {
-                    rootNode = this._removeModifierNodes(rootNode, modType);
-                    if (modType.enabled) {
-                        rollString += `${modType.max.toString()}+`;
-                    }
+                    rootNode = this._removeModifierNodes(rootNode, stackModifier);
+                    rollString += `${stackModifier.max.toString()}+`;
+                    // TODO:
+                    /*
+                        add title to the span f.e.:
+                        title="${game.i18n.format(localizationKey, type: modifier.type.capitalize(),mod: modifier.max.signedString(),source: modifier.name)}"
+                        but in order to do that we will need the localization key for the current modifier which we do not have at this point. Maybe we will have to pass it down from the modifier calculation lol.
+                    */
+                    formulaString += `${stackModifier.max.toString()}[<span>${stackModifier.name}</span>]`;
                 }
             }
 
@@ -260,8 +273,8 @@ export class DiceSFRPG {
 
             const finalFormula = rootNode.resolveForRoll(0, rollMods);
 
-            finalFormula.finalRoll = `${dieRoll} + ${finalFormula.finalRoll} + ${rollString}`;
-            finalFormula.formula = dieRoll + " + " + finalFormula.formula;
+            finalFormula.finalRoll = `${dieRoll} + ${finalFormula.finalRoll} + ${rollString} + ${bonus}`;
+            finalFormula.formula = `${dieRoll} + ${finalFormula.formula} + ${formulaString}`;
             finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
                 .trim();
             finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;

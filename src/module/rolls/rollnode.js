@@ -13,6 +13,7 @@ export default class RollNode {
         this.parentNode = parentNode;
         this.nodeContext = null;
         this.variableTooltips = null;
+        this.rollTooltips = null;
         this.calculatedMods = null;
         this.options = options;
     }
@@ -25,6 +26,7 @@ export default class RollNode {
             const availableRolledMods = RollNode.getRolledModifiers(remainingVariable, this.getContext());
             this.calculatedMods = RollNode.getCalculatedModifiers(remainingVariable, this.getContext());
             this.variableTooltips = RollNode.getTooltips(remainingVariable, this.getContext());
+            this.rollTooltips = RollNode.getTooltips(remainingVariable, this.getContext(), ".rollTooltip");
 
             for (const mod of availableRolledMods) {
                 const modKey = mod.bonus.name;
@@ -77,17 +79,14 @@ export default class RollNode {
         return this.nodeContext;
     }
 
-    resolve(depth = 0, rollMods) {
+    resolve(depth = 0) {
         if (this.resolvedValue) {
             return this.resolvedValue;
         } else {
             // console.log(['Resolving', depth, this]);
             this.resolvedValue = {
                 finalRoll: "",
-                formula: "",
-                rollMods: rollMods,
-                baseValue: this.baseValue,
-                baseMod: {}
+                formula: ""
             };
 
             if (this.isVariable && !this.baseValue) {
@@ -199,7 +198,7 @@ export default class RollNode {
                 const constantMods = rollMods.filter(mod => mod.modifierType === SFRPGModifierType.CONSTANT);
                 const modSum = constantMods.reduce((accumulator, value) => accumulator + value.max, 0);
                 this.baseValue = (Number(this.baseValue) - modSum).toString();
-                const joinedTooltips = this.variableTooltips.join(',\n');
+                const joinedTooltips = this.rollTooltips.join(',\n');
 
                 this.resolvedValue.finalRoll = this.baseValue;
                 this.resolvedValue.formula = this.baseValue + "[";
@@ -324,11 +323,11 @@ export default class RollNode {
         return variableCalculatedMods || [];
     }
 
-    static getTooltips(variable, context) {
-        let variableString = variable + ".tooltip";
+    static getTooltips(variable, context, tooltipPath = ".tooltip") {
+        let variableString = variable + tooltipPath;
         let variableRolledMods = RollNode._readValue(context.data, variableString);
         if (!variableRolledMods) {
-            variableString = variable.substring(0, variable.lastIndexOf('.')) + ".tooltip";
+            variableString = variable.substring(0, variable.lastIndexOf('.')) + tooltipPath;
             variableRolledMods = RollNode._readValue(context.data, variableString);
         }
         // console.log(["getRolledModifiers", variable, context, variableString, variableRolledMods]);
