@@ -12,7 +12,7 @@ export default function(engine) {
             } else {
                 item.calculatedMods = [{mod: bonus.modifier, bonus: bonus}];
             }
-            let computedBonus = bonus.max;
+            let computedBonus = bonus.max || 0;
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
