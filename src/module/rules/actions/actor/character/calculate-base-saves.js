@@ -43,21 +43,21 @@ export default function(engine) {
             mod: data.abilities.con.mod.signedString()
         }));
         // this is done because the normal tooltip will be changed later on and we need this one as a "base" for dice rolls.
-        fort.rollTooltip = [ ...skill.tooltip ];
+        fort.rollTooltip = [ ...fort.tooltip ];
 
         reflex.tooltip.push(game.i18n.format("SFRPG.SaveAbilityModTooltip", {
             ability: "Dex",
             mod: data.abilities.dex.mod.signedString()
         }));
         // this is done because the normal tooltip will be changed later on and we need this one as a "base" for dice rolls.
-        reflex.rollTooltip = [ ...skill.tooltip ];
+        reflex.rollTooltip = [ ...reflex.tooltip ];
 
         will.tooltip.push(game.i18n.format("SFRPG.SaveAbilityModTooltip", {
             ability: "Wis",
             mod: data.abilities.wis.mod.signedString()
         }));
         // this is done because the normal tooltip will be changed later on and we need this one as a "base" for dice rolls.
-        will.rollTooltip = [ ...skill.tooltip ];
+        will.rollTooltip = [ ...will.tooltip ];
 
         return fact;
     });

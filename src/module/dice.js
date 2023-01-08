@@ -267,13 +267,14 @@ export class DiceSFRPG {
                 }
             }
 
+            rollString += `${bonus}`;
             rollString = rollString.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
                 .trim();
             rollString = rollString.endsWith("+") ? rollString.substring(0, rollString.length - 1).trim() : rollString;
 
             const finalFormula = rootNode.resolveForRoll(0, rollMods);
 
-            finalFormula.finalRoll = `${dieRoll} + ${finalFormula.finalRoll} + ${rollString} + ${bonus}`;
+            finalFormula.finalRoll = rollString ? `${dieRoll} + ${finalFormula.finalRoll} + ${rollString}` : `${dieRoll} + ${finalFormula.finalRoll}`;
             finalFormula.formula = `${dieRoll} + ${finalFormula.formula} + ${formulaString}`;
             finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
                 .trim();

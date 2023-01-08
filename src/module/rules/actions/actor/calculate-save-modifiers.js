@@ -55,13 +55,13 @@ export default function(engine) {
             return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.SAVE, SFRPGEffectType.SAVES].includes(mod.effectType);
         });
 
-        fortMods.rolledMods = null;
+        fort.rolledMods = null;
         const fortMods = context.parameters.stackModifiers.process(filteredMods.filter(mod => {
             if (mod.modifierType === SFRPGModifierType.FORMULA) {
-                if (fortMods.rolledMods) {
-                    fortMods.rolledMods.push({mod: mod.modifier, bonus: mod});
+                if (fort.rolledMods) {
+                    fort.rolledMods.push({mod: mod.modifier, bonus: mod});
                 } else {
-                    fortMods.rolledMods = [{mod: mod.modifier, bonus: mod}];
+                    fort.rolledMods = [{mod: mod.modifier, bonus: mod}];
                 }
                 return false;
             }
@@ -69,13 +69,13 @@ export default function(engine) {
             if (mod.effectType === SFRPGEffectType.SAVES) return true;
         }), context);
 
-        reflexMods.rolledMods = null;
+        reflex.rolledMods = null;
         const reflexMods = context.parameters.stackModifiers.process(filteredMods.filter(mod => {
             if (mod.modifierType === SFRPGModifierType.FORMULA) {
-                if (reflexMods.rolledMods) {
-                    reflexMods.rolledMods.push({mod: mod.modifier, bonus: mod});
+                if (reflex.rolledMods) {
+                    reflex.rolledMods.push({mod: mod.modifier, bonus: mod});
                 } else {
-                    reflexMods.rolledMods = [{mod: mod.modifier, bonus: mod}];
+                    reflex.rolledMods = [{mod: mod.modifier, bonus: mod}];
                 }
                 return false;
             }
@@ -83,13 +83,13 @@ export default function(engine) {
             if (mod.effectType === SFRPGEffectType.SAVES) return true;
         }), context);
 
-        willMods.rolledMods = null;
+        will.rolledMods = null;
         const willMods = context.parameters.stackModifiers.process(filteredMods.filter(mod => {
             if (mod.modifierType === SFRPGModifierType.FORMULA) {
-                if (willMods.rolledMods) {
-                    willMods.rolledMods.push({mod: mod.modifier, bonus: mod});
+                if (will.rolledMods) {
+                    will.rolledMods.push({mod: mod.modifier, bonus: mod});
                 } else {
-                    willMods.rolledMods = [{mod: mod.modifier, bonus: mod}];
+                    will.rolledMods = [{mod: mod.modifier, bonus: mod}];
                 }
                 return false;
             }
