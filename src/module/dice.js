@@ -252,7 +252,7 @@ export class DiceSFRPG {
                             title="${game.i18n.format(localizationKey, type: modifier.type.capitalize(),mod: modifier.max.signedString(),source: modifier.name)}"
                             but in order to do that we will need the localization key for the current modifier which we do not have at this point. Maybe we will have to pass it down from the modifier calculation lol.
                         */
-                        formulaString += `${modifier.max.toString()}[<span>${modifier.name}</span>]`;
+                        formulaString += `${modifier.max.toString()}[<span>${modifier.name}</span>] + `;
                     }
                 } else {
                     rootNode = this._removeModifierNodes(rootNode, stackModifier);
@@ -263,9 +263,11 @@ export class DiceSFRPG {
                         title="${game.i18n.format(localizationKey, type: modifier.type.capitalize(),mod: modifier.max.signedString(),source: modifier.name)}"
                         but in order to do that we will need the localization key for the current modifier which we do not have at this point. Maybe we will have to pass it down from the modifier calculation lol.
                     */
-                    formulaString += `${stackModifier.max.toString()}[<span>${stackModifier.name}</span>]`;
+                    formulaString += `${stackModifier.max.toString()}[<span>${stackModifier.name}</span>] + `;
                 }
             }
+
+            formulaString += bonus ? `${bonus.toString()}[<span>${game.i18n.localize("SFRPG.Rolls.Dialog.SituationalBonus")}</span>]` : '';
 
             rollString += `${bonus}`;
             rollString = rollString.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
@@ -275,7 +277,7 @@ export class DiceSFRPG {
             const finalFormula = rootNode.resolveForRoll(0, rollMods);
 
             finalFormula.finalRoll = rollString ? `${dieRoll} + ${finalFormula.finalRoll} + ${rollString}` : `${dieRoll} + ${finalFormula.finalRoll}`;
-            finalFormula.formula = `${dieRoll} + ${finalFormula.formula} + ${formulaString}`;
+            finalFormula.formula = formulaString ? `${dieRoll} + ${finalFormula.formula} + ${formulaString}` : `${dieRoll} + ${finalFormula.formula}`;
             finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
                 .trim();
             finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
