@@ -5,9 +5,24 @@
   "img": "systems/sfrpg/icons/spells/baleful_polymorph_mass.webp",
   "system": {
     "type": "biotech",
+    "ability": null,
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
+    "actionType": "",
+    "activation": {
+      "type": "swift",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "none",
+      "value": null
+    },
+    "attackBonus": 0,
     "attributes": {
       "ac": {
         "value": "5"
@@ -28,40 +43,171 @@
     },
     "attuned": false,
     "bulk": "-",
+    "chatFlavor": "",
+    "container": {
+      "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
+      "storage": []
+    },
     "critical": {
+      "effect": "",
       "parts": []
     },
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>Even the youngest barathus have control over their mutable bodies. A series of extendable plates, elastic filaments, and reflective layers are installed throughout your skin and arms to provide you similar benefits. Once every 1d4 rounds as a swift action, you can reshape part of your body and adjust your chemistry to gain one of the following qualities. The adaptation lasts until the beginning of your next turn.</p>\n<ul>\n<li>\n<p>You can add an additional amount of damage to melee attacks equal to your Strength modifier.</p>\n</li>\n<li>\n<p>You gain a +1 enhancement bonus to AC.</p>\n</li>\n<li>\n<p>You gain resistance 2 against a single energy type (acid, cold, electricity, fire, or sonic).</p>\n</li>\n<li>\n<p>Your reach is extended by 5 feet.</p>\n</li>\n</ul>"
+      "value": "<p>Even the youngest @UUID[Compendium.sfrpg.races.RXNBF1w6yXaB8P9O]{barathus} have control over their mutable bodies. A series of extendable plates, elastic filaments, and reflective layers are installed throughout your skin and arms to provide you similar benefits. Once every 1d4 rounds as a swift action, you can reshape part of your body and adjust your chemistry to gain one of the following qualities. The adaptation lasts until the beginning of your next turn.</p><ul><li><p>You can add an additional amount of damage to melee attacks equal to your Strength modifier.</p></li><li><p>You gain a +1 enhancement bonus to AC.</p></li><li><p>You gain resistance 2 against a single energy type (acid, cold, electricity, fire, or sonic).</p></li><li><p>Your reach is extended by 5 feet.</p></li></ul><p><span><em>Toggle on/off the selected effect in the Modifiers tab. </em></span><span style=\"box-sizing: border-box; user-select: text;\"><span><em>reach extension option must be manually tracked.</em></span></span></p>"
     },
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": ""
+    },
+    "equippable": true,
     "equipped": false,
+    "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 9,
     "modifiers": [
       {
         "_id": "a22df4fe-93a6-4b1b-b2a8-b5a2225ad634",
-        "name": "Early Stage Adaptation",
+        "name": "Early Stage Adaptation Graft - Melee Damage",
         "type": "untyped",
         "condition": "",
         "effectType": "melee-damage",
-        "enabled": true,
+        "enabled": false,
         "max": 0,
         "modifier": "@abilities.str.mod",
-        "modifierType": "formula",
+        "modifierType": "constant",
         "notes": "You can add an additional amount of damage to melee attacks equal to your Strength modifier.",
         "source": "Augmentation",
         "subtab": "misc",
         "valueAffected": ""
+      },
+      {
+        "_id": "6776462f-ba90-4d5a-b27b-1a6745409726",
+        "name": "Early Stage Adaptation Graft - AC bonus",
+        "type": "enhancement",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": false,
+        "max": 1,
+        "modifier": "1",
+        "modifierType": "constant",
+        "notes": "You gain a +1 enhancement bonus to AC.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "both"
+      },
+      {
+        "_id": "a1ad5190-6ae1-40b0-b3ff-5a14aab6685c",
+        "name": "Early Stage Adaptation Graft - Resistance (Acid)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "You gain resistance 2 against a single energy type (acid, cold, electricity, fire, or sonic).",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "acid"
+      },
+      {
+        "_id": "1652560a-a29c-44cf-bf6d-1ec6610ce0d6",
+        "name": "Early Stage Adaptation Graft - Resistance (Cold)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "You gain resistance 2 against a single energy type (acid, cold, electricity, fire, or sonic).",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "cold"
+      },
+      {
+        "_id": "9218d4db-e202-49e2-bc75-00857bf9109d",
+        "name": "Early Stage Adaptation Graft - Resistance (Electricity)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "You gain resistance 2 against a single energy type (acid, cold, electricity, fire, or sonic).",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "electricity"
+      },
+      {
+        "_id": "31b168a1-3936-48d0-a047-ee3e4184fa2b",
+        "name": "Early Stage Adaptation Graft - Resistance (Fire)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "You gain resistance 2 against a single energy type (acid, cold, electricity, fire, or sonic).",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "fire"
+      },
+      {
+        "_id": "64b3021d-b830-4760-bade-3d3e69ebe3a9",
+        "name": "Early Stage Adaptation Graft - Resistance (Sonic)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "You gain resistance 2 against a single energy type (acid, cold, electricity, fire, or sonic).",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "sonic"
       }
     ],
     "price": 13000,
     "quantity": 1,
+    "quantityPerPack": 1,
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "none",
+      "value": null
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "",
+      "dc": null,
+      "descriptor": ""
+    },
     "source": "AA4 pg. 143",
-    "system": "allArms"
+    "system": "allArms",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": 0,
+      "per": "",
+      "value": 0
+    }
   }
 }
