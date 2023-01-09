@@ -100,7 +100,7 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
                 rollContext: rollContext,
                 parts: [{ formula: this.actor.system.attributes.damage.value }],
                 title: name,
-                flavor: name,
+                flavor: null,
                 speaker: ChatMessage.getSpeaker({ actor: this.actor }),
                 dialogOptions: {
                     left: event ? event.clientX - 80 : null,

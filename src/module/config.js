@@ -1717,6 +1717,7 @@ SFRPG.starshipDefinitionItemTypes = [
     "starshipSecuritySystem",
     "starshipSensor",
     "starshipShield",
+    "starshipSpecialAbility",
     "starshipThruster",
     "starshipWeapon"
 ];
