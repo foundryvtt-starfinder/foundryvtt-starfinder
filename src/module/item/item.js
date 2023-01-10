@@ -66,25 +66,25 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Populate objects we strip out in cook/unpack
         if (this.system.descriptors) {
-            for (const descriptor of Object.keys(CONFIG.SFRPG.descriptors)) {
+            for (const descriptor of Object.keys(SFRPG.descriptors)) {
                 this.system.descriptors[descriptor] ??= false;
             }
         }
 
         if (this.system.properties) {
-            for (const property of Object.keys(CONFIG.SFRPG.weaponProperties)) {
+            for (const property of Object.keys(SFRPG.weaponProperties)) {
                 this.system.properties[property] ??= false;
             }
         }
 
         if (this.type === "starshipWeapon") {
-            for (const property of Object.keys(CONFIG.SFRPG.starshipWeaponProperties)) {
+            for (const property of Object.keys(SFRPG.starshipWeaponProperties)) {
                 this.system[property] ??= false;
             }
         }
 
         if (this.system.specialMaterials) {
-            for (const material of Object.keys(CONFIG.SFRPG.specialMaterials)) {
+            for (const material of Object.keys(SFRPG.specialMaterials)) {
                 this.system.specialMaterials[material] ??= false;
             }
         }

@@ -93,10 +93,8 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         super.prepareBaseData();
 
         // Populate objects we strip out in cook/unpack
-        if (this.system.conditions) {
-            for (const condition of Object.keys(CONFIG.SFRPG.conditions)) {
-                this.system.conditions[condition] ??= false;
-            }
+        for (const condition of Object.keys(SFRPG.conditions)) {
+            this.system.conditions[condition] ??= false;
         }
 
         this._ensureHasModifiers(this.system);
