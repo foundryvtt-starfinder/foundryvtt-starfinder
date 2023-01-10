@@ -1,7 +1,7 @@
 export default function setupVision() {
     setupVisionModes();
-    setDefaultIlluminationThreshold();
-    globalIlluminationThresholdTooltip();
+    setDefautSceneSettings();
+    sceneConfigTooltips();
     setupConditions();
 }
 
@@ -101,21 +101,24 @@ function setupVisionModes() {
     });
 }
 
-function setDefaultIlluminationThreshold() {
+function setDefautSceneSettings() {
     Hooks.on("preCreateScene", (scene) => {
-        scene.updateSource({ globalLightThreshold: 0.75 });
+        scene.updateSource({ globalLightThreshold: 0.75, globalLight: true });
     });
 }
 
-function globalIlluminationThresholdTooltip() {
+function sceneConfigTooltips() {
     Hooks.on("renderSceneConfig", (config, html) => {
         const darknessSlider = html[0].querySelector("input[name='globalLightThreshold']").nextElementSibling;
+        const globalIllumination = html[0].querySelector("input[name='globalLight']");
 
-        const tooltip
-        = `<i data-tooltip="${ game.i18n.localize("SFRPG.SensesTypes.GlobalIlluminationThresholdMessage") }"
-         class="fas fa-lightbulb" 
-         style="flex: 0; padding-left: 2px">`;
-        darknessSlider.insertAdjacentHTML("afterend", tooltip);
+        const tooltip = `
+        <i data-tooltip="${ game.i18n.localize("SFRPG.SensesTypes.GlobalIlluminationThresholdMessage") }"
+        class="fas fa-lightbulb"
+        style="flex: 0; padding-left: 2px">`;
+
+        globalIllumination?.insertAdjacentHTML("afterend", tooltip);
+        darknessSlider?.insertAdjacentHTML("afterend", tooltip);
     });
 }
 
