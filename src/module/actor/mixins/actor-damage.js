@@ -239,6 +239,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
 
         if (multiplier < 0) {
             const heal = SFRPGDamage.createHeal(rolledAmount, SFRPGHealingSetting.defaultHealing);
+            heal.modifier = modifier || 0;
             return this._applyToSelectedActors(heal);
         } else {
             const damage = SFRPGDamage.createDamage(
@@ -344,7 +345,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
                 bFloorNext = !bFloorNext;
             }
         }
-        remainingUndealtDamage += damage.modifier;
+        remainingUndealtDamage += damage.modifier || 0;
 
         const originalTempHP = parseInt(actorData.attributes.hp.temp) || 0;
         const originalSP = actorData.attributes.sp.value;
