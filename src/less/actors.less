@@ -904,6 +904,16 @@
   .spellbook {
     .inventory-list {
       height: calc(100% - 50px);
+
+      .spellbook-header {
+        .item-name {
+            flex: 0 0 130px;
+            h3 {
+                cursor: default;
+            }
+        }
+      }
+
     }
   }
 
@@ -912,23 +922,22 @@
     display: inline-block;
     text-align: center;
     padding: 0 5px;
-    padding-top: 1px;
-    color: @colorFaint;
+    color: #e9e9e9;
     background: rgb(21, 92, 155);
     border: 1px solid transparent;
     border-radius: 8px;
+    font-weight: normal;
 
     input {
-      color: @colorFaint;
+      color: #e9e9e9;
     }
   }
 
   .spell-slots,
   .spell-comps {
-    flex: none;
     padding: 0 5px;
     font-size: 12px;
-    text-align: center;
+    text-align: right;
     color: @colorTan;
     border-right: 1px solid @colorFaint;
 
@@ -944,7 +953,7 @@
     padding-top: 1px;
     width: 16px;
     line-height: 14px;
-    color: #c9c7b8;
+    color: #fbfbf9;
     background: rgba(0, 0, 0, 0.4);
     border: 1px solid transparent;
     border-radius: 8px;
