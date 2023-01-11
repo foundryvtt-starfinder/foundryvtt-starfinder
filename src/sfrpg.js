@@ -6,33 +6,16 @@
  * Repository: https://github.com/wildj79/foundryvtt-starfinder
  * Issue Tracker: https://github.com/wildj79/foundryvtt-starfinder/issues
  */
-import { SFRPG } from "./module/config.js";
-import { preloadHandlebarsTemplates } from "./module/templates.js";
-import { registerSystemSettings } from "./module/settings.js";
-import { measureDistances, canvasHandlerV10 } from "./module/canvas.js";
+import { ActorItemHelper, initializeRemoteInventory } from "./module/actor/actor-inventory-utils.js";
 import { ActorSFRPG } from "./module/actor/actor.js";
-import { initializeRemoteInventory, ActorItemHelper } from "./module/actor/actor-inventory-utils.js";
+import { SFRPGDamage, SFRPGHealingSetting } from "./module/actor/mixins/actor-damage.js";
+import { ActorSheetSFRPG } from "./module/actor/sheet/base.js";
 import { ActorSheetSFRPGCharacter } from "./module/actor/sheet/character.js";
 import { ActorSheetSFRPGDrone } from "./module/actor/sheet/drone.js";
 import { ActorSheetSFRPGHazard } from "./module/actor/sheet/hazard.js";
 import { ActorSheetSFRPGNPC } from "./module/actor/sheet/npc.js";
 import { ActorSheetSFRPGStarship } from "./module/actor/sheet/starship.js";
 import { ActorSheetSFRPGVehicle } from "./module/actor/sheet/vehicle.js";
-import { ActorSheetSFRPG } from "./module/actor/sheet/base.js";
-import { ItemSFRPG } from "./module/item/item.js";
-import { CombatSFRPG } from "./module/combat/combat.js";
-import { ItemSheetSFRPG } from "./module/item/sheet.js";
-import { addChatMessageContextOptions } from "./module/combat.js";
-import Engine from "./module/engine/engine.js";
-import registerSystemRules from "./module/rules.js";
-import { SFRPGModifierTypes, SFRPGModifierType, SFRPGEffectType } from "./module/modifiers/types.js";
-import SFRPGModifier from "./module/modifiers/modifier.js";
-import { generateUUID } from "./module/utilities.js";
-import migrateWorld from './module/migration.js';
-import CounterManagement from "./module/classes/counter-management.js";
-import templateOverrides from "./module/template-overrides.js";
-import { RPC } from "./module/rpc.js";
-import { DiceSFRPG } from './module/dice.js';
 import { ActorSheetFlags } from './module/apps/actor-flags.js';
 import { ChoiceDialog } from './module/apps/choice-dialog.js';
 import { DroneRepairDialog } from './module/apps/drone-repair-dialog.js';
@@ -46,18 +29,36 @@ import { NpcSkillToggleDialog } from './module/apps/npc-skill-toggle-dialog.js';
 import { ShortRestDialog } from './module/apps/short-rest.js';
 import { SpellCastDialog } from './module/apps/spell-cast-dialog.js';
 import { TraitSelectorSFRPG } from './module/apps/trait-selector.js';
-import { SFRPGHealingSetting, SFRPGDamage } from "./module/actor/mixins/actor-damage.js";
+import { canvasHandlerV10, measureDistances } from "./module/canvas.js";
+import CounterManagement from "./module/classes/counter-management.js";
+import { addChatMessageContextOptions } from "./module/combat.js";
+import { CombatSFRPG } from "./module/combat/combat.js";
+import { SFRPG } from "./module/config.js";
+import { DiceSFRPG } from './module/dice.js';
+import Engine from "./module/engine/engine.js";
+import { ItemSFRPG } from "./module/item/item.js";
+import { ItemSheetSFRPG } from "./module/item/sheet.js";
+import migrateWorld from './module/migration.js';
+import SFRPGModifier from "./module/modifiers/modifier.js";
+import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./module/modifiers/types.js";
+import { RPC } from "./module/rpc.js";
+import registerSystemRules from "./module/rules.js";
+import { registerSystemSettings } from "./module/settings.js";
+import templateOverrides from "./module/template-overrides.js";
+import { preloadHandlebarsTemplates } from "./module/templates.js";
+import { generateUUID } from "./module/utilities.js";
 
+import RollDialog from "./module/apps/roll-dialog.js";
+import setupEnrichers from "./module/enrichers.js";
 import { initializeBrowsers } from "./module/packs/browsers.js";
 import SFRPGRoll from "./module/rolls/roll.js";
-import SFRPGTokenDocument from "./module/token/tokendocument.js";
-import RollDialog from "./module/apps/roll-dialog.js";
-import RollNode from "./module/rolls/rollnode.js";
 import RollContext from "./module/rolls/rollcontext.js";
+import RollNode from "./module/rolls/rollnode.js";
 import RollTree from "./module/rolls/rolltree.js";
 import { SFRPGTokenHUD } from "./module/token/token-hud.js";
-import setupVision from "./module/vision.js";
+import SFRPGTokenDocument from "./module/token/tokendocument.js";
 import registerCompendiumArt from "./module/utils/compendium-art.js";
+import setupVision from "./module/vision.js";
 
 let initTime = null;
 
@@ -368,6 +369,9 @@ Hooks.once("ready", async () => {
 
     console.log("Starfinder | [SETUP] Setting up Vision Modes");
     setupVision();
+
+    console.log("Starfinder | [SETUP] Setting up Vision Modes");
+    setupEnrichers();
 
     console.log("Starfinder | [READY] Applying artwork from modules to compendiums");
     registerCompendiumArt();
