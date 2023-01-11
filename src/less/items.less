@@ -44,7 +44,7 @@
     // Item Summary
     .summary {
       border-bottom: @borderGroove;
-      
+
       li.short {
         flex: 1;
         padding-left: 5px;
@@ -82,18 +82,18 @@
             max-width: 80%;
             font-size: 16px;
           }
-          
+
           span {
             font-size: 20px;
           }
-  
+
           span.sep {
             display: inline;
             position: relative;
             font-size: 16px;
             color: @colorTan;
           }
-  
+
           &.multiple {
             input { max-width: 33%; }
           }
@@ -120,7 +120,7 @@
 
     .item-properties {
       height: 100%;
-      
+
       flex: 0 0 120px;
       margin: 5px 5px 5px 0;
       padding-right: 5px;
@@ -340,7 +340,7 @@
   .visualization-control {
     width: 18px;
     flex: 0 0 18px;
-    float: right;    
+    float: right;
   }
 
   .ability-adjustments-control {
@@ -397,7 +397,7 @@
         }
 
         .item-image {
-            flex: 0 0 45px;
+            flex: 0 0 25px;
             margin-right: 5px;
             background-size: contain;
             background-position: center;
@@ -418,7 +418,9 @@
 
         .item-action {
           flex: 0 0 15%;
-  
+          flex-direction: row;
+          padding: 1px 0;
+
           .attack {
             width: auto;
             background: @sfrpgBlue;
@@ -429,14 +431,14 @@
               box-shadow: 0 0 5px @sfrpgBlue;
             }
           }
-  
+
           .damage {
             width: auto;
             background: @sfrpgRed;
             color: #fff;
             cursor: pointer;
           }
-  
+
           .healing {
             width: auto;
             background: @sfrpgGreen;
@@ -449,7 +451,7 @@
           }
         }
       }
-      
+
       // Item Dropdown Properties
       .item-properties {
         margin-top: 3px;
@@ -496,7 +498,7 @@
       color: @colorTan;
       text-align: center;
       border-right: 1px solid @colorFaint;
-      &:last-child { border-right: none; }      
+      &:last-child { border-right: none; }
     }
 
     .item-weight {
@@ -514,7 +516,7 @@
     // Item Control Buttons
     .item-controls {
       flex: 0 0 68px;
-      
+
       .flexrow();
       justify-content: flex-end;
 
