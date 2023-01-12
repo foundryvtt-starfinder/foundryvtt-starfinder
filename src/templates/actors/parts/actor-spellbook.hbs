@@ -86,7 +86,7 @@
                 <span class="spell-component" data-tippy-content="<strong>{{ localize "SFRPG.Items.Spell.Concentration" }}</strong><br>{{ localize "SFRPG.Items.Spell.ConcentrationTooltip" }}">C</span>
                 {{/if}}
             </div>
-            <div class="spell-dc" data-tippy-content="<strong>{{labels.save}}</strong><br/><br/>{{labels.saveFormula.formula}}">{{labels.save}}</div>
+            <div class="spell-dc" {{#if labels.save}}data-tippy-content="<strong>{{labels.save}}</strong><br/><br/>{{labels.saveFormula.formula}}"{{/if}}>{{labels.save}}</div>
             <div class="spell-action">{{labels.activation}}</div>
 
             {{#if ../../isOwner}}
