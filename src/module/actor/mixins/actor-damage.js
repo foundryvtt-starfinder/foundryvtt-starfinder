@@ -1,4 +1,3 @@
-import { SFRPG } from "../../config.js";
 import { ChoiceDialog } from "../../apps/choice-dialog.js";
 
 export class SFRPGHealingSetting {
@@ -178,6 +177,37 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         const diceRollElement = html.find('.sfrpg.dice-roll');
         const diceTotal = diceRollElement.data("sfrpgDiceTotal");
 
+        const shiftKey = game.keyboard.downKeys.has("ShiftLeft") || game.keyboard.downKeys.has("ShiftRight");
+        let modifier = 0;
+
+        // Allow for modification of damage if shift key is held while context button is clicked
+        if (shiftKey) {
+            // Clicking the close button throws an error, so catch it if it does
+            try {
+                await Dialog.wait({
+                    title: `${game.i18n.localize("SFRPG.ChatCard.ContextMenu.ModifyDamage")}`,
+                    content: `
+                        <p>${game.i18n.localize("SFRPG.ChatCard.ContextMenu.ModifyDamageText")}</p>
+                        <input type="number" id="modifier" placeholder=0 autofocus />
+                    `,
+                    default: "yes",
+                    buttons: {
+                        yes: {
+                            icon: "<i class='fas fa-check'></i>",
+                            label: `${game.i18n.localize("SFRPG.ChatCard.ContextMenu.Accept")}`,
+                            callback: (html) => {
+                                modifier = parseInt(html[0].querySelector("#modifier").value) || 0;
+                                if (!modifier) ui.notifications.warn(game.i18n.localize("SFRPG.ChatCard.ContextMenu.NoDamageModifier"));
+                            }
+                        }
+                    }
+                });
+            } catch {
+                ui.notifications.warn(game.i18n.localize("SFRPG.ChatCard.ContextMenu.NoDamageModifier"));
+            }
+
+        }
+
         let rolledAmount = Math.floor((diceTotal ?? Math.floor(parseFloat(html.find('.dice-total').text()))));
         const isCritical = diceRollElement.data("sfrpgIsCritical") || false;
         const properties = [];
@@ -209,6 +239,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
 
         if (multiplier < 0) {
             const heal = SFRPGDamage.createHeal(rolledAmount, SFRPGHealingSetting.defaultHealing);
+            heal.modifier = modifier || 0;
             return this._applyToSelectedActors(heal);
         } else {
             const damage = SFRPGDamage.createDamage(
@@ -219,6 +250,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
             );
 
             damage.multiplier = multiplier;
+            damage.modifier = modifier || 0;
 
             return this._applyToSelectedActors(damage);
         }
@@ -313,6 +345,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
                 bFloorNext = !bFloorNext;
             }
         }
+        remainingUndealtDamage += damage.modifier || 0;
 
         const originalTempHP = parseInt(actorData.attributes.hp.temp) || 0;
         const originalSP = actorData.attributes.sp.value;
@@ -508,7 +541,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         let actorUpdate = {};
         const newData = duplicate(originalData);
 
-        let remainingUndealtDamage = damage.amount;
+        let remainingUndealtDamage = damage.amount + damage.modifier;
 
         if (remainingUndealtDamage % 1 !== 0) {
             const damageRoundingAdvantage = game.settings.get("sfrpg", "damageRoundingAdvantage");
