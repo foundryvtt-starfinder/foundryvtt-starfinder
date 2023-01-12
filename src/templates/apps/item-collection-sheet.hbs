@@ -45,7 +45,6 @@
 
             <ol class="item-list">
             {{#each items as |item iid|}}
-            {{ log this }}
                 {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.hbs" ../this bigItem=true item=item.item children=item.contents disableRolling=true disableEquipping=true}}
             {{/each}}
             </ol>
