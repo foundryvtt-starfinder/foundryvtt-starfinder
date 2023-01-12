@@ -1,8 +1,8 @@
 import { SFRPG } from "../config.js";
 import { RPC } from "../rpc.js";
 
-import { value_equals } from "../utils/value_equals.js";
 import { generateUUID } from "../utilities.js";
+import { value_equals } from "../utils/value_equals.js";
 
 export function initializeRemoteInventory() {
     RPC.registerCallback("createItemCollection", "gm", onCreateItemCollection);
@@ -626,8 +626,7 @@ async function onItemDraggedToCollection(message) {
         const sourceItemData = data.draggedItemData;
         if (source !== null && sourceItemData.system.container?.contents && sourceItemData.system.container.contents.length > 0) {
             const containersToTest = [sourceItemData];
-            while (containersToTest.length > 0)
-            {
+            while (containersToTest.length > 0) {
                 const container = containersToTest.shift();
                 const children = source.filterItems(x => container.system.container.contents.find(y => y.id === x.id));
                 if (children) {
@@ -804,6 +803,10 @@ export class ActorItemHelper {
         this.actorId = actorId;
         this.tokenId = tokenId;
         this.sceneId = sceneId;
+
+        if (options.actor) {
+            this.actor = options.actor;
+        }
 
         if (tokenId) {
             this.token = canvas.tokens?.placeables.find(x => x.id === tokenId);

@@ -43,7 +43,7 @@
             {{/if}}
         </div>
 
-        <div class="spell-school">{{localize "SFRPG.SpellBook.SpellSchool"}}</div>
+        <div class="spell-dc">{{localize "SFRPG.ActionSave"}}</div>
         <div class="spell-action">{{localize "SFRPG.SpellBook.SpellUsage"}}</div>
 
         <div class="item-controls item-controls-browser">
@@ -72,7 +72,6 @@
                                 <div class="item-detail spell-uses">{{localize "SFRPG.SpellBook.Uses"}} {{item.system.uses.value}} / {{item.system.uses.max}}</div>
                             {{/if}}
                         </div>
-                        <div style="flex: 1; line-height: 15px;" data-tippy-content="<strong>{{labels.save}}</strong><br/><br/>{{labels.saveFormula.formula}}">{{labels.save}}</div>
                     </div>
                 {{else}}
                     <h4>{{item.name}}</h4>
@@ -87,7 +86,7 @@
                 <span class="spell-component" data-tippy-content="<strong>{{ localize "SFRPG.Items.Spell.Concentration" }}</strong><br>{{ localize "SFRPG.Items.Spell.ConcentrationTooltip" }}">C</span>
                 {{/if}}
             </div>
-            <div class="spell-school">{{localize labels.school}}</div>
+            <div class="spell-dc" {{#if labels.save}}data-tippy-content="<strong>{{labels.save}}</strong><br/><br/>{{labels.saveFormula.formula}}"{{/if}}>{{labels.save}}</div>
             <div class="spell-action">{{labels.activation}}</div>
 
             {{#if ../../isOwner}}

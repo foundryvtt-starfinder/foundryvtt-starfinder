@@ -61,43 +61,14 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         return data;
     }
 
-    /** @override */
-    render(force, context = {}) {
-        /** Clear out deleted item sheets. */
-        const keysToDelete = [];
-        for (const [appId, app] of Object.entries(this.apps)) {
-            if (app instanceof ItemSheetSFRPG) {
-                const item = app.object;
-                if (!this.items.find(x => x.id === item.id)) {
-                    keysToDelete.push(appId);
-                }
-            }
-        }
-        if (keysToDelete.length > 0) {
-            for (const key of keysToDelete) {
-                delete this.apps[key];
-            }
-        }
-
-        /** Now render this actor. */
-        return super.render(force, context);
-    }
-
     /**
      * Augment the basic actor data with additional dynamic data.
      *
      * @param {Object} actorData The data for the actor
      * @returns {Promise} A promise for the automation process triggered at the end.
      */
-    prepareBaseData() {
-        super.prepareBaseData();
-
-        // Populate objects we strip out in cook/unpack
-        if (this.system.conditions) {
-            for (const condition of Object.keys(CONFIG.SFRPG.conditions)) {
-                this.system.conditions[condition] ??= false;
-            }
-        }
+    prepareData() {
+        super.prepareData();
 
         this._ensureHasModifiers(this.system);
         const modifiers = this.getAllModifiers();
@@ -136,8 +107,35 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             frames,
             actorResources
         });
-
     }
+
+    /** @override */
+    render(force, context = {}) {
+        /** Clear out deleted item sheets. */
+        const keysToDelete = [];
+        for (const [appId, app] of Object.entries(this.apps)) {
+            if (app instanceof ItemSheetSFRPG) {
+                const item = app.object;
+                if (!this.items.find(x => x.id === item.id)) {
+                    keysToDelete.push(appId);
+                }
+            }
+        }
+        if (keysToDelete.length > 0) {
+            for (const key of keysToDelete) {
+                delete this.apps[key];
+            }
+        }
+
+        /** Now render this actor. */
+        return super.render(force, context);
+    }
+
+    /**
+     * TODO: Use these two methods to properly setup actor data for use
+     * in the new Active Effects API.
+     */
+    prepareBaseData() { super.prepareBaseData(); }
     prepareDerivedData() { super.prepareDerivedData(); }
 
     /**
@@ -188,7 +186,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         return super.createEmbeddedDocuments(embeddedName, itemData, options);
     }
 
-    /*
+    /**
      * Extend preCreate to apply some defaults to newly created characters
      * See the base Actor class for API documentation of this method
      *
@@ -220,16 +218,16 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         return super._preCreate(data, options, user);
     }
 
-    /*
+    /**
      * Extend preUpdate to clamp certain PC changes
      * See the base Actor class for API documentation of this method
      *
      * Pre-update operations only occur for the client which requested the operation.
+     *
      * @param {object} changed            The differential data that is changed relative to the documents prior values
      * @param {object} options            Additional options which modify the update request
      * @param {documents.BaseUser} user   The User requesting the document update
      */
-
     async _preUpdate(changed, options, user) {
 
         // Clamp HP/SP/RP values to 0 and their max
@@ -982,9 +980,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     }
 
     /** -------------------
-    *
     * Floating HP functions
-    *
     ---------------------- */
 
     /** Calculate deltas in the pre-method in order to access the old value.
