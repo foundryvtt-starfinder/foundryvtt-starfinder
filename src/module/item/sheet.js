@@ -230,8 +230,8 @@ export class ItemSheetSFRPG extends ItemSheet {
                     .replace(/^./, (str) => {
                         return str.toUpperCase();
                     })
-            }
-        )`;
+
+            })`;
         } else if (item.type === "vehicleSystem") {
             // Only systems which can be activated have an activation status
             if (this.document.canBeActivated() === false) {
