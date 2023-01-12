@@ -1,5 +1,4 @@
 import { SFRPG } from "../config.js";
-import { RPC } from "../rpc.js";
 
 const itemSizeArmorClassModifier = {
     "fine": 8,
@@ -225,9 +224,15 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         if (["weapon", "equipment", "shield"].includes(item.type)) return itemData.equipped ? "Equipped" : "Unequipped";
         else if (item.type === "starshipWeapon") return itemData.mount.mounted ? "Mounted" : "Not Mounted";
-        else if (item.type === "augmentation") return `${itemData.type} (${itemData.system})`;
-        else if (item.type === "vehicleSystem")
-        {
+        else if (item.type === "augmentation") {
+            return `${itemData.type.capitalize()} (${
+                itemData.system.replace(/([A-Z])/g, ' $1')
+                    .replace(/^./, (str) => {
+                        return str.toUpperCase();
+                    })
+            })
+        `;
+        } else if (item.type === "vehicleSystem") {
             // Only systems which can be activated have an activation status
             if (this.document.canBeActivated() === false) {
                 return "";
@@ -324,18 +329,15 @@ export class ItemSheetSFRPG extends ItemSheet {
                 name: game.i18n.format("SFRPG.Items.Shield.ShieldBonus", { wielded: wieldedBonus.signedString(), aligned: alignedBonus.signedString() }),
                 tooltip: null
             });
-        }
-        else if (item.type === "vehicleAttack") {
+        } else if (item.type === "vehicleAttack") {
             if (item.ignoresHardness && item.ignoresHardness > 0) {
                 props.push(game.i18n.localize("SFRPG.VehicleAttackSheet.Details.IgnoresHardness") + " " + item.ignoresHardness);
             }
-        }
-        else if (item.type === "vehicleSystem") {
+        } else if (item.type === "vehicleSystem") {
             if (item.senses &&  item.senses.usedForSenses == true) {
                 // We deliminate the senses by `,` and present each sense as a separate property
                 let sensesDeliminated = item.senses.senses.split(",");
-                for (let index = 0; index < sensesDeliminated.length; index++)
-                {
+                for (let index = 0; index < sensesDeliminated.length; index++) {
                     let sense = sensesDeliminated[index];
                     props.push(sense);
                 }
