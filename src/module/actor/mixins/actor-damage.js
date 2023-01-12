@@ -188,7 +188,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
                     title: `${game.i18n.localize("SFRPG.ChatCard.ContextMenu.ModifyDamage")}`,
                     content: `
                         <p>${game.i18n.localize("SFRPG.ChatCard.ContextMenu.ModifyDamageText")}</p>
-                        <input type="number" id="modifier" placeholder=0 />
+                        <input type="number" id="modifier" placeholder=0 autofocus />
                     `,
                     default: "yes",
                     buttons: {
