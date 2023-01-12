@@ -37,7 +37,7 @@
                     <input type="text" name="system.spells.spell{{section.level}}.max" value="{{section.slots}}" placeholder="0"/>
                 {{/if}}
             {{ else }}
-                <span class="spell-slots">{{{section.uses}}}</span>
+                <span>{{{section.uses}}}</span>
                 <span class="sep"> / </span>
                 <span class="spell-max">{{{section.slots}}}</span>
             {{/if}}
@@ -66,7 +66,7 @@
                 <div class="item-image" style="background-image: url({{item.img}})"></div>
                 {{#if labels.save}}
                     <div class="flexcol">
-                        <div class="flexrow" style="flex: 1; line-height: 20px;">
+                        <div class="flexrow">
                             <h4>{{item.name}}</h4>
                             {{#if item.system.uses.max }}
                                 <div class="item-detail spell-uses">{{localize "SFRPG.SpellBook.Uses"}} {{item.system.uses.value}} / {{item.system.uses.max}}</div>

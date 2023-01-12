@@ -35,15 +35,17 @@
         <ol class="inventory-list">
             <li class="inventory-header flexrow">
                 <h3 class="item-name noborder flexrow">Items</h3>
-        
+
                 <div class="item-detail item-weight">{{localize "SFRPG.InventoryBulk"}}</div>
-        
+
                 <div class="item-detail item-uses">{{localize "SFRPG.InventoryCapacity"}}</div>
                 <div class="item-detail item-action">{{localize "SFRPG.InventoryUsage"}}</div>
+                <div class="item-controls"></div>
             </li>
-        
+
             <ol class="item-list">
             {{#each items as |item iid|}}
+            {{ log this }}
                 {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.hbs" ../this bigItem=true item=item.item children=item.contents disableRolling=true disableEquipping=true}}
             {{/each}}
             </ol>
