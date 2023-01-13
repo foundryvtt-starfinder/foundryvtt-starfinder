@@ -1,5 +1,5 @@
-import { ActorSheetSFRPG } from "./base.js";
 import { SFRPG } from "../../config.js";
+import { ActorSheetSFRPG } from "./base.js";
 
 export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
     constructor(...args) {
@@ -68,19 +68,20 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         let cargoLabel = game.i18n.format("SFRPG.DroneSheet.Inventory.CarriedItems");
 
         const inventory = {
-            weapon: { label: weaponLabel, items: [], dataset: { type: "weapon" } },
+            weapon: { label: weaponLabel, items: [], dataset: { type: "weapon" }, allowAdd: true },
             ammunition: { label: game.i18n.format(SFRPG.itemTypes["ammunition"]), items: [], dataset: { type: "ammunition" }, allowAdd: true },
-            upgrade: { label: armorUpgradesLabel, items: [], dataset: { type: "upgrade" } },
+            upgrade: { label: armorUpgradesLabel, items: [], dataset: { type: "upgrade" }, allowAdd: true },
             cargo: { label: cargoLabel, items: [], dataset: { type: "goods" } }
         };
 
-        //   0      1      2        3     4               5
-        let [items,
-            feats,
-            chassis,
-            mods,
-            conditionItems,
-            actorResources] = data.items.reduce((arr, item) => {
+        let [
+            items, // 0
+            feats, // 1
+            chassis, // 2
+            mods, // 3
+            conditionItems, // 4
+            actorResources // 5
+        ] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
 
             item.config = {
@@ -109,8 +110,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
                     arr[1].push(item); // feats
                 }
                 item.isFeat = true;
-            }
-            else if (item.type === "chassis") arr[2].push(item); // chassis
+            } else if (item.type === "chassis") arr[2].push(item); // chassis
             else if (item.type === "mod") arr[3].push(item); // mods
             else if (item.type === "actorResource") arr[5].push(item); // actorResources
             else arr[0].push(item); // items

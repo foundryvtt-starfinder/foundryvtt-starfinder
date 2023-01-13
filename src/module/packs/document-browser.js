@@ -1,7 +1,6 @@
 /**
  * DocumentBrowserSFRPG forked from ItemBrowserPF2e by Felix Miller aka syl3r86
  */
-import { ItemSFRPG } from '../item/item.js';
 import { packLoader } from './pack-loader.js';
 
 export class DocumentBrowserSFRPG extends Application {

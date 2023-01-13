@@ -46,10 +46,11 @@ export class PackLoader {
                             "system.weaponType",
                             "system.armor",
                             "system.school",
+                            "system.type",
                             "system.allowedClasses"
                         );
                     }
-                    const content = await pack.getIndex({"fields": fields });
+                    const content = await pack.getIndex({ "fields": fields });
                     this.setCompendiumArt(pack.collection, content);
                     data = this.loadedPacks[entityType][packId] = {
                         pack,

@@ -403,38 +403,15 @@ function sanitizeJSON(jsonInput) {
         }
     };
 
-    const cleanFalseKeys = (item) => {
-        const objectsToClean = ["conditions", "properties", "special", "descriptors", "specialMaterials"];
-        objectsToClean.forEach((i, index) => {
-            if (!item.system) return;
-            let object = item.system[i];
-            if (!object) return;
-            Object.keys(object).forEach(key => {
-                if (object[key] === false) {
-                    delete object[key];
-                }
-            });
-        });
-    };
-
     treeShake(jsonInput);
     cleanFlags(jsonInput);
     sanitizeDescription(jsonInput);
-    cleanFalseKeys(jsonInput);
-
-    if (jsonInput.system?.descriptors instanceof Array) {
-        delete jsonInput.system?.descriptors;
-    }
 
     if (jsonInput.items) {
         for (let item of jsonInput.items) {
             treeShake(item);
             cleanFlags(item);
             sanitizeDescription(item);
-            cleanFalseKeys(item);
-            if (item.system?.descriptors instanceof Array) {
-                delete item.system?.descriptors;
-            }
         }
     }
 

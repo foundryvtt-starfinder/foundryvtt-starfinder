@@ -1,14 +1,14 @@
-import { TraitSelectorSFRPG } from "../../apps/trait-selector.js";
 import { ActorSheetFlags } from "../../apps/actor-flags.js";
 import { ActorMovementConfig } from "../../apps/movement-config.js";
-import { getSpellBrowser } from "../../packs/spell-browser.js";
+import { TraitSelectorSFRPG } from "../../apps/trait-selector.js";
 import { getEquipmentBrowser } from "../../packs/equipment-browser.js";
+import { getSpellBrowser } from "../../packs/spell-browser.js";
 
-import { moveItemBetweenActorsAsync, getFirstAcceptableStorageIndex, ActorItemHelper, containsItems } from "../actor-inventory-utils.js";
 import { RPC } from "../../rpc.js";
+import { ActorItemHelper, containsItems, getFirstAcceptableStorageIndex, moveItemBetweenActorsAsync } from "../actor-inventory-utils.js";
 
-import { ItemDeletionDialog } from "../../apps/item-deletion-dialog.js";
 import { InputDialog } from "../../apps/input-dialog.js";
+import { ItemDeletionDialog } from "../../apps/item-deletion-dialog.js";
 import { SFRPG } from "../../config.js";
 
 import { ItemSFRPG } from "../../item/item.js";
@@ -598,6 +598,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         case 'container':
         case 'technological,magic,hybrid':
         case 'fusion,upgrade,weaponAccessory':
+        case 'upgrade':
         case 'augmentation':
             browser = getEquipmentBrowser();
             activeFilters.equipmentTypes = filterType.split(',');
