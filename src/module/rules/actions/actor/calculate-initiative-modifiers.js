@@ -7,21 +7,13 @@ export default function(engine) {
         const modifiers = fact.modifiers;
 
         const addModifier = (bonus, data, item, localizationKey) => {
-            if (bonus.modifierType === SFRPGModifierType.FORMULA) {
-                if (item.rolledMods) {
-                    item.rolledMods.push({mod: bonus.modifier, bonus: bonus});
-                } else {
-                    item.rolledMods = [{mod: bonus.modifier, bonus: bonus}];
-                }
-
-                return 0;
+            if (item.calculatedMods) {
+                item.calculatedMods.push({mod: bonus.modifier, bonus: bonus});
+            } else {
+                item.calculatedMods = [{mod: bonus.modifier, bonus: bonus}];
             }
 
-            let computedBonus = 0;
-            try {
-                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
-                computedBonus = roll.total;
-            } catch {}
+            let computedBonus = bonus.max || 0;
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
@@ -38,7 +30,16 @@ export default function(engine) {
             return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.INITIATIVE].includes(mod.effectType);
         });
 
-        const mods = context.parameters.stackModifiers.process(filteredMods, context);
+        const mods = context.parameters.stackModifiers.process(filteredMods.filter(mod => {
+            if (mod.modifierType === SFRPGModifierType.FORMULA) {
+                if (init.rolledMods) {
+                    init.rolledMods.push({mod: mod.modifier, bonus: mod});
+                } else {
+                    init.rolledMods = [{mod: mod.modifier, bonus: mod}];
+                }
+                return false;
+            }
+        }), context);
 
         const mod = Object.entries(mods).reduce((prev, curr) => {
             if (curr[1] === null || curr[1].length < 1) return prev;

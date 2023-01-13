@@ -8,6 +8,8 @@ export default class StackModifiers extends Closure {
     /**
      * @override
      *
+     * Note: do not put Situational Modifiers in here. (modifiers that have dices inside the formula)
+     *
      * @param {Array}   modifiers The modifiers to stack.
      * @param {Context} context   The context for this closure.
      *
@@ -16,36 +18,40 @@ export default class StackModifiers extends Closure {
      */
     process(mods, context) {
         const modifiers = mods;
-        if (modifiers.length > 0) {
-            for (let modifiersI = 0; modifiersI < modifiers.length; modifiersI++) {
-                const modifier = modifiers[modifiersI];
-                const actor = game.actors.get(modifier.container.actorId);
-                const formula = modifier.modifier;
+        for (let modifiersI = 0; modifiersI < modifiers.length; modifiersI++) {
+            const modifier = modifiers[modifiersI];
+            const actor = game.actors.get(modifier.container.actorId);
+            const formula = modifier.modifier;
 
-                if (formula && actor) {
-                    try {
-                        const roll = Roll.create(formula, actor.system);
-                        if (roll.isDeterministic) {
-                            const simplerFormula = Roll.replaceFormulaData(formula, actor.system, {missing:0, warn:true});
-                            modifier.max = Roll.safeEval(simplerFormula);
-                        } else {
-                            ui.notifications.warn(`Problem with modifier: ${modifier.name}. Bro please... do not put dice formula into constant modifiers. This is not how they work.`
-                            + `\nWhat would you do with that anyway? Have it recalculated every time the actor is updated?`);
-                            modifier.max = 0;
-                        }
-                    } catch (error) {
-                        console.warn(`Could not calculate modifier: ${modifier.name} for actor with ID: ${modifier.container.actorId}. Setting to zero. Error: ${error}`);
+            if (formula && actor) {
+                try {
+                    const roll = Roll.create(formula, actor.system);
+                    if (roll.isDeterministic) {
+                        const simplerFormula = Roll.replaceFormulaData(formula, actor.system, {missing:0, warn:true});
+                        modifier.max = Roll.safeEval(simplerFormula);
+                    } else {
+                        ui.notifications.warn(`Problem with modifier: ${modifier.name}. Bro please... do not put dice formula into constant modifiers. This is not how they work.`
+                        + `\nWhat would you do with that anyway? Have it recalculated every time the actor is updated?`);
                         modifier.max = 0;
                     }
-                } else {
+                } catch (error) {
+                    console.warn(`Could not calculate modifier: ${modifier.name} for actor with ID: ${modifier.container.actorId}. Setting to zero. Error: ${error}`);
                     modifier.max = 0;
                 }
+            } else {
+                modifier.max = 0;
             }
         }
         return this._process(modifiers);
     }
 
-    async processSituationalMods(mods, context) {
+    /**
+     * In difference to normal "process" "processAsync" can calculate with dices and so it is allowed to take situational modifiers.
+     * @param {Array} mods modifiers The modifiers to stack.
+     * @param {Context} context The context for this closure.
+     * @returns @returns {Object} An object containing only those modifiers allowed based on the stacking rules.
+     */
+    async processAsync(mods, context) {
         const modifiers = mods;
         if (modifiers.length > 0) {
             for (let modifiersI = 0; modifiersI < modifiers.length; modifiersI++) {

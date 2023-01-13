@@ -39,8 +39,7 @@ export default class RollNode {
                 }
                 this.childNodes[modKey] = existingNode;
             }
-        }
-        else {
+        } else {
             const variableMatches = new Set(this.formula.match(/@([a-zA-Z.0-9_\-]+)/g));
             for (const fullVariable of variableMatches) {
                 const variable = fullVariable.substring(1);
@@ -195,10 +194,12 @@ export default class RollNode {
 
         if (this.baseValue) {
             if (this.baseValue !== "n/a") {
+                // TODO: find another way to do this, or find the correct spot for this as this will result in bugs.
                 const constantMods = rollMods.filter(mod => mod.modifierType === SFRPGModifierType.CONSTANT);
                 const modSum = constantMods.reduce((accumulator, value) => accumulator + value.max, 0);
                 this.baseValue = (Number(this.baseValue) - modSum).toString();
-                const joinedTooltips = this.rollTooltips.join(',\n');
+
+                const joinedTooltips = this.rollTooltips ? this.rollTooltips.join(',\n') : this.variableTooltips.join(',\n');
 
                 this.resolvedValue.finalRoll = this.baseValue;
                 this.resolvedValue.formula = this.baseValue + "[";

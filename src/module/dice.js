@@ -1,5 +1,6 @@
 import SFRPGCustomChatMessage from "./chat/chatbox.js";
 import { SFRPG } from "./config.js";
+import { SFRPGModifierType } from "./modifiers/types.js";
 import RollContext from "./rolls/rollcontext.js";
 import RollTree from "./rolls/rolltree.js";
 import StackModifiers from "./rules/closures/stack-modifiers.js";
@@ -229,7 +230,7 @@ export class DiceSFRPG {
             }
 
             let stackModifiers = new StackModifiers();
-            const stackedMods = await stackModifiers.processSituationalMods(rollMods.filter(mod => {
+            const stackedMods = await stackModifiers.processAsync(rollMods.filter(mod => {
                 if (mod.enabled) return true;
             }), this.contexts);
 
@@ -244,7 +245,7 @@ export class DiceSFRPG {
                 if (stackModifier instanceof Array) {
                     for (let stackModifierI = 0; stackModifierI < stackModifier.length; stackModifierI++) {
                         const modifier = stackModifier[stackModifierI];
-                        rootNode = this._removeModifierNodes(rootNode, stackModifier);
+                        rootNode = this._removeModifierNodes(rootNode, modifier);
                         rollString += `${modifier.max.toString()}+`;
                         // TODO:
                         /*
