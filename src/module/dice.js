@@ -213,7 +213,7 @@ export class DiceSFRPG {
         const formula = parts.map(partMapper).join(" + ");
 
         const tree = new RollTree(options);
-        return tree.buildRoll(formula, rollContext, async (button, rollMode, unusedFinalFormula, node, rollMods, bonus) => {
+        return tree.buildRoll(formula, rollContext, async (button, rollMode, unusedFinalFormula, node, rollMods, bonus = null) => {
             if (button === "cancel") {
                 if (onClose) {
                     onClose(null, null, null);
@@ -231,7 +231,10 @@ export class DiceSFRPG {
 
             let stackModifiers = new StackModifiers();
             const stackedMods = await stackModifiers.processAsync(rollMods.filter(mod => {
-                if (mod.enabled) return true;
+                if (mod.enabled) {
+                    rootNode = this._removeModifierNodes(rootNode, mod);
+                    return true;
+                }
             }), this.contexts);
 
             let rollString = '';
@@ -245,7 +248,6 @@ export class DiceSFRPG {
                 if (stackModifier instanceof Array) {
                     for (let stackModifierI = 0; stackModifierI < stackModifier.length; stackModifierI++) {
                         const modifier = stackModifier[stackModifierI];
-                        rootNode = this._removeModifierNodes(rootNode, modifier);
                         rollString += `${modifier.max.toString()}+`;
                         // TODO:
                         /*
@@ -256,7 +258,6 @@ export class DiceSFRPG {
                         formulaString += `${modifier.max.toString()}[<span>${modifier.name}</span>] + `;
                     }
                 } else {
-                    rootNode = this._removeModifierNodes(rootNode, stackModifier);
                     rollString += `${stackModifier.max.toString()}+`;
                     // TODO:
                     /*
@@ -270,7 +271,7 @@ export class DiceSFRPG {
 
             formulaString += bonus ? `${bonus.toString()}[<span>${game.i18n.localize("SFRPG.Rolls.Dialog.SituationalBonus")}</span>]` : '';
 
-            rollString += `${bonus}`;
+            rollString += bonus ? `${bonus}` : '';
             rollString = rollString.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
                 .trim();
             rollString = rollString.endsWith("+") ? rollString.substring(0, rollString.length - 1).trim() : rollString;
