@@ -137,7 +137,7 @@ async function copyFiles() {
 async function copyWatchFiles() {
     const name = 'sfrpg';
 
-    // Build static files first
+    // Don't minify on build:watch in order to give quickest build time.
     gulp.src([
         'src/lang/*.json',
         'src/templates/**/*.hbs',
@@ -145,34 +145,13 @@ async function copyWatchFiles() {
     ])
         .pipe(gulp.dest((file) => file.base.replace("\\src", "\\dist")));
 
-    // Then pipe in js files to be minified
     gulp.src('src/sfrpg.js')
-        .pipe(sourcemaps.init())
-        // Minify the JS
-        .pipe(terser({
-            ecma: 2016,
-            compress: {
-                module: true
-            }
-        }))
-        .pipe(sourcemaps.write('./maps'))
-        // Output
         .pipe(gulp.dest('dist'));
 
     return gulp.src([
         'src/module/**/*.js',
         'src/module/*.js'
     ])
-        .pipe(sourcemaps.init())
-        // Minify the JS
-        .pipe(terser({
-            ecma: 2016,
-            compress: {
-                module: true
-            }
-        }))
-        .pipe(sourcemaps.write('./maps'))
-        // Output
         .pipe(gulp.dest('dist/module'));
 }
 
