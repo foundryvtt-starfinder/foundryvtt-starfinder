@@ -145,7 +145,7 @@ async function copyWatchFiles() {
     ])
         .pipe(gulp.dest((file) => file.base.replace("\\src", "\\dist")));
 
-    gulp.src('src/sfrpg.js')
+    gulp.src(`src/${name}.js`)
         .pipe(gulp.dest('dist'));
 
     return gulp.src([
