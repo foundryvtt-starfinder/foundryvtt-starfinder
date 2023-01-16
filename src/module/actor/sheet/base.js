@@ -151,6 +151,10 @@ export class ActorSheetSFRPG extends ActorSheet {
             this._prepareTraits(data.system.traits);
         }
 
+        if (data.system.details.xp.pct) {
+            data.system.details.xp.color = Math.round((data.system.details.xp.pct / 100) * 255).toString(16);
+        }
+
         this._prepareItems(data);
 
         // Enrich text editors. The below are used for character, drone and npc(2). Other types use editors defined in their class.
