@@ -100,8 +100,7 @@ async function copyFiles() {
         .pipe(terser({
             ecma: 2016,
             compress: {
-                module: true,
-                passes: 2
+                module: true
             }
         }))
         .pipe(sourcemaps.write('./maps'))
@@ -117,8 +116,7 @@ async function copyFiles() {
         .pipe(terser({
             ecma: 2016,
             compress: {
-                module: true,
-                passes: 2
+                module: true
             }
         }))
         .pipe(sourcemaps.write('./maps'))
@@ -154,8 +152,7 @@ async function copyWatchFiles() {
         .pipe(terser({
             ecma: 2016,
             compress: {
-                module: true,
-                passes: 2
+                module: true
             }
         }))
         .pipe(sourcemaps.write('./maps'))
@@ -171,8 +168,7 @@ async function copyWatchFiles() {
         .pipe(terser({
             ecma: 2016,
             compress: {
-                module: true,
-                passes: 2
+                module: true
             }
         }))
         .pipe(sourcemaps.write('./maps'))
