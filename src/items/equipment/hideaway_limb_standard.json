@@ -5,9 +5,24 @@
   "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "cybernetic",
+    "ability": null,
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
+    "actionType": "",
+    "activation": {
+      "type": "",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "",
+      "value": 0
+    },
+    "attackBonus": 0,
     "attributes": {
       "ac": {
         "value": ""
@@ -27,25 +42,106 @@
       "sturdy": false
     },
     "attuned": false,
-    "bulk": "L",
+    "bulk": "-",
+    "chatFlavor": "",
+    "container": {
+      "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
+      "storage": [
+        {
+          "type": "bulk",
+          "acceptsType": [
+            "weapon",
+            "container",
+            "upgrade",
+            "hybrid",
+            "ammunition",
+            "equipment",
+            "magic",
+            "shield",
+            "consumable",
+            "technological",
+            "fusion",
+            "weaponAccessory",
+            "goods"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "",
+          "weightMultiplier": 1,
+          "weightProperty": ""
+        }
+      ]
+    },
     "critical": {
+      "effect": "",
       "parts": []
     },
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>This compartment is hidden inside one of your limbs. You can conceal items inside and protect them with a simple passcode. The compartment can hold items of negligible bulk and items of light bulk that are either relatively small or can be folded or contracted to fit. A hideaway in a leg (in a @UUID[Compendium.sfrpg.races.AMBcyDZDtJ1OOzh3]{Human}) can hold more than one in an arm, and the creature’s size also adjusts the capacity. The GM decides what can fit.</p>\n<p>When the compartment is closed, the seam in your flesh is difficult to detect. You gain a +2 bonus to Sleight of Hand checks to conceal items in a hideaway limb. Though this compartment can usually foil a simple pat down, most security checkpoints include a scan that can detect such devices. Retrieving an item from a hideaway limb is a move action instead of a standard action. This type of augmentation is for Small and Medium creatures only. Hideaway limbs for creatures larger than Medium typically cost more but can hold items of greater size or bulk.</p>\n<p>If you have a quickdraw hideaway limb, the compartment is integrated with a specific weapon. This allows you to draw the weapon as a swift action or as part of making an attack or full attack (similar to using the Quick Draw feat). A quickdraw hideaway limb works only if the limb is one you can normally aim and attack with, typically an arm. You can’t, for example, put a quickdraw hideaway limb in your leg and have the weapon spring into your hand.</p>\n<p>You can have a mount installed in a quickdraw limb that holds the weapon in place while you shoot. You still can’t use your hand for other purposes, but you gain a +2 bonus to KAC against disarm attempts. The mount can’t hold a weapon that requires more than one hand to operate. You can’t hide other objects inside a quickdraw hideaway limb—there’s room for only the weapon.</p>\n<p>Nothing stored in a hideaway limb is considered part of the cybernetic, and the stored item does not gain the cybernetic’s immunity to attacks affecting technological devices.</p>"
+      "value": "<p>This compartment is hidden inside one of your limbs. You can conceal items inside and protect them with a simple passcode. The compartment can hold items of negligible bulk and items of light bulk that are either relatively small or can be folded or contracted to fit. A hideaway in a leg (in a @UUID[Compendium.sfrpg.races.AMBcyDZDtJ1OOzh3]{Human}) can hold more than one in an arm, and the creature’s size also adjusts the capacity. The GM decides what can fit.</p>\n<p>When the compartment is closed, the seam in your flesh is difficult to detect. You gain a +2 bonus to Sleight of Hand checks to conceal items in a hideaway limb. Though this compartment can usually foil a simple pat down, most security checkpoints include a scan that can detect such devices. Retrieving an item from a hideaway limb is a move action instead of a standard action. This type of augmentation is for Small and Medium creatures only. Hideaway limbs for creatures larger than Medium typically cost more but can hold items of greater size or bulk.</p>\n<p>If you have a quickdraw hideaway limb, the compartment is integrated with a specific weapon. This allows you to draw the weapon as a swift action or as part of making an attack or full attack (similar to using the Quick Draw feat). A quickdraw hideaway limb works only if the limb is one you can normally aim and attack with, typically an arm. You can’t, for example, put a quickdraw hideaway limb in your leg and have the weapon spring into your hand.</p>\n<p>You can have a mount installed in a quickdraw limb that holds the weapon in place while you shoot. You still can’t use your hand for other purposes, but you gain a +2 bonus to KAC against @UUID[Compendium.sfrpg.rules.U37n5tY5hn1ctzQL.JournalEntryPage.R33uiOMesYP0ISWl#disarm]{disarm} attempts. The mount can’t hold a weapon that requires more than one hand to operate. You can’t hide other objects inside a quickdraw hideaway limb—there’s room for only the weapon.</p>\n<p>Nothing stored in a hideaway limb is considered part of the cybernetic, and the stored item does not gain the cybernetic’s immunity to attacks affecting technological devices.</p>\n<p><em>Change system in the details tab to use Arm or Leg.</em></p>"
     },
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": null
+    },
+    "equippable": true,
     "equipped": false,
+    "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 1,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "e7424e19-e6eb-48e0-8f7e-398c28f0aea8",
+        "name": "Hideaway Limb, Standard",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "You gain a +2 bonus to Sleight of Hand checks to conceal items in a hideaway limb. Though this compartment can usually foil a simple pat down, most security checkpoints include a scan that can detect such devices.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "sle"
+      }
+    ],
     "price": 150,
     "quantity": 1,
-    "source": "",
-    "system": "arm"
+    "quantityPerPack": 1,
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "",
+      "value": null
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "",
+      "dc": null,
+      "descriptor": ""
+    },
+    "source": "CRB pg. 209",
+    "system": "arm",
+    "target": {
+      "type": "",
+      "value": null
+    },
+    "uses": {
+      "max": 0,
+      "per": null,
+      "value": 0
+    }
   }
 }
