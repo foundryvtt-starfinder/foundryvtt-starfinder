@@ -9,13 +9,14 @@ const path = require('path');
 const sanitize = require("sanitize-filename");
 const stringify = require('json-stringify-pretty-compact');
 const jsdom = require("jsdom");
+const terser = require("gulp-terser");
+const sourcemaps = require("gulp-sourcemaps");
+const cssClean = require('gulp-clean-css');
 
 const { JSDOM } = jsdom;
 const { window } = new JSDOM();
 
 const $ = require("jquery")(window);
-
-const SFRPG_LESS = ["src/less/*.less"];
 
 function getConfig() {
     const configPath = path.resolve(process.cwd(), 'foundryconfig.json');
@@ -61,12 +62,15 @@ function getManifest() {
 /**
  * Build Less
  */
-function buildLess() {
+async function buildLess() {
     const name = 'sfrpg';
 
     return gulp
         .src(`src/less/${name}.less`)
+        .pipe(sourcemaps.init())
         .pipe(less())
+        .pipe(cssClean())
+        .pipe(sourcemaps.write('./maps'))
         .pipe(gulp.dest('dist'));
 }
 
@@ -74,31 +78,53 @@ function buildLess() {
  * Copy static files
  */
 async function copyFiles() {
-    const name = 'sfrpg';
 
-    const statics = [
-        'lang',
-        'fonts',
-        'images',
-        'templates',
-        'icons',
-        'packs',
-        'module',
-        `${name}.js`,
-        'module.json',
-        'system.json',
-        'template.json'
-    ];
-    try {
-        for (const file of statics) {
-            if (fs.existsSync(path.join('src', file))) {
-                await fs.copy(path.join('src', file), path.join('dist', file));
+    // Build static files first
+    gulp.src([
+        'src/fonts/*',
+        'src/icons/*',
+        'src/icons/**/*',
+        'src/images/**/*',
+        'src/images/*',
+        'src/lang/*.json',
+        'src/packs/*.db',
+        'src/templates/**/*.hbs',
+        "src/*.json"
+    ])
+        .pipe(gulp.dest((file) => file.base.replace("\\src", "\\dist")));
+
+    // Then pipe in js files to be minified
+    gulp.src('src/sfrpg.js')
+        .pipe(sourcemaps.init())
+        // Minify the JS
+        .pipe(terser({
+            ecma: 2016,
+            compress: {
+                module: true,
+                passes: 2
             }
-        }
-        return Promise.resolve();
-    } catch (err) {
-        Promise.reject(err);
-    }
+        }))
+        .pipe(sourcemaps.write('./maps'))
+        // Output
+        .pipe(gulp.dest('dist'));
+
+    return gulp.src([
+        'src/module/**/*.js',
+        'src/module/*.js'
+    ])
+        .pipe(sourcemaps.init())
+        // Minify the JS
+        .pipe(terser({
+            ecma: 2016,
+            compress: {
+                module: true,
+                passes: 2
+            }
+        }))
+        .pipe(sourcemaps.write('./maps'))
+        // Output
+        .pipe(gulp.dest('dist/module'));
+
 }
 
 /**
@@ -113,25 +139,45 @@ async function copyFiles() {
 async function copyWatchFiles() {
     const name = 'sfrpg';
 
-    const statics = [
-        'lang',
-        'templates',
-        'module',
-        `${name}.js`,
-        'module.json',
-        'system.json',
-        'template.json'
-    ];
-    try {
-        for (const file of statics) {
-            if (fs.existsSync(path.join('src', file))) {
-                await fs.copy(path.join('src', file), path.join('dist', file));
+    // Build static files first
+    gulp.src([
+        'src/lang/*.json',
+        'src/templates/**/*.hbs',
+        "src/*.json"
+    ])
+        .pipe(gulp.dest((file) => file.base.replace("\\src", "\\dist")));
+
+    // Then pipe in js files to be minified
+    gulp.src('src/sfrpg.js')
+        .pipe(sourcemaps.init())
+        // Minify the JS
+        .pipe(terser({
+            ecma: 2016,
+            compress: {
+                module: true,
+                passes: 2
             }
-        }
-        return Promise.resolve();
-    } catch (err) {
-        Promise.reject(err);
-    }
+        }))
+        .pipe(sourcemaps.write('./maps'))
+        // Output
+        .pipe(gulp.dest('dist'));
+
+    return gulp.src([
+        'src/module/**/*.js',
+        'src/module/*.js'
+    ])
+        .pipe(sourcemaps.init())
+        // Minify the JS
+        .pipe(terser({
+            ecma: 2016,
+            compress: {
+                module: true,
+                passes: 2
+            }
+        }))
+        .pipe(sourcemaps.write('./maps'))
+        // Output
+        .pipe(gulp.dest('dist/module'));
 }
 
 /**
@@ -179,10 +225,10 @@ async function copyLibs() {
  * Watch for changes for each build step
  */
 function buildWatch() {
-    gulp.watch('src/**/*.less', { ignoreInitial: false }, buildLess);
+    gulp.watch('src/**/*.less', { ignoreInitial: true }, buildLess);
     gulp.watch(
         ['src/fonts', 'src/templates', 'src/lang', 'src/*.json', 'src/**/*.js'],
-        { ignoreInitial: false },
+        { ignoreInitial: true },
         copyWatchFiles
     );
 }
@@ -1499,7 +1545,9 @@ async function clean() {
         'lib',
         'styles',
         `${name}.js`,
+        `${name}.js.map`,
         `${name}.css`,
+        `${name}.css.map`,
         'module.json',
         'system.json',
         'template.json',
@@ -1791,7 +1839,7 @@ function updateManifest(cb) {
 const execBuild = gulp.parallel(buildLess, copyFiles, copyLibs);
 
 exports.build = gulp.series(clean, execBuild);
-exports.watch = buildWatch;
+exports.watch = gulp.series(execBuild, buildWatch);
 exports.clean = clean;
 exports.link = linkUserData;
 exports.copyUser = copyUserData;
