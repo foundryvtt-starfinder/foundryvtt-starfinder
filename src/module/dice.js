@@ -1010,7 +1010,7 @@ export class DiceSFRPG {
      * @param {RollNode} node - the Rootnode which is used for the roll
      * @param {Array} rollMods - all modifiers applied to this roll (unstacked)
      * @param {Number} bonus - the situational bonus for this roll
-     * @returns
+     * @returns {Object} finalFormula Object: {finalRoll: String, formula: String}
      */
     static async _calcStackingFormula(node, rollMods, bonus = null) {
         let rootNode = node;
