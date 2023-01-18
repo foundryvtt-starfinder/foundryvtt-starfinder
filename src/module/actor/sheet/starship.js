@@ -20,8 +20,8 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         const options = super.defaultOptions;
         mergeObject(options, {
             classes: ["sfrpg", "sheet", "actor", "starship"],
-            width: 700,
-            height: 800
+            width: 700
+            // height: 800
         });
 
         return options;
