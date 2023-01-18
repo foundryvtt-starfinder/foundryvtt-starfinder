@@ -151,7 +151,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             this._prepareTraits(data.system.traits);
         }
 
-        if (data.system.details.xp.pct) {
+        if (data.system.details?.xp?.pct) {
             data.system.details.xp.color = Math.round((data.system.details.xp.pct / 100) * 255).toString(16);
         }
 
