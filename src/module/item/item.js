@@ -728,7 +728,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         });
 
         let stackModifiers = new StackModifiers();
-        modifiers = stackModifiers.process(modifiers, null);
+        modifiers = await stackModifiers.processAsync(modifiers, null);
 
         const rolledMods = [];
         const addModifier = (bonus, parts) => {
@@ -1065,7 +1065,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         });
 
         let stackModifiers = new StackModifiers();
-        modifiers = stackModifiers.process(modifiers, null);
+        modifiers = await stackModifiers.processAsync(modifiers, null);
 
         const rolledMods = [];
         const addModifier = (bonus, parts) => {
