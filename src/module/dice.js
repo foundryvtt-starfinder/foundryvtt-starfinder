@@ -220,7 +220,6 @@ export class DiceSFRPG {
                 }
                 return null;
             }
-            let rootNode = node;
 
             let dieRoll = "1d20";
             if (button === "disadvantage") {
@@ -229,57 +228,10 @@ export class DiceSFRPG {
                 dieRoll = "2d20kh";
             }
 
-            let stackModifiers = new StackModifiers();
-            const stackedMods = await stackModifiers.processAsync(rollMods.filter(mod => {
-                if (mod.enabled) {
-                    rootNode = this._removeModifierNodes(rootNode, mod);
-                    return true;
-                }
-            }), this.contexts);
+            const finalFormula = await this._calcStackingFormula(node, rollMods, bonus);
 
-            let rollString = '';
-            let formulaString = '';
-            const stackedModsArray = Object.keys(stackedMods);
-            for (let stackModsI = 0; stackModsI < stackedModsArray.length; stackModsI++) {
-                const stackModifier = stackedMods[stackedModsArray[stackModsI]];
-                if (stackModifier === null || stackModifier === undefined) {
-                    continue;
-                }
-                if (stackModifier instanceof Array) {
-                    for (let stackModifierI = 0; stackModifierI < stackModifier.length; stackModifierI++) {
-                        const modifier = stackModifier[stackModifierI];
-                        rollString += `${modifier.max.toString()}+`;
-                        // TODO:
-                        /*
-                            add title to the span f.e.:
-                            title="${game.i18n.format(localizationKey, type: modifier.type.capitalize(),mod: modifier.max.signedString(),source: modifier.name)}"
-                            but in order to do that we will need the localization key for the current modifier which we do not have at this point. Maybe we will have to pass it down from the modifier calculation lol.
-                        */
-                        formulaString += `${modifier.max.toString()}[<span>${modifier.name}</span>] + `;
-                    }
-                } else {
-                    rollString += `${stackModifier.max.toString()}+`;
-                    // TODO:
-                    /*
-                        add title to the span f.e.:
-                        title="${game.i18n.format(localizationKey, type: modifier.type.capitalize(),mod: modifier.max.signedString(),source: modifier.name)}"
-                        but in order to do that we will need the localization key for the current modifier which we do not have at this point. Maybe we will have to pass it down from the modifier calculation lol.
-                    */
-                    formulaString += `${stackModifier.max.toString()}[<span>${stackModifier.name}</span>] + `;
-                }
-            }
-
-            formulaString += bonus ? `${bonus.toString()}[<span>${game.i18n.localize("SFRPG.Rolls.Dialog.SituationalBonus")}</span>]` : '';
-
-            rollString += bonus ? `${bonus}` : '';
-            rollString = rollString.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
-                .trim();
-            rollString = rollString.endsWith("+") ? rollString.substring(0, rollString.length - 1).trim() : rollString;
-
-            const finalFormula = rootNode.resolveForRoll(0, rollMods);
-
-            finalFormula.finalRoll = rollString ? `${dieRoll} + ${finalFormula.finalRoll} + ${rollString}` : `${dieRoll} + ${finalFormula.finalRoll}`;
-            finalFormula.formula = formulaString ? `${dieRoll} + ${finalFormula.formula} + ${formulaString}` : `${dieRoll} + ${finalFormula.formula}`;
+            finalFormula.finalRoll = `${dieRoll} + ${finalFormula.finalRoll}`;
+            finalFormula.formula = `${dieRoll} + ${finalFormula.formula}`;
             finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
                 .trim();
             finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
@@ -424,7 +376,9 @@ export class DiceSFRPG {
         if (dialogOptions?.skipUI) {
             /** @type {RollResult|null} */
             let result = null;
-            await tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormula) => {
+            await tree.buildRoll(formula, rollContext, async (button, rollMode, unusedFinalFormula, node, rollMods, bonus = null) => {
+                const finalFormula = await this._calcStackingFormula(node, rollMods, bonus);
+
                 if (mainDie) {
                     let dieRoll = "1" + mainDie;
                     if (mainDie === "d20") {
@@ -435,8 +389,8 @@ export class DiceSFRPG {
                         }
                     }
 
-                    finalFormula.finalRoll = dieRoll + " + " + finalFormula.finalRoll;
-                    finalFormula.formula = dieRoll + " + " + finalFormula.formula;
+                    finalFormula.finalRoll = `${dieRoll} + ${finalFormula.finalRoll}`;
+                    finalFormula.formula = `${dieRoll} + ${finalFormula.formula}`;
                 }
 
                 const rollObject = Roll.create(finalFormula.finalRoll, { breakdown, tags, skipUI: true });
@@ -456,11 +410,13 @@ export class DiceSFRPG {
             return result;
         } else {
             return new Promise((resolve) => {
-                tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormula) => {
+                tree.buildRoll(formula, rollContext, async (button, rollMode, unusedFinalFormula, node, rollMods, bonus = null) => {
                     if (button === "cancel") {
                         resolve(null);
                         return;
                     }
+
+                    const finalFormula = await this._calcStackingFormula(node, rollMods, bonus);
 
                     if (mainDie) {
                         let dieRoll = "1" + mainDie;
@@ -471,9 +427,8 @@ export class DiceSFRPG {
                                 dieRoll = "2d20kh";
                             }
                         }
-
-                        finalFormula.finalRoll = dieRoll + " + " + finalFormula.finalRoll;
-                        finalFormula.formula = dieRoll + " + " + finalFormula.formula;
+                        finalFormula.finalRoll = `${dieRoll} + ${finalFormula.finalRoll}`;
+                        finalFormula.formula = `${dieRoll} + ${finalFormula.formula}`;
                     }
 
                     finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
@@ -1048,6 +1003,75 @@ export class DiceSFRPG {
             }
         }
         return node;
+    }
+
+    /**
+     * Calculates the final formula used for rolls with applied stacking of the modifiers
+     * @param {RollNode} node - the Rootnode which is used for the roll
+     * @param {Array} rollMods - all modifiers applied to this roll (unstacked)
+     * @param {Number} bonus - the situational bonus for this roll
+     * @returns
+     */
+    static async _calcStackingFormula(node, rollMods, bonus = null) {
+        let rootNode = node;
+
+        let stackModifiers = new StackModifiers();
+        const stackedMods = await stackModifiers.processAsync(rollMods.filter(mod => {
+            if (mod.enabled) {
+                rootNode = this._removeModifierNodes(rootNode, mod);
+                return true;
+            }
+        }));
+
+        let rollString = '';
+        let formulaString = '';
+        const stackedModsArray = Object.keys(stackedMods);
+        for (let stackModsI = 0; stackModsI < stackedModsArray.length; stackModsI++) {
+            const stackModifier = stackedMods[stackedModsArray[stackModsI]];
+            if (stackModifier === null || stackModifier === undefined) {
+                continue;
+            }
+            if (stackModifier instanceof Array) {
+                for (let stackModifierI = 0; stackModifierI < stackModifier.length; stackModifierI++) {
+                    const modifier = stackModifier[stackModifierI];
+                    rollString += `${modifier.max.toString()}+`;
+                    // TODO:
+                    /*
+                        add title to the span f.e.:
+                        title="${game.i18n.format(localizationKey, type: modifier.type.capitalize(),mod: modifier.max.signedString(),source: modifier.name)}"
+                        but in order to do that we will need the localization key for the current modifier which we do not have at this point. Maybe we will have to pass it down from the modifier calculation lol.
+                    */
+                    formulaString += `${modifier.max.toString()}[<span>${modifier.name}</span>] + `;
+                }
+            } else {
+                rollString += `${stackModifier.max.toString()}+`;
+                // TODO:
+                /*
+                    add title to the span f.e.:
+                    title="${game.i18n.format(localizationKey, type: modifier.type.capitalize(),mod: modifier.max.signedString(),source: modifier.name)}"
+                    but in order to do that we will need the localization key for the current modifier which we do not have at this point. Maybe we will have to pass it down from the modifier calculation lol.
+                */
+                formulaString += `${stackModifier.max.toString()}[<span>${stackModifier.name}</span>] + `;
+            }
+        }
+
+        formulaString += bonus ? `${bonus.toString()}[<span>${game.i18n.localize("SFRPG.Rolls.Dialog.SituationalBonus")}</span>]` : '';
+
+        rollString += bonus ? `${bonus}` : '';
+        rollString = rollString.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
+            .trim();
+        rollString = rollString.endsWith("+") ? rollString.substring(0, rollString.length - 1).trim() : rollString;
+
+        const finalFormula = rootNode.resolveForRoll(0, rollMods);
+
+        finalFormula.finalRoll = rollString ? `${finalFormula.finalRoll} + ${rollString}` : finalFormula.finalRoll;
+        finalFormula.formula = formulaString ? `${finalFormula.formula} + ${formulaString}` : finalFormula.formula;
+
+        finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
+            .trim();
+        finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
+
+        return finalFormula;
     }
 
     /**

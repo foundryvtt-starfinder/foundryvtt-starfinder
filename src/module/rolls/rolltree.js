@@ -81,7 +81,7 @@ export default class RollTree {
                             const partCount = parts.length;
                             part.partIndex = game.i18n.format("SFRPG.Damage.PartIndex", {partIndex: partIndex + 1, partCount: partCount});
                         }
-                        await callback(button, rollMode, finalSectionFormula, part);
+                        await callback(button, rollMode, finalSectionFormula, part, this.rootNode, this.rollMods);
                     }
                 }
             } else {
@@ -144,7 +144,7 @@ export default class RollTree {
                             const partCount = enabledParts.length;
                             part.partIndex = game.i18n.format("SFRPG.Damage.PartIndex", {partIndex: partIndex + 1, partCount: partCount});
                         }
-                        await callback(button, rollMode, finalSectionFormula, part);
+                        await callback(button, rollMode, finalSectionFormula, part, this.rootNode, this.rollMods, bonus);
                     }
                 }
             } else {
