@@ -98,7 +98,7 @@ async function copyFiles() {
         .pipe(sourcemaps.init())
         // Minify the JS
         .pipe(terser({
-            ecma: 2016,
+            ecma: 2022,
             compress: {
                 module: true
             }
@@ -114,7 +114,7 @@ async function copyFiles() {
         .pipe(sourcemaps.init())
         // Minify the JS
         .pipe(terser({
-            ecma: 2016,
+            ecma: 2022,
             compress: {
                 module: true
             }
