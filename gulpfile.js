@@ -119,7 +119,7 @@ async function copyFiles() {
                 module: true
             }
         }))
-        .pipe(sourcemaps.write('./maps'))
+        .pipe(sourcemaps.write('.././maps/module'))
         // Output
         .pipe(gulp.dest('dist/module'));
 
