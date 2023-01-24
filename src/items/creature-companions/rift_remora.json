@@ -2,37 +2,13 @@
   "_id": "3FByFrsVf71pSInF",
   "name": "Rift Remora",
   "type": "npc2",
-  "_stats": {
-    "coreVersion": "10.290",
-    "createdTime": 1666738343703,
-    "lastModifiedBy": "nAGIIjYeOTKZPBrt",
-    "modifiedTime": 1668655609908,
-    "systemId": "sfrpg",
-    "systemVersion": "0.20.3"
-  },
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "_id": "zqAxKTht3TKjBzKj",
       "name": "Bite (P plus grab)",
       "type": "weapon",
-      "_stats": {
-        "coreVersion": "10.288",
-        "createdTime": 1667027117382,
-        "lastModifiedBy": "DQ2No2U3tu4dZzr5",
-        "modifiedTime": 1667693512873,
-        "systemId": "sfrpg",
-        "systemVersion": "0.20.3"
-      },
-      "effects": [],
-      "flags": {},
-      "folder": null,
       "img": "icons/svg/mystery-man.svg",
-      "ownership": {
-        "SPRszH5sDdJlGxJn": 3,
-        "default": 0
-      },
-      "sort": 0,
       "system": {
         "type": "",
         "ability": "",
@@ -104,7 +80,7 @@
           "parts": [
             {
               "name": "",
-              "formula": "@abilities.str.mod",
+              "formula": "@abilities.str.mod + (lookupRange(@details.cr, 0, 1, 1, 9, 3, 10, 2, 13, 6, 15, 5, 16, 6, 17, 8, 19, 9, 20, 13))d(lookupRange(@details.cr, 0, 1, 4, 6, 6, 7, 8, 8, 12, 9, 4, 10, 8, 11, 10, 12, 12, 13, 4, 14, 6, 15, 8, 17, 6, 18, 8, 20, 6)) + (@details.cr)",
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -125,7 +101,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>@Compendium[sfrpg.universal-creature-rules.lIsdIg9eR6IvyNG3]{Grab (Ex)}</p>"
+          "value": "<p>@UUID[Compendium.sfrpg.universal-creature-rules.lIsdIg9eR6IvyNG3]{Grab (Ex)}</p>"
         },
         "descriptors": [],
         "duration": {
@@ -287,27 +263,7 @@
       "_id": "FTDQ7caOAQoT2E45",
       "name": "Creature Companion - Rift Remora",
       "type": "feat",
-      "_stats": {
-        "coreVersion": "10.288",
-        "createdTime": 1666738399852,
-        "lastModifiedBy": "DQ2No2U3tu4dZzr5",
-        "modifiedTime": 1667693380604,
-        "systemId": "sfrpg",
-        "systemVersion": "0.20.3"
-      },
-      "effects": [],
-      "flags": {
-        "core": {
-          "sourceId": "Actor.8uktygKWLPHniSM4.Item.lDyqMXhSzt7ruwZZ"
-        }
-      },
-      "folder": "hlygaViJm7JpfQry",
       "img": "icons/creatures/mammals/wolf-shadow-black.webp",
-      "ownership": {
-        "SPRszH5sDdJlGxJn": 3,
-        "default": 0
-      },
-      "sort": 100000,
       "system": {
         "type": "",
         "ability": null,
@@ -342,7 +298,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>@UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.gTHswZ0FBafS7ru0]{Creature Companion}</p>\n<p>Rift remoras are leech-like outsiders that glide through the planes with supernatural intuition. These astral parasites are naturally attracted to interdimensional rifts. They gain sustenance from these misalignments of various planes of existence by absorbing the metaphysical potential energy through their long, drooping antennae. Their pale, near-transparent skin and circular, gaping maw of razor-sharp teeth gives them the appearance of deep-sea aquatic life. Though they don&rsquo;t need to use it to feed, their ability to smell and home in on creatures not native to the plane they&rsquo;re on makes them prized trackers by bounty hunters who specialize in pursuing targets across the planes.</p>\n<h2 class=\"title\">Rift Remora</h2>\n<p>Levels 2-16</p>\n<p>Small outsider (extraplanar)<br><strong>Senses</strong>&nbsp;blindsense (life [extraplanar beings only]) 120 ft., darkvision 60 ft.<br><strong>Good Save</strong>&nbsp;Ref;&nbsp;<strong>Poor Saves</strong>&nbsp;Fort, Will<br><strong>Speed</strong>&nbsp;10 ft., fly 40 ft. (Su, perfect)<br><strong>Melee Attack</strong>&nbsp;bite (P plus grab)<br><strong>Space</strong>&nbsp;5 ft.&nbsp;<strong>Reach</strong>&nbsp;5 ft.<br><strong>Ability Modifiers</strong>&nbsp;Dex, Cha</p>\n<h3 class=\"title\">Special Abilities</h3>\n<p><strong>Blindsense (Ex)</strong> A rift remora&rsquo;s blindsense can sense only living creatures with the extraplanar subtype.</p>\n<p><strong>Planar Leech (Su)</strong> Once per hour when a rift remora grapples a significant enemy with the extraplanar subtype, it feeds off the enemy&rsquo;s planar disjunction to regain a number of Hit Points equal to one-tenth the rift remora&rsquo;s maximum HP.</p>\n<p><strong>Rift Teeth (Su, 8th level)</strong>&nbsp;Once per day when a rift remora grapples or pins a significant enemy with the extraplanar subtype, it tears at the creature&rsquo;s very quintessence with its fangs. The grappled or pinned enemy takes an amount of piercing damage with the force descriptor equal to the rift remora&rsquo;s level.</p>\n<p><br><em>HP Max must be manually adjusted. HP value can be found on the @UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.FqsTa05DBVMfsvxy#creature-companion-statistics]{Creature Companion Statistics Table}</em></p>"
+          "value": "<p>@UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.gTHswZ0FBafS7ru0]{Creature Companion}</p>\n<p>Rift remoras are leech-like outsiders that glide through the planes with supernatural intuition. These astral parasites are naturally attracted to interdimensional rifts. They gain sustenance from these misalignments of various planes of existence by absorbing the metaphysical potential energy through their long, drooping antennae. Their pale, near-transparent skin and circular, gaping maw of razor-sharp teeth gives them the appearance of deep-sea aquatic life. Though they don’t need to use it to feed, their ability to smell and home in on creatures not native to the plane they’re on makes them prized trackers by bounty hunters who specialize in pursuing targets across the planes.</p>\n<h2>Rift Remora</h2>\n<p>Levels 2-16</p>\n<p>Small outsider (extraplanar)</p>\n<p><strong>Senses</strong>&nbsp;blindsense (life [extraplanar beings only]) 120 ft., darkvision 60 ft.</p>\n<p><strong>Good Save</strong>&nbsp;Ref;&nbsp;<strong>Poor Saves</strong>&nbsp;Fort, Will</p>\n<p><strong>Speed</strong>&nbsp;10 ft., fly 40 ft. (Su, perfect)</p>\n<p><strong>Melee Attack</strong>&nbsp;bite (P plus grab)</p>\n<p><strong>Space</strong>&nbsp;5 ft.&nbsp;<strong>Reach</strong>&nbsp;5 ft.</p>\n<p><strong>Ability Modifiers</strong>&nbsp;Dex, Cha</p>\n<h3>Special Abilities</h3>\n<p><strong>Blindsense (Ex)</strong> A rift remora’s blindsense can sense only living creatures with the extraplanar subtype.</p>\n<p><strong>Planar Leech (Su)</strong> Once per hour when a rift remora grapples a significant enemy with the extraplanar subtype, it feeds off the enemy’s planar disjunction to regain a number of Hit Points equal to one-tenth the rift remora’s maximum HP.</p>\n<p><strong>Rift Teeth (Su, 8th level)</strong>&nbsp;Once per day when a rift remora grapples or pins a significant enemy with the extraplanar subtype, it tears at the creature’s very quintessence with its fangs. The grappled or pinned enemy takes an amount of piercing damage with the force descriptor equal to the rift remora’s level.</p>\n<p><em>HP Max must be manually adjusted. HP value can be found on the @UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.FqsTa05DBVMfsvxy#creature-companion-statistics]{Creature Companion Statistics Table}</em></p>"
         },
         "descriptors": {
           "acid": false,
@@ -372,10 +328,12 @@
           "mind-affecting": false,
           "pain": false,
           "poison": false,
+          "polymorph": false,
           "radiation": false,
           "scrying": false,
           "sense-dependent": false,
           "shadow": false,
+          "sonic": false,
           "summoning": false,
           "teleportation": false,
           "water": false
@@ -393,7 +351,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "ZuVqOA0q7KmdTyai",
+              "actorId": "3FByFrsVf71pSInF",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ac",
@@ -412,7 +370,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "ZuVqOA0q7KmdTyai",
+              "actorId": "3FByFrsVf71pSInF",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ac",
@@ -431,7 +389,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "ZuVqOA0q7KmdTyai",
+              "actorId": "3FByFrsVf71pSInF",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "save",
@@ -450,7 +408,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "ZuVqOA0q7KmdTyai",
+              "actorId": "3FByFrsVf71pSInF",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "save",
@@ -469,7 +427,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "ZuVqOA0q7KmdTyai",
+              "actorId": "3FByFrsVf71pSInF",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "save",
@@ -488,7 +446,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "ZuVqOA0q7KmdTyai",
+              "actorId": "3FByFrsVf71pSInF",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ability-score",
@@ -507,7 +465,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "ZuVqOA0q7KmdTyai",
+              "actorId": "3FByFrsVf71pSInF",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ability-score",
@@ -526,7 +484,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "ZuVqOA0q7KmdTyai",
+              "actorId": "3FByFrsVf71pSInF",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ability-score",
@@ -545,7 +503,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "ZuVqOA0q7KmdTyai",
+              "actorId": "3FByFrsVf71pSInF",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "all-skills",
@@ -564,32 +522,13 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "ZuVqOA0q7KmdTyai",
+              "actorId": "3FByFrsVf71pSInF",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "all-attacks",
             "enabled": true,
             "max": 0,
             "modifier": "lookupRange(@details.cr, 0, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 9, 8, 10, 9, 11, 10, 13, 11, 14, 13, 16, 14, 17, 15, 18, 16, 19, 17, 20, 18, 21, 19, 23)",
-            "modifierType": "constant",
-            "notes": "",
-            "source": "",
-            "subtab": "misc",
-            "valueAffected": "acr"
-          },
-          {
-            "_id": "a0389005-fc87-47dd-829d-f49bebf79ec5",
-            "name": "Creature Companion - Damage",
-            "type": "untyped",
-            "condition": "",
-            "container": {
-              "actorId": "ZuVqOA0q7KmdTyai",
-              "itemId": "FTDQ7caOAQoT2E45"
-            },
-            "effectType": "all-damage",
-            "enabled": true,
-            "max": 0,
-            "modifier": "(lookupRange(@details.cr, 0, 1, 1, 9, 3, 10, 2, 13, 6, 15, 5, 16, 6, 17, 8, 19, 9, 20, 13))d(lookupRange(@details.cr, 0, 1, 4, 6, 6, 7, 8, 8, 12, 9, 4, 10, 8, 11, 10, 12, 12, 13, 4, 14, 6, 15, 8, 17, 6, 18, 8, 20, 6)) + (@details.cr)",
             "modifierType": "constant",
             "notes": "",
             "source": "",
@@ -630,23 +569,7 @@
       "_id": "2ISVIEpy2C245NdH",
       "name": "Blindsense (Ex)",
       "type": "feat",
-      "_stats": {
-        "coreVersion": "10.288",
-        "createdTime": 1667693403500,
-        "lastModifiedBy": "DQ2No2U3tu4dZzr5",
-        "modifiedTime": 1667693419719,
-        "systemId": "sfrpg",
-        "systemVersion": "0.20.3"
-      },
-      "effects": [],
-      "flags": {},
-      "folder": null,
       "img": "icons/svg/mystery-man.svg",
-      "ownership": {
-        "DQ2No2U3tu4dZzr5": 3,
-        "default": 0
-      },
-      "sort": 0,
       "system": {
         "type": "",
         "ability": null,
@@ -681,7 +604,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>A rift remora&rsquo;s blindsense can sense only living creatures with the extraplanar subtype.</p>"
+          "value": "<p>A rift remora’s blindsense can sense only living creatures with the extraplanar subtype.</p>"
         },
         "descriptors": {
           "acid": false,
@@ -759,23 +682,7 @@
       "_id": "3tXsTBR688k6qJp2",
       "name": "Planar Leech (Su)",
       "type": "feat",
-      "_stats": {
-        "coreVersion": "10.288",
-        "createdTime": 1667693403703,
-        "lastModifiedBy": "DQ2No2U3tu4dZzr5",
-        "modifiedTime": 1667693704927,
-        "systemId": "sfrpg",
-        "systemVersion": "0.20.3"
-      },
-      "effects": [],
-      "flags": {},
-      "folder": null,
       "img": "icons/svg/mystery-man.svg",
-      "ownership": {
-        "DQ2No2U3tu4dZzr5": 3,
-        "default": 0
-      },
-      "sort": 0,
       "system": {
         "type": "",
         "ability": null,
@@ -810,7 +717,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>Once per hour when a rift remora grapples a significant enemy with the extraplanar subtype, it feeds off the enemy&rsquo;s planar disjunction to regain a number of Hit Points equal to one-tenth the rift remora&rsquo;s maximum HP.</p>"
+          "value": "<p>Once per hour when a rift remora grapples a significant enemy with the extraplanar subtype, it feeds off the enemy’s planar disjunction to regain a number of Hit Points equal to one-tenth the rift remora’s maximum HP.</p>"
         },
         "descriptors": {
           "acid": false,
@@ -888,23 +795,7 @@
       "_id": "6RGSIshxVQAIsAeD",
       "name": "Rift Teeth (Su, 8th level)",
       "type": "feat",
-      "_stats": {
-        "coreVersion": "10.288",
-        "createdTime": 1667693403866,
-        "lastModifiedBy": "DQ2No2U3tu4dZzr5",
-        "modifiedTime": 1667693766192,
-        "systemId": "sfrpg",
-        "systemVersion": "0.20.3"
-      },
-      "effects": [],
-      "flags": {},
-      "folder": null,
       "img": "icons/svg/mystery-man.svg",
-      "ownership": {
-        "DQ2No2U3tu4dZzr5": 3,
-        "default": 0
-      },
-      "sort": 0,
       "system": {
         "type": "",
         "ability": null,
@@ -939,7 +830,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>Once per day when a rift remora grapples or pins a significant enemy with the extraplanar subtype, it tears at the creature&rsquo;s very quintessence with its fangs. The grappled or pinned enemy takes an amount of piercing damage with the force descriptor equal to the rift remora&rsquo;s level.</p>"
+          "value": "<p>Once per day when a rift remora grapples or pins a significant enemy with the extraplanar subtype, it tears at the creature’s very quintessence with its fangs. The grappled or pinned enemy takes an amount of piercing damage with the force descriptor equal to the rift remora’s level.</p>"
         },
         "descriptors": {
           "acid": false,
@@ -1015,20 +906,19 @@
     }
   ],
   "prototypeToken": {
-    "name": "New Actor (54)",
+    "name": "Rift Remora",
     "actorLink": false,
     "alpha": 1,
     "bar1": {
-      "attribute": null
+      "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": null
+      "attribute": ""
     },
     "detectionModes": [],
-    "displayBars": 0,
-    "displayName": 0,
+    "displayBars": 20,
+    "displayName": 20,
     "disposition": -1,
-    "flags": {},
     "height": 1,
     "light": {
       "alpha": 0.5,
@@ -1184,12 +1074,6 @@
         "tooltip": [],
         "value": 0
       },
-      "rp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
       "sp": {
         "max": 10,
         "min": 0,
@@ -1271,6 +1155,7 @@
       "frightened": false,
       "grappled": false,
       "helpless": false,
+      "invisible": false,
       "nauseated": false,
       "off-kilter": false,
       "off-target": false,
@@ -1307,11 +1192,11 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<p>Rift remoras are leech-like outsiders that glide through the planes with supernatural intuition. These astral parasites are naturally attracted to interdimensional rifts. They gain sustenance from these misalignments of various planes of existence by absorbing the metaphysical potential energy through their long, drooping antennae. Their pale, near-transparent skin and circular, gaping maw of razor-sharp teeth gives them the appearance of deep-sea aquatic life. Though they don&rsquo;t need to use it to feed, their ability to smell and home in on creatures not native to the plane they&rsquo;re on makes them prized trackers by bounty hunters who specialize in pursuing targets across the planes.</p>\n<h2 class=\"title\">Rift Remora</h2>\n<p>Levels 2-16</p>\n<p>Small outsider (extraplanar)<br><strong>Senses</strong>&nbsp;blindsense (life [extraplanar beings only]) 120 ft., darkvision 60 ft.<br><strong>Good Save</strong>&nbsp;Ref;&nbsp;<strong>Poor Saves</strong>&nbsp;Fort, Will<br><strong>Speed</strong>&nbsp;10 ft., fly 40 ft. (Su, perfect)<br><strong>Melee Attack</strong>&nbsp;bite (P plus grab)<br><strong>Space</strong>&nbsp;5 ft.&nbsp;<strong>Reach</strong>&nbsp;5 ft.<br><strong>Ability Modifiers</strong> Dex, Cha</p>",
+        "value": "<p>Rift remoras are leech-like outsiders that glide through the planes with supernatural intuition. These astral parasites are naturally attracted to interdimensional rifts. They gain sustenance from these misalignments of various planes of existence by absorbing the metaphysical potential energy through their long, drooping antennae. Their pale, near-transparent skin and circular, gaping maw of razor-sharp teeth gives them the appearance of deep-sea aquatic life. Though they don’t need to use it to feed, their ability to smell and home in on creatures not native to the plane they’re on makes them prized trackers by bounty hunters who specialize in pursuing targets across the planes.</p>\n<h2>Rift Remora</h2>\n<p>Levels 2-16</p>\n<p>Small outsider (extraplanar)</p>\n<p><strong>Senses</strong>&nbsp;blindsense (life [extraplanar beings only]) 120 ft., darkvision 60 ft.</p>\n<p><strong>Good Save</strong>&nbsp;Ref;&nbsp;<strong>Poor Saves</strong>&nbsp;Fort, Will</p>\n<p><strong>Speed</strong>&nbsp;10 ft., fly 40 ft. (Su, perfect)</p>\n<p><strong>Melee Attack</strong>&nbsp;bite (P plus grab)</p>\n<p><strong>Space</strong>&nbsp;5 ft.&nbsp;<strong>Reach</strong>&nbsp;5 ft.</p>\n<p><strong>Ability Modifiers</strong> Dex, Cha</p>",
         "weight": ""
       },
       "class": "",
-      "cr": 1,
+      "cr": 2,
       "environment": "",
       "organization": "",
       "organizationSize": {

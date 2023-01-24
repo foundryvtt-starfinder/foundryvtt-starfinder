@@ -19,6 +19,15 @@
     "camelcase": "warn",
     "arrow-spacing": "error",
     "eol-last": "error",
+    "array-element-newline": ["error", {
+        "ArrayExpression": "consistent",
+        "ArrayPattern": { "minItems": 6 }
+      }
+    ],
+    "object-property-newline": ["error", {
+      "allowAllPropertiesOnSameLine": true
+      }
+    ],
     "implicit-arrow-linebreak": ["error", "beside"],
     "comma-dangle": ["error", "never"],
     "no-duplicate-imports": "error",
@@ -27,8 +36,9 @@
     "eqeqeq": ["error", "always"],
     "no-eq-null": "error",
     "init-declarations": "off",
+    "brace-style": ["warn", "1tbs", { "allowSingleLine": true }],
     "no-undef": "off",
-    "no-var": "warn",
+    "no-var": "error",
     "spaced-comment": "error",
     "array-bracket-newline": ["error", "consistent"],
     "dot-location": ["error", "property"],
@@ -42,14 +52,18 @@
     "no-whitespace-before-property": "error",
     "rest-spread-spacing": ["error", "never"],
     "space-before-blocks": ["error", "always"],
-    "space-before-function-paren": ["error", "never"],
+    "space-before-function-paren": ["error", {
+      "anonymous": "never",
+      "named": "never",
+      "asyncArrow": "always"
+  }],
     "operator-assignment": "warn",
     "space-infix-ops": ["error"],
     "operator-linebreak": ["error", "before"],
     "no-multiple-empty-lines": [
       "error",
       {
-        "max": 2,
+        "max": 1,
         "maxEOF": 1
       }
     ],

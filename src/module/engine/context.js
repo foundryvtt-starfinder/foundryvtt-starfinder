@@ -1,7 +1,7 @@
 export class Context {
     /**
      * The context for the rule.
-     * 
+     *
      * @param {Engine} engine The rules engine instance
      * @param {Object} parameters The parameters passed into this context
      * @param {Array} rulesFired An array of rules that have already been processed
@@ -36,7 +36,7 @@ export class Context {
 
     /**
      * Creates a new context bound to the new set of parameters
-     * @param {Object} newParameters 
+     * @param {Object} newParameters
      */
     bindParameters(newParameters) {
         const parameters = Object.assign({}, this.parameters, newParameters);

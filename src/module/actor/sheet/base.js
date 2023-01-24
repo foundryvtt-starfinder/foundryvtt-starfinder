@@ -1,20 +1,21 @@
-import { TraitSelectorSFRPG } from "../../apps/trait-selector.js";
 import { ActorSheetFlags } from "../../apps/actor-flags.js";
 import { ActorMovementConfig } from "../../apps/movement-config.js";
+import { TraitSelectorSFRPG } from "../../apps/trait-selector.js";
+import { getEquipmentBrowser } from "../../packs/equipment-browser.js";
 import { getSpellBrowser } from "../../packs/spell-browser.js";
 
-import { moveItemBetweenActorsAsync, getFirstAcceptableStorageIndex, ActorItemHelper, containsItems } from "../actor-inventory-utils.js";
-import { RPC } from "../../rpc.js"
+import { RPC } from "../../rpc.js";
+import { ActorItemHelper, containsItems, getFirstAcceptableStorageIndex, moveItemBetweenActorsAsync } from "../actor-inventory-utils.js";
 
-import { ItemDeletionDialog } from "../../apps/item-deletion-dialog.js"
-import { InputDialog } from "../../apps/input-dialog.js"
+import { InputDialog } from "../../apps/input-dialog.js";
+import { ItemDeletionDialog } from "../../apps/item-deletion-dialog.js";
 import { SFRPG } from "../../config.js";
 
-import { _onScalingCantripDrop } from "../../item/item.js";
+import { ItemSFRPG } from "../../item/item.js";
 /**
  * Extend the basic ActorSheet class to do all the SFRPG things!
  * This sheet is an Abstract layer which is not used.
- * 
+ *
  * @type {ActorSheet}
  */
 export class ActorSheetSFRPG extends ActorSheet {
@@ -22,7 +23,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         super(...args);
 
         this.acceptedItemTypes = [
-            ...SFRPG.sharedItemTypes,
+            ...SFRPG.sharedItemTypes
         ];
 
         this._filters = {
@@ -54,7 +55,7 @@ export class ActorSheetSFRPG extends ActorSheet {
     /**
      * Add some extra data when rendering the sheet to reduce the amount of logic required within the template.
      */
-    getData() {
+    async getData() {
         const isOwner = this.document.isOwner;
         const data = {
             actor: this.actor,
@@ -79,8 +80,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         data.labels = this.actor.labels || {};
         data.filters = this._filters;
 
-        if (!data.system?.details?.biography?.fullBodyImage)
-        {
+        if (!data.system?.details?.biography?.fullBodyImage) {
             this.actor.system = mergeObject(this.actor.system, {
                 details: {
                     biography: {
@@ -124,7 +124,7 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         if (data.system.skills) {
             // Update skill labels
-            for (let [s, skl] of Object.entries(data.system.skills)) {                
+            for (let [s, skl] of Object.entries(data.system.skills)) {
                 skl.ability = data.system.abilities[skl.ability].label.substring(0, 3);
                 skl.icon = this._getClassSkillIcon(skl.value);
 
@@ -137,11 +137,12 @@ export class ActorSheetSFRPG extends ActorSheet {
                 skl.hover = CONFIG.SFRPG.skillProficiencyLevels[skl.value];
             }
 
-            data.system.skills = Object.keys(data.system.skills).sort().reduce((skills, key) => {
-                skills[key] = data.system.skills[key];
+            data.system.skills = Object.keys(data.system.skills).sort()
+                .reduce((skills, key) => {
+                    skills[key] = data.system.skills[key];
 
-                return skills;
-            }, {});
+                    return skills;
+                }, {});
 
             data.system.hasSkills = Object.values(data.system.skills).filter(x => x.enabled).length > 0;
         }
@@ -150,14 +151,22 @@ export class ActorSheetSFRPG extends ActorSheet {
             this._prepareTraits(data.system.traits);
         }
 
+        if (data.system.details?.xp?.pct) {
+            data.system.details.xp.color = Math.round((data.system.details.xp.pct / 100) * 255).toString(16);
+        }
+
         this._prepareItems(data);
+
+        // Enrich text editors. The below are used for character, drone and npc(2). Other types use editors defined in their class.
+        data.enrichedBiography = await TextEditor.enrichHTML(this.object.system.details.biography.value, {async: true});
+        data.enrichedGMNotes = await TextEditor.enrichHTML(this.object.system.details.biography.gmNotes, {async: true});
 
         return data;
     }
 
     /**
      * Activate event listeners using the prepared sheet HTML
-     * 
+     *
      * @param {JQuery} html The prepared HTML object ready to be rendered into the DOM
      */
     activateListeners(html) {
@@ -177,13 +186,16 @@ export class ActorSheetSFRPG extends ActorSheet {
         html.find('.item .item-name h4').contextmenu(event => this._onItemSplit(event));
 
         if (!this.options.editable) return;
-        
+
         html.find('.config-button').click(this._onConfigMenu.bind(this));
 
         html.find('.toggle-container').click(this._onToggleContainer.bind(this));
 
         html.find('.skill-proficiency').on("click contextmenu", this._onCycleClassSkill.bind(this));
         html.find('.trait-selector').click(this._onTraitSelector.bind(this));
+
+        // Skill Compendium
+        html.find('.compendium-link').click(this._onOpenSkillCompendium.bind(this));
 
         // Ability Checks
         html.find('.ability-name').click(this._onRollAbilityCheck.bind(this));
@@ -215,9 +227,13 @@ export class ActorSheetSFRPG extends ActorSheet {
         // Create New Item
         html.find('.item-create').click(ev => this._onItemCreate(ev));
 
+        // Get New Item from Browser
+        html.find('.item-browser').click(event => this._onOpenBrowser(event));
+
         // Update Inventory Item
         html.find('.item-edit').click(ev => {
-            let itemId = $(ev.currentTarget).parents(".item").attr("data-item-id");
+            let itemId = $(ev.currentTarget).parents(".item")
+                .attr("data-item-id");
             const item = this.actor.items.get(itemId);
             // const item = this.actor.getEmbeddedEntity("Item", itemId);
             item.sheet.render(true);
@@ -236,10 +252,10 @@ export class ActorSheetSFRPG extends ActorSheet {
         // Item Rolling
         html.find('.item .item-image').click(event => this._onItemRoll(event));
 
-        // Roll attack from item 
+        // Roll attack from item
         html.find('.item-action .use').click(event => this._onItemRollUse(event));
 
-        // Roll attack from item 
+        // Roll attack from item
         html.find('.item-action .attack').click(event => this._onItemRollAttack(event));
 
         // Roll damage for item
@@ -262,13 +278,13 @@ export class ActorSheetSFRPG extends ActorSheet {
         // Actor resource update
         html.find('.actor-resource-base-input').change(this._onActorResourceChanged.bind(this));
     }
-    
+
     /** @override */
     render(force, options) {
         if (this.stopRendering) {
             return this;
         }
-        
+
         return super.render(force, options);
     }
 
@@ -314,15 +330,15 @@ export class ActorSheetSFRPG extends ActorSheet {
     }
 
     _onConfigMenu(event) {
-      event.preventDefault();
-      const button = event.currentTarget;
-      let app;
-      switch ( button.dataset.action ) {
+        event.preventDefault();
+        const button = event.currentTarget;
+        let app;
+        switch ( button.dataset.action ) {
         case "movement":
-          app = new ActorMovementConfig(this.object);
-          break;
-      }
-      app?.render(true);
+            app = new ActorMovementConfig(this.object);
+            break;
+        }
+        app?.render(true);
     }
 
     _prepareTraits(traits) {
@@ -376,69 +392,69 @@ export class ActorSheetSFRPG extends ActorSheet {
             }
         }
     }
-    
+
     /**
     * Add a modifer to this actor.
-    * 
+    *
     * @param {Event} event The originating click event
     */
-   _onModifierCreate(event) {
-       event.preventDefault();
-       const target = $(event.currentTarget);
+    _onModifierCreate(event) {
+        event.preventDefault();
+        const target = $(event.currentTarget);
 
-       this.actor.addModifier({
-           name: "New Modifier",
-           subtab: target.data('subtab')
-       });
-   }
+        this.actor.addModifier({
+            name: "New Modifier",
+            subtab: target.data('subtab')
+        });
+    }
 
-   /**
+    /**
     * Delete a modifier from the actor.
-    * 
+    *
     * @param {Event} event The originating click event
     */
-   async _onModifierDelete(event) {
-       event.preventDefault();
-       const target = $(event.currentTarget);
-       const modifierId = target.closest('.item.modifier').data('modifierId');
-       
-       await this.actor.deleteModifier(modifierId);
-   }
+    async _onModifierDelete(event) {
+        event.preventDefault();
+        const target = $(event.currentTarget);
+        const modifierId = target.closest('.item.modifier').data('modifierId');
 
-   /**
+        await this.actor.deleteModifier(modifierId);
+    }
+
+    /**
     * Edit a modifier for an actor.
-    * 
+    *
     * @param {Event} event The orginating click event
     */
-   _onModifierEdit(event) {
-       event.preventDefault();
+    _onModifierEdit(event) {
+        event.preventDefault();
 
-       const target = $(event.currentTarget);
-       const modifierId = target.closest('.item.modifier').data('modifierId');
+        const target = $(event.currentTarget);
+        const modifierId = target.closest('.item.modifier').data('modifierId');
 
-       this.actor.editModifier(modifierId);
-   }
+        this.actor.editModifier(modifierId);
+    }
 
-   /**
+    /**
     * Toggle a modifier to be enabled or disabled.
-    * 
+    *
     * @param {Event} event The originating click event
     */
-   async _onToggleModifierEnabled(event) {
-       event.preventDefault();
-       const target = $(event.currentTarget);
-       const modifierId = target.closest('.item.modifier').data('modifierId');
+    async _onToggleModifierEnabled(event) {
+        event.preventDefault();
+        const target = $(event.currentTarget);
+        const modifierId = target.closest('.item.modifier').data('modifierId');
 
-       const modifiers = duplicate(this.actor.system.modifiers);
-       const modifier = modifiers.find(mod => mod._id === modifierId);
-       modifier.enabled = !modifier.enabled;
+        const modifiers = duplicate(this.actor.system.modifiers);
+        const modifier = modifiers.find(mod => mod._id === modifierId);
+        modifier.enabled = !modifier.enabled;
 
-       await this.actor.update({'system.modifiers': modifiers});
-   }
+        await this.actor.update({'system.modifiers': modifiers});
+    }
 
     /**
      * handle cycling whether a skill is a class skill or not
-     * 
+     *
      * @param {Event} event A click or contextmenu event which triggered the handler
      * @private
      */
@@ -507,7 +523,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             };
 
             let templateData = {upper: "Item", lower: "item", types: types},
-            dlg = await renderTemplate(`systems/sfrpg/templates/apps/localized-entity-create.html`, templateData);
+                dlg = await renderTemplate(`systems/sfrpg/templates/apps/localized-entity-create.hbs`, templateData);
 
             new Dialog({
                 title: game.i18n.format("SFRPG.NPCSheet.Interface.CreateItem.Title"),
@@ -551,6 +567,99 @@ export class ActorSheetSFRPG extends ActorSheet {
 
     }
 
+    async _onOpenBrowser(event) {
+        event.preventDefault();
+        const filterType = event.currentTarget.dataset.type;
+        const classesToFilters = {
+            'mystic': 'myst',
+            'precog': 'precog',
+            'technomancer': 'tech',
+            'witchwarper': 'wysh'
+        };
+        let browser;
+        let activeFilters = {};
+
+        switch (filterType) {
+        case 'weapon':
+        case 'shield':
+        case 'equipment':
+        case 'ammunition':
+        case 'consumable':
+        case 'goods':
+        case 'container':
+        case 'technological,magic,hybrid':
+        case 'fusion,upgrade,weaponAccessory':
+        case 'upgrade':
+        case 'augmentation':
+            browser = getEquipmentBrowser();
+            activeFilters.equipmentTypes = filterType.split(',');
+            break;
+        case 'spell':
+            browser = getSpellBrowser();
+            activeFilters.levels = [event.currentTarget.dataset.level];
+            // eslint-disable-next-line no-case-declarations
+            let classes = event.currentTarget.dataset.classes;
+            if (classes) {
+                classes = classes.split(',');
+                activeFilters.classes = [];
+                for (let spellFilterI = 0; spellFilterI < classes.length; spellFilterI++) {
+                    activeFilters.classes.push(classesToFilters[classes[spellFilterI]]);
+                }
+            }
+
+            break;
+        case 'class':
+        case 'race':
+        case 'theme':
+        case 'asi':
+        case 'archetypes':
+        case 'feat':
+        case 'actorResource':
+            // TODO: wait for Features Browser then implement this.
+            break;
+
+        default:
+            browser = getEquipmentBrowser();
+            break;
+        }
+
+        if (!browser._element) {
+            browser.render(true);
+        }
+
+        await this.waitForElem(`#app-${browser.appId}`);
+        const html = browser.element;
+        browser.resetFilters(html);
+
+        const activeFiltersKeys = Object.keys(activeFilters);
+        for (let filterI = 0; filterI < activeFiltersKeys.length; filterI++) {
+            browser.filters[activeFiltersKeys[filterI]].activeFilters = activeFilters[activeFiltersKeys[filterI]];
+        }
+
+        browser.refreshFilters = true;
+        browser.onFiltersUpdated(html);
+    }
+
+    waitForElem(selector) {
+        return new Promise(resolve => {
+            if (document.querySelector(selector)) {
+                return resolve(document.querySelector(selector));
+            }
+
+            const observer = new MutationObserver(mutations => {
+                if (document.querySelector(selector)) {
+                    resolve(document.querySelector(selector));
+                    observer.disconnect();
+                }
+            });
+
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+        });
+    }
+
     /**
      * Handle deleting an Owned Item for the actor
      * @param {Event} event The originating click event
@@ -558,7 +667,7 @@ export class ActorSheetSFRPG extends ActorSheet {
     async _onItemDelete(event) {
         event.preventDefault();
 
-        let li = $(event.currentTarget).parents(".item"), 
+        let li = $(event.currentTarget).parents(".item"),
             itemId = li.attr("data-item-id");
 
         let actorHelper = new ActorItemHelper(this.actor.id, this.token ? this.token.id : null, this.token ? this.token.parent.id : null);
@@ -629,9 +738,9 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         if (item.type === "spell") {
             return this.actor.useSpell(item, {configureDialog: !event.shiftKey});
+        } else {
+            return item.roll();
         }
-
-        else return item.roll();
     }
 
     /**
@@ -661,7 +770,7 @@ export class ActorSheetSFRPG extends ActorSheet {
 
     /**
      * Toggles condition modifiers on or off.
-     * 
+     *
      * @param {Event} event The triggering event.
      */
     _onToggleConditions(event) {
@@ -684,6 +793,23 @@ export class ActorSheetSFRPG extends ActorSheet {
             resourceItem.update({"system.base": newBaseValue});
         } else {
             resourceItem.update({"system.base": 0});
+        }
+    }
+
+    /**
+     * Handle Compendium Link Click
+     * @param {Event} event   The originating click event
+     */
+    async _onOpenSkillCompendium(event) {
+        event.preventDefault();
+        const uuid = CONFIG.SFRPG.skillCompendium[event.currentTarget.dataset.skillId];
+        const document = await fromUuid(uuid);
+
+        // Open document
+        if (document instanceof JournalEntryPage) {
+            document.parent.sheet.render(true, { pageId: document.id });
+        } else {
+            document.sheet.render(true);
         }
     }
 
@@ -722,7 +848,7 @@ export class ActorSheetSFRPG extends ActorSheet {
 
     /**
      * Handles reloading / replacing ammo or batteries in a weapon.
-     * 
+     *
      * @param {Event} event The originating click event
      */
     async _onReloadWeapon(event) {
@@ -736,7 +862,7 @@ export class ActorSheetSFRPG extends ActorSheet {
 
     /**
      * Handles toggling the open/close state of a container.
-     * 
+     *
      * @param {Event} event The originating click event
      */
     _onToggleContainer(event) {
@@ -752,7 +878,7 @@ export class ActorSheetSFRPG extends ActorSheet {
 
     /**
      * Get The font-awesome icon used to display if a skill is a class skill or not
-     * 
+     *
      * @param {Number} level Flag that determines if a skill is a class skill or not
      * @returns {String}
      * @private
@@ -768,7 +894,7 @@ export class ActorSheetSFRPG extends ActorSheet {
 
     /**
      * Handle rolling of an item form the Actor sheet, obtaining the item instance an dispatching to it's roll method.
-     * 
+     *
      * @param {Event} event The html event
      */
     _onItemSummary(event) {
@@ -884,7 +1010,7 @@ export class ActorSheetSFRPG extends ActorSheet {
 
     /**
      * Creates an TraitSelectorSFRPG dialog
-     * 
+     *
      * @param {Event} event HTML Event
      * @private
      */
@@ -930,7 +1056,7 @@ export class ActorSheetSFRPG extends ActorSheet {
 
     /**
      * Determine whether an Owned Item will be shown based on the current set of filters
-     * 
+     *
      * @return {Boolean}
      * @private
      */
@@ -983,7 +1109,6 @@ export class ActorSheetSFRPG extends ActorSheet {
             return;
         }
 
-
         let itemData = null;
         if (parsedDragData.type !== 'ItemCollection') {
             itemData = await Item.fromDropData(parsedDragData);
@@ -996,7 +1121,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             if (existingClass) {
                 const levelUpdate = {};
                 levelUpdate["system.levels"] = existingClass.system.levels + 1;
-                existingClass.update(levelUpdate)
+                existingClass.update(levelUpdate);
                 return existingClass;
             }
         }
@@ -1009,7 +1134,8 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         let targetContainer = null;
         if (event) {
-            const targetId = $(event.target).parents('.item').attr('data-item-id')
+            const targetId = $(event.target).parents('.item')
+                .attr('data-item-id');
             targetContainer = targetActor.getItem(targetId);
         }
 
@@ -1023,7 +1149,7 @@ export class ActorSheetSFRPG extends ActorSheet {
                 },
                 draggedItems: parsedDragData.items,
                 containerId: targetContainer ? targetContainer.id : null
-            }
+            };
 
             const messageResult = RPC.sendMessageTo("gm", "dragItemFromCollectionToPlayer", msg);
             if (messageResult === "errorRecipientNotAvailable") {
@@ -1035,7 +1161,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             const addedItem = targetActor.getItem(createResult[0].id);
 
             if (game.settings.get('sfrpg', 'scalingCantrips') && addedItem.type === "spell") {
-                _onScalingCantripDrop(addedItem, targetActor);
+                ItemSFRPG._onScalingCantripDrop(addedItem, targetActor);
             }
 
             if (!(addedItem.type in SFRPG.containableTypes)) {
@@ -1055,7 +1181,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             if (splitUUID[0] === "Actor") {
                 actorID = splitUUID[1];
             }
-            
+
             const sourceActor = new ActorItemHelper(actorID || parsedDragData.actorId, parsedDragData.tokenId, parsedDragData.sceneId);
             if (!ActorItemHelper.IsValidHelper(sourceActor)) {
                 ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragFromExternalTokenError"));
@@ -1068,32 +1194,32 @@ export class ActorSheetSFRPG extends ActorSheet {
                 InputDialog.show(
                     game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.AmountToTransferTitle"),
                     game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.AmountToTransferMessage"), {
-                    amount: {
-                        name: game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.AmountToTransferLabel"),
-                        label: game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.AmountToTransferInfo", { max: itemToMove.system.quantity }),
-                        placeholder: itemToMove.system.quantity,
-                        validator: (v) => {
-                            let number = Number(v);
-                            if (Number.isNaN(number)) {
-                                return false;
-                            }
+                        amount: {
+                            name: game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.AmountToTransferLabel"),
+                            label: game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.AmountToTransferInfo", { max: itemToMove.system.quantity }),
+                            placeholder: itemToMove.system.quantity,
+                            validator: (v) => {
+                                let number = Number(v);
+                                if (Number.isNaN(number)) {
+                                    return false;
+                                }
 
-                            if (number < 1) {
-                                return false;
-                            }
+                                if (number < 1) {
+                                    return false;
+                                }
 
-                            if (number > itemToMove.system.quantity) {
-                                return false;
+                                if (number > itemToMove.system.quantity) {
+                                    return false;
+                                }
+                                return true;
                             }
-                            return true;
                         }
-                    }
-                }, (values) => {
-                    const itemInTargetActor = moveItemBetweenActorsAsync(sourceActor, itemToMove, targetActor, targetContainer, values.amount);
-                    if (itemInTargetActor === itemToMove) {
-                        this._onSortItem(event, itemInTargetActor);
-                    }
-                });
+                    }, (values) => {
+                        const itemInTargetActor = moveItemBetweenActorsAsync(sourceActor, itemToMove, targetActor, targetContainer, values.amount);
+                        if (itemInTargetActor === itemToMove) {
+                            this._onSortItem(event, itemInTargetActor);
+                        }
+                    });
             } else {
                 const itemInTargetActor = await moveItemBetweenActorsAsync(sourceActor, itemToMove, targetActor, targetContainer);
                 if (itemInTargetActor === itemToMove) {
@@ -1108,7 +1234,7 @@ export class ActorSheetSFRPG extends ActorSheet {
                 const addedItem = targetActor.getItem(addedItemResult[0].id);
 
                 if (game.settings.get('sfrpg', 'scalingCantrips') && sidebarItem.type === "spell") {
-                    _onScalingCantripDrop(addedItem, targetActor);
+                    ItemSFRPG._onScalingCantripDrop(addedItem, targetActor);
                 }
 
                 if (targetContainer) {
@@ -1131,7 +1257,6 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         console.log("Unknown item source: " + JSON.stringify(parsedDragData));
     }
-    
 
     processItemContainment(items, pushItemFn) {
         const preprocessedItems = [];

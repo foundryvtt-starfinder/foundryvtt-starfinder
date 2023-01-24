@@ -96,7 +96,7 @@ import calculateVehiclePassengers   from './rules/actions/actor/vehicle/calculat
 // Item rules
 import calculateSaveDC from './rules/actions/item/calculate-save-dc.js';
 
-export default function (engine) {
+export default function(engine) {
     console.log("Starfinder | [SETUP] Registering rules");
 
     // Actions
@@ -287,7 +287,8 @@ export default function (engine) {
                     { closure: "calculateAbilityCheckModifiers", stackModifiers: "stackModifiers"},
                     { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" },
                     { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" },
-                    "calculateDamageMitigation"
+                    "calculateDamageMitigation",
+                    "calculateBulkAndWealth"
                 ]
             },
             {
@@ -311,7 +312,8 @@ export default function (engine) {
                     { closure: "calculateSaveModifiers", stackModifiers: "stackModifiers"},
                     { closure: "calculateSkillModifiers", stackModifiers: "stackModifiers" },
                     { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" },
-                    "calculateDamageMitigation"
+                    "calculateDamageMitigation",
+                    "calculateBulkAndWealth"
                 ]
             },
             {

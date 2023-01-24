@@ -1,5 +1,5 @@
-import { SFRPG } from "../../config.js"
-import { ActorSheetSFRPG } from "./base.js"
+import { SFRPG } from "../../config.js";
+import { ActorSheetSFRPG } from "./base.js";
 
 export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
     constructor(...args) {
@@ -14,8 +14,8 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         const options = super.defaultOptions;
         mergeObject(options, {
             classes: ['sfrpg', 'sheet', 'actor', 'character'],
-            width: 715,
-            //height: 830
+            width: 715
+            // height: 830
         });
 
         return options;
@@ -23,29 +23,25 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
 
     get template() {
         const path = "systems/sfrpg/templates/actors/";
-        if (!game.user.isGM && this.actor.limited) return path + "limited-sheet.html";
-        return path + "character-sheet.html";
+        if (!game.user.isGM && this.actor.limited) return path + "limited-sheet.hbs";
+        return path + "character-sheet.hbs";
     }
 
     async getData() {
-        const sheetData = super.getData();
+        const sheetData = await super.getData();
 
         let hp = sheetData.system.attributes.hp;
         if (hp.temp === 0) delete hp.temp;
         if (hp.tempmax === 0) delete hp.tempmax;
 
         sheetData["disableExperience"] = game.settings.get("sfrpg", "disableExperienceTracking");
-        
-        // Enrich text editors
-        sheetData.enrichedBiography = await TextEditor.enrichHTML(this.object.system.details.biography.value, {async: true});
-        sheetData.enrichedGMNotes = await TextEditor.enrichHTML(this.object.system.details.biography.gmNotes, {async: true});
 
         return sheetData;
     }
 
     /**
      * Organize and classify items for character sheets.
-     * 
+     *
      * @param {Object} data Data for the sheet
      * @private
      */
@@ -73,7 +69,16 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         }
 
         //   0      1       2      3        4      5       6           7               8     9
-        let [items, spells, feats, classes, races, themes, archetypes, conditionItems, asis, actorResources] = data.items.reduce((arr, item) => {
+        let [items,
+            spells,
+            feats,
+            classes,
+            races,
+            themes,
+            archetypes,
+            conditionItems,
+            asis,
+            actorResources] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
             item.config = {
                 isStack: item.system.quantity ? item.system.quantity > 1 : false,
@@ -83,7 +88,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
                 hasDamage: item.system.damage?.parts && item.system.damage.parts.length > 0 && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
                 hasUses: item.canBeUsed(),
                 isCharged: !item.hasUses || item.getRemainingUses() <= 0 || !item.isOnCooldown,
-                hasCapacity: item.hasCapacity(),
+                hasCapacity: item.hasCapacity()
             };
 
             if (item.config.hasCapacity) {
@@ -121,10 +126,10 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             else arr[0].push(item); // items
             return arr;
         }, [[], [], [], [], [], [], [], [], [], []]);
-        
+
         const spellbook = this._prepareSpellbook(data, spells);
 
-        this.processItemContainment(items, function (itemType, itemData) {
+        this.processItemContainment(items, function(itemType, itemData) {
             let targetItemType = itemType;
             if (!(itemType in inventory)) {
                 for (let [key, entry] of Object.entries(inventory)) {
@@ -197,7 +202,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
 
     /**
      * Activate event listeners using the prepared sheet HTML
-     * 
+     *
      * @param {JQuery} html The prepared HTML object ready to be rendered into the DOM
      */
     activateListeners(html) {
@@ -205,7 +210,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
 
         if (!this.options.editable) return;
 
-        //html.find('.toggle-prepared').click(this._onPrepareItem.bind(this));
+        // html.find('.toggle-prepared').click(this._onPrepareItem.bind(this));
         html.find('.reload').on('click', this._onReloadWeapon.bind(this));
 
         html.find('.short-rest').on('click', this._onShortRest.bind(this));
@@ -228,7 +233,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
 
     /**
      * Handle toggling the prepared status of an Owned Itme within the Actor
-     * 
+     *
      * @param {Event} event The triggering click event
      */
     _onPrepareItem(event) {

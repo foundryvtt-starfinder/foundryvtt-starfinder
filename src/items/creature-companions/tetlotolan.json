@@ -2,37 +2,13 @@
   "_id": "vdiDHp9YAdaZmNSv",
   "name": "Tetlotolan",
   "type": "npc2",
-  "_stats": {
-    "coreVersion": "10.290",
-    "createdTime": 1666738343703,
-    "lastModifiedBy": "nAGIIjYeOTKZPBrt",
-    "modifiedTime": 1668653295724,
-    "systemId": "sfrpg",
-    "systemVersion": "0.20.3"
-  },
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "_id": "zqAxKTht3TKjBzKj",
       "name": "Frond (So)",
       "type": "weapon",
-      "_stats": {
-        "coreVersion": "10.288",
-        "createdTime": 1667027117382,
-        "lastModifiedBy": "DQ2No2U3tu4dZzr5",
-        "modifiedTime": 1667629299481,
-        "systemId": "sfrpg",
-        "systemVersion": "0.20.3"
-      },
-      "effects": [],
-      "flags": {},
-      "folder": null,
       "img": "icons/svg/mystery-man.svg",
-      "ownership": {
-        "SPRszH5sDdJlGxJn": 3,
-        "default": 0
-      },
-      "sort": 0,
       "system": {
         "type": "",
         "ability": "",
@@ -104,7 +80,7 @@
           "parts": [
             {
               "name": "",
-              "formula": "@abilities.str.mod",
+              "formula": "@abilities.str.mod + (lookupRange(@details.cr, 0, 1, 1, 9, 3, 10, 2, 13, 6, 15, 5, 16, 6, 17, 8, 19, 9, 20, 13))d(lookupRange(@details.cr, 0, 1, 4, 6, 6, 7, 8, 8, 12, 9, 4, 10, 8, 11, 10, 12, 12, 13, 4, 14, 6, 15, 8, 17, 6, 18, 8, 20, 6)) + (@details.cr)",
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -125,7 +101,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>A tetlotolan&rsquo;s frond attack targets EAC and has the unwieldy weapon property.</p>"
+          "value": "<p>A tetlotolan’s frond attack targets EAC and has the unwieldy weapon property.</p>"
         },
         "descriptors": [],
         "duration": {
@@ -287,27 +263,7 @@
       "_id": "FTDQ7caOAQoT2E45",
       "name": "Creature Companion - Tetlotolan",
       "type": "feat",
-      "_stats": {
-        "coreVersion": "10.288",
-        "createdTime": 1666738399852,
-        "lastModifiedBy": "DQ2No2U3tu4dZzr5",
-        "modifiedTime": 1667448995239,
-        "systemId": "sfrpg",
-        "systemVersion": "0.20.3"
-      },
-      "effects": [],
-      "flags": {
-        "core": {
-          "sourceId": "Actor.8uktygKWLPHniSM4.Item.lDyqMXhSzt7ruwZZ"
-        }
-      },
-      "folder": "hlygaViJm7JpfQry",
       "img": "icons/creatures/mammals/wolf-shadow-black.webp",
-      "ownership": {
-        "SPRszH5sDdJlGxJn": 3,
-        "default": 0
-      },
-      "sort": 100000,
       "system": {
         "type": "",
         "ability": null,
@@ -342,7 +298,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>@UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.gTHswZ0FBafS7ru0]{Creature Companion}</p>\n<p>This squat hexapod&rsquo;s body has radial symmetry and resembles a starfish with tall, fern-like crests that chime softly when rustled. They filter feed on sounds, migrating slowly to absorb a varied diet.</p>\n<h2 class=\"title\">Tetlotolan</h2>\n<p>Levels 1-12</p>\n<p>Small aberration<br><strong>Senses</strong>&nbsp;darkvision 60 ft.<br><strong>Good Save</strong>&nbsp;Will;&nbsp;<strong>Poor Saves</strong>&nbsp;Fort, Ref<br><strong>Resistances</strong>&nbsp;sonic 5<br><strong>Speed</strong>&nbsp;25 ft.<br><strong>Melee Attack</strong>&nbsp;frond (So)<br><strong>Space</strong>&nbsp;5 ft.&nbsp;<strong>Reach</strong>&nbsp;5 ft.<br><strong>Ability Modifiers</strong>&nbsp;Con, Cha</p>\n<h3 class=\"title\">Special Abilities</h3>\n<p><strong>Discordant Burst (Ex, 7th level)</strong> Every 1d6 rounds, a tetlotolan can create a 5-foot-radius burst of unsettling harmonics within 30 feet as a standard action. Creatures in the area become flat-footed and off-target for 1 round unless they succeed at a Fortitude save (DC = 10 + 1-1/2 &times; the tetlotolan&rsquo;s level)</p>\n<p><strong>Frond (Ex)</strong>&nbsp;A tetlotolan&rsquo;s frond attack targets EAC and has the unwieldy weapon property.</p>\n<p>&nbsp;</p>\n<p><em>HP Max must be manually adjusted. HP value can be found on the @UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.FqsTa05DBVMfsvxy#creature-companion-statistics]{Creature Companion Statistics Table}</em></p>"
+          "value": "<p>@UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.gTHswZ0FBafS7ru0]{Creature Companion}</p>\n<p>This squat hexapod’s body has radial symmetry and resembles a starfish with tall, fern-like crests that chime softly when rustled. They filter feed on sounds, migrating slowly to absorb a varied diet.</p>\n<h2>Tetlotolan</h2>\n<p>Levels 1-12</p>\n<p>Small aberration</p>\n<p><strong>Senses</strong>&nbsp;darkvision 60 ft.</p>\n<p><strong>Good Save</strong>&nbsp;Will;&nbsp;<strong>Poor Saves</strong>&nbsp;Fort, Ref</p>\n<p><strong>Resistances</strong>&nbsp;sonic 5</p>\n<p><strong>Speed</strong>&nbsp;25 ft.</p>\n<p><strong>Melee Attack</strong>&nbsp;frond (So)</p>\n<p><strong>Space</strong>&nbsp;5 ft.&nbsp;<strong>Reach</strong>&nbsp;5 ft.</p>\n<p><strong>Ability Modifiers</strong>&nbsp;Con, Cha</p>\n<h3>Special Abilities</h3>\n<p><strong>Discordant Burst (Ex, 7th level)</strong> Every 1d6 rounds, a tetlotolan can create a 5-foot-radius burst of unsettling harmonics within 30 feet as a standard action. Creatures in the area become flat-footed and off-target for 1 round unless they succeed at a Fortitude save (DC = 10 + 1-1/2 × the tetlotolan’s level)</p>\n<p><strong>Frond (Ex)</strong>&nbsp;A tetlotolan’s frond attack targets EAC and has the unwieldy weapon property.</p>\n<p><em>HP Max must be manually adjusted. HP value can be found on the @UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.FqsTa05DBVMfsvxy#creature-companion-statistics]{Creature Companion Statistics Table}</em></p>"
         },
         "descriptors": {
           "acid": false,
@@ -372,10 +328,12 @@
           "mind-affecting": false,
           "pain": false,
           "poison": false,
+          "polymorph": false,
           "radiation": false,
           "scrying": false,
           "sense-dependent": false,
           "shadow": false,
+          "sonic": false,
           "summoning": false,
           "teleportation": false,
           "water": false
@@ -393,7 +351,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "TJEePFNwbaYFCZTr",
+              "actorId": "vdiDHp9YAdaZmNSv",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ac",
@@ -412,7 +370,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "TJEePFNwbaYFCZTr",
+              "actorId": "vdiDHp9YAdaZmNSv",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ac",
@@ -431,7 +389,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "TJEePFNwbaYFCZTr",
+              "actorId": "vdiDHp9YAdaZmNSv",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "save",
@@ -450,7 +408,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "TJEePFNwbaYFCZTr",
+              "actorId": "vdiDHp9YAdaZmNSv",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "save",
@@ -469,7 +427,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "TJEePFNwbaYFCZTr",
+              "actorId": "vdiDHp9YAdaZmNSv",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "save",
@@ -488,7 +446,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "TJEePFNwbaYFCZTr",
+              "actorId": "vdiDHp9YAdaZmNSv",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ability-score",
@@ -507,7 +465,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "TJEePFNwbaYFCZTr",
+              "actorId": "vdiDHp9YAdaZmNSv",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ability-score",
@@ -526,7 +484,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "TJEePFNwbaYFCZTr",
+              "actorId": "vdiDHp9YAdaZmNSv",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ability-score",
@@ -545,7 +503,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "TJEePFNwbaYFCZTr",
+              "actorId": "vdiDHp9YAdaZmNSv",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "all-skills",
@@ -564,7 +522,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "TJEePFNwbaYFCZTr",
+              "actorId": "vdiDHp9YAdaZmNSv",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "all-attacks",
@@ -578,31 +536,12 @@
             "valueAffected": "acr"
           },
           {
-            "_id": "a0389005-fc87-47dd-829d-f49bebf79ec5",
-            "name": "Creature Companion - Damage",
-            "type": "untyped",
-            "condition": "",
-            "container": {
-              "actorId": "TJEePFNwbaYFCZTr",
-              "itemId": "FTDQ7caOAQoT2E45"
-            },
-            "effectType": "all-damage",
-            "enabled": true,
-            "max": 0,
-            "modifier": "(lookupRange(@details.cr, 0, 1, 1, 9, 3, 10, 2, 13, 6, 15, 5, 16, 6, 17, 8, 19, 9, 20, 13))d(lookupRange(@details.cr, 0, 1, 4, 6, 6, 7, 8, 8, 12, 9, 4, 10, 8, 11, 10, 12, 12, 13, 4, 14, 6, 15, 8, 17, 6, 18, 8, 20, 6)) + (@details.cr)",
-            "modifierType": "constant",
-            "notes": "",
-            "source": "",
-            "subtab": "misc",
-            "valueAffected": "acr"
-          },
-          {
             "_id": "5b36554e-2d79-40a2-8e99-fc64bc616b18",
             "name": "Tetlotolan",
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "TJEePFNwbaYFCZTr",
+              "actorId": "vdiDHp9YAdaZmNSv",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "energy-resistance",
@@ -649,23 +588,7 @@
       "_id": "25koFi5bPLinhxwK",
       "name": "Discordant Burst (Ex, 7th level)",
       "type": "feat",
-      "_stats": {
-        "coreVersion": "10.290",
-        "createdTime": 1667446118476,
-        "lastModifiedBy": "nAGIIjYeOTKZPBrt",
-        "modifiedTime": 1668653295724,
-        "systemId": "sfrpg",
-        "systemVersion": "0.20.3"
-      },
-      "effects": [],
-      "flags": {},
-      "folder": null,
       "img": "icons/svg/mystery-man.svg",
-      "ownership": {
-        "DQ2No2U3tu4dZzr5": 3,
-        "default": 0
-      },
-      "sort": 0,
       "system": {
         "type": "",
         "ability": "",
@@ -700,7 +623,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>Every 1d6 rounds, a tetlotolan can create a 5-foot-radius burst of unsettling harmonics within 30 feet as a standard action. Creatures in the area become @Compendium[sfrpg.conditions.MZ8OoH1GE9qDMyCD]{Flat-Footed} and @Compendium[sfrpg.conditions.yUtkoIshf4dPruNd]{Off-Target} for 1 round unless they succeed at a Fortitude save (DC = 10 + 1-1/2 &times; the tetlotolan&rsquo;s level)</p>"
+          "value": "<p>Every 1d6 rounds, a tetlotolan can create a 5-foot-radius burst of unsettling harmonics within 30 feet as a standard action. Creatures in the area become @UUID[Compendium.sfrpg.conditions.MZ8OoH1GE9qDMyCD]{Flat-Footed} and @UUID[Compendium.sfrpg.conditions.yUtkoIshf4dPruNd]{Off-Target} for 1 round unless they succeed at a Fortitude save (DC = 10 + 1-1/2 × the tetlotolan’s level)</p>"
         },
         "descriptors": {
           "acid": false,
@@ -778,23 +701,7 @@
       "_id": "pU1Y1wsTmR9Lse2G",
       "name": "Frond (Ex)",
       "type": "feat",
-      "_stats": {
-        "coreVersion": "10.288",
-        "createdTime": 1667446118821,
-        "lastModifiedBy": "DQ2No2U3tu4dZzr5",
-        "modifiedTime": 1667690577634,
-        "systemId": "sfrpg",
-        "systemVersion": "0.20.3"
-      },
-      "effects": [],
-      "flags": {},
-      "folder": null,
       "img": "icons/svg/mystery-man.svg",
-      "ownership": {
-        "DQ2No2U3tu4dZzr5": 3,
-        "default": 0
-      },
-      "sort": 0,
       "system": {
         "type": "",
         "ability": "",
@@ -829,7 +736,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>A tetlotolan&rsquo;s frond attack targets EAC and has the unwieldy weapon property.</p>"
+          "value": "<p>A tetlotolan’s frond attack targets EAC and has the unwieldy weapon property.</p>"
         },
         "descriptors": {
           "acid": false,
@@ -905,20 +812,19 @@
     }
   ],
   "prototypeToken": {
-    "name": "New Actor (54)",
+    "name": "Tetlotolan",
     "actorLink": false,
     "alpha": 1,
     "bar1": {
-      "attribute": null
+      "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": null
+      "attribute": ""
     },
     "detectionModes": [],
-    "displayBars": 0,
-    "displayName": 0,
+    "displayBars": 20,
+    "displayName": 20,
     "disposition": -1,
-    "flags": {},
     "height": 1,
     "light": {
       "alpha": 0.5,
@@ -1074,12 +980,6 @@
         "tooltip": [],
         "value": 0
       },
-      "rp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
       "sp": {
         "max": 10,
         "min": 0,
@@ -1197,7 +1097,7 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<p>This squat hexapod&rsquo;s body has radial symmetry and resembles a starfish with tall, fern-like crests that chime softly when rustled. They filter feed on sounds, migrating slowly to absorb a varied diet.</p>\n<h2 class=\"title\">Tetlotolan</h2>\n<p>Levels 1-12</p>\n<p>Small aberration<br><strong>Senses</strong>&nbsp;darkvision 60 ft.<br><strong>Good Save</strong>&nbsp;Will;&nbsp;<strong>Poor Saves</strong>&nbsp;Fort, Ref<br><strong>Resistances</strong>&nbsp;sonic 5<br><strong>Speed</strong>&nbsp;25 ft.<br><strong>Melee Attack</strong>&nbsp;frond (So)<br><strong>Space</strong>&nbsp;5 ft.&nbsp;<strong>Reach</strong>&nbsp;5 ft.<br><strong>Ability Modifiers</strong>&nbsp;Con, Cha</p>",
+        "value": "<p>This squat hexapod’s body has radial symmetry and resembles a starfish with tall, fern-like crests that chime softly when rustled. They filter feed on sounds, migrating slowly to absorb a varied diet.</p>\n<h2>Tetlotolan</h2>\n<p>Levels 1-12</p>\n<p>Small aberration</p>\n<p><strong>Senses</strong>&nbsp;darkvision 60 ft.</p>\n<p><strong>Good Save</strong>&nbsp;Will;&nbsp;<strong>Poor Saves</strong>&nbsp;Fort, Ref</p>\n<p><strong>Resistances</strong>&nbsp;sonic 5</p>\n<p><strong>Speed</strong>&nbsp;25 ft.</p>\n<p><strong>Melee Attack</strong>&nbsp;frond (So)</p>\n<p><strong>Space</strong>&nbsp;5 ft.&nbsp;<strong>Reach</strong>&nbsp;5 ft.</p>\n<p><strong>Ability Modifiers</strong>&nbsp;Con, Cha</p>",
         "weight": ""
       },
       "class": "",

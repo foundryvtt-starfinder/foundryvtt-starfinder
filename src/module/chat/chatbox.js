@@ -18,7 +18,7 @@ export default class SFRPGCustomChatMessage {
 
     /**
      * Render a custom standard roll to chat.
-     * 
+     *
      * @param {Roll}        roll             The roll data
      * @param {object}      data             The data for the roll
      * @param {RollContext} data.rollContent The context for the roll
@@ -31,7 +31,7 @@ export default class SFRPGCustomChatMessage {
     static renderStandardRoll(roll, data) {
         /** Get entities */
         const mainContext = data.rollContext.mainContext ? data.rollContext.allContexts[data.rollContext.mainContext] : null;
-        
+
         let actor = data.rollContext.allContexts['actor'] ? data.rollContext.allContexts['actor'].entity : mainContext?.entity;
         if (!actor) {
             actor = data.rollContext.allContexts['ship'] ? data.rollContext.allContexts['ship'].entity : mainContext?.entity;
@@ -39,7 +39,7 @@ export default class SFRPGCustomChatMessage {
                 return false;
             }
         }
-        
+
         let item = data.rollContext.allContexts['item'] ? data.rollContext.allContexts['item'].entity : mainContext?.entity;
         if (!item) {
             item = data.rollContext.allContexts['weapon'] ? data.rollContext.allContexts['weapon'].entity : mainContext?.entity;
@@ -71,7 +71,7 @@ export default class SFRPGCustomChatMessage {
             tags: data.tags,
             damageTypeString: data.damageTypeString,
             specialMaterials: data.specialMaterials,
-            rollOptions: data.rollOptions,
+            rollOptions: data.rollOptions
         };
 
         const speaker = data.speaker;
@@ -99,7 +99,7 @@ export default class SFRPGCustomChatMessage {
     }
 
     static async _render(roll, data, options) {
-        const templateName = "systems/sfrpg/templates/chat/chat-message-attack-roll.html";
+        const templateName = "systems/sfrpg/templates/chat/chat-message-attack-roll.hbs";
         let rollContent = await roll.render({htmlData: data.htmlData});
 
         // Insert the damage type string if possible.
@@ -113,7 +113,7 @@ export default class SFRPGCustomChatMessage {
         }
 
         options = foundry.utils.mergeObject(options, { rollContent });
-        const cardContent = await renderTemplate(templateName, options);        
+        const cardContent = await renderTemplate(templateName, options);
         const rollMode = data.rollMode ? data.rollMode : game.settings.get('core', 'rollMode');
 
         // let explainedRollContent = rollContent;
@@ -125,7 +125,7 @@ export default class SFRPGCustomChatMessage {
         const messageData = {
             flavor: data.title,
             speaker: data.speaker,
-            content: cardContent, //+ explainedRollContent + (options.additionalContent || ""),
+            content: cardContent, // + explainedRollContent + (options.additionalContent || ""),
             rollMode: rollMode,
             roll: roll,
             type: CONST.CHAT_MESSAGE_TYPES.ROLL,

@@ -1,7 +1,8 @@
+import FloatingNumberMenu from "./classes/floating-number-menu.js";
 import { SFRPG } from "./config.js";
-import { _onScalingCantripsSettingChanges } from "./item/item.js";
+import { ItemSFRPG } from "./item/item.js";
 
-export const registerSystemSettings = function () {
+export const registerSystemSettings = function() {
     game.settings.register("sfrpg", "diagonalMovement", {
         name: "SFRPG.Settings.DiagonalMovementRule.Name",
         hint: "SFRPG.Settings.DiagonalMovementRule.Hint",
@@ -76,7 +77,7 @@ export const registerSystemSettings = function () {
         default: true,
         type: Boolean
     });
-    
+
     game.settings.register("sfrpg", "autoAddUnarmedStrike", {
         name: "SFRPG.Settings.AutoAddUnarmedStrike.Name",
         hint: "SFRPG.Settings.AutoAddUnarmedStrike.Hint",
@@ -103,18 +104,18 @@ export const registerSystemSettings = function () {
         default: false,
         type: Boolean
     });
-    
+
     game.settings.register("sfrpg", "scalingCantrips", {
-    name: "SFRPG.Settings.ScalingCantrips.Name",
+        name: "SFRPG.Settings.ScalingCantrips.Name",
         hint: "SFRPG.Settings.ScalingCantrips.Hint",
-    scope: "world",
-    config: true,
-    default: false,
-    type: Boolean,
-    onChange: () => {
-        _onScalingCantripsSettingChanges() 
-    }
-});    
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
+        onChange: () => {
+            ItemSFRPG._onScalingCantripsSettingChanges();
+        }
+    });
 
     for (let combatType of SFRPG.combatTypes) {
         const capitalizedCombatType = combatType[0].toUpperCase() + combatType.slice(1);
@@ -181,7 +182,7 @@ export const registerSystemSettings = function () {
         hint: "SFRPG.Settings.DamageRoundingAdvantage.Hint",
         scope: "world",
         config: true,
-        default: "attacker",
+        default: "defender",
         type: String,
         choices: {
             "attacker": "SFRPG.Settings.DamageRoundingAdvantage.ValueAttacker",
@@ -223,5 +224,56 @@ export const registerSystemSettings = function () {
         config: true,
         default: true,
         type: Boolean
+    });
+
+    // Floating Number settings
+    game.settings.registerMenu("sfrpg", "floatingHP", {
+        name: "SFRPG.Settings.FloatingHP.Menu.Label",
+        label: "SFRPG.Settings.FloatingHP.Button",
+        hint: "SFRPG.Settings.FloatingHP.Hint",
+        icon: "fas fa-heart",
+        type: FloatingNumberMenu
+    });
+
+    game.settings.register("sfrpg", "floatingHP", {
+        scope: "world",
+        config: false,
+        type: Boolean,
+        default: true
+    });
+
+    game.settings.register("sfrpg", "verboseFloatyText", {
+        scope: "world",
+        config: false,
+        type: Boolean,
+        default: false
+    });
+
+    game.settings.register("sfrpg", "limitByCriteria", {
+        scope: "world",
+        config: false,
+        type: Boolean,
+        default: false
+    });
+
+    game.settings.register("sfrpg", "canSeeBars", {
+        scope: "world",
+        config: false,
+        type: Boolean,
+        default: false
+    });
+
+    game.settings.register("sfrpg", "canSeeName", {
+        scope: "world",
+        config: false,
+        type: Boolean,
+        default: false
+    });
+
+    game.settings.register("sfrpg", "minPerm", {
+        scope: "world",
+        config: false,
+        type: String,
+        default: "LIMITED"
     });
 };

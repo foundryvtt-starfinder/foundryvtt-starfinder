@@ -52,4 +52,4 @@ export const ActorResourcesMixin = (superclass) => class extends superclass {
         const actorResources = this.items.filter(x => x.type === "actorResource" && x.system.combatTracker?.show);
         return actorResources;
     }
-}
+};

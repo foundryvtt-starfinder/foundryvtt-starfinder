@@ -1,13 +1,13 @@
 export default class SFRPGTokenDocument extends TokenDocument {
     /**
      * Hijack Token health bar rendering to include temporary and temp-max health in the bar display
-     * 
+     *
      * @param {string} barName The name of the bar attribute to target.
      * @param {object} [optional] Optional parameters that can be passed into the mehtod.
      * @param {string} [optional.alternative] An alternative attribute path to get instead of the default one
-     * @returns 
+     * @returns
      */
-    getBarAttribute(barName, {alternative}={}) {
+    getBarAttribute(barName, {alternative} = {}) {
         const attr = alternative || (barName ? this[barName].attribute : null);
         if ( !attr || !this.actor ) return null;
         let data = foundry.utils.getProperty(this.actor.system, attr);
@@ -21,7 +21,7 @@ export default class SFRPGTokenDocument extends TokenDocument {
                 attribute: attr,
                 value: Number(data),
                 editable: foundry.utils.hasProperty(model, attr)
-            }
+            };
         }
 
         // Attribute objects
@@ -40,7 +40,7 @@ export default class SFRPGTokenDocument extends TokenDocument {
                 value: value,
                 max: max,
                 editable: foundry.utils.hasProperty(model, `${attr}.value`)
-            }
+            };
         }
 
         // Otherwise null

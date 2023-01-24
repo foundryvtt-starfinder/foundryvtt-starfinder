@@ -1,7 +1,7 @@
 export const ActorInventoryMixin = (superclass) => class extends superclass {
     /**
      * Returns the containing item for a given item.
-     * 
+     *
      * @param {Item} item Item to find the parent of.
      * @returns {Item} The parent item of the item, or null if not contained.
      */
@@ -24,13 +24,14 @@ export const ActorInventoryMixin = (superclass) => class extends superclass {
             }
 
             // Wait a moment to allow the database to update.
-            Promise.all(promises).then(x => { return new Promise(resolve => setTimeout(() => resolve(x), 1)); }).then(() => {
-                Hooks.callAll("afterItemsProcessed", {actor: actor});
-                if (actor.sheet?.rendered) {
-                    actor.sheet?.clearTooltips();
-                    actor.sheet?.render(false);
-                }
-            });
+            Promise.all(promises).then(x => { return new Promise(resolve => setTimeout(() => resolve(x), 1)); })
+                .then(() => {
+                    Hooks.callAll("afterItemsProcessed", {actor: actor});
+                    if (actor.sheet?.rendered) {
+                        actor.sheet?.clearTooltips();
+                        actor.sheet?.render(false);
+                    }
+                });
         }
     }
-}
+};

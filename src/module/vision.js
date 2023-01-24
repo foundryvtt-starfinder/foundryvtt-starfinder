@@ -1,15 +1,15 @@
 export default function setupVision() {
     setupVisionModes();
-    setDefaultIlluminationThreshold();
-    globalIlluminationThresholdTooltip();
-    setupConditions()
+    setDefautSceneSettings();
+    sceneConfigTooltips();
+    setupConditions();
 }
 
 function setupVisionModes() {
-    //Set global illumination luminosity to dim light, so LLV will see it as bright
+    // Set global illumination luminosity to dim light, so LLV will see it as bright
     CONFIG.Canvas.globalLightConfig.luminosity = 0.5;
 
-    //Override core darkvision
+    // Override core darkvision
     CONFIG.Canvas.visionModes.darkvision = new VisionMode({
         id: "darkvision",
         label: "SFRPG.SensesTypes.SensesDark",
@@ -101,21 +101,24 @@ function setupVisionModes() {
     });
 }
 
-function setDefaultIlluminationThreshold() {
+function setDefautSceneSettings() {
     Hooks.on("preCreateScene", (scene) => {
-        scene.updateSource({ globalLightThreshold: 0.75 });
+        scene.updateSource({ globalLightThreshold: 0.75, globalLight: true });
     });
 }
 
-function globalIlluminationThresholdTooltip() {
+function sceneConfigTooltips() {
     Hooks.on("renderSceneConfig", (config, html) => {
         const darknessSlider = html[0].querySelector("input[name='globalLightThreshold']").nextElementSibling;
+        const globalIllumination = html[0].querySelector("input[name='globalLight']");
 
-        const tooltip = 
-        `<i data-tooltip="${ game.i18n.localize("SFRPG.SensesTypes.GlobalIlluminationThresholdMessage") }"
-         class="fas fa-lightbulb" 
-         style="flex: 0; padding-left: 2px">`;
-        darknessSlider.insertAdjacentHTML("afterend", tooltip);
+        const tooltip = `
+        <i data-tooltip="${ game.i18n.localize("SFRPG.SensesTypes.GlobalIlluminationThresholdMessage") }"
+        class="fas fa-lightbulb"
+        style="flex: 0; padding-left: 2px">`;
+
+        globalIllumination?.insertAdjacentHTML("afterend", tooltip);
+        darknessSlider?.insertAdjacentHTML("afterend", tooltip);
     });
 }
 

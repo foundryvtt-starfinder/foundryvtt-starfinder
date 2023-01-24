@@ -1,0 +1,158 @@
+<nav class="sheet-subnavigation subtabs" data-group="modifiers">
+    {{#each sections as |section sid|}}
+    <a class="item" data-tab="{{section.dataset.subtab}}">{{localize section.label}}</a>
+    {{/each}}
+</nav>
+<section class="modifiers-body">
+    {{#each sections as |section sid|}}
+    <div class="tab {{section.dataset.subtab}} {{#unless section.isConditions}}flexrow{{else}}flexcol{{/unless}}" data-group="modifiers" data-tab="{{section.dataset.subtab}}">
+        {{#if section.isConditions}}
+        <div class="form-group stacked conditions">
+            {{#each ../config.conditionTypes as |condition name|}}
+            <label class="checkbox" data-tippy-content="{{lookup (lookup ../../config.conditions name) "tooltip"}}">
+                <input type="checkbox" 
+                       class="condition {{name}}" 
+                       data-condition="{{name}}" 
+                       name="system.conditions.{{name}}" 
+                       {{checked (lookup ../../system.conditions name)}} /> {{condition}}
+            </label>
+            {{/each}}
+        </div>
+
+        <ol class="inventory-list">
+            <li class="inventory-header flexrow">
+                <h3 class="item-name noborder flexrow">Conditions</h3>
+        
+                {{#if ../isOwner}}
+                <div class="item-controls">
+                    {{#if section.allowAdd}}
+                    <a class="item-control item-create" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Create"}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
+                        <i class="fas fa-plus"></i> {{localize "SFRPG.InventoryAdd"}}
+                    </a>
+                    {{/if}}
+                </div>
+                {{/if}}
+            </li>
+        
+            <ol class="item-list">
+            {{#each section.items as |item iid|}}
+                {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.hbs" ../../this bigItem=true item=item onlyControls=true}}
+            {{/each}}
+            </ol>
+        </ol>
+        {{else}}
+        <ol class="inventory-list">
+            <li class="item flexrow inventory-header modifiers-header">
+                <div class="item-name modifier-name flexrow">
+                    <h3 class="noborder">{{localize "SFRPG.ModifierNameLabel"}}</h3>
+                </div>
+
+                <div class="item-detail modifier-mod">{{localize "SFRPG.ModifierTitle"}}</div>
+                <div class="item-detail modifier-type">{{localize "SFRPG.ModifierTypeLabel"}}</div>
+                <div class="item-detail modifier-effect-type">{{localize "SFRPG.ModifierEffectTypeHeaderLabel"}}</div>
+                <div class="item-detail modifier-value-affected">{{localize "SFRPG.ModifierValueAffectedHeaderLabel"}}</div>
+                {{#if ../isOwner}}
+                <div class="item-controls">
+                    <a class="item-control modifier-create" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}} title="Add Modifier">
+                        <i class="fas fa-plus"></i> {{localize "SFRPG.AddLabel"}}
+                    </a>
+                </div>
+                {{/if}}
+            </li>
+
+            <ol class="modifier-list item-list">
+                {{#each section.modifiers as |modifier mid|}}
+                <li class="item modifier flexrow" data-tippy-content="<strong>{{modifier.name}}</strong><br>{{#if modifier.enabled}}Enabled{{else}}Disabled{{/if}}{{#if modifier.notes}}<br><br>Notes<hr>{{modifier.notes}}{{/if}}" data-modifier-id="{{modifier._id}}">
+                    <div class="item-name modifier-name flexrow">
+                        <h4>{{~modifier.name~}}</h4>
+                    </div>
+
+                    <div class="item-detail modifier-mod">
+                        {{#if (or (ne modifier.modifierType "constant") (isNaN modifier.modifier))}}
+                        {{ellipsis modifier.modifier 12}}
+                        {{else}}
+                        {{ellipsis (numberFormat modifier.modifier decimals=0 sign=true) 10}}
+                        {{/if}}
+                    </div>
+                    <div class="item-detail modifier-type">
+                        {{lookup ../../config.modifierTypes modifier.type}}
+                    </div>
+                    <div class="item-detail modifier-effect-type">
+                        {{lookup ../../config.modifierEffectTypes modifier.effectType}}
+                    </div>
+                    <div class="item-detail modifier-value-affected">
+                        {{#if (eq modifier.effectType "ac")}}
+                            {{lookup ../../config.modifierArmorClassAffectedValues modifier.valueAffected}}
+                        {{else if (eq modifier.effectType "acp")}}
+                            {{lookup ../../config.acpEffectingArmorType modifier.valueAffected}}
+                        {{else if (eq modifier.effectType "ability-skills")}}
+                            {{lookup ../../config.abilities modifier.valueAffected}}
+                        {{else if (eq modifier.effectType "ability-check")}}
+                            {{lookup ../../config.abilities modifier.valueAffected}}
+                        {{else if (eq modifier.effectType "ability-score")}}
+                            {{lookup ../../config.abilities modifier.valueAffected}}
+                        {{else if (eq modifier.effectType "skill")}}
+                            {{lookup ../../config.skills modifier.valueAffected}}
+                        {{else if (eq modifier.effectType "skill-ranks")}}
+                            {{lookup ../../config.skills modifier.valueAffected}}
+                        {{else if (eq modifier.effectType "save")}}
+                            {{#if (eq modifier.valueAffected "highest")}}
+                                {{localize "SFRPG.ModifierSaveHighest"}}
+                            {{else if (eq modifier.valueAffected "lowest")}}
+                                {{localize "SFRPG.ModifierSaveLowest"}}
+                            {{else}}
+                                {{lookup ../../config.saves modifier.valueAffected}}
+                            {{/if}}
+                        {{else if (eq modifier.effectType "weapon-attacks")}}
+                            {{lookup ../../config.weaponTypes modifier.valueAffected}}
+                        {{else if (eq modifier.effectType "weapon-property-attacks")}}
+                            {{lookup ../../config.weaponProperties modifier.valueAffected}}
+                        {{else if (eq modifier.effectType "weapon-category-attacks")}}
+                            {{lookup ../../config.weaponCategories modifier.valueAffected}}
+                        {{else if (eq modifier.effectType "weapon-damage")}}
+                            {{lookup ../../config.weaponTypes modifier.valueAffected}}
+                        {{else if (eq modifier.effectType "weapon-property-damage")}}
+                            {{lookup ../../config.weaponProperties modifier.valueAffected}}
+                        {{else if (eq modifier.effectType "weapon-category-damage")}}
+                            {{lookup ../../config.weaponCategories modifier.valueAffected}}
+                        {{else if (eq modifier.effectType "specific-speed")}}
+                            {{lookup ../../config.speeds modifier.valueAffected}}
+                        {{else if (eq modifier.effectType "actor-resource")}}
+                            <h4>{{~modifier.valueAffected~}}</h4>
+                        {{else if (eq modifier.effectType "damage-reduction")}}
+                            {{#if (eq modifier.valueAffected "custom")}}
+                                {{modifier.notes}}
+                            {{else}}
+                                {{lookup ../../config.damageReductionTypes modifier.valueAffected}}
+                            {{/if}}
+                        {{else if (eq modifier.effectType "energy-resistance")}}
+                            {{#if (eq modifier.valueAffected "custom")}}
+                                {{modifier.notes}}
+                            {{else}}
+                                {{lookup ../../config.energyResistanceTypes modifier.valueAffected}}
+                            {{/if}}
+                        {{else}}
+                        {{!-- Nothing --}}
+                        {{/if}}
+                    </div>
+                    {{#if ../../isOwner}}
+                    <div class="item-controls">
+                        <a class="item-control modifier-toggle" {{createTippy title="SFRPG.ActorSheet.Modifiers.Tooltips.ToggleModifier" subtitle="SFRPG.ActorSheet.Modifiers.Tooltips.ToggleModifierTooltip"}}>{{#if modifier.enabled}}<i class="far fa-check-square">{{else}}<i class="far fa-square"></i>{{/if}}</i></a>
+                        <a class="item-control modifier-edit" {{createTippy title="SFRPG.ActorSheet.Modifiers.Tooltips.EditModifier" subtitle="SFRPG.ActorSheet.Modifiers.Tooltips.EditModifierTooltip"}}><i class="fas fa-edit"></i></a>
+                        <a class="item-control modifier-delete" {{createTippy title="SFRPG.ActorSheet.Modifiers.Tooltips.DeleteModifier" subtitle="SFRPG.ActorSheet.Modifiers.Tooltips.DeleteModifierTooltip"}}><i class="fas fa-trash"></i></a>
+                    </div>
+                    {{/if}}
+                </li>
+                {{/each}}
+            </ol>
+        </ol>
+        {{/if}}
+    </div>
+    {{/each}}
+</section>
+
+{{#if (eq actor.type "npc")}}
+<div class="warningFooter">
+    <label>{{localize "SFRPG.NPCSheet.Interface.Conditions.Warning"}}</label>
+</div>
+{{/if}}

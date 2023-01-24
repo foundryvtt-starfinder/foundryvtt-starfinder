@@ -1,4 +1,4 @@
-import { ActorItemHelper, getChildItems, getItemContainer, setItemContainer } from "../../actor/actor-inventory-utils.js"
+import { ActorItemHelper, getChildItems, getItemContainer, setItemContainer } from "../../actor/actor-inventory-utils.js";
 
 export const ItemCapacityMixin = (superclass) => class extends superclass {
     /**
@@ -40,7 +40,8 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
         // Create actor item helper
         const tokenId = this.actor.isToken ? this.actor.token.id : null;
         const sceneId = this.actor.isToken ? this.actor.token.parent.id : null;
-        const itemHelper = new ActorItemHelper(this.actor.id, tokenId, sceneId);
+        // Pass the actor through on the options object so the constructor doesn't have to try (and fail) and fetch the actor from the compendium.
+        const itemHelper = new ActorItemHelper(this.actor.id, tokenId, sceneId, { actor: this.actor });
 
         // Find child item
         const childItems = getChildItems(itemHelper, this);
@@ -98,7 +99,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
         if (this.type === "ammunition" && !this.system.useCapacity) {
             return null;
         }
-        
+
         const itemData = this.system;
         const maxCapacity = itemData.capacity?.max;
         return maxCapacity;
@@ -121,7 +122,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
         let updatePromise = null;
         if (this.requiresCapacityItem()) {
             const capacityItem = this.getCapacityItem();
-            
+
             // Find more items matching ammunition type
             const matchingItems = this.actor.items
                 .filter(x => x.type === "ammunition" && x.system.ammunitionType === itemData.ammunitionType && ((x.getCurrentCapacity() > currentCapacity && x.getMaxCapacity() <= maxCapacity) || !x.system.useCapacity))
@@ -145,7 +146,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
                     if (capacityItem) {
                         updatePromise = setItemContainer(itemHelper, capacityItem, null, 1);
                     }
-                    
+
                     if (updatePromise) {
                         updatePromise.then(() => {
                             setItemContainer(itemHelper, newAmmunition, this, 1);
@@ -224,7 +225,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
             cost: game.i18n.format("SFRPG.AbilityActivationTypesMove")
         };
 
-        const template = `systems/sfrpg/templates/chat/item-action-card.html`;
+        const template = `systems/sfrpg/templates/chat/item-action-card.hbs`;
         const renderPromise = renderTemplate(template, templateData);
         renderPromise.then((html) => {
             // Create the chat message
@@ -238,4 +239,4 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
         });
 
     }
-}
+};

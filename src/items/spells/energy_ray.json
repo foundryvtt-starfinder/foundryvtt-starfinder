@@ -2,12 +2,6 @@
   "_id": "xNs98gJ8XLhmVyR3",
   "name": "Energy Ray",
   "type": "spell",
-  "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.sfrpg.spells.xNs98gJ8XLhmVyR3"
-    }
-  },
   "img": "systems/sfrpg/icons/spells/energy_ray.webp",
   "system": {
     "type": "",
@@ -24,6 +18,7 @@
     },
     "allowedClasses": {
       "myst": false,
+      "precog": false,
       "tech": true,
       "wysh": false
     },
@@ -43,13 +38,62 @@
     "damage": {
       "parts": [
         {
-          "name": "",
+          "name": "Acid",
           "formula": "1d3",
+          "group": 0,
           "types": {
             "acid": true,
             "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Cold",
+          "formula": "1d3",
+          "group": 0,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
             "cold": true,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Electricity",
+          "formula": "1d3",
+          "group": 0,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
             "electricity": true,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Fire",
+          "formula": "1d3",
+          "group": 0,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
             "fire": true,
             "healing": false,
             "piercing": false,
@@ -67,7 +111,44 @@
       "unidentified": "",
       "value": "<p>When you cast this spell, choose acid, cold, electricity, or fire; the spell gains that descriptor. You fire a ray at the target, and you must make a ranged attack against its EAC. On a hit, the ray deals 1d3 damage of the chosen energy type.</p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": true,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
     "dismissible": false,
     "duration": {
       "units": "",

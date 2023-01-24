@@ -2,37 +2,13 @@
   "_id": "zg55NZn3QqopyONB",
   "name": "Giant Pipefish",
   "type": "npc2",
-  "_stats": {
-    "coreVersion": "10.290",
-    "createdTime": 1666738343703,
-    "lastModifiedBy": "nAGIIjYeOTKZPBrt",
-    "modifiedTime": 1668653662577,
-    "systemId": "sfrpg",
-    "systemVersion": "0.20.3"
-  },
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "_id": "zqAxKTht3TKjBzKj",
       "name": "Feeding tube (P; critical needle maw)",
       "type": "weapon",
-      "_stats": {
-        "coreVersion": "10.288",
-        "createdTime": 1667027117382,
-        "lastModifiedBy": "DQ2No2U3tu4dZzr5",
-        "modifiedTime": 1667689761046,
-        "systemId": "sfrpg",
-        "systemVersion": "0.20.3"
-      },
-      "effects": [],
-      "flags": {},
-      "folder": null,
       "img": "icons/svg/mystery-man.svg",
-      "ownership": {
-        "SPRszH5sDdJlGxJn": 3,
-        "default": 0
-      },
-      "sort": 0,
       "system": {
         "type": "",
         "ability": "",
@@ -104,7 +80,7 @@
           "parts": [
             {
               "name": "",
-              "formula": "@abilities.str.mod",
+              "formula": "@abilities.str.mod + (lookupRange(@details.cr, 0, 1, 1, 9, 3, 10, 2, 13, 6, 15, 5, 16, 6, 17, 8, 19, 9, 20, 13))d(lookupRange(@details.cr, 0, 1, 4, 6, 6, 7, 8, 8, 12, 9, 4, 10, 8, 11, 10, 12, 12, 13, 4, 14, 6, 15, 8, 17, 6, 18, 8, 20, 6)) + (@details.cr)",
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -287,27 +263,7 @@
       "_id": "FTDQ7caOAQoT2E45",
       "name": "Creature Companion - Giant Pipefish",
       "type": "feat",
-      "_stats": {
-        "coreVersion": "10.288",
-        "createdTime": 1666738399852,
-        "lastModifiedBy": "DQ2No2U3tu4dZzr5",
-        "modifiedTime": 1667629843699,
-        "systemId": "sfrpg",
-        "systemVersion": "0.20.3"
-      },
-      "effects": [],
-      "flags": {
-        "core": {
-          "sourceId": "Actor.8uktygKWLPHniSM4.Item.lDyqMXhSzt7ruwZZ"
-        }
-      },
-      "folder": "hlygaViJm7JpfQry",
       "img": "icons/creatures/mammals/wolf-shadow-black.webp",
-      "ownership": {
-        "SPRszH5sDdJlGxJn": 3,
-        "default": 0
-      },
-      "sort": 100000,
       "system": {
         "type": "",
         "ability": null,
@@ -342,7 +298,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>@UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.gTHswZ0FBafS7ru0]{Creature Companion}</p>\n<p>On countless watery worlds across the galaxy, convergent evolution has resulted in a vast array of somewhat similar creatures known collectively as giant pipefish. While the size, color, and exact shape of these relatively tame carnivores vary based on their ecosystem, they all have one thing in common: symbiotic relationships with other creatures. A giant pipefish has a fragile, tubular form that ends in a thin, sharp feeding tube. It relies on filter feeders, scavengers, and other hangers-on to attach themselves to its cylindrical body and to provide physical protection against predators and other threats; in exchange, the riders get a free meal out of the pipefish&rsquo;s constant movement (in the case of filter feeders) or scraps (in the case of scavengers). Convincing a giant pipefish that you&rsquo;re a friend and not just another meal is no easy feat; the DC of Survival checks to bond with a giant pipefish companion is 3 higher than normal.</p>\n<h2 class=\"title\">Giant Pipefish</h2>\n<p>Levels 1-20</p>\n<p>Medium or Large animal<br><strong>Senses</strong>&nbsp;blindsense (vibration) 60 ft.<br><strong>Good Save</strong>&nbsp;Ref;&nbsp;<strong>Poor Saves</strong>&nbsp;Fort, Will<br><strong>Speed</strong>&nbsp;10 ft., swim 40 ft.<br><strong>Melee Attack</strong>&nbsp;feeding tube (P; critical needle maw)<br><strong>Space</strong>&nbsp;5 ft. (Medium) or 10 ft. (Large)&nbsp;<strong>Reach</strong>&nbsp;5 ft.<br><strong>Ability Modifiers</strong>&nbsp;Dex, Str</p>\n<h3 class=\"title\">Special Abilities</h3>\n<p><strong>Needle Maw (Ex, 5th level)</strong> Giant pipefish are excellent at finding weak spots in their prey. When a giant pipefish rolls a 19 or 20 on its melee attack, it applies the wound critical hit effect to its target (save DC = 7 + the giant pipefish&rsquo;s level); roll a d12 instead of a d20 on the Wounding Weapons table.</p>\n<p><strong>Rapid Turning (Ex)</strong>&nbsp;Giant pipefish are incredibly agile swimmers, so it doesn&rsquo;t cost them additional movement to change direction while swimming.</p>\n<p>&nbsp;</p>\n<p><em>HP Max must be manually adjusted. HP value can be found on the @UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.FqsTa05DBVMfsvxy#creature-companion-statistics]{Creature Companion Statistics Table}</em></p>"
+          "value": "<p>@UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.gTHswZ0FBafS7ru0]{Creature Companion}</p>\n<p>On countless watery worlds across the galaxy, convergent evolution has resulted in a vast array of somewhat similar creatures known collectively as giant pipefish. While the size, color, and exact shape of these relatively tame carnivores vary based on their ecosystem, they all have one thing in common: symbiotic relationships with other creatures. A giant pipefish has a fragile, tubular form that ends in a thin, sharp feeding tube. It relies on filter feeders, scavengers, and other hangers-on to attach themselves to its cylindrical body and to provide physical protection against predators and other threats; in exchange, the riders get a free meal out of the pipefish’s constant movement (in the case of filter feeders) or scraps (in the case of scavengers). Convincing a giant pipefish that you’re a friend and not just another meal is no easy feat; the DC of Survival checks to bond with a giant pipefish companion is 3 higher than normal.</p>\n<h2>Giant Pipefish</h2>\n<p>Levels 1-20</p>\n<p>Medium or Large animal</p>\n<p><strong>Senses</strong>&nbsp;blindsense (vibration) 60 ft.</p>\n<p><strong>Good Save</strong>&nbsp;Ref;&nbsp;<strong>Poor Saves</strong>&nbsp;Fort, Will</p>\n<p><strong>Speed</strong>&nbsp;10 ft., swim 40 ft.</p>\n<p><strong>Melee Attack</strong>&nbsp;feeding tube (P; critical needle maw)</p>\n<p><strong>Space</strong>&nbsp;5 ft. (Medium) or 10 ft. (Large)&nbsp;<strong>Reach</strong>&nbsp;5 ft.</p>\n<p><strong>Ability Modifiers</strong>&nbsp;Dex, Str</p>\n<h3>Special Abilities</h3>\n<p><strong>Needle Maw (Ex, 5th level)</strong> Giant pipefish are excellent at finding weak spots in their prey. When a giant pipefish rolls a 19 or 20 on its melee attack, it applies the wound critical hit effect to its target (save DC = 7 + the giant pipefish’s level); roll a d12 instead of a d20 on the Wounding Weapons table.</p>\n<p><strong>Rapid Turning (Ex)</strong>&nbsp;Giant pipefish are incredibly agile swimmers, so it doesn’t cost them additional movement to change direction while swimming.</p>\n<p><em>HP Max must be manually adjusted. HP value can be found on the @UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.FqsTa05DBVMfsvxy#creature-companion-statistics]{Creature Companion Statistics Table}</em></p>"
         },
         "descriptors": {
           "acid": false,
@@ -372,10 +328,12 @@
           "mind-affecting": false,
           "pain": false,
           "poison": false,
+          "polymorph": false,
           "radiation": false,
           "scrying": false,
           "sense-dependent": false,
           "shadow": false,
+          "sonic": false,
           "summoning": false,
           "teleportation": false,
           "water": false
@@ -393,7 +351,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "K1PZesqavgnlTton",
+              "actorId": "zg55NZn3QqopyONB",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ac",
@@ -412,7 +370,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "K1PZesqavgnlTton",
+              "actorId": "zg55NZn3QqopyONB",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ac",
@@ -431,7 +389,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "K1PZesqavgnlTton",
+              "actorId": "zg55NZn3QqopyONB",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "save",
@@ -450,7 +408,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "K1PZesqavgnlTton",
+              "actorId": "zg55NZn3QqopyONB",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "save",
@@ -469,7 +427,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "K1PZesqavgnlTton",
+              "actorId": "zg55NZn3QqopyONB",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "save",
@@ -488,7 +446,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "K1PZesqavgnlTton",
+              "actorId": "zg55NZn3QqopyONB",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ability-score",
@@ -507,7 +465,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "K1PZesqavgnlTton",
+              "actorId": "zg55NZn3QqopyONB",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ability-score",
@@ -526,7 +484,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "K1PZesqavgnlTton",
+              "actorId": "zg55NZn3QqopyONB",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ability-score",
@@ -545,7 +503,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "K1PZesqavgnlTton",
+              "actorId": "zg55NZn3QqopyONB",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "all-skills",
@@ -564,32 +522,13 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "K1PZesqavgnlTton",
+              "actorId": "zg55NZn3QqopyONB",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "all-attacks",
             "enabled": true,
             "max": 0,
             "modifier": "lookupRange(@details.cr, 0, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 9, 8, 10, 9, 11, 10, 13, 11, 14, 13, 16, 14, 17, 15, 18, 16, 19, 17, 20, 18, 21, 19, 23)",
-            "modifierType": "constant",
-            "notes": "",
-            "source": "",
-            "subtab": "misc",
-            "valueAffected": "acr"
-          },
-          {
-            "_id": "a0389005-fc87-47dd-829d-f49bebf79ec5",
-            "name": "Creature Companion - Damage",
-            "type": "untyped",
-            "condition": "",
-            "container": {
-              "actorId": "K1PZesqavgnlTton",
-              "itemId": "FTDQ7caOAQoT2E45"
-            },
-            "effectType": "all-damage",
-            "enabled": true,
-            "max": 0,
-            "modifier": "(lookupRange(@details.cr, 0, 1, 1, 9, 3, 10, 2, 13, 6, 15, 5, 16, 6, 17, 8, 19, 9, 20, 13))d(lookupRange(@details.cr, 0, 1, 4, 6, 6, 7, 8, 8, 12, 9, 4, 10, 8, 11, 10, 12, 12, 13, 4, 14, 6, 15, 8, 17, 6, 18, 8, 20, 6)) + (@details.cr)",
             "modifierType": "constant",
             "notes": "",
             "source": "",
@@ -630,23 +569,7 @@
       "_id": "ofDFL7qwvpK6KP35",
       "name": "Needle Maw (Ex, 5th level)",
       "type": "feat",
-      "_stats": {
-        "coreVersion": "10.290",
-        "createdTime": 1667629730512,
-        "lastModifiedBy": "nAGIIjYeOTKZPBrt",
-        "modifiedTime": 1668653662577,
-        "systemId": "sfrpg",
-        "systemVersion": "0.20.3"
-      },
-      "effects": [],
-      "flags": {},
-      "folder": null,
       "img": "icons/svg/mystery-man.svg",
-      "ownership": {
-        "DQ2No2U3tu4dZzr5": 3,
-        "default": 0
-      },
-      "sort": 0,
       "system": {
         "type": "",
         "ability": "",
@@ -681,7 +604,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>Giant pipefish are excellent at finding weak spots in their prey. When a giant pipefish rolls a 19 or 20 on its melee attack, it applies the @UUID[Compendium.sfrpg.rules.O5GDQUKPCJ9Zbnfj.JournalEntryPage.zOJ86MDq6kNzAAbB#wound]{Wound} critical hit effect to its target (save DC = 7 + the giant pipefish&rsquo;s level); roll a d12 instead of a d20 on the Wounding Weapons table.</p>"
+          "value": "<p>Giant pipefish are excellent at finding weak spots in their prey. When a giant pipefish rolls a 19 or 20 on its melee attack, it applies the @UUID[Compendium.sfrpg.rules.O5GDQUKPCJ9Zbnfj.JournalEntryPage.zOJ86MDq6kNzAAbB#wound]{Wound} critical hit effect to its target (save DC = 7 + the giant pipefish’s level); roll a d12 instead of a d20 on the Wounding Weapons table.</p>"
         },
         "descriptors": {
           "acid": false,
@@ -759,23 +682,7 @@
       "_id": "TBEDTiKVJjRVl8Ib",
       "name": "Rapid Turning (Ex)",
       "type": "feat",
-      "_stats": {
-        "coreVersion": "10.288",
-        "createdTime": 1667629730743,
-        "lastModifiedBy": "DQ2No2U3tu4dZzr5",
-        "modifiedTime": 1667629824808,
-        "systemId": "sfrpg",
-        "systemVersion": "0.20.3"
-      },
-      "effects": [],
-      "flags": {},
-      "folder": null,
       "img": "icons/svg/mystery-man.svg",
-      "ownership": {
-        "DQ2No2U3tu4dZzr5": 3,
-        "default": 0
-      },
-      "sort": 0,
       "system": {
         "type": "",
         "ability": null,
@@ -810,7 +717,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>Giant pipefish are incredibly agile swimmers, so it doesn&rsquo;t cost them additional movement to change direction while swimming.</p>"
+          "value": "<p>Giant pipefish are incredibly agile swimmers, so it doesn’t cost them additional movement to change direction while swimming.</p>"
         },
         "descriptors": {
           "acid": false,
@@ -886,20 +793,19 @@
     }
   ],
   "prototypeToken": {
-    "name": "New Actor (54)",
+    "name": "Giant Pipefish",
     "actorLink": false,
     "alpha": 1,
     "bar1": {
-      "attribute": null
+      "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": null
+      "attribute": ""
     },
     "detectionModes": [],
-    "displayBars": 0,
-    "displayName": 0,
+    "displayBars": 20,
+    "displayName": 20,
     "disposition": -1,
-    "flags": {},
     "height": 1,
     "light": {
       "alpha": 0.5,
@@ -1055,12 +961,6 @@
         "tooltip": [],
         "value": 0
       },
-      "rp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
       "sp": {
         "max": 10,
         "min": 0,
@@ -1142,6 +1042,7 @@
       "frightened": false,
       "grappled": false,
       "helpless": false,
+      "invisible": false,
       "nauseated": false,
       "off-kilter": false,
       "off-target": false,
@@ -1178,7 +1079,7 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<p>On countless watery worlds across the galaxy, convergent evolution has resulted in a vast array of somewhat similar creatures known collectively as giant pipefish. While the size, color, and exact shape of these relatively tame carnivores vary based on their ecosystem, they all have one thing in common: symbiotic relationships with other creatures. A giant pipefish has a fragile, tubular form that ends in a thin, sharp feeding tube. It relies on filter feeders, scavengers, and other hangers-on to attach themselves to its cylindrical body and to provide physical protection against predators and other threats; in exchange, the riders get a free meal out of the pipefish&rsquo;s constant movement (in the case of filter feeders) or scraps (in the case of scavengers). Convincing a giant pipefish that you&rsquo;re a friend and not just another meal is no easy feat; the DC of Survival checks to bond with a giant pipefish companion is 3 higher than normal.</p>\n<h2 class=\"title\">Giant Pipefish</h2>\n<p>Levels 1-20</p>\n<p>Medium or Large animal<br><strong>Senses</strong>&nbsp;blindsense (vibration) 60 ft.<br><strong>Good Save</strong>&nbsp;Ref;&nbsp;<strong>Poor Saves</strong>&nbsp;Fort, Will<br><strong>Speed</strong>&nbsp;10 ft., swim 40 ft.<br><strong>Melee Attack</strong>&nbsp;feeding tube (P; critical needle maw)<br><strong>Space</strong>&nbsp;5 ft. (Medium) or 10 ft. (Large)&nbsp;<strong>Reach</strong>&nbsp;5 ft.<br><strong>Ability Modifiers</strong>&nbsp;Dex, Str</p>",
+        "value": "<p>On countless watery worlds across the galaxy, convergent evolution has resulted in a vast array of somewhat similar creatures known collectively as giant pipefish. While the size, color, and exact shape of these relatively tame carnivores vary based on their ecosystem, they all have one thing in common: symbiotic relationships with other creatures. A giant pipefish has a fragile, tubular form that ends in a thin, sharp feeding tube. It relies on filter feeders, scavengers, and other hangers-on to attach themselves to its cylindrical body and to provide physical protection against predators and other threats; in exchange, the riders get a free meal out of the pipefish’s constant movement (in the case of filter feeders) or scraps (in the case of scavengers). Convincing a giant pipefish that you’re a friend and not just another meal is no easy feat; the DC of Survival checks to bond with a giant pipefish companion is 3 higher than normal.</p>\n<h2>Giant Pipefish</h2>\n<p>Levels 1-20</p>\n<p>Medium or Large animal</p>\n<p><strong>Senses</strong>&nbsp;blindsense (vibration) 60 ft.</p>\n<p><strong>Good Save</strong>&nbsp;Ref;&nbsp;<strong>Poor Saves</strong>&nbsp;Fort, Will</p>\n<p><strong>Speed</strong>&nbsp;10 ft., swim 40 ft.</p>\n<p><strong>Melee Attack</strong>&nbsp;feeding tube (P; critical needle maw)</p>\n<p><strong>Space</strong>&nbsp;5 ft. (Medium) or 10 ft. (Large)&nbsp;<strong>Reach</strong>&nbsp;5 ft.</p>\n<p><strong>Ability Modifiers</strong>&nbsp;Dex, Str</p>",
         "weight": ""
       },
       "class": "",

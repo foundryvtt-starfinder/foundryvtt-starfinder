@@ -2,37 +2,13 @@
   "_id": "ZvTt34GYy5a3Qc3z",
   "name": "Glitch Gremlin",
   "type": "npc2",
-  "_stats": {
-    "coreVersion": "10.290",
-    "createdTime": 1666738343703,
-    "lastModifiedBy": "nAGIIjYeOTKZPBrt",
-    "modifiedTime": 1668654178386,
-    "systemId": "sfrpg",
-    "systemVersion": "0.20.3"
-  },
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "_id": "zqAxKTht3TKjBzKj",
       "name": "Bite (P)",
       "type": "weapon",
-      "_stats": {
-        "coreVersion": "10.288",
-        "createdTime": 1667027117382,
-        "lastModifiedBy": "DQ2No2U3tu4dZzr5",
-        "modifiedTime": 1667630598011,
-        "systemId": "sfrpg",
-        "systemVersion": "0.20.3"
-      },
-      "effects": [],
-      "flags": {},
-      "folder": null,
       "img": "icons/svg/mystery-man.svg",
-      "ownership": {
-        "SPRszH5sDdJlGxJn": 3,
-        "default": 0
-      },
-      "sort": 0,
       "system": {
         "type": "",
         "ability": "",
@@ -104,7 +80,7 @@
           "parts": [
             {
               "name": "",
-              "formula": "@abilities.str.mod",
+              "formula": "@abilities.str.mod + (lookupRange(@details.cr, 0, 1, 1, 9, 3, 10, 2, 13, 6, 15, 5, 16, 6, 17, 8, 19, 9, 20, 13))d(lookupRange(@details.cr, 0, 1, 4, 6, 6, 7, 8, 8, 12, 9, 4, 10, 8, 11, 10, 12, 12, 13, 4, 14, 6, 15, 8, 17, 6, 18, 8, 20, 6)) + (@details.cr)",
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -287,27 +263,7 @@
       "_id": "FTDQ7caOAQoT2E45",
       "name": "Creature Companion - Glitch Gremlin",
       "type": "feat",
-      "_stats": {
-        "coreVersion": "10.288",
-        "createdTime": 1666738399852,
-        "lastModifiedBy": "DQ2No2U3tu4dZzr5",
-        "modifiedTime": 1667630399277,
-        "systemId": "sfrpg",
-        "systemVersion": "0.20.3"
-      },
-      "effects": [],
-      "flags": {
-        "core": {
-          "sourceId": "Actor.8uktygKWLPHniSM4.Item.lDyqMXhSzt7ruwZZ"
-        }
-      },
-      "folder": "hlygaViJm7JpfQry",
       "img": "icons/creatures/mammals/wolf-shadow-black.webp",
-      "ownership": {
-        "SPRszH5sDdJlGxJn": 3,
-        "default": 0
-      },
-      "sort": 100000,
       "system": {
         "type": "",
         "ability": null,
@@ -342,7 +298,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>@UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.gTHswZ0FBafS7ru0]{Creature Companion}</p>\n<p>See Magic Hack @Compendium[sfrpg.class-features.DkOzHY87bTjsdjMp]{Gremlin Companion (Su)}.</p>\n<h2 class=\"title\">Glitch Gremlin</h2>\n<p>Levels 1-20</p>\n<p>Tiny fey<br><strong>Senses</strong>&nbsp;low-light vision<br><strong>Good Save</strong>&nbsp;Will;&nbsp;<strong>Poor Saves</strong>&nbsp;Fort, Ref<br><strong>Speed</strong>&nbsp;20 ft., climb 20 ft.<br><strong>Melee Attack</strong>&nbsp;bite (P) or jolt (E)<br><strong>Space</strong>&nbsp;2 1/2 ft.&nbsp;<strong>Reach</strong>&nbsp;0 ft.<br><strong>Ability Modifiers</strong>&nbsp;Dex, Int</p>\n<h3 class=\"title\">Special Abilities</h3>\n<p><strong>Jolt (Su)</strong> Every 1d4 rounds, a glitch gremlin can channel an electrical blast as a ranged attack that targets EAC. This ray has a range increment of 30 feet.</p>\n<p><strong>Short Circuit (Su, 7th level)</strong> A glitch gremlin that critically hits a creature with its bite or jolt attack can cause one computer, technological item, or weapon without the analog special property in the target&rsquo;s possession to become broken for 1d4 rounds unless the target succeeds at a Will save (DC = 10 + the gremlin&rsquo;s level). If the broken condition would have no effect on the item, the condition instead causes the weapon to have a 20% chance of malfunctioning each round it&rsquo;s turned on and each time it&rsquo;s activated. When an item malfunctions, it is deactivated, cannot be used until the beginning of the user&rsquo;s next turn, and produces no effect (wasting the action used to operate it).</p>\n<p><strong>Tech Support (Ex)</strong>&nbsp;While your glitch gremlin is adjacent to you or in your space, you gain a +2 morale bonus to Engineering checks to arm explosives and disable devices. You also gain this bonus to Computers checks to hack computers; disable modules and systems; and destroy modules and systems.</p>\n<p><br><em>HP Max must be manually adjusted. HP value can be found on the @UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.FqsTa05DBVMfsvxy#creature-companion-statistics]{Creature Companion Statistics Table}</em></p>"
+          "value": "<p>@UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.gTHswZ0FBafS7ru0]{Creature Companion}</p>\n<p>See Magic Hack @UUID[Compendium.sfrpg.class-features.DkOzHY87bTjsdjMp]{Gremlin Companion (Su)}.</p>\n<h2>Glitch Gremlin</h2>\n<p>Levels 1-20</p>\n<p>Tiny fey</p>\n<p><strong>Senses</strong>&nbsp;low-light vision</p>\n<p><strong>Good Save</strong>&nbsp;Will;&nbsp;<strong>Poor Saves</strong>&nbsp;Fort, Ref</p>\n<p><strong>Speed</strong>&nbsp;20 ft., climb 20 ft.</p>\n<p><strong>Melee Attack</strong>&nbsp;bite (P) or jolt (E)</p>\n<p><strong>Space</strong>&nbsp;2 1/2 ft.&nbsp;<strong>Reach</strong>&nbsp;0 ft.</p>\n<p><strong>Ability Modifiers</strong>&nbsp;Dex, Int</p>\n<h3>Special Abilities</h3>\n<p><strong>Jolt (Su)</strong> Every 1d4 rounds, a glitch gremlin can channel an electrical blast as a ranged attack that targets EAC. This ray has a range increment of 30 feet.</p>\n<p><strong>Short Circuit (Su, 7th level)</strong> A glitch gremlin that critically hits a creature with its bite or jolt attack can cause one computer, technological item, or weapon without the analog special property in the target’s possession to become broken for 1d4 rounds unless the target succeeds at a Will save (DC = 10 + the gremlin’s level). If the broken condition would have no effect on the item, the condition instead causes the weapon to have a 20% chance of malfunctioning each round it’s turned on and each time it’s activated. When an item malfunctions, it is deactivated, cannot be used until the beginning of the user’s next turn, and produces no effect (wasting the action used to operate it).</p>\n<p><strong>Tech Support (Ex)</strong>&nbsp;While your glitch gremlin is adjacent to you or in your space, you gain a +2 morale bonus to Engineering checks to arm explosives and disable devices. You also gain this bonus to Computers checks to hack computers; disable modules and systems; and destroy modules and systems.</p>\n<p><em>HP Max must be manually adjusted. HP value can be found on the @UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.FqsTa05DBVMfsvxy#creature-companion-statistics]{Creature Companion Statistics Table}</em></p>"
         },
         "descriptors": {
           "acid": false,
@@ -372,10 +328,12 @@
           "mind-affecting": false,
           "pain": false,
           "poison": false,
+          "polymorph": false,
           "radiation": false,
           "scrying": false,
           "sense-dependent": false,
           "shadow": false,
+          "sonic": false,
           "summoning": false,
           "teleportation": false,
           "water": false
@@ -393,7 +351,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "qJY2SvCMK3QD4X6w",
+              "actorId": "ZvTt34GYy5a3Qc3z",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ac",
@@ -412,7 +370,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "qJY2SvCMK3QD4X6w",
+              "actorId": "ZvTt34GYy5a3Qc3z",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ac",
@@ -431,7 +389,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "qJY2SvCMK3QD4X6w",
+              "actorId": "ZvTt34GYy5a3Qc3z",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "save",
@@ -450,7 +408,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "qJY2SvCMK3QD4X6w",
+              "actorId": "ZvTt34GYy5a3Qc3z",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "save",
@@ -469,7 +427,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "qJY2SvCMK3QD4X6w",
+              "actorId": "ZvTt34GYy5a3Qc3z",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "save",
@@ -488,7 +446,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "qJY2SvCMK3QD4X6w",
+              "actorId": "ZvTt34GYy5a3Qc3z",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ability-score",
@@ -507,7 +465,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "qJY2SvCMK3QD4X6w",
+              "actorId": "ZvTt34GYy5a3Qc3z",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ability-score",
@@ -526,7 +484,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "qJY2SvCMK3QD4X6w",
+              "actorId": "ZvTt34GYy5a3Qc3z",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ability-score",
@@ -545,7 +503,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "qJY2SvCMK3QD4X6w",
+              "actorId": "ZvTt34GYy5a3Qc3z",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "all-skills",
@@ -564,32 +522,13 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "qJY2SvCMK3QD4X6w",
+              "actorId": "ZvTt34GYy5a3Qc3z",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "all-attacks",
             "enabled": true,
             "max": 0,
             "modifier": "lookupRange(@details.cr, 0, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 9, 8, 10, 9, 11, 10, 13, 11, 14, 13, 16, 14, 17, 15, 18, 16, 19, 17, 20, 18, 21, 19, 23)",
-            "modifierType": "constant",
-            "notes": "",
-            "source": "",
-            "subtab": "misc",
-            "valueAffected": "acr"
-          },
-          {
-            "_id": "a0389005-fc87-47dd-829d-f49bebf79ec5",
-            "name": "Creature Companion - Damage",
-            "type": "untyped",
-            "condition": "",
-            "container": {
-              "actorId": "qJY2SvCMK3QD4X6w",
-              "itemId": "FTDQ7caOAQoT2E45"
-            },
-            "effectType": "all-damage",
-            "enabled": true,
-            "max": 0,
-            "modifier": "(lookupRange(@details.cr, 0, 1, 1, 9, 3, 10, 2, 13, 6, 15, 5, 16, 6, 17, 8, 19, 9, 20, 13))d(lookupRange(@details.cr, 0, 1, 4, 6, 6, 7, 8, 8, 12, 9, 4, 10, 8, 11, 10, 12, 12, 13, 4, 14, 6, 15, 8, 17, 6, 18, 8, 20, 6)) + (@details.cr)",
             "modifierType": "constant",
             "notes": "",
             "source": "",
@@ -630,23 +569,7 @@
       "_id": "VFP5RblCWx0VA67q",
       "name": "Jolt (Su)",
       "type": "feat",
-      "_stats": {
-        "coreVersion": "10.290",
-        "createdTime": 1667630338745,
-        "lastModifiedBy": "nAGIIjYeOTKZPBrt",
-        "modifiedTime": 1668654099806,
-        "systemId": "sfrpg",
-        "systemVersion": "0.20.3"
-      },
-      "effects": [],
-      "flags": {},
-      "folder": null,
       "img": "icons/svg/mystery-man.svg",
-      "ownership": {
-        "DQ2No2U3tu4dZzr5": 3,
-        "default": 0
-      },
-      "sort": 0,
       "system": {
         "type": "",
         "ability": "",
@@ -676,7 +599,8 @@
           "parts": [
             {
               "name": "",
-              "formula": "",
+              "formula": "(lookupRange(@details.cr, 0, 1, 1, 9, 3, 10, 2, 13, 6, 15, 5, 16, 6, 17, 8, 19, 9, 20, 13))d(lookupRange(@details.cr, 0, 1, 4, 6, 6, 7, 8, 8, 12, 9, 4, 10, 8, 11, 10, 12, 12, 13, 4, 14, 6, 15, 8, 17, 6, 18, 8, 20, 6)) + (@details.cr)",
+              "group": null,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -727,10 +651,12 @@
           "mind-affecting": false,
           "pain": false,
           "poison": false,
+          "polymorph": false,
           "radiation": false,
           "scrying": false,
           "sense-dependent": false,
           "shadow": false,
+          "sonic": false,
           "summoning": false,
           "teleportation": false,
           "water": false
@@ -775,23 +701,7 @@
       "_id": "BHwUVwonnawK8JQy",
       "name": "Short Circuit (Su, 7th level)",
       "type": "feat",
-      "_stats": {
-        "coreVersion": "10.290",
-        "createdTime": 1667630339411,
-        "lastModifiedBy": "nAGIIjYeOTKZPBrt",
-        "modifiedTime": 1668654178386,
-        "systemId": "sfrpg",
-        "systemVersion": "0.20.3"
-      },
-      "effects": [],
-      "flags": {},
-      "folder": null,
       "img": "icons/svg/mystery-man.svg",
-      "ownership": {
-        "DQ2No2U3tu4dZzr5": 3,
-        "default": 0
-      },
-      "sort": 0,
       "system": {
         "type": "",
         "ability": "",
@@ -826,7 +736,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>A glitch gremlin that critically hits a creature with its bite or jolt attack can cause one computer, technological item, or weapon without the analog special property in the target&rsquo;s possession to become broken for 1d4 rounds unless the target succeeds at a Will save (DC = 10 + the gremlin&rsquo;s level). If the broken condition would have no effect on the item, the condition instead causes the weapon to have a 20% chance of malfunctioning each round it&rsquo;s turned on and each time it&rsquo;s activated. When an item malfunctions, it is deactivated, cannot be used until the beginning of the user&rsquo;s next turn, and produces no effect (wasting the action used to operate it).</p>"
+          "value": "<p>A glitch gremlin that critically hits a creature with its bite or jolt attack can cause one computer, technological item, or weapon without the analog special property in the target’s possession to become broken for 1d4 rounds unless the target succeeds at a Will save (DC = 10 + the gremlin’s level). If the broken condition would have no effect on the item, the condition instead causes the weapon to have a 20% chance of malfunctioning each round it’s turned on and each time it’s activated. When an item malfunctions, it is deactivated, cannot be used until the beginning of the user’s next turn, and produces no effect (wasting the action used to operate it).</p>"
         },
         "descriptors": {
           "acid": false,
@@ -904,23 +814,7 @@
       "_id": "NF5GVkGSYKF0DFfF",
       "name": "Tech Support (Ex)",
       "type": "feat",
-      "_stats": {
-        "coreVersion": "10.288",
-        "createdTime": 1667630339522,
-        "lastModifiedBy": "DQ2No2U3tu4dZzr5",
-        "modifiedTime": 1667630528608,
-        "systemId": "sfrpg",
-        "systemVersion": "0.20.3"
-      },
-      "effects": [],
-      "flags": {},
-      "folder": null,
       "img": "icons/svg/mystery-man.svg",
-      "ownership": {
-        "DQ2No2U3tu4dZzr5": 3,
-        "default": 0
-      },
-      "sort": 0,
       "system": {
         "type": "",
         "ability": null,
@@ -1031,20 +925,19 @@
     }
   ],
   "prototypeToken": {
-    "name": "New Actor (54)",
+    "name": "Glitch Gremlin",
     "actorLink": false,
     "alpha": 1,
     "bar1": {
-      "attribute": null
+      "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": null
+      "attribute": ""
     },
     "detectionModes": [],
-    "displayBars": 0,
-    "displayName": 0,
+    "displayBars": 20,
+    "displayName": 20,
     "disposition": -1,
-    "flags": {},
     "height": 1,
     "light": {
       "alpha": 0.5,
@@ -1200,12 +1093,6 @@
         "tooltip": [],
         "value": 0
       },
-      "rp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
       "sp": {
         "max": 10,
         "min": 0,
@@ -1287,6 +1174,7 @@
       "frightened": false,
       "grappled": false,
       "helpless": false,
+      "invisible": false,
       "nauseated": false,
       "off-kilter": false,
       "off-target": false,
@@ -1323,7 +1211,7 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<p>See Magic Hack @Compendium[sfrpg.class-features.DkOzHY87bTjsdjMp]{Gremlin Companion (Su)}.</p>\n<h2 class=\"title\">Glitch Gremlin</h2>\n<p>Levels 1-20</p>\n<p>Tiny fey<br><strong>Senses</strong>&nbsp;low-light vision<br><strong>Good Save</strong>&nbsp;Will;&nbsp;<strong>Poor Saves</strong>&nbsp;Fort, Ref<br><strong>Speed</strong>&nbsp;20 ft., climb 20 ft.<br><strong>Melee Attack</strong>&nbsp;bite (P) or jolt (E)<br><strong>Space</strong>&nbsp;2 1/2 ft.&nbsp;<strong>Reach</strong>&nbsp;0 ft.<br><strong>Ability Modifiers</strong>&nbsp;Dex, Int</p>",
+        "value": "<p>See Magic Hack @UUID[Compendium.sfrpg.class-features.DkOzHY87bTjsdjMp]{Gremlin Companion (Su)}.</p>\n<h2>Glitch Gremlin</h2>\n<p>Levels 1-20</p>\n<p>Tiny fey</p>\n<p><strong>Senses</strong>&nbsp;low-light vision</p>\n<p><strong>Good Save</strong>&nbsp;Will;&nbsp;<strong>Poor Saves</strong>&nbsp;Fort, Ref</p>\n<p><strong>Speed</strong>&nbsp;20 ft., climb 20 ft.</p>\n<p><strong>Melee Attack</strong>&nbsp;bite (P) or jolt (E)</p>\n<p><strong>Space</strong>&nbsp;2 1/2 ft.&nbsp;<strong>Reach</strong>&nbsp;0 ft.</p>\n<p><strong>Ability Modifiers</strong>&nbsp;Dex, Int</p>",
         "weight": ""
       },
       "class": "",

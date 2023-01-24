@@ -1,3 +1,76 @@
+# v0.22.1 - Hotfix
+This is just a small hotfix mainly to fix the floating numbers settings window from opening, with a few other tweaks that accumulated in the meantime.
+
+## System improvements
+* Added a new item type and section on starship sheets for Starship Special Abilities.
+* Altered the layout of ASI sheets slightly to reference rules text.
+
+## Bugfixes
+* The floating numbers settings window now opens.
+* The pause icon of the custom SFRPG theme can now be correctly overridden by modules.
+* Restored hazard damage rolls, and removed some redundant flavour text. 
+
+## Compendium improvements
+* Replaced several incorrect attribute references in spells.
+* Added Fire Support.
+* Added Philosopher's Stings & Rift Rifles.
+
+# v0.22.0
+
+This update bring a slew of minor-to-moderate new features and continued data entry of Interstellar Species, plus a (hopefully) final batch of V10 fixes.
+
+## Damage groups
+Damage sections on weapons can now be assigned to groups. You can only enable one damage section from a given group. This is useful for things like damaging cantrips, which allow you to pick a damage type.
+
+## Floating text
+Applying damage to tokens will now show a floating number of the amount of damage dealt, as well as the resource (HP/SP) it affected. This is particularly useful on starships, as it shows you which arc was hit.
+
+## Compendium module artwork
+Courtesy of the PF2e system, we have implemented the ability to apply artwork to creatures in the compendium through pre-defined maps in modules, this allows things like token packs to be possible, and for individual users to build their own for personal use.
+
+## Compendium browser improvements
+Skills now have a button to quickly take you to the rules journal for that skill, and the inventory and spellbook pages now have buttons on each header to quickly open the compendium browser and show only items relevant for that header. Lastly, the compendium browsers will open and load much faster.
+
+## Compendium sanitisation
+We've changed our process of how we add data to the system compendiums, so that it now automatically cleans up the data and descriptions. What that means for users, is that compendium entries will be of generally higher quality, with less broken links, incorrect token sizes and formatting mistakes.
+
+## Compendium Updates
+* Add IS Gear, racial features, spells and creature companions
+* Fix spellcasters having incorrect spells known
+* Update solarian crystals to be weapons rather than hybrid items
+* Fix Embrace of the Void damage formula
+* As mentioned above, fixed a huge amoount of broken links, incorrect token sizes and formatting mistakes.
+* Fixed Cloaking skin prices and sources
+* Correctly capitalize Needler Pistol
+
+## Core system improvements
+* Clamp HP, SP and RP values between 0 and Max
+* Add a new roll data attribute for a class's ability DC
+* Replaced some text labels to bring them closer to Starfinder RAW terms
+* Add some system dependencies to maintain code quality
+* Allow SFRPG rolls to be made without a chat message being created, for use with modules and macros
+* Add actions and attacks to augmentations
+* Items with usages will now show a button in the inventory
+* Items in containers can now show usage buttons
+* Adjust scaling cantrip settings to account for multiple damage sections
+* Adjusted some headings on actor sheet tabs, and remove now needless search buttons
+* Adjust signs on NPC stats
+
+## Bugfixes
+* Set rollable buttons have correct hover properties
+* Change height attribute on attributes to min-height
+* Fix skill notes not including actor roll data
+* Fix container open/close button font
+* Fixed npc and starship containers not showing embedded items
+* Ensure Temp HP is depleted as expected
+* Fix text colour on the damage dialog not working correctly with UI modules
+* Fix NPC NaN ability scores
+* Default new actors to medium
+* Fix certain actor biographies not showing up
+* Fixed loot actors breaking unexpectedly after interacting with them
+* Fix the inability to add items to existing loot actors
+
+
 # v0.21.1 - Interstellar Innovators
 
 This is a small hotfix release to clean up some issues from v0.21.0, and also continue our data entry of Interstellar Species

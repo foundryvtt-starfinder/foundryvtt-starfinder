@@ -1,4 +1,4 @@
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateClasses", (fact, context) => {
         const data = fact.data;
         const classes = fact.classes;

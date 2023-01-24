@@ -44,6 +44,7 @@
         "TypeStarshipsecuritysystem": "Sistema di Sicurezza",
         "TypeStarshipsensor": "Sensore",
         "TypeStarshipshield": "Scudo",
+        "TypeStarshipspecialability": "Starship Special Ability",
         "TypeStarshipthruster": "Propulsore",
         "TypeStarshipweapon": "Arma",
         "TypeTechnological": "Tecnologico",
@@ -170,6 +171,7 @@
                     "Race": "Razza",
                     "Theme": "Tema"
                 },
+                "Create": "Create new feature",
                 "Filters": {
                     "Action": "Azioni",
                     "Bonus": "Bonus",
@@ -262,6 +264,7 @@
                 "Item": {
                     "Activate": "Activate",
                     "Create": "Creare un Oggetto",
+                    "CreateFromCompendium": "Add item from Compendium",
                     "Deactivate": "Disattiva",
                     "Delete": "Elimina",
                     "Edit": "Edita l'Oggetto",
@@ -481,6 +484,7 @@
                 "Action": "Azione",
                 "Day": "Giorno",
                 "Hour": "Ora",
+                "Hour8": "8 Hours",
                 "Minute": "Minuto",
                 "Minute10": "10 Minutes",
                 "Round": "Round di Combattimento",
@@ -503,11 +507,15 @@
         },
         "ChatCard": {
             "ContextMenu": {
+                "Accept": "Accept",
                 "ApplyDamage": "Apply Damage",
                 "ApplyHealing": "Apply Healing",
                 "DamageAndAHalf": "1.5x Damage",
                 "DoubleDamage": "Double Damage",
                 "HalfDamage": "Half Damage",
+                "ModifyDamage": "Modify Damage",
+                "ModifyDamageText": "Input an number to modify the damage amount by. This is applied after any multiplication.",
+                "NoDamageModifier": "No damage modifier applied.",
                 "NoToken": "Cannot apply: No token selected!"
             },
             "ItemActivation": {
@@ -696,9 +704,12 @@
                 "Bludgeoning": "Contundente",
                 "Cold": "Freddo",
                 "Custom": "Custom",
+                "DamageGroup": "Damage Group {group}",
+                "DamageGroupTooltip": "If damage sections share a group, you may only enable one from that group when making a damage roll. You may freely enable/disable damage sections that lack a group.",
                 "Electricity": "Elettrico",
                 "Fire": "Fuoco",
                 "Force": "Forza",
+                "GrouplessDamage": "Groupless Damage",
                 "Hint": "This is a list of damage types that apply to this damage roll.",
                 "Nonlethal": "Non Letale",
                 "Operators": {
@@ -907,6 +918,24 @@
         "FlagsInstructions": "Configura le caratteristiche e i Talenti che determinano il comportamento del sistema.",
         "FlagsSave": "Salvare i Talenti Speciali",
         "FlagsTitle": "Configurazione dei Talenti Speciali.",
+        "FloatingHP": {
+            "HP": "HP",
+            "Sh.A.": "Sh.A.",
+            "Sh.F.": "Sh.F.",
+            "Sh.P.": "Sh.P.",
+            "Sh.S.": "Sh.S.",
+            "stamina": "SP",
+            "temp": "Temp"
+        },
+        "FloatingHPVerbose": {
+            "HP": "HP",
+            "Sh.A.": "Aft Shields",
+            "Sh.F.": "Forward Shields",
+            "Sh.P.": "Port Shields",
+            "Sh.S.": "Starboard Shields",
+            "stamina": "SP",
+            "temp": "Temp"
+        },
         "FortitudeSave": "Tempra",
         "Ft": "/3 mt.",
         "GreatFortitudeHint": "Aggiungi 2 al Tiro Salvezza di Tempra",
@@ -1025,7 +1054,8 @@
         "ItemSheet": {
             "AbilityScoreIncrease": {
                 "Header": "Miglioramenti di caratteristica",
-                "Instruction": "* Scegli 4 caratteristiche da aumentare",
+                "Instruction": "Scegli 4 caratteristiche da aumentare",
+                "InstructionRules": "Every 5 levels (at 5th, 10th, 15th, and 20th levels), you get to increase and customize your ability scores. Each time you reach one of these level thresholds, choose four of your ability scores to increase. If that ability score is 17 or higher (excluding any ability increases from personal upgrades—see page 212), it increases permanently by 1. If it’s 16 or lower, it increases permanently by 2. You can’t apply more than one of these increases to the same ability score at a given level, but unlike at 1st level, these increases can make your ability scores go higher than 18.",
                 "ItemName": "Miglioramento di caratteristica : Livello {level}",
                 "Label": "caratteristiche"
             },
@@ -1885,6 +1915,7 @@
                 "RollModeTooltip": "La modalità di Tiro determina chi può vedere questo Tiro.",
                 "Selector": "Selezionato '{name}'",
                 "SelectorTooltip": "Selezione dinamica degli attori per il contesto della formula  '{name}'.",
+                "SimplifiedFormulaTooltip": "<p>The formula displayed on the dialog has been calculated from the following formula:</p><p>{formula}</p>",
                 "SituationalBonus": "Bonus di circostanza",
                 "SituationalBonusTooltip": "Ci sono bonus aggiuntivi che si applicano a questo tiro? (Ad esempio, incrementi di Gittata?)"
             },
@@ -2036,6 +2067,38 @@
             "ExperienceTracking": {
                 "Hint": "Rimuovi la barra dell'esperienza dal personaggio.",
                 "Name": "Disabilita il monitoraggio dell'esperienza"
+            },
+            "FloatingHP": {
+                "Button": "Configure Floating Number Settings",
+                "Hint": "Configure the floating numbers that appear on a token when their HP/SP is changed.",
+                "Menu": {
+                    "CanSeeBars": {
+                        "Hint": "Users that can see the token's resource bars will be able to see floating numbers.",
+                        "Name": "Can see resource bars?"
+                    },
+                    "CanSeeName": {
+                        "Hint": "Users that can see the token's name will be able to see floating numbers.",
+                        "Name": "Can see name?"
+                    },
+                    "Enabled": {
+                        "Hint": "Enable floating numbers when a token's HP/SP is changed.",
+                        "Name": "Enable Floating Numbers?"
+                    },
+                    "Label": "Floating Number Settings",
+                    "LimitByCriteria": {
+                        "Hint": "When enabled, users will only be shown floating numbers if they meet at least one of the criteria below. When disabled, floating numbers will be shown to all users.",
+                        "Name": "Limit by criteria?"
+                    },
+                    "MinPerm": {
+                        "Hint": "Users with this permission or higher over the token will be able to see floating numbers.",
+                        "Name": "Minimum Permission"
+                    },
+                    "VerboseFloatyText": {
+                        "Hint": "When enabled, the full names of shield arcs will be displayed.",
+                        "Name": "Verbose Mode"
+                    }
+                },
+                "Name": "Floating Number Settings"
             },
             "GalacticTrade": {
                 "Hint": "Enables the Galactic Trade subsystem, allowing the maximum BP on a ship to be 5% higher than normal, and adds BPs to the ship inventory as credits.",
@@ -2300,6 +2363,7 @@
             "AddSpells": "Aggiungi un Incantesimo",
             "AttributesNone": "Nessuno",
             "Browse": "Aprire il Libro degli Incantesimi",
+            "CreateFromCompendium": "Add Spell from Compendium",
             "CreateSpell": "Creare un Incantesimo",
             "DeleteItem": "Rimuovere Elemento",
             "EditItem": "Editare Elemento",
@@ -2462,6 +2526,7 @@
                 },
                 "PrimarySystems": "Sistemi Primari",
                 "SecuritySystems": "Sistemi di Sicurezza",
+                "SpecialAbilities": "Special Abilities",
                 "Thrusters": "Propulsori"
             },
             "Header": {
@@ -2810,6 +2875,8 @@
         "WeaponPropertiesHolyWaterTooltip": "A holy water weapon is infused with the blessings of one or more good-aligned deities (most commonly Hylax, Iomedae, or Sarenrae within the Pact Worlds, though devoted followers of any good-aligned deity could create such weapons). It damages only undead (regardless of alignment) and outsiders with the evil subtype, and even those creatures suffer no effect (and show no sign of their nature if it is not already obvious) with a successful saving throw. Crafting a holy water grenade requires the blessing of formally trained priests of a good deity, though a character of any alignment can do the actual crafting.",
         "WeaponPropertiesHybrid": "Ibrida",
         "WeaponPropertiesHybridTooltip": "A weapon with this special property is a hybrid item, incorporating both magic and technology into its design. It counts as a magical weapon and gains the analog weapon special property. It consumes ammunition and battery charges normally.",
+        "WeaponPropertiesHydrodynamic": "Hydrodynamic",
+        "WeaponPropertiesHydrodynamicTooltip": "This weapon can be thrown underwater effectively, taking no penalty to attack rolls or damage for underwater combat.",
         "WeaponPropertiesIgnite": "Incendiare",
         "WeaponPropertiesIgniteTooltip": "Weapons with the ignite special property use an accelerant to start small, intense fires on their targets. A target hit by a weapon with this special property must succeed at a Reflex save (DC = 20 + 1/2 the item’s level + your Dexterity bonus) or gains the burning condition with the listed amount of damage. Gaining the burning condition multiple times from the ignite special property does not increase your burning damage—you take only the highest listed ignite damage each round. A character who gains the burning condition through other means (such as the burn critical effect, even from a weapon with ignite) does add that damage to her burning damage each round. Ending the burning condition ends burning from all sources.",
         "WeaponPropertiesIndirect": "Indiretto",

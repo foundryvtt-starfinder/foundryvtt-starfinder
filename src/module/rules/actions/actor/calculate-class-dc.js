@@ -1,4 +1,4 @@
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateClassDC", (fact, context) => {
         // Calculated later because we need ability modifiers, but classes have to be calculated as early as possible.
         const data = fact.data;

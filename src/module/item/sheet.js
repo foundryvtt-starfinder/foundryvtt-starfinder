@@ -1,5 +1,4 @@
-import { SFRPG } from "../config.js"
-import { RPC } from "../rpc.js";
+import { SFRPG } from "../config.js";
 
 const itemSizeArmorClassModifier = {
     "fine": 8,
@@ -60,7 +59,7 @@ export class ItemSheetSFRPG extends ItemSheet {
      */
     get template() {
         const path = "systems/sfrpg/templates/items";
-        return `${path}/${this.item.type}.html`;
+        return `${path}/${this.item.type}.hbs`;
     }
 
     /* -------------------------------------------- */
@@ -136,7 +135,7 @@ export class ItemSheetSFRPG extends ItemSheet {
                 data.placeholders.savingThrow = data.placeholders.savingThrow || {};
                 data.placeholders.savingThrow.formula = `@itemLevel + @owner.abilities.dex.mod`;
                 data.placeholders.savingThrow.value = data.placeholders.savingThrow.value ?? 10;
-                
+
                 this.item.flags.placeholders = data.placeholders;
                 this._computeSavingThrowValue(itemLevel, data.placeholders.savingThrow.formula)
                     .then((total) => this.onPlaceholderUpdated(this.item, total))
@@ -155,7 +154,7 @@ export class ItemSheetSFRPG extends ItemSheet {
                 data.placeholders.savingThrow = data.placeholders.savingThrow || {};
                 data.placeholders.savingThrow.formula = `@itemLevel + @owner.abilities.dex.mod`;
                 data.placeholders.savingThrow.value = data.placeholders.savingThrow.value ?? 10;
-                
+
                 this.item.flags.placeholders = data.placeholders;
                 this._computeSavingThrowValue(itemLevel, data.placeholders.savingThrow.formula)
                     .then((total) => this.onPlaceholderUpdated(this.item, total))
@@ -225,12 +224,18 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         if (["weapon", "equipment", "shield"].includes(item.type)) return itemData.equipped ? "Equipped" : "Unequipped";
         else if (item.type === "starshipWeapon") return itemData.mount.mounted ? "Mounted" : "Not Mounted";
-        else if (item.type === "augmentation") return `${itemData.type} (${itemData.system})`;
-        else if (item.type === "vehicleSystem")
-        {
+        else if (item.type === "augmentation") {
+            return `${itemData.type.capitalize()} (${
+                itemData.system.replace(/([A-Z])/g, ' $1')
+                    .replace(/^./, (str) => {
+                        return str.toUpperCase();
+                    })
+
+            })`;
+        } else if (item.type === "vehicleSystem") {
             // Only systems which can be activated have an activation status
             if (this.document.canBeActivated() === false) {
-                return ""
+                return "";
             }
 
             return this.document.isActive() ? "Activated" : "Not Activated";
@@ -258,15 +263,16 @@ export class ItemSheetSFRPG extends ItemSheet {
                     name: CONFIG.SFRPG.weaponProperties[e[0]],
                     tooltip: CONFIG.SFRPG.weaponPropertiesTooltips[e[0]]
                 })
-            )
-        );
+                )
+            );
         } else if (item.type === "spell") {
-            const desc = (Object.entries(itemData.descriptors)).filter(e => e[1] === true).map(e => ({
+            const desc = (Object.entries(itemData.descriptors)).filter(e => e[1] === true)
+                .map(e => ({
                     name: CONFIG.SFRPG.descriptors[e[0]],
                     tooltip: (CONFIG.SFRPG.descriptorsTooltips[e[0]]) ? CONFIG.SFRPG.descriptorsTooltips[e[0]] : null
                 })
-            );
-           
+                );
+
             props.push(
                 {name: labels.components, tooltip: null},
                 {name: labels.materials, tooltip: null},
@@ -274,7 +280,7 @@ export class ItemSheetSFRPG extends ItemSheet {
                 itemData.sr ? {name: "Spell Resistence", tooltip: null} : null,
                 itemData.dismissible ? {name: "Dismissible", tooltip: null} : null,
                 ...desc
-            )
+            );
         } else if (item.type === "equipment") {
             props.push({
                 name: CONFIG.SFRPG.armorTypes[itemData.armor.type],
@@ -285,15 +291,16 @@ export class ItemSheetSFRPG extends ItemSheet {
                 tooltip: null
             });
         } else if (item.type === "feat") {
-            const desc = (Object.entries(itemData.descriptors)).filter(e => e[1] === true).map(e => ({
+            const desc = (Object.entries(itemData.descriptors)).filter(e => e[1] === true)
+                .map(e => ({
                     name: CONFIG.SFRPG.descriptors[e[0]],
                     tooltip: (CONFIG.SFRPG.descriptorsTooltips[e[0]]) ? CONFIG.SFRPG.descriptorsTooltips[e[0]] : null
                 })
-            );
-            
+                );
+
             props.push(
-            {name: labels.featType, tooltip: null},
-            ...desc
+                {name: labels.featType, tooltip: null},
+                ...desc
             );
         } else if (item.type === "starshipWeapon") {
             props.push({
@@ -315,26 +322,23 @@ export class ItemSheetSFRPG extends ItemSheet {
                 name: game.i18n.format("SFRPG.Items.Shield.ACP", { acp: item.acp.signedString() }),
                 tooltip: null
             });
-            
+
             const wieldedBonus = itemData.proficient ? (itemData.bonus.wielded || 0) : 0;
             const alignedBonus = itemData.proficient ? (itemData.bonus.aligned || 0) : 0;
             props.push({
                 name: game.i18n.format("SFRPG.Items.Shield.ShieldBonus", { wielded: wieldedBonus.signedString(), aligned: alignedBonus.signedString() }),
                 tooltip: null
             });
-        }
-        else if (item.type === "vehicleAttack") {
+        } else if (item.type === "vehicleAttack") {
             if (item.ignoresHardness && item.ignoresHardness > 0) {
                 props.push(game.i18n.localize("SFRPG.VehicleAttackSheet.Details.IgnoresHardness") + " " + item.ignoresHardness);
             }
-        }
-        else if (item.type === "vehicleSystem") {
+        } else if (item.type === "vehicleSystem") {
             if (item.senses &&  item.senses.usedForSenses == true) {
                 // We deliminate the senses by `,` and present each sense as a separate property
                 let sensesDeliminated = item.senses.senses.split(",");
-                for (let index = 0; index < sensesDeliminated.length; index++)
-                {
-                    var sense = sensesDeliminated[index];
+                for (let index = 0; index < sensesDeliminated.length; index++) {
+                    let sense = sensesDeliminated[index];
                     props.push(sense);
                 }
             }
@@ -355,7 +359,7 @@ export class ItemSheetSFRPG extends ItemSheet {
                 {name: labels.range, tooltip: null},
                 {name: labels.target, tooltip: null},
                 {name: labels.duration, tooltip: null}
-            )
+            );
         }
         return props.filter(p => !!p && !!p.name);
     }
@@ -407,20 +411,23 @@ export class ItemSheetSFRPG extends ItemSheet {
         let damage = Object.entries(formData).filter(e => e[0].startsWith("system.damage.parts"));
         formData["system.damage.parts"] = damage.reduce((arr, entry) => {
             let [i, key, type] = entry[0].split(".").slice(3);
-            if (!arr[i]) arr[i] = { name: "", formula: "", types: {} };
+            if (!arr[i]) arr[i] = { name: "", formula: "", types: {}, group: null };
 
             switch (key) {
-                case 'name':
-                    arr[i].name = entry[1];
-                    break;
-                case 'formula':
-                    arr[i].formula = entry[1];
-                    break;
-                case 'types':
-                    if (type) arr[i].types[type] = entry[1];
-                    break;
+            case 'name':
+                arr[i].name = entry[1];
+                break;
+            case 'formula':
+                arr[i].formula = entry[1];
+                break;
+            case 'types':
+                if (type) arr[i].types[type] = entry[1];
+                break;
+            case 'group':
+                arr[i].group = entry[1];
+                break;
             }
-            
+
             return arr;
         }, []);
 
@@ -431,14 +438,14 @@ export class ItemSheetSFRPG extends ItemSheet {
             if (!arr[i]) arr[i] = { formula: "", types: {}, operator: "" };
 
             switch (key) {
-                case 'formula':
-                    arr[i].formula = entry[1];
-                    break;
-                case 'types':
-                    if (type) arr[i].types[type] = entry[1];
-                    break;
+            case 'formula':
+                arr[i].formula = entry[1];
+                break;
+            case 'types':
+                if (type) arr[i].types[type] = entry[1];
+                break;
             }
-            
+
             return arr;
         }, []);
 
@@ -539,7 +546,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             const damage = this.item.system.damage;
             return this.item.update({
                 "system.damage.parts": damage.parts.concat([
-                    { name: "", formula: "", types: {} }
+                    { name: "", formula: "", types: {}, group: null }
                 ])
             });
         }
@@ -580,7 +587,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
     /**
      * Add a modifer to this item.
-     * 
+     *
      * @param {Event} event The originating click event
      */
     _onModifierCreate(event) {
@@ -594,7 +601,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
     /**
      * Delete a modifier from the item.
-     * 
+     *
      * @param {Event} event The originating click event
      */
     async _onModifierDelete(event) {
@@ -607,7 +614,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
     /**
      * Edit a modifier for an item.
-     * 
+     *
      * @param {Event} event The orginating click event
      */
     _onModifierEdit(event) {
@@ -621,7 +628,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
     /**
      * Toggle a modifier to be enabled or disabled.
-     * 
+     *
      * @param {Event} event The originating click event
      */
     async _onToggleModifierEnabled(event) {
@@ -831,16 +838,16 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         const attr = event.currentTarget.dataset.edit;
         const fp = new FilePicker({
-          type: "image",
-          current: currentImage,
-          callback: path => {
-            visualization[visualizationIndex].image = path;
-            this.item.update({
-                "system.combatTracker.visualization": visualization
-            });
-          },
-          top: this.position.top + 40,
-          left: this.position.left + 10
+            type: "image",
+            current: currentImage,
+            callback: path => {
+                visualization[visualizationIndex].image = path;
+                this.item.update({
+                    "system.combatTracker.visualization": visualization
+                });
+            },
+            top: this.position.top + 40,
+            left: this.position.left + 10
         });
         return fp.browse();
     }

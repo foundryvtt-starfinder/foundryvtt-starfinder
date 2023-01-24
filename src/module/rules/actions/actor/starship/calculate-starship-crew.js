@@ -1,4 +1,4 @@
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateStarshipCrew", (fact, context) => {
         const data = fact.data;
         const actor = fact.actor;
@@ -115,7 +115,7 @@ export default function (engine) {
             }
 
             if (!crew.actorIds) {
-                crew.actorIds = []
+                crew.actorIds = [];
             }
 
             const deadActors = [];

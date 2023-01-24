@@ -13,11 +13,11 @@ const reduceStrategies = {
  * This is a closure composite that will reduce the fact execution through
  * a list of component closures. The result of each losure execution will
  * be used as a fact for the next closure.
- * 
+ *
  * @param {String} name The name of the closure
  * @param {Array} closures An array of closures
  * @param {Object} options Any options used by the closure
- * 
+ *
  * @type {ClosureReducer}
  */
 export class ClosureReducer extends Closure {

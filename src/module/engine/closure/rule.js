@@ -5,7 +5,7 @@ import { raise, nowOrThen } from "../util.js";
  * A rule is a named conditional closure. It understands the `process` message
  * but it will only fire its internal closure action if the provided fact matches
  * the associated conditional closure.
- * 
+ *
  * @param {String}  name      The name of the rule.
  * @param {Closure} condition The closure that determines if this rule has met a condition
  * @param {Closure} action    The action to take if the condition is met.

@@ -44,6 +44,7 @@
         "TypeStarshipsecuritysystem": "Espaçonave Sistemas de Segurança",
         "TypeStarshipsensor": "Espaçonave Sensor",
         "TypeStarshipshield": "Espaçonave Escudos",
+        "TypeStarshipspecialability": "Starship Special Ability",
         "TypeStarshipthruster": "Espaçonave Propulsor",
         "TypeStarshipweapon": "Espaçonave Armas",
         "TypeTechnological": "Tecnologica",
@@ -170,6 +171,7 @@
                     "Race": "Raça",
                     "Theme": "Tema"
                 },
+                "Create": "Create new feature",
                 "Filters": {
                     "Action": "Ação",
                     "Bonus": "Bônus",
@@ -262,6 +264,7 @@
                 "Item": {
                     "Activate": "Ativado",
                     "Create": "Criar um novo Item",
+                    "CreateFromCompendium": "Add item from Compendium",
                     "Deactivate": "Desativado",
                     "Delete": "Excluir item",
                     "Edit": "Editar item",
@@ -481,6 +484,7 @@
                 "Action": "Ação",
                 "Day": "Dia",
                 "Hour": "Hora",
+                "Hour8": "8 Hours",
                 "Minute": "Minuto",
                 "Minute10": "10 Minutes",
                 "Round": "Rodada Combate",
@@ -503,11 +507,15 @@
         },
         "ChatCard": {
             "ContextMenu": {
+                "Accept": "Accept",
                 "ApplyDamage": "Apply Damage",
                 "ApplyHealing": "Apply Healing",
                 "DamageAndAHalf": "1.5x Damage",
                 "DoubleDamage": "Double Damage",
                 "HalfDamage": "Half Damage",
+                "ModifyDamage": "Modify Damage",
+                "ModifyDamageText": "Input an number to modify the damage amount by. This is applied after any multiplication.",
+                "NoDamageModifier": "No damage modifier applied.",
                 "NoToken": "Cannot apply: No token selected!"
             },
             "ItemActivation": {
@@ -696,9 +704,12 @@
                 "Bludgeoning": "Contusão",
                 "Cold": "Frio",
                 "Custom": "Custom",
+                "DamageGroup": "Damage Group {group}",
+                "DamageGroupTooltip": "If damage sections share a group, you may only enable one from that group when making a damage roll. You may freely enable/disable damage sections that lack a group.",
                 "Electricity": "Eletricidade",
                 "Fire": "Fogo",
                 "Force": "Poder",
+                "GrouplessDamage": "Groupless Damage",
                 "Hint": "This is a list of damage sections that apply to this damage roll.",
                 "Nonlethal": "Não letal",
                 "Operators": {
@@ -907,6 +918,24 @@
         "FlagsInstructions": "Configure as características e traços dos personagens que ajustam os comportamentos do sistema Starfinder.",
         "FlagsSave": "Atualizar Traços Especiais",
         "FlagsTitle": "ConfigurAR Traços Especiais",
+        "FloatingHP": {
+            "HP": "HP",
+            "Sh.A.": "Sh.A.",
+            "Sh.F.": "Sh.F.",
+            "Sh.P.": "Sh.P.",
+            "Sh.S.": "Sh.S.",
+            "stamina": "SP",
+            "temp": "Temp"
+        },
+        "FloatingHPVerbose": {
+            "HP": "HP",
+            "Sh.A.": "Aft Shields",
+            "Sh.F.": "Forward Shields",
+            "Sh.P.": "Port Shields",
+            "Sh.S.": "Starboard Shields",
+            "stamina": "SP",
+            "temp": "Temp"
+        },
         "FortitudeSave": "Fortitude",
         "Ft": "Pés",
         "GreatFortitudeHint": "Talento de personagem que adiciona 2 aos salvamentos de Fortitude",
@@ -1025,7 +1054,8 @@
         "ItemSheet": {
             "AbilityScoreIncrease": {
                 "Header": "Incremento Valor Habilidade",
-                "Instruction": "* escolha 4 habilidades para aumentar.",
+                "Instruction": "Escolha 4 habilidades para aumentar.",
+                "InstructionRules": "Every 5 levels (at 5th, 10th, 15th, and 20th levels), you get to increase and customize your ability scores. Each time you reach one of these level thresholds, choose four of your ability scores to increase. If that ability score is 17 or higher (excluding any ability increases from personal upgrades—see page 212), it increases permanently by 1. If it’s 16 or lower, it increases permanently by 2. You can’t apply more than one of these increases to the same ability score at a given level, but unlike at 1st level, these increases can make your ability scores go higher than 18.",
                 "ItemName": "Incremento Valor Habilidade: Nível {level}",
                 "Label": "Habilidades"
             },
@@ -1885,6 +1915,7 @@
                 "RollModeTooltip": "Modo de Rolagem determina quem pode ver essa rolagem.",
                 "Selector": "Selecione '{name}'",
                 "SelectorTooltip": "Seleção dinâmica do ator '{name}' para a fórmula.",
+                "SimplifiedFormulaTooltip": "<p>The formula displayed on the dialog has been calculated from the following formula:</p><p>{formula}</p>",
                 "SituationalBonus": "Bônus Substâncial",
                 "SituationalBonusTooltip": "Existem bônus adicionais que se aplicam a este teste? (Por exemplo, incrementos de distância)"
             },
@@ -2036,6 +2067,38 @@
             "ExperienceTracking": {
                 "Hint": "Remova as barras de experiência das fichas de personagem.",
                 "Name": "Desabilitar barra de experiência"
+            },
+            "FloatingHP": {
+                "Button": "Configure Floating Number Settings",
+                "Hint": "Configure the floating numbers that appear on a token when their HP/SP is changed.",
+                "Menu": {
+                    "CanSeeBars": {
+                        "Hint": "Users that can see the token's resource bars will be able to see floating numbers.",
+                        "Name": "Can see resource bars?"
+                    },
+                    "CanSeeName": {
+                        "Hint": "Users that can see the token's name will be able to see floating numbers.",
+                        "Name": "Can see name?"
+                    },
+                    "Enabled": {
+                        "Hint": "Enable floating numbers when a token's HP/SP is changed.",
+                        "Name": "Enable Floating Numbers?"
+                    },
+                    "Label": "Floating Number Settings",
+                    "LimitByCriteria": {
+                        "Hint": "When enabled, users will only be shown floating numbers if they meet at least one of the criteria below. When disabled, floating numbers will be shown to all users.",
+                        "Name": "Limit by criteria?"
+                    },
+                    "MinPerm": {
+                        "Hint": "Users with this permission or higher over the token will be able to see floating numbers.",
+                        "Name": "Minimum Permission"
+                    },
+                    "VerboseFloatyText": {
+                        "Hint": "When enabled, the full names of shield arcs will be displayed.",
+                        "Name": "Verbose Mode"
+                    }
+                },
+                "Name": "Floating Number Settings"
             },
             "GalacticTrade": {
                 "Hint": "Habilita o subsistema de Comércio Galáctico, permitindo que o PF máximo em uma espaçonave seja 5% maior do que o normal, e adiciona PFs ao estoque da espaçonave como créditos.",
@@ -2300,6 +2363,7 @@
             "AddSpells": "Adicionar Magia",
             "AttributesNone": "Nenhum",
             "Browse": "Visualizar Grimório",
+            "CreateFromCompendium": "Add Spell from Compendium",
             "CreateSpell": "Criar Magia",
             "DeleteItem": "Deletar Item",
             "EditItem": "Editar Item",
@@ -2462,6 +2526,7 @@
                 },
                 "PrimarySystems": "Sistemas Primários",
                 "SecuritySystems": "Sistemas Secundários",
+                "SpecialAbilities": "Special Abilities",
                 "Thrusters": "Propulsores"
             },
             "Header": {
@@ -2810,6 +2875,8 @@
         "WeaponPropertiesHolyWaterTooltip": "Uma arma de água benta é infundida com as bênçãos de uma ou mais divindades alinhadas com o bem (mais comumente Hylax, Iomedae ou Sarenrae dentro dos Mundos do Pacto, embora seguidores devotos de qualquer divindade alinhada com o bem possam criar tais armas). Ela causa danos apenas mortos-vivos (independentemente da tendência) e forasteiros com o subtipo do mal, e mesmo essas criaturas não sofrem nenhum efeito (e não mostram nenhum sinal de sua natureza se já não for óbvio) com um teste de resistência bem-sucedido. Criar uma granada de água benta requer a bênção de sacerdotes formalmente treinados de uma boa divindade, embora um personagem de qualquer tendência possa fazer a criação real. ",
         "WeaponPropertiesHybrid": "Híbrido",
         "WeaponPropertiesHybridTooltip": "Uma arma com esta propriedade especial é um item híbrido, incorporando magia e tecnologia em seu design. Conta como uma arma mágica e ganha a propriedade especial de arma analógica. Consome munições e cargas de bateria normalmente. ",
+        "WeaponPropertiesHydrodynamic": "Hydrodynamic",
+        "WeaponPropertiesHydrodynamicTooltip": "This weapon can be thrown underwater effectively, taking no penalty to attack rolls or damage for underwater combat.",
         "WeaponPropertiesIgnite": "Acender",
         "WeaponPropertiesIgniteTooltip": "As armas com a propriedade especial ignite usam um acelerador para iniciar pequenos e intensos disparos em seus alvos. Um alvo atingido por uma arma com esta propriedade especial deve ser bem-sucedido em um teste de resistência de Reflexos (CD = 20 + 1/2 do nível do item + seu bônus de Destreza) ou ganha a condição de queima com a quantidade de dano listada. Ganhar a condição de queima várias vezes da propriedade especial de ignição não aumenta seu dano de queima - você recebe apenas o dano de ignição listado mais alto a cada rodada. Um personagem que ganha a condição de queima por outros meios (como o efeito crítico de queima, mesmo de uma arma com ignição) adiciona aquele dano ao seu dano de queima a cada rodada. Terminar a condição de queima termina a queima de todas as fontes. ",
         "WeaponPropertiesIndirect": "Indireto",

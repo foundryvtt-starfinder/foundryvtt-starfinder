@@ -1,4 +1,4 @@
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateStarshipCritThreshold", (fact, context) => {
         const data = fact.data;
 

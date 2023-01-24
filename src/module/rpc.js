@@ -35,7 +35,7 @@ export class RPC {
             sender: game.user.id,
             eventName: eventName,
             data: args
-        }
+        };
 
         if (this.initialized) {
             game.socket.emit('system.sfrpg', messageData);
@@ -54,9 +54,9 @@ export class RPC {
             sender: game.user.id,
             eventName: eventName,
             payload: payload
-        }
+        };
 
-        //console.log(`Sending message:\n${JSON.stringify(messageData)}`);
+        // console.log(`Sending message:\n${JSON.stringify(messageData)}`);
 
         /** Sending to GM, local user is GM, send to self always succeeds. */
         if (recipient === "gm" && game.user.isGM) {
@@ -115,7 +115,7 @@ export class RPC {
         let callbackItem = {
             callback: callback,
             target: target
-        }
+        };
         if (eventName in this.callbacks) {
             this.callbacks[eventName] = this.callbacks[eventName].push(callbackItem);
         } else {
@@ -142,20 +142,20 @@ export class RPC {
     }
 
     async _handleMessage(data) {
-        //console.log(`Received a message (${data.eventName}), recipient is ${data.recipient}`);
+        // console.log(`Received a message (${data.eventName}), recipient is ${data.recipient}`);
         if (data.recipient) {
             if (data.recipient === "gm") {
                 if (!game.user.isGM) {
-                    //console.log(`> Message meant for GM, rejecting message.`);
+                    // console.log(`> Message meant for GM, rejecting message.`);
                     return false;
                 }
             } else if (data.recipient !== game.user.id) {
-                //console.log(`> Recipient ID mismatch, rejecting message.`);
+                // console.log(`> Recipient ID mismatch, rejecting message.`);
                 return false;
             }
         }
 
-        //console.log(`> Handling it.`);
+        // console.log(`> Handling it.`);
         let wasHandled = false;
         let handlers = this.callbacks[data.eventName];
         if (handlers) {

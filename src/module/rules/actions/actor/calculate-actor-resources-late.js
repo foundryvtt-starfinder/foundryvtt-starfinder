@@ -1,6 +1,6 @@
 import { SFRPGModifierType, SFRPGModifierTypes, SFRPGEffectType } from "../../../modifiers/types.js";
 
-export default function (engine) {
+export default function(engine) {
     engine.closures.add('calculateActorResourcesLate', (fact, context) => {
         const data = fact.data;
         const actorResources = fact.actorResources.filter(x => x.system.stage === "late");
@@ -32,7 +32,7 @@ export default function (engine) {
                     source: bonus.name
                 }));
             }
-            
+
             return computedBonus;
         };
 
@@ -74,7 +74,7 @@ export default function (engine) {
                     // First apply all modifiers
                     const resourceMod = Object.entries(processedMods).reduce((sum, curr) => {
                         if (curr[1] === null || curr[1].length < 1) return sum;
-            
+
                         if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(curr[0])) {
                             for (const bonus of curr[1]) {
                                 sum += addModifier(bonus, data, finalActorResource, "SFRPG.ACTooltipBonus");
@@ -83,7 +83,7 @@ export default function (engine) {
                         else {
                             sum += addModifier(curr[1], data, finalActorResource, "SFRPG.ACTooltipBonus");
                         }
-            
+
                         return sum;
                     }, 0);
 
@@ -93,7 +93,7 @@ export default function (engine) {
                     if (resourceData.range.min || resourceData.range.min === 0) {
                         finalActorResource.value = Math.max(finalActorResource.value, resourceData.range.min);
                     }
-    
+
                     if (resourceData.range.max || resourceData.range.max === 0) {
                         finalActorResource.value = Math.min(finalActorResource.value, resourceData.range.max);
                     }
@@ -102,7 +102,7 @@ export default function (engine) {
                     if (resourceData.range.min || resourceData.range.min === 0) {
                         finalActorResource.value = Math.max(finalActorResource.value, resourceData.range.min);
                     }
-    
+
                     if (resourceData.range.max || resourceData.range.max === 0) {
                         finalActorResource.value = Math.min(finalActorResource.value, resourceData.range.max);
                     }
@@ -125,7 +125,7 @@ export default function (engine) {
                         if (resourceData.range.min || resourceData.range.min === 0) {
                             finalActorResource.value = Math.max(finalActorResource.value, resourceData.range.min);
                         }
-        
+
                         if (resourceData.range.max || resourceData.range.max === 0) {
                             finalActorResource.value = Math.min(finalActorResource.value, resourceData.range.max);
                         }
@@ -133,7 +133,6 @@ export default function (engine) {
                 }
             }
         }
-
 
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] });

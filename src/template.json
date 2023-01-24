@@ -377,7 +377,7 @@
                     }
                 },
                 "traits": {
-                    "size": "Medium",
+                    "size": "medium",
                     "senses": "",
                     "languages": {
                         "value": [],
@@ -1084,7 +1084,7 @@
                         "value": null,
                         "max": null
                     }
-                }                
+                }
             }
         },
         "vehicle": {
@@ -1190,6 +1190,7 @@
             "starshipSecuritySystem",
             "starshipSensor",
             "starshipShield",
+            "starshipSpecialAbility",
             "starshipThruster",
             "starshipWeapon",
 
@@ -1639,7 +1640,7 @@
             }
         },
         "augmentation": {
-            "templates": ["itemDescription", "physicalItem", "modifiers", "container"],
+            "templates": ["itemDescription", "physicalItem", "modifiers", "container", "action", "activatedEffect"],
             "system": "",
             "type": "cybernetic"
         },
@@ -1770,6 +1771,9 @@
             "armorBonus": 0,
             "targetLockBonus": 0
         },
+        "starshipSpecialAbility": {
+          "templates": ["itemDescription"]
+      },
         "starshipThruster": {
             "templates": ["starshipComponent", "itemDescription", "modifiers", "specialMaterials"],
             "supportedSize": "",
@@ -1917,7 +1921,7 @@
             "templates": ["itemDescription", "physicalItem", "itemUsage", "modifiers", "container"],
             "weaponType": "any"
         },
- 
+
         "actorResource": {
             "templates": ["itemDescription", "modifiers"],
             "type": null,

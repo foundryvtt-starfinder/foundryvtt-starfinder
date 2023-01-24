@@ -1,6 +1,6 @@
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../../modifiers/types.js";
 
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateSkillArmorCheckPenalty", (fact, context) => {
         const armors = fact.armors?.length > 0 ? fact.armors : null;
         const shields = fact.shields;
@@ -46,7 +46,7 @@ export default function (engine) {
                     source: bonus.name
                 }));
             }
-            
+
             return computedBonus;
         };
 

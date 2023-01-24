@@ -1,7 +1,7 @@
-import { ItemDeletionDialog } from "./item-deletion-dialog.js"
-import { ItemSFRPG } from "../item/item.js"
-import { ItemSheetSFRPG } from "../item/sheet.js"
-import { RPC } from "../rpc.js"
+import { ItemDeletionDialog } from "./item-deletion-dialog.js";
+import { ItemSFRPG } from "../item/item.js";
+import { ItemSheetSFRPG } from "../item/sheet.js";
+import { RPC } from "../rpc.js";
 
 export class ItemCollectionSheet extends DocumentSheet {
     constructor(itemCollection) {
@@ -22,7 +22,7 @@ export class ItemCollectionSheet extends DocumentSheet {
             classes: defaultOptions.classes.concat(['sfrpg', 'actor', 'sheet', 'npc']),
             height: 720,
             width: 720,
-            template: "systems/sfrpg/templates/apps/item-collection-sheet.html",
+            template: "systems/sfrpg/templates/apps/item-collection-sheet.hbs",
             closeOnSubmit: false,
             submitOnClose: true,
             submitOnChange: true,
@@ -32,7 +32,7 @@ export class ItemCollectionSheet extends DocumentSheet {
         });
     }
 
-    async close(options={}) {
+    async close(options = {}) {
         delete this.document.apps[this.appId];
         Hooks.off("updateToken", this.updateCallback);
         Hooks.off("deleteToken", this.deleteCallback);
@@ -109,17 +109,18 @@ export class ItemCollectionSheet extends DocumentSheet {
             if (item.system.equippedBulkMultiplier !== undefined && item.system.equipped) {
                 item.totalWeight *= item.system.equippedBulkMultiplier;
             }
-            item.totalWeight = item.totalWeight < 1 && item.totalWeight > 0 ? "L" : 
-                item.totalWeight === 0 ? "-" : Math.floor(item.totalWeight);
+            item.totalWeight = item.totalWeight < 1 && item.totalWeight > 0
+                ? "L"
+                : item.totalWeight === 0 ? "-" : Math.floor(item.totalWeight);
         }
 
         data.items = [];
-        this.processItemContainment(items, function (itemType, itemData) {
+        this.processItemContainment(items, function(itemType, itemData) {
             data.items.push(itemData);
         });
 
         // Ensure containers are always open in loot collection tokens
-        for(const itemData of data.items) {
+        for (const itemData of data.items) {
             if (itemData.contents && itemData.contents.length > 0) {
                 itemData.item.isOpen = true;
             }
@@ -193,7 +194,7 @@ export class ItemCollectionSheet extends DocumentSheet {
 
     /**
      * Handle rolling of an item form the Actor sheet, obtaining the item instance an dispatching to it's roll method.
-     * 
+     *
      * @param {Event} event The html event
      */
     _onItemSummary(event) {
@@ -219,7 +220,8 @@ export class ItemCollectionSheet extends DocumentSheet {
     }
 
     _onItemEdit(event) {
-        const itemId = $(event.currentTarget).parents('.item').attr("data-item-id");
+        const itemId = $(event.currentTarget).parents('.item')
+            .attr("data-item-id");
         const itemData = this.itemCollection.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
 
         const item = new ItemSFRPG(itemData);
@@ -270,7 +272,7 @@ export class ItemCollectionSheet extends DocumentSheet {
         const newItems = this.itemCollection.flags.sfrpg.itemCollection.items.filter(x => !itemsToDelete.includes(x._id));
         const update = {
             "flags.sfrpg.itemCollection.items": newItems
-        }
+        };
 
         if (newItems.length === 0 && this.itemCollection.flags.sfrpg.itemCollection.deleteIfEmpty) {
             this.itemCollection.delete();
@@ -286,7 +288,7 @@ export class ItemCollectionSheet extends DocumentSheet {
     getItems() {
         return this.itemCollection.flags.sfrpg.itemCollection.items;
     }
-    
+
     getChatData(itemData, htmlOptions) {
         console.log(itemData);
         const data = duplicate(itemData);
@@ -306,7 +308,7 @@ export class ItemCollectionSheet extends DocumentSheet {
         if (data.hasOwnProperty("equipped") && !["goods", "augmentation", "technological", "upgrade"].includes(itemData.type)) {
             props.push(
                 data.equipped ? "Equipped" : "Not Equipped",
-                data.proficient ? "Proficient" : "Not Proficient",
+                data.proficient ? "Proficient" : "Not Proficient"
             );
         }
 
@@ -333,44 +335,44 @@ export class ItemCollectionSheet extends DocumentSheet {
     }
 
     /* -------------------------------------------- */
-  
+
     /**
      * Handle changing the actor profile image by opening a FilePicker
      * @private
      */
     _onEditImage(event) {
-      const attr = event.currentTarget.dataset.edit;
-      const current = getProperty(this.document, attr);
-      new FilePicker({
-        type: "image",
-        current: current,
-        callback: path => {
-          event.currentTarget.src = path;
-          this._onSubmit(event);
-        },
-        top: this.position.top + 40,
-        left: this.position.left + 10
-      }).browse(current);
+        const attr = event.currentTarget.dataset.edit;
+        const current = getProperty(this.document, attr);
+        new FilePicker({
+            type: "image",
+            current: current,
+            callback: path => {
+                event.currentTarget.src = path;
+                this._onSubmit(event);
+            },
+            top: this.position.top + 40,
+            left: this.position.left + 10
+        }).browse(current);
     }
 
     /* -------------------------------------------- */
     /*  Drag and Drop                               */
     /* -------------------------------------------- */
-  
+
     /** @override */
     _canDragStart(selector) {
-      return true; // flags.sfrpg.itemCollection.locked || game.user.isGM
+        return true; // flags.sfrpg.itemCollection.locked || game.user.isGM
     }
-  
+
     /* -------------------------------------------- */
-  
+
     /** @override */
     _canDragDrop(selector) {
         return true; // flags.sfrpg.itemCollection.locked || game.user.isGM
     }
-  
+
     /* -------------------------------------------- */
-  
+
     /** @override */
     _onDragStart(event) {
         const li = event.currentTarget;
@@ -382,7 +384,7 @@ export class ItemCollectionSheet extends DocumentSheet {
 
         const item = tokenData.items.find(x => x._id === li.dataset.itemId);
         let draggedItems = [item];
-        for (let i = 0; i<draggedItems.length; i++) {
+        for (let i = 0; i < draggedItems.length; i++) {
             const draggedItemData = draggedItems[i];
 
             if (draggedItemData.container?.contents) {
@@ -406,18 +408,18 @@ export class ItemCollectionSheet extends DocumentSheet {
         };
         event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
     }
-  
+
     /* -------------------------------------------- */
-  
+
     /**
      * @deprecated since 0.5.6
      */
     _onDragItemStart(event) {
-      return this._onDragStart(event);
+        return this._onDragStart(event);
     }
-  
+
     /* -------------------------------------------- */
-  
+
     /** @override */
     async _onDrop(event) {
         let data = TextEditor.getDragEventData(event);
@@ -427,7 +429,8 @@ export class ItemCollectionSheet extends DocumentSheet {
 
         let targetContainer = null;
         if (event) {
-            const targetId = $(event.target).parents('.item').attr('data-item-id')
+            const targetId = $(event.target).parents('.item')
+                .attr('data-item-id');
             targetContainer = this.findItem(targetId);
         }
 
@@ -449,13 +452,13 @@ export class ItemCollectionSheet extends DocumentSheet {
             source: {
                 actorId: sourceActorId,
                 tokenId: sourceTokenId,
-                sceneId: sourceSceneId,
+                sceneId: sourceSceneId
             },
             draggedItemId: item.id,
             draggedItemData: item,
             pack: item.pack,
             containerId: targetContainer ? targetContainer.id : null
-        }
+        };
 
         RPC.sendMessageTo("gm", "dragItemToCollection", msg);
     }

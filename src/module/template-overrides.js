@@ -3,7 +3,7 @@ import { degtorad } from "./utilities.js";
 // Borrows quite heavily from the Pathfinder 1e system by Furyspark.
 export default function() {
     const _templateLayerOriginalOnDragLeftStart = TemplateLayer.prototype._onDragLeftStart;
-    TemplateLayer.prototype._onDragLeftStart = function (event) {
+    TemplateLayer.prototype._onDragLeftStart = function(event) {
         if (!game.settings.get("sfrpg", "useStarfinderAOETemplates")) return _templateLayerOriginalOnDragLeftStart.call(this, event);
 
         PlaceablesLayer.prototype._onDragLeftStart.call(this, event);
@@ -35,7 +35,7 @@ export default function() {
     };
 
     const _templateLayerOriginalOnDragLeftMove = TemplateLayer.prototype._onDragLeftMove;
-    TemplateLayer.prototype._onDragLeftMove = function (event) {
+    TemplateLayer.prototype._onDragLeftMove = function(event) {
         if (!game.settings.get("sfrpg", "useStarfinderAOETemplates")) return _templateLayerOriginalOnDragLeftMove.call(this, event);
 
         PlaceablesLayer.prototype._onDragLeftMove.call(this, event);
@@ -68,7 +68,7 @@ export default function() {
     };
 
     const _measuredTemplateOriginalHightlightGrid = MeasuredTemplate.prototype.highlightGrid;
-    MeasuredTemplate.prototype.highlightGrid = function () {
+    MeasuredTemplate.prototype.highlightGrid = function() {
         if (!game.settings.get("sfrpg", "useStarfinderAOETemplates") || !["circle", "cone"].includes(this.document.t)) return _measuredTemplateOriginalHightlightGrid.call(this);
 
         const grid = canvas.grid;
@@ -96,7 +96,7 @@ export default function() {
         let minAngle = (360 + ((this.document.direction - this.document.angle * 0.5) % 360)) % 360;
         let maxAngle = (360 + ((this.document.direction + this.document.angle * 0.5) % 360)) % 360;
 
-        const within_angle = function (min, max, value) {
+        const within_angle = function(min, max, value) {
             min = (360 + min % 360) % 360;
             max = (360 + max % 360) % 360;
             value = (360 + value % 360) % 360;
@@ -105,7 +105,7 @@ export default function() {
             return value >= min || value <= max;
         };
 
-        const measureDistance = function (p0, p1) {
+        const measureDistance = function(p0, p1) {
             let gs = canvas.dimensions.size;
             let ray = new Ray(p0, p1);
 

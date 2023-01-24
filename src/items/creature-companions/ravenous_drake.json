@@ -2,37 +2,13 @@
   "_id": "YUt6hOErNXCsgKZv",
   "name": "Ravenous Drake",
   "type": "npc2",
-  "_stats": {
-    "coreVersion": "10.290",
-    "createdTime": 1666738343703,
-    "lastModifiedBy": "nAGIIjYeOTKZPBrt",
-    "modifiedTime": 1668651888780,
-    "systemId": "sfrpg",
-    "systemVersion": "0.20.3"
-  },
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "_id": "zqAxKTht3TKjBzKj",
       "name": "Bite (P)",
       "type": "weapon",
-      "_stats": {
-        "coreVersion": "10.288",
-        "createdTime": 1667027117382,
-        "lastModifiedBy": "DQ2No2U3tu4dZzr5",
-        "modifiedTime": 1667163118302,
-        "systemId": "sfrpg",
-        "systemVersion": "0.20.3"
-      },
-      "effects": [],
-      "flags": {},
-      "folder": null,
       "img": "icons/svg/mystery-man.svg",
-      "ownership": {
-        "SPRszH5sDdJlGxJn": 3,
-        "default": 0
-      },
-      "sort": 0,
       "system": {
         "type": "",
         "ability": "",
@@ -104,7 +80,7 @@
           "parts": [
             {
               "name": "",
-              "formula": "@abilities.str.mod",
+              "formula": "@abilities.str.mod + (lookupRange(@details.cr, 0, 1, 1, 9, 3, 10, 2, 13, 6, 15, 5, 16, 6, 17, 8, 19, 9, 20, 13))d(lookupRange(@details.cr, 0, 1, 4, 6, 6, 7, 8, 8, 12, 9, 4, 10, 8, 11, 10, 12, 12, 13, 4, 14, 6, 15, 8, 17, 6, 18, 8, 20, 6)) + (@details.cr)",
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -287,27 +263,7 @@
       "_id": "FTDQ7caOAQoT2E45",
       "name": "Creature Companion - Ravenous Drake",
       "type": "feat",
-      "_stats": {
-        "coreVersion": "10.288",
-        "createdTime": 1666738399852,
-        "lastModifiedBy": "DQ2No2U3tu4dZzr5",
-        "modifiedTime": 1667440431252,
-        "systemId": "sfrpg",
-        "systemVersion": "0.20.3"
-      },
-      "effects": [],
-      "flags": {
-        "core": {
-          "sourceId": "Actor.8uktygKWLPHniSM4.Item.lDyqMXhSzt7ruwZZ"
-        }
-      },
-      "folder": "hlygaViJm7JpfQry",
       "img": "icons/creatures/mammals/wolf-shadow-black.webp",
-      "ownership": {
-        "SPRszH5sDdJlGxJn": 3,
-        "default": 0
-      },
-      "sort": 100000,
       "system": {
         "type": "",
         "ability": null,
@@ -342,7 +298,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>@UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.gTHswZ0FBafS7ru0]{Creature Companion}</p>\n<p>Ravenous drakes can make suitable creature companions for those prepared to sate their appetites.</p>\n<h2 class=\"title\">Ravenous Drake</h2>\n<p><strong>Levels 1-5</strong></p>\n<p>Small dragon<br><strong>Senses</strong> darkvision 60 ft., low-light vision<br><strong>Good Save</strong> Fort; <strong>Poor Saves</strong> Ref, Will<br><strong>Speed</strong> 30 ft., climb 20 ft.<br><strong>Melee Attack</strong> bite (P), suctioning vortex (special)<br><strong>Space</strong> 5 ft. <strong>Reach</strong> 5 ft.(10 ft. with suctioning vortex) <br><strong>Ability Modifiers</strong> Str, Con</p>\n<h3 class=\"title\">Special Abilities</h3>\n<p><span id=\"ctl00_MainContent_DetailedOutput\"><strong>Growth Spurt (Ex, 6th level)</strong>&nbsp;Upon reaching 6th level, a ravenous drake can choose to become Medium. If it remains Small, each time it gains a new level it can choose to become Medium.<br></span></p>\n<p><strong>Suctioning Vortex (Ex)</strong> As a standard action, a ravenous drake can make a special melee attack targeting KAC by powerfully inhaling, drawing its prey into its mouth. Against a target larger than the drake, this functions as the @Compendium[sfrpg.universal-creature-rules.7dHUPB2PyPTXUL3i]{attach} universal creature ability; if the attack succeeds, the drake moves to the nearest adjacent space and attaches to the target. If the attack fails, the drake moves but doesn&rsquo;t attach.</p>\n<p>Against a target of the ravenous drake&rsquo;s size or smaller, this instead functions in many ways like the @Compendium[sfrpg.universal-creature-rules.8mPBT10423cEnTiZ]{swallow whole} universal creature ability. The drake gains a +4 bonus to the initial attack roll but doesn&rsquo;t deal damage upon initially hitting the target. On its subsequent turns, while @Compendium[sfrpg.conditions.4AkWDHGM6gHDepHN]{grappling} or @Compendium[sfrpg.conditions.XgK4EdO5D3Fj3iWz]{pinning} the target, the drake deals its bite damage. The drake can swallow a creature of its size or smaller. While it has swallowed a creature of its same size, the drake gains the @Compendium[sfrpg.conditions.OwZA6flUQPH0jPA0]{encumbered} and @Compendium[sfrpg.conditions.MZ8OoH1GE9qDMyCD]{flat-Footed} conditions.</p>\n<p>The movement from this ability&mdash;both for the drake and its target&mdash;does not provoke attacks of opportunity. The DC of Strength checks to remove an attached drake equals 10 + the drake&rsquo;s level. Use the drake&rsquo;s level in place of its CR to calculate the Athletics check DC to climb out of its stomach.</p>\n<p><span id=\"ctl00_MainContent_DetailedOutput\"></span></p>\n<p><em>HP Max must be manually adjusted. HP value can be found on the @UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.FqsTa05DBVMfsvxy#creature-companion-statistics]{Creature Companion Statistics Table}</em></p>"
+          "value": "<p>@UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.gTHswZ0FBafS7ru0]{Creature Companion}</p>\n<p>Ravenous drakes can make suitable creature companions for those prepared to sate their appetites.</p>\n<h2>Ravenous Drake</h2>\n<p><strong>Levels 1-5</strong></p>\n<p>Small dragon</p>\n<p><strong>Senses</strong> darkvision 60 ft., low-light vision</p>\n<p><strong>Good Save</strong> Fort; <strong>Poor Saves</strong> Ref, Will</p>\n<p><strong>Speed</strong> 30 ft., climb 20 ft.</p>\n<p><strong>Melee Attack</strong> bite (P), suctioning vortex (special)</p>\n<p><strong>Space</strong> 5 ft. <strong>Reach</strong> 5 ft.(10 ft. with suctioning vortex)</p>\n<p><strong>Ability Modifiers</strong> Str, Con</p>\n<h3>Special Abilities</h3>\n<p><strong>Growth Spurt (Ex, 6th level)</strong> Upon reaching 6th level, a ravenous drake can choose to become Medium. If it remains Small, each time it gains a new level it can choose to become Medium.</p>\n<p><strong>Suctioning Vortex (Ex)</strong> As a standard action, a ravenous drake can make a special melee attack targeting KAC by powerfully inhaling, drawing its prey into its mouth. Against a target larger than the drake, this functions as the @UUID[Compendium.sfrpg.universal-creature-rules.7dHUPB2PyPTXUL3i]{attach} universal creature ability; if the attack succeeds, the drake moves to the nearest adjacent space and attaches to the target. If the attack fails, the drake moves but doesn’t attach.</p>\n<p>Against a target of the ravenous drake’s size or smaller, this instead functions in many ways like the @UUID[Compendium.sfrpg.universal-creature-rules.8mPBT10423cEnTiZ]{swallow whole} universal creature ability. The drake gains a +4 bonus to the initial attack roll but doesn’t deal damage upon initially hitting the target. On its subsequent turns, while @UUID[Compendium.sfrpg.conditions.4AkWDHGM6gHDepHN]{grappling} or @UUID[Compendium.sfrpg.conditions.XgK4EdO5D3Fj3iWz]{pinning} the target, the drake deals its bite damage. The drake can swallow a creature of its size or smaller. While it has swallowed a creature of its same size, the drake gains the @UUID[Compendium.sfrpg.conditions.OwZA6flUQPH0jPA0]{encumbered} and @UUID[Compendium.sfrpg.conditions.MZ8OoH1GE9qDMyCD]{flat-Footed} conditions.</p>\n<p>The movement from this ability—both for the drake and its target—does not provoke attacks of opportunity. The DC of Strength checks to remove an attached drake equals 10 + the drake’s level. Use the drake’s level in place of its CR to calculate the Athletics check DC to climb out of its stomach.</p>\n<p><span id=\"ctl00_MainContent_DetailedOutput\"></span></p>\n<p><em>HP Max must be manually adjusted. HP value can be found on the @UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.FqsTa05DBVMfsvxy#creature-companion-statistics]{Creature Companion Statistics Table}</em></p>"
         },
         "descriptors": {
           "acid": false,
@@ -372,10 +328,12 @@
           "mind-affecting": false,
           "pain": false,
           "poison": false,
+          "polymorph": false,
           "radiation": false,
           "scrying": false,
           "sense-dependent": false,
           "shadow": false,
+          "sonic": false,
           "summoning": false,
           "teleportation": false,
           "water": false
@@ -393,7 +351,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "VYbQR06rFmlELsVE",
+              "actorId": "YUt6hOErNXCsgKZv",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ac",
@@ -412,7 +370,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "VYbQR06rFmlELsVE",
+              "actorId": "YUt6hOErNXCsgKZv",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ac",
@@ -431,7 +389,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "VYbQR06rFmlELsVE",
+              "actorId": "YUt6hOErNXCsgKZv",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "save",
@@ -450,7 +408,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "VYbQR06rFmlELsVE",
+              "actorId": "YUt6hOErNXCsgKZv",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "save",
@@ -469,7 +427,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "VYbQR06rFmlELsVE",
+              "actorId": "YUt6hOErNXCsgKZv",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "save",
@@ -488,7 +446,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "VYbQR06rFmlELsVE",
+              "actorId": "YUt6hOErNXCsgKZv",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ability-score",
@@ -507,7 +465,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "VYbQR06rFmlELsVE",
+              "actorId": "YUt6hOErNXCsgKZv",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ability-score",
@@ -526,7 +484,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "VYbQR06rFmlELsVE",
+              "actorId": "YUt6hOErNXCsgKZv",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ability-score",
@@ -545,7 +503,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "VYbQR06rFmlELsVE",
+              "actorId": "YUt6hOErNXCsgKZv",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "all-skills",
@@ -564,32 +522,13 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "VYbQR06rFmlELsVE",
+              "actorId": "YUt6hOErNXCsgKZv",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "all-attacks",
             "enabled": true,
             "max": 0,
             "modifier": "lookupRange(@details.cr, 0, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 9, 8, 10, 9, 11, 10, 13, 11, 14, 13, 16, 14, 17, 15, 18, 16, 19, 17, 20, 18, 21, 19, 23)",
-            "modifierType": "constant",
-            "notes": "",
-            "source": "",
-            "subtab": "misc",
-            "valueAffected": "acr"
-          },
-          {
-            "_id": "a0389005-fc87-47dd-829d-f49bebf79ec5",
-            "name": "Creature Companion - Damage",
-            "type": "untyped",
-            "condition": "",
-            "container": {
-              "actorId": "VYbQR06rFmlELsVE",
-              "itemId": "FTDQ7caOAQoT2E45"
-            },
-            "effectType": "all-damage",
-            "enabled": true,
-            "max": 0,
-            "modifier": "(lookupRange(@details.cr, 0, 1, 1, 9, 3, 10, 2, 13, 6, 15, 5, 16, 6, 17, 8, 19, 9, 20, 13))d(lookupRange(@details.cr, 0, 1, 4, 6, 6, 7, 8, 8, 12, 9, 4, 10, 8, 11, 10, 12, 12, 13, 4, 14, 6, 15, 8, 17, 6, 18, 8, 20, 6)) + (@details.cr)",
             "modifierType": "constant",
             "notes": "",
             "source": "",
@@ -630,23 +569,7 @@
       "_id": "PqDfN9nb1GAbvO3n",
       "name": "Growth Spurt (Ex, 6th level)",
       "type": "feat",
-      "_stats": {
-        "coreVersion": "10.288",
-        "createdTime": 1667063858519,
-        "lastModifiedBy": "SPRszH5sDdJlGxJn",
-        "modifiedTime": 1667064745262,
-        "systemId": "sfrpg",
-        "systemVersion": "0.21.0"
-      },
-      "effects": [],
-      "flags": {},
-      "folder": null,
       "img": "icons/svg/mystery-man.svg",
-      "ownership": {
-        "SPRszH5sDdJlGxJn": 3,
-        "default": 0
-      },
-      "sort": 0,
       "system": {
         "type": "",
         "ability": null,
@@ -759,23 +682,7 @@
       "_id": "racmiJev9jUPjs0Q",
       "name": "Suctioning Vortex (Ex)",
       "type": "feat",
-      "_stats": {
-        "coreVersion": "10.290",
-        "createdTime": 1667063886077,
-        "lastModifiedBy": "nAGIIjYeOTKZPBrt",
-        "modifiedTime": 1668651888780,
-        "systemId": "sfrpg",
-        "systemVersion": "0.20.3"
-      },
-      "effects": [],
-      "flags": {},
-      "folder": null,
       "img": "icons/svg/mystery-man.svg",
-      "ownership": {
-        "SPRszH5sDdJlGxJn": 3,
-        "default": 0
-      },
-      "sort": 0,
       "system": {
         "type": "",
         "ability": "",
@@ -805,7 +712,8 @@
           "parts": [
             {
               "name": "",
-              "formula": "@abilities.str.mod",
+              "formula": "@abilities.str.mod + (lookupRange(@details.cr, 0, 1, 1, 9, 3, 10, 2, 13, 6, 15, 5, 16, 6, 17, 8, 19, 9, 20, 13))d(lookupRange(@details.cr, 0, 1, 4, 6, 6, 7, 8, 8, 12, 9, 4, 10, 8, 11, 10, 12, 12, 13, 4, 14, 6, 15, 8, 17, 6, 18, 8, 20, 6)) + (@details.cr)",
+              "group": null,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -826,7 +734,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>As a standard action, a ravenous drake can make a special melee attack targeting KAC by powerfully inhaling, drawing its prey into its mouth. Against a target larger than the drake, this functions as the @Compendium[sfrpg.universal-creature-rules.7dHUPB2PyPTXUL3i]{attach} universal creature ability; if the attack succeeds, the drake moves to the nearest adjacent space and attaches to the target. If the attack fails, the drake moves but doesn&rsquo;t attach.</p>\n<p>Against a target of the ravenous drake&rsquo;s size or smaller, this instead functions in many ways like the @Compendium[sfrpg.universal-creature-rules.8mPBT10423cEnTiZ]{swallow whole} universal creature ability. The drake gains a +4 bonus to the initial attack roll but doesn&rsquo;t deal damage upon initially hitting the target. On its subsequent turns, while @Compendium[sfrpg.conditions.4AkWDHGM6gHDepHN]{grappling} or @Compendium[sfrpg.conditions.XgK4EdO5D3Fj3iWz]{pinning} the target, the drake deals its bite damage. The drake can swallow a creature of its size or smaller. While it has swallowed a creature of its same size, the drake gains the @Compendium[sfrpg.conditions.OwZA6flUQPH0jPA0]{encumbered} and @Compendium[sfrpg.conditions.MZ8OoH1GE9qDMyCD]{flat-Footed} conditions.</p>\n<p>The movement from this ability&mdash;both for the drake and its target&mdash;does not provoke attacks of opportunity. The DC of Strength checks to remove an attached drake equals 10 + the drake&rsquo;s level. Use the drake&rsquo;s level in place of its CR to calculate the Athletics check DC to climb out of its stomach.</p>"
+          "value": "<p>As a standard action, a ravenous drake can make a special melee attack targeting KAC by powerfully inhaling, drawing its prey into its mouth. Against a target larger than the drake, this functions as the @UUID[Compendium.sfrpg.universal-creature-rules.7dHUPB2PyPTXUL3i]{attach} universal creature ability; if the attack succeeds, the drake moves to the nearest adjacent space and attaches to the target. If the attack fails, the drake moves but doesn’t attach.</p>\n<p>Against a target of the ravenous drake’s size or smaller, this instead functions in many ways like the @UUID[Compendium.sfrpg.universal-creature-rules.8mPBT10423cEnTiZ]{swallow whole} universal creature ability. The drake gains a +4 bonus to the initial attack roll but doesn’t deal damage upon initially hitting the target. On its subsequent turns, while @UUID[Compendium.sfrpg.conditions.4AkWDHGM6gHDepHN]{grappling} or @UUID[Compendium.sfrpg.conditions.XgK4EdO5D3Fj3iWz]{pinning} the target, the drake deals its bite damage. The drake can swallow a creature of its size or smaller. While it has swallowed a creature of its same size, the drake gains the @UUID[Compendium.sfrpg.conditions.OwZA6flUQPH0jPA0]{encumbered} and @UUID[Compendium.sfrpg.conditions.MZ8OoH1GE9qDMyCD]{flat-Footed} conditions.</p>\n<p>The movement from this ability—both for the drake and its target—does not provoke attacks of opportunity. The DC of Strength checks to remove an attached drake equals 10 + the drake’s level. Use the drake’s level in place of its CR to calculate the Athletics check DC to climb out of its stomach.</p>"
         },
         "descriptors": {
           "acid": false,
@@ -856,10 +764,12 @@
           "mind-affecting": false,
           "pain": false,
           "poison": false,
+          "polymorph": false,
           "radiation": false,
           "scrying": false,
           "sense-dependent": false,
           "shadow": false,
+          "sonic": false,
           "summoning": false,
           "teleportation": false,
           "water": false
@@ -918,20 +828,19 @@
     }
   ],
   "prototypeToken": {
-    "name": "New Actor (54)",
+    "name": "Ravenous Drake",
     "actorLink": false,
     "alpha": 1,
     "bar1": {
-      "attribute": null
+      "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": null
+      "attribute": ""
     },
     "detectionModes": [],
-    "displayBars": 0,
-    "displayName": 0,
+    "displayBars": 20,
+    "displayName": 20,
     "disposition": -1,
-    "flags": {},
     "height": 1,
     "light": {
       "alpha": 0.5,
@@ -1087,12 +996,6 @@
         "tooltip": [],
         "value": 0
       },
-      "rp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
       "sp": {
         "max": 10,
         "min": 0,
@@ -1210,7 +1113,7 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<p>Ravenous drakes can make suitable creature companions for those prepared to sate their appetites.</p>\n<h2 class=\"title\">Ravenous Drake</h2>\n<p><strong>Levels 1-5</strong></p>\n<p>Small dragon<br><strong>Senses</strong>&nbsp;darkvision 60 ft., low-light vision<br><strong>Good Save</strong>&nbsp;Fort;&nbsp;<strong>Poor Saves</strong>&nbsp;Ref, Will<br><strong>Speed</strong>&nbsp;30 ft., climb 20 ft.<br><strong>Melee Attack</strong>&nbsp;bite (P), suctioning vortex (special)<br><strong>Space</strong>&nbsp;5 ft.&nbsp;<strong>Reach</strong>&nbsp;5 ft.(10 ft. with suctioning vortex)<br><strong>Ability Modifiers</strong> Str, Con</p>",
+        "value": "<p>Ravenous drakes can make suitable creature companions for those prepared to sate their appetites.</p>\n<h2>Ravenous Drake</h2>\n<p><strong>Levels 1-5</strong></p>\n<p>Small dragon</p>\n<p><strong>Senses</strong>&nbsp;darkvision 60 ft., low-light vision</p>\n<p><strong>Good Save</strong>&nbsp;Fort;&nbsp;<strong>Poor Saves</strong>&nbsp;Ref, Will</p>\n<p><strong>Speed</strong>&nbsp;30 ft., climb 20 ft.</p>\n<p><strong>Melee Attack</strong>&nbsp;bite (P), suctioning vortex (special)</p>\n<p><strong>Space</strong>&nbsp;5 ft.&nbsp;<strong>Reach</strong>&nbsp;5 ft.(10 ft. with suctioning vortex)</p>\n<p><strong>Ability Modifiers</strong> Str, Con</p>",
         "weight": ""
       },
       "class": "",

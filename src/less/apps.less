@@ -10,6 +10,13 @@ button {
   font-size: 13px;
 }
 
+blockquote.quote {
+    margin: 0.5em 0.5em 0.5em 0px;
+    padding: 0 0 0 0.75em;
+    border-left: 3px solid #235683;
+    font-style: italic;
+}
+
 .window-app {
   .exo2();
 
@@ -87,7 +94,7 @@ a.content-link, a.inline-roll {
   }
 
   // Checkbox Labels
-  label.checkbox {
+  label.checkbox, label.radio {
     flex: auto;
     margin: 0;
     line-height: 20px;
@@ -95,9 +102,15 @@ a.content-link, a.inline-roll {
     text-align: right;
     input[type="checkbox"] {
       height: auto;
-      margin: 0 5px 0;
+      margin: 0 3px;
       position: relative;
       top: 3px;
+    }
+    input[type="radio"] {
+        height: auto;
+        margin: 0 4px;
+        position: relative;
+        top: 3px;
     }
   }
 
@@ -139,11 +152,11 @@ a.content-link, a.inline-roll {
     border-top: @borderGroove;
     border-bottom: @borderGroove;
   }
-  
+
   .form-rest {
     margin-bottom: 7px
   }
-  
+
   .form-repair {
     margin-bottom: 7px
   }
@@ -276,7 +289,7 @@ a.content-link, a.inline-roll {
   /* ----------------------------------------- */
   .sheet-header {
     flex: 0 0 @headerHeight;
-    border-bottom: @borderGroove;
+    border-bottom: 1px groove #eeede0;
     .orbitron();
 
     /* Character Name */
@@ -342,7 +355,7 @@ a.content-link, a.inline-roll {
   .sheet-navigation {
     background: @blueGradientBackground;
     flex: 0 0 @navHeight;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
     // .nodesto();
     .exo2();
 
@@ -363,9 +376,8 @@ a.content-link, a.inline-roll {
 
   .sheet-subnavigation {
     flex: 0 0 @navHeight;
-    margin-bottom: 5px;
     .exo2();
-    
+
     .item {
       height: 30px;
       line-height: 32px;

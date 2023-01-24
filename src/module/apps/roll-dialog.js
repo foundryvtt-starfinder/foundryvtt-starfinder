@@ -3,7 +3,7 @@ import { SFRPG } from "../config.js";
 // Typedef's for documentation purposes.
 /**
  * A data structure for storing damage statistics.
- * 
+ *
  * @typedef {Object} DamagePart
  * @property {string}                     formula  The roll formula to use.
  * @property {{[key: string]: boolean}}   types    A set of key value pairs that determines the available damage types.
@@ -16,9 +16,9 @@ import { SFRPG } from "../config.js";
 export default class RollDialog extends Dialog {
     /**
      * Construct a custom RollDialog
-     * 
+     *
      * @param {object} params The parameters passed into the class.
-     * @param {RollTree} params.rollTree 
+     * @param {RollTree} params.rollTree
      * @param {string} params.formula The formula used for this roll.
      * @param {RollContext} params.contexts Contextual data for the roll.
      * @param {Modifier[]} params.availableModifiers Any conditional modifiers that can apply to this roll.
@@ -39,7 +39,17 @@ export default class RollDialog extends Dialog {
             this.formula = mainDie + " + " + formula;
         }
 
-        this.parts = parts
+        this.parts = parts;
+
+        // Sort parts by group. Parts with the same group will share a radio input.
+        if (this.parts.length > 0) {
+            this.damageGroups = this.parts.reduce((groups, item) => {
+                const group = (groups[item.group] || []);
+                group.push(item);
+                groups[item.group] = group;
+                return groups;
+            }, {});
+        }
 
         /** Prepare selectors */
         this.selectors = {};
@@ -68,7 +78,7 @@ export default class RollDialog extends Dialog {
     }
 
     get template() {
-        return "systems/sfrpg/templates/chat/roll-dialog.html";
+        return "systems/sfrpg/templates/chat/roll-dialog.hbs";
     }
 
     async _render(...args) {
@@ -86,23 +96,52 @@ export default class RollDialog extends Dialog {
         }
     }
 
-    getData() {
-        const data = super.getData();
+    async getData() {
+        const data = await super.getData();
         data.formula = this.formula;
         data.rollMode = this.rollMode;
         data.rollModes = CONFIG.Dice.rollModes;
         data.additionalBonus = this.additionalBonus;
-        data.availableModifiers = this.availableModifiers || [];
+        data.availableModifiers = duplicate(this.availableModifiers) || [];
         data.hasModifiers = data.availableModifiers.length > 0;
         data.hasSelectors = this.contexts.selectors && this.contexts.selectors.length > 0;
         data.selectors = this.selectors;
         data.contexts = this.contexts;
-        
+        data.damageGroups = this.damageGroups;
+
+        for (const modifier of data.availableModifiers) {
+            const allContexts = data.contexts.allContexts;
+            const mainContext = data.contexts.mainContext;
+            let context = allContexts[mainContext]?.data;
+
+            // Starships use "@ship" etc. in their formulas, so the context needs to be adjusted to skip the intermediate "data/entity" object.
+            if (["ship", ""].includes(mainContext)) {
+                context = Object.entries(allContexts).reduce((obj, i) => {
+                    const scope = i[0];
+                    const data = i[1].data;
+                    obj[scope] = data;
+                    return obj;
+                }, {});
+            }
+
+            // Make a simplified roll
+            const simplerRoll = Roll.create(modifier.modifier, context).simplifiedFormula;
+            if (modifier.modifier[0] === "+") modifier.modifier = modifier.modifier.slice(1);
+
+            // If it actually was simplified, append the original modififer for use on the tooltip.
+            if (modifier.modifier !== simplerRoll) {
+                modifier.originalFormula = modifier.modifier;
+            }
+
+            // Sign that string
+            const numMod = Number(simplerRoll);
+            modifier.modifier = numMod ? numMod.signedString() : simplerRoll;
+        }
+
         if (this.parts?.length > 0) {
             data.hasDamageTypes = true;
-            
-            data.damageSections = this.parts;
-            for(const part of this.parts) {
+
+            for (const part of this.parts) {
                 const partIndex = this.parts.indexOf(part);
 
                 // If there is no name, create the placeholder name
@@ -117,9 +156,18 @@ export default class RollDialog extends Dialog {
                 // Create type string out of localized parts
                 let typeString = "";
                 if (part.types && !foundry.utils.isEmpty(part.types)) {
-                    typeString = `${(Object.entries(part.types).filter(type => type[1]).map(type => SFRPG.damageTypes[type[0]]).join(` & `))}`
+                    typeString = `${(Object.entries(part.types).filter(type => type[1])
+                        .map(type => SFRPG.damageTypes[type[0]])
+                        .join(` & `))}`;
                 }
                 part.type = typeString;
+
+                // Clean up the formula
+                const simplerRoll = Roll.create(part.formula).simplifiedFormula;
+                if (part.formula !== simplerRoll) {
+                    part.originalFormula = part.formula;
+                    part.formula = simplerRoll;
+                }
             }
 
             data.formula = this.formula;
@@ -133,7 +181,7 @@ export default class RollDialog extends Dialog {
 
     /**
      * Activate any event listeners.
-     * 
+     *
      * @param {JQuery} html The jQuery object that represents the HTMl content.
      */
     activateListeners(html) {
@@ -151,7 +199,8 @@ export default class RollDialog extends Dialog {
         const selectorCombobox = html.find('.selector');
         selectorCombobox.on('change', this._onSelectorChanged.bind(this));
 
-        html.find('input[class="damageSection"]').change(this._onDamageSectionToggled.bind(this));
+        html.find('input[class="damageSection"][type="radio"]').on('change', this._onDamageSectionRadio.bind(this)); // Handle radios turning each other off
+        html.find('input[class="damageSection"][type="checkbox"]').on('change', this._onDamageSectionCheckbox.bind(this));
     }
 
     async _onAdditionalBonusChanged(event) {
@@ -214,12 +263,29 @@ export default class RollDialog extends Dialog {
         this.render(false);
     }
 
-    async _onDamageSectionToggled(event) {
-        const selectorName = event.currentTarget.name;
-        const selectedValue = event.currentTarget.checked;
+    _onDamageSectionRadio(event) {
+        let damageGroups = this.damageGroups;
 
-        this.parts[selectorName].enabled = selectedValue;
-        this.render(null, false);
+        const selectorGroup = event.currentTarget.name;
+        const selectorId = event.currentTarget.id;
+
+        const selectedGroup = damageGroups[selectorGroup];
+
+        selectedGroup.forEach(i => i.enabled = false);
+        selectedGroup[selectorId].enabled = event.currentTarget.checked;
+
+        // this.render(null, false);
+    }
+
+    _onDamageSectionCheckbox(event) {
+        let damageGroups = this.damageGroups;
+
+        const selectorGroup = event.currentTarget.name;
+        const selectorId = event.currentTarget.id;
+
+        const selectedGroup = damageGroups[selectorGroup];
+
+        selectedGroup[selectorId].enabled = event.currentTarget.checked;
     }
 
     submit(button) {
@@ -252,13 +318,13 @@ export default class RollDialog extends Dialog {
 
     /**
      * Factory method used to create a RollDialog.
-     * 
-     * @param {RollTree} rollTree 
-     * @param {string} formula 
-     * @param {RollContext} contexts 
-     * @param {Modifier[]} availableModifiers 
-     * @param {string} mainDie 
-     * @param {DialogOptions} options 
+     *
+     * @param {RollTree} rollTree
+     * @param {string} formula
+     * @param {RollContext} contexts
+     * @param {Modifier[]} availableModifiers
+     * @param {string} mainDie
+     * @param {DialogOptions} options
      * @returns {RollDialog}
      */
     static async showRollDialog(rollTree, formula, contexts, availableModifiers = [], mainDie, options = {}) {
@@ -267,11 +333,11 @@ export default class RollDialog extends Dialog {
             const defaultButton = options.defaultButton || (Object.values(buttons)[0].id ?? Object.values(buttons)[0].label);
 
             const dlg = new RollDialog({
-                rollTree, 
-                formula, 
-                contexts, 
-                availableModifiers, 
-                mainDie, 
+                rollTree,
+                formula,
+                contexts,
+                availableModifiers,
+                mainDie,
                 parts: options.parts,
                 dialogData: {
                     title: options.title || game.i18n.localize("SFRPG.Rolls.Dice.Roll"),
@@ -280,7 +346,7 @@ export default class RollDialog extends Dialog {
                     close: (button, rollMode, bonus, parts) => {
                         resolve([button, rollMode, bonus, parts]);
                     }
-                }, 
+                },
                 options: options.dialogOptions || {}
             });
             dlg.render(true);

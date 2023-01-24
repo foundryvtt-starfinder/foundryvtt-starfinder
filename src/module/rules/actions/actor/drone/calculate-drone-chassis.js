@@ -1,6 +1,6 @@
 import { SFRPG } from "../../../../config.js";
 
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateDroneChassis", (fact, context) => {
         const data = fact.data;
 
@@ -46,7 +46,7 @@ export default function (engine) {
             data.abilities.int.base = chassisData.abilityScores.int + (abilityIncreaseStats.includes("int") ? abilityIncreases : 0);
 
             data.abilities.wis.base = chassisData.abilityScores.wis + (abilityIncreaseStats.includes("wis") ? abilityIncreases : 0);
-            
+
             data.abilities.cha.base = chassisData.abilityScores.cha + (abilityIncreaseStats.includes("cha") ? abilityIncreases : 0);
         } else {
             data.abilities.str.tooltip.push(game.i18n.format("SFRPG.DroneSheet.Chassis.NotInstalled"));

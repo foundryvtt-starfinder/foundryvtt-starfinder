@@ -2,37 +2,13 @@
   "_id": "7TcCXmCYUTYPvgqV",
   "name": "Eshar",
   "type": "npc2",
-  "_stats": {
-    "coreVersion": "10.290",
-    "createdTime": 1666738343703,
-    "lastModifiedBy": "nAGIIjYeOTKZPBrt",
-    "modifiedTime": 1668649012340,
-    "systemId": "sfrpg",
-    "systemVersion": "0.20.3"
-  },
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "_id": "zqAxKTht3TKjBzKj",
       "name": "Tail (B)",
       "type": "weapon",
-      "_stats": {
-        "coreVersion": "10.290",
-        "createdTime": 1667027117382,
-        "lastModifiedBy": "nAGIIjYeOTKZPBrt",
-        "modifiedTime": 1668648651980,
-        "systemId": "sfrpg",
-        "systemVersion": "0.20.3"
-      },
-      "effects": [],
-      "flags": {},
-      "folder": null,
       "img": "icons/svg/mystery-man.svg",
-      "ownership": {
-        "SPRszH5sDdJlGxJn": 3,
-        "default": 0
-      },
-      "sort": 0,
       "system": {
         "type": "",
         "ability": "",
@@ -104,7 +80,7 @@
           "parts": [
             {
               "name": "",
-              "formula": "@abilities.str.mod",
+              "formula": "@abilities.str.mod + (lookupRange(@details.cr, 0, 1, 1, 9, 3, 10, 2, 13, 6, 15, 5, 16, 6, 17, 8, 19, 9, 20, 13))d(lookupRange(@details.cr, 0, 1, 4, 6, 6, 7, 8, 8, 12, 9, 4, 10, 8, 11, 10, 12, 12, 13, 4, 14, 6, 15, 8, 17, 6, 18, 8, 20, 6)) + (@details.cr)",
               "types": {
                 "acid": false,
                 "bludgeoning": true,
@@ -287,27 +263,7 @@
       "_id": "FTDQ7caOAQoT2E45",
       "name": "Creature Companion - Eshar",
       "type": "feat",
-      "_stats": {
-        "coreVersion": "10.290",
-        "createdTime": 1666738399852,
-        "lastModifiedBy": "nAGIIjYeOTKZPBrt",
-        "modifiedTime": 1668648725405,
-        "systemId": "sfrpg",
-        "systemVersion": "0.20.3"
-      },
-      "effects": [],
-      "flags": {
-        "core": {
-          "sourceId": "Actor.8uktygKWLPHniSM4.Item.lDyqMXhSzt7ruwZZ"
-        }
-      },
-      "folder": "hlygaViJm7JpfQry",
       "img": "icons/creatures/mammals/wolf-shadow-black.webp",
-      "ownership": {
-        "SPRszH5sDdJlGxJn": 3,
-        "default": 0
-      },
-      "sort": 100000,
       "system": {
         "type": "",
         "ability": null,
@@ -342,7 +298,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>@UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.gTHswZ0FBafS7ru0]{Creature Companion}</p>\n<p>Eshars are hulking, serpentine beasts from the expansive, sandy deserts of the tidally locked planet Verces. They are used for battle, transportation, and even for sport, in an elaborate zone-capturing game that can last for days.</p>\n<h2 class=\"title\">Eshar</h2>\n<p>Levels 10-20</p>\n<p>Huge animal<br><strong>Senses</strong>&nbsp;blindsight (vibration) 60 ft., low-light vision<br><strong>Good Save</strong>&nbsp;Fort;&nbsp;<strong>Poor Saves</strong>&nbsp;Ref, Will<br><strong>Defensive Abilities</strong>&nbsp;ferocity;&nbsp;<strong>Resistances</strong>&nbsp;fire 5<br><strong>Weaknesses</strong>&nbsp;vulnerable to cold<br><strong>Speed</strong>&nbsp;30 ft.; burrow 60 ft.<br><strong>Melee Attack</strong>&nbsp;tail (B)<br><strong>Space</strong>&nbsp;15 ft.&nbsp;<strong>Reach</strong>&nbsp;10 ft.<br><strong>Ability Modifiers</strong>&nbsp;Con, Dex</p>\n<h3 class=\"title\">Special Abilities</h3>\n<p><strong>Lie in Wait (Ex)</strong> While mounted on your eshar companion, you can remain burrowed in sand or loose dirt for up to 1 hour, and if combat begins during this time, you gain a +4 circumstance bonus to any skill check (normally Perception or Stealth) to determine whether you act in a surprise round.</p>\n<p><strong>Screech (Ex)</strong>&nbsp;As a standard action, an eshar can unleash a terrifying screech, causing each creature within 30 feet to become shaken for 1d4 rounds unless it succeeds at a Will saving throw (DC = 10 + 1-1/2 &times; the eshar&rsquo;s level). Regardless of whether a creature succeeds at this check, it is immune to that eshar&rsquo;s screech for 24 hours. Eshars are immune to the screech ability of other eshars, and you are immune to the screech of your own eshar companion.</p>\n<p><span id=\"ctl00_MainContent_DetailedOutput\"></span></p>\n<p><em>HP Max must be manually adjusted. HP value can be found on the @UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.FqsTa05DBVMfsvxy#creature-companion-statistics]{Creature Companion Statistics Table}</em></p>"
+          "value": "<p>@UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.gTHswZ0FBafS7ru0]{Creature Companion}</p>\n<p>Eshars are hulking, serpentine beasts from the expansive, sandy deserts of the tidally locked planet @UUID[Compendium.sfrpg.setting.f24qKgU5Wh5LLJyh]{Verces}. They are used for battle, transportation, and even for sport, in an elaborate zone-capturing game that can last for days.</p><h2>Eshar</h2><p>Levels 10-20</p>\n<p>Huge animal</p>\n<p><strong>Senses</strong>&nbsp;blindsight (vibration) 60 ft., low-light vision</p>\n<p><strong>Good Save</strong>&nbsp;Fort;&nbsp;<strong>Poor Saves</strong>&nbsp;Ref, Will</p>\n<p><strong>Defensive Abilities</strong>&nbsp;ferocity;&nbsp;<strong>Resistances</strong>&nbsp;fire 5</p>\n<p><strong>Weaknesses</strong>&nbsp;vulnerable to cold</p>\n<p><strong>Speed</strong>&nbsp;30 ft.; burrow 60 ft.</p>\n<p><strong>Melee Attack</strong>&nbsp;tail (B)</p>\n<p><strong>Space</strong>&nbsp;15 ft.&nbsp;<strong>Reach</strong>&nbsp;10 ft.</p>\n<p><strong>Ability Modifiers</strong>&nbsp;Con, Dex</p><h3>Special Abilities</h3><p><strong>Lie in Wait (Ex)</strong> While mounted on your eshar companion, you can remain burrowed in sand or loose dirt for up to 1 hour, and if combat begins during this time, you gain a +4 circumstance bonus to any skill check (normally Perception or Stealth) to determine whether you act in a surprise round.</p>\n<p><strong>Screech (Ex)</strong>&nbsp;As a standard action, an eshar can unleash a terrifying screech, causing each creature within 30 feet to become shaken for 1d4 rounds unless it succeeds at a Will saving throw (DC = 10 + 1-1/2 × the eshar’s level). Regardless of whether a creature succeeds at this check, it is immune to that eshar’s screech for 24 hours. Eshars are immune to the screech ability of other eshars, and you are immune to the screech of your own eshar companion.</p>\n<p><em>HP Max must be manually adjusted. HP value can be found on the @UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.FqsTa05DBVMfsvxy#creature-companion-statistics]{Creature Companion Statistics Table}</em></p>"
         },
         "descriptors": {
           "acid": false,
@@ -372,10 +328,12 @@
           "mind-affecting": false,
           "pain": false,
           "poison": false,
+          "polymorph": false,
           "radiation": false,
           "scrying": false,
           "sense-dependent": false,
           "shadow": false,
+          "sonic": false,
           "summoning": false,
           "teleportation": false,
           "water": false
@@ -393,7 +351,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "SqTV5SqvvaO2k8iN",
+              "actorId": "7TcCXmCYUTYPvgqV",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ac",
@@ -412,7 +370,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "SqTV5SqvvaO2k8iN",
+              "actorId": "7TcCXmCYUTYPvgqV",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ac",
@@ -431,7 +389,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "SqTV5SqvvaO2k8iN",
+              "actorId": "7TcCXmCYUTYPvgqV",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "save",
@@ -450,7 +408,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "SqTV5SqvvaO2k8iN",
+              "actorId": "7TcCXmCYUTYPvgqV",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "save",
@@ -469,7 +427,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "SqTV5SqvvaO2k8iN",
+              "actorId": "7TcCXmCYUTYPvgqV",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "save",
@@ -488,7 +446,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "SqTV5SqvvaO2k8iN",
+              "actorId": "7TcCXmCYUTYPvgqV",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ability-score",
@@ -507,7 +465,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "SqTV5SqvvaO2k8iN",
+              "actorId": "7TcCXmCYUTYPvgqV",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ability-score",
@@ -526,7 +484,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "SqTV5SqvvaO2k8iN",
+              "actorId": "7TcCXmCYUTYPvgqV",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "ability-score",
@@ -545,7 +503,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "SqTV5SqvvaO2k8iN",
+              "actorId": "7TcCXmCYUTYPvgqV",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "all-skills",
@@ -564,7 +522,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "SqTV5SqvvaO2k8iN",
+              "actorId": "7TcCXmCYUTYPvgqV",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "all-attacks",
@@ -578,31 +536,12 @@
             "valueAffected": "acr"
           },
           {
-            "_id": "a0389005-fc87-47dd-829d-f49bebf79ec5",
-            "name": "Creature Companion - Damage",
-            "type": "untyped",
-            "condition": "",
-            "container": {
-              "actorId": "SqTV5SqvvaO2k8iN",
-              "itemId": "FTDQ7caOAQoT2E45"
-            },
-            "effectType": "all-damage",
-            "enabled": true,
-            "max": 0,
-            "modifier": "(lookupRange(@details.cr, 0, 1, 1, 9, 3, 10, 2, 13, 6, 15, 5, 16, 6, 17, 8, 19, 9, 20, 13))d(lookupRange(@details.cr, 0, 1, 4, 6, 6, 7, 8, 8, 12, 9, 4, 10, 8, 11, 10, 12, 12, 13, 4, 14, 6, 15, 8, 17, 6, 18, 8, 20, 6)) + (@details.cr)",
-            "modifierType": "constant",
-            "notes": "",
-            "source": "",
-            "subtab": "misc",
-            "valueAffected": "acr"
-          },
-          {
             "_id": "8119019f-03c1-4b93-95f0-c9c2179644d7",
             "name": "Eshar",
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "SqTV5SqvvaO2k8iN",
+              "actorId": "7TcCXmCYUTYPvgqV",
               "itemId": "FTDQ7caOAQoT2E45"
             },
             "effectType": "energy-resistance",
@@ -649,27 +588,7 @@
       "_id": "P4lKSiqmqQP1Gmo8",
       "name": "Ferocity (Ex)",
       "type": "feat",
-      "_stats": {
-        "coreVersion": "10.290",
-        "createdTime": 1668648562307,
-        "lastModifiedBy": "nAGIIjYeOTKZPBrt",
-        "modifiedTime": 1668648565908,
-        "systemId": "sfrpg",
-        "systemVersion": "0.20.3"
-      },
-      "effects": [],
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.universal-creature-rules.5LzJesbIYqQWzvLn"
-        }
-      },
-      "folder": null,
       "img": "icons/svg/mystery-man.svg",
-      "ownership": {
-        "default": 0,
-        "nAGIIjYeOTKZPBrt": 3
-      },
-      "sort": 0,
       "system": {
         "type": "",
         "ability": null,
@@ -704,7 +623,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>When the creature is brought to 0 Hit Points, it can fight on for 1 more round. It can act normally until the end of its next turn; if it has 0 HP at that point, it dies. If it would lose further Hit Points before this, it ceases to be able to act and dies.</p>\n<p><span id=\"ctl00_MainContent_DataListRulesAll_ctl23_LabelName\"><em>Format</em>: <strong>Defensive Abilities</strong> ferocity.</span></p>"
+          "value": "<p>When the creature is brought to 0 Hit Points, it can fight on for 1 more round. It can act normally until the end of its next turn; if it has 0 HP at that point, it dies. If it would lose further Hit Points before this, it ceases to be able to act and dies.</p>\n<p><em>Format</em>:<strong>Defensive Abilities</strong> ferocity.</p>"
         },
         "descriptors": {
           "acid": false,
@@ -782,23 +701,7 @@
       "_id": "qIXWj75WRcWXtDYm",
       "name": "Lie in Wait (Ex)",
       "type": "feat",
-      "_stats": {
-        "coreVersion": "10.290",
-        "createdTime": 1668648687846,
-        "lastModifiedBy": "nAGIIjYeOTKZPBrt",
-        "modifiedTime": 1668648762571,
-        "systemId": "sfrpg",
-        "systemVersion": "0.20.3"
-      },
-      "effects": [],
-      "flags": {},
-      "folder": null,
       "img": "icons/svg/mystery-man.svg",
-      "ownership": {
-        "default": 0,
-        "nAGIIjYeOTKZPBrt": 3
-      },
-      "sort": 0,
       "system": {
         "type": "",
         "ability": null,
@@ -911,23 +814,7 @@
       "_id": "qd3wJS3AFlTUzIPC",
       "name": "Screech (Ex)",
       "type": "feat",
-      "_stats": {
-        "coreVersion": "10.290",
-        "createdTime": 1668648687956,
-        "lastModifiedBy": "nAGIIjYeOTKZPBrt",
-        "modifiedTime": 1668648939572,
-        "systemId": "sfrpg",
-        "systemVersion": "0.20.3"
-      },
-      "effects": [],
-      "flags": {},
-      "folder": null,
       "img": "icons/svg/mystery-man.svg",
-      "ownership": {
-        "default": 0,
-        "nAGIIjYeOTKZPBrt": 3
-      },
-      "sort": 0,
       "system": {
         "type": "",
         "ability": "",
@@ -962,7 +849,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p><span id=\"ctl00_MainContent_DetailedOutput\">As a standard action, an eshar can unleash a terrifying screech, causing each creature within 30 feet to become @Compendium[sfrpg.conditions.nywSVEeDvp1bk7L3]{Shaken} for 1d4 rounds unless it succeeds at a Will saving throw (DC = 10 + 1-1/2 &times; the eshar&rsquo;s level). Regardless of whether a creature succeeds at this check, it is immune to that eshar&rsquo;s screech for 24 hours. Eshars are immune to the screech ability of other eshars, and you are immune to the screech of your own eshar companion.</span></p>"
+          "value": "<p>As a standard action, an eshar can unleash a terrifying screech, causing each creature within 30 feet to become @UUID[Compendium.sfrpg.conditions.nywSVEeDvp1bk7L3]{Shaken} for 1d4 rounds unless it succeeds at a Will saving throw (DC = 10 + 1-1/2 × the eshar’s level). Regardless of whether a creature succeeds at this check, it is immune to that eshar’s screech for 24 hours. Eshars are immune to the screech ability of other eshars, and you are immune to the screech of your own eshar companion.</p>"
         },
         "descriptors": {
           "acid": false,
@@ -1038,20 +925,19 @@
     }
   ],
   "prototypeToken": {
-    "name": "New Actor (54)",
+    "name": "Eshar",
     "actorLink": false,
     "alpha": 1,
     "bar1": {
-      "attribute": null
+      "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": null
+      "attribute": ""
     },
     "detectionModes": [],
-    "displayBars": 0,
-    "displayName": 0,
+    "displayBars": 20,
+    "displayName": 20,
     "disposition": -1,
-    "flags": {},
     "height": 3,
     "light": {
       "alpha": 0.5,
@@ -1207,12 +1093,6 @@
         "tooltip": [],
         "value": 0
       },
-      "rp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
       "sp": {
         "max": 10,
         "min": 0,
@@ -1294,6 +1174,7 @@
       "frightened": false,
       "grappled": false,
       "helpless": false,
+      "invisible": false,
       "nauseated": false,
       "off-kilter": false,
       "off-target": false,
@@ -1330,11 +1211,11 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<p>Eshars are hulking, serpentine beasts from the expansive, sandy deserts of the tidally locked planet Verces. They are used for battle, transportation, and even for sport, in an elaborate zone-capturing game that can last for days.</p>\n<h2 class=\"title\">Eshar</h2>\n<p>Levels 10-20</p>\n<p>Huge animal<br><strong>Senses</strong>&nbsp;blindsight (vibration) 60 ft., low-light vision<br><strong>Good Save</strong>&nbsp;Fort;&nbsp;<strong>Poor Saves</strong>&nbsp;Ref, Will<br><strong>Defensive Abilities</strong>&nbsp;ferocity;&nbsp;<strong>Resistances</strong>&nbsp;fire 5<br><strong>Weaknesses</strong>&nbsp;vulnerable to cold<br><strong>Speed</strong>&nbsp;30 ft.; burrow 60 ft.<br><strong>Melee Attack</strong>&nbsp;tail (B)<br><strong>Space</strong>&nbsp;15 ft.&nbsp;<strong>Reach</strong>&nbsp;10 ft.<br><strong>Ability Modifiers</strong>&nbsp;Con, Dex</p>",
+        "value": "<p>Eshars are hulking, serpentine beasts from the expansive, sandy deserts of the tidally locked planet @UUID[Compendium.sfrpg.setting.f24qKgU5Wh5LLJyh]{Verces}. They are used for battle, transportation, and even for sport, in an elaborate zone-capturing game that can last for days.</p><h2>Eshar</h2><p>Levels 10-20</p>\n<p>Huge animal</p>\n<p><strong>Senses</strong>&nbsp;blindsight (vibration) 60 ft., low-light vision</p>\n<p><strong>Good Save</strong>&nbsp;Fort;&nbsp;<strong>Poor Saves</strong>&nbsp;Ref, Will</p>\n<p><strong>Defensive Abilities</strong>&nbsp;ferocity;&nbsp;<strong>Resistances</strong>&nbsp;fire 5</p>\n<p><strong>Weaknesses</strong>&nbsp;vulnerable to cold</p>\n<p><strong>Speed</strong>&nbsp;30 ft.; burrow 60 ft.</p>\n<p><strong>Melee Attack</strong>&nbsp;tail (B)</p>\n<p><strong>Space</strong>&nbsp;15 ft.&nbsp;<strong>Reach</strong>&nbsp;10 ft.</p>\n<p><strong>Ability Modifiers</strong>&nbsp;Con, Dex</p>",
         "weight": ""
       },
       "class": "",
-      "cr": 1,
+      "cr": 10,
       "environment": "",
       "organization": "",
       "organizationSize": {

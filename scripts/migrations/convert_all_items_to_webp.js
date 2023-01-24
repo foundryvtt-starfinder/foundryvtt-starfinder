@@ -21,7 +21,7 @@ function needsReplace(imagePath) {
 try {
     fs.readdir(compendiumRootPath, 'utf-8', (err, folders) => {
         if (err) throw err;
-        
+
         for (const compendiumFolder of folders) {
             const compendiumPath = compendiumRootPath + "/" + compendiumFolder;
             const files = fs.readdirSync(compendiumPath);
@@ -39,7 +39,7 @@ try {
                     itemData.img = itemData.img.replace(imageType, ".webp");
                     isDirty = true;
                 }
-                
+
                 const fullBodyImageType = needsReplace(itemData.data?.details?.biography?.fullBodyImage);
                 if (fullBodyImageType) {
                     itemData.data.details.biography.fullBodyImage = itemData.data.details.biography.fullBodyImage.replace(fullBodyImageType, ".webp");
@@ -55,7 +55,7 @@ try {
                         }
                     }
                 }
-                
+
                 if (itemData.items?.length > 0) {
                     for (const item of itemData.items) {
                         if (item.img) {
@@ -75,15 +75,15 @@ try {
                     jsonOutput = jsonOutput.replace(/(.png)/gi, ".webp");
                     isDirty = true;
                 }
-                
+
                 if (isDirty) {
                     fs.writeFileSync(`${compendiumPath}/${file}`, jsonOutput);
-                    
+
                     count += 1;
                 }
             }
         }
-        
+
         console.log(`Found, and migrated, ${count} entries.`);
     });
 
