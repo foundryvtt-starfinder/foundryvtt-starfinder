@@ -1,5 +1,5 @@
 import { Closure } from "../../engine/closure/closure.js";
-import { SFRPGModifierTypes } from "../../modifiers/types.js";
+import { SFRPGModifierType, SFRPGModifierTypes } from "../../modifiers/types.js";
 
 /**
  * Takes an array of modifiers and "stacks" them.
@@ -20,13 +20,13 @@ export default class StackModifiers extends Closure {
         const modifiers = mods;
         for (let modifiersI = 0; modifiersI < modifiers.length; modifiersI++) {
             const modifier = modifiers[modifiersI];
-            const actor = game.actors.get(modifier.container.actorId);
+            const actor = game.actors.get(modifier.container?.actorId);
             const formula = modifier.modifier;
 
-            if (formula && actor) {
+            if (formula) {
                 try {
-                    const roll = Roll.create(formula, actor.system);
-                    if (roll.isDeterministic) {
+                    const roll = Roll.create(formula, actor?.system);
+                    if (roll.isDeterministic || (modifier.type !== SFRPGModifierType.FORMULA)) {
                         const simplerFormula = Roll.replaceFormulaData(formula, actor.system, {missing:0, warn:true});
                         modifier.max = Roll.safeEval(simplerFormula);
                     } else {
@@ -49,18 +49,18 @@ export default class StackModifiers extends Closure {
      * In difference to normal "process" "processAsync" can calculate with dices and so it is allowed to take situational modifiers.
      * @param {Array} mods modifiers The modifiers to stack.
      * @param {Context} context The context for this closure.
-     * @returns @returns {Object} An object containing only those modifiers allowed based on the stacking rules.
+     * @returns {Object} An object containing only those modifiers allowed based on the stacking rules.
      */
     async processAsync(mods, context) {
         const modifiers = mods;
         if (modifiers.length > 0) {
             for (let modifiersI = 0; modifiersI < modifiers.length; modifiersI++) {
                 const modifier = modifiers[modifiersI];
-                const actor = game.actors.get(modifier.container.actorId);
+                const actor = game.actors.get(modifier.container?.actorId);
                 const formula = modifier.modifier;
 
-                if (formula && actor) {
-                    const roll = Roll.create(formula, actor.system);
+                if (formula) {
+                    const roll = Roll.create(formula, actor?.system);
                     const evaluatedRoll = await roll.evaluate({async: true});
                     modifiers[modifiersI].max = evaluatedRoll.total;
                 } else {

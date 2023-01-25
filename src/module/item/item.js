@@ -724,7 +724,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                     return false;
                 }
             }
-            return (mod.enabled || mod.modifierType === "formula") && acceptedModifiers.includes(mod.effectType);
+            return (mod.enabled || mod.modifierType === SFRPGModifierType.FORMULA) && acceptedModifiers.includes(mod.effectType);
         });
 
         let stackModifiers = new StackModifiers();
@@ -732,7 +732,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         const rolledMods = [];
         const addModifier = (bonus, parts) => {
-            if (bonus.modifierType === "formula") {
+            if (bonus.modifierType === SFRPGModifierType.FORMULA) {
                 rolledMods.push(bonus);
                 return;
             }
@@ -787,6 +787,14 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         /** Create additional modifiers. */
         const additionalModifiers = duplicate(SFRPG.globalAttackRollModifiers);
+
+        /** Add Container Values to globalAttackRollModifiers */
+        for (let addModsI = 0; addModsI < additionalModifiers.length; addModsI++) {
+            additionalModifiers[addModsI].container = {
+                actorId: this.actor.id,
+                itemId: itemData.id
+            };
+        }
 
         /** Apply bonus rolled mods from relevant attack roll formula modifiers. */
         for (const rolledMod of rolledMods) {

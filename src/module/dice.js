@@ -996,7 +996,7 @@ export class DiceSFRPG {
         const childKeys = Object.keys(node.childNodes);
         for (let nodeI = 0; nodeI < childKeys.length; nodeI++) {
             const childNode = node.childNodes[childKeys[nodeI]];
-            if (childNode.referenceModifier?._id === modifier._id) {
+            if (modifier._id && (childNode.referenceModifier?._id === modifier._id)) {
                 delete node.childNodes[childKeys[nodeI]];
             } else if (Object.keys(childNode.childNodes).length > 0) {
                 node = this._removeModifierNodes(childNode, modifier).parentNode;
