@@ -5,9 +5,24 @@
   "img": "icons/magic/sonic/explosion-shock-sound-wave.webp",
   "system": {
     "type": "magitech",
+    "ability": null,
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
+    "actionType": "",
+    "activation": {
+      "type": "move",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "none",
+      "value": null
+    },
+    "attackBonus": 0,
     "attributes": {
       "ac": {
         "value": ""
@@ -21,34 +36,50 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": 10
       },
       "size": "medium",
       "sturdy": false
     },
     "attuned": false,
     "bulk": "-",
+    "chatFlavor": "",
+    "container": {
+      "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
+      "storage": []
+    },
     "critical": {
+      "effect": "",
       "parts": []
     },
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>Your ears are implanted with magical sound-dampening membranes. You can activate selective ears as a move action or as a reaction to protect yourself from dangerous sounds. When you activate your selective ears as a reaction, you can’t take a move action on your next turn. Selective ears have three modes: inactive, muffling, and silence. Your selective ears remain in their current mode until you change them. While your selective ears are in muffling mode, you take a –2 penalty to initiative checks and hearing-based Perception checks, but you can’t be deafened for more than 1 round by sonic effects and you have sonic resistance 1. While your selective ears are in silence mode, you are deafened and thus immune to sound-based sensedependent effects, and you also have sonic resistance 5.</p>"
+      "value": "<p>Your ears are implanted with magical sound-dampening membranes. You can activate selective ears as a move action or as a reaction to protect yourself from dangerous sounds. When you activate your selective ears as a reaction, you can’t take a move action on your next turn. Selective ears have three modes: inactive, muffling, and silence. Your selective ears remain in their current mode until you change them. While your selective ears are in muffling mode, you take a –2 penalty to initiative checks and hearing-based Perception checks, but you can’t be deafened for more than 1 round by sonic effects and you have sonic resistance 1. While your selective ears are in silence mode, you are @UUID[Compendium.sfrpg.conditions.D8JvCEmOiWKe2UDx]{deafened} and thus immune to sound-based sensedependent effects, and you also have sonic resistance 5.</p>\n<p><em>Enable/Disable sonic resistance in the Modifiers tab.</em></p>"
     },
-    "equippable": false,
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": ""
+    },
+    "equippable": true,
     "equipped": false,
+    "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 5,
     "modifiers": [
       {
         "_id": "583750c8-4e1d-407e-9ff2-ccaa9feb4b69",
-        "name": "Selective ears",
+        "name": "Selective ears - Selective",
         "type": "untyped",
         "condition": "",
         "effectType": "initiative",
@@ -56,15 +87,82 @@
         "max": -2,
         "modifier": "-2",
         "modifierType": "formula",
-        "notes": "",
+        "notes": "While your selective ears are in muffling mode, you take a –2 penalty to initiative checks and hearing-based Perception checks, but you can’t be deafened for more than 1 round by sonic effects and you have sonic resistance 1.",
         "source": "",
         "subtab": "misc",
         "valueAffected": ""
+      },
+      {
+        "_id": "50184a80-0fba-462e-8b81-9781bd64d8a0",
+        "name": "Selective ears - Selective",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": -2,
+        "modifier": "-2",
+        "modifierType": "formula",
+        "notes": "While your selective ears are in muffling mode, you take a –2 penalty to initiative checks and hearing-based Perception checks, but you can’t be deafened for more than 1 round by sonic effects and you have sonic resistance 1.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "per"
+      },
+      {
+        "_id": "b3796851-4d5e-48fc-a173-667075549880",
+        "name": "Selective ears - Selective",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": false,
+        "max": 1,
+        "modifier": "1",
+        "modifierType": "constant",
+        "notes": "While your selective ears are in muffling mode, you take a –2 penalty to initiative checks and hearing-based Perception checks, but you can’t be deafened for more than 1 round by sonic effects and you have sonic resistance 1.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "sonic"
+      },
+      {
+        "_id": "91304700-8fd6-4cec-b98e-e81628c59858",
+        "name": "Selective ears - Muffling",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": false,
+        "max": 5,
+        "modifier": "5",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "sonic"
       }
     ],
     "price": 2830,
     "quantity": 1,
+    "quantityPerPack": 1,
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "none",
+      "value": null
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "",
+      "dc": null,
+      "descriptor": ""
+    },
     "source": "AR pg. 93",
-    "system": "ears"
+    "system": "ears",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": 0,
+      "per": "",
+      "value": 0
+    }
   }
 }
