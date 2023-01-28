@@ -240,8 +240,6 @@ function sanitizeJSON(jsonInput) {
 
         delete item.flags?.exportSource;
         delete item.flags?.sourceId;
-        delete item.flags?.core?.exportSource;
-        delete item.flags?.core?.sourceId;
 
         // Remove leading or trailing spaces
         item.name = item.name.trim();
