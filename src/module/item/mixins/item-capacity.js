@@ -40,7 +40,8 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
         // Create actor item helper
         const tokenId = this.actor.isToken ? this.actor.token.id : null;
         const sceneId = this.actor.isToken ? this.actor.token.parent.id : null;
-        const itemHelper = new ActorItemHelper(this.actor.id, tokenId, sceneId);
+        // Pass the actor through on the options object so the constructor doesn't have to try (and fail) and fetch the actor from the compendium.
+        const itemHelper = new ActorItemHelper(this.actor.id, tokenId, sceneId, { actor: this.actor });
 
         // Find child item
         const childItems = getChildItems(itemHelper, this);

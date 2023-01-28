@@ -10,8 +10,8 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             classes: ["sfrpg", "sheet", "actor", "hazard"],
-            width: 600,
-            height: 685
+            width: 600
+            // height: 685
         });
     }
 

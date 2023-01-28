@@ -96,18 +96,47 @@ export default class RollDialog extends Dialog {
         }
     }
 
-    getData() {
-        const data = super.getData();
+    async getData() {
+        const data = await super.getData();
         data.formula = this.formula;
         data.rollMode = this.rollMode;
         data.rollModes = CONFIG.Dice.rollModes;
         data.additionalBonus = this.additionalBonus;
-        data.availableModifiers = this.availableModifiers || [];
+        data.availableModifiers = duplicate(this.availableModifiers) || [];
         data.hasModifiers = data.availableModifiers.length > 0;
         data.hasSelectors = this.contexts.selectors && this.contexts.selectors.length > 0;
         data.selectors = this.selectors;
         data.contexts = this.contexts;
         data.damageGroups = this.damageGroups;
+
+        for (const modifier of data.availableModifiers) {
+            const allContexts = data.contexts.allContexts;
+            const mainContext = data.contexts.mainContext;
+            let context = allContexts[mainContext]?.data;
+
+            // Starships use "@ship" etc. in their formulas, so the context needs to be adjusted to skip the intermediate "data/entity" object.
+            if (["ship", ""].includes(mainContext)) {
+                context = Object.entries(allContexts).reduce((obj, i) => {
+                    const scope = i[0];
+                    const data = i[1].data;
+                    obj[scope] = data;
+                    return obj;
+                }, {});
+            }
+
+            // Make a simplified roll
+            const simplerRoll = Roll.create(modifier.modifier, context).simplifiedFormula;
+            if (modifier.modifier[0] === "+") modifier.modifier = modifier.modifier.slice(1);
+
+            // If it actually was simplified, append the original modififer for use on the tooltip.
+            if (modifier.modifier !== simplerRoll) {
+                modifier.originalFormula = modifier.modifier;
+            }
+
+            // Sign that string
+            const numMod = Number(simplerRoll);
+            modifier.modifier = numMod ? numMod.signedString() : simplerRoll;
+        }
 
         if (this.parts?.length > 0) {
             data.hasDamageTypes = true;
@@ -132,6 +161,13 @@ export default class RollDialog extends Dialog {
                         .join(` & `))}`;
                 }
                 part.type = typeString;
+
+                // Clean up the formula
+                const simplerRoll = Roll.create(part.formula).simplifiedFormula;
+                if (part.formula !== simplerRoll) {
+                    part.originalFormula = part.formula;
+                    part.formula = simplerRoll;
+                }
             }
 
             data.formula = this.formula;

@@ -30,25 +30,28 @@ export class PackLoader {
                         "system.level"
                     ];
                     if (entityType === "Actor") {
-                        fields.push(...[
+                        fields.push(
                             "system.details.cr",
                             "system.attributes.hp.max",
                             "system.details.type",
                             "system.traits.size",
                             "system.details.organizationSize",
                             "system.details.alignment"
-                        ]);
+                        );
                     } else {
-                        fields.push(...[
+                        fields.push(
                             "system.pcu",
                             "system.cost",
                             "system.weaponCategory",
                             "system.weaponType",
+                            "system.armor",
                             "system.school",
+                            "system.type",
                             "system.allowedClasses"
-                        ]);
+                        );
                     }
-                    const content = await pack.getIndex({"fields": fields });
+                    const content = await pack.getIndex({ "fields": fields });
+                    this.setCompendiumArt(pack.collection, content);
                     data = this.loadedPacks[entityType][packId] = {
                         pack,
                         content
@@ -67,6 +70,14 @@ export class PackLoader {
         }
 
         progress.close('Loading complete');
+    }
+
+    setCompendiumArt(packName, index) {
+        if (!packName.startsWith("sfrpg.")) return;
+        for (const record of index) {
+            const actorArt = game.sfrpg.compendiumArt.map.get(`Compendium.${packName}.${record._id}`)?.actor;
+            record.img = actorArt ?? record.img;
+        }
     }
 }
 

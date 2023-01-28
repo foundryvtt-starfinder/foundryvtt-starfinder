@@ -1,6 +1,6 @@
-import { ActorSheetSFRPG } from "./base.js";
 import { ChoiceDialog } from "../../apps/choice-dialog.js";
 import { SFRPG } from "../../config.js";
+import { ActorSheetSFRPG } from "./base.js";
 
 /**
  * An Actor sheet for a starship in the SFRPG system.
@@ -20,8 +20,8 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         const options = super.defaultOptions;
         mergeObject(options, {
             classes: ["sfrpg", "sheet", "actor", "starship"],
-            width: 700,
-            height: 800
+            width: 700
+            // height: 800
         });
 
         return options;
@@ -227,22 +227,24 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             "starshipShield"
         ];
 
-        //   0        1          2    3     4       5          6      7           8          9               10            11               12             13     14
-        let [forward,
-            starboard,
-            aft,
-            port,
-            turret,
-            unmounted,
-            frame,
-            powerCores,
-            thrusters,
-            primarySystems,
-            otherSystems,
-            securitySystems,
-            expansionBays,
-            cargo,
-            actorResources] = data.items.reduce((arr, item) => {
+        let [
+            forward, // 0
+            starboard, // 1
+            aft, // 2
+            port, // 3
+            turret, // 4
+            unmounted, // 5
+            frame, // 6
+            powerCores, // 7
+            thrusters, // 8
+            primarySystems, // 9
+            otherSystems, // 10
+            securitySystems, // 11
+            expansionBays, // 12
+            cargo, // 13
+            actorResources, // 14
+            specialAbilities // 15
+        ] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
             if (!item.config) item.config = {
                 isStack: item.system.quantity ? item.system.quantity > 1 : false,
@@ -272,8 +274,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
                 else if (weaponArc === "port") arr[3].push(item);
                 else if (weaponArc === "turret") arr[4].push(item);
                 else arr[5].push(item);
-            }
-            else if (item.type === "starshipFrame") arr[6].push(item);
+            } else if (item.type === "starshipFrame") arr[6].push(item);
             else if (item.type === "starshipPowerCore") arr[7].push(item);
             else if (item.type === "starshipThruster") arr[8].push(item);
             else if (starshipSystems.includes(item.type)) arr[9].push(item);
@@ -281,10 +282,11 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             else if (item.type === "starshipSecuritySystem") arr[11].push(item);
             else if (item.type === "starshipExpansionBay") arr[12].push(item);
             else if (item.type === "actorResource") arr[14].push(item);
+            else if (item.type === "starshipSpecialAbility") arr[15].push(item);
             else if (this.acceptedItemTypes.includes(item.type)) arr[13].push(item);
 
             return arr;
-        }, [[], [], [], [], [], [], [], [], [], [], [], [], [], [], []]);
+        }, [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []]);
 
         this.processItemContainment(cargo, function(itemType, itemData) {
             inventory.inventory.items.push(itemData);
@@ -353,6 +355,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             otherSystems: { label: game.i18n.format("SFRPG.StarshipSheet.Features.OtherSystems"), items: otherSystems, hasActions: false, dataset: { type: "starshipOtherSystem" } },
             securitySystems: { label: game.i18n.format("SFRPG.StarshipSheet.Features.SecuritySystems"), items: securitySystems, hasActions: false, dataset: { type: "starshipSecuritySystem" } },
             expansionBays: { label: game.i18n.format("SFRPG.StarshipSheet.Features.ExpansionBays", {current: expansionBays.length, max: actorData.attributes.expansionBays.value}), items: expansionBays, hasActions: false, dataset: { type: "starshipExpansionBay" } },
+            specialAbilities: { label: game.i18n.format("SFRPG.StarshipSheet.Features.SpecialAbilities"), items: specialAbilities, hasActions: false, dataset: { type: "starshipSpecialAbility" } },
             resources: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"), items: actorResources, hasActions: false, dataset: { type: "actorResource" } }
         };
 
@@ -508,7 +511,6 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
     async _getItemDropData(event, data) {
         let itemData = null;
 
-        const actor = this.actor;
         const item = await Item.fromDropData(data);
         itemData = item;
 
@@ -555,7 +557,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
             if (oldRole) {
                 const originalRole = crew[oldRole];
-                originalRole.actorIds = originalRole.actorIds.filter(x => x != actorId);
+                originalRole.actorIds = originalRole.actorIds.filter(x => x !== actorId);
             }
 
             await this.actor.update({
