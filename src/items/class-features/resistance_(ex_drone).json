@@ -1,8 +1,8 @@
 {
-  "_id": "rDCdrOBeaaeFLjmg",
-  "name": "Enhanced Senses (Ex; Drone)",
+  "_id": "wJcZkzm1cs8aZhPc",
+  "name": "Resistance (Ex; Drone)",
   "type": "mod",
-  "img": "systems/sfrpg/icons/classes/enhanced_senses_drone.webp",
+  "img": "systems/sfrpg/icons/classes/resistance.webp",
   "system": {
     "type": "",
     "ability": null,
@@ -17,7 +17,7 @@
       "cost": 0
     },
     "additionalMovement": "",
-    "additionalSenses": "low-light vision 60; darkvision 60",
+    "additionalSenses": "",
     "area": {
       "effect": "",
       "shape": "",
@@ -44,7 +44,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.QsCRXffpsDoMvPnT]{Basic Mods}</p>\n<p>Your drone gains low-light vision, darkvision to 60 feet, and a +2 insight bonus to Perception skill checks. If your drone has the camera mod, the camera gains these senses as well.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.QsCRXffpsDoMvPnT]{Basic Mods}</p>\n<p>Your drone gains resistance to an energy type of your choice—acid, cold, electricity, fire, or sonic—equal to your mechanic level, to a maximum of 10. You can select this mod multiple times. Its effects do not stack; each time you select this mod, it must apply to a different energy type from the list above.</p>\n<p><em>Select chosen resistance in the Modifiers tab.</em></p>"
     },
     "descriptors": [],
     "duration": {
@@ -58,18 +58,19 @@
     "maxInstalls": 1,
     "modifiers": [
       {
-        "_id": "8cfd3643-78d0-4e68-9d47-f113eea04f2a",
-        "name": "New Modifier",
-        "type": "insight",
+        "_id": "cebc4aac-d2b0-4cd1-b123-70cd3300ea0f",
+        "name": "Resistance (Ex; Drone)",
+        "type": "untyped",
         "condition": "",
-        "effectType": "skill",
+        "effectType": "energy-resistance",
         "enabled": true,
-        "modifier": 2,
+        "max": 0,
+        "modifier": "min(@classes.mechanic.levels, 10)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
         "subtab": "misc",
-        "valueAffected": "per"
+        "valueAffected": "acid"
       }
     ],
     "range": {

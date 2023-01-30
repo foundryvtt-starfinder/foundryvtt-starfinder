@@ -1,8 +1,8 @@
 {
-  "_id": "9FBgUMSIkGwT8Qn5",
-  "name": "Echolocators (Ex)",
+  "_id": "KiseyOPy3VaVldlw",
+  "name": "Flight System (Ex; Drone)",
   "type": "mod",
-  "img": "systems/sfrpg/icons/classes/echolocators.webp",
+  "img": "systems/sfrpg/icons/classes/flight_system.webp",
   "system": {
     "type": "",
     "ability": null,
@@ -16,8 +16,8 @@
       "condition": "",
       "cost": 0
     },
-    "additionalMovement": "",
-    "additionalSenses": "Blindsense (Sound)",
+    "additionalMovement": "flight (1/2 land speed; average) 10 min/day",
+    "additionalSenses": "",
     "area": {
       "effect": "",
       "shape": "",
@@ -44,7 +44,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.cQtmz297P5g6g5xv]{Advanced Mods}</p>\n<p>Your drone uses basic echolocation to notice unseen foes. The drone gains @UUID[Compendium.sfrpg.rules.rX5rK6UWAIOeeipl.JournalEntryPage.p0o9tmWtKZ0qy8DI#blindsense]{Blindsense} (sound) with a range of 60 feet. (see page 262).</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.cQtmz297P5g6g5xv]{Advanced Mods}</p>\n<p>Your drone gains a fly speed equal to half its land speed with average maneuverability for up to 10 minutes per day. This duration need not be continuous, but it must be used in 1-minute increments. You can select this mod a second time; in this case, the drone’s fly speed increases to its full land speed, its maneuverability increases to perfect, and there is no limit on the amount of time it can fly.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -56,7 +56,23 @@
     "isArmorSlot": false,
     "isFree": false,
     "maxInstalls": 1,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "25bb440a-6918-45f8-9697-d131e70ce4c7",
+        "name": "Flight System (Ex)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "specific-speed",
+        "enabled": true,
+        "max": 15,
+        "modifier": "floor(@attributes.speed.land.value / 2)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "flying"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -70,7 +86,7 @@
       "descriptor": ""
     },
     "shieldProficiency": "",
-    "source": "",
+    "source": "CRB, pg. 78",
     "spellResistance": 0,
     "target": {
       "type": "",
