@@ -428,6 +428,8 @@ function sanitizeJSON(jsonInput) {
     cleanFlags(jsonInput);
     sanitizeDescription(jsonInput);
 
+    delete jsonInput?.flags?.core?.sourceId;
+
     if (jsonInput.items) {
         for (let item of jsonInput.items) {
             treeShake(item);
