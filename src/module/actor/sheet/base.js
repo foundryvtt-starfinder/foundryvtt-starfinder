@@ -151,8 +151,10 @@ export class ActorSheetSFRPG extends ActorSheet {
             this._prepareTraits(data.system.traits);
         }
 
-        if (data.system.details?.xp?.pct) {
-            data.system.details.xp.color = Math.round((data.system.details.xp.pct / 100) * 255).toString(16);
+        if (data.system.details?.xp?.pct !== null && data.system.details?.xp?.pct !== undefined) {
+            data.system.details.xp.color = Math.round(Math.max((data.system.details.xp.pct / 100), 0) * 255)
+                .toString(16)
+                .padStart(2, "0");
         }
 
         this._prepareItems(data);
