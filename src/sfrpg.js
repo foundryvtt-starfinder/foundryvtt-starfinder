@@ -60,6 +60,11 @@ import SFRPGTokenDocument from "./module/token/tokendocument.js";
 import registerCompendiumArt from "./module/utils/compendium-art.js";
 import setupVision from "./module/vision.js";
 
+import { getAlienArchiveBrowser } from "./module/packs/alien-archive-browser.js";
+import { getEquipmentBrowser } from "./module/packs/equipment-browser.js";
+import { getSpellBrowser } from "./module/packs/spell-browser.js";
+import { getStarshipBrowser } from "./module/packs/starship-browser.js";
+
 let initTime = null;
 
 Hooks.once('init', async function() {
@@ -117,6 +122,11 @@ Hooks.once('init', async function() {
         engine,
         entities: { ActorSFRPG, ItemSFRPG },
         generateUUID,
+        // Document browsers
+        getSpellBrowser,
+        getEquipmentBrowser,
+        getAlienArchiveBrowser,
+        getStarshipBrowser,
         migrateWorld,
         rollItemMacro,
         rolls: {
@@ -370,7 +380,7 @@ Hooks.once("ready", async () => {
     console.log("Starfinder | [SETUP] Setting up Vision Modes");
     setupVision();
 
-    console.log("Starfinder | [SETUP] Setting up Vision Modes");
+    console.log("Starfinder | [SETUP] Setting up Custom Enrichers");
     setupEnrichers();
 
     console.log("Starfinder | [READY] Applying artwork from modules to compendiums");

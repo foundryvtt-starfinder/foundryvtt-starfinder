@@ -202,6 +202,29 @@ class EquipmentBrowserSFRPG extends DocumentBrowserSFRPG {
         });
         d.render(true);
     }
+
+    /**
+     * @typedef  {object} filterObjectEquipment
+     * @property {string[]} equipmentTypes Drawn from SFRPG.itemTypes
+     * @property {string[]} weaponTypes Drawn from SFRPG.weaponTypes
+     * @property {string[]} weaponCategories Drawn from SFRPG.weaponCategories
+     * @see {config.js}
+     */
+    /**
+     * Prepare the filter object before calling the parent method
+     * @param {filterObjectEquipment} filters A filter object
+     */
+    renderWithFilters(filters = {}) {
+        let filterObject = filters;
+
+        if (Array.isArray(filterObject.equipmentTypes)) {
+            filterObject.equipmentTypes = filterObject.equipmentTypes.map(i => i === "armor" ? "equipment" : i);
+        } else {
+            if (filterObject.equipmentTypes === "armor") filterObject.equipmentTypes = "equipment";
+        }
+
+        return super.renderWithFilters(filterObject);
+    }
 }
 
 let _equipmentBrowser = null;

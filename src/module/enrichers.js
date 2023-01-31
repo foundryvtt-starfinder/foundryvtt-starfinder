@@ -4,18 +4,33 @@ import { getSpellBrowser } from "./packs/spell-browser.js";
 import { getStarshipBrowser } from "./packs/starship-browser.js";
 
 const browserTypes = ["spell", "equipment", "starship", "alien"];
+const icons = {
+    equipment: "fa-gun",
+    spell: "fa-sparkles",
+    starship: "fa-rocket",
+    alien: "fa-alien"
+};
 
 export default function setupEnrichers() {
     const browserLink = {
+        // E.g @Browser[type:equipment|filters:{"equipmentTypes":"weapon","weaponTypes":"smallA","weaponCategories":"cryo","search":"Big Gun"}]
+
         pattern: /(@Browser)\[(.+?)\](?:{(.+?)})?/gm,
         enricher: (match, options) => {
-
+            // Split each argument from the square brackets
             const args = match[2].split("|");
+            // Capture the name from the curly brackets
             let name = match[3];
 
             const argObj = args.reduce((obj, i) => {
-                const split = i.split(":");
-                obj[split[0]] = split[1];
+                // Split each arg into a key and a value
+                // Matches a colon with a letter before, and either a letter or JSON after.
+                // Set up as to not split colons in JSONs
+                const split = i.match(/(\w+):(\w+|{.+})/);
+                if (split?.length > 0) {
+                    obj[split[1]] = split[2];
+                }
+
                 return obj;
             }, {});
 
@@ -30,10 +45,15 @@ export default function setupEnrichers() {
             }
 
             const a = document.createElement("a");
-            a.dataset.action = argObj.type;
+
+            a.dataset.type = argObj.type;
+            if (argObj.filters) a.dataset.filters = JSON.stringify(argObj.filters);
+
             a.classList.add("enriched-link");
             a.draggable = false;
-            a.innerHTML = `<i class="fas fa-book"></i>${name}`;
+
+            a.innerHTML = `<i class="fas ${icons[argObj.type]}"></i>${name}`;
+
             return a;
 
         }
@@ -45,33 +65,40 @@ export default function setupEnrichers() {
 
 Hooks.on("renderJournalPageSheet", (app, html, options) => {
     for (const type of browserTypes) {
-        html[2].querySelectorAll(`a[data-action=${type}]`)
+        html[2].querySelectorAll(`a[data-type=${type}]`)
             .forEach(i => {
-                i.addEventListener("click", (ev) => _browserOnClick(ev, i.dataset.action));
+                i.addEventListener("click", (ev) => _browserOnClick(ev, i.dataset));
             });
 
     }
 });
 
-function _browserOnClick(ev, action) {
-    let browser;
-    switch (action) {
-    case "spell":
-        browser = getSpellBrowser();
-        break;
-    case "equipment":
-        browser = getEquipmentBrowser();
-        break;
-    case "starship":
-        browser = getStarshipBrowser();
-        break;
-    case "alien":
-        browser = getAlienArchiveBrowser();
-        break;
+function _browserOnClick(ev, data) {
+    console.log(new BaseEnricher("browser"));
+    let browser, filters;
+
+    // Gotta double parse this to get rid of escape characters from the HTML.
+    try {
+        if (data.filters) filters = JSON.parse(JSON.parse(data.filters));
+    } catch (err) {
+        return ui.notifications.error(`Error parsing filters: ${err}`);
     }
 
-    if (!browser._element) {
-        browser.render(true);
+    switch (data.type) {
+        case "spell":
+            browser = getSpellBrowser();
+            break;
+        case "equipment":
+            browser = getEquipmentBrowser();
+            break;
+        case "starship":
+            browser = getStarshipBrowser();
+            break;
+        case "alien":
+            browser = getAlienArchiveBrowser();
+            break;
     }
+    if (browser) browser.renderWithFilters(filters);
+    else return ui.notifications.error("Invalid type.");
 }
 
