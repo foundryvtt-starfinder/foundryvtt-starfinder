@@ -1090,6 +1090,11 @@ export class ActorSheetSFRPG extends ActorSheet {
         new ActorSheetFlags(this.actor).render(true);
     }
 
+    _onLevelUp(event) {
+        event.preventDefault();
+        this.actor.levelUp(event.currentTarget.dataset.actorClassId);
+    }
+
     async _onDrop(event) {
         event.preventDefault();
 
