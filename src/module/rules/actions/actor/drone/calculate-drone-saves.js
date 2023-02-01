@@ -1,6 +1,6 @@
 import { SFRPG } from "../../../../config.js";
 
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateDroneSaves", (fact, context) => {
         const data = fact.data;
 
@@ -14,9 +14,9 @@ export default function (engine) {
         data.attributes.fort.bonus = 0;
         data.attributes.reflex.bonus = 0;
         data.attributes.will.bonus = 0;
-        
+
         if (activeChassis) {
-            const chassisData = activeChassis.data.data;
+            const chassisData = activeChassis.system;
 
             let droneLevel = chassisData.levels;
             droneLevel = Math.max(1, Math.min(droneLevel, 20));

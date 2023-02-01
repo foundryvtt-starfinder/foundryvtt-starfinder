@@ -1,3 +1,305 @@
+# v0.22.1 - Hotfix
+This is just a small hotfix mainly to fix the floating numbers settings window from opening, with a few other tweaks that accumulated in the meantime.
+
+## System improvements
+* Added a new item type and section on starship sheets for Starship Special Abilities.
+* Altered the layout of ASI sheets slightly to reference rules text.
+
+## Bugfixes
+* The floating numbers settings window now opens.
+* The pause icon of the custom SFRPG theme can now be correctly overridden by modules.
+* Restored hazard damage rolls, and removed some redundant flavour text. 
+
+## Compendium improvements
+* Replaced several incorrect attribute references in spells.
+* Added Fire Support.
+* Added Philosopher's Stings & Rift Rifles.
+
+# v0.22.0
+
+This update bring a slew of minor-to-moderate new features and continued data entry of Interstellar Species, plus a (hopefully) final batch of V10 fixes.
+
+## Damage groups
+Damage sections on weapons can now be assigned to groups. You can only enable one damage section from a given group. This is useful for things like damaging cantrips, which allow you to pick a damage type.
+
+## Floating text
+Applying damage to tokens will now show a floating number of the amount of damage dealt, as well as the resource (HP/SP) it affected. This is particularly useful on starships, as it shows you which arc was hit.
+
+## Compendium module artwork
+Courtesy of the PF2e system, we have implemented the ability to apply artwork to creatures in the compendium through pre-defined maps in modules, this allows things like token packs to be possible, and for individual users to build their own for personal use.
+
+## Compendium browser improvements
+Skills now have a button to quickly take you to the rules journal for that skill, and the inventory and spellbook pages now have buttons on each header to quickly open the compendium browser and show only items relevant for that header. Lastly, the compendium browsers will open and load much faster.
+
+## Compendium sanitisation
+We've changed our process of how we add data to the system compendiums, so that it now automatically cleans up the data and descriptions. What that means for users, is that compendium entries will be of generally higher quality, with less broken links, incorrect token sizes and formatting mistakes.
+
+## Compendium Updates
+* Add IS Gear, racial features, spells and creature companions
+* Fix spellcasters having incorrect spells known
+* Update solarian crystals to be weapons rather than hybrid items
+* Fix Embrace of the Void damage formula
+* As mentioned above, fixed a huge amoount of broken links, incorrect token sizes and formatting mistakes.
+* Fixed Cloaking skin prices and sources
+* Correctly capitalize Needler Pistol
+
+## Core system improvements
+* Clamp HP, SP and RP values between 0 and Max
+* Add a new roll data attribute for a class's ability DC
+* Replaced some text labels to bring them closer to Starfinder RAW terms
+* Add some system dependencies to maintain code quality
+* Allow SFRPG rolls to be made without a chat message being created, for use with modules and macros
+* Add actions and attacks to augmentations
+* Items with usages will now show a button in the inventory
+* Items in containers can now show usage buttons
+* Adjust scaling cantrip settings to account for multiple damage sections
+* Adjusted some headings on actor sheet tabs, and remove now needless search buttons
+* Adjust signs on NPC stats
+
+## Bugfixes
+* Set rollable buttons have correct hover properties
+* Change height attribute on attributes to min-height
+* Fix skill notes not including actor roll data
+* Fix container open/close button font
+* Fixed npc and starship containers not showing embedded items
+* Ensure Temp HP is depleted as expected
+* Fix text colour on the damage dialog not working correctly with UI modules
+* Fix NPC NaN ability scores
+* Default new actors to medium
+* Fix certain actor biographies not showing up
+* Fixed loot actors breaking unexpectedly after interacting with them
+* Fix the inability to add items to existing loot actors
+
+
+# v0.21.1 - Interstellar Innovators
+
+This is a small hotfix release to clean up some issues from v0.21.0, and also continue our data entry of Interstellar Species
+
+## Comependium Updates
+* Add feats from IS
+* Add remaining class features from IS
+
+## Core system improvements
+* Automate operative weapon property
+
+## Bugfixes
+* Ensure `slug` generation occurs correctly, so old class items will still work,
+* Added a `slug` to Evolutionist.
+* Fixed a bug that caused battery capacity to be uneditable
+* Saving throw spells now correctly add modifiers to spell damage.
+
+# v0.21.0 - Interstellar Innovators
+
+Oh hi! I do these now. This update primarily brings the new Evolutionist class from Interstellar species, as well as a few fixes and new shinies for V10.
+
+## Interstellar Species Classes
+Iankid has added the entirety of the Evolutionist class, as well as the entire alternate class features section. Note that all the new species feature are **not** in this update but will be coming soon!
+
+## Vision Modes
+Darkvision and Low-light vision can now be set as vision modes on tokens, and affect light on the canvas as the rules describe. Additionally, the Blinded and newly added Invisible condition will cause a token to become appropriately blind or invisible. This is only the beginning of our foray into the new V10 features, so stay tuned!
+
+## Rules Journals
+Also new for V10, we have updated our rules journal entries to use the new V10 journal layouts. This allows for easier navigation, and allows for more granular linking in items to relevant rules entries.
+
+## Compendium Updates
+* Added the Tromin races
+* Updated Entropic Strike to be a weapon
+* Updated Anactie wingbot with the correct speed
+* Zeitgeist, Third Eye and Voidwalker Mystic Connections. Embrace the Void Spell - Kae
+* Shock and Awe fighting style added to the fighting Style item's list - Nick
+* Added Swarm Fleetfury spaceship - bglad (bglad#0722)
+* Updated Mystic Cure formula - Iankid
+* Added Beastblood theme - Mr. Cerberus
+* Added space creatures: Telelith(Blinking and Swarming); Giant Space Tardigrade; Gwahled; Novaspawn; Stellar Protozoa; Vermelith; Voraij; Alinoisos; Cerebrex; Updated Zoaphorix. - Uldirone (Uldirone#7536)
+* Updated Telepathic Message to include Precog in classes (SCMNomad#6789)
+
+## Core system improvements
+* Add sonic and polymorph descripts
+* Add the instrumental weapon properties
+* Added a new system setting to automatically give new PCs the unarmed strike item
+* Added modifers for attack rolls and damage based on weapon category
+* Added a `slug` field to classes to ensure localised versions are still compatible with modifiers.
+* Added a custom SFRPG theme, which changes some of Foundry's colours and images
+* Combatants hidden in the combat tracker will now whisper the chat message announcing their turn to the GM.
+* Text editors on Actor sheets now use ProseMirror, allowing for collaborative editing.
+
+## Bugfixes
+* Fixed 5/5/5 ruler displaying `NaN`
+* Fixed ASI sheets being unable to open.
+* Fixed NPC biography text not displaying.
+* Fixed formulas not working in damage mitigation modifiers (Syberic)
+* Various CSS fixes
+
+# v0.20.3 - Starfinder Hotfix
+
+Just a quick hotfix to correct an issue with drone sheets. They can now be opened normally.
+
+# v0.20.2 - Starfinder Update
+
+This is an update to address the many bugs that were identified from the last update. It includes a lot of big changes made to the underlying data model to be more inline with
+changes made in the core software. And addresses many the backwards compatability breaking changes from core that weren't caught before the last release.
+
+## Bugfixes
+* Fixed all of the drag and drop issues that were discovered after last release
+    * Fixed crew drag and drop on starship sheets
+    * Fixed drag and drop functionality on vehicles (yes, this was broken. I know, no one noticed ;) )
+    * Fixed drag and drop functionality from the compendium browser
+* Fixed the issues with measured templates
+* Fixed bulk calculations so they don't display `NaN`
+* Fixed wealth calculations so they don't display `NaN` 
+* Fixed issues where various sheets wouldn't open with error messages about exceding the maximum call stack
+* Updated the description fields for the various entities to utilize new functionality provided by foundry
+* Fixed item macro creation on drag and drop
+* Various backend changes made to our build pipeline to deal with the new data model changes
+* Updated the manifest file to utilize the new fields that Foundry VTT v10 provides
+* Converted all of the compendium items to utilize the new data model
+* Various css style updates to deal with changes made in the core software's styling
+* Several buttons weren't working correctly because of side effects caused by the new data model used in Foundry v10
+* Changed the background colors used for private, self, and blind rolls (these are still a work in progress. Expect these to change again, most likely)
+* Fixed the attack bonus box on starship weapons
+* Fixed some funky styling on chat cards caused by old css properties that hadn't been properly updated
+
+This update isn't particularly glamorus. It doesn't contain huge swaths of content updates, with tons of new items or aliens, but it was a pretty grueling update
+from a development standpoint. The core Foundry v10 data model updates caused some weird issues to crop up in the last release that kind of forced our hand. I was hoping to
+do a lot of these updates over the course of a few releases through the course of a couple of months, not all at once in one massive update. I do apprecieate everyones patience
+with this one and I do hope that the wait was worth it. This release makes the system fully v10 compatible, and provides the system with a good base that we can use for future development. We can now get back to focusing on content and feature updates (until v11, at least ;) ). Enjoy the new release!
+
+
+# v0.20.1 - Starfinder Update
+
+This update focuses on getting the system compatible with FoundryVTT v10. No new features or bugfixes, just the bare minimum code needed to get the system functional
+without losing functionality.
+
+## Bugfixes
+* Fixed issue where actor sheets wouldn't open on v10.
+* Refactored how drag-n-drop is handled to be in line with the new v10 functionality.
+
+# v0.19.2 - Starfinder Update
+
+This update contains a lot of data entry, particularly around Galactic Magic and Drift Crisis class features and equipment.
+
+## Drift Crisis
+* Added support for the new ammo types from Drift Crisis.
+* Added equipment from Drift Crisis.
+* Added spells from Drift Crisis.
+* Added new weapon properties from Drift Crisis.
+* Added the new Aeon stones from Drift Crisis.
+
+## Galactic Magic
+* Added Technomancer abilities from Galactic Magic.
+* Added Soldier abilities from Galactic Magic.
+* Added Solarian abilities from Galactic Magic.
+* Added Operative abilities from Galactic Magic.
+* Added Nanocyte abilities from Galactic Magic.
+* Added Witchwarper abilities from Galactic Magic.
+* Added Mechanic abilities from Galactic Magic.
+* Added Mystic abilities from Galactic Magic.
+
+## Racial Features
+Racial features have all been broken out into individual items, This comes with many advantages, like modifier support, frequency tracking, and alternate racial features being more intuitive.
+
+## New Items / Features
+* Added Actor Resource for Negative Character levels in the Conditions compendium.
+* Added Interstellar Starship Engines.
+* Added starship critical damage table as a roll table.
+* Added the Vanguard Rebound Aspect and the various items surrounding it.
+* Added descriptors to spell's and feats.
+* Updated many of the Aeon Stone entries.
+* Ammo type and capacity has been set on all weapons, so reloading should work properly on every weapon out of the box now.
+* When rolling damage, if the result is less than one, it will be set to 1 and be tagged as non-lethal damage. This conforms to the "Minimum Damage Rule" presented on p. 241 of the Core Rulebook.
+* Added Biomes and related rules added to SFRPG Rules
+* Goods can now be equipped.
+* Starship ECM weapons now correctly use Int and Computers ranks to hit.
+* Modifiers for Biohacker feautres - Palmarian
+  * Injection expert
+  * Arms Expert
+  * Painful Injection
+  * Weapon Specialization
+* Added Moyishuu race
+-Add Quantum Entrapment class feature
+-Add Spell Sergeant archetype
+* Added some clarification to the Weapon Specialization feat about its implementation in the system.
+
+## Bugfixes
+* **Formulas on chat cards should look a lot prettier now!!**
+* Fixed an assortment of minor issues with biohacker and envoy class features.
+* Fixed an assortment of minor issues with various equipment.
+* Fixed an issue that would cause containers to migrate incorrectly in v0.19 and onwards.
+* Fixed a long standing bug where pressing enter on a character sheet would cause the add profession skill dialog to pop open.
+* Fixed a UI bug that would cause certain images on the PC inventory and features tab to repeat vertically if they weren't perfectly square or when the name of the item was too long and caused it to wrap the text to the next line.
+* Updated the wording on the "Use Quick Rolls by Default" system setting to make it clearer on how it works and updated the logic to make it work correctly.
+* Fixed "undefined" showing in the flavor text on damage chat card if damage section has no name.
+* Fixed it so that popout chat cards are sytled the same as normal chat cards.
+* Fixed a bug that caused certain level 0 items to infinitely re-render, causing them to be uneditable.
+* Fixed the Needler rifle's AC target
+* Fixed mystic cure's healing formula
+* Changed Rings of Resistance to Magic items rather than goods - VonnyBaun
+* Updated Mind Thrust and Ectoplasmic Barrage formulas to lookupRange
+* Fixed Deadly Aim; had an incorrect actor data reference
+
+# v0.19.1 - Starfinder Update
+
+This update includes a quick fix for some container items in the compendiums cuasing a migration on every world start.
+
+## Bugfix
+- Removed some unused properties from several contianer items that were causing a migration to run on every world start. This is only a partial fix by updating the compenidum items. A later update should prevent the bogus migration from happening in the future.
+
+# v0.19.0 - Starfinder Update
+
+This update includes a lot of quality of life improvements and some additions and updates to the compendiums. 
+
+## Concerning Backwards Compatibility with Foundry VTT v0.8.x
+**WARNING** This update breaks backwards compatibility with the v0.8.x branch of Foundry. We held off on this breaking change as long as we could, but with Foundry v10 on the horizon, it was time to pull the plug. 
+
+## New Features
+### WebP conversion
+We have converted all of the embedded system art files from png to webp, taking the package from 80MB down by 75%! to about 20MB, this should be welcome news to anyone hosting Starfinder on a host that has limited storage space.
+
+We also perform a world migration to convert all item and actor art that uses these files to their webp variants. This is a very slow process as it has to go through all actors and their items, all items, all scenes and their tokens, all world compendia, all macros, the chat messages, etc. This takes a lot of time.
+
+Do not perform this update 5 minutes before your game goes live! Otherwise, you will have a 30 minute "just chatting" game night.
+
+### Galactic Magic Scaling Cantrips
+You can now enable the Scaling Cantrip variant rule from Galactic Magic in the system settings, doing so will automatically change all affected spells on PCs and NPCs to use a fancy formula that scales based off of your caster level. Dragging an affected spell to your character sheet will also automatically update its formula. This also works for NPC's and uses their CR as their caster level.
+
+### Spellcasting Ability Selector
+Good news Precogs, Key Abilty Score and Spellcasting Ability Score have been seperated for all your Dex/Int needs. This will make your spell DCs and bonus spells calculate correctly without having to update each spell individually. All spellcasting classes in the compendium have been updated to reflect this change. This change also generally improves spell DC calculation logic.
+
+### Gunnery Skill for NPC Starships
+You can now add Gunnery as a skill to NPC starships, simplifying setting up NPC gunners. Firing a starship weapon on an NPC starship will use the gunner's Gunnery Modifier, rather than the old hacky method of using their Piloting Ranks. Note that a migration will be performed on all NPC starships in your item directory that will move the gunner's piloting ranks to their gunnery modifier (Yes, two migrations in one update 😛). Lastly, all NPC starships in the compendium have been updated to use the new Gunnery skill.
+
+### Skill Notes
+We've added a notes field for skills that can be used to denote special abilities or additional checks needed when rolling a skill. You can also use the inline roll syntax in this field so you can roll any additional checks with the click of a button. You can access this field by right clicking on a skill in the skill list.
+
+### Compendium
+* A few missing class features and items from the Armory have been added.
+* Hazards have been added as their own compendium!
+* Precog ability names have had their names made consistent with the rest of the items.
+* Skills compendium received many spelling error corrections.
+* Various aliens have been updated.
+* Updated various items to be inline with latest errata.
+* Added action targets to all starship weapons.
+* Updated all NPCs and NPC starships to have correct action targets on their weapons.
+* Fixed everday clothing price. (Thanks Teo-CD!)
+* Updated the levels of the Culinary Synthesizer Mark 2 and 3.
+* Added some missing Envoy class features from Galatic Magic
+
+## Bugfixes and small improvements
+* French localization has been updated. (Thanks Aldarion!)
+* Missing icons when hovering over items in sheets have been restored. (Thanks mkahvi!)
+* Added missing reference to `src/module/actor/mixins/actor-damage.js` file which was causing issues with resolving damage from the chat cards.
+* Clicking the name of a starship action will now expand with the action description.
+* A skill notes field has been added to all skills, allowing you to note features like Theme Knowledge on skill checks.
+* Fixed shield dex caps not working correctly.
+* Removed the old Solarian Attunement special trait selector.
+* Archaic weapons now automatically include a -5 penalty to damage.
+* Added ability activation cost of 1 Round.
+* Profession skill checks were not adding the name of the profession in the title on the chat card.
+
+# v0.18.3 - Precog Pioneers
+
+This is a hotfix release to fix an issue where it was imposible to apply damage to a starship from the chat card.
+
 # v0.18.2 - Precog Pioneers
 
 This is a hotfix to re enable backwards compatability to v0.8.9. 

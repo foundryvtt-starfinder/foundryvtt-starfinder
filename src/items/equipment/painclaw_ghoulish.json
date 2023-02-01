@@ -2,14 +2,15 @@
   "_id": "hyQcjIMDE9GjlChw",
   "name": "Painclaw, ghoulish",
   "type": "weapon",
-  "data": {
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
     "type": "",
     "ability": "str",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "kac",
-    "actionType": "rwak",
+    "actionType": "mwak",
     "activation": {
       "type": "none",
       "condition": "",
@@ -67,7 +68,7 @@
     "damage": {
       "parts": [
         {
-          "formula": "1d8 + @mod",
+          "formula": "1d8 + @abilities.str.mod",
           "operator": "and",
           "types": {
             "piercing": true,
@@ -205,8 +206,5 @@
       "value": 1
     },
     "weaponType": "advancedM"
-  },
-  "flags": {},
-  "folder": null,
-  "img": "icons/svg/mystery-man.svg"
+  }
 }

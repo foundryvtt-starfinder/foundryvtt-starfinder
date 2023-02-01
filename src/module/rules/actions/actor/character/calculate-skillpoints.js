@@ -1,6 +1,6 @@
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../../modifiers/types.js";
 
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateSkillpoints", (fact, context) => {
         const data = fact.data;
         const skills = fact.data.skills;
@@ -39,12 +39,12 @@ export default function (engine) {
                     source: bonus.name
                 }));
             }
-            
+
             return computedBonus;
         };
 
         const intModifier = data.abilities.int.mod;
-        
+
         // Iterate through any modifiers that grant the character additional skillpoints to distribute
         // These only count towards skillpoint max
         let skillPointModifiers = fact.modifiers.filter(mod => {
@@ -77,7 +77,7 @@ export default function (engine) {
             const mods = context.parameters.stackModifiers.process(skillRankModifiers.filter(mod => {
                 if (mod.effectType !== SFRPGEffectType.SKILL_RANKS) return false;
                 else if (key !== mod.valueAffected) return false;
-                
+
                 return true;
             }), context);
 
@@ -94,14 +94,14 @@ export default function (engine) {
 
                 return sum;
             }, 0);
-            
+
             skill.min = accumulator;
         }
-        
+
         let skillpointsMax = 0;
         let totalLevel = 0;
         for (const cls of classes) {
-            const classData = cls.data.data;
+            const classData = cls.system;
 
             const classBonus = classData.levels * (intModifier + classData.skillRanks.value);
             skillpointsMax += classBonus;
@@ -122,9 +122,9 @@ export default function (engine) {
             skill.ranks = Math.max(skill.min, Math.min(skill.ranks, totalLevel));
             skillpointsUsed += (skill.ranks - skill.min);
         }
-        
+
         skillpointsMax += skillPointModifierBonus;
-        
+
         data.skillpoints.used = skillpointsUsed;
         data.skillpoints.max = skillpointsMax;
 

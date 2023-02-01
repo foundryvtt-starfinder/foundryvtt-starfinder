@@ -10,14 +10,23 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             classes: ["sfrpg", "sheet", "actor", "hazard"],
-            width: 600,
-            height: 685
+            width: 600
+            // height: 685
         });
     }
 
     get template() {
-        if (!game.user.isGM && this.actor.limited) return "systems/sfrpg/templates/actors/hazard-sheet-limited.html";
-        return "systems/sfrpg/templates/actors/hazard-sheet-full.html";
+        if (!game.user.isGM && this.actor.limited) return "systems/sfrpg/templates/actors/hazard-sheet-limited.hbs";
+        return "systems/sfrpg/templates/actors/hazard-sheet-full.hbs";
+    }
+
+    async getData() {
+        const data = await super.getData();
+
+        // Enrich text editors
+        data.enrichedDescription = await TextEditor.enrichHTML(this.object.system.details.description.value, {async: true});
+
+        return data;
     }
 
     activateListeners(html) {
@@ -35,7 +44,7 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
         await super._render(...args);
 
         const textAreas = this._element.find('textarea');
-        for (let i = 0; i<textAreas.length; i++) {
+        for (let i = 0; i < textAreas.length; i++) {
             const textArea = textAreas[i];
             textArea.style.height = textArea.scrollHeight + "px";
         }
@@ -44,7 +53,7 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
     /**
      * Organize and classify items for hazard sheets.
      * Hazards don't need items, but this function is required because base.js calls it.
-     * 
+     *
      * @param {Object} data Data for the sheet
      */
     _prepareItems(data) {
@@ -55,43 +64,43 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
         event.preventDefault();
 
         const name = game.i18n.format("SFRPG.HazardSheet.Rolls.Fortitude", {name: this.actor.name});
-        return await this._performRoll(event, name, this.actor.data.data.attributes.fort.value, false);
+        return await this._performRoll(event, name, this.actor.system.attributes.fort.value, false);
     }
 
     async _onReflexSaveClicked(event) {
         event.preventDefault();
 
         const name = game.i18n.format("SFRPG.HazardSheet.Rolls.Reflex", {name: this.actor.name});
-        return await this._performRoll(event, name, this.actor.data.data.attributes.reflex.value, false);
+        return await this._performRoll(event, name, this.actor.system.attributes.reflex.value, false);
     }
 
     async _onWillSaveClicked(event) {
         event.preventDefault();
 
         const name = game.i18n.format("SFRPG.HazardSheet.Rolls.Will", {name: this.actor.name});
-        return await this._performRoll(event, name, this.actor.data.data.attributes.will.value, false);
+        return await this._performRoll(event, name, this.actor.system.attributes.will.value, false);
     }
 
     async _onAttackClicked(event) {
         event.preventDefault();
 
         const name = game.i18n.format("SFRPG.HazardSheet.Rolls.Attack", {name: this.actor.name});
-        return await this._performRoll(event, name, this.actor.data.data.attributes.baseAttackBonus.value, true);
+        return await this._performRoll(event, name, this.actor.system.attributes.baseAttackBonus.value, true);
     }
 
     async _onDamageClicked(event) {
         event.preventDefault();
 
-        if (this.actor.data.data.attributes.damage.value) {
+        if (this.actor.system.attributes.damage.value) {
             const rollContext = RollContext.createActorRollContext(this.actor);
-    
+
             const name = game.i18n.format("SFRPG.HazardSheet.Rolls.Damage", {name: this.actor.name});
             return DiceSFRPG.damageRoll({
                 event: event,
                 rollContext: rollContext,
-                parts: [{ formula: this.actor.data.data.attributes.damage.value }],
+                parts: [{ formula: this.actor.system.attributes.damage.value }],
                 title: name,
-                flavor: name,
+                flavor: null,
                 speaker: ChatMessage.getSpeaker({ actor: this.actor }),
                 dialogOptions: {
                     left: event ? event.clientX - 80 : null,

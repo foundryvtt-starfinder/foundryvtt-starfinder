@@ -137,12 +137,15 @@
                     "biography": {
                         "value": "",
                         "public": "",
-                        "fullBodyImage": "systems/sfrpg/images/mystery-body.png",
+                        "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
                         "dateOfBirth": "",
                         "age": 0,
                         "height": "",
                         "weight": "",
-                        "otherVisuals": ""
+                        "otherVisuals": "",
+                        "deity": "",
+                        "genderPronouns": "",
+                        "homeWorld": ""
                     }
                 },
                 "skillpoints": {
@@ -374,7 +377,7 @@
                     }
                 },
                 "traits": {
-                    "size": "Medium",
+                    "size": "medium",
                     "senses": "",
                     "languages": {
                         "value": [],
@@ -1081,7 +1084,7 @@
                         "value": null,
                         "max": null
                     }
-                }                
+                }
             }
         },
         "vehicle": {
@@ -1187,6 +1190,7 @@
             "starshipSecuritySystem",
             "starshipSensor",
             "starshipShield",
+            "starshipSpecialAbility",
             "starshipThruster",
             "starshipWeapon",
 
@@ -1313,6 +1317,7 @@
                 },
                 "descriptors": []
             },
+            "descriptors": {},
             "itemUsage": {
                 "ammunitionType": "",
                 "capacity": {
@@ -1482,6 +1487,8 @@
             "ref": "fast",
             "will": "slow",
             "isCaster": false,
+            "slug": "",
+            "spellAbility" : "",
             "spellsKnown": {
                 "1":  {"0": 4, "1": 2, "2": null, "3": null, "4": null, "5": null, "6": null},
                 "2":  {"0": 5, "1": 3, "2": null, "3": null, "4": null, "5": null, "6": null},
@@ -1541,7 +1548,7 @@
             }
         },
         "spell": {
-            "templates": ["itemDescription", "activatedEffect", "action", "modifiers"],
+            "templates": ["itemDescription", "activatedEffect", "action", "modifiers", "descriptors"],
             "level": 1,
             "school": "",
             "sr": false,
@@ -1566,7 +1573,7 @@
             "isVariableLevel": false
         },
         "feat": {
-            "templates": ["itemDescription", "activatedEffect", "action", "modifiers"],
+            "templates": ["itemDescription", "activatedEffect", "action", "modifiers", "descriptors"],
             "requirements": "",
             "recharge": {
                 "value": null,
@@ -1633,7 +1640,7 @@
             }
         },
         "augmentation": {
-            "templates": ["itemDescription", "physicalItem", "modifiers", "container"],
+            "templates": ["itemDescription", "physicalItem", "modifiers", "container", "action", "activatedEffect"],
             "system": "",
             "type": "cybernetic"
         },
@@ -1764,6 +1771,9 @@
             "armorBonus": 0,
             "targetLockBonus": 0
         },
+        "starshipSpecialAbility": {
+          "templates": ["itemDescription"]
+      },
         "starshipThruster": {
             "templates": ["starshipComponent", "itemDescription", "modifiers", "specialMaterials"],
             "supportedSize": "",
@@ -1911,7 +1921,7 @@
             "templates": ["itemDescription", "physicalItem", "itemUsage", "modifiers", "container"],
             "weaponType": "any"
         },
- 
+
         "actorResource": {
             "templates": ["itemDescription", "modifiers"],
             "type": null,

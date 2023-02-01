@@ -2,12 +2,14 @@
   "_id": "bLPXnEXunSrwnIGT",
   "name": "Rapid Response (Ex) (1st)",
   "type": "feat",
-  "data": {
+  "img": "systems/sfrpg/icons/classes/rapid_response.webp",
+  "system": {
     "type": "",
     "ability": null,
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "",
@@ -29,10 +31,13 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"AKI0TQ3pSwmU5twg\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Blitz</a></p>\n        <p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">You gain a +4 bonus to initiative checks and increase your land speed by 10 feet.</span></p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.AKI0TQ3pSwmU5twg]{Blitz}</p>\n<p>You gain a +4 bonus to initiative checks and increase your land speed by 10 feet.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -40,7 +45,39 @@
       "value": ""
     },
     "formula": "",
-    "modifiers": [],
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "0b5268d6-5e35-411d-9ccb-8f8a21737aab",
+        "name": "Rapid Response - Initiative",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "initiative",
+        "enabled": true,
+        "max": 4,
+        "modifier": "4",
+        "modifierType": "constant",
+        "notes": "You gain a +4 bonus to initiative checks and increase your land speed by 10 feet.",
+        "source": "Rapid Response",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "586d7d27-2ee7-45d5-8214-931845e9af42",
+        "name": "Rapid Response - Land Speed",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "specific-speed",
+        "enabled": true,
+        "max": 10,
+        "modifier": "10",
+        "modifierType": "constant",
+        "notes": "You gain a +4 bonus to initiative checks and increase your land speed by 10 feet.",
+        "source": "Rapid Response",
+        "subtab": "misc",
+        "valueAffected": "land"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -52,6 +89,7 @@
       "value": null
     },
     "requirements": "1st Bonus",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
@@ -67,11 +105,5 @@
       "per": "",
       "value": 1
     }
-  },
-  "flags": {},
-  "img": "systems/sfrpg/icons/classes/rapid_response.png",
-  "permission": {
-    "QqVQDajn5ZN4kl25": 3,
-    "default": 0
   }
 }

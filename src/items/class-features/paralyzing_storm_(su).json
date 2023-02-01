@@ -2,7 +2,8 @@
   "_id": "C6E52LWmykVJsAMh",
   "name": "Paralyzing Storm (Su)",
   "type": "feat",
-  "data": {
+  "img": "systems/sfrpg/images/cup/gameplay/photon.webp",
+  "system": {
     "type": "",
     "ability": "",
     "abilityMods": {
@@ -11,7 +12,7 @@
     "actionTarget": "",
     "actionType": "util",
     "activation": {
-      "type": "full",
+      "type": "",
       "condition": "",
       "cost": null
     },
@@ -28,23 +29,7 @@
       "parts": []
     },
     "damage": {
-      "parts": [
-        {
-          "name": "Burning damage",
-          "formula": "lookupRange(@classes.solarian.levels, 0, 10, 2, 14, 3, 18, 4)d6",
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
-            "cold": false,
-            "electricity": false,
-            "fire": true,
-            "healing": false,
-            "piercing": false,
-            "slashing": false,
-            "sonic": false
-          }
-        }
-      ]
+      "parts": []
     },
     "damageNotes": "",
     "description": {
@@ -52,7 +37,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@Compendium[sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p>You have learned how to create a burst of cosmic energy at the point of your solar manifestation&rsquo;s impact. As a full action while attuned or fully attuned, you can make an attack with your solar flare, solar shield, or solar weapon against a single target. If you are able to make this attack as a ranged attack, the target must be within 30 feet. On a hit, the target and each creature within 10 feet of it except you must attempt a Reflex save. A creature that fails its save gains the burning condition. This burning condition deals 2d6 damage (increasing by 1d6 at 14th level and again at 18th level).</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p><sub><img style=\"border: 1px solid var(--color-border-dark);\" src=\"systems/sfrpg/images/cup/gameplay/photon.webp\" alt=\"\" width=\"20\" height=\"20\"></sub><span> </span>Photon Revelation</p>\n<p>Your electrical discharges overwhelm your target’s motor functions. If the target of your destructive discharge stellar revelation fails its saving throw against the effect, the revelation also has one of the following effects: the target is knocked prone, the target gains the flat-footed condition for 1 round, or the target must succeed at a second Fortitude save or be stunned for 1 round. You must have the destructive discharge stellar revelation to select this revelation.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -65,8 +50,8 @@
     "range": {
       "additional": "",
       "per": "",
-      "units": "ft",
-      "value": 30
+      "units": "none",
+      "value": null
     },
     "recharge": {
       "charged": false,
@@ -82,13 +67,12 @@
     "source": "TR pg. 31",
     "target": {
       "type": "",
-      "value": "All creatures within 10 feet of main target, except user"
+      "value": ""
     },
     "uses": {
       "max": 0,
       "per": "",
       "value": 0
     }
-  },
-  "img": "systems/sfrpg/images/cup/gameplay/photon.png"
+  }
 }

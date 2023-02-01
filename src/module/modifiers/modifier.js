@@ -3,7 +3,7 @@ import { generateUUID } from '../utilities.js';
 
 /**
  * A data object that hold information about a specific modifier.
- * 
+ *
  * @param {Object}        data               The data for the modifier.
  * @param {String}        data.name          The name for the modifier. Only useful for identifiying the modifier.
  * @param {Number|String} data.modifier      The value to modify with. This can be either a constant number or a Roll formula.
@@ -20,19 +20,19 @@ import { generateUUID } from '../utilities.js';
  */
 export default class SFRPGModifier {
     constructor({
-        name = "", 
-        modifier = 0, 
-        type = SFRPGModifierTypes.UNTYPED, 
-        modifierType = SFRPGModifierType.CONSTANT, 
-        effectType = SFRPGEffectType.SKILL, 
-        valueAffected = "", 
-        enabled = true, 
-        source = "", 
+        name = "",
+        modifier = 0,
+        type = SFRPGModifierTypes.UNTYPED,
+        modifierType = SFRPGModifierType.CONSTANT,
+        effectType = SFRPGEffectType.SKILL,
+        valueAffected = "",
+        enabled = true,
+        source = "",
         notes = "",
         subtab = "misc",
         condition = "",
         id = null
-    } = {}) {        
+    } = {}) {
         this.name = name;
         this.modifier = modifier;
         this.type = type;

@@ -6,6 +6,14 @@
   /* ----------------------------------------- */
 
   .sheet-header {
+    .summary {
+      li {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+
     .header-background {
       background: #235683;
       background: @blueGradientBackground;
@@ -23,13 +31,13 @@
         margin: 0;
         padding: 5px;
         text-align: right;
-  
+
         .level {
           width: 100%;
           height: 30px;
           font-size: 20px;
           line-height: 30px;
-  
+
           label {
             display: inline;
             font-size: 24px;
@@ -41,7 +49,7 @@
             color: #fff;
             font-size: 20px;
           }
-  
+
           input {
             // display: inline;
             width: 45px;
@@ -49,7 +57,7 @@
             text-align: center;
             color: #fff;
           }
-  
+
           // If the Experience Bar is disabled
           &.noxp {
             margin-top: 10px;
@@ -62,9 +70,9 @@
               height: 44px;
             }
           }
-  
+
         }
-  
+
         .experience {
           .exo2();
           width: 100%;
@@ -78,7 +86,7 @@
           }
         }
       }
-    }    
+    }
   }
 
   .attributes {
@@ -88,10 +96,10 @@
   }
 
   .sheet-body {
-    
+
     .bio-properties {
       height: 100%;
-      
+
       flex: 0 0 200px;
       margin: 5px 5px 5px 5px;
       padding-right: 5px;
@@ -99,6 +107,7 @@
 
       .avatar {
         flex: 0 0 250px;
+        object-fit: contain;
       }
 
       .singleFlex {
@@ -166,6 +175,14 @@
     border-bottom: 1px solid @colorBeige;
   }
 
+  .rollable {
+    cursor: pointer;
+
+    &:hover {
+      text-shadow: 0 0 10px red;
+    }
+  }
+
   /* ----------------------------------------- */
   /*  Attributes                               */
   /* ----------------------------------------- */
@@ -176,13 +193,17 @@
     padding: 0;
 
     li.attribute {
-      height: 70px;
+      min-height: 70px;
       margin: 0 5px;
       border: @borderGroove;
       border-radius: 4px;
       //.nodesto();
       .exo2();
       text-align: center;
+
+      &.cmd {//CMD is larger to fit "KAC + 8" label
+        margin: 0 3px;
+      }
 
       .attribute-name {
         flex: 0 0 18px;
@@ -226,7 +247,6 @@
         flex: 0 0 18px;
         margin-top: -1px;
         line-height: 18px;
-        font-family: "Signika", "Palatino Linotype", serif;
         font-size: 12px;
       }
     }
@@ -531,15 +551,16 @@
       color: @colorOlive;
       font-size: 18px;
       margin: 0;
+      border: none;
     }
 
     &.spellbook-filters {
-      flex: 0 0 40px;
+      flex: 0 0 29px;
     }
 
     .currency {
       list-style: none;
-      margin: 4px 0 8px;
+      margin: 0;
       padding: 0;
       font-size: 12px;
 
@@ -577,13 +598,14 @@
     // Inventory Item
     .item,
     .crew {
-      line-height: 45px;
+      line-height: 25px;
       padding: 0 2px; // to align with the header border
       border-bottom: 1px solid @colorBeige;
       &:last-child { border-bottom: none; }
 
       &.small {
         line-height: 25px;
+        margin-left: 5px;
       }
 
       &.container {
@@ -598,13 +620,16 @@
 
         &.modifier-name {
           cursor: default;
+          overflow-wrap: anywhere;
         }
 
         .item-image,
         .crew-image {
-          flex: 0 0 45px;
-          background-size: 45px;
-          margin-right: 5px;
+            flex: 0 0 25px;
+            margin-right: 5px;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
 
           &.small {
             flex: 0 0 25px;
@@ -618,34 +643,37 @@
         }
 
         &:hover .item-image {
-          background-image: url("/icons/svg/d20-grey.svg") !important;
+          background-image: url("../../icons/svg/d20-grey.svg") !important;
         }
 
         .item-image:hover {
-          background-image: url("/icons/svg/d20-black.svg") !important;
+          background-image: url("../../icons/svg/d20-black.svg") !important;
         }
 
         .item-action {
           flex: 0 0 15%;
-  
+          flex-direction: row;
+          padding: 1px 0;
+
           .attack {
             width: auto;
             background: @sfrpgBlue;
             color: #fff;
             cursor: pointer;
+            padding: 1px 6px;
 
             &:hover, &:focus{
               box-shadow: 0 0 5px @sfrpgBlue;
             }
           }
-  
+
           .damage {
             width: auto;
             background: @sfrpgRed;
             color: #fff;
             cursor: pointer;
           }
-  
+
           .healing {
             width: auto;
             background: @sfrpgGreen;
@@ -703,7 +731,7 @@
           }
         }
       }
-      
+
       // Item Dropdown Properties
       .item-properties,
       .crew-properties {
@@ -740,6 +768,7 @@
         padding-left: 5px;
         font-size: 13px;
         font-weight: bold;
+        border: none;
       }
 
       .item-controls a.item-create,
@@ -747,6 +776,15 @@
       .crew-controls a.crew-create,
       .crew-controls a.skill-create {
         flex: 0 0 100%;
+      }
+
+      .item-controls.item-controls-browser {
+          flex-wrap: nowrap;
+          justify-content: space-evenly;
+
+          a.item-browser, a.item-create {
+          flex: 0 0 22px;
+        }
       }
     }
 
@@ -763,7 +801,8 @@
       text-align: center;
       border-right: 1px solid @colorFaint;
       &:last-child { border-right: none; }
-  
+      white-space: nowrap;
+
       .featDeactivate, .vehicle-system-deactivate {
         background: @sfrpgRed;
         color: #fff;
@@ -796,9 +835,10 @@
 
     .item-list-child {
       list-style: none;
-      width: 97%;
-      margin: 0 0 0 3%;
+      width: calc(100% - 7px);
+      margin: 0 0 0 7px;
       padding: 0;
+      border-left: 2px dashed @sfrpgRed;
     }
 
     // Item Control Buttons
@@ -844,7 +884,7 @@
         font-size: 10px;
       }
     }
-  
+
     label {
       font-size: 16px;
       padding-top: 1px;
@@ -866,6 +906,16 @@
   .spellbook {
     .inventory-list {
       height: calc(100% - 50px);
+
+      .spellbook-header {
+        .item-name {
+            flex: 0 0 130px;
+            h3 {
+                cursor: default;
+            }
+        }
+      }
+
     }
   }
 
@@ -874,23 +924,30 @@
     display: inline-block;
     text-align: center;
     padding: 0 5px;
-    padding-top: 1px;
-    color: @colorFaint;
+    color: #e9e9e9;
     background: rgb(21, 92, 155);
     border: 1px solid transparent;
     border-radius: 8px;
+    font-weight: normal;
 
     input {
-      color: @colorFaint;
+      color: #e9e9e9;
     }
   }
 
-  .spell-slots,
   .spell-comps {
-    flex: none;
     padding: 0 5px;
     font-size: 12px;
-    text-align: center;
+    text-align: right;
+    color: @colorTan;
+    border-right: 1px solid @colorFaint;
+    flex: 0 0 20px;
+  }
+
+  .spell-slots {
+    padding: 0 5px;
+    font-size: 12px;
+    text-align: right;
     color: @colorTan;
     border-right: 1px solid @colorFaint;
 
@@ -899,17 +956,25 @@
       text-align: right;
     }
   }
-  
+
   .spell-component {
     display: inline-block;
     text-align: center;
     padding-top: 1px;
     width: 16px;
     line-height: 14px;
-    color: #c9c7b8;
+    color: #fbfbf9;
     background: rgba(0, 0, 0, 0.4);
     border: 1px solid transparent;
     border-radius: 8px;
+  }
+
+  .spell-dc {
+    flex: 0 0 150px;
+    font-size: 12px;
+    color: @colorTan;
+    text-align: center;
+    border-right: 1px solid @colorFaint;
   }
 
   .spell-slots {
@@ -921,12 +986,12 @@
   }
 
   .spell-uses {
-    padding-right: 8px;
+    padding: 2px;
     text-align: right !important;
   }
 
   .spell-school, .spell-action {
-    flex: 0 0 120px;
+    flex: 0 0 90px;
     font-size: 12px;
     color: @colorTan;
     text-align: center;

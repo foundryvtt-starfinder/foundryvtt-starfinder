@@ -2,7 +2,547 @@
   "_id": "VWoKy8EMCf89lY0N",
   "name": "Synapse Worm",
   "type": "npc2",
-  "data": {
+  "img": "icons/svg/mystery-man.svg",
+  "items": [
+    {
+      "name": "Bite (plus Grab)",
+      "type": "weapon",
+      "hasAttack": true,
+      "hasCapacity": false,
+      "hasUses": false,
+      "img": "icons/svg/mystery-man.svg",
+      "isCharged": true,
+      "isStack": false,
+      "labels": {
+        "activation": "",
+        "area": "",
+        "damage": "1d6+6",
+        "duration": "",
+        "range": "",
+        "save": "",
+        "target": ""
+      },
+      "system": {
+        "type": "",
+        "ability": "",
+        "acceptedItemTypes": {
+          "augmentation": false,
+          "consumable": false,
+          "container": false,
+          "equipment": false,
+          "fusion": true,
+          "goods": false,
+          "technological": false,
+          "upgrade": false,
+          "weapon": false
+        },
+        "actionTarget": "kac",
+        "actionType": "mwak",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 10,
+        "attuned": false,
+        "bulk": "L",
+        "capacity": {
+          "max": 0,
+          "value": 0
+        },
+        "chatFlavor": "",
+        "containedItemIds": [],
+        "container": {
+          "contents": [],
+          "storage": [
+            {
+              "type": "slot",
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 1,
+              "subtype": "fusion",
+              "weightProperty": "level"
+            }
+          ]
+        },
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "1d6+6",
+              "operator": "",
+              "types": {
+                "piercing": true
+              }
+            }
+          ]
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "equipped": false,
+        "equippedBulkMultiplier": 1,
+        "formula": "",
+        "identified": true,
+        "level": 1,
+        "modifiers": [],
+        "price": 0,
+        "proficient": true,
+        "properties": {},
+        "quantity": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "special": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "usage": {
+          "per": "",
+          "value": 0
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        },
+        "weaponType": "basicM"
+      }
+    },
+    {
+      "name": "Synaptic Shock Web (Su)",
+      "type": "feat",
+      "hasAttack": false,
+      "hasUses": false,
+      "img": "icons/svg/mystery-man.svg",
+      "isCharged": true,
+      "isOnCooldown": false,
+      "isStack": false,
+      "labels": {
+        "activation": "",
+        "area": "",
+        "damage": "",
+        "duration": "",
+        "featType": "Passive",
+        "range": "",
+        "save": "DC null undefined",
+        "target": ""
+      },
+      "system": {
+        "type": "",
+        "ability": null,
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>Once every 1d4 rounds as a standard action, a synapse worm can regurgitate a viscous fluid in a 15-foot cone that expands on contact into sticky webbing along the ground and nearby walls. A creature that touches the webbing takes 2d6 acid damage and is dazed for 1 round. A successful DC 11 Reflex saving throw halves this damage and negates the dazed condition.</p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "modifiers": [],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      }
+    },
+    {
+      "name": "Improved Combat Maneuver (Combat) (Grapple)",
+      "type": "feat",
+      "hasAttack": false,
+      "hasUses": false,
+      "img": "systems/sfrpg/icons/feats/improved_combat_maneuver.webp",
+      "isCharged": true,
+      "isOnCooldown": false,
+      "isStack": false,
+      "labels": {
+        "activation": "",
+        "area": "",
+        "damage": "",
+        "duration": "",
+        "featType": "Passive",
+        "range": "",
+        "save": "",
+        "target": ""
+      },
+      "system": {
+        "type": "",
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": null,
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>You are particularly skilled with a specific combat maneuver.</p>\n<p><strong>Prerequisites</strong>: Base attack bonus +1.</p>\n<hr />\n<p><strong>Benefit</strong>: Choose one combat maneuver (bull rush, dirty trick, disarm, grapple, reposition, sunder, or trip). You gain a +4 bonus to your attack roll to resolve that combat maneuver.</p>\n<p><strong>Special</strong>: You can take Improved Combat Maneuver multiple times. The effects don’t stack. Each time you take the feat, it applies to a new combat maneuver.</p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": ""
+        },
+        "formula": "",
+        "modifiers": [],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": null,
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": "negate"
+        },
+        "source": "Core Rulebook",
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "uses": {
+          "max": 0,
+          "per": "",
+          "value": 0
+        }
+      }
+    },
+    {
+      "name": "Mindless",
+      "type": "feat",
+      "hasAttack": false,
+      "hasUses": false,
+      "img": "icons/svg/mystery-man.svg",
+      "isCharged": true,
+      "isOnCooldown": false,
+      "isStack": false,
+      "labels": {
+        "activation": "",
+        "area": "",
+        "damage": "",
+        "duration": "",
+        "featType": "Passive",
+        "range": "",
+        "save": "",
+        "target": ""
+      },
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "<h3>(EX)</h3>\n<h3>The creature has no Intelligence score or modifier and is immune to mind-affecting effects. Any DCs or other statistics that rely on an Intelligence score treat the creature as having a score of 10 (+0).</h3>\n<h3>Guidelines: Mindless creatures usually have fewer good skills and no master skills. Their skills should be based on inborn abilities, since they’re incapable of training.</h3>\n<hr />\n<h3>&nbsp;</h3>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "modifiers": [],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      }
+    },
+    {
+      "name": "Grab",
+      "type": "feat",
+      "hasAttack": false,
+      "hasUses": false,
+      "img": "icons/svg/mystery-man.svg",
+      "isCharged": true,
+      "isOnCooldown": false,
+      "isStack": false,
+      "labels": {
+        "activation": "",
+        "area": "",
+        "damage": "",
+        "duration": "",
+        "featType": "Passive",
+        "range": "",
+        "save": "",
+        "target": ""
+      },
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "<h3>(EX)</h3>\n<h3>If the creature hits with the indicated attack (usually a claw or bite attack), it deals the normal damage. If the creature’s attack roll successfully hits the target’s KAC + 4, the creature also automatically grapples the foe as a free action (see @UUID[Compendium.sfrpg.conditions.4AkWDHGM6gHDepHN]{Grappled}). (If it hits the target’s KAC + 13, it instead pins the target - see @UUID[Compendium.sfrpg.conditions.XgK4EdO5D3Fj3iWz]{Pinned}.) The creature does not need to have a spare limb free to perform this grapple, as long as it can make the listed attack, and it can potentially grapple more than one target if it has more than one attack with the grab ability. The creature can maintain the grab either with another successful grab attack or by performing the grapple combat maneuver normally.</h3>\n<hr />\n<h3>&nbsp;</h3>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "modifiers": [],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      }
+    }
+  ],
+  "prototypeToken": {
+    "name": "Synapse Worm",
+    "actorLink": false,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": ""
+    },
+    "displayBars": 20,
+    "displayName": 20,
+    "disposition": -1,
+    "height": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 360,
+      "animation": {
+        "type": null,
+        "intensity": 5,
+        "reverse": false,
+        "speed": 5
+      },
+      "attenuation": 0.5,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "contrast": 0,
+      "darkness": {
+        "max": 1,
+        "min": 0
+      },
+      "dim": 0,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "shadows": 0
+    },
+    "lockRotation": false,
+    "mirrorX": false,
+    "mirrorY": false,
+    "randomImg": false,
+    "rotation": 0,
+    "scale": 1,
+    "sight": {
+      "angle": 360,
+      "attenuation": 0.1,
+      "brightness": 1,
+      "color": null,
+      "contrast": 0,
+      "enabled": false,
+      "range": 0,
+      "saturation": 0,
+      "visionMode": "basic"
+    },
+    "texture": {
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": null
+    },
+    "width": 1
+  },
+  "system": {
     "abilities": {
       "cha": {
         "base": 0,
@@ -97,18 +637,6 @@
         "tooltip": [],
         "value": 0
       },
-      "rp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
-      "sp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
       "space": "0",
       "speed": {
         "burrowing": {
@@ -152,7 +680,7 @@
       "aura": "",
       "biography": {
         "public": "",
-        "value": "<section class=\"secret\">\n<h2>Description</h2>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">In many ways, a synapse worm is similar to other large invertebrates: it is a mindless omnivore that sees the world around it in terms of food to consume and landscape to traverse. Where the synapse worm stands out is in its unique feeding technique. The worm’s cranial cavity is lined with a membrane coated in an acidic and paralytic enzyme, which it can evert through its mouth in a thick effluvium that coats nearby surfaces with a branching, viscous web. This webbing can cause prey to enter a form of synaptic shock, thus giving the creature its name. The worm can then take nibbles of its prey without resistance—or in the case of smaller victims, such as spiders and insects, simply swallow them alive.<br><br>Synapse worms are opportunistic ambush predators with sharp-toothed maws and gullets strong enough to digest almost any organic substance. When hunting, a synapse worm burrows into the soil to wait for unsuspecting victims and then unleashes its paralytic webbing. If it wounds its prey enough to prevent the creature’s escape and the creature is too large to swallow whole, the worm then buries the victim alive to feast on later. Those unlucky enough to find a synapse worm’s hunting grounds regularly stumble across the rotting remains of those who previously fell to the vermin.<br><br>A synapse worm typically grows to about 3 to 4 feet long, and can raise itself up on its back half to stand a little over 2 feet tall. Its nearly nonexistent appendages are useless in combat, but they do allow it to move through soil. Synapse worms’ permeable skin naturally absorbs pigments from their surroundings, allowing a worm to blend quite well into its normal habitat. In a sterile environment, a synapse worm is a bright-blue color, with a cyan belly and webbing material that is white or, more rarely, reddish orange.<br><br>While no one is certain where synapse worms originated, these creatures can be found on a wide range of worlds throughout Near Space and the Vast. Luckily, no synapse worms have ever been seen in the wilds of the Pact Worlds, but a couple of eccentric collectors keep one or two of these vermin in their menageries.</span></p>\n<p>&nbsp;</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any warm or temperate</p>\n<p>&nbsp;</p>\n<h3>Organization</h3>\n<p>solitary, pair, or clew (3-6)</p>\n<p>&nbsp;</p>\n</section>"
+        "value": "<section class=\"secret\">\n<h2>Description</h2>\n<p>In many ways, a synapse worm is similar to other large invertebrates: it is a mindless omnivore that sees the world around it in terms of food to consume and landscape to traverse. Where the synapse worm stands out is in its unique feeding technique. The worm’s cranial cavity is lined with a membrane coated in an acidic and paralytic enzyme, which it can evert through its mouth in a thick effluvium that coats nearby surfaces with a branching, viscous web. This webbing can cause prey to enter a form of synaptic shock, thus giving the creature its name. The worm can then take nibbles of its prey without resistance—or in the case of smaller victims, such as spiders and insects, simply swallow them alive.</p>\n<p>Synapse worms are opportunistic ambush predators with sharp-toothed maws and gullets strong enough to digest almost any organic substance. When hunting, a synapse worm burrows into the soil to wait for unsuspecting victims and then unleashes its paralytic webbing. If it wounds its prey enough to prevent the creature’s escape and the creature is too large to swallow whole, the worm then buries the victim alive to feast on later. Those unlucky enough to find a synapse worm’s hunting grounds regularly stumble across the rotting remains of those who previously fell to the vermin.</p>\n<p>A synapse worm typically grows to about 3 to 4 feet long, and can raise itself up on its back half to stand a little over 2 feet tall. Its nearly nonexistent appendages are useless in combat, but they do allow it to move through soil. Synapse worms’ permeable skin naturally absorbs pigments from their surroundings, allowing a worm to blend quite well into its normal habitat. In a sterile environment, a synapse worm is a bright-blue color, with a cyan belly and webbing material that is white or, more rarely, reddish orange.</p>\n<p>While no one is certain where synapse worms originated, these creatures can be found on a wide range of worlds throughout Near Space and the Vast. Luckily, no synapse worms have ever been seen in the wilds of the Pact Worlds, but a couple of eccentric collectors keep one or two of these vermin in their menageries.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any warm or temperate</p>\n<h3>Organization</h3>\n<p>solitary, pair, or clew (3-6)</p>\n</section>"
       },
       "class": "",
       "cr": 2,
@@ -427,522 +955,5 @@
       "size": "small",
       "sr": 0
     }
-  },
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "items": [
-    {
-      "name": "Bite (plus Grab)",
-      "type": "weapon",
-      "data": {
-        "type": "",
-        "ability": "",
-        "acceptedItemTypes": {
-          "augmentation": false,
-          "consumable": false,
-          "container": false,
-          "equipment": false,
-          "fusion": true,
-          "goods": false,
-          "technological": false,
-          "upgrade": false,
-          "weapon": false
-        },
-        "actionType": "mwak",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 10,
-        "attuned": false,
-        "bulk": "L",
-        "capacity": {
-          "max": 0,
-          "value": 0
-        },
-        "chatFlavor": "",
-        "containedItemIds": [],
-        "container": {
-          "contents": [],
-          "storage": [
-            {
-              "type": "slot",
-              "acceptsType": [
-                "fusion"
-              ],
-              "affectsEncumbrance": true,
-              "amount": 1,
-              "subtype": "fusion",
-              "weightProperty": "level"
-            }
-          ]
-        },
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": [
-            {
-              "formula": "1d6+6",
-              "operator": "",
-              "types": {
-                "piercing": true
-              }
-            }
-          ]
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": ""
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
-        "formula": "",
-        "identified": true,
-        "level": 1,
-        "modifiers": [],
-        "price": 0,
-        "proficient": true,
-        "properties": {},
-        "quantity": 1,
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "special": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "usage": {
-          "per": "",
-          "value": 0
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        },
-        "weaponType": "basicM"
-      },
-      "flags": {},
-      "hasAttack": true,
-      "hasCapacity": false,
-      "hasUses": false,
-      "img": "icons/svg/mystery-man.svg",
-      "isCharged": true,
-      "isStack": false,
-      "labels": {
-        "activation": "",
-        "area": "",
-        "damage": "1d6+6",
-        "duration": "",
-        "range": "",
-        "save": "",
-        "target": ""
-      }
-    },
-    {
-      "name": "Synaptic Shock Web (Su)",
-      "type": "feat",
-      "data": {
-        "type": "",
-        "ability": null,
-        "actionType": null,
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "Once every 1d4 rounds as a standard action, a synapse worm can regurgitate a viscous fluid in a 15-foot cone that expands on contact into sticky webbing along the ground and nearby walls. A creature that touches the webbing takes 2d6 acid damage and is dazed for 1 round. A successful DC 11 Reflex saving throw halves this damage and negates the dazed condition."
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      },
-      "flags": {},
-      "hasAttack": false,
-      "hasUses": false,
-      "img": "icons/svg/mystery-man.svg",
-      "isCharged": true,
-      "isOnCooldown": false,
-      "isStack": false,
-      "labels": {
-        "activation": "",
-        "area": "",
-        "damage": "",
-        "duration": "",
-        "featType": "Passive",
-        "range": "",
-        "save": "DC null undefined",
-        "target": ""
-      }
-    },
-    {
-      "name": "Improved Combat Maneuver (Combat) (Grapple)",
-      "type": "feat",
-      "data": {
-        "type": "",
-        "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": null,
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "<p>You are particularly skilled with a specific combat maneuver.<br><strong>Prerequisites</strong>: Base attack bonus +1.</p>\n<hr>\n<p><span id=\"ctl00_MainContent_DataListTypes_ctl00_LabelName\"><strong>Benefit</strong>: Choose one combat maneuver (bull rush, dirty trick, disarm, grapple, reposition, sunder, or trip). You gain a +4 bonus to your attack roll to resolve that combat maneuver.<br></span></p>\n<p><span id=\"ctl00_MainContent_DataListTypes_ctl00_LabelName\"><strong>Special</strong>: You can take Improved Combat Maneuver multiple times. The effects don’t stack. Each time you take the feat, it applies to a new combat maneuver.</span></p>"
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": ""
-        },
-        "formula": "",
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": null,
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": "negate"
-        },
-        "source": "Core Rulebook",
-        "target": {
-          "type": "",
-          "value": ""
-        },
-        "uses": {
-          "max": 0,
-          "per": "",
-          "value": 0
-        }
-      },
-      "flags": {},
-      "hasAttack": false,
-      "hasUses": false,
-      "img": "systems/sfrpg/icons/feats/improved_combat_maneuver.png",
-      "isCharged": true,
-      "isOnCooldown": false,
-      "isStack": false,
-      "labels": {
-        "activation": "",
-        "area": "",
-        "damage": "",
-        "duration": "",
-        "featType": "Passive",
-        "range": "",
-        "save": "",
-        "target": ""
-      }
-    },
-    {
-      "name": "Mindless",
-      "type": "feat",
-      "data": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "<h3>(EX)</h3>\n<h3>The creature has no Intelligence score or modifier and is immune to mind-affecting effects. Any DCs or other statistics that rely on an Intelligence score treat the creature as having a score of 10 (+0).</h3>\n<h3>Guidelines: Mindless creatures usually have fewer good skills and no master skills. Their skills should be based on inborn abilities, since they’re incapable of training.</h3>\n<hr>\n<h3>&nbsp;</h3>"
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      },
-      "flags": {},
-      "hasAttack": false,
-      "hasUses": false,
-      "img": "icons/svg/mystery-man.svg",
-      "isCharged": true,
-      "isOnCooldown": false,
-      "isStack": false,
-      "labels": {
-        "activation": "",
-        "area": "",
-        "damage": "",
-        "duration": "",
-        "featType": "Passive",
-        "range": "",
-        "save": "",
-        "target": ""
-      }
-    },
-    {
-      "name": "Grab",
-      "type": "feat",
-      "data": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "<h3>(EX)</h3>\n<h3>If the creature hits with the indicated attack (usually a claw or bite attack), it deals the normal damage. If the creature’s attack roll successfully hits the target’s KAC + 4, the creature also automatically grapples the foe as a free action (see @Compendium[sfrpg.conditions.4AkWDHGM6gHDepHN]{Grappled}). (If it hits the target’s KAC + 13, it instead pins the target - see @Compendium[sfrpg.conditions.XgK4EdO5D3Fj3iWz]{Pinned}.) The creature does not need to have a spare limb free to perform this grapple, as long as it can make the listed attack, and it can potentially grapple more than one target if it has more than one attack with the grab ability. The creature can maintain the grab either with another successful grab attack or by performing the grapple combat maneuver normally.</h3>\n<hr>\n<h3>&nbsp;</h3>"
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      },
-      "flags": {},
-      "hasAttack": false,
-      "hasUses": false,
-      "img": "icons/svg/mystery-man.svg",
-      "isCharged": true,
-      "isOnCooldown": false,
-      "isStack": false,
-      "labels": {
-        "activation": "",
-        "area": "",
-        "damage": "",
-        "duration": "",
-        "featType": "Passive",
-        "range": "",
-        "save": "",
-        "target": ""
-      }
-    }
-  ],
-  "token": {
-    "name": "Synapse Worm",
-    "actorData": {},
-    "actorId": "FN72F5E3obxCcIOm",
-    "actorLink": false,
-    "bar1": {
-      "attribute": "attributes.hp"
-    },
-    "bar2": {
-      "attribute": ""
-    },
-    "brightLight": 0,
-    "brightSight": 0,
-    "dimLight": 0,
-    "dimSight": 0,
-    "displayBars": 40,
-    "displayName": 40,
-    "disposition": -1,
-    "flags": {},
-    "height": 1,
-    "img": "icons/svg/mystery-man.svg",
-    "lightAlpha": 1,
-    "lightAngle": 360,
-    "lightColor": "",
-    "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
-    "randomImg": false,
-    "rotation": 0,
-    "scale": 1,
-    "sightAngle": 360,
-    "tint": "",
-    "vision": false,
-    "width": 1
   }
 }

@@ -6,7 +6,7 @@ import RollTree from "./rolls/rolltree.js";
 // Type definitions for documentation.
 /**
  * A data structure for storing data about damage types
- * 
+ *
  * @typedef {Object} DamageType
  * @property {String[]} types    An array of damage types.
  * @property {string}   operator An operator that determines how damage is split between multiple types.
@@ -14,7 +14,7 @@ import RollTree from "./rolls/rolltree.js";
 
 /**
  * A data structure for storing damage statistics.
- * 
+ *
  * @typedef {Object} DamagePart
  * @property {string}                     formula  The roll formula to use.
  * @property {{[key: string]: boolean}}   types    A set of key value pairs that determines the available damage types.
@@ -23,7 +23,7 @@ import RollTree from "./rolls/rolltree.js";
 
 /**
  * A data structure to define critical damage.
- * 
+ *
  * @typedef {Object} CriticalDamage
  * @property {string}       effect The critical damage effect.
  * @property {DamagePart[]} parts  Any damage rolls used with this critical
@@ -31,7 +31,7 @@ import RollTree from "./rolls/rolltree.js";
 
 /**
  * The data for a foundry Speaker
- * 
+ *
  * @typedef {Object} SpeakerData
  * @property {string} scene The internal ID for the associated scene.
  * @property {string} actor The internal ID for the associated actor.
@@ -41,10 +41,10 @@ import RollTree from "./rolls/rolltree.js";
 
 /**
  * Options that can be passed into a foundry Dialog.
- * 
+ *
  * @typedef {Object} DialogOptions
  * @property {boolean}  [jQuery]          Whether to provide jQuery objects to callback functions (if true)
- *                                        or play HTMLElement instances (if false). This is currently true by 
+ *                                        or play HTMLElement instances (if false). This is currently true by
  *                                        default but in the future will become false by default.
  * @property {string}   [baseApplication] A named "base application" which generates an additional hook
  * @property {number}   [width]           The default pixel width for the rendered HTML
@@ -62,13 +62,13 @@ import RollTree from "./rolls/rolltree.js";
  * @property {string[]} [scrollY]         A list of unique CSS selectors which target containers that should
  *                                        have their vertical scroll positions preserved during a re-render.
  * @property {TabsConfiguration[]} [tabs] An array of tabbed container configurations which should be enabled
- *                                        for the application. 
+ *                                        for the application.
  * @property {boolean}  [skipUI]          Should this dialog be skipped?
  */
 
 /**
  * Temporary data structure used to hold the final formula and explanation for a Roll.
- * 
+ *
  * @typedef {Object} FinalFormula
  * @property {string} finalRoll The finalized forumla used in the Roll
  * @property {string} formula   The summarized explanation of the roll formula
@@ -76,7 +76,7 @@ import RollTree from "./rolls/rolltree.js";
 
 /**
  * The results of a Roll
- * 
+ *
  * @typedef {Object} RollResult
  * @property {Roll}         roll    The data for the roll
  * @property {FinalFormula} formula The finalized formula used in the roll
@@ -85,7 +85,7 @@ import RollTree from "./rolls/rolltree.js";
 /**
  * A data structure for outputing any metadata that is rendered at the bottom
  * of a Roll chat card.
- * 
+ *
  * @typedef {Object} Tag
  * @property {string} tag Text that will be addeded as a class on an HTMLElement
  * @property {string} text The text rendered on the card.
@@ -93,7 +93,7 @@ import RollTree from "./rolls/rolltree.js";
 
 /**
  * A structure for passing data into an HTML for for use in data- attributes.
- * 
+ *
  * @typedef {Object} HtmlData
  * @property {string} name The name of the data property sans data-
  * @property {string} value The value of the data property.
@@ -101,7 +101,7 @@ import RollTree from "./rolls/rolltree.js";
 
 /**
  * An optional modifer that can be added to a roll.
- * 
+ *
  * @typedef {Object} Modifier
  * @property {string}  name     The name of the modifer.
  * @property {boolean} enabled  Whether this modifier is enabled or not.
@@ -111,7 +111,7 @@ import RollTree from "./rolls/rolltree.js";
 
 /**
  * Function called when the attack roll dialog is closed.
- * 
+ *
  * @callback onD20DialogClosed
  * @param {Roll}         roll         The data for the roll.
  * @param {string}       formula      The formula used in the roll.
@@ -121,7 +121,7 @@ import RollTree from "./rolls/rolltree.js";
 
 /**
  * Function called when the damage roll dialog is closed.
- * 
+ *
  * @callback onDamageDialogClosed
  * @param {Roll}         roll         The data for the roll.
  * @param {string}       formula      The formula used in the roll.
@@ -131,7 +131,7 @@ import RollTree from "./rolls/rolltree.js";
 
 /**
  * Called when a roll is built.
- * 
+ *
  * @async
  * @callback onRollBuilt
  * @param {string}       button           The name of the button clicked.
@@ -147,7 +147,7 @@ export class DiceSFRPG {
     * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
     * This chooses the default options of a normal attack with no bonus, Advantage, or Disadvantage respectively
     *
-    * @param {Object}               data               The parameters passed into the method   
+    * @param {Object}               data               The parameters passed into the method
     * @param {Event|JQuery.Event}   [data.event]       The triggering event which initiated the roll
     * @param {string[]}             data.parts         The dice roll component parts, excluding the initial d20
     * @param {RollContext}          data.rollContext   The contextual data for this roll
@@ -162,10 +162,10 @@ export class DiceSFRPG {
     * @param {DialogOptions}        data.dialogOptions Modal dialog options
     */
     static async d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true, rollOptions = {},
-        critical = 20, fumble = 1, onClose, dialogOptions }) {
+        critical = 20, fumble = 1, chatMessage = true, onClose, dialogOptions }) {
 
-        flavor = `${title}${(flavor ? " - " + flavor : "")}`;
-        
+        flavor = `${title}${(flavor ? " <br> " + flavor : "")}`;
+
         if (!rollContext?.isValid()) {
             console.log(['Invalid rollContext', rollContext]);
             return null;
@@ -186,7 +186,7 @@ export class DiceSFRPG {
             buttons: buttons,
             defaultButton: "normal",
             title: title,
-            skipUI: (event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault') || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
+            skipUI: ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
             mainDie: "1d20",
             dialogOptions: dialogOptions,
             useRawStrings: false
@@ -228,7 +228,8 @@ export class DiceSFRPG {
 
             finalFormula.finalRoll = dieRoll + " + " + finalFormula.finalRoll;
             finalFormula.formula = dieRoll + " + " + finalFormula.formula;
-            finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ").trim();
+            finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
+                .trim();
             finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
             const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
 
@@ -255,17 +256,17 @@ export class DiceSFRPG {
             //         speaker: speaker,
             //         content: flavor
             //     };
-        
+
             //     ChatMessage.create(chatData, { chatBubble: true });
             // }
 
             const itemContext = rollContext.allContexts['item'];
-            const htmlData = [{ name: "rollNotes", value: itemContext?.data?.data?.rollNotes }];
+            const htmlData = [{ name: "rollNotes", value: itemContext?.system?.rollNotes }];
 
             let useCustomCard = game.settings.get("sfrpg", "useCustomChatCards");
             let errorToThrow = null;
-            if (useCustomCard) {
-                //Push the roll to the ChatBox
+            if (useCustomCard && chatMessage) {
+                // Push the roll to the ChatBox
                 const customData = {
                     title: flavor,
                     rollContext:  rollContext,
@@ -284,8 +285,8 @@ export class DiceSFRPG {
                     errorToThrow = error;
                 }
             }
-            
-            if (!useCustomCard) {
+
+            if (!useCustomCard && chatMessage) {
                 const messageData = {
                     flavor: flavor,
                     speaker: speaker,
@@ -319,7 +320,7 @@ export class DiceSFRPG {
     *
     * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
     * This chooses the default options of a normal attack with no bonus, Advantage, or Disadvantage respectively (Only available for d20 rolls)
-    * 
+    *
     * Returns a promise that will return an object containing roll and formula.
     *
     * @param {Object}             data               The parameters passed into the method.
@@ -338,7 +339,7 @@ export class DiceSFRPG {
     * @returns {Promise<RollResult>|Promise} Returns the roll's result or an empty promise.
     */
     static async createRoll({ event = new Event(''), rollFormula = null, parts, rollContext, title, mainDie = "d20", advantage = true, critical = 20, fumble = 1, breakdown = "", tags = [], dialogOptions, useRawStrings = false }) {
-        
+
         if (!rollContext?.isValid()) {
             console.log(['Invalid rollContext', rollContext]);
             return null;
@@ -359,7 +360,7 @@ export class DiceSFRPG {
             buttons: buttons,
             defaultButton: "normal",
             title: title,
-            skipUI: (event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault') || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
+            skipUI: ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
             mainDie: mainDie ? "1" + mainDie : null,
             dialogOptions: dialogOptions,
             useRawStrings: useRawStrings
@@ -389,7 +390,7 @@ export class DiceSFRPG {
                 const rollObject = Roll.create(finalFormula.finalRoll, { breakdown, tags, skipUI: true });
                 let roll = await rollObject.evaluate({async: true});
                 roll.options.rollMode = rollMode;
-    
+
                 // Flag critical thresholds
                 for (let d of roll.dice) {
                     if (d.faces === 20) {
@@ -408,28 +409,29 @@ export class DiceSFRPG {
                         resolve(null);
                         return;
                     }
-                    
+
                     if (mainDie) {
-                        const dieRoll = "1" + mainDie;
-                        if (mainDie == "d20") {
+                        let dieRoll = "1" + mainDie;
+                        if (mainDie === "d20") {
                             if (button === "Disadvantage") {
                                 dieRoll = "2d20kl";
                             } else if (button === "Advantage") {
                                 dieRoll = "2d20kh";
                             }
                         }
-        
+
                         finalFormula.finalRoll = dieRoll + " + " + finalFormula.finalRoll;
                         finalFormula.formula = dieRoll + " + " + finalFormula.formula;
                     }
 
-                    finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ").trim();
+                    finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
+                        .trim();
                     finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
-    
+
                     const rollObject = Roll.create(finalFormula.finalRoll, { breakdown, tags });
                     const roll = await rollObject.evaluate({async: true});
                     roll.options.rollMode = rollMode;
-            
+
                     // Flag critical thresholds
                     for (let d of roll.dice) {
                         if (d.faces === 20) {
@@ -437,7 +439,7 @@ export class DiceSFRPG {
                             d.options.fumble = fumble;
                         }
                     }
-    
+
                     resolve({roll: roll, formula: finalFormula});
                 });
             });
@@ -461,7 +463,7 @@ export class DiceSFRPG {
     * @param {onDamageDialogClosed} data.onClose       Callback for actions to take when the dialog form is closed
     * @param {Object}               data.dialogOptions Modal dialog options
     */
-    static async damageRoll({ event = new Event(''), parts, criticalData, rollContext, title, speaker, flavor, onClose, dialogOptions }) {
+    static async damageRoll({ event = new Event(''), parts, criticalData, rollContext, title, speaker, flavor, chatMessage = true, onClose, dialogOptions }) {
         flavor = `${title}${(flavor ? " - " + flavor : "")}`;
 
         if (!rollContext?.isValid()) {
@@ -476,7 +478,7 @@ export class DiceSFRPG {
         };
 
         const getDamageTypeForPart = (part) => {
-            if (part.types && !foundry.utils.isObjectEmpty(part.types)) {
+            if (part.types && !foundry.utils.isEmpty(part.types)) {
                 const filteredTypes = Object.entries(part.types).filter(type => type[1]);
                 const obj = { types: [], operator: "" };
 
@@ -492,7 +494,7 @@ export class DiceSFRPG {
 
         /** @type {DamageType[]} */
         let damageTypes = parts.reduce((acc, cur) => {
-            if (cur.types && !foundry.utils.isObjectEmpty(cur.types)) {
+            if (cur.types && !foundry.utils.isEmpty(cur.types)) {
                 const filteredTypes = Object.entries(cur.types).filter(type => type[1]);
                 const obj = { types: [], operator: "" };
 
@@ -514,7 +516,7 @@ export class DiceSFRPG {
             buttons: buttons,
             defaultButton: "normal",
             title: title,
-            skipUI: (event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault') || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
+            skipUI: ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
             mainDie: "",
             dialogOptions: dialogOptions,
             parts,
@@ -556,7 +558,7 @@ export class DiceSFRPG {
             }
         }
 
-        if (damageSections) {
+        if (damageSections.length > 0) {
             finalParts.splice(0, 0, "<damageSection>");
         }
 
@@ -583,7 +585,7 @@ export class DiceSFRPG {
             let damageTypeString = "";
             const tempParts = usedParts.reduce((arr, curr) => {
                 let obj = { formula: curr.formula, damage: 0, types: [], operator: curr.operator };
-                if (curr.types && !foundry.utils.isObjectEmpty(curr.types)) {
+                if (curr.types && !foundry.utils.isEmpty(curr.types)) {
                     for (const [key, isEnabled] of Object.entries(curr.types)) {
                         if (isEnabled) {
                             obj.types.push(key);
@@ -602,7 +604,7 @@ export class DiceSFRPG {
                         damageTypeString += ", ";
                     }
                     damageTypeString += shortText;
-                    
+
                     if (!tags.some(t => t.tag === tag && t.text === text))
                         tags.push({ tag: tag, text: text });
                 }
@@ -615,7 +617,7 @@ export class DiceSFRPG {
             //     for (const damageType of damageTypes) {
             //         const tag = "damage-type-" + damageType.types.join(`-${damageType.operator}-`);
             //         const text = damageType.types.map(type => SFRPG.damageTypes[type]).join(` ${SFRPG.damageTypeOperators[damageType.operator]} `);
-                    
+
             //         tags.push({ tag: tag, text: text });
             //     }
             // }
@@ -623,10 +625,10 @@ export class DiceSFRPG {
             const itemContext = rollContext.allContexts['item'];
             if (itemContext) {
                 /** Regular Weapons use data.properties for their properties */
-                if (itemContext.entity.data.data.properties) {
+                if (itemContext.entity.system.properties) {
                     try {
                         const props = [];
-                        for (const [key, isEnabled] of Object.entries(itemContext.entity.data.data.properties)) {
+                        for (const [key, isEnabled] of Object.entries(itemContext.entity.system.properties)) {
                             if (isEnabled) {
                                 tags.push({tag: `weapon-properties ${key}`, text: SFRPG.weaponProperties[key]});
                                 props.push(key);
@@ -637,14 +639,14 @@ export class DiceSFRPG {
                 }
 
                 /** Starship Weapons use data.special for their properties */
-                if (itemContext.entity.data.type === "starshipWeapon") {
-                    tags.push({tag: `starship-weapon-type ${itemContext.entity.data.data.weaponType}`, text: SFRPG.starshipWeaponTypes[itemContext.entity.data.data.weaponType]});
-                    htmlData.push({ name: "starship-weapon-type", value: itemContext.entity.data.data.weaponType });
+                if (itemContext.entity.type === "starshipWeapon") {
+                    tags.push({tag: `starship-weapon-type ${itemContext.entity.system.weaponType}`, text: SFRPG.starshipWeaponTypes[itemContext.entity.system.weaponType]});
+                    htmlData.push({ name: "starship-weapon-type", value: itemContext.entity.system.weaponType });
 
-                    if (itemContext.entity.data.data.special) {
+                    if (itemContext.entity.system.special) {
                         try {
                             const props = [];
-                            for (const [key, isEnabled] of Object.entries(itemContext.entity.data.data.special)) {
+                            for (const [key, isEnabled] of Object.entries(itemContext.entity.system.special)) {
                                 if (isEnabled) {
                                     tags.push({tag: `starship-weapon-properties ${key}`, text: SFRPG.starshipWeaponProperties[key]});
                                     props.push(key);
@@ -655,7 +657,7 @@ export class DiceSFRPG {
                     }
                 }
 
-                const specialMaterials = itemContext.entity.data.data.specialMaterials;
+                const specialMaterials = itemContext.entity.system.specialMaterials;
                 if (specialMaterials) {
                     for (const [material, isEnabled] of Object.entries(specialMaterials)) {
                         if (isEnabled) {
@@ -675,16 +677,17 @@ export class DiceSFRPG {
                     finalFormula.finalRoll = finalFormula.finalRoll + " + " + finalFormula.finalRoll;
                     finalFormula.formula = finalFormula.formula + " + " + finalFormula.formula;
                 }
-                
+
                 let tempFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": finalFlavor });
-                
+
                 if (criticalData !== undefined) {
                     if (criticalData?.effect?.trim().length > 0) {
                         tempFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavorWithEffect", { "title": finalFlavor, "criticalEffect": criticalData.effect });
                         tags.push({ tag: "critical-effect", text: game.i18n.format("SFRPG.Rolls.Dice.CriticalEffect", {"criticalEffect": criticalData.effect })});
                     }
 
-                    let critRoll = criticalData.parts?.filter(x => x.formula?.trim().length > 0).map(x => x.formula).join("+") ?? "";
+                    let critRoll = criticalData.parts?.filter(x => x.formula?.trim().length > 0).map(x => x.formula)
+                        .join("+") ?? "";
                     if (critRoll.length > 0) {
                         finalFormula.finalRoll = finalFormula.finalRoll + " + " + critRoll;
                         finalFormula.formula = finalFormula.formula + " + " + critRoll;
@@ -696,25 +699,42 @@ export class DiceSFRPG {
                 finalFlavor = tempFlavor;
             }
 
-            if (part) {
+            if (part?.name) {
                 finalFlavor += `: ${part.name}`;
                 if (part.partIndex) {
                     finalFlavor += ` (${part.partIndex})`;
                 }
-                //const originalTypes = duplicate(damageTypes);
-                //damageTypes = [getDamageTypeForPart(part)];
-                //console.log([originalTypes, damageTypes]);
+                // const originalTypes = duplicate(damageTypes);
+                // damageTypes = [getDamageTypeForPart(part)];
+                // console.log([originalTypes, damageTypes]);
             }
-            
-            finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ").trim();
+
+            finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
+                .trim();
             finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
             const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
 
             const rollObject = Roll.create(finalFormula.finalRoll, { tags: tags, breakdown: preparedRollExplanation });
             let roll = await rollObject.evaluate({async: true});
 
+            // CRB pg. 240, < 1 damage returns 1 non-lethal damage.
+            if (roll._total < 1) {
+                roll._total = 1;
+                const nonlethal = tags.find(e => e.tag === "weapon-properties nonlethal");
+
+                if (itemContext.type !== "starshipWeapon") {
+                    if (nonlethal) {
+                        nonlethal.text += ` (${game.i18n.localize("SFRPG.Damage.MinimumDamage")})`;
+                    } else {
+                        tags.push({ tag: "nonlethal", text: game.i18n.format("SFRPG.Damage.Types.Nonlethal") + ` (${game.i18n.localize("SFRPG.Damage.MinimumDamage")})`});
+                    }
+                } else {
+                    tags.push({ tag: "minimum-damage", text: game.i18n.localize("SFRPG.Damage.MinimumDamage") });
+                }
+            }
+
             // Associate the damage types for this attack to the first DiceTerm
-            // for the roll. 
+            // for the roll.
             const die = roll.dice && roll.dice.length > 0 ? roll.dice[0] : null;
 
             if (die) {
@@ -738,8 +758,8 @@ export class DiceSFRPG {
 
             let useCustomCard = game.settings.get("sfrpg", "useCustomChatCards");
             let errorToThrow = null;
-            if (useCustomCard) {
-                //Push the roll to the ChatBox
+            if (useCustomCard && chatMessage) {
+                // Push the roll to the ChatBox
                 const customData = {
                     title: finalFlavor,
                     rollContext:  rollContext,
@@ -752,8 +772,8 @@ export class DiceSFRPG {
                     damageTypeString: damageTypeString
                 };
 
-                if (itemContext && itemContext.entity.data.data.specialMaterials) {
-                    customData.specialMaterials = itemContext.entity.data.data.specialMaterials;
+                if (itemContext && itemContext.entity.system.specialMaterials) {
+                    customData.specialMaterials = itemContext.entity.system.specialMaterials;
                 }
 
                 try {
@@ -763,8 +783,8 @@ export class DiceSFRPG {
                     errorToThrow = error;
                 }
             }
-            
-            if (!useCustomCard) {
+
+            if (!useCustomCard && chatMessage) {
                 let rollContent = await roll.render({ htmlData: htmlData });
 
                 const messageData = {
@@ -787,11 +807,11 @@ export class DiceSFRPG {
                         }
                     };
 
-                    if (itemContext && itemContext.entity.data.data.specialMaterials) {
-                        messageData.flags.specialMaterials = itemContext.entity.data.data.specialMaterials;
+                    if (itemContext && itemContext.entity.system.specialMaterials) {
+                        messageData.flags.specialMaterials = itemContext.entity.system.specialMaterials;
                     }
                 }
-                
+
                 ChatMessage.create(messageData);
             }
 
@@ -822,7 +842,7 @@ export class DiceSFRPG {
 
     /**
      * Hightlight rolls that are considered critical successes or failures.
-     * 
+     *
      * @param {ChatMessage} message            The ChatMessage document being rendered
      * @param {JQuery}      html               The pending HTML as a jQuery object
      * @param {Object}      data               The input data provided for template rendering
@@ -837,8 +857,8 @@ export class DiceSFRPG {
      */
     static highlightCriticalSuccessFailure(message, html, data) {
         if (!message.isRoll || !message.isContentVisible) return;
-    
-        let roll = message.roll;
+
+        let roll = message.rolls[0];
         if (!roll.dice.length) return;
         for (let d of roll.dice) {
             if (d.faces === 20 && d.results.length === 1) {
@@ -850,7 +870,7 @@ export class DiceSFRPG {
 
     /**
      * Add damage types for damage rolls to the chat card.
-     * 
+     *
      * @param {ChatMessage} message            The ChatMessage document being rendered
      * @param {JQuery}      html               The pending HTML as a jQuery object
      * @param {Object}      data               The input data provided for template rendering
@@ -866,7 +886,7 @@ export class DiceSFRPG {
     static addDamageTypes(message, html, data) {
         if (!message.isRoll || !message.isContentVisible) return;
 
-        const roll = message.roll;
+        const roll = message.rolls[0];
         if (!(roll?.dice.length > 0)) return;
         for (const die of roll.dice) {
             if (die?.options?.isDamageRoll) {
@@ -957,5 +977,197 @@ export class DiceSFRPG {
         }
 
         return resolveResult;
+    }
+
+    /**
+     * The below is copied from the DnD5e system on Foundry (https://github.com/foundryvtt/dnd5e/blob/master/module/dice/simplify-roll-formula.mjs) under the MIT License.
+     *
+     * Copyright 2021 Andrew Clayton
+     * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+     * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+     * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+     */
+
+    /**
+     * A standardized helper function for simplifying the constant parts of a multipart roll formula.
+     *
+     * @param {string} formula                          The original roll formula.
+     * @param {object} [options]                        Formatting options.
+     * @param {boolean} [options.preserveFlavor=false]  Preserve flavor text in the simplified formula.
+     *
+     * @returns {string}  The resulting simplified formula.
+     */
+    static simplifyRollFormula(formula, { preserveFlavor = false } = {}) {
+        // Create a new roll and verify that the formula is valid before attempting simplification.
+        let roll;
+        try { roll = Roll.create(formula); } catch (err) { console.warn(`Unable to simplify formula '${formula}': ${err}`); }
+        Roll.validate(roll.formula);
+
+        // Optionally strip flavor annotations.
+        if ( !preserveFlavor ) roll.terms = Roll.parse(roll.formula.replace(RollTerm.FLAVOR_REGEXP, ""));
+
+        // Perform arithmetic simplification on the existing roll terms.
+        roll.terms = DiceSFRPG.#simplifyOperatorTerms(roll.terms);
+
+        if ( /[*/]/.test(roll.formula) ) {
+            return ( roll.isDeterministic ) && ( !/\[/.test(roll.formula) || !preserveFlavor )
+                // TODO: Sync rolls may or may not be going away? Idfk man
+                ? roll.evaluate({ async: false }).total.toString()
+                : roll.constructor.getFormula(roll.terms);
+        }
+
+        // Flatten the roll formula and eliminate string terms.
+        roll.terms = DiceSFRPG.#expandParentheticalTerms(roll.terms);
+        roll.terms = Roll.simplifyTerms(roll.terms);
+
+        // Group terms by type and perform simplifications on various types of roll term.
+        let { poolTerms, diceTerms, mathTerms, numericTerms } = DiceSFRPG.#groupTermsByType(roll.terms);
+        numericTerms = DiceSFRPG.#simplifyNumericTerms(numericTerms ?? []);
+        diceTerms = DiceSFRPG.#simplifyDiceTerms(diceTerms ?? []);
+
+        // Recombine the terms into a single term array and remove an initial + operator if present.
+        const simplifiedTerms = [diceTerms, poolTerms, mathTerms, numericTerms].flat().filter(Boolean);
+        if ( simplifiedTerms[0]?.operator === "+" ) simplifiedTerms.shift();
+        return roll.constructor.getFormula(simplifiedTerms);
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+    * A helper function to perform arithmetic simplification and remove redundant operator terms.
+    * @param {RollTerm[]} terms  An array of roll terms.
+    * @returns {RollTerm[]}      A new array of roll terms with redundant operators removed.
+    */
+    static #simplifyOperatorTerms(terms) {
+        return terms.reduce((acc, term) => {
+            const prior = acc[acc.length - 1];
+            const ops = new Set([prior?.operator, term.operator]);
+
+            // If one of the terms is not an operator, add the current term as is.
+            if ( ops.has(undefined) ) acc.push(term);
+
+            // Replace consecutive "+ -" operators with a "-" operator.
+            else if ( (ops.has("+")) && (ops.has("-")) ) acc.splice(-1, 1, new OperatorTerm({ operator: "-" }));
+
+            // Replace double "-" operators with a "+" operator.
+            else if ( (ops.has("-")) && (ops.size === 1) ) acc.splice(-1, 1, new OperatorTerm({ operator: "+" }));
+
+            // Don't include "+" operators that directly follow "+", "*", or "/". Otherwise, add the term as is.
+            else if ( !ops.has("+") ) acc.push(term);
+
+            return acc;
+        }, []);
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+    * A helper function for combining unannotated numeric terms in an array into a single numeric term.
+    * @param {object[]} terms  An array of roll terms.
+    * @returns {object[]}      A new array of terms with unannotated numeric terms combined into one.
+    */
+    static #simplifyNumericTerms(terms) {
+        const simplified = [];
+        const { annotated, unannotated } = DiceSFRPG.#separateAnnotatedTerms(terms);
+
+        // Combine the unannotated numerical bonuses into a single new NumericTerm.
+        if ( unannotated.length ) {
+            const staticBonus = Roll.safeEval(Roll.getFormula(unannotated));
+            if ( staticBonus === 0 ) return [...annotated];
+
+            // If the staticBonus is greater than 0, add a "+" operator so the formula remains valid.
+            if ( staticBonus > 0 ) simplified.push(new OperatorTerm({ operator: "+"}));
+            simplified.push(new NumericTerm({ number: staticBonus }));
+
+        }
+        return [...simplified, ...annotated];
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+    * A helper function to group dice of the same size and sign into single dice terms.
+    * @param {object[]} terms  An array of DiceTerms and associated OperatorTerms.
+    * @returns {object[]}      A new array of simplified dice terms.
+    */
+    static #simplifyDiceTerms(terms) {
+        const { annotated, unannotated } = DiceSFRPG.#separateAnnotatedTerms(terms);
+
+        // Split the unannotated terms into different die sizes and signs
+        const diceQuantities = unannotated.reduce((obj, term, i) => {
+            if ( term instanceof OperatorTerm ) return obj;
+            const key = `${unannotated[i - 1].operator}${term.faces}`;
+            obj[key] = (obj[key] ?? 0) + term.number;
+            return obj;
+        }, {});
+
+        // Add new die and operator terms to simplified for each die size and sign
+        const simplified = Object.entries(diceQuantities).flatMap(([key, number]) => ([
+            new OperatorTerm({ operator: key.charAt(0) }),
+            new Die({ number, faces: parseInt(key.slice(1)) })
+        ]));
+        return [...simplified, ...annotated];
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+    * A helper function to extract the contents of parenthetical terms into their own terms.
+    * @param {object[]} terms  An array of roll terms.
+    * @returns {object[]}      A new array of terms with no parenthetical terms.
+    */
+    static #expandParentheticalTerms(terms) {
+        terms = terms.reduce((acc, term) => {
+            if ( term instanceof ParentheticalTerm ) {
+                if ( term.isDeterministic ) term = new NumericTerm({ number: Roll.safeEval(term.term) });
+                else {
+                    const subterms = new Roll(term.term).terms;
+                    term = DiceSFRPG.#expandParentheticalTerms(subterms);
+                }
+            }
+            acc.push(term);
+            return acc;
+        }, []);
+        return DiceSFRPG.#simplifyOperatorTerms(terms.flat());
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+    * A helper function to group terms into PoolTerms, DiceTerms, MathTerms, and NumericTerms.
+    * MathTerms are included as NumericTerms if they are deterministic.
+    * @param {RollTerm[]} terms  An array of roll terms.
+    * @returns {object}          An object mapping term types to arrays containing roll terms of that type.
+    */
+    static #groupTermsByType(terms) {
+        // Add an initial operator so that terms can be rearranged arbitrarily.
+        if ( !(terms[0] instanceof OperatorTerm) ) terms.unshift(new OperatorTerm({ operator: "+" }));
+
+        return terms.reduce((obj, term, i) => {
+            let type;
+            if ( term instanceof DiceTerm ) type = DiceTerm;
+            else if ( (term instanceof MathTerm) && (term.isDeterministic) ) type = NumericTerm;
+            else type = term.constructor;
+            const key = `${type.name.charAt(0).toLowerCase()}${type.name.substring(1)}s`;
+
+            // Push the term and the preceding OperatorTerm.
+            (obj[key] = obj[key] ?? []).push(terms[i - 1], term);
+            return obj;
+        }, {});
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+    * A helper function to separate annotated terms from unannotated terms.
+    * @param {object[]} terms     An array of DiceTerms and associated OperatorTerms.
+    * @returns {Array | Array[]}  A pair of term arrays, one containing annotated terms.
+    */
+    static #separateAnnotatedTerms(terms) {
+        return terms.reduce((obj, curr, i) => {
+            if ( curr instanceof OperatorTerm ) return obj;
+            obj[curr.flavor ? "annotated" : "unannotated"].push(terms[i - 1], curr);
+            return obj;
+        }, { annotated: [], unannotated: [] });
     }
 }

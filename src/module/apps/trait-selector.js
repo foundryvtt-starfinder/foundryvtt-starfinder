@@ -1,6 +1,6 @@
 /**
  * A specialized form used to select damage or condition types which appl to an Actor
- * 
+ *
  * @type {FormApplication}
  */
 export class TraitSelectorSFRPG extends FormApplication {
@@ -10,7 +10,7 @@ export class TraitSelectorSFRPG extends FormApplication {
         options.id = "trait-selector";
         options.classes = ["sfrpg"];
         options.title = "Actor Trait Selection";
-        options.template = "systems/sfrpg/templates/apps/trait-selector.html";
+        options.template = "systems/sfrpg/templates/apps/trait-selector.hbs";
         options.width = 320;
         options.height = "auto";
 
@@ -19,7 +19,7 @@ export class TraitSelectorSFRPG extends FormApplication {
 
     /**
      * Return a reference to the target attribute
-     * 
+     *
      * @type {String}
      */
     get attribute() {
@@ -28,11 +28,11 @@ export class TraitSelectorSFRPG extends FormApplication {
 
     /**
      * Provide data to the HTML template for rendering
-     * 
+     *
      * @returns {Object}
      */
     getData() {
-        let attr = getProperty(this.object.data, this.attribute);
+        let attr = getProperty(this.object, this.attribute);
         if (typeof attr.value === "string") attr.value = this.constructor._backCompat(attr.value, this.options.choices);
 
         const choices = duplicate(this.options.choices);
@@ -70,7 +70,7 @@ export class TraitSelectorSFRPG extends FormApplication {
 
     /**
      * Support backwards compatability for old-style string separated traits
-     * 
+     *
      * @param {String} current The current value
      * @param {Array} choices The choices
      * @returns {Array}
@@ -80,7 +80,7 @@ export class TraitSelectorSFRPG extends FormApplication {
         if (!current || current.length === 0) return [];
         current = current.split(/[\s,]/).filter(t => !!t);
         return current.map(val => {
-            for (let [k,v] of Object.entries(choices)) {
+            for (let [k, v] of Object.entries(choices)) {
                 if (val === v) return k;
             }
             return null;
@@ -89,7 +89,7 @@ export class TraitSelectorSFRPG extends FormApplication {
 
     /**
      * Update the Actor object with new trait data processed from the form
-     * 
+     *
      * @param {Event} event The event that triggers the update
      * @param {Object} formData The data from the form
      * @private
@@ -97,7 +97,7 @@ export class TraitSelectorSFRPG extends FormApplication {
     _updateObject(event, formData) {
         let choices = [];
 
-        if (this.attribute !== "data.traits.dr") {
+        if (this.attribute !== "system.traits.dr") {
             for (let [k, v] of Object.entries(formData)) {
                 if ((k !== 'custom') && v) choices.push(k);
             }
@@ -112,11 +112,12 @@ export class TraitSelectorSFRPG extends FormApplication {
                 return obj;
             }, {});
 
-            choices = Object.entries(resistances).filter(e => e[1][0]).reduce((arr, resistance) => {
-                arr.push({[resistance[0]]: resistance[1][1]});
+            choices = Object.entries(resistances).filter(e => e[1][0])
+                .reduce((arr, resistance) => {
+                    arr.push({[resistance[0]]: resistance[1][1]});
 
-                return arr;
-            }, []);
+                    return arr;
+                }, []);
         }
 
         this.object.update({

@@ -2,89 +2,14 @@
   "_id": "em52Qb4GWu96wvl9",
   "name": "Heavy Walker",
   "type": "vehicle",
-  "data": {
-    "attributes": {
-      "type": "land",
-      "controlSkill": "pil",
-      "cover": "total",
-      "dimensions": {
-        "height": "30",
-        "length": "40",
-        "width": "20"
-      },
-      "eac": {
-        "value": 29
-      },
-      "expansionBays": {
-        "value": 2
-      },
-      "hardness": 18,
-      "hp": {
-        "max": 280,
-        "threshold": 140,
-        "value": 280
-      },
-      "kac": {
-        "value": 31
-      },
-      "modifiers": {
-        "athletics": "",
-        "attackFullSpeed": "-5",
-        "attackMoving": "-3",
-        "attackStopped": "0",
-        "piloting": "-5",
-        "survival": 0
-      },
-      "size": "gargantuan",
-      "special": [],
-      "speed": {
-        "type": "",
-        "drive": "30 ft (land), 20 ft (climb)",
-        "full": "550 ft (land), 350 ft (climb)",
-        "mph": "65 mph (land), 40 mph (climb)"
-      },
-      "systems": []
-    },
-    "conditions": {},
-    "crew": {
-      "complement": {
-        "actorIds": [],
-        "limit": 4
-      },
-      "passenger": {
-        "actorIds": [],
-        "limit": 20
-      },
-      "pilot": {
-        "actorIds": [],
-        "limit": 1
-      },
-      "useNPCCrew": false
-    },
-    "details": {
-      "description": {
-        "chat": "",
-        "unidentified": "",
-        "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">Striding over battlefields and hostile terrain like a titanic spider, this eight-legged walker can serve as a mobile base of operations for platoons on long-term or remote assignments. Its four articulated crane arms allow it to retrieve or offload supplies and personnel without the risk of lowering its armored body to ground level.</span></p>"
-      },
-      "level": 15,
-      "price": 310000,
-      "source": "AP #24 pg. 52"
-    },
-    "hangarBay": {
-      "actorIds": [],
-      "limit": 0
-    }
-  },
-  "effects": [],
-  "flags": {},
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "_id": "6hYEGXGbezExRSQD",
       "name": "Collision (Ram)",
       "type": "vehicleAttack",
-      "data": {
+      "img": "icons/svg/mystery-man.svg",
+      "system": {
         "type": "",
         "abilityMods": {
           "parts": []
@@ -108,7 +33,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>As a full action, you can pilot a vehicle at up to its full speed in a straight line at its current heading and try to ram one creature or object at the end of the movement, dealing double the vehicle&rsquo;s collision damage to the target and half the vehicle&rsquo;s collision damage to your vehicle. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see page 228).</p>\n<p>Movement during a ram action has all the same restrictions as the race action and requires the same Piloting checks. If you fail any Piloting check during the movement, you fail to ram your target.</p>\n<p>&nbsp;</p>\n<p>If the target of the ram action is a creature, it can attempt a Reflex saving throw against the vehicle&rsquo;s collision DC to avoid being hit. If the target of the ram action is another vehicle, the pilot of the defending vehicle can attempt a Piloting check to avoid being hit, with a DC equal to the result of your Piloting check. The attacker wins ties.</p>"
+          "value": "<p>As a full action, you can pilot a vehicle at up to its full speed in a straight line at its current heading and try to ram one creature or object at the end of the movement, dealing double the vehicle’s collision damage to the target and half the vehicle’s collision damage to your vehicle. A vehicle’s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see page 228).</p>\n<p>Movement during a ram action has all the same restrictions as the race action and requires the same Piloting checks. If you fail any Piloting check during the movement, you fail to ram your target.</p>\n<p>If the target of the ram action is a creature, it can attempt a Reflex saving throw against the vehicle’s collision DC to avoid being hit. If the target of the ram action is another vehicle, the pilot of the defending vehicle can attempt a Piloting check to avoid being hit, with a DC equal to the result of your Piloting check. The attacker wins ties.</p>"
         },
         "modifiers": [],
         "save": {
@@ -117,17 +42,14 @@
           "descriptor": "negate"
         },
         "source": ""
-      },
-      "effects": [],
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "sort": 100000
+      }
     },
     {
       "_id": "LS40UB61zorcVeSs",
       "name": "Collision (Run Over)",
       "type": "vehicleAttack",
-      "data": {
+      "img": "icons/svg/mystery-man.svg",
+      "system": {
         "type": "",
         "abilityMods": {
           "parts": []
@@ -151,7 +73,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>As a full action, you can pilot a vehicle at up to double its drive speed and run over any creatures at least two size categories smaller than the vehicle during this movement. Those creatures take bludgeoning damage equal to the vehicle&rsquo;s collision damage, but can each attempt a Reflex save against the vehicle&rsquo;s collision DC to take half damage. Roll the damage only once and apply it to each creature, rather than rolling separately for each. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see Vehicles on page 228).</p>\n<p>When you take a run over action, the vehicle takes damage equal to half the damage rolled for each creature it runs over. If the vehicle becomes unable to proceed due to this damage, it ceases moving. You can still set the vehicle&rsquo;s heading at the end of this movement as normal.</p>\n<p>&nbsp;</p>\n<p>A vehicle taking the run over action can damage a creature no more than once per round, no matter how many times its movement takes it over a target creature. The vehicle can run over objects of the appropriate size with the same effects, though they don&rsquo;t receive saving throws unless they are piloted or otherwise animate.</p>"
+          "value": "<p>As a full action, you can pilot a vehicle at up to double its drive speed and run over any creatures at least two size categories smaller than the vehicle during this movement. Those creatures take bludgeoning damage equal to the vehicle’s collision damage, but can each attempt a Reflex save against the vehicle’s collision DC to take half damage. Roll the damage only once and apply it to each creature, rather than rolling separately for each. A vehicle’s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see Vehicles on page 228).</p>\n<p>When you take a run over action, the vehicle takes damage equal to half the damage rolled for each creature it runs over. If the vehicle becomes unable to proceed due to this damage, it ceases moving. You can still set the vehicle’s heading at the end of this movement as normal.</p>\n<p>A vehicle taking the run over action can damage a creature no more than once per round, no matter how many times its movement takes it over a target creature. The vehicle can run over objects of the appropriate size with the same effects, though they don’t receive saving throws unless they are piloted or otherwise animate.</p>"
         },
         "modifiers": [],
         "save": {
@@ -160,11 +82,7 @@
           "descriptor": "half"
         },
         "source": ""
-      },
-      "effects": [],
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "sort": 0
+      }
     },
     {
       "_id": "BfaPeG6WddAUxSRj",
@@ -182,7 +100,58 @@
         false,
         false
       ],
-      "data": {
+      "equipment": [
+        false,
+        false
+      ],
+      "fusion": [
+        true,
+        false
+      ],
+      "goods": [
+        false,
+        true
+      ],
+      "hybrid": [
+        false,
+        false
+      ],
+      "img": "systems/sfrpg/icons/equipment/weapons/advanced_reaction_cannon.webp",
+      "magic": [
+        false,
+        false
+      ],
+      "shield": [
+        false,
+        false
+      ],
+      "spell": [
+        false,
+        false
+      ],
+      "storage": {
+        "type": [
+          "slot",
+          "slot"
+        ],
+        "affectsEncumbrance": [
+          true,
+          true
+        ],
+        "amount": [
+          "14",
+          "1"
+        ],
+        "subtype": [
+          "fusion",
+          ""
+        ],
+        "weightProperty": [
+          "level",
+          ""
+        ]
+      },
+      "system": {
         "type": "",
         "ability": "dex",
         "abilityMods": {
@@ -407,60 +376,6 @@
         "weaponCategory": "projectile",
         "weaponType": "heavy"
       },
-      "effects": [],
-      "equipment": [
-        false,
-        false
-      ],
-      "flags": {},
-      "fusion": [
-        true,
-        false
-      ],
-      "goods": [
-        false,
-        true
-      ],
-      "hybrid": [
-        false,
-        false
-      ],
-      "img": "systems/sfrpg/icons/equipment/weapons/advanced_reaction_cannon.jpg",
-      "magic": [
-        false,
-        false
-      ],
-      "shield": [
-        false,
-        false
-      ],
-      "sort": 100000,
-      "spell": [
-        false,
-        false
-      ],
-      "storage": {
-        "type": [
-          "slot",
-          "slot"
-        ],
-        "affectsEncumbrance": [
-          true,
-          true
-        ],
-        "amount": [
-          "14",
-          "1"
-        ],
-        "subtype": [
-          "fusion",
-          ""
-        ],
-        "weightProperty": [
-          "level",
-          ""
-        ]
-      },
       "technological": [
         false,
         false
@@ -490,7 +405,8 @@
       "_id": "UBudHVtfY4fQoj5q",
       "name": "Autopilot",
       "type": "vehicleSystem",
-      "data": {
+      "img": "icons/svg/mystery-man.svg",
+      "system": {
         "type": "",
         "abilityMods": {
           "parts": []
@@ -507,7 +423,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p><span id=\"ctl00_MainContent_DetailedOutput\">Some vehicles have an autopilot AI that can control the vehicle in place of an actual pilot. You can engage or disengage an autopilot as a swift action. You can input a destination into an autopilot as a move action, and the autopilot attempts to reach that location if doing so is possible (provided the autopilot isn&rsquo;t locked by a passcode or otherwise programmed not to obey).<br /><br />A vehicle is considered controlled when the autopilot is engaged. An autopilot&rsquo;s actions are dictated by the GM, and an autopilot can take any of the actions to pilot the vehicle that an actual pilot can. However, autopilots tend to be cautious, rarely risking the integrity of the vehicle and never attempting to ram or run over a target unless specifically programmed as a war machine (indicated in its stat block).<br /><br />The Systems entry in a vehicle&rsquo;s statistics (see page 228) lists the autopilot&rsquo;s modifier to the Piloting skill. For Piloting checks attempted for the Autopilot, apply this modifier first and then apply the vehicle&rsquo;s modifier (listed in the vehicle&rsquo;s Modifiers entry) to the Piloting checks.</span></p>"
+          "value": "<p>Some vehicles have an autopilot AI that can control the vehicle in place of an actual pilot. You can engage or disengage an autopilot as a swift action. You can input a destination into an autopilot as a move action, and the autopilot attempts to reach that location if doing so is possible (provided the autopilot isn’t locked by a passcode or otherwise programmed not to obey).</p>\n<p>A vehicle is considered controlled when the autopilot is engaged. An autopilot’s actions are dictated by the GM, and an autopilot can take any of the actions to pilot the vehicle that an actual pilot can. However, autopilots tend to be cautious, rarely risking the integrity of the vehicle and never attempting to ram or run over a target unless specifically programmed as a war machine (indicated in its stat block).</p>\n<p>The Systems entry in a vehicle’s statistics (see page 228) lists the autopilot’s modifier to the Piloting skill. For Piloting checks attempted for the Autopilot, apply this modifier first and then apply the vehicle’s modifier (listed in the vehicle’s Modifiers entry) to the Piloting checks.</p>"
         },
         "isActive": false,
         "piloting": {
@@ -515,17 +431,14 @@
           "usedAsPilot": true
         },
         "source": "CRB pg. 280"
-      },
-      "effects": [],
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "sort": 1200000
+      }
     },
     {
       "_id": "f7G0yGcSlOjefxCn",
       "name": "Enhanced sensors",
       "type": "vehicleSystem",
-      "data": {
+      "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.webp",
+      "system": {
         "type": "",
         "abilityMods": {
           "parts": []
@@ -554,17 +467,14 @@
           "usedForSenses": true
         },
         "source": ""
-      },
-      "effects": [],
-      "flags": {},
-      "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.png",
-      "sort": 400000
+      }
     },
     {
       "_id": "iwPsVEw4TeyjzBpw",
       "name": "Manipulators (4)",
       "type": "vehicleSystem",
-      "data": {
+      "img": "icons/svg/mystery-man.svg",
+      "system": {
         "type": "",
         "abilityMods": {
           "parts": []
@@ -581,7 +491,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>This vehicle is fitted with the listed number of manipulators.</p>\n<h4>&nbsp;</h4>\n<p>Some vehicles are fitted with appendages ending in manipulating mechanisms such as digits and pincers. Such a vehicle is treated as a tall creature of the same size category for the purpose of determining the reach of its manipulators, and each manipulator can hold up to 10 &times; the vehicle&rsquo;s item level in bulk. Manipulators are generally too large and clumsy for delicate tasks such as operating equipment designed for Medium and smaller creatures.<br />A manipulator&rsquo;s EAC is equal to 4 + the vehicle&rsquo;s EAC and its KAC is equal to the 4 + the vehicle&rsquo;s KAC. It has Hit Points equal to 3 &times; the item level of the vehicle and hardness equal to half the vehicle&rsquo;s hardness. A manipulator that has lost at least half of its total Hit Points gains the broken condition, imposing a &ndash;2 penalty to Piloting checks to control the manipulator and to the DC of checks to escape the manipulator. Damage done to a vehicle&rsquo;s manipulator doesn&rsquo;t affect the vehicle&rsquo;s Hit Point total.</p>\n<p><br />A vehicle&rsquo;s pilot (or one of its complement) can control a manipulator in the following ways, though only one person can control a manipulator in a round.</p>\n<h5>Crush</h5>\n<p>As a standard action, you direct the manipulator to clamp tighter around a held creature or object (see Grab below), dealing half the vehicle&rsquo;s collision damage. The creature or object can halve this damage by succeeding at a Fortitude saving throw (DC = 10 + the vehicle item level).</p>\n<h5>Grab</h5>\n<p>As a standard action, you direct the manipulator to grab at a target within its reach by attempting a Piloting check (DC = 10 + the target&rsquo;s KAC). On a success, the target is @Compendium[sfrpg.conditions.4AkWDHGM6gHDepHN]{Grappled} by the manipulator. If the target is a creature, it gains soft cover and the @Compendium[sfrpg.conditions.4AkWDHGM6gHDepHN]{Grappled} condition while held by the manipulator. If the result of your Piloting check exceeded the DC by 5 or more, the creature is instead @Compendium[sfrpg.conditions.XgK4EdO5D3Fj3iWz]{Pinned}. A creature held by a manipulator can use the escape action to free itself by succeeding at an Acrobatics check (DC = 10 + the vehicle&rsquo;s KAC), but it can&rsquo;t grapple the vehicle in return.<br />If the target of a successful grab is another vehicle, both vehicles are considered to be connected by a rigid tether (see Tethered Vehicles below).</p>\n<h5>Slam</h5>\n<p>As a standard action, you direct the manipulator to strike a target within its reach by attempting a Piloting check (DC = 5 + the target&rsquo;s KAC). On a success, the manipulator deals half the vehicle&rsquo;s collision damage to the target.<br />If the target of the slam action is a creature, it can attempt a Reflex saving throw against the vehicle&rsquo;s collision DC to halve the damage. If the target of the slam action is another vehicle, the pilot of the defending vehicle can attempt a Piloting check to halve the damage, with a DC equal to the result of your Piloting check.</p>"
+          "value": "<p>This vehicle is fitted with the listed number of manipulators.</p>\n<h4>&nbsp;</h4>\n<p>Some vehicles are fitted with appendages ending in manipulating mechanisms such as digits and pincers. Such a vehicle is treated as a tall creature of the same size category for the purpose of determining the reach of its manipulators, and each manipulator can hold up to 10 × the vehicle’s item level in bulk. Manipulators are generally too large and clumsy for delicate tasks such as operating equipment designed for Medium and smaller creatures.</p>\n<p>A manipulator’s EAC is equal to 4 + the vehicle’s EAC and its KAC is equal to the 4 + the vehicle’s KAC. It has Hit Points equal to 3 × the item level of the vehicle and hardness equal to half the vehicle’s hardness. A manipulator that has lost at least half of its total Hit Points gains the broken condition, imposing a –2 penalty to Piloting checks to control the manipulator and to the DC of checks to escape the manipulator. Damage done to a vehicle’s manipulator doesn’t affect the vehicle’s Hit Point total.</p>\n<p>A vehicle’s pilot (or one of its complement) can control a manipulator in the following ways, though only one person can control a manipulator in a round.</p>\n<h5>Crush</h5>\n<p>As a standard action, you direct the manipulator to clamp tighter around a held creature or object (see Grab below), dealing half the vehicle’s collision damage. The creature or object can halve this damage by succeeding at a Fortitude saving throw (DC = 10 + the vehicle item level).</p>\n<h5>Grab</h5>\n<p>As a standard action, you direct the manipulator to grab at a target within its reach by attempting a Piloting check (DC = 10 + the target’s KAC). On a success, the target is @UUID[Compendium.sfrpg.conditions.4AkWDHGM6gHDepHN]{Grappled} by the manipulator. If the target is a creature, it gains soft cover and the @UUID[Compendium.sfrpg.conditions.4AkWDHGM6gHDepHN]{Grappled} condition while held by the manipulator. If the result of your Piloting check exceeded the DC by 5 or more, the creature is instead @UUID[Compendium.sfrpg.conditions.XgK4EdO5D3Fj3iWz]{Pinned}. A creature held by a manipulator can use the escape action to free itself by succeeding at an Acrobatics check (DC = 10 + the vehicle’s KAC), but it can’t grapple the vehicle in return.</p>\n<p>If the target of a successful grab is another vehicle, both vehicles are considered to be connected by a rigid tether (see Tethered Vehicles below).</p>\n<h5>Slam</h5>\n<p>As a standard action, you direct the manipulator to strike a target within its reach by attempting a Piloting check (DC = 5 + the target’s KAC). On a success, the manipulator deals half the vehicle’s collision damage to the target.</p>\n<p>If the target of the slam action is a creature, it can attempt a Reflex saving throw against the vehicle’s collision DC to halve the damage. If the target of the slam action is another vehicle, the pilot of the defending vehicle can attempt a Piloting check to halve the damage, with a DC equal to the result of your Piloting check.</p>"
         },
         "isActive": false,
         "piloting": {
@@ -589,42 +499,142 @@
           "usedAsPilot": false
         },
         "source": ""
-      },
-      "effects": [],
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "sort": 600000
+      }
     }
   ],
-  "token": {
+  "prototypeToken": {
     "name": "Heavy Walker",
-    "actorId": "Rh2TTiemLK0T43qx",
     "actorLink": false,
-    "bar1": {},
-    "bar2": {},
-    "brightLight": 0,
-    "brightSight": 0,
-    "dimLight": 0,
-    "dimSight": 0,
-    "displayBars": 0,
-    "displayName": 0,
-    "disposition": -1,
-    "flags": {},
-    "height": 1,
-    "img": "icons/svg/mystery-man.svg",
-    "lightAlpha": 1,
-    "lightAngle": 360,
-    "lightAnimation": {
-      "intensity": 5,
-      "speed": 5
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": ""
+    },
+    "displayBars": 20,
+    "displayName": 20,
+    "disposition": 0,
+    "height": 4,
+    "light": {
+      "alpha": 0.5,
+      "angle": 360,
+      "animation": {
+        "type": null,
+        "intensity": 5,
+        "reverse": false,
+        "speed": 5
+      },
+      "attenuation": 0.5,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "contrast": 0,
+      "darkness": {
+        "max": 1,
+        "min": 0
+      },
+      "dim": 0,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "shadows": 0
     },
     "lockRotation": false,
     "randomImg": false,
     "rotation": 0,
     "scale": 1,
-    "sightAngle": 360,
-    "tint": null,
-    "vision": false,
-    "width": 1
+    "sight": {
+      "angle": 360,
+      "attenuation": 0.1,
+      "brightness": 1,
+      "color": null,
+      "contrast": 0,
+      "enabled": false,
+      "range": 0,
+      "saturation": 0,
+      "visionMode": "basic"
+    },
+    "texture": {
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": null
+    },
+    "width": 4
+  },
+  "system": {
+    "attributes": {
+      "type": "land",
+      "controlSkill": "pil",
+      "cover": "total",
+      "dimensions": {
+        "height": "30",
+        "length": "40",
+        "width": "20"
+      },
+      "eac": {
+        "value": 29
+      },
+      "expansionBays": {
+        "value": 2
+      },
+      "hardness": 18,
+      "hp": {
+        "max": 280,
+        "threshold": 140,
+        "value": 280
+      },
+      "kac": {
+        "value": 31
+      },
+      "modifiers": {
+        "athletics": "",
+        "attackFullSpeed": "-5",
+        "attackMoving": "-3",
+        "attackStopped": "0",
+        "piloting": "-5",
+        "survival": 0
+      },
+      "size": "gargantuan",
+      "special": [],
+      "speed": {
+        "type": "",
+        "drive": "30 ft (land), 20 ft (climb)",
+        "full": "550 ft (land), 350 ft (climb)",
+        "mph": "65 mph (land), 40 mph (climb)"
+      },
+      "systems": []
+    },
+    "conditions": {},
+    "crew": {
+      "complement": {
+        "actorIds": [],
+        "limit": 4
+      },
+      "passenger": {
+        "actorIds": [],
+        "limit": 20
+      },
+      "pilot": {
+        "actorIds": [],
+        "limit": 1
+      },
+      "useNPCCrew": false
+    },
+    "details": {
+      "description": {
+        "chat": "",
+        "unidentified": "",
+        "value": "<p>Striding over battlefields and hostile terrain like a titanic spider, this eight-legged walker can serve as a mobile base of operations for platoons on long-term or remote assignments. Its four articulated crane arms allow it to retrieve or offload supplies and personnel without the risk of lowering its armored body to ground level.</p>"
+      },
+      "level": 15,
+      "price": 310000,
+      "source": "AP #24 pg. 52"
+    },
+    "hangarBay": {
+      "actorIds": [],
+      "limit": 0
+    }
   }
 }

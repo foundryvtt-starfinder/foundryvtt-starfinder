@@ -2,12 +2,14 @@
   "_id": "HJ7rwsCh1ge3odiy",
   "name": "Arms Expert (Ex)",
   "type": "feat",
-  "data": {
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
     "type": "",
     "ability": null,
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "",
@@ -29,10 +31,13 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@Compendium[sfrpg.class-features.rpaon3jF3nCe5eP9]{Theorem (Ex)}</p>\n<p><span id=\"ctl00_MainContent_DetailedOutput\">If you have the weapon specialization class feature, add your full class level to damage (rather than half your class level) with small arms and weapons with which you have gained proficiency through the injection expert class feature.</span></p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.rpaon3jF3nCe5eP9]{Theorem (Ex)}</p>\n<p>If you have the @UUID[Compendium.sfrpg.class-features.mgtX5UHMPwvNkUUi]{Weapon Specialization (Ex) (Biohacker)} class feature, add your full class level to damage (rather than half your class level) with small arms and weapons with which you have gained proficiency through the @UUID[Compendium.sfrpg.class-features.IPDN3VDLTrrMFE2g]{Injection Expert (Ex)} class feature.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -40,7 +45,28 @@
       "value": null
     },
     "formula": "",
-    "modifiers": [],
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "64b6d704-4442-4aac-9134-3af7b6d9f22f",
+        "name": "Arms Expert - Injection Weapon or Small Arm",
+        "type": "untyped",
+        "condition": "",
+        "container": {
+          "actorId": "k3DwFxswmxRmNHjj",
+          "itemId": "k2HXOmd4VLHOVAhY"
+        },
+        "effectType": "weapon-property-damage",
+        "enabled": true,
+        "max": 0,
+        "modifier": "ceil(@details.level.value/2)",
+        "modifierType": "formula",
+        "notes": "Enable only if you gained proficiency with this weapon from Injection Expert, OR if the weapon is a Small Arm.",
+        "source": "COM pg. 47",
+        "subtab": "misc",
+        "valueAffected": "injection"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -52,6 +78,7 @@
       "value": null
     },
     "requirements": "8th Level",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
@@ -67,11 +94,5 @@
       "per": null,
       "value": 0
     }
-  },
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "permission": {
-    "QqVQDajn5ZN4kl25": 3,
-    "default": 0
   }
 }

@@ -44,6 +44,7 @@
         "TypeStarshipsecuritysystem": "Espaçonave Sistemas de Segurança",
         "TypeStarshipsensor": "Espaçonave Sensor",
         "TypeStarshipshield": "Espaçonave Escudos",
+        "TypeStarshipspecialability": "Starship Special Ability",
         "TypeStarshipthruster": "Espaçonave Propulsor",
         "TypeStarshipweapon": "Espaçonave Armas",
         "TypeTechnological": "Tecnologica",
@@ -63,7 +64,7 @@
         "ACTooltipNotProficientMod": "Penalidade por não proficiencia em armadura: {profMod}",
         "ACTooltipNotProficientShield": "Penalidade por não proficiencia em escudo: {profMod}",
         "ACTooltipShieldACMod": "Modificador Escudo: {shield} ({name})",
-        "ACvsCombatManeuversLabel": "CMC",
+        "ACvsCombatManeuversLabel": "CAC + 8",
         "ACvsCombatManeuversTitle": "CA vs Manobras de Combate",
         "AbilityActivationTypesDay": "Dia",
         "AbilityActivationTypesFull": "Ação Completa",
@@ -74,6 +75,7 @@
         "AbilityActivationTypesNoneButton": "Activate",
         "AbilityActivationTypesOther": "Outras Ações",
         "AbilityActivationTypesReaction": "Reação",
+        "AbilityActivationTypesRound": "Round",
         "AbilityActivationTypesSpecial": "Especial",
         "AbilityActivationTypesStandard": "Ação Pd.",
         "AbilityActivationTypesSwift": "Ação Rápida",
@@ -142,8 +144,14 @@
                 "AgePlaceholder": "e.x. 19",
                 "DateOfBirth": "Data Nascimento",
                 "DateOfBirthPlaceholder": "e.x. 6 de Gozran, 300 DL",
+                "Deity": "Deity",
+                "DeityPlaceholder": "e.g. Pharasma",
+                "GenderPronouns": "Gender/Pronouns",
+                "GenderPronounsPlaceholder": "e.g. They/Them",
                 "Height": "Altura",
                 "HeightPlaceholder": "e.x. 1.70\"",
+                "HomeWorld": "Home World",
+                "HomeWorldPlaceholder": "e.g. Akiton",
                 "ImageTooltip": "Esta é uma imagem de corpo inteiro que você pode definir para este personagem. As dimensões devem ser 200 x 250 pixels ou proporção de 4:5.",
                 "OtherVisuals": "Aparência",
                 "TabBio": "Biografia",
@@ -163,6 +171,7 @@
                     "Race": "Raça",
                     "Theme": "Tema"
                 },
+                "Create": "Create new feature",
                 "Filters": {
                     "Action": "Ação",
                     "Bonus": "Bônus",
@@ -255,11 +264,13 @@
                 "Item": {
                     "Activate": "Ativado",
                     "Create": "Criar um novo Item",
+                    "CreateFromCompendium": "Add item from Compendium",
                     "Deactivate": "Desativado",
                     "Delete": "Excluir item",
                     "Edit": "Editar item",
                     "Equip": "Equipar item",
-                    "Unequip": "Desequipar item"
+                    "Unequip": "Desequipar item",
+                    "LevelUp": "Level up"
                 },
                 "ItemValue": {
                     "Label": "Riqueza:",
@@ -308,6 +319,8 @@
                     "SpellAttackRolls": "Rolagem Ataque Magia",
                     "SpellSaveDC": "Spell Save DC",
                     "Stamina": "Estamina",
+                    "WeaponCategoryAttackRolls": "Weapon Category Attack Rolls",
+                    "WeaponCategoryDamage": "Weapon Category Damage",
                     "WeaponPropertyAttackRolls": "Rolagem Ataque Propriedade de Arma",
                     "WeaponPropertyDamage": "Dano Propriedade de Arma"
                 },
@@ -472,6 +485,7 @@
                 "Action": "Ação",
                 "Day": "Dia",
                 "Hour": "Hora",
+                "Hour8": "8 Hours",
                 "Minute": "Minuto",
                 "Minute10": "10 Minutes",
                 "Round": "Rodada Combate",
@@ -494,11 +508,15 @@
         },
         "ChatCard": {
             "ContextMenu": {
+                "Accept": "Accept",
                 "ApplyDamage": "Apply Damage",
                 "ApplyHealing": "Apply Healing",
                 "DamageAndAHalf": "1.5x Damage",
                 "DoubleDamage": "Double Damage",
                 "HalfDamage": "Half Damage",
+                "ModifyDamage": "Modify Damage",
+                "ModifyDamageText": "Input an number to modify the damage amount by. This is applied after any multiplication.",
+                "NoDamageModifier": "No damage modifier applied.",
                 "NoToken": "Cannot apply: No token selected!"
             },
             "ItemActivation": {
@@ -519,6 +537,7 @@
         "ClassSPPerlevel": "Pontos Estamina por nível",
         "ClassSkillRanksPerlevel": "Graduação Perícias por nível",
         "ClassSkills": "Perícias de Classe",
+        "ClassSpellcastingAbility": "Spellcasting Ability",
         "ClassWeaponProf": "Proficiencia em Armas",
         "ClassWillSaveProgression": "Progressão Save Vontade",
         "Classes": {
@@ -631,6 +650,7 @@
         "ConditionsFrightened": "Amedrontado",
         "ConditionsGrappled": "Agarrado",
         "ConditionsHelpless": "Indefeso",
+        "ConditionsInvisible": "Invisible",
         "ConditionsNauseated": "Enjoado",
         "ConditionsOffKilter": "Desgravitado",
         "ConditionsOffTarget": "Desorientado",
@@ -675,6 +695,7 @@
         "Cybernetic": "Cybernetico",
         "Damage": {
             "Immunities": "Imudades a dano",
+            "MinimumDamage": "Minimum Damage",
             "PartIndex": "Part {partIndex} of {partCount}",
             "Reduction": "Redução Dano",
             "Resistances": "Resistencia a Energia",
@@ -684,9 +705,12 @@
                 "Bludgeoning": "Contusão",
                 "Cold": "Frio",
                 "Custom": "Custom",
+                "DamageGroup": "Damage Group {group}",
+                "DamageGroupTooltip": "If damage sections share a group, you may only enable one from that group when making a damage roll. You may freely enable/disable damage sections that lack a group.",
                 "Electricity": "Eletricidade",
                 "Fire": "Fogo",
                 "Force": "Poder",
+                "GrouplessDamage": "Groupless Damage",
                 "Hint": "This is a list of damage sections that apply to this damage roll.",
                 "Nonlethal": "Não letal",
                 "Operators": {
@@ -703,6 +727,58 @@
         },
         "Description": "Descrição",
         "DescriptionShort": "Descrição Curta",
+        "Descriptors": {
+            "Acid": "Acid",
+            "Air": "Air",
+            "Calling": "Calling",
+            "CallingDescription": "A calling effect transports a creature from another plane to the plane you are on. The effect grants the creature the one-time ability to return to its plane of origin, although the effect might limit the circumstances under which this is possible. Creatures who are called die if they are killed on the new plane. A called creature can’t be dispelled, even if it was called by magical means.",
+            "Chaotic": "Chaotic",
+            "Charm": "Charm",
+            "CharmDescription": "A charm effect changes how the subject views you. This gives you the ability to befriend and suggest courses of action to another creature, but its servitude is not absolute or mindless. Essentially, a charmed character retains free will but makes choices according to a skewed view of the world.<br><br>A charmed creature retains its original alignment and allegiances, generally with the exception that it now regards the person who charmed it as a dear friend and gives great weight to that character’s suggestions and directions. A charmed creature does not volunteer information or tactics that its master doesn’t ask for. A charmed creature never obeys a command that is obviously suicidal or grievously harmful to it.<br><br>A creature fights friends it had before being charmed only if they threaten its new friend. Even then, it uses the least lethal means at its disposal, for it wishes to resolve the conflict without causing real harm.<br><br>A charmed creature can attempt an opposed Charisma check against its master in order to resist instructions or commands that would make it do something it wouldn’t normally do even for a close friend. If it succeeds at this check, it decides not to go along with that particular order but remains charmed. If the creature’s master commands it to perform an action that the creature would be vehemently opposed to, it can attempt a new saving throw to break free of its master’s influence altogether.<br><br>If a charmed creature is openly attacked by the character who charmed it or by that character’s apparent allies, it is automatically freed of the spell or effect.",
+            "Cold": "Cold",
+            "Compulsion": "Compulsion",
+            "CompulsionDescription": "A compulsion effect overrides the subject’s free will in some way, forcing the subject to act in some manner or changing the way its mind works.",
+            "Creation": "Creation",
+            "CreationDescription": "A creation effect manipulates matter to create an object or creature in the place the creator designates. If the effect has a duration other than instantaneous, magic or some other energy holds the creation together, but when the duration ends, the created creature or object vanishes without a trace. If the effect has an instantaneous duration, the created object or creature does not depend on any outside energy for its existence, so it lasts indefinitely once created.",
+            "Curse": "Curse",
+            "Darkness": "Darkness",
+            "Death": "Death",
+            "Descriptors": "Descriptors",
+            "Disease": "Disease",
+            "Earth": "Earth",
+            "Electricity": "Electricity",
+            "Emotion": "Emotion",
+            "Evil": "Evil",
+            "Fear": "Fear",
+            "Fire": "Fire",
+            "Force": "Force",
+            "ForceDescription": "A force effect deals full damage to incorporeal creatures and blocks their movement. It also blocks the sense through ability.",
+            "Good": "Good",
+            "Healing": "Healing",
+            "LanguageDependent": "Language Dependent",
+            "LanguageDependentDescription": "A language-dependent effect uses intelligible language (either audible, visual, or telepathic) as a medium for communication. If you cannot communicate with the target or the target cannot understand what you are communicating, the effect fails to affect that target.",
+            "Lawful": "Lawful",
+            "Light": "Light",
+            "MindAffecting": "Mind Affecting",
+            "MindAffectingDescription": "A mind-affecting effect works only against creatures with an Intelligence score of 1 or higher.",
+            "Pain": "Pain",
+            "PainDescription": "A pain effect causes unpleasant sensations but not permanent physical damage. Creatures that are immune to effects that require a Fortitude save are immune to pain effects.",
+            "Poison": "Poison",
+            "Polymorph": "Polymorph",
+            "Radiation": "Radiation",
+            "Scrying": "Scrying",
+            "ScryingDescription": "A scrying effect creates an invisible magical sensor that sends you information while the effect lasts. Unless noted otherwise, the sensor has the same sensory abilities that you have naturally, but not any sensory abilities you gain from other spells or technology. The sensor is a separate, independent source of sensory input for you, and thus it functions normally even if you have been blinded or deafened or otherwise suffer sensory impairment.<br><br>A creature can notice a scrying sensor with a successful Perception check (DC = 20 + the spell or effect’s level). The sensor can be dispelled as if it were an active spell. Lead sheeting, force fields, and some exotic materials and magical protections block scrying effects; if that is the case, you can sense that the effect has been blocked.",
+            "SenseDependent": "Sense Dependent",
+            "SenseDependentDescription": "A sense-dependent effect has either audible or visual elements, requiring sight or hearing to have any effect. For this kind of effect to affect that target, you must be able to either see or hear the target, and the target must be able to either see or hear you.",
+            "Shadow": "Shadow",
+            "ShadowDescription": "A shadow effect creates something that is partially real from an amalgamation of extradimensional energy. Damage dealt by a shadow effect is real.",
+            "Sonic": "Sonic",
+            "Summoning": "Summoning",
+            "SummoningDescription": "A summoning effect instantly brings a creature or object to a place you designate. When the effect ends or is dispelled, a summoned creature is instantly sent back to where it came from (typically another plane, but not always), but a summoned object is not sent back unless the effect description specifically indicates otherwise. A summoned creature also goes away if it is killed or if its Hit Points drop to 0, but it is not really dead. It takes 24 hours for the creature to reform in the place from which it was summoned, during which time it can’t be summoned again.<br><br>When a summoning effect ends and the summoned creature disappears, all spells it has cast expire. A summoned creature cannot use any innate summoning abilities it may have.",
+            "Teleportation": "Teleportation",
+            "TeleportationDescription": "A teleportation effect involves instantaneous travel through the Astral Plane (see page 471). Anything that blocks astral travel also blocks teleportation unless the specific effect notes otherwise, and teleportation effects work within the Drift.",
+            "Water": "Water"
+        },
         "Details": "Detalhes",
         "Dialogs": {
             "InputDialog": {
@@ -839,9 +915,28 @@
         "FeaturesFilter": "Filtro",
         "FeaturesUsage": "Uso",
         "FlagDeprecationNotice": "<strong>NOTA:</strong> Esses valores estão sendo substituídos pelo novo sistema de modificadores e serão removidos em uma atualização futura. É recomendável desmarcar qualquer um desses valores e adicioná-los como um modificador na guia Modificadores.",
+        "FlagsEmptySolarian": "There are no special traits at the moment. If you're looking for Solarian Attunement, use the new Actor Resource system within the Stellar Mode class feature.",
         "FlagsInstructions": "Configure as características e traços dos personagens que ajustam os comportamentos do sistema Starfinder.",
         "FlagsSave": "Atualizar Traços Especiais",
         "FlagsTitle": "ConfigurAR Traços Especiais",
+        "FloatingHP": {
+            "HP": "HP",
+            "Sh.A.": "Sh.A.",
+            "Sh.F.": "Sh.F.",
+            "Sh.P.": "Sh.P.",
+            "Sh.S.": "Sh.S.",
+            "stamina": "SP",
+            "temp": "Temp"
+        },
+        "FloatingHPVerbose": {
+            "HP": "HP",
+            "Sh.A.": "Aft Shields",
+            "Sh.F.": "Forward Shields",
+            "Sh.P.": "Port Shields",
+            "Sh.S.": "Starboard Shields",
+            "stamina": "SP",
+            "temp": "Temp"
+        },
         "FortitudeSave": "Fortitude",
         "Ft": "Pés",
         "GreatFortitudeHint": "Talento de personagem que adiciona 2 aos salvamentos de Fortitude",
@@ -960,7 +1055,8 @@
         "ItemSheet": {
             "AbilityScoreIncrease": {
                 "Header": "Incremento Valor Habilidade",
-                "Instruction": "* escolha 4 habilidades para aumentar.",
+                "Instruction": "Escolha 4 habilidades para aumentar.",
+                "InstructionRules": "Every 5 levels (at 5th, 10th, 15th, and 20th levels), you get to increase and customize your ability scores. Each time you reach one of these level thresholds, choose four of your ability scores to increase. If that ability score is 17 or higher (excluding any ability increases from personal upgrades—see page 212), it increases permanently by 1. If it’s 16 or lower, it increases permanently by 2. You can’t apply more than one of these increases to the same ability score at a given level, but unlike at 1st level, these increases can make your ability scores go higher than 18.",
                 "ItemName": "Incremento Valor Habilidade: Nível {level}",
                 "Label": "Habilidades"
             },
@@ -1280,18 +1376,25 @@
                 "Details": "Ammunition Details",
                 "Type": {
                     "Arrows": "Arrows",
+                    "Caustrol": "Caustrol",
                     "Charges": "Charges",
                     "Darts": "Darts",
                     "Flares": "Flares",
+                    "Flechettes": "Flechettes",
                     "Fuel": "Fuel",
                     "HeavyRounds": "Heavy Rounds",
                     "LongarmAndSniperRounds": "Longarm and Sniper Rounds",
                     "Missiles": "Missiles",
+                    "MoodGoo": "Mood Goo",
                     "Nanites": "Nanites",
+                    "Nets": "Nets",
                     "None": "None",
                     "Rockets": "Rockets",
+                    "Sclerites": "Sclerites",
                     "Shells": "Shells",
-                    "SmallArmRounds": "Small Arm Rounds"
+                    "SmallArmRounds": "Small Arm Rounds",
+                    "Thasphalt": "Thasphalt",
+                    "ThasteronPellets": "Thasteron Pellets"
                 },
                 "UseCapacity": "Use Capacity"
             },
@@ -1395,6 +1498,9 @@
                 "FeatureUsage": "Talento Uso",
                 "RechargeOn": "Recarga Ativa",
                 "Requirements": "Requerimentos"
+            },
+            "Goods": {
+                "Details": "Goods Details"
             },
             "Hybrid": {
                 "Details": "Detalhes Item Hibrido"
@@ -1605,6 +1711,7 @@
         "MigrationEndMigration": "A migração do sistema Starfinder para a versão {systemVersion} foi bem-sucedida!",
         "MigrationErrorMessage": "Ocorreu um erro ao migrar seus dados do Starfinder, você fez um backup, certo?",
         "MigrationSuccessfulMessage": "Seus dados Starfinder foram migrados com sucesso para a versão atual.",
+        "MigrationSuccessfulRefreshMessage": "Your Starfinder data was successfully migrated to the current version.<br/><br/>Please refresh your game to finalize migration.",
         "ModifierACPEffectingArmorTypeAll": "Todas Armaduras",
         "ModifierACPEffectingArmorTypeHeavy": "Apenas Armadura Pesada",
         "ModifierACPEffectingArmorTypeLight": "Apenas Armadura Leve",
@@ -1809,6 +1916,7 @@
                 "RollModeTooltip": "Modo de Rolagem determina quem pode ver essa rolagem.",
                 "Selector": "Selecione '{name}'",
                 "SelectorTooltip": "Seleção dinâmica do ator '{name}' para a fórmula.",
+                "SimplifiedFormulaTooltip": "<p>The formula displayed on the dialog has been calculated from the following formula:</p><p>{formula}</p>",
                 "SituationalBonus": "Bônus Substâncial",
                 "SituationalBonusTooltip": "Existem bônus adicionais que se aplicam a este teste? (Por exemplo, incrementos de distância)"
             },
@@ -1833,7 +1941,8 @@
                 "NormalTooltip": "Rolagem Normal.",
                 "Roll": "Rolagem",
                 "SaveTitle": "Save - {label}",
-                "SkillCheckTitle": "Skill Check - {skill}"
+                "SkillCheckTitle": "Skill Check - {skill}",
+                "SkillCheckTitleWithProfession": "Skill Check - {skill} ({profession})"
             },
             "HealingRoll": "Rolar Cura",
             "HealingRollFull": "Rolar Cura - {name}",
@@ -1888,12 +1997,16 @@
         "SaveModifiersTooltip": "{type} Bônus: {mod} ({source})",
         "SaveProgressionFast": "Rápido",
         "SaveProgressionSlow": "Lento",
-        "SenesBL": "Sentido às Cegas",
-        "SenesBS": "Sentido Cego",
-        "SenesDark": "Visão Noturna",
-        "SenesLLV": "Visão Penumbra",
-        "Senses": "Sentidos",
-        "SensesST": "Sentir Através",
+        "SensesTypes": {
+            "GlobalIlluminationThresholdMessage": "<strong>Starfinder System</strong><br />It is recommended to keep the Global Illumination Threshold enabled in order for features such as Low Light Vision to function correctly.",
+            "Senses": "Sentidos",
+            "SensesBL": "Sentido às Cegas",
+            "SensesBS": "Sentido Cego",
+            "SensesDark": "Visão Noturna",
+            "SensesLLV": "Visão Penumbra",
+            "SensesLLVDark": "Visão Penumbra & Visão Noturna",
+            "SensesST": "Sentir Através"
+        },
         "Settings": {
             "Advantage": {
                 "Hint": "Habilita a habilidade de alternar vantagem ou desvantagem nas jogadas de dados.",
@@ -1902,6 +2015,10 @@
             "AlwaysShowQuantity": {
                 "Hint": "Mostra sempre a quantidade de itens, mesmo que seja 0 ou 1. Você terá que atualizar sua janela antes que esta alteração tenha efeito.",
                 "Name": "Sempre mostrar a quantidade de itens"
+            },
+            "AutoAddUnarmedStrike": {
+                "Hint": "When checked, the unarmed strike item will be automatically added to any new player character actors.",
+                "Name": "Automatically add Unarmed Strike to new characters"
             },
             "AutoCollapseCard": {
                 "Hint": "Recolher automaticamente as descrições do cartão de item no registro de bate-papo",
@@ -1952,9 +2069,49 @@
                 "Hint": "Remova as barras de experiência das fichas de personagem.",
                 "Name": "Desabilitar barra de experiência"
             },
+            "FloatingHP": {
+                "Button": "Configure Floating Number Settings",
+                "Hint": "Configure the floating numbers that appear on a token when their HP/SP is changed.",
+                "Menu": {
+                    "CanSeeBars": {
+                        "Hint": "Users that can see the token's resource bars will be able to see floating numbers.",
+                        "Name": "Can see resource bars?"
+                    },
+                    "CanSeeName": {
+                        "Hint": "Users that can see the token's name will be able to see floating numbers.",
+                        "Name": "Can see name?"
+                    },
+                    "Enabled": {
+                        "Hint": "Enable floating numbers when a token's HP/SP is changed.",
+                        "Name": "Enable Floating Numbers?"
+                    },
+                    "Label": "Floating Number Settings",
+                    "LimitByCriteria": {
+                        "Hint": "When enabled, users will only be shown floating numbers if they meet at least one of the criteria below. When disabled, floating numbers will be shown to all users.",
+                        "Name": "Limit by criteria?"
+                    },
+                    "MinPerm": {
+                        "Hint": "Users with this permission or higher over the token will be able to see floating numbers.",
+                        "Name": "Minimum Permission"
+                    },
+                    "VerboseFloatyText": {
+                        "Hint": "When enabled, the full names of shield arcs will be displayed.",
+                        "Name": "Verbose Mode"
+                    }
+                },
+                "Name": "Floating Number Settings"
+            },
             "GalacticTrade": {
                 "Hint": "Habilita o subsistema de Comércio Galáctico, permitindo que o PF máximo em uma espaçonave seja 5% maior do que o normal, e adiciona PFs ao estoque da espaçonave como créditos.",
                 "Name": "Habilitar Comércio Galáctico"
+            },
+            "SFRPGTheme": {
+                "Hint": "When enabled, a few minor tweaks to Foundry's colours will be made to match Starfinder's colour scheme.",
+                "Name": "Custom SFRPG theme"
+            },
+            "ScalingCantrips": {
+                "Hint": "Enables the Scaling Cantrips variant rule from Galactic Magic pg. 88. Changing this setting will alter the formulas of all affected spells on all actors, so can take a while if you have lots.",
+                "Name": "Enable Scaling Cantrips"
             },
             "StarshipActionsCrit": {
                 "Hint": "Estado de exibição para o efeito crítico das ações da nave.",
@@ -2142,6 +2299,7 @@
         "SkillDip": "Diplomacia",
         "SkillDis": "Disfarce",
         "SkillEng": "Engenharia",
+        "SkillGun": "Gunnery",
         "SkillInt": "Intimidação",
         "SkillLsc": "Ciências Biológicas",
         "SkillMed": "Medicina",
@@ -2181,6 +2339,7 @@
             "Inubrix": "Inubrix",
             "Khefak": "Khefak Armor",
             "Noqual": "Noqual",
+            "Nyblantine": "Nyblantine",
             "PurpleCores": "Purple Cores",
             "Siccatite": "Siccatite",
             "Silver": "Silver",
@@ -2205,6 +2364,7 @@
             "AddSpells": "Adicionar Magia",
             "AttributesNone": "Nenhum",
             "Browse": "Visualizar Grimório",
+            "CreateFromCompendium": "Add Spell from Compendium",
             "CreateSpell": "Criar Magia",
             "DeleteItem": "Deletar Item",
             "EditItem": "Editar Item",
@@ -2273,6 +2433,7 @@
                 "Header": "Tripulação Espaçonave",
                 "IsNPCCrew": "É NPC Tripulante",
                 "MagicOfficers": "Oficiais Magicos",
+                "NPCGunnerRanksMessage": "While ranks aren't relevant to an NPC's gunnery modifier, some statblocks may include the Gunner's level, which you can store here. You can otherwise safely leave this box blank.",
                 "Passengers": "Passageiros",
                 "Pilot": "Piloto",
                 "ScienceOfficers": "Oficial Ciências",
@@ -2366,6 +2527,7 @@
                 },
                 "PrimarySystems": "Sistemas Primários",
                 "SecuritySystems": "Sistemas Secundários",
+                "SpecialAbilities": "Special Abilities",
                 "Thrusters": "Propulsores"
             },
             "Header": {
@@ -2651,7 +2813,7 @@
         "WeaponPropertiesAurora": "Aurora",
         "WeaponPropertiesAuroraTooltip": "Quando uma arma aurora atinge um alvo, a criatura brilha com uma luminescência suave por 1 minuto. Isso nega os efeitos de invisibilidade e torna impossível para o alvo se esconder ou se esconder em áreas de sombra ou escuridão. ",
         "WeaponPropertiesAutomatic": "Automatico",
-        "WeaponPropertiesAutomaticTooltip": "Além de fazer ataques à distância normalmente, uma arma com esta propriedade especial pode disparar no modo totalmente automático. Nenhuma ação é necessária para alternar uma arma entre fazer ataques normais à distância e usar o modo automático. \n\n Quando você faz um ataque completo com uma arma no modo automático, você pode atacar em um cone com um alcance de metade do incremento de alcance da arma. Isso usa toda a munição restante da arma. Role um ataque contra cada alvo no cone, começando pelos mais próximos de você. Ataques feitos com uma arma no modo automático não podem marcar acertos críticos. Role o dano apenas uma vez e aplique-o a todos os alvos atingidos. Cada ataque contra uma criatura individual no cone consome a mesma quantidade de munição ou carga de dois tiros, e quando você não tem mais munição suficiente para atacar outro alvo, você para de fazer ataques. \n \n Por exemplo, se você fosse usando uma arma tática X-gen com 27 rodadas restantes, você alvejaria as 6 criaturas mais próximas no cone e usaria todas as 27 rodadas. \n \n Se mais de uma criatura for equidistante e você não tiver cartuchos suficientes restantes para atirar em todas as criaturas equidistantes, determine aleatoriamente qual delas você terá como alvo. Você não pode evitar atirar em aliados no cone, nem pode atirar em qualquer criatura mais de uma vez, mesmo se você tiver cartuchos suficientes para disparar mais tiros do que seus alvos. Ataques no modo automático têm as mesmas penalidades que outros ataques completos. ",
+        "WeaponPropertiesAutomaticTooltip": "Além de fazer ataques à distância normalmente, uma arma com esta propriedade especial pode disparar no modo totalmente automático. Nenhuma ação é necessária para alternar uma arma entre fazer ataques normais à distância e usar o modo automático. <br><br> Quando você faz um ataque completo com uma arma no modo automático, você pode atacar em um cone com um alcance de metade do incremento de alcance da arma. Isso usa toda a munição restante da arma. Role um ataque contra cada alvo no cone, começando pelos mais próximos de você. Ataques feitos com uma arma no modo automático não podem marcar acertos críticos. Role o dano apenas uma vez e aplique-o a todos os alvos atingidos. Cada ataque contra uma criatura individual no cone consome a mesma quantidade de munição ou carga de dois tiros, e quando você não tem mais munição suficiente para atacar outro alvo, você para de fazer ataques. \n \n Por exemplo, se você fosse usando uma arma tática X-gen com 27 rodadas restantes, você alvejaria as 6 criaturas mais próximas no cone e usaria todas as 27 rodadas. \n \n Se mais de uma criatura for equidistante e você não tiver cartuchos suficientes restantes para atirar em todas as criaturas equidistantes, determine aleatoriamente qual delas você terá como alvo. Você não pode evitar atirar em aliados no cone, nem pode atirar em qualquer criatura mais de uma vez, mesmo se você tiver cartuchos suficientes para disparar mais tiros do que seus alvos. Ataques no modo automático têm as mesmas penalidades que outros ataques completos. ",
         "WeaponPropertiesBlast": "Explosão",
         "WeaponPropertiesBlastTooltip": "Esta arma dispara em um cone que se estende apenas até o primeiro incremento de alcance. Você não pode usá-lo para atacar criaturas além desse alcance. \n Para cada ataque que você fizer com uma arma com a propriedade especial de explosão, role um ataque contra cada alvo no cone, começando com aqueles mais próximos de você. Cada ataque tem uma penalidade de -2 além de outras penalidades, como a penalidade para todos os ataques durante um ataque completo. Role o dano apenas uma vez para todos os alvos. Se você rolar um ou mais acertos críticos, role o dano crítico extra apenas uma vez (ou quaisquer outros efeitos especiais em um acerto crítico que exija que você role) e aplique-o a cada criatura contra a qual você pontuar um acerto crítico. Você não pode evitar atirar em aliados no cone, nem atirar em qualquer criatura mais de uma vez. \n \n Ataques com armas de explosão ignoram a ocultação. Uma arma de explosão não se beneficia de talentos ou habilidades que aumentam o dano de um único ataque (como o truque de ataque do operativo). A munição para armas explosivas é projetada para ataques explosivos, então você gasta a quantidade de uso apenas uma vez para cada cone de ataques. ",
         "WeaponPropertiesBlock": "Bloqueio",
@@ -2714,12 +2876,16 @@
         "WeaponPropertiesHolyWaterTooltip": "Uma arma de água benta é infundida com as bênçãos de uma ou mais divindades alinhadas com o bem (mais comumente Hylax, Iomedae ou Sarenrae dentro dos Mundos do Pacto, embora seguidores devotos de qualquer divindade alinhada com o bem possam criar tais armas). Ela causa danos apenas mortos-vivos (independentemente da tendência) e forasteiros com o subtipo do mal, e mesmo essas criaturas não sofrem nenhum efeito (e não mostram nenhum sinal de sua natureza se já não for óbvio) com um teste de resistência bem-sucedido. Criar uma granada de água benta requer a bênção de sacerdotes formalmente treinados de uma boa divindade, embora um personagem de qualquer tendência possa fazer a criação real. ",
         "WeaponPropertiesHybrid": "Híbrido",
         "WeaponPropertiesHybridTooltip": "Uma arma com esta propriedade especial é um item híbrido, incorporando magia e tecnologia em seu design. Conta como uma arma mágica e ganha a propriedade especial de arma analógica. Consome munições e cargas de bateria normalmente. ",
+        "WeaponPropertiesHydrodynamic": "Hydrodynamic",
+        "WeaponPropertiesHydrodynamicTooltip": "This weapon can be thrown underwater effectively, taking no penalty to attack rolls or damage for underwater combat.",
         "WeaponPropertiesIgnite": "Acender",
         "WeaponPropertiesIgniteTooltip": "As armas com a propriedade especial ignite usam um acelerador para iniciar pequenos e intensos disparos em seus alvos. Um alvo atingido por uma arma com esta propriedade especial deve ser bem-sucedido em um teste de resistência de Reflexos (CD = 20 + 1/2 do nível do item + seu bônus de Destreza) ou ganha a condição de queima com a quantidade de dano listada. Ganhar a condição de queima várias vezes da propriedade especial de ignição não aumenta seu dano de queima - você recebe apenas o dano de ignição listado mais alto a cada rodada. Um personagem que ganha a condição de queima por outros meios (como o efeito crítico de queima, mesmo de uma arma com ignição) adiciona aquele dano ao seu dano de queima a cada rodada. Terminar a condição de queima termina a queima de todas as fontes. ",
         "WeaponPropertiesIndirect": "Indireto",
         "WeaponPropertiesIndirectTooltip": "Uma arma indireta usa um sinal sem fio junto com um sistema de disparo de vários estágios, telemetria interna, flutuação bimetálica, orientação magnética ou algum outro sistema para fazer parecer que um tiro da arma foi disparado de um local diferente. Isso reduz a penalidade para testes de Furtividade por sniping em 10. ",
         "WeaponPropertiesInjection": "Injeção",
         "WeaponPropertiesInjectionTooltip": "Esta arma ou munição pode ser preenchida com uma droga; um contato, ingerido, inalado ou veneno de ferimento; ou um composto medicinal. Em um ataque bem-sucedido com a arma (seja o primeiro ataque se for uma arma corpo-a-corpo ou um ataque com a parte relevante da munição se for uma arma de longo alcance), a arma injeta automaticamente no alvo com a substância. Reabastecer a arma com uma nova substância age como recarregá-la e é uma ação de movimento. Cada material injetável diferente deve ser comprado separadamente e pode ser usado em qualquer arma com a propriedade especial de injeção. Consulte a página 231 para obter as regras e preços de medicamentos, medicamentos e venenos. ",
+        "WeaponPropertiesInstrumental": "Instrumental",
+        "WeaponPropertiesInstrumentalTooltip": "A weapon with this property can also be used as a basic musical instrument (Armory 105). The size of this instrument’s battery is the same as that of the weapon’s, and it can be used as a weapon (with the charge usage indicated) or an instrument (where it uses 1 charge every 10 minutes). If the weapon is 8th level or higher, it also functions instead as a euphonic musical instrument (Armory 106).",
         "WeaponPropertiesIntegrated": "Integrado",
         "WeaponPropertiesIntegratedTooltip": "Uma arma integrada pode ser empunhada normalmente ou instalada em um slot de atualização de armadura. Quando instalada corretamente, a arma é considerada empunhada sem a necessidade de designar um número de mãos para empunhá-la. Uma arma integrada requer o número listado de slots de armadura para instalação adequada. Um andróide ou qualquer outra criatura com a habilidade racial do slot de atualização não pode combinar seu slot de atualização racial com slots de atualização de armadura para instalar uma arma integrada. Instalar, remover ou substituir uma arma integrada em uma armadura leva 10 minutos, como se fosse uma atualização de armadura. ",
         "WeaponPropertiesLine": "Linha",
@@ -2754,6 +2920,8 @@
         "WeaponPropertiesPoweredTooltip": "Uma arma corpo a corpo com uma bateria interna que deve ser carregada para funcionar tem a propriedade especial alimentada, que lista sua capacidade e uso. Ao contrário de uma arma de longo alcance, o uso é para 1 minuto de operação ao invés de por ataque, embora usar uma arma com motor por menos de 1 minuto completo ainda gasta 1 uso completo. O número de cargas gastas é igual ao uso × o número de minutos em que a arma é usada, arredondado para o minuto mais próximo. Você pode ativar o poder da arma como parte da ação usada para fazer um ataque com ela, e ela é desativada automaticamente após 1 minuto. \n \n Como com as armas de longo alcance, você pode recarregar a bateria de uma arma corpo-a-corpo motorizada usando um gerador ou uma estação de recarga, ou você pode comprar novas baterias para ele. Se você tentar atacar com uma arma potente que está sem carga, ela funciona como uma arma improvisada (consulte a página 169). ",
         "WeaponPropertiesProfessional": "Profissional",
         "WeaponPropertiesProfessionalTooltip": "Uma arma profissional é uma ferramenta usada em um comércio especializado que, no entanto, tem um enorme potencial de danos. Ao usar uma arma profissional, você ganha um bônus de percepção de +2 para testes com a perícia Profissão listada (ou para testes com perícias semelhantes que poderiam usar essa arma razoavelmente como parte da profissão, sujeito ao critério do GM). Se você tiver um número de graduações na perícia Profissão listada igual ao nível do item, você é considerado proficiente com aquela arma, mesmo que normalmente não o fosse. Essa proficiência nunca conta para pré-requisitos de qualquer tipo. ",
+        "WeaponPropertiesPropel": "Propel",
+        "WeaponPropertiesPropelTooltip": "These weapons move affected targets the listed distance away from the origin point of the effect. A target that succeeds at a Reflex save (DC = 10 + 1/2 the weapon’s item level + the wielder’s Dexterity modifier) isn’t moved. If the movement would cause the target to move through a wall, object, or another barrier, the target creature stops moving and falls prone.",
         "WeaponPropertiesPunchGun": "Punch Gun",
         "WeaponPropertiesPunchGunTooltip": "Uma arma de soco é uma pequena arma de longo alcance equipada com um mecanismo de disparo sensível à pressão que é afixado em uma luva ou item semelhante. Ao contrário da maioria das armas de longo alcance, que disparam quando um gatilho é puxado, uma pistola de soco dispara quando a pressão suficiente é colocada em seu cano. Todas as armas de projéteis de pistola de soco têm um alcance igual ao alcance natural de seu portador. Embora sejam ataques à distância, eles não provocam ataques de oportunidade. ",
         "WeaponPropertiesQuickReload": "Recarga Rápida",
@@ -2770,6 +2938,8 @@
         "WeaponPropertiesRelicTooltip": "Esses itens raros são fragmentos de tecnologia perdida ou itens exclusivos menos poderosos do que artefatos. Uma relíquia tem um nível de item, mas pode ser vendida por 100% do preço do item (como mercadorias comerciais). Uma relíquia não pode ser trabalhada sem os meios de uma fórmula específica, que quase sempre está perdida há muito tempo e muitas vezes requer materiais específicos. Uma relíquia que passou a ser compreendida bem o suficiente para ser reproduzida, padronizada e comercializada em massa pode perder seu status de relíquia. Ao contrário das armas normais, as armas relíquias não vêm totalmente carregadas com munição, a menos que assim o indiquem. ",
         "WeaponPropertiesReposition": "Reposição",
         "WeaponPropertiesRepositionTooltip": "Quando você tenta uma manobra de combate de reposicionamento com esta arma, você ganha um bônus de +2 em sua jogada de ataque.",
+        "WeaponPropertiesScramble": "Scramble",
+        "WeaponPropertiesScrambleTooltip": "A weapon with the scramble special property disrupts a creature’s telepathic or hive mind abilities briefly. When a creature takes damage from a weapon with the scramble property, that creature must succeed at a Fortitude save (DC = 10 + half the weapon’s level + the wielder’s Int modifier) or lose its ability to communicate telepathically until the end of your next turn. Abilities that depend on telepathic communication, such as the Swarm mind ability, also don’t function during this time.",
         "WeaponPropertiesShape": "Forma",
         "WeaponPropertiesShapeTooltip": "Uma arma com a propriedade especial de forma possui uma matriz de alvos complexa que permite atingir áreas específicas. Se você fizer um único ataque como uma ação completa com tal arma, você pode excluir o número listado de quadrados de dentro da área de efeito desta arma. Isso significa que você pode evitar atirar em um aliado na área de efeito de uma arma de explosão, por exemplo. ",
         "WeaponPropertiesShatter": "Estilhaçar",

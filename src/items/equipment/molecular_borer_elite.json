@@ -2,10 +2,8 @@
   "_id": "eoDRCLwNGd2pdnML",
   "name": "Molecular borer, elite",
   "type": "weapon",
-  "augmentation": false,
-  "consumable": false,
-  "container": false,
-  "data": {
+  "img": "systems/sfrpg/icons/equipment/technological%20items/lazer-drill.webp",
+  "system": {
     "type": "",
     "ability": "dex",
     "abilityMods": {
@@ -18,6 +16,7 @@
       "condition": "",
       "cost": 1
     },
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
       "shape": "",
@@ -49,7 +48,7 @@
       "max": 80,
       "value": 80
     },
-    "chatFlavor": "unwieldy, shatter, professional (miner), modal(cryo)",
+    "chatFlavor": "professional (miner), modal (cryo)",
     "container": {
       "contents": [
         {
@@ -61,6 +60,7 @@
           "index": 0
         }
       ],
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -92,20 +92,29 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "8d10",
-          "operator": "or",
           "types": {
+            "acid": false,
+            "bludgeoning": false,
             "cold": true,
-            "fire": true
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Molecular borers are bleeding-edge tools that function by slowing molecular action and then, with a modal change, exciting the molecules to cause sheering force, resulting in quicker excavation. Instead of damaging valuable ores, the molecular borer allows a miner to detect different materials by their variable response to the borer&rsquo;s energy loop. Rescue operations make good use of utility borers, which easily penetrates penetrating the lighter materials used for public doorways and vehicles. Industrial borers routinely remove typical mining materials, such as limestone. Advanced and elite models cut through plate steel or airlocks. The paragon model has tested favorably against pure plate adamantine.</span></p>"
+      "value": "<p>Molecular borers are bleeding-edge tools that function by slowing molecular action and then, with a modal change, exciting the molecules to cause sheering force, resulting in quicker excavation. Instead of damaging valuable ores, the molecular borer allows a miner to detect different materials by their variable response to the borer’s energy loop. Rescue operations make good use of utility borers, which easily penetrates penetrating the lighter materials used for public doorways and vehicles. Industrial borers routinely remove typical mining materials, such as limestone. Advanced and elite models cut through plate steel or airlocks. The paragon model has tested favorably against pure plate adamantine.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -135,6 +144,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -153,6 +163,7 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
@@ -179,6 +190,7 @@
       "polymorphic": false,
       "powered": false,
       "professional": true,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
@@ -187,6 +199,7 @@
       "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
       "shatter": true,
       "shells": false,
@@ -201,6 +214,7 @@
       "thought": false,
       "throttle": false,
       "thrown": false,
+      "thruster": false,
       "trip": false,
       "two": true,
       "unbalancing": false,
@@ -210,12 +224,14 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
       "value": 40
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": "",
@@ -223,6 +239,22 @@
     },
     "source": "AP #34 pg. 44",
     "special": "",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
@@ -238,27 +270,5 @@
     },
     "weaponCategory": "uncategorized",
     "weaponType": "heavy"
-  },
-  "effects": [],
-  "equipment": false,
-  "flags": {},
-  "fusion": true,
-  "goods": false,
-  "hybrid": false,
-  "img": "systems/sfrpg/icons/equipment/technological%20items/lazer-drill.jpg",
-  "magic": false,
-  "shield": false,
-  "spell": false,
-  "storage": {
-    "type": "slot",
-    "affectsEncumbrance": true,
-    "amount": 14,
-    "subtype": "fusion",
-    "weightProperty": "level"
-  },
-  "technological": false,
-  "upgrade": false,
-  "vehicleAttack": false,
-  "weapon": false,
-  "weaponAccessory": false
+  }
 }

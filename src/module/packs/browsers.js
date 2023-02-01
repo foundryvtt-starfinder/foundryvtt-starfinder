@@ -17,7 +17,7 @@ Hooks.on('renderCompendiumDirectory', (app, html, data) => {
     html.find('.browser-group').append(spellBrowserButton);
     html.find('.browser-group').append(equipmentBrowserButton);
     html.find('.browser-group').append(starshipBrowserButton);
-    
+
     // Handle button clicks
     alienArchiveBrowserButton.click(ev => {
         ev.preventDefault();

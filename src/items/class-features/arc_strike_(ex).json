@@ -1,0 +1,117 @@
+{
+  "_id": "aGuYtPBdKbP6RyY7",
+  "name": "Arc Strike (Ex)",
+  "type": "mod",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "type": "",
+    "ability": "",
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "",
+    "actionType": "other",
+    "activation": {
+      "type": "action",
+      "condition": "",
+      "cost": 0
+    },
+    "additionalMovement": "",
+    "additionalSenses": "",
+    "area": {
+      "effect": "",
+      "shape": "line",
+      "units": "ft",
+      "value": 30
+    },
+    "arms": {
+      "armType": "general",
+      "number": 0
+    },
+    "attackBonus": 0,
+    "bonusSkill": "",
+    "chatFlavor": "",
+    "critical": {
+      "effect": "",
+      "parts": []
+    },
+    "damage": {
+      "parts": [
+        {
+          "name": "d8 Damage",
+          "formula": "1d8 + (lookupRange(@details.level.value, 0, 4, floor(@details.level.value / 3))d8)",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": true,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "d10 Damage",
+          "formula": "1d10 + (lookupRange(@details.level.value, 0, 4, floor(@details.level.value / 3))d10)",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": true,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
+    },
+    "damageNotes": "",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.QsCRXffpsDoMvPnT]{Basic Mods}</p>\n<p>As a standard action, you create a devastating energy stream that arcs between your custom rig and your drone, creating a line effect; to use this ability, your custom rig must be in your possession and your drone must be within 30 feet of you. For each advanced drone mod your drone has, the arc deals 1d8 electricity damage to each creature in the line; affected creatures can attempt Reflex saving throws to halve the damage (DC = 10 + half your mechanic level + your Intelligence modifier). The damage increases by 1d8 at 4th level and every three levels thereafter. You can instead activate this ability as a full action to increase the damage dice to d10s.</p>\n<p>Once you’ve activated this drone mod, you can’t do so again until you’ve rested for 10 minutes to regain Stamina Points.</p>\n<p><em>Manually adjust first value in the damage formula for additional advanced drone mods in the Details tab, as well as the saving throw.</em></p>"
+    },
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": ""
+    },
+    "formula": "",
+    "isActive": null,
+    "isArmorSlot": false,
+    "isFree": false,
+    "maxInstalls": 1,
+    "modifiers": [],
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "none",
+      "value": null
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "descriptor": "half"
+    },
+    "shieldProficiency": "",
+    "source": "IS, pg. 24",
+    "spellResistance": 0,
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": 1,
+      "per": "sr",
+      "value": 1
+    },
+    "weaponProficiency": ""
+  }
+}

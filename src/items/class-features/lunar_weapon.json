@@ -1,77 +1,259 @@
 {
   "_id": "0GKYyi6lUKAdcPk7",
   "name": "Lunar Weapon",
-  "type": "feat",
-  "data": {
+  "type": "weapon",
+  "img": "systems/sfrpg/icons/classes/solar_weapon.webp",
+  "system": {
     "type": "",
-    "ability": null,
+    "ability": "dex",
     "abilityMods": {
       "parts": []
     },
-    "actionType": "",
+    "actionTarget": "kac",
+    "actionType": "mwak",
     "activation": {
-      "type": "move",
+      "type": "",
       "condition": "",
-      "cost": 1
+      "cost": 0
     },
+    "ammunitionType": "",
     "area": {
       "effect": "",
       "shape": "",
-      "units": "none",
-      "value": null
+      "units": "",
+      "value": 0
     },
     "attackBonus": 0,
+    "attributes": {
+      "ac": {
+        "value": ""
+      },
+      "customBuilt": false,
+      "dex": {
+        "mod": ""
+      },
+      "hardness": {
+        "value": ""
+      },
+      "hp": {
+        "max": "",
+        "value": 6
+      },
+      "size": "medium",
+      "sturdy": true
+    },
+    "attuned": false,
+    "bulk": "0",
+    "capacity": {
+      "max": 0,
+      "value": 0
+    },
     "chatFlavor": "",
+    "container": {
+      "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
+      "storage": [
+        {
+          "type": "bulk",
+          "acceptsType": [
+            "weapon",
+            "fusion"
+          ],
+          "amount": 1,
+          "subtype": "",
+          "weightMultiplier": 1,
+          "weightProperty": ""
+        }
+      ]
+    },
     "critical": {
       "effect": "",
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "",
+          "formula": "(lookupRange(@classes.solarian.levels, 0, 1, 1, 6, 2, 9, 3, 12, 4, 13, 5, 14, 6, 15, 7, 16, 8, 17, 9, 18, 10, 19, 11, 20, 12))d4  + @abilities.str.mod  + ceil(@classes.solarian.levels / 2)",
+          "group": null,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;<a class=\"entity-link\" draggable=\"true\" data-pack=\"sfrpg.class-features\" data-id=\"7ilyZdE0yZi2F3SQ\"> Solar Manifestation (Su)</a></p>\n<p>&nbsp;</p>\n<div title=\"Page 55\">\n<div>\n<div>\n<p>You have studied the delicate and luminous light reflected from a moon or similar celestial body, allowing you to bring forth an exquisite weapon made for graceful combat. This manifestation functions similarly to @Compendium[sfrpg.class-features.WWHUAfgpvk6uIgY0]{Solar Weapon}, except it deals 1d4 damage at 1st level. This damage increases by 1d4 at 6th level, 9th level, 12th level, and every level thereafter. Your lunar weapon also has the feint (Starfinder Armory 28) and operative special qualities (though it can&rsquo;t be used to make trick attacks, if you have that class feature). Unlike other melee weapons with the operative special quality, when you gain @Compendium[sfrpg.feats.9Us7Eg9cAoq3BcS5]{Weapon Specialization} at 3rd level, you add your full solarian level to damage with your lunar weapon, as opposed to half. If you&rsquo;re a multiclass solarian, you add your full solarian level and half your levels in other classes to damage with your lunar weapon.</p>\n</div>\n</div>\n</div>\n<p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\"></span></p>\n<table class=\"inner\" style=\"width: 86px;\">\n<tbody>\n<tr>\n<td style=\"width: 35px;\"><strong>Level</strong></td>\n<td style=\"width: 51px;\"><strong>Solar Weapon</strong></td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">1st</td>\n<td style=\"width: 51px;\">1d4</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">2nd</td>\n<td style=\"width: 51px;\">1d4</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">3rd</td>\n<td style=\"width: 51px;\">1d4</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">4th</td>\n<td style=\"width: 51px;\">1d4</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">5th</td>\n<td style=\"width: 51px;\">1d4</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">6th</td>\n<td style=\"width: 51px;\">2d4</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">7th</td>\n<td style=\"width: 51px;\">2d4</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">8th</td>\n<td style=\"width: 51px;\">2d4</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">9th</td>\n<td style=\"width: 51px;\">3d4</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">10th</td>\n<td style=\"width: 51px;\">3d4</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">11th</td>\n<td style=\"width: 51px;\">3d4</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">12th</td>\n<td style=\"width: 51px;\">4d4</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">13th</td>\n<td style=\"width: 51px;\">5d4</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">14th</td>\n<td style=\"width: 51px;\">6d4</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">15th</td>\n<td style=\"width: 51px;\">7d4</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">16th</td>\n<td style=\"width: 51px;\">8d4</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">17th</td>\n<td style=\"width: 51px;\">9d4</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">18th</td>\n<td style=\"width: 51px;\">10d4</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">19th</td>\n<td style=\"width: 51px;\">11d4</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">20th</td>\n<td style=\"width: 51px;\">12d4</td>\n</tr>\n</tbody>\n</table>\n<p><sub>Source AP 35 pg. 53</sub></p>\n<p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\"></span></p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.7ilyZdE0yZi2F3SQ]{Solar Manifestation (Su)}</p>\n<p><em>Please change Damage type in the Details tab to match the selected Kinetic Damage.</em></p><em></em><p><em></em></p>\n<p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\"></span></p>\n<div>\n<p>You have studied the delicate and luminous light reflected from a moon or similar celestial body, allowing you to bring forth an exquisite weapon made for graceful combat. This manifestation functions similarly to @UUID[Compendium.sfrpg.class-features.WWHUAfgpvk6uIgY0]{Solar Weapon}, except it deals 1d4 damage at 1st level. This damage increases by 1d4 at 6th level, 9th level, 12th level, and every level thereafter. Your lunar weapon also has the feint (Starfinder Armory 28) and operative special qualities (though it can’t be used to make trick attacks, if you have that class feature). Unlike other melee weapons with the operative special quality, when you gain @UUID[Compendium.sfrpg.feats.9Us7Eg9cAoq3BcS5]{Weapon Specialization} at 3rd level, you add your full solarian level to damage with your lunar weapon, as opposed to half. If you’re a multiclass solarian, you add your full solarian level and half your levels in other classes to damage with your lunar weapon.</p>\n</div>\n<p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\"></span></p>\n<table class=\"inner\" style=\"width: 86px; height: 546px;\">\n<tbody>\n<tr>\n<td style=\"width: 32.1094px;\"><strong>Level</strong></td>\n<td style=\"width: 48.8906px;\"><strong>Solar Weapon</strong></td>\n</tr>\n<tr>\n<td style=\"width: 32.1094px;\">1st</td>\n<td style=\"width: 48.8906px;\">1d4</td>\n</tr>\n<tr>\n<td style=\"width: 32.1094px;\">2nd</td>\n<td style=\"width: 48.8906px;\">1d4</td>\n</tr>\n<tr>\n<td style=\"width: 32.1094px;\">3rd</td>\n<td style=\"width: 48.8906px;\">1d4</td>\n</tr>\n<tr>\n<td style=\"width: 32.1094px;\">4th</td>\n<td style=\"width: 48.8906px;\">1d4</td>\n</tr>\n<tr>\n<td style=\"width: 32.1094px;\">5th</td>\n<td style=\"width: 48.8906px;\">1d4</td>\n</tr>\n<tr>\n<td style=\"width: 32.1094px;\">6th</td>\n<td style=\"width: 48.8906px;\">2d4</td>\n</tr>\n<tr>\n<td style=\"width: 32.1094px;\">7th</td>\n<td style=\"width: 48.8906px;\">2d4</td>\n</tr>\n<tr>\n<td style=\"width: 32.1094px;\">8th</td>\n<td style=\"width: 48.8906px;\">2d4</td>\n</tr>\n<tr>\n<td style=\"width: 32.1094px;\">9th</td>\n<td style=\"width: 48.8906px;\">3d4</td>\n</tr>\n<tr>\n<td style=\"width: 32.1094px;\">10th</td>\n<td style=\"width: 48.8906px;\">3d4</td>\n</tr>\n<tr>\n<td style=\"width: 32.1094px;\">11th</td>\n<td style=\"width: 48.8906px;\">3d4</td>\n</tr>\n<tr>\n<td style=\"width: 32.1094px;\">12th</td>\n<td style=\"width: 48.8906px;\">4d4</td>\n</tr>\n<tr>\n<td style=\"width: 32.1094px;\">13th</td>\n<td style=\"width: 48.8906px;\">5d4</td>\n</tr>\n<tr>\n<td style=\"width: 32.1094px;\">14th</td>\n<td style=\"width: 48.8906px;\">6d4</td>\n</tr>\n<tr>\n<td style=\"width: 32.1094px;\">15th</td>\n<td style=\"width: 48.8906px;\">7d4</td>\n</tr>\n<tr>\n<td style=\"width: 32.1094px;\">16th</td>\n<td style=\"width: 48.8906px;\">8d4</td>\n</tr>\n<tr>\n<td style=\"width: 32.1094px;\">17th</td>\n<td style=\"width: 48.8906px;\">9d4</td>\n</tr>\n<tr>\n<td style=\"width: 32.1094px;\">18th</td>\n<td style=\"width: 48.8906px;\">10d4</td>\n</tr>\n<tr>\n<td style=\"width: 32.1094px;\">19th</td>\n<td style=\"width: 48.8906px;\">11d4</td>\n</tr>\n<tr>\n<td style=\"width: 32.1094px;\">20th</td>\n<td style=\"width: 49.0781px;\">12d4</td>\n</tr>\n</tbody>\n</table>"
     },
     "descriptors": [],
     "duration": {
       "units": "",
-      "value": ""
+      "value": null
     },
+    "equippable": false,
+    "equipped": true,
     "formula": "",
+    "identified": true,
     "isActive": null,
+    "level": 1,
     "modifiers": [],
+    "price": 0,
+    "proficient": true,
+    "properties": {
+      "aeon": false,
+      "amm": false,
+      "analog": false,
+      "antibiological": false,
+      "archaic": false,
+      "aurora": false,
+      "automatic": false,
+      "blast": false,
+      "block": false,
+      "boost": false,
+      "breach": false,
+      "breakdown": false,
+      "bright": false,
+      "buttressing": false,
+      "cluster": false,
+      "conceal": false,
+      "deconstruct": false,
+      "deflect": false,
+      "disarm": false,
+      "double": false,
+      "drainCharge": false,
+      "echo": false,
+      "entangle": false,
+      "explode": false,
+      "extinguish": false,
+      "feint": true,
+      "fiery": false,
+      "firstArc": false,
+      "flexibleLine": false,
+      "force": false,
+      "freeHands": false,
+      "fueled": false,
+      "gearArray": false,
+      "grapple": false,
+      "gravitation": false,
+      "guided": false,
+      "harrying": false,
+      "holyWater": false,
+      "hybrid": false,
+      "hydrodynamic": false,
+      "ignite": false,
+      "indirect": false,
+      "injection": false,
+      "instrumental": false,
+      "integrated": false,
+      "line": false,
+      "living": false,
+      "lockdown": false,
+      "mind-affecting": false,
+      "mine": false,
+      "mire": false,
+      "modal": false,
+      "necrotic": false,
+      "nonlethal": false,
+      "one": true,
+      "operative": true,
+      "penetrating": false,
+      "polarize": false,
+      "polymorphic": false,
+      "powered": false,
+      "professional": false,
+      "propel": false,
+      "punchGun": false,
+      "qreload": false,
+      "radioactive": false,
+      "reach": false,
+      "recall": false,
+      "regrowth": false,
+      "relic": false,
+      "reposition": false,
+      "scramble": false,
+      "shape": false,
+      "shatter": false,
+      "shells": false,
+      "shield": false,
+      "sniper": false,
+      "stun": false,
+      "subtle": false,
+      "sunder": false,
+      "swarm": false,
+      "tail": false,
+      "teleportive": false,
+      "thought": false,
+      "throttle": false,
+      "thrown": false,
+      "thruster": false,
+      "trip": false,
+      "two": false,
+      "unbalancing": false,
+      "underwater": false,
+      "unwieldy": false,
+      "variantBoost": false,
+      "wideLine": false
+    },
+    "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
-      "units": "none",
+      "units": "",
       "value": null
     },
-    "recharge": {
-      "charged": false,
-      "value": null
-    },
-    "requirements": "1st Level",
+    "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
-    "source": "Solarian",
+    "source": "AP #35 pg. 53",
+    "special": "",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
-      "value": ""
+      "value": null
+    },
+    "usage": {
+      "per": "",
+      "value": 0
     },
     "uses": {
       "max": 0,
-      "per": "",
+      "per": null,
       "value": 0
-    }
-  },
-  "effects": [],
-  "flags": {},
-  "img": "systems/sfrpg/icons/classes/solar_weapon.png"
+    },
+    "weaponCategory": "uncategorized",
+    "weaponType": "basicM"
+  }
 }

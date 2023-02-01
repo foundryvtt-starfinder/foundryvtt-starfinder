@@ -1,14 +1,15 @@
-import { DiceSFRPG } from "../../../dice.js"
+import { DiceSFRPG } from "../../../dice.js";
 import RollContext from "../../../rolls/rollcontext.js";
 
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateSaveDC", (fact, context) => {
         const item = fact.item;
-        const itemData = fact.itemData;
-        const data = itemData.data;
+        const itemData = item;
+        const data = itemData.system;
 
         const actor = fact.owner.actor;
         const actorData = fact.owner.actorData;
+        const classes = actor.items.filter(item => item.type === "class");
 
         if (data.actionType) {
 
@@ -17,10 +18,12 @@ export default function (engine) {
 
                 let dcFormula = save.dc?.toString();
                 if (!dcFormula) {
-                    const ownerKeyAbilityId = actorData?.attributes.keyability;
+                    const ownerKeyAbilityId = actorData?.attributes.keyability  || classes[0]?.system.kas;
                     const itemKeyAbilityId = data.ability;
+                    const spellbookSpellAbility = actorData?.attributes.spellcasting;
+                    const classSpellAbility = classes[0]?.system.spellAbility;
 
-                    const abilityKey = itemKeyAbilityId || ownerKeyAbilityId;
+                    const abilityKey = itemKeyAbilityId || spellbookSpellAbility || classSpellAbility || ownerKeyAbilityId;
                     if (abilityKey) {
                         if (itemData.type === "spell") {
                             dcFormula = `10 + @item.level + @owner.abilities.${abilityKey}.mod`;
@@ -33,7 +36,7 @@ export default function (engine) {
                                 }
                             }
                         } else if (itemData.type === "feat") {
-                            dcFormula = `10 + @owner.details.level.value + @owner.abilities.${abilityKey}.mod`;
+                            dcFormula = `10 + floor(@owner.details.level.value / 2) + @owner.abilities.${abilityKey}.mod`;
                         } else {
                             dcFormula = `10 + floor(@item.level / 2) + @owner.abilities.${abilityKey}.mod`;
                         }
@@ -72,7 +75,7 @@ export default function (engine) {
 
                 if (!computedSave) {
                     item.labels.save = 10;
-                    item.labels.saveFormula = 10;    
+                    item.labels.saveFormula = 10;
                 }
             }
         }

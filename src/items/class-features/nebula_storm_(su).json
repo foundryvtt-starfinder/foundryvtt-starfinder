@@ -2,23 +2,25 @@
   "_id": "VlXYVLRVQPBVzpTf",
   "name": "Nebula Storm (Su)",
   "type": "feat",
-  "data": {
+  "img": "systems/sfrpg/images/cup/gameplay/graviton.webp",
+  "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
-    "actionType": "",
+    "actionTarget": "",
+    "actionType": "other",
     "activation": {
       "type": "action",
       "condition": "",
       "cost": 1
     },
     "area": {
-      "effect": "",
-      "shape": "",
-      "units": "none",
-      "value": null
+      "effect": "burst",
+      "shape": "sphere",
+      "units": "ft",
+      "value": 10
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -27,12 +29,31 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "",
+          "formula": "(lookupRange(@classes.solarian.levels, 0, 9, 3, 12, 4, 15, 5, 18, 6))d6",
+          "types": {
+            "acid": false,
+            "bludgeoning": true,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@Compendium[sfrpg.class-features.UVNOjH2ERlQjcGnU]{Zenith Revelation}</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl56_LabelName\">When you’re fully graviton-attuned, as a standard action, you can create areas of cosmic energy that make it difficult to maneuver. When you use this ability, you create three 10-foot-radius bursts within 60 feet of you, each of which cannot overlap and must be centered no more than 15 feet from the center of one other radius. These areas become difficult terrain for a number of rounds equal to your solarian level, and any creature that starts their turn within this difficult terrain takes 3d6 bludgeoning damage, plus 1d6 for every 3 solarian levels you have beyond 9th. An affected creature can attempt a Fortitude save to take half damage. At 17th level, you can create three, four, or five bursts when using this ability.</span></p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.UVNOjH2ERlQjcGnU]{Zenith Revelation}</p>\n<p><sub><img style=\"border: 1px solid var(--color-border-dark);\" src=\"systems/sfrpg/images/cup/gameplay/graviton.webp\" alt=\"\" width=\"20\" height=\"20\">&nbsp;</sub>Graviton Revelation</p>\n<p>When you’re fully graviton-attuned, as a standard action, you can create areas of cosmic energy that make it difficult to maneuver. When you use this ability, you create three 10-foot-radius bursts within 60 feet of you, each of which cannot overlap and must be centered no more than 20 feet from the center of one other radius. These areas become difficult terrain for a number of rounds equal to your solarian level, and any creature that starts their turn within this difficult terrain takes 3d6 bludgeoning damage, plus 1d6 for every 3 solarian levels you have beyond 9th. An affected creature can attempt a Fortitude save to take half damage. At 17th level, you can create three, four, or five bursts when using this ability.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -40,22 +61,24 @@
       "value": ""
     },
     "formula": "",
+    "isActive": null,
     "modifiers": [],
     "range": {
       "additional": "",
       "per": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": 60
     },
     "recharge": {
       "charged": false,
       "value": null
     },
     "requirements": "Zenith Revelation",
+    "rollNotes": "",
     "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": ""
+      "type": "fort",
+      "dc": "10+floor(@classes.solarian.levels/2) + @abilities.cha.mod",
+      "descriptor": "half"
     },
     "source": "Solarian",
     "target": {
@@ -67,11 +90,5 @@
       "per": "",
       "value": 0
     }
-  },
-  "flags": {},
-  "img": "systems/sfrpg/images/cup/gameplay/graviton.png",
-  "permission": {
-    "QqVQDajn5ZN4kl25": 3,
-    "default": 0
   }
 }

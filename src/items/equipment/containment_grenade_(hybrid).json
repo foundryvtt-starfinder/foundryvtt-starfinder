@@ -2,7 +2,8 @@
   "_id": "psguuehHsj3hS8Xn",
   "name": "Containment Grenade (Hybrid)",
   "type": "weapon",
-  "data": {
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
     "type": "",
     "ability": "str",
     "abilityMods": {
@@ -15,6 +16,7 @@
       "condition": "",
       "cost": 1
     },
+    "ammunitionType": "",
     "area": {
       "effect": "burst",
       "shape": "",
@@ -49,6 +51,8 @@
     "chatFlavor": "see text",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
@@ -77,21 +81,42 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "",
+          "formula": "3d6",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p><br>Upon exploding, a containment grenade forces creatures in the blast radius to attempt a Reflex saving throw. Those that fail remain within the blast radius, provided it’s big enough to contain them. Creatures that succeed take 3d6 force damage as they are pushed out of the blast radius. If a creature is too large to be contained within the radius, that creature is shunted out of the area as if it succeeded at the saving throw. Creatures that remain inside the sphere are trapped for 10 minutes as if by a wall of force spell.</p>"
+      "value": "<p>Upon exploding, a containment grenade forces creatures in the blast radius to attempt a Reflex saving throw. Those that fail remain within the blast radius, provided it’s big enough to contain them. Creatures that succeed take 3d6 force damage as they are pushed out of the blast radius. If a creature is too large to be contained within the radius, that creature is shunted out of the area as if it succeeded at the saving throw. Creatures that remain inside the sphere are trapped for 10 minutes as if by a wall of force spell.</p>"
     },
     "descriptors": [],
     "duration": {
       "units": "",
       "value": ""
     },
+    "equippable": false,
     "equipped": false,
     "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 12,
     "modifiers": [],
     "price": 6000,
@@ -110,6 +135,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -125,9 +151,10 @@
       "fiery": false,
       "firstArc": false,
       "flexibleLine": false,
-      "force": false,
+      "force": true,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
@@ -154,6 +181,7 @@
       "polymorphic": false,
       "powered": false,
       "professional": false,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
@@ -162,7 +190,9 @@
       "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
+      "shatter": false,
       "shells": false,
       "shield": false,
       "sniper": false,
@@ -175,6 +205,7 @@
       "thought": false,
       "throttle": false,
       "thrown": true,
+      "thruster": false,
       "trip": false,
       "two": false,
       "unbalancing": false,
@@ -184,19 +215,37 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
       "value": 20
     },
+    "rollNotes": "",
     "save": {
       "type": "reflex",
-      "dc": "15+@abilities.dex.mod",
+      "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
       "descriptor": "partial"
     },
-    "source": "",
+    "source": "AR pg. 126",
     "special": "",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
@@ -206,13 +255,11 @@
       "value": 1
     },
     "uses": {
-      "max": 0,
-      "per": "",
-      "value": 0
+      "max": 1,
+      "per": "charges",
+      "value": 1
     },
     "weaponCategory": "",
     "weaponType": "grenade"
-  },
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg"
+  }
 }

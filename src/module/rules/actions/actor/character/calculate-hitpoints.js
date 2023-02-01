@@ -1,6 +1,6 @@
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../../modifiers/types.js";
 
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateHitpoints", (fact, context) => {
         const data = fact.data;
 
@@ -28,7 +28,7 @@ export default function (engine) {
                     source: bonus.name
                 }));
             }
-            
+
             return computedBonus;
         };
 
@@ -37,7 +37,7 @@ export default function (engine) {
         // Race bonus
         if (fact.races && fact.races.length > 0) {
             for (const race of fact.races) {
-                const raceData = race.data.data;
+                const raceData = race.system;
 
                 hpMax += raceData.hp.value;
 
@@ -51,7 +51,7 @@ export default function (engine) {
         // Class bonus
         if (fact.classes && fact.classes.length > 0) {
             for (const cls of fact.classes) {
-                const classData = cls.data.data;
+                const classData = cls.system;
 
                 let classBonus = Math.floor(classData.levels * classData.hp.value);
                 hpMax += classBonus;
@@ -62,7 +62,7 @@ export default function (engine) {
                 }));
             }
         }
-        
+
         // Iterate through any modifiers that affect HP
         let filteredModifiers = fact.modifiers.filter(mod => {
             return (mod.enabled || mod.modifierType === "roll") && mod.effectType == SFRPGEffectType.HIT_POINTS;
@@ -82,7 +82,7 @@ export default function (engine) {
 
             return sum;
         }, 0);
-        
+
         hpMax += bonus;
 
         data.attributes.hp.max = hpMax;

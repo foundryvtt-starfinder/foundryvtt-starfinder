@@ -2,7 +2,8 @@
   "_id": "uNsADocQHSqcPUmW",
   "name": "Solar Battery (Su)",
   "type": "feat",
-  "data": {
+  "img": "systems/sfrpg/images/cup/gameplay/photon.webp",
+  "system": {
     "type": "",
     "ability": "",
     "abilityMods": {
@@ -28,23 +29,7 @@
       "parts": []
     },
     "damage": {
-      "parts": [
-        {
-          "name": "",
-          "formula": "@classes.solarian.levels + @abilities.cha.mod",
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
-            "cold": false,
-            "electricity": false,
-            "fire": false,
-            "healing": false,
-            "piercing": false,
-            "slashing": false,
-            "sonic": false
-          }
-        }
-      ]
+      "parts": []
     },
     "damageNotes": "",
     "description": {
@@ -52,7 +37,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@Compendium[sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p>You can energize a battery with solar power, empowering a weapon but draining the battery in the process. As a move action, you supercharge one weapon you&rsquo;re wielding or a weapon wielded by an ally within your melee reach. The weapon must have a battery, and that battery must have at least half its charges remaining. The next attack made with that weapon before the end of your next turn gains a bonus to its damage equal to your solarian level plus your Charisma modifier, but the attack expends the battery&rsquo;s remaining charges.<br />If you&rsquo;re attuned or fully attuned, you can cause half or all of the weapon&rsquo;s damage to become fire damage instead of its normal damage type; this doesn&rsquo;t change whether the attack targets EAC or KAC. If the attack already deals two types of damage, the wielder can replace one or both of them with fire damage.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p><sub><img style=\"border: 1px solid var(--color-border-dark);\" src=\"systems/sfrpg/images/cup/gameplay/photon.webp\" alt=\"\" width=\"20\" height=\"20\"></sub><span>&nbsp;</span>Photon Revelation</p>\n<p>You can energize a battery with solar power, empowering a weapon but draining the battery in the process. As a move action, you supercharge one weapon you’re wielding or a weapon wielded by an ally within your melee reach. The weapon must have a battery, and that battery must have at least half its charges remaining. The next attack made with that weapon before the end of your next turn gains a bonus to its damage equal to your solarian level plus your Charisma modifier, but the attack expends the battery’s remaining charges.</p>\n<p>If you’re attuned or fully attuned, you can cause half or all of the weapon’s damage to become fire damage instead of its normal damage type; this doesn’t change whether the attack targets EAC or KAC. If the attack already deals two types of damage, the wielder can replace one or both of them with fire damage.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -61,7 +46,23 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "c4143138-7f3f-4315-a3ce-60a013b611a6",
+        "name": "Solar Battery (Su)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-damage",
+        "enabled": true,
+        "max": 0,
+        "modifier": "@classes.solarian.levels + @abilities.cha.mod",
+        "modifierType": "formula",
+        "notes": "The next attack made with the weapon which battery it used for this ability before the end of your next turn gains this bonus.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -89,6 +90,5 @@
       "per": "",
       "value": 0
     }
-  },
-  "img": "systems/sfrpg/images/cup/gameplay/photon.png"
+  }
 }

@@ -1,0 +1,126 @@
+{
+  "_id": "U2iZpDZBZCQh2nKL",
+  "name": "Destructive Rebuke",
+  "type": "spell",
+  "img": "systems/sfrpg/icons/spells/call_cosmos.webp",
+  "system": {
+    "type": "",
+    "ability": "",
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "",
+    "actionType": "save",
+    "activation": {
+      "type": "special",
+      "condition": "",
+      "cost": 1
+    },
+    "allowedClasses": {
+      "myst": true,
+      "precog": false,
+      "tech": false,
+      "wysh": true
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "none",
+      "value": null
+    },
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "concentration": false,
+    "critical": {
+      "effect": "",
+      "parts": []
+    },
+    "damage": {
+      "parts": [
+        {
+          "name": "Health > 10HP",
+          "formula": "lookupRange(@item.level, 1, 2, 2, 3, 4, 4, 6, 5, 9, 6, 13)d6",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Health < 10HP",
+          "formula": "lookupRange(@item.level, 1, 2, 2, 3, 4, 4, 6, 5, 9, 6, 13)d8",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
+    },
+    "damageNotes": "",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>You convert your pain and emotional distress into a sharp, forceful reverberation that fractures another creature’s body. The target can attempt a Fortitude saving throw to halve the damage dealt by the spell and negate any additional effects.</p>\n<p>When you take damage from a spell or attack, you can cast this spell as a reaction, but only to target the creature that performed the triggering spell or attack. If the triggering effect was a critical hit or reduced your Hit Points to 10 or fewer (but not 0), you roll d8s instead of d6s to calculate yourdestructive rebuke’s damage. Casting this spell as a reaction doesn’t provoke attacks of opportunity.</p>\n<p><strong>1st</strong>:When you castdestructive rebukeas a 1st-level spell, it deals 1d6 damage with the force descriptor, and the target is @UUID[Compendium.sfrpg.conditions.MZ8OoH1GE9qDMyCD]{Flat-Footed} until the end of your next turn.</p>\n<p><strong>2nd</strong>:When you castdestructive rebukeas a 2nd-level spell, it deals 2d6 damage with the force descriptor, and the target is flat-footed until the end of your next turn.</p>\n<p><strong>3rd</strong>:When you castdestructive rebukeas a 3rd-level spell, it deals 4d6 damage with the force descriptor, and the target is flat-footed until the end of your next turn.</p>\n<p><strong>4th</strong>:When you castdestructive rebukeas a 4th-level spell, it deals 6d6 damage with the force descriptor, and the target is sickened for 1 round.</p>\n<p><strong>5th</strong>:When you castdestructive rebukeas a 5th-level spell, it deals 9d6 damage with the force descriptor, and the target is sickened and flat-footed for 1 round.</p>\n<p><strong>6th</strong>:When you castdestructive rebukeas a 6th-level spell, it deals 13d6 damage with the force descriptor, and the target is knocked prone and becomes sickened and flat-footed for 1 round.</p>"
+    },
+    "descriptors": [],
+    "dismissible": false,
+    "duration": {
+      "units": "",
+      "value": "instantaneous"
+    },
+    "formula": "",
+    "isActive": null,
+    "isVariableLevel": true,
+    "level": 1,
+    "materials": {
+      "consumed": false,
+      "cost": 0,
+      "supply": 0,
+      "value": ""
+    },
+    "modifiers": [],
+    "preparation": {
+      "mode": "",
+      "prepared": false
+    },
+    "range": {
+      "additional": "5 ft.",
+      "per": "2 levels",
+      "units": "ft",
+      "value": 25
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "fort",
+      "dc": "",
+      "descriptor": "partial"
+    },
+    "school": "evo",
+    "source": "DC pg. 135",
+    "sr": true,
+    "target": {
+      "type": "",
+      "value": "one creature"
+    },
+    "uses": {
+      "max": null,
+      "per": "",
+      "value": null
+    }
+  }
+}

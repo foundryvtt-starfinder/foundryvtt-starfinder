@@ -1,26 +1,26 @@
 export const ItemActivationMixin = (superclass) => class extends superclass {
 
     hasUses() {
-        const itemData = this.data.data;
+        const itemData = this.system;
         return itemData.uses && itemData.uses.max && itemData.uses.value;
     }
 
     getRemainingUses() {
-        const itemData = this.data.data;
+        const itemData = this.system;
         return itemData.uses?.value || 0;
     }
 
     getMaxUses() {
-        const itemData = this.data.data;
+        const itemData = this.system;
         return itemData.uses?.max || 0;
     }
 
     canBeUsed() {
         return this.getRemainingUses() > 0 && this.getMaxUses() > 0;
     }
-    
+
     canBeActivated() {
-        const itemData = this.data.data;
+        const itemData = this.system;
         if (this.type === "vehicleSystem") {
             return itemData.canBeActivated;
         } else {
@@ -29,14 +29,14 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
     }
 
     isActive() {
-        const itemData = this.data.data;
+        const itemData = this.system;
         return itemData.isActive;
     }
-    
+
     setActive(active) {
         // Only true and false are accepted.
         if (active !== true && active !== false) {
-            console.log(`Entering an invalid value ${active} for item.setActive()! Only true or false are allowed.`)
+            console.log(`Entering an invalid value ${active} for item.setActive()! Only true or false are allowed.`);
             return;
         }
 
@@ -54,14 +54,14 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                 return false;
             }
 
-            updateData['data.uses.value'] = Math.max(0, remainingUses - 1);
+            updateData['system.uses.value'] = Math.max(0, remainingUses - 1);
         }
 
-        updateData['data.isActive'] = active;
+        updateData['system.isActive'] = active;
 
         const updatePromise = this.update(updateData);
         const rollMode = game.settings.get("core", "rollMode");
-        
+
         if (active) {
             updatePromise.then(() => {
                 // Render the chat card template
@@ -81,7 +81,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                     templateData.sceneId = this.actor.token.parent.id;
                 }
 
-                const template = `systems/sfrpg/templates/chat/item-action-card.html`;
+                const template = `systems/sfrpg/templates/chat/item-action-card.hbs`;
                 const htmlPromise = renderTemplate(template, templateData);
                 htmlPromise.then((html) => {
                     // Create the chat message
@@ -109,8 +109,8 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                 Hooks.callAll("itemActivationChanged", {actor: this.actor, item: this, isActive: active});
             });
         } else {
-            if (this.data.data.duration.value || this.data.data.uses.max > 0) {
-               updatePromise.then(() => {
+            if (this.system.duration.value || this.system.uses.max > 0) {
+                updatePromise.then(() => {
                     // Render the chat card template
                     const templateData = {
                         actor: this.actor,
@@ -122,10 +122,10 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                         templateData.tokenId = this.actor.token.id;
                         templateData.sceneId = this.actor.token.parent.id;
                     }
-        
-                    const template = `systems/sfrpg/templates/chat/item-action-card.html`;
+
+                    const template = `systems/sfrpg/templates/chat/item-action-card.hbs`;
                     const htmlPromise = renderTemplate(template, templateData);
-        
+
                     htmlPromise.then((html) => {
                         // Create the chat message
                         const chatData = {
@@ -145,7 +145,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                         if (rollMode === "selfroll") {
                             chatData["whisper"] = ChatMessage.getWhisperRecipients(game.user.name);
                         }
-            
+
                         ChatMessage.create(chatData, { displaySheet: false });
                     });
 
@@ -156,4 +156,4 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
 
         return updatePromise;
     }
-}
+};

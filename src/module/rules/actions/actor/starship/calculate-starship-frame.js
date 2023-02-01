@@ -1,11 +1,11 @@
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes} from "../../../../modifiers/types.js";
 
-export default function (engine) {
+export default function(engine) {
     engine.closures.add( "calculateStarshipFrame", (fact, context) => {
         const data = fact.data;
         const modifiers = fact.modifiers;
         const frames = fact.frames;
-        
+
         const maneuverabilityMap = {
             "clumsy" : { pilotingBonus: -2, turn: 4 },
             "poor"   : { pilotingBonus: -1, turn: 3 },
@@ -155,31 +155,31 @@ export default function (engine) {
             data.attributes.hp.max = 0;
             data.crew.gunner.limit = 0;
         } else {
-            const frame = frames[0].data;
+            const frame = frames[0];
 
             data.frame = frame;
 
             data.details.frame = frame.name;
-            data.details.size = frame.data.size;
-            data.attributes.maneuverability = frame.data.maneuverability;
+            data.details.size = frame.system.size;
+            data.attributes.maneuverability = frame.system.maneuverability;
             data.attributes.damageThreshold = {
-                value: frame.data.damageThreshold.base,
+                value: frame.system.damageThreshold.base,
                 tooltip: []
             };
             data.attributes.expansionBays = {
-                value: frame.data.expansionBays,
+                value: frame.system.expansionBays,
                 tooltip: []
             };
-            data.attributes.complement.min = frame.data.crew.minimum;
-            data.attributes.complement.max = frame.data.crew.maximum;
+            data.attributes.complement.min = frame.system.crew.minimum;
+            data.attributes.complement.max = frame.system.crew.maximum;
 
-            data.attributes.hp.increment = frame.data.hitpoints.increment;
-            data.attributes.hp.max = frame.data.hitpoints.base + Math.floor(data.details.tier / 4) * frame.data.hitpoints.increment;
-            data.crew.gunner.limit = frame.data.weaponMounts.forward.lightSlots + frame.data.weaponMounts.forward.heavySlots + frame.data.weaponMounts.forward.capitalSlots
-                + frame.data.weaponMounts.aft.lightSlots + frame.data.weaponMounts.aft.heavySlots + frame.data.weaponMounts.aft.capitalSlots
-                + frame.data.weaponMounts.port.lightSlots + frame.data.weaponMounts.port.heavySlots + frame.data.weaponMounts.port.capitalSlots
-                + frame.data.weaponMounts.starboard.lightSlots + frame.data.weaponMounts.starboard.heavySlots + frame.data.weaponMounts.starboard.capitalSlots
-                + frame.data.weaponMounts.turret.lightSlots + frame.data.weaponMounts.turret.heavySlots + frame.data.weaponMounts.turret.capitalSlots;
+            data.attributes.hp.increment = frame.system.hitpoints.increment;
+            data.attributes.hp.max = frame.system.hitpoints.base + Math.floor(data.details.tier / 4) * frame.system.hitpoints.increment;
+            data.crew.gunner.limit = frame.system.weaponMounts.forward.lightSlots + frame.system.weaponMounts.forward.heavySlots + frame.system.weaponMounts.forward.capitalSlots
+                + frame.system.weaponMounts.aft.lightSlots + frame.system.weaponMounts.aft.heavySlots + frame.system.weaponMounts.aft.capitalSlots
+                + frame.system.weaponMounts.port.lightSlots + frame.system.weaponMounts.port.heavySlots + frame.system.weaponMounts.port.capitalSlots
+                + frame.system.weaponMounts.starboard.lightSlots + frame.system.weaponMounts.starboard.heavySlots + frame.system.weaponMounts.starboard.capitalSlots
+                + frame.system.weaponMounts.turret.lightSlots + frame.system.weaponMounts.turret.heavySlots + frame.system.weaponMounts.turret.capitalSlots;
 
             data.attributes.turn.value = maneuverabilityMap[data.attributes.maneuverability].turn;
             data.attributes.turn.tooltip.push(`${data.details.frame}: ${data.attributes.turn.value.signedString()}`);
@@ -265,12 +265,12 @@ export default function (engine) {
         const sizeModifier = sizeModifierMap[data.details.size] || 0;
         const starshipComponents = fact.items.filter(x => x.type.startsWith("starship"));
         for (const component of starshipComponents) {
-            const componentData = component.data.data;
+            const componentData = component.system;
             const bpCost = componentData.costMultipliedBySize ? sizeModifier * componentData.cost : componentData.cost;
             data.attributes.bp.value += bpCost;
             data.attributes.bp.tooltip.push(`${component.name}: ${bpCost}`);
         }
-        
+
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] } );
 }

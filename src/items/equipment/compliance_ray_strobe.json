@@ -2,7 +2,8 @@
   "_id": "tkRinSgbsIQvvRXq",
   "name": "Compliance ray, strobe",
   "type": "weapon",
-  "data": {
+  "img": "systems/sfrpg/icons/equipment/weapons/incapacitator.webp",
+  "system": {
     "type": "",
     "ability": "dex",
     "abilityMods": {
@@ -15,6 +16,7 @@
       "condition": "",
       "cost": null
     },
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
       "shape": "",
@@ -49,6 +51,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -91,24 +94,36 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "4d4",
-          "operator": "",
           "types": {
-            "fire": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>With a wider beam than typical lasers, the compliance ray is designed for crowd control and other nonmilitary uses. Although these rays are legal for civilians to own, most models are themed to fit in with the local constabulary&rsquo;s armor; the Stewards&rsquo; blue-and-gold models are common throughout the Pact Worlds. Shots from these pistols cause intense discomfort, and a hit to the eyes can cause temporary blindness. Models begin with the flash designation and increase&nbsp;in intensity as follows: flare, strobe, starburst, and sunspot.</p>"
+      "value": "<p>With a wider beam than typical lasers, the compliance ray is designed for crowd control and other nonmilitary uses. Although these rays are legal for civilians to own, most models are themed to fit in with the local constabulary’s armor; the Stewards’ blue-and-gold models are common throughout the Pact Worlds. Shots from these pistols cause intense discomfort, and a hit to the eyes can cause temporary blindness. Models begin with the flash designation and increase&nbsp;in intensity as follows: flare, strobe, starburst, and sunspot.</p>"
     },
     "descriptors": [],
     "duration": {
       "units": "",
       "value": ""
     },
+    "equippable": false,
     "equipped": false,
     "formula": "",
     "identified": true,
@@ -131,6 +146,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -149,6 +165,7 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
@@ -175,6 +192,7 @@
       "polymorphic": false,
       "powered": false,
       "professional": false,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
@@ -183,7 +201,9 @@
       "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
+      "shatter": false,
       "shells": false,
       "shield": false,
       "sniper": false,
@@ -196,6 +216,7 @@
       "thought": false,
       "throttle": false,
       "thrown": false,
+      "thruster": false,
       "trip": false,
       "two": false,
       "unbalancing": false,
@@ -205,12 +226,14 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
       "value": 60
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": "",
@@ -218,6 +241,22 @@
     },
     "source": "AR pg. 14",
     "special": "",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
@@ -233,8 +272,5 @@
     },
     "weaponCategory": "laser",
     "weaponType": "smallA"
-  },
-  "effects": [],
-  "flags": {},
-  "img": "systems/sfrpg/icons/equipment/weapons/incapacitator.jpg"
+  }
 }

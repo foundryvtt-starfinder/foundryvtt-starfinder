@@ -2,7 +2,8 @@
   "_id": "l8z0L0glrIrssG64",
   "name": "Summoning Grenade, Mk 5 (Hybrid)",
   "type": "weapon",
-  "data": {
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
     "type": "",
     "ability": "str",
     "abilityMods": {
@@ -15,6 +16,7 @@
       "condition": "",
       "cost": 1
     },
+    "ammunitionType": "",
     "area": {
       "effect": "burst",
       "shape": "",
@@ -49,6 +51,8 @@
     "chatFlavor": "see text",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
@@ -79,19 +83,24 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>When a diminisher grenade explodes, it twists space-time enough to accelerate the duration of magic and other effects in the blast radius. Any existing effect that has a duration measured in rounds has its remaining duration reduced by 2d4 rounds. If this reduction drops the remaining duration to 0 or less, the effect ends.<br>A diminisher grenade affects only items and spells of the indicated level or lower or, for other effects, only those created by creatures with a CR or level equal to or lower than that listed.</p>\n<ul>\n<li><strong>Mk 1 (Level 3):</strong>&nbsp;Item level or CR 3; spell level 1st</li>\n<li><strong>Mk 2 (Level 6):</strong>&nbsp;Item level or CR 6; spell level 2nd</li>\n<li><strong>Mk 3 (Level 9):&nbsp;</strong>Item level or CR 9; spell level 3rd</li>\n<li><strong>Mk 4 (Level 12):</strong>&nbsp;Item level or CR 12; spell level 4th</li>\n<li><strong>Mk 5 (Level 15):</strong>&nbsp;Item level or CR 15; spell level 5th</li>\n<li><strong>Mk 6 (Level 18):</strong>&nbsp;Item level or CR 18; spell level 6th</li>\n</ul>"
+      "value": "<p>The explosion a summoning grenade generates is a realitywarping field that summons creatures as if you had cast a @UUID[Compendium.sfrpg.spells.rJ0acpj21GDJYaim]{Summon Creature} spell (Alien Archive 144) of a spell level and caster level according to the grenade’s type. The creatures to be summoned are set when the grenade is created, so you know what you’re getting when you buy, presupposing a scrupulous vendor. When the grenade detonates, the summoned creatures appear immediately in unoccupied spaces, but a creature needs to have only 1 square of its space inside the blast radius. If a creature doesn’t have enough room to appear, it doesn’t. Summoned creatures treat you as their summoner.</p>\n<p>Summoning grenades come in the following types.</p>\n<ul>\n<li><strong>Mk 1 (Level 3):&nbsp;</strong> 1st-level summon creature; caster level 3rd</li>\n<li><strong>Mk 2 (Level 6):&nbsp;</strong> 2nd-level summon creature; caster level 6th</li>\n<li><strong>Mk 3 (Level 9):</strong>&nbsp;3rd-level summon creature; caster level 9th</li>\n<li><strong>Mk 4 (Level 12):</strong>&nbsp;4th-level summon creature; caster level 12th</li>\n<li><strong>Mk 5 (Level 15):&nbsp;</strong> 5th-level summon creature; caster level 15th</li>\n<li><strong>Mk 6 (Level 18):&nbsp;</strong> 6th-level summon creature; caster level 18th</li>\n</ul>"
     },
     "descriptors": [],
     "duration": {
       "units": "",
       "value": ""
     },
+    "equippable": false,
     "equipped": false,
     "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 15,
     "modifiers": [],
     "price": 16000,
@@ -110,6 +119,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -128,6 +138,7 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
@@ -154,6 +165,7 @@
       "polymorphic": false,
       "powered": false,
       "professional": false,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
@@ -162,7 +174,9 @@
       "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
+      "shatter": false,
       "shells": false,
       "shield": false,
       "sniper": false,
@@ -175,6 +189,7 @@
       "thought": false,
       "throttle": false,
       "thrown": true,
+      "thruster": false,
       "trip": false,
       "two": false,
       "unbalancing": false,
@@ -184,19 +199,37 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
       "value": 20
     },
+    "rollNotes": "",
     "save": {
-      "type": "reflex",
-      "dc": "17+@abilities.dex.mod",
+      "type": "",
+      "dc": "",
       "descriptor": "partial"
     },
-    "source": "",
+    "source": "AR pg. 126",
     "special": "",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
@@ -206,13 +239,11 @@
       "value": 1
     },
     "uses": {
-      "max": 0,
-      "per": "",
-      "value": 0
+      "max": 1,
+      "per": "charges",
+      "value": 1
     },
     "weaponCategory": "",
     "weaponType": "grenade"
-  },
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg"
+  }
 }

@@ -2,12 +2,14 @@
   "_id": "nL0Ns1wXXtXa20nf",
   "name": "Gravity Anchor (Su)",
   "type": "feat",
-  "data": {
+  "img": "systems/sfrpg/icons/classes/gravity_anchor.webp",
+  "system": {
     "type": "",
     "ability": null,
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "move",
@@ -29,10 +31,13 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"G7p2YIGFTAU6uGjL\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Stellar Revelation</a></p>\n        <p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl10_LabelName\">As a move action, you can form a gravitational bond between yourself and either the surface you’re standing on or the objects you are holding. This grants you a +4 bonus to your AC against bull rush, reposition, and trip combat maneuvers if you choose the surface underfoot, or against disarm combat maneuvers if you choose objects. The bonus lasts for 1 round or until you leave graviton mode. You can have only one gravity anchor active at a time.<br><br>When you are attuned or fully attuned, you can activate this revelation as a reaction when targeted by a bull rush, disarm, reposition, or trip combat maneuver, in which case it defends against only that attack.</span></p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p><sub><img style=\"border: 1px solid var(--color-border-dark);\" src=\"systems/sfrpg/images/cup/gameplay/graviton.webp\" alt=\"\" width=\"20\" height=\"20\"></sub>&nbsp;Graviton Revelation</p>\n<p>As a move action, you can form a gravitational bond between yourself and either the surface you’re standing on or the objects you are holding. This grants you a +4 bonus to your AC against bull rush, reposition, and trip combat maneuvers if you choose the surface underfoot, or against disarm combat maneuvers if you choose objects. The bonus lasts for 1 round or until you leave graviton mode. You can have only one gravity anchor active at a time.</p>\n<p>When you are attuned or fully attuned, you can activate this revelation as a reaction when targeted by a bull rush, disarm, reposition, or trip combat maneuver, in which case it defends against only that attack.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -40,7 +45,24 @@
       "value": ""
     },
     "formula": "",
-    "modifiers": [],
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "33bdda9d-ab8c-4fdd-9bef-ad8e47d79c33",
+        "name": "Gravity Anchor (Su)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "cmd",
+        "enabled": true,
+        "max": 4,
+        "modifier": "4",
+        "modifierType": "constant",
+        "notes": "This grants you a +4 bonus to your AC against bull rush, reposition, and trip combat maneuvers if you choose the surface underfoot, or against disarm combat maneuvers if you choose objects.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -52,6 +74,7 @@
       "value": null
     },
     "requirements": "2nd Level",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
@@ -67,11 +90,5 @@
       "per": "",
       "value": 0
     }
-  },
-  "flags": {},
-  "img": "systems/sfrpg/icons/classes/gravity_anchor.png",
-  "permission": {
-    "QqVQDajn5ZN4kl25": 3,
-    "default": 0
   }
 }

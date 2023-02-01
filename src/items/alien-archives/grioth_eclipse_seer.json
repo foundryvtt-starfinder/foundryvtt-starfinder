@@ -2,7 +2,1376 @@
   "_id": "SgELVy5e8952pMY1",
   "name": "Grioth Eclipse Seer",
   "type": "npc2",
-  "data": {
+  "img": "icons/svg/mystery-man.svg",
+  "items": [
+    {
+      "_id": "qnWKHCrdWUkaNVDi",
+      "name": "Void Adaptation",
+      "type": "feat",
+      "img": "icons/svg/mystery-man.svg",
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>(EX OR SU)</p>\n<p>Numerous creatures are inured to the void of outer space. A creature with void adaptation has the following abilities.</p>\n<ul>\n<li>Immunity to cosmic rays.</li>\n<li>Immunity to the environmental effects of vacuum.</li>\n<li>No breath (see page 152).</li>\n</ul>\n<hr />"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "isActive": null,
+        "modifiers": [],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "o7cJxvG9jLhB7jH8",
+      "name": "Bite (plus Psychotomimetic Saliva)",
+      "type": "weapon",
+      "img": "icons/svg/mystery-man.svg",
+      "system": {
+        "type": "",
+        "ability": "",
+        "actionTarget": "kac",
+        "actionType": "mwak",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": 0
+        },
+        "attackBonus": 11,
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": true
+        },
+        "attuned": false,
+        "bulk": "L",
+        "capacity": {
+          "max": 0,
+          "value": 0
+        },
+        "chatFlavor": "",
+        "container": {
+          "contents": [],
+          "isOpen": true,
+          "storage": [
+            {
+              "type": "slot",
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 0,
+              "subtype": "fusion",
+              "weightProperty": "level"
+            }
+          ]
+        },
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "1d6+6",
+              "operator": "",
+              "types": {
+                "piercing": true
+              }
+            }
+          ]
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "equipped": true,
+        "formula": "",
+        "identified": true,
+        "isActive": null,
+        "level": 1,
+        "modifiers": [],
+        "price": 0,
+        "proficient": true,
+        "properties": {},
+        "quantity": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "special": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "usage": {
+          "per": "",
+          "value": 0
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        },
+        "weaponCategory": "uncategorized",
+        "weaponType": "basicM"
+      }
+    },
+    {
+      "_id": "5zUAl4YgqzKv5CtO",
+      "name": "Mindshock (Su)",
+      "type": "feat",
+      "img": "icons/svg/mystery-man.svg",
+      "system": {
+        "type": "",
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "save",
+        "activation": {
+          "type": "action",
+          "condition": "",
+          "cost": 1
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "none",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "2d6",
+              "operator": "",
+              "types": {}
+            }
+          ]
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>Three times per day as a standard action, a grioth eclipse seer can unleash a wave of violent psychic energy. Each non grioth creature within 30 feet takes 2d6 damage and is @UUID[Compendium.sfrpg.conditions.nywSVEeDvp1bk7L3]{Shaken} for 1d4 rounds. A creature that succeeds at a DC 16 Will save takes half damage and negates the @UUID[Compendium.sfrpg.conditions.nywSVEeDvp1bk7L3]{Shaken} condition. This is a mind-affecting effect.</p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": ""
+        },
+        "formula": "",
+        "isActive": null,
+        "modifiers": [],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "none",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "save": {
+          "type": "will",
+          "dc": "16",
+          "descriptor": "negate"
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "uses": {
+          "max": 3,
+          "per": "day",
+          "value": 3
+        }
+      }
+    },
+    {
+      "_id": "Van648dybPGK1UMe",
+      "name": "No Breath",
+      "type": "feat",
+      "img": "icons/svg/mystery-man.svg",
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>(EX)</p>\n<p>The creature doesn't breathe, and it is immune to effects that require breathing (such as inhaled @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Poison}). This does not give it immunity to cloud or gas attacks that don't require breathing.</p>\n<hr />"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "isActive": null,
+        "modifiers": [],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "hbCdsI0a1IQhgwW7",
+      "name": "Hold Person (DC 18)",
+      "type": "spell",
+      "img": "systems/sfrpg/icons/spells/hold_person.webp",
+      "system": {
+        "type": "",
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "save",
+        "activation": {
+          "type": "action",
+          "condition": "",
+          "cost": 1
+        },
+        "allowedClasses": {
+          "myst": true,
+          "tech": false,
+          "wysh": true
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "none",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "concentration": false,
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>The target becomes @UUID[Compendium.sfrpg.conditions.NV4qXRDgb7zTNkW2]{Paralyzed} and freezes in place. It is aware and breathes normally but can't take any physical actions, even speech. A held creature can't cast spells. Each round on its turn, the target can spend a full action to attempt a new saving throw to end the effect. This does not provoke attacks of opportunity. A winged creature that is @UUID[Compendium.sfrpg.conditions.NV4qXRDgb7zTNkW2]{Paralyzed} can't flap its wings and falls. A swimmer can't swim and may drown.</p>"
+        },
+        "descriptors": [],
+        "dismissible": true,
+        "duration": {
+          "units": "",
+          "value": "1 round/level (D)"
+        },
+        "formula": "",
+        "isActive": null,
+        "level": 2,
+        "materials": {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": ""
+        },
+        "modifiers": [],
+        "preparation": {
+          "mode": "innate",
+          "prepared": true
+        },
+        "range": {
+          "additional": "ft.10",
+          "per": "level",
+          "units": "ft",
+          "value": 100
+        },
+        "save": {
+          "type": "will",
+          "dc": "18",
+          "descriptor": "negate"
+        },
+        "school": "enc",
+        "source": "CRB pg. 359",
+        "sr": true,
+        "target": {
+          "type": "",
+          "value": "one humanoid creature"
+        },
+        "uses": {
+          "max": 1,
+          "per": "day",
+          "value": 1
+        }
+      }
+    },
+    {
+      "_id": "TKc3h32TmhYnRxqT",
+      "name": "Inflict Pain (DC 18)",
+      "type": "spell",
+      "img": "systems/sfrpg/icons/spells/inflict_pain.webp",
+      "system": {
+        "type": "",
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "save",
+        "activation": {
+          "type": "action",
+          "condition": "",
+          "cost": 1
+        },
+        "allowedClasses": {
+          "myst": true,
+          "tech": false,
+          "wysh": false
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "none",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "concentration": false,
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>You telepathically rack the target's mind and body with agonizing pain that imposes a — penalty to ability checks, attack rolls, and skill checks. A target that succeeds at a Will saving throw reduces the duration to 1 round.</p>"
+        },
+        "descriptors": [],
+        "dismissible": false,
+        "duration": {
+          "units": "",
+          "value": "1 round/level"
+        },
+        "formula": "",
+        "isActive": null,
+        "level": 2,
+        "materials": {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": ""
+        },
+        "modifiers": [],
+        "preparation": {
+          "mode": "innate",
+          "prepared": true
+        },
+        "range": {
+          "additional": "5 ft.",
+          "per": "2 levels",
+          "units": "ft",
+          "value": 25
+        },
+        "save": {
+          "type": "will",
+          "dc": "18",
+          "descriptor": "partial"
+        },
+        "school": "abj",
+        "source": "CRB pg. 361",
+        "sr": true,
+        "target": {
+          "type": "",
+          "value": "one creature"
+        },
+        "uses": {
+          "max": 1,
+          "per": "day",
+          "value": 1
+        }
+      }
+    },
+    {
+      "_id": "uR1QWmzs2JzMmzls",
+      "name": "Command (DC 17)",
+      "type": "spell",
+      "img": "systems/sfrpg/icons/spells/command.webp",
+      "system": {
+        "type": "",
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "save",
+        "activation": {
+          "type": "action",
+          "condition": "",
+          "cost": 1
+        },
+        "allowedClasses": {
+          "myst": true,
+          "tech": false,
+          "wysh": false
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "none",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "concentration": false,
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>You give the target one of the following commands, which it obeys to the best of its ability at its earliest opportunity. If the target can’t carry out your command on its next turn, the spell automatically fails.</p>\n<p><strong>Approach</strong>: The target moves toward you as quickly and directly as possible for 1 round, taking no other actions and triggering reactions (such as attacks of opportunity) for this movement as normal.</p>\n<p><strong>Drop</strong>: The target drops whatever it is holding. It can’t pick up any dropped item until its next turn.</p>\n<p><strong>Fall</strong>: The target falls to the ground and remains @UUID[Compendium.sfrpg.conditions.XeRGqHVtcZ7vsgJ0]{Prone} for 1 round. It can otherwise act normally.</p>\n<p><strong>Flee</strong>: The target moves away from you as quickly and directly as possible for 1 round, taking no other actions and provoking reactions (such as attacks of opportunity) for this movement as normal.</p>\n<p><strong>Halt</strong>: The target is dazed for 1 round.</p>"
+        },
+        "descriptors": [],
+        "dismissible": false,
+        "duration": {
+          "units": "",
+          "value": "1 round"
+        },
+        "formula": "",
+        "isActive": null,
+        "level": 1,
+        "materials": {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": ""
+        },
+        "modifiers": [],
+        "preparation": {
+          "mode": "innate",
+          "prepared": true
+        },
+        "range": {
+          "additional": "5 ft.",
+          "per": "2 levels",
+          "units": "ft",
+          "value": 25
+        },
+        "save": {
+          "type": "will",
+          "dc": "17",
+          "descriptor": "negate"
+        },
+        "school": "enc",
+        "source": "CRB pg. 343",
+        "sr": true,
+        "target": {
+          "type": "",
+          "value": "one living creature"
+        },
+        "uses": {
+          "max": 3,
+          "per": "day",
+          "value": 3
+        }
+      }
+    },
+    {
+      "_id": "zjKNcC1qz4HTUQ7R",
+      "name": "Detect Thoughts (DC 17)",
+      "type": "spell",
+      "img": "systems/sfrpg/icons/spells/detect_thoughts.webp",
+      "system": {
+        "type": "",
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "save",
+        "activation": {
+          "type": "action",
+          "condition": "",
+          "cost": 1
+        },
+        "allowedClasses": {
+          "myst": true,
+          "tech": false,
+          "wysh": true
+        },
+        "area": {
+          "effect": "burst",
+          "shape": "cone",
+          "units": "ft",
+          "value": 60
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "concentration": true,
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>You detect the surface thoughts of intelligent creatures around you. The amount of information revealed depends on how long you study a particular area or target.</p>\n<ul>\n<li><strong>1st Round:</strong> You detect the presence or absence of thoughts from conscious creatures that have Intelligence scores of at least 1 (or an Intelligence modifier of –5) or higher.</li>\n<li><strong>2nd Round</strong>: You detect the number of thinking minds and the Intelligence score (or modifier) of each. If the highest Intelligence score is 26 (or a modifier of +8) or higher and at least 10 points higher than your own Intelligence score (or 5 points higher than your own Intelligence modifier), you are @UUID[Compendium.sfrpg.conditions.CvsDp0GvojxiF2jz]{Stunned} for 1 round and the spell ends. This spell doesn’t let you determine the location of the thinking minds if you can’t see the creatures whose thoughts you are detecting.</li>\n<li><strong>3rd Round</strong>: You can read the surface thoughts of any mind in the area. A target who succeeds at its Will save prevents you from reading its thoughts, and you must cast <em>detect thoughts</em> again to have another chance. Creatures of animal intelligence (an Intelligence score of 1 or 2 or an Intelligence modifier of –4 or lower) have simple, instinctual thoughts.</li>\n</ul>\n<p>Each round, you can turn to detect thoughts in a new area. The spell can penetrate barriers, but 3 feet of dirt or wood, 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or any force field blocks it.</p>"
+        },
+        "descriptors": [],
+        "dismissible": false,
+        "duration": {
+          "units": "",
+          "value": "concentration, up to 1 minute/level"
+        },
+        "formula": "",
+        "isActive": null,
+        "level": 1,
+        "materials": {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": ""
+        },
+        "modifiers": [],
+        "preparation": {
+          "mode": "innate",
+          "prepared": true
+        },
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "none",
+          "value": null
+        },
+        "save": {
+          "type": "will",
+          "dc": "17",
+          "descriptor": "negate"
+        },
+        "school": "div",
+        "source": "CRB pg. 349",
+        "sr": false,
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "uses": {
+          "max": 3,
+          "per": "day",
+          "value": 3
+        }
+      }
+    },
+    {
+      "_id": "vhOpDltlfYlULNuN",
+      "name": "Lesser Confusion (DC 17)",
+      "type": "spell",
+      "img": "systems/sfrpg/icons/spells/confusion_lesser.webp",
+      "system": {
+        "type": "",
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "save",
+        "activation": {
+          "type": "action",
+          "condition": "",
+          "cost": 1
+        },
+        "allowedClasses": {
+          "myst": true,
+          "tech": false,
+          "wysh": true
+        },
+        "area": {
+          "effect": "burst",
+          "shape": "sphere",
+          "units": "ft",
+          "value": 15
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "concentration": false,
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>This spell causes a single creature to become confused (as per the <em>@UUID[Compendium.sfrpg.spells.wSeE9HyAmM7lTdpo]{Confusion}</em> spell) for 1 round.</p>\n<table style=\"width: 403px; height: 85px;\" border=\"1\">\n<tbody>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; background-color: #34495e; text-align: center; width: 44px;\">\n<p style=\"color: white;\">D%</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\"><strong>Behavior</strong></p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">1-25</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">Act normally</p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">26-50</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">Do nothing but babble incoherently</p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">51-75</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">Deal 1d8 + Str modifier damage to self with item in hand</p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">76-100</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">Attack nearest creature</p>\n</td>\n</tr>\n</tbody>\n</table>"
+        },
+        "descriptors": [],
+        "dismissible": false,
+        "duration": {
+          "units": "",
+          "value": "1 round"
+        },
+        "formula": "1d100",
+        "isActive": null,
+        "level": 1,
+        "materials": {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": ""
+        },
+        "modifiers": [],
+        "preparation": {
+          "mode": "innate",
+          "prepared": true
+        },
+        "range": {
+          "additional": "5 ft.",
+          "per": "level",
+          "units": "close",
+          "value": 25
+        },
+        "save": {
+          "type": "will",
+          "dc": "17",
+          "descriptor": "negate"
+        },
+        "school": "enc",
+        "source": "CRB pg. 344",
+        "sr": true,
+        "target": {
+          "type": "",
+          "value": "one living creature"
+        },
+        "uses": {
+          "max": 3,
+          "per": "day",
+          "value": 3
+        }
+      }
+    },
+    {
+      "_id": "XJ1jIplNA0zHchwP",
+      "name": "Daze (DC 16) (At Will)",
+      "type": "spell",
+      "img": "systems/sfrpg/icons/spells/daze.webp",
+      "system": {
+        "type": "",
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "save",
+        "activation": {
+          "type": "action",
+          "condition": "",
+          "cost": 1
+        },
+        "allowedClasses": {
+          "myst": true,
+          "tech": true,
+          "wysh": true
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "none",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "concentration": false,
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>This spell short-circuits the mind of a humanoid creature with a CR of 3 or lower so that it is dazed (unable to take actions, but taking no penalty to AC). Humanoids of CR 4 or higher are not affected. After a creature has been dazed by this spell, it is immune to it for 1 minute.</p>"
+        },
+        "descriptors": [],
+        "dismissible": false,
+        "duration": {
+          "units": "",
+          "value": "1 round"
+        },
+        "formula": "",
+        "isActive": null,
+        "level": 0,
+        "materials": {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": ""
+        },
+        "modifiers": [],
+        "preparation": {
+          "mode": "always",
+          "prepared": true
+        },
+        "range": {
+          "additional": "5 ft.",
+          "per": "2 levels",
+          "units": "ft",
+          "value": 25
+        },
+        "save": {
+          "type": "will",
+          "dc": "16",
+          "descriptor": "negate"
+        },
+        "school": "enc",
+        "source": "CRB pg. 347",
+        "sr": true,
+        "target": {
+          "type": "",
+          "value": "one humanoid creature of CR 3 or lower"
+        },
+        "uses": {
+          "max": null,
+          "per": "",
+          "value": null
+        }
+      }
+    },
+    {
+      "_id": "BoMlo7zDYPTqJKdV",
+      "name": "Psychokinetic Hand (DC 16) (At Will)",
+      "type": "spell",
+      "img": "systems/sfrpg/icons/spells/psychokenetic_hand.webp",
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "",
+        "activation": {
+          "type": "action",
+          "condition": "",
+          "cost": 1
+        },
+        "allowedClasses": {
+          "myst": true,
+          "tech": true,
+          "wysh": true
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "none",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "concentration": true,
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>You point your finger at the target object, gaining the ability to lift it and move it at will from a distance. As a move action, you can propel the object as far as 15 feet in any direction, though the spell ends if the distance between you and the object ever exceeds the spell range. You can't perform complex operations, such as firing a gun or using a computer, but you can shut a mechanical door or lid and work simple buttons to open or close automated doors or trigger an alarm.</p>"
+        },
+        "descriptors": [],
+        "dismissible": false,
+        "duration": {
+          "units": "",
+          "value": "concentration"
+        },
+        "formula": "",
+        "isActive": null,
+        "level": 0,
+        "materials": {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": ""
+        },
+        "modifiers": [],
+        "preparation": {
+          "mode": "always",
+          "prepared": true
+        },
+        "range": {
+          "additional": "5 ft.",
+          "per": "2 levels",
+          "units": "ft",
+          "value": 25
+        },
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "school": "trs",
+        "source": "CRB pg. 370",
+        "sr": false,
+        "target": {
+          "type": "",
+          "value": "one unattended object of no more than 10 lbs. or 1 bulk"
+        },
+        "uses": {
+          "max": null,
+          "per": "",
+          "value": null
+        }
+      }
+    },
+    {
+      "_id": "a6QRFc3C4VpppOks",
+      "name": "Psychotomimetic Saliva (Ex)",
+      "type": "feat",
+      "img": "icons/svg/mystery-man.svg",
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": 0
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>Grioth saliva is laced with psychotropic toxins that overload a victim’s neurological pathways, causing intense, rapid fire hallucinations, confusion, and violent seizures. Creatures that are immune to @UUID[Compendium.sfrpg.rules.PqV3OCbUTyk2upPD]{Mind-affecting} effects are immune to this @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Poison}.</p>\n<p>PSYCHOTOMIMETIC SALIVA</p>\n<p><strong>Type</strong>@UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Poison (injury)}; <strong>Save</strong> Fortitude DC 16</p>\n<p><strong>Track</strong>@UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Wisdom}; <strong>Frequency</strong> 1/round for 6 rounds</p>\n<p><strong>Cure</strong> 1 save</p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "isActive": null,
+        "modifiers": [],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "S04tcpzYku9vrJNv",
+      "name": "Battery",
+      "type": "goods",
+      "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
+      "system": {
+        "type": "",
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": false
+        },
+        "attuned": false,
+        "bulk": "-",
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 20</p>"
+        },
+        "equipped": false,
+        "identified": true,
+        "level": 1,
+        "modifiers": [],
+        "price": 60,
+        "quantity": 2,
+        "source": "Core Rulebook"
+      }
+    },
+    {
+      "_id": "MtEdJdlww44BPj0G",
+      "name": "Disintegrator pistol, liquidator",
+      "type": "weapon",
+      "img": "icons/svg/mystery-man.svg",
+      "system": {
+        "type": "",
+        "ability": "dex",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "eac",
+        "actionType": "rwak",
+        "activation": {
+          "type": "none",
+          "condition": "",
+          "cost": null
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "none",
+          "value": null
+        },
+        "attackBonus": 13,
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": true
+        },
+        "attuned": false,
+        "bulk": "L",
+        "capacity": {
+          "max": 20,
+          "value": 20
+        },
+        "chatFlavor": "",
+        "container": {
+          "contents": [],
+          "isOpen": true,
+          "storage": [
+            {
+              "type": "slot",
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 6,
+              "subtype": "fusion",
+              "weightProperty": "level"
+            }
+          ]
+        },
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "1d10 + 6",
+              "operator": "",
+              "types": {
+                "acid": true
+              }
+            }
+          ]
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": ""
+        },
+        "equipped": true,
+        "formula": "",
+        "identified": true,
+        "isActive": null,
+        "level": 6,
+        "modifiers": [],
+        "price": 4500,
+        "proficient": true,
+        "properties": {
+          "aeon": false,
+          "amm": true,
+          "analog": false,
+          "antibiological": false,
+          "archaic": false,
+          "aurora": false,
+          "automatic": false,
+          "blast": false,
+          "block": false,
+          "boost": false,
+          "breach": false,
+          "breakdown": false,
+          "bright": false,
+          "cluster": false,
+          "conceal": false,
+          "deconstruct": false,
+          "deflect": false,
+          "disarm": false,
+          "double": false,
+          "drainCharge": false,
+          "echo": false,
+          "entangle": false,
+          "explode": false,
+          "extinguish": false,
+          "feint": false,
+          "fiery": false,
+          "firstArc": false,
+          "flexibleLine": false,
+          "force": false,
+          "freeHands": false,
+          "fueled": false,
+          "grapple": false,
+          "gravitation": false,
+          "guided": false,
+          "harrying": false,
+          "holyWater": false,
+          "hybrid": false,
+          "ignite": false,
+          "indirect": false,
+          "injection": false,
+          "integrated": false,
+          "line": false,
+          "living": false,
+          "lockdown": false,
+          "mind-affecting": false,
+          "mine": false,
+          "mire": false,
+          "modal": false,
+          "necrotic": false,
+          "nonlethal": false,
+          "one": true,
+          "operative": false,
+          "penetrating": false,
+          "polarize": false,
+          "polymorphic": false,
+          "powered": false,
+          "professional": false,
+          "punchGun": false,
+          "qreload": false,
+          "radioactive": false,
+          "reach": false,
+          "recall": false,
+          "regrowth": false,
+          "relic": false,
+          "reposition": false,
+          "shape": false,
+          "shells": false,
+          "shield": false,
+          "sniper": false,
+          "stun": false,
+          "subtle": false,
+          "sunder": false,
+          "swarm": false,
+          "tail": false,
+          "teleportive": false,
+          "thought": false,
+          "throttle": false,
+          "thrown": false,
+          "trip": false,
+          "two": false,
+          "unbalancing": false,
+          "underwater": false,
+          "unwieldy": false,
+          "variantBoost": false,
+          "wideLine": false
+        },
+        "quantity": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "ft",
+          "value": 15
+        },
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "source": "AR",
+        "special": "",
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "usage": {
+          "per": "shot",
+          "value": 2
+        },
+        "uses": {
+          "max": 0,
+          "per": "",
+          "value": 2
+        },
+        "weaponCategory": "disintegrator",
+        "weaponType": "smallA"
+      }
+    }
+  ],
+  "prototypeToken": {
+    "name": "Grioth Eclipse Seer",
+    "actorLink": false,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": ""
+    },
+    "displayBars": 20,
+    "displayName": 20,
+    "disposition": -1,
+    "height": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 360,
+      "animation": {
+        "type": null,
+        "intensity": 5,
+        "reverse": false,
+        "speed": 5
+      },
+      "attenuation": 0.5,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "contrast": 0,
+      "darkness": {
+        "max": 1,
+        "min": 0
+      },
+      "dim": 0,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "shadows": 0
+    },
+    "lockRotation": false,
+    "mirrorX": false,
+    "mirrorY": false,
+    "randomImg": false,
+    "rotation": 0,
+    "scale": 1,
+    "sight": {
+      "angle": 360,
+      "attenuation": 0.1,
+      "brightness": 1,
+      "color": null,
+      "contrast": 0,
+      "enabled": false,
+      "range": 0,
+      "saturation": 0,
+      "visionMode": "basic"
+    },
+    "texture": {
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": null
+    },
+    "width": 1
+  },
+  "system": {
     "abilities": {
       "cha": {
         "base": 3,
@@ -102,18 +1471,6 @@
         "tooltip": [],
         "value": 0
       },
-      "rp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
-      "sp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
       "space": "",
       "speed": {
         "burrowing": {
@@ -194,7 +1551,7 @@
       "aura": "",
       "biography": {
         "public": "",
-        "value": "<h2>Description</h2>\n<p>Sadistic psychics and religious fanatics, grioths raid other worlds under the cover of darkness. These unfathomably cruel creatures take delight in inflicting pain and sowing terror. Ancient grioths once inhabited planets adrift in the Dark Tapestry, where they encountered unthinkable horrors and embraced them as kin. Subsumed by darkness and fouler things, grioths are devoted thralls to their patron, the Haunter of the Dark, an aspect of the chaotic evil Outer God @Compendium[sfrpg.setting.ul7WYVhr1F6q32jN]{Nyarlathotep}.</p>\n<p>Grioths appear as lean, stooped bat-like humanoids with four narrow eyes and exceptional hearing. They typically stand around 5 feet tall. They have dry, raspy voices and speak in an eerie language of clicks, squeaks, and sibilant sighs. Grioths live in vast crystalline spire cities. With few resources available on their frozen, lightless worlds, they depend on raiding, theft, and war to obtain the resources they need to survive. Powerful grioth psychics known as eclipse seers organize raids that span entire galaxies. They serve as conduits to the Hunter of the Dark, enacting eldritch rituals to establish temporary portals to worlds undergoing an eclipse.</p>\n<p>Grioth soldiers and mercenaries pour through these mystical portals in a wave of blood and terror, glutting on violence and pillaging resources&mdash;primarily food, technology, and living sapient creatures. In addition to temporary portals, grioths maintain a series of permanent gateways to sunless worlds like their own, creating a web of cities among countless lost worlds.</p>\n<p>For unknown reasons, @Compendium[sfrpg.setting.FYV6RgTjPdg72RF0]{Triune}&rsquo;s Signal was lost to the grioths, though they quickly pried the secrets of Drift travel from the minds of their sapient victims. In their sleek voidglass starships, they travel the Drift and beyond in search of easy prey and&nbsp;resource-rich worlds to subjugate.</p>\n<p>Due to prolonged exposure to the Dark Tapestry, grioths can be born with strange physiological alterations, the terrors of the unknowable realm intruding into their forms or giving them powers far beyond their kin. The most powerful become potent psychics who boast nigh impenetrable mental defenses. These grioth paragons, known as Vessels, are considered blessed by the Haunter of the Dark and swiftly rise to positions of power, becoming CEOs of major corporations, military generals, religious leaders, or overseers of entire colonies.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<p>&nbsp;</p>\n<h3>Organization</h3>\n<p>solitary, clutch (2&ndash;6), or omen (7&ndash;20 plus 1 grioth eclipse seer)</p>\n</section>"
+        "value": "<h2>Description</h2>\n<p>Sadistic psychics and religious fanatics, grioths raid other worlds under the cover of darkness. These unfathomably cruel creatures take delight in inflicting pain and sowing terror. Ancient grioths once inhabited planets adrift in the Dark Tapestry, where they encountered unthinkable horrors and embraced them as kin. Subsumed by darkness and fouler things, grioths are devoted thralls to their patron, the Haunter of the Dark, an aspect of the chaotic evil Outer God @UUID[Compendium.sfrpg.setting.ul7WYVhr1F6q32jN]{Nyarlathotep}.</p>\n<p>Grioths appear as lean, stooped bat-like humanoids with four narrow eyes and exceptional hearing. They typically stand around 5 feet tall. They have dry, raspy voices and speak in an eerie language of clicks, squeaks, and sibilant sighs. Grioths live in vast crystalline spire cities. With few resources available on their frozen, lightless worlds, they depend on raiding, theft, and war to obtain the resources they need to survive. Powerful grioth psychics known as eclipse seers organize raids that span entire galaxies. They serve as conduits to the Hunter of the Dark, enacting eldritch rituals to establish temporary portals to worlds undergoing an eclipse.</p>\n<p>Grioth soldiers and mercenaries pour through these mystical portals in a wave of blood and terror, glutting on violence and pillaging resources—primarily food, technology, and living sapient creatures. In addition to temporary portals, grioths maintain a series of permanent gateways to sunless worlds like their own, creating a web of cities among countless lost worlds.</p>\n<p>For unknown reasons, @UUID[Compendium.sfrpg.setting.FYV6RgTjPdg72RF0]{Triune}’s Signal was lost to the grioths, though they quickly pried the secrets of Drift travel from the minds of their sapient victims. In their sleek voidglass starships, they travel the Drift and beyond in search of easy prey and&nbsp;resource-rich worlds to subjugate.</p>\n<p>Due to prolonged exposure to the Dark Tapestry, grioths can be born with strange physiological alterations, the terrors of the unknowable realm intruding into their forms or giving them powers far beyond their kin. The most powerful become potent psychics who boast nigh impenetrable mental defenses. These grioth paragons, known as Vessels, are considered blessed by the Haunter of the Dark and swiftly rise to positions of power, becoming CEOs of major corporations, military generals, religious leaders, or overseers of entire colonies.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<h3>Organization</h3>\n<p>solitary, clutch (2–6), or omen (7–20 plus 1 grioth eclipse seer)</p>\n</section>"
       },
       "class": "",
       "cr": 6,
@@ -500,1391 +1857,5 @@
       "size": "medium",
       "sr": 0
     }
-  },
-  "effects": [],
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "items": [
-    {
-      "_id": "qnWKHCrdWUkaNVDi",
-      "name": "Void Adaptation",
-      "type": "feat",
-      "data": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "<p>(EX OR SU)</p>\n<p>Numerous creatures are inured to the void of outer space. A creature with void adaptation has the following abilities.</p>\n<ul>\n<li>Immunity to cosmic rays.</li>\n<li>Immunity to the environmental effects of vacuum.</li>\n<li>No breath (see page 152).</li>\n</ul>\n<hr>\n<p>&nbsp;</p>"
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "isActive": null,
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      },
-      "effects": [],
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "sort": 100000
-    },
-    {
-      "_id": "o7cJxvG9jLhB7jH8",
-      "name": "Bite (plus Psychotomimetic Saliva)",
-      "type": "weapon",
-      "data": {
-        "type": "",
-        "ability": "",
-        "actionType": "mwak",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": 0
-        },
-        "attackBonus": 11,
-        "attributes": {
-          "ac": {
-            "value": ""
-          },
-          "customBuilt": false,
-          "dex": {
-            "mod": ""
-          },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
-          "size": "medium",
-          "sturdy": true
-        },
-        "attuned": false,
-        "bulk": "L",
-        "capacity": {
-          "max": 0,
-          "value": 0
-        },
-        "chatFlavor": "",
-        "container": {
-          "contents": [],
-          "isOpen": true,
-          "storage": [
-            {
-              "type": "slot",
-              "acceptsType": [
-                "fusion"
-              ],
-              "affectsEncumbrance": true,
-              "amount": 0,
-              "subtype": "fusion",
-              "weightProperty": "level"
-            }
-          ]
-        },
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": [
-            {
-              "formula": "1d6+6",
-              "operator": "",
-              "types": {
-                "piercing": true
-              }
-            }
-          ]
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": ""
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "equipped": true,
-        "formula": "",
-        "identified": true,
-        "isActive": null,
-        "level": 1,
-        "modifiers": [],
-        "price": 0,
-        "proficient": true,
-        "properties": {},
-        "quantity": 1,
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "special": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "usage": {
-          "per": "",
-          "value": 0
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        },
-        "weaponCategory": "uncategorized",
-        "weaponType": "basicM"
-      },
-      "effects": [],
-      "flags": {},
-      "sort": 200000
-    },
-    {
-      "_id": "5zUAl4YgqzKv5CtO",
-      "name": "Mindshock (Su)",
-      "type": "feat",
-      "data": {
-        "type": "",
-        "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "save",
-        "activation": {
-          "type": "action",
-          "condition": "",
-          "cost": 1
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "none",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": [
-            {
-              "formula": "2d6",
-              "operator": "",
-              "types": {}
-            }
-          ]
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "Three times per day as a standard action, a grioth eclipse seer can unleash a wave of violent psychic energy. Each non grioth creature within 30 feet takes 2d6 damage and is @Compendium[sfrpg.conditions.nywSVEeDvp1bk7L3]{Shaken} for 1d4 rounds. A creature that succeeds at a DC 16 Will save takes half damage and negates the @Compendium[sfrpg.conditions.nywSVEeDvp1bk7L3]{Shaken} condition. This is a mind-affecting effect."
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": ""
-        },
-        "formula": "",
-        "isActive": null,
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "save": {
-          "type": "will",
-          "dc": "16",
-          "descriptor": "negate"
-        },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": ""
-        },
-        "uses": {
-          "max": 3,
-          "per": "day",
-          "value": 3
-        }
-      },
-      "effects": [],
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "sort": 400000
-    },
-    {
-      "_id": "Van648dybPGK1UMe",
-      "name": "No Breath",
-      "type": "feat",
-      "data": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "<p>(EX)</p>\n<p>The creature doesn't breathe, and it is immune to effects that require breathing (such as inhaled @Compendium[sfrpg.rules.aKqRtg165rAly1Cc]{Poison}). This does not give it immunity to cloud or gas attacks that don't require breathing.</p>\n<hr>\n<p>&nbsp;</p>"
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "isActive": null,
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      },
-      "effects": [],
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "sort": 500000
-    },
-    {
-      "_id": "hbCdsI0a1IQhgwW7",
-      "name": "Hold Person (DC 18)",
-      "type": "spell",
-      "data": {
-        "type": "",
-        "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "save",
-        "activation": {
-          "type": "action",
-          "condition": "",
-          "cost": 1
-        },
-        "allowedClasses": {
-          "myst": true,
-          "tech": false,
-          "wysh": true
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "none",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "concentration": false,
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "<p style=\"text-align: justify;\">The target becomes @Compendium[sfrpg.conditions.NV4qXRDgb7zTNkW2]{Paralyzed} and freezes in place. It is aware and breathes normally but can't take any physical actions, even speech. A held creature can't cast spells. Each round on its turn, the target can spend a full action to attempt a new saving throw to end the effect. This does not provoke attacks of opportunity. A winged creature that is @Compendium[sfrpg.conditions.NV4qXRDgb7zTNkW2]{Paralyzed} can't flap its wings and falls. A swimmer can't swim and may drown.</p>"
-        },
-        "descriptors": [],
-        "dismissible": true,
-        "duration": {
-          "units": "",
-          "value": "1 round/level (D)"
-        },
-        "formula": "",
-        "isActive": null,
-        "level": 2,
-        "materials": {
-          "consumed": false,
-          "cost": 0,
-          "supply": 0,
-          "value": ""
-        },
-        "modifiers": [],
-        "preparation": {
-          "mode": "innate",
-          "prepared": true
-        },
-        "range": {
-          "additional": "ft.10",
-          "per": "level",
-          "units": "ft",
-          "value": 100
-        },
-        "save": {
-          "type": "will",
-          "dc": "18",
-          "descriptor": "negate"
-        },
-        "school": "enc",
-        "source": "CRB pg. 359",
-        "sr": true,
-        "target": {
-          "type": "",
-          "value": "one humanoid creature"
-        },
-        "uses": {
-          "max": 1,
-          "per": "day",
-          "value": 1
-        }
-      },
-      "effects": [],
-      "flags": {},
-      "img": "systems/sfrpg/icons/spells/hold_person.jpg",
-      "sort": 900000
-    },
-    {
-      "_id": "TKc3h32TmhYnRxqT",
-      "name": "Inflict Pain (DC 18)",
-      "type": "spell",
-      "data": {
-        "type": "",
-        "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "save",
-        "activation": {
-          "type": "action",
-          "condition": "",
-          "cost": 1
-        },
-        "allowedClasses": {
-          "myst": true,
-          "tech": false,
-          "wysh": false
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "none",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "concentration": false,
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "<p style=\"text-align: justify;\">You telepathically rack the target's mind and body with agonizing pain that imposes a 窶・ penalty to ability checks, attack rolls, and skill checks. A target that succeeds at a Will saving throw reduces the duration to 1 round.</p>"
-        },
-        "descriptors": [],
-        "dismissible": false,
-        "duration": {
-          "units": "",
-          "value": "1 round/level"
-        },
-        "formula": "",
-        "isActive": null,
-        "level": 2,
-        "materials": {
-          "consumed": false,
-          "cost": 0,
-          "supply": 0,
-          "value": ""
-        },
-        "modifiers": [],
-        "preparation": {
-          "mode": "innate",
-          "prepared": true
-        },
-        "range": {
-          "additional": "5 ft.",
-          "per": "2 levels",
-          "units": "ft",
-          "value": 25
-        },
-        "save": {
-          "type": "will",
-          "dc": "18",
-          "descriptor": "partial"
-        },
-        "school": "abj",
-        "source": "CRB pg. 361",
-        "sr": true,
-        "target": {
-          "type": "",
-          "value": "one creature"
-        },
-        "uses": {
-          "max": 1,
-          "per": "day",
-          "value": 1
-        }
-      },
-      "effects": [],
-      "flags": {},
-      "img": "systems/sfrpg/icons/spells/inflict_pain.png",
-      "sort": 1000000
-    },
-    {
-      "_id": "uR1QWmzs2JzMmzls",
-      "name": "Command (DC 17)",
-      "type": "spell",
-      "data": {
-        "type": "",
-        "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "save",
-        "activation": {
-          "type": "action",
-          "condition": "",
-          "cost": 1
-        },
-        "allowedClasses": {
-          "myst": true,
-          "tech": false,
-          "wysh": false
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "none",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "concentration": false,
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">You give the target one of the following commands, which it obeys to the best of its ability at its earliest opportunity. If the target can&rsquo;t carry out your command on its next turn, the spell automatically fails.<br /></span></p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\"><strong>Approach</strong>: The target moves toward you as quickly and directly as possible for 1 round, taking no other actions and triggering reactions (such as attacks of opportunity) for this movement as normal.<br /></span></p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\"><strong>Drop</strong>: The target drops whatever it is holding. It can&rsquo;t pick up any dropped item until its next turn.<br /></span></p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\"><strong>Fall</strong>: The target falls to the ground and remains @Compendium[sfrpg.conditions.XeRGqHVtcZ7vsgJ0]{Prone} for 1 round. It can otherwise act normally.<br /></span></p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\"><strong>Flee</strong>: The target moves away from you as quickly and directly as possible for 1 round, taking no other actions and provoking reactions (such as attacks of opportunity) for this movement as normal.<br /></span></p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\"><strong>Halt</strong>: The target is dazed for 1 round.</span></p>"
-        },
-        "descriptors": [],
-        "dismissible": false,
-        "duration": {
-          "units": "",
-          "value": "1 round"
-        },
-        "formula": "",
-        "isActive": null,
-        "level": 1,
-        "materials": {
-          "consumed": false,
-          "cost": 0,
-          "supply": 0,
-          "value": ""
-        },
-        "modifiers": [],
-        "preparation": {
-          "mode": "innate",
-          "prepared": true
-        },
-        "range": {
-          "additional": "5 ft.",
-          "per": "2 levels",
-          "units": "ft",
-          "value": 25
-        },
-        "save": {
-          "type": "will",
-          "dc": "17",
-          "descriptor": "negate"
-        },
-        "school": "enc",
-        "source": "CRB pg. 343",
-        "sr": true,
-        "target": {
-          "type": "",
-          "value": "one living creature"
-        },
-        "uses": {
-          "max": 3,
-          "per": "day",
-          "value": 3
-        }
-      },
-      "effects": [],
-      "flags": {},
-      "img": "systems/sfrpg/icons/spells/command.png",
-      "sort": 1100000
-    },
-    {
-      "_id": "zjKNcC1qz4HTUQ7R",
-      "name": "Detect Thoughts (DC 17)",
-      "type": "spell",
-      "data": {
-        "type": "",
-        "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "save",
-        "activation": {
-          "type": "action",
-          "condition": "",
-          "cost": 1
-        },
-        "allowedClasses": {
-          "myst": true,
-          "tech": false,
-          "wysh": true
-        },
-        "area": {
-          "effect": "burst",
-          "shape": "cone",
-          "units": "ft",
-          "value": 60
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "concentration": true,
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "<p>You detect the surface thoughts of intelligent creatures around you. The amount of information revealed depends on how long you study a particular area or target.</p>\n<ul>\n<li><strong>1st Round:</strong> You detect the presence or absence of thoughts from conscious creatures that have Intelligence scores of at least 1 (or an Intelligence modifier of &ndash;5) or higher.</li>\n<li><strong>2nd Round</strong>: You detect the number of thinking minds and the Intelligence score (or modifier) of each. If the highest Intelligence score is 26 (or a modifier of +8) or higher and at least 10 points higher than your own Intelligence score (or 5 points higher than your own Intelligence modifier), you are @Compendium[sfrpg.conditions.CvsDp0GvojxiF2jz]{Stunned} for 1 round and the spell ends. This spell doesn&rsquo;t let you determine the location of the thinking minds if you can&rsquo;t see the creatures whose thoughts you are detecting.</li>\n<li><strong>3rd Round</strong>: You can read the surface thoughts of any mind in the area. A target who succeeds at its Will save prevents you from reading its thoughts, and you must cast <em>detect thoughts</em> again to have another chance. Creatures of animal intelligence (an Intelligence score of 1 or 2 or an Intelligence modifier of &ndash;4 or lower) have simple, instinctual thoughts.</li>\n</ul>\n<p>Each round, you can turn to detect thoughts in a new area. The spell can penetrate barriers, but 3 feet of dirt or wood, 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or any force field blocks it.</p>"
-        },
-        "descriptors": [],
-        "dismissible": false,
-        "duration": {
-          "units": "",
-          "value": "concentration, up to 1 minute/level"
-        },
-        "formula": "",
-        "isActive": null,
-        "level": 1,
-        "materials": {
-          "consumed": false,
-          "cost": 0,
-          "supply": 0,
-          "value": ""
-        },
-        "modifiers": [],
-        "preparation": {
-          "mode": "innate",
-          "prepared": true
-        },
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
-        },
-        "save": {
-          "type": "will",
-          "dc": "17",
-          "descriptor": "negate"
-        },
-        "school": "div",
-        "source": "CRB pg. 349",
-        "sr": false,
-        "target": {
-          "type": "",
-          "value": ""
-        },
-        "uses": {
-          "max": 3,
-          "per": "day",
-          "value": 3
-        }
-      },
-      "effects": [],
-      "flags": {},
-      "img": "systems/sfrpg/icons/spells/detect_thoughts.png",
-      "sort": 1200000
-    },
-    {
-      "_id": "vhOpDltlfYlULNuN",
-      "name": "Lesser Confusion (DC 17)",
-      "type": "spell",
-      "data": {
-        "type": "",
-        "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "save",
-        "activation": {
-          "type": "action",
-          "condition": "",
-          "cost": 1
-        },
-        "allowedClasses": {
-          "myst": true,
-          "tech": false,
-          "wysh": true
-        },
-        "area": {
-          "effect": "burst",
-          "shape": "sphere",
-          "units": "ft",
-          "value": 15
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "concentration": false,
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl01_LabelName\">This spell causes a single creature to become confused (as per the <em>@Compendium[sfrpg.spells.wSeE9HyAmM7lTdpo]{Confusion}</em> spell) for 1 round.</span></p>\n<table style=\"width: 403px; height: 85px;\" border=\"1\">\n<tbody>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; background-color: #34495e; text-align: center; width: 44px;\">\n<p style=\"color: white;\">D%</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\"><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\"><strong>Behavior</strong></span></p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">1-25</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\"><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Act normally</span></p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">26-50</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\"><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Do nothing but babble incoherently</span></p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">51-75</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\"><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Deal 1d8 + Str modifier damage to self with item in hand</span></p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">76-100</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\"><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Attack nearest creature</span></p>\n</td>\n</tr>\n</tbody>\n</table>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>"
-        },
-        "descriptors": [],
-        "dismissible": false,
-        "duration": {
-          "units": "",
-          "value": "1 round"
-        },
-        "formula": "1d100",
-        "isActive": null,
-        "level": 1,
-        "materials": {
-          "consumed": false,
-          "cost": 0,
-          "supply": 0,
-          "value": ""
-        },
-        "modifiers": [],
-        "preparation": {
-          "mode": "innate",
-          "prepared": true
-        },
-        "range": {
-          "additional": "5 ft.",
-          "per": "level",
-          "units": "close",
-          "value": 25
-        },
-        "save": {
-          "type": "will",
-          "dc": "17",
-          "descriptor": "negate"
-        },
-        "school": "enc",
-        "source": "CRB pg. 344",
-        "sr": true,
-        "target": {
-          "type": "",
-          "value": "one living creature"
-        },
-        "uses": {
-          "max": 3,
-          "per": "day",
-          "value": 3
-        }
-      },
-      "effects": [],
-      "flags": {},
-      "img": "systems/sfrpg/icons/spells/confusion_lesser.png",
-      "sort": 1300000
-    },
-    {
-      "_id": "XJ1jIplNA0zHchwP",
-      "name": "Daze (DC 16) (At Will)",
-      "type": "spell",
-      "data": {
-        "type": "",
-        "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "save",
-        "activation": {
-          "type": "action",
-          "condition": "",
-          "cost": 1
-        },
-        "allowedClasses": {
-          "myst": true,
-          "tech": true,
-          "wysh": true
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "none",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "concentration": false,
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">This spell short-circuits the mind of a humanoid creature with a CR of 3 or lower so that it is dazed (unable to take actions, but taking no penalty to AC). Humanoids of CR 4 or higher are not affected. After a creature has been dazed by this spell, it is immune to it for 1 minute.&nbsp;</span></p>"
-        },
-        "descriptors": [],
-        "dismissible": false,
-        "duration": {
-          "units": "",
-          "value": "1 round"
-        },
-        "formula": "",
-        "isActive": null,
-        "level": 0,
-        "materials": {
-          "consumed": false,
-          "cost": 0,
-          "supply": 0,
-          "value": ""
-        },
-        "modifiers": [],
-        "preparation": {
-          "mode": "always",
-          "prepared": true
-        },
-        "range": {
-          "additional": "5 ft.",
-          "per": "2 levels",
-          "units": "ft",
-          "value": 25
-        },
-        "save": {
-          "type": "will",
-          "dc": "16",
-          "descriptor": "negate"
-        },
-        "school": "enc",
-        "source": "CRB pg. 347",
-        "sr": true,
-        "target": {
-          "type": "",
-          "value": "one humanoid creature of CR 3 or lower"
-        },
-        "uses": {
-          "max": null,
-          "per": "",
-          "value": null
-        }
-      },
-      "effects": [],
-      "flags": {},
-      "img": "systems/sfrpg/icons/spells/daze.png",
-      "sort": 1400000
-    },
-    {
-      "_id": "BoMlo7zDYPTqJKdV",
-      "name": "Psychokinetic Hand (DC 16) (At Will)",
-      "type": "spell",
-      "data": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "",
-        "activation": {
-          "type": "action",
-          "condition": "",
-          "cost": 1
-        },
-        "allowedClasses": {
-          "myst": true,
-          "tech": true,
-          "wysh": true
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "none",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "concentration": true,
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "<p style=\"text-align: justify;\">You point your finger at the target object, gaining the ability to lift it and move it at will from a distance. As a move action, you can propel the object as far as 15 feet in any direction, though the spell ends if the distance between you and the object ever exceeds the spell range. You can't perform complex operations, such as firing a gun or using a computer, but you can shut a mechanical door or lid and work simple buttons to open or close automated doors or trigger an alarm.</p>"
-        },
-        "descriptors": [],
-        "dismissible": false,
-        "duration": {
-          "units": "",
-          "value": "concentration"
-        },
-        "formula": "",
-        "isActive": null,
-        "level": 0,
-        "materials": {
-          "consumed": false,
-          "cost": 0,
-          "supply": 0,
-          "value": ""
-        },
-        "modifiers": [],
-        "preparation": {
-          "mode": "always",
-          "prepared": true
-        },
-        "range": {
-          "additional": "5 ft.",
-          "per": "2 levels",
-          "units": "ft",
-          "value": 25
-        },
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "school": "trs",
-        "source": "CRB pg. 370",
-        "sr": false,
-        "target": {
-          "type": "",
-          "value": "one unattended object of no more than 10 lbs. or 1 bulk"
-        },
-        "uses": {
-          "max": null,
-          "per": "",
-          "value": null
-        }
-      },
-      "effects": [],
-      "flags": {},
-      "img": "systems/sfrpg/icons/spells/psychokenetic_hand.png",
-      "sort": 1500000
-    },
-    {
-      "_id": "a6QRFc3C4VpppOks",
-      "name": "Psychotomimetic Saliva (Ex)",
-      "type": "feat",
-      "data": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": 0
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "<p>Grioth saliva is laced with psychotropic toxins that overload a victim&rsquo;s neurological pathways, causing intense, rapid fire hallucinations, confusion, and violent seizures. Creatures that are immune to @Compendium[sfrpg.rules.PqV3OCbUTyk2upPD]{Mind-affecting} effects are immune to this @Compendium[sfrpg.rules.aKqRtg165rAly1Cc]{Poison}.</p>\n<p>PSYCHOTOMIMETIC SALIVA</p>\n<p><strong>Type </strong>@Compendium[sfrpg.rules.aKqRtg165rAly1Cc]{Poison (injury)}; <strong>Save </strong>Fortitude DC 16</p>\n<p><strong>Track </strong>@Compendium[sfrpg.rules.aKqRtg165rAly1Cc]{Wisdom}; <strong>Frequency </strong>1/round for 6 rounds</p>\n<p><strong>Cure </strong>1 save</p>"
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "isActive": null,
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      },
-      "effects": [],
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "sort": 1600000
-    },
-    {
-      "_id": "S04tcpzYku9vrJNv",
-      "name": "Battery",
-      "type": "goods",
-      "data": {
-        "type": "",
-        "attributes": {
-          "ac": {
-            "value": ""
-          },
-          "customBuilt": false,
-          "dex": {
-            "mod": ""
-          },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
-          "size": "medium",
-          "sturdy": false
-        },
-        "attuned": false,
-        "bulk": "-",
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.&nbsp;</span></p>\n<p><strong>Capacity:</strong> 20</p>"
-        },
-        "equipped": false,
-        "identified": true,
-        "level": 1,
-        "modifiers": [],
-        "price": 60,
-        "quantity": 2,
-        "source": "Core Rulebook"
-      },
-      "effects": [],
-      "flags": {},
-      "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.jpg",
-      "sort": 100000
-    },
-    {
-      "_id": "MtEdJdlww44BPj0G",
-      "name": "Disintegrator pistol, liquidator",
-      "type": "weapon",
-      "data": {
-        "type": "",
-        "ability": "dex",
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "rwak",
-        "activation": {
-          "type": "none",
-          "condition": "",
-          "cost": null
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "none",
-          "value": null
-        },
-        "attackBonus": 13,
-        "attributes": {
-          "ac": {
-            "value": ""
-          },
-          "customBuilt": false,
-          "dex": {
-            "mod": ""
-          },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
-          "size": "medium",
-          "sturdy": true
-        },
-        "attuned": false,
-        "bulk": "L",
-        "capacity": {
-          "max": 20,
-          "value": 20
-        },
-        "chatFlavor": "",
-        "container": {
-          "contents": [],
-          "isOpen": true,
-          "storage": [
-            {
-              "type": "slot",
-              "acceptsType": [
-                "fusion"
-              ],
-              "affectsEncumbrance": true,
-              "amount": 6,
-              "subtype": "fusion",
-              "weightProperty": "level"
-            }
-          ]
-        },
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": [
-            {
-              "formula": "1d10 + 6",
-              "operator": "",
-              "types": {
-                "acid": true
-              }
-            }
-          ]
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": ""
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": ""
-        },
-        "equipped": true,
-        "formula": "",
-        "identified": true,
-        "isActive": null,
-        "level": 6,
-        "modifiers": [],
-        "price": 4500,
-        "proficient": true,
-        "properties": {
-          "aeon": false,
-          "amm": true,
-          "analog": false,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "holyWater": false,
-          "hybrid": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": false,
-          "one": true,
-          "operative": false,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": false,
-          "professional": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "recall": false,
-          "regrowth": false,
-          "relic": false,
-          "reposition": false,
-          "shape": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "trip": false,
-          "two": false,
-          "unbalancing": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
-        },
-        "quantity": 1,
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "ft",
-          "value": 15
-        },
-        "save": {
-          "type": "",
-          "dc": "",
-          "descriptor": "negate"
-        },
-        "source": "AR",
-        "special": "",
-        "target": {
-          "type": "",
-          "value": ""
-        },
-        "usage": {
-          "per": "shot",
-          "value": 2
-        },
-        "uses": {
-          "max": 0,
-          "per": "",
-          "value": 2
-        },
-        "weaponCategory": "disintegrator",
-        "weaponType": "smallA"
-      },
-      "effects": [],
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "sort": 400000
-    }
-  ],
-  "token": {
-    "name": "Grioth Eclipse Seer",
-    "actorId": "gzjBbiF42qE7Ovdh",
-    "actorLink": false,
-    "bar1": {
-      "attribute": "attributes.hp"
-    },
-    "bar2": {
-      "attribute": ""
-    },
-    "brightLight": 0,
-    "brightSight": 0,
-    "dimLight": 0,
-    "dimSight": 0,
-    "displayBars": 40,
-    "displayName": 0,
-    "disposition": -1,
-    "flags": {},
-    "height": 1,
-    "img": "icons/svg/mystery-man.svg",
-    "lightAlpha": 1,
-    "lightAngle": 360,
-    "lightAnimation": {
-      "type": "",
-      "intensity": 5,
-      "speed": 5
-    },
-    "lightColor": "",
-    "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
-    "randomImg": false,
-    "rotation": 0,
-    "scale": 1,
-    "sightAngle": 360,
-    "tint": "",
-    "vision": false,
-    "width": 1
   }
 }

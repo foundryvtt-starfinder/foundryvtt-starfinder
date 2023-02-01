@@ -6,7 +6,10 @@ export default class CounterManagement {
 
             for (const combatant of combatants) {
                 const currentActor = combatant.actor;
-                
+                if (!currentActor) {
+                    continue;
+                }
+
                 const displayedResources = currentActor.getResourcesForCombatTracker();
                 if (displayedResources.length === 0) {
                     continue;
@@ -14,9 +17,9 @@ export default class CounterManagement {
 
                 let additionalHtml = "";
                 for (const displayedResource of displayedResources) {
-                    const resourceValue = currentActor.getResourceComputedValue(displayedResource.data.data.type, displayedResource.data.data.subType);
+                    const resourceValue = currentActor.getResourceComputedValue(displayedResource.system.type, displayedResource.system.subType);
 
-                    if (displayedResource.data.data.combatTracker.showOwnerAndGMOnly) {
+                    if (displayedResource.system.combatTracker.showOwnerAndGMOnly) {
                         if (!game.user.isGM && !currentActor.isOwner) {
                             continue;
                         }
@@ -26,49 +29,49 @@ export default class CounterManagement {
                     let image = displayedResource.img;
                     let displayValue = resourceValue;
 
-                    if (displayedResource.data.data.combatTracker.displayAbsoluteValue) {
+                    if (displayedResource.system.combatTracker.displayAbsoluteValue) {
                         displayValue = Math.abs(displayValue);
                     }
 
-                    if (displayedResource.data.data.combatTracker.visualization) {
-                        for (const visualizationEntry of displayedResource.data.data.combatTracker.visualization) {
+                    if (displayedResource.system.combatTracker.visualization) {
+                        for (const visualizationEntry of displayedResource.system.combatTracker.visualization) {
                             switch (visualizationEntry.mode) {
-                                case 'eq':
-                                    if (resourceValue === visualizationEntry.value) {
-                                        title = visualizationEntry.title || title;
-                                        image = visualizationEntry.image || image;
-                                    }
-                                    break;
-                                case 'neq':
-                                    if (resourceValue !== visualizationEntry.value) {
-                                        title = visualizationEntry.title || title;
-                                        image = visualizationEntry.image || image;
-                                    }
-                                    break;
-                                case 'gt':
-                                    if (resourceValue > visualizationEntry.value) {
-                                        title = visualizationEntry.title || title;
-                                        image = visualizationEntry.image || image;
-                                    }
-                                    break;
-                                case 'gte':
-                                    if (resourceValue >= visualizationEntry.value) {
-                                        title = visualizationEntry.title || title;
-                                        image = visualizationEntry.image || image;
-                                    }
-                                    break;
-                                case 'lt':
-                                    if (resourceValue < visualizationEntry.value) {
-                                        title = visualizationEntry.title || title;
-                                        image = visualizationEntry.image || image;
-                                    }
-                                    break;
-                                case 'lte':
-                                    if (resourceValue <= visualizationEntry.value) {
-                                        title = visualizationEntry.title || title;
-                                        image = visualizationEntry.image || image;
-                                    }
-                                    break;
+                            case 'eq':
+                                if (resourceValue === visualizationEntry.value) {
+                                    title = visualizationEntry.title || title;
+                                    image = visualizationEntry.image || image;
+                                }
+                                break;
+                            case 'neq':
+                                if (resourceValue !== visualizationEntry.value) {
+                                    title = visualizationEntry.title || title;
+                                    image = visualizationEntry.image || image;
+                                }
+                                break;
+                            case 'gt':
+                                if (resourceValue > visualizationEntry.value) {
+                                    title = visualizationEntry.title || title;
+                                    image = visualizationEntry.image || image;
+                                }
+                                break;
+                            case 'gte':
+                                if (resourceValue >= visualizationEntry.value) {
+                                    title = visualizationEntry.title || title;
+                                    image = visualizationEntry.image || image;
+                                }
+                                break;
+                            case 'lt':
+                                if (resourceValue < visualizationEntry.value) {
+                                    title = visualizationEntry.title || title;
+                                    image = visualizationEntry.image || image;
+                                }
+                                break;
+                            case 'lte':
+                                if (resourceValue <= visualizationEntry.value) {
+                                    title = visualizationEntry.title || title;
+                                    image = visualizationEntry.image || image;
+                                }
+                                break;
                             }
                         }
                     }
@@ -92,9 +95,12 @@ export default class CounterManagement {
                 $combatantHtml.find('.token-image').before('<div id="foundry-elements" class="flexrow"></div>');
                 const $div = $combatantHtml.find('#foundry-elements');
 
-                $combatantHtml.find('.token-image').detach().appendTo($div);
-                $combatantHtml.find('.token-name').detach().appendTo($div);
-                $combatantHtml.find('.token-initiative').detach().appendTo($div);
+                $combatantHtml.find('.token-image').detach()
+                    .appendTo($div);
+                $combatantHtml.find('.token-name').detach()
+                    .appendTo($div);
+                $combatantHtml.find('.token-initiative').detach()
+                    .appendTo($div);
 
                 $div.after('<div id="counter-tokens" class=""></div>');
                 const $counterTokens = $combatantHtml.find('#counter-tokens');

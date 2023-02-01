@@ -1,10 +1,11 @@
 {
   "_id": "6Fuz5JTbJCBPynZd",
   "name": "Entropic Strike (Su)",
-  "type": "feat",
-  "data": {
+  "type": "weapon",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
     "type": "",
-    "ability": "con",
+    "ability": "str",
     "abilityMods": {
       "parts": []
     },
@@ -15,6 +16,7 @@
       "condition": "",
       "cost": 0
     },
+    "ammunitionType": "",
     "area": {
       "effect": "",
       "shape": "",
@@ -22,7 +24,48 @@
       "value": null
     },
     "attackBonus": 0,
+    "attributes": {
+      "ac": {
+        "value": "0"
+      },
+      "customBuilt": false,
+      "dex": {
+        "mod": ""
+      },
+      "hardness": {
+        "value": ""
+      },
+      "hp": {
+        "max": "0",
+        "value": 0
+      },
+      "size": "medium",
+      "sturdy": true
+    },
+    "attuned": false,
+    "bulk": "0",
+    "capacity": {
+      "max": 0,
+      "value": 0
+    },
     "chatFlavor": "",
+    "container": {
+      "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
+      "storage": [
+        {
+          "type": "slot",
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 0,
+          "subtype": "fusion",
+          "weightProperty": "level"
+        }
+      ]
+    },
     "critical": {
       "effect": "",
       "parts": []
@@ -30,11 +73,26 @@
     "damage": {
       "parts": [
         {
-          "name": "",
-          "formula": "(lookupRange(min(@item.level, @classes.vanguard.levels), 0, 1, 1, 6, 2, 9, 3, 12, 4, 13, 5, 14, 6, 15, 7, 16, 8, 17, 9, 18, 10, 19, 11, 20, 12))d(lookupRange(min(@item.level, @classes.vanguard.levels), 0, 1, 3, 3, 4, 5, 6)) + @abilities.con.mod",
+          "name": "Entropic Strike (Su)",
+          "formula": "(lookupRange(@classes.vanguard.levels, 0, 1, 1, 6, 2, 9, 3, 12, 4, 13, 5, 14, 6, 15, 7, 16, 8, 17, 9, 18, 10, 19, 11, 20, 12))d(lookupRange(@classes.vanguard.levels, 0, 1, 3, 3, 4, 5, 6)) + @abilities.con.mod + (lookupRange(@classes.vanguard.levels, 0, 10, @abilities.str.mod))",
           "types": {
             "acid": true,
             "bludgeoning": true,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Entropic Strike (Su) (Through Weapon. Copy to weapon)",
+          "formula": "(lookupRange(@item.level, 0, 1, 1, 6, 2, 9, 3, 12, 4, 13, 5, 14, 6, 15, 7, 16, 8, 17, 9, 18, 10, 19, 11, 20, 12))d(lookupRange(@item.level, 0, 1, 3, 3, 4, 5, 6)) + @abilities.con.mod + (lookupRange(@classes.vanguard.levels, 0, 10, @abilities.str.mod))",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
             "cold": false,
             "electricity": false,
             "fire": false,
@@ -52,43 +110,161 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@Compendium[sfrpg.classes.WDvGdJ5mMpAD9cWQ]{Vanguard}</p>\n<p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\">You can focus the power of entropy into a forceful attack. Though you must touch your target to damage it, the damage is not from the impact but from focused waves of entropic energy that unbind and dissolve your target, crush it, or both. Your entropic strike is a magical one-handed advanced melee weapon with the operative weapon special property that targets EAC (even when dealing bludgeoning damage). You can make this attack with nearly any body part and do not need a hand free to use this ability. Using your entropic strike does not require any additional action to use beyond the action you take to make an attack (for example, it can be used to make an attack of opportunity.) For any calculation that requires the item level of your entropic strike, treat your vanguard level as your entropic strike&rsquo;s item level.<br /><br />You can also deliver an entropic strike with any melee weapon, or any shield that allows you to make unarmed attacks (replacing the normal attack with your entropic strike). The attack&rsquo;s damage is equal to the entropic strike damage of a vanguard of either your class level or a class level equal to the weapon&rsquo;s item level, whichever is lower. When you use this option, your entropic strike is considered to be made of whatever material the weapon or shield is made of (such as for the purposes of bypassing DR or creature weaknesses). Additionally, you can apply any weapon special property, critical hit effect, or weapon fusion the melee weapon or shield has to your entropic strike as long as the effect can be applied to a one-handed advanced melee weapon that deals acid or bludgeoning damage, doesn&rsquo;t use additional ammunition or charges, and doesn&rsquo;t require information beyond that specified for your entropic strike to function. If the weapon special property, critical hit effect, or weapon fusion requires information provided for your weapon (such as the amount of a @Compendium[sfrpg.conditions.v9RNVTqyTyaPchvd]{Bleed} critical hit effect), use the value for the weapon you are gaining the effect from.<br /><br />At 1st level, your entropic strike deals damage equal to 1d3 + your Constitution modifier, but you do not add your Strength modifier (unlike most melee attacks). For each attack, you can deal acid damage, bludgeoning damage, or both. This damage increases as you gain levels (see Table below). At 10th level, you also add your Strength modifier to the damage of your entropic strike. At 5th level, when you use any combat maneuver for which you have Improved Combat Maneuver, you can target a foe&rsquo;s EAC + 8 (rather than KAC + 8) to determine success, and you also determine the level of success (such as how far you push a foe with a successful bull rush) using EAC.</span></p>\n<p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\"></span></p>\n<table class=\"inner\" style=\"width: 141px;\">\n<tbody>\n<tr>\n<td style=\"width: 35px;\"><strong>Level</strong></td>\n<td style=\"width: 106px;\"><strong>Entropic Strike Damage</strong></td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">1st</td>\n<td style=\"width: 106px;\">1d3</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">2nd</td>\n<td style=\"width: 106px;\">1d3</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">3rd</td>\n<td style=\"width: 106px;\">1d4</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">4th</td>\n<td style=\"width: 106px;\">1d4</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">5th</td>\n<td style=\"width: 106px;\">1d6</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">6th</td>\n<td style=\"width: 106px;\">2d6</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">7th</td>\n<td style=\"width: 106px;\">2d6</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">8th</td>\n<td style=\"width: 106px;\">2d6</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">9th</td>\n<td style=\"width: 106px;\">3d6</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">10th</td>\n<td style=\"width: 106px;\">3d6</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">11th</td>\n<td style=\"width: 106px;\">3d6</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">12th</td>\n<td style=\"width: 106px;\">4d6</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">13th</td>\n<td style=\"width: 106px;\">5d6</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">14th</td>\n<td style=\"width: 106px;\">6d6</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">15th</td>\n<td style=\"width: 106px;\">7d6</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">16th</td>\n<td style=\"width: 106px;\">8d6</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">17th</td>\n<td style=\"width: 106px;\">9d6</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">18th</td>\n<td style=\"width: 106px;\">10d6</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">19th</td>\n<td style=\"width: 106px;\">11d6</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">20th</td>\n<td style=\"width: 106px;\">12d6</td>\n</tr>\n</tbody>\n</table>\n<p>&nbsp;</p>\n<p><em>Damage formula is provided in the details tab. In order for correct damage calculation, such as for DR, it is suggested you add a new damage field to your weapon items using the Entropic Strike's damage formula.</em></p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.WDvGdJ5mMpAD9cWQ]{Vanguard}</p>\n<p><em>Damage formula for weapons is provided as a secondary damage forumla in the Details tab. This formula is only for copying to weapons as a secondary damage formula, and should not be used within this item.</em></p>\n<p>You can focus the power of entropy into a forceful attack. Though you must touch your target to damage it, the damage is not from the impact but from focused waves of entropic energy that unbind and dissolve your target, crush it, or both. Your entropic strike is a magical one-handed advanced melee weapon with the operative weapon special property that targets EAC (even when dealing bludgeoning damage). You can make this attack with nearly any body part and do not need a hand free to use this ability. Using your entropic strike does not require any additional action to use beyond the action you take to make an attack (for example, it can be used to make an attack of opportunity.) For any calculation that requires the item level of your entropic strike, treat your vanguard level as your entropic strike’s item level.</p>\n<p>You can also deliver an entropic strike with any melee weapon, or any shield that allows you to make unarmed attacks (replacing the normal attack with your entropic strike). The attack’s damage is equal to the entropic strike damage of a vanguard of either your class level or a class level equal to the weapon’s item level, whichever is lower. When you use this option, your entropic strike is considered to be made of whatever material the weapon or shield is made of (such as for the purposes of bypassing DR or creature weaknesses). Additionally, you can apply any weapon special property, critical hit effect, or weapon fusion the melee weapon or shield has to your entropic strike as long as the effect can be applied to a one-handed advanced melee weapon that deals acid or bludgeoning damage, doesn’t use additional ammunition or charges, and doesn’t require information beyond that specified for your entropic strike to function. If the weapon special property, critical hit effect, or weapon fusion requires information provided for your weapon (such as the amount of a @UUID[Compendium.sfrpg.conditions.v9RNVTqyTyaPchvd]{Bleed} critical hit effect), use the value for the weapon you are gaining the effect from.</p>\n<p>At 1st level, your entropic strike deals damage equal to 1d3 + your Constitution modifier, but you do not add your Strength modifier (unlike most melee attacks). For each attack, you can deal acid damage, bludgeoning damage, or both. This damage increases as you gain levels (see Table below). At 10th level, you also add your Strength modifier to the damage of your entropic strike. At 5th level, when you use any combat maneuver for which you have Improved Combat Maneuver, you can target a foe’s EAC + 8 (rather than KAC + 8) to determine success, and you also determine the level of success (such as how far you push a foe with a successful bull rush) using EAC.</p>\n<p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\"></span></p>\n<table class=\"inner\" style=\"width: 141px;\">\n<tbody>\n<tr>\n<td style=\"width: 35px;\"><strong>Level</strong></td>\n<td style=\"width: 106px;\"><strong>Entropic Strike Damage</strong></td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">1st</td>\n<td style=\"width: 106px;\">1d3</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">2nd</td>\n<td style=\"width: 106px;\">1d3</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">3rd</td>\n<td style=\"width: 106px;\">1d4</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">4th</td>\n<td style=\"width: 106px;\">1d4</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">5th</td>\n<td style=\"width: 106px;\">1d6</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">6th</td>\n<td style=\"width: 106px;\">2d6</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">7th</td>\n<td style=\"width: 106px;\">2d6</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">8th</td>\n<td style=\"width: 106px;\">2d6</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">9th</td>\n<td style=\"width: 106px;\">3d6</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">10th</td>\n<td style=\"width: 106px;\">3d6</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">11th</td>\n<td style=\"width: 106px;\">3d6</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">12th</td>\n<td style=\"width: 106px;\">4d6</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">13th</td>\n<td style=\"width: 106px;\">5d6</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">14th</td>\n<td style=\"width: 106px;\">6d6</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">15th</td>\n<td style=\"width: 106px;\">7d6</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">16th</td>\n<td style=\"width: 106px;\">8d6</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">17th</td>\n<td style=\"width: 106px;\">9d6</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">18th</td>\n<td style=\"width: 106px;\">10d6</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">19th</td>\n<td style=\"width: 106px;\">11d6</td>\n</tr>\n<tr>\n<td style=\"width: 35px;\">20th</td>\n<td style=\"width: 106px;\">12d6</td>\n</tr>\n</tbody>\n</table>"
     },
     "descriptors": [],
     "duration": {
       "units": "",
       "value": ""
     },
+    "equippable": false,
+    "equipped": false,
     "formula": "",
-    "isActive": false,
+    "identified": true,
+    "isActive": null,
+    "level": 0,
     "modifiers": [],
+    "price": 0,
+    "proficient": true,
+    "properties": {
+      "aeon": false,
+      "amm": false,
+      "analog": false,
+      "antibiological": false,
+      "archaic": false,
+      "aurora": false,
+      "automatic": false,
+      "blast": false,
+      "block": false,
+      "boost": false,
+      "breach": false,
+      "breakdown": false,
+      "bright": false,
+      "buttressing": false,
+      "cluster": false,
+      "conceal": false,
+      "deconstruct": false,
+      "deflect": false,
+      "disarm": false,
+      "double": false,
+      "drainCharge": false,
+      "echo": false,
+      "entangle": false,
+      "explode": false,
+      "extinguish": false,
+      "feint": false,
+      "fiery": false,
+      "firstArc": false,
+      "flexibleLine": false,
+      "force": false,
+      "freeHands": false,
+      "fueled": false,
+      "gearArray": false,
+      "grapple": false,
+      "gravitation": false,
+      "guided": false,
+      "harrying": false,
+      "holyWater": false,
+      "hybrid": false,
+      "ignite": false,
+      "indirect": false,
+      "injection": false,
+      "integrated": false,
+      "line": false,
+      "living": false,
+      "lockdown": false,
+      "mind-affecting": false,
+      "mine": false,
+      "mire": false,
+      "modal": false,
+      "necrotic": false,
+      "nonlethal": false,
+      "one": true,
+      "operative": true,
+      "penetrating": false,
+      "polarize": false,
+      "polymorphic": false,
+      "powered": false,
+      "professional": false,
+      "propel": false,
+      "punchGun": false,
+      "qreload": false,
+      "radioactive": false,
+      "reach": false,
+      "recall": false,
+      "regrowth": false,
+      "relic": false,
+      "reposition": false,
+      "scramble": false,
+      "shape": false,
+      "shatter": false,
+      "shells": false,
+      "shield": false,
+      "sniper": false,
+      "stun": false,
+      "subtle": false,
+      "sunder": false,
+      "swarm": false,
+      "tail": false,
+      "teleportive": false,
+      "thought": false,
+      "throttle": false,
+      "thrown": false,
+      "thruster": false,
+      "trip": false,
+      "two": false,
+      "unbalancing": false,
+      "underwater": false,
+      "unwieldy": false,
+      "variantBoost": false,
+      "wideLine": false
+    },
+    "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "none",
       "value": null
     },
-    "recharge": {
-      "charged": false,
-      "value": null
-    },
-    "requirements": "1st Level",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": "",
       "descriptor": "negate"
     },
-    "source": "Vanguard",
+    "source": "COM, p. 50",
+    "special": "",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
     },
-    "uses": {
-      "max": null,
+    "usage": {
       "per": "",
-      "value": null
-    }
-  },
-  "img": "icons/svg/mystery-man.svg"
+      "value": 0
+    },
+    "uses": {
+      "max": 0,
+      "per": "",
+      "value": 0
+    },
+    "weaponCategory": "uncategorized",
+    "weaponType": "advancedM"
+  }
 }

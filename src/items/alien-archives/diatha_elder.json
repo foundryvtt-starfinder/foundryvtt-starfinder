@@ -2,7 +2,599 @@
   "_id": "vAkckJjshSLeM3zR",
   "name": "Diatha Elder",
   "type": "npc2",
-  "data": {
+  "img": "icons/svg/mystery-man.svg",
+  "items": [
+    {
+      "_id": "F6167qiIKEfrouYP",
+      "name": "Bite",
+      "type": "weapon",
+      "img": "icons/svg/item-bag.svg",
+      "system": {
+        "type": "",
+        "ability": "",
+        "actionTarget": "kac",
+        "actionType": "mwak",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "ammunitionType": "",
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": 0
+        },
+        "attackBonus": 14,
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": true
+        },
+        "attuned": false,
+        "bulk": "L",
+        "capacity": {
+          "max": 0,
+          "value": 0
+        },
+        "chatFlavor": "",
+        "container": {
+          "contents": [],
+          "includeContentsInWealthCalculation": 1,
+          "isOpen": true,
+          "storage": [
+            {
+              "type": "slot",
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 0,
+              "subtype": "fusion",
+              "weightProperty": "level"
+            }
+          ]
+        },
+        "critical": {
+          "effect": "Burn 1d4",
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "1d6 +7",
+              "operator": "and",
+              "types": {
+                "slashing": true
+              }
+            }
+          ]
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "equippable": true,
+        "equipped": true,
+        "formula": "",
+        "identified": true,
+        "isActive": null,
+        "level": 1,
+        "modifiers": [],
+        "price": 0,
+        "proficient": true,
+        "properties": {},
+        "quantity": 1,
+        "quantityPerPack": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "special": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "usage": {
+          "per": "",
+          "value": 0
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        },
+        "weaponCategory": "uncategorized",
+        "weaponType": "basicM"
+      }
+    },
+    {
+      "_id": "I7KNunfQ36B33MQF",
+      "name": "Detonate (Ex)",
+      "type": "feat",
+      "img": "icons/svg/item-bag.svg",
+      "system": {
+        "type": "",
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "save",
+        "activation": {
+          "type": "none",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "burst",
+          "shape": "sphere",
+          "units": "ft",
+          "value": 10
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "2d6",
+              "operator": "",
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": true,
+                "healing": false,
+                "piercing": false,
+                "slashing": false,
+                "sonic": false
+              }
+            }
+          ]
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>While the diatha has 20 or fewer Hit Points, its energy-dense flesh becomes unstable. If, while in this state, the diatha takes acid, electricity, fire, piercing, slashing, or sonic damage, or uses its explosive charge ability, it dies, exploding in a 10-foot-radius burst, dealing 2d6 fire damage and causes the burning condition dealing 1d4 fire damage (Reflex DC 13 for half damage and no burning condition).</p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": ""
+        },
+        "formula": "",
+        "isActive": null,
+        "modifiers": [],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "none",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "save": {
+          "type": "reflex",
+          "dc": "13",
+          "descriptor": "half"
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "uses": {
+          "max": 0,
+          "per": "",
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "VYyJyyuma9NhbpNq",
+      "name": "Explosive Charge (Ex)",
+      "type": "feat",
+      "img": "icons/svg/item-bag.svg",
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "",
+        "activation": {
+          "type": "full",
+          "condition": "",
+          "cost": 1
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "none",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>While the diatha has 20 or fewer Hit Points, as a full action, the creature can move up to double its speed and make a bite attack. Its detonate ability then triggers.</p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": ""
+        },
+        "formula": "",
+        "isActive": null,
+        "modifiers": [],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "none",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "uses": {
+          "max": 0,
+          "per": "",
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "H0NpUYqjUcE2q6fN",
+      "name": "Buoyant (Ex)",
+      "type": "feat",
+      "img": "icons/svg/item-bag.svg",
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "",
+        "activation": {
+          "type": "swift",
+          "condition": "",
+          "cost": 1
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "none",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>A diatha elder can hover as a swift action or part of a full action without needing to attempt an Acrobatics check. It can avoid falling damage as if it had perfect maneuverability.</p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": ""
+        },
+        "formula": "",
+        "isActive": null,
+        "modifiers": [],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "none",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "uses": {
+          "max": 0,
+          "per": "",
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "fULsOeoDBmSSdR4q",
+      "name": "Compression",
+      "type": "feat",
+      "img": "icons/svg/mystery-man.svg",
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>(EX)</p>\n<p>The creature can move through an area as small as one-quarter of its space without squeezing or one-eighth its space when squeezing.</p>\n<hr />"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "isActive": null,
+        "modifiers": [],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "JYflcpDaKXWmz0SP",
+      "name": "Mindless",
+      "type": "feat",
+      "img": "icons/svg/mystery-man.svg",
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>(EX)</p>\n<p>The creature has no Intelligence score or modifier and is immune to @UUID[Compendium.sfrpg.rules.PqV3OCbUTyk2upPD]{Mind-affecting effects}. Any DCs or other statistics that rely on an Intelligence score treat the creature as having a score of 10 (+0).</p>\n<p>Guidelines: Mindless creatures usually have fewer good skills and no master skills. Their skills should be based on inborn abilities, since they’re incapable of training.</p>\n<hr />"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "isActive": null,
+        "modifiers": [],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      }
+    }
+  ],
+  "prototypeToken": {
+    "name": "Diatha Elder",
+    "actorLink": false,
+    "alpha": 1,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": ""
+    },
+    "displayBars": 20,
+    "displayName": 20,
+    "disposition": -1,
+    "height": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 360,
+      "animation": {
+        "type": null,
+        "intensity": 5,
+        "reverse": false,
+        "speed": 5
+      },
+      "attenuation": 0.5,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "contrast": 0,
+      "darkness": {
+        "max": 1,
+        "min": 0
+      },
+      "dim": 0,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "shadows": 0
+    },
+    "lockRotation": false,
+    "mirrorX": false,
+    "mirrorY": false,
+    "randomImg": false,
+    "rotation": 0,
+    "scale": 1,
+    "sight": {
+      "angle": 360,
+      "attenuation": 0.1,
+      "brightness": 1,
+      "color": null,
+      "contrast": 0,
+      "enabled": false,
+      "range": 0,
+      "saturation": 0,
+      "visionMode": "basic"
+    },
+    "texture": {
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": null
+    },
+    "width": 1
+  },
+  "system": {
     "abilities": {
       "cha": {
         "base": -2,
@@ -102,18 +694,6 @@
         "tooltip": [],
         "value": 0
       },
-      "rp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
-      "sp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
       "space": "5",
       "speed": {
         "burrowing": {
@@ -196,11 +776,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
-        "fullBodyImage": "systems/sfrpg/images/mystery-body.png",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
         "height": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<h2>Diatha</h2>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Diathas are a common species of what are known as &ldquo;explosive slugs.&rdquo; Found throughout the galaxy, including on Vesk-2, diathas store energy in chemical chains, rather than in fat deposits, causing the slugs to smell like raw petroleum. When threatened, diathas bite. and they sometimes regurgitate volatile materials that ignite on contact with air into the wound. Diathas are cooperative creatures that organize themselves into hives. These hives live in warrens normal diathas slowly dig in the dirt, making distinctive mounds of churned soil with stable passages underneath. Diathas usually dig their warrens into gently rolling ground, but some can be found on hillsides or sheltered in ruins. The slugs have also adapted to maintenance tunnels and power conduits big enough to facilitate their movement. A single diatha hive claims a wide territory, building numerous communal mounds with extensive connecting tunnels. The diathas fiercely defend this territory, especially the hive mounds.</span></p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Such an interconnected diatha hive can contain hundreds of normal diathas, which work to find food for larvae and for older, stronger diathas known as elders. Their ultimate defensive adaptation is the ability to detonate their energy-packed flesh while in an injured and excited state. If a foe manages to break into a diatha hive, each of the creatures within is a potential explosive deathtrap. The loss of several diathas does little harm to the hive as a whole. However, the explosions can destroy or drive away predators much larger and more powerful than the diathas.</span></p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">While diatha flesh is explosive, it is stable under in most circumstances. Like manufactured explosives, a diatha is difficult to set off unless &ldquo;primed&rdquo; first. Hurting a diatha initially has no effect. However, when a diatha is badly wounded, hormones released as a stress response destabilize its flesh. A diatha excited in this way launches itself into a suicide charge, slamming into a foe and detonating itself with an electrochemical spark from its brain. If the diatha&rsquo;s body takes certain types of damage after it becomes unstable, the creature also explodes.</span></p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">As diathas age, they become more energy-rich and buoyant with stored internal gases, and their malleable bodies can extend winglike flaps. These floating diathas rise in prominence within the hive and enjoy less and less work. Such elders are expected to scout for food and potential territory in places only they can reach. They also guard the hive.</span></p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Although all diathas can exchange sex cells at any time, they produce no young until they achieve elder status. Elder diathas produce larvae, with a birth rate based on how much food the hive has. Normal diathas then care for the offspring. A hive with a dearth of food may struggle to produce enough larvae to replace diathas that die defending the hive, while hives with plentiful forage can expand so rapidly that one hive breaks into multiple smaller hives, expanding diatha territory in the region.</span></p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Diathas eat anything that won&rsquo;t kill them, converting it into the fuel-like liquid they require. They spread through battlefields, settlements, and starships, seeking out and eating energy-rich material, such as flamer petrol. A lone diatha is little threat. However, if an elder can break into a food source in a potential lair, that diatha can birth offspring. This new colony might become dangerous as the diatha population grows and the creatures become more territorial.</span></p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Diathas that burrow into the infrastructure of starships are often carried to new star systems. Being resilient creatures, they quickly adapt to their new environments. Xenobiologists believe this to be one reason they can be found throughout the galaxy. Diathas can dominate worlds in early stages of biological development, displacing or killing native species. The Pact Worlds and Veskarium have strict quarantine measures for vessels arriving from systems known to have diatha infestations, as do many other planets. However, these laws most often are passed in the wake of a diatha-related disaster. A typical diatha is 2 feet long and weighs 90 pounds. Elders can grow to nearly 4 feet, weighing up to 50 pounds.</span></p>",
+        "value": "<h2>Diatha</h2>\n<p>Diathas are a common species of what are known as “explosive slugs.” Found throughout the galaxy, including on Vesk-2, diathas store energy in chemical chains, rather than in fat deposits, causing the slugs to smell like raw petroleum. When threatened, diathas bite. and they sometimes regurgitate volatile materials that ignite on contact with air into the wound. Diathas are cooperative creatures that organize themselves into hives. These hives live in warrens normal diathas slowly dig in the dirt, making distinctive mounds of churned soil with stable passages underneath. Diathas usually dig their warrens into gently rolling ground, but some can be found on hillsides or sheltered in ruins. The slugs have also adapted to maintenance tunnels and power conduits big enough to facilitate their movement. A single diatha hive claims a wide territory, building numerous communal mounds with extensive connecting tunnels. The diathas fiercely defend this territory, especially the hive mounds.</p>\n<p>Such an interconnected diatha hive can contain hundreds of normal diathas, which work to find food for larvae and for older, stronger diathas known as elders. Their ultimate defensive adaptation is the ability to detonate their energy-packed flesh while in an injured and excited state. If a foe manages to break into a diatha hive, each of the creatures within is a potential explosive deathtrap. The loss of several diathas does little harm to the hive as a whole. However, the explosions can destroy or drive away predators much larger and more powerful than the diathas.</p>\n<p>While diatha flesh is explosive, it is stable under in most circumstances. Like manufactured explosives, a diatha is difficult to set off unless “primed” first. Hurting a diatha initially has no effect. However, when a diatha is badly wounded, hormones released as a stress response destabilize its flesh. A diatha excited in this way launches itself into a suicide charge, slamming into a foe and detonating itself with an electrochemical spark from its brain. If the diatha’s body takes certain types of damage after it becomes unstable, the creature also explodes.</p>\n<p>As diathas age, they become more energy-rich and buoyant with stored internal gases, and their malleable bodies can extend winglike flaps. These floating diathas rise in prominence within the hive and enjoy less and less work. Such elders are expected to scout for food and potential territory in places only they can reach. They also guard the hive.</p>\n<p>Although all diathas can exchange sex cells at any time, they produce no young until they achieve elder status. Elder diathas produce larvae, with a birth rate based on how much food the hive has. Normal diathas then care for the offspring. A hive with a dearth of food may struggle to produce enough larvae to replace diathas that die defending the hive, while hives with plentiful forage can expand so rapidly that one hive breaks into multiple smaller hives, expanding diatha territory in the region.</p>\n<p>Diathas eat anything that won’t kill them, converting it into the fuel-like liquid they require. They spread through battlefields, settlements, and starships, seeking out and eating energy-rich material, such as flamer petrol. A lone diatha is little threat. However, if an elder can break into a food source in a potential lair, that diatha can birth offspring. This new colony might become dangerous as the diatha population grows and the creatures become more territorial.</p>\n<p>Diathas that burrow into the infrastructure of starships are often carried to new star systems. Being resilient creatures, they quickly adapt to their new environments. Xenobiologists believe this to be one reason they can be found throughout the galaxy. Diathas can dominate worlds in early stages of biological development, displacing or killing native species. The Pact Worlds and Veskarium have strict quarantine measures for vessels arriving from systems known to have diatha infestations, as do many other planets. However, these laws most often are passed in the wake of a diatha-related disaster. A typical diatha is 2 feet long and weighs 90 pounds. Elders can grow to nearly 4 feet, weighing up to 50 pounds.</p>",
         "weight": ""
       },
       "class": "",
@@ -510,618 +1090,5 @@
       "size": "small",
       "sr": 0
     }
-  },
-  "effects": [],
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "items": [
-    {
-      "_id": "F6167qiIKEfrouYP",
-      "name": "Bite",
-      "type": "weapon",
-      "data": {
-        "type": "",
-        "ability": "",
-        "actionType": "mwak",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "ammunitionType": "",
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": 0
-        },
-        "attackBonus": 14,
-        "attributes": {
-          "ac": {
-            "value": ""
-          },
-          "customBuilt": false,
-          "dex": {
-            "mod": ""
-          },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
-          "size": "medium",
-          "sturdy": true
-        },
-        "attuned": false,
-        "bulk": "L",
-        "capacity": {
-          "max": 0,
-          "value": 0
-        },
-        "chatFlavor": "",
-        "container": {
-          "contents": [],
-          "includeContentsInWealthCalculation": 1,
-          "isOpen": true,
-          "storage": [
-            {
-              "type": "slot",
-              "acceptsType": [
-                "fusion"
-              ],
-              "affectsEncumbrance": true,
-              "amount": 0,
-              "subtype": "fusion",
-              "weightProperty": "level"
-            }
-          ]
-        },
-        "critical": {
-          "effect": "Burn 1d4",
-          "parts": []
-        },
-        "damage": {
-          "parts": [
-            {
-              "formula": "1d6 +7",
-              "operator": "and",
-              "types": {
-                "slashing": true
-              }
-            }
-          ]
-        },
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": ""
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "equippable": true,
-        "equipped": true,
-        "formula": "",
-        "identified": true,
-        "isActive": null,
-        "level": 1,
-        "modifiers": [],
-        "price": 0,
-        "proficient": true,
-        "properties": {},
-        "quantity": 1,
-        "quantityPerPack": 1,
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "special": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "usage": {
-          "per": "",
-          "value": 0
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        },
-        "weaponCategory": "uncategorized",
-        "weaponType": "basicM"
-      },
-      "effects": [],
-      "flags": {},
-      "folder": null,
-      "img": "icons/svg/item-bag.svg",
-      "permission": {
-        "FfLAsyMewQgw5kRw": 3,
-        "default": 0
-      },
-      "sort": 0
-    },
-    {
-      "_id": "I7KNunfQ36B33MQF",
-      "name": "Detonate (Ex)",
-      "type": "feat",
-      "data": {
-        "type": "",
-        "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "save",
-        "activation": {
-          "type": "none",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "burst",
-          "shape": "sphere",
-          "units": "ft",
-          "value": 10
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": [
-            {
-              "formula": "2d6",
-              "operator": "",
-              "types": {
-                "acid": false,
-                "bludgeoning": false,
-                "cold": false,
-                "electricity": false,
-                "fire": true,
-                "healing": false,
-                "piercing": false,
-                "slashing": false,
-                "sonic": false
-              }
-            }
-          ]
-        },
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "While the diatha has 20 or fewer Hit Points, its energy-dense flesh becomes unstable. If, while in this state, the diatha takes acid, electricity, fire, piercing, slashing, or sonic damage, or uses its explosive charge ability, it dies, exploding in a 10-foot-radius burst, dealing 2d6 fire damage and causes the burning condition dealing 1d4 fire damage (Reflex DC 13 for half damage and no burning condition). "
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": ""
-        },
-        "formula": "",
-        "isActive": null,
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "save": {
-          "type": "reflex",
-          "dc": "13",
-          "descriptor": "half"
-        },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": ""
-        },
-        "uses": {
-          "max": 0,
-          "per": "",
-          "value": 0
-        }
-      },
-      "effects": [],
-      "flags": {},
-      "folder": null,
-      "img": "icons/svg/item-bag.svg",
-      "permission": {
-        "FfLAsyMewQgw5kRw": 3,
-        "default": 0
-      },
-      "sort": 0
-    },
-    {
-      "_id": "VYyJyyuma9NhbpNq",
-      "name": "Explosive Charge (Ex)",
-      "type": "feat",
-      "data": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "",
-        "activation": {
-          "type": "full",
-          "condition": "",
-          "cost": 1
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "none",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "While the diatha has 20 or fewer Hit Points, as a full action, the creature can move up to double its speed and make a bite attack. Its detonate ability then triggers."
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": ""
-        },
-        "formula": "",
-        "isActive": null,
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": ""
-        },
-        "uses": {
-          "max": 0,
-          "per": "",
-          "value": 0
-        }
-      },
-      "effects": [],
-      "flags": {},
-      "folder": null,
-      "img": "icons/svg/item-bag.svg",
-      "permission": {
-        "FfLAsyMewQgw5kRw": 3,
-        "default": 0
-      },
-      "sort": 0
-    },
-    {
-      "_id": "H0NpUYqjUcE2q6fN",
-      "name": "Buoyant (Ex)",
-      "type": "feat",
-      "data": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "",
-        "activation": {
-          "type": "swift",
-          "condition": "",
-          "cost": 1
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "none",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "A diatha elder can hover as a swift action or part of a full action without needing to attempt an Acrobatics check. It can avoid falling damage as if it had perfect maneuverability. "
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": ""
-        },
-        "formula": "",
-        "isActive": null,
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": ""
-        },
-        "uses": {
-          "max": 0,
-          "per": "",
-          "value": 0
-        }
-      },
-      "effects": [],
-      "flags": {},
-      "folder": null,
-      "img": "icons/svg/item-bag.svg",
-      "permission": {
-        "FfLAsyMewQgw5kRw": 3,
-        "default": 0
-      },
-      "sort": 0
-    },
-    {
-      "_id": "fULsOeoDBmSSdR4q",
-      "name": "Compression",
-      "type": "feat",
-      "data": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>(EX)</p>\n<p>The creature can move through an area as small as one-quarter of its space without squeezing or one-eighth its space when squeezing.</p>\n<hr>\n<p>&nbsp;</p>"
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "isActive": null,
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      },
-      "effects": [],
-      "flags": {},
-      "folder": null,
-      "img": "icons/svg/mystery-man.svg",
-      "permission": {
-        "FfLAsyMewQgw5kRw": 3,
-        "default": 0
-      },
-      "sort": 0
-    },
-    {
-      "_id": "JYflcpDaKXWmz0SP",
-      "name": "Mindless",
-      "type": "feat",
-      "data": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>(EX)</p>\n<p>The creature has no Intelligence score or modifier and is immune to @Compendium[sfrpg.rules.PqV3OCbUTyk2upPD]{Mind-affecting effects}. Any DCs or other statistics that rely on an Intelligence score treat the creature as having a score of 10 (+0).</p>\n<p>Guidelines: Mindless creatures usually have fewer good skills and no master skills. Their skills should be based on inborn abilities, since they’re incapable of training.</p>\n<hr>\n<p>&nbsp;</p>"
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "isActive": null,
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      },
-      "effects": [],
-      "flags": {},
-      "folder": null,
-      "img": "icons/svg/mystery-man.svg",
-      "permission": {
-        "FfLAsyMewQgw5kRw": 3,
-        "default": 0
-      },
-      "sort": 0
-    }
-  ],
-  "token": {
-    "name": "Diatha Elder",
-    "actorLink": false,
-    "alpha": 1,
-    "bar1": {
-      "attribute": "attributes.hp"
-    },
-    "bar2": {
-      "attribute": "attributes.rp"
-    },
-    "brightLight": 0,
-    "brightSight": 0,
-    "dimLight": 0,
-    "dimSight": 0,
-    "displayBars": 40,
-    "displayName": 40,
-    "disposition": -1,
-    "flags": {},
-    "height": 1,
-    "img": "icons/svg/mystery-man.svg",
-    "lightAlpha": 0.25,
-    "lightAngle": 0,
-    "lightAnimation": {
-      "intensity": 5,
-      "speed": 5
-    },
-    "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
-    "randomImg": false,
-    "rotation": 0,
-    "scale": 1,
-    "sightAngle": 0,
-    "vision": false,
-    "width": 1
   }
 }

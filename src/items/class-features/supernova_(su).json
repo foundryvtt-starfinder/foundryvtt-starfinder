@@ -2,13 +2,15 @@
   "_id": "RQlIIC7yl9XwNiun",
   "name": "Supernova (Su)",
   "type": "feat",
-  "data": {
+  "img": "systems/sfrpg/icons/classes/supernova.webp",
+  "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
-    "actionType": "",
+    "actionTarget": "",
+    "actionType": "save",
     "activation": {
       "type": "action",
       "condition": "",
@@ -27,12 +29,31 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "",
+          "formula": "(1+@classes.solarian.levels)d6",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"G7p2YIGFTAU6uGjL\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Stellar Revelation</a></p>\n        <p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl01_LabelName\">When you’re fully photon-attuned, as a standard action, you can deal 1d6 fire damage plus 1d6 additional fire damage per solarian level to all creatures within 10 feet of you. A creature that succeeds at a Reflex save takes half damage. At 9th level, you can increase the radius to 15 feet, and at 17th level, you can increase the radius to 20 feet. After you use this revelation, you immediately become unattuned. Supernova functions as a zenith revelation for the purposes of abilities that reference them.</span></p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p><sub><img style=\"border: 1px solid var(--color-border-dark);\" src=\"systems/sfrpg/images/cup/gameplay/photon.webp\" alt=\"\" width=\"20\" height=\"20\"></sub> Photon Revelation</p>\n<p>When you’re fully photon-attuned, as a standard action, you can deal 1d6 fire damage plus 1d6 additional fire damage per solarian level to all creatures within 10 feet of you. A creature that succeeds at a Reflex save takes half damage. At 9th level, you can increase the radius to 15 feet, and at 17th level, you can increase the radius to 20 feet. After you use this revelation, you immediately become unattuned. Supernova functions as a zenith revelation for the purposes of abilities that reference them.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -40,6 +61,7 @@
       "value": ""
     },
     "formula": "",
+    "isActive": null,
     "modifiers": [],
     "range": {
       "additional": "",
@@ -52,12 +74,13 @@
       "value": null
     },
     "requirements": "1st Level",
+    "rollNotes": "",
     "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": ""
+      "type": "reflex",
+      "dc": "10+floor(@classes.solarian.levels/2) + @abilities.cha.mod",
+      "descriptor": "half"
     },
-    "source": "Solarian",
+    "source": "CRB pg. 103",
     "target": {
       "type": "",
       "value": ""
@@ -67,11 +90,5 @@
       "per": "",
       "value": 0
     }
-  },
-  "flags": {},
-  "img": "systems/sfrpg/icons/classes/supernova.png",
-  "permission": {
-    "QqVQDajn5ZN4kl25": 3,
-    "default": 0
   }
 }

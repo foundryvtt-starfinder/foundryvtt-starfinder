@@ -2,7 +2,8 @@
   "_id": "TW1IjrATKd36HtNe",
   "name": "Sclerite harpooner, lure",
   "type": "weapon",
-  "data": {
+  "img": "systems/sfrpg/icons/equipment/weapons/explosive-arrows.webp",
+  "system": {
     "type": "",
     "ability": "dex",
     "abilityMods": {
@@ -15,6 +16,7 @@
       "condition": "",
       "cost": 1
     },
+    "ammunitionType": "sclerite",
     "area": {
       "effect": "",
       "shape": "",
@@ -49,6 +51,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": 1,
       "isOpen": true,
       "storage": [
         {
@@ -88,16 +91,20 @@
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>Kaions&rsquo; ability to reel in all manner of prey has led to emulations of their effective hunting strategy. A sclerite harpooner is inlaid with spirals of kaion shell and magnetically fires either harvested or manufactured kaion sclerites along two rails; this ammunition is available in the same quantities and at the same price as darts. As a reaction, the weapon can be activated to reel in a target affected by its @Compendium[sfrpg.rules.O5GDQUKPCJ9Zbnfj]{Embed} critical hit effect. The target must attempt a Reflex save (DC = 10 + 1/2 the harpooner&rsquo;s item level + the wielder&rsquo;s Strength modifier) or be pulled 30 feet toward the wielder; this movement does not provoke attacks of opportunity. Huge or larger creatures are not affected.</p>"
+      "value": "<p>Kaions’ ability to reel in all manner of prey has led to emulations of their effective hunting strategy. A sclerite harpooner is inlaid with spirals of kaion shell and magnetically fires either harvested or manufactured kaion sclerites along two rails; this ammunition is available in the same quantities and at the same price as darts. As a reaction, the weapon can be activated to reel in a target affected by its @UUID[Compendium.sfrpg.rules.O5GDQUKPCJ9Zbnfj]{Embed} critical hit effect. The target must attempt a Reflex save (DC = 10 + 1/2 the harpooner’s item level + the wielder’s Strength modifier) or be pulled 30 feet toward the wielder; this movement does not provoke attacks of opportunity. Huge or larger creatures are not affected.</p>"
     },
     "descriptors": [],
     "duration": {
       "units": "",
       "value": ""
     },
+    "equippable": false,
     "equipped": false,
     "formula": "",
     "identified": true,
@@ -194,12 +201,14 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
       "value": 90
     },
+    "rollNotes": "",
     "save": {
       "type": "reflex",
       "dc": "10+floor(@item.level)+@abilities.str.mod",
@@ -207,6 +216,7 @@
     },
     "source": "AA4 pg. 59",
     "special": "",
+    "specialMaterials": {},
     "target": {
       "type": "",
       "value": ""
@@ -222,8 +232,5 @@
     },
     "weaponCategory": "projectile",
     "weaponType": "heavy"
-  },
-  "effects": [],
-  "flags": {},
-  "img": "systems/sfrpg/icons/equipment/weapons/explosive-arrows.jpg"
+  }
 }

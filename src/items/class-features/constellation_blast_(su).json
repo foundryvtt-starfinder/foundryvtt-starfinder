@@ -2,13 +2,15 @@
   "_id": "jLc4wi4vROIHvT7C",
   "name": "Constellation Blast (Su)",
   "type": "feat",
-  "data": {
+  "img": "systems/sfrpg/images/cup/gameplay/photon.webp",
+  "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
-    "actionType": "",
+    "actionTarget": "",
+    "actionType": "other",
     "activation": {
       "type": "action",
       "condition": "",
@@ -16,9 +18,9 @@
     },
     "area": {
       "effect": "",
-      "shape": "",
-      "units": "none",
-      "value": null
+      "shape": "sphere",
+      "units": "ft",
+      "value": 10
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -27,12 +29,31 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "",
+          "formula": "(lookupRange(@classes.solarian.levels, 0, 9, 5, 11, 6, 13, 7, 15, 8, 17, 9, 19, 10))d6",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@Compendium[sfrpg.class-features.UVNOjH2ERlQjcGnU]{Zenith Revelation}</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl53_LabelName\">When you’re fully photon-attuned, as a standard action, you can create a momentary chain of bursting energy that burns through the terrain. When you use this ability, you create three 10-foot-radius bursts within 60 feet of you, each of which cannot overlap and must be centered no more than 15 feet from the center of one other radius. You deal 5d6 fire damage, plus 1d6 for every 2 solarian levels you have beyond 9th, to each creature in each radius. An affected creature can attempt a Reflex save to take half damage. At 17th level, you can create three, four, or five bursts when using this ability.</span></p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.UVNOjH2ERlQjcGnU]{Zenith Revelation}</p>\n<p><sub><img style=\"border: 1px solid var(--color-border-dark);\" src=\"systems/sfrpg/images/cup/gameplay/photon.webp\" alt=\"\" width=\"20\" height=\"20\"></sub><span>&nbsp;</span>Photon Revelation</p>\n<p>When you’re fully photon-attuned, as a standard action, you can create a momentary chain of bursting energy that burns through the terrain. When you use this ability, you create three 10-foot-radius bursts within 60 feet of you, each of which cannot overlap and must be centered no more than 20 feet from the center of one other radius. You deal 5d6 fire damage, plus 1d6 for every 2 solarian levels you have beyond 9th, to each creature in each radius. An affected creature can attempt a Reflex save to take half damage. At 17th level, you can create three, four, or five bursts when using this ability.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -40,22 +61,24 @@
       "value": ""
     },
     "formula": "",
+    "isActive": null,
     "modifiers": [],
     "range": {
       "additional": "",
       "per": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": 60
     },
     "recharge": {
       "charged": false,
       "value": null
     },
     "requirements": "Zenith Revelation",
+    "rollNotes": "",
     "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": ""
+      "type": "reflex",
+      "dc": "10+floor(@classes.solarian.levels/2) + @abilities.cha.mod",
+      "descriptor": "negate"
     },
     "source": "Solarian",
     "target": {
@@ -67,11 +90,5 @@
       "per": "",
       "value": 0
     }
-  },
-  "flags": {},
-  "img": "systems/sfrpg/images/cup/gameplay/photon.png",
-  "permission": {
-    "QqVQDajn5ZN4kl25": 3,
-    "default": 0
   }
 }

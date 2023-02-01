@@ -2,12 +2,14 @@
   "_id": "tEcu9gFQgVC36OG5",
   "name": "Finesse Striker (Ex)",
   "type": "feat",
-  "data": {
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
     "type": "",
     "ability": null,
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "",
@@ -29,10 +31,13 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@Compendium[sfrpg.class-features.wFTC0sGqdpnZUib4]{Gear Boost}</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl03_LabelName\"><span id=\"ctl00_MainContent_DataListTalentsAll_ctl10_LabelName\">You add half your soldier level to damage rolls using weapons with the operative special property.</span><br></span></p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.wFTC0sGqdpnZUib4]{Gear Boost}</p>\n<p>You add half your soldier level to damage rolls using weapons with the operative special property.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -40,7 +45,24 @@
       "value": ""
     },
     "formula": "",
-    "modifiers": [],
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "d06088d5-e1c9-44fd-a4b2-70e2043eb946",
+        "name": "Finesse Striker - Operative Damage Rolls",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-property-damage",
+        "enabled": true,
+        "max": 0,
+        "modifier": "floor(@classes.soldier.levels/2)",
+        "modifierType": "constant",
+        "notes": "You add half your soldier level to damage rolls using weapons with the operative special property.",
+        "source": "Finesse Striker",
+        "subtab": "misc",
+        "valueAffected": "operative"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -52,6 +74,7 @@
       "value": null
     },
     "requirements": "",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
@@ -67,11 +90,5 @@
       "per": "",
       "value": 0
     }
-  },
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "permission": {
-    "QqVQDajn5ZN4kl25": 3,
-    "default": 0
   }
 }

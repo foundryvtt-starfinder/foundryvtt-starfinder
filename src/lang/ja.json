@@ -44,6 +44,7 @@
         "TypeStarshipsecuritysystem": "Starship Security System",
         "TypeStarshipsensor": "Starship Sensor",
         "TypeStarshipshield": "Starship Shield",
+        "TypeStarshipspecialability": "Starship Special Ability",
         "TypeStarshipthruster": "Starship Thruster",
         "TypeStarshipweapon": "Starship Weapon",
         "TypeTechnological": "Technological",
@@ -63,7 +64,7 @@
         "ACTooltipNotProficientMod": "Penalty for armor non-proficiency: {profMod}",
         "ACTooltipNotProficientShield": "Penalty for shield non-proficiency: {profMod}",
         "ACTooltipShieldACMod": "Shield Modifier: {shield} ({name})",
-        "ACvsCombatManeuversLabel": "CMD",
+        "ACvsCombatManeuversLabel": "KAC + 8",
         "ACvsCombatManeuversTitle": "VS 戦技",
         "AbilityActivationTypesDay": "日",
         "AbilityActivationTypesFull": "全力ｱｸｼｮﾝ",
@@ -74,6 +75,7 @@
         "AbilityActivationTypesNoneButton": "Activate",
         "AbilityActivationTypesOther": "他ｱｸｼｮﾝ",
         "AbilityActivationTypesReaction": "反射ｱｸｼｮﾝ",
+        "AbilityActivationTypesRound": "Round",
         "AbilityActivationTypesSpecial": "特殊",
         "AbilityActivationTypesStandard": "標準ｱｸｼｮﾝ",
         "AbilityActivationTypesSwift": "即行ｱｸｼｮﾝ",
@@ -142,8 +144,14 @@
                 "AgePlaceholder": "e.g. 19",
                 "DateOfBirth": "Date of birth",
                 "DateOfBirthPlaceholder": "e.g. 6th of Gozran, 300 AG",
+                "Deity": "Deity",
+                "DeityPlaceholder": "e.g. Pharasma",
+                "GenderPronouns": "Gender/Pronouns",
+                "GenderPronounsPlaceholder": "e.g. They/Them",
                 "Height": "Height",
                 "HeightPlaceholder": "e.g. 5'4\"",
+                "HomeWorld": "Home World",
+                "HomeWorldPlaceholder": "e.g. Akiton",
                 "ImageTooltip": "This is a full body image you can set for this character. The dimensions should be 200x250 pixels, or 4:5 aspect ratio.",
                 "OtherVisuals": "Appearance",
                 "TabBio": "Biography",
@@ -163,6 +171,7 @@
                     "Race": "Race",
                     "Theme": "Theme"
                 },
+                "Create": "Create new feature",
                 "Filters": {
                     "Action": "Action",
                     "Bonus": "Bonus",
@@ -255,11 +264,13 @@
                 "Item": {
                     "Activate": "Activate",
                     "Create": "新規アイテム作成",
+                    "CreateFromCompendium": "Add item from Compendium",
                     "Deactivate": "Deactivate",
                     "Delete": "アイテム削除",
                     "Edit": "アイテム編集",
                     "Equip": "装備アイテム",
-                    "Unequip": "未装備アイテム"
+                    "Unequip": "未装備アイテム",
+                    "LevelUp": "Level up"
                 },
                 "ItemValue": {
                     "Label": "財:",
@@ -308,6 +319,8 @@
                     "SpellAttackRolls": "呪文攻撃ロール",
                     "SpellSaveDC": "Spell Save DC",
                     "Stamina": "ＳＰ",
+                    "WeaponCategoryAttackRolls": "Weapon Category Attack Rolls",
+                    "WeaponCategoryDamage": "Weapon Category Damage",
                     "WeaponPropertyAttackRolls": "Weapon Property Attack Rolls",
                     "WeaponPropertyDamage": "武器属性ダメージ"
                 },
@@ -472,6 +485,7 @@
                 "Action": "Action",
                 "Day": "１日毎",
                 "Hour": "１時間毎",
+                "Hour8": "8 Hours",
                 "Minute": "１分毎",
                 "Minute10": "10 Minutes",
                 "Round": "１戦闘ﾗｳﾝﾄﾞ毎",
@@ -494,11 +508,15 @@
         },
         "ChatCard": {
             "ContextMenu": {
+                "Accept": "Accept",
                 "ApplyDamage": "Apply Damage",
                 "ApplyHealing": "Apply Healing",
                 "DamageAndAHalf": "1.5x Damage",
                 "DoubleDamage": "Double Damage",
                 "HalfDamage": "Half Damage",
+                "ModifyDamage": "Modify Damage",
+                "ModifyDamageText": "Input an number to modify the damage amount by. This is applied after any multiplication.",
+                "NoDamageModifier": "No damage modifier applied.",
                 "NoToken": "Cannot apply: No token selected!"
             },
             "ItemActivation": {
@@ -519,6 +537,7 @@
         "ClassSPPerlevel": "レベル毎のＳＰ",
         "ClassSkillRanksPerlevel": "レベル毎の技能ランク",
         "ClassSkills": "クラス技能",
+        "ClassSpellcastingAbility": "Spellcasting Ability",
         "ClassWeaponProf": "武器習熟",
         "ClassWillSaveProgression": "意志セーヴの成長度",
         "Classes": {
@@ -631,6 +650,7 @@
         "ConditionsFrightened": "恐れ状態 [Frightened]",
         "ConditionsGrappled": "組み付き状態 [Grpld]",
         "ConditionsHelpless": "無防備状態 [Helpless]",
+        "ConditionsInvisible": "Invisible",
         "ConditionsNauseated": "吐き気がする状態 [Nst]",
         "ConditionsOffKilter": "不安定状態 [Off-Kilter]",
         "ConditionsOffTarget": "集中切れ状態 [OfTgt]",
@@ -675,6 +695,7 @@
         "Cybernetic": "サイバー化",
         "Damage": {
             "Immunities": "ダメージ完全耐性",
+            "MinimumDamage": "Minimum Damage",
             "PartIndex": "Part {partIndex} of {partCount}",
             "Reduction": "ダメージ抵抗",
             "Resistances": "エネルギー抵抗",
@@ -684,9 +705,12 @@
                 "Bludgeoning": "[殴打]",
                 "Cold": "[冷気]",
                 "Custom": "Custom",
+                "DamageGroup": "Damage Group {group}",
+                "DamageGroupTooltip": "If damage sections share a group, you may only enable one from that group when making a damage roll. You may freely enable/disable damage sections that lack a group.",
                 "Electricity": "[電気]",
                 "Fire": "[火]",
                 "Force": "[力場]",
+                "GrouplessDamage": "Groupless Damage",
                 "Hint": "This is a list of damage types that apply to this damage roll.",
                 "Nonlethal": "Nonlethal",
                 "Operators": {
@@ -703,6 +727,58 @@
         },
         "Description": "説明",
         "DescriptionShort": "Short Description",
+        "Descriptors": {
+            "Acid": "Acid",
+            "Air": "Air",
+            "Calling": "Calling",
+            "CallingDescription": "A calling effect transports a creature from another plane to the plane you are on. The effect grants the creature the one-time ability to return to its plane of origin, although the effect might limit the circumstances under which this is possible. Creatures who are called die if they are killed on the new plane. A called creature can’t be dispelled, even if it was called by magical means.",
+            "Chaotic": "Chaotic",
+            "Charm": "Charm",
+            "CharmDescription": "A charm effect changes how the subject views you. This gives you the ability to befriend and suggest courses of action to another creature, but its servitude is not absolute or mindless. Essentially, a charmed character retains free will but makes choices according to a skewed view of the world.<br><br>A charmed creature retains its original alignment and allegiances, generally with the exception that it now regards the person who charmed it as a dear friend and gives great weight to that character’s suggestions and directions. A charmed creature does not volunteer information or tactics that its master doesn’t ask for. A charmed creature never obeys a command that is obviously suicidal or grievously harmful to it.<br><br>A creature fights friends it had before being charmed only if they threaten its new friend. Even then, it uses the least lethal means at its disposal, for it wishes to resolve the conflict without causing real harm.<br><br>A charmed creature can attempt an opposed Charisma check against its master in order to resist instructions or commands that would make it do something it wouldn’t normally do even for a close friend. If it succeeds at this check, it decides not to go along with that particular order but remains charmed. If the creature’s master commands it to perform an action that the creature would be vehemently opposed to, it can attempt a new saving throw to break free of its master’s influence altogether.<br><br>If a charmed creature is openly attacked by the character who charmed it or by that character’s apparent allies, it is automatically freed of the spell or effect.",
+            "Cold": "Cold",
+            "Compulsion": "Compulsion",
+            "CompulsionDescription": "A compulsion effect overrides the subject’s free will in some way, forcing the subject to act in some manner or changing the way its mind works.",
+            "Creation": "Creation",
+            "CreationDescription": "A creation effect manipulates matter to create an object or creature in the place the creator designates. If the effect has a duration other than instantaneous, magic or some other energy holds the creation together, but when the duration ends, the created creature or object vanishes without a trace. If the effect has an instantaneous duration, the created object or creature does not depend on any outside energy for its existence, so it lasts indefinitely once created.",
+            "Curse": "Curse",
+            "Darkness": "Darkness",
+            "Death": "Death",
+            "Descriptors": "Descriptors",
+            "Disease": "Disease",
+            "Earth": "Earth",
+            "Electricity": "Electricity",
+            "Emotion": "Emotion",
+            "Evil": "Evil",
+            "Fear": "Fear",
+            "Fire": "Fire",
+            "Force": "Force",
+            "ForceDescription": "A force effect deals full damage to incorporeal creatures and blocks their movement. It also blocks the sense through ability.",
+            "Good": "Good",
+            "Healing": "Healing",
+            "LanguageDependent": "Language Dependent",
+            "LanguageDependentDescription": "A language-dependent effect uses intelligible language (either audible, visual, or telepathic) as a medium for communication. If you cannot communicate with the target or the target cannot understand what you are communicating, the effect fails to affect that target.",
+            "Lawful": "Lawful",
+            "Light": "Light",
+            "MindAffecting": "Mind Affecting",
+            "MindAffectingDescription": "A mind-affecting effect works only against creatures with an Intelligence score of 1 or higher.",
+            "Pain": "Pain",
+            "PainDescription": "A pain effect causes unpleasant sensations but not permanent physical damage. Creatures that are immune to effects that require a Fortitude save are immune to pain effects.",
+            "Poison": "Poison",
+            "Polymorph": "Polymorph",
+            "Radiation": "Radiation",
+            "Scrying": "Scrying",
+            "ScryingDescription": "A scrying effect creates an invisible magical sensor that sends you information while the effect lasts. Unless noted otherwise, the sensor has the same sensory abilities that you have naturally, but not any sensory abilities you gain from other spells or technology. The sensor is a separate, independent source of sensory input for you, and thus it functions normally even if you have been blinded or deafened or otherwise suffer sensory impairment.<br><br>A creature can notice a scrying sensor with a successful Perception check (DC = 20 + the spell or effect’s level). The sensor can be dispelled as if it were an active spell. Lead sheeting, force fields, and some exotic materials and magical protections block scrying effects; if that is the case, you can sense that the effect has been blocked.",
+            "SenseDependent": "Sense Dependent",
+            "SenseDependentDescription": "A sense-dependent effect has either audible or visual elements, requiring sight or hearing to have any effect. For this kind of effect to affect that target, you must be able to either see or hear the target, and the target must be able to either see or hear you.",
+            "Shadow": "Shadow",
+            "ShadowDescription": "A shadow effect creates something that is partially real from an amalgamation of extradimensional energy. Damage dealt by a shadow effect is real.",
+            "Sonic": "Sonic",
+            "Summoning": "Summoning",
+            "SummoningDescription": "A summoning effect instantly brings a creature or object to a place you designate. When the effect ends or is dispelled, a summoned creature is instantly sent back to where it came from (typically another plane, but not always), but a summoned object is not sent back unless the effect description specifically indicates otherwise. A summoned creature also goes away if it is killed or if its Hit Points drop to 0, but it is not really dead. It takes 24 hours for the creature to reform in the place from which it was summoned, during which time it can’t be summoned again.<br><br>When a summoning effect ends and the summoned creature disappears, all spells it has cast expire. A summoned creature cannot use any innate summoning abilities it may have.",
+            "Teleportation": "Teleportation",
+            "TeleportationDescription": "A teleportation effect involves instantaneous travel through the Astral Plane (see page 471). Anything that blocks astral travel also blocks teleportation unless the specific effect notes otherwise, and teleportation effects work within the Drift.",
+            "Water": "Water"
+        },
         "Details": "詳細",
         "Dialogs": {
             "InputDialog": {
@@ -839,9 +915,28 @@
         "FeaturesFilter": "-",
         "FeaturesUsage": "用法",
         "FlagDeprecationNotice": "<strong>メモ:</strong> これらの値は新しい修正値システムに置き換えられており、将来のアップデートで削除される予定です。これらの値をオフにして、[状態]タブで修正値として追加することをお勧めします。",
+        "FlagsEmptySolarian": "There are no special traits at the moment. If you're looking for Solarian Attunement, use the new Actor Resource system within the Stellar Mode class feature.",
         "FlagsInstructions": "Starfinderシステム上のキャラクター特性を設定する。",
         "FlagsSave": "例外的特性の更新",
         "FlagsTitle": "例外的特性の設定",
+        "FloatingHP": {
+            "HP": "HP",
+            "Sh.A.": "Sh.A.",
+            "Sh.F.": "Sh.F.",
+            "Sh.P.": "Sh.P.",
+            "Sh.S.": "Sh.S.",
+            "stamina": "SP",
+            "temp": "Temp"
+        },
+        "FloatingHPVerbose": {
+            "HP": "HP",
+            "Sh.A.": "Aft Shields",
+            "Sh.F.": "Forward Shields",
+            "Sh.P.": "Port Shields",
+            "Sh.S.": "Starboard Shields",
+            "stamina": "SP",
+            "temp": "Temp"
+        },
         "FortitudeSave": "頑健",
         "Ft": "ﾌｨｰﾄ",
         "GreatFortitudeHint": "頑健セーヴィング･スロー +2",
@@ -960,7 +1055,8 @@
         "ItemSheet": {
             "AbilityScoreIncrease": {
                 "Header": "Ability Score Increases",
-                "Instruction": "* Check 4 abilities to raise.",
+                "Instruction": "Check 4 abilities to raise.",
+                "InstructionRules": "Every 5 levels (at 5th, 10th, 15th, and 20th levels), you get to increase and customize your ability scores. Each time you reach one of these level thresholds, choose four of your ability scores to increase. If that ability score is 17 or higher (excluding any ability increases from personal upgrades—see page 212), it increases permanently by 1. If it’s 16 or lower, it increases permanently by 2. You can’t apply more than one of these increases to the same ability score at a given level, but unlike at 1st level, these increases can make your ability scores go higher than 18.",
                 "ItemName": "Ability Score Increase: Level {level}",
                 "Label": "Abilities"
             },
@@ -1280,18 +1376,25 @@
                 "Details": "Ammunition Details",
                 "Type": {
                     "Arrows": "Arrows",
+                    "Caustrol": "Caustrol",
                     "Charges": "Charges",
                     "Darts": "Darts",
                     "Flares": "Flares",
+                    "Flechettes": "Flechettes",
                     "Fuel": "Fuel",
                     "HeavyRounds": "Heavy Rounds",
                     "LongarmAndSniperRounds": "Longarm and Sniper Rounds",
                     "Missiles": "Missiles",
+                    "MoodGoo": "Mood Goo",
                     "Nanites": "Nanites",
+                    "Nets": "Nets",
                     "None": "None",
                     "Rockets": "Rockets",
+                    "Sclerites": "Sclerites",
                     "Shells": "Shells",
-                    "SmallArmRounds": "Small Arm Rounds"
+                    "SmallArmRounds": "Small Arm Rounds",
+                    "Thasphalt": "Thasphalt",
+                    "ThasteronPellets": "Thasteron Pellets"
                 },
                 "UseCapacity": "Use Capacity"
             },
@@ -1395,6 +1498,9 @@
                 "FeatureUsage": "Feature Usage",
                 "RechargeOn": "Recharge On",
                 "Requirements": "Requirements"
+            },
+            "Goods": {
+                "Details": "Goods Details"
             },
             "Hybrid": {
                 "Details": "Hybrid Item Details"
@@ -1605,6 +1711,7 @@
         "MigrationEndMigration": "Starfinderシステム、バージョン{systemVersion}への移行が成功しました！",
         "MigrationErrorMessage": "Starfinderのデータ移行中にエラーが発生しました。バックアップは作成しましたよね？",
         "MigrationSuccessfulMessage": "Starfinderのデータが現在のバージョンに正常に移行されました。",
+        "MigrationSuccessfulRefreshMessage": "Your Starfinder data was successfully migrated to the current version.<br/><br/>Please refresh your game to finalize migration.",
         "ModifierACPEffectingArmorTypeAll": "全てのアーマー",
         "ModifierACPEffectingArmorTypeHeavy": "ヘヴィアーマーのみ",
         "ModifierACPEffectingArmorTypeLight": "ライトアーマーのみ",
@@ -1809,6 +1916,7 @@
                 "RollModeTooltip": "Roll Mode determines who can see this roll.",
                 "Selector": "Select '{name}'",
                 "SelectorTooltip": "Dynamic actor selection for the '{name}' formula context.",
+                "SimplifiedFormulaTooltip": "<p>The formula displayed on the dialog has been calculated from the following formula:</p><p>{formula}</p>",
                 "SituationalBonus": "Situational bonus",
                 "SituationalBonusTooltip": "Are there any additional bonuses that apply to this roll? (For example, range increments)"
             },
@@ -1833,7 +1941,8 @@
                 "NormalTooltip": "Normal roll.",
                 "Roll": "Roll",
                 "SaveTitle": "Save - {label}",
-                "SkillCheckTitle": "Skill Check - {skill}"
+                "SkillCheckTitle": "Skill Check - {skill}",
+                "SkillCheckTitleWithProfession": "Skill Check - {skill} ({profession})"
             },
             "HealingRoll": "Healing Roll",
             "HealingRollFull": "Healing Roll - {name}",
@@ -1888,12 +1997,16 @@
         "SaveModifiersTooltip": "{type} ボーナス: {mod} ({source})",
         "SaveProgressionFast": "速い",
         "SaveProgressionSlow": "遅い",
-        "SenesBL": "擬似視覚",
-        "SenesBS": "非視覚感知",
-        "SenesDark": "暗視",
-        "SenesLLV": "低光量視覚",
-        "Senses": "感覚",
-        "SensesST": "透過知覚",
+        "SensesTypes": {
+            "GlobalIlluminationThresholdMessage": "<strong>Starfinder System</strong><br />It is recommended to keep the Global Illumination Threshold enabled in order for features such as Low Light Vision to function correctly.",
+            "Senses": "感覚",
+            "SensesBL": "擬似視覚",
+            "SensesBS": "非視覚感知",
+            "SensesDark": "暗視",
+            "SensesLLV": "低光量視覚",
+            "SensesLLVDark": "低光量視覚 & 暗視",
+            "SensesST": "透過知覚"
+        },
         "Settings": {
             "Advantage": {
                 "Hint": "ダイスロールする際に､有利か不利かを表示する機能を有効にします。",
@@ -1902,6 +2015,10 @@
             "AlwaysShowQuantity": {
                 "Hint": "Always shows the quantity of items, even if it is 0 or 1. You will have to refresh your window before this change will take effect.",
                 "Name": "Always show item quantity"
+            },
+            "AutoAddUnarmedStrike": {
+                "Hint": "When checked, the unarmed strike item will be automatically added to any new player character actors.",
+                "Name": "Automatically add Unarmed Strike to new characters"
             },
             "AutoCollapseCard": {
                 "Hint": "チャットログのアイテムカードの説明を自動的に折りたたみます。",
@@ -1952,9 +2069,49 @@
                 "Hint": "キャラクターシートから経験値バーを削除する。",
                 "Name": "経験値表示の無効化"
             },
+            "FloatingHP": {
+                "Button": "Configure Floating Number Settings",
+                "Hint": "Configure the floating numbers that appear on a token when their HP/SP is changed.",
+                "Menu": {
+                    "CanSeeBars": {
+                        "Hint": "Users that can see the token's resource bars will be able to see floating numbers.",
+                        "Name": "Can see resource bars?"
+                    },
+                    "CanSeeName": {
+                        "Hint": "Users that can see the token's name will be able to see floating numbers.",
+                        "Name": "Can see name?"
+                    },
+                    "Enabled": {
+                        "Hint": "Enable floating numbers when a token's HP/SP is changed.",
+                        "Name": "Enable Floating Numbers?"
+                    },
+                    "Label": "Floating Number Settings",
+                    "LimitByCriteria": {
+                        "Hint": "When enabled, users will only be shown floating numbers if they meet at least one of the criteria below. When disabled, floating numbers will be shown to all users.",
+                        "Name": "Limit by criteria?"
+                    },
+                    "MinPerm": {
+                        "Hint": "Users with this permission or higher over the token will be able to see floating numbers.",
+                        "Name": "Minimum Permission"
+                    },
+                    "VerboseFloatyText": {
+                        "Hint": "When enabled, the full names of shield arcs will be displayed.",
+                        "Name": "Verbose Mode"
+                    }
+                },
+                "Name": "Floating Number Settings"
+            },
             "GalacticTrade": {
                 "Hint": "Enables the Galactic Trade subsystem, allowing the maximum BP on a ship to be 5% higher than normal, and adds BPs to the ship inventory as credits.",
                 "Name": "Enable Galactic Trade"
+            },
+            "SFRPGTheme": {
+                "Hint": "When enabled, a few minor tweaks to Foundry's colours will be made to match Starfinder's colour scheme.",
+                "Name": "Custom SFRPG theme"
+            },
+            "ScalingCantrips": {
+                "Hint": "Enables the Scaling Cantrips variant rule from Galactic Magic pg. 88. Changing this setting will alter the formulas of all affected spells on all actors, so can take a while if you have lots.",
+                "Name": "Enable Scaling Cantrips"
             },
             "StarshipActionsCrit": {
                 "Hint": "Display state for the critical effect of starship actions.",
@@ -1978,7 +2135,7 @@
                 "Name": "カスタムされたStarfinderチャットカードを使用しますか？"
             },
             "UseQuickRollAsDefault": {
-                "Hint": "When clicking abilities that roll dice, the roll will act as if the Shift key was depressed by default. This will trigger a fast-forwarded roll.",
+                "Hint": "When checked, abilities that roll dice will skip the roll dialog window by default. If the shift key is held while clicking, the window will be shown instead.",
                 "Name": "Use Quick roll by default?"
             },
             "UseStarfinderAOETemplates": {
@@ -2142,6 +2299,7 @@
         "SkillDip": "＜外交＞",
         "SkillDis": "＜変装＞",
         "SkillEng": "＜エンジニアリング＞",
+        "SkillGun": "Gunnery",
         "SkillInt": "＜威圧＞",
         "SkillLsc": "＜生命科学＞",
         "SkillMed": "＜医学＞",
@@ -2181,6 +2339,7 @@
             "Inubrix": "Inubrix",
             "Khefak": "Khefak Armor",
             "Noqual": "Noqual",
+            "Nyblantine": "Nyblantine",
             "PurpleCores": "Purple Cores",
             "Siccatite": "Siccatite",
             "Silver": "Silver",
@@ -2205,6 +2364,7 @@
             "AddSpells": "呪文追加",
             "AttributesNone": "なし",
             "Browse": "呪文所検索",
+            "CreateFromCompendium": "Add Spell from Compendium",
             "CreateSpell": "呪文作成",
             "DeleteItem": "呪文削除",
             "EditItem": "呪文編集",
@@ -2273,6 +2433,7 @@
                 "Header": "Starship Crew",
                 "IsNPCCrew": "Is NPC crew",
                 "MagicOfficers": "Magic Officers",
+                "NPCGunnerRanksMessage": "While ranks aren't relevant to an NPC's gunnery modifier, some statblocks may include the Gunner's level, which you can store here. You can otherwise safely leave this box blank.",
                 "Passengers": "Passengers",
                 "Pilot": "Pilot",
                 "ScienceOfficers": "Science Officers",
@@ -2366,6 +2527,7 @@
                 },
                 "PrimarySystems": "Primary Systems",
                 "SecuritySystems": "Security Systems",
+                "SpecialAbilities": "Special Abilities",
                 "Thrusters": "Thrusters"
             },
             "Header": {
@@ -2640,7 +2802,7 @@
         "WeaponProficiencySniper": "狙撃武器",
         "WeaponProficiencySpecial": "特殊武器",
         "WeaponPropertiesAeon": "アイウーン [Aeon]",
-        "WeaponPropertiesAeonTooltip": "A weapon that has the aeon special property includes a socket that can house an aeon stone. As a standard action, you can slot an aeon stone into the socket or remove it. You can slot an aeon stone into a weapon only if the weapon has an item level equal to or greater than the aeon stone’s item level. You don’t benefit from the stone’s normal abilities while the stone is slotted into a weapon. Instead, an aeon weapon with a slotted aeon stone gains the boost weapon special property, provided it doesn’t have the blast or unwieldy properties. The amount of the boost’s damage increase is dependent on the item level of the slotted aeon stone, as follows: level 1–5, 1d4; levels 6–10, 1d6; levels 11–15, 1d8; levels 16–20, 1d10.\n\nA slotted aeon stone has a number of charges per day equal to the stone’s item level. Utilizing the boost special property the stone provides spends charges from the stone equal to the weapon’s usage value. If the stone lacks enough charges, the boost attempt has no effect. An aeon stone that has had any daily charges expended in this way turns a dull color and doesn’t confer its usual benefits if removed from the aeon weapon.",
+        "WeaponPropertiesAeonTooltip": "A weapon that has the aeon special property includes a socket that can house an aeon stone. As a standard action, you can slot an aeon stone into the socket or remove it. You can slot an aeon stone into a weapon only if the weapon has an item level equal to or greater than the aeon stone’s item level. You don’t benefit from the stone’s normal abilities while the stone is slotted into a weapon. Instead, an aeon weapon with a slotted aeon stone gains the boost weapon special property, provided it doesn’t have the blast or unwieldy properties. The amount of the boost’s damage increase is dependent on the item level of the slotted aeon stone, as follows: level 1–5, 1d4; levels 6–10, 1d6; levels 11–15, 1d8; levels 16–20, 1d10.<br><br>A slotted aeon stone has a number of charges per day equal to the stone’s item level. Utilizing the boost special property the stone provides spends charges from the stone equal to the weapon’s usage value. If the stone lacks enough charges, the boost attempt has no effect. An aeon stone that has had any daily charges expended in this way turns a dull color and doesn’t confer its usual benefits if removed from the aeon weapon.",
         "WeaponPropertiesAmmunition": "弾倉 [Amn]",
         "WeaponPropertiesAnalog": "アナログ [Ang]",
         "WeaponPropertiesAnalogTooltip": "This weapon does not use any advanced electronics, computer systems, or electrical power sources. It is immune to abilities that target technology. While this use of the word “analog” is not technically correct when referring to technology, use of the term in this way has become common throughout the Pact Worlds.",
@@ -2651,9 +2813,9 @@
         "WeaponPropertiesAurora": "ベール [Aurora]",
         "WeaponPropertiesAuroraTooltip": "When an aurora weapon strikes a target, the creature glows with a soft luminescence for 1 minute. This negates invisibility effects and makes it impossible for the target to gain concealment from or hide in areas of shadow or darkness.",
         "WeaponPropertiesAutomatic": "フルオート [Atc]",
-        "WeaponPropertiesAutomaticTooltip": "In addition to making ranged attacks normally, a weapon with this special property can fire in fully automatic mode. No action is required to toggle a weapon between making normal ranged attacks and using automatic mode.\n\nWhen you make a full attack with a weapon in automatic mode, you can attack in a cone with a range of half the weapon’s range increment. This uses all the weapon’s remaining ammunition. Roll one attack against each target in the cone, starting with those closest to you. Attacks made with a weapon in automatic mode can’t score critical hits. Roll damage only once, and apply it to all targets struck. Each attack against an individual creature in the cone uses up the same amount of ammunition or charges as taking two shots, and once you no longer have enough ammunition to attack another target, you stop making attacks.\n\nFor example, if you were using a tactical X-gen gun with 27 rounds remaining, you would target the nearest 6 creatures in the cone and use up all 27 rounds.\n\nIf more than one creature is equidistant and you don’t have enough cartridges remaining to shoot at all equidistant creatures, determine randomly which one you target. You can’t avoid shooting at allies in the cone, nor can you shoot any creature more than once, even if you have enough cartridges to fire more shots than you have targets. Attacks in automatic mode take the same penalties as other full attacks.",
+        "WeaponPropertiesAutomaticTooltip": "In addition to making ranged attacks normally, a weapon with this special property can fire in fully automatic mode. No action is required to toggle a weapon between making normal ranged attacks and using automatic mode.<br><br>When you make a full attack with a weapon in automatic mode, you can attack in a cone with a range of half the weapon’s range increment. This uses all the weapon’s remaining ammunition. Roll one attack against each target in the cone, starting with those closest to you. Attacks made with a weapon in automatic mode can’t score critical hits. Roll damage only once, and apply it to all targets struck. Each attack against an individual creature in the cone uses up the same amount of ammunition or charges as taking two shots, and once you no longer have enough ammunition to attack another target, you stop making attacks.<br><br>For example, if you were using a tactical X-gen gun with 27 rounds remaining, you would target the nearest 6 creatures in the cone and use up all 27 rounds.<br><br>If more than one creature is equidistant and you don’t have enough cartridges remaining to shoot at all equidistant creatures, determine randomly which one you target. You can’t avoid shooting at allies in the cone, nor can you shoot any creature more than once, even if you have enough cartridges to fire more shots than you have targets. Attacks in automatic mode take the same penalties as other full attacks.",
         "WeaponPropertiesBlast": "拡散 [Blt]",
-        "WeaponPropertiesBlastTooltip": "This weapon fires in a cone that extends only to its first range increment. You can’t use it to attack creatures beyond that range.\nFor each attack you make with a weapon with the blast special property, roll one attack against each target in the cone, starting with those closest to you. Each attack takes a –2 penalty in addition to other penalties, such as the penalty to all attacks during a full attack. Roll damage only once for all targets. If you roll one or more critical hits, roll the extra critical damage only once (or any other special effects on a critical hit that require you to roll) and apply it to each creature against which you score a critical hit. You can’t avoid shooting at allies in the cone, nor can you shoot any creature more than once.\n\nAttacks with blast weapons ignore concealment. A blast weapon doesn’t benefit from feats or abilities that increase the damage of a single attack (such as the operative’s trick attack). Ammunition for blast weapons is designed for blast attacks, so you spend the usage amount only once for each cone of attacks.",
+        "WeaponPropertiesBlastTooltip": "This weapon fires in a cone that extends only to its first range increment. You can’t use it to attack creatures beyond that range.\nFor each attack you make with a weapon with the blast special property, roll one attack against each target in the cone, starting with those closest to you. Each attack takes a –2 penalty in addition to other penalties, such as the penalty to all attacks during a full attack. Roll damage only once for all targets. If you roll one or more critical hits, roll the extra critical damage only once (or any other special effects on a critical hit that require you to roll) and apply it to each creature against which you score a critical hit. You can’t avoid shooting at allies in the cone, nor can you shoot any creature more than once.<br><br>Attacks with blast weapons ignore concealment. A blast weapon doesn’t benefit from feats or abilities that increase the damage of a single attack (such as the operative’s trick attack). Ammunition for blast weapons is designed for blast attacks, so you spend the usage amount only once for each cone of attacks.",
         "WeaponPropertiesBlock": "防御 [Blk]",
         "WeaponPropertiesBlockTooltip": "Only melee weapons can have the block special property, which represents some kind of guard or crossbar that can protect you from attacks by a foe you strike in melee. When you successfully strike a target with a melee attack using such a weapon, you gain a +1 enhancement bonus to your AC for 1 round against melee attacks from that target.",
         "WeaponPropertiesBoost": "増強 [Bst]",
@@ -2675,7 +2837,7 @@
         "WeaponPropertiesDisarm": "武装解除",
         "WeaponPropertiesDisarmTooltip": "When you attempt a disarm combat maneuver while wielding a weapon with the disarm special property, you gain a +2 bonus to your attack roll.",
         "WeaponPropertiesDouble": "双頭 [Double]",
-        "WeaponPropertiesDoubleTooltip": "A double weapon has two different weapons placed end to end so you can attack with either easily without changing your grip. For the purpose of the Multi-Weapon Fighting feat, a double weapon is treated as two or more operative melee weapons. A double weapon is not treated as an operative weapon for any other purpose unless it has the operative weapon special property.\n\nSome double weapons have ends that deal different damage types. When making a single attack with such a weapon, you can choose which damage type to deal, but if you make more than one attack in the same round, at least one of those attacks must be made with the second damage type. The weapon category of a double weapon that deals more than one damage type is based on the first damage type listed. If its second damage type causes it to be considered a different weapon category when dealing that damage, that category is listed in parentheses. For example, a double weapon in the flame category that deals 1d6 fire damage or 1d6 cold damage lists “double (cryo)” to indicate that when it is used to deal cold damage, it is treated as a weapon in the cryo category.",
+        "WeaponPropertiesDoubleTooltip": "A double weapon has two different weapons placed end to end so you can attack with either easily without changing your grip. For the purpose of the Multi-Weapon Fighting feat, a double weapon is treated as two or more operative melee weapons. A double weapon is not treated as an operative weapon for any other purpose unless it has the operative weapon special property.<br><br>Some double weapons have ends that deal different damage types. When making a single attack with such a weapon, you can choose which damage type to deal, but if you make more than one attack in the same round, at least one of those attacks must be made with the second damage type. The weapon category of a double weapon that deals more than one damage type is based on the first damage type listed. If its second damage type causes it to be considered a different weapon category when dealing that damage, that category is listed in parentheses. For example, a double weapon in the flame category that deals 1d6 fire damage or 1d6 cold damage lists “double (cryo)” to indicate that when it is used to deal cold damage, it is treated as a weapon in the cryo category.",
         "WeaponPropertiesDrainCharge": "吸収 [Drain Charge]",
         "WeaponPropertiesDrainChargeTooltip": "When a weapon with the drain charge weapon special property hits an enemy that has a natural attack that deals electricity damage (an attack not dependent on armor upgrades, spells, spell-like abilities, or carried weapons or equipment), it siphons off some of that target’s inherent electricity and regains the number of charges listed in the weapon’s usage entry.",
         "WeaponPropertiesEcho": "共鳴 [Echo]",
@@ -2714,18 +2876,22 @@
         "WeaponPropertiesHolyWaterTooltip": "A holy water weapon is infused with the blessings of one or more good-aligned deities (most commonly Hylax, Iomedae, or Sarenrae within the Pact Worlds, though devoted followers of any good-aligned deity could create such weapons). It damages only undead (regardless of alignment) and outsiders with the evil subtype, and even those creatures suffer no effect (and show no sign of their nature if it is not already obvious) with a successful saving throw. Crafting a holy water grenade requires the blessing of formally trained priests of a good deity, though a character of any alignment can do the actual crafting.",
         "WeaponPropertiesHybrid": "Hybrid",
         "WeaponPropertiesHybridTooltip": "A weapon with this special property is a hybrid item, incorporating both magic and technology into its design. It counts as a magical weapon and gains the analog weapon special property. It consumes ammunition and battery charges normally.",
+        "WeaponPropertiesHydrodynamic": "Hydrodynamic",
+        "WeaponPropertiesHydrodynamicTooltip": "This weapon can be thrown underwater effectively, taking no penalty to attack rolls or damage for underwater combat.",
         "WeaponPropertiesIgnite": "燃焼 [Ignite]",
         "WeaponPropertiesIgniteTooltip": "Weapons with the ignite special property use an accelerant to start small, intense fires on their targets. A target hit by a weapon with this special property must succeed at a Reflex save (DC = 20 + 1/2 the item’s level + your Dexterity bonus) or gains the burning condition with the listed amount of damage. Gaining the burning condition multiple times from the ignite special property does not increase your burning damage—you take only the highest listed ignite damage each round. A character who gains the burning condition through other means (such as the burn critical effect, even from a weapon with ignite) does add that damage to her burning damage each round. Ending the burning condition ends burning from all sources.",
         "WeaponPropertiesIndirect": "遠隔操作 [Indirect]",
         "WeaponPropertiesIndirectTooltip": "An indirect weapon uses a wireless signal along with a multistage firing system, internal telemetry, bimetallic fluctuation, magnetic guidance, or some other system to make it appear as if a shot from the weapon had been fired from a different location. This reduces the penalty to Stealth checks for sniping by 10.",
         "WeaponPropertiesInjection": "注入 [Inj]",
         "WeaponPropertiesInjectionTooltip": "This weapon or its ammunition can be filled with a drug; a contact, ingested, inhaled, or injury poison; or a medicinal compound. On a successful attack with the weapon (either the first attack if it’s a melee weapon or an attack with the relevant piece of ammunition if it’s a ranged weapon), the weapon automatically injects the target with the substance. Refilling the weapon with a new substance acts as reloading it and is a move action. Each different injectable material must be bought separately and can be used in any weapon with the injection special property. See page 231 for rules and prices for drugs, medicinals, and poisons.",
+        "WeaponPropertiesInstrumental": "Instrumental",
+        "WeaponPropertiesInstrumentalTooltip": "A weapon with this property can also be used as a basic musical instrument (Armory 105). The size of this instrument’s battery is the same as that of the weapon’s, and it can be used as a weapon (with the charge usage indicated) or an instrument (where it uses 1 charge every 10 minutes). If the weapon is 8th level or higher, it also functions instead as a euphonic musical instrument (Armory 106).",
         "WeaponPropertiesIntegrated": "付属武器 [Intgrtd]",
         "WeaponPropertiesIntegratedTooltip": "An integrated weapon can be wielded normally or installed in an armor upgrade slot. When properly installed, the weapon is considered to be wielded without needing to assign a number of hands to wield it. An integrated weapon requires the listed number of armor slots for proper installation. An android or any other creature with the upgrade slot racial ability cannot combine its racial upgrade slot with armor upgrade slots to install an integrated weapon. Installing, removing, or replacing an integrated weapon in a suit of armor takes 10 minutes, as if it were an armor upgrade.",
         "WeaponPropertiesLine": "透過 [Lin]",
         "WeaponPropertiesLineTooltip": "This weapon fires a projectile in a straight line that pierces through multiple creatures or obstacles. When attacking with such a weapon, make a single attack roll and compare it to the relevant Armor Class of all creatures and objects in a line extending to the weapon’s listed range increment. Roll damage only once. The weapon hits all targets with an AC equal to or lower than the attack roll. However, if an attack fails to damage a creature or obstacle hit in the line (typically due to damage reduction or hardness), the path is stopped and the attack doesn’t damage creatures farther away. A line weapon can’t damage targets beyond its listed range. If you score a critical hit, that effect applies only to the first target hit in the line, and you roll the critical damage separately. If multiple creatures are equally close, you choose which one takes the effects of the critical hit. A line weapon doesn’t benefit from feats or abilities that increase the damage of a single attack (such as the operative’s trick attack).",
         "WeaponPropertiesLiving": "生物 [Liv]",
-        "WeaponPropertiesLivingTooltip": "Unlike simpler forms of biotech, a living weapon is not just organic material—it’s actually a simple living organism. The core function of a living weapon is based on the same scientific principles as manufactured weapons, but come about as part of its natural development and body function.\n\nA living weapon can be affected by spells that target creatures, though it is mindless, incapable of independent action, and has no ability scores other than Constitution (which is always equal to its item level). It is subject to poisons and diseases, though it does not need to breath and is always protected as well as a creature with active environmental protection from armor. If it is forced to make a saving throw, its save bonus is always equal to its item level. If it suffers a condition that would normally cause it to take a penalty to attacks, damage, or save DCs, those penalties apply to any attack or effect created with it. Living weapons “eat” by absorbing part of the charges or fuel (or energy from some other form of ammunition) when fired. They do not sleep or breathe, cannot communicate in any way, are immune to pain effects due to their incredibly simple nervous systems, and are mindless.\n\nIf damaged, a living weapon can regain Hit Points from effects that restore Hit Points to living creatures, such as a mystic cure spell, and it regains a number of Hit Points equal to its item level each day. You can use the Life Science or Medicine skill instead of Engineering to repair a living weapon.",
+        "WeaponPropertiesLivingTooltip": "Unlike simpler forms of biotech, a living weapon is not just organic material—it’s actually a simple living organism. The core function of a living weapon is based on the same scientific principles as manufactured weapons, but come about as part of its natural development and body function.<br><br>A living weapon can be affected by spells that target creatures, though it is mindless, incapable of independent action, and has no ability scores other than Constitution (which is always equal to its item level). It is subject to poisons and diseases, though it does not need to breath and is always protected as well as a creature with active environmental protection from armor. If it is forced to make a saving throw, its save bonus is always equal to its item level. If it suffers a condition that would normally cause it to take a penalty to attacks, damage, or save DCs, those penalties apply to any attack or effect created with it. Living weapons “eat” by absorbing part of the charges or fuel (or energy from some other form of ammunition) when fired. They do not sleep or breathe, cannot communicate in any way, are immune to pain effects due to their incredibly simple nervous systems, and are mindless.<br><br>If damaged, a living weapon can regain Hit Points from effects that restore Hit Points to living creatures, such as a mystic cure spell, and it regains a number of Hit Points equal to its item level each day. You can use the Life Science or Medicine skill instead of Engineering to repair a living weapon.",
         "WeaponPropertiesLockdown": "封鎖 [Lockdown]",
         "WeaponPropertiesLockdownTooltip": "A construct reduced to 0 Hit Points by a lockdown weapon is not destroyed but simply immobilized until it regains 1 or more Hit Points.",
         "WeaponPropertiesMindAffecting": "精神効果 [MindAfct]",
@@ -2751,9 +2917,11 @@
         "WeaponPropertiesPolymorphic": "多様 [Polymorphic]",
         "WeaponPropertiesPolymorphicTooltip": "Melee weapons with the polymorphic weapon special property are made of a multitude of linked scales that can be reconfigured with a gesture. The wielder can cause the scales to flatten, form several contiguous sharp edges, or stand upright as a series of points. As a swift action or once as part of a full action, a creature wielding a polymorphic weapon can change its damage type from bludgeoning, slashing, or piercing to another of those types.",
         "WeaponPropertiesPowered": "動力消費 [Pwrd]",
-        "WeaponPropertiesPoweredTooltip": "A melee weapon with an internal battery that must be charged to function has the powered special property, which lists its capacity and usage. Unlike with a ranged weapon, the usage is for 1 minute of operation rather than per attack, though using a powered weapon for less than 1 full minute still expends 1 full usage. The number of charges expended is equal to the usage × the number of minutes the weapon is used, rounded up to the nearest minute. You can activate the power of the weapon as part of the action used to make an attack with it, and it automatically deactivates after 1 minute.\n\nAs with ranged weapons, you can recharge the battery of a powered melee weapon using a generator or a recharging station, or you can purchase new batteries for it. If you try to attack with a powered weapon that’s out of charges, it functions as an improvised weapon (see page 169).",
+        "WeaponPropertiesPoweredTooltip": "A melee weapon with an internal battery that must be charged to function has the powered special property, which lists its capacity and usage. Unlike with a ranged weapon, the usage is for 1 minute of operation rather than per attack, though using a powered weapon for less than 1 full minute still expends 1 full usage. The number of charges expended is equal to the usage × the number of minutes the weapon is used, rounded up to the nearest minute. You can activate the power of the weapon as part of the action used to make an attack with it, and it automatically deactivates after 1 minute.<br><br>As with ranged weapons, you can recharge the battery of a powered melee weapon using a generator or a recharging station, or you can purchase new batteries for it. If you try to attack with a powered weapon that’s out of charges, it functions as an improvised weapon (see page 169).",
         "WeaponPropertiesProfessional": "専門 [Professional]",
         "WeaponPropertiesProfessionalTooltip": "A professional weapon is a tool used in a specialized trade that nevertheless has tremendous damaging potential. When using a professional weapon, you gain a +2 insight bonus to checks with the listed Profession skill (or to checks with similar skills that could reasonably use that weapon as part of the profession, subject to the GM’s discretion). If you have a number of ranks in the listed Profession skill equal to the item level, you are considered proficient with that weapon, even if you would not normally be. This proficiency never counts toward prerequisites of any kind.",
+        "WeaponPropertiesPropel": "Propel",
+        "WeaponPropertiesPropelTooltip": "These weapons move affected targets the listed distance away from the origin point of the effect. A target that succeeds at a Reflex save (DC = 10 + 1/2 the weapon’s item level + the wielder’s Dexterity modifier) isn’t moved. If the movement would cause the target to move through a wall, object, or another barrier, the target creature stops moving and falls prone.",
         "WeaponPropertiesPunchGun": "穿孔銃 [PunchGun]",
         "WeaponPropertiesPunchGunTooltip": "A punch gun weapon is a small ranged weapon outfitted with a pressure-sensitive firing mechanism that is affixed to a glove or a similar item. Unlike most ranged weapons, which discharge when a trigger is pulled, a punch gun fires when sufficient pressure is placed upon its barrel. All punch gun projectile weapons have a range equal to their wielder’s natural reach. Although these are ranged attacks, they do not provoke attacks of opportunity.",
         "WeaponPropertiesQuickReload": "ｸｲｯｸﾘﾛｰﾄﾞ[QicRld]",
@@ -2770,6 +2938,8 @@
         "WeaponPropertiesRelicTooltip": "These rare items are bits of lost technology or unique items less powerful than artifacts. A relic has an item level but can be sold for 100% of the item’s price (like trade goods). A relic cannot be crafted without the means of a specific formula, which is almost always long lost, and often requires specific materials. A relic that became understood well enough to be reproduced, standardized, and mass-marketed might lose its relic status. Unlike normal weapons, relic weapons do not come fully loaded with ammunition unless they say so.",
         "WeaponPropertiesReposition": "再配置 [Reposition]",
         "WeaponPropertiesRepositionTooltip": "When you attempt a reposition combat maneuver with this weapon, you gain a +2 bonus to your attack roll.",
+        "WeaponPropertiesScramble": "Scramble",
+        "WeaponPropertiesScrambleTooltip": "A weapon with the scramble special property disrupts a creature’s telepathic or hive mind abilities briefly. When a creature takes damage from a weapon with the scramble property, that creature must succeed at a Fortitude save (DC = 10 + half the weapon’s level + the wielder’s Int modifier) or lose its ability to communicate telepathically until the end of your next turn. Abilities that depend on telepathic communication, such as the Swarm mind ability, also don’t function during this time.",
         "WeaponPropertiesShape": "シャープ [Shape]",
         "WeaponPropertiesShapeTooltip": "A weapon with the shape special property has a complex targeting array that allows it to target specified areas. If you make a single attack as a full action with such a weapon, you can exclude the listed number of squares from within this weapon’s area of effect. This means you can avoid shooting an ally in the area of a blast weapon’s effect, for example.",
         "WeaponPropertiesShatter": "Shatter",
@@ -2787,7 +2957,7 @@
         "WeaponPropertiesSunder": "切断 [Sunder]",
         "WeaponPropertiesSunderTooltip": "When you attempt a sunder combat maneuver while wielding a weapon with the sunder weapon special property, you gain a +2 bonus to your attack roll.",
         "WeaponPropertiesSwarm": "群 [Swarm]",
-        "WeaponPropertiesSwarmTooltip": "A weapon with this special property is virtually indistinguishable from Swarm technology and requires a special Swarm battery to use efficiently. The weapon can use other batteries, but usage doubles when doing so.\n\nIn addition to the energy drawback, a Swarm weapon attracts the attention of nearby Swarm creatures. They can sense such a weapon as if using blindsense with a range of 30 feet. Swarm components have been observed fixating on wielders of this technology during battle, with little else to explain such a violent focus. If the Swarm wins the conflict, the surviving components destroy these weapons.",
+        "WeaponPropertiesSwarmTooltip": "A weapon with this special property is virtually indistinguishable from Swarm technology and requires a special Swarm battery to use efficiently. The weapon can use other batteries, but usage doubles when doing so.<br><br>In addition to the energy drawback, a Swarm weapon attracts the attention of nearby Swarm creatures. They can sense such a weapon as if using blindsense with a range of 30 feet. Swarm components have been observed fixating on wielders of this technology during battle, with little else to explain such a violent focus. If the Swarm wins the conflict, the surviving components destroy these weapons.",
         "WeaponPropertiesTail": "尻尾 [Tail]",
         "WeaponPropertiesTailTooltip": "If you have a tail (or similar taillike appendage), you can wear a weapon with the tail weapon special property on your tail, rather than wield it in your hand. Attaching or removing a tail weapon is a full action, and once it’s installed, you wield the weapon without using your hands.",
         "WeaponPropertiesTeleportive": "転移 [Teleportive]",
@@ -2807,7 +2977,7 @@
         "WeaponPropertiesUnbalancing": "Unbalancing",
         "WeaponPropertiesUnbalancingTooltip": "This weapon pushes foes off-balance. When you deal damage with this weapon, the target is flat-footed against the next attack that targets it before the start of your next turn. Anything that causes a critical hit to be treated as a normal hit, such as fortification, grants immunity to this special property.",
         "WeaponPropertiesUnderwater": "水中 [Underwater]",
-        "WeaponPropertiesUnderwaterTooltip": "Like residents of most water worlds, kalos create their own versions of common weapons, redesigned to function better underwater. These weapons have the following special property and generally cost 10% more.\n\nUnderwater: A weapon with this special property that is used underwater ignores the –2 penalty to attack rolls and deals full damage.",
+        "WeaponPropertiesUnderwaterTooltip": "Like residents of most water worlds, kalos create their own versions of common weapons, redesigned to function better underwater. These weapons have the following special property and generally cost 10% more.<br><br>Underwater: A weapon with this special property that is used underwater ignores the –2 penalty to attack rolls and deals full damage.",
         "WeaponPropertiesUnwieldy": "特異 [Uwd]",
         "WeaponPropertiesUnwieldyTooltip": "Weapons with the unwieldy special property are large and awkward, can’t be fired without cooling down first, or are otherwise difficult to use with repeated attacks. You can’t use an unwieldy weapon as part of a full attack (or any other action in which you could make multiple attacks), you can’t attack with it more than once per round, and you can’t use it to make an attack of opportunity.",
         "WeaponPropertiesVariantBoost": "可変ブースト [VB]",

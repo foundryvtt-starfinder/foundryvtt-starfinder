@@ -1,14 +1,14 @@
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../../modifiers/types.js";
 
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateSkillArmorCheckPenalty", (fact, context) => {
         const armors = fact.armors?.length > 0 ? fact.armors : null;
         const shields = fact.shields;
         const skills = fact.data.skills;
         const modifiers = fact.modifiers;
 
-        const worstArmor = armors?.reduce((armor, worstArmor) => (armor.data?.data?.armor?.acp || 0) < (worstArmor.data?.data?.armor?.acp || 0) ? armor : worstArmor);
-        const armorData = worstArmor?.data?.data;
+        const worstArmor = armors?.reduce((armor, worstArmor) => (armor.system?.armor?.acp || 0) < (worstArmor.system?.armor?.acp || 0) ? armor : worstArmor);
+        const armorData = worstArmor?.system;
         const hasLightArmor = armorData?.armor?.type === "light";
         const hasHeavyArmor = armorData?.armor?.type === "heavy";
 
@@ -46,7 +46,7 @@ export default function (engine) {
                     source: bonus.name
                 }));
             }
-            
+
             return computedBonus;
         };
 
@@ -96,7 +96,7 @@ export default function (engine) {
 
             if (shields) {
                 shields.forEach(shield => {
-                    const shieldData = shield.data.data;
+                    const shieldData = shield.system;
 
                     if (shieldData?.acp) {
                         let acp = parseInt(shieldData.acp);

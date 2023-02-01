@@ -5,7 +5,22 @@
   "augmentation": false,
   "consumable": false,
   "container": false,
-  "data": {
+  "equipment": false,
+  "fusion": true,
+  "goods": false,
+  "hybrid": false,
+  "img": "systems/sfrpg/icons/equipment/weapons/club.webp",
+  "magic": false,
+  "shield": false,
+  "spell": false,
+  "storage": {
+    "type": "slot",
+    "affectsEncumbrance": true,
+    "amount": 2,
+    "subtype": "fusion",
+    "weightProperty": "level"
+  },
+  "system": {
     "type": "",
     "ability": "str",
     "abilityMods": {
@@ -83,7 +98,7 @@
     "damage": {
       "parts": [
         {
-          "formula": "1d4 + @mod",
+          "formula": "1d4 + @abilities.str.mod",
           "operator": "",
           "types": {
             "electricity": true
@@ -225,23 +240,6 @@
     },
     "weaponCategory": "uncategorized",
     "weaponType": "advancedM"
-  },
-  "effects": [],
-  "equipment": false,
-  "flags": {},
-  "fusion": true,
-  "goods": false,
-  "hybrid": false,
-  "img": "systems/sfrpg/icons/equipment/weapons/club.jpg",
-  "magic": false,
-  "shield": false,
-  "spell": false,
-  "storage": {
-    "type": "slot",
-    "affectsEncumbrance": true,
-    "amount": 2,
-    "subtype": "fusion",
-    "weightProperty": "level"
   },
   "technological": false,
   "upgrade": false,

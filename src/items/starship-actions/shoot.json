@@ -2,7 +2,8 @@
   "_id": "umc9JwD3YQmZhOyh",
   "name": "Shoot",
   "type": "starshipAction",
-  "data": {
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
     "type": "",
     "dc": null,
     "description": {
@@ -15,7 +16,7 @@
     "formula": [
       {
         "name": "Gunnery",
-        "formula": "max(@gunner.attributes.baseAttackBonus.value, @gunner.skills.pil.ranks) + @gunner.abilities.dex.mod"
+        "formula": "max(@gunner.attributes.baseAttackBonus.value, @gunner.skills.pil.ranks, @gunner.skills.gun.mod) + @gunner.abilities.dex.mod"
       }
     ],
     "isPush": false,
@@ -31,7 +32,5 @@
       "gunner"
     ],
     "source": "CRB"
-  },
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg"
+  }
 }

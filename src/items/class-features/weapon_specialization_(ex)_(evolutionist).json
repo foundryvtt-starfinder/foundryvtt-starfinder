@@ -1,0 +1,159 @@
+{
+  "_id": "jzZlTibXepwFExbl",
+  "name": "Weapon Specialization (Ex) (Evolutionist)",
+  "type": "feat",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "type": "",
+    "ability": null,
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "",
+    "actionType": "",
+    "activation": {
+      "type": "",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "",
+      "value": null
+    },
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "effect": "",
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "damageNotes": "",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.tcQlonOTpuaKeGLs]{Evolutionist}</p>\n<p>You gain Weapon Specialization as a bonus feat for each weapon type for which this class grants you proficiency. You gain a special form of weapon specialization for your adaptive strike. If your adaptive strike targets EAC, you add a bonus to your damage equal to your evolutionist level plus half of any other class levels you have. If your adaptive strike targets KAC, you add a bonus to your damage equal to 1-1/2 × your evolutionist class level, plus 1 × any other class levels you have.</p>\n<p><em>Damage is already added in the Adaptice Strike weapon items.</em></p>"
+    },
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
+    "duration": {
+      "units": "",
+      "value": null
+    },
+    "formula": "",
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "9b5a4f11-8c9c-47e2-875b-113a8d7a971e",
+        "name": "Weapon Specialization Evolutionist",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-damage",
+        "enabled": true,
+        "max": 0,
+        "modifier": "floor(@details.level.value / 2)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "smallA"
+      },
+      {
+        "_id": "1b19f9fd-5e8a-4e9c-8e09-fe60e784d0dc",
+        "name": "Weapon Specialization Evolutionist",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-damage",
+        "enabled": true,
+        "max": 0,
+        "modifier": "@details.level.value",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "basicM"
+      },
+      {
+        "_id": "8f0c6cf7-403f-4e69-b209-2b66ee75878f",
+        "name": "Weapon Specialization Evolutionist",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-property-damage",
+        "enabled": true,
+        "max": 0,
+        "modifier": "-ceil(@details.level.value / 2)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "operative"
+      }
+    ],
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "",
+      "value": null
+    },
+    "recharge": {
+      "charged": false,
+      "value": null
+    },
+    "requirements": "3rd Level (Evolutionist)",
+    "rollNotes": "",
+    "save": {
+      "type": "",
+      "dc": null,
+      "descriptor": ""
+    },
+    "source": "IS, pg. 13",
+    "target": {
+      "type": "",
+      "value": null
+    },
+    "uses": {
+      "max": 0,
+      "per": null,
+      "value": 0
+    }
+  }
+}

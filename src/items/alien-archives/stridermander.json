@@ -2,7 +2,641 @@
   "_id": "xoMrd3Nb9rdy2QDp",
   "name": "Stridermander",
   "type": "npc2",
-  "data": {
+  "img": "icons/svg/mystery-man.svg",
+  "items": [
+    {
+      "name": "Camouflage (Ex)",
+      "type": "feat",
+      "hasAttack": false,
+      "hasUses": false,
+      "img": "icons/svg/mystery-man.svg",
+      "isCharged": true,
+      "isOnCooldown": false,
+      "isStack": false,
+      "labels": {
+        "activation": "",
+        "area": "",
+        "damage": "",
+        "duration": "",
+        "featType": "Passive",
+        "range": "",
+        "save": "DC null undefined",
+        "target": ""
+      },
+      "system": {
+        "type": "",
+        "ability": null,
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>A stridermander can alter the color and texture of its fur to blend into its environment. Whenever a stridermander remains motionless for 1 round, it gains a +10 bonus to Stealth checks (this bonus doesn’t stack with the invisibility spell or similar effects). If the stridermander moves more than 10 feet or takes a hostile action (such as attacking or casting a spell), it loses this bonus until it once again spends 1 round remaining still.</p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "modifiers": [],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      }
+    },
+    {
+      "name": "Archaic Obsidian Spear",
+      "type": "weapon",
+      "hasAttack": true,
+      "hasCapacity": false,
+      "hasUses": false,
+      "img": "icons/svg/mystery-man.svg",
+      "isCharged": true,
+      "isStack": false,
+      "labels": {
+        "activation": "",
+        "area": "",
+        "damage": "1d6+7",
+        "duration": "",
+        "range": "",
+        "save": "",
+        "target": ""
+      },
+      "system": {
+        "type": "",
+        "ability": "",
+        "acceptedItemTypes": {
+          "augmentation": false,
+          "consumable": false,
+          "container": false,
+          "equipment": false,
+          "fusion": true,
+          "goods": false,
+          "technological": false,
+          "upgrade": false,
+          "weapon": false
+        },
+        "actionTarget": "kac",
+        "actionType": "mwak",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 12,
+        "attuned": false,
+        "bulk": "L",
+        "capacity": {
+          "max": 0,
+          "value": 0
+        },
+        "chatFlavor": "",
+        "containedItemIds": [],
+        "container": {
+          "contents": [],
+          "storage": [
+            {
+              "type": "slot",
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 1,
+              "subtype": "fusion",
+              "weightProperty": "level"
+            }
+          ]
+        },
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "1d6+7",
+              "operator": "",
+              "types": {
+                "piercing": true
+              }
+            }
+          ]
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "equipped": false,
+        "equippedBulkMultiplier": 1,
+        "formula": "",
+        "identified": true,
+        "level": 1,
+        "modifiers": [],
+        "price": 0,
+        "proficient": true,
+        "properties": {},
+        "quantity": null,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "special": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "usage": {
+          "per": "",
+          "value": 0
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        },
+        "weaponType": "basicM"
+      }
+    },
+    {
+      "name": "Bite",
+      "type": "weapon",
+      "hasAttack": true,
+      "hasCapacity": false,
+      "hasUses": false,
+      "img": "icons/svg/mystery-man.svg",
+      "isCharged": true,
+      "isStack": false,
+      "labels": {
+        "activation": "",
+        "area": "",
+        "damage": "1d6+7",
+        "duration": "",
+        "range": "",
+        "save": "",
+        "target": ""
+      },
+      "system": {
+        "type": "",
+        "ability": "",
+        "acceptedItemTypes": {
+          "augmentation": false,
+          "consumable": false,
+          "container": false,
+          "equipment": false,
+          "fusion": true,
+          "goods": false,
+          "technological": false,
+          "upgrade": false,
+          "weapon": false
+        },
+        "actionTarget": "kac",
+        "actionType": "mwak",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 12,
+        "attuned": false,
+        "bulk": "L",
+        "capacity": {
+          "max": 0,
+          "value": 0
+        },
+        "chatFlavor": "",
+        "containedItemIds": [],
+        "container": {
+          "contents": [],
+          "storage": [
+            {
+              "type": "slot",
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 1,
+              "subtype": "fusion",
+              "weightProperty": "level"
+            }
+          ]
+        },
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "1d6+7",
+              "operator": "",
+              "types": {
+                "piercing": true
+              }
+            }
+          ]
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "equipped": false,
+        "equippedBulkMultiplier": 1,
+        "formula": "",
+        "identified": true,
+        "level": 1,
+        "modifiers": [],
+        "price": 0,
+        "proficient": true,
+        "properties": {},
+        "quantity": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "special": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "usage": {
+          "per": "",
+          "value": 0
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        },
+        "weaponType": "basicM"
+      }
+    },
+    {
+      "name": "Feeding Tendril (Ex)",
+      "type": "weapon",
+      "hasAttack": true,
+      "hasCapacity": false,
+      "hasUses": false,
+      "img": "icons/svg/mystery-man.svg",
+      "isCharged": true,
+      "isStack": false,
+      "labels": {
+        "activation": "",
+        "area": "",
+        "damage": "1d3+7",
+        "duration": "",
+        "range": "",
+        "save": "",
+        "target": ""
+      },
+      "system": {
+        "type": "",
+        "ability": "",
+        "acceptedItemTypes": {
+          "augmentation": false,
+          "consumable": false,
+          "container": false,
+          "equipment": false,
+          "fusion": true,
+          "goods": false,
+          "technological": false,
+          "upgrade": false,
+          "weapon": false
+        },
+        "actionTarget": "kac",
+        "actionType": "mwak",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 12,
+        "attuned": false,
+        "bulk": "L",
+        "capacity": {
+          "max": 0,
+          "value": 0
+        },
+        "chatFlavor": "",
+        "containedItemIds": [],
+        "container": {
+          "contents": [],
+          "storage": [
+            {
+              "type": "slot",
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 1,
+              "subtype": "fusion",
+              "weightProperty": "level"
+            }
+          ]
+        },
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "1d3+7",
+              "operator": "",
+              "types": {
+                "piercing": true
+              }
+            }
+          ]
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>A stridermander’s secondary mouth is similar to a skittermander whelp’s, but it has a more powerful and developed feeding tendril. As a standard action, a stridermander can strike at a creature its size or smaller up to 10 feet away with this tendril. In addition to dealing damage, if the stridermander hits the target’s KAC + 4, it grapples the target and pulls the target adjacent to the stridermander; this movement doesn’t provoke attacks of opportunity. The stridermander doesn’t need to have a limb free to perform or maintain this grapple, but it can only grapple one target at a time. The stridermander can maintain this grapple with the same attack as a move action on subsequent rounds.</p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "equipped": false,
+        "equippedBulkMultiplier": 1,
+        "formula": "",
+        "identified": true,
+        "level": 1,
+        "modifiers": [],
+        "price": 0,
+        "proficient": true,
+        "properties": {},
+        "quantity": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "special": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "usage": {
+          "per": "",
+          "value": 0
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        },
+        "weaponType": "basicM"
+      }
+    },
+    {
+      "name": "Gorge (Ex) (+4)",
+      "type": "feat",
+      "hasAttack": false,
+      "hasUses": false,
+      "img": "icons/svg/mystery-man.svg",
+      "isCharged": true,
+      "isOnCooldown": false,
+      "isStack": false,
+      "labels": {
+        "activation": "",
+        "area": "",
+        "damage": "",
+        "duration": "",
+        "featType": "Passive",
+        "range": "",
+        "save": "",
+        "target": ""
+      },
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>When a stridermander hits with its bite attack against a creature it has @UUID[Compendium.sfrpg.conditions.4AkWDHGM6gHDepHN]{Grappled} with its feeding tendril, it deals additional damage equal to its Strength modifier.</p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "modifiers": [],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      }
+    }
+  ],
+  "prototypeToken": {
+    "name": "Stridermander",
+    "actorLink": false,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": ""
+    },
+    "displayBars": 20,
+    "displayName": 20,
+    "disposition": -1,
+    "height": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 360,
+      "animation": {
+        "type": null,
+        "intensity": 5,
+        "reverse": false,
+        "speed": 5
+      },
+      "attenuation": 0.5,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "contrast": 0,
+      "darkness": {
+        "max": 1,
+        "min": 0
+      },
+      "dim": 0,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "shadows": 0
+    },
+    "lockRotation": false,
+    "mirrorX": false,
+    "mirrorY": false,
+    "randomImg": false,
+    "rotation": 0,
+    "scale": 1,
+    "sight": {
+      "angle": 360,
+      "attenuation": 0.1,
+      "brightness": 1,
+      "color": null,
+      "contrast": 0,
+      "enabled": false,
+      "range": 0,
+      "saturation": 0,
+      "visionMode": "basic"
+    },
+    "texture": {
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": null
+    },
+    "width": 1
+  },
+  "system": {
     "abilities": {
       "cha": {
         "base": -2,
@@ -97,18 +731,6 @@
         "tooltip": [],
         "value": 0
       },
-      "rp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
-      "sp": {
-        "max": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
       "space": "5 ft.",
       "speed": {
         "burrowing": {
@@ -152,7 +774,7 @@
       "aura": "",
       "biography": {
         "public": "",
-        "value": "<section class=\"secret\">\n<h2>Description</h2>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Vesk-3 is perhaps best known for its dominant species, the accommodating and helpful skittermanders, but the planet—like any ecosystem—has evolved dangers and predators all its own.<br><br>Stridermanders are an evolutionary cousin of the more numerous skittermanders. A planetwide disaster millions of years ago split the common ancestor of both species into two populations. One population remained on the planet’s devastated surface and evolved into the skittermanders. The other population retreated into the planet’s extensive cave system, becoming larger, faster, and increasingly vicious as they competed for dwindling food supplies. Eventually, the stridermanders reemerged on the surface and the two populations met once again—and the skittermanders became prey.<br><br>Called strovion by the vesk, which roughly translates as “skittering wolves,” stridermanders are brawny and threatening. Like most natives of Vesk-3, they have eight limbs, four of which are long and graceful, capable of running at high speeds and climbing through the rocky caverns where the creatures make their nests. The four shorter arms are more muscular and used for restraining prey, mating, and manipulating their environment. Their most identifiable feature is a feeding tendril that emerges from their abdomen— similar to that of a skittermander whelp—which is long enough and strong enough to drag a grown @Compendium[sfrpg.races.AMBcyDZDtJ1OOzh3]{Human} through the darkness or lift a vesk soldier into the air.<br><br>Stridermanders feed by restraining their victims and puncturing their flesh, draining their fluids first so the rest of the body can be eaten more slowly over time. They prefer preying on skittermanders but will attack and devour anything their own size or smaller, as the vesk have discovered.<br><br>While simpleminded and animalistic, stridermanders are clever predators and construct simple obsidian tools. They have no language but hunt using coordinated pack tactics. Even more terrifying, skittermander legends speak of stridermander tyrants—larger, more vicious mutants with uncanny abilities to cloud people’s minds and fool the senses.<br><br>Today, stridermanders remain a danger in Vesk-3’s deep forests and caverns, though the Veskarium has heavily curtailed their numbers. Their whelps are small, rodent-like, and solitary, making them difficult to exterminate and allowing them to easily stow away on starships. Stridermanders have consequently migrated to several other worlds, where they reproduce quickly and fill apex predator roles in wilderness and ruins environments. Vesk see the species as dangerous predators worthy of hunting, and the Veskarium has exported stridermanders off-world for use as guard beasts, and for a variety of dangerous sporting events.</span></p>\n<p>&nbsp;</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any (Vesk-3)</p>\n<p>&nbsp;</p>\n<h3>Organization</h3>\n<p>solitary, pair, or route (3-10)</p>\n<p>&nbsp;</p>\n</section>"
+        "value": "<section class=\"secret\">\n<h2>Description</h2>\n<p>Vesk-3 is perhaps best known for its dominant species, the accommodating and helpful skittermanders, but the planet—like any ecosystem—has evolved dangers and predators all its own.</p>\n<p>Stridermanders are an evolutionary cousin of the more numerous skittermanders. A planetwide disaster millions of years ago split the common ancestor of both species into two populations. One population remained on the planet’s devastated surface and evolved into the skittermanders. The other population retreated into the planet’s extensive cave system, becoming larger, faster, and increasingly vicious as they competed for dwindling food supplies. Eventually, the stridermanders reemerged on the surface and the two populations met once again—and the skittermanders became prey.</p>\n<p>Called strovion by the vesk, which roughly translates as “skittering wolves,” stridermanders are brawny and threatening. Like most natives of Vesk-3, they have eight limbs, four of which are long and graceful, capable of running at high speeds and climbing through the rocky caverns where the creatures make their nests. The four shorter arms are more muscular and used for restraining prey, mating, and manipulating their environment. Their most identifiable feature is a feeding tendril that emerges from their abdomen— similar to that of a skittermander whelp—which is long enough and strong enough to drag a grown @UUID[Compendium.sfrpg.races.AMBcyDZDtJ1OOzh3]{Human} through the darkness or lift a vesk soldier into the air.</p>\n<p>Stridermanders feed by restraining their victims and puncturing their flesh, draining their fluids first so the rest of the body can be eaten more slowly over time. They prefer preying on skittermanders but will attack and devour anything their own size or smaller, as the vesk have discovered.</p>\n<p>While simpleminded and animalistic, stridermanders are clever predators and construct simple obsidian tools. They have no language but hunt using coordinated pack tactics. Even more terrifying, skittermander legends speak of stridermander tyrants—larger, more vicious mutants with uncanny abilities to cloud people’s minds and fool the senses.</p>\n<p>Today, stridermanders remain a danger in Vesk-3’s deep forests and caverns, though the Veskarium has heavily curtailed their numbers. Their whelps are small, rodent-like, and solitary, making them difficult to exterminate and allowing them to easily stow away on starships. Stridermanders have consequently migrated to several other worlds, where they reproduce quickly and fill apex predator roles in wilderness and ruins environments. Vesk see the species as dangerous predators worthy of hunting, and the Veskarium has exported stridermanders off-world for use as guard beasts, and for a variety of dangerous sporting events.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any (Vesk-3)</p>\n<h3>Organization</h3>\n<p>solitary, pair, or route (3-10)</p>\n</section>"
       },
       "class": "",
       "cr": 3,
@@ -428,614 +1050,5 @@
       "size": "medium",
       "sr": 0
     }
-  },
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "items": [
-    {
-      "name": "Camouflage (Ex)",
-      "type": "feat",
-      "data": {
-        "type": "",
-        "ability": null,
-        "actionType": null,
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "A stridermander can alter the color and texture of its fur to blend into its environment. Whenever a stridermander remains motionless for 1 round, it gains a +10 bonus to Stealth checks (this bonus doesn’t stack with the invisibility spell or similar effects). If the stridermander moves more than 10 feet or takes a hostile action (such as attacking or casting a spell), it loses this bonus until it once again spends 1 round remaining still."
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      },
-      "flags": {},
-      "hasAttack": false,
-      "hasUses": false,
-      "img": "icons/svg/mystery-man.svg",
-      "isCharged": true,
-      "isOnCooldown": false,
-      "isStack": false,
-      "labels": {
-        "activation": "",
-        "area": "",
-        "damage": "",
-        "duration": "",
-        "featType": "Passive",
-        "range": "",
-        "save": "DC null undefined",
-        "target": ""
-      }
-    },
-    {
-      "name": "Archaic Obsidian Spear",
-      "type": "weapon",
-      "data": {
-        "type": "",
-        "ability": "",
-        "acceptedItemTypes": {
-          "augmentation": false,
-          "consumable": false,
-          "container": false,
-          "equipment": false,
-          "fusion": true,
-          "goods": false,
-          "technological": false,
-          "upgrade": false,
-          "weapon": false
-        },
-        "actionType": "mwak",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 12,
-        "attuned": false,
-        "bulk": "L",
-        "capacity": {
-          "max": 0,
-          "value": 0
-        },
-        "chatFlavor": "",
-        "containedItemIds": [],
-        "container": {
-          "contents": [],
-          "storage": [
-            {
-              "type": "slot",
-              "acceptsType": [
-                "fusion"
-              ],
-              "affectsEncumbrance": true,
-              "amount": 1,
-              "subtype": "fusion",
-              "weightProperty": "level"
-            }
-          ]
-        },
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": [
-            {
-              "formula": "1d6+7",
-              "operator": "",
-              "types": {
-                "piercing": true
-              }
-            }
-          ]
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": ""
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
-        "formula": "",
-        "identified": true,
-        "level": 1,
-        "modifiers": [],
-        "price": 0,
-        "proficient": true,
-        "properties": {},
-        "quantity": null,
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "special": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "usage": {
-          "per": "",
-          "value": 0
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        },
-        "weaponType": "basicM"
-      },
-      "flags": {},
-      "hasAttack": true,
-      "hasCapacity": false,
-      "hasUses": false,
-      "img": "icons/svg/mystery-man.svg",
-      "isCharged": true,
-      "isStack": false,
-      "labels": {
-        "activation": "",
-        "area": "",
-        "damage": "1d6+7",
-        "duration": "",
-        "range": "",
-        "save": "",
-        "target": ""
-      }
-    },
-    {
-      "name": "Bite",
-      "type": "weapon",
-      "data": {
-        "type": "",
-        "ability": "",
-        "acceptedItemTypes": {
-          "augmentation": false,
-          "consumable": false,
-          "container": false,
-          "equipment": false,
-          "fusion": true,
-          "goods": false,
-          "technological": false,
-          "upgrade": false,
-          "weapon": false
-        },
-        "actionType": "mwak",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 12,
-        "attuned": false,
-        "bulk": "L",
-        "capacity": {
-          "max": 0,
-          "value": 0
-        },
-        "chatFlavor": "",
-        "containedItemIds": [],
-        "container": {
-          "contents": [],
-          "storage": [
-            {
-              "type": "slot",
-              "acceptsType": [
-                "fusion"
-              ],
-              "affectsEncumbrance": true,
-              "amount": 1,
-              "subtype": "fusion",
-              "weightProperty": "level"
-            }
-          ]
-        },
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": [
-            {
-              "formula": "1d6+7",
-              "operator": "",
-              "types": {
-                "piercing": true
-              }
-            }
-          ]
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": ""
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
-        "formula": "",
-        "identified": true,
-        "level": 1,
-        "modifiers": [],
-        "price": 0,
-        "proficient": true,
-        "properties": {},
-        "quantity": 1,
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "special": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "usage": {
-          "per": "",
-          "value": 0
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        },
-        "weaponType": "basicM"
-      },
-      "flags": {},
-      "hasAttack": true,
-      "hasCapacity": false,
-      "hasUses": false,
-      "img": "icons/svg/mystery-man.svg",
-      "isCharged": true,
-      "isStack": false,
-      "labels": {
-        "activation": "",
-        "area": "",
-        "damage": "1d6+7",
-        "duration": "",
-        "range": "",
-        "save": "",
-        "target": ""
-      }
-    },
-    {
-      "name": "Feeding Tendril (Ex)",
-      "type": "weapon",
-      "data": {
-        "type": "",
-        "ability": "",
-        "acceptedItemTypes": {
-          "augmentation": false,
-          "consumable": false,
-          "container": false,
-          "equipment": false,
-          "fusion": true,
-          "goods": false,
-          "technological": false,
-          "upgrade": false,
-          "weapon": false
-        },
-        "actionType": "mwak",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 12,
-        "attuned": false,
-        "bulk": "L",
-        "capacity": {
-          "max": 0,
-          "value": 0
-        },
-        "chatFlavor": "",
-        "containedItemIds": [],
-        "container": {
-          "contents": [],
-          "storage": [
-            {
-              "type": "slot",
-              "acceptsType": [
-                "fusion"
-              ],
-              "affectsEncumbrance": true,
-              "amount": 1,
-              "subtype": "fusion",
-              "weightProperty": "level"
-            }
-          ]
-        },
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": [
-            {
-              "formula": "1d3+7",
-              "operator": "",
-              "types": {
-                "piercing": true
-              }
-            }
-          ]
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "A stridermander’s secondary mouth is similar to a skittermander whelp’s, but it has a more powerful and developed feeding tendril. As a standard action, a stridermander can strike at a creature its size or smaller up to 10 feet away with this tendril. In addition to dealing damage, if the stridermander hits the target’s KAC + 4, it grapples the target and pulls the target adjacent to the stridermander; this movement doesn’t provoke attacks of opportunity. The stridermander doesn’t need to have a limb free to perform or maintain this grapple, but it can only grapple one target at a time. The stridermander can maintain this grapple with the same attack as a move action on subsequent rounds."
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
-        "formula": "",
-        "identified": true,
-        "level": 1,
-        "modifiers": [],
-        "price": 0,
-        "proficient": true,
-        "properties": {},
-        "quantity": 1,
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "special": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "usage": {
-          "per": "",
-          "value": 0
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        },
-        "weaponType": "basicM"
-      },
-      "flags": {},
-      "hasAttack": true,
-      "hasCapacity": false,
-      "hasUses": false,
-      "img": "icons/svg/mystery-man.svg",
-      "isCharged": true,
-      "isStack": false,
-      "labels": {
-        "activation": "",
-        "area": "",
-        "damage": "1d3+7",
-        "duration": "",
-        "range": "",
-        "save": "",
-        "target": ""
-      }
-    },
-    {
-      "name": "Gorge (Ex) (+4)",
-      "type": "feat",
-      "data": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "When a stridermander hits with its bite attack against a creature it has @Compendium[sfrpg.conditions.4AkWDHGM6gHDepHN]{Grappled} with its feeding tendril, it deals additional damage equal to its Strength modifier."
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      },
-      "flags": {},
-      "hasAttack": false,
-      "hasUses": false,
-      "img": "icons/svg/mystery-man.svg",
-      "isCharged": true,
-      "isOnCooldown": false,
-      "isStack": false,
-      "labels": {
-        "activation": "",
-        "area": "",
-        "damage": "",
-        "duration": "",
-        "featType": "Passive",
-        "range": "",
-        "save": "",
-        "target": ""
-      }
-    }
-  ],
-  "token": {
-    "name": "Stridermander",
-    "actorData": {},
-    "actorId": "MahXL40r5qekogMI",
-    "actorLink": false,
-    "bar1": {
-      "attribute": "attributes.hp"
-    },
-    "bar2": {
-      "attribute": ""
-    },
-    "brightLight": 0,
-    "brightSight": 0,
-    "dimLight": 0,
-    "dimSight": 0,
-    "displayBars": 40,
-    "displayName": 40,
-    "disposition": -1,
-    "flags": {},
-    "height": 1,
-    "img": "icons/svg/mystery-man.svg",
-    "lightAlpha": 1,
-    "lightAngle": 360,
-    "lightColor": "",
-    "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
-    "randomImg": false,
-    "rotation": 0,
-    "scale": 1,
-    "sightAngle": 360,
-    "tint": "",
-    "vision": false,
-    "width": 1
   }
 }

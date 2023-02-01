@@ -6,33 +6,33 @@ import { ItemSFRPG } from "../item/item.js";
  * @type {Dialog}
  */
 export class SpellCastDialog extends Dialog {
-    constructor(actor, item, dialogData={}, options={}) {
+    constructor(actor, item, dialogData = {}, options = {}) {
         super(dialogData, options);
         this.options.classes = ["sfrpg", "dialog"];
-  
+
         /**
          * Store a reference to the Actor entity which is casting the spell
          * @type {ActorSFRPG}
          */
         this.actor = actor;
-    
+
         /**
          * Store a reference to the Item entity which is the spell being cast
          * @type {ItemSFRPG}
          */
         this.item = item;
     }
-  
+
     /* -------------------------------------------- */
     /*  Rendering                                   */
     /* -------------------------------------------- */
-  
+
     activateListeners(html) {
         super.activateListeners(html);
     }
-  
+
     /* -------------------------------------------- */
-  
+
     /**
      * A constructor function which displays the Spell Cast Dialog app for a given Actor and Item.
      * Returns a Promise which resolves to the dialog FormData once the workflow has been completed.
@@ -41,9 +41,9 @@ export class SpellCastDialog extends Dialog {
      * @return {Promise}
      */
     static async create(actor, item) {
-        const casterData = actor.data.data;
-        const spellData = item.data.data;
-    
+        const casterData = actor.system;
+        const spellData = item.system;
+
         const maxSpellLevel = spellData.level;
 
         // Stupid spell slots counter
@@ -72,7 +72,7 @@ export class SpellCastDialog extends Dialog {
                 general: 0,
                 perClass: {}
             }
-        }
+        };
         for (let spellLevel = 1; spellLevel <= 6; spellLevel++) {
             const spellsPerLevel = casterData.spells[`spell${spellLevel}`];
             if (spellsPerLevel) {
@@ -83,7 +83,7 @@ export class SpellCastDialog extends Dialog {
                     }
 
                     if (perClass.value > 0) {
-                        availableSlots[spellLevel].perClass[key] = {class: key, value: perClass.value}
+                        availableSlots[spellLevel].perClass[key] = {class: key, value: perClass.value};
                     }
                 }
 
@@ -109,7 +109,7 @@ export class SpellCastDialog extends Dialog {
                     if (!classEntry) {
                         continue;
                     }
-                    
+
                     includedClasses.push(classEntry.key);
 
                     const label = game.i18n.format("SFRPG.SpellCasting.SpellLabelClass", {className: classEntry.name, spellSlot: game.i18n.format(CONFIG.SFRPG.spellLevels[slotLevel], slotLevel), remainingSlots: classSlot.value});
@@ -137,15 +137,15 @@ export class SpellCastDialog extends Dialog {
         }
 
         // Render the Spell casting template
-        const html = await renderTemplate("systems/sfrpg/templates/apps/spell-cast.html", {
-            item: item.data,
+        const html = await renderTemplate("systems/sfrpg/templates/apps/spell-cast.hbs", {
+            item: item.system,
             hasSlots: spellLevels.length > 0,
             consume: spellLevels.length > 0,
             spellLevels,
             config: CONFIG.SFRPG,
             includedClasses: includedClasses
         });
-    
+
         // Create the Dialog and return as a Promise
         return new Promise((resolve, reject) => {
             const dlg = new this(actor, item, {
@@ -168,4 +168,4 @@ export class SpellCastDialog extends Dialog {
         });
     }
 }
-  
+

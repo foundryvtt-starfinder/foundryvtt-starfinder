@@ -1,5 +1,4 @@
 import { DocumentBrowserSFRPG } from './document-browser.js';
-import { SFRPG } from "../config.js"
 
 const equipmentTypes = {
     "ammunition"   : "SFRPG.Items.Categories.Ammunition",
@@ -13,8 +12,6 @@ const equipmentTypes = {
     "magic"        : "SFRPG.Items.Categories.MagicItems",
     "shield"       : "SFRPG.Items.Categories.Shields",
     "technological": "SFRPG.Items.Categories.TechnologicalItems",
-    "magic"        : "SFRPG.Items.Categories.MagicItems",
-    "hybrid"       : "SFRPG.Items.Categories.HybridItems",
     "upgrade"      : "SFRPG.Items.Categories.ArmorUpgrades",
     "weapon"       : "SFRPG.Items.Categories.Weapons",
     "weaponAccessory": "SFRPG.Items.Categories.WeaponAccessories"
@@ -29,8 +26,8 @@ class EquipmentBrowserSFRPG extends DocumentBrowserSFRPG {
 
     getConfigurationProperties() {
         return {
-          label: game.i18n.format("SFRPG.Browsers.EquipmentBrowser.Title"),
-          settings: "equipmentBrowser"
+            label: game.i18n.format("SFRPG.Browsers.EquipmentBrowser.Title"),
+            settings: "equipmentBrowser"
         };
     }
 
@@ -53,12 +50,14 @@ class EquipmentBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     _sortByLevel(elementA, elementB) {
-        const aVal = parseInt($(elementA).find('input[name=level]').val());
-        const bVal = parseInt($(elementB).find('input[name=level]').val());
+        const aVal = parseInt($(elementA).find('input[name=level]')
+            .val());
+        const bVal = parseInt($(elementB).find('input[name=level]')
+            .val());
         if (aVal < bVal) return -1;
         if (aVal > bVal) return 1;
 
-        if (aVal == bVal) {
+        if (aVal === bVal) {
             const aName = $(elementA).find('.item-name a')[0].innerHTML;
             const bName = $(elementB).find('.item-name a')[0].innerHTML;
             if (aName < bName) return -1;
@@ -85,7 +84,7 @@ class EquipmentBrowserSFRPG extends DocumentBrowserSFRPG {
                 filter: (element, filters) => { return this._filterWeaponType(element, filters); },
                 activeFilters: this.filters.weaponTypes?.activeFilters || [],
                 type: "multi-select"
-            }
+            };
 
             filters.weaponCategories = {
                 label: game.i18n.format("SFRPG.Browsers.EquipmentBrowser.WeaponCategories"),
@@ -93,7 +92,7 @@ class EquipmentBrowserSFRPG extends DocumentBrowserSFRPG {
                 filter: (element, filters) => { return this._filterWeaponCategory(element, filters); },
                 activeFilters: this.filters.weaponCategories?.activeFilters || [],
                 type: "multi-select"
-            }
+            };
         }
 
         if ((this.filters?.equipmentTypes?.activeFilters || []).includes("equipment")) {
@@ -103,7 +102,17 @@ class EquipmentBrowserSFRPG extends DocumentBrowserSFRPG {
                 filter: (element, filters) => { return this._filterArmorType(element, filters); },
                 activeFilters: this.filters.armorTypes?.activeFilters || [],
                 type: "multi-select"
-            }
+            };
+        }
+
+        if ((this.filters?.equipmentTypes?.activeFilters || []).includes("augmentation")) {
+            filters.augmentationTypes = {
+                label: game.i18n.format("SFRPG.Browsers.EquipmentBrowser.EquipmentType"),
+                content: CONFIG.SFRPG.augmentationTypes,
+                filter: (element, filters) => { return this._filterAugmentationType(element, filters); },
+                activeFilters: this.filters.augmentationTypes?.activeFilters || [],
+                type: "multi-select"
+            };
         }
 
         return filters;
@@ -112,9 +121,9 @@ class EquipmentBrowserSFRPG extends DocumentBrowserSFRPG {
     getTags() {
         return {
             level: {
-              name: game.i18n.localize("SFRPG.Browsers.EquipmentBrowser.BrowserSortMethodLevel"),
-              dataKey: "level",
-              sortValue: "level"
+                name: game.i18n.localize("SFRPG.Browsers.EquipmentBrowser.BrowserSortMethodLevel"),
+                dataKey: "level",
+                sortValue: "level"
             }
         };
     }
@@ -125,31 +134,33 @@ class EquipmentBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     _filterItemType(element, filters) {
-        let compendium = element.dataset.entryCompendium;
-        let itemId = element.dataset.entryId;
-        let item = this.items.find(x => x.compendium === compendium && x._id === itemId);
+        let itemUuid = element.dataset.entryUuid;
+        let item = this.items.find(x => x.uuid === itemUuid);
         return item && filters.includes(item.type);
     }
 
     _filterWeaponType(element, filters) {
-        let compendium = element.dataset.entryCompendium;
-        let itemId = element.dataset.entryId;
-        let item = this.items.find(x => x.compendium === compendium && x._id === itemId);
-        return item && (item.type !== "weapon" || filters.includes(item.data.weaponType));
+        let itemUuid = element.dataset.entryUuid;
+        let item = this.items.find(x => x.uuid === itemUuid);
+        return item && (item.type !== "weapon" || filters.includes(item.system.weaponType));
     }
 
     _filterWeaponCategory(element, filters) {
-        let compendium = element.dataset.entryCompendium;
-        let itemId = element.dataset.entryId;
-        let item = this.items.find(x => x.compendium === compendium && x._id === itemId);
-        return item && (item.type !== "weapon" || filters.includes(item.data.weaponCategory || "uncategorized"));
+        let itemUuid = element.dataset.entryUuid;
+        let item = this.items.find(x => x.uuid === itemUuid);
+        return item && (item.type !== "weapon" || filters.includes(item.system.weaponCategory || "uncategorized"));
     }
 
     _filterArmorType(element, filters) {
-        let compendium = element.dataset.entryCompendium;
-        let itemId = element.dataset.entryId;
-        let item = this.items.find(x => x.compendium === compendium && x._id === itemId);
-        return item && (item.type !== "equipment" || filters.includes(item.data.armor?.type));
+        let itemUuid = element.dataset.entryUuid;
+        let item = this.items.find(x => x.uuid === itemUuid);
+        return item && (item.type !== "equipment" || filters.includes(item.system.armor?.type));
+    }
+
+    _filterAugmentationType(element, filters) {
+        let itemUuid = element.dataset.entryUuid;
+        let item = this.items.find(x => x.uuid === itemUuid);
+        return item && (item.type !== "augmentation" || filters.includes(item.system?.type));
     }
 
     openSettings() {
@@ -157,11 +168,11 @@ class EquipmentBrowserSFRPG extends DocumentBrowserSFRPG {
         // Item Browser
         let content = '<h2>Equipment Browser</h2>';
         content += '<p>Which compendium should be loaded? Uncheck each compendium that contains no items.</p>';
-    
+
         for (const key in this.settings) {
             content += `<div><input type=checkbox data-browser-type="item" name="${key}" ${this.settings[key].load ? 'checked=true' : ''}><label>${this.settings[key].name}</label></div>`;
         }
-    
+
         const d = new Dialog({
             title: 'Equipment Browser settings',
             content: `${content}<br>`,
@@ -175,14 +186,14 @@ class EquipmentBrowserSFRPG extends DocumentBrowserSFRPG {
             default: 'save',
             close: html => {
                 const inputs = html.find('input');
-        
+
                 for (const input of inputs) {
                     const browserType = $(input).attr('data-browser-type');
                     if (browserType === 'item') this.settings[input.name].load = input.checked;
                 }
-        
+
                 console.log('SFRPG System | Equipment Browser | Saving new Settings'); // write Item Browser settings
-        
+
                 game.settings.set('sfrpg', "equipmentBrowser", JSON.stringify(this.settings)); // write Item Browser settings
                 this.forceReload = true;
             }

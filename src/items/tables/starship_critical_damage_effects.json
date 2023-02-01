@@ -1,0 +1,96 @@
+{
+  "_id": "RkDign75n1xFBsdK",
+  "name": "Starship Critical Damage Effects",
+  "description": "When critical damage is scored, the attacking PC should roll on the table below to randomly determine which of the target starship’s key systems is hit; that system gains a critical damage condition (see below), with the effect listed on the table. If the system isn’t currently critically damaged, it gains the glitching condition. If it is critically damaged again, its critical condition changes by one step of severity (glitching becomes malfunctioning; malfunctioning becomes wrecked). These conditions and their effects on crew actions are explained in Critical Damage Conditions.\n<br><br>\nTo determine which system is affected, roll d% and consult the table below. If a system already has the wrecked condition (or in the case of the weapons array, if all weapon arcs have the wrecked condition), apply its critical damage to the next system down on the chart. If you reach the bottom of the chart, instead deal damage to one of the crew.",
+  "displayRoll": true,
+  "formula": "1d100",
+  "img": "icons/svg/lightning.svg",
+  "replacement": true,
+  "results": [
+    {
+      "_id": "3NkocHImlle2SKUA",
+      "type": 0,
+      "collection": null,
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/regen.svg",
+      "range": [
+        1,
+        10
+      ],
+      "rangeH": 10,
+      "rangeL": 1,
+      "resultId": null,
+      "text": "<b> Life Support </b> <br> Condition applies to all captain actions",
+      "weight": 1
+    },
+    {
+      "_id": "I56vad6kNmEsdZrO",
+      "type": 0,
+      "collection": null,
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/eye.svg",
+      "range": [
+        11,
+        30
+      ],
+      "rangeH": 30,
+      "rangeL": 11,
+      "resultId": null,
+      "text": "<b> Sensors </b> <br> Condition applies to all science officer actions",
+      "weight": 1
+    },
+    {
+      "_id": "dGw6IXgrUAVuNV69",
+      "type": 0,
+      "collection": null,
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/target.svg",
+      "range": [
+        31,
+        60
+      ],
+      "rangeH": 60,
+      "rangeL": 31,
+      "resultId": null,
+      "text": "<b> Weapons Array </b> <br> Randomly determine one arc containing weapons; condition applies to all gunner actions using weapons in that arc (a turret counts as being in all arcs)",
+      "weight": 1
+    },
+    {
+      "_id": "RSjsYHxfeXyfCqm2",
+      "type": 0,
+      "collection": null,
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/fire.svg",
+      "range": [
+        61,
+        80
+      ],
+      "rangeH": 80,
+      "rangeL": 61,
+      "resultId": null,
+      "text": "<b> Engines </b> <br> Condition applies to all pilot actions",
+      "weight": 1
+    },
+    {
+      "_id": "0XcWYQvxO7tpg8rM",
+      "type": 0,
+      "collection": null,
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/radiation.svg",
+      "range": [
+        81,
+        100
+      ],
+      "rangeH": 100,
+      "rangeL": 81,
+      "resultId": null,
+      "text": "<b> Power Core </b> <br> Condition applies to all engineer actions except hold it together and patch; a malfunctioning or wrecked power core affects other crew members’ actions (see Critical Damage Conditions below)",
+      "weight": 1
+    }
+  ]
+}

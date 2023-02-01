@@ -1,4 +1,4 @@
-import { SFRPG } from "../../config.js"
+import { SFRPG } from "../../config.js";
 
 export const ActorConditionsMixin = (superclass) => class extends superclass {
     /**
@@ -50,7 +50,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
      * @private
      */
     _isCondition(item) {
-        return item.type === "feat" && item.data.data.requirements?.toLowerCase() === "condition";
+        return item.type === "feat" && item.system.requirements?.toLowerCase() === "condition";
     }
 
     _isStatusEffect(name) {
@@ -82,7 +82,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
 
         // Update condition item
         const conditionItem = this.getCondition(conditionName);
-        
+
         if (enabled) {
             if (!conditionItem) {
                 const compendium = game.packs.find(element => element.title.includes("Conditions"));
@@ -92,7 +92,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
                     const entry = compendium.index.find(e => e.name.toLowerCase() === conditionName.toLowerCase());
                     if (entry) {
                         const entity = await compendium.getDocument(entry._id);
-                        const itemData = duplicate(entity.data);
+                        const itemData = duplicate(entity);
 
                         const promise = this.createEmbeddedDocuments("Item", [itemData]);
                         promise.then((createdItems) => {
@@ -102,7 +102,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
                                 });
                             }
                         });
-                        
+
                         return promise;
                     }
                 }
@@ -130,7 +130,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
      * */
     async _updateActorCondition(conditionName, enabled) {
         const updateData = {};
-        updateData[`data.conditions.${conditionName}`] = enabled;
+        updateData[`system.conditions.${conditionName}`] = enabled;
 
         return this.update(updateData).then(() => {
             this._checkFlatFooted(conditionName, enabled);
@@ -153,11 +153,11 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
                 break;
             }
         }
-        
+
         if (shouldBeFlatfooted !== this.hasCondition(flatFooted)) {
             return this.setCondition(flatFooted, shouldBeFlatfooted);
         }
 
         return null;
     }
-}
+};

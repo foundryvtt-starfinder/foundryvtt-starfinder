@@ -2,13 +2,15 @@
   "_id": "FQNLYxDXqBgqKLN4",
   "name": "Distracting Glare (Su)",
   "type": "feat",
-  "data": {
+  "img": "systems/sfrpg/images/cup/gameplay/photon.webp",
+  "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
-    "actionType": "",
+    "actionTarget": "",
+    "actionType": "other",
     "activation": {
       "type": "move",
       "condition": "",
@@ -29,10 +31,13 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@Compendium[sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl07_LabelName\">Your shimmering power draws your enemies’ focus to the real threat: you. As a move action, you can focus your attention on a creature within 30 feet of you. The target must attempt a Fortitude save. If it fails, it takes a –2 penalty to attack rolls for attacks that don’t include you as a target for 1 round or until you leave photon mode.</span></p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p><sub><img style=\"border: 1px solid var(--color-border-dark);\" src=\"systems/sfrpg/images/cup/gameplay/photon.webp\" alt=\"\" width=\"20\" height=\"20\"></sub><span>&nbsp;</span>Photon Revelation</p>\n<p>Your shimmering power draws your enemies’ focus to the real threat: you. As a move action, you can focus your attention on a creature within 30 feet of you. The target must attempt a Fortitude save. If it fails, it takes a –2 penalty to attack rolls for attacks that don’t include you as a target for 1 round or until you leave photon mode.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -40,22 +45,24 @@
       "value": ""
     },
     "formula": "",
+    "isActive": null,
     "modifiers": [],
     "range": {
       "additional": "",
       "per": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": 30
     },
     "recharge": {
       "charged": false,
       "value": null
     },
     "requirements": "2nd Level",
+    "rollNotes": "",
     "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": ""
+      "type": "fort",
+      "dc": "10+floor(@classes.solarian.levels/2) + @abilities.cha.mod",
+      "descriptor": "negate"
     },
     "source": "Solarian",
     "target": {
@@ -67,11 +74,5 @@
       "per": "",
       "value": 0
     }
-  },
-  "flags": {},
-  "img": "systems/sfrpg/images/cup/gameplay/photon.png",
-  "permission": {
-    "QqVQDajn5ZN4kl25": 3,
-    "default": 0
   }
 }

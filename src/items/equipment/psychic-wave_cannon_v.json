@@ -2,7 +2,8 @@
   "_id": "vjM1zi7EKxAKSQWI",
   "name": "Psychic-Wave Cannon V",
   "type": "weapon",
-  "data": {
+  "img": "systems/sfrpg/icons/equipment/weapons/psychic-wave-cannon-5.webp",
+  "system": {
     "type": "",
     "ability": "dex",
     "abilityMods": {
@@ -15,6 +16,7 @@
       "condition": "",
       "cost": null
     },
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
       "shape": "",
@@ -22,6 +24,24 @@
       "value": null
     },
     "attackBonus": 0,
+    "attributes": {
+      "ac": {
+        "value": ""
+      },
+      "customBuilt": false,
+      "dex": {
+        "mod": ""
+      },
+      "hardness": {
+        "value": ""
+      },
+      "hp": {
+        "max": "",
+        "value": 6
+      },
+      "size": "medium",
+      "sturdy": true
+    },
     "attuned": false,
     "bulk": "2",
     "capacity": {
@@ -31,6 +51,8 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
@@ -61,28 +83,42 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "7d12",
-          "operator": "",
           "types": {
-            "": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Unlike weapons that rely on physical projectiles or various energy forms to damage a target, a psychic-wave cannon targets a creature’s mind. The cannon contains an organic neural matrix that converts charges into a mental blast, damaging creatures with overwhelming psychic output. The numeral of a psychicwave cannon’s model indicates the strength of its output, but the weapon can’t harm objects and mindless creatures, as well as those immune to mind-affecting effects.&nbsp;</span></p>"
+      "value": "<p>Unlike weapons that rely on physical projectiles or various energy forms to damage a target, a psychic-wave cannon targets a creature’s mind. The cannon contains an organic neural matrix that converts charges into a mental blast, damaging creatures with overwhelming psychic output. The numeral of a psychicwave cannon’s model indicates the strength of its output, but the weapon can’t harm objects and mindless creatures, as well as those immune to mind-affecting effects.</p>"
     },
     "descriptors": [],
     "duration": {
       "units": "",
       "value": ""
     },
+    "equippable": false,
     "equipped": false,
     "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 20,
+    "modifiers": [],
     "price": 990000,
     "proficient": false,
     "properties": {
@@ -99,6 +135,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -117,11 +154,13 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
       "harrying": false,
       "holyWater": false,
+      "hybrid": false,
       "ignite": false,
       "indirect": false,
       "injection": false,
@@ -142,14 +181,18 @@
       "polymorphic": false,
       "powered": false,
       "professional": false,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
       "reach": false,
       "recall": false,
+      "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
+      "shatter": false,
       "shells": false,
       "shield": false,
       "sniper": false,
@@ -162,33 +205,53 @@
       "thought": false,
       "throttle": false,
       "thrown": false,
+      "thruster": false,
       "trip": false,
       "two": true,
+      "unbalancing": false,
       "underwater": false,
       "unwieldy": true,
       "variantBoost": false,
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
       "value": 60
     },
+    "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
     "source": "Armory",
     "special": "",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
     },
     "usage": {
-      "per": "round",
+      "per": "shot",
       "value": 4
     },
     "uses": {
@@ -196,12 +259,7 @@
       "per": "",
       "value": 0
     },
+    "weaponCategory": "uncategorized",
     "weaponType": "heavy"
-  },
-  "flags": {},
-  "img": "systems/sfrpg/icons/equipment/weapons/psychic-wave-cannon-5.jpg",
-  "permission": {
-    "default": 0,
-    "umHu8DFnCrMQVZ37": 3
   }
 }

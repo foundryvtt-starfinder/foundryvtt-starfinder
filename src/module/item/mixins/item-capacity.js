@@ -1,4 +1,4 @@
-import { ActorItemHelper, getChildItems, getItemContainer, setItemContainer } from "../../actor/actor-inventory-utils.js"
+import { ActorItemHelper, getChildItems, getItemContainer, setItemContainer } from "../../actor/actor-inventory-utils.js";
 
 export const ItemCapacityMixin = (superclass) => class extends superclass {
     /**
@@ -7,13 +7,13 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
     hasCapacity() {
         if (this.type === "starshipWeapon") {
             return (
-                this.data.data.weaponType === "tracking"
-                || this.data.data.special["mine"]
-                || this.data.data.special["transposition"]
-                || this.data.data.special["orbital"]
-                || this.data.data.special["rail"]
-                || this.data.data.special["forcefield"]
-                || this.data.data.special["limited"]
+                this.system.weaponType === "tracking"
+                || this.system.special["mine"]
+                || this.system.special["transposition"]
+                || this.system.special["orbital"]
+                || this.system.special["rail"]
+                || this.system.special["forcefield"]
+                || this.system.special["limited"]
             );
         }
 
@@ -24,7 +24,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
      * Returns whether or not this item requires capacity items (typically ammunition) or not
      */
     requiresCapacityItem() {
-        const itemData = this.data.data;
+        const itemData = this.system;
         return (this.type !== "ammunition" && itemData.ammunitionType);
     }
 
@@ -40,7 +40,8 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
         // Create actor item helper
         const tokenId = this.actor.isToken ? this.actor.token.id : null;
         const sceneId = this.actor.isToken ? this.actor.token.parent.id : null;
-        const itemHelper = new ActorItemHelper(this.actor.id, tokenId, sceneId);
+        // Pass the actor through on the options object so the constructor doesn't have to try (and fail) and fetch the actor from the compendium.
+        const itemHelper = new ActorItemHelper(this.actor.id, tokenId, sceneId, { actor: this.actor });
 
         // Find child item
         const childItems = getChildItems(itemHelper, this);
@@ -58,8 +59,8 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
             return capacityItem?.getCurrentCapacity() || 0;
         }
 
-        const itemData = this.data.data;
-        if (this.type === "ammunition" && !this.data.data.useCapacity) {
+        const itemData = this.system;
+        if (this.type === "ammunition" && !this.system.useCapacity) {
             return itemData.quantity;
         } else {
             return itemData.capacity?.value;
@@ -83,10 +84,10 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
 
         const updatedCapacity = Math.max(0, currentCapacity - consumedAmount);
 
-        if (this.type === "ammunition" && !this.data.data.useCapacity) {
-            return this.update({'data.quantity': updatedCapacity});
+        if (this.type === "ammunition" && !this.system.useCapacity) {
+            return this.update({'system.quantity': updatedCapacity});
         } else {
-            return this.update({'data.capacity.value': updatedCapacity});
+            return this.update({'system.capacity.value': updatedCapacity});
         }
     }
 
@@ -95,11 +96,11 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
      * Can return null if there is no maximum capacity.
      */
     getMaxCapacity() {
-        if (this.type === "ammunition" && !this.data.data.useCapacity) {
+        if (this.type === "ammunition" && !this.system.useCapacity) {
             return null;
         }
-        
-        const itemData = this.data.data;
+
+        const itemData = this.system;
         const maxCapacity = itemData.capacity?.max;
         return maxCapacity;
     }
@@ -108,25 +109,25 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
      * Attempts to reload the item's capacity.
      */
     reload() {
-        const itemData = this.data.data;
+        const itemData = this.system;
         const currentCapacity = this.getCurrentCapacity();
         const maxCapacity = this.getMaxCapacity();
 
         if (currentCapacity >= maxCapacity) {
             // No need to reload if already at max capacity.
-            ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Weapon.AlreadyFullyLoaded", {name: this.data.name}));
+            ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Weapon.AlreadyFullyLoaded", {name: this.name}));
             return false;
         }
 
         let updatePromise = null;
         if (this.requiresCapacityItem()) {
             const capacityItem = this.getCapacityItem();
-            
+
             // Find more items matching ammunition type
             const matchingItems = this.actor.items
-                .filter(x => x.type === "ammunition" && x.data.data.ammunitionType === itemData.ammunitionType && ((x.getCurrentCapacity() > currentCapacity && x.getMaxCapacity() <= maxCapacity) || !x.data.data.useCapacity))
+                .filter(x => x.type === "ammunition" && x.system.ammunitionType === itemData.ammunitionType && ((x.getCurrentCapacity() > currentCapacity && x.getMaxCapacity() <= maxCapacity) || !x.system.useCapacity))
                 .filter(x => {
-                    const container = getItemContainer(this.actor.data.items, x);
+                    const container = getItemContainer(this.actor.items, x);
                     return !container || container.type === "container";
                 })
                 .sort((firstEl, secondEl) => secondEl.getCurrentCapacity() - firstEl.getCurrentCapacity() );
@@ -139,20 +140,20 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
                 const sceneId = this.actor.isToken ? this.actor.token.parent.id : null;
                 const itemHelper = new ActorItemHelper(this.actor.id, tokenId, sceneId);
 
-                const originalContainer = getItemContainer(this.actor.data.items, newAmmunition);
+                const originalContainer = getItemContainer(this.actor.items, newAmmunition);
 
-                if (newAmmunition.data.data.useCapacity || capacityItem == null) {
+                if (newAmmunition.system.useCapacity || capacityItem == null) {
                     if (capacityItem) {
                         updatePromise = setItemContainer(itemHelper, capacityItem, null, 1);
                     }
-                    
+
                     if (updatePromise) {
                         updatePromise.then(() => {
                             setItemContainer(itemHelper, newAmmunition, this, 1);
                         });
                     } else {
                         let totalAmountLoaded = 1;
-                        if (!newAmmunition.data.data.useCapacity) {
+                        if (!newAmmunition.system.useCapacity) {
                             totalAmountLoaded = Math.min(maxCapacity, newAmmunition.getCurrentCapacity());
                         }
 
@@ -163,14 +164,14 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
                 }
 
                 if (updatePromise && originalContainer) {
-                    ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Weapon.ReloadFromContainer", {name: this.data.name, ammoName: newAmmunition.name, containerName: originalContainer.name}), {permanent: true});
+                    ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Weapon.ReloadFromContainer", {name: this.name, ammoName: newAmmunition.name, containerName: originalContainer.name}), {permanent: true});
                 }
 
             } else {
-                ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Weapon.NoAmmunitionAvailable", {name: this.data.name}));
+                ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Weapon.NoAmmunitionAvailable", {name: this.name}));
             }
         } else {
-            updatePromise = this.update({'data.capacity.value': maxCapacity});
+            updatePromise = this.update({'system.capacity.value': maxCapacity});
         }
 
         if (updatePromise) {
@@ -194,11 +195,11 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
 
             const updates = [];
             if (capacityItem) {
-                updates.push({_id: capacityItem.id, "data.quantity": currentItemCapacity});
+                updates.push({_id: capacityItem.id, "system.quantity": currentItemCapacity});
             }
 
             if (newAmmunition && ammunitionItemCapacity > 0) {
-                updates.push({_id: newAmmunition.id, "data.quantity": ammunitionItemCapacity});
+                updates.push({_id: newAmmunition.id, "system.quantity": ammunitionItemCapacity});
             }
 
             const updatePromise = this.actor.updateEmbeddedDocuments("Item", updates);
@@ -224,7 +225,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
             cost: game.i18n.format("SFRPG.AbilityActivationTypesMove")
         };
 
-        const template = `systems/sfrpg/templates/chat/item-action-card.html`;
+        const template = `systems/sfrpg/templates/chat/item-action-card.hbs`;
         const renderPromise = renderTemplate(template, templateData);
         renderPromise.then((html) => {
             // Create the chat message
@@ -238,4 +239,4 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
         });
 
     }
-}
+};

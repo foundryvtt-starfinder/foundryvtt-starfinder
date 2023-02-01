@@ -1,0 +1,38 @@
+
+            <h4 class="section-header first">{{ localize "SFRPG.ItemSheet.StarshipComponent.Header" }}</h4>
+
+            {{#unless noBPCost}}
+            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipComponent.Cost" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipComponent.CostTooltip" }}">
+                <label>{{ localize "SFRPG.ItemSheet.StarshipComponent.Cost" }}</label>
+                <div class="form-fields">
+                    <input type="text" name="system.cost" value="{{itemData.cost}}" data-dtype="Number" placeholder="0"/>
+                </div>
+            </div>
+
+            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipComponent.CostMultipliedBySize" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipComponent.CostMultipliedBySizeTooltip" }}">
+                <label>{{ localize "SFRPG.ItemSheet.StarshipComponent.CostMultipliedBySize" }}</label>
+                <div class="form-fields">
+                    <label class="checkbox">
+                        <input type="checkbox" name="system.costMultipliedBySize" {{checked itemData.costMultipliedBySize}}/> {{ localize "SFRPG.ItemSheet.StarshipComponent.IsCostMultipliedBySize" }}
+                    </label>
+                </div>
+            </div>
+            {{/unless}}
+
+            {{#unless noPCUCost}}
+            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipComponent.PCU" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipComponent.PCUTooltip" }}">
+                <label>{{ localize "SFRPG.ItemSheet.StarshipComponent.PCU" }}</label>
+                <div class="form-fields">
+                    <input type="text" name="system.pcu" value="{{itemData.pcu}}" data-dtype="Number" placeholder="0" />
+                </div>
+            </div>
+
+            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipComponent.PoweredState" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipComponent.PoweredStateTooltip" }}">
+                <label>{{ localize "SFRPG.ItemSheet.StarshipComponent.PoweredState" }}</label>
+                <div class="form-fields">
+                    <label class="checkbox">
+                        <input type="checkbox" name="system.isPowered" {{checked itemData.isPowered}}/> {{ localize "SFRPG.ItemSheet.StarshipComponent.IsPowered" }}
+                    </label>
+                </div>
+            </div>
+            {{/unless}}

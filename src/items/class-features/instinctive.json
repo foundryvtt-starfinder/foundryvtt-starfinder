@@ -1,0 +1,139 @@
+{
+  "_id": "bmscIuTpCFw5uvyG",
+  "name": "Instinctive",
+  "type": "feat",
+  "img": "icons/magic/perception/third-eye-blue-red.webp",
+  "system": {
+    "type": "",
+    "ability": null,
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "",
+    "actionType": "",
+    "activation": {
+      "type": "",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "",
+      "value": 0
+    },
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "effect": "",
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "damageNotes": "",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.effKY7m8EX1NnZWX]{Scientific Method (Ex)}</p>\n<p>You can quickly intuit the connections between things and often act instinctively on those connections, gaining knowledge and aptitude without always being able to say how you picked it up. Select two skills—once made, this choice cannot be changed. You gain a bonus rank in each of these two skills at every level, as well as a +1 insight bonus to checks using these skills. This bonus increases by 1 at 3rd level and every 4 levels thereafter. Additionally, you can add your Wisdom modifier instead of your Intelligence modifier to Life Science, Medicine, and Physical Science checks.</p>\n<p><em>To set your chosen skills, go to the modifiers tab of this class feature and change the Specific Effected Attributes of the modifiers to your chosen skills; once for the bonus ranks, and again for the insight bonus.</em></p>"
+    },
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": null
+    },
+    "formula": "",
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "16b7e368-4397-473a-9645-ee3d7d41b8ab",
+        "name": "Instinctive Biohacker - Bonus Ranks",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "skill-ranks",
+        "enabled": true,
+        "max": 0,
+        "modifier": "@details.level.value",
+        "modifierType": "constant",
+        "notes": "Select two skills—once made, this choice cannot be changed. You gain a bonus rank in each of these two skills at every level.",
+        "source": "Scientific Method",
+        "subtab": "misc",
+        "valueAffected": "acr"
+      },
+      {
+        "_id": "1619b2a8-f377-4f9a-a692-5653ccdfa514",
+        "name": "Instinctive Biohacker - Bonus Ranks",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "skill-ranks",
+        "enabled": true,
+        "max": 0,
+        "modifier": "@details.level.value",
+        "modifierType": "constant",
+        "notes": "Select two skills—once made, this choice cannot be changed. You gain a bonus rank in each of these two skills at every level",
+        "source": "Scientific Method",
+        "subtab": "misc",
+        "valueAffected": "ath"
+      },
+      {
+        "_id": "b3359ab8-f008-4593-a78c-82b6cb9348a3",
+        "name": "Instinctive Biohacker - Insight Bonus",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@classes.biohacker.levels,0,1,1,3,2,7,3,11,4,15,5,19,6)",
+        "modifierType": "constant",
+        "notes": "You gain a +1 insight bonus to checks using these skills. This bonus increases by 1 at 3rd level and every 4 levels thereafter.",
+        "source": "Scientific Method",
+        "subtab": "misc",
+        "valueAffected": "acr"
+      },
+      {
+        "_id": "04c82f85-de99-4161-9fa2-fd9597406401",
+        "name": "Instinctive Biohacker - Insight Bonus",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@classes.biohacker.levels,0,1,1,3,2,7,3,11,4,15,5,19,6)",
+        "modifierType": "constant",
+        "notes": "You gain a +1 insight bonus to checks using these skills. This bonus increases by 1 at 3rd level and every 4 levels thereafter.",
+        "source": "Scientific Method",
+        "subtab": "misc",
+        "valueAffected": "ath"
+      }
+    ],
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "",
+      "value": null
+    },
+    "recharge": {
+      "charged": false,
+      "value": null
+    },
+    "requirements": "1st Level",
+    "rollNotes": "",
+    "save": {
+      "type": "",
+      "dc": null,
+      "descriptor": ""
+    },
+    "source": "COM pg. 43",
+    "target": {
+      "type": "",
+      "value": null
+    },
+    "uses": {
+      "max": 0,
+      "per": null,
+      "value": 0
+    }
+  }
+}

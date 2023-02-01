@@ -2,12 +2,14 @@
   "_id": "EVMp2EOpASIpIbFQ",
   "name": "Techlore (Ex)",
   "type": "feat",
-  "data": {
+  "img": "systems/sfrpg/icons/classes/tech_lore.webp",
+  "system": {
     "type": "",
     "ability": null,
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "",
@@ -29,10 +31,13 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.classes\" data-id=\"IvLuq2pxKkHJJpae\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Technomancer</a></p>\n        <p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\">You rewire your mind to give you greater insight into the nature of magic and technology. You gain a +1 insight bonus to Computers and Mysticism checks. This bonus increases by 1 at 6th level and every 3 levels thereafter.</span></p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.IvLuq2pxKkHJJpae]{Technomancer}</p>\n<p>You rewire your mind to give you greater insight into the nature of magic and technology. You gain a +1 insight bonus to Computers and Mysticism checks. This bonus increases by 1 at 6th level and every 3 levels thereafter.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -40,7 +45,39 @@
       "value": null
     },
     "formula": "",
-    "modifiers": [],
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "f7cca474-1117-49f6-a645-425b858efe72",
+        "name": "Techlore (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@classes.technomancer.levels, 0, 1, 1, 6, 2, 9, 3, 12, 4, 15, 5, 18, 6)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "com"
+      },
+      {
+        "_id": "d5177fda-da86-4a38-8d98-e529079272a4",
+        "name": "Techlore (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@classes.technomancer.levels, 0, 1, 1, 6, 2, 9, 3, 12, 4, 15, 5, 18, 6)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "mys"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -52,6 +89,7 @@
       "value": null
     },
     "requirements": "3rd Level",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
@@ -67,11 +105,5 @@
       "per": null,
       "value": 0
     }
-  },
-  "flags": {},
-  "img": "systems/sfrpg/icons/classes/tech_lore.png",
-  "permission": {
-    "QqVQDajn5ZN4kl25": 3,
-    "default": 0
   }
 }

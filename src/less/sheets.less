@@ -17,12 +17,22 @@ body {
 
 .sfrpg.sheet {
     .window-content {
-        border: 5px solid @sfrpgBlue;
+        border-width: 1px;
+        border-style: solid;
+        border-image: linear-gradient(
+            130deg, #0c2d4a 0%, #235683 40%, #235683 60%, #1d7dd1 100%) 1;
         border-top: none;
         background: @sheetBackground;
-        padding: 0 0 5px 0;
+        padding: 0 0 0 0;
+        border-bottom-left-radius: 6px;
+        border-bottom-right-radius: 6px;
     }
-    
+
+    .window-resizable-handle {
+        bottom: 0px;
+        border-radius: 4px 0 5px 0;
+    }
+
     .sheet-lower {
         padding: 5px;
     }

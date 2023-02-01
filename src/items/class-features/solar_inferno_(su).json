@@ -2,13 +2,15 @@
   "_id": "nLGfiBPzBWuakbHM",
   "name": "Solar Inferno (Su)",
   "type": "feat",
-  "data": {
+  "img": "systems/sfrpg/images/cup/gameplay/photon.webp",
+  "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
-    "actionType": "",
+    "actionTarget": "",
+    "actionType": "other",
     "activation": {
       "type": "full",
       "condition": "",
@@ -27,12 +29,31 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "Burning damage",
+          "formula": "lookupRange(@classes.solarian.levels, 0, 10, 2, 14, 3, 18, 4)d6",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@Compendium[sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl39_LabelName\">You have learned how to create a burst of cosmic energy at the point of your solar manifestation’s impact. As a full action while attuned or fully attuned, you can make an attack with your solar flare, solar shield, or solar weapon against a single target. If you are able to make this attack as a ranged attack, the target must be within 30 feet. On a hit, the target and each creature within 10 feet of it must attempt a Reflex save. A creature that fails its save gains the burning condition. This burning condition deals 2d6 damage (increasing by 1d6 at 14th level and again at 18th level).</span></p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p><sub><img style=\"border: 1px solid var(--color-border-dark);\" src=\"systems/sfrpg/images/cup/gameplay/photon.webp\" alt=\"\" width=\"20\" height=\"20\"></sub> Photon Revelation</p>\n<p>You have learned how to create a burst of cosmic energy at the point of your solar manifestation’s impact. As a full action while attuned or fully attuned, you can make an attack with your solar flare, solar shield, or solar weapon against a single target. If you are able to make this attack as a ranged attack, the target must be within 30 feet. On a hit, the target and each creature within 10 feet of it except you must attempt a Reflex save. A creature that fails its save gains the burning condition. This burning condition deals 2d6 damage (increasing by 1d6 at 14th level and again at 18th level).</p>"
     },
     "descriptors": [],
     "duration": {
@@ -40,38 +61,34 @@
       "value": ""
     },
     "formula": "",
+    "isActive": null,
     "modifiers": [],
     "range": {
       "additional": "",
       "per": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": 30
     },
     "recharge": {
       "charged": false,
       "value": null
     },
     "requirements": "10th Level",
+    "rollNotes": "",
     "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": ""
+      "type": "reflex",
+      "dc": "10+floor(@classes.solarian.levels/2) + @abilities.cha.mod",
+      "descriptor": "negate"
     },
     "source": "Solarian",
     "target": {
       "type": "",
-      "value": ""
+      "value": "All creatures within 10 feet of main target, except user"
     },
     "uses": {
       "max": 0,
       "per": "",
       "value": 0
     }
-  },
-  "flags": {},
-  "img": "systems/sfrpg/images/cup/gameplay/photon.png",
-  "permission": {
-    "QqVQDajn5ZN4kl25": 3,
-    "default": 0
   }
 }

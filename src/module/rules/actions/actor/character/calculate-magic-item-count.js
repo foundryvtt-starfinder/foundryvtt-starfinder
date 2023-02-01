@@ -1,4 +1,4 @@
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateMagicalItemCount", (fact, context) => {
         const data = fact.data;
 
@@ -9,7 +9,7 @@ export default function (engine) {
         };
 
         const magicalItemTypes = ["magic", "hybrid"];
-        const equippedLimitedMagicalItems = fact.items.filter(x => magicalItemTypes.includes(x.data.type) && x.data.data.limitedWear && x.data.data.equipped);
+        const equippedLimitedMagicalItems = fact.items.filter(x => magicalItemTypes.includes(x.type) && x.system.limitedWear && x.system.equipped);
         data.magicalItems.worn = equippedLimitedMagicalItems.length;
 
         for (const item of equippedLimitedMagicalItems) {

@@ -1,4 +1,4 @@
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateSpellsPerDay", (fact, context) => {
         const data = fact.data;
         const classes = fact.classes;
@@ -6,9 +6,9 @@ export default function (engine) {
         data.spells.classes = [];
         const casterData = duplicate(data.spells);
 
-        const computeSpellsPerDay = (spellLevel, classData, keyAbilityMod) => {
+        const computeSpellsPerDay = (spellLevel, classData, spellAbilityMod) => {
             let totalSpells = 0;
-            
+
             try {
                 totalSpells += classData.spellsPerDay[classData.levels][spellLevel] || 0;
             } catch {}
@@ -16,26 +16,28 @@ export default function (engine) {
             // Only apply bonus spells known if there is a base spells known.
             if (totalSpells > 0) {
                 try {
-                    // TODO: If keyAbilityMod is not part of bonusSpellsPerDay's keys, find the nearest key and use that instead.
-                    totalSpells += classData.bonusSpellsPerDay[keyAbilityMod][spellLevel] || 0;
+                    // TODO: If spellAbilityMod is not part of bonusSpellsPerDay's keys, find the nearest key and use that instead.
+                    totalSpells += classData.bonusSpellsPerDay[spellAbilityMod][spellLevel] || 0;
                 } catch {}
             }
 
             return totalSpells;
-        }
+        };
 
         for (const cls of classes) {
-            const classData = cls.data.data;
+            const classData = cls.system;
 
             const className = cls.name.slugify({replacement: "_", strict: true});
             const keyAbilityScore = classData.kas || "str";
-            
+            const spellAbilityScore =  classData.spellAbility || classData.kas || "str";
+
             const classInfo = {
                 keyAbilityMod: data.abilities[keyAbilityScore].mod,
                 levels: classData.levels,
                 keyAbilityScore: keyAbilityScore,
                 skillRanksPerLevel: classData.skillRanks.value,
-                isCaster: classData.isCaster
+                isCaster: classData.isCaster,
+                spellAbilityMod: data.abilities[spellAbilityScore]?.mod
             };
 
             if (classInfo.isCaster) {
@@ -45,22 +47,22 @@ export default function (engine) {
                     key: className
                 });
                 casterData.spell1.perClass[className] = {
-                    max: computeSpellsPerDay(1, classData, classInfo.keyAbilityMod)
+                    max: computeSpellsPerDay(1, classData, classInfo.spellAbilityMod)
                 };
                 casterData.spell2.perClass[className] = {
-                    max: computeSpellsPerDay(2, classData, classInfo.keyAbilityMod)
+                    max: computeSpellsPerDay(2, classData, classInfo.spellAbilityMod)
                 };
                 casterData.spell3.perClass[className] = {
-                    max: computeSpellsPerDay(3, classData, classInfo.keyAbilityMod)
+                    max: computeSpellsPerDay(3, classData, classInfo.spellAbilityMod)
                 };
                 casterData.spell4.perClass[className] = {
-                    max: computeSpellsPerDay(4, classData, classInfo.keyAbilityMod)
+                    max: computeSpellsPerDay(4, classData, classInfo.spellAbilityMod)
                 };
                 casterData.spell5.perClass[className] = {
-                    max: computeSpellsPerDay(5, classData, classInfo.keyAbilityMod)
+                    max: computeSpellsPerDay(5, classData, classInfo.spellAbilityMod)
                 };
                 casterData.spell6.perClass[className] = {
-                    max: computeSpellsPerDay(6, classData, classInfo.keyAbilityMod)
+                    max: computeSpellsPerDay(6, classData, classInfo.spellAbilityMod)
                 };
             }
         }

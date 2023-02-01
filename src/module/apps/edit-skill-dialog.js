@@ -3,7 +3,7 @@
  * @type {Dialog}
  */
 export class AddEditSkillDialog extends Dialog {
-    constructor(skill, dialogData={}, options={}) {
+    constructor(skill, dialogData = {}, options = {}) {
         super(dialogData, options);
         this.options.classes = ["sfrpg", "dialog"];
 
@@ -20,7 +20,7 @@ export class AddEditSkillDialog extends Dialog {
 
     /**
      * A factory method which displays the Edit Skill dialog for a given skill.
-     * 
+     *
      * Returns a Promise which resolves to the dialog FormData once the workflow has been completed.
      * @param {String}  skillId The internal ID for the skill
      * @param {Object}  skill   The skill being updated
@@ -31,7 +31,7 @@ export class AddEditSkillDialog extends Dialog {
      */
     static async create(skillId, skill, isEdit = true, isNpc = false, isOwner = false) {
         let hasSubName = typeof skill.subname !== "undefined" || !isEdit;
-        const html = await renderTemplate("systems/sfrpg/templates/apps/add-edit-skill.html", {
+        const html = await renderTemplate("systems/sfrpg/templates/apps/add-edit-skill.hbs", {
             skill: skill,
             hasSubName,
             config: CONFIG.SFRPG,

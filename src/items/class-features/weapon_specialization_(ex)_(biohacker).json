@@ -2,12 +2,14 @@
   "_id": "mgtX5UHMPwvNkUUi",
   "name": "Weapon Specialization (Ex) (Biohacker)",
   "type": "feat",
-  "data": {
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
     "type": "",
     "ability": null,
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "",
@@ -29,12 +31,13 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@Compendium[sfrpg.classes.PSHcGB4UFgMSiF4V]{Biohacker}</p>\n<p>You gain the Weapon Specialization feat as a bonus feat for each weapon type this class grants you proficiency with. For weapons you have gained proficiency with only through the injection expert class feature, rather than the normal Weapon Specialization benefit, you instead add half your character level to damage you deal with those weapons.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.PSHcGB4UFgMSiF4V]{Biohacker}</p>\n<p>You gain the Weapon Specialization feat as a bonus feat for each weapon type this class grants you proficiency with. For weapons you have gained proficiency with only through the injection expert class feature, rather than the normal Weapon Specialization benefit, you instead add half your character level to damage you deal with those weapons.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -85,6 +88,21 @@
         "source": "",
         "subtab": "misc",
         "valueAffected": "operative"
+      },
+      {
+        "_id": "9ece2ee9-6611-441e-985c-429191f803bf",
+        "name": "Weapon Specialization (Injection Expert)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-property-damage",
+        "enabled": true,
+        "max": 0,
+        "modifier": "floor(@details.level.value/2)",
+        "modifierType": "formula",
+        "notes": "Enable only if you gained proficiency with this weapon from Injection Expert (Ex) and from nowhere else.<br>(E.g you would disable this for a Small Arm, but not a Longarm, as the Biohacker class provides proficiency with the former, but not the latter.)",
+        "source": "Weapon Specialization",
+        "subtab": "misc",
+        "valueAffected": "injection"
       }
     ],
     "range": {
@@ -98,6 +116,7 @@
       "value": null
     },
     "requirements": "3rd Level",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
@@ -113,6 +132,5 @@
       "per": null,
       "value": 0
     }
-  },
-  "img": "icons/svg/mystery-man.svg"
+  }
 }
