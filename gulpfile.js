@@ -261,8 +261,6 @@ function sanitizeJSON(jsonInput) {
 
         delete item.flags?.exportSource;
         delete item.flags?.sourceId;
-        delete item.flags?.core?.exportSource;
-        delete item.flags?.core?.sourceId;
 
         // Remove leading or trailing spaces
         item.name = item.name.trim();
@@ -362,6 +360,7 @@ function sanitizeJSON(jsonInput) {
             .append($description)
             .html()
             .replace(/@Compendium\[/g, "@UUID[Compendium.") // Replace @Compendium links with @UUID links
+            .replace(/(\w)(@UUID)/g, "$1 $2") // Add a space before the start of @UUID links if there is a word before.
             .replace(/<([hb]r)>/g, "<$1 />") // Prefer self-closing tags
             .replace(/ {2,}/g, " ") // Replace double or more spaces with a single space
             .replace(/<(div|p)>\s*<\/(div|p)>/g, "") // Delete empty <p>s and <div>s
@@ -373,6 +372,7 @@ function sanitizeJSON(jsonInput) {
             .replace(/(<\/strong>)(\w)/g, "$1 $2") // Add a space after the end of <strong> tags
             .replace(/<(em)>\s*/g, "<em>") // Remove whitespace at the start of <em> tags
             .replace(/\s*<\/(em)>/g, "</em>") // Remove whitespace at the end of <em> tags
+            .replace(/(\w)(<em>)/g, "$1 $2") // Add a space before the start of <em> tags if there is a word before.
             .replace(/(<\/em>)(\w)/g, "$1 $2") // Add a space after the end of <em> tags
             .replace(/(<p>&nbsp;<\/p>)/g, "") // Delete paragraphs with only a non-breaking space
             .replace(/(<br \/>)+/g, "</p>\n<p>") // Replace any number of <br /> tags with <p>s
@@ -427,6 +427,8 @@ function sanitizeJSON(jsonInput) {
     treeShake(jsonInput);
     cleanFlags(jsonInput);
     sanitizeDescription(jsonInput);
+
+    delete jsonInput?.flags?.core?.sourceId;
 
     if (jsonInput.items) {
         for (let item of jsonInput.items) {
