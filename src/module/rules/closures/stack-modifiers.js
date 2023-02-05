@@ -71,6 +71,7 @@ export default class StackModifiers extends Closure {
                             const die = evaluatedRoll.dice[allDiceI];
                             modifiers[modifiersI].dices.push({
                                 formula: `${die.number}d${die.faces}`,
+                                faces: die.faces,
                                 total: die.results.reduce((pv, cv) => pv + cv.result, 0)
                             });
                         }
