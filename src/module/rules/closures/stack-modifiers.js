@@ -63,6 +63,18 @@ export default class StackModifiers extends Closure {
                     const roll = Roll.create(formula, actor?.system);
                     const evaluatedRoll = await roll.evaluate({async: true});
                     modifiers[modifiersI].max = evaluatedRoll.total;
+                    modifiers[modifiersI].isDeterministic = roll.isDeterministic;
+                    modifiers[modifiersI].dices = [];
+
+                    if (!roll.isDeterministic) {
+                        for (let allDiceI = 0; allDiceI < evaluatedRoll.dice.length; allDiceI++) {
+                            const die = evaluatedRoll.dice[allDiceI];
+                            modifiers[modifiersI].dices.push({
+                                formula: `${die.number}d${die.faces}`,
+                                total: die.results.reduce((pv, cv) => pv + cv.result, 0)
+                            });
+                        }
+                    }
                 } else {
                     modifiers[modifiersI].max = 0;
                 }

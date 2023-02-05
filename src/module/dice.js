@@ -279,7 +279,8 @@ export class DiceSFRPG {
                     breakdown: preparedRollExplanation,
                     htmlData: htmlData,
                     rollType: "normal",
-                    rollOptions: rollOptions
+                    rollOptions: rollOptions,
+                    rollDices: finalFormula.rollDices
                 };
 
                 try {
@@ -301,7 +302,7 @@ export class DiceSFRPG {
                     flags: {rollOptions: rollOptions}
                 };
 
-                messageData.content = await roll.render({ htmlData: htmlData });
+                messageData.content = await roll.render({ htmlData: htmlData, customTooltip: finalFormula.rollDices });
                 if (rollOptions?.actionTarget) {
                     messageData.content = DiceSFRPG.appendTextToRoll(messageData.content, game.i18n.format("SFRPG.Items.Action.ActionTarget.ChatMessage", {actionTarget: rollOptions.actionTargetSource[rollOptions.actionTarget]}));
                 }
@@ -1025,6 +1026,7 @@ export class DiceSFRPG {
 
         let rollString = '';
         let formulaString = '';
+        const rollDices = [];
         const stackedModsArray = Object.keys(stackedMods);
         for (let stackModsI = 0; stackModsI < stackedModsArray.length; stackModsI++) {
             const stackModifier = stackedMods[stackedModsArray[stackModsI]];
@@ -1041,7 +1043,12 @@ export class DiceSFRPG {
                         title="${game.i18n.format(localizationKey, type: modifier.type.capitalize(),mod: modifier.max.signedString(),source: modifier.name)}"
                         but in order to do that we will need the localization key for the current modifier which we do not have at this point. Maybe we will have to pass it down from the modifier calculation lol.
                     */
-                    formulaString += `${modifier.max.toString()}[<span>${modifier.name}</span>] + `;
+                    if (!modifier.isDeterministic) {
+                        rollDices.push(...modifier.dices);
+                        formulaString += `${modifier.max.toString()}(${modifier.modifier})[<span>${modifier.name}</span>] + `;
+                    } else {
+                        formulaString += `${modifier.max.toString()}[<span>${modifier.name}</span>] + `;
+                    }
                 }
             } else {
                 rollString += `${stackModifier.max.toString()}+`;
@@ -1051,7 +1058,12 @@ export class DiceSFRPG {
                     title="${game.i18n.format(localizationKey, type: modifier.type.capitalize(),mod: modifier.max.signedString(),source: modifier.name)}"
                     but in order to do that we will need the localization key for the current modifier which we do not have at this point. Maybe we will have to pass it down from the modifier calculation lol.
                 */
-                formulaString += `${stackModifier.max.toString()}[<span>${stackModifier.name}</span>] + `;
+                if (!stackModifier.isDeterministic) {
+                    rollDices.push(...stackModifier.dices);
+                    formulaString += `${stackModifier.max.toString()}(${stackModifier.modifier})[<span>${stackModifier.name}</span>] + `;
+                } else {
+                    formulaString += `${stackModifier.max.toString()}[<span>${stackModifier.name}</span>] + `;
+                }
             }
         }
 
@@ -1070,6 +1082,8 @@ export class DiceSFRPG {
         finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
             .trim();
         finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
+
+        finalFormula.rollDices = rollDices;
 
         return finalFormula;
     }
