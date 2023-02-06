@@ -1122,6 +1122,12 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         return false;
     }
 
+    levelUp(actorClassId) {
+        const targetClass = this.items.find(item => item.type === "class" && item._id === actorClassId);
+        if (targetClass) {
+            targetClass.update({["system.levels"]: targetClass.system.levels + 1});
+        }
+    }
 }
 
 Hooks.on("afterClosureProcessed", async (closureName, fact) => {

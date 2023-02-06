@@ -9,13 +9,14 @@ const path = require('path');
 const sanitize = require("sanitize-filename");
 const stringify = require('json-stringify-pretty-compact');
 const jsdom = require("jsdom");
+const terser = require("gulp-terser");
+const sourcemaps = require("gulp-sourcemaps");
+const cssClean = require('gulp-clean-css');
 
 const { JSDOM } = jsdom;
 const { window } = new JSDOM();
 
 const $ = require("jquery")(window);
-
-const SFRPG_LESS = ["src/less/*.less"];
 
 function getConfig() {
     const configPath = path.resolve(process.cwd(), 'foundryconfig.json');
@@ -61,12 +62,15 @@ function getManifest() {
 /**
  * Build Less
  */
-function buildLess() {
+async function buildLess() {
     const name = 'sfrpg';
 
     return gulp
         .src(`src/less/${name}.less`)
+        .pipe(sourcemaps.init())
         .pipe(less())
+        .pipe(cssClean())
+        .pipe(sourcemaps.write('./maps'))
         .pipe(gulp.dest('dist'));
 }
 
@@ -74,31 +78,51 @@ function buildLess() {
  * Copy static files
  */
 async function copyFiles() {
-    const name = 'sfrpg';
 
-    const statics = [
-        'lang',
-        'fonts',
-        'images',
-        'templates',
-        'icons',
-        'packs',
-        'module',
-        `${name}.js`,
-        'module.json',
-        'system.json',
-        'template.json'
-    ];
-    try {
-        for (const file of statics) {
-            if (fs.existsSync(path.join('src', file))) {
-                await fs.copy(path.join('src', file), path.join('dist', file));
+    // Build static files first
+    gulp.src([
+        'src/fonts/*',
+        'src/icons/*',
+        'src/icons/**/*',
+        'src/images/**/*',
+        'src/images/*',
+        'src/lang/*.json',
+        'src/packs/*.db',
+        'src/templates/**/*.hbs',
+        "src/*.json"
+    ])
+        .pipe(gulp.dest((file) => file.base.replace("\\src", "\\dist")));
+
+    // Then pipe in js files to be minified
+    gulp.src('src/sfrpg.js')
+        .pipe(sourcemaps.init())
+        // Minify the JS
+        .pipe(terser({
+            ecma: 2022,
+            compress: {
+                module: true
             }
-        }
-        return Promise.resolve();
-    } catch (err) {
-        Promise.reject(err);
-    }
+        }))
+        .pipe(sourcemaps.write('./maps'))
+        // Output
+        .pipe(gulp.dest('dist'));
+
+    return gulp.src([
+        'src/module/**/*.js',
+        'src/module/*.js'
+    ])
+        .pipe(sourcemaps.init())
+        // Minify the JS
+        .pipe(terser({
+            ecma: 2022,
+            compress: {
+                module: true
+            }
+        }))
+        .pipe(sourcemaps.write('.././maps/module'))
+        // Output
+        .pipe(gulp.dest('dist/module'));
+
 }
 
 /**
@@ -113,25 +137,22 @@ async function copyFiles() {
 async function copyWatchFiles() {
     const name = 'sfrpg';
 
-    const statics = [
-        'lang',
-        'templates',
-        'module',
-        `${name}.js`,
-        'module.json',
-        'system.json',
-        'template.json'
-    ];
-    try {
-        for (const file of statics) {
-            if (fs.existsSync(path.join('src', file))) {
-                await fs.copy(path.join('src', file), path.join('dist', file));
-            }
-        }
-        return Promise.resolve();
-    } catch (err) {
-        Promise.reject(err);
-    }
+    // Don't minify on build:watch in order to give quickest build time.
+    gulp.src([
+        'src/lang/*.json',
+        'src/templates/**/*.hbs',
+        "src/*.json"
+    ])
+        .pipe(gulp.dest((file) => file.base.replace("\\src", "\\dist")));
+
+    gulp.src(`src/${name}.js`)
+        .pipe(gulp.dest('dist'));
+
+    return gulp.src([
+        'src/module/**/*.js',
+        'src/module/*.js'
+    ])
+        .pipe(gulp.dest('dist/module'));
 }
 
 /**
@@ -179,10 +200,10 @@ async function copyLibs() {
  * Watch for changes for each build step
  */
 function buildWatch() {
-    gulp.watch('src/**/*.less', { ignoreInitial: false }, buildLess);
+    gulp.watch('src/**/*.less', { ignoreInitial: true }, buildLess);
     gulp.watch(
         ['src/fonts', 'src/templates', 'src/lang', 'src/*.json', 'src/**/*.js'],
-        { ignoreInitial: false },
+        { ignoreInitial: true },
         copyWatchFiles
     );
 }
@@ -240,8 +261,6 @@ function sanitizeJSON(jsonInput) {
 
         delete item.flags?.exportSource;
         delete item.flags?.sourceId;
-        delete item.flags?.core?.exportSource;
-        delete item.flags?.core?.sourceId;
 
         // Remove leading or trailing spaces
         item.name = item.name.trim();
@@ -341,6 +360,7 @@ function sanitizeJSON(jsonInput) {
             .append($description)
             .html()
             .replace(/@Compendium\[/g, "@UUID[Compendium.") // Replace @Compendium links with @UUID links
+            .replace(/(\w)(@UUID)/g, "$1 $2") // Add a space before the start of @UUID links if there is a word before.
             .replace(/<([hb]r)>/g, "<$1 />") // Prefer self-closing tags
             .replace(/ {2,}/g, " ") // Replace double or more spaces with a single space
             .replace(/<(div|p)>\s*<\/(div|p)>/g, "") // Delete empty <p>s and <div>s
@@ -352,6 +372,7 @@ function sanitizeJSON(jsonInput) {
             .replace(/(<\/strong>)(\w)/g, "$1 $2") // Add a space after the end of <strong> tags
             .replace(/<(em)>\s*/g, "<em>") // Remove whitespace at the start of <em> tags
             .replace(/\s*<\/(em)>/g, "</em>") // Remove whitespace at the end of <em> tags
+            .replace(/(\w)(<em>)/g, "$1 $2") // Add a space before the start of <em> tags if there is a word before.
             .replace(/(<\/em>)(\w)/g, "$1 $2") // Add a space after the end of <em> tags
             .replace(/(<p>&nbsp;<\/p>)/g, "") // Delete paragraphs with only a non-breaking space
             .replace(/(<br \/>)+/g, "</p>\n<p>") // Replace any number of <br /> tags with <p>s
@@ -406,6 +427,8 @@ function sanitizeJSON(jsonInput) {
     treeShake(jsonInput);
     cleanFlags(jsonInput);
     sanitizeDescription(jsonInput);
+
+    delete jsonInput?.flags?.core?.sourceId;
 
     if (jsonInput.items) {
         for (let item of jsonInput.items) {
@@ -1498,6 +1521,7 @@ async function clean() {
         'packs',
         'lib',
         'styles',
+        `maps`,
         `${name}.js`,
         `${name}.css`,
         'module.json',
@@ -1791,7 +1815,7 @@ function updateManifest(cb) {
 const execBuild = gulp.parallel(buildLess, copyFiles, copyLibs);
 
 exports.build = gulp.series(clean, execBuild);
-exports.watch = buildWatch;
+exports.watch = gulp.series(execBuild, buildWatch);
 exports.clean = clean;
 exports.link = linkUserData;
 exports.copyUser = copyUserData;
