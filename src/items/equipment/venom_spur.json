@@ -5,9 +5,24 @@
   "img": "systems/sfrpg/icons/equipment/augmentations/venom-spur.webp",
   "system": {
     "type": "biotech",
+    "ability": "str",
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "kac",
+    "actionType": "mwak",
+    "activation": {
+      "type": "none",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "none",
+      "value": null
+    },
+    "attackBonus": 0,
     "attributes": {
       "ac": {
         "value": ""
@@ -21,13 +36,14 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": 7
       },
       "size": "medium",
       "sturdy": false
     },
     "attuned": false,
     "bulk": "-",
+    "chatFlavor": "",
     "container": {
       "contents": [],
       "includeContentsInWealthCalculation": true,
@@ -35,11 +51,46 @@
       "storage": []
     },
     "critical": {
+      "effect": "",
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "Base damage",
+          "formula": "1d6 + @abilities.str.mod",
+          "group": null,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": true,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Venom damage",
+          "formula": "2d6",
+          "group": null,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
@@ -47,15 +98,43 @@
       "unidentified": "",
       "value": "<p>You implant a retractable stinger and venom sac into your hand. You can extend this stinger as a swift action but only while you aren’t holding anything in that hand. While extended, the venom spur is a one-handed basic melee weapon that deals 1d6 piercing damage and automatically injects venom into a struck target. An affected creature can attempt a Fortitude saving throw (DC = 10 + half your level + your Constitution modifier) to resist the effects of your venom. On a failed save, the creature takes 2d6 damage immediately and must attempt a new Fortitude saving throw at the start of its turn each round to end the effect. Each time it fails this save, it takes an additional 2d6 damage. Effects such as @UUID[Compendium.sfrpg.spells.YGkyMwEE6SLfZc4r]{Remove Affliction} and antitoxin affect this venom as though it were a poison.</p>\n<p>Once used, the venom sac doesn’t refill until the next time you rest to regain Stamina Points. While it’s empty, you can still attack with the stinger but can’t envenomate your target.</p>"
     },
-    "equippable": false,
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": ""
+    },
+    "equippable": true,
     "equipped": false,
+    "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 2,
     "modifiers": [],
     "price": 625,
     "quantity": 1,
     "quantityPerPack": 1,
-    "source": "Core Rulebook",
-    "system": "hand"
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "none",
+      "value": null
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "fort",
+      "dc": "10 + floor(@details.level.value / 2) + @abilities.con.mod",
+      "descriptor": "negate"
+    },
+    "source": "CRB pg. 211",
+    "system": "hand",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": 1,
+      "per": "sr",
+      "value": 1
+    }
   }
 }

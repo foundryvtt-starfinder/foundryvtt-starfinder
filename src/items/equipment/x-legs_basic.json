@@ -5,9 +5,24 @@
   "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "cybernetic",
+    "ability": null,
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
+    "actionType": "",
+    "activation": {
+      "type": "",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "",
+      "value": 0
+    },
+    "attackBonus": 0,
     "attributes": {
       "ac": {
         "value": ""
@@ -28,24 +43,96 @@
     },
     "attuned": false,
     "bulk": "-",
+    "chatFlavor": "",
+    "container": {
+      "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
+      "storage": []
+    },
     "critical": {
+      "effect": "",
       "parts": []
     },
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>You enhance your stability by replacing your legs with a quartet of spiderlike limbs. Basic X-legs grant you a +4 circumstance bonus to your KAC against bull rush, reposition, and trip combat maneuvers. You also gain a +2 circumstance bonus to Reflex saving throws against effects that would knock you @UUID[Compendium.sfrpg.conditions.XeRGqHVtcZ7vsgJ0]{Prone}. Climbing X-legs include a gravitic-attraction device at the tip of each leg, allowing you to walk across walls and ceilings without using your hands; this grants you a climb speed of 25 feet.</p>\n<p>An X-legs system uses similar connection points as standard prosthetic legs (Core Rulebook 210), allowing you to detach your X-legs and attach a pair of prosthetic legs (which you must buy separately) in only 10 minutes, for situations where X-legs would attract unwanted attention.</p>"
+      "value": "<p>You enhance your stability by replacing your legs with a quartet of spiderlike limbs. Basic X-legs grant you a +4 circumstance bonus to your KAC against @UUID[Compendium.sfrpg.rules.U37n5tY5hn1ctzQL.JournalEntryPage.R33uiOMesYP0ISWl#bull-rush]{bull rush}, @UUID[Compendium.sfrpg.rules.U37n5tY5hn1ctzQL.JournalEntryPage.R33uiOMesYP0ISWl#reposition]{reposition}, and @UUID[Compendium.sfrpg.rules.U37n5tY5hn1ctzQL.JournalEntryPage.R33uiOMesYP0ISWl#trip]{trip} combat maneuvers. You also gain a +2 circumstance bonus to Reflex saving throws against effects that would knock you @UUID[Compendium.sfrpg.conditions.XeRGqHVtcZ7vsgJ0]{Prone}. Climbing X-legs include a gravitic-attraction device at the tip of each leg, allowing you to walk across walls and ceilings without using your hands; this grants you a climb speed of 25 feet.</p>\n<p>An X-legs system uses similar connection points as @UUID[Compendium.sfrpg.equipment.15y3ktmm59l8LFIR]{standard prosthetic legs} (Core Rulebook 210), allowing you to detach your X-legs and attach a pair of prosthetic legs (which you must buy separately) in only 10 minutes, for situations where X-legs would attract unwanted attention.</p>\n<p><em>Enable/Disable KAC bonus in the Modifiers tab.</em></p>"
     },
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": null
+    },
+    "equippable": true,
     "equipped": false,
+    "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 6,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "314f925e-d317-49e7-8bf1-2806c09b01fb",
+        "name": "X-Legs, Basic",
+        "type": "circumstance",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": false,
+        "max": 4,
+        "modifier": "4",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "kac"
+      },
+      {
+        "_id": "42fba18a-75ea-4109-b1ef-9504b93edb01",
+        "name": "X-Legs, Basic",
+        "type": "circumstance",
+        "condition": "",
+        "effectType": "save",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "You gain a +2 circumstance bonus to Reflex saving throws against effects that would knock you Prone.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "reflex"
+      }
+    ],
     "price": 4295,
     "quantity": 1,
-    "source": "",
-    "system": "allLegsAndFeet"
+    "quantityPerPack": 1,
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "",
+      "value": null
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "",
+      "dc": null,
+      "descriptor": ""
+    },
+    "source": "AR pg. 89",
+    "system": "allLegsAndFeet",
+    "target": {
+      "type": "",
+      "value": null
+    },
+    "uses": {
+      "max": 0,
+      "per": null,
+      "value": 0
+    }
   }
 }
