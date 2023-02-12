@@ -1,13 +1,13 @@
 {
-  "_id": "XhDmuUyUtVjgLrTo",
-  "name": "Exocortex Mod, Jump Jets (Ex)",
+  "_id": "E5UGSczcIiQjjPKI",
+  "name": "Resistance (Ex; Exocortex)",
   "type": "feat",
   "flags": {
     "core": {
       "sourceId": "Compendium.sfrpg.class-features.z8iOan4RJXYvVhit"
     }
   },
-  "img": "systems/sfrpg/icons/classes/jumps_jets.webp",
+  "img": "systems/sfrpg/icons/classes/resistance.webp",
   "system": {
     "type": "",
     "ability": null,
@@ -42,7 +42,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.z8iOan4RJXYvVhit]{Exocortex Mods (Ex)}</p>\n<p>Your exocortex <span>is equipped with powerful miniature jets. It can use these jets to jump up to 30 feet as a move action (either vertically, horizontally, or in any combination that does not exceed 30 feet). If applied to a hover drone, these jets instead allow your drone to increase its fly speed by 30 feet for 1 round. Once used, these jets must cool down for 1 minute before they can be used again.</span></p>"
+      "value": "<p>&gt; @UUID[Compendium.sfrpg.class-features.z8iOan4RJXYvVhit]{Exocortex Mods (Ex)}</p>\n<p>Your exocortex gains resistance to an energy type of your choice—acid, cold, electricity, fire, or sonic—equal to your mechanic level, to a maximum of 10. You can select this mod multiple times. Its effects do not stack; each time you select this mod, it must apply to a different energy type from the list above.</p>\n<p><em>Select chosen resistance in the 'Specific Affected Value' field in the Modifiers tab.</em></p>"
     },
     "descriptors": {
       "acid": false,
@@ -90,19 +90,19 @@
     "isActive": null,
     "modifiers": [
       {
-        "_id": "75041499-422a-4242-bffd-50aef755155b",
-        "name": "Jumps Jets (Ex; Exocortex Mod)",
+        "_id": "23aa8d96-d8d2-4289-9f2f-b10711090e7e",
+        "name": "Resistance (Ex; Exocortex)",
         "type": "untyped",
         "condition": "",
-        "effectType": "specific-speed",
+        "effectType": "energy-resistance",
         "enabled": true,
-        "max": 30,
-        "modifier": "30",
+        "max": 0,
+        "modifier": "min(@classes.mechanic.levels, 10)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
         "subtab": "misc",
-        "valueAffected": "flying"
+        "valueAffected": "acid"
       }
     ],
     "range": {

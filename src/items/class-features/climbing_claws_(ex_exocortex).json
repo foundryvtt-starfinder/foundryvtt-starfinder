@@ -1,13 +1,13 @@
 {
-  "_id": "28PhX1gOjYNvC3Fa",
-  "name": "Exocortex Mod, Weapon Proficiency (Ex)",
+  "_id": "W49lpCz2CD7VwRB2",
+  "name": "Climbing Claws (Ex; Exocortex)",
   "type": "feat",
   "flags": {
     "core": {
       "sourceId": "Compendium.sfrpg.class-features.z8iOan4RJXYvVhit"
     }
   },
-  "img": "systems/sfrpg/icons/classes/weapon_proficiency.webp",
+  "img": "systems/sfrpg/icons/classes/climbing_claws.webp",
   "system": {
     "type": "",
     "ability": null,
@@ -42,7 +42,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.z8iOan4RJXYvVhit]{Exocortex Mods (Ex)}</p>\n<p>Your exocortex <span>gains one of the following feats as a bonus feat (it must meet all the prerequisites of the chosen feat): Advanced Melee Weapon Proficiency, or Heavy Weapon Proficiency. You can select this mod multiple times; each time, you gains another of the available proficiency feats as a bonus feat.</span></p>\n<p>@UUID[Compendium.sfrpg.feats.54qpDSqRUsVRWOSZ]{Advanced Melee Weapon Proficiency (Combat)}</p>\n<p>@UUID[Compendium.sfrpg.feats.Ssw8itpOPE45uFzO]{Heavy Weapon Proficiency (Combat)}</p>"
+      "value": "<p>&gt; @UUID[Compendium.sfrpg.class-features.z8iOan4RJXYvVhit]{Exocortex Mods (Ex)}</p>\n<p>Your exocortex enables the mechanic to gain a climb speed equal to half its land speed.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -88,7 +88,23 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "8f5fbd5a-88fd-4af7-a046-a831ccffa635",
+        "name": "Climbing Claws (Ex; Exocortex)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "specific-speed",
+        "enabled": true,
+        "max": 0,
+        "modifier": "floor(@attributes.speed.land.value / 2)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "climbing"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
