@@ -1168,6 +1168,7 @@
             "actorResource",
             "feat",
             "spell",
+            "effect",
 
             "asi",
 
@@ -1340,6 +1341,13 @@
             },
             "specialMaterials": {
                 "specialMaterials": {}
+            },
+            "itemDuration": {
+                "activeDuration": {
+                    "unit": "",
+                    "value": 0,
+                    "activationTime": 0
+                }
             }
         },
         "asi": {
@@ -1773,7 +1781,7 @@
         },
         "starshipSpecialAbility": {
           "templates": ["itemDescription"]
-      },
+        },
         "starshipThruster": {
             "templates": ["starshipComponent", "itemDescription", "modifiers", "specialMaterials"],
             "supportedSize": "",
@@ -1921,7 +1929,6 @@
             "templates": ["itemDescription", "physicalItem", "itemUsage", "modifiers", "container"],
             "weaponType": "any"
         },
-
         "actorResource": {
             "templates": ["itemDescription", "modifiers"],
             "type": null,
@@ -1936,6 +1943,11 @@
                 "showOwnerAndGMOnly": false,
                 "visualization": []
             }
+        },
+        "effect": {
+            "templates": ["itemDescription", "modifiers", "itemDuration"],
+            "type": "",
+            "active": false
         }
     }
 }

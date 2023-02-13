@@ -120,6 +120,7 @@ export class CombatSFRPG extends Combat {
         let nextPhase = this.flags.sfrpg.phase;
         let nextTurn = this.turn - 1;
 
+        const updateOptions = {};
         const currentPhase = this.getCurrentPhase();
         if (currentPhase.resetInitiative) {
             ui.notifications.error(game.i18n.format(CombatSFRPG.errors.historyLimitedResetInitiative), {permanent: false});
@@ -155,6 +156,12 @@ export class CombatSFRPG extends Combat {
                     return;
                 }
             }
+
+            let round = Math.max(this.round - 1, 0);
+            let advanceTime = -1 * (this.turn || 0) * CONFIG.time.turnTime;
+            if ( round > 0 ) advanceTime -= CONFIG.time.roundTime;
+            updateOptions.advanceTime = advanceTime;
+            updateOptions.direction = -1;
         }
 
         if (nextPhase !== this.flags.sfrpg.phase || nextRound !== this.round) {
@@ -168,7 +175,7 @@ export class CombatSFRPG extends Combat {
             }
         }
 
-        await this._handleUpdate(nextRound, nextPhase, nextTurn);
+        await this._handleUpdate(nextRound, nextPhase, nextTurn, updateOptions);
     }
 
     async nextTurn() {
@@ -180,6 +187,7 @@ export class CombatSFRPG extends Combat {
         let nextPhase = this.flags.sfrpg.phase;
         let nextTurn = this.turn + 1;
 
+        const updateOptions = {};
         const phases = this.getPhases();
         const currentPhase = phases[this.flags.sfrpg.phase];
         if (currentPhase.resetInitiative && this.hasCombatantsWithoutInitiative()) {
@@ -229,6 +237,10 @@ export class CombatSFRPG extends Combat {
             } else {
                 nextTurn = 0;
             }
+
+            let advanceTime = Math.max(this.turns.length - this.turn, 0) * CONFIG.time.turnTime;
+            updateOptions.advanceTime = advanceTime + CONFIG.time.roundTime;
+            updateOptions.direction = 1;
         }
 
         if (nextPhase !== this.flags.sfrpg.phase) {
@@ -242,7 +254,7 @@ export class CombatSFRPG extends Combat {
             }
         }
 
-        await this._handleUpdate(nextRound, nextPhase, nextTurn);
+        await this._handleUpdate(nextRound, nextPhase, nextTurn, updateOptions);
     }
 
     async previousRound() {
@@ -268,7 +280,11 @@ export class CombatSFRPG extends Combat {
             }
         }
 
-        await this._handleUpdate(nextRound, nextPhase, nextTurn);
+        let round = Math.max(this.round - 1, 0);
+        let advanceTime = -1 * (this.turn || 0) * CONFIG.time.turnTime;
+        if ( round > 0 ) advanceTime -= CONFIG.time.roundTime;
+
+        await this._handleUpdate(nextRound, nextPhase, nextTurn, {advanceTime, direction: -1});
     }
 
     async nextRound() {
@@ -290,10 +306,12 @@ export class CombatSFRPG extends Combat {
             }
         }
 
-        await this._handleUpdate(nextRound, nextPhase, nextTurn);
+        let advanceTime = Math.max(this.turns.length - this.turn, 0) * CONFIG.time.turnTime;
+
+        await this._handleUpdate(nextRound, nextPhase, nextTurn, {advanceTime: advanceTime + CONFIG.time.roundTime, direction: 1});
     }
 
-    async _handleUpdate(nextRound, nextPhase, nextTurn) {
+    async _handleUpdate(nextRound, nextPhase, nextTurn, updateOptions = {}) {
         const phases = this.getPhases();
         const currentPhase = phases[this.flags.sfrpg.phase];
         const newPhase = phases[nextPhase];
@@ -327,8 +345,7 @@ export class CombatSFRPG extends Combat {
             turn: nextTurn
         };
 
-        const advanceTime = CONFIG.time.turnTime;
-        await this.update(updateData, {advanceTime});
+        await this.update(updateData, updateOptions);
 
         if (eventData.isNewPhase) {
             if (newPhase.resetInitiative) {

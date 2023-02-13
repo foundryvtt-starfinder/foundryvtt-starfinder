@@ -163,6 +163,8 @@ Hooks.once('init', async function() {
     CONFIG.Combat.documentClass = CombatSFRPG;
     CONFIG.Dice.rolls.unshift(SFRPGRoll);
 
+    CONFIG.time.roundTime = 6;
+
     CONFIG.Token.documentClass = SFRPGTokenDocument;
 
     CONFIG.fontDefinitions["Exo2"] = {

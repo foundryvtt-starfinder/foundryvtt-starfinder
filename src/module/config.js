@@ -139,6 +139,18 @@ SFRPG.abilityActivationTypes = {
     "special": "SFRPG.AbilityActivationTypesSpecial"
 };
 
+/**
+ * possible effect duration types
+ * @type {Object}
+ */
+SFRPG.effectDurationTypes = {
+    "none": "SFRPG.EffectDurationTypesNone",
+    "rounds": "SFRPG.EffectDurationTypesRounds",
+    "minutes": "SFRPG.EffectDurationTypesMinutes",
+    "hours": "SFRPG.EffectDurationTypesHours",
+    "Days": "SFRPG.EffectDurationTypesDays"
+};
+
 SFRPG.skillProficiencyLevels = {
     0: "",
     3: "SFRPG.SkillProficiencyLevelClassSkill"
@@ -1634,6 +1646,7 @@ SFRPG.itemTypes = {
     "actorResource": "ITEM.TypeActorresource",
     "feat": "SFRPG.Items.Categories.Feats",
     "spell": "SFRPG.Items.Categories.Spells",
+    "effect": "SFRPG.Items.Categories.Effect",
 
     "asi": "SFRPG.Items.Categories.AbilityScoreIncrease",
 
@@ -1688,7 +1701,8 @@ SFRPG.characterDefinitionItemTypes = [
 SFRPG.sharedItemTypes = [
     "actorResource",
     "feat",
-    "spell"
+    "spell",
+    "effect"
 ];
 
 SFRPG.playerCharacterDefinitionItemTypes = [

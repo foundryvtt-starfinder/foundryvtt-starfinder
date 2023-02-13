@@ -1,5 +1,4 @@
 <form class="{{cssClass}} flexcol" autocomplete="off">
-
     {{!-- Item Sheet Header --}}
     <header class="sheet-header flexrow">
         <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img"/>
@@ -46,33 +45,8 @@
 
             <h3 class="form-header noborder">{{ localize "SFRPG.Items.Feat.FeatureUsage" }}</h3>
 
-            {{!-- Item Activation Template --}}
-            {{> "systems/sfrpg/templates/items/parts/item-activation.hbs"}}
+            {{> "systems/sfrpg/templates/items/parts/item-duration.hbs"}}
 
-            {{!-- Recharge Requirement --}}
-            {{#if itemData.activation.type}}
-            <div class="form-group recharge">
-                <label>{{ localize "SFRPG.Items.Feat.ActionRecharge" }}</label>
-                <div class="form-fields">
-                    <span>{{ localize "SFRPG.Items.Feat.RechargeOn" }}</span>
-                    <input type="text" name="system.recharge.value" value="{{itemData.recharge.value}}"
-                           data-dtype="Number" placeholder="1d6 Result"/>
-                    <label class="checkbox">
-                        {{ localize "SFRPG.Items.Feat.Charged" }}
-                        <input type="checkbox" name="system.recharge.charged" {{checked itemData.recharge.charged}}/>
-                    </label>
-                </div>
-            </div>
-            {{/if}}
-
-            {{!-- Descriptors Selector --}}
-            {{> "systems/sfrpg/templates/items/parts/item-descriptors.hbs"}}
-
-            <br />
-
-            {{!-- Item Action Template --}}
-            <h3 class="form-header noborder">{{ localize "SFRPG.Items.Feat.FeatureAttack" }}</h3>
-            {{> "systems/sfrpg/templates/items/parts/item-action.hbs"}}
         </div>
 
         {{!-- Modifiers Tab --}}

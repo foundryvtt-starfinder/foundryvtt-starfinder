@@ -1,0 +1,14 @@
+<div class="form-group input-select">
+    <label>Duration</label>
+    <div class="form-fields">
+        <input type="text" name="system.duration.value" value="{{itemData.duration.value}}" data-dtype="Number" placeholder="-"/>
+        <select name="system.duration.type">
+            {{#select itemData.duration.type}}
+            <option value=""></option>
+            {{#each config.effectDurationTypes as |name key|}}
+            <option value="{{key}}">{{name}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+    </div>
+</div>
