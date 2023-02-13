@@ -410,19 +410,24 @@ function sanitizeJSON(jsonInput) {
         }
 
         // If core or sfrpg is empty, delete it
-        if ((typeof item?.flags?.core === "object" && item?.flags?.core !== null) && Object.entries(item?.flags?.core)?.length === 0) {
+        if ((typeof item?.flags?.core === "object" && item?.flags?.core !== null) // If an object
+            && Object.entries(item?.flags?.core)?.length === 0) { // And is empty
             delete item.flags.core;
         }
 
-        if ((typeof item?.flags?.sfrpg === "object" && item?.flags?.sfrpg !== null) && Object.entries(item?.flags?.sfrpg)?.length === 0) {
+        if ((typeof item?.flags?.sfrpg === "object" && item?.flags?.sfrpg !== null)
+            && Object.entries(item?.flags?.sfrpg)?.length === 0) {
             delete item.flags.sfrpg;
         }
 
         // If flags is now empty, delete it entirely
-        if ((typeof item.flags === "object" && item.flags !== null) && Object.entries(item?.flags)?.length === 0) {
+        if ((typeof item.flags === "object" && item.flags !== null)
+            && Object.entries(item?.flags)?.length === 0) {
             delete item.flags;
         }
     };
+
+    delete jsonInput?.flags?.core?.sourceId;
 
     treeShake(jsonInput);
     cleanFlags(jsonInput);

@@ -41,7 +41,7 @@ export default function(engine) {
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
-                    type: bonus.type.capitalize(),
+                    type: game.i18n.format(`SFRPG.ModifierType${bonus.type.capitalize()}`),
                     mod: computedBonus.signedString(),
                     source: bonus.name
                 }));
@@ -68,8 +68,7 @@ export default function(engine) {
                 for (const bonus of mod[1]) {
                     sum += addModifier(bonus, fact.data, skillModifier, "SFRPG.ACPTooltip");
                 }
-            }
-            else {
+            } else {
                 sum += addModifier(mod[1], fact.data, skillModifier, "SFRPG.ACPTooltip");
             }
 
