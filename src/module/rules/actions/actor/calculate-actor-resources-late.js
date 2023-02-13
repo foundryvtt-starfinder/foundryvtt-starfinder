@@ -1,4 +1,4 @@
-import { SFRPGModifierType, SFRPGModifierTypes, SFRPGEffectType } from "../../../modifiers/types.js";
+import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
 
 export default function(engine) {
     engine.closures.add('calculateActorResourcesLate', (fact, context) => {
@@ -27,7 +27,7 @@ export default function(engine) {
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
-                    type: bonus.type.capitalize(),
+                    type: game.i18n.format(`SFRPG.ModifierType${bonus.type.capitalize()}`),
                     mod: computedBonus.signedString(),
                     source: bonus.name
                 }));
@@ -79,8 +79,7 @@ export default function(engine) {
                             for (const bonus of curr[1]) {
                                 sum += addModifier(bonus, data, finalActorResource, "SFRPG.ACTooltipBonus");
                             }
-                        }
-                        else {
+                        } else {
                             sum += addModifier(curr[1], data, finalActorResource, "SFRPG.ACTooltipBonus");
                         }
 
@@ -116,8 +115,7 @@ export default function(engine) {
                             for (const bonus of mod) {
                                 resourceMod = addModifier(bonus, data, finalActorResource, "SFRPG.ACTooltipBonus");
                             }
-                        }
-                        else {
+                        } else {
                             resourceMod = addModifier(mod, data, finalActorResource, "SFRPG.ACTooltipBonus");
                         }
 
