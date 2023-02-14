@@ -47,11 +47,17 @@ function _browserOnClick(ev, data) {
         case "alien":
             browser = getAlienArchiveBrowser();
             break;
+        default:
+            ui.notifications.error("Invalid type.");
     }
     if (browser) browser.renderWithFilters(filters);
-    else return ui.notifications.error("Invalid type.");
 }
 
+/**
+ * Abstract base class for enrichers which carries validation and basic element creation
+ * @abstract
+ * @class
+ */
 class BaseEnricher {
 
     /** @type {CustomEnricher} */
@@ -179,14 +185,17 @@ export class BrowserEnricher extends BaseEnricher {
         super();
     }
 
+    /** @inheritdoc */
     get enricherType() {
         return "Browser";
     }
 
+    /** @inheritdoc */
     get validTypes() {
         return ["spell", "equipment", "starship", "alien"];
     }
 
+    /** @inheritdoc */
     get icons() {
         return {
             equipment: "fa-gun",
@@ -196,7 +205,9 @@ export class BrowserEnricher extends BaseEnricher {
         };
     }
 
-    /** @returns {HTMLAnchorElement} */
+    /**
+     * @extends BaseEnricher
+     * @returns {HTMLAnchorElement} */
     createElement() {
         const a = super.createElement();
 
