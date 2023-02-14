@@ -103,7 +103,7 @@ class BaseEnricher {
         if (this.match[3]) this.name = this.match[3];
         else this.name = undefined;
 
-        this.parseArgs(this.match);
+        this.parseArgs();
 
         // Early return an error element if invalid
         if (!this.typeIsValid()) return this.element;
