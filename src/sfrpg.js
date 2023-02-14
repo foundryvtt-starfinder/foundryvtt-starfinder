@@ -48,8 +48,9 @@ import templateOverrides from "./module/template-overrides.js";
 import { preloadHandlebarsTemplates } from "./module/templates.js";
 import { generateUUID } from "./module/utilities.js";
 
+import { BrowserEnricher } from "./module/enrichers.js";
+
 import RollDialog from "./module/apps/roll-dialog.js";
-import setupEnrichers from "./module/enrichers.js";
 import { initializeBrowsers } from "./module/packs/browsers.js";
 import SFRPGRoll from "./module/rolls/roll.js";
 import RollContext from "./module/rolls/rollcontext.js";
@@ -380,8 +381,8 @@ Hooks.once("ready", async () => {
     console.log("Starfinder | [SETUP] Setting up Vision Modes");
     setupVision();
 
-    console.log("Starfinder | [SETUP] Setting up Custom Enrichers");
-    setupEnrichers();
+    console.log("Starfinder | [SETUP] Setting up custom enrichers");
+    CONFIG.TextEditor.enrichers.push(new BrowserEnricher());
 
     console.log("Starfinder | [READY] Applying artwork from modules to compendiums");
     registerCompendiumArt();

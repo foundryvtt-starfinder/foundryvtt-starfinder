@@ -1900,3 +1900,5 @@ SFRPG.floatingHPValues = {
         negative: { fill: 0xd90069 }
     }
 };
+
+SFRPG.enricherTypes = ["Browser"];
