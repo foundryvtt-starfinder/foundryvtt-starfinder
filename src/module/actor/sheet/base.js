@@ -565,17 +565,10 @@ export class ActorSheetSFRPG extends ActorSheet {
 
     async _onOpenBrowser(event) {
         event.preventDefault();
-        const filterType = event.currentTarget.dataset.type;
-        const classesToFilters = {
-            'mystic': 'myst',
-            'precog': 'precog',
-            'technomancer': 'tech',
-            'witchwarper': 'wysh'
-        };
+        const data = event.currentTarget.dataset;
         let browser;
-        let activeFilters = {};
 
-        switch (filterType) {
+        switch (data.type) {
             case 'weapon':
             case 'shield':
             case 'equipment':
@@ -587,20 +580,15 @@ export class ActorSheetSFRPG extends ActorSheet {
             case 'fusion,upgrade,weaponAccessory':
             case 'augmentation':
                 browser = getEquipmentBrowser();
-                browser.renderWithFilters({equipmentTypes: filterType.split(',')});
+                browser.renderWithFilters({equipmentTypes: data.type.split(',')});
                 break;
             case 'spell':
                 browser = getSpellBrowser();
-                activeFilters.levels = [event.currentTarget.dataset.level];
-                // eslint-disable-next-line no-case-declarations
-                let classes = event.currentTarget.dataset.classes;
-                if (classes) {
-                    classes = classes.split(',');
-                    activeFilters.classes = [];
-                    for (let spellFilterI = 0; spellFilterI < classes.length; spellFilterI++) {
-                        activeFilters.classes.push(classesToFilters[classes[spellFilterI]]);
-                    }
-                }
+
+                browser.renderWithFilters({
+                    levels: [data.level],
+                    classes: data.classes.split(',').filter(i => !!i)
+                });
 
                 break;
             case 'class':

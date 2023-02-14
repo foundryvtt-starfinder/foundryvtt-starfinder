@@ -425,39 +425,6 @@ export class DocumentBrowserSFRPG extends Application {
     async renderWithFilters(filterObject = {}) {
         console.log(this);
 
-        const classesToFilters = {
-            'mystic': 'myst',
-            'precog': 'precog',
-            'technomancer': 'tech',
-            'witchwarper': 'wysh'
-        };
-
-        /*         switch (filter) {
-        case 'spell':
-            activeFilters.levels = [event.currentTarget.dataset.level];
-            // eslint-disable-next-line no-case-declarations
-            let classes = event.currentTarget.dataset.classes;
-            if (classes) {
-                for (let className of classes) {
-                    activeFilters.classes.push(classesToFilters[className]);
-                }
-            }
-
-            break;
-        case 'class':
-        case 'race':
-        case 'theme':
-        case 'asi':
-        case 'archetypes':
-        case 'feat':
-        case 'actorResource':
-            // TODO: wait for Features Browser then implement this.
-            break;
-
-        default:
-            break;
-        } */
-
         if (!this._element) {
             this.render(true);
         }

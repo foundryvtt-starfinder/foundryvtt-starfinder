@@ -1,5 +1,5 @@
-import { DocumentBrowserSFRPG } from './document-browser.js';
 import { SFRPG } from "../config.js";
+import { DocumentBrowserSFRPG } from './document-browser.js';
 
 class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
     static get defaultOptions() {
@@ -110,6 +110,57 @@ class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
         let itemUuid = element.dataset.entryUuid;
         let item = this.items.find(x => x.uuid === itemUuid);
         return item && filters.includes(item.system?.school);
+    }
+
+    /**
+     * @typedef  {object} filterObjectSpell
+     * @property {string[]} levels Drawn from SFRPG.spellLevels
+     * @property {string[]} classes Drawn from SFRPG.spellcastingClasses
+     * @property {string[]} schools Drawn from SFRPG.spellSchools
+     * @see {config.js}
+     */
+    /**
+     * Prepare the filter object before calling the parent method
+     * @param {filterObjectSpell} filters A filter object
+     */
+    renderWithFilters(filters = {}) {
+        let filterObject = filters;
+
+        if (filters.classes) {
+            const classesToFilters = {
+                'mystic': 'myst',
+                'precog': 'precog',
+                'technomancer': 'tech',
+                'witchwarper': 'wysh'
+            };
+
+            filters.classes = filters.classes instanceof Array ? filters.classes : [filters.classes];
+            filters.classes = filters.classes.map(i => classesToFilters[i] || i);
+        }
+
+        if (filters.levels) {
+            filters.levels = filters.levels instanceof Array ? filters.levels : [filters.levels];
+            filters.levels = filters.levels.map(i => String(i));
+        }
+
+        if (filters.schools) {
+            const schoolsToFilters = {
+                "abjuration": "abj",
+                "conjuration": "con",
+                "divination": "div",
+                "enchantment": "enc",
+                "evocation": "evo",
+                "illusion": "ill",
+                "necromancy": "nec",
+                "transmutation": "trs",
+                "universal": "uni"
+            };
+
+            filters.schools = filters.schools instanceof Array ? filters.schools : [filters.schools];
+            filters.schools = filters.schools.map(i => schoolsToFilters[i] || i);
+        }
+
+        return super.renderWithFilters(filterObject);
     }
 }
 

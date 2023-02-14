@@ -62,8 +62,16 @@ class BaseEnricher {
 
     /** @type {CustomEnricher} */
     constructor() {
-        this.pattern = new RegExp(`(@${this.enricherType})\\[(.+?)\\](?:{(.+?)})?`, "gm");
+        this.pattern = this.regex;
         this.enricher = this.enricherFunc.bind(this);
+    }
+
+    /**
+     * The RegExp to capture the text.
+     * @returns {RegExp}
+     */
+    get regex() {
+        return new RegExp(`(@${this.enricherType})\\[(.+[^\\[\\]]?)\\](?:{(.*?)})?`, "gm");
     }
 
     /**
@@ -76,7 +84,7 @@ class BaseEnricher {
 
     /**
      * Valid options for the type argument
-     * @returns {Array}
+     * @returns {String[]}
      */
     get validTypes() {
         return [];
@@ -102,8 +110,10 @@ class BaseEnricher {
 
         if (this.match[3]) this.name = this.match[3];
         else this.name = undefined;
+        console.log(this.match);
 
         this.parseArgs();
+        console.log(this.args);
 
         // Early return an error element if invalid
         if (!this.typeIsValid()) return this.element;
