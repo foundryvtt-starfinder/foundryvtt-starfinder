@@ -10,7 +10,7 @@ import { getStarshipBrowser } from "./packs/starship-browser.js";
  */
 
 const enricherListeners = {
-    Browser: _browserOnClick
+    "Browser": _browserOnClick
 };
 
 Hooks.on("renderJournalPageSheet", (app, html, options) => {
