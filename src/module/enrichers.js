@@ -18,7 +18,6 @@ Hooks.on("renderJournalPageSheet", (app, html, options) => {
         const enricherListener = enricherListeners[action];
         html[2]?.querySelectorAll(`a[data-action=${action}]`)
             ?.forEach(i => {
-
                 i.addEventListener("click", (ev) => enricherListener(ev, i.dataset));
             });
 
