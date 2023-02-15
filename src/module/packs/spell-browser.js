@@ -113,7 +113,7 @@ class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     /**
-     * @typedef  {object} filterObjectSpell
+     * @typedef  {object} FilterObjectSpell
      * @property {string[]} levels Drawn from SFRPG.spellLevels
      * @property {string[]} classes Drawn from SFRPG.spellcastingClasses
      * @property {string[]} schools Drawn from SFRPG.spellSchools
@@ -121,7 +121,7 @@ class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
      */
     /**
      * Prepare the filter object before calling the parent method
-     * @param {filterObjectSpell} filters A filter object
+     * @param {FilterObjectSpell} filters A filter object
      */
     renderWithFilters(filters = {}) {
         let filterObject = filters;

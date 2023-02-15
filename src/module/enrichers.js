@@ -110,10 +110,8 @@ class BaseEnricher {
 
         if (this.match[3]) this.name = this.match[3];
         else this.name = undefined;
-        console.log(this.match);
 
         this.parseArgs();
-        console.log(this.args);
 
         // Early return an error element if invalid
         if (!this.typeIsValid()) return this.element;
@@ -191,6 +189,8 @@ class BaseEnricher {
 
 export class BrowserEnricher extends BaseEnricher {
     // E.g @Browser[type:equipment|filters:{"equipmentTypes":"weapon","weaponTypes":"smallA","weaponCategories":"cryo","search":"Big Gun"}]
+    // @Browser[type:spell|filters:{"classes":["mystic","technomancer"],"levels":[0,1,2],"schools":"conjuration"}]{Some cool spells}
+    // @Browser[type:starship|filters:{"starshipComponentTypes":["starshipWeapon"], "starshipWeaponTypes":"ecm","starshipWeaponClass":"heavy"}]
     constructor() {
         super();
     }

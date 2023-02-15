@@ -204,7 +204,7 @@ class EquipmentBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     /**
-     * @typedef  {object} filterObjectEquipment
+     * @typedef  {object} FilterObjectEquipment
      * @property {string[]} equipmentTypes Drawn from SFRPG.itemTypes
      * @property {string[]} weaponTypes Drawn from SFRPG.weaponTypes
      * @property {string[]} weaponCategories Drawn from SFRPG.weaponCategories
@@ -212,7 +212,7 @@ class EquipmentBrowserSFRPG extends DocumentBrowserSFRPG {
      */
     /**
      * Prepare the filter object before calling the parent method
-     * @param {filterObjectEquipment} filters A filter object
+     * @param {FilterObjectEquipment} filters A filter object
      */
     renderWithFilters(filters = {}) {
         let filterObject = filters;
