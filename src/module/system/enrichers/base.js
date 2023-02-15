@@ -152,6 +152,7 @@ export default class BaseEnricher {
 
 const sheets = [
     "ActorSheet",
+    "ItemSummary",
     "ItemCollectionSheet",
     "ItemSheet",
     "ChatMessage"
@@ -171,8 +172,8 @@ for (const sheet of sheets) {
 }
 
 Hooks.on("renderJournalPageSheet", (app, html, options) => {
-    for (const action of CONFIG.SFRPG.enricherTypes) {
-        const enricherListener = enricherListeners[action];
+    for (const [action, cls] of Object.entries(CONFIG.SFRPG.enricherTypes)) {
+        const enricherListener = cls.listener;
         html[2]?.querySelectorAll(`a[data-action=${action}]`)
             ?.forEach(i => {
                 i.addEventListener("click", (ev) => enricherListener(ev, i.dataset));

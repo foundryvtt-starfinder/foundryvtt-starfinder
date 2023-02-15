@@ -209,6 +209,7 @@ export class ItemCollectionSheet extends DocumentSheet {
             summary.slideUp(200, () => summary.remove());
         } else {
             let div = $(`<div class="item-summary">${chatData.system.description.value}</div>`);
+            Hooks.callAll("renderItemSummary", this, div, {}); // Event listeners need to be added to newly added HTML.
             let props = $(`<div class="item-properties"></div>`);
             chatData.properties.forEach(p => props.append(`<span class="tag" ${ p.tooltip ? ("data-tippy-content='" + p.tooltip + "'") : ""}>${p.name}</span>`));
 
