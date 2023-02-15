@@ -1,5 +1,5 @@
-import { ActorSheetSFRPG } from "./base.js";
 import { SFRPG } from "../../config.js";
+import { ActorSheetSFRPG } from "./base.js";
 
 /**
  * An Actor sheet for NPC type characters in the SFRPG system.
@@ -19,8 +19,8 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         const options = super.defaultOptions;
         mergeObject(options, {
             classes: options.classes.concat(['sfrpg', 'actor', 'sheet', 'npc']),
-            width: 720,
-            height: 765
+            width: 720
+            // height: 765
         });
 
         return options;
@@ -128,8 +128,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
                     arr[1].push(item); // other
                 }
                 item.isFeat = true;
-            }
-            else if (item.type === "actorResource") arr[4].push(item); // actorResources
+            } else if (item.type === "actorResource") arr[4].push(item); // actorResources
             else arr[1].push(item); // other
             return arr;
         }, [[], [], [], [], []]);
@@ -152,12 +151,10 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
                     features.weapons.items.push(item);
                 }
                 itemsToProcess.push(item);
-            }
-            else if (item.type === "feat") {
+            } else if (item.type === "feat") {
                 if (item.system.activation.type) features.actions.items.push(item);
                 else features.passive.items.push(item);
-            }
-            else if (["consumable", "technological"].includes(item.type)) {
+            } else if (["consumable", "technological"].includes(item.type)) {
                 item.isOpen = item.system.container?.isOpen === undefined ? true : item.system.container.isOpen;
                 if (!item.system.containerId) {
                     features.activeItems.items.push(item);

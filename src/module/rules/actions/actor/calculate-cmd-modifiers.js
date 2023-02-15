@@ -24,7 +24,7 @@ export default function(engine) {
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
-                    type: bonus.type.capitalize(),
+                    type: game.i18n.format(`SFRPG.ModifierType${bonus.type.capitalize()}`),
                     mod: computedBonus.signedString(),
                     source: bonus.name
                 }));
@@ -46,8 +46,7 @@ export default function(engine) {
                 for (const bonus of curr[1]) {
                     prev += addModifier(bonus, fact.data, cmd, "SFRPG.CMDModiferTooltip");
                 }
-            }
-            else {
+            } else {
                 prev += addModifier(curr[1], fact.data, cmd, "SFRPG.CMDModiferTooltip");
             }
 

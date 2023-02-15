@@ -1,6 +1,6 @@
+import FloatingNumberMenu from "./classes/floating-number-menu.js";
 import { SFRPG } from "./config.js";
 import { ItemSFRPG } from "./item/item.js";
-import FloatingNumberMenu from "./classes/floating-number-menu.js";
 
 export const registerSystemSettings = function() {
     game.settings.register("sfrpg", "diagonalMovement", {
@@ -182,7 +182,7 @@ export const registerSystemSettings = function() {
         hint: "SFRPG.Settings.DamageRoundingAdvantage.Hint",
         scope: "world",
         config: true,
-        default: "attacker",
+        default: "defender",
         type: String,
         choices: {
             "attacker": "SFRPG.Settings.DamageRoundingAdvantage.ValueAttacker",

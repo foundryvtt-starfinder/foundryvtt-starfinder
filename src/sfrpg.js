@@ -180,8 +180,15 @@ Hooks.once('init', async function() {
     CONFIG.fontDefinitions["Exo2"] = {
         editor: true,
         fonts: [
-            {urls: ["../systems/sfrpg/fonts/Exo2-VariableFont_wght.ttf"]},
-            {urls: ["../systems/sfrpg/fonts/Exo2-Italic-VariableFont_wght.ttf"], weight: 700}
+            {urls: ["../systems/sfrpg/fonts/exo2-variablefont_wght.woff2"]},
+            {urls: ["../systems/sfrpg/fonts/exo2-italic-variablefont_wght.woff2"], weight: 700}
+        ]
+    };
+
+    CONFIG.fontDefinitions["Orbitron"] = {
+        editor: true,
+        fonts: [
+            {urls: ["../systems/sfrpg/fonts/orbitron-variablefont_wght.woff2"]}
         ]
     };
 
@@ -477,16 +484,16 @@ Hooks.on("hotbarDrop", (bar, data, slot) => {
 });
 
 function registerMathFunctions() {
-    Math.lookup = function(value) {
+    function lookup(value) {
         for (let i = 1; i < arguments.length - 1; i += 2) {
             if (arguments[i] === value) {
                 return arguments[i + 1];
             }
         }
         return 0;
-    };
+    }
 
-    Math.lookupRange = function(value, lowestValue) {
+    function lookupRange(value, lowestValue) {
         let baseValue = lowestValue;
         for (let i = 2; i < arguments.length - 1; i += 2) {
             if (arguments[i] > value) {
@@ -495,7 +502,19 @@ function registerMathFunctions() {
             baseValue = arguments[i + 1];
         }
         return baseValue;
-    };
+    }
+
+    Roll.MATH_PROXY = mergeObject(Roll.MATH_PROXY, {
+        eq: (a, b) => a === b,
+        gt: (a, b) => a > b,
+        gte: (a, b) => a >= b,
+        lt: (a, b) => a < b,
+        lte: (a, b) => a <= b,
+        ne: (a, b) => a !== b,
+        ternary: (condition, ifTrue, ifFalse) => (condition ? ifTrue : ifFalse),
+        lookup,
+        lookupRange
+    });
 }
 
 /**

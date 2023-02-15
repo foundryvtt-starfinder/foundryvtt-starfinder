@@ -151,6 +151,12 @@ export class ActorSheetSFRPG extends ActorSheet {
             this._prepareTraits(data.system.traits);
         }
 
+        if (data.system.details?.xp?.pct !== null && data.system.details?.xp?.pct !== undefined) {
+            data.system.details.xp.color = Math.round(Math.max((data.system.details.xp.pct / 100), 0) * 255)
+                .toString(16)
+                .padStart(2, "0");
+        }
+
         this._prepareItems(data);
 
         // Enrich text editors. The below are used for character, drone and npc(2). Other types use editors defined in their class.
@@ -1035,6 +1041,11 @@ export class ActorSheetSFRPG extends ActorSheet {
     _onConfigureFlags(event) {
         event.preventDefault();
         new ActorSheetFlags(this.actor).render(true);
+    }
+
+    _onLevelUp(event) {
+        event.preventDefault();
+        this.actor.levelUp(event.currentTarget.dataset.actorClassId);
     }
 
     async _onDrop(event) {
