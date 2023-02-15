@@ -1,3 +1,5 @@
+import BrowserEnricher from "./system/enrichers/browser.js";
+
 // Namespace SFRPG Configuration Values
 export const SFRPG = {};
 
@@ -1901,4 +1903,4 @@ SFRPG.floatingHPValues = {
     }
 };
 
-SFRPG.enricherTypes = ["Browser"];
+SFRPG.enricherTypes = {"Browser": BrowserEnricher};

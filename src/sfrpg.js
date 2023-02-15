@@ -43,12 +43,12 @@ import SFRPGModifier from "./module/modifiers/modifier.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./module/modifiers/types.js";
 import { RPC } from "./module/rpc.js";
 import registerSystemRules from "./module/rules.js";
-import { registerSystemSettings } from "./module/settings.js";
+import { registerSystemSettings } from "./module/system/settings.js";
 import templateOverrides from "./module/template-overrides.js";
 import { preloadHandlebarsTemplates } from "./module/templates.js";
-import { generateUUID } from "./module/utilities.js";
+import { generateUUID } from "./module/utils/utilities.js";
 
-import { BrowserEnricher } from "./module/enrichers.js";
+import BrowserEnricher from "./module/system/enrichers/browser.js";
 
 import RollDialog from "./module/apps/roll-dialog.js";
 import { initializeBrowsers } from "./module/packs/browsers.js";
@@ -56,9 +56,9 @@ import SFRPGRoll from "./module/rolls/roll.js";
 import RollContext from "./module/rolls/rollcontext.js";
 import RollNode from "./module/rolls/rollnode.js";
 import RollTree from "./module/rolls/rolltree.js";
+import registerCompendiumArt from "./module/system/compendium-art.js";
 import { SFRPGTokenHUD } from "./module/token/token-hud.js";
 import SFRPGTokenDocument from "./module/token/tokendocument.js";
-import registerCompendiumArt from "./module/utils/compendium-art.js";
 import setupVision from "./module/vision.js";
 
 import { getAlienArchiveBrowser } from "./module/packs/alien-archive-browser.js";

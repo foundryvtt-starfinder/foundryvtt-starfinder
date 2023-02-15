@@ -1,84 +1,15 @@
-import { getAlienArchiveBrowser } from "./packs/alien-archive-browser.js";
-import { getEquipmentBrowser } from "./packs/equipment-browser.js";
-import { getSpellBrowser } from "./packs/spell-browser.js";
-import { getStarshipBrowser } from "./packs/starship-browser.js";
-
 /**
  * @typedef {Object} CustomEnricher
  * @property {RegExp} pattern
  * @property {EnricherFunction} enricher
  */
 
-const enricherListeners = {
-    "Browser": _browserOnClick
-};
-
-const sheets = [
-    "ActorSheet",
-    "ItemCollectionSheet",
-    "ItemSheet",
-    "ChatMessage"
-];
-
-for (const sheet of sheets) {
-    Hooks.on(`render${sheet}`, (app, html, options) => {
-        for (const action of CONFIG.SFRPG.enricherTypes) {
-            const enricherListener = enricherListeners[action];
-            html[0]?.querySelectorAll(`a[data-action=${action}]`)
-                ?.forEach(i => {
-                    i.addEventListener("click", (ev) => enricherListener(ev, i.dataset));
-                });
-
-        }
-    });
-}
-
-Hooks.on("renderJournalPageSheet", (app, html, options) => {
-    for (const action of CONFIG.SFRPG.enricherTypes) {
-        const enricherListener = enricherListeners[action];
-        html[2]?.querySelectorAll(`a[data-action=${action}]`)
-            ?.forEach(i => {
-                i.addEventListener("click", (ev) => enricherListener(ev, i.dataset));
-            });
-
-    }
-});
-
-function _browserOnClick(ev, data) {
-    let browser, filters;
-
-    // Gotta double parse this to get rid of escape characters from the HTML.
-    try {
-        if (data.filters) filters = JSON.parse(JSON.parse(data.filters));
-    } catch (err) {
-        return ui.notifications.error(`Error parsing filters: ${err}`);
-    }
-
-    switch (data.type) {
-        case "spell":
-            browser = getSpellBrowser();
-            break;
-        case "equipment":
-            browser = getEquipmentBrowser();
-            break;
-        case "starship":
-            browser = getStarshipBrowser();
-            break;
-        case "alien":
-            browser = getAlienArchiveBrowser();
-            break;
-        default:
-            ui.notifications.error("Invalid type.");
-    }
-    if (browser) browser.renderWithFilters(filters);
-}
-
 /**
  * Abstract base class for enrichers which carries validation and basic element creation
  * @abstract
  * @class
  */
-class BaseEnricher {
+export default class BaseEnricher {
 
     /** @type {CustomEnricher} */
     constructor() {
@@ -205,48 +136,47 @@ class BaseEnricher {
 
         return a;
     }
-}
-
-export class BrowserEnricher extends BaseEnricher {
-    // E.g @Browser[type:equipment|filters:{"equipmentTypes":"weapon","weaponTypes":"smallA","weaponCategories":"cryo","search":"Big Gun"}]
-    // @Browser[type:spell|filters:{"classes":["mystic","technomancer"],"levels":[0,1,2],"schools":"conjuration"}]{Some cool spells}
-    // @Browser[type:starship|filters:{"starshipComponentTypes":["starshipWeapon"], "starshipWeaponTypes":"ecm","starshipWeaponClass":"heavy"}]
-    constructor() {
-        super();
-    }
-
-    /** @inheritdoc */
-    get enricherType() {
-        return "Browser";
-    }
-
-    /** @inheritdoc */
-    get validTypes() {
-        return ["spell", "equipment", "starship", "alien"];
-    }
-
-    /** @inheritdoc */
-    get icons() {
-        return {
-            equipment: "fa-gun",
-            spell: "fa-sparkles",
-            starship: "fa-rocket",
-            alien: "fa-alien"
-        };
-    }
 
     /**
-     * @extends BaseEnricher
-     * @returns {HTMLAnchorElement} */
-    createElement() {
-        const a = super.createElement();
+     * A callback function to run when the element is clicked.
+     * @param {Event} ev The DOM event that triggers the listener
+     * @param {HTMLDataset} data The element's dataset
+     * @returns {*}
+     */
+    static listener(ev, data) {}
+}
 
-        if (this.args.filters) a.dataset.filters = JSON.stringify(this.args.filters);
+/** --------------------------------
+ * Add listeners
+    ----------------------------- */
 
-        a.innerHTML = `<i class="fas ${this.icons[this.args.type]}"></i>${this.name}`;
+const sheets = [
+    "ActorSheet",
+    "ItemCollectionSheet",
+    "ItemSheet",
+    "ChatMessage"
+];
 
-        return a;
+for (const sheet of sheets) {
+    Hooks.on(`render${sheet}`, (app, html, options) => {
+        for (const [action, cls] of Object.entries(CONFIG.SFRPG.enricherTypes)) {
+            const enricherListener = cls.listener;
+            html[0]?.querySelectorAll(`a[data-action=${action}]`)
+                ?.forEach(i => {
+                    i.addEventListener("click", (ev) => enricherListener(ev, i.dataset));
+                });
+
+        }
+    });
+}
+
+Hooks.on("renderJournalPageSheet", (app, html, options) => {
+    for (const action of CONFIG.SFRPG.enricherTypes) {
+        const enricherListener = enricherListeners[action];
+        html[2]?.querySelectorAll(`a[data-action=${action}]`)
+            ?.forEach(i => {
+                i.addEventListener("click", (ev) => enricherListener(ev, i.dataset));
+            });
 
     }
-
-}
+});
