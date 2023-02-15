@@ -1,8 +1,6 @@
 import { ActorSheetFlags } from "../../apps/actor-flags.js";
 import { ActorMovementConfig } from "../../apps/movement-config.js";
 import { TraitSelectorSFRPG } from "../../apps/trait-selector.js";
-import { getEquipmentBrowser } from "../../packs/equipment-browser.js";
-import { getSpellBrowser } from "../../packs/spell-browser.js";
 
 import { RPC } from "../../rpc.js";
 import { ActorItemHelper, containsItems, getFirstAcceptableStorageIndex, moveItemBetweenActorsAsync } from "../actor-inventory-utils.js";
@@ -10,8 +8,11 @@ import { ActorItemHelper, containsItems, getFirstAcceptableStorageIndex, moveIte
 import { InputDialog } from "../../apps/input-dialog.js";
 import { ItemDeletionDialog } from "../../apps/item-deletion-dialog.js";
 import { SFRPG } from "../../config.js";
-
 import { ItemSFRPG } from "../../item/item.js";
+
+import { getEquipmentBrowser } from "../../packs/equipment-browser.js";
+import { getSpellBrowser } from "../../packs/spell-browser.js";
+import { getStarshipBrowser } from "../../packs/starship-browser.js";
 /**
  * Extend the basic ActorSheet class to do all the SFRPG things!
  * This sheet is an Abstract layer which is not used.
@@ -590,12 +591,10 @@ export class ActorSheetSFRPG extends ActorSheet {
                 break;
             case 'spell':
                 browser = getSpellBrowser();
-
                 browser.renderWithFilters({
                     levels: [data.level],
                     classes: data.classes.split(',').filter(i => !!i)
                 });
-
                 break;
             case 'class':
             case 'race':
@@ -606,7 +605,12 @@ export class ActorSheetSFRPG extends ActorSheet {
             case 'actorResource':
             // TODO: wait for Features Browser then implement this.
                 break;
-
+            case 'starshipWeapon':
+                browser = getStarshipBrowser();
+                browser.renderWithFilters({
+                    starshipComponentTypes: data.type
+                });
+                break;
             default:
                 browser = getEquipmentBrowser();
                 break;
