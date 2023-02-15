@@ -663,8 +663,8 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
         let li = $(event.currentTarget).parents('.action');
 
-        const filter = index.filter(i => i.name === (li.prevObject[0].innerHTML));
-        const item = await pack.getDocument(filter[0]._id);
+        const doc = index.find(i => i.name === (li.prevObject[0].innerHTML));
+        const item = await pack.getDocument(doc._id);
         const chatData = await item.getChatData({ secrets: this.actor.isOwner, rollData: this.actor.system });
 
         let content = `<p><strong>${game.i18n.localize("SFRPG.StarshipSheet.Actions.Tooltips.NormalEffect")}:</strong> ${chatData.effectNormal}</p>`;
