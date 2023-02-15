@@ -423,7 +423,6 @@ export class DocumentBrowserSFRPG extends Application {
      *         filterObjectStarship} filterObject An object containing valid filters for one of the browser types.
      */
     async renderWithFilters(filterObject = {}) {
-        console.log(this);
 
         if (!this._element) {
             this.render(true);
