@@ -365,6 +365,9 @@ Hooks.once("setup", function() {
     console.log("Starfinder | [SETUP] Registering custom handlebars");
     setupHandlebars();
 
+    console.log("Starfinder | [SETUP] Setting up custom enrichers");
+    CONFIG.TextEditor.enrichers.push(new BrowserEnricher());
+
     const finishTime = (new Date()).getTime();
     console.log(`Starfinder | [SETUP] Done (operation took ${finishTime - setupTime} ms)`);
 });
@@ -387,9 +390,6 @@ Hooks.once("ready", async () => {
 
     console.log("Starfinder | [SETUP] Setting up Vision Modes");
     setupVision();
-
-    console.log("Starfinder | [SETUP] Setting up custom enrichers");
-    CONFIG.TextEditor.enrichers.push(new BrowserEnricher());
 
     console.log("Starfinder | [READY] Applying artwork from modules to compendiums");
     registerCompendiumArt();

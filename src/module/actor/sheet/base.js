@@ -185,7 +185,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         filterLists.each(this._initializeFilterItemList.bind(this));
         filterLists.on("click", ".filter-item", this._onToggleFilter.bind(this));
 
-        html.find('.item .item-name h4').click(event => this._onItemSummary(event));
+        html.find('.item .item-name h4').click(async event => this._onItemSummary(event));
         html.find('.item .item-name h4').contextmenu(event => this._onItemSplit(event));
 
         if (!this.options.editable) return;
@@ -854,17 +854,17 @@ export class ActorSheetSFRPG extends ActorSheet {
      *
      * @param {Event} event The html event
      */
-    _onItemSummary(event) {
+    async _onItemSummary(event) {
         event.preventDefault();
         let li = $(event.currentTarget).parents('.item'),
             item = this.actor.items.get(li.data('item-id')),
-            chatData = item.getChatData({ secrets: this.actor.isOwner, rollData: this.actor.system });
+            chatData = await item.getChatData({ secrets: this.actor.isOwner, rollData: this.actor.system });
 
         if (li.hasClass('expanded')) {
             let summary = li.children('.item-summary');
             summary.slideUp(200, () => summary.remove());
         } else {
-            const desiredDescription = TextEditor.enrichHTML(chatData.description.short || chatData.description.value, {async: false});
+            const desiredDescription = await TextEditor.enrichHTML(chatData.description.short || chatData.description.value, {async: true});
             let div = $(`<div class="item-summary">${desiredDescription}</div>`);
             let props = $(`<div class="item-properties"></div>`);
             chatData.properties.forEach(p => props.append(`<span class="tag" ${ p.tooltip ? ("data-tippy-content='" + p.tooltip + "'") : ""}>${p.name}</span>`));

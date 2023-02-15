@@ -13,6 +13,26 @@ const enricherListeners = {
     "Browser": _browserOnClick
 };
 
+const sheets = [
+    "ActorSheet",
+    "ItemCollectionSheet",
+    "ItemSheet",
+    "ChatMessage"
+];
+
+for (const sheet of sheets) {
+    Hooks.on(`render${sheet}`, (app, html, options) => {
+        for (const action of CONFIG.SFRPG.enricherTypes) {
+            const enricherListener = enricherListeners[action];
+            html[0]?.querySelectorAll(`a[data-action=${action}]`)
+                ?.forEach(i => {
+                    i.addEventListener("click", (ev) => enricherListener(ev, i.dataset));
+                });
+
+        }
+    });
+}
+
 Hooks.on("renderJournalPageSheet", (app, html, options) => {
     for (const action of CONFIG.SFRPG.enricherTypes) {
         const enricherListener = enricherListeners[action];

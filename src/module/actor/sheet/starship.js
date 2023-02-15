@@ -665,7 +665,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
         const filter = index.filter(i => i.name === (li.prevObject[0].innerHTML));
         const item = await pack.getDocument(filter[0]._id);
-        const chatData = item.getChatData({ secrets: this.actor.isOwner, rollData: this.actor.system });
+        const chatData = await item.getChatData({ secrets: this.actor.isOwner, rollData: this.actor.system });
 
         let content = `<p><strong>${game.i18n.localize("SFRPG.StarshipSheet.Actions.Tooltips.NormalEffect")}:</strong> ${chatData.effectNormal}</p>`;
         if (chatData.effectCritical) {
@@ -676,7 +676,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             let summary = li.children('.item-summary');
             summary.slideUp(200, () => summary.remove());
         } else {
-            const desiredDescription = TextEditor.enrichHTML(content || chatData.description.value, {async: false});
+            const desiredDescription = await TextEditor.enrichHTML(content || chatData.description.value, {async: true});
             let div = $(`<div class="item-summary">${desiredDescription}</div>`);
 
             li.append(div.hide());
