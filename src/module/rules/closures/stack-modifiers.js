@@ -27,11 +27,10 @@ export default class StackModifiers extends Closure {
                 try {
                     const roll = Roll.create(formula, actor?.system);
                     if (roll.isDeterministic || (modifier.type !== SFRPGModifierType.FORMULA)) {
-                        const simplerFormula = Roll.replaceFormulaData(formula, actor.system, {missing:0, warn:true});
+                        const simplerFormula = Roll.replaceFormulaData(formula, actor.system, {missing: 0, warn: true});
                         modifier.max = Roll.safeEval(simplerFormula);
                     } else {
-                        ui.notifications.warn(`Problem with modifier: ${modifier.name}. Bro please... do not put dice formula into constant modifiers. This is not how they work.`
-                        + `\nWhat would you do with that anyway? Have it recalculated every time the actor is updated?`);
+                        ui.notifications.error(`Error with modifier: ${modifier.name}. Dice are not available in constant formulas. Please use a situational modifier instead.`);
                         modifier.max = 0;
                     }
                 } catch (error) {

@@ -1,4 +1,4 @@
-import { SFRPGModifierTypes, SFRPGModifierType, SFRPGEffectType } from "../modifiers/types.js";
+import { SFRPGEffectType } from "../modifiers/types.js";
 
 /**
  * Application that is used to edit a dynamic modifier.
@@ -283,8 +283,13 @@ export default class SFRPGModifierApplication extends FormApplication {
 
         const formula = formData['modifier'];
         if (formula) {
-            const roll = Roll.create(formula, this.owningActor?.system || this.actor.system);
-            modifier.max = await roll.evaluate({maximize: true}).total;
+            try {
+                const roll = Roll.create(formula, this.owningActor?.system || this.actor.system);
+                modifier.max = await roll.evaluate({maximize: true}).total;
+            } catch (err) {
+                ui.notifications.error(err);
+            }
+
         } else {
             modifier.max = 0;
         }
