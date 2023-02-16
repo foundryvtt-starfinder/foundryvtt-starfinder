@@ -1,4 +1,3 @@
-import { SFRPG } from "../../../../config.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../../modifiers/types.js";
 
 export default function(engine) {
@@ -32,7 +31,7 @@ export default function(engine) {
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
-                    type: bonus.type.capitalize(),
+                    type: game.i18n.format(`SFRPG.ModifierType${bonus.type.capitalize()}`),
                     mod: computedBonus.signedString(),
                     base: originalBonus.signedString(),
                     source: bonus.name

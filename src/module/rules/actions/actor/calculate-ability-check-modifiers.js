@@ -1,4 +1,4 @@
-import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes} from "../../../modifiers/types.js";
+import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
 
 export default function(engine) {
     engine.closures.add( "calculateAbilityCheckModifiers", (fact, context) => {
@@ -16,7 +16,7 @@ export default function(engine) {
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
-                    type: bonus.type.capitalize(),
+                    type: game.i18n.format(`SFRPG.ModifierType${bonus.type.capitalize()}`),
                     mod: computedBonus.signedString(),
                     source: bonus.name
                 }));

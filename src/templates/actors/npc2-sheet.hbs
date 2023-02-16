@@ -118,6 +118,11 @@
                             <span class="sep"> / </span>
                             <input name="system.attributes.hp.max" type="text" value="{{system.attributes.hp.max}}" data-dtype="Number" placeholder="10" />
                         </div>
+                        <footer class="attribute-footer">
+                            <div>
+                                <input name="system.attributes.hp.temp" type="text" class="temphp" value="{{system.attributes.hp.temp}}" data-dtype="Number" placeholder="{{localize "SFRPG.TempHPPlaceHolderText"}}" />
+                            </div>
+                        </footer>
                     </li>
 
                     <li class="attribute health">
@@ -148,11 +153,11 @@
                             <input class="attrib-base" name="system.attributes.kac.base" type="text" value="{{system.attributes.kac.base}}" data-dtype="Number" placeholder="10"/>
                         </div>
                     </li>
-                    
+
                 </ul>
 
                 <ul class="attributes flexrow">
-                    
+
                     <li class="attribute initiative" data-tippy-content="<strong>{{ localize "SFRPG.InitiativeLabel" }}</strong><br/>@attributes.init.total<br/><br/>{{#each system.attributes.init.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                         <h4 class="attribute-name new-box-title">{{ localize "SFRPG.InitiativeLabel" }}</h4>
                         <div class="attrib-modifiers flexrow">
@@ -161,7 +166,7 @@
                             <input class="attrib-base" name="system.attributes.init.value" type="text" value="{{system.attributes.init.value}}" data-dtype="Number" placeholder="10"/>
                         </div>
                     </li>
-                    
+
                     {{> "systems/sfrpg/templates/actors/parts/actor-movement-element.hbs" expand=true}}
                 </ul>
 
