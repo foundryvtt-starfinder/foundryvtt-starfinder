@@ -54,6 +54,7 @@ import SFRPGRoll from "./module/rolls/roll.js";
 import RollContext from "./module/rolls/rollcontext.js";
 import RollNode from "./module/rolls/rollnode.js";
 import RollTree from "./module/rolls/rolltree.js";
+import StackModifiers from "./module/rules/closures/stack-modifiers.js";
 import { SFRPGTokenHUD } from "./module/token/token-hud.js";
 import SFRPGTokenDocument from "./module/token/tokendocument.js";
 import registerCompendiumArt from "./module/utils/compendium-art.js";
@@ -733,6 +734,66 @@ function setupHandlebars() {
         const moneyFormatter  = new Intl.NumberFormat(currencyLocale);
         const formattedValue = moneyFormatter.format(value);
         return formattedValue;
+    });
+
+    Handlebars.registerHelper('prettyDamageFormula', (formula, options) => {
+        const actor = options.hash["actorData"];
+        const item = options.hash["itemData"];
+
+        const isWeapon  = ["weapon", "shield"].includes(item.type);
+
+        const acceptedModifiers = [SFRPGEffectType.ALL_DAMAGE];
+
+        if (["msak", "rsak"].includes(item.system.actionType) || (item.type === "spell" && item.system.actionType === "save")) {
+            acceptedModifiers.push(SFRPGEffectType.SPELL_DAMAGE);
+        } else if (item.system.actionType === "rwak") {
+            acceptedModifiers.push(SFRPGEffectType.RANGED_DAMAGE);
+        } else if (item.system.actionType === "mwak") {
+            acceptedModifiers.push(SFRPGEffectType.MELEE_DAMAGE);
+        }
+
+        if (isWeapon) {
+            acceptedModifiers.push(SFRPGEffectType.WEAPON_DAMAGE);
+            acceptedModifiers.push(SFRPGEffectType.WEAPON_PROPERTY_DAMAGE);
+            acceptedModifiers.push(SFRPGEffectType.WEAPON_CATEGORY_DAMAGE);
+        }
+
+        let modifiers = actor.getAllModifiers();
+        modifiers = modifiers.filter(mod => {
+            if (!acceptedModifiers.includes(mod.effectType)) {
+                return false;
+            }
+
+            if (mod.effectType === SFRPGEffectType.WEAPON_DAMAGE) {
+                if (mod.valueAffected !== item.system.weaponType) {
+                    return false;
+                }
+            } else if (mod.effectType === SFRPGEffectType.WEAPON_PROPERTY_DAMAGE) {
+                if (!item.system.properties[mod.valueAffected]) {
+                    return false;
+                }
+            } else if (mod.effectType === SFRPGEffectType.WEAPON_CATEGORY_DAMAGE) {
+                if (item.system.weaponCategory !== mod.valueAffected) {
+                    return false;
+                }
+            }
+            return mod.enabled;
+        });
+
+        const stackModifiers = new StackModifiers();
+        modifiers = stackModifiers.process(modifiers, null);
+
+        modifiers = Object.values(modifiers)
+            .flat()
+            .filter(i => !!i);
+        const modifiersTotal = modifiers.reduce((total, i) => {
+            return total + i.max;
+        }, 0);
+
+        const finalFormula = formula + " + " + (String(modifiersTotal) || "");
+
+        const roll = Roll.create(finalFormula, actor.system).simplifiedFormula;
+        return roll;
     });
 }
 

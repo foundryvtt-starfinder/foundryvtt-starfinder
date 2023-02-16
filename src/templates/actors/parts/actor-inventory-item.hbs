@@ -15,9 +15,9 @@
                         {{/if}}
                         {{#if item.config.hasDamage}}
                             {{#if (eq item.system.actionType "heal")}}
-                                <button type="button" class="tag healing">{{localize "SFRPG.ActionHeal"}}</button>
+                                <button type="button" class="tag healing" data-tooltip="{{localize "SFRPG.ActionHeal"}}">{{prettyDamageFormula item.system.damage.parts.0.formula actorData=this.actor itemData=item}}</button>
                             {{else}}
-                                <button type="button" class="tag damage">{{localize "SFRPG.Damage.Title"}}</button>
+                                <button type="button" class="tag damage" data-tooltip="{{localize "SFRPG.Damage.Title"}}">{{prettyDamageFormula item.system.damage.parts.0.formula actorData=this.actor itemData=item}}</button>
                             {{/if}}
                         {{/if}}
                     {{/if}}
