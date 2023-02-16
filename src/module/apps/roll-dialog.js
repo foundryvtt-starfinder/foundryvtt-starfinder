@@ -29,7 +29,6 @@ export default class RollDialog extends Dialog {
      */
     constructor({ rollTree, formula, contexts, availableModifiers, mainDie, parts = [], dialogData = {}, options = {} }) {
         super(dialogData, options);
-        this.options.classes = ["sfrpg", "dialog", "roll"];
 
         this.rollTree = rollTree;
         this.formula = formula;
@@ -79,6 +78,13 @@ export default class RollDialog extends Dialog {
 
     get template() {
         return "systems/sfrpg/templates/chat/roll-dialog.hbs";
+    }
+
+    static get defaultOptions() {
+        return foundry.utils.mergeObject(super.defaultOptions, {
+            classes: ["sfrpg", "dialog", "roll"],
+            width: 540
+        });
     }
 
     async _render(...args) {
@@ -136,6 +142,10 @@ export default class RollDialog extends Dialog {
             // Sign that string
             const numMod = Number(simplerRoll);
             modifier.modifier = numMod ? numMod.signedString() : simplerRoll;
+
+            if (Object.keys(CONFIG.SFRPG.modifierTypes).includes(modifier.type)) {
+                modifier.localizedType = game.i18n.localize(`${CONFIG.SFRPG.modifierTypes[modifier.type]}`);
+            }
         }
 
         if (this.parts?.length > 0) {
