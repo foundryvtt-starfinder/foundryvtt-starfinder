@@ -23,10 +23,10 @@ export default class StackModifiers extends Closure {
             const actor = game.actors.get(modifier.container?.actorId);
             const formula = modifier.modifier;
 
-            if (formula) {
+            if (formula && (modifier.modifierType === SFRPGModifierType.CONSTANT)) {
                 try {
                     const roll = Roll.create(formula, actor?.system);
-                    if (roll.isDeterministic || (modifier.type !== SFRPGModifierType.FORMULA)) {
+                    if (roll.isDeterministic) {
                         const simplerFormula = Roll.replaceFormulaData(formula, actor.system, {missing: 0, warn: true});
                         modifier.max = Roll.safeEval(simplerFormula);
                     } else {
@@ -34,11 +34,14 @@ export default class StackModifiers extends Closure {
                         modifier.max = 0;
                     }
                 } catch (error) {
-                    console.warn(`Could not calculate modifier: ${modifier.name} for actor with ID: ${modifier.container.actorId}. Setting to zero. Error: ${error}`);
+                    console.warn(`Could not calculate modifier: ${modifier.name} for actor with ID: ${modifier.container.actorId}. Setting to zero. ${error}`);
                     modifier.max = 0;
                 }
             } else {
                 modifier.max = 0;
+                if (modifier.modifierType === SFRPGModifierType.FORMULA) {
+                    console.warn(`Situational modifier: ${modifier.name} was found in constant modifier calculation. How did that end up in here?`);
+                }
             }
         }
         return this._process(modifiers);
