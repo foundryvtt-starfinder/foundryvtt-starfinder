@@ -47,7 +47,7 @@ export default class RollTree {
             }
         }
 
-        const allRolledMods = await this.populate();
+        const allRolledMods = this.populate();
 
         if (this.options.skipUI) {
             const button = this.options.defaultButton || (this.options.buttons ? (Object.values(this.options.buttons)[0].id ?? Object.values(this.options.buttons)[0].label) : "roll");
@@ -174,7 +174,7 @@ export default class RollTree {
         return uiPromise;
     }
 
-    async populate() {
+    populate() {
         if (this.options.debug) {
             console.log(`Resolving '${this.formula}'`);
             console.log(duplicate(this.contexts));
