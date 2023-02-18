@@ -25,7 +25,7 @@ export default class BaseEnricher {
      * @returns {RegExp}
      */
     get regex() {
-        return new RegExp(`(@${this.enricherType})\\[(.+[^\\[\\]]?)\\](?:{(.*?)})?`, "gm");
+        return new RegExp(`(@${this.enricherType})(\\[[^\\]]+)](?:{([^}]+)})?`, "gm");
     }
 
     /**
@@ -85,10 +85,10 @@ export default class BaseEnricher {
         const args = this.match[2].split("|");
 
         this.args = args.reduce((obj, i) => {
-        // Split each arg into a key and a value
-        // Matches a colon with a letter before, and either a letter or JSON after.
-        // Set up as to not split colons in JSONs
-            const split = i.match(/(\w+):(\w+|{.+})/);
+            // Split each arg into a key and a value
+            // Matches a colon with a letter before, and either a letter or JSON after.
+            // Set up as to not split colons in JSONs
+            const split = i.match(/(\w*):({.*}?|[\w-]+)/);
             if (split?.length > 0) {
                 obj[split[1]] = split[2];
             }
@@ -109,6 +109,7 @@ export default class BaseEnricher {
             this.element = strong;
             return false;
         }
+
         return true;
     }
 
@@ -135,7 +136,7 @@ export default class BaseEnricher {
         a.classList.add("enriched-link");
         a.draggable = false;
 
-        a.innerHTML = this.name;
+        a.innerText = this.name;
 
         return a;
     }
