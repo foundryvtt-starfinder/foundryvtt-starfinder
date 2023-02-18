@@ -47,6 +47,8 @@ export default class BrowserEnricher extends BaseEnricher {
 
     }
 
+    static hasListener = true;
+
     static listener(ev, data) {
         let browser, filters;
 

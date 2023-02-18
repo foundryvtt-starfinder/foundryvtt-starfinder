@@ -13,6 +13,9 @@ export default class BaseEnricher {
 
     /** @type {CustomEnricher} */
     constructor() {
+        if (this.constructor === BaseEnricher) throw new Error(
+            "The BaseEnricher class is an abstract class and may not be instantiated."
+        );
         this.pattern = this.regex;
         this.enricher = this.enricherFunc.bind(this);
     }
@@ -30,7 +33,7 @@ export default class BaseEnricher {
      * @returns {String}
     */
     get enricherType() {
-        return "";
+        throw new Error("This method must be implemented on subclasses of BaseEnricher.");
     }
 
     /**
@@ -38,7 +41,7 @@ export default class BaseEnricher {
      * @returns {String[]}
      */
     get validTypes() {
-        return [];
+        throw new Error("This method must be implemented on subclasses of BaseEnricher.");
     }
 
     /**
@@ -46,7 +49,7 @@ export default class BaseEnricher {
      * @returns {Object}
      */
     get icons() {
-        return {};
+        throw new Error("This method must be implemented on subclasses of BaseEnricher.");
     }
 
     /**
@@ -121,7 +124,7 @@ export default class BaseEnricher {
     /**
      * Create a HTML element and affix some data.
      * Can be called in subclasses by assigning the super to a local variable.
-     * @returns {HTMLElement}
+     * @returns {HTMLAnchorElement}
      */
     createElement() {
         const a = document.createElement("a");
@@ -136,6 +139,12 @@ export default class BaseEnricher {
 
         return a;
     }
+
+    /**
+     * Whether the enricher has an event listener.
+     * @type {Boolean}
+     */
+    static hasListener = false;
 
     /**
      * A callback function to run when the element is clicked.
@@ -155,14 +164,16 @@ const sheets = [
     "ItemSummary",
     "ItemCollectionSheet",
     "ItemSheet",
-    "ChatMessage"
+    "ChatMessage",
+    "JournalPageSheet"
 ];
 
 for (const sheet of sheets) {
     Hooks.on(`render${sheet}`, (app, html, options) => {
         for (const [action, cls] of Object.entries(CONFIG.SFRPG.enricherTypes)) {
+            if (!cls.hasListener) continue;
             const enricherListener = cls.listener;
-            html[0]?.querySelectorAll(`a[data-action=${action}]`)
+            html[sheet !== "JournalPageSheet" ? 0 : 2]?.querySelectorAll(`a[data-action=${action}]`)
                 ?.forEach(i => {
                     i.addEventListener("click", (ev) => enricherListener(ev, i.dataset));
                 });
@@ -170,14 +181,3 @@ for (const sheet of sheets) {
         }
     });
 }
-
-Hooks.on("renderJournalPageSheet", (app, html, options) => {
-    for (const [action, cls] of Object.entries(CONFIG.SFRPG.enricherTypes)) {
-        const enricherListener = cls.listener;
-        html[2]?.querySelectorAll(`a[data-action=${action}]`)
-            ?.forEach(i => {
-                i.addEventListener("click", (ev) => enricherListener(ev, i.dataset));
-            });
-
-    }
-});
