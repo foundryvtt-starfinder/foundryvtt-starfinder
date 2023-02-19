@@ -118,7 +118,7 @@ export default class BaseEnricher {
      */
     validateName() {
         if (!this.name) {
-            this.name = this.args.type.capitalize() + " Browser";
+            this.name = this.args.type.capitalize() + " " + this.enricherType;
         }
     }
 

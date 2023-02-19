@@ -49,6 +49,7 @@ import { preloadHandlebarsTemplates } from "./module/templates.js";
 import { generateUUID } from "./module/utils/utilities.js";
 
 import BrowserEnricher from "./module/system/enrichers/browser.js";
+import CheckEnricher from "./module/system/enrichers/check.js";
 import IconEnricher from "./module/system/enrichers/icon.js";
 
 import RollDialog from "./module/apps/roll-dialog.js";
@@ -367,7 +368,7 @@ Hooks.once("setup", function() {
     setupHandlebars();
 
     console.log("Starfinder | [SETUP] Setting up custom enrichers");
-    CONFIG.TextEditor.enrichers.push(new BrowserEnricher(), new IconEnricher());
+    CONFIG.TextEditor.enrichers.push(new BrowserEnricher(), new IconEnricher(), new CheckEnricher());
 
     const finishTime = (new Date()).getTime();
     console.log(`Starfinder | [SETUP] Done (operation took ${finishTime - setupTime} ms)`);
