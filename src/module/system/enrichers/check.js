@@ -27,7 +27,7 @@ export default class CheckEnricher extends BaseEnricher {
         return {
             "acrobatics": "fa-person-walking",
             "athletics": "fa-dumbbell",
-            "bluff": "fa-face-lying",
+            "bluff": "fa-comment-xmark",
             "computers": "fa-computer",
             "culture": "fa-flag",
             "diplomacy": "fa-handshake",
