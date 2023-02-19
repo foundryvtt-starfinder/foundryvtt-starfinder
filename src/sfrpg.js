@@ -170,8 +170,15 @@ Hooks.once('init', async function() {
     CONFIG.fontDefinitions["Exo2"] = {
         editor: true,
         fonts: [
-            {urls: ["../systems/sfrpg/fonts/Exo2-VariableFont_wght.ttf"]},
-            {urls: ["../systems/sfrpg/fonts/Exo2-Italic-VariableFont_wght.ttf"], weight: 700}
+            {urls: ["../systems/sfrpg/fonts/exo2-variablefont_wght.woff2"]},
+            {urls: ["../systems/sfrpg/fonts/exo2-italic-variablefont_wght.woff2"], weight: 700}
+        ]
+    };
+
+    CONFIG.fontDefinitions["Orbitron"] = {
+        editor: true,
+        fonts: [
+            {urls: ["../systems/sfrpg/fonts/orbitron-variablefont_wght.woff2"]}
         ]
     };
 
