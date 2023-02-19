@@ -1,4 +1,4 @@
-import SkillNameHelper from "../skill-names.js";
+import SkillNameHelper from "../../utils/skill-names.js";
 import BaseEnricher from "./base.js";
 
 export default class CheckEnricher extends BaseEnricher {
