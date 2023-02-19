@@ -1,4 +1,5 @@
 import BrowserEnricher from "./system/enrichers/browser.js";
+import CheckEnricher from "./system/enrichers/check.js";
 import IconEnricher from "./system/enrichers/icon.js";
 
 // Namespace SFRPG Configuration Values
@@ -1906,5 +1907,6 @@ SFRPG.floatingHPValues = {
 
 SFRPG.enricherTypes = {
     "Browser": BrowserEnricher,
-    "Icon": IconEnricher
+    "Icon": IconEnricher,
+    "Check": CheckEnricher
 };

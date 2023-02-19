@@ -1,4 +1,4 @@
-import SkillNameHelper from "../../utils/skill-names.js";
+import CheckNameHelper from "../../utils/skill-names.js";
 import BaseEnricher from "./base.js";
 
 export default class CheckEnricher extends BaseEnricher {
@@ -66,7 +66,7 @@ export default class CheckEnricher extends BaseEnricher {
      * Inputted types are full names.
      */
     typeIsValid() {
-        if (!this.args.type || !this.validTypes.includes(SkillNameHelper.shortFormName(this.args.type))) {
+        if (!this.args.type || !this.validTypes.includes(CheckNameHelper.shortFormName(this.args.type))) {
             const strong = document.createElement("strong");
             strong.innerText = `${this.match[1]} parsing failed! Type is invalid.`;
             this.element = strong;
@@ -82,7 +82,7 @@ export default class CheckEnricher extends BaseEnricher {
     createElement() {
         const a = super.createElement();
 
-        if (this.args.filters) a.dataset.filters = parseInt(this.args.dc);
+        if (this.args.dc) a.dataset.dc = parseInt(this.args.dc);
 
         a.innerHTML = `<i class="fas ${this.icons[this.args.type]}"></i>${this.name}`;
 
@@ -93,32 +93,14 @@ export default class CheckEnricher extends BaseEnricher {
     static hasListener = true;
 
     static listener(ev, data) {
-        let browser, filters;
+        const actor = _token?.actor ?? game.user?.character;
+        if (!actor) return ui.notifications.error("You must have a token or an actor selected.");
+        const id = CheckNameHelper.shortFormName(data.type);
 
-        // Gotta double parse this to get rid of escape characters from the HTML.
-        try {
-            if (data.filters) filters = JSON.parse(JSON.parse(data.filters));
-        } catch (err) {
-            return ui.notifications.error(`Error parsing filters: ${err}`);
-        }
+        if (Object.keys(CONFIG.SFRPG.skills).includes(id)) actor.rollSkill(CheckNameHelper.shortFormName(data.type));
+        else if (Object.keys(CONFIG.SFRPG.saves).includes(id)) actor.rollSave(CheckNameHelper.shortFormName(data.type));
+        else if (Object.keys(CONFIG.SFRPG.abilities).includes(id)) actor.rollAbility(CheckNameHelper.shortFormName(data.type));
 
-        switch (data.type) {
-            case "spell":
-                browser = getSpellBrowser();
-                break;
-            case "equipment":
-                browser = getEquipmentBrowser();
-                break;
-            case "starship":
-                browser = getStarshipBrowser();
-                break;
-            case "alien":
-                browser = getAlienArchiveBrowser();
-                break;
-            default:
-                ui.notifications.error("Invalid type.");
-        }
-        if (browser) browser.renderWithFilters(filters);
     }
 
 }

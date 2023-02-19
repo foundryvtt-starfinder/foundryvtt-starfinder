@@ -3,7 +3,7 @@
  * @class
  * Helper class to transform shortform ability names back and forth between their full names.
  */
-export default class SkillNameHelper {
+export default class CheckNameHelper {
     /**
      * Take the full name for a check, and return the 3-letter identifier
      * @param {String} fullName The full name for the check, such as "life-science" or "acrobatics"
