@@ -35,9 +35,9 @@ export default class BrowserEnricher extends BaseEnricher {
     get icons() {
         return {
             equipment: "fa-gun",
-            spell: "fa-sparkles",
+            spell: "fa-wand-magic-sparkles",
             starship: "fa-rocket",
-            alien: "fa-alien"
+            alien: "fa-spaghetti-monster-flying"
         };
     }
 

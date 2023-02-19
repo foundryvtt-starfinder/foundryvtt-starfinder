@@ -7,8 +7,8 @@ Hooks.on('renderCompendiumDirectory', (app, html, data) => {
     // Browser Buttons
     const grouping = $('<div class="flexcol browser-group"></div>');
 
-    const alienArchiveBrowserButton = $(`<button class="alien-archive-browser-btn"><i class="fas fa-alien"></i><br> ${game.i18n.format("SFRPG.Browsers.AlienArchiveBrowser.Button")}</button>`);
-    const spellBrowserButton = $(`<button class="spell-browser-btn"><i class="fas fa-sparkles"></i><br> ${game.i18n.format("SFRPG.Browsers.SpellBrowser.Button")}</button>`);
+    const alienArchiveBrowserButton = $(`<button class="alien-archive-browser-btn"><i class="fas fa-spaghetti-monster-flying"></i><br> ${game.i18n.format("SFRPG.Browsers.AlienArchiveBrowser.Button")}</button>`);
+    const spellBrowserButton = $(`<button class="spell-browser-btn"><i class="fas fa-wand-magic-sparkles"></i><br> ${game.i18n.format("SFRPG.Browsers.SpellBrowser.Button")}</button>`);
     const equipmentBrowserButton = $(`<button class="spell-browser-btn"><i class="fas fa-gun"></i><br> ${game.i18n.format("SFRPG.Browsers.EquipmentBrowser.Button")}</button>`);
     const starshipBrowserButton = $(`<button class="spell-browser-btn"><i class="fas fa-rocket"></i><br> ${game.i18n.format("SFRPG.Browsers.StarshipBrowser.Button")}</button>`);
 

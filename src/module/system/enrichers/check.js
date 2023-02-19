@@ -27,16 +27,16 @@ export default class CheckEnricher extends BaseEnricher {
         return {
             "acrobatics": "fa-person-walking",
             "athletics": "fa-dumbbell",
-            "bluff": "fa-comment-xmark",
+            "bluff": "fa-comment",
             "computers": "fa-computer",
             "culture": "fa-flag",
             "diplomacy": "fa-handshake",
-            "disguise": "fa-face-disguise",
+            "disguise": "fa-mask",
             "engineering": "fa-gear",
             "intimidate": "fa-face-angry",
             "life-science": "fa-dna",
             "medicine": "fa-syringe",
-            "mysticism": "fa-sparkles",
+            "mysticism": "fa-hand-sparkles",
             "perception": "fa-magnifying-glass",
             "profession": "fa-user-tie",
             "physical-science": "fa-flask",
@@ -44,18 +44,18 @@ export default class CheckEnricher extends BaseEnricher {
             "sense-motive": "fa-person-circle-question",
             "sleight-of-hand": "fa-hands",
             "stealth": "fa-moon",
-            "survival": "fa-campfire",
+            "survival": "fa-campground",
 
             "fortitude": "fa-shield-heart",
             "reflex": "fa-person-running",
             "will": "fa-brain",
 
             "strength": "fa-weight-hanging",
-            "dexterity": "fa-feather",
+            "dexterity": "fa-feather-pointed",
             "constitution": "fa-heart-pulse",
             "intelligence": "fa-glasses",
-            "wisdom": "fa-book-sparkles",
-            "charisma": "fa-user-group",
+            "wisdom": "fa-mountain-sun",
+            "charisma": "fa-people-arrows",
 
             "caster-level": "fa-wand-magic-sparkles"
         };
