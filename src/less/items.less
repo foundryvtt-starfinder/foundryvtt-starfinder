@@ -179,13 +179,17 @@
 
     // Item Sheet form fields
     input[type="text"], select {
+      &.wide-form-field {
+          flex: 3
+      }
+
       border: 1px solid @colorTan;
       background: rgba(0, 0, 0, 0.05);
     }
 
     .form-group.input-select {
       select {
-        flex: 1.8;
+        flex: 1;
       }
 
       select[multiple] {
