@@ -1,6 +1,6 @@
-import FloatingNumberMenu from "./classes/floating-number-menu.js";
-import { SFRPG } from "./config.js";
-import { ItemSFRPG } from "./item/item.js";
+import FloatingNumberMenu from "../classes/floating-number-menu.js";
+import { SFRPG } from "../config.js";
+import { ItemSFRPG } from "../item/item.js";
 
 export const registerSystemSettings = function() {
     game.settings.register("sfrpg", "diagonalMovement", {
