@@ -5,7 +5,7 @@
  */
 
 /**
- * Abstract base class for enrichers which carries validation and basic element creation
+ * Abstract base class for enrichers which carries validation and basic element creation.
  * @abstract
  * @class
  */
@@ -89,9 +89,7 @@ export default class BaseEnricher {
             // Matches a colon with a letter before, and either a letter or JSON after.
             // Set up as to not split colons in JSONs
             const split = i.match(/(\w*):({.*}?|[\w-]+)/);
-            if (split?.length > 0) {
-                obj[split[1]] = split[2];
-            }
+            if (split?.length > 0) obj[split[1]] = split[2];
 
             return obj;
         }, {});
@@ -105,7 +103,7 @@ export default class BaseEnricher {
     typeIsValid() {
         if (!this.args.type || !this.validTypes.includes(this.args.type)) {
             const strong = document.createElement("strong");
-            strong.innerText = `${this.match[1]} parsing failed! Type is invalid.`;
+            strong.innerText = game.i18n.format("SFRPG.Enrichers.TypeError", {enricherType: this.match[1]});
             this.element = strong;
             return false;
         }
@@ -117,9 +115,7 @@ export default class BaseEnricher {
      * Sets a default name if none was given
      */
     validateName() {
-        if (!this.name) {
-            this.name = this.args.type.capitalize() + " " + this.enricherType;
-        }
+        this.name ||= `${this.args.type.capitalize()} ${this.enricherType}`;
     }
 
     /**
@@ -173,12 +169,12 @@ for (const sheet of sheets) {
     Hooks.on(`render${sheet}`, (app, html, options) => {
         for (const [action, cls] of Object.entries(CONFIG.SFRPG.enricherTypes)) {
             if (!cls.hasListener) continue;
+
             const enricherListener = cls.listener;
             html[sheet !== "JournalPageSheet" ? 0 : 2]?.querySelectorAll(`a[data-action=${action}]`)
                 ?.forEach(i => {
                     i.addEventListener("click", (ev) => enricherListener(ev, i.dataset));
                 });
-
         }
     });
 }

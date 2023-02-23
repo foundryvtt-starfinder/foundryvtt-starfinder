@@ -4,6 +4,10 @@ import { getSpellBrowser } from "../../packs/spell-browser.js";
 import { getStarshipBrowser } from "../../packs/starship-browser.js";
 import BaseEnricher from "./base.js";
 
+/**
+ * Open a specified compendium browser, optionally with pre-defined filters.
+ * @class
+ */
 export default class BrowserEnricher extends BaseEnricher {
     // E.g @Browser<type:equipment|filters:{"equipmentTypes":"weapon","weaponTypes":"smallA","weaponCategories":"cryo","search":"Big Gun"}>
     // @Browser<type:spell|filters:{"classes":["mystic","technomancer"],"levels":[0,1,2],"schools":"conjuration"}>{Some cool spells}

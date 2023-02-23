@@ -1,8 +1,14 @@
 import CheckNameHelper from "../../utils/skill-names.js";
 import BaseEnricher from "./base.js";
 
+/**
+ * Roll a specific check
+ * @class
+ */
 export default class CheckEnricher extends BaseEnricher {
-
+    // @Check[type:athletics]
+    // @Check[type:life-science]
+    // @Check[type:reflex]
     constructor() {
         super();
     }
@@ -97,8 +103,8 @@ export default class CheckEnricher extends BaseEnricher {
         if (!actor) return ui.notifications.error("You must have a token or an actor selected.");
         const id = CheckNameHelper.shortFormName(data.type);
 
-        if (Object.keys(CONFIG.SFRPG.skills).includes(id)) actor.rollSkill(CheckNameHelper.shortFormName(data.type));
-        else if (Object.keys(CONFIG.SFRPG.saves).includes(id)) actor.rollSave(CheckNameHelper.shortFormName(data.type));
+        if      (Object.keys(CONFIG.SFRPG.skills).includes(id))    actor.rollSkill(CheckNameHelper.shortFormName(data.type));
+        else if (Object.keys(CONFIG.SFRPG.saves).includes(id))     actor.rollSave(CheckNameHelper.shortFormName(data.type));
         else if (Object.keys(CONFIG.SFRPG.abilities).includes(id)) actor.rollAbility(CheckNameHelper.shortFormName(data.type));
 
     }
