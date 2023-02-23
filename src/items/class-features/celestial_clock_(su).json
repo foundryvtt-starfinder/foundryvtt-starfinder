@@ -1,8 +1,8 @@
 {
-  "_id": "bLFSPxAj9LPyoVAf",
-  "name": "Tenebrous Bulwark (Su)",
+  "_id": "IIe7KpoFXy8BK03H",
+  "name": "Celestial Clock (Su)",
   "type": "feat",
-  "img": "systems/sfrpg/images/cup/gameplay/graviton.webp",
+  "img": "systems/sfrpg/images/cup/gameplay/photon.webp",
   "system": {
     "type": "",
     "ability": "",
@@ -10,9 +10,9 @@
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "",
+    "actionType": "other",
     "activation": {
-      "type": "move",
+      "type": "action",
       "condition": "",
       "cost": null
     },
@@ -29,7 +29,24 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "",
+          "formula": "(lookupRange(@classes.solarian.levels, 0, 2, 1, 6, 2, 10, 3, 14, 4, 18, 5))d6",
+          "group": null,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
     },
     "damageNotes": "",
     "description": {
@@ -37,7 +54,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p>@Icon[type:graviton]Graviton Revelation</p>\n<p>As a move action, you channel the Negative Energy Plane’s power directly into your @UUID[Compendium.sfrpg.class-features.kCvI3xvm0Q1slajx]{Solar Flare} or @UUID[Compendium.sfrpg.class-features.WWHUAfgpvk6uIgY0]{Solar Weapon}, helping you capture and convert your escaping life energy into deadly force. As a reaction when you take damage that causes you to lose at least 2 Hit Points, the next successful attack you make with your @UUID[Compendium.sfrpg.class-features.kCvI3xvm0Q1slajx]{Solar Flare} or @UUID[Compendium.sfrpg.class-features.WWHUAfgpvk6uIgY0]{Solar Weapon} before the end of your next turn deals additional cold damage equal to half the number of Hit Points you lost. Undead creatures are immune to this additional cold damage.</p>\n<p>If you’re attuned or fully attuned, whenever you use this revelation’s reaction to add cold damage to your next attack, your @UUID[Compendium.sfrpg.class-features.kCvI3xvm0Q1slajx]{Solar Flare} or @UUID[Compendium.sfrpg.class-features.WWHUAfgpvk6uIgY0]{Solar Weapon} also gains the <strong>penetrating</strong> weapon special property until the end of your next turn.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p><sub>&nbsp;</sub>@Icon[type:photon]Photon Revelation</p>\n<p>The rotation of a pulsar is perfectly precise, rivaling that of an atomic clock. You can sense this cosmological clock and time your movements to it, acting with uncanny timing and perfect precision. You gain a +2 bonus to your Armor Class against attacks of opportunity.</p><p class=\"MsoNormal\">You also possess a supernaturally accurate sense of time—you’re always aware of the exact date and time wherever (and whenever) you are, accurate to the millisecond, and can precisely measure time as it passes without the need for a clock or other device.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -83,25 +100,41 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "db8256cf-e721-4244-add4-bfc03486fdea",
+        "name": "Celestial Clock",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": true,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "Against Attacks of Opportunity",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "both"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": 30
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "14th Level",
+    "requirements": "2nd Level",
     "rollNotes": "",
     "save": {
       "type": "fort",
       "dc": "10+floor(@classes.solarian.levels/2) + @abilities.cha.mod",
       "descriptor": "negate"
     },
-    "source": "Drift Crisis, pg. 45",
+    "source": "HotV#2 (AP#41), pg 52",
     "target": {
       "type": "",
       "value": ""
