@@ -1,5 +1,5 @@
-import { DocumentBrowserSFRPG } from './document-browser.js';
 import { SFRPG } from "../config.js";
+import { DocumentBrowserSFRPG } from './document-browser.js';
 import { packLoader } from './pack-loader.js';
 
 class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
@@ -47,18 +47,16 @@ class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
                 };
 
                 // Used for sorting and displaying
-                itemData.system.cr = itemData.system.details.cr;
-                itemData.system.hp = itemData.system.attributes.hp.max;
+                itemData.system.cr = itemData.system.details?.cr;
+                itemData.system.hp = itemData.system.attributes?.hp.max;
 
                 // 1/3 and 1/2 CR aliens have special strings used to describe their CR rather than using the float value
-                if (itemData.system.details.cr == (1 / 3)) {
+                if (itemData.system.details?.cr == (1 / 3)) {
                     itemData.system.crDisplay = "1/3";
-                }
-                else if (itemData.system.details.cr == (1 / 2)) {
+                } else if (itemData.system.details?.cr == (1 / 2)) {
                     itemData.system.crDisplay = "1/2";
-                }
-                else {
-                    itemData.system.crDisplay = itemData.system.details.cr;
+                } else {
+                    itemData.system.crDisplay = itemData.system.details?.cr;
                 }
 
                 if (this.allowedItem(item)) {

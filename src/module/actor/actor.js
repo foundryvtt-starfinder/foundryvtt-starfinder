@@ -593,8 +593,8 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             rollContext: rollContext,
             parts: parts,
             title: title,
-            flavor: TextEditor.enrichHTML(skill.notes, {
-                async: false,
+            flavor: await TextEditor.enrichHTML(skill.notes, {
+                async: true,
                 rollData: this.getRollData() ?? {}
             }),
             speaker: ChatMessage.getSpeaker({ actor: this }),
@@ -834,12 +834,12 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
                 flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${dcRoll.roll.total}</p>`;
             } else {
-                flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${TextEditor.enrichHTML(dc.value, {async: false})}</p>`;
+                flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${await TextEditor.enrichHTML(dc.value, {async: true})}</p>`;
             }
         }
 
         flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.NormalEffect")}: </strong>`;
-        flavor += TextEditor.enrichHTML(selectedFormula.effectNormal || actionEntry.system.effectNormal, {async: false});
+        flavor += await TextEditor.enrichHTML(selectedFormula.effectNormal || actionEntry.system.effectNormal, {async: true});
         flavor += "</p>";
 
         if (actionEntry.system.effectCritical) {
@@ -847,7 +847,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             if (critEffectDisplayState !== 'never') {
                 if (critEffectDisplayState === 'always' || rollResult.roll.dice[0].values[0] === 20) {
                     flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.CriticalEffect")}: </strong>`;
-                    flavor += TextEditor.enrichHTML(selectedFormula.effectCritical || actionEntry.system.effectCritical, {async: false});
+                    flavor += await TextEditor.enrichHTML(selectedFormula.effectCritical || actionEntry.system.effectCritical, {async: true});
                     flavor += "</p>";
                 }
             }

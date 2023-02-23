@@ -1,8 +1,6 @@
 import { ActorSheetFlags } from "../../apps/actor-flags.js";
 import { ActorMovementConfig } from "../../apps/movement-config.js";
 import { TraitSelectorSFRPG } from "../../apps/trait-selector.js";
-import { getEquipmentBrowser } from "../../packs/equipment-browser.js";
-import { getSpellBrowser } from "../../packs/spell-browser.js";
 
 import { RPC } from "../../rpc.js";
 import { ActorItemHelper, containsItems, getFirstAcceptableStorageIndex, moveItemBetweenActorsAsync } from "../actor-inventory-utils.js";
@@ -10,8 +8,11 @@ import { ActorItemHelper, containsItems, getFirstAcceptableStorageIndex, moveIte
 import { InputDialog } from "../../apps/input-dialog.js";
 import { ItemDeletionDialog } from "../../apps/item-deletion-dialog.js";
 import { SFRPG } from "../../config.js";
-
 import { ItemSFRPG } from "../../item/item.js";
+
+import { getEquipmentBrowser } from "../../packs/equipment-browser.js";
+import { getSpellBrowser } from "../../packs/spell-browser.js";
+import { getStarshipBrowser } from "../../packs/starship-browser.js";
 /**
  * Extend the basic ActorSheet class to do all the SFRPG things!
  * This sheet is an Abstract layer which is not used.
@@ -184,7 +185,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         filterLists.each(this._initializeFilterItemList.bind(this));
         filterLists.on("click", ".filter-item", this._onToggleFilter.bind(this));
 
-        html.find('.item .item-name h4').click(event => this._onItemSummary(event));
+        html.find('.item .item-name h4').click(async event => this._onItemSummary(event));
         html.find('.item .item-name h4').contextmenu(event => this._onItemSplit(event));
 
         if (!this.options.editable) return;
@@ -336,9 +337,9 @@ export class ActorSheetSFRPG extends ActorSheet {
         const button = event.currentTarget;
         let app;
         switch ( button.dataset.action ) {
-        case "movement":
-            app = new ActorMovementConfig(this.object);
-            break;
+            case "movement":
+                app = new ActorMovementConfig(this.object);
+                break;
         }
         app?.render(true);
     }
@@ -571,95 +572,49 @@ export class ActorSheetSFRPG extends ActorSheet {
 
     async _onOpenBrowser(event) {
         event.preventDefault();
-        const filterType = event.currentTarget.dataset.type;
-        const classesToFilters = {
-            'mystic': 'myst',
-            'precog': 'precog',
-            'technomancer': 'tech',
-            'witchwarper': 'wysh'
-        };
+        const data = event.currentTarget.dataset;
         let browser;
-        let activeFilters = {};
 
-        switch (filterType) {
-        case 'weapon':
-        case 'shield':
-        case 'equipment':
-        case 'ammunition':
-        case 'consumable':
-        case 'goods':
-        case 'container':
-        case 'technological,magic,hybrid':
-        case 'fusion,upgrade,weaponAccessory':
-        case 'upgrade':
-        case 'augmentation':
-            browser = getEquipmentBrowser();
-            activeFilters.equipmentTypes = filterType.split(',');
-            break;
-        case 'spell':
-            browser = getSpellBrowser();
-            activeFilters.levels = [event.currentTarget.dataset.level];
-            // eslint-disable-next-line no-case-declarations
-            let classes = event.currentTarget.dataset.classes;
-            if (classes) {
-                classes = classes.split(',');
-                activeFilters.classes = [];
-                for (let spellFilterI = 0; spellFilterI < classes.length; spellFilterI++) {
-                    activeFilters.classes.push(classesToFilters[classes[spellFilterI]]);
-                }
-            }
-
-            break;
-        case 'class':
-        case 'race':
-        case 'theme':
-        case 'asi':
-        case 'archetypes':
-        case 'feat':
-        case 'actorResource':
+        switch (data.type) {
+            case 'weapon':
+            case 'shield':
+            case 'equipment':
+            case 'ammunition':
+            case 'consumable':
+            case 'goods':
+            case 'container':
+            case 'technological,magic,hybrid':
+            case 'fusion,upgrade,weaponAccessory':
+            case 'augmentation':
+                browser = getEquipmentBrowser();
+                browser.renderWithFilters({equipmentTypes: data.type.split(',')});
+                break;
+            case 'spell':
+                browser = getSpellBrowser();
+                browser.renderWithFilters({
+                    levels: [data.level],
+                    classes: data.classes.split(',').filter(i => !!i)
+                });
+                break;
+            case 'class':
+            case 'race':
+            case 'theme':
+            case 'asi':
+            case 'archetypes':
+            case 'feat':
+            case 'actorResource':
             // TODO: wait for Features Browser then implement this.
-            break;
-
-        default:
-            browser = getEquipmentBrowser();
-            break;
+                break;
+            case 'starshipWeapon':
+                browser = getStarshipBrowser();
+                browser.renderWithFilters({
+                    starshipComponentTypes: data.type
+                });
+                break;
+            default:
+                browser = getEquipmentBrowser();
+                break;
         }
-
-        if (!browser._element) {
-            browser.render(true);
-        }
-
-        await this.waitForElem(`#app-${browser.appId}`);
-        const html = browser.element;
-        browser.resetFilters(html);
-
-        const activeFiltersKeys = Object.keys(activeFilters);
-        for (let filterI = 0; filterI < activeFiltersKeys.length; filterI++) {
-            browser.filters[activeFiltersKeys[filterI]].activeFilters = activeFilters[activeFiltersKeys[filterI]];
-        }
-
-        browser.refreshFilters = true;
-        browser.onFiltersUpdated(html);
-    }
-
-    waitForElem(selector) {
-        return new Promise(resolve => {
-            if (document.querySelector(selector)) {
-                return resolve(document.querySelector(selector));
-            }
-
-            const observer = new MutationObserver(mutations => {
-                if (document.querySelector(selector)) {
-                    resolve(document.querySelector(selector));
-                    observer.disconnect();
-                }
-            });
-
-            observer.observe(document.body, {
-                childList: true,
-                subtree: true
-            });
-        });
     }
 
     /**
@@ -899,18 +854,20 @@ export class ActorSheetSFRPG extends ActorSheet {
      *
      * @param {Event} event The html event
      */
-    _onItemSummary(event) {
+    async _onItemSummary(event) {
         event.preventDefault();
         let li = $(event.currentTarget).parents('.item'),
             item = this.actor.items.get(li.data('item-id')),
-            chatData = item.getChatData({ secrets: this.actor.isOwner, rollData: this.actor.system });
+            chatData = await item.getChatData({ secrets: this.actor.isOwner, rollData: this.actor.system });
 
         if (li.hasClass('expanded')) {
             let summary = li.children('.item-summary');
             summary.slideUp(200, () => summary.remove());
         } else {
-            const desiredDescription = TextEditor.enrichHTML(chatData.description.short || chatData.description.value, {async: false});
+            const desiredDescription = await TextEditor.enrichHTML(chatData.description.short || chatData.description.value, {async: true});
             let div = $(`<div class="item-summary">${desiredDescription}</div>`);
+            Hooks.callAll("renderItemSummary", this, div, {}); // Event listeners need to be added to this HTML.
+
             let props = $(`<div class="item-properties"></div>`);
             chatData.properties.forEach(p => props.append(`<span class="tag" ${ p.tooltip ? ("data-tippy-content='" + p.tooltip + "'") : ""}>${p.name}</span>`));
 

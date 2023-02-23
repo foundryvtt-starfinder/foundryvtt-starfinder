@@ -220,7 +220,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             actor: this.actor,
             tokenId: token ? `${token.parent.id}.${token.id}` : null,
             item: this,
-            system: this.getChatData(htmlOptions),
+            system: await this.getChatData(htmlOptions),
             labels: this.labels,
             hasAttack: this.hasAttack,
             hasDamage: this.hasDamage,
@@ -345,14 +345,14 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     /*  Chat Cards                                  */
     /* -------------------------------------------- */
 
-    getChatData(htmlOptions) {
+    async getChatData(htmlOptions) {
         const data = duplicate(this.system);
         const labels = this.labels;
 
-        if (htmlOptions.async === undefined) htmlOptions.async = false;
+        htmlOptions.async = true;
 
         // Rich text description
-        data.description.value = TextEditor.enrichHTML(data.description.value, htmlOptions);
+        data.description.value = await TextEditor.enrichHTML(data.description.value, htmlOptions);
 
         // Item type specific properties
         const props = [];
@@ -817,7 +817,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             parts: parts,
             rollContext: rollContext,
             title: title,
-            flavor: TextEditor.enrichHTML(this.system?.chatFlavor, {async: false}),
+            flavor: await TextEditor.enrichHTML(this.system?.chatFlavor, {async: true}),
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             critical: critThreshold,
             chatMessage: options.chatMessage,
@@ -1155,7 +1155,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             criticalData: itemData.critical,
             rollContext: rollContext,
             title: title,
-            flavor: (TextEditor.enrichHTML(options?.flavorOverride, {async: false}) ?? TextEditor.enrichHTML(itemData.chatFlavor, {async: false})) || null,
+            flavor: (await TextEditor.enrichHTML(options?.flavorOverride, {async: true}) ?? await TextEditor.enrichHTML(itemData.chatFlavor, {async: true})) || null,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             chatMessage: options.chatMessage,
             dialogOptions: {
@@ -1356,7 +1356,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 actor: this.actor,
                 tokenId: token ? `${token.parent.id}.${token.id}` : null,
                 item: this,
-                data: this.getChatData(htmlOptions),
+                data: await this.getChatData(htmlOptions),
                 labels: this.labels,
                 hasAttack: this.hasAttack,
                 hasDamage: this.hasDamage,
