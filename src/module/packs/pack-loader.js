@@ -43,6 +43,7 @@ export class PackLoader {
                             "system.pcu",
                             "system.cost",
                             "system.weaponCategory",
+                            "system.class",
                             "system.weaponType",
                             "system.armor",
                             "system.school",

@@ -1,4 +1,4 @@
-import isObject from "./is-object.js";
+import isObject from "../utils/is-object.js";
 
 /**
  * THIS CODE WAS ENTIRELY, COMPLETELY, AND UTTERLY STOLEN FROM THE PF2E SYSTEM. PLEASE FORGIVE ME SHARK.

@@ -1,5 +1,5 @@
-import { DocumentBrowserSFRPG } from './document-browser.js';
 import { SFRPG } from "../config.js";
+import { DocumentBrowserSFRPG } from './document-browser.js';
 
 const starshipComponentTypes = {
     "starshipAblativeArmor": "SFRPG.Items.Categories.StarshipAblativeArmors",
@@ -221,6 +221,23 @@ class StarshipBrowserSFRPG extends DocumentBrowserSFRPG {
             width: '300px'
         });
         d.render(true);
+    }
+
+    /**
+     * @typedef  {object} filterObjectStarship
+     * @property {string[]} starshipComponentTypes Drawn from starshipComponentTypes
+     * @property {string[]} starshipWeaponTypes Drawn from SFRPG.starshipWeaponTypes
+     * @property {string[]} starshipWeaponClass Drawn from SFRPG.starshipWeaponClass
+     * @see {config.js}
+     */
+    /**
+     * Prepare the filter object before calling the parent method
+     * @param {filterObjectStarship} filters A filter object
+     */
+    renderWithFilters(filters = {}) {
+        let filterObject = filters;
+
+        return super.renderWithFilters(filterObject);
     }
 }
 

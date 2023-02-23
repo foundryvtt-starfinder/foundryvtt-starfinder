@@ -1,7 +1,7 @@
 import { SFRPG } from "../config.js";
 import { RPC } from "../rpc.js";
 
-import { generateUUID } from "../utilities.js";
+import { generateUUID } from "../utils/utilities.js";
 import { value_equals } from "../utils/value_equals.js";
 
 export function initializeRemoteInventory() {
