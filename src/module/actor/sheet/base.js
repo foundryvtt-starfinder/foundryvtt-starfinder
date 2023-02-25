@@ -3,6 +3,7 @@ import { ActorMovementConfig } from "../../apps/movement-config.js";
 import { TraitSelectorSFRPG } from "../../apps/trait-selector.js";
 import { getEquipmentBrowser } from "../../packs/equipment-browser.js";
 import { getSpellBrowser } from "../../packs/spell-browser.js";
+import StackModifiers from "../../rules/closures/stack-modifiers.js";
 
 import { RPC } from "../../rpc.js";
 import { ActorItemHelper, containsItems, getFirstAcceptableStorageIndex, moveItemBetweenActorsAsync } from "../actor-inventory-utils.js";
@@ -392,6 +393,89 @@ export class ActorSheetSFRPG extends ActorSheet {
             if (actorResourceItem.system.base || actorResourceItem.system.base === 0) {
                 actorResourceItem.actorResourceData = actorData.resources[actorResourceItem.system.type][actorResourceItem.system.subType];
             }
+        }
+    }
+
+    _prepareAttackString(item)  {
+        try {
+            const itemData = item.system;
+            const actor = item.actor;
+            const isWeapon = ["weapon", "shield"].includes(item.type);
+
+            let abl = itemData.ability;
+            if (!abl && (actor.type === "npc" || actor.type === "npc2")) abl = "";
+            else if (!abl && (item.type === "spell")) abl = actor.system.attributes.spellcasting || "int";
+            else if (itemData.properties?.operative && actor.system.abilities.dex.value > actor.system.abilities.str.value) abl = "dex";
+            else if (!abl) abl = "str";
+
+            // Define Roll parts
+            const parts = [];
+
+            if (Number.isNumeric(itemData.attackBonus) && itemData.attackBonus !== 0) parts.push("@item.attackBonus");
+            if (abl) parts.push(`@abilities.${abl}.mod`);
+            if (["character", "drone"].includes(actor.type)) parts.push("@attributes.baseAttackBonus.value");
+            if (isWeapon) {
+                const procifiencyKey = SFRPG.weaponTypeProficiency[item.system.weaponType];
+                const proficient = itemData.proficient || actor?.system?.traits?.weaponProf?.value?.includes(procifiencyKey);
+                if (!proficient) {
+                    parts.push(`-4[${game.i18n.localize("SFRPG.Items.NotProficient")}]`);
+                }
+            }
+
+            const formula = parts.join("+");
+
+            const appropriateMods = item.getAppropriateAttackModifiers(isWeapon);
+            const stackModifiers = new StackModifiers();
+            let modifiers = stackModifiers.process(appropriateMods, null);
+
+            modifiers = Object.values(modifiers)
+                .flat()
+                .filter(i => !!i);
+            const modifiersTotal = modifiers.reduce((total, i) => {
+                return total + i.max;
+            }, 0);
+
+            const preparedFormula = `${formula} ${modifiersTotal > 0 ? "+" + String(modifiersTotal) : ""}`;
+
+            const roll = Roll.create(preparedFormula, {...item.actor.system, item: item.system}).simplifiedFormula;
+            item.config.attackString = Number(roll) > 0 ? `+${roll}` : roll;
+
+        } catch {
+            item.config.attackString = game.i18n.localize("SFRPG.Attack");
+        }
+        console.log(item.config.attackString);
+    }
+
+    /**
+     * Take the items's first damage part,  add all applicable damage modifiers, and create a pretty formula, for display on the damage button
+     * @param {ItemSFRPG} item
+     */
+    _prepareDamageString(item) {
+        try {
+            const isWeapon = ["weapon", "shield"].includes(item.type);
+            const formula = item.system.damage.parts[0].formula;
+            if (!formula) throw ("No damage formula, deferring to default string");
+
+            const appropriateMods = item.getAppropriateDamageModifiers(isWeapon);
+            const stackModifiers = new StackModifiers();
+            let modifiers = stackModifiers.process(appropriateMods, null);
+
+            modifiers = Object.values(modifiers)
+                .flat()
+                .filter(i => !!i);
+            const modifiersTotal = modifiers.reduce((total, i) => {
+                return total + i.max;
+            }, 0);
+
+            const preparedFormula = `${formula} ${modifiersTotal > 0 ? "+" + String(modifiersTotal) : ""}`;
+
+            const roll = Roll.create(preparedFormula, {...item.actor.system, item: item.system}).simplifiedFormula;
+            if (!roll) throw ("Invaid roll, deferring to default string.");
+            item.config.damageString = roll;
+        } catch {
+            item.config.damageString = item.system.actionType === "heal"
+                ? game.i18n.localize("SFRPG.ActionHeal")
+                : game.i18n.localize("SFRPG.Damage.Title");
         }
     }
 

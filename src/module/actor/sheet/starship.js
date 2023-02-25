@@ -266,6 +266,14 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
                 this._prepareActorResource(item, actorData);
             }
 
+            if (item.config.hasAttack) {
+                this._prepareAttackString(item);
+            }
+
+            if (item.config.hasDamage) {
+                this._prepareDamageString(item);
+            }
+
             if (item.type === "starshipWeapon") {
                 const weaponArc = item?.system?.mount?.arc;
                 if (weaponArc === "forward") arr[0].push(item);

@@ -96,6 +96,14 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
                 item.config.capacityMaximum = item.getMaxCapacity();
             }
 
+            if (item.config.hasAttack) {
+                this._prepareAttackString(item);
+            }
+
+            if (item.config.hasDamage) {
+                this._prepareDamageString(item);
+            }
+
             if (item.type === "actorResource") {
                 this._prepareActorResource(item, actorData);
             }
@@ -107,16 +115,14 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
                 } else {
                     arr[0].push(item); // items
                 }
-            }
-            else if (item.type === "feat") {
+            } else if (item.type === "feat") {
                 if ((item.system.requirements?.toLowerCase() || "") === "condition") {
                     arr[7].push(item); // conditionItems
                 } else {
                     arr[2].push(item); // feats
                 }
                 item.isFeat = true;
-            }
-            else if (item.type === "class") arr[3].push(item); // classes
+            } else if (item.type === "class") arr[3].push(item); // classes
             else if (item.type === "race") arr[4].push(item); // races
             else if (item.type === "theme") arr[5].push(item); // themes
             else if (item.type === "archetypes") arr[6].push(item); // archetypes

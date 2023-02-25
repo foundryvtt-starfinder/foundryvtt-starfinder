@@ -340,7 +340,7 @@
                     </li>
                 </ul>
             </div>
-            
+
             {{#if (or system.hasAblativeArmor (and system.hasShields (not system.hasDeflectorShields)))}}
             <div class="flexcol traits">
                 <div class="flexrow">
@@ -385,7 +385,7 @@
                 </div>
             </div>
             {{/if}}
-                        
+
             <div class="flexcol traits">
                 <h3 class="form-header noborder">{{localize "SFRPG.StarshipSheet.Critical.Header"}}</h3>
                 <div class="flexrow">
@@ -502,7 +502,7 @@
                             {{#if ../../isOwner}}
                             <div class="item-action flexcol">
                                 <button type="button" class="tag attack">{{localize "SFRPG.Attack"}}</button>
-                                <button type="button" class="tag damage">{{localize "SFRPG.Damage.Title"}}</button>
+                                <button type="button" class="tag damage">{{item.config.damageString}}</button>
                             </div>
                             {{/if}}
                         </div>

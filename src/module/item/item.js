@@ -667,7 +667,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         const actorData = this.actor.system;
         if (!this.hasAttack) {
-            throw new Error("You may not place an Attack Roll with this Item.");
+            return ui.notifications.error("You may not make an Attack Roll with this Item.");
         }
 
         if (this.type === "starshipWeapon") return this._rollStarshipAttack(options);
@@ -694,38 +694,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             }
         }
 
-        const acceptedModifiers = [SFRPGEffectType.ALL_ATTACKS];
-        if (["msak", "rsak"].includes(this.system.actionType)) {
-            acceptedModifiers.push(SFRPGEffectType.SPELL_ATTACKS);
-        } else if (this.system.actionType === "rwak") {
-            acceptedModifiers.push(SFRPGEffectType.RANGED_ATTACKS);
-        } else if (this.system.actionType === "mwak") {
-            acceptedModifiers.push(SFRPGEffectType.MELEE_ATTACKS);
-        }
-
-        if (isWeapon) {
-            acceptedModifiers.push(SFRPGEffectType.WEAPON_ATTACKS);
-            acceptedModifiers.push(SFRPGEffectType.WEAPON_PROPERTY_ATTACKS);
-            acceptedModifiers.push(SFRPGEffectType.WEAPON_CATEGORY_ATTACKS);
-        }
-
-        let modifiers = this.actor.getAllModifiers();
-        modifiers = modifiers.filter(mod => {
-            if (mod.effectType === SFRPGEffectType.WEAPON_ATTACKS) {
-                if (mod.valueAffected !== this.system.weaponType) {
-                    return false;
-                }
-            } else if (mod.effectType === SFRPGEffectType.WEAPON_PROPERTY_ATTACKS) {
-                if (!this.system.properties[mod.valueAffected]) {
-                    return false;
-                }
-            } else if (mod.effectType === SFRPGEffectType.WEAPON_CATEGORY_ATTACKS) {
-                if (this.system.weaponCategory !== mod.valueAffected) {
-                    return false;
-                }
-            }
-            return (mod.enabled || mod.modifierType === "formula") && acceptedModifiers.includes(mod.effectType);
-        });
+        let modifiers = this.getAppropriateAttackModifiers(isWeapon);
 
         let stackModifiers = new StackModifiers();
         modifiers = stackModifiers.process(modifiers, null);
@@ -815,6 +784,43 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             },
             onClose: this._onAttackRollClose.bind(this, options)
         });
+    }
+
+    getAppropriateAttackModifiers(isWeapon) {
+        const acceptedModifiers = [SFRPGEffectType.ALL_ATTACKS];
+        if (["msak", "rsak"].includes(this.system.actionType)) {
+            acceptedModifiers.push(SFRPGEffectType.SPELL_ATTACKS);
+        } else if (this.system.actionType === "rwak") {
+            acceptedModifiers.push(SFRPGEffectType.RANGED_ATTACKS);
+        } else if (this.system.actionType === "mwak") {
+            acceptedModifiers.push(SFRPGEffectType.MELEE_ATTACKS);
+        }
+
+        if (isWeapon) {
+            acceptedModifiers.push(SFRPGEffectType.WEAPON_ATTACKS);
+            acceptedModifiers.push(SFRPGEffectType.WEAPON_PROPERTY_ATTACKS);
+            acceptedModifiers.push(SFRPGEffectType.WEAPON_CATEGORY_ATTACKS);
+        }
+
+        let modifiers = this.actor.getAllModifiers();
+        modifiers = modifiers.filter(mod => {
+            if (mod.effectType === SFRPGEffectType.WEAPON_ATTACKS) {
+                if (mod.valueAffected !== this.system.weaponType) {
+                    return false;
+                }
+            } else if (mod.effectType === SFRPGEffectType.WEAPON_PROPERTY_ATTACKS) {
+                if (!this.system.properties[mod.valueAffected]) {
+                    return false;
+                }
+            } else if (mod.effectType === SFRPGEffectType.WEAPON_CATEGORY_ATTACKS) {
+                if (this.system.weaponCategory !== mod.valueAffected) {
+                    return false;
+                }
+            }
+            return (mod.enabled || mod.modifierType === "formula") && acceptedModifiers.includes(mod.effectType);
+        });
+
+        return modifiers;
     }
 
     /**
@@ -1008,7 +1014,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const isHealing = this.system.actionType === "heal";
 
         if (!this.hasDamage) {
-            throw new Error("You may not make a Damage Roll with this Item.");
+            return ui.notifications.error("You may not make a Damage Roll with this Item.");
         }
 
         if (this.type === "starshipWeapon") return this._rollStarshipDamage({ event: event });
@@ -1026,43 +1032,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             part.isDamageSection = true;
         }
 
-        const acceptedModifiers = [SFRPGEffectType.ALL_DAMAGE];
-
-        if (["msak", "rsak"].includes(this.system.actionType) || (this.type === "spell"  && this.system.actionType === "save")) {
-            acceptedModifiers.push(SFRPGEffectType.SPELL_DAMAGE);
-        } else if (this.system.actionType === "rwak") {
-            acceptedModifiers.push(SFRPGEffectType.RANGED_DAMAGE);
-        } else if (this.system.actionType === "mwak") {
-            acceptedModifiers.push(SFRPGEffectType.MELEE_DAMAGE);
-        }
-
-        if (isWeapon) {
-            acceptedModifiers.push(SFRPGEffectType.WEAPON_DAMAGE);
-            acceptedModifiers.push(SFRPGEffectType.WEAPON_PROPERTY_DAMAGE);
-            acceptedModifiers.push(SFRPGEffectType.WEAPON_CATEGORY_DAMAGE);
-        }
-
-        let modifiers = this.actor.getAllModifiers();
-        modifiers = modifiers.filter(mod => {
-            if (!acceptedModifiers.includes(mod.effectType)) {
-                return false;
-            }
-
-            if (mod.effectType === SFRPGEffectType.WEAPON_DAMAGE) {
-                if (mod.valueAffected !== this.system.weaponType) {
-                    return false;
-                }
-            } else if (mod.effectType === SFRPGEffectType.WEAPON_PROPERTY_DAMAGE) {
-                if (!this.system.properties[mod.valueAffected]) {
-                    return false;
-                }
-            } else if (mod.effectType === SFRPGEffectType.WEAPON_CATEGORY_DAMAGE) {
-                if (this.system.weaponCategory !== mod.valueAffected) {
-                    return false;
-                }
-            }
-            return (mod.enabled || mod.modifierType === "formula");
-        });
+        let modifiers = this.getAppropriateDamageModifiers(isWeapon);
 
         let stackModifiers = new StackModifiers();
         modifiers = stackModifiers.process(modifiers, null);
@@ -1156,6 +1126,48 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 }
             }
         });
+    }
+
+    getAppropriateDamageModifiers(isWeapon) {
+        const acceptedModifiers = [SFRPGEffectType.ALL_DAMAGE];
+
+        if (["msak", "rsak"].includes(this.system.actionType) || (this.type === "spell"  && this.system.actionType === "save")) {
+            acceptedModifiers.push(SFRPGEffectType.SPELL_DAMAGE);
+        } else if (this.system.actionType === "rwak") {
+            acceptedModifiers.push(SFRPGEffectType.RANGED_DAMAGE);
+        } else if (this.system.actionType === "mwak") {
+            acceptedModifiers.push(SFRPGEffectType.MELEE_DAMAGE);
+        }
+
+        if (isWeapon) {
+            acceptedModifiers.push(SFRPGEffectType.WEAPON_DAMAGE);
+            acceptedModifiers.push(SFRPGEffectType.WEAPON_PROPERTY_DAMAGE);
+            acceptedModifiers.push(SFRPGEffectType.WEAPON_CATEGORY_DAMAGE);
+        }
+
+        let modifiers = this.actor.getAllModifiers();
+        modifiers = modifiers.filter(mod => {
+            if (!acceptedModifiers.includes(mod.effectType)) {
+                return false;
+            }
+
+            if (mod.effectType === SFRPGEffectType.WEAPON_DAMAGE) {
+                if (mod.valueAffected !== this.system.weaponType) {
+                    return false;
+                }
+            } else if (mod.effectType === SFRPGEffectType.WEAPON_PROPERTY_DAMAGE) {
+                if (!this.system.properties[mod.valueAffected]) {
+                    return false;
+                }
+            } else if (mod.effectType === SFRPGEffectType.WEAPON_CATEGORY_DAMAGE) {
+                if (this.system.weaponCategory !== mod.valueAffected) {
+                    return false;
+                }
+            }
+            return (mod.enabled || mod.modifierType === "formula");
+        });
+
+        return modifiers;
     }
 
     async _rollVehicleDamage({ event } = {}, options = {}) {

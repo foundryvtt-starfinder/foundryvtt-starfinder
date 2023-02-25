@@ -112,6 +112,14 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
                 this._prepareActorResource(item, actorData);
             }
 
+            if (item.config.hasAttack) {
+                this._prepareAttackString(item);
+            }
+
+            if (item.config.hasDamage) {
+                this._prepareDamageString(item);
+            }
+
             if (droneItemTypes.includes(item.type)) {
                 arr[3].push(item); // droneItems
             } else if (item.type === "spell") {

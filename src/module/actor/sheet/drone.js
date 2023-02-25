@@ -103,6 +103,14 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
                 this._prepareActorResource(item, actorData);
             }
 
+            if (item.config.hasAttack) {
+                this._prepareAttackString(item);
+            }
+
+            if (item.config.hasDamage) {
+                this._prepareDamageString(item);
+            }
+
             if (item.type === "feat") {
                 if ((item.system.requirements?.toLowerCase() || "") === "condition") {
                     arr[4].push(item); // conditionItems
