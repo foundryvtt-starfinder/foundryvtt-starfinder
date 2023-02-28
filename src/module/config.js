@@ -782,8 +782,8 @@ SFRPG.itemActionTypes = {
     "msak": "SFRPG.ActionMSAK",
     "rsak": "SFRPG.ActionRSAK",
     "save": "SFRPG.ActionSave",
+    "skill": "SFRPG.ActionSkill",
     "heal": "SFRPG.ActionHeal",
-    "abil": "SFRPG.ActionAbil",
     "util": "SFRPG.ActionUtil",
     "other": "SFRPG.ActionOther"
 };

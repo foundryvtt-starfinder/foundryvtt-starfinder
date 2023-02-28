@@ -54,6 +54,17 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         return hasType;
     }
 
+    /**
+     * Does the Item implement a saving throw as part of its usage
+     * @type {boolean}
+     */
+    get hasSkill() {
+        const skillData = this.system?.skillCheck;
+        if (!skillData) return false;
+
+        return !!skillData.type;
+    }
+
     /* -------------------------------------------- */
     /*	Data Preparation														*/
     /* -------------------------------------------- */
@@ -214,6 +225,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             hasAttack: this.hasAttack,
             hasDamage: this.hasDamage,
             hasSave: this.hasSave,
+            hasSkill: this.hasSkill,
             hasOtherFormula: this.hasOtherFormula
         };
 
@@ -769,6 +781,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const rollData = duplicate(actorData);
         // Add hasSave to roll
         itemData.hasSave = this.hasSave;
+        itemData.hasSkill = this.hasSkill;
         itemData.hasDamage = this.hasDamage;
         itemData.hasCapacity = this.hasCapacity();
 
@@ -1460,7 +1473,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const action = button.dataset.action;
 
         // Validate permission to proceed with the roll
-        const isTargetted = action === "save";
+        const isTargetted = ["save", "skill"].includes(action);
         if (!(isTargetted || game.user.isGM || message.isAuthor)) return;
 
         // Get the Actor from a synthetic Token
@@ -1495,14 +1508,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         else if (action === "damage") await item.rollDamage({ event });
         else if (action === "formula") await item.rollFormula({ event });
 
+        // Skill Check
+        else if (action === "skill" && targetActor) await targetActor.rollSkill(button.dataset.type, { event });
+
         // Saving Throw
-        else if (action === "save" && targetActor) {
-            const savePromise = targetActor.rollSave(button.dataset.type, { event });
-            savePromise.then(() => {
-                button.disabled = false;
-            });
-            return;
-        }
+        else if (action === "save" && targetActor) await targetActor.rollSave(button.dataset.type, { event });
 
         // Consumable usage
         else if (action === "consume") await item.rollConsumable({ event });
