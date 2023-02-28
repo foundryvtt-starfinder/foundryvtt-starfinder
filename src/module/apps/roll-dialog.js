@@ -126,11 +126,20 @@ export default class RollDialog extends Dialog {
 
             // Make a simplified roll
             const simplerRoll = Roll.create(modifier.modifier, context).simplifiedFormula;
+
             if (modifier.modifier[0] === "+") modifier.modifier = modifier.modifier.slice(1);
 
-            // If it actually was simplified, append the original modififer for use on the tooltip.
+            /* If it actually was simplified, append the original modififer for use on the tooltip.
+            *
+            * If the formulas are different with whitespace, that means the original likely has some weird whitespace, so let's correct that, bu we don't need to tell the user.
+            */
             if (modifier.modifier !== simplerRoll) {
                 modifier.originalFormula = modifier.modifier;
+
+                // If the formulas are still different without whitespace, then MathTerms must have been simplifed, so let's tell the user.
+                if (modifier.originalFormula.replace(/\s/g, "") !== simplerRoll.replace(/\s/g, "")) {
+                    modifier.originalFormulaTooltip = true;
+                }
             }
 
             // Sign that string
@@ -162,11 +171,17 @@ export default class RollDialog extends Dialog {
                 }
                 part.type = typeString;
 
-                // Clean up the formula
+                // If it actually was simplified, append the original modififer for use on the tooltip.
+                // If the formulas are different with whitespace, that means the original likely has some weird whitespace, so let's correct that, bu we don't need to tell the user.
                 const simplerRoll = Roll.create(part.formula).simplifiedFormula;
                 if (part.formula !== simplerRoll) {
                     part.originalFormula = part.formula;
                     part.formula = simplerRoll;
+
+                    // If the formulas are still different without whitespace, then MathTerms must have been simplifed, so let's tell the user.
+                    if (part.originalFormula.replace(/\s/g, "") !== simplerRoll.replace(/\s/g, "")) {
+                        part.originalFormulaTooltip = true;
+                    }
                 }
             }
 
