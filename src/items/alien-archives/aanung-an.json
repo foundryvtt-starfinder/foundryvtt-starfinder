@@ -269,9 +269,12 @@
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
-        "ability": null,
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "skill",
         "activation": {
           "type": "",
           "condition": "",
@@ -290,7 +293,24 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [
+            {
+              "name": "",
+              "formula": "1d6+4",
+              "group": null,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "piercing": false,
+                "slashing": true,
+                "sonic": false
+              }
+            }
+          ]
         },
         "damageNotes": "",
         "description": {
@@ -298,9 +318,46 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>An aanung-an that starts its turn grappling a creature can attempt to carve a ritual scar into its victim’s body as a standard action, afflicting it with potent magic. The aanung-an attempts a Mysticism check (DC = 20 + target’s level or CR). On a success, the aanung-an renews the grapple, and the target takes 1d6+4 slashing damage as the aanung-an claws a symbol into its body. The target must then succeed at a DC 15 Will saving throw or suffer one of the following effects of the aanung-an’s choice: bestow curse, slow, or suggestion. These effects function at the aanung-an’s caster level. Certain aanung-ans might inflict different or unique effects with this ability, at the GM’s discretion.</p>"
+          "value": "<p>An aanung-an that starts its turn grappling a creature can attempt to carve a ritual scar into its victim’s body as a standard action, afflicting it with potent magic. The aanung-an attempts a Mysticism check (DC = 20 + target’s level or CR). On a success, the aanung-an renews the grapple, and the target takes 1d6+4 slashing damage as the aanung-an claws a symbol into its body. The target must then succeed at a DC 15 Will saving throw or suffer one of the following effects of the aanung-an’s choice: @UUID[Compendium.sfrpg.spells.Jrx0dGgxtVkLcZd1]{Bestow Curse}, @UUID[Compendium.sfrpg.spells.4prroV3z26u1cy5y]{Slow}, or @UUID[Compendium.sfrpg.spells.nmBeoZQUNcZw7nmy]{Suggestion}. These effects function at the aanung-an’s caster level. Certain aanung-ans might inflict different or unique effects with this ability, at the GM’s discretion.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
         "duration": {
           "units": "",
           "value": null
@@ -321,9 +378,13 @@
         "requirements": "",
         "rollNotes": "",
         "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
+          "type": "will",
+          "dc": "15",
+          "descriptor": "negate"
+        },
+        "skillCheck": {
+          "type": "mys",
+          "dc": ""
         },
         "source": "",
         "target": {
@@ -1402,7 +1463,7 @@
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": "attributes.rp"
     },
     "detectionModes": [],
     "displayBars": 20,
@@ -1560,6 +1621,18 @@
         "base": 3,
         "bonus": 0,
         "misc": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "rp": {
+        "max": 10,
+        "min": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "sp": {
+        "max": 10,
+        "min": 0,
         "tooltip": [],
         "value": 0
       },

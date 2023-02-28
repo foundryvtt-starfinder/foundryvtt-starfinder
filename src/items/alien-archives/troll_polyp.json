@@ -154,9 +154,9 @@
         "damage": {
           "parts": [
             {
-              "name": "",
-              "formula": "1d6 +7",
-              "group": null,
+              "name": "Bludgeoning",
+              "formula": "1d6 + 7",
+              "group": 0,
               "types": {
                 "acid": false,
                 "bludgeoning": true,
@@ -164,7 +164,39 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "piercing": false,
+                "slashing": false,
+                "sonic": false
+              }
+            },
+            {
+              "name": "Piercing",
+              "formula": "1d6 + 7",
+              "group": 0,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
                 "piercing": true,
+                "slashing": false,
+                "sonic": false
+              }
+            },
+            {
+              "name": "Slashing",
+              "formula": "1d6 + 7",
+              "group": 0,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "piercing": false,
                 "slashing": true,
                 "sonic": false
               }
@@ -301,6 +333,10 @@
           "type": "",
           "dc": "",
           "descriptor": "negate"
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": ""
         },
         "source": "",
         "special": "",
@@ -504,7 +540,7 @@
           "value": ""
         },
         "formula": "",
-        "isActive": true,
+        "isActive": false,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -522,6 +558,10 @@
           "type": "reflex",
           "dc": "12",
           "descriptor": "negate"
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": ""
         },
         "source": "",
         "target": {
@@ -544,7 +584,7 @@
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": "attributes.rp"
     },
     "detectionModes": [],
     "displayBars": 20,
@@ -702,6 +742,18 @@
         "base": 5,
         "bonus": 0,
         "misc": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "rp": {
+        "max": 10,
+        "min": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "sp": {
+        "max": 10,
+        "min": 0,
         "tooltip": [],
         "value": 0
       },

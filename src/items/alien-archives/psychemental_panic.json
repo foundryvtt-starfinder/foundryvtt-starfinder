@@ -11,9 +11,12 @@
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
-        "ability": null,
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "save",
         "activation": {
           "type": "",
           "condition": "",
@@ -42,7 +45,44 @@
           "unidentified": "",
           "value": "<p>Creatures within 30 feet of a psychemental are affected by an impairing mind fog. Creatures inside the aura must succeed at a DC 12 Will save or take a -1 penalty to Will saves and Intelligence- and Wisdom-based skill checks.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
         "duration": {
           "units": "",
           "value": null
@@ -63,9 +103,13 @@
         "requirements": "",
         "rollNotes": "",
         "save": {
+          "type": "will",
+          "dc": "12",
+          "descriptor": "negate"
+        },
+        "skillCheck": {
           "type": "",
-          "dc": null,
-          "descriptor": ""
+          "dc": ""
         },
         "source": "",
         "target": {
@@ -657,7 +701,7 @@
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": "attributes.rp"
     },
     "detectionModes": [],
     "displayBars": 20,
@@ -815,6 +859,18 @@
         "base": 1,
         "bonus": 0,
         "misc": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "rp": {
+        "max": 10,
+        "min": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "sp": {
+        "max": 10,
+        "min": 0,
         "tooltip": [],
         "value": 0
       },

@@ -345,18 +345,21 @@
       "system": {
         "type": "",
         "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
-          "type": "",
+          "type": "move",
           "condition": "",
-          "cost": 0
+          "cost": 1
         },
         "area": {
           "effect": "",
           "shape": "",
-          "units": "",
-          "value": 0
+          "units": "none",
+          "value": null
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -375,10 +378,47 @@
           "unidentified": "",
           "value": "<p>As a move action, the talrepi recombinator can teleport up to 10 feet away without provoking attacks of opportunity. This is a teleportation effect.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": true,
+          "water": false
+        },
         "duration": {
           "units": "",
-          "value": null
+          "value": ""
         },
         "formula": "",
         "isActive": null,
@@ -386,8 +426,8 @@
         "range": {
           "additional": "",
           "per": "",
-          "units": "",
-          "value": null
+          "units": "ft",
+          "value": 10
         },
         "recharge": {
           "charged": false,
@@ -403,11 +443,11 @@
         "source": "",
         "target": {
           "type": "",
-          "value": null
+          "value": ""
         },
         "uses": {
           "max": 0,
-          "per": null,
+          "per": "",
           "value": 0
         }
       }
@@ -420,8 +460,11 @@
       "system": {
         "type": "",
         "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
@@ -448,9 +491,46 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>The talrepi recombinator has an integrated dispenser of ion tape (Armory 105) and can discharge minor jolts from its dispensing port to activate or deactivate the tape. A talrepi recombinator can produce 50 feet of ion tape each day; any tape it hasn’t used that day can be recovered from its body when it’s destroyed.</p>"
+          "value": "<p>The talrepi recombinator has an integrated dispenser of @UUID[Compendium.sfrpg.equipment.WktzHEcitLOKPCaP]{Ion Tape} (Armory 105) and can discharge minor jolts from its dispensing port to activate or deactivate the tape. A talrepi recombinator can produce 50 feet of ion tape each day; any tape it hasn’t used that day can be recovered from its body when it’s destroyed.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
         "duration": {
           "units": "",
           "value": null
@@ -662,7 +742,7 @@
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": "attributes.rp"
     },
     "detectionModes": [],
     "displayBars": 20,
@@ -820,6 +900,18 @@
         "base": 0,
         "bonus": 0,
         "misc": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "rp": {
+        "max": 10,
+        "min": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "sp": {
+        "max": 10,
+        "min": 0,
         "tooltip": [],
         "value": 0
       },

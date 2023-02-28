@@ -572,9 +572,12 @@
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
-        "ability": null,
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "save",
         "activation": {
           "type": "",
           "condition": "",
@@ -603,7 +606,44 @@
           "unidentified": "",
           "value": "<p>When a liquescence deals a critical hit with its slam attack, it pours into every crevice and joint possible. The target must succeed at a DC 11 Reflex saving throw or have 1d4+2 of its hybrid and technological weapons, armor, and gear (randomly determined) gain the broken condition for 1d4 rounds. Items with the analog property are unaffected.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
         "duration": {
           "units": "",
           "value": null
@@ -624,9 +664,13 @@
         "requirements": "",
         "rollNotes": "",
         "save": {
+          "type": "reflex",
+          "dc": "11",
+          "descriptor": "negate"
+        },
+        "skillCheck": {
           "type": "",
-          "dc": null,
-          "descriptor": ""
+          "dc": ""
         },
         "source": "",
         "target": {
@@ -732,7 +776,7 @@
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": "attributes.rp"
     },
     "detectionModes": [],
     "displayBars": 20,
@@ -890,6 +934,18 @@
         "base": 2,
         "bonus": 0,
         "misc": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "rp": {
+        "max": 10,
+        "min": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "sp": {
+        "max": 10,
+        "min": 0,
         "tooltip": [],
         "value": 0
       },

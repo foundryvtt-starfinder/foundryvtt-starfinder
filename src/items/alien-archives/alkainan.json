@@ -1720,7 +1720,44 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.f34cpBT3OiXKXssf]{Squad}</p>\n<p>As a full action, you can move up to twice your speed and make one attack, but your target must be a creature threatening an ally. Once you have used this ability, you cannot do so again until you have taken a 10-minute rest to regain Stamina Points.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
         "duration": {
           "units": "",
           "value": ""
@@ -1751,9 +1788,9 @@
           "value": ""
         },
         "uses": {
-          "max": 0,
-          "per": "",
-          "value": 0
+          "max": 1,
+          "per": "sr",
+          "value": 1
         }
       }
     },
@@ -1866,121 +1903,6 @@
           "descriptor": ""
         },
         "source": "Gear Boost",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      }
-    },
-    {
-      "_id": "rTvoUTchNEmXoQUL",
-      "name": "Metallic Bloodline",
-      "type": "feat",
-      "img": "icons/svg/item-bag.svg",
-      "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
-        "actionTarget": "",
-        "actionType": "",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": 0
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "damageNotes": "",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>Each alkainan’s ancestors survived on a type of metal, granting their descendants a certain ability as follows.</p>\n<p><strong>Ferrous</strong>: When wearing armor, the alkainan gains a +1 species bonus to KAC.</p>\n<p><strong>Nonferrous</strong>: The alkainan gains a +2 species bonus to Reflex saving throws.</p>\n<p><strong>Skymetal</strong>: The alkainan’s unarmed strikes count as magic. At 7th level, the alkainan’s unarmed strikes also count as adamantine</p>"
-        },
-        "descriptors": {
-          "acid": false,
-          "air": false,
-          "calling": false,
-          "chaotic": false,
-          "charm": false,
-          "cold": false,
-          "compulsion": false,
-          "creation": false,
-          "curse": false,
-          "darkness": false,
-          "death": false,
-          "disease": false,
-          "earth": false,
-          "electricity": false,
-          "emotion": false,
-          "evil": false,
-          "fear": false,
-          "fire": false,
-          "force": false,
-          "good": false,
-          "healing": false,
-          "language-dependent": false,
-          "lawful": false,
-          "light": false,
-          "mind-affecting": false,
-          "pain": false,
-          "poison": false,
-          "polymorph": false,
-          "radiation": false,
-          "scrying": false,
-          "sense-dependent": false,
-          "shadow": false,
-          "sonic": false,
-          "summoning": false,
-          "teleportation": false,
-          "water": false
-        },
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "isActive": null,
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "Alkainan",
-        "rollNotes": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "AP #49 pg. 56",
         "target": {
           "type": "",
           "value": null
@@ -2251,7 +2173,7 @@
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": "attributes.rp"
     },
     "detectionModes": [],
     "displayBars": 20,
@@ -2409,6 +2331,18 @@
         "base": 5,
         "bonus": 0,
         "misc": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "rp": {
+        "max": 10,
+        "min": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "sp": {
+        "max": 10,
+        "min": 0,
         "tooltip": [],
         "value": 0
       },

@@ -86,9 +86,12 @@
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
-        "ability": null,
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "skill",
         "activation": {
           "type": "",
           "condition": "",
@@ -117,7 +120,44 @@
           "unidentified": "",
           "value": "<p>When an aerial devil would be hit by a ranged attack against KAC, it can attempt to pick the projectile out of the air with its beak as a reaction. The aerial devil attempts an Acrobatics check (DC = the result of the successful attack roll). If successful, the aerial devil takes no damage. The aerial devil must be aware of the attack and not flat-footed. An aerial devil can’t eat ammunition from incredibly large ranged weapons (such as starship’s mass driver cannon).</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
         "duration": {
           "units": "",
           "value": null
@@ -139,8 +179,12 @@
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
-          "descriptor": ""
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "skillCheck": {
+          "type": "acr",
+          "dc": ""
         },
         "source": "",
         "target": {
@@ -605,7 +649,7 @@
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": "attributes.rp"
     },
     "detectionModes": [],
     "displayBars": 20,
@@ -763,6 +807,18 @@
         "base": 7,
         "bonus": 0,
         "misc": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "rp": {
+        "max": 10,
+        "min": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "sp": {
+        "max": 10,
+        "min": 0,
         "tooltip": [],
         "value": 0
       },

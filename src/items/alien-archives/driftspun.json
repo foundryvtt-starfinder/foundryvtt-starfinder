@@ -43,7 +43,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>A driftspun surrounds itself with a psychic aura with the effects of a constant holographic terrain spell (CL 9th), changing the appearance of the environment and any items and structures within 30 feet to match the story that manifested the driftspun. Creatures that succeed at a DC 18 Will save to disbelieve this holographic terrain are immune to this driftspun’s aura for 24 hours.</p>"
+          "value": "<p>A driftspun surrounds itself with a psychic aura with the effects of a constant @UUID[Compendium.sfrpg.spells.Lmm0u6noSlQYekSe]{Holographic Terrain} spell (CL 9th), changing the appearance of the environment and any items and structures within 30 feet to match the story that manifested the driftspun. Creatures that succeed at a DC 18 Will save to disbelieve this holographic terrain are immune to this driftspun’s aura for 24 hours.</p>"
         },
         "descriptors": {
           "acid": false,
@@ -106,6 +106,10 @@
           "type": "will",
           "dc": "18",
           "descriptor": "negate"
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": ""
         },
         "source": "",
         "target": {
@@ -499,7 +503,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>As a swift action, a driftspun can manipulate its surroundings to confound and hinder opponents. All creatures except for the driftspun in the driftspun’s aura must succeed a DC 18 Fortitude save or suffer one of the following effects (chosen by the driftspun) for 1d4 rounds (or 1 round if they disbelieved the settingscape). Quake: The affected creature treats the area of the driftspun’s settingscape as difficult terrain. Ripple: The affected creature is flat-footed. Shift: The affected creature is off-target.</p>"
+          "value": "<p>As a swift action, a driftspun can manipulate its surroundings to confound and hinder opponents. All creatures except for the driftspun in the driftspun’s aura must succeed a DC 18 Fortitude save or suffer one of the following effects (chosen by the driftspun) for 1d4 rounds (or 1 round if they disbelieved the settingscape).</p><ul><li><p><em>Quake</em>: The affected creature treats the area of the driftspun’s settingscape as difficult terrain.</p></li><li><p><em>Ripple</em>: The affected creature is @UUID[Compendium.sfrpg.conditions.MZ8OoH1GE9qDMyCD]{Flat-Footed}.</p></li><li><p><em>Shift</em>: The affected creature is @UUID[Compendium.sfrpg.conditions.yUtkoIshf4dPruNd]{Off-Target}.</p></li></ul>"
         },
         "descriptors": {
           "acid": false,
@@ -562,6 +566,10 @@
           "type": "fort",
           "dc": "18",
           "descriptor": "negate"
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": ""
         },
         "source": "",
         "target": {
@@ -750,7 +758,7 @@
             "type": "untyped",
             "condition": "",
             "container": {
-              "actorId": "YM1EgSDu0zz7ElAS",
+              "actorId": "Gqd7MtVVtU7XCHEN",
               "itemId": "unCCCkzcVbvCp055"
             },
             "effectType": "saves",
@@ -758,7 +766,7 @@
             "max": -4,
             "modifier": "-4",
             "modifierType": "formula",
-            "notes": "against mind-affecting effects",
+            "notes": "It takes a -4 penalty to saves against mind-affecting spells and abilities, and when it fails a save against such an effect, it loses its damage reduction for 1 round.",
             "source": "",
             "subtab": "misc",
             "valueAffected": ""
@@ -1912,7 +1920,7 @@
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": "attributes.rp"
     },
     "detectionModes": [],
     "displayBars": 20,
@@ -2070,6 +2078,18 @@
         "base": 8,
         "bonus": 0,
         "misc": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "rp": {
+        "max": 10,
+        "min": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "sp": {
+        "max": 10,
+        "min": 0,
         "tooltip": [],
         "value": 0
       },

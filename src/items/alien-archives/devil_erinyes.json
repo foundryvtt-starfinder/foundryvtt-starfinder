@@ -66,7 +66,7 @@
                 "fusion"
               ],
               "affectsEncumbrance": true,
-              "amount": 0,
+              "amount": 20,
               "subtype": "fusion",
               "weightProperty": "level"
             }
@@ -226,6 +226,10 @@
           "type": "",
           "dc": "",
           "descriptor": "negate"
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": ""
         },
         "source": "",
         "special": "",
@@ -769,8 +773,11 @@
       "system": {
         "type": "",
         "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
@@ -797,9 +804,46 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>Any weapon an erinyes holds gains the effect of an unholy weapon fusion; if the weapon doesn’t already inflict fire damage, it also gains the effect of the flaming weapon fusion.</p>"
+          "value": "<p>Any weapon an erinyes holds gains the effect of an unholy weapon fusion; if the weapon doesn’t already inflict fire damage, it also gains the effect of the @UUID[Compendium.sfrpg.equipment.xCFWNmEQCMP2pbBo]{Flaming} weapon fusion.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
         "duration": {
           "units": "",
           "value": null
@@ -844,18 +888,21 @@
       "system": {
         "type": "",
         "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
-          "type": "",
+          "type": "full",
           "condition": "",
-          "cost": 0
+          "cost": 1
         },
         "area": {
           "effect": "",
-          "shape": "",
-          "units": "",
-          "value": 0
+          "shape": "cone",
+          "units": "ft",
+          "value": 60
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -874,10 +921,47 @@
           "unidentified": "",
           "value": "<p>If they’re flying, the erinyes can take a full action to hover in place and make one ranged attack with their laser rifle against every enemy in a 60-ft. cone.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
         "duration": {
           "units": "",
-          "value": null
+          "value": ""
         },
         "formula": "",
         "isActive": null,
@@ -885,7 +969,7 @@
         "range": {
           "additional": "",
           "per": "",
-          "units": "",
+          "units": "none",
           "value": null
         },
         "recharge": {
@@ -902,11 +986,11 @@
         "source": "",
         "target": {
           "type": "",
-          "value": null
+          "value": ""
         },
         "uses": {
           "max": 0,
-          "per": null,
+          "per": "",
           "value": 0
         }
       }
@@ -2658,7 +2742,7 @@
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": "attributes.rp"
     },
     "detectionModes": [],
     "displayBars": 20,
@@ -2816,6 +2900,18 @@
         "base": 12,
         "bonus": 0,
         "misc": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "rp": {
+        "max": 10,
+        "min": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "sp": {
+        "max": 10,
+        "min": 0,
         "tooltip": [],
         "value": 0
       },

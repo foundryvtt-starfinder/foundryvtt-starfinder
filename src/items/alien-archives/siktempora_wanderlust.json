@@ -11,9 +11,12 @@
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
-        "ability": null,
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "save",
         "activation": {
           "type": "",
           "condition": "",
@@ -32,7 +35,24 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [
+            {
+              "name": "",
+              "formula": "7d10",
+              "group": null,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "piercing": false,
+                "slashing": false,
+                "sonic": false
+              }
+            }
+          ]
         },
         "damageNotes": "",
         "description": {
@@ -40,9 +60,46 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>All creatures within 30 feet of a wanderlust siktempora (but not including the siktempora) gain the effects of the haste spell. If an affected creature doesn’t take a move action to move on its turn, the denied urge to move physically pains that creature, who takes 7d10 damage. A successful DC 20 Will save halves the damage.</p>"
+          "value": "<p>All creatures within 30 feet of a wanderlust siktempora (but not including the siktempora) gain the effects of the @UUID[Compendium.sfrpg.spells.PecEOjojT15BJKi9]{Haste} spell. If an affected creature doesn’t take a move action to move on its turn, the denied urge to move physically pains that creature, who takes 7d10 damage. A successful DC 20 Will save halves the damage.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
         "duration": {
           "units": "",
           "value": null
@@ -63,9 +120,13 @@
         "requirements": "",
         "rollNotes": "",
         "save": {
+          "type": "will",
+          "dc": "20",
+          "descriptor": "negate"
+        },
+        "skillCheck": {
           "type": "",
-          "dc": null,
-          "descriptor": ""
+          "dc": ""
         },
         "source": "",
         "target": {
@@ -729,6 +790,12 @@
         "min": 0,
         "tooltip": [],
         "value": 5
+      },
+      "sp": {
+        "max": 10,
+        "min": 0,
+        "tooltip": [],
+        "value": 0
       },
       "space": "5 ft.",
       "speed": {

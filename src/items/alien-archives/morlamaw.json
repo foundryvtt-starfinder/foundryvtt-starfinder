@@ -841,6 +841,7 @@
             {
               "name": "Healing",
               "formula": "lookupRange(@item.level, 1, 2, 3, 3, 5, 4, 7, 5, 9, 6, 11)d8 + @abilities.wis.mod",
+              "group": null,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -856,6 +857,7 @@
             {
               "name": "4th level Extra Healing",
               "formula": "4d8",
+              "group": null,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -871,6 +873,7 @@
             {
               "name": "5th Level Extra Healing",
               "formula": "7d8",
+              "group": null,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -886,6 +889,7 @@
             {
               "name": "6th Level Extra Healing",
               "formula": "9d8",
+              "group": null,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -936,10 +940,12 @@
           "mind-affecting": false,
           "pain": false,
           "poison": false,
+          "polymorph": false,
           "radiation": false,
           "scrying": false,
           "sense-dependent": false,
           "shadow": false,
+          "sonic": false,
           "summoning": false,
           "teleportation": false,
           "water": false
@@ -974,10 +980,14 @@
         "rollNotes": "",
         "save": {
           "type": "will",
-          "dc": "",
+          "dc": "16",
           "descriptor": "harmless"
         },
         "school": "con",
+        "skillCheck": {
+          "type": "",
+          "dc": ""
+        },
         "source": "CRB pg. 367",
         "sr": true,
         "target": {
@@ -1368,7 +1378,7 @@
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": "attributes.rp"
     },
     "detectionModes": [],
     "displayBars": 20,
@@ -1526,6 +1536,18 @@
         "base": 4,
         "bonus": 0,
         "misc": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "rp": {
+        "max": 10,
+        "min": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "sp": {
+        "max": 10,
+        "min": 0,
         "tooltip": [],
         "value": 0
       },

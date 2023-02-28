@@ -527,19 +527,22 @@
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
-        "ability": null,
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "save",
         "activation": {
-          "type": "",
+          "type": "full",
           "condition": "",
-          "cost": 0
+          "cost": 1
         },
         "area": {
           "effect": "",
           "shape": "",
-          "units": "",
-          "value": 0
+          "units": "none",
+          "value": null
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -548,7 +551,24 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [
+            {
+              "name": "",
+              "formula": "4d6",
+              "group": null,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "piercing": false,
+                "slashing": true,
+                "sonic": false
+              }
+            }
+          ]
         },
         "damageNotes": "",
         "description": {
@@ -558,10 +578,47 @@
           "unidentified": "",
           "value": "<p>As a reaction when a creature within 60 feet of the palioxodaemon is affected by a teleportation effect, the daemon can scramble that creature’s form. The creature takes 4d6 slashing damage and suffers the effects of the critical wound effect. A successful DC 18 Fortitude save halves the damage and negates the wound effect. The palioxodaemon can’t use this ability on a target affected by their own space-time shuffle ability. In addition, any creature who accompanies a palioxodaemon via its teleport spell-like ability must attempt a save against cause mishap with a -4 penalty. The daemon can’t choose not to affect an accompanying creature this way.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
         "duration": {
           "units": "",
-          "value": null
+          "value": ""
         },
         "formula": "",
         "isActive": null,
@@ -569,7 +626,7 @@
         "range": {
           "additional": "",
           "per": "",
-          "units": "",
+          "units": "none",
           "value": null
         },
         "recharge": {
@@ -579,18 +636,22 @@
         "requirements": "",
         "rollNotes": "",
         "save": {
+          "type": "fort",
+          "dc": "18",
+          "descriptor": "negate"
+        },
+        "skillCheck": {
           "type": "",
-          "dc": null,
-          "descriptor": ""
+          "dc": ""
         },
         "source": "",
         "target": {
           "type": "",
-          "value": null
+          "value": ""
         },
         "uses": {
           "max": 0,
-          "per": null,
+          "per": "",
           "value": 0
         }
       }
@@ -603,18 +664,21 @@
       "system": {
         "type": "",
         "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
-          "type": "",
+          "type": "move",
           "condition": "",
-          "cost": 0
+          "cost": 1
         },
         "area": {
           "effect": "",
           "shape": "",
-          "units": "",
-          "value": 0
+          "units": "none",
+          "value": null
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -633,10 +697,47 @@
           "unidentified": "",
           "value": "<p>As a move action, the palioxodaemon can teleport any creature within 60 feet who they can see to any other unoccupied space within 60 feet that they can see. The target can attempt a DC 20 Will save to resist this teleportation. Once per day, the palioxodaemon can attempt to teleport their target into a space occupied by solid nonliving matter, such as a wall. A target subjected to this variation who fails the Will save also attempts a DC 18 Fortitude save; on a success, the daemon must instead teleport it to an unoccupied space. On a failed Fortitude save, the target takes 4d10 bludgeoning damage and is pinned within the matter. The affected creature isn’t within line of sight of other creatures outside the matter (unless these creatures have a way to see through solid matter) and can’t escape the pinned condition with the usual attack roll or Acrobatics check. However, at the beginning of each turn that it’s pinned within the matter, the target attempts another DC 18 Fortitude save. On a success, it’s teleported to a random unoccupied space adjacent to (or as close as possible to) the solid matter it had been trapped in. On a failure, the target takes an additional 4d10 bludgeoning damage and remains pinned. This is a teleportation effect.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
         "duration": {
           "units": "",
-          "value": null
+          "value": ""
         },
         "formula": "",
         "isActive": null,
@@ -644,8 +745,8 @@
         "range": {
           "additional": "",
           "per": "",
-          "units": "",
-          "value": null
+          "units": "ft",
+          "value": 60
         },
         "recharge": {
           "charged": false,
@@ -661,11 +762,11 @@
         "source": "",
         "target": {
           "type": "",
-          "value": null
+          "value": ""
         },
         "uses": {
           "max": 0,
-          "per": null,
+          "per": "",
           "value": 0
         }
       }
@@ -896,7 +997,7 @@
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": "attributes.rp"
     },
     "detectionModes": [],
     "displayBars": 20,
@@ -1054,6 +1155,18 @@
         "base": 13,
         "bonus": 0,
         "misc": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "rp": {
+        "max": 10,
+        "min": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "sp": {
+        "max": 10,
+        "min": 0,
         "tooltip": [],
         "value": 0
       },

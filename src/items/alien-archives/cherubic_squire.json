@@ -604,9 +604,12 @@
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
-        "ability": null,
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "skill",
         "activation": {
           "type": "",
           "condition": "",
@@ -635,7 +638,44 @@
           "unidentified": "",
           "value": "<p>When not in use, each of a cherubic squire’s weapons is folded inside the squire’s shell and hidden from sight. A creature unaware of the cherubic squire’s hidden weapons must succeed at a DC 15 Perception check to notice one. A cherubic squire can deploy any or all of their weapons as a swift action or as part of making an attack or full attack. The cherubic squire can’t be disarmed of the weapons. As a swift action, the squire can retract any or all of their weapons.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
         "duration": {
           "units": "",
           "value": null
@@ -657,8 +697,12 @@
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
-          "descriptor": ""
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "skillCheck": {
+          "type": "per",
+          "dc": "15"
         },
         "source": "",
         "target": {
@@ -1322,7 +1366,7 @@
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": "attributes.rp"
     },
     "detectionModes": [],
     "displayBars": 20,
@@ -1480,6 +1524,18 @@
         "base": 3,
         "bonus": 0,
         "misc": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "rp": {
+        "max": 10,
+        "min": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "sp": {
+        "max": 10,
+        "min": 0,
         "tooltip": [],
         "value": 0
       },

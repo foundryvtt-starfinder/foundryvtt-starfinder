@@ -301,7 +301,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>Mustyotals gain a +4 racial bonus to attack rolls to perform the disarm combat maneuver against enemies threatened by an ally. After a mustyotal attempts a disarm combat maneuver against an enemy that’s also threatened by an ally, the mustyotal can take a guarded step as a reaction.</p>"
+          "value": "<p>Mustyotals gain a +4 species bonus to attack rolls to perform the disarm combat maneuver against enemies threatened by an ally. After a mustyotal attempts a disarm combat maneuver against an enemy that’s also threatened by an ally, the mustyotal can take a guarded step as a reaction.</p>"
         },
         "descriptors": {
           "acid": false,
@@ -347,7 +347,27 @@
         },
         "formula": "",
         "isActive": null,
-        "modifiers": [],
+        "modifiers": [
+          {
+            "_id": "e663bd86-5942-488d-8e57-5a81de9fd286",
+            "name": "Tandem Disarm (Ex)",
+            "type": "untyped",
+            "condition": "",
+            "container": {
+              "actorId": "blW59YwGdRFlURjD",
+              "itemId": "JAlJqkoMPrsl2J4n"
+            },
+            "effectType": "melee-attacks",
+            "enabled": true,
+            "max": 4,
+            "modifier": "4",
+            "modifierType": "formula",
+            "notes": "Mustyotals gain a +4 species bonus to attack rolls to perform the disarm combat maneuver against enemies threatened by an ally.",
+            "source": "Tandem Disarm (Ex)",
+            "subtab": "misc",
+            "valueAffected": ""
+          }
+        ],
         "range": {
           "additional": "",
           "per": "",
@@ -641,7 +661,27 @@
         },
         "formula": "",
         "isActive": null,
-        "modifiers": [],
+        "modifiers": [
+          {
+            "_id": "595d8b8d-5a82-4ee5-a1b3-71da0ce7fbb4",
+            "name": "Weapon of the Enemy (Ex)",
+            "type": "insight",
+            "condition": "",
+            "container": {
+              "actorId": "blW59YwGdRFlURjD",
+              "itemId": "agZ2u3FcglaCRuvQ"
+            },
+            "effectType": "melee-attacks",
+            "enabled": true,
+            "max": 1,
+            "modifier": "1",
+            "modifierType": "formula",
+            "notes": "When a mustyotal successfully disarms an enemy, they become proficient with that weapon for 1 minute and gain a +1 insight bonus to attack rolls made with that weapon against creatures wielding a weapon of the same type.",
+            "source": "Weapon of the Enemy (Ex)",
+            "subtab": "misc",
+            "valueAffected": ""
+          }
+        ],
         "range": {
           "additional": "",
           "per": "",
@@ -761,7 +801,7 @@
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": "attributes.rp"
     },
     "detectionModes": [],
     "displayBars": 20,
@@ -919,6 +959,18 @@
         "base": 7,
         "bonus": 0,
         "misc": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "rp": {
+        "max": 10,
+        "min": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "sp": {
+        "max": 10,
+        "min": 0,
         "tooltip": [],
         "value": 0
       },

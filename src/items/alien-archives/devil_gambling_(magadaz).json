@@ -11,9 +11,12 @@
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
-        "ability": null,
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "save",
         "activation": {
           "type": "",
           "condition": "",
@@ -42,7 +45,44 @@
           "unidentified": "",
           "value": "<p>The presence of a gambling devil encourages nearby creatures to make riskier decisions and take bigger gambles. Any non-devil creature within 30 feet of a gambling devil must succeed at a DC 15 Will saving throw each round or be compelled to throw caution to the wind for as long as it remains within the aura. Whenever a situation calls for a d20 roll, any creature affected by this ability must roll twice. If either roll is a natural 20, the affected creature can use that roll. Otherwise, it must use the lower of the two results. A gambling devil can take a swift action to suppress this aura for 1 round.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
         "duration": {
           "units": "",
           "value": null
@@ -63,9 +103,13 @@
         "requirements": "",
         "rollNotes": "",
         "save": {
+          "type": "will",
+          "dc": "15",
+          "descriptor": "negate"
+        },
+        "skillCheck": {
           "type": "",
-          "dc": null,
-          "descriptor": ""
+          "dc": ""
         },
         "source": "",
         "target": {
@@ -747,7 +791,7 @@
     },
     {
       "_id": "WRQvbZfBb7Poc189",
-      "name": "Change Shape (Su)",
+      "name": "Change Shape (Humanoid)",
       "type": "feat",
       "flags": {
         "core": {
@@ -791,7 +835,44 @@
           "unidentified": "",
           "value": "<p>The creature has the ability to assume the appearance of a specific creature or type of creature, but it retains most of its own physical qualities. If the form assumed has any of the following abilities, the creature gains them while in that form: @UUID[Compendium.sfrpg.universal-creature-rules.4HvnYWLhFBiuvDxD]{Blindsight} (scent), @UUID[Compendium.sfrpg.universal-creature-rules.3Yg98sD5UymVymF9]{Darkvision}, @UUID[Compendium.sfrpg.universal-creature-rules.NRtNybzTZrVjbOYv]{Low Light Vision}, and swim 30 feet. The creature can retain its own breathing ability, or it can assume the ability to breathe in any environment the assumed shape can breathe in (including the no breath ability, which enables it to survive in the vacuum of space). If the ability does not specify what the creature can change shape into, it can assume the form of any creature of the humanoid type, but it can’t mimic a specific humanoid. Change shape grants a +10 bonus to Disguise checks to appear as a creature of the type and subtype of the new form, and the DC of the creature’s Disguise check is not modified as a result of altering major features or disguising itself as a different race or creature type.</p>\n<p>A creature can assume a form that is one size category smaller or larger than its original form; it becomes that size. Unless otherwise stated, it can remain in an alternate form indefinitely. Some creatures can transform into unique forms with special modifiers and abilities. These creatures adjust their ability scores, as noted in their description.</p>\n<p><em>Format</em>:<strong>Other Abilities</strong> change shape (humanoid); creatures with a unique form also have an entry in Special Abilities.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
         "duration": {
           "units": "",
           "value": null
@@ -1054,7 +1135,7 @@
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": "attributes.rp"
     },
     "detectionModes": [],
     "displayBars": 20,
@@ -1212,6 +1293,18 @@
         "base": 5,
         "bonus": 0,
         "misc": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "rp": {
+        "max": 10,
+        "min": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "sp": {
+        "max": 10,
+        "min": 0,
         "tooltip": [],
         "value": 0
       },

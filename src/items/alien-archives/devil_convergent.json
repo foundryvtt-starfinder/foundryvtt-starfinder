@@ -269,9 +269,12 @@
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
-        "ability": null,
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "save",
         "activation": {
           "type": "",
           "condition": "",
@@ -298,9 +301,46 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>When a convergent devil uses their instant upgrade spell-like ability, they can choose to create a biotech augmentation instead of a cybernetic augmentation, subject to the same restrictions. If they do so, the target must attempt a DC 17 Fortitude save. On a failure, the target is sickened for the duration of the spell.</p>"
+          "value": "<p>When a convergent devil uses their instant upgrade spell-like ability, they can choose to create a biotech augmentation instead of a cybernetic augmentation, subject to the same restrictions. If they do so, the target must attempt a DC 17 Fortitude save. On a failure, the target is @UUID[Compendium.sfrpg.conditions.ZacF0l6IwqBwToTJ]{Sickened} for the duration of the spell.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
         "duration": {
           "units": "",
           "value": null
@@ -321,9 +361,13 @@
         "requirements": "",
         "rollNotes": "",
         "save": {
+          "type": "fort",
+          "dc": "17",
+          "descriptor": "negate"
+        },
+        "skillCheck": {
           "type": "",
-          "dc": null,
-          "descriptor": ""
+          "dc": ""
         },
         "source": "",
         "target": {
@@ -484,7 +528,7 @@
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": "attributes.rp"
     },
     "detectionModes": [],
     "displayBars": 20,
@@ -642,6 +686,18 @@
         "base": 3,
         "bonus": 0,
         "misc": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "rp": {
+        "max": 10,
+        "min": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "sp": {
+        "max": 10,
+        "min": 0,
         "tooltip": [],
         "value": 0
       },

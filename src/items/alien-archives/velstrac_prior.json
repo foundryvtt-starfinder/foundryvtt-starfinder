@@ -760,19 +760,22 @@
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
-        "ability": null,
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "save",
         "activation": {
           "type": "",
           "condition": "",
-          "cost": 0
+          "cost": 1
         },
         "area": {
           "effect": "",
           "shape": "",
-          "units": "",
-          "value": 0
+          "units": "none",
+          "value": null
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -789,12 +792,49 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>Those who meet a prior’s gaze are overcome by the horror of the passage of time. A creature who fails a DC 18 Will saving throw gains the off-target condition, can’t ready actions, can’t delay, and can’t take actions it has already readied. These effects last for 2d4 rounds. This is a mind-affecting fear effect. Whether a creature succeeds at the save or not, it can’t be affected again by a prior’s unnerving gaze for 24 hours.</p>"
+          "value": "<p>Those who meet a prior’s gaze are overcome by the horror of the passage of time. A creature who fails a DC 18 Will saving throw gains the @UUID[Compendium.sfrpg.conditions.yUtkoIshf4dPruNd]{Off-Target} condition, can’t ready actions, can’t delay, and can’t take actions it has already readied. These effects last for 2d4 rounds. This is a mind-affecting fear effect. Whether a creature succeeds at the save or not, it can’t be affected again by a prior’s unnerving gaze for 24 hours.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": true,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": true,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
         "duration": {
           "units": "",
-          "value": null
+          "value": ""
         },
         "formula": "",
         "isActive": null,
@@ -802,7 +842,7 @@
         "range": {
           "additional": "",
           "per": "",
-          "units": "",
+          "units": "none",
           "value": null
         },
         "recharge": {
@@ -812,18 +852,22 @@
         "requirements": "",
         "rollNotes": "",
         "save": {
+          "type": "will",
+          "dc": "18",
+          "descriptor": "negate"
+        },
+        "skillCheck": {
           "type": "",
-          "dc": null,
-          "descriptor": ""
+          "dc": ""
         },
         "source": "",
         "target": {
           "type": "",
-          "value": null
+          "value": ""
         },
         "uses": {
           "max": 0,
-          "per": null,
+          "per": "",
           "value": 0
         }
       }
@@ -1046,7 +1090,7 @@
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": "attributes.rp"
     },
     "detectionModes": [],
     "displayBars": 20,
@@ -1207,6 +1251,18 @@
         "tooltip": [],
         "value": 0
       },
+      "rp": {
+        "max": 10,
+        "min": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "sp": {
+        "max": 10,
+        "min": 0,
+        "tooltip": [],
+        "value": 0
+      },
       "space": "5",
       "speed": {
         "burrowing": {
@@ -1308,7 +1364,7 @@
     "details": {
       "type": "Outsider",
       "alignment": "LE",
-      "aura": "Agonizing Alacrity - 60 Ft., DC 18",
+      "aura": "agonizing alacrity (60 ft., DC 18); unnerving gaze (30 ft., DC 18)",
       "biography": {
         "age": 0,
         "dateOfBirth": "",
