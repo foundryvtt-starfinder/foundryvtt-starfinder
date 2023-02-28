@@ -1658,10 +1658,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     }
 
     static async _onScalingCantripsSettingChanges() {
-        const d3scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d(lookupRange(@details.cl.value,3,7,4))+lookupRange(@details.cl.value,0,3,floor(@details.level.value/2))";
-        const d6scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+lookupRange(@details.cl.value,0,3,floor(@details.level.value/2))";
-        const npcd3scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d(lookupRange(@details.cr,3,7,4))+lookupRange(@details.cr,0,3,floor(@details.cr/2))";
-        const npcd6scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+lookupRange(@details.cr,0,3,floor(@details.cr/2))";
+        const d3scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d(ternary(gte(@details.cl.value,7),4,3))+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
+        const d6scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
+        const npcd3scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d(ternary(gte(@details.cr,7),4,3))+ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
+        const npcd6scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
 
         const setting = game.settings.get("sfrpg", "scalingCantrips");
         let count = 0;
@@ -1713,7 +1713,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
                 await actor.updateEmbeddedDocuments("Item", updates);
                 count += params.length;
-                actorCount += 1;
+                actorCount++;
             }
         }
         const message = `Starfinder | Updated ${count} spells to use ${(setting) ? "scaling" : "default"} formulas on ${actorCount} actors.`;
@@ -1721,10 +1721,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     }
 
     static async _onScalingCantripDrop(addedItem, targetActor) {
-        const d3scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d(lookupRange(@details.cl.value,3,7,4))+lookupRange(@details.cl.value,0,3,floor(@details.level.value/2))";
-        const d6scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+lookupRange(@details.cl.value,0,3,floor(@details.level.value/2))";
-        const npcd3scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d(lookupRange(@details.cr,3,7,4))+lookupRange(@details.cr,0,3,floor(@details.cr/2))";
-        const npcd6scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+lookupRange(@details.cr,0,3,floor(@details.cr/2))";
+        const d3scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d(ternary(gte(@details.cl.value,7),4,3))+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
+        const d6scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
+        const npcd3scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d(ternary(gte(@details.cr,7),4,3))+ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
+        const npcd6scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
 
         const isNPC = ['npc', 'npc2'].includes(targetActor.actor.type);
 
