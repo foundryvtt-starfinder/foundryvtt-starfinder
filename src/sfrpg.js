@@ -746,8 +746,7 @@ function setupHandlebars() {
     });
 
     Handlebars.registerHelper('currencyFormat', function(value) {
-        const currencyLocale = game.settings.get('sfrpg', 'currencyLocale');
-        const moneyFormatter  = new Intl.NumberFormat(currencyLocale);
+        const moneyFormatter = new Intl.NumberFormat(game.i18n.lang);
         const formattedValue = moneyFormatter.format(value);
         return formattedValue;
     });

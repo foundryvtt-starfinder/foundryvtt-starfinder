@@ -208,15 +208,6 @@ export const registerSystemSettings = function() {
         type: Boolean
     });
 
-    game.settings.register("sfrpg", "currencyLocale", {
-        name: "SFRPG.Settings.CurrencyLocale.Name",
-        hint: "SFRPG.Settings.CurrencyLocale.Hint",
-        scope: "client",
-        config: true,
-        default: "en-US",
-        type: String
-    });
-
     game.settings.register("sfrpg", "sfrpgTheme", {
         name: "SFRPG.Settings.SFRPGTheme.Name",
         hint: "SFRPG.Settings.SFRPGTheme.Hint",
