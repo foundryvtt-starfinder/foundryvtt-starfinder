@@ -108,8 +108,8 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
                     arr[0].push(item); // items
                 }
             }
-            else if (item.type === "feat") {
-                if ((item.system.requirements?.toLowerCase() || "") === "condition") {
+            else if (item.type === "feat" || item.type === "effect") {
+                if (((item.system.requirements?.toLowerCase() || "") === "condition") || item.type === "effect") {
                     arr[7].push(item); // conditionItems
                 } else {
                     arr[2].push(item); // feats
