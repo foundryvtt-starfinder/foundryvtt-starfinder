@@ -55,7 +55,6 @@ export default function(engine) {
 
                 if (!computedSkill) {
                     item.labels.skillCheck = 10;
-                    item.labels.skillCheck = 10;
                 }
             }
         }
