@@ -171,8 +171,10 @@ export default class RollDialog extends Dialog {
                 }
                 part.type = typeString;
 
-                // If it actually was simplified, append the original modififer for use on the tooltip.
-                // If the formulas are different with whitespace, that means the original likely has some weird whitespace, so let's correct that, bu we don't need to tell the user.
+                /* If it actually was simplified, append the original modififer for use on the tooltip.
+                *
+                * If the formulas are different with whitespace, that means the original likely has some weird whitespace, so let's correct that, bu we don't need to tell the user.
+                */
                 const simplerRoll = Roll.create(part.formula).simplifiedFormula;
                 if (part.formula !== simplerRoll) {
                     part.originalFormula = part.formula;
