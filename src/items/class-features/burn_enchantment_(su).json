@@ -1,6 +1,6 @@
 {
-  "_id": "uNsADocQHSqcPUmW",
-  "name": "Solar Battery (Su)",
+  "_id": "FfoYHZQ6GS6YjiT9",
+  "name": "Burn Enchantment (Su)",
   "type": "feat",
   "img": "systems/sfrpg/images/cup/gameplay/photon.webp",
   "system": {
@@ -29,7 +29,24 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "",
+          "formula": "(lookupRange(@classes.solarian.levels, 0, 2, 1, 6, 2, 10, 3, 14, 4, 18, 5))d6",
+          "group": null,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
     },
     "damageNotes": "",
     "description": {
@@ -37,7 +54,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p><sub><img style=\"border: 1px solid var(--color-border-dark);\" src=\"systems/sfrpg/images/cup/gameplay/photon.webp\" alt=\"\" width=\"20\" height=\"20\"></sub><span>&nbsp;</span>Photon Revelation</p>\n<p>You can energize a battery with solar power, empowering a weapon but draining the battery in the process. As a move action, you supercharge one weapon you’re wielding or a weapon wielded by an ally within your melee reach. The weapon must have a battery, and that battery must have at least half its charges remaining. The next attack made with that weapon before the end of your next turn gains a bonus to its damage equal to your solarian level plus your Charisma modifier, but the attack expends the battery’s remaining charges.</p>\n<p>If you’re attuned or fully attuned, you can cause half or all of the weapon’s damage to become fire damage instead of its normal damage type; this doesn’t change whether the attack targets EAC or KAC. If the attack already deals two types of damage, the wielder can replace one or both of them with fire damage.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p>@Icon[type:photon] Photon Revelation</p>\n<p>Your attacks’ cosmic energy shreds the magical forces wielded by spellcasters. As a move action, you sheathe your body in protective energy that attunes to spellcasters you strike. If the next successful melee attack you make before the beginning of your next turn hits a creature capable of casting spells or using spell-like abilities, you gain a +2 enhancement bonus to saving throws against that creature’s spells and spell-like abilities for 1 round.</p>\n<p>When you are attuned or fully attuned, your weapon gains the dispelling critical effect. If the weapon already has a critical hit effect, when you score a critical hit, you can apply either the weapon’s normal critical hit effect or the dispelling effect. A target affected by the dispelling critical hit effect is the subject of a targeted <em>@UUID[Compendium.sfrpg.spells.KQ4vSfG9tq8EJxir]{Dispel Magic}</em>, per the spell, using your solarian level as the caster level.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -85,16 +102,16 @@
     "isActive": null,
     "modifiers": [
       {
-        "_id": "c4143138-7f3f-4315-a3ce-60a013b611a6",
-        "name": "Solar Battery (Su)",
-        "type": "untyped",
+        "_id": "435883cc-fbcf-4810-8c02-0bc2a31e51a4",
+        "name": "Burn Enchantment (Su)",
+        "type": "enhancement",
         "condition": "",
-        "effectType": "all-damage",
+        "effectType": "spell-save-dc",
         "enabled": true,
-        "max": 0,
-        "modifier": "@classes.solarian.levels + @abilities.cha.mod",
-        "modifierType": "formula",
-        "notes": "The next attack made with the weapon which battery it used for this ability before the end of your next turn gains this bonus.",
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "You gain a +2 enhancement bonus to saving throws against the hit creature’s spells and spell-like abilities",
         "source": "",
         "subtab": "misc",
         "valueAffected": ""
@@ -110,14 +127,14 @@
       "charged": false,
       "value": null
     },
-    "requirements": "2nd Level",
+    "requirements": "10th Level",
     "rollNotes": "",
     "save": {
-      "type": "",
-      "dc": "",
+      "type": "fort",
+      "dc": "10+floor(@classes.solarian.levels/2) + @abilities.cha.mod",
       "descriptor": "negate"
     },
-    "source": "TR pg. 30",
+    "source": "AR, pg 152",
     "target": {
       "type": "",
       "value": ""

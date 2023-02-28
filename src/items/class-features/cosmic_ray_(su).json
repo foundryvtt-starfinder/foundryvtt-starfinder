@@ -1,8 +1,8 @@
 {
-  "_id": "7VVFPck5IJhTmP7q",
-  "name": "Flare (Su)",
+  "_id": "0LTWgvxLS80pzszW",
+  "name": "Cosmic Ray (Su)",
   "type": "feat",
-  "img": "systems/sfrpg/icons/classes/flare.webp",
+  "img": "systems/sfrpg/images/cup/gameplay/photon.webp",
   "system": {
     "type": "",
     "ability": "",
@@ -12,15 +12,15 @@
     "actionTarget": "",
     "actionType": "other",
     "activation": {
-      "type": "move",
+      "type": "action",
       "condition": "",
-      "cost": 1
+      "cost": null
     },
     "area": {
       "effect": "",
-      "shape": "sphere",
-      "units": "ft",
-      "value": 30
+      "shape": "",
+      "units": "none",
+      "value": null
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -29,7 +29,24 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "",
+          "formula": "(lookupRange(@classes.solarian.levels, 0, 2, 1, 6, 2, 10, 3, 14, 4, 18, 5))d6",
+          "group": null,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
     },
     "damageNotes": "",
     "description": {
@@ -37,7 +54,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p><sub><img style=\"border: 1px solid var(--color-border-dark);\" src=\"systems/sfrpg/images/cup/gameplay/photon.webp\" alt=\"\" width=\"20\" height=\"20\"></sub><span>&nbsp;</span>Photon Revelation</p>\n<p>As a move action, you can shed light in a 30-foot radius for 1 minute. You choose dim, normal, or bright light each time you activate this revelation. As a standard action, you can create a flash of brilliant light, forcing one creature within 30 feet to succeed at a Reflex save or be @UUID[Compendium.sfrpg.conditions.tOpF6qjnlnKc10t7]{Blinded} for 1 round. Once you’ve targeted a creature with flare, you can’t target it with this revelation again for 10 minutes. Blind or sightless creatures are not affected by this use of this revelation.</p>\n<p>When you create a flash of light as a standard action and you are attuned or fully attuned, you can instead choose to make all enemies within range @UUID[Compendium.sfrpg.conditions.YjE6UGzwOTfO9p4g]{Dazzled} for 1 round (no save).</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p>&nbsp;@Icon[type:photon] Photon Revelation</p>\n<p>A rapidly spinning pulsar casts out subatomic particles, constantly shooting high-energy cosmic rays into space; you’ve learned to control these cosmic rays and wield them in battle. As a standard action while you are attuned or fully attuned, you can shoot a ray of high-energy particles at a single target within 120 feet, making a ranged attack against its EAC. On a hit, your target is exposed to medium @UUID[Compendium.sfrpg.rules.SfkuzH5kxSAmG4nv.JournalEntryPage.n461i9lDXw303SiY#radiation]{Radiation} (Core Rulebook 404). At 12th level, your cosmic ray exposes the target to @UUID[Compendium.sfrpg.rules.SfkuzH5kxSAmG4nv.JournalEntryPage.n461i9lDXw303SiY#radiation-levels]{High Radiation} instead, and at 20th level, your cosmic ray exposes the target to extreme radiation.</p>\n<p>Once you use this revelation, you can’t use it again until you rest for 10 minutes to regain Stamina Points.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -79,7 +96,7 @@
     },
     "duration": {
       "units": "",
-      "value": "1 minute"
+      "value": ""
     },
     "formula": "",
     "isActive": null,
@@ -88,23 +105,23 @@
       "additional": "",
       "per": "",
       "units": "ft",
-      "value": 30
+      "value": 120
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "2nd Level",
+    "requirements": "6th Level",
     "rollNotes": "",
     "save": {
-      "type": "reflex",
+      "type": "fort",
       "dc": "10+floor(@classes.solarian.levels/2) + @abilities.cha.mod",
       "descriptor": "negate"
     },
-    "source": "Solarian",
+    "source": "AP#41, pg 52",
     "target": {
       "type": "",
-      "value": "1 S. Action"
+      "value": ""
     },
     "uses": {
       "max": 0,

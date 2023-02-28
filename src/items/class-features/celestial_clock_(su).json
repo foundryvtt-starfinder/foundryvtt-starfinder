@@ -1,8 +1,8 @@
 {
-  "_id": "7VVFPck5IJhTmP7q",
-  "name": "Flare (Su)",
+  "_id": "IIe7KpoFXy8BK03H",
+  "name": "Celestial Clock (Su)",
   "type": "feat",
-  "img": "systems/sfrpg/icons/classes/flare.webp",
+  "img": "systems/sfrpg/images/cup/gameplay/photon.webp",
   "system": {
     "type": "",
     "ability": "",
@@ -12,15 +12,15 @@
     "actionTarget": "",
     "actionType": "other",
     "activation": {
-      "type": "move",
+      "type": "action",
       "condition": "",
-      "cost": 1
+      "cost": null
     },
     "area": {
       "effect": "",
-      "shape": "sphere",
-      "units": "ft",
-      "value": 30
+      "shape": "",
+      "units": "none",
+      "value": null
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -29,7 +29,24 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "",
+          "formula": "(lookupRange(@classes.solarian.levels, 0, 2, 1, 6, 2, 10, 3, 14, 4, 18, 5))d6",
+          "group": null,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
     },
     "damageNotes": "",
     "description": {
@@ -37,7 +54,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p><sub><img style=\"border: 1px solid var(--color-border-dark);\" src=\"systems/sfrpg/images/cup/gameplay/photon.webp\" alt=\"\" width=\"20\" height=\"20\"></sub><span>&nbsp;</span>Photon Revelation</p>\n<p>As a move action, you can shed light in a 30-foot radius for 1 minute. You choose dim, normal, or bright light each time you activate this revelation. As a standard action, you can create a flash of brilliant light, forcing one creature within 30 feet to succeed at a Reflex save or be @UUID[Compendium.sfrpg.conditions.tOpF6qjnlnKc10t7]{Blinded} for 1 round. Once you’ve targeted a creature with flare, you can’t target it with this revelation again for 10 minutes. Blind or sightless creatures are not affected by this use of this revelation.</p>\n<p>When you create a flash of light as a standard action and you are attuned or fully attuned, you can instead choose to make all enemies within range @UUID[Compendium.sfrpg.conditions.YjE6UGzwOTfO9p4g]{Dazzled} for 1 round (no save).</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p>&nbsp;@Icon[type:photon] Photon Revelation</p>\n<p>The rotation of a pulsar is perfectly precise, rivaling that of an atomic clock. You can sense this cosmological clock and time your movements to it, acting with uncanny timing and perfect precision. You gain a +2 bonus to your Armor Class against attacks of opportunity.</p>\n<p>You also possess a supernaturally accurate sense of time—you’re always aware of the exact date and time wherever (and whenever) you are, accurate to the millisecond, and can precisely measure time as it passes without the need for a clock or other device.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -79,11 +96,27 @@
     },
     "duration": {
       "units": "",
-      "value": "1 minute"
+      "value": ""
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "db8256cf-e721-4244-add4-bfc03486fdea",
+        "name": "Celestial Clock",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": true,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "Against Attacks of Opportunity",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "both"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -97,14 +130,14 @@
     "requirements": "2nd Level",
     "rollNotes": "",
     "save": {
-      "type": "reflex",
+      "type": "fort",
       "dc": "10+floor(@classes.solarian.levels/2) + @abilities.cha.mod",
       "descriptor": "negate"
     },
-    "source": "Solarian",
+    "source": "AP#41, pg 52",
     "target": {
       "type": "",
-      "value": "1 S. Action"
+      "value": ""
     },
     "uses": {
       "max": 0,
