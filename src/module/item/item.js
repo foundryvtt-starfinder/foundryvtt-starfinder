@@ -1692,7 +1692,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
                 for (let currentValue of updates) {
                     if (currentValue.scaling.d3) {
-                        currentValue['system.damage.parts'].forEach(i => {
+                        const parts = currentValue['system.damage.parts'];
+                        for (const i of parts) {
                             if (setting) {
                                 if (isNPC) {
                                     i.formula = npcd3scaling;
@@ -1702,9 +1703,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                             } else {
                                 i.formula = "1d3";
                             }
-                        });
+                        }
                     } else if (currentValue.scaling.d6) {
-                        currentValue['system.damage.parts'].forEach(i => {
+                        const parts = currentValue['system.damage.parts'];
+                        for (const i of parts) {
                             if (setting) {
                                 if (isNPC) {
                                     i.formula = npcd6scaling;
@@ -1714,7 +1716,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                             } else {
                                 i.formula = "1d6";
                             }
-                        });
+                        }
                     }
 
                     delete currentValue.scaling;
@@ -1740,7 +1742,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         if (addedItem.system.scaling?.d3) {
 
             const updates = duplicate(addedItem.system.damage.parts);
-            updates.forEach(i => i.formula = (isNPC) ? npcd3scaling : d3scaling);
+            updates.map(i => {
+                i.formula = (isNPC) ? npcd3scaling : d3scaling;
+                return i;
+            } );
 
             await addedItem.update({"system.damage.parts": updates});
             console.log(`Starfinder | Updated ${addedItem.name} to use the ${ (isNPC) ? 'NPC ' : ""}d3 scaling formula.`);
@@ -1748,7 +1753,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         } else if (addedItem.system.scaling?.d6) {
 
             const updates = duplicate(addedItem.system.damage.parts);
-            updates.forEach(i => i.formula = (isNPC) ? npcd6scaling : d6scaling);
+            updates.map(i => {
+                i.formula = (isNPC) ? npcd6scaling : d6scaling;
+                return i;
+            } );
 
             await addedItem.update({"system.damage.parts": updates});
             console.log(`Starfinder | Updated ${addedItem.name} to use the ${ (isNPC) ? "NPC " : ""}d6 scaling formula.`);

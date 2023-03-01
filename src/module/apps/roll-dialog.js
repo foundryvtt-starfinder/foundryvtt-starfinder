@@ -361,7 +361,7 @@ export default class RollDialog extends Dialog {
                     buttons: buttons,
                     default: defaultButton,
                     close: (button, rollMode, bonus, parts) => {
-                        resolve([button, rollMode, bonus, parts]);
+                        resolve({button, rollMode, bonus, parts});
                     }
                 },
                 options: options.dialogOptions || {}
