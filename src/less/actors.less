@@ -1,1023 +1,1053 @@
 @import "./variables.less";
 .sfrpg.sheet.actor {
+    /* ----------------------------------------- */
+    /*  Sheet Header                             */
+    /* ----------------------------------------- */
 
-  /* ----------------------------------------- */
-  /*  Sheet Header                             */
-  /* ----------------------------------------- */
+    .sheet-header {
+        .summary {
+            li {
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+        }
 
-  .sheet-header {
-    .summary {
-      li {
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-      }
+        .header-background {
+            background: #235683;
+            background: @blueGradientBackground;
+
+            .charname {
+                > input {
+                    color: #fff;
+                    margin: 0 2%;
+                }
+            }
+
+            .charlevel {
+                flex: 0 0 160px;
+                height: 60px;
+                margin: 0;
+                padding: 5px;
+                text-align: right;
+
+                .level {
+                    width: 100%;
+                    height: 30px;
+                    font-size: 20px;
+                    line-height: 30px;
+
+                    label {
+                        display: inline;
+                        font-size: 24px;
+                        text-align: right;
+                        color: #fff;
+                    }
+
+                    span {
+                        color: #fff;
+                        font-size: 20px;
+                    }
+
+                    input {
+                        // display: inline;
+                        width: 45px;
+                        font-size: 20px;
+                        text-align: center;
+                        color: #fff;
+                    }
+
+                    // If the Experience Bar is disabled
+                    &.noxp {
+                        margin-top: 10px;
+                        > label {
+                            font-size: 32px;
+                        }
+                        > input {
+                            font-size: 32px;
+                            flex: 0 0 40px;
+                            height: 44px;
+                        }
+                    }
+                }
+
+                .experience {
+                    .exo2();
+                    width: 100%;
+                    height: 20px;
+                    padding-right: 5px;
+                    font-size: 12px;
+                    color: #fff;
+
+                    > input {
+                        color: #fff;
+                    }
+                }
+            }
+        }
     }
 
-    .header-background {
-      background: #235683;
-      background: @blueGradientBackground;
-
-      .charname {
-        > input {
-          color: #fff;
-          margin: 0 2%;
+    .attributes {
+        input.temphp {
+            width: 48%;
         }
-      }
+    }
 
-      .charlevel {
-        flex: 0 0 160px;
-        height: 60px;
-        margin: 0;
-        padding: 5px;
-        text-align: right;
+    .sheet-body {
+        .bio-properties {
+            height: 100%;
 
-        .level {
-          width: 100%;
-          height: 30px;
-          font-size: 20px;
-          line-height: 30px;
+            flex: 0 0 200px;
+            margin: 5px 5px 5px 5px;
+            padding-right: 5px;
+            border-right: @borderGroove;
 
-          label {
-            display: inline;
-            font-size: 24px;
-            text-align: right;
-            color: #fff;
-          }
+            .avatar {
+                flex: 0 0 250px;
+                object-fit: contain;
+            }
 
-          span {
-            color: #fff;
-            font-size: 20px;
-          }
+            .singleFlex {
+                flex: 0 0 20px;
+                height: 20px;
+                max-height: 20px;
+                line-height: 20px;
+            }
+            .doubleFlex {
+                flex: 0 0 40px;
+            }
 
-          input {
-            // display: inline;
-            width: 45px;
-            font-size: 20px;
+            .form-group {
+                margin: 0;
+                label {
+                    line-height: 20px;
+                }
+                input {
+                    text-align: right;
+
+                    &.regular {
+                        text-align: left;
+                    }
+                }
+                .singleLine {
+                    height: 20px;
+                    line-height: 20px;
+                    max-height: 20px;
+                }
+            }
+
+            .fill {
+                box-sizing: border-box; /* fit parent width */
+                height: 100%;
+                margin-bottom: 5px;
+            }
+
+            .properties-list {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+
+                li {
+                    margin: 3px 0;
+                    padding: 0 2px;
+                    background: rgba(0, 0, 0, 0.05);
+                    border: @borderGroove;
+                    text-align: center;
+                    font-size: 12px;
+                    line-height: 18px;
+                }
+            }
+        }
+    }
+
+    /* ----------------------------------------- */
+    /*  General Styles                           */
+    /* ----------------------------------------- */
+
+    // Box Headers
+    h4.box-title {
+        line-height: 16px;
+        margin: 4px 8px 2px;
+        font-size: 16px;
+        border-bottom: 1px solid @colorBeige;
+    }
+
+    .rollable {
+        cursor: pointer;
+
+        &:hover {
+            text-shadow: 0 0 10px red;
+        }
+    }
+
+    /* ----------------------------------------- */
+    /*  Attributes                               */
+    /* ----------------------------------------- */
+
+    ul.attributes {
+        list-style: none;
+        margin: 5px 0 0;
+        padding: 0;
+
+        li.attribute {
+            min-height: 70px;
+            margin: 0 5px;
+            border: @borderGroove;
+            border-radius: 4px;
+            //.nodesto();
+            .exo2();
             text-align: center;
-            color: #fff;
-          }
 
-          // If the Experience Bar is disabled
-          &.noxp {
-            margin-top: 10px;
-            > label {
-              font-size: 32px;
+            &.cmd {
+                //CMD is larger to fit "KAC + 8" label
+                margin: 0 3px;
             }
-            > input {
-              font-size: 32px;
-              flex: 0 0 40px;
-              height: 44px;
+
+            .attribute-name {
+                flex: 0 0 18px;
             }
-          }
 
+            .attribute-value {
+                height: 28px;
+                line-height: 28px;
+
+                input,
+                div.attribute-value-max {
+                    display: inline;
+                    max-width: 80%;
+                    margin: 0;
+                    font-size: 16px;
+                    padding: 0;
+                }
+
+                div.attribute-value-max {
+                    font-size: 20px;
+                }
+
+                span.sep {
+                    display: inline;
+                    position: relative;
+                    top: 2px;
+                    font-size: 28px;
+                    color: @colorTan;
+                }
+
+                &.multiple {
+                    input {
+                        max-width: 33%;
+                    }
+                }
+
+                ul,
+                li {
+                    list-style-type: none;
+                    line-height: 13px;
+                }
+            }
+
+            .attribute-footer {
+                flex: 0 0 18px;
+                margin-top: -1px;
+                line-height: 18px;
+                font-size: 12px;
+            }
         }
 
-        .experience {
-          .exo2();
-          width: 100%;
-          height: 20px;
-          padding-right: 5px;
-          font-size: 12px;
-          color: #fff;
-
-          > input {
-            color: #fff;
-          }
+        li.save {
+            height: 75px;
         }
-      }
     }
-  }
 
-  .attributes {
-    input.temphp {
-      width: 48%;
-    }
-  }
-
-  .sheet-body {
-
-    .bio-properties {
-      height: 100%;
-
-      flex: 0 0 200px;
-      margin: 5px 5px 5px 5px;
-      padding-right: 5px;
-      border-right: @borderGroove;
-
-      .avatar {
-        flex: 0 0 250px;
-        object-fit: contain;
-      }
-
-      .singleFlex {
-        flex: 0 0 20px;
-        height: 20px;
-        max-height: 20px;
-        line-height: 20px;
-      }
-      .doubleFlex {
-        flex: 0 0 40px;
-      }
-
-      .form-group {
-        margin: 0;
-        label {
-          line-height: 20px;
-        }
-        input {
-          text-align: right;
-
-          &.regular {
-            text-align: left;
-          }
-        }
-        .singleLine {
-          height: 20px;
-          line-height: 20px;
-          max-height: 20px;
-        }
-      }
-
-      .fill {
-        box-sizing: border-box; /* fit parent width */
-        height: 100%;
+    ul.attributes.last {
+        border-bottom: @borderGroove;
         margin-bottom: 5px;
-      }
+        padding-bottom: 5px;
+    }
 
-      .properties-list {
+    /* ----------------------------------------- */
+    /*  Ability Scores                           */
+    /* ----------------------------------------- */
+
+    .ability-scores {
+        flex: 0 0 100%;
         list-style: none;
         margin: 0;
         padding: 0;
-
-        li {
-          margin: 3px 0;
-          padding: 0 2px;
-          background: rgba(0, 0, 0, 0.05);
-          border: @borderGroove;
-          text-align: center;
-          font-size: 12px;
-          line-height: 18px;
-        }
-      }
-    }
-  }
-
-  /* ----------------------------------------- */
-  /*  General Styles                           */
-  /* ----------------------------------------- */
-
-  // Box Headers
-  h4.box-title {
-    line-height: 16px;
-    margin: 4px 8px 2px;
-    font-size: 16px;
-    border-bottom: 1px solid @colorBeige;
-  }
-
-  .rollable {
-    cursor: pointer;
-
-    &:hover {
-      text-shadow: 0 0 10px red;
-    }
-  }
-
-  /* ----------------------------------------- */
-  /*  Attributes                               */
-  /* ----------------------------------------- */
-
-  ul.attributes {
-    list-style: none;
-    margin: 5px 0 0;
-    padding: 0;
-
-    li.attribute {
-      min-height: 70px;
-      margin: 0 5px;
-      border: @borderGroove;
-      border-radius: 4px;
-      //.nodesto();
-      .exo2();
-      text-align: center;
-
-      &.cmd {//CMD is larger to fit "KAC + 8" label
-        margin: 0 3px;
-      }
-
-      .attribute-name {
-        flex: 0 0 18px;
-      }
-
-      .attribute-value {
-        height: 28px;
-        line-height: 28px;
-
-        input, div.attribute-value-max {
-          display: inline;
-          max-width: 80%;
-          margin: 0;
-          font-size: 16px;
-          padding: 0;
-        }
-
-        div.attribute-value-max {
-          font-size: 20px;
-        }
-
-        span.sep {
-          display: inline;
-          position: relative;
-          top: 2px;
-          font-size: 28px;
-          color: @colorTan;
-        }
-
-        &.multiple {
-          input { max-width: 33%; }
-        }
-
-        ul, li {
-          list-style-type: none;
-          line-height: 13px;
-        }
-      }
-
-      .attribute-footer {
-        flex: 0 0 18px;
-        margin-top: -1px;
-        line-height: 18px;
-        font-size: 12px;
-      }
-    }
-
-    li.save {
-      height: 75px;
-    }
-  }
-
-  ul.attributes.last {
-    border-bottom: @borderGroove;
-    margin-bottom: 5px;
-    padding-bottom: 5px;
-  }
-
-  /* ----------------------------------------- */
-  /*  Ability Scores                           */
-  /* ----------------------------------------- */
-
-  .ability-scores {
-    flex: 0 0 100%;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    .exo2();
-
-    .ability {
-      height: 70px;
-      margin: 0 5px;
-      text-align: center;
-      border: @borderGroove;
-      border-radius: 3px;
-
-      input.ability-score {
-        height: 30px;
-        width: 50px;
-        margin: 0 auto;
-        line-height: 32px;
-        font-size: 24px;
-      }
-
-      .ability-modifiers {
-        height: 24px;
-        margin: -10px 0 0;
-
-        span.ability-mod,
-        span.ability-save {
-          flex: 0 0 24px;
-          height: 24px;
-          border-top: @borderGroove;
-        }
-
-        span.ability-mod {
-          border-right: @borderGroove;
-        }
-
-        .ability-proficiency {
-          line-height: 30px;
-        }
-
-        span.ability-save {
-          border-left: @borderGroove;
-        }
-      }
-
-      /* Hide modifier box on hover */
-
-      input.ability-score:hover + .ability-modifiers {
-        visibility: hidden;
-      }
-    }
-  }
-
-  // Proficiency Toggle Buttons
-  .proficiency-toggle {
-    color: @colorBeige;
-    font-size: 12px;
-  }
-  .proficient .proficiency-toggle {
-    color: @colorOlive;
-  }
-
-  .locked .proficiency-toggle {
-    color: @colorBeige;
-    text-shadow: none;
-    cursor: default;
-  }
-
-  /* ----------------------------------------- */
-  /*  Skills                                   */
-  /* ----------------------------------------- */
-
-  ul.skills-list {
-    flex: 0 0 192px;
-    list-style: none;
-    margin: 5px 5px 0;
-    padding: 2px 2px 0;
-    border: @borderGroove;
-    border-radius: 3px;
-
-    div.centered {
-      text-align: center;
-    }
-
-    li.skill {
-      height: 22px;
-      padding: 3px 0;
-
-      h4 {
-        flex: 1px;
-        margin: 0;
-        font-size: 11px;
-        line-height: 18px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      .skill-proficiency {
-        flex: 0 0 16px;
-        line-height: 18px;
-      }
-
-      .skill-ability {
-        flex: 0 0 26px;
-      }
-
-      .skill-mod {
-        flex: 0 0 20px;
-      }
-
-      .skill-ranks,
-      .skill-misc {
-        flex: 0 0 20px;
-        text-align: center;
-        height: 18px;
-      }
-
-      .skill-passive {
-        flex: 0 0 26px;
-        text-align: center;
-        color: @colorTan;
-      }
-    }
-
-    .skills-footer {
-      padding-top: 20px;
-    }
-  }
-
-  /* ----------------------------------------- */
-  /*  Statuses                                 */
-  /* ----------------------------------------- */
-
-  .counters {
-    flex: 0 0 100%;
-    border-bottom: @borderGroove;
-    margin-bottom: 5px;
-
-    .counter {
-      padding: 0 6px;
-      line-height: 32px;
-
-      h4 {
-        flex: auto;
-        margin: 0;
         .exo2();
-        font-size: 14px;
-      }
 
-      .counter-value {
-        flex: 0 0 50px;
-        text-align: right;
-        > * {
-          display: inline;
+        .ability {
+            height: 70px;
+            margin: 0 5px;
+            text-align: center;
+            border: @borderGroove;
+            border-radius: 3px;
+
+            input.ability-score {
+                height: 30px;
+                width: 50px;
+                margin: 0 auto;
+                line-height: 32px;
+                font-size: 24px;
+            }
+
+            .ability-modifiers {
+                height: 24px;
+                margin: -10px 0 0;
+
+                span.ability-mod,
+                span.ability-save {
+                    flex: 0 0 24px;
+                    height: 24px;
+                    border-top: @borderGroove;
+                }
+
+                span.ability-mod {
+                    border-right: @borderGroove;
+                }
+
+                .ability-proficiency {
+                    line-height: 30px;
+                }
+
+                span.ability-save {
+                    border-left: @borderGroove;
+                }
+            }
+
+            /* Hide modifier box on hover */
+
+            input.ability-score:hover + .ability-modifiers {
+                visibility: hidden;
+            }
         }
-      }
+    }
 
-      input[type="text"] {
-        height: 20px;
-        max-width: 20px;
-        margin: 0;
-        text-align: center;
-      }
-
-      input[type="checkbox"] {
-        position: relative;
-        margin: 0;
-        top: 6px;
-      }
-
-      &.lair input[type="text"] {
-        width: 32px;
-        max-width: 32px;
-      }
-
-      span.sep {
-        margin: 0 -2px;
+    // Proficiency Toggle Buttons
+    .proficiency-toggle {
+        color: @colorBeige;
         font-size: 12px;
-      }
     }
-  }
-
-  .form-group.stacked.conditions {
-    flex: 0;
-  }
-
-  /* ----------------------------------------- */
-  /*  Traits                                   */
-  /* ----------------------------------------- */
-
-  .traits {
-    margin: 0 5px;
-
-    .form-group, .form-group-stacked {
-      margin: 0 0 4px 0;
-      justify-content: space-between;
+    .proficient .proficiency-toggle {
+        color: @colorOlive;
     }
 
-    .damage-reduction {
-      .sep {
-        flex: 0;
-      }
-
-      input[name="data.traits.damageReduction.negatedBy"] {
-        text-align: left;
-      }
-
-      input[name="data.traits.damageReduction.value"] {
-        flex: 0 0 50px;
-      }
+    .locked .proficiency-toggle {
+        color: @colorBeige;
+        text-shadow: none;
+        cursor: default;
     }
 
-    .trait-selector {
-      flex: 0 0 16px;
-      padding: 2px 0;
-      color: #999;
-      font-size: 10px;
-    }
+    /* ----------------------------------------- */
+    /*  Skills                                   */
+    /* ----------------------------------------- */
 
-    .configure-flags {
-      flex: 1;
-    }
+    ul.skills-list {
+        flex: 0 0 192px;
+        list-style: none;
+        margin: 5px 5px 0;
+        padding: 2px 2px 0;
+        border: @borderGroove;
+        border-radius: 3px;
 
-    .traits-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      text-align: right;
-    }
-
-    .actor-size,
-    .actor-keyability {
-      flex: 0 0 150px;
-    }
-
-    label {
-      flex: 0 0 150px;
-      line-height: 20px;
-      font-weight: bold;
-      margin: 0;
-    }
-
-    input {
-      text-align: right;
-    }
-
-    i.fas {
-      float: right;
-      margin-right: 3px;
-      text-align: right;
-      color: #999;
-
-      &:hover {
-        color: #111;
-        text-shadow: 0 0 10px red;
-      }
-    }
-
-    .inactive {
-      color: @colorTan;
-    }
-
-    .value {
-      text-align: right;
-    }
-  }
-
-  /* ----------------------------------------- */
-  /*  Inventory Lists                          */
-  /* ----------------------------------------- */
-
-  /* Inventory List Filters */
-  .inventory-filters {
-    margin: 0 8px;
-    flex: 0 0 20px;
-    h3, .filter-title {
-      .exo2();
-      color: @colorOlive;
-      font-size: 18px;
-      margin: 0;
-      border: none;
-    }
-
-    &.spellbook-filters {
-      flex: 0 0 29px;
-    }
-
-    .currency {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      font-size: 12px;
-
-      label {
-        flex: 0;
-        margin-left: 8px;
-        text-align: right;
-        line-height: 20px;
-        color: @colorTan;
-      }
-      label.currency-value {
-        color: black;
-      }
-      input[type="text"] {
-        flex: 0 0 48px;
-        text-align: center;
-        margin-left: 8px;
-        border-bottom: @borderGroove;
-      }
-    }
-  }
-
-  .inventory-list,
-  .crew-list,
-  .vehicle-system-list {
-    list-style: none;
-    margin: 0;
-    padding: 0 5px;
-    overflow-y: auto;
-
-    &.noPadding {
-      padding: 0;
-    }
-
-    // Inventory Item
-    .item,
-    .crew {
-      line-height: 25px;
-      padding: 0 2px; // to align with the header border
-      border-bottom: 1px solid @colorBeige;
-      &:last-child { border-bottom: none; }
-
-      &.small {
-        line-height: 25px;
-        margin-left: 5px;
-      }
-
-      &.container {
-        // This is the @blueGradientBackground color from variables.less, but with transparency
-        background: linear-gradient(130deg, rgba(12,45,74,0.1) 0%, rgba(35,86,131,0.1) 40%, rgba(35,86,131,0.1) 60%, rgba(29,125,209,0.1) 100%);
-      }
-
-      // Item Header Name
-      .item-name,
-      .crew-name {
-        cursor: pointer;
-
-        &.modifier-name {
-          cursor: default;
-          overflow-wrap: anywhere;
+        div.centered {
+            text-align: center;
         }
 
-        .item-image,
-        .crew-image {
-            flex: 0 0 25px;
-            margin-right: 5px;
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
+        li.skill {
+            height: 22px;
+            padding: 3px 0;
 
-          &.small {
-            flex: 0 0 25px;
-            background-size: 25px;
-            margin-right: 2px;
-          }
-        }
-
-        h4 {
-          margin: 0;
-        }
-
-        &:hover .item-image {
-          background-image: url("../../icons/svg/d20-grey.svg") !important;
-        }
-
-        .item-image:hover {
-          background-image: url("../../icons/svg/d20-black.svg") !important;
-        }
-
-        .item-action {
-          flex: 0 0 15%;
-          flex-direction: row;
-          padding: 1px 0;
-
-          .attack {
-            width: auto;
-            background: @sfrpgBlue;
-            color: #fff;
-            cursor: pointer;
-            padding: 1px 6px;
-
-            &:hover, &:focus{
-              box-shadow: 0 0 5px @sfrpgBlue;
+            h4 {
+                flex: 1px;
+                margin: 0;
+                font-size: 11px;
+                line-height: 18px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
-          }
 
-          .damage {
-            width: auto;
-            background: @sfrpgRed;
-            color: #fff;
-            cursor: pointer;
-          }
-
-          .healing {
-            width: auto;
-            background: @sfrpgGreen;
-            color: #fff;
-            cursor: pointer;
-
-            &:hover, &:focus{
-              box-shadow: 0 0 5px @sfrpgGreen;
+            .skill-proficiency {
+                flex: 0 0 16px;
+                line-height: 18px;
             }
-          }
 
-          .use {
-            width: auto;
-            background: @sfrpgYellow;
-            color: #000;
-            cursor: pointer;
-
-            &:hover, &:focus{
-              box-shadow: 0 0 5px @sfrpgYellow;
+            .skill-ability {
+                flex: 0 0 26px;
             }
-          }
+
+            .skill-mod {
+                flex: 0 0 20px;
+            }
+
+            .skill-ranks,
+            .skill-misc {
+                flex: 0 0 20px;
+                text-align: center;
+                height: 18px;
+            }
+
+            .skill-passive {
+                flex: 0 0 26px;
+                text-align: center;
+                color: @colorTan;
+            }
         }
 
-        .actor-resource-name {
-          flex: 0 0 calc(100% - 282px);
-          line-height: 21px;
-
-          .name-label {
-            display: inline-block;
-            width: calc(100%);
-          }
-
-          .value-label {
-            display: inline-block;
-            width: calc(100%);
-          }
+        .skills-footer {
+            padding-top: 20px;
         }
-
-        .actor-resource-values {
-          flex: 0 0 180px;
-          line-height: 21px;
-
-          .actor-resource-base-label {
-            display: inline-block;
-            width: 105px;
-          }
-
-          .actor-resource-base-input {
-            width: 70px;
-          }
-
-          .actor-resource-computed-label {
-            display: inline-block;
-            width: 109px;
-          }
-        }
-      }
-
-      // Item Dropdown Properties
-      .item-properties,
-      .crew-properties {
-        margin-top: 3px;
-      }
-
-      // Charged
-      .item-recharge {
-        flex: 0 0 80px;
-        text-align: right;
-        font-size: 11px;
-        color: @colorTan;
-      }
     }
 
-    // Inventory Header
-    .inventory-header,
-    .crew-header {
-      margin: 2px 0;
-      padding: 0;
-      background: rgba(0, 0, 0, 0.05);
-      border: @borderGroove;
-      font-weight: bold;
-      line-height: 24px;
+    /* ----------------------------------------- */
+    /*  Statuses                                 */
+    /* ----------------------------------------- */
 
-      &.disabled {
-        h3 {
-          color: gray;
-        }
-      }
-
-      h3 {
-        margin: 0 -5px 0 0;
-        padding-left: 5px;
-        font-size: 13px;
-        font-weight: bold;
-        border: none;
-      }
-
-      .item-controls a.item-create,
-      .item-controls a.modifier-create,
-      .crew-controls a.crew-create,
-      .crew-controls a.skill-create {
+    .counters {
         flex: 0 0 100%;
-      }
+        border-bottom: @borderGroove;
+        margin-bottom: 5px;
 
-      .item-controls.item-controls-browser {
-          flex-wrap: nowrap;
-          justify-content: space-evenly;
+        .counter {
+            padding: 0 6px;
+            line-height: 32px;
 
-          a.item-browser, a.item-create {
-          flex: 0 0 22px;
-        }
-      }
-    }
+            h4 {
+                flex: auto;
+                margin: 0;
+                .exo2();
+                font-size: 14px;
+            }
 
-    // Item Detail Sections
-    .item-detail,
-    .crew-detial {
-      &.modifier-effect-type { flex: 0 0 160px; }
-      &.modifier-value-affected { flex: 0 0 120px; }
-      &.modifier-type { flex: 0 0 95px; }
+            .counter-value {
+                flex: 0 0 50px;
+                text-align: right;
+                > * {
+                    display: inline;
+                }
+            }
 
-      flex: 0 0 82px;
-      font-size: 12px;
-      color: @colorTan;
-      text-align: center;
-      border-right: 1px solid @colorFaint;
-      &:last-child { border-right: none; }
-      white-space: nowrap;
+            input[type="text"] {
+                height: 20px;
+                max-width: 20px;
+                margin: 0;
+                text-align: center;
+            }
 
-      .featDeactivate, .vehicle-system-deactivate {
-        background: @sfrpgRed;
-        color: #fff;
-        cursor: pointer;
-      }
+            input[type="checkbox"] {
+                position: relative;
+                margin: 0;
+                top: 6px;
+            }
 
-      .featActivate, .vehicle-system-activate {
-        background: @sfrpgGreen;
-        color: #fff;
-        cursor: pointer;
+            &.lair input[type="text"] {
+                width: 32px;
+                max-width: 32px;
+            }
 
-        &:hover, &:focus{
-          box-shadow: 0 0 5px @sfrpgGreen;
-        }
-      }
-    }
-
-    .item-weight {
-      flex: 0 0 60px;
-      border-left: 1px solid @colorFaint;
-      border-right: 1px solid @colorFaint;
-    }
-
-    .item-list,
-    .crew-item-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    .item-list-child {
-      list-style: none;
-      width: calc(100% - 7px);
-      margin: 0 0 0 7px;
-      padding: 0;
-      border-left: 2px dashed @sfrpgRed;
-    }
-
-    // Item Control Buttons
-    .item-controls,
-    .crew-controls {
-      flex: 0 0 44px;
-      .flexrow();
-      justify-content: flex-end;
-
-      a {
-        flex: 0 0 22px;
-        font-size: 10px;
-        text-align: center;
-        color: #666;
-      }
-    }
-
-    // Item Dropdown Summary
-    .item-summary,
-    .crew-summary {
-      flex: 0 0 100%;
-      font-size: 12px;
-      line-height: 16px;
-      padding: 0.25em 0.5em;
-      border-top: 1px solid @colorFaint;
-    }
-  }
-
-  .error {
-    color: #c00;
-  }
-
-  .attribute-multibox {
-    list-style: none;
-    margin: 0;
-    padding: 0 5px;
-    overflow-y: auto;
-
-    .box-header {
-      line-height: 10px;
-
-      label {
-        font-size: 10px;
-      }
-    }
-
-    label {
-      font-size: 16px;
-      padding-top: 1px;
-    }
-
-    input {
-      display: inline;
-      max-width: 80%;
-      margin: 0;
-      font-size: 16px;
-      padding: 0;
-    }
-  }
-
-  /* ----------------------------------------- */
-  /*  Spellbook                                */
-  /* ----------------------------------------- */
-
-  .spellbook {
-    .inventory-list {
-      height: calc(100% - 50px);
-
-      .spellbook-header {
-        .item-name {
-            flex: 0 0 130px;
-            h3 {
-                cursor: default;
+            span.sep {
+                margin: 0 -2px;
+                font-size: 12px;
             }
         }
-      }
-
     }
-  }
 
-  .spell-class {
-    line-height: 14px;
-    display: inline-block;
-    text-align: center;
-    padding: 0 5px;
-    color: #e9e9e9;
-    background: rgb(21, 92, 155);
-    border: 1px solid transparent;
-    border-radius: 8px;
-    font-weight: normal;
-
-    input {
-      color: #e9e9e9;
+    .form-group.stacked.conditions {
+        flex: 0;
     }
-  }
 
-  .spell-comps {
-    padding: 0 5px;
-    font-size: 12px;
-    text-align: right;
-    color: @colorTan;
-    border-right: 1px solid @colorFaint;
-    flex: 0 0 20px;
-  }
+    /* ----------------------------------------- */
+    /*  Traits                                   */
+    /* ----------------------------------------- */
 
-  .spell-slots {
-    padding: 0 5px;
-    font-size: 12px;
-    text-align: right;
-    color: @colorTan;
-    border-right: 1px solid @colorFaint;
+    .traits {
+        margin: 0 5px;
 
-    &.fit-classes {
-      width: calc(100% - 430px);
-      text-align: right;
+        .form-group,
+        .form-group-stacked {
+            margin: 0 0 4px 0;
+            justify-content: space-between;
+        }
+
+        .damage-reduction {
+            .sep {
+                flex: 0;
+            }
+
+            input[name="data.traits.damageReduction.negatedBy"] {
+                text-align: left;
+            }
+
+            input[name="data.traits.damageReduction.value"] {
+                flex: 0 0 50px;
+            }
+        }
+
+        .trait-selector {
+            flex: 0 0 16px;
+            padding: 2px 0;
+            color: #999;
+            font-size: 10px;
+        }
+
+        .configure-flags {
+            flex: 1;
+        }
+
+        .traits-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            text-align: right;
+        }
+
+        .actor-size,
+        .actor-keyability {
+            flex: 0 0 150px;
+        }
+
+        label {
+            flex: 0 0 150px;
+            line-height: 20px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        input {
+            text-align: right;
+        }
+
+        i.fas {
+            float: right;
+            margin-right: 3px;
+            text-align: right;
+            color: #999;
+
+            &:hover {
+                color: #111;
+                text-shadow: 0 0 10px red;
+            }
+        }
+
+        .inactive {
+            color: @colorTan;
+        }
+
+        .value {
+            text-align: right;
+        }
     }
-  }
 
-  .spell-component {
-    display: inline-block;
-    text-align: center;
-    padding-top: 1px;
-    width: 16px;
-    line-height: 14px;
-    color: #fbfbf9;
-    background: rgba(0, 0, 0, 0.4);
-    border: 1px solid transparent;
-    border-radius: 8px;
-  }
+    /* ----------------------------------------- */
+    /*  Inventory Lists                          */
+    /* ----------------------------------------- */
 
-  .spell-dc {
-    flex: 0 0 150px;
-    font-size: 12px;
-    color: @colorTan;
-    text-align: center;
-    border-right: 1px solid @colorFaint;
-  }
+    /* Inventory List Filters */
+    .inventory-filters {
+        margin: 0 8px;
+        flex: 0 0 20px;
+        h3,
+        .filter-title {
+            .exo2();
+            color: @colorOlive;
+            font-size: 18px;
+            margin: 0;
+            border: none;
+        }
 
-  .spell-slots {
-    input, span.sep {
-      display: inline;
-      max-width: 20px;
-      text-align: center;
+        &.spellbook-filters {
+            flex: 0 0 29px;
+        }
+
+        .currency {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            font-size: 12px;
+
+            label {
+                flex: 0;
+                margin-left: 8px;
+                text-align: right;
+                line-height: 20px;
+                color: @colorTan;
+            }
+            label.currency-value {
+                color: black;
+            }
+            input[type="text"] {
+                flex: 0 0 48px;
+                text-align: center;
+                margin-left: 8px;
+                border-bottom: @borderGroove;
+            }
+        }
     }
-  }
 
-  .spell-uses {
-    padding: 2px;
-    text-align: right !important;
-  }
+    .inventory-list,
+    .crew-list,
+    .vehicle-system-list {
+        list-style: none;
+        margin: 0;
+        padding: 0 5px;
+        overflow-y: auto;
 
-  .spell-school, .spell-action {
-    flex: 0 0 90px;
-    font-size: 12px;
-    color: @colorTan;
-    text-align: center;
-    border-right: 1px solid @colorFaint;
-  }
+        &.noPadding {
+            padding: 0;
+        }
 
-  // Empty spellbook controls
-  .spellbook-empty .item-controls { flex: 1; }
+        // Inventory Item
+        .item,
+        .crew {
+            line-height: 25px;
+            padding: 0 2px; // to align with the header border
+            border-bottom: 1px solid @colorBeige;
+            &:last-child {
+                border-bottom: none;
+            }
 
-  /* ----------------------------------------- */
-  /*  TinyMCE                                  */
-  /* ----------------------------------------- */
+            &.small {
+                line-height: 25px;
+                margin-left: 5px;
+            }
 
-  .editor {
-    padding: 0 8px;
-  }
+            &.container {
+                // This is the @blueGradientBackground color from variables.less, but with transparency
+                background: linear-gradient(
+                    130deg,
+                    rgba(12, 45, 74, 0.1) 0%,
+                    rgba(35, 86, 131, 0.1) 40%,
+                    rgba(35, 86, 131, 0.1) 60%,
+                    rgba(29, 125, 209, 0.1) 100%
+                );
+            }
 
-  .bio-properties {
-    textarea {
-      padding: 5px;
-      margin: 0 3px 0 0;
-      margin-right: 0;
+            // Item Header Name
+            .item-name,
+            .crew-name {
+                cursor: pointer;
 
-      resize: vertical;
-      height: 100%;
+                &.modifier-name {
+                    cursor: default;
+                    overflow-wrap: anywhere;
+                }
 
-      min-width: 200px;
-      max-width: 200px;
-      overflow-x: hidden;
+                .item-image,
+                .crew-image {
+                    flex: 0 0 25px;
+                    margin-right: 5px;
+                    background-size: contain;
+                    background-position: center;
+                    background-repeat: no-repeat;
+
+                    &.small {
+                        flex: 0 0 25px;
+                        background-size: 25px;
+                        margin-right: 2px;
+                    }
+                }
+
+                h4 {
+                    margin: 0;
+                }
+
+                &:hover .item-image {
+                    background-image: url("../../icons/svg/d20-grey.svg") !important;
+                }
+
+                .item-image:hover {
+                    background-image: url("../../icons/svg/d20-black.svg") !important;
+                }
+
+                .item-action {
+                    flex: 0 0 15%;
+                    flex-direction: row;
+                    padding: 1px 0;
+
+                    .attack {
+                        width: auto;
+                        background: @sfrpgBlue;
+                        color: #fff;
+                        cursor: pointer;
+                        padding: 1px 6px;
+
+                        &:hover,
+                        &:focus {
+                            box-shadow: 0 0 5px @sfrpgBlue;
+                        }
+                    }
+
+                    .damage {
+                        width: auto;
+                        background: @sfrpgRed;
+                        color: #fff;
+                        cursor: pointer;
+                    }
+
+                    .healing {
+                        width: auto;
+                        background: @sfrpgGreen;
+                        color: #fff;
+                        cursor: pointer;
+
+                        &:hover,
+                        &:focus {
+                            box-shadow: 0 0 5px @sfrpgGreen;
+                        }
+                    }
+
+                    .use {
+                        width: auto;
+                        background: @sfrpgYellow;
+                        color: #000;
+                        cursor: pointer;
+
+                        &:hover,
+                        &:focus {
+                            box-shadow: 0 0 5px @sfrpgYellow;
+                        }
+                    }
+                }
+
+                .actor-resource-name {
+                    flex: 0 0 calc(100% - 282px);
+                    line-height: 21px;
+
+                    .name-label {
+                        display: inline-block;
+                        width: calc(100%);
+                    }
+
+                    .value-label {
+                        display: inline-block;
+                        width: calc(100%);
+                    }
+                }
+
+                .actor-resource-values {
+                    flex: 0 0 180px;
+                    line-height: 21px;
+
+                    .actor-resource-base-label {
+                        display: inline-block;
+                        width: 105px;
+                    }
+
+                    .actor-resource-base-input {
+                        width: 70px;
+                    }
+
+                    .actor-resource-computed-label {
+                        display: inline-block;
+                        width: 109px;
+                    }
+                }
+            }
+
+            // Item Dropdown Properties
+            .item-properties,
+            .crew-properties {
+                margin-top: 3px;
+            }
+
+            // Charged
+            .item-recharge {
+                flex: 0 0 80px;
+                text-align: right;
+                font-size: 11px;
+                color: @colorTan;
+            }
+        }
+
+        // Inventory Header
+        .inventory-header,
+        .crew-header {
+            margin: 2px 0;
+            padding: 0;
+            background: rgba(0, 0, 0, 0.05);
+            border: @borderGroove;
+            font-weight: bold;
+            line-height: 24px;
+
+            &.disabled {
+                h3 {
+                    color: gray;
+                }
+            }
+
+            h3 {
+                margin: 0 -5px 0 0;
+                padding-left: 5px;
+                font-size: 13px;
+                font-weight: bold;
+                border: none;
+            }
+
+            .item-controls a.item-create,
+            .item-controls a.modifier-create,
+            .crew-controls a.crew-create,
+            .crew-controls a.skill-create {
+                flex: 0 0 100%;
+            }
+
+            .item-controls.item-controls-browser {
+                flex-wrap: nowrap;
+                justify-content: space-evenly;
+
+                a.item-browser,
+                a.item-create {
+                    flex: 0 0 22px;
+                }
+            }
+        }
+
+        // Item Detail Sections
+        .item-detail,
+        .crew-detial {
+            &.modifier-effect-type {
+                flex: 0 0 160px;
+            }
+            &.modifier-value-affected {
+                flex: 0 0 120px;
+            }
+            &.modifier-type {
+                flex: 0 0 95px;
+            }
+
+            flex: 0 0 82px;
+            font-size: 12px;
+            color: @colorTan;
+            text-align: center;
+            border-right: 1px solid @colorFaint;
+            &:last-child {
+                border-right: none;
+            }
+            white-space: nowrap;
+
+            .featDeactivate,
+            .vehicle-system-deactivate {
+                background: @sfrpgRed;
+                color: #fff;
+                cursor: pointer;
+            }
+
+            .featActivate,
+            .vehicle-system-activate {
+                background: @sfrpgGreen;
+                color: #fff;
+                cursor: pointer;
+
+                &:hover,
+                &:focus {
+                    box-shadow: 0 0 5px @sfrpgGreen;
+                }
+            }
+        }
+
+        .item-weight {
+            flex: 0 0 60px;
+            border-left: 1px solid @colorFaint;
+            border-right: 1px solid @colorFaint;
+        }
+
+        .item-list,
+        .crew-item-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .item-list-child {
+            list-style: none;
+            width: calc(100% - 7px);
+            margin: 0 0 0 7px;
+            padding: 0;
+            border-left: 2px dashed @sfrpgRed;
+        }
+
+        // Item Control Buttons
+        .item-controls,
+        .crew-controls {
+            flex: 0 0 44px;
+            .flexrow();
+            justify-content: flex-end;
+
+            a {
+                flex: 0 0 22px;
+                font-size: 10px;
+                text-align: center;
+                color: #666;
+            }
+        }
+
+        // Item Dropdown Summary
+        .item-summary,
+        .crew-summary {
+            flex: 0 0 100%;
+            font-size: 12px;
+            line-height: 16px;
+            padding: 0.25em 0.5em;
+            border-top: 1px solid @colorFaint;
+        }
     }
-  }
+
+    .error {
+        color: #c00;
+    }
+
+    .attribute-multibox {
+        list-style: none;
+        margin: 0;
+        padding: 0 5px;
+        overflow-y: auto;
+
+        .box-header {
+            line-height: 10px;
+
+            label {
+                font-size: 10px;
+            }
+        }
+
+        label {
+            font-size: 16px;
+            padding-top: 1px;
+        }
+
+        input {
+            display: inline;
+            max-width: 80%;
+            margin: 0;
+            font-size: 16px;
+            padding: 0;
+        }
+    }
+
+    /* ----------------------------------------- */
+    /*  Spellbook                                */
+    /* ----------------------------------------- */
+
+    .spellbook {
+        .inventory-list {
+            height: calc(100% - 50px);
+
+            .spellbook-header {
+                .item-name {
+                    flex: 0 0 130px;
+                    h3 {
+                        cursor: default;
+                    }
+                }
+            }
+        }
+    }
+
+    .spell-class {
+        line-height: 14px;
+        display: inline-block;
+        text-align: center;
+        padding: 0 5px;
+        color: #e9e9e9;
+        background: rgb(21, 92, 155);
+        border: 1px solid transparent;
+        border-radius: 8px;
+        font-weight: normal;
+
+        input {
+            color: #e9e9e9;
+        }
+    }
+
+    .spell-comps {
+        padding: 0 5px;
+        font-size: 12px;
+        text-align: right;
+        color: @colorTan;
+        border-right: 1px solid @colorFaint;
+        flex: 0 0 20px;
+    }
+
+    .spell-slots {
+        padding: 0 5px;
+        font-size: 12px;
+        text-align: right;
+        color: @colorTan;
+        border-right: 1px solid @colorFaint;
+
+        &.fit-classes {
+            width: calc(100% - 430px);
+            text-align: right;
+        }
+    }
+
+    .spell-component {
+        display: inline-block;
+        text-align: center;
+        padding-top: 1px;
+        width: 16px;
+        line-height: 14px;
+        color: #fbfbf9;
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid transparent;
+        border-radius: 8px;
+    }
+
+    .spell-dc {
+        flex: 0 0 150px;
+        font-size: 12px;
+        color: @colorTan;
+        text-align: center;
+        border-right: 1px solid @colorFaint;
+    }
+
+    .spell-slots {
+        input,
+        span.sep {
+            display: inline;
+            max-width: 20px;
+            text-align: center;
+        }
+    }
+
+    .spell-uses {
+        padding: 2px;
+        text-align: right !important;
+    }
+
+    .spell-school,
+    .spell-action {
+        flex: 0 0 90px;
+        font-size: 12px;
+        color: @colorTan;
+        text-align: center;
+        border-right: 1px solid @colorFaint;
+    }
+
+    // Empty spellbook controls
+    .spellbook-empty .item-controls {
+        flex: 1;
+    }
+
+    /* ----------------------------------------- */
+    /*  TinyMCE                                  */
+    /* ----------------------------------------- */
+
+    .editor {
+        padding: 0 8px;
+    }
+
+    .bio-properties {
+        textarea {
+            padding: 5px;
+            margin: 0 3px 0 0;
+            margin-right: 0;
+
+            resize: vertical;
+            height: 100%;
+
+            min-width: 200px;
+            max-width: 200px;
+            overflow-x: hidden;
+        }
+    }
 }
