@@ -1,20 +1,20 @@
 {
-  "_id": "CyhANnSvaEl5whGW",
-  "name": "Sudden Shift (Ex)",
+  "_id": "fVb7IyZForaKo8M3",
+  "name": "Brace Yourselves (Ex)",
   "type": "feat",
   "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
     "actionType": "",
     "activation": {
-      "type": "reaction",
+      "type": "move",
       "condition": "",
-      "cost": 1
+      "cost": 0
     },
     "area": {
       "effect": "",
@@ -37,7 +37,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.hIhgdXnqGHBm0A64]{Envoy Improvisation}</p>\n<p>&nbsp;@Icon[type:language-dependent] Language-dependent @Icon[type:mind-affecting] Mind-Affecting @Icon[type:sense-dependent] Sense-Dependent</p>\n<p>Whenever you or an ally deal damage to an opponent within 60 feet of you, you can take a reaction to allow all allies within 60 feet of the opponent to take a guarded step as a reaction. All of the characters who took a guarded step using this improvisation have their speed reduced by 5 feet until the end of their next turn.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.hIhgdXnqGHBm0A64]{Envoy Improvisation}</p>\n<p>&nbsp;@Icon[type:language-dependent] Language-dependent @Icon[type:mind-affecting] Mind-Affecting @Icon[type:sense-dependent] Sense-Dependent</p>\n<p>As a move action, you can choose one enemy within 60 feet. Until the start of your next turn, you and your allies gain a +1 morale bonus to AC if adjacent to at least one other ally, as you all position yourselves so that your armor protects you better. The bonus persists even if the enemy moves beyond 60 feet or out of line of sight or hearing.</p>\n<p>At 6th level, you can spend 1 Resolve Point to grant this bonus to AC against attacks made by all enemies within 60 feet.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -61,16 +61,16 @@
       "force": false,
       "good": false,
       "healing": false,
-      "language-dependent": false,
+      "language-dependent": true,
       "lawful": false,
       "light": false,
-      "mind-affecting": false,
+      "mind-affecting": true,
       "pain": false,
       "poison": false,
       "polymorph": false,
       "radiation": false,
       "scrying": false,
-      "sense-dependent": false,
+      "sense-dependent": true,
       "shadow": false,
       "sonic": false,
       "summoning": false,
@@ -83,28 +83,44 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "83e34c7f-cade-4ec1-9612-54b3a425a91f",
+        "name": "Brace Yourself (Ex)",
+        "type": "morale",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": true,
+        "max": 1,
+        "modifier": "1",
+        "modifierType": "formula",
+        "notes": "If adjacent to at least one other ally",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "both"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": 60
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "4th Level (Envoy)",
+    "requirements": "1st Level (Envoy)",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
-    "source": "COM, pg. 70",
+    "source": "AR, pg. 144",
     "target": {
       "type": "",
-      "value": ""
+      "value": "One Enemy"
     },
     "uses": {
       "max": 0,
