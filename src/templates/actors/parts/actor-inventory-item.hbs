@@ -1,4 +1,4 @@
-        <li class="item {{#if (not bigItem)}}small{{/if}} {{#if (eq item.type "container")}}container{{/if}} flexrow" data-item-id="{{item._id}}">
+        <li class="item {{#if (not bigItem)}}small{{/if}}{{#if (eq item.type "container")}}container{{/if}}{{#if (eq item.type "effect")}}effect{{/if}} flexrow" data-item-id="{{item._id}}">
             <div class="item-name flexrow {{#if (not disableRolling)}}rollable{{/if}}">
                 <div class="item-image {{#if (not bigItem)}}small{{/if}}" style="background-image: url({{item.img}})"></div>
                 <h4>
@@ -86,6 +86,9 @@
                             <a class="item-control item-equip" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Equip"}}"><i class="far fa-square"></i></a>
                         {{/if}}
                     {{/if}}
+                {{/if}}
+                {{#if (eq item.type "effect")}}
+                    <a class="item-control effect-toggle" {{createTippy title="SFRPG.ActorSheet.Modifiers.Tooltips.ToggleEffect" subtitle="SFRPG.ActorSheet.Modifiers.Tooltips.ToggleEffectTooltip"}}>{{#if item.system.enabled}}<i class="far fa-check-square">{{else}}<i class="far fa-square"></i>{{/if}}</i></a>
                 {{/if}}
                 <a class="item-control item-edit" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Edit"}}"><i class="fas fa-edit"></i></a>
                 <a class="item-control item-delete" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Delete"}}"><i class="fas fa-trash"></i></a>

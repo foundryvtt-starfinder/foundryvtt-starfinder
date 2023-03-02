@@ -180,7 +180,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         data.features = Object.values(features);
 
         const modifiers = {
-            conditions: { label: "SFRPG.ModifiersConditionsTabLabel", modifiers: [], dataset: { subtab: "conditions" }, isConditions: true },
+            conditions: { label: "SFRPG.ModifiersConditionsTabLabel", modifiers: [], dataset: { subtab: "conditions", type: "effect" }, isConditions: true, allowAdd: true },
             permanent: { label: "SFRPG.ModifiersPermanentTabLabel", modifiers: [], dataset: { subtab: "permanent" } },
             temporary: { label: "SFRPG.ModifiersTemporaryTabLabel", modifiers: [], dataset: { subtab: "temporary" } }
         };
@@ -219,6 +219,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         html.find('.modifier-edit').on('click', this._onModifierEdit.bind(this));
         html.find('.modifier-delete').on('click', this._onModifierDelete.bind(this));
         html.find('.modifier-toggle').on('click', this._onToggleModifierEnabled.bind(this));
+        html.find('.effect-toggle').on('click', this._onToggleEffect.bind(this));
         html.find('.player-class-level-up').on('click', this._onLevelUp.bind(this));
     }
 

@@ -759,3 +759,7 @@ Hooks.on("renderPause", () => {
         icon.src = "systems/sfrpg/images/cup/organizations/starfinder_society.webp";
     }
 });
+
+Hooks.on("updateWorldTime", (worldTime, dt, options, userId) => {
+    // TODO: check every actor for enabled effects and check if the effects should still be active or should be disabled.
+});
