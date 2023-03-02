@@ -13,6 +13,7 @@
         <button type="button" disabled>No Charges</button>
         {{/if}}
         {{#if hasSave}}<button type="button" data-action="save" data-type="{{system.save.type}}">{{ localize "SFRPG.Save" }} {{labels.save}}</button>{{/if}}
+        {{#if hasSkill}}<button type="button" class="chat-button-skill" data-action="skill" data-type="{{item.system.skillCheck.type}}">{{item.labels.skillCheck}}</button>{{/if}}
     </div>
 
     <footer class="card-footer">

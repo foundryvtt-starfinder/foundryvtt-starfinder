@@ -6,270 +6,269 @@
 
 .app.chat-popout .chat-message,
 #chat-log .message {
-  background: @sheetBackground;
-  font-size: 13px;
-  position: relative;
+    background: @sheetBackground;
+    font-size: 13px;
+    position: relative;
 }
 #chat-log .message.whisper {
-  background-color: #cfcfffff;
-  border: 2px solid #7096bf;
+    background-color: #cfcfffff;
+    border: 2px solid #7096bf;
 }
 #chat-log .message.blind {
-  background-color: #f1bdf1ff;
-  border: 2px solid #d87fd6;
+    background-color: #f1bdf1ff;
+    border: 2px solid #d87fd6;
 }
 #chat-form {
-  textarea {
-    background: @sheetBackground;
-  }
+    textarea {
+        background: @sheetBackground;
+    }
 }
 
 .dice-tooltip {
-  .dice-rolls {
-    .roll {
-      font-size: 13px;
+    .dice-rolls {
+        .roll {
+            font-size: 13px;
+        }
     }
-  }
 }
 
 .chat-card-custom {
-  .chat-card-custom-item {
-    img {
-      margin: 5px;
-      float: left;
-      border: none;
-      border-radius: 10px;
-      width: 30px;
+    .chat-card-custom-item {
+        img {
+            margin: 5px;
+            float: left;
+            border: none;
+            border-radius: 10px;
+            width: 30px;
+        }
+
+        p span {
+            display: block;
+            color: black;
+            font-weight: bold;
+        }
+
+        p button {
+            margin: 5px 0px;
+            background-color: @sfrpgRed;
+            border-color: #000000;
+            color: #ffffff;
+            font-size: 12px;
+            height: 20px;
+            width: 60px;
+            line-height: inherit;
+        }
+
+        p button.chat-button-save {
+            margin: 5px 0px;
+            background-color: grey;
+            border-color: black;
+            color: #ffffff;
+            font-size: 12px;
+            height: 20px;
+            width: auto;
+            line-height: inherit;
+        }
+
+        h2 {
+            position: initial;
+        }
     }
 
-    p span {
-      display: block;
-      color: black;
-      font-weight: bold;
+    div.chard-card-custom-token {
+        img {
+            float: left;
+            border: none;
+            width: 60px;
+        }
     }
-
-    p button {
-      margin: 5px 0px;
-      background-color: @sfrpgRed;
-      border-color: #000000;
-      color: #FFFFFF;
-      font-size: 12px;
-      height: 20px;
-      width: 60px;
-      line-height: inherit;
-    }
-
-    p button.chat-button-save {
-      margin: 5px 0px;
-      background-color: grey;
-      border-color: black;
-      color: #FFFFFF;
-      font-size: 12px;
-      height: 20px;
-      width: auto;
-      line-height: inherit;
-    }
-
-    h2 {
-      position: initial;
-    }
-  }
-
-  div.chard-card-custom-token {
-    img {
-      float: left;
-      border: none;
-      width: 60px;
-    }
-  }
 }
 
 .chard-card-custom-details {
-  margin-top: 3px;
+    margin-top: 3px;
 
-  ul {
-    margin: 0;
-    padding: 0;
-  }
+    ul {
+        margin: 0;
+        padding: 0;
+    }
 
-  li {
-    display: inline-block;
-    margin: 0 2px 0 0;
-    padding: 0 3px;
-    font-size: 10px;
-    line-height: 16px;
-    border: 1px solid #999;
-    border-radius: 3px;
-    background: rgba(0, 0, 0, 0.05);
-  }
+    li {
+        display: inline-block;
+        margin: 0 2px 0 0;
+        padding: 0 3px;
+        font-size: 10px;
+        line-height: 16px;
+        border: 1px solid #999;
+        border-radius: 3px;
+        background: rgba(0, 0, 0, 0.05);
+    }
 }
 
 .message-content {
-  h2 {
-    font-weight: bold;
-    text-align: center;
-  }
-
-  div.chat-card-custom-container {
-    padding: 3px;
-    background-color: rgba(0,0,0,0.05);
-    margin-bottom: 5px;
-    border-radius: 5px;
-  }
-
-  div.dice-roll {
-    .dice-formula {
-      font-weight: bold;
-      background-color: rgba(0,0,0,0.5);
-      color: white;
+    h2 {
+        font-weight: bold;
+        text-align: center;
     }
-  }
 
-  div.flexrow div h2 {
-    position: initial;
-  }
+    div.chat-card-custom-container {
+        padding: 3px;
+        background-color: rgba(0, 0, 0, 0.05);
+        margin-bottom: 5px;
+        border-radius: 5px;
+    }
+
+    div.dice-roll {
+        .dice-formula {
+            font-weight: bold;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+        }
+    }
+
+    div.flexrow div h2 {
+        position: initial;
+    }
 }
 
 .message-header {
-  background-color: rgba(150,200,255,0.4);
-  padding: 2px;
-  z-index: 5;
+    background-color: rgba(150, 200, 255, 0.4);
+    padding: 2px;
+    z-index: 5;
 
-  h4.message-sender {
-    z-index: 1;
-    color: @sfrpgRed;
-    font-weight: bold;
-  }
+    h4.message-sender {
+        z-index: 1;
+        color: @sfrpgRed;
+        font-weight: bold;
+    }
 }
 
-
 .sfrpg {
-  &.chat-card {
-    font-style: normal;
-    font-size: 12px;
-
-    .card-header {
-      padding: 3px 0;
-      border-top: 2px groove #FFF;
-      border-bottom: 2px groove #FFF;
-
-      img {
-        flex: 0 0 36px;
-        margin-right: 5px;
-        width: 36px;
-        height: 36px;
-        object-fit: contain;
-      }
-
-      .action-img {
-        flex: 0 0 50px;
-        width: 50px;
-        height: 50px;
-      }
-
-      h3 {
-        flex: 1;
-        margin: 0;
-        line-height: 36px;
-        .exo2();
-        color: @colorOlive;
-        &:hover {
-          color: #111;
-          text-shadow: 0 0 10px @sfrpgRed;
-        }
-
-        &.action-name {
-          line-height: 20px;
-          font-size: 15px;
-        }
-
-        &.item-name {
-          line-height: 30px;
-          font-size: 20px;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-      }
-
-      .action-activation {
-        height: 20px;
-        text-align: right;
-      }
-    }
-
-    .card-content {
-      margin: 5px 0;
-
-      h3 {
+    &.chat-card {
+        font-style: normal;
         font-size: 12px;
-        margin: 0;
-        font-weight: bold;
-      }
 
-      > * {
-        -webkit-user-select: text;
-        -moz-user-select: text;
-        -ms-user-select: text;
-        user-select: text;
-      }
-    }
+        .card-header {
+            padding: 3px 0;
+            border-top: 2px groove #fff;
+            border-bottom: 2px groove #fff;
 
-    .card-buttons {
-      margin: 5px 0;
+            img {
+                flex: 0 0 36px;
+                margin-right: 5px;
+                width: 36px;
+                height: 36px;
+                object-fit: contain;
+            }
 
-      span {
-        display: block;
-        line-height: 28px;
-        text-align: center;
-        border: 1px solid @borderLight;
-      }
+            .action-img {
+                flex: 0 0 50px;
+                width: 50px;
+                height: 50px;
+            }
 
-      button {
-        font-size: 12px;
-        height: 24px;
-        line-height: 20px;
-        margin: 2px 0;
-        .exo2();
-      }
-    }
+            h3 {
+                flex: 1;
+                margin: 0;
+                line-height: 36px;
+                .exo2();
+                color: @colorOlive;
+                &:hover {
+                    color: #111;
+                    text-shadow: 0 0 10px @sfrpgRed;
+                }
 
-    .card-footer {
-      padding: 3px 0 0;
-      border-top: 2px groove #FFF;
+                &.action-name {
+                    line-height: 20px;
+                    font-size: 15px;
+                }
 
-      span {
-        border-right: 2px groove #FFF;
-        padding: 0 5px 5px 0;
-        font-size: 10px;
+                &.item-name {
+                    line-height: 30px;
+                    font-size: 20px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+            }
 
-        &:last-child {
-          border-right: none;
-          padding-right: 0;
+            .action-activation {
+                height: 20px;
+                text-align: right;
+            }
         }
-      }
-    }
-  }
 
-  &.dice-roll {
-    .dice-footer {
-      border-top: 2px groove #fff;
-      font-size: 12px;
-      font-style: normal;
-      order: 3;
-      padding: 3px 0 0;
-      margin-top: 5px;
+        .card-content {
+            margin: 5px 0;
 
-      span {
-        border-right: 2px groove #fff;
-        padding: 0 5px 0 0;
-        font-size: 10px;
+            h3 {
+                font-size: 12px;
+                margin: 0;
+                font-weight: bold;
+            }
 
-        &:last-child {
-          border-right: none;
-          padding-right: 0;
+            > * {
+                -webkit-user-select: text;
+                -moz-user-select: text;
+                -ms-user-select: text;
+                user-select: text;
+            }
         }
-      }
+
+        .card-buttons {
+            margin: 5px 0;
+
+            span {
+                display: block;
+                line-height: 28px;
+                text-align: center;
+                border: 1px solid @borderLight;
+            }
+
+            button {
+                font-size: 12px;
+                height: 24px;
+                line-height: 20px;
+                margin: 2px 0;
+                .exo2();
+            }
+        }
+
+        .card-footer {
+            padding: 3px 0 0;
+            border-top: 2px groove #fff;
+
+            span {
+                border-right: 2px groove #fff;
+                padding: 0 5px 5px 0;
+                font-size: 10px;
+
+                &:last-child {
+                    border-right: none;
+                    padding-right: 0;
+                }
+            }
+        }
     }
-  }
+
+    &.dice-roll {
+        .dice-footer {
+            border-top: 2px groove #fff;
+            font-size: 12px;
+            font-style: normal;
+            order: 3;
+            padding: 3px 0 0;
+            margin-top: 5px;
+
+            span {
+                border-right: 2px groove #fff;
+                padding: 0 5px 0 0;
+                font-size: 10px;
+
+                &:last-child {
+                    border-right: none;
+                    padding-right: 0;
+                }
+            }
+        }
+    }
 }

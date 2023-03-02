@@ -54,6 +54,17 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         return hasType;
     }
 
+    /**
+     * Does the Item implement a saving throw as part of its usage
+     * @type {boolean}
+     */
+    get hasSkill() {
+        const skillData = this.system?.skillCheck;
+        if (!skillData) return false;
+
+        return !!skillData.type;
+    }
+
     /* -------------------------------------------- */
     /*	Data Preparation														*/
     /* -------------------------------------------- */
@@ -209,11 +220,12 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             actor: this.actor,
             tokenId: token ? `${token.parent.id}.${token.id}` : null,
             item: this,
-            system: this.getChatData(htmlOptions),
+            system: await this.getChatData(htmlOptions),
             labels: this.labels,
             hasAttack: this.hasAttack,
             hasDamage: this.hasDamage,
             hasSave: this.hasSave,
+            hasSkill: this.hasSkill,
             hasOtherFormula: this.hasOtherFormula
         };
 
@@ -333,14 +345,14 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     /*  Chat Cards                                  */
     /* -------------------------------------------- */
 
-    getChatData(htmlOptions) {
+    async getChatData(htmlOptions) {
         const data = duplicate(this.system);
         const labels = this.labels;
 
-        if (htmlOptions.async === undefined) htmlOptions.async = false;
+        htmlOptions.async = true;
 
         // Rich text description
-        data.description.value = TextEditor.enrichHTML(data.description.value, htmlOptions);
+        data.description.value = await TextEditor.enrichHTML(data.description.value, htmlOptions);
 
         // Item type specific properties
         const props = [];
@@ -376,8 +388,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         if (this.type === "container") {
             if (this.actor) {
-                const currencyLocale = game.settings.get('sfrpg', 'currencyLocale');
-                const wealthString = new Intl.NumberFormat(currencyLocale).format(Math.floor(this.system.itemWealth.contentWealth));
+                const wealthString = new Intl.NumberFormat(game.i18n.lang).format(Math.floor(this.system.itemWealth.contentWealth));
                 const wealthProperty = game.i18n.format("SFRPG.CharacterSheet.Inventory.ContainedWealth", {wealth: wealthString});
                 props.push({
                     name: wealthProperty,
@@ -739,6 +750,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const rollData = duplicate(actorData);
         // Add hasSave to roll
         itemData.hasSave = this.hasSave;
+        itemData.hasSkill = this.hasSkill;
         itemData.hasDamage = this.hasDamage;
         itemData.hasCapacity = this.hasCapacity();
 
@@ -773,7 +785,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             parts: parts,
             rollContext: rollContext,
             title: title,
-            flavor: TextEditor.enrichHTML(this.system?.chatFlavor, {async: false}),
+            flavor: await TextEditor.enrichHTML(this.system?.chatFlavor, {async: true}),
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             critical: critThreshold,
             chatMessage: options.chatMessage,
@@ -1112,7 +1124,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             criticalData: itemData.critical,
             rollContext: rollContext,
             title: title,
-            flavor: (TextEditor.enrichHTML(options?.flavorOverride, {async: false}) ?? TextEditor.enrichHTML(itemData.chatFlavor, {async: false})) || null,
+            flavor: (await TextEditor.enrichHTML(options?.flavorOverride, {async: true}) ?? await TextEditor.enrichHTML(itemData.chatFlavor, {async: true})) || null,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             chatMessage: options.chatMessage,
             dialogOptions: {
@@ -1355,7 +1367,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 actor: this.actor,
                 tokenId: token ? `${token.parent.id}.${token.id}` : null,
                 item: this,
-                data: this.getChatData(htmlOptions),
+                data: await this.getChatData(htmlOptions),
                 labels: this.labels,
                 hasAttack: this.hasAttack,
                 hasDamage: this.hasDamage,
@@ -1473,7 +1485,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const action = button.dataset.action;
 
         // Validate permission to proceed with the roll
-        const isTargetted = action === "save";
+        const isTargetted = ["save", "skill"].includes(action);
         if (!(isTargetted || game.user.isGM || message.isAuthor)) return;
 
         // Get the Actor from a synthetic Token
@@ -1508,14 +1520,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         else if (action === "damage") await item.rollDamage({ event });
         else if (action === "formula") await item.rollFormula({ event });
 
+        // Skill Check
+        else if (action === "skill" && targetActor) await targetActor.rollSkill(button.dataset.type, { event });
+
         // Saving Throw
-        else if (action === "save" && targetActor) {
-            const savePromise = targetActor.rollSave(button.dataset.type, { event });
-            savePromise.then(() => {
-                button.disabled = false;
-            });
-            return;
-        }
+        else if (action === "save" && targetActor) await targetActor.rollSave(button.dataset.type, { event });
 
         // Consumable usage
         else if (action === "consume") await item.rollConsumable({ event });
@@ -1670,10 +1679,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     }
 
     static async _onScalingCantripsSettingChanges() {
-        const d3scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d(lookupRange(@details.cl.value,3,7,4))+lookupRange(@details.cl.value,0,3,floor(@details.level.value/2))";
-        const d6scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+lookupRange(@details.cl.value,0,3,floor(@details.level.value/2))";
-        const npcd3scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d(lookupRange(@details.cr,3,7,4))+lookupRange(@details.cr,0,3,floor(@details.cr/2))";
-        const npcd6scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+lookupRange(@details.cr,0,3,floor(@details.cr/2))";
+        const d3scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d(ternary(gte(@details.cl.value,7),4,3))+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
+        const d6scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
+        const npcd3scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d(ternary(gte(@details.cr,7),4,3))+ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
+        const npcd6scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
 
         const setting = game.settings.get("sfrpg", "scalingCantrips");
         let count = 0;
@@ -1695,7 +1704,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
                 for (let currentValue of updates) {
                     if (currentValue.scaling.d3) {
-                        currentValue['system.damage.parts'].forEach(i => {
+                        const parts = currentValue['system.damage.parts'];
+                        for (const i of parts) {
                             if (setting) {
                                 if (isNPC) {
                                     i.formula = npcd3scaling;
@@ -1705,9 +1715,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                             } else {
                                 i.formula = "1d3";
                             }
-                        });
+                        }
                     } else if (currentValue.scaling.d6) {
-                        currentValue['system.damage.parts'].forEach(i => {
+                        const parts = currentValue['system.damage.parts'];
+                        for (const i of parts) {
                             if (setting) {
                                 if (isNPC) {
                                     i.formula = npcd6scaling;
@@ -1717,7 +1728,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                             } else {
                                 i.formula = "1d6";
                             }
-                        });
+                        }
                     }
 
                     delete currentValue.scaling;
@@ -1725,7 +1736,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
                 await actor.updateEmbeddedDocuments("Item", updates);
                 count += params.length;
-                actorCount += 1;
+                actorCount++;
             }
         }
         const message = `Starfinder | Updated ${count} spells to use ${(setting) ? "scaling" : "default"} formulas on ${actorCount} actors.`;
@@ -1733,17 +1744,20 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     }
 
     static async _onScalingCantripDrop(addedItem, targetActor) {
-        const d3scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d(lookupRange(@details.cl.value,3,7,4))+lookupRange(@details.cl.value,0,3,floor(@details.level.value/2))";
-        const d6scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+lookupRange(@details.cl.value,0,3,floor(@details.level.value/2))";
-        const npcd3scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d(lookupRange(@details.cr,3,7,4))+lookupRange(@details.cr,0,3,floor(@details.cr/2))";
-        const npcd6scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+lookupRange(@details.cr,0,3,floor(@details.cr/2))";
+        const d3scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d(ternary(gte(@details.cl.value,7),4,3))+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
+        const d6scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
+        const npcd3scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d(ternary(gte(@details.cr,7),4,3))+ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
+        const npcd6scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
 
         const isNPC = ['npc', 'npc2'].includes(targetActor.actor.type);
 
         if (addedItem.system.scaling?.d3) {
 
             const updates = duplicate(addedItem.system.damage.parts);
-            updates.forEach(i => i.formula = (isNPC) ? npcd3scaling : d3scaling);
+            updates.map(i => {
+                i.formula = (isNPC) ? npcd3scaling : d3scaling;
+                return i;
+            } );
 
             await addedItem.update({"system.damage.parts": updates});
             console.log(`Starfinder | Updated ${addedItem.name} to use the ${ (isNPC) ? 'NPC ' : ""}d3 scaling formula.`);
@@ -1751,7 +1765,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         } else if (addedItem.system.scaling?.d6) {
 
             const updates = duplicate(addedItem.system.damage.parts);
-            updates.forEach(i => i.formula = (isNPC) ? npcd6scaling : d6scaling);
+            updates.map(i => {
+                i.formula = (isNPC) ? npcd6scaling : d6scaling;
+                return i;
+            } );
 
             await addedItem.update({"system.damage.parts": updates});
             console.log(`Starfinder | Updated ${addedItem.name} to use the ${ (isNPC) ? "NPC " : ""}d6 scaling formula.`);
