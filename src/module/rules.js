@@ -39,6 +39,7 @@ import calculateInitiativeModifiers     from './rules/actions/actor/calculate-in
 import calculateMovementSpeeds          from './rules/actions/actor/calculate-movement-speeds.js';
 import calculateSaveModifiers           from './rules/actions/actor/calculate-save-modifiers.js';
 import calculateSkillModifiers          from './rules/actions/actor/calculate-skill-modifiers.js';
+import calculateTimedEffects            from "./rules/actions/actor/calculate-timed-effects.js";
 // Character rules
 import calculateBaseArmorClass          from './rules/actions/actor/character/calculate-base-armor-class.js';
 import calculateBaseAttackBonus         from './rules/actions/actor/character/calculate-bab.js';
@@ -129,6 +130,7 @@ export default function(engine) {
     calculateAbilityCheckModifiers(engine);
     calculateEncumbrance(engine);
     calculateMovementSpeeds(engine);
+    calculateTimedEffects(engine);
     // Character actions
     calculateBaseAttackBonus(engine);
     calculateCharacterLevel(engine);
@@ -356,7 +358,8 @@ export default function(engine) {
         name: "process-items",
         description: "Take all of the item data and process it.",
         rules: [
-            "calculateSaveDC"
+            "calculateSaveDC",
+            "calculateTimedEffects"
         ]
     });
 

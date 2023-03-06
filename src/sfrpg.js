@@ -129,6 +129,7 @@ Hooks.once('init', async function() {
         SFRPGModifier,
         SFRPGModifierType,
         SFRPGModifierTypes,
+        timedEffects: [],
 
         // Namespace style
         Actor: {
@@ -761,5 +762,13 @@ Hooks.on("renderPause", () => {
 });
 
 Hooks.on("updateWorldTime", (worldTime, dt, options, userId) => {
-    // TODO: check every actor for enabled effects and check if the effects should still be active or should be disabled.
+    const timedEffects = game.sfrpg.timedEffects;
+    for (let effectI = 0; effectI < timedEffects.length; effectI++) {
+        const effect = timedEffects[effectI];
+        const effectFinish = effect.activeDuration.activationTime + (effect.activeDuration.value * SFRPG.effectDurationFrom[effect.activeDuration.unit]);
+        // TODO: add in options for combat: when it should stop (start of your turn, start of given actor turn, next round, ...)
+        if (((effectFinish <= worldTime) && effect.enabled) || (dt < 0 && (effectFinish >= worldTime) && !effect.enabled)) {
+            effect.toggle(false);
+        }
+    }
 });

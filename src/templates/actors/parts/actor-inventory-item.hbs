@@ -1,4 +1,5 @@
-        <li class="item {{#if (not bigItem)}}small{{/if}}{{#if (eq item.type "container")}}container{{/if}}{{#if (eq item.type "effect")}}effect{{/if}} flexrow" data-item-id="{{item._id}}">
+        <li class="item {{#if (not bigItem)}}small{{/if}}{{#if (eq item.type "container")}}container{{/if}}{{#if (eq item.type "effect")}}effect{{/if}} flexrow"
+            data-item-id="{{item._id}}" {{#if (eq item.type "effect")}}data-effect-id="{{item.timedEffect}}"{{/if}}>
             <div class="item-name flexrow {{#if (not disableRolling)}}rollable{{/if}}">
                 <div class="item-image {{#if (not bigItem)}}small{{/if}}" style="background-image: url({{item.img}})"></div>
                 <h4>

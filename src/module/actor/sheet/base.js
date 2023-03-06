@@ -454,30 +454,17 @@ export class ActorSheetSFRPG extends ActorSheet {
         await this.actor.update({'system.modifiers': modifiers});
     }
 
+    /**
+     * Toggle an effect and their modifiers to be enabled or disabled.
+     *
+     * @param {Event} event The originating click event
+     */
     async _onToggleEffect(event) {
         event.preventDefault();
         const target = $(event.currentTarget);
-        const effectID = target.closest('.item.effect').data('itemId');
+        const effectID = target.closest('.item.effect').data('effectId');
 
-        const items = duplicate(this.actor.items);
-        const effect = items.find(item => (item.type === 'effect') && (item._id = effectID));
-
-        effect.system.enabled = !effect.system.enabled;
-
-        // thats fucked up... hoped i could make it work like a modifier that if the item is not enabled all modifiers inside are also not enabled but idk how ^^
-        for (let effectModI = 0; effectModI < effect.system.modifiers.length; effectModI++) {
-            const mod = effect.system.modifiers[effectModI];
-            mod.enabled = effect.system.enabled;
-        }
-
-        if (effect.system.enabled) {
-            effect.system.activeDuration.activationTime = game.time.worldTime;
-        } else {
-            effect.system.activeDuration.activationTime = 0;
-        }
-
-        await this.actor.update({'items': items});
-
+        this.actor.system.timedEffects.find(item => item.id === effectID)?.toggle();
     }
 
     /**

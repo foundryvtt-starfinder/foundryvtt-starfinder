@@ -144,11 +144,17 @@ SFRPG.abilityActivationTypes = {
  * @type {Object}
  */
 SFRPG.effectDurationTypes = {
-    "none": "SFRPG.EffectDurationTypesNone",
     "rounds": "SFRPG.EffectDurationTypesRounds",
     "minutes": "SFRPG.EffectDurationTypesMinutes",
     "hours": "SFRPG.EffectDurationTypesHours",
     "Days": "SFRPG.EffectDurationTypesDays"
+};
+
+SFRPG.effectDurationFrom = {
+    "rounds": 6,
+    "minutes": 60,
+    "hours": 3600,
+    "Days": 86400
 };
 
 SFRPG.skillProficiencyLevels = {

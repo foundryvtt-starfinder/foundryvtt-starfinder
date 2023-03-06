@@ -109,7 +109,11 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
                 }
             }
             else if (item.type === "feat" || item.type === "effect") {
-                if (((item.system.requirements?.toLowerCase() || "") === "condition") || item.type === "effect") {
+                if (item.type === "effect") {
+                    const timedEffect = duplicate(actorData.timedEffects.find(effect => effect.itemId === item.id) || {});
+                    item.timedEffect = timedEffect?.id;
+                    arr[7].push(item); // conditionItems
+                } else if ((item.system.requirements?.toLowerCase() || "") === "condition") {
                     arr[7].push(item); // conditionItems
                 } else {
                     arr[2].push(item); // feats
