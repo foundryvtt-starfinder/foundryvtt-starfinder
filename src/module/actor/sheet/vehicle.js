@@ -528,7 +528,8 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             hasAttack: item.hasAttack,
             hasDamage: item.hasDamage,
             isVersatile: item.isVersatile,
-            hasSave: item.hasSave
+            hasSave: item.hasSave,
+            hasSkill: this.hasSkill
         };
 
         const template = `systems/sfrpg/templates/chat/item-action-card.hbs`;

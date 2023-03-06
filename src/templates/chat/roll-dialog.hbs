@@ -56,7 +56,7 @@
                     <p class="damage-type">
                         <label class="radio">
                             <input class="damageSection" type="radio" name="{{part.group}}" id={{@index}} {{checked part.enabled}}/>{{part.name}}: {{part.formula}} {{part.type}}
-                            {{#if part.originalFormula}}
+                            {{#if part.originalFormulaTooltip}}
                                 <i class="fas fa-info-circle" data-tooltip="{{localize "SFRPG.Rolls.Dialog.SimplifiedFormulaTooltip" formula=part.originalFormula}}"></i>
                             {{/if}}
                         </label>
@@ -65,7 +65,7 @@
                     <p class="damage-type">
                         <label class="checkbox">
                             <input class="damageSection" type="checkbox" name="{{i}}" id={{@index}} {{checked part.enabled}}/>{{part.name}}: {{part.formula}} {{part.type}}
-                            {{#if part.originalFormula}}
+                            {{#if part.originalFormulaTooltip}}
                                 <i class="fas fa-info-circle" data-tooltip="{{localize "SFRPG.Rolls.Dialog.SimplifiedFormulaTooltip" formula=part.originalFormula}}"></i>
                             {{/if}}
                         </label>
@@ -94,7 +94,7 @@
             <a class="modifier-enabled" title="{{modifier.name}}">{{#if modifier.enabled}}<i class="far fa-check-square">{{else}}<i class="far fa-square"></i>{{/if}}</i></a>
             <h4 class="modifier-name">{{modifier.name}}</h4>
             <span class="modifier-modifier">{{modifier.modifier}}
-            {{#if modifier.originalFormula}}
+            {{#if modifier.originalFormulaTooltip}}
                 <i class="fas fa-info-circle" data-tooltip="{{localize "SFRPG.Rolls.Dialog.SimplifiedFormulaTooltip" formula=modifier.originalFormula}}"></i>
             {{/if}}
             </span>

@@ -1205,8 +1205,14 @@ function searchDescriptionForUnlinkedReference(description, regularExpression) {
             let delimiterCharacters = [">", "<", ";", ",", "/", "(", ")", "."];
 
             let unlinkedReferenceFound = false;
+            // This is a simple rule of thumb which checks of the word in question is surrounded by `&nbsp;`. In this case we'll ignore,
+            // as this can be used to escape a condition word (ie. `Burning`) in an otherwise unrelated context (ie. `... the Burning Archipelago...`)
+            if (characterBefore === ";" || characterAfter === "&") {
+                unlinkedReferenceFound = false;
+                continue;
+            }
             // If surrounded by { and } we assume it is linked and continue
-            if (characterBefore === "{" && characterAfter === "}") {
+            else if (characterBefore === "{" && characterAfter === "}") {
                 alreadyLinked.push(conditionWord);
                 continue;
             }
@@ -1228,11 +1234,6 @@ function searchDescriptionForUnlinkedReference(description, regularExpression) {
             else if ((delimiterCharacters.includes(characterBefore) || characterBefore === " ") && delimiterCharacters.includes(characterAfter)) {
                 unlinkedReferenceFound = true;
                 if (!alreadyLinked.includes(conditionWord)) foundWords.push(conditionWord);
-            }
-            // This is a simple rule of thumb which checks of the word in question is surrounded by `&nbsp;`. In this case we'll ignore,
-            // as this can be used to escape a condition word (ie. `Burning`) in an otherwise unrelated context (ie. `... the Burning Archipelago...`)
-            else if (characterBefore === ";" && characterAfter === "&") {
-                unlinkedReferenceFound = false;
             }
 
         }

@@ -43,10 +43,14 @@ import SFRPGModifier from "./module/modifiers/modifier.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./module/modifiers/types.js";
 import { RPC } from "./module/rpc.js";
 import registerSystemRules from "./module/rules.js";
-import { registerSystemSettings } from "./module/settings.js";
+import { registerSystemSettings } from "./module/system/settings.js";
 import templateOverrides from "./module/template-overrides.js";
 import { preloadHandlebarsTemplates } from "./module/templates.js";
-import { generateUUID } from "./module/utilities.js";
+import { generateUUID } from "./module/utils/utilities.js";
+
+import BrowserEnricher from "./module/system/enrichers/browser.js";
+import CheckEnricher from "./module/system/enrichers/check.js";
+import IconEnricher from "./module/system/enrichers/icon.js";
 
 import RollDialog from "./module/apps/roll-dialog.js";
 import { initializeBrowsers } from "./module/packs/browsers.js";
@@ -54,10 +58,15 @@ import SFRPGRoll from "./module/rolls/roll.js";
 import RollContext from "./module/rolls/rollcontext.js";
 import RollNode from "./module/rolls/rollnode.js";
 import RollTree from "./module/rolls/rolltree.js";
+import registerCompendiumArt from "./module/system/compendium-art.js";
 import { SFRPGTokenHUD } from "./module/token/token-hud.js";
 import SFRPGTokenDocument from "./module/token/tokendocument.js";
-import registerCompendiumArt from "./module/utils/compendium-art.js";
 import setupVision from "./module/vision.js";
+
+import { getAlienArchiveBrowser } from "./module/packs/alien-archive-browser.js";
+import { getEquipmentBrowser } from "./module/packs/equipment-browser.js";
+import { getSpellBrowser } from "./module/packs/spell-browser.js";
+import { getStarshipBrowser } from "./module/packs/starship-browser.js";
 
 let initTime = null;
 
@@ -116,6 +125,11 @@ Hooks.once('init', async function() {
         engine,
         entities: { ActorSFRPG, ItemSFRPG },
         generateUUID,
+        // Document browsers
+        getSpellBrowser,
+        getEquipmentBrowser,
+        getAlienArchiveBrowser,
+        getStarshipBrowser,
         migrateWorld,
         rollItemMacro,
         rolls: {
@@ -355,6 +369,9 @@ Hooks.once("setup", function() {
 
     console.log("Starfinder | [SETUP] Registering custom handlebars");
     setupHandlebars();
+
+    console.log("Starfinder | [SETUP] Setting up custom enrichers");
+    CONFIG.TextEditor.enrichers.push(new BrowserEnricher(), new IconEnricher(), new CheckEnricher());
 
     const finishTime = (new Date()).getTime();
     console.log(`Starfinder | [SETUP] Done (operation took ${finishTime - setupTime} ms)`);
@@ -732,8 +749,7 @@ function setupHandlebars() {
     });
 
     Handlebars.registerHelper('currencyFormat', function(value) {
-        const currencyLocale = game.settings.get('sfrpg', 'currencyLocale');
-        const moneyFormatter  = new Intl.NumberFormat(currencyLocale);
+        const moneyFormatter = new Intl.NumberFormat(game.i18n.lang);
         const formattedValue = moneyFormatter.format(value);
         return formattedValue;
     });

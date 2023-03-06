@@ -4,86 +4,88 @@
 /*  Basic Structure                          */
 /* ----------------------------------------- */
 .sfrpg.dialog.roll {
-  min-width: 500px;
-  //min-height: 830px;
+    min-width: 500px;
+    //min-height: 830px;
 
-  div.damage-type-selector-list {
-    .damage-type-list-title {
-      font-weight: bold;
-      font-size: 1em;
-      border-bottom: 1px solid @borderDark;
-      margin-top: 5px;
-    }
-  }
-
-  ul.modifier-list {
-    flex: 0 0 49%;
-    list-style: none;
-    margin: 5px 0px 9px;
-    padding: 2px 2px 0;
-    border: @borderGroove;
-    border-radius: 3px;
-
-    h3.modifier-list-title {
-      text-align: center;
-      margin-bottom: 3px;
+    div.damage-type-selector-list {
+        .damage-type-list-title {
+            font-weight: bold;
+            font-size: 1em;
+            border-bottom: 1px solid @borderDark;
+            margin-top: 5px;
+        }
     }
 
-    li.modifier-list-header {
-      background: rgba(0, 0 ,0, 0.05);
-      border: @borderGroove;
-      font-size: 12px;
-      font-weight: bold;
-      line-height: 15px;
-      padding: 3px;
+    ul.modifier-list {
+        flex: 0 0 49%;
+        list-style: none;
+        margin: 5px 0px 9px;
+        padding: 2px 2px 0;
+        border: @borderGroove;
+        border-radius: 3px;
 
-      div.modifier-list-header-enabled {
-        flex: 0 0 10%;
-        text-align: center;
-      }
-      h3.modifier-list-header-name {
-        flex: 0 0 40%;
-        text-align: left;
-        font-size: 12px;
-        font-weight: bold;
-        margin: 0;
-      }
-      div.modifier-list-header-modifier {
-        flex: 0 0 50%;
-        text-align: left;
-      }
+        h3.modifier-list-title {
+            text-align: center;
+            margin-bottom: 3px;
+        }
+
+        li.modifier-list-header {
+            background: rgba(0, 0, 0, 0.05);
+            border: @borderGroove;
+            font-size: 12px;
+            font-weight: bold;
+            line-height: 15px;
+            padding: 3px;
+
+            div.modifier-list-header-enabled {
+                flex: 0 0 10%;
+                text-align: center;
+            }
+            h3.modifier-list-header-name {
+                flex: 0 0 40%;
+                text-align: left;
+                font-size: 12px;
+                font-weight: bold;
+                margin: 0;
+            }
+            div.modifier-list-header-modifier {
+                flex: 0 0 50%;
+                text-align: left;
+            }
+        }
+
+        li.modifier {
+            height: 22px;
+            padding: 3px;
+
+            &:hover {
+                background-color: rgba(@colorFaint, 0.4);
+            }
+
+            h4 {
+                flex: 0 0 50%;
+                margin: 0;
+                font-size: 13px;
+                line-height: 18px;
+            }
+            .modifier-enabled {
+                flex: 0 0 10%;
+                text-align: center;
+            }
+            .modifier-name {
+                flex: 0 0 40%;
+                text-align: left;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .modifier-modifier {
+                flex: 0 0 50%;
+                text-align: left;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
     }
-
-    li.modifier {
-      height: 22px;
-      padding: 3px;
-
-      &:hover {background-color: rgba(@colorFaint, 0.4);}
-
-      h4 {
-        flex: 0 0 50%;
-        margin: 0;
-        font-size: 13px;
-        line-height: 18px;
-      }
-      .modifier-enabled {
-        flex: 0 0 10%;
-        text-align: center;
-      }
-      .modifier-name {
-        flex: 0 0 40%;
-        text-align: left;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-      .modifier-modifier {
-        flex: 0 0 50%;
-        text-align: left;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-    }
-  }
 }

@@ -1,3 +1,7 @@
+import BrowserEnricher from "./system/enrichers/browser.js";
+import CheckEnricher from "./system/enrichers/check.js";
+import IconEnricher from "./system/enrichers/icon.js";
+
 // Namespace SFRPG Configuration Values
 export const SFRPG = {};
 
@@ -796,8 +800,8 @@ SFRPG.itemActionTypes = {
     "msak": "SFRPG.ActionMSAK",
     "rsak": "SFRPG.ActionRSAK",
     "save": "SFRPG.ActionSave",
+    "skill": "SFRPG.ActionSkill",
     "heal": "SFRPG.ActionHeal",
-    "abil": "SFRPG.ActionAbil",
     "util": "SFRPG.ActionUtil",
     "other": "SFRPG.ActionOther"
 };
@@ -1919,4 +1923,10 @@ SFRPG.floatingHPValues = {
         positive: { fill: 0x9696ff },
         negative: { fill: 0xd90069 }
     }
+};
+
+SFRPG.enricherTypes = {
+    "Browser": BrowserEnricher,
+    "Icon": IconEnricher,
+    "Check": CheckEnricher
 };

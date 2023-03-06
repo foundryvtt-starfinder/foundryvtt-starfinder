@@ -1,6 +1,6 @@
-import FloatingNumberMenu from "./classes/floating-number-menu.js";
-import { SFRPG } from "./config.js";
-import { ItemSFRPG } from "./item/item.js";
+import FloatingNumberMenu from "../classes/floating-number-menu.js";
+import { SFRPG } from "../config.js";
+import { ItemSFRPG } from "../item/item.js";
 
 export const registerSystemSettings = function() {
     game.settings.register("sfrpg", "diagonalMovement", {
@@ -206,15 +206,6 @@ export const registerSystemSettings = function() {
         config: true,
         default: true,
         type: Boolean
-    });
-
-    game.settings.register("sfrpg", "currencyLocale", {
-        name: "SFRPG.Settings.CurrencyLocale.Name",
-        hint: "SFRPG.Settings.CurrencyLocale.Hint",
-        scope: "client",
-        config: true,
-        default: "en-US",
-        type: String
     });
 
     game.settings.register("sfrpg", "sfrpgTheme", {
