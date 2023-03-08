@@ -154,6 +154,11 @@ SFRPG.effectDurationTypes = {
     "Days": "SFRPG.EffectDurationTypesDays"
 };
 
+SFRPG.effectEndTypes = {
+    "onTurnStart": "SFRPG.EffectEndTypesOnTurnStart",
+    "onTurnEnd": "SFRPG.EffectEndTypesOnTurnEnd"
+};
+
 SFRPG.effectDurationFrom = {
     "rounds": 6,
     "minutes": 60,

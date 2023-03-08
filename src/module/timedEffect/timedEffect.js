@@ -26,7 +26,8 @@ export default class SFRPGTimedEffect {
         activeDuration = {
             unit: '',
             value: 0,
-            activationTime: 0
+            activationTime: 0,
+            endsOn: ''
         }
     }) {
         this.id = id ?? generateUUID();

@@ -333,6 +333,8 @@ export class CombatSFRPG extends Combat {
             return;
         }
 
+        this._handleTimedEffects(eventData);
+
         await this._notifyBeforeUpdate(eventData);
 
         if (!newPhase.iterateTurns) {
@@ -698,6 +700,29 @@ export class CombatSFRPG extends Combat {
         let cn = an.localeCompare(bn);
         if ( cn !== 0 ) return cn;
         return a.tokenId - b.tokenId;
+    }
+
+    _handleTimedEffects(eventData) {
+        const timedEffects = game.sfrpg.timedEffects;
+        for (let effectI = 0; effectI < timedEffects.length; effectI++) {
+            const effect = timedEffects[effectI];
+            switch (effect.activeDuration.endsOn) {
+                case 'onTurnStart':
+                    if (eventData.isNewTurn && (eventData.newCombatant.actor._id === effect.actorId)) {
+                        // TODO: test this, will produce bugs like turning effect on again when going back (using previous turn)
+                        effect.toggle(false);
+                    }
+                    break;
+                case 'onTurnEnd':
+                    if (eventData.isNewTurn && (eventData.oldCombatant.actor._id === effect.actorId)) {
+                        effect.toggle(false);
+                    }
+                    break;
+                // TODO: add case that supports the ending of an effect that originates from another actor. (will need to introduce some kind of "sourceActor" property to the effect item type)
+                default:
+                    break;
+            }
+        }
     }
 }
 
