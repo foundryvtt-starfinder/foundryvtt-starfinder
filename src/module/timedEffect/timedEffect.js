@@ -10,6 +10,7 @@ export default class SFRPGTimedEffect {
      * @param {String}  data.type this is for later use of different effect types
      * @param {Boolean} data.enabled is this effect enabled or not
      * @param {UUID}    data.actorId Id of the actor that owns this timedEffect
+     * @param {UUID}    data.sourceActorId Id of the actor that this effect originates from
      * @param {Array}   data.modifiers the modifiers that apply from this effect
      * @param {String}  data.notes general notes
      * @param {Object}  data.activeDuration an object that contains the information on how long this effect lasts and when it was activated.
@@ -21,6 +22,7 @@ export default class SFRPGTimedEffect {
         type = '', // this is for later use of different effect types
         enabled = true,
         actorId = '',
+        sourceActorId = '',
         modifiers = [],
         notes = '',
         activeDuration = {
@@ -36,6 +38,7 @@ export default class SFRPGTimedEffect {
         this.type = type;
         this.enabled = enabled;
         this.actorId = actorId;
+        this.sourceActorId = sourceActorId;
         this.modifiers = modifiers;
         this.notes = notes;
         this.activeDuration = activeDuration;
@@ -48,6 +51,7 @@ export default class SFRPGTimedEffect {
         type,
         enabled,
         actorId,
+        sourceActorId,
         modifiers,
         notes,
         activeDuration
@@ -58,13 +62,17 @@ export default class SFRPGTimedEffect {
         this.type = type;
         this.enabled = enabled;
         this.actorId = actorId;
+        this.sourceActorId = sourceActorId;
         this.modifiers = modifiers;
         this.notes = notes;
         this.activeDuration = activeDuration;
+        return this;
     }
 
     /**
      * toggle the effect on or off across the game.
+     *
+     * @param {Boolean} resetActivationTime default = true, sets if the activeDuration.activationTime should be reset or kept.
      */
     toggle(resetActivationTime = true) {
         this.enabled = !this.enabled;
@@ -92,8 +100,8 @@ export default class SFRPGTimedEffect {
                 effect.system.activeDuration.activationTime = game.time.worldTime;
                 this.activeDuration.activationTime = game.time.worldTime;
             } else if (resetActivationTime) {
-                effect.system.activeDuration.activationTime = 0;
-                this.activeDuration.activationTime = 0;
+                effect.system.activeDuration.activationTime = -1;
+                this.activeDuration.activationTime = -1;
             }
 
             // update global and actor timedEffect objects
@@ -103,6 +111,18 @@ export default class SFRPGTimedEffect {
             actor.update({'items': items});
         } else {
             console.error('could not toggle effect, item is missing.');
+        }
+    }
+
+    delete() {
+        const gameEffectIndex = game.sfrpg.timedEffects.findIndex(effect => effect.itemId = this.itemId);
+        if (gameEffectIndex > -1) {
+            game.sfrpg.timedEffects.splice(gameEffectIndex, 1);
+        }
+        const actor = game.actors.get(this.actorId);
+        const actorEffectIndex = actor ? actor.system.timedEffects.findIndex(effect => effect.itemId = this.itemId) : -1;
+        if (actorEffectIndex > -1) {
+            actor.system.timedEffects.splice(actorEffectIndex, 1);
         }
     }
 }

@@ -15,6 +15,8 @@
 <div class="form-group input-select">
     <label>{{localize "SFRPG.EffectEndTypesLabel"}}</label>
     <div class="form-fields">
+        <input type="text" name="system.sourceActorId" value="{{itemData.sourceActorId}}" data-dtype="String" placeholder="{{actor.id}}"/>
+        {{log itemData}}
         <select name="system.activeDuration.endsOn">
             {{#select itemData.activeDuration.endsOn}}
             <option value=""></option>
@@ -25,4 +27,3 @@
         </select>
     </div>
 </div>
-

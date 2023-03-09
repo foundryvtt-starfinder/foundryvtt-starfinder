@@ -1,4 +1,5 @@
 import { DiceSFRPG } from "../dice.js";
+import { SFRPG } from "../config.js";
 import RollContext from "../rolls/rollcontext.js";
 
 /*
@@ -318,9 +319,9 @@ export class CombatSFRPG extends Combat {
 
         const eventData = {
             combat: this,
-            isNewRound: nextRound != this.round,
-            isNewPhase: nextRound != this.round || nextPhase != this.flags.sfrpg.phase,
-            isNewTurn: (nextRound != this.round && phases[nextPhase].iterateTurns) || nextTurn != this.turn,
+            isNewRound: nextRound !== this.round,
+            isNewPhase: nextRound !== this.round || nextPhase !== this.flags.sfrpg.phase,
+            isNewTurn: (nextRound !== this.round && phases[nextPhase].iterateTurns) || nextTurn !== this.turn,
             oldRound: this.round,
             newRound: nextRound,
             oldPhase: currentPhase,
@@ -332,8 +333,6 @@ export class CombatSFRPG extends Combat {
         if (!eventData.isNewRound && !eventData.isNewPhase && !eventData.isNewTurn) {
             return;
         }
-
-        this._handleTimedEffects(eventData);
 
         await this._notifyBeforeUpdate(eventData);
 
@@ -360,6 +359,7 @@ export class CombatSFRPG extends Combat {
         }
 
         await this._notifyAfterUpdate(eventData);
+        this._handleTimedEffects(eventData);
     }
 
     async _notifyBeforeUpdate(eventData) {
@@ -706,21 +706,27 @@ export class CombatSFRPG extends Combat {
         const timedEffects = game.sfrpg.timedEffects;
         for (let effectI = 0; effectI < timedEffects.length; effectI++) {
             const effect = timedEffects[effectI];
-            switch (effect.activeDuration.endsOn) {
-                case 'onTurnStart':
-                    if (eventData.isNewTurn && (eventData.newCombatant.actor._id === effect.actorId)) {
-                        // TODO: test this, will produce bugs like turning effect on again when going back (using previous turn)
-                        effect.toggle(false);
-                    }
-                    break;
-                case 'onTurnEnd':
-                    if (eventData.isNewTurn && (eventData.oldCombatant.actor._id === effect.actorId)) {
-                        effect.toggle(false);
-                    }
-                    break;
-                // TODO: add case that supports the ending of an effect that originates from another actor. (will need to introduce some kind of "sourceActor" property to the effect item type)
-                default:
-                    break;
+            const effectFinish = effect.activeDuration.activationTime + (effect.activeDuration.value * SFRPG.effectDurationFrom[effect.activeDuration.unit]);
+            const worldTime = game.time.worldTime;
+            const targetActorId = effect.sourceActorId || effect.actorId;
+            if (((effectFinish <= worldTime) && effect.enabled) || (effect.activeDuration.activationTime >= 0 && (effectFinish >= worldTime) && !effect.enabled)) {
+                if (!eventData.combat.combatants.find(combatant => combatant.actorId === targetActorId)) {
+                    effect.toggle(false);
+                    continue;
+                }
+                switch (effect.activeDuration.endsOn) {
+                    case 'onTurnEnd':
+                        if (eventData.isNewTurn && (eventData.oldCombatant.actorId === targetActorId)) {
+                            effect.toggle(false);
+                        }
+                        break;
+                    case 'onTurnStart':
+                    default:
+                        if (eventData.isNewTurn && (eventData.newCombatant.actorId === targetActorId)) {
+                            effect.toggle(false);
+                        }
+                        break;
+                }
             }
         }
     }

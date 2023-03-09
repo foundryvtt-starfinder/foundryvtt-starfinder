@@ -909,6 +909,15 @@ export class ActorItemHelper {
             }
         }
 
+        for (let itemI = 0; itemI < itemIdsToDelete.length; itemI++) {
+            const itemId = itemIdsToDelete[itemI];
+            const item = this.getItem(itemId);
+            if (item.type === 'effect') {
+                const effect = this.actor.system.timedEffects.find(effect => effect.itemId === itemId);
+                effect.delete();
+            }
+        }
+
         /** Clean up parent container, if deleted from container. */
         const promises = [];
         const container = this.actor.items.find(x => x.system?.container?.contents?.find(y => y.id === itemId) !== undefined);
