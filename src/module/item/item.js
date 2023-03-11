@@ -89,14 +89,20 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Feat Items
         else if (itemData.type === "feat") {
             const act = data.activation;
-            if (act && act.type) labels.featType = data.damage.length ? "Attack" : "Action";
-            else labels.featType = "Passive";
+            console.log(data.damage);
+            if (act && ["mwak", "rwak", "msak", "rsak"].includes(act.type)) {
+                labels.featType = data?.damage?.parts?.length
+                    ? game.i18n.localize("SFRPG.Attack")
+                    : game.i18n.localize("SFRPG.Items.Actions.TitleAction");
+            } else {
+                labels.featType = game.i18n.localize("SFRPG.Passive");
+            }
         }
 
         // Equipment Items
         else if (itemData.type === "equipment") {
-            labels.eac = data.armor.eac ? `${data.armor.eac} EAC` : "";
-            labels.kac = data.armor.kac ? `${data.armor.kac} KAC` : "";
+            labels.eac = data.armor.eac ? `${data.armor.eac} ${game.i18n.localize("SFRPG.EnergyArmorClassShort")}` : "";
+            labels.kac = data.armor.kac ? `${data.armor.kac} ${game.i18n.localize("SFRPG.KineticArmorClassShort")}` : "";
         }
 
         // Activated Items
@@ -364,7 +370,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         if (data.hasOwnProperty("equipped") && equippableTypes.includes(this.type)) {
             props.push(
                 {name: data.equipped ? "Equipped" : "Not Equipped", tooltip: null },
-                {name: data.proficient ? "Proficient" : "Not Proficient", tooltip: null }
+                {name: data.proficient
+                    ? game.i18n.localize("SFRPG.Items.Proficient")
+                    : game.i18n.localize("SFRPG.Items.NotProficient"),
+                tooltip: null }
             );
         }
 
