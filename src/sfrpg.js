@@ -428,15 +428,19 @@ Hooks.once("ready", async () => {
         }
     }
 
+    // If Item Piles is enabled, defer to creating its loot tokens instead of system ones.
+    if (!(game.modules.get("item-piles")?.active)) {
+        Hooks.on("dropCanvasData", (canvas, data) => canvasHandlerV10(canvas, data));
+    } else {
+        console.log("Starfinder | [READY] Item Piles detected, deferring to its loot token implementation.");
+    }
+
     const finishTime = (new Date()).getTime();
     console.log(`Starfinder | [READY] Done (operation took ${finishTime - readyTime} ms)`);
 
     const startupDuration = finishTime - initTime;
     console.log(`Starfinder | [STARTUP] Total launch took ${Number(startupDuration / 1000).toFixed(2)} seconds.`);
 });
-
-Hooks.on("dropCanvasData", (canvas, data) => canvasHandlerV10(canvas, data));
-
 async function migrateOldContainers() {
     const promises = [];
     for (const actor of game.actors.contents) {
