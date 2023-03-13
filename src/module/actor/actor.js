@@ -489,20 +489,23 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         }
 
         if (skl.isTrainedOnly && !(skl.ranks > 0)) {
-            let content = `${CONFIG.SFRPG.skills[skillId.substring(0, 3)]} is a trained only skill, but ${this.name} is not trained in that skill.
-                Would you like to roll anyway?`;
+            let content = game.i18n.format(
+                "SFRPG.SkillTrainedOnlyDialog.Content", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)], name: this.name }
+            );
 
             return new Promise(resolve => {
                 new Dialog({
-                    title: `${CONFIG.SFRPG.skills[skillId.substring(0, 3)]} is trained only`,
+                    title: game.i18n.format(
+                        "SFRPG.SkillTrainedOnlyDialog.Title", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)] }
+                    ),
                     content: content,
                     buttons: {
                         yes: {
-                            label: "Yes",
+                            label: game.i18n.localize("Yes"),
                             callback: () => resolve(this.rollSkillCheck(skillId, skl, options))
                         },
                         cancel: {
-                            label: "No"
+                            label: game.i18n.localize("No")
                         }
                     },
                     default: "cancel"
