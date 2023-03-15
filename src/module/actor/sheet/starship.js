@@ -680,7 +680,9 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             summary.slideUp(200, () => summary.remove());
         } else {
             const desiredDescription = await TextEditor.enrichHTML(content || chatData.description.value, {
-                async: true, rollData: this.actor.getRollData() ?? {}
+                async: true,
+                rollData: this.actor.getRollData() ?? {},
+                secrets: this.actor.isOwner
             });
             let div = $(`<div class="item-summary">${desiredDescription}</div>`);
             Hooks.callAll("renderItemSummary", this, div, {});

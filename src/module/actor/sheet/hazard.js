@@ -26,7 +26,8 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
         // Enrich text editors
         data.enrichedDescription = await TextEditor.enrichHTML(this.actor.system.details.description.value, {
             async: true,
-            rollData: this.actor.getRollData() ?? {}
+            rollData: this.actor.getRollData() ?? {},
+            secrets: this.actor.isOwner
         });
 
         return data;
