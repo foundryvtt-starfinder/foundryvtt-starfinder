@@ -14,6 +14,7 @@ import { ItemSFRPG } from "../../item/item.js";
 import { getEquipmentBrowser } from "../../packs/equipment-browser.js";
 import { getSpellBrowser } from "../../packs/spell-browser.js";
 import { getStarshipBrowser } from "../../packs/starship-browser.js";
+import RollContext from "../../rolls/rollcontext.js";
 /**
  * Extend the basic ActorSheet class to do all the SFRPG things!
  * This sheet is an Abstract layer which is not used.
@@ -438,13 +439,14 @@ export class ActorSheetSFRPG extends ActorSheet {
 
             const preparedFormula = `${formula} ${modifiersTotal > 0 ? "+" + String(modifiersTotal) : ""}`;
 
-            const roll = Roll.create(preparedFormula, {...item.actor.system, item: item.system}).simplifiedFormula;
+            const rollData = RollContext.createItemRollContext(item, item.actor).getRollData();
+
+            const roll = Roll.create(preparedFormula, rollData).simplifiedFormula;
             item.config.attackString = Number(roll) > 0 ? `+${roll}` : roll;
 
         } catch {
             item.config.attackString = game.i18n.localize("SFRPG.Attack");
         }
-        console.log(item.config.attackString);
     }
 
     /**
@@ -470,7 +472,9 @@ export class ActorSheetSFRPG extends ActorSheet {
 
             const preparedFormula = `${formula} ${modifiersTotal > 0 ? "+" + String(modifiersTotal) : ""}`;
 
-            const roll = Roll.create(preparedFormula, {...item.actor.system, item: item.system}).simplifiedFormula;
+            const rollData = RollContext.createItemRollContext(item, item.actor).getRollData();
+
+            const roll = Roll.create(preparedFormula, rollData).simplifiedFormula;
             if (!roll) throw ("Invaid roll, deferring to default string.");
             item.config.damageString = roll;
         } catch {
