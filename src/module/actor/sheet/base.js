@@ -161,8 +161,17 @@ export class ActorSheetSFRPG extends ActorSheet {
         this._prepareItems(data);
 
         // Enrich text editors. The below are used for character, drone and npc(2). Other types use editors defined in their class.
-        data.enrichedBiography = await TextEditor.enrichHTML(this.object.system.details.biography.value, {async: true});
-        data.enrichedGMNotes = await TextEditor.enrichHTML(this.object.system.details.biography.gmNotes, {async: true});
+        const secrets = this.actor.isOwner;
+        data.enrichedBiography = await TextEditor.enrichHTML(this.actor.system.details.biography.value, {
+            async: true,
+            rollData: this.actor.getRollData() ?? {},
+            secrets
+        });
+        data.enrichedGMNotes = await TextEditor.enrichHTML(this.actor.system.details.biography.gmNotes, {
+            async: true,
+            rollData: this.actor.getRollData() ?? {},
+            secrets
+        });
 
         return data;
     }
@@ -856,15 +865,15 @@ export class ActorSheetSFRPG extends ActorSheet {
      */
     async _onItemSummary(event) {
         event.preventDefault();
-        let li = $(event.currentTarget).parents('.item'),
-            item = this.actor.items.get(li.data('item-id')),
-            chatData = await item.getChatData({ secrets: this.actor.isOwner, rollData: this.actor.system });
+        const li = $(event.currentTarget).parents('.item');
+        const item = this.actor.items.get(li.data('item-id'));
+        const chatData = await item.getChatData();
 
         if (li.hasClass('expanded')) {
             let summary = li.children('.item-summary');
             summary.slideUp(200, () => summary.remove());
         } else {
-            const desiredDescription = await TextEditor.enrichHTML(chatData.description.short || chatData.description.value, {async: true});
+            const desiredDescription = chatData.description.short || chatData.description.value;
             let div = $(`<div class="item-summary">${desiredDescription}</div>`);
             Hooks.callAll("renderItemSummary", this, div, {}); // Event listeners need to be added to this HTML.
 

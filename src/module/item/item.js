@@ -216,8 +216,6 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      * @return {Promise}
      */
     async roll() {
-        let htmlOptions = { secrets: this.actor?.isOwner || true, rollData: this };
-        htmlOptions.rollData.owner = this.actor?.system;
 
         // Basic template rendering data
         const token = this.actor.token;
@@ -225,7 +223,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             actor: this.actor,
             tokenId: token ? `${token.parent.id}.${token.id}` : null,
             item: this,
-            system: await this.getChatData(htmlOptions),
+            system: await this.getChatData(),
             labels: this.labels,
             hasAttack: this.hasAttack,
             hasDamage: this.hasDamage,
@@ -350,14 +348,29 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     /*  Chat Cards                                  */
     /* -------------------------------------------- */
 
-    async getChatData(htmlOptions) {
+    /**
+     * Prepare this item's description, and chat message properties.
+     * @returns {Object} An object containing the item's rollData (including its owners), and chat message properties.
+     */
+    async getChatData() {
         const data = duplicate(this.system);
         const labels = this.labels;
 
-        htmlOptions.async = true;
+        const async = true;
+        const secrets = this.isOwner;
+        const rollData = RollContext.createItemRollContext(this, this.actor).getRollData();
 
         // Rich text description
-        data.description.value = await TextEditor.enrichHTML(data.description.value, htmlOptions);
+        if (data.description.short) data.description.short = await TextEditor.enrichHTML(data.description.short, {
+            async,
+            secrets,
+            rollData
+        });
+        data.description.value = await TextEditor.enrichHTML(data.description.value, {
+            async,
+            secrets,
+            rollData
+        });
 
         // Item type specific properties
         const props = [];
@@ -831,7 +844,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             parts: parts,
             rollContext: rollContext,
             title: title,
-            flavor: await TextEditor.enrichHTML(this.system?.chatFlavor, {async: true}),
+            flavor: await TextEditor.enrichHTML(this.system?.chatFlavor, {
+                async: true,
+                rollData: this.actor.getRollData() ?? {},
+                secrets: this.isOwner
+            }),
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             critical: critThreshold,
             chatMessage: options.chatMessage,
@@ -1169,7 +1186,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             criticalData: itemData.critical,
             rollContext: rollContext,
             title: title,
-            flavor: (await TextEditor.enrichHTML(options?.flavorOverride, {async: true}) ?? await TextEditor.enrichHTML(itemData.chatFlavor, {async: true})) || null,
+            flavor: await TextEditor.enrichHTML(options?.flavorOverride || itemData.chatFlavor, {
+                async: true,
+                rollData: this.actor.getRollData() ?? {},
+                secrets: this.isOwner
+            }) || null,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             chatMessage: options.chatMessage,
             dialogOptions: {
