@@ -834,12 +834,18 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
                 flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${dcRoll.roll.total}</p>`;
             } else {
-                flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${await TextEditor.enrichHTML(dc.value, {async: true})}</p>`;
+                flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${await TextEditor.enrichHTML(dc.value, {
+                    async: true,
+                    rollData: this.getRollData() ?? {}
+                })}</p>`;
             }
         }
 
         flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.NormalEffect")}: </strong>`;
-        flavor += await TextEditor.enrichHTML(selectedFormula.effectNormal || actionEntry.system.effectNormal, {async: true});
+        flavor += await TextEditor.enrichHTML(selectedFormula.effectNormal || actionEntry.system.effectNormal, {
+            async: true,
+            rollData: this.getRollData() ?? {}
+        });
         flavor += "</p>";
 
         if (actionEntry.system.effectCritical) {
@@ -847,7 +853,10 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             if (critEffectDisplayState !== 'never') {
                 if (critEffectDisplayState === 'always' || rollResult.roll.dice[0].values[0] === 20) {
                     flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.CriticalEffect")}: </strong>`;
-                    flavor += await TextEditor.enrichHTML(selectedFormula.effectCritical || actionEntry.system.effectCritical, {async: true});
+                    flavor += await TextEditor.enrichHTML(selectedFormula.effectCritical || actionEntry.system.effectCritical, {
+                        async: true,
+                        rollData: this.getRollData() ?? {}
+                    });
                     flavor += "</p>";
                 }
             }
