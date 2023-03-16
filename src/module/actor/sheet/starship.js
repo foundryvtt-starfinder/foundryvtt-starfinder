@@ -1,5 +1,6 @@
 import { ChoiceDialog } from "../../apps/choice-dialog.js";
 import { SFRPG } from "../../config.js";
+import RollContext from "../../rolls/rollcontext.js";
 import { ActorSheetSFRPG } from "./base.js";
 
 /**
@@ -250,7 +251,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
                 isStack: item.system.quantity ? item.system.quantity > 1 : false,
                 isOpen: item.type === "container" ? item.system.container.isOpen : true,
                 isOnCooldown: item.system.recharge && !!item.system.recharge.value && (item.system.recharge.charged === false),
-                hasAttack: ["mwak", "rwak", "msak", "rsak"].includes(item.system.actionType) && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
+                hasAttack: item.type === "starshipWeapon",
                 hasDamage: item.system.damage?.parts && item.system.damage.parts.length > 0 && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
                 hasUses: item.canBeUsed(),
                 isCharged: !item.hasUses || item.getRemainingUses() <= 0 || !item.isOnCooldown,
@@ -405,6 +406,50 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
                 chiefMate: ActorSheetSFRPGStarship.StarshipActionsCache.chiefMate,
                 magicOfficer: ActorSheetSFRPGStarship.StarshipActionsCache.magicOfficer
             };
+        }
+    }
+
+    _prepareAttackString(item)  {
+        try {
+            const actor = item.actor;
+            const itemData = item.system;
+
+            // Define Roll parts
+            let parts = [];
+
+            if (actor.system.crew.useNPCCrew) { // If NPC, use the gunnery skill bonus
+                parts = ["@gunner.skills.gun.mod"];
+            } else if (itemData.weaponType === "ecm") { // If the weapon is an ECM weapon and not an NPC, use Computers ranks + Int (NPC ECM weapons still use gunnery)
+                parts = ["@scienceOfficer.skills.com.ranks", "@scienceOfficer.abilities.int.mod"];
+            } else { // If not an ECM weapon and not an NPC, use BAB/Piloting + Dex
+                parts = ["max(@gunner.attributes.baseAttackBonus.value, @gunner.skills.pil.ranks)", "@gunner.abilities.dex.mod"];
+            }
+
+            const formula = parts.join("+");
+
+            /** Build the roll context */
+            const rollContext = new RollContext();
+            rollContext.addContext("ship", actor);
+            rollContext.addContext("item", item, itemData);
+            rollContext.addContext("weapon", item, itemData);
+            rollContext.setMainContext("");
+
+            actor.setupRollContexts(rollContext, ["gunner", "scienceOfficer"]);
+
+            for (const selector of rollContext.selectors) {
+                const selectorTarget = selector.target;
+                const firstValue = selector.options[0];
+                if (selectorTarget && firstValue) {
+                    rollContext.allContexts[selectorTarget] = rollContext.allContexts[firstValue];
+                }
+            }
+
+            const roll = Roll.create(formula, rollContext.getRollData()).simplifiedFormula;
+            console.log(formula, roll, rollContext.getRollData());
+            item.config.attackString = Number(roll) > 0 ? `+${roll}` : roll;
+
+        } catch {
+            item.config.attackString = game.i18n.localize("SFRPG.Attack");
         }
     }
 
