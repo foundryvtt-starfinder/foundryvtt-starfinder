@@ -12,7 +12,7 @@ export default function(engine) {
         let prior = getLevelExp(level - 1 || 0),
             req = data.details.xp.max - prior;
 
-        data.details.xp.pct = Math.min(Math.round((data.details.xp.value - prior) * 100 / req), 99.5);
+        data.details.xp.pct = Math.clamped(((data.details.xp.value - prior) * 100 / req), 0, 99.5);
 
         return fact;
     });

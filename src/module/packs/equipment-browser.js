@@ -1,5 +1,4 @@
 import { DocumentBrowserSFRPG } from './document-browser.js';
-import { SFRPG } from "../config.js";
 
 const equipmentTypes = {
     "ammunition"   : "SFRPG.Items.Categories.Ammunition",
@@ -58,7 +57,7 @@ class EquipmentBrowserSFRPG extends DocumentBrowserSFRPG {
         if (aVal < bVal) return -1;
         if (aVal > bVal) return 1;
 
-        if (aVal == bVal) {
+        if (aVal === bVal) {
             const aName = $(elementA).find('.item-name a')[0].innerHTML;
             const bName = $(elementB).find('.item-name a')[0].innerHTML;
             if (aName < bName) return -1;
@@ -106,6 +105,16 @@ class EquipmentBrowserSFRPG extends DocumentBrowserSFRPG {
             };
         }
 
+        if ((this.filters?.equipmentTypes?.activeFilters || []).includes("augmentation")) {
+            filters.augmentationTypes = {
+                label: game.i18n.format("SFRPG.Browsers.EquipmentBrowser.EquipmentType"),
+                content: CONFIG.SFRPG.augmentationTypes,
+                filter: (element, filters) => { return this._filterAugmentationType(element, filters); },
+                activeFilters: this.filters.augmentationTypes?.activeFilters || [],
+                type: "multi-select"
+            };
+        }
+
         return filters;
     }
 
@@ -148,6 +157,12 @@ class EquipmentBrowserSFRPG extends DocumentBrowserSFRPG {
         return item && (item.type !== "equipment" || filters.includes(item.system.armor?.type));
     }
 
+    _filterAugmentationType(element, filters) {
+        let itemUuid = element.dataset.entryUuid;
+        let item = this.items.find(x => x.uuid === itemUuid);
+        return item && (item.type !== "augmentation" || filters.includes(item.system?.type));
+    }
+
     openSettings() {
         // Generate HTML for settings menu
         // Item Browser
@@ -186,6 +201,29 @@ class EquipmentBrowserSFRPG extends DocumentBrowserSFRPG {
             width: '300px'
         });
         d.render(true);
+    }
+
+    /**
+     * @typedef  {object} FilterObjectEquipment
+     * @property {string[]} equipmentTypes Drawn from SFRPG.itemTypes
+     * @property {string[]} weaponTypes Drawn from SFRPG.weaponTypes
+     * @property {string[]} weaponCategories Drawn from SFRPG.weaponCategories
+     * @see {config.js}
+     */
+    /**
+     * Prepare the filter object before calling the parent method
+     * @param {FilterObjectEquipment} filters A filter object
+     */
+    renderWithFilters(filters = {}) {
+        let filterObject = filters;
+
+        if (Array.isArray(filterObject.equipmentTypes)) {
+            filterObject.equipmentTypes = filterObject.equipmentTypes.map(i => i === "armor" ? "equipment" : i);
+        } else {
+            if (filterObject.equipmentTypes === "armor") filterObject.equipmentTypes = "equipment";
+        }
+
+        return super.renderWithFilters(filterObject);
     }
 }
 

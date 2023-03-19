@@ -9,13 +9,14 @@ const path = require('path');
 const sanitize = require("sanitize-filename");
 const stringify = require('json-stringify-pretty-compact');
 const jsdom = require("jsdom");
+const terser = require("gulp-terser");
+const sourcemaps = require("gulp-sourcemaps");
+const cssClean = require('gulp-clean-css');
 
 const { JSDOM } = jsdom;
 const { window } = new JSDOM();
 
 const $ = require("jquery")(window);
-
-const SFRPG_LESS = ["src/less/*.less"];
 
 function getConfig() {
     const configPath = path.resolve(process.cwd(), 'foundryconfig.json');
@@ -61,12 +62,15 @@ function getManifest() {
 /**
  * Build Less
  */
-function buildLess() {
+async function buildLess() {
     const name = 'sfrpg';
 
     return gulp
         .src(`src/less/${name}.less`)
+        .pipe(sourcemaps.init())
         .pipe(less())
+        .pipe(cssClean())
+        .pipe(sourcemaps.write('./maps'))
         .pipe(gulp.dest('dist'));
 }
 
@@ -74,31 +78,51 @@ function buildLess() {
  * Copy static files
  */
 async function copyFiles() {
-    const name = 'sfrpg';
 
-    const statics = [
-        'lang',
-        'fonts',
-        'images',
-        'templates',
-        'icons',
-        'packs',
-        'module',
-        `${name}.js`,
-        'module.json',
-        'system.json',
-        'template.json'
-    ];
-    try {
-        for (const file of statics) {
-            if (fs.existsSync(path.join('src', file))) {
-                await fs.copy(path.join('src', file), path.join('dist', file));
+    // Build static files first
+    gulp.src([
+        'src/fonts/*',
+        'src/icons/*',
+        'src/icons/**/*',
+        'src/images/**/*',
+        'src/images/*',
+        'src/lang/*.json',
+        'src/packs/*.db',
+        'src/templates/**/*.hbs',
+        "src/*.json"
+    ])
+        .pipe(gulp.dest((file) => file.base.replace("\\src", "\\dist")));
+
+    // Then pipe in js files to be minified
+    gulp.src('src/sfrpg.js')
+        .pipe(sourcemaps.init())
+        // Minify the JS
+        .pipe(terser({
+            ecma: 2022,
+            compress: {
+                module: true
             }
-        }
-        return Promise.resolve();
-    } catch (err) {
-        Promise.reject(err);
-    }
+        }))
+        .pipe(sourcemaps.write('./maps'))
+        // Output
+        .pipe(gulp.dest('dist'));
+
+    return gulp.src([
+        'src/module/**/*.js',
+        'src/module/*.js'
+    ])
+        .pipe(sourcemaps.init())
+        // Minify the JS
+        .pipe(terser({
+            ecma: 2022,
+            compress: {
+                module: true
+            }
+        }))
+        .pipe(sourcemaps.write('.././maps/module'))
+        // Output
+        .pipe(gulp.dest('dist/module'));
+
 }
 
 /**
@@ -113,25 +137,22 @@ async function copyFiles() {
 async function copyWatchFiles() {
     const name = 'sfrpg';
 
-    const statics = [
-        'lang',
-        'templates',
-        'module',
-        `${name}.js`,
-        'module.json',
-        'system.json',
-        'template.json'
-    ];
-    try {
-        for (const file of statics) {
-            if (fs.existsSync(path.join('src', file))) {
-                await fs.copy(path.join('src', file), path.join('dist', file));
-            }
-        }
-        return Promise.resolve();
-    } catch (err) {
-        Promise.reject(err);
-    }
+    // Don't minify on build:watch in order to give quickest build time.
+    gulp.src([
+        'src/lang/*.json',
+        'src/templates/**/*.hbs',
+        "src/*.json"
+    ])
+        .pipe(gulp.dest((file) => file.base.replace("\\src", "\\dist")));
+
+    gulp.src(`src/${name}.js`)
+        .pipe(gulp.dest('dist'));
+
+    return gulp.src([
+        'src/module/**/*.js',
+        'src/module/*.js'
+    ])
+        .pipe(gulp.dest('dist/module'));
 }
 
 /**
@@ -179,10 +200,10 @@ async function copyLibs() {
  * Watch for changes for each build step
  */
 function buildWatch() {
-    gulp.watch('src/**/*.less', { ignoreInitial: false }, buildLess);
+    gulp.watch('src/**/*.less', { ignoreInitial: true }, buildLess);
     gulp.watch(
         ['src/fonts', 'src/templates', 'src/lang', 'src/*.json', 'src/**/*.js'],
-        { ignoreInitial: false },
+        { ignoreInitial: true },
         copyWatchFiles
     );
 }
@@ -247,6 +268,10 @@ function sanitizeJSON(jsonInput) {
         item.img &&= item.img.replace(
             "https://assets.forge-vtt.com/bazaar/systems/sfrpg/assets/",
             "systems/sfrpg/"
+        );
+        item.img &&= item.img.replace(
+            "https://assets.forge-vtt.com/bazaar/core/",
+            ""
         );
 
         if (item.type === "npc2" && !item?.system?.attributes?.sp?.max > 0) {
@@ -318,7 +343,7 @@ function sanitizeJSON(jsonInput) {
 
         // Replace erroneously copied links with actually working ones
         $description.find("i[class*='fas']").remove();
-        const fakeLink = $description.find("a.entity-link");
+        const fakeLink = $description.find("a.entity-link, a.content-link");
         if (fakeLink.length > 0) {
             fakeLink.each((index, el) => {
                 const element = $(el);
@@ -335,6 +360,7 @@ function sanitizeJSON(jsonInput) {
             .append($description)
             .html()
             .replace(/@Compendium\[/g, "@UUID[Compendium.") // Replace @Compendium links with @UUID links
+            .replace(/(\w)(@UUID)/g, "$1 $2") // Add a space before the start of @UUID links if there is a word before.
             .replace(/<([hb]r)>/g, "<$1 />") // Prefer self-closing tags
             .replace(/ {2,}/g, " ") // Replace double or more spaces with a single space
             .replace(/<(div|p)>\s*<\/(div|p)>/g, "") // Delete empty <p>s and <div>s
@@ -344,6 +370,10 @@ function sanitizeJSON(jsonInput) {
             .replace(/<(?:b|strong)>\s*/g, "<strong>") // Remove whitespace at the start of <strong> tags
             .replace(/\s*<\/(?:b|strong)>/g, "</strong>") // Remove whitespace at the end of <strong> tags
             .replace(/(<\/strong>)(\w)/g, "$1 $2") // Add a space after the end of <strong> tags
+            .replace(/<(em)>\s*/g, "<em>") // Remove whitespace at the start of <em> tags
+            .replace(/\s*<\/(em)>/g, "</em>") // Remove whitespace at the end of <em> tags
+            .replace(/(\w)(<em>)/g, "$1 $2") // Add a space before the start of <em> tags if there is a word before.
+            .replace(/(<\/em>)(\w)/g, "$1 $2") // Add a space after the end of <em> tags
             .replace(/(<p>&nbsp;<\/p>)/g, "") // Delete paragraphs with only a non-breaking space
             .replace(/(<br \/>)+/g, "</p>\n<p>") // Replace any number of <br /> tags with <p>s
             .replace(/(\n)+/g, "\n") // Replace any number of newlines with a single one
@@ -380,19 +410,24 @@ function sanitizeJSON(jsonInput) {
         }
 
         // If core or sfrpg is empty, delete it
-        if ((typeof item?.flags?.core === "object" && item?.flags?.core !== null) && Object.entries(item?.flags?.core)?.length === 0) {
+        if ((typeof item?.flags?.core === "object" && item?.flags?.core !== null) // If an object
+            && Object.entries(item?.flags?.core)?.length === 0) { // And is empty
             delete item.flags.core;
         }
 
-        if ((typeof item?.flags?.sfrpg === "object" && item?.flags?.sfrpg !== null) && Object.entries(item?.flags?.sfrpg)?.length === 0) {
+        if ((typeof item?.flags?.sfrpg === "object" && item?.flags?.sfrpg !== null)
+            && Object.entries(item?.flags?.sfrpg)?.length === 0) {
             delete item.flags.sfrpg;
         }
 
         // If flags is now empty, delete it entirely
-        if ((typeof item.flags === "object" && item.flags !== null) && Object.entries(item?.flags)?.length === 0) {
+        if ((typeof item.flags === "object" && item.flags !== null)
+            && Object.entries(item?.flags)?.length === 0) {
             delete item.flags;
         }
     };
+
+    delete jsonInput?.flags?.core?.sourceId;
 
     treeShake(jsonInput);
     cleanFlags(jsonInput);
@@ -1170,8 +1205,14 @@ function searchDescriptionForUnlinkedReference(description, regularExpression) {
             let delimiterCharacters = [">", "<", ";", ",", "/", "(", ")", "."];
 
             let unlinkedReferenceFound = false;
+            // This is a simple rule of thumb which checks of the word in question is surrounded by `&nbsp;`. In this case we'll ignore,
+            // as this can be used to escape a condition word (ie. `Burning`) in an otherwise unrelated context (ie. `... the Burning Archipelago...`)
+            if (characterBefore === ";" || characterAfter === "&") {
+                unlinkedReferenceFound = false;
+                continue;
+            }
             // If surrounded by { and } we assume it is linked and continue
-            if (characterBefore === "{" && characterAfter === "}") {
+            else if (characterBefore === "{" && characterAfter === "}") {
                 alreadyLinked.push(conditionWord);
                 continue;
             }
@@ -1193,11 +1234,6 @@ function searchDescriptionForUnlinkedReference(description, regularExpression) {
             else if ((delimiterCharacters.includes(characterBefore) || characterBefore === " ") && delimiterCharacters.includes(characterAfter)) {
                 unlinkedReferenceFound = true;
                 if (!alreadyLinked.includes(conditionWord)) foundWords.push(conditionWord);
-            }
-            // This is a simple rule of thumb which checks of the word in question is surrounded by `&nbsp;`. In this case we'll ignore,
-            // as this can be used to escape a condition word (ie. `Burning`) in an otherwise unrelated context (ie. `... the Burning Archipelago...`)
-            else if (characterBefore === ";" && characterAfter === "&") {
-                unlinkedReferenceFound = false;
             }
 
         }
@@ -1489,6 +1525,7 @@ async function clean() {
         'packs',
         'lib',
         'styles',
+        `maps`,
         `${name}.js`,
         `${name}.css`,
         'module.json',
@@ -1782,7 +1819,7 @@ function updateManifest(cb) {
 const execBuild = gulp.parallel(buildLess, copyFiles, copyLibs);
 
 exports.build = gulp.series(clean, execBuild);
-exports.watch = buildWatch;
+exports.watch = gulp.series(execBuild, buildWatch);
 exports.clean = clean;
 exports.link = linkUserData;
 exports.copyUser = copyUserData;

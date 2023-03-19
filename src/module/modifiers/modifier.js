@@ -1,5 +1,5 @@
-import { SFRPGModifierTypes, SFRPGModifierType, SFRPGEffectType } from "./types.js";
-import { generateUUID } from '../utilities.js';
+import { generateUUID } from '../utils/utilities.js';
+import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./types.js";
 
 /**
  * A data object that hold information about a specific modifier.

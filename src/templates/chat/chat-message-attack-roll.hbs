@@ -9,6 +9,8 @@
                 {{#if item.img }}<span>{{item.name}}</span>{{else}}<h2>{{flavor}}</h2>{{/if}}
                 {{#if hasDamage }}<button type="button" data-action="damage">Damage</button>{{/if}}
                 {{#if hasSave}}<button type="button" class="chat-button-save" data-action="save" data-type="{{item.system.save.type}}">{{item.labels.save}}</button>{{/if}}
+                {{#if hasSkill}}<button type="button" class="chat-button-skill" data-action="skill" data-type="{{item.system.skillCheck.type}}">{{item.labels.skillCheck}}</button>{{/if}}
+
              </p>
         </div>
     </div>

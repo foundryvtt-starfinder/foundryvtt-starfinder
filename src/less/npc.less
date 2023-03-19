@@ -4,293 +4,292 @@
 /*  Basic Structure                          */
 /* ----------------------------------------- */
 .sfrpg.sheet.actor.npc {
-  min-width: 720px;
-  min-height: 765px;
+    min-width: 720px;
+    // min-height: 765px;
 
-  .initiative .attribute-footer input,
-  .save .attribute-footer input {
-    width: 32px;
-  }
-
-  ul.attributes {
-    li.attribute {
-      &.save {
-        height: 90px;
-      }
-
-      &.new-save {
-        height: 67px;
-      }
-
-      // Box Headers
-      h4.new-box-title {
-        line-height: 16px;
-        margin: 4px 8px 5px;
-        font-size: 18px;
-        border-bottom: 1px solid @colorBeige;
-      }
-
-      .attrib-modifiers {
-        height: 32px;
-
-        span.attrib-mod {
-          flex: 0 0 32px;
-          height: 30px;
-          overflow: hidden;
-          border: 0px;
-          padding: 7px 0 0;
-        }
-
-        div.attrib-center {
-          margin: 0px 0 10px;
-          font-size: 24px;
-          overflow: hidden;
-        }
-
-        input[type="text"].attrib-base {
-          flex: 0 0 32px;
-          margin: 10px 0 0px;
-          height: 30px;
-          overflow: hidden;
-          border-top: @borderGroove;
-          border-left: @borderGroove;
-          border-radius: 0;
-        }
-      }
+    .initiative .attribute-footer input,
+    .save .attribute-footer input {
+        width: 32px;
     }
-  }
 
-  .ability-scores {
-    flex: 0 0 100%;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    ul.attributes {
+        li.attribute {
+            &.save {
+                height: 90px;
+            }
 
-    .ability {
-      height: 70px;
-      margin: 0 2px;
-      text-align: center;
-      border: @borderGroove;
-      border-radius: 3px;
+            &.new-save {
+                height: 67px;
+            }
 
-      .ability-header {
-        height: 24px;
+            // Box Headers
+            h4.new-box-title {
+                line-height: 16px;
+                margin: 4px 8px 5px;
+                font-size: 18px;
+                border-bottom: 1px solid @colorBeige;
+            }
+
+            .attrib-modifiers {
+                height: 32px;
+
+                span.attrib-mod {
+                    flex: 0 0 32px;
+                    height: 30px;
+                    overflow: hidden;
+                    border: 0px;
+                    padding: 7px 0 0;
+                }
+
+                div.attrib-center {
+                    margin: 0px 0 10px;
+                    font-size: 24px;
+                    overflow: hidden;
+                }
+
+                input[type="text"].attrib-base {
+                    flex: 0 0 32px;
+                    margin: 10px 0 0px;
+                    height: 30px;
+                    overflow: hidden;
+                    border-top: @borderGroove;
+                    border-left: @borderGroove;
+                    border-radius: 0;
+                }
+            }
+        }
+    }
+
+    .ability-scores {
+        flex: 0 0 100%;
+        list-style: none;
         margin: 0;
+        padding: 0;
 
-        input[type="text"].ability-damage {
-          flex: 1;
-          height: 24px;
-          border-bottom: @borderGroove;
-          border-right: @borderGroove;
+        .ability {
+            height: 70px;
+            margin: 0 2px;
+            text-align: center;
+            border: @borderGroove;
+            border-radius: 3px;
+
+            .ability-header {
+                height: 24px;
+                margin: 0;
+
+                input[type="text"].ability-damage {
+                    flex: 1;
+                    height: 24px;
+                    border-bottom: @borderGroove;
+                    border-right: @borderGroove;
+                }
+
+                input[type="text"].ability-penalty {
+                    flex: 1;
+                    height: 24px;
+                    border-bottom: @borderGroove;
+                }
+
+                input[type="text"].ability-drain {
+                    flex: 1;
+                    height: 24px;
+                    border-bottom: @borderGroove;
+                    border-left: @borderGroove;
+                }
+            }
+
+            // Box Headers
+            h4.new-box-title {
+                line-height: 16px;
+                margin: 4px 8px 25px;
+                font-size: 18px;
+                border-bottom: 1px solid @colorBeige;
+            }
+
+            .ability-modifiers {
+                height: 32px;
+
+                input[type="text"].ability-base {
+                    flex: 0 0 32px;
+                    height: 30px;
+                    overflow: hidden;
+                    border-top: @borderGroove;
+                }
+
+                span.ability-mod {
+                    flex: 0 0 32px;
+                    height: 30px;
+                    overflow: hidden;
+                    border: 0px;
+                    padding: 7px 0 0;
+                }
+
+                div.ability-center {
+                    margin: -10px 5px 0 0;
+                    font-size: 24px;
+                    overflow: hidden;
+                }
+
+                input[type="text"].ability-base {
+                    border-left: @borderGroove;
+                    border-radius: 0;
+                }
+            }
         }
-
-        input[type="text"].ability-penalty {
-          flex: 1;
-          height: 24px;
-          border-bottom: @borderGroove;
-        }
-
-        input[type="text"].ability-drain {
-          flex: 1;
-          height: 24px;
-          border-bottom: @borderGroove;
-          border-left: @borderGroove;
-        }
-      }
-
-      // Box Headers
-      h4.new-box-title {
-        line-height: 16px;
-        margin: 4px 8px 25px;
-        font-size: 18px;
-        border-bottom: 1px solid @colorBeige;
-      }
-
-      .ability-modifiers {
-        height: 32px;
-
-        input[type="text"].ability-base {
-          flex: 0 0 32px;
-          height: 30px;
-          overflow: hidden;
-          border-top: @borderGroove;
-        }
-
-        span.ability-mod {
-          flex: 0 0 32px;
-          height: 30px;
-          overflow: hidden;
-          border: 0px;
-          padding: 7px 0 0;
-        }
-
-        div.ability-center {
-          margin: -10px 5px 0 0;
-          font-size: 24px;
-          overflow: hidden;
-        }
-
-        input[type="text"].ability-base {
-          border-left: @borderGroove;
-          border-radius: 0;
-        }
-      }
     }
-  }
 
-  ul.skills-list {
-    li.skills-header {
-      background: rgba(0, 0 ,0, 0.05);
-      border: @borderGroove;
-      font-size: 12px;
-      font-weight: bold;
-      line-height: 15px;
-      padding: 3px;
+    ul.skills-list {
+        li.skills-header {
+            background: rgba(0, 0, 0, 0.05);
+            border: @borderGroove;
+            font-size: 12px;
+            font-weight: bold;
+            line-height: 15px;
+            padding: 3px;
 
-      h3 {
-        flex: 0 0 50%;
-        font-size: 12px;
+            h3 {
+                flex: 0 0 50%;
+                font-size: 12px;
+                font-weight: bold;
+                margin: 0;
+            }
+            div.skill-header-mod {
+                flex: 0 0 25%;
+            }
+            div.skill-header-rank {
+                flex: 0 0 25%;
+                text-align: center;
+            }
+        }
+
+        li.skill {
+            padding: 3px;
+            h4 {
+                flex: 0 0 50%;
+                margin: 0;
+                font-size: 13px;
+            }
+            .skill-ranks {
+                flex: 0 0 25%;
+                text-align: center;
+            }
+            .skill-mod {
+                flex: 0 0 25%;
+            }
+        }
+
+        input.skill-mod {
+            flex: 0 0 33%;
+            text-align: center;
+            height: 18px;
+        }
+    }
+
+    .item-controls {
+        flex: 0 0 66px;
+    }
+
+    .ecology label {
+        flex: 0 0 100px;
+        line-height: 20px;
         font-weight: bold;
         margin: 0;
-      }
-      div.skill-header-mod {
-        flex: 0 0 25%;
-      }
-      div.skill-header-rank {
-        flex: 0 0 25%;
-        text-align: center;
-      }
     }
-
-    li.skill {
-      padding: 3px;
-      h4 {
-        flex: 0 0 50%;
-        margin: 0;
-        font-size: 13px;
-      }
-      .skill-ranks {
-        flex: 0 0 25%;
-        text-align: center;
-      }
-      .skill-mod {
-        flex: 0 0 25%;
-      }
-    }
-
-    input.skill-mod {
-      flex: 0 0 33%;
-      text-align: center;
-      height: 18px;
-    }
-  }
-  
-  .item-controls {
-    flex: 0 0 68px;
-  }
-
-  .ecology label {
-    flex: 0 0 100px;
-    line-height: 20px;
-    font-weight: bold;
-    margin: 0;
-  }
 }
 
 @headerHeight: 140px;
 
 .sfrpg.sheet {
-  /* ----------------------------------------- */
-  /*  Sheet Header                             */
-  /* ----------------------------------------- */
-  .sheet-header {
-    
-    /* Profile Image */
-    img.profile {
-      flex: 0 0 @headerHeight;
-      height: @headerHeight;
-      object-fit: contain;
-      border: none;
-      border-right: @borderGroove;
+    /* ----------------------------------------- */
+    /*  Sheet Header                             */
+    /* ----------------------------------------- */
+    .sheet-header {
+        /* Profile Image */
+        img.profile {
+            flex: 0 0 @headerHeight;
+            height: @headerHeight;
+            object-fit: contain;
+            border: none;
+            border-right: @borderGroove;
+        }
+
+        /* Header Summary Details */
+        .summary-row1 {
+            flex: 0 0 100%;
+            height: @detailsHeight;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            border-top: @borderGroove;
+            border-bottom: none;
+            font-size: 16px;
+
+            li {
+                width: 45%;
+                float: left;
+                height: @detailsHeight - 6px;
+                margin: 2px 0;
+                padding: 0 3px;
+                border-right: @borderGroove;
+                line-height: 34px;
+                color: @colorOlive;
+
+                &:first-child {
+                    width: 55%;
+                }
+
+                &:last-child {
+                    border-right: none;
+                }
+            }
+        }
+
+        .summary-row2 {
+            flex: 0 0 100%;
+            height: @detailsHeight;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            border-top: @borderGroove;
+            border-bottom: none;
+            font-size: 16px;
+
+            li {
+                width: 45%;
+                float: left;
+                height: @detailsHeight - 6px;
+                margin: 2px 0;
+                padding: 0 3px;
+                border-right: @borderGroove;
+                line-height: 34px;
+                color: @colorOlive;
+
+                &:first-child {
+                    width: 10%;
+                }
+
+                &:last-child {
+                    border-right: none;
+                }
+            }
+        }
     }
 
-    /* Header Summary Details */
-    .summary-row1 {
-      flex: 0 0 100%;
-      height: @detailsHeight;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      border-top: @borderGroove;
-      border-bottom: none;
-      font-size: 16px;
-
-      li {
-        width: 45%;
-        float: left;
-        height: @detailsHeight - 6px;
-        margin: 2px 0;
-        padding: 0 3px;
-        border-right: @borderGroove;
-        line-height: 34px;
-        color: @colorOlive;
-
-        &:first-child {
-          width: 55%
-        }
-
-        &:last-child {
-          border-right: none;
-        }
-      }
+    /* ----------------------------------------- */
+    /*  Modifiers                                */
+    /* ----------------------------------------- */
+    .form-group.stacked label.checkbox {
+        flex: 0 0 20%;
     }
 
-    .summary-row2 {
-      flex: 0 0 100%;
-      height: @detailsHeight;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      border-top: @borderGroove;
-      border-bottom: none;
-      font-size: 16px;
-
-      li {
-        width: 45%;
-        float: left;
-        height: @detailsHeight - 6px;
-        margin: 2px 0;
-        padding: 0 3px;
-        border-right: @borderGroove;
-        line-height: 34px;
-        color: @colorOlive;
-
-        &:first-child {
-          width: 10%
-        }
-
-        &:last-child {
-          border-right: none;
-        }
-      }
+    /* Warning Footer Bar */
+    .warningFooter {
+        flex: 0 0 12px;
+        background: @colorCrimson;
+        margin: 1px 15px 5px 15px;
+        border: 1px solid @colorDark;
+        border-radius: 3px;
+        position: relative;
+        color: white;
     }
-  }
-
-  /* ----------------------------------------- */
-  /*  Modifiers                                */
-  /* ----------------------------------------- */
-  .form-group.stacked label.checkbox {
-    flex: 0 0 20%;
-  }
-
-  /* Warning Footer Bar */
-  .warningFooter {
-    flex: 0 0 12px;
-    background: @colorCrimson;
-    margin: 1px 15px 5px 15px;
-    border: 1px solid @colorDark;
-    border-radius: 3px;
-    position: relative;
-    color: white;
-  }
 }

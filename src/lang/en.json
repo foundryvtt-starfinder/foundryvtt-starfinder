@@ -25,7 +25,7 @@
         "TypeHybrid": "Hybrid",
         "TypeMagic": "Magic",
         "TypeMod": "Drone Mod",
-        "TypeRace": "Race",
+        "TypeRace": "Species",
         "TypeShield": "Shield",
         "TypeSpell": "Spell",
         "TypeStarshipablativearmor": "Starship Ablative Armor",
@@ -100,7 +100,7 @@
         "AbilityScoreBonusTooltip": "{type} bonus: {mod} ({source})",
         "AbilityScoreGenericTooltip": "{score} Ability Score: {value} ({source})",
         "AbilityScoreIncreaseTooltip": "Ability Score Increase: {mod}",
-        "AbilityScoreRaceTooltip": "Race: {mod}",
+        "AbilityScoreRaceTooltip": "Species: {mod}",
         "AbilityScoreThemeTooltip": "Theme: {mod}",
         "AbilityStr": "Strength",
         "AbilityWis": "Wisdom",
@@ -113,6 +113,7 @@
         "ActionRSAK": "Ranged Spell Attack",
         "ActionRWAK": "Ranged Weapon Attack",
         "ActionSave": "Saving Throw",
+        "ActionSkill": "Skill Check",
         "ActionUtil": "Utility",
         "ActorSheet": {
             "Attributes": {
@@ -168,7 +169,7 @@
                     "Archetypes": "Archetypes",
                     "Classes": "Classes",
                     "PassiveFeats": "Passive Feats",
-                    "Race": "Race",
+                    "Race": "Species",
                     "Theme": "Theme"
                 },
                 "Create": "Create new feature",
@@ -182,7 +183,7 @@
                 "CL": "CL",
                 "Hitpoints": {
                     "ClassTooltip": "Class Base: {mod} ({source})",
-                    "RacialTooltip": "Racial Base: {mod} ({source})"
+                    "RacialTooltip": "Species Base: {mod} ({source})"
                 },
                 "Resolve": {
                     "KeyAbilityTooltip": "Key Ability Score Base: {mod} ({kas}, {source})",
@@ -269,6 +270,7 @@
                     "Delete": "Delete item",
                     "Edit": "Edit item",
                     "Equip": "Equip item",
+                    "LevelUp": "Level up",
                     "Unequip": "Unequip item"
                 },
                 "ItemValue": {
@@ -325,7 +327,7 @@
                 },
                 "ModifierTypes": {
                     "Class": "Class",
-                    "Racial": "Racial"
+                    "Racial": "Species"
                 },
                 "Tooltips": {
                     "BonusSkillpoints": "{type} Bonus: {mod} ({source})",
@@ -395,6 +397,7 @@
         "AugBrain": "Brain",
         "AugBrainAndEyes": "Brain and Eyes",
         "AugBrainHeartLungs": "Brain, Heart, Lungs",
+        "AugBrainThroat": "Brain and Throat",
         "AugEars": "Ears",
         "AugEarsAndThroat": "Ears and Throat",
         "AugEndocrine": "Endocrine",
@@ -428,7 +431,7 @@
                 "BrowserFilterType": "Filter by Type",
                 "BrowserSortMethodCR": "CR",
                 "BrowserSortMethodHP": "HP",
-                "Button": "Alien Archive",
+                "Button": "Aliens",
                 "Title": "Browse Alien Archive"
             },
             "EquipmentBrowser": {
@@ -494,7 +497,7 @@
         "CapacityUsage": "Capacity & Usage",
         "CharacterFlagsSectionClassFeatures": "Class Features",
         "CharacterFlagsSectionFeats": "Feats",
-        "CharacterFlagsSectionRacialTraits": "Racial Traits",
+        "CharacterFlagsSectionRacialTraits": "Species Traits",
         "CharacterLevelsTooltip": "{class} Levels: {levels}",
         "CharacterNamePlaceHolderText": "Character Name",
         "CharacterSheet": {
@@ -507,12 +510,19 @@
         },
         "ChatCard": {
             "ContextMenu": {
+                "Accept": "Accept",
                 "ApplyDamage": "Apply Damage",
                 "ApplyHealing": "Apply as Healing",
                 "DamageAndAHalf": "Apply 1.5x Damage",
                 "DoubleDamage": "Apply Double Damage",
                 "HalfDamage": "Apply Half Damage",
+                "ModifyDamage": "Modify Damage",
+                "ModifyDamageText": "Input a number to modify the damage amount by. This is applied after any multiplication.",
+                "NoDamageModifier": "No damage modifier applied.",
                 "NoToken": "Cannot apply: No token selected!"
+            },
+            "ItemAction": {
+                "Check": "Check"
             },
             "ItemActivation": {
                 "Activates": "Activates",
@@ -899,6 +909,19 @@
             }
         },
         "EnergyArmorClass": "Energy AC",
+        "EnergyArmorClassShort": "EAC",
+        "Enrichers": {
+            "Icon": {
+                "Types": {
+                    "Graviton": "Graviton",
+                    "LanguageDependent": "Language Dependent",
+                    "MindAffecting": "Mind Affecting",
+                    "Photon": "Photon",
+                    "SenseDependent": "Sense Dependent"
+                }
+            },
+            "TypeError": "{enricherType} parsing failed! Type is invalid."
+        },
         "Environment": "Environment",
         "FeatTypes": {
             "Combat": "Combat Feats",
@@ -1032,6 +1055,7 @@
         "InventoryCapacity": "Capacity",
         "InventoryCurrency": "Currency",
         "InventoryEquipped": "Equipped",
+        "InventoryNotEquipped": "Not Equipped",
         "InventoryUsage": "Utilisation",
         "IronWillHint": "Character feat that adds 2 to will saving throws",
         "IronWillLabel": "Iron Will",
@@ -1126,7 +1150,7 @@
             "Header": {
                 "ArmorClass": "Armor Class",
                 "ArmorClassTooltip": "<strong>Armor Class</strong><br/>The armor class of this item, if left unattended. Otherwise, the attendee's armor class should be used instead.<br/>An item is considered unattended if it is not currently under any influence of a character.",
-                "DetailsHeader": "Armor details",
+                "DetailsHeader": "Armor Details",
                 "Hardness": "Hardness",
                 "HardnessTooltip": "<strong>Hardness</strong><br/>When taking damage, subtract the item's hardness from the incoming damage before applying.",
                 "Hitpoints": "Hitpoints",
@@ -1353,6 +1377,7 @@
                 "RollNotes": "Roll Notes",
                 "RollNotesTooltip": "The roll notes are displayed on the action roll chat card. This is a great way to put helpful reminders, especially for GMs with complicated NPCs.",
                 "SavingThrow": "Saving Throw",
+                "SkillCheck": "Skill Check",
                 "TitleAction": "Action",
                 "TitleActivation": "Activation"
             },
@@ -1425,7 +1450,7 @@
                 "HybridItems": "Hybrid Items",
                 "MagicItems": "Magic Items",
                 "MiscellaneousItems": "Miscellaneous Items",
-                "Races": "Races",
+                "Races": "Species",
                 "Shields": "Shields",
                 "Spells": "Spells",
                 "StarshipAblativeArmors": "Starship Ablative Armors",
@@ -1608,6 +1633,7 @@
         },
         "KeyAbility": "Key Ability Score",
         "KineticArmorClass": "Kinetic AC",
+        "KineticArmorClassShort": "KAC",
         "Languages": "Languages",
         "LanguagesAbyssal": "Abyssal",
         "LanguagesAkitonian": "Akitonian",
@@ -1754,7 +1780,7 @@
         "ModifierTypeLabel": "Type",
         "ModifierTypeLuck": "Luck",
         "ModifierTypeMorale": "Morale",
-        "ModifierTypeRacial": "Racial",
+        "ModifierTypeRacial": "Species",
         "ModifierTypeResistance": "Resistance",
         "ModifierTypeTooltip": "The modifiers type. Used for figuring out which modifier to use when multiple modifiers are of the same type (usually the highest)",
         "ModifierTypeUntyped": "Untyped",
@@ -1789,7 +1815,7 @@
                 "BaseSpellDC": "Base Spell DC",
                 "BaseSpellDCTooltip": "The base spell DC this NPC has. All of the NPCs spells that have a saving throw associated with them typically use this value, plus the spell level.",
                 "NamePlaceHolderText": "Character Name",
-                "RaceAndGraftsPlaceHolderText": "Gender, Race, and Class/Grafts",
+                "RaceAndGraftsPlaceHolderText": "Gender, Species, and Class/Grafts",
                 "SourcePlaceHolderText": "Source",
                 "SubtypePlaceHolderText": "Subtype",
                 "TypePlaceHolderText": "Type"
@@ -1828,6 +1854,7 @@
         "NpcToggleSkillsDialogTitle": "Toggle NPC Skills",
         "NumberOfArms": "Number of Arms",
         "Organization": "Organization",
+        "Passive": "Passive",
         "Personal": "Personal",
         "PersonalUpgrade": "Personal Upgrade",
         "Plane": "Plane",
@@ -1836,9 +1863,9 @@
         "RaceAbilityAdjustments": "Ability Adjustments",
         "RaceAddAbilityAdjustment": "Add Adjustment",
         "RaceHitPoints": "Hit Points",
-        "RacePlaceHolderText": "Race",
+        "RacePlaceHolderText": "Species",
         "RaceSize": "Size",
-        "RacialTraits": "Racial Traits",
+        "RacialTraits": "Species Traits",
         "Reach": "Reach",
         "ReflexSave": "Reflex",
         "RepairDroneChatMessage": "{name} was repaired for {regainedHP} hit points.",
@@ -1910,6 +1937,7 @@
                 "RollModeTooltip": "Roll Mode determines who can see this roll.",
                 "Selector": "Select '{name}'",
                 "SelectorTooltip": "Dynamic actor selection for the '{name}' formula context.",
+                "SimplifiedFormulaTooltip": "<p>The formula displayed on the dialog has been calculated from the following formula:</p><p>{formula}</p>",
                 "SituationalBonus": "Situational bonus",
                 "SituationalBonusTooltip": "Are there any additional bonuses that apply to this roll? (For example, range increments)"
             },
@@ -1991,7 +2019,7 @@
         "SaveProgressionFast": "Fast",
         "SaveProgressionSlow": "Slow",
         "SensesTypes": {
-            "GlobalIlluminationThresholdMessage": "<strong>Starfinder System</strong><br />It is recommended to keep the Global Illumination Threshold enabled in order for features such as Low Light Vision to function correctly.",
+            "GlobalIlluminationThresholdMessage": "<strong>Starfinder System</strong><br />It is recommended to keep these settings enabled in order for features such as Low Light Vision to function correctly.",
             "Senses": "Senses",
             "SensesBL": "Blindsight",
             "SensesBS": "Blindsense",
@@ -2313,6 +2341,10 @@
         "SkillTooltipThemeMod": "Theme Modifier: {mod}",
         "SkillTooltipTrainedClassSkill": "Trained Class Skill Modifier: {mod}",
         "SkillTrainedOnly": "Trained Only",
+        "SkillTrainedOnlyDialog": {
+            "Content": "{skill} is a trained only skill, but {name} is not trained in that skill. Would you like to roll anyway?",
+            "Title": "{skill} is trained only"
+        },
         "SkillsHeaderAbility": "Abl",
         "SkillsHeaderModifier": "Mod",
         "SkillsHeaderName": "Name",
@@ -2339,6 +2371,7 @@
             "Voidglass": "Voidglass"
         },
         "SpecialTraits": "Special Traits",
+        "SpeciesGraft": "Species Graft",
         "Speed": "Speed",
         "SpeedSpecial": "Special Movement",
         "SpellAreaEffects": {
@@ -2880,7 +2913,7 @@
         "WeaponPropertiesInstrumental": "Instrumental",
         "WeaponPropertiesInstrumentalTooltip": "A weapon with this property can also be used as a basic musical instrument (Armory 105). The size of this instrument’s battery is the same as that of the weapon’s, and it can be used as a weapon (with the charge usage indicated) or an instrument (where it uses 1 charge every 10 minutes). If the weapon is 8th level or higher, it also functions instead as a euphonic musical instrument (Armory 106).",
         "WeaponPropertiesIntegrated": "Integrated",
-        "WeaponPropertiesIntegratedTooltip": "An integrated weapon can be wielded normally or installed in an armor upgrade slot. When properly installed, the weapon is considered to be wielded without needing to assign a number of hands to wield it. An integrated weapon requires the listed number of armor slots for proper installation. An android or any other creature with the upgrade slot racial ability cannot combine its racial upgrade slot with armor upgrade slots to install an integrated weapon. Installing, removing, or replacing an integrated weapon in a suit of armor takes 10 minutes, as if it were an armor upgrade.",
+        "WeaponPropertiesIntegratedTooltip": "An integrated weapon can be wielded normally or installed in an armor upgrade slot. When properly installed, the weapon is considered to be wielded without needing to assign a number of hands to wield it. An integrated weapon requires the listed number of armor slots for proper installation. An android or any other creature with the upgrade slot species ability cannot combine its species upgrade slot with armor upgrade slots to install an integrated weapon. Installing, removing, or replacing an integrated weapon in a suit of armor takes 10 minutes, as if it were an armor upgrade.",
         "WeaponPropertiesLine": "Line",
         "WeaponPropertiesLineTooltip": "This weapon fires a projectile in a straight line that pierces through multiple creatures or obstacles. When attacking with such a weapon, make a single attack roll and compare it to the relevant Armor Class of all creatures and objects in a line extending to the weapon’s listed range increment. Roll damage only once. The weapon hits all targets with an AC equal to or lower than the attack roll. However, if an attack fails to damage a creature or obstacle hit in the line (typically due to damage reduction or hardness), the path is stopped and the attack doesn’t damage creatures farther away. A line weapon can’t damage targets beyond its listed range. If you score a critical hit, that effect applies only to the first target hit in the line, and you roll the critical damage separately. If multiple creatures are equally close, you choose which one takes the effects of the critical hit. A line weapon doesn’t benefit from feats or abilities that increase the damage of a single attack (such as the operative’s trick attack).",
         "WeaponPropertiesLiving": "Living",
@@ -2956,9 +2989,9 @@
         "WeaponPropertiesTeleportive": "Teleportive",
         "WeaponPropertiesTeleportiveTooltip": "This weapon’s fired ammunition teleports a short distance after being fired. You take only a –1 cumulative penalty when attacking outside the range of this weapon.",
         "WeaponPropertiesThought": "Thought",
-        "WeaponPropertiesThoughtTooltip": "A thought weapon can be fully or partially controlled via telepathy. If you have the telepathy or limited telepathy racial trait, are benefiting from a telepathy spell, are wearing a mindlink circlet, or have a similar ability, you ignore the weapon’s unwieldy weapon special property.",
+        "WeaponPropertiesThoughtTooltip": "A thought weapon can be fully or partially controlled via telepathy. If you have the telepathy or limited telepathy species trait, are benefiting from a telepathy spell, are wearing a mindlink circlet, or have a similar ability, you ignore the weapon’s unwieldy weapon special property.",
         "WeaponPropertiesThrottle": "Throttle",
-        "WeaponPropertiesThrottleTooltip": "A throttle weapon deals damage only when it is used to grapple a foe, automatically dealing damage with every successful grapple combat maneuver. These are considered attacks for abilities that can increase a weapon’s damage (such as trick attack). All throttle weapons are also grapple weapons. While a target is successfully being grappled with a throttle weapon, it cannot use its airways to speak or make vocalizations of any kind (though other forms of making noise work normally).",
+        "WeaponPropertiesThrottleTooltip": "A throttle weapon deals damage only when it is used to grapple a foe, automatically dealing damage with every successful grapple combat maneuver. All throttle weapons are also grapple weapons. While a target is successfully being grappled with a throttle weapon, it cannot use its airways to speak or make vocalizations of any kind (though other forms of making noise work normally).",
         "WeaponPropertiesThrown": "Thrown",
         "WeaponPropertiesThrownTooltip": "Ranged weapons that must be thrown and melee weapons that can be thrown as a ranged attack have the thrown special property and a listed range increment. You apply your Strength modifier to damage rolls for thrown attacks. After you throw a weapon, it lands near your target and you must recover it if you want to attack with it again.",
         "WeaponPropertiesThruster": "Thruster",
