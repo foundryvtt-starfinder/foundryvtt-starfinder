@@ -17,6 +17,7 @@ One of the reasons this update took so long, Iankid undertook a gruelling audit 
 * Migrated the compendium art mapping feature to V10
 * Show mapped compendium art in the alien browser
 * Add augmentation filtering to the equipment browser
+* Add Skill DC as an action type on items
 * Holding shift while applying damage from chat cards will bring up a window allowing you to modify the applied damage
 * Enable global illumination on scenes by default
 * Updated nomenclature of "race" and "racial" to "species"
@@ -25,6 +26,7 @@ One of the reasons this update took so long, Iankid undertook a gruelling audit 
 * Remove minimum height on sheets
 * Adjust CSS to round sheet corners
 * Trim margins on item sidebars, removing unnecessary scrollbars
+* Expand formula entry boxes for DCs on saves and skills
 * The system is now served in a minified state, improving load times
 * The XP bar now changes colour depending on how much XP you have
 * Implement a French translation for the gunnery skill, and various other fields on sheets
