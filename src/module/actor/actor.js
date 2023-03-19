@@ -1,3 +1,7 @@
+import { ChoiceDialog } from "../apps/choice-dialog.js";
+import { AddEditSkillDialog } from "../apps/edit-skill-dialog.js";
+import { NpcSkillToggleDialog } from "../apps/npc-skill-toggle-dialog.js";
+import { SpellCastDialog } from "../apps/spell-cast-dialog.js";
 import { SFRPG } from "../config.js";
 import { DiceSFRPG } from "../dice.js";
 import RollContext from "../rolls/rollcontext.js";
@@ -9,15 +13,10 @@ import { ActorInventoryMixin } from "./mixins/actor-inventory.js";
 import { ActorModifiersMixin } from "./mixins/actor-modifiers.js";
 import { ActorResourcesMixin } from "./mixins/actor-resources.js";
 import { ActorRestMixin } from "./mixins/actor-rest.js";
-import { ChoiceDialog } from "../apps/choice-dialog.js";
-import { SpellCastDialog } from "../apps/spell-cast-dialog.js";
-import { AddEditSkillDialog } from "../apps/edit-skill-dialog.js";
-import { NpcSkillToggleDialog } from "../apps/npc-skill-toggle-dialog.js";
 
-import { } from "./crew-update.js";
-import { ItemSheetSFRPG } from "../item/sheet.js";
 import { ItemSFRPG } from "../item/item.js";
-import { hasDiceTerms } from "../utilities.js";
+import { ItemSheetSFRPG } from "../item/sheet.js";
+import { } from "./crew-update.js";
 
 /**
  * A data structure for storing damage statistics.
@@ -40,8 +39,14 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             if (art) {
                 data.img = art.actor;
                 const tokenArt = typeof art.token === "string"
-                    ? { img: art.token } // If just a path, set it as img
-                    : { ...art.token }; // If not a path, it must contain scale too, so spread it
+                    ? { texture: { src: art.token } }
+                    : {
+                        texture: {
+                            src: art.token.img,
+                            scaleX: art.token.scale,
+                            scaleY: art.token.scale
+                        }
+                    };
                 data.prototypeToken = mergeObject(data.prototypeToken ?? {}, tokenArt);
             }
         }
@@ -181,7 +186,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         return super.createEmbeddedDocuments(embeddedName, itemData, options);
     }
 
-    /*
+    /**
      * Extend preCreate to apply some defaults to newly created characters
      * See the base Actor class for API documentation of this method
      *
@@ -213,16 +218,16 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         return super._preCreate(data, options, user);
     }
 
-    /*
+    /**
      * Extend preUpdate to clamp certain PC changes
      * See the base Actor class for API documentation of this method
      *
      * Pre-update operations only occur for the client which requested the operation.
+     *
      * @param {object} changed            The differential data that is changed relative to the documents prior values
      * @param {object} options            Additional options which modify the update request
      * @param {documents.BaseUser} user   The User requesting the document update
      */
-
     async _preUpdate(changed, options, user) {
 
         // Clamp HP/SP/RP values to 0 and their max
@@ -484,20 +489,23 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         }
 
         if (skl.isTrainedOnly && !(skl.ranks > 0)) {
-            let content = `${CONFIG.SFRPG.skills[skillId.substring(0, 3)]} is a trained only skill, but ${this.name} is not trained in that skill.
-                Would you like to roll anyway?`;
+            let content = game.i18n.format(
+                "SFRPG.SkillTrainedOnlyDialog.Content", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)], name: this.name }
+            );
 
             return new Promise(resolve => {
                 new Dialog({
-                    title: `${CONFIG.SFRPG.skills[skillId.substring(0, 3)]} is trained only`,
+                    title: game.i18n.format(
+                        "SFRPG.SkillTrainedOnlyDialog.Title", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)] }
+                    ),
                     content: content,
                     buttons: {
                         yes: {
-                            label: "Yes",
+                            label: game.i18n.localize("Yes"),
                             callback: () => resolve(this.rollSkillCheck(skillId, skl, options))
                         },
                         cancel: {
-                            label: "No"
+                            label: game.i18n.localize("No")
                         }
                     },
                     default: "cancel"
@@ -588,8 +596,8 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             rollContext: rollContext,
             parts: parts,
             title: title,
-            flavor: TextEditor.enrichHTML(skill.notes, {
-                async: false,
+            flavor: await TextEditor.enrichHTML(skill.notes, {
+                async: true,
                 rollData: this.getRollData() ?? {}
             }),
             speaker: ChatMessage.getSpeaker({ actor: this }),
@@ -624,12 +632,10 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         if (system) {
             rollContext.addContext("system", system, system.system);
             parts.push(`@system.piloting.piloting`);
-        }
-        else if (!role || !actorId) {
+        } else if (!role || !actorId) {
             // Add pilot's piloting modifier
             parts.push(`@pilot.skills.pil.mod`);
-        }
-        else {
+        } else {
             const passengerId = this.system.crew[role].actorIds.find(id => id === actorId);
             let passenger = game.actors.get(passengerId);
             let actorData = null;
@@ -831,12 +837,18 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
                 flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${dcRoll.roll.total}</p>`;
             } else {
-                flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${TextEditor.enrichHTML(dc.value, {async: false})}</p>`;
+                flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${await TextEditor.enrichHTML(dc.value, {
+                    async: true,
+                    rollData: this.getRollData() ?? {}
+                })}</p>`;
             }
         }
 
         flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.NormalEffect")}: </strong>`;
-        flavor += TextEditor.enrichHTML(selectedFormula.effectNormal || actionEntry.system.effectNormal, {async: false});
+        flavor += await TextEditor.enrichHTML(selectedFormula.effectNormal || actionEntry.system.effectNormal, {
+            async: true,
+            rollData: this.getRollData() ?? {}
+        });
         flavor += "</p>";
 
         if (actionEntry.system.effectCritical) {
@@ -844,7 +856,10 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             if (critEffectDisplayState !== 'never') {
                 if (critEffectDisplayState === 'always' || rollResult.roll.dice[0].values[0] === 20) {
                     flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.CriticalEffect")}: </strong>`;
-                    flavor += TextEditor.enrichHTML(selectedFormula.effectCritical || actionEntry.system.effectCritical, {async: false});
+                    flavor += await TextEditor.enrichHTML(selectedFormula.effectCritical || actionEntry.system.effectCritical, {
+                        async: true,
+                        rollData: this.getRollData() ?? {}
+                    });
                     flavor += "</p>";
                 }
             }
@@ -889,8 +904,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                     rollContext.addContext("pilot", pilotActor, pilotData);
                 }
             }
-        }
-        else if (actorData.type === "starship") {
+        } else if (actorData.type === "starship") {
             if (!crewData.useNPCCrew) {
                 /** Add player captain if available. */
                 if (crewActorData.captain?.actors?.length > 0) {
@@ -978,9 +992,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     }
 
     /** -------------------
-    *
     * Floating HP functions
-    *
     ---------------------- */
 
     /** Calculate deltas in the pre-method in order to access the old value.
@@ -1122,6 +1134,12 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         return false;
     }
 
+    levelUp(actorClassId) {
+        const targetClass = this.items.find(item => item.type === "class" && item._id === actorClassId);
+        if (targetClass) {
+            targetClass.update({["system.levels"]: targetClass.system.levels + 1});
+        }
+    }
 }
 
 Hooks.on("afterClosureProcessed", async (closureName, fact) => {

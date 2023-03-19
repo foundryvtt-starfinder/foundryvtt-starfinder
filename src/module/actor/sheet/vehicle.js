@@ -1,5 +1,5 @@
-import { ActorSheetSFRPG } from "./base.js";
 import { SFRPG } from "../../config.js";
+import { ActorSheetSFRPG } from "./base.js";
 
 export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     constructor(...args) {
@@ -12,8 +12,8 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             classes: ["sfrpg", "sheet", "actor", "vehicle"],
-            width: 600,
-            height: 685
+            width: 600
+            // height: 685
         });
     }
 
@@ -33,7 +33,11 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         this._getHangarBayData(data);
 
         // Encrich text editors
-        data.enrichedDescription = await TextEditor.enrichHTML(this.object.system.details.description.value, {async: true});
+        data.enrichedDescription = await TextEditor.enrichHTML(this.actor.system.details.description.value, {
+            async: true,
+            rollData: this.actor.getRollData() ?? {},
+            secrets: this.actor.isOwner
+        });
 
         return data;
     }
@@ -100,13 +104,11 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
             if (item.type === "weapon" || item.type === "vehicleAttack") {
                 arr[0].push(item); // attacks
-            }
-            else if (item.type === "vehicleSystem") {
+            } else if (item.type === "vehicleSystem") {
 
                 item.isVehicleSystem = true;
                 arr[1].push(item); // primarySystems
-            }
-            else if (item.type === "starshipExpansionBay") arr[2].push(item); // expansionBays
+            } else if (item.type === "starshipExpansionBay") arr[2].push(item); // expansionBays
             else if (item.type === "actorResource") arr[3].push(item); // actorResources
 
             return arr;
@@ -223,14 +225,12 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             else {
                 return this._onCrewDrop(event, actor.id);
             }
-        }
-        else if (data.type === "Item") {
+        } else if (data.type === "Item") {
             const rawItemData = await this._getItemDropData(event, data);
 
             if (rawItemData.type === "weapon" || rawItemData.type === "vehicleAttack") {
                 return this.processDroppedData(event, data);
-            }
-            else if (rawItemData.type === "starshipExpansionBay" || rawItemData.type === "vehicleSystem" || rawItemData.type === "actorResource") {
+            } else if (rawItemData.type === "starshipExpansionBay" || rawItemData.type === "vehicleSystem" || rawItemData.type === "actorResource") {
                 return this.actor.createEmbeddedDocuments("Item", [rawItemData]);
             }
         }
@@ -322,7 +322,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
             if (oldRole) {
                 const originalRole = crew[oldRole];
-                originalRole.actorIds = originalRole.actorIds.filter(x => x != actorId);
+                originalRole.actorIds = originalRole.actorIds.filter(x => x !== actorId);
             }
 
             await this.actor.update({
@@ -532,7 +532,8 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             hasAttack: item.hasAttack,
             hasDamage: item.hasDamage,
             isVersatile: item.isVersatile,
-            hasSave: item.hasSave
+            hasSave: item.hasSave,
+            hasSkill: this.hasSkill
         };
 
         const template = `systems/sfrpg/templates/chat/item-action-card.hbs`;

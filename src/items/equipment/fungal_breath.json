@@ -5,9 +5,24 @@
   "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "biotech",
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
+    "actionType": "util",
+    "activation": {
+      "type": "action",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "none",
+      "value": null
+    },
+    "attackBonus": 0,
     "attributes": {
       "ac": {
         "value": ""
@@ -21,34 +36,72 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": 13
       },
       "size": "medium",
       "sturdy": false
     },
     "attuned": false,
     "bulk": "-",
+    "chatFlavor": "",
+    "container": {
+      "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
+      "storage": []
+    },
     "critical": {
+      "effect": "",
       "parts": []
     },
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>Autopsies on dycepskian hosts have revealed victims whose lungs have been genetically altered. These biotech lungs are large, delicate white sacs with trailing wisps of mycelia. Once implanted, they produce modified dycepskian spores and stimulate growth of a mycelial network that snakes up the throat to expel the spores with great force. Once per day as a standard action, you can use your fungal breath on a creature within 15 feet. Unless it is immune to disease, the target is sickened for 1 day and, if it fails a Fortitude save, is stunned for 1 round. Creatures sickened by this effect who spend Resolve to regain Stamina Points can attempt the saving throw again, ending the condition on a success.</p>"
+      "value": "<p>Autopsies on dycepskian hosts have revealed victims whose lungs have been genetically altered. These biotech lungs are large, delicate white sacs with trailing wisps of mycelia. Once implanted, they produce modified dycepskian spores and stimulate growth of a mycelial network that snakes up the throat to expel the spores with great force. Once per day as a standard action, you can use your fungal breath on a creature within 15 feet. Unless it is immune to @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.gBhZDjh30JEyh7DY]{disease}, the target is @UUID[Compendium.sfrpg.conditions.ZacF0l6IwqBwToTJ]{sickened} for 1 day and, if it fails a Fortitude save, is @UUID[Compendium.sfrpg.conditions.CvsDp0GvojxiF2jz]{stunned} for 1 round. Creatures sickened by this effect who spend Resolve to regain Stamina Points can attempt the saving throw again, ending the condition on a success.</p>"
     },
-    "equippable": false,
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": ""
+    },
+    "equippable": true,
     "equipped": false,
+    "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 8,
     "modifiers": [],
     "price": 9000,
     "quantity": 1,
-    "source": "AP#28, p. 52",
-    "system": "lungsAndThroat"
+    "quantityPerPack": 1,
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "ft",
+      "value": 15
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "",
+      "dc": "10 + floor(@details.level.value / 2) + @abilities.con.mod",
+      "descriptor": "negate"
+    },
+    "source": "AP #28 pg. 52",
+    "system": "lungsAndThroat",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": 1,
+      "per": "day",
+      "value": 1
+    }
   }
 }

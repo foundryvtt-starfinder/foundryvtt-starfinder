@@ -1,13 +1,13 @@
+import SFRPGModifierApplication from "../apps/modifier-app.js";
+import { SFRPG } from "../config.js";
+import { DiceSFRPG } from "../dice.js";
+import SFRPGModifier from "../modifiers/modifier.js";
+import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../modifiers/types.js";
+import RollContext from "../rolls/rollcontext.js";
+import StackModifiers from "../rules/closures/stack-modifiers.js";
 import { Mix } from "../utils/custom-mixer.js";
 import { ItemActivationMixin } from "./mixins/item-activation.js";
 import { ItemCapacityMixin } from "./mixins/item-capacity.js";
-import { DiceSFRPG } from "../dice.js";
-import RollContext from "../rolls/rollcontext.js";
-import { SFRPG } from "../config.js";
-import { SFRPGModifierType, SFRPGModifierTypes, SFRPGEffectType } from "../modifiers/types.js";
-import SFRPGModifier from "../modifiers/modifier.js";
-import SFRPGModifierApplication from "../apps/modifier-app.js";
-import StackModifiers from "../rules/closures/stack-modifiers.js";
 
 export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityMixin) {
 
@@ -54,6 +54,17 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         return hasType;
     }
 
+    /**
+     * Does the Item implement a saving throw as part of its usage
+     * @type {boolean}
+     */
+    get hasSkill() {
+        const skillData = this.system?.skillCheck;
+        if (!skillData) return false;
+
+        return !!skillData.type;
+    }
+
     /* -------------------------------------------- */
     /*	Data Preparation														*/
     /* -------------------------------------------- */
@@ -78,14 +89,19 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Feat Items
         else if (itemData.type === "feat") {
             const act = data.activation;
-            if (act && act.type) labels.featType = data.damage.length ? "Attack" : "Action";
-            else labels.featType = "Passive";
+            if (act && ["mwak", "rwak", "msak", "rsak"].includes(act.type)) {
+                labels.featType = data?.damage?.parts?.length
+                    ? game.i18n.localize("SFRPG.Attack")
+                    : game.i18n.localize("SFRPG.Items.Actions.TitleAction");
+            } else {
+                labels.featType = game.i18n.localize("SFRPG.Passive");
+            }
         }
 
         // Equipment Items
         else if (itemData.type === "equipment") {
-            labels.eac = data.armor.eac ? `${data.armor.eac} EAC` : "";
-            labels.kac = data.armor.kac ? `${data.armor.kac} KAC` : "";
+            labels.eac = data.armor.eac ? `${data.armor.eac} ${game.i18n.localize("SFRPG.EnergyArmorClassShort")}` : "";
+            labels.kac = data.armor.kac ? `${data.armor.kac} ${game.i18n.localize("SFRPG.KineticArmorClassShort")}` : "";
         }
 
         // Activated Items
@@ -96,8 +112,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             if (act) {
                 if (act.type === "none") {
                     labels.activation = game.i18n.localize("SFRPG.AbilityActivationTypesNoneButton");
-                }
-                else {
+                } else {
                     labels.activation = [
                         act.cost,
                         C.abilityActivationTypes[act.type]
@@ -173,7 +188,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         return data;
     }
 
-    /*
+    /**
      * Extend preCreate to create class name slugs.
      * See the base Actor class for API documentation of this method
      *
@@ -185,7 +200,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     async _preCreate(data, options, user) {
         let updates = {};
 
-        if (this.type === "class") {
+        if (this.type === "class" && !this.system?.slug) {
             updates["system.slug"] = this.name.slugify({replacement: "_", strict: true});
         }
 
@@ -201,8 +216,6 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      * @return {Promise}
      */
     async roll() {
-        let htmlOptions = { secrets: this.actor?.isOwner || true, rollData: this };
-        htmlOptions.rollData.owner = this.actor?.system;
 
         // Basic template rendering data
         const token = this.actor.token;
@@ -210,11 +223,12 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             actor: this.actor,
             tokenId: token ? `${token.parent.id}.${token.id}` : null,
             item: this,
-            system: this.getChatData(htmlOptions),
+            system: await this.getChatData(),
             labels: this.labels,
             hasAttack: this.hasAttack,
             hasDamage: this.hasDamage,
             hasSave: this.hasSave,
+            hasSkill: this.hasSkill,
             hasOtherFormula: this.hasOtherFormula
         };
 
@@ -334,14 +348,29 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     /*  Chat Cards                                  */
     /* -------------------------------------------- */
 
-    getChatData(htmlOptions) {
+    /**
+     * Prepare this item's description, and chat message properties.
+     * @returns {Object} An object containing the item's rollData (including its owners), and chat message properties.
+     */
+    async getChatData() {
         const data = duplicate(this.system);
         const labels = this.labels;
 
-        if (htmlOptions.async === undefined) htmlOptions.async = false;
+        const async = true;
+        const secrets = this.isOwner;
+        const rollData = RollContext.createItemRollContext(this, this.actor).getRollData();
 
         // Rich text description
-        data.description.value = TextEditor.enrichHTML(data.description.value, htmlOptions);
+        if (data.description.short) data.description.short = await TextEditor.enrichHTML(data.description.short, {
+            async,
+            secrets,
+            rollData
+        });
+        data.description.value = await TextEditor.enrichHTML(data.description.value, {
+            async,
+            secrets,
+            rollData
+        });
 
         // Item type specific properties
         const props = [];
@@ -352,8 +381,18 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const equippableTypes = ["weapon", "equipment", "shield"];
         if (data.hasOwnProperty("equipped") && equippableTypes.includes(this.type)) {
             props.push(
-                {name: data.equipped ? "Equipped" : "Not Equipped", tooltip: null },
-                {name: data.proficient ? "Proficient" : "Not Proficient", tooltip: null }
+                {
+                    name: data.equipped
+                        ? game.i18n.localize("SFRPG.InventoryEquipped")
+                        : game.i18n.localize("SFRPG.InventoryNotEquipped"),
+                    tooltip: null
+                },
+                {
+                    name: data.proficient
+                        ? game.i18n.localize("SFRPG.Items.Proficient")
+                        : game.i18n.localize("SFRPG.Items.NotProficient"),
+                    tooltip: null
+                }
             );
         }
 
@@ -377,8 +416,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         if (this.type === "container") {
             if (this.actor) {
-                const currencyLocale = game.settings.get('sfrpg', 'currencyLocale');
-                const wealthString = new Intl.NumberFormat(currencyLocale).format(Math.floor(this.system.itemWealth.contentWealth));
+                const wealthString = new Intl.NumberFormat(game.i18n.lang).format(Math.floor(this.system.itemWealth.contentWealth));
                 const wealthProperty = game.i18n.format("SFRPG.CharacterSheet.Inventory.ContainedWealth", {wealth: wealthString});
                 props.push({
                     name: wealthProperty,
@@ -456,7 +494,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     _consumableChatData(data, labels, props) {
         props.push(
             {name: CONFIG.SFRPG.consumableTypes[data.consumableType], tooltip: null},
-            {name: this.getRemainingUses() + "/" + this.getMaxUses() + " Charges", tooltip: null}
+            {name: this.getRemainingUses() + "/" + this.getMaxUses() + ` ${game.i18n.localize("SFRPG.FeaturesCharges")}`, tooltip: null}
         );
         data.hasCharges = this.getRemainingUses() >= 0;
     }
@@ -469,8 +507,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      */
     _goodsChatData(data, labels, props) {
         props.push(
-            {name: "Goods", tooltip: null},
-            data.bulk ? {name: `Bulk ${data.bulk}`, tooltip: null} : null
+            {name: CONFIG.SFRPG.itemTypes["goods"], tooltip: null},
+            data.bulk ? {name: `${game.i18n.localize("SFRPG.InventoryBulk")} ${data.bulk}`, tooltip: null} : null
         );
     }
 
@@ -482,9 +520,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      */
     _technologicalChatData(data, labels, props) {
         props.push(
-            {name: "Technological", tooltip: null},
-            data.bulk ? {name: `Bulk ${data.bulk}`, tooltip: null} : null,
-            data.hands ? {name: `Hands ${data.hands}`, tooltip: null} : null
+            {name: game.i18n.localize("ITEM.TypeTechnological"), tooltip: null},
+            data.bulk ? {name: `${game.i18n.localize("SFRPG.InventoryBulk")} ${data.bulk}`, tooltip: null} : null,
+            data.hands ? {name: `${game.i18n.localize("SFRPG.Items.Description.Hands")} ${data.hands}`, tooltip: null} : null
         );
     }
 
@@ -496,9 +534,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      */
     _hybridChatData(data, labels, props) {
         props.push(
-            {name: "Hybrid", tooltip: null},
-            data.bulk ? {name: `Bulk ${data.bulk}`, tooltip: null} : null,
-            data.hands ? {name: `Hands ${data.hands}`, tooltip: null} : null
+            {name: game.i18n.localize("ITEM.TypeHybrid"), tooltip: null},
+            data.bulk ? {name: `${game.i18n.localize("SFRPG.InventoryBulk")} ${data.bulk}`, tooltip: null} : null,
+            data.hands ? {name: `${game.i18n.localize("SFRPG.Items.Description.Hands")} ${data.hands}`, tooltip: null} : null
         );
     }
 
@@ -510,9 +548,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      */
     _magicChatData(data, labels, props) {
         props.push(
-            "Magic",
-            data.bulk ? {name: `Bulk ${data.bulk}`, tooltip: null} : null,
-            data.hands ? {name: `Hands ${data.hands}`, tooltip: null} : null
+            {name: game.i18n.localize("ITEM.TypeMagic"), tooltip: null},
+            data.bulk ? {name: `${game.i18n.localize("SFRPG.InventoryBulk")} ${data.bulk}`, tooltip: null} : null,
+            data.hands ? {name: `${game.i18n.localize("SFRPG.Items.Description.Hands")} ${data.hands}`, tooltip: null} : null
         );
     }
 
@@ -532,15 +570,15 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         }
 
         props.push(
-            {name: "Armor Upgrade", tooltip: null},
-            data.slots ? {name: `Slots ${data.slots}`, tooltip: null} : null,
-            {name: `Allowed armor ${armorType}`, tooltip: null}
+            {name: game.i18n.localize("ITEM.TypeUpgrade"), tooltip: null},
+            data.slots ? {name: `${game.i18n.localize("SFRPG.Items.Upgrade.Slots")} ${data.slots}`, tooltip: null} : null,
+            {name: `${game.i18n.localize("SFRPG.Items.Upgrade.AllowedArmorType")}: ${armorType}`, tooltip: null}
         );
     }
 
     _augmentationChatData(data, labels, props) {
         props.push(
-            {name:"Augmentation", tooltip: null},
+            {name:game.i18n.localize("ITEM.TypeAugmentation"), tooltip: null},
             data.type ? {name: CONFIG.SFRPG.augmentationTypes[data.type], tooltip: null} : null,
             data.system ? {name: CONFIG.SFRPG.augmentationSytems[data.system], tooltip: null} : null
         );
@@ -554,14 +592,14 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      */
     _fusionChatData(data, labels, props) {
         props.push(
-            {name: "Weapon Fusion", tooltip: null},
-            data.level ? {name: `Level ${data.level}`, tooltip: null} : null
+            {name: game.i18n.localize("ITEM.TypeFusion"), tooltip: null},
+            data.level ? {name: `${game.i18n.localize("SFRPG.LevelLabelText")} ${data.level}`, tooltip: null} : null
         );
     }
 
     _starshipWeaponChatData(data, labels, props) {
         props.push(
-            {name: "Starship Weapon", tooltip: null},
+            {name: game.i18n.localize("ITEM.TypeStarshipweapon"), tooltip: null},
             data.weaponType ? {name: CONFIG.SFRPG.starshipWeaponTypes[data.weaponType], tooltip: null} : null,
             data.class ? {name: CONFIG.SFRPG.starshipWeaponClass[data.class], tooltip: null} : null,
             data.range ? {name: CONFIG.SFRPG.starshipWeaponRanges[data.range], tooltip: null} : null,
@@ -618,7 +656,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
     _themeChatData(data, labels, props) {
         props.push(
-            {name: "Theme", tooltip: null},
+            {name: game.i18n.localize("ITEM.TypeTheme"), tooltip: null},
             data.abilityMod.ability ? {name: `Ability ${CONFIG.SFRPG.abilities[data.abilityMod.ability]}`, tooltip: null} : null,
             data.skill ? {name: `Skill ${CONFIG.SFRPG.skills[data.skill]}`, tooltip: null} : null
         );
@@ -626,7 +664,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
     _raceChatData(data, labels, props) {
         props.push(
-            {name: "Race", tooltip: null},
+            {name: game.i18n.localize("ITEM.TypeRace"), tooltip: null},
             data.type ? {name: data.type, tooltip: null} : null,
             data.subtype ? {name: data.subtype, tooltip: null} : null
         );
@@ -643,8 +681,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         if (data.senses &&  data.senses.usedForSenses) {
             // We deliminate the senses by `,` and present each sense as a separate property
             let sensesDeliminated = data.senses.senses.split(",");
-            for (let index = 0; index < sensesDeliminated.length; index++)
-            {
+            for (let index = 0; index < sensesDeliminated.length; index++) {
                 let sense = sensesDeliminated[index];
                 props.push(sense);
             }
@@ -688,8 +725,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         if (Number.isNumeric(itemData.attackBonus) && itemData.attackBonus !== 0) parts.push("@item.attackBonus");
         if (abl) parts.push(`@abilities.${abl}.mod`);
         if (["character", "drone"].includes(this.actor.type)) parts.push("@attributes.baseAttackBonus.value");
-        if (isWeapon)
-        {
+        if (isWeapon) {
             const procifiencyKey = SFRPG.weaponTypeProficiency[this.system.weaponType];
             const proficient = itemData.proficient || this.actor?.system?.traits?.weaponProf?.value?.includes(procifiencyKey);
             if (!proficient) {
@@ -773,6 +809,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const rollData = duplicate(actorData);
         // Add hasSave to roll
         itemData.hasSave = this.hasSave;
+        itemData.hasSkill = this.hasSkill;
         itemData.hasDamage = this.hasDamage;
         itemData.hasCapacity = this.hasCapacity();
 
@@ -807,7 +844,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             parts: parts,
             rollContext: rollContext,
             title: title,
-            flavor: TextEditor.enrichHTML(this.system?.chatFlavor, {async: false}),
+            flavor: await TextEditor.enrichHTML(this.system?.chatFlavor, {
+                async: true,
+                rollData: this.actor.getRollData() ?? {},
+                secrets: this.isOwner
+            }),
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             critical: critThreshold,
             chatMessage: options.chatMessage,
@@ -849,7 +890,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                         this.consumeCapacity(usage.value);
                     }
                 } else {
-                    ui.notifications.info("Currently cannot deduct ammunition from weapons with a usage per minute outside of combat.");
+                    ui.notifications.info("You currently cannot deduct ammunition from weapons with a usage per minute outside of combat.");
                 }
             }
         }
@@ -900,9 +941,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         /** Create additional modifiers. */
         const additionalModifiers = [
             {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.ComputerBonus"), modifier: "@ship.attributes.computer.value", enabled: false} },
-            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.CaptainDemand"), modifier: "4", enabled: false} },
-            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.CaptainEncouragement"), modifier: "2", enabled: false} },
-            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.ScienceOfficerLockOn"), modifier: "2", enabled: false} },
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.CaptainDemand"), modifier: "+4", enabled: false} },
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.CaptainEncouragement"), modifier: "+2", enabled: false} },
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.ScienceOfficerLockOn"), modifier: "+2", enabled: false} },
             {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.SnapShot"), modifier: "-2", enabled: false} },
             {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.FireAtWill"), modifier: "-4", enabled: false} },
             {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.Broadside"), modifier: "-2", enabled: false} }
@@ -1145,7 +1186,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             criticalData: itemData.critical,
             rollContext: rollContext,
             title: title,
-            flavor: (TextEditor.enrichHTML(options?.flavorOverride, {async: false}) ?? TextEditor.enrichHTML(itemData.chatFlavor, {async: false})) || null,
+            flavor: await TextEditor.enrichHTML(options?.flavorOverride || itemData.chatFlavor, {
+                async: true,
+                rollData: this.actor.getRollData() ?? {},
+                secrets: this.isOwner
+            }) || null,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             chatMessage: options.chatMessage,
             dialogOptions: {
@@ -1215,7 +1260,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             throw new Error("you may not make a Damage Roll with this item");
         }
 
-        const parts = itemData.damage.parts.map(part => part);
+        const parts = duplicate(itemData.damage.parts.map(part => part));
         for (const part of parts) {
             part.isDamageSection = true;
         }
@@ -1346,7 +1391,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 actor: this.actor,
                 tokenId: token ? `${token.parent.id}.${token.id}` : null,
                 item: this,
-                data: this.getChatData(htmlOptions),
+                data: await this.getChatData(htmlOptions),
                 labels: this.labels,
                 hasAttack: this.hasAttack,
                 hasDamage: this.hasDamage,
@@ -1464,7 +1509,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const action = button.dataset.action;
 
         // Validate permission to proceed with the roll
-        const isTargetted = action === "save";
+        const isTargetted = ["save", "skill"].includes(action);
         if (!(isTargetted || game.user.isGM || message.isAuthor)) return;
 
         // Get the Actor from a synthetic Token
@@ -1499,14 +1544,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         else if (action === "damage") await item.rollDamage({ event });
         else if (action === "formula") await item.rollFormula({ event });
 
+        // Skill Check
+        else if (action === "skill" && targetActor) await targetActor.rollSkill(button.dataset.type, { event });
+
         // Saving Throw
-        else if (action === "save" && targetActor) {
-            const savePromise = targetActor.rollSave(button.dataset.type, { event });
-            savePromise.then(() => {
-                button.disabled = false;
-            });
-            return;
-        }
+        else if (action === "save" && targetActor) await targetActor.rollSave(button.dataset.type, { event });
 
         // Consumable usage
         else if (action === "consume") await item.rollConsumable({ event });
@@ -1552,8 +1594,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             const scene = game.scenes.get(sceneId);
             if (scene) {
                 const tokenData = scene.getEmbeddedDocument("Token", tokenId);
-                if (tokenData)
-                {
+                if (tokenData) {
                     const token = new Token(tokenData);
                     chatCardActor = token.actor;
                 }
@@ -1662,10 +1703,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     }
 
     static async _onScalingCantripsSettingChanges() {
-        const d3scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d(lookupRange(@details.cl.value,3,7,4))+lookupRange(@details.cl.value,0,3,floor(@details.level.value/2))";
-        const d6scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+lookupRange(@details.cl.value,0,3,floor(@details.level.value/2))";
-        const npcd3scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d(lookupRange(@details.cr,3,7,4))+lookupRange(@details.cr,0,3,floor(@details.cr/2))";
-        const npcd6scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+lookupRange(@details.cr,0,3,floor(@details.cr/2))";
+        const d3scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d(ternary(gte(@details.cl.value,7),4,3))+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
+        const d6scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
+        const npcd3scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d(ternary(gte(@details.cr,7),4,3))+ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
+        const npcd6scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
 
         const setting = game.settings.get("sfrpg", "scalingCantrips");
         let count = 0;
@@ -1687,7 +1728,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
                 for (let currentValue of updates) {
                     if (currentValue.scaling.d3) {
-                        currentValue['system.damage.parts'].forEach(i => {
+                        const parts = currentValue['system.damage.parts'];
+                        for (const i of parts) {
                             if (setting) {
                                 if (isNPC) {
                                     i.formula = npcd3scaling;
@@ -1697,9 +1739,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                             } else {
                                 i.formula = "1d3";
                             }
-                        });
+                        }
                     } else if (currentValue.scaling.d6) {
-                        currentValue['system.damage.parts'].forEach(i => {
+                        const parts = currentValue['system.damage.parts'];
+                        for (const i of parts) {
                             if (setting) {
                                 if (isNPC) {
                                     i.formula = npcd6scaling;
@@ -1709,7 +1752,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                             } else {
                                 i.formula = "1d6";
                             }
-                        });
+                        }
                     }
 
                     delete currentValue.scaling;
@@ -1717,7 +1760,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
                 await actor.updateEmbeddedDocuments("Item", updates);
                 count += params.length;
-                actorCount += 1;
+                actorCount++;
             }
         }
         const message = `Starfinder | Updated ${count} spells to use ${(setting) ? "scaling" : "default"} formulas on ${actorCount} actors.`;
@@ -1725,17 +1768,20 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     }
 
     static async _onScalingCantripDrop(addedItem, targetActor) {
-        const d3scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d(lookupRange(@details.cl.value,3,7,4))+lookupRange(@details.cl.value,0,3,floor(@details.level.value/2))";
-        const d6scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+lookupRange(@details.cl.value,0,3,floor(@details.level.value/2))";
-        const npcd3scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d(lookupRange(@details.cr,3,7,4))+lookupRange(@details.cr,0,3,floor(@details.cr/2))";
-        const npcd6scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+lookupRange(@details.cr,0,3,floor(@details.cr/2))";
+        const d3scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d(ternary(gte(@details.cl.value,7),4,3))+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
+        const d6scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
+        const npcd3scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d(ternary(gte(@details.cr,7),4,3))+ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
+        const npcd6scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
 
         const isNPC = ['npc', 'npc2'].includes(targetActor.actor.type);
 
         if (addedItem.system.scaling?.d3) {
 
             const updates = duplicate(addedItem.system.damage.parts);
-            updates.forEach(i => i.formula = (isNPC) ? npcd3scaling : d3scaling);
+            updates.map(i => {
+                i.formula = (isNPC) ? npcd3scaling : d3scaling;
+                return i;
+            } );
 
             await addedItem.update({"system.damage.parts": updates});
             console.log(`Starfinder | Updated ${addedItem.name} to use the ${ (isNPC) ? 'NPC ' : ""}d3 scaling formula.`);
@@ -1743,7 +1789,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         } else if (addedItem.system.scaling?.d6) {
 
             const updates = duplicate(addedItem.system.damage.parts);
-            updates.forEach(i => i.formula = (isNPC) ? npcd6scaling : d6scaling);
+            updates.map(i => {
+                i.formula = (isNPC) ? npcd6scaling : d6scaling;
+                return i;
+            } );
 
             await addedItem.update({"system.damage.parts": updates});
             console.log(`Starfinder | Updated ${addedItem.name} to use the ${ (isNPC) ? "NPC " : ""}d6 scaling formula.`);

@@ -1,7 +1,7 @@
-import { ItemDeletionDialog } from "./item-deletion-dialog.js";
 import { ItemSFRPG } from "../item/item.js";
 import { ItemSheetSFRPG } from "../item/sheet.js";
 import { RPC } from "../rpc.js";
+import { ItemDeletionDialog } from "./item-deletion-dialog.js";
 
 export class ItemCollectionSheet extends DocumentSheet {
     constructor(itemCollection) {
@@ -64,7 +64,7 @@ export class ItemCollectionSheet extends DocumentSheet {
     activateListeners(html) {
         super.activateListeners(html);
 
-        html.find('.item .item-name h4').click(event => this._onItemSummary(event));
+        html.find('.item .item-name h4').click(async event => this._onItemSummary(event));
 
         if (game.user.isGM) {
             html.find('img[data-edit]').click(ev => this._onEditImage(ev));
@@ -197,18 +197,19 @@ export class ItemCollectionSheet extends DocumentSheet {
      *
      * @param {Event} event The html event
      */
-    _onItemSummary(event) {
+    async _onItemSummary(event) {
         event.preventDefault();
         let li = $(event.currentTarget).parents('.item');
         let itemId = li.attr("data-item-id");
         const item = this.itemCollection.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
-        let chatData = this.getChatData(item, { secrets: true, rollData: item.system });
+        let chatData = await this.getChatData(item, { secrets: true, rollData: item });
 
         if (li.hasClass('expanded')) {
             let summary = li.children('.item-summary');
             summary.slideUp(200, () => summary.remove());
         } else {
             let div = $(`<div class="item-summary">${chatData.system.description.value}</div>`);
+            Hooks.callAll("renderItemSummary", this, div, {}); // Event listeners need to be added to newly added HTML.
             let props = $(`<div class="item-properties"></div>`);
             chatData.properties.forEach(p => props.append(`<span class="tag" ${ p.tooltip ? ("data-tippy-content='" + p.tooltip + "'") : ""}>${p.name}</span>`));
 
@@ -289,15 +290,16 @@ export class ItemCollectionSheet extends DocumentSheet {
         return this.itemCollection.flags.sfrpg.itemCollection.items;
     }
 
-    getChatData(itemData, htmlOptions) {
+    async getChatData(itemData, htmlOptions) {
         console.log(itemData);
         const data = duplicate(itemData);
         const labels = itemData.labels || {};
 
-        if (htmlOptions.async === undefined) htmlOptions.async = false;
+        htmlOptions.async = true;
+        htmlOptions.rollData ||= (this.actor.getRollData() ?? {});
 
         // Rich text description
-        data.system.description.value = TextEditor.enrichHTML(data.system.description.value, htmlOptions);
+        data.system.description.value = await TextEditor.enrichHTML(data.system.description.value, htmlOptions);
 
         // Item type specific properties
         const props = [];

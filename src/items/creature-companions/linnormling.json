@@ -264,11 +264,6 @@
       "_id": "FTDQ7caOAQoT2E45",
       "name": "Creature Companion - Linnormling",
       "type": "feat",
-      "flags": {
-        "core": {
-          "sourceId": "Actor.8uktygKWLPHniSM4.Item.lDyqMXhSzt7ruwZZ"
-        }
-      },
       "img": "icons/creatures/mammals/wolf-shadow-black.webp",
       "system": {
         "type": "",
@@ -304,7 +299,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>@UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.gTHswZ0FBafS7ru0]{Creature Companion}</p>\n<p>Despite their size, linnormlings claim to be descendants of the @UUID[Compendium.sfrpg.setting.Lm8elOSprkFWgnZy]{Eldest} Ragadahn. They’re willful creatures yet offer their expertise with curses to anyone offering them proper tribute.</p><h2>Linnormling</h2><h4>Levels 1-20</h4><p>Tiny fey (aquatic)</p>\n<p><strong>Senses</strong> darkvision 60 ft.; low-light vision</p>\n<p><strong>Good Save</strong> Will;<strong>Poor Saves</strong> Fort, Ref</p>\n<p><strong>Speed</strong> fly 30 ft. (Su, perfect); swim 30 ft.</p>\n<p><strong>Melee Attack</strong> bite (P)</p>\n<p><strong>Space</strong> 2-1/2 ft.;<strong>Reach</strong> 0 ft.</p>\n<p><strong>Ability Modifiers</strong> Dex, Cha</p><h3>Special Abilities</h3><p><strong>Spiteful Curse (Su; 10th level)</strong> When the linnormling takes damage from a creature’s spell or attack, they cast bestow curse on that creature as a reaction with a range of 30 feet without having to touch the target (Will negates). The curse lasts until the end of that creature’s next turn. If the spell or attack reduced the linnormling to 0 Hit Points, the curse instead lasts a number of rounds equal to the linnormling’s Charisma modifier. Once they use this ability, they can’t do so again for 1d4 rounds.</p>\n<p><strong>Zap (Ex)</strong> A linnormling has a ranged attack that deals electricity damage and has a range of 60 feet.</p>\n<p><em>HP Max must be manually adjusted. HP value can be found on the @UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.FqsTa05DBVMfsvxy#creature-companion-statistics]{Creature Companion Statistics Table}</em></p>"
+          "value": "<p>@UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.gTHswZ0FBafS7ru0]{Creature Companion}</p>\n<p>Despite their size, linnormlings claim to be descendants of the @UUID[Compendium.sfrpg.setting.Lm8elOSprkFWgnZy]{Eldest} Ragadahn. They’re willful creatures yet offer their expertise with curses to anyone offering them proper tribute.</p><h2>Linnormling</h2><h4>Levels 6-20</h4><p>Tiny fey (aquatic)</p>\n<p><strong>Senses</strong> darkvision 60 ft.; low-light vision</p>\n<p><strong>Good Save</strong> Will;<strong>Poor Saves</strong> Fort, Ref</p>\n<p><strong>Speed</strong> fly 30 ft. (Su, perfect); swim 30 ft.</p>\n<p><strong>Melee Attack</strong> bite (P)</p>\n<p><strong>Space</strong> 2-1/2 ft.;<strong>Reach</strong> 0 ft.</p>\n<p><strong>Ability Modifiers</strong> Dex, Cha</p><h3>Special Abilities</h3><p><strong>Spiteful Curse (Su; 10th level)</strong> When the linnormling takes damage from a creature’s spell or attack, they cast <em>@UUID[Compendium.sfrpg.spells.Jrx0dGgxtVkLcZd1]{Bestow Curse}</em> on that creature as a reaction with a range of 30 feet without having to touch the target (Will negates DC = 10 + half the linnormling’s level + the linnormling’s Charisma modifier).</p>\n<p><strong>Zap (Ex)</strong> A linnormling has a ranged attack that deals electricity damage and has a range of 60 feet.</p>\n<p><em>HP Max must be manually adjusted. HP value can be found on the @UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.FqsTa05DBVMfsvxy#creature-companion-statistics]{Creature Companion Statistics Table}</em></p>"
         },
         "descriptors": {
           "acid": false,
@@ -578,22 +573,22 @@
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
-        "ability": null,
+        "ability": "",
         "abilityMods": {
           "parts": []
         },
         "actionTarget": "",
-        "actionType": "",
+        "actionType": "save",
         "activation": {
-          "type": "",
+          "type": "reaction",
           "condition": "",
-          "cost": 0
+          "cost": 1
         },
         "area": {
           "effect": "",
           "shape": "",
-          "units": "",
-          "value": 0
+          "units": "none",
+          "value": null
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -610,7 +605,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>When the linnormling takes damage from a creature’s spell or attack, they cast bestow curse on that creature as a reaction with a range of 30 feet without having to touch the target (Will negates). The curse lasts until the end of that creature’s next turn. If the spell or attack reduced the linnormling to 0 Hit Points, the curse instead lasts a number of rounds equal to the linnormling’s Charisma modifier. Once they use this ability, they can’t do so again for 1d4 rounds.</p>"
+          "value": "<p>When the linnormling takes damage from a creature’s spell or attack, they cast <em>@UUID[Compendium.sfrpg.spells.Jrx0dGgxtVkLcZd1]{Bestow Curse}</em> on that creature as a reaction with a range of 30 feet without having to touch the target (Will negates DC = 10 + half the linnormling’s level + the linnormling’s Charisma modifier).</p>"
         },
         "descriptors": {
           "acid": false,
@@ -652,7 +647,7 @@
         },
         "duration": {
           "units": "",
-          "value": null
+          "value": ""
         },
         "formula": "",
         "isActive": null,
@@ -660,7 +655,7 @@
         "range": {
           "additional": "",
           "per": "",
-          "units": "",
+          "units": "none",
           "value": null
         },
         "recharge": {
@@ -670,18 +665,18 @@
         "requirements": "",
         "rollNotes": "",
         "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
+          "type": "will",
+          "dc": "10+floor(@details.cr)+@abilities.cha.mod",
+          "descriptor": "negate"
         },
         "source": "",
         "target": {
           "type": "",
-          "value": null
+          "value": ""
         },
         "uses": {
           "max": 0,
-          "per": null,
+          "per": "",
           "value": 0
         }
       }
@@ -826,7 +821,7 @@
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": "attributes.rp"
     },
     "detectionModes": [],
     "displayBars": 20,
@@ -987,6 +982,12 @@
         "tooltip": [],
         "value": 0
       },
+      "rp": {
+        "max": 10,
+        "min": 0,
+        "tooltip": [],
+        "value": 0
+      },
       "sp": {
         "max": 10,
         "min": 0,
@@ -1109,7 +1110,7 @@
         "weight": ""
       },
       "class": "",
-      "cr": 1,
+      "cr": 6,
       "environment": "",
       "organization": "",
       "organizationSize": {

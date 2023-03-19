@@ -1,22 +1,22 @@
-@import './variables.less';
+@import "./variables.less";
 
 .sfrpg.sheet.actor.vehicle {
     min-width: 600px;
-    min-height: 685px;
+    // min-height: 685px;
 
     /* ----------------------------------------- */
     /*  Sheet Header                             */
     /* ----------------------------------------- */
-  
+
     .sheet-header {
-      .charlevel {
-        flex: 0 0 180px;
-        padding: 0 5px 2px;
-  
-        .level {
-          height: 28px;
+        .charlevel {
+            flex: 0 0 180px;
+            padding: 0 5px 2px;
+
+            .level {
+                height: 28px;
+            }
         }
-      }
     }
 
     .summary li {
@@ -29,11 +29,11 @@
     .form-group {
         padding: 0 5px;
 
-        .form-fields input[type="text"], 
+        .form-fields input[type="text"],
         .form-fields select {
             border: 1px solid @colorTan;
             background: rgba(0, 0, 0, 0.05);
-          }
+        }
     }
 
     .traits {
@@ -58,30 +58,32 @@
     }
 
     .passenger-action {
-      flex: 0 0 25%;
+        flex: 0 0 25%;
 
-      .passengerPilotingSkill {
-          width: auto;
-          background: @sfrpgBlue;
-          color: #fff;
-          cursor: pointer;
+        .passengerPilotingSkill {
+            width: auto;
+            background: @sfrpgBlue;
+            color: #fff;
+            cursor: pointer;
 
-          &:hover, &:focus{
-              box-shadow: 0 0 5px @sfrpgBlue;
-          }
-      }
-
-      .pilotPilotingSkill {
-        width: auto;
-        display: block;
-        background: url("../../icons/svg/d20-grey.svg") no-repeat 50% 50%;
-        background-size: 16px;
-        margin: 0 0.5em;
-
-        &:hover, &:focus{
-          background-image: url("../../icons/svg/d20-black.svg")
+            &:hover,
+            &:focus {
+                box-shadow: 0 0 5px @sfrpgBlue;
+            }
         }
-      }
+
+        .pilotPilotingSkill {
+            width: auto;
+            display: block;
+            background: url("../../icons/svg/d20-grey.svg") no-repeat 50% 50%;
+            background-size: 16px;
+            margin: 0 0.5em;
+
+            &:hover,
+            &:focus {
+                background-image: url("../../icons/svg/d20-black.svg");
+            }
+        }
     }
 
     .vehicle-system-action {
@@ -93,10 +95,10 @@
             color: #fff;
             cursor: pointer;
 
-            &:hover, &:focus{
+            &:hover,
+            &:focus {
                 box-shadow: 0 0 5px @sfrpgBlue;
             }
         }
     }
-
 }

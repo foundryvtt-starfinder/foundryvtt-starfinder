@@ -1,7 +1,6 @@
 /**
  * DocumentBrowserSFRPG forked from ItemBrowserPF2e by Felix Miller aka syl3r86
  */
-import { ItemSFRPG } from '../item/item.js';
 import { packLoader } from './pack-loader.js';
 
 export class DocumentBrowserSFRPG extends Application {
@@ -415,6 +414,62 @@ export class DocumentBrowserSFRPG extends Application {
 
             this.filterItems(html.find('li'));
         }
+    }
+
+    /**
+     * @param {filterObjectEquipment|
+     *         filterObjectSpell    |
+     *         filterObjectAlien    |
+     *         filterObjectStarship} filterObject An object containing valid filters for one of the browser types.
+     */
+    async renderWithFilters(filterObject = {}) {
+
+        if (!this._element) {
+            this.render(true);
+        }
+
+        await this._waitForElem(`#app-${this.appId}`);
+        const html = this.element;
+        this.resetFilters(html);
+
+        if (filterObject.search !== undefined && filterObject.search !== null) {
+            this.sorters.text = String(filterObject.search).trim();
+            html.find("input[name='textFilter']").val(this.sorters.text);
+            delete filterObject.search;
+            this.onFiltersUpdated(html);
+        }
+
+        for (const [filterKey, currentFilter] of Object.entries(filterObject)) {
+            let browserFilter = this.filters[filterKey];
+            if (!browserFilter) {
+                return ui.notifications.error("Invalid filter.");
+            }
+
+            browserFilter.activeFilters = currentFilter instanceof Array ? currentFilter : [currentFilter];
+            this.refreshFilters = true;
+            this.onFiltersUpdated(html);
+        }
+
+    }
+
+    _waitForElem(selector) {
+        return new Promise(resolve => {
+            if (document.querySelector(selector)) {
+                return resolve(document.querySelector(selector));
+            }
+
+            const observer = new MutationObserver(mutations => {
+                if (document.querySelector(selector)) {
+                    resolve(document.querySelector(selector));
+                    observer.disconnect();
+                }
+            });
+
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+        });
     }
 
     generateFilterHTML(filterKey, filter) {

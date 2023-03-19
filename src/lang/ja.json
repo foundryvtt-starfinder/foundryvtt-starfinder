@@ -113,6 +113,7 @@
         "ActionRSAK": "遠隔呪文攻撃",
         "ActionRWAK": "遠隔武器攻撃",
         "ActionSave": "セーヴィング･スロー",
+        "ActionSkill": "Skill Check",
         "ActionUtil": "ユーティリティ",
         "ActorSheet": {
             "Attributes": {
@@ -269,6 +270,7 @@
                     "Delete": "アイテム削除",
                     "Edit": "アイテム編集",
                     "Equip": "装備アイテム",
+                    "LevelUp": "Level up",
                     "Unequip": "未装備アイテム"
                 },
                 "ItemValue": {
@@ -395,6 +397,7 @@
         "AugBrain": "脳",
         "AugBrainAndEyes": "Brain and Eyes",
         "AugBrainHeartLungs": "Brain, Heart, Lungs",
+        "AugBrainThroat": "Brain and Throat",
         "AugEars": "耳",
         "AugEarsAndThroat": "Ears and Throat",
         "AugEndocrine": "Endocrine",
@@ -507,12 +510,19 @@
         },
         "ChatCard": {
             "ContextMenu": {
+                "Accept": "Accept",
                 "ApplyDamage": "Apply Damage",
                 "ApplyHealing": "Apply Healing",
                 "DamageAndAHalf": "1.5x Damage",
                 "DoubleDamage": "Double Damage",
                 "HalfDamage": "Half Damage",
+                "ModifyDamage": "Modify Damage",
+                "ModifyDamageText": "Input an number to modify the damage amount by. This is applied after any multiplication.",
+                "NoDamageModifier": "No damage modifier applied.",
                 "NoToken": "Cannot apply: No token selected!"
+            },
+            "ItemAction": {
+                "Check": "Check"
             },
             "ItemActivation": {
                 "Activates": "Activates",
@@ -899,6 +909,19 @@
             }
         },
         "EnergyArmorClass": "ｴﾈﾙｷﾞｰAC",
+        "EnergyArmorClassShort": "EAC",
+        "Enrichers": {
+            "Icon": {
+                "Types": {
+                    "Graviton": "Graviton",
+                    "LanguageDependent": "Language Dependent",
+                    "MindAffecting": "Mind Affecting",
+                    "Photon": "Photon",
+                    "SenseDependent": "Sense Dependent"
+                }
+            },
+            "TypeError": "{enricherType} parsing failed! Type is invalid."
+        },
         "Environment": "Environment",
         "FeatTypes": {
             "Combat": "Combat Feats",
@@ -1032,6 +1055,7 @@
         "InventoryCapacity": "容量",
         "InventoryCurrency": "通貨",
         "InventoryEquipped": "装備済",
+        "InventoryNotEquipped": "Not Equipped",
         "InventoryUsage": "使用量",
         "IronWillHint": "意志セーヴィング･スロー +2",
         "IronWillLabel": "鋼の意志 (Iron Will)",
@@ -1353,6 +1377,7 @@
                 "RollNotes": "Roll Notes",
                 "RollNotesTooltip": "The roll notes are displayed on the action roll chat card. This is a great way to put helpful reminders, especially for GMs with complicated NPCs.",
                 "SavingThrow": "Saving Throw",
+                "SkillCheck": "Skill Check",
                 "TitleAction": "Action",
                 "TitleActivation": "Activation"
             },
@@ -1609,6 +1634,7 @@
         },
         "KeyAbility": "主要能力値",
         "KineticArmorClass": "ｷﾈﾃｨｯｸAC",
+        "KineticArmorClassShort": "KAC",
         "Languages": "言語",
         "LanguagesAbyssal": "奈落語",
         "LanguagesAkitonian": "アキトン語",
@@ -1829,6 +1855,7 @@
         "NpcToggleSkillsDialogTitle": "NPC技能切替",
         "NumberOfArms": "腕の数",
         "Organization": "Organization",
+        "Passive": "Passive",
         "Personal": "自身",
         "PersonalUpgrade": "ﾊﾟｰｿﾅﾙ･ｱｯﾌﾟｸﾞﾚｰﾄﾞ",
         "Plane": "同一次元",
@@ -1911,6 +1938,7 @@
                 "RollModeTooltip": "Roll Mode determines who can see this roll.",
                 "Selector": "Select '{name}'",
                 "SelectorTooltip": "Dynamic actor selection for the '{name}' formula context.",
+                "SimplifiedFormulaTooltip": "<p>The formula displayed on the dialog has been calculated from the following formula:</p><p>{formula}</p>",
                 "SituationalBonus": "Situational bonus",
                 "SituationalBonusTooltip": "Are there any additional bonuses that apply to this roll? (For example, range increments)"
             },
@@ -2314,6 +2342,10 @@
         "SkillTooltipThemeMod": "テーマ修正値: {mod}",
         "SkillTooltipTrainedClassSkill": "訓練済技能クラス修正値: {mod}",
         "SkillTrainedOnly": "訓練時のみ判定可",
+        "SkillTrainedOnlyDialog": {
+            "Content": "{skill} is a trained only skill, but {name} is not trained in that skill. Would you like to roll anyway?",
+            "Title": "{skill} is trained only"
+        },
         "SkillsHeaderAbility": "能力値",
         "SkillsHeaderModifier": "修正",
         "SkillsHeaderName": "名前",
@@ -2340,6 +2372,7 @@
             "Voidglass": "Voidglass"
         },
         "SpecialTraits": "例外的特性",
+        "SpeciesGraft": "Species Graft",
         "Speed": "移動速度",
         "SpeedSpecial": "特殊移動",
         "SpellAreaEffects": {
@@ -2957,7 +2990,7 @@
         "WeaponPropertiesTeleportive": "転移 [Teleportive]",
         "WeaponPropertiesTeleportiveTooltip": "This weapon’s fired ammunition teleports a short distance after being fired. You take only a –1 cumulative penalty when attacking outside the range of this weapon.",
         "WeaponPropertiesThought": "思念 [Thought]",
-        "WeaponPropertiesThoughtTooltip": "A thought weapon can be fully or partially controlled via telepathy. If you have the telepathy or limited telepathy racial trait, are benefiting from a telepathy spell, are wearing a mindlink circlet, or have a similar ability, you ignore the weapon’s unwieldy weapon special property.",
+        "WeaponPropertiesThoughtTooltip": "A thought weapon can be fully or partially controlled via telepathy. If you have the telepathy or limited telepathy species trait, are benefiting from a telepathy spell, are wearing a mindlink circlet, or have a similar ability, you ignore the weapon’s unwieldy weapon special property.",
         "WeaponPropertiesThrottle": "絞首 [Throttle]",
         "WeaponPropertiesThrottleTooltip": "A throttle weapon deals damage only when it is used to grapple a foe, automatically dealing damage with every successful grapple combat maneuver. These are considered attacks for abilities that can increase a weapon’s damage (such as trick attack). All throttle weapons are also grapple weapons. While a target is successfully being grappled with a throttle weapon, it cannot use its airways to speak or make vocalizations of any kind (though other forms of making noise work normally).",
         "WeaponPropertiesThrown": "投擲 [Thw]",
