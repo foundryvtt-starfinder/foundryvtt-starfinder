@@ -263,7 +263,7 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         // Item button dragging
         let itemUsageHandler = ev => this._onItemUsageDragStart(ev);
-        html.find('button:is(.featActivate, .featDeactivate, .damage, .healing, .attack)').each((i, li) => {
+        html.find('button:is(.featActivate, .featDeactivate, .damage, .healing, .attack, .use)').each((i, li) => {
             li.setAttribute("draggable", true);
             li.addEventListener("dragstart", itemUsageHandler, false);
         });

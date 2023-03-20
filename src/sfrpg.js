@@ -570,8 +570,9 @@ function rollItemMacro(itemName, macroType) {
             return item.rollDamage();
         case "activate":
             return item.setActive(!item.isActive());
+        case "use":
+            return item.rollConsumable();
         default:
-            if (item.type === 'spell') return actor.useSpell(item);
             return item.roll();
     }
 
