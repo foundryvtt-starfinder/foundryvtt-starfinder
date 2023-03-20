@@ -484,6 +484,7 @@ Hooks.on("getChatLogEntryContext", addChatMessageContextOptions);
 Hooks.on("renderChatLog", (app, html, data) => ItemSFRPG.chatListeners(html));
 
 Hooks.on("hotbarDrop", (bar, data, slot) => {
+    console.log(data);
     if (data.type !== "Item") return;
     createItemMacro(data, slot);
     return false;
@@ -533,11 +534,16 @@ function registerMathFunctions() {
  */
 async function createItemMacro(data, slot) {
     const item = await Item.fromDropData(data);
-    const command = `game.sfrpg.rollItemMacro("${item.name}");`;
+    if (!item) return;
+
+    let macroType = data?.macroType || "chatCard";
+    if (macroType.includes("feat")) macroType = "activate";
+
+    const command = `game.sfrpg.rollItemMacro("${item.name}", "${macroType}");`;
     let macro = game.macros.contents.find(m => (m.name === item.name) && (m.command === command));
     if (!macro) {
         macro = await Macro.create({
-            name: item.name,
+            name: item.name + (macroType !== "chatCard" ? ` (${game.i18n.localize(`SFRPG.ItemMacro.${macroType.capitalize()}`)})` : ""),
             type: "script",
             img: item.img,
             command: command,
@@ -548,7 +554,7 @@ async function createItemMacro(data, slot) {
     game.user.assignHotbarMacro(macro, slot);
 }
 
-function rollItemMacro(itemName) {
+function rollItemMacro(itemName, macroType) {
     const speaker = ChatMessage.getSpeaker();
     let actor;
 
@@ -557,8 +563,19 @@ function rollItemMacro(itemName) {
     const item = actor ? actor.items.find(i => i.name === itemName) : null;
     if (!item) return ui.notifications.warn(`Your controlled Actor does not have an item named ${itemName}`);
 
-    if (item.type === 'spell') return actor.useSpell(item);
-    return item.roll();
+    switch (macroType) {
+        case "attack":
+            return item.rollAttack();
+        case "damage":
+        case "healing":
+            return item.rollDamage();
+        case "activate":
+            return item.setActive(!item.isActive());
+        default:
+            if (item.type === 'spell') return actor.useSpell(item);
+            return item.roll();
+    }
+
 }
 
 function setupHandlebars() {
