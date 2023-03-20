@@ -484,7 +484,6 @@ Hooks.on("getChatLogEntryContext", addChatMessageContextOptions);
 Hooks.on("renderChatLog", (app, html, data) => ItemSFRPG.chatListeners(html));
 
 Hooks.on("hotbarDrop", (bar, data, slot) => {
-    console.log(data);
     if (data.type !== "Item") return;
     createItemMacro(data, slot);
     return false;
