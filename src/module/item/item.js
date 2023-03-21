@@ -370,13 +370,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Ability activation properties
         if (data.hasOwnProperty("activation")) {
-            props.push(
-                {name: labels.target, tooltip: null },
-                {name: labels.area, tooltip: null },
-                {name: labels.activation, tooltip: null },
-                {name: labels.range, tooltip: null },
-                {name: labels.duration, tooltip: null }
-            );
+            if ("target"     in data.activation) props.push({name: labels.target, tooltip: null });
+            if ("area"       in data.activation) props.push({name: labels.area, tooltip: null });
+            if ("activation" in data.activation) props.push({name: labels.activation, tooltip: null });
+            if ("range"      in data.activation) props.push({name: labels.range, tooltip: null });
+            if ("duration"   in data.activation) props.push({name: labels.duration, tooltip: null });
         }
 
         if (data.hasOwnProperty("capacity")) {
@@ -1330,18 +1328,18 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      */
     async rollConsumable(options = {}) {
         const itemData = this.system;
+        const overrideUsage = !!options?.event?.shiftKey;
 
-        if (itemData.uses.value === 0 && itemData.quantity === 0) {
+        if (itemData.uses.value === 0 && itemData.quantity === 0 && !overrideUsage) {
             ui.notifications.error(game.i18n.format("SFRPG.Items.Consumable.ErrorNoUses", {name: this.name}));
             return;
         }
 
         if (itemData.actionType && itemData.actionType !== "save") {
-            options = options || {};
             options.flavorOverride = game.i18n.format("SFRPG.Items.Consumable.UseChatMessage", {consumableName: this.name});
 
             const result = await this.rollDamage({}, options);
-            if (!result[0]) {
+            if (!result.callbackResult) {
                 // Roll was cancelled, don't consume.
                 return;
             }
@@ -1392,7 +1390,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         }
 
         // Deduct consumed charges from the item
-        if (itemData.uses.autoUse) {
+        if (itemData.uses.autoUse && !overrideUsage) {
             let quantity = itemData.quantity;
             const remainingUses = this.getRemainingUses();
 

@@ -252,6 +252,13 @@ export class ActorSheetSFRPG extends ActorSheet {
             li.addEventListener("dragstart", handler, false);
         });
 
+        // Item button dragging
+        let itemUsageHandler = ev => this._onItemUsageDragStart(ev);
+        html.find('button:is(.featActivate, .featDeactivate, .damage, .healing, .attack, .use)').each((i, li) => {
+            li.setAttribute("draggable", true);
+            li.addEventListener("dragstart", itemUsageHandler, false);
+        });
+
         // Item Rolling
         html.find('.item .item-image').click(event => this._onItemRoll(event));
 
@@ -1220,6 +1227,21 @@ export class ActorSheetSFRPG extends ActorSheet {
         }
 
         console.log("Unknown item source: " + JSON.stringify(parsedDragData));
+    }
+
+    /**
+     * Allow item action buttons to be draggable, for the use of creating item macros
+     * @param {Event} ev
+     */
+    _onItemUsageDragStart(ev) {
+        ev.stopPropagation();
+        const el = ev.currentTarget;
+        const item = this.actor.items.get(el.closest("li.item").dataset.itemId);
+        let dragData = item.toDragData();
+        dragData.macroType = Array.from(el.classList)[1];
+
+        // Set data transfer
+        ev.dataTransfer.setData("text/plain", JSON.stringify(dragData));
     }
 
     processItemContainment(items, pushItemFn) {
