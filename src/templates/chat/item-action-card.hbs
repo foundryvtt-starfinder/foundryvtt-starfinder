@@ -19,6 +19,7 @@
         {{#if hasAttack}}<button type="button" data-action="attack">{{ localize "SFRPG.Attack" }}</button>{{/if}}
         {{#if hasDamage}}<button type="button" data-action="damage">{{ localize "SFRPG.Damage.Title" }}</button>{{/if}}
         {{#if hasSave}}<button type="button" data-action="save" data-type="{{item.system.save.type}}">{{ localize "SFRPG.Save" }} {{labels.save}}</button>{{/if}}
+        {{#if hasSkill}}<button type="button" class="chat-button-skill" data-action="skill" data-type="{{item.system.skillCheck.type}}">{{item.labels.skillCheck}}</button>{{/if}}
     </div>
 
     <footer class="card-footer">

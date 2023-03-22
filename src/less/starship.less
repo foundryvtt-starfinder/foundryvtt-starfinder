@@ -1,8 +1,8 @@
-@import './variables.less';
+@import "./variables.less";
 
 .sfrpg.sheet.actor.starship {
     min-width: 700px;
-  //min-height: 830px;
+    //min-height: 830px;
 
     img.profile {
         flex: 0 0 180px;
@@ -21,7 +21,7 @@
         .form-fields select {
             border: 1px solid @colorTan;
             background: rgba(0, 0, 0, 0.05);
-          }
+        }
     }
 
     .traits {
@@ -51,8 +51,9 @@
             border-bottom: @borderGroove;
 
             .no-frame {
-                color: #E00;
-                text-shadow: -1px -1px 0 #A66, 1px -1px 0 #A66, -1px 1px 0 #A66, 1px 1px 0 #A66;
+                color: #e00;
+                text-shadow: -1px -1px 0 #a66, 1px -1px 0 #a66, -1px 1px 0 #a66,
+                    1px 1px 0 #a66;
             }
         }
 
@@ -153,18 +154,18 @@
     }
 
     .item-controls {
-      flex: 0 0 66px;
+        flex: 0 0 66px;
     }
 
     .crew-controls {
-      flex: 0 0 80px;
+        flex: 0 0 80px;
     }
 
     .crew-settings {
         margin: 0 8px;
         flex: 0 0 20px;
-        h3, .filter-title {
-            // .nodesto();
+        h3,
+        .filter-title {
             .exo2();
             color: @colorOlive;
             font-size: 18px;
@@ -200,7 +201,9 @@
             line-height: 45px;
             padding: 0 2px; // to align with the header border
             border-bottom: 1px solid @colorBeige;
-            &:last-child { border-bottom: none; }
+            &:last-child {
+                border-bottom: none;
+            }
 
             &.small {
                 line-height: 25px;
@@ -208,7 +211,13 @@
 
             &.container {
                 // This is the @blueGradientBackground color from variables.less, but with transparency
-                background: linear-gradient(130deg, rgba(12,45,74,0.1) 0%, rgba(35,86,131,0.1) 40%, rgba(35,86,131,0.1) 60%, rgba(29,125,209,0.1) 100%);
+                background: linear-gradient(
+                    130deg,
+                    rgba(12, 45, 74, 0.1) 0%,
+                    rgba(35, 86, 131, 0.1) 40%,
+                    rgba(35, 86, 131, 0.1) 60%,
+                    rgba(29, 125, 209, 0.1) 100%
+                );
             }
 
             // Item Header Name
@@ -227,9 +236,9 @@
                     margin-right: 5px;
 
                     &.small {
-                    flex: 0 0 25px;
-                    background-size: 25px;
-                    margin-right: 2px;
+                        flex: 0 0 25px;
+                        background-size: 25px;
+                        margin-right: 2px;
                     }
                 }
 
@@ -254,7 +263,7 @@
                 padding-top: 7px;
                 padding-bottom: 7px;
                 border-top: 1px solid #c9c7b8;
-                }
+            }
 
             .action-phase {
                 flex: 2;

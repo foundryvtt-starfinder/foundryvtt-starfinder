@@ -6,33 +6,16 @@
  * Repository: https://github.com/wildj79/foundryvtt-starfinder
  * Issue Tracker: https://github.com/wildj79/foundryvtt-starfinder/issues
  */
-import { SFRPG } from "./module/config.js";
-import { preloadHandlebarsTemplates } from "./module/templates.js";
-import { registerSystemSettings } from "./module/settings.js";
-import { measureDistances, canvasHandlerV10 } from "./module/canvas.js";
+import { ActorItemHelper, initializeRemoteInventory } from "./module/actor/actor-inventory-utils.js";
 import { ActorSFRPG } from "./module/actor/actor.js";
-import { initializeRemoteInventory, ActorItemHelper } from "./module/actor/actor-inventory-utils.js";
+import { SFRPGDamage, SFRPGHealingSetting } from "./module/actor/mixins/actor-damage.js";
+import { ActorSheetSFRPG } from "./module/actor/sheet/base.js";
 import { ActorSheetSFRPGCharacter } from "./module/actor/sheet/character.js";
 import { ActorSheetSFRPGDrone } from "./module/actor/sheet/drone.js";
 import { ActorSheetSFRPGHazard } from "./module/actor/sheet/hazard.js";
 import { ActorSheetSFRPGNPC } from "./module/actor/sheet/npc.js";
 import { ActorSheetSFRPGStarship } from "./module/actor/sheet/starship.js";
 import { ActorSheetSFRPGVehicle } from "./module/actor/sheet/vehicle.js";
-import { ActorSheetSFRPG } from "./module/actor/sheet/base.js";
-import { ItemSFRPG } from "./module/item/item.js";
-import { CombatSFRPG } from "./module/combat/combat.js";
-import { ItemSheetSFRPG } from "./module/item/sheet.js";
-import { addChatMessageContextOptions } from "./module/combat.js";
-import Engine from "./module/engine/engine.js";
-import registerSystemRules from "./module/rules.js";
-import { SFRPGModifierTypes, SFRPGModifierType, SFRPGEffectType } from "./module/modifiers/types.js";
-import SFRPGModifier from "./module/modifiers/modifier.js";
-import { generateUUID } from "./module/utilities.js";
-import migrateWorld from './module/migration.js';
-import CounterManagement from "./module/classes/counter-management.js";
-import templateOverrides from "./module/template-overrides.js";
-import { RPC } from "./module/rpc.js";
-import { DiceSFRPG } from './module/dice.js';
 import { ActorSheetFlags } from './module/apps/actor-flags.js';
 import { ChoiceDialog } from './module/apps/choice-dialog.js';
 import { DroneRepairDialog } from './module/apps/drone-repair-dialog.js';
@@ -46,18 +29,44 @@ import { NpcSkillToggleDialog } from './module/apps/npc-skill-toggle-dialog.js';
 import { ShortRestDialog } from './module/apps/short-rest.js';
 import { SpellCastDialog } from './module/apps/spell-cast-dialog.js';
 import { TraitSelectorSFRPG } from './module/apps/trait-selector.js';
-import { SFRPGHealingSetting, SFRPGDamage } from "./module/actor/mixins/actor-damage.js";
+import { canvasHandlerV10, measureDistances } from "./module/canvas.js";
+import CounterManagement from "./module/classes/counter-management.js";
+import { addChatMessageContextOptions } from "./module/combat.js";
+import { CombatSFRPG } from "./module/combat/combat.js";
+import { SFRPG } from "./module/config.js";
+import { DiceSFRPG } from './module/dice.js';
+import Engine from "./module/engine/engine.js";
+import { ItemSFRPG } from "./module/item/item.js";
+import { ItemSheetSFRPG } from "./module/item/sheet.js";
+import migrateWorld from './module/migration.js';
+import SFRPGModifier from "./module/modifiers/modifier.js";
+import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./module/modifiers/types.js";
+import { RPC } from "./module/rpc.js";
+import registerSystemRules from "./module/rules.js";
+import { registerSystemSettings } from "./module/system/settings.js";
+import templateOverrides from "./module/template-overrides.js";
+import { preloadHandlebarsTemplates } from "./module/templates.js";
+import { generateUUID } from "./module/utils/utilities.js";
 
+import BrowserEnricher from "./module/system/enrichers/browser.js";
+import CheckEnricher from "./module/system/enrichers/check.js";
+import IconEnricher from "./module/system/enrichers/icon.js";
+
+import RollDialog from "./module/apps/roll-dialog.js";
 import { initializeBrowsers } from "./module/packs/browsers.js";
 import SFRPGRoll from "./module/rolls/roll.js";
-import SFRPGTokenDocument from "./module/token/tokendocument.js";
-import RollDialog from "./module/apps/roll-dialog.js";
-import RollNode from "./module/rolls/rollnode.js";
 import RollContext from "./module/rolls/rollcontext.js";
+import RollNode from "./module/rolls/rollnode.js";
 import RollTree from "./module/rolls/rolltree.js";
+import registerCompendiumArt from "./module/system/compendium-art.js";
 import { SFRPGTokenHUD } from "./module/token/token-hud.js";
+import SFRPGTokenDocument from "./module/token/tokendocument.js";
 import setupVision from "./module/vision.js";
-import registerCompendiumArt from "./module/utils/compendium-art.js";
+
+import { getAlienArchiveBrowser } from "./module/packs/alien-archive-browser.js";
+import { getEquipmentBrowser } from "./module/packs/equipment-browser.js";
+import { getSpellBrowser } from "./module/packs/spell-browser.js";
+import { getStarshipBrowser } from "./module/packs/starship-browser.js";
 
 let initTime = null;
 
@@ -116,6 +125,11 @@ Hooks.once('init', async function() {
         engine,
         entities: { ActorSFRPG, ItemSFRPG },
         generateUUID,
+        // Document browsers
+        getSpellBrowser,
+        getEquipmentBrowser,
+        getAlienArchiveBrowser,
+        getStarshipBrowser,
         migrateWorld,
         rollItemMacro,
         rolls: {
@@ -168,8 +182,15 @@ Hooks.once('init', async function() {
     CONFIG.fontDefinitions["Exo2"] = {
         editor: true,
         fonts: [
-            {urls: ["../systems/sfrpg/fonts/Exo2-VariableFont_wght.ttf"]},
-            {urls: ["../systems/sfrpg/fonts/Exo2-Italic-VariableFont_wght.ttf"], weight: 700}
+            {urls: ["../systems/sfrpg/fonts/exo2-variablefont_wght.woff2"]},
+            {urls: ["../systems/sfrpg/fonts/exo2-italic-variablefont_wght.woff2"], weight: 700}
+        ]
+    };
+
+    CONFIG.fontDefinitions["Orbitron"] = {
+        editor: true,
+        fonts: [
+            {urls: ["../systems/sfrpg/fonts/orbitron-variablefont_wght.woff2"]}
         ]
     };
 
@@ -346,6 +367,9 @@ Hooks.once("setup", function() {
     console.log("Starfinder | [SETUP] Registering custom handlebars");
     setupHandlebars();
 
+    console.log("Starfinder | [SETUP] Setting up custom enrichers");
+    CONFIG.TextEditor.enrichers.push(new BrowserEnricher(), new IconEnricher(), new CheckEnricher());
+
     const finishTime = (new Date()).getTime();
     console.log(`Starfinder | [SETUP] Done (operation took ${finishTime - setupTime} ms)`);
 });
@@ -404,15 +428,19 @@ Hooks.once("ready", async () => {
         }
     }
 
+    // If Item Piles is enabled, defer to creating its loot tokens instead of system ones.
+    if (!(game.modules.get("item-piles")?.active)) {
+        Hooks.on("dropCanvasData", (canvas, data) => canvasHandlerV10(canvas, data));
+    } else {
+        console.log("Starfinder | [READY] Item Piles detected, deferring to its loot token implementation.");
+    }
+
     const finishTime = (new Date()).getTime();
     console.log(`Starfinder | [READY] Done (operation took ${finishTime - readyTime} ms)`);
 
     const startupDuration = finishTime - initTime;
     console.log(`Starfinder | [STARTUP] Total launch took ${Number(startupDuration / 1000).toFixed(2)} seconds.`);
 });
-
-Hooks.on("dropCanvasData", (canvas, data) => canvasHandlerV10(canvas, data));
-
 async function migrateOldContainers() {
     const promises = [];
     for (const actor of game.actors.contents) {
@@ -462,16 +490,16 @@ Hooks.on("hotbarDrop", (bar, data, slot) => {
 });
 
 function registerMathFunctions() {
-    Math.lookup = function(value) {
+    function lookup(value) {
         for (let i = 1; i < arguments.length - 1; i += 2) {
             if (arguments[i] === value) {
                 return arguments[i + 1];
             }
         }
         return 0;
-    };
+    }
 
-    Math.lookupRange = function(value, lowestValue) {
+    function lookupRange(value, lowestValue) {
         let baseValue = lowestValue;
         for (let i = 2; i < arguments.length - 1; i += 2) {
             if (arguments[i] > value) {
@@ -480,7 +508,19 @@ function registerMathFunctions() {
             baseValue = arguments[i + 1];
         }
         return baseValue;
-    };
+    }
+
+    Roll.MATH_PROXY = mergeObject(Roll.MATH_PROXY, {
+        eq: (a, b) => a === b,
+        gt: (a, b) => a > b,
+        gte: (a, b) => a >= b,
+        lt: (a, b) => a < b,
+        lte: (a, b) => a <= b,
+        ne: (a, b) => a !== b,
+        ternary: (condition, ifTrue, ifFalse) => (condition ? ifTrue : ifFalse),
+        lookup,
+        lookupRange
+    });
 }
 
 /**
@@ -493,11 +533,16 @@ function registerMathFunctions() {
  */
 async function createItemMacro(data, slot) {
     const item = await Item.fromDropData(data);
-    const command = `game.sfrpg.rollItemMacro("${item.name}");`;
+    if (!item) return;
+
+    let macroType = data?.macroType || "chatCard";
+    if (macroType.includes("feat")) macroType = "activate";
+
+    const command = `game.sfrpg.rollItemMacro("${item.name}", "${macroType}");`;
     let macro = game.macros.contents.find(m => (m.name === item.name) && (m.command === command));
     if (!macro) {
         macro = await Macro.create({
-            name: item.name,
+            name: item.name + (macroType !== "chatCard" ? ` (${game.i18n.localize(`SFRPG.ItemMacro.${macroType.capitalize()}`)})` : ""),
             type: "script",
             img: item.img,
             command: command,
@@ -508,7 +553,7 @@ async function createItemMacro(data, slot) {
     game.user.assignHotbarMacro(macro, slot);
 }
 
-function rollItemMacro(itemName) {
+function rollItemMacro(itemName, macroType) {
     const speaker = ChatMessage.getSpeaker();
     let actor;
 
@@ -517,8 +562,20 @@ function rollItemMacro(itemName) {
     const item = actor ? actor.items.find(i => i.name === itemName) : null;
     if (!item) return ui.notifications.warn(`Your controlled Actor does not have an item named ${itemName}`);
 
-    if (item.type === 'spell') return actor.useSpell(item);
-    return item.roll();
+    switch (macroType) {
+        case "attack":
+            return item.rollAttack();
+        case "damage":
+        case "healing":
+            return item.rollDamage();
+        case "activate":
+            return item.setActive(!item.isActive());
+        case "use":
+            return item.rollConsumable();
+        default:
+            return item.roll();
+    }
+
 }
 
 function setupHandlebars() {
@@ -710,8 +767,7 @@ function setupHandlebars() {
     });
 
     Handlebars.registerHelper('currencyFormat', function(value) {
-        const currencyLocale = game.settings.get('sfrpg', 'currencyLocale');
-        const moneyFormatter  = new Intl.NumberFormat(currencyLocale);
+        const moneyFormatter = new Intl.NumberFormat(game.i18n.lang);
         const formattedValue = moneyFormatter.format(value);
         return formattedValue;
     });

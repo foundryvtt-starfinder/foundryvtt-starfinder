@@ -29,7 +29,7 @@ export default function(engine) {
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
-                    type: bonus.type.capitalize(),
+                    type: game.i18n.format(`SFRPG.ModifierType${bonus.type.capitalize()}`),
                     mod: computedBonus.signedString(),
                     source: bonus.name
                 }));
@@ -52,8 +52,7 @@ export default function(engine) {
                 for (const bonus of curr[1]) {
                     sum += addModifier(bonus, data, eac, "SFRPG.ACTooltipBonus");
                 }
-            }
-            else {
+            } else {
                 sum += addModifier(curr[1], data, eac, "SFRPG.ACTooltipBonus");
             }
 
@@ -67,8 +66,7 @@ export default function(engine) {
                 for (const bonus of curr[1]) {
                     sum += addModifier(bonus, data, kac, "SFRPG.ACTooltipBonus");
                 }
-            }
-            else {
+            } else {
                 sum += addModifier(curr[1], data, kac, "SFRPG.ACTooltipBonus");
             }
 

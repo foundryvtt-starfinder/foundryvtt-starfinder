@@ -42,7 +42,10 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         this._getCrewData(data);
 
         // Encrich text editors
-        data.enrichedDescription = await TextEditor.enrichHTML(this.object.system.details.notes, {async: true});
+        data.enrichedDescription = await TextEditor.enrichHTML(this.actor.system.details.notes, {
+            async: true,
+            rollData: this.actor.getRollData() ?? {}
+        });
 
         return data;
     }
@@ -663,9 +666,9 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
         let li = $(event.currentTarget).parents('.action');
 
-        const filter = index.filter(i => i.name === (li.prevObject[0].innerHTML));
-        const item = await pack.getDocument(filter[0]._id);
-        const chatData = item.getChatData({ secrets: this.actor.isOwner, rollData: this.actor.system });
+        const doc = index.find(i => i.name === (li.prevObject[0].innerHTML));
+        const item = await pack.getDocument(doc._id);
+        const chatData = await item.getChatData();
 
         let content = `<p><strong>${game.i18n.localize("SFRPG.StarshipSheet.Actions.Tooltips.NormalEffect")}:</strong> ${chatData.effectNormal}</p>`;
         if (chatData.effectCritical) {
@@ -676,8 +679,13 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             let summary = li.children('.item-summary');
             summary.slideUp(200, () => summary.remove());
         } else {
-            const desiredDescription = TextEditor.enrichHTML(content || chatData.description.value, {async: false});
+            const desiredDescription = await TextEditor.enrichHTML(content || chatData.description.value, {
+                async: true,
+                rollData: this.actor.getRollData() ?? {},
+                secrets: this.actor.isOwner
+            });
             let div = $(`<div class="item-summary">${desiredDescription}</div>`);
+            Hooks.callAll("renderItemSummary", this, div, {});
 
             li.append(div.hide());
 

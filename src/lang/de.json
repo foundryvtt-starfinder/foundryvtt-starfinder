@@ -113,6 +113,7 @@
         "ActionRSAK": "Fernkampfzauber",
         "ActionRWAK": "Fernkampfwaffenangriff",
         "ActionSave": "Rettungswurf",
+        "ActionSkill": "Skill Check",
         "ActionUtil": "Unterstützung",
         "ActorSheet": {
             "Attributes": {
@@ -269,7 +270,10 @@
                     "Delete": "Gegenstand entfernen",
                     "Edit": "Gegenstand bearbeiten",
                     "Equip": "Gegenstand ausrüsten",
-                    "Unequip": "Gegenstand ablegen"
+                    "Install": "Install Augmentation",
+                    "LevelUp": "Aufsteigen",
+                    "Unequip": "Gegenstand ablegen",
+                    "Uninstall": "Uninstall Augmentation"
                 },
                 "ItemValue": {
                     "Label": "Vermögen:",
@@ -395,6 +399,7 @@
         "AugBrain": "Gehirn",
         "AugBrainAndEyes": "Gehirn und Augen",
         "AugBrainHeartLungs": "Gehirn, Herz, Lunge",
+        "AugBrainThroat": "Brain and Throat",
         "AugEars": "Ohren",
         "AugEarsAndThroat": "Ohren und Kehle",
         "AugEndocrine": "Hormone",
@@ -517,6 +522,9 @@
                 "ModifyDamageText": "Input an number to modify the damage amount by. This is applied after any multiplication.",
                 "NoDamageModifier": "No damage modifier applied.",
                 "NoToken": "Cannot apply: No token selected!"
+            },
+            "ItemAction": {
+                "Check": "Check"
             },
             "ItemActivation": {
                 "Activates": "Activates",
@@ -903,6 +911,19 @@
             }
         },
         "EnergyArmorClass": "Energetische RK",
+        "EnergyArmorClassShort": "EAC",
+        "Enrichers": {
+            "Icon": {
+                "Types": {
+                    "Graviton": "Graviton",
+                    "LanguageDependent": "Language Dependent",
+                    "MindAffecting": "Mind Affecting",
+                    "Photon": "Photon",
+                    "SenseDependent": "Sense Dependent"
+                }
+            },
+            "TypeError": "{enricherType} parsing failed! Type is invalid."
+        },
         "Environment": "Environment",
         "FeatTypes": {
             "Combat": "Kampftalente",
@@ -1036,6 +1057,7 @@
         "InventoryCapacity": "Kapazität",
         "InventoryCurrency": "Währung",
         "InventoryEquipped": "Ausgerüstet",
+        "InventoryNotEquipped": "Not Equipped",
         "InventoryUsage": "Nutzung",
         "IronWillHint": "Charaktertalent welches +2 auf Willerettungswürfe gibt",
         "IronWillLabel": "Eiserner Wille",
@@ -1049,6 +1071,13 @@
                 "Locked": "Verschlossen",
                 "LockedTooltip": "<strong>Verschlossen</strong><br/>Das Verschließen eines Behälters verhindert den Zugriff durch die Spieler."
             }
+        },
+        "ItemMacro": {
+            "Activate": "Activate",
+            "Attack": "Attack",
+            "Damage": "Damage",
+            "Healing": "Healing",
+            "Use": "Use"
         },
         "ItemNoAmmo": "{name} hat keine Munition mehr!",
         "ItemSheet": {
@@ -1357,6 +1386,7 @@
                 "RollNotes": "Roll Notes",
                 "RollNotesTooltip": "The roll notes are displayed on the action roll chat card. This is a great way to put helpful reminders, especially for GMs with complicated NPCs.",
                 "SavingThrow": "Rettungswurf",
+                "SkillCheck": "Skill Check",
                 "TitleAction": "Action",
                 "TitleActivation": "Activation"
             },
@@ -1613,6 +1643,7 @@
         },
         "KeyAbility": "Schlüsselattribut",
         "KineticArmorClass": "Kinetische RK",
+        "KineticArmorClassShort": "KAC",
         "Languages": "Sprachen",
         "LanguagesAbyssal": "Abyssisch",
         "LanguagesAkitonian": "Akitonisch",
@@ -1833,6 +1864,7 @@
         "NpcToggleSkillsDialogTitle": "NSC-Fertigkeiten umschalten",
         "NumberOfArms": "Anzahl der Arme",
         "Organization": "Organization",
+        "Passive": "Passive",
         "Personal": "Persönlich",
         "PersonalUpgrade": "Persönliche Verbesserung",
         "Plane": "Ebene",
@@ -2319,6 +2351,10 @@
         "SkillTooltipThemeMod": "Charaktermotivmodifikator: {mod}",
         "SkillTooltipTrainedClassSkill": "Modifikator für geübte Klassenfertigkeiten: {mod}",
         "SkillTrainedOnly": "Nur geübt",
+        "SkillTrainedOnlyDialog": {
+            "Content": "{skill} is a trained only skill, but {name} is not trained in that skill. Would you like to roll anyway?",
+            "Title": "{skill} is trained only"
+        },
         "SkillsHeaderAbility": "Attribut",
         "SkillsHeaderModifier": "Modifikator",
         "SkillsHeaderName": "Name",
@@ -2345,6 +2381,7 @@
             "Voidglass": "Voidglass"
         },
         "SpecialTraits": "Spezialmerkmale",
+        "SpeciesGraft": "Species Graft",
         "Speed": "Bewegungsrate",
         "SpeedSpecial": "Spezielle Bewegungsrate",
         "SpellAreaEffects": {
@@ -2962,7 +2999,7 @@
         "WeaponPropertiesTeleportive": "Teleportive",
         "WeaponPropertiesTeleportiveTooltip": "This weapon’s fired ammunition teleports a short distance after being fired. You take only a –1 cumulative penalty when attacking outside the range of this weapon.",
         "WeaponPropertiesThought": "Thought",
-        "WeaponPropertiesThoughtTooltip": "A thought weapon can be fully or partially controlled via telepathy. If you have the telepathy or limited telepathy racial trait, are benefiting from a telepathy spell, are wearing a mindlink circlet, or have a similar ability, you ignore the weapon’s unwieldy weapon special property.",
+        "WeaponPropertiesThoughtTooltip": "A thought weapon can be fully or partially controlled via telepathy. If you have the telepathy or limited telepathy species trait, are benefiting from a telepathy spell, are wearing a mindlink circlet, or have a similar ability, you ignore the weapon’s unwieldy weapon special property.",
         "WeaponPropertiesThrottle": "Throttle",
         "WeaponPropertiesThrottleTooltip": "A throttle weapon deals damage only when it is used to grapple a foe, automatically dealing damage with every successful grapple combat maneuver. These are considered attacks for abilities that can increase a weapon’s damage (such as trick attack). All throttle weapons are also grapple weapons. While a target is successfully being grappled with a throttle weapon, it cannot use its airways to speak or make vocalizations of any kind (though other forms of making noise work normally).",
         "WeaponPropertiesThrown": "Geworfen",

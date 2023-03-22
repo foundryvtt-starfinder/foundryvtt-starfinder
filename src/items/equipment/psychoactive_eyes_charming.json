@@ -5,9 +5,24 @@
   "img": "icons/magic/control/hypnosis-mesmerism-eye.webp",
   "system": {
     "type": "magitech",
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
+    "actionType": "save",
+    "activation": {
+      "type": "action",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "none",
+      "value": null
+    },
+    "attackBonus": 0,
     "attributes": {
       "ac": {
         "value": ""
@@ -21,34 +36,72 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": 11
       },
       "size": "medium",
       "sturdy": false
     },
     "attuned": false,
     "bulk": "-",
+    "chatFlavor": "",
+    "container": {
+      "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
+      "storage": []
+    },
     "critical": {
+      "effect": "",
       "parts": []
     },
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>Your eyes are injected with nanite-controlled psychoactive dyes. Once per day as a standard action, you can activate a fascinating gaze with a duration of concentration. Creatures of your type within 30 feet that see you must succeed at a Will saving throw (DC = 10 + half your character level + your Charisma modifier) or be fascinated for as long as they can see you. A creature that succeeds at this saving throw is immune to your gaze for 24 hours. If you break line of sight, the effect ends for those targets and they become immune to it for 24 hours. This is a mind-affecting gaze attack (Alien Archive 154). Charming psychoactive eyes charm creatures per charm person instead of fascinating them, but they otherwise function the same way as fascinating psychoactive eyes.</p>\n<p>@UUID[Compendium.sfrpg.spells.3nFCrisRp2GIjbR3]{Charm Person}</p>"
+      "value": "<p>Your eyes are injected with nanite-controlled psychoactive dyes. Once per day as a standard action, you can activate a fascinating gaze with a duration of concentration. Creatures of your type within 30 feet that see you must succeed at a Will saving throw (DC = 10 + half your character level + your Charisma modifier) or be @UUID[Compendium.sfrpg.conditions.7PPRS6krnvaTHbxh]{fascinated} for as long as they can see you. A creature that succeeds at this saving throw is immune to your gaze for 24 hours. If you break line of sight, the effect ends for those targets and they become immune to it for 24 hours. This is a mind-affecting @UUID[Compendium.sfrpg.universal-creature-rules.lZnbqFTZ9QWILhVL]{gaze} attack (Alien Archive 154). Charming psychoactive eyes charm creatures per @UUID[Compendium.sfrpg.spells.3nFCrisRp2GIjbR3]{charm person} instead of fascinating them, but they otherwise function the same way as fascinating psychoactive eyes.</p>"
     },
-    "equippable": false,
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": ""
+    },
+    "equippable": true,
     "equipped": false,
+    "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 6,
     "modifiers": [],
     "price": 4250,
     "quantity": 1,
-    "source": "ARM, p. 93",
-    "system": "eyes"
+    "quantityPerPack": 1,
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "ft",
+      "value": 30
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "will",
+      "dc": "10 + floor(@details.level.value / 2) + @abilities.cha.mod",
+      "descriptor": "negate"
+    },
+    "source": "AR pg. 93",
+    "system": "eyes",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": 1,
+      "per": "day",
+      "value": 1
+    }
   }
 }

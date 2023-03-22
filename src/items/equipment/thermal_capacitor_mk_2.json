@@ -9,6 +9,7 @@
       "parts": []
     },
     "allowedArmorType": "any",
+    "ammunitionType": "",
     "armorType": "any",
     "attributes": {
       "ac": {
@@ -34,6 +35,12 @@
       "max": null,
       "value": null
     },
+    "container": {
+      "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
+      "storage": []
+    },
     "critical": {
       "parts": []
     },
@@ -42,15 +49,50 @@
     },
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>This upgrade regulates heat, protecting you from extreme temperatures. You can exist comfortably in conditions between –50° and 170° F without needing to attempt Fortitude saves. In addition, the armor grants cold resistance and fire resistance. The amount depends on the capacitor’s type, as listed below.</p>\n<ul>\n<li><strong>Mk 1:</strong>&nbsp;Resistance 5</li>\n<li><strong>Mk 2:</strong>&nbsp;Resistance 10</li>\n<li><strong>Mk 3:</strong>&nbsp;Resistance 15</li>\n</ul>"
     },
+    "equippable": false,
     "equipped": false,
     "identified": true,
     "level": 12,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "faffc71a-3cb3-4a8e-8d2d-cc2720573391",
+        "name": "Thermal Capacitor, Mk 2 (Fire)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": true,
+        "max": 10,
+        "modifier": "10",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "fire"
+      },
+      {
+        "_id": "c0871e83-fd25-4bbb-a58f-a6be8e822910",
+        "name": "Thermal Capacitor, Mk 2 (Cold)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": true,
+        "max": 10,
+        "modifier": "10",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "cold"
+      }
+    ],
     "price": 36250,
     "quantity": 1,
+    "quantityPerPack": 1,
     "slots": 1,
     "source": "CRB pg. 205",
     "usage": {

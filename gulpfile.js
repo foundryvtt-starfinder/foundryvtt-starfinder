@@ -261,8 +261,6 @@ function sanitizeJSON(jsonInput) {
 
         delete item.flags?.exportSource;
         delete item.flags?.sourceId;
-        delete item.flags?.core?.exportSource;
-        delete item.flags?.core?.sourceId;
 
         // Remove leading or trailing spaces
         item.name = item.name.trim();
@@ -362,6 +360,7 @@ function sanitizeJSON(jsonInput) {
             .append($description)
             .html()
             .replace(/@Compendium\[/g, "@UUID[Compendium.") // Replace @Compendium links with @UUID links
+            .replace(/(\w)(@UUID)/g, "$1 $2") // Add a space before the start of @UUID links if there is a word before.
             .replace(/<([hb]r)>/g, "<$1 />") // Prefer self-closing tags
             .replace(/ {2,}/g, " ") // Replace double or more spaces with a single space
             .replace(/<(div|p)>\s*<\/(div|p)>/g, "") // Delete empty <p>s and <div>s
@@ -373,6 +372,7 @@ function sanitizeJSON(jsonInput) {
             .replace(/(<\/strong>)(\w)/g, "$1 $2") // Add a space after the end of <strong> tags
             .replace(/<(em)>\s*/g, "<em>") // Remove whitespace at the start of <em> tags
             .replace(/\s*<\/(em)>/g, "</em>") // Remove whitespace at the end of <em> tags
+            .replace(/(\w)(<em>)/g, "$1 $2") // Add a space before the start of <em> tags if there is a word before.
             .replace(/(<\/em>)(\w)/g, "$1 $2") // Add a space after the end of <em> tags
             .replace(/(<p>&nbsp;<\/p>)/g, "") // Delete paragraphs with only a non-breaking space
             .replace(/(<br \/>)+/g, "</p>\n<p>") // Replace any number of <br /> tags with <p>s
@@ -410,19 +410,24 @@ function sanitizeJSON(jsonInput) {
         }
 
         // If core or sfrpg is empty, delete it
-        if ((typeof item?.flags?.core === "object" && item?.flags?.core !== null) && Object.entries(item?.flags?.core)?.length === 0) {
+        if ((typeof item?.flags?.core === "object" && item?.flags?.core !== null) // If an object
+            && Object.entries(item?.flags?.core)?.length === 0) { // And is empty
             delete item.flags.core;
         }
 
-        if ((typeof item?.flags?.sfrpg === "object" && item?.flags?.sfrpg !== null) && Object.entries(item?.flags?.sfrpg)?.length === 0) {
+        if ((typeof item?.flags?.sfrpg === "object" && item?.flags?.sfrpg !== null)
+            && Object.entries(item?.flags?.sfrpg)?.length === 0) {
             delete item.flags.sfrpg;
         }
 
         // If flags is now empty, delete it entirely
-        if ((typeof item.flags === "object" && item.flags !== null) && Object.entries(item?.flags)?.length === 0) {
+        if ((typeof item.flags === "object" && item.flags !== null)
+            && Object.entries(item?.flags)?.length === 0) {
             delete item.flags;
         }
     };
+
+    delete jsonInput?.flags?.core?.sourceId;
 
     treeShake(jsonInput);
     cleanFlags(jsonInput);
@@ -1200,8 +1205,14 @@ function searchDescriptionForUnlinkedReference(description, regularExpression) {
             let delimiterCharacters = [">", "<", ";", ",", "/", "(", ")", "."];
 
             let unlinkedReferenceFound = false;
+            // This is a simple rule of thumb which checks of the word in question is surrounded by `&nbsp;`. In this case we'll ignore,
+            // as this can be used to escape a condition word (ie. `Burning`) in an otherwise unrelated context (ie. `... the Burning Archipelago...`)
+            if (characterBefore === ";" || characterAfter === "&") {
+                unlinkedReferenceFound = false;
+                continue;
+            }
             // If surrounded by { and } we assume it is linked and continue
-            if (characterBefore === "{" && characterAfter === "}") {
+            else if (characterBefore === "{" && characterAfter === "}") {
                 alreadyLinked.push(conditionWord);
                 continue;
             }
@@ -1223,11 +1234,6 @@ function searchDescriptionForUnlinkedReference(description, regularExpression) {
             else if ((delimiterCharacters.includes(characterBefore) || characterBefore === " ") && delimiterCharacters.includes(characterAfter)) {
                 unlinkedReferenceFound = true;
                 if (!alreadyLinked.includes(conditionWord)) foundWords.push(conditionWord);
-            }
-            // This is a simple rule of thumb which checks of the word in question is surrounded by `&nbsp;`. In this case we'll ignore,
-            // as this can be used to escape a condition word (ie. `Burning`) in an otherwise unrelated context (ie. `... the Burning Archipelago...`)
-            else if (characterBefore === ";" && characterAfter === "&") {
-                unlinkedReferenceFound = false;
             }
 
         }
