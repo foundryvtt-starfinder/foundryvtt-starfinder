@@ -48,6 +48,7 @@ import templateOverrides from "./module/template-overrides.js";
 import { preloadHandlebarsTemplates } from "./module/templates.js";
 import { generateUUID } from "./module/utils/utilities.js";
 
+import BaseEnricher from "./module/system/enrichers/base.js";
 import BrowserEnricher from "./module/system/enrichers/browser.js";
 import CheckEnricher from "./module/system/enrichers/check.js";
 import IconEnricher from "./module/system/enrichers/icon.js";
@@ -367,9 +368,6 @@ Hooks.once("setup", function() {
     console.log("Starfinder | [SETUP] Registering custom handlebars");
     setupHandlebars();
 
-    console.log("Starfinder | [SETUP] Setting up custom enrichers");
-    CONFIG.TextEditor.enrichers.push(new BrowserEnricher(), new IconEnricher(), new CheckEnricher());
-
     const finishTime = (new Date()).getTime();
     console.log(`Starfinder | [SETUP] Done (operation took ${finishTime - setupTime} ms)`);
 });
@@ -395,6 +393,10 @@ Hooks.once("ready", async () => {
 
     console.log("Starfinder | [READY] Applying artwork from modules to compendiums");
     registerCompendiumArt();
+
+    console.log("Starfinder | [READY] Setting up inline buttons");
+    CONFIG.TextEditor.enrichers.push(new BrowserEnricher(), new IconEnricher(), new CheckEnricher());
+    BaseEnricher.addListeners();
 
     if (game.user.isGM) {
         const currentSchema = game.settings.get('sfrpg', 'worldSchemaVersion') ?? 0;

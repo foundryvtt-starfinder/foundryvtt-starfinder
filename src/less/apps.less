@@ -20,7 +20,12 @@ blockquote.quote {
 .window-app {
     .exo2();
 
-    .window-content {
+    &.image-popout > .window-content{
+        background: transparent;
+    }
+
+    .window-content,
+    .window-content .journal-entry-content {
         background: @sheetBackground;
     }
 }
