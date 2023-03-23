@@ -145,36 +145,18 @@ export default class BaseEnricher {
 
     /**
      * A callback function to run when the element is clicked.
-     * @param {Event} ev The DOM event that triggers the listener
-     * @param {HTMLDataset} data The element's dataset
+     * @param {Event} event The DOM event that triggers the listener
      * @returns {*}
      */
-    static listener(ev, data) {}
-}
+    static listener(event) {}
 
-/** --------------------------------
- * Add listeners
-    ----------------------------- */
-
-const sheets = [
-    "ActorSheet",
-    "ItemSummary",
-    "ItemCollectionSheet",
-    "ItemSheet",
-    "ChatMessage",
-    "JournalPageSheet"
-];
-
-for (const sheet of sheets) {
-    Hooks.on(`render${sheet}`, (app, html, options) => {
+    static addListeners() {
+        const body = $("body");
         for (const [action, cls] of Object.entries(CONFIG.SFRPG.enricherTypes)) {
             if (!cls.hasListener) continue;
-
             const enricherListener = cls.listener;
-            html[sheet !== "JournalPageSheet" ? 0 : 2]?.querySelectorAll(`a[data-action=${action}]`)
-                ?.forEach(i => {
-                    i.addEventListener("click", (ev) => enricherListener(ev, i.dataset));
-                });
+
+            body.on("click", `a[data-action="${action}"]`, enricherListener);
         }
-    });
+    }
 }
