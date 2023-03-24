@@ -252,24 +252,7 @@ Hooks.once('init', async function() {
     console.log(`Starfinder | [INIT] Done (operation took ${finishTime - initTime} ms)`);
 });
 
-Hooks.once("setup", function() {
-    console.log(`Starfinder | [SETUP] Setting up Starfinder System subsystems`);
-    const setupTime = (new Date()).getTime();
-
-    /**
-     * Manage counter classe feature from combat tracker
-     * Like Solarian Attenument / Vanguard Entropic Point and Soldat Ki Point
-    **/
-    console.log("Starfinder | [SETUP] Initializing counter management");
-    const counterManagement = new CounterManagement();
-    counterManagement.setup();
-
-    console.log("Starfinder | [SETUP] Initializing RPC system");
-    RPC.initialize();
-
-    console.log("Starfinder | [SETUP] Initializing remote inventory system");
-    initializeRemoteInventory();
-
+Hooks.once("i18nInit", () => {
     console.log("Starfinder | [SETUP] Localizing global arrays");
     const toLocalize = [
         "abilities",
@@ -359,7 +342,31 @@ Hooks.once("setup", function() {
         element.bonus.notes = game.i18n.localize(element.bonus.notes);
     }
 
+    for (const obj of Object.values(SFRPG.featureCategories)) {
+        obj.category = game.i18n.localize(obj.category);
+        obj.label = game.i18n.localize(obj.label);
+    }
+
     CONFIG.SFRPG.statusEffects.forEach(e => e.label = game.i18n.localize(e.label));
+});
+
+Hooks.once("setup", function() {
+    console.log(`Starfinder | [SETUP] Setting up Starfinder System subsystems`);
+    const setupTime = (new Date()).getTime();
+
+    /**
+     * Manage counter classe feature from combat tracker
+     * Like Solarian Attenument / Vanguard Entropic Point and Soldat Ki Point
+    **/
+    console.log("Starfinder | [SETUP] Initializing counter management");
+    const counterManagement = new CounterManagement();
+    counterManagement.setup();
+
+    console.log("Starfinder | [SETUP] Initializing RPC system");
+    RPC.initialize();
+
+    console.log("Starfinder | [SETUP] Initializing remote inventory system");
+    initializeRemoteInventory();
 
     console.log("Starfinder | [SETUP] Configuring rules engine");
     registerSystemRules(game.sfrpg.engine);

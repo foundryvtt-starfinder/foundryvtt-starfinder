@@ -44,6 +44,18 @@
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
+            <h3 class="form-header noborder">{{ localize "SFRPG.Items.Feat.FeatureCategory" }}</h3>
+            <div class="form-group select">
+                <label for="category">{{ localize "SFRPG.Items.Feat.FeatureCategory" }}</label>
+                <select name="system.category" id="category">
+                {{#select itemData.category}}
+                    {{#each config.featureCategories as |category c|}}
+                        <option value="{{c}}">{{category.label}}</option>
+                    {{/each}}
+                {{/select}}
+                </select>
+            </div>
+
             <h3 class="form-header noborder">{{ localize "SFRPG.Items.Feat.FeatureUsage" }}</h3>
 
             {{!-- Item Activation Template --}}
@@ -64,10 +76,10 @@
                 </div>
             </div>
             {{/if}}
-            
+
             {{!-- Descriptors Selector --}}
             {{> "systems/sfrpg/templates/items/parts/item-descriptors.hbs"}}
-            
+
             <br />
 
             {{!-- Item Action Template --}}
