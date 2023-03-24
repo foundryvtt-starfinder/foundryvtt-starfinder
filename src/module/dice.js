@@ -825,6 +825,8 @@ export class DiceSFRPG {
             if (errorToThrow) {
                 throw errorToThrow;
             }
+
+            return roll;
         });
     }
 

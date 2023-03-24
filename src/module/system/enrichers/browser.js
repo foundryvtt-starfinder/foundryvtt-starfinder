@@ -61,7 +61,8 @@ export default class BrowserEnricher extends BaseEnricher {
 
     static hasListener = true;
 
-    static listener(ev, data) {
+    static listener(event) {
+        const data = event.currentTarget.dataset;
         let browser, filters;
 
         // Gotta double parse this to get rid of escape characters from the HTML.
