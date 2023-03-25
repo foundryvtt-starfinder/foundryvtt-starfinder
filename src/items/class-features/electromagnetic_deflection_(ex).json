@@ -9,6 +9,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "",
@@ -30,19 +31,90 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>When you activate your energy shield, choose two of the following damage types: cold, electricity, or fire. While your shield is active, you gain resistance to the chosen damage types equal to half your mechanic level. You must have the @UUID[Compendium.sfrpg.class-features.xcIBsW8VL3DD9rVU]{Energy Shield (Ex)} mechanic trick to learn this trick.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>When you activate your energy shield, choose two of the following damage types: cold, electricity, or fire. While your shield is active, you gain resistance to the chosen damage types equal to [[floor(@classes.mechanic.levels/2)]]{half your mechanic level}. You must have the @UUID[Compendium.sfrpg.class-features.xcIBsW8VL3DD9rVU]{Energy Shield (Ex)} mechanic trick to learn this trick.</p>\n<p><em>Edit the Modifiers to select the correct resistance types. Defaults to Cold and Fire</em></p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
     "duration": {
       "units": "",
       "value": null
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "615cb155-6397-4ca6-9cb9-7c4f2851cb67",
+        "name": "Shield Resist 1",
+        "type": "resistance",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": true,
+        "max": 0,
+        "modifier": "floor(@classes.mechanic.levels /2)",
+        "modifierType": "formula",
+        "notes": "While Energy Shield is active",
+        "source": "Electromagnetic Deflection",
+        "subtab": "misc",
+        "valueAffected": "cold"
+      },
+      {
+        "_id": "be323b9f-b30d-41a7-85a6-e857b96ba43a",
+        "name": "Shield Resist 2",
+        "type": "resistance",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": true,
+        "max": 0,
+        "modifier": "floor(@classes.mechanic.levels/2)",
+        "modifierType": "formula",
+        "notes": "While Energy Shield is Active",
+        "source": "Electromagnetic Deflection",
+        "subtab": "misc",
+        "valueAffected": "fire"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -54,6 +126,7 @@
       "value": null
     },
     "requirements": "Energy Shield",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,

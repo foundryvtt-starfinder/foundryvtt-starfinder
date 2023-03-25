@@ -9,6 +9,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "",
@@ -30,18 +31,90 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>You have augmented the performance of your AI for maximum response timing. You gain a +2 insight bonus to initiative checks, and either you (if you have an exocortex) or your drone (if you have a drone) gains a +2 insight bonus to Reflex saves.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>You have augmented the performance of your AI for maximum response timing. You gain a +2 insight bonus to initiative checks, and either you (if you have an @UUID[Compendium.sfrpg.class-features.cM54UpNXExgDSbq4]{Exocortex}) or your drone (if you have a @UUID[Compendium.sfrpg.class-features.cA0NuGh484BwlDjX]{Drone}) gains a +2 insight bonus to @Check[type:reflex] saves.</p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
     "duration": {
       "units": "",
       "value": null
     },
     "formula": "",
-    "modifiers": [],
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "237a1b8d-12b9-41d3-8d2e-b41d2464d6e5",
+        "name": "Overclocking - Init",
+        "type": "insight",
+        "condition": "",
+        "effectType": "initiative",
+        "enabled": true,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "66658ab4-623b-4137-8553-0f5f61e30c8b",
+        "name": "Overclocking - Reflex",
+        "type": "insight",
+        "condition": "",
+        "effectType": "save",
+        "enabled": true,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "If you have an Exocortex",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "reflex"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -52,13 +125,14 @@
       "charged": false,
       "value": null
     },
-    "requirements": "2nd Level",
+    "requirements": "2nd Level (Mechanic)",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "Mechanic",
+    "source": "CRB pg. 72",
     "target": {
       "type": "",
       "value": null

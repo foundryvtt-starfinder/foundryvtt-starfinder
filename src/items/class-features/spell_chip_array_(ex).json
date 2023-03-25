@@ -33,6 +33,7 @@
         {
           "name": "Reflected damage",
           "formula": "1",
+          "group": null,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -53,7 +54,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>You’ve built in a receiver for spell chips (Core Rulebook 215). You can insert a number of spell chips equal to half your level. Using these spell chips has the same requirements as normal. Because you have the chips linked in an array, you can expend a spell chip to cast a spell on any other spell chip you’ve inserted of the same or higher spell level. A spell chip array is difficult for creatures not aware of it to locate; someone performing a close inspection can discover it with a successful @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.HXcmgteT2OegqFrB]{Mysticism} or @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.gZlg2ZKze0erNLmP]{Perception} check (DC = 10 + your total @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.76u4HnGcAlySicb4]{Engineering} skill modifier).</p>\n<p><strong>This trick can be taken only by characters who can be targeted by effects that only affect constructs, including those of the construct type and those with the constructed species trait.</strong></p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>You’ve built in a receiver for spell chips (Core Rulebook 215). You can insert a number of spell chips equal to [[floor(( @classes.mechanic.levels / 2)]]{half your level}. Using these spell chips has the same requirements as normal. Because you have the chips linked in an array, you can expend a spell chip to cast a spell on any other spell chip you’ve inserted of the same or higher spell level. A spell chip array is difficult for creatures not aware of it to locate; someone performing a close inspection can discover it with a successful @Check[type:mysticism] or @Check[type:perception] (DC = 10 + [[@skills.eng.mod]]{your total Engineering skill modifier}).</p>\n<p><strong>This trick can be taken only by characters who can be targeted by effects that only affect constructs, including those of the construct type and those with the @UUID[Compendium.sfrpg.racial-features.nyUODKP7eBP6Y6tn]{Constructed} species trait.</strong></p>"
     },
     "descriptors": {
       "acid": false,
@@ -117,7 +118,11 @@
       "dc": "10+floor(@classes.mechanic.levels/2) + (@classes.mechanic.keyAbilityMod)",
       "descriptor": "half"
     },
-    "source": "IS, pg. 127",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
+    "source": "IS pg. 127",
     "target": {
       "type": "",
       "value": ""
