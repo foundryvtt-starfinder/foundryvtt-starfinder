@@ -216,8 +216,6 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      * @return {Promise}
      */
     async roll() {
-        let htmlOptions = { secrets: this.actor?.isOwner || true, rollData: this };
-        htmlOptions.rollData.owner = this.actor?.system;
 
         // Basic template rendering data
         const token = this.actor.token;
@@ -225,7 +223,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             actor: this.actor,
             tokenId: token ? `${token.parent.id}.${token.id}` : null,
             item: this,
-            system: await this.getChatData(htmlOptions),
+            system: await this.getChatData(),
             labels: this.labels,
             hasAttack: this.hasAttack,
             hasDamage: this.hasDamage,
@@ -350,14 +348,29 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     /*  Chat Cards                                  */
     /* -------------------------------------------- */
 
-    async getChatData(htmlOptions) {
+    /**
+     * Prepare this item's description, and chat message properties.
+     * @returns {Object} An object containing the item's rollData (including its owners), and chat message properties.
+     */
+    async getChatData() {
         const data = duplicate(this.system);
         const labels = this.labels;
 
-        htmlOptions.async = true;
+        const async = true;
+        const secrets = this.isOwner;
+        const rollData = RollContext.createItemRollContext(this, this.actor).getRollData();
 
         // Rich text description
-        data.description.value = await TextEditor.enrichHTML(data.description.value, htmlOptions);
+        if (data.description.short) data.description.short = await TextEditor.enrichHTML(data.description.short, {
+            async,
+            secrets,
+            rollData
+        });
+        data.description.value = await TextEditor.enrichHTML(data.description.value, {
+            async,
+            secrets,
+            rollData
+        });
 
         // Item type specific properties
         const props = [];
@@ -385,13 +398,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Ability activation properties
         if (data.hasOwnProperty("activation")) {
-            props.push(
-                {name: labels.target, tooltip: null },
-                {name: labels.area, tooltip: null },
-                {name: labels.activation, tooltip: null },
-                {name: labels.range, tooltip: null },
-                {name: labels.duration, tooltip: null }
-            );
+            if ("target"     in data.activation) props.push({name: labels.target, tooltip: null });
+            if ("area"       in data.activation) props.push({name: labels.area, tooltip: null });
+            if ("activation" in data.activation) props.push({name: labels.activation, tooltip: null });
+            if ("range"      in data.activation) props.push({name: labels.range, tooltip: null });
+            if ("duration"   in data.activation) props.push({name: labels.duration, tooltip: null });
         }
 
         if (data.hasOwnProperty("capacity")) {
@@ -831,7 +842,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             parts: parts,
             rollContext: rollContext,
             title: title,
-            flavor: await TextEditor.enrichHTML(this.system?.chatFlavor, {async: true}),
+            flavor: await TextEditor.enrichHTML(this.system?.chatFlavor, {
+                async: true,
+                rollData: this.actor.getRollData() ?? {},
+                secrets: this.isOwner
+            }),
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             critical: critThreshold,
             chatMessage: options.chatMessage,
@@ -1169,7 +1184,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             criticalData: itemData.critical,
             rollContext: rollContext,
             title: title,
-            flavor: (await TextEditor.enrichHTML(options?.flavorOverride, {async: true}) ?? await TextEditor.enrichHTML(itemData.chatFlavor, {async: true})) || null,
+            flavor: await TextEditor.enrichHTML(options?.flavorOverride || itemData.chatFlavor, {
+                async: true,
+                rollData: this.actor.getRollData() ?? {},
+                secrets: this.isOwner
+            }) || null,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             chatMessage: options.chatMessage,
             dialogOptions: {
@@ -1345,18 +1364,18 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      */
     async rollConsumable(options = {}) {
         const itemData = this.system;
+        const overrideUsage = !!options?.event?.shiftKey;
 
-        if (itemData.uses.value === 0 && itemData.quantity === 0) {
+        if (itemData.uses.value === 0 && itemData.quantity === 0 && !overrideUsage) {
             ui.notifications.error(game.i18n.format("SFRPG.Items.Consumable.ErrorNoUses", {name: this.name}));
             return;
         }
 
         if (itemData.actionType && itemData.actionType !== "save") {
-            options = options || {};
             options.flavorOverride = game.i18n.format("SFRPG.Items.Consumable.UseChatMessage", {consumableName: this.name});
 
             const result = await this.rollDamage({}, options);
-            if (!result[0]) {
+            if (!result.callbackResult) {
                 // Roll was cancelled, don't consume.
                 return;
             }
@@ -1407,7 +1426,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         }
 
         // Deduct consumed charges from the item
-        if (itemData.uses.autoUse) {
+        if (itemData.uses.autoUse && !overrideUsage) {
             let quantity = itemData.quantity;
             const remainingUses = this.getRemainingUses();
 

@@ -5,9 +5,24 @@
   "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "cybernetic",
+    "ability": null,
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
+    "actionType": "",
+    "activation": {
+      "type": "reaction",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "none",
+      "value": null
+    },
+    "attackBonus": 0,
     "attributes": {
       "ac": {
         "value": ""
@@ -28,24 +43,95 @@
     },
     "attuned": false,
     "bulk": "-",
+    "chatFlavor": "",
+    "container": {
+      "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
+      "storage": []
+    },
     "critical": {
+      "effect": "",
       "parts": []
     },
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>This implant plugs directly into your heart and can be triggered to overclock the performance of your heart and circulatory system. When you run, charge, or take a move action to move, you can spend 1 Resolve Point to increase your speed (in the relevant mode of movement) by 20 feet for that action. This extra movement is treated as an enhancement bonus.</p>\n<p>Alternatively, you can spend 1 Resolve Point as a reaction when you attempt a Reflex saving throw to gain a +1 enhancement bonus to your roll.</p>"
+      "value": "<p>This implant plugs directly into your heart and can be triggered to overclock the performance of your heart and circulatory system. When you @UUID[Compendium.sfrpg.rules.U37n5tY5hn1ctzQL.JournalEntryPage.Fu5eDR99bGo9WdUU#run]{run}, @UUID[Compendium.sfrpg.rules.U37n5tY5hn1ctzQL.JournalEntryPage.Fu5eDR99bGo9WdUU#charge]{charge}, or take a move action to @UUID[Compendium.sfrpg.rules.U37n5tY5hn1ctzQL.JournalEntryPage.SKgwxeMd2gB1g2W8#move-your-speed]{move}, you can spend 1 Resolve Point to increase your speed (in the relevant mode of movement) by 20 feet for that action. This extra movement is treated as an enhancement bonus.</p>\n<p>Alternatively, you can spend 1 Resolve Point as a reaction when you attempt a Reflex saving throw to gain a +1 enhancement bonus to your roll.</p>\n<p><em>Enable/Disable speed modifier in the Modifiers tab.</em></p>"
     },
+    "duration": {
+      "units": "",
+      "value": ""
+    },
+    "equippable": true,
     "equipped": false,
+    "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 6,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "d809c641-2846-4cf0-a104-6e59615dc684",
+        "name": "Cardiac Accelerator",
+        "type": "enhancement",
+        "condition": "",
+        "effectType": "all-speeds",
+        "enabled": false,
+        "max": 20,
+        "modifier": "20",
+        "modifierType": "constant",
+        "notes": "When you run, charge, or take a move action to move, you can spend 1 Resolve Point to increase your speed (in the relevant mode of movement) by 20 feet for that action. This extra movement is treated as an enhancement bonus.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "922b2008-8817-428a-a12c-b73cecc32a32",
+        "name": "Cardiac Accelerator",
+        "type": "enhancement",
+        "condition": "",
+        "effectType": "save",
+        "enabled": false,
+        "max": 1,
+        "modifier": "1",
+        "modifierType": "formula",
+        "notes": "you can spend 1 Resolve Point as a reaction when you attempt a Reflex saving throw to gain a +1 enhancement bonus to your roll.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "reflex"
+      }
+    ],
     "price": 3850,
     "quantity": 1,
-    "source": "",
-    "system": "heart"
+    "quantityPerPack": 1,
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "none",
+      "value": null
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "",
+      "dc": null,
+      "descriptor": ""
+    },
+    "source": "CRB pg. 209",
+    "system": "heart",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": 0,
+      "per": "",
+      "value": 0
+    }
   }
 }

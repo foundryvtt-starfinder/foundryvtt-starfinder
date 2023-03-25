@@ -48,6 +48,7 @@ import templateOverrides from "./module/template-overrides.js";
 import { preloadHandlebarsTemplates } from "./module/templates.js";
 import { generateUUID } from "./module/utils/utilities.js";
 
+import BaseEnricher from "./module/system/enrichers/base.js";
 import BrowserEnricher from "./module/system/enrichers/browser.js";
 import CheckEnricher from "./module/system/enrichers/check.js";
 import IconEnricher from "./module/system/enrichers/icon.js";
@@ -367,9 +368,6 @@ Hooks.once("setup", function() {
     console.log("Starfinder | [SETUP] Registering custom handlebars");
     setupHandlebars();
 
-    console.log("Starfinder | [SETUP] Setting up custom enrichers");
-    CONFIG.TextEditor.enrichers.push(new BrowserEnricher(), new IconEnricher(), new CheckEnricher());
-
     const finishTime = (new Date()).getTime();
     console.log(`Starfinder | [SETUP] Done (operation took ${finishTime - setupTime} ms)`);
 });
@@ -395,6 +393,10 @@ Hooks.once("ready", async () => {
 
     console.log("Starfinder | [READY] Applying artwork from modules to compendiums");
     registerCompendiumArt();
+
+    console.log("Starfinder | [READY] Setting up inline buttons");
+    CONFIG.TextEditor.enrichers.push(new BrowserEnricher(), new IconEnricher(), new CheckEnricher());
+    BaseEnricher.addListeners();
 
     if (game.user.isGM) {
         const currentSchema = game.settings.get('sfrpg', 'worldSchemaVersion') ?? 0;
@@ -533,11 +535,16 @@ function registerMathFunctions() {
  */
 async function createItemMacro(data, slot) {
     const item = await Item.fromDropData(data);
-    const command = `game.sfrpg.rollItemMacro("${item.name}");`;
+    if (!item) return;
+
+    let macroType = data?.macroType || "chatCard";
+    if (macroType.includes("feat")) macroType = "activate";
+
+    const command = `game.sfrpg.rollItemMacro("${item.name}", "${macroType}");`;
     let macro = game.macros.contents.find(m => (m.name === item.name) && (m.command === command));
     if (!macro) {
         macro = await Macro.create({
-            name: item.name,
+            name: item.name + (macroType !== "chatCard" ? ` (${game.i18n.localize(`SFRPG.ItemMacro.${macroType.capitalize()}`)})` : ""),
             type: "script",
             img: item.img,
             command: command,
@@ -548,7 +555,7 @@ async function createItemMacro(data, slot) {
     game.user.assignHotbarMacro(macro, slot);
 }
 
-function rollItemMacro(itemName) {
+function rollItemMacro(itemName, macroType) {
     const speaker = ChatMessage.getSpeaker();
     let actor;
 
@@ -557,8 +564,20 @@ function rollItemMacro(itemName) {
     const item = actor ? actor.items.find(i => i.name === itemName) : null;
     if (!item) return ui.notifications.warn(`Your controlled Actor does not have an item named ${itemName}`);
 
-    if (item.type === 'spell') return actor.useSpell(item);
-    return item.roll();
+    switch (macroType) {
+        case "attack":
+            return item.rollAttack();
+        case "damage":
+        case "healing":
+            return item.rollDamage();
+        case "activate":
+            return item.setActive(!item.isActive());
+        case "use":
+            return item.rollConsumable();
+        default:
+            return item.roll();
+    }
+
 }
 
 function setupHandlebars() {
