@@ -928,7 +928,7 @@ SFRPG.consumableTypes = {
     "foodDrink": "SFRPG.ConsumableTypes.FoodDrink"
 };
 
-SFRPG.augmentationSytems = {
+SFRPG.augmentationSystems = {
     "none": "SFRPG.None",
     "arm": "SFRPG.AugArm",
     "armAndHand" : "SFRPG.AugArmAndHand",

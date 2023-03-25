@@ -239,15 +239,10 @@ export class ItemSheetSFRPG extends ItemSheet {
         const itemData = item.system;
 
         if (["weapon", "equipment", "shield"].includes(item.type)) return itemData.equipped ? "Equipped" : "Unequipped";
+        else if (item.type === "feat") return CONFIG.SFRPG.featureCategories[itemData.category]?.label || "";
         else if (item.type === "starshipWeapon") return itemData.mount.mounted ? "Mounted" : "Not Mounted";
         else if (item.type === "augmentation") {
-            return `${itemData.type.capitalize()} (${
-                itemData.system.replace(/([A-Z])/g, ' $1')
-                    .replace(/^./, (str) => {
-                        return str.toUpperCase();
-                    })
-
-            })`;
+            return `${CONFIG.SFRPG.augmentationTypes[itemData.type]} (${CONFIG.SFRPG.augmentationSystems[itemData.system] || ""})`;
         } else if (item.type === "vehicleSystem") {
             // Only systems which can be activated have an activation status
             if (this.document.canBeActivated() === false) {

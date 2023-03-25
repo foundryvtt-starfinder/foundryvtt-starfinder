@@ -268,7 +268,7 @@ Hooks.once("i18nInit", () => {
         "ammunitionTypes",
         "armorProficiencies",
         "armorTypes",
-        "augmentationSytems",
+        "augmentationSystems",
         "augmentationTypes",
         "babProgression",
         "capacityUsagePer",
