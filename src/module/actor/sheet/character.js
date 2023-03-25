@@ -201,21 +201,25 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
 
         };
 
+        let otherFeatures = [];
         for (let f of feats) {
             if (f.system.activation.type) features.active.items.push(f);
             else {
                 try {
                     features[f.system.category].items.push(f);
                 } catch {
-                    features.otherFeatures = {
-                        category: game.i18n.format("SFRPG.ActorSheet.Features.Categories.OtherFeatures"),
-                        items: [],
-                        hasActions: false,
-                        dataset: { type: "feat" }
-                    };
                     features.otherFeatures.items.push(f);
                 }
             }
+        }
+
+        if (otherFeatures.length > 0) {
+            features.otherFeatures = {
+                category: game.i18n.format("SFRPG.ActorSheet.Features.Categories.OtherFeatures"),
+                items: otherFeatures,
+                hasActions: false,
+                allowAdd: false
+            };
         }
 
         classes.sort((a, b) => b.levels - a.levels);
