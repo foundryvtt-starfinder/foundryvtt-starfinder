@@ -37,7 +37,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>You double your @UUID[Compendium.sfrpg.class-features.a65jtTCCb5kXCz5v]{operative’s edge} bonus to Perception checks to notice traps. Additionally, you automatically receive a Perception check to notice a trap when you pass within 10 feet of it.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>You double your @UUID[Compendium.sfrpg.class-features.a65jtTCCb5kXCz5v]{operative’s edge} bonus to @Check[type:perception] to notice traps. Additionally, you automatically receive a Perception check to notice a trap when you pass within 10 feet of it.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -77,6 +77,11 @@
       "teleportation": false,
       "water": false
     },
+    "details": {
+      "category": "feat",
+      "combat": false,
+      "specialAbilityType": ""
+    },
     "duration": {
       "units": "",
       "value": null
@@ -92,9 +97,9 @@
         "effectType": "skill",
         "enabled": true,
         "max": 2,
-        "modifier": "round((@classes.operative.levels + 3) / 4) * 2",
+        "modifier": "2* (1+floor((@classes.operative.levels + 1) / 4))",
         "modifierType": "formula",
-        "notes": "bonus to Perception checks to notice traps",
+        "notes": "Double Operative's Edge bonus to Perception checks to notice traps",
         "source": "",
         "subtab": "misc",
         "valueAffected": "per"
