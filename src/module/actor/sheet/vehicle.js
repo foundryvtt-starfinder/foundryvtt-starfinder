@@ -57,9 +57,39 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         const localizedNoLimit = game.i18n.format("SFRPG.VehicleSheet.Passengers.UnlimitedMax");
 
         const crew = {
-            pilots: { label: game.i18n.format("SFRPG.VehicleSheet.Passengers.Pilot") + " " + game.i18n.format("SFRPG.VehicleSheet.Passengers.AssignedCount", {"current": pilotActors.length, "max": crewData.pilot.limit > -1 ? crewData.pilot.limit : localizedNoLimit}), actors: pilotActors, dataset: { type: "passenger", role: "pilot" }},
-            complement: { label: game.i18n.format("SFRPG.VehicleSheet.Passengers.Complement") + " " + game.i18n.format("SFRPG.VehicleSheet.Passengers.AssignedCount", {"current": complementActors.length, "max": crewData.complement.limit > -1 ? crewData.complement.limit : localizedNoLimit}), actors: complementActors, dataset: { type: "passenger", role: "complement" }},
-            passengers: { label: game.i18n.format("SFRPG.VehicleSheet.Passengers.Passengers") + " " + game.i18n.format("SFRPG.VehicleSheet.Passengers.AssignedCount", {"current": passengerActors.length, "max": crewData.passenger.limit > -1 ? crewData.passenger.limit : localizedNoLimit}), actors: passengerActors, dataset: { type: "passenger", role: "passenger" }}
+            pilots: {
+                label:
+                    game.i18n.format("SFRPG.VehicleSheet.Passengers.Pilot")
+                    + " "
+                    + game.i18n.format("SFRPG.VehicleSheet.Passengers.AssignedCount", {
+                        current: pilotActors.length,
+                        max: crewData.pilot.limit > -1 ? crewData.pilot.limit : localizedNoLimit
+                    }),
+                actors: pilotActors,
+                dataset: { type: "passenger", role: "pilot" }
+            },
+            complement: {
+                label:
+                    game.i18n.format("SFRPG.VehicleSheet.Passengers.Complement")
+                    + " "
+                    + game.i18n.format("SFRPG.VehicleSheet.Passengers.AssignedCount", {
+                        current: complementActors.length,
+                        max: crewData.complement.limit > -1 ? crewData.complement.limit : localizedNoLimit
+                    }),
+                actors: complementActors,
+                dataset: { type: "passenger", role: "complement" }
+            },
+            passengers: {
+                label:
+                    game.i18n.format("SFRPG.VehicleSheet.Passengers.Passengers")
+                    + " "
+                    + game.i18n.format("SFRPG.VehicleSheet.Passengers.AssignedCount", {
+                        current: passengerActors.length,
+                        max: crewData.passenger.limit > -1 ? crewData.passenger.limit : localizedNoLimit
+                    }),
+                actors: passengerActors,
+                dataset: { type: "passenger", role: "passenger" }
+            }
         };
 
         data.crew = Object.values(crew);
