@@ -44,17 +44,35 @@
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
-            <h3 class="form-header noborder">{{ localize "SFRPG.Items.Feat.FeatureCategory" }}</h3>
+            <h3 class="form-header noborder">{{ localize "SFRPG.Items.Feat.FeatureDetails" }}</h3>
             <div class="form-group select">
                 <label for="category">{{ localize "SFRPG.Items.Feat.FeatureCategory" }}</label>
-                <select name="system.category" id="category">
-                {{#select itemData.category}}
+                <select name="system.details.category" id="category">
+                {{#select itemData.details.category}}
                     {{#each config.featureCategories as |category c|}}
                         <option value="{{c}}">{{category.label}}</option>
                     {{/each}}
                 {{/select}}
                 </select>
             </div>
+            {{#if (eq itemData.details.category "feat")}}
+                <div class="form-group">
+                    <label for="combat">{{ localize "SFRPG.Items.Feat.CombatFeat" }}</label>
+                    <input type="checkbox" name="system.details.combat" id="combat" {{checked itemData.details.combat}}>
+                </div>
+            {{/if}}
+            <div class="form-group select">
+                <label for="category">{{ localize "SFRPG.Items.Feat.SpecialAbilityType" }}</label>
+                <select name="system.details.specialAbilityType" id="specialAbilityType">
+                {{#select itemData.details.specialAbilityType}}
+                    {{#each config.specialAbilityTypes as |type t|}}
+                        <option value="{{t}}">{{type}}</option>
+                    {{/each}}
+                {{/select}}
+                </select>
+            </div>
+
+
 
             <h3 class="form-header noborder">{{ localize "SFRPG.Items.Feat.FeatureUsage" }}</h3>
 

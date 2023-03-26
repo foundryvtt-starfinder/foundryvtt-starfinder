@@ -303,6 +303,7 @@ Hooks.once("i18nInit", () => {
         "senses",
         "skillProficiencyLevels",
         "skills",
+        "specialAbilityTypes",
         "specialMaterials",
         "speeds",
         "spellAreaEffects",

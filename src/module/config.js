@@ -759,6 +759,13 @@ SFRPG.featureCategories = {
     }
 };
 
+SFRPG.specialAbilityTypes = {
+    "": "SFRPG.None",
+    "ex": "SFRPG.SpecialAbilityTypes.Extraordinary",
+    "su": "SFRPG.SpecialAbilityTypes.Supernatural",
+    "sp": "SFRPG.SpecialAbilityTypes.SpellLike"
+};
+
 /**
  * The avaialbe sizes for an Actor
  * @type {Object}

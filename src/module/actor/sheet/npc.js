@@ -197,7 +197,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
                 if (item.system.activation.type) features.actions.items.push(item);
                 else {
                     try {
-                        features[item.system.category].items.push(item);
+                        features[item.system.details.category].items.push(item);
                     } catch {
                         otherFeatures.push(item);
                     }

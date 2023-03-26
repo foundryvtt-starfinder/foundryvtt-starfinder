@@ -206,7 +206,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             if (f.system.activation.type) features.active.items.push(f);
             else {
                 try {
-                    features[f.system.category].items.push(f);
+                    features[f.system.details.category].items.push(f);
                 } catch {
                     features.otherFeatures.items.push(f);
                 }
