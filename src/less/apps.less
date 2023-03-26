@@ -58,10 +58,32 @@ a.enriched-link {
     white-space: nowrap;
     word-break: break-all;
     line-height: 1.6em;
+    transition: text-shadow .15s ease-in-out,
+        background-color .15s ease-in-out,
+        border .15s ease-in-out,
+        color .15s ease-in-out,
+        box-shadow .15s ease-in-out;
 
     i {
         color: var(--color-text-dark-inactive);
         margin-right: 0.25em;
+
+        &.repost {
+            border-left: 1px solid var(--color-border-dark-tertiary);
+            background: #FFF9;
+            padding: 2px;
+            margin-right: -4px;
+            margin-left: 2px;
+            text-shadow: none;
+
+
+            &:hover {
+                color: var(--color-shadow-primary);
+                text-shadow: 0px 0px 2px black;
+                transition: inherit;
+
+            }
+        }
     }
 }
 
