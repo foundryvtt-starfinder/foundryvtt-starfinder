@@ -5,12 +5,12 @@
   "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "",
+    "actionType": "save",
     "activation": {
       "type": "",
       "condition": "",
@@ -80,7 +80,7 @@
     "details": {
       "category": "feat",
       "combat": false,
-      "specialAbilityType": ""
+      "specialAbilityType": "ex"
     },
     "duration": {
       "units": "",
@@ -102,9 +102,13 @@
     "requirements": "6th Level (Operative)",
     "rollNotes": "",
     "save": {
+      "type": "reflex",
+      "dc": "10 + floor(@classes.operative.levels/2) + @abilities.dex.mod",
+      "descriptor": "negate"
+    },
+    "skillCheck": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": ""
     },
     "source": "AR pg. 150",
     "target": {
