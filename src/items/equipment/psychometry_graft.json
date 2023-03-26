@@ -4,10 +4,25 @@
   "type": "augmentation",
   "img": "systems/sfrpg/icons/spells/comprehend_customs.webp",
   "system": {
-    "type": "biotech",
+    "type": "speciesGraft",
+    "ability": "str",
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "kac",
+    "actionType": "mwak",
+    "activation": {
+      "type": "action",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "none",
+      "value": null
+    },
+    "attackBonus": 0,
     "attributes": {
       "ac": {
         "value": "5"
@@ -28,19 +43,38 @@
     },
     "attuned": false,
     "bulk": "-",
+    "chatFlavor": "",
+    "container": {
+      "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
+      "storage": []
+    },
     "critical": {
+      "effect": "",
       "parts": []
     },
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>In order to drive off an army of daemons, ancient shatoris performed a complex ritual that saved their lives but exposed them to energies of the Boneyard that irrevocably changed them. Powerful sensors in your fingertips (or similar appendages) connecting to a relay in your brain allow you glimpses into the inner workings of creatures and objects, much in the same way shatoris are connected to the past. By taking a standard action to touch a creature or object, you gain a +4 enhancement bonus to your next skill check to identify the creature, your next skill check to recall knowledge about the creature or object, or your next Sense Motive check against the creature. To touch an unwilling creature, you must succeed at a melee attack roll against the creature’s EAC.</p>"
+      "value": "<p>In order to drive off an army of daemons, ancient @UUID[Compendium.sfrpg.races.9WH75r8HRLSHTD1T]{shatoris} performed a complex ritual that saved their lives but exposed them to energies of the Boneyard that irrevocably changed them. Powerful sensors in your fingertips (or similar appendages) connecting to a relay in your brain allow you glimpses into the inner workings of creatures and objects, much in the same way shatoris are connected to the past. By taking a standard action to touch a creature or object, you gain a +4 enhancement bonus to your next skill check to @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.IdprCKGj66qptyN5]{identify the creature}, your next skill check to @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.VWJLbwCeu7DsunHk]{recall knowledge} about the creature or object, or your next @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.nBrYkGfNBJAHe0xJ]{Sense Motive} check against the creature. To touch an unwilling creature, you must succeed at a melee attack roll against the creature’s EAC.</p>"
     },
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": ""
+    },
+    "equippable": true,
     "equipped": false,
+    "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 4,
     "modifiers": [
       {
@@ -48,7 +82,7 @@
         "name": "Psychometry Grant",
         "type": "enhancement",
         "condition": "",
-        "effectType": "all-skills",
+        "effectType": "skill",
         "enabled": false,
         "max": 4,
         "modifier": "4",
@@ -56,12 +90,124 @@
         "notes": "You gain a +4 enhancement bonus to your next skill check to identify the creature, your next skill check to recall knowledge about the creature or object, or your next Sense Motive check against the creature. To touch an unwilling creature, you must succeed at a melee attack roll against the creature’s EAC.",
         "source": "Augmentation",
         "subtab": "misc",
-        "valueAffected": ""
+        "valueAffected": "cul"
+      },
+      {
+        "_id": "085ba7eb-99b4-4a34-bac9-4b8763fd8e77",
+        "name": "Psychometry Graft",
+        "type": "enhancement",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 4,
+        "modifier": "4",
+        "modifierType": "formula",
+        "notes": "You gain a +4 enhancement bonus to your next skill check to identify the creature, your next skill check to recall knowledge about the creature or object, or your next Sense Motive check against the creature. To touch an unwilling creature, you must succeed at a melee attack roll against the creature’s EAC.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "eng"
+      },
+      {
+        "_id": "4bdddd5b-d7dd-4448-88b0-0f2a3e10a2be",
+        "name": "Psychometry Graft",
+        "type": "enhancement",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 4,
+        "modifier": "4",
+        "modifierType": "formula",
+        "notes": "You gain a +4 enhancement bonus to your next skill check to identify the creature, your next skill check to recall knowledge about the creature or object, or your next Sense Motive check against the creature. To touch an unwilling creature, you must succeed at a melee attack roll against the creature’s EAC.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "lsc"
+      },
+      {
+        "_id": "80046f16-b4c9-40d0-8c2a-2182947c81fc",
+        "name": "Psychometry Graft",
+        "type": "enhancement",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 4,
+        "modifier": "4",
+        "modifierType": "formula",
+        "notes": "You gain a +4 enhancement bonus to your next skill check to identify the creature, your next skill check to recall knowledge about the creature or object, or your next Sense Motive check against the creature. To touch an unwilling creature, you must succeed at a melee attack roll against the creature’s EAC.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "mys"
+      },
+      {
+        "_id": "03c436d2-6e70-485e-9475-a9a80cf31558",
+        "name": "Psychometry Graft",
+        "type": "enhancement",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 4,
+        "modifier": "4",
+        "modifierType": "formula",
+        "notes": "You gain a +4 enhancement bonus to your next skill check to identify the creature, your next skill check to recall knowledge about the creature or object, or your next Sense Motive check against the creature. To touch an unwilling creature, you must succeed at a melee attack roll against the creature’s EAC.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "pro"
+      },
+      {
+        "_id": "e7d6d51e-c4c4-41d5-a419-63b7ac2eb746",
+        "name": "Psychometry Graft",
+        "type": "enhancement",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 4,
+        "modifier": "4",
+        "modifierType": "formula",
+        "notes": "You gain a +4 enhancement bonus to your next skill check to identify the creature, your next skill check to recall knowledge about the creature or object, or your next Sense Motive check against the creature. To touch an unwilling creature, you must succeed at a melee attack roll against the creature’s EAC.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "phs"
+      },
+      {
+        "_id": "ec8ffab7-604b-412a-8d39-2a94d7b90075",
+        "name": "Psychometry Graft",
+        "type": "enhancement",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 4,
+        "modifier": "4",
+        "modifierType": "formula",
+        "notes": "You gain a +4 enhancement bonus to your next skill check to identify the creature, your next skill check to recall knowledge about the creature or object, or your next Sense Motive check against the creature. To touch an unwilling creature, you must succeed at a melee attack roll against the creature’s EAC.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "sen"
       }
     ],
     "price": 1875,
     "quantity": 1,
+    "quantityPerPack": 1,
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "none",
+      "value": null
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "",
+      "dc": "",
+      "descriptor": "negate"
+    },
     "source": "AA4 pg. 146",
-    "system": "brain"
+    "system": "brain",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": 0,
+      "per": "",
+      "value": 0
+    }
   }
 }

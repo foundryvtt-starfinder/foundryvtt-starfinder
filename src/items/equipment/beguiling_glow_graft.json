@@ -4,10 +4,25 @@
   "type": "augmentation",
   "img": "systems/sfrpg/icons/classes/efficient_cloaking_field.webp",
   "system": {
-    "type": "biotech",
+    "type": "speciesGraft",
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
+    "actionType": "util",
+    "activation": {
+      "type": "action",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "none",
+      "value": null
+    },
+    "attackBonus": 0,
     "attributes": {
       "ac": {
         "value": "5"
@@ -28,24 +43,64 @@
     },
     "attuned": false,
     "bulk": "-",
+    "chatFlavor": "",
+    "container": {
+      "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
+      "storage": []
+    },
     "critical": {
+      "effect": "",
       "parts": []
     },
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>Cephalumes communicate in part by controlling their bioluminescent skin and can use this natural ability to beguiling effect. Glowing filaments embedded within your skin allow you to create mesmerizing patterns as a standard action. Each sighted creature within 20 feet of you must succeed at a Will saving throw (DC = 10 + half your character level + your Wisdom modifier) or be @UUID[Compendium.sfrpg.conditions.7PPRS6krnvaTHbxh]{Fascinated} for as long as you continue this presentation (requiring a standard action each round). Creatures that understand Lumos (the racial language of cephalumes) are unaffected. This a @UUID[Compendium.sfrpg.rules.PqV3OCbUTyk2upPD]{Sense-dependent} effect.</p>"
+      "value": "<p>Cephalumes communicate in part by controlling their bioluminescent skin and can use this natural ability to beguiling effect. Glowing filaments embedded within your skin allow you to create mesmerizing patterns as a standard action. Each sighted creature within 20 feet of you must succeed at a Will saving throw (DC = 10 + half your character level + your Wisdom modifier) or be @UUID[Compendium.sfrpg.conditions.7PPRS6krnvaTHbxh]{Fascinated} for as long as you continue this presentation (requiring a standard action each round). Creatures that understand Lumos (the racial language of @UUID[Compendium.sfrpg.races.5Hl70X2rB6D7glN5]{cephalumes}) are unaffected. This a @UUID[Compendium.sfrpg.rules.PqV3OCbUTyk2upPD]{Sense-dependent} effect.</p>"
     },
+    "duration": {
+      "units": "",
+      "value": ""
+    },
+    "equippable": true,
     "equipped": false,
+    "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 4,
     "modifiers": [],
     "price": 1900,
     "quantity": 1,
+    "quantityPerPack": 1,
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "ft",
+      "value": 20
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "will",
+      "dc": "10 + floor(@details.level.value / 2) + @abilities.wis.mod",
+      "descriptor": "negate"
+    },
     "source": "AA4 pg. 142",
-    "system": "skin"
+    "system": "skin",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": 0,
+      "per": "",
+      "value": 0
+    }
   }
 }
