@@ -13,12 +13,23 @@
             height: 150px;
         }
 
+        .charname {
+            flex: 5;
+            padding: 5px 0 5px 5px;
+
+            input[name="name"] {
+                margin: 0;
+                background: #00000010;
+            }
+        }
+
         .item-subtitle {
             flex: 0 0 80px;
             height: 60px;
             margin: 0;
-            padding: 5px;
+            padding: 5px 5px 5px 0;
             text-align: right;
+            white-space: nowrap;
             color: @colorTan;
             flex: 1;
 
@@ -120,10 +131,9 @@
         }
 
         .item-properties {
-            height: 100%;
-
+            max-height: 100%;
             flex: 0 0 120px;
-            margin: 5px 5px 5px 0;
+            margin-right: 5px;
             padding-right: 5px;
             border-right: @borderGroove;
 
