@@ -578,7 +578,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         props.push(
             {name:game.i18n.localize("ITEM.TypeAugmentation"), tooltip: null},
             data.type ? {name: CONFIG.SFRPG.augmentationTypes[data.type], tooltip: null} : null,
-            data.system ? {name: CONFIG.SFRPG.augmentationSytems[data.system], tooltip: null} : null
+            data.system ? {name: CONFIG.SFRPG.augmentationSystems[data.system], tooltip: null} : null
         );
     }
 
