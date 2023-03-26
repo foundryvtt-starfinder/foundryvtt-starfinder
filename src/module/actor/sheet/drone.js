@@ -168,9 +168,9 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         let otherFeatures = [];
         for (let f of feats) {
             if (f.system.activation.type) activeFeats.push(f);
-            else if (f.system.category === "feat") passiveFeats.push(f);
-            else if (f.system.category === "classFeature") classFeatures.push(f);
-            else if (f.system.category === "universalCreatureRule") universalCreatureRule.push(f);
+            else if (f.system.details.category === "feat") passiveFeats.push(f);
+            else if (f.system.details.category === "classFeature") classFeatures.push(f);
+            else if (f.system.details.category === "universalCreatureRule") universalCreatureRule.push(f);
             else otherFeatures.push(f);
         }
 
