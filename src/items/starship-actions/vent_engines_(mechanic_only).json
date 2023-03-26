@@ -1,0 +1,70 @@
+{
+  "_id": "UnPXRFEyjS0WHNj6",
+  "name": "Vent Engines (Mechanic Only)",
+  "type": "starshipAction",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "type": "",
+    "abilityMods": {
+      "parts": []
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "dc": {
+      "resolve": true,
+      "value": "10 + floor(1.5 * @ship.details.tier)"
+    },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<h2>Normal effect</h2><p><span>As your starship moves during the next helm phase, it fills a number of consecutive hexes it departs with hazardous energy; the number of hexes filled can’t exceed [[@abilities.int.mod]]{your Intelligence modifier}. The energy dissipates at the beginning of the following turn’s helm phase. Any starship that enters one or more of these hexes before then takes damage equal to [[/r 1d4]]{1d4} × your starship’s tier, distributed evenly across all four quadrants. You can use this action once per combat, though you can use it additional times by spending 1 Resolve Point for each additional use.</span></p>"
+    },
+    "effectCritical": "For a crucial moment, you far surpass the power core’s potential output. The results of a critical divert action depend on where you decided to send the extra power.<br/>Engines: You also divert power to the maneuvering thrusters, lowering the turn value of your starship by 1 this round.<br/>Science Equipment: You’re able to divert power in an efficient and balanced way. Science officers can roll their checks twice this round and use the better result.<br/>Shields: You’re able to efficiently route energy to the shields, doubling the number of Shield Points restored to 10% of the PCU rating of the starship’s power core. If this would restore the shields over their maximum value, these excess Shield Points remain until the beginning of the next engineering phase, at which point any excess Shield Points are lost.<br/>Starship Weapons: The augmented weapons run at maximum safe power. For your starship’s weapons, treat each damage die roll that results in a 1 this round as having rolled the die’s maximum result instead.",
+    "effectNormal": "You can divert auxiliary power into one of your starship’s systems, giving it a boost. This requires a successful Engineering check (DC = 10 + 1-1/2 × your starship’s tier), and the results depend on where you decide to send this extra power. If you send it to the engines, your starship’s speed increases by 2 this round. If you send it to the science equipment, all science officers receive a +2 bonus to their crew actions this round. If you send it to the starship’s weapons, treat each damage die that rolls a 1 this round as having rolled a 2 instead. If you send it to the shields, restore an amount of Shield Points equal to 5% of the PCU rating of the starship’s power core (see page 296), up to the shields’ maximum value. You can distribute the restored Shield Points across the shields’ four quadrants as you see fit.",
+    "formula": [
+      {
+        "name": "Engines",
+        "effectCritical": "For a crucial moment, you far surpass the power core’s potential output. You also divert power to the maneuvering thrusters, lowering the turn value of your starship by 1 this round.",
+        "effectNormal": "If you send it to the engines, your starship’s speed increases by 2 this round.",
+        "formula": "@engineer.skills.eng.mod"
+      },
+      {
+        "name": "Science Equipment",
+        "effectCritical": "For a crucial moment, you far surpass the power core’s potential output. You’re able to divert power in an efficient and balanced way. Science officers can roll their checks twice this round and use the better result.",
+        "effectNormal": "If you send it to the science equipment, all science officers receive a +2 bonus to their crew actions this round.",
+        "formula": "@engineer.skills.eng.mod"
+      },
+      {
+        "name": "Weapons",
+        "effectCritical": "For a crucial moment, you far surpass the power core’s potential output. The augmented weapons run at maximum safe power. For your starship’s weapons, treat each damage die roll that results in a 1 this round as having rolled the die’s maximum result instead.",
+        "effectNormal": "If you send it to the starship’s weapons, treat each damage die that rolls a 1 this round as having rolled a 2 instead.",
+        "formula": "@engineer.skills.eng.mod"
+      },
+      {
+        "name": "Shields",
+        "effectCritical": "For a crucial moment, you far surpass the power core’s potential output. You’re able to efficiently route energy to the shields, doubling the number of Shield Points restored to 10% of the PCU rating of the starship’s power core. If this would restore the shields over their maximum value, these excess Shield Points remain until the beginning of the next engineering phase, at which point any excess Shield Points are lost.",
+        "effectNormal": "If you send it to the shields, restore an amount of Shield Points equal to 5% of the PCU rating of the starship’s power core (see page 296), up to the shields’ maximum value. You can distribute the restored Shield Points across the shields’ four quadrants as you see fit.",
+        "formula": "@engineer.skills.eng.mod"
+      }
+    ],
+    "isPush": false,
+    "order": 0,
+    "phase": {
+      "name": "Engineering phase",
+      "tooltip": "This action can be used during the engineering phase of combat."
+    },
+    "resolvePointCost": 0,
+    "role": "engineer",
+    "selectorKey": "engineer",
+    "selectors": [
+      "engineer"
+    ],
+    "source": "TR pg. 23"
+  }
+}

@@ -33,6 +33,7 @@
         {
           "name": "Reflected damage",
           "formula": "1",
+          "group": null,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -53,7 +54,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>When you or your drone are dealt damage that’s subsequently reduced by your energy resistance, you can reflect some of that damage as a reaction. The source of the damage takes energy damage equal to the amount you or your drone resisted (Reflex half), dealing the same type of damage as was resisted. You or your drone must have a mechanic trick or drone mod that grants energy resistance (such as @UUID[Compendium.sfrpg.class-features.A4j6Vi3iuJeViWww]{electromagnetic deflection}<sup>AA4</sup>, @UUID[Compendium.sfrpg.class-features.wJcZkzm1cs8aZhPc]{resistance}, or @UUID[Compendium.sfrpg.class-features.vKizgDpw42XO6BQm]{resistant energy}) to select this trick.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>When you or your drone are dealt damage that’s subsequently reduced by your energy resistance, you can reflect some of that damage as a reaction. The source of the damage takes energy damage equal to the amount you or your drone resisted (@Check[type:reflex] half), dealing the same type of damage as was resisted. You or your drone must have a mechanic trick or drone mod that grants energy resistance (such as @UUID[Compendium.sfrpg.class-features.A4j6Vi3iuJeViWww]{electromagnetic deflection}<sup>AA4</sup>, @UUID[Compendium.sfrpg.class-features.wJcZkzm1cs8aZhPc]{resistance}, or @UUID[Compendium.sfrpg.class-features.vKizgDpw42XO6BQm]{resistant energy}) to select this trick.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -95,6 +96,7 @@
     },
     "details": {
       "category": "classFeature",
+      "combat": false,
       "specialAbilityType": "ex"
     },
     "duration": {
@@ -120,6 +122,10 @@
       "type": "reflex",
       "dc": "10+floor(@classes.mechanic.levels/2) + (@classes.mechanic.keyAbilityMod)",
       "descriptor": "half"
+    },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
     },
     "source": "IS, pg. 25",
     "target": {
