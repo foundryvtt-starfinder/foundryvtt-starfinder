@@ -1,14 +1,14 @@
 {
-  "_id": "0EANNReclfEBEDmw",
-  "name": "Skip Tracer",
+  "_id": "0kb3vdHeVupou83i",
+  "name": "Recovery Agent",
   "type": "npc2",
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
-      "_id": "G10dCQ0FGP2La790",
-      "name": "Baton, tactical",
+      "_id": "HOvlfdfZqoaetu2G",
+      "name": "Dueling sword, tactical",
       "type": "weapon",
-      "img": "icons/weapons/staves/staff-simple.webp",
+      "img": "systems/sfrpg/icons/equipment/weapons/dueling-sword.webp",
       "system": {
         "type": "",
         "ability": "",
@@ -29,7 +29,7 @@
           "units": "none",
           "value": null
         },
-        "attackBonus": 4,
+        "attackBonus": 12,
         "attributes": {
           "ac": {
             "value": "5"
@@ -39,11 +39,11 @@
             "mod": ""
           },
           "hardness": {
-            "value": "7"
+            "value": "9"
           },
           "hp": {
-            "max": "18",
-            "value": 18
+            "max": "21",
+            "value": 21
           },
           "size": "medium",
           "sturdy": true
@@ -59,7 +59,28 @@
           "contents": [],
           "includeContentsInWealthCalculation": 1,
           "isOpen": true,
-          "storage": []
+          "storage": [
+            {
+              "type": "slot",
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 2,
+              "subtype": "fusion",
+              "weightProperty": "level"
+            },
+            {
+              "type": "slot",
+              "acceptsType": [
+                "goods"
+              ],
+              "amount": 1,
+              "subtype": "",
+              "weightMultiplier": 1,
+              "weightProperty": ""
+            }
+          ]
         },
         "critical": {
           "effect": "",
@@ -68,10 +89,10 @@
         "damage": {
           "parts": [
             {
-              "formula": "1d4 +1",
+              "formula": "1d6 +6",
               "operator": "and",
               "types": {
-                "bludgeoning": true
+                "slashing": true
               }
             }
           ]
@@ -82,7 +103,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>A baton is a thin, solid metal shaft, usually with a textured rubber grip. A tactical baton can be used to inflict precise bludgeoning blows. An advanced baton, used by elite mercenary and security companies, often has an additional shaft, as well as a weighted end that can be powered to connect with substantially more force than a tactical baton.</p>"
+          "value": "<p>While dueling swords are crafted to be aesthetically pleasing and are often seen as a mark of rank or tradition, many warriors still train with them to deadly effect. The powered blades of both buzzblade and ripper dueling swords bring this danger into the modern era, while the molecular rift sword - though unpowered - uses a field of disrupted molecules along its blade to slice through nearly anything, and must be stored in a magnetic sheath that never actually touches the blade.</p>"
         },
         "descriptors": [],
         "duration": {
@@ -94,9 +115,9 @@
         "formula": "",
         "identified": true,
         "isActive": null,
-        "level": 1,
+        "level": 2,
         "modifiers": [],
-        "price": 90,
+        "price": 475,
         "proficient": true,
         "properties": {
           "aeon": false,
@@ -150,7 +171,493 @@
           "necrotic": false,
           "nonlethal": false,
           "one": true,
-          "operative": true,
+          "operative": false,
+          "penetrating": false,
+          "polarize": false,
+          "polymorphic": false,
+          "powered": false,
+          "professional": false,
+          "punchGun": false,
+          "qreload": false,
+          "radioactive": false,
+          "reach": false,
+          "recall": false,
+          "regrowth": false,
+          "relic": false,
+          "reposition": false,
+          "shape": false,
+          "shells": false,
+          "shield": false,
+          "sniper": false,
+          "stun": false,
+          "subtle": false,
+          "sunder": false,
+          "swarm": false,
+          "tail": false,
+          "teleportive": false,
+          "thought": false,
+          "throttle": false,
+          "thrown": false,
+          "trip": false,
+          "two": false,
+          "unbalancing": false,
+          "underwater": false,
+          "unwieldy": false,
+          "variantBoost": false,
+          "wideLine": false
+        },
+        "quantity": 1,
+        "quantityPerPack": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "touch",
+          "value": null
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "source": "CRB pg. 171",
+        "special": "",
+        "specialMaterials": {},
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "usage": {
+          "per": "",
+          "value": null
+        },
+        "uses": {
+          "max": null,
+          "per": "",
+          "value": null
+        },
+        "weaponCategory": "uncategorized",
+        "weaponType": "basicM"
+      }
+    },
+    {
+      "_id": "jMmAbTNZNBAQAoSW",
+      "name": "Semi-auto pistol, tactical",
+      "type": "weapon",
+      "img": "systems/sfrpg/icons/equipment/weapons/semi-auto-pistol-tactical.webp",
+      "system": {
+        "type": "",
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "kac",
+        "actionType": "rwak",
+        "activation": {
+          "type": "none",
+          "condition": "",
+          "cost": null
+        },
+        "ammunitionType": "roundS",
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "none",
+          "value": null
+        },
+        "attackBonus": 14,
+        "attributes": {
+          "ac": {
+            "value": "5"
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": "7"
+          },
+          "hp": {
+            "max": "18",
+            "value": 18
+          },
+          "size": "medium",
+          "sturdy": true
+        },
+        "attuned": false,
+        "bulk": "L",
+        "capacity": {
+          "max": 9,
+          "value": 9
+        },
+        "chatFlavor": "",
+        "container": {
+          "contents": [
+            {
+              "id": "vv4iF38V5FZ6rQLv",
+              "index": 2
+            }
+          ],
+          "includeContentsInWealthCalculation": 1,
+          "isOpen": true,
+          "storage": [
+            {
+              "type": "slot",
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 1,
+              "subtype": "fusion",
+              "weightProperty": "level"
+            },
+            {
+              "type": "slot",
+              "acceptsType": [
+                "goods"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 1,
+              "subtype": "",
+              "weightMultiplier": 1,
+              "weightProperty": ""
+            },
+            {
+              "type": "slot",
+              "acceptsType": [
+                "ammunition"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 1,
+              "subtype": "ammunitionSlot",
+              "weightProperty": ""
+            }
+          ]
+        },
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "1d6 +6",
+              "operator": "and",
+              "types": {
+                "piercing": true
+              }
+            }
+          ]
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>The semiautomatic mechanism of this pistol discharges spent cartridges and reloads fresh ones in the barrel, provided a cartridge remains in the magazine.</p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": ""
+        },
+        "equippable": true,
+        "equipped": true,
+        "formula": "",
+        "identified": true,
+        "isActive": null,
+        "level": 1,
+        "modifiers": [],
+        "price": 260,
+        "proficient": true,
+        "properties": {
+          "aeon": false,
+          "amm": false,
+          "analog": true,
+          "antibiological": false,
+          "archaic": false,
+          "aurora": false,
+          "automatic": false,
+          "blast": false,
+          "block": false,
+          "boost": false,
+          "breach": false,
+          "breakdown": false,
+          "bright": false,
+          "cluster": false,
+          "conceal": false,
+          "deconstruct": false,
+          "deflect": false,
+          "disarm": false,
+          "double": false,
+          "drainCharge": false,
+          "echo": false,
+          "entangle": false,
+          "explode": false,
+          "extinguish": false,
+          "feint": false,
+          "fiery": false,
+          "firstArc": false,
+          "flexibleLine": false,
+          "force": false,
+          "freeHands": false,
+          "fueled": false,
+          "grapple": false,
+          "gravitation": false,
+          "guided": false,
+          "harrying": false,
+          "holyWater": false,
+          "hybrid": false,
+          "ignite": false,
+          "indirect": false,
+          "injection": false,
+          "integrated": false,
+          "line": false,
+          "living": false,
+          "lockdown": false,
+          "mind-affecting": false,
+          "mine": false,
+          "mire": false,
+          "modal": false,
+          "necrotic": false,
+          "nonlethal": false,
+          "one": true,
+          "operative": false,
+          "penetrating": false,
+          "polarize": false,
+          "polymorphic": false,
+          "powered": false,
+          "professional": false,
+          "punchGun": false,
+          "qreload": false,
+          "radioactive": false,
+          "reach": false,
+          "recall": false,
+          "regrowth": false,
+          "relic": false,
+          "reposition": false,
+          "shape": false,
+          "shells": false,
+          "shield": false,
+          "sniper": false,
+          "stun": false,
+          "subtle": false,
+          "sunder": false,
+          "swarm": false,
+          "tail": false,
+          "teleportive": false,
+          "thought": false,
+          "throttle": false,
+          "thrown": false,
+          "trip": false,
+          "two": false,
+          "unbalancing": false,
+          "underwater": false,
+          "unwieldy": false,
+          "variantBoost": false,
+          "wideLine": false
+        },
+        "quantity": 1,
+        "quantityPerPack": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "ft",
+          "value": 30
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "source": "CRB pg. 173",
+        "special": "",
+        "specialMaterials": {},
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "usage": {
+          "per": "shot",
+          "value": 1
+        },
+        "uses": {
+          "max": null,
+          "per": "",
+          "value": null
+        },
+        "weaponCategory": "projectile",
+        "weaponType": "smallA"
+      }
+    },
+    {
+      "_id": "JiaxxdvANoWPDsHj",
+      "name": "Stickybomb grenade II",
+      "type": "weapon",
+      "img": "systems/sfrpg/icons/equipment/weapons/stickybomb-grenade.webp",
+      "system": {
+        "type": "",
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "rwak",
+        "activation": {
+          "type": "action",
+          "condition": "",
+          "cost": 1
+        },
+        "ammunitionType": "",
+        "area": {
+          "effect": "burst",
+          "shape": "sphere",
+          "units": "ft",
+          "value": 15
+        },
+        "attackBonus": 14,
+        "attributes": {
+          "ac": {
+            "value": "5"
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": "13"
+          },
+          "hp": {
+            "max": "27",
+            "value": 27
+          },
+          "size": "medium",
+          "sturdy": true
+        },
+        "attuned": false,
+        "bulk": "L",
+        "capacity": {
+          "max": 1,
+          "value": 1
+        },
+        "chatFlavor": "entangled [[2d4]] rounds",
+        "container": {
+          "contents": [],
+          "includeContentsInWealthCalculation": 1,
+          "isOpen": true,
+          "storage": [
+            {
+              "type": "slot",
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 4,
+              "subtype": "fusion",
+              "weightProperty": "level"
+            },
+            {
+              "type": "slot",
+              "acceptsType": [
+                "ammunition"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 1,
+              "subtype": "ammunitionSlot",
+              "weightProperty": ""
+            }
+          ]
+        },
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "2d4",
+              "operator": "and",
+              "types": {}
+            }
+          ]
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>A stickybomb grenade detonates with a splash of adhesive resin.</p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": ""
+        },
+        "equippable": true,
+        "equipped": true,
+        "formula": "",
+        "identified": true,
+        "isActive": null,
+        "level": 4,
+        "modifiers": [],
+        "price": 300,
+        "proficient": true,
+        "properties": {
+          "aeon": false,
+          "amm": false,
+          "analog": false,
+          "antibiological": false,
+          "archaic": false,
+          "aurora": false,
+          "automatic": false,
+          "blast": false,
+          "block": false,
+          "boost": false,
+          "breach": false,
+          "breakdown": false,
+          "bright": false,
+          "cluster": false,
+          "conceal": false,
+          "deconstruct": false,
+          "deflect": false,
+          "disarm": false,
+          "double": false,
+          "drainCharge": false,
+          "echo": false,
+          "entangle": false,
+          "explode": true,
+          "extinguish": false,
+          "feint": false,
+          "fiery": false,
+          "firstArc": false,
+          "flexibleLine": false,
+          "force": false,
+          "freeHands": false,
+          "fueled": false,
+          "grapple": false,
+          "gravitation": false,
+          "guided": false,
+          "harrying": false,
+          "holyWater": false,
+          "hybrid": false,
+          "ignite": false,
+          "indirect": false,
+          "injection": false,
+          "integrated": false,
+          "line": false,
+          "living": false,
+          "lockdown": false,
+          "mind-affecting": false,
+          "mine": false,
+          "mire": false,
+          "modal": false,
+          "necrotic": false,
+          "nonlethal": false,
+          "one": true,
+          "operative": false,
           "penetrating": false,
           "polarize": false,
           "polymorphic": false,
@@ -195,11 +702,11 @@
         },
         "rollNotes": "",
         "save": {
-          "type": "",
-          "dc": "",
+          "type": "reflex",
+          "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
           "descriptor": "negate"
         },
-        "source": "CRB pg. 171",
+        "source": "CRB pg. 178",
         "special": "",
         "specialMaterials": {},
         "target": {
@@ -207,307 +714,21 @@
           "value": ""
         },
         "usage": {
-          "per": "",
-          "value": null
+          "per": "shot",
+          "value": 1
         },
         "uses": {
-          "max": null,
-          "per": "",
-          "value": null
+          "max": 1,
+          "per": "charges",
+          "value": 1
         },
         "weaponCategory": "uncategorized",
-        "weaponType": "basicM"
-      }
-    },
-    {
-      "_id": "uLYBLnBzeFlZledH",
-      "name": "Arc pistol, static",
-      "type": "weapon",
-      "img": "systems/sfrpg/icons/equipment/weapons/arc-pistol.webp",
-      "system": {
-        "type": "",
-        "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "actionTarget": "eac",
-        "actionType": "rwak",
-        "activation": {
-          "type": "none",
-          "condition": "",
-          "cost": null
-        },
-        "ammunitionType": "charge",
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": null,
-          "value": null
-        },
-        "attackBonus": 6,
-        "attributes": {
-          "ac": {
-            "value": "5"
-          },
-          "customBuilt": false,
-          "dex": {
-            "mod": ""
-          },
-          "hardness": {
-            "value": "9"
-          },
-          "hp": {
-            "max": "21",
-            "value": 21
-          },
-          "size": "medium",
-          "sturdy": true
-        },
-        "attuned": false,
-        "bulk": "L",
-        "capacity": {
-          "max": 20,
-          "value": 20
-        },
-        "chatFlavor": "",
-        "container": {
-          "contents": [
-            {
-              "id": "z5LCYOWYQnKMk0yA",
-              "index": 2
-            }
-          ],
-          "includeContentsInWealthCalculation": true,
-          "isOpen": true,
-          "storage": [
-            {
-              "type": "slot",
-              "acceptsType": [
-                "fusion"
-              ],
-              "affectsEncumbrance": true,
-              "amount": 2,
-              "subtype": "fusion",
-              "weightProperty": "level"
-            },
-            {
-              "type": "slot",
-              "acceptsType": [
-                "goods"
-              ],
-              "affectsEncumbrance": true,
-              "amount": 1,
-              "subtype": "",
-              "weightProperty": ""
-            },
-            {
-              "type": "slot",
-              "acceptsType": [
-                "ammunition"
-              ],
-              "affectsEncumbrance": true,
-              "amount": 1,
-              "subtype": "ammunitionSlot",
-              "weightProperty": ""
-            }
-          ]
-        },
-        "critical": {
-          "effect": "Arc 2",
-          "parts": []
-        },
-        "damage": {
-          "parts": [
-            {
-              "name": "",
-              "formula": "1d6",
-              "group": null,
-              "types": {
-                "acid": false,
-                "bludgeoning": false,
-                "cold": false,
-                "electricity": true,
-                "fire": false,
-                "healing": false,
-                "piercing": false,
-                "slashing": false,
-                "sonic": false
-              }
-            }
-          ]
-        },
-        "damageNotes": "",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>Arc pistols fire deadly, stunning blasts of electricity at ranged targets. They have a two-pronged emitter that directs the electrical blast and a bulky chamber that holds the capacitor.</p>"
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": ""
-        },
-        "equippable": true,
-        "equipped": true,
-        "formula": "",
-        "identified": true,
-        "img": "systems/sfrpg/icons/equipment/weapons/arc-pistol.webp",
-        "isActive": null,
-        "isOpen": true,
-        "level": 2,
-        "modifiers": [],
-        "price": 750,
-        "proficient": true,
-        "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": false,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "buttressing": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "gearArray": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "holyWater": false,
-          "hybrid": false,
-          "hydrodynamic": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "instrumental": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": false,
-          "one": true,
-          "operative": false,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": false,
-          "professional": false,
-          "propel": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "recall": false,
-          "regrowth": false,
-          "relic": false,
-          "reposition": false,
-          "scramble": false,
-          "shape": false,
-          "shatter": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": true,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "thruster": false,
-          "trip": false,
-          "two": false,
-          "unbalancing": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
-        },
-        "quantity": 1,
-        "quantityPerPack": 1,
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "ft",
-          "value": 50
-        },
-        "rollNotes": "",
-        "save": {
-          "type": "",
-          "dc": "",
-          "descriptor": "negate"
-        },
-        "source": "CRB pg. 173",
-        "special": "",
-        "specialMaterials": {
-          "abysium": false,
-          "adamantine": false,
-          "coldiron": false,
-          "diatha": false,
-          "djezet": false,
-          "horacalcum": false,
-          "inubrix": false,
-          "khefak": false,
-          "noqual": false,
-          "nyblantine": false,
-          "purplecores": false,
-          "siccatite": false,
-          "silver": false,
-          "voidglass": false
-        },
-        "target": {
-          "type": "",
-          "value": ""
-        },
-        "totalWeight": "L",
-        "usage": {
-          "per": "shot",
-          "value": 2
-        },
-        "uses": {
-          "max": null,
-          "per": "",
-          "value": null
-        },
-        "weaponCategory": "shock",
         "weaponType": "smallA"
       }
     },
     {
-      "_id": "l76FJlbJYpHM22yb",
-      "name": "Mark (Ex)",
+      "_id": "fmUroRb1gHPbSnzW",
+      "name": "Swift Stalker (Ex)",
       "type": "feat",
       "img": "icons/svg/mystery-man.svg",
       "system": {
@@ -544,7 +765,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>A skip tracer can choose one sapient creature as a mark, provided the skip tracer can identify that creature by a specific identity and has studied the mark for 1 hour using available information, or directly observed the mark for 1 minute outside of combat or as a full action in combat. The skip tracer gains an insight bonus on skill checks made to investigate, track, or gather information on the mark, as well as on Sense Motive checks against the mark. This bonus equals 1 + the skip tracer’s CR divided by 6 (+1 total at CR 1). Also, the skip tracer can use Sense Motive instead of Perception to use the pierce disguise or search tasks of the Perception skill against the mark.</p>"
+          "value": "<p>A recovery agent reduces the penalty for following tracks using Survival while moving at full speed to 0. The agent also reduces the penalty for moving at more than half speed while using Stealth to hide to -5.</p>"
         },
         "descriptors": {
           "acid": false,
@@ -595,23 +816,7 @@
         },
         "formula": "",
         "isActive": null,
-        "modifiers": [
-          {
-            "_id": "ead362a2-dc5f-4629-97dd-59a90f470210",
-            "name": "Mark (Ex)",
-            "type": "insight",
-            "condition": "",
-            "effectType": "all-skills",
-            "enabled": false,
-            "max": 1,
-            "modifier": "1",
-            "modifierType": "formula",
-            "notes": "A skip tracer can choose one sapient creature as a mark, provided the skip tracer can identify that creature by a specific identity and has studied the mark for 1 hour using available information, or directly observed the mark for 1 minute outside of combat or as a full action in combat. The skip tracer gains an insight bonus on skill checks made to investigate, track, or gather information on the mark, as well as on Sense Motive checks against the mark.",
-            "source": "",
-            "subtab": "misc",
-            "valueAffected": ""
-          }
-        ],
+        "modifiers": [],
         "range": {
           "additional": "",
           "per": "",
@@ -642,10 +847,10 @@
       }
     },
     {
-      "_id": "Yl2aBTxHXwhhytCR",
-      "name": "Second skin",
+      "_id": "eJAVg9nijW1S7oiZ",
+      "name": "Freebooter armor II",
       "type": "equipment",
-      "img": "systems/sfrpg/icons/equipment/armor/second-skin.webp",
+      "img": "systems/sfrpg/icons/equipment/armor/freebooter-armor-2.webp",
       "system": {
         "type": "",
         "ability": null,
@@ -670,8 +875,8 @@
           "type": "light",
           "acp": 0,
           "dex": 5,
-          "eac": 1,
-          "kac": 2,
+          "eac": 6,
+          "kac": 8,
           "speedAdjust": 0
         },
         "attackBonus": 0,
@@ -684,11 +889,11 @@
             "mod": ""
           },
           "hardness": {
-            "value": "7"
+            "value": "17"
           },
           "hp": {
-            "max": "`8",
-            "value": null
+            "max": "33",
+            "value": 33
           },
           "size": "medium",
           "sturdy": true
@@ -703,7 +908,7 @@
         "container": {
           "contents": [
             {
-              "id": "8PIWMNkZ9a9YjhyB",
+              "id": "5ThywMjNw3XZJb6H",
               "index": 0
             }
           ],
@@ -736,7 +941,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>This flexible body stocking fits tightly against its wearer and can be worn under ordinary clothes. If a second skin matches the wearerâ€™s skin tone, this type of light armor can be difficult to detect. A second skin can also accept upgrades, making it popular for celebrities, diplomats, and other individuals who want protection without appearing to wear armor.</p>"
+          "value": "<p>Popularized by the Free Captains of @UUID[Compendium.sfrpg.setting.Yt2xT4Iy6lHjCzso]{The Diaspora}, freebooter armor features an armored jacket or breastplate, heavy boots and gloves, numerous straps and hidden weapons, and a helmet. Novice explorers and mercenaries beginning their career sometimes choose freebooter armor for the air of rakish experience this light armor lends its wearer.</p>"
         },
         "descriptors": [],
         "duration": {
@@ -748,9 +953,9 @@
         "formula": "",
         "identified": true,
         "isActive": null,
-        "level": 1,
+        "level": 6,
         "modifiers": [],
-        "price": 250,
+        "price": 4720,
         "proficient": false,
         "quantity": 1,
         "quantityPerPack": 1,
@@ -788,363 +993,10 @@
       }
     },
     {
-      "_id": "5MYzN7idAeqyVaWz",
-      "name": "Arc pistol, static",
+      "_id": "Pwykat7UvmRu9O27",
+      "name": "Dueling sword, tactical",
       "type": "weapon",
-      "img": "systems/sfrpg/icons/equipment/weapons/arc-pistol.webp",
-      "system": {
-        "type": "",
-        "ability": "dex",
-        "abilityMods": {
-          "parts": []
-        },
-        "actionTarget": "eac",
-        "actionType": "rwak",
-        "activation": {
-          "type": "none",
-          "condition": "",
-          "cost": null
-        },
-        "ammunitionType": "charge",
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": null,
-          "value": null
-        },
-        "attackBonus": 0,
-        "attributes": {
-          "ac": {
-            "value": "5"
-          },
-          "customBuilt": false,
-          "dex": {
-            "mod": ""
-          },
-          "hardness": {
-            "value": "9"
-          },
-          "hp": {
-            "max": "21",
-            "value": 21
-          },
-          "size": "medium",
-          "sturdy": true
-        },
-        "attuned": false,
-        "bulk": "L",
-        "capacity": {
-          "max": 20,
-          "value": 20
-        },
-        "chatFlavor": "",
-        "container": {
-          "contents": [],
-          "includeContentsInWealthCalculation": true,
-          "isOpen": true,
-          "storage": [
-            {
-              "type": "slot",
-              "acceptsType": [
-                "fusion"
-              ],
-              "affectsEncumbrance": true,
-              "amount": 2,
-              "subtype": "fusion",
-              "weightProperty": "level"
-            },
-            {
-              "type": "slot",
-              "acceptsType": [
-                "goods"
-              ],
-              "affectsEncumbrance": true,
-              "amount": 1,
-              "subtype": "",
-              "weightProperty": ""
-            },
-            {
-              "type": "slot",
-              "acceptsType": [
-                "ammunition"
-              ],
-              "affectsEncumbrance": true,
-              "amount": 1,
-              "subtype": "ammunitionSlot",
-              "weightProperty": ""
-            }
-          ]
-        },
-        "critical": {
-          "effect": "Arc 2",
-          "parts": [
-            {
-              "formula": "2",
-              "operator": "",
-              "types": {
-                "acid": false,
-                "bludgeoning": false,
-                "cold": false,
-                "electricity": true,
-                "fire": false,
-                "healing": false,
-                "piercing": false,
-                "slashing": false,
-                "sonic": false
-              }
-            }
-          ]
-        },
-        "damage": {
-          "parts": [
-            {
-              "name": "",
-              "formula": "1d6",
-              "types": {
-                "acid": false,
-                "bludgeoning": false,
-                "cold": false,
-                "electricity": true,
-                "fire": false,
-                "healing": false,
-                "piercing": false,
-                "slashing": false,
-                "sonic": false
-              }
-            }
-          ]
-        },
-        "damageNotes": "",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>Arc pistols fire deadly, stunning blasts of electricity at ranged targets. They have a two-pronged emitter that directs the electrical blast and a bulky chamber that holds the capacitor.</p>"
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": ""
-        },
-        "equippable": false,
-        "equipped": false,
-        "formula": "",
-        "identified": true,
-        "img": "systems/sfrpg/icons/equipment/weapons/arc-pistol.webp",
-        "isActive": null,
-        "isOpen": true,
-        "level": 2,
-        "modifiers": [],
-        "price": 750,
-        "proficient": true,
-        "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": false,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "buttressing": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "gearArray": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "holyWater": false,
-          "hybrid": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": false,
-          "one": true,
-          "operative": false,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": false,
-          "professional": false,
-          "propel": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "recall": false,
-          "regrowth": false,
-          "relic": false,
-          "reposition": false,
-          "scramble": false,
-          "shape": false,
-          "shatter": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": true,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "thruster": false,
-          "trip": false,
-          "two": false,
-          "unbalancing": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
-        },
-        "quantity": 1,
-        "quantityPerPack": 1,
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "ft",
-          "value": 50
-        },
-        "rollNotes": "",
-        "save": {
-          "type": "",
-          "dc": "",
-          "descriptor": "negate"
-        },
-        "source": "CRB pg. 173",
-        "special": "",
-        "specialMaterials": {
-          "abysium": false,
-          "adamantine": false,
-          "coldiron": false,
-          "diatha": false,
-          "djezet": false,
-          "horacalcum": false,
-          "inubrix": false,
-          "khefak": false,
-          "noqual": false,
-          "nyblantine": false,
-          "purplecores": false,
-          "siccatite": false,
-          "silver": false,
-          "voidglass": false
-        },
-        "target": {
-          "type": "",
-          "value": ""
-        },
-        "totalWeight": "L",
-        "usage": {
-          "per": "shot",
-          "value": 2
-        },
-        "uses": {
-          "max": null,
-          "per": "",
-          "value": null
-        },
-        "weaponCategory": "shock",
-        "weaponType": "smallA"
-      }
-    },
-    {
-      "_id": "0vYcBgowfJycgeST",
-      "name": "Battery",
-      "type": "ammunition",
-      "flags": {
-        "core": {
-          "sourceId": "Actor.Q30e2DcopsrGzQgN.Item.0vYcBgowfJycgeST"
-        }
-      },
-      "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
-      "system": {
-        "type": "",
-        "ammunitionType": "charge",
-        "attributes": {
-          "ac": {
-            "value": ""
-          },
-          "customBuilt": false,
-          "dex": {
-            "mod": ""
-          },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
-          "size": "medium",
-          "sturdy": false
-        },
-        "attuned": false,
-        "bulk": "-",
-        "capacity": {
-          "max": 20,
-          "value": 20
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 20</p>"
-        },
-        "equippable": false,
-        "equipped": false,
-        "identified": true,
-        "level": 1,
-        "price": 60,
-        "quantity": 1,
-        "quantityPerPack": 1,
-        "source": "Core Rulebook",
-        "specialMaterials": {},
-        "useCapacity": true
-      }
-    },
-    {
-      "_id": "jsyys0EmU3ogE21Q",
-      "name": "Baton, tactical",
-      "type": "weapon",
-      "img": "icons/weapons/staves/staff-simple.webp",
+      "img": "systems/sfrpg/icons/equipment/weapons/dueling-sword.webp",
       "system": {
         "type": "",
         "ability": "str",
@@ -1175,11 +1027,11 @@
             "mod": ""
           },
           "hardness": {
-            "value": "7"
+            "value": "9"
           },
           "hp": {
-            "max": "18",
-            "value": 18
+            "max": "21",
+            "value": 21
           },
           "size": "medium",
           "sturdy": true
@@ -1195,7 +1047,28 @@
           "contents": [],
           "includeContentsInWealthCalculation": 1,
           "isOpen": true,
-          "storage": []
+          "storage": [
+            {
+              "type": "slot",
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 2,
+              "subtype": "fusion",
+              "weightProperty": "level"
+            },
+            {
+              "type": "slot",
+              "acceptsType": [
+                "goods"
+              ],
+              "amount": 1,
+              "subtype": "",
+              "weightMultiplier": 1,
+              "weightProperty": ""
+            }
+          ]
         },
         "critical": {
           "effect": "",
@@ -1204,10 +1077,10 @@
         "damage": {
           "parts": [
             {
-              "formula": "1d4 + @abilities.str.mod",
+              "formula": "1d6 + @abilities.str.mod",
               "operator": "",
               "types": {
-                "bludgeoning": true
+                "slashing": true
               }
             }
           ]
@@ -1218,7 +1091,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>A baton is a thin, solid metal shaft, usually with a textured rubber grip. A tactical baton can be used to inflict precise bludgeoning blows. An advanced baton, used by elite mercenary and security companies, often has an additional shaft, as well as a weighted end that can be powered to connect with substantially more force than a tactical baton.</p>"
+          "value": "<p>While dueling swords are crafted to be aesthetically pleasing and are often seen as a mark of rank or tradition, many warriors still train with them to deadly effect. The powered blades of both buzzblade and ripper dueling swords bring this danger into the modern era, while the molecular rift sword - though unpowered - uses a field of disrupted molecules along its blade to slice through nearly anything, and must be stored in a magnetic sheath that never actually touches the blade.</p>"
         },
         "descriptors": [],
         "duration": {
@@ -1230,9 +1103,9 @@
         "formula": "",
         "identified": true,
         "isActive": null,
-        "level": 1,
+        "level": 2,
         "modifiers": [],
-        "price": 90,
+        "price": 475,
         "proficient": true,
         "properties": {
           "aeon": false,
@@ -1286,7 +1159,557 @@
           "necrotic": false,
           "nonlethal": false,
           "one": true,
-          "operative": true,
+          "operative": false,
+          "penetrating": false,
+          "polarize": false,
+          "polymorphic": false,
+          "powered": false,
+          "professional": false,
+          "punchGun": false,
+          "qreload": false,
+          "radioactive": false,
+          "reach": false,
+          "recall": false,
+          "regrowth": false,
+          "relic": false,
+          "reposition": false,
+          "shape": false,
+          "shells": false,
+          "shield": false,
+          "sniper": false,
+          "stun": false,
+          "subtle": false,
+          "sunder": false,
+          "swarm": false,
+          "tail": false,
+          "teleportive": false,
+          "thought": false,
+          "throttle": false,
+          "thrown": false,
+          "trip": false,
+          "two": false,
+          "unbalancing": false,
+          "underwater": false,
+          "unwieldy": false,
+          "variantBoost": false,
+          "wideLine": false
+        },
+        "quantity": 1,
+        "quantityPerPack": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "touch",
+          "value": null
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "source": "CRB pg. 171",
+        "special": "",
+        "specialMaterials": {},
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "usage": {
+          "per": "",
+          "value": null
+        },
+        "uses": {
+          "max": null,
+          "per": "",
+          "value": null
+        },
+        "weaponCategory": "uncategorized",
+        "weaponType": "basicM"
+      }
+    },
+    {
+      "_id": "9FdmaGUj2jS58c1z",
+      "name": "Semi-auto pistol, tactical",
+      "type": "weapon",
+      "img": "systems/sfrpg/icons/equipment/weapons/semi-auto-pistol-tactical.webp",
+      "system": {
+        "type": "",
+        "ability": "dex",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "kac",
+        "actionType": "rwak",
+        "activation": {
+          "type": "none",
+          "condition": "",
+          "cost": null
+        },
+        "ammunitionType": "roundS",
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "none",
+          "value": null
+        },
+        "attackBonus": 0,
+        "attributes": {
+          "ac": {
+            "value": "5"
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": "7"
+          },
+          "hp": {
+            "max": "18",
+            "value": 18
+          },
+          "size": "medium",
+          "sturdy": true
+        },
+        "attuned": false,
+        "bulk": "L",
+        "capacity": {
+          "max": 9,
+          "value": 9
+        },
+        "chatFlavor": "",
+        "container": {
+          "contents": [],
+          "includeContentsInWealthCalculation": 1,
+          "isOpen": true,
+          "storage": [
+            {
+              "type": "slot",
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 1,
+              "subtype": "fusion",
+              "weightProperty": "level"
+            },
+            {
+              "type": "slot",
+              "acceptsType": [
+                "goods"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 1,
+              "subtype": "",
+              "weightMultiplier": 1,
+              "weightProperty": ""
+            },
+            {
+              "type": "slot",
+              "acceptsType": [
+                "ammunition"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 1,
+              "subtype": "ammunitionSlot",
+              "weightProperty": ""
+            }
+          ]
+        },
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "1d6",
+              "operator": "",
+              "types": {
+                "piercing": true
+              }
+            }
+          ]
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>The semiautomatic mechanism of this pistol discharges spent cartridges and reloads fresh ones in the barrel, provided a cartridge remains in the magazine.</p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": ""
+        },
+        "equippable": false,
+        "equipped": false,
+        "formula": "",
+        "identified": true,
+        "isActive": null,
+        "level": 1,
+        "modifiers": [],
+        "price": 260,
+        "proficient": true,
+        "properties": {
+          "aeon": false,
+          "amm": false,
+          "analog": true,
+          "antibiological": false,
+          "archaic": false,
+          "aurora": false,
+          "automatic": false,
+          "blast": false,
+          "block": false,
+          "boost": false,
+          "breach": false,
+          "breakdown": false,
+          "bright": false,
+          "cluster": false,
+          "conceal": false,
+          "deconstruct": false,
+          "deflect": false,
+          "disarm": false,
+          "double": false,
+          "drainCharge": false,
+          "echo": false,
+          "entangle": false,
+          "explode": false,
+          "extinguish": false,
+          "feint": false,
+          "fiery": false,
+          "firstArc": false,
+          "flexibleLine": false,
+          "force": false,
+          "freeHands": false,
+          "fueled": false,
+          "grapple": false,
+          "gravitation": false,
+          "guided": false,
+          "harrying": false,
+          "holyWater": false,
+          "hybrid": false,
+          "ignite": false,
+          "indirect": false,
+          "injection": false,
+          "integrated": false,
+          "line": false,
+          "living": false,
+          "lockdown": false,
+          "mind-affecting": false,
+          "mine": false,
+          "mire": false,
+          "modal": false,
+          "necrotic": false,
+          "nonlethal": false,
+          "one": true,
+          "operative": false,
+          "penetrating": false,
+          "polarize": false,
+          "polymorphic": false,
+          "powered": false,
+          "professional": false,
+          "punchGun": false,
+          "qreload": false,
+          "radioactive": false,
+          "reach": false,
+          "recall": false,
+          "regrowth": false,
+          "relic": false,
+          "reposition": false,
+          "shape": false,
+          "shells": false,
+          "shield": false,
+          "sniper": false,
+          "stun": false,
+          "subtle": false,
+          "sunder": false,
+          "swarm": false,
+          "tail": false,
+          "teleportive": false,
+          "thought": false,
+          "throttle": false,
+          "thrown": false,
+          "trip": false,
+          "two": false,
+          "unbalancing": false,
+          "underwater": false,
+          "unwieldy": false,
+          "variantBoost": false,
+          "wideLine": false
+        },
+        "quantity": 1,
+        "quantityPerPack": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "ft",
+          "value": 30
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "source": "CRB pg. 173",
+        "special": "",
+        "specialMaterials": {},
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "usage": {
+          "per": "shot",
+          "value": 1
+        },
+        "uses": {
+          "max": null,
+          "per": "",
+          "value": null
+        },
+        "weaponCategory": "projectile",
+        "weaponType": "smallA"
+      }
+    },
+    {
+      "_id": "f2OpBjFYzNHRMwP6",
+      "name": "Rounds, Small Arm",
+      "type": "ammunition",
+      "img": "systems/sfrpg/icons/equipment/weapons/rounds-small-arm.webp",
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "ammunitionType": "roundS",
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": false
+        },
+        "attuned": false,
+        "bulk": "L",
+        "capacity": {
+          "max": 0,
+          "value": 0
+        },
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>Cased rounds are housed in magazines, which can be fitted into the appropriate weapon.</p>\n<p><strong>Capacity:</strong> 30</p>"
+        },
+        "equippable": false,
+        "equipped": false,
+        "identified": true,
+        "level": 1,
+        "price": 40,
+        "quantity": 18,
+        "quantityPerPack": 30,
+        "source": "Core Rulebook",
+        "specialMaterials": {
+          "abysium": false,
+          "adamantine": false,
+          "coldiron": false,
+          "diatha": false,
+          "djezet": false,
+          "horacalcum": false,
+          "inubrix": false,
+          "khefak": false,
+          "noqual": false,
+          "nyblantine": false,
+          "purplecores": false,
+          "siccatite": false,
+          "silver": false,
+          "voidglass": false
+        },
+        "useCapacity": false
+      }
+    },
+    {
+      "_id": "IrKlXZA3h0gJwxhx",
+      "name": "Stickybomb grenade II",
+      "type": "weapon",
+      "img": "systems/sfrpg/icons/equipment/weapons/stickybomb-grenade.webp",
+      "system": {
+        "type": "",
+        "ability": "str",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "rwak",
+        "activation": {
+          "type": "action",
+          "condition": "",
+          "cost": 1
+        },
+        "ammunitionType": "",
+        "area": {
+          "effect": "burst",
+          "shape": "sphere",
+          "units": "ft",
+          "value": 15
+        },
+        "attackBonus": 0,
+        "attributes": {
+          "ac": {
+            "value": "5"
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": "13"
+          },
+          "hp": {
+            "max": "27",
+            "value": 27
+          },
+          "size": "medium",
+          "sturdy": true
+        },
+        "attuned": false,
+        "bulk": "L",
+        "capacity": {
+          "max": 1,
+          "value": 1
+        },
+        "chatFlavor": "entangled [[2d4]] rounds",
+        "container": {
+          "contents": [],
+          "includeContentsInWealthCalculation": 1,
+          "isOpen": true,
+          "storage": [
+            {
+              "type": "slot",
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 4,
+              "subtype": "fusion",
+              "weightProperty": "level"
+            },
+            {
+              "type": "slot",
+              "acceptsType": [
+                "ammunition"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 1,
+              "subtype": "ammunitionSlot",
+              "weightProperty": ""
+            }
+          ]
+        },
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>A stickybomb grenade detonates with a splash of adhesive resin.</p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": ""
+        },
+        "equippable": false,
+        "equipped": false,
+        "formula": "",
+        "identified": true,
+        "isActive": null,
+        "level": 4,
+        "modifiers": [],
+        "price": 300,
+        "proficient": true,
+        "properties": {
+          "aeon": false,
+          "amm": false,
+          "analog": false,
+          "antibiological": false,
+          "archaic": false,
+          "aurora": false,
+          "automatic": false,
+          "blast": false,
+          "block": false,
+          "boost": false,
+          "breach": false,
+          "breakdown": false,
+          "bright": false,
+          "cluster": false,
+          "conceal": false,
+          "deconstruct": false,
+          "deflect": false,
+          "disarm": false,
+          "double": false,
+          "drainCharge": false,
+          "echo": false,
+          "entangle": false,
+          "explode": true,
+          "extinguish": false,
+          "feint": false,
+          "fiery": false,
+          "firstArc": false,
+          "flexibleLine": false,
+          "force": false,
+          "freeHands": false,
+          "fueled": false,
+          "grapple": false,
+          "gravitation": false,
+          "guided": false,
+          "harrying": false,
+          "holyWater": false,
+          "hybrid": false,
+          "ignite": false,
+          "indirect": false,
+          "injection": false,
+          "integrated": false,
+          "line": false,
+          "living": false,
+          "lockdown": false,
+          "mind-affecting": false,
+          "mine": false,
+          "mire": false,
+          "modal": false,
+          "necrotic": false,
+          "nonlethal": false,
+          "one": true,
+          "operative": false,
           "penetrating": false,
           "polarize": false,
           "polymorphic": false,
@@ -1331,11 +1754,11 @@
         },
         "rollNotes": "",
         "save": {
-          "type": "",
-          "dc": "",
+          "type": "reflex",
+          "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
           "descriptor": "negate"
         },
-        "source": "CRB pg. 171",
+        "source": "CRB pg. 178",
         "special": "",
         "specialMaterials": {},
         "target": {
@@ -1343,20 +1766,20 @@
           "value": ""
         },
         "usage": {
-          "per": "",
-          "value": null
+          "per": "shot",
+          "value": 1
         },
         "uses": {
-          "max": null,
-          "per": "",
-          "value": null
+          "max": 1,
+          "per": "charges",
+          "value": 1
         },
         "weaponCategory": "uncategorized",
-        "weaponType": "basicM"
+        "weaponType": "grenade"
       }
     },
     {
-      "_id": "bJRxX95AjhdLf3cD",
+      "_id": "xC7OFzVQdvqRcrZe",
       "name": "Loot",
       "type": "container",
       "img": "icons/svg/item-bag.svg",
@@ -1385,27 +1808,35 @@
         "container": {
           "contents": [
             {
-              "id": "Yl2aBTxHXwhhytCR",
+              "id": "eJAVg9nijW1S7oiZ",
               "index": 0
             },
             {
-              "id": "5MYzN7idAeqyVaWz",
+              "id": "Pwykat7UvmRu9O27",
               "index": 0
             },
             {
-              "id": "jsyys0EmU3ogE21Q",
+              "id": "9FdmaGUj2jS58c1z",
               "index": 0
             },
             {
-              "id": "APhzQm6AN5xCHvKH",
+              "id": "f2OpBjFYzNHRMwP6",
               "index": 0
             },
             {
-              "id": "beMagQaVwBg4cqET",
+              "id": "IrKlXZA3h0gJwxhx",
               "index": 0
             },
             {
-              "id": "0vYcBgowfJycgeST",
+              "id": "5HQZtkppW17vCoUr",
+              "index": 0
+            },
+            {
+              "id": "HeBN1t75Vw58iGrZ",
+              "index": 0
+            },
+            {
+              "id": "pqahHZMaNN8FJ1Ku",
               "index": 0
             }
           ],
@@ -1457,80 +1888,16 @@
       }
     },
     {
-      "_id": "z5LCYOWYQnKMk0yA",
-      "name": "Battery",
+      "_id": "vv4iF38V5FZ6rQLv",
+      "name": "Rounds, Small Arm",
       "type": "ammunition",
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.GcFU8g4cqpZlU1dG"
-        }
-      },
-      "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
-      "system": {
-        "type": "",
-        "ammunitionType": "charge",
-        "attributes": {
-          "ac": {
-            "value": ""
-          },
-          "customBuilt": false,
-          "dex": {
-            "mod": ""
-          },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
-          "size": "medium",
-          "sturdy": false
-        },
-        "attuned": false,
-        "bulk": "-",
-        "capacity": {
-          "max": 20,
-          "value": 20
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 20</p>"
-        },
-        "equippable": false,
-        "equipped": false,
-        "identified": true,
-        "level": 1,
-        "price": 60,
-        "quantity": 1,
-        "quantityPerPack": 1,
-        "source": "Core Rulebook",
-        "specialMaterials": {},
-        "useCapacity": true
-      }
-    },
-    {
-      "_id": "APhzQm6AN5xCHvKH",
-      "name": "Voice Distorter",
-      "type": "technological",
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.5LGFynRGwAtRIm9q"
-        }
-      },
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/equipment/weapons/rounds-small-arm.webp",
       "system": {
         "type": "",
         "abilityMods": {
           "parts": []
         },
-        "ammunitionType": "",
+        "ammunitionType": "roundS",
         "attributes": {
           "ac": {
             "value": ""
@@ -1555,9 +1922,91 @@
           "max": 0,
           "value": 0
         },
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>Cased rounds are housed in magazines, which can be fitted into the appropriate weapon.</p>\n<p><strong>Capacity:</strong> 30</p>"
+        },
+        "equippable": false,
+        "equipped": false,
+        "identified": true,
+        "level": 1,
+        "price": 40,
+        "quantity": 9,
+        "quantityPerPack": 30,
+        "source": "Core Rulebook",
+        "specialMaterials": {
+          "abysium": false,
+          "adamantine": false,
+          "coldiron": false,
+          "diatha": false,
+          "djezet": false,
+          "horacalcum": false,
+          "inubrix": false,
+          "khefak": false,
+          "noqual": false,
+          "nyblantine": false,
+          "purplecores": false,
+          "siccatite": false,
+          "silver": false,
+          "voidglass": false
+        },
+        "useCapacity": false
+      }
+    },
+    {
+      "_id": "5ThywMjNw3XZJb6H",
+      "name": "Jetpack",
+      "type": "upgrade",
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.sfrpg.equipment.ufNFjEVtymgFqY9Y"
+        }
+      },
+      "img": "icons/svg/mystery-man.svg",
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "allowedArmorType": "lightAndHeavy",
+        "ammunitionType": "",
+        "armorType": "lightAndHeavy",
+        "attributes": {
+          "ac": {
+            "value": "5"
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": "10"
+          },
+          "hp": {
+            "max": "10",
+            "value": 10
+          },
+          "size": "medium",
+          "sturdy": false
+        },
+        "attuned": false,
+        "bulk": "1",
+        "capacity": {
+          "max": 40,
+          "value": 40
+        },
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": true,
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": []
         },
@@ -1572,31 +2021,159 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>Kasathas who turn to crime, as well as those who value anonymity, sometimes wear masks that conceal their identities. A voice distorter worn over the mouth converts the user’s voice into an unrecognizable and obviously artificial tone. Any check attempted to identify the wearer’s voice takes a –5 penalty, and such identification can succeed only by relying on speech patterns, distinguishing phrases, and other idiosyncrasies of the wearer’s speech rather than the sound of the voice itself.</p>\n<p>If the distorted voice is recorded, a character can remove the distortion and reveal the speaker’s original voice. Doing so requires a successful DC 21 Computers check. The decipherer gains a +4 circumstance bonus to this check with access to an undistorted recording of the same voice.</p>"
+          "value": "<p>You gain a fly speed of 30 feet (average maneuverability). You can use this for “cruising flight” at a usage of only 1 charge per minute, but you are @UUID[Compendium.sfrpg.conditions.MZ8OoH1GE9qDMyCD]{Flat-footed} and @UUID[Compendium.sfrpg.conditions.yUtkoIshf4dPruNd]{Off-Target} while doing so. Changing from normal flight to cruising flight or vice versa is a standard action. A jetpack can’t lift you if you’re @UUID[Compendium.sfrpg.conditions.OwZA6flUQPH0jPA0]{Encumbered}.</p>\n<p>This upgrade can be installed only in light or heavy armor.</p>"
         },
         "equippable": false,
         "equipped": false,
-        "hands": 0,
-        "identified": false,
-        "level": 1,
+        "identified": true,
+        "level": 5,
         "modifiers": [],
-        "price": 55,
+        "price": 3100,
         "quantity": 1,
         "quantityPerPack": 1,
-        "source": "COM pg. 21",
+        "slots": 1,
+        "source": "CRB pg. 205",
         "usage": {
+          "per": "round",
+          "value": 2
+        }
+      }
+    },
+    {
+      "_id": "5HQZtkppW17vCoUr",
+      "name": "Speed suspension, minimal",
+      "type": "augmentation",
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.sfrpg.equipment.ck1uVTnXFB5wf2jZ"
+        }
+      },
+      "img": "icons/commodities/bones/bone-joint-tan.webp",
+      "system": {
+        "type": "cybernetic",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": 0
+        },
+        "attackBonus": 0,
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": null
+          },
+          "size": "medium",
+          "sturdy": false
+        },
+        "attuned": false,
+        "bulk": "-",
+        "chatFlavor": "",
+        "container": {
+          "contents": [],
+          "includeContentsInWealthCalculation": true,
+          "isOpen": true,
+          "storage": []
+        },
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>You increase your land speed by replacing joints and tendons in your legs with high-performance cybernetics. A minimal speed suspension replaces only a few parts, increasing your land speed by 10 feet. A standard suspension is more invasive and increases your land speed by 20 feet. Replacing all your leg joints and tendons with a complete speed suspension increases your land speed by 30 feet. You can install a speed suspension into prosthetic legs. Extra speed from these augmentations is treated as an enhancement bonus.</p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "equippable": true,
+        "equipped": false,
+        "formula": "",
+        "identified": true,
+        "isActive": null,
+        "level": 4,
+        "modifiers": [
+          {
+            "_id": "c313c211-0bbb-4141-8b24-835733bcfac8",
+            "name": "Speed suspension, minimal",
+            "type": "untyped",
+            "condition": "",
+            "effectType": "specific-speed",
+            "enabled": true,
+            "max": 10,
+            "modifier": "10",
+            "modifierType": "constant",
+            "notes": "",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": "land"
+          }
+        ],
+        "price": 1900,
+        "quantity": 1,
+        "quantityPerPack": 1,
+        "range": {
+          "additional": "",
           "per": "",
+          "units": "",
+          "value": null
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "CRB pg. 211",
+        "system": "allLegs",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
           "value": 0
         }
       }
     },
     {
-      "_id": "8PIWMNkZ9a9YjhyB",
-      "name": "Quick-release sheath",
-      "type": "upgrade",
+      "_id": "HeBN1t75Vw58iGrZ",
+      "name": "Restraints, Manacles",
+      "type": "technological",
       "flags": {
         "core": {
-          "sourceId": "Compendium.sfrpg.equipment.48qgczqOKtxcNg4L"
+          "sourceId": "Compendium.sfrpg.equipment.51H6DFZEfiTzVdCs"
         }
       },
       "img": "icons/svg/mystery-man.svg",
@@ -1605,29 +2182,27 @@
         "abilityMods": {
           "parts": []
         },
-        "allowedArmorType": "any",
         "ammunitionType": "",
-        "armorType": "any",
         "attributes": {
           "ac": {
-            "value": "5"
+            "value": ""
           },
           "customBuilt": false,
           "dex": {
             "mod": ""
           },
           "hardness": {
-            "value": "2"
+            "value": ""
           },
           "hp": {
-            "max": "6",
-            "value": 6
+            "max": "",
+            "value": 9
           },
           "size": "medium",
           "sturdy": false
         },
         "attuned": false,
-        "bulk": "L",
+        "bulk": "1",
         "capacity": {
           "max": 0,
           "value": 0
@@ -1649,18 +2224,18 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>This articulated compartment can hold a one-handed weapon of no more than light bulk. You can activate this upgrade as a swift action to put the item in your hand as though you’d drawn it.</p>"
+          "value": "<h1>Restraints</h1>\n<p>Binders are simple, single-use, resin-cord restraints that can be placed only on helpless, @UUID[Compendium.sfrpg.conditions.XgK4EdO5D3Fj3iWz]{Pinned}, or willing creatures (a standard action). A pair of binders immobilizes two limbs of your choice. A creature can escape binders with a successful Acrobatics check (DC = 20 + 1-1/2 × your level).</p>\n<p>Manacles are reusable wrist restraints made of hardened metal or ceramics and keyed to open with a security chip, code, or voice command (determined when they are manufactured). Manacles can be placed only on helpless, @UUID[Compendium.sfrpg.conditions.XgK4EdO5D3Fj3iWz]{Pinned}, or willing creatures (a standard action). Manacles prevent two arms from holding or using any object. A creature can escape manacles with a successful DC 30 Acrobatics check.</p>"
         },
         "equippable": false,
         "equipped": false,
-        "identified": true,
-        "level": 1,
+        "hands": 0,
+        "identified": false,
+        "level": 4,
         "modifiers": [],
-        "price": 325,
+        "price": 350,
         "quantity": 1,
         "quantityPerPack": 1,
-        "slots": 1,
-        "source": "CRB pg. 205",
+        "source": "CRB pg. 219",
         "usage": {
           "per": "",
           "value": 0
@@ -1668,7 +2243,7 @@
       }
     },
     {
-      "_id": "beMagQaVwBg4cqET",
+      "_id": "pqahHZMaNN8FJ1Ku",
       "name": "Restraints, Binders",
       "type": "technological",
       "flags": {
@@ -1743,18 +2318,18 @@
       }
     },
     {
-      "_id": "xSp4ToJDn2oaS3NL",
-      "name": "Dragon-Scaled",
+      "_id": "T3Pt0ikW1pcHQ1UV",
+      "name": "Prehensile Tail",
       "type": "feat",
       "flags": {
         "core": {
-          "sourceId": "Compendium.sfrpg.racial-features.vn2OQ1qVC8rRUTbX"
+          "sourceId": "Compendium.sfrpg.racial-features.tcEhoQ9kffyh10Ro"
         }
       },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
-        "ability": null,
+        "ability": "",
         "abilityMods": {
           "parts": []
         },
@@ -1786,7 +2361,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>Kobolds gain energy resistance based on the color of their scales and the dragons they resemble. Black-scaled kobolds, copper-scaled kobolds, and green-scaled kobolds gain acid resistance 5. Blue-scaled kobolds and bronze-scaled kobolds gain electricity resistance 5. Red-scaled kobolds, brass-scaled kobolds, and gold-scaled kobolds gain fire resistance 5. White-scaled kobolds and silver-scaled kobolds gain cold resistance 5. A kobold can stack this natural resistance with one other form of energy resistance.</p>\n<p><em>Toggle on modifier in the Modifiers tab for the selected scale color. System does not currently allow stacked energy resistances, so please modifier ER bonus to account for this when stacking.</em></p>"
+          "value": "<p>This creature's tail is as effective as a hand at manipulating objects, which allows them to wield and hold up to three hands’ worth of weapons and equipment. This doesn’t increase the number of attacks they can make during combat.</p>"
         },
         "descriptors": {
           "acid": false,
@@ -1837,84 +2412,7 @@
         },
         "formula": "",
         "isActive": null,
-        "modifiers": [
-          {
-            "_id": "15def881-7143-411d-b4c0-94ca9269f580",
-            "name": "Dragon Scaled - Black, Copper, Green",
-            "type": "untyped",
-            "condition": "",
-            "container": {
-              "actorId": "Q30e2DcopsrGzQgN",
-              "itemId": "xSp4ToJDn2oaS3NL"
-            },
-            "effectType": "energy-resistance",
-            "enabled": false,
-            "max": 5,
-            "modifier": "5",
-            "modifierType": "constant",
-            "notes": "Black-scaled kobolds, copper-scaled kobolds, and green-scaled kobolds gain acid resistance 5. A kobold can stack this natural resistance with one other form of energy resistance.",
-            "source": "Racial",
-            "subtab": "misc",
-            "valueAffected": "acid"
-          },
-          {
-            "_id": "f0c8b6dd-1f72-4d1c-b0f2-92a3268063c9",
-            "name": "Dragon Scaled - Blue, Bronze",
-            "type": "untyped",
-            "condition": "",
-            "container": {
-              "actorId": "Q30e2DcopsrGzQgN",
-              "itemId": "xSp4ToJDn2oaS3NL"
-            },
-            "effectType": "energy-resistance",
-            "enabled": true,
-            "max": 5,
-            "modifier": "5",
-            "modifierType": "constant",
-            "notes": "Blue-scaled kobolds and bronze-scaled kobolds gain electricity resistance 5. A kobold can stack this natural resistance with one other form of energy resistance.",
-            "source": "Racial",
-            "subtab": "misc",
-            "valueAffected": "electricity"
-          },
-          {
-            "_id": "c253328d-b9e3-4838-b36b-2f101e7ac936",
-            "name": "Dragon Scaled - Red, Brass, Gold",
-            "type": "untyped",
-            "condition": "",
-            "container": {
-              "actorId": "Q30e2DcopsrGzQgN",
-              "itemId": "xSp4ToJDn2oaS3NL"
-            },
-            "effectType": "energy-resistance",
-            "enabled": false,
-            "max": 5,
-            "modifier": "5",
-            "modifierType": "constant",
-            "notes": "Red-scaled kobolds, brass-scaled kobolds, and gold-scaled kobolds gain fire resistance 5. A kobold can stack this natural resistance with one other form of energy resistance.",
-            "source": "Racial",
-            "subtab": "misc",
-            "valueAffected": "fire"
-          },
-          {
-            "_id": "6797cc25-160e-490b-94ee-7a24a3878d82",
-            "name": "Dragon Scaled - White, Silver",
-            "type": "untyped",
-            "condition": "",
-            "container": {
-              "actorId": "Q30e2DcopsrGzQgN",
-              "itemId": "xSp4ToJDn2oaS3NL"
-            },
-            "effectType": "energy-resistance",
-            "enabled": false,
-            "max": 5,
-            "modifier": "5",
-            "modifierType": "constant",
-            "notes": "White-scaled kobolds and silver-scaled kobolds gain cold resistance 5. A kobold can stack this natural resistance with one other form of energy resistance.",
-            "source": "",
-            "subtab": "misc",
-            "valueAffected": "cold"
-          }
-        ],
+        "modifiers": [],
         "range": {
           "additional": "",
           "per": "",
@@ -1925,14 +2423,14 @@
           "charged": false,
           "value": null
         },
-        "requirements": "Kobold",
+        "requirements": "Racial Feature",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
-          "descriptor": ""
+          "dc": "",
+          "descriptor": "negate"
         },
-        "source": "ACD",
+        "source": "",
         "target": {
           "type": "",
           "value": ""
@@ -1943,10 +2441,155 @@
           "value": null
         }
       }
+    },
+    {
+      "_id": "MkfIUHblEesH2K3S",
+      "name": "Mark (Ex)",
+      "type": "feat",
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.sfrpg.alien-archives.0EANNReclfEBEDmw.Item.l76FJlbJYpHM22yb"
+        }
+      },
+      "img": "icons/svg/mystery-man.svg",
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": 0
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>A recovery agent can choose one sapient creature as a mark, provided the recovery agent can identify that creature by a specific identity and has studied the mark for 1 hour using available information, or directly observed the mark for 1 minute outside of combat or as a full action in combat. The recovery agent gains an insight bonus on skill checks made to investigate, track, or gather information on the mark, as well as on Sense Motive checks against the mark. This bonus equals 1 + the recovery agent’s CR divided by 6 (+1 total at CR 1). Also, the recovery agent can use Sense Motive instead of Perception to use the pierce disguise or search tasks of the Perception skill against the mark.</p>"
+        },
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "isActive": null,
+        "modifiers": [
+          {
+            "_id": "ead362a2-dc5f-4629-97dd-59a90f470210",
+            "name": "Mark (Ex)",
+            "type": "insight",
+            "condition": "",
+            "container": {
+              "actorId": "edhrhKbllCeYX4Op",
+              "itemId": "MkfIUHblEesH2K3S"
+            },
+            "effectType": "all-skills",
+            "enabled": false,
+            "max": 2,
+            "modifier": "2",
+            "modifierType": "formula",
+            "notes": "A recovery agent can choose one sapient creature as a mark, provided the recovery agent can identify that creature by a specific identity and has studied the mark for 1 hour using available information, or directly observed the mark for 1 minute outside of combat or as a full action in combat. The recovery agent gains an insight bonus on skill checks made to investigate, track, or gather information on the mark, as well as on Sense Motive checks against the mark.",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": ""
+          }
+        ],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      }
     }
   ],
   "prototypeToken": {
-    "name": "Skip Tracer",
+    "name": "Recovery Agent",
     "actorLink": false,
     "alpha": 1,
     "bar1": {
@@ -1983,7 +2626,7 @@
       "saturation": 0,
       "shadows": 0
     },
-    "lockRotation": false,
+    "lockRotation": true,
     "randomImg": false,
     "rotation": 0,
     "sight": {
@@ -2011,7 +2654,7 @@
   "system": {
     "abilities": {
       "cha": {
-        "base": 2,
+        "base": 3,
         "min": 3,
         "misc": 0,
         "mod": 0,
@@ -2025,7 +2668,7 @@
         "value": 10
       },
       "dex": {
-        "base": 1,
+        "base": 5,
         "min": 3,
         "misc": 0,
         "mod": 0,
@@ -2073,34 +2716,34 @@
         "value": 10
       },
       "eac": {
-        "base": 12,
+        "base": 18,
         "min": 0,
         "tooltip": [],
         "value": 10
       },
       "fort": {
-        "base": 1,
+        "base": 4,
         "bonus": 0,
         "misc": 0,
         "tooltip": [],
         "value": 0
       },
       "hp": {
-        "max": 15,
+        "max": 80,
         "min": 0,
         "temp": null,
         "tempmax": null,
         "tooltip": [],
-        "value": 15
+        "value": 80
       },
       "init": {
         "bonus": 0,
         "tooltip": [],
         "total": 0,
-        "value": 5
+        "value": 9
       },
       "kac": {
-        "base": 13,
+        "base": 19,
         "min": 0,
         "tooltip": [],
         "value": 10
@@ -2108,7 +2751,7 @@
       "keyability": "",
       "reach": "5",
       "reflex": {
-        "base": 3,
+        "base": 6,
         "bonus": 0,
         "misc": 0,
         "tooltip": [],
@@ -2120,14 +2763,14 @@
           "base": 0
         },
         "climbing": {
-          "base": 0
+          "base": 20
         },
         "flying": {
-          "base": 0,
+          "base": 30,
           "baseManeuverability": 0
         },
         "land": {
-          "base": 30
+          "base": 40
         },
         "mainMovement": "land",
         "special": "",
@@ -2138,7 +2781,7 @@
       },
       "spellcasting": "",
       "will": {
-        "base": 4,
+        "base": 8,
         "bonus": 0,
         "misc": 0,
         "tooltip": [],
@@ -2214,7 +2857,7 @@
     },
     "details": {
       "type": "Humanoid",
-      "alignment": "LN",
+      "alignment": "N",
       "aura": "",
       "biography": {
         "age": 0,
@@ -2226,11 +2869,11 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<h2>BOUNTY HUNTERS</h2><p>Anyone who seeks and catches those who don’t want to be caught may be called a bounty hunter, though in practice, the term comprises an array of professionals. Most bounty hunters have legal sanction, such as a license to hunt fugitives, but many also work in a gray area between legal authority and vigilantism. Bounty hunters take jobs from legitimate authorities, but what legitimate means varies by location. Little stops a bounty hunter from acting as an agent of a private party, and many are enforcers for the unscrupulous. Some clever bounty hunters double as private investigators, tracking down missing people or runaways.</p><h3>SKIP TRACER</h3><p>Skip tracers track those who renege on legal obligations—civil or criminal—usually for those who skip out on bail, court dates, or private contracts. Side jobs tracking down missing people are within a skip tracer’s purview, too. The typical skip tracer prefers investigation, negotiation, and nonlethal methods to retrieve their quarry, working within the bounds of the law.</p>",
+        "value": "<h2>BOUNTY HUNTERS</h2><p>Anyone who seeks and catches those who don’t want to be caught may be called a bounty hunter, though in practice, the term comprises an array of professionals. Most bounty hunters have legal sanction, such as a license to hunt fugitives, but many also work in a gray area between legal authority and vigilantism. Bounty hunters take jobs from legitimate authorities, but what legitimate means varies by location. Little stops a bounty hunter from acting as an agent of a private party, and many are enforcers for the unscrupulous. Some clever bounty hunters double as private investigators, tracking down missing people or runaways.</p><h3>RECOVERY AGENT</h3><p>Recovery agents are often veteran skip tracers who act across a larger region and handle harder cases. These hunters confront criminals, sometimes on quasi-legal or violent terms. A recovery agent opens with investigation and diplomacy but is prepared for a fight. Pursuit often leads a recovery agent from city streets into the wilderness, where their survival skills provide an edge. <br style=\" font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; \"></p>",
         "weight": ""
       },
       "class": "",
-      "cr": 1,
+      "cr": 6,
       "environment": "",
       "organization": "",
       "organizationSize": {
@@ -2238,9 +2881,9 @@
         "min": 1
       },
       "race": "",
-      "raceAndGrafts": "Blue-scaled kobold",
+      "raceAndGrafts": "",
       "source": "IS pg. 154",
-      "subtype": "Kobold",
+      "subtype": "Maraquoi",
       "xp": {
         "value": 10
       }
@@ -2276,13 +2919,13 @@
       },
       "blu": {
         "ability": "cha",
-        "enabled": true,
+        "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
         "min": 0,
         "misc": 0,
         "mod": 0,
-        "ranks": 5,
+        "ranks": 0,
         "value": 0
       },
       "com": {
@@ -2304,7 +2947,7 @@
         "min": 0,
         "misc": 0,
         "mod": 0,
-        "ranks": 5,
+        "ranks": 11,
         "value": 0
       },
       "dip": {
@@ -2315,7 +2958,7 @@
         "min": 0,
         "misc": 0,
         "mod": 0,
-        "ranks": 10,
+        "ranks": 16,
         "value": 0
       },
       "dis": {
@@ -2342,13 +2985,13 @@
       },
       "int": {
         "ability": "cha",
-        "enabled": false,
+        "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
         "min": 0,
         "misc": 0,
         "mod": 0,
-        "ranks": 0,
+        "ranks": 11,
         "value": 0
       },
       "lsc": {
@@ -2392,7 +3035,7 @@
         "min": 0,
         "misc": 0,
         "mod": 0,
-        "ranks": 5,
+        "ranks": 13,
         "value": 0
       },
       "phs": {
@@ -2408,13 +3051,13 @@
       },
       "pil": {
         "ability": "dex",
-        "enabled": false,
+        "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
         "min": 0,
         "misc": 0,
         "mod": 0,
-        "ranks": 0,
+        "ranks": 11,
         "value": 0
       },
       "pro": {
@@ -2425,9 +3068,8 @@
         "min": 0,
         "misc": 0,
         "mod": 0,
-        "notes": "",
-        "ranks": 10,
-        "subname": "Bounty Hunter",
+        "ranks": 16,
+        "subname": "",
         "value": 3
       },
       "sen": {
@@ -2438,7 +3080,7 @@
         "min": 0,
         "misc": 0,
         "mod": 0,
-        "ranks": 10,
+        "ranks": 11,
         "value": 0
       },
       "sle": {
@@ -2460,18 +3102,18 @@
         "min": 0,
         "misc": 0,
         "mod": 0,
-        "ranks": 5,
+        "ranks": 11,
         "value": 0
       },
       "sur": {
         "ability": "wis",
-        "enabled": false,
+        "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
         "min": 0,
         "misc": 0,
         "mod": 0,
-        "ranks": 0,
+        "ranks": 11,
         "value": 0
       }
     },
@@ -2534,14 +3176,14 @@
         "value": []
       },
       "languages": {
-        "custom": "Any 1 Other",
+        "custom": "Maraquoi",
         "value": [
-          "common",
-          "draconic"
+          "brethedan",
+          "common"
         ]
       },
-      "senses": "darkvision 60 ft.",
-      "size": "small",
+      "senses": "blindsense (sound) 30 ft., low-light vision;",
+      "size": "medium",
       "spellResistance": {
         "base": 0
       },
