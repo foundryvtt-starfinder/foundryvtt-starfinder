@@ -146,7 +146,7 @@ export default class BaseEnricher {
 
         a.innerText = this.name;
 
-        if (this._hasRepost) a = this.addRepost(a);
+        if (this.#_hasRepost) a = this.addRepost(a);
 
         return a;
     }
@@ -159,10 +159,12 @@ export default class BaseEnricher {
 
     /**
      * Should this enricher have a repost button appended to created elements?
-     * Create both a publically accessable static variable and an internal instance one.
+     * Create both a publicly accessible static variable and an internal instance one.
+     * @type {Boolean}
      */
     static hasRepost = false;
-    _hasRepost = this.constructor.hasRepost;
+    /** @type {Boolean} */
+    #_hasRepost = this.constructor.hasRepost;
 
     /**
      * Take an anchor element and append a repost button
@@ -180,7 +182,7 @@ export default class BaseEnricher {
     }
 
     /**
-     * `this` is the instance of the class fished out of CONFIG, so we can access instance variables.
+     * Handle repost button click, sending a chat message of the current target to chat.
      * @param {Event} event
      * @returns Create a chat message
      */
