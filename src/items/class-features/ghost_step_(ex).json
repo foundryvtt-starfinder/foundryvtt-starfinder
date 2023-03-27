@@ -5,12 +5,12 @@
   "img": "icons/magic/unholy/silhouette-robe-evil-power.webp",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "",
+    "actionType": "skill",
     "activation": {
       "type": "",
       "condition": "",
@@ -37,11 +37,49 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>You can’t be tracked using the Survival skill, though magical methods of following your tracks or finding your location function normally. When you would activate a trap with a proximity trigger, you can spend 1 Resolve Point to attempt a Stealth check whose DC equals the Perception DC to find the trap. If you succeed, you don’t trigger the trap for 1 round. The trap becomes immune to this ability for 24 hours afterward. This ability doesn’t prevent you from triggering the trap if you remain in the area, nor does it prevent other creatures from triggering the trap. You must have the @UUID[Compendium.sfrpg.class-features.AOHkbIjjeez1xyd8]{Without a Trace (Ex)} exploit to learn this exploit.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>You can’t be tracked using the Survival skill, though magical methods of following your tracks or finding your location function normally. When you would activate a trap with a proximity trigger, you can spend 1 Resolve Point to attempt a @Check[type:stealth] whose DC equals the Perception DC to find the trap. If you succeed, you don’t trigger the trap for 1 round. The trap becomes immune to this ability for 24 hours afterward. This ability doesn’t prevent you from triggering the trap if you remain in the area, nor does it prevent other creatures from triggering the trap. You must have the @UUID[Compendium.sfrpg.class-features.AOHkbIjjeez1xyd8]{Without a Trace (Ex)} exploit to learn this exploit.</p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
     "details": {
       "category": "classFeature",
+      "combat": false,
       "specialAbilityType": "ex"
     },
     "duration": {
@@ -61,12 +99,16 @@
       "charged": false,
       "value": null
     },
-    "requirements": "10th  Level",
+    "requirements": "10th  Level (Operative)",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
+    },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
     },
     "source": "GEM pg. 23",
     "target": {
