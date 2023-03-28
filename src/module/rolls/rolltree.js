@@ -143,7 +143,7 @@ export default class RollTree {
                         const partCount = enabledParts.length;
                         part.partIndex = game.i18n.format("SFRPG.Damage.PartIndex", {partIndex: partIndex + 1, partCount: partCount});
                     }
-                    await callback(button, rollMode, finalSectionFormula, part, this.rootNode, this.rollMods, bonus);
+                    callbackResult = await callback(button, rollMode, finalSectionFormula, part, this.rootNode, this.rollMods, bonus);
                 }
             }
         } else {
@@ -157,15 +157,15 @@ export default class RollTree {
             if (bonus) {
                 const operators = ['+', '-', '*', '/'];
                 if (!operators.includes(bonus[0])) {
-                    finalSectionFormula.finalRoll += " +";
-                    finalSectionFormula.formula += " +";
+                    finalRollFormula.finalRoll += " +";
+                    finalRollFormula.formula += " +";
                 }
-                finalSectionFormula.finalRoll += " " + bonus;
-                finalSectionFormula.formula += game.i18n.format("SFRPG.Rolls.Dice.Formula.AdditionalBonus", { "bonus": bonus });
+                finalRollFormula.finalRoll += " " + bonus;
+                finalRollFormula.formula += game.i18n.format("SFRPG.Rolls.Dice.Formula.AdditionalBonus", { "bonus": bonus });
             }
 
             if (this.options.debug) {
-                console.log([`Final roll results outcome`, formula, allRolledMods, finalSectionFormula]);
+                console.log([`Final roll results outcome`, formula, allRolledMods, finalRollFormula]);
             }
 
             if (callback) {
