@@ -78,46 +78,14 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         const droneItemTypes = ["chassis", "mod"];
 
         const inventory = {
-            inventory: {
-                label: game.i18n.localize("SFRPG.NPCSheet.Inventory.Inventory"),
-                items: [],
-                dataset: {
-                    type: "augmentation,consumable,container,equipment,fusion,goods,hybrid,magic,technological,upgrade,shield,weapon,weaponAccessory"
-                },
-                allowAdd: true
-            }
+            inventory: { label: game.i18n.localize("SFRPG.NPCSheet.Inventory.Inventory"), items: [], dataset: { type: "augmentation,consumable,container,equipment,fusion,goods,hybrid,magic,technological,upgrade,shield,weapon,weaponAccessory" }, allowAdd: true }
         };
         const features = {
-            weapons: {
-                category: game.i18n.localize("SFRPG.NPCSheet.Features.Attacks"),
-                items: [],
-                hasActions: true,
-                dataset: { type: "weapon,shield", "weapon-type": "natural" },
-                allowAdd: true
-            },
-            actions: {
-                category: game.i18n.localize("SFRPG.NPCSheet.Features.Actions"),
-                items: [],
-                hasActions: true,
-                dataset: { type: "feat", "activation.type": "action" },
-                allowAdd: true
-            },
-            /* activeItems: {
-                category: game.i18n.localize("SFRPG.NPCSheet.Features.ActiveItems"),
-                items: [],
-                dataset: {},
-                allowAdd: false
-            }, */
-            feat: duplicate(CONFIG.SFRPG.featureCategories.feat),
-            classFeature: duplicate(CONFIG.SFRPG.featureCategories.classFeature),
-            speciesFeature: duplicate(CONFIG.SFRPG.featureCategories.speciesFeature),
-            universalCreatureRule: duplicate(CONFIG.SFRPG.featureCategories.universalCreatureRule),
-            resources: {
-                category: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"),
-                items: [],
-                hasActions: false,
-                dataset: { type: "actorResource" }
-            }
+            weapons: { label: game.i18n.localize("SFRPG.NPCSheet.Features.Attacks"), items: [], hasActions: true, dataset: { type: "weapon,shield", "weapon-type": "natural" }, allowAdd: true },
+            actions: { label: game.i18n.localize("SFRPG.NPCSheet.Features.Actions"), items: [], hasActions: true, dataset: { type: "feat", "activation.type": "action" }, allowAdd: true },
+            passive: { label: game.i18n.localize("SFRPG.NPCSheet.Features.Features"), items: [], dataset: { type: "feat" }, allowAdd: true },
+            activeItems: { label: game.i18n.localize("SFRPG.NPCSheet.Features.ActiveItems"), items: [], dataset: { }, allowAdd: false },
+            resources: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"), items: [], hasActions: false, dataset: { type: "actorResource" } }
         };
 
         //   0       1      2               3           4
@@ -127,18 +95,9 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
             item.config = {
                 isStack: item.system.quantity ? item.system.quantity > 1 : false,
                 isOpen: item.type === "container" ? item.system.container.isOpen : true,
-                isOnCooldown: item.system.recharge
-                    && !!item.system.recharge.value
-                    && item.system.recharge.charged === false,
-                hasAttack:
-                    ["mwak", "rwak", "msak", "rsak"].includes(item.system.actionType)
-                    && (!["weapon", "shield"].includes(item.type)
-                    || item.system.equipped),
-                hasDamage:
-                    item.system.damage?.parts
-                    && item.system.damage.parts.length > 0
-                    && (!["weapon", "shield"].includes(item.type)
-                    || item.system.equipped),
+                isOnCooldown: item.system.recharge && !!item.system.recharge.value && (item.system.recharge.charged === false),
+                hasAttack: ["mwak", "rwak", "msak", "rsak"].includes(item.system.actionType) && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
+                hasDamage: item.system.damage?.parts && item.system.damage.parts.length > 0 && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
                 hasUses: item.canBeUsed(),
                 isCharged: !item.hasUses || item.getRemainingUses() <= 0 || !item.isOnCooldown,
                 hasCapacity: item.hasCapacity()
@@ -183,7 +142,6 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
 
         // Organize Features
         const itemsToProcess = [];
-        const otherFeatures = [];
         for (const item of other) {
             const container = this.actor.items.contents.find(x => x.system.container?.contents?.find(y => y.id === item._id) !== undefined);
 
@@ -195,20 +153,14 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
                 itemsToProcess.push(item);
             } else if (item.type === "feat") {
                 if (item.system.activation.type) features.actions.items.push(item);
-                else {
-                    try {
-                        features[item.system.details.category].items.push(item);
-                    } catch {
-                        otherFeatures.push(item);
-                    }
-                }
-            } /* else if (["consumable", "technological"].includes(item.type)) {
+                else features.passive.items.push(item);
+            } else if (["consumable", "technological"].includes(item.type)) {
                 item.isOpen = item.system.container?.isOpen === undefined ? true : item.system.container.isOpen;
                 if (!item.system.containerId) {
                     features.activeItems.items.push(item);
                 }
                 itemsToProcess.push(item);
-            } */ else if (["archetypes", "class", "race", "theme"].includes(item.type)) {
+            } else if (["archetypes", "class", "race", "theme"].includes(item.type)) {
                 if (!(item.type in features)) {
                     let label = "SFRPG.Items.Categories.MiscellaneousItems";
                     if (item.type in SFRPG.itemTypes) {
@@ -221,15 +173,6 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
                 item.isOpen = item.system.container?.isOpen === undefined ? true : item.system.container.isOpen;
                 itemsToProcess.push(item);
             }
-        }
-
-        if (otherFeatures.length > 0) {
-            features.otherFeatures = {
-                category: game.i18n.format("SFRPG.ActorSheet.Features.Categories.OtherFeatures"),
-                items: otherFeatures,
-                hasActions: false,
-                allowAdd: false
-            };
         }
 
         features.resources.items = actorResources;
@@ -377,7 +320,10 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         delete actorData._id;
 
         const actor = await Actor.create(actorData);
-        if (!actor) return ui.notifications.error(game.i18n.localize("SFRPG.NPCSheet.Interface.DuplicateNewStyle.ErrorCreateActor"), {permanent: true});
+        if (actor == null) {
+            ui.notifications.error(game.i18n.localize("SFRPG.NPCSheet.Interface.DuplicateNewStyle.ErrorCreateActor"), {permanent: true});
+            return;
+        }
 
         // Open newly created NPC sheet
         const registeredSheet = Actors.registeredSheets.find(x => x.name === "ActorSheetSFRPGNPC");

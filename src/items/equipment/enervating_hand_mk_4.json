@@ -5,24 +5,9 @@
   "img": "icons/commodities/biological/hand-yellow-red.webp",
   "system": {
     "type": "necrograft",
-    "ability": "str",
     "abilityMods": {
       "parts": []
     },
-    "actionTarget": "eac",
-    "actionType": "mwak",
-    "activation": {
-      "type": "none",
-      "condition": "",
-      "cost": 0
-    },
-    "area": {
-      "effect": "",
-      "shape": "",
-      "units": "none",
-      "value": null
-    },
-    "attackBonus": 0,
     "attributes": {
       "ac": {
         "value": ""
@@ -36,121 +21,34 @@
       },
       "hp": {
         "max": "",
-        "value": 53
+        "value": 6
       },
       "size": "medium",
       "sturdy": false
     },
     "attuned": false,
-    "bulk": "-",
-    "chatFlavor": "",
-    "container": {
-      "contents": [],
-      "includeContentsInWealthCalculation": true,
-      "isOpen": true,
-      "storage": []
-    },
+    "bulk": "L",
     "critical": {
-      "effect": "",
       "parts": []
     },
     "damage": {
-      "parts": [
-        {
-          "name": "Basic damage",
-          "formula": "12d4",
-          "group": 0,
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
-            "cold": true,
-            "electricity": false,
-            "fire": false,
-            "healing": false,
-            "piercing": false,
-            "slashing": false,
-            "sonic": false
-          }
-        },
-        {
-          "name": "Basic Melee Specialization",
-          "formula": "12d4 + @details.level.value",
-          "group": 0,
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
-            "cold": true,
-            "electricity": false,
-            "fire": false,
-            "healing": false,
-            "piercing": false,
-            "slashing": false,
-            "sonic": false
-          }
-        },
-        {
-          "name": "Temporary Hitpoints",
-          "formula": "@item.level",
-          "group": null,
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
-            "cold": false,
-            "electricity": false,
-            "fire": false,
-            "healing": true,
-            "piercing": false,
-            "slashing": false,
-            "sonic": false
-          }
-        }
-      ]
+      "parts": []
     },
-    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>An enervating hand replaces a living hand with a withered extremity capable of draining the life essence of living creatures. As a standard action, you can make an unarmed strike with the enervating hand against a target’s EAC to deal the amount of damage listed for your necrograft’s model. You deal only the listed amount of damage (plus additional damage from the @UUID[Compendium.sfrpg.feats.9Us7Eg9cAoq3BcS5]{Weapon Specialization} feat, if applicable), even if you have other abilities that increase your unarmed strike damage (such as natural weapons or the Improved Unarmed Strike feat). On a successful attack, you gain a number of temporary Hit Points equal to the necrograft’s item level; these temporary Hit Points last for 10 minutes, until lost when you take damage, or until you gain a larger number of temporary Hit Points from another source. This attack has no effect on unliving creatures or creatures immune to negative energy damage (such as those under the effects of a death ward spell). Once you make a successful attack with an enervating hand, you can’t attack with it again until you have rested for 10 minutes to regain Stamina Points, though you can spend 1 Resolve Point at any time to recharge it immediately.</p>\n<p>ENERVATING HAND</p><table style=\"width: 32.2113%; height: 96px;\" border=\"1\"><tbody><tr style=\"height: 16px;\"><td style=\"width: 43.5993%; height: 16px; text-align: center;\"><strong>MODEL</strong></td><td style=\"width: 55.6338%; height: 16px; text-align: center;\"><strong>DAMAGE</strong></td></tr><tr style=\"height: 16px;\"><td style=\"width: 43.5993%; height: 16px; text-align: center;\">Mk 1</td><td style=\"width: 55.6338%; height: 16px; text-align: center;\">4d4 C</td></tr><tr style=\"height: 16px;\"><td style=\"width: 43.5993%; height: 16px; text-align: center;\">Mk 2</td><td style=\"width: 55.6338%; height: 16px; text-align: center;\">6d4 C</td></tr><tr style=\"height: 16px;\"><td style=\"width: 43.5993%; height: 16px; text-align: center;\">Mk 3</td><td style=\"width: 55.6338%; height: 16px; text-align: center;\">8d4 C</td></tr><tr style=\"height: 16px;\"><td style=\"width: 43.5993%; height: 16px; text-align: center;\">Mk 4</td><td style=\"width: 55.6338%; height: 16px; text-align: center;\">12d4 C</td></tr><tr style=\"height: 16px;\"><td style=\"width: 43.5993%; height: 16px; text-align: center;\">Mk 5</td><td style=\"width: 55.6338%; height: 16px; text-align: center;\">16d4 C</td></tr></tbody></table>"
+      "value": "<p>An enervating hand replaces a living hand with a withered extremity capable of draining the life essence of living creatures. As a standard action, you can make an unarmed strike with the enervating hand against a target’s EAC to deal the amount of damage listed for your necrograft’s model. You deal only the listed amount of damage (plus additional damage from the Weapon Specialization feat, if applicable), even if you have other abilities that increase your unarmed strike damage (such as natural weapons or the Improved Unarmed Strike feat). On a successful attack, you gain a number of temporary Hit Points equal to the necrograft’s item level; these temporary Hit Points last for 10 minutes, until lost when you take damage, or until you gain a larger number of temporary Hit Points from another source. This attack has no effect on unliving creatures or creatures immune to negative energy damage (such as those under the effects of a death ward spell). Once you make a successful attack with an enervating hand, you can’t attack with it again until you have rested for 10 minutes to regain Stamina Points, though you can spend 1 Resolve Point at any time to recharge it immediately.</p>\n<p>ENERVATING HAND</p>\n<table style=\"width: 32.2113%; height: 96px;\" border=\"1\">\n<tbody>\n<tr style=\"height: 16px;\">\n<td style=\"width: 43.5993%; height: 16px; text-align: center;\"><strong>MODEL</strong></td>\n<td style=\"width: 55.6338%; height: 16px; text-align: center;\"><strong>DAMAGE</strong></td>\n</tr>\n<tr style=\"height: 16px;\">\n<td style=\"width: 43.5993%; height: 16px; text-align: center;\">Mk 1</td>\n<td style=\"width: 55.6338%; height: 16px; text-align: center;\">4d4 C</td>\n</tr>\n<tr style=\"height: 16px;\">\n<td style=\"width: 43.5993%; height: 16px; text-align: center;\">Mk 2</td>\n<td style=\"width: 55.6338%; height: 16px; text-align: center;\">6d4 C</td>\n</tr>\n<tr style=\"height: 16px;\">\n<td style=\"width: 43.5993%; height: 16px; text-align: center;\">Mk 3</td>\n<td style=\"width: 55.6338%; height: 16px; text-align: center;\">8d4 C</td>\n</tr>\n<tr style=\"height: 16px;\">\n<td style=\"width: 43.5993%; height: 16px; text-align: center;\">Mk 4</td>\n<td style=\"width: 55.6338%; height: 16px; text-align: center;\">12d4 C</td>\n</tr>\n<tr style=\"height: 16px;\">\n<td style=\"width: 43.5993%; height: 16px; text-align: center;\">Mk 5</td>\n<td style=\"width: 55.6338%; height: 16px; text-align: center;\">16d4 C</td>\n</tr>\n</tbody>\n</table>"
     },
-    "descriptors": [],
-    "duration": {
-      "units": "",
-      "value": ""
-    },
-    "equippable": true,
+    "equippable": false,
     "equipped": false,
-    "formula": "",
     "identified": true,
-    "isActive": null,
     "level": 18,
     "modifiers": [],
     "price": 350000,
     "quantity": 1,
-    "quantityPerPack": 1,
-    "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
-    },
-    "rollNotes": "",
-    "save": {
-      "type": "",
-      "dc": "",
-      "descriptor": "negate"
-    },
-    "source": "AR pg. 95",
-    "system": "hand",
-    "target": {
-      "type": "",
-      "value": ""
-    },
-    "uses": {
-      "max": 1,
-      "per": "sr",
-      "value": 1
-    }
+    "source": "ARM, p. 95",
+    "system": "hand"
   }
 }

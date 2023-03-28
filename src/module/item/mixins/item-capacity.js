@@ -138,7 +138,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
                 // Create actor item helper
                 const tokenId = this.actor.isToken ? this.actor.token.id : null;
                 const sceneId = this.actor.isToken ? this.actor.token.parent.id : null;
-                const itemHelper = new ActorItemHelper(this.actor.id, tokenId, sceneId, { actor: this.actor });
+                const itemHelper = new ActorItemHelper(this.actor.id, tokenId, sceneId);
 
                 const originalContainer = getItemContainer(this.actor.items, newAmmunition);
 

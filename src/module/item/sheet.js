@@ -1,5 +1,4 @@
 import { SFRPG } from "../config.js";
-import RollContext from "../rolls/rollcontext.js";
 
 const itemSizeArmorClassModifier = {
     "fine": 8,
@@ -187,24 +186,9 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.hasCapacity = this.item.hasCapacity();
 
         // Enrich text editors
-        const rollData = RollContext.createItemRollContext(this.item, this.actor).getRollData();
-        const secrets = this.item.isOwner;
-
-        data.enrichedDescription = await TextEditor.enrichHTML(this.item.system?.description?.value, {
-            async: true,
-            rollData: rollData ?? {},
-            secrets
-        });
-        data.enrichedShortDescription = await TextEditor.enrichHTML(this.item.system?.description?.short, {
-            async: true,
-            rollData: rollData ?? {},
-            secrets
-        });
-        data.enrichedGMNotes = await TextEditor.enrichHTML(this.item.system?.description?.gmNotes, {
-            async: true,
-            rollData: rollData ?? {},
-            secrets
-        });
+        data.enrichedDescription = await TextEditor.enrichHTML(this.object.system?.description?.value, {async: true});
+        data.enrichedShortDescription = await TextEditor.enrichHTML(this.object.system?.description?.short, {async: true});
+        data.enrichedGMNotes = await TextEditor.enrichHTML(this.object.system?.description?.gmNotes, {async: true});
 
         return data;
     }
@@ -239,10 +223,15 @@ export class ItemSheetSFRPG extends ItemSheet {
         const itemData = item.system;
 
         if (["weapon", "equipment", "shield"].includes(item.type)) return itemData.equipped ? "Equipped" : "Unequipped";
-        else if (item.type === "feat") return CONFIG.SFRPG.featureCategories[itemData.details.category]?.label || "";
         else if (item.type === "starshipWeapon") return itemData.mount.mounted ? "Mounted" : "Not Mounted";
         else if (item.type === "augmentation") {
-            return `${CONFIG.SFRPG.augmentationTypes[itemData.type]} (${CONFIG.SFRPG.augmentationSystems[itemData.system] || ""})`;
+            return `${itemData.type.capitalize()} (${
+                itemData.system.replace(/([A-Z])/g, ' $1')
+                    .replace(/^./, (str) => {
+                        return str.toUpperCase();
+                    })
+
+            })`;
         } else if (item.type === "vehicleSystem") {
             // Only systems which can be activated have an activation status
             if (this.document.canBeActivated() === false) {
@@ -345,7 +334,7 @@ export class ItemSheetSFRPG extends ItemSheet {
                 props.push(game.i18n.localize("SFRPG.VehicleAttackSheet.Details.IgnoresHardness") + " " + item.ignoresHardness);
             }
         } else if (item.type === "vehicleSystem") {
-            if (item.senses && item.senses.usedForSenses) {
+            if (item.senses &&  item.senses.usedForSenses == true) {
                 // We deliminate the senses by `,` and present each sense as a separate property
                 let sensesDeliminated = item.senses.senses.split(",");
                 for (let index = 0; index < sensesDeliminated.length; index++) {
@@ -425,18 +414,18 @@ export class ItemSheetSFRPG extends ItemSheet {
             if (!arr[i]) arr[i] = { name: "", formula: "", types: {}, group: null };
 
             switch (key) {
-                case 'name':
-                    arr[i].name = entry[1];
-                    break;
-                case 'formula':
-                    arr[i].formula = entry[1];
-                    break;
-                case 'types':
-                    if (type) arr[i].types[type] = entry[1];
-                    break;
-                case 'group':
-                    arr[i].group = entry[1];
-                    break;
+            case 'name':
+                arr[i].name = entry[1];
+                break;
+            case 'formula':
+                arr[i].formula = entry[1];
+                break;
+            case 'types':
+                if (type) arr[i].types[type] = entry[1];
+                break;
+            case 'group':
+                arr[i].group = entry[1];
+                break;
             }
 
             return arr;
@@ -449,12 +438,12 @@ export class ItemSheetSFRPG extends ItemSheet {
             if (!arr[i]) arr[i] = { formula: "", types: {}, operator: "" };
 
             switch (key) {
-                case 'formula':
-                    arr[i].formula = entry[1];
-                    break;
-                case 'types':
-                    if (type) arr[i].types[type] = entry[1];
-                    break;
+            case 'formula':
+                arr[i].formula = entry[1];
+                break;
+            case 'types':
+                if (type) arr[i].types[type] = entry[1];
+                break;
             }
 
             return arr;

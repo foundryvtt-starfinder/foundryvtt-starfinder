@@ -98,9 +98,7 @@ export default class CheckEnricher extends BaseEnricher {
 
     static hasListener = true;
 
-    static listener(event) {
-        const data = event.currentTarget.dataset;
-
+    static listener(ev, data) {
         const actor = _token?.actor ?? game.user?.character;
         if (!actor) return ui.notifications.error("You must have a token or an actor selected.");
         const id = CheckNameHelper.shortFormName(data.type);

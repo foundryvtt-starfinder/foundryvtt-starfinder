@@ -161,17 +161,8 @@ export class ActorSheetSFRPG extends ActorSheet {
         this._prepareItems(data);
 
         // Enrich text editors. The below are used for character, drone and npc(2). Other types use editors defined in their class.
-        const secrets = this.actor.isOwner;
-        data.enrichedBiography = await TextEditor.enrichHTML(this.actor.system.details.biography.value, {
-            async: true,
-            rollData: this.actor.getRollData() ?? {},
-            secrets
-        });
-        data.enrichedGMNotes = await TextEditor.enrichHTML(this.actor.system.details.biography.gmNotes, {
-            async: true,
-            rollData: this.actor.getRollData() ?? {},
-            secrets
-        });
+        data.enrichedBiography = await TextEditor.enrichHTML(this.object.system.details.biography.value, {async: true});
+        data.enrichedGMNotes = await TextEditor.enrichHTML(this.object.system.details.biography.gmNotes, {async: true});
 
         return data;
     }
@@ -254,20 +245,11 @@ export class ActorSheetSFRPG extends ActorSheet {
         // Delete Inventory Item
         html.find('.item-delete').click(ev => this._onItemDelete(ev));
 
-        html.find("li.inventory-header").click(ev => this._onItemHeaderClick(ev));
-
         // Item Dragging
         let handler = ev => this._onDragStart(ev);
         html.find('li.item').each((i, li) => {
             li.setAttribute("draggable", true);
             li.addEventListener("dragstart", handler, false);
-        });
-
-        // Item button dragging
-        let itemUsageHandler = ev => this._onItemUsageDragStart(ev);
-        html.find('button:is(.featActivate, .featDeactivate, .damage, .healing, .attack, .use)').each((i, li) => {
-            li.setAttribute("draggable", true);
-            li.addEventListener("dragstart", itemUsageHandler, false);
         });
 
         // Item Rolling
@@ -537,7 +519,7 @@ export class ActorSheetSFRPG extends ActorSheet {
      * @param {Event} event The originating click event
      */
     async _onItemCreate(event) {
-        event.stopPropagation();
+        event.preventDefault();
         const header = event.currentTarget;
         let type = header.dataset.type;
         if (!type || type.includes(",")) {
@@ -658,7 +640,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         let li = $(event.currentTarget).parents(".item"),
             itemId = li.attr("data-item-id");
 
-        let actorHelper = new ActorItemHelper(this.actor.id, this.token ? this.token.id : null, this.token ? this.token.parent.id : null, { actor: this.actor });
+        let actorHelper = new ActorItemHelper(this.actor.id, this.token ? this.token.id : null, this.token ? this.token.parent.id : null);
         let item = actorHelper.getItem(itemId);
 
         if (event.shiftKey) {
@@ -802,24 +784,6 @@ export class ActorSheetSFRPG extends ActorSheet {
     }
 
     /**
-     * Handle clicking inventory/features headers, allowing them to minimize
-     * @param {Event} event
-     */
-    async _onItemHeaderClick(event) {
-        event.preventDefault();
-        const target = $(event.currentTarget);
-
-        const items = target.next("ol.item-list");
-
-        if (!target.hasClass("collapsed")) {
-            items.slideUp(200, () => items.css("display", "none"));
-        } else {
-            items.slideDown(200, () => items.css("display", ""));
-        }
-        target.toggleClass('collapsed');
-    }
-
-    /**
      * Handle rolling a Save
      * @param {Event} event   The originating click event
      * @private
@@ -905,15 +869,15 @@ export class ActorSheetSFRPG extends ActorSheet {
      */
     async _onItemSummary(event) {
         event.preventDefault();
-        const li = $(event.currentTarget).parents('.item');
-        const item = this.actor.items.get(li.data('item-id'));
-        const chatData = await item.getChatData();
+        let li = $(event.currentTarget).parents('.item'),
+            item = this.actor.items.get(li.data('item-id')),
+            chatData = await item.getChatData({ secrets: this.actor.isOwner, rollData: this.actor.system });
 
         if (li.hasClass('expanded')) {
             let summary = li.children('.item-summary');
             summary.slideUp(200, () => summary.remove());
         } else {
-            const desiredDescription = chatData.description.short || chatData.description.value;
+            const desiredDescription = await TextEditor.enrichHTML(chatData.description.short || chatData.description.value, {async: true});
             let div = $(`<div class="item-summary">${desiredDescription}</div>`);
             Hooks.callAll("renderItemSummary", this, div, {}); // Event listeners need to be added to this HTML.
 
@@ -946,7 +910,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         const bigStack = Math.ceil(itemQuantity / 2.0);
         const smallStack = Math.floor(itemQuantity / 2.0);
 
-        const actorHelper = new ActorItemHelper(this.actor.id, this.token ? this.token.id : null, this.token ? this.token.parent.id : null, { actor: this.actor });
+        const actorHelper = new ActorItemHelper(this.actor.id, this.token ? this.token.id : null, this.token ? this.token.parent.id : null);
 
         const update = { "quantity": bigStack };
         await actorHelper.updateItem(item.id, update);
@@ -1116,7 +1080,7 @@ export class ActorSheetSFRPG extends ActorSheet {
     }
 
     async processDroppedData(event, parsedDragData) {
-        const targetActor = new ActorItemHelper(this.actor.id, this.token?.id, this.token?.parent?.id, { actor: this.actor });
+        const targetActor = new ActorItemHelper(this.actor.id, this.token?.id, this.token?.parent?.id);
         if (!ActorItemHelper.IsValidHelper(targetActor)) {
             ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragToExternalTokenError"));
             return;
@@ -1195,7 +1159,7 @@ export class ActorSheetSFRPG extends ActorSheet {
                 actorID = splitUUID[1];
             }
 
-            const sourceActor = new ActorItemHelper(actorID || parsedDragData.actorId, parsedDragData.tokenId, parsedDragData.sceneId, { actor: this.actor });
+            const sourceActor = new ActorItemHelper(actorID || parsedDragData.actorId, parsedDragData.tokenId, parsedDragData.sceneId);
             if (!ActorItemHelper.IsValidHelper(sourceActor)) {
                 ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragFromExternalTokenError"));
                 return;
@@ -1269,21 +1233,6 @@ export class ActorSheetSFRPG extends ActorSheet {
         }
 
         console.log("Unknown item source: " + JSON.stringify(parsedDragData));
-    }
-
-    /**
-     * Allow item action buttons to be draggable, for the use of creating item macros
-     * @param {Event} ev
-     */
-    _onItemUsageDragStart(ev) {
-        ev.stopPropagation();
-        const el = ev.currentTarget;
-        const item = this.actor.items.get(el.closest("li.item").dataset.itemId);
-        let dragData = item.toDragData();
-        dragData.macroType = Array.from(el.classList)[1];
-
-        // Set data transfer
-        ev.dataTransfer.setData("text/plain", JSON.stringify(dragData));
     }
 
     processItemContainment(items, pushItemFn) {

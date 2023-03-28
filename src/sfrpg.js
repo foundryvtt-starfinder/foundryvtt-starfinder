@@ -48,7 +48,6 @@ import templateOverrides from "./module/template-overrides.js";
 import { preloadHandlebarsTemplates } from "./module/templates.js";
 import { generateUUID } from "./module/utils/utilities.js";
 
-import BaseEnricher from "./module/system/enrichers/base.js";
 import BrowserEnricher from "./module/system/enrichers/browser.js";
 import CheckEnricher from "./module/system/enrichers/check.js";
 import IconEnricher from "./module/system/enrichers/icon.js";
@@ -256,7 +255,24 @@ Hooks.once('init', async function() {
     console.log(`Starfinder | [INIT] Done (operation took ${finishTime - initTime} ms)`);
 });
 
-Hooks.once("i18nInit", () => {
+Hooks.once("setup", function() {
+    console.log(`Starfinder | [SETUP] Setting up Starfinder System subsystems`);
+    const setupTime = (new Date()).getTime();
+
+    /**
+     * Manage counter classe feature from combat tracker
+     * Like Solarian Attenument / Vanguard Entropic Point and Soldat Ki Point
+    **/
+    console.log("Starfinder | [SETUP] Initializing counter management");
+    const counterManagement = new CounterManagement();
+    counterManagement.setup();
+
+    console.log("Starfinder | [SETUP] Initializing RPC system");
+    RPC.initialize();
+
+    console.log("Starfinder | [SETUP] Initializing remote inventory system");
+    initializeRemoteInventory();
+
     console.log("Starfinder | [SETUP] Localizing global arrays");
     const toLocalize = [
         "abilities",
@@ -271,7 +287,7 @@ Hooks.once("i18nInit", () => {
         "ammunitionTypes",
         "armorProficiencies",
         "armorTypes",
-        "augmentationSystems",
+        "augmentationSytems",
         "augmentationTypes",
         "babProgression",
         "capacityUsagePer",
@@ -306,7 +322,6 @@ Hooks.once("i18nInit", () => {
         "senses",
         "skillProficiencyLevels",
         "skills",
-        "specialAbilityTypes",
         "specialMaterials",
         "speeds",
         "spellAreaEffects",
@@ -347,37 +362,16 @@ Hooks.once("i18nInit", () => {
         element.bonus.notes = game.i18n.localize(element.bonus.notes);
     }
 
-    for (const obj of Object.values(SFRPG.featureCategories)) {
-        obj.category = game.i18n.localize(obj.category);
-        obj.label = game.i18n.localize(obj.label);
-    }
-
     CONFIG.SFRPG.statusEffects.forEach(e => e.label = game.i18n.localize(e.label));
-});
-
-Hooks.once("setup", function() {
-    console.log(`Starfinder | [SETUP] Setting up Starfinder System subsystems`);
-    const setupTime = (new Date()).getTime();
-
-    /**
-     * Manage counter classe feature from combat tracker
-     * Like Solarian Attenument / Vanguard Entropic Point and Soldat Ki Point
-    **/
-    console.log("Starfinder | [SETUP] Initializing counter management");
-    const counterManagement = new CounterManagement();
-    counterManagement.setup();
-
-    console.log("Starfinder | [SETUP] Initializing RPC system");
-    RPC.initialize();
-
-    console.log("Starfinder | [SETUP] Initializing remote inventory system");
-    initializeRemoteInventory();
 
     console.log("Starfinder | [SETUP] Configuring rules engine");
     registerSystemRules(game.sfrpg.engine);
 
     console.log("Starfinder | [SETUP] Registering custom handlebars");
     setupHandlebars();
+
+    console.log("Starfinder | [SETUP] Setting up custom enrichers");
+    CONFIG.TextEditor.enrichers.push(new BrowserEnricher(), new IconEnricher(), new CheckEnricher());
 
     const finishTime = (new Date()).getTime();
     console.log(`Starfinder | [SETUP] Done (operation took ${finishTime - setupTime} ms)`);
@@ -404,10 +398,6 @@ Hooks.once("ready", async () => {
 
     console.log("Starfinder | [READY] Applying artwork from modules to compendiums");
     registerCompendiumArt();
-
-    console.log("Starfinder | [READY] Setting up inline buttons");
-    CONFIG.TextEditor.enrichers.push(new BrowserEnricher(), new IconEnricher(), new CheckEnricher());
-    BaseEnricher.addListeners();
 
     if (game.user.isGM) {
         const currentSchema = game.settings.get('sfrpg', 'worldSchemaVersion') ?? 0;
@@ -441,19 +431,15 @@ Hooks.once("ready", async () => {
         }
     }
 
-    // If Item Piles is enabled, defer to creating its loot tokens instead of system ones.
-    if (!(game.modules.get("item-piles")?.active)) {
-        Hooks.on("dropCanvasData", (canvas, data) => canvasHandlerV10(canvas, data));
-    } else {
-        console.log("Starfinder | [READY] Item Piles detected, deferring to its loot token implementation.");
-    }
-
     const finishTime = (new Date()).getTime();
     console.log(`Starfinder | [READY] Done (operation took ${finishTime - readyTime} ms)`);
 
     const startupDuration = finishTime - initTime;
     console.log(`Starfinder | [STARTUP] Total launch took ${Number(startupDuration / 1000).toFixed(2)} seconds.`);
 });
+
+Hooks.on("dropCanvasData", (canvas, data) => canvasHandlerV10(canvas, data));
+
 async function migrateOldContainers() {
     const promises = [];
     for (const actor of game.actors.contents) {
@@ -546,16 +532,11 @@ function registerMathFunctions() {
  */
 async function createItemMacro(data, slot) {
     const item = await Item.fromDropData(data);
-    if (!item) return;
-
-    let macroType = data?.macroType || "chatCard";
-    if (macroType.includes("feat")) macroType = "activate";
-
-    const command = `game.sfrpg.rollItemMacro("${item.name}", "${macroType}");`;
+    const command = `game.sfrpg.rollItemMacro("${item.name}");`;
     let macro = game.macros.contents.find(m => (m.name === item.name) && (m.command === command));
     if (!macro) {
         macro = await Macro.create({
-            name: item.name + (macroType !== "chatCard" ? ` (${game.i18n.localize(`SFRPG.ItemMacro.${macroType.capitalize()}`)})` : ""),
+            name: item.name,
             type: "script",
             img: item.img,
             command: command,
@@ -566,7 +547,7 @@ async function createItemMacro(data, slot) {
     game.user.assignHotbarMacro(macro, slot);
 }
 
-function rollItemMacro(itemName, macroType) {
+function rollItemMacro(itemName) {
     const speaker = ChatMessage.getSpeaker();
     let actor;
 
@@ -575,20 +556,8 @@ function rollItemMacro(itemName, macroType) {
     const item = actor ? actor.items.find(i => i.name === itemName) : null;
     if (!item) return ui.notifications.warn(`Your controlled Actor does not have an item named ${itemName}`);
 
-    switch (macroType) {
-        case "attack":
-            return item.rollAttack();
-        case "damage":
-        case "healing":
-            return item.rollDamage();
-        case "activate":
-            return item.setActive(!item.isActive());
-        case "use":
-            return item.rollConsumable();
-        default:
-            return item.roll();
-    }
-
+    if (item.type === 'spell') return actor.useSpell(item);
+    return item.roll();
 }
 
 function setupHandlebars() {

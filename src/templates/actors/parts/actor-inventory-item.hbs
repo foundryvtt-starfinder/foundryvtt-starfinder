@@ -82,9 +82,9 @@
                     {{!-- TODO: Remove this massive or chain once all weapons, shields, equipments, and containers have their data.equippable flag set in their json definitions --}}
                     {{#if (or (or (or (or (eq item.type "weapon") (eq item.type "shield")) (eq item.type "equipment")) (eq item.type "container")) item.system.equippable)}}
                         {{#if item.system.equipped}}
-                            <a class="item-control item-equip" title="{{#if (eq item.type "augmentation")}}{{localize "SFRPG.ActorSheet.Inventory.Item.Uninstall"}}{{else}}{{localize "SFRPG.ActorSheet.Inventory.Item.Unequip"}}{{/if}}"><i class="fas fa-check"></i></a>
+                            <a class="item-control item-equip" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Unequip"}}"><i class="fas fa-check"></i></a>
                         {{else}}
-                            <a class="item-control item-equip" title="{{#if (eq item.type "augmentation")}}{{localize "SFRPG.ActorSheet.Inventory.Item.Install"}}{{else}}{{localize "SFRPG.ActorSheet.Inventory.Item.Equip"}}{{/if}}"><i class="far fa-square"></i></a>
+                            <a class="item-control item-equip" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Equip"}}"><i class="far fa-square"></i></a>
                         {{/if}}
                     {{/if}}
                 {{/if}}
