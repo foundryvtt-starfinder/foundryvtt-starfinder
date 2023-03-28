@@ -1,5 +1,4 @@
 import RollDialog from "../apps/roll-dialog.js";
-import StackModifiers from "../rules/closures/stack-modifiers.js";
 import RollNode from "./rollnode.js";
 
 export default class RollTree {
