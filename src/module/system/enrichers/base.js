@@ -20,6 +20,12 @@ export default class BaseEnricher {
         this.enricher = this.enricherFunc.bind(this);
     }
 
+    /** --------
+    |           |
+    |  Getters  |
+    |           |
+    ----------*/
+
     /**
      * The RegExp to capture the text.
      * @returns {RegExp}
@@ -51,6 +57,12 @@ export default class BaseEnricher {
     get icons() {
         throw new Error("This method must be implemented on subclasses of BaseEnricher.");
     }
+
+    /** -------------------
+    |                      |
+    |  Element Generation  |
+    |                      |
+    ----------------------*/
 
     /**
      * Transform the Regex match array into an enriched element, performing validation.
@@ -124,7 +136,7 @@ export default class BaseEnricher {
      * @returns {HTMLAnchorElement}
      */
     createElement() {
-        const a = document.createElement("a");
+        let a = document.createElement("a");
 
         a.dataset.action = this.enricherType;
         a.dataset.type = this.args.type;
@@ -134,8 +146,57 @@ export default class BaseEnricher {
 
         a.innerText = this.name;
 
+        if (this.#_hasRepost) a = this.addRepost(a);
+
         return a;
     }
+
+    /** -------
+    |          |
+    |  Repost  |
+    |          |
+    -----------*/
+
+    /**
+     * Should this enricher have a repost button appended to created elements?
+     * Create both a publicly accessible static variable and an internal instance one.
+     * @type {Boolean}
+     */
+    static hasRepost = false;
+    /** @type {Boolean} */
+    #_hasRepost = this.constructor.hasRepost;
+
+    /**
+     * Take an anchor element and append a repost button
+     * @param {HTMLAnchorElement} a The original anchor
+     * @returns The inputted Anchor, with a repost button appended
+     */
+    addRepost(a) {
+        let repost = document.createElement("i");
+        repost.classList.add("fas", "fa-comment-alt", "repost");
+        repost.dataset.tooltip = "SFRPG.Enrichers.SendToChat";
+
+        a.append(repost);
+
+        return a;
+    }
+
+    /**
+     * Handle repost button click, sending a chat message of the current target to chat.
+     * @param {Event} event
+     * @returns Create a chat message
+     */
+    static repostListener(event) {
+        event.stopPropagation();
+
+        return ChatMessage.create({content: event.currentTarget.parentElement.outerHTML});
+    }
+
+    /** ---------
+    |            |
+    |  Listener  |
+    |            |
+    ------------*/
 
     /**
      * Whether the enricher has an event listener.
@@ -145,36 +206,19 @@ export default class BaseEnricher {
 
     /**
      * A callback function to run when the element is clicked.
-     * @param {Event} ev The DOM event that triggers the listener
-     * @param {HTMLDataset} data The element's dataset
-     * @returns {*}
+     * @param {Event} event The DOM event that triggers the listener
+     * @returns {void}
      */
-    static listener(ev, data) {}
-}
+    static listener(event) {}
 
-/** --------------------------------
- * Add listeners
-    ----------------------------- */
-
-const sheets = [
-    "ActorSheet",
-    "ItemSummary",
-    "ItemCollectionSheet",
-    "ItemSheet",
-    "ChatMessage",
-    "JournalPageSheet"
-];
-
-for (const sheet of sheets) {
-    Hooks.on(`render${sheet}`, (app, html, options) => {
+    /**
+     * Add Event listeners to the DOM body at startup.
+     */
+    static addListeners() {
+        const body = $("body");
+        body.on("click", `i.repost`, this.repostListener);
         for (const [action, cls] of Object.entries(CONFIG.SFRPG.enricherTypes)) {
-            if (!cls.hasListener) continue;
-
-            const enricherListener = cls.listener;
-            html[sheet !== "JournalPageSheet" ? 0 : 2]?.querySelectorAll(`a[data-action=${action}]`)
-                ?.forEach(i => {
-                    i.addEventListener("click", (ev) => enricherListener(ev, i.dataset));
-                });
+            if (cls.hasListener) body.on("click", `a[data-action="${action}"]`, cls.listener);
         }
-    });
+    }
 }

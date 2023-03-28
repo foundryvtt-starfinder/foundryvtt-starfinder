@@ -90,15 +90,18 @@ export default class CheckEnricher extends BaseEnricher {
 
         if (this.args.dc) a.dataset.dc = parseInt(this.args.dc);
 
-        a.innerHTML = `<i class="fas ${this.icons[this.args.type]}"></i>${this.name}`;
+        a.innerHTML = `<i class="fas ${this.icons[this.args.type]}"></i>${a.innerHTML}`;
 
         return a;
 
     }
 
+    static hasRepost = true;
     static hasListener = true;
 
-    static listener(ev, data) {
+    static listener(event) {
+        const data = event.currentTarget.dataset;
+
         const actor = _token?.actor ?? game.user?.character;
         if (!actor) return ui.notifications.error("You must have a token or an actor selected.");
         const id = CheckNameHelper.shortFormName(data.type);
