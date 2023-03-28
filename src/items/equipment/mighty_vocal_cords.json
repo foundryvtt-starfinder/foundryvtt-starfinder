@@ -5,9 +5,24 @@
   "img": "icons/magic/sonic/scream-wail-shout-teal.webp",
   "system": {
     "type": "biotech",
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
+    "actionType": "save",
+    "activation": {
+      "type": "action",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "none",
+      "value": null
+    },
+    "attackBonus": 0,
     "attributes": {
       "ac": {
         "value": ""
@@ -21,34 +36,72 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": 8
       },
       "size": "medium",
       "sturdy": false
     },
     "attuned": false,
     "bulk": "-",
+    "chatFlavor": "",
+    "container": {
+      "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
+      "storage": []
+    },
     "critical": {
+      "effect": "",
       "parts": []
     },
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>You can mimic the roar of a powerful predator, such as the renkrodas of Castrovel. As a standard action you can bellow ferociously, causing all enemies within 30 feet of you to become shaken for 1d4+1 rounds. A target can attempt a Will saving throw (DC = 10 + half your character level + your Constitution modifier) to negate this effect; a creature that succeeds at this saving throw is immune to your mighty vocal cords for 24 hours. Once you use your mighty vocal cords, you can’t use them again until you’ve rested for 10 minutes to regain Stamina Points.</p>"
+      "value": "<p>You can mimic the roar of a powerful predator, such as the renkrodas of Castrovel. As a standard action you can bellow ferociously, causing all enemies within 30 feet of you to become @UUID[Compendium.sfrpg.conditions.nywSVEeDvp1bk7L3]{shaken} for [[/r 1d4+1]]{1d4+1 rounds}. A target can attempt a Will saving throw (DC = 10 + half your character level + your Constitution modifier) to negate this effect; a creature that succeeds at this saving throw is immune to your mighty vocal cords for 24 hours. Once you use your mighty vocal cords, you can’t use them again until you’ve rested for 10 minutes to regain Stamina Points.</p>"
     },
-    "equippable": false,
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": ""
+    },
+    "equippable": true,
     "equipped": false,
+    "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 3,
     "modifiers": [],
     "price": 1275,
     "quantity": 1,
-    "source": "ARM, p.86",
-    "system": "throat"
+    "quantityPerPack": 1,
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "none",
+      "value": null
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "will",
+      "dc": "10 + floor(@details.level.value / 2) + @abilities.con.mod",
+      "descriptor": "negate"
+    },
+    "source": "AR pg. 86",
+    "system": "throat",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": 1,
+      "per": "sr",
+      "value": 1
+    }
   }
 }

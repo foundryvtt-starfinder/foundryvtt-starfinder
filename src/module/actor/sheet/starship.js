@@ -42,7 +42,10 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         this._getCrewData(data);
 
         // Encrich text editors
-        data.enrichedDescription = await TextEditor.enrichHTML(this.object.system.details.notes, {async: true});
+        data.enrichedDescription = await TextEditor.enrichHTML(this.actor.system.details.notes, {
+            async: true,
+            rollData: this.actor.getRollData() ?? {}
+        });
 
         return data;
     }
@@ -330,12 +333,36 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         const turretLabel = this._createLabel("SFRPG.StarshipSheet.Weapons.Turret", turret, weaponMounts?.turret);
 
         const arcs = {
-            forward: { label: forwardLabel, items: [], dataset: { type: "starshipWeapon", allowAdd: false, isDisabled: !hasForward }},
-            starboard: { label: starboardLabel, items: [], dataset: { type: "starshipWeapon", allowAdd: false, isDisabled: !hasStarboard }},
-            port: { label: portLabel, items: [], dataset: { type: "starshipWeapon", allowAdd: false, isDisabled: !hasPort }},
-            aft: { label: aftLabel, items: [], dataset: { type: "starshipWeapon", allowAdd: false, isDisabled: !hasAft }},
-            turret: { label: turretLabel, items: [], dataset: { type: "starshipWeapon", allowAdd: false, isDisabled: !hasTurret }},
-            unmounted: { label: game.i18n.format("SFRPG.StarshipSheet.Weapons.NotMounted"), items: [], dataset: { type: "starshipWeapon", allowAdd: true }}
+            forward: {
+                label: forwardLabel,
+                items: [],
+                dataset: { type: "starshipWeapon", allowAdd: false, isDisabled: !hasForward }
+            },
+            starboard: {
+                label: starboardLabel,
+                items: [],
+                dataset: { type: "starshipWeapon", allowAdd: false, isDisabled: !hasStarboard }
+            },
+            port: {
+                label: portLabel,
+                items: [],
+                dataset: { type: "starshipWeapon", allowAdd: false, isDisabled: !hasPort }
+            },
+            aft: {
+                label: aftLabel,
+                items: [],
+                dataset: { type: "starshipWeapon", allowAdd: false, isDisabled: !hasAft }
+            },
+            turret: {
+                label: turretLabel,
+                items: [],
+                dataset: { type: "starshipWeapon", allowAdd: false, isDisabled: !hasTurret }
+            },
+            unmounted: {
+                label: game.i18n.format("SFRPG.StarshipSheet.Weapons.NotMounted"),
+                items: [],
+                dataset: { type: "starshipWeapon", allowAdd: true }
+            }
         };
 
         arcs.forward.items = forward;
@@ -348,15 +375,63 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         data.arcs = Object.values(arcs);
 
         const features = {
-            frame: { label: game.i18n.format("SFRPG.StarshipSheet.Features.Frame", {"current": frame.length}), items: frame, hasActions: false, dataset: { type: "starshipFrame" } },
-            powerCores: { label: game.i18n.format("SFRPG.StarshipSheet.Features.PowerCores"), items: powerCores, hasActions: false, dataset: { type: "starshipPowerCore" } },
-            thrusters: { label: game.i18n.format("SFRPG.StarshipSheet.Features.Thrusters"), items: thrusters, hasActions: false, dataset: { type: "starshipThruster" } },
-            primarySystems: { label: game.i18n.format("SFRPG.StarshipSheet.Features.PrimarySystems"), items: primarySystems, hasActions: false, dataset: { type: starshipSystems.join(',') } },
-            otherSystems: { label: game.i18n.format("SFRPG.StarshipSheet.Features.OtherSystems"), items: otherSystems, hasActions: false, dataset: { type: "starshipOtherSystem" } },
-            securitySystems: { label: game.i18n.format("SFRPG.StarshipSheet.Features.SecuritySystems"), items: securitySystems, hasActions: false, dataset: { type: "starshipSecuritySystem" } },
-            expansionBays: { label: game.i18n.format("SFRPG.StarshipSheet.Features.ExpansionBays", {current: expansionBays.length, max: actorData.attributes.expansionBays.value}), items: expansionBays, hasActions: false, dataset: { type: "starshipExpansionBay" } },
-            specialAbilities: { label: game.i18n.format("SFRPG.StarshipSheet.Features.SpecialAbilities"), items: specialAbilities, hasActions: false, dataset: { type: "starshipSpecialAbility" } },
-            resources: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"), items: actorResources, hasActions: false, dataset: { type: "actorResource" } }
+            frame: {
+                category: game.i18n.format("SFRPG.StarshipSheet.Features.Frame", { current: frame.length }),
+                items: frame,
+                hasActions: false,
+                dataset: { type: "starshipFrame" }
+            },
+            powerCores: {
+                category: game.i18n.format("SFRPG.StarshipSheet.Features.PowerCores"),
+                items: powerCores,
+                hasActions: false,
+                dataset: { type: "starshipPowerCore" }
+            },
+            thrusters: {
+                category: game.i18n.format("SFRPG.StarshipSheet.Features.Thrusters"),
+                items: thrusters,
+                hasActions: false,
+                dataset: { type: "starshipThruster" }
+            },
+            primarySystems: {
+                category: game.i18n.format("SFRPG.StarshipSheet.Features.PrimarySystems"),
+                items: primarySystems,
+                hasActions: false,
+                dataset: { type: starshipSystems.join(",") }
+            },
+            otherSystems: {
+                category: game.i18n.format("SFRPG.StarshipSheet.Features.OtherSystems"),
+                items: otherSystems,
+                hasActions: false,
+                dataset: { type: "starshipOtherSystem" }
+            },
+            securitySystems: {
+                category: game.i18n.format("SFRPG.StarshipSheet.Features.SecuritySystems"),
+                items: securitySystems,
+                hasActions: false,
+                dataset: { type: "starshipSecuritySystem" }
+            },
+            expansionBays: {
+                category: game.i18n.format("SFRPG.StarshipSheet.Features.ExpansionBays", {
+                    current: expansionBays.length,
+                    max: actorData.attributes.expansionBays.value
+                }),
+                items: expansionBays,
+                hasActions: false,
+                dataset: { type: "starshipExpansionBay" }
+            },
+            specialAbilities: {
+                category: game.i18n.format("SFRPG.StarshipSheet.Features.SpecialAbilities"),
+                items: specialAbilities,
+                hasActions: false,
+                dataset: { type: "starshipSpecialAbility" }
+            },
+            resources: {
+                category: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"),
+                items: actorResources,
+                hasActions: false,
+                dataset: { type: "actorResource" }
+            }
         };
 
         data.features = Object.values(features);
@@ -665,7 +740,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
         const doc = index.find(i => i.name === (li.prevObject[0].innerHTML));
         const item = await pack.getDocument(doc._id);
-        const chatData = await item.getChatData({ secrets: this.actor.isOwner, rollData: this.actor.system });
+        const chatData = await item.getChatData();
 
         let content = `<p><strong>${game.i18n.localize("SFRPG.StarshipSheet.Actions.Tooltips.NormalEffect")}:</strong> ${chatData.effectNormal}</p>`;
         if (chatData.effectCritical) {
@@ -676,7 +751,11 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             let summary = li.children('.item-summary');
             summary.slideUp(200, () => summary.remove());
         } else {
-            const desiredDescription = await TextEditor.enrichHTML(content || chatData.description.value, {async: true});
+            const desiredDescription = await TextEditor.enrichHTML(content || chatData.description.value, {
+                async: true,
+                rollData: this.actor.getRollData() ?? {},
+                secrets: this.actor.isOwner
+            });
             let div = $(`<div class="item-summary">${desiredDescription}</div>`);
             Hooks.callAll("renderItemSummary", this, div, {});
 
