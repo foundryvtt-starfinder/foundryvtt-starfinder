@@ -105,13 +105,13 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
 
                 item.config = {
                     isStack: item.system.quantity ? item.system.quantity > 1 : false,
-                    isOnCooldown:
-                        item.system.recharge && !!item.system.recharge.value && item.system.recharge.charged === false,
-                    hasAttack:
-                        ["mwak", "rwak", "msak", "rsak"].includes(item.system.actionType)
+                    isOpen: item.type === "container" ? item.system.container.isOpen : true,
+                    isOnCooldown: item.system.recharge
+                        && !!item.system.recharge.value
+                        && item.system.recharge.charged === false,
+                    hasAttack: ["mwak", "rwak", "msak", "rsak"].includes(item.system.actionType)
                         && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
-                    hasDamage:
-                        item.system.damage?.parts
+                    hasDamage: item.system.damage?.parts
                         && item.system.damage.parts.length > 0
                         && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
                     hasUses: item.canBeUsed(),
