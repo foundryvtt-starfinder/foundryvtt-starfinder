@@ -4,384 +4,387 @@
 /*  Basic Structure                          */
 /* ----------------------------------------- */
 .sfrpg.sheet.actor.character {
-  min-width: 715px;
-  //min-height: 830px;
+    min-width: 715px;
+    //min-height: 830px;
 
-  /* ----------------------------------------- */
-  /*  Sheet Header                             */
-  /* ----------------------------------------- */
+    /* ----------------------------------------- */
+    /*  Sheet Header                             */
+    /* ----------------------------------------- */
 
-  .sheet-header {
-
-    // Character Profile image (larger than usual)
-    img.profile {
-      flex: 0 0 180px;
-      height: 180px;
-    }
-
-    // Character level and experience bar
-    .charlevel {
-      flex: 0 0 180px;
-      padding: 0 5px 2px;
-
-      .level {
-        height: 28px;
-      }
-
-      .experience {
-        input[type="text"] {
-          width: 100px;
+    .sheet-header {
+        // Character Profile image (larger than usual)
+        img.profile {
+            flex: 0 0 180px;
+            height: 180px;
         }
-      }
 
-      .xpbar {
-        width: 100%;
-        flex: 0 0 8px;
-        background: #666;
-        border: 1px solid #000;
-        border-radius: 3px;
+        // Character level and experience bar
+        .charlevel {
+            flex: 0 0 180px;
+            padding: 0 5px 2px;
 
-        .bar {
-          height: 4px;
-          margin: 1px;
-          display: block;
-          background: @sfrpgRed;
-          border: 1px solid #000;
-          border-radius: 2px;
-          max-width: 99%;
+            .level {
+                height: 28px;
+            }
+
+            .experience {
+                input[type="text"] {
+                    width: 100px;
+                }
+            }
+
+            .xpbar {
+                width: 100%;
+                flex: 0 0 8px;
+                background: #666;
+                border: 1px solid #000;
+                border-radius: 3px;
+
+                .bar {
+                    height: 4px;
+                    margin: 1px;
+                    display: block;
+                    background: @sfrpgRed;
+                    border: 1px solid #000;
+                    border-radius: 2px;
+                    max-width: 99%;
+                }
+            }
         }
-      }
+
+        // Character Summary
+        .summary {
+            border-bottom: @borderGroove;
+        }
+
+        // Primary Attributes
+        .attributes {
+            height: 80px;
+            margin: 0;
+
+            .attribute {
+                height: 80px;
+                margin: 0;
+                border: none;
+                border-right: @borderGroove;
+                border-radius: 0;
+
+                &:last-child {
+                    border-right: none;
+                }
+
+                .attribute-value {
+                    margin: 5px 0 0;
+                    height: 32px;
+                    line-height: 32px;
+
+                    span {
+                        font-size: 25px;
+                    }
+                }
+
+                .attribute-name {
+                    margin-top: 6px;
+                }
+
+                .attribute-footer {
+                    margin-bottom: 2px;
+                }
+            }
+
+            a.rest {
+                border: 1px solid @colorBeige;
+                border-radius: 2px;
+                background: rgba(0, 0, 0, 0.05);
+                padding: 1px 3px;
+                margin: 0 6px;
+            }
+        }
     }
 
-    // Character Summary
-    .summary {
-      border-bottom: @borderGroove;
-    }
+    /* ----------------------------------------- */
+    /*  Sheet Body                               */
+    /* ----------------------------------------- */
 
-    // Primary Attributes
     .attributes {
-      height: 80px;
-      margin: 0;
+        .resource {
+            .attribute-name {
+                margin: 0 8px;
+                input[type="text"] {
+                    height: 20px;
+                    margin: 2px 0 -2px;
+                    line-height: 24px;
+                }
+            }
+            label.checkbox {
+                margin: 0 3px;
+                input[type="checkbox"] {
+                    transform: scale(1.2);
+                }
+            }
+        }
 
-      .attribute {
-        height: 80px;
+        .initiative .attribute-footer input,
+        .save .attribute-footer input {
+            width: 32px;
+        }
+        a.rest {
+            border: 1px solid @colorBeige;
+            border-radius: 2px;
+            background: rgba(0, 0, 0, 0.05);
+            padding: 1px 3px;
+            margin: 0 6px;
+        }
+    }
+
+    .ability-scores {
+        flex: 0 0 100%;
+        list-style: none;
         margin: 0;
-        border: none;
-        border-right: @borderGroove;
-        border-radius: 0;
+        padding: 0;
 
-        &:last-child {
-          border-right: none;
+        .ability {
+            height: 94px;
+            margin: 0 2px;
+            text-align: center;
+            border: @borderGroove;
+            border-radius: 3px;
+
+            .ability-header {
+                height: 24px;
+                margin: 0;
+
+                input[type="text"].ability-damage {
+                    flex: 1;
+                    height: 24px;
+                    border-bottom: @borderGroove;
+                    border-right: @borderGroove;
+                }
+
+                input[type="text"].ability-penalty {
+                    flex: 1;
+                    height: 24px;
+                    border-bottom: @borderGroove;
+                }
+
+                input[type="text"].ability-drain {
+                    flex: 1;
+                    height: 24px;
+                    border-bottom: @borderGroove;
+                    border-left: @borderGroove;
+                }
+            }
+
+            // Box Headers
+            h4.box-title {
+                line-height: 16px;
+                margin: 4px 8px 25px;
+                font-size: 18px;
+                border-bottom: 1px solid @colorBeige;
+            }
+
+            .ability-modifiers {
+                height: 32px;
+
+                span.ability-mod,
+                input[type="text"].ability-base {
+                    flex: 0 0 32px;
+                    height: 30px;
+                    overflow: hidden;
+                    border-top: @borderGroove;
+                }
+
+                span.ability-mod {
+                    border-right: @borderGroove;
+                    padding: 7px 0 0;
+                }
+
+                div.ability-center {
+                    margin: -10px 0 10px;
+                    font-size: 24px;
+                    overflow: hidden;
+                }
+
+                input[type="text"].ability-base {
+                    border-left: @borderGroove;
+                    border-radius: 0;
+                }
+            }
+        }
+    }
+
+    ul.skills-list {
+        flex: 0 0 49%;
+
+        h3.skill-ranks {
+            text-align: center;
+            margin-bottom: 3px;
+            border: none;
+
+            &.red {
+                color: @sfrpgRed;
+            }
         }
 
-        .attribute-value {
-          margin: 5px 0 0;
-          height: 32px;
-          line-height: 32px;
+        li.skills-header {
+            background: rgba(0, 0, 0, 0.05);
+            border: @borderGroove;
+            font-size: 12px;
+            font-weight: bold;
+            line-height: 15px;
+            padding: 3px;
 
-          span {
-            font-size: 25px;
-          }
+            h3 {
+                flex: 0 0 50%;
+                font-size: 12px;
+                font-weight: bold;
+                margin: 0;
+                border: none;
+            }
+            div.skill-header-prof,
+            div.skill-header-mod {
+                flex: 0 0 10%;
+            }
+            div.skill-header-rank,
+            div.skill-header-ability {
+                flex: 0 0 15%;
+            }
+
+            div.skill-header-rank {
+                text-align: center;
+            }
         }
 
-        .attribute-name {
-          margin-top: 6px;
+        li.skill {
+            padding: 3px;
+            h4 {
+                flex: 0 0 44%;
+                margin: 0;
+                font-size: 13px;
+            }
+            .skill-proficiency {
+                flex: 0 0 10%;
+                text-align: center;
+            }
+            .skill-ranks,
+            .skill-ability {
+                flex: 0 0 15%;
+            }
+            .skill-mod {
+                flex: 0 0 10%;
+            }
+        }
+    }
+
+    .counters {
+        .death-saves {
+            flex: 2;
+            .counter-value {
+                flex: 0 0 90px;
+            }
+        }
+    }
+
+    .item-detail.player-class {
+        flex: 0 0 180px;
+        text-align: right;
+        padding-right: 10px;
+    }
+
+    /* ----------------------------------------- */
+    /*  Inventory                                */
+    /* ----------------------------------------- */
+
+    /* Encumbrance Bar */
+    .encumbrance {
+        flex: 0 0 12px;
+        background: @colorTan;
+        margin: 1px 15px 5px 15px;
+        border: 1px solid @colorDark;
+        border-radius: 3px;
+        position: relative;
+
+        .encumbrance-bar {
+            position: absolute;
+            top: 1px;
+            left: 1px;
+            background: #6c8aa5;
+            height: 8px;
+            border: 1px solid #cde4ff;
+            border-radius: 2px;
         }
 
-        .attribute-footer {
-          margin-bottom: 2px;
-        }
-      }
-
-      a.rest {
-        border: 1px solid @colorBeige;
-        border-radius: 2px;
-        background: rgba(0, 0, 0, 0.05);
-        padding: 1px 3px;
-        margin: 0 6px;
-      }
-    }
-  }
-
-  /* ----------------------------------------- */
-  /*  Sheet Body                               */
-  /* ----------------------------------------- */
-
-  .attributes {
-    .resource {
-      .attribute-name {
-        margin: 0 8px;
-        input[type="text"] {
-          height: 20px;
-          margin: 2px 0 -2px;
-          line-height: 24px;
-        }
-      }
-      label.checkbox {
-        margin: 0 3px;
-        input[type="checkbox"] {
-          transform: scale(1.2);
-        }
-      }
-    }
-
-    .initiative .attribute-footer input,
-    .save .attribute-footer input {
-      width: 32px;
-    }
-    a.rest {
-      border: 1px solid @colorBeige;
-      border-radius: 2px;
-      background: rgba(0, 0, 0, 0.05);
-      padding: 1px 3px;
-      margin: 0 6px;
-    }
-  }
-
-  .ability-scores {
-    flex: 0 0 100%;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-
-    .ability {
-      height: 94px;
-      margin: 0 2px;
-      text-align: center;
-      border: @borderGroove;
-      border-radius: 3px;
-
-      .ability-header {
-        height: 24px;
-        margin: 0;
-
-        input[type="text"].ability-damage {
-          flex: 1;
-          height: 24px;
-          border-bottom: @borderGroove;
-          border-right: @borderGroove;
+        .encumbrance-label {
+            height: 10px;
+            padding: 0 5px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: 13px;
+            line-height: 12px;
+            text-align: right;
+            color: #eee;
+            text-shadow: 0 0 5px #000;
         }
 
-        input[type="text"].ability-penalty {
-          flex: 1;
-          height: 24px;
-          border-bottom: @borderGroove;
+        .encumbrance-breakpoint {
+            position: absolute;
+            left: 50%;
         }
 
-        input[type="text"].ability-drain {
-          flex: 1;
-          height: 24px;
-          border-bottom: @borderGroove;
-          border-left: @borderGroove;
-        }
-      }
-
-      // Box Headers
-      h4.box-title {
-        line-height: 16px;
-        margin: 4px 8px 25px;
-        font-size: 18px;
-        border-bottom: 1px solid @colorBeige;
-      }
-
-      .ability-modifiers {
-        height: 32px;
-
-        span.ability-mod,
-        input[type="text"].ability-base {
-          flex: 0 0 32px;
-          height: 30px;
-          overflow: hidden;
-          border-top: @borderGroove;
+        .arrow-up {
+            bottom: 0;
+            width: 0;
+            height: 0;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-bottom: 4px solid #000;
         }
 
-        span.ability-mod {
-          border-right: @borderGroove;
-          padding: 7px 0 0;
+        .arrow-down {
+            top: 0;
+            width: 0;
+            height: 0;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 4px solid #000;
         }
 
-        div.ability-center {
-          margin: -10px 0 10px;
-          font-size: 24px;
-          overflow: hidden;
+        &.encumbered {
+            .arrow-up {
+                border-bottom: 4px solid @sfrpgRed;
+            }
+            .arrow-down {
+                border-top: 4px solid @sfrpgRed;
+            }
         }
-
-        input[type="text"].ability-base {
-          border-left: @borderGroove;
-          border-radius: 0;
-        }
-      }
-    }
-  }
-
-  ul.skills-list {
-    flex: 0 0 49%;
-
-    h3.skill-ranks {
-      text-align: center;
-      margin-bottom: 3px;
-      border: none;
-
-      &.red {
-        color: @sfrpgRed;
-      }
     }
 
-    li.skills-header {
-      background: rgba(0, 0 ,0, 0.05);
-      border: @borderGroove;
-      font-size: 12px;
-      font-weight: bold;
-      line-height: 15px;
-      padding: 3px;
-
-      h3 {
-        flex: 0 0 50%;
-        font-size: 12px;
-        font-weight: bold;
-        margin: 0;
-        border: none;
-      }
-      div.skill-header-prof,
-      div.skill-header-mod {
-        flex: 0 0 10%;
-      }
-      div.skill-header-rank,
-      div.skill-header-ability {
-        flex: 0 0 15%;
-      }
-
-      div.skill-header-rank {
-        text-align: center;
-      }
-    }
-
-    li.skill {
-      padding: 3px;
-      h4 {
-        flex: 0 0 44%;
-        margin: 0;
-        font-size: 13px;
-      }
-      .skill-proficiency {
-        flex: 0 0 10%;
-        text-align: center;
-      }
-      .skill-ranks,
-      .skill-ability {
-        flex: 0 0 15%;
-      }
-      .skill-mod {
-        flex: 0 0 10%;
-      }
-    }
-  }
-
-  .counters {
-    .death-saves {
-      flex: 2;
-      .counter-value {
-        flex: 0 0 90px;
-      }
-    }
-  }
-
-  .item-detail.player-class {
-    flex: 0 0 180px;
-    text-align: right;
-    padding-right: 10px;
-  }
-
-  /* ----------------------------------------- */
-  /*  Inventory                                */
-  /* ----------------------------------------- */
-
-  /* Encumbrance Bar */
-  .encumbrance {
-    flex: 0 0 12px;
-    background: @colorTan;
-    margin: 1px 15px 5px 15px;
-    border: 1px solid @colorDark;
-    border-radius: 3px;
-    position: relative;
-
-    .encumbrance-bar {
-      position: absolute;
-      top: 1px;
-      left: 1px;
-      background: #6c8aa5;
-      height: 8px;
-      border: 1px solid #cde4ff;
-      border-radius: 2px;
-    }
-
-    .encumbrance-label {
-      height: 10px;
-      padding: 0 5px;
-      position: absolute;
-      top: 0;
-      right: 0;
-      font-size: 13px;
-      line-height: 12px;
-      text-align: right;
-      color: #EEE;
-      text-shadow: 0 0 5px #000;
-    }
-
-    .encumbrance-breakpoint {
-      position: absolute;
-      left: 50%;
-    }
-
-    .arrow-up {
-      bottom: 0;
-      width: 0;
-      height: 0;
-      border-left: 4px solid transparent;
-      border-right: 4px solid transparent;
-      border-bottom: 4px solid #000;
-    }
-
-    .arrow-down {
-      top: 0;
-      width: 0;
-      height: 0;
-      border-left: 4px solid transparent;
-      border-right: 4px solid transparent;
-      border-top: 4px solid #000;
-    }
-
-    &.encumbered {
-      .arrow-up { border-bottom: 4px solid @sfrpgRed; }
-      .arrow-down { border-top: 4px solid @sfrpgRed; }
-    }
-  }
-
-  .item-controls {
-    flex: 0 0 66px;
-  }
-
-  /* ----------------------------------------- */
-  /*  Spellbook                                */
-  /* ----------------------------------------- */
-
-  .spellbook {
     .item-controls {
-      flex: 0 0 44px;
-
-      .toggle-prepared {
-        color: @colorBeige;
-        &.prepared {
-          color: @colorOlive;
-        }
-      }
+        flex: 0 0 66px;
     }
-  }
 
-  /* ----------------------------------------- */
-  /*  Modifiers                                */
-  /* ----------------------------------------- */
-  .form-group.stacked label.checkbox {
-    flex: 0 0 20%;
-  }
+    /* ----------------------------------------- */
+    /*  Spellbook                                */
+    /* ----------------------------------------- */
+
+    .spellbook {
+        .item-controls {
+            flex: 0 0 44px;
+
+            .toggle-prepared {
+                color: @colorBeige;
+                &.prepared {
+                    color: @colorOlive;
+                }
+            }
+        }
+    }
+
+    /* ----------------------------------------- */
+    /*  Modifiers                                */
+    /* ----------------------------------------- */
+    .form-group.stacked label.checkbox {
+        flex: 0 0 20%;
+    }
 }

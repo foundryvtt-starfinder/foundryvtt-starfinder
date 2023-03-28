@@ -5,9 +5,24 @@
   "img": "icons/creatures/mammals/bull-horns-eyes-glowin-orange.webp",
   "system": {
     "type": "biotech",
+    "ability": null,
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
+    "actionType": "",
+    "activation": {
+      "type": "full",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "none",
+      "value": null
+    },
+    "attackBonus": 0,
     "attributes": {
       "ac": {
         "value": ""
@@ -21,34 +36,103 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": 11
       },
       "size": "medium",
       "sturdy": false
     },
     "attuned": false,
     "bulk": "-",
+    "chatFlavor": "",
+    "container": {
+      "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
+      "storage": []
+    },
     "critical": {
+      "effect": "",
       "parts": []
     },
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>Your largest bones are embedded with specialized glands that can cause you to radically increase in size. You can’t activate these glands while you’re wearing armor that isn’t fitted to you. Activating this augmentation requires a full action. While you are transformed, your size increases by one size category. If you become Large or larger, your reach increases by 5 feet, the amount of Bulk you can carry before being encumbered increases by 2, and you gain a +2 circumstance bonus to checks to destroy an object using Strength (Core Rulebook 409). The effect of the glands lasts 1 minute. You must rest for 10 minutes to regain Stamina Points to reactivate the glands or spend 1 Resolve Point to recharge them immediately.</p>"
+      "value": "<p>Your largest bones are embedded with specialized glands that can cause you to radically increase in size. You can’t activate these glands while you’re wearing armor that isn’t fitted to you. Activating this augmentation requires a full action. While you are transformed, your size increases by one size category. If you become Large or larger, your reach increases by 5 feet, the amount of Bulk you can carry before being encumbered increases by 2, and you gain a +2 circumstance bonus to checks to destroy an object using Strength (@UUID[Compendium.sfrpg.rules.SfkuzH5kxSAmG4nv.JournalEntryPage.ftqreMQkNpYDxpxY#destroying-objects-using-strength]{Core Rulebook 409}). The effect of the glands lasts 1 minute. You must rest for 10 minutes to regain Stamina Points to reactivate the glands or spend 1 Resolve Point to recharge them immediately.</p>\n<p><em>Enable/Disable carry bonus in the Modifiers tab.</em></p>"
     },
-    "equippable": false,
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": "1 minute"
+    },
+    "equippable": true,
     "equipped": false,
+    "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 6,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "49631244-12b9-4839-b9c1-4a8a6c9a3112",
+        "name": "Growth glands",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "bulk",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "If you become Large or larger, your reach increases by 5 feet, the amount of Bulk you can carry before being encumbered increases by 2, and you gain a +2 circumstance bonus to checks to destroy an object using Strength (Core Rulebook 409).",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "a9669d7b-ab20-4257-8e49-809500b06301",
+        "name": "Growth glands",
+        "type": "circumstance",
+        "condition": "",
+        "effectType": "ability-check",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "If you become Large or larger, your reach increases by 5 feet, the amount of Bulk you can carry before being encumbered increases by 2, and you gain a +2 circumstance bonus to checks to destroy an object using Strength (Core Rulebook 409).",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "str"
+      }
+    ],
     "price": 3900,
     "quantity": 1,
-    "source": "AP#29, p. 50",
-    "system": "spinal"
+    "quantityPerPack": 1,
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "none",
+      "value": null
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "",
+      "dc": null,
+      "descriptor": ""
+    },
+    "source": "AP #29 pg. 50",
+    "system": "spinal",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": 1,
+      "per": "sr",
+      "value": 1
+    }
   }
 }

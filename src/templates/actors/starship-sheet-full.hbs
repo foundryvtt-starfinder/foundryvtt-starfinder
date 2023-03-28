@@ -340,7 +340,7 @@
                     </li>
                 </ul>
             </div>
-            
+
             {{#if (or system.hasAblativeArmor (and system.hasShields (not system.hasDeflectorShields)))}}
             <div class="flexcol traits">
                 <div class="flexrow">
@@ -385,7 +385,7 @@
                 </div>
             </div>
             {{/if}}
-                        
+
             <div class="flexcol traits">
                 <h3 class="form-header noborder">{{localize "SFRPG.StarshipSheet.Critical.Header"}}</h3>
                 <div class="flexrow">
@@ -485,9 +485,12 @@
                         <h3 class="noborder">{{section.label}}</h3>
                     </div>
                     {{#if (and ../isOwner section.dataset.allowAdd)}}
-                    <div class="item-controls">
+                    <div class="item-controls item-controls-browser">
                         <a class="item-control item-create" title="Create Items" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
-                            <i class="fas fa-plus"></i> Add
+                            <i class="fas fa-plus"></i>
+                        </a>
+                        <a class="item-control item-browser" title="{{localize "SFRPG.ActorSheet.Inventory.Item.CreateFromCompendium"}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
+                            <i class="fas fa-book"></i>
                         </a>
                     </div>
                     {{/if}}

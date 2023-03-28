@@ -1,3 +1,7 @@
+import BrowserEnricher from "./system/enrichers/browser.js";
+import CheckEnricher from "./system/enrichers/check.js";
+import IconEnricher from "./system/enrichers/icon.js";
+
 // Namespace SFRPG Configuration Values
 export const SFRPG = {};
 
@@ -704,9 +708,62 @@ SFRPG.spellLevels = {
 };
 
 // Feat types
+// I don't think this is actually used anywhere, but let's keep this and make featureCategories separate below.
 SFRPG.featTypes = {
     "general": "SFRPG.FeatTypes.General",
     "combat" : "SFRPG.FeatTypes.Combat"
+};
+
+SFRPG.featureCategories = {
+    "feat": {
+        category: "SFRPG.ActorSheet.Features.Categories.Feats",
+        label: "SFRPG.FeatureCategory.Feat",
+        items: [],
+        hasActions: false,
+        dataset: { type: "feat", "category": "feat" }
+    },
+    "classFeature": {
+        category: "SFRPG.ActorSheet.Features.Categories.ClassFeatures",
+        label: "SFRPG.FeatureCategory.ClassFeature",
+        items: [],
+        hasActions: false,
+        dataset: { type: "feat", "category": "classFeature" }
+    },
+    "speciesFeature": {
+        category: "SFRPG.ActorSheet.Features.Categories.SpeciesFeatures",
+        label: "SFRPG.FeatureCategory.SpeciesFeature",
+        items: [],
+        hasActions: false,
+        dataset: { type: "feat", category: "speciesFeature" }
+    },
+    "archetypeFeature": {
+        category: "SFRPG.ActorSheet.Features.Categories.ArchetypeFeatures",
+        label: "SFRPG.FeatureCategory.ArchetypeFeature",
+        items: [],
+        hasActions: false,
+        dataset: { type: "feat", category: "archetypeFeature" }
+    },
+    "themeFeature": {
+        category: "SFRPG.ActorSheet.Features.Categories.ThemeFeatures",
+        label: "SFRPG.FeatureCategory.ThemeFeature",
+        items: [],
+        hasActions: false,
+        dataset: { type: "feat", category: "themeFeature" }
+    },
+    "universalCreatureRule": {
+        category: "SFRPG.ActorSheet.Features.Categories.UniversalCreatureRules",
+        label: "SFRPG.FeatureCategory.UniversalCreatureRule",
+        items: [],
+        hasActions: false,
+        dataset: { type: "feat", category: "UniversalCreatureRule" }
+    }
+};
+
+SFRPG.specialAbilityTypes = {
+    "": "SFRPG.None",
+    "ex": "SFRPG.SpecialAbilityTypes.Extraordinary",
+    "su": "SFRPG.SpecialAbilityTypes.Supernatural",
+    "sp": "SFRPG.SpecialAbilityTypes.SpellLike"
 };
 
 /**
@@ -778,8 +835,8 @@ SFRPG.itemActionTypes = {
     "msak": "SFRPG.ActionMSAK",
     "rsak": "SFRPG.ActionRSAK",
     "save": "SFRPG.ActionSave",
+    "skill": "SFRPG.ActionSkill",
     "heal": "SFRPG.ActionHeal",
-    "abil": "SFRPG.ActionAbil",
     "util": "SFRPG.ActionUtil",
     "other": "SFRPG.ActionOther"
 };
@@ -864,7 +921,8 @@ SFRPG.augmentationTypes = {
     "biotech": "SFRPG.Biotech",
     "magitech": "SFRPG.Magitech",
     "necrograft": "SFRPG.Necrograft",
-    "personal": "SFRPG.PersonalUpgrade"
+    "personal": "SFRPG.PersonalUpgrade",
+    "speciesGraft": "SFRPG.SpeciesGraft"
 };
 
 SFRPG.consumableTypes = {
@@ -877,7 +935,7 @@ SFRPG.consumableTypes = {
     "foodDrink": "SFRPG.ConsumableTypes.FoodDrink"
 };
 
-SFRPG.augmentationSytems = {
+SFRPG.augmentationSystems = {
     "none": "SFRPG.None",
     "arm": "SFRPG.AugArm",
     "armAndHand" : "SFRPG.AugArmAndHand",
@@ -1971,4 +2029,10 @@ SFRPG.floatingHPValues = {
         positive: { fill: 0x9696ff },
         negative: { fill: 0xd90069 }
     }
+};
+
+SFRPG.enricherTypes = {
+    "Browser": BrowserEnricher,
+    "Icon": IconEnricher,
+    "Check": CheckEnricher
 };

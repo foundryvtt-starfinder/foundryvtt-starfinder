@@ -489,20 +489,23 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         }
 
         if (skl.isTrainedOnly && !(skl.ranks > 0)) {
-            let content = `${CONFIG.SFRPG.skills[skillId.substring(0, 3)]} is a trained only skill, but ${this.name} is not trained in that skill.
-                Would you like to roll anyway?`;
+            let content = game.i18n.format(
+                "SFRPG.SkillTrainedOnlyDialog.Content", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)], name: this.name }
+            );
 
             return new Promise(resolve => {
                 new Dialog({
-                    title: `${CONFIG.SFRPG.skills[skillId.substring(0, 3)]} is trained only`,
+                    title: game.i18n.format(
+                        "SFRPG.SkillTrainedOnlyDialog.Title", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)] }
+                    ),
                     content: content,
                     buttons: {
                         yes: {
-                            label: "Yes",
+                            label: game.i18n.localize("Yes"),
                             callback: () => resolve(this.rollSkillCheck(skillId, skl, options))
                         },
                         cancel: {
-                            label: "No"
+                            label: game.i18n.localize("No")
                         }
                     },
                     default: "cancel"
@@ -588,8 +591,8 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             rollContext: rollContext,
             parts: parts,
             title: title,
-            flavor: TextEditor.enrichHTML(skill.notes, {
-                async: false,
+            flavor: await TextEditor.enrichHTML(skill.notes, {
+                async: true,
                 rollData: this.getRollData() ?? {}
             }),
             speaker: ChatMessage.getSpeaker({ actor: this }),
@@ -829,12 +832,18 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
                 flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${dcRoll.roll.total}</p>`;
             } else {
-                flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${TextEditor.enrichHTML(dc.value, {async: false})}</p>`;
+                flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${await TextEditor.enrichHTML(dc.value, {
+                    async: true,
+                    rollData: this.getRollData() ?? {}
+                })}</p>`;
             }
         }
 
         flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.NormalEffect")}: </strong>`;
-        flavor += TextEditor.enrichHTML(selectedFormula.effectNormal || actionEntry.system.effectNormal, {async: false});
+        flavor += await TextEditor.enrichHTML(selectedFormula.effectNormal || actionEntry.system.effectNormal, {
+            async: true,
+            rollData: this.getRollData() ?? {}
+        });
         flavor += "</p>";
 
         if (actionEntry.system.effectCritical) {
@@ -842,7 +851,10 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             if (critEffectDisplayState !== 'never') {
                 if (critEffectDisplayState === 'always' || rollResult.roll.dice[0].values[0] === 20) {
                     flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.CriticalEffect")}: </strong>`;
-                    flavor += TextEditor.enrichHTML(selectedFormula.effectCritical || actionEntry.system.effectCritical, {async: false});
+                    flavor += await TextEditor.enrichHTML(selectedFormula.effectCritical || actionEntry.system.effectCritical, {
+                        async: true,
+                        rollData: this.getRollData() ?? {}
+                    });
                     flavor += "</p>";
                 }
             }

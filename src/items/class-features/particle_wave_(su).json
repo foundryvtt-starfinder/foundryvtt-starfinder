@@ -1,0 +1,152 @@
+{
+  "_id": "Jlti9Xr47sVhjheN",
+  "name": "Particle Wave (Su)",
+  "type": "feat",
+  "img": "systems/sfrpg/images/cup/gameplay/photon.webp",
+  "system": {
+    "type": "",
+    "ability": "",
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "",
+    "actionType": "other",
+    "activation": {
+      "type": "action",
+      "condition": "",
+      "cost": 1
+    },
+    "area": {
+      "effect": "",
+      "shape": "sphere",
+      "units": "ft",
+      "value": 10
+    },
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "effect": "",
+      "parts": []
+    },
+    "damage": {
+      "parts": [
+        {
+          "name": "",
+          "formula": "(lookupRange(@classes.solarian.levels, 0, 9, 5, 11, 6, 13, 7, 15, 8, 17, 9, 19, 10))d6",
+          "group": null,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
+    },
+    "damageNotes": "",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.UVNOjH2ERlQjcGnU]{Zenith Revelation}</p>\n<p>&nbsp;@Icon[type:photon] Photon Revelation</p>\n<p>When you’re fully photon-attuned, you can dissolve into a Large cloud composed of thousands of flaming pinpoints of brilliance as a standard action. While in this form, you gain a swarm attack that deals 4d6 fire damage, swarm defenses, swarm immunities (Starfinder Alien Archive 157), and a fly speed equal to your land speed. You lose all normal modes of attack and movement, all abilities that depend on your physical form, and any bonus to your KAC and EAC granted by your armor. You can maintain this form for a number of rounds equal to your solarian level. Returning to your normal form before the duration expires requires a standard action. The damage of your swarm attack increases by 1d6 for every 3 solarian levels you have beyond 7th. At 17th level, targets damaged by your swarm attack must succeed at a Reflex saving throw or be @UUID[Compendium.sfrpg.conditions.tOpF6qjnlnKc10t7]{Blinded} for 1 round.</p>"
+    },
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
+    "details": {
+      "category": "classFeature",
+      "specialAbilityType": "su"
+    },
+    "duration": {
+      "units": "",
+      "value": ""
+    },
+    "formula": "",
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "d1adc954-d0b5-4a43-b1ab-9bf52f56f400",
+        "name": "Particle Wave (Su)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "specific-speed",
+        "enabled": true,
+        "max": 0,
+        "modifier": "@attributes.speed.land.value",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "flying"
+      }
+    ],
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "none",
+      "value": null
+    },
+    "recharge": {
+      "charged": false,
+      "value": null
+    },
+    "requirements": "Zenith Revelation",
+    "rollNotes": "",
+    "save": {
+      "type": "reflex",
+      "dc": "10+floor(@classes.solarian.levels/2) + @abilities.cha.mod",
+      "descriptor": "negate"
+    },
+    "source": "Solarian",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": 0,
+      "per": "",
+      "value": 0
+    }
+  }
+}

@@ -5,9 +5,24 @@
   "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "biotech",
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
+    "actionType": "save",
+    "activation": {
+      "type": "",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "",
+      "value": 0
+    },
+    "attackBonus": 0,
     "attributes": {
       "ac": {
         "value": ""
@@ -27,29 +42,66 @@
       "sturdy": false
     },
     "attuned": false,
-    "bulk": "0",
+    "bulk": "-",
+    "chatFlavor": "",
+    "container": {
+      "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
+      "storage": []
+    },
     "critical": {
+      "effect": "",
       "parts": []
     },
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>Reinforcing tissue around your heart supports healthy cardiovascular function under normal circumstances, but the grafted muscle twinges angrily when it senses a drop in blood pressure, such as from heavy bleeding. As a reaction once per 1d4 rounds when you take bleed damage, you can expel a portion of the blood at an adjacent creature to make it flat-footed until the end of your next turn. If the bleed damage causes you to lose Hit Points, you can instead make the adjacent creature blinded until the end of your next turn. If the creature succeeds at a Reflex save, it negates the effect, and it can remove the condition by taking a move action to wipe away the blood. The save DC for this effect equals 10 + 1/2 your level + your Constitution modifier, or 10 + the damage dealt by the bleed effect this turn, whichever is lower.</p>"
+      "value": "<p>Reinforcing tissue around your heart supports healthy cardiovascular function under normal circumstances, but the grafted muscle twinges angrily when it senses a drop in blood pressure, such as from heavy bleeding. As a reaction once per [[/r 1d4]]{1d4 rounds} when you take bleed damage, you can expel a portion of the blood at an adjacent creature to make it @UUID[Compendium.sfrpg.conditions.MZ8OoH1GE9qDMyCD]{flat-footed} until the end of your next turn. If the bleed damage causes you to lose Hit Points, you can instead make the adjacent creature @UUID[Compendium.sfrpg.conditions.tOpF6qjnlnKc10t7]{blinded} until the end of your next turn. If the creature succeeds at a Reflex save, it negates the effect, and it can remove the condition by taking a move action to wipe away the blood. The save DC for this effect equals 10 + 1/2 your level + your Constitution modifier, or 10 + the damage dealt by the bleed effect this turn, whichever is lower.</p>"
     },
-    "equippable": false,
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": null
+    },
+    "equippable": true,
     "equipped": false,
+    "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 7,
     "modifiers": [],
     "price": 6300,
     "quantity": 1,
     "quantityPerPack": 1,
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "",
+      "value": null
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "reflex",
+      "dc": "10 + floor(@details.level.value / 2) + @abilities.con.mod",
+      "descriptor": "negate"
+    },
     "source": "TR pg. 57",
-    "system": "heart"
+    "system": "heart",
+    "target": {
+      "type": "",
+      "value": null
+    },
+    "uses": {
+      "max": 0,
+      "per": null,
+      "value": 0
+    }
   }
 }

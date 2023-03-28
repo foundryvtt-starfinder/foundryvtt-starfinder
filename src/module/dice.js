@@ -213,7 +213,7 @@ export class DiceSFRPG {
         const formula = parts.map(partMapper).join(" + ");
 
         const tree = new RollTree(options);
-        return tree.buildRoll(formula, rollContext, async (button, rollMode, unusedFinalFormula, node, rollMods, bonus = null) => {
+        return await tree.buildRoll(formula, rollContext, async (button, rollMode, unusedFinalFormula, node, rollMods, bonus = null) => {
             if (button === "cancel") {
                 if (onClose) {
                     onClose(null, null, null);
@@ -317,7 +317,10 @@ export class DiceSFRPG {
             if (errorToThrow) {
                 throw errorToThrow;
             }
+
+            return roll;
         });
+
     }
 
     /**
@@ -572,7 +575,7 @@ export class DiceSFRPG {
 
         const formula = finalParts.join(" + ");
         const tree = new RollTree(options);
-        return tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormula, part) => {
+        return await tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormula, part) => {
             if (button === 'cancel') {
                 if (onClose) {
                     onClose(null, null, null, false);
@@ -830,6 +833,8 @@ export class DiceSFRPG {
             if (errorToThrow) {
                 throw errorToThrow;
             }
+
+            return roll;
         });
     }
 

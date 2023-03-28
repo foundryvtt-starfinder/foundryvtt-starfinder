@@ -19,7 +19,7 @@
         "TypeConsumable": "Consumable",
         "TypeContainer": "Container",
         "TypeEquipment": "Armor",
-        "TypeFeat": "Feat",
+        "TypeFeat": "Feature",
         "TypeFusion": "Weapon Fusion",
         "TypeGoods": "Goods",
         "TypeHybrid": "Hybrid",
@@ -113,6 +113,7 @@
         "ActionRSAK": "Ranged Spell Attack",
         "ActionRWAK": "Ranged Weapon Attack",
         "ActionSave": "Saving Throw",
+        "ActionSkill": "Skill Check",
         "ActionUtil": "Utility",
         "ActorSheet": {
             "Attributes": {
@@ -163,13 +164,20 @@
             },
             "Features": {
                 "Categories": {
-                    "ActiveFeats": "Active Feats",
+                    "ActiveFeats": "Active Features",
                     "ActorResources": "Actor Resources",
+                    "ArchetypeFeatures": "Archetype Features",
                     "Archetypes": "Archetypes",
+                    "ClassFeatures": "Class Features",
                     "Classes": "Classes",
+                    "Feats": "Feats",
+                    "OtherFeatures": "Other Features",
                     "PassiveFeats": "Passive Feats",
                     "Race": "Species",
-                    "Theme": "Theme"
+                    "SpeciesFeatures": "Species Features",
+                    "Theme": "Theme",
+                    "ThemeFeatures": "Theme Features",
+                    "UniversalCreatureRules": "Universal Creature Rules"
                 },
                 "Create": "Create new feature",
                 "Filters": {
@@ -263,14 +271,16 @@
                 },
                 "Item": {
                     "Activate": "Activate",
-                    "Create": "Create new item",
-                    "CreateFromCompendium": "Add item from Compendium",
+                    "Create": "Create New Item",
+                    "CreateFromCompendium": "Add Item From Compendium",
                     "Deactivate": "Deactivate",
-                    "Delete": "Delete item",
-                    "Edit": "Edit item",
-                    "Equip": "Equip item",
-                    "Unequip": "Unequip item",
-                    "LevelUp": "Level up"
+                    "Delete": "Delete Item",
+                    "Edit": "Edit Item",
+                    "Equip": "Equip Item",
+                    "Install": "Install Augmentation",
+                    "LevelUp": "Level Up",
+                    "Unequip": "Unequip Item",
+                    "Uninstall": "Uninstall Augmentation"
                 },
                 "ItemValue": {
                     "Label": "Wealth:",
@@ -396,6 +406,7 @@
         "AugBrain": "Brain",
         "AugBrainAndEyes": "Brain and Eyes",
         "AugBrainHeartLungs": "Brain, Heart, Lungs",
+        "AugBrainThroat": "Brain and Throat",
         "AugEars": "Ears",
         "AugEarsAndThroat": "Ears and Throat",
         "AugEndocrine": "Endocrine",
@@ -429,7 +440,7 @@
                 "BrowserFilterType": "Filter by Type",
                 "BrowserSortMethodCR": "CR",
                 "BrowserSortMethodHP": "HP",
-                "Button": "Alien Archive",
+                "Button": "Aliens",
                 "Title": "Browse Alien Archive"
             },
             "EquipmentBrowser": {
@@ -518,6 +529,9 @@
                 "ModifyDamageText": "Input a number to modify the damage amount by. This is applied after any multiplication.",
                 "NoDamageModifier": "No damage modifier applied.",
                 "NoToken": "Cannot apply: No token selected!"
+            },
+            "ItemAction": {
+                "Check": "Check"
             },
             "ItemActivation": {
                 "Activates": "Activates",
@@ -904,10 +918,33 @@
             }
         },
         "EnergyArmorClass": "Energy AC",
+        "EnergyArmorClassShort": "EAC",
+        "Enrichers": {
+            "Icon": {
+                "Types": {
+                    "Graviton": "Graviton",
+                    "LanguageDependent": "Language Dependent",
+                    "MindAffecting": "Mind Affecting",
+                    "Photon": "Photon",
+                    "SenseDependent": "Sense Dependent"
+                }
+            },
+            "SendToChat": "Send to chat",
+            "TypeError": "{enricherType} parsing failed! Type is invalid."
+        },
         "Environment": "Environment",
         "FeatTypes": {
             "Combat": "Combat Feats",
             "General": "General Feats"
+        },
+        "FeatureCategory": {
+            "ArchetypeFeature": "Archetype Feature",
+            "ClassFeature": "Class Feature",
+            "Feat": "Feat",
+            "OtherFeature": "Other Feature",
+            "SpeciesFeature": "Species Feature",
+            "ThemeFeature": "Theme Feature",
+            "UniversalCreatureRule": "Universal Creature Rule"
         },
         "Features": "Features",
         "FeaturesAdd": "Add",
@@ -1037,6 +1074,7 @@
         "InventoryCapacity": "Capacity",
         "InventoryCurrency": "Currency",
         "InventoryEquipped": "Equipped",
+        "InventoryNotEquipped": "Not Equipped",
         "InventoryUsage": "Utilisation",
         "IronWillHint": "Character feat that adds 2 to will saving throws",
         "IronWillLabel": "Iron Will",
@@ -1050,6 +1088,13 @@
                 "Locked": "Locked",
                 "LockedTooltip": "<strong>Locked</strong><br/>A locked container prevents player access."
             }
+        },
+        "ItemMacro": {
+            "Activate": "Activate",
+            "Attack": "Attack",
+            "Damage": "Damage",
+            "Healing": "Healing",
+            "Use": "Use"
         },
         "ItemNoAmmo": "{name} has no ammunition left!",
         "ItemSheet": {
@@ -1358,6 +1403,7 @@
                 "RollNotes": "Roll Notes",
                 "RollNotesTooltip": "The roll notes are displayed on the action roll chat card. This is a great way to put helpful reminders, especially for GMs with complicated NPCs.",
                 "SavingThrow": "Saving Throw",
+                "SkillCheck": "Skill Check",
                 "TitleAction": "Action",
                 "TitleActivation": "Activation"
             },
@@ -1493,10 +1539,14 @@
             "Feat": {
                 "ActionRecharge": "Action Recharge",
                 "Charged": "Charged",
+                "CombatFeat": "Combat Feat",
                 "FeatureAttack": "Feature Attack",
+                "FeatureCategory": "Feature Category",
+                "FeatureDetails": "Feature Details",
                 "FeatureUsage": "Feature Usage",
                 "RechargeOn": "Recharge On",
-                "Requirements": "Requirements"
+                "Requirements": "Requirements",
+                "SpecialAbilityType": "Special Ability Type"
             },
             "Goods": {
                 "Details": "Goods Details"
@@ -1613,6 +1663,7 @@
         },
         "KeyAbility": "Key Ability Score",
         "KineticArmorClass": "Kinetic AC",
+        "KineticArmorClassShort": "KAC",
         "Languages": "Languages",
         "LanguagesAbyssal": "Abyssal",
         "LanguagesAkitonian": "Akitonian",
@@ -1833,6 +1884,7 @@
         "NpcToggleSkillsDialogTitle": "Toggle NPC Skills",
         "NumberOfArms": "Number of Arms",
         "Organization": "Organization",
+        "Passive": "Passive",
         "Personal": "Personal",
         "PersonalUpgrade": "Personal Upgrade",
         "Plane": "Plane",
@@ -2319,6 +2371,10 @@
         "SkillTooltipThemeMod": "Theme Modifier: {mod}",
         "SkillTooltipTrainedClassSkill": "Trained Class Skill Modifier: {mod}",
         "SkillTrainedOnly": "Trained Only",
+        "SkillTrainedOnlyDialog": {
+            "Content": "{skill} is a trained only skill, but {name} is not trained in that skill. Would you like to roll anyway?",
+            "Title": "{skill} is trained only"
+        },
         "SkillsHeaderAbility": "Abl",
         "SkillsHeaderModifier": "Mod",
         "SkillsHeaderName": "Name",
@@ -2328,6 +2384,11 @@
         "SortByFilterName": "Name",
         "Space": "Space",
         "Special": "Special",
+        "SpecialAbilityTypes": {
+            "Extraordinary": "Extraordinary (Ex)",
+            "SpellLike": "Spell-like Ability (Sp)",
+            "Supernatural": "Supernatural (Su)"
+        },
         "SpecialMaterials": {
             "Abysium": "Abysium",
             "Adamantine": "Adamantine Alloy",
@@ -2345,6 +2406,7 @@
             "Voidglass": "Voidglass"
         },
         "SpecialTraits": "Special Traits",
+        "SpeciesGraft": "Species Graft",
         "Speed": "Speed",
         "SpeedSpecial": "Special Movement",
         "SpellAreaEffects": {

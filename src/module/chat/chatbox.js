@@ -1,5 +1,4 @@
 import { DiceSFRPG } from "../dice.js";
-import { SFRPG } from "../config.js";
 import { ItemSFRPG } from "../item/item.js";
 
 /**
@@ -55,6 +54,7 @@ export default class SFRPGCustomChatMessage {
             item: item,
             hasDamage: data.rollType !== "damage" && (item.hasDamage || false),
             hasSave: item.hasSave || false,
+            hasSkill: this.hasSkill || false,
             hasCapacity: hasCapacity,
             ammoLeft: currentCapacity,
             title: data.title ? data.title : 'Roll',

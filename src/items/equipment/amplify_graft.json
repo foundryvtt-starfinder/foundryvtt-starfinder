@@ -4,10 +4,25 @@
   "type": "augmentation",
   "img": "icons/commodities/gems/gem-fragmented-pink.webp",
   "system": {
-    "type": "biotech",
+    "type": "speciesGraft",
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
+    "actionType": "util",
+    "activation": {
+      "type": "none",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "none",
+      "value": null
+    },
+    "attackBonus": 0,
     "attributes": {
       "ac": {
         "value": "5"
@@ -28,24 +43,145 @@
     },
     "attuned": false,
     "bulk": "-",
+    "chatFlavor": "",
+    "container": {
+      "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
+      "storage": []
+    },
     "critical": {
+      "effect": "",
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "Acid",
+          "formula": "lookupRange(@details.level.value, 1, 8, 2, 16, 3)d4",
+          "group": 0,
+          "types": {
+            "acid": true,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Cold",
+          "formula": "lookupRange(@details.level.value, 1, 8, 2, 16, 3)d4",
+          "group": 0,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": true,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Electricity",
+          "formula": "lookupRange(@details.level.value, 1, 8, 2, 16, 3)d4",
+          "group": 0,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": true,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Fire",
+          "formula": "lookupRange(@details.level.value, 1, 8, 2, 16, 3)d4",
+          "group": 0,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Sonic",
+          "formula": "lookupRange(@details.level.value, 1, 8, 2, 16, 3)d4",
+          "group": 0,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": true
+          }
+        }
+      ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>Shimreens can absorb and amplify energy within their crystalline bodies. Plates embedded in your skin allow you to do the same. Whenever you take energy damage, you can voluntarily take an additional 1d4 damage of the same type. The next time you hit with a melee attack, you release this energy, dealing an additional amount of damage equal to the extra damage you took (and of the same type). You can’t take additional damage in this way again until you release your stored energy. If unused, the stored energy dissipates after 10 minutes. The amount of extra damage you take and deal&nbsp;Skin increase to 2d4 when you reach 8th level and to 3d4 when you reach 16th level.</p>"
     },
+    "duration": {
+      "units": "",
+      "value": "10 minutes"
+    },
+    "equippable": true,
     "equipped": false,
+    "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 4,
     "modifiers": [],
     "price": 2000,
     "quantity": 1,
+    "quantityPerPack": 1,
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "none",
+      "value": null
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "",
+      "dc": "",
+      "descriptor": "negate"
+    },
     "source": "AA4 pg. 141",
-    "system": "skin"
+    "system": "skin",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": 0,
+      "per": "",
+      "value": 0
+    }
   }
 }

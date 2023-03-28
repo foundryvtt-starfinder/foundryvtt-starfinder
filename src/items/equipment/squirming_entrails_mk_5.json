@@ -5,9 +5,24 @@
   "img": "icons/commodities/biological/organ-intestines-red.webp",
   "system": {
     "type": "necrograft",
+    "ability": "str",
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "kac",
+    "actionType": "mwak",
+    "activation": {
+      "type": "move",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "none",
+      "value": null
+    },
+    "attackBonus": 0,
     "attributes": {
       "ac": {
         "value": ""
@@ -21,34 +36,103 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": 55
       },
       "size": "medium",
       "sturdy": false
     },
     "attuned": false,
     "bulk": "-",
+    "chatFlavor": "",
+    "container": {
+      "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
+      "storage": []
+    },
     "critical": {
+      "effect": "",
       "parts": []
     },
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>Squirming entrails reinforce your esophagus and replace your stomach and lower gastrointestinal tract with writhing intestines. You still must eat, but you suffer no ill effects from eating spoiled food and gain a +4 enhancement bonus against ingested drugs and poisons, unless they specifically affect undead. In addition, you can extrude your squirming entrails from your mouth as a move action and use them almost like an additional limb, though you can’t speak, ingest anything, or hold your breath while doing so. You can retract your squirming entrails as a move action.</p>\n<p>Each model of squirming entrails functions differently when extruded: mk 1 squirming entrails help you keep your balance, so you don’t take the normal penalties to attacks or gain the flat-footed condition when you are off-kilter, and you gain a +4 circumstance bonus to Athletics checks to balance. Mk 2 squirming entrails function as mk 1 squirming entrails, except that they also allow you to stand from prone as a swift action. Mk 3 squirming entrails function as mk 2 squirming entrails and are also prehensile, allowing you to hold an additional hand’s worth of equipment. Mk 4 squirming entrails function as mk 2 squirming entrails and allow you to hold two additional hands’ worth of equipment. Mk 5 squirming entrails function as mk 4 squirming entrails and, when not holding any objects, can perform an attack five times a day identical to that of mk 3 ghoul glands. Squirming entrails that allow you to hold more equipment don’t increase the number of attacks you can make in combat, but they allow you to store a single object of light or negligible bulk inside your body when you retract them. An external examination or a tactile search can’t detect the hidden object, but most security checkpoints include a scan that can detect it.</p>"
+      "value": "<p>Squirming entrails reinforce your esophagus and replace your stomach and lower gastrointestinal tract with writhing intestines. You still must eat, but you suffer no ill effects from eating spoiled food and gain a +4 enhancement bonus against ingested drugs and poisons, unless they specifically affect undead. In addition, you can extrude your squirming entrails from your mouth as a move action and use them almost like an additional limb, though you can’t speak, ingest anything, or hold your breath while doing so. You can retract your squirming entrails as a move action.</p>\n<p>Each model of squirming entrails functions differently when extruded: mk 1 squirming entrails help you keep your balance, so you don’t take the normal penalties to attacks or gain the @UUID[Compendium.sfrpg.conditions.MZ8OoH1GE9qDMyCD]{flat-footed} condition when you are @UUID[Compendium.sfrpg.conditions.QnGpBSHSTiszjPSb]{off-kilter}, and you gain a +4 circumstance bonus to Athletics checks to @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.3QdtsfnVJsHEdrt0#balance]{balance}. Mk 2 squirming entrails function as mk 1 squirming entrails, except that they also allow you to stand from prone as a swift action. Mk 3 squirming entrails function as mk 2 squirming entrails and are also prehensile, allowing you to hold an additional hand’s worth of equipment. Mk 4 squirming entrails function as mk 2 squirming entrails and allow you to hold two additional hands’ worth of equipment. Mk 5 squirming entrails function as mk 4 squirming entrails and, when not holding any objects, can perform an attack five times a day identical to that of @UUID[Compendium.sfrpg.equipment.6jdDkLYrMqBEKTBM]{mk 3 ghoul glands}. Squirming entrails that allow you to hold more equipment don’t increase the number of attacks you can make in combat, but they allow you to store a single object of light or negligible bulk inside your body when you retract them. An external examination or a tactile search can’t detect the hidden object, but most security checkpoints include a scan that can detect it.</p>"
     },
-    "equippable": false,
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": ""
+    },
+    "equippable": true,
     "equipped": false,
+    "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 20,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "a9d9b01a-43a3-4408-ab0d-55ead298ea97",
+        "name": "Squirming entrails, Mk 5",
+        "type": "enhancement",
+        "condition": "",
+        "effectType": "save",
+        "enabled": false,
+        "max": 4,
+        "modifier": "4",
+        "modifierType": "formula",
+        "notes": "You still must eat, but you suffer no ill effects from eating spoiled food and gain a +4 enhancement bonus against ingested drugs and poisons, unless they specifically affect undead.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "fort"
+      },
+      {
+        "_id": "952841a3-1019-41b0-918c-030991bebd94",
+        "name": "Squirming entrails, Mk 5",
+        "type": "circumstance",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 4,
+        "modifier": "4",
+        "modifierType": "formula",
+        "notes": "You gain a +4 circumstance bonus to Athletics checks to balance.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "acr"
+      }
+    ],
     "price": 775000,
     "quantity": 1,
-    "source": "ARM, p. 96",
-    "system": "throat"
+    "quantityPerPack": 1,
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "none",
+      "value": null
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "fort",
+      "dc": "",
+      "descriptor": "negate"
+    },
+    "source": "AR pg. 96",
+    "system": "throat",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": 5,
+      "per": "day",
+      "value": 5
+    }
   }
 }
