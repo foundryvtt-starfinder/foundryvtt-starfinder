@@ -29,7 +29,7 @@ export default class RollNode {
             this.rollTooltips = RollNode.getTooltips(remainingVariable, this.getContext(), ".rollTooltip");
 
             for (const mod of availableRolledMods) {
-                const modKey = mod.bonus.name;
+                const modKey = mod.bonus._id;
 
                 let existingNode = nodes[modKey];
                 if (!existingNode) {
