@@ -60,7 +60,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         const isOwner = this.document.isOwner;
         const data = {
             actor: this.actor,
-            system: duplicate(this.actor.system),
+            system: deepClone(this.actor.system),
             isOwner: isOwner,
             isGM: game.user.isGM,
             limited: this.document.limited,
@@ -393,7 +393,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             if (trait.custom) {
                 trait.custom.split(';').forEach((c, i) => trait.selected[`custom${i + 1}`] = c.trim());
             }
-            trait.cssClass = !foundry.utils.isEmpty(trait.selected) ? "" : "inactive";
+            trait.cssClass = !isEmpty(trait.selected) ? "" : "inactive";
         }
     }
 
@@ -466,7 +466,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         const target = $(event.currentTarget);
         const modifierId = target.closest('.item.modifier').data('modifierId');
 
-        const modifiers = duplicate(this.actor.system.modifiers);
+        const modifiers = deepClone(this.actor.system.modifiers);
         const modifier = modifiers.find(mod => mod._id === modifierId);
 
         const formula = modifier.modifier;
@@ -537,7 +537,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         const header = event.currentTarget;
         let type = header.dataset.type;
         if (!type || type.includes(",")) {
-            let types = duplicate(SFRPG.itemTypes);
+            let types = deepClone(SFRPG.itemTypes);
             if (type) {
                 let supportedTypes = type.split(',');
                 for (let key of Object.keys(types)) {
@@ -584,7 +584,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         const itemData = {
             name: `New ${type.capitalize()}`,
             type: type,
-            system: duplicate(header.dataset)
+            system: deepClone(header.dataset)
         };
         delete itemData.system['type'];
 
@@ -992,7 +992,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         const update = { "quantity": bigStack };
         await actorHelper.updateItem(item.id, update);
 
-        const itemData = duplicate(item);
+        const itemData = deepClone(item);
         itemData.id = null;
         itemData.system.quantity = smallStack;
         itemData.effects = [];
@@ -1283,8 +1283,9 @@ export class ActorSheetSFRPG extends ActorSheet {
         } else {
             const sidebarItem = itemData;
 
+
             if (sidebarItem.system.modifiers) {
-                const modifiers = duplicate(sidebarItem.system.modifiers);
+                const modifiers = deepClone(sidebarItem.system.modifiers);
 
                 for (let modifiersI = 0; modifiersI < modifiers.length; modifiersI++) {
                     const modifier = modifiers[modifiersI];
@@ -1301,7 +1302,7 @@ export class ActorSheetSFRPG extends ActorSheet {
                 await sidebarItem.update({'system.modifiers': modifiers});
             }
 
-            const addedItemResult = await targetActor.createItem(duplicate(sidebarItem));
+            const addedItemResult = await targetActor.createItem(deepClone(sidebarItem));
             if (addedItemResult.length > 0) {
                 const addedItem = targetActor.getItem(addedItemResult[0].id);
 
@@ -1312,7 +1313,7 @@ export class ActorSheetSFRPG extends ActorSheet {
                 if (targetContainer) {
                     let newContents = [];
                     if (targetContainer.system.container?.contents) {
-                        newContents = duplicate(targetContainer.system.container?.contents || []);
+                        newContents = deepClone(targetContainer.system.container?.contents || []);
                     }
 
                     const preferredStorageIndex = getFirstAcceptableStorageIndex(targetContainer, addedItem) || 0;

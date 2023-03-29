@@ -62,7 +62,7 @@ export default class RollTree {
             let callbackResult = null;
             if (parts?.length > 0) {
                 for (const part of parts) {
-                    const finalSectionFormula = duplicate(finalRollFormula);
+                    const finalSectionFormula = deepClone(finalRollFormula);
 
                     if (finalSectionFormula.finalRoll.includes("<damageSection>")) {
                         const damageSectionFormula = part?.formula ?? "0";
@@ -114,7 +114,7 @@ export default class RollTree {
         const enabledParts = parts?.filter(x => x.enabled);
         if (enabledParts?.length > 0) {
             for (const part of enabledParts) {
-                const finalSectionFormula = duplicate(finalRollFormula);
+                const finalSectionFormula = deepClone(finalRollFormula);
 
                 if (finalSectionFormula.finalRoll.includes("<damageSection>")) {
                     const damageSectionFormula = part?.formula ?? "0";
@@ -184,7 +184,7 @@ export default class RollTree {
     populate() {
         if (this.options.debug) {
             console.log(`Resolving '${this.formula}'`);
-            console.log(duplicate(this.contexts));
+            console.log(this.contexts);
         }
 
         this.rootNode = new RollNode(this, this.formula, null, null, false, true, null, this.options);

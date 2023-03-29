@@ -28,7 +28,7 @@ export async function addItemToActorAsync(targetActor, itemToAdd, quantity, targ
         return itemToAdd;
     }
 
-    const newItemData = duplicate(itemToAdd);
+    const newItemData = deepClone(itemToAdd);
     newItemData.system.quantity = quantity;
 
     let desiredParent = null;
@@ -47,7 +47,7 @@ export async function addItemToActorAsync(targetActor, itemToAdd, quantity, targ
     let addedItem = null;
     if (targetActor.isToken) {
         const created = await Entity.prototype.createEmbeddedDocuments.call(targetActor.actor, "Item", [newItemData], {temporary: true});
-        const items = duplicate(targetActor.actor.items).concat(created instanceof Array ? created : [created]);
+        const items = deepClone(targetActor.actor.items).concat(created instanceof Array ? created : [created]);
         await targetActor.token.update({"actorData.items": items}, {});
         addedItem = targetActor.getItem(created._id);
     } else {
@@ -56,7 +56,7 @@ export async function addItemToActorAsync(targetActor, itemToAdd, quantity, targ
     }
 
     if (desiredParent) {
-        let newContents = duplicate(desiredParent.system.container.contents || []);
+        let newContents = deepClone(desiredParent.system.container.contents || []);
         newContents.push({id: addedItem._id, index: targetItemStorageIndex || 0});
         await targetActor.updateItem(desiredParent._id, {"data.container.contents": newContents});
     }
@@ -133,7 +133,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
         if (quantity < itemQuantity) {
             await sourceActor.updateItem(itemToMove.id, {"quantity": itemQuantity - quantity});
 
-            let newItemData = duplicate(itemToMove);
+            let newItemData = deepClone(itemToMove);
             delete newItemData.id;
             newItemData.system.quantity = quantity;
 
@@ -188,7 +188,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
             }
 
             if (desiredParent) {
-                let newContents = duplicate(desiredParent.system.container?.contents || []);
+                let newContents = deepClone(desiredParent.system.container?.contents || []);
                 newContents.push({id: itemToMove.id, index: desiredStorageIndex || 0});
                 bulkUpdates.push({_id: desiredParent.id, "system.container.contents": newContents});
             }
@@ -214,7 +214,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
                 }
             }
 
-            const duplicatedData = duplicate(itemToCreate.item);
+            const duplicatedData = deepClone(itemToCreate.item);
             duplicatedData.system.equipped = false;
 
             items.push({item: duplicatedData, children: contents, parent: itemToCreate.parent});
@@ -279,7 +279,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
                     return foundItemIndex;
                 });
 
-                let newContents = duplicate(itemToUpdate.system.container.contents);
+                let newContents = deepClone(itemToUpdate.system.container.contents);
                 for (let j = 0; j < indexMap.length; j++) {
                     const index = indexMap[j];
                     if (index === -1) {
@@ -328,7 +328,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
         }
 
         if (desiredParent) {
-            const newContents = duplicate(desiredParent.system.container?.contents || []);
+            const newContents = deepClone(desiredParent.system.container?.contents || []);
             newContents.push({id: createResult[0].id, index: desiredStorageIndex || 0});
             updatesToPerform.push({_id: desiredParent.id, "system.container.contents": newContents});
         }
@@ -428,10 +428,10 @@ function canMerge(itemA, itemB) {
     }
 
     // Perform deep comparison on item data.
-    let itemDataA = duplicate(itemA.system);
+    let itemDataA = deepClone(itemA.system);
     delete itemDataA.quantity;
 
-    let itemDataB = duplicate(itemB.system);
+    let itemDataB = deepClone(itemB.system);
     delete itemDataB.quantity;
 
     // TODO: Remove all keys that are not template appropriate given the item type, remove all keys that are not shared?
@@ -542,7 +542,7 @@ function wouldCreateParentCycle(item, container, actor) {
 
     if (item.system.container.contents.find(y => y.id === container.id)) return true;
 
-    let itemsToTest = duplicate(item.system.container.contents || []);
+    let itemsToTest = deepClone(item.system.container.contents || []);
     while (itemsToTest.length > 0) {
         const content = itemsToTest.shift();
         const child = actor.actor.items.get(content.id);
@@ -611,7 +611,7 @@ async function onItemDraggedToCollection(message) {
     if (data.pack) {
         const pack = game.packs.get(data.pack);
         const itemData = await pack.getDocument(data.draggedItemId);
-        newItems.push(duplicate(itemData));
+        newItems.push(deepClone(itemData));
     } else if (data.source.tokenId || data.source.actorId) {
         // from another token
         const source = ActorItemHelper.FromObject(data.source);
@@ -646,8 +646,8 @@ async function onItemDraggedToCollection(message) {
     } else {
         const sidebarItem = game.items.get(data.draggedItemId);
         if (sidebarItem) {
-            const itemData = duplicate(sidebarItem);
-            newItems.push(duplicate(itemData));
+            const itemData = deepClone(sidebarItem);
+            newItems.push(deepClone(itemData));
         }
     }
 
@@ -698,7 +698,7 @@ async function onItemCollectionItemDraggedToPlayer(message) {
     const itemToItemMapping = {};
 
     // Get child items as well
-    const itemsToTest = duplicate(data.draggedItems);
+    const itemsToTest = deepClone(data.draggedItems);
     while (itemsToTest.length > 0) {
         const draggedItem = itemsToTest.shift();
         if (draggedItem.system?.container?.contents?.length > 0) {
@@ -758,7 +758,7 @@ async function onItemCollectionItemDraggedToPlayer(message) {
     }
 
     // Remove items from source token
-    let sourceItems = duplicate(source.token.document.flags.sfrpg.itemCollection.items);
+    let sourceItems = deepClone(source.token.document.flags.sfrpg.itemCollection.items);
     sourceItems = sourceItems.filter(x => !copiedItemIds.includes(x._id));
     await source.token.document.update({"flags.sfrpg.itemCollection.items": sourceItems});
 
@@ -956,7 +956,7 @@ export class ActorItemHelper {
         const propertiesToTest = ["contents", "storageCapacity", "contentBulkMultiplier", "acceptedItemTypes", "fusions", "armor.upgradeSlots", "armor.upgrades"];
         const migrations = [];
         for (const item of this.actor.items) {
-            const itemData = duplicate(item.system);
+            const itemData = deepClone(item.system);
             let isDirty = false;
 
             // Migrate original format

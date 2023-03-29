@@ -233,7 +233,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         };
 
         if (this.type === "spell") {
-            let descriptionText = duplicate(templateData.system.description.short || templateData.system.description.value);
+            let descriptionText = deepClone(templateData.system.description.short || templateData.system.description.value);
             if (descriptionText?.length > 0) {
                 // Alter description by removing non-eligble level tags.
                 const levelTags = [
@@ -353,7 +353,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      * @returns {Object} An object containing the item's rollData (including its owners), and chat message properties.
      */
     async getChatData() {
-        const data = duplicate(this.system);
+        const data = deepClone(this.system);
         const labels = this.labels;
 
         const async = true;
@@ -804,7 +804,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         }
 
         // Define Roll Data
-        const rollData = duplicate(actorData);
+        const rollData = deepClone(actorData);
         // Add hasSave to roll
         itemData.hasSave = this.hasSave;
         itemData.hasSkill = this.hasSkill;
@@ -824,7 +824,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const rollContext = RollContext.createItemRollContext(this, this.actor, {itemData: itemData});
 
         /** Create additional modifiers. */
-        const additionalModifiers = duplicate(SFRPG.globalAttackRollModifiers);
+        const additionalModifiers = deepClone(SFRPG.globalAttackRollModifiers);
 
         /** Add Container Values to globalAttackRollModifiers */
         for (let addModsI = 0; addModsI < additionalModifiers.length; addModsI++) {
@@ -883,7 +883,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             return;
         }
 
-        const itemData = duplicate(this.system);
+        const itemData = deepClone(this.system);
         if (itemData.hasOwnProperty("usage") && !options.disableDeductAmmo) {
             const usage = itemData.usage;
 
@@ -1071,7 +1071,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Define Roll parts
         /** @type {DamageParts[]} */
-        const parts = duplicate(itemData.damage.parts.map(part => part));
+        const parts = deepClone(itemData.damage.parts.map(part => part));
         for (const part of parts) {
             part.isDamageSection = true;
         }
@@ -1145,7 +1145,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         }, 0);
 
         // Define Roll Data
-        const rollData = mergeObject(duplicate(actorData), {
+        const rollData = mergeObject(deepClone(actorData), {
             item: itemData,
             mod: actorData.abilities[abl].mod
         });
@@ -1266,7 +1266,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             throw new Error("you may not make a Damage Roll with this item");
         }
 
-        const parts = duplicate(itemData.damage.parts.map(part => part));
+        const parts = deepClone(itemData.damage.parts.map(part => part));
         for (const part of parts) {
             part.isDamageSection = true;
         }
@@ -1529,7 +1529,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Adjust item to level, if required
         if (typeof (message.flags.level) !== 'undefined' && message.flags.level !== item.system.level) {
-            const newItemData = duplicate(item);
+            const newItemData = deepClone(item);
             newItemData.system.level = message.flags.level;
 
             item = new ItemSFRPG(newItemData, {parent: item.parent});
@@ -1662,7 +1662,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         condition = "",
         id = null
     } = {}) {
-        const data = this._ensureHasModifiers(duplicate(this.system));
+        const data = this._ensureHasModifiers(deepClone(this.system));
         const modifiers = data.modifiers;
 
         modifiers.push(new SFRPGModifier({
@@ -1702,7 +1702,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      * @param {String} id The id for the modifier to edit
      */
     editModifier(id) {
-        const modifiers = duplicate(this.system.modifiers);
+        const modifiers = deepClone(this.system.modifiers);
         const modifier = modifiers.find(mod => mod._id === id);
 
         new SFRPGModifierApplication(modifier, this, {}, this.actor).render(true);
@@ -1783,7 +1783,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         if (addedItem.system.scaling?.d3) {
 
-            const updates = duplicate(addedItem.system.damage.parts);
+            const updates = deepClone(addedItem.system.damage.parts);
             updates.map(i => {
                 i.formula = (isNPC) ? npcd3scaling : d3scaling;
                 return i;
@@ -1794,7 +1794,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         } else if (addedItem.system.scaling?.d6) {
 
-            const updates = duplicate(addedItem.system.damage.parts);
+            const updates = deepClone(addedItem.system.damage.parts);
             updates.map(i => {
                 i.formula = (isNPC) ? npcd6scaling : d6scaling;
                 return i;
