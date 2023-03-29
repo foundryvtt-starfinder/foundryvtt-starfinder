@@ -108,10 +108,10 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
                 dataset: {},
                 allowAdd: false
             }, */
-            feat: duplicate(CONFIG.SFRPG.featureCategories.feat),
-            classFeature: duplicate(CONFIG.SFRPG.featureCategories.classFeature),
-            speciesFeature: duplicate(CONFIG.SFRPG.featureCategories.speciesFeature),
-            universalCreatureRule: duplicate(CONFIG.SFRPG.featureCategories.universalCreatureRule),
+            feat: deepClone(CONFIG.SFRPG.featureCategories.feat),
+            classFeature: deepClone(CONFIG.SFRPG.featureCategories.classFeature),
+            speciesFeature: deepClone(CONFIG.SFRPG.featureCategories.speciesFeature),
+            universalCreatureRule: deepClone(CONFIG.SFRPG.featureCategories.universalCreatureRule),
             resources: {
                 category: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"),
                 items: [],
@@ -326,7 +326,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
     }
 
     async _duplicateAsNewStyleNPC(event) {
-        let actorData = duplicate(this.actor);
+        let actorData = deepClone(this.actor);
 
         if (this.token && !this.token.actorLink) {
             // If it is an unlinked actor, ask if the user wants to duplicate the original actor, or use the unlinked actor data instead
@@ -348,7 +348,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
             if (useOriginalActor === true) {
                 const originalActor = game.actors.get(this.token.actor.id);
                 if (originalActor) {
-                    actorData = duplicate(originalActor);
+                    actorData = deepClone(originalActor);
                 }
             }
         }
