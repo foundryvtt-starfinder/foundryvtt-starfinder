@@ -25,7 +25,7 @@ export class ActorSheetFlags extends DocumentSheet {
         const flags = {};
         for (let [k, v] of Object.entries(CONFIG.SFRPG.characterFlags)) {
             if (!flags.hasOwnProperty(v.section)) flags[v.section] = {};
-            let flag = duplicate(v);
+            let flag = deepClone(v);
             flag.type = v.type.name;
             flag.isCheckbox = v.type === Boolean;
             flag.isSelect = v.hasOwnProperty('choices');

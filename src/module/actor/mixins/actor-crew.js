@@ -2,7 +2,7 @@ export const ActorCrewMixin = (superclass) => class extends superclass {
     async removeFromCrew(actorId) {
         const role = this.getCrewRoleForActor(actorId);
         if (role) {
-            const crewData = duplicate(this.system.crew);
+            const crewData = deepClone(this.system.crew);
             crewData[role].actorIds = crewData[role].actorIds.filter(x => x !== actorId);
             return this.update({
                 "system.crew": crewData
@@ -48,6 +48,6 @@ export const ActorCrewMixin = (superclass) => class extends superclass {
             return null;
         }
 
-        return duplicate(this.system.crew[role]);
+        return deepClone(this.system.crew[role]);
     }
 };

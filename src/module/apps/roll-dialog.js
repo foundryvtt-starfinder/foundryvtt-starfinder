@@ -102,7 +102,7 @@ export default class RollDialog extends Dialog {
         data.rollMode = this.rollMode;
         data.rollModes = CONFIG.Dice.rollModes;
         data.additionalBonus = this.additionalBonus;
-        data.availableModifiers = duplicate(this.availableModifiers) || [];
+        data.availableModifiers = deepClone(this.availableModifiers) || [];
         data.hasModifiers = data.availableModifiers.length > 0;
         data.hasSelectors = this.contexts.selectors && this.contexts.selectors.length > 0;
         data.selectors = this.selectors;
@@ -164,7 +164,7 @@ export default class RollDialog extends Dialog {
 
                 // Create type string out of localized parts
                 let typeString = "";
-                if (part.types && !foundry.utils.isEmpty(part.types)) {
+                if (part.types && !isEmpty(part.types)) {
                     typeString = `${(Object.entries(part.types).filter(type => type[1])
                         .map(type => SFRPG.damageTypes[type[0]])
                         .join(` & `))}`;
@@ -252,13 +252,13 @@ export default class RollDialog extends Dialog {
                 const item = container.itemId ? await actor.items.get(container.itemId) : null;
 
                 // Update modifier by ID in item
-                const containerModifiers = duplicate(item.system.modifiers);
+                const containerModifiers = deepClone(item.system.modifiers);
                 const modifierToUpdate = containerModifiers.find(x => x._id === modifier._id);
                 modifierToUpdate.enabled = modifier.enabled;
                 await item.update({ "system.modifiers": containerModifiers });
             } else {
                 // Update modifier by ID in actor
-                const containerModifiers = duplicate(actor.system.modifiers);
+                const containerModifiers = deepClone(actor.system.modifiers);
                 const modifierToUpdate = containerModifiers.find(x => x._id === modifier._id);
                 modifierToUpdate.enabled = modifier.enabled;
                 await actor.update({ "system.modifiers": containerModifiers });
