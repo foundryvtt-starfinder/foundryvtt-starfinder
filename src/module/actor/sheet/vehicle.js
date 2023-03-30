@@ -294,7 +294,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         //     itemData = item.data;
         // }
 
-        return duplicate(itemData);
+        return deepClone(itemData);
     }
 
     /**
@@ -310,7 +310,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
         if (!actorId) return false;
 
-        const hangarBay = duplicate(this.actor.system.hangarBay);
+        const hangarBay = deepClone(this.actor.system.hangarBay);
 
         if (hangarBay.limit === -1 || hangarBay.actorIds.length < hangarBay.limit) {
             hangarBay.actorIds.push(actorId);
@@ -339,7 +339,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         const targetRole = event.target.dataset.role;
         if (!targetRole || !actorId) return false;
 
-        const crew = duplicate(this.actor.system.crew);
+        const crew = deepClone(this.actor.system.crew);
         const crewRole = crew[targetRole];
         const oldRole = this.actor.getCrewRoleForActor(actorId);
 
@@ -423,7 +423,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             return null;
         }
 
-        const hangarData = duplicate(this.actor.system.hangarBay);
+        const hangarData = deepClone(this.actor.system.hangarBay);
         hangarData.actorIds = hangarData.actorIds.filter(x => x !== actorId);
         await this.actor.update({
             "system.hangarBay": hangarData

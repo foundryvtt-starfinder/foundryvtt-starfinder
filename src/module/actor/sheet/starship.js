@@ -152,7 +152,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             "system.crew": newCrew
         });
 
-        let cleanflags = duplicate(this.actor.flags);
+        let cleanflags = deepClone(this.actor.flags);
         delete cleanflags.sfrpg.shipsCrew;
 
         await this.actor.update({
@@ -558,7 +558,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             }
 
             if (acceptedItems.length > 0) {
-                const acceptedItemData = duplicate(data);
+                const acceptedItemData = deepClone(data);
                 acceptedItemData.items = acceptedItems;
                 await this.processDroppedData(event, data);
             }
@@ -603,7 +603,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         //        itemData = item.data;
         //    }
 
-        return duplicate(itemData);
+        return deepClone(itemData);
     }
 
     /**
@@ -620,7 +620,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         const targetRole = event.target.dataset.role;
         if (!targetRole || !actorId) return false;
 
-        const crew = duplicate(this.actor.system.crew);
+        const crew = deepClone(this.actor.system.crew);
         const crewRole = crew[targetRole];
         const oldRole = this.actor.getCrewRoleForActor(actorId);
 
@@ -765,7 +765,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
         const roleId = $(event.currentTarget).closest('li')
             .data('role');
-        const skills = duplicate(CONFIG.SFRPG.skills);
+        const skills = deepClone(CONFIG.SFRPG.skills);
         skills.gun = "Gunnery";
 
         const results = await ChoiceDialog.show(
@@ -796,7 +796,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             return;
         }
 
-        const crewData = duplicate(this.actor.system.crew);
+        const crewData = deepClone(this.actor.system.crew);
         crewData.npcData[roleId].skills[skillId] = {
             isTrainedOnly: false,
             hasArmorCheckPenalty: false,
@@ -939,7 +939,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             }
         );
 
-        const currentSystem = duplicate(this.actor.system.attributes.systems[affectedSystem]);
+        const currentSystem = deepClone(this.actor.system.attributes.systems[affectedSystem]);
         currentSystem.affectedRoles = {
             captain: results.result.captain === options[1],
             pilot: results.result.pilot === options[1],

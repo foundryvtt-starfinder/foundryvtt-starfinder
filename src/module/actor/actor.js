@@ -297,7 +297,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                 spellLevel = parseInt(selectedSlot?.level || item.system.level);
 
                 if (spellLevel !== item.system.level && item.system.level > spellLevel) {
-                    const newItemData = duplicate(item);
+                    const newItemData = deepClone(item);
                     newItemData.system.level = spellLevel;
 
                     if (this.type === "npc" || this.type === "npc2") {
@@ -374,7 +374,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         // this.update({"data.skills.-=skillId": null});
         // use this to delete any unwanted skills.
 
-        const skill = duplicate(this.system.skills[skillId]);
+        const skill = deepClone(this.system.skills[skillId]);
         const isNpc = this.type === "npc" || this.type === "npc2";
         const formData = await AddEditSkillDialog.create(skillId, skill, true, isNpc, this.isOwner),
             isTrainedOnly = Boolean(formData.get('isTrainedOnly')),
@@ -411,7 +411,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      * Toggles what NPC skills are shown on the sheet.
      */
     async toggleNpcSkills() {
-        const skills = duplicate(this.system.skills);
+        const skills = deepClone(this.system.skills);
         const formData = await NpcSkillToggleDialog.create(skills);
         let enabledSkills = {};
         const delta = Object.entries(skills).reduce((obj, curr) => {

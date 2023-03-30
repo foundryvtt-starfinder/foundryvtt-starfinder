@@ -249,6 +249,10 @@ Hooks.once('init', async function() {
     console.log("Starfinder | [READY] Preloading handlebar templates");
     preloadHandlebarsTemplates();
 
+    console.log("Starfinder | [READY] Setting up inline buttons");
+    CONFIG.TextEditor.enrichers.push(new BrowserEnricher(), new IconEnricher(), new CheckEnricher());
+    BaseEnricher.addListeners();
+
     const finishTime = (new Date()).getTime();
     console.log(`Starfinder | [INIT] Done (operation took ${finishTime - initTime} ms)`);
 });
@@ -401,10 +405,6 @@ Hooks.once("ready", async () => {
 
     console.log("Starfinder | [READY] Applying artwork from modules to compendiums");
     registerCompendiumArt();
-
-    console.log("Starfinder | [READY] Setting up inline buttons");
-    CONFIG.TextEditor.enrichers.push(new BrowserEnricher(), new IconEnricher(), new CheckEnricher());
-    BaseEnricher.addListeners();
 
     if (game.user.isGM) {
         const currentSchema = game.settings.get('sfrpg', 'worldSchemaVersion') ?? 0;
