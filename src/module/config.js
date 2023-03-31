@@ -891,7 +891,7 @@ SFRPG.languages = {
     "anassan": "SFRPG.LanguagesAnassan",
     "aquan": "SFRPG.LanguagesAquan",
     "arkanen": "SFRPG.LanguagesArkanen",
-    "arkanen": "SFRPG.LanguagesArkanen",
+    "astriapi": "SFRPG.LanguagesAstriapi",
     "ancientDaimalkan": "SFRPG.LanguagesAncientDaimalkan",
     "auran": "SFRPG.LanguagesAuran",
     "azlanti": "SFRPG.LanguagesAzlanti",
@@ -991,6 +991,7 @@ SFRPG.languages = {
     "vlakan": "SFRPG.LanguagesVlakan",
     "vulgarKishaleen": "SFRPG.LanguagesVulgarKishaleen",
     "woiokan": "SFRPG.LanguagesWoiokan",
+    "worlansi": "SFRPG.LanguagesWorlansi",
     "wrikreechee": "SFRPG.LanguagesWrikreechee",
     "xaarb": "SFRPG.LanguagesXaarb",
     "ysoki": "SFRPG.LanguagesYsoki"
