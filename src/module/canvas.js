@@ -1,4 +1,4 @@
-import { moveItemBetweenActorsAsync, onCreateItemCollection, ActorItemHelper } from "./actor/actor-inventory-utils.js";
+import { ActorItemHelper, moveItemBetweenActorsAsync, onCreateItemCollection } from "./actor/actor-inventory-utils.js";
 import { ItemCollectionSheet } from "./apps/item-collection-sheet.js";
 
 import { RPC } from "./rpc.js";
@@ -162,7 +162,7 @@ async function handleCanvasDropAsync(canvas, data) {
     const document = await Item.fromDropData(data);
     let sourceActor = null;
     const sourceItem = document;
-    const sourceItemData = foundry.utils.duplicate(document.system);
+    const sourceItemData = deepClone(document.system);
 
     if (document?.parent?.isToken ?? false) {
         sourceActor = new ActorItemHelper(document.parent._id, document.parent.parent._id, document.parent.parent.parent._id);
@@ -185,8 +185,7 @@ async function handleCanvasDropAsync(canvas, data) {
         let transferringItems = [sourceItem];
         if (sourceActor !== null && sourceItemData.container?.contents && sourceItemData.container.contents.length > 0) {
             const containersToTest = [sourceItemData];
-            while (containersToTest.length > 0)
-            {
+            while (containersToTest.length > 0) {
                 const container = containersToTest.shift();
                 const children = sourceActor.filterItems(x => container.container.contents.find(y => y.id === x.id));
                 if (children) {
