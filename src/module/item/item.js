@@ -748,20 +748,23 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         let modifiers = this.actor.getAllModifiers();
         modifiers = modifiers.filter(mod => {
+            // Remove inactive constant mods. Keep all situational mods, regardless of status.
+            if (!mod.enabled && mod.modifierType !== "formula") return false;
             if (mod.effectType === SFRPGEffectType.WEAPON_ATTACKS) {
-                if (mod.valueAffected !== this.system.weaponType) {
+                if (mod.valueAffected !== this.system?.weaponType) {
                     return false;
                 }
             } else if (mod.effectType === SFRPGEffectType.WEAPON_PROPERTY_ATTACKS) {
-                if (!this.system.properties[mod.valueAffected]) {
+                if (!this.system?.properties?.[mod.valueAffected]) {
                     return false;
                 }
             } else if (mod.effectType === SFRPGEffectType.WEAPON_CATEGORY_ATTACKS) {
-                if (this.system.weaponCategory !== mod.valueAffected) {
+                if (this.system?.weaponCategory !== mod.valueAffected) {
                     return false;
                 }
             }
-            return (mod.enabled || mod.modifierType === "formula") && acceptedModifiers.includes(mod.effectType);
+
+            return acceptedModifiers.includes(mod.effectType);
         });
 
         let stackModifiers = new StackModifiers();
