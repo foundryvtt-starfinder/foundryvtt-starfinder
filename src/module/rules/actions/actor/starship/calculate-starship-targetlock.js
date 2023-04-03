@@ -12,28 +12,28 @@ export default function(engine) {
         }
 
         /** Set up base values. */
-        const forwardTL = deepClone(data.quadrants.forward.targetLock);
+        const forwardTL = duplicate(data.quadrants.forward.targetLock);
         data.quadrants.forward.targetLock = {
             value: 10,
             misc: (forwardTL?.misc || 0),
             tooltip: [game?.i18n ? game.i18n.localize("SFRPG.StarshipSheet.Modifiers.Base") : 'Base: 10']
         };
 
-        const portTL = deepClone(data.quadrants.port.targetLock);
+        const portTL = duplicate(data.quadrants.port.targetLock);
         data.quadrants.port.targetLock = {
             value: 10,
             misc: (portTL?.misc || 0),
             tooltip: [game?.i18n ? game.i18n.localize("SFRPG.StarshipSheet.Modifiers.Base") : 'Base: 10']
         };
 
-        const starboardTL = deepClone(data.quadrants.starboard.targetLock);
+        const starboardTL = duplicate(data.quadrants.starboard.targetLock);
         data.quadrants.starboard.targetLock = {
             value: 10,
             misc: (starboardTL?.misc || 0),
             tooltip: [game?.i18n ? game.i18n.localize("SFRPG.StarshipSheet.Modifiers.Base") : 'Base: 10']
         };
 
-        const aftTL = deepClone(data.quadrants.aft.targetLock);
+        const aftTL = duplicate(data.quadrants.aft.targetLock);
         data.quadrants.aft.targetLock = {
             value: 10,
             misc: (aftTL?.misc || 0),

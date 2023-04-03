@@ -88,7 +88,7 @@ export class ItemCollectionSheet extends DocumentSheet {
 
         const tokenData = this.document.getFlag("sfrpg", "itemCollection");
 
-        const items = deepClone(tokenData.items);
+        const items = duplicate(tokenData.items);
         for (const item of items) {
             item.img = item.img || CONST.DEFAULT_TOKEN;
 
@@ -292,7 +292,7 @@ export class ItemCollectionSheet extends DocumentSheet {
 
     async getChatData(itemData, htmlOptions) {
         console.log(itemData);
-        const data = deepClone(itemData);
+        const data = duplicate(itemData);
         const labels = itemData.labels || {};
 
         htmlOptions.async = true;

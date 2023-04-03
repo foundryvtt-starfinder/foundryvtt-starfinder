@@ -1,5 +1,5 @@
+import { SFRPGModifierTypes, SFRPGEffectType, SFRPGModifierType } from "./modifiers/types.js";
 import SFRPGModifier from "./modifiers/modifier.js";
-import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./modifiers/types.js";
 
 const SFRPGMigrationSchemas = Object.freeze({
     NPC_DATA_UPATE: 0.001,
@@ -21,7 +21,7 @@ export default async function migrateWorld() {
     for (const actor of game.actors.contents) {
         try {
             const updateData = await migrateActor(actor, worldSchema);
-            if (!isEmpty(updateData)) {
+            if (!foundry.utils.isEmpty(updateData)) {
                 console.log(`Starfinder | Migrating Actor entity ${actor.name}`);
                 await actor.update(updateData, { enforceTypes: false });
             }
@@ -34,7 +34,7 @@ export default async function migrateWorld() {
         for (const token of scene.tokens) {
             try {
                 const tokenUpdateData = await migrateToken(token, worldSchema);
-                if (!isEmpty(tokenUpdateData)) {
+                if (!foundry.utils.isEmpty(tokenUpdateData)) {
                     console.log(`Starfinder | Migrating Token entity ${token.name}`);
                     await token.update(tokenUpdateData, { enforceTypes: false });
                 }
@@ -47,7 +47,7 @@ export default async function migrateWorld() {
     for (const item of game.items.contents) {
         try {
             const updateData = await migrateItem(item, worldSchema);
-            if (!isEmpty(updateData)) {
+            if (!foundry.utils.isEmpty(updateData)) {
                 console.log(`Starfinder | Migrating Item entity ${item.name}`);
                 await item.update(updateData, { enforceTypes: false });
             }
@@ -59,7 +59,7 @@ export default async function migrateWorld() {
     for (const message of game.messages) {
         try {
             const updateData = await migrateChatMessage(message, worldSchema);
-            if (!isEmpty(updateData)) {
+            if (!foundry.utils.isEmpty(updateData)) {
                 console.log(`Starfinder | Migrating Chat message entity ${message.id}`);
                 await message.update(updateData, { enforceTypes: false });
             }
@@ -71,7 +71,7 @@ export default async function migrateWorld() {
     for (const macro of game.macros) {
         try {
             const updateData = await migrateMacro(macro, worldSchema);
-            if (!isEmpty(updateData)) {
+            if (!foundry.utils.isEmpty(updateData)) {
                 console.log(`Starfinder | Migrating Macro entity ${macro.name}`);
                 await macro.update(updateData, { enforceTypes: false });
             }
@@ -143,7 +143,7 @@ const migrateActor = async function(actor, schema) {
 
     for (const item of actor.items) {
         const itemUpdateData = await migrateItem(item, schema);
-        if (!isEmpty(itemUpdateData)) {
+        if (!foundry.utils.isEmpty(itemUpdateData)) {
             console.log(`Starfinder | Migrating Actor Item ${item.name}`);
             await item.update(itemUpdateData, { enforceTypes: false });
         }
@@ -178,7 +178,7 @@ const migrateToken = async function(token, schema) {
     const actor = token.actor;
     if (!token.data.actorLink && actor) {
         const actorUpdateData = await migrateActor(actor, schema);
-        if (!isEmpty(actorUpdateData)) {
+        if (!foundry.utils.isEmpty(actorUpdateData)) {
             console.log(`Starfinder | Migrating Token Actor ${actor.name}`);
             await actor.update(actorUpdateData, { enforceTypes: false });
         }
@@ -225,7 +225,7 @@ const damageTypeMigrationCallback = function(arr, curr) {
 };
 
 const _migrateDamageTypes = function(item, data) {
-    const itemData = deepClone(item.data);
+    const itemData = foundry.utils.duplicate(item.data);
     const damage = itemData.damage;
     const critical = itemData.critical;
 
@@ -245,7 +245,7 @@ const _migrateDamageTypes = function(item, data) {
 };
 
 const _migrateNPCData = function(actor, migratedData) {
-    const actorData = deepClone(actor.data);
+    const actorData = duplicate(actor.data);
     const abilities = actorData.abilities;
     const skills = actorData.skills;
 
@@ -268,11 +268,11 @@ const _migrateNPCData = function(actor, migratedData) {
 };
 
 const _resetActorFlags = function(actor, migratedData) {
-    const actorData = deepClone(actor.data);
+    const actorData = duplicate(actor.data);
     let sfFlags = null;
 
     if (actor.flags.starfinder) {
-        sfFlags = deepClone(actor.flags.starfinder);
+        sfFlags = duplicate(actor.flags.starfinder);
     }
 
     migratedData["flags.-=starfinder"] = null;
@@ -282,7 +282,7 @@ const _resetActorFlags = function(actor, migratedData) {
 };
 
 const _migrateActorAbilityScores = function(actor, migratedData) {
-    const actorData = deepClone(actor.data);
+    const actorData = duplicate(actor.data);
     const abilities = actorData.abilities;
 
     for (const ability of Object.values(abilities)) {
@@ -299,7 +299,7 @@ const _migrateActorSpeed = function(actor, migratedData) {
 
     const speedValue = actorData.attributes.speed?.value;
 
-    let baseSpeed = deepClone(speedValue);
+    let baseSpeed = duplicate(speedValue);
     if (baseSpeed && isNaN(baseSpeed)) {
         baseSpeed = baseSpeed.replace(/\D/g, '');
         baseSpeed = Number(baseSpeed);
@@ -347,12 +347,12 @@ const _migrateActorSpeed = function(actor, migratedData) {
 const _migrateActorDamageReductions = function(actor, migratedData) {
     const actorData = actor.data;
 
-    const modifiers = deepClone(migratedData.modifiers ?? actorData.modifiers ?? []);
+    const modifiers = duplicate(migratedData.modifiers ?? actorData.modifiers ?? []);
     let isDirty = false;
 
     // Process old damage reduction
     if (actorData.traits?.damageReduction) {
-        const oldDamageReduction = deepClone(actorData.traits.damageReduction);
+        const oldDamageReduction = duplicate(actorData.traits.damageReduction);
         const oldDamageReductionValue = Number(oldDamageReduction.value);
         if (!Number.isNaN(oldDamageReductionValue) && oldDamageReductionValue > 0) {
             let notes = "";
@@ -483,7 +483,7 @@ const _migrateDocumentIconToWebP = function(document, data) {
     }
 
     if (document.data?.combatTracker?.visualization?.length > 0) {
-        const newVisualization = deepClone(document.data.combatTracker.visualization);
+        const newVisualization = duplicate(document.data.combatTracker.visualization);
         let isDirty = false;
 
         for (const [key, visualization] of Object.entries(newVisualization)) {
@@ -522,7 +522,7 @@ const _migrateChatMessageContentToWebP = function(messageData, data) {
 };
 
 const _migrateStringContentToWebP = function(string) {
-    string = deepClone(string);
+    string = duplicate(string);
     string = string.replace(/(systems\/sfrpg\/[^"]*).png/gi, "$1.webp");
     string = string.replace(/(systems\/sfrpg\/[^"]*).jpg/gi, "$1.webp");
     return string;

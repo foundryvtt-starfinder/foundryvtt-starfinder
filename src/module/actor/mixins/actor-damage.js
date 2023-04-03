@@ -258,8 +258,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
 
     static _applyToSelectedActors(damage) {
         const promises = [];
-        if (canvas.tokens?.controlled.length < 1) return;
-        for (const controlledToken of canvas.tokens.controlled) {
+        for (const controlledToken of canvas.tokens?.controlled) {
             const actor = controlledToken.actor;
             const promise = actor.applyDamage(damage);
 
@@ -284,12 +283,12 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         // console.log(['Applying damage', damage.toString(), damage]);
 
         switch (this.type) {
-            case 'starship':
-                return this._applyStarshipDamage(damage);
-            case 'vehicle':
-                return this._applyVehicleDamage(damage);
-            default:
-                return this._applyActorDamage(damage);
+        case 'starship':
+            return this._applyStarshipDamage(damage);
+        case 'vehicle':
+            return this._applyVehicleDamage(damage);
+        default:
+            return this._applyActorDamage(damage);
         }
     }
 
@@ -305,7 +304,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         }
 
         const actorUpdate = {};
-        const actorData = deepClone(this.system);
+        const actorData = foundry.utils.duplicate(this.system);
 
         const damagesPerType = [];
         if (damage.damageTypes.length > 0) {
@@ -540,7 +539,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         }
 
         let actorUpdate = {};
-        const newData = deepClone(originalData);
+        const newData = duplicate(originalData);
 
         let remainingUndealtDamage = damage.amount + damage.modifier;
 

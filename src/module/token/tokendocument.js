@@ -10,7 +10,7 @@ export default class SFRPGTokenDocument extends TokenDocument {
     getBarAttribute(barName, {alternative} = {}) {
         const attr = alternative || (barName ? this[barName].attribute : null);
         if ( !attr || !this.actor ) return null;
-        let data = getProperty(this.actor.system, attr);
+        let data = foundry.utils.getProperty(this.actor.system, attr);
         if ( (data === null) || (data === undefined) ) return null;
         const model = game.system.model.Actor[this.actor.type];
 
@@ -20,7 +20,7 @@ export default class SFRPGTokenDocument extends TokenDocument {
                 type: "value",
                 attribute: attr,
                 value: Number(data),
-                editable: hasProperty(model, attr)
+                editable: foundry.utils.hasProperty(model, attr)
             };
         }
 
@@ -39,7 +39,7 @@ export default class SFRPGTokenDocument extends TokenDocument {
                 attribute: attr,
                 value: value,
                 max: max,
-                editable: hasProperty(model, `${attr}.value`)
+                editable: foundry.utils.hasProperty(model, `${attr}.value`)
             };
         }
 
