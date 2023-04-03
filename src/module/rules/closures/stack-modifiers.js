@@ -99,40 +99,40 @@ export default class StackModifiers extends Closure {
             racialMods,
             untypedMods] = modifiers.reduce((prev, curr) => {
             switch (curr.type) {
-            case SFRPGModifierTypes.ABILITY:
-                prev[0].push(curr);
-                break;
-            case SFRPGModifierTypes.ARMOR:
-                prev[1].push(curr);
-                break;
-            case SFRPGModifierTypes.BASE:
-                prev[2].push(curr);
-                break;
-            case SFRPGModifierTypes.CIRCUMSTANCE:
-                prev[3].push(curr);
-                break;
-            case SFRPGModifierTypes.DIVINE:
-                prev[4].push(curr);
-                break;
-            case SFRPGModifierTypes.ENHANCEMENT:
-                prev[5].push(curr);
-                break;
-            case SFRPGModifierTypes.INSIGHT:
-                prev[6].push(curr);
-                break;
-            case SFRPGModifierTypes.LUCK:
-                prev[7].push(curr);
-                break;
-            case SFRPGModifierTypes.MORALE:
-                prev[8].push(curr);
-                break;
-            case SFRPGModifierTypes.RACIAL:
-                prev[9].push(curr);
-                break;
-            case SFRPGModifierTypes.UNTYPED:
-            default:
-                prev[10].push(curr);
-                break;
+                case SFRPGModifierTypes.ABILITY:
+                    prev[0].push(curr);
+                    break;
+                case SFRPGModifierTypes.ARMOR:
+                    prev[1].push(curr);
+                    break;
+                case SFRPGModifierTypes.BASE:
+                    prev[2].push(curr);
+                    break;
+                case SFRPGModifierTypes.CIRCUMSTANCE:
+                    prev[3].push(curr);
+                    break;
+                case SFRPGModifierTypes.DIVINE:
+                    prev[4].push(curr);
+                    break;
+                case SFRPGModifierTypes.ENHANCEMENT:
+                    prev[5].push(curr);
+                    break;
+                case SFRPGModifierTypes.INSIGHT:
+                    prev[6].push(curr);
+                    break;
+                case SFRPGModifierTypes.LUCK:
+                    prev[7].push(curr);
+                    break;
+                case SFRPGModifierTypes.MORALE:
+                    prev[8].push(curr);
+                    break;
+                case SFRPGModifierTypes.RACIAL:
+                    prev[9].push(curr);
+                    break;
+                case SFRPGModifierTypes.UNTYPED:
+                default:
+                    prev[10].push(curr);
+                    break;
             }
 
             return prev;

@@ -116,22 +116,9 @@ export default class RollDialog extends Dialog {
         data.damageGroups = this.damageGroups;
 
         for (const modifier of data.availableModifiers) {
-            const allContexts = data.contexts.allContexts;
-            const mainContext = data.contexts.mainContext;
-            let context = allContexts[mainContext]?.data;
-
-            // Starships use "@ship" etc. in their formulas, so the context needs to be adjusted to skip the intermediate "data/entity" object.
-            if (["ship", ""].includes(mainContext)) {
-                context = Object.entries(allContexts).reduce((obj, i) => {
-                    const scope = i[0];
-                    const data = i[1].data;
-                    obj[scope] = data;
-                    return obj;
-                }, {});
-            }
 
             // Make a simplified roll
-            const simplerRoll = Roll.create(modifier.modifier, context).simplifiedFormula;
+            const simplerRoll = Roll.create(modifier.modifier, data.contexts.getRollData()).simplifiedFormula;
 
             if (modifier.modifier[0] === "+") modifier.modifier = modifier.modifier.slice(1);
 
