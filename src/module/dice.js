@@ -481,7 +481,7 @@ export class DiceSFRPG {
         };
 
         const getDamageTypeForPart = (part) => {
-            if (part.types && !isEmpty(part.types)) {
+            if (part.types && !foundry.utils.isEmpty(part.types)) {
                 const filteredTypes = Object.entries(part.types).filter(type => type[1]);
                 const obj = { types: [], operator: "" };
 
@@ -497,7 +497,7 @@ export class DiceSFRPG {
 
         /** @type {DamageType[]} */
         let damageTypes = parts.reduce((acc, cur) => {
-            if (cur.types && !isEmpty(cur.types)) {
+            if (cur.types && !foundry.utils.isEmpty(cur.types)) {
                 const filteredTypes = Object.entries(cur.types).filter(type => type[1]);
                 const obj = { types: [], operator: "" };
 
@@ -533,7 +533,7 @@ export class DiceSFRPG {
                 if (part.isDamageSection) {
                     damageSections.push(part);
 
-                    const additionalOptions = deepClone(options);
+                    const additionalOptions = duplicate(options);
                     additionalOptions.skipUI = true;
 
                     const tempTree = new RollTree(additionalOptions);
@@ -588,7 +588,7 @@ export class DiceSFRPG {
             let damageTypeString = "";
             const tempParts = usedParts.reduce((arr, curr) => {
                 let obj = { formula: curr.formula, damage: 0, types: [], operator: curr.operator };
-                if (curr.types && !isEmpty(curr.types)) {
+                if (curr.types && !foundry.utils.isEmpty(curr.types)) {
                     for (const [key, isEnabled] of Object.entries(curr.types)) {
                         if (isEnabled) {
                             obj.types.push(key);
@@ -671,7 +671,7 @@ export class DiceSFRPG {
             }
 
             const isCritical = (button === "critical");
-            let finalFlavor = deepClone(flavor);
+            let finalFlavor = duplicate(flavor);
             if (isCritical) {
                 htmlData.push({ name: "is-critical", value: "true" });
                 tags.push({tag: `critical`, text: game.i18n.localize("SFRPG.Rolls.Dice.CriticalHit")});
@@ -707,7 +707,7 @@ export class DiceSFRPG {
                 if (part.partIndex) {
                     finalFlavor += ` (${part.partIndex})`;
                 }
-                // const originalTypes = deepClone(damageTypes);
+                // const originalTypes = duplicate(damageTypes);
                 // damageTypes = [getDamageTypeForPart(part)];
                 // console.log([originalTypes, damageTypes]);
             }

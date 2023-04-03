@@ -214,8 +214,8 @@ export class ItemSheetSFRPG extends ItemSheet {
     async _computeSavingThrowValue(itemLevel, formula) {
         try {
             const rollData = {
-                owner: this.item.actor ? deepClone(this.item.actor.system) : {abilities: {dex: {mod: 0}}},
-                item: deepClone(this.item.system),
+                owner: this.item.actor ? duplicate(this.item.actor.system) : {abilities: {dex: {mod: 0}}},
+                item: duplicate(this.item.system),
                 itemLevel: itemLevel
             };
             if (!rollData.owner.abilities?.dex?.mod) {
@@ -364,7 +364,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         }
 
         // Action usage
-        if ((item.type !== "weapon") && itemData.activation && !isEmpty(itemData.activation)) {
+        if ((item.type !== "weapon") && itemData.activation && !foundry.utils.isEmpty(itemData.activation)) {
             props.push(
                 {name: labels.activation, tooltip: null},
                 {name: labels.range, tooltip: null},
@@ -533,7 +533,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("delete-ability-adjustment")) {
             await this._onSubmit(event);
             const li = a.closest(".ability-adjustment-part");
-            const abilityMods = deepClone(this.item.system.abilityMods);
+            const abilityMods = duplicate(this.item.system.abilityMods);
             abilityMods.parts.splice(Number(li.dataset.abilityAdjustment), 1);
             return this.item.update({
                 "system.abilityMods.parts": abilityMods.parts
@@ -566,7 +566,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("delete-damage")) {
             await this._onSubmit(event); // Submit any unsaved changes
             const li = a.closest(".damage-part");
-            const damage = deepClone(this.item.system.damage);
+            const damage = duplicate(this.item.system.damage);
             damage.parts.splice(Number(li.dataset.damagePart), 1);
             return this.item.update({
                 "system.damage.parts": damage.parts
@@ -588,7 +588,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("delete-critical-damage")) {
             await this._onSubmit(event); // Submit any unsaved changes
             const li = a.closest(".damage-part");
-            const criticalDamage = deepClone(this.item.system.critical);
+            const criticalDamage = duplicate(this.item.system.critical);
             criticalDamage.parts.splice(Number(li.dataset.criticalPart), 1);
             return this.item.update({
                 "system.critical.parts": criticalDamage.parts
@@ -647,7 +647,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         const target = $(event.currentTarget);
         const modifierId = target.closest('.item.modifier').data('modifierId');
 
-        const modifiers = deepClone(this.item.system.modifiers);
+        const modifiers = duplicate(this.item.system.modifiers);
         const modifier = modifiers.find(mod => mod._id === modifierId);
         modifier.enabled = !modifier.enabled;
 
@@ -659,7 +659,7 @@ export class ItemSheetSFRPG extends ItemSheet {
     async _onAddStorage(event) {
         event.preventDefault();
 
-        let storage = deepClone(this.item.system.container.storage);
+        let storage = duplicate(this.item.system.container.storage);
         storage.push({
             type: "bulk",
             subtype: "",
@@ -679,7 +679,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         let li = $(event.currentTarget).parents(".storage-slot");
         const slotIndex = li.attr("data-slot-index");
 
-        let storage = deepClone(this.item.system.container.storage);
+        let storage = duplicate(this.item.system.container.storage);
         storage.splice(slotIndex, 1);
         await this.item.update({
             "system.container.storage": storage
@@ -693,7 +693,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         let li = $(event.currentTarget).parents(".storage-slot");
         const slotIndex = li.attr("data-slot-index");
 
-        let storage = deepClone(this.item.system.container.storage);
+        let storage = duplicate(this.item.system.container.storage);
         storage[slotIndex].type = event.currentTarget.value;
         if (storage[slotIndex].type === "bulk") {
             storage[slotIndex].subtype = "";
@@ -713,7 +713,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         let li = $(event.currentTarget).parents(".storage-slot");
         const slotIndex = li.attr("data-slot-index");
 
-        let storage = deepClone(this.item.system.container.storage);
+        let storage = duplicate(this.item.system.container.storage);
         storage[slotIndex].subtype = event.currentTarget.value;
         await this.item.update({
             "system.container.storage": storage
@@ -729,7 +729,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         const inputNumber = Number(event.currentTarget.value);
         if (!Number.isNaN(inputNumber)) {
-            let storage = deepClone(this.item.system.container.storage);
+            let storage = duplicate(this.item.system.container.storage);
             storage[slotIndex].amount = inputNumber;
             await this.item.update({
                 "system.container.storage": storage
@@ -744,7 +744,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         let li = $(event.currentTarget).parents(".storage-slot");
         const slotIndex = li.attr("data-slot-index");
 
-        let storage = deepClone(this.item.system.container.storage);
+        let storage = duplicate(this.item.system.container.storage);
         storage[slotIndex].weightProperty = event.currentTarget.value;
         await this.item.update({
             "system.container.storage": storage
@@ -761,7 +761,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         const itemType = event.currentTarget.name;
         const enabled = event.currentTarget.checked;
 
-        let storage = deepClone(this.item.system.container.storage);
+        let storage = duplicate(this.item.system.container.storage);
         if (enabled) {
             if (!storage[slotIndex].acceptsType.includes(itemType)) {
                 storage[slotIndex].acceptsType.push(itemType);
@@ -783,7 +783,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         const toggleSize = event.currentTarget.name;
         const enabled = event.currentTarget.checked;
 
-        let supportedSizes = deepClone(this.item.system.supportedSizes);
+        let supportedSizes = duplicate(this.item.system.supportedSizes);
         if (enabled && !supportedSizes.includes(toggleSize)) {
             supportedSizes.push(toggleSize);
         } else if (!enabled && supportedSizes.includes(toggleSize)) {
@@ -802,7 +802,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         let li = $(event.currentTarget).parents(".storage-slot");
         const slotIndex = li.attr("data-slot-index");
 
-        let storage = deepClone(this.item.system.container.storage);
+        let storage = duplicate(this.item.system.container.storage);
         storage[slotIndex].affectsEncumbrance = event.currentTarget.checked;
         await this.item.update({
             "system.container.storage": storage
@@ -817,7 +817,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         // Add new visualization rule
         if (a.classList.contains("add-visualization")) {
             await this._onSubmit(event); // Submit any unsaved changes
-            const visualization = deepClone(this.item.system.combatTracker.visualization);
+            const visualization = duplicate(this.item.system.combatTracker.visualization);
             return this.item.update({
                 "system.combatTracker.visualization": visualization.concat([
                     { mode: "eq", value: 0, title: this.item.name, image: this.item.img }
@@ -829,7 +829,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("delete-visualization")) {
             await this._onSubmit(event); // Submit any unsaved changes
             const li = a.closest(".visualization-part");
-            const visualization = deepClone(this.item.system.combatTracker.visualization);
+            const visualization = duplicate(this.item.system.combatTracker.visualization);
             visualization.splice(Number(li.dataset.index), 1);
             return this.item.update({
                 "system.combatTracker.visualization": visualization
@@ -844,7 +844,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         const parent = $(event.currentTarget).parents(".visualization-part");
         const visualizationIndex = $(parent).attr("data-index");
 
-        const visualization = deepClone(this.item.system.combatTracker.visualization);
+        const visualization = duplicate(this.item.system.combatTracker.visualization);
         const currentImage = visualization[visualizationIndex].image || this.item.img;
 
         const attr = event.currentTarget.dataset.edit;
@@ -870,7 +870,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         const parent = $(event.currentTarget).parents(".visualization-part");
         const visualizationIndex = $(parent).attr("data-index");
 
-        const visualization = deepClone(this.item.system.combatTracker.visualization);
+        const visualization = duplicate(this.item.system.combatTracker.visualization);
         visualization[visualizationIndex].mode = event.currentTarget.value;
 
         return this.item.update({
@@ -885,7 +885,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         const parent = $(event.currentTarget).parents(".visualization-part");
         const visualizationIndex = $(parent).attr("data-index");
 
-        const visualization = deepClone(this.item.system.combatTracker.visualization);
+        const visualization = duplicate(this.item.system.combatTracker.visualization);
         visualization[visualizationIndex].value = Number(event.currentTarget.value);
         if (Number.isNaN(visualization[visualizationIndex].value)) {
             visualization[visualizationIndex].value = 0;
@@ -903,7 +903,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         const parent = $(event.currentTarget).parents(".visualization-part");
         const visualizationIndex = $(parent).attr("data-index");
 
-        const visualization = deepClone(this.item.system.combatTracker.visualization);
+        const visualization = duplicate(this.item.system.combatTracker.visualization);
         visualization[visualizationIndex].title = event.currentTarget.value;
 
         return this.item.update({
