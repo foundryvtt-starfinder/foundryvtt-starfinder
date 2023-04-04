@@ -1,5 +1,5 @@
-import { DroneRepairDialog } from "../../apps/drone-repair-dialog.js";
 import { ShortRestDialog } from "../../apps/short-rest.js";
+import { DroneRepairDialog } from "../../apps/drone-repair-dialog.js";
 import { SFRPG } from "../../config.js";
 
 export const ActorRestMixin = (superclass) => class extends superclass {
@@ -150,7 +150,7 @@ export const ActorRestMixin = (superclass) => class extends superclass {
      * @return {Promise}        A Promise which resolves once the long rest workflow has completed
      */
     async longRest({ dialog = true, chat = true } = {}) {
-        const data = deepClone(this.system);
+        const data = duplicate(this.system);
         const updateData = {};
 
         if (dialog) {

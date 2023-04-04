@@ -92,7 +92,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
                     const entry = compendium.index.find(e => e.name.toLowerCase() === conditionName.toLowerCase());
                     if (entry) {
                         const entity = await compendium.getDocument(entry._id);
-                        const itemData = deepClone(entity);
+                        const itemData = duplicate(entity);
 
                         const promise = this.createEmbeddedDocuments("Item", [itemData]);
                         promise.then((createdItems) => {
