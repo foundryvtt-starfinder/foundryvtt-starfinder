@@ -191,7 +191,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
                 hasActions: true,
                 dataset: { type: "feat", "activation.type": "action" }
             },
-            ...deepClone(CONFIG.SFRPG.featureCategories),
+            ...duplicate(CONFIG.SFRPG.featureCategories),
             resources: {
                 category: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"),
                 items: [],

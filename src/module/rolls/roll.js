@@ -73,7 +73,7 @@ export default class SFRPGRoll extends Roll {
 
     /** @override */
     async render(chatOptions = {}) {
-        chatOptions = mergeObject({
+        chatOptions = foundry.utils.mergeObject({
             user: game.user.id,
             flavor: null,
             template: this.constructor.CHAT_TEMPLATE,

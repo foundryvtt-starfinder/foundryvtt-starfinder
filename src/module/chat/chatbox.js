@@ -113,7 +113,7 @@ export default class SFRPGCustomChatMessage {
             rollContent = DiceSFRPG.appendTextToRoll(rollContent, game.i18n.format("SFRPG.Items.Action.ActionTarget.ChatMessage", {actionTarget: options.rollOptions.actionTargetSource[options.rollOptions.actionTarget]}));
         }
 
-        options = mergeObject(options, { rollContent });
+        options = foundry.utils.mergeObject(options, { rollContent });
         const cardContent = await renderTemplate(templateName, options);
         const rollMode = data.rollMode ? data.rollMode : game.settings.get('core', 'rollMode');
 

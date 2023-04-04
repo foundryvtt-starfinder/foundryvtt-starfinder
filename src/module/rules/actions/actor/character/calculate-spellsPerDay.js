@@ -4,7 +4,7 @@ export default function(engine) {
         const classes = fact.classes;
 
         data.spells.classes = [];
-        const casterData = deepClone(data.spells);
+        const casterData = duplicate(data.spells);
 
         const computeSpellsPerDay = (spellLevel, classData, spellAbilityMod) => {
             let totalSpells = 0;

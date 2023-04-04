@@ -219,8 +219,8 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
                 hasActions: false,
                 dataset: { type: "feat" }
             },
-            classFeature: deepClone(CONFIG.SFRPG.featureCategories.classFeature),
-            universalCreatureRule: deepClone(CONFIG.SFRPG.featureCategories.universalCreatureRule),
+            classFeature: duplicate(CONFIG.SFRPG.featureCategories.classFeature),
+            universalCreatureRule: duplicate(CONFIG.SFRPG.featureCategories.universalCreatureRule),
             resources: {
                 category: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"),
                 items: actorResources,
@@ -358,7 +358,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         const target = $(event.currentTarget);
         const modifierId = target.closest(".item.modifier").data("modifierId");
 
-        const modifiers = deepClone(this.actor.system.modifiers);
+        const modifiers = duplicate(this.actor.system.modifiers);
         const modifier = modifiers.find((mod) => mod._id === modifierId);
 
         const formula = modifier.modifier;
