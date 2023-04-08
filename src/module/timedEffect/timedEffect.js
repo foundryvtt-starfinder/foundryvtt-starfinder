@@ -1,4 +1,4 @@
-import { generateUUID } from '../utilities.js';
+import { generateUUID } from "../utils/utilities.js";
 
 export default class SFRPGTimedEffect {
     /**
