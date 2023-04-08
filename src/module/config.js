@@ -995,7 +995,7 @@ SFRPG.languages = {
     "vlakan": "SFRPG.LanguagesVlakan",
     "vulgarKishaleen": "SFRPG.LanguagesVulgarKishaleen",
     "woiokan": "SFRPG.LanguagesWoiokan",
-    "worlansi": "SFRPG.LanguagesWorlansi",
+    "worlanisi": "SFRPG.LanguagesWorlanisi",
     "wrikreechee": "SFRPG.LanguagesWrikreechee",
     "xaarb": "SFRPG.LanguagesXaarb",
     "ysoki": "SFRPG.LanguagesYsoki"
