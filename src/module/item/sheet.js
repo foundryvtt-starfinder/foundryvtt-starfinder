@@ -127,7 +127,7 @@ export class ItemSheetSFRPG extends ItemSheet {
                 const sizeModifier = itemSizeArmorClassModifier[itemData.attributes.size];
                 const dexterityModifier = this.parseNumber(itemData.attributes.dex?.mod, -5);
 
-                data.placeholders.hardness = this.parseNumber(itemData.attributes.hardness, 5 + itemData.attributes.sturdy ? 2 * itemLevel : itemLevel);
+                data.placeholders.hardness = this.parseNumber(itemData.attributes.hardness, itemData.attributes.sturdy ? 5 + (2 * itemLevel) : 5 + itemLevel);
                 data.placeholders.maxHitpoints = this.parseNumber(itemData.attributes.hp?.max, (itemData.attributes.sturdy ? 15 + 3 * itemLevel : 5 + itemLevel) + (itemLevel >= 15 ? 30 : 0));
                 data.placeholders.armorClass = this.parseNumber(itemData.attributes.ac, 10 + sizeModifier + dexterityModifier);
                 data.placeholders.dexterityModifier = dexterityModifier;
