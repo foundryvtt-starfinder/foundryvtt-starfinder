@@ -964,6 +964,7 @@ SFRPG.languages = {
     "paralithi": "SFRPG.LanguagesParalithi",
     "perani": "SFRPG.LanguagesPerani",
     "protean": "SFRPG.LanguagesProtean",
+    "psacynoa": "SFRPG.LanguagesPsacynoa",
     "quorlu": "SFRPG.LanguagesQuorlu",
     "raxi": "SFRPG.LanguagesRaxi",
     "reptoid": "SFRPG.LanguagesReptoid",
