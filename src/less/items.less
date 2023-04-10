@@ -196,33 +196,41 @@
             background: rgba(0, 0, 0, 0.05);
         }
 
-        .form-group.input-select {
-            select {
-                flex: 1;
+        .form-group {
+
+            &.input-select {
+                select {
+                    flex: 1;
+                }
+
+                select[multiple] {
+                    height: 200px;
+                }
             }
 
-            select[multiple] {
-                height: 200px;
+            &.input-select-select {
+                select {
+                    flex: 1.5;
+                }
             }
-        }
 
-        .form-group.input-select-select {
-            select {
-                flex: 1.5;
+            &.uses-per {
+                input {
+                    flex: 1;
+                }
+                span {
+                    text-align: center;
+                    flex: 0 0 16px;
+                    line-height: 24px;
+                }
+                select {
+                    flex: 3;
+                }
             }
-        }
 
-        .form-group.uses-per {
-            input {
-                flex: 1;
-            }
-            span {
-                text-align: center;
-                flex: 0 0 16px;
-                line-height: 24px;
-            }
-            select {
-                flex: 3;
+            .calculated-total {
+                flex: 0;
+                color: @colorOlive;
             }
         }
 

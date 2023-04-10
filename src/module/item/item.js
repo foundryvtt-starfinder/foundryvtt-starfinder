@@ -133,12 +133,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             labels.area = [area.value, C.distanceUnits[area.units] || null, C.spellAreaShapes[area.shape], C.spellAreaEffects[area.effect]].filterJoin(" ");
 
             // Range Label
-            let rng = data.range || {};
-            if (["none", "touch", "personal"].includes(rng.units) || (rng.value === 0)) {
-                rng.value = null;
-            }
-            if (["none"].includes(rng.units)) rng.units = null;
-            labels.range = [rng.value, C.distanceUnits[rng.units] || null].filterJoin(" ");
+            /* let rng = data.range || {};
+            labels.range = [rng.value || "", C.distanceUnits[rng.units]].filterJoin(" "); */
+            // Now prepared in the calculate-activation-details closure!
 
             // Duration Label
             let dur = data.duration || {};
@@ -398,11 +395,21 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Ability activation properties
         if (data.hasOwnProperty("activation")) {
-            if ("target"     in data.activation) props.push({name: labels.target, tooltip: null });
-            if ("area"       in data.activation) props.push({name: labels.area, tooltip: null });
-            if ("activation" in data.activation) props.push({name: labels.activation, tooltip: null });
-            if ("range"      in data.activation) props.push({name: labels.range, tooltip: null });
-            if ("duration"   in data.activation) props.push({name: labels.duration, tooltip: null });
+            if (data.activation.type && data.activation.type !== "none") props.push(
+                { title: game.i18n.localize("SFRPG.Items.Activation.Activation"), name: labels.activation, tooltip: null }
+            );
+            if (data.target.value) props.push(
+                { title: game.i18n.localize("SFRPG.Items.Activation.Target"), name: labels.target, tooltip: null }
+            );
+            if (data.range.value) props.push(
+                { title: game.i18n.localize("SFRPG.Items.Activation.Range"), name: labels.range, tooltip: null }
+            );
+            if (data.area.value) props.push(
+                { title: game.i18n.localize("SFRPG.Items.Activation.Area"), name: labels.area, tooltip: null }
+            );
+            if (data.duration.value) props.push(
+                { title: game.i18n.localize("SFRPG.Items.Activation.Duration"), name: labels.duration, tooltip: null }
+            );
         }
 
         if (data.hasOwnProperty("capacity")) {

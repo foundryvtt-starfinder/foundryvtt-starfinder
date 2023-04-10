@@ -905,7 +905,9 @@ export class ActorSheetSFRPG extends ActorSheet {
             Hooks.callAll("renderItemSummary", this, div, {}); // Event listeners need to be added to this HTML.
 
             let props = $(`<div class="item-properties"></div>`);
-            chatData.properties.forEach(p => props.append(`<span class="tag" ${ p.tooltip ? ("data-tippy-content='" + p.tooltip + "'") : ""}>${p.name}</span>`));
+            chatData.properties.forEach(p => props.append(
+                `<span class="tag" data-tippy-content="${p.tooltip || p.title}"><strong>${p.title ? p.title + ":" : ""} </strong>${p.name}</span>`
+            ));
 
             div.append(props);
             li.append(div.hide());

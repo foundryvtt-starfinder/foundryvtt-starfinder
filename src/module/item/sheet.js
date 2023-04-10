@@ -90,6 +90,8 @@ export class ItemSheetSFRPG extends ItemSheet {
      */
     async getData() {
         const data = super.getData();
+        // Ensure derived data is included
+        this.item.processData();
 
         data.itemData = this.document.system;
         data.actor = this.document.parent;
@@ -174,6 +176,17 @@ export class ItemSheetSFRPG extends ItemSheet {
         // Action Details
         data.hasAttackRoll = this.item.hasAttack;
         data.isHealing = data.item.actionType === "heal";
+
+        // Activation Details to hide/show specific elements
+        data.range = {};
+        data.range.hasInput = (() => {
+            if (!("range" in itemData)) return;
+
+            // C/M/L on spells requires no input
+            if (this.item.type === "spell") return !(["close", "medium", "long", "none", "personal", "touch", "planetary", "system", "plane", "unlimited"].includes(itemData.range.units));
+            // These ranges require no input
+            else return !(["none", "personal", "touch", "planetary", "system", "plane", "unlimited"].includes(itemData.range.units));
+        })();
 
         // Vehicle Attacks
         if (data.isVehicleAttack) {

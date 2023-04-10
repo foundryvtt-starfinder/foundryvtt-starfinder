@@ -132,13 +132,6 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     }
 
     /**
-     * TODO: Use these two methods to properly setup actor data for use
-     * in the new Active Effects API.
-     */
-    prepareBaseData() { super.prepareBaseData(); }
-    prepareDerivedData() { super.prepareDerivedData(); }
-
-    /**
      * Extend the default update method to enhance data before submission.
      * See the parent Entity.update method for full details.
      *

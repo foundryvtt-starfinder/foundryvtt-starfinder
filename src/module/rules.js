@@ -51,7 +51,7 @@ import calculateMagicalItemCount from './rules/actions/actor/character/calculate
 import calculateResolve from './rules/actions/actor/character/calculate-resolve.js';
 import calculateSkillArmorCheckPenalty from './rules/actions/actor/character/calculate-skill-armor-check-penalty.js';
 import calculateSkillpoints from './rules/actions/actor/character/calculate-skillpoints.js';
-import calculateSpellsPerDay from './rules/actions/actor/character/calculate-spellsPerDay.js';
+import calculateSpells from './rules/actions/actor/character/calculate-spells.js';
 import calculateStamina from './rules/actions/actor/character/calculate-stamina.js';
 import calculateTraits from './rules/actions/actor/character/calculate-traits.js';
 import calculatePlayerXp from './rules/actions/actor/character/calculate-xp.js';
@@ -75,6 +75,7 @@ import calculateNpc2ArmorClass from './rules/actions/actor/npc2/calculate-npc2-a
 import calculateNpc2Initiative from './rules/actions/actor/npc2/calculate-npc2-initiative.js';
 import calculateNpc2BaseSaves from './rules/actions/actor/npc2/calculate-npc2-saves.js';
 import calculateNpc2BaseSkills from './rules/actions/actor/npc2/calculate-npc2-skills.js';
+import calculateNpc2SpellRanges from './rules/actions/actor/npc2/calculate-npc2-spell-ranges.js';
 // Starship rules
 import calculateStarshipAblative from './rules/actions/actor/starship/calculate-starship-ablative.js';
 import calculateStarshipArmorClass from './rules/actions/actor/starship/calculate-starship-ac.js';
@@ -94,6 +95,7 @@ import calculateVehicleControlSkill from './rules/actions/actor/vehicle/calculat
 import calculateVehicleHangar from './rules/actions/actor/vehicle/calculate-vehicle-hangar.js';
 import calculateVehiclePassengers from './rules/actions/actor/vehicle/calculate-vehicle-passengers.js';
 // Item rules
+import calculateActivationDetails from './rules/actions/item/calculate-activation-details.js';
 import calculateSaveDC from './rules/actions/item/calculate-save-dc.js';
 import calculateSkillDC from './rules/actions/item/calculate-skill-dc.js';
 
@@ -137,7 +139,7 @@ export default function(engine) {
     calculateMagicalItemCount(engine);
     calculateResolve(engine);
     calculateSkillpoints(engine);
-    calculateSpellsPerDay(engine);
+    calculateSpells(engine);
     calculateStamina(engine);
     calculateTraits(engine);
     calculatePlayerXp(engine);
@@ -161,6 +163,7 @@ export default function(engine) {
     calculateNpc2BaseSaves(engine);
     calculateNpc2Initiative(engine);
     calculateNpc2BaseSkills(engine);
+    calculateNpc2SpellRanges(engine);
     // Starship actions
     calculateStarshipArmorClass(engine);
     calculateStarshipCrew(engine);
@@ -182,6 +185,7 @@ export default function(engine) {
     // Item actions
     calculateSaveDC(engine);
     calculateSkillDC(engine);
+    calculateActivationDetails(engine);
 
     // Conditions
     always(engine);
@@ -237,7 +241,7 @@ export default function(engine) {
                     "calculateBulkAndWealth",
                     { closure: "calculateEncumbrance", stackModifiers: "stackModifiers" },
                     { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" },
-                    "calculateSpellsPerDay",
+                    "calculateSpells",
                     { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" },
                     "calculateDamageMitigation",
                     "calculateMagicalItemCount"
@@ -308,6 +312,7 @@ export default function(engine) {
                     "calculateNPC2Initiative",
                     "calculateNPC2BaseSaves",
                     "calculateNPC2BaseSkills",
+                    "calculateNPC2SpellRanges",
                     { closure: "calculateAbilityCheckModifiers", stackModifiers: "stackModifiers"},
                     { closure: "calculateArmorModifiers", stackModifiers: "stackModifiers" },
                     {closure: "calculateInitiativeModifiers", stackModifiers: "stackModifiers" },
@@ -359,7 +364,8 @@ export default function(engine) {
         description: "Take all of the item data and process it.",
         rules: [
             "calculateSaveDC",
-            "calculateSkillDC"
+            "calculateSkillDC",
+            "calculateActivationDetails"
         ]
     });
 

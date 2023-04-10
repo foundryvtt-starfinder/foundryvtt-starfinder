@@ -64,7 +64,10 @@
 <div class="form-group input-select">
     <label>{{ localize "SFRPG.Items.Activation.Range" }}</label>
     <div class="form-fields">
-        <input type="text" name="system.range.value" value="{{itemData.range.value}}" data-dtype="Number" placeholder="Range"/>
+        {{#if itemData.range.total}}<p class="calculated-total"><strong>{{itemData.range.total}}</strong></p>{{/if}}
+        {{#if this.range.hasInput}}
+        <input class="wide-form-field" type="text" name="system.range.value" value="{{itemData.range.value}}" data-dtype="String" placeholder="Range"/>
+        {{/if}}
         <select name="system.range.units">
             {{#select itemData.range.units}}
             {{#each config.distanceUnits as |unit key|}}
@@ -72,10 +75,6 @@
             {{/each}}
             {{/select}}
         </select>
-        <span class="sep"> + </span>
-        <input type="text" name="system.range.additional" value="{{itemData.range.additional}}" data-dtype="String" placeholder="5 ft." />
-        <span class="sep"> / </span>
-        <input type="text" name="system.range.per" value="{{itemData.range.per}}" placeholder="level" />
     </div>
 </div>
 
