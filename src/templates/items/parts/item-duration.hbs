@@ -16,7 +16,6 @@
     <label>{{localize "SFRPG.EffectEndTypesLabel"}}</label>
     <div class="form-fields">
         <input type="text" name="system.sourceActorId" value="{{itemData.sourceActorId}}" data-dtype="String" placeholder="{{actor.id}}"/>
-        {{log itemData}}
         <select name="system.activeDuration.endsOn">
             {{#select itemData.activeDuration.endsOn}}
             <option value=""></option>
@@ -26,4 +25,8 @@
             {{/select}}
         </select>
     </div>
+</div>
+<div class="form-group">
+    <label for="effectEnabled">{{ localize "SFRPG.EffectDetailsEnabledLabel" }}</label>
+    <input type="checkbox" id="effectEnabled" class="effect-details-toggle" data-effect-id="{{item.timedEffect}}" {{checked itemData.enabled}}>
 </div>

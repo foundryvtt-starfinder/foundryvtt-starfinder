@@ -510,6 +510,9 @@ export class ItemSheetSFRPG extends ItemSheet {
         html.find('select[name="resource-mode"]').change(this._onChangeResourceVisualizationMode.bind(this));
         html.find('input[name="resource-value"]').change(this._onChangeResourceVisualizationValue.bind(this));
         html.find('input[name="resource-title"]').change(this._onChangeResourceVisualizationTitle.bind(this));
+
+        // toggle timedEffect
+        html.find('.effect-details-toggle').on('click', this._onToggleDetailsEffect.bind(this));
     }
 
     /* -------------------------------------------- */
@@ -909,6 +912,19 @@ export class ItemSheetSFRPG extends ItemSheet {
         return this.item.update({
             "system.combatTracker.visualization": visualization
         });
+    }
+
+    /**
+     * Toggle an effect and their modifiers to be enabled or disabled.
+     *
+     * @param {Event} event The originating click event
+     */
+    async _onToggleDetailsEffect(event) {
+        event.preventDefault();
+        const target = $(event.currentTarget);
+        const effectID = target.data('effectId');
+
+        this.actor.system.timedEffects.find(item => item.id === effectID)?.toggle();
     }
 
     /** @override */
