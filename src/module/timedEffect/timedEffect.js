@@ -78,8 +78,7 @@ export default class SFRPGTimedEffect {
         this.enabled = !this.enabled;
 
         const actor = game.actors.get(this.actorId);
-        const items = duplicate(actor.items);
-        const effect = items.find(item => (item.type === 'effect') && (item._id === this.itemId));
+        const effect = actor.items.find(item => (item.type === 'effect') && (item._id === this.itemId));
 
         if (effect) {
             // toggle on actor
@@ -108,19 +107,22 @@ export default class SFRPGTimedEffect {
             actor.system.timedEffects.find(tEffect => tEffect.id === this.id)?.update(this);
             game.sfrpg.timedEffects.find(gEffect => gEffect.id === this.id)?.update(this);
 
-            actor.update({'items': items});
+            actor.updateEmbeddedDocuments({'Item': effect});
         } else {
             console.error('could not toggle effect, item is missing.');
         }
     }
 
+    /**
+     * delete the effect across the game.
+     */
     delete() {
-        const gameEffectIndex = game.sfrpg.timedEffects.findIndex(effect => effect.itemId = this.itemId);
+        const gameEffectIndex = game.sfrpg.timedEffects.findIndex(effect => effect.itemId === this.itemId);
         if (gameEffectIndex > -1) {
             game.sfrpg.timedEffects.splice(gameEffectIndex, 1);
         }
         const actor = game.actors.get(this.actorId);
-        const actorEffectIndex = actor ? actor.system.timedEffects.findIndex(effect => effect.itemId = this.itemId) : -1;
+        const actorEffectIndex = actor ? actor.system.timedEffects.findIndex(effect => effect.itemId === this.itemId) : -1;
         if (actorEffectIndex > -1) {
             actor.system.timedEffects.splice(actorEffectIndex, 1);
         }
