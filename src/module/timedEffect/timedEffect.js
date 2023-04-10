@@ -78,11 +78,21 @@ export default class SFRPGTimedEffect {
         this.enabled = !this.enabled;
 
         const actor = game.actors.get(this.actorId);
-        const effect = actor.items.find(item => (item.type === 'effect') && (item._id === this.itemId));
+        const items = duplicate(actor.items);
+        const effect = items.find(item => (item.type === 'effect') && (item._id === this.itemId));
 
         if (effect) {
             // toggle on actor
             effect.system.enabled = this.enabled;
+            const updateData = {
+                _id: effect._id,
+                system: {
+                    enabled: this.enabled,
+                    activeDuration: {
+                        activationTime: 0
+                    }
+                }
+            };
 
             // thats fucked up... sadly the actual toggle is only a placebo because only the modifier toggle actually does something.
             // I wish i could make it that if the item is not enabled all modifiers inside do not apply but idk how ^^
@@ -98,16 +108,18 @@ export default class SFRPGTimedEffect {
             if (this.enabled && resetActivationTime) {
                 effect.system.activeDuration.activationTime = game.time.worldTime;
                 this.activeDuration.activationTime = game.time.worldTime;
+                updateData.system.activeDuration.activationTime = game.time.worldTime;
             } else if (resetActivationTime) {
                 effect.system.activeDuration.activationTime = -1;
                 this.activeDuration.activationTime = -1;
+                updateData.system.activeDuration.activationTime = -1;
             }
 
             // update global and actor timedEffect objects
             actor.system.timedEffects.find(tEffect => tEffect.id === this.id)?.update(this);
             game.sfrpg.timedEffects.find(gEffect => gEffect.id === this.id)?.update(this);
 
-            actor.updateEmbeddedDocuments({'Item': effect});
+            actor.updateEmbeddedDocuments('Item', [updateData]);
         } else {
             console.error('could not toggle effect, item is missing.');
         }
