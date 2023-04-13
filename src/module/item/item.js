@@ -125,11 +125,12 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
             labels.target = [tgt.value].filterJoin(" ");
 
-            let area = data.area || {};
+            /* let area = data.area || {};
             if (typeof area.value === 'number' && area.value === 0) area.value = null;
 
             if (area.units === "text") labels.area = String(area.value || "")?.trim();
-            else labels.area = [area.total || area.value, C.distanceUnits[area.units] || null, C.spellAreaShapes[area.shape], C.spellAreaEffects[area.effect]].filterJoin(" ");
+            else labels.area = [area.total || area.value, C.distanceUnits[area.units] || null, C.spellAreaShapes[area.shape], C.spellAreaEffects[area.effect]].filterJoin(" "); */
+            // Now prepared in the calculate-activation-details closure!
 
             // Range Label
             /* let rng = data.range || {};

@@ -10,6 +10,7 @@ export default function(engine) {
         const actor = fact.owner.actor;
         if (!actor) return fact;
         const actorData = fact.owner.actorData;
+        const C = CONFIG.SFRPG;
 
         // Create a roll context for this item to be used in all calculations
         const rollContext = RollContext.createItemRollContext(item, actor);
@@ -19,12 +20,14 @@ export default function(engine) {
          * @param {import("../../../rolls/rollcontext.js").FormulaKey | Number} formula
          * @returns {number} The calculated value
          */
-        const calculateWithContext = (formula) => {
+        const calculateWithContext = formula => {
             const stringFormula = String(formula || 0);
-            let total = DiceSFRPG.resolveFormulaWithoutDice(stringFormula, rollContext, {logErrors: false}).total;
+            let total = DiceSFRPG.resolveFormulaWithoutDice(stringFormula, rollContext, { logErrors: false }).total;
 
             if (!total && total !== 0) {
-                ui.notifications.error(`Error calculating activation property on actor ${actor.name} (${actor.id}), item ${item.name} (${item.id}).`);
+                ui.notifications.error(
+                    `Error calculating activation property on actor ${actor.name} (${actor.id}), item ${item.name} (${item.id}).`
+                );
                 total = 0;
             }
 
@@ -43,14 +46,14 @@ export default function(engine) {
                     // Close/medium/long ranges for spells are calculated during actor prep
                     if (item.type === "spell") {
                         rangeValue = actorData.spells.range[rangeType];
-                    // Since we have no way of telling which level a feature will scale off, c/m/l on features still require a formula
+                        // Since we have no way of telling which level a feature will scale off, c/m/l on features still require a formula
                     } else {
                         rangeValue = calculateWithContext(data.range.value);
                     }
 
                     data.range.total = rangeValue;
                     item.labels.range = game.i18n.format("SFRPG.RangeCalculated", {
-                        rangeType: CONFIG.SFRPG.distanceUnits[rangeType],
+                        rangeType: C.distanceUnits[rangeType],
                         total: rangeValue.toLocaleString(game.i18n.lang)
                     });
 
@@ -58,11 +61,14 @@ export default function(engine) {
                 } else {
                     let rangeValue = "";
                     // These ranges don't need a value, so keep it as a falsy value
-                    if (!(["none", "personal", "touch", "planetary", "system", "plane", "unlimited"].includes(rangeType)))
+                    if (!["none", "personal", "touch", "planetary", "system", "plane", "unlimited"].includes(rangeType))
                         rangeValue = calculateWithContext(data.range.value) || "";
 
                     data.range.total = rangeValue;
-                    item.labels.range = [rangeValue?.toLocaleString(game.i18n.lang), CONFIG.SFRPG.distanceUnits[rangeType]].filterJoin(" ");
+                    item.labels.range = [
+                        rangeValue?.toLocaleString(game.i18n.lang),
+                        C.distanceUnits[rangeType]
+                    ].filterJoin(" ");
                 }
             }
 
@@ -75,8 +81,21 @@ export default function(engine) {
              * Area
              * I don't think any areas actually scale by distance (normally by number of areas), but we'll do this for the sake of homebrew
              */
-            if (data.area.units !== "text") data.area.total = calculateWithContext(data.area.value);
+            {
+                const area = data.area;
+                if (area.value === 0) area.value = null;
+                if (area.units !== "text") area.total = calculateWithContext(area.value);
 
+                if (area.units === "text") item.labels.area = String(area.value || "")?.trim();
+                else
+                    item.labels.area = [
+                        area.total || area.value,
+                        C.distanceUnits[area.units] || null,
+                        C.spellAreaShapes[area.shape],
+                        C.spellAreaEffects[area.effect],
+                        area.shapable ? "(S)" : ""
+                    ].filterJoin(" ");
+            }
         }
 
         return fact;

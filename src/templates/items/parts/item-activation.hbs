@@ -36,7 +36,7 @@
     <label>{{ localize "SFRPG.Items.Activation.Area" }}</label>
     <div class="form-fields">
         {{#if this.area.showTotal}}<p class="calculated-total"><strong>{{itemData.area.total}}</strong></p>{{/if}}
-        <input type="text" {{#if (eq itemData.area.units "text")}}class="wide-form-field"{{/if}} name="system.area.value" value="{{itemData.area.value}}" data-dtype={{#unless (eq itemData.area.units "text")}}"Number"{{else}}"String"{{/unless}} placeholder="Area" />
+        <input type="text" {{#if (eq itemData.area.units "text")}}class="wide-form-field"{{/if}} name="system.area.value" value="{{itemData.area.value}}" data-dtype="String" placeholder="Area" />
         <select name="system.area.units" class="min-form-field">
             {{#select itemData.area.units}}
             {{#each config.variableDistanceUnits as |unit key|}}

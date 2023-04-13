@@ -1,6 +1,3 @@
-import { ActorSFRPG } from "../actor/actor";
-import { ItemSFRPG } from "../item/item";
-
 /**
  * @typedef {Object} RollData
  * An object containing relevant data of a document, to be used at roll-time to resolve `@tags` in formulas.

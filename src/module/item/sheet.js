@@ -391,8 +391,9 @@ export class ItemSheetSFRPG extends ItemSheet {
         if ((item.type !== "weapon") && itemData.activation && !foundry.utils.isEmpty(itemData.activation)) {
             props.push(
                 {name: labels.activation, tooltip: null},
-                {name: labels.range, tooltip: null},
                 {name: labels.target, tooltip: null},
+                {name: labels.range, tooltip: null},
+                {name: labels.area, tooltip: null},
                 {name: labels.duration, tooltip: null}
             );
         }
