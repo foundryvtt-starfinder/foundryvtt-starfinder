@@ -16,7 +16,7 @@ export default function(engine) {
 
         /**
          * Use the item's roll context and calculate a given formula with it.
-         * @param {string} formula
+         * @param {import("../../../rolls/rollcontext.js").FormulaKey | Number} formula
          * @returns {number} The calculated value
          */
         const calculateWithContext = (formula) => {
