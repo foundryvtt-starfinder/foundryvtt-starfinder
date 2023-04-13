@@ -111,7 +111,7 @@ export default function(engine) {
                     item.labels.duration = [
                         duration.total || duration.value,
                         C.durationTypes[duration.units] || null,
-                        duration.dismissible ? "(D)" : ""
+                        data.dismissible ? "(D)" : ""
                     ].filterJoin(" ");
                 } else {
                     const label = duration.units === "instantaneous" ? C.durationTypes[duration.units] : duration.value;
