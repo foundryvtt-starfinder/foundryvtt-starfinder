@@ -1,3 +1,4 @@
+import { ItemSFRPG } from "./item/item.js";
 import BrowserEnricher from "./system/enrichers/browser.js";
 import CheckEnricher from "./system/enrichers/check.js";
 import IconEnricher from "./system/enrichers/icon.js";
@@ -447,6 +448,7 @@ SFRPG.weaponProperties = {
     "gravitation": "SFRPG.WeaponPropertiesGravitation",
     "guided": "SFRPG.WeaponPropertiesGuided",
     "harrying": "SFRPG.WeaponPropertiesHarrying",
+    "healing": "SFRPG.WeaponPropertiesHealing",
     "holyWater": "SFRPG.WeaponPropertiesHolyWater",
     "hybrid": "SFRPG.WeaponPropertiesHybrid",
     "hydrodynamic": "SFRPG.WeaponPropertiesHydrodynamic",
@@ -542,6 +544,7 @@ SFRPG.weaponPropertiesTooltips = {
     "gravitation": "SFRPG.WeaponPropertiesGravitationTooltip",
     "guided": "SFRPG.WeaponPropertiesGuidedTooltip",
     "harrying": "SFRPG.WeaponPropertiesHarryingTooltip",
+    "healing": "SFRPG.WeaponPropertiesHealingTooltip",
     "holyWater": "SFRPG.WeaponPropertiesHolyWaterTooltip",
     "hybrid": "SFRPG.WeaponPropertiesHybridTooltip",
     "hydrodynamic": "SFRPG.WeaponPropertiesHydrodynamicTooltip",
@@ -714,6 +717,22 @@ SFRPG.featTypes = {
     "combat" : "SFRPG.FeatTypes.Combat"
 };
 
+/**
+ * @typedef  {Object} FeatureCategory
+ * @property {String} category A localisation key, used for the plural form of the category (For use on sheet headers)
+ * @property {String} label A localisation key, used for the singular form of the category (For use on sheets themselves)
+ * @property {ItemSFRPG[]} items During sheet rendering, items are sorted into the items arrays in each category. To be empty during declaration
+ * @property {Boolean} hasActions Whether to show a "+ Add" button for the category on sheets
+ * @property {Dataset} dataset Data to be added as `data-`objects in the HTML. Extra fields will be added to the created item's data.
+ */
+/**
+ * @typedef  {Object} Dataset
+ * @property {"feat"} type The type of item to create. Features are type "feat", so there is no need to create anything else.
+ * @property {String} "*" A data path and a value to be added to the created item.
+ */
+/**
+ * @type {Object.<string, FeatureCategory>}
+ */
 SFRPG.featureCategories = {
     "feat": {
         category: "SFRPG.ActorSheet.Features.Categories.Feats",
@@ -734,7 +753,7 @@ SFRPG.featureCategories = {
         label: "SFRPG.FeatureCategory.SpeciesFeature",
         items: [],
         hasActions: false,
-        dataset: { type: "feat", category: "speciesFeature" }
+        dataset: { type: "feat", "category": "speciesFeature" }
     },
     "archetypeFeature": {
         category: "SFRPG.ActorSheet.Features.Categories.ArchetypeFeatures",

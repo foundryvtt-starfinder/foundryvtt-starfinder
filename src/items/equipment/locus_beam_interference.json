@@ -1,20 +1,20 @@
 {
-  "_id": "e8ULJUxXGZnMhF0j",
-  "name": "Excavation drill, utility",
+  "_id": "hr56hkrLKdlN06Fe",
+  "name": "Locus Beam, interference",
   "type": "weapon",
-  "img": "systems/sfrpg/icons/equipment/technological%20items/lazer-drill.webp",
+  "img": "systems/sfrpg/icons/equipment/weapons/acid_dart_rifle_tactical.webp",
   "system": {
     "type": "",
-    "ability": "str",
+    "ability": "dex",
     "abilityMods": {
       "parts": []
     },
-    "actionTarget": "kac",
-    "actionType": "mwak",
+    "actionTarget": "eac",
+    "actionType": "rwak",
     "activation": {
-      "type": "action",
+      "type": "none",
       "condition": "",
-      "cost": 1
+      "cost": null
     },
     "ammunitionType": "charge",
     "area": {
@@ -37,18 +37,18 @@
       },
       "hp": {
         "max": "",
-        "value": 21
+        "value": 42
       },
       "size": "medium",
       "sturdy": true
     },
     "attuned": false,
-    "bulk": "2",
+    "bulk": "L",
     "capacity": {
-      "max": 20,
-      "value": 20
+      "max": 40,
+      "value": 0
     },
-    "chatFlavor": "unwieldy, shatter, professional (miner)",
+    "chatFlavor": "",
     "container": {
       "contents": [],
       "includeContentsInWealthCalculation": true,
@@ -60,7 +60,7 @@
             "fusion"
           ],
           "affectsEncumbrance": true,
-          "amount": 2,
+          "amount": 9,
           "subtype": "fusion",
           "weightProperty": "level"
         },
@@ -70,48 +70,33 @@
             "ammunition"
           ],
           "affectsEncumbrance": true,
-          "amount": 1,
+          "amount": 2,
           "subtype": "ammunitionSlot",
+          "weightMultiplier": 1,
           "weightProperty": ""
         }
       ]
     },
     "critical": {
-      "effect": "Bleed",
-      "parts": [
-        {
-          "formula": "1d4",
-          "operator": "",
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
-            "cold": false,
-            "electricity": false,
-            "fire": false,
-            "healing": false,
-            "piercing": true,
-            "slashing": false,
-            "sonic": false
-          }
-        }
-      ]
+      "effect": "Leech",
+      "parts": []
     },
     "damage": {
       "parts": [
         {
           "name": "",
-          "formula": "2d4",
+          "formula": "2d6",
           "group": null,
           "types": {
             "acid": false,
             "bludgeoning": false,
             "cold": false,
-            "electricity": false,
+            "electricity": true,
             "fire": false,
-            "healing": false,
-            "piercing": true,
+            "healing": true,
+            "piercing": false,
             "slashing": false,
-            "sonic": false
+            "sonic": true
           }
         }
       ]
@@ -122,7 +107,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>Excavation drills are a core hand tool for miners across the galaxy. Some claim that @UUID[Compendium.sfrpg.races.SaWDXnfaX24Iuuuz]{Dwarf} mining engineers poached from Ulrikka Clanholdings initially designed these drills, as Ulrikka has previously produced similar designs. @UUID[Compendium.sfrpg.races.SaWDXnfaX24Iuuuz]{Dwarf} knights have long used these drills in combat, as have gladiators, who often use them to put on bizarre and grisly shows. Utility and industrial models see extensive use in demolition and mining, while helical and volute drills are essential for some star-metal mining, where hard ore requires a tougher tool. Gyroidal drills are restricted, special-operations tools predominantly used to breach starship hulls during rescue or military boarding operations.</p>"
+      "value": "<p>This weapon’s radiant beam can be modulated to disrupt matter or reintegrate damaged creatures. When fired, the weapon emits a low hum that rapidly grows to a shrill whine.</p>\n<p>A weapon fitted with a Locus crystal creates a unique vibratory radiation that disrupts the target—or, with a flip of a switch, heals their wounds. Locus weapons have the Healing weapon special property. After using this property five times, the weapon’s Locus crystal burns out and must be replaced.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -134,13 +119,13 @@
     "formula": "",
     "identified": true,
     "isActive": null,
-    "level": 2,
+    "level": 9,
     "modifiers": [],
-    "price": 750,
+    "price": 13200,
     "proficient": false,
     "properties": {
       "aeon": false,
-      "amm": true,
+      "amm": false,
       "analog": false,
       "antibiological": false,
       "archaic": false,
@@ -168,7 +153,7 @@
       "fiery": false,
       "firstArc": false,
       "flexibleLine": false,
-      "force": false,
+      "force": true,
       "freeHands": false,
       "fueled": false,
       "gearArray": false,
@@ -176,7 +161,7 @@
       "gravitation": false,
       "guided": false,
       "harrying": false,
-      "healing": false,
+      "healing": true,
       "holyWater": false,
       "hybrid": false,
       "hydrodynamic": false,
@@ -194,13 +179,13 @@
       "modal": false,
       "necrotic": false,
       "nonlethal": false,
-      "one": false,
+      "one": true,
       "operative": false,
       "penetrating": false,
       "polarize": false,
       "polymorphic": false,
       "powered": false,
-      "professional": true,
+      "professional": false,
       "propel": false,
       "punchGun": false,
       "qreload": false,
@@ -212,7 +197,7 @@
       "reposition": false,
       "scramble": false,
       "shape": false,
-      "shatter": true,
+      "shatter": false,
       "shells": false,
       "shield": false,
       "sniper": false,
@@ -227,10 +212,10 @@
       "thrown": false,
       "thruster": false,
       "trip": false,
-      "two": true,
+      "two": false,
       "unbalancing": false,
       "underwater": false,
-      "unwieldy": true,
+      "unwieldy": false,
       "variantBoost": false,
       "wideLine": false
     },
@@ -239,8 +224,8 @@
     "range": {
       "additional": "",
       "per": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": 30
     },
     "rollNotes": "",
     "save": {
@@ -252,7 +237,7 @@
       "type": "",
       "dc": ""
     },
-    "source": "AP #34 pg. 44",
+    "source": "SA:LoC pg. 59",
     "special": "",
     "specialMaterials": {
       "abysium": false,
@@ -276,14 +261,14 @@
     },
     "usage": {
       "per": "shot",
-      "value": 1
+      "value": 4
     },
     "uses": {
       "max": null,
       "per": "",
       "value": null
     },
-    "weaponCategory": "uncategorized",
-    "weaponType": "advancedM"
+    "weaponCategory": "",
+    "weaponType": "smallA"
   }
 }

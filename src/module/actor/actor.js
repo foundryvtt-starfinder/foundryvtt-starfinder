@@ -880,6 +880,13 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         });
     }
 
+    levelUp(actorClassId) {
+        const targetClass = this.items.get(actorClassId);
+        if (targetClass) {
+            targetClass.update({["system.levels"]: targetClass.system.levels + 1});
+        }
+    }
+
     /** Roll contexts */
     setupRollContexts(rollContext, desiredSelectors = []) {
         if (!this) {
@@ -1132,13 +1139,6 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         if (canSeeName && visibleOptions.includes(token.document.displayName)) return true;
 
         return false;
-    }
-
-    levelUp(actorClassId) {
-        const targetClass = this.items.find(item => item.type === "class" && item._id === actorClassId);
-        if (targetClass) {
-            targetClass.update({["system.levels"]: targetClass.system.levels + 1});
-        }
     }
 }
 
