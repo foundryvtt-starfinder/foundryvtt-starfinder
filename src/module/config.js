@@ -335,6 +335,26 @@ SFRPG.distanceUnits = {
     ...SFRPG.variableDistanceUnits
 };
 
+/**
+ * Durations for effects by definition must be non-zero.
+ * @type {Object}
+ */
+SFRPG.effectDurationTypes = {
+    "rounds": "SFRPG.EffectDurationTypesRounds",
+    "minutes": "SFRPG.EffectDurationTypesMinutes",
+    "hours": "SFRPG.EffectDurationTypesHours",
+    "days": "SFRPG.EffectDurationTypesDays"
+};
+
+/**
+ * Durations for features/spells however can be.
+ * @type {Object}
+ */
+SFRPG.durationTypes = {
+    "instantaneous": "SFRPG.DurationTypesInstantaneous",
+    ...SFRPG.effectDurationTypes
+};
+
 SFRPG.targetTypes = {};
 
 SFRPG.timePeriods = {};

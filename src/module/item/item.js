@@ -138,8 +138,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             // Now prepared in the calculate-activation-details closure!
 
             // Duration Label
-            let dur = data.duration || {};
-            labels.duration = [dur.value].filterJoin(" ");
+            /* let dur = data.duration || {};
+            labels.duration = [dur.value].filterJoin(" "); */
+            // Now prepared in the calculate-activation-details closure!
         }
 
         // Item Actions

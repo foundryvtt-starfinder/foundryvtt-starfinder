@@ -57,13 +57,11 @@ export default function(engine) {
                         total: rangeValue.toLocaleString(game.i18n.lang)
                     });
 
-                    // Other ranges allow for formulas
+                } else if (["none", "personal", "touch", "planetary", "system", "plane", "unlimited"].includes(rangeType)) {
+                    item.labels.range = C.distanceUnits[rangeType];
+                // Other ranges allow for formulas
                 } else {
-                    let rangeValue = "";
-                    // These ranges don't need a value, so keep it as a falsy value
-                    if (!["none", "personal", "touch", "planetary", "system", "plane", "unlimited"].includes(rangeType))
-                        rangeValue = calculateWithContext(data.range.value) || "";
-
+                    const rangeValue = calculateWithContext(data.range.value) || "";
                     data.range.total = rangeValue;
                     item.labels.range = [
                         rangeValue?.toLocaleString(game.i18n.lang),
@@ -84,10 +82,10 @@ export default function(engine) {
             {
                 const area = data.area;
                 if (area.value === 0) area.value = null;
-                if (area.units !== "text") area.total = calculateWithContext(area.value);
 
-                if (area.units === "text") item.labels.area = String(area.value || "")?.trim();
-                else
+                if (area.units !== "text") {
+                    area.total = calculateWithContext(area.value);
+
                     item.labels.area = [
                         area.total || area.value,
                         C.distanceUnits[area.units] || null,
@@ -95,6 +93,31 @@ export default function(engine) {
                         C.spellAreaEffects[area.effect],
                         area.shapable ? "(S)" : ""
                     ].filterJoin(" ");
+                } else {
+                    item.labels.area = String(area.value || "")?.trim();
+                }
+
+            }
+
+            /**
+             * Duration
+             */
+            {
+                const duration = data.duration;
+
+                if (!(["instantaneous", "text"].includes(duration.units))) {
+                    duration.total = calculateWithContext(duration.value);
+
+                    item.labels.duration = [
+                        duration.total || duration.value,
+                        C.durationTypes[duration.units] || null,
+                        duration.dismissible ? "(D)" : ""
+                    ].filterJoin(" ");
+                } else {
+                    const label = duration.units === "instantaneous" ? C.durationTypes[duration.units] : duration.value;
+                    item.labels.duration = label || "";
+                }
+
             }
         }
 

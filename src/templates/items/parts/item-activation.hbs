@@ -90,7 +90,24 @@
 <div class="form-group input-select">
     <label>{{ localize "SFRPG.Items.Activation.Duration" }}</label>
     <div class="form-fields">
-        <input type="text" name="system.duration.value" value="{{itemData.duration.value}}" data-dtype="String" placeholder="-"/>
+        {{#if this.duration.showTotal}}<p class="calculated-total"><strong>{{itemData.duration.total}}</strong></p>{{/if}}
+        {{#if this.duration.hasInput}}
+        <input type="text" class="wide-form-field" name="system.duration.value" value="{{itemData.duration.value}}" data-dtype="String" placeholder="-"/>
+        {{/if}}
+        <select name="system.duration.units">
+            {{#select itemData.duration.units}}
+            {{#each config.durationTypes as |unit key|}}
+            <option value="{{key}}">{{unit}}</option>
+            {{/each}}
+            <option value="text">{{localize "SFRPG.Text"}}</option>
+            {{/select}}
+        </select>
+        {{#unless (eq itemData.duration.units "text")}}
+        <label class="checkbox">
+            <input type="checkbox" name="system.duration.dismissible" {{checked itemData.duration.dismissible}}>
+            {{ localize "SFRPG.Items.Spell.Dismissible" }}
+        </label>
+        {{/unless}}
     </div>
 </div>
 

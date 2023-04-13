@@ -179,24 +179,33 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.isHealing = data.item.actionType === "heal";
 
         // Determine whether to show calculated totals for fields with formulas
-        data.range = {};
+        if (data?.activation?.type) {
+            data.range = {};
 
-        if (data.isActorResource && itemData.stage === "late") {
-            data.range.showMinTotal = String(itemData.range.totalMin) !== String(itemData.range.min);
-            data.range.showMaxTotal = String(itemData.range.totalMax) !== String(itemData.range.max);
-        } else {
             data.range.hasInput = (() => {
-                if (!("range" in itemData)) return;
+                if (!data.actor || !("range" in itemData)) return false;
 
                 // C/M/L on spells requires no input
                 if (this.item.type === "spell") return !(["close", "medium", "long", "none", "personal", "touch", "planetary", "system", "plane", "unlimited"].includes(itemData.range.units));
                 // These ranges require no input
                 else return !(["none", "personal", "touch", "planetary", "system", "plane", "unlimited"].includes(itemData.range.units));
             })();
-            data.range.showTotal = String(itemData.range?.total) !== String(itemData.range?.value);
+            data.range.showTotal = !!itemData.range?.total && (String(itemData.range?.total) !== String(itemData.range?.value));
 
             data.area = {};
-            data.area.showTotal = String(itemData.area?.total) !== String(itemData.area?.value);
+            data.area.showTotal = !!itemData.area?.total && (String(itemData.area?.total) !== String(itemData.area?.value));
+
+            data.duration = {};
+            data.duration.showTotal = !!itemData.duration?.total && (String(itemData.duration?.total) !== String(itemData.duration?.value));
+            data.duration.hasInput = itemData.duration.units !== "instantaneous";
+
+        }
+
+        if (data.isActorResource && itemData.stage === "late") {
+            data.range = {};
+
+            data.range.showMinTotal = !!itemData.range.totalMin && (String(itemData.range.totalMin) !== String(itemData.range.min));
+            data.range.showMaxTotal = !!itemData.range.totalMax && (String(itemData.range.totalMax) !== String(itemData.range.max));
         }
 
         // Vehicle Attacks

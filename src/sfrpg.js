@@ -286,6 +286,8 @@ Hooks.once("i18nInit", () => {
         "distanceUnits",
         "constantDistanceUnits",
         "variableDistanceUnits",
+        "durationTypes",
+        "effectDurationTypes",
         "descriptors",
         "descriptorsTooltips",
         "energyDamageTypes",
