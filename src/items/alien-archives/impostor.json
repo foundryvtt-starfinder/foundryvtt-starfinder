@@ -15,6 +15,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "",
@@ -36,6 +37,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -44,6 +46,11 @@
           "value": "<p>A creature that fails to hit an impostor is filled with self-doubt and must succeed at a DC 18 Will saving throw or gain the shaken condition until the end of its next turn. This is a mind‑affecting effect.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -62,6 +69,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "will",
           "dc": "18",
@@ -94,6 +102,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -128,6 +137,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -165,6 +175,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -188,12 +199,14 @@
         "proficient": true,
         "properties": {},
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -201,6 +214,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -229,6 +243,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "move",
@@ -250,6 +265,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -258,6 +274,11 @@
           "value": "<p>As a move action, an impostor can alter its face into a twisted version of the face of a creature within 15 feet that can see it. The targeted creature must then succeed at a DC 18 Will saving throw or gain the flat-footed condition against the impostor until the beginning of the impostor’s next turn. This is a mind-affecting, sense-dependent effect.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": ""
@@ -276,6 +297,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "will",
           "dc": "18",
@@ -304,6 +326,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -325,6 +348,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -333,6 +357,11 @@
           "value": "<p>An impostor takes half again as much damage (+50%) when it takes damage from a creature benefiting from a morale bonus.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -351,6 +380,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -372,12 +402,14 @@
   "prototypeToken": {
     "name": "Impostor",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": "attributes.rp"
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -406,11 +438,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -428,6 +457,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -478,12 +508,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": "0"
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": "0"
       },
       "cmd": {
         "min": 0,
@@ -532,6 +568,12 @@
         "tooltip": [],
         "value": 0
       },
+      "rp": {
+        "max": 10,
+        "min": 0,
+        "tooltip": [],
+        "value": 0
+      },
       "space": "5",
       "speed": {
         "burrowing": {
@@ -541,7 +583,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 50
@@ -550,7 +593,8 @@
         "special": "original base: 50 ft.",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -559,6 +603,28 @@
         "misc": 0,
         "tooltip": [],
         "value": 0
+      }
+    },
+    "common": {
+      "abilities": {
+        "cha": {
+          "base": 0
+        },
+        "con": {
+          "base": 0
+        },
+        "dex": {
+          "base": 0
+        },
+        "int": {
+          "base": 0
+        },
+        "str": {
+          "base": 0
+        },
+        "wis": {
+          "base": 0
+        }
       }
     },
     "conditions": {
@@ -583,6 +649,7 @@
       "frightened": false,
       "grappled": false,
       "helpless": false,
+      "invisible": false,
       "nauseated": false,
       "off-kilter": false,
       "off-target": false,
@@ -612,8 +679,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<h2>Description</h2>\n<p>From the fumbling fool to the universally respected prodigy, every being suffers from moments of doubt when they believe all of their successes are due only to luck and that they will soon be revealed to be the frauds they are. Such thoughts usually pass quickly, but sometimes they can leave a psychic impression on the Astral Plane. When a creature’s lack of confidence returns again and again, these imprints grow strong enough to create a rare outsider known as an impostor-a creature that feeds on self-doubt.</p>\n<p>An impostor takes on a form reminiscent of the creature whose doubt created it. However, it is a nightmarish, funhouse-mirror version of the creature, with an elongated face and hollow eyes. When an impostor is created, it can push its way onto the Material Plane, its only thought to end its progenitor’s life. As a creature born from the dark places of the mind, an impostor can manifest doubt as a weapon: a cold blade that seems to absorb light.</p>\n<p>Once an impostor has finished off its creator, it seeks ways to undo their accomplishments. Though an impostor is rarely mistaken for its progenitor, it knows their every shameful secret and worst impulses, and it uses this knowledge to further its cruel agenda. Once it thoroughly spoils a person’s reputation, the impostor fades from existence, its energy returning to the Astral Plane.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any (Astral Plane)</p>\n<h3>Organization</h3>\n<p>solitary</p>\n</section>",
@@ -623,6 +693,10 @@
       "cr": 8,
       "environment": "",
       "organization": "",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #23 pg. 55",
@@ -863,30 +937,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -919,6 +1000,9 @@
       },
       "senses": "darkvision 60 ft.",
       "size": "medium",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }
