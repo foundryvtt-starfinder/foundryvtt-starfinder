@@ -287,6 +287,8 @@ export class ActorSheetSFRPG extends ActorSheet {
         html.find('.item-detail .featActivate').click(event => this._onActivateFeat(event));
         html.find('.item-detail .featDeactivate').click(event => this._onDeactivateFeat(event));
 
+        html.find('.limited-uses-value').change(event => this._onItemUsesUpdate(event));
+
         // Item Recharging
         html.find('.item .item-recharge').click(event => this._onItemRecharge(event));
 
@@ -700,6 +702,14 @@ export class ActorSheetSFRPG extends ActorSheet {
         const item = this.actor.items.get(itemId);
 
         item.setActive(false);
+    }
+
+    async _onItemUsesUpdate(event) {
+        event.preventDefault();
+        const itemId = event.currentTarget.closest('.item').dataset.itemId;
+        const item = this.actor.items.get(itemId);
+
+        item.update({"system.uses.value": Number(event.currentTarget.value)});
     }
 
     /**

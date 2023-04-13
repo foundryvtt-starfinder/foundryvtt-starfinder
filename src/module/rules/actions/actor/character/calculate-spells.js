@@ -24,8 +24,6 @@ export default function(engine) {
             return totalSpells;
         };
 
-        let anyCasterClass = false;
-
         for (const cls of classes) {
             const classData = cls.system;
 
@@ -42,9 +40,7 @@ export default function(engine) {
                 spellAbilityMod: data.abilities[spellAbilityScore]?.mod
             };
 
-            if (classInfo.isCaster) anyCasterClass = true;
-
-            if (anyCasterClass) {
+            if (classInfo.isCaster) {
                 casterData.classes.push({
                     classItemId: cls.id,
                     name: cls.name,
@@ -72,15 +68,13 @@ export default function(engine) {
         }
 
         // Pre-calculate close, medium and long spell ranges for use in item prep.
-        if (anyCasterClass) {
-            const cl = data.details.cl.value;
+        const cl = data.details.cl.value || 0;
 
-            casterData.range = {
-                close: 25 + 5 * Math.floor(cl / 2),
-                medium: 100 + 10 * cl,
-                long: 400 + 40 * cl
-            };
-        }
+        casterData.range = {
+            close: 25 + 5 * Math.floor(cl / 2),
+            medium: 100 + 10 * cl,
+            long: 400 + 40 * cl
+        };
 
         data.spells = mergeObject(data.spells, casterData);
 

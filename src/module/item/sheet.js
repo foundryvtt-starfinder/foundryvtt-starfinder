@@ -108,7 +108,8 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.hasLevel = data.itemData.hasOwnProperty("level") && data.item.type !== "spell";
         data.hasHands = data.itemData.hasOwnProperty("hands");
         data.hasProficiency = data.itemData.proficient === true || data.itemData.proficient === false;
-        data.isFeat = this.type === "feat";
+        data.isFeat = data.item.type === "feat";
+        data.isActorResource = data.item.type === "actorResource";
         data.isVehicleAttack = data.item.type === "vehicleAttack";
         data.isVehicleSystem = data.item.type === "vehicleSystem";
         data.isGM = game.user.isGM;
@@ -177,16 +178,26 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.hasAttackRoll = this.item.hasAttack;
         data.isHealing = data.item.actionType === "heal";
 
-        // Activation Details to hide/show specific elements
+        // Determine whether to show calculated totals for fields with formulas
         data.range = {};
-        data.range.hasInput = (() => {
-            if (!("range" in itemData)) return;
 
-            // C/M/L on spells requires no input
-            if (this.item.type === "spell") return !(["close", "medium", "long", "none", "personal", "touch", "planetary", "system", "plane", "unlimited"].includes(itemData.range.units));
-            // These ranges require no input
-            else return !(["none", "personal", "touch", "planetary", "system", "plane", "unlimited"].includes(itemData.range.units));
-        })();
+        if (data.isActorResource && itemData.stage === "late") {
+            data.range.showMinTotal = String(itemData.range.totalMin) !== String(itemData.range.min);
+            data.range.showMaxTotal = String(itemData.range.totalMax) !== String(itemData.range.max);
+        } else {
+            data.range.hasInput = (() => {
+                if (!("range" in itemData)) return;
+
+                // C/M/L on spells requires no input
+                if (this.item.type === "spell") return !(["close", "medium", "long", "none", "personal", "touch", "planetary", "system", "plane", "unlimited"].includes(itemData.range.units));
+                // These ranges require no input
+                else return !(["none", "personal", "touch", "planetary", "system", "plane", "unlimited"].includes(itemData.range.units));
+            })();
+            data.range.showTotal = String(itemData.range?.total) !== String(itemData.range?.value);
+
+            data.area = {};
+            data.area.showTotal = String(itemData.area?.total) !== String(itemData.area?.value);
+        }
 
         // Vehicle Attacks
         if (data.isVehicleAttack) {
