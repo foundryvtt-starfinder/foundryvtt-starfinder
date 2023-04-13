@@ -1135,7 +1135,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     }
 
     levelUp(actorClassId) {
-        const targetClass = this.items.find(item => item.type === "class" && item._id === actorClassId);
+        const targetClass = this.items.get(actorClassId);
         if (targetClass) {
             targetClass.update({["system.levels"]: targetClass.system.levels + 1});
         }
