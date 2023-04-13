@@ -6,7 +6,8 @@ const dataPaths = [
     "../../src/items/racial-features",
     "../../src/items/archetype-features",
     "../../src/items/universal-creature-rules",
-    "../../src/items/spells"
+    "../../src/items/spells",
+    "../../src/items/equipment"
 ];
 
 // Migrate features and spells to use calculated values for range, area and duration
