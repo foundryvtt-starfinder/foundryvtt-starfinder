@@ -402,7 +402,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             if (data.target.value) props.push(
                 { title: game.i18n.localize("SFRPG.Items.Activation.Target"), name: labels.target, tooltip: null }
             );
-            if (data.range.value || data.range.total) {
+            if ((data.range.value || data.range.total) && data.range.units !== "none") {
                 const rangeTooltip = ["close", "medium", "long"].includes(data.range.units)
                     ? game.i18n.format(`SFRPG.Range${data.range.units.capitalize()}`)
                     : null;

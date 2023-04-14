@@ -405,9 +405,9 @@ export class ItemSheetSFRPG extends ItemSheet {
             props.push(
                 {title: game.i18n.localize("SFRPG.Items.Activation.Activation"), name: labels.activation, tooltip: null},
                 {title: game.i18n.localize("SFRPG.Items.Activation.Target"), name: labels.target, tooltip: null},
-                {title: game.i18n.localize("SFRPG.Items.Activation.Range"), name: labels.range, tooltip: rangeTooltip},
-                {title: game.i18n.localize("SFRPG.Items.Activation.Area"), name: labels.area, tooltip: null},
-                {title: game.i18n.localize("SFRPG.Items.Activation.Duration"), name: labels.duration, tooltip: null}
+                itemData.range.value && itemData.range.units !== "none" ? {title: game.i18n.localize("SFRPG.Items.Activation.Range"), name: labels.range, tooltip: rangeTooltip} : null,
+                itemData.area.value ? {title: game.i18n.localize("SFRPG.Items.Activation.Area"), name: labels.area, tooltip: null} : null,
+                itemData.duration.value ? {title: game.i18n.localize("SFRPG.Items.Activation.Duration"), name: labels.duration, tooltip: null} : null
             );
         }
         return props.filter(p => !!p && !!p.name);

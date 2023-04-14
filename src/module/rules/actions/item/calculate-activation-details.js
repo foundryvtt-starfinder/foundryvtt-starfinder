@@ -87,18 +87,20 @@ export default function(engine) {
                 const area = data.area;
                 if (area.value === 0) area.value = null;
 
-                if (area.units !== "text") {
-                    area.total = calculateWithContext(area.value);
+                if (area.value) {
+                    if (area.units !== "text") {
+                        area.total = calculateWithContext(area.value);
 
-                    item.labels.area = [
-                        area.total || area.value,
-                        C.distanceUnits[area.units] || null,
-                        C.spellAreaShapes[area.shape],
-                        C.spellAreaEffects[area.effect],
-                        area.shapable ? "(S)" : ""
-                    ].filterJoin(" ");
-                } else {
-                    item.labels.area = String(area.value || "")?.trim();
+                        item.labels.area = [
+                            area.total || area.value,
+                            C.distanceUnits[area.units] || null,
+                            C.spellAreaShapes[area.shape],
+                            C.spellAreaEffects[area.effect],
+                            area.shapable ? "(S)" : ""
+                        ].filterJoin(" ");
+                    } else {
+                        item.labels.area = String(area.value || "")?.trim();
+                    }
                 }
 
             }
