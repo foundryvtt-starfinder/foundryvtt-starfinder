@@ -8,19 +8,18 @@ export default function(engine) {
         const data = itemData.system;
 
         const actor = fact.owner.actor;
-        if (!actor) return fact;
         const actorData = fact.owner.actorData;
         const C = CONFIG.SFRPG;
 
         // Create a roll context for this item to be used in all calculations
-        const rollContext = RollContext.createItemRollContext(item, actor);
+        const rollContext = RollContext.createItemRollContext(item, actor || null);
 
         /**
          * Use the item's roll context and calculate a given formula with it.
          * @param {import("../../../rolls/rollcontext.js").FormulaKey | Number} formula
          * @returns {number} The calculated value
          */
-        const calculateWithContext = formula => {
+        const calculateWithContext = (formula) => {
             const stringFormula = String(formula || 0);
             let total = DiceSFRPG.resolveFormulaWithoutDice(stringFormula, rollContext, { logErrors: false }).total;
 
@@ -39,23 +38,28 @@ export default function(engine) {
              * Range
              */
             {
+
                 const rangeType = data.range.units;
 
                 if (["close", "medium", "long"].includes(rangeType)) {
                     let rangeValue = 0;
                     // Close/medium/long ranges for spells are calculated during actor prep
                     if (item.type === "spell") {
-                        rangeValue = actorData.spells.range[rangeType];
+                        rangeValue = actor ? actorData?.spells?.range[rangeType] : null;
                         // Since we have no way of telling which level a feature will scale off, c/m/l on features still require a formula
                     } else {
                         rangeValue = calculateWithContext(data.range.value);
                     }
 
                     data.range.total = rangeValue;
-                    item.labels.range = game.i18n.format("SFRPG.RangeCalculated", {
-                        rangeType: C.distanceUnits[rangeType],
-                        total: rangeValue.toLocaleString(game.i18n.lang)
-                    });
+                    if (rangeValue) {
+                        item.labels.range = game.i18n.format("SFRPG.RangeCalculated", {
+                            rangeType: C.distanceUnits[rangeType],
+                            total: rangeValue.toLocaleString(game.i18n.lang)
+                        });
+                    } else {
+                        item.labels.range = game.i18n.format(`SFRPG.Range${rangeType.capitalize()}`);
+                    }
 
                 } else if (["none", "personal", "touch", "planetary", "system", "plane", "unlimited"].includes(rangeType)) {
                     item.labels.range = C.distanceUnits[rangeType];
@@ -64,7 +68,7 @@ export default function(engine) {
                     const rangeValue = calculateWithContext(data.range.value) || "";
                     data.range.total = rangeValue;
                     item.labels.range = [
-                        rangeValue?.toLocaleString(game.i18n.lang),
+                        rangeValue?.toLocaleString(game.i18n.lang) || data.range.value,
                         C.distanceUnits[rangeType]
                     ].filterJoin(" ");
                 }

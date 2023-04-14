@@ -70,7 +70,7 @@
 
 {{!-- Ability Range --}}
 <div class="form-group input-select">
-    <label>{{ localize "SFRPG.Items.Activation.Range" }}</label>
+    <label>{{#if (eq this.data.type "weapon")}}{{ localize "SFRPG.Items.Activation.RangeIncrement" }}{{else}}{{ localize "SFRPG.Items.Activation.Range" }}{{/if}}</label>
     <div class="form-fields">
         {{#if this.range.showTotal}}<p class="calculated-total"><strong>{{itemData.range.total}}</strong></p>{{/if}}
         {{#if this.range.hasInput}}
@@ -112,7 +112,7 @@
         <input type="text" name="system.uses.value" value="{{itemData.uses.value}}" data-dtype="Number"/>
         <span class="sep"> of </span>
         <input type="text" name="system.uses.max" value="{{itemData.uses.max}}" data-dtype="String"/>
-        {{#if itemData.uses.total}}<p class="calculated-total"><strong>{{itemData.uses.total}}</strong></p>{{/if}}
+        {{#if this.uses.showTotal}}<p class="calculated-total"><strong>{{itemData.uses.total}}</strong></p>{{/if}}
         <select name="system.uses.per">
             {{#select itemData.uses.per}}
             <option value=""></option>

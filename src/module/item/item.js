@@ -402,9 +402,14 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             if (data.target.value) props.push(
                 { title: game.i18n.localize("SFRPG.Items.Activation.Target"), name: labels.target, tooltip: null }
             );
-            if (data.range.value || data.range.total) props.push(
-                { title: game.i18n.localize("SFRPG.Items.Activation.Range"), name: labels.range, tooltip: null }
-            );
+            if (data.range.value || data.range.total) {
+                const rangeTooltip = ["close", "medium", "long"].includes(data.range.units)
+                    ? game.i18n.format(`SFRPG.Range${data.range.units.capitalize()}`)
+                    : null;
+                props.push(
+                    { title: game.i18n.localize(`SFRPG.Items.Activation.Range${this.type === "weapon" ? "Increment" : ""}`), name: labels.range, tooltip: rangeTooltip }
+                );
+            }
             if (data.area.value || data.area.total) props.push(
                 { title: game.i18n.localize("SFRPG.Items.Activation.Area"), name: labels.area, tooltip: null }
             );

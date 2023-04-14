@@ -183,8 +183,6 @@ export class ItemSheetSFRPG extends ItemSheet {
             data.range = {};
 
             data.range.hasInput = (() => {
-                if (!data.actor || !("range" in itemData)) return false;
-
                 // C/M/L on spells requires no input
                 if (this.item.type === "spell") return !(["close", "medium", "long", "none", "personal", "touch", "planetary", "system", "plane", "unlimited"].includes(itemData.range.units));
                 // These ranges require no input
@@ -198,6 +196,9 @@ export class ItemSheetSFRPG extends ItemSheet {
             data.duration = {};
             data.duration.showTotal = !!itemData.duration?.total && (String(itemData.duration?.total) !== String(itemData.duration?.value));
             data.duration.hasInput = itemData.duration.units !== "instantaneous";
+
+            data.uses = {};
+            data.uses.showTotal = !!itemData.uses?.total && (String(itemData.uses?.total) !== String(itemData.uses?.max));
 
         }
 
@@ -306,8 +307,8 @@ export class ItemSheetSFRPG extends ItemSheet {
                 .map(e => ({
                     name: CONFIG.SFRPG.weaponProperties[e[0]],
                     tooltip: CONFIG.SFRPG.weaponPropertiesTooltips[e[0]]
-                })
-                )
+                })),
+            {title: game.i18n.localize("SFRPG.Items.Activation.RangeIncrement"), name: labels.range, tooltip: null}
             );
         } else if (item.type === "spell") {
             const desc = (Object.entries(itemData.descriptors)).filter(e => e[1] === true)
@@ -320,9 +321,9 @@ export class ItemSheetSFRPG extends ItemSheet {
             props.push(
                 {name: labels.components, tooltip: null},
                 {name: labels.materials, tooltip: null},
-                itemData.concentration ? {name: "Concentration", tooltip: null} : null,
-                itemData.sr ? {name: "Spell Resistence", tooltip: null} : null,
-                itemData.dismissible ? {name: "Dismissible", tooltip: null} : null,
+                itemData.concentration ? {name: game.i18n.localize("SFRPG.Items.Spell.Concentration"), tooltip: null} : null,
+                itemData.sr ? {name: game.i18n.localize("SFRPG.SpellResistance"), tooltip: null} : null,
+                itemData.dismissible ? {name: game.i18n.localize("SFRPG.Items.Spell.Dismissible"), tooltip: null} : null,
                 ...desc
             );
         } else if (item.type === "equipment") {
@@ -398,12 +399,15 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         // Action usage
         if ((item.type !== "weapon") && itemData.activation && !foundry.utils.isEmpty(itemData.activation)) {
+            const rangeTooltip = ["close", "medium", "long"].includes(itemData?.range?.units)
+                ? game.i18n.format(`SFRPG.Range${itemData?.range?.units?.capitalize()}`)
+                : null;
             props.push(
-                {name: labels.activation, tooltip: null},
-                {name: labels.target, tooltip: null},
-                {name: labels.range, tooltip: null},
-                {name: labels.area, tooltip: null},
-                {name: labels.duration, tooltip: null}
+                {title: game.i18n.localize("SFRPG.Items.Activation.Activation"), name: labels.activation, tooltip: null},
+                {title: game.i18n.localize("SFRPG.Items.Activation.Target"), name: labels.target, tooltip: null},
+                {title: game.i18n.localize("SFRPG.Items.Activation.Range"), name: labels.range, tooltip: rangeTooltip},
+                {title: game.i18n.localize("SFRPG.Items.Activation.Area"), name: labels.area, tooltip: null},
+                {title: game.i18n.localize("SFRPG.Items.Activation.Duration"), name: labels.duration, tooltip: null}
             );
         }
         return props.filter(p => !!p && !!p.name);

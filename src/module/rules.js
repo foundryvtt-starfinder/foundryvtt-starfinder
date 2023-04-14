@@ -75,7 +75,6 @@ import calculateNpc2ArmorClass from './rules/actions/actor/npc2/calculate-npc2-a
 import calculateNpc2Initiative from './rules/actions/actor/npc2/calculate-npc2-initiative.js';
 import calculateNpc2BaseSaves from './rules/actions/actor/npc2/calculate-npc2-saves.js';
 import calculateNpc2BaseSkills from './rules/actions/actor/npc2/calculate-npc2-skills.js';
-import calculateNpc2SpellRanges from './rules/actions/actor/npc2/calculate-npc2-spell-ranges.js';
 // Starship rules
 import calculateStarshipAblative from './rules/actions/actor/starship/calculate-starship-ablative.js';
 import calculateStarshipArmorClass from './rules/actions/actor/starship/calculate-starship-ac.js';
@@ -163,7 +162,6 @@ export default function(engine) {
     calculateNpc2BaseSaves(engine);
     calculateNpc2Initiative(engine);
     calculateNpc2BaseSkills(engine);
-    calculateNpc2SpellRanges(engine);
     // Starship actions
     calculateStarshipArmorClass(engine);
     calculateStarshipCrew(engine);
@@ -312,7 +310,6 @@ export default function(engine) {
                     "calculateNPC2Initiative",
                     "calculateNPC2BaseSaves",
                     "calculateNPC2BaseSkills",
-                    "calculateNPC2SpellRanges",
                     { closure: "calculateAbilityCheckModifiers", stackModifiers: "stackModifiers"},
                     { closure: "calculateArmorModifiers", stackModifiers: "stackModifiers" },
                     {closure: "calculateInitiativeModifiers", stackModifiers: "stackModifiers" },
