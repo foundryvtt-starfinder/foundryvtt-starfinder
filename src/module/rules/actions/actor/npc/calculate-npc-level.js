@@ -3,6 +3,7 @@ export default function(engine) {
         const data = fact.data;
 
         data.details.level = { value: data.details.cr };
+        data.details.cl = { value: data.details.cr };
 
         return fact;
     });
