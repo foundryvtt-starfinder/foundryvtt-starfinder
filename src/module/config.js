@@ -340,10 +340,10 @@ SFRPG.distanceUnits = {
  * @type {Object}
  */
 SFRPG.effectDurationTypes = {
-    "rounds": "SFRPG.EffectDurationTypesRounds",
-    "minutes": "SFRPG.EffectDurationTypesMinutes",
-    "hours": "SFRPG.EffectDurationTypesHours",
-    "days": "SFRPG.EffectDurationTypesDays"
+    "round": "SFRPG.EffectDurationTypesRounds",
+    "minute": "SFRPG.EffectDurationTypesMinutes",
+    "hour": "SFRPG.EffectDurationTypesHours",
+    "day": "SFRPG.EffectDurationTypesDays"
 };
 
 /**

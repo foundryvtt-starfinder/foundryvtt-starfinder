@@ -179,7 +179,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.isHealing = data.item.actionType === "heal";
 
         // Determine whether to show calculated totals for fields with formulas
-        if (data?.activation?.type) {
+        if (itemData?.activation?.type) {
             data.range = {};
 
             data.range.hasInput = (() => {

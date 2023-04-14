@@ -96,10 +96,10 @@
         {{/if}}
         <select name="system.duration.units">
             {{#select itemData.duration.units}}
+            <option value="text">{{localize "SFRPG.Text"}}</option>
             {{#each config.durationTypes as |unit key|}}
             <option value="{{key}}">{{unit}}</option>
             {{/each}}
-            <option value="text">{{localize "SFRPG.Text"}}</option>
             {{/select}}
         </select>
     </div>
