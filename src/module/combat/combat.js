@@ -706,26 +706,28 @@ export class CombatSFRPG extends Combat {
         const timedEffects = game.sfrpg.timedEffects;
         for (let effectI = 0; effectI < timedEffects.length; effectI++) {
             const effect = timedEffects[effectI];
-            const effectFinish = effect.activeDuration.activationTime + (effect.activeDuration.value * SFRPG.effectDurationFrom[effect.activeDuration.unit]);
-            const worldTime = game.time.worldTime;
-            const targetActorId = effect.sourceActorId || effect.actorId;
-            if (((effectFinish <= worldTime) && effect.enabled) || (effect.activeDuration.activationTime >= 0 && (effectFinish >= worldTime) && !effect.enabled)) {
-                if (!eventData.combat.combatants.find(combatant => combatant.actorId === targetActorId)) {
-                    effect.toggle(false);
-                    continue;
-                }
-                switch (effect.activeDuration.endsOn) {
-                    case 'onTurnEnd':
-                        if (eventData.isNewTurn && (eventData.oldCombatant.actorId === targetActorId)) {
-                            effect.toggle(false);
-                        }
-                        break;
-                    case 'onTurnStart':
-                    default:
-                        if (eventData.isNewTurn && (eventData.newCombatant.actorId === targetActorId)) {
-                            effect.toggle(false);
-                        }
-                        break;
+            if (effect.activeDuration.unit !== 'permanent') {
+                const effectFinish = effect.activeDuration.activationTime + (effect.activeDuration.value * SFRPG.effectDurationFrom[effect.activeDuration.unit]);
+                const worldTime = game.time.worldTime;
+                const targetActorId = effect.sourceActorId || effect.actorId;
+                if (((effectFinish <= worldTime) && effect.enabled) || (effect.activeDuration.activationTime >= 0 && (effectFinish >= worldTime) && !effect.enabled)) {
+                    if (!eventData.combat.combatants.find(combatant => combatant.actorId === targetActorId)) {
+                        effect.toggle(false);
+                        continue;
+                    }
+                    switch (effect.activeDuration.endsOn) {
+                        case 'onTurnEnd':
+                            if (eventData.isNewTurn && (eventData.oldCombatant.actorId === targetActorId)) {
+                                effect.toggle(false);
+                            }
+                            break;
+                        case 'onTurnStart':
+                        default:
+                            if (eventData.isNewTurn && (eventData.newCombatant.actorId === targetActorId)) {
+                                effect.toggle(false);
+                            }
+                            break;
+                    }
                 }
             }
         }

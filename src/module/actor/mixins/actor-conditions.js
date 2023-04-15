@@ -50,7 +50,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
      * @private
      */
     _isCondition(item) {
-        return item.type === "feat" && item.system.requirements?.toLowerCase() === "condition";
+        return item.type === "effect" && item.system.requirements?.toLowerCase() === "condition";
     }
 
     _isStatusEffect(name) {
@@ -109,6 +109,9 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
             }
         } else {
             if (conditionItem) {
+                const effect = this.system.timedEffects.find(effect => effect.itemId === conditionItem.id);
+                effect.delete();
+
                 const promise = this.deleteEmbeddedDocuments("Item", [conditionItem.id]);
                 promise.then(() => {
                     this._updateActorCondition(conditionName, false).then(() => {

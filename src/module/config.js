@@ -151,7 +151,8 @@ SFRPG.effectDurationTypes = {
     "rounds": "SFRPG.EffectDurationTypesRounds",
     "minutes": "SFRPG.EffectDurationTypesMinutes",
     "hours": "SFRPG.EffectDurationTypesHours",
-    "Days": "SFRPG.EffectDurationTypesDays"
+    "days": "SFRPG.EffectDurationTypesDays",
+    "permanent": "SFRPG.EffectDurationTypesPermanent"
 };
 
 SFRPG.effectEndTypes = {
@@ -163,7 +164,7 @@ SFRPG.effectDurationFrom = {
     "rounds": 6,
     "minutes": 60,
     "hours": 3600,
-    "Days": 86400
+    "days": 86400
 };
 
 SFRPG.skillProficiencyLevels = {

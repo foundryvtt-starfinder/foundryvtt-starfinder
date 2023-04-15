@@ -76,7 +76,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             races,
             themes,
             archetypes,
-            conditionItems,
+            conditionItems, // contains Conditions and other timedEffects
             asis,
             actorResources] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
@@ -107,16 +107,12 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
                 } else {
                     arr[0].push(item); // items
                 }
-            } else if (item.type === "feat" || item.type === "effect") {
-                if (item.type === "effect") {
-                    const timedEffect = duplicate(actorData.timedEffects.find(effect => effect.itemId === item.id) || {});
-                    item.timedEffect = timedEffect?.id;
-                    arr[7].push(item); // conditionItems
-                } else if ((item.system.requirements?.toLowerCase() || "") === "condition") {
-                    arr[7].push(item); // conditionItems
-                } else {
-                    arr[2].push(item); // feats
-                }
+            } else if (item.type === "effect") {
+                const timedEffect = duplicate(actorData.timedEffects.find(effect => effect.itemId === item.id) || {});
+                item.timedEffect = timedEffect?.id;
+                arr[7].push(item); // timedEffects & conditionItems
+            } else if (item.type === "feat") {
+                arr[2].push(item); // feats
                 item.isFeat = true;
             } else if (item.type === "class") arr[3].push(item); // classes
             else if (item.type === "race") arr[4].push(item); // races

@@ -10,10 +10,10 @@
         <div class="form-group stacked conditions">
             {{#each ../config.conditionTypes as |condition name|}}
             <label class="checkbox" data-tippy-content="{{lookup (lookup ../../config.conditions name) "tooltip"}}">
-                <input type="checkbox" 
-                       class="condition {{name}}" 
-                       data-condition="{{name}}" 
-                       name="system.conditions.{{name}}" 
+                <input type="checkbox"
+                       class="condition {{name}}"
+                       data-condition="{{name}}"
+                       name="system.conditions.{{name}}"
                        {{checked (lookup ../../system.conditions name)}} /> {{condition}}
             </label>
             {{/each}}
@@ -22,7 +22,18 @@
         <ol class="inventory-list">
             <li class="inventory-header flexrow">
                 <h3 class="item-name noborder flexrow">Conditions</h3>
-        
+            </li>
+            <ol class="item-list">
+            {{#each section.items as |item iid|}}
+                {{#if (eq item.system.type "condition")}}
+                    {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.hbs" ../../this bigItem=true item=item onlyControls=true}}
+                {{/if}}
+            {{/each}}
+            </ol>
+        </ol>
+        <ol class="inventory-list">
+            <li class="inventory-header flexrow">
+                <h3 class="item-name noborder flexrow">Effects</h3>
                 {{#if ../isOwner}}
                 <div class="item-controls">
                     {{#if section.allowAdd}}
@@ -33,10 +44,11 @@
                 </div>
                 {{/if}}
             </li>
-        
             <ol class="item-list">
             {{#each section.items as |item iid|}}
-                {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.hbs" ../../this bigItem=true item=item onlyControls=true}}
+                {{#if (ne item.system.type "condition")}}
+                    {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.hbs" ../../this bigItem=true item=item onlyControls=true}}
+                {{/if}}
             {{/each}}
             </ol>
         </ol>

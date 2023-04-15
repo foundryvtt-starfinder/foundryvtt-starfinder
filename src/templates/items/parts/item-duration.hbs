@@ -4,10 +4,10 @@
         <input type="text" name="system.activeDuration.value" value="{{itemData.activeDuration.value}}" data-dtype="Number" placeholder="-"/>
         <select name="system.activeDuration.unit">
             {{#select itemData.activeDuration.unit}}
-            <option value=""></option>
-            {{#each config.effectDurationTypes as |name key|}}
-            <option value="{{key}}">{{localize name}}</option>
-            {{/each}}
+                <option value=""></option>
+                {{#each config.effectDurationTypes as |name key|}}
+                    <option value="{{key}}">{{localize name}}</option>
+                {{/each}}
             {{/select}}
         </select>
     </div>
@@ -18,10 +18,10 @@
         <input type="text" name="system.sourceActorId" value="{{itemData.sourceActorId}}" data-dtype="String" placeholder="{{actor.id}}"/>
         <select name="system.activeDuration.endsOn">
             {{#select itemData.activeDuration.endsOn}}
-            <option value=""></option>
-            {{#each config.effectEndTypes as |name key|}}
-            <option value="{{key}}">{{localize name}}</option>
-            {{/each}}
+                <option value=""></option>
+                {{#each config.effectEndTypes as |name key|}}
+                    <option value="{{key}}">{{localize name}}</option>
+                {{/each}}
             {{/select}}
         </select>
     </div>

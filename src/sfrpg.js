@@ -812,10 +812,12 @@ Hooks.on("updateWorldTime", (worldTime, dt, options, userId) => {
     const timedEffects = game.sfrpg.timedEffects;
     for (let effectI = 0; effectI < timedEffects.length; effectI++) {
         const effect = timedEffects[effectI];
-        const effectFinish = effect.activeDuration.activationTime + (effect.activeDuration.value * SFRPG.effectDurationFrom[effect.activeDuration.unit]);
-        // handling effects while in combat is handled in combat.js
-        if (!game.combat && (((effectFinish <= worldTime) && effect.enabled) || (dt < 0 && (effectFinish >= worldTime) && !effect.enabled))) {
-            effect.toggle(false);
+        if (effect.activeDuration.unit !== 'permanent') {
+            const effectFinish = effect.activeDuration.activationTime + (effect.activeDuration.value * SFRPG.effectDurationFrom[effect.activeDuration.unit]);
+            // handling effects while in combat is handled in combat.js
+            if (!game.combat && (((effectFinish <= worldTime) && effect.enabled) || (dt < 0 && (effectFinish >= worldTime) && !effect.enabled))) {
+                effect.toggle(false);
+            }
         }
     }
 });
