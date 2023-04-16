@@ -34,12 +34,12 @@ import calculateInitiativeModifiers from './rules/actions/actor/calculate-initia
 import calculateMovementSpeeds from './rules/actions/actor/calculate-movement-speeds.js';
 import calculateSaveModifiers from './rules/actions/actor/calculate-save-modifiers.js';
 import calculateSkillModifiers from './rules/actions/actor/calculate-skill-modifiers.js';
+import calculateTimedEffects from "./rules/actions/actor/calculate-timed-effects.js";
 import clearTooltips from './rules/actions/actor/clear-tooltips.js';
 import logToConsole from './rules/actions/log.js';
 import stackModifiers from './rules/actions/modifiers/stack-modifiers.js';
 import isActorType from './rules/conditions/is-actor-type.js';
 import isModifierType from './rules/conditions/is-modifier-type.js';
-import calculateTimedEffects from "./rules/actions/actor/calculate-timed-effects.js";
 // Character rules
 import calculateBaseAttackBonus from './rules/actions/actor/character/calculate-bab.js';
 import calculateBaseArmorClass from './rules/actions/actor/character/calculate-base-armor-class.js';
@@ -52,7 +52,7 @@ import calculateMagicalItemCount from './rules/actions/actor/character/calculate
 import calculateResolve from './rules/actions/actor/character/calculate-resolve.js';
 import calculateSkillArmorCheckPenalty from './rules/actions/actor/character/calculate-skill-armor-check-penalty.js';
 import calculateSkillpoints from './rules/actions/actor/character/calculate-skillpoints.js';
-import calculateSpellsPerDay from './rules/actions/actor/character/calculate-spellsPerDay.js';
+import calculateSpells from './rules/actions/actor/character/calculate-spells.js';
 import calculateStamina from './rules/actions/actor/character/calculate-stamina.js';
 import calculateTraits from './rules/actions/actor/character/calculate-traits.js';
 import calculatePlayerXp from './rules/actions/actor/character/calculate-xp.js';
@@ -95,6 +95,7 @@ import calculateVehicleControlSkill from './rules/actions/actor/vehicle/calculat
 import calculateVehicleHangar from './rules/actions/actor/vehicle/calculate-vehicle-hangar.js';
 import calculateVehiclePassengers from './rules/actions/actor/vehicle/calculate-vehicle-passengers.js';
 // Item rules
+import calculateActivationDetails from './rules/actions/item/calculate-activation-details.js';
 import calculateSaveDC from './rules/actions/item/calculate-save-dc.js';
 import calculateSkillDC from './rules/actions/item/calculate-skill-dc.js';
 
@@ -139,7 +140,7 @@ export default function(engine) {
     calculateMagicalItemCount(engine);
     calculateResolve(engine);
     calculateSkillpoints(engine);
-    calculateSpellsPerDay(engine);
+    calculateSpells(engine);
     calculateStamina(engine);
     calculateTraits(engine);
     calculatePlayerXp(engine);
@@ -184,6 +185,7 @@ export default function(engine) {
     // Item actions
     calculateSaveDC(engine);
     calculateSkillDC(engine);
+    calculateActivationDetails(engine);
 
     // Conditions
     always(engine);
@@ -239,7 +241,7 @@ export default function(engine) {
                     "calculateBulkAndWealth",
                     { closure: "calculateEncumbrance", stackModifiers: "stackModifiers" },
                     { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" },
-                    "calculateSpellsPerDay",
+                    "calculateSpells",
                     { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" },
                     "calculateDamageMitigation",
                     "calculateMagicalItemCount"
@@ -362,7 +364,8 @@ export default function(engine) {
         rules: [
             "calculateSaveDC",
             "calculateTimedEffects",
-            "calculateSkillDC"
+            "calculateSkillDC",
+            "calculateActivationDetails"
         ]
     });
 

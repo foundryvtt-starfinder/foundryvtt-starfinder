@@ -287,6 +287,10 @@ Hooks.once("i18nInit", () => {
         "damageTypeOperators",
         "damageTypes",
         "distanceUnits",
+        "constantDistanceUnits",
+        "variableDistanceUnits",
+        "durationTypes",
+        "effectDurationTypes",
         "descriptors",
         "descriptorsTooltips",
         "energyDamageTypes",
@@ -595,9 +599,14 @@ function setupHandlebars() {
     Handlebars.registerHelper("length", function(value) {
         if (value instanceof Array) {
             return value.length;
+        } else if (typeof value === "string") {
+            return value.length;
+        } else if (typeof value === "number") {
+            return String(value).length;
         } else if (value instanceof Object) {
             return Object.entries(value).length;
         }
+
         return 0;
     });
 

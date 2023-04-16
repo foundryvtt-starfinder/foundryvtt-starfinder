@@ -143,30 +143,6 @@ SFRPG.abilityActivationTypes = {
     "special": "SFRPG.AbilityActivationTypesSpecial"
 };
 
-/**
- * possible effect duration types
- * @type {Object}
- */
-SFRPG.effectDurationTypes = {
-    "rounds": "SFRPG.EffectDurationTypesRounds",
-    "minutes": "SFRPG.EffectDurationTypesMinutes",
-    "hours": "SFRPG.EffectDurationTypesHours",
-    "days": "SFRPG.EffectDurationTypesDays",
-    "permanent": "SFRPG.EffectDurationTypesPermanent"
-};
-
-SFRPG.effectEndTypes = {
-    "onTurnStart": "SFRPG.EffectEndTypesOnTurnStart",
-    "onTurnEnd": "SFRPG.EffectEndTypesOnTurnEnd"
-};
-
-SFRPG.effectDurationFrom = {
-    "rounds": 6,
-    "minutes": 60,
-    "hours": 3600,
-    "days": 86400
-};
-
 SFRPG.skillProficiencyLevels = {
     0: "",
     3: "SFRPG.SkillProficiencyLevelClassSkill"
@@ -333,7 +309,7 @@ SFRPG.ammunitionTypes = {
     "thasteronPellets": "SFRPG.Items.Ammunition.Type.ThasteronPellets"
 };
 
-SFRPG.distanceUnits = {
+SFRPG.constantDistanceUnits = {
     "none": "SFRPG.None",
     "personal": "SFRPG.Personal",
     "touch": "SFRPG.Touch",
@@ -343,12 +319,53 @@ SFRPG.distanceUnits = {
     "planetary": "SFRPG.Planetary",
     "system": "SFRPG.SystemWide",
     "plane": "SFRPG.Plane",
-    "unlimited": "SFRPG.Unlimited",
+    "unlimited": "SFRPG.Unlimited"
+};
+
+SFRPG.variableDistanceUnits = {
     "ft": "SFRPG.Ft",
     "meter": "SFRPG.Meter",
     "mi": "SFRPG.Mi",
     "spec": "SFRPG.Special",
     "any": "SFRPG.DistAny"
+};
+
+SFRPG.distanceUnits = {
+    ...SFRPG.constantDistanceUnits,
+    ...SFRPG.variableDistanceUnits
+};
+
+/**
+ * Durations for effects by definition must be non-zero.
+ * @type {Object}
+ */
+SFRPG.effectDurationTypes = {
+    "round": "SFRPG.EffectDurationTypesRounds",
+    "minute": "SFRPG.EffectDurationTypesMinutes",
+    "hour": "SFRPG.EffectDurationTypesHours",
+    "day": "SFRPG.EffectDurationTypesDays",
+    "permanent": "SFRPG.EffectDurationTypesPermanent"
+};
+
+SFRPG.effectEndTypes = {
+    "onTurnStart": "SFRPG.EffectEndTypesOnTurnStart",
+    "onTurnEnd": "SFRPG.EffectEndTypesOnTurnEnd"
+};
+
+SFRPG.effectDurationFrom = {
+    "round": 6,
+    "minute": 60,
+    "hour": 3600,
+    "day": 86400
+};
+
+/**
+ * Durations for features/spells however can be.
+ * @type {Object}
+ */
+SFRPG.durationTypes = {
+    "instantaneous": "SFRPG.DurationTypesInstantaneous",
+    ...SFRPG.effectDurationTypes
 };
 
 SFRPG.targetTypes = {};
@@ -471,6 +488,7 @@ SFRPG.weaponProperties = {
     "gravitation": "SFRPG.WeaponPropertiesGravitation",
     "guided": "SFRPG.WeaponPropertiesGuided",
     "harrying": "SFRPG.WeaponPropertiesHarrying",
+    "healing": "SFRPG.WeaponPropertiesHealing",
     "holyWater": "SFRPG.WeaponPropertiesHolyWater",
     "hybrid": "SFRPG.WeaponPropertiesHybrid",
     "hydrodynamic": "SFRPG.WeaponPropertiesHydrodynamic",
@@ -566,6 +584,7 @@ SFRPG.weaponPropertiesTooltips = {
     "gravitation": "SFRPG.WeaponPropertiesGravitationTooltip",
     "guided": "SFRPG.WeaponPropertiesGuidedTooltip",
     "harrying": "SFRPG.WeaponPropertiesHarryingTooltip",
+    "healing": "SFRPG.WeaponPropertiesHealingTooltip",
     "holyWater": "SFRPG.WeaponPropertiesHolyWaterTooltip",
     "hybrid": "SFRPG.WeaponPropertiesHybridTooltip",
     "hydrodynamic": "SFRPG.WeaponPropertiesHydrodynamicTooltip",
@@ -658,11 +677,11 @@ SFRPG.energyResistanceTypes = {
 
 SFRPG.spellAreaShapes = {
     "": "",
+    "sphere": "SFRPG.SpellAreaShapesSphere",
     "cone": "SFRPG.SpellAreaShapesCone",
+    "cube": "SFRPG.SpellAreaShapesCube",
     "cylinder": "SFRPG.SpellAreaShapesCylinder",
     "line": "SFRPG.SpellAreaShapesLine",
-    "sphere": "SFRPG.SpellAreaShapesSphere",
-    "shapable": "SFRPG.SpellAreaShapesShapable",
     "other": "SFRPG.SpellAreaShapesOther"
 };
 
@@ -738,6 +757,22 @@ SFRPG.featTypes = {
     "combat" : "SFRPG.FeatTypes.Combat"
 };
 
+/**
+ * @typedef  {Object} FeatureCategory
+ * @property {String} category A localisation key, used for the plural form of the category (For use on sheet headers)
+ * @property {String} label A localisation key, used for the singular form of the category (For use on sheets themselves)
+ * @property {ItemSFRPG[]} items During sheet rendering, items are sorted into the items arrays in each category. To be empty during declaration
+ * @property {Boolean} hasActions Whether to show a "+ Add" button for the category on sheets
+ * @property {Dataset} dataset Data to be added as `data-`objects in the HTML. Extra fields will be added to the created item's data.
+ */
+/**
+ * @typedef  {Object} Dataset
+ * @property {"feat"} type The type of item to create. Features are type "feat", so there is no need to create anything else.
+ * @property {String} "*" A data path and a value to be added to the created item.
+ */
+/**
+ * @type {Object.<string, FeatureCategory>}
+ */
 SFRPG.featureCategories = {
     "feat": {
         category: "SFRPG.ActorSheet.Features.Categories.Feats",
@@ -758,7 +793,7 @@ SFRPG.featureCategories = {
         label: "SFRPG.FeatureCategory.SpeciesFeature",
         items: [],
         hasActions: false,
-        dataset: { type: "feat", category: "speciesFeature" }
+        dataset: { type: "feat", "category": "speciesFeature" }
     },
     "archetypeFeature": {
         category: "SFRPG.ActorSheet.Features.Categories.ArchetypeFeatures",
@@ -905,38 +940,117 @@ SFRPG.conditionTypes = {
 };
 
 SFRPG.languages = {
+    "aballonian": "SFRPG.LanguagesAballonian",
     "abyssal": "SFRPG.LanguagesAbyssal",
+    "aglian": "SFRPG.LanguagesAglian",
+    "akan": "SFRPG.LanguagesAkan",
     "akiton": "SFRPG.LanguagesAkitonian",
     "aklo": "SFRPG.LanguagesAklo",
+    "alkainish": "SFRPG.LanguagesAlkainish",
+    "anassan": "SFRPG.LanguagesAnassan",
     "aquan": "SFRPG.LanguagesAquan",
     "arkanen": "SFRPG.LanguagesArkanen",
+    "ancientDaimalkan": "SFRPG.LanguagesAncientDaimalkan",
     "auran": "SFRPG.LanguagesAuran",
     "azlanti": "SFRPG.LanguagesAzlanti",
+    "bantridi": "SFRPG.LanguagesBantridi",
+    "barathu": "SFRPG.LanguagesBarathu",
+    "bolidan": "SFRPG.LanguagesBolidan",
+    "brenneri": "SFRPG.LanguagesBrenneri",
     "brethedan": "SFRPG.LanguagesBrethedan",
     "castrovelian": "SFRPG.LanguagesCastrovelian",
     "celestial": "SFRPG.LanguagesCelestial",
     "common": "SFRPG.LanguagesCommon",
+    "copaxi": "SFRPG.LanguagesCopaxi",
+    "cyrunian": "SFRPG.LanguagesCyrunian",
+    "daimalkan": "SFRPG.LanguagesDaimalkan",
+    "dirindi": "SFRPG.LanguagesDirindi",
     "draconic": "SFRPG.LanguagesDraconic",
+    "dromadan": "SFRPG.LanguagesDromadan",
     "drow": "SFRPG.LanguagesDrow",
     "dwarven": "SFRPG.LanguagesDwarven",
     "elven": "SFRPG.LanguagesElven",
+    "embri": "SFRPG.LanguagesEmbri",
+    "endiffian": "SFRPG.LanguagesEndiffian",
     "eoxian": "SFRPG.LanguagesEoxian",
+    "espraksi": "SFRPG.LanguagesEspraksi",
+    "ferran": "SFRPG.LanguagesFerran",
+    "firstSpeech": "SFRPG.LanguagesFirstSpeech",
+    "frujai": "SFRPG.LanguagesFrujai",
+    "garaggakal": "SFRPG.LanguagesGaraggakal",
+    "ghibran": "SFRPG.LanguagesGhibran",
+    "ghoran": "SFRPG.LanguagesGhoran",
+    "giant": "SFRPG.LanguagesGiant",
     "gnome": "SFRPG.LanguagesGnome",
     "goblin": "SFRPG.LanguagesGoblin",
+    "grioth": "SFRPG.LanguagesGrioth",
+    "gytchean": "SFRPG.LanguagesGytchean",
+    "hadrogaan": "SFRPG.LanguagesHadrogaan",
     "halfling": "SFRPG.LanguagesHalfling",
+    "hallas": "SFRPG.LanguagesHallas",
+    "hortaa": "SFRPG.LanguagesHortaa",
     "ignan": "SFRPG.LanguagesIgnan",
+    "ihonva": "SFRPG.LanguagesIhonva",
+    "iji": "SFRPG.LanguagesIji",
+    "ilthisarian": "SFRPG.LanguagesIlthisarian",
     "infernal": "SFRPG.LanguagesInfernal",
+    "ixtangi": "SFRPG.LanguagesIxtangi",
+    "izalguun": "SFRPG.LanguagesIzalguun",
+    "jinsul": "SFRPG.LanguagesJinsul",
     "kalo": "SFRPG.LanguagesKalo",
     "kasatha": "SFRPG.LanguagesKasatha",
-    "Nchaki": "SFRPG.LanguagesNchaki",
+    "katholbi": "SFRPG.LanguagesKatholbi",
+    "kiirinta": "SFRPG.LanguagesKiirinta",
+    "koshorian": "SFRPG.LanguagesKoshorian",
+    "kothama": "SFRPG.LanguagesKothama",
+    "lexonian": "SFRPG.LanguagesLexonian",
+    "lumos": "SFRPG.LanguagesLumos",
+    "maraquoi": "SFRPG.LanguagesMaraquoi",
+    "megalonic": "SFRPG.LanguagesMegalonic",
+    "migo": "SFRPG.LanguagesMi-Go",
+    "morlamaw": "SFRPG.LanguagesMorlamaw",
+    "mulkaxi": "SFRPG.LanguagesMulkaxi",
+    "nchaki": "SFRPG.LanguagesNchaki",
+    "noma": "SFRPG.LanguagesNoma",
+    "orbian": "SFRPG.LanguagesOrbian",
     "orc": "SFRPG.LanguagesOrc",
+    "orrian": "SFRPG.LanguagesOrrian",
+    "osharu": "SFRPG.LanguagesOsharu",
+    "pahtra": "SFRPG.LanguagesPahtra",
+    "paralithi": "SFRPG.LanguagesParalithi",
+    "perani": "SFRPG.LanguagesPerani",
+    "protean": "SFRPG.LanguagesProtean",
+    "quorlu": "SFRPG.LanguagesQuorlu",
+    "raxi": "SFRPG.LanguagesRaxi",
+    "reptoid": "SFRPG.LanguagesReptoid",
+    "requian": "SFRPG.LanguagesRequian",
     "sarcesian": "SFRPG.LanguagesSarcesian",
+    "sazaron": "SFRPG.LanguagesSazaron",
+    "scyphozoan": "SFRPG.LanguagesScyphozoan",
+    "selamidian": "SFRPG.LanguagesSelamidian",
+    "seprevoi": "SFRPG.LanguagesSeprevoi",
+    "shadowtongue": "SFRPG.LanguagesShadowtongue",
+    "shimreeni": "SFRPG.LanguagesShimreeni",
     "shirren": "SFRPG.LanguagesShirren",
     "shobhad": "SFRPG.LanguagesShobhad",
+    "sivvian": "SFRPG.LanguagesSivvian",
+    "spathinae": "SFRPG.LanguagesSpathinae",
+    "starsong": "SFRPG.LanguagesStarsong",
+    "stroxha": "SFRPG.LanguagesStroxha",
+    "sylvan": "SFRPG.LanguagesSylvan",
+    "telian": "SFRPG.LanguagesTelian",
     "terran": "SFRPG.LanguagesTerran",
     "triaxian": "SFRPG.LanguagesTriaxian",
+    "trinir": "SFRPG.LanguagesTrinir",
+    "urog": "SFRPG.LanguagesUrog",
+    "varratana": "SFRPG.LanguagesVarratana",
     "vercite": "SFRPG.LanguagesVercite",
     "vesk": "SFRPG.LanguagesVesk",
+    "vlakan": "SFRPG.LanguagesVlakan",
+    "vulgarKishaleen": "SFRPG.LanguagesVulgarKishaleen",
+    "woiokan": "SFRPG.LanguagesWoiokan",
+    "wrikreechee": "SFRPG.LanguagesWrikreechee",
+    "xaarb": "SFRPG.LanguagesXaarb",
     "ysoki": "SFRPG.LanguagesYsoki"
 };
 

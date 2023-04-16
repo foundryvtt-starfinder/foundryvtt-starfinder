@@ -11,7 +11,7 @@
             {{{system.description.value}}}
         {{/if}}
         {{#if system.materials.value}}
-        <p><strong>{{ localize "SFRPG.ChatReqMats" }}.</strong> {{system.materials.value}}</p>
+        <p><strong>{{ localize "SFRPG.Items.Spell.SpellcastingMaterials" }}:</strong> {{system.materials.value}}</p>
         {{/if}}
     </div>
 
@@ -25,7 +25,7 @@
 
     <footer class="card-footer">
         {{#each system.properties}}
-        <span {{#if this.tooltip}}data-tippy-content="{{this.tooltip}}{{/if}}">{{this.name}}</span>
+        <span data-tippy-content="{{#if this.tooltip}}{{this.tooltip}}{{else}}{{this.title}}{{/if}}">{{#if this.title}}<strong>{{this.title}}: </strong>{{/if}}{{this.name}}</span>
         {{/each}}
     </footer>
 </div>
