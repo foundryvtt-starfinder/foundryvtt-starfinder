@@ -1506,8 +1506,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     /* -------------------------------------------- */
 
     static chatListeners(html) {
-        html.on('click', '.card-buttons button', this._onChatCardAction.bind(this));
-        html.on('click', '.item-name', this._onChatCardToggleContent.bind(this));
+        html.on('click', '.chat-card .card-buttons button', this._onChatCardAction.bind(this));
+        html.on('click', '.chat-card .item-name', this._onChatCardToggleContent.bind(this));
     }
 
     /* -------------------------------------------- */
@@ -1528,7 +1528,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Get the Actor from a synthetic Token
         const chatCardActor = this._getChatCardActor(card);
-        if (!chatCardActor) return;
+        if (!chatCardActor) return ui.notifications.error("SFRPG.ChatCard.ItemAction.NoActor");
 
         button.disabled = true;
 
