@@ -741,9 +741,9 @@ function setupHandlebars() {
             throw new Error(game.i18n.localize("SFRPG.Tippy.ErrorNoTitle"));
         }
 
-        let html = "data-tippy-content=\"<strong>" + game.i18n.localize(title) + "</strong>";
+        let html = "data-tippy-content=\"<strong>" + Handlebars.escapeExpression(game.i18n.localize(title)) + "</strong>";
         if (subtitle) {
-            html += "<br/>" + game.i18n.localize(subtitle);
+            html += "<br/>" + Handlebars.escapeExpression(game.i18n.localize(subtitle));
         }
         if (attributes) {
             const printableAttributes = [];
