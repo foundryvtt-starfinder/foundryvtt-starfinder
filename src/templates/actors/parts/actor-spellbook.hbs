@@ -69,14 +69,22 @@
                         <div class="flexrow">
                             <h4>{{item.name}}</h4>
                             {{#if item.system.uses.max }}
-                                <div class="item-detail spell-uses">{{localize "SFRPG.SpellBook.Uses"}} {{item.system.uses.value}} / {{item.system.uses.max}}</div>
+                                <div class="item-detail spell-uses">
+                                    {{localize "SFRPG.SpellBook.Uses"}}
+                                    <input type="text" class="limited-uses-value" value="{{item.system.uses.value}}" data-dtype="Number" />
+                                     / {{item.system.uses.total}}
+                                </div>
                             {{/if}}
                         </div>
                     </div>
                 {{else}}
                     <h4>{{item.name}}</h4>
                     {{#if item.system.uses.max }}
-                        <div class="item-detail spell-uses">{{localize "SFRPG.SpellBook.Uses"}} {{item.system.uses.value}} / {{item.system.uses.max}}</div>
+                        <div class="item-detail spell-uses">
+                            {{localize "SFRPG.SpellBook.Uses"}}
+                            <input type="text" class="limited-uses-value" value="{{item.system.uses.value}}" data-dtype="Number" />
+                             / {{item.system.uses.total}}
+                        </div>
                     {{/if}}
                 {{/if}}
             </div>

@@ -1,4 +1,3 @@
-import { ItemSFRPG } from "./item/item.js";
 import BrowserEnricher from "./system/enrichers/browser.js";
 import CheckEnricher from "./system/enrichers/check.js";
 import IconEnricher from "./system/enrichers/icon.js";
@@ -310,7 +309,7 @@ SFRPG.ammunitionTypes = {
     "thasteronPellets": "SFRPG.Items.Ammunition.Type.ThasteronPellets"
 };
 
-SFRPG.distanceUnits = {
+SFRPG.constantDistanceUnits = {
     "none": "SFRPG.None",
     "personal": "SFRPG.Personal",
     "touch": "SFRPG.Touch",
@@ -320,12 +319,40 @@ SFRPG.distanceUnits = {
     "planetary": "SFRPG.Planetary",
     "system": "SFRPG.SystemWide",
     "plane": "SFRPG.Plane",
-    "unlimited": "SFRPG.Unlimited",
+    "unlimited": "SFRPG.Unlimited"
+};
+
+SFRPG.variableDistanceUnits = {
     "ft": "SFRPG.Ft",
     "meter": "SFRPG.Meter",
     "mi": "SFRPG.Mi",
     "spec": "SFRPG.Special",
     "any": "SFRPG.DistAny"
+};
+
+SFRPG.distanceUnits = {
+    ...SFRPG.constantDistanceUnits,
+    ...SFRPG.variableDistanceUnits
+};
+
+/**
+ * Durations for effects by definition must be non-zero.
+ * @type {Object}
+ */
+SFRPG.effectDurationTypes = {
+    "round": "SFRPG.EffectDurationTypesRounds",
+    "minute": "SFRPG.EffectDurationTypesMinutes",
+    "hour": "SFRPG.EffectDurationTypesHours",
+    "day": "SFRPG.EffectDurationTypesDays"
+};
+
+/**
+ * Durations for features/spells however can be.
+ * @type {Object}
+ */
+SFRPG.durationTypes = {
+    "instantaneous": "SFRPG.DurationTypesInstantaneous",
+    ...SFRPG.effectDurationTypes
 };
 
 SFRPG.targetTypes = {};
@@ -637,11 +664,11 @@ SFRPG.energyResistanceTypes = {
 
 SFRPG.spellAreaShapes = {
     "": "",
+    "sphere": "SFRPG.SpellAreaShapesSphere",
     "cone": "SFRPG.SpellAreaShapesCone",
+    "cube": "SFRPG.SpellAreaShapesCube",
     "cylinder": "SFRPG.SpellAreaShapesCylinder",
     "line": "SFRPG.SpellAreaShapesLine",
-    "sphere": "SFRPG.SpellAreaShapesSphere",
-    "shapable": "SFRPG.SpellAreaShapesShapable",
     "other": "SFRPG.SpellAreaShapesOther"
 };
 
