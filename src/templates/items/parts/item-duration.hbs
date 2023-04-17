@@ -1,10 +1,11 @@
 <div class="form-group input-select">
-    <label>{{localize "SFRPG.EffectDurationTypesLabel"}}</label>
+    <label>{{localize "SFRPG.Effect.DurationTypesLabel"}}</label>
     <div class="form-fields">
+        {{#unless (eq itemData.activeDuration.unit "permanent")}}
         <input type="text" name="system.activeDuration.value" value="{{itemData.activeDuration.value}}" data-dtype="Number" placeholder="-"/>
+        {{/unless}}
         <select name="system.activeDuration.unit">
             {{#select itemData.activeDuration.unit}}
-                <option value=""></option>
                 {{#each config.effectDurationTypes as |name key|}}
                     <option value="{{key}}">{{localize name}}</option>
                 {{/each}}
@@ -13,12 +14,20 @@
     </div>
 </div>
 <div class="form-group input-select">
-    <label>{{localize "SFRPG.EffectEndTypesLabel"}}</label>
+    <label>{{localize "SFRPG.Effect.EndTypesLabel"}}</label>
     <div class="form-fields">
-        <input type="text" name="system.sourceActorId" value="{{itemData.sourceActorId}}" data-dtype="String" placeholder="{{actor.id}}"/>
+        <select name="system.sourceActorId" {{createTippy title="SFRPG.Effect.EndTypesLabel" subtitle="SFRPG.Effect.EndsOnTooltip"}}>
+            {{#select itemData.sourceActorId}}
+                <option value=""></option>
+                {{#each this.sourceActorChoices as |name id|}}
+                    <option value="{{id}}">
+                    {{name}} {{#if (eq id ../this.item.actor.id)}}(Parent Actor){{/if}}
+                    </option>
+                {{/each}}
+            {{/select}}
+        </select>
         <select name="system.activeDuration.endsOn">
             {{#select itemData.activeDuration.endsOn}}
-                <option value=""></option>
                 {{#each config.effectEndTypes as |name key|}}
                     <option value="{{key}}">{{localize name}}</option>
                 {{/each}}
@@ -27,6 +36,6 @@
     </div>
 </div>
 <div class="form-group">
-    <label for="effectEnabled">{{ localize "SFRPG.EffectDetailsEnabledLabel" }}</label>
+    <label for="effectEnabled">{{ localize "SFRPG.Effect.DetailsEnabledLabel" }}</label>
     <input type="checkbox" id="effectEnabled" class="effect-details-toggle" data-effect-id="{{item.timedEffect}}" {{checked itemData.enabled}}>
 </div>

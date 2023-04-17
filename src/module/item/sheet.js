@@ -1,4 +1,3 @@
-import { SFRPG } from "../config.js";
 import RollContext from "../rolls/rollcontext.js";
 
 const itemSizeArmorClassModifier = {
@@ -215,6 +214,20 @@ export class ItemSheetSFRPG extends ItemSheet {
             data.placeholders.savingThrow.value = data.item.system.save.dc;
         }
 
+        if (data.item.type === "effect") {
+            data.sourceActorChoices = {};
+            if (game.combat) {
+                for (const combatant of game.combat.combatants) {
+                    data.sourceActorChoices[combatant.actorId] = combatant.name;
+                }
+            } else {
+                const PCs = game.actors.filter(i => i.type === "character");
+                for (const PC of PCs) {
+                    data.sourceActorChoices[PC.id] = PC.name;
+                }
+            }
+        }
+
         data.modifiers = this.item.system.modifiers;
 
         data.hasSpeed = this.item.system.weaponType === "tracking" || (this.item.system.special && this.item.system.special["limited"]);
@@ -275,6 +288,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (["weapon", "equipment", "shield"].includes(item.type)) return itemData.equipped ? "Equipped" : "Unequipped";
         else if (item.type === "feat") return CONFIG.SFRPG.featureCategories[itemData.details.category]?.label || "";
         else if (item.type === "starshipWeapon") return itemData.mount.mounted ? "Mounted" : "Not Mounted";
+        else if (item.type === "effect") return game.i18n.localize(`SFRPG.${itemData.enabled ? "Enabled" : "Disabled"}`);
         else if (item.type === "augmentation") {
             return `${CONFIG.SFRPG.augmentationTypes[itemData.type]} (${CONFIG.SFRPG.augmentationSystems[itemData.system] || ""})`;
         } else if (item.type === "vehicleSystem") {

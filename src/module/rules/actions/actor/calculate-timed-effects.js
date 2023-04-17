@@ -4,6 +4,7 @@ export default function(engine) {
     engine.closures.add('calculateTimedEffects', (fact, context) => {
         const item = fact.item;
         const actor = fact.owner.actor;
+        if (!actor) return fact;
 
         if ((item.type === 'effect') && (actor.system.timedEffects instanceof Array)) {
             // TODO: find out why "actor.system.timedEffects" is always empty at this point and change that.

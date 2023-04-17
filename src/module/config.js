@@ -340,16 +340,16 @@ SFRPG.distanceUnits = {
  * @type {Object}
  */
 SFRPG.effectDurationTypes = {
-    "round": "SFRPG.EffectDurationTypesRounds",
-    "minute": "SFRPG.EffectDurationTypesMinutes",
-    "hour": "SFRPG.EffectDurationTypesHours",
-    "day": "SFRPG.EffectDurationTypesDays",
-    "permanent": "SFRPG.EffectDurationTypesPermanent"
+    "round": "SFRPG.Effect.DurationTypesRounds",
+    "minute": "SFRPG.Effect.DurationTypesMinutes",
+    "hour": "SFRPG.Effect.DurationTypesHours",
+    "day": "SFRPG.Effect.DurationTypesDays",
+    "permanent": "SFRPG.Effect.DurationTypesPermanent"
 };
 
 SFRPG.effectEndTypes = {
-    "onTurnStart": "SFRPG.EffectEndTypesOnTurnStart",
-    "onTurnEnd": "SFRPG.EffectEndTypesOnTurnEnd"
+    "onTurnStart": "SFRPG.Effect.EndTypesOnTurnStart",
+    "onTurnEnd": "SFRPG.Effect.EndTypesOnTurnEnd"
 };
 
 SFRPG.effectDurationFrom = {
