@@ -6,6 +6,10 @@
   "system": {
     "type": "",
     "ability": null,
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "",
@@ -27,17 +31,125 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>You know how to get full value out of weapon types your class doesn’t normally use.</p>\n<p><strong>Prerequisites</strong>: Weapon Specialization, character level 3rd.</p>\n<hr />\n<p><strong>Benefit</strong>: You gain specialization (see page 243) in all weapons with which you are proficient that can be selected with Weapon Specialization.</p>"
+      "value": "<p>You know how to get full value out of weapon types your class doesn’t normally use.</p>\n<p><strong>Prerequisites</strong>: Weapon Specialization, character level 3rd.</p><hr /><p><strong>Benefit</strong>: You gain specialization (see page 243) in all weapons with which you are proficient that can be selected with Weapon Specialization.</p>\n<p><em>Enable Specialization bonuses in the Modifiers tab. Only enable modifiers you do not have elsewhere.</em></p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
+    "details": {
+      "category": "feat",
+      "combat": true,
+      "specialAbilityType": ""
+    },
     "duration": {
       "units": "",
       "value": null
     },
     "formula": "",
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "6b305f26-6127-43c3-9f53-8eca4e52723e",
+        "name": "Weapon Specialization Longarms",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-damage",
+        "enabled": false,
+        "max": 0,
+        "modifier": "@details.level.value",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "longA"
+      },
+      {
+        "_id": "7f0caf74-d6a4-48b6-913b-0fdb421e3c12",
+        "name": "Weapon Specialization Adv Melee",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-damage",
+        "enabled": false,
+        "max": 0,
+        "modifier": "@details.level.value",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "advancedM"
+      },
+      {
+        "_id": "16a6c295-3a94-46a6-a63e-28c08eff2c22",
+        "name": "Weapon Specialization Heavy",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-damage",
+        "enabled": false,
+        "max": 0,
+        "modifier": "@details.level.value",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "heavy"
+      },
+      {
+        "_id": "5b4ef509-d259-4cdb-b9ce-6b709e9986af",
+        "name": "Weapon Specialization Sniper",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-damage",
+        "enabled": false,
+        "max": 0,
+        "modifier": "@details.level.value",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "sniper"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -49,6 +161,7 @@
       "value": null
     },
     "requirements": "",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,

@@ -3,6 +3,7 @@
 @navHeight: 30px;
 @headerHeight: 100px;
 @detailsHeight: 40px;
+@sheetNavTransition: background .2s, backdrop-filter .2s;
 
 // Global background style
 button {
@@ -20,7 +21,12 @@ blockquote.quote {
 .window-app {
     .exo2();
 
-    .window-content {
+    &.image-popout > .window-content{
+        background: transparent;
+    }
+
+    .window-content,
+    .window-content .journal-entry-content {
         background: @sheetBackground;
     }
 }
@@ -53,11 +59,38 @@ a.enriched-link {
     white-space: nowrap;
     word-break: break-all;
     line-height: 1.6em;
+    transition: text-shadow .15s ease-in-out,
+        background-color .15s ease-in-out,
+        border .15s ease-in-out,
+        color .15s ease-in-out,
+        box-shadow .15s ease-in-out;
 
     i {
         color: var(--color-text-dark-inactive);
         margin-right: 0.25em;
+
+        &.repost {
+            border-left: 1px solid var(--color-border-dark-tertiary);
+            background: #FFF9;
+            padding: 2px;
+            margin-right: -4px;
+            margin-left: 2px;
+            text-shadow: none;
+
+            &:hover {
+                color: var(--color-shadow-primary);
+                text-shadow: 0px 0px 2px black;
+                transition: inherit;
+            }
+        }
     }
+}
+
+img.icon-enricher {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    top: 5px;
 }
 
 /* ----------------------------------------- */
@@ -352,10 +385,10 @@ a.enriched-link {
             li {
                 width: 33.33%;
                 float: left;
-                height: @detailsHeight - 6px;
-                margin: 2px 0;
+                height: @detailsHeight - 4px;
+                margin: 0;
                 padding: 0 3px;
-                border-right: @borderGroove;
+                border-left: @borderGroove;
                 line-height: 34px;
                 color: @colorOlive;
 
@@ -383,10 +416,17 @@ a.enriched-link {
             color: #fff;
             // border-bottom: 3px solid @colorBeige;
             flex: 1;
+            transition: @sheetNavTransition;
 
             &.active {
                 // border-bottom: 3px solid @colorCrimson;
                 background: @sfrpgRed;
+            }
+
+            &:hover:not(.active) {
+                backdrop-filter: brightness(0.5);
+                filter: drop-shadow(0px 2px 4px #00a0ff);
+                transition: @sheetNavTransition, filter 700ms;
             }
         }
     }

@@ -5,9 +5,24 @@
   "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "cybernetic",
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
+    "actionType": "heal",
+    "activation": {
+      "type": "full",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "none",
+      "value": null
+    },
+    "attackBonus": 0,
     "attributes": {
       "ac": {
         "value": ""
@@ -28,24 +43,97 @@
     },
     "attuned": false,
     "bulk": "-",
+    "chatFlavor": "",
+    "container": {
+      "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
+      "storage": []
+    },
     "critical": {
+      "effect": "",
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "Treat Wounds",
+          "formula": "2d8",
+          "group": 0,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": true,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Fast Healing",
+          "formula": "2",
+          "group": 0,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": true,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<table>\n<tbody>\n<tr>\n<th>Model</th>\n<th>Level</th>\n<th>Price</th>\n<th>Treat Wounds</th>\n<th>Fast Healing</th>\n</tr>\n<tr>\n<td>Mk 1</td>\n<td>6</td>\n<td>4,450</td>\n<td>2d8 Hit Points</td>\n<td>2</td>\n</tr>\n<tr>\n<td>Mk 2</td>\n<td>9</td>\n<td>13,700</td>\n<td>3d8 Hit Points</td>\n<td>3</td>\n</tr>\n<tr>\n<td>Mk 3</td>\n<td>13</td>\n<td>50,900</td>\n<td>6d8 Hit Points</td>\n<td>6</td>\n</tr>\n</tbody>\n</table>\n<p>Once injected into the body, these nanites congregate just under the epidermis and can quickly replicate to heal bodily injuries. This augmentation allows you to spend 1 Resolve Point as a swift action to activate the nanites’ treat wounds capability, instantly regaining a number of Hit Points depending on the model of biosynthetic nanites you have installed. In addition, once per day as a full action as long as you have Resolve Points remaining, you can overcharge the nanites to gain an amount of fast healing depending on the model of biosynthetic nanites you have installed for 1 minute. If you do so, you can’t activate the treat wounds capability of the augmentation until the next time you rest for 10 minutes to regain Stamina Points.</p>"
     },
+    "duration": {
+      "units": "minute",
+      "value": "1"
+    },
+    "equippable": true,
     "equipped": false,
+    "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 6,
     "modifiers": [],
     "price": 4450,
     "quantity": 1,
-    "source": "",
-    "system": "skin"
+    "quantityPerPack": 1,
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "none",
+      "value": null
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "",
+      "dc": "",
+      "descriptor": "negate"
+    },
+    "source": "AP #11 pg. 45",
+    "system": "skin",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": 1,
+      "per": "day",
+      "value": 1
+    }
   }
 }

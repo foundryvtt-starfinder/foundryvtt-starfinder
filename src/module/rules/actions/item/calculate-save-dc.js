@@ -8,6 +8,7 @@ export default function(engine) {
         const data = itemData.system;
 
         const actor = fact.owner.actor;
+        if (!actor) return fact;
         const actorData = fact.owner.actorData;
         const classes = actor.items.filter(item => item.type === "class");
 

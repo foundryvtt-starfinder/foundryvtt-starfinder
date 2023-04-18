@@ -1,3 +1,5 @@
+import { SFRPGModifierType } from "../modifiers/types.js";
+
 export default class RollNode {
     constructor(tree, formula, baseValue, referenceModifier, isVariable, isEnabled, parentNode = null, options = {}) {
         this.tree = tree;
@@ -11,6 +13,8 @@ export default class RollNode {
         this.parentNode = parentNode;
         this.nodeContext = null;
         this.variableTooltips = null;
+        this.rollTooltips = null;
+        this.calculatedMods = null;
         this.options = options;
     }
 
@@ -20,10 +24,12 @@ export default class RollNode {
             this.nodeContext = context;
 
             const availableRolledMods = RollNode.getRolledModifiers(remainingVariable, this.getContext());
+            this.calculatedMods = RollNode.getCalculatedModifiers(remainingVariable, this.getContext());
             this.variableTooltips = RollNode.getTooltips(remainingVariable, this.getContext());
+            this.rollTooltips = RollNode.getTooltips(remainingVariable, this.getContext(), ".rollTooltip");
 
             for (const mod of availableRolledMods) {
-                const modKey = mod.bonus.name;
+                const modKey = mod.bonus._id;
 
                 let existingNode = nodes[modKey];
                 if (!existingNode) {
@@ -33,8 +39,7 @@ export default class RollNode {
                 }
                 this.childNodes[modKey] = existingNode;
             }
-        }
-        else {
+        } else {
             const variableMatches = new Set(this.formula.match(/@([a-zA-Z.0-9_\-]+)/g));
             for (const fullVariable of variableMatches) {
                 const variable = fullVariable.substring(1);
@@ -176,6 +181,111 @@ export default class RollNode {
         }
     }
 
+    resolveForRoll(depth = 0, rollMods) {
+        // console.log(['Resolving', depth, this]);
+        this.resolvedValue = {
+            finalRoll: "",
+            formula: ""
+        };
+
+        if (this.isVariable && !this.baseValue) {
+            this.baseValue = "0";
+        }
+
+        if (this.baseValue) {
+            if (this.baseValue !== "n/a") {
+                // TODO: find another way to do this, or find the correct spot for this as this will result in bugs.
+                const constantMods = rollMods.filter(mod => mod.modifierType === SFRPGModifierType.CONSTANT);
+                const modSum = constantMods.reduce((accumulator, value) => accumulator + value.max, 0);
+                this.baseValue = (Number(this.baseValue) - modSum).toString();
+
+                const joinedTooltips = this.rollTooltips ? this.rollTooltips.join(',\n') : this.variableTooltips.join(',\n');
+
+                this.resolvedValue.finalRoll = this.baseValue;
+                this.resolvedValue.formula = this.baseValue + "[";
+                if (this.options.useRawStrings) {
+                    this.resolvedValue.formula += (this.referenceModifier?.name || "@" + this.formula);
+                } else {
+                    this.resolvedValue.formula += "<span";
+                    if (joinedTooltips) {
+                        this.resolvedValue.formula += ` title="${joinedTooltips}"`;
+                    }
+                    this.resolvedValue.formula += `>`;
+                    this.resolvedValue.formula += (this.referenceModifier?.name || "@" + this.formula);
+                    this.resolvedValue.formula += `</span>`;
+                }
+                this.resolvedValue.formula += "]";
+            }
+
+            // formula
+            const enabledChildNodes = Object.values(this.childNodes).filter(x => x.isEnabled);
+            for (const childNode of enabledChildNodes) {
+                const childResolution = childNode.resolveForRoll(depth + 1, rollMods);
+                if (this.resolvedValue.finalRoll !== "") {
+                    this.resolvedValue.finalRoll += " + ";
+                }
+                this.resolvedValue.finalRoll += childResolution.finalRoll;
+
+                if (this.resolvedValue.formula !== "") {
+                    this.resolvedValue.formula += " + ";
+                }
+
+                if (childResolution.formula.endsWith("]")) {
+                    this.resolvedValue.formula += childResolution.formula;
+                } else {
+                    this.resolvedValue.formula += childResolution.formula + `[${childNode.referenceModifier.name}]`;
+                }
+            }
+        } else {
+            let valueString = this.formula;
+            let formulaString = this.formula;
+            const variableMatches = new Set(formulaString.match(/@([a-zA-Z.0-9_\-]+)/g));
+
+            for (const fullVariable of variableMatches) {
+                const regexp = new RegExp(fullVariable, "gi");
+                const variable = fullVariable.substring(1);
+                const existingNode = this.childNodes[variable];
+                // console.log(["testing var", depth, this, fullVariable, variable, existingNode]);
+                if (existingNode) {
+                    const childResolution = existingNode.resolveForRoll(depth + 1, rollMods);
+                    valueString = valueString.replace(regexp, childResolution.finalRoll);
+                    formulaString = formulaString.replace(regexp, childResolution.formula);
+                    // console.log(['Result', depth, childResolution, valueString, formulaString]);
+                } else {
+                    // console.log(['Result', depth, "0"]);
+                    valueString = valueString.replace(regexp, "0");
+                    formulaString = formulaString.replace(regexp, "0");
+                }
+            }
+
+            valueString = valueString.trim();
+            while (valueString.endsWith("+")) {
+                valueString = valueString.substring(0, valueString.length - 1).trim();
+            }
+
+            /** Remove any naming from the valueString. */
+            let limit = 5;
+            while (valueString.includes("[") && valueString.includes("]") && limit > 0) {
+                const openIndex = valueString.indexOf("[");
+                const closeIndex = valueString.indexOf("]");
+                if (closeIndex > openIndex) {
+                    valueString = valueString.substring(0, openIndex) + valueString.substring(closeIndex + 1);
+                }
+                limit--;
+            }
+
+            formulaString = formulaString.trim();
+            while (formulaString.endsWith("+")) {
+                formulaString = formulaString.substring(0, formulaString.length - 1).trim();
+            }
+
+            this.resolvedValue.finalRoll = valueString;
+            this.resolvedValue.formula = formulaString;
+        }
+        // console.log(["Resolved", depth, this, this.resolvedValue]);
+        return this.resolvedValue;
+    }
+
     static getContextForVariable(variable, contexts) {
         if (variable[0] === '@') {
             variable = variable.substring(1);
@@ -204,11 +314,21 @@ export default class RollNode {
         return variableRolledMods || [];
     }
 
-    static getTooltips(variable, context) {
-        let variableString = variable + ".tooltip";
+    static getCalculatedModifiers(variable, context) {
+        let variableString = variable + ".calculatedMods";
+        let variableCalculatedMods = RollNode._readValue(context.data, variableString);
+        if (!variableCalculatedMods) {
+            variableString = variable.substring(0, variable.lastIndexOf('.')) + ".calculatedMods";
+            variableCalculatedMods = RollNode._readValue(context.data, variableString);
+        }
+        return variableCalculatedMods || [];
+    }
+
+    static getTooltips(variable, context, tooltipPath = ".tooltip") {
+        let variableString = variable + tooltipPath;
         let variableRolledMods = RollNode._readValue(context.data, variableString);
         if (!variableRolledMods) {
-            variableString = variable.substring(0, variable.lastIndexOf('.')) + ".tooltip";
+            variableString = variable.substring(0, variable.lastIndexOf('.')) + tooltipPath;
             variableRolledMods = RollNode._readValue(context.data, variableString);
         }
         // console.log(["getRolledModifiers", variable, context, variableString, variableRolledMods]);

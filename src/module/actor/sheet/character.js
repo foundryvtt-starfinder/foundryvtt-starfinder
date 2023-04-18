@@ -159,19 +159,75 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         });
 
         const features = {
-            classes: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Classes"), items: [], hasActions: false, dataset: { type: "class" }, isClass: true },
-            race: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Race"), items: [], hasActions: false, dataset: { type: "race" }, isRace: true },
-            theme: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Theme"), items: [], hasActions: false, dataset: { type: "theme" }, isTheme: true },
-            asi: { label: game.i18n.format("SFRPG.Items.Categories.AbilityScoreIncrease"), items: asis, hasActions: false, dataset: { type: "asi" }, isASI: true },
-            archetypes: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Archetypes"), items: [], dataset: { type: "archetypes" }, isArchetype: true },
-            active: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActiveFeats"), items: [], hasActions: true, dataset: { type: "feat", "activation.type": "action" } },
-            passive: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.PassiveFeats"), items: [], hasActions: false, dataset: { type: "feat" } },
-            resources: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"), items: [], hasActions: false, dataset: { type: "actorResource" } }
+            classes: {
+                category: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Classes"),
+                items: [],
+                hasActions: false,
+                dataset: { type: "class" },
+                isClass: true
+            },
+            race: {
+                category: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Race"),
+                items: [],
+                hasActions: false,
+                dataset: { type: "race" },
+                isRace: true
+            },
+            theme: {
+                category: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Theme"),
+                items: [],
+                hasActions: false,
+                dataset: { type: "theme" },
+                isTheme: true
+            },
+            asi: {
+                category: game.i18n.format("SFRPG.Items.Categories.AbilityScoreIncrease"),
+                items: asis,
+                hasActions: false,
+                dataset: { type: "asi" },
+                isASI: true
+            },
+            archetypes: {
+                category: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Archetypes"),
+                items: [],
+                dataset: { type: "archetypes" },
+                isArchetype: true
+            },
+            active: {
+                category: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActiveFeats"),
+                items: [],
+                hasActions: true,
+                dataset: { type: "feat", "activation.type": "action" }
+            },
+            ...duplicate(CONFIG.SFRPG.featureCategories),
+            resources: {
+                category: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"),
+                items: [],
+                hasActions: false,
+                dataset: { type: "actorResource" }
+            }
+
         };
 
+        let otherFeatures = [];
         for (let f of feats) {
             if (f.system.activation.type) features.active.items.push(f);
-            else features.passive.items.push(f);
+            else {
+                try {
+                    features[f.system.details.category].items.push(f);
+                } catch {
+                    features.otherFeatures.items.push(f);
+                }
+            }
+        }
+
+        if (otherFeatures.length > 0) {
+            features.otherFeatures = {
+                category: game.i18n.format("SFRPG.ActorSheet.Features.Categories.OtherFeatures"),
+                items: otherFeatures,
+                hasActions: false,
+                allowAdd: false
+            };
         }
 
         classes.sort((a, b) => b.levels - a.levels);

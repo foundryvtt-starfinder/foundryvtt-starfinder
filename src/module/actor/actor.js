@@ -132,13 +132,6 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     }
 
     /**
-     * TODO: Use these two methods to properly setup actor data for use
-     * in the new Active Effects API.
-     */
-    prepareBaseData() { super.prepareBaseData(); }
-    prepareDerivedData() { super.prepareDerivedData(); }
-
-    /**
      * Extend the default update method to enhance data before submission.
      * See the parent Entity.update method for full details.
      *
@@ -149,7 +142,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     async update(data, options = {}) {
         const newSize = data['system.traits.size'];
         if (newSize && (newSize !== getProperty(this.system, "traits.size"))) {
-            let size = CONFIG.SFRPG.tokenSizes[data['system.traits.size']];
+            const size = CONFIG.SFRPG.tokenSizes[data['system.traits.size']];
             if (this.isToken) this.token.update({ height: size, width: size });
             else if (!data["token.width"] && !hasProperty(data, "token.width")) {
                 setProperty(data, 'token.height', size);
@@ -172,15 +165,16 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     async createEmbeddedDocuments(embeddedName, itemData, options) {
         for (const item of itemData) {
             if (!this.hasPlayerOwner) {
-                let t = item.type;
-                let initial = {};
+                const t = item.type;
+                const initial = {};
                 if (t === "weapon") initial['system.proficient'] = true;
                 if (["weapon", "equipment"].includes(t)) initial['system.equipped'] = true;
                 if (t === "spell") initial['system.prepared'] = true;
                 mergeObject(item, initial);
             }
 
-            item.effects = null;
+            if (item.effects instanceof Array) item.effects = null;
+            else if (item.effects instanceof Map) item.effects.clear();
         }
 
         return super.createEmbeddedDocuments(embeddedName, itemData, options);
@@ -197,7 +191,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      */
     async _preCreate(data, options, user) {
         const autoLinkedTypes = ['character', 'drone'];
-        let updates = {};
+        const updates = {};
 
         // Auto link PCs and drones
         if (autoLinkedTypes.includes(this.type)) {
@@ -231,22 +225,22 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     async _preUpdate(changed, options, user) {
 
         // Clamp HP/SP/RP values to 0 and their max
-        let changedHP = changed.system?.attributes?.hp?.value;
-        let changedSP = changed.system?.attributes?.sp?.value;
-        let changedRP = changed.system?.attributes?.rp?.value;
+        const changedHP = changed.system?.attributes?.hp?.value;
+        const changedSP = changed.system?.attributes?.sp?.value;
+        const changedRP = changed.system?.attributes?.rp?.value;
 
         if (changedHP) {
-            let clampedHP = Math.clamped(changedHP, 0, this.system.attributes.hp.max);
+            const clampedHP = Math.clamped(changedHP, 0, this.system.attributes.hp.max);
             changed.system.attributes.hp.value = clampedHP;
         }
 
         if (changedSP) {
-            let clampedSP = Math.clamped(changedSP, 0, this.system.attributes.sp.max);
+            const clampedSP = Math.clamped(changedSP, 0, this.system.attributes.sp.max);
             changed.system.attributes.sp.value = clampedSP;
         }
 
         if (changedRP) {
-            let clampedRP = Math.clamped(changedRP, 0, this.system.attributes.rp.max);
+            const clampedRP = Math.clamped(changedRP, 0, this.system.attributes.rp.max);
             changed.system.attributes.rp.value = clampedRP;
         }
 
@@ -388,7 +382,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
         if (remove) return this.update({ [`system.skills.-=${skillId}`]: null });
 
-        let updateObject = {
+        const updateObject = {
             [`system.skills.${skillId}.ability`]: ability,
             [`system.skills.${skillId}.ranks`]: ranks,
             [`system.skills.${skillId}.value`]: value,
@@ -419,7 +413,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             return obj;
         }, {});
 
-        for (let [key, value] of formData.entries()) {
+        for (const [key, value] of formData.entries()) {
             enabledSkills[`system.${key}`] = Boolean(value);
         }
 
@@ -459,7 +453,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             ability = formData.get('ability'),
             subname = formData.get('subname');
 
-        let newSkillData = {
+        const newSkillData = {
             [`system.skills.${skillId}`]: {},
             [`system.skills.${skillId}.isTrainedOnly`]: isTrainedOnly,
             [`system.skills.${skillId}.hasArmorCheckPenalty`]: hasArmorCheckPenalty,
@@ -489,20 +483,23 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         }
 
         if (skl.isTrainedOnly && !(skl.ranks > 0)) {
-            let content = `${CONFIG.SFRPG.skills[skillId.substring(0, 3)]} is a trained only skill, but ${this.name} is not trained in that skill.
-                Would you like to roll anyway?`;
+            const content = game.i18n.format(
+                "SFRPG.SkillTrainedOnlyDialog.Content", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)], name: this.name }
+            );
 
             return new Promise(resolve => {
                 new Dialog({
-                    title: `${CONFIG.SFRPG.skills[skillId.substring(0, 3)]} is trained only`,
+                    title: game.i18n.format(
+                        "SFRPG.SkillTrainedOnlyDialog.Title", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)] }
+                    ),
                     content: content,
                     buttons: {
                         yes: {
-                            label: "Yes",
+                            label: game.i18n.localize("Yes"),
                             callback: () => resolve(this.rollSkillCheck(skillId, skl, options))
                         },
                         cancel: {
-                            label: "No"
+                            label: game.i18n.localize("No")
                         }
                     },
                     default: "cancel"
@@ -528,11 +525,6 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
         const rollContext = RollContext.createActorRollContext(this);
 
-        // Include ability check bonus only if it's not 0
-        if (abl.abilityCheckBonus) {
-            parts.push('@abilityCheckBonus');
-            data.abilityCheckBonus = abl.abilityCheckBonus;
-        }
         parts.push(`@abilities.${abilityId}.mod`);
 
         return await DiceSFRPG.d20Roll({
@@ -614,8 +606,8 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      */
     async rollVehiclePilotingSkill(role = null, actorId = null, system = null, options = {}) {
 
-        let parts = [];
-        let data = this.getRollData();
+        const parts = [];
+        const data = this.getRollData();
 
         const rollContext = new RollContext();
         rollContext.addContext("vehicle", this, data);
@@ -634,7 +626,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             parts.push(`@pilot.skills.pil.mod`);
         } else {
             const passengerId = this.system.crew[role].actorIds.find(id => id === actorId);
-            let passenger = game.actors.get(passengerId);
+            const passenger = game.actors.get(passengerId);
             let actorData = null;
             if (passenger instanceof ActorSFRPG) {
                 actorData = passenger.system;
@@ -834,12 +826,18 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
                 flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${dcRoll.roll.total}</p>`;
             } else {
-                flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${await TextEditor.enrichHTML(dc.value, {async: true})}</p>`;
+                flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${await TextEditor.enrichHTML(dc.value, {
+                    async: true,
+                    rollData: this.getRollData() ?? {}
+                })}</p>`;
             }
         }
 
         flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.NormalEffect")}: </strong>`;
-        flavor += await TextEditor.enrichHTML(selectedFormula.effectNormal || actionEntry.system.effectNormal, {async: true});
+        flavor += await TextEditor.enrichHTML(selectedFormula.effectNormal || actionEntry.system.effectNormal, {
+            async: true,
+            rollData: this.getRollData() ?? {}
+        });
         flavor += "</p>";
 
         if (actionEntry.system.effectCritical) {
@@ -847,7 +845,10 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             if (critEffectDisplayState !== 'never') {
                 if (critEffectDisplayState === 'always' || rollResult.roll.dice[0].values[0] === 20) {
                     flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.CriticalEffect")}: </strong>`;
-                    flavor += await TextEditor.enrichHTML(selectedFormula.effectCritical || actionEntry.system.effectCritical, {async: true});
+                    flavor += await TextEditor.enrichHTML(selectedFormula.effectCritical || actionEntry.system.effectCritical, {
+                        async: true,
+                        rollData: this.getRollData() ?? {}
+                    });
                     flavor += "</p>";
                 }
             }
@@ -866,6 +867,13 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             type: CONST.CHAT_MESSAGE_TYPES.ROLL,
             sound: CONFIG.sounds.dice
         });
+    }
+
+    levelUp(actorClassId) {
+        const targetClass = this.items.get(actorClassId);
+        if (targetClass) {
+            targetClass.update({["system.levels"]: targetClass.system.levels + 1});
+        }
     }
 
     /** Roll contexts */
@@ -1120,13 +1128,6 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         if (canSeeName && visibleOptions.includes(token.document.displayName)) return true;
 
         return false;
-    }
-
-    levelUp(actorClassId) {
-        const targetClass = this.items.find(item => item.type === "class" && item._id === actorClassId);
-        if (targetClass) {
-            targetClass.update({["system.levels"]: targetClass.system.levels + 1});
-        }
     }
 }
 

@@ -1,4 +1,5 @@
 import { SFRPG } from "../config.js";
+import RollContext from "../rolls/rollcontext.js";
 
 const itemSizeArmorClassModifier = {
     "fine": 8,
@@ -89,6 +90,8 @@ export class ItemSheetSFRPG extends ItemSheet {
      */
     async getData() {
         const data = super.getData();
+        // Ensure derived data is included
+        this.item.processData();
 
         data.itemData = this.document.system;
         data.actor = this.document.parent;
@@ -105,7 +108,8 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.hasLevel = data.itemData.hasOwnProperty("level") && data.item.type !== "spell";
         data.hasHands = data.itemData.hasOwnProperty("hands");
         data.hasProficiency = data.itemData.proficient === true || data.itemData.proficient === false;
-        data.isFeat = this.type === "feat";
+        data.isFeat = data.item.type === "feat";
+        data.isActorResource = data.item.type === "actorResource";
         data.isVehicleAttack = data.item.type === "vehicleAttack";
         data.isVehicleSystem = data.item.type === "vehicleSystem";
         data.isGM = game.user.isGM;
@@ -126,7 +130,7 @@ export class ItemSheetSFRPG extends ItemSheet {
                 const sizeModifier = itemSizeArmorClassModifier[itemData.attributes.size];
                 const dexterityModifier = this.parseNumber(itemData.attributes.dex?.mod, -5);
 
-                data.placeholders.hardness = this.parseNumber(itemData.attributes.hardness, 5 + itemData.attributes.sturdy ? 2 * itemLevel : itemLevel);
+                data.placeholders.hardness = this.parseNumber(itemData.attributes.hardness, itemData.attributes.sturdy ? 5 + (2 * itemLevel) : 5 + itemLevel);
                 data.placeholders.maxHitpoints = this.parseNumber(itemData.attributes.hp?.max, (itemData.attributes.sturdy ? 15 + 3 * itemLevel : 5 + itemLevel) + (itemLevel >= 15 ? 30 : 0));
                 data.placeholders.armorClass = this.parseNumber(itemData.attributes.ac, 10 + sizeModifier + dexterityModifier);
                 data.placeholders.dexterityModifier = dexterityModifier;
@@ -174,6 +178,37 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.hasAttackRoll = this.item.hasAttack;
         data.isHealing = data.item.actionType === "heal";
 
+        // Determine whether to show calculated totals for fields with formulas
+        if (itemData?.activation?.type) {
+            data.range = {};
+
+            data.range.hasInput = (() => {
+                // C/M/L on spells requires no input
+                if (this.item.type === "spell") return !(["close", "medium", "long", "none", "personal", "touch", "planetary", "system", "plane", "unlimited"].includes(itemData.range.units));
+                // These ranges require no input
+                else return !(["none", "personal", "touch", "planetary", "system", "plane", "unlimited"].includes(itemData.range.units));
+            })();
+            data.range.showTotal = !!itemData.range?.total && (String(itemData.range?.total) !== String(itemData.range?.value));
+
+            data.area = {};
+            data.area.showTotal = !!itemData.area?.total && (String(itemData.area?.total) !== String(itemData.area?.value));
+
+            data.duration = {};
+            data.duration.showTotal = !!itemData.duration?.total && (String(itemData.duration?.total) !== String(itemData.duration?.value));
+            data.duration.hasInput = itemData.duration.units !== "instantaneous";
+
+            data.uses = {};
+            data.uses.showTotal = !!itemData.uses?.total && (String(itemData.uses?.total) !== String(itemData.uses?.max));
+
+        }
+
+        if (data.isActorResource && itemData.stage === "late") {
+            data.range = {};
+
+            data.range.showMinTotal = !!itemData.range.totalMin && (String(itemData.range.totalMin) !== String(itemData.range.min));
+            data.range.showMaxTotal = !!itemData.range.totalMax && (String(itemData.range.totalMax) !== String(itemData.range.max));
+        }
+
         // Vehicle Attacks
         if (data.isVehicleAttack) {
             data.placeholders.savingThrow = {};
@@ -186,9 +221,24 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.hasCapacity = this.item.hasCapacity();
 
         // Enrich text editors
-        data.enrichedDescription = await TextEditor.enrichHTML(this.object.system?.description?.value, {async: true});
-        data.enrichedShortDescription = await TextEditor.enrichHTML(this.object.system?.description?.short, {async: true});
-        data.enrichedGMNotes = await TextEditor.enrichHTML(this.object.system?.description?.gmNotes, {async: true});
+        const rollData = RollContext.createItemRollContext(this.item, this.actor).getRollData();
+        const secrets = this.item.isOwner;
+
+        data.enrichedDescription = await TextEditor.enrichHTML(this.item.system?.description?.value, {
+            async: true,
+            rollData: rollData ?? {},
+            secrets
+        });
+        data.enrichedShortDescription = await TextEditor.enrichHTML(this.item.system?.description?.short, {
+            async: true,
+            rollData: rollData ?? {},
+            secrets
+        });
+        data.enrichedGMNotes = await TextEditor.enrichHTML(this.item.system?.description?.gmNotes, {
+            async: true,
+            rollData: rollData ?? {},
+            secrets
+        });
 
         return data;
     }
@@ -223,15 +273,10 @@ export class ItemSheetSFRPG extends ItemSheet {
         const itemData = item.system;
 
         if (["weapon", "equipment", "shield"].includes(item.type)) return itemData.equipped ? "Equipped" : "Unequipped";
+        else if (item.type === "feat") return CONFIG.SFRPG.featureCategories[itemData.details.category]?.label || "";
         else if (item.type === "starshipWeapon") return itemData.mount.mounted ? "Mounted" : "Not Mounted";
         else if (item.type === "augmentation") {
-            return `${itemData.type.capitalize()} (${
-                itemData.system.replace(/([A-Z])/g, ' $1')
-                    .replace(/^./, (str) => {
-                        return str.toUpperCase();
-                    })
-
-            })`;
+            return `${CONFIG.SFRPG.augmentationTypes[itemData.type]} (${CONFIG.SFRPG.augmentationSystems[itemData.system] || ""})`;
         } else if (item.type === "vehicleSystem") {
             // Only systems which can be activated have an activation status
             if (this.document.canBeActivated() === false) {
@@ -262,8 +307,8 @@ export class ItemSheetSFRPG extends ItemSheet {
                 .map(e => ({
                     name: CONFIG.SFRPG.weaponProperties[e[0]],
                     tooltip: CONFIG.SFRPG.weaponPropertiesTooltips[e[0]]
-                })
-                )
+                })),
+            {title: game.i18n.localize("SFRPG.Items.Activation.RangeIncrement"), name: labels.range, tooltip: null}
             );
         } else if (item.type === "spell") {
             const desc = (Object.entries(itemData.descriptors)).filter(e => e[1] === true)
@@ -276,9 +321,9 @@ export class ItemSheetSFRPG extends ItemSheet {
             props.push(
                 {name: labels.components, tooltip: null},
                 {name: labels.materials, tooltip: null},
-                itemData.concentration ? {name: "Concentration", tooltip: null} : null,
-                itemData.sr ? {name: "Spell Resistence", tooltip: null} : null,
-                itemData.dismissible ? {name: "Dismissible", tooltip: null} : null,
+                itemData.concentration ? {name: game.i18n.localize("SFRPG.Items.Spell.Concentration"), tooltip: null} : null,
+                itemData.sr ? {name: game.i18n.localize("SFRPG.SpellResistance"), tooltip: null} : null,
+                itemData.dismissible ? {name: game.i18n.localize("SFRPG.Items.Spell.Dismissible"), tooltip: null} : null,
                 ...desc
             );
         } else if (item.type === "equipment") {
@@ -334,7 +379,7 @@ export class ItemSheetSFRPG extends ItemSheet {
                 props.push(game.i18n.localize("SFRPG.VehicleAttackSheet.Details.IgnoresHardness") + " " + item.ignoresHardness);
             }
         } else if (item.type === "vehicleSystem") {
-            if (item.senses &&  item.senses.usedForSenses == true) {
+            if (item.senses && item.senses.usedForSenses) {
                 // We deliminate the senses by `,` and present each sense as a separate property
                 let sensesDeliminated = item.senses.senses.split(",");
                 for (let index = 0; index < sensesDeliminated.length; index++) {
@@ -354,11 +399,19 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         // Action usage
         if ((item.type !== "weapon") && itemData.activation && !foundry.utils.isEmpty(itemData.activation)) {
+            const rangeTooltip = ["close", "medium", "long"].includes(itemData?.range?.units)
+                ? game.i18n.format(`SFRPG.Range${itemData?.range?.units?.capitalize()}`)
+                : null;
             props.push(
-                {name: labels.activation, tooltip: null},
-                {name: labels.range, tooltip: null},
-                {name: labels.target, tooltip: null},
-                {name: labels.duration, tooltip: null}
+                {title: game.i18n.localize("SFRPG.Items.Activation.Activation"), name: labels.activation, tooltip: null},
+                {title: game.i18n.localize("SFRPG.Items.Activation.Target"), name: labels.target, tooltip: null},
+                itemData.range.units !== "none" ? {title: game.i18n.localize("SFRPG.Items.Activation.Range"), name: labels.range, tooltip: rangeTooltip} : null,
+                (itemData.area.value || itemData.area.total)
+                    ? {title: game.i18n.localize("SFRPG.Items.Activation.Area"), name: labels.area, tooltip: null}
+                    : null,
+                (itemData.duration.units !== "text" || itemData.duration.value || itemData.duration.total)
+                    ? {title: game.i18n.localize("SFRPG.Items.Activation.Duration"), name: labels.duration, tooltip: null}
+                    : null
             );
         }
         return props.filter(p => !!p && !!p.name);
@@ -414,18 +467,18 @@ export class ItemSheetSFRPG extends ItemSheet {
             if (!arr[i]) arr[i] = { name: "", formula: "", types: {}, group: null };
 
             switch (key) {
-            case 'name':
-                arr[i].name = entry[1];
-                break;
-            case 'formula':
-                arr[i].formula = entry[1];
-                break;
-            case 'types':
-                if (type) arr[i].types[type] = entry[1];
-                break;
-            case 'group':
-                arr[i].group = entry[1];
-                break;
+                case 'name':
+                    arr[i].name = entry[1];
+                    break;
+                case 'formula':
+                    arr[i].formula = entry[1];
+                    break;
+                case 'types':
+                    if (type) arr[i].types[type] = entry[1];
+                    break;
+                case 'group':
+                    arr[i].group = entry[1];
+                    break;
             }
 
             return arr;
@@ -438,12 +491,12 @@ export class ItemSheetSFRPG extends ItemSheet {
             if (!arr[i]) arr[i] = { formula: "", types: {}, operator: "" };
 
             switch (key) {
-            case 'formula':
-                arr[i].formula = entry[1];
-                break;
-            case 'types':
-                if (type) arr[i].types[type] = entry[1];
-                break;
+                case 'formula':
+                    arr[i].formula = entry[1];
+                    break;
+                case 'types':
+                    if (type) arr[i].types[type] = entry[1];
+                    break;
             }
 
             return arr;
@@ -638,6 +691,16 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         const modifiers = duplicate(this.item.system.modifiers);
         const modifier = modifiers.find(mod => mod._id === modifierId);
+
+        const formula = modifier.modifier;
+        if (formula) {
+            // TODO: test this this.item should be the actor if not try to get the actor here
+            const roll = Roll.create(formula, this.item.system);
+            modifier.max = await roll.evaluate({maximize: true}).total;
+        } else {
+            modifier.max = 0;
+        }
+
         modifier.enabled = !modifier.enabled;
 
         await this.item.update({
