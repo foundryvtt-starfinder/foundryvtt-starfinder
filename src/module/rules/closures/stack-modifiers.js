@@ -21,7 +21,7 @@ export default class StackModifiers extends Closure {
         for (let modifiersI = 0; modifiersI < modifiers.length; modifiersI++) {
             const modifier = modifiers[modifiersI];
             const actor = game.actors.get(modifier.container?.actorId);
-            const formula = modifier.modifier;
+            const formula = String(modifier.modifier);
 
             if (formula && (modifier.modifierType === SFRPGModifierType.CONSTANT)) {
                 try {
@@ -87,7 +87,7 @@ export default class StackModifiers extends Closure {
     }
 
     _process(modifiers) {
-        let [abilityMods,
+        const [abilityMods,
             armorMods,
             baseMods,
             circumstanceMods,
