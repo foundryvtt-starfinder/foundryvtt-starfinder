@@ -1,10 +1,10 @@
 export default function(engine) {
-    engine.closures.add("calculateSpellsPerDay", (fact, context) => {
+    engine.closures.add("calculateSpells", (fact, context) => {
         const data = fact.data;
         const classes = fact.classes;
 
         data.spells.classes = [];
-        const casterData = duplicate(data.spells);
+        const casterData = deepClone(data.spells);
 
         const computeSpellsPerDay = (spellLevel, classData, spellAbilityMod) => {
             let totalSpells = 0;
@@ -27,7 +27,7 @@ export default function(engine) {
         for (const cls of classes) {
             const classData = cls.system;
 
-            const className = cls.name.slugify({replacement: "_", strict: true});
+            const className = classData.slug || cls.name.slugify({replacement: "_", strict: true});
             const keyAbilityScore = classData.kas || "str";
             const spellAbilityScore =  classData.spellAbility || classData.kas || "str";
 
@@ -66,6 +66,15 @@ export default function(engine) {
                 };
             }
         }
+
+        // Pre-calculate close, medium and long spell ranges for use in item prep.
+        const cl = data.details.cl.value || 0;
+
+        casterData.range = {
+            close: 25 + 5 * Math.floor(cl / 2),
+            medium: 100 + 10 * cl,
+            long: 400 + 40 * cl
+        };
 
         data.spells = mergeObject(data.spells, casterData);
 

@@ -790,8 +790,8 @@
         "descriptors": [],
         "dismissible": false,
         "duration": {
-          "units": "",
-          "value": "1 round + 1 round/3 levels"
+          "units": "round",
+          "value": "1+floor(@details.cl.value/3)"
         },
         "formula": "",
         "level": 2,
@@ -1192,10 +1192,10 @@
           "value": "<p>You make yourself—and any clothing, armor, weapons, and equipment on you—look different. You can seem up to 1 foot shorter or taller, thin, fat, or in between. You can’t change your creature type (although you can appear as another subtype). Otherwise, the extent of the apparent change is up to you. You could merely add or obscure a minor feature, or you could look like an entirely different person or gender.</p>\n<p>The spell does not provide the abilities or mannerisms of the chosen form nor does it alter the perceived tactile (touch) or audible (sound) properties of you or your equipment. If you use this spell to create a disguise, you gain a +10 circumstance bonus to the Disguise check (since it counts as altering your form). A creature that interacts with you directly can attempt a Will saving throw to recognize your appearance as an illusion.</p>"
         },
         "descriptors": [],
-        "dismissible": false,
+        "dismissible": true,
         "duration": {
-          "units": "",
-          "value": "10 minutes/level (D)"
+          "units": "minute",
+          "value": "@details.cl.value*10"
         },
         "formula": "",
         "level": 1,
@@ -1296,8 +1296,8 @@
         "descriptors": [],
         "dismissible": false,
         "duration": {
-          "units": "",
-          "value": "instantaneous"
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
         "level": 1,

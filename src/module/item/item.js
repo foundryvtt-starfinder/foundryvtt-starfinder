@@ -125,24 +125,22 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
             labels.target = [tgt.value].filterJoin(" ");
 
-            let area = data.area || {};
-            if (["none", "touch", "personal"].includes(area.units)) area.value = null;
+            /* let area = data.area || {};
             if (typeof area.value === 'number' && area.value === 0) area.value = null;
-            if (["none"].includes(area.units)) area.units = null;
 
-            labels.area = [area.value, C.distanceUnits[area.units] || null, C.spellAreaShapes[area.shape], C.spellAreaEffects[area.effect]].filterJoin(" ");
+            if (area.units === "text") labels.area = String(area.value || "")?.trim();
+            else labels.area = [area.total || area.value, C.distanceUnits[area.units] || null, C.spellAreaShapes[area.shape], C.spellAreaEffects[area.effect]].filterJoin(" "); */
+            // Now prepared in the calculate-activation-details closure!
 
             // Range Label
-            let rng = data.range || {};
-            if (["none", "touch", "personal"].includes(rng.units) || (rng.value === 0)) {
-                rng.value = null;
-            }
-            if (["none"].includes(rng.units)) rng.units = null;
-            labels.range = [rng.value, C.distanceUnits[rng.units] || null].filterJoin(" ");
+            /* let rng = data.range || {};
+            labels.range = [rng.value || "", C.distanceUnits[rng.units]].filterJoin(" "); */
+            // Now prepared in the calculate-activation-details closure!
 
             // Duration Label
-            let dur = data.duration || {};
-            labels.duration = [dur.value].filterJoin(" ");
+            /* let dur = data.duration || {};
+            labels.duration = [dur.value].filterJoin(" "); */
+            // Now prepared in the calculate-activation-details closure!
         }
 
         // Item Actions
@@ -398,11 +396,26 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Ability activation properties
         if (data.hasOwnProperty("activation")) {
-            if ("target"     in data.activation) props.push({name: labels.target, tooltip: null });
-            if ("area"       in data.activation) props.push({name: labels.area, tooltip: null });
-            if ("activation" in data.activation) props.push({name: labels.activation, tooltip: null });
-            if ("range"      in data.activation) props.push({name: labels.range, tooltip: null });
-            if ("duration"   in data.activation) props.push({name: labels.duration, tooltip: null });
+            if (data.activation.type && data.activation.type !== "none") props.push(
+                { title: game.i18n.localize("SFRPG.Items.Activation.Activation"), name: labels.activation, tooltip: null }
+            );
+            if (data.target.value) props.push(
+                { title: game.i18n.localize("SFRPG.Items.Activation.Target"), name: labels.target, tooltip: null }
+            );
+            if ((data.range.value || data.range.total) && data.range.units !== "none") {
+                const rangeTooltip = ["close", "medium", "long"].includes(data.range.units)
+                    ? game.i18n.format(`SFRPG.Range${data.range.units.capitalize()}`)
+                    : null;
+                props.push(
+                    { title: game.i18n.localize(`SFRPG.Items.Activation.Range${this.type === "weapon" ? "Increment" : ""}`), name: labels.range, tooltip: rangeTooltip }
+                );
+            }
+            if (data.area.value || data.area.total) props.push(
+                { title: game.i18n.localize("SFRPG.Items.Activation.Area"), name: labels.area, tooltip: null }
+            );
+            if (data.duration.value || data.duration.total) props.push(
+                { title: game.i18n.localize("SFRPG.Items.Activation.Duration"), name: labels.duration, tooltip: null }
+            );
         }
 
         if (data.hasOwnProperty("capacity")) {
@@ -1501,8 +1514,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     /* -------------------------------------------- */
 
     static chatListeners(html) {
-        html.on('click', '.card-buttons button', this._onChatCardAction.bind(this));
-        html.on('click', '.item-name', this._onChatCardToggleContent.bind(this));
+        html.on('click', '.chat-card .card-buttons button', this._onChatCardAction.bind(this));
+        html.on('click', '.chat-card .item-name', this._onChatCardToggleContent.bind(this));
     }
 
     /* -------------------------------------------- */
@@ -1523,7 +1536,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Get the Actor from a synthetic Token
         const chatCardActor = this._getChatCardActor(card);
-        if (!chatCardActor) return;
+        if (!chatCardActor) return ui.notifications.error("SFRPG.ChatCard.ItemAction.NoActor");
 
         button.disabled = true;
 

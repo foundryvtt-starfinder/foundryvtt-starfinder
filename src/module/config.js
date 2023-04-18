@@ -309,7 +309,7 @@ SFRPG.ammunitionTypes = {
     "thasteronPellets": "SFRPG.Items.Ammunition.Type.ThasteronPellets"
 };
 
-SFRPG.distanceUnits = {
+SFRPG.constantDistanceUnits = {
     "none": "SFRPG.None",
     "personal": "SFRPG.Personal",
     "touch": "SFRPG.Touch",
@@ -319,12 +319,40 @@ SFRPG.distanceUnits = {
     "planetary": "SFRPG.Planetary",
     "system": "SFRPG.SystemWide",
     "plane": "SFRPG.Plane",
-    "unlimited": "SFRPG.Unlimited",
+    "unlimited": "SFRPG.Unlimited"
+};
+
+SFRPG.variableDistanceUnits = {
     "ft": "SFRPG.Ft",
     "meter": "SFRPG.Meter",
     "mi": "SFRPG.Mi",
     "spec": "SFRPG.Special",
     "any": "SFRPG.DistAny"
+};
+
+SFRPG.distanceUnits = {
+    ...SFRPG.constantDistanceUnits,
+    ...SFRPG.variableDistanceUnits
+};
+
+/**
+ * Durations for effects by definition must be non-zero.
+ * @type {Object}
+ */
+SFRPG.effectDurationTypes = {
+    "round": "SFRPG.EffectDurationTypesRounds",
+    "minute": "SFRPG.EffectDurationTypesMinutes",
+    "hour": "SFRPG.EffectDurationTypesHours",
+    "day": "SFRPG.EffectDurationTypesDays"
+};
+
+/**
+ * Durations for features/spells however can be.
+ * @type {Object}
+ */
+SFRPG.durationTypes = {
+    "instantaneous": "SFRPG.DurationTypesInstantaneous",
+    ...SFRPG.effectDurationTypes
 };
 
 SFRPG.targetTypes = {};
@@ -447,6 +475,7 @@ SFRPG.weaponProperties = {
     "gravitation": "SFRPG.WeaponPropertiesGravitation",
     "guided": "SFRPG.WeaponPropertiesGuided",
     "harrying": "SFRPG.WeaponPropertiesHarrying",
+    "healing": "SFRPG.WeaponPropertiesHealing",
     "holyWater": "SFRPG.WeaponPropertiesHolyWater",
     "hybrid": "SFRPG.WeaponPropertiesHybrid",
     "hydrodynamic": "SFRPG.WeaponPropertiesHydrodynamic",
@@ -542,6 +571,7 @@ SFRPG.weaponPropertiesTooltips = {
     "gravitation": "SFRPG.WeaponPropertiesGravitationTooltip",
     "guided": "SFRPG.WeaponPropertiesGuidedTooltip",
     "harrying": "SFRPG.WeaponPropertiesHarryingTooltip",
+    "healing": "SFRPG.WeaponPropertiesHealingTooltip",
     "holyWater": "SFRPG.WeaponPropertiesHolyWaterTooltip",
     "hybrid": "SFRPG.WeaponPropertiesHybridTooltip",
     "hydrodynamic": "SFRPG.WeaponPropertiesHydrodynamicTooltip",
@@ -634,11 +664,11 @@ SFRPG.energyResistanceTypes = {
 
 SFRPG.spellAreaShapes = {
     "": "",
+    "sphere": "SFRPG.SpellAreaShapesSphere",
     "cone": "SFRPG.SpellAreaShapesCone",
+    "cube": "SFRPG.SpellAreaShapesCube",
     "cylinder": "SFRPG.SpellAreaShapesCylinder",
     "line": "SFRPG.SpellAreaShapesLine",
-    "sphere": "SFRPG.SpellAreaShapesSphere",
-    "shapable": "SFRPG.SpellAreaShapesShapable",
     "other": "SFRPG.SpellAreaShapesOther"
 };
 
@@ -714,6 +744,22 @@ SFRPG.featTypes = {
     "combat" : "SFRPG.FeatTypes.Combat"
 };
 
+/**
+ * @typedef  {Object} FeatureCategory
+ * @property {String} category A localisation key, used for the plural form of the category (For use on sheet headers)
+ * @property {String} label A localisation key, used for the singular form of the category (For use on sheets themselves)
+ * @property {ItemSFRPG[]} items During sheet rendering, items are sorted into the items arrays in each category. To be empty during declaration
+ * @property {Boolean} hasActions Whether to show a "+ Add" button for the category on sheets
+ * @property {Dataset} dataset Data to be added as `data-`objects in the HTML. Extra fields will be added to the created item's data.
+ */
+/**
+ * @typedef  {Object} Dataset
+ * @property {"feat"} type The type of item to create. Features are type "feat", so there is no need to create anything else.
+ * @property {String} "*" A data path and a value to be added to the created item.
+ */
+/**
+ * @type {Object.<string, FeatureCategory>}
+ */
 SFRPG.featureCategories = {
     "feat": {
         category: "SFRPG.ActorSheet.Features.Categories.Feats",
@@ -734,7 +780,7 @@ SFRPG.featureCategories = {
         label: "SFRPG.FeatureCategory.SpeciesFeature",
         items: [],
         hasActions: false,
-        dataset: { type: "feat", category: "speciesFeature" }
+        dataset: { type: "feat", "category": "speciesFeature" }
     },
     "archetypeFeature": {
         category: "SFRPG.ActorSheet.Features.Categories.ArchetypeFeatures",
@@ -890,7 +936,6 @@ SFRPG.languages = {
     "alkainish": "SFRPG.LanguagesAlkainish",
     "anassan": "SFRPG.LanguagesAnassan",
     "aquan": "SFRPG.LanguagesAquan",
-    "arkanen": "SFRPG.LanguagesArkanen",
     "arkanen": "SFRPG.LanguagesArkanen",
     "ancientDaimalkan": "SFRPG.LanguagesAncientDaimalkan",
     "auran": "SFRPG.LanguagesAuran",

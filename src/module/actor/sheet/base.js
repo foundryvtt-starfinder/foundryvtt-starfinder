@@ -197,6 +197,9 @@ export class ActorSheetSFRPG extends ActorSheet {
         html.find('.item .item-name h4').click(async event => this._onItemSummary(event));
         html.find('.item .item-name h4').contextmenu(event => this._onItemSplit(event));
 
+        // Open character art in image viewer
+        html.find('a.hover-icon[data-action="show-image"]').click(this._onShowImage.bind(this));
+
         if (!this.options.editable) return;
 
         html.find('.config-button').click(this._onConfigMenu.bind(this));
@@ -286,6 +289,8 @@ export class ActorSheetSFRPG extends ActorSheet {
         // (De-)activate an item
         html.find('.item-detail .featActivate').click(event => this._onActivateFeat(event));
         html.find('.item-detail .featDeactivate').click(event => this._onDeactivateFeat(event));
+
+        html.find('.limited-uses-value').change(event => this._onItemUsesUpdate(event));
 
         // Item Recharging
         html.find('.item .item-recharge').click(event => this._onItemRecharge(event));
@@ -596,6 +601,12 @@ export class ActorSheetSFRPG extends ActorSheet {
     onBeforeCreateNewItem(itemData) {
 
     }
+    
+    async _onShowImage(event) {
+        const actor = this.actor;
+        const title = actor.token?.name ?? actor.prototypeToken?.name ?? actor.name;
+        new ImagePopout(actor.img, { title, uuid: actor.uuid }).render(true);
+    }
 
     /**
      * open and prefilter a compendium browser depending on it's environment.
@@ -754,6 +765,14 @@ export class ActorSheetSFRPG extends ActorSheet {
         const item = this.actor.items.get(itemId);
 
         item.setActive(false);
+    }
+
+    async _onItemUsesUpdate(event) {
+        event.preventDefault();
+        const itemId = event.currentTarget.closest('.item').dataset.itemId;
+        const item = this.actor.items.get(itemId);
+
+        item.update({"system.uses.value": Number(event.currentTarget.value)});
     }
 
     /**
@@ -959,7 +978,9 @@ export class ActorSheetSFRPG extends ActorSheet {
             Hooks.callAll("renderItemSummary", this, div, {}); // Event listeners need to be added to this HTML.
 
             let props = $(`<div class="item-properties"></div>`);
-            chatData.properties.forEach(p => props.append(`<span class="tag" ${ p.tooltip ? ("data-tippy-content='" + p.tooltip + "'") : ""}>${p.name}</span>`));
+            chatData.properties.forEach(p => props.append(
+                `<span class="tag" data-tippy-content="${p.tooltip || p.title}"><strong>${p.title ? p.title + ":" : ""} </strong>${p.name}</span>`
+            ));
 
             div.append(props);
             li.append(div.hide());
