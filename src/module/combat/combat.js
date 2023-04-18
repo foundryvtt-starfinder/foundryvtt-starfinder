@@ -552,6 +552,43 @@ export class CombatSFRPG extends Combat {
         return this.getIndexOfFirstUndefeatedCombatant() === null;
     }
 
+    average(array) {
+        let total = 0;
+        let count = 0;
+        jQuery.each(array, function(index, value) {
+            total += value;
+            count++;
+        });
+        return total / count;
+    }
+
+    calculateAPL() {
+        let playerCombatants = [];
+        let playerLevels = [];
+
+        // Find all player-owned PCs and get their levels
+        for (const combatant of this.combatants) {
+            if (combatant.players.length > 0) {
+                playerCombatants.push(combatant);
+                playerLevels.push(combatant.actor.system.details.level.value);
+            }
+        }
+
+        // Calculate APL
+        if (playerCombatants.length < 4) {
+            return Math.round(this.average(playerLevels)) - 1;
+        } else if (playerCombatants.length > 5) {
+            return Math.round(this.average(playerLevels)) + 1;
+        } else {
+            return Math.round(this.average(playerLevels));
+        }
+    }
+
+    calculateChallenge(APL) {
+        console.log("Challenge");
+        console.log(APL);
+    }
+
     _getInitiativeFormula(combatant) {
         if (this.getCombatType() === "starship") {
             return "1d20 + @pilot.skills.pil.mod";
@@ -708,15 +745,19 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
     const roundHeader = header.find('h3');
     const originalHtml = roundHeader.html();
 
+    const APL = activeCombat.calculateAPL();
+    activeCombat.calculateChallenge(APL);
+    const difficulty = "Hard";
+
     if (activeCombat.round) {
         const phases = activeCombat.getPhases();
         if (phases.length > 1) {
-            roundHeader.replaceWith(`<div>${originalHtml}<h4 class="combat-type">${game.i18n.format(activeCombat.getCurrentPhase().name)}</h4></div>`);
+            roundHeader.replaceWith(`<div>${originalHtml}<h4 class="combat-type">${game.i18n.format(activeCombat.getCurrentPhase().name)}</h4><h4>This is good: ${difficulty}</h4></div>`);
         }
     } else {
         const prevCombatTypeButton = `<a class="combat-type-prev" title="${game.i18n.format("SFRPG.Combat.EncounterTracker.SelectPrevType")}"><i class="fas fa-caret-left"></i></a>`;
         const nextCombatTypeButton = `<a class="combat-type-next" title="${game.i18n.format("SFRPG.Combat.EncounterTracker.SelectNextType")}"><i class="fas fa-caret-right"></i></a>`;
-        roundHeader.replaceWith(`<div>${originalHtml}<h4 class="combat-type">${prevCombatTypeButton} &nbsp; ${activeCombat.getCombatName()} &nbsp; ${nextCombatTypeButton}</h4></div>`);
+        roundHeader.replaceWith(`<div>${originalHtml}<h4 class="combat-type">${prevCombatTypeButton} &nbsp; ${activeCombat.getCombatName()} &nbsp; ${nextCombatTypeButton}</h4> <h4 class="challenge">This is good: ${difficulty}</h4> </div>`);
 
         // Handle button clicks
         const configureButtonPrev = header.find('.combat-type-prev');
