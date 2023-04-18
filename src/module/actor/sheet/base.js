@@ -197,6 +197,9 @@ export class ActorSheetSFRPG extends ActorSheet {
         html.find('.item .item-name h4').click(async event => this._onItemSummary(event));
         html.find('.item .item-name h4').contextmenu(event => this._onItemSplit(event));
 
+        // Open character art in image viewer
+        html.find('a.hover-icon[data-action="show-image"]').click(this._onShowImage.bind(this));
+
         if (!this.options.editable) return;
 
         html.find('.config-button').click(this._onConfigMenu.bind(this));
@@ -588,6 +591,12 @@ export class ActorSheetSFRPG extends ActorSheet {
 
     onBeforeCreateNewItem(itemData) {
 
+    }
+
+    async _onShowImage(event) {
+        const actor = this.actor;
+        const title = actor.token?.name ?? actor.prototypeToken?.name ?? actor.name;
+        new ImagePopout(actor.img, { title, uuid: actor.uuid }).render(true);
     }
 
     async _onOpenBrowser(event) {

@@ -19,9 +19,14 @@
         }
 
         // Character Profile image (larger than usual)
-        img.profile {
+        div.image-container {
             flex: 0 0 180px;
             height: 180px;
+
+            img.profile {
+                flex: 0 0 180px;
+                height: 180px;
+            }
         }
 
         // Character level and experience bar
@@ -57,12 +62,8 @@
                 height: 80px;
                 margin: 0;
                 border: none;
-                border-right: @borderGroove;
+                border-left: @borderGroove;
                 border-radius: 0;
-
-                &:last-child {
-                    border-right: none;
-                }
 
                 .attribute-row {
                     height: 18px;
