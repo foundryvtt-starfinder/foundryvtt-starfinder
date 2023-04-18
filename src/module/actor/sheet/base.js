@@ -465,7 +465,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             const rollData = RollContext.createItemRollContext(item, item.actor).getRollData();
 
             const roll = Roll.create(preparedFormula, rollData).simplifiedFormula;
-            item.config.attackString = Number(roll) > 0 ? `+${roll}` : roll;
+            item.config.attackString = Number(roll) >= 0 ? `+${roll}` : roll;
 
         } catch {
             item.config.attackString = game.i18n.localize("SFRPG.Attack");
