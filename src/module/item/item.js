@@ -762,7 +762,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         let modifiers = this.actor.getAllModifiers();
         modifiers = modifiers.filter(mod => {
             // Remove inactive constant mods. Keep all situational mods, regardless of status.
-            if (!mod.enabled && mod.modifierType !== "formula") return false;
+            if (!mod.enabled && mod.modifierType !== SFRPGModifierType.FORMULA) return false;
             if (mod.effectType === SFRPGEffectType.WEAPON_ATTACKS) {
                 if (mod.valueAffected !== this.system?.weaponType) {
                     return false;
@@ -781,11 +781,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         });
 
         let stackModifiers = new StackModifiers();
-        modifiers = stackModifiers.process(modifiers, null);
+        modifiers = await stackModifiers.processAsync(modifiers, null);
 
         const rolledMods = [];
         const addModifier = (bonus, parts) => {
-            if (bonus.modifierType === "formula") {
+            if (bonus.modifierType === SFRPGModifierType.FORMULA) {
                 rolledMods.push(bonus);
                 return;
             }
@@ -840,7 +840,15 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const rollContext = RollContext.createItemRollContext(this, this.actor, {itemData: itemData});
 
         /** Create additional modifiers. */
-        const additionalModifiers = duplicate(SFRPG.globalAttackRollModifiers);
+        const additionalModifiers = deepClone(SFRPG.globalAttackRollModifiers);
+
+        /** Add Container Values to globalAttackRollModifiers */
+        for (let addModsI = 0; addModsI < additionalModifiers.length; addModsI++) {
+            additionalModifiers[addModsI].container = {
+                actorId: this.actor.id,
+                itemId: itemData.id
+            };
+        }
 
         /** Apply bonus rolled mods from relevant attack roll formula modifiers. */
         for (const rolledMod of rolledMods) {
@@ -1123,7 +1131,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         });
 
         let stackModifiers = new StackModifiers();
-        modifiers = stackModifiers.process(modifiers, null);
+        modifiers = await stackModifiers.processAsync(modifiers, null);
 
         const rolledMods = [];
         const addModifier = (bonus, parts) => {

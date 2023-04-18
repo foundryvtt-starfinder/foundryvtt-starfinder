@@ -94,6 +94,7 @@ export default class SFRPGRoll extends Roll {
             flavor: isPrivate ? null : chatOptions.flavor,
             user: chatOptions.user,
             tooltip: isPrivate ? "" : await this.getTooltip(),
+            customTooltip: chatOptions.customTooltip,
             total: isPrivate ? "?" : Math.round(this.total * 100) / 100,
             tags: this.tags,
             breakdown: this.breakdown,

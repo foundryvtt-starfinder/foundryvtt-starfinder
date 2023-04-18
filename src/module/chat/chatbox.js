@@ -1,4 +1,5 @@
 import { DiceSFRPG } from "../dice.js";
+import { ItemSFRPG } from "../item/item.js";
 
 /**
  * Helper class to handle the display of chatBox
@@ -47,9 +48,8 @@ export default class SFRPGCustomChatMessage {
             }
         }
 
-        /** Set up variables */
-        const hasCapacity = item.hasCapacity();
-        const currentCapacity = item.getCurrentCapacity();
+        const hasCapacity = item instanceof ItemSFRPG ? item.hasCapacity() : null;
+        const currentCapacity = item instanceof ItemSFRPG ? item.getCurrentCapacity() : null;
         const options = {
             item: item,
             hasDamage: data.rollType !== "damage" && (item.hasDamage || false),
@@ -71,7 +71,8 @@ export default class SFRPGCustomChatMessage {
             tags: data.tags,
             damageTypeString: data.damageTypeString,
             specialMaterials: data.specialMaterials,
-            rollOptions: data.rollOptions
+            rollOptions: data.rollOptions,
+            rollDices: data.rollDices
         };
 
         const speaker = data.speaker;
@@ -100,7 +101,7 @@ export default class SFRPGCustomChatMessage {
 
     static async _render(roll, data, options) {
         const templateName = "systems/sfrpg/templates/chat/chat-message-attack-roll.hbs";
-        let rollContent = await roll.render({htmlData: data.htmlData});
+        let rollContent = await roll.render({htmlData: data.htmlData, customTooltip: options.rollDices});
 
         // Insert the damage type string if possible.
         const damageTypeString = options?.damageTypeString;

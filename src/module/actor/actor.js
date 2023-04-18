@@ -524,11 +524,6 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
         const rollContext = RollContext.createActorRollContext(this);
 
-        // Include ability check bonus only if it's not 0
-        if (abl.abilityCheckBonus) {
-            parts.push('@abilityCheckBonus');
-            data.abilityCheckBonus = abl.abilityCheckBonus;
-        }
         parts.push(`@abilities.${abilityId}.mod`);
 
         return await DiceSFRPG.d20Roll({
