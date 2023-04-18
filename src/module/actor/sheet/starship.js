@@ -36,8 +36,8 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
     async getData() {
         const data = await super.getData();
 
-        let tier = parseFloat(data.system.details.tier || 0);
-        let tiers = { 0: "0", 0.25: "1/4", [1 / 3]: "1/3", 0.5: "1/2" };
+        const tier = parseFloat(data.system.details.tier || 0);
+        const tiers = { 0: "0", 0.25: "1/4", [1 / 3]: "1/3", 0.5: "1/2" };
         data.labels["tier"] = tier >= 1 ? String(tier) : tiers[tier] || 1;
 
         this._getCrewData(data);
@@ -95,7 +95,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
      * @param {Object} flags The set of flags for the Actor
      */
     async _processFlags(data, flags) {
-        let newCrew = {
+        const newCrew = {
             captain: {
                 limit: 1,
                 actorIds: []
@@ -141,7 +141,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             const actor = game.actors.get(actorId);
             if (!actor) continue;
 
-            let crewMember = actor.getFlag("sfrpg", "crewMember") || null;
+            const crewMember = actor.getFlag("sfrpg", "crewMember") || null;
             if (!crewMember) continue;
 
             if (crewMember.role === "captain") newCrew.captain.actorIds.push(actorId);
@@ -156,7 +156,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             "system.crew": newCrew
         });
 
-        let cleanflags = duplicate(this.actor.flags);
+        const cleanflags = duplicate(this.actor.flags);
         delete cleanflags.sfrpg.shipsCrew;
 
         await this.actor.update({
@@ -231,7 +231,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             "starshipShield"
         ];
 
-        let [
+        const [
             forward, // 0
             starboard, // 1
             aft, // 2
@@ -511,6 +511,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
             actor.setupRollContexts(rollContext, ["gunner", "scienceOfficer"]);
 
+            // Resolve multiple gunners
             for (const selector of rollContext.selectors) {
                 const selectorTarget = selector.target;
                 const firstValue = selector.options[0];
@@ -520,7 +521,6 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             }
 
             const roll = Roll.create(formula, rollContext.getRollData()).simplifiedFormula;
-            console.log(formula, roll, rollContext.getRollData());
             item.config.attackString = Number(roll) > 0 ? `+${roll}` : roll;
 
         } catch {
@@ -543,7 +543,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
         html.find('.crew-delete').click(this._onRemoveFromCrew.bind(this));
 
-        let handler = ev => this._onDragCrewStart(ev);
+        const handler = ev => this._onDragCrewStart(ev);
         html.find('li.crew').each((i, li) => {
             li.setAttribute("draggable", true);
             li.addEventListener("dragstart", handler, false);
@@ -768,7 +768,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
         const actorId = $(event.currentTarget).parents('.crew')
             .data('actorId');
-        let actor = game.actors.get(actorId);
+        const actor = game.actors.get(actorId);
         actor.sheet.render(true);
     }
 
@@ -789,7 +789,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         const pack = game.packs.get(actionPack);
         const index = pack.index || (await pack.getIndex());
 
-        let li = $(event.currentTarget).parents('.action');
+        const li = $(event.currentTarget).parents('.action');
 
         const doc = index.find(i => i.name === (li.prevObject[0].innerHTML));
         const item = await pack.getDocument(doc._id);
@@ -801,7 +801,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         }
 
         if (li.hasClass('expanded')) {
-            let summary = li.children('.item-summary');
+            const summary = li.children('.item-summary');
             summary.slideUp(200, () => summary.remove());
         } else {
             const desiredDescription = await TextEditor.enrichHTML(content || chatData.description.value, {
@@ -809,7 +809,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
                 rollData: this.actor.getRollData() ?? {},
                 secrets: this.actor.isOwner
             });
-            let div = $(`<div class="item-summary">${desiredDescription}</div>`);
+            const div = $(`<div class="item-summary">${desiredDescription}</div>`);
             Hooks.callAll("renderItemSummary", this, div, {});
 
             li.append(div.hide());
@@ -1033,7 +1033,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
      */
     _updateObject(event, formData) {
         const tiers = { "1/4": 0.25, "1/3": 1 / 3, "1/2": 0.5 };
-        let v = "system.details.tier";
+        const v = "system.details.tier";
         let tier = formData[v];
         tier = tiers[tier] || parseFloat(tier);
         if (tier) formData[v] = tier < 1 ? tier : parseInt(tier);
