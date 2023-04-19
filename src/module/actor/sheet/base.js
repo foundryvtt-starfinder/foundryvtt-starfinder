@@ -1,6 +1,7 @@
 import { ActorSheetFlags } from "../../apps/actor-flags.js";
 import { ActorMovementConfig } from "../../apps/movement-config.js";
 import { TraitSelectorSFRPG } from "../../apps/trait-selector.js";
+import { SFRPGModifierType } from "../../modifiers/types.js";
 import StackModifiers from "../../rules/closures/stack-modifiers.js";
 
 import { RPC } from "../../rpc.js";
@@ -449,7 +450,9 @@ export class ActorSheetSFRPG extends ActorSheet {
 
             const formula = parts.join("+");
 
-            const appropriateMods = item.getAppropriateAttackModifiers(isWeapon);
+            let appropriateMods = item.getAppropriateAttackModifiers(isWeapon);
+            // Remove situational modifiers
+            appropriateMods = appropriateMods.filter(mod => mod.modifierType !== SFRPGModifierType.FORMULA);
             const stackModifiers = new StackModifiers();
             let modifiers = stackModifiers.process(appropriateMods, null);
 
@@ -482,7 +485,9 @@ export class ActorSheetSFRPG extends ActorSheet {
             const formula = item.system.damage.parts[0].formula;
             if (!formula) throw ("No damage formula, deferring to default string");
 
-            const appropriateMods = item.getAppropriateDamageModifiers(isWeapon);
+            let appropriateMods = item.getAppropriateDamageModifiers(isWeapon);
+            // Remove situational modifiers
+            appropriateMods = appropriateMods.filter(mod => mod.modifierType !== SFRPGModifierType.FORMULA);
             const stackModifiers = new StackModifiers();
             let modifiers = stackModifiers.process(appropriateMods, null);
 
