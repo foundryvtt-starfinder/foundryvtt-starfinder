@@ -868,7 +868,7 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
         // Add in the difficulty calculator if needed
         if (activeCombat.getCombatType() === "normal" && game.user.isGM) {
             activeCombat.getEncounterInfo();
-            roundHeader.replaceWith(`<div>${originalHtml}<h4 class="combat-type">${prevCombatTypeButton} &nbsp; ${activeCombat.getCombatName()} &nbsp; ${nextCombatTypeButton}</h4><h4 class="difficulty">Difficulty: ${activeCombat.flags.sfrpg.Difficulty}</h4></div>`);
+            roundHeader.replaceWith(`<div>${originalHtml}<h4 class="combat-type">${prevCombatTypeButton} &nbsp; ${activeCombat.getCombatName()} &nbsp; ${nextCombatTypeButton}</h4><div class="difficulty">Difficulty: ${activeCombat.flags.sfrpg.Difficulty}</div></div>`);
         } else {
             roundHeader.replaceWith(`<div>${originalHtml}<h4 class="combat-type">${prevCombatTypeButton} &nbsp; ${activeCombat.getCombatName()} &nbsp; ${nextCombatTypeButton}</h4></div>`);
         }
