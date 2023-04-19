@@ -108,7 +108,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         if (data.hasOwnProperty("activation")) {
 
             // Ability Activation Label
-            const act = data.activation || {};
+            let act = data.activation || {};
             if (act) {
                 if (act.type === "none") {
                     labels.activation = game.i18n.localize("SFRPG.AbilityActivationTypesNoneButton");
@@ -120,7 +120,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 }
             }
 
-            const tgt = data.target || {};
+            let tgt = data.target || {};
             if (tgt.value && tgt.value === "") tgt.value = null;
 
             labels.target = [tgt.value].filterJoin(" ");
@@ -146,7 +146,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Item Actions
         if (data.hasOwnProperty("actionType")) {
             // Damage
-            const dam = data.damage || {};
+            let dam = data.damage || {};
             if (dam.parts) labels.damage = dam.parts.map(d => d[0]).join(" + ")
                 .replace(/\+ -/g, "- ");
         }
@@ -196,7 +196,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      * @returns {boolean|void}        Explicitly return false to prevent creation of this Document
      */
     async _preCreate(data, options, user) {
-        const updates = {};
+        let updates = {};
 
         if (this.type === "class" && !this.system?.slug) {
             updates["system.slug"] = this.name.slugify({replacement: "_", strict: true});
@@ -691,9 +691,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         if (data.senses &&  data.senses.usedForSenses) {
             // We deliminate the senses by `,` and present each sense as a separate property
-            const sensesDeliminated = data.senses.senses.split(",");
+            let sensesDeliminated = data.senses.senses.split(",");
             for (let index = 0; index < sensesDeliminated.length; index++) {
-                const sense = sensesDeliminated[index];
+                let sense = sensesDeliminated[index];
                 props.push(sense);
             }
         }
@@ -717,7 +717,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         const actorData = this.actor.system;
         if (!this.hasAttack) {
-            return ui.notifications.error("You may not make an Attack Roll with this Item.");
+            throw new Error("You may not place an Attack Roll with this Item.");
         }
 
         if (this.type === "starshipWeapon") return this._rollStarshipAttack(options);
@@ -744,9 +744,43 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             }
         }
 
-        let modifiers = this.getAppropriateAttackModifiers(isWeapon);
+        const acceptedModifiers = [SFRPGEffectType.ALL_ATTACKS];
+        if (["msak", "rsak"].includes(this.system.actionType)) {
+            acceptedModifiers.push(SFRPGEffectType.SPELL_ATTACKS);
+        } else if (this.system.actionType === "rwak") {
+            acceptedModifiers.push(SFRPGEffectType.RANGED_ATTACKS);
+        } else if (this.system.actionType === "mwak") {
+            acceptedModifiers.push(SFRPGEffectType.MELEE_ATTACKS);
+        }
 
-        const stackModifiers = new StackModifiers();
+        if (isWeapon) {
+            acceptedModifiers.push(SFRPGEffectType.WEAPON_ATTACKS);
+            acceptedModifiers.push(SFRPGEffectType.WEAPON_PROPERTY_ATTACKS);
+            acceptedModifiers.push(SFRPGEffectType.WEAPON_CATEGORY_ATTACKS);
+        }
+
+        let modifiers = this.actor.getAllModifiers();
+        modifiers = modifiers.filter(mod => {
+            // Remove inactive constant mods. Keep all situational mods, regardless of status.
+            if (!mod.enabled && mod.modifierType !== SFRPGModifierType.FORMULA) return false;
+            if (mod.effectType === SFRPGEffectType.WEAPON_ATTACKS) {
+                if (mod.valueAffected !== this.system?.weaponType) {
+                    return false;
+                }
+            } else if (mod.effectType === SFRPGEffectType.WEAPON_PROPERTY_ATTACKS) {
+                if (!this.system?.properties?.[mod.valueAffected]) {
+                    return false;
+                }
+            } else if (mod.effectType === SFRPGEffectType.WEAPON_CATEGORY_ATTACKS) {
+                if (this.system?.weaponCategory !== mod.valueAffected) {
+                    return false;
+                }
+            }
+
+            return acceptedModifiers.includes(mod.effectType);
+        });
+
+        let stackModifiers = new StackModifiers();
         modifiers = await stackModifiers.processAsync(modifiers, null);
 
         const rolledMods = [];
@@ -755,7 +789,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 rolledMods.push(bonus);
                 return;
             }
-            const computedBonus = bonus.modifier;
+            let computedBonus = bonus.modifier;
             parts.push({score: computedBonus, explanation: bonus.name});
             return computedBonus;
         };
@@ -847,46 +881,6 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             },
             onClose: this._onAttackRollClose.bind(this, options)
         });
-    }
-
-    getAppropriateAttackModifiers(isWeapon) {
-        const acceptedModifiers = [SFRPGEffectType.ALL_ATTACKS];
-        if (["msak", "rsak"].includes(this.system.actionType)) {
-            acceptedModifiers.push(SFRPGEffectType.SPELL_ATTACKS);
-        } else if (this.system.actionType === "rwak") {
-            acceptedModifiers.push(SFRPGEffectType.RANGED_ATTACKS);
-        } else if (this.system.actionType === "mwak") {
-            acceptedModifiers.push(SFRPGEffectType.MELEE_ATTACKS);
-        }
-
-        if (isWeapon) {
-            acceptedModifiers.push(SFRPGEffectType.WEAPON_ATTACKS);
-            acceptedModifiers.push(SFRPGEffectType.WEAPON_PROPERTY_ATTACKS);
-            acceptedModifiers.push(SFRPGEffectType.WEAPON_CATEGORY_ATTACKS);
-        }
-
-        let modifiers = this.actor.getAllModifiers();
-        modifiers = modifiers.filter(mod => {
-            // Remove inactive constant mods. Keep all situational mods, regardless of status.
-            if (!mod.enabled && mod.modifierType !== SFRPGModifierType.FORMULA) return false;
-            if (mod.effectType === SFRPGEffectType.WEAPON_ATTACKS) {
-                if (mod.valueAffected !== this.system?.weaponType) {
-                    return false;
-                }
-            } else if (mod.effectType === SFRPGEffectType.WEAPON_PROPERTY_ATTACKS) {
-                if (!this.system?.properties?.[mod.valueAffected]) {
-                    return false;
-                }
-            } else if (mod.effectType === SFRPGEffectType.WEAPON_CATEGORY_ATTACKS) {
-                if (this.system?.weaponCategory !== mod.valueAffected) {
-                    return false;
-                }
-            }
-
-            return acceptedModifiers.includes(mod.effectType);
-        });
-
-        return modifiers;
     }
 
     /**
@@ -1080,7 +1074,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const isHealing = this.system.actionType === "heal";
 
         if (!this.hasDamage) {
-            return ui.notifications.error("You may not make a Damage Roll with this Item.");
+            throw new Error("You may not make a Damage Roll with this Item.");
         }
 
         if (this.type === "starshipWeapon") return this._rollStarshipDamage({ event: event });
@@ -1098,9 +1092,45 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             part.isDamageSection = true;
         }
 
-        let modifiers = this.getAppropriateDamageModifiers(isWeapon);
+        const acceptedModifiers = [SFRPGEffectType.ALL_DAMAGE];
 
-        const stackModifiers = new StackModifiers();
+        if (["msak", "rsak"].includes(this.system.actionType) || (this.type === "spell"  && this.system.actionType === "save")) {
+            acceptedModifiers.push(SFRPGEffectType.SPELL_DAMAGE);
+        } else if (this.system.actionType === "rwak") {
+            acceptedModifiers.push(SFRPGEffectType.RANGED_DAMAGE);
+        } else if (this.system.actionType === "mwak") {
+            acceptedModifiers.push(SFRPGEffectType.MELEE_DAMAGE);
+        }
+
+        if (isWeapon) {
+            acceptedModifiers.push(SFRPGEffectType.WEAPON_DAMAGE);
+            acceptedModifiers.push(SFRPGEffectType.WEAPON_PROPERTY_DAMAGE);
+            acceptedModifiers.push(SFRPGEffectType.WEAPON_CATEGORY_DAMAGE);
+        }
+
+        let modifiers = this.actor.getAllModifiers();
+        modifiers = modifiers.filter(mod => {
+            if (!acceptedModifiers.includes(mod.effectType)) {
+                return false;
+            }
+
+            if (mod.effectType === SFRPGEffectType.WEAPON_DAMAGE) {
+                if (mod.valueAffected !== this.system.weaponType) {
+                    return false;
+                }
+            } else if (mod.effectType === SFRPGEffectType.WEAPON_PROPERTY_DAMAGE) {
+                if (!this.system.properties[mod.valueAffected]) {
+                    return false;
+                }
+            } else if (mod.effectType === SFRPGEffectType.WEAPON_CATEGORY_DAMAGE) {
+                if (this.system.weaponCategory !== mod.valueAffected) {
+                    return false;
+                }
+            }
+            return (mod.enabled || mod.modifierType === "formula");
+        });
+
+        let stackModifiers = new StackModifiers();
         modifiers = await stackModifiers.processAsync(modifiers, null);
 
         const rolledMods = [];
@@ -1111,7 +1141,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             }
 
             // console.log(`Adding ${bonus.name} with ${bonus.modifier}`);
-            const computedBonus = bonus.modifier;
+            let computedBonus = bonus.modifier;
             parts.push({ formula: computedBonus, explanation: bonus.name });
             return computedBonus;
         };
@@ -1196,48 +1226,6 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 }
             }
         });
-    }
-
-    getAppropriateDamageModifiers(isWeapon) {
-        const acceptedModifiers = [SFRPGEffectType.ALL_DAMAGE];
-
-        if (["msak", "rsak"].includes(this.system.actionType) || (this.type === "spell"  && this.system.actionType === "save")) {
-            acceptedModifiers.push(SFRPGEffectType.SPELL_DAMAGE);
-        } else if (this.system.actionType === "rwak") {
-            acceptedModifiers.push(SFRPGEffectType.RANGED_DAMAGE);
-        } else if (this.system.actionType === "mwak") {
-            acceptedModifiers.push(SFRPGEffectType.MELEE_DAMAGE);
-        }
-
-        if (isWeapon) {
-            acceptedModifiers.push(SFRPGEffectType.WEAPON_DAMAGE);
-            acceptedModifiers.push(SFRPGEffectType.WEAPON_PROPERTY_DAMAGE);
-            acceptedModifiers.push(SFRPGEffectType.WEAPON_CATEGORY_DAMAGE);
-        }
-
-        let modifiers = this.actor.getAllModifiers();
-        modifiers = modifiers.filter(mod => {
-            if (!acceptedModifiers.includes(mod.effectType)) {
-                return false;
-            }
-
-            if (mod.effectType === SFRPGEffectType.WEAPON_DAMAGE) {
-                if (mod.valueAffected !== this.system.weaponType) {
-                    return false;
-                }
-            } else if (mod.effectType === SFRPGEffectType.WEAPON_PROPERTY_DAMAGE) {
-                if (!this.system.properties[mod.valueAffected]) {
-                    return false;
-                }
-            } else if (mod.effectType === SFRPGEffectType.WEAPON_CATEGORY_DAMAGE) {
-                if (this.system.weaponCategory !== mod.valueAffected) {
-                    return false;
-                }
-            }
-            return (mod.enabled || mod.modifierType === "formula");
-        });
-
-        return modifiers;
     }
 
     async _rollVehicleDamage({ event } = {}, options = {}) {
@@ -1416,7 +1404,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 return;
             }
         } else {
-            const htmlOptions = { secrets: this.actor?.isOwner || true, rollData: this };
+            let htmlOptions = { secrets: this.actor?.isOwner || true, rollData: this };
             htmlOptions.rollData.owner = this.actor?.system;
 
             // Basic template rendering data
@@ -1746,11 +1734,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         let count = 0;
         let actorCount = 0;
 
-        for (const actor of game.actors.contents) {
+        for (let actor of game.actors.contents) {
             const isNPC = ['npc', 'npc2'].includes(actor.type);
 
             let updates = [];
-            const params = actor.items.filter(i => i.system.scaling?.d3 || i.system.scaling?.d6);
+            let params = actor.items.filter(i => i.system.scaling?.d3 || i.system.scaling?.d6);
             if (params.length > 0) {
                 updates = params.map( (currentValue) => {
                     return {
@@ -1760,7 +1748,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                     };
                 });
 
-                for (const currentValue of updates) {
+                for (let currentValue of updates) {
                     if (currentValue.scaling.d3) {
                         const parts = currentValue['system.damage.parts'];
                         for (const i of parts) {

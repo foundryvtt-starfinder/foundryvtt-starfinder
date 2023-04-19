@@ -564,7 +564,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("add-ability-adjustment")) {
             await this._onSubmit(event);
             const abilityMods = this.item.system.abilityMods;
-            return await this.item.update({
+            return this.item.update({
                 "system.abilityMods.parts": abilityMods.parts.concat([
                     [0, ""]
                 ])
@@ -577,7 +577,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             const li = a.closest(".ability-adjustment-part");
             const abilityMods = duplicate(this.item.system.abilityMods);
             abilityMods.parts.splice(Number(li.dataset.abilityAdjustment), 1);
-            return await this.item.update({
+            return this.item.update({
                 "system.abilityMods.parts": abilityMods.parts
             });
         }
@@ -597,7 +597,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("add-damage")) {
             await this._onSubmit(event); // Submit any unsaved changes
             const damage = this.item.system.damage;
-            return await this.item.update({
+            return this.item.update({
                 "system.damage.parts": damage.parts.concat([
                     { name: "", formula: "", types: {}, group: null }
                 ])
@@ -610,7 +610,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             const li = a.closest(".damage-part");
             const damage = duplicate(this.item.system.damage);
             damage.parts.splice(Number(li.dataset.damagePart), 1);
-            return await this.item.update({
+            return this.item.update({
                 "system.damage.parts": damage.parts
             });
         }
@@ -619,7 +619,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("add-critical-damage")) {
             await this._onSubmit(event); // Submit any unsaved changes
             const criticalDamage = this.item.system.critical;
-            return await this.item.update({
+            return this.item.update({
                 "system.critical.parts": criticalDamage.parts.concat([
                     ["", ""]
                 ])
@@ -632,7 +632,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             const li = a.closest(".damage-part");
             const criticalDamage = duplicate(this.item.system.critical);
             criticalDamage.parts.splice(Number(li.dataset.criticalPart), 1);
-            return await this.item.update({
+            return this.item.update({
                 "system.critical.parts": criticalDamage.parts
             });
         }
@@ -870,7 +870,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("add-visualization")) {
             await this._onSubmit(event); // Submit any unsaved changes
             const visualization = duplicate(this.item.system.combatTracker.visualization);
-            return await this.item.update({
+            return this.item.update({
                 "system.combatTracker.visualization": visualization.concat([
                     { mode: "eq", value: 0, title: this.item.name, image: this.item.img }
                 ])
@@ -883,7 +883,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             const li = a.closest(".visualization-part");
             const visualization = duplicate(this.item.system.combatTracker.visualization);
             visualization.splice(Number(li.dataset.index), 1);
-            return await this.item.update({
+            return this.item.update({
                 "system.combatTracker.visualization": visualization
             });
         }
@@ -925,7 +925,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         const visualization = duplicate(this.item.system.combatTracker.visualization);
         visualization[visualizationIndex].mode = event.currentTarget.value;
 
-        return await this.item.update({
+        return this.item.update({
             "system.combatTracker.visualization": visualization
         });
     }
@@ -943,7 +943,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             visualization[visualizationIndex].value = 0;
         }
 
-        return await this.item.update({
+        return this.item.update({
             "system.combatTracker.visualization": visualization
         });
     }
@@ -958,7 +958,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         const visualization = duplicate(this.item.system.combatTracker.visualization);
         visualization[visualizationIndex].title = event.currentTarget.value;
 
-        return await this.item.update({
+        return this.item.update({
             "system.combatTracker.visualization": visualization
         });
     }
