@@ -562,12 +562,28 @@ export class CombatSFRPG extends Combat {
         return total / count;
     }
 
-    getCombatInfo(activeCombat) {
+    getEncounterInfo(activeCombat) {
+        activeCombat.encounterInfo = [];
+        const encounterInfo = activeCombat.encounterInfo;
+
         const playerInfo = activeCombat.calculateAPL();
-        activeCombat.PCs = playerInfo[0];
-        activeCombat.APL = playerInfo[1];
-        activeCombat.enemyXP = activeCombat.calculateEnemyXP();
-        activeCombat.calculateChallenge(activeCombat.APL);
+        encounterInfo.PCs = playerInfo[0];
+        encounterInfo.APL = playerInfo[1];
+
+        const enemyInfo = activeCombat.calculateEnemyXP();
+        encounterInfo.enemies = enemyInfo[0];
+        encounterInfo.enemyXP = enemyInfo[1];
+
+        const challengeInfo = activeCombat.calculateChallenge();
+        encounterInfo.CR = challengeInfo[0].CR;
+        encounterInfo.CRXPbounds = [challengeInfo[0].minXP, challengeInfo[0].totalXP];
+        encounterInfo.Difficulty = challengeInfo[1];
+        encounterInfo.IndXP = challengeInfo[2];
+
+        console.log(this);
+        console.log("The encounter has ".concat(encounterInfo.PCs.length, " PC(s) [APL ", encounterInfo.APL, "], ", "and ", encounterInfo.enemies.length, " hostile NPC(s) [CR ", encounterInfo.CR, "]."));
+        console.log("The encounter difficulty is ".concat(encounterInfo.Difficulty, " and is worth ", encounterInfo.IndXP, " XP per player."));
+
     }
 
     calculateAPL() {
@@ -605,25 +621,25 @@ export class CombatSFRPG extends Combat {
                 }
             }
         }
-        return enemyXP;
+        return [enemyCombatants, enemyXP.reduce((partialSum, a) => partialSum + a, 0)];
     }
 
     calculateChallenge() {
         const XPTable = CONFIG.SFRPG.XPTable;
-        const APL = this.APL;
-        const enemyXP = this.enemyXP;
+        const APL = this.encounterInfo.APL;
+        const numPlayers = this.encounterInfo.PCs.length;
+        const XPtotal = this.encounterInfo.enemyXP;
 
         // Calculate Difficulty Table
         const diffTable = [
-            {"difficulty": "Easy", "CR": APL - 1},
-            {"difficulty": "Average", "CR": APL},
-            {"difficulty": "Challenging", "CR": APL + 1},
-            {"difficulty": "Hard", "CR": APL + 2},
-            {"difficulty": "Epic", "CR": APL + 3}
+            {"difficulty": `${game.i18n.format("SFRPG.Combat.Difficulty.Levels.Easy")}`, "CR": APL - 1},
+            {"difficulty": `${game.i18n.format("SFRPG.Combat.Difficulty.Levels.Average")}`, "CR": APL},
+            {"difficulty": `${game.i18n.format("SFRPG.Combat.Difficulty.Levels.Challenging")}`, "CR": APL + 1},
+            {"difficulty": `${game.i18n.format("SFRPG.Combat.Difficulty.Levels.Hard")}`, "CR": APL + 2},
+            {"difficulty": `${game.i18n.format("SFRPG.Combat.Difficulty.Levels.Epic")}`, "CR": APL + 3}
         ];
 
         // Calculate XP and compare to XP table
-        const XPtotal = enemyXP.reduce((partialSum, a) => partialSum + a, 0);
         let XParray = [];
         let XPsurplus = 0;
         let XPdeficit = 0;
@@ -640,36 +656,29 @@ export class CombatSFRPG extends Combat {
             if (XPtotal > XProw.minXP) {
                 if (XPtotal <= XProw.totalXP) {
                     XParray = XProw;
-                    XPsurplus = XPtotal - XProw.minXP;
-                    XPdeficit = XProw.totalXP - XPtotal;
+                    // XPsurplus = XPtotal - XProw.minXP;
+                    // XPdeficit = XProw.totalXP - XPtotal;
                     break;
                 }
             }
         }
-        console.log("XP Award Array:");
-        console.log(XParray);
-        console.log(XPsurplus);
-        console.log(XPdeficit);
+        // console.log("XP surplus: ".concat(XPsurplus));
+        // console.log("XP deficit: ".concat(XPdeficit));
 
         // Calculate the Encounter Difficulty
         if (XParray.CR < diffTable[0].CR) {
-            console.log("Encounter is less than Easy.");
-            encounterDifficulty = "less than Easy";
+            encounterDifficulty = `${game.i18n.format("SFRPG.Combat.Difficulty.Levels.LessThanEasy")}.`;
         } else if (XParray.CR > diffTable[4].CR) {
-            console.log("Encounter is greater than Epic.");
-            encounterDifficulty = "greater than Epic";
+            encounterDifficulty = `${game.i18n.format("SFRPG.Combat.Difficulty.Levels.GreaterThanEpic")}`;
         } else {
-            for (const difficulty of diffTable) {
-                if (XParray.CR === difficulty.CR) {
-                    console.log("Encounter difficulty is ".concat(difficulty.difficulty, "."));
-                    encounterDifficulty = difficulty.difficulty;
+            for (const diffRow of diffTable) {
+                if (XParray.CR === diffRow.CR) {
+                    encounterDifficulty = diffRow.difficulty;
                 }
             }
         }
 
         // Calculate individual XP based on number of party members
-        console.log(this);
-        const numPlayers = this.PCs.length;
         if (numPlayers < 4) {
             encounterIndXP = XParray.indOneThree;
         } else if (numPlayers > 5) {
@@ -677,8 +686,8 @@ export class CombatSFRPG extends Combat {
         } else {
             encounterIndXP = XParray.indFourFive;
         }
-        console.log(encounterDifficulty);
-        console.log(encounterIndXP);
+
+        return [XParray, encounterDifficulty, encounterIndXP];
     }
 
     _getInitiativeFormula(combatant) {
@@ -837,7 +846,7 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
     const roundHeader = header.find('h3');
     const originalHtml = roundHeader.html();
 
-    activeCombat.getCombatInfo(activeCombat);
+    activeCombat.getEncounterInfo(activeCombat);
 
     if (activeCombat.round) {
         const phases = activeCombat.getPhases();
