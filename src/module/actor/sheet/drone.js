@@ -63,12 +63,12 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
             weaponLabel = game.i18n.format("SFRPG.DroneSheet.Inventory.Weapons.None");
         }
 
-        const armorUpgradesLabel = game.i18n.format("SFRPG.DroneSheet.Inventory.ArmorUpgrades", {
+        let armorUpgradesLabel = game.i18n.format("SFRPG.DroneSheet.Inventory.ArmorUpgrades", {
             current: data.system.attributes.armorSlots.current,
             max: data.system.attributes.armorSlots.max
         });
 
-        const cargoLabel = game.i18n.format("SFRPG.DroneSheet.Inventory.CarriedItems");
+        let cargoLabel = game.i18n.format("SFRPG.DroneSheet.Inventory.CarriedItems");
 
         const inventory = {
             weapon: {
@@ -92,7 +92,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
             cargo: { label: cargoLabel, items: [], dataset: { type: "goods" } }
         };
 
-        const [
+        let [
             items, // 0
             feats, // 1
             chassis, // 2
@@ -128,14 +128,6 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
                     this._prepareActorResource(item, actorData);
                 }
 
-                if (item.config.hasAttack) {
-                    this._prepareAttackString(item);
-                }
-
-                if (item.config.hasDamage) {
-                    this._prepareDamageString(item);
-                }
-
                 if (item.type === "feat") {
                     if ((item.system.requirements?.toLowerCase() || "") === "condition") {
                         arr[4].push(item); // conditionItems
@@ -166,15 +158,15 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
             }
         });
 
-        const droneLevelIndex = data.system.details.level.value - 1;
-        const maxMods = SFRPG.droneModsPerLevel[droneLevelIndex];
+        let droneLevelIndex = data.system.details.level.value - 1;
+        let maxMods = SFRPG.droneModsPerLevel[droneLevelIndex];
 
-        const activeFeats = [];
-        const passiveFeats = [];
-        const classFeatures = [];
-        const universalCreatureRule = [];
-        const otherFeatures = [];
-        for (const f of feats) {
+        let activeFeats = [];
+        let passiveFeats = [];
+        let classFeatures = [];
+        let universalCreatureRule = [];
+        let otherFeatures = [];
+        for (let f of feats) {
             if (f.system.activation.type) activeFeats.push(f);
             else if (f.system.details.category === "feat") passiveFeats.push(f);
             else if (f.system.details.category === "classFeature") classFeatures.push(f);
@@ -182,18 +174,18 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
             else otherFeatures.push(f);
         }
 
-        const maxFeats = SFRPG.droneFeatsPerLevel[droneLevelIndex];
+        let maxFeats = SFRPG.droneFeatsPerLevel[droneLevelIndex];
 
-        const chassisLabel = game.i18n.format("SFRPG.DroneSheet.Features.Chassis");
-        const modsLabel = game.i18n.format("SFRPG.DroneSheet.Features.Mods", {
+        let chassisLabel = game.i18n.format("SFRPG.DroneSheet.Features.Chassis");
+        let modsLabel = game.i18n.format("SFRPG.DroneSheet.Features.Mods", {
             current: mods.filter((x) => !x.system.isFree).length,
             max: maxMods
         });
-        const featsLabel = game.i18n.format("SFRPG.DroneSheet.Features.Feats.Header", {
+        let featsLabel = game.i18n.format("SFRPG.DroneSheet.Features.Feats.Header", {
             current: activeFeats.length + passiveFeats.length,
             max: maxFeats
         });
-        const activeFeatsLabel = game.i18n.format("SFRPG.DroneSheet.Features.Feats.Active");
+        let activeFeatsLabel = game.i18n.format("SFRPG.DroneSheet.Features.Feats.Active");
 
         const features = {
             chassis: {
@@ -271,7 +263,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
             }
         };
 
-        const [permanent, temporary, conditions] = data.system.modifiers.reduce(
+        let [permanent, temporary, conditions] = data.system.modifiers.reduce(
             (arr, modifier) => {
                 if (modifier.subtab === "permanent") arr[0].push(modifier);
                 else if (modifier.subtab === "conditions") arr[2].push(modifier);

@@ -127,21 +127,9 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         let [attacks, primarySystems, expansionBays, actorResources] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
             if (!item.config) item.config = {};
-            const hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.system.actionType) && (!["weapon", "shield"].includes(item.type) || item.system.equipped);
-            const hasDamage = item.system.damage?.parts
-                && item.system.damage.parts.length > 0
-                && (!["weapon", "shield"].includes(item.type) || item.system.equipped);
 
             if (item.type === "actorResource") {
                 this._prepareActorResource(item, actorData);
-            }
-
-            if (item.config.hasAttack || hasAttack) {
-                this._prepareAttackString(item);
-            }
-
-            if (item.config.hasDamage || hasDamage) {
-                this._prepareDamageString(item);
             }
 
             if (item.type === "weapon" || item.type === "vehicleAttack") {
