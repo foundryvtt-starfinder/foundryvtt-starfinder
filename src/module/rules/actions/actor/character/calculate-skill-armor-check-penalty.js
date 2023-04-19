@@ -60,7 +60,7 @@ export default function(engine) {
             rolledMods: []
         };
 
-        const mods = context.parameters.stackModifiers.process(acpMods, context);
+        const mods = context.parameters.stackModifiers.process(acpMods, context, {actor: fact.actor});
         let mod = Object.entries(mods).reduce((sum, mod) => {
             if (mod[1] === null || mod[1].length < 1) return sum;
 

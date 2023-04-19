@@ -65,7 +65,7 @@ export default function(engine) {
             if (resourceData.enabled && resourceData.type && resourceData.subType && (resourceData.base || resourceData.base === 0)) {
                 const modifierKey = `${resourceData.type}.${resourceData.subType}`;
                 const filteredMods = actorResourceMods.filter(mod => mod.valueAffected === modifierKey);
-                const processedMods = context.parameters.stackModifiers.process(filteredMods, context);
+                const processedMods = context.parameters.stackModifiers.process(filteredMods, context, {actor: fact.actor});
 
                 if (!data.resources) {
                     data.resources = {};

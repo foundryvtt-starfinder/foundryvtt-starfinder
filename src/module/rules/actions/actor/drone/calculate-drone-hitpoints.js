@@ -38,7 +38,7 @@ export default function(engine) {
         let filteredModifiers = fact.modifiers.filter(mod => {
             return (mod.enabled || mod.modifierType === "formula") && mod.effectType == SFRPGEffectType.HIT_POINTS;
         });
-        filteredModifiers = context.parameters.stackModifiers.process(filteredModifiers, context);
+        filteredModifiers = context.parameters.stackModifiers.process(filteredModifiers, context, {actor: fact.actor});
 
         let bonus = Object.entries(filteredModifiers).reduce((sum, mod) => {
             if (mod[1] === null || mod[1].length < 1) return sum;

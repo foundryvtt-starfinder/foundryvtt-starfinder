@@ -42,8 +42,8 @@ export default function(engine) {
             return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.AC].includes(mod.effectType);
         });
 
-        let eacMods = context.parameters.stackModifiers.process(armorMods.filter(mod => ["eac", "both"].includes(mod.valueAffected)), context);
-        let kacMods = context.parameters.stackModifiers.process(armorMods.filter(mod => ["kac", "both"].includes(mod.valueAffected)), context);
+        let eacMods = context.parameters.stackModifiers.process(armorMods.filter(mod => ["eac", "both"].includes(mod.valueAffected)), context, {actor: fact.actor});
+        let kacMods = context.parameters.stackModifiers.process(armorMods.filter(mod => ["kac", "both"].includes(mod.valueAffected)), context, {actor: fact.actor});
 
         let eacMod = Object.entries(eacMods).reduce((sum, curr) => {
             if (curr[1] === null || curr[1].length < 1) return sum;

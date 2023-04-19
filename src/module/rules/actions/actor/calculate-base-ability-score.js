@@ -74,7 +74,8 @@ export default function(engine) {
 
             const abilityMods = context.parameters.stackModifiers.process(
                 filteredMods.filter(mod => mod.valueAffected === abl),
-                context
+                context,
+                {actor: fact.actor}
             );
 
             let score = ability.base ? ability.base : 10;

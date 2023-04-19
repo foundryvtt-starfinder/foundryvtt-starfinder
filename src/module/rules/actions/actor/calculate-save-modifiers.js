@@ -68,7 +68,7 @@ export default function(engine) {
             if ([ "highest", "lowest", "fort" ].includes(mod.valueAffected)) return true;
             if (mod.effectType === SFRPGEffectType.SAVES) return true;
             return false;
-        }), context);
+        }), context, {actor: fact.actor});
 
         reflex.rolledMods = null;
         const reflexMods = context.parameters.stackModifiers.process(filteredMods.filter(mod => {
@@ -83,7 +83,7 @@ export default function(engine) {
             if ([ "highest", "lowest", "reflex" ].includes(mod.valueAffected)) return true;
             if (mod.effectType === SFRPGEffectType.SAVES) return true;
             return false;
-        }), context);
+        }), context, {actor: fact.actor});
 
         will.rolledMods = null;
         const willMods = context.parameters.stackModifiers.process(filteredMods.filter(mod => {
@@ -98,7 +98,7 @@ export default function(engine) {
             if ([ "highest", "lowest", "will" ].includes(mod.valueAffected)) return true;
             if (mod.effectType === SFRPGEffectType.SAVES) return true;
             return false;
-        }), context);
+        }), context, {actor: fact.actor});
 
         let fortMod = Object.entries(fortMods).reduce((sum, mod) => {
             if (mod[1] === null || mod[1].length < 1) return sum;

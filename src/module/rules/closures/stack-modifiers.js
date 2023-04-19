@@ -12,22 +12,22 @@ export default class StackModifiers extends Closure {
      *
      * @param {Array}   modifiers The modifiers to stack.
      * @param {Context} context   The context for this closure.
-     *
+     * @param {Object} options    Some options for this closure. F.e. we can provide the whole actor here.
      * @returns {Object}          An object containing only those modifiers allowed
      *                            based on the stacking rules.
      */
-    process(mods, context) {
+    process(mods, context, options = { actor: null }) {
         const modifiers = mods;
         for (let modifiersI = 0; modifiersI < modifiers.length; modifiersI++) {
             const modifier = modifiers[modifiersI];
-            const actor = game.actors.get(modifier.container?.actorId);
+            const actor = options.actor || game.actors.get(modifier.container?.actorId);
             const formula = String(modifier.modifier);
 
             if (formula && (modifier.modifierType === SFRPGModifierType.CONSTANT)) {
                 try {
                     const roll = Roll.create(formula, actor?.system);
                     if (roll.isDeterministic) {
-                        const simplerFormula = Roll.replaceFormulaData(formula, actor.system, {missing: 0, warn: true});
+                        const simplerFormula = Roll.replaceFormulaData(formula, actor?.system, {missing: 0, warn: true});
                         modifier.max = Roll.safeEval(simplerFormula);
                     } else {
                         ui.notifications.error(`Error with modifier: ${modifier.name}. Dice are not available in constant formulas. Please use a situational modifier instead.`);
@@ -51,15 +51,16 @@ export default class StackModifiers extends Closure {
      * In difference to normal "process" "processAsync" can calculate with dices and so it is allowed to take situational modifiers.
      * @param {Array} mods modifiers The modifiers to stack.
      * @param {Context} context The context for this closure.
+     * @param {Object} options Some options for this closure. F.e. we can provide the whole actor here.
      * @returns {Object} An object containing only those modifiers allowed based on the stacking rules.
      */
-    async processAsync(mods, context) {
+    async processAsync(mods, context, options = { actor: null }) {
         const modifiers = mods;
         if (modifiers.length > 0) {
             for (let modifiersI = 0; modifiersI < modifiers.length; modifiersI++) {
                 const modifier = modifiers[modifiersI];
-                const actor = game.actors.get(modifier.container?.actorId);
-                const formula = modifier.modifier;
+                const actor = options.actor || game.actors.get(modifier.container?.actorId);
+                const formula = String(modifier.modifier);
 
                 if (formula) {
                     const roll = Roll.create(formula, actor?.system);

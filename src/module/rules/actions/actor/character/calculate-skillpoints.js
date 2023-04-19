@@ -50,7 +50,7 @@ export default function(engine) {
         let skillPointModifiers = fact.modifiers.filter(mod => {
             return (mod.enabled || mod.modifierType === "formula") && mod.effectType === SFRPGEffectType.SKILL_POINTS;
         });
-        skillPointModifiers = context.parameters.stackModifiers.process(skillPointModifiers, context);
+        skillPointModifiers = context.parameters.stackModifiers.process(skillPointModifiers, context, {actor: fact.actor});
 
         const skillPointModifierBonus = Object.entries(skillPointModifiers).reduce((sum, mod) => {
             if (mod[1] === null || mod[1].length < 1) return sum;
@@ -79,7 +79,7 @@ export default function(engine) {
                 else if (key !== mod.valueAffected) return false;
 
                 return true;
-            }), context);
+            }), context, {actor: fact.actor});
 
             let accumulator = Object.entries(mods).reduce((sum, mod) => {
                 if (mod[1] === null || mod[1].length < 1) return sum;

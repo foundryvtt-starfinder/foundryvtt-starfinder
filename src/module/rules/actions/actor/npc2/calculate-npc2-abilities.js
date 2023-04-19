@@ -49,7 +49,8 @@ export default function(engine) {
 
             const abilityMods = context.parameters.stackModifiers.process(
                 filteredMods.filter(mod => mod.valueAffected === abl),
-                context
+                context,
+                {actor: fact.actor}
             );
 
             const bonus = Object.entries(abilityMods).reduce((sum, mod) => {

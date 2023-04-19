@@ -41,7 +41,8 @@ export default function(engine) {
 
             const abilityMods = context.parameters.stackModifiers.process(
                 filteredMods.filter(mod => mod.valueAffected === abl || mod.effectType === SFRPGEffectType.ABILITY_MODIFIERS),
-                context
+                context,
+                {actor: fact.actor}
             );
 
             let abilityValue = ability.value;

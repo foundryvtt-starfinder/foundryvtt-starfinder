@@ -37,7 +37,7 @@ export default function(engine) {
             return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.CMD].includes(mod.effectType);
         });
 
-        const mods = context.parameters.stackModifiers.process(filteredMods, context);
+        const mods = context.parameters.stackModifiers.process(filteredMods, context, {actor: fact.actor});
 
         const cmdMod = Object.entries(mods).reduce((prev, curr) => {
             if (curr[1] === null || curr[1].length < 1) return prev;
