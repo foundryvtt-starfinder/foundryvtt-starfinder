@@ -562,27 +562,24 @@ export class CombatSFRPG extends Combat {
         return total / count;
     }
 
-    getEncounterInfo(activeCombat) {
-        activeCombat.encounterInfo = [];
-        const encounterInfo = activeCombat.encounterInfo;
+    getEncounterInfo() {
+        const playerInfo = this.calculateAPL();
+        this.flags.sfrpg.PCs = playerInfo[0];
+        this.flags.sfrpg.APL = playerInfo[1];
 
-        const playerInfo = activeCombat.calculateAPL();
-        encounterInfo.PCs = playerInfo[0];
-        encounterInfo.APL = playerInfo[1];
+        const enemyInfo = this.calculateEnemyXP();
+        this.flags.sfrpg.enemies = enemyInfo[0];
+        this.flags.sfrpg.enemyXP = enemyInfo[1];
 
-        const enemyInfo = activeCombat.calculateEnemyXP();
-        encounterInfo.enemies = enemyInfo[0];
-        encounterInfo.enemyXP = enemyInfo[1];
-
-        const challengeInfo = activeCombat.calculateChallenge();
-        encounterInfo.CR = challengeInfo[0].CR;
-        encounterInfo.CRXPbounds = [challengeInfo[0].minXP, challengeInfo[0].totalXP];
-        encounterInfo.Difficulty = challengeInfo[1];
-        encounterInfo.IndXP = challengeInfo[2];
+        const challengeInfo = this.calculateChallenge();
+        this.flags.sfrpg.CR = challengeInfo[0].CR;
+        this.flags.sfrpg.CRXPbounds = [challengeInfo[0].minXP, challengeInfo[0].totalXP];
+        this.flags.sfrpg.Difficulty = challengeInfo[1];
+        this.flags.sfrpg.IndXP = challengeInfo[2];
 
         console.log(this);
-        console.log("The encounter has ".concat(encounterInfo.PCs.length, " PC(s) [APL ", encounterInfo.APL, "], ", "and ", encounterInfo.enemies.length, " hostile NPC(s) [CR ", encounterInfo.CR, "]."));
-        console.log("The encounter difficulty is ".concat(encounterInfo.Difficulty, " and is worth ", encounterInfo.IndXP, " XP per player."));
+        console.log("Starfinder | The active combat encounter has ".concat(this.flags.sfrpg.PCs.length, " PC(s) [APL ", this.flags.sfrpg.APL, "], ", "and ", this.flags.sfrpg.enemies.length, " hostile NPC(s) [CR ", this.flags.sfrpg.CR, "]."));
+        console.log("Starfinder | The active combat encounter difficulty is ".concat(this.flags.sfrpg.Difficulty, " and is worth ", this.flags.sfrpg.IndXP, " individual XP per player."));
 
     }
 
@@ -599,7 +596,9 @@ export class CombatSFRPG extends Combat {
         }
 
         // Calculate APL
-        if (playerCombatants.length < 4) {
+        if (!playerCombatants.length) {
+            return [playerCombatants, 0];
+        } else if (playerCombatants.length < 4) {
             return [playerCombatants, Math.round(this.average(playerLevels)) - 1];
         } else if (playerCombatants.length > 5) {
             return [playerCombatants, Math.round(this.average(playerLevels)) + 1];
@@ -626,9 +625,18 @@ export class CombatSFRPG extends Combat {
 
     calculateChallenge() {
         const XPTable = CONFIG.SFRPG.XPTable;
-        const APL = this.encounterInfo.APL;
-        const numPlayers = this.encounterInfo.PCs.length;
-        const XPtotal = this.encounterInfo.enemyXP;
+        const APL = this.flags.sfrpg.APL;
+        const numPlayers = this.flags.sfrpg.PCs.length;
+        const numEnemies = this.flags.sfrpg.enemies.length;
+        const XPtotal = this.flags.sfrpg.enemyXP;
+        const XPNoCR = {CR: 0, minXP: 0, totalXP: 0, indOneThree: 0, indFourFive: 0, indSixPlus: 0};
+
+        // Check that Players and NPCs are both present
+        if (!numPlayers) {
+            return [XPNoCR, `${game.i18n.format("SFRPG.Combat.Difficulty.Levels.NoPCs")}`, 0];
+        } else if (!numEnemies) {
+            return [XPNoCR, `${game.i18n.format("SFRPG.Combat.Difficulty.Levels.NoEnemies")}`, 0];
+        }
 
         // Calculate Difficulty Table
         const diffTable = [
@@ -848,13 +856,17 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
             roundHeader.replaceWith(`<div>${originalHtml}<h4 class="combat-type">${game.i18n.format(activeCombat.getCurrentPhase().name)}</h4></div>`);
         }
     } else {
-        // Calculate Encounter Difficulty Info
-        activeCombat.getEncounterInfo(activeCombat);
-
         // Add buttons for switching combat type
         const prevCombatTypeButton = `<a class="combat-type-prev" title="${game.i18n.format("SFRPG.Combat.EncounterTracker.SelectPrevType")}"><i class="fas fa-caret-left"></i></a>`;
         const nextCombatTypeButton = `<a class="combat-type-next" title="${game.i18n.format("SFRPG.Combat.EncounterTracker.SelectNextType")}"><i class="fas fa-caret-right"></i></a>`;
-        roundHeader.replaceWith(`<div>${originalHtml}<h4 class="combat-type">${prevCombatTypeButton} &nbsp; ${activeCombat.getCombatName()} &nbsp; ${nextCombatTypeButton}</h4></div>`);
+
+        // Add in the difficulty calculator if needed
+        if (activeCombat.getCombatType() === "normal") {
+            activeCombat.getEncounterInfo();
+            roundHeader.replaceWith(`<div>${originalHtml}<h4 class="combat-type">${prevCombatTypeButton} &nbsp; ${activeCombat.getCombatName()} &nbsp; ${nextCombatTypeButton}</h4><h4 class="difficulty">Difficulty: ${activeCombat.flags.sfrpg.Difficulty}</h4></div>`);
+        } else {
+            roundHeader.replaceWith(`<div>${originalHtml}<h4 class="combat-type">${prevCombatTypeButton} &nbsp; ${activeCombat.getCombatName()} &nbsp; ${nextCombatTypeButton}</h4></div>`);
+        }
 
         // Handle button clicks
         const configureButtonPrev = header.find('.combat-type-prev');
