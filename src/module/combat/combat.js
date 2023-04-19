@@ -641,8 +641,6 @@ export class CombatSFRPG extends Combat {
 
         // Calculate XP and compare to XP table
         let XParray = [];
-        let XPsurplus = 0;
-        let XPdeficit = 0;
         let encounterIndXP = 0;
         let encounterDifficulty = "";
 
@@ -650,20 +648,18 @@ export class CombatSFRPG extends Combat {
             // Error checking
             if (XPtotal > XPTable[29].totalXP) {
                 console.log("Error, encounter CR > 25.");
+                XPArray = XPTable[29];
+                break;
             }
 
             // Figure out encounter difficulty
             if (XPtotal > XProw.minXP) {
                 if (XPtotal <= XProw.totalXP) {
                     XParray = XProw;
-                    // XPsurplus = XPtotal - XProw.minXP;
-                    // XPdeficit = XProw.totalXP - XPtotal;
                     break;
                 }
             }
         }
-        // console.log("XP surplus: ".concat(XPsurplus));
-        // console.log("XP deficit: ".concat(XPdeficit));
 
         // Calculate the Encounter Difficulty
         if (XParray.CR < diffTable[0].CR) {
@@ -846,14 +842,16 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
     const roundHeader = header.find('h3');
     const originalHtml = roundHeader.html();
 
-    activeCombat.getEncounterInfo(activeCombat);
-
     if (activeCombat.round) {
         const phases = activeCombat.getPhases();
         if (phases.length > 1) {
             roundHeader.replaceWith(`<div>${originalHtml}<h4 class="combat-type">${game.i18n.format(activeCombat.getCurrentPhase().name)}</h4></div>`);
         }
     } else {
+        // Calculate Encounter Difficulty Info
+        activeCombat.getEncounterInfo(activeCombat);
+
+        // Add buttons for switching combat type
         const prevCombatTypeButton = `<a class="combat-type-prev" title="${game.i18n.format("SFRPG.Combat.EncounterTracker.SelectPrevType")}"><i class="fas fa-caret-left"></i></a>`;
         const nextCombatTypeButton = `<a class="combat-type-next" title="${game.i18n.format("SFRPG.Combat.EncounterTracker.SelectNextType")}"><i class="fas fa-caret-right"></i></a>`;
         roundHeader.replaceWith(`<div>${originalHtml}<h4 class="combat-type">${prevCombatTypeButton} &nbsp; ${activeCombat.getCombatName()} &nbsp; ${nextCombatTypeButton}</h4></div>`);
