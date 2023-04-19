@@ -562,6 +562,14 @@ export class CombatSFRPG extends Combat {
         return total / count;
     }
 
+    getCombatInfo(activeCombat) {
+        const playerInfo = activeCombat.calculateAPL();
+        activeCombat.PCs = playerInfo[0];
+        activeCombat.APL = playerInfo[1];
+        activeCombat.enemyXP = activeCombat.calculateEnemyXP();
+        activeCombat.calculateChallenge(activeCombat.APL);
+    }
+
     calculateAPL() {
         let playerCombatants = [];
         let playerLevels = [];
@@ -576,17 +584,101 @@ export class CombatSFRPG extends Combat {
 
         // Calculate APL
         if (playerCombatants.length < 4) {
-            return Math.round(this.average(playerLevels)) - 1;
+            return [playerCombatants, Math.round(this.average(playerLevels)) - 1];
         } else if (playerCombatants.length > 5) {
-            return Math.round(this.average(playerLevels)) + 1;
+            return [playerCombatants, Math.round(this.average(playerLevels)) + 1];
         } else {
-            return Math.round(this.average(playerLevels));
+            return [playerCombatants, Math.round(this.average(playerLevels))];
         }
     }
 
-    calculateChallenge(APL) {
-        console.log("Challenge");
-        console.log(APL);
+    calculateEnemyXP() {
+        let enemyCombatants = [];
+        let enemyXP = [];
+
+        // Find all player-owned PCs and get their levels
+        for (const combatant of this.combatants) {
+            if (combatant.isNPC) {
+                if (combatant.token.disposition < 0) {
+                    enemyCombatants.push(combatant);
+                    enemyXP.push(combatant.actor.system.details.xp.value); // Enemy XP values
+                }
+            }
+        }
+        return enemyXP;
+    }
+
+    calculateChallenge() {
+        const XPTable = CONFIG.SFRPG.XPTable;
+        const APL = this.APL;
+        const enemyXP = this.enemyXP;
+
+        // Calculate Difficulty Table
+        const diffTable = [
+            {"difficulty": "Easy", "CR": APL - 1},
+            {"difficulty": "Average", "CR": APL},
+            {"difficulty": "Challenging", "CR": APL + 1},
+            {"difficulty": "Hard", "CR": APL + 2},
+            {"difficulty": "Epic", "CR": APL + 3}
+        ];
+
+        // Calculate XP and compare to XP table
+        const XPtotal = enemyXP.reduce((partialSum, a) => partialSum + a, 0);
+        let XParray = [];
+        let XPsurplus = 0;
+        let XPdeficit = 0;
+        let encounterIndXP = 0;
+        let encounterDifficulty = "";
+
+        for (const XProw of XPTable) {
+            // Error checking
+            if (XPtotal > XPTable[29].totalXP) {
+                console.log("Error, encounter CR > 25.");
+            }
+
+            // Figure out encounter difficulty
+            if (XPtotal > XProw.minXP) {
+                if (XPtotal <= XProw.totalXP) {
+                    XParray = XProw;
+                    XPsurplus = XPtotal - XProw.minXP;
+                    XPdeficit = XProw.totalXP - XPtotal;
+                    break;
+                }
+            }
+        }
+        console.log("XP Award Array:");
+        console.log(XParray);
+        console.log(XPsurplus);
+        console.log(XPdeficit);
+
+        // Calculate the Encounter Difficulty
+        if (XParray.CR < diffTable[0].CR) {
+            console.log("Encounter is less than Easy.");
+            encounterDifficulty = "less than Easy";
+        } else if (XParray.CR > diffTable[4].CR) {
+            console.log("Encounter is greater than Epic.");
+            encounterDifficulty = "greater than Epic";
+        } else {
+            for (const difficulty of diffTable) {
+                if (XParray.CR === difficulty.CR) {
+                    console.log("Encounter difficulty is ".concat(difficulty.difficulty, "."));
+                    encounterDifficulty = difficulty.difficulty;
+                }
+            }
+        }
+
+        // Calculate individual XP based on number of party members
+        console.log(this);
+        const numPlayers = this.PCs.length;
+        if (numPlayers < 4) {
+            encounterIndXP = XParray.indOneThree;
+        } else if (numPlayers > 5) {
+            encounterIndXP = XParray.indSixPlus;
+        } else {
+            encounterIndXP = XParray.indFourFive;
+        }
+        console.log(encounterDifficulty);
+        console.log(encounterIndXP);
     }
 
     _getInitiativeFormula(combatant) {
@@ -745,19 +837,17 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
     const roundHeader = header.find('h3');
     const originalHtml = roundHeader.html();
 
-    const APL = activeCombat.calculateAPL();
-    activeCombat.calculateChallenge(APL);
-    const difficulty = "Hard";
+    activeCombat.getCombatInfo(activeCombat);
 
     if (activeCombat.round) {
         const phases = activeCombat.getPhases();
         if (phases.length > 1) {
-            roundHeader.replaceWith(`<div>${originalHtml}<h4 class="combat-type">${game.i18n.format(activeCombat.getCurrentPhase().name)}</h4><h4>This is good: ${difficulty}</h4></div>`);
+            roundHeader.replaceWith(`<div>${originalHtml}<h4 class="combat-type">${game.i18n.format(activeCombat.getCurrentPhase().name)}</h4></div>`);
         }
     } else {
         const prevCombatTypeButton = `<a class="combat-type-prev" title="${game.i18n.format("SFRPG.Combat.EncounterTracker.SelectPrevType")}"><i class="fas fa-caret-left"></i></a>`;
         const nextCombatTypeButton = `<a class="combat-type-next" title="${game.i18n.format("SFRPG.Combat.EncounterTracker.SelectNextType")}"><i class="fas fa-caret-right"></i></a>`;
-        roundHeader.replaceWith(`<div>${originalHtml}<h4 class="combat-type">${prevCombatTypeButton} &nbsp; ${activeCombat.getCombatName()} &nbsp; ${nextCombatTypeButton}</h4> <h4 class="challenge">This is good: ${difficulty}</h4> </div>`);
+        roundHeader.replaceWith(`<div>${originalHtml}<h4 class="combat-type">${prevCombatTypeButton} &nbsp; ${activeCombat.getCombatName()} &nbsp; ${nextCombatTypeButton}</h4></div>`);
 
         // Handle button clicks
         const configureButtonPrev = header.find('.combat-type-prev');
