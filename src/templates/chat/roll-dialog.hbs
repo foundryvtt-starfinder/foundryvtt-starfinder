@@ -87,10 +87,11 @@
             <div class="modifier-list-header-enabled"></div>
             <h3 class="modifier-list-header-name noborder">{{localize "SFRPG.Rolls.Dialog.ModifierName"}}</h3>
             <div class="modifier-list-header-modifier">{{localize "SFRPG.Rolls.Dialog.ModifierEffect"}}</div>
+            <div class="modifier-list-header-type">Type</div>
         </li>
 
         {{#each availableModifiers as |modifier id|}}
-        <li class="modifier flexrow toggle-modifier" data-modifier-index="{{id}}" {{#if modifier.notes}}data-tippy-content="<b>{{modifier.name}}</b><br/>{{modifier.notes}}"{{/if}}>
+        <li class="modifier flexrow toggle-modifier" data-modifier-index="{{id}}" data-modifier-type="{{modifier.type}}" data-modifier-value="{{modifier.max}}" {{#if modifier.notes}}data-tippy-content="<b>{{modifier.name}}</b><br/>{{modifier.notes}}"{{/if}}>
             <a class="modifier-enabled" title="{{modifier.name}}">{{#if modifier.enabled}}<i class="far fa-check-square">{{else}}<i class="far fa-square"></i>{{/if}}</i></a>
             <h4 class="modifier-name">{{modifier.name}}</h4>
             <span class="modifier-modifier">{{modifier.modifier}}
@@ -98,6 +99,9 @@
                 <i class="fas fa-info-circle" data-tooltip="{{localize "SFRPG.Rolls.Dialog.SimplifiedFormulaTooltip" formula=modifier.originalFormula}}"></i>
             {{/if}}
             </span>
+            {{#if modifier.localizedType}}
+            <span class="modifier-type">{{modifier.localizedType}}</span>
+            {{/if}}
         </li>
         {{/each}}
     </ul>

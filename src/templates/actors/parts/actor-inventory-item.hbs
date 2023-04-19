@@ -12,13 +12,13 @@
                         <button type="button" class="tag use">{{localize "SFRPG.Items.Consumable.UseAction"}}</button>
                     {{else}}
                         {{#if item.config.hasAttack}}
-                        <button type="button" class="tag attack">{{localize "SFRPG.Attack"}}</button>
+                        <button type="button" class="tag attack" data-tooltip="{{localize "SFRPG.Attack"}}">{{item.config.attackString}}</button>
                         {{/if}}
                         {{#if item.config.hasDamage}}
                             {{#if (eq item.system.actionType "heal")}}
-                                <button type="button" class="tag healing">{{localize "SFRPG.ActionHeal"}}</button>
+                                <button type="button" class="tag healing" data-tooltip="{{localize "SFRPG.ActionHeal"}}">{{item.config.damageString}}</button>
                             {{else}}
-                                <button type="button" class="tag damage">{{localize "SFRPG.Damage.Title"}}</button>
+                                <button type="button" class="tag damage" data-tooltip="{{localize "SFRPG.Damage.Title"}}">{{item.config.damageString}}</button>
                             {{/if}}
                         {{/if}}
                     {{/if}}

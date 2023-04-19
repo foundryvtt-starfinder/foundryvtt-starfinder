@@ -5,11 +5,99 @@
     /* ----------------------------------------- */
 
     .sheet-header {
+        /* Profile Image */
+        div.image-container {
+            flex: 0 0 @headerHeight;
+            height: @headerHeight;
+
+            img.profile {
+                flex: 0 0 @headerHeight;
+                height: @headerHeight;
+                object-fit: contain;
+                border: none;
+            }
+
+            a.hover-icon {
+                display: none;
+                text-align: right;
+                bottom: 26px;
+                position: relative;
+                right: 4px;
+                font-size: var(--font-size-16);
+            }
+
+            &:hover .hover-icon {
+                display: block;
+            }
+        }
+
         .summary {
             li {
                 white-space: nowrap;
                 text-overflow: ellipsis;
                 overflow: hidden;
+            }
+        }
+
+        /* Header Summary Details */
+        // Used on NPCs and Hazards
+        .summary-row1 {
+            flex: 0 0 100%;
+            height: @detailsHeight;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            border-top: @borderGroove;
+            border-bottom: none;
+            font-size: 16px;
+
+            li {
+                width: 45%;
+                float: left;
+                height: @detailsHeight - 6px;
+                margin: 2px 0;
+                padding: 0 3px;
+                border-left: @borderGroove;
+                line-height: 34px;
+                color: @colorOlive;
+
+                &:first-child {
+                    width: 55%;
+                }
+
+                &:last-child {
+                    border-right: none;
+                }
+            }
+        }
+
+        .summary-row2 {
+            flex: 0 0 100%;
+            height: @detailsHeight;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            border-top: @borderGroove;
+            border-bottom: none;
+            font-size: 16px;
+
+            li {
+                width: 45%;
+                float: left;
+                height: @detailsHeight - 6px;
+                margin: 2px 0;
+                padding: 0 3px;
+                border-left: @borderGroove;
+                line-height: 34px;
+                color: @colorOlive;
+
+                &:first-child {
+                    width: 10%;
+                }
+
+                &:last-child {
+                    border-right: none;
+                }
             }
         }
 
@@ -659,16 +747,16 @@
                 }
 
                 .item-action {
-                    flex: 0 0 15%;
+                    flex: 0 0 25%;
                     flex-direction: row;
                     padding: 1px 0;
+                    white-space: nowrap;
 
                     .attack {
                         width: auto;
                         background: @sfrpgBlue;
                         color: #fff;
                         cursor: pointer;
-                        padding: 1px 6px;
 
                         &:hover,
                         &:focus {
@@ -681,6 +769,11 @@
                         background: @sfrpgRed;
                         color: #fff;
                         cursor: pointer;
+
+                        &:hover,
+                        &:focus {
+                            box-shadow: 0 0 5px @sfrpgRed;
+                        }
                     }
 
                     .healing {

@@ -7,21 +7,12 @@ export default function(engine) {
         const modifiers = fact.modifiers;
 
         const addModifier = (bonus, data, item, localizationKey) => {
-            if (bonus.modifierType === SFRPGModifierType.FORMULA) {
-                if (item.rolledMods) {
-                    item.rolledMods.push({mod: bonus.modifier, bonus: bonus});
-                } else {
-                    item.rolledMods = [{mod: bonus.modifier, bonus: bonus}];
-                }
-
-                return 0;
+            if (item.calculatedMods) {
+                item.calculatedMods.push({mod: bonus.modifier, bonus: bonus});
+            } else {
+                item.calculatedMods = [{mod: bonus.modifier, bonus: bonus}];
             }
-
-            let computedBonus = 0;
-            try {
-                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
-                computedBonus = roll.total;
-            } catch {}
+            let computedBonus = bonus.max || 0;
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
@@ -42,6 +33,17 @@ export default function(engine) {
         for (let [skl, skill] of Object.entries(skills)) {
             skill.rolledMods = null;
             const mods = context.parameters.stackModifiers.process(filteredMods.filter(mod => {
+                // temporary workaround to fix modifiers with mod "0" if the situational mod is higher.
+                if (mod.modifierType === SFRPGModifierType.FORMULA && ((mod.effectType === SFRPGEffectType.ALL_SKILLS)
+                    || (mod.effectType === SFRPGEffectType.SKILL && skl === mod.valueAffected)
+                    || (mod.effectType === SFRPGEffectType.ABILITY_SKILLS && skill.ability === mod.valueAffected))) {
+                    if (skill.rolledMods) {
+                        skill.rolledMods.push({mod: mod.modifier, bonus: mod});
+                    } else {
+                        skill.rolledMods = [{mod: mod.modifier, bonus: mod}];
+                    }
+                    return false;
+                }
                 if (mod.effectType === SFRPGEffectType.ALL_SKILLS) return true;
                 else if (mod.effectType === SFRPGEffectType.SKILL && skl === mod.valueAffected) return true;
                 else if (mod.effectType === SFRPGEffectType.ABILITY_SKILLS && skill.ability === mod.valueAffected) return true;
