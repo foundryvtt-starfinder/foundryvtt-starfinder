@@ -747,7 +747,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         let modifiers = this.getAppropriateAttackModifiers(isWeapon);
 
         const stackModifiers = new StackModifiers();
-        modifiers = await stackModifiers.processAsync(modifiers, null);
+        modifiers = await stackModifiers.processAsync(modifiers, null, {actor: this.actor});
 
         const rolledMods = [];
         const addModifier = (bonus, parts) => {
@@ -1101,7 +1101,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         let modifiers = this.getAppropriateDamageModifiers(isWeapon);
 
         const stackModifiers = new StackModifiers();
-        modifiers = await stackModifiers.processAsync(modifiers, null);
+        modifiers = await stackModifiers.processAsync(modifiers, null, {actor: this.actor});
 
         const rolledMods = [];
         const addModifier = (bonus, parts) => {

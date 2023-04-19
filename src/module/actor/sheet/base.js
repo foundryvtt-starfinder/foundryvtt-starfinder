@@ -454,7 +454,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             // Remove situational modifiers
             appropriateMods = appropriateMods.filter(mod => mod.modifierType !== SFRPGModifierType.FORMULA);
             const stackModifiers = new StackModifiers();
-            let modifiers = stackModifiers.process(appropriateMods, null);
+            let modifiers = stackModifiers.process(appropriateMods, null, {actor: actor});
 
             modifiers = Object.values(modifiers)
                 .flat()
@@ -489,7 +489,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             // Remove situational modifiers
             appropriateMods = appropriateMods.filter(mod => mod.modifierType !== SFRPGModifierType.FORMULA);
             const stackModifiers = new StackModifiers();
-            let modifiers = stackModifiers.process(appropriateMods, null);
+            let modifiers = stackModifiers.process(appropriateMods, null, {actor: actor});
 
             modifiers = Object.values(modifiers)
                 .flat()

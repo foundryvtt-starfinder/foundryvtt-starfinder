@@ -20,7 +20,7 @@ export default class StackModifiers extends Closure {
         const modifiers = mods;
         for (let modifiersI = 0; modifiersI < modifiers.length; modifiersI++) {
             const modifier = modifiers[modifiersI];
-            const actor = options.actor || game.actors.get(modifier.container?.actorId);
+            const actor = game.actors.get(modifier.container?.actorId) || options.actor;
             const formula = String(modifier.modifier);
 
             if (formula && (modifier.modifierType === SFRPGModifierType.CONSTANT)) {
