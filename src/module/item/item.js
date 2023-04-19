@@ -11,6 +11,17 @@ import { ItemCapacityMixin } from "./mixins/item-capacity.js";
 
 export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityMixin) {
 
+    constructor(data, context) {
+        // Set module art if available. This applies art to items viewed or created from compendiums.
+        if (context.pack && data._id) {
+            const art = game.sfrpg.compendiumArt.map.get(`Compendium.${context.pack}.${data._id}`);
+            if (art) {
+                data.img = art.item;
+            }
+        }
+        super(data, context);
+    }
+
     /* -------------------------------------------- */
     /*  Item Properties                             */
     /* -------------------------------------------- */
