@@ -577,6 +577,7 @@ export class CombatSFRPG extends Combat {
         this.flags.sfrpg.Difficulty = challengeInfo[1];
         this.flags.sfrpg.IndXP = challengeInfo[2];
 
+        // Debug info
         console.log(this);
         console.log("Starfinder | The active combat encounter has ".concat(this.flags.sfrpg.PCs.length, " PC(s) [APL ", this.flags.sfrpg.APL, "], ", "and ", this.flags.sfrpg.enemies.length, " hostile NPC(s) [CR ", this.flags.sfrpg.CR, "]."));
         console.log("Starfinder | The active combat encounter difficulty is ".concat(this.flags.sfrpg.Difficulty, " and is worth ", this.flags.sfrpg.IndXP, " individual XP per player."));
