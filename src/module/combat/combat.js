@@ -672,7 +672,7 @@ export class CombatSFRPG extends Combat {
 
         // Calculate the Encounter Difficulty
         if (XParray.CR < diffTable[0].CR) {
-            encounterDifficulty = `${game.i18n.format("SFRPG.Combat.Difficulty.Levels.LessThanEasy")}.`;
+            encounterDifficulty = `${game.i18n.format("SFRPG.Combat.Difficulty.Levels.LessThanEasy")}`;
         } else if (XParray.CR > diffTable[4].CR) {
             encounterDifficulty = `${game.i18n.format("SFRPG.Combat.Difficulty.Levels.GreaterThanEpic")}`;
         } else {
