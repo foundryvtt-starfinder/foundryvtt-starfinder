@@ -862,7 +862,7 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
         const nextCombatTypeButton = `<a class="combat-type-next" title="${game.i18n.format("SFRPG.Combat.EncounterTracker.SelectNextType")}"><i class="fas fa-caret-right"></i></a>`;
 
         // Add in the difficulty calculator if needed
-        if (activeCombat.getCombatType() === "normal") {
+        if (activeCombat.getCombatType() === "normal" && game.user.isGM) {
             activeCombat.getEncounterInfo();
             roundHeader.replaceWith(`<div>${originalHtml}<h4 class="combat-type">${prevCombatTypeButton} &nbsp; ${activeCombat.getCombatName()} &nbsp; ${nextCombatTypeButton}</h4><h4 class="difficulty">Difficulty: ${activeCombat.flags.sfrpg.Difficulty}</h4></div>`);
         } else {
