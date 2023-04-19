@@ -228,7 +228,7 @@ export class DiceSFRPG {
                 dieRoll = "2d20kh";
             }
 
-            const finalFormula = await this._calcStackingFormula(node, rollMods, bonus);
+            const finalFormula = await this._calcStackingFormula(node, rollMods, bonus, rollContext.allContexts["actor"]?.entity);
 
             finalFormula.finalRoll = `${dieRoll} + ${finalFormula.finalRoll}`;
             finalFormula.formula = `${dieRoll} + ${finalFormula.formula}`;
@@ -381,7 +381,7 @@ export class DiceSFRPG {
             /** @type {RollResult|null} */
             let result = null;
             await tree.buildRoll(formula, rollContext, async (button, rollMode, unusedFinalFormula, node, rollMods, bonus = null) => {
-                const finalFormula = await this._calcStackingFormula(node, rollMods, bonus);
+                const finalFormula = await this._calcStackingFormula(node, rollMods, bonus, rollContext.allContexts["actor"]?.entity);
 
                 if (mainDie) {
                     let dieRoll = "1" + mainDie;
@@ -420,7 +420,7 @@ export class DiceSFRPG {
                         return;
                     }
 
-                    const finalFormula = await this._calcStackingFormula(node, rollMods, bonus);
+                    const finalFormula = await this._calcStackingFormula(node, rollMods, bonus, rollContext.allContexts["actor"]?.entity);
 
                     if (mainDie) {
                         let dieRoll = "1" + mainDie;
@@ -1018,7 +1018,7 @@ export class DiceSFRPG {
      * @param {Number} bonus - the situational bonus for this roll
      * @returns {Object} finalFormula Object: {finalRoll: String, formula: String}
      */
-    static async _calcStackingFormula(node, rollMods, bonus = null) {
+    static async _calcStackingFormula(node, rollMods, bonus = null, actor = null) {
         let rootNode = node;
 
         let stackModifiers = new StackModifiers();
@@ -1027,7 +1027,7 @@ export class DiceSFRPG {
                 rootNode = this._removeModifierNodes(rootNode, mod);
                 return true;
             }
-        }));
+        }), null, { actor: actor });
 
         let rollString = '';
         let formulaString = '';
