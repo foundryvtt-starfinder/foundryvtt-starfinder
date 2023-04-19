@@ -37,7 +37,7 @@ export default class FloatingNumberMenu extends FormApplication {
     }
 
     async _updateObject(event, formData) {
-        Promise.all([
+        await Promise.all([
             game.settings.set("sfrpg", "floatingHP", formData["floating-toggle"]),
             game.settings.set("sfrpg", "verboseFloatyText", formData["verbose-floaty-text"]),
             game.settings.set("sfrpg", "limitByCriteria", formData["limit-by-criteria"]),
