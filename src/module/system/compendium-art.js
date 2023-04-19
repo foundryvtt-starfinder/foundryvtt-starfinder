@@ -26,6 +26,19 @@ import isObject from "../utils/is-object.js";
  *      "token": "systems/sfrpg/images/starfinder_icon.webp"
  *      }
  *    }
+ *  },
+ *  "equipment": {
+ *    "WwjWtIrdijOZ4QNn": {
+ *      "item": "modules/starfinder-iconic-tokens/art/portraits/raia.webp"
+ *    }
+ *  }
+ *  //Parsing will fail if you have an "actor" or "token" entry and an "item" entry together!
+ *  "equipment": {
+ *    "WwjWtIrdijOZ4QNn": {
+ *      "item": "systems/sfrpg/images/starfinder_icon.webp",
+ *      "actor": "systems/sfrpg/images/starfinder_icon.webp",
+ *      "token": "systems/sfrpg/images/starfinder_icon.webp"
+ *    }
  *  }
  *
  */
@@ -47,12 +60,15 @@ export default async function registerCompendiumArt() {
             }
 
             const index = pack.indexed ? pack.index : await pack.getIndex();
-            for (const [actorId, paths] of Object.entries(art)) {
-                const record = index.get(actorId); // Find the current actor in the index
+            for (const [id, paths] of Object.entries(art)) {
+                const record = index.get(id); // Find the current document in the index
                 if (!record) continue;
-
-                record.img = paths.actor; // Set the actor's art in the index, which is used by compendium windows
-                game.sfrpg.compendiumArt.map.set(`Compendium.sfrpg.${packName}.${actorId}`, paths); // Push the actor ID and art to the map
+                if (paths.actor) {
+                    record.img = paths.actor; // Set the document's art in the index, which is used by compendium windows
+                } else if (paths.item) {
+                    record.img = paths.item; // Set the document's art in the index, which is used by compendium windows
+                }
+                game.sfrpg.compendiumArt.map.set(`Compendium.sfrpg.${packName}.${id}`, paths); // Push the document ID and art to the map
             }
         }
     }
@@ -77,7 +93,9 @@ async function getArtMap(art) {
                 return null;
             }
             const map = await response.json();
-            return isModuleArt(map) ? map : null;
+            const valid = isModuleArt(map);
+            if (!valid) console.warn(`Starfinder | Art mapping file at ${art} is invalid.`);
+            return valid ? map : null;
         } catch (error) {
             if (error instanceof Error) {
                 console.warn(`Starfinder | ${error.message}`);
@@ -99,12 +117,18 @@ function isModuleArt(record) {
         && Object.values(record).every(
             (packToArt) => isObject(packToArt) // Ensure each entry is an object with a pack name
                 && Object.values(packToArt).every(
-                    (art) => isObject(art) // Ensure each within the pack object is an object with an actor ID
-                        && typeof art.actor === "string" // Within an actor object, there must be an actor string, which is a file path
-                        || (isObject(art.token)
-                        && typeof art.token.img === "string"
-                        && (typeof art.token === "string" // token can be a file path, or an object containing the file path and the token scale
-                                && (art.token.scale === undefined || typeof art.token.scale === "number")))
+                    (art) => isObject(art) // Ensure each entry within the pack object is an object with an actor or item ID
+                        && (
+                            // Within a document object, there can be an actor, token or item string. If there is an item string, there must not be a token or actor string
+                            (typeof art.actor === "string" || typeof art.token === "string" || typeof art.item === "string")
+                            && !((typeof art.actor === "string" || typeof art.token === "string") && typeof art.item === "string")
+                            // token can be a file path, or an object containing the file path and the token scale
+                            || (isObject(art.token)
+                                && typeof art.token.img === "string"
+                                && (art.token.scale === undefined || typeof art.token.scale === "number")
+                                && art.item === undefined
+                            )
+                        )
                 )
         )
     );

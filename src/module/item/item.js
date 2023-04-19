@@ -11,6 +11,17 @@ import { ItemCapacityMixin } from "./mixins/item-capacity.js";
 
 export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityMixin) {
 
+    constructor(data, context) {
+        // Set module art if available. This applies art to items viewed or created from compendiums.
+        if (context.pack && data._id) {
+            const art = game.sfrpg.compendiumArt.map.get(`Compendium.${context.pack}.${data._id}`);
+            if (art) {
+                data.img = art.item;
+            }
+        }
+        super(data, context);
+    }
+
     /* -------------------------------------------- */
     /*  Item Properties                             */
     /* -------------------------------------------- */
@@ -108,7 +119,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         if (data.hasOwnProperty("activation")) {
 
             // Ability Activation Label
-            let act = data.activation || {};
+            const act = data.activation || {};
             if (act) {
                 if (act.type === "none") {
                     labels.activation = game.i18n.localize("SFRPG.AbilityActivationTypesNoneButton");
@@ -120,7 +131,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 }
             }
 
-            let tgt = data.target || {};
+            const tgt = data.target || {};
             if (tgt.value && tgt.value === "") tgt.value = null;
 
             labels.target = [tgt.value].filterJoin(" ");
@@ -146,7 +157,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Item Actions
         if (data.hasOwnProperty("actionType")) {
             // Damage
-            let dam = data.damage || {};
+            const dam = data.damage || {};
             if (dam.parts) labels.damage = dam.parts.map(d => d[0]).join(" + ")
                 .replace(/\+ -/g, "- ");
         }
@@ -196,7 +207,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      * @returns {boolean|void}        Explicitly return false to prevent creation of this Document
      */
     async _preCreate(data, options, user) {
-        let updates = {};
+        const updates = {};
 
         if (this.type === "class" && !this.system?.slug) {
             updates["system.slug"] = this.name.slugify({replacement: "_", strict: true});
@@ -691,9 +702,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         if (data.senses &&  data.senses.usedForSenses) {
             // We deliminate the senses by `,` and present each sense as a separate property
-            let sensesDeliminated = data.senses.senses.split(",");
+            const sensesDeliminated = data.senses.senses.split(",");
             for (let index = 0; index < sensesDeliminated.length; index++) {
-                let sense = sensesDeliminated[index];
+                const sense = sensesDeliminated[index];
                 props.push(sense);
             }
         }
@@ -780,7 +791,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             return acceptedModifiers.includes(mod.effectType);
         });
 
-        let stackModifiers = new StackModifiers();
+        const stackModifiers = new StackModifiers();
         modifiers = await stackModifiers.processAsync(modifiers, null);
 
         const rolledMods = [];
@@ -789,7 +800,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 rolledMods.push(bonus);
                 return;
             }
-            let computedBonus = bonus.modifier;
+            const computedBonus = bonus.modifier;
             parts.push({score: computedBonus, explanation: bonus.name});
             return computedBonus;
         };
@@ -1130,7 +1141,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             return (mod.enabled || mod.modifierType === "formula");
         });
 
-        let stackModifiers = new StackModifiers();
+        const stackModifiers = new StackModifiers();
         modifiers = await stackModifiers.processAsync(modifiers, null);
 
         const rolledMods = [];
@@ -1141,7 +1152,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             }
 
             // console.log(`Adding ${bonus.name} with ${bonus.modifier}`);
-            let computedBonus = bonus.modifier;
+            const computedBonus = bonus.modifier;
             parts.push({ formula: computedBonus, explanation: bonus.name });
             return computedBonus;
         };
@@ -1404,7 +1415,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 return;
             }
         } else {
-            let htmlOptions = { secrets: this.actor?.isOwner || true, rollData: this };
+            const htmlOptions = { secrets: this.actor?.isOwner || true, rollData: this };
             htmlOptions.rollData.owner = this.actor?.system;
 
             // Basic template rendering data
@@ -1734,11 +1745,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         let count = 0;
         let actorCount = 0;
 
-        for (let actor of game.actors.contents) {
+        for (const actor of game.actors.contents) {
             const isNPC = ['npc', 'npc2'].includes(actor.type);
 
             let updates = [];
-            let params = actor.items.filter(i => i.system.scaling?.d3 || i.system.scaling?.d6);
+            const params = actor.items.filter(i => i.system.scaling?.d3 || i.system.scaling?.d6);
             if (params.length > 0) {
                 updates = params.map( (currentValue) => {
                     return {
@@ -1748,7 +1759,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                     };
                 });
 
-                for (let currentValue of updates) {
+                for (const currentValue of updates) {
                     if (currentValue.scaling.d3) {
                         const parts = currentValue['system.damage.parts'];
                         for (const i of parts) {
