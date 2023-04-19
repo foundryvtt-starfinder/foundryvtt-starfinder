@@ -563,6 +563,10 @@ export class CombatSFRPG extends Combat {
     }
 
     getEncounterInfo() {
+        if (!this.flags.sfrpg) {
+            this.flags.sfrpg = [];
+        }
+
         const playerInfo = this.calculateAPL();
         this.flags.sfrpg.PCs = playerInfo[0];
         this.flags.sfrpg.APL = playerInfo[1];
