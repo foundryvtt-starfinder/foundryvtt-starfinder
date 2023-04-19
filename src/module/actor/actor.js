@@ -142,7 +142,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     async update(data, options = {}) {
         const newSize = data['system.traits.size'];
         if (newSize && (newSize !== getProperty(this.system, "traits.size"))) {
-            const size = CONFIG.SFRPG.tokenSizes[data['system.traits.size']];
+            let size = CONFIG.SFRPG.tokenSizes[data['system.traits.size']];
             if (this.isToken) this.token.update({ height: size, width: size });
             else if (!data["token.width"] && !hasProperty(data, "token.width")) {
                 setProperty(data, 'token.height', size);
@@ -165,16 +165,15 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     async createEmbeddedDocuments(embeddedName, itemData, options) {
         for (const item of itemData) {
             if (!this.hasPlayerOwner) {
-                const t = item.type;
-                const initial = {};
+                let t = item.type;
+                let initial = {};
                 if (t === "weapon") initial['system.proficient'] = true;
                 if (["weapon", "equipment"].includes(t)) initial['system.equipped'] = true;
                 if (t === "spell") initial['system.prepared'] = true;
                 mergeObject(item, initial);
             }
 
-            if (item.effects instanceof Array) item.effects = null;
-            else if (item.effects instanceof Map) item.effects.clear();
+            item.effects = null;
         }
 
         return super.createEmbeddedDocuments(embeddedName, itemData, options);
@@ -191,7 +190,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      */
     async _preCreate(data, options, user) {
         const autoLinkedTypes = ['character', 'drone'];
-        const updates = {};
+        let updates = {};
 
         // Auto link PCs and drones
         if (autoLinkedTypes.includes(this.type)) {
@@ -225,22 +224,22 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     async _preUpdate(changed, options, user) {
 
         // Clamp HP/SP/RP values to 0 and their max
-        const changedHP = changed.system?.attributes?.hp?.value;
-        const changedSP = changed.system?.attributes?.sp?.value;
-        const changedRP = changed.system?.attributes?.rp?.value;
+        let changedHP = changed.system?.attributes?.hp?.value;
+        let changedSP = changed.system?.attributes?.sp?.value;
+        let changedRP = changed.system?.attributes?.rp?.value;
 
         if (changedHP) {
-            const clampedHP = Math.clamped(changedHP, 0, this.system.attributes.hp.max);
+            let clampedHP = Math.clamped(changedHP, 0, this.system.attributes.hp.max);
             changed.system.attributes.hp.value = clampedHP;
         }
 
         if (changedSP) {
-            const clampedSP = Math.clamped(changedSP, 0, this.system.attributes.sp.max);
+            let clampedSP = Math.clamped(changedSP, 0, this.system.attributes.sp.max);
             changed.system.attributes.sp.value = clampedSP;
         }
 
         if (changedRP) {
-            const clampedRP = Math.clamped(changedRP, 0, this.system.attributes.rp.max);
+            let clampedRP = Math.clamped(changedRP, 0, this.system.attributes.rp.max);
             changed.system.attributes.rp.value = clampedRP;
         }
 
@@ -382,7 +381,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
         if (remove) return this.update({ [`system.skills.-=${skillId}`]: null });
 
-        const updateObject = {
+        let updateObject = {
             [`system.skills.${skillId}.ability`]: ability,
             [`system.skills.${skillId}.ranks`]: ranks,
             [`system.skills.${skillId}.value`]: value,
@@ -413,7 +412,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             return obj;
         }, {});
 
-        for (const [key, value] of formData.entries()) {
+        for (let [key, value] of formData.entries()) {
             enabledSkills[`system.${key}`] = Boolean(value);
         }
 
@@ -453,7 +452,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             ability = formData.get('ability'),
             subname = formData.get('subname');
 
-        const newSkillData = {
+        let newSkillData = {
             [`system.skills.${skillId}`]: {},
             [`system.skills.${skillId}.isTrainedOnly`]: isTrainedOnly,
             [`system.skills.${skillId}.hasArmorCheckPenalty`]: hasArmorCheckPenalty,
@@ -483,7 +482,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         }
 
         if (skl.isTrainedOnly && !(skl.ranks > 0)) {
-            const content = game.i18n.format(
+            let content = game.i18n.format(
                 "SFRPG.SkillTrainedOnlyDialog.Content", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)], name: this.name }
             );
 
@@ -606,8 +605,8 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      */
     async rollVehiclePilotingSkill(role = null, actorId = null, system = null, options = {}) {
 
-        const parts = [];
-        const data = this.getRollData();
+        let parts = [];
+        let data = this.getRollData();
 
         const rollContext = new RollContext();
         rollContext.addContext("vehicle", this, data);
@@ -626,7 +625,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             parts.push(`@pilot.skills.pil.mod`);
         } else {
             const passengerId = this.system.crew[role].actorIds.find(id => id === actorId);
-            const passenger = game.actors.get(passengerId);
+            let passenger = game.actors.get(passengerId);
             let actorData = null;
             if (passenger instanceof ActorSFRPG) {
                 actorData = passenger.system;
