@@ -916,6 +916,17 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
             ev.preventDefault();
             activeCombat.begin();
         });
+
+        const difficultyButton = header.find('.difficulty');
+        difficultyButton.click(async ev => {
+            ev.preventDefault();
+            const contentTemplate = '//systems/sfrpg/templates/combat/encounter-stats.hbs';
+            new Dialog({
+                title: "TMP",
+                content: await renderTemplate(contentTemplate, activeCombat),
+                buttons: {}
+            }).render(true);
+        });
     }
 });
 
