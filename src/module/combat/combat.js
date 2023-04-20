@@ -665,9 +665,17 @@ export class CombatSFRPG extends Combat {
             {"difficulty": "epic", "CR": APL + 3}
         ];
 
+        // Calculate a numerical version of the CR for comparison
+        const CRsplit = encounterCR.split("/");
+        let numCR = 0;
+        if (CRsplit.length === 2) {
+            numCR = Number(CRsplit[0]) / Number(CRsplit[1]);
+        } else {
+            numCR = Number(CRsplit[0]);
+        }
+
         // Calculate the Encounter Difficulty
         let encounterDifficulty = "";
-        const numCR = eval(encounterCR);
 
         if (numCR < diffTable[0].CR) {
             encounterDifficulty = "lessThanEasy";
