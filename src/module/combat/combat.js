@@ -621,7 +621,7 @@ export class CombatSFRPG extends Combat {
     }
 
     calculateChallenge() {
-        const CRMap = CONFIG.SFRPG.CRMap;
+        const CRTable = CONFIG.SFRPG.CRTable;
         const APL = this.flags.sfrpg.APL;
         const numPlayers = this.flags.sfrpg.PCs.length;
         const numEnemies = this.flags.sfrpg.enemies.length;
@@ -629,9 +629,9 @@ export class CombatSFRPG extends Combat {
 
         // Check that Players and NPCs are both present
         if (!numPlayers) {
-            return ["0", CRMap.get("0"), "noPcs", 0];
+            return ["0", CRTable["0"], "noPcs", 0];
         } else if (!numEnemies) {
-            return ["0", CRMap.get("0"), "noEnemies", 0];
+            return ["0", CRTable["0"], "noEnemies", 0];
         }
 
         // Calculate XP and compare to XP table
@@ -639,12 +639,12 @@ export class CombatSFRPG extends Combat {
         let XParray = {};
 
         // Error checking
-        if (XPtotal > CRMap.get("25").totalXP) {
+        if (XPtotal > CRTable["25"].totalXP) {
             console.log("Error, encounter CR > 25.");
-            XParray = CRMap.get("25");
+            XParray = CRTable["25"];
             encounterCR = "25";
         } else {
-            for (let [CR, XProw] of CRMap.entries()) {
+            for (let [CR, XProw] of Object.entries(CRTable)) {
                 // Figure out encounter difficulty
                 if (XPtotal <= XProw.totalXP) {
                     if (XPtotal > XProw.minXP) {
@@ -693,11 +693,11 @@ export class CombatSFRPG extends Combat {
         let perPlayerXP = 0;
 
         if (numPlayers < 4) {
-            perPlayerXP = XParray.perPlayerXP123;
+            perPlayerXP = XParray.perPlayerXP[0];
         } else if (numPlayers > 5) {
-            perPlayerXP = XParray.perPlayerXP6;
+            perPlayerXP = XParray.perPlayerXP[2];
         } else {
-            perPlayerXP = XParray.perPlayerXP45;
+            perPlayerXP = XParray.perPlayerXP[1];
         }
 
         return [encounterCR, XParray, encounterDifficulty, perPlayerXP];

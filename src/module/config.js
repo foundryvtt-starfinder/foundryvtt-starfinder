@@ -1400,6 +1400,40 @@ SFRPG.CR_EXP_LEVELS = [
     1638400
 ];
 
+SFRPG.CRTable = {
+    "0":   {minXP: 0,       totalXP: 0,       perPlayerXP: [0,      0,      0]},
+    "1/8": {minXP: 0,       totalXP: 50,      perPlayerXP: [15,     15,     10]},
+    "1/6": {minXP: 50,      totalXP: 65,      perPlayerXP: [20,     15,     10]},
+    "1/4": {minXP: 65,      totalXP: 100,     perPlayerXP: [35,     25,     15]},
+    "1/3": {minXP: 100,     totalXP: 135,     perPlayerXP: [45,     35,     25]},
+    "1/2": {minXP: 135,     totalXP: 200,     perPlayerXP: [65,     50,     35]},
+    "1":   {minXP: 200,     totalXP: 400,     perPlayerXP: [135,    100,    65]},
+    "2":   {minXP: 400,     totalXP: 600,     perPlayerXP: [200,    150,    100]},
+    "3":   {minXP: 600,     totalXP: 800,     perPlayerXP: [265,    200,    135]},
+    "4":   {minXP: 800,     totalXP: 1200,    perPlayerXP: [400,    300,    200]},
+    "5":   {minXP: 1200,    totalXP: 1600,    perPlayerXP: [535,    400,    265]},
+    "6":   {minXP: 1600,    totalXP: 2400,    perPlayerXP: [800,    600,    400]},
+    "7":   {minXP: 2400,    totalXP: 3200,    perPlayerXP: [1070,   800,    535]},
+    "8":   {minXP: 3200,    totalXP: 4800,    perPlayerXP: [1600,   1200,   800]},
+    "9":   {minXP: 4800,    totalXP: 6400,    perPlayerXP: [2130,   1600,   1070]},
+    "10":  {minXP: 6400,    totalXP: 9600,    perPlayerXP: [3200,   2400,   1600]},
+    "11":  {minXP: 9600,    totalXP: 12800,   perPlayerXP: [4270,   3200,   2130]},
+    "12":  {minXP: 12800,   totalXP: 19200,   perPlayerXP: [6400,   4800,   3200]},
+    "13":  {minXP: 19200,   totalXP: 25600,   perPlayerXP: [8530,   6400,   4270]},
+    "14":  {minXP: 25600,   totalXP: 38400,   perPlayerXP: [12800,  9600,   6400]},
+    "15":  {minXP: 38400,   totalXP: 51200,   perPlayerXP: [17100,  12800,  8530]},
+    "16":  {minXP: 51200,   totalXP: 76800,   perPlayerXP: [25600,  19200,  12800]},
+    "17":  {minXP: 76800,   totalXP: 102400,  perPlayerXP: [34100,  25600,  17100]},
+    "18":  {minXP: 102400,  totalXP: 153600,  perPlayerXP: [51200,  38400,  25600]},
+    "19":  {minXP: 153600,  totalXP: 204800,  perPlayerXP: [68300,  51200,  34100]},
+    "20":  {minXP: 204800,  totalXP: 307200,  perPlayerXP: [102000, 76800,  51200]},
+    "21":  {minXP: 307200,  totalXP: 409600,  perPlayerXP: [137000, 102400, 68300]},
+    "22":  {minXP: 409600,  totalXP: 614400,  perPlayerXP: [205000, 153600, 102400]},
+    "23":  {minXP: 614400,  totalXP: 819200,  perPlayerXP: [273000, 204800, 137000]},
+    "24":  {minXP: 819200,  totalXP: 1228800, perPlayerXP: [410000, 307200, 204800]},
+    "25":  {minXP: 1228800, totalXP: 1638400, perPlayerXP: [546000, 409600, 273000]}
+};
+
 SFRPG.difficultyLevels = {
     "noPcs": "SFRPG.Combat.Difficulty.Levels.NoPCs",
     "noEnemies": "SFRPG.Combat.Difficulty.Levels.NoEnemies",
@@ -1411,39 +1445,6 @@ SFRPG.difficultyLevels = {
     "epic": "SFRPG.Combat.Difficulty.Levels.Epic",
     "greaterThanEpic": "SFRPG.Combat.Difficulty.Levels.GreaterThanEpic"
 };
-
-SFRPG.CRMap = new Map();
-SFRPG.CRMap.set("0", {minXP: 0, totalXP: 0, perPlayerXP123: 0, perPlayerXP45: 0, perPlayerXP6: 0});
-SFRPG.CRMap.set("1/8", {minXP: 0, totalXP: 50, perPlayerXP123: 15, perPlayerXP45: 15, perPlayerXP6: 10});
-SFRPG.CRMap.set("1/6", {minXP: 50, totalXP: 65, perPlayerXP123: 20, perPlayerXP45: 15, perPlayerXP6: 10});
-SFRPG.CRMap.set("1/4", {minXP: 65, totalXP: 100, perPlayerXP123: 35, perPlayerXP45: 25, perPlayerXP6: 15});
-SFRPG.CRMap.set("1/3", {minXP: 100, totalXP: 135, perPlayerXP123: 45, perPlayerXP45: 35, perPlayerXP6: 25});
-SFRPG.CRMap.set("1/2", {minXP: 135, totalXP: 200, perPlayerXP123: 65, perPlayerXP45: 50, perPlayerXP6: 35});
-SFRPG.CRMap.set("1", {minXP: 200, totalXP: 400, perPlayerXP123: 135, perPlayerXP45: 100, perPlayerXP6: 65});
-SFRPG.CRMap.set("2", {minXP: 400, totalXP: 600, perPlayerXP123: 200, perPlayerXP45: 150, perPlayerXP6: 100});
-SFRPG.CRMap.set("3", {minXP: 600, totalXP: 800, perPlayerXP123: 265, perPlayerXP45: 200, perPlayerXP6: 135});
-SFRPG.CRMap.set("4", {minXP: 800, totalXP: 1200, perPlayerXP123: 400, perPlayerXP45: 300, perPlayerXP6: 200});
-SFRPG.CRMap.set("5", {minXP: 1200, totalXP: 1600, perPlayerXP123: 535, perPlayerXP45: 400, perPlayerXP6: 265});
-SFRPG.CRMap.set("6", {minXP: 1600, totalXP: 2400, perPlayerXP123: 800, perPlayerXP45: 600, perPlayerXP6: 400});
-SFRPG.CRMap.set("7", {minXP: 2400, totalXP: 3200, perPlayerXP123: 1070, perPlayerXP45: 800, perPlayerXP6: 535});
-SFRPG.CRMap.set("8", {minXP: 3200, totalXP: 4800, perPlayerXP123: 1600, perPlayerXP45: 1200, perPlayerXP6: 800});
-SFRPG.CRMap.set("9", {minXP: 4800, totalXP: 6400, perPlayerXP123: 2130, perPlayerXP45: 1600, perPlayerXP6: 1070});
-SFRPG.CRMap.set("10", {minXP: 6400, totalXP: 9600, perPlayerXP123: 3200, perPlayerXP45: 2400, perPlayerXP6: 1600});
-SFRPG.CRMap.set("11", {minXP: 9600, totalXP: 12800, perPlayerXP123: 4270, perPlayerXP45: 3200, perPlayerXP6: 2130});
-SFRPG.CRMap.set("12", {minXP: 12800, totalXP: 19200, perPlayerXP123: 6400, perPlayerXP45: 4800, perPlayerXP6: 3200});
-SFRPG.CRMap.set("13", {minXP: 19200, totalXP: 25600, perPlayerXP123: 8530, perPlayerXP45: 6400, perPlayerXP6: 4270});
-SFRPG.CRMap.set("14", {minXP: 25600, totalXP: 38400, perPlayerXP123: 12800, perPlayerXP45: 9600, perPlayerXP6: 6400});
-SFRPG.CRMap.set("15", {minXP: 38400, totalXP: 51200, perPlayerXP123: 17100, perPlayerXP45: 12800, perPlayerXP6: 8530});
-SFRPG.CRMap.set("16", {minXP: 51200, totalXP: 76800, perPlayerXP123: 25600, perPlayerXP45: 19200, perPlayerXP6: 12800});
-SFRPG.CRMap.set("17", {minXP: 76800, totalXP: 102400, perPlayerXP123: 34100, perPlayerXP45: 25600, perPlayerXP6: 17100});
-SFRPG.CRMap.set("18", {minXP: 102400, totalXP: 153600, perPlayerXP123: 51200, perPlayerXP45: 38400, perPlayerXP6: 25600});
-SFRPG.CRMap.set("19", {minXP: 153600, totalXP: 204800, perPlayerXP123: 68300, perPlayerXP45: 51200, perPlayerXP6: 34100});
-SFRPG.CRMap.set("20", {minXP: 204800, totalXP: 307200, perPlayerXP123: 102000, perPlayerXP45: 76800, perPlayerXP6: 51200});
-SFRPG.CRMap.set("21", {minXP: 307200, totalXP: 409600, perPlayerXP123: 137000, perPlayerXP45: 102400, perPlayerXP6: 68300});
-SFRPG.CRMap.set("22", {minXP: 409600, totalXP: 614400, perPlayerXP123: 205000, perPlayerXP45: 153600, perPlayerXP6: 102400});
-SFRPG.CRMap.set("23", {minXP: 614400, totalXP: 819200, perPlayerXP123: 273000, perPlayerXP45: 204800, perPlayerXP6: 137000});
-SFRPG.CRMap.set("24", {minXP: 819200, totalXP: 1228800, perPlayerXP123: 410000, perPlayerXP45: 307200, perPlayerXP6: 204800});
-SFRPG.CRMap.set("25", {minXP: 1228800, totalXP: 1638400, perPlayerXP123: 546000, perPlayerXP45: 409600, perPlayerXP6: 273000});
 
 SFRPG.statusEffects = [
     {
