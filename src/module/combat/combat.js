@@ -696,6 +696,8 @@ export class CombatSFRPG extends Combat {
     }
 
     renderDifficulty() {
+        // determine the coloration tag for the difficulty tracker
+        // const diffNum = eval(this.flags.sfrpg.CR) - this.flags.sfrpg.APL;
         let difficultyHTML = document.createElement("div");
         difficultyHTML.classList.add("difficulty");
         difficultyHTML.innerHTML = `Difficulty: ${this.flags.sfrpg.difficulty}`;
