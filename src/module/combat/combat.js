@@ -723,8 +723,9 @@ export class CombatSFRPG extends Combat {
     renderDifficulty() {
         const difficulty = this.flags.sfrpg.difficulty;
 
-        let difficultyHTML = document.createElement("div");
+        let difficultyHTML = document.createElement("a");
         difficultyHTML.classList.add("difficulty", difficulty);
+        difficultyHTML.title = `${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.PCs")}: ${this.flags.sfrpg.PCs.length} [${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.APL")} ${this.flags.sfrpg.APL}]\n${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.HostileNPCs")}: ${this.flags.sfrpg.enemies.length} [${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.CR")} ${this.flags.sfrpg.CR}]`;
         difficultyHTML.innerHTML = `Difficulty: ${CONFIG.SFRPG.difficultyLevels[difficulty]}`;
         document.getElementsByClassName('combat-tracker-header')[0].appendChild(difficultyHTML);
     }
