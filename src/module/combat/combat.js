@@ -695,6 +695,14 @@ export class CombatSFRPG extends Combat {
         return [encounterCR, XParray, encounterDifficulty, perPlayerXP];
     }
 
+    renderDifficulty() {
+        let difficultyHTML = document.createElement("div");
+        difficultyHTML.classList.add("difficulty");
+        difficultyHTML.innerHTML = `Difficulty: ${this.flags.sfrpg.difficulty}`;
+        let header2 = document.getElementsByClassName('combat-tracker-header')[0].appendChild(difficultyHTML);
+        console.log(header2);
+    }
+
     _getInitiativeFormula(combatant) {
         if (this.getCombatType() === "starship") {
             return "1d20 + @pilot.skills.pil.mod";
@@ -860,13 +868,12 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
         // Add buttons for switching combat type
         const prevCombatTypeButton = `<a class="combat-type-prev" title="${game.i18n.format("SFRPG.Combat.EncounterTracker.SelectPrevType")}"><i class="fas fa-caret-left"></i></a>`;
         const nextCombatTypeButton = `<a class="combat-type-next" title="${game.i18n.format("SFRPG.Combat.EncounterTracker.SelectNextType")}"><i class="fas fa-caret-right"></i></a>`;
+        roundHeader.replaceWith(`<div>${originalHtml}<h4 class="combat-type">${prevCombatTypeButton} &nbsp; ${activeCombat.getCombatName()} &nbsp; ${nextCombatTypeButton}</h4></div>`);
 
         // Add in the difficulty calculator if needed
         if (activeCombat.getCombatType() === "normal" && game.user.isGM) {
             activeCombat.getEncounterInfo();
-            roundHeader.replaceWith(`<div>${originalHtml}<h4 class="combat-type">${prevCombatTypeButton} &nbsp; ${activeCombat.getCombatName()} &nbsp; ${nextCombatTypeButton}</h4><div class="difficulty">Difficulty: ${activeCombat.flags.sfrpg.difficulty}</div></div>`);
-        } else {
-            roundHeader.replaceWith(`<div>${originalHtml}<h4 class="combat-type">${prevCombatTypeButton} &nbsp; ${activeCombat.getCombatName()} &nbsp; ${nextCombatTypeButton}</h4></div>`);
+            activeCombat.renderDifficulty();
         }
 
         // Handle button clicks
