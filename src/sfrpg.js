@@ -219,13 +219,20 @@ Hooks.once('init', async function() {
     registerSystemSettings();
 
     if (game.settings.get("sfrpg", "sfrpgTheme")) {
-        const logo = document.querySelector("#logo");
-        logo.src = "systems/sfrpg/images/starfinder_icon.webp";
-        logo.style.width = "92px";
-        logo.style.height = "92px";
-        logo.style.margin = "0 0 0 9px";
+        const setAnvil = () => {
+            const logo = document.querySelector("#logo");
+            logo.src = "systems/sfrpg/images/starfinder_icon.webp";
+            logo.style.width = "92px";
+            logo.style.height = "92px";
+            logo.style.margin = "0 0 0 9px";
+        };
 
-        let r = document.querySelector(':root');
+        const dummy = document.createElement("img");
+        dummy.addEventListener("load", setAnvil);
+        dummy.src = "systems/sfrpg/images/starfinder_icon.webp";
+        dummy.style.display = "none";
+
+        const r = document.querySelector(':root');
         r.style.setProperty("--color-border-highlight-alt", "#0080ff");
         r.style.setProperty("--color-border-highlight", "#00a0ff");
         r.style.setProperty("--color-text-hyperlink", "#38b5ff");
@@ -338,7 +345,7 @@ Hooks.once("i18nInit", () => {
         "weaponTypes"
     ];
 
-    for (let o of toLocalize) {
+    for (const o of toLocalize) {
         CONFIG.SFRPG[o] = Object.entries(CONFIG.SFRPG[o]).reduce((obj, e) => {
             obj[e[0]] = game.i18n.localize(e[1]);
 
@@ -652,7 +659,7 @@ function setupHandlebars() {
     });
 
     Handlebars.registerHelper('ellipsis', function(displayedValue, limit) {
-        let str = displayedValue.toString();
+        const str = displayedValue.toString();
         if (str.length <= limit) {
             return str;
         }
@@ -671,7 +678,7 @@ function setupHandlebars() {
     Handlebars.registerHelper('getTotalStorageCapacity', function(item) {
         let totalCapacity = 0;
         if (item?.system?.container?.storage && item.system.container.storage.length > 0) {
-            for (let storage of item.system.container.storage) {
+            for (const storage of item.system.container.storage) {
                 totalCapacity += storage.amount;
             }
         }
