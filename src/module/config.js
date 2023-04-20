@@ -1400,6 +1400,11 @@ SFRPG.CR_EXP_LEVELS = [
     1638400
 ];
 
+SFRPG.XPTable2 = new Map();
+SFRPG.XPTable2.set("1/8", {minXP: 0, totalXP: 50, indOneThree: 15, indFourFive: 15, indSixPlus: 10});
+SFRPG.XPTable2.set("1/6", {minXP: 50, totalXP: 65, indOneThree: 20, indFourFive: 15, indSixPlus: 10});
+SFRPG.XPTable2.set("1/4", {minXP: 65, totalXP: 100, indOneThree: 35, indFourFive: 25, indSixPlus: 15});
+
 SFRPG.XPTable  = [
     {CR: 1 / 8, minXP: 0, totalXP: 50, indOneThree: 15, indFourFive: 15, indSixPlus: 10},
     {CR: 1 / 6, minXP: 50, totalXP: 65, indOneThree: 20, indFourFive: 15, indSixPlus: 10},

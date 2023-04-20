@@ -552,43 +552,35 @@ export class CombatSFRPG extends Combat {
         return this.getIndexOfFirstUndefeatedCombatant() === null;
     }
 
-    average(array) {
-        let total = 0;
-        let count = 0;
-        jQuery.each(array, function(index, value) {
-            total += value;
-            count++;
-        });
-        return total / count;
-    }
-
     getEncounterInfo() {
         if (!this.flags.sfrpg) {
             this.flags.sfrpg = [];
         }
 
-        const playerInfo = this.calculateAPL();
-        this.flags.sfrpg.PCs = playerInfo[0];
-        this.flags.sfrpg.APL = playerInfo[1];
+        const [PCs, APL] = this.calculateAPL();
+        this.flags.sfrpg.PCs = PCs;
+        this.flags.sfrpg.APL = APL;
 
-        const enemyInfo = this.calculateEnemyXP();
-        this.flags.sfrpg.enemies = enemyInfo[0];
-        this.flags.sfrpg.enemyXP = enemyInfo[1];
+        const [enemies, enemyXP] = this.calculateEnemyXP();
+        this.flags.sfrpg.enemies = enemies;
+        this.flags.sfrpg.enemyXP = enemyXP;
 
-        const challengeInfo = this.calculateChallenge();
-        this.flags.sfrpg.CR = challengeInfo[0].CR;
-        this.flags.sfrpg.CRXPbounds = [challengeInfo[0].minXP, challengeInfo[0].totalXP];
-        this.flags.sfrpg.Difficulty = challengeInfo[1];
-        this.flags.sfrpg.IndXP = challengeInfo[2];
+        const [XPArray, difficulty, playerXP] = this.calculateChallenge();
+        this.flags.sfrpg.CR = XPArray.CR;
+        this.flags.sfrpg.CRXPbounds = [XPArray.minXP, XPArray.totalXP];
+        this.flags.sfrpg.difficulty = difficulty;
+        this.flags.sfrpg.playerXP = playerXP;
 
         // Debug info
         console.log(this);
         console.log("Starfinder | The active combat encounter has ".concat(this.flags.sfrpg.PCs.length, " PC(s) [APL ", this.flags.sfrpg.APL, "], ", "and ", this.flags.sfrpg.enemies.length, " hostile NPC(s) [CR ", this.flags.sfrpg.CR, "]."));
-        console.log("Starfinder | The active combat encounter difficulty is ".concat(this.flags.sfrpg.Difficulty, " and is worth ", this.flags.sfrpg.IndXP, " individual XP per player."));
+        console.log("Starfinder | The active combat encounter difficulty is ".concat(this.flags.sfrpg.difficulty, " and is worth ", this.flags.sfrpg.playerXP, " individual XP per player."));
 
     }
 
     calculateAPL() {
+        const average = (array) => (array.reduce((total, value) => total + value), 0) / array.length;
+
         let playerCombatants = [];
         let playerLevels = [];
 
@@ -604,11 +596,11 @@ export class CombatSFRPG extends Combat {
         if (!playerCombatants.length) {
             return [playerCombatants, 0];
         } else if (playerCombatants.length < 4) {
-            return [playerCombatants, Math.round(this.average(playerLevels)) - 1];
+            return [playerCombatants, Math.round(average(playerLevels)) - 1];
         } else if (playerCombatants.length > 5) {
-            return [playerCombatants, Math.round(this.average(playerLevels)) + 1];
+            return [playerCombatants, Math.round(average(playerLevels)) + 1];
         } else {
-            return [playerCombatants, Math.round(this.average(playerLevels))];
+            return [playerCombatants, Math.round(average(playerLevels))];
         }
     }
 
@@ -645,11 +637,11 @@ export class CombatSFRPG extends Combat {
 
         // Calculate Difficulty Table
         const diffTable = [
-            {"difficulty": `${game.i18n.format("SFRPG.Combat.Difficulty.Levels.Easy")}`, "CR": APL - 1},
-            {"difficulty": `${game.i18n.format("SFRPG.Combat.Difficulty.Levels.Average")}`, "CR": APL},
-            {"difficulty": `${game.i18n.format("SFRPG.Combat.Difficulty.Levels.Challenging")}`, "CR": APL + 1},
-            {"difficulty": `${game.i18n.format("SFRPG.Combat.Difficulty.Levels.Hard")}`, "CR": APL + 2},
-            {"difficulty": `${game.i18n.format("SFRPG.Combat.Difficulty.Levels.Epic")}`, "CR": APL + 3}
+            {"difficulty": game.i18n.format("SFRPG.Combat.Difficulty.Levels.Easy"), "CR": APL - 1},
+            {"difficulty": game.i18n.format("SFRPG.Combat.Difficulty.Levels.Average"), "CR": APL},
+            {"difficulty": game.i18n.format("SFRPG.Combat.Difficulty.Levels.Challenging"), "CR": APL + 1},
+            {"difficulty": game.i18n.format("SFRPG.Combat.Difficulty.Levels.Hard"), "CR": APL + 2},
+            {"difficulty": game.i18n.format("SFRPG.Combat.Difficulty.Levels.Epic"), "CR": APL + 3}
         ];
 
         // Calculate XP and compare to XP table
