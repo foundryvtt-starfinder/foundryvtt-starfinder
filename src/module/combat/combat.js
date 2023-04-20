@@ -579,7 +579,7 @@ export class CombatSFRPG extends Combat {
     }
 
     calculateAPL() {
-        const average = (array) => (array.reduce((total, value) => total + value), 0) / array.length;
+        const average = (array) => array.reduce((total, value) => total + value, 0) / array.length;
 
         let playerCombatants = [];
         let playerLevels = [];
@@ -621,18 +621,17 @@ export class CombatSFRPG extends Combat {
     }
 
     calculateChallenge() {
-        const XPTable = CONFIG.SFRPG.XPTable;
+        const CRMap = CONFIG.SFRPG.CRMap;
         const APL = this.flags.sfrpg.APL;
         const numPlayers = this.flags.sfrpg.PCs.length;
         const numEnemies = this.flags.sfrpg.enemies.length;
         const XPtotal = this.flags.sfrpg.enemyXP;
-        const XPNoCR = {CR: 0, minXP: 0, totalXP: 0, indOneThree: 0, indFourFive: 0, indSixPlus: 0};
 
         // Check that Players and NPCs are both present
         if (!numPlayers) {
-            return [XPNoCR, `${game.i18n.format("SFRPG.Combat.Difficulty.Levels.NoPCs")}`, 0];
+            return [CRMap.get("0"), game.i18n.format("SFRPG.Combat.Difficulty.Levels.NoPCs"), 0];
         } else if (!numEnemies) {
-            return [XPNoCR, `${game.i18n.format("SFRPG.Combat.Difficulty.Levels.NoEnemies")}`, 0];
+            return [CRMap.get("0"), game.i18n.format("SFRPG.Combat.Difficulty.Levels.NoEnemies"), 0];
         }
 
         // Calculate Difficulty Table
@@ -645,35 +644,34 @@ export class CombatSFRPG extends Combat {
         ];
 
         // Calculate XP and compare to XP table
-        let XParray = [];
+        let XParray = {};
         let encounterIndXP = 0;
         let encounterDifficulty = "";
 
-        for (const XProw of XPTable) {
-            // Error checking
-            if (XPtotal > XPTable[29].totalXP) {
-                console.log("Error, encounter CR > 25.");
-                XPArray = XPTable[29];
-                break;
-            }
-
-            // Figure out encounter difficulty
-            if (XPtotal > XProw.minXP) {
+        // Error checking
+        if (XPtotal > CRMap.get("25").totalXP) {
+            console.log("Error, encounter CR > 25.");
+            XParray = CRMap.get("25");
+        } else {
+            for (let [CR, XProw] of CRMap.entries()) {
+                // Figure out encounter difficulty
                 if (XPtotal <= XProw.totalXP) {
-                    XParray = XProw;
-                    break;
+                    if (XPtotal > XProw.minXP) {
+                        XParray = XProw;
+                        break;
+                    }
                 }
             }
         }
 
         // Calculate the Encounter Difficulty
-        if (XParray.CR < diffTable[0].CR) {
-            encounterDifficulty = `${game.i18n.format("SFRPG.Combat.Difficulty.Levels.LessThanEasy")}`;
-        } else if (XParray.CR > diffTable[4].CR) {
-            encounterDifficulty = `${game.i18n.format("SFRPG.Combat.Difficulty.Levels.GreaterThanEpic")}`;
+        if (Number(XParray.CR) < diffTable[0].CR) {
+            encounterDifficulty = game.i18n.format("SFRPG.Combat.Difficulty.Levels.LessThanEasy");
+        } else if (Number(XParray.CR) > diffTable[4].CR) {
+            encounterDifficulty = game.i18n.format("SFRPG.Combat.Difficulty.Levels.GreaterThanEpic");
         } else {
             for (const diffRow of diffTable) {
-                if (XParray.CR === diffRow.CR) {
+                if (Number(XParray.CR) === diffRow.CR) {
                     encounterDifficulty = diffRow.difficulty;
                 }
             }
@@ -860,7 +858,7 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
         // Add in the difficulty calculator if needed
         if (activeCombat.getCombatType() === "normal" && game.user.isGM) {
             activeCombat.getEncounterInfo();
-            roundHeader.replaceWith(`<div>${originalHtml}<h4 class="combat-type">${prevCombatTypeButton} &nbsp; ${activeCombat.getCombatName()} &nbsp; ${nextCombatTypeButton}</h4><div class="difficulty">Difficulty: ${activeCombat.flags.sfrpg.Difficulty}</div></div>`);
+            roundHeader.replaceWith(`<div>${originalHtml}<h4 class="combat-type">${prevCombatTypeButton} &nbsp; ${activeCombat.getCombatName()} &nbsp; ${nextCombatTypeButton}</h4><div class="difficulty">Difficulty: ${activeCombat.flags.sfrpg.difficulty}</div></div>`);
         } else {
             roundHeader.replaceWith(`<div>${originalHtml}<h4 class="combat-type">${prevCombatTypeButton} &nbsp; ${activeCombat.getCombatName()} &nbsp; ${nextCombatTypeButton}</h4></div>`);
         }

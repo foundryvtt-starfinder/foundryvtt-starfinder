@@ -1400,43 +1400,38 @@ SFRPG.CR_EXP_LEVELS = [
     1638400
 ];
 
-SFRPG.XPTable2 = new Map();
-SFRPG.XPTable2.set("1/8", {minXP: 0, totalXP: 50, indOneThree: 15, indFourFive: 15, indSixPlus: 10});
-SFRPG.XPTable2.set("1/6", {minXP: 50, totalXP: 65, indOneThree: 20, indFourFive: 15, indSixPlus: 10});
-SFRPG.XPTable2.set("1/4", {minXP: 65, totalXP: 100, indOneThree: 35, indFourFive: 25, indSixPlus: 15});
-
-SFRPG.XPTable  = [
-    {CR: 1 / 8, minXP: 0, totalXP: 50, indOneThree: 15, indFourFive: 15, indSixPlus: 10},
-    {CR: 1 / 6, minXP: 50, totalXP: 65, indOneThree: 20, indFourFive: 15, indSixPlus: 10},
-    {CR: 1 / 4, minXP: 65, totalXP: 100, indOneThree: 35, indFourFive: 25, indSixPlus: 15},
-    {CR: 1 / 3, minXP: 100, totalXP: 135, indOneThree: 45, indFourFive: 35, indSixPlus: 25},
-    {CR: 1 / 2, minXP: 135, totalXP: 200, indOneThree: 65, indFourFive: 50, indSixPlus: 35},
-    {CR: 1, minXP: 200, totalXP: 400, indOneThree: 135, indFourFive: 100, indSixPlus: 65},
-    {CR: 2, minXP: 400, totalXP: 600, indOneThree: 200, indFourFive: 150, indSixPlus: 100},
-    {CR: 3, minXP: 600, totalXP: 800, indOneThree: 265, indFourFive: 200, indSixPlus: 135},
-    {CR: 4, minXP: 800, totalXP: 1200, indOneThree: 400, indFourFive: 300, indSixPlus: 200},
-    {CR: 5, minXP: 1200, totalXP: 1600, indOneThree: 535, indFourFive: 400, indSixPlus: 265},
-    {CR: 6, minXP: 1600, totalXP: 2400, indOneThree: 800, indFourFive: 600, indSixPlus: 400},
-    {CR: 7, minXP: 2400, totalXP: 3200, indOneThree: 1070, indFourFive: 800, indSixPlus: 535},
-    {CR: 8, minXP: 3200, totalXP: 4800, indOneThree: 1600, indFourFive: 1200, indSixPlus: 800},
-    {CR: 9, minXP: 4800, totalXP: 6400, indOneThree: 2130, indFourFive: 1600, indSixPlus: 1070},
-    {CR: 10, minXP: 6400, totalXP: 9600, indOneThree: 3200, indFourFive: 2400, indSixPlus: 1600},
-    {CR: 11, minXP: 9600, totalXP: 12800, indOneThree: 4270, indFourFive: 3200, indSixPlus: 2130},
-    {CR: 12, minXP: 12800, totalXP: 19200, indOneThree: 6400, indFourFive: 4800, indSixPlus: 3200},
-    {CR: 13, minXP: 19200, totalXP: 25600, indOneThree: 8530, indFourFive: 6400, indSixPlus: 4270},
-    {CR: 14, minXP: 25600, totalXP: 38400, indOneThree: 12800, indFourFive: 9600, indSixPlus: 6400},
-    {CR: 15, minXP: 38400, totalXP: 51200, indOneThree: 17100, indFourFive: 12800, indSixPlus: 8530},
-    {CR: 16, minXP: 51200, totalXP: 76800, indOneThree: 25600, indFourFive: 19200, indSixPlus: 12800},
-    {CR: 17, minXP: 76800, totalXP: 102400, indOneThree: 34100, indFourFive: 25600, indSixPlus: 17100},
-    {CR: 18, minXP: 102400, totalXP: 153600, indOneThree: 51200, indFourFive: 38400, indSixPlus: 25600},
-    {CR: 19, minXP: 153600, totalXP: 204800, indOneThree: 68300, indFourFive: 51200, indSixPlus: 34100},
-    {CR: 20, minXP: 204800, totalXP: 307200, indOneThree: 102000, indFourFive: 76800, indSixPlus: 51200},
-    {CR: 21, minXP: 307200, totalXP: 409600, indOneThree: 137000, indFourFive: 102400, indSixPlus: 68300},
-    {CR: 22, minXP: 409600, totalXP: 614400, indOneThree: 205000, indFourFive: 153600, indSixPlus: 102400},
-    {CR: 23, minXP: 614400, totalXP: 819200, indOneThree: 273000, indFourFive: 204800, indSixPlus: 137000},
-    {CR: 24, minXP: 819200, totalXP: 1228800, indOneThree: 410000, indFourFive: 307200, indSixPlus: 204800},
-    {CR: 25, minXP: 1228800, totalXP: 1638400, indOneThree: 546000, indFourFive: 409600, indSixPlus: 273000}
-];
+SFRPG.CRMap = new Map();
+SFRPG.CRMap.set("0", {CR: "0", minXP: 0, totalXP: 0, indOneThree: 0, indFourFive: 0, indSixPlus: 0});
+SFRPG.CRMap.set("1/8", {CR: "1/8", minXP: 0, totalXP: 50, indOneThree: 15, indFourFive: 15, indSixPlus: 10});
+SFRPG.CRMap.set("1/6", {CR: "1/6", minXP: 50, totalXP: 65, indOneThree: 20, indFourFive: 15, indSixPlus: 10});
+SFRPG.CRMap.set("1/4", {CR: "1/4", minXP: 65, totalXP: 100, indOneThree: 35, indFourFive: 25, indSixPlus: 15});
+SFRPG.CRMap.set("1/3", {CR: "1/3", minXP: 100, totalXP: 135, indOneThree: 45, indFourFive: 35, indSixPlus: 25});
+SFRPG.CRMap.set("1/2", {CR: "1/2", minXP: 135, totalXP: 200, indOneThree: 65, indFourFive: 50, indSixPlus: 35});
+SFRPG.CRMap.set("1", {CR: "1", minXP: 200, totalXP: 400, indOneThree: 135, indFourFive: 100, indSixPlus: 65});
+SFRPG.CRMap.set("2", {CR: "2", minXP: 400, totalXP: 600, indOneThree: 200, indFourFive: 150, indSixPlus: 100});
+SFRPG.CRMap.set("3", {CR: "3", minXP: 600, totalXP: 800, indOneThree: 265, indFourFive: 200, indSixPlus: 135});
+SFRPG.CRMap.set("4", {CR: "4", minXP: 800, totalXP: 1200, indOneThree: 400, indFourFive: 300, indSixPlus: 200});
+SFRPG.CRMap.set("5", {CR: "5", minXP: 1200, totalXP: 1600, indOneThree: 535, indFourFive: 400, indSixPlus: 265});
+SFRPG.CRMap.set("6", {CR: "6", minXP: 1600, totalXP: 2400, indOneThree: 800, indFourFive: 600, indSixPlus: 400});
+SFRPG.CRMap.set("7", {CR: "7", minXP: 2400, totalXP: 3200, indOneThree: 1070, indFourFive: 800, indSixPlus: 535});
+SFRPG.CRMap.set("8", {CR: "8", minXP: 3200, totalXP: 4800, indOneThree: 1600, indFourFive: 1200, indSixPlus: 800});
+SFRPG.CRMap.set("9", {CR: "9", minXP: 4800, totalXP: 6400, indOneThree: 2130, indFourFive: 1600, indSixPlus: 1070});
+SFRPG.CRMap.set("10", {CR: "10", minXP: 6400, totalXP: 9600, indOneThree: 3200, indFourFive: 2400, indSixPlus: 1600});
+SFRPG.CRMap.set("11", {CR: "11", minXP: 9600, totalXP: 12800, indOneThree: 4270, indFourFive: 3200, indSixPlus: 2130});
+SFRPG.CRMap.set("12", {CR: "12", minXP: 12800, totalXP: 19200, indOneThree: 6400, indFourFive: 4800, indSixPlus: 3200});
+SFRPG.CRMap.set("13", {CR: "13", minXP: 19200, totalXP: 25600, indOneThree: 8530, indFourFive: 6400, indSixPlus: 4270});
+SFRPG.CRMap.set("14", {CR: "14", minXP: 25600, totalXP: 38400, indOneThree: 12800, indFourFive: 9600, indSixPlus: 6400});
+SFRPG.CRMap.set("15", {CR: "15", minXP: 38400, totalXP: 51200, indOneThree: 17100, indFourFive: 12800, indSixPlus: 8530});
+SFRPG.CRMap.set("16", {CR: "16", minXP: 51200, totalXP: 76800, indOneThree: 25600, indFourFive: 19200, indSixPlus: 12800});
+SFRPG.CRMap.set("17", {CR: "17", minXP: 76800, totalXP: 102400, indOneThree: 34100, indFourFive: 25600, indSixPlus: 17100});
+SFRPG.CRMap.set("18", {CR: "18", minXP: 102400, totalXP: 153600, indOneThree: 51200, indFourFive: 38400, indSixPlus: 25600});
+SFRPG.CRMap.set("19", {CR: "19", minXP: 153600, totalXP: 204800, indOneThree: 68300, indFourFive: 51200, indSixPlus: 34100});
+SFRPG.CRMap.set("20", {CR: "20", minXP: 204800, totalXP: 307200, indOneThree: 102000, indFourFive: 76800, indSixPlus: 51200});
+SFRPG.CRMap.set("21", {CR: "21", minXP: 307200, totalXP: 409600, indOneThree: 137000, indFourFive: 102400, indSixPlus: 68300});
+SFRPG.CRMap.set("22", {CR: "22", minXP: 409600, totalXP: 614400, indOneThree: 205000, indFourFive: 153600, indSixPlus: 102400});
+SFRPG.CRMap.set("23", {CR: "23", minXP: 614400, totalXP: 819200, indOneThree: 273000, indFourFive: 204800, indSixPlus: 137000});
+SFRPG.CRMap.set("24", {CR: "24", minXP: 819200, totalXP: 1228800, indOneThree: 410000, indFourFive: 307200, indSixPlus: 204800});
+SFRPG.CRMap.set("25", {CR: "25", minXP: 1228800, totalXP: 1638400, indOneThree: 546000, indFourFive: 409600, indSixPlus: 273000});
 
 SFRPG.statusEffects = [
     {
