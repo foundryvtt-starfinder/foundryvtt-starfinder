@@ -221,6 +221,7 @@ Hooks.once('init', async function() {
     if (game.settings.get("sfrpg", "sfrpgTheme")) {
         const setAnvil = () => {
             const logo = document.querySelector("#logo");
+            logo.loading = "eager";
             logo.src = "systems/sfrpg/images/starfinder_icon.webp";
             logo.style.width = "92px";
             logo.style.height = "92px";
@@ -229,6 +230,7 @@ Hooks.once('init', async function() {
 
         const dummy = document.createElement("img");
         dummy.addEventListener("load", setAnvil);
+        dummy.loading = "eager";
         dummy.src = "systems/sfrpg/images/starfinder_icon.webp";
         dummy.style.display = "none";
 
