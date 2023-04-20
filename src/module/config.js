@@ -1400,16 +1400,16 @@ SFRPG.CR_EXP_LEVELS = [
     1638400
 ];
 
-SFRPG.DifficultyLevels = {
-    "no-pcs": "SFRPG.Combat.Difficulty.Levels.NoPCs",
-    "no-enemies": "SFRPG.Combat.Difficulty.Levels.NoEnemies",
-    "less-than-easy": "SFRPG.Combat.Difficulty.Levels.LessThanEasy",
+SFRPG.difficultyLevels = {
+    "noPcs": "SFRPG.Combat.Difficulty.Levels.NoPCs",
+    "noEnemies": "SFRPG.Combat.Difficulty.Levels.NoEnemies",
+    "lessThanEasy": "SFRPG.Combat.Difficulty.Levels.LessThanEasy",
     "easy": "SFRPG.Combat.Difficulty.Levels.Easy",
     "average": "SFRPG.Combat.Difficulty.Levels.Average",
     "challenging": "SFRPG.Combat.Difficulty.Levels.Challenging",
     "hard": "SFRPG.Combat.Difficulty.Levels.Hard",
     "epic": "SFRPG.Combat.Difficulty.Levels.Epic",
-    "greater-than-epic": "SFRPG.Combat.Difficulty.Levels.GreaterThanEpic"
+    "greaterThanEpic": "SFRPG.Combat.Difficulty.Levels.GreaterThanEpic"
 };
 
 SFRPG.CRMap = new Map();

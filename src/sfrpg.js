@@ -283,6 +283,7 @@ Hooks.once("i18nInit", () => {
         "damageReductionTypes",
         "damageTypeOperators",
         "damageTypes",
+        "difficultyLevels",
         "distanceUnits",
         "descriptors",
         "descriptorsTooltips",

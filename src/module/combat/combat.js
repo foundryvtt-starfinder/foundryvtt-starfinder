@@ -554,7 +554,7 @@ export class CombatSFRPG extends Combat {
 
     getEncounterInfo() {
         if (!this.flags.sfrpg) {
-            this.flags.sfrpg = [];
+            this.flags.sfrpg = {};
         }
 
         const [PCs, APL] = this.calculateAPL();
@@ -629,19 +629,10 @@ export class CombatSFRPG extends Combat {
 
         // Check that Players and NPCs are both present
         if (!numPlayers) {
-            return ["0", CRMap.get("0"), game.i18n.format("SFRPG.Combat.Difficulty.Levels.NoPCs"), 0];
+            return ["0", CRMap.get("0"), "noPcs", 0];
         } else if (!numEnemies) {
-            return ["0", CRMap.get("0"), game.i18n.format("SFRPG.Combat.Difficulty.Levels.NoEnemies"), 0];
+            return ["0", CRMap.get("0"), "noEnemies", 0];
         }
-
-        // Calculate Difficulty Table
-        const diffTable = [
-            {"difficulty": game.i18n.format("SFRPG.Combat.Difficulty.Levels.Easy"), "CR": APL - 1},
-            {"difficulty": game.i18n.format("SFRPG.Combat.Difficulty.Levels.Average"), "CR": APL},
-            {"difficulty": game.i18n.format("SFRPG.Combat.Difficulty.Levels.Challenging"), "CR": APL + 1},
-            {"difficulty": game.i18n.format("SFRPG.Combat.Difficulty.Levels.Hard"), "CR": APL + 2},
-            {"difficulty": game.i18n.format("SFRPG.Combat.Difficulty.Levels.Epic"), "CR": APL + 3}
-        ];
 
         // Calculate XP and compare to XP table
         let encounterCR = 0;
@@ -665,14 +656,23 @@ export class CombatSFRPG extends Combat {
             }
         }
 
+        // Calculate Difficulty Table
+        const diffTable = [
+            {"difficulty": "easy", "CR": APL - 1},
+            {"difficulty": "average", "CR": APL},
+            {"difficulty": "challenging", "CR": APL + 1},
+            {"difficulty": "hard", "CR": APL + 2},
+            {"difficulty": "epic", "CR": APL + 3}
+        ];
+
         // Calculate the Encounter Difficulty
         let encounterDifficulty = "";
         const numCR = eval(encounterCR);
 
         if (numCR < diffTable[0].CR) {
-            encounterDifficulty = game.i18n.format("SFRPG.Combat.Difficulty.Levels.LessThanEasy");
+            encounterDifficulty = "lessThanEasy";
         } else if (numCR > diffTable[4].CR) {
-            encounterDifficulty = game.i18n.format("SFRPG.Combat.Difficulty.Levels.GreaterThanEpic");
+            encounterDifficulty = "greaterThanEpic";
         } else {
             for (const diffRow of diffTable) {
                 if (numCR === diffRow.CR) {
@@ -696,13 +696,12 @@ export class CombatSFRPG extends Combat {
     }
 
     renderDifficulty() {
-        // determine the coloration tag for the difficulty tracker
-        // const diffNum = eval(this.flags.sfrpg.CR) - this.flags.sfrpg.APL;
+        const difficulty = this.flags.sfrpg.difficulty;
+
         let difficultyHTML = document.createElement("div");
-        difficultyHTML.classList.add("difficulty");
-        difficultyHTML.innerHTML = `Difficulty: ${this.flags.sfrpg.difficulty}`;
-        let header2 = document.getElementsByClassName('combat-tracker-header')[0].appendChild(difficultyHTML);
-        console.log(header2);
+        difficultyHTML.classList.add("difficulty", difficulty);
+        difficultyHTML.innerHTML = `Difficulty: ${CONFIG.SFRPG.difficultyLevels[difficulty]}`;
+        document.getElementsByClassName('combat-tracker-header')[0].appendChild(difficultyHTML);
     }
 
     _getInitiativeFormula(combatant) {
