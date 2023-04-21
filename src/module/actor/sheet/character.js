@@ -96,6 +96,14 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
                 item.config.capacityMaximum = item.getMaxCapacity();
             }
 
+            if (item.config.hasAttack) {
+                this._prepareAttackString(item);
+            }
+
+            if (item.config.hasDamage) {
+                this._prepareDamageString(item);
+            }
+
             if (item.type === "actorResource") {
                 this._prepareActorResource(item, actorData);
             }

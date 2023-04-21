@@ -90,6 +90,8 @@ export class ItemSheetSFRPG extends ItemSheet {
      */
     async getData() {
         const data = super.getData();
+        // Ensure derived data is included
+        this.item.processData();
 
         data.itemData = this.document.system;
         data.actor = this.document.parent;
@@ -106,7 +108,8 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.hasLevel = data.itemData.hasOwnProperty("level") && data.item.type !== "spell";
         data.hasHands = data.itemData.hasOwnProperty("hands");
         data.hasProficiency = data.itemData.proficient === true || data.itemData.proficient === false;
-        data.isFeat = this.type === "feat";
+        data.isFeat = data.item.type === "feat";
+        data.isActorResource = data.item.type === "actorResource";
         data.isVehicleAttack = data.item.type === "vehicleAttack";
         data.isVehicleSystem = data.item.type === "vehicleSystem";
         data.isGM = game.user.isGM;
@@ -174,6 +177,37 @@ export class ItemSheetSFRPG extends ItemSheet {
         // Action Details
         data.hasAttackRoll = this.item.hasAttack;
         data.isHealing = data.item.actionType === "heal";
+
+        // Determine whether to show calculated totals for fields with formulas
+        if (itemData?.activation?.type) {
+            data.range = {};
+
+            data.range.hasInput = (() => {
+                // C/M/L on spells requires no input
+                if (this.item.type === "spell") return !(["close", "medium", "long", "none", "personal", "touch", "planetary", "system", "plane", "unlimited"].includes(itemData.range.units));
+                // These ranges require no input
+                else return !(["none", "personal", "touch", "planetary", "system", "plane", "unlimited"].includes(itemData.range.units));
+            })();
+            data.range.showTotal = !!itemData.range?.total && (String(itemData.range?.total) !== String(itemData.range?.value));
+
+            data.area = {};
+            data.area.showTotal = !!itemData.area?.total && (String(itemData.area?.total) !== String(itemData.area?.value));
+
+            data.duration = {};
+            data.duration.showTotal = !!itemData.duration?.total && (String(itemData.duration?.total) !== String(itemData.duration?.value));
+            data.duration.hasInput = itemData.duration.units !== "instantaneous";
+
+            data.uses = {};
+            data.uses.showTotal = !!itemData.uses?.total && (String(itemData.uses?.total) !== String(itemData.uses?.max));
+
+        }
+
+        if (data.isActorResource && itemData.stage === "late") {
+            data.range = {};
+
+            data.range.showMinTotal = !!itemData.range.totalMin && (String(itemData.range.totalMin) !== String(itemData.range.min));
+            data.range.showMaxTotal = !!itemData.range.totalMax && (String(itemData.range.totalMax) !== String(itemData.range.max));
+        }
 
         // Vehicle Attacks
         if (data.isVehicleAttack) {
@@ -273,8 +307,8 @@ export class ItemSheetSFRPG extends ItemSheet {
                 .map(e => ({
                     name: CONFIG.SFRPG.weaponProperties[e[0]],
                     tooltip: CONFIG.SFRPG.weaponPropertiesTooltips[e[0]]
-                })
-                )
+                })),
+            {title: game.i18n.localize("SFRPG.Items.Activation.RangeIncrement"), name: labels.range, tooltip: null}
             );
         } else if (item.type === "spell") {
             const desc = (Object.entries(itemData.descriptors)).filter(e => e[1] === true)
@@ -287,9 +321,9 @@ export class ItemSheetSFRPG extends ItemSheet {
             props.push(
                 {name: labels.components, tooltip: null},
                 {name: labels.materials, tooltip: null},
-                itemData.concentration ? {name: "Concentration", tooltip: null} : null,
-                itemData.sr ? {name: "Spell Resistence", tooltip: null} : null,
-                itemData.dismissible ? {name: "Dismissible", tooltip: null} : null,
+                itemData.concentration ? {name: game.i18n.localize("SFRPG.Items.Spell.Concentration"), tooltip: null} : null,
+                itemData.sr ? {name: game.i18n.localize("SFRPG.SpellResistance"), tooltip: null} : null,
+                itemData.dismissible ? {name: game.i18n.localize("SFRPG.Items.Spell.Dismissible"), tooltip: null} : null,
                 ...desc
             );
         } else if (item.type === "equipment") {
@@ -365,11 +399,19 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         // Action usage
         if ((item.type !== "weapon") && itemData.activation && !foundry.utils.isEmpty(itemData.activation)) {
+            const rangeTooltip = ["close", "medium", "long"].includes(itemData?.range?.units)
+                ? game.i18n.format(`SFRPG.Range${itemData?.range?.units?.capitalize()}`)
+                : null;
             props.push(
-                {name: labels.activation, tooltip: null},
-                {name: labels.range, tooltip: null},
-                {name: labels.target, tooltip: null},
-                {name: labels.duration, tooltip: null}
+                {title: game.i18n.localize("SFRPG.Items.Activation.Activation"), name: labels.activation, tooltip: null},
+                {title: game.i18n.localize("SFRPG.Items.Activation.Target"), name: labels.target, tooltip: null},
+                itemData.range.units !== "none" ? {title: game.i18n.localize("SFRPG.Items.Activation.Range"), name: labels.range, tooltip: rangeTooltip} : null,
+                (itemData.area.value || itemData.area.total)
+                    ? {title: game.i18n.localize("SFRPG.Items.Activation.Area"), name: labels.area, tooltip: null}
+                    : null,
+                (itemData.duration.units !== "text" || itemData.duration.value || itemData.duration.total)
+                    ? {title: game.i18n.localize("SFRPG.Items.Activation.Duration"), name: labels.duration, tooltip: null}
+                    : null
             );
         }
         return props.filter(p => !!p && !!p.name);
@@ -522,7 +564,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("add-ability-adjustment")) {
             await this._onSubmit(event);
             const abilityMods = this.item.system.abilityMods;
-            return this.item.update({
+            return await this.item.update({
                 "system.abilityMods.parts": abilityMods.parts.concat([
                     [0, ""]
                 ])
@@ -535,7 +577,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             const li = a.closest(".ability-adjustment-part");
             const abilityMods = duplicate(this.item.system.abilityMods);
             abilityMods.parts.splice(Number(li.dataset.abilityAdjustment), 1);
-            return this.item.update({
+            return await this.item.update({
                 "system.abilityMods.parts": abilityMods.parts
             });
         }
@@ -555,7 +597,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("add-damage")) {
             await this._onSubmit(event); // Submit any unsaved changes
             const damage = this.item.system.damage;
-            return this.item.update({
+            return await this.item.update({
                 "system.damage.parts": damage.parts.concat([
                     { name: "", formula: "", types: {}, group: null }
                 ])
@@ -568,7 +610,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             const li = a.closest(".damage-part");
             const damage = duplicate(this.item.system.damage);
             damage.parts.splice(Number(li.dataset.damagePart), 1);
-            return this.item.update({
+            return await this.item.update({
                 "system.damage.parts": damage.parts
             });
         }
@@ -577,7 +619,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("add-critical-damage")) {
             await this._onSubmit(event); // Submit any unsaved changes
             const criticalDamage = this.item.system.critical;
-            return this.item.update({
+            return await this.item.update({
                 "system.critical.parts": criticalDamage.parts.concat([
                     ["", ""]
                 ])
@@ -590,7 +632,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             const li = a.closest(".damage-part");
             const criticalDamage = duplicate(this.item.system.critical);
             criticalDamage.parts.splice(Number(li.dataset.criticalPart), 1);
-            return this.item.update({
+            return await this.item.update({
                 "system.critical.parts": criticalDamage.parts
             });
         }
@@ -649,6 +691,16 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         const modifiers = duplicate(this.item.system.modifiers);
         const modifier = modifiers.find(mod => mod._id === modifierId);
+
+        const formula = modifier.modifier;
+        if (formula) {
+            // TODO: test this this.item should be the actor if not try to get the actor here
+            const roll = Roll.create(formula, this.item.system);
+            modifier.max = await roll.evaluate({maximize: true}).total;
+        } else {
+            modifier.max = 0;
+        }
+
         modifier.enabled = !modifier.enabled;
 
         await this.item.update({
@@ -818,7 +870,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("add-visualization")) {
             await this._onSubmit(event); // Submit any unsaved changes
             const visualization = duplicate(this.item.system.combatTracker.visualization);
-            return this.item.update({
+            return await this.item.update({
                 "system.combatTracker.visualization": visualization.concat([
                     { mode: "eq", value: 0, title: this.item.name, image: this.item.img }
                 ])
@@ -831,7 +883,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             const li = a.closest(".visualization-part");
             const visualization = duplicate(this.item.system.combatTracker.visualization);
             visualization.splice(Number(li.dataset.index), 1);
-            return this.item.update({
+            return await this.item.update({
                 "system.combatTracker.visualization": visualization
             });
         }
@@ -873,7 +925,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         const visualization = duplicate(this.item.system.combatTracker.visualization);
         visualization[visualizationIndex].mode = event.currentTarget.value;
 
-        return this.item.update({
+        return await this.item.update({
             "system.combatTracker.visualization": visualization
         });
     }
@@ -891,7 +943,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             visualization[visualizationIndex].value = 0;
         }
 
-        return this.item.update({
+        return await this.item.update({
             "system.combatTracker.visualization": visualization
         });
     }
@@ -906,7 +958,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         const visualization = duplicate(this.item.system.combatTracker.visualization);
         visualization[visualizationIndex].title = event.currentTarget.value;
 
-        return this.item.update({
+        return await this.item.update({
             "system.combatTracker.visualization": visualization
         });
     }

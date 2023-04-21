@@ -1,4 +1,3 @@
-import { ItemSFRPG } from "./item/item.js";
 import BrowserEnricher from "./system/enrichers/browser.js";
 import CheckEnricher from "./system/enrichers/check.js";
 import IconEnricher from "./system/enrichers/icon.js";
@@ -310,7 +309,7 @@ SFRPG.ammunitionTypes = {
     "thasteronPellets": "SFRPG.Items.Ammunition.Type.ThasteronPellets"
 };
 
-SFRPG.distanceUnits = {
+SFRPG.constantDistanceUnits = {
     "none": "SFRPG.None",
     "personal": "SFRPG.Personal",
     "touch": "SFRPG.Touch",
@@ -320,12 +319,40 @@ SFRPG.distanceUnits = {
     "planetary": "SFRPG.Planetary",
     "system": "SFRPG.SystemWide",
     "plane": "SFRPG.Plane",
-    "unlimited": "SFRPG.Unlimited",
+    "unlimited": "SFRPG.Unlimited"
+};
+
+SFRPG.variableDistanceUnits = {
     "ft": "SFRPG.Ft",
     "meter": "SFRPG.Meter",
     "mi": "SFRPG.Mi",
     "spec": "SFRPG.Special",
     "any": "SFRPG.DistAny"
+};
+
+SFRPG.distanceUnits = {
+    ...SFRPG.constantDistanceUnits,
+    ...SFRPG.variableDistanceUnits
+};
+
+/**
+ * Durations for effects by definition must be non-zero.
+ * @type {Object}
+ */
+SFRPG.effectDurationTypes = {
+    "round": "SFRPG.EffectDurationTypesRounds",
+    "minute": "SFRPG.EffectDurationTypesMinutes",
+    "hour": "SFRPG.EffectDurationTypesHours",
+    "day": "SFRPG.EffectDurationTypesDays"
+};
+
+/**
+ * Durations for features/spells however can be.
+ * @type {Object}
+ */
+SFRPG.durationTypes = {
+    "instantaneous": "SFRPG.DurationTypesInstantaneous",
+    ...SFRPG.effectDurationTypes
 };
 
 SFRPG.targetTypes = {};
@@ -637,11 +664,11 @@ SFRPG.energyResistanceTypes = {
 
 SFRPG.spellAreaShapes = {
     "": "",
+    "sphere": "SFRPG.SpellAreaShapesSphere",
     "cone": "SFRPG.SpellAreaShapesCone",
+    "cube": "SFRPG.SpellAreaShapesCube",
     "cylinder": "SFRPG.SpellAreaShapesCylinder",
     "line": "SFRPG.SpellAreaShapesLine",
-    "sphere": "SFRPG.SpellAreaShapesSphere",
-    "shapable": "SFRPG.SpellAreaShapesShapable",
     "other": "SFRPG.SpellAreaShapesOther"
 };
 
@@ -1347,12 +1374,84 @@ SFRPG.modifierArmorClassAffectedValues = {
 };
 
 SFRPG.globalAttackRollModifiers = [
-    {bonus: { name: "SFRPG.Rolls.Character.Charge", modifier: "-2", enabled: false, notes: "SFRPG.Rolls.Character.ChargeTooltip" } },
-    {bonus: { name: "SFRPG.Rolls.Character.Flanking", modifier: "+2", enabled: false, notes: "SFRPG.Rolls.Character.FlankingTooltip" } },
-    {bonus: { name: "SFRPG.Rolls.Character.FightDefensively", modifier: "-4", enabled: false, notes: "SFRPG.Rolls.Character.FightDefensivelyTooltip" } },
-    {bonus: { name: "SFRPG.Rolls.Character.FullAttack", modifier: "-4", enabled: false, notes: "SFRPG.Rolls.Character.FullAttackTooltip" } },
-    {bonus: { name: "SFRPG.Rolls.Character.HarryingFire", modifier: "+2", enabled: false, notes: "SFRPG.Rolls.Character.HarryingFireTooltip" } },
-    {bonus: { name: "SFRPG.Rolls.Character.Nonlethal", modifier: "-4", enabled: false, notes: "SFRPG.Rolls.Character.NonlethalTooltip" } }
+    {
+        bonus: {
+            _id: "e10bf545-4c36-4072-b8e7-ef791cfdaae5",
+            name: "SFRPG.Rolls.Character.Charge",
+            modifier: "-2",
+            type: "untyped",
+            enabled: false,
+            modifierType: "formula",
+            subtab: "temporary",
+            max: -2,
+            notes: "SFRPG.Rolls.Character.ChargeTooltip"
+        }
+    },
+    {
+        bonus: {
+            _id: "5eb1f127-31e1-47d9-bd9e-cd2a68b8d8eb",
+            name: "SFRPG.Rolls.Character.Flanking",
+            modifier: "+2",
+            type: "untyped",
+            enabled: false,
+            modifierType: "formula",
+            subtab: "temporary",
+            max: +2,
+            notes: "SFRPG.Rolls.Character.FlankingTooltip"
+        }
+    },
+    {
+        bonus: {
+            _id: "2e72e48a-d152-4b25-97fc-5f5485ba6027",
+            name: "SFRPG.Rolls.Character.FightDefensively",
+            modifier: "-4",
+            type: "untyped",
+            enabled: false,
+            modifierType: "formula",
+            subtab: "temporary",
+            max: -4,
+            notes: "SFRPG.Rolls.Character.FightDefensivelyTooltip"
+        }
+    },
+    {
+        bonus: {
+            _id: "9752a0ff-ee73-4fac-8d4a-f6822135d8fc",
+            name: "SFRPG.Rolls.Character.FullAttack",
+            modifier: "-4",
+            type: "untyped",
+            enabled: false,
+            modifierType: "formula",
+            subtab: "temporary",
+            max: -4,
+            notes: "SFRPG.Rolls.Character.FullAttackTooltip"
+        }
+    },
+    {
+        bonus: {
+            _id: "12dfb463-9a24-483a-85e4-8d43ea23f871",
+            name: "SFRPG.Rolls.Character.HarryingFire",
+            modifier: "+2",
+            type: "untyped",
+            enabled: false,
+            modifierType: "formula",
+            subtab: "temporary",
+            max: +2,
+            notes: "SFRPG.Rolls.Character.HarryingFireTooltip"
+        }
+    },
+    {
+        bonus: {
+            _id: "a64aabd8-8704-4420-8c43-dab851ccf83d",
+            name: "SFRPG.Rolls.Character.Nonlethal",
+            modifier: "-4",
+            type: "untyped",
+            enabled: false,
+            modifierType: "formula",
+            subtab: "temporary",
+            max: -4,
+            notes: "SFRPG.Rolls.Character.NonlethalTooltip"
+        }
+    }
 ];
 
 SFRPG.CHARACTER_EXP_LEVELS = [

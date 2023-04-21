@@ -56,6 +56,9 @@ export default function(engine) {
             if (skill.misc !== 0) {
                 skill.tooltip.push(game.i18n.format("SFRPG.SkillTooltipMiscMod", {mod: skill.misc.signedString()}));
             }
+
+            // this is done because the normal tooltip will be changed later on and we need this one as a "base" for dice rolls.
+            skill.rollTooltip = [ ...skill.tooltip ];
         }
 
         return fact;

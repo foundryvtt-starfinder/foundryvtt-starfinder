@@ -219,13 +219,22 @@ Hooks.once('init', async function() {
     registerSystemSettings();
 
     if (game.settings.get("sfrpg", "sfrpgTheme")) {
-        const logo = document.querySelector("#logo");
-        logo.src = "systems/sfrpg/images/starfinder_icon.webp";
-        logo.style.width = "92px";
-        logo.style.height = "92px";
-        logo.style.margin = "0 0 0 9px";
+        const setAnvil = () => {
+            const logo = document.querySelector("#logo");
+            logo.loading = "eager";
+            logo.src = "systems/sfrpg/images/starfinder_icon.webp";
+            logo.style.width = "92px";
+            logo.style.height = "92px";
+            logo.style.margin = "0 0 0 9px";
+        };
 
-        let r = document.querySelector(':root');
+        const dummy = document.createElement("img");
+        dummy.addEventListener("load", setAnvil);
+        dummy.loading = "eager";
+        dummy.src = "systems/sfrpg/images/starfinder_icon.webp";
+        dummy.style.display = "none";
+
+        const r = document.querySelector(':root');
         r.style.setProperty("--color-border-highlight-alt", "#0080ff");
         r.style.setProperty("--color-border-highlight", "#00a0ff");
         r.style.setProperty("--color-text-hyperlink", "#38b5ff");
@@ -246,19 +255,18 @@ Hooks.once('init', async function() {
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("sfrpg", ItemSheetSFRPG, { makeDefault: true });
 
-    console.log("Starfinder | [READY] Preloading handlebar templates");
+    console.log("Starfinder | [INIT] Preloading handlebar templates");
     preloadHandlebarsTemplates();
 
-    console.log("Starfinder | [READY] Setting up inline buttons");
+    console.log("Starfinder | [INIT] Setting up inline buttons");
     CONFIG.TextEditor.enrichers.push(new BrowserEnricher(), new IconEnricher(), new CheckEnricher());
-    BaseEnricher.addListeners();
 
     const finishTime = (new Date()).getTime();
     console.log(`Starfinder | [INIT] Done (operation took ${finishTime - initTime} ms)`);
 });
 
 Hooks.once("i18nInit", () => {
-    console.log("Starfinder | [SETUP] Localizing global arrays");
+    console.log("Starfinder | [I18N] Localizing global arrays");
     const toLocalize = [
         "abilities",
         "abilityActivationTypes",
@@ -284,6 +292,10 @@ Hooks.once("i18nInit", () => {
         "damageTypeOperators",
         "damageTypes",
         "distanceUnits",
+        "constantDistanceUnits",
+        "variableDistanceUnits",
+        "durationTypes",
+        "effectDurationTypes",
         "descriptors",
         "descriptorsTooltips",
         "energyDamageTypes",
@@ -335,7 +347,7 @@ Hooks.once("i18nInit", () => {
         "weaponTypes"
     ];
 
-    for (let o of toLocalize) {
+    for (const o of toLocalize) {
         CONFIG.SFRPG[o] = Object.entries(CONFIG.SFRPG[o]).reduce((obj, e) => {
             obj[e[0]] = game.i18n.localize(e[1]);
 
@@ -400,11 +412,15 @@ Hooks.once("ready", async () => {
     console.log("Starfinder | [READY] Initializing compendium browsers");
     initializeBrowsers();
 
-    console.log("Starfinder | [SETUP] Setting up Vision Modes");
+    console.log("Starfinder | [READY] Setting up Vision Modes");
     setupVision();
 
     console.log("Starfinder | [READY] Applying artwork from modules to compendiums");
     registerCompendiumArt();
+
+    console.log("Starfinder | [READY] Setting up event listeners");
+    BaseEnricher.addListeners();
+    ItemSFRPG.chatListeners($("body"));
 
     if (game.user.isGM) {
         const currentSchema = game.settings.get('sfrpg', 'worldSchemaVersion') ?? 0;
@@ -491,7 +507,6 @@ Hooks.on("renderChatMessage", (app, html, data) => {
     if (game.settings.get("sfrpg", "autoCollapseItemCards")) html.find('.card-content').hide();
 });
 Hooks.on("getChatLogEntryContext", addChatMessageContextOptions);
-Hooks.on("renderChatLog", (app, html, data) => ItemSFRPG.chatListeners(html));
 
 Hooks.on("hotbarDrop", (bar, data, slot) => {
     if (data.type !== "Item") return;
@@ -592,9 +607,14 @@ function setupHandlebars() {
     Handlebars.registerHelper("length", function(value) {
         if (value instanceof Array) {
             return value.length;
+        } else if (typeof value === "string") {
+            return value.length;
+        } else if (typeof value === "number") {
+            return String(value).length;
         } else if (value instanceof Object) {
             return Object.entries(value).length;
         }
+
         return 0;
     });
 
@@ -641,7 +661,7 @@ function setupHandlebars() {
     });
 
     Handlebars.registerHelper('ellipsis', function(displayedValue, limit) {
-        let str = displayedValue.toString();
+        const str = displayedValue.toString();
         if (str.length <= limit) {
             return str;
         }
@@ -660,7 +680,7 @@ function setupHandlebars() {
     Handlebars.registerHelper('getTotalStorageCapacity', function(item) {
         let totalCapacity = 0;
         if (item?.system?.container?.storage && item.system.container.storage.length > 0) {
-            for (let storage of item.system.container.storage) {
+            for (const storage of item.system.container.storage) {
                 totalCapacity += storage.amount;
             }
         }
@@ -730,9 +750,9 @@ function setupHandlebars() {
             throw new Error(game.i18n.localize("SFRPG.Tippy.ErrorNoTitle"));
         }
 
-        let html = "data-tippy-content=\"<strong>" + game.i18n.localize(title) + "</strong>";
+        let html = "data-tippy-content=\"<strong>" + Handlebars.escapeExpression(game.i18n.localize(title)) + "</strong>";
         if (subtitle) {
-            html += "<br/>" + game.i18n.localize(subtitle);
+            html += "<br/>" + Handlebars.escapeExpression(game.i18n.localize(subtitle));
         }
         if (attributes) {
             const printableAttributes = [];
@@ -781,6 +801,7 @@ function setupHandlebars() {
         const formattedValue = moneyFormatter.format(value);
         return formattedValue;
     });
+
 }
 
 Hooks.on("renderSidebarTab", async (app, html) => {

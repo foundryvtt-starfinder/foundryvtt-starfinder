@@ -30,13 +30,13 @@
                 {{#if (or item.config.hasAttack item.config.hasDamage)}}
                 <div class="item-action flexcol">
                     {{#if item.config.hasAttack}}
-                    <button type="button" class="tag attack">{{localize "SFRPG.Attack"}}</button>
+                    <button type="button" class="tag attack" data-tooltip="{{localize "SFRPG.Attack"}}">{{item.config.attackString}}</button>
                     {{/if}}
                     {{#if item.config.hasDamage}}
                         {{#if (eq item.system.actionType "heal")}}
-                            <button type="button" class="tag healing">{{localize "SFRPG.ActionHeal"}}</button>
+                            <button type="button" class="tag healing" data-tooltip="{{localize "SFRPG.ActionHeal"}}">{{item.config.damageString}}</button>
                         {{else}}
-                            <button type="button" class="tag damage">{{localize "SFRPG.Damage.Title"}}</button>
+                            <button type="button" class="tag damage" data-tooltip="{{localize "SFRPG.Damage.Title"}}">{{item.config.damageString}}</button>
                         {{/if}}
                     {{/if}}
                 </div>
@@ -58,7 +58,7 @@
             {{#if section.hasActions}}
             <div class="item-detail item-uses">
                 {{#if (or item.system.uses.value item.system.uses.max)}}
-                    {{item.system.uses.value}} / {{item.system.uses.max}}
+                    <input type="text" class="limited-uses-value" value="{{item.system.uses.value}}" data-dtype="Number" /> / {{item.system.uses.total}}
                 {{else if item.system.recharge.value}}
                     {{#if item.config.isOnCooldown}}
                         <a class="item-recharge rollable">{{item.labels.recharge}}</a>

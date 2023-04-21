@@ -11,6 +11,7 @@
         img.profile {
             flex: 0 0 150px;
             height: 150px;
+            border-right: @borderGroove;
         }
 
         .charname {
@@ -64,6 +65,10 @@
                 flex: 2 3;
                 margin-left: 8px;
                 padding-right: 8px;
+            }
+
+            :first-child {
+                border-left: none;
             }
         }
 
@@ -136,6 +141,8 @@
             margin-right: 5px;
             padding-right: 5px;
             border-right: @borderGroove;
+            top: 0;
+            position: sticky;
 
             .form-group {
                 margin: 0;
@@ -157,12 +164,16 @@
 
                 li {
                     margin: 3px 0;
-                    padding: 0 2px;
+                    padding: 0 1px;
                     background: rgba(0, 0, 0, 0.05);
                     border: @borderGroove;
                     text-align: center;
                     font-size: 12px;
-                    line-height: 18px;
+                    line-height: 16px;
+
+                    hr {
+                        margin: 0;
+                    }
                 }
             }
         }
@@ -192,37 +203,49 @@
                 flex: 3;
             }
 
+            &.min-form-field {
+                flex: 0;
+            }
+
             border: 1px solid @colorTan;
             background: rgba(0, 0, 0, 0.05);
         }
 
-        .form-group.input-select {
-            select {
-                flex: 1;
+        .form-group {
+
+            &.input-select {
+                select {
+                    flex: 1;
+                }
+
+                select[multiple] {
+                    height: 200px;
+                }
             }
 
-            select[multiple] {
-                height: 200px;
+            &.input-select-select {
+                select {
+                    flex: 1.5;
+                }
             }
-        }
 
-        .form-group.input-select-select {
-            select {
-                flex: 1.5;
+            &.uses-per {
+                input {
+                    flex: 1;
+                }
+                span {
+                    text-align: center;
+                    flex: 0 0 16px;
+                    line-height: 24px;
+                }
+                select {
+                    flex: 0;
+                }
             }
-        }
 
-        .form-group.uses-per {
-            input {
-                flex: 1;
-            }
-            span {
-                text-align: center;
-                flex: 0 0 16px;
-                line-height: 24px;
-            }
-            select {
-                flex: 3;
+            .calculated-total {
+                flex: 0;
+                color: @colorOlive;
             }
         }
 
