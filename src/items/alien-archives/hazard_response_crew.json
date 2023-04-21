@@ -1476,7 +1476,7 @@
               "index": 0
             },
             {
-              "id": "5qsbfBeMpfBb3djJ",
+              "id": "kQ5Rb1dnzqkoISqD",
               "index": 0
             }
           ],
@@ -2900,9 +2900,9 @@
       }
     },
     {
-      "_id": "5qsbfBeMpfBb3djJ",
+      "_id": "kQ5Rb1dnzqkoISqD",
       "name": "Medpatch",
-      "type": "technological",
+      "type": "consumable",
       "flags": {
         "core": {
           "sourceId": "Compendium.sfrpg.equipment.7aTLW078XT6tgOoW"
@@ -2911,10 +2911,26 @@
       "img": "systems/sfrpg/icons/equipment/technological%20items/medpatch.webp",
       "system": {
         "type": "",
+        "ability": null,
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "none",
+          "condition": "",
+          "cost": 0
+        },
         "ammunitionType": "",
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "ft",
+          "value": ""
+        },
+        "attackBonus": 0,
         "attributes": {
           "ac": {
             "value": ""
@@ -2939,6 +2955,8 @@
           "max": 0,
           "value": 1
         },
+        "chatFlavor": "",
+        "consumableType": "medicne",
         "container": {
           "contents": [],
           "includeContentsInWealthCalculation": true,
@@ -2946,30 +2964,78 @@
           "storage": []
         },
         "critical": {
+          "effect": "",
           "parts": []
         },
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>A medpatch is a simple, all-in-one, disposable medical device designed to be slapped onto a wound or area of concern (such as a clearly @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.gBhZDjh30JEyh7DY]{diseased} or @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{poisoned} section of the body) with little skill required. A medpatch allows you to attempt a Medicine check untrained with a +10 circumstance bonus, but only for the first aid, long-term stability, treat disease, and treat @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Drugs} or poison tasks.</p>"
+          "value": "<div><h3>Technological</h3></div><p>A medpatch is a simple, all-in-one, disposable medical device designed to be slapped onto a wound or area of concern (such as a clearly @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.gBhZDjh30JEyh7DY]{diseased} or @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{poisoned} section of the body) with little skill required. A medpatch allows you to attempt a Medicine check untrained with a +10 circumstance bonus, but only for the @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.d4fcGwOcrsuYrwGH#first-aid]{first aid}, @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.d4fcGwOcrsuYrwGH#long-term-stability]{long-term stability}, @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.d4fcGwOcrsuYrwGH#treat-disease]{treat disease}, and @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.d4fcGwOcrsuYrwGH#treat-drugs-or-poison]{treat Drugs or&nbsp;poison} tasks.</p>\n<p><em>Enable/disable bonus in the Modifiers tab</em></p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "text",
+          "value": ""
         },
         "equippable": false,
         "equipped": false,
+        "formula": "",
         "hands": 1,
         "identified": true,
+        "isActive": null,
         "level": 1,
-        "modifiers": [],
+        "modifiers": [
+          {
+            "_id": "cac1b3c0-3a45-4772-90ae-922c25f63c98",
+            "name": "Medpatch",
+            "type": "circumstance",
+            "condition": "",
+            "effectType": "skill",
+            "enabled": false,
+            "max": 10,
+            "modifier": "10",
+            "modifierType": "constant",
+            "notes": "A medpatch allows you to attempt a Medicine check untrained with a +10 circumstance bonus, but only for the first aid, long-term stability, treat disease, and treat Drugs or poison tasks.",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": "med"
+          }
+        ],
         "price": 50,
-        "quantity": 1,
+        "quantity": 5,
         "quantityPerPack": 1,
-        "source": "Core Rulebook",
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "none",
+          "value": ""
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "CRB pg. 220",
+        "target": {
+          "type": "",
+          "value": ""
+        },
         "usage": {
           "per": "",
+          "value": 1
+        },
+        "uses": {
+          "autoDestroy": true,
+          "autoUse": true,
+          "max": "1",
+          "per": "charges",
           "value": 1
         }
       }
