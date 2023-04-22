@@ -15,37 +15,63 @@
     text-align: center;
 }
 
-.encounter-stats-header {
-    margin: 0;
-    padding: 0.25em;
-    border-bottom-style: solid;
-    border-color: black;
-    font-size: var(--font-size-14);
-}
+.encounter-stats-sheet {
 
-.encounter-table-left {
-    flex: 3;
-    text-align: left;
-}
+    .stats-header {
+        margin: 0;
+        padding: 0.25em;
+        border-bottom-style: solid;
+        border-color: black;
+        font-size: var(--font-size-14);
 
-.encounter-table-right {
-    flex: 1;
-    align-self: center;
-    text-align: right;
-}
+        .table-left {
+            flex: 3;
+            text-align: left;
+        }
+        
+        .table-right {
+            flex: 1;
+            align-self: center;
+            text-align: right;
+        }
+    }
+    
+    .stats-body {
+        
+        .body-col-left {
+            flex: 1;
+        }
 
-ul.difficulty {
-    list-style-type: none; /* Remove bullets */
-    padding: 0; /* Remove padding */
-    margin: 0; /* Remove margins */
-}
+        .body-col-right {
+            flex: 1;
+        }
+        
+        img {
+            border-style: none;
+            object-fit: cover;
+            object-position: 50% 0;
+        }
 
-li.difficulty {
-    padding: 0.5em;
-    display: flex;
-    flex-direction: row;
-}
+        ul.combatant-list {
+            list-style-type: none; /* Remove bullets */
+            padding: 0; /* Remove padding */
+            margin: 0; /* Remove margins */
+        }
+        
+        li.combatant-list {
+            border-style: solid;
+            border-radius: 1em;
+            border-width: thin;
+            border-color: black;
+            padding: 0.5em;
+            margin: 0.25em;
+            display: flex;
+            flex-direction: row;
+        }
 
+    }
+}
+    
 .difficulty-noPcs {
     color: var(--color-text-light-5);
 }

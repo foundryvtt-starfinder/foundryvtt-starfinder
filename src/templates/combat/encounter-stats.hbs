@@ -1,53 +1,53 @@
 <div class="encounter-stats-sheet">
-    <div class="encounter-stats-header">
+    <div class="stats-header">
         <table>
             <tr>
-                <td class="encounter-table-left">
+                <td class="table-left">
                     {{localize "SFRPG.Combat.Difficulty.Tooltip.APLFull"}} ({{localize "SFRPG.Combat.Difficulty.Tooltip.APL"}})
                 </td>
-                <td class="encounter-table-right">
+                <td class="table-right">
                     {{flags.sfrpg.APL}}
                 </td>
             </tr>
             <tr>
-                <td class="encounter-table-left">
+                <td class="table-left">
                     {{localize "SFRPG.Combat.Difficulty.Tooltip.EncounterCR"}} ({{localize "SFRPG.Combat.Difficulty.Tooltip.CR"}})
                 </td>
-                <td class="encounter-table-right">
+                <td class="table-right">
                     {{flags.sfrpg.CR}}
                 </td>
             </tr>
             <tr>
-                <td class="encounter-table-left">
+                <td class="table-left">
                     {{localize "SFRPG.Combat.Difficulty.Tooltip.EnemyXP"}}
                 </td>
-                <td class="encounter-table-right">
+                <td class="table-right">
                     {{flags.sfrpg.enemyXP}}
                 </td>
             </tr>
             <tr>
-                <td class="encounter-table-left">
+                <td class="table-left">
                     {{localize "SFRPG.Combat.Difficulty.Tooltip.XPBounds"}} ({{localize "SFRPG.Combat.Difficulty.Tooltip.CR"}} {{flags.sfrpg.CR}})
                 </td>
-                <td class="encounter-table-right">
+                <td class="table-right">
                     [{{flags.sfrpg.CRXPbounds}}]
                 </td>
             </tr>
         </table>
     </div>
-    <div class="encounter-stats-body">
-        <div class="encounter-header-col-left">
-            <ul class="no-bullets">
+    <div class="stats-body">
+        <div class="body-col-left">
+            <ul class="combatant-list">
                 {{#each flags.sfrpg.PCs as |item id|}}
-                <li class="item flexrow" data-item-id="{{item.id}}">
-                    <div class="item-image">
-                        <img class="img" src="{{item.img}}" title="{{item.name}}" width="36" height="36"/>
+                <li class="combatant-list flexrow" data-item-id="{{item.id}}">
+                    <div class="art">
+                        <img class="img" src="{{item.img}}" title="{{item.name}}" width="48" height="48"/>
                     </div>
                 </li>
                 {{/each}}
             </ul>
         </div>
-        <div class="encounter-header-col-right">
+        <div class="body-col-right">
             <!-- <ul class="no-bullets">
                 {{#each system.weapons as |item id|}}
                 <li class="item flexrow" data-item-id="{{item.id}}">
