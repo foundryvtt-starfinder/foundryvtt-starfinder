@@ -922,7 +922,7 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
             ev.preventDefault();
             const contentTemplate = '//systems/sfrpg/templates/combat/encounter-stats.hbs';
             new Dialog({
-                title: "TMP",
+                title: `${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.Details")}: ${CONFIG.SFRPG.difficultyLevels[activeCombat.flags.sfrpg.difficulty]} ${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.DifficultyEncounter")}`,
                 content: await renderTemplate(contentTemplate, activeCombat),
                 buttons: {}
             }).render(true);
