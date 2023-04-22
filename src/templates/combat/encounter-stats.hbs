@@ -1,48 +1,70 @@
 <div class="encounter-stats-sheet">
     <div class="encounter-stats-header">
-        <ul class="no-bullets">
-            <li>
-                <div class="encounter-header-col-left">
+        <table>
+            <tr>
+                <td class="encounter-table-left">
                     {{localize "SFRPG.Combat.Difficulty.Tooltip.APLFull"}} ({{localize "SFRPG.Combat.Difficulty.Tooltip.APL"}})
-                </div>
-                <div class="encounter-header-col-right">
+                </td>
+                <td class="encounter-table-right">
                     {{flags.sfrpg.APL}}
-                </div>
-            </li>
-            <li>
-                <div class="encounter-header-col-left">
+                </td>
+            </tr>
+            <tr>
+                <td class="encounter-table-left">
                     {{localize "SFRPG.Combat.Difficulty.Tooltip.EncounterCR"}} ({{localize "SFRPG.Combat.Difficulty.Tooltip.CR"}})
-                </div>
-                <div class="encounter-header-col-right">
+                </td>
+                <td class="encounter-table-right">
                     {{flags.sfrpg.CR}}
-                </div>
-            </li>
-            <li>
-                <div class="encounter-header-col-left">
+                </td>
+            </tr>
+            <tr>
+                <td class="encounter-table-left">
                     {{localize "SFRPG.Combat.Difficulty.Tooltip.EnemyXP"}}
-                </div>
-                <div class="encounter-header-col-right">
+                </td>
+                <td class="encounter-table-right">
                     {{flags.sfrpg.enemyXP}}
-                </div>
-            </li>
-            <li>
-                <div class="encounter-header-col-left">
+                </td>
+            </tr>
+            <tr>
+                <td class="encounter-table-left">
                     {{localize "SFRPG.Combat.Difficulty.Tooltip.XPBounds"}} ({{localize "SFRPG.Combat.Difficulty.Tooltip.CR"}} {{flags.sfrpg.CR}})
-                </div>
-                <div class="encounter-header-col-right">
+                </td>
+                <td class="encounter-table-right">
                     [{{flags.sfrpg.CRXPbounds}}]
-                </div>
-            </li>
-        </ul>
+                </td>
+            </tr>
+        </table>
     </div>
     <div class="encounter-stats-body">
-        <div class="encounter-stats-players">
-            <div class="encounter-header">
-
-            </div>
+        <div class="encounter-header-col-left">
+            <ul class="no-bullets">
+                {{#each flags.sfrpg.PCs as |item id|}}
+                <li class="item flexrow" data-item-id="{{item.id}}">
+                    <div class="item-image">
+                        <img class="img" src="{{item.img}}" title="{{item.name}}" width="36" height="36"/>
+                    </div>
+                </li>
+                {{/each}}
+            </ul>
         </div>
-        <div class="encounter-stats-enemies">
-            
+        <div class="encounter-header-col-right">
+            <!-- <ul class="no-bullets">
+                {{#each system.weapons as |item id|}}
+                <li class="item flexrow" data-item-id="{{item.id}}">
+                    <div class="item-image">
+                        <a class="dmg-roll" title="{{localize "sfrpgbb.general.clickToRoll"}} {{item.name}} {{localize "sfrpgbb.weapon.damage"}}" data-weapon-name="{{item.name}}" data-weapon-type="{{item.system.weaponType}}" data-damage-type="{{item.system.damageType}}" data-dice={{item.system.damage}} data-melee-damage={{../system.attack.bonus.melee.damageBonus}} data-ranged-damage={{../system.attack.bonus.ranged.damageBonus}}>
+                            <img class="img-rollable" src="{{item.img}}" title="{{localize "sfrpgbb.general.clickToRoll"}} {{item.name}} {{localize "sfrpgbb.weapon.damage"}}" width="36" height="36"/>
+                        </a>
+                    </div>
+                    <div class="item-name" style="flex-grow: 2;"><a class="item-control item-edit" title={{localize "sfrpgbb.equipment.editItem"}}><h4 class="item-name">{{item.name}}</h4></a></div>
+                    <div class="item-equipped"><input type="checkbox" {{checked item.system.equipped}} /></div>
+                    <div class="item-quantity"><input type="number" value="{{item.system.quantity}}" data-dtype="Number" /></div>
+                    <div class="item-controls">
+                        <a class="item-control item-delete" title={{localize "sfrpgbb.equipment.deleteItem"}}><i class="fas fa-trash"></i></a>
+                    </div>
+                </li>
+                {{/each}}
+            </ul> -->
         </div>
     </div>
 </div>

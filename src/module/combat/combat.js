@@ -629,9 +629,9 @@ export class CombatSFRPG extends Combat {
 
         // Check that Players and NPCs are both present
         if (!numPlayers) {
-            return ["0", CRTable["0"], "noPcs", 0];
+            return ["0", CRTable["0"], "difficulty-noPcs", 0];
         } else if (!numEnemies) {
-            return ["0", CRTable["0"], "noEnemies", 0];
+            return ["0", CRTable["0"], "difficulty-noEnemies", 0];
         }
 
         // Calculate XP and compare to XP table
@@ -658,11 +658,11 @@ export class CombatSFRPG extends Combat {
 
         // Calculate Difficulty Table
         const diffTable = [
-            {"difficulty": "easy", "CR": APL - 1},
-            {"difficulty": "average", "CR": APL},
-            {"difficulty": "challenging", "CR": APL + 1},
-            {"difficulty": "hard", "CR": APL + 2},
-            {"difficulty": "epic", "CR": APL + 3}
+            {"difficulty": "difficulty-easy", "CR": APL - 1},
+            {"difficulty": "difficulty-average", "CR": APL},
+            {"difficulty": "difficulty-challenging", "CR": APL + 1},
+            {"difficulty": "difficulty-hard", "CR": APL + 2},
+            {"difficulty": "difficulty-epic", "CR": APL + 3}
         ];
 
         // Calculate a numerical version of the CR for comparison
@@ -678,9 +678,9 @@ export class CombatSFRPG extends Combat {
         let encounterDifficulty = "";
 
         if (numCR < diffTable[0].CR) {
-            encounterDifficulty = "lessThanEasy";
+            encounterDifficulty = "difficulty-lessThanEasy";
         } else if (numCR > diffTable[4].CR) {
-            encounterDifficulty = "greaterThanEpic";
+            encounterDifficulty = "difficulty-greaterThanEpic";
         } else {
             for (const diffRow of diffTable) {
                 if (numCR === diffRow.CR) {

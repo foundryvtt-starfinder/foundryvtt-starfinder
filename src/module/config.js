@@ -1435,15 +1435,15 @@ SFRPG.CRTable = {
 };
 
 SFRPG.difficultyLevels = {
-    "noPcs": "SFRPG.Combat.Difficulty.Levels.NoPCs",
-    "noEnemies": "SFRPG.Combat.Difficulty.Levels.NoEnemies",
-    "lessThanEasy": "SFRPG.Combat.Difficulty.Levels.LessThanEasy",
-    "easy": "SFRPG.Combat.Difficulty.Levels.Easy",
-    "average": "SFRPG.Combat.Difficulty.Levels.Average",
-    "challenging": "SFRPG.Combat.Difficulty.Levels.Challenging",
-    "hard": "SFRPG.Combat.Difficulty.Levels.Hard",
-    "epic": "SFRPG.Combat.Difficulty.Levels.Epic",
-    "greaterThanEpic": "SFRPG.Combat.Difficulty.Levels.GreaterThanEpic"
+    "difficulty-noPcs": "SFRPG.Combat.Difficulty.Levels.NoPCs",
+    "difficulty-noEnemies": "SFRPG.Combat.Difficulty.Levels.NoEnemies",
+    "difficulty-lessThanEasy": "SFRPG.Combat.Difficulty.Levels.LessThanEasy",
+    "difficulty-easy": "SFRPG.Combat.Difficulty.Levels.Easy",
+    "difficulty-average": "SFRPG.Combat.Difficulty.Levels.Average",
+    "difficulty-challenging": "SFRPG.Combat.Difficulty.Levels.Challenging",
+    "difficulty-hard": "SFRPG.Combat.Difficulty.Levels.Hard",
+    "difficulty-epic": "SFRPG.Combat.Difficulty.Levels.Epic",
+    "difficulty-greaterThanEpic": "SFRPG.Combat.Difficulty.Levels.GreaterThanEpic"
 };
 
 SFRPG.statusEffects = [
