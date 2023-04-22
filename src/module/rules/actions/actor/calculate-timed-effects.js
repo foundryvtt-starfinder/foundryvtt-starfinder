@@ -9,6 +9,7 @@ export default function(engine) {
         if ((item.type === 'effect') && (actor.system.timedEffects instanceof Array)) {
             // TODO: find out why "actor.system.timedEffects" is always empty at this point and change that.
             // It will still work just fine but always change the effects ID when you are updating it. It just bugs me a bit.
+            // The only real solution is to add the timedEffect id to the item itself.
             const existingEffect = actor.system.timedEffects.find(effect => effect.itemId === item.id);
             const effectData = {
                 itemId: item.id,

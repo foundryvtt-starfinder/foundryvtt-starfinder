@@ -175,9 +175,39 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
             if (item.effects instanceof Array) item.effects = null;
             else if (item.effects instanceof Map) item.effects.clear();
+
+            if (item.type === 'effect') {
+                item.system.activeDuration.activationTime = game.time.worldTime;
+            }
         }
 
         return super.createEmbeddedDocuments(embeddedName, itemData, options);
+    }
+
+    /**
+     * Extends logic for SFRPG system after a set of embedded Documents is deleted.
+     * @param {string} embeddedName   The name of the embedded Document type
+     * @param {Document[]} documents  An Array of deleted Documents
+     * @param {object[]} result       An Array of document IDs being deleted
+     * @param {object} options        Options which modified the deletion operation
+     * @param {string} userId         The ID of the User who triggered the operation
+     * @memberof ClientDocumentMixin#
+     */
+    _onDeleteEmbeddedDocuments(embeddedName, documents, result, options, userId) {
+        // delete timedEffect objects
+        for (let itemI = 0; itemI < documents.length; itemI++) {
+            const item = documents[itemI];
+            if (item.type === 'effect') {
+                game.sfrpg.timedEffects.find(effect => {
+                    if (effect.itemId === item.id) {
+                        effect.delete();
+                        return true;
+                    }
+                    return false;
+                });
+            }
+        }
+        return super._onDeleteEmbeddedDocuments(embeddedName, documents, result, options, userId);
     }
 
     /**
