@@ -175,13 +175,27 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
             if (item.effects instanceof Array) item.effects = null;
             else if (item.effects instanceof Map) item.effects.clear();
+        }
 
+        return super.createEmbeddedDocuments(embeddedName, itemData, options);
+    }
+
+    /**
+     * Extends logic for SFRPG system after a set of embedded Documents in this parent Document are created.
+     * @param {string} embeddedName   The name of the embedded Document type
+     * @param {Document[]} documents  An Array of created Documents
+     * @param {object[]} result       An Array of created data objects
+     * @param {object} options        Options which modified the creation operation
+     * @param {string} userId         The ID of the User who triggered the operation
+     */
+    _onCreateEmbeddedDocuments(embeddedName, documents, result, options, userId) {
+        for (let itemI = 0; itemI < documents.length; itemI++) {
+            const item = documents[itemI];
             if (item.type === 'effect') {
                 item.system.activeDuration.activationTime = game.time.worldTime;
             }
         }
-
-        return super.createEmbeddedDocuments(embeddedName, itemData, options);
+        return super._onCreateEmbeddedDocuments(embeddedName, documents, result, options, userId);
     }
 
     /**
@@ -191,7 +205,6 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      * @param {object[]} result       An Array of document IDs being deleted
      * @param {object} options        Options which modified the deletion operation
      * @param {string} userId         The ID of the User who triggered the operation
-     * @memberof ClientDocumentMixin#
      */
     _onDeleteEmbeddedDocuments(embeddedName, documents, result, options, userId) {
         // delete timedEffect objects
