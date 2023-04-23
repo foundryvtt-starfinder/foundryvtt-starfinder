@@ -20,8 +20,6 @@
     .stats-header {
         margin: 0;
         padding: 0.25em;
-        border-bottom-style: solid;
-        border-color: black;
         font-size: var(--font-size-14);
 
         .table-left {
@@ -35,21 +33,33 @@
             text-align: right;
         }
     }
+
+    .combatants-title {
+        display: flex;
+        flex-direction: row;
+        text-align: center;
+        border-bottom-style: solid;
+        border-color: black;
+
+        .title-item {
+            flex: 1;
+            padding: 0.25em;
+            margin: 0;
+            font-size: var(--font-size-16);
+        }
+    }
     
     .stats-body {
-        
+
+        display: flex;
+        flex-direction: row;
+
         .body-col-left {
             flex: 1;
         }
 
         .body-col-right {
             flex: 1;
-        }
-        
-        img {
-            border-style: none;
-            object-fit: cover;
-            object-position: 50% 0;
         }
 
         ul.combatant-list {
@@ -60,13 +70,29 @@
         
         li.combatant-list {
             border-style: solid;
-            border-radius: 1em;
+            border-radius: 0.5em;
             border-width: thin;
             border-color: black;
             padding: 0.5em;
             margin: 0.25em;
             display: flex;
             flex-direction: row;
+            
+            img {
+                border-style: none;
+                border-right-style: solid;
+                border-right-color: black;
+                padding-right: 0.5em;
+                object-fit: cover;
+                object-position: 50% 0;
+            }
+
+            h4 {
+                align-self: center;
+                text-align: left;
+                padding-left: 0.5em;
+                font-size: var(--font-size-16);
+            }
         }
 
     }

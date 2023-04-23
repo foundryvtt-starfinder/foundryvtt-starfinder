@@ -924,7 +924,8 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
             new Dialog({
                 title: `${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.Details")}: ${CONFIG.SFRPG.difficultyLevels[activeCombat.flags.sfrpg.difficulty]} ${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.DifficultyEncounter")}`,
                 content: await renderTemplate(contentTemplate, activeCombat),
-                buttons: {}
+                buttons: {},
+                resizable: true
             }).render(true);
         });
     }

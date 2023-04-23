@@ -43,36 +43,40 @@
             </tr>
         </table>
     </div>
+
+    <div class="combatants-title">
+        <div class="title-item">
+            {{localize "SFRPG.Combat.Difficulty.Tooltip.Players"}}
+        </div>
+        <div class="title-item">
+            {{localize "SFRPG.Combat.Difficulty.Tooltip.Enemies"}}
+        </div>
+    </div>
+
     <div class="stats-body">
         <div class="body-col-left">
             <ul class="combatant-list">
-                {{#each flags.sfrpg.PCs as |item id|}}
-                <li class="combatant-list flexrow" data-item-id="{{item.id}}">
-                    <div class="art">
-                        <img class="img" src="{{item.img}}" title="{{item.name}}" width="48" height="48"/>
-                    </div>
+                {{#each flags.sfrpg.PCs as |actor id|}}
+                <li class="combatant-list" data-actor-id="{{actor.id}}">
+                    <img class="img" src="{{actor.img}}" title="{{actor.name}}" width="48" height="48"/>
+                    <h4>
+                        {{actor.name}}
+                    </h4>
                 </li>
                 {{/each}}
             </ul>
         </div>
         <div class="body-col-right">
-            <!-- <ul class="no-bullets">
-                {{#each system.weapons as |item id|}}
-                <li class="item flexrow" data-item-id="{{item.id}}">
-                    <div class="item-image">
-                        <a class="dmg-roll" title="{{localize "sfrpgbb.general.clickToRoll"}} {{item.name}} {{localize "sfrpgbb.weapon.damage"}}" data-weapon-name="{{item.name}}" data-weapon-type="{{item.system.weaponType}}" data-damage-type="{{item.system.damageType}}" data-dice={{item.system.damage}} data-melee-damage={{../system.attack.bonus.melee.damageBonus}} data-ranged-damage={{../system.attack.bonus.ranged.damageBonus}}>
-                            <img class="img-rollable" src="{{item.img}}" title="{{localize "sfrpgbb.general.clickToRoll"}} {{item.name}} {{localize "sfrpgbb.weapon.damage"}}" width="36" height="36"/>
-                        </a>
-                    </div>
-                    <div class="item-name" style="flex-grow: 2;"><a class="item-control item-edit" title={{localize "sfrpgbb.equipment.editItem"}}><h4 class="item-name">{{item.name}}</h4></a></div>
-                    <div class="item-equipped"><input type="checkbox" {{checked item.system.equipped}} /></div>
-                    <div class="item-quantity"><input type="number" value="{{item.system.quantity}}" data-dtype="Number" /></div>
-                    <div class="item-controls">
-                        <a class="item-control item-delete" title={{localize "sfrpgbb.equipment.deleteItem"}}><i class="fas fa-trash"></i></a>
-                    </div>
+            <ul class="combatant-list">
+                {{#each flags.sfrpg.enemies as |actor id|}}
+                <li class="combatant-list" data-actor-id="{{actor.id}}">
+                    <img class="img" src="{{actor.img}}" title="{{actor.name}}" width="48" height="48"/>
+                    <h4>
+                        {{actor.name}}
+                    </h4>
                 </li>
                 {{/each}}
-            </ul> -->
+            </ul>
         </div>
     </div>
 </div>
