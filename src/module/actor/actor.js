@@ -193,6 +193,18 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             const item = documents[index];
             if (item.type === 'effect') {
                 await item.update({ 'system.activeDuration.activationTime': game.time.worldTime });
+                if (item.system.type !== 'condition') {
+                    const tokens = item.actor.getActiveTokens(true);
+                    const name = item.name.length > 32 ? item.name.slice(0, 32) : item.name;
+                    const statusEffect = {
+                        id: item._id,
+                        label: name,
+                        icon: item.thumbnail || 'icons/svg/item-bag.svg'
+                    };
+                    for (const token of tokens) {
+                        token.toggleEffect(statusEffect, {active: item.enabled, overlay: false});
+                    }
+                }
             }
         }
         super._onCreateEmbeddedDocuments(embeddedName, documents, result, options, userId);
@@ -218,6 +230,18 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                     }
                     return false;
                 });
+                if (item.system.type !== 'condition') {
+                    const tokens = item.actor.getActiveTokens(true);
+                    const name = item.name.length > 32 ? item.name.slice(0, 32) : item.name;
+                    const statusEffect = {
+                        id: item._id,
+                        label: name,
+                        icon: item.thumbnail || 'icons/svg/item-bag.svg'
+                    };
+                    for (const token of tokens) {
+                        token.toggleEffect(statusEffect, {active: false, overlay: false});
+                    }
+                }
             }
         }
         return super._onDeleteEmbeddedDocuments(embeddedName, documents, result, options, userId);

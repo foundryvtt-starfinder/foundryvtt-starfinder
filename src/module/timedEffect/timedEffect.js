@@ -81,7 +81,7 @@ export default class SFRPGTimedEffect {
         const items = duplicate(actor.items);
         const effect = items.find(item => (item.type === 'effect') && (item._id === this.itemId));
 
-        if (effect) {
+        if (effect && actor) {
             // toggle on actor
             effect.system.enabled = this.enabled;
             const updateData = {
@@ -120,8 +120,21 @@ export default class SFRPGTimedEffect {
             game.sfrpg.timedEffects.find(gEffect => gEffect.id === this.id)?.update(this);
 
             actor.updateEmbeddedDocuments('Item', [updateData]);
+
+            if (effect.system.type !== 'condition') {
+                const tokens = actor.getActiveTokens(true);
+                const name = this.name.length > 32 ? this.name.slice(0, 32) : this.name;
+                const statusEffect = {
+                    id: effect._id,
+                    label: name,
+                    icon: effect.thumbnail || 'icons/svg/item-bag.svg'
+                };
+                for (const token of tokens) {
+                    token.toggleEffect(statusEffect, {active: this.enabled, overlay: false});
+                }
+            }
         } else {
-            console.error('could not toggle effect, item is missing.');
+            console.error('could not toggle effect, item or actor is missing.');
         }
     }
 
