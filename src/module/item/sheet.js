@@ -224,6 +224,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             else if (remainingTime > SFRPG.effectDurationFrom.hour) data.remainingDuration = `${Math.floor(remainingTime / SFRPG.effectDurationFrom.hour)} ${SFRPG.effectDurationTypes.hour}`;
             else if (remainingTime > SFRPG.effectDurationFrom.minute) data.remainingDuration = `${Math.floor(remainingTime / SFRPG.effectDurationFrom.minute)} ${SFRPG.effectDurationTypes.minute}`;
             else if (remainingTime > SFRPG.effectDurationFrom.round) data.remainingDuration = `${Math.floor(remainingTime / SFRPG.effectDurationFrom.round)} ${SFRPG.effectDurationTypes.round}`;
+            else if (data.item.system.activeDuration.unit === 'permanent') data.remainingDuration = 'Permanent';
 
             if (game.combat) {
                 for (const combatant of game.combat.combatants) {
