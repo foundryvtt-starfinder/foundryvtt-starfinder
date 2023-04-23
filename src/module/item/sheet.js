@@ -220,7 +220,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             data.remainingDuration = 'Done';
             const remainingTime = (data.item.system.activeDuration.activationTime + (data.item.system.activeDuration.value * SFRPG.effectDurationFrom[data.item.system.activeDuration.unit])) - game.time.worldTime;
 
-            if (remainingTime > SFRPG.effectDurationFrom.day) data.remainingDuration = `${Math.floor(remainingTime / SFRPG.effectDurationFrom.day)} ${SFRPG.effectDurationTypes.hour}`;
+            if (remainingTime > SFRPG.effectDurationFrom.day) data.remainingDuration = `${Math.floor(remainingTime / SFRPG.effectDurationFrom.day)} ${SFRPG.effectDurationTypes.day}`;
             else if (remainingTime > SFRPG.effectDurationFrom.hour) data.remainingDuration = `${Math.floor(remainingTime / SFRPG.effectDurationFrom.hour)} ${SFRPG.effectDurationTypes.hour}`;
             else if (remainingTime > SFRPG.effectDurationFrom.minute) data.remainingDuration = `${Math.floor(remainingTime / SFRPG.effectDurationFrom.minute)} ${SFRPG.effectDurationTypes.minute}`;
             else if (remainingTime > SFRPG.effectDurationFrom.round) data.remainingDuration = `${Math.floor(remainingTime / SFRPG.effectDurationFrom.round)} ${SFRPG.effectDurationTypes.round}`;
