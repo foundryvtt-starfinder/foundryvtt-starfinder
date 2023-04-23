@@ -18,6 +18,7 @@ export default function(engine) {
                 enabled: item.system.enabled,
                 actorId: item.actor.id,
                 sourceActorId: item.system.sourceActorId,
+                showOnToken: item.system.showOnToken,
                 modifiers: item.system.modifiers,
                 notes: item.system.description.value,
                 activeDuration: item.system.activeDuration

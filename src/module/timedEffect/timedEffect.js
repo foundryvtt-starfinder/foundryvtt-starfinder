@@ -11,6 +11,7 @@ export default class SFRPGTimedEffect {
      * @param {Boolean} data.enabled is this effect enabled or not
      * @param {UUID}    data.actorId Id of the actor that owns this timedEffect
      * @param {UUID}    data.sourceActorId Id of the actor that this effect originates from
+     * @param {Boolean} data.showOnToken should this effect be shown on token or not
      * @param {Array}   data.modifiers the modifiers that apply from this effect
      * @param {String}  data.notes general notes
      * @param {Object}  data.activeDuration an object that contains the information on how long this effect lasts and when it was activated.
@@ -23,6 +24,7 @@ export default class SFRPGTimedEffect {
         enabled = true,
         actorId = '',
         sourceActorId = '',
+        showOnToken = true,
         modifiers = [],
         notes = '',
         activeDuration = {
@@ -39,6 +41,7 @@ export default class SFRPGTimedEffect {
         this.enabled = enabled;
         this.actorId = actorId;
         this.sourceActorId = sourceActorId;
+        this.showOnToken = showOnToken;
         this.modifiers = modifiers;
         this.notes = notes;
         this.activeDuration = activeDuration;
@@ -52,6 +55,7 @@ export default class SFRPGTimedEffect {
         enabled,
         actorId,
         sourceActorId,
+        showOnToken,
         modifiers,
         notes,
         activeDuration
@@ -63,6 +67,7 @@ export default class SFRPGTimedEffect {
         this.enabled = enabled;
         this.actorId = actorId;
         this.sourceActorId = sourceActorId;
+        this.showOnToken = showOnToken;
         this.modifiers = modifiers;
         this.notes = notes;
         this.activeDuration = activeDuration;
@@ -121,13 +126,13 @@ export default class SFRPGTimedEffect {
 
             actor.updateEmbeddedDocuments('Item', [updateData]);
 
-            if (effect.system.type !== 'condition') {
+            if (this.showOnToken && effect.system.type !== 'condition') {
                 const tokens = actor.getActiveTokens(true);
                 const name = this.name.length > 32 ? this.name.slice(0, 32) : this.name;
                 const statusEffect = {
                     id: effect._id,
                     label: name,
-                    icon: effect.thumbnail || 'icons/svg/item-bag.svg'
+                    icon: effect.img || 'icons/svg/item-bag.svg'
                 };
                 for (const token of tokens) {
                     token.toggleEffect(statusEffect, {active: this.enabled, overlay: false});
