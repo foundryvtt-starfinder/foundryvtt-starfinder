@@ -170,7 +170,6 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                 if (t === "weapon") initial['system.proficient'] = true;
                 if (["weapon", "equipment"].includes(t)) initial['system.equipped'] = true;
                 if (t === "spell") initial['system.prepared'] = true;
-                if (t === 'effect') await item.update({ 'system.activeDuration.activationTime': game.time.worldTime });
                 mergeObject(item, initial);
             }
 
@@ -179,6 +178,24 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         }
 
         return super.createEmbeddedDocuments(embeddedName, itemData, options);
+    }
+
+    /**
+     * Extends logic for SFRPG system after a set of embedded Documents in this parent Document are created.
+     * @param {string} embeddedName   The name of the embedded Document type
+     * @param {Document[]} documents  An Array of created Documents
+     * @param {object[]} result       An Array of created data objects
+     * @param {object} options        Options which modified the creation operation
+     * @param {string} userId         The ID of the User who triggered the operation
+     */
+    async _onCreateEmbeddedDocuments(embeddedName, documents, result, options, userId) {
+        for (let index = 0; index < documents.length; index++) {
+            const item = documents[index];
+            if (item.type === 'effect') {
+                await item.update({ 'system.activeDuration.activationTime': game.time.worldTime });
+            }
+        }
+        super._onCreateEmbeddedDocuments(embeddedName, documents, result, options, userId);
     }
 
     /**
