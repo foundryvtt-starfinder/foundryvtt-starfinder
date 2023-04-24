@@ -3,12 +3,12 @@
 @navHeight: 30px;
 @headerHeight: 100px;
 @detailsHeight: 40px;
-@sheetNavTransition: background .2s, backdrop-filter .2s;
+@sheetNavTransition: background 0.2s, backdrop-filter 0.2s;
 
 // Global background style
 button {
     .exo2();
-    font-size: 13px;
+    font-size: var(--font-size-13);
 }
 
 blockquote.quote {
@@ -21,7 +21,7 @@ blockquote.quote {
 .window-app {
     .exo2();
 
-    &.image-popout > .window-content{
+    &.image-popout > .window-content {
         background: transparent;
     }
 
@@ -59,11 +59,8 @@ a.enriched-link {
     white-space: nowrap;
     word-break: break-all;
     line-height: 1.6em;
-    transition: text-shadow .15s ease-in-out,
-        background-color .15s ease-in-out,
-        border .15s ease-in-out,
-        color .15s ease-in-out,
-        box-shadow .15s ease-in-out;
+    transition: text-shadow 0.15s ease-in-out, background-color 0.15s ease-in-out, border 0.15s ease-in-out,
+        color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
     i {
         color: var(--color-text-dark-inactive);
@@ -71,7 +68,7 @@ a.enriched-link {
 
         &.repost {
             border-left: 1px solid var(--color-border-dark-tertiary);
-            background: #FFF9;
+            background: #fff9;
             padding: 2px;
             margin-right: -4px;
             margin-left: 2px;
@@ -99,7 +96,7 @@ img.icon-enricher {
 
 .sfrpg {
     .window-content {
-        font-size: 13px;
+        font-size: var(--font-size-13);
         color: @colorDark;
         .exo2();
     }
@@ -149,7 +146,7 @@ img.icon-enricher {
         flex: auto;
         margin: 0;
         line-height: 20px;
-        font-size: 11px;
+        font-size: var(--font-size-11);
         text-align: right;
         input[type="checkbox"] {
             height: auto;
@@ -199,7 +196,7 @@ img.icon-enricher {
         margin: 0 0 0.25em 0;
         padding: 0 2px;
         .exo2();
-        font-size: 24px;
+        font-size: var(--font-size-24);
         font-weight: normal;
         border-top: @borderGroove;
         border-bottom: @borderGroove;
@@ -218,7 +215,7 @@ img.icon-enricher {
         display: inline-block;
         margin: 0 2px 0 0;
         padding: 0 3px;
-        font-size: 10px;
+        font-size: var(--font-size-11);
         line-height: 16px;
         border: 1px solid #999;
         border-radius: 3px;
@@ -259,7 +256,7 @@ img.icon-enricher {
     .window-content {
         overflow-y: hidden;
         background: @sheetBackground;
-        font-size: 13px;
+        font-size: var(--font-size-13);
         color: @colorDark;
 
         form {
@@ -291,7 +288,7 @@ img.icon-enricher {
     // Select Fields
     select {
         flex: 1;
-        font-size: 12px;
+        font-size: var(--font-size-12);
         height: 22px;
         background: transparent;
     }
@@ -319,19 +316,19 @@ img.icon-enricher {
         h1 {
             color: rgb(20, 63, 144);
             font-weight: bold;
-            font-size: 25px;
+            font-size: var(--font-size-24);
         }
         h2 {
             color: rgb(20, 63, 144);
-            font-size: 22px;
+            font-size: var(--font-size-20);
         }
         h3 {
             color: rgb(88, 103, 169);
-            font-size: 19px;
+            font-size: var(--font-size-18);
         }
         h4 {
             font-weight: bold;
-            font-size: 16px;
+            font-size: var(--font-size-16);
         }
     }
 
@@ -353,7 +350,7 @@ img.icon-enricher {
 
             input {
                 height: 50px;
-                font-size: 26px;
+                font-size: var(--font-size-24);
                 margin: 0 2%;
             }
         }
@@ -379,7 +376,7 @@ img.icon-enricher {
             list-style: none;
             border-top: @borderGroove;
             border-bottom: none;
-            font-size: 16px;
+            font-size: var(--font-size-16);
 
             li {
                 width: 33.33%;
@@ -439,7 +436,7 @@ img.icon-enricher {
             line-height: 32px;
             // color: #111;
             margin: 0 5px;
-            font-size: 15px;
+            font-size: var(--font-size-14);
             border-bottom: 3px solid @colorBeige;
 
             &:hover {
@@ -482,7 +479,7 @@ img.icon-enricher {
 
         .filter-item {
             text-align: center;
-            font-size: 12px;
+            font-size: var(--font-size-12);
             margin: 0 6px;
             border-bottom: 3px solid @colorBeige;
             white-space: nowrap;

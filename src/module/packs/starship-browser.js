@@ -40,12 +40,12 @@ class StarshipBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     allowedItem(item) {
-        let keys = Object.keys(starshipComponentTypes);
+        const keys = Object.keys(starshipComponentTypes);
         return (keys.includes(item.type));
     }
 
     getSortingMethods() {
-        let sortingMethods = super.getSortingMethods();
+        const sortingMethods = super.getSortingMethods();
         sortingMethods["pcu"] = {
             name: game.i18n.format("SFRPG.Browsers.StarshipBrowser.BrowserSortMethodPCU"),
             method: this._sortByPCU
@@ -114,7 +114,7 @@ class StarshipBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     getFilters() {
-        let filters = {
+        const filters = {
             starshipComponentTypes: {
                 label: game.i18n.format("SFRPG.Browsers.StarshipBrowser.ComponentType"),
                 content: starshipComponentTypes,
@@ -166,20 +166,20 @@ class StarshipBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     _filterComponentType(element, filters) {
-        let itemId = element.dataset.entryUuid;
-        let item = this.items.find(x => x.uuid === itemId);
+        const itemId = element.dataset.entryUuid;
+        const item = this.items.get(itemUuid);
         return item && filters.includes(item.type);
     }
 
     _filterWeaponType(element, filters) {
-        let itemId = element.dataset.entryUuid;
-        let item = this.items.find(x => x.uuid === itemId);
+        const itemId = element.dataset.entryUuid;
+        const item = this.items.get(itemUuid);
         return item && (item.type !== "starshipWeapon" || filters.includes(item.system.weaponType));
     }
 
     _filterWeaponClass(element, filters) {
-        let itemId = element.dataset.entryUuid;
-        let item = this.items.find(x => x.uuid === itemId);
+        const itemId = element.dataset.entryUuid;
+        const item = this.items.get(itemUuid);
         return item && (item.type !== "starshipWeapon" || filters.includes(item.system.class));
     }
 
@@ -235,7 +235,7 @@ class StarshipBrowserSFRPG extends DocumentBrowserSFRPG {
      * @param {filterObjectStarship} filters A filter object
      */
     renderWithFilters(filters = {}) {
-        let filterObject = filters;
+        const filterObject = filters;
 
         return super.renderWithFilters(filterObject);
     }
