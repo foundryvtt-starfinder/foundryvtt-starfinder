@@ -571,10 +571,12 @@ export class CombatSFRPG extends Combat {
         this.flags.sfrpg.difficulty = difficulty;
         this.flags.sfrpg.playerXP = playerXP;
 
+        this.flags.sfrpg.leftoverCR = this.calculateLeftoverCR();
+
         // Debug info
-        console.log(this);
-        console.log("Starfinder | The active combat encounter has ".concat(this.flags.sfrpg.PCs.length, " PC(s) [APL ", this.flags.sfrpg.APL, "], ", "and ", this.flags.sfrpg.enemies.length, " hostile NPC(s) [CR ", this.flags.sfrpg.CR, "]."));
-        console.log("Starfinder | The active combat encounter difficulty is ".concat(this.flags.sfrpg.difficulty, " and is worth ", this.flags.sfrpg.playerXP, " individual XP per player."));
+        // console.log(this);
+        // console.log("Starfinder | The active combat encounter has ".concat(this.flags.sfrpg.PCs.length, " PC(s) [APL ", this.flags.sfrpg.APL, "], ", "and ", this.flags.sfrpg.enemies.length, " hostile NPC(s) [CR ", this.flags.sfrpg.CR, "]."));
+        // console.log("Starfinder | The active combat encounter difficulty is ".concat(this.flags.sfrpg.difficulty, " and is worth ", this.flags.sfrpg.playerXP, " individual XP per player."));
 
     }
 
@@ -701,6 +703,27 @@ export class CombatSFRPG extends Combat {
         }
 
         return [encounterCR, XParray, encounterDifficulty, perPlayerXP];
+    }
+
+    calculateLeftoverCR() {
+        const enemyXP = this.flags.sfrpg.enemyXP;
+        const remainingXP = this.flags.sfrpg.CRXPbounds[1] - enemyXP;
+        const CRTable = CONFIG.SFRPG.CRTable;
+
+        if (!remainingXP) {
+            return "0";
+        } else if (remainingXP > CRTable["25"].totalXP) {
+            return "25";
+        } else {
+            // Find the CR value of the remaining XP, without going over
+            for (let [CR, XProw] of Object.entries(CRTable)) {
+                if (remainingXP <= XProw.nextXP) {
+                    if (remainingXP > XProw.totalXP) {
+                        return CR;
+                    }
+                }
+            }
+        }
     }
 
     renderCombatPhase() {
@@ -920,6 +943,7 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
         const difficultyButton = header.find('.difficulty');
         difficultyButton.click(async ev => {
             ev.preventDefault();
+            console.log("Starfinder | Rendering Encounter Statistics Dialog");
             const contentTemplate = '//systems/sfrpg/templates/combat/encounter-stats.hbs';
             new Dialog({
                 title: `${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.Details")}: ${CONFIG.SFRPG.difficultyLevels[activeCombat.flags.sfrpg.difficulty]} ${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.DifficultyEncounter")}`,

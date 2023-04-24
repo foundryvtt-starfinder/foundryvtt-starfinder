@@ -19,6 +19,16 @@
             </tr>
             <tr>
                 <td class="table-left">
+                    {{localize "SFRPG.Combat.Difficulty.Tooltip.PlayerXP"}}
+                </td>
+                <td class="table-right">
+                    {{flags.sfrpg.playerXP}}
+                </td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td class="table-left">
                     {{localize "SFRPG.Combat.Difficulty.Tooltip.EnemyXP"}}
                 </td>
                 <td class="table-right">
@@ -33,12 +43,14 @@
                     [{{flags.sfrpg.CRXPbounds}}]
                 </td>
             </tr>
+        </table>
+        <table>
             <tr>
                 <td class="table-left">
-                    {{localize "SFRPG.Combat.Difficulty.Tooltip.PlayerXP"}}
+                    {{localize "SFRPG.Combat.Difficulty.Tooltip.CanBeAdded"}}
                 </td>
                 <td class="table-right">
-                    {{flags.sfrpg.playerXP}}
+                    {{flags.sfrpg.leftoverCR}}
                 </td>
             </tr>
         </table>
@@ -54,10 +66,10 @@
     </div>
 
     <div class="stats-body">
-        <div class="body-col-left">
+        <div class="body-col">
             <ul class="combatant-list">
                 {{#each flags.sfrpg.PCs as |actor id|}}
-                <li class="combatant-list" data-actor-id="{{actor.id}}">
+                <li class="combatant-list ally" data-actor-id="{{actor.id}}">
                     <img class="img" src="{{actor.img}}" title="{{actor.name}}" width="48" height="48"/>
                     <h4>
                         {{actor.name}}
@@ -66,10 +78,10 @@
                 {{/each}}
             </ul>
         </div>
-        <div class="body-col-right">
+        <div class="body-col">
             <ul class="combatant-list">
                 {{#each flags.sfrpg.enemies as |actor id|}}
-                <li class="combatant-list" data-actor-id="{{actor.id}}">
+                <li class="combatant-list enemy" data-actor-id="{{actor.id}}">
                     <img class="img" src="{{actor.img}}" title="{{actor.name}}" width="48" height="48"/>
                     <h4>
                         {{actor.name}}

@@ -31,6 +31,7 @@
             flex: 1;
             align-self: center;
             text-align: right;
+            font-weight: bold;
         }
     }
 
@@ -54,11 +55,7 @@
         display: flex;
         flex-direction: row;
 
-        .body-col-left {
-            flex: 1;
-        }
-
-        .body-col-right {
+        .body-col{
             flex: 1;
         }
 
@@ -70,15 +67,16 @@
         
         li.combatant-list {
             border-style: solid;
-            border-radius: 0.5em;
+            border-radius: 0.25em;
             border-width: thin;
             border-color: black;
             padding: 0.5em;
             margin: 0.25em;
             display: flex;
             flex-direction: row;
-            
+
             img {
+                align-self: center;
                 border-style: none;
                 border-right-style: solid;
                 border-right-color: black;
@@ -94,7 +92,23 @@
                 font-size: var(--font-size-16);
             }
         }
+    
+        li.ally {
+            
+            background: rgba(0, 0, 255, 0.2);
+        }
+        
+        li.enemy {
+            
+            background: rgba(64, 64, 64, 0.2);
+        }
 
+    }
+
+    .stats-footer {
+        padding: 0.25em;
+        margin: 0;
+        font-size: var(--font-size-16);
     }
 }
     
