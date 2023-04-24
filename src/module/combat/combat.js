@@ -917,11 +917,6 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
         activeCombat.renderCombatTypeControls();
 
         // Add in the difficulty calculator if needed
-        try {
-            console.log(diffDisplay);
-        } catch (error) {
-            console.log("That didn't work.");
-        }
         if (activeCombat.getCombatType() === "normal" && game.user.isGM && diffDisplay) {
             activeCombat.getEncounterInfo();
             activeCombat.renderDifficulty();
