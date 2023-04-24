@@ -553,6 +553,7 @@ export class CombatSFRPG extends Combat {
     }
 
     getEncounterInfo() {
+        // Performs all encounter difficulty calculations
         if (!this.flags.sfrpg) {
             this.flags.sfrpg = {};
         }
@@ -572,15 +573,10 @@ export class CombatSFRPG extends Combat {
         this.flags.sfrpg.playerXP = playerXP;
 
         this.flags.sfrpg.leftoverCR = this.calculateLeftoverCR();
-
-        // Debug info
-        // console.log(this);
-        // console.log("Starfinder | The active combat encounter has ".concat(this.flags.sfrpg.PCs.length, " PC(s) [APL ", this.flags.sfrpg.APL, "], ", "and ", this.flags.sfrpg.enemies.length, " hostile NPC(s) [CR ", this.flags.sfrpg.CR, "]."));
-        // console.log("Starfinder | The active combat encounter difficulty is ".concat(this.flags.sfrpg.difficulty, " and is worth ", this.flags.sfrpg.playerXP, " individual XP per player."));
-
     }
 
     calculateAPL() {
+        // Calculates the APL of the players in a combat
         const average = (array) => array.reduce((total, value) => total + value, 0) / array.length;
 
         let playerCombatants = [];
@@ -607,6 +603,7 @@ export class CombatSFRPG extends Combat {
     }
 
     calculateEnemyXP() {
+        // Calculates the sum of enemy XP values in a combat
         let enemyCombatants = [];
         let enemyXP = [];
 
@@ -623,6 +620,7 @@ export class CombatSFRPG extends Combat {
     }
 
     calculateChallenge() {
+        // Calculates combat encounter CR, difficulty, and XP value
         const CRTable = CONFIG.SFRPG.CRTable;
         const APL = this.flags.sfrpg.APL;
         const numPlayers = this.flags.sfrpg.PCs.length;
@@ -706,6 +704,7 @@ export class CombatSFRPG extends Combat {
     }
 
     calculateLeftoverCR() {
+        // Calculate the CR value of the strongest enemy that can be added to the encounter without changing CR
         const enemyXP = this.flags.sfrpg.enemyXP;
         const remainingXP = this.flags.sfrpg.CRXPbounds[1] - enemyXP;
         const CRTable = CONFIG.SFRPG.CRTable;
