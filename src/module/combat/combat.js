@@ -566,11 +566,12 @@ export class CombatSFRPG extends Combat {
         this.flags.sfrpg.enemies = enemies;
         this.flags.sfrpg.enemyXP = enemyXP;
 
-        const [CR, XPArray, difficulty, playerXP] = this.calculateChallenge();
+        const [CR, XPArray, difficulty, playerXP, wealth] = this.calculateChallenge();
         this.flags.sfrpg.CR = CR;
         this.flags.sfrpg.CRXPbounds = [XPArray.minXP, XPArray.totalXP];
         this.flags.sfrpg.difficulty = difficulty;
         this.flags.sfrpg.playerXP = playerXP;
+        this.flags.sfrpg.wealth = wealth;
 
         this.flags.sfrpg.leftoverCR = this.calculateLeftoverCR();
     }
@@ -634,7 +635,7 @@ export class CombatSFRPG extends Combat {
             return ["0", CRTable["0"], "difficulty-noEnemies", 0];
         }
 
-        // Calculate XP and compare to XP table
+        // Calculate XP and compare to XP table to get CR and wealth value
         let encounterCR = 0;
         let XParray = {};
 
@@ -700,7 +701,7 @@ export class CombatSFRPG extends Combat {
             perPlayerXP = XParray.perPlayerXP[1];
         }
 
-        return [encounterCR, XParray, encounterDifficulty, perPlayerXP];
+        return [encounterCR, XParray, encounterDifficulty, perPlayerXP, XParray.wealthValue];
     }
 
     calculateLeftoverCR() {
