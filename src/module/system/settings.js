@@ -117,6 +117,15 @@ export const registerSystemSettings = function() {
         }
     });
 
+    game.settings.register("sfrpg", "difficultyDisplay", {
+        name: "SFRPG.Settings.DifficultyDisplay.Name",
+        hint: "SFRPG.Settings.DifficultyDisplay.Hint",
+        scope: "world",
+        config: true,
+        default: true,
+        type: Boolean
+    });
+
     for (let combatType of SFRPG.combatTypes) {
         const capitalizedCombatType = combatType[0].toUpperCase() + combatType.slice(1);
         game.settings.register("sfrpg", `${combatType}ChatCards`, {

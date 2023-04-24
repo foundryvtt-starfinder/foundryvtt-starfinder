@@ -905,6 +905,7 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
 
     const header = html.find('.combat-tracker-header');
     const footer = html.find('.directory-footer');
+    const diffDisplay = game.settings.get("sfrpg", "difficultyDisplay");
 
     if (activeCombat.round) {
         const phases = activeCombat.getPhases();
@@ -916,7 +917,12 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
         activeCombat.renderCombatTypeControls();
 
         // Add in the difficulty calculator if needed
-        if (activeCombat.getCombatType() === "normal" && game.user.isGM) {
+        try {
+            console.log(diffDisplay);
+        } catch (error) {
+            console.log("That didn't work.");
+        }
+        if (activeCombat.getCombatType() === "normal" && game.user.isGM && diffDisplay) {
             activeCombat.getEncounterInfo();
             activeCombat.renderDifficulty();
         }
