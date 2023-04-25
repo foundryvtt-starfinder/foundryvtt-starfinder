@@ -49,8 +49,8 @@
                     {{else}}
                         {{children.length}} / {{getTotalStorageCapacity item}} {{localize "SFRPG.ActorSheet.Inventory.Container.CapacityLabelItems"}}
                     {{/if}}
-                {{else if item.system.uses.max}}
-                    {{item.system.uses.value}} / {{item.system.uses.max}}
+                {{else if item.system.uses.total}}
+                    {{item.system.uses.value}} / {{item.system.uses.total}}
                 {{/if}}
             </div>
 
