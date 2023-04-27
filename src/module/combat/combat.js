@@ -655,6 +655,83 @@ export class CombatSFRPG extends Combat {
         return tierEffective;
     }
 
+    calculateShipChallenge() {
+        // Calculate the difficulty of the combat encounter
+        const CRTable = CONFIG.SFRPG.CRTable;
+        const numPlayerShips = this.flags.sfrpg.playerShips.length;
+        const numEnemyShips = this.flags.sfrpg.enemyShips.length;
+        const playerEffectiveTier = this.flags.sfrpg.playerEffectiveTier;
+        const enemyEffectiveTier = this.flags.sfrpg.enemyEffectiveTier;
+
+        // Check that Players and NPCs are both present
+        if (!numPlayerShips) {
+            return ["0", CRTable["0"], "difficulty-noPcs", 0];
+        } else if (!numEnemyShips) {
+            return ["0", CRTable["0"], "difficulty-noEnemies", 0];
+        }
+
+        // Calculate XP and compare to XP table to get CR and wealth value
+        let encounterTier = "0";
+        let XParray = {};
+
+        for (let [CR, XProw] of Object.entries(CRTable)) {
+            // Figure out encounter difficulty
+            if (XPtotal <= XProw.totalXP) {
+                if (XPtotal > XProw.minXP) {
+                    XParray = XProw;
+                    encounterTier = CR;
+                    break;
+                }
+            }
+        }
+
+        // Calculate Difficulty Table
+        const diffTable = [
+            {"difficulty": "difficulty-easy", "CR": playerEffectiveTier - 3},
+            {"difficulty": "difficulty-average", "CR": playerEffectiveTier - 2},
+            {"difficulty": "difficulty-challenging", "CR": playerEffectiveTier - 1},
+            {"difficulty": "difficulty-hard", "CR": playerEffectiveTier},
+            {"difficulty": "difficulty-epic", "CR": playerEffectiveTier + 1}
+        ];
+
+        // Calculate a numerical version of the CR for comparison
+        const CRsplit = encounterCR.split("/");
+        let numCR = 0;
+        if (CRsplit.length === 2) {
+            numCR = Number(CRsplit[0]) / Number(CRsplit[1]);
+        } else {
+            numCR = Number(CRsplit[0]);
+        }
+
+        // Calculate the Encounter Difficulty
+        let encounterDifficulty = "";
+
+        if (numCR < diffTable[0].CR) {
+            encounterDifficulty = "difficulty-lessThanEasy";
+        } else if (numCR > diffTable[4].CR) {
+            encounterDifficulty = "difficulty-greaterThanEpic";
+        } else {
+            for (const diffRow of diffTable) {
+                if (numCR === diffRow.CR) {
+                    encounterDifficulty = diffRow.difficulty;
+                }
+            }
+        }
+
+        // Calculate individual XP based on number of party members
+        let perPlayerXP = 0;
+
+        if (numPlayers < 4) {
+            perPlayerXP = XParray.perPlayerXP[0];
+        } else if (numPlayers > 5) {
+            perPlayerXP = XParray.perPlayerXP[2];
+        } else {
+            perPlayerXP = XParray.perPlayerXP[1];
+        }
+
+        return [encounterCR, XParray, encounterDifficulty, perPlayerXP, XParray.wealthValue];
+    }
+
     getNormalEncounterInfo() {
         // Performs all encounter difficulty calculations
         if (!this.flags.sfrpg) {
