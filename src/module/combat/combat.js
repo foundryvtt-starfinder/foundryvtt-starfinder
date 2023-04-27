@@ -567,6 +567,8 @@ export class CombatSFRPG extends Combat {
         this.flags.sfrpg.playerEffectiveTier = this.calculatePlayerShipEffectiveTier(playerShipTiers);
         this.flags.sfrpg.enemyEffectiveTier = this.calculateEnemyShipEffectiveTier(enemyShipTiers);
 
+        this.collateEnemyhipEffectiveTierAlt(enemyShipTiers);
+
         /* const [enemies, enemyXP] = this.calculateEnemyXP();
         this.flags.sfrpg.enemies = enemies;
         this.flags.sfrpg.enemyXP = enemyXP;
@@ -601,8 +603,8 @@ export class CombatSFRPG extends Combat {
         return [playerShips, playerShipTiers, enemyShips, enemyShipTiers];
     }
 
-    calculatePlayerShipEffectiveTier(ShipTiers) {
-        const sortedTiers = ShipTiers.sort().reverse();
+    calculatePlayerShipEffectiveTier(shipTiers) {
+        const sortedTiers = shipTiers.sort().reverse(); // sort high to low
         const highestShipTier = sortedTiers[0];
         let tierEffective = highestShipTier;
 
@@ -629,36 +631,45 @@ export class CombatSFRPG extends Combat {
         return tierEffective;
     }
 
-    calculateEnemyShipEffectiveTier(ShipTiers) {
-        const sortedTiers = ShipTiers.sort().reverse();
+    collateEnemyhipEffectiveTierAlt(shipTiers) {
+        const sortedTiers = shipTiers.sort(); // sort low to high
+        let tiersTemp = sortedTiers;
+        let counts = {};
+        let duplicatesFound = 1;
+
+        for (const tier of sortedTiers) {
+            counts[tier] = counts[tier] ? counts[tier] + 1 : 1;
+        }
+        console.log(counts);
+
+        while (duplicatesFound) {
+            duplicatesFound = 0;
+        }
+    }
+
+    calculateEnemyShipEffectiveTier(shipTiers) {
+        const sortedTiers = shipTiers.sort().reverse(); // sort high to low
         const highestShipTier = sortedTiers[0];
-        const numShips = ShipTiers.length;
+        const numShips = shipTiers.length;
         let tierEffective = highestShipTier;
-        console.log('We out here with the highest at: '.concat(tierEffective));
 
         if (numShips > 1) {
             if (sortedTiers[1] === sortedTiers[0]) {
-                console.log('Part 2');
                 tierEffective += 2;
                 if (numShips > 2) {
                     if (sortedTiers[2] === sortedTiers[0]) {
-                        console.log('Part 3');
                         tierEffective += 1;
                         if (numShips > 3) {
                             if (sortedTiers[3] === sortedTiers[0]) {
-                                console.log('Nah dog 2.');
-                                tierEffective = this.calculatePlayerShipEffectiveTier(ShipTiers);
+                                tierEffective = this.calculatePlayerShipEffectiveTier(shipTiers);
                             }
                         }
                     }
                 }
             } else {
-                console.log('Nah dog.');
-                tierEffective = this.calculatePlayerShipEffectiveTier(ShipTiers);
+                tierEffective = this.calculatePlayerShipEffectiveTier(shipTiers);
             }
         }
-
-        console.log('The effective tier is '.concat(tierEffective));
         return tierEffective;
     }
 
