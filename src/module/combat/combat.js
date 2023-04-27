@@ -567,8 +567,6 @@ export class CombatSFRPG extends Combat {
         this.flags.sfrpg.playerEffectiveTier = this.calculatePlayerShipEffectiveTier(playerShipTiers);
         this.flags.sfrpg.enemyEffectiveTier = this.calculateEnemyShipEffectiveTier(enemyShipTiers);
 
-        this.collateEnemyhipEffectiveTierAlt(enemyShipTiers);
-
         /* const [enemies, enemyXP] = this.calculateEnemyXP();
         this.flags.sfrpg.enemies = enemies;
         this.flags.sfrpg.enemyXP = enemyXP;
@@ -629,22 +627,6 @@ export class CombatSFRPG extends Combat {
             }
         }
         return tierEffective;
-    }
-
-    collateEnemyhipEffectiveTierAlt(shipTiers) {
-        const sortedTiers = shipTiers.sort(); // sort low to high
-        let tiersTemp = sortedTiers;
-        let counts = {};
-        let duplicatesFound = 1;
-
-        for (const tier of sortedTiers) {
-            counts[tier] = counts[tier] ? counts[tier] + 1 : 1;
-        }
-        console.log(counts);
-
-        while (duplicatesFound) {
-            duplicatesFound = 0;
-        }
     }
 
     calculateEnemyShipEffectiveTier(shipTiers) {
