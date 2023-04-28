@@ -681,9 +681,11 @@ export class CombatSFRPG extends Combat {
 
         // Check that Players and NPCs are both present
         if (!numPlayerShips) {
-            return ["0", CRTable["0"], "difficulty-noPcs", 0];
+            console.log('no players');
+            return ["difficulty-noPCShips", 0, 0];
         } else if (!numEnemyShips) {
-            return ["0", CRTable["0"], "difficulty-noEnemies", 0];
+            console.log('no enemies');
+            return ["difficulty-noEnemyShips", 0, 0];
         }
 
         // Calculate Difficulty Table
