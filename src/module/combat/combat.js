@@ -567,6 +567,8 @@ export class CombatSFRPG extends Combat {
         this.flags.sfrpg.playerEffectiveTier = this.calculatePlayerShipEffectiveTier(playerShipTiers);
         this.flags.sfrpg.enemyEffectiveTier = this.calculateEnemyShipEffectiveTier(enemyShipTiers);
 
+        console.log(this);
+        this.calculateShipChallenge();
         /* const [enemies, enemyXP] = this.calculateEnemyXP();
         this.flags.sfrpg.enemies = enemies;
         this.flags.sfrpg.enemyXP = enemyXP;
@@ -589,12 +591,14 @@ export class CombatSFRPG extends Combat {
 
         // split combatants into allies and enemies
         for (const combatant of this.combatants) {
-            if (combatant.hasPlayerOwner) {
-                playerShips.push(combatant);
-                playerShipTiers.push(combatant.actor.system.details.tier);
-            } else if (combatant.token.disposition < 0) {
-                enemyShips.push(combatant);
-                enemyShipTiers.push(combatant.actor.system.details.tier);
+            if (combatant.actor.type === "starship") {
+                if (combatant.hasPlayerOwner) {
+                    playerShips.push(combatant);
+                    playerShipTiers.push(combatant.actor.system.details.tier);
+                } else if (combatant.token.disposition < 0) {
+                    enemyShips.push(combatant);
+                    enemyShipTiers.push(combatant.actor.system.details.tier);
+                }
             }
         }
 
@@ -652,6 +656,11 @@ export class CombatSFRPG extends Combat {
                 tierEffective = this.calculatePlayerShipEffectiveTier(shipTiers);
             }
         }
+
+        // Round down if it's not an allowed fractional value (between 0 and 1)
+        if (tierEffective > 1) {
+            tierEffective = Math.floor(tierEffective);
+        }
         return tierEffective;
     }
 
@@ -671,15 +680,16 @@ export class CombatSFRPG extends Combat {
         }
 
         // Calculate XP and compare to XP table to get CR and wealth value
-        let encounterTier = "0";
+        let encounterTier = 0;
         let XParray = {};
 
-        for (let [CR, XProw] of Object.entries(CRTable)) {
+        // need to tweak to allow for 1/4, 1/3, and 1/2 values
+        for (let [tier, XProw] of Object.entries(CRTable)) {
             // Figure out encounter difficulty
-            if (XPtotal <= XProw.totalXP) {
+            if (enemyEffectiveTier === tier) {
                 if (XPtotal > XProw.minXP) {
                     XParray = XProw;
-                    encounterTier = CR;
+                    encounterTier = tier;
                     break;
                 }
             }
@@ -687,15 +697,26 @@ export class CombatSFRPG extends Combat {
 
         // Calculate Difficulty Table
         const diffTable = [
-            {"difficulty": "difficulty-easy", "CR": playerEffectiveTier - 3},
-            {"difficulty": "difficulty-average", "CR": playerEffectiveTier - 2},
-            {"difficulty": "difficulty-challenging", "CR": playerEffectiveTier - 1},
-            {"difficulty": "difficulty-hard", "CR": playerEffectiveTier},
-            {"difficulty": "difficulty-epic", "CR": playerEffectiveTier + 1}
+            {"difficulty": "difficulty-easy", "tier": playerEffectiveTier - 3},
+            {"difficulty": "difficulty-average", "tier": playerEffectiveTier - 2},
+            {"difficulty": "difficulty-challenging", "tier": playerEffectiveTier - 1},
+            {"difficulty": "difficulty-hard", "tier": playerEffectiveTier},
+            {"difficulty": "difficulty-epic", "tier": playerEffectiveTier + 1}
         ];
 
+        // Round down if the tier in the table is a non-integer that isn't allowed
+        console.log(diffTable);
+        for (diffLevel of diffTable) {
+            console.log(diffLevel);
+            if (diffLevel.tier < 0 || diffLevel.tier > 1) {
+                diffLevel.tier = Math.floor(diffLevel.tier);
+                console.log(diffTable);
+            }
+        }
+        console.log(diffTable);
+
         // Calculate a numerical version of the CR for comparison
-        const CRsplit = encounterCR.split("/");
+        const CRsplit = encounterTier.split("/");
         let numCR = 0;
         if (CRsplit.length === 2) {
             numCR = Number(CRsplit[0]) / Number(CRsplit[1]);
@@ -765,9 +786,11 @@ export class CombatSFRPG extends Combat {
 
         // Find all player-owned PCs and get their levels
         for (const combatant of this.combatants) {
-            if (combatant.players.length > 0) {
-                playerCombatants.push(combatant);
-                playerLevels.push(combatant.actor.system.details.level.value);
+            if (combatant.actor.type === "character") {
+                if (combatant.players.length > 0) {
+                    playerCombatants.push(combatant);
+                    playerLevels.push(combatant.actor.system.details.level.value);
+                }
             }
         }
 
@@ -790,10 +813,12 @@ export class CombatSFRPG extends Combat {
 
         // Find all player-owned PCs and get their levels
         for (const combatant of this.combatants) {
-            if (combatant.isNPC) {
-                if (combatant.token.disposition < 0) {
-                    enemyCombatants.push(combatant);
-                    enemyXP.push(combatant.actor.system.details.xp.value); // Enemy XP values
+            if (combatant.actor.type === "npc2" || combatant.actor.type === "npc") {
+                if (combatant.isNPC) {
+                    if (combatant.token.disposition < 0) {
+                        enemyCombatants.push(combatant);
+                        enemyXP.push(combatant.actor.system.details.xp.value); // Enemy XP values
+                    }
                 }
             }
         }
@@ -1104,7 +1129,6 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
 
         // Add in the difficulty calculator if needed
         if (activeCombat.getCombatType() === "starship" && game.user.isGM && diffDisplay) {
-            console.log(activeCombat);
             activeCombat.getStarshipEncounterInfo();
             // activeCombat.renderDifficulty();
         }
