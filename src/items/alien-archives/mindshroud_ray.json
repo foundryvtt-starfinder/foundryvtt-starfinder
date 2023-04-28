@@ -1,5 +1,5 @@
 {
-  "_id": "XIohhRxK20CrumXZ",
+  "_id": "mFjGCyw54B7JkyTg",
   "name": "Mindshroud Ray",
   "type": "npc2",
   "img": "icons/svg/mystery-man.svg",
@@ -24,6 +24,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -84,9 +85,9 @@
           "water": false
         },
         "details": {
-          "category": "feat",
+          "category": "speciesFeature",
           "combat": false,
-          "specialAbilityType": ""
+          "specialAbilityType": "su"
         },
         "duration": {
           "units": "",
@@ -145,6 +146,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -394,12 +396,12 @@
       "img": "icons/magic/control/fear-fright-shadow-monster-red.webp",
       "system": {
         "type": "",
-        "ability": null,
+        "ability": "",
         "abilityMods": {
           "parts": []
         },
         "actionTarget": "",
-        "actionType": "",
+        "actionType": "other",
         "activation": {
           "type": "",
           "condition": "",
@@ -407,6 +409,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -418,15 +421,32 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [
+            {
+              "name": "",
+              "formula": "2d6",
+              "group": null,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "piercing": false,
+                "slashing": false,
+                "sonic": false
+              }
+            }
+          ]
         },
-        "damageNotes": "",
+        "damageNotes": "Nonlethal damage",
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>As a standard action, a ray deals [[/r 2d6]]{2d6 nonlethal damage} to a visible target within 30 feet. The target also takes a -1 penalty to Intelligence-, Wisdom-, and Charisma-based checks; spell save DCs; and Will saving throws for 1 round (@Check[type:will|dc:13] negates). Targets the ray touches have a -2 penalty to this saving throw; the ray can touch an unwilling target by succeeding at a melee attack against the target’s EAC. A target that fails this saving throw by 5 or more is also staggered for 1 round.</p>"
+          "value": "<p>As a standard action, a ray deals 2d6 nonlethal damage to a visible target within 30 feet. The target also takes a -1 penalty to Intelligence-, Wisdom-, and Charisma-based checks; spell save DCs; and Will saving throws for 1 round (DC 13 Will negates). Targets the ray touches have a -2 penalty to this saving throw; the ray can touch an unwilling target by succeeding at a melee attack against the target’s EAC. A target that fails this saving throw by 5 or more is also @UUID[Compendium.sfrpg.conditions.aAQ6SW6iK0EVq8Ce]{staggered} for 1 round.</p>"
         },
         "descriptors": {
           "acid": false,
@@ -467,9 +487,9 @@
           "water": false
         },
         "details": {
-          "category": "feat",
+          "category": "speciesFeature",
           "combat": false,
-          "specialAbilityType": ""
+          "specialAbilityType": "su"
         },
         "duration": {
           "units": "",
@@ -491,9 +511,13 @@
         "requirements": "",
         "rollNotes": "",
         "save": {
+          "type": "will",
+          "dc": "13",
+          "descriptor": "negate"
+        },
+        "skillCheck": {
           "type": "",
-          "dc": null,
-          "descriptor": ""
+          "dc": ""
         },
         "source": "",
         "target": {
@@ -514,12 +538,12 @@
       "img": "icons/magic/control/fear-fright-monster-red.webp",
       "system": {
         "type": "",
-        "ability": null,
+        "ability": "",
         "abilityMods": {
           "parts": []
         },
         "actionTarget": "",
-        "actionType": "",
+        "actionType": "other",
         "activation": {
           "type": "",
           "condition": "",
@@ -527,6 +551,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -538,7 +563,24 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [
+            {
+              "name": "",
+              "formula": "5",
+              "group": null,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "piercing": true,
+                "slashing": false,
+                "sonic": false
+              }
+            }
+          ]
         },
         "damageNotes": "",
         "description": {
@@ -546,7 +588,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>As a full action when a mindshroud ray starts its turn attached to an unconscious but living aberration, animal, dragon, humanoid, magical beast, monstrous humanoid, or outsider with the native subtype, a mindshroud ray can attach to a part of the body where the target’s brain is located (usually the head). This process takes 1 minute and deals [[/r 5]]{5 piercing damage}. The target and the mindshroud ray become one creature who gains the shrouded template graft and recovers from all nonlethal damage. A melded mindshroud ray can’t willingly leave the target and dies if the target does. Another creature can remove the melded mindshroud ray with 4 hours of surgery, which requires a medical lab and a successful @Check[type:medicine|dc:35].</p>"
+          "value": "<p>As a full action when a mindshroud ray starts its turn attached to an unconscious but living aberration, animal, dragon, humanoid, magical beast, monstrous humanoid, or outsider with the native subtype, a mindshroud ray can attach to a part of the body where the target’s brain is located (usually the head). This process takes 1 minute and deals 5 piercing damage. The target and the mindshroud ray become one creature who gains the shrouded template graft and recovers from all nonlethal damage. A melded mindshroud ray can’t willingly leave the target and dies if the target does. Another creature can remove the melded mindshroud ray with 4 hours of surgery, which requires a medical lab and a successful @Check[type:medicine|dc:35].</p>"
         },
         "descriptors": {
           "acid": false,
@@ -587,9 +629,9 @@
           "water": false
         },
         "details": {
-          "category": "feat",
+          "category": "speciesFeature",
           "combat": false,
-          "specialAbilityType": ""
+          "specialAbilityType": "su"
         },
         "duration": {
           "units": "",
@@ -612,8 +654,12 @@
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
-          "descriptor": ""
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": ""
         },
         "source": "",
         "target": {
@@ -647,6 +693,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -707,9 +754,9 @@
           "water": false
         },
         "details": {
-          "category": "feat",
+          "category": "universalCreatureRule",
           "combat": false,
-          "specialAbilityType": ""
+          "specialAbilityType": "ex"
         },
         "duration": {
           "units": "",
@@ -767,6 +814,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -827,9 +875,9 @@
           "water": false
         },
         "details": {
-          "category": "feat",
+          "category": "speciesFeature",
           "combat": false,
-          "specialAbilityType": ""
+          "specialAbilityType": "su"
         },
         "duration": {
           "units": "",
