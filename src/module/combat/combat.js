@@ -958,7 +958,7 @@ export class CombatSFRPG extends Combat {
         if (combatType === 'normal') {
             difficultyHTML.title = `${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.PCs")}: ${this.flags.sfrpg.PCs.length} [${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.APL")} ${this.flags.sfrpg.APL}]\n${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.HostileNPCs")}: ${this.flags.sfrpg.enemies.length} [${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.CR")} ${this.flags.sfrpg.CR}]`;
         } else if (combatType === 'starship') {
-            difficultyHTML.title = `I'm a starship combat`;
+            difficultyHTML.title = game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.ClickForDetails");
         }
         difficultyHTML.innerHTML = `Difficulty: ${CONFIG.SFRPG.difficultyLevels[difficulty]}`;
         document.getElementsByClassName('combat-tracker-header')[0].appendChild(difficultyHTML);
