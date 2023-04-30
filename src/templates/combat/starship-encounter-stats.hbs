@@ -1,0 +1,74 @@
+<div class="encounter-stats-sheet">
+    <div class="stats-header">
+        <table>
+            <tr>
+                <td class="table-left">
+                    {{localize "SFRPG.Combat.Difficulty.Tooltip.PlayerShipEffectiveTier"}}
+                </td>
+                <td class="table-right">
+                    {{flags.sfrpg.playerTier.string}}
+                </td>
+            </tr>
+            <tr>
+                <td class="table-left">
+                    {{localize "SFRPG.Combat.Difficulty.Tooltip.EnemyShipEffectiveTier"}}
+                </td>
+                <td class="table-right">
+                    {{flags.sfrpg.enemyTier.string}}
+                </td>
+            </tr>
+            <tr>
+                <td class="table-left">
+                    {{localize "SFRPG.Combat.Difficulty.Tooltip.EncounterTotalXP"}}
+                </td>
+                <td class="table-right">
+                    {{flags.sfrpg.XPValue}} {{localize "SFRPG.Combat.Difficulty.Units.XP"}}
+                </td>
+            </tr>
+            <tr>
+                <td class="table-left">
+                    {{localize "SFRPG.Combat.Difficulty.Tooltip.EncounterWealth"}}
+                </td>
+                <td class="table-right">
+                    {{flags.sfrpg.wealth}}  {{localize "SFRPG.Combat.Difficulty.Units.Credits"}}
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="combatants-title">
+        <div class="title-item">
+            {{localize "SFRPG.Combat.Difficulty.Tooltip.Players"}}
+        </div>
+        <div class="title-item">
+            {{localize "SFRPG.Combat.Difficulty.Tooltip.Enemies"}}
+        </div>
+    </div>
+
+    <div class="stats-body">
+        <div class="body-col">
+            <ul class="combatant-list">
+                {{#each flags.sfrpg.playerShips as |actor id|}}
+                <li class="combatant-list ally" data-actor-id="{{actor.id}}">
+                    <img class="img" src="{{actor.img}}" title="{{actor.name}}" width="48" height="48"/>
+                    <h4>
+                        {{actor.name}}
+                    </h4>
+                </li>
+                {{/each}}
+            </ul>
+        </div>
+        <div class="body-col">
+            <ul class="combatant-list">
+                {{#each flags.sfrpg.enemyShips as |actor id|}}
+                <li class="combatant-list enemy" data-actor-id="{{actor.id}}">
+                    <img class="img" src="{{actor.img}}" title="{{actor.name}}" width="48" height="48"/>
+                    <h4>
+                        {{actor.name}}
+                    </h4>
+                </li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+</div>

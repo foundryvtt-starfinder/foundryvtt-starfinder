@@ -552,7 +552,209 @@ export class CombatSFRPG extends Combat {
         return this.getIndexOfFirstUndefeatedCombatant() === null;
     }
 
-    getEncounterInfo() {
+    getStarshipEncounterInfo() {
+        // Performs starship encounter difficulty calculations and populates flags
+        if (!this.flags.sfrpg) {
+            this.flags.sfrpg = {};
+        }
+
+        const [playerShips, playerShipTiers, enemyShips, enemyShipTiers] = this.parseShips();
+        this.flags.sfrpg.playerShips = playerShips;
+        this.flags.sfrpg.playerShipTiers = playerShipTiers;
+        this.flags.sfrpg.enemyShips = enemyShips;
+        this.flags.sfrpg.enemyShipTiers = enemyShipTiers;
+
+        const [playerTierEffective, playerTierRound, playerTierString] = this.calculatePlayerShipEffectiveTier(playerShipTiers);
+        this.flags.sfrpg.playerTier = {};
+        this.flags.sfrpg.playerTier.effective = playerTierEffective;
+        this.flags.sfrpg.playerTier.round = playerTierRound;
+        this.flags.sfrpg.playerTier.string = playerTierString;
+
+        const [enemyTierEffective, enemyTierRound, enemyTierString] = this.calculateEnemyShipEffectiveTier(enemyShipTiers);
+        this.flags.sfrpg.enemyTier = {};
+        this.flags.sfrpg.enemyTier.effective = enemyTierEffective;
+        this.flags.sfrpg.enemyTier.round = enemyTierRound;
+        this.flags.sfrpg.enemyTier.string = enemyTierString;
+
+        console.log(this);
+        const [difficulty, XPValue, wealth] = this.calculateShipChallenge();
+        this.flags.sfrpg.difficulty = difficulty;
+        this.flags.sfrpg.XPValue = XPValue;
+        this.flags.sfrpg.wealth = wealth;
+    }
+
+    parseShips() {
+        let playerShips = [];
+        let playerShipTiers = [];
+        let enemyShips = [];
+        let enemyShipTiers = [];
+
+        // split combatants into allies and enemies
+        for (const combatant of this.combatants) {
+            if (combatant.actor.type === "starship") {
+                if (combatant.hasPlayerOwner) {
+                    playerShips.push(combatant);
+                    playerShipTiers.push(combatant.actor.system.details.tier);
+                } else if (combatant.token.disposition < 0) {
+                    enemyShips.push(combatant);
+                    enemyShipTiers.push(combatant.actor.system.details.tier);
+                }
+            }
+        }
+
+        return [playerShips, playerShipTiers, enemyShips, enemyShipTiers];
+    }
+
+    calculatePlayerShipEffectiveTier(shipTiers) {
+        const sortedTiers = shipTiers.sort().reverse(); // sort high to low
+        const highestShipTier = sortedTiers[0];
+        let tierEffective = highestShipTier;
+
+        if (sortedTiers.length > 1) {
+            // count the number of starships within 2 Tiers of the highest one
+            let withinTwo = -1;
+            for (const num of sortedTiers) {
+                if (num >= highestShipTier - 2) {
+                    withinTwo += 1;
+                }
+            }
+
+            // If there are any ships within 2 tiers of the highest one, add one to the effective tier for each of them
+            // Otherwise, sum the remaining ships' tiers and add 1 if the value is equal to or greater than the highest ship's tier
+            if (withinTwo > 0) {
+                tierEffective += withinTwo;
+            } else {
+                const sum = sortedTiers.reduce((partialSum, a) => partialSum + a, 0) - highestShipTier;
+                if (sum >= highestShipTier) {
+                    tierEffective += 1;
+                }
+            }
+        }
+
+        // Calculate other versions of the tier (number, rounded, string)
+        let tierRound = tierEffective;
+        let tierString = "";
+
+        if (tierEffective > 1) {
+            tierRound = Math.floor(tierEffective);
+        }
+        switch (tierRound) {
+            case 0.25:
+                tierString = "1/4";
+                break;
+            case 1 / 3:
+                tierString = "1/3";
+                break;
+            case 0.5:
+                tierString = "1/2";
+                break;
+            default:
+                tierString = String(tierRound);
+        }
+        return [tierEffective, tierRound, tierString];
+    }
+
+    calculateEnemyShipEffectiveTier(shipTiers) {
+        const sortedTiers = shipTiers.sort().reverse(); // sort high to low
+        const highestShipTier = sortedTiers[0];
+        const numShips = shipTiers.length;
+        let tierEffective = highestShipTier;
+
+        if (numShips > 1) {
+            if (sortedTiers[1] === sortedTiers[0]) {
+                tierEffective += 2;
+                if (numShips > 2) {
+                    if (sortedTiers[2] === sortedTiers[0]) {
+                        tierEffective += 1;
+                        if (numShips > 3) {
+                            if (sortedTiers[3] === sortedTiers[0]) {
+                                return this.calculatePlayerShipEffectiveTier(shipTiers);
+                            }
+                        }
+                    }
+                }
+            } else {
+                return this.calculatePlayerShipEffectiveTier(shipTiers);
+            }
+        }
+
+        // Calculate other versions of the tier (number, rounded, string)
+        let tierRound = tierEffective;
+        let tierString = "";
+
+        // Round down if it's not an allowed fractional value (between 0 and 1)
+        if (tierEffective > 1) {
+            tierRound = Math.floor(tierEffective);
+        }
+        switch (tierRound) {
+            case 0.25:
+                tierString = "1/4";
+                break;
+            case 1 / 3:
+                tierString = "1/3";
+                break;
+            case 0.5:
+                tierString = "1/2";
+                break;
+            default:
+                tierString = String(tierRound);
+        }
+        return [tierEffective, tierRound, tierString];
+    }
+
+    calculateShipChallenge() {
+        // Calculate the difficulty of the combat encounter
+        const CRTable = CONFIG.SFRPG.CRTable;
+        const numPlayerShips = this.flags.sfrpg.playerShips.length;
+        const numEnemyShips = this.flags.sfrpg.enemyShips.length;
+        const playerEffectiveTier = this.flags.sfrpg.playerTier.effective;
+        const enemyNumericalTier = this.flags.sfrpg.enemyTier.round;
+        const enemyStringTier = this.flags.sfrpg.enemyTier.string;
+
+        // Check that Players and NPCs are both present
+        if (!numPlayerShips) {
+            console.log('no players');
+            return ["difficulty-noPCShips", 0, 0];
+        } else if (!numEnemyShips) {
+            console.log('no enemies');
+            return ["difficulty-noEnemyShips", 0, 0];
+        }
+
+        // Calculate Difficulty Table
+        const diffTable = [
+            {"difficulty": "difficulty-easy", "tier": playerEffectiveTier - 3},
+            {"difficulty": "difficulty-average", "tier": playerEffectiveTier - 2},
+            {"difficulty": "difficulty-challenging", "tier": playerEffectiveTier - 1},
+            {"difficulty": "difficulty-hard", "tier": playerEffectiveTier},
+            {"difficulty": "difficulty-epic", "tier": playerEffectiveTier + 1}
+        ];
+
+        // Round down if the tier in the table is a non-integer that isn't allowed
+        for (const row of diffTable) {
+            if (row.tier < 0 || row.tier > 1) {
+                row.tier = Math.floor(row.tier);
+            }
+        }
+
+        // Calculate the Encounter Difficulty
+        let encounterDifficulty = "";
+
+        if (enemyNumericalTier < diffTable[0].tier) {
+            encounterDifficulty = "difficulty-lessThanEasy";
+        } else if (enemyNumericalTier > diffTable[4].tier) {
+            encounterDifficulty = "difficulty-greaterThanEpic";
+        } else {
+            for (const diffRow of diffTable) {
+                if (enemyNumericalTier === diffRow.tier) {
+                    encounterDifficulty = diffRow.difficulty;
+                }
+            }
+        }
+
+        return [encounterDifficulty, CRTable[enemyStringTier].totalXP, CRTable[enemyStringTier].wealthValue];
+    }
+
+    getNormalEncounterInfo() {
         // Performs all encounter difficulty calculations
         if (!this.flags.sfrpg) {
             this.flags.sfrpg = {};
@@ -585,9 +787,11 @@ export class CombatSFRPG extends Combat {
 
         // Find all player-owned PCs and get their levels
         for (const combatant of this.combatants) {
-            if (combatant.players.length > 0) {
-                playerCombatants.push(combatant);
-                playerLevels.push(combatant.actor.system.details.level.value);
+            if (combatant.actor.type === "character") {
+                if (combatant.players.length > 0) {
+                    playerCombatants.push(combatant);
+                    playerLevels.push(combatant.actor.system.details.level.value);
+                }
             }
         }
 
@@ -610,10 +814,12 @@ export class CombatSFRPG extends Combat {
 
         // Find all player-owned PCs and get their levels
         for (const combatant of this.combatants) {
-            if (combatant.isNPC) {
-                if (combatant.token.disposition < 0) {
-                    enemyCombatants.push(combatant);
-                    enemyXP.push(combatant.actor.system.details.xp.value); // Enemy XP values
+            if (combatant.actor.type === "npc2" || combatant.actor.type === "npc") {
+                if (combatant.isNPC) {
+                    if (combatant.token.disposition < 0) {
+                        enemyCombatants.push(combatant);
+                        enemyXP.push(combatant.actor.system.details.xp.value); // Enemy XP values
+                    }
                 }
             }
         }
@@ -745,10 +951,15 @@ export class CombatSFRPG extends Combat {
 
     renderDifficulty() {
         const difficulty = this.flags.sfrpg.difficulty;
+        const combatType = this.flags.sfrpg.combatType;
 
         let difficultyHTML = document.createElement("a");
         difficultyHTML.classList.add("difficulty", difficulty);
-        difficultyHTML.title = `${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.PCs")}: ${this.flags.sfrpg.PCs.length} [${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.APL")} ${this.flags.sfrpg.APL}]\n${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.HostileNPCs")}: ${this.flags.sfrpg.enemies.length} [${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.CR")} ${this.flags.sfrpg.CR}]`;
+        if (combatType === 'normal') {
+            difficultyHTML.title = `${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.PCs")}: ${this.flags.sfrpg.PCs.length} [${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.APL")} ${this.flags.sfrpg.APL}]\n${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.HostileNPCs")}: ${this.flags.sfrpg.enemies.length} [${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.CR")} ${this.flags.sfrpg.CR}]`;
+        } else if (combatType === 'starship') {
+            difficultyHTML.title = game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.ClickForDetails");
+        }
         difficultyHTML.innerHTML = `Difficulty: ${CONFIG.SFRPG.difficultyLevels[difficulty]}`;
         document.getElementsByClassName('combat-tracker-header')[0].appendChild(difficultyHTML);
     }
@@ -918,7 +1129,13 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
 
         // Add in the difficulty calculator if needed
         if (activeCombat.getCombatType() === "normal" && game.user.isGM && diffDisplay) {
-            activeCombat.getEncounterInfo();
+            activeCombat.getNormalEncounterInfo();
+            activeCombat.renderDifficulty();
+        }
+
+        // Add in the difficulty calculator if needed
+        if (activeCombat.getCombatType() === "starship" && game.user.isGM && diffDisplay) {
+            activeCombat.getStarshipEncounterInfo();
             activeCombat.renderDifficulty();
         }
 
@@ -945,7 +1162,15 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
         difficultyButton.click(async ev => {
             ev.preventDefault();
             console.log("Starfinder | Rendering Encounter Statistics Dialog");
-            const contentTemplate = '//systems/sfrpg/templates/combat/encounter-stats.hbs';
+            const combatType = activeCombat.flags.sfrpg.combatType;
+            let contentTemplate = "";
+
+            if (combatType === 'starship') {
+                contentTemplate = '//systems/sfrpg/templates/combat/starship-encounter-stats.hbs';
+            } else {
+                contentTemplate = '//systems/sfrpg/templates/combat/normal-encounter-stats.hbs';
+            }
+
             new Dialog({
                 title: `${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.Details")}: ${CONFIG.SFRPG.difficultyLevels[activeCombat.flags.sfrpg.difficulty]} ${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.DifficultyEncounter")}`,
                 content: await renderTemplate(contentTemplate, activeCombat),

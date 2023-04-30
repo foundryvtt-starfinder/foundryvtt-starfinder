@@ -1435,6 +1435,8 @@ SFRPG.CRTable = {
 };
 
 SFRPG.difficultyLevels = {
+    "difficulty-noPCShips": "SFRPG.Combat.Difficulty.Levels.NoPCShips",
+    "difficulty-noEnemyShips": "SFRPG.Combat.Difficulty.Levels.NoEnemyShips",
     "difficulty-noPcs": "SFRPG.Combat.Difficulty.Levels.NoPCs",
     "difficulty-noEnemies": "SFRPG.Combat.Difficulty.Levels.NoEnemies",
     "difficulty-lessThanEasy": "SFRPG.Combat.Difficulty.Levels.LessThanEasy",
