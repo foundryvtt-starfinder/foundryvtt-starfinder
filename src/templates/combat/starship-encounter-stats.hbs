@@ -3,26 +3,26 @@
         <table>
             <tr>
                 <td class="table-left">
-                    {{localize "SFRPG.Combat.Difficulty.Tooltip.APLFull"}} ({{localize "SFRPG.Combat.Difficulty.Tooltip.APL"}})
+                    {{localize "SFRPG.Combat.Difficulty.Tooltip.PlayerShipEffectiveTier"}}
                 </td>
                 <td class="table-right">
-                    {{flags.sfrpg.APL}}
+                    {{flags.sfrpg.playerTier.string}}
                 </td>
             </tr>
             <tr>
                 <td class="table-left">
-                    {{localize "SFRPG.Combat.Difficulty.Tooltip.EncounterCR"}} ({{localize "SFRPG.Combat.Difficulty.Tooltip.CR"}})
+                    {{localize "SFRPG.Combat.Difficulty.Tooltip.EnemyShipEffectiveTier"}}
                 </td>
                 <td class="table-right">
-                    {{flags.sfrpg.CR}}
+                    {{flags.sfrpg.enemyTier.string}}
                 </td>
             </tr>
             <tr>
                 <td class="table-left">
-                    {{localize "SFRPG.Combat.Difficulty.Tooltip.PlayerXP"}}
+                    {{localize "SFRPG.Combat.Difficulty.Tooltip.EncounterTotalXP"}}
                 </td>
                 <td class="table-right">
-                    {{flags.sfrpg.playerXP}} {{localize "SFRPG.Combat.Difficulty.Units.XP"}}
+                    {{flags.sfrpg.XPValue}} {{localize "SFRPG.Combat.Difficulty.Units.XP"}}
                 </td>
             </tr>
             <tr>
@@ -31,34 +31,6 @@
                 </td>
                 <td class="table-right">
                     {{flags.sfrpg.wealth}}  {{localize "SFRPG.Combat.Difficulty.Units.Credits"}}
-                </td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <td class="table-left">
-                    {{localize "SFRPG.Combat.Difficulty.Tooltip.EnemyXP"}}
-                </td>
-                <td class="table-right">
-                    {{flags.sfrpg.enemyXP}} {{localize "SFRPG.Combat.Difficulty.Units.XP"}}
-                </td>
-            </tr>
-            <tr>
-                <td class="table-left">
-                    {{localize "SFRPG.Combat.Difficulty.Tooltip.XPBounds"}} ({{localize "SFRPG.Combat.Difficulty.Tooltip.CR"}} {{flags.sfrpg.CR}})
-                </td>
-                <td class="table-right">
-                    [{{flags.sfrpg.CRXPbounds}}]  {{localize "SFRPG.Combat.Difficulty.Units.XP"}}
-                </td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <td class="table-left">
-                    {{localize "SFRPG.Combat.Difficulty.Tooltip.CanBeAdded"}}
-                </td>
-                <td class="table-right">
-                    {{flags.sfrpg.leftoverCR}}
                 </td>
             </tr>
         </table>
@@ -76,7 +48,7 @@
     <div class="stats-body">
         <div class="body-col">
             <ul class="combatant-list">
-                {{#each flags.sfrpg.PCs as |actor id|}}
+                {{#each flags.sfrpg.playerShips as |actor id|}}
                 <li class="combatant-list ally" data-actor-id="{{actor.id}}">
                     <img class="img" src="{{actor.img}}" title="{{actor.name}}" width="48" height="48"/>
                     <h4>
@@ -88,7 +60,7 @@
         </div>
         <div class="body-col">
             <ul class="combatant-list">
-                {{#each flags.sfrpg.enemies as |actor id|}}
+                {{#each flags.sfrpg.enemyShips as |actor id|}}
                 <li class="combatant-list enemy" data-actor-id="{{actor.id}}">
                     <img class="img" src="{{actor.img}}" title="{{actor.name}}" width="48" height="48"/>
                     <h4>

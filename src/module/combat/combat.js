@@ -564,8 +564,17 @@ export class CombatSFRPG extends Combat {
         this.flags.sfrpg.enemyShips = enemyShips;
         this.flags.sfrpg.enemyShipTiers = enemyShipTiers;
 
-        this.flags.sfrpg.playerEffectiveTier = this.calculatePlayerShipEffectiveTier(playerShipTiers);
-        this.flags.sfrpg.enemyEffectiveTier = this.calculateEnemyShipEffectiveTier(enemyShipTiers);
+        const [playerTierEffective, playerTierRound, playerTierString] = this.calculatePlayerShipEffectiveTier(playerShipTiers);
+        this.flags.sfrpg.playerTier = {};
+        this.flags.sfrpg.playerTier.effective = playerTierEffective;
+        this.flags.sfrpg.playerTier.round = playerTierRound;
+        this.flags.sfrpg.playerTier.string = playerTierString;
+
+        const [enemyTierEffective, enemyTierRound, enemyTierString] = this.calculateEnemyShipEffectiveTier(enemyShipTiers);
+        this.flags.sfrpg.enemyTier = {};
+        this.flags.sfrpg.enemyTier.effective = enemyTierEffective;
+        this.flags.sfrpg.enemyTier.round = enemyTierRound;
+        this.flags.sfrpg.enemyTier.string = enemyTierString;
 
         console.log(this);
         const [difficulty, XPValue, wealth] = this.calculateShipChallenge();
@@ -621,7 +630,28 @@ export class CombatSFRPG extends Combat {
                 }
             }
         }
-        return tierEffective;
+
+        // Calculate other versions of the tier (number, rounded, string)
+        let tierRound = tierEffective;
+        let tierString = "";
+
+        if (tierEffective > 1) {
+            tierRound = Math.floor(tierEffective);
+        }
+        switch (tierRound) {
+            case 0.25:
+                tierString = "1/4";
+                break;
+            case 1 / 3:
+                tierString = "1/3";
+                break;
+            case 0.5:
+                tierString = "1/2";
+                break;
+            default:
+                tierString = String(tierRound);
+        }
+        return [tierEffective, tierRound, tierString];
     }
 
     calculateEnemyShipEffectiveTier(shipTiers) {
@@ -638,21 +668,38 @@ export class CombatSFRPG extends Combat {
                         tierEffective += 1;
                         if (numShips > 3) {
                             if (sortedTiers[3] === sortedTiers[0]) {
-                                tierEffective = this.calculatePlayerShipEffectiveTier(shipTiers);
+                                return this.calculatePlayerShipEffectiveTier(shipTiers);
                             }
                         }
                     }
                 }
             } else {
-                tierEffective = this.calculatePlayerShipEffectiveTier(shipTiers);
+                return this.calculatePlayerShipEffectiveTier(shipTiers);
             }
         }
 
+        // Calculate other versions of the tier (number, rounded, string)
+        let tierRound = tierEffective;
+        let tierString = "";
+
         // Round down if it's not an allowed fractional value (between 0 and 1)
         if (tierEffective > 1) {
-            tierEffective = Math.floor(tierEffective);
+            tierRound = Math.floor(tierEffective);
         }
-        return tierEffective;
+        switch (tierRound) {
+            case 0.25:
+                tierString = "1/4";
+                break;
+            case 1 / 3:
+                tierString = "1/3";
+                break;
+            case 0.5:
+                tierString = "1/2";
+                break;
+            default:
+                tierString = String(tierRound);
+        }
+        return [tierEffective, tierRound, tierString];
     }
 
     calculateShipChallenge() {
@@ -660,24 +707,9 @@ export class CombatSFRPG extends Combat {
         const CRTable = CONFIG.SFRPG.CRTable;
         const numPlayerShips = this.flags.sfrpg.playerShips.length;
         const numEnemyShips = this.flags.sfrpg.enemyShips.length;
-        const playerEffectiveTier = this.flags.sfrpg.playerEffectiveTier;
-        const enemyNumericalTier = this.flags.sfrpg.enemyEffectiveTier;
-
-        // Convert enemy effective tier to string
-        let enemyStringTier = "";
-        switch (enemyNumericalTier) {
-            case 0.25:
-                enemyStringTier = "1/4";
-                break;
-            case 1 / 3:
-                enemyStringTier = "1/3";
-                break;
-            case 0.5:
-                enemyStringTier = "1/2";
-                break;
-            default:
-                enemyStringTier = String(enemyNumericalTier);
-        }
+        const playerEffectiveTier = this.flags.sfrpg.playerTier.effective;
+        const enemyNumericalTier = this.flags.sfrpg.enemyTier.round;
+        const enemyStringTier = this.flags.sfrpg.enemyTier.string;
 
         // Check that Players and NPCs are both present
         if (!numPlayerShips) {
