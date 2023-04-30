@@ -641,11 +641,28 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const alignedBonus = (data.proficient ? data.bonus.aligned : 0) || 0;
 
         props.push(
-            {name: game.i18n.localize("SFRPG.Items.Shield.Shield"), tooltip: null},
-            {name: game.i18n.format("SFRPG.Items.Shield.AcMaxDex", { maxDex: (data.dex || 0).signedString() }),  tooltip: null},
-            {name: game.i18n.format("SFRPG.Items.Shield.ArmorCheck", { acp: (data.acp || 0).signedString() }),  tooltip: null},
-            {name: game.i18n.format("SFRPG.Items.Shield.Bonuses", { wielded: wieldedBonus.signedString(), aligned: alignedBonus.signedString() }),  tooltip: null},
-            data.proficient ? {name: game.i18n.localize("SFRPG.Items.Proficient"), tooltip: null} : {name: game.i18n.localize("SFRPG.Items.NotProficient"), tooltip: null}
+            { name: game.i18n.localize("SFRPG.Items.Shield.Shield"), tooltip: null },
+            {
+                title: game.i18n.localize("SFRPG.Items.Shield.AcMaxDexLabel"),
+                name: (data.dex || 0).signedString(),
+                tooltip: null
+            },
+            {
+                title: game.i18n.localize("SFRPG.Items.Shield.ArmorCheckLabel"),
+                name: (data.acp || 0).signedString(),
+                tooltip: null
+            },
+            {
+                title: game.i18n.localize("SFRPG.Items.Shield.Bonus"),
+                name: game.i18n.format("SFRPG.Items.Shield.Bonuses", {
+                    wielded: wieldedBonus.signedString(),
+                    aligned: alignedBonus.signedString()
+                }),
+                tooltip: null
+            },
+            data.proficient
+                ? { name: game.i18n.localize("SFRPG.Items.Proficient"), tooltip: null }
+                : { name: game.i18n.localize("SFRPG.Items.NotProficient"), tooltip: null }
         );
     }
 
