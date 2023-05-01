@@ -763,7 +763,7 @@ export class CombatSFRPG extends Combat {
     }
 
     /**
-     * Performs all encounter difficulty calculations
+     * Performs all encounter difficulty calculations for normal combat
      */
     getNormalEncounterInfo() {
         if (!this.flags.sfrpg) {
@@ -946,8 +946,9 @@ export class CombatSFRPG extends Combat {
         } else {
             // Find the CR value of the remaining XP, without going over
             for (let [CR, XProw] of Object.entries(CRTable)) {
-                if (remainingXP <= XProw.nextXP) {
-                    if (remainingXP > XProw.totalXP) {
+                console.log(CR, remainingXP, XProw.nextXP);
+                if (remainingXP < XProw.nextXP) {
+                    if (remainingXP >= XProw.totalXP) {
                         return CR;
                     } else {
                         return "0";
