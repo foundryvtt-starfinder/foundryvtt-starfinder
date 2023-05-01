@@ -3,7 +3,8 @@
         <table>
             <tr>
                 <td class="table-left">
-                    {{localize "SFRPG.Combat.Difficulty.Tooltip.APLFull"}} ({{localize "SFRPG.Combat.Difficulty.Tooltip.APL"}})
+                    {{localize "SFRPG.Combat.Difficulty.Tooltip.APLFull"}} ({{localize
+                    "SFRPG.Combat.Difficulty.Tooltip.APL"}})
                 </td>
                 <td class="table-right">
                     {{flags.sfrpg.APL}}
@@ -11,12 +12,32 @@
             </tr>
             <tr>
                 <td class="table-left">
-                    {{localize "SFRPG.Combat.Difficulty.Tooltip.EncounterCR"}} ({{localize "SFRPG.Combat.Difficulty.Tooltip.CR"}})
+                    {{localize "SFRPG.Combat.Difficulty.Tooltip.EncounterCR"}} ({{localize
+                    "SFRPG.Combat.Difficulty.Tooltip.CR"}})
                 </td>
                 <td class="table-right">
                     {{flags.sfrpg.CR}}
                 </td>
             </tr>
+            <tr>
+                <td class="table-left">
+                    {{localize "SFRPG.Combat.Difficulty.Tooltip.EnemyXP"}}
+                </td>
+                <td class="table-right">
+                    {{flags.sfrpg.enemyXP}} {{localize "SFRPG.Combat.Difficulty.Units.XP"}}
+                </td>
+            </tr>
+            <tr>
+                <td class="table-left">
+                    {{localize "SFRPG.Combat.Difficulty.Tooltip.XPBounds"}} ({{localize
+                    "SFRPG.Combat.Difficulty.Tooltip.CR"}} {{flags.sfrpg.CR}})
+                </td>
+                <td class="table-right">
+                    {{flags.sfrpg.CRXPboundsString}} {{localize "SFRPG.Combat.Difficulty.Units.XP"}}
+                </td>
+            </tr>
+        </table>
+        <table>
             <tr>
                 <td class="table-left">
                     {{localize "SFRPG.Combat.Difficulty.Tooltip.PlayerXP"}}
@@ -30,38 +51,22 @@
                     {{localize "SFRPG.Combat.Difficulty.Tooltip.EncounterWealth"}}
                 </td>
                 <td class="table-right">
-                    {{flags.sfrpg.wealth}}  {{localize "SFRPG.Combat.Difficulty.Units.Credits"}}
+                    {{flags.sfrpg.wealth}} {{localize "SFRPG.Combat.Difficulty.Units.Credits"}}
                 </td>
             </tr>
         </table>
-        <table>
-            <tr>
-                <td class="table-left">
-                    {{localize "SFRPG.Combat.Difficulty.Tooltip.EnemyXP"}}
-                </td>
-                <td class="table-right">
-                    {{flags.sfrpg.enemyXP}} {{localize "SFRPG.Combat.Difficulty.Units.XP"}}
-                </td>
-            </tr>
-            <tr>
-                <td class="table-left">
-                    {{localize "SFRPG.Combat.Difficulty.Tooltip.XPBounds"}} ({{localize "SFRPG.Combat.Difficulty.Tooltip.CR"}} {{flags.sfrpg.CR}})
-                </td>
-                <td class="table-right">
-                    [{{flags.sfrpg.CRXPbounds}}]  {{localize "SFRPG.Combat.Difficulty.Units.XP"}}
-                </td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <td class="table-left">
-                    {{localize "SFRPG.Combat.Difficulty.Tooltip.CanBeAdded"}}
-                </td>
-                <td class="table-right">
-                    {{flags.sfrpg.leftoverCR}}
-                </td>
-            </tr>
-        </table>
+        {{#if (ne flags.sfrpg.leftoverCR "0")}}
+            <table>
+                <tr>
+                    <td class="table-left">
+                        {{localize "SFRPG.Combat.Difficulty.Tooltip.CanBeAdded"}}
+                    </td>
+                    <td class="table-right">
+                        {{flags.sfrpg.leftoverCR}}
+                    </td>
+                </tr>
+            </table>
+        {{/if}}
     </div>
 
     <div class="combatants-title">
@@ -76,25 +81,33 @@
     <div class="stats-body">
         <div class="body-col">
             <ul class="combatant-list">
-                {{#each flags.sfrpg.PCs as |actor id|}}
-                <li class="combatant-list ally" data-actor-id="{{actor.id}}">
-                    <img class="img" src="{{actor.img}}" title="{{actor.name}}" width="48" height="48"/>
-                    <h4>
-                        {{actor.name}}
-                    </h4>
-                </li>
+                {{#each flags.sfrpg.PCs as |combatant id|}}
+                    <li class="combatant-list ally" data-combatant-id="{{combatant.id}}">
+                        <img class="img" src="{{combatant.img}}" title="{{combatant.name}}" width="48" height="48" />
+                        <div class="combatant-info">
+                            <h4>
+                                {{combatant.name}}
+                            </h4>
+                            <label class="combatant-level">{{localize "SFRPG.LevelLabelText"}}
+                                {{combatant.actor.system.details.level.value}}</label>
+                        </div>
+                    </li>
                 {{/each}}
             </ul>
         </div>
         <div class="body-col">
             <ul class="combatant-list">
-                {{#each flags.sfrpg.enemies as |actor id|}}
-                <li class="combatant-list enemy" data-actor-id="{{actor.id}}">
-                    <img class="img" src="{{actor.img}}" title="{{actor.name}}" width="48" height="48"/>
-                    <h4>
-                        {{actor.name}}
-                    </h4>
-                </li>
+                {{#each flags.sfrpg.enemies as |combatant id|}}
+                    <li class="combatant-list enemy" data-combatant-id="{{combatant.id}}">
+                        <img class="img" src="{{combatant.img}}" title="{{combatant.name}}" width="48" height="48" />
+                        <div class="combatant-info">
+                            <h4>
+                                {{combatant.name}}
+                            </h4>
+                            <label class="combatant-level">CR
+                                {{crDecimalToFraction combatant.actor.system.details.cr}}</label>
+                        </div>
+                    </li>
                 {{/each}}
             </ul>
         </div>

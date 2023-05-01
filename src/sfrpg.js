@@ -599,6 +599,23 @@ function setupHandlebars() {
         return 0;
     });
 
+    Handlebars.registerHelper("crDecimalToFraction", function(value) {
+        let string = "";
+        switch (value) {
+            case 0.125: string = "1/8";
+                break;
+            case 0.16666666666666666: string = "1/6";
+                break;
+            case 0.25: string = "1/4";
+                break;
+            case 0.3333333333333333: string = "1/3";
+                break;
+            case 0.5: string = "1/2";
+                break;
+        }
+        return string || value;
+    });
+
     Handlebars.registerHelper("not", function(value) {
         return !value;
     });

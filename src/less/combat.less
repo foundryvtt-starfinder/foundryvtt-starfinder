@@ -1,6 +1,7 @@
 @import "variables.less";
 
-.combat-type {
+.combat-type,
+.combat-difficulty-container {
     flex: 1;
     margin: 0;
     font-size: var(--font-size-14);
@@ -8,59 +9,60 @@
     text-align: center;
 }
 
-.combat-difficulty {
+a.combat-difficulty {
     flex: 1;
     margin: 0;
     font-size: var(--font-size-16);
+    line-height: var(--font-size-16);
     text-align: center;
-}
+    text-shadow: black 1px 1px;
 
-.difficulty-noPcs {
-    color: var(--color-text-light-5);
-}
+    &.noPcs {
+        color: var(--color-text-light-5);
+    }
 
-.difficulty-noPCShips {
-    color: var(--color-text-light-5);
-}
+    &.noPCShips {
+        color: var(--color-text-light-5);
+    }
 
-.difficulty-noEnemyShips {
-    color: var(--color-text-light-5);
-}
+    &.noEnemyShips {
+        color: var(--color-text-light-5);
+    }
 
-.difficulty-noEnemies {
-    color: var(--color-text-light-5);
-}
+    &.noEnemies {
+        color: var(--color-text-light-5);
+    }
 
-.difficulty-lessThanEasy {
-    color: white;
-}
+    &.lessThanEasy {
+        color: white;
+    }
 
-.difficulty-easy {
-    color: cyan;
-}
+    &.easy {
+        color: cyan;
+    }
 
-.difficulty-average {
-    color: rgb(0, 255, 0);
-}
+    &.average {
+        color: rgb(0, 255, 0);
+    }
 
-.difficulty-challenging {
-    color: yellow;
-}
+    &.challenging {
+        color: rgb(255, 247, 0);
+    }
 
-.difficulty-hard {
-    color: orange;
-}
+    &.hard {
+        color: orange;
+    }
 
-.difficulty-epic {
-    color: red;
-}
+    &.epic {
+        color: red;
+    }
 
-.difficulty-greaterThanEpic {
-    color: rgb(255, 0, 255);
+    &.greaterThanEpic {
+        color: rgb(255, 0, 255);
+    }
 }
 
 .encounter-stats-sheet {
-
     .stats-header {
         margin: 0;
         padding: 0.25em;
@@ -70,7 +72,7 @@
             flex: 3;
             text-align: left;
         }
-        
+
         .table-right {
             flex: 1;
             align-self: center;
@@ -85,8 +87,7 @@
         display: flex;
         flex-direction: row;
         text-align: center;
-        border-bottom-style: solid;
-        border-color: black;
+        border-bottom: @borderGroove;
 
         .title-item {
             flex: 1;
@@ -95,13 +96,12 @@
             font-size: var(--font-size-18);
         }
     }
-    
-    .stats-body {
 
+    .stats-body {
         display: flex;
         flex-direction: row;
 
-        .body-col{
+        .body-col {
             flex: 1;
         }
 
@@ -110,12 +110,10 @@
             padding: 0; /* Remove padding */
             margin: 0; /* Remove margins */
         }
-        
+
         li.combatant-list {
-            border-style: solid;
+            border: black 1px solid;
             border-radius: 0.25em;
-            border-width: thin;
-            border-color: black;
             padding: 0.5em;
             margin: 0.25em;
             display: flex;
@@ -124,31 +122,35 @@
             img {
                 align-self: center;
                 border-style: none;
-                border-right-style: solid;
-                border-right-color: black;
+                border-right: @borderGroove;
                 padding-right: 0.5em;
                 object-fit: cover;
                 object-position: 50% 0;
             }
 
-            h4 {
-                align-self: center;
-                text-align: left;
-                padding-left: 0.5em;
-                font-size: var(--font-size-16);
+            .combatant-info {
+                h4 {
+                    align-self: center;
+                    text-align: left;
+                    padding-left: 0.5em;
+                    font-size: var(--font-size-16);
+                }
+
+                label.combatant-level {
+                    align-self: center;
+                    text-align: left;
+                    padding-left: 0.5em;
+                }
             }
         }
-    
+
         li.ally {
-            
             background: rgba(0, 0, 255, 0.2);
         }
-        
+
         li.enemy {
-            
             background: rgba(64, 64, 64, 0.2);
         }
-
     }
 
     .stats-footer {
