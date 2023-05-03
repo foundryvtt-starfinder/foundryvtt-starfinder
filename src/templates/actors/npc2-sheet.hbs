@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 {{#if combatRoleImage}}
-                <img class="combat-role" src="{{combatRoleImage}}" alt="{{system.details.combatRole}}" {{createTippy title=(lookup config.combatRoles system.details.combatRole) subtitle=(lookup config.combatRolesDescriptions system.details.combatRole)}}>
+                <img class="combat-role" src="{{combatRoleImage}}" alt="{{lookup config.combatRoles system.details.combatRole}}" {{createTippy title=(lookup config.combatRoles system.details.combatRole) subtitle=(lookup config.combatRolesDescriptions system.details.combatRole)}}>
                 {{/if}}
             </div>
             <ul class="summary-row1">
