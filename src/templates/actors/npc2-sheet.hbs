@@ -13,7 +13,7 @@
                     <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "SFRPG.NPCSheet.Header.NamePlaceHolderText"}}" />
                 </h1>
 
-                <div class="charlevel">
+                <div class="charlevel" {{#if combatRoleImage}}style="padding-right: 0;"{{/if}}>
                     <div class="level" {{createTippy title="CR" subtitle="@details.cr<br/>@details.level.value"}}>
                         <label>CR</label>
                         <input name="system.details.cr" type="text" value="{{labels.cr}}" placeholder="1" />
@@ -22,6 +22,9 @@
                         <span>{{system.details.xp.value}} XP</span>
                     </div>
                 </div>
+                {{#if combatRoleImage}}
+                <img class="combat-role" src="{{combatRoleImage}}" alt="{{system.details.combatRole}}" {{createTippy title=(lookup config.combatRoles system.details.combatRole) subtitle=(lookup config.combatRolesDescriptions system.details.combatRole)}}>
+                {{/if}}
             </div>
             <ul class="summary-row1">
                 <li>

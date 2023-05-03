@@ -1,4 +1,17 @@
 <div class="traits">
+    {{#if isNPC}}
+        <div class="form-group">
+        <label>{{localize "SFRPG.CombatRoles.Label"}}</label>
+        <select class="npc-combat-role" name="system.details.combatRole">
+            {{#select system.details.combatRole}}
+                <option value=""></option>
+            {{#each config.combatRoles as |label role|}}
+                <option value="{{role}}">{{label}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+    </div>
+    {{/if}}
     <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.Size"}}</strong><br/>@system.traits.size">
         <label>{{localize "SFRPG.Size"}}</label>
         {{#if (not isDrone)}}
@@ -42,7 +55,7 @@
         <label>{{localize "SFRPG.NumberOfArms"}}</label>
         <input type="text" name="system.attributes.arms" value="{{system.attributes.arms}}" placeholder="2" />
     </div>
-    
+
     {{#if isCharacter}}
     <div class="form-group" {{createTippy title="SFRPG.ActorSheet.Traits.MagicalItems" subtitle="@magicalItems.worn<br/>@magicalItems.max" tooltips=system.magicalItems.tooltip}}>
         <label>{{localize "SFRPG.ActorSheet.Traits.MagicalItems"}}</label>
@@ -74,7 +87,7 @@
         <span class="value">{{system.attributes.weaponMounts.ranged.max}}</span>
     </div>
     {{/if}}
-    
+
     {{#if isDrone}}
     <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.SFRPG.DroneSheet.Traits.ArmorSlots"}}</strong><br/>@system.attributes.armorSlots.current<br/>@system.attributes.armorSlots.max">
         <label>{{localize "SFRPG.DroneSheet.Traits.ArmorSlots"}}</label>
@@ -95,7 +108,7 @@
         <a class="trait-selector" data-options="languages"><i class="fas fa-edit"></i></a>
     </div>
     {{/if}}
-    
+
     {{#if (not isDrone)}}
     <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.SpellResistance"}}</strong><br/>@system.traits.sr">
         <label>{{localize "SFRPG.SpellResistance"}}</label>
@@ -107,7 +120,7 @@
         <span class="value">{{system.traits.spellResistance.value}}</span>
     </div>
     {{/if}}
-    
+
     <div class="form-group damage-reduction" {{createTippy title="SFRPG.Damage.Reduction" subtitle="@traits.damageMitigation.damageReductionFirst.value<br/>@traits.damageMitigation.damageReductionFirst.negatedBy" tooltips=system.traits.damageMitigation.damageReductionTooltip}}>
         <label>{{localize "SFRPG.Damage.Reduction"}}</label>
         {{#if system.traits.damageMitigation.damageReductionFirst}}
@@ -216,7 +229,7 @@
         <input type="text" name="system.attributes.baseSpellDC.base" value="{{system.attributes.baseSpellDC.base}}" placeholder="0"/>
     </div>
     {{/if}}
-    
+
     {{#if (not isDrone)}}
     <div class="form-group ">
         <label>{{localize "SFRPG.SpecialTraits"}}</label>
