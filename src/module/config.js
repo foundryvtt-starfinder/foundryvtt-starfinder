@@ -1109,6 +1109,24 @@ SFRPG.npctypes = {
     "vermin": "Vermin"
 };
 
+SFRPG.combatRoles = {
+    "combatant": "SFRPG.CombatRoles.Combatant",
+    "expert": "SFRPG.CombatRoles.Expert",
+    "spellcaster": "SFRPG.CombatRoles.Spellcaster"
+};
+
+SFRPG.combatRolesDescriptions = {
+    "combatant": "SFRPG.CombatRoles.Descriptions.Combatant",
+    "expert": "SFRPG.CombatRoles.Descriptions.Expert",
+    "spellcaster": "SFRPG.CombatRoles.Descriptions.Spellcaster"
+};
+
+SFRPG.combatRoleImages = {
+    "combatant": "systems/sfrpg/images/cup/gameplay/combatant.webp",
+    "expert": "systems/sfrpg/images/cup/gameplay/expert.webp",
+    "spellcaster": "systems/sfrpg/images/cup/gameplay/spellcaster.webp"
+};
+
 /* --------------------------------*
  * Starship properties and values *
  *--------------------------------*/

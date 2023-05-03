@@ -284,6 +284,8 @@ Hooks.once("i18nInit", () => {
         "augmentationTypes",
         "babProgression",
         "capacityUsagePer",
+        "combatRoles",
+        "combatRolesDescriptions",
         "conditionTypes",
         "consumableTypes",
         "containableTypes",
