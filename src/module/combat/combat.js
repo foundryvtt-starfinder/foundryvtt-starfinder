@@ -946,7 +946,6 @@ export class CombatSFRPG extends Combat {
         } else {
             // Find the CR value of the remaining XP, without going over
             for (let [CR, XProw] of Object.entries(CRTable)) {
-                console.log(CR, remainingXP, XProw.nextXP);
                 if (remainingXP < XProw.nextXP) {
                     if (remainingXP >= XProw.totalXP) {
                         return CR;
