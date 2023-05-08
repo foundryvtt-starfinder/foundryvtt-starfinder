@@ -6,7 +6,7 @@ export class ActorMovementConfig extends DocumentSheet {
 
     /** @override */
     static get defaultOptions() {
-        return mergeObject(super.defaultOptions, {
+        return foundry.utils.mergeObject(super.defaultOptions, {
             classes: ["sfrpg"],
             template: "systems/sfrpg/templates/apps/movement-config.hbs",
             width: 300,
@@ -25,9 +25,9 @@ export class ActorMovementConfig extends DocumentSheet {
 
     /** @override */
     getData(options) {
-        const sourceMovement = getProperty(this.document._source, "system.attributes.speed") || {};
+        const sourceMovement = foundry.utils.getProperty(this.document._source, "system.attributes.speed") || {};
         const data = {
-            speed: deepClone(sourceMovement)
+            speed: foundry.utils.deepClone(sourceMovement)
         };
         return this.document;
     }

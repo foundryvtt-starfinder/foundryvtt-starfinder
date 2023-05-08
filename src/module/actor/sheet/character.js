@@ -96,6 +96,14 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
                 item.config.capacityMaximum = item.getMaxCapacity();
             }
 
+            if (item.config.hasAttack) {
+                this._prepareAttackString(item);
+            }
+
+            if (item.config.hasDamage) {
+                this._prepareDamageString(item);
+            }
+
             if (item.type === "actorResource") {
                 this._prepareActorResource(item, actorData);
             }
@@ -191,7 +199,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
                 hasActions: true,
                 dataset: { type: "feat", "activation.type": "action" }
             },
-            ...deepClone(CONFIG.SFRPG.featureCategories),
+            ...duplicate(CONFIG.SFRPG.featureCategories),
             resources: {
                 category: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"),
                 items: [],

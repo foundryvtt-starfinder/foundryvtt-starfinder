@@ -1,7 +1,9 @@
 import SFRPGCustomChatMessage from "./chat/chatbox.js";
 import { SFRPG } from "./config.js";
+import { SFRPGModifierType } from "./modifiers/types.js";
 import RollContext from "./rolls/rollcontext.js";
 import RollTree from "./rolls/rolltree.js";
+import StackModifiers from "./rules/closures/stack-modifiers.js";
 
 // Type definitions for documentation.
 /**
@@ -211,7 +213,7 @@ export class DiceSFRPG {
         const formula = parts.map(partMapper).join(" + ");
 
         const tree = new RollTree(options);
-        return await tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormula) => {
+        return await tree.buildRoll(formula, rollContext, async (button, rollMode, unusedFinalFormula, node, rollMods, bonus = null) => {
             if (button === "cancel") {
                 if (onClose) {
                     onClose(null, null, null);
@@ -226,8 +228,10 @@ export class DiceSFRPG {
                 dieRoll = "2d20kh";
             }
 
-            finalFormula.finalRoll = dieRoll + " + " + finalFormula.finalRoll;
-            finalFormula.formula = dieRoll + " + " + finalFormula.formula;
+            const finalFormula = await this._calcStackingFormula(node, rollMods, bonus);
+
+            finalFormula.finalRoll = `${dieRoll} + ${finalFormula.finalRoll}`;
+            finalFormula.formula = `${dieRoll} + ${finalFormula.formula}`;
             finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
                 .trim();
             finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
@@ -275,7 +279,8 @@ export class DiceSFRPG {
                     breakdown: preparedRollExplanation,
                     htmlData: htmlData,
                     rollType: "normal",
-                    rollOptions: rollOptions
+                    rollOptions: rollOptions,
+                    rollDices: finalFormula.rollDices
                 };
 
                 try {
@@ -297,7 +302,7 @@ export class DiceSFRPG {
                     flags: {rollOptions: rollOptions}
                 };
 
-                messageData.content = await roll.render({ htmlData: htmlData });
+                messageData.content = await roll.render({ htmlData: htmlData, customTooltip: finalFormula.rollDices });
                 if (rollOptions?.actionTarget) {
                     messageData.content = DiceSFRPG.appendTextToRoll(messageData.content, game.i18n.format("SFRPG.Items.Action.ActionTarget.ChatMessage", {actionTarget: rollOptions.actionTargetSource[rollOptions.actionTarget]}));
                 }
@@ -375,7 +380,9 @@ export class DiceSFRPG {
         if (dialogOptions?.skipUI) {
             /** @type {RollResult|null} */
             let result = null;
-            await tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormula) => {
+            await tree.buildRoll(formula, rollContext, async (button, rollMode, unusedFinalFormula, node, rollMods, bonus = null) => {
+                const finalFormula = await this._calcStackingFormula(node, rollMods, bonus);
+
                 if (mainDie) {
                     let dieRoll = "1" + mainDie;
                     if (mainDie === "d20") {
@@ -386,8 +393,8 @@ export class DiceSFRPG {
                         }
                     }
 
-                    finalFormula.finalRoll = dieRoll + " + " + finalFormula.finalRoll;
-                    finalFormula.formula = dieRoll + " + " + finalFormula.formula;
+                    finalFormula.finalRoll = `${dieRoll} + ${finalFormula.finalRoll}`;
+                    finalFormula.formula = `${dieRoll} + ${finalFormula.formula}`;
                 }
 
                 const rollObject = Roll.create(finalFormula.finalRoll, { breakdown, tags, skipUI: true });
@@ -407,11 +414,13 @@ export class DiceSFRPG {
             return result;
         } else {
             return new Promise((resolve) => {
-                tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormula) => {
+                tree.buildRoll(formula, rollContext, async (button, rollMode, unusedFinalFormula, node, rollMods, bonus = null) => {
                     if (button === "cancel") {
                         resolve(null);
                         return;
                     }
+
+                    const finalFormula = await this._calcStackingFormula(node, rollMods, bonus);
 
                     if (mainDie) {
                         let dieRoll = "1" + mainDie;
@@ -422,9 +431,8 @@ export class DiceSFRPG {
                                 dieRoll = "2d20kh";
                             }
                         }
-
-                        finalFormula.finalRoll = dieRoll + " + " + finalFormula.finalRoll;
-                        finalFormula.formula = dieRoll + " + " + finalFormula.formula;
+                        finalFormula.finalRoll = `${dieRoll} + ${finalFormula.finalRoll}`;
+                        finalFormula.formula = `${dieRoll} + ${finalFormula.formula}`;
                     }
 
                     finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
@@ -481,7 +489,7 @@ export class DiceSFRPG {
         };
 
         const getDamageTypeForPart = (part) => {
-            if (part.types && !isEmpty(part.types)) {
+            if (part.types && !foundry.utils.isEmpty(part.types)) {
                 const filteredTypes = Object.entries(part.types).filter(type => type[1]);
                 const obj = { types: [], operator: "" };
 
@@ -497,7 +505,7 @@ export class DiceSFRPG {
 
         /** @type {DamageType[]} */
         let damageTypes = parts.reduce((acc, cur) => {
-            if (cur.types && !isEmpty(cur.types)) {
+            if (cur.types && !foundry.utils.isEmpty(cur.types)) {
                 const filteredTypes = Object.entries(cur.types).filter(type => type[1]);
                 const obj = { types: [], operator: "" };
 
@@ -533,7 +541,7 @@ export class DiceSFRPG {
                 if (part.isDamageSection) {
                     damageSections.push(part);
 
-                    const additionalOptions = deepClone(options);
+                    const additionalOptions = duplicate(options);
                     additionalOptions.skipUI = true;
 
                     const tempTree = new RollTree(additionalOptions);
@@ -588,7 +596,7 @@ export class DiceSFRPG {
             let damageTypeString = "";
             const tempParts = usedParts.reduce((arr, curr) => {
                 let obj = { formula: curr.formula, damage: 0, types: [], operator: curr.operator };
-                if (curr.types && !isEmpty(curr.types)) {
+                if (curr.types && !foundry.utils.isEmpty(curr.types)) {
                     for (const [key, isEnabled] of Object.entries(curr.types)) {
                         if (isEnabled) {
                             obj.types.push(key);
@@ -671,7 +679,7 @@ export class DiceSFRPG {
             }
 
             const isCritical = (button === "critical");
-            let finalFlavor = deepClone(flavor);
+            let finalFlavor = duplicate(flavor);
             if (isCritical) {
                 htmlData.push({ name: "is-critical", value: "true" });
                 tags.push({tag: `critical`, text: game.i18n.localize("SFRPG.Rolls.Dice.CriticalHit")});
@@ -707,7 +715,7 @@ export class DiceSFRPG {
                 if (part.partIndex) {
                     finalFlavor += ` (${part.partIndex})`;
                 }
-                // const originalTypes = deepClone(damageTypes);
+                // const originalTypes = duplicate(damageTypes);
                 // damageTypes = [getDamageTypeForPart(part)];
                 // console.log([originalTypes, damageTypes]);
             }
@@ -982,6 +990,107 @@ export class DiceSFRPG {
         }
 
         return resolveResult;
+    }
+
+    /**
+     * returns the rootNode with removed childnodes that match the modifier.
+     * @param {RollNode} rootNode
+     * @param {Object} modifier
+     */
+    static _removeModifierNodes(rootNode, modifier) {
+        let node = rootNode;
+        const childKeys = Object.keys(node.childNodes);
+        for (let nodeI = 0; nodeI < childKeys.length; nodeI++) {
+            const childNode = node.childNodes[childKeys[nodeI]];
+            if (modifier._id && (childNode.referenceModifier?._id === modifier._id)) {
+                delete node.childNodes[childKeys[nodeI]];
+            } else if (Object.keys(childNode.childNodes).length > 0) {
+                node = this._removeModifierNodes(childNode, modifier).parentNode;
+            }
+        }
+        return node;
+    }
+
+    /**
+     * Calculates the final formula used for rolls with applied stacking of the modifiers
+     * @param {RollNode} node - the Rootnode which is used for the roll
+     * @param {Array} rollMods - all modifiers applied to this roll (unstacked)
+     * @param {Number} bonus - the situational bonus for this roll
+     * @returns {Object} finalFormula Object: {finalRoll: String, formula: String}
+     */
+    static async _calcStackingFormula(node, rollMods, bonus = null) {
+        let rootNode = node;
+
+        let stackModifiers = new StackModifiers();
+        const stackedMods = await stackModifiers.processAsync(rollMods.filter(mod => {
+            if (mod.enabled) {
+                rootNode = this._removeModifierNodes(rootNode, mod);
+                return true;
+            }
+        }));
+
+        let rollString = '';
+        let formulaString = '';
+        const rollDices = [];
+        const stackedModsArray = Object.keys(stackedMods);
+        for (let stackModsI = 0; stackModsI < stackedModsArray.length; stackModsI++) {
+            const stackModifier = stackedMods[stackedModsArray[stackModsI]];
+            if (stackModifier === null || stackModifier === undefined) {
+                continue;
+            }
+            if (stackModifier instanceof Array) {
+                for (let stackModifierI = 0; stackModifierI < stackModifier.length; stackModifierI++) {
+                    const modifier = stackModifier[stackModifierI];
+                    rollString += `${modifier.max.toString()}+`;
+                    // TODO:
+                    /*
+                        add title to the span f.e.:
+                        title="${game.i18n.format(localizationKey, type: modifier.type.capitalize(),mod: modifier.max.signedString(),source: modifier.name)}"
+                        but in order to do that we will need the localization key for the current modifier which we do not have at this point. Maybe we will have to pass it down from the modifier calculation lol.
+                    */
+                    if (!modifier.isDeterministic) {
+                        rollDices.push(...modifier.dices);
+                        formulaString += `${modifier.max.toString()}(${modifier.modifier})[<span>${modifier.name}</span>] + `;
+                    } else {
+                        formulaString += `${modifier.max.toString()}[<span>${modifier.name}</span>] + `;
+                    }
+                }
+            } else {
+                rollString += `${stackModifier.max.toString()}+`;
+                // TODO:
+                /*
+                    add title to the span f.e.:
+                    title="${game.i18n.format(localizationKey, type: modifier.type.capitalize(),mod: modifier.max.signedString(),source: modifier.name)}"
+                    but in order to do that we will need the localization key for the current modifier which we do not have at this point. Maybe we will have to pass it down from the modifier calculation lol.
+                */
+                if (!stackModifier.isDeterministic) {
+                    rollDices.push(...stackModifier.dices);
+                    formulaString += `${stackModifier.max.toString()}(${stackModifier.modifier})[<span>${stackModifier.name}</span>] + `;
+                } else {
+                    formulaString += `${stackModifier.max.toString()}[<span>${stackModifier.name}</span>] + `;
+                }
+            }
+        }
+
+        formulaString += bonus ? `${bonus.toString()}[<span>${game.i18n.localize("SFRPG.Rolls.Dialog.SituationalBonus")}</span>]` : '';
+
+        rollString += bonus ? `${bonus}` : '';
+        rollString = rollString.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
+            .trim();
+        rollString = rollString.endsWith("+") ? rollString.substring(0, rollString.length - 1).trim() : rollString;
+
+        const finalFormula = rootNode.resolveForRoll(0, rollMods);
+
+        finalFormula.finalRoll = rollString ? `${finalFormula.finalRoll} + ${rollString}` : finalFormula.finalRoll;
+        finalFormula.formula = formulaString ? `${finalFormula.formula} + ${formulaString}` : finalFormula.formula;
+
+        finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
+            .trim();
+        finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
+
+        finalFormula.rollDices = rollDices;
+
+        return finalFormula;
     }
 
     /**

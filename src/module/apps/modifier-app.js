@@ -21,7 +21,6 @@ export default class SFRPGModifierApplication extends FormApplication {
         let options = super.defaultOptions;
 
         return mergeObject(options, {
-            id: 'modifier-app',
             classes: ['sfrpg', 'modifier-app'],
             template: "systems/sfrpg/templates/apps/modifier-app.hbs",
             width: 400,
@@ -278,13 +277,18 @@ export default class SFRPGModifierApplication extends FormApplication {
     }
 
     async _updateModifierData(formData) {
-        const modifiers = deepClone(this.actor.system.modifiers);
+        const modifiers = duplicate(this.actor.system.modifiers);
         const modifier = modifiers.find(mod => mod._id === this.modifier._id);
 
         const formula = formData['modifier'];
         if (formula) {
-            const roll = Roll.create(formula, this.owningActor?.system || this.actor.system);
-            modifier.max = await roll.evaluate({maximize: true}).total;
+            try {
+                const roll = Roll.create(formula, this.owningActor?.system || this.actor.system);
+                modifier.max = await roll.evaluate({maximize: true}).total;
+            } catch (err) {
+                ui.notifications.error(err);
+            }
+
         } else {
             modifier.max = 0;
         }

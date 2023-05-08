@@ -29,7 +29,6 @@ export default class RollDialog extends Dialog {
      */
     constructor({ rollTree, formula, contexts, availableModifiers, mainDie, parts = [], dialogData = {}, options = {} }) {
         super(dialogData, options);
-        this.options.classes = ["sfrpg", "dialog", "roll"];
 
         this.rollTree = rollTree;
         this.formula = formula;
@@ -81,6 +80,13 @@ export default class RollDialog extends Dialog {
         return "systems/sfrpg/templates/chat/roll-dialog.hbs";
     }
 
+    static get defaultOptions() {
+        return foundry.utils.mergeObject(super.defaultOptions, {
+            classes: ["sfrpg", "dialog", "roll"],
+            width: 540
+        });
+    }
+
     async _render(...args) {
         await super._render(...args);
 
@@ -102,7 +108,7 @@ export default class RollDialog extends Dialog {
         data.rollMode = this.rollMode;
         data.rollModes = CONFIG.Dice.rollModes;
         data.additionalBonus = this.additionalBonus;
-        data.availableModifiers = deepClone(this.availableModifiers) || [];
+        data.availableModifiers = duplicate(this.availableModifiers) || [];
         data.hasModifiers = data.availableModifiers.length > 0;
         data.hasSelectors = this.contexts.selectors && this.contexts.selectors.length > 0;
         data.selectors = this.selectors;
@@ -110,22 +116,9 @@ export default class RollDialog extends Dialog {
         data.damageGroups = this.damageGroups;
 
         for (const modifier of data.availableModifiers) {
-            const allContexts = data.contexts.allContexts;
-            const mainContext = data.contexts.mainContext;
-            let context = allContexts[mainContext]?.data;
-
-            // Starships use "@ship" etc. in their formulas, so the context needs to be adjusted to skip the intermediate "data/entity" object.
-            if (["ship", ""].includes(mainContext)) {
-                context = Object.entries(allContexts).reduce((obj, i) => {
-                    const scope = i[0];
-                    const data = i[1].data;
-                    obj[scope] = data;
-                    return obj;
-                }, {});
-            }
 
             // Make a simplified roll
-            const simplerRoll = Roll.create(modifier.modifier, context).simplifiedFormula;
+            const simplerRoll = Roll.create(modifier.modifier, data.contexts.getRollData()).simplifiedFormula;
 
             if (modifier.modifier[0] === "+") modifier.modifier = modifier.modifier.slice(1);
 
@@ -145,6 +138,10 @@ export default class RollDialog extends Dialog {
             // Sign that string
             const numMod = Number(simplerRoll);
             modifier.modifier = numMod ? numMod.signedString() : simplerRoll;
+
+            if (Object.keys(CONFIG.SFRPG.modifierTypes).includes(modifier.type)) {
+                modifier.localizedType = game.i18n.localize(`${CONFIG.SFRPG.modifierTypes[modifier.type]}`);
+            }
         }
 
         if (this.parts?.length > 0) {
@@ -164,7 +161,7 @@ export default class RollDialog extends Dialog {
 
                 // Create type string out of localized parts
                 let typeString = "";
-                if (part.types && !isEmpty(part.types)) {
+                if (part.types && !foundry.utils.isEmpty(part.types)) {
                     typeString = `${(Object.entries(part.types).filter(type => type[1])
                         .map(type => SFRPG.damageTypes[type[0]])
                         .join(` & `))}`;
@@ -252,13 +249,13 @@ export default class RollDialog extends Dialog {
                 const item = container.itemId ? await actor.items.get(container.itemId) : null;
 
                 // Update modifier by ID in item
-                const containerModifiers = deepClone(item.system.modifiers);
+                const containerModifiers = duplicate(item.system.modifiers);
                 const modifierToUpdate = containerModifiers.find(x => x._id === modifier._id);
                 modifierToUpdate.enabled = modifier.enabled;
                 await item.update({ "system.modifiers": containerModifiers });
             } else {
                 // Update modifier by ID in actor
-                const containerModifiers = deepClone(actor.system.modifiers);
+                const containerModifiers = duplicate(actor.system.modifiers);
                 const modifierToUpdate = containerModifiers.find(x => x._id === modifier._id);
                 modifierToUpdate.enabled = modifier.enabled;
                 await actor.update({ "system.modifiers": containerModifiers });
@@ -274,7 +271,7 @@ export default class RollDialog extends Dialog {
         this.contexts.allContexts[selectorName] = this.contexts.allContexts[selectedValue];
 
         /** Repopulate nodes, might change modifiers because of different selector. */
-        this.availableModifiers = this.rollTree.populate();
+        this.availableModifiers = await this.rollTree.populate();
 
         this.position.height = "auto";
         this.render(false);

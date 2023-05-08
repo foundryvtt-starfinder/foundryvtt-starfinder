@@ -2,24 +2,7 @@
   "_id": "vdL7X22VnbQJAUd4",
   "name": "Excavation drill, industrial",
   "type": "weapon",
-  "augmentation": false,
-  "consumable": false,
-  "container": false,
-  "equipment": false,
-  "fusion": true,
-  "goods": false,
-  "hybrid": false,
   "img": "systems/sfrpg/icons/equipment/technological%20items/lazer-drill.webp",
-  "magic": false,
-  "shield": false,
-  "spell": false,
-  "storage": {
-    "type": "slot",
-    "affectsEncumbrance": true,
-    "amount": 6,
-    "subtype": "fusion",
-    "weightProperty": "level"
-  },
   "system": {
     "type": "",
     "ability": "str",
@@ -33,6 +16,7 @@
       "condition": "",
       "cost": 1
     },
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
       "shape": "",
@@ -76,6 +60,7 @@
           "index": 0
         }
       ],
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -106,24 +91,45 @@
         {
           "formula": "1d6",
           "operator": "",
-          "types": {}
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
         }
       ]
     },
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "3d6",
-          "operator": "",
+          "group": null,
           "types": {
-            "piercing": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": true,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>Excavation drills are a core hand tool for miners across the galaxy. Some claim that @UUID[Compendium.sfrpg.races.SaWDXnfaX24Iuuuz]{Dwarf} mining engineers poached from Ulrikka Clanholdings initially designed these drills, as Ulrikka has previously produced similar designs. @UUID[Compendium.sfrpg.races.SaWDXnfaX24Iuuuz]{Dwarf} knights have long used these drills in combat, as have gladiators, who often use them to put on bizarre and grisly shows. Utility and industrial models see extensive use in demolition and mining, while helical and volute drills are essential for some star-metal mining, where hard ore requires a tougher tool. Gyroidal drills are restricted, special-operations tools predominantly used to breach starship hulls during rescue or military boarding operations.</p>"
     },
@@ -155,6 +161,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -173,15 +180,18 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
       "harrying": false,
       "holyWater": false,
       "hybrid": false,
+      "hydrodynamic": false,
       "ignite": false,
       "indirect": false,
       "injection": false,
+      "instrumental": false,
       "integrated": false,
       "line": false,
       "living": false,
@@ -199,6 +209,7 @@
       "polymorphic": false,
       "powered": false,
       "professional": true,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
@@ -207,6 +218,7 @@
       "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
       "shatter": true,
       "shells": false,
@@ -221,6 +233,7 @@
       "thought": false,
       "throttle": false,
       "thrown": false,
+      "thruster": false,
       "trip": false,
       "two": true,
       "unbalancing": false,
@@ -230,19 +243,41 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "none",
       "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
     "source": "AP #34 pg. 44",
     "special": "",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
@@ -258,10 +293,5 @@
     },
     "weaponCategory": "uncategorized",
     "weaponType": "advancedM"
-  },
-  "technological": false,
-  "upgrade": false,
-  "vehicleAttack": false,
-  "weapon": false,
-  "weaponAccessory": false
+  }
 }

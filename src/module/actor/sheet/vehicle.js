@@ -123,9 +123,21 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         let [attacks, primarySystems, expansionBays, actorResources] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
             if (!item.config) item.config = {};
+            const hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.system.actionType) && (!["weapon", "shield"].includes(item.type) || item.system.equipped);
+            const hasDamage = item.system.damage?.parts
+                && item.system.damage.parts.length > 0
+                && (!["weapon", "shield"].includes(item.type) || item.system.equipped);
 
             if (item.type === "actorResource") {
                 this._prepareActorResource(item, actorData);
+            }
+
+            if (item.config.hasAttack || hasAttack) {
+                this._prepareAttackString(item);
+            }
+
+            if (item.config.hasDamage || hasDamage) {
+                this._prepareDamageString(item);
             }
 
             if (item.type === "weapon" || item.type === "vehicleAttack") {
@@ -294,7 +306,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         //     itemData = item.data;
         // }
 
-        return deepClone(itemData);
+        return duplicate(itemData);
     }
 
     /**
@@ -310,7 +322,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
         if (!actorId) return false;
 
-        const hangarBay = deepClone(this.actor.system.hangarBay);
+        const hangarBay = duplicate(this.actor.system.hangarBay);
 
         if (hangarBay.limit === -1 || hangarBay.actorIds.length < hangarBay.limit) {
             hangarBay.actorIds.push(actorId);
@@ -339,7 +351,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         const targetRole = event.target.dataset.role;
         if (!targetRole || !actorId) return false;
 
-        const crew = deepClone(this.actor.system.crew);
+        const crew = duplicate(this.actor.system.crew);
         const crewRole = crew[targetRole];
         const oldRole = this.actor.getCrewRoleForActor(actorId);
 
@@ -423,7 +435,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             return null;
         }
 
-        const hangarData = deepClone(this.actor.system.hangarBay);
+        const hangarData = duplicate(this.actor.system.hangarBay);
         hangarData.actorIds = hangarData.actorIds.filter(x => x !== actorId);
         await this.actor.update({
             "system.hangarBay": hangarData

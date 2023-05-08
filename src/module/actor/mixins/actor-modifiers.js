@@ -54,7 +54,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
         condition = "",
         id = null
     } = {}) {
-        const data = this._ensureHasModifiers(deepClone(this.system));
+        const data = this._ensureHasModifiers(duplicate(this.system));
         const modifiers = data.modifiers;
 
         modifiers.push(new SFRPGModifier({
@@ -92,7 +92,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
      * @param {String} id The id for the modifier to edit
      */
     editModifier(id) {
-        const modifiers = deepClone(this.system.modifiers);
+        const modifiers = duplicate(this.system.modifiers);
         const modifier = modifiers.find(mod => mod._id === id);
 
         new SFRPGModifierApplication(modifier, this).render(true);
