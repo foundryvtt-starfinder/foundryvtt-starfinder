@@ -244,7 +244,13 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
 
         features.resources.items = actorResources;
 
+        // Add appropriate items to inventory, exclude weapons that are not equipment, like unarmed strikes and natural weapons
         this.processItemContainment(itemsToProcess, function(itemType, itemData) {
+            if (itemData.item.type === "weapon") {
+                if (!itemData.item.system.isEquipment) {
+                    return;
+                }
+            }
             inventory.inventory.items.push(itemData);
         });
 
@@ -268,6 +274,8 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
             modifiers.permanent = { label: "SFRPG.ModifiersPermanentTabLabel", modifiers: permanent, dataset: { subtab: "permanent" }};
             modifiers.temporary = { label: "SFRPG.ModifiersTemporaryTabLabel", modifiers: temporary, dataset: { subtab: "temporary" }};
         }
+
+        console.log(inventory); // Debug
 
         // Assign and return
         data.inventory = inventory;
