@@ -117,9 +117,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Apply a tag if the item is a weapon that's not equipment (unarmed strike, natural attack, etc.)
         if (itemData.type === "weapon") {
-            itemData.system.NPCInventoryShow = itemData.system.isEquipment;
+            itemData.system.transferrable = itemData.system.isEquipment;
         } else {
-            itemData.system.NPCInventoryShow = true;
+            itemData.system.transferrable = true;
         }
 
         // Activated Items
