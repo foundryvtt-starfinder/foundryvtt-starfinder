@@ -43,7 +43,13 @@
 
     <ol class="item-list">
     {{#each section.items as |item iid|}}
-        {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.hbs" ../../this bigItem=true item=item.item children=item.contents}}
+        {{#if ../../isNPC}}
+            {{#if item.item.system.NPCInventoryShow}}
+                {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.hbs" ../../this bigItem=true item=item.item children=item.contents}}
+            {{/if}}
+        {{else}}
+            {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.hbs" ../../this bigItem=true item=item.item children=item.contents}}
+        {{/if}}
     {{/each}}
     </ol>
 {{/each}}
