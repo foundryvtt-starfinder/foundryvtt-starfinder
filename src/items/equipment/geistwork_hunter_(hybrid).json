@@ -1,6 +1,6 @@
 {
   "_id": "ahqfz562GJA6DjyA",
-  "name": "Geistwork hunter (Hybrid)",
+  "name": "Geistwork Hunter (Hybrid)",
   "type": "equipment",
   "img": "icons/svg/mystery-man.svg",
   "system": {
@@ -9,15 +9,17 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
       "type": "",
       "condition": "",
       "cost": 0
     },
-    "ammunitionType": "",
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": 0
@@ -44,7 +46,7 @@
       },
       "hp": {
         "max": "",
-        "value": 54
+        "value": null
       },
       "size": "medium",
       "sturdy": true
@@ -52,12 +54,13 @@
     "attuned": false,
     "bulk": "22",
     "capacity": {
-      "max": 0,
+      "max": 20,
       "value": 0
     },
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -80,6 +83,17 @@
           "amount": 2,
           "subtype": "weaponSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "ammunition"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "ammunitionSlot",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
@@ -90,8 +104,25 @@
     "damage": {
       "parts": [
         {
-          "formula": "1d10",
-          "operator": "",
+          "name": "Piercing",
+          "formula": "1d10 +(@abilities.str.mod)",
+          "group": 0,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": true,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Slashing",
+          "formula": "1d10 +(@abilities.str.mod)",
+          "group": 0,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -106,12 +137,13 @@
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p><strong>Speed&nbsp;</strong> 40 ft.</p>\n<p><strong>Strength&nbsp;</strong> 22 (+6);&nbsp;<strong>Damage&nbsp;</strong> 1d10 S or P;&nbsp;<strong>Size&nbsp;</strong> Medium</p>\n<p><strong>Capacity&nbsp;</strong> 20;&nbsp;Usage&nbsp;1/hour</p>\n<p>Marketed as a dueling frame by its Apostae-based manufacturer, Geistwork, this armor is far more suitable for performing perilous assassinations. A Geistwork hunter can use its weapon slots to mount both melee and ranged weapons, and it’s equipped with a proprietary drow stealth system that functions as a grandchild’s cloak that doesn’t occupy an upgrade slot. By spending an additional 110,000 credits, the stealth system can be upgraded to function as a @UUID[Compendium.sfrpg.equipment.bzrqNIk5eAoMQWxw]{greater grandchild's cloak} instead.</p>"
+      "value": "<p><strong>Speed&nbsp;</strong> 40 ft.</p>\n<p><strong>Strength&nbsp;</strong> 22 (+6);&nbsp;<strong>Damage&nbsp;</strong> 1d10 S or P;&nbsp;<strong>Size&nbsp;</strong> Medium</p>\n<p><strong>Capacity&nbsp;</strong> 20;&nbsp;Usage&nbsp;1/hour</p>\n<p>Marketed as a dueling frame by its Apostae-based manufacturer, Geistwork, this armor is far more suitable for performing perilous assassinations. A Geistwork hunter can use its weapon slots to mount both melee and ranged weapons, and it’s equipped with a proprietary drow stealth system that functions as a @UUID[Compendium.sfrpg.equipment.uf80igbyTFzs43EE]{Grandchild’s Cloak} that doesn’t occupy an upgrade slot. By spending an additional 110,000 credits, the stealth system can be upgraded to function as a @UUID[Compendium.sfrpg.equipment.bzrqNIk5eAoMQWxw]{Greater Grandchild's Cloak} instead.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -136,22 +168,43 @@
       "value": null
     },
     "reach": "",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": "",
       "descriptor": "negate"
     },
-    "size": "",
+    "size": "medium",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
     "source": "TR pg. 54",
-    "speed": "",
-    "strength": 0,
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
+    "speed": "40 ft.",
+    "strength": 22,
     "target": {
       "type": "",
       "value": null
     },
     "usage": {
-      "per": "",
-      "value": 0
+      "per": "hour",
+      "value": 1
     },
     "uses": {
       "max": 0,

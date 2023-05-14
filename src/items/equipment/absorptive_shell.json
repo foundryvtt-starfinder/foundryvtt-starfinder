@@ -9,14 +9,17 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
       "type": "",
       "condition": "",
       "cost": 0
     },
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": null
@@ -43,10 +46,10 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": null
       },
       "size": "medium",
-      "sturdy": false
+      "sturdy": true
     },
     "attuned": false,
     "bulk": "18",
@@ -57,6 +60,8 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
@@ -78,6 +83,17 @@
           "amount": 0,
           "subtype": "weaponSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "ammunition"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "ammunitionSlot",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
@@ -88,18 +104,30 @@
     "damage": {
       "parts": [
         {
-          "formula": "1d10",
-          "operator": "",
+          "name": "",
+          "formula": "1d10 +(@abilities.str.mod)",
+          "group": null,
           "types": {
-            "bludgeoning": true
+            "acid": false,
+            "bludgeoning": true,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>This powered armor consists of a thin frame around a central command unit (which fits around the torso for a typical wearer), covered in form-fitting plates filled with a rheopectic fluid that hardens when struck, dispersing force throughout the armor and absorbing crushing blows. Although an absorptive shell provides significant protection, the fluid-filled plates can’t support a weapon mount.</p>\n<p>Unlike many forms of powered armor which are primarily used as military combat gear, absorptive shells are also often used as safety equipment for skilled rescue workers operating in extremely hazardous conditions, ranging from areas @UUID[Compendium.sfrpg.conditions.XeRGqHVtcZ7vsgJ0]{Prone} to rockfalls, starship crashes, and vehicles that still have explosives and industrial chemicals leaking from them, to actual war zones where rescue workers may come under fire.</p>"
+      "value": "<p>This powered armor consists of a thin frame around a central command unit (which fits around the torso for a typical wearer), covered in form-fitting plates filled with a rheopectic fluid that hardens when struck, dispersing force throughout the armor and absorbing crushing blows. Although an absorptive shell provides significant protection, the fluid-filled plates can’t support a weapon mount.</p>\n<p>Unlike many forms of powered armor which are primarily used as military combat gear, absorptive shells are also often used as safety equipment for skilled rescue workers operating in extremely hazardous conditions, ranging from areas prone to rockfalls, starship crashes, and vehicles that still have explosives and industrial chemicals leaking from them, to actual war zones where rescue workers may come under fire.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -110,26 +138,49 @@
     "equipped": false,
     "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 5,
     "modifiers": [],
     "price": 3375,
     "proficient": false,
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "",
       "value": null
     },
-    "reach": "5 ft",
+    "reach": "5 ft.",
+    "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
     "size": "medium",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
     "source": "AR pg. 74",
-    "speed": "30 ft",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
+    "speed": "30 ft.",
     "strength": 18,
     "target": {
       "type": "",

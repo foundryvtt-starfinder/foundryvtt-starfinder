@@ -5,7 +5,7 @@
   "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "",
-    "ability": "",
+    "ability": "str",
     "abilityMods": {
       "parts": []
     },
@@ -19,6 +19,7 @@
     "ammunitionType": "charge",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": null
@@ -82,6 +83,17 @@
           "amount": 2,
           "subtype": "weaponSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "ammunition"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "ammunitionSlot",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
@@ -93,7 +105,8 @@
       "parts": [
         {
           "name": "",
-          "formula": "2d6",
+          "formula": "2d6 +(@abilities.str.mod)",
+          "group": null,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -101,8 +114,8 @@
             "electricity": false,
             "fire": false,
             "healing": false,
-            "piercing": true,
-            "slashing": false,
+            "piercing": false,
+            "slashing": true,
             "sonic": false
           }
         }
@@ -114,7 +127,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>This powered, magical armor was originally constructed in the forges of Abaddon. While primarily battery-powered, it also converts soul energy into auxiliary power. Whenever a significant enemy dies within 30 feet of an operatingoblivion chassis, the armor gains a number of soul charges equal to the dead creature’s CR. As a standard action, you can spend 10 soul charges to cast the spellsupercharge weaponon the armor’s unarmed strikes or a weapon in one of the armor’s weapon slots.</p>"
+      "value": "<p>This powered, magical armor was originally constructed in the forges of Abaddon. While primarily battery-powered, it also converts soul energy into auxiliary power. Whenever a significant enemy dies within 30 feet of an operating oblivion chassis, the armor gains a number of soul charges equal to the dead creature’s CR. As a standard action, you can spend 10 soul charges to cast the spell @UUID[Compendium.sfrpg.spells.VfGkPlxHZoxJDjX7]{Supercharge Weapon} on the armor’s unarmed strikes or a weapon in one of the armor’s weapon slots.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -146,6 +159,10 @@
       "descriptor": "negate"
     },
     "size": "large",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
     "source": "DC pg. 52",
     "specialMaterials": {
       "abysium": false,
@@ -157,6 +174,7 @@
       "inubrix": false,
       "khefak": false,
       "noqual": false,
+      "nyblantine": false,
       "purplecores": false,
       "siccatite": false,
       "silver": false,

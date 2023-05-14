@@ -9,14 +9,17 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
       "type": "",
       "condition": "",
       "cost": 0
     },
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": null
@@ -43,10 +46,10 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": null
       },
-      "size": "medium",
-      "sturdy": false
+      "size": "large",
+      "sturdy": true
     },
     "attuned": false,
     "bulk": "35",
@@ -57,6 +60,8 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
@@ -78,6 +83,17 @@
           "amount": 2,
           "subtype": "weaponSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "ammunition"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "ammunitionSlot",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
@@ -88,16 +104,44 @@
     "damage": {
       "parts": [
         {
-          "formula": "3d6",
-          "operator": "",
+          "name": "Normal",
+          "formula": "3d6 +(@abilities.str.mod)",
+          "group": 0,
           "types": {
-            "bludgeoning": true
+            "acid": false,
+            "bludgeoning": true,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": true,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Bladed Strike",
+          "formula": "4d8 +(@abilities.str.mod)",
+          "group": 0,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": true,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>Travelers on alien worlds must be prepared to confront a variety of difficult environments. This long-range powered armor resembles a humanoid torso atop several bristly metal tendrils ending in sharp, grasping claws. The armor has comfortable seating and a supply of nutritious paste delivered intravenously; while wearing an explorer’s cradle, you do not need to eat or drink. As a standard action, you can extend and reshape the tentacles into a variety of forms resembling limbs, fins, or wings, gaining one of the following abilities until you next rearrange the tentacles.</p>\n<p><strong>Bladed Strikes:&nbsp;</strong> The damage dealt by this armor increases to 4d8 slashing damage.</p>\n<p><strong>Climbing Claws:&nbsp;</strong> You gain a climb speed of 20 feet.</p>\n<p><strong>Creeping Legs:</strong>&nbsp;Your movement is not slowed by difficult terrain, although you still cannot run or charge through difficult terrain.</p>\n<p><strong>Fluttering Wings:</strong>&nbsp;The tentacles splay out behind you and form connective membranes to create wings, granting you a fly speed of 20 feet with clumsy maneuverability.</p>\n<p><strong>Undulating Tendrils:&nbsp;</strong> You gain a swim speed of 20 feet.</p>"
     },
@@ -110,11 +154,13 @@
     "equipped": false,
     "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 14,
     "modifiers": [],
     "price": 79000,
     "proficient": false,
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
@@ -122,15 +168,36 @@
       "value": null
     },
     "reach": "10 ft",
+    "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
     "size": "large",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
     "source": "AR pg. 75",
-    "speed": "30 feet",
-    "strength": 23,
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
+    "speed": "30 ft., climb 20 ft., fly 20 ft. (clumsy), swim 20ft.",
+    "strength": 26,
     "target": {
       "type": "",
       "value": null

@@ -1,22 +1,25 @@
 {
   "_id": "3aLrZ6DeozRiqpIN",
-  "name": "Cargo hauler",
+  "name": "Cargo Hauler",
   "type": "equipment",
   "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "str",
     "abilityMods": {
       "parts": []
     },
-    "actionType": "",
+    "actionTarget": "kac",
+    "actionType": "mwak",
     "activation": {
       "type": "",
       "condition": "",
       "cost": 0
     },
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": 0
@@ -43,9 +46,9 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": null
       },
-      "size": "medium",
+      "size": "large",
       "sturdy": true
     },
     "attuned": false,
@@ -57,6 +60,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -79,6 +83,17 @@
           "amount": 0,
           "subtype": "weaponSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "ammunition"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "ammunitionSlot",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
@@ -87,14 +102,32 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "",
+          "formula": "3d10 +(@abilities.str.mod)",
+          "group": null,
+          "types": {
+            "acid": false,
+            "bludgeoning": true,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>Similar in appearance to a cargo lifter, a cargo hauler consists of sturdy legs or treads supporting a basic metal frame. Large gripping appendages allow the user to lift and transport large crates and other bulky pieces of cargo. A cargo hauler isn’t designed to use weapons and takes a –2 penalty to all attack rolls. It can carry 10 bulk more than normal for its Strength score without becoming encumbered or overburdened.</p>\n<h2>Powered Armor</h2>\n<p>Unlike light and heavy armor, powered armor requires its own battery, and comes with a fully charged battery at purchase. Powered armor uses the same type of batteries as other items, including charged weapons, and the battery for a suit of powered armor can be recharged as normal using a generator or recharging station (see page 234), or it can be replaced with a new battery when spent (see Table 7–9: Ammunition for battery pricing).</p>\n<h3>Entering and Exiting</h3>\n<p>Getting into or exiting a suit of powered armor requires a full action. Unless noted otherwise, a suit of powered armor has an electronic lock preventing anyone from opening it without knowing the passcode. The passcode can be determined with a successful Computers check (DC = 15 + double the armor’s level).</p>\n<h3>Powered Armor Proficiency</h3>\n<p>Characters can gain proficiency with powered armor by taking the Powered Armor Proficiency feat (see page 160) or at 5th level through the soldier’s guard fighting style. Lacking proficiency in powered armor comes with more significant drawbacks than with other types of armor. If you are wearing powered armor with which you are not proficient, you take a –4 penalty to both EAC and KAC, you are always flat-footed and off-target, and you move at half speed. If the armor has a special form of movement (such as a fly speed), you cannot use that movement.</p>"
+      "value": "<p>Similar in appearance to a cargo lifter, a cargo hauler consists of sturdy legs or treads supporting a basic metal frame. Large gripping appendages allow the user to lift and transport large crates and other bulky pieces of cargo. A cargo hauler isn’t designed to use weapons and takes a –2 penalty to all attack rolls. It can carry 10 bulk more than normal for its Strength score without becoming @UUID[Compendium.sfrpg.conditions.OwZA6flUQPH0jPA0]{Encumbered} or @UUID[Compendium.sfrpg.conditions.11k3ObUIXEYFGrg9]{Overburdened}.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -107,10 +140,27 @@
     "identified": true,
     "isActive": null,
     "level": 8,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "0f9375d0-bf32-4250-979c-3babfdeead1d",
+        "name": "Cargo Hauler",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-attacks",
+        "enabled": true,
+        "max": -2,
+        "modifier": "-2",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "price": 9500,
     "proficient": false,
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
@@ -118,15 +168,36 @@
       "value": null
     },
     "reach": "",
+    "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "size": "large",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
     "source": "AP #38 pg. 55",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "speed": "20 ft.",
-    "strength": 7,
+    "strength": 24,
     "target": {
       "type": "",
       "value": null

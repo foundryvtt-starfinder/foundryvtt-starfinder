@@ -9,15 +9,17 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
       "type": "",
       "condition": "",
       "cost": 0
     },
-    "ammunitionType": "",
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": 0
@@ -52,12 +54,13 @@
     "attuned": false,
     "bulk": "25",
     "capacity": {
-      "max": 0,
+      "max": 20,
       "value": 0
     },
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -80,6 +83,17 @@
           "amount": 2,
           "subtype": "weaponSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "ammunition"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "ammunitionSlot",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
@@ -90,8 +104,9 @@
     "damage": {
       "parts": [
         {
-          "formula": "4d6",
-          "operator": "",
+          "name": "Piercing",
+          "formula": "4d6 +(@abilities.str.mod)",
+          "group": 0,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -100,18 +115,35 @@
             "fire": false,
             "healing": false,
             "piercing": true,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Slashing",
+          "formula": "4d6 +(@abilities.str.mod)",
+          "group": 0,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
             "slashing": true,
             "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p><strong>Speed</strong>&nbsp;30 ft., <strong>fly</strong> 40 ft. (poor)</p>\n<p><strong>Strength&nbsp;</strong> 26 (+8);&nbsp;<strong>Damage&nbsp;</strong> 4d6 S or P;&nbsp;<strong>Size&nbsp;</strong> Medium</p>\n<p><strong>Capacity&nbsp;</strong> 20;&nbsp;<strong>Usage&nbsp;</strong> 1/hour</p>\n<p>Inspired by the angel frame, devaplate is a purely technological wonder. Its featureless faceplate provides a sophisticated heads-up display that allows the wearer to see as if they possessed darkvision 120 ft. and low-light vision, includes an integrated @UUID[Compendium.sfrpg.equipment.sBXU59RIx5BRkrbN]{MedObserve} armor upgrade, and grants a +2 circumstance bonus on saving throws to resist harmful visual effects. Devaplate’s specialized shielding grants the wearer resistance 10 against acid, cold, electricity, fire, and positive and negative energy damage. The armor’s user-monitoring systems detect when the wearer is poisoned and auto-inject counteragents, granting a +2 enhancement bonus to saves against @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{poison}. Finally, while the wearer is not using the armor’s fly speed, they can angle the suit’s wings to project defensive fields and deflect projectiles, acting as an integrated @UUID[Compendium.sfrpg.equipment.zYYCYrG9KKD1hzSe]{titan shield} armor upgrade.</p>"
+      "value": "<p><strong>Speed</strong>&nbsp;30 ft., <strong>fly</strong> 40 ft. (poor)</p>\n<p><strong>Strength&nbsp;</strong> 26 (+8);&nbsp;<strong>Damage&nbsp;</strong> 4d6 S or P;&nbsp;<strong>Size&nbsp;</strong> Medium</p>\n<p><strong>Capacity&nbsp;</strong> 20;&nbsp;<strong>Usage&nbsp;</strong> 1/hour</p>\n<p>Inspired by the angel frame, devaplate is a purely technological wonder. Its featureless faceplate provides a sophisticated heads-up display that allows the wearer to see as if they possessed @UUID[Compendium.sfrpg.rules.rX5rK6UWAIOeeipl.JournalEntryPage.p0o9tmWtKZ0qy8DI#darkvision]{Darkvision} 120 ft. and @UUID[Compendium.sfrpg.rules.rX5rK6UWAIOeeipl.JournalEntryPage.p0o9tmWtKZ0qy8DI#low-light-vision]{Low-Light Vision}, includes an integrated @UUID[Compendium.sfrpg.equipment.sBXU59RIx5BRkrbN]{MedObserve} armor upgrade, and grants a +2 circumstance bonus on saving throws to resist harmful visual effects. Devaplate’s specialized shielding grants the wearer resistance 10 against acid, cold, electricity, fire, and positive and negative energy damage. The armor’s user-monitoring systems detect when the wearer is poisoned and auto-inject counteragents, granting a +2 enhancement bonus to saves against @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Poison}. Finally, while the wearer is not using the armor’s fly speed, they can angle the suit’s wings to project defensive fields and deflect projectiles, acting as an integrated @UUID[Compendium.sfrpg.equipment.zYYCYrG9KKD1hzSe]{Titan Shield} armor upgrade.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -119,12 +151,103 @@
       "value": null
     },
     "equippable": true,
-    "equipped": false,
+    "equipped": true,
     "formula": "",
     "identified": true,
     "isActive": null,
     "level": 18,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "d9ee24d8-2767-4c77-b353-6d7ad5675662",
+        "name": "Energy Resistance Acid",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": true,
+        "max": 10,
+        "modifier": "10",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "acid"
+      },
+      {
+        "_id": "45b64533-050b-4c6e-97c9-11a0235b6652",
+        "name": "Energy Resistance Cold",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": true,
+        "max": 10,
+        "modifier": "10",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "cold"
+      },
+      {
+        "_id": "d2f877c3-d3d6-4631-a70a-02ef4bb8f8e2",
+        "name": "Energy Resistance Electricity",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": true,
+        "max": 10,
+        "modifier": "10",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "electricity"
+      },
+      {
+        "_id": "e4e63010-0761-4417-a9fb-3e7b13e383b1",
+        "name": "Energy Resistance Fire",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": true,
+        "max": 10,
+        "modifier": "10",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "fire"
+      },
+      {
+        "_id": "f8892cf8-6d7a-4479-8e8c-6c1428bb5b1e",
+        "name": "Devaplate vs Harmful Visual Effects",
+        "type": "circumstance",
+        "condition": "",
+        "effectType": "saves",
+        "enabled": true,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "Resist Harmful Visual Effects",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "9196f1c7-748b-443a-8671-0808fe9bec80",
+        "name": "Devaplate vs Poison",
+        "type": "enhancement",
+        "condition": "",
+        "effectType": "saves",
+        "enabled": true,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "Saves against Poison",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "price": 424000,
     "proficient": false,
     "quantity": 1,
@@ -136,22 +259,43 @@
       "value": null
     },
     "reach": "",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": "",
       "descriptor": "negate"
     },
-    "size": "",
+    "size": "medium",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
     "source": "TR pg. 53",
-    "speed": "",
-    "strength": 0,
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
+    "speed": "30 ft., fly 40ft. (clumsy)",
+    "strength": 26,
     "target": {
       "type": "",
       "value": null
     },
     "usage": {
-      "per": "",
-      "value": 0
+      "per": "hour",
+      "value": 1
     },
     "uses": {
       "max": 0,

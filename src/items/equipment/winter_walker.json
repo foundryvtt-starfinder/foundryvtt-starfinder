@@ -9,14 +9,17 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
       "type": "",
       "condition": "",
       "cost": 0
     },
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": null
@@ -43,10 +46,10 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": null
       },
-      "size": "medium",
-      "sturdy": false
+      "size": "large",
+      "sturdy": true
     },
     "attuned": false,
     "bulk": "34",
@@ -57,6 +60,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -79,6 +83,17 @@
           "amount": 2,
           "subtype": "weaponSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "ammunition"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "ammunitionSlot",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
@@ -89,20 +104,30 @@
     "damage": {
       "parts": [
         {
-          "formula": "2d6",
-          "operator": "",
+          "name": "",
+          "formula": "2d6 +(@abilities.str.mod)",
+          "group": null,
           "types": {
-            "piercing": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": true,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>The thick legs of this heavily insulated armor end in short retractable spikes, allowing you to easily anchor yourself to most surfaces. You gain a +2 bonus to your AC when resisting bull rush, reposition, and trip combat maneuvers as long as you are standing on the ground. You and the armor are immune to cold damage and cold environments, even when your @UUID[Compendium.sfrpg.rules.WP7hddXW4mLXXXOg]{Environmental protections} are not active. Your movement is not slowed by icy surfaces, and the DCs of Acrobatics checks you attempt on such surfaces do not increase.</p>"
+      "value": "<p>The thick legs of this heavily insulated armor end in short retractable spikes, allowing you to easily anchor yourself to most surfaces. You gain a +2 bonus to your AC when resisting bull rush, reposition, and trip combat maneuvers as long as you are standing on the ground. You and the armor are immune to cold damage and @UUID[Compendium.sfrpg.rules.SfkuzH5kxSAmG4nv.JournalEntryPage.n461i9lDXw303SiY#cold-dangers]{Cold Environments}, even when your @UUID[Compendium.sfrpg.rules.WP7hddXW4mLXXXOg.JournalEntryPage.8bxhPYw9heXqKHYD#environmental-protections]{Environmental Protections} are not active. Your movement is not slowed by icy surfaces, and the DCs of Acrobatics checks you attempt on such surfaces do not increase.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -119,21 +144,43 @@
     "price": 52100,
     "proficient": false,
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "",
       "value": null
     },
-    "reach": "10 ft",
+    "reach": "10 ft.",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": "",
       "descriptor": "negate"
     },
     "size": "large",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
     "source": "AR pg. 79",
-    "speed": "30 feet",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
+    "speed": "",
     "strength": 26,
     "target": {
       "type": "",

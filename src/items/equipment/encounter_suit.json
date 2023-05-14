@@ -9,14 +9,17 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
       "type": "",
       "condition": "",
       "cost": 0
     },
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": null
@@ -26,7 +29,7 @@
       "acp": -4,
       "dex": 3,
       "eac": 5,
-      "kac": 7,
+      "kac": 5,
       "speedAdjust": 0
     },
     "attackBonus": 0,
@@ -43,10 +46,10 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": null
       },
       "size": "medium",
-      "sturdy": false
+      "sturdy": true
     },
     "attuned": false,
     "bulk": "10",
@@ -57,6 +60,8 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
@@ -78,6 +83,17 @@
           "amount": 0,
           "subtype": "weaponSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "ammunition"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "ammunitionSlot",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
@@ -88,18 +104,30 @@
     "damage": {
       "parts": [
         {
-          "formula": "1d6",
-          "operator": "",
+          "name": "",
+          "formula": "1d6 +(@abilities.str.mod)",
+          "group": null,
           "types": {
-            "bludgeoning": true
+            "acid": false,
+            "bludgeoning": true,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>This armor is made of rubbery blue material grown by barathu conglomerates. It's most popular among early-stage barathus who are not yet as skilled at adapting to various environments.</p>\n<p>The armors was developed by and designed for barathus; as such, they are highly adjustable, easily accommodating barathus’ ever-changing physiology. Reduce the DC for Engineering checks to adjust these armors by 5; if you pay a professional to adjust the armor instead of doing so yourself, the cost is 5% of the armor’s purchase price.</p>"
+      "value": "<p>This armor is made of rubbery blue material grown by barathu conglomerates. It's most popular among early-stage barathus who are not yet as skilled at adapting to various environments.</p>\n<p>The armors was developed by and designed for barathus; as such, they are highly adjustable, easily accommodating barathus’ ever-changing physiology. Reduce the DC for Engineering checks to @UUID[Compendium.sfrpg.rules.WP7hddXW4mLXXXOg.JournalEntryPage.8bxhPYw9heXqKHYD#armor-size]{Adjusting Armor} by 5; if you pay a professional to adjust the armor instead of doing so yourself, the cost is 5% of the armor’s purchase price.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -110,26 +138,49 @@
     "equipped": false,
     "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 4,
     "modifiers": [],
     "price": 2800,
     "proficient": false,
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "",
       "value": null
     },
-    "reach": "5 ft",
+    "reach": "5 ft.",
+    "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
     "size": "medium",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
     "source": "AP #29 pg. 49",
-    "speed": "25 ft",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
+    "speed": "25 ft.",
     "strength": 16,
     "target": {
       "type": "",

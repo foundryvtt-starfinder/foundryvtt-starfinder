@@ -9,14 +9,17 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "mwak",
     "activation": {
       "type": "",
       "condition": "",
       "cost": 0
     },
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": null
@@ -43,10 +46,10 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": null
       },
-      "size": "medium",
-      "sturdy": false
+      "size": "large",
+      "sturdy": true
     },
     "attuned": false,
     "bulk": "32",
@@ -57,6 +60,8 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
@@ -78,6 +83,17 @@
           "amount": 1,
           "subtype": "weaponSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "ammunition"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "ammunitionSlot",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
@@ -88,18 +104,30 @@
     "damage": {
       "parts": [
         {
-          "formula": "1d10",
-          "operator": "",
+          "name": "",
+          "formula": "1d10 +(@abilities.str.mod)",
+          "group": null,
           "types": {
-            "piercing": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": true,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>This bulky, bulbous armor is made of pressure-resistant plates with durable seals. Retractable ridges along the armor’s arms, legs, and back function as fins, providing increased mobility in most fluids. The armor grants you a swim speed and allows you to both breathe underwater and survive the pressure of thick atmospheres and great depths even when your @UUID[Compendium.sfrpg.rules.WP7hddXW4mLXXXOg]{Environmental protections} are not active.</p>"
+      "value": "<p>This bulky, bulbous armor is made of pressure-resistant plates with durable seals. Retractable ridges along the armor’s arms, legs, and back function as fins, providing increased mobility in most fluids. The armor grants you a swim speed and allows you to both breathe underwater and survive the pressure of @UUID[Compendium.sfrpg.rules.SfkuzH5kxSAmG4nv.JournalEntryPage.NOrSFYXShdxot60k#atmosphere]{Thick Atmospheres} and @UUID[Compendium.sfrpg.rules.SfkuzH5kxSAmG4nv.JournalEntryPage.Gf0dltAXIpCzjMl0#aquatic-terrain]{Great Depths} even when your @UUID[Compendium.sfrpg.rules.WP7hddXW4mLXXXOg.JournalEntryPage.8bxhPYw9heXqKHYD#environmental-protections]{Environmental Protections} are not active.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -110,11 +138,13 @@
     "equipped": false,
     "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 7,
     "modifiers": [],
     "price": 7200,
     "proficient": false,
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
@@ -122,14 +152,35 @@
       "value": null
     },
     "reach": "5 ft",
+    "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
     "size": "large",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
     "source": "AR pg. 78",
-    "speed": "20 feet, swim 30 feet",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
+    "speed": "20 ft., swim 30 ft.",
     "strength": 18,
     "target": {
       "type": "",

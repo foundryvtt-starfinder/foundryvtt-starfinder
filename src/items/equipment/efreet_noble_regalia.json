@@ -19,6 +19,7 @@
     "ammunitionType": "charge",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": null
@@ -47,7 +48,7 @@
         "max": "",
         "value": 99
       },
-      "size": "medium",
+      "size": "huge",
       "sturdy": true
     },
     "attuned": false,
@@ -82,6 +83,17 @@
           "amount": 4,
           "subtype": "weaponSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "ammunition"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "ammunitionSlot",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
@@ -92,8 +104,9 @@
     "damage": {
       "parts": [
         {
-          "name": "",
-          "formula": "4d6",
+          "name": "Slashing",
+          "formula": "4d6 +(@abilities.str.mod)",
+          "group": 0,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -101,8 +114,24 @@
             "electricity": false,
             "fire": false,
             "healing": false,
-            "piercing": true,
-            "slashing": false,
+            "piercing": false,
+            "slashing": true,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Half Fire, Half Slashing",
+          "formula": "4d6 +(@abilities.str.mod)",
+          "group": 0,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "piercing": false,
+            "slashing": true,
             "sonic": false
           }
         }
@@ -114,7 +143,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>As its name implies, sets of efreet noble regalia were originally crafted for powerful efreet on the Plane of Fire. Traditionally, the armor is decorated in shining red and gold, and has elaborate horned helms. While wearing this armor and while it still has charges remaining, you have fire resistance 20 and are immune to environmental effects related to heat. Additionally, when attacking with the armor’s unarmed strikes or with any weapon slotted into the armor, you can make half the weapon’s damage fire damage.</p>"
+      "value": "<p>As its name implies, sets of efreet noble regalia were originally crafted for powerful efreet on the Plane of Fire. Traditionally, the armor is decorated in shining red and gold, and has elaborate horned helms. While wearing this armor and while it still has charges remaining, you have fire resistance 20 and are immune to environmental effects related to @UUID[Compendium.sfrpg.rules.SfkuzH5kxSAmG4nv.JournalEntryPage.n461i9lDXw303SiY#heat-dangers]{Heat}. Additionally, when attacking with the armor’s unarmed strikes or with any weapon slotted into the armor, you can make half the weapon’s damage fire damage.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -130,7 +159,7 @@
     "modifiers": [
       {
         "_id": "c44ed057-5df4-483e-9e81-f007ba4c2667",
-        "name": "Efreet Noble Regalia",
+        "name": "Energy Resistance Fire",
         "type": "untyped",
         "condition": "",
         "effectType": "energy-resistance",
@@ -162,6 +191,10 @@
       "descriptor": "negate"
     },
     "size": "huge",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
     "source": "DC pg. 52",
     "specialMaterials": {
       "abysium": false,
@@ -173,6 +206,7 @@
       "inubrix": false,
       "khefak": false,
       "noqual": false,
+      "nyblantine": false,
       "purplecores": false,
       "siccatite": false,
       "silver": false,

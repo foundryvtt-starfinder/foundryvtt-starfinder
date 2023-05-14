@@ -1,6 +1,6 @@
 {
-  "_id": "VreCSJu55Z2H1bGf",
-  "name": "Feral Frame",
+  "_id": "t2xgY9tX53c0dTeS",
+  "name": "Aeon Guard Elite Harness",
   "type": "equipment",
   "img": "icons/svg/mystery-man.svg",
   "system": {
@@ -26,11 +26,11 @@
     },
     "armor": {
       "type": "power",
-      "acp": -4,
-      "dex": 4,
-      "eac": 21,
-      "kac": 23,
-      "speedAdjust": null
+      "acp": -3,
+      "dex": 3,
+      "eac": 19,
+      "kac": 24,
+      "speedAdjust": 0
     },
     "attackBonus": 0,
     "attributes": {
@@ -46,15 +46,15 @@
       },
       "hp": {
         "max": "",
-        "value": 57
+        "value": null
       },
-      "size": "huge",
+      "size": "large",
       "sturdy": true
     },
     "attuned": false,
-    "bulk": "50",
+    "bulk": "40",
     "capacity": {
-      "max": 100,
+      "max": 40,
       "value": 0
     },
     "chatFlavor": "",
@@ -70,7 +70,7 @@
             "weapon"
           ],
           "affectsEncumbrance": true,
-          "amount": 0,
+          "amount": 2,
           "subtype": "armorUpgrade",
           "weightProperty": "slots"
         },
@@ -80,18 +80,27 @@
             "weapon"
           ],
           "affectsEncumbrance": true,
-          "amount": 1,
+          "amount": 3,
           "subtype": "weaponSlot",
           "weightProperty": ""
         },
         {
           "type": "slot",
-          "acceptsType": [
-            "ammunition"
-          ],
+          "acceptsType": [],
           "affectsEncumbrance": true,
           "amount": 1,
           "subtype": "ammunitionSlot",
+          "weightMultiplier": 1,
+          "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "magic"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 2,
+          "subtype": "",
           "weightMultiplier": 1,
           "weightProperty": ""
         }
@@ -104,34 +113,18 @@
     "damage": {
       "parts": [
         {
-          "name": "Piercing",
-          "formula": "4d6 +(@abilities.str.mod)",
-          "group": 0,
+          "name": "",
+          "formula": "2d6 +(@abilities.str.mod)",
+          "group": null,
           "types": {
             "acid": false,
-            "bludgeoning": false,
-            "cold": false,
-            "electricity": false,
-            "fire": false,
-            "healing": false,
-            "piercing": true,
-            "slashing": false,
-            "sonic": false
-          }
-        },
-        {
-          "name": "Slashing",
-          "formula": "4d6 +(@abilities.str.mod)",
-          "group": 0,
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
+            "bludgeoning": true,
             "cold": false,
             "electricity": false,
             "fire": false,
             "healing": false,
             "piercing": false,
-            "slashing": true,
+            "slashing": false,
             "sonic": false
           }
         }
@@ -143,11 +136,11 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p><strong>Speed&nbsp;</strong> 50 ft., <strong>burrow</strong> 20 ft., <strong>climb</strong> 40 ft.</p>\n<p><strong>Strength&nbsp;</strong> 28 (+9);&nbsp;<strong>Damage&nbsp;</strong> 4d6 S or P;&nbsp;<strong>Size&nbsp;</strong> Huge (10-ft. reach)</p>\n<p><strong>Capacity&nbsp;</strong> 100;&nbsp;<strong>Usage&nbsp;</strong> 1/minute</p>\n<p>This massive frame of curved metal and rippling carbon-fiber musculature resembles a quadrupedal predator, with sickle-clawed limbs and zero-edged fangs. Unlike other powered armor, a feral frame has no hands, and the control interface prevents the wearer from using their own hands for any other purpose. A feral frame includes an integrated @UUID[Compendium.sfrpg.equipment.nF5N6jDZcJy8Fq48]{Automated Loader} upgrade and integrated @UUID[Compendium.sfrpg.equipment.Bq9j3Y6WL5F9yjgb]{Juggernaut Boosters} upgrade, neither of which count against the feral frame’s carried bulk.</p>"
+      "value": "<p><span>The Star Empire equips elite Aeon Guard units with powered armor designed for extensive field operations and customized to include slots for a pair of aeon stones. Soldiers in these units form the frontline in major assaults and serve as rallying points for less well-equipped troops forced to retreat.</span></p>\n<p><span><em>The 2 magic item slots can be used only to hold aeon stones.</em></span></p>"
     },
     "descriptors": [],
     "duration": {
-      "units": "",
+      "units": "text",
       "value": null
     },
     "equippable": true,
@@ -155,9 +148,9 @@
     "formula": "",
     "identified": true,
     "isActive": null,
-    "level": 14,
+    "level": 15,
     "modifiers": [],
-    "price": 75000,
+    "price": 125000,
     "proficient": false,
     "quantity": 1,
     "quantityPerPack": 1,
@@ -174,12 +167,12 @@
       "dc": "",
       "descriptor": "negate"
     },
-    "size": "huge",
+    "size": "large",
     "skillCheck": {
       "type": "",
       "dc": ""
     },
-    "source": "TR pg. 54",
+    "source": "AP #45 pg. 43",
     "specialMaterials": {
       "abysium": false,
       "adamantine": false,
@@ -196,14 +189,14 @@
       "silver": false,
       "voidglass": false
     },
-    "speed": "50 ft., burrow 20ft, climb 40 ft.",
+    "speed": "",
     "strength": 28,
     "target": {
       "type": "",
       "value": null
     },
     "usage": {
-      "per": "minute",
+      "per": "hour",
       "value": 1
     },
     "uses": {

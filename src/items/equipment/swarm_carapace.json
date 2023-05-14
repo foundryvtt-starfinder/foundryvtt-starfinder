@@ -1,6 +1,6 @@
 {
   "_id": "WSYPRGwWZiPL5sKy",
-  "name": "Swarm carapace",
+  "name": "Swarm Carapace",
   "type": "equipment",
   "img": "icons/svg/mystery-man.svg",
   "system": {
@@ -9,15 +9,17 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
       "type": "",
       "condition": "",
       "cost": 0
     },
-    "ammunitionType": "",
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": 0
@@ -52,12 +54,13 @@
     "attuned": false,
     "bulk": "35",
     "capacity": {
-      "max": 0,
+      "max": 20,
       "value": 0
     },
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -80,6 +83,17 @@
           "amount": 3,
           "subtype": "weaponSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "ammunition"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "ammunitionSlot",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
@@ -90,8 +104,9 @@
     "damage": {
       "parts": [
         {
-          "formula": "3d6",
-          "operator": "",
+          "name": "Piercing",
+          "formula": "3d6 +(@abilities.str.mod)",
+          "group": 0,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -100,18 +115,35 @@
             "fire": false,
             "healing": false,
             "piercing": true,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Slashing",
+          "formula": "3d6 +(@abilities.str.mod)",
+          "group": 0,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
             "slashing": true,
             "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p><strong>Speed&nbsp;</strong> 30 ft., <strong>climb</strong> 30 ft., <strong>fly</strong> 40 ft. (poor)</p>\n<p><strong>Strength&nbsp;</strong> 24 (+7);&nbsp;<strong>Damage&nbsp;</strong> 3d6 S or P;&nbsp;<strong>Size</strong>&nbsp;Large (10-ft. reach)</p>\n<p><strong>Capacity&nbsp;</strong> 20;&nbsp;Usage&nbsp;1/hour</p>\n<p>This biomechanical armor is grown from Swarm remains, assisting its wearer in infiltrating Swarm hives for targeted strikes. A swarm carapace can use its weapon slots to mount both melee and ranged weapons. The wearer gains telepathy that they can use only to communicate with Swarm creatures, can use Disguise to take the appearance of a Swarm creature without any DC modifiers for imitating a different creature type, and is treated as a Swarm creature for the purpose of fulfilling other Swarm creatures’ Swarm mind abilities (though the wearer does not gain the benefits of Swarm mind). A shirren wearer reduces the armor’s armor check penalty to –2.</p>"
+      "value": "<p><strong>Speed&nbsp;</strong> 30 ft., <strong>climb</strong> 30 ft., <strong>fly</strong> 40 ft. (poor)</p>\n<p><strong>Strength&nbsp;</strong> 24 (+7);&nbsp;<strong>Damage&nbsp;</strong> 3d6 S or P;&nbsp;<strong>Size</strong>&nbsp;Large (10-ft. reach)</p>\n<p><strong>Capacity&nbsp;</strong> 20;&nbsp;Usage&nbsp;1/hour</p>\n<p>This biomechanical armor is grown from Swarm remains, assisting its wearer in infiltrating Swarm hives for targeted strikes. A swarm carapace can use its weapon slots to mount both melee and ranged weapons. The wearer gains @UUID[Compendium.sfrpg.rules.rX5rK6UWAIOeeipl.JournalEntryPage.p0o9tmWtKZ0qy8DI#telepathy]{Telepathy} that they can use only to communicate with Swarm creatures, can use @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.aayAhTaRzitONs5U]{Disguise} to take the appearance of a Swarm creature without any DC modifiers for imitating a different creature type, and is treated as a Swarm creature for the purpose of fulfilling other Swarm creatures’ @UUID[Compendium.sfrpg.universal-creature-rules.BCdGPzzc8s4vIWFJ]{Swarm Mind} abilities (though the wearer does not gain the benefits of Swarm mind). A shirren wearer reduces the armor’s armor check penalty to –2.</p>\n<p><em>Shirren wearers should toggle the Shirren Armor Check Penalty Reduction modifier on in the modifiers tab.</em></p>"
     },
     "descriptors": [],
     "duration": {
@@ -124,7 +156,23 @@
     "identified": true,
     "isActive": null,
     "level": 12,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "1aa55fab-08aa-4244-8f88-6d92da1a6c4a",
+        "name": "Shirren Armor Check Penalty Reduction",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "acp",
+        "enabled": false,
+        "max": 1,
+        "modifier": "1",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "acp-power"
+      }
+    ],
     "price": 41200,
     "proficient": false,
     "quantity": 1,
@@ -135,23 +183,44 @@
       "units": "",
       "value": null
     },
-    "reach": "",
+    "reach": "10 ft.",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": "",
       "descriptor": "negate"
     },
-    "size": "",
+    "size": "large",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
     "source": "TR pg. 55",
-    "speed": "",
-    "strength": 0,
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
+    "speed": "30 ft., climb 30ft., fly 40 ft. (clumsy)",
+    "strength": 24,
     "target": {
       "type": "",
       "value": null
     },
     "usage": {
-      "per": "",
-      "value": 0
+      "per": "hour",
+      "value": 1
     },
     "uses": {
       "max": 0,

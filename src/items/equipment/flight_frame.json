@@ -1,84 +1,25 @@
 {
   "_id": "LmH2QAAlFlrKHQfz",
-  "name": "Flight frame",
+  "name": "Flight Frame",
   "type": "equipment",
-  "augmentation": [
-    false,
-    false
-  ],
-  "consumable": [
-    false,
-    false
-  ],
-  "container": [
-    false,
-    false
-  ],
-  "equipment": [
-    false,
-    false
-  ],
-  "fusion": [
-    false,
-    false
-  ],
-  "goods": [
-    false,
-    false
-  ],
-  "hybrid": [
-    false,
-    false
-  ],
   "img": "icons/svg/mystery-man.svg",
-  "magic": [
-    false,
-    false
-  ],
-  "shield": [
-    false,
-    false
-  ],
-  "spell": [
-    false,
-    false
-  ],
-  "storage": {
-    "type": [
-      "slot",
-      "slot"
-    ],
-    "affectsEncumbrance": [
-      true,
-      true
-    ],
-    "amount": [
-      "4",
-      "3"
-    ],
-    "subtype": [
-      "armorUpgrade",
-      "weaponSlot"
-    ],
-    "weightProperty": [
-      "slots",
-      ""
-    ]
-  },
   "system": {
     "type": "",
     "ability": "str",
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
       "type": "",
       "condition": "",
       "cost": 0
     },
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": null
@@ -91,7 +32,7 @@
       "kac": 19,
       "speedAdjust": 0
     },
-    "attackBonus": 6,
+    "attackBonus": null,
     "attributes": {
       "ac": {
         "value": "5"
@@ -101,13 +42,13 @@
         "mod": ""
       },
       "hardness": {
-        "value": "22"
+        "value": ""
       },
       "hp": {
-        "max": "48",
-        "value": 48
+        "max": "",
+        "value": null
       },
-      "size": "medium",
+      "size": "huge",
       "sturdy": true
     },
     "attuned": false,
@@ -119,12 +60,14 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
           "type": "slot",
           "acceptsType": [
-            "upgrade"
+            "upgrade",
+            "weapon"
           ],
           "affectsEncumbrance": true,
           "amount": 4,
@@ -140,6 +83,17 @@
           "amount": 3,
           "subtype": "weaponSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "ammunition"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "ammunitionSlot",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
@@ -150,16 +104,28 @@
     "damage": {
       "parts": [
         {
-          "formula": "1d10 + 6",
-          "operator": "",
+          "name": "",
+          "formula": "1d10 +(@abilities.str.mod)",
+          "group": null,
           "types": {
-            "bludgeoning": true
+            "acid": false,
+            "bludgeoning": true,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>This massive, sleek machine is shaped like a person and equipped with powerful thrusters built into the feet and attached to the back, giving it a fly speed with average maneuverability.</p>"
     },
@@ -174,56 +140,11 @@
     "identified": true,
     "isActive": null,
     "level": 11,
-    "modifiers": [
-      {
-        "_id": "d3f74c83-5a2f-45fe-94e9-3c46d432625d",
-        "name": "Flight frame - char attack",
-        "type": "untyped",
-        "condition": "",
-        "effectType": "melee-attacks",
-        "enabled": true,
-        "max": 0,
-        "modifier": "-(@abilities.str.mod)",
-        "modifierType": "constant",
-        "notes": "Removes character str bonus to armor.",
-        "source": "Powered Armor",
-        "subtab": "misc",
-        "valueAffected": ""
-      },
-      {
-        "_id": "919262f4-0d50-42f4-9fb8-66d2ec17280a",
-        "name": "Flight frame - char str skills",
-        "type": "untyped",
-        "condition": "",
-        "effectType": "ability-skills",
-        "enabled": true,
-        "max": 0,
-        "modifier": "-(@abilities.str.mod)",
-        "modifierType": "constant",
-        "notes": "Removes character bonus to str based skills. See other mod for added bonus from powered armor.",
-        "source": "Powered Armor",
-        "subtab": "misc",
-        "valueAffected": "str"
-      },
-      {
-        "_id": "e45fb28d-c511-4f7a-ad96-ca2ec047b8c8",
-        "name": "Flight frame - char str skills",
-        "type": "untyped",
-        "condition": "",
-        "effectType": "ability-skills",
-        "enabled": true,
-        "max": 6,
-        "modifier": "6",
-        "modifierType": "constant",
-        "notes": "Adds powered armor str bonus to applicable strength based skills.",
-        "source": "Powered Armor",
-        "subtab": "misc",
-        "valueAffected": "str"
-      }
-    ],
+    "modifiers": [],
     "price": 27100,
     "proficient": false,
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
@@ -231,13 +152,34 @@
       "value": null
     },
     "reach": "10 ft.",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": "",
       "descriptor": "negate"
     },
     "size": "huge",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
     "source": "CRB pg. 204",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "speed": "30 ft., fly 30 ft. (average)",
     "strength": 22,
     "target": {
@@ -253,21 +195,5 @@
       "per": null,
       "value": 0
     }
-  },
-  "technological": [
-    false,
-    false
-  ],
-  "upgrade": [
-    true,
-    false
-  ],
-  "weapon": [
-    false,
-    true
-  ],
-  "weaponAccessory": [
-    false,
-    false
-  ]
+  }
 }

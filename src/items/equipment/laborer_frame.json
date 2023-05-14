@@ -9,14 +9,17 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "mwak",
     "activation": {
       "type": "",
       "condition": "",
       "cost": 0
     },
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": null
@@ -43,10 +46,10 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": null
       },
       "size": "medium",
-      "sturdy": false
+      "sturdy": true
     },
     "attuned": false,
     "bulk": "22",
@@ -57,6 +60,8 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
@@ -78,6 +83,16 @@
           "amount": 2,
           "subtype": "weaponSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "ammunition"
+          ],
+          "amount": 1,
+          "subtype": "ammunitionSlot",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
@@ -88,18 +103,30 @@
     "damage": {
       "parts": [
         {
-          "formula": "1d10",
-          "operator": "",
+          "name": "",
+          "formula": "1d10 +(@abilities.str.mod)",
+          "group": null,
           "types": {
-            "bludgeoning": true
+            "acid": false,
+            "bludgeoning": true,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>A laborer frame resembles an anacite laborer (Starfinder Alien Archive 10). These armor frames allow weapon and upgrade modifications, mimicking the ways in which anacite laborers improve themselves. The frame is also reconfigurable for movement. When you buy the armor, the movement is set to one mode that you choose, but this mode can be changed with 1 hour of work using an engineering toolkit or tech workshop. The possible modes are detailed below.</p>\n<p><strong>Advanced Treads:&nbsp;</strong> The land speed the armor grants you increases to 40 feet.</p>\n<p><strong>Climbing Pads:</strong>&nbsp;The armor grants you a climb speed of 15 feet.</p>\n<p><strong>Swim Jets:</strong>&nbsp;The armor grants you a swim speed of 15 feet.</p>"
+      "value": "<p>A laborer frame resembles an anacite laborer (Starfinder Alien Archive 1). These armor frames allow weapon and upgrade modifications, mimicking the ways in which anacite laborers improve themselves. The frame is also reconfigurable for movement. When you buy the armor, the movement is set to one mode that you choose, but this mode can be changed with 1 hour of work using an engineering toolkit or tech workshop. The possible modes are detailed below.</p>\n<p><strong>Advanced Treads:&nbsp;</strong> The land speed the armor grants you increases to 40 feet.</p>\n<p><strong>Climbing Pads:</strong>&nbsp;The armor grants you a climb speed of 15 feet.</p>\n<p><strong>Swim Jets:</strong>&nbsp;The armor grants you a swim speed of 15 feet.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -110,26 +137,49 @@
     "equipped": false,
     "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 7,
     "modifiers": [],
     "price": 7500,
     "proficient": false,
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "",
       "value": null
     },
-    "reach": "5 ft",
+    "reach": "",
+    "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
     "size": "medium",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
     "source": "AA2 pg. 11",
-    "speed": "30 ft",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
+    "speed": "30 ft., 40ft. with Advanced Treads, 15 ft. climb with Climbing pads, 15 ft. swim with Swim Jets",
     "strength": 18,
     "target": {
       "type": "",
