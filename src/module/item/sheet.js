@@ -110,6 +110,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.hasProficiency = data.itemData.proficient === true || data.itemData.proficient === false;
         data.isFeat = data.item.type === "feat";
         data.isActorResource = data.item.type === "actorResource";
+        data.isWeapon = data.item.type === "weapon";
         data.isVehicleAttack = data.item.type === "vehicleAttack";
         data.isVehicleSystem = data.item.type === "vehicleSystem";
         data.isGM = game.user.isGM;

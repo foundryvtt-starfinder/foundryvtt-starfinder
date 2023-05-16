@@ -6,6 +6,14 @@
                     <input type="checkbox" name="system.proficient" {{checked itemData.proficient}}/> {{ localize "SFRPG.Items.Proficient" }}
                 </label>
                 {{/if}}
+                {{#if isWeapon}}
+                <label class="checkbox">
+                    <input type="checkbox" name="system.isEquipment" {{checked itemData.isEquipment}}/> {{ localize "SFRPG.Items.Weapon.IsEquipment" }}
+                </label>
+                {{/if}}
+                <label class="checkbox">
+                    <input type="checkbox" name="system.identified" {{checked itemData.identified}}/> {{ localize "SFRPG.Items.Identified" }}
+                </label>
                 <label class="checkbox">
                     <input type="checkbox" name="system.equippable" {{checked itemData.equippable}}/> {{ localize "SFRPG.Items.Equippable" }}
                 </label>
@@ -14,7 +22,4 @@
                     <input type="checkbox" name="system.equipped" {{checked itemData.equipped}}/> {{ localize "SFRPG.Items.Equipped" }}
                 </label>
                 {{/if}}
-                <label class="checkbox">
-                    <input type="checkbox" name="system.identified" {{checked itemData.identified}}/> {{ localize "SFRPG.Items.Identified" }}
-                </label>
             </div>
