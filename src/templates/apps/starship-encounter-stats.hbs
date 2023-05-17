@@ -6,7 +6,7 @@
                     {{localize "SFRPG.Combat.Difficulty.Tooltip.PlayerShipEffectiveTier"}}
                 </td>
                 <td class="table-right">
-                    {{flags.sfrpg.playerTier.string}}
+                    {{difficultyData.playerTier.string}}
                 </td>
             </tr>
             <tr>
@@ -14,7 +14,7 @@
                     {{localize "SFRPG.Combat.Difficulty.Tooltip.EnemyShipEffectiveTier"}}
                 </td>
                 <td class="table-right">
-                    {{flags.sfrpg.enemyTier.string}}
+                    {{difficultyData.enemyTier.string}}
                 </td>
             </tr>
             <tr>
@@ -22,7 +22,7 @@
                     {{localize "SFRPG.Combat.Difficulty.Tooltip.EncounterTotalXP"}}
                 </td>
                 <td class="table-right">
-                    {{flags.sfrpg.XPValue}} {{localize "SFRPG.Combat.Difficulty.Units.XP"}}
+                    {{difficultyData.XPValue}} {{localize "SFRPG.Combat.Difficulty.Units.XP"}}
                 </td>
             </tr>
             <tr>
@@ -30,7 +30,7 @@
                     {{localize "SFRPG.Combat.Difficulty.Tooltip.EncounterWealth"}}
                 </td>
                 <td class="table-right">
-                    {{flags.sfrpg.wealth}}  {{localize "SFRPG.Combat.Difficulty.Units.Credits"}}
+                    {{difficultyData.wealth}}  {{localize "SFRPG.Combat.Difficulty.Units.Credits"}}
                 </td>
             </tr>
         </table>
@@ -48,7 +48,7 @@
     <div class="stats-body">
         <div class="body-col">
             <ul class="combatant-list">
-                {{#each flags.sfrpg.playerShips as |actor id|}}
+                {{#each difficultyData.playerShips as |actor id|}}
                 <li class="combatant-list ally" data-actor-id="{{actor.id}}">
                     <img class="img" src="{{actor.img}}" title="{{actor.name}}" width="48" height="48"/>
                     <h4>
@@ -60,7 +60,7 @@
         </div>
         <div class="body-col">
             <ul class="combatant-list">
-                {{#each flags.sfrpg.enemyShips as |actor id|}}
+                {{#each difficultyData.enemyShips as |actor id|}}
                 <li class="combatant-list enemy" data-actor-id="{{actor.id}}">
                     <img class="img" src="{{actor.img}}" title="{{actor.name}}" width="48" height="48"/>
                     <h4>
