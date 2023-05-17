@@ -1,6 +1,6 @@
+import { CombatDifficulty } from "../apps/combat-difficulty.js";
 import { DiceSFRPG } from "../dice.js";
 import RollContext from "../rolls/rollcontext.js";
-import { CombatDifficulty } from "../apps/combat-difficulty.js";
 
 /*
 The following hooks were added:
@@ -45,6 +45,15 @@ Vehicle has the following 3 phases: "Pilot Actions", "Chase Progress", and "Comb
 
 export class CombatSFRPG extends Combat {
     static HiddenTurn = 0;
+
+    _preCreate(data, options, user) {
+        const update = {
+            "flags.sfrpg.combatType": this.getCombatType(),
+            "flags.sfrpg.phase": 0
+        };
+
+        this.updateSource(update);
+    }
 
     async begin() {
         const update = {
@@ -564,19 +573,19 @@ export class CombatSFRPG extends Combat {
         document.getElementsByClassName('combat-tracker-header')[0].appendChild(phaseDisplay);
     }
 
-    renderCombatTypeControls() {
+    renderCombatTypeControls(html) {
         const prevCombatTypeButton = `<a class="combat-type-prev" title="${game.i18n.format("SFRPG.Combat.EncounterTracker.SelectPrevType")}"><i class="fas fa-caret-left"></i></a>`;
         const nextCombatTypeButton = `<a class="combat-type-next" title="${game.i18n.format("SFRPG.Combat.EncounterTracker.SelectNextType")}"><i class="fas fa-caret-right"></i></a>`;
 
         let combatTypeControls = document.createElement("div");
         combatTypeControls.classList.add("combat-type");
         combatTypeControls.innerHTML = `${prevCombatTypeButton} &nbsp; ${this.getCombatName()} &nbsp; ${nextCombatTypeButton}`;
-        document.getElementsByClassName('combat-tracker-header')[0].appendChild(combatTypeControls);
+        html.getElementsByClassName('combat-tracker-header')[0].appendChild(combatTypeControls);
     }
 
-    renderDifficulty(diffObject) {
+    renderDifficulty(diffObject, html) {
         const difficulty = diffObject.difficultyData.difficulty;
-        const combatType = this.flags.sfrpg.combatType;
+        const combatType = this.getCombatType();
 
         let difficultyContainer = document.createElement("div");
         difficultyContainer.classList.add("combat-difficulty-container");
@@ -591,7 +600,7 @@ export class CombatSFRPG extends Combat {
         difficultyHTML.innerHTML = `Difficulty: ${CONFIG.SFRPG.difficultyLevels[difficulty]}`;
 
         difficultyContainer.appendChild(difficultyHTML);
-        document.getElementsByClassName('combat-tracker-header')[0].appendChild(difficultyContainer);
+        html.getElementsByClassName('combat-tracker-header')[0].appendChild(difficultyContainer);
     }
 
     _getInitiativeFormula(combatant) {
@@ -757,16 +766,16 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
         }
     } else {
         // Add buttons for switching combat type
-        activeCombat.renderCombatTypeControls();
+        activeCombat.renderCombatTypeControls(html[0]);
 
         // Add difficulty calculator display if needed
         if (activeCombat.getCombatType() === "normal" && game.user.isGM && diffDisplay) {
             diffObject.getNormalEncounterInfo();
-            activeCombat.renderDifficulty(diffObject);
         } else if (activeCombat.getCombatType() === "starship" && game.user.isGM && diffDisplay) {
             diffObject.getStarshipEncounterInfo();
-            activeCombat.renderDifficulty(diffObject);
         }
+
+        activeCombat.renderDifficulty(diffObject, html[0]);
 
         // Handle button clicks
         const configureButtonPrev = header.find('.combat-type-prev');

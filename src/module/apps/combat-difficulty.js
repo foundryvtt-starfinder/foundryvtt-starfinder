@@ -4,6 +4,8 @@
  * @type {Application}
  */
 export class CombatDifficulty extends Application {
+    difficultyData = {};
+
     constructor(combatData, options = {}) {
         super(combatData, options);
         this.combatData = combatData;
@@ -25,8 +27,7 @@ export class CombatDifficulty extends Application {
 
     get template() {
         const isStarship = this.combatData.flags.sfrpg.combatType === "starship";
-        const contentTemplate = `//systems/sfrpg/templates/apps/${isStarship ? "starship" : "normal"}-encounter-stats.hbs`;
-        return contentTemplate;
+        return `systems/sfrpg/templates/apps/${isStarship ? "starship" : "normal"}-encounter-stats.hbs`;
     }
 
     getData() {
@@ -35,9 +36,6 @@ export class CombatDifficulty extends Application {
 
     getStarshipEncounterInfo() {
         // Performs starship encounter difficulty calculations and populates data storage location
-        if (!this.difficultyData) {
-            this.difficultyData = {};
-        }
 
         const [playerShips, playerShipTiers, enemyShips, enemyShipTiers] = this.parseShips();
         this.difficultyData.playerShips = playerShips;
@@ -240,9 +238,6 @@ export class CombatDifficulty extends Application {
      * Performs all encounter difficulty calculations for normal combat
      */
     getNormalEncounterInfo() {
-        if (!this.difficultyData) {
-            this.difficultyData = {};
-        }
 
         const [PCs, APL] = this.calculateAPL();
         this.difficultyData.PCs = PCs;
