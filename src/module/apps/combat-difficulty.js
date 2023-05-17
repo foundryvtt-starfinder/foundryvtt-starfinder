@@ -34,6 +34,18 @@ export class CombatDifficulty extends Application {
         return this;
     }
 
+    async activateListeners(html) {
+        html.find("li.combatant-list").on("click", (event) => this._onCombatantClick(event));
+    }
+
+    async _onCombatantClick(event) {
+        event.preventDefault();
+        const id = event.currentTarget.dataset.combatantId;
+        const actor = game.combat.combatants.get(id).actor;
+
+        actor.sheet.render(true);
+    }
+
     getStarshipEncounterInfo() {
         // Performs starship encounter difficulty calculations and populates data storage location
 
@@ -247,12 +259,18 @@ export class CombatDifficulty extends Application {
         this.difficultyData.enemies = enemies;
         this.difficultyData.enemyXP = enemyXP;
 
-        const [CR, XPArray, difficulty, playerXP, wealth] = this.calculateChallenge();
+        const [CR,
+            XPArray,
+            difficulty,
+            arrayPlayerXP,
+            wealth,
+            divPlayerXP] = this.calculateChallenge();
         this.difficultyData.CR = CR;
         this.difficultyData.CRXPbounds = [XPArray.minXP, XPArray.totalXP];
         this.difficultyData.CRXPboundsString = `${XPArray.minXP} – ${XPArray.totalXP}`;
         this.difficultyData.difficulty = difficulty;
-        this.difficultyData.playerXP = playerXP;
+        this.difficultyData.arrayPlayerXP = arrayPlayerXP;
+        this.difficultyData.divPlayerXP = divPlayerXP;
         this.difficultyData.wealth = wealth;
 
         this.difficultyData.leftoverCR = this.calculateLeftoverCR();
@@ -342,13 +360,12 @@ export class CombatDifficulty extends Application {
         } else {
             for (let [CR, XProw] of Object.entries(CRTable)) {
                 // Figure out encounter difficulty
-                if (XPtotal <= XProw.totalXP) {
-                    if (XPtotal > XProw.minXP) {
-                        XParray = XProw;
-                        encounterCR = CR;
-                        break;
-                    }
+                if (XPtotal <= XProw.totalXP && XPtotal > XProw.minXP) {
+                    XParray = XProw;
+                    encounterCR = CR;
+                    break;
                 }
+
             }
         }
 
@@ -385,18 +402,21 @@ export class CombatDifficulty extends Application {
             }
         }
 
-        // Calculate individual XP based on number of party members
-        let perPlayerXP = 0;
+        // Calculate XP per player based on the table on CRB pg. 390.
+        let arrayPerPlayerXP = 0;
 
         if (numPlayers < 4) {
-            perPlayerXP = XParray.perPlayerXP[0];
+            arrayPerPlayerXP = XParray.perPlayerXP[0];
         } else if (numPlayers > 5) {
-            perPlayerXP = XParray.perPlayerXP[2];
+            arrayPerPlayerXP = XParray.perPlayerXP[2];
         } else {
-            perPlayerXP = XParray.perPlayerXP[1];
+            arrayPerPlayerXP = XParray.perPlayerXP[1];
         }
 
-        return [encounterCR, XParray, encounterDifficulty, perPlayerXP, XParray.wealthValue];
+        // Calculate XP per player by dividing total XP by the number of players (Calculate these both since the rules say both are valid)
+        const divPerPlayerXP = Math.floor(XPtotal / numPlayers);
+
+        return [encounterCR, XParray, encounterDifficulty, arrayPerPlayerXP, XParray.wealthValue, divPerPlayerXP];
     }
 
     /**
