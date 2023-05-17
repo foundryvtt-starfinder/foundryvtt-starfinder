@@ -566,7 +566,7 @@ export class CombatSFRPG extends Combat {
         return this.getIndexOfFirstUndefeatedCombatant() === null;
     }
 
-    renderCombatPhase() {
+    renderCombatPhase(html) {
         let phaseDisplay = document.createElement("h4");
         phaseDisplay.classList.add("combat-type");
         phaseDisplay.innerHTML = game.i18n.format(this.getCurrentPhase().name);
@@ -762,7 +762,7 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
     if (activeCombat.round) {
         const phases = activeCombat.getPhases();
         if (phases.length > 1) {
-            activeCombat.renderCombatPhase();
+            activeCombat.renderCombatPhase(html[0]);
         }
     } else {
         // Add buttons for switching combat type
