@@ -459,9 +459,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             modifiers = Object.values(modifiers)
                 .flat()
                 .filter(i => !!i);
-            const modifiersTotal = modifiers.reduce((total, i) => {
-                return total + i.max;
-            }, 0);
+            const modifiersTotal = modifiers.reduce((total, i) => total + i.max, 0);
 
             const preparedFormula = `${formula} ${modifiersTotal > 0 ? "+" + String(modifiersTotal) : ""}`;
 
@@ -494,9 +492,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             modifiers = Object.values(modifiers)
                 .flat()
                 .filter(i => !!i);
-            const modifiersTotal = modifiers.reduce((total, i) => {
-                return total + i.max;
-            }, 0);
+            const modifiersTotal = modifiers.reduce((total, i) => total + i.max, 0);
 
             const preparedFormula = `${formula} ${modifiersTotal > 0 ? "+" + String(modifiersTotal) : ""}`;
 
@@ -504,7 +500,14 @@ export class ActorSheetSFRPG extends ActorSheet {
 
             const roll = Roll.create(preparedFormula, rollData).simplifiedFormula;
             if (!roll) throw ("Invaid roll, deferring to default string.");
-            item.config.damageString = roll;
+
+            const damageTypes = Object.entries(item.system.damage.parts[0].types)
+                .map(([type, enabled]) => {
+                    if (enabled) return SFRPG.damageTypeToAcronym[type];
+                })
+                .filterJoin(" & ");
+
+            item.config.damageString = `${roll} ${damageTypes}`;
         } catch {
             item.config.damageString = item.system.actionType === "heal"
                 ? game.i18n.localize("SFRPG.ActionHeal")
