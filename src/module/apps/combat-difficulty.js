@@ -1,24 +1,14 @@
 /**
  * A class for checking the difficulty of the currently defined combat
  *
- * @type {Dialog}
+ * @type {Application}
  */
-export class CombatDifficulty extends Dialog {
+export class CombatDifficulty extends Application {
     constructor(combatData, options = {}) {
         super(combatData, options);
-        this.options.classes = ["sfrpg", "dialog"];
+        this.options.classes = ["sfrpg", "app"];
 
         this.combatData = combatData;
-
-        /*
-        {
-            title: `${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.Details")}: ${CONFIG.SFRPG.difficultyLevels[diffObject.difficultyData.difficulty]} ${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.DifficultyEncounter")}`,
-            content: await renderTemplate(contentTemplate, diffObject),
-            buttons: {},
-            resizable: true
-        }
-        {id: "encounter-stats"}
-        */
     }
 
     async prepDialog() {
@@ -27,13 +17,6 @@ export class CombatDifficulty extends Dialog {
         const isStarship = this.combatData.flags.sfrpg.combatType === "starship";
         const contentTemplate = `//systems/sfrpg/templates/apps/${isStarship ? "starship" : "normal"}-encounter-stats.hbs`;
 
-        /*
-        this.title = `${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.Details")}: ${CONFIG.SFRPG.difficultyLevels[this.difficultyData.difficulty]} ${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.DifficultyEncounter")}`;
-        this.content = await renderTemplate(contentTemplate, this);
-        this.buttons = {};
-        this.resizable = true;
-        this.id = "encounter-stats";
-        */
         new Dialog({
             title: `${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.Details")}: ${CONFIG.SFRPG.difficultyLevels[this.difficultyData.difficulty]} ${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.DifficultyEncounter")}`,
             content: await renderTemplate(contentTemplate, this),
@@ -438,26 +421,6 @@ export class CombatDifficulty extends Dialog {
 
             return "0";
         }
-    }
-
-    renderDifficulty() {
-        const difficulty = this.difficultyData.difficulty;
-        const combatType = this.combatData.flags.sfrpg.combatType;
-
-        let difficultyContainer = document.createElement("div");
-        difficultyContainer.classList.add("combat-difficulty-container");
-
-        let difficultyHTML = document.createElement("a");
-        difficultyHTML.classList.add("combat-difficulty", difficulty);
-        if (combatType === 'normal') {
-            difficultyHTML.title = `${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.PCs")}: ${this.difficultyData.PCs.length} [${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.APL")} ${this.difficultyData.APL}]\n${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.HostileNPCs")}: ${this.difficultyData.enemies.length} [${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.CR")} ${this.difficultyData.CR}]`;
-        } else if (combatType === 'starship') {
-            difficultyHTML.title = game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.ClickForDetails");
-        }
-        difficultyHTML.innerHTML = `Difficulty: ${CONFIG.SFRPG.difficultyLevels[difficulty]}`;
-
-        difficultyContainer.appendChild(difficultyHTML);
-        document.getElementsByClassName('combat-tracker-header')[0].appendChild(difficultyContainer);
     }
 
 }

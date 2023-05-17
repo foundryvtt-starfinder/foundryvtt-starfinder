@@ -574,6 +574,26 @@ export class CombatSFRPG extends Combat {
         document.getElementsByClassName('combat-tracker-header')[0].appendChild(combatTypeControls);
     }
 
+    renderDifficulty(diffObject) {
+        const difficulty = diffObject.difficultyData.difficulty;
+        const combatType = this.flags.sfrpg.combatType;
+
+        let difficultyContainer = document.createElement("div");
+        difficultyContainer.classList.add("combat-difficulty-container");
+
+        let difficultyHTML = document.createElement("a");
+        difficultyHTML.classList.add("combat-difficulty", difficulty);
+        if (combatType === 'normal') {
+            difficultyHTML.title = `${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.PCs")}: ${diffObject.difficultyData.PCs.length} [${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.APL")} ${diffObject.difficultyData.APL}]\n${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.HostileNPCs")}: ${diffObject.difficultyData.enemies.length} [${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.CR")} ${diffObject.difficultyData.CR}]`;
+        } else if (combatType === 'starship') {
+            difficultyHTML.title = game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.ClickForDetails");
+        }
+        difficultyHTML.innerHTML = `Difficulty: ${CONFIG.SFRPG.difficultyLevels[difficulty]}`;
+
+        difficultyContainer.appendChild(difficultyHTML);
+        document.getElementsByClassName('combat-tracker-header')[0].appendChild(difficultyContainer);
+    }
+
     _getInitiativeFormula(combatant) {
         if (this.getCombatType() === "starship") {
             return "1d20 + @pilot.skills.pil.mod";
@@ -739,16 +759,13 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
         // Add buttons for switching combat type
         activeCombat.renderCombatTypeControls();
 
-        // Add in the normal encounter difficulty calculator if needed
+        // Add difficulty calculator display if needed
         if (activeCombat.getCombatType() === "normal" && game.user.isGM && diffDisplay) {
             diffObject.getNormalEncounterInfo();
-            diffObject.renderDifficulty();
-        }
-
-        // Add in the starship encounter difficulty calculator if needed
-        if (activeCombat.getCombatType() === "starship" && game.user.isGM && diffDisplay) {
+            activeCombat.renderDifficulty(diffObject);
+        } else if (activeCombat.getCombatType() === "starship" && game.user.isGM && diffDisplay) {
             diffObject.getStarshipEncounterInfo();
-            diffObject.renderDifficulty();
+            activeCombat.renderDifficulty(diffObject);
         }
 
         // Handle button clicks
