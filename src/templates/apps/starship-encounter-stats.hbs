@@ -48,25 +48,33 @@
     <div class="stats-body">
         <div class="body-col">
             <ul class="combatant-list">
-                {{#each difficultyData.playerShips as |actor id|}}
-                <li class="combatant-list ally" data-actor-id="{{actor.id}}">
-                    <img class="img" src="{{actor.img}}" title="{{actor.name}}" width="48" height="48"/>
-                    <h4>
-                        {{actor.name}}
-                    </h4>
-                </li>
+                {{#each difficultyData.playerShips as |combatant id|}}
+                    <li class="combatant-list ally" data-combatant-id="{{combatant.id}}">
+                        <img class="img" src="{{combatant.img}}" title="{{combatant.name}}" width="48" height="48" />
+                        <div class="combatant-info">
+                            <h4>
+                                {{combatant.name}}
+                            </h4>
+                            <label class="combatant-level">{{localize "SFRPG.ShipTierLabel"}}
+                                {{crDecimalToFraction combatant.actor.system.details.tier}}</label>
+                        </div>
+                    </li>
                 {{/each}}
             </ul>
         </div>
         <div class="body-col">
             <ul class="combatant-list">
-                {{#each difficultyData.enemyShips as |actor id|}}
-                <li class="combatant-list enemy" data-actor-id="{{actor.id}}">
-                    <img class="img" src="{{actor.img}}" title="{{actor.name}}" width="48" height="48"/>
-                    <h4>
-                        {{actor.name}}
-                    </h4>
-                </li>
+                {{#each difficultyData.enemyShips as |combatant id|}}
+                    <li class="combatant-list enemy" data-combatant-id="{{combatant.id}}">
+                        <img class="img" src="{{combatant.img}}" title="{{combatant.name}}" width="48" height="48" />
+                        <div class="combatant-info">
+                            <h4>
+                                {{combatant.name}}
+                            </h4>
+                            <label class="combatant-level">{{localize "SFRPG.ShipTierLabel"}}
+                                {{crDecimalToFraction combatant.actor.system.details.tier}}</label>
+                        </div>
+                    </li>
                 {{/each}}
             </ul>
         </div>
