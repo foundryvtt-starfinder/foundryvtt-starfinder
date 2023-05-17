@@ -6,7 +6,7 @@
 export class CombatDifficulty extends Application {
     constructor(combatData, options = {}) {
         super(combatData, options);
-        this.options.classes = ["sfrpg", "dialog"];
+        this.options.classes = ["sfrpg", "application"];
 
         this.combatData = combatData;
     }
@@ -175,10 +175,8 @@ export class CombatDifficulty extends Application {
 
         // Check that Players and NPCs are both present
         if (!numPlayerShips) {
-            console.log('No player ships!');
             return ["noPCShips", 0, 0];
         } else if (!numEnemyShips) {
-            console.log('No enemy Ships!');
             return ["noEnemyShips", 0, 0];
         }
 
@@ -403,11 +401,11 @@ export class CombatDifficulty extends Application {
                 if (remainingXP < XProw.nextXP) {
                     if (remainingXP >= XProw.totalXP) {
                         return CR;
-                    } else {
-                        return "0";
                     }
                 }
             }
+
+            return "0";
         }
     }
 
