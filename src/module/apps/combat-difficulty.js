@@ -1,14 +1,45 @@
 /**
  * A class for checking the difficulty of the currently defined combat
  *
- * @type {Application}
+ * @type {Dialog}
  */
-export class CombatDifficulty extends Application {
+export class CombatDifficulty extends Dialog {
     constructor(combatData, options = {}) {
         super(combatData, options);
-        this.options.classes = ["sfrpg", "application"];
+        this.options.classes = ["sfrpg", "dialog"];
 
         this.combatData = combatData;
+
+        /*
+        {
+            title: `${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.Details")}: ${CONFIG.SFRPG.difficultyLevels[diffObject.difficultyData.difficulty]} ${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.DifficultyEncounter")}`,
+            content: await renderTemplate(contentTemplate, diffObject),
+            buttons: {},
+            resizable: true
+        }
+        {id: "encounter-stats"}
+        */
+    }
+
+    async prepDialog() {
+        console.log(this);
+        console.log("Starfinder | Rendering Encounter Statistics Dialog");
+        const isStarship = this.combatData.flags.sfrpg.combatType === "starship";
+        const contentTemplate = `//systems/sfrpg/templates/apps/${isStarship ? "starship" : "normal"}-encounter-stats.hbs`;
+
+        /*
+        this.title = `${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.Details")}: ${CONFIG.SFRPG.difficultyLevels[this.difficultyData.difficulty]} ${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.DifficultyEncounter")}`;
+        this.content = await renderTemplate(contentTemplate, this);
+        this.buttons = {};
+        this.resizable = true;
+        this.id = "encounter-stats";
+        */
+        new Dialog({
+            title: `${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.Details")}: ${CONFIG.SFRPG.difficultyLevels[this.difficultyData.difficulty]} ${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.DifficultyEncounter")}`,
+            content: await renderTemplate(contentTemplate, this),
+            buttons: {},
+            resizable: true
+        }, {id: "encounter-stats"}).render(true);
     }
 
     getStarshipEncounterInfo() {

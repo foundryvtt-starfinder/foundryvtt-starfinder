@@ -773,16 +773,7 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
         const difficultyButton = header.find('.combat-difficulty');
         difficultyButton.click(async ev => {
             ev.preventDefault();
-            console.log("Starfinder | Rendering Encounter Statistics Dialog");
-            const isStarship = activeCombat.flags.sfrpg.combatType === "starship";
-            const contentTemplate = `//systems/sfrpg/templates/apps/${isStarship ? "starship" : "normal"}-encounter-stats.hbs`;
-
-            new Dialog({
-                title: `${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.Details")}: ${CONFIG.SFRPG.difficultyLevels[diffObject.difficultyData.difficulty]} ${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.DifficultyEncounter")}`,
-                content: await renderTemplate(contentTemplate, diffObject),
-                buttons: {},
-                resizable: true
-            }, {id: "encounter-stats"}).render(true);
+            diffObject.prepDialog();
         });
     }
 });
