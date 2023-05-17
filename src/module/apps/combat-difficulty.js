@@ -73,7 +73,7 @@ export class CombatDifficulty extends Application {
                 if (combatant.hasPlayerOwner) {
                     playerShips.push(combatant);
                     playerShipTiers.push(combatant.actor.system.details.tier);
-                } else if (combatant.token.disposition < 0) {
+                } else if (combatant?.token?.disposition < 0) {
                     enemyShips.push(combatant);
                     enemyShipTiers.push(combatant.actor.system.details.tier);
                 }
@@ -302,7 +302,7 @@ export class CombatDifficulty extends Application {
         for (const combatant of this.combatData.combatants) {
             if (combatant.actor.type === "npc2" || combatant.actor.type === "npc") {
                 if (combatant.isNPC) {
-                    if (combatant.token.disposition < 0) {
+                    if (combatant?.token?.disposition < 0) {
                         enemyCombatants.push(combatant);
                         enemyXP.push(combatant.actor.system.details.xp.value); // Enemy XP values
                     }
