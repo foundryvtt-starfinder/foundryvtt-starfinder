@@ -762,7 +762,9 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
         }
     } else {
         // Add buttons for switching combat type
-        activeCombat.renderCombatTypeControls(html[0]);
+        if (game.user.isGM) {
+            activeCombat.renderCombatTypeControls(html[0]);
+        }
 
         // Handle button clicks
         const configureButtonPrev = header.find('.combat-type-prev');
