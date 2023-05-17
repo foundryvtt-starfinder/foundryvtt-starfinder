@@ -3,7 +3,7 @@
 @navHeight: 30px;
 @headerHeight: 100px;
 @detailsHeight: 40px;
-@sheetNavTransition: background .2s, backdrop-filter .2s;
+@sheetNavTransition: background 0.2s, backdrop-filter 0.2s;
 
 // Global background style
 button {
@@ -21,7 +21,7 @@ blockquote.quote {
 .window-app {
     .exo2();
 
-    &.image-popout > .window-content{
+    &.image-popout > .window-content {
         background: transparent;
     }
 
@@ -59,11 +59,8 @@ a.enriched-link {
     white-space: nowrap;
     word-break: break-all;
     line-height: 1.6em;
-    transition: text-shadow .15s ease-in-out,
-        background-color .15s ease-in-out,
-        border .15s ease-in-out,
-        color .15s ease-in-out,
-        box-shadow .15s ease-in-out;
+    transition: text-shadow 0.15s ease-in-out, background-color 0.15s ease-in-out, border 0.15s ease-in-out,
+        color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
     i {
         color: var(--color-text-dark-inactive);
@@ -71,7 +68,7 @@ a.enriched-link {
 
         &.repost {
             border-left: 1px solid var(--color-border-dark-tertiary);
-            background: #FFF9;
+            background: #fff9;
             padding: 2px;
             margin-right: -4px;
             margin-left: 2px;
@@ -632,7 +629,6 @@ a.enriched-link {
             flex: 1;
             align-self: center;
             text-align: right;
-            padding-left: 2em;
             padding-right: 0.25em;
             font-weight: bold;
         }
@@ -673,6 +669,7 @@ a.enriched-link {
             margin: 0.25em;
             display: flex;
             flex-direction: row;
+            cursor: pointer;
 
             img {
                 align-self: center;
