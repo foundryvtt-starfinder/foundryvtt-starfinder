@@ -755,10 +755,6 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
     const header = html.find('.combat-tracker-header');
     const footer = html.find('.directory-footer');
 
-    // Return whether the difficulty tracker should be displayed
-    const diffDisplay = game.settings.get("sfrpg", "difficultyDisplay");
-    const diffObject = new CombatDifficulty(activeCombat);
-
     if (activeCombat.round) {
         const phases = activeCombat.getPhases();
         if (phases.length > 1) {
@@ -767,15 +763,6 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
     } else {
         // Add buttons for switching combat type
         activeCombat.renderCombatTypeControls(html[0]);
-
-        // Add difficulty calculator display if needed
-        if (activeCombat.getCombatType() === "normal" && game.user.isGM && diffDisplay) {
-            diffObject.getNormalEncounterInfo();
-        } else if (activeCombat.getCombatType() === "starship" && game.user.isGM && diffDisplay) {
-            diffObject.getStarshipEncounterInfo();
-        }
-
-        activeCombat.renderDifficulty(diffObject, html[0]);
 
         // Handle button clicks
         const configureButtonPrev = header.find('.combat-type-prev');
@@ -795,7 +782,26 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
             ev.preventDefault();
             activeCombat.begin();
         });
+    }
 
+    // Perform difficulty calculations
+    if (game.user.isGM) {
+        // Return whether the difficulty tracker should be displayed
+        const diffDisplay = game.settings.get("sfrpg", "difficultyDisplay");
+        const diffObject = new CombatDifficulty(activeCombat);
+
+        if (activeCombat.getCombatType() === "normal") {
+            diffObject.getNormalEncounterInfo();
+        } else if (activeCombat.getCombatType() === "starship") {
+            diffObject.getStarshipEncounterInfo();
+        }
+
+        // Display difficulty if appropriate
+        if (activeCombat.getCombatType() !== "vehicleChase" && diffDisplay) {
+            activeCombat.renderDifficulty(diffObject, html[0]);
+        }
+
+        // Handle button presses
         const difficultyButton = header.find('.combat-difficulty');
         difficultyButton.click(async ev => {
             ev.preventDefault();
