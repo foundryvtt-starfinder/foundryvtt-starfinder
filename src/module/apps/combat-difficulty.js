@@ -6,23 +6,31 @@
 export class CombatDifficulty extends Application {
     constructor(combatData, options = {}) {
         super(combatData, options);
-        this.options.classes = ["sfrpg", "app"];
-
         this.combatData = combatData;
     }
 
-    async prepDialog() {
-        console.log(this);
-        console.log("Starfinder | Rendering Encounter Statistics Dialog");
+    static get defaultOptions() {
+        const options = super.defaultOptions;
+        options.id = "encounter-stats";
+        options.classes = ["sfrpg"];
+        options.width = "auto";
+        options.height = "auto";
+        return options;
+    }
+
+    get title() {
+        const title = `${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.Details")}: ${CONFIG.SFRPG.difficultyLevels[this.difficultyData.difficulty]} ${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.DifficultyEncounter")}`;
+        return title;
+    }
+
+    get template() {
         const isStarship = this.combatData.flags.sfrpg.combatType === "starship";
         const contentTemplate = `//systems/sfrpg/templates/apps/${isStarship ? "starship" : "normal"}-encounter-stats.hbs`;
+        return contentTemplate;
+    }
 
-        new Dialog({
-            title: `${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.Details")}: ${CONFIG.SFRPG.difficultyLevels[this.difficultyData.difficulty]} ${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.DifficultyEncounter")}`,
-            content: await renderTemplate(contentTemplate, this),
-            buttons: {},
-            resizable: true
-        }, {id: "encounter-stats"}).render(true);
+    getData() {
+        return this;
     }
 
     getStarshipEncounterInfo() {

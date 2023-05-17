@@ -790,7 +790,7 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
         const difficultyButton = header.find('.combat-difficulty');
         difficultyButton.click(async ev => {
             ev.preventDefault();
-            diffObject.prepDialog();
+            diffObject.render(true);
         });
     }
 });
