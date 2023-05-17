@@ -579,7 +579,13 @@ export class CombatSFRPG extends Combat {
 
         let combatTypeControls = document.createElement("div");
         combatTypeControls.classList.add("combat-type");
-        combatTypeControls.innerHTML = `${prevCombatTypeButton} &nbsp; ${this.getCombatName()} &nbsp; ${nextCombatTypeButton}`;
+
+        if (game.user.isGM) {
+            combatTypeControls.innerHTML = `${prevCombatTypeButton} &nbsp; ${this.getCombatName()} &nbsp; ${nextCombatTypeButton}`;
+        } else {
+            combatTypeControls.innerHTML = this.getCombatName();
+        }
+
         html.getElementsByClassName('combat-tracker-header')[0].appendChild(combatTypeControls);
     }
 
@@ -762,9 +768,7 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
         }
     } else {
         // Add buttons for switching combat type
-        if (game.user.isGM) {
-            activeCombat.renderCombatTypeControls(html[0]);
-        }
+        activeCombat.renderCombatTypeControls(html[0]);
 
         // Handle button clicks
         const configureButtonPrev = header.find('.combat-type-prev');
