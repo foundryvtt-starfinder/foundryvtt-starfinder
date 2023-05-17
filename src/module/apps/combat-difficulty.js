@@ -34,7 +34,7 @@ export class CombatDifficulty extends Application {
         return this;
     }
 
-    async activateListeners(html) {
+    activateListeners(html) {
         html.find("li.combatant-list").on("click", (event) => this._onCombatantClick(event));
     }
 
