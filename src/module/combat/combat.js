@@ -570,7 +570,7 @@ export class CombatSFRPG extends Combat {
         let phaseDisplay = document.createElement("h4");
         phaseDisplay.classList.add("combat-type");
         phaseDisplay.innerHTML = game.i18n.format(this.getCurrentPhase().name);
-        document.getElementsByClassName('combat-tracker-header')[0].appendChild(phaseDisplay);
+        html.getElementsByClassName('combat-tracker-header')[0].appendChild(phaseDisplay);
     }
 
     renderCombatTypeControls(html) {
