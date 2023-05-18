@@ -46,6 +46,20 @@ export class CombatDifficulty extends Application {
         actor.sheet.render(true);
     }
 
+    async render(force, options = {}) {
+        // Ensure this data is up to date, particularly important when the combat tracker re-renders
+        if (this.combatData.getCombatType() === "normal") this.getNormalEncounterInfo();
+        else if (this.combatData.getCombatType() === "starship") this.getStarshipEncounterInfo();
+
+        if (!(this.appId in game.combat.apps)) game.combat.apps[this.appId] = this;
+        super.render(force, options);
+    }
+
+    async close(options = {}) {
+        delete game.combat.apps[this.appId];
+        super.close(options);
+    }
+
     getStarshipEncounterInfo() {
         // Performs starship encounter difficulty calculations and populates data storage location
 

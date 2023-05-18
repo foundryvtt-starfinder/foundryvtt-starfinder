@@ -758,6 +758,8 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
         return;
     }
 
+    const combatType = activeCombat.getCombatType();
+
     const header = html.find('.combat-tracker-header');
     const footer = html.find('.directory-footer');
 
@@ -790,22 +792,18 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
         });
     }
 
-    // Perform difficulty calculations
-    if (game.user.isGM) {
-        // Return whether the difficulty tracker should be displayed
+    // Perform difficulty calculations, and display if appropriate
+    if (game.user.isGM && combatType !== "vehicleChase") {
         const diffDisplay = game.settings.get("sfrpg", "difficultyDisplay");
+        if (!diffDisplay) return;
+
         const diffObject = new CombatDifficulty(activeCombat);
 
-        if (activeCombat.getCombatType() === "normal") {
-            diffObject.getNormalEncounterInfo();
-        } else if (activeCombat.getCombatType() === "starship") {
-            diffObject.getStarshipEncounterInfo();
-        }
+        if (combatType === "normal") diffObject.getNormalEncounterInfo();
+        else if (combatType === "starship") diffObject.getStarshipEncounterInfo();
 
-        // Display difficulty if appropriate
-        if (activeCombat.getCombatType() !== "vehicleChase" && diffDisplay) {
-            activeCombat.renderDifficulty(diffObject, html[0]);
-        }
+        // Display difficulty
+        activeCombat.renderDifficulty(diffObject, html[0]);
 
         // Handle button presses
         const difficultyButton = header.find('.combat-difficulty');
