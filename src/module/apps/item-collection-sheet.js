@@ -202,7 +202,7 @@ export class ItemCollectionSheet extends DocumentSheet {
         let li = $(event.currentTarget).parents('.item');
         let itemId = li.attr("data-item-id");
         const item = this.itemCollection.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
-        let chatData = await this.getChatData(item, { secrets: true, rollData: item });
+        let chatData = await this.getChatData(item, { secrets: true, rollData: item.system });
 
         if (li.hasClass('expanded')) {
             let summary = li.children('.item-summary');
@@ -296,7 +296,6 @@ export class ItemCollectionSheet extends DocumentSheet {
         const labels = itemData.labels || {};
 
         htmlOptions.async = true;
-        htmlOptions.rollData ||= (this.actor.getRollData() ?? {});
 
         // Rich text description
         data.system.description.value = await TextEditor.enrichHTML(data.system.description.value, htmlOptions);

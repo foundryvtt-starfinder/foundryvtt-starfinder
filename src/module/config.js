@@ -1046,8 +1046,7 @@ SFRPG.augmentationTypes = {
     "biotech": "SFRPG.Biotech",
     "magitech": "SFRPG.Magitech",
     "necrograft": "SFRPG.Necrograft",
-    "personal": "SFRPG.PersonalUpgrade",
-    "speciesGraft": "SFRPG.SpeciesGraft"
+    "personal": "SFRPG.PersonalUpgrade"
 };
 
 SFRPG.consumableTypes = {

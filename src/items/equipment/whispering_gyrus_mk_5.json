@@ -5,24 +5,9 @@
   "img": "icons/magic/control/silhouette-aura-energy.webp",
   "system": {
     "type": "necrograft",
-    "ability": null,
     "abilityMods": {
       "parts": []
     },
-    "actionTarget": "",
-    "actionType": "",
-    "activation": {
-      "type": "reaction",
-      "condition": "",
-      "cost": 0
-    },
-    "area": {
-      "effect": "",
-      "shape": "",
-      "units": "none",
-      "value": null
-    },
-    "attackBonus": 0,
     "attributes": {
       "ac": {
         "value": ""
@@ -36,28 +21,19 @@
       },
       "hp": {
         "max": "",
-        "value": 55
+        "value": 6
       },
       "size": "medium",
       "sturdy": false
     },
     "attuned": false,
     "bulk": "-",
-    "chatFlavor": "",
-    "container": {
-      "contents": [],
-      "includeContentsInWealthCalculation": true,
-      "isOpen": true,
-      "storage": []
-    },
     "critical": {
-      "effect": "",
       "parts": []
     },
     "damage": {
       "parts": []
     },
-    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
@@ -65,21 +41,14 @@
       "unidentified": "",
       "value": "<p>A whispering gyrus is a wisp of errant thought from an allip grafted directly into your brain or comparable organ. The frenetic whispers of the gyrus permeate your thoughts, giving you a –2 penalty to Wisdom-based skills and ability checks. A number of times per day equal to the necrograft’s mark, you can instead heed the whispers as a reaction when attempting an Intelligence-, Wisdom-, or Charisma-based skill check to negate the penalty from the gyrus and gain a +5 insight bonus to the check. In addition, the gyrus provides an enhancement bonus equal to its mark on saves against fear effects, languagedependent effects, and effects that cause confusion or sleep.</p>"
     },
-    "descriptors": [],
-    "duration": {
-      "units": "",
-      "value": ""
-    },
-    "equippable": true,
+    "equippable": false,
     "equipped": false,
-    "formula": "",
     "identified": true,
-    "isActive": null,
     "level": 20,
     "modifiers": [
       {
         "_id": "4d17c2d3-5450-4449-b779-ebfa2feaf2df",
-        "name": "Whispering gyrus - Wisdom penalty",
+        "name": "Whispering gyrus",
         "type": "untyped",
         "condition": "",
         "effectType": "ability-skills",
@@ -87,14 +56,14 @@
         "max": -2,
         "modifier": "-2",
         "modifierType": "formula",
-        "notes": "The frenetic whispers of the gyrus permeate your thoughts, giving you a –2 penalty to Wisdom-based skills and ability checks.",
+        "notes": "",
         "source": "",
         "subtab": "misc",
         "valueAffected": "wis"
       },
       {
         "_id": "c6bbef7e-6dda-40b8-8f82-3354a9146c4a",
-        "name": "Whispering gyrus - Wisdom penalty",
+        "name": "Whispering gyrus",
         "type": "untyped",
         "condition": "",
         "effectType": "ability-check",
@@ -102,7 +71,7 @@
         "max": -2,
         "modifier": "-2",
         "modifierType": "formula",
-        "notes": "The frenetic whispers of the gyrus permeate your thoughts, giving you a –2 penalty to Wisdom-based skills and ability checks.",
+        "notes": "",
         "source": "",
         "subtab": "misc",
         "valueAffected": "wis"
@@ -117,7 +86,7 @@
         "max": 5,
         "modifier": "+5",
         "modifierType": "formula",
-        "notes": "A number of times per day equal to the necrograft’s mark, you can instead heed the whispers as a reaction when attempting an Intelligence-, Wisdom-, or Charisma-based skill check to negate the penalty from the gyrus and gain a +5 insight bonus to the check.",
+        "notes": "",
         "source": "",
         "subtab": "misc",
         "valueAffected": "int"
@@ -132,7 +101,7 @@
         "max": 5,
         "modifier": "+5",
         "modifierType": "formula",
-        "notes": "A number of times per day equal to the necrograft’s mark, you can instead heed the whispers as a reaction when attempting an Intelligence-, Wisdom-, or Charisma-based skill check to negate the penalty from the gyrus and gain a +5 insight bonus to the check.",
+        "notes": "",
         "source": "",
         "subtab": "misc",
         "valueAffected": "wis"
@@ -140,59 +109,22 @@
       {
         "_id": "f2bbba03-f407-4924-9868-de0b1aceeb92",
         "name": "Whispering gyrus",
-        "type": "insight",
+        "type": "enhancement",
         "condition": "",
         "effectType": "ability-skills",
-        "enabled": false,
+        "enabled": true,
         "max": 5,
         "modifier": "+5",
         "modifierType": "formula",
-        "notes": "A number of times per day equal to the necrograft’s mark, you can instead heed the whispers as a reaction when attempting an Intelligence-, Wisdom-, or Charisma-based skill check to negate the penalty from the gyrus and gain a +5 insight bonus to the check.",
+        "notes": "",
         "source": "",
         "subtab": "misc",
         "valueAffected": "cha"
-      },
-      {
-        "_id": "df9ea688-f978-47ec-8862-3559243bcc3d",
-        "name": "Whispering gyrus, Mk 5",
-        "type": "enhancement",
-        "condition": "",
-        "effectType": "saves",
-        "enabled": false,
-        "max": 5,
-        "modifier": "5",
-        "modifierType": "formula",
-        "notes": "The gyrus provides an enhancement bonus equal to its mark on saves against fear effects, languagedependent effects, and effects that cause confusion or sleep.",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": ""
       }
     ],
     "price": 775000,
     "quantity": 1,
-    "quantityPerPack": 1,
-    "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
-    },
-    "rollNotes": "",
-    "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": ""
-    },
-    "source": "AR pg. 97",
-    "system": "brain",
-    "target": {
-      "type": "",
-      "value": ""
-    },
-    "uses": {
-      "max": 5,
-      "per": "day",
-      "value": 5
-    }
+    "source": "ARM, p. 97",
+    "system": "brain"
   }
 }

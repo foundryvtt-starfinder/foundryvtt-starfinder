@@ -33,11 +33,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         this._getHangarBayData(data);
 
         // Encrich text editors
-        data.enrichedDescription = await TextEditor.enrichHTML(this.actor.system.details.description.value, {
-            async: true,
-            rollData: this.actor.getRollData() ?? {},
-            secrets: this.actor.isOwner
-        });
+        data.enrichedDescription = await TextEditor.enrichHTML(this.object.system.details.description.value, {async: true});
 
         return data;
     }
@@ -364,7 +360,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
             if (oldRole) {
                 const originalRole = crew[oldRole];
-                originalRole.actorIds = originalRole.actorIds.filter(x => x !== actorId);
+                originalRole.actorIds = originalRole.actorIds.filter(x => x != actorId);
             }
 
             await this.actor.update({

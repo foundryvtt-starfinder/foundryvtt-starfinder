@@ -164,17 +164,8 @@ export class ActorSheetSFRPG extends ActorSheet {
         this._prepareItems(data);
 
         // Enrich text editors. The below are used for character, drone and npc(2). Other types use editors defined in their class.
-        const secrets = this.actor.isOwner;
-        data.enrichedBiography = await TextEditor.enrichHTML(this.actor.system.details.biography.value, {
-            async: true,
-            rollData: this.actor.getRollData() ?? {},
-            secrets
-        });
-        data.enrichedGMNotes = await TextEditor.enrichHTML(this.actor.system.details.biography.gmNotes, {
-            async: true,
-            rollData: this.actor.getRollData() ?? {},
-            secrets
-        });
+        data.enrichedBiography = await TextEditor.enrichHTML(this.object.system.details.biography.value, {async: true});
+        data.enrichedGMNotes = await TextEditor.enrichHTML(this.object.system.details.biography.gmNotes, {async: true});
 
         return data;
     }
@@ -1020,9 +1011,9 @@ export class ActorSheetSFRPG extends ActorSheet {
      */
     async _onItemSummary(event) {
         event.preventDefault();
-        const li = $(event.currentTarget).parents('.item');
-        const item = this.actor.items.get(li.data('item-id'));
-        const chatData = await item.getChatData();
+        let li = $(event.currentTarget).parents('.item'),
+            item = this.actor.items.get(li.data('item-id')),
+            chatData = await item.getChatData({ secrets: this.actor.isOwner, rollData: this.actor.system });
 
         if (li.hasClass('expanded')) {
             const summary = li.children('.item-summary');

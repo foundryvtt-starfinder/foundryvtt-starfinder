@@ -1,79 +1,3 @@
-# v0.23.0 - The one that got away
-So for a variety of reasons, this update took us 3 months. The good news is that means there's some cool new features here, and a shed-load of compendium updates and data entry.
-
-## Inline buttons
-We've added a handful of inline buttons to perform certain system specific behaviour. The three current ones are `@Browser`, which opens a compendium browser, `@Icon`, which shows the icon of things like Envoy Improv descriptors or Solarian Revelation types, and `@Check`, which rolls a check. You can view the syntax and full details of these on the wiki.
-
-## Simplified formulas
-Damage roll dialogs and Check dialogs will now simplify any computed formulas into their final form. So ugly formulas like `lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d(lookupRange(@details.cl.value,3,7,4))+lookupRange(@details.cl.value,0,3,floor(@details.level.value/2))` will be simply `1d3 + 1`. This simplification is available to modules and macros to use too, via the `simplifiedFormula` getter on `RollSFRPG`.
-
-## Level up button
-A simple QoL feature that will go a long way; when you have enough XP to level up, a handy level up button will appear next to your class(es), removing the need to dig through class sheets to level yourself up
-
-## The great augmentation audit
-One of the reasons this update took so long, Iankid undertook a gruelling audit of nearly every augmentation in the system, updating them with the latest modifier technology and system features, and generally cleaning them up a great deal. If you have any augmentations, it's recommended to pull fresh version from the compendium
-
-## Core system improvements
-* Migrated the compendium art mapping feature to V10
-* Show mapped compendium art in the alien browser
-* Add augmentation filtering to the equipment browser
-* Holding shift while applying damage from chat cards will bring up a window allowing you to modify the applied damage
-* Enable global illumination on scenes by default
-* Updated nomenclature of "race" and "racial" to "species"
-* Shrunk the height of items on sheets, and slightly redesigned the spellbook tab
-* Trimmed borders off sheets
-* Remove minimum height on sheets
-* Adjust CSS to round sheet corners
-* Trim margins on item sidebars, removing unnecessary scrollbars
-* The system is now served in a minified state, improving load times
-* The XP bar now changes colour depending on how much XP you have
-* Implement a French translation for the gunnery skill, and various other fields on sheets
-* Display Temp HP on NPCs
-* Refactor custom math functions and implement a conditional ternary function, updated some formulas to use the ternary function
-* Removed the currency locale setting, instead deferring to your Foundry client language setting
-* Run prettier on LESS files
-* The return value of rolls now includes the `Roll` object, for use in modules and macros
-* Defer to creating Item Piles loot tokens if enabled
-* Refactor item chat data, and ensure inline attributes in items pull actor/item data correctly
-* Added `renderWithFilters`, a system function to render a compendium browser with specific pre-defined filters, exposed and available to modules and macros
-* Expose the various `get[Type]Browser` functions allowing modules and macro to interact with compendium browsers better
-* Convert several hard-coded strings to utilise localisations
-* Update data sanitisation to ensure links and italics have spaces before them
-* Update system fonts to latest versions, and to use a more efficient file format
-
-## Compendium improvements
-* Add missing Alien Archive actors (should be 100% coverage now!)
-* Add various missing actors from old APs
-* Add actors from Drift Hackers
-* Add various missing Solarian Revelations
-* Implement the February 2023 Errata
-* Corrected Daredevil modifier names
-* Corrected Exceptional Vision modifier names
-* Corrected Honey Production modifier names
-* Add Drone Mods as Exocortex Mods
-* Seperate tool kits into indiviudal items
-* Fix the mistakenly swapped Quick Change spells
-* Add concentration to the Wall of Steam spell
-* Add roll tables for species and sub-species
-* Adjust Entropic Strike damage to account for Weapon Specialisation
-* Add links to the android species, and add some modifiers to various armor upgrades
-* Add Drift Crisis Treasures
-* Add an archetype rules journal, and begin splitting archetype features into their own compendium
-* Add School specialist archetype
-* Implemented ammo tracking on the Inferno Knife
-* Audit strength modifiers on melee weapons
-* Fix description of Dross guns and Void hide.
-* Add inline calculations to some Envoy Improvisations
-* Added Scalegraser Weapons and the Cunning weapon fusion
-* Updated Skitterpunk modifiers
-
-## Bugfixes
-* Fix armor type filtering in the compendium browser
-* Fix new blank classes bricking character sheets
-* Fix some aliens being unable to open
-* Ensure existing class slugs are respected
-
-
 # v0.22.1 - Hotfix
 This is just a small hotfix mainly to fix the floating numbers settings window from opening, with a few other tweaks that accumulated in the meantime.
 
@@ -84,7 +8,7 @@ This is just a small hotfix mainly to fix the floating numbers settings window f
 ## Bugfixes
 * The floating numbers settings window now opens.
 * The pause icon of the custom SFRPG theme can now be correctly overridden by modules.
-* Restored hazard damage rolls, and removed some redundant flavour text.
+* Restored hazard damage rolls, and removed some redundant flavour text. 
 
 ## Compendium improvements
 * Replaced several incorrect attribute references in spells.
@@ -222,7 +146,7 @@ changes made in the core software. And addresses many the backwards compatabilit
     * Fixed drag and drop functionality from the compendium browser
 * Fixed the issues with measured templates
 * Fixed bulk calculations so they don't display `NaN`
-* Fixed wealth calculations so they don't display `NaN`
+* Fixed wealth calculations so they don't display `NaN` 
 * Fixed issues where various sheets wouldn't open with error messages about exceding the maximum call stack
 * Updated the description fields for the various entities to utilize new functionality provided by foundry
 * Fixed item macro creation on drag and drop
@@ -322,10 +246,10 @@ This update includes a quick fix for some container items in the compendiums cua
 
 # v0.19.0 - Starfinder Update
 
-This update includes a lot of quality of life improvements and some additions and updates to the compendiums.
+This update includes a lot of quality of life improvements and some additions and updates to the compendiums. 
 
 ## Concerning Backwards Compatibility with Foundry VTT v0.8.x
-**WARNING** This update breaks backwards compatibility with the v0.8.x branch of Foundry. We held off on this breaking change as long as we could, but with Foundry v10 on the horizon, it was time to pull the plug.
+**WARNING** This update breaks backwards compatibility with the v0.8.x branch of Foundry. We held off on this breaking change as long as we could, but with Foundry v10 on the horizon, it was time to pull the plug. 
 
 ## New Features
 ### WebP conversion
@@ -378,7 +302,7 @@ This is a hotfix release to fix an issue where it was imposible to apply damage 
 
 # v0.18.2 - Precog Pioneers
 
-This is a hotfix to re enable backwards compatability to v0.8.9.
+This is a hotfix to re enable backwards compatability to v0.8.9. 
 
 _**NOTE:** This will be the last version that will support any Foundry VTT version less than v9._
 
@@ -745,7 +669,7 @@ game.sfrpg = {
         RPC,
         SFRPGEffectType,
         SFRPGModifier,
-        SFRPGModifierType,
+        SFRPGModifierType,        
         SFRPGModifierTypes
 };
 ```
@@ -754,7 +678,7 @@ If any module developers have any questions on what these are and what they are 
 
 # v0.11.4 - Starfinder
 
-This is a bug fix release that corrects a couple of major issues that were discovered by the community. The recent changes to the Foundry VTT Roll API caused some unforeseen issues that weren't obvious when we initially updated the system for Foundry v0.8.x compatibility.
+This is a bug fix release that corrects a couple of major issues that were discovered by the community. The recent changes to the Foundry VTT Roll API caused some unforeseen issues that weren't obvious when we initially updated the system for Foundry v0.8.x compatibility. 
 
 ## New Features
 ### Ammunition Tracking
@@ -782,7 +706,7 @@ The Starfinder system provides a couple of hooks that allow module and macro dev
 
 # v0.11.3 - Starfinder
 
-This is another in a round of updates to correct issues encountered with the latest version of foundry.
+This is another in a round of updates to correct issues encountered with the latest version of foundry. 
 
 * Modifiers couldn't be deleted, this has been corrected. Fixes #400 .
 * Fixed some warnings that were occurring when creating starships.
@@ -796,7 +720,7 @@ This is another in a round of updates to correct issues encountered with the lat
 
 # v0.11.2 - Starfinder
 
-This is a hotfix release to correct some issues that were not found during beta testing.
+This is a hotfix release to correct some issues that were not found during beta testing. 
 
 * Fixes modifiers not working for feats, weapons, and a few other item types.
 * Measured templates weren't working correctly.
@@ -821,7 +745,7 @@ Even though this is a stable release, there is always the potential for data cor
 This is a beta version that updates Starfinder to be compatible with Foundry v0.8.x.
 
 **Important**
-You will have to install this update through the package browser using a manifest URL.
+You will have to install this update through the package browser using a manifest URL. 
 
 * **Make a backup of your data!**
 * Uninstall the current version of the system. Skip this if this is a fresh install of Foundry VTT v0.8.5
@@ -831,7 +755,7 @@ You will have to install this update through the package browser using a manifes
 
 There is not any new functionality beyond just updating the system to work with the newest major release of Foundry. Most things should be working, but we need fresh eyes on the system to make sure that is the case. There are a few known issues, but they shouldn't be game breaking:
 
-1) The loot sheet's have some known issues.
+1) The loot sheet's have some known issues. 
 2) The Equipment browser isn't working quite the way I'd expect it to in Firefox. When selecting options on the left side of the dialog, it's not creating a vertical scroll bar. I'm not 100% sure if it's a browser issue or not.
 3) The system will run a migration every time a world is loaded currently. We're still investigating this issue.
 
@@ -862,7 +786,7 @@ I'd like to thank first time contributors for there contributions! There were a 
 This is a big release for the Starfinder system, predominantly focused on adding improvements to vehicles.
 
 ## Vehicle Sheet overhaul
-After the completion of the Starship Sheets, the vehicle sheet now got its turn.
+After the completion of the Starship Sheets, the vehicle sheet now got its turn. 
 
 First, vehicles now have systems, weapons, passengers (broken into pilot, complement & passengers) and hangar bays. Passengers function similarly to the way they work for Starships. Vehicles now also have Vehicle Systems which can be used to roll piloting checks (like Autopilot), or provide additional senses for passengers. It is also possible for vehicles to contain starship expansion bays, if they have expansion bay systems.
 
@@ -1007,7 +931,7 @@ There are also numerous other improvements made to the system, so be sure to rea
 
 # v0.7.1.4 - Starfinder
 
-Just fixing the fix that fixed the other fix. Last time today, I swear 😄!
+Just fixing the fix that fixed the other fix. Last time today, I swear 😄! 
 
 # v0.7.1.3 - Starfinder
 
@@ -1183,7 +1107,7 @@ Sorry for taking so long to get this one out the door, but real life things got 
 - Shields! Added shields as an item type
 - Ability Score Increases are now handled with an item.
 
-I'd like to thank everyone for there contributions for this round of updates (there wouldn't be much otherwise!).
+I'd like to thank everyone for there contributions for this round of updates (there wouldn't be much otherwise!). 
 
 This will most likely be the last update for the current stable branch of Foundry (v0.6.6). After this release, we will switch our focus to bringing the Starfinder system inline with the current beta (v0.7.3). Because of how module and system releases are handled in foundry, the next couple of releases won't come through the normal update channels, so be watching discord to see when the next release of Starfinder comes out. Once the v0.7.x branch of Foundry hits stable, we will do a proper release at that time. Thanks for all of the support, it is appreciated!
 
@@ -1225,7 +1149,7 @@ I'd like to thank everyone that has contributed to this release. What I thought 
 
 # v0.4.0.1 Beta - Starfinder
 
-This is a beta snapshot of the current development branch. This release should be fairly stable, but there is a chance there are some game breaking bugs, so download and use at your own risk!
+This is a beta snapshot of the current development branch. This release should be fairly stable, but there is a chance there are some game breaking bugs, so download and use at your own risk! 
 
 This being a beta release, it will not appear in the foundry module browser, nor will you get a message in foundry that there is an update available. If you are adventurous and wouldn't mind helping us find some bugs, you can download the update from here:
 
@@ -1249,7 +1173,7 @@ There are a lot of juicy new things in here, so here is the change log:
 - Added ability to add roll formulas to modifiers
 - Added ability to add modifiers to Attack rolls and damage
 - Fixes Drone sheets not adding in AC correctly
-- Updates to the race compendium
+- Updates to the race compendium 
 - Fixes an issue where the `rollMode` on the roll dialog boxes wasn't being honored
 - Fix for an issue where the Maximum Dexterity modifier was being calculated correctly on a piece of armor that has a max dex of 0
 - A few of the chat cards where not allowing the descriptive text to be collapsed, this has been fixed
@@ -1292,7 +1216,7 @@ We've been given the green light by Paizo to use the community use policy, so th
 
 - Changed SFRPG back Starfinder in the README
 - Added legal blurb at the end of the README about how this system is using some images and names as allowed under Paizo's community use policy
-- Added a ton of images that were provided by community members.
+- Added a ton of images that were provided by community members. 
 - Added images that are available from the Paizo community use packages for Starfinder
 - Includes some grammatical corrections
 - New custom dice roll chat cards
@@ -1373,7 +1297,7 @@ This is a big update with a few bug fixes and a lot of new features and content.
 * Fixed the critical and fail dice highlighting.
 * Item chat card description text can now be toggled to be open or closed.
 * Added a system setting that allows a player to auto close Item chat card descriptions.
-* Enhanced the class item
+* Enhanced the class item 
 * Enhanced the race item
 * Added a new classes compendium item with all of the core classes from the Core Rulebook
 * Added a new races compendium item with all of seven of the core races, as well as all six of the Pathfinder legacy races.
@@ -1399,7 +1323,7 @@ Hot fix release to fix consumable items.
 
 This update fixes a few things, adds some new features, and adds a lot of new content!
 
-* Fix for #33 and #32. It is now possible to add weapons manually to starship actors.
+* Fix for #33 and #32. It is now possible to add weapons manually to starship actors. 
 * Adds feature request for #30. Adds an attack and damage button to items that can make attacks on the inventory tab. This is the initial release of the feature, so how and where it functions might change.
 * Partial implementation for #22. This adds some ability to track the number of available hands that a character has, but doesn't go much further than that. I will consider implementing the rest of the request at a later date.
 * Moves the starship data values to the `STARFINDER` configuration object.
@@ -1451,7 +1375,7 @@ This release updates the system to be compatible with the new embedded entity ap
 
 Some notable changes:
 
-* Overrode some core styling that was adding extra margin to `img` tags
+* Overrode some core styling that was adding extra margin to `img` tags 
 * Added the ability to drag items for the character sheet into the new Macro hot bars
 
 # v0.1.6 - Release
@@ -1473,7 +1397,7 @@ This adds support for v0.4.2+ of the Foundry Virtual Tabletop.
 This fixes an issue with how damage was being applied when using the apply damage context menu in the chat panel. Starfinder has different rules for this than 5e because there are two damage tracks instead of one. I also updated the README.
 
 # v0.1.1 - Initial Release of the Starfinder system
-This is the first release for the Starfinder system for the awesome Foundry Virtual Tabletop. This version isn't close to being feature complete, but I wanted to get it out there so people could start using it.
+This is the first release for the Starfinder system for the awesome Foundry Virtual Tabletop. This version isn't close to being feature complete, but I wanted to get it out there so people could start using it. 
 
 ## Bugs and Issues
 

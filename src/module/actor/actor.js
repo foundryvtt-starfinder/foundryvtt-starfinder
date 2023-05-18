@@ -489,17 +489,15 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
             return new Promise(resolve => {
                 new Dialog({
-                    title: game.i18n.format(
-                        "SFRPG.SkillTrainedOnlyDialog.Title", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)] }
-                    ),
+                    title: `${CONFIG.SFRPG.skills[skillId.substring(0, 3)]} is trained only`,
                     content: content,
                     buttons: {
                         yes: {
-                            label: game.i18n.localize("Yes"),
+                            label: "Yes",
                             callback: () => resolve(this.rollSkillCheck(skillId, skl, options))
                         },
                         cancel: {
-                            label: game.i18n.localize("No")
+                            label: "No"
                         }
                     },
                     default: "cancel"
@@ -826,18 +824,12 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
                 flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${dcRoll.roll.total}</p>`;
             } else {
-                flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${await TextEditor.enrichHTML(dc.value, {
-                    async: true,
-                    rollData: this.getRollData() ?? {}
-                })}</p>`;
+                flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${await TextEditor.enrichHTML(dc.value, {async: true})}</p>`;
             }
         }
 
         flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.NormalEffect")}: </strong>`;
-        flavor += await TextEditor.enrichHTML(selectedFormula.effectNormal || actionEntry.system.effectNormal, {
-            async: true,
-            rollData: this.getRollData() ?? {}
-        });
+        flavor += await TextEditor.enrichHTML(selectedFormula.effectNormal || actionEntry.system.effectNormal, {async: true});
         flavor += "</p>";
 
         if (actionEntry.system.effectCritical) {
@@ -845,10 +837,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             if (critEffectDisplayState !== 'never') {
                 if (critEffectDisplayState === 'always' || rollResult.roll.dice[0].values[0] === 20) {
                     flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.CriticalEffect")}: </strong>`;
-                    flavor += await TextEditor.enrichHTML(selectedFormula.effectCritical || actionEntry.system.effectCritical, {
-                        async: true,
-                        rollData: this.getRollData() ?? {}
-                    });
+                    flavor += await TextEditor.enrichHTML(selectedFormula.effectCritical || actionEntry.system.effectCritical, {async: true});
                     flavor += "</p>";
                 }
             }

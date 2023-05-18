@@ -43,10 +43,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         this._getCrewData(data);
 
         // Encrich text editors
-        data.enrichedDescription = await TextEditor.enrichHTML(this.actor.system.details.notes, {
-            async: true,
-            rollData: this.actor.getRollData() ?? {}
-        });
+        data.enrichedDescription = await TextEditor.enrichHTML(this.object.system.details.notes, {async: true});
 
         return data;
     }
@@ -793,7 +790,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
         const doc = index.find(i => i.name === (li.prevObject[0].innerHTML));
         const item = await pack.getDocument(doc._id);
-        const chatData = await item.getChatData();
+        const chatData = await item.getChatData({ secrets: this.actor.isOwner, rollData: this.actor.system });
 
         let content = `<p><strong>${game.i18n.localize("SFRPG.StarshipSheet.Actions.Tooltips.NormalEffect")}:</strong> ${chatData.effectNormal}</p>`;
         if (chatData.effectCritical) {
