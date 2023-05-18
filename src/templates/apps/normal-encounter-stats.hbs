@@ -24,7 +24,7 @@
                     {{localize "SFRPG.Combat.Difficulty.Tooltip.EnemyXP"}}
                 </td>
                 <td class="table-right">
-                    {{difficultyData.enemyXP}} {{localize "SFRPG.Combat.Difficulty.Units.XP"}}
+                    {{numberFormat difficultyData.enemyXP}} {{localize "SFRPG.Combat.Difficulty.Units.XP"}}
                 </td>
             </tr>
             <tr>
@@ -43,8 +43,10 @@
                     {{localize "SFRPG.Combat.Difficulty.Tooltip.PlayerXP"}}
                 </td>
                 <td class="table-right" style="width: 50%;">
-                    <i class="fas fa-circle-info" data-tooltip="The first value is the total of all enemies' XP divided by the number of players.<br>The value in parentheses is the value from Table 11-3 on CRB pg. 390."></i>
-                    {{difficultyData.divPlayerXP}} ({{difficultyData.arrayPlayerXP}}) {{localize "SFRPG.Combat.Difficulty.Units.XP"}}
+                    <i class="fas fa-circle-info"
+                        data-tooltip="The first value is the total of all enemies' XP divided by the number of players.<br>The value in parentheses is the value from Table 11-3 on CRB pg. 390."></i>
+                    {{numberFormat difficultyData.divPlayerXP}} ({{numberFormat difficultyData.arrayPlayerXP}})
+                    {{localize "SFRPG.Combat.Difficulty.Units.XP"}}
                 </td>
             </tr>
             <tr>
@@ -52,23 +54,23 @@
                     {{localize "SFRPG.Combat.Difficulty.Tooltip.EncounterWealth"}}
                 </td>
                 <td class="table-right">
-                    {{difficultyData.wealth}} {{localize "SFRPG.Combat.Difficulty.Units.Credits"}}
+                    {{numberFormat difficultyData.wealth}} {{localize "SFRPG.Combat.Difficulty.Units.Credits"}}
                 </td>
             </tr>
         </table>
         {{#if (ne difficultyData.leftoverCR "0")}}
-        {{#if (ne difficultyData.difficulty "greaterThanEpic")}}
-            <table>
-                <tr>
-                    <td class="table-left">
-                        {{localize "SFRPG.Combat.Difficulty.Tooltip.CanBeAdded"}}
-                    </td>
-                    <td class="table-right">
-                        {{difficultyData.leftoverCR}}
-                    </td>
-                </tr>
-            </table>
-        {{/if}}
+            {{#if (ne difficultyData.difficulty "greaterThanEpic")}}
+                <table>
+                    <tr>
+                        <td class="table-left">
+                            {{localize "SFRPG.Combat.Difficulty.Tooltip.CanBeAdded"}}
+                        </td>
+                        <td class="table-right">
+                            {{difficultyData.leftoverCR}}
+                        </td>
+                    </tr>
+                </table>
+            {{/if}}
         {{/if}}
     </div>
 
@@ -88,9 +90,7 @@
                     <li class="combatant-list ally" data-combatant-id="{{combatant.id}}">
                         <img class="img" src="{{combatant.img}}" title="{{combatant.name}}" width="48" height="48" />
                         <div class="combatant-info">
-                            <h4>
-                                {{combatant.name}}
-                            </h4>
+                            <h4>{{combatant.name}}</h4>
                             <label class="combatant-level">{{localize "SFRPG.LevelLabelText"}}
                                 {{combatant.actor.system.details.level.value}}</label>
                         </div>
@@ -104,11 +104,10 @@
                     <li class="combatant-list enemy" data-combatant-id="{{combatant.id}}">
                         <img class="img" src="{{combatant.img}}" title="{{combatant.name}}" width="48" height="48" />
                         <div class="combatant-info">
-                            <h4>
-                                {{combatant.name}}
-                            </h4>
+                            <h4>{{combatant.name}}</h4>
                             <label class="combatant-level">{{localize "SFRPG.Combat.Difficulty.Tooltip.CR"}}
-                                {{crDecimalToFraction combatant.actor.system.details.cr}}</label>
+                                {{crDecimalToFraction combatant.actor.system.details.cr}} ({{numberFormat
+                                combatant.actor.system.details.xp.value}} XP)</label>
                         </div>
                     </li>
                 {{/each}}

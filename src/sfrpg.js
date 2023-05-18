@@ -794,9 +794,9 @@ function setupHandlebars() {
         return new Handlebars.SafeString(html);
     });
 
-    Handlebars.registerHelper('currencyFormat', function(value) {
-        const moneyFormatter = new Intl.NumberFormat(game.i18n.lang);
-        const formattedValue = moneyFormatter.format(value);
+    Handlebars.registerHelper('numberFormat', function(value) {
+        const formatter = new Intl.NumberFormat(game.i18n.lang);
+        const formattedValue = formatter.format(value);
         return formattedValue;
     });
 }
