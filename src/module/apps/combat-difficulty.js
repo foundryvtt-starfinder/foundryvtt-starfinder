@@ -71,20 +71,20 @@ export class CombatDifficulty extends Application {
 
         const [playerTierEffective, playerTierRound, playerTierString] = this.calculatePlayerShipEffectiveTier(playerShipTiers);
         this.difficultyData.playerTier = {};
-        this.difficultyData.playerTier.effective = playerTierEffective;
+        this.difficultyData.playerTier.effective = playerTierEffective || 0;
         this.difficultyData.playerTier.round = playerTierRound;
         this.difficultyData.playerTier.string = playerTierString;
 
         const [enemyTierEffective, enemyTierRound, enemyTierString] = this.calculateEnemyShipEffectiveTier(enemyShipTiers);
         this.difficultyData.enemyTier = {};
-        this.difficultyData.enemyTier.effective = enemyTierEffective;
+        this.difficultyData.enemyTier.effective = enemyTierEffective || 0;
         this.difficultyData.enemyTier.round = enemyTierRound;
         this.difficultyData.enemyTier.string = enemyTierString;
 
         const [difficulty, XPValue, wealth] = this.calculateShipChallenge();
         this.difficultyData.difficulty = difficulty;
-        this.difficultyData.XPValue = XPValue;
-        this.difficultyData.wealth = wealth;
+        this.difficultyData.XPValue = XPValue || 0;
+        this.difficultyData.wealth = wealth || 0;
     }
 
     parseShips() {
@@ -153,7 +153,7 @@ export class CombatDifficulty extends Application {
                 tierString = "1/2";
                 break;
             default:
-                tierString = String(tierRound);
+                tierString = String(tierRound || "0");
         }
         return [tierEffective, tierRound, tierString];
     }
@@ -167,14 +167,11 @@ export class CombatDifficulty extends Application {
         if (numShips > 1) {
             if (sortedTiers[1] === sortedTiers[0]) {
                 tierEffective += 2;
-                if (numShips > 2) {
-                    if (sortedTiers[2] === sortedTiers[0]) {
-                        tierEffective += 1;
-                        if (numShips > 3) {
-                            if (sortedTiers[3] === sortedTiers[0]) {
-                                return this.calculatePlayerShipEffectiveTier(shipTiers);
-                            }
-                        }
+                if (numShips > 2 && sortedTiers[2] === sortedTiers[0]) {
+                    tierEffective += 1;
+
+                    if (numShips > 3 && sortedTiers[3] === sortedTiers[0]) {
+                        return this.calculatePlayerShipEffectiveTier(shipTiers);
                     }
                 }
             } else {
@@ -201,7 +198,7 @@ export class CombatDifficulty extends Application {
                 tierString = "1/2";
                 break;
             default:
-                tierString = String(tierRound);
+                tierString = String(tierRound || "0");
         }
         return [tierEffective, tierRound, tierString];
     }
@@ -272,7 +269,7 @@ export class CombatDifficulty extends Application {
 
         const [enemies, enemyXP] = this.calculateEnemyXP();
         this.difficultyData.enemies = enemies;
-        this.difficultyData.enemyXP = enemyXP;
+        this.difficultyData.enemyXP = enemyXP || 0;
 
         const [CR,
             XPArray,
@@ -284,9 +281,9 @@ export class CombatDifficulty extends Application {
         this.difficultyData.CRXPbounds = [XPArray.minXP, XPArray.totalXP];
         this.difficultyData.CRXPboundsString = `${formatter.format(XPArray.minXP)} – ${formatter.format(XPArray.totalXP)}`;
         this.difficultyData.difficulty = difficulty;
-        this.difficultyData.arrayPlayerXP = arrayPlayerXP;
-        this.difficultyData.divPlayerXP = divPlayerXP;
-        this.difficultyData.wealth = wealth;
+        this.difficultyData.arrayPlayerXP = arrayPlayerXP || 0;
+        this.difficultyData.divPlayerXP = divPlayerXP || 0;
+        this.difficultyData.wealth = wealth || 0;
 
         this.difficultyData.leftoverCR = this.calculateLeftoverCR();
     }
@@ -369,7 +366,7 @@ export class CombatDifficulty extends Application {
 
         // Error checking
         if (XPtotal > CRTable["25"].totalXP) {
-            console.log("Error, encounter CR > 25.");
+            // console.log("Error, encounter CR > 25.");
             XParray = CRTable["25"];
             encounterCR = "25";
         } else {
