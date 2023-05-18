@@ -264,6 +264,7 @@ export class CombatDifficulty extends Application {
      * Performs all encounter difficulty calculations for normal combat
      */
     getNormalEncounterInfo() {
+        const formatter = new Intl.NumberFormat(game.i18n.lang);
 
         const [PCs, APL] = this.calculateAPL();
         this.difficultyData.PCs = PCs;
@@ -273,7 +274,6 @@ export class CombatDifficulty extends Application {
         this.difficultyData.enemies = enemies;
         this.difficultyData.enemyXP = enemyXP;
 
-        const formatter = new Intl.NumberFormat(game.i18n.lang);
         const [CR,
             XPArray,
             difficulty,
