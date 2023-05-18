@@ -47,6 +47,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             scrollY: [".tab.details"],
             tabs: [
                 {navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"},
+                {navSelector: ".subtabs", contentSelector: ".sheet-details", initial: "properties"},
                 {navSelector: ".descTabs", contentSelector: ".desc-body", initial: "description"}
             ]
         });
