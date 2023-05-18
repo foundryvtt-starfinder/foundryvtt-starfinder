@@ -46,7 +46,7 @@ export const registerSystemSettings = function() {
         config: true,
         default: false,
         type: Boolean,
-        onChange: s => {
+        onChange: () => {
             ui.chat.render();
         }
     });
@@ -123,7 +123,8 @@ export const registerSystemSettings = function() {
         scope: "world",
         config: true,
         default: true,
-        type: Boolean
+        type: Boolean,
+        onChange: () => ui.combat.render(false)
     });
 
     for (let combatType of SFRPG.combatTypes) {
