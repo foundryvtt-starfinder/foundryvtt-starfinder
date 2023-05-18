@@ -273,6 +273,7 @@ export class CombatDifficulty extends Application {
         this.difficultyData.enemies = enemies;
         this.difficultyData.enemyXP = enemyXP;
 
+        const formatter = new Intl.NumberFormat(game.i18n.lang);
         const [CR,
             XPArray,
             difficulty,
@@ -281,7 +282,7 @@ export class CombatDifficulty extends Application {
             divPlayerXP] = this.calculateChallenge();
         this.difficultyData.CR = CR;
         this.difficultyData.CRXPbounds = [XPArray.minXP, XPArray.totalXP];
-        this.difficultyData.CRXPboundsString = `${XPArray.minXP} – ${XPArray.totalXP}`;
+        this.difficultyData.CRXPboundsString = `${formatter.format(XPArray.minXP)} – ${formatter.format(XPArray.totalXP)}`;
         this.difficultyData.difficulty = difficulty;
         this.difficultyData.arrayPlayerXP = arrayPlayerXP;
         this.difficultyData.divPlayerXP = divPlayerXP;
