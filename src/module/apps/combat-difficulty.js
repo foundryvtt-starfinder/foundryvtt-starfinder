@@ -15,7 +15,7 @@ export class CombatDifficulty extends Application {
         const options = super.defaultOptions;
         options.id = "encounter-stats";
         options.classes = ["sfrpg"];
-        options.width = "auto";
+        options.width = 400;
         options.height = "auto";
         return options;
     }
