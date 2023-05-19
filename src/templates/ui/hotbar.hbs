@@ -1,0 +1,45 @@
+<div id="hotbar" class="flexrow sfrpg" data-tooltip-direction="UP">
+    <div id="hotbar-directory-controls" class="bar-controls flexcol">
+        <a id="bar-toggle" data-tooltip="MACRO.CollapseHotbar">
+            <i class="fas fa-caret-down"></i>
+        </a>
+        <a id="macro-directory" data-tooltip="MACRO.Directory">
+            <i class="fas fa-folder"></i>
+        </a>
+    </div>
+    <nav id="action-bar" class="flexrow {{barClass}}"  aria-label="{{localize 'MACRO.NavLabel'}}">
+        <ol id="macro-list" class="flexrow" data-page="{{page}}">
+            {{#each macros}}
+            <li class="macro {{this.cssClass}}" data-slot="{{this.slot}}"
+                {{#if this.macro}}data-macro-id="{{this.macro.id}}" data-tooltip="{{this.tooltip}}"{{/if}}>
+                <span class="macro-key">{{this.key}}</span>
+                {{#if this.icon}}
+                <img class="macro-icon {{#if this.macro.item.macroConfig.greyscale}}greyscale{{/if}}" src="{{this.icon}}" alt="{{this.tooltip}}" />
+                {{/if}}
+                {{#if this.macro.item}}
+                    {{#if this.macro.item.macroConfig.hasActivation}}
+                        {{#if this.macro.item.macroConfig.isActive}}
+                        <i class="fas fa-check activation" data-tooltip="Activated"></i>
+                        {{else}}
+                        <i class="fas fa-xmark activation" data-tooltip="Not Activated"></i>
+                        {{/if}}
+                    {{/if}}
+                    {{#if this.macro.item.macroConfig.hasCapacity}}
+                    <footer class="macro-footer">{{this.macro.item.macroConfig.capacityCurrent}}/{{this.macro.item.macroConfig.capacityMaximum}}</footer>
+                    {{else if this.macro.item.macroConfig.hasUses}}
+                    <footer class="macro-footer">{{this.macro.item.system.uses.value}}/{{this.macro.item.system.uses.total}}</footer>
+                    {{/if}}
+                {{/if}}
+            </li>
+            {{/each}}
+        </ol>
+        <div id="hotbar-page-controls" class="bar-controls flexcol" data-tooltip-direction="UP">
+            <a class="page-control" data-action="page-up" data-tooltip="MACRO.PageUp" alt="{{localize 'MACRO.PageUp'}}" >
+                <i class="fas fa-angle-up"></i></a>
+            <span class="page-number">{{page}}</span>
+            <a class="page-control" data-action="page-down" data-tooltip="MACRO.PageDown" alt="{{localize 'MACRO.PageDown'}}">
+                <i class="fas fa-angle-down"></i>
+            </a>
+        </div>
+    </nav>
+</div>

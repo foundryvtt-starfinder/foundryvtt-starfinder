@@ -64,6 +64,9 @@ import { SFRPGTokenHUD } from "./module/token/token-hud.js";
 import SFRPGTokenDocument from "./module/token/tokendocument.js";
 import setupVision from "./module/vision.js";
 
+import { HotbarSFRPG, listenForUpdates } from "./module/apps/ui/hotbar.js";
+import { rollItemMacro } from "./module/system/item-macros.js";
+
 import { getAlienArchiveBrowser } from "./module/packs/alien-archive-browser.js";
 import { getEquipmentBrowser } from "./module/packs/equipment-browser.js";
 import { getSpellBrowser } from "./module/packs/spell-browser.js";
@@ -179,6 +182,8 @@ Hooks.once('init', async function() {
     CONFIG.Dice.rolls.unshift(SFRPGRoll);
 
     CONFIG.Token.documentClass = SFRPGTokenDocument;
+
+    CONFIG.ui.hotbar = HotbarSFRPG;
 
     CONFIG.fontDefinitions["Exo2"] = {
         editor: true,
@@ -422,6 +427,9 @@ Hooks.once("ready", async () => {
     BaseEnricher.addListeners();
     ItemSFRPG.chatListeners($("body"));
 
+    console.log("Starfinder | [READY] Connecting item macros to items");
+    listenForUpdates();
+
     if (game.user.isGM) {
         const currentSchema = game.settings.get('sfrpg', 'worldSchemaVersion') ?? 0;
         const systemSchema = Number(game.system.flags.sfrpg.schema);
@@ -508,12 +516,6 @@ Hooks.on("renderChatMessage", (app, html, data) => {
 });
 Hooks.on("getChatLogEntryContext", addChatMessageContextOptions);
 
-Hooks.on("hotbarDrop", (bar, data, slot) => {
-    if (data.type !== "Item") return;
-    createItemMacro(data, slot);
-    return false;
-});
-
 function registerMathFunctions() {
     function lookup(value) {
         for (let i = 1; i < arguments.length - 1; i += 2) {
@@ -546,61 +548,6 @@ function registerMathFunctions() {
         lookup,
         lookupRange
     });
-}
-
-/**
- * Create a Macro form an Item drop.
- * Get an existing item macro if one exists, otherwise create a new one.
- *
- * @param {Object} data The item data
- * @param {number} slot The hotbar slot to use
- * @returns {Promise}
- */
-async function createItemMacro(data, slot) {
-    const item = await Item.fromDropData(data);
-    if (!item) return;
-
-    let macroType = data?.macroType || "chatCard";
-    if (macroType.includes("feat")) macroType = "activate";
-
-    const command = `game.sfrpg.rollItemMacro("${item.name}", "${macroType}");`;
-    let macro = game.macros.contents.find(m => (m.name === item.name) && (m.command === command));
-    if (!macro) {
-        macro = await Macro.create({
-            name: item.name + (macroType !== "chatCard" ? ` (${game.i18n.localize(`SFRPG.ItemMacro.${macroType.capitalize()}`)})` : ""),
-            type: "script",
-            img: item.img,
-            command: command,
-            flags: {"sfrpg.itemMacro": true}
-        }, {displaySheet: false});
-    }
-
-    game.user.assignHotbarMacro(macro, slot);
-}
-
-function rollItemMacro(itemName, macroType) {
-    const speaker = ChatMessage.getSpeaker();
-    let actor;
-
-    if (speaker.token) actor = game.actors.tokens[speaker.token];
-    if (!actor) actor = game.actors.get(speaker.actor);
-    const item = actor ? actor.items.find(i => i.name === itemName) : null;
-    if (!item) return ui.notifications.warn(`Your controlled Actor does not have an item named ${itemName}`);
-
-    switch (macroType) {
-        case "attack":
-            return item.rollAttack();
-        case "damage":
-        case "healing":
-            return item.rollDamage();
-        case "activate":
-            return item.setActive(!item.isActive());
-        case "use":
-            return item.rollConsumable();
-        default:
-            return item.roll();
-    }
-
 }
 
 function setupHandlebars() {
