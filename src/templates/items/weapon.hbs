@@ -21,7 +21,7 @@
 
             {{!-- Details Tab Navigation --}}
             <nav class="sheet-subnavigation subtabs" data-group="subdetails">
-                <a class="item active" data-tab="properties">Properties</a>
+                <a class="item highlight active" data-tab="properties">Properties</a>
                 <a class="item" data-tab="attack">Attack &#38; Damage</a>
                 <a class="item" data-tab="container">Ammunition &#38; Container</a>
                 <a class="item" data-tab="npc">NPC Specific</a>
@@ -33,60 +33,52 @@
                 {{!-- Weapon Properties Tab --}}
                 <div class="tab properties" data-group="subdetails" data-tab="properties">
 
-                    <br />
+                    <div class="bubble">
+                        {{!-- Weapon Type --}}
+                        <div class="form-group">
+                            <label>{{ localize "SFRPG.Items.Weapon.Type" }}</label>
+                            <select name="system.weaponType">
+                                {{#select itemData.weaponType}}
+                                {{#each config.weaponTypes as |name type|}}
+                                <option value="{{type}}">{{name}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                        </div>
 
-                    {{!-- Weapon Type --}}
-                    <div class="form-group">
-                        <label>{{ localize "SFRPG.Items.Weapon.Type" }}</label>
-                        <select name="system.weaponType">
-                            {{#select itemData.weaponType}}
-                            {{#each config.weaponTypes as |name type|}}
-                            <option value="{{type}}">{{name}}</option>
-                            {{/each}}
-                            {{/select}}
-                        </select>
+                        {{!-- Weapon Category --}}
+                        <div class="form-group">
+                            <label>{{ localize "SFRPG.Items.Weapon.Category" }}</label>
+                            <select name="system.weaponCategory">
+                                {{#select itemData.weaponCategory}}
+                                <option value="">Unspecified</option>
+                                {{#each config.weaponCategories as |name type|}}
+                                <option value="{{type}}">{{name}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                        </div>
+
+                        {{!-- Equipment Status --}}
+                        {{> "systems/sfrpg/templates/items/parts/item-status.hbs"}}
+                        
+                        {{!-- Weapon Properties --}}
+                        {{> "systems/sfrpg/templates/items/parts/weapon-properties.hbs"}}
                     </div>
 
-                    {{!-- Weapon Category --}}
-                    <div class="form-group">
-                        <label>{{ localize "SFRPG.Items.Weapon.Category" }}</label>
-                        <select name="system.weaponCategory">
-                            {{#select itemData.weaponCategory}}
-                            <option value="">Unspecified</option>
-                            {{#each config.weaponCategories as |name type|}}
-                            <option value="{{type}}">{{name}}</option>
-                            {{/each}}
-                            {{/select}}
-                        </select>
+                    <div class="bubble">
+                        <h3 class="form-header noborder">{{ localize "SFRPG.Items.Weapon.Usage" }}</h3>
+                        {{!-- Item Activation Template --}}
+                        {{> "systems/sfrpg/templates/items/parts/item-activation.hbs"}}
                     </div>
 
-                    {{!-- Equipment Status --}}
-                    {{> "systems/sfrpg/templates/items/parts/item-status.hbs"}}
+                    <div class="bubble">
+                        {{!-- Physical Item Details --}}
+                        {{> "systems/sfrpg/templates/items/parts/physical-item-details.hbs"}}
 
-                    {{!-- Weapon Properties --}}
-                    <div class="form-group stacked weapon-properties">
-                        <label>{{ localize "SFRPG.Items.Weapon.Properties" }}</label>
-                        {{#each config.weaponProperties as |name prop|}}
-                        <!-- If there's a tooltip entry set for this weapon property we set a Tippy tooltip -->
-                        <label class="checkbox" {{#if (lookup ../config.weaponPropertiesTooltips prop)}} data-tippy-content='<strong>{{ name }}</strong><br/>{{lookup ../config.weaponPropertiesTooltips prop}}' {{/if}}>
-                            <input type="checkbox" name="system.properties.{{prop}}" {{checked (lookup ../itemData.properties prop)}} /> {{ name }}
-                        </label>
-                        {{/each}}
+                        {{!-- Special Materials Template --}}
+                        {{> "systems/sfrpg/templates/items/parts/item-special-materials.hbs"}}
                     </div>
-
-                    <br />
-
-                    <h3 class="form-header noborder">{{ localize "SFRPG.Items.Weapon.Usage" }}</h3>
-                    {{!-- Item Activation Template --}}
-                    {{> "systems/sfrpg/templates/items/parts/item-activation.hbs"}}
-
-                    <br />
-
-                    {{!-- Physical Item Details --}}
-                    {{> "systems/sfrpg/templates/items/parts/physical-item-details.hbs"}}
-
-                    {{!-- Special Materials Template --}}
-                    {{> "systems/sfrpg/templates/items/parts/item-special-materials.hbs"}}
 
                 </div>
 
