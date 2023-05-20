@@ -1,3 +1,4 @@
+{{!-- Action Details --}}
 <div class="bubble">
     <h3 class="form-header bubble-header">{{localize "SFRPG.Items.Action.Details"}}</h3>
 
@@ -97,9 +98,11 @@
                     <input type="text" name="system.formula" value="{{itemData.formula}}" placeholder="Formula"/>
                 </div>
             </div>
-        </div>
+        {{/if}}
     </div>
+</div>
 
+{{#if itemData.actionType}}
     {{!-- Damage Sections --}}
     <div class="bubble">
         <h3 class="form-header bubble-header">{{ localize "SFRPG.Items.Action.DamageHeader" }}</h3>
