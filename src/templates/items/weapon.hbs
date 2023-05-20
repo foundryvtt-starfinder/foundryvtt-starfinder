@@ -34,36 +34,39 @@
                 <div class="tab properties" data-group="subdetails" data-tab="properties">
 
                     <div class="bubble">
-                        {{!-- Weapon Type --}}
-                        <div class="form-group">
-                            <label>{{ localize "SFRPG.Items.Weapon.Type" }}</label>
-                            <select name="system.weaponType">
-                                {{#select itemData.weaponType}}
-                                {{#each config.weaponTypes as |name type|}}
-                                <option value="{{type}}">{{name}}</option>
-                                {{/each}}
-                                {{/select}}
-                            </select>
-                        </div>
+                        <h3 class="form-header noborder">{{ localize "SFRPG.Items.Weapon.Properties" }}</h3>
+                        <div class="info">
+                            {{!-- Weapon Type --}}
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.Items.Weapon.Type" }}</label>
+                                <select name="system.weaponType">
+                                    {{#select itemData.weaponType}}
+                                    {{#each config.weaponTypes as |name type|}}
+                                    <option value="{{type}}">{{name}}</option>
+                                    {{/each}}
+                                    {{/select}}
+                                </select>
+                            </div>
 
-                        {{!-- Weapon Category --}}
-                        <div class="form-group">
-                            <label>{{ localize "SFRPG.Items.Weapon.Category" }}</label>
-                            <select name="system.weaponCategory">
-                                {{#select itemData.weaponCategory}}
-                                <option value="">Unspecified</option>
-                                {{#each config.weaponCategories as |name type|}}
-                                <option value="{{type}}">{{name}}</option>
-                                {{/each}}
-                                {{/select}}
-                            </select>
-                        </div>
+                            {{!-- Weapon Category --}}
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.Items.Weapon.Category" }}</label>
+                                <select name="system.weaponCategory">
+                                    {{#select itemData.weaponCategory}}
+                                    <option value="">Unspecified</option>
+                                    {{#each config.weaponCategories as |name type|}}
+                                    <option value="{{type}}">{{name}}</option>
+                                    {{/each}}
+                                    {{/select}}
+                                </select>
+                            </div>
 
-                        {{!-- Equipment Status --}}
-                        {{> "systems/sfrpg/templates/items/parts/item-status.hbs"}}
-                        
-                        {{!-- Weapon Properties --}}
-                        {{> "systems/sfrpg/templates/items/parts/weapon-properties.hbs"}}
+                            {{!-- Equipment Status --}}
+                            {{> "systems/sfrpg/templates/items/parts/item-status.hbs"}}
+                            
+                            {{!-- Weapon Properties --}}
+                            {{> "systems/sfrpg/templates/items/parts/weapon-properties.hbs"}}
+                        </div>
                     </div>
 
                     <div class="bubble">
