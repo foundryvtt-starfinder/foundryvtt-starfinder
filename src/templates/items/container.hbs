@@ -18,30 +18,56 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-            <h4 class="section-header first">{{ localize "SFRPG.ItemSheet.Header.DetailsHeader" }}</h4>
 
-            {{!-- Equipment Status --}}
-            <div class="form-group stacked">
-                <label>{{ localize "SFRPG.Items.EquipmentStatus" }}</label>
-                <label class="checkbox">
-                    <input type="checkbox" name="system.equipped" {{checked itemData.equipped}}/> {{ localize "SFRPG.Items.Equipped" }}
-                </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="system.identified" {{checked itemData.identified}}/> {{ localize "SFRPG.Items.Identified" }}
-                </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="system.attuned" {{checked itemData.attuned}}/> {{ localize "SFRPG.Items.Attuned" }}
-                </label>
-            </div>
+            {{!-- Details Tab Navigation --}}
+            <nav class="sheet-subnavigation subtabs" data-group="subdetails">
+                <a class="item highlight active" data-tab="properties">{{ localize "SFRPG.ItemSheet.Tabs.Properties" }}</a>
+                <a class="item" data-tab="container">{{ localize "SFRPG.ItemSheet.Tabs.ContainerDetails" }}</a>
+            </nav>
 
-            <br />
+            {{!-- Details Section --}}
+            <section class="sheet-details">
 
-            <h3 class="form-header noborder">{{ localize "SFRPG.ItemSheet.PhysicalProperties.Header" }}</h3>
-            {{> "systems/sfrpg/templates/items/parts/physical-item-details.hbs"}}
+                {{!-- Properties Tab --}}
+                <div class="tab properties" data-group="subdetails" data-tab="properties">
 
-            <br />
+                    {{!-- Details --}}
+                    <div class="bubble">
+                        <h3 class="form-header bubble-header">{{ localize "SFRPG.ItemSheet.Header.DetailsHeader" }}</h3>
 
-            {{> "systems/sfrpg/templates/items/parts/container-details.hbs" message="SFRPG.ItemSheet.Containers.ContainerTooltip"}}
+                        <div class="bubble-info">
+                            <div class="form-group stacked">
+                                <label>{{ localize "SFRPG.Items.EquipmentStatus" }}</label>
+                                <label class="checkbox">
+                                    <input type="checkbox" name="system.equipped" {{checked itemData.equipped}}/> {{ localize "SFRPG.Items.Equipped" }}
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" name="system.identified" {{checked itemData.identified}}/> {{ localize "SFRPG.Items.Identified" }}
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" name="system.attuned" {{checked itemData.attuned}}/> {{ localize "SFRPG.Items.Attuned" }}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{!-- Physical Properties --}}
+                    <div class="bubble">
+                        <h3 class="form-header bubble-header">{{ localize "SFRPG.ItemSheet.PhysicalProperties.Header" }}</h3>
+
+                        <div class="bubble-info">
+                            {{> "systems/sfrpg/templates/items/parts/physical-item-details.hbs"}}
+                        </div>
+                    </div>
+
+                </div>
+
+                {{!-- Container Tab --}}
+                <div class="tab container" data-group="subdetails" data-tab="container">
+                    {{> "systems/sfrpg/templates/items/parts/container-details.hbs" message="SFRPG.ItemSheet.Containers.ContainerTooltip"}}
+                </div>
+
+            </section>
         </div>
 
         {{!-- Modifiers Tab --}}
