@@ -18,14 +18,18 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-            <h3 class="form-header noborder">{{ localize "SFRPG.Items.Goods.Details" }}</h3>
-            
-            {{!-- Equipment Status --}}
-            {{> "systems/sfrpg/templates/items/parts/item-status.hbs"}}
 
-            <br />
-            
-            <h3 class="form-header noborder">{{ localize "SFRPG.ItemSheet.PhysicalProperties.Header" }}</h3>
+            {{!-- Goods Details --}}
+            <div class="bubble">
+                <h3 class="form-header bubble-header">{{ localize "SFRPG.Items.Goods.Details" }}</h3>
+
+                <div class="bubble-info">
+                    {{!-- Equipment Status --}}
+                    {{> "systems/sfrpg/templates/items/parts/item-status.hbs"}}
+                </div>
+            </div>
+
+            {{!-- Physical Properties --}}
             {{> "systems/sfrpg/templates/items/parts/physical-item-details.hbs"}}
         
         </div>
