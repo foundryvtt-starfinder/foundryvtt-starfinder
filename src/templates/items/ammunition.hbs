@@ -15,43 +15,52 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
+            <div class="bubble">
+                <h3 class="form-header bubble-header">{{ localize "SFRPG.Items.Ammunition.Details" }}</h3>
 
-            <h3 class="form-header noborder">{{ localize "SFRPG.Items.Ammunition.Details" }}</h3>
+                {{!-- Ammunition Details --}}
+                <div class="bubble-info">
+                    <div class="form-group">
+                        <label>{{ localize "SFRPG.Items.Ammunition.AmmunitionType" }}</label>
+                        <div class="form-fields">
+                            <select name="system.ammunitionType">
+                                {{#select itemData.ammunitionType}}
+                                <option value="">{{ localize "SFRPG.Items.Ammunition.Type.None" }}</option>
+                                {{#each config.ammunitionTypes as |ammunition type|}}
+                                <option value="{{type}}">{{ammunition}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                        </div>
+                    </div>
 
-            <div class="form-group">
-                <label>{{ localize "SFRPG.Items.Ammunition.AmmunitionType" }}</label>
-                <div class="form-fields">
-                    <select name="system.ammunitionType">
-                        {{#select itemData.ammunitionType}}
-                        <option value="">{{ localize "SFRPG.Items.Ammunition.Type.None" }}</option>
-                        {{#each config.ammunitionTypes as |ammunition type|}}
-                        <option value="{{type}}">{{ammunition}}</option>
-                        {{/each}}
-                        {{/select}}
-                    </select>
+                    <div class="form-group">
+                        <label>{{ localize "SFRPG.Items.Ammunition.Capacity" }}</label>
+                        <div class="form-fields">
+                            <label class="checkbox">
+                                <input type="checkbox" name="system.useCapacity" {{checked itemData.useCapacity}} /> {{ localize "SFRPG.Items.Ammunition.UseCapacity" }}
+                            </label>
+                            {{#if itemData.useCapacity}}
+                            <input type="text" name="system.capacity.value" value="{{itemData.capacity.value}}" data-dtype="Number"/>
+                            <span class="sep"> / </span>
+                            <input type="text" name="system.capacity.max" value="{{itemData.capacity.max}}" data-dtype="Number"/>
+                            {{/if}}
+                        </div>
+                    </div>
+
+                    {{!-- Special Materials Template --}}
+                    {{> "systems/sfrpg/templates/items/parts/item-special-materials.hbs"}}
                 </div>
             </div>
 
-            <div class="form-group">
-                <label>{{ localize "SFRPG.Items.Ammunition.Capacity" }}</label>
-                <div class="form-fields">
-                    <label class="checkbox">
-                        <input type="checkbox" name="system.useCapacity" {{checked itemData.useCapacity}} /> {{ localize "SFRPG.Items.Ammunition.UseCapacity" }}
-                    </label>
-                    {{#if itemData.useCapacity}}
-                    <input type="text" name="system.capacity.value" value="{{itemData.capacity.value}}" data-dtype="Number"/>
-                    <span class="sep"> / </span>
-                    <input type="text" name="system.capacity.max" value="{{itemData.capacity.max}}" data-dtype="Number"/>
-                    {{/if}}
+            {{!-- Physical Properties --}}
+            <div class="bubble">
+                <h3 class="form-header bubble-header">{{ localize "SFRPG.ItemSheet.PhysicalProperties.Header" }}</h3>
+
+                <div class="bubble-info">
+                    {{> "systems/sfrpg/templates/items/parts/physical-item-details.hbs"}}
                 </div>
             </div>
-
-            {{!-- Special Materials Template --}}
-            {{> "systems/sfrpg/templates/items/parts/item-special-materials.hbs"}}
-
-            <br />
-            <h3 class="form-header noborder">{{ localize "SFRPG.ItemSheet.PhysicalProperties.Header" }}</h3>
-            {{> "systems/sfrpg/templates/items/parts/physical-item-details.hbs"}}
         </div>
         
     </section>
