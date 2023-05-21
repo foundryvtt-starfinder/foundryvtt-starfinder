@@ -1,126 +1,137 @@
-{{!-- Activation Cost --}}
-<div class="form-group input-select">
-    <label>{{ localize "SFRPG.Items.Activation.ActivationCost" }}</label>
-    <div class="form-fields">
-        <input type="text" name="system.activation.cost" value="{{itemData.activation.cost}}" data-dtype="Number" placeholder="-"/>
-        <select name="system.activation.type">
-            {{#select itemData.activation.type}}
-            <option value=""></option>
-            {{#each config.abilityActivationTypes as |name key|}}
-            <option value="{{key}}">{{name}}</option>
-            {{/each}}
-            {{/select}}
-        </select>
-    </div>
-</div>
-{{#if itemData.activation.type}}
+{{!-- Activation Details --}}
+<div class="bubble">
+    {{#if message}}
+        <h3 class="form-header bubble-header">{{localize message}}</h3>
+    {{else}}
+        <h3 class="form-header bubble-header">{{localize "SFRPG.ItemSheet.Details.Section.Usage"}}</h3>
+    {{/if}}
 
-{{!-- Activation Condition --}}
-<div class="form-group">
-    <label>{{ localize "SFRPG.Items.Activation.ActivationCondition" }}</label>
-    <div class="form-fields">
-        <input type="text" name="system.activation.condition" value="{{itemData.activation.condition}}"/>
-    </div>
-</div>
+    <div class="bubble-info">
+        {{!-- Activation Cost --}}
+        <div class="form-group input-select">
+            <label>{{ localize "SFRPG.Items.Activation.ActivationCost" }}</label>
+            <div class="form-fields">
+                <input type="text" name="system.activation.cost" value="{{itemData.activation.cost}}" data-dtype="Number" placeholder="-"/>
+                <select name="system.activation.type">
+                    {{#select itemData.activation.type}}
+                    <option value=""></option>
+                    {{#each config.abilityActivationTypes as |name key|}}
+                    <option value="{{key}}">{{name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+        </div>
+        {{#if itemData.activation.type}}
+
+        {{!-- Activation Condition --}}
+        <div class="form-group">
+            <label>{{ localize "SFRPG.Items.Activation.ActivationCondition" }}</label>
+            <div class="form-fields">
+                <input type="text" name="system.activation.condition" value="{{itemData.activation.condition}}"/>
+            </div>
+        </div>
 
 
-{{!-- Ability Target --}}
-<div class="form-group input-select-select">
-    <label>{{ localize "SFRPG.Items.Activation.Target" }}</label>
-    <div class="form-fields">
-        <input type="text" name="system.target.value" value="{{itemData.target.value}}" data-dtype="String" placeholder="-"/>
-    </div>
-</div>
+        {{!-- Ability Target --}}
+        <div class="form-group input-select-select">
+            <label>{{ localize "SFRPG.Items.Activation.Target" }}</label>
+            <div class="form-fields">
+                <input type="text" name="system.target.value" value="{{itemData.target.value}}" data-dtype="String" placeholder="-"/>
+            </div>
+        </div>
 
-<div class="form-group input-select-select-select">
-    <label>{{ localize "SFRPG.Items.Activation.Area" }}</label>
-    <div class="form-fields">
-        {{#if this.area.showTotal}}<p class="calculated-total"><strong>{{itemData.area.total}}</strong></p>{{/if}}
-        <input type="text" {{#if (eq itemData.area.units "text")}}class="wide-form-field"{{/if}} name="system.area.value" value="{{itemData.area.value}}" data-dtype="String" placeholder="Area" />
-        <select name="system.area.units" class="min-form-field">
-            {{#select itemData.area.units}}
-            {{#each config.variableDistanceUnits as |unit key|}}
-            <option value="{{key}}">{{unit}}</option>
-            {{/each}}
-            <option value="text">{{localize "SFRPG.Text"}}</option>
-            {{/select}}
-        </select>
-        {{#unless (eq itemData.area.units "text")}}
-        <select name="system.area.shape" class="min-form-field">
-            {{#select itemData.area.shape}}
-            {{#each config.spellAreaShapes as |shape s|}}
-            <option value="{{s}}">{{shape}}</option>
-            {{/each}}
-            {{/select}}
-        </select>
-        <select name="system.area.effect" class="min-form-field">
-            {{#select itemData.area.effect}}
-            {{#each config.spellAreaEffects as |effect e|}}
-            <option value="{{e}}">{{effect}}</option>
-            {{/each}}
-            {{/select}}
-        </select>
-        <label class="checkbox">
-            <input type="checkbox" name="system.area.shapable" {{checked itemData.area.shapable}}>
-            {{ localize "SFRPG.SpellAreaShapesShapable" }}
-        </label>
-        {{/unless}}
-    </div>
-</div>
+        <div class="form-group input-select-select-select">
+            <label>{{ localize "SFRPG.Items.Activation.Area" }}</label>
+            <div class="form-fields">
+                {{#if this.area.showTotal}}<p class="calculated-total"><strong>{{itemData.area.total}}</strong></p>{{/if}}
+                <input type="text" {{#if (eq itemData.area.units "text")}}class="wide-form-field"{{/if}} name="system.area.value" value="{{itemData.area.value}}" data-dtype="String" placeholder="Area" />
+                <select name="system.area.units" class="min-form-field">
+                    {{#select itemData.area.units}}
+                    {{#each config.variableDistanceUnits as |unit key|}}
+                    <option value="{{key}}">{{unit}}</option>
+                    {{/each}}
+                    <option value="text">{{localize "SFRPG.Text"}}</option>
+                    {{/select}}
+                </select>
+                {{#unless (eq itemData.area.units "text")}}
+                <select name="system.area.shape" class="min-form-field">
+                    {{#select itemData.area.shape}}
+                    {{#each config.spellAreaShapes as |shape s|}}
+                    <option value="{{s}}">{{shape}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+                <select name="system.area.effect" class="min-form-field">
+                    {{#select itemData.area.effect}}
+                    {{#each config.spellAreaEffects as |effect e|}}
+                    <option value="{{e}}">{{effect}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+                <label class="checkbox">
+                    <input type="checkbox" name="system.area.shapable" {{checked itemData.area.shapable}}>
+                    {{ localize "SFRPG.SpellAreaShapesShapable" }}
+                </label>
+                {{/unless}}
+            </div>
+        </div>
 
-{{!-- Ability Range --}}
-<div class="form-group input-select">
-    <label>{{#if (eq this.data.type "weapon")}}{{ localize "SFRPG.Items.Activation.RangeIncrement" }}{{else}}{{ localize "SFRPG.Items.Activation.Range" }}{{/if}}</label>
-    <div class="form-fields">
-        {{#if this.range.showTotal}}<p class="calculated-total"><strong>{{itemData.range.total}}</strong></p>{{/if}}
-        {{#if this.range.hasInput}}
-        <input class="wide-form-field" type="text" name="system.range.value" value="{{itemData.range.value}}" data-dtype="String" placeholder="Range"/>
+        {{!-- Ability Range --}}
+        <div class="form-group input-select">
+            <label>{{#if (eq this.data.type "weapon")}}{{ localize "SFRPG.Items.Activation.RangeIncrement" }}{{else}}{{ localize "SFRPG.Items.Activation.Range" }}{{/if}}</label>
+            <div class="form-fields">
+                {{#if this.range.showTotal}}<p class="calculated-total"><strong>{{itemData.range.total}}</strong></p>{{/if}}
+                {{#if this.range.hasInput}}
+                <input class="wide-form-field" type="text" name="system.range.value" value="{{itemData.range.value}}" data-dtype="String" placeholder="Range"/>
+                {{/if}}
+                <select name="system.range.units">
+                    {{#select itemData.range.units}}
+                    {{#each config.distanceUnits as |unit key|}}
+                    <option value="{{key}}">{{unit}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+        </div>
+
+        {{!-- Effect Duration --}}
+        <div class="form-group input-select">
+            <label>{{ localize "SFRPG.Items.Activation.Duration" }}</label>
+            <div class="form-fields">
+                {{#if this.duration.showTotal}}<p class="calculated-total"><strong>{{itemData.duration.total}}</strong></p>{{/if}}
+                {{#if this.duration.hasInput}}
+                <input type="text" class="wide-form-field" name="system.duration.value" value="{{itemData.duration.value}}" data-dtype="String" placeholder="-"/>
+                {{/if}}
+                <select name="system.duration.units">
+                    {{#select itemData.duration.units}}
+                    <option value="text">{{localize "SFRPG.Text"}}</option>
+                    {{#each config.durationTypes as |unit key|}}
+                    <option value="{{key}}">{{unit}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+        </div>
+
+        {{!-- Limited Uses --}}
+        <div class="form-group uses-per" data-tippy-content="<strong>{{ localize "SFRPG.Items.Activation.LimitedUses" }}</strong><br/>@itemData.uses.value<br/>@itemData.uses.max</br/>@itemData.uses.per">
+            <label>{{ localize "SFRPG.Items.Activation.LimitedUses" }}</label>
+            <div class="form-fields">
+                <input type="text" name="system.uses.value" value="{{itemData.uses.value}}" data-dtype="Number"/>
+                <span class="sep"> of </span>
+                <input type="text" name="system.uses.max" value="{{itemData.uses.max}}" data-dtype="String"/>
+                {{#if this.uses.showTotal}}<p class="calculated-total"><strong>{{itemData.uses.total}}</strong></p>{{/if}}
+                <select name="system.uses.per">
+                    {{#select itemData.uses.per}}
+                    <option value=""></option>
+                    {{#each config.limitedUsePeriods as |name key|}}
+                    <option value="{{key}}">{{name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+        </div>
         {{/if}}
-        <select name="system.range.units">
-            {{#select itemData.range.units}}
-            {{#each config.distanceUnits as |unit key|}}
-            <option value="{{key}}">{{unit}}</option>
-            {{/each}}
-            {{/select}}
-        </select>
     </div>
 </div>
-
-{{!-- Effect Duration --}}
-<div class="form-group input-select">
-    <label>{{ localize "SFRPG.Items.Activation.Duration" }}</label>
-    <div class="form-fields">
-        {{#if this.duration.showTotal}}<p class="calculated-total"><strong>{{itemData.duration.total}}</strong></p>{{/if}}
-        {{#if this.duration.hasInput}}
-        <input type="text" class="wide-form-field" name="system.duration.value" value="{{itemData.duration.value}}" data-dtype="String" placeholder="-"/>
-        {{/if}}
-        <select name="system.duration.units">
-            {{#select itemData.duration.units}}
-            <option value="text">{{localize "SFRPG.Text"}}</option>
-            {{#each config.durationTypes as |unit key|}}
-            <option value="{{key}}">{{unit}}</option>
-            {{/each}}
-            {{/select}}
-        </select>
-    </div>
-</div>
-
-{{!-- Limited Uses --}}
-<div class="form-group uses-per" data-tippy-content="<strong>{{ localize "SFRPG.Items.Activation.LimitedUses" }}</strong><br/>@itemData.uses.value<br/>@itemData.uses.max</br/>@itemData.uses.per">
-    <label>{{ localize "SFRPG.Items.Activation.LimitedUses" }}</label>
-    <div class="form-fields">
-        <input type="text" name="system.uses.value" value="{{itemData.uses.value}}" data-dtype="Number"/>
-        <span class="sep"> of </span>
-        <input type="text" name="system.uses.max" value="{{itemData.uses.max}}" data-dtype="String"/>
-        {{#if this.uses.showTotal}}<p class="calculated-total"><strong>{{itemData.uses.total}}</strong></p>{{/if}}
-        <select name="system.uses.per">
-            {{#select itemData.uses.per}}
-            <option value=""></option>
-            {{#each config.limitedUsePeriods as |name key|}}
-            <option value="{{key}}">{{name}}</option>
-            {{/each}}
-            {{/select}}
-        </select>
-    </div>
-</div>
-{{/if}}

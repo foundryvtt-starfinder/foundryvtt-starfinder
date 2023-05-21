@@ -20,7 +20,7 @@
             {{!-- Details Tab Navigation --}}
             <nav class="sheet-subnavigation subtabs" data-group="subdetails">
                 <a class="item highlight active" data-tab="properties">{{ localize "SFRPG.ItemSheet.Details.Tab.Properties" }}</a>
-                <a class="item" data-tab="attack">{{ localize "SFRPG.ItemSheet.Details.Tab.AttackDamage" }}</a>
+                <a class="item" data-tab="usage">{{ localize "SFRPG.ItemSheet.Details.Tab.UsageAction" }}</a>
                 <a class="item" data-tab="container">{{ localize "SFRPG.ItemSheet.Details.Tab.AmmunitionContainer" }}</a>
             </nav>
 
@@ -66,33 +66,20 @@
 
                         </div>
                     </div>
-                    
-                    {{!-- Weapon Usage --}}
-                    <div class="bubble">
-                        <h3 class="form-header bubble-header">{{ localize "SFRPG.Items.Weapon.Usage" }}</h3>
-                            
-                        <div class="bubble-info">
-                            {{!-- Item Activation Template --}}
-                            {{> "systems/sfrpg/templates/items/parts/item-activation.hbs"}}
-                        </div>
-                    </div>
 
                     {{!-- Physical Properties --}}
-                    <div class="bubble">
-                        <h3 class="form-header bubble-header">{{ localize "SFRPG.ItemSheet.PhysicalProperties.Header" }}</h3>
-
-                        <div class="bubble-info">
-                            {{> "systems/sfrpg/templates/items/parts/physical-item-details.hbs"}}
-                        </div>
-                    </div>
+                    {{> "systems/sfrpg/templates/items/parts/physical-item-details.hbs"}}
 
                 </div>
 
-                {{!-- Attack & Damage Tab --}}
-                <div class="tab attack" data-group="subdetails" data-tab="attack">
-
+                {{!-- Usage and Action Tab --}}
+                <div class="tab usage" data-group="subdetails" data-tab="usage">
+                    
+                    {{!-- Item Activation Template --}}
+                    {{> "systems/sfrpg/templates/items/parts/item-activation.hbs" message="SFRPG.Items.Augmentation.Usage"}}
+                    
                     {{!-- Item Action Template --}}
-                    {{> "systems/sfrpg/templates/items/parts/item-action.hbs"}}
+                    {{> "systems/sfrpg/templates/items/parts/item-action.hbs" message="SFRPG.Items.Augmentation.Action"}}
 
                 </div>
 

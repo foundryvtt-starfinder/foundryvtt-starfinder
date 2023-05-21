@@ -1,6 +1,10 @@
 {{!-- Action Details --}}
 <div class="bubble">
-    <h3 class="form-header bubble-header">{{localize "SFRPG.Items.Action.Details"}}</h3>
+    {{#if message}}
+        <h3 class="form-header bubble-header">{{localize message}}</h3>
+    {{else}}
+        <h3 class="form-header bubble-header">{{localize "SFRPG.Items.Action.Details"}}</h3>
+    {{/if}}
 
     <div class="bubble-info">
         {{!-- Action Type --}}
