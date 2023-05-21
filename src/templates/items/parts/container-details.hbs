@@ -30,12 +30,12 @@
 
         <ol class="storage-slots form-group">
             {{#each itemData.container.storage as |storage|}}
-            <li class="storage-slot sub-bubble" data-slot-index="{{indexOf ../itemData.container.storage storage}}">
-                <h4 class="sub-bubble-header">
+            <li class="storage-slot bubble" data-slot-index="{{indexOf ../itemData.container.storage storage}}">
+                <h4 class="bubble-header">
                     {{ localize "SFRPG.ActorSheet.Inventory.Container.StorageSection" index=(indexOf ../itemData.container.storage storage false) }}
                     <a class="item-control bubble-icon remove-storage"> <i class="fas fa-minus"></i> </a>
                 </h4>
-                <div class="sub-bubble-info">
+                <div class="bubble-info">
                     <div class="form-group" data-tippy-content="<strong>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageType" }}</strong><br/>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageTypeTooltip" }}">
                         <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageType" }}</label>
                         <div class="form-fields">

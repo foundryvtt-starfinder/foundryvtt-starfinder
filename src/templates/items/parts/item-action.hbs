@@ -118,13 +118,13 @@
             {{!-- Damage Formula --}}
             <ol class="damage-parts form-group">
                 {{#each itemData.damage.parts as |part i| }}
-                <li class="damage-part sub-bubble" data-damage-part="{{i}}">
-                        <h4 class="damage-header sub-bubble-header">
+                <li class="damage-part bubble" data-damage-part="{{i}}">
+                        <h4 class="damage-header bubble-header">
                             {{#unless (lookup this "name") }}{{ localize "SFRPG.Items.Action.DamageSection" section=i}}{{else}}{{lookup this "name"}}{{/unless}}
                             <a class="damage-control delete-damage" {{createTippy title="SFRPG.Items.Action.DeleteDamageSection" subtitle="SFRPG.Items.Action.DeleteDamageSectionTooltip"}}><i class="fas fa-minus"></i></a>
                         </h4>
 
-                        <div class="sub-bubble-info">
+                        <div class="bubble-info">
                             <div class="form-group" {{createTippy title="SFRPG.Items.Action.DamageName" subtitle="SFRPG.Items.Action.DamageNameTooltip"}}>
                                 <label>{{ localize "SFRPG.Items.Action.DamageName" }}</label>
                                 <div class="form-fields">
@@ -195,12 +195,12 @@
                 </div>
                 <ol class="damage-parts form-group">
                     {{#each itemData.critical.parts as |part i| }}
-                    <li class="damage-part sub-bubble" data-critical-part="{{i}}">
-                        <h4 class="damage-header sub-bubble-header">
+                    <li class="damage-part bubble" data-critical-part="{{i}}">
+                        <h4 class="damage-header bubble-header">
                             {{#unless isHealing }}{{ localize "SFRPG.Items.Action.CriticalDamageFormula" }}{{ else }}{{ localize "SFRPG.Items.Action.CriticalHealingFormula" }}{{/unless}}
                             <a class="damage-control delete-critical-damage"><i class="fas fa-minus"></i></a>
                         </h4>
-                        <div class="sub-bubble-info">
+                        <div class="bubble-info">
                             <div class="damage-part-formula form-group flexrow">
                                 <input type="text" name="system.critical.parts.{{i}}.formula" value="{{lookup this "formula"}}"/>
                             </div>
