@@ -29,8 +29,8 @@ export class HotbarSFRPG extends Hotbar {
                     hasUses: item.hasUses(),
                     hasActivation: item.canBeActivated(),
                     isActive: item.isActive(),
-                    hasCapacity: item.hasCapacity(),
-                    greyscale: this._getGrayscaleStatus(item)
+                    hasCapacity: item.hasCapacity()
+
                 };
 
                 if (item.macroConfig.hasCapacity) {
@@ -39,6 +39,7 @@ export class HotbarSFRPG extends Hotbar {
                 }
 
                 slot.iconClass = this._getIcon(item.macroConfig, itemMacroDetails.macroType);
+                slot.greyscale = this._getGreyscaleStatus(item, itemMacroDetails.macroType);
 
                 slot.tooltip += `
                     <br>
@@ -77,7 +78,9 @@ export class HotbarSFRPG extends Hotbar {
 
     }
 
-    _getGrayscaleStatus(item) {
+    _getGreyscaleStatus(item, macroType) {
+        if (!["activate", "attack", "use", "healing"].includes(macroType)) return false;
+
         if (item.hasCapacity()) return item.getCurrentCapacity() <= 0;
         else if (item.hasUses()) return !item.canBeUsed();
         return false;
