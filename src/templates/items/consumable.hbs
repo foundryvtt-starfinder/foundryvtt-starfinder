@@ -18,51 +18,62 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-            <h3 class="form-header noborder">Consumable Details</h3>
 
-            {{!-- Consumable Type --}}
-            <div class="form-group">
-                <label>{{ localize "SFRPG.Items.Consumable.Type" }}</label>
-                <select name="system.consumableType">
-                    {{#select itemData.consumableType}}
-                    {{#each config.consumableTypes as |name type|}}
-                    <option value="{{type}}">{{name}}</option>
-                    {{/each}}
-                    {{/select}}
-                </select>
-            </div>
+            {{!-- Details Tab Navigation --}}
+            <nav class="sheet-subnavigation subtabs" data-group="subdetails">
+                <a class="item highlight active" data-tab="properties">{{ localize "SFRPG.ItemSheet.Details.Tab.Properties" }}</a>
+                <a class="item" data-tab="usage">{{ localize "SFRPG.ItemSheet.Details.Tab.UsageAction" }}</a>
+            </nav>
 
-            <br />
+            {{!-- Details Section --}}
+            <section class="sheet-details">
 
-            <h3 class="form-header noborder">{{ localize "SFRPG.Items.Consumable.Usage" }}</h3>
+                {{!-- Properties Tab --}}
+                <div class="tab properties" data-group="subdetails" data-tab="properties">
 
-            {{!-- Item Activation Template --}}
-            {{> "systems/sfrpg/templates/items/parts/item-activation.hbs"}}
+                    {{!-- Consumable Details --}}
+                    <div class="bubble">
+                        <h3 class="form-header bubble-header">{{localize "SFRPG.ItemSheet.Details.Section.ConsumableDetails"}}</h3>
 
-            {{!-- Consumable Usage --}}
-            {{#if itemData.activation.type}}
-            <div class="form-group">
-                <label>{{ localize "SFRPG.Items.Consumable.Usage" }}</label>
-                <label class="checkbox">
-                    <input type="checkbox" name="system.uses.autoUse" {{checked itemData.uses.autoUse}}/> {{ localize "SFRPG.Items.Consumable.OnUse" }}
-                </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="system.uses.autoDestroy" {{checked itemData.uses.autoDestroy}}/> {{ localize "SFRPG.Items.Consumable.DestroyWhenEmpty" }}
-                </label>
-            </div>
-            {{/if}}
+                        <div class="bubble-info">
 
-            <br />
+                            {{!-- Consumable Type --}}
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.Items.Consumable.Type" }}</label>
+                                <select name="system.consumableType">
+                                    {{#select itemData.consumableType}}
+                                    {{#each config.consumableTypes as |name type|}}
+                                    <option value="{{type}}">{{name}}</option>
+                                    {{/each}}
+                                    {{/select}}
+                                </select>
+                            </div>
 
-            <h3 class="form-header noborder">{{ localize "SFRPG.Items.Consumable.Action" }}</h3>
+                        </div>
+                    </div>
 
-            {{!-- Item Action Template --}}
-            {{> "systems/sfrpg/templates/items/parts/item-action.hbs"}}
+                    {{!-- Physical Properties --}}
+                    {{> "systems/sfrpg/templates/items/parts/physical-item-details.hbs"}}
+                    
+                </div>
 
-            <br />
+                {{!-- Usage & Action Tab --}}
+                <div class="tab usage" data-group="subdetails" data-tab="usage">
 
-            <h3 class="form-header noborder">{{ localize "SFRPG.ItemSheet.PhysicalProperties.Header" }}</h3>
-            {{> "systems/sfrpg/templates/items/parts/physical-item-details.hbs"}}
+                    {{!-- Item Activation Template --}}
+                    {{#if itemData.activation.type}}
+                        {{> "systems/sfrpg/templates/items/parts/item-activation.hbs" message="SFRPG.Items.Consumable.Usage" consumable=true}}
+                    {{else}}
+                        {{> "systems/sfrpg/templates/items/parts/item-activation.hbs" message="SFRPG.Items.Consumable.Usage" consumable=false}}
+                    {{/if}}
+
+                    {{!-- Item Action Template --}}
+                    {{> "systems/sfrpg/templates/items/parts/item-action.hbs" message="SFRPG.Items.Consumable.Action"}}
+
+                </div>
+
+            </section>
+
         </div>
 
         {{!-- Modifiers Tab --}}

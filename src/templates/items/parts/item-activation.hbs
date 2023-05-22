@@ -133,5 +133,18 @@
             </div>
         </div>
         {{/if}}
+
+        {{!-- Consumable Usage --}}
+        {{#if consumable}}
+        <div class="form-group">
+            <label>{{ localize "SFRPG.Items.Consumable.Usage" }}</label>
+            <label class="checkbox">
+                <input type="checkbox" name="system.uses.autoUse" {{checked itemData.uses.autoUse}}/> {{ localize "SFRPG.Items.Consumable.OnUse" }}
+            </label>
+            <label class="checkbox">
+                <input type="checkbox" name="system.uses.autoDestroy" {{checked itemData.uses.autoDestroy}}/> {{ localize "SFRPG.Items.Consumable.DestroyWhenEmpty" }}
+            </label>
+        </div>
+        {{/if}}
     </div>
 </div>
