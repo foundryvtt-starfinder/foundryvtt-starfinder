@@ -18,73 +18,87 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-            <h3 class="form-header noborder">{{ localize "SFRPG.Items.Shield.Details" }}</h3>
 
-            {{!-- Equipment Status --}}
-            {{> "systems/sfrpg/templates/items/parts/item-status.hbs"}}
+            {{!-- Details Tab Navigation --}}
+            <nav class="sheet-subnavigation subtabs" data-group="subdetails">
+                <a class="item highlight active" data-tab="properties">{{ localize "SFRPG.ItemSheet.Details.Tab.Properties" }}</a>
+                <a class="item" data-tab="usage">{{ localize "SFRPG.ItemSheet.Details.Tab.UsageAction" }}</a>
+                <a class="item" data-tab="container">{{ localize "SFRPG.ItemSheet.Details.Tab.AmmunitionContainer" }}</a>
+            </nav>
 
-            {{!-- Weapon Properties --}}
-            <div class="form-group stacked weapon-properties">
-                <label>{{ localize "SFRPG.Items.Weapon.Properties" }}</label>
-                {{#each config.weaponProperties as |name prop|}}
-                <label class="checkbox">
-                    <input type="checkbox" name="system.properties.{{prop}}" {{checked (lookup ../itemData.properties prop)}}/> {{ name }}
-                </label>
-                {{/each}}
-            </div>
+            {{!-- Details Section --}}
+            <section class="sheet-details">
 
-            {{!-- Special Materials Template --}}
-            {{> "systems/sfrpg/templates/items/parts/item-special-materials.hbs"}}
+                {{!-- Properties Tab --}}
+                <div class="tab properties" data-group="subdetails" data-tab="properties">
 
-            <br />
+                    {{!-- Shield Details --}}
+                    <div class="bubble">
+                        <h3 class="form-header bubble-header">{{ localize "SFRPG.Items.Shield.Details" }}</h3>
 
-            {{!-- Shield Bonus --}}
-            <div class="form-group">
-                <label>{{ localize "SFRPG.Items.Shield.Bonus" }}</label>
-                <div class="form-fields">
-                    <span class="sep">{{ localize "SFRPG.Items.Shield.Wielded" }} </span>
-                    <input type="text" name="system.bonus.wielded" value="{{itemData.bonus.wielded}}" data-dtype="Number"/>
-                    <span class="sep"> / </span>
-                    <span class="sep">{{ localize "SFRPG.Items.Shield.Aligned" }} </span>
-                    <input type="text" name="system.bonus.aligned" value="{{itemData.bonus.aligned}}" data-dtype="Number"/>
+                        <div class="bubble-info">
+                            {{!-- Equipment Status --}}
+                            {{> "systems/sfrpg/templates/items/parts/item-status.hbs"}}
+
+                            {{!-- Shield Bonus --}}
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.Items.Shield.Bonus" }}</label>
+                                <div class="form-fields">
+                                    <span class="sep">{{ localize "SFRPG.Items.Shield.Wielded" }} </span>
+                                    <input type="text" name="system.bonus.wielded" value="{{itemData.bonus.wielded}}" data-dtype="Number"/>
+                                    <span class="sep"> / </span>
+                                    <span class="sep">{{ localize "SFRPG.Items.Shield.Aligned" }} </span>
+                                    <input type="text" name="system.bonus.aligned" value="{{itemData.bonus.aligned}}" data-dtype="Number"/>
+                                </div>
+                            </div>
+
+                            {{!-- Dexterity Modifier --}}
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.Items.MaxDex" }}</label>
+                                <div class="form-fields">
+                                <input type="text" name="system.dex" value="{{itemData.dex}}" data-dtype="Number" placeholder="{{ localize "SFRPG.Items.Unlimited" }}"/>
+                                </div>
+                            </div>
+
+                            {{!-- Armor Check Penalty --}}
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.Items.ACP" }}</label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.acp" value="{{itemData.acp}}" data-dtype="Number" placeholder="0" />
+                                </div>
+                            </div>
+
+                            {{!-- Weapon Properties --}}
+                            {{> "systems/sfrpg/templates/items/parts/weapon-properties.hbs"}}
+
+                        </div>
+                    </div>
+
+                    {{!-- Physical Properties --}}
+                    {{> "systems/sfrpg/templates/items/parts/physical-item-details.hbs" includeMaterials=true}}
+
                 </div>
-            </div>
 
-            {{!-- Dexterity Modifier --}}
-            <div class="form-group">
-                <label>{{ localize "SFRPG.Items.MaxDex" }}</label>
-                <div class="form-fields">
-                   <input type="text" name="system.dex" value="{{itemData.dex}}" data-dtype="Number" placeholder="{{ localize "SFRPG.Items.Unlimited" }}"/>
+                {{!-- Usage and Action Tab --}}
+                <div class="tab pusage" data-group="subdetails" data-tab="usage">
+
+                    {{!-- Item Activation Template --}}
+                    {{> "systems/sfrpg/templates/items/parts/item-activation.hbs"}}
+
+                    {{!-- Item Action Template --}}
+                    {{> "systems/sfrpg/templates/items/parts/item-action.hbs"}}
+
                 </div>
-            </div>
 
-            {{!-- Armor Check Penalty --}}
-            <div class="form-group">
-                <label>{{ localize "SFRPG.Items.ACP" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.acp" value="{{itemData.acp}}" data-dtype="Number" placeholder="0" />
+                {{!-- Container Tab --}}
+                <div class="tab container" data-group="subdetails" data-tab="container">
+                    
+                    {{!-- Container Settings --}}
+                    {{> "systems/sfrpg/templates/items/parts/container-details.hbs" message="SFRPG.Items.Equipment.ContainerTooltip"}}
+
                 </div>
-            </div>
 
-            <h3 class="form-header noborder">{{ localize "SFRPG.Items.EquipmentUsage" }}</h3>
-
-            {{!-- Item Activation Template --}}
-            {{> "systems/sfrpg/templates/items/parts/item-activation.hbs"}}
-
-            <h3 class="form-header noborder">{{ localize "SFRPG.Items.Shield.Action" }}</h3>
-
-            {{!-- Item Action Template --}}
-            {{> "systems/sfrpg/templates/items/parts/item-action.hbs"}}
-
-            <br />
-
-            <h3 class="form-header noborder">{{ localize "SFRPG.ItemSheet.PhysicalProperties.Header" }}</h3>
-            {{> "systems/sfrpg/templates/items/parts/physical-item-details.hbs"}}
-
-            <br />
-
-            {{> "systems/sfrpg/templates/items/parts/container-details.hbs" message="SFRPG.Items.Equipment.ContainerTooltip"}}
-
+            </section>
         </div>
 
         {{!-- Modifiers Tab --}}
