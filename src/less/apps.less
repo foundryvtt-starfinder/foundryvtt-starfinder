@@ -618,9 +618,15 @@ img.icon-enricher {
 }
 
 #hotbar.sfrpg .macro {
-    img.greyscale {
-        filter: grayscale(1);
-        cursor: not-allowed;
+    img {
+        &.greyscale {
+            filter: grayscale(1);
+            cursor: not-allowed;
+        }
+
+        &.active {
+            box-shadow: 0 0 10px 0 var(--color-shadow-highlight);
+        }
     }
 
     footer.macro-footer {
@@ -643,7 +649,7 @@ img.icon-enricher {
         }
 
         &.fa-check {
-            color: green;
+            color: springgreen;
         }
     }
 }

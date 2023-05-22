@@ -14,7 +14,7 @@
                 {{#if this.macro}}data-macro-id="{{this.macro.id}}" data-tooltip="{{this.tooltip}}"{{/if}}>
                 <span class="macro-key">{{this.key}}</span>
                 {{#if this.icon}}
-                <img class="macro-icon {{#if this.macro.item.macroConfig.greyscale}}greyscale{{/if}}" src="{{this.icon}}" alt="{{this.tooltip}}" />
+                <img class="macro-icon {{#if this.macro.item.macroConfig.greyscale}}greyscale{{/if}} {{#if this.macro.item.macroConfig.isActive}}active{{/if}}" src="{{this.icon}}" alt="{{this.tooltip}}" />
                 {{/if}}
                 {{#if this.macro.item}}
                     {{#if this.macro.item.macroConfig.hasActivation}}

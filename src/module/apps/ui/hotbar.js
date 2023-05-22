@@ -15,6 +15,7 @@ export class HotbarSFRPG extends Hotbar {
         for (const slot of data.macros) {
             const macro = slot.macro;
             if (!macro) continue;
+
             const itemMacroDetails = macro?.flags?.sfrpg?.itemMacro;
             if (itemMacroDetails?.itemUuid) {
                 const item = deepClone(fromUuidSync(itemMacroDetails?.itemUuid));
@@ -58,6 +59,7 @@ export class HotbarSFRPG extends Hotbar {
 
             }
         }
+
         return data;
     }
 
@@ -68,6 +70,10 @@ export class HotbarSFRPG extends Hotbar {
     }
 }
 
+/**
+ * Add the items of all item macros to the apps object of the hotbar, so the hotbar is re-rendered whenever they are updated.
+ * Also any child items, as reloading a weapon (which changes the current ammo value) updates the ammo, not the weapon.
+ */
 export function listenForUpdates() {
     for (const macro of game.macros) {
         const itemMacroDetails = macro?.flags?.sfrpg?.itemMacro;
@@ -87,17 +93,19 @@ export function listenForUpdates() {
     }
 }
 
+// Before deleting an item, remove it from the hotbar's apps, so the delete method doesn't close the hotbar.
 Hooks.on("preDeleteItem", (item) => {
     delete item.apps[ui.hotbar.appId];
 });
 
+// Add update listeners to all child items whenever an item is updated, in case any child items were swapped.
 Hooks.on("updateItem", (item) => {
     if (item.apps[ui.hotbar.appId]) {
         const childItems = _getChildItems(item);
         if (!childItems?.length) return;
 
         for (const child of childItems) {
-            if (!child.apps[ui.hotbar.appId]) continue;
+            if (child.apps[ui.hotbar.appId]) continue;
             child.apps[ui.hotbar.appId] = ui.hotbar;
         }
     }
@@ -114,7 +122,6 @@ function _getChildItems(item) {
     // Pass the actor through on the options object so the constructor doesn't have to try (and fail) and fetch the actor from the compendium.
     const itemHelper = new ActorItemHelper(item.actor.id, tokenId, sceneId, { actor: item.actor });
 
-    const childItems = getChildItems(itemHelper, item);
-    return childItems;
+    return getChildItems(itemHelper, item);
 
 }
