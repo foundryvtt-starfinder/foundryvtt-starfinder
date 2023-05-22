@@ -14,35 +14,57 @@
     <section class="sheet-body">
         {{> "systems/sfrpg/templates/items/parts/item-description.hbs"}}
 
+        {{!-- Details Tab --}}
         <div class="tab details" data-tab="details" data-group="primary">
 
-            {{!-- Supported Types --}}
-            <h3 class="form-header noborder first">{{ localize "SFRPG.ItemSheet.WeaponAccessory.SupportedTypes" }}</h3>
-            <div class="form-group">
-                <label>{{ localize "SFRPG.ItemSheet.WeaponAccessory.SupportedTypes" }}</label>
-                <div class="form-fields">
-                    <select name="system.weaponType">
-                        {{#select itemData.weaponType}}
-                        {{#each config.weaponAccessoriesSupportedTypes as |name type|}}
-                        <option value="{{type}}">{{localize name}}</option>
-                        {{/each}}
-                        {{/select}}
-                    </select>
+            {{!-- Details Tab Navigation --}}
+            <nav class="sheet-subnavigation subtabs" data-group="subdetails">
+                <a class="item highlight active" data-tab="properties">{{ localize "SFRPG.ItemSheet.Details.Tab.Properties" }}</a>
+                <a class="item" data-tab="container">{{ localize "SFRPG.ItemSheet.Details.Tab.AmmunitionContainer" }}</a>
+            </nav>
+
+            {{!-- Details Section --}}
+            <section class="sheet-details">
+
+                {{!-- Properties Tab --}}
+                <div class="tab properties" data-group="subdetails" data-tab="properties">
+
+                    <div class="bubble">
+                        <h3 class="form-header bubble-header">{{ localize "SFRPG.ItemSheet.WeaponAccessory.SupportedTypes" }}</h3>
+
+                        <div class="bubble-info">
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.ItemSheet.WeaponAccessory.SupportedTypes" }}</label>
+                                <div class="form-fields">
+                                    <select name="system.weaponType">
+                                        {{#select itemData.weaponType}}
+                                        {{#each config.weaponAccessoriesSupportedTypes as |name type|}}
+                                        <option value="{{type}}">{{localize name}}</option>
+                                        {{/each}}
+                                        {{/select}}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{!-- Physical Item Details --}}
+                    {{> "systems/sfrpg/templates/items/parts/physical-item-details.hbs"}}
+
                 </div>
-            </div>
 
-            <br />
+                {{!-- Container Tab --}}
+                <div class="tab container" data-group="subdetails" data-tab="container">
 
-            {{> "systems/sfrpg/templates/items/parts/item-capacity.hbs"}}
+                    {{!-- Capacity and Usage --}}
+                    {{> "systems/sfrpg/templates/items/parts/item-capacity.hbs"}}
 
-            <br />
+                    {{!-- Container Details --}}
+                    {{> "systems/sfrpg/templates/items/parts/container-details.hbs" message="SFRPG.ItemSheet.Weapons.ContainerTooltip"}}
 
-            <h3 class="form-header noborder">{{ localize "SFRPG.ItemSheet.PhysicalProperties.Header" }}</h3>
-            {{> "systems/sfrpg/templates/items/parts/physical-item-details.hbs"}}
+                </div>
 
-            <br />
-
-            {{> "systems/sfrpg/templates/items/parts/container-details.hbs" message="SFRPG.ItemSheet.Weapons.ContainerTooltip"}}
+            </section>
         </div>
 
         {{!-- Modifiers Tab --}}
