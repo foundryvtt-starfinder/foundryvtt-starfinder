@@ -17,13 +17,7 @@
                 <img class="macro-icon {{#if this.macro.item.macroConfig.greyscale}}greyscale{{/if}} {{#if this.macro.item.macroConfig.isActive}}active{{/if}}" src="{{this.icon}}" alt="{{this.tooltip}}" />
                 {{/if}}
                 {{#if this.macro.item}}
-                    {{#if this.macro.item.macroConfig.hasActivation}}
-                        {{#if this.macro.item.macroConfig.isActive}}
-                        <i class="fas fa-check activation" data-tooltip="Activated"></i>
-                        {{else}}
-                        <i class="fas fa-xmark activation" data-tooltip="Not Activated"></i>
-                        {{/if}}
-                    {{/if}}
+                    <i class="fas {{this.iconClass}} icon"></i>
                     {{#if this.macro.item.macroConfig.hasCapacity}}
                     <footer class="macro-footer">{{this.macro.item.macroConfig.capacityCurrent}}/{{this.macro.item.macroConfig.capacityMaximum}}</footer>
                     {{else if this.macro.item.macroConfig.hasUses}}

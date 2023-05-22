@@ -64,8 +64,8 @@ import { SFRPGTokenHUD } from "./module/token/token-hud.js";
 import SFRPGTokenDocument from "./module/token/tokendocument.js";
 import setupVision from "./module/vision.js";
 
-import { HotbarSFRPG, listenForUpdates } from "./module/apps/ui/hotbar.js";
-import { rollItemMacro } from "./module/system/item-macros.js";
+import { HotbarSFRPG } from "./module/apps/ui/hotbar.js";
+import { connectToDocument, rollItemMacro } from "./module/system/item-macros.js";
 
 import { getAlienArchiveBrowser } from "./module/packs/alien-archive-browser.js";
 import { getEquipmentBrowser } from "./module/packs/equipment-browser.js";
@@ -428,7 +428,9 @@ Hooks.once("ready", async () => {
     ItemSFRPG.chatListeners($("body"));
 
     console.log("Starfinder | [READY] Connecting item macros to items");
-    listenForUpdates();
+    for (const macro of game.macros) {
+        connectToDocument(macro);
+    }
 
     if (game.user.isGM) {
         const currentSchema = game.settings.get('sfrpg', 'worldSchemaVersion') ?? 0;

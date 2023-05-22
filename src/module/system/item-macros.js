@@ -1,3 +1,5 @@
+import { ActorItemHelper, getChildItems } from "../actor/actor-inventory-utils.js";
+
 Hooks.on("hotbarDrop", (bar, data, slot) => {
     if (data.type !== "Item") return;
     createItemMacro(data, slot);
@@ -38,7 +40,9 @@ export async function createItemMacro(data, slot) {
         }, {displaySheet: false});
     }
 
+    connectToDocument(macro);
     game.user.assignHotbarMacro(macro, slot);
+
 }
 
 export function rollItemMacro(itemUuid, macroType) {
@@ -71,6 +75,8 @@ export function rollItemMacro(itemUuid, macroType) {
             return item.rollDamage({ event });
         case "activate":
             return item.setActive(!item.isActive());
+        case "reload":
+            return item.reload();
         case "use":
             return item.rollConsumable({ event });
         default:
@@ -79,47 +85,62 @@ export function rollItemMacro(itemUuid, macroType) {
 
 }
 
-Hooks.on("getHotbarEntryContext", (element, li) => {
-    const viewActor = {
-        name: "SFRPG.Macro.ViewActor",
-        icon: "<i class=\"fas fa-user\"></i>",
-        condition: (li) => {
-            const macro = game.macros.get(li.data("macro-id"));
-            const itemMacroDetails = macro?.flags?.sfrpg?.itemMacro;
-            if (itemMacroDetails?.itemUuid) {
-                const item = fromUuidSync(itemMacroDetails?.itemUuid);
-                return !!item.actor;
-            }
-        },
-        callback: (li) => {
-            const macro = game.macros.get(li.data("macro-id"));
-            const itemMacroDetails = macro?.flags?.sfrpg?.itemMacro;
-            if (itemMacroDetails?.itemUuid) {
-                const item = fromUuidSync(itemMacroDetails?.itemUuid);
-                item.actor.sheet.render(true);
-            }
-        }
-    };
+/**
+ * Find the corresponding item of an item macro, and listen for updates on it and any child items.
+ * @param {Macro} macro A macro to search for the corresponding item with.
+ * @returns {Boolean} True if any items successfully connected, otherwise false.
+ */
+export function connectToDocument(macro) {
+    const itemMacroDetails = macro?.flags?.sfrpg?.itemMacro;
 
-    const viewItem = {
-        name: "SFRPG.Macro.ViewItem",
-        icon: "<i class=\"fas fa-suitcase\"></i>",
-        condition: (li) => {
-            const macro = game.macros.get(li.data("macro-id"));
-            const itemMacroDetails = macro?.flags?.sfrpg?.itemMacro;
-            if (itemMacroDetails?.itemUuid) {
-                return !!fromUuidSync(itemMacroDetails?.itemUuid);
-            }
-        },
-        callback: (li) => {
-            const macro = game.macros.get(li.data("macro-id"));
-            const itemMacroDetails = macro?.flags?.sfrpg?.itemMacro;
-            if (itemMacroDetails?.itemUuid) {
-                const item = fromUuidSync(itemMacroDetails?.itemUuid);
-                item.sheet.render(true);
-            }
-        }
-    };
+    if (itemMacroDetails?.itemUuid) {
+        const item = fromUuidSync(itemMacroDetails?.itemUuid);
+        if (!item || !item.actor) return false;
+        item.apps[ui.hotbar.appId] = ui.hotbar;
 
-    li.push(viewActor, viewItem);
+        // Attacking with a weapon with ammo triggers an update on the ammo, not the weapon, so listen to the ammo too.
+        const childItems = _getChildItems(item);
+        if (!childItems?.length) return;
+        for (const child of childItems) {
+            child.apps[ui.hotbar.appId] = ui.hotbar;
+        }
+
+        return true;
+    } else {
+        return false;
+    }
+
+}
+
+function _getChildItems(item) {
+    if (!item.requiresCapacityItem()) {
+        return null;
+    }
+
+    // Create actor item helper
+    const tokenId = item.actor.isToken ? item.actor.token.id : null;
+    const sceneId = item.actor.isToken ? item.actor.token.parent.id : null;
+    // Pass the actor through on the options object so the constructor doesn't have to try (and fail) and fetch the actor from the compendium.
+    const itemHelper = new ActorItemHelper(item.actor.id, tokenId, sceneId, { actor: item.actor });
+
+    return getChildItems(itemHelper, item);
+
+}
+
+// Before deleting an item, remove it from the hotbar's apps, so the delete method doesn't close the hotbar.
+Hooks.on("preDeleteItem", (item) => {
+    delete item.apps[ui.hotbar.appId];
+});
+
+// Add update listeners to all child items whenever an item is updated, in case any child items were swapped.
+Hooks.on("updateItem", (item) => {
+    if (item.apps[ui.hotbar.appId]) {
+        const childItems = _getChildItems(item);
+        if (!childItems?.length) return;
+
+        for (const child of childItems) {
+            if (child.apps[ui.hotbar.appId]) continue;
+            child.apps[ui.hotbar.appId] = ui.hotbar;
+        }
+    }
 });
