@@ -37,8 +37,6 @@
                         <h3 class="form-header bubble-header">{{ localize "SFRPG.Items.Shield.Details" }}</h3>
 
                         <div class="bubble-info">
-                            {{!-- Equipment Status --}}
-                            {{> "systems/sfrpg/templates/items/parts/item-status.hbs"}}
 
                             {{!-- Shield Bonus --}}
                             <div class="form-group">
@@ -67,6 +65,9 @@
                                     <input type="text" name="system.acp" value="{{itemData.acp}}" data-dtype="Number" placeholder="0" />
                                 </div>
                             </div>
+                            
+                            {{!-- Equipment Status --}}
+                            {{> "systems/sfrpg/templates/items/parts/item-status.hbs"}}
 
                             {{!-- Weapon Properties --}}
                             {{> "systems/sfrpg/templates/items/parts/weapon-properties.hbs"}}
