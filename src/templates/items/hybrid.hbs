@@ -17,40 +17,62 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-tab="details" data-group="primary">
-            <h3 class="form-header noborder">{{ localize "SFRPG.Items.Hybrid.Details" }}</h3>
 
-            <div class="form-group">
-                <label>{{ localize "SFRPG.Items.Magic.LimitedWear" }}</label>
-                <label class="checkbox">
-                   <input type="checkbox" name="system.limitedWear" {{checked itemData.limitedWear}}/>{{ localize "SFRPG.Items.Magic.LimitedWearCheckbox" }}
-               </label>
-            </div>
+            {{!-- Details Tab Navigation --}}
+            <nav class="sheet-subnavigation subtabs" data-group="subdetails">
+                <a class="item highlight active" data-tab="properties">{{ localize "SFRPG.ItemSheet.Details.Tab.Properties" }}</a>
+                <a class="item" data-tab="container">{{ localize "SFRPG.ItemSheet.Details.Tab.AmmunitionContainer" }}</a>
+            </nav>
 
-            {{#if (and (and itemData.limitedWear actor) (eq actor.type "character"))}}
-                {{#if (gt actor.system.magicalItems.worn actor.system.magicalItems.max)}}
-                <div class="form-group">
-                    <label></label>
-                    <span class="error"  style="text-align: right;">{{localize "SFRPG.Items.Magic.LimitedWearExceeded"}}</span>
+            {{!-- Details Section --}}
+            <section class="sheet-details">
+
+                {{!-- Properties Tab --}}
+                <div class="tab properties" data-group="subdetails" data-tab="properties">
+                    
+                    <div class="bubble">
+                        <h3 class="form-header bubble-header">{{ localize "SFRPG.Items.Hybrid.Details" }}</h3>
+
+                        <div class="bubble-info">
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.Items.Magic.LimitedWear" }}</label>
+                                <label class="checkbox">
+                                <input type="checkbox" name="system.limitedWear" {{checked itemData.limitedWear}}/>{{ localize "SFRPG.Items.Magic.LimitedWearCheckbox" }}
+                            </label>
+                            </div>
+
+                            {{#if (and (and itemData.limitedWear actor) (eq actor.type "character"))}}
+                                {{#if (gt actor.system.magicalItems.worn actor.system.magicalItems.max)}}
+                                <div class="form-group">
+                                    <label></label>
+                                    <span class="error"  style="text-align: right;">{{localize "SFRPG.Items.Magic.LimitedWearExceeded"}}</span>
+                                </div>
+                                {{/if}}
+                            {{/if}}
+                            
+                            {{!-- Equipment Status --}}
+                            {{> "systems/sfrpg/templates/items/parts/item-status.hbs"}}
+
+                        </div>
+                    </div>
+
+                    {{!-- Physical Item Details --}}
+                    {{> "systems/sfrpg/templates/items/parts/physical-item-details.hbs"}}
+
                 </div>
-                {{/if}}
-            {{/if}}
+
+                {{!-- Container Tab --}}
+                <div class="tab container" data-group="subdetails" data-tab="container">
+
+                    {{!-- Capacity --}}
+                    {{> "systems/sfrpg/templates/items/parts/item-capacity.hbs"}}
+
+                    {{!-- Container Template --}}
+                    {{> "systems/sfrpg/templates/items/parts/container-details.hbs" message="SFRPG.Items.Equipment.ContainerTooltip"}}
+
+                </div>
             
-            {{!-- Equipment Status --}}
-            {{> "systems/sfrpg/templates/items/parts/item-status.hbs"}}
-
-            <br />
-
-            {{> "systems/sfrpg/templates/items/parts/item-capacity.hbs"}}
-
-            <br />
-
-            <h3 class="form-header noborder">{{ localize "SFRPG.ItemSheet.PhysicalProperties.Header" }}</h3>
-            {{> "systems/sfrpg/templates/items/parts/physical-item-details.hbs"}}
-            
-            <br />
-
-            {{!-- Container Template --}}
-            {{> "systems/sfrpg/templates/items/parts/container-details.hbs" message="SFRPG.Items.Equipment.ContainerTooltip"}}
+            </section>
             
         </div>
 
