@@ -46,7 +46,7 @@ export const registerSystemSettings = function() {
         config: true,
         default: false,
         type: Boolean,
-        onChange: s => {
+        onChange: () => {
             ui.chat.render();
         }
     });
@@ -115,6 +115,16 @@ export const registerSystemSettings = function() {
         onChange: () => {
             ItemSFRPG._onScalingCantripsSettingChanges();
         }
+    });
+
+    game.settings.register("sfrpg", "difficultyDisplay", {
+        name: "SFRPG.Settings.DifficultyDisplay.Name",
+        hint: "SFRPG.Settings.DifficultyDisplay.Hint",
+        scope: "world",
+        config: true,
+        default: true,
+        type: Boolean,
+        onChange: () => ui.combat.render(false)
     });
 
     for (let combatType of SFRPG.combatTypes) {
