@@ -14,26 +14,50 @@
     <section class="sheet-body">
         {{> "systems/sfrpg/templates/items/parts/item-description.hbs"}}
 
+        {{!-- Details Tab --}}
         <div class="tab details" data-tab="details" data-group="primary">
-            <h3 class="form-header noborder">{{ localize "SFRPG.Items.Technological.Details" }}</h3>
+
+            {{!-- Details Tab Navigation --}}
+            <nav class="sheet-subnavigation subtabs" data-group="subdetails">
+                <a class="item highlight active" data-tab="properties">{{ localize "SFRPG.ItemSheet.Details.Tab.Properties" }}</a>
+                <a class="item" data-tab="container">{{ localize "SFRPG.ItemSheet.Details.Tab.AmmunitionContainer" }}</a>
+            </nav>
+
+            {{!-- Details Section --}}
+            <section class="sheet-details">
+
+                {{!-- Properties Tab --}}
+                <div class="tab properties" data-group="subdetails" data-tab="properties">
+                    
+                    <div class="bubble">
+                        <h3 class="form-header bubble-header">{{ localize "SFRPG.Items.Technological.Details" }}</h3>
+
+                        <div class="bubble-info">
+                            
+                            {{!-- Equipment Status --}}
+                            {{> "systems/sfrpg/templates/items/parts/item-status.hbs"}}
+
+                        </div>
+                    </div>
+
+                    {{!-- Physical Item Details --}}
+                    {{> "systems/sfrpg/templates/items/parts/physical-item-details.hbs"}}
+
+                </div>
+
+                {{!-- Container Tab --}}
+                <div class="tab container" data-group="subdetails" data-tab="container">
+
+                    {{!-- Capacity --}}
+                    {{> "systems/sfrpg/templates/items/parts/item-capacity.hbs"}}
+
+                    {{!-- Container Template --}}
+                    {{> "systems/sfrpg/templates/items/parts/container-details.hbs" message="SFRPG.Items.Equipment.ContainerTooltip"}}
+
+                </div>
             
-            {{!-- Equipment Status --}}
-            {{> "systems/sfrpg/templates/items/parts/item-status.hbs"}}
-
-            <br />
-
-            {{> "systems/sfrpg/templates/items/parts/item-capacity.hbs"}}
-
-            <br />
-
-            <h3 class="form-header noborder">{{ localize "SFRPG.ItemSheet.PhysicalProperties.Header" }}</h3>
-            {{> "systems/sfrpg/templates/items/parts/physical-item-details.hbs"}}
+            </section>
             
-            <br />
-
-            {{!-- Container Template --}}
-            {{> "systems/sfrpg/templates/items/parts/container-details.hbs" message="SFRPG.Items.Equipment.ContainerTooltip"}}
-
         </div>
 
         {{!-- Modifiers Tab --}}
