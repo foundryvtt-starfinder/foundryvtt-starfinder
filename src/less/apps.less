@@ -617,39 +617,51 @@ img.icon-enricher {
     }
 }
 
-#hotbar.sfrpg .macro {
-    img {
-        &.greyscale {
-            filter: grayscale(1);
-            cursor: not-allowed;
-        }
+#hotbar.sfrpg {
+    ol#macro-list {
+        border: none;
 
-        &.active {
-            box-shadow: 0 0 10px 0 var(--color-shadow-highlight);
-        }
-    }
+        .macro {
+            img {
+                &.greyscale {
+                    filter: grayscale(1);
+                    cursor: not-allowed;
+                }
 
-    footer.macro-footer {
-        position: absolute;
-        bottom: 0px;
-        left: 0px;
-        font-size: var(--font-size-11);
-        padding: 1px 2px;
-        background: #11111180;
-        color: var(--color-text-light-highlight);
-    }
+                &.active {
+                    box-shadow: 0 0 10px 0 var(--color-shadow-highlight);
+                }
+            }
 
-    i.fas.activation {
-        position: absolute;
-        top: 0px;
-        left: 1px;
+            span.macro-key {
+                top: 0px;
+                right: 0px;
+                padding: 0 2px;
+            }
 
-        &.fa-xmark {
-            color: red;
-        }
+            footer.macro-footer {
+                position: absolute;
+                bottom: 0px;
+                left: 0px;
+                font-size: var(--font-size-12);
+                padding: 0 2px;
+                background: #11111180;
+                color: var(--color-text-light-highlight);
+            }
 
-        &.fa-check {
-            color: springgreen;
+            i.fas.activation {
+                position: absolute;
+                top: 0px;
+                left: 1px;
+
+                &.fa-xmark {
+                    color: red;
+                }
+
+                &.fa-check {
+                    color: springgreen;
+                }
+            }
         }
     }
 }

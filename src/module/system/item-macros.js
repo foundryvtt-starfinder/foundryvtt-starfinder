@@ -65,14 +65,14 @@ export function rollItemMacro(itemUuid, macroType) {
 
     switch (macroType) {
         case "attack":
-            return item.rollAttack();
+            return item.rollAttack({ event });
         case "damage":
         case "healing":
-            return item.rollDamage();
+            return item.rollDamage({ event });
         case "activate":
             return item.setActive(!item.isActive());
         case "use":
-            return item.rollConsumable();
+            return item.rollConsumable({ event });
         default:
             return item.roll();
     }
