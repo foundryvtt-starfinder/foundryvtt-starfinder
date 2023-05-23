@@ -38,113 +38,145 @@
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
-            <h4 class="section-header first">{{ localize "SFRPG.DroneSheet.Mod.Details.BaseStatistics.Header" }}</h4>
+            {{!-- Details Tab Navigation --}}
+            <nav class="sheet-subnavigation subtabs" data-group="subdetails">
+                <a class="item highlight active" data-tab="properties">{{ localize "SFRPG.ItemSheet.Details.Tab.Properties" }}</a>
+                <a class="item" data-tab="usage">{{ localize "SFRPG.ItemSheet.Details.Tab.UsageAction" }}</a>
+            </nav>
 
-            <div class="form-group">
-                <label>{{ localize "SFRPG.DroneSheet.Mod.Details.BaseStatistics.MaxInstalls" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.maxInstalls" value="{{itemData.maxInstalls}}" data-dtype="Number"/>
-                 </div>
-            </div>
+            {{!-- Details Section --}}
+            <section class="sheet-details">
 
-            <div class="form-group">
-                <label>{{ localize "SFRPG.DroneSheet.Mod.Details.BaseStatistics.FreeInstall" }}</label>
-                <label class="checkbox">
-                    <input type="checkbox" name="system.isFree" {{checked itemData.isFree}}/>{{ localize "SFRPG.DroneSheet.Mod.Details.BaseStatistics.FreeInstallLabel" }}
-                </label>
-            </div>
+                {{!-- Properties Tab --}}
+                <div class="tab properties" data-group="subdetails" data-tab="properties">
 
-            <h4 class="section-header">{{ localize "SFRPG.DroneSheet.Mod.Details.Arms.Header" }}</h4>
- 
-            <div class="form-group">
-                <label>{{ localize "SFRPG.DroneSheet.Mod.Details.Arms.Amount" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.arms.number" value="{{itemData.arms.number}}" data-dtype="Number"/>
-                 </div>
-            </div>
- 
-            <div class="form-group">
-                <label>{{ localize "SFRPG.DroneSheet.Mod.Details.Arms.ArmType.Label" }}</label>
-                <div class="form-fields">
-                    <select name="system.arms.armType">
-                        {{#select itemData.arms.armType}}
-                        <option value="general">{{ localize "SFRPG.DroneSheet.Mod.Details.Arms.ArmType.General" }}</option>
-                        <option value="melee">{{ localize "SFRPG.DroneSheet.Mod.Details.Arms.ArmType.Melee" }}</option>
-                        <option value="ranged">{{ localize "SFRPG.DroneSheet.Mod.Details.Arms.ArmType.Ranged" }}</option>
-                        {{/select}}
-                    </select>
+                    {{!-- Base Statistics --}}
+                    <div class="bubble">
+                        <h3 class="form-header bubble-header">{{ localize "SFRPG.DroneSheet.Mod.Details.BaseStatistics.Header" }}</h3>
+
+                        <div class="bubble-info">
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.DroneSheet.Mod.Details.BaseStatistics.MaxInstalls" }}</label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.maxInstalls" value="{{itemData.maxInstalls}}" data-dtype="Number"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.DroneSheet.Mod.Details.BaseStatistics.FreeInstall" }}</label>
+                                <label class="checkbox">
+                                    <input type="checkbox" name="system.isFree" {{checked itemData.isFree}}/>{{ localize "SFRPG.DroneSheet.Mod.Details.BaseStatistics.FreeInstallLabel" }}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{!-- Arms --}}
+                    <div class="bubble">
+                        <h3 class="form-header bubble-header">{{ localize "SFRPG.DroneSheet.Mod.Details.Arms.Header" }}</h3>
+
+                        <div class="bubble-info">
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.DroneSheet.Mod.Details.Arms.Amount" }}</label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.arms.number" value="{{itemData.arms.number}}" data-dtype="Number"/>
+                                </div>
+                            </div>
+                
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.DroneSheet.Mod.Details.Arms.ArmType.Label" }}</label>
+                                <div class="form-fields">
+                                    <select name="system.arms.armType">
+                                        {{#select itemData.arms.armType}}
+                                        <option value="general">{{ localize "SFRPG.DroneSheet.Mod.Details.Arms.ArmType.General" }}</option>
+                                        <option value="melee">{{ localize "SFRPG.DroneSheet.Mod.Details.Arms.ArmType.Melee" }}</option>
+                                        <option value="ranged">{{ localize "SFRPG.DroneSheet.Mod.Details.Arms.ArmType.Ranged" }}</option>
+                                        {{/select}}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {{!-- Other Effects --}}
+                    <div class="bubble">
+                        <h3 class="form-header bubble-header">{{ localize "SFRPG.DroneSheet.Mod.Details.OtherEffects.Header" }}</h3>
+
+                        <div class="bubble-info">
+
+                            <div class="form-group">
+                            <label>{{ localize "SFRPG.DroneSheet.Mod.Details.OtherEffects.ArmorSlot" }}</label>
+                            <label class="checkbox">
+                                <input type="checkbox" name="system.isArmorSlot" {{checked itemData.isArmorSlot}}/>
+                            </label>
+                            </div>
+
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.DroneSheet.Mod.Details.OtherEffects.WeaponProficiency" }}</label>
+                                <div class="form-fields">
+                                    <select name="system.weaponProficiency">
+                                        <option value="">{{ localize "SFRPG.None" }}</option>
+                                        {{#select itemData.weaponProficiency}}
+                                        {{#each config.weaponProficiencies as |name val|}}
+                                        <option value="{{val}}">{{name}}</option>
+                                        {{/each}}
+                                        {{/select}}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.DroneSheet.Mod.Details.OtherEffects.BonusSkill" }}</label>
+                                <div class="form-fields">
+                                    <select name="system.bonusSkill">
+                                        <option value="">{{ localize "SFRPG.None" }}</option>
+                                        {{#select itemData.bonusSkill}}
+                                        {{#each config.skills as |name val|}}
+                                        <option value="{{val}}">{{name}}</option>
+                                        {{/each}}
+                                        {{/select}}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                            <label>{{ localize "SFRPG.DroneSheet.Mod.Details.OtherEffects.SpellResistance" }}</label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.spellResistance" value="{{itemData.spellResistance}}" data-dtype="Number"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                            <label>{{ localize "SFRPG.DroneSheet.Mod.Details.OtherEffects.SpeedSpecial" }}</label>
+                            <div class="form-fields">
+                                <input type="text" name="system.additionalMovement" value="{{itemData.additionalMovement}}" data-dtype="String"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                            <label>{{ localize "SFRPG.DroneSheet.Mod.Details.OtherEffects.AdditionalSenses" }}</label>
+                            <div class="form-fields">
+                                <input type="text" name="system.additionalSenses" value="{{itemData.additionalSenses}}" data-dtype="String"/>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
                 </div>
-            </div>
 
-            <h4 class="section-header">{{ localize "SFRPG.DroneSheet.Mod.Details.OtherEffects.Header" }}</h4>
+                {{!-- Usage Tab --}}
+                <div class="tab usage" data-group="subdetails" data-tab="usage">
 
-            <div class="form-group">
-               <label>{{ localize "SFRPG.DroneSheet.Mod.Details.OtherEffects.SpeedSpecial" }}</label>
-               <div class="form-fields">
-                   <input type="text" name="system.additionalMovement" value="{{itemData.additionalMovement}}" data-dtype="String"/>
+                    {{!-- Item Action Template --}}
+                    {{> "systems/sfrpg/templates/items/parts/item-activation.hbs" message="SFRPG.Items.Action.TitleActivation"}}
+
+                    {{!-- Item Action Template --}}
+                    {{> "systems/sfrpg/templates/items/parts/item-action.hbs"}}
+
                 </div>
-            </div>
 
-            <div class="form-group">
-               <label>{{ localize "SFRPG.DroneSheet.Mod.Details.OtherEffects.AdditionalSenses" }}</label>
-               <div class="form-fields">
-                   <input type="text" name="system.additionalSenses" value="{{itemData.additionalSenses}}" data-dtype="String"/>
-                </div>
-            </div>
-
-            <div class="form-group">
-               <label>{{ localize "SFRPG.DroneSheet.Mod.Details.OtherEffects.ArmorSlot" }}</label>
-               <label class="checkbox">
-                   <input type="checkbox" name="system.isArmorSlot" {{checked itemData.isArmorSlot}}/>
-               </label>
-            </div>
-
-            <div class="form-group">
-               <label>{{ localize "SFRPG.DroneSheet.Mod.Details.OtherEffects.SpellResistance" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.spellResistance" value="{{itemData.spellResistance}}" data-dtype="Number"/>
-                 </div>
-            </div>
-
-            <div class="form-group">
-                <label>{{ localize "SFRPG.DroneSheet.Mod.Details.OtherEffects.WeaponProficiency" }}</label>
-                <div class="form-fields">
-                    <select name="system.weaponProficiency">
-                        <option value="">{{ localize "SFRPG.None" }}</option>
-                        {{#select itemData.weaponProficiency}}
-                        {{#each config.weaponProficiencies as |name val|}}
-                        <option value="{{val}}">{{name}}</option>
-                        {{/each}}
-                        {{/select}}
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>{{ localize "SFRPG.DroneSheet.Mod.Details.OtherEffects.BonusSkill" }}</label>
-                <div class="form-fields">
-                    <select name="system.bonusSkill">
-                        <option value="">{{ localize "SFRPG.None" }}</option>
-                        {{#select itemData.bonusSkill}}
-                        {{#each config.skills as |name val|}}
-                        <option value="{{val}}">{{name}}</option>
-                        {{/each}}
-                        {{/select}}
-                    </select>
-                </div>
-            </div>
-
-            <br />
-
-            <h3 class="form-header noborder">{{ localize "SFRPG.Items.Action.TitleActivation" }}</h3>
-
-            {{!-- Item Action Template --}}
-            {{> "systems/sfrpg/templates/items/parts/item-activation.hbs"}}
-
-            <h3 class="form-header noborder">{{ localize "SFRPG.Items.Action.TitleAction" }}</h3>
-
-            {{!-- Item Action Template --}}
-            {{> "systems/sfrpg/templates/items/parts/item-action.hbs"}}
+            </section>
 
         </div>
 
