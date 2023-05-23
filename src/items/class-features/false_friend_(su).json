@@ -37,11 +37,49 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>As a reaction, when a creature targets you with a hostile action, you can implant a brief psychic suggestion that you are a loved one, ally, or other creature they’d be unwilling to attack. The creature attempts a Will save against this mind‑affecting compulsion effect. If they succeed, they are shaken for 1 round by the unsettling experience. If they fail, the creature flinches and misses with the triggering attack, and additional attacks they make against you until the beginning of their next turn take a –2 penalty. Once you’ve used this ability, you cannot do so again until you rest for 10 minutes to recover Stamina Points.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>As a reaction, when a creature targets you with a hostile action, you can implant a brief psychic suggestion that you are a loved one, ally, or other creature they’d be unwilling to attack. The creature attempts a @Check[type:will] save against this mind‑affecting compulsion effect. If they succeed, they are @UUID[Compendium.sfrpg.conditions.nywSVEeDvp1bk7L3]{Shaken} for 1 round by the unsettling experience. If they fail, the creature flinches and misses with the triggering attack, and additional attacks they make against you until the beginning of their next turn take a –2 penalty. Once you’ve used this ability, you cannot do so again until you rest for 10 minutes to recover Stamina Points.</p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
     "details": {
       "category": "classFeature",
+      "combat": false,
       "specialAbilityType": "su"
     },
     "duration": {
@@ -61,12 +99,16 @@
       "charged": false,
       "value": null
     },
-    "requirements": "10th Level",
+    "requirements": "10th Level (Operative)",
     "rollNotes": "",
     "save": {
       "type": "will",
       "dc": "10+floor(@classes.operative.levels/2) + @abilities.dex.mod",
       "descriptor": "negate"
+    },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
     },
     "source": "GM pg. 29",
     "target": {

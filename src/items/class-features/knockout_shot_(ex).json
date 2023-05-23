@@ -37,11 +37,49 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>For your debilitating trick, you can attempt to knock the target out in one blow. The target must succeed at a Fortitude save or fall unconscious for 1 minute. Once you’ve used this ability to attempt to knock a creature out, that creature is immune to your knockout shot for 24 hours. You must have the staggering shot and stunning shot exploits to learn this exploit.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>For your debilitating trick, you can attempt to knock the target out in one blow. The target must succeed at a @Check[type:fortitude] save or fall @UUID[Compendium.sfrpg.conditions.lf8pbezocjYIvR9y]{Unconscious} for 1 minute. Once you’ve used this ability to attempt to knock a creature out, that creature is immune to your knockout shot for 24 hours. You must have the @UUID[Compendium.sfrpg.class-features.o2GDNS1g87yquIMS]{Staggering Shot (Ex)} and @UUID[Compendium.sfrpg.class-features.baRuU23mPo6lkVbn]{Stunning Shot (Ex)} exploits to learn this exploit.</p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
     "details": {
       "category": "classFeature",
+      "combat": false,
       "specialAbilityType": "ex"
     },
     "duration": {
@@ -61,14 +99,18 @@
       "charged": false,
       "value": null
     },
-    "requirements": "14th Level",
+    "requirements": "14th Level (Operative)",
     "rollNotes": "",
     "save": {
       "type": "fort",
       "dc": "10+floor(@classes.operative.levels/2) + @abilities.dex.mod",
       "descriptor": "negate"
     },
-    "source": "Operative Exploit",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
+    "source": "CRB pg. 97",
     "target": {
       "type": "",
       "value": ""
