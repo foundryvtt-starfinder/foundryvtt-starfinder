@@ -53,124 +53,141 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-            <h3 class="form-header noborder">{{ localize "SFRPG.Items.Spell.Details" }}</h3>
 
-            {{!-- Allowed Classes --}}
-            <div class="form-group">
-                <label>{{ localize "SFRPG.Items.Spell.AllowedClasses" }}</label>
-                <div class="form-fields">
-                    {{#each config.spellcastingClasses as |name key|}}
-                    <label class="checkbox">
-                        <input type="checkbox" name="system.allowedClasses.{{key}}" {{checked (lookup ../itemData.allowedClasses key)}} /> {{name}}
-                    </label>
-                    {{/each}}
-                </div>
-            </div>
+            {{!-- Details Tab Navigation --}}
+            <nav class="sheet-subnavigation subtabs" data-group="subdetails">
+                <a class="item highlight active" data-tab="properties">{{ localize "SFRPG.ItemSheet.Details.Tab.Properties" }}</a>
+                <a class="item" data-tab="usage">{{ localize "SFRPG.ItemSheet.Details.Tab.UsageAction" }}</a>
+            </nav>
 
-            {{!-- Spell Level --}}
-            <div class="form-group">
-                <label>{{ localize "SFRPG.Items.Spell.Level" }}</label>
-                <div class="form-fields">
-                    <select name="system.level" data-dtype="Number">
-                        {{#select itemData.level}}
-                        {{#each config.spellLevels as |name lvl|}}
-                        <option value="{{lvl}}">{{localize name}}</option>
-                        {{/each}}
-                        {{/select}}
-                    </select>
-                </div>
-            </div>
+            {{!-- Details Section --}}
+            <section class="sheet-details">
 
-            <div class="form-group">
-                <label>{{ localize "SFRPG.Items.Spell.IsVariableLevel" }}</label>
-                <div class="form-fields">
-                    <label class="checkbox">
-                        <input type="checkbox" name="system.isVariableLevel" {{checked itemData.isVariableLevel}} /> {{ localize "SFRPG.Items.Spell.IsVariableLevelYes" }}
-                    </label>
-                </div>
-            </div>
+                {{!-- Properties Tab --}}
+                <div class="tab properties" data-group="subdetails" data-tab="properties">
 
-            {{!-- Spell School --}}
-            <div class="form-group">
-                <label>{{ localize "SFRPG.Items.Spell.School" }}</label>
-                <div class="form-fields">
-                    <select name="system.school">
-                        {{#select itemData.school}}
-                        {{#each config.spellSchools as |name sch|}}
-                        <option value="{{sch}}">{{localize name}}</option>
-                        {{/each}}
-                        {{/select}}
-                    </select>
-                </div>
-            </div>
+                    {{!-- Feature Details --}}
+                    <div class="bubble">
+                        <h3 class="form-header bubble-header">{{ localize "SFRPG.Items.Spell.Details" }}</h3>
 
-            {{!-- Spell Components --}}
-            <div class="spell-components form-group">
-                <label>{{ localize "SFRPG.Items.Spell.Properties" }}</label>
-                <div class="form-fields">
-                    <label class="checkbox">
-                        <input type="checkbox" name="system.sr" {{checked itemData.sr}}/> {{ localize "SFRPG.Items.Spell.Resistance" }}
-                    </label>
-                    <label class="checkbox">
-                        <input type="checkbox" name="system.dismissible" {{checked itemData.dismissible}}/> {{ localize "SFRPG.Items.Spell.Dismissible" }}
-                    </label>
-                    <label class="checkbox">
-                        <input type="checkbox" name="system.concentration" {{checked itemData.concentration}}/> {{ localize "SFRPG.Items.Spell.Concentration" }}
-                    </label>
-                </div>
-            </div>
+                        <div class="bubble-info">
+                            {{!-- Allowed Classes --}}
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.Items.Spell.AllowedClasses" }}</label>
+                                <div class="form-fields">
+                                    {{#each config.spellcastingClasses as |name key|}}
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="system.allowedClasses.{{key}}" {{checked (lookup ../itemData.allowedClasses key)}} /> {{name}}
+                                    </label>
+                                    {{/each}}
+                                </div>
+                            </div>
 
-            {{!-- Material Components --}}
-            <div class="form-group">
-                <label>{{ localize "SFRPG.Items.Spell.SpellcastingMaterials" }}</label>
-                <div class="form-fields">
-                    <input class="materials" type="text" name="system.materials.value" value="{{itemData.materials.value}}"/>
-                    {{#if itemData.materials.value}}
-                    <div class="spell-materials flexrow">
-                        <label>{{ localize "SFRPG.Items.Spell.Supply" }}</label>
-                        <input type="text" name="system.materials.supply" value="{{itemData.materials.supply}}" data-dtype="Number" Placeholder="0"/>
-                        <label>{{ localize "SFRPG.Items.Spell.Cost" }}</label>
-                        <input type="text" name="system.materials.cost" value="{{itemData.materials.cost}}" data-dtype="Number" Placeholder="0"/>
-                        <label>{{ localize "SFRPG.Items.Spell.Consumed" }}</label>
-                        <input type="checkbox" name="system.materials.consumed" {{checked itemData.materials.consumed}}/>
+                            {{!-- Spell Level --}}
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.Items.Spell.Level" }}</label>
+                                <div class="form-fields">
+                                    <select name="system.level" data-dtype="Number">
+                                        {{#select itemData.level}}
+                                        {{#each config.spellLevels as |name lvl|}}
+                                        <option value="{{lvl}}">{{localize name}}</option>
+                                        {{/each}}
+                                        {{/select}}
+                                    </select>
+                                    <span>&nbsp;</span>
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="system.isVariableLevel" {{checked itemData.isVariableLevel}} /> {{ localize "SFRPG.Items.Spell.IsVariableLevel" }}
+                                    </label>
+                                </div>
+                            </div>
+
+                            {{!-- Spell School --}}
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.Items.Spell.School" }}</label>
+                                <div class="form-fields">
+                                    <select name="system.school">
+                                        {{#select itemData.school}}
+                                        {{#each config.spellSchools as |name sch|}}
+                                        <option value="{{sch}}">{{localize name}}</option>
+                                        {{/each}}
+                                        {{/select}}
+                                    </select>
+                                </div>
+                            </div>
+
+                            {{!-- Spell Components --}}
+                            <div class="spell-components form-group">
+                                <label>{{ localize "SFRPG.Items.Spell.Properties" }}</label>
+                                <div class="form-fields">
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="system.sr" {{checked itemData.sr}}/> {{ localize "SFRPG.Items.Spell.Resistance" }}
+                                    </label>
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="system.dismissible" {{checked itemData.dismissible}}/> {{ localize "SFRPG.Items.Spell.Dismissible" }}
+                                    </label>
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="system.concentration" {{checked itemData.concentration}}/> {{ localize "SFRPG.Items.Spell.Concentration" }}
+                                    </label>
+                                </div>
+                            </div>
+
+                            {{!-- Preparation Mode --}}
+                            <div class="form-group input-select">
+                                <label>{{ localize "SFRPG.Items.Spell.PreparationMode" }}</label>
+                                <div class="form-fields">
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="system.preparation.prepared" {{checked itemData.preparation.prepared}}/> {{ localize "SFRPG.Items.Spell.Prepared" }}
+                                    </label>
+                                    <span>&nbsp;</span>
+                                    <select name="system.preparation.mode">
+                                        {{#select itemData.preparation.mode}}
+                                        <option value=""></option>
+                                        {{#each config.spellPreparationModes as |name key|}}
+                                        <option value="{{key}}">{{name}}</option>
+                                        {{/each}}
+                                        {{/select}}
+                                    </select>
+                                </div>
+                            </div>
+
+                            {{!-- Material Components --}}
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.Items.Spell.SpellcastingMaterials" }}</label>
+                                <div class="form-fields">
+                                    <input class="materials" type="text" name="system.materials.value" value="{{itemData.materials.value}}"/>
+                                    {{#if itemData.materials.value}}
+                                    <div class="spell-materials flexrow">
+                                        <label>{{ localize "SFRPG.Items.Spell.Supply" }}</label>
+                                        <input type="text" name="system.materials.supply" value="{{itemData.materials.supply}}" data-dtype="Number" Placeholder="0"/>
+                                        <label>{{ localize "SFRPG.Items.Spell.Cost" }}</label>
+                                        <input type="text" name="system.materials.cost" value="{{itemData.materials.cost}}" data-dtype="Number" Placeholder="0"/>
+                                        <label>{{ localize "SFRPG.Items.Spell.Consumed" }}</label>
+                                        <input type="checkbox" name="system.materials.consumed" {{checked itemData.materials.consumed}}/>
+                                    </div>
+                                    {{/if}}
+                                </div>
+                            </div>
+                            
+                            {{!-- Descriptors Selector --}}
+                            {{> "systems/sfrpg/templates/items/parts/item-descriptors.hbs"}}
+                        </div>
                     </div>
-                    {{/if}}
+                
                 </div>
-            </div>
 
-            {{!-- Preparation Mode --}}
-            <div class="form-group input-select">
-                <label>{{ localize "SFRPG.Items.Spell.PreparationMode" }}</label>
-                <div class="form-fields">
-                    <label class="checkbox">
-                        <input type="checkbox" name="system.preparation.prepared" {{checked itemData.preparation.prepared}}/> {{ localize "SFRPG.Items.Spell.Prepared" }}
-                    </label>
-                    <span>&nbsp;</span>
-                    <select name="system.preparation.mode">
-                        {{#select itemData.preparation.mode}}
-                        <option value=""></option>
-                        {{#each config.spellPreparationModes as |name key|}}
-                        <option value="{{key}}">{{name}}</option>
-                        {{/each}}
-                        {{/select}}
-                    </select>
+                {{!-- Usage Tab --}}
+                <div class="tab usage" data-group="subdetails" data-tab="usage">
+
+                    {{!-- Item Activation Template --}}
+                    {{> "systems/sfrpg/templates/items/parts/item-activation.hbs" message="SFRPG.Items.Spell.Casting"}}
+
+                    {{!-- Item Action Template --}}
+                    {{> "systems/sfrpg/templates/items/parts/item-action.hbs" message="SFRPG.Items.Spell.Effects"}}
+                    
                 </div>
-            </div>
-            
-            {{!-- Descriptors Selector --}}
-            {{> "systems/sfrpg/templates/items/parts/item-descriptors.hbs"}}
-            
-            <br />
 
-            <h3 class="form-header noborder">{{ localize "SFRPG.Items.Spell.Casting" }}</h3>
+            </section>
 
-            {{!-- Item Activation Template --}}
-            {{> "systems/sfrpg/templates/items/parts/item-activation.hbs"}}
-
-            <h3 class="form-header noborder">{{ localize "SFRPG.Items.Spell.Effects" }}</h3>
-
-            {{!-- Item Action Template --}}
-            {{> "systems/sfrpg/templates/items/parts/item-action.hbs"}}
         </div>
     </section>
 </form>
