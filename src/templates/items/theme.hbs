@@ -37,32 +37,37 @@
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
-            <h3 class="form-header noborder">{{ localize "SFRPG.Items.Theme.Details" }}</h3>
+            <div class="bubble">
+                <h3 class="form-header bubble-header">{{ localize "SFRPG.Items.Theme.Details" }}</h3>
 
-            <div class="form-group">
-                <label>{{ localize "SFRPG.Items.Theme.AbilityAdjustment" }}</label>
-                <div class="form-fields">
-                    <select name="system.abilityMod.ability">
-                        {{#select itemData.abilityMod.ability}}
-                        {{#each config.abilities as |ability key|}}
-                        <option value="{{key}}">{{ability}}</option>
-                        {{/each}}
-                        {{/select}}
-                    </select>
-                    <input type="text" name="system.abilityMod.mod" value="{{itemData.abilityMod.mod}}" data-dtype="Number" />                    
+                <div class="bubble-info">
+                    <div class="form-group">
+                        <label>{{ localize "SFRPG.Items.Theme.AbilityAdjustment" }}</label>
+                        <div class="form-fields">
+                            <select name="system.abilityMod.ability">
+                                {{#select itemData.abilityMod.ability}}
+                                {{#each config.abilities as |ability key|}}
+                                <option value="{{key}}">{{ability}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                            <input type="text" name="system.abilityMod.mod" value="{{itemData.abilityMod.mod}}" data-dtype="Number" />                    
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>{{ localize "SFRPG.Items.Theme.Skill" }}</label>
+                        <select name="system.skill">
+                            {{#select itemData.skill}}
+                            {{#each config.skills as |skill skl|}}
+                            <option value="{{skl}}">{{skill}}</option>
+                            {{/each}}
+                            {{/select}}
+                        </select>
+                    </div>
                 </div>
             </div>
 
-            <div class="form-group">
-                <label>{{ localize "SFRPG.Items.Theme.Skill" }}</label>
-                <select name="system.skill">
-                    {{#select itemData.skill}}
-                    {{#each config.skills as |skill skl|}}
-                    <option value="{{skl}}">{{skill}}</option>
-                    {{/each}}
-                    {{/select}}
-                </select>
-            </div>
         </div>
 
         {{!-- Modifiers Tab --}}
