@@ -38,267 +38,335 @@
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
-            {{!-- Class Levels --}}
-            <div class="form-group">
-                <label>{{localize "SFRPG.ClassLevelLabel"}}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.levels" value="{{itemData.levels}}" data-dtype="Number" />
-                </div>
-            </div>
+            {{!-- Details Tab Navigation --}}
+            <nav class="sheet-subnavigation subtabs" data-group="subdetails">
+                <a class="item highlight active" data-tab="information">{{ localize "SFRPG.ItemSheet.Details.Tab.ClassInformation" }}</a>
+                {{#if itemData.isCaster}}<a class="item" data-tab="spellcasting">{{ localize "SFRPG.ItemSheet.Details.Tab.Spellcasting" }}</a>{{/if}}
+            </nav>
 
-            <div class="form-group">
-                <label>{{localize "SFRPG.ClassBABProgression"}}</label>
-                <div class="form-fields">
-                    <select name="system.bab">
-                        {{#select itemData.bab}}
-                        {{#each config.babProgression as |name val|}}
-                        <option value="{{val}}">{{name}}</option>
-                        {{/each}}
-                        {{/select}}
-                    </select>
-                </div>
-            </div>
+            {{!-- Details Section --}}
+            <section class="sheet-details">
 
-            <div class="form-group">
-                <label>{{localize "SFRPG.ClassFortSaveProgression"}}</label>
-                <div class="form-fields">
-                    <select name="system.fort">
-                        {{#select itemData.fort}}
-                        {{#each config.saveProgression as |name val|}}
-                        <option value="{{val}}">{{name}}</option>
-                        {{/each}}
-                        {{/select}}
-                    </select>
-                </div>
-            </div>
+                {{!-- Class Information Tab --}}
+                <div class="tab information" data-group="subdetails" data-tab="information">
 
-            <div class="form-group">
-                <label>{{localize "SFRPG.ClassReflexSaveProgression"}}</label>
-                <div class="form-fields">
-                    <select name="system.ref">
-                        {{#select itemData.ref}}
-                        {{#each config.saveProgression as |name val|}}
-                        <option value="{{val}}">{{name}}</option>
-                        {{/each}}
-                        {{/select}}
-                    </select>
-                </div>
-            </div>
+                    {{!-- Class Basics --}}
+                    <div class="bubble">
+                        <h3 class="form-header bubble-header">{{ localize "SFRPG.ItemSheet.Details.Section.ClassBasics" }}</h3>
 
-            <div class="form-group">
-                <label>{{localize "SFRPG.ClassWillSaveProgression"}}</label>
-                <div class="form-fields">
-                    <select name="system.will">
-                        {{#select itemData.will}}
-                        {{#each config.saveProgression as |name val|}}
-                        <option value="{{val}}">{{name}}</option>
-                        {{/each}}
-                        {{/select}}
-                    </select>
-                </div>
-            </div>
+                        <div class="bubble-info">
 
-            <div class="form-group">
-                <label>{{localize "SFRPG.ClassKeyAbilityScore"}}</label>
-                <div class="form-fields">
-                    <select name="system.kas">
-                        {{#select itemData.kas}}
-                        {{#each config.abilities as |name val|}}
-                        <option value="{{val}}">{{name}}</option>
-                        {{/each}}
-                        {{/select}}
-                    </select>
-                </div>
-            </div>
+                            {{!-- Class Levels --}}
+                            <div class="form-group">
+                                <label>{{localize "SFRPG.ClassLevelLabel"}}</label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.levels" value="{{itemData.levels}}" data-dtype="Number" />
+                                </div>
+                            </div>
 
-            {{!-- Hit Points per level --}}
-            <div class="form-group">
-                <label>{{localize "SFRPG.ClassHPPerLevel"}}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.hp.value" value="{{itemData.hp.value}}" data-dtype="Number" />
-                </div>
-            </div>
+                            {{!-- Key Ability Score --}}
+                            <div class="form-group">
+                                <label>{{localize "SFRPG.ClassKeyAbilityScore"}}</label>
+                                <div class="form-fields">
+                                    <select name="system.kas">
+                                        {{#select itemData.kas}}
+                                        {{#each config.abilities as |name val|}}
+                                        <option value="{{val}}">{{name}}</option>
+                                        {{/each}}
+                                        {{/select}}
+                                    </select>
+                                </div>
+                            </div>
 
-            {{!-- Stamina points per level --}}
-            <div class="form-group">
-                <label>{{localize "SFRPG.ClassSPPerlevel"}}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.sp.value" value="{{itemData.sp.value}}" data-dtype="Number" />
-                </div>
-            </div>
+                            {{!-- Hit Points per level --}}
+                            <div class="form-group">
+                                <label>{{localize "SFRPG.ClassHPPerLevel"}}</label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.hp.value" value="{{itemData.hp.value}}" data-dtype="Number" />
+                                </div>
+                            </div>
 
-            {{!-- Spellcasting --}}
-            <h4 class="section-header">{{localize "SFRPG.ItemSheet.Class.SpellCasting.Header"}}</h4>
+                            {{!-- Stamina points per level --}}
+                            <div class="form-group">
+                                <label>{{localize "SFRPG.ClassSPPerlevel"}}</label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.sp.value" value="{{itemData.sp.value}}" data-dtype="Number" />
+                                </div>
+                            </div>
 
-            <div class="form-group">
-                <label>{{localize "SFRPG.Classes.IsCasterClass"}}</label>
-                <div class="form-fields">
-                    <label class="checkbox">
-                        <input type="checkbox" name="system.isCaster" {{checked itemData.isCaster}} /> {{localize "SFRPG.ItemSheet.Class.SpellCasting.IsCaster"}}
-                    </label>
+                            {{!-- Spellcasting Class Toggle --}}
+                            <div class="form-group">
+                                <label>{{localize "SFRPG.Classes.IsCasterClass"}}</label>
+                                <div class="form-fields">
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="system.isCaster" {{checked itemData.isCaster}} /> {{localize "SFRPG.ItemSheet.Class.SpellCasting.IsCaster"}}
+                                    </label>
+                                </div>
+                            </div>
+
+                            {{!-- BAB & Save Progressions --}}
+                            <div class="bubble">
+                                <h3 class="bubble-header">{{ localize "SFRPG.ItemSheet.Details.Section.Progressions" }}</h3>
+
+                                <div class="bubble-info">
+                                    <div class="form-group">
+                                        <label>{{localize "SFRPG.ClassBABProgression"}}</label>
+                                        <div class="form-fields">
+                                            <select name="system.bab">
+                                                {{#select itemData.bab}}
+                                                {{#each config.babProgression as |name val|}}
+                                                <option value="{{val}}">{{name}}</option>
+                                                {{/each}}
+                                                {{/select}}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>{{localize "SFRPG.ClassFortSaveProgression"}}</label>
+                                        <div class="form-fields">
+                                            <select name="system.fort">
+                                                {{#select itemData.fort}}
+                                                {{#each config.saveProgression as |name val|}}
+                                                <option value="{{val}}">{{name}}</option>
+                                                {{/each}}
+                                                {{/select}}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>{{localize "SFRPG.ClassReflexSaveProgression"}}</label>
+                                        <div class="form-fields">
+                                            <select name="system.ref">
+                                                {{#select itemData.ref}}
+                                                {{#each config.saveProgression as |name val|}}
+                                                <option value="{{val}}">{{name}}</option>
+                                                {{/each}}
+                                                {{/select}}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>{{localize "SFRPG.ClassWillSaveProgression"}}</label>
+                                        <div class="form-fields">
+                                            <select name="system.will">
+                                                {{#select itemData.will}}
+                                                {{#each config.saveProgression as |name val|}}
+                                                <option value="{{val}}">{{name}}</option>
+                                                {{/each}}
+                                                {{/select}}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                    {{!-- Skills and Proficiencies --}}
+                    <div class="bubble">
+                        <h3 class="form-header bubble-header">{{localize "SFRPG.ItemSheet.Details.Section.SkillsAndProficiencies"}}</h3>
+
+                        <div class="bubble-info">
+
+                            {{!-- Class Skill Ranks per Level --}}
+                            <div class="form-group">
+                                <label>{{localize "SFRPG.ClassSkillRanksPerlevel"}}</label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.skillRanks.value" value="{{itemData.skillRanks.value}}" data-dtype="Number" />
+                                </div>
+                            </div>
+
+                            {{!-- Class Skills --}}
+                            <div class="bubble">
+                                <h3 class="bubble-header">{{localize "SFRPG.ClassSkills"}}</h3>
+
+                                <div class="form-group stacked weapon-properties bubble-info">
+                                    {{#each config.skills as |name val|}}
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="system.csk.{{val}}" {{checked (lookup ../itemData.csk val)}}/> {{ name }}
+                                    </label>
+                                    {{/each}}
+                                </div>
+                            </div>
+
+                            {{!-- Weapon Proficiencies --}}
+                            <div class="bubble">
+                                <h3 class="bubble-header">{{localize "SFRPG.ClassWeaponProf"}}</h3>
+
+                                <div class="form-group stacked weapon-properties bubble-info">
+                                    {{#each config.weaponProficiencies as |name val|}}
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="system.proficiencies.weapon.{{val}}" {{checked (lookup ../itemData.proficiencies.weapon val)}}/> {{ name }}
+                                    </label>
+                                    {{/each}}
+                                </div>
+                            </div>
+
+                            {{!-- Armor Proficiencies --}}
+                            <div class="bubble">
+                                <h3 class="bubble-header">{{localize "SFRPG.ClassArmorProf"}}</h3>
+
+                                <div class="form-group stacked weapon-properties bubble-info">
+                                    {{#each config.armorProficiencies as |name val|}}
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="system.proficiencies.armor.{{val}}" {{checked (lookup ../itemData.proficiencies.armor val)}}/> {{ name }}
+                                    </label>
+                                    {{/each}}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
                 </div>
-            </div>
+
+                {{!-- Spellcasting Tab --}}
+                {{#if itemData.isCaster}}
+                <div class="tab spellcasting" data-group="subdetails" data-tab="spellcasting">
+
+                    {{!-- Spellcasting Ability --}}
+                    <div class="bubble">
+                        <h3 class="form-header bubble-header">{{localize "SFRPG.ClassSpellcastingAbility"}}</h3>
+
+                        <div class="form-group bubble-info">
+                            <div class="form-fields">
+                                <select name="system.spellAbility">
+                                    <option value=""></option>
+                                    {{#select itemData.spellAbility}}
+                                    {{#each config.abilities as |name val|}}
+                                    <option value="{{val}}">{{name}}</option>
+                                    {{/each}}
+                                    {{/select}}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{!-- Spells Known --}}
+                    <div class="bubble">
+                        <h3 class="form-header bubble-header">{{localize "SFRPG.ItemSheet.Class.SpellCasting.SpellsKnown"}}</h3>
+
+                        <div class="form-group bubble-info" style="align-items: flex-start;">
+                            <table class="spells-known" cellpadding="5">
+                                <thead>
+                                    <tr>
+                                        <th rowspan="2" class="class-level">{{localize "SFRPG.ItemSheet.Class.SpellCasting.ClassLevel"}}</th>
+                                        <th colspan="7">{{localize "SFRPG.ItemSheet.Class.SpellCasting.SpellsKnownHeader"}}</th>
+                                    </tr>
+                                    <tr>
+                                        <th>{{localize "SFRPG.Levels.0"}}</th>
+                                        <th>{{localize "SFRPG.Levels.1"}}</th>
+                                        <th>{{localize "SFRPG.Levels.2"}}</th>
+                                        <th>{{localize "SFRPG.Levels.3"}}</th>
+                                        <th>{{localize "SFRPG.Levels.4"}}</th>
+                                        <th>{{localize "SFRPG.Levels.5"}}</th>
+                                        <th>{{localize "SFRPG.Levels.6"}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each itemData.spellsKnown}}
+                                    <tr>
+                                        <td>{{localize (append "SFRPG.Levels." @key)}}</td>
+                                        <td><input type="text" name="system.spellsKnown.{{@key}}.0" value="{{nullOrNonZero (lookup this 0)}}" data-dtype="Number" /></td>
+                                        <td><input type="text" name="system.spellsKnown.{{@key}}.1" value="{{nullOrNonZero (lookup this 1)}}" data-dtype="Number" /></td>
+                                        <td><input type="text" name="system.spellsKnown.{{@key}}.2" value="{{nullOrNonZero (lookup this 2)}}" data-dtype="Number" /></td>
+                                        <td><input type="text" name="system.spellsKnown.{{@key}}.3" value="{{nullOrNonZero (lookup this 3)}}" data-dtype="Number" /></td>
+                                        <td><input type="text" name="system.spellsKnown.{{@key}}.4" value="{{nullOrNonZero (lookup this 4)}}" data-dtype="Number" /></td>
+                                        <td><input type="text" name="system.spellsKnown.{{@key}}.5" value="{{nullOrNonZero (lookup this 5)}}" data-dtype="Number" /></td>
+                                        <td><input type="text" name="system.spellsKnown.{{@key}}.6" value="{{nullOrNonZero (lookup this 6)}}" data-dtype="Number" /></td>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    {{!-- Spells per Day --}}
+                    <div class="bubble">
+                        <h3 class="form-header bubble-header">{{localize "SFRPG.ItemSheet.Class.SpellCasting.SpellsPerDay"}}</h3>
+
+                        <div class="form-group bubble-info" style="align-items: flex-start;">
+                            <table class="spells-known" cellpadding="5">
+                                <thead>
+                                    <tr>
+                                        <th rowspan="2" class="class-level">{{localize "SFRPG.ItemSheet.Class.SpellCasting.ClassLevel"}}</th>
+                                        <th colspan="6">{{localize "SFRPG.ItemSheet.Class.SpellCasting.SpellsPerDayHeader"}}</th>
+                                    </tr>
+                                    <tr>
+                                        <th>{{localize "SFRPG.Levels.1"}}</th>
+                                        <th>{{localize "SFRPG.Levels.2"}}</th>
+                                        <th>{{localize "SFRPG.Levels.3"}}</th>
+                                        <th>{{localize "SFRPG.Levels.4"}}</th>
+                                        <th>{{localize "SFRPG.Levels.5"}}</th>
+                                        <th>{{localize "SFRPG.Levels.6"}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each itemData.spellsPerDay}}
+                                    <tr>
+                                        <td>{{localize (append "SFRPG.Levels." @key)}}</td>
+                                        <td><input type="text" name="system.spellsPerDay.{{@key}}.1" value="{{nullOrNonZero (lookup this 1)}}" data-dtype="Number" /></td>
+                                        <td><input type="text" name="system.spellsPerDay.{{@key}}.2" value="{{nullOrNonZero (lookup this 2)}}" data-dtype="Number" /></td>
+                                        <td><input type="text" name="system.spellsPerDay.{{@key}}.3" value="{{nullOrNonZero (lookup this 3)}}" data-dtype="Number" /></td>
+                                        <td><input type="text" name="system.spellsPerDay.{{@key}}.4" value="{{nullOrNonZero (lookup this 4)}}" data-dtype="Number" /></td>
+                                        <td><input type="text" name="system.spellsPerDay.{{@key}}.5" value="{{nullOrNonZero (lookup this 5)}}" data-dtype="Number" /></td>
+                                        <td><input type="text" name="system.spellsPerDay.{{@key}}.6" value="{{nullOrNonZero (lookup this 6)}}" data-dtype="Number" /></td>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    {{!-- Bonus Spells per Day --}}
+                    <div class="bubble">
+                        <h3 class="form-header bubble-header">{{localize "SFRPG.ItemSheet.Class.SpellCasting.SpellsPerDayBonus"}}</h3>
+
+                        <div class="form-group bubble-info" style="align-items: flex-start;">
+                            <table class="spells-known" cellpadding="5">
+                                <thead>
+                                    <tr>
+                                        <th rowspan="2" class="class-level">{{localize "SFRPG.ItemSheet.Class.SpellCasting.KeyAbilityScore"}}</th>
+                                        <th colspan="7">{{localize "SFRPG.ItemSheet.Class.SpellCasting.SpellsPerDayBonusHeader"}}</th>
+                                    </tr>
+                                    <tr>
+                                        <th style="width: 30px;">{{localize "SFRPG.Levels.0"}}</th>
+                                        <th>{{localize "SFRPG.Levels.1"}}</th>
+                                        <th>{{localize "SFRPG.Levels.2"}}</th>
+                                        <th>{{localize "SFRPG.Levels.3"}}</th>
+                                        <th>{{localize "SFRPG.Levels.4"}}</th>
+                                        <th>{{localize "SFRPG.Levels.5"}}</th>
+                                        <th>{{localize "SFRPG.Levels.6"}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each itemData.bonusSpellsPerDay}}
+                                    <tr>
+                                        <td>{{modToScoreRange @key}}</td>
+                                        <td> - </td>
+                                        <td><input type="text" name="system.bonusSpellsPerDay.{{@key}}.1" value="{{nullOrNonZero (lookup this 1)}}" data-dtype="Number" /></td>
+                                        <td><input type="text" name="system.bonusSpellsPerDay.{{@key}}.2" value="{{nullOrNonZero (lookup this 2)}}" data-dtype="Number" /></td>
+                                        <td><input type="text" name="system.bonusSpellsPerDay.{{@key}}.3" value="{{nullOrNonZero (lookup this 3)}}" data-dtype="Number" /></td>
+                                        <td><input type="text" name="system.bonusSpellsPerDay.{{@key}}.4" value="{{nullOrNonZero (lookup this 4)}}" data-dtype="Number" /></td>
+                                        <td><input type="text" name="system.bonusSpellsPerDay.{{@key}}.5" value="{{nullOrNonZero (lookup this 5)}}" data-dtype="Number" /></td>
+                                        <td><input type="text" name="system.bonusSpellsPerDay.{{@key}}.6" value="{{nullOrNonZero (lookup this 6)}}" data-dtype="Number" /></td>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+                {{/if}}
             
-            
+            </section>
 
-            {{#if itemData.isCaster}}
-            <div class="form-group">
-                <label>{{localize "SFRPG.ClassSpellcastingAbility"}}</label>
-                <div class="form-fields">
-                    <select name="system.spellAbility">
-                        <option value=""></option>
-                        {{#select itemData.spellAbility}}
-                        {{#each config.abilities as |name val|}}
-                        <option value="{{val}}">{{name}}</option>
-                        {{/each}}
-                        {{/select}}
-                    </select>
-                </div>
-            </div>
-            
-            
-            <div class="form-group" style="align-items: flex-start;">
-                <label>{{localize "SFRPG.ItemSheet.Class.SpellCasting.SpellsKnown"}}</label>
-                <table class="spells-known" cellpadding="5">
-                    <thead>
-                        <tr>
-                            <th rowspan="2" class="class-level">{{localize "SFRPG.ItemSheet.Class.SpellCasting.ClassLevel"}}</th>
-                            <th colspan="7">{{localize "SFRPG.ItemSheet.Class.SpellCasting.SpellsKnownHeader"}}</th>
-                        </tr>
-                        <tr>
-                            <th>{{localize "SFRPG.Levels.0"}}</th>
-                            <th>{{localize "SFRPG.Levels.1"}}</th>
-                            <th>{{localize "SFRPG.Levels.2"}}</th>
-                            <th>{{localize "SFRPG.Levels.3"}}</th>
-                            <th>{{localize "SFRPG.Levels.4"}}</th>
-                            <th>{{localize "SFRPG.Levels.5"}}</th>
-                            <th>{{localize "SFRPG.Levels.6"}}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{#each itemData.spellsKnown}}
-                        <tr>
-                            <td>{{localize (append "SFRPG.Levels." @key)}}</td>
-                            <td><input type="text" name="system.spellsKnown.{{@key}}.0" value="{{nullOrNonZero (lookup this 0)}}" data-dtype="Number" /></td>
-                            <td><input type="text" name="system.spellsKnown.{{@key}}.1" value="{{nullOrNonZero (lookup this 1)}}" data-dtype="Number" /></td>
-                            <td><input type="text" name="system.spellsKnown.{{@key}}.2" value="{{nullOrNonZero (lookup this 2)}}" data-dtype="Number" /></td>
-                            <td><input type="text" name="system.spellsKnown.{{@key}}.3" value="{{nullOrNonZero (lookup this 3)}}" data-dtype="Number" /></td>
-                            <td><input type="text" name="system.spellsKnown.{{@key}}.4" value="{{nullOrNonZero (lookup this 4)}}" data-dtype="Number" /></td>
-                            <td><input type="text" name="system.spellsKnown.{{@key}}.5" value="{{nullOrNonZero (lookup this 5)}}" data-dtype="Number" /></td>
-                            <td><input type="text" name="system.spellsKnown.{{@key}}.6" value="{{nullOrNonZero (lookup this 6)}}" data-dtype="Number" /></td>
-                        </tr>
-                        {{/each}}
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="form-group" style="align-items: flex-start;">
-                <label>{{localize "SFRPG.ItemSheet.Class.SpellCasting.SpellsPerDay"}}</label>
-                <table class="spells-known" cellpadding="5">
-                    <thead>
-                        <tr>
-                            <th rowspan="2" class="class-level">{{localize "SFRPG.ItemSheet.Class.SpellCasting.ClassLevel"}}</th>
-                            <th colspan="6">{{localize "SFRPG.ItemSheet.Class.SpellCasting.SpellsPerDayHeader"}}</th>
-                        </tr>
-                        <tr>
-                            <th>{{localize "SFRPG.Levels.1"}}</th>
-                            <th>{{localize "SFRPG.Levels.2"}}</th>
-                            <th>{{localize "SFRPG.Levels.3"}}</th>
-                            <th>{{localize "SFRPG.Levels.4"}}</th>
-                            <th>{{localize "SFRPG.Levels.5"}}</th>
-                            <th>{{localize "SFRPG.Levels.6"}}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{#each itemData.spellsPerDay}}
-                        <tr>
-                            <td>{{localize (append "SFRPG.Levels." @key)}}</td>
-                            <td><input type="text" name="system.spellsPerDay.{{@key}}.1" value="{{nullOrNonZero (lookup this 1)}}" data-dtype="Number" /></td>
-                            <td><input type="text" name="system.spellsPerDay.{{@key}}.2" value="{{nullOrNonZero (lookup this 2)}}" data-dtype="Number" /></td>
-                            <td><input type="text" name="system.spellsPerDay.{{@key}}.3" value="{{nullOrNonZero (lookup this 3)}}" data-dtype="Number" /></td>
-                            <td><input type="text" name="system.spellsPerDay.{{@key}}.4" value="{{nullOrNonZero (lookup this 4)}}" data-dtype="Number" /></td>
-                            <td><input type="text" name="system.spellsPerDay.{{@key}}.5" value="{{nullOrNonZero (lookup this 5)}}" data-dtype="Number" /></td>
-                            <td><input type="text" name="system.spellsPerDay.{{@key}}.6" value="{{nullOrNonZero (lookup this 6)}}" data-dtype="Number" /></td>
-                        </tr>
-                        {{/each}}
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="form-group" style="align-items: flex-start;">
-                <label>{{localize "SFRPG.ItemSheet.Class.SpellCasting.SpellsPerDayBonus"}}</label>
-                <table class="spells-known" cellpadding="5">
-                    <thead>
-                        <tr>
-                            <th rowspan="2" class="class-level">{{localize "SFRPG.ItemSheet.Class.SpellCasting.KeyAbilityScore"}}</th>
-                            <th colspan="7">{{localize "SFRPG.ItemSheet.Class.SpellCasting.SpellsPerDayBonusHeader"}}</th>
-                        </tr>
-                        <tr>
-                            <th style="width: 30px;">{{localize "SFRPG.Levels.0"}}</th>
-                            <th>{{localize "SFRPG.Levels.1"}}</th>
-                            <th>{{localize "SFRPG.Levels.2"}}</th>
-                            <th>{{localize "SFRPG.Levels.3"}}</th>
-                            <th>{{localize "SFRPG.Levels.4"}}</th>
-                            <th>{{localize "SFRPG.Levels.5"}}</th>
-                            <th>{{localize "SFRPG.Levels.6"}}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{#each itemData.bonusSpellsPerDay}}
-                        <tr>
-                            <td>{{modToScoreRange @key}}</td>
-                            <td> - </td>
-                            <td><input type="text" name="system.bonusSpellsPerDay.{{@key}}.1" value="{{nullOrNonZero (lookup this 1)}}" data-dtype="Number" /></td>
-                            <td><input type="text" name="system.bonusSpellsPerDay.{{@key}}.2" value="{{nullOrNonZero (lookup this 2)}}" data-dtype="Number" /></td>
-                            <td><input type="text" name="system.bonusSpellsPerDay.{{@key}}.3" value="{{nullOrNonZero (lookup this 3)}}" data-dtype="Number" /></td>
-                            <td><input type="text" name="system.bonusSpellsPerDay.{{@key}}.4" value="{{nullOrNonZero (lookup this 4)}}" data-dtype="Number" /></td>
-                            <td><input type="text" name="system.bonusSpellsPerDay.{{@key}}.5" value="{{nullOrNonZero (lookup this 5)}}" data-dtype="Number" /></td>
-                            <td><input type="text" name="system.bonusSpellsPerDay.{{@key}}.6" value="{{nullOrNonZero (lookup this 6)}}" data-dtype="Number" /></td>
-                        </tr>
-                        {{/each}}
-                    </tbody>
-                </table>
-            </div>
-            {{/if}}
-
-            {{!-- Skills --}}
-            <h4 class="section-header">Skills and Proficiencies</h4>
-
-            <div class="form-group">
-                <label>{{localize "SFRPG.ClassSkillRanksPerlevel"}}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.skillRanks.value" value="{{itemData.skillRanks.value}}" data-dtype="Number" />
-                </div>
-            </div>
-
-            <div class="form-group stacked weapon-properties">
-                <label>{{localize "SFRPG.ClassSkills"}}</label>
-                {{#each config.skills as |name val|}}
-                <label class="checkbox">
-                    <input type="checkbox" name="system.csk.{{val}}" {{checked (lookup ../itemData.csk val)}}/> {{ name }}
-                </label>
-                {{/each}}
-            </div>
-
-             {{!-- Weapon proficiencies --}}
-            <div class="form-group stacked weapon-properties">
-                <label>{{localize "SFRPG.ClassWeaponProf"}}</label>
-                {{#each config.weaponProficiencies as |name val|}}
-                <label class="checkbox">
-                    <input type="checkbox" name="system.proficiencies.weapon.{{val}}" {{checked (lookup ../itemData.proficiencies.weapon val)}}/> {{ name }}
-                </label>
-                {{/each}}
-            </div>
-
-             {{!-- Weapon proficiencies --}}
-            <div class="form-group stacked weapon-properties">
-                <label>{{localize "SFRPG.ClassArmorProf"}}</label>
-                {{#each config.armorProficiencies as |name val|}}
-                <label class="checkbox">
-                    <input type="checkbox" name="system.proficiencies.armor.{{val}}" {{checked (lookup ../itemData.proficiencies.armor val)}}/> {{ name }}
-                </label>
-                {{/each}}
-            </div>
         </div>
 
         {{!-- Modifiers Tab --}}
