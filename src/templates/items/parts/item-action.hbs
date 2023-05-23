@@ -1,9 +1,9 @@
 {{!-- Action Details --}}
 <div class="bubble">
     {{#if message}}
-        <h3 class="form-header bubble-header">{{localize message}}</h3>
+        <h3 class="bubble-header">{{localize message}}</h3>
     {{else}}
-        <h3 class="form-header bubble-header">{{localize "SFRPG.Items.Action.Details"}}</h3>
+        <h3 class="bubble-header">{{localize "SFRPG.Items.Action.Details"}}</h3>
     {{/if}}
 
     <div class="bubble-info">
@@ -109,7 +109,7 @@
 {{#if itemData.actionType}}
     {{!-- Damage Sections --}}
     <div class="bubble">
-        <h3 class="form-header bubble-header">
+        <h3 class="bubble-header">
             {{ localize "SFRPG.Items.Action.DamageHeader" }}
             <a class="damage-control add-damage"><i class="fas fa-plus"></i></a>
         </h3>
@@ -181,7 +181,7 @@
     {{#if (ne itemData.actionType "heal")}}
         {{!-- Critical Damage Sections --}}
         <div class="bubble">
-            <h4 class="form-header bubble-header">
+            <h4 class="bubble-header">
                 {{ localize "SFRPG.Items.Action.CriticalDamageHeader" }}
                 <a class="damage-control add-critical-damage"><i class="fas fa-plus"></i></a>
             </h4>
@@ -249,7 +249,7 @@
 
     {{!-- Damage Notes --}}
     <div class="bubble">
-        <h3 class="form-header bubble-header">{{ localize "SFRPG.Items.Action.DamageNotes" }}</h3>
+        <h3 class="bubble-header">{{ localize "SFRPG.Items.Action.DamageNotes" }}</h3>
 
         <div class="bubble-info">
             {{!-- Chat Message Flavor --}}
