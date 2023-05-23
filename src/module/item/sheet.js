@@ -40,7 +40,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
-            width: 740,
+            width: 770,
             height: 600,
             classes: ["sfrpg", "sheet", "item"],
             resizable: true,

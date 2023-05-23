@@ -1,9 +1,11 @@
-            {{!-- Special Materials --}}
-            <div class="form-group stacked weapon-properties">
-                <label>{{ localize "SFRPG.Items.SpecialMaterials.Title" }}</label>
-                {{#each config.specialMaterials as |name prop|}}
-                <label class="checkbox">
-                    <input type="checkbox" name="system.specialMaterials.{{prop}}" {{checked (lookup ../itemData.specialMaterials prop)}} /> {{ name }}
-                </label>
-                {{/each}}
-            </div>
+<div class="bubble">
+    <h3 class="bubble-header">{{ localize "SFRPG.Items.SpecialMaterials.Title" }}</h3>
+    
+    <div class="form-group stacked weapon-properties bubble-info">
+        {{#each config.specialMaterials as |name prop|}}
+        <label class="checkbox">
+            <input type="checkbox" name="system.specialMaterials.{{prop}}" {{checked (lookup ../itemData.specialMaterials prop)}} /> {{ name }}
+        </label>
+        {{/each}}
+    </div>
+</div>
