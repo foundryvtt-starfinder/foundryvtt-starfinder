@@ -37,6 +37,7 @@
                         <h3 class="bubble-header">{{ localize "SFRPG.ItemSheet.Details.Section.ArmorDetails" }}</h3>
 
                         <div class="bubble-info">
+
                             {{!-- Armor Type --}}
                             <div class="form-group">
                                 <label>{{ localize "SFRPG.Items.Equipment.Category" }}</label>
@@ -49,9 +50,6 @@
                                     {{/select}}
                                 </select>
                             </div>
-
-                            {{!-- Equipment Status --}}
-                            {{> "systems/sfrpg/templates/items/parts/item-status.hbs"}}
 
                             {{!-- Armor Class --}}
                             <div class="form-group">
@@ -84,8 +82,8 @@
                                 </div>
                             </div>
 
-                            {{#unless isPowerArmor}}
                             {{!-- Speed Adjustment --}}
+                            {{#unless isPowerArmor}}
                             <div class="form-group">
                                 <label>{{ localize "SFRPG.Items.Equipment.SpeedAdjustment" }}</label>
                                 <div class="form-fields">
@@ -94,6 +92,10 @@
                                 </div>
                             </div>
                             {{/unless}}
+
+                            {{!-- Equipment Status --}}
+                            {{> "systems/sfrpg/templates/items/parts/item-status.hbs"}}
+                            
                         </div>
                     </div>
 

@@ -22,7 +22,7 @@
             {{!-- Details Tab Navigation --}}
             <nav class="sheet-subnavigation subtabs" data-group="subdetails">
                 <a class="item highlight active" data-tab="properties">{{ localize "SFRPG.ItemSheet.Details.Tab.Properties" }}</a>
-                <a class="item" data-tab="tracker">{{ localize "SFRPG.ItemSheet.ActorResource.CombatTracker" }}</a>
+                {{#if itemData.combatTracker.show}}<a class="item" data-tab="tracker">{{ localize "SFRPG.ItemSheet.ActorResource.CombatTracker" }}</a>{{/if}}
             </nav>
 
             {{!-- Details Section --}}
@@ -43,6 +43,16 @@
                                 <div class="form-fields">
                                     <label class="checkbox">
                                         <input type="checkbox" name="system.enabled" {{checked itemData.enabled}}/>
+                                    </label>
+                                </div>
+                            </div>
+
+                            {{!-- Show in Combat Tracker --}}
+                            <div class="form-group" {{createTippy title="SFRPG.ItemSheet.ActorResource.ShowInCombatTracker" subtitle="SFRPG.ItemSheet.ActorResource.ShowInCombatTrackerTooltip"}}>
+                                <label>{{ localize "SFRPG.ItemSheet.ActorResource.ShowInCombatTracker" }}</label>
+                                <div class="form-fields">
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="system.combatTracker.show" {{checked itemData.combatTracker.show}}/>
                                     </label>
                                 </div>
                             </div>
@@ -154,20 +164,20 @@
                             <label>{{ localize "SFRPG.ItemSheet.ActorResource.UsageTooltip" }}<br/></label>
 
                             {{#if (or (or (not itemData.type) (not itemData.subType)) (isNull itemData.base))}}
-                            <label class="error">{{ localize "SFRPG.ItemSheet.ActorResource.ErrorMissingFields" }}</label>
+                                <label class="error">{{ localize "SFRPG.ItemSheet.ActorResource.ErrorMissingFields" }}</label>
                             {{else}}
-                            <div class="form-group">
-                                <label>{{ localize "SFRPG.ItemSheet.ActorResource.UsageBaseValue" }}</label>
-                                <div class="form-fields">
-                                    <label style="text-align: left; user-select: text; cursor: text;">@resources.{{itemData.type}}.{{itemData.subType}}.base</label>
+                                <div class="form-group">
+                                    <label>{{ localize "SFRPG.ItemSheet.ActorResource.UsageBaseValue" }}</label>
+                                    <div class="form-fields">
+                                        <label style="text-align: left; user-select: text; cursor: text;">@resources.{{itemData.type}}.{{itemData.subType}}.base</label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label>{{ localize "SFRPG.ItemSheet.ActorResource.UsageComputedValue" }}</label>
-                                <div class="form-fields">
-                                    <label style="text-align: left; user-select: text; cursor: text;">@resources.{{itemData.type}}.{{itemData.subType}}.value</label>
+                                <div class="form-group">
+                                    <label>{{ localize "SFRPG.ItemSheet.ActorResource.UsageComputedValue" }}</label>
+                                    <div class="form-fields">
+                                        <label style="text-align: left; user-select: text; cursor: text;">@resources.{{itemData.type}}.{{itemData.subType}}.value</label>
+                                    </div>
                                 </div>
-                            </div>
                             {{/if}}
 
                         </div>
@@ -176,6 +186,7 @@
                 </div>
 
                 {{!-- Combat Tracker Tab --}}
+                {{#if itemData.combatTracker.show}}
                 <div class="tab tracker" data-group="subdetails" data-tab="tracker">
 
                     {{!-- Combat Tracker Settings --}}
@@ -183,16 +194,7 @@
                         <h3 class="bubble-header">{{localize "SFRPG.ItemSheet.ActorResource.CombatTrackerSettings"}}</h3>
 
                         <div class="bubble-info">
-                            <div class="form-group" {{createTippy title="SFRPG.ItemSheet.ActorResource.ShowInCombatTracker" subtitle="SFRPG.ItemSheet.ActorResource.ShowInCombatTrackerTooltip"}}>
-                                <label>{{ localize "SFRPG.ItemSheet.ActorResource.ShowInCombatTracker" }}</label>
-                                <div class="form-fields">
-                                    <label class="checkbox">
-                                        <input type="checkbox" name="system.combatTracker.show" {{checked itemData.combatTracker.show}}/>
-                                    </label>
-                                </div>
-                            </div>
 
-                            {{#if itemData.combatTracker.show}}
                             <div class="form-group" {{createTippy title="SFRPG.ItemSheet.ActorResource.ShowOwnerAndGMOnly" subtitle="SFRPG.ItemSheet.ActorResource.ShowOwnerAndGMOnlyTooltip"}}>
                                 <label>{{ localize "SFRPG.ItemSheet.ActorResource.ShowOwnerAndGMOnly" }}</label>
                                 <div class="form-fields">
@@ -210,12 +212,11 @@
                                     </label>
                                 </div>
                             </div>
-                            {{/if}}
+
                         </div>
                     </div>
 
                     {{!-- Condition Visualization --}}
-                    {{#if itemData.combatTracker.show}}
                     <div class="bubble">
                         <h3 class="bubble-header">
                             {{ localize "SFRPG.ItemSheet.ActorResource.Visualizations" }}
@@ -272,9 +273,9 @@
 
                         </div>
                     </div>
-                    {{/if}}
 
                 </div>
+                {{/if}}
 
             </section>
             

@@ -31,25 +31,8 @@
                 {{!-- Properties Tab --}}
                 <div class="tab properties" data-group="subdetails" data-tab="properties">
 
-                    {{!-- Details --}}
-                    <div class="bubble">
-                        <h3 class="bubble-header">{{ localize "SFRPG.ItemSheet.Header.DetailsHeader" }}</h3>
-
-                        <div class="bubble-info">
-                            <div class="form-group stacked">
-                                <label>{{ localize "SFRPG.Items.EquipmentStatus" }}</label>
-                                <label class="checkbox">
-                                    <input type="checkbox" name="system.equipped" {{checked itemData.equipped}}/> {{ localize "SFRPG.Items.Equipped" }}
-                                </label>
-                                <label class="checkbox">
-                                    <input type="checkbox" name="system.identified" {{checked itemData.identified}}/> {{ localize "SFRPG.Items.Identified" }}
-                                </label>
-                                <label class="checkbox">
-                                    <input type="checkbox" name="system.attuned" {{checked itemData.attuned}}/> {{ localize "SFRPG.Items.Attuned" }}
-                                </label>
-                            </div>
-                        </div>
-                    </div>
+                    {{!-- Equipment Status --}}
+                    {{> "systems/sfrpg/templates/items/parts/item-status.hbs"}}
 
                     {{!-- Physical Properties --}}
                     {{> "systems/sfrpg/templates/items/parts/physical-item-details.hbs"}}
