@@ -896,6 +896,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             await this._onSubmit(event); // Submit any unsaved changes
             const li = a.closest(".visualization-part");
             const visualization = duplicate(this.item.system.combatTracker.visualization);
+            console.log(this, li, visualization);
             visualization.splice(Number(li.dataset.index), 1);
             return await this.item.update({
                 "system.combatTracker.visualization": visualization

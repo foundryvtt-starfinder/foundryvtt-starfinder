@@ -19,197 +19,265 @@
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
-            <h4 class="section-header first">{{localize "SFRPG.ItemSheet.ActorResource.Header"}}</h4>
+            {{!-- Details Tab Navigation --}}
+            <nav class="sheet-subnavigation subtabs" data-group="subdetails">
+                <a class="item highlight active" data-tab="properties">{{ localize "SFRPG.ItemSheet.Details.Tab.Properties" }}</a>
+                <a class="item" data-tab="tracker">{{ localize "SFRPG.ItemSheet.ActorResource.CombatTracker" }}</a>
+            </nav>
 
-            <div class="form-group" {{createTippy title="SFRPG.ItemSheet.ActorResource.Enabled" subtitle="SFRPG.ItemSheet.ActorResource.EnabledTooltip"}}>
-                <label>{{ localize "SFRPG.ItemSheet.ActorResource.Enabled" }}</label>
-                <div class="form-fields">
-                    <label class="checkbox">
-                        <input type="checkbox" name="system.enabled" {{checked itemData.enabled}}/>
-                    </label>
-                </div>
-            </div>
+            {{!-- Details Section --}}
+            <section class="sheet-details">
 
-            <div class="form-group" {{createTippy title="SFRPG.ItemSheet.ActorResource.Type" subtitle="SFRPG.ItemSheet.ActorResource.TypeTooltip"}}>
-                <label>{{ localize "SFRPG.ItemSheet.ActorResource.Type" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.type" value="{{itemData.type}}" data-dtype="text" placeholder="" />
-                </div>
-            </div>
+                {{!-- Properties Tab --}}
+                <div class="tab properties" data-group="subdetails" data-tab="properties">
 
-            {{#if (not itemData.type)}}
-            <div class="form-group">
-                <label></label>
-                <div class="form-fields">
-                    <label class="error">* {{ localize "SFRPG.ItemSheet.ActorResource.ErrorNoType" }}</label>
-                </div>
-            </div>
-            {{/if}}
+                    {{!-- Resource Properties --}}
+                    <div class="bubble">
+                        <h3 class="bubble-header">{{localize "SFRPG.ItemSheet.ActorResource.Header"}}</h3>
 
-            <div class="form-group" {{createTippy title="SFRPG.ItemSheet.ActorResource.SubType" subtitle="SFRPG.ItemSheet.ActorResource.SubTypeTooltip"}}>
-                <label>{{ localize "SFRPG.ItemSheet.ActorResource.SubType" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.subType" value="{{itemData.subType}}" data-dtype="text" placeholder="" />
-                </div>
-            </div>
+                        <div class="bubble-info">
 
-            {{#if (not itemData.subType)}}
-            <div class="form-group">
-                <label></label>
-                <div class="form-fields">
-                    <label class="error">* {{ localize "SFRPG.ItemSheet.ActorResource.ErrorNoSubType" }}</label>
-                </div>
-            </div>
-            {{/if}}
+                            {{!-- Enable --}}
+                            <div class="form-group" {{createTippy title="SFRPG.ItemSheet.ActorResource.Enabled" subtitle="SFRPG.ItemSheet.ActorResource.EnabledTooltip"}}>
+                                <label>{{ localize "SFRPG.ItemSheet.ActorResource.Enabled" }}</label>
+                                <div class="form-fields">
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="system.enabled" {{checked itemData.enabled}}/>
+                                    </label>
+                                </div>
+                            </div>
 
-            <div class="form-group" {{createTippy title="SFRPG.ItemSheet.ActorResource.Base" subtitle="SFRPG.ItemSheet.ActorResource.BaseTooltip"}}>
-                <label>{{ localize "SFRPG.ItemSheet.ActorResource.Base" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.base" value="{{itemData.base}}" data-dtype="Number" placeholder="" />
-                </div>
-            </div>
+                            {{!-- Type --}}
+                            <div class="form-group" {{createTippy title="SFRPG.ItemSheet.ActorResource.Type" subtitle="SFRPG.ItemSheet.ActorResource.TypeTooltip"}}>
+                                <label>{{ localize "SFRPG.ItemSheet.ActorResource.Type" }}</label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.type" value="{{itemData.type}}" data-dtype="text" placeholder="" />
+                                </div>
+                            </div>
 
-            {{#if (isNull itemData.base)}}
-            <div class="form-group">
-                <label></label>
-                <div class="form-fields">
-                    <label class="error">* {{ localize "SFRPG.ItemSheet.ActorResource.ErrorNoBase" }}</label>
+                            {{#if (not itemData.type)}}
+                            <div class="form-group">
+                                <label></label>
+                                <div class="form-fields">
+                                    <label class="error">* {{ localize "SFRPG.ItemSheet.ActorResource.ErrorNoType" }}</label>
+                                </div>
+                            </div>
+                            {{/if}}
+
+                            {{!-- Subtype --}}
+                            <div class="form-group" {{createTippy title="SFRPG.ItemSheet.ActorResource.SubType" subtitle="SFRPG.ItemSheet.ActorResource.SubTypeTooltip"}}>
+                                <label>{{ localize "SFRPG.ItemSheet.ActorResource.SubType" }}</label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.subType" value="{{itemData.subType}}" data-dtype="text" placeholder="" />
+                                </div>
+                            </div>
+
+                            {{#if (not itemData.subType)}}
+                            <div class="form-group">
+                                <label></label>
+                                <div class="form-fields">
+                                    <label class="error">* {{ localize "SFRPG.ItemSheet.ActorResource.ErrorNoSubType" }}</label>
+                                </div>
+                            </div>
+                            {{/if}}
+
+                            {{!-- Base Value --}}
+                            <div class="form-group" {{createTippy title="SFRPG.ItemSheet.ActorResource.Base" subtitle="SFRPG.ItemSheet.ActorResource.BaseTooltip"}}>
+                                <label>{{ localize "SFRPG.ItemSheet.ActorResource.Base" }}</label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.base" value="{{itemData.base}}" data-dtype="Number" placeholder="" />
+                                </div>
+                            </div>
+
+                            {{#if (isNull itemData.base)}}
+                            <div class="form-group">
+                                <label></label>
+                                <div class="form-fields">
+                                    <label class="error">* {{ localize "SFRPG.ItemSheet.ActorResource.ErrorNoBase" }}</label>
+                                </div>
+                            </div>
+                            {{/if}}
+
+                            {{!-- Value Range --}}
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.ItemSheet.ActorResource.Range" }}</label>
+                                <div class="form-fields" {{createTippy title="SFRPG.ItemSheet.ActorResource.Range" subtitle="SFRPG.ItemSheet.ActorResource.RangeTooltip"}}>
+                                    {{#if (eq itemData.stage "late")}}
+                                        {{#if this.range.showMinTotal}}<p class="calculated-total"><strong>{{itemData.range.totalMin}}</strong></p>{{/if}}
+                                        <input type="text" name="system.range.min" value="{{itemData.range.min}}" data-dtype="String" />
+                                        <span class="sep"> - </span>
+                                        {{#if this.range.showMaxTotal}}<p class="calculated-total"><strong>{{itemData.range.totalMax}}</strong></p>{{/if}}
+                                        <input type="text" name="system.range.max" value="{{itemData.range.max}}" data-dtype="String" />
+                                    {{else}}
+                                        <input type="text" name="system.range.min" value="{{itemData.range.min}}" data-dtype="String" />
+                                        <span class="sep"> - </span>
+                                        <input type="text" name="system.range.max" value="{{itemData.range.max}}" data-dtype="String" />
+                                    {{/if}}
+                                </div>
+                            </div>
+
+                            {{!-- Range Mode --}}
+                            <div class="form-group" {{createTippy title="SFRPG.ItemSheet.ActorResource.RangeMode" subtitle="SFRPG.ItemSheet.ActorResource.RangeModeTooltip"}}>
+                                <label>{{ localize "SFRPG.ItemSheet.ActorResource.RangeMode" }}</label>
+                                <div class="form-fields">
+                                    <select name="system.range.mode">
+                                        {{#select itemData.range.mode}}
+                                        <option value="post">{{ localize "SFRPG.ItemSheet.ActorResource.RangeModePost" }}</option>
+                                        <option value="immediate">{{ localize "SFRPG.ItemSheet.ActorResource.RangeModeImmediate" }}</option>
+                                        {{/select}}
+                                    </select>
+                                </div>
+                            </div>
+
+                            {{!-- Calculation Stage --}}
+                            <div class="form-group" {{createTippy title="SFRPG.ItemSheet.ActorResource.Stage" subtitle="SFRPG.ItemSheet.ActorResource.StageTooltip"}}>
+                                <label>{{ localize "SFRPG.ItemSheet.ActorResource.Stage" }}</label>
+                                <div class="form-fields">
+                                    <select name="system.stage">
+                                        {{#select itemData.stage}}
+                                        <option value="early">{{ localize "SFRPG.ItemSheet.ActorResource.StageEarly" }}</option>
+                                        <option value="late">{{ localize "SFRPG.ItemSheet.ActorResource.StageLate" }}</option>
+                                        {{/select}}
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    {{!-- Attribute Usage --}}
+                    <div class="bubble">
+                        <h3 class="bubble-header">{{localize "SFRPG.ItemSheet.ActorResource.Usage"}}</h3>
+
+                        <div class="bubble-info">
+
+                            <label>{{ localize "SFRPG.ItemSheet.ActorResource.UsageTooltip" }}<br/></label>
+
+                            {{#if (or (or (not itemData.type) (not itemData.subType)) (isNull itemData.base))}}
+                            <label class="error">{{ localize "SFRPG.ItemSheet.ActorResource.ErrorMissingFields" }}</label>
+                            {{else}}
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.ItemSheet.ActorResource.UsageBaseValue" }}</label>
+                                <div class="form-fields">
+                                    <label style="text-align: left; user-select: text; cursor: text;">@resources.{{itemData.type}}.{{itemData.subType}}.base</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.ItemSheet.ActorResource.UsageComputedValue" }}</label>
+                                <div class="form-fields">
+                                    <label style="text-align: left; user-select: text; cursor: text;">@resources.{{itemData.type}}.{{itemData.subType}}.value</label>
+                                </div>
+                            </div>
+                            {{/if}}
+
+                        </div>
+                    </div>
+
                 </div>
-            </div>
-            {{/if}}
-            
-            <div class="form-group" {{createTippy title="SFRPG.ItemSheet.ActorResource.Range" subtitle="SFRPG.ItemSheet.ActorResource.RangeTooltip"}}>
-                <label>{{ localize "SFRPG.ItemSheet.ActorResource.Range" }}</label>
-                <div class="form-fields" {{createTippy title="SFRPG.ItemSheet.ActorResource.Range" subtitle="SFRPG.ItemSheet.ActorResource.RangeTooltip"}}>
-                    {{#if (eq itemData.stage "late")}}
-                        {{#if this.range.showMinTotal}}<p class="calculated-total"><strong>{{itemData.range.totalMin}}</strong></p>{{/if}}
-                        <input type="text" name="system.range.min" value="{{itemData.range.min}}" data-dtype="String" />
-                        <span class="sep"> - </span>
-                        {{#if this.range.showMaxTotal}}<p class="calculated-total"><strong>{{itemData.range.totalMax}}</strong></p>{{/if}}
-                        <input type="text" name="system.range.max" value="{{itemData.range.max}}" data-dtype="String" />
-                    {{else}}
-                        <input type="text" name="system.range.min" value="{{itemData.range.min}}" data-dtype="String" />
-                        <span class="sep"> - </span>
-                        <input type="text" name="system.range.max" value="{{itemData.range.max}}" data-dtype="String" />
+
+                {{!-- Combat Tracker Tab --}}
+                <div class="tab tracker" data-group="subdetails" data-tab="tracker">
+
+                    {{!-- Combat Tracker Settings --}}
+                    <div class="bubble">
+                        <h3 class="bubble-header">{{localize "SFRPG.ItemSheet.ActorResource.CombatTrackerSettings"}}</h3>
+
+                        <div class="bubble-info">
+                            <div class="form-group" {{createTippy title="SFRPG.ItemSheet.ActorResource.ShowInCombatTracker" subtitle="SFRPG.ItemSheet.ActorResource.ShowInCombatTrackerTooltip"}}>
+                                <label>{{ localize "SFRPG.ItemSheet.ActorResource.ShowInCombatTracker" }}</label>
+                                <div class="form-fields">
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="system.combatTracker.show" {{checked itemData.combatTracker.show}}/>
+                                    </label>
+                                </div>
+                            </div>
+
+                            {{#if itemData.combatTracker.show}}
+                            <div class="form-group" {{createTippy title="SFRPG.ItemSheet.ActorResource.ShowOwnerAndGMOnly" subtitle="SFRPG.ItemSheet.ActorResource.ShowOwnerAndGMOnlyTooltip"}}>
+                                <label>{{ localize "SFRPG.ItemSheet.ActorResource.ShowOwnerAndGMOnly" }}</label>
+                                <div class="form-fields">
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="system.combatTracker.showOwnerAndGMOnly" {{checked itemData.combatTracker.showOwnerAndGMOnly}}/>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group" {{createTippy title="SFRPG.ItemSheet.ActorResource.DisplayAbsoluteValue" subtitle="SFRPG.ItemSheet.ActorResource.DisplayAbsoluteValueTooltip"}}>
+                                <label>{{ localize "SFRPG.ItemSheet.ActorResource.DisplayAbsoluteValue" }}</label>
+                                <div class="form-fields">
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="system.combatTracker.displayAbsoluteValue" {{checked itemData.combatTracker.displayAbsoluteValue}}/>
+                                    </label>
+                                </div>
+                            </div>
+                            {{/if}}
+                        </div>
+                    </div>
+
+                    {{!-- Condition Visualization --}}
+                    {{#if itemData.combatTracker.show}}
+                    <div class="bubble">
+                        <h3 class="bubble-header">
+                            {{ localize "SFRPG.ItemSheet.ActorResource.Visualizations" }}
+                            <a class="visualization-control add-visualization bubble-icon"><i class="fas fa-plus"></i></a>
+                        </h3>
+
+                        <div class="bubble-info">
+
+                            {{!-- Visualization Parts --}}
+                            <ol class="visualization-parts form-group">
+                                {{#each itemData.combatTracker.visualization as |part i| }}
+                                <li class="visualization-part" data-index="{{i}}">
+                                    <div class="bubble">
+                                        <h4 class="bubble-header">
+                                            {{localize "SFRPG.ItemSheet.ActorResource.VisualizationsPart"}} {{i}}
+                                            <a class="visualization-control delete-visualization bubble-icon"><i class="fas fa-minus"></i></a>
+                                        </h4>
+
+                                        <div class="bubble-info flexrow">
+
+                                            <div class="visualization-part-mode flexcol">
+                                                <span>{{ localize "SFRPG.ItemSheet.ActorResource.VisualizationsIntro" }}</span>
+                                                <select name="resource-mode">
+                                                    {{#select part.mode}}
+                                                    <option value="eq">{{ localize "SFRPG.ItemSheet.ActorResource.VisualizationsModeEqual" }}</option>
+                                                    <option value="neq">{{ localize "SFRPG.ItemSheet.ActorResource.VisualizationsModeNotEqual" }}</option>
+                                                    <option value="lt">{{ localize "SFRPG.ItemSheet.ActorResource.VisualizationsModeLesserThan" }}</option>
+                                                    <option value="lte">{{ localize "SFRPG.ItemSheet.ActorResource.VisualizationsModeLesserThanEqual" }}</option>
+                                                    <option value="gt">{{ localize "SFRPG.ItemSheet.ActorResource.VisualizationsModeGreaterThan" }}</option>
+                                                    <option value="gte">{{ localize "SFRPG.ItemSheet.ActorResource.VisualizationsModeGreaterThanEqual" }}</option>
+                                                    {{/select}}
+                                                </select>
+                                                <input type="text" name="resource-value" value="{{part.value}}"/>
+                                            </div>
+                                            <div class="visualization-part-middle flexcol">
+                                                {{ localize "SFRPG.ItemSheet.ActorResource.VisualizationsThen" }}
+                                            </div>
+                                            <div class="visualization-part-middle flexcol">
+                                                <img name="resource-image" class="part-image" src="{{part.image}}" title="{{part.image}}" width="50" height="50"/>
+                                            </div>
+                                            <div class="visualization-part-title flexcol">
+                                                <span></span>
+                                                <label>{{ localize "SFRPG.ItemSheet.ActorResource.VisualizationsTitle" }}</label>
+                                                <input type="text" name="resource-title" value="{{part.title}}"/>
+                                                <span></span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </li>
+                                {{/each}}
+                            </ol>
+
+                        </div>
+                    </div>
                     {{/if}}
+
                 </div>
-            </div>
+
+            </section>
             
-            <div class="form-group" {{createTippy title="SFRPG.ItemSheet.ActorResource.RangeMode" subtitle="SFRPG.ItemSheet.ActorResource.RangeModeTooltip"}}>
-                <label>{{ localize "SFRPG.ItemSheet.ActorResource.RangeMode" }}</label>
-                <div class="form-fields">
-                    <select name="system.range.mode">
-                        {{#select itemData.range.mode}}
-                        <option value="post">{{ localize "SFRPG.ItemSheet.ActorResource.RangeModePost" }}</option>
-                        <option value="immediate">{{ localize "SFRPG.ItemSheet.ActorResource.RangeModeImmediate" }}</option>
-                        {{/select}}
-                    </select>
-                </div>
-            </div>
-            
-            <div class="form-group" {{createTippy title="SFRPG.ItemSheet.ActorResource.Stage" subtitle="SFRPG.ItemSheet.ActorResource.StageTooltip"}}>
-                <label>{{ localize "SFRPG.ItemSheet.ActorResource.Stage" }}</label>
-                <div class="form-fields">
-                    <select name="system.stage">
-                        {{#select itemData.stage}}
-                        <option value="early">{{ localize "SFRPG.ItemSheet.ActorResource.StageEarly" }}</option>
-                        <option value="late">{{ localize "SFRPG.ItemSheet.ActorResource.StageLate" }}</option>
-                        {{/select}}
-                    </select>
-                </div>
-            </div>
-
-            <h4 class="section-header first">{{localize "SFRPG.ItemSheet.ActorResource.CombatTracker"}}</h4>
-
-            <div class="form-group" {{createTippy title="SFRPG.ItemSheet.ActorResource.ShowInCombatTracker" subtitle="SFRPG.ItemSheet.ActorResource.ShowInCombatTrackerTooltip"}}>
-                <label>{{ localize "SFRPG.ItemSheet.ActorResource.ShowInCombatTracker" }}</label>
-                <div class="form-fields">
-                    <label class="checkbox">
-                        <input type="checkbox" name="system.combatTracker.show" {{checked itemData.combatTracker.show}}/>
-                    </label>
-                </div>
-            </div>
-
-            {{#if itemData.combatTracker.show}}
-            <div class="form-group" {{createTippy title="SFRPG.ItemSheet.ActorResource.ShowOwnerAndGMOnly" subtitle="SFRPG.ItemSheet.ActorResource.ShowOwnerAndGMOnlyTooltip"}}>
-                <label>{{ localize "SFRPG.ItemSheet.ActorResource.ShowOwnerAndGMOnly" }}</label>
-                <div class="form-fields">
-                    <label class="checkbox">
-                        <input type="checkbox" name="system.combatTracker.showOwnerAndGMOnly" {{checked itemData.combatTracker.showOwnerAndGMOnly}}/>
-                    </label>
-                </div>
-            </div>
-
-            <div class="form-group" {{createTippy title="SFRPG.ItemSheet.ActorResource.DisplayAbsoluteValue" subtitle="SFRPG.ItemSheet.ActorResource.DisplayAbsoluteValueTooltip"}}>
-                <label>{{ localize "SFRPG.ItemSheet.ActorResource.DisplayAbsoluteValue" }}</label>
-                <div class="form-fields">
-                    <label class="checkbox">
-                        <input type="checkbox" name="system.combatTracker.displayAbsoluteValue" {{checked itemData.combatTracker.displayAbsoluteValue}}/>
-                    </label>
-                </div>
-            </div>
-
-            <h4 class="visualization-header">
-                {{ localize "SFRPG.ItemSheet.ActorResource.Visualizations" }}
-                <a class="visualization-control add-visualization"><i class="fas fa-plus"></i></a>
-            </h4>
-            <ol class="visualization-parts form-group">
-                {{#each itemData.combatTracker.visualization as |part i| }}
-                <li class="visualization-part flexrow" data-index="{{i}}">
-                    <div class="visualization-part-mode flexcol">
-                        <span>{{ localize "SFRPG.ItemSheet.ActorResource.VisualizationsIntro" }}</span>
-                        <select name="resource-mode">
-                            {{#select part.mode}}
-                            <option value="eq">{{ localize "SFRPG.ItemSheet.ActorResource.VisualizationsModeEqual" }}</option>
-                            <option value="neq">{{ localize "SFRPG.ItemSheet.ActorResource.VisualizationsModeNotEqual" }}</option>
-                            <option value="lt">{{ localize "SFRPG.ItemSheet.ActorResource.VisualizationsModeLesserThan" }}</option>
-                            <option value="lte">{{ localize "SFRPG.ItemSheet.ActorResource.VisualizationsModeLesserThanEqual" }}</option>
-                            <option value="gt">{{ localize "SFRPG.ItemSheet.ActorResource.VisualizationsModeGreaterThan" }}</option>
-                            <option value="gte">{{ localize "SFRPG.ItemSheet.ActorResource.VisualizationsModeGreaterThanEqual" }}</option>
-                            {{/select}}
-                        </select>
-                        <input type="text" name="resource-value" value="{{part.value}}"/>
-                    </div>
-                    <div class="visualization-part-middle flexcol">
-                        {{ localize "SFRPG.ItemSheet.ActorResource.VisualizationsThen" }}
-                    </div>
-                    <div class="visualization-part-middle flexcol">
-                        <img name="resource-image" class="part-image" src="{{part.image}}" title="{{part.image}}" width="50" height="50"/>
-                    </div>
-                    <div class="visualization-part-title flexcol">
-                        <span></span>
-                        <label>{{ localize "SFRPG.ItemSheet.ActorResource.VisualizationsTitle" }}</label>
-                        <input type="text" name="resource-title" value="{{part.title}}"/>
-                        <span></span>
-                    </div>
-                    <div class="visualization-part-delete">
-                        <a class="visualization-control delete-visualization"><i class="fas fa-minus"></i></a>
-                    </div>
-                </li>
-                {{/each}}
-            </ol>
-
-            {{/if}}
-
-            <h4 class="section-header first">{{localize "SFRPG.ItemSheet.ActorResource.Usage"}}</h4>
-            <label>{{ localize "SFRPG.ItemSheet.ActorResource.UsageTooltip" }}<br/></label>
-
-            {{#if (or (or (not itemData.type) (not itemData.subType)) (isNull itemData.base))}}
-            <label class="error">{{ localize "SFRPG.ItemSheet.ActorResource.ErrorMissingFields" }}</label>
-            {{else}}
-            <div class="form-group">
-                <label>{{ localize "SFRPG.ItemSheet.ActorResource.UsageBaseValue" }}</label>
-                <div class="form-fields">
-                    <label style="text-align: left; user-select: text; cursor: text;">@resources.{{itemData.type}}.{{itemData.subType}}.base</label>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>{{ localize "SFRPG.ItemSheet.ActorResource.UsageComputedValue" }}</label>
-                <div class="form-fields">
-                    <label style="text-align: left; user-select: text; cursor: text;">@resources.{{itemData.type}}.{{itemData.subType}}.value</label>
-                </div>
-            </div>
-            {{/if}}
         </div>
 
         {{!-- Modifiers Tab --}}
