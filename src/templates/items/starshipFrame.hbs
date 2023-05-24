@@ -18,156 +18,213 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-            <h4 class="section-header first">{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.HeaderSpecs" }}</h4>
 
-            <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.SizeTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.Size" }}</label>
-                <div class="form-fields">
-                    <select class="actor-size" name="system.size">
-                        {{#select itemData.size}}
-                        {{#each config.starshipSizes as |label size|}}
-                            <option value="{{size}}">{{label}}</option>
-                        {{/each}}
-                        {{/select}}
-                    </select>
+            {{!-- Details Tab Navigation --}}
+            <nav class="sheet-subnavigation subtabs" data-group="subdetails">
+                <a class="item highlight active" data-tab="properties">{{ localize "SFRPG.ItemSheet.Details.Tab.Properties" }}</a>
+                <a class="item" data-tab="weaponMounts">{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponMounts" }}</a>
+            </nav>
+
+            {{!-- Details Section --}}
+            <section class="sheet-details">
+
+                {{!-- Frame Properties Tab --}}
+                <div class="tab properties" data-group="subdetails" data-tab="properties">
+
+                    {{!-- Specs ---}}
+                    <div class="bubble">
+                        <h3 class="bubble-header">{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.HeaderSpecs" }}</h3>
+
+                        <div class="bubble-info">
+                            
+                            {{!-- Size --}}
+                            <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.SizeTooltip" }}">
+                                <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.Size" }}</label>
+                                <div class="form-fields">
+                                    <select class="actor-size" name="system.size">
+                                        {{#select itemData.size}}
+                                        {{#each config.starshipSizes as |label size|}}
+                                            <option value="{{size}}">{{label}}</option>
+                                        {{/each}}
+                                        {{/select}}
+                                    </select>
+                                </div>
+                            </div>
+
+                            {{!-- Maneuverability --}}
+                            <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.ManeuverabilityTooltip" }}">
+                                <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.Maneuverability" }}</label>
+                                <div class="form-fields">
+                                    <select class="actor-size" name="system.maneuverability">
+                                        {{#select itemData.maneuverability}}
+                                        {{#each config.maneuverability as |label size|}}
+                                            <option value="{{size}}">{{label}}</option>
+                                        {{/each}}
+                                        {{/select}}
+                                    </select>
+                                </div>
+                            </div>
+
+                            {{!-- Expansion Bays --}}
+                            <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.ExpansionBaysTooltip" }}">
+                                <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.ExpansionBays" }}</label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.expansionBays" value="{{itemData.expansionBays}}" data-dtype="Number" />
+                                </div>
+                            </div>
+
+                            {{!-- Minimum Crew --}}
+                            <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.CrewMinimumTooltip" }}">
+                                <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.CrewMinimum" }}</label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.crew.minimum" value="{{itemData.crew.minimum}}" data-dtype="Number" />
+                                </div>
+                            </div>
+
+                            {{!-- Maximum Crew --}}
+                            <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.CrewMaximumTooltip" }}">
+                                <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.CrewMaximum" }}</label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.crew.maximum" value="{{itemData.crew.maximum}}" data-dtype="Number" />
+                                </div>
+                            </div>
+
+                            {{!-- BP Cost --}}
+                            <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.CostTooltip" }}">
+                                <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.Cost" }}</label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.cost" value="{{itemData.cost}}" data-dtype="Number" />
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    {{!-- Defense ---}}
+                    <div class="bubble">
+                        <h3 class="bubble-header">{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.HeaderDefense" }}</h3>
+
+                        <div class="bubble-info">
+
+                            {{!-- Hull Points --}}
+                            <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.HitpointsTooltip" }}">
+                                <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.Hitpoints" }}</label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.hitpoints.base" value="{{itemData.hitpoints.base}}" data-dtype="Number" />
+                                </div>
+                            </div>
+
+                            {{!-- Hull Point Increment --}}
+                            <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.HitpointsIncrementTooltip" }}">
+                                <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.HitpointsIncrement" }}</label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.hitpoints.increment" value="{{itemData.hitpoints.increment}}" data-dtype="Number" />
+                                </div>
+                            </div>
+
+                            {{!-- Damage Threshold --}}
+                            <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.DamageThresholdTooltip" }}">
+                                <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.DamageThreshold" }}</label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.damageThreshold.base" value="{{itemData.damageThreshold.base}}" data-dtype="Number" />
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
                 </div>
-            </div>
 
-            <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.ManeuverabilityTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.Maneuverability" }}</label>
-                <div class="form-fields">
-                    <select class="actor-size" name="system.maneuverability">
-                        {{#select itemData.maneuverability}}
-                        {{#each config.maneuverability as |label size|}}
-                            <option value="{{size}}">{{label}}</option>
-                        {{/each}}
-                        {{/select}}
-                    </select>
+                {{!-- Weapon Mounts Tab --}}
+                <div class="tab weaponMounts" data-group="subdetails" data-tab="weaponMounts">
+
+                    {{!-- Weapon Mounts ---}}
+                    <div class="bubble">
+                        <h3 class="bubble-header">{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponMounts" }}</h3>
+
+                        <div class="bubble-info">
+                            
+                            {{!-- Forward Arc --}}
+                            <div class="form-group input-select-select-select" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponArcTooltip" }}">
+                                <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponArcForward" }}</label>
+                                <div class="form-fields">
+                                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeLight" }}</label>
+                                    <input type="text" name="system.weaponMounts.forward.lightSlots" value="{{itemData.weaponMounts.forward.lightSlots}}" data-dtype="Number" placeholder="0" />
+                                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeHeavy" }}</label>
+                                    <input type="text" name="system.weaponMounts.forward.heavySlots" value="{{itemData.weaponMounts.forward.heavySlots}}" data-dtype="Number" placeholder="0" />
+                                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeCapital" }}</label>
+                                    <input type="text" name="system.weaponMounts.forward.capitalSlots" value="{{itemData.weaponMounts.forward.capitalSlots}}" data-dtype="Number" placeholder="0" />
+                                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeSpinal" }}</label>
+                                    <input type="text" name="system.weaponMounts.forward.spinalSlots" value="{{itemData.weaponMounts.forward.spinalSlots}}" data-dtype="Number" placeholder="0" />
+                                </div>
+                            </div>
+
+                            {{!-- Aft Arc --}}
+                            <div class="form-group input-select-select-select" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponArcTooltip" }}">
+                                <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponArcAft" }}</label>
+                                <div class="form-fields">
+                                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeLight" }}</label>
+                                    <input type="text" name="system.weaponMounts.aft.lightSlots" value="{{itemData.weaponMounts.aft.lightSlots}}" data-dtype="Number" placeholder="0" />
+                                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeHeavy" }}</label>
+                                    <input type="text" name="system.weaponMounts.aft.heavySlots" value="{{itemData.weaponMounts.aft.heavySlots}}" data-dtype="Number" placeholder="0" />
+                                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeCapital" }}</label>
+                                    <input type="text" name="system.weaponMounts.aft.capitalSlots" value="{{itemData.weaponMounts.aft.capitalSlots}}" data-dtype="Number" placeholder="0" />
+                                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeSpinal" }}</label>
+                                    <input type="text" name="system.weaponMounts.aft.spinalSlots" value="{{itemData.weaponMounts.aft.spinalSlots}}" data-dtype="Number" placeholder="0" />
+                                </div>
+                            </div>
+
+                            {{!-- Port Arc --}}
+                            <div class="form-group input-select-select-select" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponArcTooltip" }}">
+                                <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponArcPort" }}</label>
+                                <div class="form-fields">
+                                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeLight" }}</label>
+                                    <input type="text" name="system.weaponMounts.port.lightSlots" value="{{itemData.weaponMounts.port.lightSlots}}" data-dtype="Number" placeholder="0" />
+                                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeHeavy" }}</label>
+                                    <input type="text" name="system.weaponMounts.port.heavySlots" value="{{itemData.weaponMounts.port.heavySlots}}" data-dtype="Number" placeholder="0" />
+                                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeCapital" }}</label>
+                                    <input type="text" name="system.weaponMounts.port.capitalSlots" value="{{itemData.weaponMounts.port.capitalSlots}}" data-dtype="Number" placeholder="0" />
+                                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeSpinal" }}</label>
+                                    <input type="text" name="system.weaponMounts.port.spinalSlots" value="{{itemData.weaponMounts.port.spinalSlots}}" data-dtype="Number" placeholder="0" />
+                                </div>
+                            </div>
+
+                            {{!-- Starboard Arc --}}
+                            <div class="form-group input-select-select-select" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponArcTooltip" }}">
+                                <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponArcStarboard" }}</label>
+                                <div class="form-fields">
+                                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeLight" }}</label>
+                                    <input type="text" name="system.weaponMounts.starboard.lightSlots" value="{{itemData.weaponMounts.starboard.lightSlots}}" data-dtype="Number" placeholder="0" />
+                                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeHeavy" }}</label>
+                                    <input type="text" name="system.weaponMounts.starboard.heavySlots" value="{{itemData.weaponMounts.starboard.heavySlots}}" data-dtype="Number" placeholder="0" />
+                                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeCapital" }}</label>
+                                    <input type="text" name="system.weaponMounts.starboard.capitalSlots" value="{{itemData.weaponMounts.starboard.capitalSlots}}" data-dtype="Number" placeholder="0" />
+                                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeSpinal" }}</label>
+                                    <input type="text" name="system.weaponMounts.starboard.spinalSlots" value="{{itemData.weaponMounts.starboard.spinalSlots}}" data-dtype="Number" placeholder="0" />
+                                </div>
+                            </div>
+
+                            {{!-- Turret --}}
+                            <div class="form-group input-select-select-select" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponArcTooltip" }}">
+                                <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponArcTurret" }}</label>
+                                <div class="form-fields">
+                                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeLight" }}</label>
+                                    <input type="text" name="system.weaponMounts.turret.lightSlots" value="{{itemData.weaponMounts.turret.lightSlots}}" data-dtype="Number" placeholder="0" />
+                                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeHeavy" }}</label>
+                                    <input type="text" name="system.weaponMounts.turret.heavySlots" value="{{itemData.weaponMounts.turret.heavySlots}}" data-dtype="Number" placeholder="0" />
+                                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeCapital" }}</label>
+                                    <input type="text" name="system.weaponMounts.turret.capitalSlots" value="{{itemData.weaponMounts.turret.capitalSlots}}" data-dtype="Number" placeholder="0" />
+                                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeSpinal" }}</label>
+                                    <input type="text" name="system.weaponMounts.turret.spinalSlots" value="{{itemData.weaponMounts.turret.spinalSlots}}" data-dtype="Number" placeholder="0" />
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
                 </div>
-            </div>
 
-            <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.ExpansionBaysTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.ExpansionBays" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.expansionBays" value="{{itemData.expansionBays}}" data-dtype="Number" />
-                </div>
-            </div>
-
-            <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.CrewMinimumTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.CrewMinimum" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.crew.minimum" value="{{itemData.crew.minimum}}" data-dtype="Number" />
-                </div>
-            </div>
-
-            <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.CrewMaximumTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.CrewMaximum" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.crew.maximum" value="{{itemData.crew.maximum}}" data-dtype="Number" />
-                </div>
-            </div>
-
-            <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.CostTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.Cost" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.cost" value="{{itemData.cost}}" data-dtype="Number" />
-                </div>
-            </div>
-
-            <h4 class="section-header">{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.HeaderDefense" }}</h4>
-
-            <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.HitpointsTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.Hitpoints" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.hitpoints.base" value="{{itemData.hitpoints.base}}" data-dtype="Number" />
-                </div>
-            </div>
-
-            <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.HitpointsIncrementTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.HitpointsIncrement" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.hitpoints.increment" value="{{itemData.hitpoints.increment}}" data-dtype="Number" />
-                </div>
-            </div>
-
-            <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.DamageThresholdTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.DamageThreshold" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.damageThreshold.base" value="{{itemData.damageThreshold.base}}" data-dtype="Number" />
-                </div>
-            </div>
-
-            <h4 class="section-header">{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.HeaderOffense" }}</h4>
-
-            <div class="form-group input-select-select-select" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponArcTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponArcForward" }}</label>
-                <div class="form-fields">
-                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeLight" }}</label>
-                    <input type="text" name="system.weaponMounts.forward.lightSlots" value="{{itemData.weaponMounts.forward.lightSlots}}" data-dtype="Number" placeholder="0" />
-                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeHeavy" }}</label>
-                    <input type="text" name="system.weaponMounts.forward.heavySlots" value="{{itemData.weaponMounts.forward.heavySlots}}" data-dtype="Number" placeholder="0" />
-                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeCapital" }}</label>
-                    <input type="text" name="system.weaponMounts.forward.capitalSlots" value="{{itemData.weaponMounts.forward.capitalSlots}}" data-dtype="Number" placeholder="0" />
-                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeSpinal" }}</label>
-                    <input type="text" name="system.weaponMounts.forward.spinalSlots" value="{{itemData.weaponMounts.forward.spinalSlots}}" data-dtype="Number" placeholder="0" />
-                </div>
-            </div>
-
-            <div class="form-group input-select-select-select" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponArcTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponArcAft" }}</label>
-                <div class="form-fields">
-                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeLight" }}</label>
-                    <input type="text" name="system.weaponMounts.aft.lightSlots" value="{{itemData.weaponMounts.aft.lightSlots}}" data-dtype="Number" placeholder="0" />
-                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeHeavy" }}</label>
-                    <input type="text" name="system.weaponMounts.aft.heavySlots" value="{{itemData.weaponMounts.aft.heavySlots}}" data-dtype="Number" placeholder="0" />
-                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeCapital" }}</label>
-                    <input type="text" name="system.weaponMounts.aft.capitalSlots" value="{{itemData.weaponMounts.aft.capitalSlots}}" data-dtype="Number" placeholder="0" />
-                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeSpinal" }}</label>
-                    <input type="text" name="system.weaponMounts.aft.spinalSlots" value="{{itemData.weaponMounts.aft.spinalSlots}}" data-dtype="Number" placeholder="0" />
-                </div>
-            </div>
-
-            <div class="form-group input-select-select-select" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponArcTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponArcPort" }}</label>
-                <div class="form-fields">
-                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeLight" }}</label>
-                    <input type="text" name="system.weaponMounts.port.lightSlots" value="{{itemData.weaponMounts.port.lightSlots}}" data-dtype="Number" placeholder="0" />
-                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeHeavy" }}</label>
-                    <input type="text" name="system.weaponMounts.port.heavySlots" value="{{itemData.weaponMounts.port.heavySlots}}" data-dtype="Number" placeholder="0" />
-                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeCapital" }}</label>
-                    <input type="text" name="system.weaponMounts.port.capitalSlots" value="{{itemData.weaponMounts.port.capitalSlots}}" data-dtype="Number" placeholder="0" />
-                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeSpinal" }}</label>
-                    <input type="text" name="system.weaponMounts.port.spinalSlots" value="{{itemData.weaponMounts.port.spinalSlots}}" data-dtype="Number" placeholder="0" />
-                </div>
-            </div>
-
-            <div class="form-group input-select-select-select" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponArcTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponArcStarboard" }}</label>
-                <div class="form-fields">
-                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeLight" }}</label>
-                    <input type="text" name="system.weaponMounts.starboard.lightSlots" value="{{itemData.weaponMounts.starboard.lightSlots}}" data-dtype="Number" placeholder="0" />
-                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeHeavy" }}</label>
-                    <input type="text" name="system.weaponMounts.starboard.heavySlots" value="{{itemData.weaponMounts.starboard.heavySlots}}" data-dtype="Number" placeholder="0" />
-                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeCapital" }}</label>
-                    <input type="text" name="system.weaponMounts.starboard.capitalSlots" value="{{itemData.weaponMounts.starboard.capitalSlots}}" data-dtype="Number" placeholder="0" />
-                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeSpinal" }}</label>
-                    <input type="text" name="system.weaponMounts.starboard.spinalSlots" value="{{itemData.weaponMounts.starboard.spinalSlots}}" data-dtype="Number" placeholder="0" />
-                </div>
-            </div>
-
-            <div class="form-group input-select-select-select" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponArcTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponArcTurret" }}</label>
-                <div class="form-fields">
-                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeLight" }}</label>
-                    <input type="text" name="system.weaponMounts.turret.lightSlots" value="{{itemData.weaponMounts.turret.lightSlots}}" data-dtype="Number" placeholder="0" />
-                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeHeavy" }}</label>
-                    <input type="text" name="system.weaponMounts.turret.heavySlots" value="{{itemData.weaponMounts.turret.heavySlots}}" data-dtype="Number" placeholder="0" />
-                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeCapital" }}</label>
-                    <input type="text" name="system.weaponMounts.turret.capitalSlots" value="{{itemData.weaponMounts.turret.capitalSlots}}" data-dtype="Number" placeholder="0" />
-                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.WeaponTypeSpinal" }}</label>
-                    <input type="text" name="system.weaponMounts.turret.spinalSlots" value="{{itemData.weaponMounts.turret.spinalSlots}}" data-dtype="Number" placeholder="0" />
-                </div>
-            </div>
+            </section>
 
         </div>
 
