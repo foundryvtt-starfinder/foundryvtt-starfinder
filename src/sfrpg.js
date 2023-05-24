@@ -211,8 +211,11 @@ Hooks.once('init', async function() {
         wordWrap: false
     });
 
+    console.log("Starfinder | [SETUP] Configuring rules engine");
+    registerSystemRules(game.sfrpg.engine);
+
     console.log("Starfinder | [INIT] Overriding Mathematics");
-    registerMathFunctions();
+    SFRPGRoll.registerMathFunctions();
 
     console.log("Starfinder | [INIT] Registering system settings");
     registerSystemSettings();
@@ -361,9 +364,6 @@ Hooks.once("setup", function() {
 
     CONFIG.SFRPG.statusEffects.forEach(e => e.label = game.i18n.localize(e.label));
 
-    console.log("Starfinder | [SETUP] Configuring rules engine");
-    registerSystemRules(game.sfrpg.engine);
-
     console.log("Starfinder | [SETUP] Registering custom handlebars");
     setupHandlebars();
 
@@ -488,40 +488,6 @@ Hooks.on("hotbarDrop", (bar, data, slot) => {
     createItemMacro(data, slot);
     return false;
 });
-
-function registerMathFunctions() {
-    function lookup(value) {
-        for (let i = 1; i < arguments.length - 1; i += 2) {
-            if (arguments[i] === value) {
-                return arguments[i + 1];
-            }
-        }
-        return 0;
-    }
-
-    function lookupRange(value, lowestValue) {
-        let baseValue = lowestValue;
-        for (let i = 2; i < arguments.length - 1; i += 2) {
-            if (arguments[i] > value) {
-                return baseValue;
-            }
-            baseValue = arguments[i + 1];
-        }
-        return baseValue;
-    }
-
-    Roll.MATH_PROXY = mergeObject(Roll.MATH_PROXY, {
-        eq: (a, b) => a === b,
-        gt: (a, b) => a > b,
-        gte: (a, b) => a >= b,
-        lt: (a, b) => a < b,
-        lte: (a, b) => a <= b,
-        ne: (a, b) => a !== b,
-        ternary: (condition, ifTrue, ifFalse) => (condition ? ifTrue : ifFalse),
-        lookup,
-        lookupRange
-    });
-}
 
 /**
  * Create a Macro form an Item drop.
@@ -758,12 +724,12 @@ function setupHandlebars() {
 
 Hooks.on("renderSidebarTab", async (app, html) => {
     if (app.options.id === "settings") {
-        const textToAdd = `<br/><a href="https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/blob/master/changelist.md">Starfinder Patch Notes</a>`;
+        const textToAdd = `<a href="https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/blob/master/changelist.md">Starfinder Patch Notes</a>`;
         const gameDetails = document.getElementById("game-details");
         if (gameDetails) {
             const systemSection = gameDetails.getElementsByClassName("system")[0];
             if (systemSection) {
-                systemSection.innerHTML += textToAdd;
+                systemSection.insertAdjacentHTML("afterend", textToAdd);
             }
         }
     }
