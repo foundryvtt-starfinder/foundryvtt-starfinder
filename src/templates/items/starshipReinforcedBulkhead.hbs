@@ -18,15 +18,18 @@
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
-            {{!-- Common component data --}}
-            {{> "systems/sfrpg/templates/items/parts/starship-component.hbs" this noPCUCost=true}}
+            {{!-- Common Component DData --}}
+            {{> "systems/sfrpg/templates/items/parts/starship-component.hbs" noPCUCost=true}}
 
-            <h4 class="section-header first">{{ localize "SFRPG.ItemSheet.StarshipReinforcedBulkhead.Header" }}</h4>
+            {{!-- Bulkhead Properties --}}
+            <div class="bubble">
+                <h3 class="bubble-header">{{ localize "SFRPG.ItemSheet.StarshipReinforcedBulkhead.Header" }}</h3>
 
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipReinforcedBulkhead.Fortification" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipReinforcedBulkhead.FortificationTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipReinforcedBulkhead.Fortification" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.fortification" value="{{itemData.fortification}}" data-dtype="String" placeholder="0%" />
+                <div class="form-group bubble-info" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipReinforcedBulkhead.Fortification" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipReinforcedBulkhead.FortificationTooltip" }}">
+                    <label>{{ localize "SFRPG.ItemSheet.StarshipReinforcedBulkhead.Fortification" }}</label>
+                    <div class="form-fields">
+                        <input type="text" name="system.fortification" value="{{itemData.fortification}}" data-dtype="String" placeholder="0%" />
+                    </div>
                 </div>
             </div>
 

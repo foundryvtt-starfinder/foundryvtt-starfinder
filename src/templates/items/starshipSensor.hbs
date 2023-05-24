@@ -18,31 +18,40 @@
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
-            {{!-- Common component data --}}
-            {{> "systems/sfrpg/templates/items/parts/starship-component.hbs" this noPCUCost=true}}
+            {{!-- Common Component Data --}}
+            {{> "systems/sfrpg/templates/items/parts/starship-component.hbs" noPCUCost=true}}
 
-            {{!-- Special Materials Template --}}
-            {{> "systems/sfrpg/templates/items/parts/item-special-materials.hbs"}}
+            {{!-- Sensor Properties --}}
+            <div class="bubble">
+                <h3 class="bubble-header">{{ localize "SFRPG.ItemSheet.StarshipSensor.Header" }}</h3>
 
-            <h4 class="section-header first">{{ localize "SFRPG.ItemSheet.StarshipSensor.Header" }}</h4>
+                <div class="bubble-info">
 
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipSensor.Modifier" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipSensor.ModifierTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipSensor.Modifier" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.modifier" value="{{itemData.modifier}}" data-dtype="Number" placeholder="0" />
+                    {{!-- Scan Modifier --}}
+                    <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipSensor.Modifier" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipSensor.ModifierTooltip" }}">
+                        <label>{{ localize "SFRPG.ItemSheet.StarshipSensor.Modifier" }}</label>
+                        <div class="form-fields">
+                            <input type="text" name="system.modifier" value="{{itemData.modifier}}" data-dtype="Number" placeholder="0" />
+                        </div>
+                    </div>
+
+                    {{!-- Range --}}
+                    <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipSensor.Range" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipSensor.RangeTooltip" }}">
+                        <label>{{ localize "SFRPG.ItemSheet.StarshipSensor.Range" }}</label>
+                        <select name="system.range">
+                            {{#select itemData.range}}
+                            {{#each config.starshipWeaponRanges as |name type|}}
+                            <option value="{{type}}">{{localize name}}</option>
+                            {{/each}}
+                            {{/select}}
+                        </select>
+                    </div>
+
                 </div>
             </div>
-
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipSensor.Range" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipSensor.RangeTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipSensor.Range" }}</label>
-                <select name="system.range">
-                    {{#select itemData.range}}
-                    {{#each config.starshipWeaponRanges as |name type|}}
-                    <option value="{{type}}">{{localize name}}</option>
-                    {{/each}}
-                    {{/select}}
-                </select>
-            </div>
+            
+            {{!-- Special Materials Template --}}
+            {{> "systems/sfrpg/templates/items/parts/item-special-materials.hbs"}}
 
         </div>
 

@@ -18,15 +18,18 @@
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
-            {{!-- Common component data --}}
-            {{> "systems/sfrpg/templates/items/parts/starship-component.hbs" this noPCUCost=true}}
+            {{!-- Common Component Data --}}
+            {{> "systems/sfrpg/templates/items/parts/starship-component.hbs" noPCUCost=true}}
 
-            <h4 class="section-header first">{{ localize "SFRPG.ItemSheet.StarshipFortifiedHull.Header" }}</h4>
+            {{!-- Fortified Hull Properties --}}
+            <div class="bubble">
+                <h3 class="bubble-header">{{ localize "SFRPG.ItemSheet.StarshipFortifiedHull.Header" }}</h3>
 
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipFortifiedHull.CriticalThresholdBonus" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipFortifiedHull.CriticalThresholdBonusTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipFortifiedHull.CriticalThresholdBonus" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.criticalThresholdBonus" value="{{itemData.criticalThresholdBonus}}" data-dtype="Number" placeholder="0" />
+                <div class="form-group bubble-info" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipFortifiedHull.CriticalThresholdBonus" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipFortifiedHull.CriticalThresholdBonusTooltip" }}">
+                    <label>{{ localize "SFRPG.ItemSheet.StarshipFortifiedHull.CriticalThresholdBonus" }}</label>
+                    <div class="form-fields">
+                        <input type="text" name="system.criticalThresholdBonus" value="{{itemData.criticalThresholdBonus}}" data-dtype="Number" placeholder="0" />
+                    </div>
                 </div>
             </div>
 
