@@ -19,26 +19,33 @@
         <div class="tab details" data-group="primary" data-tab="details">
 
             {{!-- Common component data --}}
-            {{> "systems/sfrpg/templates/items/parts/starship-component.hbs" this}}
+            {{> "systems/sfrpg/templates/items/parts/starship-component.hbs"}}
 
-            <h4 class="section-header first">{{ localize "SFRPG.ItemSheet.StarshipDriftEngine.Header" }}</h4>
+            {{!-- Drift Engine Properties --}}
+            <div class="bubble">
+                <h3 class="bubble-header">{{ localize "SFRPG.ItemSheet.StarshipDriftEngine.Header" }}</h3>
 
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipDriftEngine.EngineRating" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipDriftEngine.EngineRatingTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipDriftEngine.EngineRating" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.engineRating" value="{{itemData.engineRating}}" data-dtype="Number" placeholder="0" />
+                <div class="bubble-info">
+                    
+                    <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipDriftEngine.EngineRating" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipDriftEngine.EngineRatingTooltip" }}">
+                        <label>{{ localize "SFRPG.ItemSheet.StarshipDriftEngine.EngineRating" }}</label>
+                        <div class="form-fields">
+                            <input type="text" name="system.engineRating" value="{{itemData.engineRating}}" data-dtype="Number" placeholder="0" />
+                        </div>
+                    </div>
+
+                    <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipDriftEngine.MaxSize" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipDriftEngine.MaxSizeTooltip" }}">
+                        <label>{{ localize "SFRPG.ItemSheet.StarshipDriftEngine.MaxSize" }}</label>
+                        <select name="system.maxSize">
+                            {{#select itemData.maxSize}}
+                            {{#each config.starshipSizes as |name type|}}
+                            <option value="{{type}}">{{localize name}}</option>
+                            {{/each}}
+                            {{/select}}
+                        </select>
+                    </div>
+
                 </div>
-            </div>
-
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipDriftEngine.MaxSize" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipDriftEngine.MaxSizeTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipDriftEngine.MaxSize" }}</label>
-                <select name="system.maxSize">
-                    {{#select itemData.maxSize}}
-                    {{#each config.starshipSizes as |name type|}}
-                    <option value="{{type}}">{{localize name}}</option>
-                    {{/each}}
-                    {{/select}}
-                </select>
             </div>
 
         </div>

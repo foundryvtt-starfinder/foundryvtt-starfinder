@@ -18,20 +18,23 @@
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
-            {{!-- Common component data --}}
-            {{> "systems/sfrpg/templates/items/parts/starship-component.hbs" this}}
+            {{!-- Common Component Data --}}
+            {{> "systems/sfrpg/templates/items/parts/starship-component.hbs"}}
+
+            {{!-- Countermeasures Properties --}}
+            <div class="bubble">
+                <h3 class="bubble-header">{{ localize "SFRPG.ItemSheet.StarshipDefensiveCountermeasure.Header" }}</h3>
+
+                <div class="form-group bubble-info" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipDefensiveCountermeasure.TargetLockBonus" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipDefensiveCountermeasure.TargetLockBonusTooltip" }}">
+                    <label>{{ localize "SFRPG.ItemSheet.StarshipDefensiveCountermeasure.TargetLockBonus" }}</label>
+                    <div class="form-fields">
+                        <input type="text" name="system.targetLockBonus" value="{{itemData.targetLockBonus}}" data-dtype="Number" placeholder="0" />
+                    </div>
+                </div>
+            </div>
 
             {{!-- Special Materials Template --}}
             {{> "systems/sfrpg/templates/items/parts/item-special-materials.hbs"}}
-
-            <h4 class="section-header first">{{ localize "SFRPG.ItemSheet.StarshipDefensiveCountermeasure.Header" }}</h4>
-
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipDefensiveCountermeasure.TargetLockBonus" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipDefensiveCountermeasure.TargetLockBonusTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipDefensiveCountermeasure.TargetLockBonus" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.targetLockBonus" value="{{itemData.targetLockBonus}}" data-dtype="Number" placeholder="0" />
-                </div>
-            </div>
 
         </div>
 

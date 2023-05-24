@@ -18,29 +18,39 @@
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
-            {{!-- Common component data --}}
-            {{> "systems/sfrpg/templates/items/parts/starship-component.hbs" this noPCUCost=true}}
+            {{!-- Common Component Data --}}
+            {{> "systems/sfrpg/templates/items/parts/starship-component.hbs" noPCUCost=true}}
 
-            <h4 class="section-header first">{{ localize "SFRPG.ItemSheet.StarshipAblativeArmor.Header" }}</h4>
+            {{!-- Ablative Armor Data --}}
+            <div class="bubble">
+                <h3 class="bubble-header">{{ localize "SFRPG.ItemSheet.StarshipAblativeArmor.Header" }}</h3>
 
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipAblativeArmor.AblativeValue" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipAblativeArmor.AblativeValueTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipAblativeArmor.AblativeValue" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.ablativeValue" value="{{itemData.ablativeValue}}" data-dtype="Number" placeholder="0" />
-                </div>
-            </div>
+                <div class="bubble-info">
+                    
+                    {{!-- Ablative Value --}}
+                    <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipAblativeArmor.AblativeValue" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipAblativeArmor.AblativeValueTooltip" }}">
+                        <label>{{ localize "SFRPG.ItemSheet.StarshipAblativeArmor.AblativeValue" }}</label>
+                        <div class="form-fields">
+                            <input type="text" name="system.ablativeValue" value="{{itemData.ablativeValue}}" data-dtype="Number" placeholder="0" />
+                        </div>
+                    </div>
 
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipAblativeArmor.TargetLockPenalty" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipAblativeArmor.TargetLockPenaltyTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipAblativeArmor.TargetLockPenalty" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.targetLockPenalty" value="{{itemData.targetLockPenalty}}" data-dtype="Number" placeholder="0" />
-                </div>
-            </div>
+                    {{!-- Target Lock Penalty --}}
+                    <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipAblativeArmor.TargetLockPenalty" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipAblativeArmor.TargetLockPenaltyTooltip" }}">
+                        <label>{{ localize "SFRPG.ItemSheet.StarshipAblativeArmor.TargetLockPenalty" }}</label>
+                        <div class="form-fields">
+                            <input type="text" name="system.targetLockPenalty" value="{{itemData.targetLockPenalty}}" data-dtype="Number" placeholder="0" />
+                        </div>
+                    </div>
 
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipAblativeArmor.TurnDistancePenalty" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipAblativeArmor.TurnDistancePenaltyTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipAblativeArmor.TurnDistancePenalty" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.turnDistancePenalty" value="{{itemData.turnDistancePenalty}}" data-dtype="Number" placeholder="0" />
+                    {{!-- Turn Penalty --}}
+                    <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipAblativeArmor.TurnDistancePenalty" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipAblativeArmor.TurnDistancePenaltyTooltip" }}">
+                        <label>{{ localize "SFRPG.ItemSheet.StarshipAblativeArmor.TurnDistancePenalty" }}</label>
+                        <div class="form-fields">
+                            <input type="text" name="system.turnDistancePenalty" value="{{itemData.turnDistancePenalty}}" data-dtype="Number" placeholder="0" />
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
