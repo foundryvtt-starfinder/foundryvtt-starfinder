@@ -22,6 +22,7 @@
             {{!-- Details Tab Navigation --}}
             <nav class="sheet-subnavigation subtabs" data-group="subdetails">
                 <a class="item highlight active" data-tab="properties">{{ localize "SFRPG.ItemSheet.Details.Tab.Properties" }}</a>
+                <a class="item" data-tab="usage">{{ localize "SFRPG.ItemSheet.Details.Tab.UsageAction" }}</a>
                 <a class="item" data-tab="container">{{ localize "SFRPG.ItemSheet.Details.Tab.AmmunitionContainer" }}</a>
             </nav>
 
@@ -56,6 +57,17 @@
 
                     {{!-- Physical Properties --}}
                     {{> "systems/sfrpg/templates/items/parts/physical-item-details.hbs"}}
+
+                </div>
+
+                {{!-- Usage and Action Tab --}}
+                <div class="tab usage" data-group="subdetails" data-tab="usage">
+
+                    {{!-- Item Activation Template --}}
+                    {{> "systems/sfrpg/templates/items/parts/item-activation.hbs"}}
+
+                    {{!-- Item Action Template --}}
+                    {{> "systems/sfrpg/templates/items/parts/item-action.hbs"}}
 
                 </div>
 
