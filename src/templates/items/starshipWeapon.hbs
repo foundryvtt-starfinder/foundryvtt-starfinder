@@ -207,14 +207,8 @@
                         </h4>
 
                         <div class="bubble-info">
-                            <ol class="damage-parts form-group">
-                                {{#each itemData.damage.parts as |part i| }}
-                                <li class="damage-part flexrow" data-damage-part="{{i}}">
-                                    <input type="text" name="system.damage.parts.{{i}}.formula" value="{{lookup this "formula"}}" />
-                                    <a class="damage-control delete-damage"><i class="fas fa-minus"></i></a>
-                                </li>
-                                {{/each}}
-                            </ol>
+                            {{!-- Damage Formula --}}
+                            {{> "systems/sfrpg/templates/items/parts/damage-sections.hbs" starshipDamage=true}}
                         </div>
                     </div>
 
