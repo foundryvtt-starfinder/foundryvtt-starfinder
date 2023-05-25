@@ -1,9 +1,63 @@
 @import "variables.less";
 
-.combat-type {
+.combat-type,
+.combat-difficulty-container {
     flex: 1;
     margin: 0;
     font-size: var(--font-size-14);
     color: var(--color-text-light-5);
     text-align: center;
+}
+
+a.combat-difficulty {
+    flex: 1;
+    margin: 0;
+    font-size: var(--font-size-16);
+    line-height: var(--font-size-16);
+    text-align: center;
+    text-shadow: black 1px 1px;
+
+    &.noPcs {
+        color: var(--color-text-light-5);
+    }
+
+    &.noPCShips {
+        color: var(--color-text-light-5);
+    }
+
+    &.noEnemyShips {
+        color: var(--color-text-light-5);
+    }
+
+    &.noEnemies {
+        color: var(--color-text-light-5);
+    }
+
+    &.lessThanEasy {
+        color: white;
+    }
+
+    &.easy {
+        color: cyan;
+    }
+
+    &.average {
+        color: rgb(0, 255, 0);
+    }
+
+    &.challenging {
+        color: rgb(255, 247, 0);
+    }
+
+    &.hard {
+        color: orange;
+    }
+
+    &.epic {
+        color: red;
+    }
+
+    &.greaterThanEpic {
+        color: rgb(255, 0, 255);
+    }
 }
