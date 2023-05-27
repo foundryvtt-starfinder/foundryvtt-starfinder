@@ -219,6 +219,7 @@ SFRPG.descriptors = {
     "force": "SFRPG.Descriptors.Force",
     "good": "SFRPG.Descriptors.Good",
     "healing": "SFRPG.Descriptors.Healing",
+    "illusion": "SFRPG.Descriptors.Illusion",
     "language-dependent": "SFRPG.Descriptors.LanguageDependent",
     "lawful": "SFRPG.Descriptors.Lawful",
     "light": "SFRPG.Descriptors.Light",
