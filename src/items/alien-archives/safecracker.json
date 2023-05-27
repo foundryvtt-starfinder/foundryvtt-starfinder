@@ -1,14 +1,114 @@
 {
-  "_id": "zL1jwOAKdw9dMYKq",
-  "name": "Mysterious Hermit",
+  "_id": "MSgm0FhU3e2sAzAn",
+  "name": "Safecracker",
   "type": "npc2",
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
-      "_id": "xdW8GwOGxIHbEStA",
-      "name": "Living staff, advanced",
+      "_id": "tuH7HyJHVfVesaXC",
+      "name": "Limited Plant Benefits (Ex)",
+      "type": "feat",
+      "img": "icons/svg/mystery-man.svg",
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>Despite being a plant creature, the creature doesn’t gain the standard immunities associated with creatures of the plant type. Instead, a creature with this ability gains a +2 species bonus on saving throws against @UUID[Compendium.sfrpg.rules.PqV3OCbUTyk2upPD]{Mind-affecting effects}, @UUID[Compendium.sfrpg.conditions.NV4qXRDgb7zTNkW2]{Paralysis}, @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Poison}, polymorph, @UUID[Compendium.sfrpg.conditions.3iTdt2NRgIyrychR]{Sleep}, and @UUID[Compendium.sfrpg.conditions.CvsDp0GvojxiF2jz]{Stunning} effects, unless the effect specifies that it is effective against plants.</p>\n<p><em>Format</em>:<strong>Defensive Abilities</strong> limited plant benefits.</p>"
+        },
+        "descriptors": [],
+        "details": {
+          "category": "universalCreatureRule",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "isActive": null,
+        "modifiers": [
+          {
+            "_id": "1b18d1f5-099e-4614-af8d-a1ffcd583de6",
+            "name": "Limited Plant Benefits",
+            "type": "racial",
+            "condition": "",
+            "effectType": "saves",
+            "enabled": true,
+            "max": 2,
+            "modifier": "2",
+            "modifierType": "formula",
+            "notes": "+2 species bonus on saving throws against mind-affecting effects, paralysis, poison, polymorph, sleep, and stunning effects, unless the effect specifies that it is effective against plants.",
+            "source": "AA3 pg. 152",
+            "subtab": "misc",
+            "valueAffected": ""
+          }
+        ],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "AA3 pg. 152",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "34xrQtRCLU2X9Abn",
+      "name": "Handaxe, sintered",
       "type": "weapon",
-      "img": "icons/weapons/staves/staff-vines-green.webp",
+      "img": "icons/weapons/axes/axe-broad-worn-blue.webp",
       "system": {
         "type": "",
         "ability": "",
@@ -22,7 +122,7 @@
           "condition": "",
           "cost": null
         },
-        "ammunitionType": "charge",
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shapable": false,
@@ -30,7 +130,7 @@
           "units": "ft",
           "value": ""
         },
-        "attackBonus": 21,
+        "attackBonus": 18,
         "attributes": {
           "ac": {
             "value": "5"
@@ -40,29 +140,24 @@
             "mod": ""
           },
           "hardness": {
-            "value": "29"
+            "value": "23"
           },
           "hp": {
-            "max": "51",
-            "value": 51
+            "max": "42",
+            "value": 42
           },
           "size": "medium",
           "sturdy": true
         },
         "attuned": false,
-        "bulk": "1",
+        "bulk": "L",
         "capacity": {
-          "max": 20,
-          "value": 20
+          "max": null,
+          "value": null
         },
         "chatFlavor": "",
         "container": {
-          "contents": [
-            {
-              "id": "XhR57shCb4ldRK4y",
-              "index": 1
-            }
-          ],
+          "contents": [],
           "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
@@ -72,19 +167,9 @@
                 "fusion"
               ],
               "affectsEncumbrance": true,
-              "amount": 12,
+              "amount": 9,
               "subtype": "fusion",
               "weightProperty": "level"
-            },
-            {
-              "type": "slot",
-              "acceptsType": [
-                "ammunition"
-              ],
-              "affectsEncumbrance": true,
-              "amount": 1,
-              "subtype": "ammunitionSlot",
-              "weightProperty": ""
             },
             {
               "type": "slot",
@@ -94,31 +179,21 @@
               "affectsEncumbrance": true,
               "amount": 1,
               "subtype": "",
-              "weightMultiplier": 1,
               "weightProperty": ""
             }
           ]
         },
         "critical": {
-          "effect": "Bind",
+          "effect": "",
           "parts": []
         },
         "damage": {
           "parts": [
             {
-              "name": "",
-              "formula": "4d6 +14",
-              "group": null,
+              "formula": "2d6 +13",
+              "operator": "and",
               "types": {
-                "acid": false,
-                "bludgeoning": true,
-                "cold": false,
-                "electricity": false,
-                "fire": false,
-                "healing": false,
-                "piercing": false,
-                "slashing": false,
-                "sonic": false
+                "slashing": true
               }
             }
           ]
@@ -129,7 +204,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>Xenodruids developed the living staff, a gnarled and vineswathed pole, to use as a weapon and a sign of their allegiance. The staff itself can extend, and the vines can wrap around and entangle a target. Xenodruids on sentinel duty favor the tactical and advanced models. The elite and paragon models are more common among highly skilled warrior-mystics undertaking assault missions.</p>"
+          "value": "<p>A balanced, wedge-shaped blade affixed to a lightweight haft, a handaxe can be wielded in melee or thrown. The flexibility of handaxes makes them a favorite of explorers of all types, and the basic handaxe is a common tool that can be used as a weapon. A tactical handaxe is made of a stronger, lightweight alloy, while the sintered handaxe uses a denser ceramic material for added heft and a much keener edge. An ultrathin handaxe has a blade so thin it can’t be seen clearly, while the molecular rift handaxe has a blade narrow enough to slice between molecules. Most handaxes have blade covers to prevent accidental injury to the wielder.</p>"
         },
         "descriptors": [],
         "duration": {
@@ -140,21 +215,23 @@
         "equipped": true,
         "formula": "",
         "identified": true,
+        "img": "icons/weapons/axes/axe-broad-worn-blue.webp",
         "isActive": null,
-        "level": 12,
+        "isOpen": true,
+        "level": 9,
         "modifiers": [],
-        "price": 39500,
+        "price": 12500,
         "proficient": true,
         "properties": {
           "aeon": false,
           "amm": false,
-          "analog": false,
+          "analog": true,
           "antibiological": false,
           "archaic": false,
           "aurora": false,
           "automatic": false,
           "blast": false,
-          "block": true,
+          "block": false,
           "boost": false,
           "breach": false,
           "breakdown": false,
@@ -193,7 +270,7 @@
           "instrumental": false,
           "integrated": false,
           "line": false,
-          "living": true,
+          "living": false,
           "lockdown": false,
           "mind-affecting": false,
           "mine": false,
@@ -201,18 +278,18 @@
           "modal": false,
           "necrotic": false,
           "nonlethal": false,
-          "one": false,
+          "one": true,
           "operative": false,
           "penetrating": false,
           "polarize": false,
           "polymorphic": false,
-          "powered": true,
+          "powered": false,
           "professional": false,
           "propel": false,
           "punchGun": false,
           "qreload": false,
           "radioactive": false,
-          "reach": true,
+          "reach": false,
           "recall": false,
           "regrowth": false,
           "relic": false,
@@ -231,10 +308,10 @@
           "teleportive": false,
           "thought": false,
           "throttle": false,
-          "thrown": false,
+          "thrown": true,
           "thruster": false,
           "trip": false,
-          "two": true,
+          "two": false,
           "unbalancing": false,
           "underwater": false,
           "unwieldy": false,
@@ -246,8 +323,9 @@
         "range": {
           "additional": "",
           "per": "",
+          "total": 30,
           "units": "ft",
-          "value": "10"
+          "value": "30"
         },
         "rollNotes": "",
         "save": {
@@ -259,7 +337,7 @@
           "type": "",
           "dc": ""
         },
-        "source": "AR pg. 9",
+        "source": "AR pg. 8",
         "special": "",
         "specialMaterials": {
           "abysium": false,
@@ -281,13 +359,15 @@
           "type": "",
           "value": ""
         },
+        "totalWeight": "L",
         "usage": {
-          "per": "minute",
-          "value": 1
+          "per": "",
+          "value": null
         },
         "uses": {
           "max": "",
           "per": "",
+          "total": 0,
           "value": null
         },
         "weaponCategory": "uncategorized",
@@ -295,8 +375,8 @@
       }
     },
     {
-      "_id": "2keQrsNdIF4SYeRl",
-      "name": "Laser pistol, parallax",
+      "_id": "KW1tzXc1I1TATsNM",
+      "name": "Laser pistol, aphelion",
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/laser-pistol-azimuth.webp",
       "system": {
@@ -320,7 +400,7 @@
           "units": "ft",
           "value": ""
         },
-        "attackBonus": 23,
+        "attackBonus": 20,
         "attributes": {
           "ac": {
             "value": "5"
@@ -330,11 +410,11 @@
             "mod": ""
           },
           "hardness": {
-            "value": "33"
+            "value": "23"
           },
           "hp": {
-            "max": "57",
-            "value": 57
+            "max": "42",
+            "value": 42
           },
           "size": "medium",
           "sturdy": true
@@ -342,17 +422,12 @@
         "attuned": false,
         "bulk": "L",
         "capacity": {
-          "max": 80,
-          "value": 80
+          "max": 40,
+          "value": 40
         },
         "chatFlavor": "",
         "container": {
-          "contents": [
-            {
-              "id": "Mv5eWiS94uekm0LR",
-              "index": 2
-            }
-          ],
+          "contents": [],
           "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
@@ -362,7 +437,7 @@
                 "fusion"
               ],
               "affectsEncumbrance": true,
-              "amount": 14,
+              "amount": 9,
               "subtype": "fusion",
               "weightProperty": "level"
             },
@@ -374,7 +449,6 @@
               "affectsEncumbrance": true,
               "amount": 1,
               "subtype": "",
-              "weightMultiplier": 1,
               "weightProperty": ""
             },
             {
@@ -390,13 +464,13 @@
           ]
         },
         "critical": {
-          "effect": "Burn 3d4",
+          "effect": "Burn 1d4",
           "parts": []
         },
         "damage": {
           "parts": [
             {
-              "formula": "5d4 +14",
+              "formula": "3d4 +10",
               "operator": "and",
               "types": {
                 "fire": true
@@ -421,10 +495,12 @@
         "equipped": true,
         "formula": "",
         "identified": true,
+        "img": "systems/sfrpg/icons/equipment/weapons/laser-pistol-azimuth.webp",
         "isActive": null,
-        "level": 14,
+        "isOpen": true,
+        "level": 9,
         "modifiers": [],
-        "price": 82000,
+        "price": 14820,
         "proficient": true,
         "properties": {
           "aeon": false,
@@ -527,6 +603,7 @@
         "range": {
           "additional": "",
           "per": "",
+          "total": 90,
           "units": "ft",
           "value": "90"
         },
@@ -562,13 +639,15 @@
           "type": "",
           "value": ""
         },
+        "totalWeight": "L",
         "usage": {
           "per": "shot",
-          "value": 4
+          "value": 2
         },
         "uses": {
           "max": "",
           "per": "",
+          "total": 0,
           "value": null
         },
         "weaponCategory": "laser",
@@ -576,20 +655,20 @@
       }
     },
     {
-      "_id": "64wUEbgFZLbyx5hF",
-      "name": "Compression (Ex)",
+      "_id": "wutIx6GuzhM5q7DH",
+      "name": "Jam Shot (Ex)",
       "type": "feat",
-      "img": "icons/creatures/slimes/slime-giant-face-eyes.webp",
+      "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
-        "ability": null,
+        "ability": "",
         "abilityMods": {
           "parts": []
         },
         "actionTarget": "",
-        "actionType": "",
+        "actionType": "other",
         "activation": {
-          "type": "",
+          "type": "action",
           "condition": "",
           "cost": 0
         },
@@ -597,8 +676,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": "",
-          "value": null
+          "units": "ft",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -607,7 +686,24 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [
+            {
+              "name": "",
+              "formula": "floor(@details.level.value * 2)",
+              "group": null,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": true,
+                "healing": false,
+                "piercing": false,
+                "slashing": false,
+                "sonic": false
+              }
+            }
+          ]
         },
         "damageNotes": "",
         "description": {
@@ -615,11 +711,12 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>The creature can move through an area as small as one-quarter of its space without squeezing or one-eighth its space when squeezing.</p>\n<p><em>Format</em>: <strong>Other Abilities</strong> compression.</p>"
+          "value": "<p>Once per day as a standard action, the safecracker can apply a small explosive to a 5-foot square. They can trigger this explosive as a reaction when a creature enters this space, dealing fire damage equal to twice the safecracker’s CR, pushing the target back 5 feet into an empty space, and knocking it prone. The creature can attempt a Reflex save (DC = 10 + the safecracker’s CR) to halve the damage and avoid being pushed and knocked prone.</p>"
         },
         "descriptors": {
           "acid": false,
           "air": false,
+          "auditory": false,
           "calling": false,
           "chaotic": false,
           "charm": false,
@@ -639,6 +736,7 @@
           "force": false,
           "good": false,
           "healing": false,
+          "illusion": false,
           "language-dependent": false,
           "lawful": false,
           "light": false,
@@ -656,313 +754,9 @@
           "water": false
         },
         "details": {
-          "category": "universalCreatureRule",
+          "category": "feat",
           "combat": false,
           "specialAbilityType": "ex"
-        },
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "isActive": null,
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "rollNotes": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "AA1 pg. 153",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      }
-    },
-    {
-      "_id": "1jcFPZ1iLwE6cUI3",
-      "name": "Peer into the Unknown (Su)",
-      "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
-      "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
-        "actionTarget": "",
-        "actionType": "",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shapable": false,
-          "shape": "",
-          "units": "",
-          "value": 0
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "damageNotes": "",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>A mysterious hermit can spend 1 Resolve Point to gain +2 on an attack roll, skill check, or saving throw. They can choose to use this ability after success or failure has been determined.</p>"
-        },
-        "descriptors": {
-          "acid": false,
-          "air": false,
-          "auditory": false,
-          "calling": false,
-          "chaotic": false,
-          "charm": false,
-          "cold": false,
-          "compulsion": false,
-          "creation": false,
-          "curse": false,
-          "darkness": false,
-          "death": false,
-          "disease": false,
-          "earth": false,
-          "electricity": false,
-          "emotion": false,
-          "evil": false,
-          "fear": false,
-          "fire": false,
-          "force": false,
-          "good": false,
-          "healing": false,
-          "illusion": false,
-          "language-dependent": false,
-          "lawful": false,
-          "light": false,
-          "mind-affecting": false,
-          "pain": false,
-          "poison": false,
-          "polymorph": false,
-          "radiation": false,
-          "scrying": false,
-          "sense-dependent": false,
-          "shadow": false,
-          "sonic": false,
-          "summoning": false,
-          "teleportation": false,
-          "water": false
-        },
-        "details": {
-          "category": "feat",
-          "combat": false,
-          "specialAbilityType": "su"
-        },
-        "duration": {
-          "units": "text",
-          "value": null
-        },
-        "formula": "",
-        "isActive": null,
-        "modifiers": [
-          {
-            "_id": "827a6b4a-ce73-4f60-aa58-78bc87fbb812",
-            "name": "Peer into the Unknown (Su)",
-            "type": "untyped",
-            "condition": "",
-            "container": {
-              "actorId": "uJ9TfiQuU5hw4TGI",
-              "itemId": "1jcFPZ1iLwE6cUI3"
-            },
-            "effectType": "all-attacks",
-            "enabled": false,
-            "max": 2,
-            "modifier": "2",
-            "modifierType": "formula",
-            "notes": "A mysterious hermit can spend 1 Resolve Point to gain +2 on an attack roll, skill check, or saving throw. They can choose to use this ability after success or failure has been determined.",
-            "source": "",
-            "subtab": "misc",
-            "valueAffected": ""
-          },
-          {
-            "_id": "b0c36cec-9f83-493a-b796-a81c8c9e4127",
-            "name": "Peer into the Unknown (Su)",
-            "type": "untyped",
-            "condition": "",
-            "container": {
-              "actorId": "uJ9TfiQuU5hw4TGI",
-              "itemId": "1jcFPZ1iLwE6cUI3"
-            },
-            "effectType": "all-skills",
-            "enabled": false,
-            "max": 2,
-            "modifier": "2",
-            "modifierType": "formula",
-            "notes": "A mysterious hermit can spend 1 Resolve Point to gain +2 on an attack roll, skill check, or saving throw. They can choose to use this ability after success or failure has been determined.",
-            "source": "",
-            "subtab": "misc",
-            "valueAffected": ""
-          },
-          {
-            "_id": "608f7136-60ed-40ba-b266-91292884333f",
-            "name": "Peer into the Unknown (Su)",
-            "type": "untyped",
-            "condition": "",
-            "container": {
-              "actorId": "uJ9TfiQuU5hw4TGI",
-              "itemId": "1jcFPZ1iLwE6cUI3"
-            },
-            "effectType": "saves",
-            "enabled": false,
-            "max": 2,
-            "modifier": "2",
-            "modifierType": "formula",
-            "notes": "A mysterious hermit can spend 1 Resolve Point to gain +2 on an attack roll, skill check, or saving throw. They can choose to use this ability after success or failure has been determined.",
-            "source": "",
-            "subtab": "misc",
-            "valueAffected": ""
-          }
-        ],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "rollNotes": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      }
-    },
-    {
-      "_id": "ZE8OL1coThwTDUcc",
-      "name": "Weird Surroundings (Su)",
-      "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
-      "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
-        "actionTarget": "",
-        "actionType": "",
-        "activation": {
-          "type": "none",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shapable": false,
-          "shape": "sphere",
-          "units": "mi",
-          "value": "1"
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "damageNotes": "",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>A mysterious hermit has the ability to alter the terrain close to their home. In any location where the hermit has lived for at least 1 year, they can create one of the following effects within a radius of 1 mile: change the local gravity by 1 step, change the local temperature by 1 step, or increase Survival DCs to avoid getting lost by 10. A mysterious hermit can change which effect is active once per day and the change takes effect after 1 day.</p>"
-        },
-        "descriptors": {
-          "acid": false,
-          "air": false,
-          "auditory": false,
-          "calling": false,
-          "chaotic": false,
-          "charm": false,
-          "cold": false,
-          "compulsion": false,
-          "creation": false,
-          "curse": false,
-          "darkness": false,
-          "death": false,
-          "disease": false,
-          "earth": false,
-          "electricity": false,
-          "emotion": false,
-          "evil": false,
-          "fear": false,
-          "fire": false,
-          "force": false,
-          "good": false,
-          "healing": false,
-          "illusion": false,
-          "language-dependent": false,
-          "lawful": false,
-          "light": false,
-          "mind-affecting": false,
-          "pain": false,
-          "poison": false,
-          "polymorph": false,
-          "radiation": false,
-          "scrying": false,
-          "sense-dependent": false,
-          "shadow": false,
-          "sonic": false,
-          "summoning": false,
-          "teleportation": false,
-          "water": false
-        },
-        "details": {
-          "category": "feat",
-          "combat": false,
-          "specialAbilityType": "su"
         },
         "duration": {
           "units": "text",
@@ -984,9 +778,13 @@
         "requirements": "",
         "rollNotes": "",
         "save": {
+          "type": "reflex",
+          "dc": "10 + @details.level.value",
+          "descriptor": "half"
+        },
+        "skillCheck": {
           "type": "",
-          "dc": null,
-          "descriptor": ""
+          "dc": ""
         },
         "source": "",
         "target": {
@@ -1001,10 +799,133 @@
       }
     },
     {
-      "_id": "3DrpceUndzfCqqXD",
-      "name": "Freebooter armor IV",
+      "_id": "rHEvtFzSvjOO6P0v",
+      "name": "Swift Recalibration (Ex)",
+      "type": "feat",
+      "img": "icons/svg/mystery-man.svg",
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": 0
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>The safecracker’s keen eye quickly notes mistakes. They can spend 1 Resolve Point to immediately reroll a failed @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.76u4HnGcAlySicb4]{Engineering} check to @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.76u4HnGcAlySicb4#arm-explosives]{arm explosives}, @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.76u4HnGcAlySicb4#disable-device]{disable a device}, or @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.76u4HnGcAlySicb4#repair-item]{repair an item}, taking the better of the two results.</p>"
+        },
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "auditory": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "illusion": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
+        "duration": {
+          "units": "text",
+          "value": null
+        },
+        "formula": "",
+        "isActive": null,
+        "modifiers": [],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "RMZYR7UACkY46x2Y",
+      "name": "Carbon skin, white carbon",
       "type": "equipment",
-      "img": "systems/sfrpg/icons/equipment/armor/freebooter-armor-4.webp",
+      "img": "systems/sfrpg/icons/equipment/armor/carbon-skin-white-graphite.webp",
       "system": {
         "type": "",
         "ability": null,
@@ -1028,10 +949,10 @@
         },
         "armor": {
           "type": "light",
-          "acp": 0,
-          "dex": 6,
-          "eac": 17,
-          "kac": 18,
+          "acp": -1,
+          "dex": 5,
+          "eac": 12,
+          "kac": 14,
           "speedAdjust": 0
         },
         "attackBonus": 0,
@@ -1044,17 +965,17 @@
             "mod": ""
           },
           "hardness": {
-            "value": "33"
+            "value": "25"
           },
           "hp": {
-            "max": "57",
-            "value": 57
+            "max": "45",
+            "value": 45
           },
           "size": "medium",
           "sturdy": true
         },
         "attuned": false,
-        "bulk": "L",
+        "bulk": "1",
         "capacity": {
           "max": 0,
           "value": 0
@@ -1072,7 +993,7 @@
                 "weapon"
               ],
               "affectsEncumbrance": true,
-              "amount": 4,
+              "amount": 3,
               "subtype": "armorUpgrade",
               "weightProperty": "slots"
             }
@@ -1091,7 +1012,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>Popularized by the Free Captains of @UUID[Compendium.sfrpg.setting.Yt2xT4Iy6lHjCzso]{The Diaspora}, freebooter armor features an armored jacket or breastplate, heavy boots and gloves, numerous straps and hidden weapons, and a helmet. Novice explorers and mercenaries beginning their career sometimes choose freebooter armor for the air of rakish experience this light armor lends its wearer.</p>"
+          "value": "<p>Though these suits of light armor appear to be made of stiff fabric, they are actually woven from carbon fibers. Higher-quality carbon skins are reinforced with carbon allotypes, such as white carbon or diamond, and the heightened sheen of the fabric hints at their expensive construction.</p>"
         },
         "descriptors": [],
         "duration": {
@@ -1103,9 +1024,9 @@
         "formula": "",
         "identified": true,
         "isActive": null,
-        "level": 14,
+        "level": 10,
         "modifiers": [],
-        "price": 60600,
+        "price": 19650,
         "proficient": false,
         "quantity": 1,
         "quantityPerPack": 1,
@@ -1143,88 +1064,8 @@
       }
     },
     {
-      "_id": "SgnoTtoLU9wUZsir",
-      "name": "Battery",
-      "type": "ammunition",
-      "flags": {
-        "core": {
-          "sourceId": "Actor.uJ9TfiQuU5hw4TGI.Item.SgnoTtoLU9wUZsir"
-        }
-      },
-      "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
-      "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "ammunitionType": "charge",
-        "attributes": {
-          "ac": {
-            "value": ""
-          },
-          "customBuilt": false,
-          "dex": {
-            "mod": ""
-          },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
-          "size": "medium",
-          "sturdy": false
-        },
-        "attuned": false,
-        "bulk": "-",
-        "capacity": {
-          "max": 20,
-          "value": 20
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 20</p>"
-        },
-        "equippable": false,
-        "equipped": false,
-        "identified": true,
-        "level": 1,
-        "price": 60,
-        "quantity": 1,
-        "quantityPerPack": 1,
-        "source": "Core Rulebook",
-        "specialMaterials": {
-          "abysium": false,
-          "adamantine": false,
-          "coldiron": false,
-          "diatha": false,
-          "djezet": false,
-          "horacalcum": false,
-          "inubrix": false,
-          "khefak": false,
-          "noqual": false,
-          "nyblantine": false,
-          "purplecores": false,
-          "siccatite": false,
-          "silver": false,
-          "voidglass": false
-        },
-        "useCapacity": true
-      }
-    },
-    {
-      "_id": "8VycSjZvbyzxgKut",
-      "name": "Laser pistol, parallax",
+      "_id": "2nhEAcMIJI60qWeN",
+      "name": "Laser pistol, aphelion",
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/laser-pistol-azimuth.webp",
       "system": {
@@ -1258,11 +1099,11 @@
             "mod": ""
           },
           "hardness": {
-            "value": "33"
+            "value": "23"
           },
           "hp": {
-            "max": "57",
-            "value": 57
+            "max": "42",
+            "value": 42
           },
           "size": "medium",
           "sturdy": true
@@ -1270,8 +1111,8 @@
         "attuned": false,
         "bulk": "L",
         "capacity": {
-          "max": 80,
-          "value": 80
+          "max": 40,
+          "value": 40
         },
         "chatFlavor": "",
         "container": {
@@ -1285,7 +1126,7 @@
                 "fusion"
               ],
               "affectsEncumbrance": true,
-              "amount": 14,
+              "amount": 9,
               "subtype": "fusion",
               "weightProperty": "level"
             },
@@ -1297,7 +1138,6 @@
               "affectsEncumbrance": true,
               "amount": 1,
               "subtype": "",
-              "weightMultiplier": 1,
               "weightProperty": ""
             },
             {
@@ -1313,14 +1153,14 @@
           ]
         },
         "critical": {
-          "effect": "Burn 3d4",
+          "effect": "Burn 1d4",
           "parts": []
         },
         "damage": {
           "parts": [
             {
               "name": "",
-              "formula": "5d4",
+              "formula": "3d4",
               "group": null,
               "types": {
                 "acid": false,
@@ -1353,10 +1193,12 @@
         "equipped": false,
         "formula": "",
         "identified": true,
+        "img": "systems/sfrpg/icons/equipment/weapons/laser-pistol-azimuth.webp",
         "isActive": null,
-        "level": 14,
+        "isOpen": true,
+        "level": 9,
         "modifiers": [],
-        "price": 82000,
+        "price": 14820,
         "proficient": true,
         "properties": {
           "aeon": false,
@@ -1459,6 +1301,7 @@
         "range": {
           "additional": "",
           "per": "",
+          "total": 90,
           "units": "ft",
           "value": "90"
         },
@@ -1494,13 +1337,15 @@
           "type": "",
           "value": ""
         },
+        "totalWeight": "L",
         "usage": {
           "per": "shot",
-          "value": 4
+          "value": 2
         },
         "uses": {
           "max": "",
           "per": "",
+          "total": 0,
           "value": null
         },
         "weaponCategory": "laser",
@@ -1508,15 +1353,12 @@
       }
     },
     {
-      "_id": "GVNOrs4e8eIyyeIJ",
-      "name": "Battery, Super-Capacity",
+      "_id": "6jAaOVDyt91uoFgD",
+      "name": "Battery, High-Capacity",
       "type": "ammunition",
-      "img": "systems/sfrpg/icons/equipment/weapons/battery-super-capacity.webp",
+      "img": "systems/sfrpg/icons/equipment/weapons/battery-high-capacity.webp",
       "system": {
         "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "ammunitionType": "charge",
         "attributes": {
           "ac": {
@@ -1539,11 +1381,8 @@
         "attuned": false,
         "bulk": "-",
         "capacity": {
-          "max": 80,
-          "value": 80
-        },
-        "critical": {
-          "parts": []
+          "max": 40,
+          "value": 40
         },
         "damage": {
           "parts": []
@@ -1553,37 +1392,22 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 80</p>"
+          "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 40</p>"
         },
         "equippable": false,
         "equipped": false,
         "identified": true,
         "level": 4,
-        "price": 390,
+        "price": 330,
         "quantity": 1,
         "quantityPerPack": 1,
         "source": "Core Rulebook",
-        "specialMaterials": {
-          "abysium": false,
-          "adamantine": false,
-          "coldiron": false,
-          "diatha": false,
-          "djezet": false,
-          "horacalcum": false,
-          "inubrix": false,
-          "khefak": false,
-          "noqual": false,
-          "nyblantine": false,
-          "purplecores": false,
-          "siccatite": false,
-          "silver": false,
-          "voidglass": false
-        },
+        "specialMaterials": {},
         "useCapacity": true
       }
     },
     {
-      "_id": "qU7ZnVNthvuxM0Li",
+      "_id": "CnVrpTQDPufvyKxT",
       "name": "Loot",
       "type": "container",
       "img": "icons/svg/item-bag.svg",
@@ -1612,23 +1436,27 @@
         "container": {
           "contents": [
             {
-              "id": "3DrpceUndzfCqqXD",
+              "id": "RMZYR7UACkY46x2Y",
               "index": 0
             },
             {
-              "id": "8VycSjZvbyzxgKut",
+              "id": "2nhEAcMIJI60qWeN",
               "index": 0
             },
             {
-              "id": "GVNOrs4e8eIyyeIJ",
+              "id": "6jAaOVDyt91uoFgD",
               "index": 0
             },
             {
-              "id": "ldJLWuKBKTQu0IVv",
+              "id": "hPhgTSVR1NitRJ0U",
               "index": 0
             },
             {
-              "id": "SgnoTtoLU9wUZsir",
+              "id": "EBK85jtNGCUD5KJs",
+              "index": 0
+            },
+            {
+              "id": "M2vMukx1yIWjfRYo",
               "index": 0
             }
           ],
@@ -1680,17 +1508,17 @@
       }
     },
     {
-      "_id": "lpHVastw8B0q7dqE",
-      "name": "Change Form",
-      "type": "feat",
+      "_id": "cIwpedaQYXCd7pdp",
+      "name": "LFAN",
+      "type": "augmentation",
       "flags": {
         "core": {
-          "sourceId": "Compendium.sfrpg.racial-features.VY40amXS8nx7pTRY"
+          "sourceId": "Compendium.sfrpg.racial-features.oqsObKnxzFKUOb5u"
         }
       },
       "img": "icons/svg/mystery-man.svg",
       "system": {
-        "type": "",
+        "type": "biotech",
         "ability": null,
         "abilityMods": {
           "parts": []
@@ -1698,7 +1526,7 @@
         "actionTarget": "",
         "actionType": "",
         "activation": {
-          "type": "action",
+          "type": "",
           "condition": "",
           "cost": 0
         },
@@ -1706,11 +1534,37 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": "none",
-          "value": null
+          "units": "",
+          "value": 0
         },
         "attackBonus": 0,
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "tiny",
+          "sturdy": false
+        },
+        "attuned": false,
+        "bulk": "-",
         "chatFlavor": "",
+        "container": {
+          "contents": [],
+          "includeContentsInWealthCalculation": true,
+          "isOpen": true,
+          "storage": []
+        },
         "critical": {
           "effect": "",
           "parts": []
@@ -1724,108 +1578,55 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>As a standard action, an astrazoan can physically alter their form to look like any Medium creature, as long as they have seen a similar creature before. They can attempt to either mimic a specific creature or look like a general creature of the chosen type. The astrazoan gains a +10 bonus to @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.aayAhTaRzitONs5U]{Disguise} checks to appear as a creature of the type and subtype of the new form. The DC of the astrazoan’s Disguise check is not modified as a result of altering major features or if they disguise themself as an aberration or a humanoid (though the DC is still modified if the astrazoan attempts to disguise themself as a different creature type). The astrazoan can remain in an alternate form indefinitely (or until they take another form).</p>"
+          "value": "<p>An LFAN, or Lifting Floret Activation Network, is a biotech augmentation that looks like a cluster of artificial, prehensile “vines” attached to a raxilite’s brain system (the raxilite can add one other brain augmentation to the LFAN). The LFAN is as dexterous and strong as a @UUID[Compendium.sfrpg.races.AMBcyDZDtJ1OOzh3]{Human} hand, and the vines can extend and retract, allowing a raxilite to use one-handed items as if they were a Medium creature with a reach of 5 feet.</p>"
         },
-        "descriptors": {
-          "acid": false,
-          "air": false,
-          "calling": false,
-          "chaotic": false,
-          "charm": false,
-          "cold": false,
-          "compulsion": false,
-          "creation": false,
-          "curse": false,
-          "darkness": false,
-          "death": false,
-          "disease": false,
-          "earth": false,
-          "electricity": false,
-          "emotion": false,
-          "evil": false,
-          "fear": false,
-          "fire": false,
-          "force": false,
-          "good": false,
-          "healing": false,
-          "language-dependent": false,
-          "lawful": false,
-          "light": false,
-          "mind-affecting": false,
-          "pain": false,
-          "poison": false,
-          "radiation": false,
-          "scrying": false,
-          "sense-dependent": false,
-          "shadow": false,
-          "summoning": false,
-          "teleportation": false,
-          "water": false
-        },
-        "details": {
-          "category": "speciesFeature",
-          "combat": false,
-          "specialAbilityType": ""
-        },
+        "descriptors": [],
         "duration": {
           "units": "",
-          "value": ""
+          "value": null
         },
+        "equippable": true,
+        "equipped": true,
         "formula": "",
+        "identified": true,
         "isActive": null,
-        "modifiers": [
-          {
-            "_id": "2b67683b-f116-44b2-b3ca-89304ea20be8",
-            "name": "Change Form",
-            "type": "racial",
-            "condition": "",
-            "effectType": "skill",
-            "enabled": true,
-            "max": 10,
-            "modifier": "10",
-            "modifierType": "constant",
-            "notes": "The astrazoan gains a +10 bonus to Disguise checks to appear as a creature of the type and subtype of the new form. The DC of the astrazoan’s Disguise check is not modified as a result of altering major features or if they disguise themself as an aberration or a humanoid (though the DC is still modified if the astrazoan attempts to disguise themself as a different creature type).",
-            "source": "Racial",
-            "subtab": "misc",
-            "valueAffected": "dis"
-          }
-        ],
+        "level": 1,
+        "modifiers": [],
+        "price": 0,
+        "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
-          "units": "none",
+          "units": "",
           "value": null
         },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "Astrazoan",
         "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
           "descriptor": ""
         },
-        "source": "PW pg. 210",
+        "source": "IS pg. 110",
+        "system": "brain",
         "target": {
           "type": "",
-          "value": ""
+          "value": null
         },
         "uses": {
-          "max": null,
-          "per": "day",
-          "value": null
+          "max": 0,
+          "per": null,
+          "value": 0
         }
       }
     },
     {
-      "_id": "TuzDndm4jHrivsa6",
-      "name": "Many Forms",
+      "_id": "kzPXOFG0H1jBrPqn",
+      "name": "LFAN Symbiosis",
       "type": "feat",
       "flags": {
         "core": {
-          "sourceId": "Compendium.sfrpg.racial-features.7A0l27W4UNvqHTtM"
+          "sourceId": "Compendium.sfrpg.racial-features.6hAY9u2JfExQdoax"
         }
       },
       "img": "icons/svg/mystery-man.svg",
@@ -1864,7 +1665,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>For effects targeting creatures by type, astrazoans count as both aberrations and humanoids.</p>"
+          "value": "<p>When two or more raxilites share the same 5-foot space, they can use their LFANs together, allowing them to handle larger objects. Up to four raxilites can work together in this way, each acting as one hand.</p>"
         },
         "descriptors": {
           "acid": false,
@@ -1924,35 +1725,35 @@
           "charged": false,
           "value": null
         },
-        "requirements": "Astrazoan",
+        "requirements": "Raxilite",
         "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
           "descriptor": ""
         },
-        "source": "PW pg. 210",
+        "source": "AA3 pg. 83",
         "target": {
           "type": "",
           "value": ""
         },
         "uses": {
           "max": null,
-          "per": "day",
+          "per": "",
           "value": null
         }
       }
     },
     {
-      "_id": "ldJLWuKBKTQu0IVv",
-      "name": "Living staff, advanced",
+      "_id": "hPhgTSVR1NitRJ0U",
+      "name": "Handaxe, sintered",
       "type": "weapon",
       "flags": {
         "core": {
-          "sourceId": "Compendium.sfrpg.equipment.17kk2s6iC9DR2v22"
+          "sourceId": "Compendium.sfrpg.equipment.RYLSMaocgpOtRNUr"
         }
       },
-      "img": "icons/weapons/staves/staff-vines-green.webp",
+      "img": "icons/weapons/axes/axe-broad-worn-blue.webp",
       "system": {
         "type": "",
         "ability": "str",
@@ -1966,7 +1767,7 @@
           "condition": "",
           "cost": null
         },
-        "ammunitionType": "charge",
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shapable": false,
@@ -1984,20 +1785,20 @@
             "mod": ""
           },
           "hardness": {
-            "value": "29"
+            "value": "23"
           },
           "hp": {
-            "max": "51",
-            "value": 51
+            "max": "42",
+            "value": 42
           },
           "size": "medium",
           "sturdy": true
         },
         "attuned": false,
-        "bulk": "1",
+        "bulk": "L",
         "capacity": {
-          "max": 20,
-          "value": 20
+          "max": null,
+          "value": null
         },
         "chatFlavor": "",
         "container": {
@@ -2011,19 +1812,9 @@
                 "fusion"
               ],
               "affectsEncumbrance": true,
-              "amount": 12,
+              "amount": 9,
               "subtype": "fusion",
               "weightProperty": "level"
-            },
-            {
-              "type": "slot",
-              "acceptsType": [
-                "ammunition"
-              ],
-              "affectsEncumbrance": true,
-              "amount": 1,
-              "subtype": "ammunitionSlot",
-              "weightProperty": ""
             },
             {
               "type": "slot",
@@ -2033,30 +1824,29 @@
               "affectsEncumbrance": true,
               "amount": 1,
               "subtype": "",
-              "weightMultiplier": 1,
               "weightProperty": ""
             }
           ]
         },
         "critical": {
-          "effect": "Bind",
+          "effect": "",
           "parts": []
         },
         "damage": {
           "parts": [
             {
               "name": "",
-              "formula": "4d6 + @abilities.str.mod",
+              "formula": "2d6 + @abilities.str.mod",
               "group": null,
               "types": {
                 "acid": false,
-                "bludgeoning": true,
+                "bludgeoning": false,
                 "cold": false,
                 "electricity": false,
                 "fire": false,
                 "healing": false,
                 "piercing": false,
-                "slashing": false,
+                "slashing": true,
                 "sonic": false
               }
             }
@@ -2068,7 +1858,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>Xenodruids developed the living staff, a gnarled and vineswathed pole, to use as a weapon and a sign of their allegiance. The staff itself can extend, and the vines can wrap around and entangle a target. Xenodruids on sentinel duty favor the tactical and advanced models. The elite and paragon models are more common among highly skilled warrior-mystics undertaking assault missions.</p>"
+          "value": "<p>A balanced, wedge-shaped blade affixed to a lightweight haft, a handaxe can be wielded in melee or thrown. The flexibility of handaxes makes them a favorite of explorers of all types, and the basic handaxe is a common tool that can be used as a weapon. A tactical handaxe is made of a stronger, lightweight alloy, while the sintered handaxe uses a denser ceramic material for added heft and a much keener edge. An ultrathin handaxe has a blade so thin it can’t be seen clearly, while the molecular rift handaxe has a blade narrow enough to slice between molecules. Most handaxes have blade covers to prevent accidental injury to the wielder.</p>"
         },
         "descriptors": [],
         "duration": {
@@ -2079,21 +1869,23 @@
         "equipped": false,
         "formula": "",
         "identified": true,
+        "img": "icons/weapons/axes/axe-broad-worn-blue.webp",
         "isActive": null,
-        "level": 12,
+        "isOpen": true,
+        "level": 9,
         "modifiers": [],
-        "price": 39500,
+        "price": 12500,
         "proficient": true,
         "properties": {
           "aeon": false,
           "amm": false,
-          "analog": false,
+          "analog": true,
           "antibiological": false,
           "archaic": false,
           "aurora": false,
           "automatic": false,
           "blast": false,
-          "block": true,
+          "block": false,
           "boost": false,
           "breach": false,
           "breakdown": false,
@@ -2132,7 +1924,7 @@
           "instrumental": false,
           "integrated": false,
           "line": false,
-          "living": true,
+          "living": false,
           "lockdown": false,
           "mind-affecting": false,
           "mine": false,
@@ -2140,18 +1932,18 @@
           "modal": false,
           "necrotic": false,
           "nonlethal": false,
-          "one": false,
+          "one": true,
           "operative": false,
           "penetrating": false,
           "polarize": false,
           "polymorphic": false,
-          "powered": true,
+          "powered": false,
           "professional": false,
           "propel": false,
           "punchGun": false,
           "qreload": false,
           "radioactive": false,
-          "reach": true,
+          "reach": false,
           "recall": false,
           "regrowth": false,
           "relic": false,
@@ -2170,10 +1962,10 @@
           "teleportive": false,
           "thought": false,
           "throttle": false,
-          "thrown": false,
+          "thrown": true,
           "thruster": false,
           "trip": false,
-          "two": true,
+          "two": false,
           "unbalancing": false,
           "underwater": false,
           "unwieldy": false,
@@ -2185,8 +1977,9 @@
         "range": {
           "additional": "",
           "per": "",
+          "total": 30,
           "units": "ft",
-          "value": "10"
+          "value": "30"
         },
         "rollNotes": "",
         "save": {
@@ -2198,7 +1991,7 @@
           "type": "",
           "dc": ""
         },
-        "source": "AR pg. 9",
+        "source": "AR pg. 8",
         "special": "",
         "specialMaterials": {
           "abysium": false,
@@ -2220,13 +2013,15 @@
           "type": "",
           "value": ""
         },
+        "totalWeight": "L",
         "usage": {
-          "per": "minute",
-          "value": 1
+          "per": "",
+          "value": null
         },
         "uses": {
           "max": "",
           "per": "",
+          "total": 0,
           "value": null
         },
         "weaponCategory": "uncategorized",
@@ -2234,16 +2029,18 @@
       }
     },
     {
-      "_id": "XhR57shCb4ldRK4y",
-      "name": "Battery",
-      "type": "ammunition",
-      "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
+      "_id": "EBK85jtNGCUD5KJs",
+      "name": "Laser Drill",
+      "type": "technological",
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.sfrpg.equipment.tOtmTsXNEattXits"
+        }
+      },
+      "img": "systems/sfrpg/icons/equipment/technological%20items/lazer-drill.webp",
       "system": {
         "type": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "ammunitionType": "charge",
+        "ammunitionType": "",
         "attributes": {
           "ac": {
             "value": ""
@@ -2263,13 +2060,16 @@
           "sturdy": false
         },
         "attuned": false,
-        "bulk": "-",
+        "bulk": "L",
         "capacity": {
           "max": 20,
           "value": 20
         },
-        "critical": {
-          "parts": []
+        "container": {
+          "contents": [],
+          "includeContentsInWealthCalculation": 1,
+          "isOpen": true,
+          "storage": []
         },
         "damage": {
           "parts": []
@@ -2279,46 +2079,40 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 20</p>"
+          "value": "<p>A laser drill is a handheld item that resembles a snub-nosed pistol. As a standard action, you can use the drill to create a hole 1 inch in diameter and 1 inch deep in stationary and unattended materials with a hardness of 15 or less, such as concrete, plastic, or wood. At the GM’s discretion, you might be able to use a laser drill on harder materials as a full action or longer. Detecting a laser drill at work requires a successful DC 15 Perception check. A laser drill isn’t generally useful in combat, but it can deal 1 fire damage with a successful melee attack as an improvised weapon.</p>"
         },
         "equippable": false,
         "equipped": false,
+        "hands": 1,
         "identified": true,
         "level": 1,
-        "price": 60,
+        "modifiers": [],
+        "price": 200,
         "quantity": 1,
         "quantityPerPack": 1,
-        "source": "Core Rulebook",
-        "specialMaterials": {
-          "abysium": false,
-          "adamantine": false,
-          "coldiron": false,
-          "diatha": false,
-          "djezet": false,
-          "horacalcum": false,
-          "inubrix": false,
-          "khefak": false,
-          "noqual": false,
-          "nyblantine": false,
-          "purplecores": false,
-          "siccatite": false,
-          "silver": false,
-          "voidglass": false
-        },
-        "useCapacity": true
+        "source": "Armory",
+        "usage": {
+          "per": "minute",
+          "value": 1
+        }
       }
     },
     {
-      "_id": "Mv5eWiS94uekm0LR",
-      "name": "Battery, Super-Capacity",
-      "type": "ammunition",
-      "img": "systems/sfrpg/icons/equipment/weapons/battery-super-capacity.webp",
+      "_id": "M2vMukx1yIWjfRYo",
+      "name": "Microgoggles",
+      "type": "technological",
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.sfrpg.equipment.udNcraaEiSx4US0r"
+        }
+      },
+      "img": "systems/sfrpg/icons/equipment/technological%20items/microgoggles.webp",
       "system": {
         "type": "",
         "abilityMods": {
           "parts": []
         },
-        "ammunitionType": "charge",
+        "ammunitionType": "",
         "attributes": {
           "ac": {
             "value": ""
@@ -2332,16 +2126,22 @@
           },
           "hp": {
             "max": "",
-            "value": 6
+            "value": 7
           },
           "size": "medium",
           "sturdy": false
         },
         "attuned": false,
-        "bulk": "-",
+        "bulk": "1",
         "capacity": {
-          "max": 80,
-          "value": 80
+          "max": 20,
+          "value": 20
+        },
+        "container": {
+          "contents": [],
+          "includeContentsInWealthCalculation": true,
+          "isOpen": true,
+          "storage": []
         },
         "critical": {
           "parts": []
@@ -2354,38 +2154,43 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 80</p>"
+          "value": "<p>This bulky set of goggles functions as a lighted magnifying glass or microscope, allowing you to see exceptionally small details with adjustable levels of magnification. Microgoggles provide a +2 insight bonus to any skill use that benefits from exceedingly close vision, such as detecting complicated forgeries or crafting @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Drugs} or medicinals.</p>"
         },
-        "equippable": false,
+        "equippable": true,
         "equipped": false,
+        "hands": null,
         "identified": true,
-        "level": 4,
-        "price": 390,
+        "level": 2,
+        "modifiers": [
+          {
+            "_id": "97e5f358-96bd-4ed3-8969-a4822c0c1531",
+            "name": "Microgoggles",
+            "type": "insight",
+            "condition": "",
+            "effectType": "all-skills",
+            "enabled": true,
+            "max": 2,
+            "modifier": "2",
+            "modifierType": "formula",
+            "notes": "Microgoggles provide a +2 insight bonus to any skill use that benefits from exceedingly close vision, such as detecting complicated forgeries or crafting Drugs or medicinals.",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": ""
+          }
+        ],
+        "price": 900,
         "quantity": 1,
         "quantityPerPack": 1,
-        "source": "Core Rulebook",
-        "specialMaterials": {
-          "abysium": false,
-          "adamantine": false,
-          "coldiron": false,
-          "diatha": false,
-          "djezet": false,
-          "horacalcum": false,
-          "inubrix": false,
-          "khefak": false,
-          "noqual": false,
-          "nyblantine": false,
-          "purplecores": false,
-          "siccatite": false,
-          "silver": false,
-          "voidglass": false
-        },
-        "useCapacity": true
+        "source": "CRB pg. 105",
+        "usage": {
+          "per": "hour",
+          "value": 1
+        }
       }
     }
   ],
   "prototypeToken": {
-    "name": "Mysterious Hermit",
+    "name": "Safecracker",
     "actorLink": false,
     "alpha": 1,
     "bar1": {
@@ -2450,42 +2255,42 @@
   "system": {
     "abilities": {
       "cha": {
-        "base": 4,
+        "base": 1,
         "min": 3,
         "misc": 0,
         "mod": 0,
         "value": 10
       },
       "con": {
-        "base": 0,
+        "base": 3,
         "min": 3,
         "misc": 0,
         "mod": 0,
         "value": 10
       },
       "dex": {
-        "base": 6,
+        "base": 5,
         "min": 3,
         "misc": 0,
         "mod": 0,
         "value": 10
       },
       "int": {
-        "base": 4,
+        "base": 8,
         "min": 3,
         "misc": 0,
         "mod": 0,
         "value": 10
       },
       "str": {
-        "base": 0,
+        "base": 3,
         "min": 3,
         "misc": 0,
         "mod": 0,
         "value": 10
       },
       "wis": {
-        "base": 8,
+        "base": 1,
         "min": 3,
         "misc": 0,
         "mod": 0,
@@ -2512,42 +2317,42 @@
         "value": 10
       },
       "eac": {
-        "base": 27,
+        "base": 23,
         "min": 0,
         "tooltip": [],
         "value": 10
       },
       "fort": {
-        "base": 12,
+        "base": 11,
         "bonus": 0,
         "misc": 0,
         "tooltip": [],
         "value": 0
       },
       "hp": {
-        "max": 215,
+        "max": 150,
         "min": 0,
         "temp": null,
         "tempmax": null,
         "tooltip": [],
-        "value": 215
+        "value": 150
       },
       "init": {
         "bonus": 0,
         "tooltip": [],
         "total": 0,
-        "value": 6
+        "value": 5
       },
       "kac": {
-        "base": 28,
+        "base": 24,
         "min": 0,
         "tooltip": [],
         "value": 10
       },
       "keyability": "",
-      "reach": "5",
+      "reach": "0 ft.",
       "reflex": {
-        "base": 12,
+        "base": 13,
         "bonus": 0,
         "misc": 0,
         "tooltip": [],
@@ -2559,7 +2364,7 @@
         "tooltip": [],
         "value": 5
       },
-      "space": "5",
+      "space": "2-1/2 ft.",
       "speed": {
         "burrowing": {
           "base": 0
@@ -2583,7 +2388,7 @@
       },
       "spellcasting": "",
       "will": {
-        "base": 19,
+        "base": 9,
         "bonus": 0,
         "misc": 0,
         "tooltip": [],
@@ -2658,8 +2463,8 @@
       "upb": 0
     },
     "details": {
-      "type": "Aberration",
-      "alignment": "CN",
+      "type": "Plant",
+      "alignment": "NE",
       "aura": "",
       "biography": {
         "age": 0,
@@ -2671,12 +2476,12 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<h2>SURVIVALISTS</h2><p>Survivalists are defined by independence and self-sufficiency. They often expertly navigate specific types of hostile or dangerous terrain: forests, deserts, or more remote locales such as dead space or post-apocalyptic cityscapes. Survivalists generally don’t rely on others and commonly live and work alone. However, the following statistics can represent hunters and warriors within a community as well as hermits. A survivalist might have some kind of sentient companion or a creature companion, such as a beast of burden or a hunting beast. A survivalist might arrive at a critical moment to help PCs as they travel through a barren wasteland. Alternatively, a survivalist makes an excellent antagonist in a wilderness setting since they’re capable of using every aspect of the environment against their foes.</p><h3>MYSTERIOUS HERMIT</h3><p>For one reason or another, mysterious hermits isolate themselves from civilization. Perhaps a hermit chose isolation to better focus on their studies, or perhaps they fled their home after being persecuted for performing horrible experiments on the local populace.</p>\n<p>Locating a hermit and convincing them to share their knowledge requires seekers to travel to remote, dangerous locales simply for the chance of receiving a hermit’s aid. Hermits can have a range of reactions to others seeking them; they might be grateful for some brief company, or be violently distrustful of those who seek their knowledge.</p>",
+        "value": "<h2>THIEVES</h2><p>Thieves are common throughout the galaxy, though more numerous in larger cities and space stations. They have a variety of methods and motivations for snaring others’ property; some thieves strike back against an amoral corporate system that left them behind, while others selfishly prey on those with little power to defend their possessions. PCs can encounter thieves in numerous circumstances, whether as unsavory associates, crafty foes, or on-again-off-again allies and rivals.</p><h3>SAFECRACKER</h3><p>Safecrackers specialize in getting into vaults and other secured locations, often working with a small team. Some safecrackers go after treasures like gemstones and art objects, while others target less-tangible things, such as corporate secrets. The PCs might encounter a safecracker if they interrupt a robbery while on another mission, or might be asked to investigate a break-in after it occurs.</p>",
         "weight": ""
       },
       "class": "",
       "combatRole": "",
-      "cr": 14,
+      "cr": 10,
       "environment": "",
       "organization": "",
       "organizationSize": {
@@ -2684,9 +2489,9 @@
         "min": 1
       },
       "race": "",
-      "raceAndGrafts": "Astrazoan",
-      "source": "IS pg. 183",
-      "subtype": "Shapechanger",
+      "raceAndGrafts": "Raxilite",
+      "source": "IS pg. 184",
+      "subtype": "",
       "xp": {
         "value": 10
       }
@@ -2722,24 +2527,24 @@
       },
       "blu": {
         "ability": "cha",
-        "enabled": false,
+        "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
         "min": 0,
         "misc": 0,
         "mod": 0,
-        "ranks": 0,
+        "ranks": 24,
         "value": 0
       },
       "com": {
         "ability": "int",
-        "enabled": false,
+        "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
         "min": 0,
         "misc": 0,
         "mod": 0,
-        "ranks": 0,
+        "ranks": 24,
         "value": 0
       },
       "cul": {
@@ -2777,13 +2582,13 @@
       },
       "eng": {
         "ability": "int",
-        "enabled": false,
+        "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
         "min": 0,
         "misc": 0,
         "mod": 0,
-        "ranks": 0,
+        "ranks": 24,
         "value": 0
       },
       "int": {
@@ -2799,13 +2604,13 @@
       },
       "lsc": {
         "ability": "int",
-        "enabled": true,
+        "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
         "min": 0,
         "misc": 0,
         "mod": 0,
-        "ranks": 30,
+        "ranks": 0,
         "value": 0
       },
       "med": {
@@ -2821,13 +2626,13 @@
       },
       "mys": {
         "ability": "wis",
-        "enabled": true,
+        "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
         "min": 0,
         "misc": 0,
         "mod": 0,
-        "ranks": 30,
+        "ranks": 0,
         "value": 0
       },
       "per": {
@@ -2838,18 +2643,18 @@
         "min": 0,
         "misc": 0,
         "mod": 0,
-        "ranks": 25,
+        "ranks": 24,
         "value": 0
       },
       "phs": {
         "ability": "int",
-        "enabled": false,
+        "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
         "min": 0,
         "misc": 0,
         "mod": 0,
-        "ranks": 0,
+        "ranks": 19,
         "value": 0
       },
       "pil": {
@@ -2877,13 +2682,13 @@
       },
       "sen": {
         "ability": "wis",
-        "enabled": false,
+        "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
         "min": 0,
         "misc": 0,
         "mod": 0,
-        "ranks": 0,
+        "ranks": 19,
         "value": 0
       },
       "sle": {
@@ -2910,13 +2715,13 @@
       },
       "sur": {
         "ability": "wis",
-        "enabled": true,
+        "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
         "min": 0,
         "misc": 0,
         "mod": 0,
-        "ranks": 25,
+        "ranks": 0,
         "value": 0
       }
     },
@@ -2979,14 +2784,21 @@
         "value": []
       },
       "languages": {
-        "custom": "Up To 4 Others",
+        "custom": "",
         "value": [
+          "akitonian",
           "aklo",
-          "common"
+          "castrovelian",
+          "common",
+          "raxi",
+          "triaxian",
+          "vercite",
+          "vesk",
+          "ysoki"
         ]
       },
-      "senses": "darkvision 60 ft.",
-      "size": "medium",
+      "senses": "low-light vision",
+      "size": "tiny",
       "spellResistance": {
         "base": 0
       },
