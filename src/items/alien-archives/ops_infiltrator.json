@@ -715,7 +715,7 @@
           "shapable": false,
           "shape": "",
           "units": "ft",
-          "value": 10
+          "value": "10"
         },
         "attackBonus": 26,
         "attributes": {
@@ -777,7 +777,7 @@
         },
         "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "text",
           "value": ""
         },
         "equippable": true,
@@ -827,11 +827,14 @@
           "gravitation": false,
           "guided": false,
           "harrying": false,
+          "healing": false,
           "holyWater": false,
           "hybrid": false,
+          "hydrodynamic": false,
           "ignite": false,
           "indirect": false,
           "injection": false,
+          "instrumental": false,
           "integrated": false,
           "line": false,
           "living": false,
@@ -888,13 +891,17 @@
           "additional": "",
           "per": "",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "rollNotes": "",
         "save": {
-          "type": "",
+          "type": "will",
           "dc": "",
-          "descriptor": "negate"
+          "descriptor": "disbelieve"
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": ""
         },
         "source": "AR pg. 126",
         "special": "",
@@ -923,7 +930,7 @@
           "value": 0
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "charges",
           "value": 1
         },
@@ -1483,7 +1490,7 @@
               "index": 0
             },
             {
-              "id": "HXlvr8WsQolz0QUV",
+              "id": "RHMKgXWEVRtSmcnQ",
               "index": 0
             }
           ],
@@ -2340,7 +2347,7 @@
       }
     },
     {
-      "_id": "HXlvr8WsQolz0QUV",
+      "_id": "RHMKgXWEVRtSmcnQ",
       "name": "Holo Grenade, Mk 3 (Hybrid)",
       "type": "weapon",
       "flags": {
@@ -2368,7 +2375,7 @@
           "shapable": false,
           "shape": "",
           "units": "ft",
-          "value": 10
+          "value": "10"
         },
         "attackBonus": 0,
         "attributes": {
@@ -2384,7 +2391,7 @@
           },
           "hp": {
             "max": "",
-            "value": 6
+            "value": 36
           },
           "size": "medium",
           "sturdy": true
@@ -2430,7 +2437,7 @@
         },
         "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "text",
           "value": ""
         },
         "equippable": false,
@@ -2480,11 +2487,14 @@
           "gravitation": false,
           "guided": false,
           "harrying": false,
+          "healing": false,
           "holyWater": false,
           "hybrid": false,
+          "hydrodynamic": false,
           "ignite": false,
           "indirect": false,
           "injection": false,
+          "instrumental": false,
           "integrated": false,
           "line": false,
           "living": false,
@@ -2541,13 +2551,17 @@
           "additional": "",
           "per": "",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "rollNotes": "",
         "save": {
+          "type": "will",
+          "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
+          "descriptor": "disbelieve"
+        },
+        "skillCheck": {
           "type": "",
-          "dc": "",
-          "descriptor": "negate"
+          "dc": ""
         },
         "source": "AR pg. 126",
         "special": "",
@@ -2576,7 +2590,7 @@
           "value": 0
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "charges",
           "value": 1
         },
@@ -2585,7 +2599,7 @@
       }
     },
     {
-      "_id": "podoBAStKL3MQnhV",
+      "_id": "2lm4z5u4hthDSvuc",
       "name": "Vocal Modulator",
       "type": "augmentation",
       "flags": {
@@ -2824,7 +2838,7 @@
     },
     "attributes": {
       "abilityDC": {
-        "base": "0"
+        "base": "23"
       },
       "arms": "2",
       "bab": 0,

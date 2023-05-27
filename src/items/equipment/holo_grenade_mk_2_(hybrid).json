@@ -19,9 +19,10 @@
     "ammunitionType": "",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "ft",
-      "value": 10
+      "value": "10"
     },
     "attackBonus": 0,
     "attributes": {
@@ -37,7 +38,7 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": 27
       },
       "size": "medium",
       "sturdy": true
@@ -83,7 +84,7 @@
     },
     "descriptors": [],
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
     "equippable": false,
@@ -133,11 +134,14 @@
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
       "hybrid": false,
+      "hydrodynamic": false,
       "ignite": false,
       "indirect": false,
       "injection": false,
+      "instrumental": false,
       "integrated": false,
       "line": false,
       "living": false,
@@ -194,13 +198,17 @@
       "additional": "",
       "per": "",
       "units": "ft",
-      "value": 20
+      "value": "20"
     },
     "rollNotes": "",
     "save": {
+      "type": "will",
+      "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
+      "descriptor": "disbelieve"
+    },
+    "skillCheck": {
       "type": "",
-      "dc": "",
-      "descriptor": "negate"
+      "dc": ""
     },
     "source": "AR pg. 126",
     "special": "",
@@ -229,7 +237,7 @@
       "value": 0
     },
     "uses": {
-      "max": 1,
+      "max": "1",
       "per": "charges",
       "value": 1
     },

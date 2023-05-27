@@ -19,9 +19,10 @@
     "ammunitionType": "charge",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -37,7 +38,7 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": 18
       },
       "size": "medium",
       "sturdy": true
@@ -73,6 +74,17 @@
           "amount": 1,
           "subtype": "ammunitionSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "weaponAccessory"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
@@ -85,6 +97,7 @@
         {
           "name": "",
           "formula": "1d4",
+          "group": null,
           "types": {
             "acid": true,
             "bludgeoning": false,
@@ -109,7 +122,7 @@
     },
     "descriptors": [],
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
     "equippable": false,
@@ -159,11 +172,14 @@
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
       "hybrid": false,
+      "hydrodynamic": false,
       "ignite": false,
       "indirect": false,
       "injection": true,
+      "instrumental": false,
       "integrated": false,
       "line": false,
       "living": false,
@@ -220,7 +236,7 @@
       "additional": "",
       "per": "",
       "units": "ft",
-      "value": 30
+      "value": "30"
     },
     "rollNotes": "",
     "save": {
@@ -228,7 +244,11 @@
       "dc": "",
       "descriptor": "negate"
     },
-    "source": "Character Operations Manual",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
+    "source": "COM pg. 122",
     "special": "",
     "specialMaterials": {
       "abysium": false,
@@ -255,7 +275,7 @@
       "value": 2
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     },

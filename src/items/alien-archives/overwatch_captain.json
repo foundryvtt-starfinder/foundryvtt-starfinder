@@ -369,10 +369,19 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d8",
-              "operator": "and",
+              "group": null,
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "piercing": false,
+                "slashing": true,
+                "sonic": false
               }
             }
           ]
@@ -506,7 +515,7 @@
         "rollNotes": "",
         "save": {
           "type": "reflex",
-          "dc": "13+@abilities.dex.mod",
+          "dc": "",
           "descriptor": "partial"
         },
         "skillCheck": {
@@ -2923,7 +2932,7 @@
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": "attributes.rp"
     },
     "detectionModes": [],
     "displayBars": 20,
@@ -3025,7 +3034,7 @@
     },
     "attributes": {
       "abilityDC": {
-        "base": "0"
+        "base": "17"
       },
       "arms": "2",
       "bab": 0,
@@ -3081,6 +3090,12 @@
         "base": 14,
         "bonus": 0,
         "misc": 0,
+        "tooltip": [],
+        "value": 0
+      },
+      "rp": {
+        "max": 10,
+        "min": 0,
         "tooltip": [],
         "value": 0
       },
