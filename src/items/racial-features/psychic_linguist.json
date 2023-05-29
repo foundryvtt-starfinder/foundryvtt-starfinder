@@ -1,6 +1,6 @@
 {
-  "_id": "woM4qJwdbZLySu8R",
-  "name": "Amorphous",
+  "_id": "HVPg1Y60CW6cdoXv",
+  "name": "Psychic Linguist",
   "type": "feat",
   "img": "icons/svg/mystery-man.svg",
   "system": {
@@ -20,8 +20,8 @@
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "none",
-      "value": null
+      "units": "",
+      "value": 0
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -38,7 +38,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>This creature has the Amorphous (Ex) universal creature rule (page 152).</p><h2>@UUID[Compendium.sfrpg.universal-creature-rules.WYinJZZxKYueyaY1]{Amorphous (Ex)}</h2><p>The creature’s body is malleable and shapeless. It does not take double damage from critical hits, but it is affected by critical hit effects normally.</p>\n<p><em>Format:</em> <strong>Defensive Abilities</strong> amorphous.</p>"
+      "value": "<p>Thyrs gain a +2 species bonus to Culture checks. Once per day, a thyr can cast @UUID[Compendium.sfrpg.spells.zxecXzHipD4MEoFc]{Comprehend Languages} as a spell-like ability. At 10th level, a thyr can cast @UUID[Compendium.sfrpg.spells.uWKhr01bnKxuNRkL]{Tongues} as a spell-like ability. Their caster level equals their character level.</p>\n<p><em>After adding the spell to the Spellbook tab, edit the spell's Details, changing the Spell Preparation Mode to Innate Spellcasting, and change Limited uses to x of x Day as level allows.</em></p>"
     },
     "descriptors": {
       "acid": false,
@@ -79,43 +79,59 @@
       "water": false
     },
     "details": {
-      "category": "speciesFeature",
+      "category": "feat",
       "combat": false,
       "specialAbilityType": ""
     },
     "duration": {
-      "units": "",
-      "value": ""
+      "units": "text",
+      "value": null
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "ce6a969b-b773-4586-98fb-0e8a6fc82599",
+        "name": "Psychic Linguist",
+        "type": "racial",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "cul"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
-      "units": "none",
+      "units": "",
       "value": null
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "",
+    "requirements": "Thyr",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "",
+    "source": "PoC pg. 22",
     "target": {
       "type": "",
-      "value": ""
+      "value": null
     },
     "uses": {
-      "max": null,
-      "per": "",
-      "value": null
+      "max": 0,
+      "per": null,
+      "value": 0
     }
   }
 }
