@@ -1,27 +1,27 @@
 {
-  "_id": "sk184TPaGA4rjpqz",
-  "name": "Subspecies (Giant)",
+  "_id": "t52fuf0hJxUIG7HC",
+  "name": "Pheromone Cloud",
   "type": "feat",
   "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "",
+    "actionType": "save",
     "activation": {
-      "type": "",
+      "type": "action",
       "condition": "",
       "cost": 0
     },
     "area": {
       "effect": "",
       "shapable": false,
-      "shape": "",
-      "units": "",
-      "value": 0
+      "shape": "sphere",
+      "units": "ft",
+      "value": "5"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -38,7 +38,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>A giant gains additional abilities based on its subspecies.</p><h2>@UUID[Compendium.sfrpg.racial-features.hUmxQJtU0bFVSvQQ]{Fire Giant}</h2><p>Fire giants have fire resistance 5, which stacks with one other source of fire resistance. When wearing armor, their armor check penalty is 1 less severe than normal, and any speed adjustment from the armor is reduced by 5 feet (minimum –0 feet).</p><h2>@UUID[Compendium.sfrpg.racial-features.6Hkxe9THcyi9K2oz]{Hill Giant}</h2><p>Hill giants gain a +2 species bonus to bull rush and grapple combat maneuvers, and they gain a +2 species bonus to AC against bull rush and grapple combat maneuvers.</p><h2>@UUID[Compendium.sfrpg.racial-features.Bqo6LHw6Q1QlWVsH]{Slag Giant}</h2><p>Slag giants have fire resistance 5, which stacks with one other source of fire resistance. They gain a +2 species bonus to sunder combat maneuvers and ignore 5 points of an object’s hardness when dealing damage.</p><h2>@UUID[Compendium.sfrpg.racial-features.zzCYvbd213SjwD5C]{Stone Giant}</h2><p>Stone giants gain darkvision with a range of 60 feet, and they increase the die size of damage dealt by debris they hurl from d6s to d8s.</p>"
+      "value": "<p>Once per day as a standard action, a xulgath can create a stench cloud around themself with a radius of 5 feet for [[/r 1d4]]{1d4 rounds}. Creatures who enter the cloud must attempt a Fortitude save (DC = 10 + the xulgath’s level + their Con modifier) or become @UUID[Compendium.sfrpg.conditions.ZacF0l6IwqBwToTJ]{Sickened} for 1 round. This is a poison effect.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -67,7 +67,7 @@
       "light": false,
       "mind-affecting": false,
       "pain": false,
-      "poison": false,
+      "poison": true,
       "polymorph": false,
       "radiation": false,
       "scrying": false,
@@ -84,38 +84,58 @@
       "specialAbilityType": ""
     },
     "duration": {
-      "units": "text",
-      "value": null
+      "units": "round",
+      "value": "1d4"
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "09f4b672-0ec5-4bec-a0a8-9760003bb7c5",
+        "name": "Ancestral Knowledge",
+        "type": "racial",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "acr"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
-      "value": null
+      "units": "none",
+      "value": ""
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "Giant",
+    "requirements": "Xulgath",
     "rollNotes": "",
     "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": ""
+      "type": "fort",
+      "dc": "10 + @details.level.value + @abilities.con.mod",
+      "descriptor": "negate"
     },
-    "source": "PoC pg. 20",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
+    "source": "PoC pg. 23",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "uses": {
-      "max": 0,
-      "per": null,
-      "value": 0
+      "max": "1",
+      "per": "day",
+      "value": 1
     }
   }
 }
