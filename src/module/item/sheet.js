@@ -99,7 +99,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.config = CONFIG.SFRPG;
 
         // Item Type, Status, and Details
-        data.itemType = game.i18n.format(`TYPES.Item.Type${data.item.type.titleCase()}`);
+        data.itemType = game.i18n.format(`TYPES.Item.${data.item.type}`);
         data.itemStatus = this._getItemStatus();
         data.itemProperties = this._getItemProperties();
         data.isPhysical = data.itemData.hasOwnProperty("quantity");
