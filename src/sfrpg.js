@@ -44,7 +44,7 @@ import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./module
 import { RPC } from "./module/rpc.js";
 import registerSystemRules from "./module/rules.js";
 import { registerSystemSettings } from "./module/system/settings.js";
-import templateOverrides from "./module/template-overrides.js";
+import { MeasuredTemplateSFRPG, TemplateLayerSFRPG } from "./module/template-overrides.js";
 import { preloadHandlebarsTemplates } from "./module/templates.js";
 import { generateUUID } from "./module/utils/utilities.js";
 
@@ -178,6 +178,10 @@ Hooks.once('init', async function() {
     CONFIG.Dice.rolls.unshift(SFRPGRoll);
 
     CONFIG.Token.documentClass = SFRPGTokenDocument;
+
+    CONFIG.Canvas.layers.templates.layerClass = TemplateLayerSFRPG;
+    CONFIG.MeasuredTemplate.objectClass = MeasuredTemplateSFRPG;
+    CONFIG.MeasuredTemplate.defaults.angle = 90; // SF uses 90 degree cones
 
     CONFIG.fontDefinitions["Exo2"] = {
         editor: true,
@@ -380,9 +384,6 @@ Hooks.once("ready", async () => {
 
     console.log("Starfinder | [READY] Overriding token HUD");
     canvas.hud.token = new SFRPGTokenHUD();
-
-    console.log("Starfinder | [READY] Setting up AOE template overrides");
-    templateOverrides();
 
     console.log("Starfinder | [READY] Caching starship actions");
     ActorSheetSFRPGStarship.ensureStarshipActions();
