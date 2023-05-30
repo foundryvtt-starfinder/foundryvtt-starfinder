@@ -6,13 +6,13 @@ import IconEnricher from "./system/enrichers/icon.js";
 export const SFRPG = {};
 
 SFRPG.actorTypes = {
-    "character": "TYPES.Actor.TypeCharacter",
-    "drone": "TYPES.Actor.TypeDrone",
-    "hazard": "TYPES.Actor.TypeHazard",
-    "npc": "TYPES.Actor.TypeNpc",
-    "npc2": "TYPES.Actor.TypeNpc2",
-    "starshop": "TYPES.Actor.TypeStarship",
-    "vehicle": "TYPES.Actor.TypeVehicle"
+    "character": "TYPES.Actor.character",
+    "drone": "TYPES.Actor.drone",
+    "hazard": "TYPES.Actor.hazard",
+    "npc": "TYPES.Actor.npc",
+    "npc2": "TYPES.Actor.npc2",
+    "starship": "TYPES.Actor.starship",
+    "vehicle": "TYPES.Actor.vehicle"
 };
 
 /**
@@ -1636,7 +1636,7 @@ SFRPG.itemTypes = {
     "race": "SFRPG.Items.Categories.Races",
     "theme": "SFRPG.Items.Categories.Themes",
 
-    "actorResource": "TYPES.Item.TypeActorresource",
+    "actorResource": "TYPES.Item.actorResource",
     "feat": "SFRPG.Items.Categories.Feats",
     "spell": "SFRPG.Items.Categories.Spells",
 
@@ -1646,7 +1646,7 @@ SFRPG.itemTypes = {
     "mod": "SFRPG.Items.Categories.DroneMods",
 
     "starshipAblativeArmor": "SFRPG.Items.Categories.StarshipAblativeArmors",
-    "starshipAction": "TYPES.Item.TypeStarshipaction",
+    "starshipAction": "TYPES.Item.starshipAction",
     "starshipArmor": "SFRPG.Items.Categories.StarshipArmors",
     "starshipComputer": "SFRPG.Items.Categories.StarshipComputers",
     "starshipCrewQuarter": "SFRPG.Items.Categories.StarshipCrewQuarters",
@@ -1672,15 +1672,15 @@ SFRPG.itemTypes = {
     "consumable": "SFRPG.Items.Categories.Consumables",
     "container": "SFRPG.Items.Categories.Containers",
     "equipment": "SFRPG.Items.Categories.Armor",
-    "fusion": "TYPES.Item.TypeFusion",
+    "fusion": "TYPES.Item.fusion",
     "goods": "SFRPG.Items.Categories.Goods",
     "hybrid": "SFRPG.Items.Categories.HybridItems",
     "magic": "SFRPG.Items.Categories.MagicItems",
     "shield": "SFRPG.Items.Categories.Shields",
     "technological": "SFRPG.Items.Categories.TechnologicalItems",
-    "upgrade": "TYPES.Item.TypeUpgrade",
+    "upgrade": "TYPES.Item.upgrade",
     "weapon": "SFRPG.Items.Categories.Weapons",
-    "weaponAccessory": "TYPES.Item.TypeWeaponaccessory"
+    "weaponAccessory": "TYPES.Item.weaponAccessory"
 };
 
 SFRPG.characterDefinitionItemTypes = [
