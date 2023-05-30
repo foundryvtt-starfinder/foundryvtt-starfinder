@@ -1,3 +1,14 @@
+# v0.24.0 - V11 Compatibility
+The very cool features currently sat on the development branch have been pushed to the side to allow for this small but important update. This update prepares the system for use on V11.
+
+## As usual when updating to a new major version of Foundry, back up all of your worlds!!
+
+## Core system improvements
+- Move system rules engine initialisation to the `init` hook, to account for the `setup` hook being moved.
+- Restructure i18n files to account for new structure.
+- Move custom `Math` function registration on `MATH_PROXY` to the `SFRPGRoll` class instead of patching `Roll` itself.
+- Re-implement Starfinder measured template overrides.
+
 # v0.23.0 - The one that got away
 So for a variety of reasons, this update took us 3 months. The good news is that means there's some cool new features here, and a shed-load of compendium updates and data entry.
 
