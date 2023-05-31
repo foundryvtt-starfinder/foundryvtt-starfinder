@@ -10,7 +10,7 @@
                 {{#if hasDamage }}<button type="button" data-action="damage">Damage</button>{{/if}}
                 {{#if hasSave}}<button type="button" class="chat-button-save" data-action="save" data-type="{{item.system.save.type}}">{{item.labels.save}}</button>{{/if}}
                 {{#if hasSkill}}<button type="button" class="chat-button-skill" data-action="skill" data-type="{{item.system.skillCheck.type}}">{{item.labels.skillCheck}}</button>{{/if}}
-
+                {{#if hasArea}}<button type="button" class="chat-button-template" data-action="template" data-type="{{item.system.area.type}}">{{localize "SFRPG.ChatCard.PlaceAbilityTemplate" label=item.labels.area}}</button>{{/if}}
              </p>
         </div>
     </div>

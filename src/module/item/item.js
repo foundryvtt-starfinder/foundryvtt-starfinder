@@ -1,4 +1,5 @@
 import SFRPGModifierApplication from "../apps/modifier-app.js";
+import AbilityTemplate from "../canvas/ability-template.js";
 import { SFRPG } from "../config.js";
 import { DiceSFRPG } from "../dice.js";
 import SFRPGModifier from "../modifiers/modifier.js";
@@ -76,8 +77,19 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         return !!skillData.type;
     }
 
+    /**
+     * Does the Item implement a saving throw as part of its usage
+     * @type {boolean}
+     */
+    get hasArea() {
+        const areaData = this.system?.area;
+        if (!areaData) return false;
+
+        return !!(areaData?.value || areaData?.total);
+    }
+
     /* -------------------------------------------- */
-    /*	Data Preparation														*/
+    /*	Data Preparation							*/
     /* -------------------------------------------- */
 
     /**
@@ -238,6 +250,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             hasDamage: this.hasDamage,
             hasSave: this.hasSave,
             hasSkill: this.hasSkill,
+            hasArea: this.hasArea && ["ft", "meter"].includes(this.system.area.units) && !["", "other"].includes(this.system.area.shape),
             hasOtherFormula: this.hasOtherFormula
         };
 
@@ -818,6 +831,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Add hasSave to roll
         itemData.hasSave = this.hasSave;
         itemData.hasSkill = this.hasSkill;
+        itemData.hasArea = this.hasSkill;
         itemData.hasDamage = this.hasDamage;
         itemData.hasCapacity = this.hasCapacity();
 
@@ -1458,6 +1472,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 hasAttack: this.hasAttack,
                 hasDamage: this.hasDamage,
                 hasSave: this.hasSave,
+                hasArea: this.hasArea,
                 hasOtherFormula: this.hasOtherFormula
             };
 
@@ -1551,6 +1566,34 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         return Promise.all(promises);
     }
 
+    async placeAbilityTemplate(event) {
+        const itemData = this.system;
+
+        const type = {
+            "sphere": "circle",
+            "cone": "cone",
+            "cube": "rect",
+            "cylinder": "circle",
+            "line": "ray",
+            "other": null
+        }[itemData?.area?.shape] || null;
+
+        if (!type) return;
+
+        const template = AbilityTemplate.fromData({
+            type: type || "circle",
+            distance: this.system?.area?.total || this.system?.area?.value || 0
+        });
+
+        if (!template) return;
+
+        const preview = await template.drawPreview();
+        if (preview.result) await preview.place();
+
+        return preview;
+
+    }
+
     /* -------------------------------------------- */
 
     static chatListeners(html) {
@@ -1605,6 +1648,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         if (action === "attack") await item.rollAttack({ event });
         else if (action === "damage") await item.rollDamage({ event });
         else if (action === "formula") await item.rollFormula({ event });
+        else if (action === "template") await item.placeAbilityTemplate({ event });
 
         // Skill Check
         else if (action === "skill" && targetActor) await targetActor.rollSkill(button.dataset.type, { event });

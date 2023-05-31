@@ -1,5 +1,5 @@
+import { degtorad } from "../utils/utilities.js";
 import { measureDistance } from "./canvas.js";
-import { degtorad } from "./utils/utilities.js";
 
 // Borrows quite heavily from the Pathfinder 1e system by Furyspark.
 const withinAngle = (min, max, value) => {

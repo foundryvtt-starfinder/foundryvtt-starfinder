@@ -29,7 +29,8 @@ import { NpcSkillToggleDialog } from './module/apps/npc-skill-toggle-dialog.js';
 import { ShortRestDialog } from './module/apps/short-rest.js';
 import { SpellCastDialog } from './module/apps/spell-cast-dialog.js';
 import { TraitSelectorSFRPG } from './module/apps/trait-selector.js';
-import { canvasHandlerV10, measureDistances } from "./module/canvas.js";
+import { canvasHandlerV10, measureDistances } from "./module/canvas/canvas.js";
+import { MeasuredTemplateSFRPG, TemplateLayerSFRPG } from "./module/canvas/template-overrides.js";
 import CounterManagement from "./module/classes/counter-management.js";
 import { addChatMessageContextOptions } from "./module/combat.js";
 import { CombatSFRPG } from "./module/combat/combat.js";
@@ -44,7 +45,6 @@ import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./module
 import { RPC } from "./module/rpc.js";
 import registerSystemRules from "./module/rules.js";
 import { registerSystemSettings } from "./module/system/settings.js";
-import { MeasuredTemplateSFRPG, TemplateLayerSFRPG } from "./module/template-overrides.js";
 import { preloadHandlebarsTemplates } from "./module/templates.js";
 import TooltipManagerSFRPG from "./module/tooltip.js";
 import { generateUUID } from "./module/utils/utilities.js";
@@ -55,6 +55,8 @@ import CheckEnricher from "./module/system/enrichers/check.js";
 import IconEnricher from "./module/system/enrichers/icon.js";
 
 import RollDialog from "./module/apps/roll-dialog.js";
+import AbilityTemplate from "./module/canvas/ability-template.js";
+import setupVision from "./module/canvas/vision.js";
 import { initializeBrowsers } from "./module/packs/browsers.js";
 import SFRPGRoll from "./module/rolls/roll.js";
 import RollContext from "./module/rolls/rollcontext.js";
@@ -63,7 +65,6 @@ import RollTree from "./module/rolls/rolltree.js";
 import registerCompendiumArt from "./module/system/compendium-art.js";
 import { SFRPGTokenHUD } from "./module/token/token-hud.js";
 import SFRPGTokenDocument from "./module/token/tokendocument.js";
-import setupVision from "./module/vision.js";
 
 import { getAlienArchiveBrowser } from "./module/packs/alien-archive-browser.js";
 import { getEquipmentBrowser } from "./module/packs/equipment-browser.js";
@@ -92,6 +93,7 @@ Hooks.once('init', async function() {
     const engine = new Engine();
 
     game.sfrpg = {
+        AbilityTemplate,
         applications: {
             // Actor Sheets
             ActorSheetSFRPG,

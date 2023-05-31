@@ -1,7 +1,7 @@
-import { ActorItemHelper, moveItemBetweenActorsAsync, onCreateItemCollection } from "./actor/actor-inventory-utils.js";
-import { ItemCollectionSheet } from "./apps/item-collection-sheet.js";
+import { ActorItemHelper, moveItemBetweenActorsAsync, onCreateItemCollection } from "../actor/actor-inventory-utils.js";
+import { ItemCollectionSheet } from "../apps/item-collection-sheet.js";
 
-import { RPC } from "./rpc.js";
+import { RPC } from "../rpc.js";
 
 Hooks.on('canvasReady', onCanvasReady);
 Hooks.on('createToken', onTokenCreated);
@@ -202,7 +202,7 @@ async function handleCanvasDropAsync(canvas, data) {
 
     // Create a placeable instead and do item transferral there.
     if (targetActor === null) {
-        let transferringItems = [sourceItem];
+        const transferringItems = [sourceItem];
         if (sourceActor !== null && sourceItemData.container?.contents && sourceItemData.container.contents.length > 0) {
             const containersToTest = [sourceItemData];
             while (containersToTest.length > 0) {
