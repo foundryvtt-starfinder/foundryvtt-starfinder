@@ -99,7 +99,7 @@ import calculateSaveDC from './rules/actions/item/calculate-save-dc.js';
 import calculateSkillDC from './rules/actions/item/calculate-skill-dc.js';
 
 export default function(engine) {
-    console.log("Starfinder | [SETUP] Registering rules");
+    console.log("Starfinder | [INIT] Registering rules");
 
     // Actions
     error(engine);
@@ -368,5 +368,5 @@ export default function(engine) {
 
     Hooks.callAll('sfrpg.registerRules', engine);
 
-    console.log("Starfinder | [SETUP] Done registering rules");
+    console.log("Starfinder | [INIT] Done registering rules");
 }
