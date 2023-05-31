@@ -1574,8 +1574,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             "cone": "cone",
             "cube": "rect",
             "cylinder": "circle",
-            "line": "ray",
-            "other": null
+            "line": "ray"
         }[itemData?.area?.shape] || null;
 
         if (!type) return;
@@ -1587,10 +1586,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         if (!template) return;
 
-        const preview = await template.drawPreview();
-        if (preview.result) await preview.place();
-
-        return preview;
+        const placed = await template.drawPreview();
+        if (placed) template.place(); // If placement is confirmed
 
     }
 

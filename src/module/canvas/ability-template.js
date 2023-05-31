@@ -31,7 +31,8 @@ export default class AbilityTemplate extends MeasuredTemplateSFRPG {
             y: 0,
             fillColor: color ?? game.user.color,
             texture: texture ?? null,
-            _id: randomID(16)
+            _id: randomID(16),
+            hidden: event.altKey
         };
 
         // Apply some type-specific defaults
@@ -65,6 +66,7 @@ export default class AbilityTemplate extends MeasuredTemplateSFRPG {
    * Creates a preview of the spell template
    *
    * @param {Event} event   The initiating click event
+   * @returns {Promise<boolean>} Returns true if placed, or false if cancelled
    */
     async drawPreview(event) {
         const initialLayer = canvas.activeLayer;
@@ -121,32 +123,20 @@ export default class AbilityTemplate extends MeasuredTemplateSFRPG {
                 _clear();
 
                 initialLayer.activate();
-                if (canResolve)
-                    resolve({
-                        result: false
-                    });
+                if (canResolve) resolve(false);
             };
 
             // Confirm the workflow (left-click)
             handlers.leftClick = async (event) => {
+                // Disallow drawing templates normally
+                event.preventDefault();
+                event.stopPropagation();
+
+                // Use the right-click workflow to return to the previous state
                 handlers.rightClick(event, false);
 
                 // Create the template
-                const result = {
-                    result: true,
-                    place: async () => {
-                        const doc = (
-                            await canvas.scene.createEmbeddedDocuments("MeasuredTemplate", [this.document.toObject(false)])
-                        )[0];
-                        this.document = doc;
-                        return doc;
-                    },
-                    delete: () => {
-                        return this.document.delete();
-                    }
-                };
-                _clear();
-                resolve(result);
+                resolve(true);
             };
 
             // Rotate the template by 3 degree increments (mouse-wheel)
@@ -194,6 +184,12 @@ export default class AbilityTemplate extends MeasuredTemplateSFRPG {
         if (!canvas.scene) return;
 
         return super.refresh();
+    }
+
+    async place() {
+        this.document = await canvas.scene.createEmbeddedDocuments("MeasuredTemplate", [this.document.toObject(false)])[0];
+        return this.document;
+
     }
 }
 
