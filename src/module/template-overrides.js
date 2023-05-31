@@ -296,7 +296,7 @@ export class MeasuredTemplateSFRPG extends MeasuredTemplate {
         return result;
     }
 
-    // Highlight grid in PF1 style
+    // Highlight grid in SF style
     highlightGrid() {
         if (!["circle", "cone", "ray"].includes(this.document.t) || canvas.grid.type !== CONST.GRID_TYPES.SQUARE) {
             return super.highlightGrid();
@@ -310,19 +310,11 @@ export class MeasuredTemplateSFRPG extends MeasuredTemplate {
         hl.clear();
         if (!this.isVisible) return;
 
-        // Get grid squares to highlight
-        if ( grid.type === CONST.GRID_TYPES.GRIDLESS ) {
-            const shape = this._getGridHighlightShape();
-            grid.grid.highlightGridPosition(hl, {border: borderColor, color: fillColor, shape});
+        const positions = this.getHighlightedSquares();
+        for (const {x, y} of positions) {
+            grid.grid.highlightGridPosition(hl, {x, y, border: borderColor, color: fillColor});
         }
 
-        // Otherwise, highlight specific grid positions
-        else {
-            const positions = this.getHighlightedSquares();
-            for (const {x, y} of positions) {
-                grid.grid.highlightGridPosition(hl, {x, y, border: borderColor, color: fillColor});
-            }
-        }
     }
 
     getHighlightLayer() {
