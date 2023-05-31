@@ -71,6 +71,46 @@ export default class SFRPGRoll extends Roll {
     /** @inheritdoc */
     static TOOLTIP_TEMPLATE = "systems/sfrpg/templates/dice/tooltip.hbs";
 
+    static MATH_PROXY = new Proxy(Math, {
+        has: () => true, // Include everything
+        get: (t, k) => k === Symbol.unscopables ? undefined : t[k]
+        // set: () => console.error("You may not set properties of the Roll.MATH_PROXY environment") // No-op
+    });
+
+    static registerMathFunctions() {
+        function lookup(value) {
+            for (let i = 1; i < arguments.length - 1; i += 2) {
+                if (arguments[i] === value) {
+                    return arguments[i + 1];
+                }
+            }
+            return 0;
+        }
+
+        function lookupRange(value, lowestValue) {
+            let baseValue = lowestValue;
+            for (let i = 2; i < arguments.length - 1; i += 2) {
+                if (arguments[i] > value) {
+                    return baseValue;
+                }
+                baseValue = arguments[i + 1];
+            }
+            return baseValue;
+        }
+
+        this.MATH_PROXY = mergeObject(this.MATH_PROXY, {
+            eq: (a, b) => a === b,
+            gt: (a, b) => a > b,
+            gte: (a, b) => a >= b,
+            lt: (a, b) => a < b,
+            lte: (a, b) => a <= b,
+            ne: (a, b) => a !== b,
+            ternary: (condition, ifTrue, ifFalse) => (condition ? ifTrue : ifFalse),
+            lookup,
+            lookupRange
+        });
+    }
+
     /** @override */
     async render(chatOptions = {}) {
         chatOptions = foundry.utils.mergeObject({
