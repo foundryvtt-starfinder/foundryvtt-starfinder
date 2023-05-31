@@ -1,11 +1,11 @@
 {
-  "_id": "woM4qJwdbZLySu8R",
-  "name": "Amorphous",
+  "_id": "OGY3BiO2ULCDv1Kb",
+  "name": "Skilled (Giant)",
   "type": "feat",
   "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
@@ -38,7 +38,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>This creature has the Amorphous (Ex) universal creature rule (page 152).</p><h2>@UUID[Compendium.sfrpg.universal-creature-rules.WYinJZZxKYueyaY1]{Amorphous (Ex)}</h2><p>The creature’s body is malleable and shapeless. It does not take double damage from critical hits, but it is affected by critical hit effects normally.</p>\n<p><em>Format:</em> <strong>Defensive Abilities</strong> amorphous.</p>"
+      "value": "<p><span>Giants gain a +2 species bonus to @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.76u4HnGcAlySicb4]{Engineering} and @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.6fqgiVqlA7u9jS4i]{Intimidate} checks.</span></p>"
     },
     "descriptors": {
       "acid": false,
@@ -89,7 +89,38 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "fd07428f-7225-4cd8-b0b1-b163464250b2",
+        "name": "Skilled (Giant)",
+        "type": "racial",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "Giants gain a +2 species bonus to Engineering and Intimidate checks.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "eng"
+      },
+      {
+        "_id": "40f65642-ecdd-4a6c-98eb-f8f08254d097",
+        "name": "Skilled (Giant)",
+        "type": "racial",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "Giants gain a +2 species bonus to Engineering and Intimidate checks.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "int"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -100,14 +131,14 @@
       "charged": false,
       "value": null
     },
-    "requirements": "",
+    "requirements": "Giant",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
-    "source": "",
+    "source": "PoC pg. 20",
     "target": {
       "type": "",
       "value": ""
