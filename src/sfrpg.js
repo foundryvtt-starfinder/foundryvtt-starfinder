@@ -396,9 +396,6 @@ Hooks.once("setup", function() {
     console.log("Starfinder | [SETUP] Initializing remote inventory system");
     initializeRemoteInventory();
 
-    console.log("Starfinder | [SETUP] Configuring rules engine");
-    registerSystemRules(game.sfrpg.engine);
-
     console.log("Starfinder | [SETUP] Registering custom handlebars");
     setupHandlebars();
 
