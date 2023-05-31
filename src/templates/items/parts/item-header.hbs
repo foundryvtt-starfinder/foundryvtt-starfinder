@@ -4,22 +4,22 @@
     <div class="header-details flexrow">
         <div class="header-background flexrow">
             <h1 class="charname">
-                <input name="name" type="text" value="{{item.name}}" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.ItemNameTooltip" }}" placeholder="{{ localize "SFRPG.ItemSheet.Header.ItemName" }}"/>
+                <input name="name" type="text" value="{{item.name}}" data-tooltip="{{ localize "SFRPG.ItemSheet.Header.ItemNameTooltip" }}" placeholder="{{ localize "SFRPG.ItemSheet.Header.ItemName" }}"/>
             </h1>
             <div class="item-subtitle">
-                <h4 data-tippy-content="Item Type" class="item-type">{{itemType}}</h4>
-                <span data-tippy-content="Item Status" class="item-status">{{itemStatus}}</span>
+                <h4 data-tooltip="Item Type" class="item-type">{{itemType}}</h4>
+                <span data-tooltip="Item Status" class="item-status">{{itemStatus}}</span>
             </div>
         </div>
 
         {{!-- Item Summary --}}
         <ul class="summary flexrow">
             {{#if category.enabled}}
-            <li class="short" data-tippy-content="{{localize category.tooltip}}">
+            <li class="short" data-tooltip="{{localize category.tooltip}}">
                 <label>{{localize category.value}}</label>
             </li>
             {{/if}}
-            <li class="wide" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.SourceTooltip" }}">
+            <li class="wide" data-tooltip="{{ localize "SFRPG.ItemSheet.Header.SourceTooltip" }}">
                 <input type="text" name="system.source" value="{{itemData.source}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Source" }}"/>
             </li>
         </ul>
@@ -27,7 +27,7 @@
         {{!-- Header Attributes --}}
         <ul class="attributes flexrow">
             {{#if isPhysicalItem}}
-            <li class="attribute" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.HitpointsTooltip" }}">
+            <li class="attribute" data-tooltip="{{ localize "SFRPG.ItemSheet.Header.HitpointsTooltip" }}">
                 <h4 class="attribute-name box-title">{{ localize "SFRPG.ItemSheet.Header.Hitpoints" }}</h4>
                 <div class="attribute-value multiple">
                     <input name="system.attributes.hp.value" type="text" value="{{itemData.attributes.hp.value}}"
@@ -38,7 +38,7 @@
                 </div>
             </li>
 
-            <li class="attribute" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.ArmorClassTooltip" }}">
+            <li class="attribute" data-tooltip="{{ localize "SFRPG.ItemSheet.Header.ArmorClassTooltip" }}">
                 <h4 class="attribute-name box-title">{{ localize "SFRPG.ItemSheet.Header.ArmorClass" }}</h4>
                 <div class="attribute-value">
                     <input name="system.attributes.ac.value" type="text" value="{{itemData.attributes.ac.value}}"
@@ -46,7 +46,7 @@
                 </div>
             </li>
 
-            <li class="attribute" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.HardnessTooltip" }}">
+            <li class="attribute" data-tooltip="{{ localize "SFRPG.ItemSheet.Header.HardnessTooltip" }}">
                 <h4 class="attribute-name box-title">{{ localize "SFRPG.ItemSheet.Header.Hardness" }}</h4>
                 <div class="attribute-value">
                     <input name="system.attributes.hardness.value" type="text" value="{{itemData.attributes.hardness.value}}"
@@ -54,7 +54,7 @@
                 </div>
             </li>
 
-            <li class="attribute" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.SaveTooltip" formula=placeholders.savingThrow.formula}}">
+            <li class="attribute" data-tooltip="{{ localize "SFRPG.ItemSheet.Header.SaveTooltip" formula=placeholders.savingThrow.formula}}">
                 <h4 class="attribute-name box-title">{{ localize "SFRPG.ItemSheet.Header.Save" }}</h4>
                 <div class="attribute-value">
                     <label>{{placeholders.savingThrow.value}}</label>

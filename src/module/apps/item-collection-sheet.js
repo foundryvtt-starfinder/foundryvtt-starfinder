@@ -135,21 +135,6 @@ export class ItemCollectionSheet extends DocumentSheet {
         return data;
     }
 
-    async _render(...args) {
-        await super._render(...args);
-
-        if (this._tooltips === null) {
-            this._tooltips = tippy.delegate(`#${this.id}`, {
-                target: '[data-tippy-content]',
-                allowHTML: true,
-                arrow: false,
-                placement: 'top-start',
-                duration: [500, null],
-                delay: [800, null]
-            });
-        }
-    }
-
     processItemContainment(items, pushItemFn) {
         const preprocessedItems = [];
         const containedItems = [];
@@ -199,19 +184,19 @@ export class ItemCollectionSheet extends DocumentSheet {
      */
     async _onItemSummary(event) {
         event.preventDefault();
-        let li = $(event.currentTarget).parents('.item');
-        let itemId = li.attr("data-item-id");
+        const li = $(event.currentTarget).parents('.item');
+        const itemId = li.attr("data-item-id");
         const item = this.itemCollection.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
-        let chatData = await this.getChatData(item, { secrets: true, rollData: item });
+        const chatData = await this.getChatData(item, { secrets: true, rollData: item });
 
         if (li.hasClass('expanded')) {
-            let summary = li.children('.item-summary');
+            const summary = li.children('.item-summary');
             summary.slideUp(200, () => summary.remove());
         } else {
-            let div = $(`<div class="item-summary">${chatData.system.description.value}</div>`);
+            const div = $(`<div class="item-summary">${chatData.system.description.value}</div>`);
             Hooks.callAll("renderItemSummary", this, div, {}); // Event listeners need to be added to newly added HTML.
-            let props = $(`<div class="item-properties"></div>`);
-            chatData.properties.forEach(p => props.append(`<span class="tag" ${ p.tooltip ? ("data-tippy-content='" + p.tooltip + "'") : ""}>${p.name}</span>`));
+            const props = $(`<div class="item-properties"></div>`);
+            chatData.properties.forEach(p => props.append(`<span class="tag" ${ p.tooltip ? ("data-tooltip='" + p.tooltip + "'") : ""}>${p.name}</span>`));
 
             div.append(props);
             li.append(div.hide());
@@ -242,11 +227,11 @@ export class ItemCollectionSheet extends DocumentSheet {
 
         // TODO: Confirm dialog, and ask to recursively delete nested items, if it is the last item and deleteIfEmpty is enabled, also ask
 
-        let li = $(event.currentTarget).parents(".item");
-        let itemId = li.attr("data-item-id");
+        const li = $(event.currentTarget).parents(".item");
+        const itemId = li.attr("data-item-id");
 
         const itemToDelete = this.itemCollection.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
-        let containsItems = (itemToDelete.system.container?.contents && itemToDelete.system.container.contents.length > 0);
+        const containsItems = (itemToDelete.system.container?.contents && itemToDelete.system.container.contents.length > 0);
         ItemDeletionDialog.show(itemToDelete.name, containsItems, (recursive) => {
             this._deleteItemById(itemId, recursive);
             li.slideUp(200, () => this.render(false));
@@ -254,15 +239,15 @@ export class ItemCollectionSheet extends DocumentSheet {
     }
 
     _deleteItemById(itemId, recursive = false) {
-        let itemsToDelete = [itemId];
+        const itemsToDelete = [itemId];
 
         if (recursive) {
-            let itemsToTest = [itemId];
+            const itemsToTest = [itemId];
             while (itemsToTest.length > 0) {
-                let itemIdToTest = itemsToTest.shift();
-                let itemData = this.itemCollection.flags.sfrpg.itemCollection.items.find(x => x._id === itemIdToTest);
+                const itemIdToTest = itemsToTest.shift();
+                const itemData = this.itemCollection.flags.sfrpg.itemCollection.items.find(x => x._id === itemIdToTest);
                 if (itemData.system.container?.contents) {
-                    for (let content of itemData.system.container.contents) {
+                    for (const content of itemData.system.container.contents) {
                         itemsToDelete.push(content.id);
                         itemsToTest.push(content.id);
                     }
@@ -385,14 +370,14 @@ export class ItemCollectionSheet extends DocumentSheet {
         }
 
         const item = tokenData.items.find(x => x._id === li.dataset.itemId);
-        let draggedItems = [item];
+        const draggedItems = [item];
         for (let i = 0; i < draggedItems.length; i++) {
             const draggedItemData = draggedItems[i];
 
             if (draggedItemData.container?.contents) {
-                let newContents = [];
-                for (let content of draggedItemData.container.contents) {
-                    let contentItem = tokenData.items.find(x => x._id === content.id);
+                const newContents = [];
+                for (const content of draggedItemData.container.contents) {
+                    const contentItem = tokenData.items.find(x => x._id === content.id);
                     if (contentItem) {
                         draggedItems.push(contentItem);
                         newContents.push({id: contentItem.id, index: content.index});
@@ -424,7 +409,7 @@ export class ItemCollectionSheet extends DocumentSheet {
 
     /** @override */
     async _onDrop(event) {
-        let data = TextEditor.getDragEventData(event);
+        const data = TextEditor.getDragEventData(event);
 
         if (data.type !== "Item") return;
         const item = await Item.fromDropData(data);

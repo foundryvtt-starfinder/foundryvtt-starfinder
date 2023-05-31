@@ -46,6 +46,7 @@ import registerSystemRules from "./module/rules.js";
 import { registerSystemSettings } from "./module/system/settings.js";
 import { MeasuredTemplateSFRPG, TemplateLayerSFRPG } from "./module/template-overrides.js";
 import { preloadHandlebarsTemplates } from "./module/templates.js";
+import TooltipManagerSFRPG from "./module/tooltip.js";
 import { generateUUID } from "./module/utils/utilities.js";
 
 import BaseEnricher from "./module/system/enrichers/base.js";
@@ -219,9 +220,6 @@ Hooks.once('init', async function() {
     console.log("Starfinder | [INIT] Configuring rules engine");
     registerSystemRules(game.sfrpg.engine);
 
-    console.log("Starfinder | [INIT] Overriding Mathematics");
-    SFRPGRoll.registerMathFunctions();
-
     console.log("Starfinder | [INIT] Registering system settings");
     registerSystemSettings();
 
@@ -239,7 +237,6 @@ Hooks.once('init', async function() {
         dummy.addEventListener("load", setAnvil);
         dummy.loading = "eager";
         dummy.src = "systems/sfrpg/images/starfinder_icon.webp";
-        dummy.style.display = "none";
 
         const r = document.querySelector(':root');
         r.style.setProperty("--color-border-highlight-alt", "#0080ff");
@@ -249,6 +246,12 @@ Hooks.once('init', async function() {
         r.style.setProperty("--color-shadow-highlight", "#00a0ff");
         r.style.setProperty("--sfrpg-theme-blue", "#235683");
     }
+
+    console.log("Starfinder | [INIT] Adding math functions");
+    SFRPGRoll.registerMathFunctions();
+
+    console.log("Starfinder | [INIT] Overriding tooltips");
+    Object.defineProperty(game, "tooltip", {value: new TooltipManagerSFRPG(), configurable: true, enumerable: true});
 
     console.log("Starfinder | [INIT] Registering sheets");
     Actors.unregisterSheet("core", ActorSheet);
@@ -395,9 +398,6 @@ Hooks.once("setup", function() {
 
     console.log("Starfinder | [SETUP] Initializing remote inventory system");
     initializeRemoteInventory();
-
-    console.log("Starfinder | [SETUP] Configuring rules engine");
-    registerSystemRules(game.sfrpg.engine);
 
     console.log("Starfinder | [SETUP] Registering custom handlebars");
     setupHandlebars();
@@ -740,7 +740,7 @@ function setupHandlebars() {
             throw new Error(game.i18n.localize("SFRPG.Tippy.ErrorNoTitle"));
         }
 
-        let html = "data-tippy-content=\"<strong>" + Handlebars.escapeExpression(game.i18n.localize(title)) + "</strong>";
+        let html = "data-tooltip=\"<strong>" + Handlebars.escapeExpression(game.i18n.localize(title)) + "</strong>";
         if (subtitle) {
             html += "<br/>" + Handlebars.escapeExpression(game.i18n.localize(subtitle));
         }
@@ -786,7 +786,7 @@ function setupHandlebars() {
         return new Handlebars.SafeString(html);
     });
 
-    Handlebars.registerHelper('numberFormat', function(value) {
+    Handlebars.registerHelper('i18nNumberFormat', function(value) {
         const formatter = new Intl.NumberFormat(game.i18n.lang);
         const formattedValue = formatter.format(value);
         return formattedValue;

@@ -177,23 +177,7 @@ async function copyReadmeAndLicenses() {
 }
 
 async function copyLibs() {
-    const tippyLib = "tippy.js/dist/tippy.umd.min.js";
-    const tippyMap = "tippy.js/dist/tippy.umd.min.js.map";
-    const popperLib = "@popperjs/core/dist/umd";
-
-    const cssFile = "tippy.js/dist/tippy.css";
-    const nodeModulesPath = "node_modules";
-
-    try {
-        await fs.copy(path.join(nodeModulesPath, tippyLib), "dist/lib/tippy/tippy.min.js");
-        await fs.copy(path.join(nodeModulesPath, tippyMap), "dist/lib/tippy/tippy.umd.min.js.map");
-        await fs.copy(path.join(nodeModulesPath, popperLib), "dist/lib/popperjs/core");
-        await fs.copy(path.join(nodeModulesPath, cssFile), "dist/styles/tippy.css");
-
-        return Promise.resolve();
-    } catch (err) {
-        Promise.reject(err);
-    }
+    // Tippy and popper have been deprecated in favor of Foundry's core tooltips!
 }
 
 /**
@@ -212,8 +196,8 @@ function buildWatch() {
  * Sorts the keys in a JSON object, which should make it easier to find data keys.
  */
 function JSONstringifyOrder( obj, space, sortingMode = "default" ) {
-    let allKeys = [];
-    let seen = {};
+    const allKeys = [];
+    const seen = {};
     JSON.stringify(obj, function(key, value) {
         if (!(key in seen)) {
             allKeys.push(key);
@@ -434,7 +418,7 @@ function sanitizeJSON(jsonInput) {
     sanitizeDescription(jsonInput);
 
     if (jsonInput.items) {
-        for (let item of jsonInput.items) {
+        for (const item of jsonInput.items) {
             treeShake(item);
             cleanFlags(item);
             sanitizeDescription(item);
@@ -483,7 +467,7 @@ function sanitizeJSON(jsonInput) {
                 jsonInput.prototypeToken.bar2.attribute = "attributes.rp"; // If the NPC has resolve points, set them as the 2nd bar
             }
 
-            let size = sizeLookup[jsonInput.system.traits.size]; // Set size to match actor's
+            const size = sizeLookup[jsonInput.system.traits.size]; // Set size to match actor's
             jsonInput.prototypeToken.width = size;
             jsonInput.prototypeToken.height = size;
         } else if (jsonInput.type === "character") {
@@ -491,7 +475,7 @@ function sanitizeJSON(jsonInput) {
             jsonInput.prototypeToken.bar2.attribute = "attributes.sp"; // 2nd bar as stamina
             jsonInput.prototypeToken.sight.enabled = true;
 
-            let size = sizeLookup[jsonInput.system.traits.size];
+            const size = sizeLookup[jsonInput.system.traits.size];
             jsonInput.prototypeToken.width = size;
             jsonInput.prototypeToken.height = size;
         } else if (jsonInput.type === "starship") {
@@ -500,7 +484,7 @@ function sanitizeJSON(jsonInput) {
         } else if (jsonInput.type === "vehicle") {
             jsonInput.prototypeToken.disposition = 0; // Neutral
 
-            let size = sizeLookup[jsonInput.system.attributes.size];
+            const size = sizeLookup[jsonInput.system.attributes.size];
             jsonInput.prototypeToken.width = size;
             jsonInput.prototypeToken.height = size;
         }
@@ -520,18 +504,18 @@ async function unpack(sourceDatabase, outputDirectory, partOfCook = false) {
             throw err;
     });
 
-    let db = new AsyncNedb({ filename: sourceDatabase, autoload: true });
-    let items = await db.asyncFind({});
+    const db = new AsyncNedb({ filename: sourceDatabase, autoload: true });
+    const items = await db.asyncFind({});
 
-    for (let item of items) {
-        let cleanItem = partOfCook ? item : sanitizeJSON(item);
-        let jsonOutput = JSONstringifyOrder(cleanItem, 2, "item");
+    for (const item of items) {
+        const cleanItem = partOfCook ? item : sanitizeJSON(item);
+        const jsonOutput = JSONstringifyOrder(cleanItem, 2, "item");
         let filename = sanitize(item.name);
         filename = filename.replace(/[\s]/g, "_");
         filename = filename.replace(/[,;]/g, "");
         filename = filename.toLowerCase();
 
-        let targetFile = `${outputDirectory}/${filename}.json`;
+        const targetFile = `${outputDirectory}/${filename}.json`;
         fs.writeFileSync(targetFile, jsonOutput, { "flag": "w" });
     }
 }
@@ -541,19 +525,19 @@ async function gulpUnpackPacks(done, partOfCook = false) {
 }
 
 async function unpackPacks(partOfCook = false) {
-    let sourceDir = partOfCook ? "./src/packs" : `${getConfig().dataPath.replaceAll("\\", "/")}/data/systems/sfrpg/packs`;
+    const sourceDir = partOfCook ? "./src/packs" : `${getConfig().dataPath.replaceAll("\\", "/")}/data/systems/sfrpg/packs`;
     console.log(`Unpacking ${partOfCook ? "" : "and sanitizing "}all packs from ${sourceDir}`);
 
-    let files = fs.readdirSync(sourceDir);
-    for (let file of files) {
+    const files = fs.readdirSync(sourceDir);
+    for (const file of files) {
         if (limitToPack && !file.includes(limitToPack)) {
             continue;
         }
 
         if (file.endsWith(".db")) {
-            let fileWithoutExt = file.substr(0, file.length - 3);
-            let unpackDir = `./src/items/${fileWithoutExt}`;
-            let sourceFile = `${sourceDir}/${file}`;
+            const fileWithoutExt = file.substr(0, file.length - 3);
+            const unpackDir = `./src/items/${fileWithoutExt}`;
+            const sourceFile = `${sourceDir}/${file}`;
 
             console.log(`Processing ${fileWithoutExt}`);
 
@@ -596,18 +580,18 @@ async function cookWithOptions(options = { formattingCheck: true }) {
         }
     }
 
-    let compendiumMap = {};
-    let allItems = [];
+    const compendiumMap = {};
+    const allItems = [];
 
     cookErrorCount = 0;
     cookAborted = false;
     packErrors = {};
 
-    let sourceDir = "./src/items";
-    let directories = fs.readdirSync(sourceDir);
-    for (let directory of directories) {
-        let itemSourceDir = `${sourceDir}/${directory}`;
-        let outputFile = `./src/packs/${directory}.db`;
+    const sourceDir = "./src/items";
+    const directories = fs.readdirSync(sourceDir);
+    for (const directory of directories) {
+        const itemSourceDir = `${sourceDir}/${directory}`;
+        const outputFile = `./src/packs/${directory}.db`;
 
         console.log(`Processing ${directory}`);
         compendiumMap[directory] = {};
@@ -623,9 +607,9 @@ async function cookWithOptions(options = { formattingCheck: true }) {
         }
 
         console.log(`> Reading and sanitizing files in ${itemSourceDir}`);
-        let files = fs.readdirSync(itemSourceDir);
-        for (let file of files) {
-            let filePath = `${itemSourceDir}/${file}`;
+        const files = fs.readdirSync(itemSourceDir);
+        for (const file of files) {
+            const filePath = `${itemSourceDir}/${file}`;
             let jsonInput = fs.readFileSync(filePath);
             try {
                 jsonInput = JSON.parse(jsonInput);
@@ -781,13 +765,13 @@ function tryMigrateActorSpeed(jsonInput) {
  * would cause significant harm to the usability of the entry.
  */
 // conditions / setting cache and regular expression are generated during beginning of cooking and used during formatting checks
-let conditionsCache = {};
-let settingCache = {};
+const conditionsCache = {};
+const settingCache = {};
 let conditionsRegularExpression;
 let settingRegularExpression;
-let poisonAndDiseasesRegularExpression = new RegExp("(poison|disease)", "g");
-let validArmorTypes = ["light", "power", "heavy", "shield"];
-let validCreatureSizes = ["fine", "diminutive", "tiny", "small", "medium", "large", "huge", "gargantuan", "colossal"];
+const poisonAndDiseasesRegularExpression = new RegExp("(poison|disease)", "g");
+const validArmorTypes = ["light", "power", "heavy", "shield"];
+const validCreatureSizes = ["fine", "diminutive", "tiny", "small", "medium", "large", "huge", "gargantuan", "colossal"];
 function formattingCheck(allItems) {
     for (const item of allItems) {
         const data = item;
@@ -842,7 +826,7 @@ function formattingCheckRace(data, pack, file, options = { checkLinks: true }) {
     }
 
     // Validate source
-    let source = data.system.source;
+    const source = data.system.source;
     if (!source) {
         addWarningForPack(`${chalk.bold(file)}: Missing source field.`, pack);
         return;
@@ -853,10 +837,10 @@ function formattingCheckRace(data, pack, file, options = { checkLinks: true }) {
 
     // Check biography for references to conditions
     if (options.checkLinks) {
-        let description = data.system.description.value;
-        let result = searchDescriptionForUnlinkedCondition(description);
+        const description = data.system.description.value;
+        const result = searchDescriptionForUnlinkedCondition(description);
         if (result.found) {
-            for (let match of result.foundWords) {
+            for (const match of result.foundWords) {
                 addWarningForPack(`${chalk.bold(file)}: Found reference to ${chalk.bold(match)} in description without link.`, pack);
             }
         }
@@ -899,7 +883,7 @@ function formattingCheckAlien(data, pack, file, options = { checkLinks: true, ch
     }
 
     // Validate source
-    let source = data.system.details.source;
+    const source = data.system.details.source;
     if (!source) {
         addWarningForPack(`${chalk.bold(file)}: Missing source field.`, pack);
         return;
@@ -910,8 +894,8 @@ function formattingCheckAlien(data, pack, file, options = { checkLinks: true, ch
 
     if (options.checkEcology === true) {
         // Validate ecology
-        let environment = data.system.details.environment;
-        let organization = data.system.details.organization;
+        const environment = data.system.details.environment;
+        const organization = data.system.details.organization;
         if (environment === null || environment === "") {
             addWarningForPack(`${fichalk.bold(file)}: Environment is missing.`, pack);
         }
@@ -921,18 +905,18 @@ function formattingCheckAlien(data, pack, file, options = { checkLinks: true, ch
     }
 
     if (options.checkLinks === true) {
-        let description = data.system.details.biography.value;
+        const description = data.system.details.biography.value;
         // Check biography for references to conditions
-        let conditionResult = searchDescriptionForUnlinkedCondition(description);
+        const conditionResult = searchDescriptionForUnlinkedCondition(description);
         if (conditionResult.found) {
-            for (let match of conditionResult.foundWords) {
+            for (const match of conditionResult.foundWords) {
                 addWarningForPack(`${chalk.bold(file)}: Found reference to ${chalk.bold(match)} in biography without link.`, pack);
             }
         }
         // Check biography for references to the setting
-        let settingResult = searchDescriptionForUnlinkedReference(description, settingRegularExpression);
+        const settingResult = searchDescriptionForUnlinkedReference(description, settingRegularExpression);
         if (settingResult.found) {
-            for (let match of settingResult.foundWords) {
+            for (const match of settingResult.foundWords) {
                 addWarningForPack(`${chalk.bold(file)}: Found reference to ${chalk.bold(match)} in description without link.`, pack);
             }
         }
@@ -961,7 +945,7 @@ function formattingCheckItems(data, pack, file, options = { checkImage: true, ch
 
     // Validate source
     if (options.checkSource) {
-        let source = data.system.source;
+        const source = data.system.source;
         if (!isSourceValid(source)) {
             addWarningForPack(`${chalk.bold(file)}: Improperly formatted source field "${chalk.bold(source)}".`, pack);
         }
@@ -969,7 +953,7 @@ function formattingCheckItems(data, pack, file, options = { checkImage: true, ch
 
     // Validate price
     if (options.checkPrice) {
-        let price = data.system.price;
+        const price = data.system.price;
         if (!price || price <= 0) {
             addWarningForPack(`${chalk.bold(file)}: Improperly formatted armor price field "${chalk.bold(price)}.`, pack);
         }
@@ -977,7 +961,7 @@ function formattingCheckItems(data, pack, file, options = { checkImage: true, ch
 
     // Validate level
     if (options.checkLevel) {
-        let level = data.system.level;
+        const level = data.system.level;
         if (!level || level <= 0) {
             addWarningForPack(`${chalk.bold(file)}: Improperly formatted armor level field "${chalk.bold(level)}.`, pack);
         }
@@ -989,10 +973,10 @@ function formattingCheckItems(data, pack, file, options = { checkImage: true, ch
     }
 
     // If armor
-    let armor = data.system.armor;
+    const armor = data.system.armor;
     if (armor) {
         // Validate armor type
-        let armorType = data.system.armor.type;
+        const armorType = data.system.armor.type;
         if (!validArmorTypes.includes(armorType)) {
             addWarningForPack(`${chalk.bold(file)}: Improperly formatted armor type field "${chalk.bold(armorType)}.`, pack);
         }
@@ -1000,22 +984,22 @@ function formattingCheckItems(data, pack, file, options = { checkImage: true, ch
 
     // Validate links
     if (options.checkLinks) {
-        let description = data.system.description.value;
+        const description = data.system.description.value;
 
         if (description) {
 
             // Check description for references to conditions
-            let conditionResult = searchDescriptionForUnlinkedReference(description, conditionsRegularExpression);
+            const conditionResult = searchDescriptionForUnlinkedReference(description, conditionsRegularExpression);
             if (conditionResult.found) {
-                for (let match of conditionResult.foundWords) {
+                for (const match of conditionResult.foundWords) {
                     addWarningForPack(`${chalk.bold(file)}: Found reference to ${chalk.bold(match)} in description without link.`, pack);
                 }
             }
 
             // Check description for references to poisons / diseases
-            let poisonResult = searchDescriptionForUnlinkedReference(description, poisonAndDiseasesRegularExpression);
+            const poisonResult = searchDescriptionForUnlinkedReference(description, poisonAndDiseasesRegularExpression);
             if (poisonResult.found) {
-                for (let match of poisonResult.foundWords) {
+                for (const match of poisonResult.foundWords) {
                     addWarningForPack(`${chalk.bold(file)}: Found reference to ${chalk.bold(match)} in description without link.`, pack);
                 }
             }
@@ -1028,7 +1012,7 @@ function formattingCheckItems(data, pack, file, options = { checkImage: true, ch
 
 function formattingCheckWeapons(data, pack, file) {
 
-    let lowecaseName = data.name.toLowerCase();
+    const lowecaseName = data.name.toLowerCase();
     if (lowecaseName.includes("multiattack")) {
         // Should be [MultiATK]
         addWarningForPack(`${chalk.bold(file)}: Improperly formatted multiattack name field "${chalk.bold(data.name)}.`, pack);
@@ -1057,7 +1041,7 @@ function formattingCheckVehicle(data, pack, file, options = { checkLinks: true }
     }
 
     // Validate source
-    let source = data.system.details.source;
+    const source = data.system.details.source;
     if (!source) {
         addWarningForPack(`${chalk.bold(file)}: Missing source field.`, pack);
         return;
@@ -1067,24 +1051,24 @@ function formattingCheckVehicle(data, pack, file, options = { checkLinks: true }
     }
 
     // Validate price
-    let price = data.system.details.price;
+    const price = data.system.details.price;
     if (!price || price <= 0) {
         addWarningForPack(`${chalk.bold(file)}: Improperly formatted vehicle price field "${chalk.bold(armorType)}.`, pack);
     }
 
     // Validate level
-    let level = data.system.details.level;
+    const level = data.system.details.level;
     if (!level || level <= 0) {
         addWarningForPack(`${chalk.bold(file)}: Improperly formatted vehicle level field "${chalk.bold(armorType)}.`, pack);
     }
 
     // Check description for references to conditions
     if (options.checkLinks) {
-        let description = data.system.details.description.value;
+        const description = data.system.details.description.value;
         if (description) {
-            let result = searchDescriptionForUnlinkedCondition(description);
+            const result = searchDescriptionForUnlinkedCondition(description);
             if (result.found) {
-                for (let match of result.foundWords) {
+                for (const match of result.foundWords) {
                     addWarningForPack(`${chalk.bold(file)}: Found reference to ${chalk.bold(match)} in description without link.`, pack);
                 }
             }
@@ -1112,7 +1096,7 @@ function formattingCheckSpell(data, pack, file, options = { checkLinks: true }) 
     }
 
     // Validate source
-    let source = data.system.source;
+    const source = data.system.source;
     if (!source) {
         addWarningForPack(`${chalk.bold(file)}: Missing source field.`, pack);
         return;
@@ -1123,19 +1107,19 @@ function formattingCheckSpell(data, pack, file, options = { checkLinks: true }) 
 
     // Check spell description for unlinked references to conditions
     if (options.checkLinks === true) {
-        let description = data.system.description.value;
+        const description = data.system.description.value;
 
         // Check references to conditions
-        let conditionResult = searchDescriptionForUnlinkedReference(description, conditionsRegularExpression);
+        const conditionResult = searchDescriptionForUnlinkedReference(description, conditionsRegularExpression);
         if (conditionResult.found) {
-            for (let match of settingResult.foundWords) {
+            for (const match of settingResult.foundWords) {
                 addWarningForPack(`${chalk.bold(file)}: Found reference to ${chalk.bold(match)} in description without link.`, pack);
             }
         }
         // Check references to the setting
-        let settingResult = searchDescriptionForUnlinkedReference(description, settingRegularExpression);
+        const settingResult = searchDescriptionForUnlinkedReference(description, settingRegularExpression);
         if (settingResult.found) {
-            for (let match of settingResult.foundWords) {
+            for (const match of settingResult.foundWords) {
                 addWarningForPack(`${chalk.bold(file)}: Found reference to ${chalk.bold(match)} in description without link.`, pack);
             }
         }
@@ -1159,18 +1143,18 @@ function formattingCheckFeat(data, pack, file, options = { checkLinks: true }) {
     // feat)
 
     if (options.checkLinks === true) {
-        let description = data.system.description.value;
+        const description = data.system.description.value;
         // Check description for references to conditions
-        let conditionResult = searchDescriptionForUnlinkedReference(description, conditionsRegularExpression);
+        const conditionResult = searchDescriptionForUnlinkedReference(description, conditionsRegularExpression);
         if (conditionResult.found) {
-            for (let match of conditionResult.foundWords) {
+            for (const match of conditionResult.foundWords) {
                 addWarningForPack(`${chalk.bold(file)}: Found reference to ${chalk.bold(match)} in description without link.`, pack);
             }
         }
         // Check description for references to the setting
-        let settingResult = searchDescriptionForUnlinkedReference(description, settingRegularExpression);
+        const settingResult = searchDescriptionForUnlinkedReference(description, settingRegularExpression);
         if (settingResult.found) {
-            for (let match of settingResult.foundWords) {
+            for (const match of settingResult.foundWords) {
                 addWarningForPack(`${chalk.bold(file)}: Found reference to ${chalk.bold(match)} in description without link.`, pack);
             }
         }
@@ -1186,23 +1170,23 @@ function searchDescriptionForUnlinkedCondition(description) {
 // Checks if a description contains an unlinked reference to any value found in the provided regular expression
 function searchDescriptionForUnlinkedReference(description, regularExpression) {
 
-    let matches = [...description.matchAll(regularExpression)];
+    const matches = [...description.matchAll(regularExpression)];
     let foundWords = [];
-    let alreadyLinked = [];
+    const alreadyLinked = [];
     // Found a potential reference to a condition
     if (matches && matches.length > 0) {
         // Capture the character before and after each match and use some basic heuristics to decide if it's an linked condition in the description
-        for (let match of matches) {
+        for (const match of matches) {
 
-            let conditionWord = match[0];
-            let matchedWord = description.substring(match["index"], match["index"] + match["length"]);
+            const conditionWord = match[0];
+            const matchedWord = description.substring(match["index"], match["index"] + match["length"]);
 
             // We want to capture a character before and after
-            let characterBeforeIndex = match["index"] - 1;
-            let characterAfterIndex = match["index"] + conditionWord.length;
-            let characterBefore = description.substring(characterBeforeIndex, characterBeforeIndex + 1);
-            let characterAfter = description.substring(characterAfterIndex, characterAfterIndex + 1);
-            let delimiterCharacters = [">", "<", ";", ",", "/", "(", ")", "."];
+            const characterBeforeIndex = match["index"] - 1;
+            const characterAfterIndex = match["index"] + conditionWord.length;
+            const characterBefore = description.substring(characterBeforeIndex, characterBeforeIndex + 1);
+            const characterAfter = description.substring(characterAfterIndex, characterAfterIndex + 1);
+            const delimiterCharacters = [">", "<", ";", ",", "/", "(", ")", "."];
 
             let unlinkedReferenceFound = false;
             // This is a simple rule of thumb which checks of the word in question is surrounded by `&nbsp;`. In this case we'll ignore,
@@ -1290,22 +1274,22 @@ function addWarningForPack(warning, pack) {
 }
 
 function consistencyCheck(allItems, compendiumMap) {
-    for (let item of allItems) {
-        let data = item;
-        let itemData = item.data;
+    for (const item of allItems) {
+        const data = item;
+        const itemData = item.data;
         if (!data || !itemData || !itemData.system || !itemData.system.description) continue;
 
-        let desc = itemData.system.description.value;
+        const desc = itemData.system.description.value;
         if (!desc) continue;
 
-        let pack = item.pack;
+        const pack = item.pack;
 
-        let errors = [];
-        let itemMatch = [...desc.matchAll(/@Item\[([^\]]*)\]({([^}]*)})?/gm)];
+        const errors = [];
+        const itemMatch = [...desc.matchAll(/@Item\[([^\]]*)\]({([^}]*)})?/gm)];
         if (itemMatch && itemMatch.length > 0) {
-            for (let localItem of itemMatch) {
-                let localItemId = localItem[1];
-                let localItemName = localItem[2] || localItemId;
+            for (const localItem of itemMatch) {
+                const localItemId = localItem[1];
+                const localItemName = localItem[2] || localItemId;
 
                 // @Item links cannot exist in compendiums.
                 if (!(pack in packErrors)) {
@@ -1316,11 +1300,11 @@ function consistencyCheck(allItems, compendiumMap) {
             }
         }
 
-        let journalMatch = [...desc.matchAll(/@JournalEntry\[([^\]]*)\]({([^}]*)})?/gm)];
+        const journalMatch = [...desc.matchAll(/@JournalEntry\[([^\]]*)\]({([^}]*)})?/gm)];
         if (journalMatch && journalMatch.length > 0) {
-            for (let localItem of journalMatch) {
-                let localItemId = localItem[1];
-                let localItemName = localItem[2] || localItemId;
+            for (const localItem of journalMatch) {
+                const localItemId = localItem[1];
+                const localItemName = localItem[2] || localItemId;
 
                 // @Item links cannot exist in compendiums.
                 if (!(pack in packErrors)) {
@@ -1331,13 +1315,13 @@ function consistencyCheck(allItems, compendiumMap) {
             }
         }
 
-        let compendiumMatch = [...desc.matchAll(/@UUID\[([^\]]*)]({([^}]*)})?/gm)];
+        const compendiumMatch = [...desc.matchAll(/@UUID\[([^\]]*)]({([^}]*)})?/gm)];
         if (compendiumMatch && compendiumMatch.length > 0) {
-            for (let otherItem of compendiumMatch) {
-                let link = otherItem[1];
-                let otherItemName = otherItem[4] || link;
+            for (const otherItem of compendiumMatch) {
+                const link = otherItem[1];
+                const otherItemName = otherItem[4] || link;
 
-                let linkParts = link.split('.');
+                const linkParts = link.split('.');
                 // Skip links to journal entry pages
                 // @UUID[Compendium.sfrpg.some-pack.abcxyz.JournalEntryPage.abcxyz]
                 if (linkParts.length === 6) {
@@ -1354,9 +1338,9 @@ function consistencyCheck(allItems, compendiumMap) {
 
                 // @UUID[Compendium.sfrpg.some-pack.abcxyz]
                 //      [0]         [1]   [2]       [3]
-                let system = linkParts[1];
-                let otherPack = linkParts[2];
-                let otherItemId = linkParts[3];
+                const system = linkParts[1];
+                const otherPack = linkParts[2];
+                const otherItemId = linkParts[3];
 
                 // @UUID links must link to sfrpg compendiums.
                 if (system !== "sfrpg") {
@@ -1391,7 +1375,7 @@ function consistencyCheck(allItems, compendiumMap) {
                 if (otherItemId in compendiumMap[otherPack]) {
                     itemExists = true;
                 } else {
-                    let foundItem = allItems.find(x => x.pack === otherPack && x._id === otherItemId);
+                    const foundItem = allItems.find(x => x.pack === otherPack && x._id === otherItemId);
                     itemExists = !!foundItem;
                 }
 
@@ -1410,9 +1394,9 @@ function consistencyCheck(allItems, compendiumMap) {
 async function postCook() {
 
     if (Object.keys(packErrors).length > 0) {
-        for (let pack of Object.keys(packErrors)) {
+        for (const pack of Object.keys(packErrors)) {
             console.error(chalk.redBright(`\n${packErrors[pack].length} Errors cooking ${pack}.db:`));
-            for (let error of packErrors[pack]) {
+            for (const error of packErrors[pack]) {
                 console.error(chalk.redBright(`> ${error}`));
             }
         }
@@ -1473,7 +1457,7 @@ async function copyLocalization() {
         const languageRaw = fs.readFileSync(itemSourceDir + "/" + filePath);
         const languageJson = JSON.parse(languageRaw);
 
-        let copiedJson = JSON.parse(JSON.stringify(englishJson));
+        const copiedJson = JSON.parse(JSON.stringify(englishJson));
         mergeDeep(copiedJson, languageJson);
 
         const outRaw = JSONstringifyOrder(copiedJson, 4);
