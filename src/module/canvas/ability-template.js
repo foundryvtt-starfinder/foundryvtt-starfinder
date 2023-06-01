@@ -1,6 +1,6 @@
 import { MeasuredTemplateSFRPG } from "./template-overrides.js";
 /**
- * A helper class for building MeasuredTemplates for SF spells and abilities
+ * A helper class to provide a preview interface for placable templates
  *
  * @augments MeasuredTemplateSFRPG
  */
@@ -186,6 +186,10 @@ export default class AbilityTemplate extends MeasuredTemplateSFRPG {
         return super.refresh();
     }
 
+    /**
+     * Confirm placement of the preview template onto the canvas
+     * @returns The updated document, after placement on the canvas
+     */
     async place() {
         this.document = await canvas.scene.createEmbeddedDocuments("MeasuredTemplate", [this.document.toObject(false)])[0];
         return this.document;

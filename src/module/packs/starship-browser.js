@@ -166,19 +166,19 @@ class StarshipBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     _filterComponentType(element, filters) {
-        const itemId = element.dataset.entryUuid;
+        const itemUuid = element.dataset.entryUuid;
         const item = this.items.get(itemUuid);
         return item && filters.includes(item.type);
     }
 
     _filterWeaponType(element, filters) {
-        const itemId = element.dataset.entryUuid;
+        const itemUuid = element.dataset.entryUuid;
         const item = this.items.get(itemUuid);
         return item && (item.type !== "starshipWeapon" || filters.includes(item.system.weaponType));
     }
 
     _filterWeaponClass(element, filters) {
-        const itemId = element.dataset.entryUuid;
+        const itemUuid = element.dataset.entryUuid;
         const item = this.items.get(itemUuid);
         return item && (item.type !== "starshipWeapon" || filters.includes(item.system.class));
     }

@@ -9,9 +9,9 @@ import BaseEnricher from "./base.js";
  * @class
  */
 export default class BrowserEnricher extends BaseEnricher {
-    // E.g @Browser<type:equipment|filters:{"equipmentTypes":"weapon","weaponTypes":"smallA","weaponCategories":"cryo","search":"Big Gun"}>
-    // @Browser<type:spell|filters:{"classes":["mystic","technomancer"],"levels":[0,1,2],"schools":"conjuration"}>{Some cool spells}
-    // @Browser<type:starship|filters:{"starshipComponentTypes":["starshipWeapon"], "starshipWeaponTypes":"ecm","starshipWeaponClass":"heavy"}>
+    // E.g @Browser(type:equipment|filters:{"equipmentTypes":"weapon","weaponTypes":"smallA","weaponCategories":"cryo","search":"Big Gun"})
+    // @Browser(type:spell|filters:{"classes":["mystic","technomancer"],"levels":[0,1,2],"schools":"conjuration"}>{Some cool spells})
+    // @Browser(type:starship|filters:{"starshipComponentTypes":["starshipWeapon"], "starshipWeaponTypes":"ecm","starshipWeaponClass":"heavy"})
 
     constructor() {
         super();
