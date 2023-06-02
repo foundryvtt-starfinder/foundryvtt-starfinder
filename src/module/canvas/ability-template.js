@@ -119,7 +119,7 @@ export default class AbilityTemplate extends MeasuredTemplateSFRPG {
                 // Clear highlight
                 this.active = false;
                 const hl = canvas.grid.getHighlightLayer(this.highlightId);
-                hl.clear();
+                hl?.clear();
                 _clear();
 
                 initialLayer.activate();
