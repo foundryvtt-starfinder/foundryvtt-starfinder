@@ -6,13 +6,13 @@ import IconEnricher from "./system/enrichers/icon.js";
 export const SFRPG = {};
 
 SFRPG.actorTypes = {
-    "character": "ACTOR.TypeCharacter",
-    "drone": "ACTOR.TypeDrone",
-    "hazard": "ACTOR.TypeHazard",
-    "npc": "ACTOR.TypeNpc",
-    "npc2": "ACTOR.TypeNpc2",
-    "starshop": "ACTOR.TypeStarship",
-    "vehicle": "ACTOR.TypeVehicle"
+    "character": "TYPES.Actor.character",
+    "drone": "TYPES.Actor.drone",
+    "hazard": "TYPES.Actor.hazard",
+    "npc": "TYPES.Actor.npc",
+    "npc2": "TYPES.Actor.npc2",
+    "starship": "TYPES.Actor.starship",
+    "vehicle": "TYPES.Actor.vehicle"
 };
 
 /**
@@ -1517,6 +1517,54 @@ SFRPG.CR_EXP_LEVELS = [
     1638400
 ];
 
+SFRPG.CRTable = {
+    "0":   {minXP: 0,       totalXP: 0,       nextXP: 1,       perPlayerXP: [0,      0,      0],      wealthValue: 0},
+    "1/8": {minXP: 1,       totalXP: 50,      nextXP: 65,      perPlayerXP: [15,     15,     10],     wealthValue: 0},
+    "1/6": {minXP: 51,      totalXP: 65,      nextXP: 100,     perPlayerXP: [20,     15,     10],     wealthValue: 0},
+    "1/4": {minXP: 66,      totalXP: 100,     nextXP: 135,     perPlayerXP: [35,     25,     15],     wealthValue: 0},
+    "1/3": {minXP: 101,     totalXP: 135,     nextXP: 200,     perPlayerXP: [45,     35,     25],     wealthValue: 150},
+    "1/2": {minXP: 136,     totalXP: 200,     nextXP: 400,     perPlayerXP: [65,     50,     35],     wealthValue: 230},
+    "1":   {minXP: 201,     totalXP: 400,     nextXP: 600,     perPlayerXP: [135,    100,    65],     wealthValue: 460},
+    "2":   {minXP: 401,     totalXP: 600,     nextXP: 800,     perPlayerXP: [200,    150,    100],    wealthValue: 775},
+    "3":   {minXP: 601,     totalXP: 800,     nextXP: 1200,    perPlayerXP: [265,    200,    135],    wealthValue: 1100},
+    "4":   {minXP: 801,     totalXP: 1200,    nextXP: 1600,    perPlayerXP: [400,    300,    200],    wealthValue: 1400},
+    "5":   {minXP: 1201,    totalXP: 1600,    nextXP: 2400,    perPlayerXP: [535,    400,    265],    wealthValue: 3100},
+    "6":   {minXP: 1601,    totalXP: 2400,    nextXP: 3200,    perPlayerXP: [800,    600,    400],    wealthValue: 3900},
+    "7":   {minXP: 2401,    totalXP: 3200,    nextXP: 4800,    perPlayerXP: [1070,   800,    535],    wealthValue: 4600},
+    "8":   {minXP: 3201,    totalXP: 4800,    nextXP: 6400,    perPlayerXP: [1600,   1200,   800],    wealthValue: 5400},
+    "9":   {minXP: 4801,    totalXP: 6400,    nextXP: 9600,    perPlayerXP: [2130,   1600,   1070],   wealthValue: 10000},
+    "10":  {minXP: 6401,    totalXP: 9600,    nextXP: 12800,   perPlayerXP: [3200,   2400,   1600],   wealthValue: 14700},
+    "11":  {minXP: 9601,    totalXP: 12800,   nextXP: 19200,   perPlayerXP: [4270,   3200,   2130],   wealthValue: 25000},
+    "12":  {minXP: 12801,   totalXP: 19200,   nextXP: 25600,   perPlayerXP: [6400,   4800,   3200],   wealthValue: 34000},
+    "13":  {minXP: 19201,   totalXP: 25600,   nextXP: 38400,   perPlayerXP: [8530,   6400,   4270],   wealthValue: 50000},
+    "14":  {minXP: 25601,   totalXP: 38400,   nextXP: 51200,   perPlayerXP: [12800,  9600,   6400],   wealthValue: 77000},
+    "15":  {minXP: 38401,   totalXP: 51200,   nextXP: 76800,   perPlayerXP: [17100,  12800,  8530],   wealthValue: 113000},
+    "16":  {minXP: 51201,   totalXP: 76800,   nextXP: 102400,  perPlayerXP: [25600,  19200,  12800],  wealthValue: 178000},
+    "17":  {minXP: 76801,   totalXP: 102400,  nextXP: 153600,  perPlayerXP: [34100,  25600,  17100],  wealthValue: 260000},
+    "18":  {minXP: 102401,  totalXP: 153600,  nextXP: 204800,  perPlayerXP: [51200,  38400,  25600],  wealthValue: 405000},
+    "19":  {minXP: 153601,  totalXP: 204800,  nextXP: 307200,  perPlayerXP: [68300,  51200,  34100],  wealthValue: 555000},
+    "20":  {minXP: 204801,  totalXP: 307200,  nextXP: 409600,  perPlayerXP: [102000, 76800,  51200],  wealthValue: 782000},
+    "21":  {minXP: 307201,  totalXP: 409600,  nextXP: 614400,  perPlayerXP: [137000, 102400, 68300],  wealthValue: 782000},
+    "22":  {minXP: 409601,  totalXP: 614400,  nextXP: 819200,  perPlayerXP: [205000, 153600, 102400], wealthValue: 782000},
+    "23":  {minXP: 614401,  totalXP: 819200,  nextXP: 1228800, perPlayerXP: [273000, 204800, 137000], wealthValue: 782000},
+    "24":  {minXP: 819201,  totalXP: 1228800, nextXP: 1638400, perPlayerXP: [410000, 307200, 204800], wealthValue: 782000},
+    "25":  {minXP: 1228801, totalXP: 1638400, nextXP: 1638400, perPlayerXP: [546000, 409600, 273000], wealthValue: 782000}
+};
+
+SFRPG.difficultyLevels = {
+    "noPCShips": "SFRPG.Combat.Difficulty.Levels.NoPCShips",
+    "noEnemyShips": "SFRPG.Combat.Difficulty.Levels.NoEnemyShips",
+    "noPcs": "SFRPG.Combat.Difficulty.Levels.NoPCs",
+    "noEnemies": "SFRPG.Combat.Difficulty.Levels.NoEnemies",
+    "lessThanEasy": "SFRPG.Combat.Difficulty.Levels.LessThanEasy",
+    "easy": "SFRPG.Combat.Difficulty.Levels.Easy",
+    "average": "SFRPG.Combat.Difficulty.Levels.Average",
+    "challenging": "SFRPG.Combat.Difficulty.Levels.Challenging",
+    "hard": "SFRPG.Combat.Difficulty.Levels.Hard",
+    "epic": "SFRPG.Combat.Difficulty.Levels.Epic",
+    "greaterThanEpic": "SFRPG.Combat.Difficulty.Levels.GreaterThanEpic"
+};
+
 SFRPG.statusEffects = [
     {
         id: "asleep",
@@ -1904,7 +1952,7 @@ SFRPG.itemTypes = {
     "race": "SFRPG.Items.Categories.Races",
     "theme": "SFRPG.Items.Categories.Themes",
 
-    "actorResource": "ITEM.TypeActorresource",
+    "actorResource": "TYPES.Item.actorResource",
     "feat": "SFRPG.Items.Categories.Feats",
     "spell": "SFRPG.Items.Categories.Spells",
 
@@ -1914,7 +1962,7 @@ SFRPG.itemTypes = {
     "mod": "SFRPG.Items.Categories.DroneMods",
 
     "starshipAblativeArmor": "SFRPG.Items.Categories.StarshipAblativeArmors",
-    "starshipAction": "ITEM.TypeStarshipaction",
+    "starshipAction": "TYPES.Item.starshipAction",
     "starshipArmor": "SFRPG.Items.Categories.StarshipArmors",
     "starshipComputer": "SFRPG.Items.Categories.StarshipComputers",
     "starshipCrewQuarter": "SFRPG.Items.Categories.StarshipCrewQuarters",
@@ -1929,6 +1977,7 @@ SFRPG.itemTypes = {
     "starshipSecuritySystem": "SFRPG.Items.Categories.StarshipSecuritySystems",
     "starshipSensor": "SFRPG.Items.Categories.StarshipSensors",
     "starshipShield": "SFRPG.Items.Categories.StarshipShields",
+    "starshipSpecialAbility": "TYPES.Item.starshipSpecialAbility",
     "starshipThruster": "SFRPG.Items.Categories.StarshipThrusters",
     "starshipWeapon": "SFRPG.Items.Categories.StarshipWeapons",
 
@@ -1940,15 +1989,15 @@ SFRPG.itemTypes = {
     "consumable": "SFRPG.Items.Categories.Consumables",
     "container": "SFRPG.Items.Categories.Containers",
     "equipment": "SFRPG.Items.Categories.Armor",
-    "fusion": "ITEM.TypeFusion",
+    "fusion": "TYPES.Item.fusion",
     "goods": "SFRPG.Items.Categories.Goods",
     "hybrid": "SFRPG.Items.Categories.HybridItems",
     "magic": "SFRPG.Items.Categories.MagicItems",
     "shield": "SFRPG.Items.Categories.Shields",
     "technological": "SFRPG.Items.Categories.TechnologicalItems",
-    "upgrade": "ITEM.TypeUpgrade",
+    "upgrade": "TYPES.Item.upgrade",
     "weapon": "SFRPG.Items.Categories.Weapons",
-    "weaponAccessory": "ITEM.TypeWeaponaccessory"
+    "weaponAccessory": "TYPES.Item.weaponAccessory"
 };
 
 SFRPG.characterDefinitionItemTypes = [

@@ -5,16 +5,16 @@
         <div class="form-group">
             <label>{{ localize "SFRPG.ItemSheet.PhysicalProperties.ItemDescriptor" }}</label>
             <div class="form-fields">
-                <label class="checkbox" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.SturdyTooltip" }}">
+                <label class="checkbox" data-tooltip="{{ localize "SFRPG.ItemSheet.PhysicalProperties.SturdyTooltip" }}">
                     <input type="checkbox" name="system.attributes.sturdy" {{checked itemData.attributes.sturdy}}/> {{ localize "SFRPG.ItemSheet.PhysicalProperties.Sturdy" }}
                 </label>
-                <label class="checkbox" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.CustomBuiltTooltip" }}">
+                <label class="checkbox" data-tooltip="{{ localize "SFRPG.ItemSheet.PhysicalProperties.CustomBuiltTooltip" }}">
                     <input type="checkbox" name="system.attributes.customBuilt" {{checked itemData.attributes.customBuilt}}/> {{ localize "SFRPG.ItemSheet.PhysicalProperties.CustomBuilt" }}
                 </label>
             </div>
         </div>
 
-        <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.SizeTooltip" }}">
+        <div class="form-group" data-tooltip="{{ localize "SFRPG.ItemSheet.PhysicalProperties.SizeTooltip" }}">
             <label>{{ localize "SFRPG.ItemSheet.PhysicalProperties.Size" }}</label>
             <div class="form-fields">
                 <select class="actor-size" name="system.attributes.size">
@@ -27,7 +27,7 @@
             </div>
         </div>
 
-        <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.DexterityModifierTooltip" }}">
+        <div class="form-group" data-tooltip="{{ localize "SFRPG.ItemSheet.PhysicalProperties.DexterityModifierTooltip" }}">
             <label>{{ localize "SFRPG.ItemSheet.PhysicalProperties.DexterityModifier" }}</label>
             <div class="form-fields">
                 <input type="text" name="system.attributes.dex.mod" value="{{itemData.attributes.dex.mod}}" data-dtype="String" placeholder="{{placeholders.dexterityModifier}}"/>
@@ -41,23 +41,23 @@
     </div>
 </div>
         <!--
-        <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.Hitpoints.HeaderTooltip" }}">
+        <div class="form-group" data-tooltip="{{ localize "SFRPG.ItemSheet.PhysicalProperties.Hitpoints.HeaderTooltip" }}">
             <label>{{ localize "SFRPG.ItemSheet.PhysicalProperties.Hitpoints.Header" }}</label>
             <div class="form-fields">
-                <input type="text" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.Hitpoints.CurrentTooltip" }}" name="system.attributes.hp.value" value="{{itemData.attributes.hp.value}}" data-dtype="Number" placeholder="{{placeholders.maxHitpoints}}" />
+                <input type="text" data-tooltip="{{ localize "SFRPG.ItemSheet.PhysicalProperties.Hitpoints.CurrentTooltip" }}" name="system.attributes.hp.value" value="{{itemData.attributes.hp.value}}" data-dtype="Number" placeholder="{{placeholders.maxHitpoints}}" />
                 <span class="sep"> / </span>
-                <input type="text" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.Hitpoints.MaxTooltip" }}" name="system.attributes.hp.max" value="{{itemData.attributes.hp.max}}" data-dtype="String" placeholder="{{placeholders.maxHitpoints}}" />
+                <input type="text" data-tooltip="{{ localize "SFRPG.ItemSheet.PhysicalProperties.Hitpoints.MaxTooltip" }}" name="system.attributes.hp.max" value="{{itemData.attributes.hp.max}}" data-dtype="String" placeholder="{{placeholders.maxHitpoints}}" />
             </div>
         </div>
 
-        <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.ArmorClassTooltip" }}">
+        <div class="form-group" data-tooltip="{{ localize "SFRPG.ItemSheet.PhysicalProperties.ArmorClassTooltip" }}">
             <label>{{ localize "SFRPG.ItemSheet.PhysicalProperties.ArmorClass" }}</label>
             <div class="form-fields">
                 <input type="text" name="system.attributes.ac.value" value="{{itemData.attributes.ac.value}}" data-dtype="String" placeholder="{{placeholders.armorClass}}"/>
             </div>
         </div>
 
-        <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.HardnessTooltip" }}">
+        <div class="form-group" data-tooltip="{{ localize "SFRPG.ItemSheet.PhysicalProperties.HardnessTooltip" }}">
             <label>{{ localize "SFRPG.ItemSheet.PhysicalProperties.Hardness" }}</label>
             <div class="form-fields">
                 <input type="text" name="system.attributes.hardness.value" value="{{itemData.attributes.hardness.value}}" data-dtype="String" placeholder="{{placeholders.hardness}}"/>

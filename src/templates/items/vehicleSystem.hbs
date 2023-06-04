@@ -16,7 +16,7 @@
 
             {{!-- Item Summary --}}
             <ul class="summary flexrow">
-                <li class="wide" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.SourceTooltip" }}">
+                <li class="wide" data-tooltip="{{ localize "SFRPG.ItemSheet.Header.SourceTooltip" }}">
                 <input type="text" name="system.source" value="{{itemData.source}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Source" }}"/>
                 </li>
             </ul>
@@ -46,7 +46,7 @@
                 <h3 class="bubble-header">{{localize "SFRPG.SensesTypes.Senses"}}</h3>
 
                 <div class="bubble-info">
-                    <div class="form-group" data-tippy-content="<strong>{{ localize 'SFRPG.VehicleSystemSheet.UseForSenses' }}</strong><br/>{{ localize "SFRPG.VehicleSystemSheet.UseForSensesTooltip" }}">
+                    <div class="form-group" data-tooltip="<strong>{{ localize 'SFRPG.VehicleSystemSheet.UseForSenses' }}</strong><br/>{{ localize "SFRPG.VehicleSystemSheet.UseForSensesTooltip" }}">
                         <label>{{ localize "SFRPG.VehicleSystemSheet.UseForSenses" }}</label>
                         <div class="form-fields">
                             <label class="checkbox">
@@ -56,7 +56,7 @@
                     </div>
 
                     {{#if itemData.senses.usedForSenses }}
-                    <div class="form-group" data-tippy-content="<strong>{{ localize 'SFRPG.VehicleSystemSheet.Senses' }}</strong><br/>{{ localize 'SFRPG.VehicleSystemSheet.SensesTooltip' }}">
+                    <div class="form-group" data-tooltip="<strong>{{ localize 'SFRPG.VehicleSystemSheet.Senses' }}</strong><br/>{{ localize 'SFRPG.VehicleSystemSheet.SensesTooltip' }}">
                         <label>{{ localize "SFRPG.VehicleSystemSheet.Senses" }}</label>
                         <div class="form-fields">
                             <input type="text" name="system.senses.senses" value="{{itemData.senses.senses}}" data-dtype="String" />
@@ -72,7 +72,7 @@
                 <h3 class="bubble-header">{{localize "SFRPG.SkillPil"}}</h3>
 
                 <div class="bubble-info">
-                    <div class="form-group" data-tippy-content="<strong>{{ localize 'SFRPG.VehicleSystemSheet.UseToPilot' }}</strong><br/>{{ localize "SFRPG.VehicleSystemSheet.UseToPilotTooltip" }}">
+                    <div class="form-group" data-tooltip="<strong>{{ localize 'SFRPG.VehicleSystemSheet.UseToPilot' }}</strong><br/>{{ localize "SFRPG.VehicleSystemSheet.UseToPilotTooltip" }}">
                         <label>{{ localize "SFRPG.VehicleSystemSheet.UseToPilot" }}</label>
                         <div class="form-fields">
                             <label class="checkbox">
@@ -82,7 +82,7 @@
                     </div>
 
                     {{#if itemData.piloting.usedAsPilot }}
-                    <div class="form-group" data-tippy-content="<strong>{{ localize 'SFRPG.VehicleSystemSheet.Piloting' }}</strong><br/>{{ localize "SFRPG.VehicleSystemSheet.PilotingTooltip" }}">
+                    <div class="form-group" data-tooltip="<strong>{{ localize 'SFRPG.VehicleSystemSheet.Piloting' }}</strong><br/>{{ localize "SFRPG.VehicleSystemSheet.PilotingTooltip" }}">
                         <label>{{ localize "SFRPG.VehicleSystemSheet.Piloting" }}</label>
                         <div class="form-fields">
                             <input type="text" name="system.piloting.piloting" value="{{itemData.piloting.piloting}}" data-dtype="String" />
@@ -97,7 +97,7 @@
                 <h3 class="bubble-header">{{localize "SFRPG.Items.Activation.Activation"}}</h3>
 
                 <div class="bubble-info">
-                    <div class="form-group" data-tippy-content="<strong>{{ localize 'SFRPG.VehicleSystemSheet.CanBeActivated' }}</strong><br/>{{ localize "SFRPG.VehicleSystemSheet.CanBeActivatedTooltip" }}">
+                    <div class="form-group" data-tooltip="<strong>{{ localize 'SFRPG.VehicleSystemSheet.CanBeActivated' }}</strong><br/>{{ localize "SFRPG.VehicleSystemSheet.CanBeActivatedTooltip" }}">
                         <label>{{ localize "SFRPG.VehicleSystemSheet.CanBeActivated" }}</label>
                         <div class="form-fields">
                             <label class="checkbox">
@@ -108,7 +108,7 @@
 
 
                     {{#if itemData.canBeActivated}}
-                    <div class="form-group" data-tippy-content="<strong>{{ localize 'SFRPG.VehicleSystemSheet.isActivated' }}</strong><br/>{{ localize "SFRPG.VehicleSystemSheet.isActivatedTooltip" }}">
+                    <div class="form-group" data-tooltip="<strong>{{ localize 'SFRPG.VehicleSystemSheet.isActivated' }}</strong><br/>{{ localize "SFRPG.VehicleSystemSheet.isActivatedTooltip" }}">
                         <label>{{ localize "SFRPG.VehicleSystemSheet.isActivated" }}</label>
                         <div class="form-fields">
                             <label class="checkbox">

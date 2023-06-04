@@ -102,7 +102,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.config = CONFIG.SFRPG;
 
         // Item Type, Status, and Details
-        data.itemType = game.i18n.format(`ITEM.Type${data.item.type.titleCase()}`);
+        data.itemType = game.i18n.format(`TYPES.Item.${data.item.type}`);
         data.itemStatus = this._getItemStatus();
         data.itemProperties = this._getItemProperties();
         data.isPhysical = data.itemData.hasOwnProperty("quantity");
@@ -977,31 +977,4 @@ export class ItemSheetSFRPG extends ItemSheet {
         });
     }
 
-    /** @override */
-    async _render(...args) {
-        await super._render(...args);
-
-        if (this._tooltips === null) {
-            this._tooltips = tippy.delegate(`#${this.id}`, {
-                target: '[data-tippy-content]',
-                allowHTML: true,
-                arrow: false,
-                placement: 'top-start',
-                duration: [500, null],
-                delay: [800, null]
-            });
-        }
-    }
-
-    async close(...args) {
-        if (this._tooltips !== null) {
-            for (const tooltip of this._tooltips) {
-                tooltip.destroy();
-            }
-
-            this._tooltips = null;
-        }
-
-        return super.close(...args);
-    }
 }

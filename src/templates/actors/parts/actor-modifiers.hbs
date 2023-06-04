@@ -9,7 +9,7 @@
         {{#if section.isConditions}}
         <div class="form-group stacked conditions">
             {{#each ../config.conditionTypes as |condition name|}}
-            <label class="checkbox" data-tippy-content="{{lookup (lookup ../../config.conditions name) "tooltip"}}">
+            <label class="checkbox" data-tooltip="{{lookup (lookup ../../config.conditions name) "tooltip"}}">
                 <input type="checkbox" 
                        class="condition {{name}}" 
                        data-condition="{{name}}" 
@@ -62,7 +62,7 @@
 
             <ol class="modifier-list item-list">
                 {{#each section.modifiers as |modifier mid|}}
-                <li class="item modifier flexrow" data-tippy-content="<strong>{{modifier.name}}</strong><br>{{#if modifier.enabled}}Enabled{{else}}Disabled{{/if}}{{#if modifier.notes}}<br><br>Notes<hr>{{modifier.notes}}{{/if}}" data-modifier-id="{{modifier._id}}">
+                <li class="item modifier flexrow" data-tooltip="<strong>{{modifier.name}}</strong><br>{{#if modifier.enabled}}Enabled{{else}}Disabled{{/if}}{{#if modifier.notes}}<br><br>Notes<hr>{{modifier.notes}}{{/if}}" data-modifier-id="{{modifier._id}}">
                     <div class="item-name modifier-name flexrow">
                         <h4>{{~modifier.name~}}</h4>
                     </div>

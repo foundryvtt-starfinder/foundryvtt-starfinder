@@ -44,8 +44,9 @@ import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./module
 import { RPC } from "./module/rpc.js";
 import registerSystemRules from "./module/rules.js";
 import { registerSystemSettings } from "./module/system/settings.js";
-import templateOverrides from "./module/template-overrides.js";
+import { MeasuredTemplateSFRPG, TemplateLayerSFRPG } from "./module/template-overrides.js";
 import { preloadHandlebarsTemplates } from "./module/templates.js";
+import TooltipManagerSFRPG from "./module/tooltip.js";
 import { generateUUID } from "./module/utils/utilities.js";
 
 import BaseEnricher from "./module/system/enrichers/base.js";
@@ -180,6 +181,10 @@ Hooks.once('init', async function() {
 
     CONFIG.Token.documentClass = SFRPGTokenDocument;
 
+    CONFIG.Canvas.layers.templates.layerClass = TemplateLayerSFRPG;
+    CONFIG.MeasuredTemplate.objectClass = MeasuredTemplateSFRPG;
+    CONFIG.MeasuredTemplate.defaults.angle = 90; // SF uses 90 degree cones
+
     CONFIG.fontDefinitions["Exo2"] = {
         editor: true,
         fonts: [
@@ -212,8 +217,8 @@ Hooks.once('init', async function() {
         wordWrap: false
     });
 
-    console.log("Starfinder | [INIT] Overriding Mathematics");
-    registerMathFunctions();
+    console.log("Starfinder | [INIT] Configuring rules engine");
+    registerSystemRules(game.sfrpg.engine);
 
     console.log("Starfinder | [INIT] Registering system settings");
     registerSystemSettings();
@@ -232,7 +237,6 @@ Hooks.once('init', async function() {
         dummy.addEventListener("load", setAnvil);
         dummy.loading = "eager";
         dummy.src = "systems/sfrpg/images/starfinder_icon.webp";
-        dummy.style.display = "none";
 
         const r = document.querySelector(':root');
         r.style.setProperty("--color-border-highlight-alt", "#0080ff");
@@ -242,6 +246,12 @@ Hooks.once('init', async function() {
         r.style.setProperty("--color-shadow-highlight", "#00a0ff");
         r.style.setProperty("--sfrpg-theme-blue", "#235683");
     }
+
+    console.log("Starfinder | [INIT] Adding math functions");
+    SFRPGRoll.registerMathFunctions();
+
+    console.log("Starfinder | [INIT] Overriding tooltips");
+    Object.defineProperty(game, "tooltip", {value: new TooltipManagerSFRPG(), configurable: true, enumerable: true});
 
     console.log("Starfinder | [INIT] Registering sheets");
     Actors.unregisterSheet("core", ActorSheet);
@@ -260,6 +270,71 @@ Hooks.once('init', async function() {
 
     console.log("Starfinder | [INIT] Setting up inline buttons");
     CONFIG.TextEditor.enrichers.push(new BrowserEnricher(), new IconEnricher(), new CheckEnricher());
+
+    console.log("Starfinder | Applying inline icons");
+    CONFIG.Actor.typeIcons = {
+        character: "fas fa-user",
+        npc2: "fas fa-spaghetti-monster-flying",
+        npc: "fas fa-spaghetti-monster-flying",
+        drone: "fas fa-robot",
+        starship: "fas fa-rocket",
+        vehicle: "fas fa-car",
+        hazard: "fas fa-skull-crossbones"
+    };
+
+    CONFIG.Item.typeIcons = {
+        "archetypes": "fas fa-id-badge",
+        "class": "fas fa-id-card",
+        "race": "fas fa-user-tag",
+        "theme": "fas fa-user-tie",
+
+        "actorResource": "fas fa-chart-pie",
+        "feat": "fas fa-medal",
+        "spell": "fas fa-wand-magic-sparkles",
+
+        "asi": "fas fa-person-arrow-up-from-line",
+
+        "chassis": "fas fa-car-battery",
+        "mod": "fas fa-screwdriver-wrench",
+
+        "starshipAblativeArmor": "fas fa-shield-halved",
+        "starshipAction": "fas fa-crosshairs",
+        "starshipArmor": "fas fa-user-shield",
+        "starshipComputer": "fas fa-server",
+        "starshipCrewQuarter": "fas fa-house-user",
+        "starshipDefensiveCountermeasure": "fas fa-shield-heart",
+        "starshipDriftEngine": "fas fa-atom",
+        "starshipExpansionBay": "fas fa-boxes-packing",
+        "starshipFortifiedHull": "fas fa-house-lock",
+        "starshipFrame": "fas fa-gears",
+        "starshipOtherSystem": "fas fa-gear",
+        "starshipPowerCore": "fas fa-radiation",
+        "starshipReinforcedBulkhead": "fas fa-file-shield",
+        "starshipSecuritySystem": "fas fa-user-lock",
+        "starshipSensor": "fas fa-location-crosshairs",
+        "starshipShield": "fas fa-shield",
+        "starshipSpecialAbility": "fas fa-medal",
+        "starshipThruster": "fas fa-shuttle-space",
+        "starshipWeapon": "fas fa-explosion",
+
+        "vehicleAttack": "fas fa-gun",
+        "vehicleSystem": "fas fa-gear",
+
+        "ammunition": "fas fa-box-archive",
+        "augmentation": "fas fa-vr-cardboard",
+        "consumable": "fas fa-beer-mug-empty",
+        "container": "fas fa-briefcase",
+        "equipment": "fas fa-shirt",
+        "fusion": "fas fa-bolt",
+        "goods": "fas fa-boxes-stacked",
+        "hybrid": "fas fa-hat-wizard",
+        "magic": "fas fa-wand-magic",
+        "shield": "fas fa-shield",
+        "technological": "fas fa-microchip",
+        "upgrade": "fas fa-link",
+        "weapon": "fas fa-gun",
+        "weaponAccessory": "fas fa-gears"
+    };
 
     const finishTime = (new Date()).getTime();
     console.log(`Starfinder | [INIT] Done (operation took ${finishTime - initTime} ms)`);
@@ -293,6 +368,7 @@ Hooks.once("i18nInit", () => {
         "damageReductionTypes",
         "damageTypeOperators",
         "damageTypes",
+        "difficultyLevels",
         "distanceUnits",
         "constantDistanceUnits",
         "variableDistanceUnits",
@@ -388,9 +464,6 @@ Hooks.once("setup", function() {
     console.log("Starfinder | [SETUP] Initializing remote inventory system");
     initializeRemoteInventory();
 
-    console.log("Starfinder | [SETUP] Configuring rules engine");
-    registerSystemRules(game.sfrpg.engine);
-
     console.log("Starfinder | [SETUP] Registering custom handlebars");
     setupHandlebars();
 
@@ -404,9 +477,6 @@ Hooks.once("ready", async () => {
 
     console.log("Starfinder | [READY] Overriding token HUD");
     canvas.hud.token = new SFRPGTokenHUD();
-
-    console.log("Starfinder | [READY] Setting up AOE template overrides");
-    templateOverrides();
 
     console.log("Starfinder | [READY] Caching starship actions");
     ActorSheetSFRPGStarship.ensureStarshipActions();
@@ -516,40 +586,6 @@ Hooks.on("hotbarDrop", (bar, data, slot) => {
     return false;
 });
 
-function registerMathFunctions() {
-    function lookup(value) {
-        for (let i = 1; i < arguments.length - 1; i += 2) {
-            if (arguments[i] === value) {
-                return arguments[i + 1];
-            }
-        }
-        return 0;
-    }
-
-    function lookupRange(value, lowestValue) {
-        let baseValue = lowestValue;
-        for (let i = 2; i < arguments.length - 1; i += 2) {
-            if (arguments[i] > value) {
-                return baseValue;
-            }
-            baseValue = arguments[i + 1];
-        }
-        return baseValue;
-    }
-
-    Roll.MATH_PROXY = mergeObject(Roll.MATH_PROXY, {
-        eq: (a, b) => a === b,
-        gt: (a, b) => a > b,
-        gte: (a, b) => a >= b,
-        lt: (a, b) => a < b,
-        lte: (a, b) => a <= b,
-        ne: (a, b) => a !== b,
-        ternary: (condition, ifTrue, ifFalse) => (condition ? ifTrue : ifFalse),
-        lookup,
-        lookupRange
-    });
-}
-
 /**
  * Create a Macro form an Item drop.
  * Get an existing item macro if one exists, otherwise create a new one.
@@ -618,6 +654,23 @@ function setupHandlebars() {
         }
 
         return 0;
+    });
+
+    Handlebars.registerHelper("crDecimalToFraction", function(value) {
+        let string = "";
+        switch (value) {
+            case 0.125: string = "1/8";
+                break;
+            case 0.16666666666666666: string = "1/6";
+                break;
+            case 0.25: string = "1/4";
+                break;
+            case 0.3333333333333333: string = "1/3";
+                break;
+            case 0.5: string = "1/2";
+                break;
+        }
+        return string || value;
     });
 
     Handlebars.registerHelper("not", function(value) {
@@ -752,7 +805,7 @@ function setupHandlebars() {
             throw new Error(game.i18n.localize("SFRPG.Tippy.ErrorNoTitle"));
         }
 
-        let html = "data-tippy-content=\"<strong>" + Handlebars.escapeExpression(game.i18n.localize(title)) + "</strong>";
+        let html = "data-tooltip=\"<strong>" + Handlebars.escapeExpression(game.i18n.localize(title)) + "</strong>";
         if (subtitle) {
             html += "<br/>" + Handlebars.escapeExpression(game.i18n.localize(subtitle));
         }
@@ -798,9 +851,9 @@ function setupHandlebars() {
         return new Handlebars.SafeString(html);
     });
 
-    Handlebars.registerHelper('currencyFormat', function(value) {
-        const moneyFormatter = new Intl.NumberFormat(game.i18n.lang);
-        const formattedValue = moneyFormatter.format(value);
+    Handlebars.registerHelper('i18nNumberFormat', function(value) {
+        const formatter = new Intl.NumberFormat(game.i18n.lang);
+        const formattedValue = formatter.format(value);
         return formattedValue;
     });
 
@@ -808,12 +861,12 @@ function setupHandlebars() {
 
 Hooks.on("renderSidebarTab", async (app, html) => {
     if (app.options.id === "settings") {
-        const textToAdd = `<br/><a href="https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/blob/master/changelist.md">Starfinder Patch Notes</a>`;
+        const textToAdd = `<a href="https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/blob/master/changelist.md">Starfinder Patch Notes</a>`;
         const gameDetails = document.getElementById("game-details");
         if (gameDetails) {
             const systemSection = gameDetails.getElementsByClassName("system")[0];
             if (systemSection) {
-                systemSection.innerHTML += textToAdd;
+                systemSection.insertAdjacentHTML("afterend", textToAdd);
             }
         }
     }

@@ -616,3 +616,131 @@ img.icon-enricher {
         font-weight: bold;
     }
 }
+
+/* ------------------------------------------- */
+/* Combat Difficulty Calculator                */
+/* ------------------------------------------- */
+.encounter-stats-sheet {
+    .stats-header {
+        margin: 0;
+        padding: 0.25em;
+        font-size: var(--font-size-14);
+
+        .table-left {
+            flex: 3;
+            text-align: left;
+        }
+
+        .table-right {
+            flex: 1;
+            align-self: center;
+            text-align: right;
+            padding-right: 0.25em;
+            font-weight: bold;
+        }
+    }
+
+    .combatants-title {
+        display: flex;
+        flex-direction: row;
+        text-align: center;
+        border-bottom: @borderGroove;
+
+        .title-item {
+            flex: 1;
+            padding: 0.25em;
+            margin: 0;
+            font-size: var(--font-size-18);
+        }
+    }
+
+    .stats-body {
+        display: flex;
+        flex-direction: row;
+
+        .body-col {
+            flex: 1;
+        }
+
+        ul.combatant-list {
+            list-style-type: none; /* Remove bullets */
+            padding: 0; /* Remove padding */
+            margin: 0; /* Remove margins */
+        }
+
+        li.combatant-list {
+            border: black 1px solid;
+            border-radius: 0.25em;
+            padding: 0.5em;
+            margin: 0.25em;
+            display: flex;
+            max-width: 185px;
+            flex-direction: row;
+            cursor: pointer;
+            box-shadow: 0px 0px 2px black;
+            transition: box-shadow 0.2s, transform 0.2s;
+
+            img {
+                align-self: center;
+                border-style: none;
+                border-right: @borderGroove;
+                padding-right: 0.5em;
+                object-fit: cover;
+                object-position: 50% 0;
+            }
+
+            .combatant-info {
+                h4 {
+                    align-self: center;
+                    text-align: left;
+                    padding-left: 0.5em;
+                    font-size: var(--font-size-16);
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    width: 128px;
+                    display: block;
+                }
+
+                label.combatant-level {
+                    align-self: center;
+                    text-align: left;
+                    padding-left: 0.5em;
+                    display: block;
+                    cursor: inherit;
+                }
+            }
+
+            &.ally {
+                background: rgba(0, 0, 255, 0.2);
+
+                &:hover {
+                    box-shadow: 0px 0px 10px @sfrpgBlue;
+                    transition: box-shadow 0.2s, transform 0.2s;
+                    transform: scale(1.01);
+                }
+            }
+
+            &.enemy {
+                background: rgba(64, 64, 64, 0.2);
+
+                &:hover {
+                    box-shadow: 0px 0px 10px #771212;
+                    transition: box-shadow 0.2s, transform 0.2s;
+                    transform: scale(1.01);
+                }
+            }
+        }
+    }
+
+    .stats-footer {
+        padding: 0.25em;
+        margin: 0;
+        font-size: var(--font-size-16);
+    }
+}
+
+aside#tooltip,
+.locked-tooltip {
+    background: #262626;
+    border: 1px solid @borderDark;
+}

@@ -317,38 +317,6 @@ export class ActorSheetSFRPG extends ActorSheet {
         return super.render(force, options);
     }
 
-    async _render(...args) {
-        await super._render(...args);
-
-        if (this._tooltips === null) {
-            this._tooltips = tippy.delegate(`#${this.id}`, {
-                target: '[data-tippy-content]',
-                allowHTML: true,
-                arrow: false,
-                placement: 'top-start',
-                duration: [500, null],
-                delay: [800, null],
-                maxWidth: 600
-            });
-        }
-    }
-
-    clearTooltips() {
-        this._tooltips = null;
-    }
-
-    async close(...args) {
-        if (this._tooltips !== null) {
-            for (const tooltip of this._tooltips) {
-                tooltip.destroy();
-            }
-
-            this._tooltips = null;
-        }
-
-        return super.close(...args);
-    }
-
     /** @override */
     _onChangeTab(event, tabs, active) {
         if (active === "modifiers") {
@@ -1034,7 +1002,7 @@ export class ActorSheetSFRPG extends ActorSheet {
 
             const props = $(`<div class="item-properties"></div>`);
             chatData.properties.forEach(p => props.append(
-                `<span class="tag" data-tippy-content="${p.tooltip || p.title}"><strong>${p.title ? p.title + ":" : ""} </strong>${p.name}</span>`
+                `<span class="tag" data-tooltip="${p.tooltip || p.title}"><strong>${p.title ? p.title + ":" : ""} </strong>${p.name}</span>`
             ));
 
             div.append(props);

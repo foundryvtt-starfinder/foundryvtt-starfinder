@@ -18,7 +18,7 @@ export default class SFRPGModifierApplication extends FormApplication {
     }
 
     static get defaultOptions() {
-        let options = super.defaultOptions;
+        const options = super.defaultOptions;
 
         return mergeObject(options, {
             classes: ['sfrpg', 'modifier-app'],
@@ -242,16 +242,6 @@ export default class SFRPGModifierApplication extends FormApplication {
                 break;
         }
 
-        if (this._tooltips === null) {
-            this._tooltips = tippy.delegate(`#${this.id}`, {
-                target: '[data-tippy-content]',
-                allowHTML: true,
-                arrow: false,
-                placement: 'top-start',
-                duration: [500, null],
-                delay: [800, null]
-            });
-        }
     }
 
     async close(...args) {

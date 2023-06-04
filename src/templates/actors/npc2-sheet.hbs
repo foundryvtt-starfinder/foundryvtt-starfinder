@@ -19,7 +19,7 @@
                         <input name="system.details.cr" type="text" value="{{labels.cr}}" placeholder="1" />
                     </div>
                     <div class="experience">
-                        <span>{{system.details.xp.value}} XP</span>
+                        <span>{{i18nNumberFormat system.details.xp.value}} XP</span>
                     </div>
                 </div>
                 {{#if combatRoleImage}}
@@ -55,7 +55,7 @@
         <a class="item" data-tab="features">{{ localize "SFRPG.Features" }}</a>
         <a class="item" data-tab="spellbook">{{ localize "SFRPG.SpellBook.Spellbook" }}</a>
         <a class="item" data-tab="modifiers">{{localize "SFRPG.NPCSheet.Interface.Navigation.Conditions"}}</a>
-        <a class="item" data-tab="biography" {{#if (and isGM system.details.biography.gmNotes)}}data-tippy-content="{{localize "SFRPG.ActorSheet.Biography.TooltipGM"}}"{{/if}}>{{ localize "SFRPG.About" }} {{#if (and isGM system.details.biography.gmNotes)}} (!){{/if}}</a>
+        <a class="item" data-tab="biography" {{#if (and isGM system.details.biography.gmNotes)}}data-tooltip="{{localize "SFRPG.ActorSheet.Biography.TooltipGM"}}"{{/if}}>{{ localize "SFRPG.About" }} {{#if (and isGM system.details.biography.gmNotes)}} (!){{/if}}</a>
     </nav>
 
     {{!-- NPC Sheet Body --}}
@@ -66,11 +66,11 @@
             <ul class="ability-scores flexrow">
                 {{#each system.abilities as |ability id|}}
                 <li class="ability new-ability" data-ability="{{id}}">
-                    <h4 class="ability-name new-box-title rollable" data-tippy-content="<strong>{{ability.label}}</strong><br>@abilities.{{id}}.mod<br><br>{{#each ability.tooltip as |tip|}}{{tip}}<br>{{/each}}">{{ability.label}}</h4>
+                    <h4 class="ability-name new-box-title rollable" data-tooltip="<strong>{{ability.label}}</strong><br>@abilities.{{id}}.mod<br><br>{{#each ability.tooltip as |tip|}}{{tip}}<br>{{/each}}">{{ability.label}}</h4>
                     <div class="ability-modifiers flexrow">
                         <span class="ability-mod"></span>
-                        <div class="ability-center" data-tippy-content="<strong>{{ability.label}}</strong><br>@abilities.{{id}}.mod<br><br>{{#each ability.tooltip as |tip|}}{{tip}}<br>{{/each}}">{{#if ability.mod}}{{numberFormat ability.mod decimals=0 sign=true}}{{else}}+0{{/if}}</div>
-                        <input class="ability-base" data-tippy-content="<strong>{{localize "SFRPG.AbilityScoreBase"}}</strong><br>@abilities.{{id}}.base" name="system.abilities.{{id}}.base" type="text" value="{{ability.base}}" data-dtype="Number" placeholder="0"/>
+                        <div class="ability-center" data-tooltip="<strong>{{ability.label}}</strong><br>@abilities.{{id}}.mod<br><br>{{#each ability.tooltip as |tip|}}{{tip}}<br>{{/each}}">{{#if ability.mod}}{{numberFormat ability.mod decimals=0 sign=true}}{{else}}+0{{/if}}</div>
+                        <input class="ability-base" data-tooltip="<strong>{{localize "SFRPG.AbilityScoreBase"}}</strong><br>@abilities.{{id}}.base" name="system.abilities.{{id}}.base" type="text" value="{{ability.base}}" data-dtype="Number" placeholder="0"/>
                     </div>
                 </li>
                 {{/each}}
@@ -86,7 +86,7 @@
                 </li>
                 {{#each system.skills as |skill s|}}
                 {{#if skill.enabled}}
-                <li class="skill flexrow {{#if skill.value}}proficient{{/if}}" data-skill="{{s}}" data-tippy-content="<strong>{{skill.label}}</strong>{{#if (or skill.isTrainedOnly skill.hasArmorCheckPenalty)}}<br>(<em>{{#if skill.hasArmorCheckPenalty}}Armor Check Penalty{{/if}}{{#if (and skill.isTrainedOnly skill.hasArmorCheckPenalty)}}; {{/if}}{{#if skill.isTrainedOnly}}Trained Only{{/if}}</em>){{/if}}<br>Modifier: @skills.{{s}}.mod<br/><br/>{{#each skill.tooltip as |tip|}}{{tip}}<br>{{/each}}" data-skill="{{s}}">
+                <li class="skill flexrow {{#if skill.value}}proficient{{/if}}" data-skill="{{s}}" data-tooltip="<strong>{{skill.label}}</strong>{{#if (or skill.isTrainedOnly skill.hasArmorCheckPenalty)}}<br>(<em>{{#if skill.hasArmorCheckPenalty}}Armor Check Penalty{{/if}}{{#if (and skill.isTrainedOnly skill.hasArmorCheckPenalty)}}; {{/if}}{{#if skill.isTrainedOnly}}Trained Only{{/if}}</em>){{/if}}<br>Modifier: @skills.{{s}}.mod<br/><br/>{{#each skill.tooltip as |tip|}}{{tip}}<br>{{/each}}" data-skill="{{s}}">
                     <input type="hidden" name="system.skills.{{s}}.value" value="{{skill.value}}" data-dtype="Number" />
                     <h4 class="skill-name rollable">
                         {{skill.label}}
@@ -142,7 +142,7 @@
                         </div>
                     </li>
 
-                    <li class="attribute" data-tippy-content="<strong>{{ localize "SFRPG.EnergyArmorClass" }}</strong><br/>@attributes.eac.value<br/><br/>{{#each system.attributes.eac.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                    <li class="attribute" data-tooltip="<strong>{{ localize "SFRPG.EnergyArmorClass" }}</strong><br/>@attributes.eac.value<br/><br/>{{#each system.attributes.eac.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                         <h4 class="attribute-name new-box-title">{{ localize "SFRPG.EnergyArmorClass" }}</h4>
                         <div class="attrib-modifiers flexrow">
                             <span class="attrib-mod"></span>
@@ -151,7 +151,7 @@
                         </div>
                     </li>
 
-                    <li class="attribute" data-tippy-content="<strong>{{ localize "SFRPG.KineticArmorClass" }}</strong><br/>@attributes.kac.value<br/><br/>{{#each system.attributes.kac.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                    <li class="attribute" data-tooltip="<strong>{{ localize "SFRPG.KineticArmorClass" }}</strong><br/>@attributes.kac.value<br/><br/>{{#each system.attributes.kac.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                         <h4 class="attribute-name new-box-title">{{ localize "SFRPG.KineticArmorClass" }}</h4>
                         <div class="attrib-modifiers flexrow">
                             <span class="attrib-mod"></span>
@@ -164,7 +164,7 @@
 
                 <ul class="attributes flexrow">
 
-                    <li class="attribute initiative" data-tippy-content="<strong>{{ localize "SFRPG.InitiativeLabel" }}</strong><br/>@attributes.init.total<br/><br/>{{#each system.attributes.init.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                    <li class="attribute initiative" data-tooltip="<strong>{{ localize "SFRPG.InitiativeLabel" }}</strong><br/>@attributes.init.total<br/><br/>{{#each system.attributes.init.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                         <h4 class="attribute-name new-box-title">{{ localize "SFRPG.InitiativeLabel" }}</h4>
                         <div class="attrib-modifiers flexrow">
                             <span class="attrib-mod"></span>
@@ -177,7 +177,7 @@
                 </ul>
 
                 <ul class="attributes flexrow">
-                    <li class="attribute new-save" data-save="fort" data-tippy-content="<strong>{{ localize "SFRPG.FortitudeSave" }}</strong><br/>@attributes.fort.bonus<br/><br/>{{#each system.attributes.fort.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                    <li class="attribute new-save" data-save="fort" data-tooltip="<strong>{{ localize "SFRPG.FortitudeSave" }}</strong><br/>@attributes.fort.bonus<br/><br/>{{#each system.attributes.fort.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                         <h4 class="attribute-name save-name box-title rollable">{{localize "SFRPG.FortitudeSave"}}</h4>
                         <div class="attrib-modifiers flexrow">
                             <span class="attrib-mod"></span>
@@ -186,7 +186,7 @@
                         </div>
                     </li>
 
-                    <li class="attribute new-save" data-save="reflex" data-tippy-content="<strong>{{ localize "SFRPG.ReflexSave" }}</strong><br/>@attributes.reflex.bonus<br/><br/>{{#each system.attributes.reflex.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                    <li class="attribute new-save" data-save="reflex" data-tooltip="<strong>{{ localize "SFRPG.ReflexSave" }}</strong><br/>@attributes.reflex.bonus<br/><br/>{{#each system.attributes.reflex.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                         <h4 class="attribute-name save-name box-title rollable">{{localize "SFRPG.ReflexSave"}}</h4>
                         <div class="attrib-modifiers flexrow">
                             <span class="attrib-mod"></span>
@@ -195,7 +195,7 @@
                         </div>
                     </li>
 
-                    <li class="attribute new-save" data-save="will" data-tippy-content="<strong>{{ localize "SFRPG.WillSave" }}</strong><br/>@attributes.will.bonus<br/><br/>{{#each system.attributes.will.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                    <li class="attribute new-save" data-save="will" data-tooltip="<strong>{{ localize "SFRPG.WillSave" }}</strong><br/>@attributes.will.bonus<br/><br/>{{#each system.attributes.will.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                         <h4 class="attribute-name save-name box-title rollable">{{localize "SFRPG.WillSave"}}</h4>
                         <div class="attrib-modifiers flexrow">
                             <span class="attrib-mod"></span>

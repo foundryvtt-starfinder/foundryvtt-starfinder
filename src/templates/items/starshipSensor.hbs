@@ -28,7 +28,7 @@
                 <div class="bubble-info">
 
                     {{!-- Scan Modifier --}}
-                    <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipSensor.Modifier" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipSensor.ModifierTooltip" }}">
+                    <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipSensor.Modifier" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipSensor.ModifierTooltip" }}">
                         <label>{{ localize "SFRPG.ItemSheet.StarshipSensor.Modifier" }}</label>
                         <div class="form-fields">
                             <input type="text" name="system.modifier" value="{{itemData.modifier}}" data-dtype="Number" placeholder="0" />
@@ -36,7 +36,7 @@
                     </div>
 
                     {{!-- Range --}}
-                    <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipSensor.Range" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipSensor.RangeTooltip" }}">
+                    <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipSensor.Range" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipSensor.RangeTooltip" }}">
                         <label>{{ localize "SFRPG.ItemSheet.StarshipSensor.Range" }}</label>
                         <select name="system.range">
                             {{#select itemData.range}}
