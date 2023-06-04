@@ -271,6 +271,71 @@ Hooks.once('init', async function() {
     console.log("Starfinder | [INIT] Setting up inline buttons");
     CONFIG.TextEditor.enrichers.push(new BrowserEnricher(), new IconEnricher(), new CheckEnricher());
 
+    console.log("Starfinder | Applying inline icons");
+    CONFIG.Actor.typeIcons = {
+        character: "fas fa-user",
+        npc2: "fas fa-spaghetti-monster-flying",
+        npc: "fas fa-spaghetti-monster-flying",
+        drone: "fas fa-robot",
+        starship: "fas fa-rocket",
+        vehicle: "fas fa-car",
+        hazard: "fas fa-skull-crossbones"
+    };
+
+    CONFIG.Item.typeIcons = {
+        "archetypes": "fas fa-id-badge",
+        "class": "fas fa-id-card",
+        "race": "fas fa-user-tag",
+        "theme": "fas fa-user-tie",
+
+        "actorResource": "fas fa-chart-pie",
+        "feat": "fas fa-medal",
+        "spell": "fas fa-wand-magic-sparkles",
+
+        "asi": "fas fa-person-arrow-up-from-line",
+
+        "chassis": "fas fa-car-battery",
+        "mod": "fas fa-screwdriver-wrench",
+
+        "starshipAblativeArmor": "fas fa-shield-halved",
+        "starshipAction": "fas fa-crosshairs",
+        "starshipArmor": "fas fa-user-shield",
+        "starshipComputer": "fas fa-server",
+        "starshipCrewQuarter": "fas fa-house-user",
+        "starshipDefensiveCountermeasure": "fas fa-shield-heart",
+        "starshipDriftEngine": "fas fa-atom",
+        "starshipExpansionBay": "fas fa-boxes-packing",
+        "starshipFortifiedHull": "fas fa-house-lock",
+        "starshipFrame": "fas fa-gears",
+        "starshipOtherSystem": "fas fa-gear",
+        "starshipPowerCore": "fas fa-radiation",
+        "starshipReinforcedBulkhead": "fas fa-file-shield",
+        "starshipSecuritySystem": "fas fa-user-lock",
+        "starshipSensor": "fas fa-location-crosshairs",
+        "starshipShield": "fas fa-shield",
+        "starshipSpecialAbility": "fas fa-medal",
+        "starshipThruster": "fas fa-shuttle-space",
+        "starshipWeapon": "fas fa-explosion",
+
+        "vehicleAttack": "fas fa-gun",
+        "vehicleSystem": "fas fa-gear",
+
+        "ammunition": "fas fa-box-archive",
+        "augmentation": "fas fa-vr-cardboard",
+        "consumable": "fas fa-beer-mug-empty",
+        "container": "fas fa-briefcase",
+        "equipment": "fas fa-shirt",
+        "fusion": "fas fa-bolt",
+        "goods": "fas fa-boxes-stacked",
+        "hybrid": "fas fa-hat-wizard",
+        "magic": "fas fa-wand-magic",
+        "shield": "fas fa-shield",
+        "technological": "fas fa-microchip",
+        "upgrade": "fas fa-link",
+        "weapon": "fas fa-gun",
+        "weaponAccessory": "fas fa-gears"
+    };
+
     const finishTime = (new Date()).getTime();
     console.log(`Starfinder | [INIT] Done (operation took ${finishTime - initTime} ms)`);
 });

@@ -1977,6 +1977,7 @@ SFRPG.itemTypes = {
     "starshipSecuritySystem": "SFRPG.Items.Categories.StarshipSecuritySystems",
     "starshipSensor": "SFRPG.Items.Categories.StarshipSensors",
     "starshipShield": "SFRPG.Items.Categories.StarshipShields",
+    "starshipSpecialAbility": "TYPES.Item.starshipSpecialAbility",
     "starshipThruster": "SFRPG.Items.Categories.StarshipThrusters",
     "starshipWeapon": "SFRPG.Items.Categories.StarshipWeapons",
 
