@@ -39,6 +39,7 @@ export default function(engine) {
                 }
                 return false;
             }
+            else return true;
         }), context, {actor: fact.actor});
 
         const mod = Object.entries(mods).reduce((prev, curr) => {
