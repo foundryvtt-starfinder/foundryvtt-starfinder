@@ -84,6 +84,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -114,6 +115,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -121,6 +123,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -218,6 +221,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -248,6 +252,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -255,6 +260,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -276,25 +282,7 @@
       "_id": "lx6EoDuUXe3aHnLX",
       "name": "[MultiATK] 4 Claws",
       "type": "weapon",
-      "ammunition": false,
-      "augmentation": false,
-      "consumable": false,
-      "container": false,
-      "equipment": false,
-      "fusion": true,
-      "goods": false,
-      "hybrid": false,
       "img": "icons/svg/item-bag.svg",
-      "magic": false,
-      "shield": false,
-      "spell": false,
-      "storage": {
-        "type": "slot",
-        "affectsEncumbrance": true,
-        "amount": 0,
-        "subtype": "fusion",
-        "weightProperty": "level"
-      },
       "system": {
         "type": "",
         "ability": "",
@@ -381,6 +369,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -501,6 +490,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -508,6 +498,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -523,13 +514,7 @@
         },
         "weaponCategory": "uncategorized",
         "weaponType": "basicM"
-      },
-      "technological": false,
-      "upgrade": false,
-      "vehicleAttack": false,
-      "vehicleSystem": false,
-      "weapon": false,
-      "weaponAccessory": false
+      }
     },
     {
       "_id": "nqKdbYKIo9z2TLOS",
@@ -542,6 +527,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -563,6 +549,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -589,6 +576,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -617,6 +605,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -638,6 +627,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -664,6 +654,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -689,6 +680,7 @@
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -710,6 +702,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -736,6 +729,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -764,6 +758,7 @@
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -792,11 +787,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -814,6 +806,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 2
@@ -864,12 +857,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -1000,8 +999,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<h2>Description</h2>\n<p>Elmeshras are large six-legged amphibians native to @UUID[Compendium.sfrpg.setting.sRunEYMfbrHeHcl7]{Triaxus}. They are omnivorous, eating fish, smaller aquatic animals, and fruit in equal quantity. While elmeshras might seem lethargic, floating calmly with their eyes just above the surface, they are surprisingly quick to act, especially if provoked or when a tempting bit of prey swims too close. Elmeshras tend to eat close to their weight in food every day. They spawn in shallow pools and marshes during @UUID[Compendium.sfrpg.setting.sRunEYMfbrHeHcl7]{Triaxus}’s summer, and the handful that survive to reach the winter hibernate through it, storing fertilized eggs to release as the weather improves. A typical elmeshra is over 12 feet long and weighs 3,000 pounds.</p>\n<p>Before the Gap, it was common for dragons and rhyphorians to dig up the massive amphibians throughout the winter. Their carcasses provided meat for lean winter days, but also elmeshra oil-originally drained from the creature’s flesh and extracted chemically-which protected against fatal freezing. Triaxians no longer rely on elmeshras for survival, but elmeshra steaks are still considered a delicacy by certain long-lived dragons, and the oil is often used as an ingredient in high-end perfumes.</p>\n<p>On @UUID[Compendium.sfrpg.setting.sRunEYMfbrHeHcl7]{Triaxus}, hibernating elmeshras can occasionally be found buried in ice floes, but it’s more common to find living versions on other planets. The ease of shipping frozen elmeshras makes them a common animal attraction in zoos and a popular quarry in hunting expeditions across many systems. However, outside of their natural environment, elmeshras engage in frequent cycles of spawning that can rapidly cause ecological blight.</p>\n<p>Elmeshra eggs are found clustered in spheres up to 10 feet in diameter and hatch based on the weather. When they finally spring forth, hundreds of elmeshra spawn surge across land and sea alike. These spawn sometimes overwhelm larger animals, especially those still adjusting to the changing season.</p>",
@@ -1011,6 +1013,10 @@
       "cr": 7,
       "environment": "temperate aquatic and marsh (Triaxus)",
       "organization": "solitary or pair",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #30 pg. 56",
@@ -1316,6 +1322,9 @@
       },
       "senses": "blindsight (heat) 60 ft., low-light vision",
       "size": "large",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

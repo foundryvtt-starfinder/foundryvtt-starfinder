@@ -5,23 +5,10 @@
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
+      "_id": "hHPEha7rYURPq9zs",
       "name": "Bite",
       "type": "weapon",
-      "hasAttack": true,
-      "hasCapacity": false,
-      "hasUses": false,
       "img": "icons/svg/mystery-man.svg",
-      "isCharged": true,
-      "isStack": false,
-      "labels": {
-        "activation": "",
-        "area": "",
-        "damage": "1d4+1",
-        "duration": "",
-        "range": "",
-        "save": "",
-        "target": ""
-      },
       "system": {
         "type": "",
         "ability": "",
@@ -43,6 +30,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -50,6 +38,24 @@
           "value": null
         },
         "attackBonus": 7,
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": true
+        },
         "attuned": false,
         "bulk": "L",
         "capacity": {
@@ -60,6 +66,8 @@
         "containedItemIds": [],
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
+          "isOpen": true,
           "storage": [
             {
               "type": "slot",
@@ -88,8 +96,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
@@ -98,22 +109,26 @@
           "units": "",
           "value": null
         },
+        "equippable": false,
         "equipped": false,
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
+        "isActive": null,
         "level": 1,
         "modifiers": [],
         "price": 0,
         "proficient": true,
         "properties": {},
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -121,6 +136,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -134,31 +150,19 @@
           "per": null,
           "value": 0
         },
+        "weaponCategory": "uncategorized",
         "weaponType": "basicM"
       }
     },
     {
+      "_id": "85VNQf3zumergCEx",
       "name": "Squox Tricks (Ex)",
       "type": "feat",
-      "hasAttack": false,
-      "hasUses": false,
       "img": "icons/svg/mystery-man.svg",
-      "isCharged": true,
-      "isOnCooldown": false,
-      "isStack": false,
-      "labels": {
-        "activation": "",
-        "area": "",
-        "damage": "",
-        "duration": "",
-        "featType": "Passive",
-        "range": "",
-        "save": "",
-        "target": ""
-      },
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -180,8 +184,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>A squox can use Acrobatics to jump instead of Athletics. In addition, a squox can use its Acrobatics bonus as its attack bonus when it attempts a dirty trick, disarm, or trip combat maneuver. If the squox succeeds at a dirty trick maneuver, it can choose only between the entangled and @UUID[Compendium.sfrpg.conditions.yUtkoIshf4dPruNd]{Off-Target} conditions. A squox’s tail, two front paws, and mouth count as hands free for a disarm attempt.</p>"
         },
@@ -191,6 +198,7 @@
           "value": null
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -203,6 +211,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -224,12 +233,14 @@
   "prototypeToken": {
     "name": "Trained Squox",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -258,11 +269,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -280,6 +288,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -330,8 +339,14 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
+      "baseSpellDC": {
+        "base": 0
+      },
       "cmd": {
         "min": 0,
         "tooltip": [],
@@ -388,7 +403,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 40
@@ -397,7 +413,8 @@
         "special": "original base: 40 ft.; original special: climb 20 ft.",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -421,12 +438,26 @@
       "alignment": "N",
       "aura": "",
       "biography": {
+        "age": 0,
+        "dateOfBirth": "",
+        "deity": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
+        "height": "",
+        "homeWorld": "",
+        "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>Called vulkariki in Lashunta, squoxes gained their popular moniker from humans who thought the creatures resembled a cross between a fox and a squirrel, with useful qualities from both animals. Squoxes are furry, vulpine animals roughly 2 feet in length and weighing around 15 pounds. They are quadrupedal, with five-fingered prehensile paws that have rotating wrists and ankles, allowing them to climb down surfaces headfirst like a squirrel. The creature’s other features are fox-like, including a flattened head with triangular ears, a pointed snout, and a bushy tail. Squox fur can come in hues of red orange, gray, fulvous, white, or brown, with white on the belly, neck, and tail tip. The species also has an array of fur patterns and environmental adaptations, such as long ears that allow desert-dwelling squoxes to disperse heat and thick seasonal fur and coloration for those accustomed to arctic regions.</p>\n<p>Squoxes are among the most intelligent animal species in the Pact Worlds, exhibiting social behaviors and hierarchies along with a vast vocal repertoire. When confronted, squoxes are devious tacticians, especially in groups. They are clever enough to poke eyes, bite sensitive regions, and steal objects to bait enemies away from a den.</p>\n<p>Although they originated on @UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel}, squoxes gained popularity across the Pact Worlds for their adorable features and ability to adapt to new environments. The people of Asana happily exported squoxes, which lashuntas see as pests. Over centuries, squoxes spread and successfully adjusted to biomes across the Pact Worlds. They’ve even begun to appear in the wild in the Veskarium and worlds in the Vast.</p>\n<p>Xenowardens have tried to preserve the native squoxes of @UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel} while simultaneously curbing the incursion of the species into other ecologies. The group fears the invasive critters might irrevocably damage invaded ecosystems if left unchecked. Therefore, Xenowardens actively promote squox hunting on numerous worlds, as well as legal controls against importing the animals and releasing them into the wild.</p>\n<h2>Squox Pets</h2>\n<p>Squoxes are abundant across the Pact Worlds, breeding quickly and living for up to 10 years, or double that in captivity. Their intelligence and delightful appearance make them desirable companion animals, and they’re intelligent enough to be easily trained. Squoxes are also loyal, protective, charming, and entertaining, making them great companions for children. As clever and fun as they are, squoxes are also notorious for mischief, such as figuring out how to open cabinets and work simple machinery with the same aptitude as a very young sapient. They’ve even been known to clean up after themselves to hide thefts or accidents from their owners. Nevertheless, squoxes make great pets.</p>\n<p>A squox kit can be purchased for 100 credits at 1 month old, just weaned from its mother. Untrained squoxes born as pets are usually domesticated and friendly but likely to misbehave without training. However, unscrupulous dealers gather squox kits in the wild and pass them off as domesticated, selling them at bargain prices. Squoxes reach adulthood by 10 months, and a fully trained adult squox goes for 400 credits.</p>\n<p>A squox kit can be reared, or an older squox domesticated and trained, using the Survival skill, which takes 3 months. The squox’s inherent cleverness, curiosity, and friendliness grant its trainer a +2 circumstance bonus to Survival checks to rear or train it. A domesticated squox is friendly or helpful toward its trainer and any owner who treats it well.</p>\n<h2 class=\"framing\">Squox Gear</h2>\n<p>This item, known colloquially as a squox pocket, is available to PCs who want to protect their pets. Shirrens use similar devices to carry and protect their young, although they call the device a larva tube.</p>\n<p><strong>Item Level</strong> 1;<strong>Price</strong> 100</p>\n<p><strong>Slots</strong> 1;<strong>Armor Type</strong> Any;<strong>Bulk</strong> L</p>\n<p>The pet carrier armor upgrade takes one upgrade slot and provides space for one Tiny, two Diminutive, or four Fine creatures to take refuge in your armor. You can open or close a pet carrier as a move action. A creature of appropriate size can enter or exit a pet carrier by using 5 feet of movement to do so. While inside the pet carrier, a creature benefits from total cover and your armor’s @UUID[Compendium.sfrpg.rules.WP7hddXW4mLXXXOg]{Environmental protections}, but it can’t take any physical actions other than to leave an open carrier.</p>\n<p>The bulk of the pet carrier is 1 when occupied.</p>\n<h2 class=\"framing\">Squox Feat</h2>\n<p>Your squox is a well-trained companion.</p>\n<p><strong>Prerequisites</strong>: You own a trained squox that has an attitude of friendly or helpful toward you.</p>\n<p><strong>Benefit</strong>: You can designate your trained squox as your companion, which obeys your instructions, orders, and suggestions to the best of its ability. It won’t follow a command that would bring significant harm to itself, but it has your interests at heart and does what it can to aid you. While your squox companion is within 30 feet of you, you gain a +1 insight bonus to Perception checks to notice and search when the GM determines your squox could help you accomplish these tasks.</p>\n<p>Your Tiny squox companion can share your space and end its movement there. Outside your space, your squox has evasion, as the operative class feature. While in your space, your squox has evasion, improved evasion (as the operative exploit), and cover. In addition, when your squox is adjacent to you or in your space and would take damage, you can use your reaction to intercede and take the damage instead.</p>\n<p>In addition, your adorable companion is distracting. While it is in your space, you gain a +1 insight bonus to Bluff checks to feint. If your squox is in your space or within 10 feet of you, you can instead gain this insight bonus to Bluff checks to create a diversion, which can allow you or your squox to attempt to hide (your choice of which when you attempt the Bluff check).</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<h3>Organization</h3>\n<p>solitary, pair, or skulk (3-8)</p>"
+        "value": "<h2>Description</h2>\n<p>Called vulkariki in Lashunta, squoxes gained their popular moniker from humans who thought the creatures resembled a cross between a fox and a squirrel, with useful qualities from both animals. Squoxes are furry, vulpine animals roughly 2 feet in length and weighing around 15 pounds. They are quadrupedal, with five-fingered prehensile paws that have rotating wrists and ankles, allowing them to climb down surfaces headfirst like a squirrel. The creature’s other features are fox-like, including a flattened head with triangular ears, a pointed snout, and a bushy tail. Squox fur can come in hues of red orange, gray, fulvous, white, or brown, with white on the belly, neck, and tail tip. The species also has an array of fur patterns and environmental adaptations, such as long ears that allow desert-dwelling squoxes to disperse heat and thick seasonal fur and coloration for those accustomed to arctic regions.</p>\n<p>Squoxes are among the most intelligent animal species in the Pact Worlds, exhibiting social behaviors and hierarchies along with a vast vocal repertoire. When confronted, squoxes are devious tacticians, especially in groups. They are clever enough to poke eyes, bite sensitive regions, and steal objects to bait enemies away from a den.</p>\n<p>Although they originated on @UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel}, squoxes gained popularity across the Pact Worlds for their adorable features and ability to adapt to new environments. The people of Asana happily exported squoxes, which lashuntas see as pests. Over centuries, squoxes spread and successfully adjusted to biomes across the Pact Worlds. They’ve even begun to appear in the wild in the Veskarium and worlds in the Vast.</p>\n<p>Xenowardens have tried to preserve the native squoxes of @UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel} while simultaneously curbing the incursion of the species into other ecologies. The group fears the invasive critters might irrevocably damage invaded ecosystems if left unchecked. Therefore, Xenowardens actively promote squox hunting on numerous worlds, as well as legal controls against importing the animals and releasing them into the wild.</p>\n<h2>Squox Pets</h2>\n<p>Squoxes are abundant across the Pact Worlds, breeding quickly and living for up to 10 years, or double that in captivity. Their intelligence and delightful appearance make them desirable companion animals, and they’re intelligent enough to be easily trained. Squoxes are also loyal, protective, charming, and entertaining, making them great companions for children. As clever and fun as they are, squoxes are also notorious for mischief, such as figuring out how to open cabinets and work simple machinery with the same aptitude as a very young sapient. They’ve even been known to clean up after themselves to hide thefts or accidents from their owners. Nevertheless, squoxes make great pets.</p>\n<p>A squox kit can be purchased for 100 credits at 1 month old, just weaned from its mother. Untrained squoxes born as pets are usually domesticated and friendly but likely to misbehave without training. However, unscrupulous dealers gather squox kits in the wild and pass them off as domesticated, selling them at bargain prices. Squoxes reach adulthood by 10 months, and a fully trained adult squox goes for 400 credits.</p>\n<p>A squox kit can be reared, or an older squox domesticated and trained, using the Survival skill, which takes 3 months. The squox’s inherent cleverness, curiosity, and friendliness grant its trainer a +2 circumstance bonus to Survival checks to rear or train it. A domesticated squox is friendly or helpful toward its trainer and any owner who treats it well.</p>\n<h2 class=\"framing\">Squox Gear</h2>\n<p>This item, known colloquially as a squox pocket, is available to PCs who want to protect their pets. Shirrens use similar devices to carry and protect their young, although they call the device a larva tube.</p>\n<p><strong>Item Level</strong> 1;<strong>Price</strong> 100</p>\n<p><strong>Slots</strong> 1;<strong>Armor Type</strong> Any;<strong>Bulk</strong> L</p>\n<p>The pet carrier armor upgrade takes one upgrade slot and provides space for one Tiny, two Diminutive, or four Fine creatures to take refuge in your armor. You can open or close a pet carrier as a move action. A creature of appropriate size can enter or exit a pet carrier by using 5 feet of movement to do so. While inside the pet carrier, a creature benefits from total cover and your armor’s @UUID[Compendium.sfrpg.rules.WP7hddXW4mLXXXOg]{Environmental protections}, but it can’t take any physical actions other than to leave an open carrier.</p>\n<p>The bulk of the pet carrier is 1 when occupied.</p>\n<h2 class=\"framing\">Squox Feat</h2>\n<p>Your squox is a well-trained companion.</p>\n<p><strong>Prerequisites</strong>: You own a trained squox that has an attitude of friendly or helpful toward you.</p>\n<p><strong>Benefit</strong>: You can designate your trained squox as your companion, which obeys your instructions, orders, and suggestions to the best of its ability. It won’t follow a command that would bring significant harm to itself, but it has your interests at heart and does what it can to aid you. While your squox companion is within 30 feet of you, you gain a +1 insight bonus to Perception checks to notice and search when the GM determines your squox could help you accomplish these tasks.</p>\n<p>Your Tiny squox companion can share your space and end its movement there. Outside your space, your squox has evasion, as the operative class feature. While in your space, your squox has evasion, improved evasion (as the operative exploit), and cover. In addition, when your squox is adjacent to you or in your space and would take damage, you can use your reaction to intercede and take the damage instead.</p>\n<p>In addition, your adorable companion is distracting. While it is in your space, you gain a +1 insight bonus to Bluff checks to feint. If your squox is in your space or within 10 feet of you, you can instead gain this insight bonus to Bluff checks to create a diversion, which can allow you or your squox to attempt to hide (your choice of which when you attempt the Bluff check).</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<h3>Organization</h3>\n<p>solitary, pair, or skulk (3-8)</p>",
+        "weight": ""
       },
       "class": "",
       "cr": 1,
       "environment": "",
+      "organization": "",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AA2 pg. 118",
@@ -441,6 +472,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 10,
         "ranks": 10,
@@ -451,6 +483,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 5,
         "ranks": 5,
@@ -461,6 +494,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -471,6 +505,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -481,6 +516,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -491,6 +527,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -501,6 +538,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -511,6 +549,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -521,6 +560,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -531,6 +571,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -541,6 +582,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -551,6 +593,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -561,6 +604,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 5,
         "ranks": 5,
@@ -571,6 +615,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -581,6 +626,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -591,6 +637,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -602,6 +649,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -612,6 +660,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -622,6 +671,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 10,
         "ranks": 10,
@@ -632,6 +682,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -641,30 +692,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -695,6 +753,9 @@
       },
       "senses": "blindsense (scent) 30 ft., low-light vision",
       "size": "tiny",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

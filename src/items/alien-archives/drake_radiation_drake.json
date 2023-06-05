@@ -84,6 +84,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -114,6 +115,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -121,6 +123,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -218,6 +221,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -248,6 +252,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -255,6 +260,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -352,6 +358,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -382,6 +389,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -389,6 +397,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -410,25 +419,7 @@
       "_id": "Gza4ynXYAN2IaoQZ",
       "name": "Atomic Bolt (Ex)",
       "type": "weapon",
-      "ammunition": false,
-      "augmentation": false,
-      "consumable": false,
-      "container": false,
-      "equipment": false,
-      "fusion": true,
-      "goods": false,
-      "hybrid": false,
       "img": "icons/svg/item-bag.svg",
-      "magic": false,
-      "shield": false,
-      "spell": false,
-      "storage": {
-        "type": "slot",
-        "affectsEncumbrance": true,
-        "amount": 0,
-        "subtype": "fusion",
-        "weightProperty": "level"
-      },
       "system": {
         "type": "",
         "ability": "",
@@ -515,6 +506,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -633,6 +625,7 @@
           "units": "ft",
           "value": 60
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -640,6 +633,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -655,13 +649,7 @@
         },
         "weaponCategory": "uncategorized",
         "weaponType": "smallA"
-      },
-      "technological": false,
-      "upgrade": false,
-      "vehicleAttack": false,
-      "vehicleSystem": false,
-      "weapon": false,
-      "weaponAccessory": false
+      }
     },
     {
       "_id": "5HwyCazGt5mFlA7C",
@@ -674,6 +662,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "action",
@@ -711,6 +700,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -737,6 +727,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "reflex",
           "dc": "16",
@@ -762,6 +753,7 @@
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -783,6 +775,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -809,6 +802,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -837,6 +831,7 @@
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -865,11 +860,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -887,6 +879,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 2
@@ -937,12 +930,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -1073,8 +1072,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<h2>Description</h2>\n<p>Radiation drakes are mighty and dangerous predators found on worlds with extensive radioactivity, such as natural deposits of radioactive ores or irradiated wastelands left by atomic warfare. These drakes are also common on worlds with kaiju-enormous creatures that exist outside the world’s ecosystem. It’s a mystery whether a link between radiation drakes and kaiju exists that leads to their overlapping presence on some planets, but it’s worth noting that when kaiju and radiation drakes meet, they are likely to ignore each other. However, some radiation drakes live in symbiotic relationships with specific kaiju, feeding on parasites that infest the massive monsters, cleaning up after their kills, and sometimes dwelling among young kaiju and protecting them from predators. It has been suggested that radiation drakes are the offspring of some dragon kaiju, though there is little evidence to support this. Radiation drakes are capable of speech and advanced planning, but primarily act out of instinct.</p>\n<p>A radiation drake is dark in coloration, most often black or dull green, but it has bright crystalline teeth and spikes running along its spine. The drake has a draconic appearance, long neck and tail, wings, and powerful hind legs, but no front legs. In addition to its bite, a radiation drake is able to unleash radioactive fire breath in either singletarget bolts or a wide cone of irradiated flames. A split second before unleashing this breath weapon, the crystal spikes along a radiation drake’s spines glow with the white-hot light of a nuclear fire.</p>\n<p>A typical radiation drake is 15 feet long from nose to tail tip and weighs 1,000 pounds.</p>",
@@ -1084,6 +1086,10 @@
       "cr": 9,
       "environment": "any",
       "organization": "solitary, pair, or rad (3-9)",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #8 pg. 56",
@@ -1391,6 +1397,9 @@
       },
       "senses": "darkvision 60 ft., low-light vision",
       "size": "large",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

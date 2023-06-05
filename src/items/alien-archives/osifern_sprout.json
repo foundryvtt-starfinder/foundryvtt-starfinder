@@ -8,9 +8,11 @@
       "_id": "g3tjISvgxl9rJyrN",
       "name": "Regeneration 1 - Electricity",
       "type": "feat",
+      "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -32,8 +34,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
@@ -56,6 +61,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -77,6 +83,7 @@
       "_id": "SMBP7yd7MP9TKHWt",
       "name": "Slam",
       "type": "weapon",
+      "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -87,6 +94,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -121,6 +129,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -150,8 +159,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
@@ -160,6 +172,7 @@
           "units": "",
           "value": null
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
@@ -170,12 +183,14 @@
         "proficient": true,
         "properties": {},
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -183,6 +198,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -218,6 +234,7 @@
           "condition": "",
           "cost": 1
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -252,6 +269,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -281,8 +299,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>As a standard action usable once every 1d4 rounds, an osifern can expel a jet of seawater and chemicals to a maximum range of 30 feet with no range increment. Any creature damaged by this attack is nauseated for 1 round (Fortitude DC 9 negates).</p>"
         },
@@ -291,6 +312,7 @@
           "units": "",
           "value": ""
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
@@ -387,12 +409,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "ft",
           "value": 30
         },
+        "rollNotes": "",
         "save": {
           "type": "fort",
           "dc": "9",
@@ -400,6 +424,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -421,12 +446,14 @@
   "prototypeToken": {
     "name": "Osifern Sprout",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -455,11 +482,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -477,6 +501,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -527,12 +552,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -590,7 +621,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 0
@@ -599,7 +631,8 @@
         "special": "original base: swim 10 ft.",
         "swimming": {
           "base": 10
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -660,12 +693,26 @@
       "alignment": "N",
       "aura": "",
       "biography": {
+        "age": 0,
+        "dateOfBirth": "",
+        "deity": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
+        "height": "",
+        "homeWorld": "",
+        "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>Often mistaken for vegetation, osiferns have proliferated in countless worlds’ shallow waterways. These largely sessile filter feeders anchor themselves to rocks, coral, shipwrecks or, occasionally, the shells of larger creatures early in life, rarely if ever moving from that spot. Resembling translucent tubes, osiferns are famous for their visible and deceptively sturdy internal skeleton—a defensive counterpoint to the creatures’ soft and flexible exteriors. Opaque, varied markings give them the appearance of having faces, although they don’t have eyes. While these patterns provide camouflage for young osiferns or spook potential predators, many adults sport bright, distinctive “faces” that make them stand out rather than blend in.</p>\n<p>Although outwardly endearing and harmless, osiferns are remarkably dangerous. Highly resilient, these creatures can adapt to salty, brackish, or fresh water without difficulty. Osiferns also readily bludgeon neighboring creatures to eliminate competition within their territories, and the enzymes they spray in self-defense conveniently also break down trespassers’ flesh into morsels the osiferns can absorb. Their gregarious sprouts can grow into vast osifern gardens; they can alert each other to danger through chemical signals, rallying rudimentary group defenses.</p>\n<p>Dangerous enough with their normal life cycle, osiferns infrequently congregate and then collectively metamorphose into an osifern enigma—a large, free-swimming predator with a central notochord and a mouth ringed with thick, ropy tendrils. The composite body has pneumatic mouthparts and teeth capable of grabbing and swallowing larger prey, in contrast to smaller osiferns’ filter feeding method. Most enigmas studied so far appear approximately 10 feet long and weigh 250 pounds, yet scars left on their escaped prey suggest they can reach twice this size or larger. Osifern enigmas can swiftly undulate through the water to reach deeper areas, where they commonly adapt to crushing depths and frigid temperatures (though enigmas that live near volcanic vents often have resistance to fire instead of cold).</p>\n<p>Enigmas demonstrate a surprising degree of aesthetic sensibilities, as they seem to enjoy making visual statements with their bodily markings, expelling jets of bioluminescence without warning and&nbsp;even grafting sparkly rocks or the bones of their prey onto their diaphanous bodies to augment their appearances.</p>\n<p>Scientific expeditions regularly hire adventurous divers and submersible pilots to help study (or even capture) enigmas, whereas conservation programs just as often send contractors with the same skills to eliminate osifern infestations.</p>\n<h3>Deep Indigo Extract</h3>\n<p>Scientists who survived early encounters with enigmas took samples of the sparkling, rainbow-hued organic matter—nicknamed deep indigo— that threatened osiferns expel. This material has inspired numerous medical developments, especially ones that harness osiferns’ regenerative properties. While osifern sprouts contain the same chemicals needed to produce these medicinal extracts, they yield such small quantities that harvesting enough to create even a single dose has proven inefficient, though not impossible. Deep indigo extract follows the rules for medicinals presented on pages 231–232 of the Starfinder Core Rulebook; two examples are described below.</p>\n<h4>Cytoguard</h4>\n<p>Similar to an antitoxin, cytoguard actively regenerates cellular damage, mitigating the immediate effects of poison. When you take or are injected with cytoguard, you gain resistance equal to 3 times the medicinal’s tier to the damage dealt by initial exposure to poison. In addition, you gain a bonus equal to the medicinal’s tier to saving throws against poison. Both effects last for a number of hours equal to the medicinal’s tier.</p>\n<h4>Prismatilate</h4>\n<p>A prismatilate extract releases a steady dose of endorphins and regenerative agents that encourage long-term recovery. When you take or are injected with prismatilate, you gain a bonus (equal to 2 + the medicinal’s tier) to saving throws to remove negative levels. In addition, you increase the number of HP you recover from a full night’s rest or complete bed rest by 25% times the medicinal’s tier. Both effects last for 24 hours.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>aquatic (any water)</p>\n<h3>Organization</h3>\n<p>solitary, pair, or accumulation (3–13)</p>\n</section>"
+        "value": "<h2>Description</h2>\n<p>Often mistaken for vegetation, osiferns have proliferated in countless worlds’ shallow waterways. These largely sessile filter feeders anchor themselves to rocks, coral, shipwrecks or, occasionally, the shells of larger creatures early in life, rarely if ever moving from that spot. Resembling translucent tubes, osiferns are famous for their visible and deceptively sturdy internal skeleton—a defensive counterpoint to the creatures’ soft and flexible exteriors. Opaque, varied markings give them the appearance of having faces, although they don’t have eyes. While these patterns provide camouflage for young osiferns or spook potential predators, many adults sport bright, distinctive “faces” that make them stand out rather than blend in.</p>\n<p>Although outwardly endearing and harmless, osiferns are remarkably dangerous. Highly resilient, these creatures can adapt to salty, brackish, or fresh water without difficulty. Osiferns also readily bludgeon neighboring creatures to eliminate competition within their territories, and the enzymes they spray in self-defense conveniently also break down trespassers’ flesh into morsels the osiferns can absorb. Their gregarious sprouts can grow into vast osifern gardens; they can alert each other to danger through chemical signals, rallying rudimentary group defenses.</p>\n<p>Dangerous enough with their normal life cycle, osiferns infrequently congregate and then collectively metamorphose into an osifern enigma—a large, free-swimming predator with a central notochord and a mouth ringed with thick, ropy tendrils. The composite body has pneumatic mouthparts and teeth capable of grabbing and swallowing larger prey, in contrast to smaller osiferns’ filter feeding method. Most enigmas studied so far appear approximately 10 feet long and weigh 250 pounds, yet scars left on their escaped prey suggest they can reach twice this size or larger. Osifern enigmas can swiftly undulate through the water to reach deeper areas, where they commonly adapt to crushing depths and frigid temperatures (though enigmas that live near volcanic vents often have resistance to fire instead of cold).</p>\n<p>Enigmas demonstrate a surprising degree of aesthetic sensibilities, as they seem to enjoy making visual statements with their bodily markings, expelling jets of bioluminescence without warning and&nbsp;even grafting sparkly rocks or the bones of their prey onto their diaphanous bodies to augment their appearances.</p>\n<p>Scientific expeditions regularly hire adventurous divers and submersible pilots to help study (or even capture) enigmas, whereas conservation programs just as often send contractors with the same skills to eliminate osifern infestations.</p>\n<h3>Deep Indigo Extract</h3>\n<p>Scientists who survived early encounters with enigmas took samples of the sparkling, rainbow-hued organic matter—nicknamed deep indigo— that threatened osiferns expel. This material has inspired numerous medical developments, especially ones that harness osiferns’ regenerative properties. While osifern sprouts contain the same chemicals needed to produce these medicinal extracts, they yield such small quantities that harvesting enough to create even a single dose has proven inefficient, though not impossible. Deep indigo extract follows the rules for medicinals presented on pages 231–232 of the Starfinder Core Rulebook; two examples are described below.</p>\n<h4>Cytoguard</h4>\n<p>Similar to an antitoxin, cytoguard actively regenerates cellular damage, mitigating the immediate effects of poison. When you take or are injected with cytoguard, you gain resistance equal to 3 times the medicinal’s tier to the damage dealt by initial exposure to poison. In addition, you gain a bonus equal to the medicinal’s tier to saving throws against poison. Both effects last for a number of hours equal to the medicinal’s tier.</p>\n<h4>Prismatilate</h4>\n<p>A prismatilate extract releases a steady dose of endorphins and regenerative agents that encourage long-term recovery. When you take or are injected with prismatilate, you gain a bonus (equal to 2 + the medicinal’s tier) to saving throws to remove negative levels. In addition, you increase the number of HP you recover from a full night’s rest or complete bed rest by 25% times the medicinal’s tier. Both effects last for 24 hours.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>aquatic (any water)</p>\n<h3>Organization</h3>\n<p>solitary, pair, or accumulation (3–13)</p>\n</section>",
+        "weight": ""
       },
       "class": "",
       "cr": 0.5,
       "environment": "",
+      "organization": "",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AA4 pg. 78",
@@ -906,30 +953,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -960,6 +1014,9 @@
       },
       "senses": "blindsense 30 ft. (sound), blindsight 5 ft. (sound), sightless",
       "size": "tiny",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

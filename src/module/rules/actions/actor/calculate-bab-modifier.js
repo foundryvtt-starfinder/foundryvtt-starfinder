@@ -52,7 +52,6 @@ export default function(engine) {
             return sum;
         }, 0);
 
-        data.attributes.bab = data.attributes.baseAttackBonus.value + bonus;
         data.attributes.baseAttackBonus.value += bonus;
 
         return fact;

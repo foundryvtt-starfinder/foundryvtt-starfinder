@@ -73,18 +73,6 @@
                         "tempmax": null,
                         "tooltip": []
                     },
-                    "sp": {
-                        "min": 0,
-                        "max": 10,
-                        "value": 0,
-                        "tooltip": []
-                    },
-                    "rp": {
-                        "min": 0,
-                        "max": 10,
-                        "value": 0,
-                        "tooltip": []
-                    },
                     "init": {
                         "value": 0,
                         "bonus": 0,
@@ -109,21 +97,26 @@
                         "misc": 0,
                         "tooltip": []
                     },
-                    "baseAttackBonus": {
-                        "value": 0,
-                        "rolledMods": [],
-                        "tooltip": []
-                    },
-                    "bab": 0,
                     "arms": 2,
                     "space": 5,
                     "reach": 5,
                     "speed": {
-                        "land": { "base": 30 },
-                        "flying": { "base": 0, "baseManeuverability": 0 },
-                        "swimming": { "base": 0 },
-                        "burrowing": { "base": 0 },
-                        "climbing": { "base": 0 },
+                        "land": {
+                            "base": 30
+                        },
+                        "flying": {
+                            "base": 0,
+                            "baseManeuverability": 0
+                        },
+                        "swimming": {
+                            "base": 0
+                        },
+                        "burrowing": {
+                            "base": 0
+                        },
+                        "climbing": {
+                            "base": 0
+                        },
                         "value": null,
                         "special": null,
                         "mainMovement": "land"
@@ -147,11 +140,6 @@
                         "genderPronouns": "",
                         "homeWorld": ""
                     }
-                },
-                "skillpoints": {
-                    "used": 0,
-                    "max": 0,
-                    "tooltip": []
                 },
                 "skills": {
                     "acr": {
@@ -479,10 +467,10 @@
                 "conditions": {}
             },
             "counterClassesManagement": {
-              "counterClasses": {
-                "values":{}
+                "counterClasses": {
+                    "values": {}
+                }
             }
-          }
         },
         "character": {
             "templates": [
@@ -492,6 +480,25 @@
                 "conditions",
                 "counterClassesManagement"
             ],
+            "attributes": {
+                "sp": {
+                    "min": 0,
+                    "max": 10,
+                    "value": 0,
+                    "tooltip": []
+                },
+                "rp": {
+                    "min": 0,
+                    "max": 10,
+                    "value": 0,
+                    "tooltip": []
+                },
+                "baseAttackBonus": {
+                    "value": 0,
+                    "rolledMods": [],
+                    "tooltip": []
+                }
+            },
             "details": {
                 "deity": "",
                 "level": {
@@ -508,6 +515,11 @@
                     "max": 1300
                 },
                 "theme": ""
+            },
+            "skillpoints": {
+                "used": 0,
+                "max": 0,
+                "tooltip": []
             },
             "traits": {
                 "weaponProf": {
@@ -584,20 +596,31 @@
                 }
             },
             "attributes": {
-              "armorSlots": {
-                  "current": 0,
-                  "max": 0
-              },
-              "weaponMounts": {
-                  "melee": {
+                "armorSlots": {
                     "current": 0,
                     "max": 0
-                  },
-                  "ranged": {
-                    "current": 0,
-                    "max": 0
-                  }
-              }
+                },
+                "baseAttackBonus": {
+                    "value": 0,
+                    "rolledMods": [],
+                    "tooltip": []
+                },
+                "rp": {
+                    "min": 0,
+                    "max": 0,
+                    "value": 0,
+                    "tooltip": []
+                },
+                "weaponMounts": {
+                    "melee": {
+                        "current": 0,
+                        "max": 0
+                    },
+                    "ranged": {
+                        "current": 0,
+                        "max": 0
+                    }
+                }
             },
             "resources": {
                 "primary": {
@@ -693,12 +716,16 @@
         },
         "npc": {
             "attributes": {
-                "abilityDC":
-                {
+                "rp": {
+                    "min": 0,
+                    "max": 0,
+                    "value": 0,
+                    "tooltip": []
+                },
+                "abilityDC": {
                     "base": 0
                 },
-                "baseSpellDC":
-                {
+                "baseSpellDC": {
                     "base": 0
                 }
             },
@@ -726,29 +753,33 @@
                 "conditions",
                 "counterClassesManagement"
             ],
-            "common": {
-                "abilities": {
-                    "str": {
-                        "base": 0
-                    },
-                    "dex": {
-                        "base": 0
-                    },
-                    "con": {
-                        "base": 0
-                    },
-                    "int": {
-                        "base": 0
-                    },
-                    "wis": {
-                        "base": 0
-                    },
-                    "cha": {
-                        "base": 0
-                    }
+            "abilities": {
+                "str": {
+                    "base": 0
+                },
+                "dex": {
+                    "base": 0
+                },
+                "con": {
+                    "base": 0
+                },
+                "int": {
+                    "base": 0
+                },
+                "wis": {
+                    "base": 0
+                },
+                "cha": {
+                    "base": 0
                 }
             },
             "attributes": {
+                "rp": {
+                    "min": 0,
+                    "max": 0,
+                    "value": 0,
+                    "tooltip": []
+                },
                 "eac": {
                     "base": 0
                 },
@@ -764,12 +795,10 @@
                 "will": {
                     "base": 0
                 },
-                "abilityDC":
-                {
+                "abilityDC": {
                     "base": 0
                 },
-                "baseSpellDC":
-                {
+                "baseSpellDC": {
                     "base": 0
                 }
             },
@@ -789,7 +818,10 @@
             }
         },
         "starship": {
-            "templates": ["modifiers", "conditions"],
+            "templates": [
+                "modifiers",
+                "conditions"
+            ],
             "details": {
                 "tier": 1,
                 "model": "",
@@ -1088,7 +1120,9 @@
             }
         },
         "vehicle": {
-            "templates": ["conditions"],
+            "templates": [
+                "conditions"
+            ],
             "details": {
                 "level": 1,
                 "price": 0,
@@ -1164,16 +1198,12 @@
             "class",
             "race",
             "theme",
-
             "actorResource",
             "feat",
             "spell",
-
             "asi",
-
             "chassis",
             "mod",
-
             "starshipAblativeArmor",
             "starshipAction",
             "starshipArmor",
@@ -1193,10 +1223,8 @@
             "starshipSpecialAbility",
             "starshipThruster",
             "starshipWeapon",
-
             "vehicleAttack",
             "vehicleSystem",
-
             "ammunition",
             "augmentation",
             "consumable",
@@ -1346,7 +1374,16 @@
             "abilities": {}
         },
         "weapon": {
-            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "itemUsage", "modifiers", "container", "specialMaterials"],
+            "templates": [
+                "itemDescription",
+                "physicalItem",
+                "activatedEffect",
+                "action",
+                "itemUsage",
+                "modifiers",
+                "container",
+                "specialMaterials"
+            ],
             "attributes": {
                 "sturdy": true
             },
@@ -1363,7 +1400,9 @@
                         "type": "slot",
                         "subtype": "fusion",
                         "amount": 0,
-                        "acceptsType": ["fusion"],
+                        "acceptsType": [
+                            "fusion"
+                        ],
                         "affectsEncumbrance": true,
                         "weightProperty": "level"
                     }
@@ -1372,7 +1411,16 @@
             }
         },
         "equipment": {
-            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "itemUsage", "modifiers", "container", "specialMaterials"],
+            "templates": [
+                "itemDescription",
+                "physicalItem",
+                "activatedEffect",
+                "action",
+                "itemUsage",
+                "modifiers",
+                "container",
+                "specialMaterials"
+            ],
             "attributes": {
                 "sturdy": true
             },
@@ -1399,7 +1447,10 @@
                         "type": "slot",
                         "subtype": "armorUpgrade",
                         "amount": 0,
-                        "acceptsType": ["upgrade", "weapon"],
+                        "acceptsType": [
+                            "upgrade",
+                            "weapon"
+                        ],
                         "affectsEncumbrance": true,
                         "weightProperty": "slots"
                     },
@@ -1407,7 +1458,9 @@
                         "type": "slot",
                         "subtype": "weaponSlot",
                         "amount": 0,
-                        "acceptsType": ["weapon"],
+                        "acceptsType": [
+                            "weapon"
+                        ],
                         "affectsEncumbrance": true,
                         "weightProperty": ""
                     }
@@ -1416,7 +1469,14 @@
             }
         },
         "consumable": {
-            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "modifiers", "container"],
+            "templates": [
+                "itemDescription",
+                "physicalItem",
+                "activatedEffect",
+                "action",
+                "modifiers",
+                "container"
+            ],
             "consumableType": "serum",
             "uses": {
                 "value": 0,
@@ -1432,7 +1492,9 @@
                         "type": "slot",
                         "subtype": "spellSlot",
                         "amount": 0,
-                        "acceptsType": ["spell"],
+                        "acceptsType": [
+                            "spell"
+                        ],
                         "affectsEncumbrance": false,
                         "weightProperty": "bulk"
                     }
@@ -1441,10 +1503,19 @@
             }
         },
         "goods": {
-            "templates": ["itemDescription", "physicalItem", "modifiers"]
+            "templates": [
+                "itemDescription",
+                "physicalItem",
+                "modifiers"
+            ]
         },
         "container": {
-            "templates": ["itemDescription", "physicalItem", "modifiers", "container"],
+            "templates": [
+                "itemDescription",
+                "physicalItem",
+                "modifiers",
+                "container"
+            ],
             "equippedBulkMultiplier": 1,
             "container": {
                 "contents": [],
@@ -1453,7 +1524,20 @@
                         "type": "bulk",
                         "subtype": "",
                         "amount": 0,
-                        "acceptsType": ["weapon", "shield", "equipment", "goods", "consumable", "container", "technological", "fusion", "upgrade", "augmentation", "magic", "hybrid"],
+                        "acceptsType": [
+                            "weapon",
+                            "shield",
+                            "equipment",
+                            "goods",
+                            "consumable",
+                            "container",
+                            "technological",
+                            "fusion",
+                            "upgrade",
+                            "augmentation",
+                            "magic",
+                            "hybrid"
+                        ],
                         "affectsEncumbrance": true,
                         "weightProperty": "bulk"
                     }
@@ -1462,7 +1546,10 @@
             }
         },
         "class": {
-            "templates": ["itemDescription", "modifiers"],
+            "templates": [
+                "itemDescription",
+                "modifiers"
+            ],
             "levels": 1,
             "hp": {
                 "value": 1,
@@ -1488,67 +1575,450 @@
             "will": "slow",
             "isCaster": false,
             "slug": "",
-            "spellAbility" : "",
+            "spellAbility": "",
             "spellsKnown": {
-                "1":  {"0": 4, "1": 2, "2": null, "3": null, "4": null, "5": null, "6": null},
-                "2":  {"0": 5, "1": 3, "2": null, "3": null, "4": null, "5": null, "6": null},
-                "3":  {"0": 6, "1": 4, "2": null, "3": null, "4": null, "5": null, "6": null},
-                "4":  {"0": 6, "1": 4, "2": 2,    "3": null, "4": null, "5": null, "6": null},
-                "5":  {"0": 6, "1": 4, "2": 3,    "3": null, "4": null, "5": null, "6": null},
-                "6":  {"0": 6, "1": 4, "2": 4,    "3": null, "4": null, "5": null, "6": null},
-                "7":  {"0": 6, "1": 5, "2": 4,    "3": 2,    "4": null, "5": null, "6": null},
-                "8":  {"0": 6, "1": 5, "2": 4,    "3": 3,    "4": null, "5": null, "6": null},
-                "9":  {"0": 6, "1": 5, "2": 4,    "3": 4,    "4": null, "5": null, "6": null},
-                "10": {"0": 6, "1": 5, "2": 4,    "3": 4,    "4": 2,    "5": null, "6": null},
-                "11": {"0": 6, "1": 6, "2": 5,    "3": 4,    "4": 3,    "5": null, "6": null},
-                "12": {"0": 6, "1": 6, "2": 5,    "3": 4,    "4": 4,    "5": null, "6": null},
-                "13": {"0": 6, "1": 6, "2": 5,    "3": 5,    "4": 4,    "5": 2,    "6": null},
-                "14": {"0": 6, "1": 6, "2": 6,    "3": 5,    "4": 4,    "5": 3,    "6": null},
-                "15": {"0": 6, "1": 6, "2": 6,    "3": 5,    "4": 4,    "5": 4,    "6": null},
-                "16": {"0": 6, "1": 6, "2": 6,    "3": 5,    "4": 5,    "5": 4,    "6": 2},
-                "17": {"0": 6, "1": 6, "2": 6,    "3": 6,    "4": 5,    "5": 4,    "6": 3},
-                "18": {"0": 6, "1": 6, "2": 6,    "3": 6,    "4": 5,    "5": 4,    "6": 4},
-                "19": {"0": 6, "1": 6, "2": 6,    "3": 6,    "4": 5,    "5": 5,    "6": 4},
-                "20": {"0": 6, "1": 6, "2": 6,    "3": 6,    "4": 6,    "5": 5,    "6": 5}
+                "1": {
+                    "0": 4,
+                    "1": 2,
+                    "2": null,
+                    "3": null,
+                    "4": null,
+                    "5": null,
+                    "6": null
+                },
+                "2": {
+                    "0": 5,
+                    "1": 3,
+                    "2": null,
+                    "3": null,
+                    "4": null,
+                    "5": null,
+                    "6": null
+                },
+                "3": {
+                    "0": 6,
+                    "1": 4,
+                    "2": null,
+                    "3": null,
+                    "4": null,
+                    "5": null,
+                    "6": null
+                },
+                "4": {
+                    "0": 6,
+                    "1": 4,
+                    "2": 2,
+                    "3": null,
+                    "4": null,
+                    "5": null,
+                    "6": null
+                },
+                "5": {
+                    "0": 6,
+                    "1": 4,
+                    "2": 3,
+                    "3": null,
+                    "4": null,
+                    "5": null,
+                    "6": null
+                },
+                "6": {
+                    "0": 6,
+                    "1": 4,
+                    "2": 4,
+                    "3": null,
+                    "4": null,
+                    "5": null,
+                    "6": null
+                },
+                "7": {
+                    "0": 6,
+                    "1": 5,
+                    "2": 4,
+                    "3": 2,
+                    "4": null,
+                    "5": null,
+                    "6": null
+                },
+                "8": {
+                    "0": 6,
+                    "1": 5,
+                    "2": 4,
+                    "3": 3,
+                    "4": null,
+                    "5": null,
+                    "6": null
+                },
+                "9": {
+                    "0": 6,
+                    "1": 5,
+                    "2": 4,
+                    "3": 4,
+                    "4": null,
+                    "5": null,
+                    "6": null
+                },
+                "10": {
+                    "0": 6,
+                    "1": 5,
+                    "2": 4,
+                    "3": 4,
+                    "4": 2,
+                    "5": null,
+                    "6": null
+                },
+                "11": {
+                    "0": 6,
+                    "1": 6,
+                    "2": 5,
+                    "3": 4,
+                    "4": 3,
+                    "5": null,
+                    "6": null
+                },
+                "12": {
+                    "0": 6,
+                    "1": 6,
+                    "2": 5,
+                    "3": 4,
+                    "4": 4,
+                    "5": null,
+                    "6": null
+                },
+                "13": {
+                    "0": 6,
+                    "1": 6,
+                    "2": 5,
+                    "3": 5,
+                    "4": 4,
+                    "5": 2,
+                    "6": null
+                },
+                "14": {
+                    "0": 6,
+                    "1": 6,
+                    "2": 6,
+                    "3": 5,
+                    "4": 4,
+                    "5": 3,
+                    "6": null
+                },
+                "15": {
+                    "0": 6,
+                    "1": 6,
+                    "2": 6,
+                    "3": 5,
+                    "4": 4,
+                    "5": 4,
+                    "6": null
+                },
+                "16": {
+                    "0": 6,
+                    "1": 6,
+                    "2": 6,
+                    "3": 5,
+                    "4": 5,
+                    "5": 4,
+                    "6": 2
+                },
+                "17": {
+                    "0": 6,
+                    "1": 6,
+                    "2": 6,
+                    "3": 6,
+                    "4": 5,
+                    "5": 4,
+                    "6": 3
+                },
+                "18": {
+                    "0": 6,
+                    "1": 6,
+                    "2": 6,
+                    "3": 6,
+                    "4": 5,
+                    "5": 4,
+                    "6": 4
+                },
+                "19": {
+                    "0": 6,
+                    "1": 6,
+                    "2": 6,
+                    "3": 6,
+                    "4": 5,
+                    "5": 5,
+                    "6": 4
+                },
+                "20": {
+                    "0": 6,
+                    "1": 6,
+                    "2": 6,
+                    "3": 6,
+                    "4": 6,
+                    "5": 5,
+                    "6": 5
+                }
             },
             "spellsPerDay": {
-                "1":  {"1": 2, "2": null, "3": null, "4": null, "5": null, "6": null},
-                "2":  {"1": 2, "2": null, "3": null, "4": null, "5": null, "6": null},
-                "3":  {"1": 3, "2": null, "3": null, "4": null, "5": null, "6": null},
-                "4":  {"1": 3, "2": 2,    "3": null, "4": null, "5": null, "6": null},
-                "5":  {"1": 4, "2": 2,    "3": null, "4": null, "5": null, "6": null},
-                "6":  {"1": 4, "2": 3,    "3": null, "4": null, "5": null, "6": null},
-                "7":  {"1": 4, "2": 3,    "3": 2,    "4": null, "5": null, "6": null},
-                "8":  {"1": 4, "2": 4,    "3": 2,    "4": null, "5": null, "6": null},
-                "9":  {"1": 5, "2": 4,    "3": 3,    "4": null, "5": null, "6": null},
-                "10": {"1": 5, "2": 4,    "3": 3,    "4": 2,    "5": null, "6": null},
-                "11": {"1": 5, "2": 4,    "3": 4,    "4": 2,    "5": null, "6": null},
-                "12": {"1": 5, "2": 5,    "3": 4,    "4": 3,    "5": null, "6": null},
-                "13": {"1": 5, "2": 5,    "3": 4,    "4": 3,    "5": 2,    "6": null},
-                "14": {"1": 5, "2": 5,    "3": 4,    "4": 4,    "5": 2,    "6": null},
-                "15": {"1": 5, "2": 5,    "3": 5,    "4": 4,    "5": 3,    "6": null},
-                "16": {"1": 5, "2": 5,    "3": 5,    "4": 4,    "5": 3,    "6": 2},
-                "17": {"1": 5, "2": 5,    "3": 5,    "4": 4,    "5": 4,    "6": 2},
-                "18": {"1": 5, "2": 5,    "3": 5,    "4": 5,    "5": 4,    "6": 3},
-                "19": {"1": 5, "2": 5,    "3": 5,    "4": 5,    "5": 5,    "6": 4},
-                "20": {"1": 5, "2": 5,    "3": 5,    "4": 5,    "5": 5,    "6": 5}
+                "1": {
+                    "1": 2,
+                    "2": null,
+                    "3": null,
+                    "4": null,
+                    "5": null,
+                    "6": null
+                },
+                "2": {
+                    "1": 2,
+                    "2": null,
+                    "3": null,
+                    "4": null,
+                    "5": null,
+                    "6": null
+                },
+                "3": {
+                    "1": 3,
+                    "2": null,
+                    "3": null,
+                    "4": null,
+                    "5": null,
+                    "6": null
+                },
+                "4": {
+                    "1": 3,
+                    "2": 2,
+                    "3": null,
+                    "4": null,
+                    "5": null,
+                    "6": null
+                },
+                "5": {
+                    "1": 4,
+                    "2": 2,
+                    "3": null,
+                    "4": null,
+                    "5": null,
+                    "6": null
+                },
+                "6": {
+                    "1": 4,
+                    "2": 3,
+                    "3": null,
+                    "4": null,
+                    "5": null,
+                    "6": null
+                },
+                "7": {
+                    "1": 4,
+                    "2": 3,
+                    "3": 2,
+                    "4": null,
+                    "5": null,
+                    "6": null
+                },
+                "8": {
+                    "1": 4,
+                    "2": 4,
+                    "3": 2,
+                    "4": null,
+                    "5": null,
+                    "6": null
+                },
+                "9": {
+                    "1": 5,
+                    "2": 4,
+                    "3": 3,
+                    "4": null,
+                    "5": null,
+                    "6": null
+                },
+                "10": {
+                    "1": 5,
+                    "2": 4,
+                    "3": 3,
+                    "4": 2,
+                    "5": null,
+                    "6": null
+                },
+                "11": {
+                    "1": 5,
+                    "2": 4,
+                    "3": 4,
+                    "4": 2,
+                    "5": null,
+                    "6": null
+                },
+                "12": {
+                    "1": 5,
+                    "2": 5,
+                    "3": 4,
+                    "4": 3,
+                    "5": null,
+                    "6": null
+                },
+                "13": {
+                    "1": 5,
+                    "2": 5,
+                    "3": 4,
+                    "4": 3,
+                    "5": 2,
+                    "6": null
+                },
+                "14": {
+                    "1": 5,
+                    "2": 5,
+                    "3": 4,
+                    "4": 4,
+                    "5": 2,
+                    "6": null
+                },
+                "15": {
+                    "1": 5,
+                    "2": 5,
+                    "3": 5,
+                    "4": 4,
+                    "5": 3,
+                    "6": null
+                },
+                "16": {
+                    "1": 5,
+                    "2": 5,
+                    "3": 5,
+                    "4": 4,
+                    "5": 3,
+                    "6": 2
+                },
+                "17": {
+                    "1": 5,
+                    "2": 5,
+                    "3": 5,
+                    "4": 4,
+                    "5": 4,
+                    "6": 2
+                },
+                "18": {
+                    "1": 5,
+                    "2": 5,
+                    "3": 5,
+                    "4": 5,
+                    "5": 4,
+                    "6": 3
+                },
+                "19": {
+                    "1": 5,
+                    "2": 5,
+                    "3": 5,
+                    "4": 5,
+                    "5": 5,
+                    "6": 4
+                },
+                "20": {
+                    "1": 5,
+                    "2": 5,
+                    "3": 5,
+                    "4": 5,
+                    "5": 5,
+                    "6": 5
+                }
             },
             "bonusSpellsPerDay": {
-                "0":  {"1": null, "2": null, "3": null, "4": null, "5": null, "6": null},
-                "1":  {"1": 1,    "2": null, "3": null, "4": null, "5": null, "6": null},
-                "2":  {"1": 1,    "2": 1,    "3": null, "4": null, "5": null, "6": null},
-                "3":  {"1": 1,    "2": 1,    "3": 1,    "4": null, "5": null, "6": null},
-                "4":  {"1": 1,    "2": 1,    "3": 1,    "4": 1,    "5": null, "6": null},
-                "5":  {"1": 2,    "2": 1,    "3": 1,    "4": 1,    "5": 1,    "6": null},
-                "6":  {"1": 2,    "2": 2,    "3": 1,    "4": 1,    "5": 1,    "6": 1},
-                "7":  {"1": 2,    "2": 2,    "3": 2,    "4": 1,    "5": 1,    "6": 1},
-                "8":  {"1": 2,    "2": 2,    "3": 2,    "4": 2,    "5": 1,    "6": 1},
-                "9":  {"1": 3,    "2": 2,    "3": 2,    "4": 2,    "5": 2,    "6": 1},
-                "10": {"1": 3,    "2": 3,    "3": 2,    "4": 2,    "5": 2,    "6": 2}
+                "0": {
+                    "1": null,
+                    "2": null,
+                    "3": null,
+                    "4": null,
+                    "5": null,
+                    "6": null
+                },
+                "1": {
+                    "1": 1,
+                    "2": null,
+                    "3": null,
+                    "4": null,
+                    "5": null,
+                    "6": null
+                },
+                "2": {
+                    "1": 1,
+                    "2": 1,
+                    "3": null,
+                    "4": null,
+                    "5": null,
+                    "6": null
+                },
+                "3": {
+                    "1": 1,
+                    "2": 1,
+                    "3": 1,
+                    "4": null,
+                    "5": null,
+                    "6": null
+                },
+                "4": {
+                    "1": 1,
+                    "2": 1,
+                    "3": 1,
+                    "4": 1,
+                    "5": null,
+                    "6": null
+                },
+                "5": {
+                    "1": 2,
+                    "2": 1,
+                    "3": 1,
+                    "4": 1,
+                    "5": 1,
+                    "6": null
+                },
+                "6": {
+                    "1": 2,
+                    "2": 2,
+                    "3": 1,
+                    "4": 1,
+                    "5": 1,
+                    "6": 1
+                },
+                "7": {
+                    "1": 2,
+                    "2": 2,
+                    "3": 2,
+                    "4": 1,
+                    "5": 1,
+                    "6": 1
+                },
+                "8": {
+                    "1": 2,
+                    "2": 2,
+                    "3": 2,
+                    "4": 2,
+                    "5": 1,
+                    "6": 1
+                },
+                "9": {
+                    "1": 3,
+                    "2": 2,
+                    "3": 2,
+                    "4": 2,
+                    "5": 2,
+                    "6": 1
+                },
+                "10": {
+                    "1": 3,
+                    "2": 3,
+                    "3": 2,
+                    "4": 2,
+                    "5": 2,
+                    "6": 2
+                }
             }
         },
         "spell": {
-            "templates": ["itemDescription", "activatedEffect", "action", "modifiers", "descriptors"],
+            "templates": [
+                "itemDescription",
+                "activatedEffect",
+                "action",
+                "modifiers",
+                "descriptors"
+            ],
             "level": 1,
             "school": "",
             "sr": false,
@@ -1573,7 +2043,13 @@
             "isVariableLevel": false
         },
         "feat": {
-            "templates": ["itemDescription", "activatedEffect", "action", "modifiers", "descriptors"],
+            "templates": [
+                "itemDescription",
+                "activatedEffect",
+                "action",
+                "modifiers",
+                "descriptors"
+            ],
             "requirements": "",
             "recharge": {
                 "value": null,
@@ -1581,7 +2057,10 @@
             }
         },
         "race": {
-            "templates": ["itemDescription", "modifiers"],
+            "templates": [
+                "itemDescription",
+                "modifiers"
+            ],
             "hp": {
                 "value": 1,
                 "min": 1
@@ -1594,7 +2073,10 @@
             "subtype": ""
         },
         "theme": {
-            "templates": ["itemDescription", "modifiers"],
+            "templates": [
+                "itemDescription",
+                "modifiers"
+            ],
             "abilityMod": {
                 "ability": "cha",
                 "mod": 1
@@ -1602,36 +2084,72 @@
             "skill": ""
         },
         "archetypes": {
-            "templates": ["itemDescription", "modifiers"],
+            "templates": [
+                "itemDescription",
+                "modifiers"
+            ],
             "grants": {
                 "levels": []
             }
         },
         "technological": {
-            "templates": ["itemDescription", "physicalItem", "itemUsage", "modifiers", "container"],
+            "templates": [
+                "itemDescription",
+                "physicalItem",
+                "itemUsage",
+                "modifiers",
+                "container"
+            ],
             "hands": 0
         },
         "hybrid": {
-            "templates": ["itemDescription", "physicalItem", "itemUsage", "modifiers", "container"],
+            "templates": [
+                "itemDescription",
+                "physicalItem",
+                "itemUsage",
+                "modifiers",
+                "container"
+            ],
             "hands": 0,
             "limitedWear": false
         },
         "magic": {
-            "templates": ["itemDescription", "physicalItem", "itemUsage", "modifiers", "container"],
+            "templates": [
+                "itemDescription",
+                "physicalItem",
+                "itemUsage",
+                "modifiers",
+                "container"
+            ],
             "hands": 0,
             "limitedWear": false
         },
         "fusion": {
-            "templates": ["itemDescription", "physicalItem", "modifiers", "container"],
+            "templates": [
+                "itemDescription",
+                "physicalItem",
+                "modifiers",
+                "container"
+            ],
             "level": 1
         },
         "upgrade": {
-            "templates": ["itemDescription", "physicalItem", "itemUsage", "modifiers", "container"],
+            "templates": [
+                "itemDescription",
+                "physicalItem",
+                "itemUsage",
+                "modifiers",
+                "container"
+            ],
             "slots": 1,
             "armorType": "any"
         },
         "ammunition": {
-            "templates": ["itemDescription", "physicalItem", "specialMaterials"],
+            "templates": [
+                "itemDescription",
+                "physicalItem",
+                "specialMaterials"
+            ],
             "ammunitionType": "",
             "useCapacity": false,
             "capacity": {
@@ -1640,12 +2158,21 @@
             }
         },
         "augmentation": {
-            "templates": ["itemDescription", "physicalItem", "modifiers", "container", "action", "activatedEffect"],
+            "templates": [
+                "itemDescription",
+                "physicalItem",
+                "modifiers",
+                "container",
+                "action",
+                "activatedEffect"
+            ],
             "system": "",
             "type": "cybernetic"
         },
         "starshipAction": {
-            "templates": ["itemDescription"],
+            "templates": [
+                "itemDescription"
+            ],
             "role": "",
             "order": 0,
             "phase": {},
@@ -1659,43 +2186,81 @@
             "effectCritical": ""
         },
         "starshipAblativeArmor": {
-            "templates": ["starshipComponent", "itemDescription", "modifiers"],
+            "templates": [
+                "starshipComponent",
+                "itemDescription",
+                "modifiers"
+            ],
             "ablativeValue": 0,
             "targetLockPenalty": 0,
             "turnDistancePenalty": 0
         },
         "starshipArmor": {
-            "templates": ["starshipComponent", "itemDescription", "modifiers", "specialMaterials"],
+            "templates": [
+                "starshipComponent",
+                "itemDescription",
+                "modifiers",
+                "specialMaterials"
+            ],
             "armorBonus": 0,
             "targetLockPenalty": 0,
             "turnDistancePenalty": 0
         },
         "starshipComputer": {
-            "templates": ["starshipComponent", "itemDescription", "modifiers"],
+            "templates": [
+                "starshipComponent",
+                "itemDescription",
+                "modifiers"
+            ],
             "modifier": 0,
             "nodes": 0
         },
         "starshipCrewQuarter": {
-            "templates": ["starshipComponent", "itemDescription", "modifiers"]
+            "templates": [
+                "starshipComponent",
+                "itemDescription",
+                "modifiers"
+            ]
         },
         "starshipDefensiveCountermeasure": {
-            "templates": ["starshipComponent", "itemDescription", "modifiers", "specialMaterials"],
+            "templates": [
+                "starshipComponent",
+                "itemDescription",
+                "modifiers",
+                "specialMaterials"
+            ],
             "targetLockBonus": 0
         },
         "starshipDriftEngine": {
-            "templates": ["starshipComponent", "itemDescription", "modifiers"],
+            "templates": [
+                "starshipComponent",
+                "itemDescription",
+                "modifiers"
+            ],
             "engineRating": 0,
             "maxSize": null
         },
         "starshipExpansionBay": {
-            "templates": ["starshipComponent", "itemDescription", "modifiers"]
+            "templates": [
+                "starshipComponent",
+                "itemDescription",
+                "modifiers"
+            ]
         },
         "starshipFortifiedHull": {
-            "templates": ["starshipComponent", "itemDescription", "modifiers"],
+            "templates": [
+                "starshipComponent",
+                "itemDescription",
+                "modifiers"
+            ],
             "criticalThresholdBonus": 0
         },
         "starshipFrame": {
-            "templates": ["starshipComponent", "itemDescription", "modifiers"],
+            "templates": [
+                "starshipComponent",
+                "itemDescription",
+                "modifiers"
+            ],
             "size": "medium",
             "maneuverability": "average",
             "hitpoints": {
@@ -1744,26 +2309,52 @@
             }
         },
         "starshipOtherSystem": {
-            "templates": ["starshipComponent", "itemDescription", "modifiers"]
+            "templates": [
+                "starshipComponent",
+                "itemDescription",
+                "modifiers"
+            ]
         },
         "starshipPowerCore": {
-            "templates": ["starshipComponent", "itemDescription", "modifiers", "specialMaterials"],
+            "templates": [
+                "starshipComponent",
+                "itemDescription",
+                "modifiers",
+                "specialMaterials"
+            ],
             "supportedSizes": []
         },
         "starshipReinforcedBulkhead": {
-            "templates": ["starshipComponent", "itemDescription", "modifiers"],
+            "templates": [
+                "starshipComponent",
+                "itemDescription",
+                "modifiers"
+            ],
             "fortification": null
         },
         "starshipSecuritySystem": {
-            "templates": ["starshipComponent", "itemDescription", "modifiers"]
+            "templates": [
+                "starshipComponent",
+                "itemDescription",
+                "modifiers"
+            ]
         },
         "starshipSensor": {
-            "templates": ["starshipComponent", "itemDescription", "modifiers", "specialMaterials"],
+            "templates": [
+                "starshipComponent",
+                "itemDescription",
+                "modifiers",
+                "specialMaterials"
+            ],
             "modifier": 0,
             "range": ""
         },
         "starshipShield": {
-            "templates": ["starshipComponent", "itemDescription", "modifiers"],
+            "templates": [
+                "starshipComponent",
+                "itemDescription",
+                "modifiers"
+            ],
             "isDeflector": false,
             "shieldPoints": 0,
             "regeneration": 0,
@@ -1772,10 +2363,17 @@
             "targetLockBonus": 0
         },
         "starshipSpecialAbility": {
-          "templates": ["itemDescription"]
+            "templates": [
+                "itemDescription"
+            ]
         },
         "starshipThruster": {
-            "templates": ["starshipComponent", "itemDescription", "modifiers", "specialMaterials"],
+            "templates": [
+                "starshipComponent",
+                "itemDescription",
+                "modifiers",
+                "specialMaterials"
+            ],
             "supportedSize": "",
             "speed": 0,
             "pilotingModifier": 0,
@@ -1783,7 +2381,12 @@
             "isEnabled": true
         },
         "starshipWeapon": {
-            "templates": ["starshipComponent", "itemDescription", "modifiers", "specialMaterials"],
+            "templates": [
+                "starshipComponent",
+                "itemDescription",
+                "modifiers",
+                "specialMaterials"
+            ],
             "actionTarget": "",
             "range": "short",
             "class": "light",
@@ -1804,15 +2407,28 @@
             }
         },
         "chassis": {
-            "templates": ["itemDescription", "modifiers"],
+            "templates": [
+                "itemDescription",
+                "modifiers"
+            ],
             "levels": 1,
             "size": "",
             "speed": {
-                "land": { "base": 30 },
-                "flying": { "base": 0 },
-                "swimming": { "base": 0 },
-                "burrowing": { "base": 0 },
-                "climbing": { "base": 0 },
+                "land": {
+                    "base": 30
+                },
+                "flying": {
+                    "base": 0
+                },
+                "swimming": {
+                    "base": 0
+                },
+                "burrowing": {
+                    "base": 0
+                },
+                "climbing": {
+                    "base": 0
+                },
                 "value": null,
                 "special": null,
                 "mainMovement": "land"
@@ -1836,7 +2452,10 @@
             }
         },
         "vehicleAttack": {
-            "templates": ["itemDescription", "modifiers"],
+            "templates": [
+                "itemDescription",
+                "modifiers"
+            ],
             "ignoresHardness": 0,
             "damage": {
                 "parts": []
@@ -1848,7 +2467,9 @@
             }
         },
         "vehicleSystem": {
-            "templates": ["itemDescription"],
+            "templates": [
+                "itemDescription"
+            ],
             "piloting": {
                 "usedAsPilot": false,
                 "piloting": 0
@@ -1857,11 +2478,16 @@
                 "usedForSenses": false,
                 "senses": ""
             },
-            "canBeActivated" : true,
-            "isActive" : true
+            "canBeActivated": true,
+            "isActive": true
         },
         "mod": {
-            "templates": ["itemDescription", "activatedEffect", "action", "modifiers"],
+            "templates": [
+                "itemDescription",
+                "activatedEffect",
+                "action",
+                "modifiers"
+            ],
             "maxInstalls": 1,
             "isFree": false,
             "additionalMovement": "",
@@ -1877,7 +2503,16 @@
             "spellResistance": 0
         },
         "shield": {
-            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "itemUsage", "modifiers", "container", "specialMaterials"],
+            "templates": [
+                "itemDescription",
+                "physicalItem",
+                "activatedEffect",
+                "action",
+                "itemUsage",
+                "modifiers",
+                "container",
+                "specialMaterials"
+            ],
             "attributes": {
                 "sturdy": true
             },
@@ -1901,7 +2536,9 @@
                         "type": "slot",
                         "subtype": "armorUpgrade",
                         "amount": 0,
-                        "acceptsType": ["upgrade"],
+                        "acceptsType": [
+                            "upgrade"
+                        ],
                         "affectsEncumbrance": true,
                         "weightProperty": "slots"
                     },
@@ -1909,7 +2546,9 @@
                         "type": "slot",
                         "subtype": "fusion",
                         "amount": 0,
-                        "acceptsType": ["fusion"],
+                        "acceptsType": [
+                            "fusion"
+                        ],
                         "affectsEncumbrance": true,
                         "weightProperty": "level"
                     }
@@ -1918,16 +2557,28 @@
             }
         },
         "weaponAccessory": {
-            "templates": ["itemDescription", "physicalItem", "itemUsage", "modifiers", "container"],
+            "templates": [
+                "itemDescription",
+                "physicalItem",
+                "itemUsage",
+                "modifiers",
+                "container"
+            ],
             "weaponType": "any"
         },
-
         "actorResource": {
-            "templates": ["itemDescription", "modifiers"],
+            "templates": [
+                "itemDescription",
+                "modifiers"
+            ],
             "type": null,
             "subType": null,
             "base": null,
-            "range": {"min": null, "max": null, "mode": "post"},
+            "range": {
+                "min": null,
+                "max": null,
+                "mode": "post"
+            },
             "stage": "early",
             "enabled": true,
             "combatTracker": {

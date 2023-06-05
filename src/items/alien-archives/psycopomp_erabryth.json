@@ -22,6 +22,7 @@
           "condition": "",
           "cost": null
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -56,6 +57,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -85,8 +87,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>Battlegloves are popular, economical choices for mercenaries and guards. These durable nylon-web or para-aramid gloves hold a weighted plate over the wearer's knuckles. You can hold other objects or weapons in a hand wearing a glove, but you can't use the glove to make attacks while doing so.</p>"
         },
@@ -95,6 +100,7 @@
           "units": "",
           "value": ""
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
@@ -191,12 +197,14 @@
           "wideLine": false
         },
         "quantity": null,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "none",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -204,6 +212,7 @@
         },
         "source": "Core Rulebook, P. 171",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -239,6 +248,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -273,6 +283,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -302,8 +313,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>As a ranged attack that targets EAC, an erabryth can emit a beam of light from their mirrored face at a single target. This beam has a range increment of 60 feet and the bright weapon special property.</p>"
         },
@@ -312,6 +326,7 @@
           "units": "",
           "value": ""
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
@@ -408,12 +423,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "ft",
           "value": 60
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -421,6 +438,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -449,6 +467,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "action",
@@ -470,8 +489,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>As a standard action, an erabryth can force a single target within 60 feet to relive their most painful memories and regrets. The target becomes dazed for 1 round, after which they become @UUID[Compendium.sfrpg.conditions.nywSVEeDvp1bk7L3]{Shaken} for 1d3 rounds. A successful DC 12 Will saving throw negates the dazed condition and reduces the @UUID[Compendium.sfrpg.conditions.nywSVEeDvp1bk7L3]{Shaken} condition to 1 round. Regardless of the result of this saving throw, the target is immune to this erabryth’s forced reflection for 24 hours. This is a mindaffecting effect.</p>"
         },
@@ -494,6 +516,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "will",
           "dc": "12",
@@ -522,6 +545,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -543,8 +567,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>Weapons wielded by a psychopomp (including natural weapons) function as if they have the ghost killer weapon fusion.</p>"
         },
@@ -567,6 +594,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -588,12 +616,14 @@
   "prototypeToken": {
     "name": "Psycopomp, Erabryth",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -622,11 +652,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -644,6 +671,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -694,12 +722,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -757,7 +791,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 30
@@ -766,7 +801,8 @@
         "special": "original base: 30 ft.; original special: fly 20 ft. (Su, average)",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -827,12 +863,26 @@
       "alignment": "N",
       "aura": "",
       "biography": {
+        "age": 0,
+        "dateOfBirth": "",
+        "deity": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
+        "height": "",
+        "homeWorld": "",
+        "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>Psychopomps are enigmatic guides, protectors of souls, and slayers of undead. These neutral outsiders safeguard the cycle of life, death, and afterlife. Native to the Boneyard, the terminus of the River of Souls where the goddess @UUID[Compendium.sfrpg.setting.VQrVznzrr85I90TI]{Pharasma} judges the dead, psychopomps come in a variety of forms, each having their own aims, interests, and methodology for ensuring the journey of souls proceeds to their standards. Stoic, proud, and patient, psychopomps perform their duties with unwavering dedication, confident&nbsp;their collective efforts ensure existence will continue&nbsp;unabated throughout the ages. Having listened to the&nbsp;complaints and regrets of the dead since time began,&nbsp;psychopomps are unswayed by passionate pleas nor&nbsp;angry lamentations, making them seem aloof or uncaring.&nbsp;Nearly all psychopomps wear masks and speak a somber&nbsp;yet melodic language called Requian. Though some posit&nbsp;this behavior is a form of psychological intimidation,&nbsp;others believe the sight of an unmasked psychopomp puts&nbsp;unnecessary strain on a mortal soul.</p>\n<p>Erabryths are psychopomps who welcome and escort&nbsp;the souls of androids who have given their bodies up&nbsp;for renewal. Akin to procreation among androids,&nbsp;renewal is generally considered a decision to&nbsp;be celebrated and respected. Once incredibly&nbsp;rare, erabryths have increased in number&nbsp;in recent centuries, alongside the&nbsp;number of cycling @UUID[Compendium.sfrpg.races.GHIntVN70xTt2Tlo]{Android} souls they&nbsp;guide. Averaging 6 feet tall and&nbsp;200 pounds, erabryths are lanky&nbsp;androgynous outsiders; they&nbsp;have metallic, ribboned flesh&nbsp;and a mirrored disk in place&nbsp;of a face, backlit by a nimbus&nbsp;of light that changes color&nbsp;and intensity to display&nbsp;their emotions.</p>\n<p>In contrast to their&nbsp;erabryth kin, morrignas&nbsp;are warriors who&nbsp;uphold the sanctity of&nbsp;life and death by tracking down and destroying those&nbsp;who interfere with the natural flow of souls in any way.&nbsp;Cautious, cunning, and patient, morrignas unrelentingly&nbsp;hunt immortals, necromancers, and undead with&nbsp;extreme prejudice.</p>\n<p><span>Ecology</span></p>\n<section>\n<h3>Environment</h3>\n<p>any (Boneyard)</p>\n<h3>Organization</h3>\n<p>solitary or reflection (2–6)</p>\n</section>"
+        "value": "<h2>Description</h2>\n<p>Psychopomps are enigmatic guides, protectors of souls, and slayers of undead. These neutral outsiders safeguard the cycle of life, death, and afterlife. Native to the Boneyard, the terminus of the River of Souls where the goddess @UUID[Compendium.sfrpg.setting.VQrVznzrr85I90TI]{Pharasma} judges the dead, psychopomps come in a variety of forms, each having their own aims, interests, and methodology for ensuring the journey of souls proceeds to their standards. Stoic, proud, and patient, psychopomps perform their duties with unwavering dedication, confident&nbsp;their collective efforts ensure existence will continue&nbsp;unabated throughout the ages. Having listened to the&nbsp;complaints and regrets of the dead since time began,&nbsp;psychopomps are unswayed by passionate pleas nor&nbsp;angry lamentations, making them seem aloof or uncaring.&nbsp;Nearly all psychopomps wear masks and speak a somber&nbsp;yet melodic language called Requian. Though some posit&nbsp;this behavior is a form of psychological intimidation,&nbsp;others believe the sight of an unmasked psychopomp puts&nbsp;unnecessary strain on a mortal soul.</p>\n<p>Erabryths are psychopomps who welcome and escort&nbsp;the souls of androids who have given their bodies up&nbsp;for renewal. Akin to procreation among androids,&nbsp;renewal is generally considered a decision to&nbsp;be celebrated and respected. Once incredibly&nbsp;rare, erabryths have increased in number&nbsp;in recent centuries, alongside the&nbsp;number of cycling @UUID[Compendium.sfrpg.races.GHIntVN70xTt2Tlo]{Android} souls they&nbsp;guide. Averaging 6 feet tall and&nbsp;200 pounds, erabryths are lanky&nbsp;androgynous outsiders; they&nbsp;have metallic, ribboned flesh&nbsp;and a mirrored disk in place&nbsp;of a face, backlit by a nimbus&nbsp;of light that changes color&nbsp;and intensity to display&nbsp;their emotions.</p>\n<p>In contrast to their&nbsp;erabryth kin, morrignas&nbsp;are warriors who&nbsp;uphold the sanctity of&nbsp;life and death by tracking down and destroying those&nbsp;who interfere with the natural flow of souls in any way.&nbsp;Cautious, cunning, and patient, morrignas unrelentingly&nbsp;hunt immortals, necromancers, and undead with&nbsp;extreme prejudice.</p>\n<p><span>Ecology</span></p>\n<section>\n<h3>Environment</h3>\n<p>any (Boneyard)</p>\n<h3>Organization</h3>\n<p>solitary or reflection (2–6)</p>\n</section>",
+        "weight": ""
       },
       "class": "",
       "cr": 1,
       "environment": "",
+      "organization": "",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AA4 pg. 90",
@@ -1073,30 +1123,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -1131,6 +1188,9 @@
       },
       "senses": "blindsight (life) 60 ft., darkvision 60 ft., low-light vision",
       "size": "medium",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

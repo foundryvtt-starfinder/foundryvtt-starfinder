@@ -12,6 +12,7 @@
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -33,6 +34,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -59,6 +61,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -87,6 +90,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "heal",
         "activation": {
           "type": "day",
@@ -124,6 +128,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -150,6 +155,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -178,6 +184,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -199,6 +206,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -225,6 +233,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -322,6 +331,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -352,6 +362,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -359,6 +370,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -380,25 +392,7 @@
       "_id": "ndUklo95jiPXYOxa",
       "name": "Power Discharge (Ex)",
       "type": "weapon",
-      "ammunition": false,
-      "augmentation": false,
-      "consumable": false,
-      "container": false,
-      "equipment": false,
-      "fusion": true,
-      "goods": false,
-      "hybrid": false,
       "img": "icons/svg/item-bag.svg",
-      "magic": false,
-      "shield": false,
-      "spell": false,
-      "storage": {
-        "type": "slot",
-        "affectsEncumbrance": true,
-        "amount": 0,
-        "subtype": "fusion",
-        "weightProperty": "level"
-      },
       "system": {
         "type": "",
         "ability": "",
@@ -474,6 +468,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -594,6 +589,7 @@
           "units": "ft",
           "value": 30
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -601,6 +597,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -616,13 +613,7 @@
         },
         "weaponCategory": "uncategorized",
         "weaponType": "smallA"
-      },
-      "technological": false,
-      "upgrade": false,
-      "vehicleAttack": false,
-      "vehicleSystem": false,
-      "weapon": false,
-      "weaponAccessory": false
+      }
     }
   ],
   "prototypeToken": {
@@ -635,6 +626,7 @@
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -663,11 +655,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -685,6 +674,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -735,12 +725,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -871,8 +867,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<h2>Description</h2>\n<p>Drift leeches are the parasites of space travel and a bane to all technology that comes near them. Their origins are unknown, but they’ve become an increasingly common nuisance for Drift travelers. Most believe drift leeches were sucked into the Drift from some far-off place, but now these creatures thrive in their new environment, spreading throughout the Drift and menacing every vessel in it.</p>\n<p>These giant red slugs measure more than 3 feet long and have circular suctioning maws equipped with hundreds of tiny, razor-sharp teeth. Incredibly hardy, they can spend months floating through space waiting for a ship to pass by and become their next meal. Once attached to a starship hull, these pesky vermin siphon energy from the vessel and store it for reproduction. If allowed to siphon too much energy, a drift leech terrorizes a starship-life support systems fail, engines cease to function, and the vessel becomes mere debris floating through the Drift. To make matters worse, Drift leeches produce an energy-draining field that interferes with advanced weapons and armor, so they’re especially hard to scrape off a starship hull, even once they are found.</p>\n<p>Drift leeches show no signs of intelligence, and live only to feed and multiply. They reproduce asexually via fission. As these parasites siphon energy over several weeks, they grow until they’ve doubled in size; they then split in half, becoming two parasites instead of one, and the process begins anew.</p>",
@@ -882,6 +881,10 @@
       "cr": 0.3333333333333333,
       "environment": "the Drift",
       "organization": "nest (3-12), or colony (13-20)",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #34 pg. 59",
@@ -1185,6 +1188,9 @@
       },
       "senses": "darkvision 60 ft., low-light vision",
       "size": "small",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

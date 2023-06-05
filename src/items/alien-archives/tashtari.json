@@ -22,6 +22,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -56,6 +57,8 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
+          "isOpen": true,
           "storage": [
             {
               "type": "slot",
@@ -84,8 +87,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
@@ -94,9 +100,11 @@
           "units": "",
           "value": null
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
+        "isActive": null,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -189,12 +197,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -202,6 +212,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -237,6 +248,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -271,6 +283,8 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
+          "isOpen": true,
           "storage": [
             {
               "type": "slot",
@@ -307,8 +321,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>As an attack, a tashtari can unleash a focused ray of light from its mouth that can @UUID[Compendium.sfrpg.rules.O5GDQUKPCJ9Zbnfj]{Burn} a target like the beam of a laser pistol. This ray has a range increment of 80 feet.</p>"
         },
@@ -317,9 +334,11 @@
           "units": "",
           "value": ""
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
+        "isActive": null,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -412,12 +431,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "ft",
           "value": 80
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -425,6 +446,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -453,6 +475,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "action",
@@ -474,8 +497,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>Once per day as a standard action, a tashtari can cause its filaments to glow with intense light. Each creature within 60 feet must succeed at a DC 12 Fortitude save or be dazzled for [[/r 1d4 rounds]]. This ability has no effect on sightless creatures. Tashtaris and tashtari alphas are immune to the effects of this ability.</p>"
         },
@@ -485,6 +511,7 @@
           "value": ""
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -497,6 +524,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "fort",
           "dc": "12",
@@ -518,12 +546,14 @@
   "prototypeToken": {
     "name": "Tashtari",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -552,11 +582,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -574,6 +601,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -624,8 +652,14 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
+      "baseSpellDC": {
+        "base": 0
+      },
       "cmd": {
         "min": 0,
         "tooltip": [],
@@ -682,7 +716,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 30
@@ -691,7 +726,8 @@
         "special": "original base: 30 ft.; original special: climb 30 ft.",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -751,12 +787,26 @@
       "alignment": "N",
       "aura": "",
       "biography": {
+        "age": 0,
+        "dateOfBirth": "",
+        "deity": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
+        "height": "",
+        "homeWorld": "",
+        "otherVisuals": "",
         "public": "",
-        "value": "<section>\n<h2>Tashtari</h2>\n<p>The first glimpse most observers have of a tashtari pack is a far-off twinkling of lights, which is easily mistaken for swamp gas or the glint of moonlight. Produced by the coat of supple filaments that cover a tashtari’s body, these phosphorescent lights facilitate communication, allowing tashtari packs to silently coordinate while searching for prey and setting up ambushes. Tashtaris also use this luminescence for social interactions. Tashtaris evolved their tactics and laser attacks to hunt the small, quick-moving mammals of their native habitat on @UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel}, but these predators are not shy about taking down larger prey if circumstances are in their favor.</p>\n<p>A pack of tashtaris consists of a dominant mating pair, their offspring, and close relatives. Juvenile tashtaris leave the pack soon after reaching maturity to seek mates from unrelated groups and found new packs.</p>\n<p>Tashtaris are nocturnal. During the day, they use the flexible claws on their trio of multijointed legs to scramble to the sunlit tops of tall trees in their habitat. They spend much of the day basking, with their photoreceptive filaments raised to maximize sunlight absorption. This basking behavior, more common in cold-blooded creatures, offsets the tremendous caloric demands of the tashtari’s muzzle laser. Instead of using bioluminescence, the tashtari stores solar energy gathered by its filaments in a photoenergetic node at its throat. When attacking, the tashtari uses a flexible focusing membrane to concentrate energy into a coherent, deadly beam.</p>\n<p>Sentient species of @UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel} refer to these beasts as tashtaris, but offworlders have nicknamed the creatures “laser wolves,” based on their hunting behavior and unique physiology. Attempts to domesticate tashtaris have spread the creatures to far-flung parts of the galaxy, but trainers must closely monitor the creatures’ intake of solar radiation. Tashtaris transplanted to systems with stronger solar output can become dangerously aggressive.</p>\n<h2>Tashtari Biotech</h2>\n<p>Hunters can do brisk business harvesting the filaments, photoenergetic nodes, and focusing membranes of tashtaris and selling them to bioengineers. If not for conservation efforts on @UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel}, tashtaris could have been hunted to extinction, since their photosensitive adaptations are difficult and expensive to duplicate through synthetic means. Cessation of hostilities between the formians and lashuntas has allowed a recent surge in the regulated trade of biotech that incorporates tashtari tissue. Explorers and scouts equip themselves with&nbsp;<a href=\"https://www.aonsrd.com/Biotech.aspx?ItemName=Mk%201&amp;Family=Focusing%20Membrane\">focusing membranes</a>&nbsp;or&nbsp;<a href=\"https://www.aonsrd.com/Biotech.aspx?ItemName=Mk%201&amp;Family=Filament%20Mesh\">filament mesh</a>, and many people throughout the Pact Worlds use&nbsp;<a href=\"https://www.aonsrd.com/Biotech.aspx?ItemName=Photoenergetic%20Node&amp;Family=None\">photoenergetic nodes</a>&nbsp;for practical and cosmetic purposes.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any forests or marshes (@UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel})</p>\n<h3>Organization</h3>\n<p>pack (3-8)</p>\n</section>"
+        "value": "<section>\n<h2>Tashtari</h2>\n<p>The first glimpse most observers have of a tashtari pack is a far-off twinkling of lights, which is easily mistaken for swamp gas or the glint of moonlight. Produced by the coat of supple filaments that cover a tashtari’s body, these phosphorescent lights facilitate communication, allowing tashtari packs to silently coordinate while searching for prey and setting up ambushes. Tashtaris also use this luminescence for social interactions. Tashtaris evolved their tactics and laser attacks to hunt the small, quick-moving mammals of their native habitat on @UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel}, but these predators are not shy about taking down larger prey if circumstances are in their favor.</p>\n<p>A pack of tashtaris consists of a dominant mating pair, their offspring, and close relatives. Juvenile tashtaris leave the pack soon after reaching maturity to seek mates from unrelated groups and found new packs.</p>\n<p>Tashtaris are nocturnal. During the day, they use the flexible claws on their trio of multijointed legs to scramble to the sunlit tops of tall trees in their habitat. They spend much of the day basking, with their photoreceptive filaments raised to maximize sunlight absorption. This basking behavior, more common in cold-blooded creatures, offsets the tremendous caloric demands of the tashtari’s muzzle laser. Instead of using bioluminescence, the tashtari stores solar energy gathered by its filaments in a photoenergetic node at its throat. When attacking, the tashtari uses a flexible focusing membrane to concentrate energy into a coherent, deadly beam.</p>\n<p>Sentient species of @UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel} refer to these beasts as tashtaris, but offworlders have nicknamed the creatures “laser wolves,” based on their hunting behavior and unique physiology. Attempts to domesticate tashtaris have spread the creatures to far-flung parts of the galaxy, but trainers must closely monitor the creatures’ intake of solar radiation. Tashtaris transplanted to systems with stronger solar output can become dangerously aggressive.</p>\n<h2>Tashtari Biotech</h2>\n<p>Hunters can do brisk business harvesting the filaments, photoenergetic nodes, and focusing membranes of tashtaris and selling them to bioengineers. If not for conservation efforts on @UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel}, tashtaris could have been hunted to extinction, since their photosensitive adaptations are difficult and expensive to duplicate through synthetic means. Cessation of hostilities between the formians and lashuntas has allowed a recent surge in the regulated trade of biotech that incorporates tashtari tissue. Explorers and scouts equip themselves with&nbsp;<a href=\"https://www.aonsrd.com/Biotech.aspx?ItemName=Mk%201&amp;Family=Focusing%20Membrane\">focusing membranes</a>&nbsp;or&nbsp;<a href=\"https://www.aonsrd.com/Biotech.aspx?ItemName=Mk%201&amp;Family=Filament%20Mesh\">filament mesh</a>, and many people throughout the Pact Worlds use&nbsp;<a href=\"https://www.aonsrd.com/Biotech.aspx?ItemName=Photoenergetic%20Node&amp;Family=None\">photoenergetic nodes</a>&nbsp;for practical and cosmetic purposes.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any forests or marshes (@UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel})</p>\n<h3>Organization</h3>\n<p>pack (3-8)</p>\n</section>",
+        "weight": ""
       },
       "class": "",
       "cr": 3,
       "environment": "",
+      "organization": "",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AA2 pg. 124",
@@ -771,6 +821,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 8,
         "ranks": 8,
@@ -781,6 +832,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 8,
         "ranks": 8,
@@ -791,6 +843,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -801,6 +854,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -811,6 +865,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -821,6 +876,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -831,6 +887,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -841,6 +898,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -851,6 +909,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -861,6 +920,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -871,6 +931,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -881,6 +942,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -891,6 +953,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 8,
         "ranks": 8,
@@ -901,6 +964,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -911,6 +975,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -921,6 +986,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -932,6 +998,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -942,6 +1009,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -952,6 +1020,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 13,
         "ranks": 13,
@@ -962,6 +1031,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -971,30 +1041,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -1029,6 +1106,9 @@
       },
       "senses": "darkvision 60 ft., low-light vision",
       "size": "medium",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

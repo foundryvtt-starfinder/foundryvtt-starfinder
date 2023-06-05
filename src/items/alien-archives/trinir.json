@@ -12,6 +12,7 @@
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -33,8 +34,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>As a standard action, a trinir can share one of their resistances with adjacent creatures of their choice. This shared resistance lasts up to 8 hours, but it ends immediately if an affected creature ceases to be adjacent to the trinir or the trinir falls @UUID[Compendium.sfrpg.conditions.lf8pbezocjYIvR9y]{Unconscious}.</p>"
         },
@@ -44,6 +48,7 @@
           "value": null
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -56,6 +61,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -74,6 +80,744 @@
       }
     },
     {
+      "_id": "UwgAt6bweUfyfL5W",
+      "name": "Battery, Standard",
+      "type": "goods",
+      "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
+      "system": {
+        "type": "",
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": false
+        },
+        "attuned": false,
+        "bulk": "-",
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 20</p>"
+        },
+        "equippable": false,
+        "equipped": false,
+        "identified": true,
+        "level": 1,
+        "modifiers": [],
+        "price": 60,
+        "quantity": "1",
+        "quantityPerPack": 1,
+        "source": "Core Rulebook"
+      }
+    },
+    {
+      "_id": "gM67wqpvHOD2E8K7",
+      "name": "Inject Nanobots (DC 17)",
+      "type": "spell",
+      "img": "systems/sfrpg/icons/spells/inject_nanobot.webp",
+      "system": {
+        "type": "",
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "msak",
+        "activation": {
+          "type": "action",
+          "condition": "",
+          "cost": 1
+        },
+        "allowedClasses": {
+          "myst": false,
+          "precog": false,
+          "tech": true,
+          "wysh": false
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": null,
+          "value": null
+        },
+        "attackBonus": 8,
+        "chatFlavor": "confused for 4 rounds.",
+        "concentration": false,
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "4d8",
+              "operator": "",
+              "types": {}
+            }
+          ]
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>You concentrate key particles in your blood into tiny biological nanobots that you can inject into a foe with a touch, disrupting and damaging its natural processes. Make a melee attack against the target’s EAC; if you hit, the nanobots deal 4d8 damage and swarm through the target’s biological or mechanical systems, causing the creature to be @UUID[Compendium.sfrpg.conditions.8rIj0ewW4bL8Uph5]{Confused}, as per&nbsp;@UUID[Compendium.sfrpg.spells.wSeE9HyAmM7lTdpo]{Confusion}, for 1 round per your caster level. If the target succeeds at a Fortitude save, it takes only half damage and negates the @UUID[Compendium.sfrpg.spells.wSeE9HyAmM7lTdpo]{Confusion} effect. A confused target can attempt a Will saving throw at the beginning of its turn each round to end the @UUID[Compendium.sfrpg.spells.wSeE9HyAmM7lTdpo]{Confusion} effect.</p>\n<p>Casting this spell doesn’t provoke attacks of opportunity.</p>"
+        },
+        "descriptors": [],
+        "dismissible": false,
+        "duration": {
+          "units": "",
+          "value": ""
+        },
+        "formula": "",
+        "isActive": null,
+        "isVariableLevel": false,
+        "level": 2,
+        "materials": {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": ""
+        },
+        "modifiers": [],
+        "preparation": {
+          "mode": "",
+          "prepared": true
+        },
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "touch",
+          "value": null
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "fort",
+          "dc": 17,
+          "descriptor": "negate"
+        },
+        "school": "nec",
+        "source": "Starfinder Core Rulebook pg. 361",
+        "sr": true,
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "uses": {
+          "max": 0,
+          "per": "",
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "PKKLs7YGgOlNPg2P",
+      "name": "Microbot Assault",
+      "type": "spell",
+      "img": "systems/sfrpg/icons/spells/microbot_assault.webp",
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "action",
+          "condition": "",
+          "cost": 1
+        },
+        "allowedClasses": {
+          "myst": false,
+          "precog": false,
+          "tech": true,
+          "wysh": false
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "ft",
+          "value": 10
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "concentration": true,
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>You pull latent technological energy from the air to form a cloud of fist-sized hindering microbots that fill an area you designate. The microbots begin in a 10-foot-square area when you create them, and you can create the cloud so that it shares the space of other creatures. If no creatures are within the cloud’s area, the microbots pursue and harass the nearest creature that is hostile to you as best they can each round. Although the microbots generally know which creatures are your enemies, you have no control over their targets or direction of travel. If there are multiple valid targets the microbots can harass, the cloud will split into a maximum of four 5-foot-square segments and pursue different targets.</p>\n<p>The cloud (and any segments thereof) has a fly speed of 20 feet. Each round on your turn, the microbot cloud grants harrying fire (see page 247) against the foes in its spaces. In addition, the cloud grants covering fire (see page 246) to anyone attacked by foes in its spaces. The microbots constantly repair themselves and the cloud generates new microbots every few seconds, so any attack against them is essentially ineffective.</p>"
+        },
+        "descriptors": [],
+        "dismissible": false,
+        "duration": {
+          "units": "",
+          "value": ""
+        },
+        "formula": "",
+        "isActive": null,
+        "isVariableLevel": false,
+        "level": 2,
+        "materials": {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": ""
+        },
+        "modifiers": [],
+        "preparation": {
+          "mode": "",
+          "prepared": true
+        },
+        "range": {
+          "additional": "5",
+          "per": "2 levels",
+          "units": "ft",
+          "value": 25
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "school": "con",
+        "source": "Starfinder Core Rulebook pg. 364",
+        "sr": false,
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "uses": {
+          "max": 0,
+          "per": "",
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "RLVm854YWGJmYRF3",
+      "name": "Life Bubble",
+      "type": "spell",
+      "img": "systems/sfrpg/icons/spells/life_bubble.webp",
+      "system": {
+        "type": "",
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "save",
+        "activation": {
+          "type": "action",
+          "condition": "",
+          "cost": 1
+        },
+        "allowedClasses": {
+          "myst": true,
+          "precog": false,
+          "tech": true,
+          "wysh": true
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": null,
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "concentration": false,
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>You surround the target creatures with a constant and movable 1-inch shell of tolerable living conditions customized for each creature. This shell enables the targets to breathe freely in a variety of atmospheric conditions (including in corrosive, thick, thin, and toxic atmospheres), as well as underwater or in a vacuum. It also makes the targets immune to harmful gases and vapors, including inhaled @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.gBhZDjh30JEyh7DY]{Diseases} and @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Poisons} as well as spells with a harmful gaseous effect. In addition, the shell protects targets (and their equipment) from extreme temperatures (between –50° and 140° F) without having to attempt Fortitude saving throws, as well as extreme pressures.</p>\n<p>Life bubble&nbsp;doesn’t provide protection from energy damage, negative or positive energy (such as found on the Negative and Positive Energy Planes), or radiation; it also doesn’t provide the ability to see in conditions of poor visibility (such as in smoke or fog) or the ability to move or act normally in conditions that impede movement (such as underwater).</p>"
+        },
+        "descriptors": [],
+        "dismissible": false,
+        "duration": {
+          "units": "",
+          "value": "1 day/level"
+        },
+        "formula": "",
+        "isActive": null,
+        "isVariableLevel": false,
+        "level": 1,
+        "materials": {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": ""
+        },
+        "modifiers": [],
+        "preparation": {
+          "mode": null,
+          "prepared": true
+        },
+        "range": {
+          "additional": "10",
+          "per": "level",
+          "units": "ft",
+          "value": 100
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "reflex",
+          "dc": null,
+          "descriptor": "harmless"
+        },
+        "school": "abj",
+        "source": "Starfinder Core Rulebook pg. 363",
+        "sr": true,
+        "target": {
+          "type": "",
+          "value": "up to one creature/level, no two of which can be more than 30 ft. apart"
+        },
+        "uses": {
+          "max": 0,
+          "per": "",
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "Dg5LegkQsPDrp3Pt",
+      "name": "Magic Missile",
+      "type": "spell",
+      "img": "systems/sfrpg/icons/spells/magic_missile.webp",
+      "system": {
+        "type": "",
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "other",
+        "activation": {
+          "type": "action",
+          "condition": "",
+          "cost": 1
+        },
+        "allowedClasses": {
+          "myst": false,
+          "precog": false,
+          "tech": true,
+          "wysh": false
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": null,
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "concentration": false,
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "1d4+1",
+              "operator": "",
+              "types": {}
+            }
+          ]
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>You fire two missiles of magical energy that strike targets unerringly (the creatures must still be valid targets) and deal 1d4+1 force damage each. You can’t target specific parts of a creature, and objects are not damaged by the spell.</p>\n<p>You can target a single creature or several creatures, but each missile can strike only one creature. You must designate targets before you attempt to overcome spell resistance or roll damage.</p>\n<p>You can cast this spell as a full action. If you do, you fire three missiles instead of two.</p>"
+        },
+        "descriptors": [],
+        "dismissible": false,
+        "duration": {
+          "units": "",
+          "value": "instantaneous"
+        },
+        "formula": "",
+        "isActive": null,
+        "isVariableLevel": false,
+        "level": 1,
+        "materials": {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": ""
+        },
+        "modifiers": [],
+        "preparation": {
+          "mode": "",
+          "prepared": true
+        },
+        "range": {
+          "additional": "10",
+          "per": "level",
+          "units": "ft",
+          "value": 100
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": "negate"
+        },
+        "school": "evo",
+        "source": "Starfinder Core Rulebook pg. 364",
+        "sr": true,
+        "target": {
+          "type": "",
+          "value": "up to three creatures, no two of which can be more than 15 ft. apart; see text"
+        },
+        "uses": {
+          "max": 0,
+          "per": "",
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "0RKxEHxVrNgoJsCh",
+      "name": "Supercharge Weapon",
+      "type": "spell",
+      "img": "systems/sfrpg/icons/spells/supercharge_weapon.webp",
+      "system": {
+        "type": "",
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "other",
+        "activation": {
+          "type": "action",
+          "condition": "",
+          "cost": 1
+        },
+        "allowedClasses": {
+          "myst": false,
+          "precog": false,
+          "tech": true,
+          "wysh": false
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "touch",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "concentration": false,
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "4d6",
+              "operator": "",
+              "types": {}
+            }
+          ]
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>You supercharge the target weapon. If the weapon’s next attack hits (provided it is made before the end of the next round), the attack deals 4d6 additional damage if the weapon is a single target attack or 2d6 additional damage if the weapon attacks all creatures in an area. This bonus damage is of the same type as the weapon’s normal damage.</p>"
+        },
+        "descriptors": [],
+        "dismissible": false,
+        "duration": {
+          "units": "",
+          "value": "see text"
+        },
+        "formula": "",
+        "isActive": null,
+        "isVariableLevel": false,
+        "level": 1,
+        "materials": {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": ""
+        },
+        "modifiers": [],
+        "preparation": {
+          "mode": null,
+          "prepared": true
+        },
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "touch",
+          "value": null
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": "negate"
+        },
+        "school": "evo",
+        "source": "Starfinder Core Rulebook pg. 379",
+        "sr": false,
+        "target": {
+          "type": "",
+          "value": "one weapon"
+        },
+        "uses": {
+          "max": 0,
+          "per": "",
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "2WEOn60ZNHOZENSS",
+      "name": "Energy Ray",
+      "type": "spell",
+      "img": "systems/sfrpg/icons/spells/energy_ray.webp",
+      "system": {
+        "type": "",
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "rsak",
+        "activation": {
+          "type": "action",
+          "condition": "",
+          "cost": 1
+        },
+        "allowedClasses": {
+          "myst": false,
+          "precog": false,
+          "tech": true,
+          "wysh": false
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": null,
+          "value": null
+        },
+        "attackBonus": 7,
+        "chatFlavor": "",
+        "concentration": false,
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "1d3",
+              "operator": "",
+              "types": {}
+            }
+          ]
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>When you cast this spell, choose acid, cold, electricity, or fire; the spell gains that descriptor. You fire a ray at the target, and you must make a ranged attack against its EAC. On a hit, the ray deals 1d3 damage of the chosen energy type.</p>"
+        },
+        "descriptors": [],
+        "dismissible": false,
+        "duration": {
+          "units": "",
+          "value": "instantaneous"
+        },
+        "formula": "",
+        "isActive": null,
+        "isVariableLevel": false,
+        "level": 0,
+        "materials": {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": ""
+        },
+        "modifiers": [],
+        "preparation": {
+          "mode": "always",
+          "prepared": true
+        },
+        "range": {
+          "additional": "5",
+          "per": "2 levels",
+          "units": "ft",
+          "value": 25
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": "negate"
+        },
+        "school": "con",
+        "source": "Starfinder Core Rulebook pg. 353",
+        "sr": true,
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "uses": {
+          "max": 0,
+          "per": "",
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "9DGX5LxFen8b1aLe",
+      "name": "Telepathic Message",
+      "type": "spell",
+      "img": "systems/sfrpg/icons/spells/telepathic_message.webp",
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "action",
+          "condition": "",
+          "cost": 1
+        },
+        "allowedClasses": {
+          "myst": true,
+          "precog": false,
+          "tech": true,
+          "wysh": false
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": null,
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "concentration": false,
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>You can send a short telepathic message and hear simple telepathic replies. Any living creature within 10 feet of you or an intended recipient also receives your telepathic message if it succeeds at a DC 25 Perception check. You must be able to see or hear each recipient. The creatures that receive the message can reply telepathically, but no more than a single message can be sent each round, and each message cannot exceed 10 words. A technomancer casting this spell can also use it to send a message to a computer or a construct with the technological subtype if the receiving target is designed to receive messages.</p>"
+        },
+        "descriptors": [],
+        "dismissible": false,
+        "duration": {
+          "units": "",
+          "value": "10 minutes/level"
+        },
+        "formula": "",
+        "isActive": null,
+        "isVariableLevel": false,
+        "level": 0,
+        "materials": {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": ""
+        },
+        "modifiers": [],
+        "preparation": {
+          "mode": "always",
+          "prepared": true
+        },
+        "range": {
+          "additional": "10",
+          "per": "level",
+          "units": "ft",
+          "value": 100
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "school": "div",
+        "source": "Starfinder Core Rulebook pg. 381",
+        "sr": false,
+        "target": {
+          "type": "",
+          "value": "up to one creature/level"
+        },
+        "uses": {
+          "max": 0,
+          "per": "",
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "U8TV6GUMXlY7I5Ns",
       "name": "Baton, tactical",
       "type": "weapon",
       "img": "icons/svg/mystery-man.svg",
@@ -90,6 +834,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -97,6 +842,24 @@
           "value": null
         },
         "attackBonus": 8,
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": true
+        },
         "attuned": false,
         "bulk": "L",
         "capacity": {
@@ -104,6 +867,23 @@
           "value": null
         },
         "chatFlavor": "",
+        "container": {
+          "contents": [],
+          "includeContentsInWealthCalculation": 1,
+          "isOpen": true,
+          "storage": [
+            {
+              "type": "slot",
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 0,
+              "subtype": "fusion",
+              "weightProperty": "level"
+            }
+          ]
+        },
         "critical": {
           "effect": "",
           "parts": []
@@ -119,8 +899,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>A baton is a thin, solid metal shaft, usually with a textured rubber grip. A tactical baton can be used to inflict precise bludgeoning blows. An advanced baton, used by elite mercenary and security companies, often has an additional shaft, as well as a weighted end that can be powered to connect with substantially more force than a tactical baton.</p>"
         },
@@ -129,10 +912,12 @@
           "units": "",
           "value": ""
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "fusions": [],
         "identified": true,
+        "isActive": null,
         "level": 1,
         "modifiers": [],
         "price": 90,
@@ -222,12 +1007,14 @@
           "wideLine": false
         },
         "quantity": null,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "touch",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -235,6 +1022,7 @@
         },
         "source": "Core Rulebook, P. 171",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -248,10 +1036,12 @@
           "per": "",
           "value": 0
         },
+        "weaponCategory": "uncategorized",
         "weaponType": "basicM"
       }
     },
     {
+      "_id": "YvaZWaHiF1yZeWwN",
       "name": "Sonic pistol, thunderstrike",
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/sonic-pistol-thunderstrike.webp",
@@ -268,6 +1058,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -275,6 +1066,24 @@
           "value": null
         },
         "attackBonus": 6,
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": true
+        },
         "attuned": false,
         "bulk": "L",
         "capacity": {
@@ -282,6 +1091,23 @@
           "value": 20
         },
         "chatFlavor": "",
+        "container": {
+          "contents": [],
+          "includeContentsInWealthCalculation": 1,
+          "isOpen": true,
+          "storage": [
+            {
+              "type": "slot",
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 0,
+              "subtype": "fusion",
+              "weightProperty": "level"
+            }
+          ]
+        },
         "critical": {
           "effect": "Deafen [DC 15]",
           "parts": []
@@ -297,8 +1123,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>Sonic pistols have a stocky barrel capped with a concave resonating chamber that amplifies and directs its sonic blast. They use high-intensity sound to shake molecules apart.</p>"
         },
@@ -307,10 +1136,12 @@
           "units": "",
           "value": ""
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "fusions": [],
         "identified": true,
+        "isActive": null,
         "level": 4,
         "modifiers": [],
         "price": 2300,
@@ -400,12 +1231,14 @@
           "wideLine": false
         },
         "quantity": null,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "ft",
           "value": 40
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -413,6 +1246,7 @@
         },
         "source": "Core Rulebook, P. 173",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -426,16 +1260,19 @@
           "per": "",
           "value": 0
         },
+        "weaponCategory": "uncategorized",
         "weaponType": "smallA"
       }
     },
     {
+      "_id": "1tcwvW8tRIPS5X55",
       "name": "Constructed",
       "type": "feat",
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -457,8 +1294,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
@@ -468,6 +1308,7 @@
           "value": null
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -480,6 +1321,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -498,12 +1340,14 @@
       }
     },
     {
+      "_id": "DlQCHplsiYPjwpBU",
       "name": "Magic Hacks - Countertech",
       "type": "feat",
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -525,8 +1369,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
@@ -536,6 +1383,7 @@
           "value": null
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -548,6 +1396,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -566,6 +1415,7 @@
       }
     },
     {
+      "_id": "jyVGnWk0ysURjFZi",
       "name": "Spell Cache (Su)",
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/spell_cache.webp",
@@ -575,6 +1425,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -596,8 +1447,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.IvLuq2pxKkHJJpae]{Technomancer}</p>\n<p>As the culmination of your early study of the fundamental forces of the galaxy, you have created a spell cache that allows you to store and access spells. Your spell cache could be a device such as a handheld computer or technological implant; an item such as a ring or staff; or a symbol such as a brand, tattoo, or other permanent modification to your body. While you don’t need your spell cache to cast your spells, once per day, you can activate your spell cache to cast any one spell you know and are capable of casting, even if you’ve expended all your spell slots for that spell’s level.</p>\n<p>If your spell cache is damaged, it is restored to full Hit Points the next time you prepare spells. If the spell cache is lost or destroyed, you can replace it after 1 week with a special ritual that takes 8 hours to complete.</p>"
         },
@@ -607,6 +1461,7 @@
           "value": null
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -619,6 +1474,7 @@
           "value": null
         },
         "requirements": "1st Level",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -637,696 +1493,62 @@
       }
     },
     {
+      "_id": "odVTHSnAJDf5G1Gn",
       "name": "Trinir Suit (Functions As Defrex Hide)",
       "type": "goods",
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": false
+        },
         "attuned": false,
         "bulk": "L",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
+        "equippable": false,
         "equipped": false,
         "identified": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
         "quantity": 1,
+        "quantityPerPack": 1,
         "source": ""
-      }
-    },
-    {
-      "_id": "UwgAt6bweUfyfL5W",
-      "name": "Battery, Standard",
-      "type": "goods",
-      "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
-      "system": {
-        "type": "",
-        "attuned": false,
-        "bulk": "-",
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 20</p>"
-        },
-        "equipped": false,
-        "identified": true,
-        "level": 1,
-        "modifiers": [],
-        "price": 60,
-        "quantity": "1",
-        "source": "Core Rulebook"
-      }
-    },
-    {
-      "_id": "gM67wqpvHOD2E8K7",
-      "name": "Inject Nanobots (DC 17)",
-      "type": "spell",
-      "img": "systems/sfrpg/icons/spells/inject_nanobot.webp",
-      "system": {
-        "type": "",
-        "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "msak",
-        "activation": {
-          "type": "action",
-          "condition": "",
-          "cost": 1
-        },
-        "allowedClasses": {
-          "myst": false,
-          "tech": true,
-          "wysh": false
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": null,
-          "value": null
-        },
-        "attackBonus": 8,
-        "chatFlavor": "confused for 4 rounds.",
-        "concentration": false,
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": [
-            {
-              "formula": "4d8",
-              "operator": "",
-              "types": {}
-            }
-          ]
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "<p>You concentrate key particles in your blood into tiny biological nanobots that you can inject into a foe with a touch, disrupting and damaging its natural processes. Make a melee attack against the target’s EAC; if you hit, the nanobots deal 4d8 damage and swarm through the target’s biological or mechanical systems, causing the creature to be @UUID[Compendium.sfrpg.conditions.8rIj0ewW4bL8Uph5]{Confused}, as per&nbsp;@UUID[Compendium.sfrpg.spells.wSeE9HyAmM7lTdpo]{Confusion}, for 1 round per your caster level. If the target succeeds at a Fortitude save, it takes only half damage and negates the @UUID[Compendium.sfrpg.spells.wSeE9HyAmM7lTdpo]{Confusion} effect. A confused target can attempt a Will saving throw at the beginning of its turn each round to end the @UUID[Compendium.sfrpg.spells.wSeE9HyAmM7lTdpo]{Confusion} effect.</p>\n<p>Casting this spell doesn’t provoke attacks of opportunity.</p>"
-        },
-        "descriptors": [],
-        "dismissible": false,
-        "duration": {
-          "units": "",
-          "value": ""
-        },
-        "formula": "",
-        "level": 2,
-        "materials": {
-          "consumed": false,
-          "cost": 0,
-          "supply": 0,
-          "value": ""
-        },
-        "modifiers": [],
-        "preparation": {
-          "mode": "",
-          "prepared": true
-        },
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
-        },
-        "save": {
-          "type": "fort",
-          "dc": 17,
-          "descriptor": "negate"
-        },
-        "school": "nec",
-        "source": "Starfinder Core Rulebook pg. 361",
-        "sr": true,
-        "target": {
-          "type": "",
-          "value": ""
-        },
-        "uses": {
-          "max": 0,
-          "per": "",
-          "value": 0
-        }
-      }
-    },
-    {
-      "_id": "PKKLs7YGgOlNPg2P",
-      "name": "Microbot Assault",
-      "type": "spell",
-      "img": "systems/sfrpg/icons/spells/microbot_assault.webp",
-      "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "",
-        "activation": {
-          "type": "action",
-          "condition": "",
-          "cost": 1
-        },
-        "allowedClasses": {
-          "myst": false,
-          "tech": true,
-          "wysh": false
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "ft",
-          "value": 10
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "concentration": true,
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "<p>You pull latent technological energy from the air to form a cloud of fist-sized hindering microbots that fill an area you designate. The microbots begin in a 10-foot-square area when you create them, and you can create the cloud so that it shares the space of other creatures. If no creatures are within the cloud’s area, the microbots pursue and harass the nearest creature that is hostile to you as best they can each round. Although the microbots generally know which creatures are your enemies, you have no control over their targets or direction of travel. If there are multiple valid targets the microbots can harass, the cloud will split into a maximum of four 5-foot-square segments and pursue different targets.</p>\n<p>The cloud (and any segments thereof) has a fly speed of 20 feet. Each round on your turn, the microbot cloud grants harrying fire (see page 247) against the foes in its spaces. In addition, the cloud grants covering fire (see page 246) to anyone attacked by foes in its spaces. The microbots constantly repair themselves and the cloud generates new microbots every few seconds, so any attack against them is essentially ineffective.</p>"
-        },
-        "descriptors": [],
-        "dismissible": false,
-        "duration": {
-          "units": "",
-          "value": ""
-        },
-        "formula": "",
-        "level": 2,
-        "materials": {
-          "consumed": false,
-          "cost": 0,
-          "supply": 0,
-          "value": ""
-        },
-        "modifiers": [],
-        "preparation": {
-          "mode": "",
-          "prepared": true
-        },
-        "range": {
-          "additional": "5",
-          "per": "2 levels",
-          "units": "ft",
-          "value": 25
-        },
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "school": "con",
-        "source": "Starfinder Core Rulebook pg. 364",
-        "sr": false,
-        "target": {
-          "type": "",
-          "value": ""
-        },
-        "uses": {
-          "max": 0,
-          "per": "",
-          "value": 0
-        }
-      }
-    },
-    {
-      "_id": "RLVm854YWGJmYRF3",
-      "name": "Life Bubble",
-      "type": "spell",
-      "img": "systems/sfrpg/icons/spells/life_bubble.webp",
-      "system": {
-        "type": "",
-        "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "save",
-        "activation": {
-          "type": "action",
-          "condition": "",
-          "cost": 1
-        },
-        "allowedClasses": {
-          "myst": true,
-          "tech": true,
-          "wysh": true
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": null,
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "concentration": false,
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "<p>You surround the target creatures with a constant and movable 1-inch shell of tolerable living conditions customized for each creature. This shell enables the targets to breathe freely in a variety of atmospheric conditions (including in corrosive, thick, thin, and toxic atmospheres), as well as underwater or in a vacuum. It also makes the targets immune to harmful gases and vapors, including inhaled @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.gBhZDjh30JEyh7DY]{Diseases} and @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Poisons} as well as spells with a harmful gaseous effect. In addition, the shell protects targets (and their equipment) from extreme temperatures (between –50° and 140° F) without having to attempt Fortitude saving throws, as well as extreme pressures.</p>\n<p>Life bubble&nbsp;doesn’t provide protection from energy damage, negative or positive energy (such as found on the Negative and Positive Energy Planes), or radiation; it also doesn’t provide the ability to see in conditions of poor visibility (such as in smoke or fog) or the ability to move or act normally in conditions that impede movement (such as underwater).</p>"
-        },
-        "descriptors": [],
-        "dismissible": false,
-        "duration": {
-          "units": "",
-          "value": "1 day/level"
-        },
-        "formula": "",
-        "level": 1,
-        "materials": {
-          "consumed": false,
-          "cost": 0,
-          "supply": 0,
-          "value": ""
-        },
-        "modifiers": [],
-        "preparation": {
-          "mode": null,
-          "prepared": true
-        },
-        "range": {
-          "additional": "10",
-          "per": "level",
-          "units": "ft",
-          "value": 100
-        },
-        "save": {
-          "type": "reflex",
-          "dc": null,
-          "descriptor": "harmless"
-        },
-        "school": "abj",
-        "source": "Starfinder Core Rulebook pg. 363",
-        "sr": true,
-        "target": {
-          "type": "",
-          "value": "up to one creature/level, no two of which can be more than 30 ft. apart"
-        },
-        "uses": {
-          "max": 0,
-          "per": "",
-          "value": 0
-        }
-      }
-    },
-    {
-      "_id": "Dg5LegkQsPDrp3Pt",
-      "name": "Magic Missile",
-      "type": "spell",
-      "img": "systems/sfrpg/icons/spells/magic_missile.webp",
-      "system": {
-        "type": "",
-        "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "other",
-        "activation": {
-          "type": "action",
-          "condition": "",
-          "cost": 1
-        },
-        "allowedClasses": {
-          "myst": false,
-          "tech": true,
-          "wysh": false
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": null,
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "concentration": false,
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": [
-            {
-              "formula": "1d4+1",
-              "operator": "",
-              "types": {}
-            }
-          ]
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "<p>You fire two missiles of magical energy that strike targets unerringly (the creatures must still be valid targets) and deal 1d4+1 force damage each. You can’t target specific parts of a creature, and objects are not damaged by the spell.</p>\n<p>You can target a single creature or several creatures, but each missile can strike only one creature. You must designate targets before you attempt to overcome spell resistance or roll damage.</p>\n<p>You can cast this spell as a full action. If you do, you fire three missiles instead of two.</p>"
-        },
-        "descriptors": [],
-        "dismissible": false,
-        "duration": {
-          "units": "",
-          "value": "instantaneous"
-        },
-        "formula": "",
-        "level": 1,
-        "materials": {
-          "consumed": false,
-          "cost": 0,
-          "supply": 0,
-          "value": ""
-        },
-        "modifiers": [],
-        "preparation": {
-          "mode": "",
-          "prepared": true
-        },
-        "range": {
-          "additional": "10",
-          "per": "level",
-          "units": "ft",
-          "value": 100
-        },
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": "negate"
-        },
-        "school": "evo",
-        "source": "Starfinder Core Rulebook pg. 364",
-        "sr": true,
-        "target": {
-          "type": "",
-          "value": "up to three creatures, no two of which can be more than 15 ft. apart; see text"
-        },
-        "uses": {
-          "max": 0,
-          "per": "",
-          "value": 0
-        }
-      }
-    },
-    {
-      "_id": "0RKxEHxVrNgoJsCh",
-      "name": "Supercharge Weapon",
-      "type": "spell",
-      "img": "systems/sfrpg/icons/spells/supercharge_weapon.webp",
-      "system": {
-        "type": "",
-        "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "other",
-        "activation": {
-          "type": "action",
-          "condition": "",
-          "cost": 1
-        },
-        "allowedClasses": {
-          "myst": false,
-          "tech": true,
-          "wysh": false
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "touch",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "concentration": false,
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": [
-            {
-              "formula": "4d6",
-              "operator": "",
-              "types": {}
-            }
-          ]
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "<p>You supercharge the target weapon. If the weapon’s next attack hits (provided it is made before the end of the next round), the attack deals 4d6 additional damage if the weapon is a single target attack or 2d6 additional damage if the weapon attacks all creatures in an area. This bonus damage is of the same type as the weapon’s normal damage.</p>"
-        },
-        "descriptors": [],
-        "dismissible": false,
-        "duration": {
-          "units": "",
-          "value": "see text"
-        },
-        "formula": "",
-        "level": 1,
-        "materials": {
-          "consumed": false,
-          "cost": 0,
-          "supply": 0,
-          "value": ""
-        },
-        "modifiers": [],
-        "preparation": {
-          "mode": null,
-          "prepared": true
-        },
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
-        },
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": "negate"
-        },
-        "school": "evo",
-        "source": "Starfinder Core Rulebook pg. 379",
-        "sr": false,
-        "target": {
-          "type": "",
-          "value": "one weapon"
-        },
-        "uses": {
-          "max": 0,
-          "per": "",
-          "value": 0
-        }
-      }
-    },
-    {
-      "_id": "2WEOn60ZNHOZENSS",
-      "name": "Energy Ray",
-      "type": "spell",
-      "img": "systems/sfrpg/icons/spells/energy_ray.webp",
-      "system": {
-        "type": "",
-        "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "rsak",
-        "activation": {
-          "type": "action",
-          "condition": "",
-          "cost": 1
-        },
-        "allowedClasses": {
-          "myst": false,
-          "tech": true,
-          "wysh": false
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": null,
-          "value": null
-        },
-        "attackBonus": 7,
-        "chatFlavor": "",
-        "concentration": false,
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": [
-            {
-              "formula": "1d3",
-              "operator": "",
-              "types": {}
-            }
-          ]
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "<p>When you cast this spell, choose acid, cold, electricity, or fire; the spell gains that descriptor. You fire a ray at the target, and you must make a ranged attack against its EAC. On a hit, the ray deals 1d3 damage of the chosen energy type.</p>"
-        },
-        "descriptors": [],
-        "dismissible": false,
-        "duration": {
-          "units": "",
-          "value": "instantaneous"
-        },
-        "formula": "",
-        "level": 0,
-        "materials": {
-          "consumed": false,
-          "cost": 0,
-          "supply": 0,
-          "value": ""
-        },
-        "modifiers": [],
-        "preparation": {
-          "mode": "always",
-          "prepared": true
-        },
-        "range": {
-          "additional": "5",
-          "per": "2 levels",
-          "units": "ft",
-          "value": 25
-        },
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": "negate"
-        },
-        "school": "con",
-        "source": "Starfinder Core Rulebook pg. 353",
-        "sr": true,
-        "target": {
-          "type": "",
-          "value": ""
-        },
-        "uses": {
-          "max": 0,
-          "per": "",
-          "value": 0
-        }
-      }
-    },
-    {
-      "_id": "9DGX5LxFen8b1aLe",
-      "name": "Telepathic Message",
-      "type": "spell",
-      "img": "systems/sfrpg/icons/spells/telepathic_message.webp",
-      "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "",
-        "activation": {
-          "type": "action",
-          "condition": "",
-          "cost": 1
-        },
-        "allowedClasses": {
-          "myst": true,
-          "tech": true,
-          "wysh": false
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": null,
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "concentration": false,
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "<p>You can send a short telepathic message and hear simple telepathic replies. Any living creature within 10 feet of you or an intended recipient also receives your telepathic message if it succeeds at a DC 25 Perception check. You must be able to see or hear each recipient. The creatures that receive the message can reply telepathically, but no more than a single message can be sent each round, and each message cannot exceed 10 words. A technomancer casting this spell can also use it to send a message to a computer or a construct with the technological subtype if the receiving target is designed to receive messages.</p>"
-        },
-        "descriptors": [],
-        "dismissible": false,
-        "duration": {
-          "units": "",
-          "value": "10 minutes/level"
-        },
-        "formula": "",
-        "level": 0,
-        "materials": {
-          "consumed": false,
-          "cost": 0,
-          "supply": 0,
-          "value": ""
-        },
-        "modifiers": [],
-        "preparation": {
-          "mode": "always",
-          "prepared": true
-        },
-        "range": {
-          "additional": "10",
-          "per": "level",
-          "units": "ft",
-          "value": 100
-        },
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "school": "div",
-        "source": "Starfinder Core Rulebook pg. 381",
-        "sr": false,
-        "target": {
-          "type": "",
-          "value": "up to one creature/level"
-        },
-        "uses": {
-          "max": 0,
-          "per": "",
-          "value": 0
-        }
       }
     }
   ],
   "prototypeToken": {
     "name": "Trinir",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -1357,7 +1579,6 @@
     "lockRotation": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -1375,6 +1596,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -1425,8 +1647,14 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
+      "baseSpellDC": {
+        "base": 0
+      },
       "cmd": {
         "min": 0,
         "tooltip": [],
@@ -1483,7 +1711,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 20
@@ -1492,7 +1721,8 @@
         "special": "original base: 20 ft.",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -1516,12 +1746,26 @@
       "alignment": "N",
       "aura": "",
       "biography": {
+        "age": 0,
+        "dateOfBirth": "",
+        "deity": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
+        "height": "",
+        "homeWorld": "",
+        "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>Trinirs are natives of the usually frozen Ashypso. These small, android-like beaked humanoids lack a history, as they awakened in hibernation chambers only recently as their planet thawed. Thanks to the Gap (and possibly other unknown factors), trinirs have found little to indicate who they are or how they came to be. Some believe ruins of their ancient civilization might be found somewhere within the ice.</p>\n<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any (Ashypso)</p>\n<h3>Organization</h3>\n<p>solitary, pair, or pilgrimage (3-10)</p>\n</section>"
+        "value": "<h2>Description</h2>\n<p>Trinirs are natives of the usually frozen Ashypso. These small, android-like beaked humanoids lack a history, as they awakened in hibernation chambers only recently as their planet thawed. Thanks to the Gap (and possibly other unknown factors), trinirs have found little to indicate who they are or how they came to be. Some believe ruins of their ancient civilization might be found somewhere within the ice.</p>\n<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any (Ashypso)</p>\n<h3>Organization</h3>\n<p>solitary, pair, or pilgrimage (3-10)</p>\n</section>",
+        "weight": ""
       },
       "class": "",
       "cr": 4,
       "environment": "",
+      "organization": "",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "Agender trinir technomancer",
       "source": "AP #22 pg. 61",
@@ -1537,6 +1781,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1547,6 +1792,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1557,6 +1803,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1567,6 +1814,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 15,
         "ranks": 15,
@@ -1577,6 +1825,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1587,6 +1836,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1597,6 +1847,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1607,6 +1858,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 15,
         "ranks": 15,
@@ -1617,6 +1869,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1627,6 +1880,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1637,6 +1891,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1647,6 +1902,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 10,
         "ranks": 10,
@@ -1657,6 +1913,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 10,
         "ranks": 10,
@@ -1667,6 +1924,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1677,6 +1935,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1687,6 +1946,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1698,6 +1958,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1708,6 +1969,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1718,6 +1980,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1728,6 +1991,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1737,30 +2001,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": "6",
+        "perClass": {},
         "value": "6"
       },
       "spell2": {
         "max": "3",
+        "perClass": {},
         "value": "3"
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -1795,6 +2066,9 @@
       },
       "senses": "darkvision 60 ft., low-light vision",
       "size": "small",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

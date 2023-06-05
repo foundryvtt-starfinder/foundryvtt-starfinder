@@ -84,6 +84,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -114,6 +115,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -121,6 +123,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -241,6 +244,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -357,6 +361,7 @@
           "units": "ft",
           "value": 70
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -364,6 +369,7 @@
         },
         "source": "CRB pg. 176",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -484,6 +490,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -600,6 +607,7 @@
           "units": "ft",
           "value": 70
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -607,6 +615,7 @@
         },
         "source": "CRB pg. 176",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -680,6 +689,7 @@
         "quantity": "10",
         "quantityPerPack": 20,
         "source": "Core Rulebook",
+        "specialMaterials": {},
         "useCapacity": false
       }
     },
@@ -742,6 +752,7 @@
         "hands": 0,
         "identified": true,
         "level": 3,
+        "limitedWear": false,
         "modifiers": [],
         "price": 1400,
         "quantity": 1,
@@ -761,6 +772,7 @@
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -782,6 +794,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -808,6 +821,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -925,6 +939,7 @@
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -953,11 +968,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -975,6 +987,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -1025,12 +1038,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -1161,8 +1180,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<h2>Embri</h2>\n<p>The embri are highly evolved mollusks with an exceptionally rigid social order. Every embri knows its place among the hierarchy of embri society and performs the duties of its station without complaint. The society’s few rebels or free thinkers, when discovered, are exiled or executed. This rigid order has allowed embri society to excel in technological and magical development, although outsiders view embri creations as soulless or downright gruesome— their vast, fiery factory-forges ring with the rhythmic clang of machinery, and blood-fueled vermicular vessels heave across their world with peristaltic contractions.</p>\n<p>Embri evolved from aquatic ancestors long ago, and their four strong limbs have sharp claws at the end allowing them to walk upright on land. These claws have significant flexibility, so embri can use tools and weapons. The average embri is 4 feet tall with a trailing tail that’s slightly longer, and most weigh around 200 pounds. Embri reproduce asexually, and while they once would bud young based on the seasons of their home world, budding is now rigidly controlled by embri bureaucracy and allowed only on schedules set by the office of the spawning administrator. Young embri are raised in institutional academies where they’re trained to be diligent and compliant and are rewarded for informing on classmates who demonstrate deviant thinking or “anomalous independence.”</p>\n<p>Embri have a highly developed brain-sac at the top of their heads, and their faces consist of two small, closely set eyes above a slit that functions as a combination of nose and ears— they exhale from this orifice to produce a whistling speech. Embri mouths are used solely for eating and are tucked away on the underside of their bodies. Embri consider eating a private, embarrassing function, and they are repulsed at how openly and communally other races eat.</p>\n<p>Culturally, embri long ago mastered social conditioning to eliminate all displays of emotion; they consider expressiveness to be barbaric, and the occasional embri who shows feelings openly is considered primitive and dangerous. As a side effect of keeping their own feelings in check, embri easily pick up on signs of emotions. To prevent inadvertent displays of emotion, embri wear ornate masks. These masks also denote social standing, civic responsibilities, and other designators that allow embri to immediately assess one another by sight. Embri wear their masks at all times, even when sleeping, and to be without a mask is a profound embarrassment—it evidences a gross exposure of an embri’s thoughts and feelings, rendering it unable to effectively protect its own emotions and too distracted to effectively read the expressions of others.</p>\n<p>Few embri realize their rigid social hierarchy is controlled by the forces of Hell—scheming devils direct all embri activities from the secret tunnels beneath the mollusks’ home world. These dictates are conveyed by the small group of embri, known as Speakers, who communicate with the devils directly and enact their infernal designs. In exchange for this service, Speakers are granted magical powers and the secrets of diabolical manipulation. Some Speakers also serve as diplomats and envoys from the embri to the Pact Worlds. In these roles, they both shield their people from dangerously individualistic thinking and extend their masters’ designs to the rest of the galaxy. Speakers usually travel with a coterie of devoted embri servants who, in their uniquely expressionless way, idolize the Speaker as a celebrity.</p>\n<p>The diabolic taint on embri society is pervasive, yet subtle. For example, the embri language now contains several Infernal words and phrases, and though embri shun symbols of deific obedience as an overemotional expression of connection to the divine, stylized iconography of infernal origin features prominently in modern embri architecture.</p>\n<h2>Hivemasks</h2>\n<p>Many embri work hard to afford masks with magical abilities. In addition to the ordinary functions of displaying social status and shielding an embri’s emotions, these masks provide additional abilities to embri wearing them. One of the most common of these masks is the @UUID[Compendium.sfrpg.equipment.cc8WEM3uAzteBI2W]{Hivemask}.</p>",
@@ -1172,6 +1194,10 @@
       "cr": 3,
       "environment": "any (Embroi)",
       "organization": "solitary, unit (2-10), or coterie (4-15 plus 1 embri Speaker)",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AA2 pg. 48",
@@ -1475,6 +1501,9 @@
       },
       "senses": "darkvision 60 ft.",
       "size": "medium",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

@@ -12,6 +12,7 @@
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -33,6 +34,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -59,6 +61,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -126,6 +129,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -155,6 +159,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -185,6 +190,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -192,6 +198,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -213,25 +220,7 @@
       "_id": "sYbsjm9KU0yBCz6i",
       "name": "[MultiATK] 3 Tentacles (plus Swallow Whole)",
       "type": "weapon",
-      "ammunition": false,
-      "augmentation": false,
-      "consumable": false,
-      "container": false,
-      "equipment": false,
-      "fusion": true,
-      "goods": false,
-      "hybrid": false,
       "img": "icons/svg/item-bag.svg",
-      "magic": false,
-      "shield": false,
-      "spell": false,
-      "storage": {
-        "type": "slot",
-        "affectsEncumbrance": true,
-        "amount": 0,
-        "subtype": "fusion",
-        "weightProperty": "level"
-      },
       "system": {
         "type": "",
         "ability": "",
@@ -280,6 +269,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -309,6 +299,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -426,6 +417,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -433,6 +425,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -448,13 +441,7 @@
         },
         "weaponCategory": "uncategorized",
         "weaponType": "basicM"
-      },
-      "technological": false,
-      "upgrade": false,
-      "vehicleAttack": false,
-      "vehicleSystem": false,
-      "weapon": false,
-      "weaponAccessory": false
+      }
     },
     {
       "_id": "RAheyTh3HAOYKmRg",
@@ -467,6 +454,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -488,6 +476,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -514,6 +503,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -542,6 +532,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -563,6 +554,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -589,6 +581,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -617,10 +610,10 @@
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
-    "elevation": null,
     "height": 4,
     "light": {
       "alpha": 0.5,
@@ -646,11 +639,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -668,11 +658,10 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
-    "width": 4,
-    "x": null,
-    "y": null
+    "width": 4
   },
   "system": {
     "abilities": {
@@ -720,12 +709,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -856,8 +851,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<h2>Description</h2>\n<p>The terrifying ambush predators known as glass serpents are some of the most notorious beasts to roam the blasted wastelands of @UUID[Compendium.sfrpg.setting.0VTtBYDJC5vUC434]{Eox}, preying on local fauna and unwary undead alike. Similar creatures have been found on dozens of planets, including those outside the Pact Worlds, leading scholars to speculate that glass serpents may have been brought to @UUID[Compendium.sfrpg.setting.0VTtBYDJC5vUC434]{Eox} in its ancient past through magical means, or that they may represent a natural case of parallel evolution on worlds that have suffered massive catastrophes.</p>\n<p>Glass serpents have long, undulating bodies that bulge and narrow at regular intervals, giving them a shape almost like a chain of thick links. Their heads are much different from those of traditional snakes, with a row of eyes peering out from beneath an armored, helmetlike crest, and long feeding tentacles each tipped with a glowing, crystalline tooth dangling from their mouths. Yet, the most fearsome aspect of glass serpents must be their legendary scales: smooth crystalline structures that warp and wrap light around the serpents, turning them invisible and making them terrifying combatants. This invisibility isn’t entirely voluntary and requires enough energy from a serpent that it can activate the ability only when it is hungry and hunting. When well fed, the serpent becomes visible once more, its body appearing partially translucent and strewn with shimmering rainbows. This weakness is of no comfort to those creatures that become the serpent’s prey and provide it with sustenance, pieces of which are visible as they pass through the serpent’s translucent digestive system. An adult glass serpent can grow to be 60 feet long and up to 5,000 pounds.</p>\n<p>Hermaphroditic and capable of mating as long as they’re sufficiently nourished, glass serpents have a fascinating courtship process. A glass serpent looking to mate seeks out another glass serpent of roughly its own size and ability level and challenges it in an elaborate ritual. Once this challenge is accepted, the two become a “rival pair.” For the next 6 weeks, the two travel together, hunting in tandem but violently attempting to keep the other from eating a share of any slain prey. At the end of this period, they seek out the largest and most powerful glass serpent they can find and attempt to woo this third serpent into accepting the mantle of motherhood via displays of their prowess and gifts of regurgitated food. If this third serpent agrees, it and the larger, better-fed member of the rival pair-called the “bull”-mate. The bull then departs, and the other member of the rival pair-the “guard”-remains to serve the pregnant serpent, bringing food and providing defense until the young are born. Young glass serpents are capable of hunting on their own within a month, at which point all members of the family go their separate ways.</p>\n<p>Not intelligent enough to be considered truly sentient, glass serpents are nevertheless cunning hunters and opportunists, with natural curiosity and adaptability in addition to their predatory instincts. Although glass serpents can diminish the glow in their tentacles’ crystalline teeth to better preserve their invisibility, they understand that the light itself remains visible even when their bodies are not. As such, many will purposefully illuminate these lures while invisible, creating delicate, dancing displays of light or even mimicking signal beacons, hoping to draw prey near. Glass serpents have learned that creatures from other worlds often require air, and they specifically target such creatures, ripping open environment suits, vehicles, or structures to asphyxiate their prey.</p>\n<p>For all the danger they present, glass serpents have long been a part of Eoxian culture, taking on the cultural role of noble predator that other groups often ascribe to wolves, lions, eagles, or dragons. Domesticated glass serpents are the chosen hunting beasts of both the planet’s nobility and its criminal organizations. Several Bone Sages and ancient organizations have glass serpents on their coats of arms or corporate logos, and execution by glass serpent is an ancient practice that still continues. In recent centuries, the creatures have been heavily exported to other planets, partially for their status in Eoxian culture but more often because their scales can be commercially harvested for illusion magic and a wide variety of optical technologies. The challenge of imprisoning smart animals that can turn invisible and don’t need to breathe means that wild glass serpent populations can now be found on nearly every terrestrial or aquatic planet in the Pact Worlds and many colony worlds beyond. Most notably, the @UUID[Compendium.sfrpg.setting.Yt2xT4Iy6lHjCzso]{Diaspora} has seen significant problems with glass serpents adapting to the highly trafficked waterways of the River Between, where despite their slight disadvantage in movement and stealth, they still prove devastating to travelers. Many crèche worlds regularly hire mercenaries and adventurers to hunt down and eradicate these serpents, but the population keeps mysteriously bouncing back.</p>\n<h2>Glass Scale Technology</h2>\n<p>Glass serpent scales are a wonder of evolution, capturing and bending light with their unique molecular structure. Simply skinning a dead glass snake results in a pretty but useless hide, as the motion of the scales and their relationship to the muscle underneath are both key to their function. When properly harvested and arranged, the scales can effectively augment armor or even other creatures’ skins, granting the wearers a measure of the serpents’ invisibility. Originally developed by Eoxian technomancers, this glasstech was quickly replicated by the drow arms dealers of @UUID[Compendium.sfrpg.setting.psZBx1kcx9pHsLrz]{Apostae}, and from there it spread throughout the Pact Worlds and beyond.</p>",
@@ -867,6 +865,10 @@
       "cr": 5,
       "environment": "any (Eox)",
       "organization": "solitary, rival pair, or brood family (2-3 adults and 3-5 juveniles)",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AA2 pg. 64",
@@ -1106,30 +1108,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -1162,6 +1171,9 @@
       },
       "senses": "darkvision 60 ft., low-light vision",
       "size": "gargantuan",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

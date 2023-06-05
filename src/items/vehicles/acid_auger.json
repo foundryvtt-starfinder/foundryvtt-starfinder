@@ -5,6 +5,7 @@
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
+      "_id": "rRhfUrMKZQQzJRNR",
       "name": "Collision (Ram)",
       "type": "vehicleAttack",
       "img": "icons/svg/mystery-man.svg",
@@ -45,6 +46,7 @@
       }
     },
     {
+      "_id": "IheMDMb7A05ixfqW",
       "name": "Collision (Run Over)",
       "type": "vehicleAttack",
       "img": "icons/svg/mystery-man.svg",
@@ -85,6 +87,7 @@
       }
     },
     {
+      "_id": "PqslSKAi3n7wf0N0",
       "name": "Enhanced sensors",
       "type": "vehicleSystem",
       "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.webp",
@@ -120,6 +123,7 @@
       }
     },
     {
+      "_id": "bU2oeZBdAOW8QkVV",
       "name": "Planetary comm unit",
       "type": "vehicleSystem",
       "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.webp",
@@ -147,10 +151,15 @@
           "piloting": "0",
           "usedAsPilot": false
         },
+        "senses": {
+          "senses": "",
+          "usedForSenses": false
+        },
         "source": "CRB pg. 218"
       }
     },
     {
+      "_id": "WRpljvE06ZVyPcY9",
       "name": "Autocontrol",
       "type": "vehicleSystem",
       "img": "icons/svg/mystery-man.svg",
@@ -178,6 +187,10 @@
           "piloting": 0,
           "usedAsPilot": false
         },
+        "senses": {
+          "senses": "",
+          "usedForSenses": false
+        },
         "source": "CRB pg. 280"
       }
     }
@@ -185,12 +198,14 @@
   "prototypeToken": {
     "name": "Acid Auger",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": 0,
@@ -221,7 +236,6 @@
     "lockRotation": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -239,6 +253,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 2
@@ -246,6 +261,7 @@
   "system": {
     "attributes": {
       "type": "landT",
+      "controlSkill": "pil",
       "cover": "total",
       "dimensions": {
         "height": "5",
@@ -268,10 +284,12 @@
         "value": 19
       },
       "modifiers": {
+        "athletics": 0,
         "attackFullSpeed": "-3",
         "attackMoving": "-1",
         "attackStopped": "0",
-        "piloting": "1"
+        "piloting": "1",
+        "survival": 0
       },
       "size": "large",
       "special": [],
