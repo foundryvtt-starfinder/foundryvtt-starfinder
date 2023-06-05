@@ -8,25 +8,7 @@
       "_id": "hh1bg08Wi5yMgBKk",
       "name": "Galvanic Pulse Wave (Su)",
       "type": "weapon",
-      "ammunition": false,
-      "augmentation": false,
-      "consumable": false,
-      "container": false,
-      "equipment": false,
-      "fusion": true,
-      "goods": false,
-      "hybrid": false,
       "img": "icons/svg/item-bag.svg",
-      "magic": false,
-      "shield": false,
-      "spell": false,
-      "storage": {
-        "type": "slot",
-        "affectsEncumbrance": true,
-        "amount": 0,
-        "subtype": "fusion",
-        "weightProperty": "level"
-      },
       "system": {
         "type": "",
         "ability": "",
@@ -242,6 +224,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -257,13 +240,7 @@
         },
         "weaponCategory": "uncategorized",
         "weaponType": "smallA"
-      },
-      "technological": false,
-      "upgrade": false,
-      "vehicleAttack": false,
-      "vehicleSystem": false,
-      "weapon": false,
-      "weaponAccessory": false
+      }
     },
     {
       "_id": "pwXRfESSdec6OkLg",
@@ -276,6 +253,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "full",
@@ -353,6 +331,7 @@
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -381,11 +360,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -403,6 +379,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -453,12 +430,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -589,8 +572,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<h2>Description</h2>\n<p>A fulmivar is a rare creature made from pure electricity, similar to a lightning elemental-though the former is more peaceful, while the fulmivar tends to be bombastic and aggressive. The keenly intelligent fulmivar can shape its pale turquoise electrical body into almost any form. Some appear as simple spheres and some take on humanoid shapes, but most seem to shift wildly between forms. In fact, a fulmivar is generally an erratic creature, constantly on the move. A conversation with a fulmivar tends to careen from topic to topic, as the elemental’s mind seems to avoid alighting on a single idea.</p>\n<p>Fulmivars are attracted to the Material Plane by complex machines and larger electronic devices that have been exposed to high quantities of magic energy. They take up residence within these devices, coursing through wires and circuitry with unabashed glee. Each fulmivar has a favorite type of electrical device, and as a fulmivar ages, it seeks out more complex and powerful items to inhabit. Though it is uncommon, starships, factories, and power stations can be the home of a pair of bonded fulmivars.</p>",
@@ -600,6 +586,10 @@
       "cr": 11,
       "environment": "any",
       "organization": "solitary or pair",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #24 pg. 55",
@@ -905,6 +895,9 @@
       },
       "senses": "darkvision 60 ft.",
       "size": "small",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

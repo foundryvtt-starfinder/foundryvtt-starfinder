@@ -12,6 +12,7 @@
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -33,6 +34,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -59,6 +61,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -156,6 +159,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -186,6 +190,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -193,6 +198,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -290,6 +296,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -320,6 +327,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -327,6 +335,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -424,6 +433,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -454,6 +464,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -461,6 +472,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -558,6 +570,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -588,6 +601,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -595,6 +609,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -623,6 +638,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -644,6 +660,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -670,6 +687,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -698,6 +716,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -719,6 +738,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -745,6 +765,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -773,6 +794,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "action",
@@ -781,6 +803,7 @@
         },
         "allowedClasses": {
           "myst": true,
+          "precog": false,
           "tech": true,
           "wysh": true
         },
@@ -800,6 +823,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -834,6 +858,7 @@
           "units": "touch",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "will",
           "dc": "",
@@ -864,6 +889,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "action",
@@ -872,6 +898,7 @@
         },
         "allowedClasses": {
           "myst": false,
+          "precog": false,
           "tech": true,
           "wysh": true
         },
@@ -891,6 +918,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -925,6 +953,7 @@
           "units": "mi",
           "value": 2000
         },
+        "rollNotes": "",
         "save": {
           "type": "will",
           "dc": "",
@@ -955,6 +984,7 @@
     "bar2": {
       "attribute": "attributes.rp"
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -983,11 +1013,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -1005,6 +1032,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 6
@@ -1055,12 +1083,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -1197,8 +1231,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<h2>Description</h2>\n<p>For countless eons, Hell’s legions have undermined the Material Plane, subtly corrupting mortal empires and laying waste to entire worlds. The malebranche-diabolical generals advancing hellish agendas on terrestrial fronts-call upon the planes’ most fearsome agents to claim strategic footholds. Some of these campaigns call for truly terrifying displays of force. Thus, when the lords of Hell seek to make a whole world shudder, dhalochars take to the battlefield.</p>\n<p>Known as endbringer devils, dhalochars are forged to embody diabolical conquest. They are vessels and weapons of ruin, designed to create beachheads upon even the best-defended worlds. Dhalochars were made to withstand the depths of space and can traverse the void, stalking worlds like apocalyptic meteors. Any witnesses who survive a dhalochar’s devastating crash landing swiftly realize that the titan’s assault has only just begun.</p>\n<p>Within its body, each dhalochar houses a cavity capable of holding a deadly payload-an infernal strike force or a portal-generating organ. This space isn’t magical but is well protected, able to withstand any attack as long as the devil remains alive. As dhalochars are close cousins to levalochs, they most commonly transport these deadly infernal shock troops.</p>\n<p>Upon landing on a world, dhalochars release their cargo and reconfigure themselves. In their terrestrial forms, they appear as many-legged titans, a form which readily demonstrates that they are not mere machines of war. They are calmly arrogant and quick to pronounce a world’s inevitable destruction. While dhalochars participating in a major planetary assault might crash-land in heavily populated areas and immediately attack, most favor staying undiscovered so they can gradually conjure more devils in preparation for even greater diabolical offensives. Dhalochars have no ability to launch themselves into space. As a result, after a dhalochar in starship form uses its cataclysm ability, it returns to Hell using its plane shift spell-like ability and waits to be conjured back to space.</p>\n<p>A dhalochar stands roughly 90 feet tall and weighs approximately 400 tons.</p>",
@@ -1208,6 +1245,10 @@
       "cr": 19,
       "environment": "any (Hell)",
       "organization": "solitary, assault (1 dhalochar plus 8 other devils), or invasion (3-12)",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AA1 pg. 34",
@@ -1522,6 +1563,9 @@
       },
       "senses": "darkvision 60 ft., see in darkness",
       "size": "colossal",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 30
     }
   }

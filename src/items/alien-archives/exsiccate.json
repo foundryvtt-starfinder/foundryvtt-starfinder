@@ -12,6 +12,7 @@
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -33,6 +34,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -59,6 +61,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -156,6 +159,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -186,6 +190,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -193,6 +198,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -221,6 +227,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "action",
@@ -258,6 +265,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -284,6 +292,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "fort",
           "dc": "19",
@@ -312,6 +321,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -333,6 +343,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -359,6 +370,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -387,6 +399,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -408,6 +421,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -434,6 +448,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -462,6 +477,7 @@
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -490,11 +506,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -512,6 +525,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -562,12 +576,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -698,8 +718,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<h2>Description</h2>\n<p>When a nonhumanoid sentient being dies in a cold place with a thin atmosphere (such as a mountain peak or a frozen comet) and is forgotten for millennia without proper burial rites, it sometimes attracts negative energy. As this energy collects, the corpse can rise again as an exsiccate, a mummified undead that hungers to replace its own flesh. An exsiccate’s hideously dried husk bears little resemblance to its original form. It has long, spindly limbs and nearly nonexistent facial features. Most exsiccates arise from deceased aberrations who hailed from rich cultures unfamiliar (and sometimes considered strange) to most Pact Worlds citizens and who have been isolated or abandoned by their societies.</p>\n<p>These damned creatures have a singular desire to regain some part of the community they lost upon death. Their corrupted minds twist this yearning for companionship into terrible attacks on living creatures. Exsiccates search for those with warm bodies and beating hearts to latch onto and tear off strips of their flesh. Unlike ghouls, exsiccates don’t eat this flesh, instead layering it across their bodies as if trying to create a second skin. This stolen skin doesn’t last for long, drying similarly to the exsiccate’s original flesh, and usually flakes away within a matter of hours. Sadly, this doesn’t abate an exsiccate’s miserable desire.</p>",
@@ -709,6 +732,10 @@
       "cr": 12,
       "environment": "any",
       "organization": "solitary, pair, or gathering (3-7)",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #31 pg. 58",
@@ -1010,6 +1037,9 @@
       },
       "senses": "blindsense (life) 60 ft., darkvision 60 ft.",
       "size": "small",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

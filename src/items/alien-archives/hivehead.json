@@ -19,6 +19,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -53,6 +54,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -82,6 +84,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -105,12 +108,14 @@
         "proficient": true,
         "properties": {},
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -118,6 +123,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -146,6 +152,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "other",
         "activation": {
           "type": "action",
@@ -175,6 +182,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -201,6 +209,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "reflex",
           "dc": "15",
@@ -229,6 +238,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "action",
@@ -237,6 +247,7 @@
         },
         "allowedClasses": {
           "myst": true,
+          "precog": false,
           "tech": false,
           "wysh": false
         },
@@ -262,6 +273,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -277,6 +289,7 @@
         },
         "formula": "",
         "isActive": null,
+        "isVariableLevel": false,
         "level": 1,
         "materials": {
           "consumed": false,
@@ -295,6 +308,7 @@
           "units": "ft",
           "value": 25
         },
+        "rollNotes": "",
         "save": {
           "type": "will",
           "dc": "",
@@ -318,12 +332,14 @@
   "prototypeToken": {
     "name": "Hivehead",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -354,7 +370,6 @@
     "lockRotation": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -372,6 +387,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -422,12 +438,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -485,7 +507,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 30
@@ -494,7 +517,8 @@
         "special": "original base: 30 ft.",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -556,8 +580,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<div>\n<p>No one knows exactly where the dangerous pests called neuralwasps come from. Theories vary wildly, speculating that they’re a mutant offshoot of the Swarm or the result of a mad apiarist’s experiments in arcane crossbreeding (and everything in between). However, those attacked by a neuralwasp are less concerned about their origin than their paralytic sting, as these carnivorous insects usually attack sentient creatures for one of two reasons: to feed on their flesh or to build a living hive, called a hivehead.</p>\n<p>The creation of a hivehead is a horrifying affair. The drones swarm over a @UUID[Compendium.sfrpg.conditions.NV4qXRDgb7zTNkW2]{Paralyzed} victim and coat the victim’s head with a waxy saliva, leaving only small openings for the victim to breathe through. The material dries over the course of a few minutes while the victim is still conscious, after which the neuralwasp queen takes residence inside their skull. The queen psychically assumes control of the host’s senses and motor functions while slowly consuming the host’s brain, transforming it into a kind of royal jelly to feed her eggs. As this happens, the unfortunate victim stumbles about, attacking anyone who would try to disturb the queen.</p>\n<p>For 1 week after a queen takes over, the victim can still be saved, though potential rescuers must fight off dozens of neuralwasps and the hivehead themself. If the host can be subdued, the queen can be removed with careful surgery or powerful magic, though victims can take months to recover from the loss of brain tissue, and some are never the same again. After that week, however, the infestation is permanent, as the host’s brain has been almost completely dissolved. The body still lives and must eat and sleep as normal, but the queen is fully in control of its actions. A hivehead can live for years as its queen lays eggs to strengthen her swarm, eventually birthing a new queen who then leaves to take over a new host.</p>\n</div>",
@@ -567,6 +594,10 @@
       "cr": 7,
       "environment": "any",
       "organization": "solitary",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #36 pg. 61",
@@ -806,30 +837,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -860,6 +898,9 @@
       },
       "senses": "blindsense (thought) 60 ft., darkvision 60 ft.",
       "size": "medium",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

@@ -15,6 +15,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -36,8 +37,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>A vespers hound has no discernible facial features. It is immune to @UUID[Compendium.sfrpg.rules.PqV3OCbUTyk2upPD]{Sense-dependent} effects, as well as effects that target standard senses, such as gaze attacks.</p>"
         },
@@ -47,6 +51,7 @@
           "value": null
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -59,6 +64,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -84,6 +90,7 @@
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -105,8 +112,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
@@ -116,6 +126,7 @@
           "value": null
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -128,6 +139,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -163,6 +175,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -197,6 +210,8 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
+          "isOpen": true,
           "storage": [
             {
               "type": "slot",
@@ -233,8 +248,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
@@ -243,9 +261,11 @@
           "units": "",
           "value": null
         },
+        "equippable": false,
         "equipped": true,
         "formula": "1d6",
         "identified": true,
+        "isActive": null,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -335,12 +355,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -348,6 +370,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -376,6 +399,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "",
@@ -397,8 +421,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>As a standard action, a vespers hound can attempt to trap a single creature within 30 feet by lashing out with the length of chain that makes up its spine. The target must succeed at a DC 19 Reflex saving throw or become entangled and knocked prone. At the beginning of each round the target is entangled, the chains try to strangle the target, dealing 2d8 bludgeoning damage. A trapped victim can attempt a DC 30 Acrobatics check to end the entangled condition. Alternatively, an adjacent ally can pull the chains off he victim with a full action that requires no check. The vespers hound can’t move more than 30 feet from a target it entangles in this way until the trapped victim escapes or is set free, or until the vespers hound releases the victim as a move action.</p>"
         },
@@ -408,6 +435,7 @@
           "value": null
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -420,6 +448,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "reflex",
           "dc": "19",
@@ -448,6 +477,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "action",
@@ -469,8 +499,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>As a standard action, a vespers hound can travel between shadows, as dimension door. The vespers hound must begin and end this movement in areas of dim light or darker, and it cannot bring any other creatures with it. It can jump a total of 100 feet per day; this amount can be split among many jumps, but each jump less than 10 feet counts as a 10-foot jump for the purpose of this total.</p>"
         },
@@ -480,6 +513,7 @@
           "value": ""
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -492,6 +526,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -513,12 +548,14 @@
   "prototypeToken": {
     "name": "Vesper Hound",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -547,11 +584,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -569,6 +603,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -619,8 +654,14 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
+      "baseSpellDC": {
+        "base": 0
+      },
       "cmd": {
         "min": 0,
         "tooltip": [],
@@ -677,7 +718,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 30
@@ -686,7 +728,8 @@
         "special": "original base: 30 ft.",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -710,12 +753,26 @@
       "alignment": "LE",
       "aura": "",
       "biography": {
+        "age": 0,
+        "dateOfBirth": "",
+        "deity": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
+        "height": "",
+        "homeWorld": "",
+        "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>No one is sure what these Shadow Plane beasts originally looked like before velstracs began to surgically alter, breed, and train them, giving them the name “vespers hounds.” Some think velstracs removed the creatures’ faces and grafted on a fifth limb, but stranger creatures have been noted to thrive on distant worlds and unusual planar environments. However, most scholars agree that the length of spiked chain that runs along a vespers hound’s back and seems to serve as its spine is definitely a velstrac addition. Those who witness a vespers hound extending that chain to envelop a nearby victim (and survive to tell the tale) are doubly certain about this theory.</p>\n<p>Instinctively able to sniff out places where corruption and suffering have taken root, vespers hounds are sometimes used by velstracs as tracking beasts and faithful pets. Their presence seems to exacerbate dormant shadow corruption festering within mortals, and though vespers hounds don’t need to eat, they seem to enjoy tearing into such mortals’ flesh. A vespers hound is approximately 5 feet long, stands about 3 feet high at the shoulder, and weighs 140 pounds.</p>\n<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any (Shadow Plane)</p>\n<h3>Organization</h3>\n<p>solitary or clutch (2-5)</p>\n</section>"
+        "value": "<h2>Description</h2>\n<p>No one is sure what these Shadow Plane beasts originally looked like before velstracs began to surgically alter, breed, and train them, giving them the name “vespers hounds.” Some think velstracs removed the creatures’ faces and grafted on a fifth limb, but stranger creatures have been noted to thrive on distant worlds and unusual planar environments. However, most scholars agree that the length of spiked chain that runs along a vespers hound’s back and seems to serve as its spine is definitely a velstrac addition. Those who witness a vespers hound extending that chain to envelop a nearby victim (and survive to tell the tale) are doubly certain about this theory.</p>\n<p>Instinctively able to sniff out places where corruption and suffering have taken root, vespers hounds are sometimes used by velstracs as tracking beasts and faithful pets. Their presence seems to exacerbate dormant shadow corruption festering within mortals, and though vespers hounds don’t need to eat, they seem to enjoy tearing into such mortals’ flesh. A vespers hound is approximately 5 feet long, stands about 3 feet high at the shoulder, and weighs 140 pounds.</p>\n<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any (Shadow Plane)</p>\n<h3>Organization</h3>\n<p>solitary or clutch (2-5)</p>\n</section>",
+        "weight": ""
       },
       "class": "",
       "cr": 10,
       "environment": "",
+      "organization": "",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #12 pg. 61",
@@ -731,6 +788,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 19,
         "ranks": 19,
@@ -741,6 +799,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 24,
         "ranks": 24,
@@ -751,6 +810,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -761,6 +821,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -771,6 +832,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -781,6 +843,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -791,6 +854,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -801,6 +865,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -811,6 +876,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 19,
         "ranks": 19,
@@ -821,6 +887,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -831,6 +898,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -841,6 +909,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -851,6 +920,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 19,
         "ranks": 19,
@@ -861,6 +931,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -871,6 +942,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -881,6 +953,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -892,6 +965,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -902,6 +976,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -912,6 +987,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 24,
         "ranks": 24,
@@ -922,6 +998,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -931,30 +1008,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -992,6 +1076,9 @@
       },
       "senses": "blindsight (vibration) 60 ft.",
       "size": "medium",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

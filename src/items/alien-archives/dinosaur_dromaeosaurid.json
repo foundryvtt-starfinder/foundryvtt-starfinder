@@ -8,25 +8,7 @@
       "_id": "vDdAmUBtST8PvsML",
       "name": "Talons",
       "type": "weapon",
-      "ammunition": false,
-      "augmentation": false,
-      "consumable": false,
-      "container": false,
-      "equipment": false,
-      "fusion": true,
-      "goods": false,
-      "hybrid": false,
       "img": "icons/svg/item-bag.svg",
-      "magic": false,
-      "shield": false,
-      "spell": false,
-      "storage": {
-        "type": "slot",
-        "affectsEncumbrance": true,
-        "amount": 0,
-        "subtype": "fusion",
-        "weightProperty": "level"
-      },
       "system": {
         "type": "",
         "ability": "",
@@ -113,6 +95,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -231,6 +214,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -238,6 +222,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -253,13 +238,7 @@
         },
         "weaponCategory": "uncategorized",
         "weaponType": "basicM"
-      },
-      "technological": false,
-      "upgrade": false,
-      "vehicleAttack": false,
-      "vehicleSystem": false,
-      "weapon": false,
-      "weaponAccessory": false
+      }
     },
     {
       "_id": "yacj5S8q8BY7UpLp",
@@ -341,6 +320,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -371,6 +351,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -378,6 +359,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -403,6 +385,7 @@
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -424,6 +407,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -450,6 +434,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -478,6 +463,7 @@
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -506,11 +492,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -528,6 +511,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -578,12 +562,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -714,8 +704,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<h2>Dinosaur</h2>\n<p>The term “dinosaur” refers to a category of reptilelike fauna associated with a planet’s prehistoric evolutionary scale. Dinosaurs vary in size, although many are quite large, and they come in a variety of forms. A ceratopsid is a quadruped that has bony frills extending from its head back over its shoulders, as well as horns that adorn its face; one example is the herbivorous triceratops. Dromaeosaurids are bipedal, feathered carnivores, like the pack-hunting deinonychus (also called a raptor). Plesiosaurs are marine reptiles with long necks and toothy mouths that dwell and hunt near the water’s surface. Pterosaurs are flying reptilian beasts with membranous wings and long, sharp, triangular beaks. Sauropods are immense, lumbering quadrupeds with long necks and tails and towering stature, such as brachiosaurus and diplodocus. Theropods are bipedal dinosaurs, generally carnivorous, with fearsome, fanged jaws and clawed digits, like the tyrannosaurus. Thyreophorans are quadrupedal dinosaurs with armor-plated backs and tails weaponized with bludgeoning bone or piercing spikes, including the ankylosaurus and the stegosaurus.</p>\n<h2>Creating Dinosaurs</h2>\n<p>The dinosaurs in this entry serve a couple of purposes. Employ them as written when you need statistics for this sort of creature. To create a unique dinosaur, use the stat blocks here and your concept as starting points. Decide what type of natural weapon the animal has, altering the damage type to suit the weapon. Then add elements from Appendix 2: Environmental Grafts. Tailor anything you want to fit your concept.</p>",
@@ -725,6 +718,10 @@
       "cr": 3,
       "environment": "any",
       "organization": "solitary, pair, or pack (3-12)",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AA2 pg. 38",
@@ -1026,6 +1023,9 @@
       },
       "senses": "low-light vision",
       "size": "medium",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

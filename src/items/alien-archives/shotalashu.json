@@ -5,6 +5,7 @@
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
+      "_id": "bZK4QYJTYf3EnA9k",
       "name": "Claws",
       "type": "weapon",
       "img": "icons/svg/mystery-man.svg",
@@ -29,6 +30,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -36,6 +38,24 @@
           "value": null
         },
         "attackBonus": 11,
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": true
+        },
         "attuned": false,
         "bulk": "L",
         "capacity": {
@@ -46,6 +66,8 @@
         "containedItemIds": [],
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
+          "isOpen": true,
           "storage": [
             {
               "type": "slot",
@@ -74,8 +96,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
@@ -84,22 +109,26 @@
           "units": "",
           "value": null
         },
+        "equippable": false,
         "equipped": false,
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
+        "isActive": null,
         "level": 1,
         "modifiers": [],
         "price": 0,
         "proficient": true,
         "properties": {},
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -107,6 +136,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -120,16 +150,19 @@
           "per": null,
           "value": 0
         },
+        "weaponCategory": "uncategorized",
         "weaponType": "basicM"
       }
     },
     {
+      "_id": "x4HeizLdrGczcGNV",
       "name": "Jungle Strider (Ex)",
       "type": "feat",
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -151,8 +184,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>Shotalashus are adept at traversing all forms of forest terrain. While in forest terrain, a shotalashu’s speed is not impeded by natural difficult terrain such as undergrowth.</p>"
         },
@@ -162,6 +198,7 @@
           "value": null
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -174,6 +211,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -192,12 +230,14 @@
       }
     },
     {
+      "_id": "lbhGIBX6ndyTzt1S",
       "name": "Telepathic Link (Su)",
       "type": "feat",
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -219,8 +259,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>A lashunta can spend 1 hour and attempt a Survival check (DC 15 + 1-1/2 the shotalashu’s CR) to form a telepathic bond with an unbound shotalashu. If the lashunta is successful, the rider’s link functions as telepathic bond with a permanent duration. A bonded shotalashu is considered trained in battle when carrying or fighting alongside the bonded lashunta. A lashunta can’t be linked to more than one shotalashu at a time, but she can break her link with one shotalashu in favor of another at any time. If either of the linked beings dies while bonded, the surviving creature suffers telepathic backlash, becoming @UUID[Compendium.sfrpg.conditions.2XWEujYSyryB4oHm]{Dazed} for 1 round and taking 3d6 damage. Creatures that have limited telepathy or telepathy other than lashuntas and that speak a common language with a shotalashu can also attempt to forge this telepathic bond, but they take a -5 penalty to their Survival checks to do so.</p>"
         },
@@ -230,6 +273,7 @@
           "value": null
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -242,6 +286,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -263,12 +308,14 @@
   "prototypeToken": {
     "name": "Shotalashu",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -297,11 +344,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -319,6 +363,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 2
@@ -369,8 +414,14 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
+      "baseSpellDC": {
+        "base": 0
+      },
       "cmd": {
         "min": 0,
         "tooltip": [],
@@ -427,7 +478,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 60
@@ -436,7 +488,8 @@
         "special": "original base: 60 ft.",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -460,12 +513,26 @@
       "alignment": "N",
       "aura": "",
       "biography": {
+        "age": 0,
+        "dateOfBirth": "",
+        "deity": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
+        "height": "",
+        "homeWorld": "",
+        "otherVisuals": "",
         "public": "",
-        "value": "<section class=\"secret\">\n<h2>Description</h2>\n<p>For as long as lashuntas have been among the dominant species on @UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel}, shotalashus—the lashuntas’ traditional telepathic reptilian mounts—have served at their sides. Millennia of domestication and parallel evolution have strengthened the symbiotic bond between the two species, allowing lashuntas to form a close mental link with a chosen mount.</p>\n<p>Shotalashus have rudimentary telepathic abilities similar to those of the lashuntas themselves, a fact that has contributed to their use as close pets and trusted mounts even in the modern day, when much more sophisticated and technologically advanced forms of both transportation and companionship exist. This tradition has lasted so long in part because of the kinship the lashuntas feel with their bonded shotalashus, but also because the symbiotic bond between the two species is deeply ingrained into lashunta culture. Shotalashu-mounted cavalry still serve as ceremonial honor guards for lashunta dignitaries, and members of all social stations regard their bonded mounts as occupying a cherished place in the family. Though shotalashus are seen less often in teeming metropolises than they are in smaller settlements, no city on @UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel} is devoid of at least basic amenities for the honored beasts, from training facilities to boarding services.</p>\n<p>While it’s common for a lashunta to switch between shotalashus throughout her life, some bonds between beast and rider deepen over time, and it is not unheard of for a warrior to bond with a single shotalashu mount until death. Lashunta whose mounts die suffer psychic trauma and often require time to recover before they can bond with another mount, and shotalashus who lose their bonded riders have been known to grieve for months, or even years.</p>\n<p>Though rare, some shotalashus still live in the wild, forming feral packs that use their telepathy to bond not with a rider, but with one another, forming a highly effective collective mind that makes them efficient and deadly hunters. Particularly adventurous lashuntas set out on solo quests into the most remote of @UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel}’s wilds in search of a potentially stronger mount from among untamed stock. These brave souls must first break an individual shotalashu away from its pack before attempting the long and arduous task of taming and eventually bonding with the creature.</p>\n<p>A typical domesticated shotalashu is over 10 feet long from snout to tail-tip, and weighs more than 1,000 pounds, while wild specimens can grow as large as 12 feet in length and weigh a staggering 1,500 pounds.</p>\n<h2>Shotalashu Equipment</h2>\n<p>&nbsp;As technology has advanced, telepathic bonding with shotalashus has become possible for those who aren’t lashunta. The lashuntas have also maintained traditional gear for shotalashu riding: the shotalashu link cortex and the shotalashu saddle.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>warm forests (@UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel})</p>\n<h3>Organization</h3>\n<p>solitary, bonded mount (1 plus 1 lashunta), or pack (3-5)</p>\n</section>"
+        "value": "<section class=\"secret\">\n<h2>Description</h2>\n<p>For as long as lashuntas have been among the dominant species on @UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel}, shotalashus—the lashuntas’ traditional telepathic reptilian mounts—have served at their sides. Millennia of domestication and parallel evolution have strengthened the symbiotic bond between the two species, allowing lashuntas to form a close mental link with a chosen mount.</p>\n<p>Shotalashus have rudimentary telepathic abilities similar to those of the lashuntas themselves, a fact that has contributed to their use as close pets and trusted mounts even in the modern day, when much more sophisticated and technologically advanced forms of both transportation and companionship exist. This tradition has lasted so long in part because of the kinship the lashuntas feel with their bonded shotalashus, but also because the symbiotic bond between the two species is deeply ingrained into lashunta culture. Shotalashu-mounted cavalry still serve as ceremonial honor guards for lashunta dignitaries, and members of all social stations regard their bonded mounts as occupying a cherished place in the family. Though shotalashus are seen less often in teeming metropolises than they are in smaller settlements, no city on @UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel} is devoid of at least basic amenities for the honored beasts, from training facilities to boarding services.</p>\n<p>While it’s common for a lashunta to switch between shotalashus throughout her life, some bonds between beast and rider deepen over time, and it is not unheard of for a warrior to bond with a single shotalashu mount until death. Lashunta whose mounts die suffer psychic trauma and often require time to recover before they can bond with another mount, and shotalashus who lose their bonded riders have been known to grieve for months, or even years.</p>\n<p>Though rare, some shotalashus still live in the wild, forming feral packs that use their telepathy to bond not with a rider, but with one another, forming a highly effective collective mind that makes them efficient and deadly hunters. Particularly adventurous lashuntas set out on solo quests into the most remote of @UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel}’s wilds in search of a potentially stronger mount from among untamed stock. These brave souls must first break an individual shotalashu away from its pack before attempting the long and arduous task of taming and eventually bonding with the creature.</p>\n<p>A typical domesticated shotalashu is over 10 feet long from snout to tail-tip, and weighs more than 1,000 pounds, while wild specimens can grow as large as 12 feet in length and weigh a staggering 1,500 pounds.</p>\n<h2>Shotalashu Equipment</h2>\n<p>&nbsp;As technology has advanced, telepathic bonding with shotalashus has become possible for those who aren’t lashunta. The lashuntas have also maintained traditional gear for shotalashu riding: the shotalashu link cortex and the shotalashu saddle.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>warm forests (@UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel})</p>\n<h3>Organization</h3>\n<p>solitary, bonded mount (1 plus 1 lashunta), or pack (3-5)</p>\n</section>",
+        "weight": ""
       },
       "class": "",
       "cr": 2,
       "environment": "",
+      "organization": "",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AA2 pg. 114",
@@ -480,6 +547,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 7,
         "ranks": 7,
@@ -490,6 +558,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -500,6 +569,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -510,6 +580,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -520,6 +591,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -530,6 +602,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -540,6 +613,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -550,6 +624,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -560,6 +635,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -570,6 +646,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -580,6 +657,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -590,6 +668,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -600,6 +679,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 12,
         "ranks": 12,
@@ -610,6 +690,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -620,6 +701,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -630,6 +712,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -641,6 +724,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -651,6 +735,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -661,6 +746,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 7,
         "ranks": 7,
@@ -671,6 +757,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -680,30 +767,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -738,6 +832,9 @@
       },
       "senses": "darkvision 60 ft., low-light vision",
       "size": "large",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

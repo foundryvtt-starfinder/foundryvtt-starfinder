@@ -15,6 +15,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -36,8 +37,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>Members of the Swarm are bound together into a singular hive mind by a blend of exuded pheromones, imperceptible movements of antennae and limbs, electrostatic fields, and telepathic communication. All Swarm creatures with 30 feet of each other are in constant communication; if one is aware of a threat, all are. (Such awareness can spread along a “chain” of Swarm creatures under appropriate circumstances, potentially alerting distant Swarm creatures). In addition, once per round when within 30 feet of another Swarm creature, a Swarm creature can roll twice and take the better result on a saving throw against a mind-affecting effect.</p>"
         },
@@ -47,6 +51,7 @@
           "value": null
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -59,6 +64,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -94,6 +100,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -101,6 +108,24 @@
           "value": null
         },
         "attackBonus": 17,
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": true
+        },
         "attuned": false,
         "bulk": "L",
         "capacity": {
@@ -110,6 +135,8 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
+          "isOpen": true,
           "storage": [
             {
               "type": "slot",
@@ -146,8 +173,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
@@ -156,9 +186,11 @@
           "units": "",
           "value": null
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
+        "isActive": null,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -248,12 +280,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -261,6 +295,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -274,6 +309,7 @@
           "per": null,
           "value": 0
         },
+        "weaponCategory": "uncategorized",
         "weaponType": "basicM"
       }
     },
@@ -288,6 +324,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "action",
@@ -317,8 +354,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>As a standard action, a Swarm molitera can focus its vibrational emanations into a painful 30-foot cone. Each creature in the cone takes 4d6 sonic damage (Fortitude DC 14 half).</p>"
         },
@@ -328,6 +368,7 @@
           "value": ""
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -340,6 +381,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "fort",
           "dc": 14,
@@ -365,6 +407,7 @@
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -386,8 +429,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>A Swarm molitera can burrow through solid rock as easily as dirt and can leave behind a 10-foot-wide, 10-foot-tall tunnel if it chooses.</p>"
         },
@@ -397,6 +443,7 @@
           "value": null
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -409,6 +456,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -430,12 +478,14 @@
   "prototypeToken": {
     "name": "The Swarm, Molitera",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -464,11 +514,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -486,6 +533,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 2
@@ -536,8 +584,14 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
+      "baseSpellDC": {
+        "base": 0
+      },
       "cmd": {
         "min": 0,
         "tooltip": [],
@@ -594,7 +648,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 30
@@ -603,7 +658,8 @@
         "special": "original base: 30 ft.; original special: burrow 30 ft.",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -627,12 +683,26 @@
       "alignment": "CE",
       "aura": "",
       "biography": {
+        "age": 0,
+        "dateOfBirth": "",
+        "deity": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
+        "height": "",
+        "homeWorld": "",
+        "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>Though the Swarm use dredgers to undermine certain defensive positions and to tunnel behind enemy lines, the small creatures can dig only through dirt and mud. When the Swarm needs to pierce solid stone-either to reach precious natural resources or to invade an underground fortification-it employs moliteras, large and sturdy components that look like living heavy industrial equipment. Moliteras have armored exoskeletons featuring dark blotches, four legs, and two shovel-like arms. These arms have pointed spikes along the edges that also make moliteras dangerous combatants. Using little-understood muscles and nerve endings, moliteras are constantly and subtly vibrating at frequencies that soften the rock they tunnel through, and they can focus these emanations in an offensive capacity when necessary. Survivors of Swarm attacks report sensing these vibrations moments before the moliteras break through nearby stone walls, with hordes of other Swarm creatures following behind them.</p>\n<section>\n<h2>The Swarm</h2>\n<p>Originally an insectile race called the kucharn, the Swarm is now a single-minded collective with a desire to consume all things and absorb their best qualities into itself. The Swarm moves from planet to planet in tremendous organic hive-ships, reducing each so-called “feeder world” to a barren husk incapable of supporting life, and occasionally altering its own DNA in the process to take on qualities from that world’s species. Once it has consumed everything of use on a planet, the Swarm moves on, not bothering to hold territory.</p>\n<p>Ironically, one of the most violent races in the galaxy also birthed one of the most peaceful, as a mutation within a sub-hive gave life to the shirrens, who broke away to form a new species. The Swarm is notorious not just because of the invasion that finally ended hostilities between the Pact Worlds and the Veskarium, but also thanks to the warnings of shirrens, who understand the Swarm’s might and its hunger as no other race can.</p>\n<p>While individual components of the Swarm have some form of intelligence—or at least a set of complex programmed behaviors that resembles intellect—they cannot generally be reasoned with in any fashion. Swarm components rarely communicate with other creatures, as they see every alien entity as either a food source or a threat. The Swarm’s morale is unbreakable, and while individual components might retreat for tactical reasons, fear is utterly unknown to the Swarm and its components.</p>\n<p>The Swarm rarely wields manufactured weapons, instead integrating biotechnology grown or grafted onto component creatures. Because of its constant genetic upgrading and experimentation, the Swarm encompasses components with a wide variety of shapes, sizes, and capabilities, from the mighty dreadlancers to the microscopic, bloodstream-infesting toxicytes.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<h3>Organization</h3>\n<p>solitary, pair, or pack (3-8)</p>\n</section>"
+        "value": "<h2>Description</h2>\n<p>Though the Swarm use dredgers to undermine certain defensive positions and to tunnel behind enemy lines, the small creatures can dig only through dirt and mud. When the Swarm needs to pierce solid stone-either to reach precious natural resources or to invade an underground fortification-it employs moliteras, large and sturdy components that look like living heavy industrial equipment. Moliteras have armored exoskeletons featuring dark blotches, four legs, and two shovel-like arms. These arms have pointed spikes along the edges that also make moliteras dangerous combatants. Using little-understood muscles and nerve endings, moliteras are constantly and subtly vibrating at frequencies that soften the rock they tunnel through, and they can focus these emanations in an offensive capacity when necessary. Survivors of Swarm attacks report sensing these vibrations moments before the moliteras break through nearby stone walls, with hordes of other Swarm creatures following behind them.</p>\n<section>\n<h2>The Swarm</h2>\n<p>Originally an insectile race called the kucharn, the Swarm is now a single-minded collective with a desire to consume all things and absorb their best qualities into itself. The Swarm moves from planet to planet in tremendous organic hive-ships, reducing each so-called “feeder world” to a barren husk incapable of supporting life, and occasionally altering its own DNA in the process to take on qualities from that world’s species. Once it has consumed everything of use on a planet, the Swarm moves on, not bothering to hold territory.</p>\n<p>Ironically, one of the most violent races in the galaxy also birthed one of the most peaceful, as a mutation within a sub-hive gave life to the shirrens, who broke away to form a new species. The Swarm is notorious not just because of the invasion that finally ended hostilities between the Pact Worlds and the Veskarium, but also thanks to the warnings of shirrens, who understand the Swarm’s might and its hunger as no other race can.</p>\n<p>While individual components of the Swarm have some form of intelligence—or at least a set of complex programmed behaviors that resembles intellect—they cannot generally be reasoned with in any fashion. Swarm components rarely communicate with other creatures, as they see every alien entity as either a food source or a threat. The Swarm’s morale is unbreakable, and while individual components might retreat for tactical reasons, fear is utterly unknown to the Swarm and its components.</p>\n<p>The Swarm rarely wields manufactured weapons, instead integrating biotechnology grown or grafted onto component creatures. Because of its constant genetic upgrading and experimentation, the Swarm encompasses components with a wide variety of shapes, sizes, and capabilities, from the mighty dreadlancers to the microscopic, bloodstream-infesting toxicytes.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<h3>Organization</h3>\n<p>solitary, pair, or pack (3-8)</p>\n</section>",
+        "weight": ""
       },
       "class": "",
       "cr": 6,
       "environment": "",
+      "organization": "",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #22 pg. 60",
@@ -647,6 +717,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 13,
         "ranks": 13,
@@ -657,6 +728,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 18,
         "ranks": 18,
@@ -667,6 +739,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -677,6 +750,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -687,6 +761,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -697,6 +772,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -707,6 +783,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -717,6 +794,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -727,6 +805,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -737,6 +816,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -747,6 +827,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -757,6 +838,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -767,6 +849,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 13,
         "ranks": 13,
@@ -777,6 +860,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -787,6 +871,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -797,6 +882,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -808,6 +894,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -818,6 +905,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -828,6 +916,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 13,
         "ranks": 13,
@@ -838,6 +927,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -847,30 +937,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -906,6 +1003,9 @@
       },
       "senses": "blindsense (vibration) 30 ft., darkvision 60 ft.",
       "size": "large",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

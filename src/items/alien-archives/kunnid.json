@@ -8,6 +8,7 @@
       "_id": "iWIDh6OmhPoI0dE4",
       "name": "Gore",
       "type": "weapon",
+      "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -18,6 +19,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -52,6 +54,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -89,8 +92,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
@@ -99,6 +105,7 @@
           "units": "",
           "value": null
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
@@ -109,12 +116,14 @@
         "proficient": true,
         "properties": {},
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -122,6 +131,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -143,6 +153,7 @@
       "_id": "rS55ufL7mWCwRuuV",
       "name": "Magnetic Beam (plus shift [DC 13])",
       "type": "weapon",
+      "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -156,6 +167,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -190,6 +202,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -219,8 +232,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>As a ranged attack, a kunnid can emit a crushing magnetic beam with a range increment of 20 feet.</p>"
         },
@@ -229,6 +245,7 @@
           "units": "",
           "value": ""
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
@@ -325,12 +342,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "ft",
           "value": 20
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -338,6 +357,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -359,9 +379,11 @@
       "_id": "YsmEFDfh7qfjAhf9",
       "name": "Relentless (Ex)",
       "type": "feat",
+      "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -383,8 +405,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>A kunnid can charge without taking the normal penalties to its attack roll and AC and can charge through difficult terrain.</p>"
         },
@@ -407,6 +432,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -428,12 +454,14 @@
   "prototypeToken": {
     "name": "Kunnid",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -462,11 +490,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -484,6 +509,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 2
@@ -534,12 +560,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -597,7 +629,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 50
@@ -606,7 +639,8 @@
         "special": "original base: 50 ft.; original special: spider climb",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -666,12 +700,26 @@
       "alignment": "N",
       "aura": "",
       "biography": {
+        "age": 0,
+        "dateOfBirth": "",
+        "deity": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
+        "height": "",
+        "homeWorld": "",
+        "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>Rarely seen and frequently misunderstood, kunnids are nomadic creatures that wander planetoids across the galaxy in an inexorable journey toward areas where the planetoids’ external magnetic field is strongest. A kunnid has three legs with hooved feet, irregular hornlike growths protruding from its skull, and dozens of prehensile tendrils that dangle from its swollen body. The average kunnid stands 10 to 12 feet tall at the shoulder and weighs 1,200 pounds. Many other species on these worlds never glimpse a kunnid in the flesh; frequently, the only evidence of a kunnid’s presence is odd, cloven-hooved tracks marching in straight lines around settlements. Locals frequently attribute these tracks to cryptids and incorporate them into their superstitions.</p>\n<p>Many researchers believe that kunnids were created by another intelligent species as living tools for exploration. Others maintain that kunnids belong to an independent lost culture. Some even think that kunnids are the spirits of deceased explorers. With few hard facts about how or why they appear on a world, kunnids’ existence has fueled many conspiracy theories.</p>\n<p>When on a planet, kunnids travel relentlessly in straight lines toward magnetic north. They are generally peaceful creatures unless their journey is obstructed or confused by unnatural magnetic fields, at which point they lash out. Once at a world’s magnetic north pole, kunnids establish lairs and mate. However, this never seems to result in an increase in kunnid populations, as groups of kunnids often mysteriously disappear overnight.</p>\n<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<h3>Organization</h3>\n<p>solitary, pair, or migration (3-20)</p>\n</section>"
+        "value": "<h2>Description</h2>\n<p>Rarely seen and frequently misunderstood, kunnids are nomadic creatures that wander planetoids across the galaxy in an inexorable journey toward areas where the planetoids’ external magnetic field is strongest. A kunnid has three legs with hooved feet, irregular hornlike growths protruding from its skull, and dozens of prehensile tendrils that dangle from its swollen body. The average kunnid stands 10 to 12 feet tall at the shoulder and weighs 1,200 pounds. Many other species on these worlds never glimpse a kunnid in the flesh; frequently, the only evidence of a kunnid’s presence is odd, cloven-hooved tracks marching in straight lines around settlements. Locals frequently attribute these tracks to cryptids and incorporate them into their superstitions.</p>\n<p>Many researchers believe that kunnids were created by another intelligent species as living tools for exploration. Others maintain that kunnids belong to an independent lost culture. Some even think that kunnids are the spirits of deceased explorers. With few hard facts about how or why they appear on a world, kunnids’ existence has fueled many conspiracy theories.</p>\n<p>When on a planet, kunnids travel relentlessly in straight lines toward magnetic north. They are generally peaceful creatures unless their journey is obstructed or confused by unnatural magnetic fields, at which point they lash out. Once at a world’s magnetic north pole, kunnids establish lairs and mate. However, this never seems to result in an increase in kunnid populations, as groups of kunnids often mysteriously disappear overnight.</p>\n<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<h3>Organization</h3>\n<p>solitary, pair, or migration (3-20)</p>\n</section>",
+        "weight": ""
       },
       "class": "",
       "cr": 5,
       "environment": "",
+      "organization": "",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #26 pg. 56",
@@ -911,30 +959,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -965,6 +1020,9 @@
       },
       "senses": "darkvision 60 ft., low-light vision",
       "size": "large",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

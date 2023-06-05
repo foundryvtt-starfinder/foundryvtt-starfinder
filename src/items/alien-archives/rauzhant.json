@@ -22,6 +22,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -56,6 +57,8 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
+          "isOpen": true,
           "storage": [
             {
               "type": "slot",
@@ -84,8 +87,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>Clutch (Ex)&nbsp;A rauzhant that hits with a bite attack automatically initiates a grapple combat maneuver against its target (this does not take an action). If successful, the rauzhant remains attached to the target until the end of the dragon’s next turn, unless it succeeds at another grapple combat maneuver (with a +4 bonus) during its next turn. The target can break the clutch with a successful DC 30 Acrobatics check to escape. The rauzhant can’t use its bite attack while it is clutching a target, and the target can’t regain Stamina Points while a rauzhant is clutching it.</p>"
         },
@@ -94,9 +100,11 @@
           "units": "",
           "value": null
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
+        "isActive": null,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -189,12 +197,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -202,6 +212,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -230,6 +241,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -251,8 +263,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>When a rauzhant succeeds at a grapple combat maneuver while clutching a target, it can make two claw attacks against that target as a move action.</p>"
         },
@@ -262,6 +277,7 @@
           "value": null
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -274,6 +290,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -302,6 +319,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -323,8 +341,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>A rauzhant that hits with a bite attack automatically initiates a grapple combat maneuver against its target (this does not take an action). If successful, the rauzhant remains attached to the target until the end of the dragon’s next turn, unless it succeeds at another grapple combat maneuver (with a +4 bonus) during its next turn. The target can break the clutch with a successful DC 30 Acrobatics check to escape. The rauzhant can’t use its bite attack while it is clutching a target, and the target can’t regain Stamina Points while a rauzhant is clutching it.</p>"
         },
@@ -334,6 +355,7 @@
           "value": null
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -346,6 +368,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -374,6 +397,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -395,8 +419,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>A rauzhant depends on an atmosphere rich in hydrogen and helium for its flight. In any other kind of atmosphere, it must hold its breath and its fly speed is reduced to 30 feet (clumsy maneuverability).</p>"
         },
@@ -406,6 +433,7 @@
           "value": null
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -418,6 +446,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -446,6 +475,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -467,8 +497,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>&nbsp;A rauzhant that loses its blindsight ability gains the blinded condition.</p>"
         },
@@ -478,6 +511,7 @@
           "value": null
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -490,6 +524,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -511,12 +546,14 @@
   "prototypeToken": {
     "name": "Rauzhant",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -545,11 +582,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -567,6 +601,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 2
@@ -617,8 +652,14 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
+      "baseSpellDC": {
+        "base": 0
+      },
       "cmd": {
         "min": 0,
         "tooltip": [],
@@ -675,7 +716,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 5
@@ -684,7 +726,8 @@
         "special": "original base: 5 ft.; original special: fly 60 ft. (average)",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -744,12 +787,26 @@
       "alignment": "N",
       "aura": "",
       "biography": {
+        "age": 0,
+        "dateOfBirth": "",
+        "deity": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
+        "height": "",
+        "homeWorld": "",
+        "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>Sometimes inaccurately referred to as clutch wyverns by offworlders, rauzhants soar through the orange-white seas of gas that make up @UUID[Compendium.sfrpg.setting.ac6z5Rqyx0oLzvVf]{Liavara}’s atmosphere. Much less intelligent than chromatic and metallic dragons, rauzhants can still carry on a conversation, but they spend most of their hours hunting for meals. When a rauzhant finds suitable prey, it fastens onto its target with the series of long fangs around its mouth and folds its wings, usually causing both predator and prey to plummet deeper into the planet’s atmosphere. As they both fall, the rauzhant rakes its victim with its hook-shaped claws until the creature is a shredded mass of flesh and bone. The rauzhant then takes flight again, feasting on its victim’s corpse as it gains altitude.</p>\n<p>A rauzhant has no eyes, but its skin acts as an olfactory organ able to detect the faintest smell in the swirling gases that make up its home environment. Instead of collecting physical trinkets like other dragons do, a rauzhant accumulates “tastes,” with the flavor of each new species it eats cataloged within its extensive memory.</p>\n<p>A rauzhant is about 14 feet long from mouth to tail and weighs an average of 2,500 pounds.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any air (@UUID[Compendium.sfrpg.setting.ac6z5Rqyx0oLzvVf]{Liavara})</p>\n<h3>Organization</h3>\n<p>solitary, pair, or flight (3−6)</p>\n</section>"
+        "value": "<h2>Description</h2>\n<p>Sometimes inaccurately referred to as clutch wyverns by offworlders, rauzhants soar through the orange-white seas of gas that make up @UUID[Compendium.sfrpg.setting.ac6z5Rqyx0oLzvVf]{Liavara}’s atmosphere. Much less intelligent than chromatic and metallic dragons, rauzhants can still carry on a conversation, but they spend most of their hours hunting for meals. When a rauzhant finds suitable prey, it fastens onto its target with the series of long fangs around its mouth and folds its wings, usually causing both predator and prey to plummet deeper into the planet’s atmosphere. As they both fall, the rauzhant rakes its victim with its hook-shaped claws until the creature is a shredded mass of flesh and bone. The rauzhant then takes flight again, feasting on its victim’s corpse as it gains altitude.</p>\n<p>A rauzhant has no eyes, but its skin acts as an olfactory organ able to detect the faintest smell in the swirling gases that make up its home environment. Instead of collecting physical trinkets like other dragons do, a rauzhant accumulates “tastes,” with the flavor of each new species it eats cataloged within its extensive memory.</p>\n<p>A rauzhant is about 14 feet long from mouth to tail and weighs an average of 2,500 pounds.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any air (@UUID[Compendium.sfrpg.setting.ac6z5Rqyx0oLzvVf]{Liavara})</p>\n<h3>Organization</h3>\n<p>solitary, pair, or flight (3−6)</p>\n</section>",
+        "weight": ""
       },
       "class": "",
       "cr": 6,
       "environment": "",
+      "organization": "",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #1 pg. 59",
@@ -764,6 +821,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 18,
         "ranks": 18,
@@ -774,6 +832,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -784,6 +843,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -794,6 +854,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -804,6 +865,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -814,6 +876,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -824,6 +887,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -834,6 +898,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -844,6 +909,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 13,
         "ranks": 13,
@@ -854,6 +920,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -864,6 +931,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -874,6 +942,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -884,6 +953,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 13,
         "ranks": 13,
@@ -894,6 +964,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -904,6 +975,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -914,6 +986,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -925,6 +998,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -935,6 +1009,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -945,6 +1020,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -955,6 +1031,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 13,
         "ranks": 13,
@@ -964,30 +1041,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -1020,6 +1104,9 @@
       },
       "senses": "blindsight (scent) 120 ft.",
       "size": "large",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

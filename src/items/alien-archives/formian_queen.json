@@ -123,6 +123,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -374,6 +375,7 @@
         },
         "source": "CRB pg. 173",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -402,6 +404,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "full",
@@ -479,6 +482,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "action",
@@ -553,6 +557,7 @@
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -630,6 +635,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "action",
@@ -704,6 +710,7 @@
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -999,6 +1006,7 @@
         },
         "source": "CRB pg. 173",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -1066,6 +1074,7 @@
         "quantity": "1",
         "quantityPerPack": 1,
         "source": "Core Rulebook",
+        "specialMaterials": {},
         "useCapacity": true
       }
     },
@@ -1080,6 +1089,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "action",
@@ -1088,6 +1098,7 @@
         },
         "allowedClasses": {
           "myst": true,
+          "precog": false,
           "tech": false,
           "wysh": true
         },
@@ -1173,6 +1184,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "action",
@@ -1181,6 +1193,7 @@
         },
         "allowedClasses": {
           "myst": true,
+          "precog": false,
           "tech": false,
           "wysh": false
         },
@@ -1266,6 +1279,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "min",
@@ -1274,6 +1288,7 @@
         },
         "allowedClasses": {
           "myst": true,
+          "precog": false,
           "tech": false,
           "wysh": false
         },
@@ -1359,6 +1374,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "rsak",
         "activation": {
           "type": "action",
@@ -1367,6 +1383,7 @@
         },
         "allowedClasses": {
           "myst": true,
+          "precog": false,
           "tech": false,
           "wysh": false
         },
@@ -1452,6 +1469,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "action",
@@ -1460,6 +1478,7 @@
         },
         "allowedClasses": {
           "myst": false,
+          "precog": false,
           "tech": true,
           "wysh": false
         },
@@ -1561,6 +1580,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "action",
@@ -1569,6 +1589,7 @@
         },
         "allowedClasses": {
           "myst": false,
+          "precog": false,
           "tech": true,
           "wysh": true
         },
@@ -1654,6 +1675,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "action",
@@ -1662,6 +1684,7 @@
         },
         "allowedClasses": {
           "myst": false,
+          "precog": false,
           "tech": true,
           "wysh": true
         },
@@ -1747,6 +1770,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "action",
@@ -1755,6 +1779,7 @@
         },
         "allowedClasses": {
           "myst": true,
+          "precog": false,
           "tech": false,
           "wysh": false
         },
@@ -1942,6 +1967,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -2019,6 +2045,7 @@
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -2047,11 +2074,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -2069,6 +2093,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 2
@@ -2119,12 +2144,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -2255,8 +2286,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<h2>Description</h2>\n<p>The queen is the center of a formian hive, figuratively and literally. A queen’s physical existence is rooted in reproduction: her first responsibility is laying the eggs that populate the hive. Indeed, she can’t actually stop this process, which takes place largely without conscious thought as she goes about her business. In emergencies, some queens resort to extreme hormonal treatments to suppress their laying, but such drastic means are rarely employed. Once they start laying, most queens never physically move more than a few feet at a time; in the rare event that they must be relocated, they are carried upon massive palanquins by members of the hive or are installed on hovering thrones.</p>\n<p>These physical constraints don’t mean a queen is helpless or powerless. A queen has defensive capabilities unparalleled in the hive, including the ability to teleport herself away from danger if overwhelmed. She can turn her telepathic prowess into a weapon to harm and disable foes, and she can possess any member of the hive to borrow their senses and inspect locations, interact with others, or confront intruders “in person.”</p>\n<p>Each formian hive-typically an entire settlement-has its own queen, and the hive is absolutely subordinate to the queen, epitomizing the ultimate order and hierarchical nature of formian society. In the distant past, this loyalty led to tremendous conflict between hives, as each queen and hive pursued its own agenda and perceived the others as threats. The long-ago establishment of the abstract concept of the “Overqueen” among the formian queens of @UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel} enabled separate hives to unify their goals and operations, effectively creating one metahive among all of formian society on that planet. The directives established by the Overqueen are purposefully broad suggestions promoting the well-being of the formian race, so as to avoid infighting between queens trying to set more specific goals.</p>\n<p>Within a hive, the queen is the absolute authority: she establishes the overall direction and goals for the hive, which the various hive members-from the powerful myrmarchs down to the countless workers-strive to carry out. Part of this comes from the fact that the vast majority of a hive’s members are direct offspring of the queen (in fact, when a new queen takes over, a hive sees massive turnover as its members are rapidly replaced with the new queen’s brood); as with most social insects, the genetic similarity of a single queen’s offspring leads to tight social bonds and minimal competition. The queen is typically quite active in the hive’s operations, meeting with myrmarchs and taskmasters personally to provide specific and detailed instruction.</p>\n<h2>Formian</h2>\n<p>Formians resemble giant ants with humanoid upper bodies, and carve their chitinous plates with insignias reflecting their individual names and achievements. Members of a hive all share a telepathic link, allowing them to coordinate efficiently.</p>\n<p>Within a hive are castes specialized to particular tasks. The queen leads the hive and is its sole means of propagation, while castes like the aristocratic myrmarchs and mercantile taskmasters direct lower castes like warriors and workers.</p>\n<p>Formians are most common on @UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel}. For millennia they sought to eradicate the lashunta, their traditional foes, but their queens now instead focus on adopting other species’ technology to industrialize their traditional hive societies.</p>",
@@ -2266,6 +2300,10 @@
       "cr": 17,
       "environment": "any land or underground (Castrovel)",
       "organization": "hive (1 plus 300-8,000 formians)",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AA3 pg. 38",
@@ -2575,6 +2613,9 @@
       },
       "senses": "",
       "size": "large",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }
