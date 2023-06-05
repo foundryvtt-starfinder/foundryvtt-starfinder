@@ -1,3 +1,10 @@
+# v0.24.1 - V11 Compatibility
+This is a minor hotfix release for 0.24 to fix some issues the LevelDB migration exposed.
+
+## Bugfixes
+- Ensure all embedded documents on Actors in compendiums have `_id`s, so they aren't discarded by the LevelDB migration.
+- Restructure `template.json` slightly to reduce redundant data on actors.
+
 # v0.24.0 - V11 Compatibility
 The very cool features currently sat on the development branch have been pushed to the side to allow for this small but important update. This update prepares the system for use on V11.
 
