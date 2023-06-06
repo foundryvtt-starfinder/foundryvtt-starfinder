@@ -223,14 +223,25 @@ img.icon-enricher {
     }
 
     &.app {
-        .trait-list {
-            li input[type="text"] {
-                flex: 0 0 65%;
-                text-align: center;
-            }
-            .energy-resistance .checkbox {
-                flex: 0 0 33%;
-                text-align: left;
+        .trait-selector {
+            max-height: 480px;
+            
+            .trait-list {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+
+                li {
+                    flex: 0 0 150px;
+                }
+                /*li input[type="text"] {
+                    flex: 0 0 65%;
+                    text-align: center;
+                }
+                .energy-resistance .checkbox {
+                    flex: 0 0 33%;
+                    text-align: left;
+                }*/
             }
         }
     }

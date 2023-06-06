@@ -1,5 +1,15 @@
-<form autocomplete="off" onsubmit="event.preventDefault();">
-    <ol class="trait-list">
+<form class="trait-selector" autocomplete="off" onsubmit="event.preventDefault();">
+
+    {{!-- Search Bar --}}
+    <div class="sortcontainer" id="tagfilter">
+        <input class="" name="textFilter" type="text" value="" data-dtype="String" placeholder="{{localize "SFRPG.Browsers.ItemBrowser.BrowserSearchPlaceholder"}}" data-tooltip="{{localize "SFRPG.Browsers.ItemBrowser.BrowserSearchTitle"}}"/>
+        <div class="hint" style="display:none;">
+            {{{localize "SFRPG.Browsers.ItemBrowser.SearchHint"}}}
+        </div>
+    </div>
+
+    {{!-- Trait List --}}
+    <ul class="trait-list">
     {{#unless isEnergyResistance}}
         {{#each choices as |choice key|}}
         <li>
@@ -21,10 +31,14 @@
         </li>
         {{/each}}
     {{/unless}}
-    </ol>
+    </ul>
+
+    {{!-- Special Traits --}}
     <div class="form-group stacked">
         <label>Special</label>
         <input type="text" name="custom" value="{{custom}}" data-dtype="String"/>
     </div>
+
+    {{!-- Save and Exit Button --}}
     <button type="submit" name="submit" value="1"><i class="far fa-save"></i> Update Actor</button>
 </form>

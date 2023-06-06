@@ -9,10 +9,11 @@ export class TraitSelectorSFRPG extends FormApplication {
 
         options.id = "trait-selector";
         options.classes = ["sfrpg"];
-        options.title = "Actor Trait Selection";
+        options.title = "Trait Selection";
         options.template = "systems/sfrpg/templates/apps/trait-selector.hbs";
-        options.width = 320;
+        options.width = 480;
         options.height = "auto";
+        console.log(options);
 
         return options;
     }
@@ -32,20 +33,20 @@ export class TraitSelectorSFRPG extends FormApplication {
      * @returns {Object}
      */
     getData() {
-        let attr = getProperty(this.object, this.attribute);
+        const attr = getProperty(this.object, this.attribute);
         if (typeof attr.value === "string") attr.value = this.constructor._backCompat(attr.value, this.options.choices);
 
         const choices = duplicate(this.options.choices);
         const isEnergyResistance = this.attribute === "data.traits.dr";
         if (!isEnergyResistance) {
-            for (let [k, v] of Object.entries(choices)) {
+            for (const [k, v] of Object.entries(choices)) {
                 choices[k] = {
                     label: v,
                     chosen: attr.value.includes(k)
                 };
             }
         } else {
-            for (let [k, v] of Object.entries(choices)) {
+            for (const [k, v] of Object.entries(choices)) {
                 choices[k] = {
                     label: v,
                     chosen: false,
@@ -80,7 +81,7 @@ export class TraitSelectorSFRPG extends FormApplication {
         if (!current || current.length === 0) return [];
         current = current.split(/[\s,]/).filter(t => !!t);
         return current.map(val => {
-            for (let [k, v] of Object.entries(choices)) {
+            for (const [k, v] of Object.entries(choices)) {
                 if (val === v) return k;
             }
             return null;
@@ -98,13 +99,13 @@ export class TraitSelectorSFRPG extends FormApplication {
         let choices = [];
 
         if (this.attribute !== "system.traits.dr") {
-            for (let [k, v] of Object.entries(formData)) {
+            for (const [k, v] of Object.entries(formData)) {
                 if ((k !== 'custom') && v) choices.push(k);
             }
         } else {
             let resistances = Object.entries(formData).filter(e => e[0].startsWith("er"));
             resistances = resistances.reduce((obj, entry) => {
-                let [type, i] = entry[0].split('.').slice(1);
+                const [type, i] = entry[0].split('.').slice(1);
 
                 if (!obj[type]) obj[type] = {};
                 obj[type][i] = entry[1];
@@ -124,5 +125,85 @@ export class TraitSelectorSFRPG extends FormApplication {
             [`${this.attribute}.value`]: choices,
             [`${this.attribute}.custom`]: formData.custom
         });
+    }
+
+    async filterItems(li) {
+        let counter = 0;
+        li.hide();
+
+        for (const item of li) {
+            if (this.getFilterResult(item)) {
+                $(item).show();
+
+                if (++counter % 20 === 0) {
+                    // Yield to the browser to render what it has
+                    await new Promise(r => setTimeout(r, 0));
+                }
+            }
+        }
+    }
+
+    getFilterResult(element) {
+        if (this.sorters.text !== '') {
+            const strings = this.sorters.text.split(',');
+
+            for (const string of strings) {
+                if (string.indexOf(':') === -1) {
+                    if ($(element).find('.item-name a')[0].innerHTML.toLowerCase().indexOf(string.toLowerCase().trim()) === -1) {
+                        return false;
+                    }
+                } else {
+                    const targetValue = string.split(':')[1].trim();
+                    const targetStat = string.split(':')[0].trim();
+
+                    if ($(element).find(`input[name=${targetStat}]`)
+                        .val()
+                        .toLowerCase()
+                        .indexOf(targetValue) === -1) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        if (this.sorters.castingtime !== 'null') {
+            const castingtime = $(element).find('input[name=time]')
+                .val()
+                .toLowerCase();
+
+            if (castingtime !== this.sorters.castingtime) {
+                return false;
+            }
+        }
+
+        for (const availableFilter of Object.values(this.filters)) {
+            if (availableFilter.type === 'multi-select') {
+                if (availableFilter.activeFilters && availableFilter.activeFilters.length > 0) {
+                    if (!availableFilter.filter(element, availableFilter.activeFilters)) {
+                        return false;
+                    }
+                }
+            } else if (availableFilter.type === "range") {
+                if (!availableFilter.filter(element, availableFilter.content)) {
+                    return false;
+                }
+            } else if (availableFilter.type === "value") {
+                if (!availableFilter.filter(element, availableFilter.content)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    activateListeners(html) {
+
+        // activating or deactivating filters
+        html.on('change paste', 'input[name=textFilter]', ev => {
+            this.sorters.text = ev.target.value;
+            this.filterItems(html.find('li'));
+        });
+
     }
 }
