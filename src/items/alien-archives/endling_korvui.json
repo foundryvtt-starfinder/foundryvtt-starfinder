@@ -15,6 +15,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -36,6 +37,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -62,6 +64,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -90,6 +93,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -111,6 +115,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -137,6 +142,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -234,6 +240,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -264,6 +271,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -271,6 +279,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -368,6 +377,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -398,6 +408,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -405,6 +416,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -433,6 +445,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -454,6 +467,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -480,6 +494,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -508,6 +523,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -529,6 +545,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -555,6 +572,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -583,6 +601,7 @@
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -611,11 +630,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -633,6 +649,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -683,12 +700,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -819,8 +842,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<h2>Endling</h2>\n<p>Over the passage of eons, myriad creatures have flourished and dwindled naturally as their eras have come and gone. Often, however, a species’ overall lifespan is cut short by an unnatural intrusion, whether from unexpected predation, destruction of natural habitat, or a disease from another planet. In rare cases, spectral creatures known as endlings arise immediately after the last member of a species perishes.</p>\n<p>Endlings manifest as much larger spectral members of an extinct species. These ghosts gain abilities that allow them to combat their perceived source of their species’ demise: those who were hunted to extinction develop ferocious combat prowess, while those whose homes were destroyed by colonization gain the power to destroy technology and artificial structures. Xenobiologists differ on the exact nature of endlings. Some theorize that endlings are the collective sorrow of a species made manifest, while others believe they are the ghosts of the very last survivors, driven to carry on their species’ legacy even in death.</p>\n<p>Koruvis were diminutive ungulates that lived in dens in a planetwide rain forest on a Near Space world. These small creatures had striped and spotted fur, prehensile snouts, and small horns, which they used to dig up fungi for sustenance. However, a vesk mining company that was scouting that system detected starmetal veins beneath the planet’s crust. In the feverish mining race that followed, factions from across the galaxy fought to gain a foothold on what came to be known as Calen 5. Invading miners razed vast swaths of forest, and koruvis, among the other native species of Calen 5, soon went extinct as their home was destroyed. In one of the early settlements on Calen 5, Hope’s Edge, residents reported mysterious property damage, such as holes ripped into buildings and electrical equipment badly mangled, and rumors spread of a pack of ghostly monsters skulking around town. Today, Hope’s Edge has grown into the de facto capital of Calen 5, but koruvi endlings still fiercely attack the city in a never-ending pursuit of revenge against the cause of their extinction.</p>",
@@ -830,6 +856,10 @@
       "cr": 3,
       "environment": "any (Calen 5)",
       "organization": "solitary or retribution (2-8)",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AA4 pg. 32",
@@ -1131,6 +1161,9 @@
       },
       "senses": "darkvision 60 ft.",
       "size": "medium",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

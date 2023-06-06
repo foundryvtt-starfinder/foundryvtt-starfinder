@@ -18,9 +18,9 @@ export default function(engine) {
 
             let mod = 0;
             switch (classData.bab) {
-            case "slow": mod += Math.floor(classData.levels * 0.5); break;
-            case "moderate": mod += Math.floor(classData.levels * 0.75); break;
-            case "full": mod += classData.levels; break;
+                case "slow": mod += Math.floor(classData.levels * 0.5); break;
+                case "moderate": mod += Math.floor(classData.levels * 0.75); break;
+                case "full": mod += classData.levels; break;
             }
 
             data.attributes.baseAttackBonus.tooltip.push(game.i18n.format("SFRPG.BABTooltip", {
@@ -30,8 +30,6 @@ export default function(engine) {
 
             data.attributes.baseAttackBonus.value += mod;
         }
-
-        data.attributes.bab = data.attributes.baseAttackBonus.value;
 
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] });

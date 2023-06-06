@@ -22,6 +22,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -56,6 +57,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -85,6 +87,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -194,12 +197,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -207,6 +212,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -242,6 +248,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -276,6 +283,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -305,6 +313,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -414,12 +423,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -427,6 +438,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -462,6 +474,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -496,6 +509,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -525,6 +539,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -634,12 +649,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "ft",
           "value": 40
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -647,6 +664,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -672,6 +690,7 @@
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "full",
@@ -693,6 +712,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -750,6 +770,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -778,6 +799,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "special",
@@ -807,6 +829,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -833,6 +856,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "fort",
           "dc": "13",
@@ -854,12 +878,14 @@
   "prototypeToken": {
     "name": "Irokiroi",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -888,11 +914,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -910,6 +933,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 3
@@ -960,12 +984,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -1023,7 +1053,8 @@
           "base": 0
         },
         "flying": {
-          "base": 60
+          "base": 60,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 0
@@ -1032,7 +1063,8 @@
         "special": "original base: fly 60 ft. (Ex, average)",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -1094,8 +1126,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<section>\n<h2>Description</h2>\n<p>Though most inhabitants of the Liavaran moon of Osoro remain confined to the few mountain peaks rising above the roiling cloud-seas of toxic gases, these perilous clouds are home to their own seldom-seen and poorly understood jungle ecosystem. The apex predators of this system are irokirois, huge serpentine creatures with long wing fins that spiral in a helical pattern along their entire bodies, from their razorfanged tripartite maws to their tapered tails. Though most irokirois keep to the toxic gas seas, their corkscrewing flight occasionally brings them to the surface or even to the skies above to attack Osoran settlements in furious rages.</p>\n<p>Irokirois are largely solitary creatures. Roughly twice every year, they congregate in writhing coils of up to a dozen to mate, after which each gives birth to dozens of tiny young. These offspring spiral to the bottom of the cloud seas and drill into the ground, where they feed until their wing fins develop. An irokiroi continues to grow throughout its lifespan, and one that survives long enough eventually grows into an enormous predator with the capacity to wreak great destruction; Osorans call these immense apex predators oshirokirois.</p>\n<p>In recent years, irokiroi and oshirokiroi attacks have increased drastically, with some Osoran settlements fighting off multiple instances each month. A strong correlation exists between the rise in attacks and the growing popularity of Bhalakosti Excursion’s survival safari trips into the moon’s poisonous jungles, run by dirindi (see pages 20–21) natives of the moon and patronized by predominantly vesk customers. Though the company’s representatives have declined to comment on the situation, biologists theorize that the excursions’ hunting of predators that feed on immature irokirois has led to a surge in the irokiroi population and therefore more attacks.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any sky (Osoro)</p>\n<h3>Organization</h3>\n<p>solitary or coil (6-12 plus 1-2 oshirokirois)</p>\n</section>",
@@ -1105,6 +1140,10 @@
       "cr": 5,
       "environment": "",
       "organization": "",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AA3 pg. 56",
@@ -1344,30 +1383,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -1400,6 +1446,9 @@
       },
       "senses": "blindsight (sound) 120 ft., sightless",
       "size": "huge",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

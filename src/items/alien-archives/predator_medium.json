@@ -8,6 +8,7 @@
       "_id": "pOgfB3srx7EsM3rl",
       "name": "Natural Weapon",
       "type": "weapon",
+      "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -18,6 +19,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -52,6 +54,8 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
+          "isOpen": true,
           "storage": [
             {
               "type": "slot",
@@ -80,8 +84,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
@@ -90,21 +97,25 @@
           "units": "",
           "value": null
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
+        "isActive": null,
         "level": 1,
         "modifiers": [],
         "price": 0,
         "proficient": true,
         "properties": {},
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -112,6 +123,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -133,12 +145,14 @@
   "prototypeToken": {
     "name": "Predator, Medium",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -167,11 +181,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -189,6 +200,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -239,8 +251,14 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
+      "baseSpellDC": {
+        "base": 0
+      },
       "cmd": {
         "min": 0,
         "tooltip": [],
@@ -297,7 +315,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 40
@@ -306,7 +325,8 @@
         "special": "original base: 40 ft.",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -366,12 +386,26 @@
       "alignment": "Predator,",
       "aura": "",
       "biography": {
+        "age": 0,
+        "dateOfBirth": "",
+        "deity": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
+        "height": "",
+        "homeWorld": "",
+        "otherVisuals": "",
         "public": "",
-        "value": "<section>\n<h2>Predator</h2>\n<p>From the vortex sharks of Kalo-Mahoi to the hoarbats of @UUID[Compendium.sfrpg.setting.f24qKgU5Wh5LLJyh]{Verces}’s Darkside, and from the dire tigers of @UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel} to the tremor worms of @UUID[Compendium.sfrpg.setting.gzXT0xwsj8kQAoj0]{Akiton}, predators abound in the Pact Worlds and on planets across the galaxy. What unites these disparate species is that their diets include the meat of other creatures and that they hunt and kill to acquire this food. On planets where sapient species are dominant, predators have learned that weapon-wielding creatures can be deadly prey. Other predators, deprived of such contact, often see sentient explorers as an unfamiliar form of potential sustenance, making confrontations inevitable.</p>\n<p>Predators come in all shapes and sizes, limited only by the environment where they are found. Bigger predators rely on abundant food, cycles of inactivity, an omnivorous diet, or a combination of these. Smaller predators have fewer requirements and can be equally dangerous; even very small animals can evolve pack tactics to overwhelm larger and stronger creatures. Some of these swarms, such as the flying viper eels of @UUID[Compendium.sfrpg.setting.2K7muQyxlXW8wqb3]{Bretheda}, strip flesh from bone as they move over and around prey.</p>\n<h2>Creating Predators</h2>\n<p>The predators in this entry serve a couple of purposes. Employ them as written when you need statistics for this sort of creature. To create a unique predator, use the stat blocks here and your concept as starting points. Decide what type of natural weapon the animal has, from claws to slams, altering the damage type to suit the weapon. Then add elements from Appendix 2: Environmental Grafts. Tailor anything you want to fit your concept.</p>\n<h2>Sample Predator</h2>\n<p>The vortex shark is a slim, cartilaginous fish that lives in the depths of Kalo-Mahoi’s oceans. The creature is bioluminescent and has a four-part jaw with rows of hooked teeth. A vortex shark’s natural weapon is a bite that deals slashing damage, has the bleed 1d6 critical hit effect, and allows the shark’s teeth to grab ahold of a target. The female of the species grows larger than the male and lays eggs in pouches she leaves behind. Young fend for themselves when they hatch, catching weaker siblings for a first meal. An adult vortex shark is a Large aquatic predator, averaging 12 feet in length and 1,000 pounds in weight. The sharks can breathe only water and have a land speed of 0 feet and a swim speed of 60 feet. Living in Kalo-Mahoi’s seas has inured them to cold (resistance 5 to cold), and they have blindsense (scent) out to 30 feet and the tracking (scent) special ability for waterborne prey, which they use mostly to hunt bleeding creatures.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<h3>Organization</h3>\n<p>solitary, pair, or pack (3-12)</p>\n</section>"
+        "value": "<section>\n<h2>Predator</h2>\n<p>From the vortex sharks of Kalo-Mahoi to the hoarbats of @UUID[Compendium.sfrpg.setting.f24qKgU5Wh5LLJyh]{Verces}’s Darkside, and from the dire tigers of @UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel} to the tremor worms of @UUID[Compendium.sfrpg.setting.gzXT0xwsj8kQAoj0]{Akiton}, predators abound in the Pact Worlds and on planets across the galaxy. What unites these disparate species is that their diets include the meat of other creatures and that they hunt and kill to acquire this food. On planets where sapient species are dominant, predators have learned that weapon-wielding creatures can be deadly prey. Other predators, deprived of such contact, often see sentient explorers as an unfamiliar form of potential sustenance, making confrontations inevitable.</p>\n<p>Predators come in all shapes and sizes, limited only by the environment where they are found. Bigger predators rely on abundant food, cycles of inactivity, an omnivorous diet, or a combination of these. Smaller predators have fewer requirements and can be equally dangerous; even very small animals can evolve pack tactics to overwhelm larger and stronger creatures. Some of these swarms, such as the flying viper eels of @UUID[Compendium.sfrpg.setting.2K7muQyxlXW8wqb3]{Bretheda}, strip flesh from bone as they move over and around prey.</p>\n<h2>Creating Predators</h2>\n<p>The predators in this entry serve a couple of purposes. Employ them as written when you need statistics for this sort of creature. To create a unique predator, use the stat blocks here and your concept as starting points. Decide what type of natural weapon the animal has, from claws to slams, altering the damage type to suit the weapon. Then add elements from Appendix 2: Environmental Grafts. Tailor anything you want to fit your concept.</p>\n<h2>Sample Predator</h2>\n<p>The vortex shark is a slim, cartilaginous fish that lives in the depths of Kalo-Mahoi’s oceans. The creature is bioluminescent and has a four-part jaw with rows of hooked teeth. A vortex shark’s natural weapon is a bite that deals slashing damage, has the bleed 1d6 critical hit effect, and allows the shark’s teeth to grab ahold of a target. The female of the species grows larger than the male and lays eggs in pouches she leaves behind. Young fend for themselves when they hatch, catching weaker siblings for a first meal. An adult vortex shark is a Large aquatic predator, averaging 12 feet in length and 1,000 pounds in weight. The sharks can breathe only water and have a land speed of 0 feet and a swim speed of 60 feet. Living in Kalo-Mahoi’s seas has inured them to cold (resistance 5 to cold), and they have blindsense (scent) out to 30 feet and the tracking (scent) special ability for waterborne prey, which they use mostly to hunt bleeding creatures.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<h3>Organization</h3>\n<p>solitary, pair, or pack (3-12)</p>\n</section>",
+        "weight": ""
       },
       "class": "",
       "cr": 1,
       "environment": "",
+      "organization": "",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AA2 pg. 102",
@@ -386,6 +420,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 5,
         "ranks": 5,
@@ -396,6 +431,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 5,
         "ranks": 5,
@@ -406,6 +442,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -416,6 +453,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -426,6 +464,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -436,6 +475,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -446,6 +486,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -456,6 +497,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -466,6 +508,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -476,6 +519,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -486,6 +530,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -496,6 +541,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -506,6 +552,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 5,
         "ranks": 5,
@@ -516,6 +563,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -526,6 +574,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -536,6 +585,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -547,6 +597,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -557,6 +608,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -567,6 +619,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 5,
         "ranks": 5,
@@ -577,6 +630,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -586,30 +640,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -640,6 +701,9 @@
       },
       "senses": "low-light vision",
       "size": "medium",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

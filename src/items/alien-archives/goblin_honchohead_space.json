@@ -54,6 +54,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -83,6 +84,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -113,6 +115,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -120,6 +123,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -148,6 +152,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "action",
@@ -169,6 +174,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -195,6 +201,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "will",
           "dc": "13",
@@ -223,6 +230,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "move",
@@ -244,6 +252,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -270,6 +279,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -345,6 +355,7 @@
               "index": 0
             }
           ],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -394,6 +405,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -512,6 +524,7 @@
           "units": "ft",
           "value": 60
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -519,6 +532,7 @@
         },
         "source": "CRB pg. 173",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "units": "",
@@ -644,6 +658,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -693,6 +708,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -715,6 +731,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -745,6 +762,7 @@
           "value": null
         },
         "reach": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -752,6 +770,7 @@
         },
         "size": "",
         "source": "CRB pg. 197",
+        "specialMaterials": {},
         "speed": "",
         "strength": 0,
         "target": {
@@ -780,6 +799,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -801,6 +821,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -827,6 +848,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -855,6 +877,7 @@
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -883,11 +906,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -905,6 +925,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -955,12 +976,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -1018,7 +1045,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 35
@@ -1027,7 +1055,8 @@
         "special": "original base: 35 ft.",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -1089,8 +1118,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<p>Goblin legend claims that long ago, a tribe of surprisingly clever goblins stowed away on a spacecraft that left Golarion and made its way to @UUID[Compendium.sfrpg.setting.hepqXl6gFvs5sDQu]{Absalom Station}, where the goblins infiltrated the station’s worst neighborhoods and set up camps in its engineering passages. Over time, the goblins learned to build weapons and armor from scavenged parts, though many of their efforts are prone to exploding at the slightest provocation. While space goblins have since managed to hijack other ships and spread to the stars, nowhere are they as prevalent as on @UUID[Compendium.sfrpg.setting.hepqXl6gFvs5sDQu]{Absalom Station}—a fact for which all other worlds that are familiar with space goblins are extremely grateful.</p>\n<p>Thanks to the goblins’ rapid reproduction rate, many generations have passed since those first goblins came to @UUID[Compendium.sfrpg.setting.hepqXl6gFvs5sDQu]{Absalom Station}. Fluctuating gravity, an entirely new diet, and the occasional radiation leak have made space goblins a distinct offshoot species from Golarion’s goblins. They are a bit more intelligent, instinctively able to take apart technology and rebuild it to suit their strange whims. They are quicker as well, scuttling rapidly into nearby ventilation ducts after swiping unattended datapads or laser pistols.</p>\n<p>While some space goblins still worship the goblin herogods of old, partially adapting their dogma to fit their current lifestyle, many more revere @UUID[Compendium.sfrpg.setting.FYV6RgTjPdg72RF0]{Triune}, the machine god. Their innate aptitude for using technology (without knowing how it actually works) leads them to believe that @UUID[Compendium.sfrpg.setting.FYV6RgTjPdg72RF0]{Triune} has a plan for them. Some even think it will lead them to some kind of scavenging paradise, where every dawn will bring a new piece of advanced technology to strip for parts. However, neither @UUID[Compendium.sfrpg.setting.FYV6RgTjPdg72RF0]{Triune} nor its church has yet officially acknowledged these zealous space goblins.</p>\n<p>Goblins from Golarion were known for their voracious appetites, often eating their body weight each day of what passed for cuisine in the twisted mind of a goblin. Space goblins were not afforded that luxury in those early days aboard @UUID[Compendium.sfrpg.setting.hepqXl6gFvs5sDQu]{Absalom Station}; they had to subsist on discarded scraps of food and other garbage. As such, space goblins aren’t as insatiable, though they are no less orally fixated. There is an even chance that upon encountering a strange item, a space goblin will try to either dismantle it or eat it. A space goblin might even attempt to diagnose a problem with a small piece of technology by putting it in his mouth and tasting every part of it.</p>\n<p>Goblins’ instinctive hatred and fear of dogs and horses has also adapted over the millennia. Space goblins tend to refer to any quadruped (or anything shaped even remotely similarly) that they dislike as a “dog” or “horse,” depending on its size. In that vein, they still refer to their iconic crude melee weapons as dogslicers; these function just like survival knives, though a few enterprising goblin tribes have discovered ways to give the blades microserrated or ultraserrated edges. Other tribes have taken to adapting flame pistols and flame rifles to suit their needs, dubbing them “horseroasters.”</p>\n<p>The physical differences between space goblins and their cousins from Golarion (none of which have been seen for centuries) are slight. Space goblins tend to be a few inches taller, and their eyes are a deeper shade of red. A typical space goblin is about 3-1/2 feet tall and weighs about 35 pounds—most of that weight is in the head.</p>",
@@ -1100,6 +1132,10 @@
       "cr": 2,
       "environment": "any",
       "organization": "tribe (1 plus 13+ zaperators, 13+ noncombatants, and 5-6 alien pets)",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AA1 pg. 54",
@@ -1340,30 +1376,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -1397,6 +1440,9 @@
       },
       "senses": "darkvision 60 ft.",
       "size": "small",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

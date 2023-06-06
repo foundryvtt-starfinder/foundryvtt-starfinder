@@ -8,9 +8,11 @@
       "_id": "wFjd9CHOeIIt2p2f",
       "name": "Fast Healing 2",
       "type": "feat",
+      "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -32,8 +34,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
@@ -56,6 +61,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -77,6 +83,7 @@
       "_id": "MoGjU5tHXoJG6N7s",
       "name": "Claws",
       "type": "weapon",
+      "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -87,6 +94,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -121,6 +129,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -150,8 +159,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
@@ -160,6 +172,7 @@
           "units": "",
           "value": null
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
@@ -170,12 +183,14 @@
         "proficient": true,
         "properties": {},
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -183,6 +198,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -204,6 +220,7 @@
       "_id": "6WOObDMxwuB2RYMp",
       "name": "Breath Weapons",
       "type": "weapon",
+      "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
         "ability": "str",
@@ -217,6 +234,7 @@
           "condition": "",
           "cost": 1
         },
+        "ammunitionType": "",
         "area": {
           "effect": "burst",
           "shape": "cone",
@@ -251,6 +269,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -272,8 +291,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>usable every 4 rounds</p>"
         },
@@ -282,6 +304,7 @@
           "units": "",
           "value": ""
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
@@ -378,12 +401,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "none",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "reflex",
           "dc": "12",
@@ -391,6 +416,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -412,12 +438,14 @@
   "prototypeToken": {
     "name": "Mephit",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -446,11 +474,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -468,6 +493,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -518,12 +544,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -581,7 +613,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 30
@@ -590,7 +623,8 @@
         "special": "original base: 30 ft.; original special: fly 40 ft. (Ex, average)",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -650,12 +684,26 @@
       "alignment": "N",
       "aura": "",
       "biography": {
+        "age": 0,
+        "dateOfBirth": "",
+        "deity": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
+        "height": "",
+        "homeWorld": "",
+        "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<h3>Description</h3>\n<p>Mephits arise from the detritus and soul-stuff of the planes, much like elementals, springing forth fully formed without parents. Regardless, some mephits take gendered identities, mimicking other creatures. More willful and often more cruel than elementals, mephits are tricksters, thieves, and bullies. Like most such beings, however, mephits back down when a powerful opponent confronts them.</p>\n<p>Working as enforcers or messengers for mightier denizens of the Elemental Planes, especially genies, mephits are common on the Elemental Planes. Most cities on those planes are infested with mephits running errands, scamming visitors, or pestering locals. These creatures also congregate anywhere on the Material Plane where the Elemental Planes bleed over or strong elemental forces occur.</p>\n<p>The typical mephit is about 3 feet tall. The creature’s weight depends on what it’s made of.</p>\n<p>To create a mephit, use the stats above and one of the following grafts.</p>\n<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any (Elemental Planes)</p>\n<h3>Organization</h3>\n<p>solitary, pair, gang (3-6), or mob (7-12)</p>\n</section>"
+        "value": "<h2>Description</h2>\n<h3>Description</h3>\n<p>Mephits arise from the detritus and soul-stuff of the planes, much like elementals, springing forth fully formed without parents. Regardless, some mephits take gendered identities, mimicking other creatures. More willful and often more cruel than elementals, mephits are tricksters, thieves, and bullies. Like most such beings, however, mephits back down when a powerful opponent confronts them.</p>\n<p>Working as enforcers or messengers for mightier denizens of the Elemental Planes, especially genies, mephits are common on the Elemental Planes. Most cities on those planes are infested with mephits running errands, scamming visitors, or pestering locals. These creatures also congregate anywhere on the Material Plane where the Elemental Planes bleed over or strong elemental forces occur.</p>\n<p>The typical mephit is about 3 feet tall. The creature’s weight depends on what it’s made of.</p>\n<p>To create a mephit, use the stats above and one of the following grafts.</p>\n<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any (Elemental Planes)</p>\n<h3>Organization</h3>\n<p>solitary, pair, gang (3-6), or mob (7-12)</p>\n</section>",
+        "weight": ""
       },
       "class": "",
       "cr": 3,
       "environment": "",
+      "organization": "",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #14 pg. 56",
@@ -896,30 +944,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -952,6 +1007,9 @@
       },
       "senses": "darkvision 60 ft.",
       "size": "small",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

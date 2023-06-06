@@ -12,6 +12,7 @@
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -33,6 +34,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -59,6 +61,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -156,6 +159,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -186,6 +190,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -193,6 +198,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -290,6 +296,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -320,6 +327,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -327,6 +335,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -348,25 +357,7 @@
       "_id": "qbT571DMj7WNmUGY",
       "name": "Acidic Spit (Ex)",
       "type": "weapon",
-      "ammunition": false,
-      "augmentation": false,
-      "consumable": false,
-      "container": false,
-      "equipment": false,
-      "fusion": true,
-      "goods": false,
-      "hybrid": false,
       "img": "icons/svg/item-bag.svg",
-      "magic": false,
-      "shield": false,
-      "spell": false,
-      "storage": {
-        "type": "slot",
-        "affectsEncumbrance": true,
-        "amount": 0,
-        "subtype": "fusion",
-        "weightProperty": "level"
-      },
       "system": {
         "type": "",
         "ability": "",
@@ -453,6 +444,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -571,6 +563,7 @@
           "units": "ft",
           "value": 30
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -578,6 +571,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -593,13 +587,7 @@
         },
         "weaponCategory": "uncategorized",
         "weaponType": "smallA"
-      },
-      "technological": false,
-      "upgrade": false,
-      "vehicleAttack": false,
-      "vehicleSystem": false,
-      "weapon": false,
-      "weaponAccessory": false
+      }
     },
     {
       "_id": "2YFSsPkw55BLkNBR",
@@ -612,6 +600,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "full",
@@ -633,6 +622,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -659,6 +649,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "will",
           "dc": "18",
@@ -687,6 +678,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -708,6 +700,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -734,6 +727,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -762,6 +756,7 @@
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -790,11 +785,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -812,6 +804,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -862,12 +855,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -998,8 +997,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<h2>Description</h2>\n<p>This six-legged beast resembles a slender alligator with three eyestalks on top of its head and a ridge of bony plates running down its spine. Its front two limbs end in sturdy claws capable of digging through earth and stone. Under its eyestalks, a dormakhabu also has a long and powerful tentacle, which it uses to drag hapless creatures toward its wide mouth full of sharp teeth, located in the center of its torso. Due to the dormakhabu’s rubbery skin and ability to phase through solid matter, many scholars theorize that this unusual aberration originates from the same world or dimension as the aliens known as grays. Despite these similarities and possible shared origins, dormakhabus have not been reported to cooperate with the bulbous-headed humanoids.</p>\n<p>The only evidence of the strife between the two species comes from an unsubstantiated infosphere report in which an unnamed witness claimed to have been held captive by grays in some kind of underground facility on an asteroid. This person alleges to have seen a creature with a description matching that of a dormakhabu burrow up from the stone floor and unleash a terrifying psychic tremor that flooded the minds of the grays and their captives alike.</p>\n<p>Beset by confusing and nightmarish visions, the witness watched in horror as the dormakhabu spit acid on their incapacitated gray captors before rushing to grab an alien with its tentacle and stuffing the unfortunate victim into its maw. Thanks to the chaos, the witness said, they were able to escape with their life and memories intact. However, no solid evidence for this story has been found.</p>\n<p>If true, the question remains as to why or how a dormakhabu can track and hunt grays with such fervor. However, those who believe in the existence of the grays are grateful to hear that the mysterious infiltrators are not without their own natural predators.</p>",
@@ -1009,6 +1011,10 @@
       "cr": 11,
       "environment": "any",
       "organization": "solitary, pair, or pack (3-10)",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #29 pg. 55",
@@ -1312,6 +1318,9 @@
       },
       "senses": "blindsense (scent) 60 ft., darkvision 120 ft.",
       "size": "medium",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

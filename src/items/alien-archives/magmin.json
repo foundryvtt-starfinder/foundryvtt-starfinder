@@ -8,12 +8,14 @@
       "_id": "mieVph5ExtrliWLz",
       "name": "Searing Aura - 5 Ft., DC 12",
       "type": "feat",
+      "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
         "ability": null,
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -35,8 +37,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>A magmin radiates volcanic heat, and any creature that starts its turn in the aura must succeed at a DC 12 Fortitude save or take 1d4 fire damage.</p>"
         },
@@ -59,6 +64,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -80,9 +86,11 @@
       "_id": "puTOxiO5ftw4AeIB",
       "name": "Molten Body (Su)",
       "type": "feat",
+      "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -104,8 +112,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>Any melee weapon striking the magmin takes 1d4 fire damage, ignoring hardness. If the weapon’s wielder fails a DC 12 Reflex save, the weapon gains the @UUID[Compendium.sfrpg.conditions.8LdyXZl9PeXXFE8O]{Burning} condition, which deals 1d4 fire damage that ignores hardness.</p>"
         },
@@ -128,6 +139,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -149,6 +161,7 @@
       "_id": "pijGcuUYC0Dt2dNt",
       "name": "Slam",
       "type": "weapon",
+      "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -162,6 +175,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -196,6 +210,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -235,8 +250,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
@@ -245,6 +263,7 @@
           "units": "",
           "value": null
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
@@ -341,12 +360,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -354,6 +375,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -375,12 +397,14 @@
   "prototypeToken": {
     "name": "Magmin",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -409,11 +433,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -431,6 +452,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -481,12 +503,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -544,7 +572,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 30
@@ -553,7 +582,8 @@
         "special": "original base: 30 ft.",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -613,12 +643,26 @@
       "alignment": "CN",
       "aura": "Searing - 5 Ft., DC 12 Fort",
       "biography": {
+        "age": 0,
+        "dateOfBirth": "",
+        "deity": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
+        "height": "",
+        "homeWorld": "",
+        "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>The mischievous magmins seek places where their native Plane of Fire touches the Material Plane, allowing them to slip between planes. When a magmin appears on the Material Plane, it does so in places of immense heat, such as within lava. An influx of magmins can disrupt magma flows, causing volcanic eruptions and earthquakes.</p>\n<p>Though few mortals know what causes magmins to begin their exodus from their home plane, the truth is that magmins aren’t very imposing in comparison to other creatures that inhabit the Plane of Fire. Such creatures regularly push magmins around or annex their territory, forcing magmins to migrate, sometimes in large groups. Ousted magmins are untrusting and inquisitive, bombarding intruders with questions in a harsh tone. If magmins dislike the answers to these interrogations, they can become aggressive, even against stronger beings.</p>\n<p>Magmin settlements can be found within the protective crust of magma pillars caused by geyser-like eruptions, where many pools of lava can be found. Magmins enjoy dwelling in these pools and use them for all sorts of purposes, much like other species use hot springs. Unlike other species, magmins also use these pools to kill interlopers and cook them, consuming the ash, bones, and minerals left over as a tasty treat.</p>\n<p>Magma flows through a magmin’s veins and washes over its body, giving off extreme heat. A tiny, fiery heart burns within a magmin, like the core of a terrestrial planet. Few have seen a magmin’s heart, however. Magmins cool quickly when they die or disintegrate into the surrounding lava. Cracking a @UUID[Compendium.sfrpg.conditions.nEJIWMKbPjqKuelo]{Dead} magmin open reveals only dense rock and, sometimes, a few even denser gemstones. What magmins lack in height, they make up for in weight. They stand roughly 4 feet tall and weigh around 300 pounds due to their rocky makeup.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any land (Plane of Fire)</p>\n<h3>Organization</h3>\n<p>solitary, pair, flow (3-8), eruption (9-24)</p>\n</section>"
+        "value": "<h2>Description</h2>\n<p>The mischievous magmins seek places where their native Plane of Fire touches the Material Plane, allowing them to slip between planes. When a magmin appears on the Material Plane, it does so in places of immense heat, such as within lava. An influx of magmins can disrupt magma flows, causing volcanic eruptions and earthquakes.</p>\n<p>Though few mortals know what causes magmins to begin their exodus from their home plane, the truth is that magmins aren’t very imposing in comparison to other creatures that inhabit the Plane of Fire. Such creatures regularly push magmins around or annex their territory, forcing magmins to migrate, sometimes in large groups. Ousted magmins are untrusting and inquisitive, bombarding intruders with questions in a harsh tone. If magmins dislike the answers to these interrogations, they can become aggressive, even against stronger beings.</p>\n<p>Magmin settlements can be found within the protective crust of magma pillars caused by geyser-like eruptions, where many pools of lava can be found. Magmins enjoy dwelling in these pools and use them for all sorts of purposes, much like other species use hot springs. Unlike other species, magmins also use these pools to kill interlopers and cook them, consuming the ash, bones, and minerals left over as a tasty treat.</p>\n<p>Magma flows through a magmin’s veins and washes over its body, giving off extreme heat. A tiny, fiery heart burns within a magmin, like the core of a terrestrial planet. Few have seen a magmin’s heart, however. Magmins cool quickly when they die or disintegrate into the surrounding lava. Cracking a @UUID[Compendium.sfrpg.conditions.nEJIWMKbPjqKuelo]{Dead} magmin open reveals only dense rock and, sometimes, a few even denser gemstones. What magmins lack in height, they make up for in weight. They stand roughly 4 feet tall and weigh around 300 pounds due to their rocky makeup.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any land (Plane of Fire)</p>\n<h3>Organization</h3>\n<p>solitary, pair, flow (3-8), eruption (9-24)</p>\n</section>",
+        "weight": ""
       },
       "class": "",
       "cr": 3,
       "environment": "",
+      "organization": "",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #16 pg. 57",
@@ -859,30 +903,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -919,6 +970,9 @@
       },
       "senses": "darkvision 60 ft.",
       "size": "small",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

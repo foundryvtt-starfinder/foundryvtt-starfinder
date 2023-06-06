@@ -8,26 +8,11 @@
       "_id": "hdFBucgMiPfdCy6z",
       "name": "Shifting Form (Ex)",
       "type": "feat",
-      "hasAttack": false,
-      "hasDamage": false,
-      "hasUses": false,
       "img": "icons/svg/mystery-man.svg",
-      "isCharged": true,
-      "isOnCooldown": false,
-      "isStack": false,
-      "labels": {
-        "activation": "",
-        "area": "",
-        "damage": "",
-        "duration": "",
-        "featType": "Passive",
-        "range": "",
-        "save": "",
-        "target": ""
-      },
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -49,8 +34,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>A quantum clone’s physical body is inherently unstable. In very stressful situations (such as combat or interacting with the being they were cloned from), the quantum clone has difficulty retaining a fixed form. This might manifest through the growth of extra limbs, rippling skin, or the warping of facial features. During this time and for 1 round after, the quantum clone gains the amorphous defensive ability but takes a -10 penalty to Disguise checks.</p>"
         },
@@ -60,6 +48,7 @@
           "value": null
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -72,6 +61,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -93,39 +83,7 @@
       "_id": "PaepKugZ3uG0o57K",
       "name": "Dagger, ultrathin",
       "type": "weapon",
-      "augmentation": false,
-      "consumable": false,
-      "container": false,
-      "equipment": false,
-      "fusion": true,
-      "goods": false,
-      "hasAttack": true,
-      "hasCapacity": false,
-      "hasDamage": true,
-      "hasUses": false,
-      "hybrid": false,
       "img": "systems/sfrpg/icons/equipment/weapons/dagger.webp",
-      "isCharged": true,
-      "isStack": false,
-      "labels": {
-        "activation": "",
-        "area": "",
-        "damage": "4d4+16",
-        "duration": "",
-        "range": "",
-        "save": "",
-        "target": ""
-      },
-      "magic": false,
-      "shield": false,
-      "spell": false,
-      "storage": {
-        "type": "slot",
-        "affectsEncumbrance": true,
-        "amount": 12,
-        "subtype": "fusion",
-        "weightProperty": "level"
-      },
       "system": {
         "type": "",
         "ability": "",
@@ -139,6 +97,7 @@
           "condition": "",
           "cost": null
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -173,6 +132,8 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
+          "isOpen": true,
           "storage": [
             {
               "type": "slot",
@@ -201,8 +162,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>The thinness and lightness of daggers make them easy to carry or conceal. Ultrathin daggers have sharp, double-edged blades. Zero-edge daggers have blades - crafted with quantum technology - that are so fine, their edges blur. The blade of a molecular rift dagger looks translucent, as if it's made of glass, and its vibrating particles allow the dagger to slice through almost any substance. Most daggers are available with fixed, folding, or retractable blades.</p>"
         },
@@ -211,9 +175,11 @@
           "units": "",
           "value": ""
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
+        "isActive": null,
         "level": 12,
         "modifiers": [],
         "price": 32800,
@@ -306,12 +272,14 @@
           "wideLine": false
         },
         "quantity": null,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": null,
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -319,6 +287,7 @@
         },
         "source": "Core Rulebook, P. 171",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -334,48 +303,13 @@
         },
         "weaponCategory": "uncategorized",
         "weaponType": "basicM"
-      },
-      "technological": false,
-      "upgrade": false,
-      "weapon": false
+      }
     },
     {
       "_id": "oZeBGHDM0qoyCcEZ",
       "name": "Arc pistol, aurora",
       "type": "weapon",
-      "augmentation": false,
-      "consumable": false,
-      "container": false,
-      "equipment": false,
-      "fusion": true,
-      "goods": false,
-      "hasAttack": true,
-      "hasCapacity": true,
-      "hasDamage": true,
-      "hasUses": false,
-      "hybrid": false,
       "img": "systems/sfrpg/icons/equipment/weapons/arc-pistol.webp",
-      "isCharged": true,
-      "isStack": false,
-      "labels": {
-        "activation": "",
-        "area": "",
-        "damage": "3d6+13",
-        "duration": "",
-        "range": "50 Feet",
-        "save": "",
-        "target": ""
-      },
-      "magic": false,
-      "shield": false,
-      "spell": false,
-      "storage": {
-        "type": "slot",
-        "affectsEncumbrance": true,
-        "amount": 13,
-        "subtype": "fusion",
-        "weightProperty": "level"
-      },
       "system": {
         "type": "",
         "ability": "",
@@ -389,6 +323,7 @@
           "condition": "",
           "cost": null
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -423,6 +358,8 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
+          "isOpen": true,
           "storage": [
             {
               "type": "slot",
@@ -451,8 +388,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>Arc pistols fire deadly, stunning blasts of electricity at ranged targets. They have a two-pronged emitter that directs the electrical blast and a bulky chamber that holds the capacitor.</p>"
         },
@@ -461,9 +401,11 @@
           "units": "",
           "value": ""
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
+        "isActive": null,
         "level": 13,
         "modifiers": [],
         "price": 45700,
@@ -556,12 +498,14 @@
           "wideLine": false
         },
         "quantity": null,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "ft",
           "value": 50
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -569,6 +513,7 @@
         },
         "source": "Core Rulebook, P. 173",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -584,35 +529,17 @@
         },
         "weaponCategory": "uncategorized",
         "weaponType": "smallA"
-      },
-      "technological": false,
-      "upgrade": false,
-      "weapon": false
+      }
     },
     {
       "_id": "LWYGyUkoIm20EmId",
       "name": "Quantum Mimicry (Su)",
       "type": "feat",
-      "hasAttack": false,
-      "hasDamage": false,
-      "hasUses": false,
       "img": "icons/svg/mystery-man.svg",
-      "isCharged": true,
-      "isOnCooldown": false,
-      "isStack": false,
-      "labels": {
-        "activation": "",
-        "area": "",
-        "damage": "",
-        "duration": "",
-        "featType": "Passive",
-        "range": "",
-        "save": "",
-        "target": ""
-      },
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -634,8 +561,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>As a being of infinite possibilities, a quantum clone can mimic actions taken by others. As a reaction, every 1d4 rounds when a creature the quantum clone can see uses a spell, spell-like ability, or feat, the quantum clone can gain use of that spell or ability until the end of its next turn (even if it doesn’t meet the prerequisites). The spell, spell-like ability, or feat must be one that requires an action to perform (such as Amplified Glitch but not Great Fortitude). The quantum clone uses its CR as its caster level if necessary.</p>"
         },
@@ -645,6 +575,7 @@
           "value": null
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -657,6 +588,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -678,26 +610,11 @@
       "_id": "MrJz5AB8ep0hsxfc",
       "name": "Existential Paralysis (Ex)",
       "type": "feat",
-      "hasAttack": false,
-      "hasDamage": false,
-      "hasUses": false,
       "img": "icons/svg/mystery-man.svg",
-      "isCharged": true,
-      "isOnCooldown": false,
-      "isStack": false,
-      "labels": {
-        "activation": "",
-        "area": "",
-        "damage": "",
-        "duration": "",
-        "featType": "Passive",
-        "range": "",
-        "save": "",
-        "target": ""
-      },
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -719,8 +636,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>The first time a cloned creature comes within 30 feet and line of sight of their quantum clone, they must succeed at a DC 21 Will save or be @UUID[Compendium.sfrpg.conditions.NV4qXRDgb7zTNkW2]{Paralyzed} with dread for 1d4 rounds.</p>"
         },
@@ -730,6 +650,7 @@
           "value": null
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -742,6 +663,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -763,12 +685,7 @@
       "_id": "FmoTcnxfwXcwekJh",
       "name": "Battery, High-Capacity",
       "type": "goods",
-      "hasAttack": false,
-      "hasDamage": false,
       "img": "systems/sfrpg/icons/equipment/weapons/battery-high-capacity.webp",
-      "isCharged": true,
-      "isStack": false,
-      "labels": {},
       "system": {
         "type": "",
         "attributes": {
@@ -796,15 +713,19 @@
         },
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 40</p>"
         },
+        "equippable": false,
         "equipped": false,
         "identified": true,
         "level": 4,
         "modifiers": [],
         "price": 330,
         "quantity": "1",
+        "quantityPerPack": 1,
         "source": "Core Rulebook"
       }
     },
@@ -812,36 +733,21 @@
       "_id": "gFIFc0TWXBY6LjO7",
       "name": "AbadarCorp travel suit, Platinium",
       "type": "equipment",
-      "hasAttack": false,
-      "hasCapacity": false,
-      "hasDamage": false,
-      "hasUses": false,
       "img": "systems/sfrpg/icons/equipment/armor/abadarcorp_travel_suit_platinium.webp",
-      "isCharged": true,
-      "isStack": false,
-      "labels": {
-        "activation": "",
-        "area": "",
-        "damage": "",
-        "duration": "",
-        "eac": "12 EAC",
-        "kac": "13 KAC",
-        "range": "",
-        "save": "",
-        "target": ""
-      },
       "system": {
         "type": "",
         "ability": null,
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -884,6 +790,8 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
+          "isOpen": true,
           "storage": [
             {
               "type": "slot",
@@ -915,8 +823,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>Executives popularized these light armor business suits for boardrooms and diplomatic meetings. Contingent force fields and concealed rebreathers protect the wearer in hostile environmental conditions. Higher grades of travel suits offer more protection—along with a designer label.</p>"
         },
@@ -925,14 +836,17 @@
           "units": "",
           "value": null
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
+        "isActive": null,
         "level": 12,
         "modifiers": [],
         "price": 34600,
         "proficient": true,
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
@@ -940,6 +854,7 @@
           "value": null
         },
         "reach": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -947,6 +862,7 @@
         },
         "size": "",
         "source": "",
+        "specialMaterials": {},
         "speed": "",
         "strength": 0,
         "target": {
@@ -968,12 +884,14 @@
   "prototypeToken": {
     "name": "Quantum Clone",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -1002,11 +920,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -1024,6 +939,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -1074,8 +990,14 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
+      "baseSpellDC": {
+        "base": 0
+      },
       "cmd": {
         "min": 0,
         "tooltip": [],
@@ -1132,7 +1054,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 30
@@ -1141,7 +1064,8 @@
         "special": "original base: 30 ft.",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -1201,12 +1125,26 @@
       "alignment": "N",
       "aura": "",
       "biography": {
+        "age": 0,
+        "dateOfBirth": "",
+        "deity": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
+        "height": "",
+        "homeWorld": "",
+        "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>Quantum clones are near-exact copies of living beings, usually created by accident through the misuse of quantum technology, though some powerful technomancers have claimed they’ve duplicated the process through magic. Since quantum clones are very rare, they have yet to be studied in detail. Some physicists believe they are composed of microscopic virtual particles formed by the fluctuation of spacetime (called “quantum foam”) writ large. Others believe quantum clones were ripped from an alternate dimension.</p>\n<p>Whatever the case, a creature’s quantum clone has the exact appearance, personality, and memories of the original creature at the time of its cloning. A quantum clone isn’t inherently evil, nor do they necessarily wish others harm. However, they initially believe themself the being they were cloned from, which occasionally results in altercations. When faced with their double, the quantum clone quickly realizes they’re an unstable copy. While this revelation sometimes leads to great emotional distress, most quantum clones attempt to forge new lives far away from those who might recognize them.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<h3>Organization</h3>\n<p>solitary</p>\n</section>"
+        "value": "<h2>Description</h2>\n<p>Quantum clones are near-exact copies of living beings, usually created by accident through the misuse of quantum technology, though some powerful technomancers have claimed they’ve duplicated the process through magic. Since quantum clones are very rare, they have yet to be studied in detail. Some physicists believe they are composed of microscopic virtual particles formed by the fluctuation of spacetime (called “quantum foam”) writ large. Others believe quantum clones were ripped from an alternate dimension.</p>\n<p>Whatever the case, a creature’s quantum clone has the exact appearance, personality, and memories of the original creature at the time of its cloning. A quantum clone isn’t inherently evil, nor do they necessarily wish others harm. However, they initially believe themself the being they were cloned from, which occasionally results in altercations. When faced with their double, the quantum clone quickly realizes they’re an unstable copy. While this revelation sometimes leads to great emotional distress, most quantum clones attempt to forge new lives far away from those who might recognize them.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<h3>Organization</h3>\n<p>solitary</p>\n</section>",
+        "weight": ""
       },
       "class": "",
       "cr": 13,
       "environment": "",
+      "organization": "",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #13 pg. 60",
@@ -1221,6 +1159,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1231,6 +1170,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1241,6 +1181,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 28,
         "ranks": 28,
@@ -1251,6 +1192,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1261,6 +1203,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1271,6 +1214,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1281,6 +1225,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 28,
         "ranks": 28,
@@ -1291,6 +1236,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1301,6 +1247,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1311,6 +1258,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 23,
         "ranks": 23,
@@ -1321,6 +1269,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1331,6 +1280,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 23,
         "ranks": 23,
@@ -1341,6 +1291,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 23,
         "ranks": 23,
@@ -1351,6 +1302,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 23,
         "ranks": 23,
@@ -1361,6 +1313,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1371,6 +1324,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1382,6 +1336,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1392,6 +1347,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1402,6 +1358,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1412,6 +1369,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1421,30 +1379,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -1477,6 +1442,9 @@
       },
       "senses": "darkvision 60 ft.",
       "size": "medium",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }
