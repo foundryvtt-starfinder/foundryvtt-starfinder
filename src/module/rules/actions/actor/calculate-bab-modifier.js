@@ -38,7 +38,7 @@ export default function(engine) {
         });
         filteredModifiers = context.parameters.stackModifiers.process(filteredModifiers, context);
 
-        let bonus = Object.entries(filteredModifiers).reduce((sum, mod) => {
+        const bonus = Object.entries(filteredModifiers).reduce((sum, mod) => {
             if (mod[1] === null || mod[1].length < 1) return sum;
 
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
@@ -52,7 +52,6 @@ export default function(engine) {
             return sum;
         }, 0);
 
-        data.attributes.bab = data.attributes.baseAttackBonus.value + bonus;
         data.attributes.baseAttackBonus.value += bonus;
 
         return fact;

@@ -15,6 +15,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -36,8 +37,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>(EX)</p>\n<p>The creature’s body is malleable and shapeless. It does not take double damage from critical hits, but it is affected by critical hit effects normally.</p>\n<hr />"
         },
@@ -47,6 +51,7 @@
           "value": null
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -59,6 +64,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -94,6 +100,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -128,6 +135,8 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
+          "isOpen": true,
           "storage": [
             {
               "type": "slot",
@@ -156,8 +165,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
@@ -166,9 +178,11 @@
           "units": "",
           "value": null
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
+        "isActive": null,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -261,12 +275,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -274,6 +290,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -302,6 +319,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -323,8 +341,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>A rebuilt can neither wield weapons nor use items that require an action to activate.</p>"
         },
@@ -334,6 +355,7 @@
           "value": null
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -346,6 +368,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -367,12 +390,14 @@
   "prototypeToken": {
     "name": "Rebuilt",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -401,11 +426,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -423,6 +445,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -473,8 +496,14 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
+      "baseSpellDC": {
+        "base": 0
+      },
       "cmd": {
         "min": 0,
         "tooltip": [],
@@ -531,7 +560,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 15
@@ -540,7 +570,8 @@
         "special": "original base: 15 ft.",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -600,12 +631,26 @@
       "alignment": "CN",
       "aura": "",
       "biography": {
+        "age": 0,
+        "dateOfBirth": "",
+        "deity": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
+        "height": "",
+        "homeWorld": "",
+        "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>Modern medical equipment, like any technology, can malfunction, sometimes resulting in further injury to a patient or even a fatality. Rarer still is the catastrophic glitch that results in a fate worse than death. The tortured monstrosities known as rebuilt are created when a technological medical procedure goes horribly awry, irreparably fracturing the victim’s genetic code and reshaping the patient’s body into something that barely resembles its previous form.</p>\n<p>Creatures that have been rebuilt in this way have limbs that jut in odd directions, and their flesh can be turned inside out, exposing misshapen organs to the air. Much of a rebuilt’s biology doesn’t function as it did for its previous form. Its eyeballs might serve as its pulmonary organs, while it sees out of its toenails. In addition, because of its perpetual agony and the rearrangement of its physiology, a rebuilt can speak only in tortured moans and screams. Strangely, this reshaping doesn’t make a rebuilt more susceptible to damage; pain effects pale in comparison to its constant agony, and its often-ossified flesh protects it from mundane harm.</p>\n<p>A rebuilt has no capacity for higher reasoning, and it lashes out at anything in its way with ruinously transformed limbs.</p>\n<p>Rebuilt are very rare, as horrified hospital personnel usually euthanize such unfortunates as soon as they arise. They mostly appear in ruined areas where medical equipment has been left unattended or in places that are exposed to high doses of radiation or mystical forces.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any ruins (Nejeor VI)</p>\n<h3>Organization</h3>\n<p>solitary or pair</p>\n</section>"
+        "value": "<h2>Description</h2>\n<p>Modern medical equipment, like any technology, can malfunction, sometimes resulting in further injury to a patient or even a fatality. Rarer still is the catastrophic glitch that results in a fate worse than death. The tortured monstrosities known as rebuilt are created when a technological medical procedure goes horribly awry, irreparably fracturing the victim’s genetic code and reshaping the patient’s body into something that barely resembles its previous form.</p>\n<p>Creatures that have been rebuilt in this way have limbs that jut in odd directions, and their flesh can be turned inside out, exposing misshapen organs to the air. Much of a rebuilt’s biology doesn’t function as it did for its previous form. Its eyeballs might serve as its pulmonary organs, while it sees out of its toenails. In addition, because of its perpetual agony and the rearrangement of its physiology, a rebuilt can speak only in tortured moans and screams. Strangely, this reshaping doesn’t make a rebuilt more susceptible to damage; pain effects pale in comparison to its constant agony, and its often-ossified flesh protects it from mundane harm.</p>\n<p>A rebuilt has no capacity for higher reasoning, and it lashes out at anything in its way with ruinously transformed limbs.</p>\n<p>Rebuilt are very rare, as horrified hospital personnel usually euthanize such unfortunates as soon as they arise. They mostly appear in ruined areas where medical equipment has been left unattended or in places that are exposed to high doses of radiation or mystical forces.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any ruins (Nejeor VI)</p>\n<h3>Organization</h3>\n<p>solitary or pair</p>\n</section>",
+        "weight": ""
       },
       "class": "",
       "cr": 7,
       "environment": "",
+      "organization": "",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #4 pg. 60",
@@ -620,6 +665,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 14,
         "ranks": 14,
@@ -630,6 +676,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 19,
         "ranks": 19,
@@ -640,6 +687,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -650,6 +698,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -660,6 +709,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -670,6 +720,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -680,6 +731,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -690,6 +742,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -700,6 +753,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 14,
         "ranks": 14,
@@ -710,6 +764,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -720,6 +775,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -730,6 +786,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -740,6 +797,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 14,
         "ranks": 14,
@@ -750,6 +808,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -760,6 +819,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -770,6 +830,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -781,6 +842,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -791,6 +853,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -801,6 +864,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -811,6 +875,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 19,
         "ranks": 19,
@@ -820,30 +885,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -876,6 +948,9 @@
       },
       "senses": "darkvision 60 ft.",
       "size": "medium",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }
