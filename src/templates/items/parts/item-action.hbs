@@ -5,6 +5,7 @@
     {{else}}
         <h3 class="bubble-header">{{localize "SFRPG.Items.Action.Details"}}</h3>
     {{/if}}
+    {{console this}}
 
     <div class="bubble-info">
         {{!-- Action Type --}}
@@ -102,6 +103,13 @@
                     <input type="text" name="system.formula" value="{{itemData.formula}}" placeholder="Formula"/>
                 </div>
             </div>
+
+            {{!-- Conditional Weapon Properties --}}
+            {{#unless (leftOrRight (eq item.type "weapon") (eq item.type "shield"))}}
+                {{#if (leftOrRight (eq itemData.actionType "mwak") (eq itemData.actionType "rwak"))}}
+                    {{> "systems/sfrpg/templates/items/parts/weapon-properties.hbs"}}
+                {{/if}}
+            {{/unless}}
         {{/if}}
     </div>
 </div>
