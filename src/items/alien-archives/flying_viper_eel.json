@@ -20,6 +20,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -102,6 +103,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -184,6 +186,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "",
@@ -277,6 +280,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -354,10 +358,10 @@
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
-    "elevation": null,
     "height": 1,
     "light": {
       "alpha": 0.5,
@@ -383,11 +387,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -405,11 +406,10 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
-    "width": 1,
-    "x": null,
-    "y": null
+    "width": 1
   },
   "system": {
     "abilities": {
@@ -457,12 +457,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -593,8 +599,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<h2>Description</h2>\n<p>Within the swirling clouds of @UUID[Compendium.sfrpg.setting.2K7muQyxlXW8wqb3]{Bretheda}, the living float and the dead sink, but usually not before a swarm of flying viper eels can scavenge the bodies. A single flying viper eel looks to be nothing more than a long, flat, serpentine creature with a pointed snout, sharp teeth, no eyes, and gossamer-like strands flowing around its body. It stays buoyant with natural hydrogen gas bladders just under the skin along its spine. A flying viper eel excretes this hydrogen in highly pressurized streams from minuscule orifices in order to navigate a gas giant’s clouds. Its enlarged, ribbon-like cilia function as sails, enabling the viper eel to ride air currents toward its next meal.</p>\n<p>Instinct has taught viper eels to work together as a single unit, traveling the skies of @UUID[Compendium.sfrpg.setting.2K7muQyxlXW8wqb3]{Bretheda} as one large swarm to better take down larger prey. First, they let their venom slow the target’s reactions, leaving it unable to fight back. The eels heightened senses and agility allow them to detect potential sluggish victims hundreds of feet away, quickly change direction, and rush toward the new source of food. Though these aggressive swarms once posed a substantial threat to Brethedan life, evolutionary factors and encroaching civilization have forced them to act more as scavengers.</p>\n<p>Through their expertise in biotechnology, barathus have developed organic devices to repel these flying eels-these devices exude a strange-smelling musk and vibrate at a frequency the viper eels find disturbing, but the results are unpredictable. On the other hand, haans hunt the creatures as easy game, using their firespray to roast swarms of viper eels, while others catch the roasted creatures in handmade nets before they plummet too deep into Bretheda’s atmosphere. Once prolific, viper eels are quickly becoming endangered, even as many swarms have taken to infesting floating platforms at Bretheda’s surface and made their way to the gas giant’s moons, scavenging from trash bins and hunting other urban vermin.</p>",
@@ -604,6 +613,10 @@
       "cr": 10,
       "environment": "any air (Bretheda)",
       "organization": "solitary",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #29 pg. 56",
@@ -907,6 +920,9 @@
       },
       "senses": "blindsight (vibration) 60 ft., sightless",
       "size": "tiny",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

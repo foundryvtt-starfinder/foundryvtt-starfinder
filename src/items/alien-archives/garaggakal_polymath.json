@@ -57,6 +57,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -86,6 +87,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -203,6 +205,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "fort",
           "dc": "20",
@@ -210,6 +213,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -238,6 +242,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "action",
@@ -265,6 +270,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -291,6 +297,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "fort",
           "dc": "20",
@@ -319,6 +326,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -340,6 +348,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -366,6 +375,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -394,6 +404,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "full",
@@ -415,6 +426,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -441,6 +453,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -469,6 +482,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -490,6 +504,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -516,6 +531,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -544,6 +560,7 @@
     "bar2": {
       "attribute": "attributes.rp"
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -572,11 +589,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -594,6 +608,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 2
@@ -644,12 +659,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -713,7 +734,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 30
@@ -722,7 +744,8 @@
         "special": "original base: 30 ft.; original special: fly 60 ft. (Su, perfect)",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -784,8 +807,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<h2>Description</h2>\n<p>@UUID[Compendium.sfrpg.setting.nb5A5e7HqTnvVjtX]{The Drift} remains very much a mystery to explorers and scholars in the Pact Worlds, and scientists have only recently discovered life-forms native to it. The garaggakal, sometimes called a “Drift wraith” by those spacefarers fortunate enough to have survived an encounter with these predators, is one such species. A garaggakal is mostly humanoid in form, with rubbery, yellowish skin, translucent wings, and a long reptilian tail. A garaggakal’s head is little more than a gaping, lamprey-like mouth filled with curved teeth. An average garaggakal has a 20-foot wingspan and stands around 8 feet tall, though its tail can more than double that length, and it weighs approximately 400 pounds. A garaggakal polymath can be 15 feet tall or more, weighing as much as 1,000 pounds.</p>\n<p>Garaggakals freely roam the Drift on their diaphanous wings, hunting whatever living prey they can find. Garaggakals seem to divide all life into two categories: predators (such as themselves) and prey (everything else). To a garaggakal, the best way to learn more about a newly discovered species is to kill, dissect, and eat it—and not necessarily in that order.</p>\n<p>Garaggakals are ambush predators. When a garaggakal encounters a living creature in the Drift, it stalks its prey, using stealth and its innate ability to phase through solid matter to approach undetected, before draining its victim’s life force from a distance. Garaggakals have been known to stalk entire starships, phasing through a vessel’s hull to hunt and feed on the crew inside.</p>\n<p>When it comes time to reproduce, a garaggakal seeks out an area of intense radiation somewhere in the Drift, where it absorbs enough energy to undergo cytogenesis, literally creating new cells from the Drift’s planar energies to “build” its offspring. Upon completion, the process results in a fully grown adult garaggakal.</p>\n<p>Garaggakals increase in size and strength as they age. A garaggakal can live for centuries, growing to more than twice its normal adult size. Called garaggakal polymaths, these elder creatures have a burning curiosity that drives them on ever-longer journeys through the Drift.</p>",
@@ -795,6 +821,10 @@
       "cr": 14,
       "environment": "any (the Drift)",
       "organization": "solitary",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AA2 pg. 54",
@@ -1035,30 +1065,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -1093,6 +1130,9 @@
       },
       "senses": "blindsight (emotion) 60 ft., darkvision 60 ft., sense through (emotion) 60 ft.",
       "size": "large",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }
