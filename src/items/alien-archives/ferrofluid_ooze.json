@@ -12,6 +12,7 @@
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -197,6 +198,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -225,6 +227,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "move",
@@ -307,6 +310,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -381,6 +385,7 @@
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -458,6 +463,7 @@
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -486,11 +492,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -508,6 +511,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -558,12 +562,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -694,8 +704,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<h2>Ferrofluid Ooze</h2>\n<p>Ferromagnetic fluid, or ferrofluid, has long been a staple of spacefaring technology. Societies across the galaxy originally created this utilitarian substance by suspending coated nanometer-sized particles of magnetite in viscous liquid. As necessity demanded invention, later iterations of the magnetic liquid began to take on an almost lifelike temperament. The substance increasingly exhibited erratic behavior as engineers tinkered with heavily magnetized liquids, using experimental bioengineered substances to suspend magnetic particles. The final result of these developments was an emergent, though limited, sentience within certain pools of ferrofluid—a consciousness solely consumed with the search for ever-stronger magnetic fields.</p>\n<p>Ferrofluid oozes can form virtually anywhere, but they are drawn to urban areas filled with magnets and ferrous metals and find solace in any place that thrums with electromagnetism. Their dark, aqueous bodies skulk low to the ground, and they often hide away beside magnetic machines in industrial districts or aboard starships and space stations. A few lucky oozes find caverns of naturally magnetized ore. Wherever the oozes travel, their magnetic properties reduce the vibrations of their movement, making them difficult to detect until their magnetic fields and unmistakable magnetic pull betray their presence. Ferrofluid oozes are usually about 3 feet in diameter.</p>\n<p>While not inherently ill meaning, ferrofluid oozes often are at odds with the owners of the magnetic objects they covet. Usually utterly indifferent to organic life, ferrofluid oozes seek only to collect magnetic material— though they do defend themselves, and can attack when stubborn life-forms refuse to relinquish their magnetic goods. Ferrofluid oozes that collect a large amount of debris are even on occasion mistaken for scavenger slimes.</p>\n<p>As ferrofluid oozes skulk around places profuse with magnetized materials, they occasionally leave behind droplets of magnetic fluid. So long as these droplets remain in the magnetized environments provided by their parent, their size and magnetic power grow in parallel with their access to additional magnetized material. Due to this propagation, it is not unusual to see several ferrofluid oozes enjoying the same magnetically charged environment, so experienced adventurers are wary when they find only a single ooze in such a place. Given enough time and magnetic material, multiple oozes can form into a single, much larger ferrofluid magneto-cluster around 8 feet in diameter.</p>",
@@ -705,6 +718,10 @@
       "cr": 2,
       "environment": "any",
       "organization": "solitary",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AA3 pg. 34",
@@ -1010,6 +1027,9 @@
       },
       "senses": "blindsight (magnetism) 60 ft., sightless",
       "size": "medium",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

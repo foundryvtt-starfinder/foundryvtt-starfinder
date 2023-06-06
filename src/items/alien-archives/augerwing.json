@@ -22,6 +22,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -56,6 +57,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": []
         },
@@ -74,6 +76,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -184,12 +187,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -197,6 +202,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -232,6 +238,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -266,6 +273,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": []
         },
@@ -292,6 +300,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -402,12 +411,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -415,6 +426,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -450,6 +462,7 @@
           "condition": "",
           "cost": 1
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -484,6 +497,7 @@
         "chatFlavor": "Embalming enzymes",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -513,6 +527,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -623,12 +638,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "ft",
           "value": 30
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -636,6 +653,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -664,6 +682,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -685,6 +704,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -711,6 +731,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -732,12 +753,14 @@
   "prototypeToken": {
     "name": "Augerwing",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -768,7 +791,6 @@
     "lockRotation": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -786,6 +808,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -836,12 +859,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -899,7 +928,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 20
@@ -908,7 +938,8 @@
         "special": "original base: 20 ft; original special: fly 50 ft. (Ex, perfect) +24 Acrobatics, swim 10 ft. +19 Athletics",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -970,8 +1001,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<p>An augerwing is a tall, lean bird with two sets of wings and eight legs. Its long, sinuous, rasp-covered beak splits into multiple sections, each of which sports numerous pores. Colored bright yellow or red, each augerwing’s beak displays a pattern of spots unique to that individual. An augerwing has eight spindly legs and two sets of wings with muted brown, gray, and white plumage, keeping its secondary wingspan close to its body when not in use. By switching between wing pairs while flying, an augerwing moves through the air in a hypnotic, twisting spiral pattern that has endeared @UUID[Compendium.sfrpg.setting.VQrVznzrr85I90TI]{Pharasmin} cultures to this strange avian.</p>\n<p>When hunting, an augerwing approaches its prey in a rapid, spinning dive. Strong muscular and skeletal structures help the bird muster the power to drill into their target’s flesh. It then continues to twist and stab, injecting fixative enzymes into its prey to limit mobility.</p>\n<p>Groups of augerwings use large animal carcasses as nests and lay their tiny eggs inside the corpse’s bones; after the eggs have hatched, these hollowed-out bones resemble flutes and can fetch a high price. The birds have spread thourough Near Space and have mostly resisted domestication efforts.</p>",
@@ -981,6 +1015,10 @@
       "cr": 5,
       "environment": "any land or sky",
       "organization": "solitary, pair, quiver (3-10), flight (11-30)",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #36 pg. 57",
@@ -1242,30 +1280,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -1296,6 +1341,9 @@
       },
       "senses": "low-light vision",
       "size": "medium",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

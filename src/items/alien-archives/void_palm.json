@@ -15,6 +15,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -36,8 +37,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>When seen in black and white, such as with darkvision in darkness, the pattern on a void palm fronds resembles a dim and distant field of stars. The effect is disorienting. As long as the void palm is in an area of darkness, it has concealment against creatures observing it with darkvision, and such creatures are flat-footed against the palm's attacks.</p>"
         },
@@ -47,6 +51,7 @@
           "value": null
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -59,6 +64,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -94,6 +100,7 @@
           "condition": "",
           "cost": 1
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -128,6 +135,8 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
+          "isOpen": true,
           "storage": []
         },
         "critical": {
@@ -145,8 +154,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
@@ -155,9 +167,11 @@
           "units": "",
           "value": ""
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
+        "isActive": null,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -247,12 +261,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": null,
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -260,6 +276,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -295,6 +312,7 @@
           "condition": "",
           "cost": 1
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -329,6 +347,8 @@
         "chatFlavor": "3 lashes",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
+          "isOpen": true,
           "storage": []
         },
         "critical": {
@@ -346,8 +366,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
@@ -356,9 +379,11 @@
           "units": "",
           "value": ""
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
+        "isActive": null,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -448,12 +473,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "ft",
           "value": 10
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -461,6 +488,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -489,6 +517,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "full",
@@ -510,8 +539,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>Once per day as a full action, a void palm can create a dark, zero-gravity area in a 20-foot-radius sphere centered on itself, negating the effects of gravity and nonmagical light sources in that area. Magical light sources in the area work normally. When the void palm uses this ability, each other creature in the area must succeed at a DC 17 Reflex saving throw or become off-kilter. The effect doesn’t move with the void palm and lasts for 10 minutes.</p>"
         },
@@ -521,6 +553,7 @@
           "value": ""
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -533,6 +566,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "reflex",
           "dc": "17",
@@ -554,12 +588,14 @@
   "prototypeToken": {
     "name": "Void Palm",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -588,11 +624,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -610,6 +643,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 2
@@ -660,8 +694,14 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
+      "baseSpellDC": {
+        "base": 0
+      },
       "cmd": {
         "min": 0,
         "tooltip": [],
@@ -718,7 +758,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 10
@@ -727,7 +768,8 @@
         "special": "original base: 10 ft.",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -751,12 +793,26 @@
       "alignment": "N",
       "aura": "",
       "biography": {
+        "age": 0,
+        "dateOfBirth": "",
+        "deity": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
+        "height": "",
+        "homeWorld": "",
+        "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<h3>Description</h3>\n<p>The fan-shaped void palm’s broad fronds are a deep, mottled red, and they are in constant motion, as though stirred by a gentle breeze. This plant creature is exceedingly rare, and the lack of information about its biology allows it to surprise oblivious explorers. When a suitably large living creature wanders nearby, a void palm plunges the area around it into magical darkness while simultaneously interrupting gravity’s normal function. Creatures caught in this area might become unable to propel themselves out of range of the void palm’s lashing fronds-something the plant deliberately makes more difficult by using its leaves to sweep the area around it clear of debris that might be used as handholds or counterbalance.</p>\n<p>Though they are rare, void palms are found across the galaxy. Their unique method of reproduction lends itself well to a slow but inexorable colonization of the stars. Once a year, a void palm produces a brilliant blue seed at the end of each of its stalks over the course of a week, and then it flings its progeny into the sky. The remarkable seeds each carry the void palm’s supernatural ability to ignore gravity, allowing the momentum imparted from their parent to carry them off the void palm’s planet and onto new ones. This unique ability makes void palm seeds rare and expensive curios.</p>\n<p>The typical void palm is 15 feet tall and weighs around 1,000 pounds.</p>\n<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any land</p>\n<h3>Organization</h3>\n<p>solitary</p>\n</section>"
+        "value": "<h2>Description</h2>\n<h3>Description</h3>\n<p>The fan-shaped void palm’s broad fronds are a deep, mottled red, and they are in constant motion, as though stirred by a gentle breeze. This plant creature is exceedingly rare, and the lack of information about its biology allows it to surprise oblivious explorers. When a suitably large living creature wanders nearby, a void palm plunges the area around it into magical darkness while simultaneously interrupting gravity’s normal function. Creatures caught in this area might become unable to propel themselves out of range of the void palm’s lashing fronds-something the plant deliberately makes more difficult by using its leaves to sweep the area around it clear of debris that might be used as handholds or counterbalance.</p>\n<p>Though they are rare, void palms are found across the galaxy. Their unique method of reproduction lends itself well to a slow but inexorable colonization of the stars. Once a year, a void palm produces a brilliant blue seed at the end of each of its stalks over the course of a week, and then it flings its progeny into the sky. The remarkable seeds each carry the void palm’s supernatural ability to ignore gravity, allowing the momentum imparted from their parent to carry them off the void palm’s planet and onto new ones. This unique ability makes void palm seeds rare and expensive curios.</p>\n<p>The typical void palm is 15 feet tall and weighs around 1,000 pounds.</p>\n<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any land</p>\n<h3>Organization</h3>\n<p>solitary</p>\n</section>",
+        "weight": ""
       },
       "class": "",
       "cr": 7,
       "environment": "",
+      "organization": "",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #8 pg. 60",
@@ -771,6 +827,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 19,
         "ranks": 19,
@@ -781,6 +838,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 19,
         "ranks": 19,
@@ -791,6 +849,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -801,6 +860,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -811,6 +871,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -821,6 +882,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -831,6 +893,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -841,6 +904,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -851,6 +915,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -861,6 +926,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -871,6 +937,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -881,6 +948,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -891,6 +959,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 14,
         "ranks": 14,
@@ -901,6 +970,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -911,6 +981,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -921,6 +992,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -932,6 +1004,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -942,6 +1015,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -952,6 +1026,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 14,
         "ranks": 14,
@@ -962,6 +1037,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 19,
         "ranks": 19,
@@ -971,30 +1047,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -1025,6 +1108,9 @@
       },
       "senses": "darkvision 60 ft., low-light vision",
       "size": "large",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

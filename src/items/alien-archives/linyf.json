@@ -8,6 +8,7 @@
       "_id": "0kqRqC45mgJqWqOV",
       "name": "Fiber Lash (plus Fibrous Growth And Grab)",
       "type": "weapon",
+      "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -21,6 +22,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -55,6 +57,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -84,8 +87,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
@@ -94,6 +100,7 @@
           "units": "",
           "value": null
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
@@ -190,12 +197,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -203,6 +212,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -224,12 +234,14 @@
       "_id": "OCVsXPGSM3dOazdN",
       "name": "Silken Snare (Ex)",
       "type": "feat",
+      "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
         "ability": null,
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "move",
@@ -251,8 +263,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>As a move action, a linyf can secrete sticky, threadlike fibers in a 10-foot-radius burst. This area counts as difficult terrain for all creatures except for the linyf, and the linyf gains a +4 circumstance bonus to attack rolls to grab or maintain a grapple on a creature in the area of the silken snare. Creatures exposed to a linyf’s silken snare who aren’t wearing protective gear (such as armor) must attempt a DC 12 Fortitude save to avoid contracting fibrous growth. A linyf’s silken snares remain until it moves. Fibrous Growth Type @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.gBhZDjh30JEyh7DY]{Disease} (injury); Save Fortitude DC 12 Track physical; Frequency 1/day Effect no latent state Cure 2 consecutive saves</p>"
         },
@@ -275,6 +290,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -296,12 +312,14 @@
       "_id": "PvFo3ciY4EG1DrX4",
       "name": "Fibrous Growth (Poison)",
       "type": "feat",
+      "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
         "ability": null,
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -323,8 +341,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<h2>Fiberous Growth</h2>\n<p><strong>Type</strong>&nbsp;@UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.gBhZDjh30JEyh7DY]{Disease} (injury);&nbsp;<strong>Save</strong>&nbsp;Fortitude DC 12</p>\n<p><strong>Track</strong>&nbsp;physical;&nbsp;<strong>Frequency</strong>&nbsp;1/day</p>\n<p><strong>Effect</strong>&nbsp;no latent state</p>\n<p><strong>Cure</strong> 2 consecutive saves</p>"
         },
@@ -347,6 +368,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -368,12 +390,14 @@
   "prototypeToken": {
     "name": "Linyf",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -402,11 +426,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -424,6 +445,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 2
@@ -474,12 +496,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -537,7 +565,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 20
@@ -546,7 +575,8 @@
         "special": "original base: 20 ft.; original special: climb 10 ft.",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -606,12 +636,26 @@
       "alignment": "N",
       "aura": "",
       "biography": {
+        "age": 0,
+        "dateOfBirth": "",
+        "deity": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
+        "height": "",
+        "homeWorld": "",
+        "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>Linyfs are invasive plants with unusual life cycles. Their translucent seeds travel alongside charged particles with the solar winds that move across the void of space, frequently attaching to starships or falling in a near-invisible rain onto a planet. In the presence of light, moisture, and heat, the seeds germinate into wide masses of silky strands with solid cores of plant matter. Linyfs are driven to grow and reproduce. They are highly susceptible to cold, and significant drops in temperature often kill budding linyf colonies.</p>\n<p>A linyf is a collection of thick, translucent vines that resemble tentacles, surrounding a central mass. These vines sprout sticky fibers that can transmit a deadly @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.gBhZDjh30JEyh7DY]{Disease}. Curious creatures who inspect a linyf lying in wait notice that it radiates a pleasant warmth but is extraordinarily sticky to the touch. The vines then reach out to slash at the victim, who soon discovers that their wounds eventually close up, though not as a result of the healing process. The affliction initially causes transparent fibers to sprout from the creature’s skin, suturing the damaged tissue. But after a period of sickness and constant itching as more threads burst out of the creature’s body, the victim typically falls comatose and dies.</p>\n<p>Despite the aggressive affliction their fibers induce, linyfs aren’t carnivorous and receive their nutrition through photosynthesis, like most other plants. Several months after maturation, a healthy linyf produces a few dozen seeds that it propels into the atmosphere with amazing force and speed. Most of these seeds return to the surface of the same world (with a few catching currents of wind), but a few achieve exit velocity and go on to infest other planets.</p>\n<section>\n<h2>Fiberous Growth</h2>\n<p><strong>Type</strong>&nbsp;@UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.gBhZDjh30JEyh7DY]{Disease} (injury);&nbsp;<strong>Save</strong>&nbsp;Fortitude DC 12</p>\n<p><strong>Track</strong>&nbsp;physical;&nbsp;<strong>Frequency</strong>&nbsp;1/day</p>\n<p><strong>Effect</strong>&nbsp;no latent state</p>\n<p><strong>Cure</strong>&nbsp;2 consecutive saves</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any temperate</p>\n<h3>Organization</h3>\n<p>solitary, growth (3-5), or colony (6-300)</p>\n</section>"
+        "value": "<h2>Description</h2>\n<p>Linyfs are invasive plants with unusual life cycles. Their translucent seeds travel alongside charged particles with the solar winds that move across the void of space, frequently attaching to starships or falling in a near-invisible rain onto a planet. In the presence of light, moisture, and heat, the seeds germinate into wide masses of silky strands with solid cores of plant matter. Linyfs are driven to grow and reproduce. They are highly susceptible to cold, and significant drops in temperature often kill budding linyf colonies.</p>\n<p>A linyf is a collection of thick, translucent vines that resemble tentacles, surrounding a central mass. These vines sprout sticky fibers that can transmit a deadly @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.gBhZDjh30JEyh7DY]{Disease}. Curious creatures who inspect a linyf lying in wait notice that it radiates a pleasant warmth but is extraordinarily sticky to the touch. The vines then reach out to slash at the victim, who soon discovers that their wounds eventually close up, though not as a result of the healing process. The affliction initially causes transparent fibers to sprout from the creature’s skin, suturing the damaged tissue. But after a period of sickness and constant itching as more threads burst out of the creature’s body, the victim typically falls comatose and dies.</p>\n<p>Despite the aggressive affliction their fibers induce, linyfs aren’t carnivorous and receive their nutrition through photosynthesis, like most other plants. Several months after maturation, a healthy linyf produces a few dozen seeds that it propels into the atmosphere with amazing force and speed. Most of these seeds return to the surface of the same world (with a few catching currents of wind), but a few achieve exit velocity and go on to infest other planets.</p>\n<section>\n<h2>Fiberous Growth</h2>\n<p><strong>Type</strong>&nbsp;@UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.gBhZDjh30JEyh7DY]{Disease} (injury);&nbsp;<strong>Save</strong>&nbsp;Fortitude DC 12</p>\n<p><strong>Track</strong>&nbsp;physical;&nbsp;<strong>Frequency</strong>&nbsp;1/day</p>\n<p><strong>Effect</strong>&nbsp;no latent state</p>\n<p><strong>Cure</strong>&nbsp;2 consecutive saves</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any temperate</p>\n<h3>Organization</h3>\n<p>solitary, growth (3-5), or colony (6-300)</p>\n</section>",
+        "weight": ""
       },
       "class": "",
       "cr": 3,
       "environment": "",
+      "organization": "",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #26 pg. 57",
@@ -851,30 +895,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -907,6 +958,9 @@
       },
       "senses": "blindsense (heat), low-light vision",
       "size": "large",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

@@ -12,6 +12,7 @@
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -33,6 +34,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -59,6 +61,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -80,25 +83,7 @@
       "_id": "ZcF6nvKU36lgjLbd",
       "name": "Claw or Incorporeal Claw",
       "type": "weapon",
-      "ammunition": false,
-      "augmentation": false,
-      "consumable": false,
-      "container": false,
-      "equipment": false,
-      "fusion": true,
-      "goods": false,
-      "hybrid": false,
       "img": "icons/svg/item-bag.svg",
-      "magic": false,
-      "shield": false,
-      "spell": false,
-      "storage": {
-        "type": "slot",
-        "affectsEncumbrance": true,
-        "amount": 0,
-        "subtype": "fusion",
-        "weightProperty": "level"
-      },
       "system": {
         "type": "",
         "ability": "",
@@ -185,6 +170,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -305,6 +291,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -312,6 +299,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -327,37 +315,13 @@
         },
         "weaponCategory": "uncategorized",
         "weaponType": "basicM"
-      },
-      "technological": false,
-      "upgrade": false,
-      "vehicleAttack": false,
-      "vehicleSystem": false,
-      "weapon": false,
-      "weaponAccessory": false
+      }
     },
     {
       "_id": "pGSGAzw6iIOUkt7L",
       "name": "Drift Rip (Su)",
       "type": "weapon",
-      "ammunition": false,
-      "augmentation": false,
-      "consumable": false,
-      "container": false,
-      "equipment": false,
-      "fusion": true,
-      "goods": false,
-      "hybrid": false,
       "img": "icons/svg/item-bag.svg",
-      "magic": false,
-      "shield": false,
-      "spell": false,
-      "storage": {
-        "type": "slot",
-        "affectsEncumbrance": true,
-        "amount": 0,
-        "subtype": "fusion",
-        "weightProperty": "level"
-      },
       "system": {
         "type": "",
         "ability": "",
@@ -428,6 +392,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -548,6 +513,7 @@
           "units": "ft",
           "value": 30
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -555,6 +521,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -570,13 +537,7 @@
         },
         "weaponCategory": "uncategorized",
         "weaponType": "smallA"
-      },
-      "technological": false,
-      "upgrade": false,
-      "vehicleAttack": false,
-      "vehicleSystem": false,
-      "weapon": false,
-      "weaponAccessory": false
+      }
     },
     {
       "_id": "AYJ0TQmGzeFrYwr1",
@@ -589,6 +550,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -610,6 +572,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -636,6 +599,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -664,6 +628,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -685,6 +650,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -711,6 +677,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -739,6 +706,7 @@
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -767,11 +735,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -789,6 +754,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -839,12 +805,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -975,8 +947,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<h2>Description</h2>\n<p>When a mortal humanoid dies within the Drift while consumed with a strong negative emotion, it can become a driftdead, a restless undead spirit bound to that plane, unable to escape the confines of the Drift and reach its final judgment. What’s left of a driftdead’s warped mind is filled with insanity, rage, and a hatred for the living. So overwhelming is this flux of emotions that a driftdead psychically broadcasts its confusion, affecting all who venture too close.</p>\n<p>A driftdead leaves its mortal remains behind and forms a new undead body out of the mingled planar energies of the Drift- just as the Drift contains material snatched from countless planes. This physical body, however, is inextricably linked to the Drift. If a driftdead ever travels to the Material Plane (or any other plane), its planar body remains within the Drift, and the driftdead becomes an incorporeal spirit. The driftdead recreates its corporeal form as soon as it returns to the Drift.</p>\n<h2>Driftdead</h2>\n<p>When a mortal creature dies within the Drift while consumed with a strong negative emotion, it might become a driftdead, a restless undead spirit bound to that plane, unable to escape the confines of the Drift and reach its final judgment. What’s left of a driftdead’s fragmented psyche is filled with confusion, rage, and a hatred for the living. So overwhelming is this flux of emotions that a driftdead psychically broadcasts its confusion, affecting all who venture too close.</p>\n<p>A driftdead leaves its mortal remains behind and forms a new undead body out of the mingled planar energies of the Drift—just as the Drift contains material snatched from countless planes. This body, however, is inextricably linked to the Drift. If a driftdead ever travels to the Material Plane (or any other plane), its physical body remains within the Drift, and the driftdead becomes an incorporeal spirit. The driftdead resumes its corporeal form as soon as it returns to the Drift.</p>\n<p>Though humanoid driftdead are the most common driftdead, Drift travelers sometimes report encounters with undead entities created by the death of non-humanoid beings—indeed, driftdead can spawn from any sapient species. On their own, these solitary undead tend to haunt the sites of their own death, reliving the moment in which they perished again and again in an agonizing loop. Their shattered memories, while not coherent enough to foster ordered thought patterns, often draw them to places, objects, or beings they were familiar with in life. Alternatively, driftdead might wend their way through the Drift, with no real direction other than trying to escape the anxiety associated with the places they died.</p>\n<p>Occasionally, multiple driftdead gather near Drift beacons or other entry points to the Material Plane that radiate life energy. On rare occasions, these lost souls fuse together into terrifying amalgams that are far more dangerous and powerful than a solitary driftdead. Sutured together by a combination of the planar energies of the Drift and its constituents’ powerful emotions, driftdead amalgams are far more likely to make their way into the Material Plane in search of living creatures. When these howling horrors sense the presence of a live mortal, driftdead amalgams relentlessly pursue and attack their targets until they either slay their victims or are destroyed. Even those who survive such attacks often find themselves wracked with mental anguish, the agonizing pain experienced by driftdead amalgams indelibly imprinted upon the victims.</p>\n<p>Though driftdead retain a shred of the intelligence they possessed in life, their minds are irreparably shattered by the trauma of their deaths, leaving little room for higher thought as they single-mindedly seek the living. When it can sense no life to latch on to, driftdead are attracted to objects and places once frequented by living creatures. Driftdead, therefore, frequently haunt derelict starships or congregate near flotsam and jetsam from the Material Plane infused with life energy.</p>\n<p>Some evil and intelligent undead have even been known to deliberately lure and collect driftdead, installing the creatures as traps for the unwary living. Rumors claim that the Corpse Fleet conducts regular trawling missions through Drift wreckage to recover driftdead and then weaponize them against the living. Whether Eox’s renegade military truly engages in such a practice or whether this is a case of fearmongers spreading misinformation is unclear. Unfortunately, few survivors of Corpse Fleet aggression remain to shed light on the issue.</p>",
@@ -986,6 +961,10 @@
       "cr": 2,
       "environment": "any (the Drift)",
       "organization": "solitary",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #1 pg. 57",
@@ -1289,6 +1268,9 @@
       },
       "senses": "darkvision 60 ft.",
       "size": "medium",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

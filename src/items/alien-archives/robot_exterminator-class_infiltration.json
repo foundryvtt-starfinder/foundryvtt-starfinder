@@ -15,6 +15,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "swift",
@@ -36,8 +37,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>Infiltration robots are composed almost entirely of adaptive nanite flesh, allowing them to impersonate other species and insulating them from typical robot weaknesses. While its advanced synthskin is active, an infiltration robot appears to be a member of a medium-sized humanoid or monstrous humanoid species of its choice. This otherwise functions as the change shape universal creature rule (page 152), except the infiltration robot can activate it as a swift action. While an infiltration robot has fewer than half its Hit Points remaining, it can’t use this ability.</p>"
         },
@@ -60,6 +64,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -85,6 +90,7 @@
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -106,8 +112,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
@@ -130,6 +139,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -162,6 +172,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -196,6 +207,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -225,8 +237,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
@@ -235,6 +250,7 @@
           "units": "",
           "value": null
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
@@ -245,12 +261,14 @@
         "proficient": true,
         "properties": {},
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -258,6 +276,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -293,6 +312,7 @@
           "condition": "",
           "cost": null
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -327,6 +347,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -356,8 +377,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>The semiautomatic mechanism of this pistol discharges spent cartridges and reloads fresh ones in the barrel, provided a cartridge remains in the magazine.</p>"
         },
@@ -366,6 +390,7 @@
           "units": "",
           "value": ""
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
@@ -462,12 +487,14 @@
           "wideLine": false
         },
         "quantity": null,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "ft",
           "value": 60
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -475,6 +502,7 @@
         },
         "source": "Core Rulebook, P. 173",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -530,15 +558,19 @@
         },
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
+        "equippable": false,
         "equipped": false,
         "identified": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
         "quantity": 1,
+        "quantityPerPack": 1,
         "source": ""
       }
     }
@@ -546,12 +578,14 @@
   "prototypeToken": {
     "name": "Robot, Exterminator-Class Infiltration",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -582,7 +616,6 @@
     "lockRotation": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -600,6 +633,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -650,12 +684,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -713,7 +753,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 50
@@ -722,7 +763,8 @@
         "special": "original base: 50 ft.",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -783,12 +825,26 @@
       "alignment": "LN",
       "aura": "",
       "biography": {
+        "age": 0,
+        "dateOfBirth": "",
+        "deity": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
+        "height": "",
+        "homeWorld": "",
+        "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>Beneath layers of synthskin and expert disguises, every&nbsp;infiltration robot is basically identical. A spindly, humanoid&nbsp;machine’s frame between 4 and 6 feet in height, lacking any&nbsp;feature that might indicate some specific design inspiration.&nbsp;By design, however, this interior is rarely seen. To most, an&nbsp;infiltration robot simply looks like some humanoid they know:&nbsp;a grocer, a pilot, or even a coworker with a penchant for&nbsp;cheesy snacks.</p>\n<p>These disguises are made possible by the synthskin&nbsp;that coats every infiltration robot. Synthskin is a pliable,&nbsp;synthetic substance that can be tuned to perfectly&nbsp;mimic a variety of humanoid species, even simulating&nbsp;blood and internal organs. Paired with an adjustable&nbsp;chassis, synthskin allows infiltration robots to&nbsp;be built as near-perfect replicas of a variety of&nbsp;humanoid species and subspecies. Social mimicry&nbsp;is handled by advanced processing centers that border on&nbsp;true AI, allowing for swift swapping between simulated&nbsp;personalities as well as resulting in all the quirks and&nbsp;personality development of intelligent life.</p>\n<p>The most basic form of infiltration robot is the monitor class.&nbsp;Monitors are primarily meant to observe and report upon their&nbsp;targets. While capable of combat, and in theory assassination,&nbsp;it is generally considered a last resort. Whatever information&nbsp;the monitor can get back to its controller is likely far more&nbsp;valuable than anyone it could reasonably kill, and damage&nbsp;from combat risks revealing the mechanical nature of the spy.&nbsp;As such, if a monitor initiates combat is likely believes that it&nbsp;has been found out, or that something far more valuable than&nbsp;its mission is at stake.</p>\n<p>More advanced by far are exterminator-class infiltration&nbsp;robots. Exterminators feature prototype nanobot swarms&nbsp;embedded in their chassis, allowing them to shrug off&nbsp;damage and swiftly repair their synthskin if it is damaged&nbsp;in battle. They can also effortlessly reshape their synthskin,&nbsp;changing their height, color, gender expression, apparent&nbsp;age, and species on the fly. This makes them both more&nbsp;resilient in battle and far more adaptable as assassins than&nbsp;monitor-class robots, as they can shift disguises as often&nbsp;as needed to approach virtually any target unsuspected.&nbsp;This adaptability also makes them much more aggressive;&nbsp;exterminators whose disguise is compromised can simply&nbsp;shift into another, so they are much more likely to initiate&nbsp;deadly combat without concern for their discovery.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<h3>Organization</h3>\n<p>solitary, pair, or cell (1 exterminator-class infiltration robot and 3 monitor-class infiltration robots)</p>\n</section>"
+        "value": "<h2>Description</h2>\n<p>Beneath layers of synthskin and expert disguises, every&nbsp;infiltration robot is basically identical. A spindly, humanoid&nbsp;machine’s frame between 4 and 6 feet in height, lacking any&nbsp;feature that might indicate some specific design inspiration.&nbsp;By design, however, this interior is rarely seen. To most, an&nbsp;infiltration robot simply looks like some humanoid they know:&nbsp;a grocer, a pilot, or even a coworker with a penchant for&nbsp;cheesy snacks.</p>\n<p>These disguises are made possible by the synthskin&nbsp;that coats every infiltration robot. Synthskin is a pliable,&nbsp;synthetic substance that can be tuned to perfectly&nbsp;mimic a variety of humanoid species, even simulating&nbsp;blood and internal organs. Paired with an adjustable&nbsp;chassis, synthskin allows infiltration robots to&nbsp;be built as near-perfect replicas of a variety of&nbsp;humanoid species and subspecies. Social mimicry&nbsp;is handled by advanced processing centers that border on&nbsp;true AI, allowing for swift swapping between simulated&nbsp;personalities as well as resulting in all the quirks and&nbsp;personality development of intelligent life.</p>\n<p>The most basic form of infiltration robot is the monitor class.&nbsp;Monitors are primarily meant to observe and report upon their&nbsp;targets. While capable of combat, and in theory assassination,&nbsp;it is generally considered a last resort. Whatever information&nbsp;the monitor can get back to its controller is likely far more&nbsp;valuable than anyone it could reasonably kill, and damage&nbsp;from combat risks revealing the mechanical nature of the spy.&nbsp;As such, if a monitor initiates combat is likely believes that it&nbsp;has been found out, or that something far more valuable than&nbsp;its mission is at stake.</p>\n<p>More advanced by far are exterminator-class infiltration&nbsp;robots. Exterminators feature prototype nanobot swarms&nbsp;embedded in their chassis, allowing them to shrug off&nbsp;damage and swiftly repair their synthskin if it is damaged&nbsp;in battle. They can also effortlessly reshape their synthskin,&nbsp;changing their height, color, gender expression, apparent&nbsp;age, and species on the fly. This makes them both more&nbsp;resilient in battle and far more adaptable as assassins than&nbsp;monitor-class robots, as they can shift disguises as often&nbsp;as needed to approach virtually any target unsuspected.&nbsp;This adaptability also makes them much more aggressive;&nbsp;exterminators whose disguise is compromised can simply&nbsp;shift into another, so they are much more likely to initiate&nbsp;deadly combat without concern for their discovery.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<h3>Organization</h3>\n<p>solitary, pair, or cell (1 exterminator-class infiltration robot and 3 monitor-class infiltration robots)</p>\n</section>",
+        "weight": ""
       },
       "class": "",
       "cr": 7,
       "environment": "",
+      "organization": "",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AA4 pg. 102",
@@ -1029,30 +1085,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -1087,6 +1150,9 @@
       },
       "senses": "darkvision 60 ft.; low light vision;",
       "size": "medium",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }
