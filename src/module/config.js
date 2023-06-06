@@ -6,13 +6,13 @@ import IconEnricher from "./system/enrichers/icon.js";
 export const SFRPG = {};
 
 SFRPG.actorTypes = {
-    "character": "ACTOR.TypeCharacter",
-    "drone": "ACTOR.TypeDrone",
-    "hazard": "ACTOR.TypeHazard",
-    "npc": "ACTOR.TypeNpc",
-    "npc2": "ACTOR.TypeNpc2",
-    "starshop": "ACTOR.TypeStarship",
-    "vehicle": "ACTOR.TypeVehicle"
+    "character": "TYPES.Actor.character",
+    "drone": "TYPES.Actor.drone",
+    "hazard": "TYPES.Actor.hazard",
+    "npc": "TYPES.Actor.npc",
+    "npc2": "TYPES.Actor.npc2",
+    "starship": "TYPES.Actor.starship",
+    "vehicle": "TYPES.Actor.vehicle"
 };
 
 /**
@@ -309,7 +309,7 @@ SFRPG.ammunitionTypes = {
     "thasteronPellets": "SFRPG.Items.Ammunition.Type.ThasteronPellets"
 };
 
-SFRPG.distanceUnits = {
+SFRPG.constantDistanceUnits = {
     "none": "SFRPG.None",
     "personal": "SFRPG.Personal",
     "touch": "SFRPG.Touch",
@@ -319,12 +319,40 @@ SFRPG.distanceUnits = {
     "planetary": "SFRPG.Planetary",
     "system": "SFRPG.SystemWide",
     "plane": "SFRPG.Plane",
-    "unlimited": "SFRPG.Unlimited",
+    "unlimited": "SFRPG.Unlimited"
+};
+
+SFRPG.variableDistanceUnits = {
     "ft": "SFRPG.Ft",
     "meter": "SFRPG.Meter",
     "mi": "SFRPG.Mi",
     "spec": "SFRPG.Special",
     "any": "SFRPG.DistAny"
+};
+
+SFRPG.distanceUnits = {
+    ...SFRPG.constantDistanceUnits,
+    ...SFRPG.variableDistanceUnits
+};
+
+/**
+ * Durations for effects by definition must be non-zero.
+ * @type {Object}
+ */
+SFRPG.effectDurationTypes = {
+    "round": "SFRPG.EffectDurationTypesRounds",
+    "minute": "SFRPG.EffectDurationTypesMinutes",
+    "hour": "SFRPG.EffectDurationTypesHours",
+    "day": "SFRPG.EffectDurationTypesDays"
+};
+
+/**
+ * Durations for features/spells however can be.
+ * @type {Object}
+ */
+SFRPG.durationTypes = {
+    "instantaneous": "SFRPG.DurationTypesInstantaneous",
+    ...SFRPG.effectDurationTypes
 };
 
 SFRPG.targetTypes = {};
@@ -447,6 +475,7 @@ SFRPG.weaponProperties = {
     "gravitation": "SFRPG.WeaponPropertiesGravitation",
     "guided": "SFRPG.WeaponPropertiesGuided",
     "harrying": "SFRPG.WeaponPropertiesHarrying",
+    "healing": "SFRPG.WeaponPropertiesHealing",
     "holyWater": "SFRPG.WeaponPropertiesHolyWater",
     "hybrid": "SFRPG.WeaponPropertiesHybrid",
     "hydrodynamic": "SFRPG.WeaponPropertiesHydrodynamic",
@@ -542,6 +571,7 @@ SFRPG.weaponPropertiesTooltips = {
     "gravitation": "SFRPG.WeaponPropertiesGravitationTooltip",
     "guided": "SFRPG.WeaponPropertiesGuidedTooltip",
     "harrying": "SFRPG.WeaponPropertiesHarryingTooltip",
+    "healing": "SFRPG.WeaponPropertiesHealingTooltip",
     "holyWater": "SFRPG.WeaponPropertiesHolyWaterTooltip",
     "hybrid": "SFRPG.WeaponPropertiesHybridTooltip",
     "hydrodynamic": "SFRPG.WeaponPropertiesHydrodynamicTooltip",
@@ -634,11 +664,11 @@ SFRPG.energyResistanceTypes = {
 
 SFRPG.spellAreaShapes = {
     "": "",
+    "sphere": "SFRPG.SpellAreaShapesSphere",
     "cone": "SFRPG.SpellAreaShapesCone",
+    "cube": "SFRPG.SpellAreaShapesCube",
     "cylinder": "SFRPG.SpellAreaShapesCylinder",
     "line": "SFRPG.SpellAreaShapesLine",
-    "sphere": "SFRPG.SpellAreaShapesSphere",
-    "shapable": "SFRPG.SpellAreaShapesShapable",
     "other": "SFRPG.SpellAreaShapesOther"
 };
 
@@ -708,9 +738,78 @@ SFRPG.spellLevels = {
 };
 
 // Feat types
+// I don't think this is actually used anywhere, but let's keep this and make featureCategories separate below.
 SFRPG.featTypes = {
     "general": "SFRPG.FeatTypes.General",
     "combat" : "SFRPG.FeatTypes.Combat"
+};
+
+/**
+ * @typedef  {Object} FeatureCategory
+ * @property {String} category A localisation key, used for the plural form of the category (For use on sheet headers)
+ * @property {String} label A localisation key, used for the singular form of the category (For use on sheets themselves)
+ * @property {ItemSFRPG[]} items During sheet rendering, items are sorted into the items arrays in each category. To be empty during declaration
+ * @property {Boolean} hasActions Whether to show a "+ Add" button for the category on sheets
+ * @property {Dataset} dataset Data to be added as `data-`objects in the HTML. Extra fields will be added to the created item's data.
+ */
+/**
+ * @typedef  {Object} Dataset
+ * @property {"feat"} type The type of item to create. Features are type "feat", so there is no need to create anything else.
+ * @property {String} "*" A data path and a value to be added to the created item.
+ */
+/**
+ * @type {Object.<string, FeatureCategory>}
+ */
+SFRPG.featureCategories = {
+    "feat": {
+        category: "SFRPG.ActorSheet.Features.Categories.Feats",
+        label: "SFRPG.FeatureCategory.Feat",
+        items: [],
+        hasActions: false,
+        dataset: { type: "feat", "category": "feat" }
+    },
+    "classFeature": {
+        category: "SFRPG.ActorSheet.Features.Categories.ClassFeatures",
+        label: "SFRPG.FeatureCategory.ClassFeature",
+        items: [],
+        hasActions: false,
+        dataset: { type: "feat", "category": "classFeature" }
+    },
+    "speciesFeature": {
+        category: "SFRPG.ActorSheet.Features.Categories.SpeciesFeatures",
+        label: "SFRPG.FeatureCategory.SpeciesFeature",
+        items: [],
+        hasActions: false,
+        dataset: { type: "feat", "category": "speciesFeature" }
+    },
+    "archetypeFeature": {
+        category: "SFRPG.ActorSheet.Features.Categories.ArchetypeFeatures",
+        label: "SFRPG.FeatureCategory.ArchetypeFeature",
+        items: [],
+        hasActions: false,
+        dataset: { type: "feat", category: "archetypeFeature" }
+    },
+    "themeFeature": {
+        category: "SFRPG.ActorSheet.Features.Categories.ThemeFeatures",
+        label: "SFRPG.FeatureCategory.ThemeFeature",
+        items: [],
+        hasActions: false,
+        dataset: { type: "feat", category: "themeFeature" }
+    },
+    "universalCreatureRule": {
+        category: "SFRPG.ActorSheet.Features.Categories.UniversalCreatureRules",
+        label: "SFRPG.FeatureCategory.UniversalCreatureRule",
+        items: [],
+        hasActions: false,
+        dataset: { type: "feat", category: "UniversalCreatureRule" }
+    }
+};
+
+SFRPG.specialAbilityTypes = {
+    "": "SFRPG.None",
+    "ex": "SFRPG.SpecialAbilityTypes.Extraordinary",
+    "su": "SFRPG.SpecialAbilityTypes.Supernatural",
+    "sp": "SFRPG.SpecialAbilityTypes.SpellLike"
 };
 
 /**
@@ -828,38 +927,117 @@ SFRPG.conditionTypes = {
 };
 
 SFRPG.languages = {
+    "aballonian": "SFRPG.LanguagesAballonian",
     "abyssal": "SFRPG.LanguagesAbyssal",
+    "aglian": "SFRPG.LanguagesAglian",
+    "akan": "SFRPG.LanguagesAkan",
     "akiton": "SFRPG.LanguagesAkitonian",
     "aklo": "SFRPG.LanguagesAklo",
+    "alkainish": "SFRPG.LanguagesAlkainish",
+    "anassan": "SFRPG.LanguagesAnassan",
     "aquan": "SFRPG.LanguagesAquan",
     "arkanen": "SFRPG.LanguagesArkanen",
+    "ancientDaimalkan": "SFRPG.LanguagesAncientDaimalkan",
     "auran": "SFRPG.LanguagesAuran",
     "azlanti": "SFRPG.LanguagesAzlanti",
+    "bantridi": "SFRPG.LanguagesBantridi",
+    "barathu": "SFRPG.LanguagesBarathu",
+    "bolidan": "SFRPG.LanguagesBolidan",
+    "brenneri": "SFRPG.LanguagesBrenneri",
     "brethedan": "SFRPG.LanguagesBrethedan",
     "castrovelian": "SFRPG.LanguagesCastrovelian",
     "celestial": "SFRPG.LanguagesCelestial",
     "common": "SFRPG.LanguagesCommon",
+    "copaxi": "SFRPG.LanguagesCopaxi",
+    "cyrunian": "SFRPG.LanguagesCyrunian",
+    "daimalkan": "SFRPG.LanguagesDaimalkan",
+    "dirindi": "SFRPG.LanguagesDirindi",
     "draconic": "SFRPG.LanguagesDraconic",
+    "dromadan": "SFRPG.LanguagesDromadan",
     "drow": "SFRPG.LanguagesDrow",
     "dwarven": "SFRPG.LanguagesDwarven",
     "elven": "SFRPG.LanguagesElven",
+    "embri": "SFRPG.LanguagesEmbri",
+    "endiffian": "SFRPG.LanguagesEndiffian",
     "eoxian": "SFRPG.LanguagesEoxian",
+    "espraksi": "SFRPG.LanguagesEspraksi",
+    "ferran": "SFRPG.LanguagesFerran",
+    "firstSpeech": "SFRPG.LanguagesFirstSpeech",
+    "frujai": "SFRPG.LanguagesFrujai",
+    "garaggakal": "SFRPG.LanguagesGaraggakal",
+    "ghibran": "SFRPG.LanguagesGhibran",
+    "ghoran": "SFRPG.LanguagesGhoran",
+    "giant": "SFRPG.LanguagesGiant",
     "gnome": "SFRPG.LanguagesGnome",
     "goblin": "SFRPG.LanguagesGoblin",
+    "grioth": "SFRPG.LanguagesGrioth",
+    "gytchean": "SFRPG.LanguagesGytchean",
+    "hadrogaan": "SFRPG.LanguagesHadrogaan",
     "halfling": "SFRPG.LanguagesHalfling",
+    "hallas": "SFRPG.LanguagesHallas",
+    "hortaa": "SFRPG.LanguagesHortaa",
     "ignan": "SFRPG.LanguagesIgnan",
+    "ihonva": "SFRPG.LanguagesIhonva",
+    "iji": "SFRPG.LanguagesIji",
+    "ilthisarian": "SFRPG.LanguagesIlthisarian",
     "infernal": "SFRPG.LanguagesInfernal",
+    "ixtangi": "SFRPG.LanguagesIxtangi",
+    "izalguun": "SFRPG.LanguagesIzalguun",
+    "jinsul": "SFRPG.LanguagesJinsul",
     "kalo": "SFRPG.LanguagesKalo",
     "kasatha": "SFRPG.LanguagesKasatha",
-    "Nchaki": "SFRPG.LanguagesNchaki",
+    "katholbi": "SFRPG.LanguagesKatholbi",
+    "kiirinta": "SFRPG.LanguagesKiirinta",
+    "koshorian": "SFRPG.LanguagesKoshorian",
+    "kothama": "SFRPG.LanguagesKothama",
+    "lexonian": "SFRPG.LanguagesLexonian",
+    "lumos": "SFRPG.LanguagesLumos",
+    "maraquoi": "SFRPG.LanguagesMaraquoi",
+    "megalonic": "SFRPG.LanguagesMegalonic",
+    "migo": "SFRPG.LanguagesMi-Go",
+    "morlamaw": "SFRPG.LanguagesMorlamaw",
+    "mulkaxi": "SFRPG.LanguagesMulkaxi",
+    "nchaki": "SFRPG.LanguagesNchaki",
+    "noma": "SFRPG.LanguagesNoma",
+    "orbian": "SFRPG.LanguagesOrbian",
     "orc": "SFRPG.LanguagesOrc",
+    "orrian": "SFRPG.LanguagesOrrian",
+    "osharu": "SFRPG.LanguagesOsharu",
+    "pahtra": "SFRPG.LanguagesPahtra",
+    "paralithi": "SFRPG.LanguagesParalithi",
+    "perani": "SFRPG.LanguagesPerani",
+    "protean": "SFRPG.LanguagesProtean",
+    "quorlu": "SFRPG.LanguagesQuorlu",
+    "raxi": "SFRPG.LanguagesRaxi",
+    "reptoid": "SFRPG.LanguagesReptoid",
+    "requian": "SFRPG.LanguagesRequian",
     "sarcesian": "SFRPG.LanguagesSarcesian",
+    "sazaron": "SFRPG.LanguagesSazaron",
+    "scyphozoan": "SFRPG.LanguagesScyphozoan",
+    "selamidian": "SFRPG.LanguagesSelamidian",
+    "seprevoi": "SFRPG.LanguagesSeprevoi",
+    "shadowtongue": "SFRPG.LanguagesShadowtongue",
+    "shimreeni": "SFRPG.LanguagesShimreeni",
     "shirren": "SFRPG.LanguagesShirren",
     "shobhad": "SFRPG.LanguagesShobhad",
+    "sivvian": "SFRPG.LanguagesSivvian",
+    "spathinae": "SFRPG.LanguagesSpathinae",
+    "starsong": "SFRPG.LanguagesStarsong",
+    "stroxha": "SFRPG.LanguagesStroxha",
+    "sylvan": "SFRPG.LanguagesSylvan",
+    "telian": "SFRPG.LanguagesTelian",
     "terran": "SFRPG.LanguagesTerran",
     "triaxian": "SFRPG.LanguagesTriaxian",
+    "trinir": "SFRPG.LanguagesTrinir",
+    "urog": "SFRPG.LanguagesUrog",
+    "varratana": "SFRPG.LanguagesVarratana",
     "vercite": "SFRPG.LanguagesVercite",
     "vesk": "SFRPG.LanguagesVesk",
+    "vlakan": "SFRPG.LanguagesVlakan",
+    "vulgarKishaleen": "SFRPG.LanguagesVulgarKishaleen",
+    "woiokan": "SFRPG.LanguagesWoiokan",
+    "wrikreechee": "SFRPG.LanguagesWrikreechee",
+    "xaarb": "SFRPG.LanguagesXaarb",
     "ysoki": "SFRPG.LanguagesYsoki"
 };
 
@@ -882,7 +1060,7 @@ SFRPG.consumableTypes = {
     "foodDrink": "SFRPG.ConsumableTypes.FoodDrink"
 };
 
-SFRPG.augmentationSytems = {
+SFRPG.augmentationSystems = {
     "none": "SFRPG.None",
     "arm": "SFRPG.AugArm",
     "armAndHand" : "SFRPG.AugArmAndHand",
@@ -929,6 +1107,24 @@ SFRPG.npctypes = {
     "plant": "Plant",
     "undead": "Undead",
     "vermin": "Vermin"
+};
+
+SFRPG.combatRoles = {
+    "combatant": "SFRPG.CombatRoles.Combatant",
+    "expert": "SFRPG.CombatRoles.Expert",
+    "spellcaster": "SFRPG.CombatRoles.Spellcaster"
+};
+
+SFRPG.combatRolesDescriptions = {
+    "combatant": "SFRPG.CombatRoles.Descriptions.Combatant",
+    "expert": "SFRPG.CombatRoles.Descriptions.Expert",
+    "spellcaster": "SFRPG.CombatRoles.Descriptions.Spellcaster"
+};
+
+SFRPG.combatRoleImages = {
+    "combatant": "systems/sfrpg/images/cup/gameplay/combatant.webp",
+    "expert": "systems/sfrpg/images/cup/gameplay/expert.webp",
+    "spellcaster": "systems/sfrpg/images/cup/gameplay/spellcaster.webp"
 };
 
 /* --------------------------------*
@@ -1189,12 +1385,84 @@ SFRPG.modifierArmorClassAffectedValues = {
 };
 
 SFRPG.globalAttackRollModifiers = [
-    {bonus: { name: "SFRPG.Rolls.Character.Charge", modifier: "-2", enabled: false, notes: "SFRPG.Rolls.Character.ChargeTooltip" } },
-    {bonus: { name: "SFRPG.Rolls.Character.Flanking", modifier: "+2", enabled: false, notes: "SFRPG.Rolls.Character.FlankingTooltip" } },
-    {bonus: { name: "SFRPG.Rolls.Character.FightDefensively", modifier: "-4", enabled: false, notes: "SFRPG.Rolls.Character.FightDefensivelyTooltip" } },
-    {bonus: { name: "SFRPG.Rolls.Character.FullAttack", modifier: "-4", enabled: false, notes: "SFRPG.Rolls.Character.FullAttackTooltip" } },
-    {bonus: { name: "SFRPG.Rolls.Character.HarryingFire", modifier: "+2", enabled: false, notes: "SFRPG.Rolls.Character.HarryingFireTooltip" } },
-    {bonus: { name: "SFRPG.Rolls.Character.Nonlethal", modifier: "-4", enabled: false, notes: "SFRPG.Rolls.Character.NonlethalTooltip" } }
+    {
+        bonus: {
+            _id: "e10bf545-4c36-4072-b8e7-ef791cfdaae5",
+            name: "SFRPG.Rolls.Character.Charge",
+            modifier: "-2",
+            type: "untyped",
+            enabled: false,
+            modifierType: "formula",
+            subtab: "temporary",
+            max: -2,
+            notes: "SFRPG.Rolls.Character.ChargeTooltip"
+        }
+    },
+    {
+        bonus: {
+            _id: "5eb1f127-31e1-47d9-bd9e-cd2a68b8d8eb",
+            name: "SFRPG.Rolls.Character.Flanking",
+            modifier: "+2",
+            type: "untyped",
+            enabled: false,
+            modifierType: "formula",
+            subtab: "temporary",
+            max: +2,
+            notes: "SFRPG.Rolls.Character.FlankingTooltip"
+        }
+    },
+    {
+        bonus: {
+            _id: "2e72e48a-d152-4b25-97fc-5f5485ba6027",
+            name: "SFRPG.Rolls.Character.FightDefensively",
+            modifier: "-4",
+            type: "untyped",
+            enabled: false,
+            modifierType: "formula",
+            subtab: "temporary",
+            max: -4,
+            notes: "SFRPG.Rolls.Character.FightDefensivelyTooltip"
+        }
+    },
+    {
+        bonus: {
+            _id: "9752a0ff-ee73-4fac-8d4a-f6822135d8fc",
+            name: "SFRPG.Rolls.Character.FullAttack",
+            modifier: "-4",
+            type: "untyped",
+            enabled: false,
+            modifierType: "formula",
+            subtab: "temporary",
+            max: -4,
+            notes: "SFRPG.Rolls.Character.FullAttackTooltip"
+        }
+    },
+    {
+        bonus: {
+            _id: "12dfb463-9a24-483a-85e4-8d43ea23f871",
+            name: "SFRPG.Rolls.Character.HarryingFire",
+            modifier: "+2",
+            type: "untyped",
+            enabled: false,
+            modifierType: "formula",
+            subtab: "temporary",
+            max: +2,
+            notes: "SFRPG.Rolls.Character.HarryingFireTooltip"
+        }
+    },
+    {
+        bonus: {
+            _id: "a64aabd8-8704-4420-8c43-dab851ccf83d",
+            name: "SFRPG.Rolls.Character.Nonlethal",
+            modifier: "-4",
+            type: "untyped",
+            enabled: false,
+            modifierType: "formula",
+            subtab: "temporary",
+            max: -4,
+            notes: "SFRPG.Rolls.Character.NonlethalTooltip"
+        }
+    }
 ];
 
 SFRPG.CHARACTER_EXP_LEVELS = [
@@ -1248,6 +1516,54 @@ SFRPG.CR_EXP_LEVELS = [
     1228800,
     1638400
 ];
+
+SFRPG.CRTable = {
+    "0":   {minXP: 0,       totalXP: 0,       nextXP: 1,       perPlayerXP: [0,      0,      0],      wealthValue: 0},
+    "1/8": {minXP: 1,       totalXP: 50,      nextXP: 65,      perPlayerXP: [15,     15,     10],     wealthValue: 0},
+    "1/6": {minXP: 51,      totalXP: 65,      nextXP: 100,     perPlayerXP: [20,     15,     10],     wealthValue: 0},
+    "1/4": {minXP: 66,      totalXP: 100,     nextXP: 135,     perPlayerXP: [35,     25,     15],     wealthValue: 0},
+    "1/3": {minXP: 101,     totalXP: 135,     nextXP: 200,     perPlayerXP: [45,     35,     25],     wealthValue: 150},
+    "1/2": {minXP: 136,     totalXP: 200,     nextXP: 400,     perPlayerXP: [65,     50,     35],     wealthValue: 230},
+    "1":   {minXP: 201,     totalXP: 400,     nextXP: 600,     perPlayerXP: [135,    100,    65],     wealthValue: 460},
+    "2":   {minXP: 401,     totalXP: 600,     nextXP: 800,     perPlayerXP: [200,    150,    100],    wealthValue: 775},
+    "3":   {minXP: 601,     totalXP: 800,     nextXP: 1200,    perPlayerXP: [265,    200,    135],    wealthValue: 1100},
+    "4":   {minXP: 801,     totalXP: 1200,    nextXP: 1600,    perPlayerXP: [400,    300,    200],    wealthValue: 1400},
+    "5":   {minXP: 1201,    totalXP: 1600,    nextXP: 2400,    perPlayerXP: [535,    400,    265],    wealthValue: 3100},
+    "6":   {minXP: 1601,    totalXP: 2400,    nextXP: 3200,    perPlayerXP: [800,    600,    400],    wealthValue: 3900},
+    "7":   {minXP: 2401,    totalXP: 3200,    nextXP: 4800,    perPlayerXP: [1070,   800,    535],    wealthValue: 4600},
+    "8":   {minXP: 3201,    totalXP: 4800,    nextXP: 6400,    perPlayerXP: [1600,   1200,   800],    wealthValue: 5400},
+    "9":   {minXP: 4801,    totalXP: 6400,    nextXP: 9600,    perPlayerXP: [2130,   1600,   1070],   wealthValue: 10000},
+    "10":  {minXP: 6401,    totalXP: 9600,    nextXP: 12800,   perPlayerXP: [3200,   2400,   1600],   wealthValue: 14700},
+    "11":  {minXP: 9601,    totalXP: 12800,   nextXP: 19200,   perPlayerXP: [4270,   3200,   2130],   wealthValue: 25000},
+    "12":  {minXP: 12801,   totalXP: 19200,   nextXP: 25600,   perPlayerXP: [6400,   4800,   3200],   wealthValue: 34000},
+    "13":  {minXP: 19201,   totalXP: 25600,   nextXP: 38400,   perPlayerXP: [8530,   6400,   4270],   wealthValue: 50000},
+    "14":  {minXP: 25601,   totalXP: 38400,   nextXP: 51200,   perPlayerXP: [12800,  9600,   6400],   wealthValue: 77000},
+    "15":  {minXP: 38401,   totalXP: 51200,   nextXP: 76800,   perPlayerXP: [17100,  12800,  8530],   wealthValue: 113000},
+    "16":  {minXP: 51201,   totalXP: 76800,   nextXP: 102400,  perPlayerXP: [25600,  19200,  12800],  wealthValue: 178000},
+    "17":  {minXP: 76801,   totalXP: 102400,  nextXP: 153600,  perPlayerXP: [34100,  25600,  17100],  wealthValue: 260000},
+    "18":  {minXP: 102401,  totalXP: 153600,  nextXP: 204800,  perPlayerXP: [51200,  38400,  25600],  wealthValue: 405000},
+    "19":  {minXP: 153601,  totalXP: 204800,  nextXP: 307200,  perPlayerXP: [68300,  51200,  34100],  wealthValue: 555000},
+    "20":  {minXP: 204801,  totalXP: 307200,  nextXP: 409600,  perPlayerXP: [102000, 76800,  51200],  wealthValue: 782000},
+    "21":  {minXP: 307201,  totalXP: 409600,  nextXP: 614400,  perPlayerXP: [137000, 102400, 68300],  wealthValue: 782000},
+    "22":  {minXP: 409601,  totalXP: 614400,  nextXP: 819200,  perPlayerXP: [205000, 153600, 102400], wealthValue: 782000},
+    "23":  {minXP: 614401,  totalXP: 819200,  nextXP: 1228800, perPlayerXP: [273000, 204800, 137000], wealthValue: 782000},
+    "24":  {minXP: 819201,  totalXP: 1228800, nextXP: 1638400, perPlayerXP: [410000, 307200, 204800], wealthValue: 782000},
+    "25":  {minXP: 1228801, totalXP: 1638400, nextXP: 1638400, perPlayerXP: [546000, 409600, 273000], wealthValue: 782000}
+};
+
+SFRPG.difficultyLevels = {
+    "noPCShips": "SFRPG.Combat.Difficulty.Levels.NoPCShips",
+    "noEnemyShips": "SFRPG.Combat.Difficulty.Levels.NoEnemyShips",
+    "noPcs": "SFRPG.Combat.Difficulty.Levels.NoPCs",
+    "noEnemies": "SFRPG.Combat.Difficulty.Levels.NoEnemies",
+    "lessThanEasy": "SFRPG.Combat.Difficulty.Levels.LessThanEasy",
+    "easy": "SFRPG.Combat.Difficulty.Levels.Easy",
+    "average": "SFRPG.Combat.Difficulty.Levels.Average",
+    "challenging": "SFRPG.Combat.Difficulty.Levels.Challenging",
+    "hard": "SFRPG.Combat.Difficulty.Levels.Hard",
+    "epic": "SFRPG.Combat.Difficulty.Levels.Epic",
+    "greaterThanEpic": "SFRPG.Combat.Difficulty.Levels.GreaterThanEpic"
+};
 
 SFRPG.statusEffects = [
     {
@@ -1636,7 +1952,7 @@ SFRPG.itemTypes = {
     "race": "SFRPG.Items.Categories.Races",
     "theme": "SFRPG.Items.Categories.Themes",
 
-    "actorResource": "ITEM.TypeActorresource",
+    "actorResource": "TYPES.Item.actorResource",
     "feat": "SFRPG.Items.Categories.Feats",
     "spell": "SFRPG.Items.Categories.Spells",
 
@@ -1646,7 +1962,7 @@ SFRPG.itemTypes = {
     "mod": "SFRPG.Items.Categories.DroneMods",
 
     "starshipAblativeArmor": "SFRPG.Items.Categories.StarshipAblativeArmors",
-    "starshipAction": "ITEM.TypeStarshipaction",
+    "starshipAction": "TYPES.Item.starshipAction",
     "starshipArmor": "SFRPG.Items.Categories.StarshipArmors",
     "starshipComputer": "SFRPG.Items.Categories.StarshipComputers",
     "starshipCrewQuarter": "SFRPG.Items.Categories.StarshipCrewQuarters",
@@ -1661,6 +1977,7 @@ SFRPG.itemTypes = {
     "starshipSecuritySystem": "SFRPG.Items.Categories.StarshipSecuritySystems",
     "starshipSensor": "SFRPG.Items.Categories.StarshipSensors",
     "starshipShield": "SFRPG.Items.Categories.StarshipShields",
+    "starshipSpecialAbility": "TYPES.Item.starshipSpecialAbility",
     "starshipThruster": "SFRPG.Items.Categories.StarshipThrusters",
     "starshipWeapon": "SFRPG.Items.Categories.StarshipWeapons",
 
@@ -1672,15 +1989,15 @@ SFRPG.itemTypes = {
     "consumable": "SFRPG.Items.Categories.Consumables",
     "container": "SFRPG.Items.Categories.Containers",
     "equipment": "SFRPG.Items.Categories.Armor",
-    "fusion": "ITEM.TypeFusion",
+    "fusion": "TYPES.Item.fusion",
     "goods": "SFRPG.Items.Categories.Goods",
     "hybrid": "SFRPG.Items.Categories.HybridItems",
     "magic": "SFRPG.Items.Categories.MagicItems",
     "shield": "SFRPG.Items.Categories.Shields",
     "technological": "SFRPG.Items.Categories.TechnologicalItems",
-    "upgrade": "ITEM.TypeUpgrade",
+    "upgrade": "TYPES.Item.upgrade",
     "weapon": "SFRPG.Items.Categories.Weapons",
-    "weaponAccessory": "ITEM.TypeWeaponaccessory"
+    "weaponAccessory": "TYPES.Item.weaponAccessory"
 };
 
 SFRPG.characterDefinitionItemTypes = [

@@ -1,6 +1,6 @@
-import { SFRPGModifierType, SFRPGModifierTypes, SFRPGEffectType } from "../../modifiers/types.js";
-import SFRPGModifier from "../../modifiers/modifier.js";
 import SFRPGModifierApplication from "../../apps/modifier-app.js";
+import SFRPGModifier from "../../modifiers/modifier.js";
+import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../modifiers/types.js";
 import { getItemContainer } from "../actor-inventory-utils.js";
 
 export const ActorModifiersMixin = (superclass) => class extends superclass {
@@ -120,66 +120,66 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
             let modifiersToConcat = [];
             switch (item.type) {
             // Armor upgrades are only valid if they are slotted into an equipped armor
-            case "upgrade":
-            {
-                if (!ignoreEquipment) {
-                    const container = getItemContainer(this.items, item);
-                    if (container && container.type === "equipment" && container.system.equipped) {
+                case "upgrade":
+                {
+                    if (!ignoreEquipment) {
+                        const container = getItemContainer(this.items, item);
+                        if (container && container.type === "equipment" && container.system.equipped) {
+                            modifiersToConcat = itemModifiers;
+                        }
+                    }
+                    break;
+                }
+
+                // Weapon upgrades (Fusions and accessories) are only valid if they are slotted into an equipped weapon
+                case "fusion":
+                case "weaponAccessory":
+                {
+                    if (!ignoreEquipment) {
+                        const container = getItemContainer(this.items, item);
+                        if (container && container.type === "weapon" && container.system.equipped) {
+                            modifiersToConcat = itemModifiers;
+                        }
+                    }
+                    break;
+                }
+
+                // Feats are only active when they are passive, or activated
+                case "feat":
+                    if (itemData.activation?.type === "" || itemData.isActive) {
                         modifiersToConcat = itemModifiers;
                     }
-                }
-                break;
-            }
-
-            // Weapon upgrades (Fusions and accessories) are only valid if they are slotted into an equipped weapon
-            case "fusion":
-            case "weaponAccessory":
-            {
-                if (!ignoreEquipment) {
-                    const container = getItemContainer(this.items, item);
-                    if (container && container.type === "weapon" && container.system.equipped) {
-                        modifiersToConcat = itemModifiers;
-                    }
-                }
-                break;
-            }
-
-            // Feats are only active when they are passive, or activated
-            case "feat":
-                if (itemData.activation?.type === "" || itemData.isActive) {
-                    modifiersToConcat = itemModifiers;
-                }
-                break;
+                    break;
 
                 // Special handling for equipment, shield, and weapon
-            case "equipment":
-            case "shield":
-            case "weapon":
-                if (!ignoreEquipment && itemData.equipped) {
-                    modifiersToConcat = itemModifiers;
-                }
-                break;
+                case "equipment":
+                case "shield":
+                case "weapon":
+                    if (!ignoreEquipment && itemData.equipped) {
+                        modifiersToConcat = itemModifiers;
+                    }
+                    break;
 
-            case "actorResource":
-                if (itemData.enabled && itemData.type && itemData.subType && (itemData.base || itemData.base === 0)) {
-                    modifiersToConcat = itemModifiers;
-                }
-                break;
+                case "actorResource":
+                    if (itemData.enabled && itemData.type && itemData.subType && (itemData.base || itemData.base === 0)) {
+                        modifiersToConcat = itemModifiers;
+                    }
+                    break;
 
                 // Everything else
-            default:
-                if (!itemData.equippable || itemData.equipped) {
-                    modifiersToConcat = itemModifiers;
-                }
-                break;
+                default:
+                    if (!itemData.equippable || itemData.equipped) {
+                        modifiersToConcat = itemModifiers;
+                    }
+                    break;
             }
 
             if (modifiersToConcat && modifiersToConcat.length > 0) {
                 for (const itemModifier of modifiersToConcat) {
                     itemModifier.container = {actorId: this.id, itemId: item.id};
                     if (this.token) {
-                        itemModifier.container.tokenId = this.token.id;
-                        itemModifier.container.sceneId = this.token.parent.id;
+                        itemModifier.container.tokenId = this.token?.id;
+                        itemModifier.container.sceneId = this.token?.parent?.id;
                     }
                 }
 

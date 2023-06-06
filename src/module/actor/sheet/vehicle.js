@@ -57,9 +57,39 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         const localizedNoLimit = game.i18n.format("SFRPG.VehicleSheet.Passengers.UnlimitedMax");
 
         const crew = {
-            pilots: { label: game.i18n.format("SFRPG.VehicleSheet.Passengers.Pilot") + " " + game.i18n.format("SFRPG.VehicleSheet.Passengers.AssignedCount", {"current": pilotActors.length, "max": crewData.pilot.limit > -1 ? crewData.pilot.limit : localizedNoLimit}), actors: pilotActors, dataset: { type: "passenger", role: "pilot" }},
-            complement: { label: game.i18n.format("SFRPG.VehicleSheet.Passengers.Complement") + " " + game.i18n.format("SFRPG.VehicleSheet.Passengers.AssignedCount", {"current": complementActors.length, "max": crewData.complement.limit > -1 ? crewData.complement.limit : localizedNoLimit}), actors: complementActors, dataset: { type: "passenger", role: "complement" }},
-            passengers: { label: game.i18n.format("SFRPG.VehicleSheet.Passengers.Passengers") + " " + game.i18n.format("SFRPG.VehicleSheet.Passengers.AssignedCount", {"current": passengerActors.length, "max": crewData.passenger.limit > -1 ? crewData.passenger.limit : localizedNoLimit}), actors: passengerActors, dataset: { type: "passenger", role: "passenger" }}
+            pilots: {
+                label:
+                    game.i18n.format("SFRPG.VehicleSheet.Passengers.Pilot")
+                    + " "
+                    + game.i18n.format("SFRPG.VehicleSheet.Passengers.AssignedCount", {
+                        current: pilotActors.length,
+                        max: crewData.pilot.limit > -1 ? crewData.pilot.limit : localizedNoLimit
+                    }),
+                actors: pilotActors,
+                dataset: { type: "passenger", role: "pilot" }
+            },
+            complement: {
+                label:
+                    game.i18n.format("SFRPG.VehicleSheet.Passengers.Complement")
+                    + " "
+                    + game.i18n.format("SFRPG.VehicleSheet.Passengers.AssignedCount", {
+                        current: complementActors.length,
+                        max: crewData.complement.limit > -1 ? crewData.complement.limit : localizedNoLimit
+                    }),
+                actors: complementActors,
+                dataset: { type: "passenger", role: "complement" }
+            },
+            passengers: {
+                label:
+                    game.i18n.format("SFRPG.VehicleSheet.Passengers.Passengers")
+                    + " "
+                    + game.i18n.format("SFRPG.VehicleSheet.Passengers.AssignedCount", {
+                        current: passengerActors.length,
+                        max: crewData.passenger.limit > -1 ? crewData.passenger.limit : localizedNoLimit
+                    }),
+                actors: passengerActors,
+                dataset: { type: "passenger", role: "passenger" }
+            }
         };
 
         data.crew = Object.values(crew);
@@ -97,9 +127,21 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         let [attacks, primarySystems, expansionBays, actorResources] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
             if (!item.config) item.config = {};
+            const hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.system.actionType) && (!["weapon", "shield"].includes(item.type) || item.system.equipped);
+            const hasDamage = item.system.damage?.parts
+                && item.system.damage.parts.length > 0
+                && (!["weapon", "shield"].includes(item.type) || item.system.equipped);
 
             if (item.type === "actorResource") {
                 this._prepareActorResource(item, actorData);
+            }
+
+            if (item.config.hasAttack || hasAttack) {
+                this._prepareAttackString(item);
+            }
+
+            if (item.config.hasDamage || hasDamage) {
+                this._prepareDamageString(item);
             }
 
             if (item.type === "weapon" || item.type === "vehicleAttack") {

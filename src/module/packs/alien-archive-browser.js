@@ -31,7 +31,7 @@ class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
 
     async loadItems() {
         console.log('Starfinder | Compendium Browser | Started loading actors');
-        const items = [];
+        const items = new Map();
 
         for await (const {pack, content} of packLoader.loadPacks(this.entityType, this._loadedPacks)) {
             console.log(`Starfinder | Compendium Browser | ${pack.metadata.label} - ${content.length} entries found`);
@@ -60,7 +60,7 @@ class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
                 }
 
                 if (this.allowedItem(item)) {
-                    items.push(itemData);
+                    items.set(itemData.uuid, itemData);
                 }
             }
         }
@@ -70,7 +70,7 @@ class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     getSortingMethods() {
-        let sortingMethods = super.getSortingMethods();
+        const sortingMethods = super.getSortingMethods();
         sortingMethods["cr"] = {
             name: game.i18n.format("SFRPG.Browsers.AlienArchiveBrowser.BrowserSortMethodCR"),
             method: this._sortByCR
@@ -131,7 +131,7 @@ class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     getFilters() {
-        let filters = {
+        const filters = {
             cr: {
                 label: game.i18n.format("SFRPG.Browsers.AlienArchiveBrowser.BrowserFilterCR"),
                 content: {min: 0, max: 25},
@@ -148,10 +148,10 @@ class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
             },
             organizationSize: {
                 label: game.i18n.format("SFRPG.Browsers.AlienArchiveBrowser.BrowserFilterOrganizationSize"),
-                content: {value: 1},
-                range: {min: 1, max: null},
+                content: {value: null},
+                range: {min: null, max: null},
                 filter: (element, filters) => { return this._filterOrganizationSize(element, filters); },
-                reset: (filter) => { filter.content = {value: 1}; },
+                reset: (filter) => { filter.content = {value: null}; },
                 type: "value"
             },
             size: {
@@ -193,7 +193,7 @@ class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
 
     _filterCR(element, range) {
         const itemUuid = element.dataset.entryUuid;
-        const alien = this.items.find(x => x.uuid === itemUuid);
+        const alien = this.items.get(itemUuid);
         const alienCR = alien.system.cr;
 
         if (range.max >= range.min) {
@@ -205,7 +205,7 @@ class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
 
     _filterHP(element, range) {
         const itemUuid = element.dataset.entryUuid;
-        const alien = this.items.find(x => x.uuid === itemUuid);
+        const alien = this.items.get(itemUuid);
         const alienHP = alien.system.attributes.hp.max;
 
         if (range.max > range.min) {
@@ -216,8 +216,9 @@ class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     _filterOrganizationSize(element, filterData) {
+        if (!filterData.value) return true;
         const itemUuid = element.dataset.entryUuid;
-        const alien = this.items.find(x => x.uuid === itemUuid);
+        const alien = this.items.get(itemUuid);
         const alienOrganizationSize = alien.system.details.organizationSize || {min: 1, max: null};
 
         if (alienOrganizationSize.max > alienOrganizationSize.min) {
@@ -228,20 +229,20 @@ class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     _filterSizes(element, filters) {
-        let itemUuid = element.dataset.entryUuid;
-        let alien = this.items.find(x => x.uuid === itemUuid);
-        let alienSize = alien ? alien.system.traits.size : "null";
+        const itemUuid = element.dataset.entryUuid;
+        const alien = this.items.get(itemUuid);
+        const alienSize = alien ? alien.system.traits.size : "null";
         return alien && filters.includes(alienSize);
     }
 
     _filterTypes(element, filters) {
-        let itemUuid = element.dataset.entryUuid;
-        let alien = this.items.find(x => x.uuid === itemUuid);
-        let alienType = alien ? alien.system.details.type.toLowerCase() : "null";
+        const itemUuid = element.dataset.entryUuid;
+        const alien = this.items.get(itemUuid);
+        const alienType = alien ? alien.system.details.type.toLowerCase() : "null";
 
         let found = false;
-        for (let filter in filters) {
-            let filterValue = filters[filter];
+        for (const filter in filters) {
+            const filterValue = filters[filter];
             if (alienType.includes(filterValue)) {
                 found = true;
                 break;
@@ -252,9 +253,9 @@ class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     _filterAlignment(element, filters) {
-        let itemUuid = element.dataset.entryUuid;
-        let alien = this.items.find(x => x.uuid === itemUuid);
-        let alienAlignment = alien?.system?.details?.alignment?.toLowerCase();
+        const itemUuid = element.dataset.entryUuid;
+        const alien = this.items.get(itemUuid);
+        const alienAlignment = alien?.system?.details?.alignment?.toLowerCase();
         return alien && filters.includes(alienAlignment);
     }
 }
@@ -268,7 +269,7 @@ export function getAlienArchiveBrowser() {
 }
 
 Hooks.on('ready', e => {
-    let browser = getAlienArchiveBrowser();
+    const browser = getAlienArchiveBrowser();
 
     const defaultAllowedCompendiums = ["alien-archives"];
     browser.initializeSettings(defaultAllowedCompendiums);

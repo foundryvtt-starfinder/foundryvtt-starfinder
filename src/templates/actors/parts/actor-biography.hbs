@@ -1,50 +1,50 @@
 <div class="flexcol bio-properties">
-    <div class="form-group singleFlex" data-tippy-content="{{localize 'SFRPG.ActorSheet.Biography.ImageTooltip'}}">
+    <div class="form-group singleFlex" data-tooltip="{{localize 'SFRPG.ActorSheet.Biography.ImageTooltip'}}">
         <label>Full body image</label>
     </div>
     <img class="avatar" src="{{system.details.biography.fullBodyImage}}" title="{{actor.name}}&#10;{{localize 'SFRPG.ActorSheet.Biography.ImageTooltip'}}" data-edit="system.details.biography.fullBodyImage" width="200" height="250" />
 
     {{#unless hideVitals}}
-    <div class="form-group stacked doubleFlex" data-tippy-content="<strong>{{localize 'SFRPG.ActorSheet.Biography.DateOfBirth'}}</strong><br>@details.biography.dateOfBirth">
+    <div class="form-group stacked doubleFlex" data-tooltip="<strong>{{localize 'SFRPG.ActorSheet.Biography.DateOfBirth'}}</strong><br>@details.biography.dateOfBirth">
         <label class="singleLine">{{localize "SFRPG.ActorSheet.Biography.DateOfBirth"}}</label>
         <input class="singleLine" type="text" name="system.details.biography.dateOfBirth" value="{{system.details.biography.dateOfBirth}}" data-dtype="String" placeholder="{{localize 'SFRPG.ActorSheet.Biography.DateOfBirthPlaceholder'}}" />
     </div>
-    <div class="form-group singleFlex" data-tippy-content="<strong>{{localize 'SFRPG.ActorSheet.Biography.Age'}}</strong><br>@details.biography.age">
+    <div class="form-group singleFlex" data-tooltip="<strong>{{localize 'SFRPG.ActorSheet.Biography.Age'}}</strong><br>@details.biography.age">
         <label>{{localize "SFRPG.ActorSheet.Biography.Age"}}</label>
         <div class="form-fields">
             <input type="text" name="system.details.biography.age" value="{{system.details.biography.age}}" data-dtype="Number" placeholder="{{localize 'SFRPG.ActorSheet.Biography.AgePlaceholder'}}" />
         </div>
     </div>
-    <div class="form-group stacked doubleFlex" data-tippy-content="<strong>Gender/Pronouns</strong><br>@details.biography.genderPronouns">
+    <div class="form-group stacked doubleFlex" data-tooltip="<strong>Gender/Pronouns</strong><br>@details.biography.genderPronouns">
         <label class="singleLine">{{localize 'SFRPG.ActorSheet.Biography.GenderPronouns'}}</label>
         <input class="singleLine" type="text" name="system.details.biography.genderPronouns" value="{{system.details.biography.genderPronouns}}" data-dtype="String" placeholder="{{localize 'SFRPG.ActorSheet.Biography.GenderPronounsPlaceholder'}}" />
     </div>
-    <div class="form-group singleFlex" data-tippy-content="<strong>{{localize 'SFRPG.ActorSheet.Biography.Height'}}</strong><br>@details.biography.height">
+    <div class="form-group singleFlex" data-tooltip="<strong>{{localize 'SFRPG.ActorSheet.Biography.Height'}}</strong><br>@details.biography.height">
         <label>{{localize "SFRPG.ActorSheet.Biography.Height"}}</label>
         <div class="form-fields">
             <input type="text" name="system.details.biography.height" value="{{system.details.biography.height}}" data-dtype="String" placeholder="{{localize 'SFRPG.ActorSheet.Biography.HeightPlaceholder'}}" />
         </div>
     </div>
-    <div class="form-group singleFlex" data-tippy-content="<strong>{{localize 'SFRPG.ActorSheet.Biography.Weight'}}</strong><br>@details.biography.weight">
+    <div class="form-group singleFlex" data-tooltip="<strong>{{localize 'SFRPG.ActorSheet.Biography.Weight'}}</strong><br>@details.biography.weight">
         <label>{{localize "SFRPG.ActorSheet.Biography.Weight"}}</label>
         <div class="form-fields">
             <input type="text" name="system.details.biography.weight" value="{{system.details.biography.weight}}" data-dtype="String" placeholder="{{localize 'SFRPG.ActorSheet.Biography.WeightPlaceholder'}}" />
         </div>
     </div>
-    <div class="form-group singleFlex" data-tippy-content="<strong>Home World</strong><br>@details.biography.homeWorld">
+    <div class="form-group singleFlex" data-tooltip="<strong>Home World</strong><br>@details.biography.homeWorld">
         <label>{{localize 'SFRPG.ActorSheet.Biography.HomeWorld'}}</label>
         <div class="form-fields">
             <input type="text" name="system.details.biography.homeWorld" value="{{system.details.biography.homeWorld}}" data-dtype="String" placeholder="{{localize 'SFRPG.ActorSheet.Biography.HomeWorldPlaceholder'}}" />
         </div>
     </div>
-    <div class="form-group singleFlex" data-tippy-content="<strong>Deity</strong><br>@details.biography.deity">
+    <div class="form-group singleFlex" data-tooltip="<strong>Deity</strong><br>@details.biography.deity">
         <label>{{localize 'SFRPG.ActorSheet.Biography.Deity'}}</label>
         <div class="form-fields">
             <input type="text" name="system.details.biography.deity" value="{{system.details.biography.deity}}" data-dtype="String" placeholder="{{localize 'SFRPG.ActorSheet.Biography.DeityPlaceholder'}}" />
         </div>
     </div>
     {{/unless}}
-    <div class="form-group singleFlex" data-tippy-content="<strong>{{localize 'SFRPG.ActorSheet.Biography.OtherVisuals'}}</strong><br>@details.biography.otherVisuals">
+    <div class="form-group singleFlex" data-tooltip="<strong>{{localize 'SFRPG.ActorSheet.Biography.OtherVisuals'}}</strong><br>@details.biography.otherVisuals">
         <label>{{localize "SFRPG.ActorSheet.Biography.OtherVisuals"}}</label>
     </div>
 
@@ -76,7 +76,7 @@
         <div class="tab" data-group="biographyTabs" data-tab="ecology">
             <div class="flexrow">
                 <div class="flexcol">
-                    <div class="form-group" data-tippy-content="<strong>{{localize 'SFRPG.Environment'}}</strong><br/>@system.details.biography.environment">
+                    <div class="form-group" data-tooltip="<strong>{{localize 'SFRPG.Environment'}}</strong><br/>@system.details.biography.environment">
                         <label>{{localize 'SFRPG.Environment'}}</label>
                         <div class="form-fields">
                             <input style="border-color: #191813;" type="text" name="system.details.environment" value="{{system.details.environment}}" placeholder="{{localize "SFRPG.Any"}}"/>
@@ -86,7 +86,7 @@
             </div>
             <div class="flexrow">
                 <div class="flexcol">
-                    <div class="form-group" data-tippy-content="<strong>{{localize 'SFRPG.Organization'}}</strong><br/>@system.details.biography.organization">
+                    <div class="form-group" data-tooltip="<strong>{{localize 'SFRPG.Organization'}}</strong><br/>@system.details.biography.organization">
                         <label>{{localize 'SFRPG.Organization'}}</label>
                         <div class="form-fields">
                             <input style="border-color: #191813;" type="text" name="system.details.organization" value="{{system.details.organization}}" placeholder="{{localize "SFRPG.Any"}}"/>
@@ -97,7 +97,7 @@
             <div class="flexrow">
                 <div class="flexcol">
                     <div class="form-group">
-                        <label data-tippy-content="{{ localize "SFRPG.NPCSheet.Biography.Organization.GroupSizeTooltip" }}">
+                        <label data-tooltip="{{ localize "SFRPG.NPCSheet.Biography.Organization.GroupSizeTooltip" }}">
                             {{ localize "SFRPG.NPCSheet.Biography.Organization.GroupSize" }}
                         </label>
                         <div class="form-fields">

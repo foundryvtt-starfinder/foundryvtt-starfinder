@@ -40,7 +40,7 @@
 
         <ol class="properties-list">
             {{#each itemProperties}}
-            <li {{#if this.tooltip}} data-tippy-content="{{ this.tooltip }}"{{/if}}>{{ this.name }}</li>
+            <li {{#if this.tooltip}} data-tooltip="{{ this.tooltip }}"{{/if}}>{{#if this.title}}<strong>{{this.title}}</strong><hr>{{/if}}{{ this.name }}</li>
             {{/each}}
         </ol>
     </div>

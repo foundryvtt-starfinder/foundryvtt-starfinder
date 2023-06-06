@@ -1,3 +1,4 @@
+import { CombatDifficulty } from "../apps/combat-difficulty.js";
 import { DiceSFRPG } from "../dice.js";
 import RollContext from "../rolls/rollcontext.js";
 
@@ -45,6 +46,15 @@ Vehicle has the following 3 phases: "Pilot Actions", "Chase Progress", and "Comb
 export class CombatSFRPG extends Combat {
     static HiddenTurn = 0;
 
+    _preCreate(data, options, user) {
+        const update = {
+            "flags.sfrpg.combatType": this.getCombatType(),
+            "flags.sfrpg.phase": 0
+        };
+
+        this.updateSource(update);
+    }
+
     async begin() {
         const update = {
             "flags.sfrpg.combatType": this.getCombatType(),
@@ -69,10 +79,12 @@ export class CombatSFRPG extends Combat {
 
         if (eventData.isNewPhase) {
             if (this.round.resetInitiative) {
-                const updates = this.combatants.map(c => { return {
-                    _id: c.id,
-                    initiative: null
-                };});
+                const updates = this.combatants.map(c => {
+                    return {
+                        _id: c.id,
+                        initiative: null
+                    };
+                });
                 await this.updateEmbeddedDocuments("Combatant", updates);
             }
         }
@@ -89,16 +101,16 @@ export class CombatSFRPG extends Combat {
     setupTurns() {
         let sortMethod = "desc";
         switch (this.getCombatType()) {
-        default:
-        case "normal":
-            sortMethod = CombatSFRPG.normalCombat.initiativeSorting;
-            break;
-        case "starship":
-            sortMethod = CombatSFRPG.starshipCombat.initiativeSorting;
-            break;
-        case "vehicleChase":
-            sortMethod = CombatSFRPG.vehicleChase.initiativeSorting;
-            break;
+            default:
+            case "normal":
+                sortMethod = CombatSFRPG.normalCombat.initiativeSorting;
+                break;
+            case "starship":
+                sortMethod = CombatSFRPG.starshipCombat.initiativeSorting;
+                break;
+            case "vehicleChase":
+                sortMethod = CombatSFRPG.vehicleChase.initiativeSorting;
+                break;
         }
 
         const combatants = this.combatants;
@@ -332,10 +344,12 @@ export class CombatSFRPG extends Combat {
 
         if (eventData.isNewPhase) {
             if (newPhase.resetInitiative) {
-                const updates = this.combatants.map(c => { return {
-                    _id: c.id,
-                    initiative: null
-                };});
+                const updates = this.combatants.map(c => {
+                    return {
+                        _id: c.id,
+                        initiative: null
+                    };
+                });
                 await this.updateEmbeddedDocuments("Combatant", updates);
             }
         }
@@ -494,25 +508,25 @@ export class CombatSFRPG extends Combat {
 
     getCombatName() {
         switch (this.getCombatType()) {
-        default:
-        case "normal":
-            return game.i18n.format(CombatSFRPG.normalCombat.name);
-        case "starship":
-            return game.i18n.format(CombatSFRPG.starshipCombat.name);
-        case "vehicleChase":
-            return game.i18n.format(CombatSFRPG.vehicleChase.name);
+            default:
+            case "normal":
+                return game.i18n.format(CombatSFRPG.normalCombat.name);
+            case "starship":
+                return game.i18n.format(CombatSFRPG.starshipCombat.name);
+            case "vehicleChase":
+                return game.i18n.format(CombatSFRPG.vehicleChase.name);
         }
     }
 
     getPhases() {
         switch (this.getCombatType()) {
-        default:
-        case "normal":
-            return CombatSFRPG.normalCombat.phases;
-        case "starship":
-            return CombatSFRPG.starshipCombat.phases;
-        case "vehicleChase":
-            return CombatSFRPG.vehicleChase.phases;
+            default:
+            case "normal":
+                return CombatSFRPG.normalCombat.phases;
+            case "starship":
+                return CombatSFRPG.starshipCombat.phases;
+            case "vehicleChase":
+                return CombatSFRPG.vehicleChase.phases;
         }
     }
 
@@ -552,11 +566,53 @@ export class CombatSFRPG extends Combat {
         return this.getIndexOfFirstUndefeatedCombatant() === null;
     }
 
+    renderCombatPhase(html) {
+        let phaseDisplay = document.createElement("h4");
+        phaseDisplay.classList.add("combat-type");
+        phaseDisplay.innerHTML = game.i18n.format(this.getCurrentPhase().name);
+        html.getElementsByClassName('combat-tracker-header')[0].appendChild(phaseDisplay);
+    }
+
+    renderCombatTypeControls(html) {
+        const prevCombatTypeButton = `<a class="combat-type-prev" title="${game.i18n.format("SFRPG.Combat.EncounterTracker.SelectPrevType")}"><i class="fas fa-caret-left"></i></a>`;
+        const nextCombatTypeButton = `<a class="combat-type-next" title="${game.i18n.format("SFRPG.Combat.EncounterTracker.SelectNextType")}"><i class="fas fa-caret-right"></i></a>`;
+
+        let combatTypeControls = document.createElement("div");
+        combatTypeControls.classList.add("combat-type");
+
+        if (game.user.isGM) {
+            combatTypeControls.innerHTML = `${prevCombatTypeButton} &nbsp; ${this.getCombatName()} &nbsp; ${nextCombatTypeButton}`;
+        } else {
+            combatTypeControls.innerHTML = this.getCombatName();
+        }
+
+        html.getElementsByClassName('combat-tracker-header')[0].appendChild(combatTypeControls);
+    }
+
+    renderDifficulty(diffObject, html) {
+        const difficulty = diffObject.difficultyData.difficulty;
+        const combatType = this.getCombatType();
+
+        let difficultyContainer = document.createElement("div");
+        difficultyContainer.classList.add("combat-difficulty-container");
+
+        let difficultyHTML = document.createElement("a");
+        difficultyHTML.classList.add("combat-difficulty", difficulty);
+        if (combatType === 'normal') {
+            difficultyHTML.title = `${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.ClickForDetails")}\n\n${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.PCs")}: ${diffObject.difficultyData.PCs.length} [${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.APL")} ${diffObject.difficultyData.APL}]\n${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.HostileNPCs")}: ${diffObject.difficultyData.enemies.length} [${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.CR")} ${diffObject.difficultyData.CR}]`;
+        } else if (combatType === 'starship') {
+            difficultyHTML.title = game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.ClickForDetails");
+        }
+        difficultyHTML.innerHTML = `Difficulty: ${CONFIG.SFRPG.difficultyLevels[difficulty]}`;
+
+        difficultyContainer.appendChild(difficultyHTML);
+        html.getElementsByClassName('combat-tracker-header')[0].appendChild(difficultyContainer);
+    }
+
     _getInitiativeFormula(combatant) {
         if (this.getCombatType() === "starship") {
             return "1d20 + @pilot.skills.pil.mod";
-        }
-        else {
+        } else {
             return "1d20 + @combatant.attributes.init.total";
         }
     }
@@ -579,6 +635,7 @@ export class CombatSFRPG extends Combat {
         const rollResult = await DiceSFRPG.createRoll({
             rollContext: rollContext,
             parts: parts,
+            event,
             title: game.i18n.format("SFRPG.Rolls.InitiativeRollFull", {name: combatant.actor.name})
         });
 
@@ -702,21 +759,19 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
         return;
     }
 
+    const combatType = activeCombat.getCombatType();
+
     const header = html.find('.combat-tracker-header');
     const footer = html.find('.directory-footer');
-
-    const roundHeader = header.find('h3');
-    const originalHtml = roundHeader.html();
 
     if (activeCombat.round) {
         const phases = activeCombat.getPhases();
         if (phases.length > 1) {
-            roundHeader.replaceWith(`<div>${originalHtml}<h4 class="combat-type">${game.i18n.format(activeCombat.getCurrentPhase().name)}</h4></div>`);
+            activeCombat.renderCombatPhase(html[0]);
         }
     } else {
-        const prevCombatTypeButton = `<a class="combat-type-prev" title="${game.i18n.format("SFRPG.Combat.EncounterTracker.SelectPrevType")}"><i class="fas fa-caret-left"></i></a>`;
-        const nextCombatTypeButton = `<a class="combat-type-next" title="${game.i18n.format("SFRPG.Combat.EncounterTracker.SelectNextType")}"><i class="fas fa-caret-right"></i></a>`;
-        roundHeader.replaceWith(`<div>${originalHtml}<h4 class="combat-type">${prevCombatTypeButton} &nbsp; ${activeCombat.getCombatName()} &nbsp; ${nextCombatTypeButton}</h4></div>`);
+        // Add buttons for switching combat type
+        activeCombat.renderCombatTypeControls(html[0]);
 
         // Handle button clicks
         const configureButtonPrev = header.find('.combat-type-prev');
@@ -735,6 +790,27 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
         beginButton.click(ev => {
             ev.preventDefault();
             activeCombat.begin();
+        });
+    }
+
+    // Perform difficulty calculations, and display if appropriate
+    if (game.user.isGM && combatType !== "vehicleChase") {
+        const diffDisplay = game.settings.get("sfrpg", "difficultyDisplay");
+        if (!diffDisplay) return;
+
+        const diffObject = new CombatDifficulty(activeCombat);
+
+        if (combatType === "normal") diffObject.getNormalEncounterInfo();
+        else if (combatType === "starship") diffObject.getStarshipEncounterInfo();
+
+        // Display difficulty
+        activeCombat.renderDifficulty(diffObject, html[0]);
+
+        // Handle button presses
+        const difficultyButton = header.find('.combat-difficulty');
+        difficultyButton.click(async ev => {
+            ev.preventDefault();
+            diffObject.render(true);
         });
     }
 });

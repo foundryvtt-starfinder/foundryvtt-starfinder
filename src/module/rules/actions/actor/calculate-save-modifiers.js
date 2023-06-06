@@ -14,21 +14,13 @@ export default function(engine) {
             .shift();
 
         const addModifier = (bonus, data, item, localizationKey) => {
-            if (bonus.modifierType === SFRPGModifierType.FORMULA) {
-                if (item.rolledMods) {
-                    item.rolledMods.push({mod: bonus.modifier, bonus: bonus});
-                } else {
-                    item.rolledMods = [{mod: bonus.modifier, bonus: bonus}];
-                }
-
-                return 0;
+            if (item.calculatedMods) {
+                item.calculatedMods.push({mod: bonus.modifier, bonus: bonus});
+            } else {
+                item.calculatedMods = [{mod: bonus.modifier, bonus: bonus}];
             }
 
-            let computedBonus = 0;
-            try {
-                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
-                computedBonus = roll.total;
-            } catch {}
+            let computedBonus = bonus.max || 0;
 
             let saveMod = 0;
             switch (bonus.valueAffected) {
@@ -63,21 +55,50 @@ export default function(engine) {
             return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.SAVE, SFRPGEffectType.SAVES].includes(mod.effectType);
         });
 
-        const fortMods = context.parameters.stackModifiers.process(filteredMods.filter(mod => [
-            "highest",
-            "lowest",
-            "fort"
-        ].includes(mod.valueAffected) || mod.effectType === SFRPGEffectType.SAVES), context);
-        const reflexMods = context.parameters.stackModifiers.process(filteredMods.filter(mod => [
-            "highest",
-            "lowest",
-            "reflex"
-        ].includes(mod.valueAffected) || mod.effectType === SFRPGEffectType.SAVES), context);
-        const willMods = context.parameters.stackModifiers.process(filteredMods.filter(mod => [
-            "highest",
-            "lowest",
-            "will"
-        ].includes(mod.valueAffected) || mod.effectType === SFRPGEffectType.SAVES), context);
+        fort.rolledMods = null;
+        const fortMods = context.parameters.stackModifiers.process(filteredMods.filter(mod => {
+            if (mod.modifierType === SFRPGModifierType.FORMULA && (mod.effectType === SFRPGEffectType.SAVES || [ "highest", "lowest", "fort" ].includes(mod.valueAffected))) {
+                if (fort.rolledMods) {
+                    fort.rolledMods.push({mod: mod.modifier, bonus: mod});
+                } else {
+                    fort.rolledMods = [{mod: mod.modifier, bonus: mod}];
+                }
+                return false;
+            }
+            if ([ "highest", "lowest", "fort" ].includes(mod.valueAffected)) return true;
+            if (mod.effectType === SFRPGEffectType.SAVES) return true;
+            return false;
+        }), context);
+
+        reflex.rolledMods = null;
+        const reflexMods = context.parameters.stackModifiers.process(filteredMods.filter(mod => {
+            if (mod.modifierType === SFRPGModifierType.FORMULA && (mod.effectType === SFRPGEffectType.SAVES || [ "highest", "lowest", "reflex" ].includes(mod.valueAffected))) {
+                if (reflex.rolledMods) {
+                    reflex.rolledMods.push({mod: mod.modifier, bonus: mod});
+                } else {
+                    reflex.rolledMods = [{mod: mod.modifier, bonus: mod}];
+                }
+                return false;
+            }
+            if ([ "highest", "lowest", "reflex" ].includes(mod.valueAffected)) return true;
+            if (mod.effectType === SFRPGEffectType.SAVES) return true;
+            return false;
+        }), context);
+
+        will.rolledMods = null;
+        const willMods = context.parameters.stackModifiers.process(filteredMods.filter(mod => {
+            if (mod.modifierType === SFRPGModifierType.FORMULA && (mod.effectType === SFRPGEffectType.SAVES || [ "highest", "lowest", "will" ].includes(mod.valueAffected))) {
+                if (will.rolledMods) {
+                    will.rolledMods.push({mod: mod.modifier, bonus: mod});
+                } else {
+                    will.rolledMods = [{mod: mod.modifier, bonus: mod}];
+                }
+                return false;
+            }
+            if ([ "highest", "lowest", "will" ].includes(mod.valueAffected)) return true;
+            if (mod.effectType === SFRPGEffectType.SAVES) return true;
+            return false;
+        }), context);
 
         let fortMod = Object.entries(fortMods).reduce((sum, mod) => {
             if (mod[1] === null || mod[1].length < 1) return sum;

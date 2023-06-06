@@ -19,10 +19,10 @@ export default class BrowserEnricher extends BaseEnricher {
 
     /**
      * @override
-     * Override to use angle brackets so any JSON doesn't interfere with closing brackets
+     * Override to use normal brackets so any JSON doesn't interfere with closing brackets
      */
     get regex() {
-        return new RegExp(`(@${this.enricherType})<([^>]+)>(?:{([^}]+)})?`, "gm");
+        return new RegExp(`(@${this.enricherType})\\(([^>]+)\\)(?:{([^}]+)})?`, "gm");
     }
 
     /** @inheritdoc */
@@ -53,7 +53,7 @@ export default class BrowserEnricher extends BaseEnricher {
 
         if (this.args.filters) a.dataset.filters = JSON.stringify(this.args.filters);
 
-        a.innerHTML = `<i class="fas ${this.icons[this.args.type]}"></i>${this.name}`;
+        a.innerHTML = `<i class="fas ${this.icons[this.args.type]}"></i>${a.innerHTML}`;
 
         return a;
 
@@ -61,7 +61,8 @@ export default class BrowserEnricher extends BaseEnricher {
 
     static hasListener = true;
 
-    static listener(ev, data) {
+    static listener(event) {
+        const data = event.currentTarget.dataset;
         let browser, filters;
 
         // Gotta double parse this to get rid of escape characters from the HTML.

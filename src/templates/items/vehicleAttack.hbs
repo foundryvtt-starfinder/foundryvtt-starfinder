@@ -16,14 +16,14 @@
 
             {{!-- Item Summary --}}
             <ul class="summary flexrow">
-                <li class="wide" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.SourceTooltip" }}">
+                <li class="wide" data-tooltip="{{ localize "SFRPG.ItemSheet.Header.SourceTooltip" }}">
                 <input type="text" name="system.source" value="{{itemData.source}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Source" }}"/>
                 </li>
             </ul>
 
             {{!-- Header Attributes --}}
             <ul class="attributes flexrow">
-                <li class="attribute" data-tippy-content="{{ localize "SFRPG.VehicleAttackSheet.Header.SaveTooltip" }}">
+                <li class="attribute" data-tooltip="{{ localize "SFRPG.VehicleAttackSheet.Header.SaveTooltip" }}">
                 <h4 class="attribute-name box-title">{{ localize "SFRPG.ItemSheet.Header.Save" }}</h4>
                 <div class="attribute-value">
                     <label>{{placeholders.savingThrow.value}}</label>
@@ -88,7 +88,7 @@
                             </label>
                         </div>
                     </div>
-                    <div class="damage-part-operator form-group flexrow" data-tippy-content="When an item or ablity does multiple types of damage, this will determine if both damage types apply, or if only one or the other apply.">
+                    <div class="damage-part-operator form-group flexrow" data-tooltip="When an item or ablity does multiple types of damage, this will determine if both damage types apply, or if only one or the other apply.">
                         <label>{{localize "Damage Operator"}}</label>
                         <select name="system.damage.parts.{{i}}.operator">
                             {{#select (lookup this "operator")}}

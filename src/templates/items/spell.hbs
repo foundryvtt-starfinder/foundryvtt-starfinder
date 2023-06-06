@@ -7,22 +7,22 @@
         <div class="header-details flexrow">
             <div class="header-background flexrow">
                 <h1 class="charname" style="flex: auto;">
-                    <input name="name" type="text" value="{{item.name}}" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.ItemNameTooltip" }}" placeholder="{{ localize "SFRPG.ItemSheet.Header.ItemName" }}"/>
+                    <input name="name" type="text" value="{{item.name}}" data-tooltip="{{ localize "SFRPG.ItemSheet.Header.ItemNameTooltip" }}" placeholder="{{ localize "SFRPG.ItemSheet.Header.ItemName" }}"/>
                 </h1>
                 <div class="item-subtitle">
-                    <h4 data-tippy-content="Item Type" class="item-type">{{itemType}}</h4>
-                    <span data-tippy-content="Item Status" class="item-status">{{itemStatus}}</span>
+                    <h4 data-tooltip="Item Type" class="item-type">{{itemType}}</h4>
+                    <span data-tooltip="Item Status" class="item-status">{{itemStatus}}</span>
                 </div>
             </div>
     
             {{!-- Item Summary --}}
             <ul class="summary flexrow">
                 {{#if category.enabled}}
-                <li class="short" data-tippy-content="{{localize category.tooltip}}">
+                <li class="short" data-tooltip="{{localize category.tooltip}}">
                     <label>{{localize category.value}}</label>
                 </li>
                 {{/if}}
-                <li class="wide" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.SourceTooltip" }}">
+                <li class="wide" data-tooltip="{{ localize "SFRPG.ItemSheet.Header.SourceTooltip" }}">
                     <input type="text" name="system.source" value="{{itemData.source}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Source" }}"/>
                 </li>
             </ul>

@@ -1,4 +1,4 @@
-import { moveItemBetweenActorsAsync, onCreateItemCollection, ActorItemHelper } from "./actor/actor-inventory-utils.js";
+import { ActorItemHelper, moveItemBetweenActorsAsync, onCreateItemCollection } from "./actor/actor-inventory-utils.js";
 import { ItemCollectionSheet } from "./apps/item-collection-sheet.js";
 
 import { RPC } from "./rpc.js";
@@ -46,41 +46,61 @@ function trySetupLootToken(token) {
 }
 
 /**
- * Override the default Grid measurement function to add additional distance for subsequent diagonal moves
- * See BaseGrid.measureDistance for more details.
+ * Measure the distance between two pixel coordinates
+ * See BaseGrid.measureDistance for more details
  *
- * @param {Object[]} segments The starting position
- * @param {Object} options The ending position
- * @returns {Number[]} An Array of distance measurmements for each segment
+ * @param segments
+ * @param options
  */
-export const measureDistances = function(segments, options = {}) {
-    if (!canvas.initialized) { return; }
-    if (!options?.gridSpaces) {
-        return BaseGrid.prototype.measureDistances.call(this, segments, options);
-    }
+export const measureDistances = (segments, options = {}) => {
+    if (!options.gridSpaces) return BaseGrid.prototype.measureDistances.call(this, segments, options);
 
-    let nDiagonal = 0;
-    const rule = this.parent.diagonalRule;
-    const d = canvas.dimensions;
+    // Track the total number of diagonals
+    const diagonalRule = game.settings.get("sfrpg", "diagonalMovement");
+    const state = { diagonals: 0 };
 
-    return segments.map(s => {
-        let r = s.ray;
+    // Iterate over measured segments
+    return segments.map((s) => measureDistance(null, null, { ray: s.ray, diagonalRule, state }));
+};
 
-        let nx = Math.abs(Math.ceil(r.dx / d.size));
-        let ny = Math.abs(Math.ceil(r.dy / d.size));
+/**
+ * Measure distance between two points.
+ *
+ * @param {Point} p0 Start point on canvas
+ * @param {Point} p1 End point on canvas
+ * @param {object} options Measuring options.
+ * @param {"5105"|"555"} [options.diagonalRule] Used diagonal rule. Defaults to 5/10/5
+ * @param {Ray} [options.ray] Pre-generated ray to use instead of the points.
+ * @param {MeasureState} [options.state] Optional state tracking across multiple measures.
+ *
+ * @returns {number} Grid distance between the two points.
+ */
+export const measureDistance = (
+    p0,
+    p1,
+    { ray = null, diagonalRule = "5105", state = { diagonals: 0, cells: 0 } } = {}
+) => {
 
-        let nd = Math.min(nx, ny);
-        let ns = Math.abs(ny - nx);
-        nDiagonal += nd;
+    ray ??= new Ray(p0, p1);
+    const gs = canvas.dimensions.size,
+        nx = Math.ceil(Math.abs(ray.dx / gs)),
+        ny = Math.ceil(Math.abs(ray.dy / gs));
 
-        if (rule === "5105") {
-            let nd10 = Math.floor(nDiagonal / 2) - Math.floor((nDiagonal - nd) / 2);
-            let spaces = (nd10 * 2) + (nd - nd10) + ns;
-            return spaces * canvas.dimensions.distance;
-        }
+    // Get the number of straight and diagonal moves
+    const nDiagonal = Math.min(nx, ny),
+        nStraight = Math.abs(ny - nx);
 
-        return (ns + nd) * canvas.dimensions.distance;
-    });
+    state.diagonals += nDiagonal;
+
+    let cells = 0;
+
+    if (diagonalRule === "5105") {
+        const nd10 = Math.floor(state.diagonals / 2) - Math.floor((state.diagonals - nDiagonal) / 2);
+        cells = nd10 * 2 + (nDiagonal - nd10) + nStraight;
+    } else cells = nStraight + nDiagonal;
+
+    state.cells += cells;
+    return cells * canvas.dimensions.distance;
 };
 
 /**
@@ -185,8 +205,7 @@ async function handleCanvasDropAsync(canvas, data) {
         let transferringItems = [sourceItem];
         if (sourceActor !== null && sourceItemData.container?.contents && sourceItemData.container.contents.length > 0) {
             const containersToTest = [sourceItemData];
-            while (containersToTest.length > 0)
-            {
+            while (containersToTest.length > 0) {
                 const container = containersToTest.shift();
                 const children = sourceActor.filterItems(x => container.container.contents.find(y => y.id === x.id));
                 if (children) {

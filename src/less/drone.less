@@ -19,9 +19,14 @@
         }
 
         // Character Profile image (larger than usual)
-        img.profile {
+        div.image-container {
             flex: 0 0 180px;
             height: 180px;
+
+            img.profile {
+                flex: 0 0 180px;
+                height: 180px;
+            }
         }
 
         // Character level and experience bar
@@ -34,8 +39,7 @@
 
                 .no-chassis {
                     color: #e00;
-                    text-shadow: -1px -1px 0 #444, 1px -1px 0 #444,
-                        -1px 1px 0 #444, 1px 1px 0 #444;
+                    text-shadow: -1px -1px 0 #444, 1px -1px 0 #444, -1px 1px 0 #444, 1px 1px 0 #444;
                 }
             }
         }
@@ -57,17 +61,13 @@
                 height: 80px;
                 margin: 0;
                 border: none;
-                border-right: @borderGroove;
+                border-left: @borderGroove;
                 border-radius: 0;
-
-                &:last-child {
-                    border-right: none;
-                }
 
                 .attribute-row {
                     height: 18px;
                     flex: 0;
-                    font-size: 12px;
+                    font-size: var(--font-size-12);
 
                     .defense-name {
                         padding: 0 0 0 10px;
@@ -81,15 +81,15 @@
                     line-height: 32px;
 
                     span {
-                        font-size: 25px;
+                        font-size: var(--font-size-24);
 
                         &.attribute-max {
-                            font-size: 16px;
+                            font-size: var(--font-size-16);
                         }
                     }
 
                     a {
-                        font-size: 14px;
+                        font-size: var(--font-size-14);
                     }
                 }
 
@@ -203,7 +203,7 @@
             h4.box-title {
                 line-height: 16px;
                 margin: 4px 8px 25px;
-                font-size: 18px;
+                font-size: var(--font-size-18);
                 border-bottom: 1px solid @colorBeige;
             }
 
@@ -225,7 +225,7 @@
 
                 div.ability-center {
                     margin: -10px 0 10px;
-                    font-size: 24px;
+                    font-size: var(--font-size-24);
                     overflow: hidden;
                 }
 
@@ -243,14 +243,14 @@
         li.skills-header {
             background: rgba(0, 0, 0, 0.05);
             border: @borderGroove;
-            font-size: 12px;
+            font-size: var(--font-size-12);
             font-weight: bold;
             line-height: 15px;
             padding: 3px;
 
             h3 {
                 flex: 0 0 50%;
-                font-size: 12px;
+                font-size: var(--font-size-12);
                 font-weight: bold;
                 margin: 0;
             }
@@ -273,7 +273,7 @@
             h4 {
                 flex: 0 0 50%;
                 margin: 0;
-                font-size: 13px;
+                font-size: var(--font-size-13);
             }
             .skill-proficiency {
                 flex: 0 0 10%;
@@ -339,7 +339,7 @@
             position: absolute;
             top: 0;
             right: 0;
-            font-size: 13px;
+            font-size: var(--font-size-13);
             line-height: 12px;
             text-align: right;
             color: #eee;

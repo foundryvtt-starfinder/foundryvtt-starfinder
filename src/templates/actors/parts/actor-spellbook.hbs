@@ -69,24 +69,32 @@
                         <div class="flexrow">
                             <h4>{{item.name}}</h4>
                             {{#if item.system.uses.max }}
-                                <div class="item-detail spell-uses">{{localize "SFRPG.SpellBook.Uses"}} {{item.system.uses.value}} / {{item.system.uses.max}}</div>
+                                <div class="item-detail spell-uses">
+                                    {{localize "SFRPG.SpellBook.Uses"}}
+                                    <input type="text" class="limited-uses-value" value="{{item.system.uses.value}}" data-dtype="Number" />
+                                     / {{item.system.uses.total}}
+                                </div>
                             {{/if}}
                         </div>
                     </div>
                 {{else}}
                     <h4>{{item.name}}</h4>
                     {{#if item.system.uses.max }}
-                        <div class="item-detail spell-uses">{{localize "SFRPG.SpellBook.Uses"}} {{item.system.uses.value}} / {{item.system.uses.max}}</div>
+                        <div class="item-detail spell-uses">
+                            {{localize "SFRPG.SpellBook.Uses"}}
+                            <input type="text" class="limited-uses-value" value="{{item.system.uses.value}}" data-dtype="Number" />
+                             / {{item.system.uses.total}}
+                        </div>
                     {{/if}}
                 {{/if}}
             </div>
 
             <div class="spell-comps">
                 {{#if item.system.concentration }}
-                <span class="spell-component" data-tippy-content="<strong>{{ localize "SFRPG.Items.Spell.Concentration" }}</strong><br>{{ localize "SFRPG.Items.Spell.ConcentrationTooltip" }}">C</span>
+                <span class="spell-component" data-tooltip="<strong>{{ localize "SFRPG.Items.Spell.Concentration" }}</strong><br>{{ localize "SFRPG.Items.Spell.ConcentrationTooltip" }}">C</span>
                 {{/if}}
             </div>
-            <div class="spell-dc" {{#if labels.save}}data-tippy-content="<strong>{{labels.save}}</strong><br/><br/>{{labels.saveFormula.formula}}"{{/if}}>{{labels.save}}</div>
+            <div class="spell-dc" {{#if labels.save}}data-tooltip="<strong>{{labels.save}}</strong><br/><br/>{{labels.saveFormula.formula}}"{{/if}}>{{labels.save}}</div>
             <div class="spell-action">{{labels.activation}}</div>
 
             {{#if ../../isOwner}}

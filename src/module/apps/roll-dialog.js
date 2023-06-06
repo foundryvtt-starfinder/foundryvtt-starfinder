@@ -29,7 +29,6 @@ export default class RollDialog extends Dialog {
      */
     constructor({ rollTree, formula, contexts, availableModifiers, mainDie, parts = [], dialogData = {}, options = {} }) {
         super(dialogData, options);
-        this.options.classes = ["sfrpg", "dialog", "roll"];
 
         this.rollTree = rollTree;
         this.formula = formula;
@@ -81,19 +80,11 @@ export default class RollDialog extends Dialog {
         return "systems/sfrpg/templates/chat/roll-dialog.hbs";
     }
 
-    async _render(...args) {
-        await super._render(...args);
-
-        if (this._tooltips === null) {
-            this._tooltips = tippy.delegate(`#${this.id}`, {
-                target: '[data-tippy-content]',
-                allowHTML: true,
-                arrow: false,
-                placement: 'top-start',
-                duration: [500, null],
-                delay: [800, null]
-            });
-        }
+    static get defaultOptions() {
+        return foundry.utils.mergeObject(super.defaultOptions, {
+            classes: ["sfrpg", "dialog", "roll"],
+            width: 540
+        });
     }
 
     async getData() {
@@ -110,22 +101,9 @@ export default class RollDialog extends Dialog {
         data.damageGroups = this.damageGroups;
 
         for (const modifier of data.availableModifiers) {
-            const allContexts = data.contexts.allContexts;
-            const mainContext = data.contexts.mainContext;
-            let context = allContexts[mainContext]?.data;
-
-            // Starships use "@ship" etc. in their formulas, so the context needs to be adjusted to skip the intermediate "data/entity" object.
-            if (["ship", ""].includes(mainContext)) {
-                context = Object.entries(allContexts).reduce((obj, i) => {
-                    const scope = i[0];
-                    const data = i[1].data;
-                    obj[scope] = data;
-                    return obj;
-                }, {});
-            }
 
             // Make a simplified roll
-            const simplerRoll = Roll.create(modifier.modifier, context).simplifiedFormula;
+            const simplerRoll = Roll.create(modifier.modifier, data.contexts.getRollData()).simplifiedFormula;
 
             if (modifier.modifier[0] === "+") modifier.modifier = modifier.modifier.slice(1);
 
@@ -145,6 +123,10 @@ export default class RollDialog extends Dialog {
             // Sign that string
             const numMod = Number(simplerRoll);
             modifier.modifier = numMod ? numMod.signedString() : simplerRoll;
+
+            if (Object.keys(CONFIG.SFRPG.modifierTypes).includes(modifier.type)) {
+                modifier.localizedType = game.i18n.localize(`${CONFIG.SFRPG.modifierTypes[modifier.type]}`);
+            }
         }
 
         if (this.parts?.length > 0) {
@@ -274,14 +256,14 @@ export default class RollDialog extends Dialog {
         this.contexts.allContexts[selectorName] = this.contexts.allContexts[selectedValue];
 
         /** Repopulate nodes, might change modifiers because of different selector. */
-        this.availableModifiers = this.rollTree.populate();
+        this.availableModifiers = await this.rollTree.populate();
 
         this.position.height = "auto";
         this.render(false);
     }
 
     _onDamageSectionRadio(event) {
-        let damageGroups = this.damageGroups;
+        const damageGroups = this.damageGroups;
 
         const selectorGroup = event.currentTarget.name;
         const selectorId = event.currentTarget.id;
@@ -295,7 +277,7 @@ export default class RollDialog extends Dialog {
     }
 
     _onDamageSectionCheckbox(event) {
-        let damageGroups = this.damageGroups;
+        const damageGroups = this.damageGroups;
 
         const selectorGroup = event.currentTarget.name;
         const selectorId = event.currentTarget.id;

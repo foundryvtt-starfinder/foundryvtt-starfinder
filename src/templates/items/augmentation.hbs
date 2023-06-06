@@ -37,7 +37,7 @@
                 <div class="form-fields">
                     <select name="system.system">
                         {{#select itemData.system}}
-                        {{#each config.augmentationSytems as |system key|}}
+                        {{#each config.augmentationSystems as |system key|}}
                         <option value="{{key}}">{{system}}</option>
                         {{/each}}
                         {{/select}}
@@ -65,12 +65,12 @@
             <br />
 
             {{> "systems/sfrpg/templates/items/parts/physical-item-details.hbs"}}
-            
+
             <br />
 
             {{!-- Container Template --}}
             {{> "systems/sfrpg/templates/items/parts/container-details.hbs" message="SFRPG.Items.Equipment.ContainerTooltip"}}
-            
+
         </div>
 
         {{!-- Modifiers Tab --}}
