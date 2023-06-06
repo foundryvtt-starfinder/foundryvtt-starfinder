@@ -103,6 +103,72 @@
                 </div>
             </div>
 
+            {{!-- Range and Area if it's got no activation cost --}}
+            {{console this}}
+            {{#unless itemData.activation.type}}
+
+                {{!-- Range Information --}}
+                <div class="bubble">
+                    <div class="bubble-header">{{ localize "SFRPG.Items.RangeInformation" }}</div>
+                    <div class="bubble-info">
+                        {{!-- Range Increment --}}
+                        <div class="form-group input-select">
+                            <label>{{#if (eq this.data.type "weapon")}}{{ localize "SFRPG.Items.Activation.RangeIncrement" }}{{else}}{{ localize "SFRPG.Items.Activation.Range" }}{{/if}}</label>
+                            <div class="form-fields">
+                                {{#if this.range.showTotal}}<p class="calculated-total"><strong>{{itemData.range.total}}</strong></p>{{/if}}
+                                {{#if this.range.hasInput}}
+                                <input class="wide-form-field" type="text" name="system.range.value" value="{{itemData.range.value}}" data-dtype="String" placeholder="Range"/>
+                                {{/if}}
+                                <select name="system.range.units">
+                                    {{#select itemData.range.units}}
+                                    {{#each config.distanceUnits as |unit key|}}
+                                    <option value="{{key}}">{{unit}}</option>
+                                    {{/each}}
+                                    {{/select}}
+                                </select>
+                            </div>
+                        </div>
+
+                        {{!-- Area --}}
+                        <div class="form-group input-select-select-select">
+                            <label>{{ localize "SFRPG.Items.Activation.Area" }}</label>
+                            <div class="form-fields">
+                                {{#if this.area.showTotal}}<p class="calculated-total"><strong>{{itemData.area.total}}</strong></p>{{/if}}
+                                <input type="text" {{#if (eq itemData.area.units "text")}}class="wide-form-field"{{/if}} name="system.area.value" value="{{itemData.area.value}}" data-dtype="String" placeholder="Area" />
+                                <select name="system.area.units" class="min-form-field">
+                                    {{#select itemData.area.units}}
+                                    {{#each config.variableDistanceUnits as |unit key|}}
+                                    <option value="{{key}}">{{unit}}</option>
+                                    {{/each}}
+                                    <option value="text">{{localize "SFRPG.Text"}}</option>
+                                    {{/select}}
+                                </select>
+                                {{#unless (eq itemData.area.units "text")}}
+                                <select name="system.area.shape" class="min-form-field">
+                                    {{#select itemData.area.shape}}
+                                    {{#each config.spellAreaShapes as |shape s|}}
+                                    <option value="{{s}}">{{shape}}</option>
+                                    {{/each}}
+                                    {{/select}}
+                                </select>
+                                <select name="system.area.effect" class="min-form-field">
+                                    {{#select itemData.area.effect}}
+                                    {{#each config.spellAreaEffects as |effect e|}}
+                                    <option value="{{e}}">{{effect}}</option>
+                                    {{/each}}
+                                    {{/select}}
+                                </select>
+                                <label class="checkbox">
+                                    <input type="checkbox" name="system.area.shapable" {{checked itemData.area.shapable}}>
+                                    {{ localize "SFRPG.SpellAreaShapesShapable" }}
+                                </label>
+                                {{/unless}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{/unless}}
+
             {{!-- Conditional Weapon Properties --}}
             {{#unless (leftOrRight (eq item.type "weapon") (eq item.type "shield"))}}
                 {{#if (leftOrRight (eq itemData.actionType "mwak") (eq itemData.actionType "rwak"))}}
