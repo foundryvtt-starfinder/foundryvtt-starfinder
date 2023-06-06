@@ -18,6 +18,7 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": null
@@ -37,7 +38,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.DR8JvF0xiwsXggxj]{Expertise Talent}</p>\n<p>Choose a skill you have selected with the skill expertise class feature. When you take 20 (see page 133) with this skill, you can roll your [[/r 2d(lookupRange(@classes.envoy.levels,6,13,8))k+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)]]{expertise die} twice and take the better result.</p>\n<p>You can choose this talent up to three times, choosing a different skill selected with the skill expertise class feature each time.</p>\n<p><em>Change selected skill in the Modifiers tab.</em></p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.DR8JvF0xiwsXggxj]{Expertise Talent}</p>\n<p>Choose a skill you have selected with the skill expertise class feature. When you take 20 (see page 133) with this skill, you can roll your expertise die twice and take the better result ([[/r 2d(lookupRange(@classes.envoy.levels,6,13,8))k+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)]]{Roll}).</p>\n<p>You can choose this talent up to three times, choosing a different skill selected with the skill expertise class feature each time.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -77,9 +78,10 @@
       "teleportation": false,
       "water": false
     },
-    "descriptors": [],
     "details": {
-      "category": "classFeature"
+      "category": "classFeature",
+      "combat": false,
+      "specialAbilityType": ""
     },
     "duration": {
       "units": "",

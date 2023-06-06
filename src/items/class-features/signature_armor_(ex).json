@@ -18,9 +18,10 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -37,15 +38,53 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.rScW5xGzTF62Xhdy]{Signature Item (Ex)}</p>\n<p>Your signature item is a suit of armor, shield, or other gear specifically designed to protect you from harm. Your first skill expertise must be selected from the following: Disguise, Intimidate, or Sense Motive. Once per hour, as a reaction when an attack successfully hits you and deals damage, you can roll your expertise die and reduce the damage you take from the attack by an amount equal to your die’s result plus your envoy level. You can use this ability an additional time per hour by spending 1 Resolve Point for each additional use.</p>\n<p>You ignore the base save bonus requirement of the @UUID[Compendium.sfrpg.class-features.C7bBiPO5wWMzth8W]{Saving Expertise (Ex; Special)} talent. If you add your expertise die result to a save and the expertise die’s result is a natural 1, you can reroll the expertise die once and use the second result.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.rScW5xGzTF62Xhdy]{Signature Item (Ex)}</p>\n<p>Your signature item is a suit of armor, shield, or other gear specifically designed to protect you from harm. Your first skill expertise must be selected from the following: @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.aayAhTaRzitONs5U]{Disguise}, @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.6fqgiVqlA7u9jS4i]{Intimidate}, or @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.nBrYkGfNBJAHe0xJ]{Sense Motive}. Once per hour, as a reaction when an attack successfully hits you and deals damage, you can roll your expertise die and reduce the damage you take from the attack by an amount equal to your die’s result plus your envoy level ([[/r 1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4) + @classes.envoy.levels]]{Roll}). You can use this ability an additional time per hour by spending 1 Resolve Point for each additional use.</p>\n<p>You ignore the base save bonus requirement of the @UUID[Compendium.sfrpg.class-features.C7bBiPO5wWMzth8W]{Saving Expertise (Ex; Special)} talent. If you add your expertise die result to a save and the expertise die’s result is a natural 1, you can reroll the expertise die once and use the second result.</p>\n<p><em>Select skill expertise in the Modifiers tab.</em></p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
     "details": {
       "category": "classFeature",
+      "combat": false,
       "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
     "formula": "",
@@ -53,138 +92,78 @@
     "modifiers": [
       {
         "_id": "d07b67b1-2c1b-4cc2-95fd-732f4e18085d",
-        "name": "Signature Armor (Ex)",
+        "name": "Signature Armor (Ex) - 1st Level",
         "type": "insight",
         "condition": "",
         "effectType": "skill",
         "enabled": false,
         "max": 6,
         "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
-        "modifierType": "constant",
+        "modifierType": "formula",
         "notes": "",
         "source": "",
         "subtab": "misc",
-        "valueAffected": "blu"
+        "valueAffected": ""
       },
       {
         "_id": "f9122022-a833-4255-b2dd-f099c9907f1a",
-        "name": "Signature Armor (Ex)",
+        "name": "Signature Armor (Ex) - 5th Level",
         "type": "insight",
         "condition": "",
         "effectType": "skill",
         "enabled": false,
         "max": 6,
         "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
-        "modifierType": "constant",
+        "modifierType": "formula",
         "notes": "",
         "source": "",
         "subtab": "misc",
-        "valueAffected": "com"
+        "valueAffected": ""
       },
       {
         "_id": "9e32331a-44c8-47b4-b03c-aa974f22e2d6",
-        "name": "Signature Armor (Ex)",
+        "name": "Signature Armor (Ex) - 9th Level",
         "type": "insight",
         "condition": "",
         "effectType": "skill",
         "enabled": false,
         "max": 6,
         "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
-        "modifierType": "constant",
+        "modifierType": "formula",
         "notes": "",
         "source": "",
         "subtab": "misc",
-        "valueAffected": "cul"
+        "valueAffected": ""
       },
       {
         "_id": "1d5a7290-2d30-44f9-9241-93085f365111",
-        "name": "Signature Armor (Ex)",
+        "name": "Signature Armor (Ex) - 13th Level",
         "type": "insight",
         "condition": "",
         "effectType": "skill",
         "enabled": false,
         "max": 6,
         "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
-        "modifierType": "constant",
+        "modifierType": "formula",
         "notes": "",
         "source": "",
         "subtab": "misc",
-        "valueAffected": "dip"
+        "valueAffected": ""
       },
       {
         "_id": "ee04123d-b96e-402f-a422-0bc52a49f92e",
-        "name": "Signature Armor (Ex)",
+        "name": "Signature Armor (Ex) - 17th Level",
         "type": "insight",
         "condition": "",
         "effectType": "skill",
         "enabled": false,
         "max": 6,
         "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
-        "modifierType": "constant",
+        "modifierType": "formula",
         "notes": "",
         "source": "",
         "subtab": "misc",
-        "valueAffected": "dis"
-      },
-      {
-        "_id": "d144adf8-8f7f-4897-919d-37053bbe2e7d",
-        "name": "Signature Armor (Ex)",
-        "type": "insight",
-        "condition": "",
-        "effectType": "skill",
-        "enabled": false,
-        "max": 6,
-        "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
-        "modifierType": "constant",
-        "notes": "",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": "eng"
-      },
-      {
-        "_id": "ddda1a90-8de0-44e4-ab5f-7466f3d01911",
-        "name": "Signature Armor (Ex)",
-        "type": "insight",
-        "condition": "",
-        "effectType": "skill",
-        "enabled": false,
-        "max": 6,
-        "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
-        "modifierType": "constant",
-        "notes": "",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": "int"
-      },
-      {
-        "_id": "de6ecf92-2702-4da2-a331-a0b823a10b0c",
-        "name": "Signature Armor (Ex)",
-        "type": "insight",
-        "condition": "",
-        "effectType": "skill",
-        "enabled": false,
-        "max": 6,
-        "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
-        "modifierType": "constant",
-        "notes": "",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": "med"
-      },
-      {
-        "_id": "744a7322-a3bc-4b47-a812-d17f2b7a0f83",
-        "name": "Signature Armor (Ex)",
-        "type": "insight",
-        "condition": "",
-        "effectType": "skill",
-        "enabled": false,
-        "max": 6,
-        "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
-        "modifierType": "constant",
-        "notes": "",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": "sen"
+        "valueAffected": ""
       }
     ],
     "range": {
@@ -210,9 +189,9 @@
       "value": ""
     },
     "uses": {
-      "max": 0,
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     }
   }
 }

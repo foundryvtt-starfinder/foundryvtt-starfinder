@@ -18,9 +18,10 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -37,7 +38,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.rScW5xGzTF62Xhdy]{Signature Item (Ex)}</p>\n<p>Your signature item is a weapon. You can’t select a natural weapon, but you can select an item that modifies a particular type of attack, such as a solarian weapon crystal or an augmentation that enhances your unarmed strikes. Your first skill expertise must be selected from the following list: @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.GcVVfpQ79HdcMqBt]{Bluff}, @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.76u4HnGcAlySicb4]{Engineering}, or @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.6fqgiVqlA7u9jS4i]{Intimidate}. As a move action during combat, you can designate a foe and openly flourish your weapon at them, gaining a brief burst of confidence and accuracy. For a number of rounds equal to your Charisma modifier, you can make attacks against the designated foe with your signature weapon as if your base attack bonus from your envoy levels were equal to your envoy level; you must be able to see the foe to gain this benefit to your attack.</p>\n<p><em></em></p><em></em><p><em>Select skill expertise in the Modifiers tab.</em></p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.rScW5xGzTF62Xhdy]{Signature Item (Ex)}</p>\n<p>Your signature item is a weapon. You can’t select a natural weapon, but you can select an item that modifies a particular type of attack, such as a solarian weapon crystal or an augmentation that enhances your unarmed strikes. Your first skill expertise must be selected from the following list: @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.GcVVfpQ79HdcMqBt]{Bluff}, @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.76u4HnGcAlySicb4]{Engineering}, or @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.6fqgiVqlA7u9jS4i]{Intimidate}. As a move action during combat, you can designate a foe and openly flourish your weapon at them, gaining a brief burst of confidence and accuracy. For a number of rounds equal to your Charisma modifier, you can make attacks against the designated foe with your signature weapon as if your base attack bonus from your envoy levels were equal to your envoy level; you must be able to see the foe to gain this benefit to your attack.</p>\n<p><em>Select skill expertise in the Modifiers tab.</em></p>"
     },
     "descriptors": {
       "acid": false,
@@ -77,13 +78,13 @@
       "teleportation": false,
       "water": false
     },
-    "descriptors": [],
     "details": {
       "category": "classFeature",
-      "specialAbilityType": "ex"
+      "combat": false,
+      "specialAbilityType": ""
     },
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
     "formula": "",
@@ -91,138 +92,93 @@
     "modifiers": [
       {
         "_id": "d07b67b1-2c1b-4cc2-95fd-732f4e18085d",
-        "name": "Signature Weapon (Ex)",
+        "name": "Signature Weapon (Ex) - 1st Level",
         "type": "insight",
         "condition": "",
         "effectType": "skill",
         "enabled": false,
         "max": 6,
         "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
-        "modifierType": "constant",
+        "modifierType": "formula",
         "notes": "",
         "source": "",
         "subtab": "misc",
-        "valueAffected": "blu"
+        "valueAffected": ""
       },
       {
         "_id": "f9122022-a833-4255-b2dd-f099c9907f1a",
-        "name": "Signature Weapon (Ex)",
+        "name": "Signature Weapon (Ex) - 5th Level",
         "type": "insight",
         "condition": "",
         "effectType": "skill",
         "enabled": false,
         "max": 6,
         "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
-        "modifierType": "constant",
+        "modifierType": "formula",
         "notes": "",
         "source": "",
         "subtab": "misc",
-        "valueAffected": "com"
+        "valueAffected": ""
       },
       {
         "_id": "9e32331a-44c8-47b4-b03c-aa974f22e2d6",
-        "name": "Signature Weapon (Ex)",
+        "name": "Signature Weapon (Ex) - 9th Level",
         "type": "insight",
         "condition": "",
         "effectType": "skill",
         "enabled": false,
         "max": 6,
         "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
-        "modifierType": "constant",
+        "modifierType": "formula",
         "notes": "",
         "source": "",
         "subtab": "misc",
-        "valueAffected": "cul"
+        "valueAffected": ""
       },
       {
         "_id": "1d5a7290-2d30-44f9-9241-93085f365111",
-        "name": "Signature Weapon (Ex)",
+        "name": "Signature Weapon (Ex) - 13th Level",
         "type": "insight",
         "condition": "",
         "effectType": "skill",
         "enabled": false,
         "max": 6,
         "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
-        "modifierType": "constant",
+        "modifierType": "formula",
         "notes": "",
         "source": "",
         "subtab": "misc",
-        "valueAffected": "dip"
+        "valueAffected": ""
       },
       {
         "_id": "ee04123d-b96e-402f-a422-0bc52a49f92e",
-        "name": "Signature Weapon (Ex)",
+        "name": "Signature Weapon (Ex) - 17th Level",
         "type": "insight",
         "condition": "",
         "effectType": "skill",
         "enabled": false,
         "max": 6,
         "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
-        "modifierType": "constant",
+        "modifierType": "formula",
         "notes": "",
         "source": "",
         "subtab": "misc",
-        "valueAffected": "dis"
+        "valueAffected": ""
       },
       {
-        "_id": "d144adf8-8f7f-4897-919d-37053bbe2e7d",
-        "name": "Signature Weapon (Ex)",
-        "type": "insight",
+        "_id": "6c3ef79f-99dd-4015-8e40-1e9f55a1465e",
+        "name": "Signature Weapon (Ex) - Attack Bonus",
+        "type": "untyped",
         "condition": "",
         "effectType": "skill",
         "enabled": false,
-        "max": 6,
-        "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
-        "modifierType": "constant",
-        "notes": "",
+        "max": 0,
+        "modifier": "(@details.level.value - @attributes.baseAttackBonus.value)",
+        "modifierType": "formula",
+        "notes": "As a move action during combat, you can designate a foe and openly flourish your weapon at them, gaining a brief burst of confidence and accuracy. For a number of rounds equal to your Charisma modifier, you can make attacks against the designated foe with your signature weapon as if your base attack bonus from your envoy levels were equal to your envoy level; you must be able to see the foe to gain this benefit to your attack.",
         "source": "",
         "subtab": "misc",
-        "valueAffected": "eng"
-      },
-      {
-        "_id": "ddda1a90-8de0-44e4-ab5f-7466f3d01911",
-        "name": "Signature Weapon (Ex)",
-        "type": "insight",
-        "condition": "",
-        "effectType": "skill",
-        "enabled": false,
-        "max": 6,
-        "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
-        "modifierType": "constant",
-        "notes": "",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": "int"
-      },
-      {
-        "_id": "de6ecf92-2702-4da2-a331-a0b823a10b0c",
-        "name": "Signature Weapon (Ex)",
-        "type": "insight",
-        "condition": "",
-        "effectType": "skill",
-        "enabled": false,
-        "max": 6,
-        "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
-        "modifierType": "constant",
-        "notes": "",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": "med"
-      },
-      {
-        "_id": "744a7322-a3bc-4b47-a812-d17f2b7a0f83",
-        "name": "Signature Weapon (Ex)",
-        "type": "insight",
-        "condition": "",
-        "effectType": "skill",
-        "enabled": false,
-        "max": 6,
-        "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
-        "modifierType": "constant",
-        "notes": "",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": "sen"
+        "valueAffected": ""
       }
     ],
     "range": {
@@ -248,7 +204,7 @@
       "value": ""
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     }
