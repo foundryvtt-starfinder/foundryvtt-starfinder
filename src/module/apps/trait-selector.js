@@ -13,7 +13,6 @@ export class TraitSelectorSFRPG extends FormApplication {
         options.template = "systems/sfrpg/templates/apps/trait-selector.hbs";
         options.width = 480;
         options.height = "auto";
-        console.log(options);
 
         return options;
     }
@@ -33,6 +32,7 @@ export class TraitSelectorSFRPG extends FormApplication {
      * @returns {Object}
      */
     getData() {
+        console.log(this);
         const attr = getProperty(this.object, this.attribute);
         if (typeof attr.value === "string") attr.value = this.constructor._backCompat(attr.value, this.options.choices);
 
@@ -61,6 +61,11 @@ export class TraitSelectorSFRPG extends FormApplication {
                 }
             }
         }
+
+        this.sorters = {
+            text: '',
+            castingtime: 'null'
+        };
 
         return {
             choices: choices,
@@ -149,7 +154,8 @@ export class TraitSelectorSFRPG extends FormApplication {
 
             for (const string of strings) {
                 if (string.indexOf(':') === -1) {
-                    if ($(element).find('.item-name a')[0].innerHTML.toLowerCase().indexOf(string.toLowerCase().trim()) === -1) {
+                    console.log($(element).find('.trait'));
+                    if ($(element).find('.trait')[0].innerHTML.toLowerCase().indexOf(string.toLowerCase().trim()) === -1) {
                         return false;
                     }
                 } else {
@@ -201,6 +207,7 @@ export class TraitSelectorSFRPG extends FormApplication {
 
         // activating or deactivating filters
         html.on('change paste', 'input[name=textFilter]', ev => {
+            console.log(this);
             this.sorters.text = ev.target.value;
             this.filterItems(html.find('li'));
         });

@@ -2,7 +2,7 @@
 
     {{!-- Search Bar --}}
     <div class="sortcontainer" id="tagfilter">
-        <input class="" name="textFilter" type="text" value="" data-dtype="String" placeholder="{{localize "SFRPG.Browsers.ItemBrowser.BrowserSearchPlaceholder"}}" data-tooltip="{{localize "SFRPG.Browsers.ItemBrowser.BrowserSearchTitle"}}"/>
+        <input class="" name="textFilter" type="text" value="" data-dtype="String" placeholder="{{localize "SFRPG.Browsers.ItemBrowser.BrowserSearchPlaceholder"}}"/>
         <div class="hint" style="display:none;">
             {{{localize "SFRPG.Browsers.ItemBrowser.SearchHint"}}}
         </div>
@@ -12,7 +12,7 @@
     <ul class="trait-list">
     {{#unless isEnergyResistance}}
         {{#each choices as |choice key|}}
-        <li>
+        <li class="trait">
             <label class="checkbox">
                 <input type="checkbox" name="{{key}}" data-dtype="Boolean" {{checked choice.chosen}}>
                 {{choice.label}}
