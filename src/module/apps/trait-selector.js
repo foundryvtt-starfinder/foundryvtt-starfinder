@@ -62,10 +62,7 @@ export class TraitSelectorSFRPG extends FormApplication {
             }
         }
 
-        this.sorters = {
-            text: '',
-            castingtime: 'null'
-        };
+        this.searchTerm = '';
 
         return {
             choices: choices,
@@ -132,6 +129,17 @@ export class TraitSelectorSFRPG extends FormApplication {
         });
     }
 
+    async filterTraits(li) {
+        let ct = 0;
+        li.hide();
+
+        for (const trait of li) {
+            if (this.searchTerm === '') {
+                $(trait).show();
+            }
+        }
+    }
+
     async filterItems(li) {
         let counter = 0;
         li.hide();
@@ -155,7 +163,8 @@ export class TraitSelectorSFRPG extends FormApplication {
             for (const string of strings) {
                 if (string.indexOf(':') === -1) {
                     console.log($(element).find('.trait'));
-                    if ($(element).find('.trait')[0].innerHTML.toLowerCase().indexOf(string.toLowerCase().trim()) === -1) {
+                    console.log($(element).find('.trait').prevObject[0].innerHTML);
+                    if ($(element).find('.trait').prevObject[0].innerHTML.toLowerCase().indexOf(string.toLowerCase().trim()) === -1) {
                         return false;
                     }
                 } else {
@@ -207,10 +216,11 @@ export class TraitSelectorSFRPG extends FormApplication {
 
         // activating or deactivating filters
         html.on('change paste', 'input[name=textFilter]', ev => {
-            console.log(this);
-            this.sorters.text = ev.target.value;
-            this.filterItems(html.find('li'));
+            this.searchTerm = ev.target.value;
+            this.filterTraits(html.find('li'));
         });
+
+        // on Enter key press, filter based on search
 
     }
 }
