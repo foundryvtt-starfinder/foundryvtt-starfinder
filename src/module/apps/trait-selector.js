@@ -34,7 +34,9 @@ export class TraitSelectorSFRPG extends FormApplication {
     getData() {
         console.log(this);
         const attr = getProperty(this.object, this.attribute);
-        if (typeof attr.value === "string") attr.value = this.constructor._backCompat(attr.value, this.options.choices);
+        if (typeof attr.value === "string") {
+            attr.value = this.constructor._backCompat(attr.value, this.options.choices);
+        }
 
         const choices = duplicate(this.options.choices);
         const isEnergyResistance = this.attribute === "data.traits.dr";
@@ -130,80 +132,24 @@ export class TraitSelectorSFRPG extends FormApplication {
     }
 
     async filterTraits(li) {
-        let ct = 0;
         li.hide();
 
         for (const trait of li) {
-            if (this.searchTerm === '') {
+            if (this.searchMatch(trait)) {
                 $(trait).show();
             }
         }
     }
 
-    async filterItems(li) {
-        let counter = 0;
-        li.hide();
+    searchMatch(trait) {
+        const searchTerm = this.searchTerm;
 
-        for (const item of li) {
-            if (this.getFilterResult(item)) {
-                $(item).show();
-
-                if (++counter % 20 === 0) {
-                    // Yield to the browser to render what it has
-                    await new Promise(r => setTimeout(r, 0));
-                }
-            }
-        }
-    }
-
-    getFilterResult(element) {
-        if (this.sorters.text !== '') {
-            const strings = this.sorters.text.split(',');
+        if (searchTerm !== '') {
+            const strings = this.searchTerm.split(',');
 
             for (const string of strings) {
-                if (string.indexOf(':') === -1) {
-                    console.log($(element).find('.trait'));
-                    console.log($(element).find('.trait').prevObject[0].innerHTML);
-                    if ($(element).find('.trait').prevObject[0].innerHTML.toLowerCase().indexOf(string.toLowerCase().trim()) === -1) {
-                        return false;
-                    }
-                } else {
-                    const targetValue = string.split(':')[1].trim();
-                    const targetStat = string.split(':')[0].trim();
-
-                    if ($(element).find(`input[name=${targetStat}]`)
-                        .val()
-                        .toLowerCase()
-                        .indexOf(targetValue) === -1) {
-                        return false;
-                    }
-                }
-            }
-        }
-
-        if (this.sorters.castingtime !== 'null') {
-            const castingtime = $(element).find('input[name=time]')
-                .val()
-                .toLowerCase();
-
-            if (castingtime !== this.sorters.castingtime) {
-                return false;
-            }
-        }
-
-        for (const availableFilter of Object.values(this.filters)) {
-            if (availableFilter.type === 'multi-select') {
-                if (availableFilter.activeFilters && availableFilter.activeFilters.length > 0) {
-                    if (!availableFilter.filter(element, availableFilter.activeFilters)) {
-                        return false;
-                    }
-                }
-            } else if (availableFilter.type === "range") {
-                if (!availableFilter.filter(element, availableFilter.content)) {
-                    return false;
-                }
-            } else if (availableFilter.type === "value") {
-                if (!availableFilter.filter(element, availableFilter.content)) {
+                const textToSearch = $(trait).find('input')[0].nextSibling.data.toLowerCase().trim();
+                if (textToSearch.indexOf(string.toLowerCase().trim()) === -1) {
                     return false;
                 }
             }
@@ -215,7 +161,7 @@ export class TraitSelectorSFRPG extends FormApplication {
     activateListeners(html) {
 
         // activating or deactivating filters
-        html.on('change paste', 'input[name=textFilter]', ev => {
+        html.on('change keyup paste', 'input[name=textFilter]', ev => {
             this.searchTerm = ev.target.value;
             this.filterTraits(html.find('li'));
         });
