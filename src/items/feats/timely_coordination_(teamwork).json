@@ -1,6 +1,6 @@
 {
-  "_id": "GHaJyskBLfHQIDBD",
-  "name": "Entropy Shield (Su)",
+  "_id": "oZzp77JCcIxeLAFN",
+  "name": "Timely Coordination (Teamwork)",
   "type": "feat",
   "img": "icons/svg/mystery-man.svg",
   "system": {
@@ -20,7 +20,7 @@
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "",
+      "units": "none",
       "value": null
     },
     "attackBonus": 0,
@@ -38,7 +38,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Dysu4F8licjEb2FY]{Vanguard Discipline}</p>\n<p>As part of any move action or full action you take, you can create a field of condensed, compressed entropy that forms in place on one of your limbs to protect you as a @UUID[Compendium.sfrpg.equipment.IHlP3qDbIxIS4Bo2]{basic riot shield} or @UUID[Compendium.sfrpg.equipment.5StvdJoJWWBC5Maf]{basic tactical shield} (you choose which each time you create the shield). The shield has no bulk, but it otherwise functions in all regards as a physical shield of the selected type. You can dismiss the shield as part of any move or full action you take, and it disappears at the end of your turn if you are not holding it.</p>\n<p>At 5th level, your compressed entropy functions as a @UUID[Compendium.sfrpg.equipment.ZTI7N5NsfYt4ALJw]{field riot} or @UUID[Compendium.sfrpg.equipment.16rv6RPagMF3m7xp]{tactical shield}. At 10th level, it functions as an @UUID[Compendium.sfrpg.equipment.5oiA9ShuGHgI13V6]{advanced riot} or @UUID[Compendium.sfrpg.equipment.6HUhhNElKX5xZS5C]{tactical shield}. At 15th level, it functions as an @UUID[Compendium.sfrpg.equipment.EcihLCcGumWkVNJD]{elite riot} or @UUID[Compendium.sfrpg.equipment.V4PBBLSA3ddR5EPP]{tactical shield}, and at 20th level, it functions as a @UUID[Compendium.sfrpg.equipment.s6ZJmByLDeANrd5f]{paragon riot} or @UUID[Compendium.sfrpg.equipment.saSjb9IzKiHkuMs8]{tactical shield}.</p>"
+      "value": "<p>You can time your teamwork precisely.</p>\n<p><strong>Benefit:</strong> You gain a +1 circumstance bonus to skill checks made as part of readied actions triggered by your allies.</p>\n<p><strong>Teamwork Benefit:</strong> You gain a +1 circumstance bonus to attack rolls made as part of readied actions triggered by allies who also have this feat.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -79,43 +79,74 @@
       "water": false
     },
     "details": {
-      "category": "classFeature",
+      "category": "feat",
       "combat": false,
-      "specialAbilityType": "su"
+      "specialAbilityType": ""
     },
     "duration": {
       "units": "",
-      "value": null
+      "value": ""
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "41c8f605-50a4-46a5-8802-400258fdcd1d",
+        "name": "Timely Coordination (Teamwork)",
+        "type": "circumstance",
+        "condition": "",
+        "effectType": "all-skills",
+        "enabled": false,
+        "max": 1,
+        "modifier": "1",
+        "modifierType": "formula",
+        "notes": "You gain a +1 circumstance bonus to skill checks made as part of readied actions triggered by your allies.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "3b160fe7-1475-4870-bb28-2c3bdff4fe46",
+        "name": "Timely Coordination (Teamwork)",
+        "type": "circumstance",
+        "condition": "",
+        "effectType": "all-attacks",
+        "enabled": false,
+        "max": 1,
+        "modifier": "1",
+        "modifierType": "formula",
+        "notes": "You gain a +1 circumstance bonus to attack rolls made as part of readied actions triggered by allies who also have this feat.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
+      "units": "none",
       "value": null
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "2nd Level - Vanguard",
+    "requirements": "",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "COM pg. 55",
+    "source": "AP #38 pg. 53",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "uses": {
-      "max": 0,
-      "per": null,
-      "value": 0
+      "max": null,
+      "per": "",
+      "value": null
     }
   }
 }

@@ -1,6 +1,6 @@
 {
-  "_id": "GHaJyskBLfHQIDBD",
-  "name": "Entropy Shield (Su)",
+  "_id": "r9kbtroawcHGxCEW",
+  "name": "Last-chance Grab (Teamwork)",
   "type": "feat",
   "img": "icons/svg/mystery-man.svg",
   "system": {
@@ -20,8 +20,8 @@
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "",
-      "value": null
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -38,7 +38,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Dysu4F8licjEb2FY]{Vanguard Discipline}</p>\n<p>As part of any move action or full action you take, you can create a field of condensed, compressed entropy that forms in place on one of your limbs to protect you as a @UUID[Compendium.sfrpg.equipment.IHlP3qDbIxIS4Bo2]{basic riot shield} or @UUID[Compendium.sfrpg.equipment.5StvdJoJWWBC5Maf]{basic tactical shield} (you choose which each time you create the shield). The shield has no bulk, but it otherwise functions in all regards as a physical shield of the selected type. You can dismiss the shield as part of any move or full action you take, and it disappears at the end of your turn if you are not holding it.</p>\n<p>At 5th level, your compressed entropy functions as a @UUID[Compendium.sfrpg.equipment.ZTI7N5NsfYt4ALJw]{field riot} or @UUID[Compendium.sfrpg.equipment.16rv6RPagMF3m7xp]{tactical shield}. At 10th level, it functions as an @UUID[Compendium.sfrpg.equipment.5oiA9ShuGHgI13V6]{advanced riot} or @UUID[Compendium.sfrpg.equipment.6HUhhNElKX5xZS5C]{tactical shield}. At 15th level, it functions as an @UUID[Compendium.sfrpg.equipment.EcihLCcGumWkVNJD]{elite riot} or @UUID[Compendium.sfrpg.equipment.V4PBBLSA3ddR5EPP]{tactical shield}, and at 20th level, it functions as a @UUID[Compendium.sfrpg.equipment.s6ZJmByLDeANrd5f]{paragon riot} or @UUID[Compendium.sfrpg.equipment.saSjb9IzKiHkuMs8]{tactical shield}.</p>"
+      "value": "<p>You can arrest your fall when climbing.</p>\n<p><strong>Prerequisites:</strong> Athletics 3 ranks</p>\n<p><strong>Benefit:</strong> As a reaction when you fail an Athletics check to climb by 5 or more, you can attempt another Athletics check with the same DC. If you succeed, you catch yourself after falling only 5 feet and take no damage.</p>\n<p><strong>Teamwork Benefit:</strong> If you’re adjacent to an ally who also has this feat, that ally can grant you a +4 circumstance bonus to the Athletics check to catch yourself as a reaction to your falling.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -79,43 +79,59 @@
       "water": false
     },
     "details": {
-      "category": "classFeature",
+      "category": "feat",
       "combat": false,
-      "specialAbilityType": "su"
+      "specialAbilityType": ""
     },
     "duration": {
-      "units": "",
-      "value": null
+      "units": "text",
+      "value": ""
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "7b63800b-4fd6-4833-938f-a3cc2d1c1380",
+        "name": "Last-chance Grab (Teamwork)",
+        "type": "circumstance",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 4,
+        "modifier": "4",
+        "modifierType": "formula",
+        "notes": "Teamwork Benefit: If you’re adjacent to an ally who also has the Last-chance Grab feat, that ally can grant you a +4 circumstance bonus to the Athletics check to catch yourself as a reaction to your falling.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "ath"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
+      "units": "none",
       "value": null
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "2nd Level - Vanguard",
+    "requirements": "Athletics 3 ranks",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "COM pg. 55",
+    "source": "AP #38 pg. 52",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "uses": {
-      "max": 0,
-      "per": null,
-      "value": 0
+      "max": "",
+      "per": "",
+      "value": null
     }
   }
 }
