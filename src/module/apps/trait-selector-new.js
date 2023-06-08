@@ -30,23 +30,27 @@ export class TraitSelectorNew extends FormApplication {
         const dataLocation = this.options.location;
         const traitData = getProperty(this.object, dataLocation);
 
+        // Choose the appropriate data parser to create the form
         switch (dataFormat) {
             case "actorTraits":
-                console.log('Item 1');
                 return this._getActorTraitChoices(traitData);
 
             case "weaponProperties":
-                console.log('Item 2');
-                break;
+                console.log('Selecting Weapon Properties');
+                return true;
 
             default:
-                console.log('Item 3');
+                console.log(`dataFormat ${dataFormat} not found`);
                 break;
         }
-
-        return true;
     }
 
+    /**
+     * Parses Actor Trait data into a format that the form can accept
+     *
+     * @param {Object} traitData The data from the actor to parse
+     * @returns {Object}
+     */
     _getActorTraitChoices(traitData) {
 
         // create the array of choices
@@ -56,13 +60,17 @@ export class TraitSelectorNew extends FormApplication {
         for (const [k, v] of Object.entries(choices)) {
             choices[k] = {
                 label: v,
-                chosen: traitData.value.includes(k)
+                isSelected: traitData.value.includes(k)
             };
         }
         return {
             choices: choices,
             custom: traitData.custom
         };
+    }
+
+    _setActorTraits() {
+        return true;
     }
 
     /**
@@ -73,6 +81,23 @@ export class TraitSelectorNew extends FormApplication {
      * @private
      */
     _updateObject(event, formData) {
+        console.log(this);
+
+        // Initialize variables for easy access
+        const dataFormat = this.options.format;
+        const dataLocation = this.options.location;
+        const traitData = getProperty(this.object, dataLocation);
+
+        switch (dataFormat) {
+            case 'actorTraits':
+                console.log('Setting Actor Traits');
+                break;
+
+            default:
+                console.log('Setting nothing.');
+                break;
+        }
+
         let choices = [];
 
         if (this.attribute !== "system.traits.dr") {
