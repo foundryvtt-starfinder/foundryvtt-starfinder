@@ -1176,6 +1176,7 @@ SFRPG.starshipWeaponProperties = {
     "irradiateL": "SFRPG.ShipSystems.StarshipWeaponProperties.IrradiateL", // CRB
     "irradiateM": "SFRPG.ShipSystems.StarshipWeaponProperties.IrradiateM", // CRB
     "irradiateH": "SFRPG.ShipSystems.StarshipWeaponProperties.IrradiateH", // CRB
+    "irradiateS": "SFRPG.ShipSystems.StarshipWeaponProperties.IrradiateS", // SOM
     "jamming"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Jamming", // Near Space
     "limited"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Limited", // CRB
     "line"      : "SFRPG.ShipSystems.StarshipWeaponProperties.Line", // CRB
