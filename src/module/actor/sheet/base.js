@@ -1,6 +1,7 @@
 import { ActorSheetFlags } from "../../apps/actor-flags.js";
 import { ActorMovementConfig } from "../../apps/movement-config.js";
 import { TraitSelectorSFRPG } from "../../apps/trait-selector.js";
+import { TraitSelectorNew } from "../../apps/trait-selector-new.js";
 import { SFRPGModifierType } from "../../modifiers/types.js";
 import StackModifiers from "../../rules/closures/stack-modifiers.js";
 
@@ -210,7 +211,8 @@ export class ActorSheetSFRPG extends ActorSheet {
         html.find('.toggle-container').click(this._onToggleContainer.bind(this));
 
         html.find('.skill-proficiency').on("click contextmenu", this._onCycleClassSkill.bind(this));
-        html.find('.trait-selector').click(this._onTraitSelector.bind(this));
+        // html.find('.trait-selector').click(this._onTraitSelector.bind(this));
+        html.find('.trait-selector').click(this._onTraitSelectorNew.bind(this));
 
         // Skill Compendium
         html.find('.compendium-link').click(this._onOpenSkillCompendium.bind(this));
@@ -1118,6 +1120,24 @@ export class ActorSheetSFRPG extends ActorSheet {
         };
 
         new TraitSelectorSFRPG(this.actor, options).render(true);
+    }
+
+    /**
+     * Creates a TraitSelectorNew dialog
+     *
+     * @param {Event} event HTML Event
+     * @private
+     */
+    _onTraitSelectorNew(event) {
+        event.preventDefault();
+        const options = {
+            location: event.currentTarget.dataset.location,
+            title: event.currentTarget.dataset.title,
+            choices: CONFIG.SFRPG[event.currentTarget.dataset.choices],
+            format: 'actorTraits'
+        };
+
+        new TraitSelectorNew(this.actor, options).render(true);
     }
 
     /**
