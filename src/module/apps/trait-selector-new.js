@@ -10,7 +10,7 @@ export class TraitSelectorNew extends FormApplication {
         options.id = "trait-selector";
         options.classes = ["sfrpg"];
         options.title = "Trait Selection";
-        options.template = "systems/sfrpg/templates/apps/trait-selector.hbs";
+        options.template = "systems/sfrpg/templates/apps/trait-selector-new.hbs";
         options.width = 480;
         options.height = "auto";
 
@@ -26,32 +26,43 @@ export class TraitSelectorNew extends FormApplication {
         console.log(this);
 
         // Initialize variables for easy access
-        const dataLocation = this.options.location;
         const dataFormat = this.options.format;
+        const dataLocation = this.options.location;
         const traitData = getProperty(this.object, dataLocation);
 
-        console.log(dataFormat, traitData);
+        switch (dataFormat) {
+            case "actorTraits":
+                console.log('Item 1');
+                return this._getActorTraitChoices(traitData);
+
+            case "weaponProperties":
+                console.log('Item 2');
+                break;
+
+            default:
+                console.log('Item 3');
+                break;
+        }
 
         return true;
     }
 
-    /**
-     * Support backwards compatability for old-style string separated traits
-     *
-     * @param {String} current The current value
-     * @param {Array} choices The choices
-     * @returns {Array}
-     * @private
-     */
-    static _backCompat(current, choices) {
-        if (!current || current.length === 0) return [];
-        current = current.split(/[\s,]/).filter(t => !!t);
-        return current.map(val => {
-            for (const [k, v] of Object.entries(choices)) {
-                if (val === v) return k;
-            }
-            return null;
-        }).filter(val => !!val);
+    _getActorTraitChoices(traitData) {
+
+        // create the array of choices
+        const choices = duplicate(this.options.choices);
+        console.log(choices, traitData);
+
+        for (const [k, v] of Object.entries(choices)) {
+            choices[k] = {
+                label: v,
+                chosen: traitData.value.includes(k)
+            };
+        }
+        return {
+            choices: choices,
+            custom: traitData.custom
+        };
     }
 
     /**
