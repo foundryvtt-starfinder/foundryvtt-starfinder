@@ -1,15 +1,15 @@
 import { TraitSelectorSFRPG } from "../trait-selector.js";
 
-export class ActorTraitSelectorSFRPG extends TraitSelectorSFRPG {
-    constructor(actor, options) {
-        super(actor, options);
+export class WeaponPropertySelectorSFRPG extends TraitSelectorSFRPG {
+    constructor(item, options) {
+        super(item, options);
         super.getData();
     }
 
     /**
-     * Parses Actor Trait data into a format that the form can accept
+     * Parses Item Weapon Property data into a format that the form can accept
      *
-     * @param {Object} traitData The data from the actor to parse
+     * @param {Object} traitData The data from the item to parse
      * @returns {Object}
      */
     _getTraitChoices(traitData) {
@@ -18,15 +18,15 @@ export class ActorTraitSelectorSFRPG extends TraitSelectorSFRPG {
         const choices = duplicate(this.options.choices);
         console.log(this, choices, traitData);
 
-        for (const [k, v] of Object.entries(choices)) {
-            choices[k] = {
-                label: v,
-                isSelected: traitData.value.includes(k)
+        for (const [key, value] of Object.entries(choices)) {
+            choices[key] = {
+                label: value,
+                isSelected: traitData[key]
             };
         }
+
         return {
-            choices: choices,
-            custom: traitData.custom
+            choices: choices
         };
     }
 
@@ -40,21 +40,20 @@ export class ActorTraitSelectorSFRPG extends TraitSelectorSFRPG {
 
         // get a list of valid choices and initialize array
         const validChoices = Object.keys(this.options.choices);
-        const selected = [];
+        const selectedValues = {};
 
-        // Ignoring options not in the list of choices, push values marked true to the updateData
+        // Ignoring options not in the list of choices
         // key is the specific language, proficiency, etc.
         // value is true or false, or the name of a custom trait
         for (const [key, value] of Object.entries(formData)) {
             if (validChoices.includes(key)) {
-                if (value) selected.push(key);
+                selectedValues[key] = value;
             }
         }
 
         // Build the updated data to pass back to the parent object
         const updateData = {
-            [`${this.options.location}.value`]: selected,
-            [`${this.options.location}.custom`]: formData.custom
+            [`${this.options.location}`]: selectedValues
         };
 
         return updateData;

@@ -1,5 +1,6 @@
 import { SFRPG } from "../config.js";
 import RollContext from "../rolls/rollcontext.js";
+import { WeaponPropertySelectorSFRPG } from "../apps/trait-selectors/weapon-property-selector.js";
 
 const itemSizeArmorClassModifier = {
     "fine": 8,
@@ -565,6 +566,8 @@ export class ItemSheetSFRPG extends ItemSheet {
         html.find('select[name="resource-mode"]').change(this._onChangeResourceVisualizationMode.bind(this));
         html.find('input[name="resource-value"]').change(this._onChangeResourceVisualizationValue.bind(this));
         html.find('input[name="resource-title"]').change(this._onChangeResourceVisualizationTitle.bind(this));
+
+        html.find('.trait-selector').click(this._onTraitSelector.bind(this));
     }
 
     /* -------------------------------------------- */
@@ -974,6 +977,28 @@ export class ItemSheetSFRPG extends ItemSheet {
         return await this.item.update({
             "system.combatTracker.visualization": visualization
         });
+    }
+
+    /**
+     * Creates a TraitSelector dialog
+     *
+     * @param {Event} event HTML Event
+     * @private
+     */
+    _onTraitSelector(event) {
+        event.preventDefault();
+        const options = {
+            location: event.currentTarget.dataset.location,
+            title: event.currentTarget.dataset.title,
+            choices: CONFIG.SFRPG[event.currentTarget.dataset.choices],
+            format: event.currentTarget.dataset.format
+        };
+
+        // Pick the appropriate trait selector subclass
+        const cls = {
+            "itemProperties": WeaponPropertySelectorSFRPG
+        }[options.format];
+        new cls(this.item, options).render(true);
     }
 
 }

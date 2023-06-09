@@ -50,13 +50,20 @@
 
             {{!-- Weapon Properties --}}
             <div class="form-group stacked weapon-properties">
-                <label>{{ localize "SFRPG.Items.Weapon.Properties" }}</label>
-                {{#each config.weaponProperties as |name prop|}}
-                <!-- If there's a tooltip entry set for this weapon property we set a Tippy tooltip -->
-                <label class="checkbox" {{#if (lookup ../config.weaponPropertiesTooltips prop)}} data-tooltip='<strong>{{ name }}</strong><br/>{{lookup ../config.weaponPropertiesTooltips prop}}' {{/if}}>
-                    <input type="checkbox" name="system.properties.{{prop}}" {{checked (lookup ../itemData.properties prop)}} /> {{ name }}
+                <label>
+                    {{ localize "SFRPG.Items.Weapon.Properties" }}&nbsp;
+                    <a class="trait-selector" data-choices="weaponProperties" data-format="itemProperties" data-location="system.properties" data-title="{{localize "SFRPG.Items.Weapon.Properties"}}"><i class="fas fa-edit"></i></a>
                 </label>
-                {{/each}}
+                
+                <ul class="traits-list">
+                    {{#each itemData.properties as |v k|}}
+                        {{#if v}}
+                            <li class="tag {{k}}" data-tooltip='<strong>{{lookup ../config.weaponProperties k}}</strong><br/>{{lookup ../config.weaponPropertiesTooltips k}}'>
+                                {{lookup ../config.weaponProperties k}}
+                            </li>
+                        {{/if}}
+                    {{/each}}
+                </ul>
             </div>
 
             {{!-- Special Materials Template --}}
