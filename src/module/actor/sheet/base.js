@@ -1,6 +1,5 @@
 import { ActorSheetFlags } from "../../apps/actor-flags.js";
 import { ActorMovementConfig } from "../../apps/movement-config.js";
-import { TraitSelectorSFRPG } from "../../apps/trait-selector.js";
 import { SFRPGModifierType } from "../../modifiers/types.js";
 import StackModifiers from "../../rules/closures/stack-modifiers.js";
 
@@ -16,6 +15,10 @@ import { getEquipmentBrowser } from "../../packs/equipment-browser.js";
 import { getSpellBrowser } from "../../packs/spell-browser.js";
 import { getStarshipBrowser } from "../../packs/starship-browser.js";
 import RollContext from "../../rolls/rollcontext.js";
+
+import { TraitSelectorSFRPG } from "../../apps/trait-selector.js";
+import { ActorTraitSelectorSFRPG } from "../../apps/trait-selectors/actor-trait-selector.js";
+
 /**
  * Extend the basic ActorSheet class to do all the SFRPG things!
  * This sheet is an Abstract layer which is not used.
@@ -1116,7 +1119,8 @@ export class ActorSheetSFRPG extends ActorSheet {
             format: 'actorTraits'
         };
 
-        new TraitSelectorSFRPG(this.actor, options).render(true);
+        // new TraitSelectorSFRPG(this.actor, options).render(true);
+        new ActorTraitSelectorSFRPG(this.actor, options).render(true);
     }
 
     /**
