@@ -1102,7 +1102,7 @@ export class ActorSheetSFRPG extends ActorSheet {
     }
 
     /**
-     * Creates a TraitSelectorNew dialog
+     * Creates a TraitSelector dialog
      *
      * @param {Event} event HTML Event
      * @private

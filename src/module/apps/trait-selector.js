@@ -10,7 +10,7 @@ export class TraitSelectorSFRPG extends FormApplication {
         options.id = "trait-selector";
         options.classes = ["sfrpg"];
         options.title = "Trait Selection";
-        options.template = "systems/sfrpg/templates/apps/trait-selector-new.hbs";
+        options.template = "systems/sfrpg/templates/apps/trait-selector.hbs";
         options.width = 480;
         options.height = "auto";
 
