@@ -1102,19 +1102,18 @@ export class ActorSheetSFRPG extends ActorSheet {
     }
 
     /**
-     * Creates an TraitSelectorSFRPG dialog
+     * Creates a TraitSelectorNew dialog
      *
      * @param {Event} event HTML Event
      * @private
      */
     _onTraitSelector(event) {
         event.preventDefault();
-        const a = event.currentTarget;
-        const label = a.parentElement.querySelector('label');
         const options = {
-            name: label.getAttribute("for"),
-            title: label.innerText,
-            choices: CONFIG.SFRPG[a.dataset.options]
+            location: event.currentTarget.dataset.location,
+            title: event.currentTarget.dataset.title,
+            choices: CONFIG.SFRPG[event.currentTarget.dataset.choices],
+            format: 'actorTraits'
         };
 
         new TraitSelectorSFRPG(this.actor, options).render(true);
