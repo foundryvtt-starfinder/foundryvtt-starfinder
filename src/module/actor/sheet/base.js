@@ -16,7 +16,6 @@ import { getSpellBrowser } from "../../packs/spell-browser.js";
 import { getStarshipBrowser } from "../../packs/starship-browser.js";
 import RollContext from "../../rolls/rollcontext.js";
 
-import { TraitSelectorSFRPG } from "../../apps/trait-selector.js";
 import { ActorTraitSelectorSFRPG } from "../../apps/trait-selectors/actor-trait-selector.js";
 
 /**
@@ -1116,11 +1115,14 @@ export class ActorSheetSFRPG extends ActorSheet {
             location: event.currentTarget.dataset.location,
             title: event.currentTarget.dataset.title,
             choices: CONFIG.SFRPG[event.currentTarget.dataset.choices],
-            format: 'actorTraits'
+            format: event.currentTarget.dataset.format
         };
 
-        // new TraitSelectorSFRPG(this.actor, options).render(true);
-        new ActorTraitSelectorSFRPG(this.actor, options).render(true);
+        // Pick the appropriate trait selector subclass
+        const cls = {
+            "actorTraits": ActorTraitSelectorSFRPG
+        }[options.format];
+        new cls(this.actor, options).render(true);
     }
 
     /**
