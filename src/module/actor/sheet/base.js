@@ -1,7 +1,6 @@
 import { ActorSheetFlags } from "../../apps/actor-flags.js";
 import { ActorMovementConfig } from "../../apps/movement-config.js";
 import { TraitSelectorSFRPG } from "../../apps/trait-selector.js";
-import { TraitSelectorNew } from "../../apps/trait-selector-new.js";
 import { SFRPGModifierType } from "../../modifiers/types.js";
 import StackModifiers from "../../rules/closures/stack-modifiers.js";
 
@@ -211,8 +210,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         html.find('.toggle-container').click(this._onToggleContainer.bind(this));
 
         html.find('.skill-proficiency').on("click contextmenu", this._onCycleClassSkill.bind(this));
-        // html.find('.trait-selector').click(this._onTraitSelector.bind(this));
-        html.find('.trait-selector').click(this._onTraitSelectorNew.bind(this));
+        html.find('.trait-selector').click(this._onTraitSelector.bind(this));
 
         // Skill Compendium
         html.find('.compendium-link').click(this._onOpenSkillCompendium.bind(this));
@@ -1104,31 +1102,12 @@ export class ActorSheetSFRPG extends ActorSheet {
     }
 
     /**
-     * Creates an TraitSelectorSFRPG dialog
-     *
-     * @param {Event} event HTML Event
-     * @private
-     */
-    _onTraitSelector(event) {
-        event.preventDefault();
-        const a = event.currentTarget;
-        const label = a.parentElement.querySelector('label');
-        const options = {
-            name: label.getAttribute("for"),
-            title: label.innerText,
-            choices: CONFIG.SFRPG[a.dataset.options]
-        };
-
-        new TraitSelectorSFRPG(this.actor, options).render(true);
-    }
-
-    /**
      * Creates a TraitSelectorNew dialog
      *
      * @param {Event} event HTML Event
      * @private
      */
-    _onTraitSelectorNew(event) {
+    _onTraitSelector(event) {
         event.preventDefault();
         const options = {
             location: event.currentTarget.dataset.location,
@@ -1137,7 +1116,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             format: 'actorTraits'
         };
 
-        new TraitSelectorNew(this.actor, options).render(true);
+        new TraitSelectorSFRPG(this.actor, options).render(true);
     }
 
     /**

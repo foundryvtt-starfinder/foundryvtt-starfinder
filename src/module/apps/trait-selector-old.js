@@ -3,18 +3,27 @@
  *
  * @type {FormApplication}
  */
-export class TraitSelectorNew extends FormApplication {
+export class TraitSelectorSFRPG extends FormApplication {
     static get defaultOptions() {
         const options = super.defaultOptions;
 
         options.id = "trait-selector";
         options.classes = ["sfrpg"];
         options.title = "Trait Selection";
-        options.template = "systems/sfrpg/templates/apps/trait-selector-new.hbs";
+        options.template = "systems/sfrpg/templates/apps/trait-selector.hbs";
         options.width = 480;
         options.height = "auto";
 
         return options;
+    }
+
+    /**
+     * Return a reference to the target attribute
+     *
+     * @type {String}
+     */
+    get attribute() {
+        return this.options.name;
     }
 
     /**
@@ -24,53 +33,63 @@ export class TraitSelectorNew extends FormApplication {
      */
     getData() {
         console.log(this);
-
-        // Initialize variables for easy access
-        const dataFormat = this.options.format;
-        const dataLocation = this.options.location;
-        const traitData = getProperty(this.object, dataLocation);
-
-        // Choose the appropriate data parser to create the form
-        switch (dataFormat) {
-            case "actorTraits":
-                return this._getActorTraitChoices(traitData);
-
-            case "weaponProperties":
-                console.log('Selecting Weapon Properties');
-                return true;
-
-            default:
-                console.log(`dataFormat ${dataFormat} not found`);
-                break;
+        const attr = getProperty(this.object, this.attribute);
+        if (typeof attr.value === "string") {
+            attr.value = this.constructor._backCompat(attr.value, this.options.choices);
         }
-    }
 
-    /**
-     * Parses Actor Trait data into a format that the form can accept
-     *
-     * @param {Object} traitData The data from the actor to parse
-     * @returns {Object}
-     */
-    _getActorTraitChoices(traitData) {
-
-        // create the array of choices
         const choices = duplicate(this.options.choices);
-        console.log(choices, traitData);
+        const isEnergyResistance = this.attribute === "data.traits.dr";
+        if (!isEnergyResistance) {
+            for (const [k, v] of Object.entries(choices)) {
+                choices[k] = {
+                    label: v,
+                    chosen: attr.value.includes(k)
+                };
+            }
+        } else {
+            for (const [k, v] of Object.entries(choices)) {
+                choices[k] = {
+                    label: v,
+                    chosen: false,
+                    resistanceValue: 0
+                };
+            }
 
-        for (const [k, v] of Object.entries(choices)) {
-            choices[k] = {
-                label: v,
-                isSelected: traitData.value.includes(k)
-            };
+            for (const value of attr.value) {
+                for (const [type, resistance] of Object.entries(value)) {
+                    choices[type].chosen = true;
+                    choices[type].resistanceValue = resistance;
+                }
+            }
         }
+
+        this.searchTerm = '';
+
         return {
             choices: choices,
-            custom: traitData.custom
+            custom: attr.custom,
+            isEnergyResistance
         };
     }
 
-    _setActorTraits() {
-        return true;
+    /**
+     * Support backwards compatability for old-style string separated traits
+     *
+     * @param {String} current The current value
+     * @param {Array} choices The choices
+     * @returns {Array}
+     * @private
+     */
+    static _backCompat(current, choices) {
+        if (!current || current.length === 0) return [];
+        current = current.split(/[\s,]/).filter(t => !!t);
+        return current.map(val => {
+            for (const [k, v] of Object.entries(choices)) {
+                if (val === v) return k;
+            }
+            return null;
+        }).filter(val => !!val);
     }
 
     /**
@@ -81,23 +100,6 @@ export class TraitSelectorNew extends FormApplication {
      * @private
      */
     _updateObject(event, formData) {
-        console.log(this);
-
-        // Initialize variables for easy access
-        const dataFormat = this.options.format;
-        const dataLocation = this.options.location;
-        const traitData = getProperty(this.object, dataLocation);
-
-        switch (dataFormat) {
-            case 'actorTraits':
-                console.log('Setting Actor Traits');
-                break;
-
-            default:
-                console.log('Setting nothing.');
-                break;
-        }
-
         let choices = [];
 
         if (this.attribute !== "system.traits.dr") {
@@ -163,6 +165,8 @@ export class TraitSelectorNew extends FormApplication {
             this.searchTerm = ev.target.value;
             this.filterTraits(html.find('li'));
         });
+
+        // on Enter key press, filter based on search
 
     }
 }

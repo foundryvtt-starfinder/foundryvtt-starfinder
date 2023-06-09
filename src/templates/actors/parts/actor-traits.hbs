@@ -121,11 +121,11 @@
     {{!-- Languages --}}
     {{#if (not isDrone)}}
         <div class="form-group {{system.traits.languages.cssClass}}">
-            <label for="system.traits.languages">{{localize "SFRPG.Languages"}}</label>
+            <label>{{localize "SFRPG.Languages"}}</label>
             <ul class="traits-list">
-            {{#each system.traits.languages.selected as |v k|}}
+                {{#each system.traits.languages.selected as |v k|}}
                 <li class="tag {{k}}">{{v}}</li>
-            {{/each}}
+                {{/each}}
             </ul>
             <a class="trait-selector" data-choices="languages" data-location="system.traits.languages" data-title="{{localize "SFRPG.Languages"}}"><i class="fas fa-edit"></i></a>
         </div>
@@ -187,7 +187,7 @@
     {{!-- Damage Vulnerability --}}
     {{#if (not isDrone)}}
     <div class="form-group {{system.traits.dv.cssClass}}">
-        <label for="system.traits.dv">{{localize "SFRPG.Damage.Vulnerabilities"}}</label>
+        <label>{{localize "SFRPG.Damage.Vulnerabilities"}}</label>
         <ul class="traits-list">
         {{#each system.traits.dv.selected as |v k|}}
             <li class="tag {{k}}">{{v}}</li>
@@ -198,24 +198,24 @@
 
     {{!-- Damage Immunity --}}
     <div class="form-group {{system.traits.di.cssClass}}">
-        <label for="system.traits.di">{{localize "SFRPG.Damage.Immunities"}}</label>
+        <label>{{localize "SFRPG.Damage.Immunities"}}</label>
         <ul class="traits-list">
         {{#each system.traits.di.selected as |v k|}}
             <li class="tag {{k}}">{{v}}</li>
         {{/each}}
         </ul>
-        <a class="trait-selector" data-options="damageTypes"><i class="fas fa-edit"></i></a>
+        <a class="trait-selector" data-choices="damageTypes" data-location="system.traits.di" data-title="{{localize "SFRPG.Damage.Immunities"}}"><i class="fas fa-edit"></i></a>
     </div>
 
     {{!-- Condition Immunities --}}
     <div class="form-group {{system.traits.ci.cssClass}}">
-        <label for="system.traits.ci">{{localize "SFRPG.ConImm"}}</label>
+        <label>{{localize "SFRPG.ConImm"}}</label>
         <ul class="traits-list">
         {{#each system.traits.ci.selected as |v k|}}
             <li class="tag {{k}}">{{v}}</li>
         {{/each}}
         </ul>
-        <a class="trait-selector" data-options="conditionTypes"><i class="fas fa-edit"></i></a>
+        <a class="trait-selector" data-choices="conditionTypes" data-location="system.traits.ci" data-title="{{localize "SFRPG.ConImm"}}"><i class="fas fa-edit"></i></a>
     </div>
     {{/if}}
 
@@ -224,25 +224,25 @@
 
         {{!-- Weapon Proficiencies --}}
         <div class="form-group {{system.traits.weaponProf.cssClass}}">
-            <label for="system.traits.weaponProf">{{localize "SFRPG.TraitWeaponProf"}}</label>
+            <label>{{localize "SFRPG.TraitWeaponProf"}}</label>
             <ul class="traits-list">
-            {{#each system.traits.weaponProf.selected as |v k|}}
+                {{#each system.traits.weaponProf.selected as |v k|}}
                 <li class="tag {{k}}">{{v}}</li>
-            {{/each}}
+                {{/each}}
             </ul>
-            <a class="trait-selector" data-options="weaponProficiencies"><i class="fas fa-edit"></i></a>
+            <a class="trait-selector" data-choices="weaponProficiencies" data-location="system.traits.weaponProf" data-title="{{localize "SFRPG.TraitWeaponProf"}}"><i class="fas fa-edit"></i></a>
         </div>
 
         {{!-- Armor Proficiencies --}}
         {{#if isCharacter}}
             <div class="form-group {{system.traits.armorProf.cssClass}}">
-                <label for="system.traits.armorProf">{{localize "SFRPG.TraitArmorProf"}}</label>
+                <label>{{localize "SFRPG.TraitArmorProf"}}</label>
                 <ul class="traits-list">
-                {{#each system.traits.armorProf.selected as |v k|}}
+                    {{#each system.traits.armorProf.selected as |v k|}}
                     <li class="tag {{k}}">{{v}}</li>
-                {{/each}}
+                    {{/each}}
                 </ul>
-                <a class="trait-selector" data-options="armorProficiencies"><i class="fas fa-edit"></i></a>
+                <a class="trait-selector" data-choices="armorProficiencies" data-location="system.traits.armorProf" data-title="{{localize "SFRPG.TraitArmorProf"}}"><i class="fas fa-edit"></i></a>
             </div>
         {{/if}}
 
