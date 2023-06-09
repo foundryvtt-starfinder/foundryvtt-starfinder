@@ -317,38 +317,6 @@ export class ActorSheetSFRPG extends ActorSheet {
         return super.render(force, options);
     }
 
-    async _render(...args) {
-        await super._render(...args);
-
-        if (this._tooltips === null) {
-            this._tooltips = tippy.delegate(`#${this.id}`, {
-                target: '[data-tippy-content]',
-                allowHTML: true,
-                arrow: false,
-                placement: 'top-start',
-                duration: [500, null],
-                delay: [800, null],
-                maxWidth: 600
-            });
-        }
-    }
-
-    clearTooltips() {
-        this._tooltips = null;
-    }
-
-    async close(...args) {
-        if (this._tooltips !== null) {
-            for (const tooltip of this._tooltips) {
-                tooltip.destroy();
-            }
-
-            this._tooltips = null;
-        }
-
-        return super.close(...args);
-    }
-
     /** @override */
     _onChangeTab(event, tabs, active) {
         if (active === "modifiers") {
@@ -459,9 +427,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             modifiers = Object.values(modifiers)
                 .flat()
                 .filter(i => !!i);
-            const modifiersTotal = modifiers.reduce((total, i) => {
-                return total + i.max;
-            }, 0);
+            const modifiersTotal = modifiers.reduce((total, i) => total + i.max, 0);
 
             const preparedFormula = `${formula} ${modifiersTotal > 0 ? "+" + String(modifiersTotal) : ""}`;
 
@@ -494,9 +460,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             modifiers = Object.values(modifiers)
                 .flat()
                 .filter(i => !!i);
-            const modifiersTotal = modifiers.reduce((total, i) => {
-                return total + i.max;
-            }, 0);
+            const modifiersTotal = modifiers.reduce((total, i) => total + i.max, 0);
 
             const preparedFormula = `${formula} ${modifiersTotal > 0 ? "+" + String(modifiersTotal) : ""}`;
 
@@ -504,7 +468,14 @@ export class ActorSheetSFRPG extends ActorSheet {
 
             const roll = Roll.create(preparedFormula, rollData).simplifiedFormula;
             if (!roll) throw ("Invaid roll, deferring to default string.");
-            item.config.damageString = roll;
+
+            const damageTypes = Object.entries(item.system.damage.parts[0].types)
+                .map(([type, enabled]) => {
+                    if (enabled) return SFRPG.damageTypeToAcronym[type];
+                })
+                .filterJoin(" & ");
+
+            item.config.damageString = `${roll} ${damageTypes}`;
         } catch {
             item.config.damageString = item.system.actionType === "heal"
                 ? game.i18n.localize("SFRPG.ActionHeal")
@@ -1044,7 +1015,7 @@ export class ActorSheetSFRPG extends ActorSheet {
 
             const props = $(`<div class="item-properties"></div>`);
             chatData.properties.forEach(p => props.append(
-                `<span class="tag" data-tippy-content="${p.tooltip || p.title}"><strong>${p.title ? p.title + ":" : ""} </strong>${p.name}</span>`
+                `<span class="tag" data-tooltip="${p.tooltip || p.title}"><strong>${p.title ? p.title + ":" : ""} </strong>${p.name}</span>`
             ));
 
             div.append(props);
@@ -1322,7 +1293,7 @@ export class ActorSheetSFRPG extends ActorSheet {
                 actorID = splitUUID[1];
             }
 
-            const sourceActor = new ActorItemHelper(actorID || parsedDragData.actorId, parsedDragData.tokenId, parsedDragData.sceneId, { actor: this.actor });
+            const sourceActor = new ActorItemHelper(actorID || parsedDragData.actorId, parsedDragData.tokenId, parsedDragData.sceneId);
             if (!ActorItemHelper.IsValidHelper(sourceActor)) {
                 ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragFromExternalTokenError"));
                 return;

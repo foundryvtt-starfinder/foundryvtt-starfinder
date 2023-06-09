@@ -87,21 +87,6 @@ export default class RollDialog extends Dialog {
         });
     }
 
-    async _render(...args) {
-        await super._render(...args);
-
-        if (this._tooltips === null) {
-            this._tooltips = tippy.delegate(`#${this.id}`, {
-                target: '[data-tippy-content]',
-                allowHTML: true,
-                arrow: false,
-                placement: 'top-start',
-                duration: [500, null],
-                delay: [800, null]
-            });
-        }
-    }
-
     async getData() {
         const data = await super.getData();
         data.formula = this.formula;
@@ -278,7 +263,7 @@ export default class RollDialog extends Dialog {
     }
 
     _onDamageSectionRadio(event) {
-        let damageGroups = this.damageGroups;
+        const damageGroups = this.damageGroups;
 
         const selectorGroup = event.currentTarget.name;
         const selectorId = event.currentTarget.id;
@@ -292,7 +277,7 @@ export default class RollDialog extends Dialog {
     }
 
     _onDamageSectionCheckbox(event) {
-        let damageGroups = this.damageGroups;
+        const damageGroups = this.damageGroups;
 
         const selectorGroup = event.currentTarget.name;
         const selectorId = event.currentTarget.id;

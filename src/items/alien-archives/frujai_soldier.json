@@ -12,6 +12,7 @@
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -197,6 +198,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -331,6 +333,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -356,6 +359,7 @@
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -433,6 +437,7 @@
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -461,11 +466,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -483,6 +485,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 2
@@ -533,12 +536,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -669,8 +678,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<h2>Frujai</h2>\n<p>On the toroid-shaped world of Orikolai, dramatic fluctuations of gravity, light, and temperature are commonplace. Sentient fungi known as frujais are among the most successful of the planet’s inhabitants, having developed not only a seasonal life cycle but also biological and psychic means of overcoming different gravity levels. Frujais function much like ants, with the colony’s living hub spawning hundreds of simple workers and soldiers to sustain it. During Orikolai’s frigid winters, frujais hibernate, awakening at the first signs of spring to blanket their territory in spores that take root in the thawing corpses of any animals that didn’t survive the cold. If not enough corpses are available, the colony begins to hunt aggressively, attacking whatever living organisms it comes across.</p>\n<p>The immature drones that sprout from these infested cadavers (use the statistics for a frujai soldier above, without the colony guard ability) wander through unclaimed territory, scavenging and hunting to grow strong. In early autumn, the drones convene and mate in roiling ligneous mats, during which they spar with and even consume one another. Those that survive the process disperse to pursue migratory herds or shadow large prey back to the latters’ winter lairs, eating and killing as much as possible in order to stockpile as much nutrition as they can. They then consume these stores over the winter months, growing to their colossal mature size and metamorphosing into fully functional frujai colonies. Both colonies and the individual soldiers they spawn as guardians use their mastery of gravity to collect stones and other objects, which constantly orbit them and represent their only concessions to wealth or vanity.</p>\n<p>Despite their strange shapes, frujai colonies and soldiers are surprisingly intelligent. Frujais see themselves as ecological caretakers, weeding out the weak and clearing the path for stronger creatures. Several attempts at settling Orikolai have failed when frujais interpreted the settlements as well-stocked larders of weak-willed flesh. Larger frujai colonies sometimes entertain interviews with avid xenobiologists, though the dialogues are as likely to descend into ravenous feasting upon the scholars as they are to explore the deep philosophical musings that occupy the frujais the rest of the time.</p>",
@@ -680,6 +692,10 @@
       "cr": 12,
       "environment": "any forests (Orikolai)",
       "organization": "solitary or squad (2-8)",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AA1 pg. 52",
@@ -981,6 +997,9 @@
       },
       "senses": "low-light vision",
       "size": "large",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

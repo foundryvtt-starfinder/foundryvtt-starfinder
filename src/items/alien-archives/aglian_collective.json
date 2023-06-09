@@ -15,6 +15,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -36,6 +37,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -62,6 +64,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -90,6 +93,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -111,6 +115,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -137,6 +142,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -165,6 +171,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -186,6 +193,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -212,6 +220,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -247,6 +256,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -281,6 +291,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": []
         },
@@ -299,6 +310,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -409,12 +421,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -422,6 +436,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -450,6 +465,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -471,6 +487,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -497,6 +514,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -518,12 +536,14 @@
   "prototypeToken": {
     "name": "Aglian Collective",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -554,7 +574,6 @@
     "lockRotation": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -572,6 +591,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -622,12 +642,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -685,7 +711,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 0
@@ -694,7 +721,8 @@
         "special": "original base: swim 40 ft.; original special: +19 Athletics to swim",
         "swimming": {
           "base": 40
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -756,8 +784,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<p>Each of these tiny eel-like natives of the aquatic world of @UUID[Compendium.sfrpg.setting.tvbcahAbnqDGepHf]{Entha} has a limited individual consciousness focused around a single idea—usually a broad theoretical concept but sometimes a specifific object or action like coral, bedrock, swim, or search. An aglian’s coloration varies based on the content and complexity of their particular thought, from dull gray for those that concentrate on narrow concepts to rainbow hues for those that embody curiosity or truth.</p>\n<div>\n<p>While individual aglians can function in perfunctory ways, they are usually found in schools, telepathically linking with each other like neurons in a brain to form a new consciousness. EJ Corp scientists have dismissed the species as nonsapient, but the large schools in which most aglians spend their time are indeed sapient. Each member contributes and receives each other’s concept, building a collective yet individual personhood for each aglian in the school.</p>\n<p>When aglians reproduce, two or more parents contribute genetic material, and the offffspring, called an elver, has an equal chance to embody either the same concept as a parent or an entirely new thought resulting from the experiences of each. In this way, the aglian population of @UUID[Compendium.sfrpg.setting.tvbcahAbnqDGepHf]{Entha}&nbsp;has grown to embody extremely specifific and refifined concepts. Their recent interactions with EJ Corp employees, however limited and scattered, have already begun to produce elvers that embody concepts like wonder, dismissal, and greed.</p>\n</div>",
@@ -767,6 +798,10 @@
       "cr": 5,
       "environment": "any water",
       "organization": "solitary or intellection (6-12)",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #36 pg. 56",
@@ -1018,30 +1053,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -1080,6 +1122,9 @@
       },
       "senses": "darkvision 60 ft., low-light vision",
       "size": "tiny",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 16
     }
   }

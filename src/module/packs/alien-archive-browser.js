@@ -148,10 +148,10 @@ class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
             },
             organizationSize: {
                 label: game.i18n.format("SFRPG.Browsers.AlienArchiveBrowser.BrowserFilterOrganizationSize"),
-                content: {value: 1},
-                range: {min: 1, max: null},
+                content: {value: null},
+                range: {min: null, max: null},
                 filter: (element, filters) => { return this._filterOrganizationSize(element, filters); },
-                reset: (filter) => { filter.content = {value: 1}; },
+                reset: (filter) => { filter.content = {value: null}; },
                 type: "value"
             },
             size: {
@@ -216,6 +216,7 @@ class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     _filterOrganizationSize(element, filterData) {
+        if (!filterData.value) return true;
         const itemUuid = element.dataset.entryUuid;
         const alien = this.items.get(itemUuid);
         const alienOrganizationSize = alien.system.details.organizationSize || {min: 1, max: null};

@@ -15,6 +15,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -200,6 +201,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -228,6 +230,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "",
@@ -305,6 +308,7 @@
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -333,11 +337,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -355,6 +356,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -405,12 +407,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -541,8 +549,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<h2>Description</h2>\n<p>Strong emotions have subtle psychic effects on the Ethereal Plane, the ghostly realm that serves as a buffer between the Material Plane and the Shadow Plane. When an excess of negative emotions occurs in one place, it sometimes leaves an impression in the ether that gains a rudimentary form of sentience, resulting in a creature known as a fuhlgeist. Though it has no true form and no soul-it’s more a mass of spiritstuff and ectoplasm than anything else-it believes itself to be a full, living creature. Gripped by raw, shifting emotions, this outsider can manifest on the Material Plane to lash out at those nearby. Such an occurrence is often mistaken as a haunting, and though fuhlgeists and ghosts have much in common, the former can’t be banished by divine means. On the other hand, once a fuhlgeist has been destroyed, it doesn’t rejuvenate like a ghost does, and there’s no need to discover the tragic story behind its creation (which would be a difficult task, as a fuhlgeist’s speech patterns are often disjointed and erratic).</p>\n<p>The “emotion crystals” mined by the fey moyishuus sometimes attract fuhlgeists like candle flames attract moths. Indeed, the Veyvilla system has the highest recorded fuhlgeist sightings in the known galaxy. The moyishuu government has no clear plans on how to prevent future incursions and unfortunately tends to hush up the most grievous cases of injuries caused by these hostile outsiders.</p>",
@@ -552,6 +563,10 @@
       "cr": 8,
       "environment": "any",
       "organization": "solitary",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #37 pg. 56",
@@ -856,6 +871,9 @@
       },
       "senses": "darkvision 60 ft., blindsight (emotion) 30 ft.;",
       "size": "medium",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

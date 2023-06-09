@@ -22,6 +22,7 @@
           "condition": "",
           "cost": null
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -56,6 +57,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -85,8 +87,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>Spears come in many varieties. Buzzblade spears vibrate at high frequency. Zero-edge spears employ quantum manufacturing to hone an edge so fine that it seems indistinct. The gravity spear uses a tiny gravity field generator to accelerate the weapon at the moment of impact.</p>"
         },
@@ -95,6 +100,7 @@
           "units": "",
           "value": ""
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
@@ -188,12 +194,14 @@
           "wideLine": false
         },
         "quantity": null,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "ft",
           "value": 20
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -201,6 +209,7 @@
         },
         "source": "Core Rulebook, P. 171",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -236,6 +245,7 @@
           "condition": "",
           "cost": null
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -275,6 +285,7 @@
               "index": 0
             }
           ],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -305,8 +316,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>The pulsecaster rifle sends a low-voltage blast at its target and has a longer range than the handheld pulsecaster. The blast can stun the target and deal nonlethal damage.</p>"
         },
@@ -315,6 +329,7 @@
           "units": "",
           "value": ""
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
@@ -411,12 +426,14 @@
           "wideLine": false
         },
         "quantity": null,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "ft",
           "value": 50
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -424,6 +441,7 @@
         },
         "source": "Core Rulebook",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -473,15 +491,19 @@
         },
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 20</p>"
         },
+        "equippable": false,
         "equipped": false,
         "identified": true,
         "level": 1,
         "modifiers": [],
         "price": 60,
         "quantity": 1,
+        "quantityPerPack": 1,
         "source": "Core Rulebook"
       }
     },
@@ -517,15 +539,19 @@
         },
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 20</p>"
         },
+        "equippable": false,
         "equipped": false,
         "identified": true,
         "level": 1,
         "modifiers": [],
         "price": 60,
         "quantity": 1,
+        "quantityPerPack": 1,
         "source": "Core Rulebook"
       }
     }
@@ -533,12 +559,14 @@
   "prototypeToken": {
     "name": "Maraquoi Hunter",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -567,11 +595,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -589,6 +614,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -639,12 +665,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -702,7 +734,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 30
@@ -711,7 +744,8 @@
         "special": "original base: 30 ft.; original special: climb 20 ft.",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -771,12 +805,26 @@
       "alignment": "NG",
       "aura": "",
       "biography": {
+        "age": 0,
+        "dateOfBirth": "",
+        "deity": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
+        "height": "",
+        "homeWorld": "",
+        "otherVisuals": "",
         "public": "",
-        "value": "<h2>Maraquoi</h2>\n<p>Maraquoi are the primary native race of Marata, one of @UUID[Compendium.sfrpg.setting.2K7muQyxlXW8wqb3]{Bretheda}’s moons. A primitive culture until relatively recently, maraquoi have made rapid technological advances as a result of interplanetary trade, yet they maintain many of the traditions of their ancestors. Maraquoi stand slightly taller than humans on average, and their bodies are covered with silky fur that acts like thousands of tiny antennae, transmitting sound to their sensitive skin. Maraquoi also each have a prehensile simian tail that allows them to manipulate objects.</p>\n<p>More than anything else, the maraquoi’s complex genders and familial structures set them apart from other races. Where many humanoid races in the Pact Worlds have a binary system of sexual reproduction, maraquoi have seven different sexes, each playing a different role in the process of reproduction. The ilsha, qsha, and susha (roughly translated to “earth-sire,” “sky-sire,” and “water-sire,” respectively) each contribute genetic material to the uisha (“sharer”). Shortly thereafter, the uisha passes the fetal maraquoi on to a klsha (“bearer”), who carries the child to term. Once born, the infant maraquoi must be passed on to a mesha (“cradle”), who carries the child in a marsupial-style pouch and nurses them until they wean. The most unusual sex might be the zysha (“facilitator”). While a zysha does not have much to do with the physical process of reproduction, their presence throughout is vital, as they somehow still pass on elements of their genetic code to the developing maraquoi. Monogamous marriage and similar traditions are unknown in traditional maraquoi culture, and despite the influx of media from other worlds, most maraquoi remain perplexed or amused by the concept.</p>\n<p>Maraquoi culture has a deep respect for life and the notion of family. The loss of several tribe members could prevent reproduction altogether, and so every life must be protected and treasured. This applies to other forms of life as well, and each hunt is traditionally followed by a ritual honoring the slain beast. Nearly all maraquoi consider themselves part of a single extended family, and intertribal conflict is rarely lethal. At the same time, the abundance of predatory fauna on their home world means that maraquoi warriors are both common and extremely skilled, using their abilities to guard their tribes. The practice of turning to mercenary work on other planets has deeply divided the maraquoi in recent generations: some believe there’s no conflict with their belief system so long as they never kill other maraquoi, while others rail against what they see as an abandonment of virtue and the exploitation of their noble guardians by outside interests. Even maraquoi mercenaries, however, retain much of their traditional honor system, with rituals recognizing fallen friends and foes alike.</p>\n<p>Many maraquoi treasure their ancient hunter-gatherer customs, and some tribes still dwell in cliffside caves and split-log longhouses in the deep forests, with only basic technological conveniences. Others follow cattlelizard herds across rocky plateaus but use modern vehicles and weapons. Still others seek to fully industrialize, and in recent years they have created impressive urban settlements, mining and exporting the planet’s natural resources in violation of the traditionally communal approach to property. Tensions are increasing between the various groups, and some maraquoi fear that their society is on the verge of fracturing beyond repair.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any (Marata)</p>\n<h3>Organization</h3>\n<p>solitary or warband (1 plus 4-12 maraquoi hunters)</p>\n<h2>Offense</h2>\n<h3>Connection</h3>\n<p>healer</p>"
+        "value": "<h2>Maraquoi</h2>\n<p>Maraquoi are the primary native race of Marata, one of @UUID[Compendium.sfrpg.setting.2K7muQyxlXW8wqb3]{Bretheda}’s moons. A primitive culture until relatively recently, maraquoi have made rapid technological advances as a result of interplanetary trade, yet they maintain many of the traditions of their ancestors. Maraquoi stand slightly taller than humans on average, and their bodies are covered with silky fur that acts like thousands of tiny antennae, transmitting sound to their sensitive skin. Maraquoi also each have a prehensile simian tail that allows them to manipulate objects.</p>\n<p>More than anything else, the maraquoi’s complex genders and familial structures set them apart from other races. Where many humanoid races in the Pact Worlds have a binary system of sexual reproduction, maraquoi have seven different sexes, each playing a different role in the process of reproduction. The ilsha, qsha, and susha (roughly translated to “earth-sire,” “sky-sire,” and “water-sire,” respectively) each contribute genetic material to the uisha (“sharer”). Shortly thereafter, the uisha passes the fetal maraquoi on to a klsha (“bearer”), who carries the child to term. Once born, the infant maraquoi must be passed on to a mesha (“cradle”), who carries the child in a marsupial-style pouch and nurses them until they wean. The most unusual sex might be the zysha (“facilitator”). While a zysha does not have much to do with the physical process of reproduction, their presence throughout is vital, as they somehow still pass on elements of their genetic code to the developing maraquoi. Monogamous marriage and similar traditions are unknown in traditional maraquoi culture, and despite the influx of media from other worlds, most maraquoi remain perplexed or amused by the concept.</p>\n<p>Maraquoi culture has a deep respect for life and the notion of family. The loss of several tribe members could prevent reproduction altogether, and so every life must be protected and treasured. This applies to other forms of life as well, and each hunt is traditionally followed by a ritual honoring the slain beast. Nearly all maraquoi consider themselves part of a single extended family, and intertribal conflict is rarely lethal. At the same time, the abundance of predatory fauna on their home world means that maraquoi warriors are both common and extremely skilled, using their abilities to guard their tribes. The practice of turning to mercenary work on other planets has deeply divided the maraquoi in recent generations: some believe there’s no conflict with their belief system so long as they never kill other maraquoi, while others rail against what they see as an abandonment of virtue and the exploitation of their noble guardians by outside interests. Even maraquoi mercenaries, however, retain much of their traditional honor system, with rituals recognizing fallen friends and foes alike.</p>\n<p>Many maraquoi treasure their ancient hunter-gatherer customs, and some tribes still dwell in cliffside caves and split-log longhouses in the deep forests, with only basic technological conveniences. Others follow cattlelizard herds across rocky plateaus but use modern vehicles and weapons. Still others seek to fully industrialize, and in recent years they have created impressive urban settlements, mining and exporting the planet’s natural resources in violation of the traditionally communal approach to property. Tensions are increasing between the various groups, and some maraquoi fear that their society is on the verge of fracturing beyond repair.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any (Marata)</p>\n<h3>Organization</h3>\n<p>solitary or warband (1 plus 4-12 maraquoi hunters)</p>\n<h2>Offense</h2>\n<h3>Connection</h3>\n<p>healer</p>",
+        "weight": ""
       },
       "class": "",
       "cr": 0.5,
       "environment": "",
+      "organization": "",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AA1 pg. 74",
@@ -1028,30 +1076,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -1084,6 +1139,9 @@
       },
       "senses": "low-light vision, blindsense (30 ft.)",
       "size": "medium",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

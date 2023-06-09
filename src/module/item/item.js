@@ -438,7 +438,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         if (this.type === "container") {
             if (this.actor) {
-                const wealthString = new Intl.NumberFormat(game.i18n.lang).format(Math.floor(this.system.itemWealth.contentWealth));
+                const wealthString = new Intl.NumberFormat(game.i18n.lang).format(Math.floor(this.contentWealth));
                 const wealthProperty = game.i18n.format("SFRPG.CharacterSheet.Inventory.ContainedWealth", {wealth: wealthString});
                 props.push({
                     name: wealthProperty,
@@ -542,7 +542,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      */
     _technologicalChatData(data, labels, props) {
         props.push(
-            {name: game.i18n.localize("ITEM.TypeTechnological"), tooltip: null},
+            {name: game.i18n.localize("TYPES.Item.technological"), tooltip: null},
             data.bulk ? {name: `${game.i18n.localize("SFRPG.InventoryBulk")} ${data.bulk}`, tooltip: null} : null,
             data.hands ? {name: `${game.i18n.localize("SFRPG.Items.Description.Hands")} ${data.hands}`, tooltip: null} : null
         );
@@ -556,7 +556,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      */
     _hybridChatData(data, labels, props) {
         props.push(
-            {name: game.i18n.localize("ITEM.TypeHybrid"), tooltip: null},
+            {name: game.i18n.localize("TYPES.Item.hybrid"), tooltip: null},
             data.bulk ? {name: `${game.i18n.localize("SFRPG.InventoryBulk")} ${data.bulk}`, tooltip: null} : null,
             data.hands ? {name: `${game.i18n.localize("SFRPG.Items.Description.Hands")} ${data.hands}`, tooltip: null} : null
         );
@@ -570,7 +570,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      */
     _magicChatData(data, labels, props) {
         props.push(
-            {name: game.i18n.localize("ITEM.TypeMagic"), tooltip: null},
+            {name: game.i18n.localize("TYPES.Item.magic"), tooltip: null},
             data.bulk ? {name: `${game.i18n.localize("SFRPG.InventoryBulk")} ${data.bulk}`, tooltip: null} : null,
             data.hands ? {name: `${game.i18n.localize("SFRPG.Items.Description.Hands")} ${data.hands}`, tooltip: null} : null
         );
@@ -592,7 +592,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         }
 
         props.push(
-            {name: game.i18n.localize("ITEM.TypeUpgrade"), tooltip: null},
+            {name: game.i18n.localize("TYPES.Item.upgrade"), tooltip: null},
             data.slots ? {name: `${game.i18n.localize("SFRPG.Items.Upgrade.Slots")} ${data.slots}`, tooltip: null} : null,
             {name: `${game.i18n.localize("SFRPG.Items.Upgrade.AllowedArmorType")}: ${armorType}`, tooltip: null}
         );
@@ -600,7 +600,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
     _augmentationChatData(data, labels, props) {
         props.push(
-            {name:game.i18n.localize("ITEM.TypeAugmentation"), tooltip: null},
+            {name:game.i18n.localize("TYPES.Item.augmentation"), tooltip: null},
             data.type ? {name: CONFIG.SFRPG.augmentationTypes[data.type], tooltip: null} : null,
             data.system ? {name: CONFIG.SFRPG.augmentationSystems[data.system], tooltip: null} : null
         );
@@ -614,14 +614,14 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      */
     _fusionChatData(data, labels, props) {
         props.push(
-            {name: game.i18n.localize("ITEM.TypeFusion"), tooltip: null},
+            {name: game.i18n.localize("TYPES.Item.fusion"), tooltip: null},
             data.level ? {name: `${game.i18n.localize("SFRPG.LevelLabelText")} ${data.level}`, tooltip: null} : null
         );
     }
 
     _starshipWeaponChatData(data, labels, props) {
         props.push(
-            {name: game.i18n.localize("ITEM.TypeStarshipweapon"), tooltip: null},
+            {name: game.i18n.localize("TYPES.Item.starshipWeapon"), tooltip: null},
             data.weaponType ? {name: CONFIG.SFRPG.starshipWeaponTypes[data.weaponType], tooltip: null} : null,
             data.class ? {name: CONFIG.SFRPG.starshipWeaponClass[data.class], tooltip: null} : null,
             data.range ? {name: CONFIG.SFRPG.starshipWeaponRanges[data.range], tooltip: null} : null,
@@ -641,11 +641,28 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const alignedBonus = (data.proficient ? data.bonus.aligned : 0) || 0;
 
         props.push(
-            {name: game.i18n.localize("SFRPG.Items.Shield.Shield"), tooltip: null},
-            {name: game.i18n.format("SFRPG.Items.Shield.AcMaxDex", { maxDex: (data.dex || 0).signedString() }),  tooltip: null},
-            {name: game.i18n.format("SFRPG.Items.Shield.ArmorCheck", { acp: (data.acp || 0).signedString() }),  tooltip: null},
-            {name: game.i18n.format("SFRPG.Items.Shield.Bonuses", { wielded: wieldedBonus.signedString(), aligned: alignedBonus.signedString() }),  tooltip: null},
-            data.proficient ? {name: game.i18n.localize("SFRPG.Items.Proficient"), tooltip: null} : {name: game.i18n.localize("SFRPG.Items.NotProficient"), tooltip: null}
+            { name: game.i18n.localize("SFRPG.Items.Shield.Shield"), tooltip: null },
+            {
+                title: game.i18n.localize("SFRPG.Items.Shield.AcMaxDexLabel"),
+                name: (data.dex || 0).signedString(),
+                tooltip: null
+            },
+            {
+                title: game.i18n.localize("SFRPG.Items.Shield.ArmorCheckLabel"),
+                name: (data.acp || 0).signedString(),
+                tooltip: null
+            },
+            {
+                title: game.i18n.localize("SFRPG.Items.Shield.Bonus"),
+                name: game.i18n.format("SFRPG.Items.Shield.Bonuses", {
+                    wielded: wieldedBonus.signedString(),
+                    aligned: alignedBonus.signedString()
+                }),
+                tooltip: null
+            },
+            data.proficient
+                ? { name: game.i18n.localize("SFRPG.Items.Proficient"), tooltip: null }
+                : { name: game.i18n.localize("SFRPG.Items.NotProficient"), tooltip: null }
         );
     }
 
@@ -678,7 +695,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
     _themeChatData(data, labels, props) {
         props.push(
-            {name: game.i18n.localize("ITEM.TypeTheme"), tooltip: null},
+            {name: game.i18n.localize("TYPES.Item.theme"), tooltip: null},
             data.abilityMod.ability ? {name: `Ability ${CONFIG.SFRPG.abilities[data.abilityMod.ability]}`, tooltip: null} : null,
             data.skill ? {name: `Skill ${CONFIG.SFRPG.skills[data.skill]}`, tooltip: null} : null
         );
@@ -686,7 +703,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
     _raceChatData(data, labels, props) {
         props.push(
-            {name: game.i18n.localize("ITEM.TypeRace"), tooltip: null},
+            {name: game.i18n.localize("TYPES.Item.race"), tooltip: null},
             data.type ? {name: data.type, tooltip: null} : null,
             data.subtype ? {name: data.subtype, tooltip: null} : null
         );

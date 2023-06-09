@@ -1,60 +1,4 @@
 {
-    "ACTOR": {
-        "TypeCharacter": "Personagem Jogador",
-        "TypeDrone": "Drone",
-        "TypeHazard": "Perigo",
-        "TypeNpc": "Old Style NPC",
-        "TypeNpc2": "NPC",
-        "TypeStarship": "Espaçonave",
-        "TypeVehicle": "Veículo"
-    },
-    "ITEM": {
-        "TypeActorresource": "Actor Resource",
-        "TypeAmmunition": "Ammunition",
-        "TypeArchetypes": "Arquetipo",
-        "TypeAsi": "Incremento Valor Habilidade",
-        "TypeAugmentation": "Acréscimo",
-        "TypeChassis": "Drone Chassis",
-        "TypeClass": "Classe",
-        "TypeConsumable": "Consumível",
-        "TypeContainer": "Container",
-        "TypeEquipment": "Armadura",
-        "TypeFeat": "Talento",
-        "TypeFusion": "Fusão de Arma",
-        "TypeGoods": "Bons",
-        "TypeHybrid": "Hibrido",
-        "TypeMagic": "Magico",
-        "TypeMod": "Drone Mod",
-        "TypeRace": "Raça",
-        "TypeShield": "Escudo",
-        "TypeSpell": "Magia",
-        "TypeStarshipablativearmor": "Espaçonave Placas Ablativas",
-        "TypeStarshipaction": "Espaçonave Ação",
-        "TypeStarshiparmor": "Espaçonave Armadura",
-        "TypeStarshipcomputer": "Espaçonave Computador",
-        "TypeStarshipcrewquarter": "Espaçonave Alojamentos da Tripulação",
-        "TypeStarshipdefensivecountermeasure": "Espaçonave Contramedida Defensiva",
-        "TypeStarshipdriftengine": "Espaçonave Motor de Deriva",
-        "TypeStarshipexpansionbay": "Espaçonave Compartimentos de Expansão",
-        "TypeStarshipfortifiedhull": "Espaçonave Casco Foritficado",
-        "TypeStarshipframe": "Espaçonave Plataforma",
-        "TypeStarshipothersystem": "Espaçonave Outros Sistemas",
-        "TypeStarshippowercore": "Espaçonave Núcleo de Energia",
-        "TypeStarshipreinforcedbulkhead": "Espaçonave Anteparas Reforçadas",
-        "TypeStarshipsecuritysystem": "Espaçonave Sistemas de Segurança",
-        "TypeStarshipsensor": "Espaçonave Sensor",
-        "TypeStarshipshield": "Espaçonave Escudos",
-        "TypeStarshipspecialability": "Starship Special Ability",
-        "TypeStarshipthruster": "Espaçonave Propulsor",
-        "TypeStarshipweapon": "Espaçonave Armas",
-        "TypeTechnological": "Tecnologica",
-        "TypeTheme": "Tema",
-        "TypeUpgrade": "Atualização Armadura",
-        "TypeVehicleattack": "Veículo Ataque",
-        "TypeVehiclesystem": "Veículo Sistema",
-        "TypeWeapon": "Armas",
-        "TypeWeaponaccessory": "Acessório de Armas"
-    },
     "SFRPG": {
         "ACPTooltip": "Penalidade Armadura: {mod} ({source})",
         "ACTooltipArmorACMod": "Modificador de Armadura: {armor} ({name})",
@@ -577,6 +521,48 @@
                     "Header": "Turno de {combatant}"
                 }
             },
+            "Difficulty": {
+                "Levels": {
+                    "Average": "Average",
+                    "Challenging": "Challenging",
+                    "Easy": "Easy",
+                    "Epic": "Epic",
+                    "GreaterThanEpic": "Greater than Epic",
+                    "Hard": "Hard",
+                    "LessThanEasy": "Less than Easy",
+                    "NoEnemies": "No enemies",
+                    "NoEnemyShips": "No Enemy Ships",
+                    "NoPCShips": "No PC Ships",
+                    "NoPCs": "No PCs"
+                },
+                "Tooltip": {
+                    "APL": "APL: ",
+                    "APLFull": "Average Party Level",
+                    "CR": "CR: ",
+                    "CanBeAdded": "A creature of this CR can be added without increasing the encounter difficulty",
+                    "ClickForDetails": "Click for Encounter Details",
+                    "Details": "Details",
+                    "DifficultyEncounter": "Difficulty Encounter",
+                    "EncounterCR": "Encounter Challenge Rating",
+                    "EncounterTotalXP": "Encounter Total XP Value",
+                    "EncounterWealth": "Suggested Wealth Gain (credits)",
+                    "Enemies": "Enemies",
+                    "EnemyShipEffectiveTier": "Effective Tier, Enemy Ship(s)",
+                    "EnemyXP": "Enemy Total XP Value",
+                    "HostileNPCs": "Hostile NPCs: ",
+                    "PCs": "Number of PCs: ",
+                    "PlayerShipEffectiveTier": "Effective Tier, Player Ship(s) ",
+                    "PlayerXP": "Per Player XP",
+                    "Players": "Players",
+                    "XPBounds": "XP Bounds",
+                    "XPNext": "Add XP to increase CR: ",
+                    "XPPrevious": "Remove XP to reduce CR: "
+                },
+                "Units": {
+                    "Credits": "cr",
+                    "XP": "XP"
+                }
+            },
             "EncounterTracker": {
                 "SelectNextType": "Mudar para o próximo tipo de combate",
                 "SelectPrevType": "Mudar para o tipo de combate anterior"
@@ -641,6 +627,17 @@
                     }
                 }
             }
+        },
+        "CombatRoles": {
+            "Combatant": "Combatant",
+            "Descriptions": {
+                "Combatant": "These creatures are best suited to physical fighting; they may be most effective at range, in melee, or both.",
+                "Expert": "These creatures tend to be most effective with various skills.",
+                "Spellcaster": "These creatures rely primarily on spells or spell-like abilities."
+            },
+            "Expert": "Expert",
+            "Label": "Combat Role",
+            "Spellcaster": "Spellcaster"
         },
         "ComingSoon": "Em breve!",
         "ConImm": "Condições de Imunidades",
@@ -1576,9 +1573,11 @@
             "Shield": {
                 "ACP": "PVA: {acp}",
                 "AcMaxDex": "Bonus Max Des: {maxDex}",
+                "AcMaxDexLabel": "Max Dex Bonus",
                 "Action": "Ação Escudo",
                 "Aligned": "Ajustada",
                 "ArmorCheck": "Penaliade Verificação Armadura: {acp}",
+                "ArmorCheckLabel": "Armor Check Penalty",
                 "Bonus": "Bônus Escudo",
                 "Bonuses": "Bônus empunhado: {wielded} / Bônus Ajustada: {aligned}",
                 "Details": "Detalhes Escudo",
@@ -2209,6 +2208,10 @@
                     "Optional": "Optional (5/5/5)"
                 }
             },
+            "DifficultyDisplay": {
+                "Hint": "Enables difficulty calculation and display on the combat tracker tab.  You will have to refresh your window before this change will take effect.",
+                "Name": "Enable Difficulty Display"
+            },
             "ExperienceTracking": {
                 "Hint": "Remova as barras de experiência das fichas de personagem.",
                 "Name": "Desabilitar barra de experiência"
@@ -2381,6 +2384,7 @@
                 "IrradiateH": "Irradiação (alta)",
                 "IrradiateL": "Irradiação (baixa)",
                 "IrradiateM": "Irradiação (média)",
+                "IrradiateS": "Irradiate (severe)",
                 "Jamming": "Escavador",
                 "Limited": "Fogo Limitado",
                 "Line": "Linha",
@@ -3154,5 +3158,63 @@
         "WeaponsPropertiesConceal": "Esconder",
         "WeaponsPropertiesConcealTooltip": "Uma arma com a propriedade especial de ocultar é considerada especialmente pequena ou fácil de esconder para o propósito da tarefa de ocultar objeto de Slight of Hand, concedendo a você um bônus de circunstância +4 para testes de habilidade para ocultar o objeto. ",
         "WillSave": "Vontade"
+    },
+    "TYPES": {
+        "Actor": {
+            "character": "Personagem Jogador",
+            "drone": "Drone",
+            "hazard": "Perigo",
+            "npc": "Old Style NPC",
+            "npc2": "NPC",
+            "starship": "Espaçonave",
+            "vehicle": "Veículo"
+        },
+        "Item": {
+            "actorResource": "Actor Resource",
+            "ammunition": "Ammunition",
+            "archetypes": "Arquetipo",
+            "asi": "Incremento Valor Habilidade",
+            "augmentation": "Acréscimo",
+            "chassis": "Drone Chassis",
+            "class": "Classe",
+            "consumable": "Consumível",
+            "container": "Container",
+            "equipment": "Armadura",
+            "feat": "Talento",
+            "fusion": "Fusão de Arma",
+            "goods": "Bons",
+            "hybrid": "Hibrido",
+            "magic": "Magico",
+            "mod": "Drone Mod",
+            "race": "Raça",
+            "shield": "Escudo",
+            "spell": "Magia",
+            "starshipAblativeArmor": "Espaçonave Placas Ablativas",
+            "starshipAction": "Espaçonave Ação",
+            "starshipArmor": "Espaçonave Armadura",
+            "starshipComputer": "Espaçonave Computador",
+            "starshipCrewQuarter": "Espaçonave Alojamentos da Tripulação",
+            "starshipDefensiveCountermeasure": "Espaçonave Contramedida Defensiva",
+            "starshipDriftEngine": "Espaçonave Motor de Deriva",
+            "starshipExpansionBay": "Espaçonave Compartimentos de Expansão",
+            "starshipFortifiedHull": "Espaçonave Casco Foritficado",
+            "starshipFrame": "Espaçonave Plataforma",
+            "starshipOtherSystem": "Espaçonave Outros Sistemas",
+            "starshipPowerCore": "Espaçonave Núcleo de Energia",
+            "starshipReinforcedBulkhead": "Espaçonave Anteparas Reforçadas",
+            "starshipSecuritySystem": "Espaçonave Sistemas de Segurança",
+            "starshipSensor": "Espaçonave Sensor",
+            "starshipShield": "Espaçonave Escudos",
+            "starshipSpecialAbility": "Starship Special Ability",
+            "starshipThruster": "Espaçonave Propulsor",
+            "starshipWeapon": "Espaçonave Armas",
+            "technological": "Tecnologica",
+            "theme": "Tema",
+            "upgrade": "Atualização Armadura",
+            "vehicleAttack": "Veículo Ataque",
+            "vehicleSystem": "Veículo Sistema",
+            "weapon": "Armas",
+            "weaponAccessory": "Acessório de Armas"
+        }
     }
 }

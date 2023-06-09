@@ -55,9 +55,11 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
     async getData() {
         const data = await super.getData();
 
-        let cr = parseFloat(data.system.details.cr || 0);
-        let crs = { 0: "0", 0.125: "1/8", [1 / 6]: "1/6", 0.25: "1/4", [1 / 3]: "1/3", 0.5: "1/2" };
+        const cr = parseFloat(data.system.details.cr || 0);
+        const crs = { 0: "0", 0.125: "1/8", [1 / 6]: "1/6", 0.25: "1/4", [1 / 3]: "1/3", 0.5: "1/2" };
         data.labels["cr"] = cr >= 1 ? String(cr) : crs[cr] || 1;
+
+        data.combatRoleImage = CONFIG.SFRPG.combatRoleImages[this.actor.system?.details?.combatRole];
 
         return data;
     }
@@ -255,7 +257,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         };
 
         if (this.actor.type === "npc2") {
-            let [permanent, temporary, itemModifiers, conditions, misc] = actorData.modifiers.reduce((arr, modifier) => {
+            const [permanent, temporary, itemModifiers, conditions, misc] = actorData.modifiers.reduce((arr, modifier) => {
                 if (modifier.subtab === "permanent") arr[0].push(modifier);
                 else if (modifier.subtab === "conditions") arr[3].push(modifier);
                 else arr[1].push(modifier); // Any unspecific categories go into temporary.
@@ -283,7 +285,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
      */
     _updateObject(event, formData) {
         const crs = { "1/8": 0.125, "1/6": 1 / 6, "1/4": 0.25, "1/3": 1 / 3, "1/2": 0.5 };
-        let crv = "system.details.cr";
+        const crv = "system.details.cr";
         let cr = formData[crv];
         cr = crs[cr] || parseFloat(cr);
         if (cr) formData[crv] = cr < 1 ? cr : parseInt(cr);
