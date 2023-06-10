@@ -158,17 +158,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         return super.update(data, options);
     }
 
-    /**
-     * Extend OwnedItem creation logic for the SFRPG system to make weapons proficient by default when dropped on a NPC sheet
-     * See the base Actor class for API documentation of this method
-     *
-     * @param {String} embeddedName The type of Entity being embedded.
-     * @param {Object} itemData The data object of the item
-     * @param {Object} options Any options passed in
-     * @returns {Promise}
-     */
-    async createEmbeddedDocuments(embeddedName, itemData, options) {
-        for (const item of itemData) {
+    async _onCreateDescendantDocuments(parent, collection, documents, data, options, userId) {
+        for (const item of documents) {
+            const itemData = item.system;
             if (!this.hasPlayerOwner) {
                 const t = item.type;
                 const initial = {};
@@ -180,22 +172,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
             if (item.effects instanceof Array) item.effects = null;
             else if (item.effects instanceof Map) item.effects.clear();
-        }
 
-        return super.createEmbeddedDocuments(embeddedName, itemData, options);
-    }
-
-    async _onCreateDescendantDocuments(parent, collection, documents, data, options, userId) {
-        for (let index = 0; index < documents.length; index++) {
-            const item = documents[index];
-            const itemData = item.system;
             if (item.type === 'effect') {
-                const activeDuration = {
-                    activationTime: game.time.worldTime,
-                    activationEnd: game.time.worldTime + (itemData.activeDuration.value * CONFIG.SFRPG.effectDurationFrom[itemData.activeDuration.unit])
-                };
-
-                await item.update({ 'system.activeDuration': activeDuration });
+                await item.update({ 'system.activeDuration.activationTime': game.time.worldTime });
 
                 if (itemData.showOnToken) {
                     const effect = game.sfrpg.timedEffects.get(item.uuid);
@@ -210,8 +189,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
     _onDeleteDescendantDocuments(parent, collection, documents, data, options, userId) {
         // delete timedEffect objects
-        for (let itemI = 0; itemI < documents.length; itemI++) {
-            const item = documents[itemI];
+        for (const item of documents) {
             if (item.type === 'effect') {
                 const effect = game.sfrpg.timedEffects.get(item.uuid);
                 if (!effect) continue;

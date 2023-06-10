@@ -71,15 +71,6 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
             return;
         }
 
-        // Try to get status effect object as a workaround for a poorly conceived check in foundry.js Token.toggleEffect(...)
-        const statusEffect = SFRPG.statusEffects.find(effect => effect.id === conditionName);
-
-        // Reflect state on tokens
-        const tokens = this.getActiveTokens(true);
-        for (const token of tokens) {
-            await token.toggleEffect(statusEffect, {active: enabled, overlay: overlay});
-        }
-
         // Update condition item
         const conditionItem = this.getCondition(conditionName);
 
@@ -109,7 +100,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
             }
         } else {
             if (conditionItem) {
-                const effect = this.system.timedEffects.find(effect => effect.itemId === conditionItem.id);
+                const effect = this.system.timedEffects.get(conditionItem.uuid);
                 effect.delete();
 
                 const promise = this.deleteEmbeddedDocuments("Item", [conditionItem.id]);

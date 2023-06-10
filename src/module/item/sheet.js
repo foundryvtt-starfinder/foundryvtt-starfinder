@@ -63,6 +63,18 @@ export class ItemSheetSFRPG extends ItemSheet {
         return `${path}/${this.item.type}.hbs`;
     }
 
+    async render(force, options) {
+        if (this.item.type === "effect") game.combat.apps[this.appId] = this;
+
+        await super.render(force, options);
+    }
+
+    async close(options) {
+        delete game.combat.apps[this.appId];
+
+        await super.close(options);
+    }
+
     /* -------------------------------------------- */
     parseNumber(value, defaultValue) {
         if (value === 0 || value instanceof Number) return value;
@@ -219,17 +231,30 @@ export class ItemSheetSFRPG extends ItemSheet {
             const itemData = data.item.system;
 
             data.sourceActorChoices = {};
-            data.remainingDuration = `${itemData.activeDuration.activationEnd} ${SFRPG.effectDurationTypes[itemData.activeDuration.units]}`;
-            const remainingTime = itemData.activeDuration.activationEnd - game.time.worldTime;
+            data.remainingDuration = `${itemData.activeDuration.value} ${CONFIG.SFRPG.effectDurationTypes[itemData.activeDuration.unit]}`;
 
-            if (remainingTime >= SFRPG.effectDurationFrom.day) data.remainingDuration = `${Math.floor(remainingTime / SFRPG.effectDurationFrom.day)} ${SFRPG.effectDurationTypes.day}`;
-            else if (remainingTime >= SFRPG.effectDurationFrom.hour) data.remainingDuration = `${Math.floor(remainingTime / SFRPG.effectDurationFrom.hour)} ${SFRPG.effectDurationTypes.hour}`;
-            else if (remainingTime >= SFRPG.effectDurationFrom.minute) data.remainingDuration = `${Math.floor(remainingTime / SFRPG.effectDurationFrom.minute)} ${SFRPG.effectDurationTypes.minute}`;
-            else if (remainingTime >= SFRPG.effectDurationFrom.round) data.remainingDuration = `${Math.floor(remainingTime / SFRPG.effectDurationFrom.round)} ${SFRPG.effectDurationTypes.round}`;
-            else if (itemData.activeDuration.unit === 'permanent') data.remainingDuration = 'Permanent';
-            else {
-                data.remainingDuration = game.i18n.localize("SFRPG.Effect.Expired");
-                data.expired = true;
+            if (this.item.actor) {
+                const remainingTime = itemData.activeDuration.activationEnd - game.time.worldTime;
+
+                if (remainingTime >= SFRPG.effectDurationFrom.day)
+                    data.remainingDuration = `${Math.floor(remainingTime / SFRPG.effectDurationFrom.day)} ${SFRPG.effectDurationTypes.day}`;
+                else if (remainingTime >= SFRPG.effectDurationFrom.hour)
+                    data.remainingDuration = `${Math.floor(remainingTime / SFRPG.effectDurationFrom.hour)} ${SFRPG.effectDurationTypes.hour}`;
+                else if (remainingTime >= SFRPG.effectDurationFrom.minute)
+                    data.remainingDuration = `${Math.floor(remainingTime / SFRPG.effectDurationFrom.minute)} ${SFRPG.effectDurationTypes.minute}`;
+                else if (remainingTime >= SFRPG.effectDurationFrom.round)
+                    data.remainingDuration = `${Math.floor(remainingTime / SFRPG.effectDurationFrom.round)} ${SFRPG.effectDurationTypes.round}`;
+                else if (itemData.activeDuration.unit === 'permanent')
+                    data.remainingDuration = 'Permanent';
+                else if (remainingTime <= 0) {
+                    if (itemData.enabled) {
+                        data.remainingDuration = `<1 ${SFRPG.effectDurationTypes.round}`;
+                    } else {
+                        data.remainingDuration = game.i18n.localize("SFRPG.Effect.Expired");
+                        data.expired = true;
+                    }
+
+                }
             }
 
             if (game.combat) {
@@ -1017,20 +1042,30 @@ export class ItemSheetSFRPG extends ItemSheet {
      */
     async _onToggleDetailsEffect(event) {
         event.preventDefault();
-        const target = $(event.currentTarget);
-        const effectUuid = target.closest('div.item-duration').data('effectUuid');
 
-        this.actor.system.timedEffects.get(effectUuid)?.toggle();
+        if (!this.item.actor) {
+            this.item.update({"system.enabled": event.currentTarget.checked});
+        } else {
+            const target = $(event.currentTarget);
+            const effectUuid = target.closest('div.item-duration').data('effectUuid');
+
+            this.actor.system.timedEffects.get(effectUuid)?.toggle();
+        }
     }
 
     async _onToggleIconEffect(event) {
         event.preventDefault();
-        const target = $(event.currentTarget);
-        const checked = event.currentTarget.checked;
-        const effectUuid = target.closest('div.item-duration').data('effectUuid');
 
-        const effect = this.actor.system.timedEffects.get(effectUuid);
-        effect.item.update({"system.showOnToken": event.currentTarget.checked});
-        effect?.toggleIcon(checked);
+        this.item.update({"system.showOnToken": event.currentTarget.checked});
+
+        if (this.item.actor) {
+            const checked = event.currentTarget.checked;
+            const target = $(event.currentTarget);
+            const effectUuid = target.closest('div.item-duration').data('effectUuid');
+
+            const effect = this.actor.system.timedEffects.get(effectUuid);
+            if (this.item.system.enabled) effect?.toggleIcon(checked);
+        }
+
     }
 }

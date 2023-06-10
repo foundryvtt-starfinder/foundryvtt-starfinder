@@ -21,6 +21,8 @@ export default function(engine) {
             activeDuration: item.system.activeDuration
         };
 
+        effectData.activeDuration.activationEnd = effectData.activeDuration.activationTime + (effectData.activeDuration.value * CONFIG.SFRPG.effectDurationFrom[effectData.activeDuration.unit]);
+
         const effect = existingEffect
             ? existingEffect.update(effectData)
             : new SFRPGTimedEffect(effectData);

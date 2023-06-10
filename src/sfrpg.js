@@ -889,7 +889,7 @@ Hooks.on("updateWorldTime", (worldTime, dt, options, userId) => {
     for (const effect of timedEffects.values()) {
         if (effect.activeDuration.unit === 'permanent') continue;
 
-        const effectFinish = effect.activeDuration.activationTime + (effect.activeDuration.value * SFRPG.effectDurationFrom[effect.activeDuration.unit]);
+        const effectFinish = effect.activeDuration.activationEnd;
         // handling effects while in combat is handled in combat.js
         if (
             !game.combat

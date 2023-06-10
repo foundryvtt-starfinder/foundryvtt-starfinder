@@ -176,10 +176,9 @@ export default class SFRPGTimedEffect {
         const item = this.item;
 
         const tokens = item.actor.getActiveTokens(true);
-        const name = item.name.length > 32 ? item.name.slice(0, 32) : item.name;
         const statusEffect = {
             id: item._id,
-            label: name,
+            label: item.name,
             icon: item.img || 'icons/svg/item-bag.svg'
         };
         for (const token of tokens) {
