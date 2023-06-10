@@ -85,7 +85,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     }
 
     /* -------------------------------------------- */
-    /*	Data Preparation														*/
+    /*	Data Preparation                            */
     /* -------------------------------------------- */
 
     /**

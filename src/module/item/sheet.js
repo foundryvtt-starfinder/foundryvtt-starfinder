@@ -234,21 +234,21 @@ export class ItemSheetSFRPG extends ItemSheet {
             data.remainingDuration = `${itemData.activeDuration.value} ${CONFIG.SFRPG.effectDurationTypes[itemData.activeDuration.unit]}`;
 
             if (this.item.actor) {
-                const remainingTime = itemData.activeDuration.activationEnd - game.time.worldTime;
+                const remaining = itemData.activeDuration.remaining;
 
-                if (remainingTime >= SFRPG.effectDurationFrom.day)
-                    data.remainingDuration = `${Math.floor(remainingTime / SFRPG.effectDurationFrom.day)} ${SFRPG.effectDurationTypes.day}`;
-                else if (remainingTime >= SFRPG.effectDurationFrom.hour)
-                    data.remainingDuration = `${Math.floor(remainingTime / SFRPG.effectDurationFrom.hour)} ${SFRPG.effectDurationTypes.hour}`;
-                else if (remainingTime >= SFRPG.effectDurationFrom.minute)
-                    data.remainingDuration = `${Math.floor(remainingTime / SFRPG.effectDurationFrom.minute)} ${SFRPG.effectDurationTypes.minute}`;
-                else if (remainingTime >= SFRPG.effectDurationFrom.round)
-                    data.remainingDuration = `${Math.floor(remainingTime / SFRPG.effectDurationFrom.round)} ${SFRPG.effectDurationTypes.round}`;
+                if (remaining >= SFRPG.effectDurationFrom.day)
+                    data.remainingDuration = `${Math.floor(remaining / SFRPG.effectDurationFrom.day)} ${SFRPG.effectDurationTypes.day}`;
+                else if (remaining >= SFRPG.effectDurationFrom.hour)
+                    data.remainingDuration = `${Math.floor(remaining / SFRPG.effectDurationFrom.hour)} ${SFRPG.effectDurationTypes.hour}`;
+                else if (remaining >= SFRPG.effectDurationFrom.minute)
+                    data.remainingDuration = `${Math.floor(remaining / SFRPG.effectDurationFrom.minute)} ${SFRPG.effectDurationTypes.minute}`;
+                else if (remaining >= SFRPG.effectDurationFrom.round)
+                    data.remainingDuration = `${Math.floor(remaining / SFRPG.effectDurationFrom.round)} ${SFRPG.effectDurationTypes.round}`;
                 else if (itemData.activeDuration.unit === 'permanent')
                     data.remainingDuration = 'Permanent';
-                else if (remainingTime <= 0) {
+                else if (remaining <= 0) {
                     if (itemData.enabled) {
-                        data.remainingDuration = `<1 ${SFRPG.effectDurationTypes.round}`;
+                        data.remainingDuration = `< 1 ${SFRPG.effectDurationTypes.round}`;
                     } else {
                         data.remainingDuration = game.i18n.localize("SFRPG.Effect.Expired");
                         data.expired = true;

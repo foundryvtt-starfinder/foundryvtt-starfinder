@@ -22,6 +22,7 @@ export default function(engine) {
         };
 
         effectData.activeDuration.activationEnd = effectData.activeDuration.activationTime + (effectData.activeDuration.value * CONFIG.SFRPG.effectDurationFrom[effectData.activeDuration.unit]);
+        effectData.activeDuration.remaining = effectData.activeDuration.activationEnd - game.time.worldTime;
 
         const effect = existingEffect
             ? existingEffect.update(effectData)

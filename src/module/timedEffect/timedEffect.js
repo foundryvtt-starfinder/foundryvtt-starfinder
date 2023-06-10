@@ -31,6 +31,7 @@ export default class SFRPGTimedEffect {
             value: 0,
             activationTime: 0,
             activationEnd: 0,
+            remaining: 0,
             endsOn: ''
         }
     }) {
