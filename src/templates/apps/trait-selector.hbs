@@ -1,21 +1,57 @@
 <form class="trait-selector" autocomplete="off" onsubmit="event.preventDefault();">
-
+{{console this}}
     {{!-- Search Bar --}}
     <div class="sortcontainer" id="tagfilter">
         <input class="" name="textFilter" type="text" value="" data-dtype="String" placeholder="{{localize "SFRPG.Browsers.ItemBrowser.BrowserSearchPlaceholder"}}"/>
     </div>
 
-    {{!-- Trait List --}}
-    <ul class="trait-list">
-        {{#each choices as |choice key|}}
-            <li class="trait">
-                <label class="checkbox" {{#if choice.tooltip}}data-tooltip="<strong>{{choice.label}}</strong><br/>{{choice.tooltip}}"{{/if}}>
-                    <input type="checkbox" name="{{key}}" data-dtype="Boolean" {{checked choice.isSelected}}>
-                    {{choice.label}}
-                </label>
-            </li>
-        {{/each}}
-    </ul>
+    {{!-- Selected Trait List --}}
+    <div class="bubble">
+        <h4 class="bubble-header">Selected</h4>
+
+        <div class="bubble-info">
+            <ul class="trait-list{{#if needsTextField}} selected{{/if}}">
+                {{#each choices as |choice key|}}
+                {{#if choice.isSelected}}
+                    <li class="trait">
+                        <label class="checkbox" {{#if choice.tooltip}}data-tooltip="<strong>{{choice.label}}</strong><br/>{{choice.tooltip}}"{{/if}}>
+                            <input type="checkbox" name="{{key}}" data-dtype="Boolean" {{checked choice.isSelected}}>
+                            {{choice.label}}
+                        </label>
+
+                        {{#if ../needsTextField}}
+                            <input type="text">
+                        {{/if}}
+                    </li>
+                {{/if}}
+                {{/each}}
+            </ul>
+        </div>
+
+    </div>
+    
+
+    {{!-- Trait Options List --}}
+    <div class="bubble">
+        <h4 class="bubble-header">Options</h4>
+
+        <div class="bubble-info">
+            <ul class="trait-list">
+                {{#each choices as |choice key|}}
+                {{#unless choice.isSelected}}
+                    <li class="trait">
+                        <label class="checkbox" {{#if choice.tooltip}}data-tooltip="<strong>{{choice.label}}</strong><br/>{{choice.tooltip}}"{{/if}}>
+                            <input type="checkbox" name="{{key}}" data-dtype="Boolean" {{checked choice.isSelected}}>
+                            {{choice.label}}
+                        </label>
+                    </li>
+                {{/unless}}
+                {{/each}}
+            </ul>
+        </div>
+
+    </div>
+
 
     {{!-- Special Traits --}}
     <div class="form-group stacked">

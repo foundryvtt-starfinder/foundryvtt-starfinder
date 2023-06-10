@@ -34,8 +34,8 @@ export class TraitSelectorSFRPG extends FormApplication {
      * @param {Event} event The event that triggers the update
      * @param {Object} formData The data from the form
      */
-    _updateObject(event, formData) {
-        this.object.update(this._setTraitChoices(formData));
+    async _updateObject(event, formData) {
+        await this.object.update(this._setTraitChoices(formData));
     }
 
     /**
@@ -88,6 +88,13 @@ export class TraitSelectorSFRPG extends FormApplication {
         html.on('change keyup paste', 'input[name=textFilter]', ev => {
             this.searchTerm = ev.target.value;
             this.filterTraits(html.find('li'));
+        });
+
+        // re-render the template with updated data if a trait is selected/unselected
+        html.on('change', 'input[type=checkbox]', async ev => {
+            const formData = this._getSubmitData();
+            await this._updateObject(ev, formData);
+            this.render();
         });
 
     }

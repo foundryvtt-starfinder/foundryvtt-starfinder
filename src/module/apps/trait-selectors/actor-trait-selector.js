@@ -16,7 +16,7 @@ export class ActorTraitSelectorSFRPG extends TraitSelectorSFRPG {
 
         // create the array of choices
         const choices = duplicate(this.options.choices);
-        console.log(this, choices, traitData);
+        // console.log(this, choices, traitData);
 
         for (const [k, v] of Object.entries(choices)) {
             choices[k] = {

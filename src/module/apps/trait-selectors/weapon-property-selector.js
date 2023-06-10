@@ -4,6 +4,12 @@ export class WeaponPropertySelectorSFRPG extends TraitSelectorSFRPG {
     constructor(item, options) {
         super(item, options);
         super.getData();
+
+        // Add a text field indicator if needed
+        foundry.utils.mergeObject(this.options, {
+            needsTextField: true
+        });
+        console.log(this);
     }
 
     /**
@@ -16,7 +22,7 @@ export class WeaponPropertySelectorSFRPG extends TraitSelectorSFRPG {
 
         // create the array of choices
         const choices = duplicate(this.options.choices);
-        console.log(this, choices, traitData);
+        // console.log(this, choices, traitData);
 
         for (const [key, value] of Object.entries(choices)) {
             choices[key] = {
@@ -27,7 +33,8 @@ export class WeaponPropertySelectorSFRPG extends TraitSelectorSFRPG {
         }
 
         return {
-            choices: choices
+            choices: choices,
+            needsTextField: this.options.needsTextField
         };
     }
 
