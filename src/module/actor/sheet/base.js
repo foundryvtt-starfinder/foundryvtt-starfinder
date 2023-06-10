@@ -63,7 +63,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         const isOwner = this.document.isOwner;
         const data = {
             actor: this.actor,
-            system: duplicate(this.actor.system),
+            system: deepClone(this.actor.system),
             isOwner: isOwner,
             isGM: game.user.isGM,
             limited: this.document.limited,
@@ -559,9 +559,9 @@ export class ActorSheetSFRPG extends ActorSheet {
     async _onToggleEffect(event) {
         event.preventDefault();
         const target = $(event.currentTarget);
-        const effectID = target.closest('.item.effect').data('effectId');
+        const effectUuid = target.closest('.item.effect').data('effectUuid');
 
-        this.actor.system.timedEffects.find(item => item.id === effectID)?.toggle();
+        this.actor.system.timedEffects.get(effectUuid)?.toggle();
     }
 
     /**

@@ -145,7 +145,7 @@ Hooks.once('init', async function() {
         SFRPGModifier,
         SFRPGModifierType,
         SFRPGModifierTypes,
-        timedEffects: [],
+        timedEffects: new Map(),
 
         // Namespace style
         Actor: {
@@ -886,14 +886,18 @@ Hooks.on("renderPause", () => {
 
 Hooks.on("updateWorldTime", (worldTime, dt, options, userId) => {
     const timedEffects = game.sfrpg.timedEffects;
-    for (let effectI = 0; effectI < timedEffects.length; effectI++) {
-        const effect = timedEffects[effectI];
-        if (effect.activeDuration.unit !== 'permanent') {
-            const effectFinish = effect.activeDuration.activationTime + (effect.activeDuration.value * SFRPG.effectDurationFrom[effect.activeDuration.unit]);
-            // handling effects while in combat is handled in combat.js
-            if (!game.combat && (((effectFinish <= worldTime) && effect.enabled) || (dt < 0 && (effectFinish >= worldTime) && !effect.enabled))) {
-                effect.toggle(false);
-            }
+    for (const effect of timedEffects.values()) {
+        if (effect.activeDuration.unit === 'permanent') continue;
+
+        const effectFinish = effect.activeDuration.activationTime + (effect.activeDuration.value * SFRPG.effectDurationFrom[effect.activeDuration.unit]);
+        // handling effects while in combat is handled in combat.js
+        if (
+            !game.combat
+            && ((effectFinish <= worldTime && effect.enabled)
+                || (dt < 0 && effectFinish >= worldTime && !effect.enabled))
+        ) {
+            effect.toggle(false);
         }
+
     }
 });

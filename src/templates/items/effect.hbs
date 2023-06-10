@@ -14,8 +14,8 @@
             </div>
 
             <ul class="summary">
-                <li>
-                    {{this.remainingDuration}}
+                <li {{#if expired}}style="color: red;"{{/if}}>
+                    {{remainingDuration}}
                 </li>
                 <li>
                     <input type="text" name="system.requirements" value="{{itemData.requirements}}" placeholder="{{ localize "SFRPG.Items.Feat.Requirements" }}"/>

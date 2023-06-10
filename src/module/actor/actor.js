@@ -16,6 +16,7 @@ import { ActorRestMixin } from "./mixins/actor-rest.js";
 
 import { ItemSFRPG } from "../item/item.js";
 import { ItemSheetSFRPG } from "../item/sheet.js";
+import SFRPGTimedEffect from "../timedEffect/timedEffect.js";
 import { } from "./crew-update.js";
 
 /**
@@ -73,6 +74,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         this._ensureHasModifiers(this.system);
         const modifiers = this.getAllModifiers();
 
+        const timedEffects = SFRPGTimedEffect.getAllTimedEffects(this);
+        this.system.timedEffects = timedEffects;
+
         const items = this.items;
         const armors = items.filter(item => item.type === "equipment" && item.system.equipped);
         const shields = items.filter(item => item.type === "shield" && item.system.equipped);
@@ -100,6 +104,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             classes,
             chassis,
             modifiers,
+            timedEffects,
             theme,
             mods,
             armorUpgrades,
@@ -180,71 +185,42 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         return super.createEmbeddedDocuments(embeddedName, itemData, options);
     }
 
-    /**
-     * Extends logic for SFRPG system after a set of embedded Documents in this parent Document are created.
-     * @param {string} embeddedName   The name of the embedded Document type
-     * @param {Document[]} documents  An Array of created Documents
-     * @param {object[]} result       An Array of created data objects
-     * @param {object} options        Options which modified the creation operation
-     * @param {string} userId         The ID of the User who triggered the operation
-     */
-    async _onCreateEmbeddedDocuments(embeddedName, documents, result, options, userId) {
+    async _onCreateDescendantDocuments(parent, collection, documents, data, options, userId) {
         for (let index = 0; index < documents.length; index++) {
             const item = documents[index];
+            const itemData = item.system;
             if (item.type === 'effect') {
-                await item.update({ 'system.activeDuration.activationTime': game.time.worldTime });
-                if (item.system.showOnToken && item.system.type !== 'condition') {
-                    const tokens = item.actor.getActiveTokens(true);
-                    const name = item.name.length > 32 ? item.name.slice(0, 32) : item.name;
-                    const statusEffect = {
-                        id: item._id,
-                        label: name,
-                        icon: item.img || 'icons/svg/item-bag.svg'
-                    };
-                    for (const token of tokens) {
-                        token.toggleEffect(statusEffect, {active: item.enabled, overlay: false});
-                    }
+                const activeDuration = {
+                    activationTime: game.time.worldTime,
+                    activationEnd: game.time.worldTime + (itemData.activeDuration.value * CONFIG.SFRPG.effectDurationFrom[itemData.activeDuration.unit])
+                };
+
+                await item.update({ 'system.activeDuration': activeDuration });
+
+                if (itemData.showOnToken) {
+                    const effect = game.sfrpg.timedEffects.get(item.uuid);
+                    if (!effect) continue;
+
+                    effect.toggleIcon(effect.enabled);
                 }
             }
         }
-        super._onCreateEmbeddedDocuments(embeddedName, documents, result, options, userId);
+        super._onCreateDescendantDocuments(parent, collection, documents, data, options, userId);
     }
 
-    /**
-     * Extends logic for SFRPG system after a set of embedded Documents is deleted.
-     * @param {string} embeddedName   The name of the embedded Document type
-     * @param {Document[]} documents  An Array of deleted Documents
-     * @param {object[]} result       An Array of document IDs being deleted
-     * @param {object} options        Options which modified the deletion operation
-     * @param {string} userId         The ID of the User who triggered the operation
-     */
-    _onDeleteEmbeddedDocuments(embeddedName, documents, result, options, userId) {
+    _onDeleteDescendantDocuments(parent, collection, documents, data, options, userId) {
         // delete timedEffect objects
         for (let itemI = 0; itemI < documents.length; itemI++) {
             const item = documents[itemI];
             if (item.type === 'effect') {
-                game.sfrpg.timedEffects.find(effect => {
-                    if (effect.itemId === item.id) {
-                        effect.delete();
-                        return true;
-                    }
-                    return false;
-                });
-                if (item.system.showOnToken && item.system.type !== 'condition') {
-                    const tokens = item.actor.getActiveTokens(true);
-                    const name = item.name.length > 32 ? item.name.slice(0, 32) : item.name;
-                    const statusEffect = {
-                        id: item._id,
-                        label: name,
-                        icon: item.img || 'icons/svg/item-bag.svg'
-                    };
-                    for (const token of tokens) {
-                        token.toggleEffect(statusEffect, {active: false, overlay: false});
-                    }
-                }
+                const effect = game.sfrpg.timedEffects.get(item.uuid);
+                if (!effect) continue;
+
+                // effect.delete();
+
             }
         }
-        return super._onDeleteEmbeddedDocuments(embeddedName, documents, result, options, userId);
+        return super._onDeleteDescendantDocuments(parent, collection, documents, data, options, userId);
     }
 
     /**
