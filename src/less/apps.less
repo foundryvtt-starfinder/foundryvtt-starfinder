@@ -95,6 +95,58 @@ img.icon-enricher {
 /* ----------------------------------------- */
 
 .sfrpg {
+
+    // Bubbles
+    .bubble {
+        margin: 0.5em 0.5em 1em 0.5em;
+        border: 2px solid #235683;
+        background-color:rgba(128, 128, 128, 0.2);
+        border-radius: 13px;
+
+        .bubble-info {
+            padding: 0.25em 1em 0.5em 1em;
+
+            .bubble {
+                margin: 0.5em 0.5em 0.5em 0.5em;
+                border: 2px solid #444444;
+                background-color:rgba(128, 128, 128, 0.2);
+                border-radius: 13px;
+    
+                .bubble-info {
+                    padding: 0.25em 1em 0.25em 1em;
+                }
+    
+                .bubble-header {
+                    background-color: #444444;
+                    color: white;
+                    border-style: none;
+                    border-top-left-radius: 9px;
+                    border-top-right-radius: 9px;
+                    margin: 0 0 0 0;
+                    padding: 0 0 3px 0;
+                    text-align: center;
+                    .exo2();
+                    font-size: var(--font-size-16);
+                    font-weight: normal;
+                }
+            }
+        }
+
+        .bubble-header {
+            background-color: #235683;
+            color: white;
+            border-style: none;
+            border-top-left-radius: 9px;
+            border-top-right-radius: 9px;
+            margin: 0 0 0 0;
+            padding: 0 0 3px 0;
+            text-align: center;
+            .exo2();
+            font-size: var(--font-size-24);
+            font-weight: normal;
+        }
+    }
+
     .window-content {
         font-size: var(--font-size-13);
         color: @colorDark;
@@ -225,6 +277,13 @@ img.icon-enricher {
     &.app {
         .trait-selector {
             max-height: 480px;
+            overflow-y: hidden;
+            overflow-x: hidden;
+
+            header {
+                overflow-y: hidden;
+                overflow-x: hidden;
+            }
             
             .trait-list {
                 display: flex;
@@ -237,6 +296,11 @@ img.icon-enricher {
                     input[type="text"] {
                         width: 2.5em;
                     }
+                }
+
+                &.not-selected {
+                    overflow-y: auto;
+                    overflow-x: hidden;
                 }
             }
         }
