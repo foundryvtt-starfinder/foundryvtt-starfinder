@@ -21,6 +21,7 @@ export class WeaponPropertySelectorSFRPG extends TraitSelectorSFRPG {
         for (const [key, value] of Object.entries(choices)) {
             choices[key] = {
                 label: value,
+                tooltip: this.options.tooltips[key],
                 isSelected: traitData[key]
             };
         }

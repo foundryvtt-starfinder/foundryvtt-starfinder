@@ -990,8 +990,9 @@ export class ItemSheetSFRPG extends ItemSheet {
         const options = {
             location: event.currentTarget.dataset.location,
             title: event.currentTarget.dataset.title,
+            format: event.currentTarget.dataset.format,
             choices: CONFIG.SFRPG[event.currentTarget.dataset.choices],
-            format: event.currentTarget.dataset.format
+            tooltips: CONFIG.SFRPG[event.currentTarget.dataset.tooltips]
         };
 
         // Pick the appropriate trait selector subclass
