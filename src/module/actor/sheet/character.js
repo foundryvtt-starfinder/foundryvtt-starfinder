@@ -116,8 +116,6 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
                     arr[0].push(item); // items
                 }
             } else if (item.type === "effect") {
-                const timedEffect = actorData.timedEffects.get(item.uuid) || {};
-                item.timedEffect = timedEffect?.uuid;
                 arr[7].push(item); // timedEffects & conditionItems
             } else if (item.type === "feat") {
                 arr[2].push(item); // feats

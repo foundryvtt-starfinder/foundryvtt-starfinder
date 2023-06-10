@@ -132,14 +132,15 @@ export default class SFRPGTimedEffect {
 
     /**
      * delete the effect across the game.
+     * @param {ItemSFRPG} item An item to pass to toggleIcon, in case it is called during a delete workflow.
      */
-    delete() {
+    delete(item = null) {
         const actor = game.actors.get(this.actorId);
 
         game.sfrpg.timedEffects.delete(this.uuid);
         actor.system.timedEffects.delete(this.uuid);
 
-        if (this.showOnToken) this.toggleIcon(false);
+        if (this.showOnToken) this.toggleIcon(false, item);
 
     }
 
@@ -172,8 +173,13 @@ export default class SFRPGTimedEffect {
         return timedEffects;
     }
 
-    toggleIcon(enabled) {
-        const item = this.item;
+    /**
+     * @param {boolean} enabled What state to set the icon to
+     * @param {ItemSFRPG} optionalItem An item to default to in case the item cannot be found.
+     */
+    toggleIcon(enabled, optionalItem = null) {
+        const item = this.item || optionalItem;
+        if (!item) return;
 
         const tokens = item.actor.getActiveTokens(true);
         const statusEffect = {

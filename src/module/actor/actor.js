@@ -158,44 +158,62 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         return super.update(data, options);
     }
 
-    async _onCreateDescendantDocuments(parent, collection, documents, data, options, userId) {
-        for (const item of documents) {
-            const itemData = item.system;
+    /**
+     * Apply some default for items on NPCs, and record the current world time of
+     */
+    _preCreateDescendantDocuments(parent, collection, data, options, userId) {
+        for (let item of data) {
+            const updates = {};
+            const t = item.type;
+
             if (!this.hasPlayerOwner) {
-                const t = item.type;
-                const initial = {};
-                if (t === "weapon") initial['system.proficient'] = true;
-                if (["weapon", "equipment"].includes(t)) initial['system.equipped'] = true;
-                if (t === "spell") initial['system.prepared'] = true;
-                mergeObject(item, initial);
+                if (t === "weapon") updates['system.proficient'] = true;
+                if (["weapon", "equipment"].includes(t)) updates['system.equipped'] = true;
+                if (t === "spell") updates['system.prepared'] = true;
             }
 
             if (item.effects instanceof Array) item.effects = null;
             else if (item.effects instanceof Map) item.effects.clear();
 
-            if (item.type === 'effect') {
-                await item.update({ 'system.activeDuration.activationTime': game.time.worldTime });
+            if (t === 'effect' && item.system.enabled) updates['system.activeDuration.activationTime'] = game.time.worldTime;
 
-                if (itemData.showOnToken) {
-                    const effect = game.sfrpg.timedEffects.get(item.uuid);
-                    if (!effect) continue;
+            item = mergeObject(item, updates);
+        }
 
-                    effect.toggleIcon(effect.enabled);
-                }
+        super._preCreateDescendantDocuments(parent, collection, data, options, userId);
+
+    }
+
+    /**
+     * Toggle a status icon for created effects
+     */
+    async _onCreateDescendantDocuments(parent, collection, documents, data, options, userId) {
+        for (const item of documents) {
+            const itemData = item.system;
+
+            if (item.type === 'effect' && itemData.showOnToken ) {
+                const effect = game.sfrpg.timedEffects.get(item.uuid);
+                if (!effect) continue;
+
+                effect.toggleIcon(effect.enabled);
             }
         }
+
         super._onCreateDescendantDocuments(parent, collection, documents, data, options, userId);
     }
 
+    /**
+     * Delete item's corresponding timedEffect objects
+     */
     _onDeleteDescendantDocuments(parent, collection, documents, data, options, userId) {
-        // delete timedEffect objects
+
         for (const item of documents) {
             if (item.type === 'effect') {
                 const effect = game.sfrpg.timedEffects.get(item.uuid);
                 if (!effect) continue;
 
-                // effect.delete();
-
+                // Need to pass the item since the item has already been deleted from the server
+                effect.delete(item);
             }
         }
         return super._onDeleteDescendantDocuments(parent, collection, documents, data, options, userId);

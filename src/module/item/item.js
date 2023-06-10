@@ -76,6 +76,14 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         return !!skillData.type;
     }
 
+    /**
+     * The timedEffect object of this item, if any.
+     * @returns {SFRPGTimedEffect|undefined}
+     */
+    get timedEffect() {
+        return game.sfrpg.timedEffects.get(this.uuid);
+    }
+
     /* -------------------------------------------- */
     /*	Data Preparation														*/
     /* -------------------------------------------- */
