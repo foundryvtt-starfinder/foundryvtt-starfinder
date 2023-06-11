@@ -67,8 +67,6 @@ export class ActorTraitSelectorSFRPG extends TraitSelectorSFRPG {
             [`${this.options.location}.custom`]: formData.custom
         };
 
-        console.log(updateData);
-
         return updateData;
     }
 }
