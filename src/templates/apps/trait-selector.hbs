@@ -1,15 +1,10 @@
 <form class="trait-selector" autocomplete="off" onsubmit="event.preventDefault();">
-{{console this}}
 
-    <header>
-        {{!-- Search Bar --}}
-        <div class="sortcontainer" id="tagfilter">
-            <input class="" name="textFilter" type="text" value="" data-dtype="String" placeholder="{{localize "SFRPG.Browsers.ItemBrowser.BrowserSearchPlaceholder"}}"/>
-        </div>
+    <div class="trait-header">
 
         {{!-- Selected Trait List --}}
-        <hr />
-        <ul class="trait-list{{#if needsTextField}} selected{{/if}}">
+        <h3 style="text-align:center">Selected Options</h3>
+        <ul class="trait-list selected">
             {{#each choices as |choice key|}}
             {{#if choice.isSelected}}
                 <li class="trait">
@@ -18,38 +13,51 @@
                         {{choice.label}}
                     </label>
 
-                    {{#if ../needsTextField}}
+                    {{#if ../needsTextExtension}}
                         <input type="text">
                     {{/if}}
                 </li>
             {{/if}}
             {{/each}}
         </ul>
+
+        {{#unless needsCustomField}}<br />{{/unless}}
         
         {{!-- Special Traits --}}
-        <div class="form-group stacked">
-            <label style="text-align: center">{{{localize "SFRPG.Special"}}}</label>
-            <input type="text" name="custom" value="{{custom}}" data-dtype="String"/>
-        </div>
+        {{#if needsCustomField}}
+            <div class="form-group stacked special-trait">
+                <label style="text-align: center">{{{localize "SFRPG.Special"}}}</label>
+                <input type="text" name="custom" value="{{custom}}" data-dtype="String"/>
+            </div>
+        {{/if}}
 
         {{!-- Save and Exit Button --}}
         <button type="submit" name="submit" value="1"><i class="far fa-save"></i> {{{localize "SFRPG.UpdateActor"}}}</button>
-        <hr />
+        <br />
+        
+        <h3 style="text-align:center; margin-top: 10px;">Available Options</h3>
+
+        {{!-- Search Bar --}}
+        <div class="sortcontainer" id="tagfilter">
+            <input class="" name="textFilter" type="text" value="" data-dtype="String" placeholder="{{localize "SFRPG.FeaturesFilter"}}"/>
+        </div>
     
-    </header>
+    </div>
 
     {{!-- Trait Options List --}}
-    <ul class="trait-list not-selected">
-        {{#each choices as |choice key|}}
-        {{#unless choice.isSelected}}
-            <li class="trait">
-                <label class="checkbox" {{#if choice.tooltip}}data-tooltip="<strong>{{choice.label}}</strong><br/>{{choice.tooltip}}"{{/if}}>
-                    <input type="checkbox" name="{{key}}" data-dtype="Boolean" {{checked choice.isSelected}}>
-                    {{choice.label}}
-                </label>
-            </li>
-        {{/unless}}
-        {{/each}}
-    </ul>
+    <div>
+        <ul class="trait-list not-selected">
+            {{#each choices as |choice key|}}
+            {{#unless choice.isSelected}}
+                <li class="trait">
+                    <label class="checkbox" {{#if choice.tooltip}}data-tooltip="<strong>{{choice.label}}</strong><br/>{{choice.tooltip}}"{{/if}}>
+                        <input type="checkbox" name="{{key}}" data-dtype="Boolean" {{checked choice.isSelected}}>
+                        {{choice.label}}
+                    </label>
+                </li>
+            {{/unless}}
+            {{/each}}
+        </ul>
+    </div>
 
 </form>

@@ -4,6 +4,12 @@ export class ActorTraitSelectorSFRPG extends TraitSelectorSFRPG {
     constructor(actor, options) {
         super(actor, options);
         super.getData();
+
+        // Add extra text fields if needed
+        foundry.utils.mergeObject(this.options, {
+            needsTextExtension: false,
+            needsCustomField: true
+        });
     }
 
     /**
@@ -26,7 +32,9 @@ export class ActorTraitSelectorSFRPG extends TraitSelectorSFRPG {
         }
         return {
             choices: choices,
-            custom: traitData.custom
+            custom: traitData.custom,
+            needsTextExtension: this.options.needsTextExtension,
+            needsCustomField: this.options.needsCustomField
         };
     }
 
@@ -40,22 +48,26 @@ export class ActorTraitSelectorSFRPG extends TraitSelectorSFRPG {
 
         // get a list of valid choices and initialize array
         const validChoices = Object.keys(this.options.choices);
-        const selected = [];
+        const values = [];
 
         // Ignoring options not in the list of choices, push values marked true to the updateData
         // key is the specific language, proficiency, etc.
         // value is true or false, or the name of a custom trait
         for (const [key, value] of Object.entries(formData)) {
             if (validChoices.includes(key)) {
-                if (value) selected.push(key);
+                if (value) {
+                    values.push(key);
+                }
             }
         }
 
         // Build the updated data to pass back to the parent object
         const updateData = {
-            [`${this.options.location}.value`]: selected,
+            [`${this.options.location}.value`]: values,
             [`${this.options.location}.custom`]: formData.custom
         };
+
+        console.log(updateData);
 
         return updateData;
     }

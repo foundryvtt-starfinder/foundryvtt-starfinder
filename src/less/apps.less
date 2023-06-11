@@ -276,13 +276,29 @@ img.icon-enricher {
 
     &.app {
         .trait-selector {
-            max-height: 480px;
             overflow-y: hidden;
             overflow-x: hidden;
 
-            header {
+            .trait-header {
                 overflow-y: hidden;
                 overflow-x: hidden;
+
+                .sortcontainer {
+                    flex-basis: 0 0 95%;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .special-trait {
+                    flex-basis: 0 0 95%;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+
+                    input{
+                        text-align: left;
+                    }
+                }
             }
             
             .trait-list {
@@ -299,8 +315,9 @@ img.icon-enricher {
                 }
 
                 &.not-selected {
-                    overflow-y: auto;
+                    overflow-y: scroll;
                     overflow-x: hidden;
+                    max-height: 320px;
                 }
             }
         }

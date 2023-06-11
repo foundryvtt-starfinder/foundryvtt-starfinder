@@ -351,6 +351,8 @@ export class ActorSheetSFRPG extends ActorSheet {
             "armorProf": CONFIG.SFRPG.armorProficiencies
         };
 
+        console.log(traits);
+
         for (const [t, choices] of Object.entries(map)) {
             const trait = traits[t];
             if (!trait) continue;
@@ -367,6 +369,7 @@ export class ActorSheetSFRPG extends ActorSheet {
 
                 return obj;
             }, {});
+            console.log(trait.selected);
 
             if (trait.custom) {
                 trait.custom.split(';').forEach((c, i) => trait.selected[`custom${i + 1}`] = c.trim());

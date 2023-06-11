@@ -5,11 +5,11 @@ export class WeaponPropertySelectorSFRPG extends TraitSelectorSFRPG {
         super(item, options);
         super.getData();
 
-        // Add a text field indicator if needed
+        // Add extra text fields if needed
         foundry.utils.mergeObject(this.options, {
-            needsTextField: true
+            needsTextExtension: true,
+            needsCustomField: false
         });
-        console.log(this);
     }
 
     /**
@@ -34,7 +34,8 @@ export class WeaponPropertySelectorSFRPG extends TraitSelectorSFRPG {
 
         return {
             choices: choices,
-            needsTextField: this.options.needsTextField
+            needsTextExtension: this.options.needsTextExtension,
+            needsCustomField: this.options.needsCustomField
         };
     }
 
