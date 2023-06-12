@@ -12,6 +12,7 @@
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -33,6 +34,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -59,6 +61,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -156,6 +159,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -186,6 +190,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -193,6 +198,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -290,6 +296,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -320,6 +327,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -327,6 +335,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -352,6 +361,7 @@
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -373,6 +383,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -399,6 +410,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -427,6 +439,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -448,6 +461,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -474,6 +488,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -502,6 +517,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -523,6 +539,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -549,6 +566,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -577,6 +595,7 @@
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -605,11 +624,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -627,6 +643,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 3
@@ -677,12 +694,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -813,8 +836,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<h2>Dust Manta</h2>\n<p>On desert worlds throughout the galaxy, strange, ray-like creatures make their home in sand flats and dunes, moving through the terrain as if through liquid. On the tidally locked @UUID[Compendium.sfrpg.setting.f24qKgU5Wh5LLJyh]{Verces} in the Pact Worlds, these terrors are known as dust mantas, and they reside in the eternal sunlight of the planet’s Fullbright hemisphere. Those who observe dust mantas from afar might presume them to be peaceful creatures with an idyllic life, but scientists and adventurers who approach them without knowledge of their brutal ways often find this to be the last mistake they ever make.</p>\n<p>Dust mantas closely resemble giant versions of common rays, with a beige coloration that allows them to blend in to their sandy surroundings and a nasty-looking tail capable of injecting a horrific toxin. Dust mantas burrow through sand as easily as their aquatic counterparts glide through water, which allows them to quickly close the distance to their prey. They attack with their stingers, injecting a dangerous toxin that quickly breaks the victim’s body down to dust; dust mantas are filter feeders, and they rely on this toxin to disintegrate food sources into filterable particles. To dust mantas, dissolving prey in this way is not cruel, but simply a matter of everyday survival. In Fullbright, dust mantas gravitate toward areas in which they can find prey, most notably the Outcast Peaks and the shirren colonies in the Temora Desert. Dust mantas are also known to frequent the Oasis Temples scattered across the desert, awaiting travelers who seek those lush and verdant anomalies.</p>\n<p>The average dust manta stretches 10 feet across and weighs 1 ton.</p>\n<p>On rare occasions, a dust manta can develop into the larger and more ferocious dust manta monarch. These enormous rays have three tails that allow them to inflict massive damage, as well as a more potent toxin when they deliver their deadly stings. Dust manta monarchs can create localized dust storms that choke and blind those creatures unlucky enough to be caught within, making it easier for the dust manta monarch and any accompanying dust mantas to ambush their unfortunate prey. When food is scarce, a single monarch might roam the desert with a pack of smaller dust mantas, scaring up enough prey to feed the whole fever.</p>\n<p>The typical dust manta monarch stretches 20 feet across and weighs 8 tons.</p>\n<h2>Dust Manta Hides</h2>\n<p>In Fullbright, some brave-or perhaps foolish-game hunters in the Outlaw Kingdoms pursue dust mantas for their desertadapted hides, despite the inherent danger in doing so. Those fortunate enough to survive their hunts craft suits of @UUID[Compendium.sfrpg.equipment.gBkbdE71A3yWwr5p]{Dust manta hide, basic} and @UUID[Compendium.sfrpg.equipment.gU4dd9j9XCrt6zs5]{Dust manta hide, advanced} from the hides, using nanocarbon filaments to stitch the armor together.</p>",
@@ -824,6 +850,10 @@
       "cr": 12,
       "environment": "warm deserts",
       "organization": "solitary, pair, or fever (1 dust manta monarch plus 3-8 dust mantas)",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AA2 pg. 46",
@@ -1129,6 +1159,9 @@
       },
       "senses": "darkvision 60 ft., low-light vision, sense through (vision [sand only])",
       "size": "huge",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

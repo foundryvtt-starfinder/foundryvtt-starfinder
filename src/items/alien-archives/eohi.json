@@ -84,6 +84,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -114,6 +115,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -121,6 +123,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -218,6 +221,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -248,6 +252,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -255,6 +260,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -280,6 +286,7 @@
       "system": {
         "type": "",
         "ability": "",
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -301,6 +308,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -347,6 +355,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -372,6 +381,7 @@
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -393,6 +403,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -419,6 +430,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -447,6 +459,7 @@
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -475,11 +488,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -497,6 +507,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -547,12 +558,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -683,8 +700,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<h2>Description</h2>\n<p>Originally from the heavily forested world of Nejeor IV, carnivorous eohis prefer to hunt in packs, often climbing to precarious heights in the treetops, where they can leap quickly from branch to branch, easily chasing down prey that is slowed by underbrush. Another favored hunting tactic is to drop down in a ring around an unsuspecting victim before closing in for the kill.</p>\n<p>These furred quadrupeds are the size of large hounds, with muscular forelimbs and six-digit humanlike hands that assist in scaling trunks and hanging onto branches. Their powerful jaws and sharp teeth are capable of tearing into tough flesh, and their large, flaring nostrils help them pick up even the faintest scent. But eohis are not entirely dependent on scent; their keen eyes allow them to see well even in the dim light under the forest canopy.</p>\n<p>Male eohis have darker fur, ranging from black to slate gray, while female eohis are usually light brown, tan, or brindled. Eohis give birth to live young, which are nursed by their mothers until their fangs grow in, usually in about 3 months. The young then feast on carcasses left behind by older eohis, but as they grow and learn to work cooperatively to take down living prey, they form their own hunting packs.</p>\n<p>Millennia ago, the kishalee empire captured a handful of eohis and brought them to the cities of Nejeor VI (see page 62) to populate their zoos. The kishalee occasionally introduced new eohis to the captive animals to keep the gene pool viable, and the creatures became a popular attraction. When the kishalee civilization crumbled, though, these captive eohis were left to fend for themselves in their pens. Many of them died from lack of food; others perished when their host cities plummeted into the clouds. However, the eohis in Istamak (see page 38) survived by breaking out of their cages and eating many of the other animals in their zoo before eventually establishing a stable population in the city’s park. Eventually, the kish (see page 58) in that city saw how useful eohis could be in a hunt and tamed some of them, training them to take down larger prey and to guard kish homes and livestock from the city’s other predators.</p>\n<p>An eohi stands about 2 feet tall at the shoulder and weighs almost 70 pounds.</p>",
@@ -694,6 +714,10 @@
       "cr": 6,
       "environment": "any forests (Nejeor IV)",
       "organization": "solitary, pair, or pack (3-8)",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #4 pg. 57",
@@ -995,6 +1019,9 @@
       },
       "senses": "blindsight (scent) 60 ft., low-light vision",
       "size": "small",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

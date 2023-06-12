@@ -273,9 +273,9 @@ export class ItemSheetSFRPG extends ItemSheet {
         const item = this.document;
         const itemData = item.system;
 
-        if (["weapon", "equipment", "shield"].includes(item.type)) return itemData.equipped ? "Equipped" : "Unequipped";
+        if (["weapon", "equipment", "shield"].includes(item.type)) return itemData.equipped ? game.i18n.localize("SFRPG.InventoryEquipped") : game.i18n.localize("SFRPG.InventoryNotEquipped");
         else if (item.type === "feat") return CONFIG.SFRPG.featureCategories[itemData.details.category]?.label || "";
-        else if (item.type === "starshipWeapon") return itemData.mount.mounted ? "Mounted" : "Not Mounted";
+        else if (item.type === "starshipWeapon") return itemData.mount.mounted ? game.i18n.localize("SFRPG.Items.ShipWeapon.Mounted") : game.i18n.localize("SFRPG.Items.ShipWeapon.NotMounted");
         else if (item.type === "augmentation") {
             return `${CONFIG.SFRPG.augmentationTypes[itemData.type]} (${CONFIG.SFRPG.augmentationSystems[itemData.system] || ""})`;
         } else if (item.type === "vehicleSystem") {
@@ -284,7 +284,7 @@ export class ItemSheetSFRPG extends ItemSheet {
                 return "";
             }
 
-            return this.document.isActive() ? "Activated" : "Not Activated";
+            return this.document.isActive() ? game.i18n.localize("SFRPG.VehicleSystemSheet.Activated") : game.i18n.localize("SFRPG.VehicleSystemSheet.NotActivated");
         }
     }
 

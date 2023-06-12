@@ -5,6 +5,7 @@
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
+      "_id": "LkKzUe78kxjpA9ga",
       "name": "Bite",
       "type": "weapon",
       "img": "icons/svg/mystery-man.svg",
@@ -29,6 +30,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -36,6 +38,24 @@
           "value": null
         },
         "attackBonus": 2,
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": true
+        },
         "attuned": false,
         "bulk": "L",
         "capacity": {
@@ -46,6 +66,8 @@
         "containedItemIds": [],
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
+          "isOpen": true,
           "storage": [
             {
               "type": "slot",
@@ -66,8 +88,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
@@ -76,22 +101,26 @@
           "units": "",
           "value": null
         },
+        "equippable": false,
         "equipped": false,
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
+        "isActive": null,
         "level": 1,
         "modifiers": [],
         "price": 0,
         "proficient": true,
         "properties": {},
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -99,6 +128,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -112,10 +142,12 @@
           "per": null,
           "value": 0
         },
+        "weaponCategory": "uncategorized",
         "weaponType": "basicM"
       }
     },
     {
+      "_id": "AoQao1YP54WAQjty",
       "name": "Attach (Ex)",
       "type": "feat",
       "img": "icons/svg/mystery-man.svg",
@@ -125,6 +157,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -146,8 +179,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>A skittermander whelp that hits with a bite attack automatically initiates a special combat maneuver against its target (this does not take an action) with a +4 species bonus. If successful, the skittermander whelp moves into the target’s space without provoking an attack of opportunity and attaches to the target. The whelp gains partial cover, (though not against attacks made by the target) as well as a +2 circumstance bonus to melee attacks and damage rolls, but it can attack only the creature to which it is attached. The target (or an ally adjacent to the target) can remove an attached skittermander whelp with a successful DC 10 Strength check as a move action.</p>"
         },
@@ -157,6 +193,7 @@
           "value": null
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -169,6 +206,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -190,12 +228,14 @@
   "prototypeToken": {
     "name": "Skittermander Whelp",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -224,11 +264,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -246,6 +283,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -296,8 +334,14 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
+      "baseSpellDC": {
+        "base": 0
+      },
       "cmd": {
         "min": 0,
         "tooltip": [],
@@ -354,7 +398,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 30
@@ -363,7 +408,8 @@
         "special": "original base: 30 ft.; original special: climb 20 ft.",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -387,12 +433,26 @@
       "alignment": "N",
       "aura": "",
       "biography": {
+        "age": 0,
+        "dateOfBirth": "",
+        "deity": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
+        "height": "",
+        "homeWorld": "",
+        "otherVisuals": "",
         "public": "",
-        "value": "<section class=\"secret\">\n<h2>Description</h2>\n<p>Near-ubiquitous inhabitants of the planet Vesk-3, skittermanders led a simple, mostly agrarian lifestyle before the Veskarium annexed their planet. They have a unique outlook: individualistic without being anarchic, and somehow unable (or perhaps unwilling) to grasp the concept of permanent governance. They understand and enjoy teamwork, and naturally follow a qualified leader to undertake large projects such as the building of domiciles, but once that task has been completed, the leader doesn’t continue to hold sway over the others. Coupled with their unusual life cycle, it would seem as if skittermanders would be very difficult to rule. But such is not exactly the case.</p>\n<p>When vesk warships appeared in the sky, skittermanders across Vesk-3 were more than happy to get out of the invaders’ way—not out of fear, but more because of their innate desire to help. Skittermanders instinctively recognized the Veskarium’s superior strength and felt they could best aid the empire by simply not being in the same location as its soldiers. In this way, skittermanders believed the vesk could quickly achieve their goals and move on. They didn’t understand the vesk’s aim was to subdue their world. Since vesk’s code of honor forbade them from shooting the cheerfully acquiescent skittermanders in the back, the invaders were confused and infuriated by the situation.</p>\n<p>Eventually, in a meeting that the empire notes as the official date that Vesk-3 was conquered, a vesk general plainly told a group of skittermanders that the Veskarium ruled their planet. The skittermanders nodded and got back to their lives. Since then, the empire has ruled Vesk-3, though it hasn’t truly been in control of it. Skittermanders cheerfully accept jobs given to them by vesk, but never truly acknowledge the vesk as being in charge. Some outside the Veskarium believe skittermanders are being deliberately obtuse, reaping all the technological and social benefits the empire offers while still partially maintaining their freedom as a society, but no skittermander has ever confirmed this theory.</p>\n<p>Today, skittermanders can be found throughout the Veskarium, often serving in clerical positions that allow them to aid as many people as possible. They have fully embraced technology and enjoy the many sights the galaxy has to offer, traveling to the Pact Worlds and beyond. Those who employ skittermanders quickly learn to give them missions that have open-ended parameters, as a skittermander who feels she has completed a task won’t necessarily report back to a superior for further instructions if she finds someone else who needs her help first. Outsiders often find them cheerfully manic, noting a @UUID[Compendium.sfrpg.races.SvZm3xijwqis2qDS]{Goblin}-like flair for the ridiculous but none of that race’s innate malice.</p>\n<p>Though skittermanders are mammals, they begin life in something akin to a larval stage. A skittermander whelp looks like a miniature version of an adult, but with more prominent ears and a tiny, secondary mouth on its abdomen. Once born, whelps are left to fend for themselves. They are truly omnivorous, capable of digesting fruits, leaves, raw meat, and seeds. Additionally, a whelp’s secondary mouth allows it to attach itself to large prey and feed at its leisure. Thanks to a numbing mucus secreted by this mouth, less intelligent animals rarely even notice the whelp’s samplings. A swarm of skittermander whelps has been known to bring down a trundling bovine monoux in a matter of minutes.</p>\n<p>After 6 years, whelps mature into adult skittermanders, begin to walk upright, and lose their secondary mouths, but they maintain their taste for anything remotely edible. Skittermanders living in tropical climes have short, soft fur, while their arctic cousins grow tough, shaggy hair. Their coloration varies even more, with tones of blue, green, and violet being the most common, but with no obvious correlation to their surroundings.</p>\n<p>The average adult skittermander is 3 feet tall and weighs about 35 pounds.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any (Vesk-3)</p>\n<h3>Organization</h3>\n<p>solitary or nest (5-24)</p>\n</section>"
+        "value": "<section class=\"secret\">\n<h2>Description</h2>\n<p>Near-ubiquitous inhabitants of the planet Vesk-3, skittermanders led a simple, mostly agrarian lifestyle before the Veskarium annexed their planet. They have a unique outlook: individualistic without being anarchic, and somehow unable (or perhaps unwilling) to grasp the concept of permanent governance. They understand and enjoy teamwork, and naturally follow a qualified leader to undertake large projects such as the building of domiciles, but once that task has been completed, the leader doesn’t continue to hold sway over the others. Coupled with their unusual life cycle, it would seem as if skittermanders would be very difficult to rule. But such is not exactly the case.</p>\n<p>When vesk warships appeared in the sky, skittermanders across Vesk-3 were more than happy to get out of the invaders’ way—not out of fear, but more because of their innate desire to help. Skittermanders instinctively recognized the Veskarium’s superior strength and felt they could best aid the empire by simply not being in the same location as its soldiers. In this way, skittermanders believed the vesk could quickly achieve their goals and move on. They didn’t understand the vesk’s aim was to subdue their world. Since vesk’s code of honor forbade them from shooting the cheerfully acquiescent skittermanders in the back, the invaders were confused and infuriated by the situation.</p>\n<p>Eventually, in a meeting that the empire notes as the official date that Vesk-3 was conquered, a vesk general plainly told a group of skittermanders that the Veskarium ruled their planet. The skittermanders nodded and got back to their lives. Since then, the empire has ruled Vesk-3, though it hasn’t truly been in control of it. Skittermanders cheerfully accept jobs given to them by vesk, but never truly acknowledge the vesk as being in charge. Some outside the Veskarium believe skittermanders are being deliberately obtuse, reaping all the technological and social benefits the empire offers while still partially maintaining their freedom as a society, but no skittermander has ever confirmed this theory.</p>\n<p>Today, skittermanders can be found throughout the Veskarium, often serving in clerical positions that allow them to aid as many people as possible. They have fully embraced technology and enjoy the many sights the galaxy has to offer, traveling to the Pact Worlds and beyond. Those who employ skittermanders quickly learn to give them missions that have open-ended parameters, as a skittermander who feels she has completed a task won’t necessarily report back to a superior for further instructions if she finds someone else who needs her help first. Outsiders often find them cheerfully manic, noting a @UUID[Compendium.sfrpg.races.SvZm3xijwqis2qDS]{Goblin}-like flair for the ridiculous but none of that race’s innate malice.</p>\n<p>Though skittermanders are mammals, they begin life in something akin to a larval stage. A skittermander whelp looks like a miniature version of an adult, but with more prominent ears and a tiny, secondary mouth on its abdomen. Once born, whelps are left to fend for themselves. They are truly omnivorous, capable of digesting fruits, leaves, raw meat, and seeds. Additionally, a whelp’s secondary mouth allows it to attach itself to large prey and feed at its leisure. Thanks to a numbing mucus secreted by this mouth, less intelligent animals rarely even notice the whelp’s samplings. A swarm of skittermander whelps has been known to bring down a trundling bovine monoux in a matter of minutes.</p>\n<p>After 6 years, whelps mature into adult skittermanders, begin to walk upright, and lose their secondary mouths, but they maintain their taste for anything remotely edible. Skittermanders living in tropical climes have short, soft fur, while their arctic cousins grow tough, shaggy hair. Their coloration varies even more, with tones of blue, green, and violet being the most common, but with no obvious correlation to their surroundings.</p>\n<p>The average adult skittermander is 3 feet tall and weighs about 35 pounds.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any (Vesk-3)</p>\n<h3>Organization</h3>\n<p>solitary or nest (5-24)</p>\n</section>",
+        "weight": ""
       },
       "class": "",
       "cr": 0.3333333333333333,
       "environment": "",
+      "organization": "",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AA1 pg. 106",
@@ -408,6 +468,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 7,
         "ranks": 7,
@@ -418,6 +479,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 3,
         "ranks": 3,
@@ -428,6 +490,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -438,6 +501,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -448,6 +512,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -458,6 +523,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -468,6 +534,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -478,6 +545,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -488,6 +556,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -498,6 +567,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -508,6 +578,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -518,6 +589,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -528,6 +600,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 7,
         "ranks": 7,
@@ -538,6 +611,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -548,6 +622,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -558,6 +633,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -569,6 +645,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -579,6 +656,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -589,6 +667,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 7,
         "ranks": 7,
@@ -599,6 +678,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -608,30 +688,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -662,6 +749,9 @@
       },
       "senses": "low-light vision",
       "size": "diminutive",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

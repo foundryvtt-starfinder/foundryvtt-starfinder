@@ -15,6 +15,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "move",
@@ -36,6 +37,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -62,6 +64,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -129,6 +132,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -158,6 +162,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -188,6 +193,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -195,6 +201,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -216,25 +223,7 @@
       "_id": "OpcrnCr8cxYyG8bi",
       "name": "Flame Jet (Ex)",
       "type": "weapon",
-      "ammunition": false,
-      "augmentation": false,
-      "consumable": false,
-      "container": false,
-      "equipment": false,
-      "fusion": true,
-      "goods": false,
-      "hybrid": false,
       "img": "icons/svg/item-bag.svg",
-      "magic": false,
-      "shield": false,
-      "spell": false,
-      "storage": {
-        "type": "slot",
-        "affectsEncumbrance": true,
-        "amount": 0,
-        "subtype": "fusion",
-        "weightProperty": "level"
-      },
       "system": {
         "type": "",
         "ability": "",
@@ -283,6 +272,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -312,6 +302,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -429,6 +420,7 @@
           "units": "none",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -436,6 +428,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -451,13 +444,7 @@
         },
         "weaponCategory": "uncategorized",
         "weaponType": "smallA"
-      },
-      "technological": false,
-      "upgrade": false,
-      "vehicleAttack": false,
-      "vehicleSystem": false,
-      "weapon": false,
-      "weaponAccessory": false
+      }
     }
   ],
   "prototypeToken": {
@@ -470,10 +457,10 @@
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
-    "elevation": null,
     "height": 1,
     "light": {
       "alpha": 0.5,
@@ -499,11 +486,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -521,11 +505,10 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
-    "width": 1,
-    "x": null,
-    "y": null
+    "width": 1
   },
   "system": {
     "abilities": {
@@ -573,12 +556,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -709,8 +698,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<h2>Description</h2>\n<p>This quadruped hails from the Darkside of the tidally locked world of @UUID[Compendium.sfrpg.setting.f24qKgU5Wh5LLJyh]{Verces}. A typical glacial borer is about 5-1/2 feet long and weighs around 225 pounds. The creature is covered in white or gray fur and has two beady eyes spaced far apart on its face; its most striking feature is a set of fiery tusks, glowing with heat. Though as strong as steel, each tusk is hollow and has numerous holes along its length that are the endpoints of ducts leading from a fleshy sac within the beast’s forehead. This bladder contains naturally produced chemicals that, when mixed together, can produce intense heat.</p>\n<p>Glacial borers get their name from how they use their heated horns to burrow through ice and snow, leaving behind smooth tunnels. The beasts gain sustenance from slurping up the melted material, which usually contains frozen strands of plant life and nutritional microscopic organisms; the borers tend to leave behind whatever doesn’t liquefy. Enterprising individuals explore these passageways to search for valuable detritus, but must be careful not to anger the glacial borers living there.</p>\n<p>For centuries, glacial borers were limited to the Darkside of @UUID[Compendium.sfrpg.setting.f24qKgU5Wh5LLJyh]{Verces} and mostly spoken of in rumors. In recent years, though, its existence was officially confirmed by the Xenowardens, and enterprising Vercites have taken to domesticating glacial borers and exporting them to other worlds as organic mining machines. Unfortunately, while the creatures remain largely docile in their natively cold climate, warmer conditions cause the creatures to become extremely ornery and volatile. Its powerful flames and horns have caused massive damage to space stations and planetary habitats in which the temperature wasn’t kept below freezing. Nevertheless, there is a burgeoning industry on @UUID[Compendium.sfrpg.setting.f24qKgU5Wh5LLJyh]{Verces} for capturing, taming, and breeding glacial borers. Many of these small companies have agreed to be regulated by the Xenowardens to maintain ethical and humane practices for securing the beasts, but more conservative ecological preservation groups are concerned that displacing too many glacial borers could lead to an imbalance in the Darkside’s ecosystem.</p>",
@@ -720,6 +712,10 @@
       "cr": 6,
       "environment": "any cold (Verces)",
       "organization": "solitary, pair, or muster (3-10)",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #27 pg. 56",
@@ -959,30 +955,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -1017,6 +1020,9 @@
       },
       "senses": "low-light vision",
       "size": "medium",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

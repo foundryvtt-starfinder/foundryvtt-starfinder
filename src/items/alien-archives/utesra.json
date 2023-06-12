@@ -22,6 +22,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -56,6 +57,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -85,8 +87,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
@@ -95,6 +100,7 @@
           "units": "",
           "value": null
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
@@ -191,12 +197,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -204,6 +212,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -239,6 +248,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -273,6 +283,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -302,8 +313,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>An utesra can lash with its electrically charged dorsal stalk. This attack lets the utesra ensnare the target per the grab ability, though the attack result is compared to the target’s EAC to determine whether the creature is @UUID[Compendium.sfrpg.conditions.4AkWDHGM6gHDepHN]{Grappled} or @UUID[Compendium.sfrpg.conditions.XgK4EdO5D3Fj3iWz]{Pinned}. Anytime the utesra renews the grapple, it also deals the tendril’s damage and repositions the target 5 feet closer to the utesra, plus 5 more feet for every 5 by which the attack exceeds the target’s EAC + 4. If the target ends the forced movement within the utesra’s normal reach, it can bite the target as a move action. A creature can sever a shock tendril by dealing 20 points of slashing damage to it (the tendril has the same AC as the utesra). An utesra can regenerate a severed tendril over the course of a week.</p>"
         },
@@ -312,6 +326,7 @@
           "units": "",
           "value": ""
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
@@ -408,12 +423,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "ft",
           "value": 30
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -421,6 +438,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -449,6 +467,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "action",
@@ -470,8 +489,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>As a standard action, an utesra can flicker one or more of its dorsal stalks until the beginning of its next turn, creating subtle, calming electromagnetic vibrations. The utesra can maintain this strobing each round as a move action. Any creature other than an utesra within 60 feet of the utesra and able to see the display becomes fascinated (Will DC 13 negates) for as long as the utesra continues to strobe, though threatening actions can potentially break the effect as normal. A creature that succeeds at this saving throw is immune to the strobe of utesras (but not utesra phylarchs) for 24 hours. The utesra can’t concurrently use a stalk to create a shock tendril and to strobe.</p>"
         },
@@ -494,6 +516,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "will",
           "dc": "13",
@@ -515,12 +538,14 @@
   "prototypeToken": {
     "name": "Utesra",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -549,11 +574,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -571,6 +593,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -621,12 +644,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -684,7 +713,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 30
@@ -693,7 +723,8 @@
         "special": "original base: 30 ft.; original special: climb 30 ft.",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -754,12 +785,26 @@
       "alignment": "N",
       "aura": "",
       "biography": {
+        "age": 0,
+        "dateOfBirth": "",
+        "deity": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
+        "height": "",
+        "homeWorld": "",
+        "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>Utesras evolved on the rain-ravaged planet of Gaskar III in Near Space. Often simply called “cliff anglers,” they are insectile predators adapted to clinging to wet escarpments and luring prey within reach using hypnotic light displays. A series of electrocyte-dense organs run along an utresa’s thorax, head, and hunting tendrils, allowing the creature to sense its surroundings with sonarlike pulses, create soft flashes of light and direct painful shocks. The haunting lights have spawned cautionary tales that mirror those of the will-o’-wisp, warning travelers against wandering toward the promise of lights spotted in the rain and fog.</p>\n<p>Utesras are obligate parasitoids, able to reproduce only by incubating their eggs in others’ flesh. The common utesra is merely a voracious larval form of the organism, and only after feeding consistently and molting repeatedly does the larva develop into an adult, referred to as an utesra phylarch. Phylarches incapacitate larger prey to lay their eggs in, typically abandoning the host in a relatively dry location until the eggs can hatch. In rare cases a phylarch even shadows its hosts for days, chasing off other predators like an ill-intentioned guardian.</p>\n<p>Although stealthy, utesras favor ambushes over patiently stalking victims. However, ongoing settlement of their longstanding habitat has led to an increase in aggressive and opportunistic behavior. In addition to utesras increasingly breaking into small houses on Gaskar III, several medical evacuations of utesras’ victims have accidentally spread the vermin beyond that planet. Most infamously, a crew of biological surveyors attempted to flee to @UUID[Compendium.sfrpg.setting.hepqXl6gFvs5sDQu]{Absalom Station} after being attacked by a phylarch, but by the time the starship emerged from the Drift, juvenile utesras had hatched and overrun the ship, killing its crew.</p>\n<p>The ship later crashed into @UUID[Compendium.sfrpg.setting.gzXT0xwsj8kQAoj0]{Akiton}, and the surviving&nbsp;utesras have since spread along the planet’s Edaio Rift as an&nbsp;invasive species—especially in the cliff city of Maro, where&nbsp;they prey upon humanoids. The creatures’ affinity for cliffs&nbsp;has even resulted in their taking over old skyscrapers and&nbsp;other artificial structures to form deadly hunting platforms&nbsp;where their haunting lures blend in with other urban lights.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any hill, mountain, or urban</p>\n<h3>Organization</h3>\n<p>solitary, pair, or scintillation (3–8)</p>\n</section>"
+        "value": "<h2>Description</h2>\n<p>Utesras evolved on the rain-ravaged planet of Gaskar III in Near Space. Often simply called “cliff anglers,” they are insectile predators adapted to clinging to wet escarpments and luring prey within reach using hypnotic light displays. A series of electrocyte-dense organs run along an utresa’s thorax, head, and hunting tendrils, allowing the creature to sense its surroundings with sonarlike pulses, create soft flashes of light and direct painful shocks. The haunting lights have spawned cautionary tales that mirror those of the will-o’-wisp, warning travelers against wandering toward the promise of lights spotted in the rain and fog.</p>\n<p>Utesras are obligate parasitoids, able to reproduce only by incubating their eggs in others’ flesh. The common utesra is merely a voracious larval form of the organism, and only after feeding consistently and molting repeatedly does the larva develop into an adult, referred to as an utesra phylarch. Phylarches incapacitate larger prey to lay their eggs in, typically abandoning the host in a relatively dry location until the eggs can hatch. In rare cases a phylarch even shadows its hosts for days, chasing off other predators like an ill-intentioned guardian.</p>\n<p>Although stealthy, utesras favor ambushes over patiently stalking victims. However, ongoing settlement of their longstanding habitat has led to an increase in aggressive and opportunistic behavior. In addition to utesras increasingly breaking into small houses on Gaskar III, several medical evacuations of utesras’ victims have accidentally spread the vermin beyond that planet. Most infamously, a crew of biological surveyors attempted to flee to @UUID[Compendium.sfrpg.setting.hepqXl6gFvs5sDQu]{Absalom Station} after being attacked by a phylarch, but by the time the starship emerged from the Drift, juvenile utesras had hatched and overrun the ship, killing its crew.</p>\n<p>The ship later crashed into @UUID[Compendium.sfrpg.setting.gzXT0xwsj8kQAoj0]{Akiton}, and the surviving&nbsp;utesras have since spread along the planet’s Edaio Rift as an&nbsp;invasive species—especially in the cliff city of Maro, where&nbsp;they prey upon humanoids. The creatures’ affinity for cliffs&nbsp;has even resulted in their taking over old skyscrapers and&nbsp;other artificial structures to form deadly hunting platforms&nbsp;where their haunting lures blend in with other urban lights.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any hill, mountain, or urban</p>\n<h3>Organization</h3>\n<p>solitary, pair, or scintillation (3–8)</p>\n</section>",
+        "weight": ""
       },
       "class": "",
       "cr": 5,
       "environment": "",
+      "organization": "",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AA4 pg. 130",
@@ -999,30 +1044,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -1057,6 +1109,9 @@
       },
       "senses": "blindsense (vibration) 30 ft.; darkvision 60 ft.;",
       "size": "medium",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }
