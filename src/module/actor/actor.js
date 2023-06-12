@@ -193,11 +193,20 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         for (const item of documents) {
             const itemData = item.system;
 
-            if (item.type === 'effect' && itemData.showOnToken ) {
-                const effect = game.sfrpg.timedEffects.get(item.uuid);
-                if (!effect) continue;
+            // Copy code from SFRPGTimedEffect.toggleIcon because the instance doesn't exist yet.
+            if (item.type === 'effect' && itemData.showOnToken && itemData.enabled) {
+                const tokens = item.actor.getActiveTokens(true);
+                if (tokens.length === 0) return;
 
-                effect.toggleIcon(effect.enabled);
+                const statusEffect = {
+                    id: item._id,
+                    label: item.name,
+                    icon: item.img || 'icons/svg/item-bag.svg'
+                };
+                for (const token of tokens) {
+                    token.toggleEffect(statusEffect, {active: itemData.enabled, overlay: false});
+                }
+
             }
         }
 

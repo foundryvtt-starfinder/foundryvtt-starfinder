@@ -152,7 +152,7 @@ export default class SFRPGTimedEffect {
     delete(item = null) {
         const actor = game.actors.get(this.actorId);
 
-        // Delete from maps
+        // Delete from Maps
         game.sfrpg.timedEffects.delete(this.uuid);
         actor.system.timedEffects.delete(this.uuid);
 
@@ -198,6 +198,8 @@ export default class SFRPGTimedEffect {
         if (!item) return;
 
         const tokens = item.actor.getActiveTokens(true);
+        if (tokens.length === 0) return;
+
         const statusEffect = {
             id: item._id,
             label: item.name,
