@@ -2010,7 +2010,7 @@ class LevelDatabase extends ClassicLevel {
 const execBuild = gulp.parallel(buildLess, copyFiles, copyLibs);
 
 exports.build = gulp.series(clean, execBuild);
-exports.watch = gulp.series(execBuild, buildWatch);
+exports.watch = buildWatch;
 exports.clean = clean;
 exports.link = linkUserData;
 exports.copyUser = copyUserData;

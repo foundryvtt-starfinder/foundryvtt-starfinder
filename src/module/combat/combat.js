@@ -61,7 +61,7 @@ export class CombatSFRPG extends Combat {
         };
 
         this.updateSource(update);
-        return super.preCreate(data, options, user);
+        return super._preCreate(data, options, user);
     }
 
     async begin() {

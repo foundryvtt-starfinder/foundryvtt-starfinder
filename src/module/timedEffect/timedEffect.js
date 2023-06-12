@@ -93,23 +93,22 @@ export default class SFRPGTimedEffect {
     toggle(resetActivationTime = true) {
         this.enabled = !this.enabled;
 
-        const actor = game.actors.get(this.actorId);
-        const items = actor.items;
-        const effect = items.get(this.itemId);
+        const item = this.item;
+        const actor = item.actor;
 
-        if (!effect) return ui.notifications.error('Failed to toggle effect, item missing.');
+        if (!item) return ui.notifications.error('Failed to toggle effect, item missing.');
         if (!actor) return ui.notifications.error('Failed to toggle effect, actor missing.');
         // toggle on actor
         const updateData = {
-            _id: effect._id,
+            _id: item._id,
             system: {
                 enabled: this.enabled,
-                modifiers: effect.system.modifiers,
-                activeDuration: effect.system.activeDuration
+                modifiers: item.system.modifiers,
+                activeDuration: item.system.activeDuration
             }
         };
 
-        for (let effectModI = 0; effectModI < effect.system.modifiers.length; effectModI++) {
+        for (let effectModI = 0; effectModI < item.system.modifiers.length; effectModI++) {
             updateData.system.modifiers[effectModI].enabled = this.enabled;
             this.modifiers[effectModI].enabled = this.enabled;
         }
@@ -136,8 +135,8 @@ export default class SFRPGTimedEffect {
         }
 
         // update global and actor timedEffect objects
-        actor.system.timedEffects.get(effect.uuid)?.update(this);
-        game.sfrpg.timedEffects.get(effect.uuid)?.update(this);
+        actor.system.timedEffects.get(this.uuid)?.update(this);
+        game.sfrpg.timedEffects.get(this.uuid)?.update(this);
 
         actor.updateEmbeddedDocuments('Item', [updateData]);
 

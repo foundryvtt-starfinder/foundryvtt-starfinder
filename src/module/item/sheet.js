@@ -1045,30 +1045,33 @@ export class ItemSheetSFRPG extends ItemSheet {
      */
     async _onToggleDetailsEffect(event) {
         event.preventDefault();
+        const checked = event.currentTarget.checked;
 
         if (!this.item.actor) {
-            this.item.update({"system.enabled": event.currentTarget.checked});
-        } else {
-            const target = $(event.currentTarget);
-            const effectUuid = target.closest('div.item-duration').data('effectUuid');
+            const updates = {
+                system: {
+                    enabled: checked,
+                    modifiers: this.item.system.modifiers
+                }
+            };
 
-            this.actor.system.timedEffects.get(effectUuid)?.toggle();
+            for (const modifier of updates.system.modifiers) {
+                modifier.enabled = checked;
+            }
+
+            this.item.update(updates);
+        } else {
+            this.item.timedEffect?.toggle();
         }
     }
 
     async _onToggleIconEffect(event) {
         event.preventDefault();
+        const checked = event.currentTarget.checked;
 
-        this.item.update({"system.showOnToken": event.currentTarget.checked});
+        this.item.update({"system.showOnToken": checked});
 
-        if (this.item.actor) {
-            const checked = event.currentTarget.checked;
-            const target = $(event.currentTarget);
-            const effectUuid = target.closest('div.item-duration').data('effectUuid');
-
-            const effect = this.actor.system.timedEffects.get(effectUuid);
-            if (this.item.system.enabled) effect?.toggleIcon(checked);
-        }
+        if (this.item.actor && this.item.system.enabled) this.item.timedEffect?.toggleIcon(checked);
 
     }
 }

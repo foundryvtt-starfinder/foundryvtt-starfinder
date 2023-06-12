@@ -1720,7 +1720,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         effectType = SFRPGEffectType.SKILL,
         subtab = "misc",
         valueAffected = "",
-        enabled = true,
+        enabled = this.system?.enabled ?? true, // New modifiers on effects should match enabled state.
         source = "",
         notes = "",
         condition = "",
