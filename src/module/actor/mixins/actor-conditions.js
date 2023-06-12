@@ -140,10 +140,20 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
     async _checkFlatFooted(conditionName, enabled) {
         const flatFooted = "flat-footed";
         const hasFlatFooted =  this.hasCondition(flatFooted);
+
+        let hasCausingCondition = false;
+        for (const condition of CONFIG.SFRPG.conditionsCausingFlatFooted) {
+            if (this.hasCondition(condition)) {
+                hasCausingCondition = true;
+                break;
+            }
+
+        }
+
         let shouldBeFlatFooted = (conditionName === flatFooted && enabled) || hasFlatFooted;
 
         const causesFlatFooted = CONFIG.SFRPG.conditionsCausingFlatFooted.includes(conditionName);
-        if (causesFlatFooted) shouldBeFlatFooted = enabled;
+        if (causesFlatFooted) shouldBeFlatFooted = hasCausingCondition || enabled;
 
         return this.setCondition(flatFooted, shouldBeFlatFooted);
 
