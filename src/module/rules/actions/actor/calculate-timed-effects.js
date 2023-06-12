@@ -6,7 +6,6 @@ export default function(engine) {
         const actor = fact.owner.actor;
         if (!actor || item.type !== "effect") return fact;
 
-        const existingEffect = actor.system.timedEffects.get(item.uuid);
         const effectData = {
             itemId: item.id,
             actorId: item.actor.id,
@@ -24,9 +23,7 @@ export default function(engine) {
         effectData.activeDuration.activationEnd = effectData.activeDuration.activationTime + (effectData.activeDuration.value * CONFIG.SFRPG.effectDurationFrom[effectData.activeDuration.unit]);
         effectData.activeDuration.remaining = effectData.activeDuration.activationEnd - game.time.worldTime;
 
-        const effect = existingEffect
-            ? existingEffect.update(effectData)
-            : new SFRPGTimedEffect(effectData);
+        const effect = new SFRPGTimedEffect(effectData);
 
         // add to actor effects
         actor.system.timedEffects.set(effect.uuid, effect);

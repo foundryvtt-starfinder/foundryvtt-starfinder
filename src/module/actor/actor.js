@@ -16,7 +16,6 @@ import { ActorRestMixin } from "./mixins/actor-rest.js";
 
 import { ItemSFRPG } from "../item/item.js";
 import { ItemSheetSFRPG } from "../item/sheet.js";
-import SFRPGTimedEffect from "../timedEffect/timedEffect.js";
 import { } from "./crew-update.js";
 
 /**
@@ -74,8 +73,8 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         this._ensureHasModifiers(this.system);
         const modifiers = this.getAllModifiers();
 
-        const timedEffects = SFRPGTimedEffect.getAllTimedEffects(this);
-        this.system.timedEffects = timedEffects;
+        // const timedEffects = SFRPGTimedEffect.getAllTimedEffects(this);
+        this.system.timedEffects = new Map();
 
         const items = this.items;
         const armors = items.filter(item => item.type === "equipment" && item.system.equipped);
@@ -104,7 +103,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             classes,
             chassis,
             modifiers,
-            timedEffects,
+            // timedEffects,
             theme,
             mods,
             armorUpgrades,

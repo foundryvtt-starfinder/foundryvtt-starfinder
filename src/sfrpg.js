@@ -883,19 +883,3 @@ Hooks.on("renderPause", () => {
         icon.src = "systems/sfrpg/images/cup/organizations/starfinder_society.webp";
     }
 });
-
-Hooks.on("updateWorldTime", (worldTime, dt, options, userId) => {
-    const timedEffects = game.sfrpg.timedEffects;
-    for (const effect of timedEffects.values()) {
-        if (effect.activeDuration.unit === 'permanent' || effect.actor.inCombat) continue;
-
-        const effectFinish = effect.activeDuration.activationEnd;
-        // handling effects while in combat is handled in combat.js
-        if ((effectFinish <= worldTime && effect.enabled)
-            || (dt < 0 && effectFinish >= worldTime && !effect.enabled)
-        ) {
-            effect.toggle(false);
-        }
-
-    }
-});
