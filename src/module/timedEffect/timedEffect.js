@@ -31,6 +31,8 @@ export default class SFRPGTimedEffect {
             value: 0,
             activationTime: 0,
             activationEnd: 0,
+            expiryMode: "turn",
+            expiryInit: 0,
             remaining: 0,
             endsOn: ''
         }
@@ -116,9 +118,21 @@ export default class SFRPGTimedEffect {
         if (this.enabled && resetActivationTime) {
             this.activeDuration.activationTime = game.time.worldTime;
             updateData.system.activeDuration.activationTime = game.time.worldTime;
+
+            if (game.combat) {
+                this.activeDuration.expiryInit = game.combat.initiative;
+                updateData.system.activeDuration.expiryInit = game.combat.initiative;
+            }
+
         } else if (resetActivationTime) {
             this.activeDuration.activationTime = -1;
             updateData.system.activeDuration.activationTime = -1;
+
+            if (game.combat) {
+                this.activeDuration.expiryInit = -1;
+                updateData.system.activeDuration.expiryInit = -1;
+            }
+
         }
 
         // update global and actor timedEffect objects
@@ -138,6 +152,7 @@ export default class SFRPGTimedEffect {
     delete(item = null) {
         const actor = game.actors.get(this.actorId);
 
+        // Delete from maps
         game.sfrpg.timedEffects.delete(this.uuid);
         actor.system.timedEffects.delete(this.uuid);
 

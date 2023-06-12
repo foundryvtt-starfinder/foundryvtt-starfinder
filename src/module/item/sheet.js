@@ -231,7 +231,10 @@ export class ItemSheetSFRPG extends ItemSheet {
             const itemData = data.item.system;
 
             data.sourceActorChoices = {};
-            data.remainingDuration = `${itemData.activeDuration.value} ${CONFIG.SFRPG.effectDurationTypes[itemData.activeDuration.unit]}`;
+            data.remainingDuration = (() => {
+                if (itemData.activeDuration.unit === "permanent") return CONFIG.SFRPG.effectDurationTypes[itemData.activeDuration.unit];
+                else return `${itemData.activeDuration.value} ${CONFIG.SFRPG.effectDurationTypes[itemData.activeDuration.unit]}`;
+            })();
 
             if (this.item.actor) {
                 const remaining = itemData.activeDuration.remaining;

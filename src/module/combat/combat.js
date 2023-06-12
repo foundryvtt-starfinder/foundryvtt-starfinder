@@ -46,6 +46,14 @@ Vehicle has the following 3 phases: "Pilot Actions", "Chase Progress", and "Comb
 export class CombatSFRPG extends Combat {
     static HiddenTurn = 0;
 
+    /**
+     * The current initiative count of the encounter
+     */
+    get initiative() {
+        if (!this.started) return null;
+        return this.combatant?.initiative;
+    }
+
     _preCreate(data, options, user) {
         const update = {
             "flags.sfrpg.combatType": this.getCombatType(),
@@ -53,6 +61,7 @@ export class CombatSFRPG extends Combat {
         };
 
         this.updateSource(update);
+        return super.preCreate(data, options, user);
     }
 
     async begin() {
@@ -771,41 +780,40 @@ export class CombatSFRPG extends Combat {
             const worldTime = game.time.worldTime;
             const effectStart = effect.activeDuration.activationTime;
             const effectFinish = effect.activeDuration.activationEnd;
-            const targetActorId = effect.sourceActorId || effect.actorId;
+            const expiryInit = effect.activeDuration.expiryInit;
+            const targetActorId = (() => {
+                if (effect.sourceActorId === "parent") return effect.actorId;
+                // Turn closest to initiative to expire on
+                if (effect.sourceActorId === "init") return this.combatants.contents.sort(this._sortCombatants).find(c => c.initiative <= expiryInit).actorId;
+                else return effect.sourceActorId;
+            })();
 
             if (((worldTime >= effectFinish) && effect.enabled) // If effect has expired
                 || ((effectStart <= worldTime) && (effectFinish >= worldTime) && !effect.enabled)) { // If the current turn has gone back, and the effect has un-expired.
+                if (!eventData.isNewTurn) continue;
                 if (!eventData.combat.combatants.find(combatant => combatant.actorId === targetActorId)) {
                     effect.toggle(false);
                     continue;
                 }
-                switch (effect.activeDuration.endsOn) {
-                    case 'onTurnEnd':
-                        if (forward) {
-                            if (eventData.isNewTurn && (eventData.oldCombatant.actorId === targetActorId)) {
-                                effect.toggle(false);
-                            }
-                        } else {
-                            if (eventData.isNewTurn && (eventData.newCombatant.actorId === targetActorId)) {
-                                effect.toggle(false);
-                            }
-                        }
 
-                        break;
-                    case 'onTurnStart':
-                    default:
-                        if (forward) {
-                            if (eventData.isNewTurn && (eventData.newCombatant.actorId === targetActorId)) {
-                                effect.toggle(false);
-                            }
-                        } else {
-                            if (eventData.isNewTurn && (eventData.oldCombatant.actorId === targetActorId)) {
-                                effect.toggle(false);
-                            }
+                if (effect.activeDuration.expiryMode === "turn") {
+                    if (effect.activeDuration.endsOn === 'onTurnEnd') {
+                        if ((forward && eventData.oldCombatant.actorId === targetActorId) || (!forward && eventData.newCombatant.actorId === targetActorId)) {
+                            effect.toggle(false);
                         }
-
-                        break;
+                    // On turn start
+                    } else {
+                        if ((forward && eventData.newCombatant.actorId === targetActorId) || (!forward && eventData.oldCombatant.actorId === targetActorId)) {
+                            effect.toggle(false);
+                        }
+                    }
+                // Expire by initiative
+                } else {
+                    if ((forward && eventData.oldCombatant.initiative >= expiryInit && eventData.newCombatant.initiative <= expiryInit) || (!forward && eventData.newCombatant.initiative >= expiryInit && eventData.oldCombatant.initiative <= expiryInit)) {
+                        effect.toggle(false);
+                    }
                 }
+
             }
 
         }

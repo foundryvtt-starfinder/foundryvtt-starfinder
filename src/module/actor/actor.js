@@ -175,7 +175,10 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             if (item.effects instanceof Array) item.effects = null;
             else if (item.effects instanceof Map) item.effects.clear();
 
-            if (t === 'effect' && item.system.enabled) updates['system.activeDuration.activationTime'] = game.time.worldTime;
+            if (t === 'effect' && item.system.enabled) {
+                updates['system.activeDuration.activationTime'] = game.time.worldTime;
+                if (game.combat) updates['system.activeDuration.expiryInit'] = game.combat.initiative;
+            }
 
             item = mergeObject(item, updates);
         }
