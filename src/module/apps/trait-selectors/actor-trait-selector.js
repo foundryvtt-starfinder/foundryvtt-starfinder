@@ -24,18 +24,60 @@ export class ActorTraitSelectorSFRPG extends TraitSelectorSFRPG {
         const choices = duplicate(this.options.choices);
         // console.log(this, choices, traitData);
 
+        // define options that can't be chosen
+        const locked = this._getLockedTraits();
+
         for (const [k, v] of Object.entries(choices)) {
             choices[k] = {
                 label: v,
-                isSelected: traitData.value.includes(k)
+                isSelected: traitData.value.includes(k),
+                isLocked: Object.keys(locked).includes(k)
             };
         }
+
         return {
             choices: choices,
             custom: traitData.custom,
+            locked: locked,
             needsTextExtension: this.options.needsTextExtension,
             needsCustomField: this.options.needsCustomField
         };
+    }
+
+    /**
+     * Checks the parent actor for class items and makes options defined by them not toggleable
+     *
+     */
+    _getLockedTraits() {
+        const items = this.object.items;
+        const classes = [];
+        const locked = {};
+
+        // store the actor's class items
+        for (const item of items) {
+            if (item.type === "class") classes.push(item);
+        }
+
+        // Exclude the proficiencies defined by the class
+        for (const cls of classes) {
+            const classData = cls.system;
+
+            if (this.options.dataType === "weaponProficiencies") {
+                for (const [key, value] of Object.entries(classData.proficiencies.weapon)) {
+                    if (value) {
+                        locked[key] = value;
+                    }
+                }
+            } else if (this.options.dataType === "armorProficiencies") {
+                for (const [key, value] of Object.entries(classData.proficiencies.armor)) {
+                    if (value) {
+                        locked[key] = value;
+                    }
+                }
+            }
+        }
+
+        return locked;
     }
 
     /**

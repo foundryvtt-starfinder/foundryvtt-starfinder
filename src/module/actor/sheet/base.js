@@ -1114,6 +1114,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         const options = {
             location: event.currentTarget.dataset.location,
             title: event.currentTarget.dataset.title,
+            dataType: event.currentTarget.dataset.choices,
             choices: CONFIG.SFRPG[event.currentTarget.dataset.choices],
             format: event.currentTarget.dataset.format
         };

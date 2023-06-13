@@ -25,9 +25,6 @@ export class TraitSelectorSFRPG extends FormApplication {
     getData() {
         const dataLocation = this.options.location;
         const traitData = getProperty(this.object, dataLocation);
-        // if (typeof traitData.value === "string") {
-        //     traitData.value = this.constructor._backCompat(attr.value, this.options.choices);
-        // }
         return this._getTraitChoices(traitData);
     }
 

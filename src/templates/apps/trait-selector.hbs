@@ -3,13 +3,13 @@
     <div class="trait-header">
 
         {{!-- Selected Trait List --}}
-        <h3 style="text-align:center">Selected Options</h3>
+        <h3 style="text-align:center" data-tooltip="Some options may be fixed by character class(es).">Selected Options</h3>
         <ul class="trait-list selected">
             {{#each choices as |choice key|}}
             {{#if choice.isSelected}}
                 <li class="trait">
                     <label class="checkbox" {{#if choice.tooltip}}data-tooltip="<strong>{{choice.label}}</strong><br/>{{choice.tooltip}}"{{/if}}>
-                        <input type="checkbox" name="{{key}}" data-dtype="Boolean" {{checked choice.isSelected}}>
+                        <input type="checkbox" name="{{key}}" data-dtype="Boolean" {{#if choice.isLocked}}disabled=true{{/if}} {{checked choice.isSelected}}>
                         {{choice.label}}
                     </label>
 
