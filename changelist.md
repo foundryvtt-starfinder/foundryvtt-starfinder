@@ -1,4 +1,10 @@
 # v0.24.1 - V11 Compatibility
+This is a minor hotfix release for 0.24 to fix some issues labels on items not being localized properly.
+
+## Bugfixes
+- Perform global localization before documents are first prepared so labels can correctly be localised.
+
+# v0.24.1 - V11 Compatibility
 This is a minor hotfix release for 0.24 to fix some issues the LevelDB migration exposed.
 
 ## Bugfixes
