@@ -92,14 +92,16 @@ export default async function migrateWorld() {
 
                 if (worldSchema < SFRPGMigrationSchemas.THE_PROPERTIES_UPDATE) {
                     if (pack.metadata.type === "Actor") {
-                        await pack.updateAll(migrateCompendiumActor, { enforceTypes: false });
+                        const documents = await pack.getDocuments();
+                        for (const doc of documents) {
+                            await doc.update(await migrateActor(doc, worldSchema), { enforceTypes: false });
+                        }
                     } else if (pack.metadata.type === "Item") {
-                        await pack.updateAll(migrateCompendiumItem, { enforceTypes: false });
+                        const documents = await pack.getDocuments();
+                        for (const doc of documents) {
+                            await doc.update(await migrateItem(doc, worldSchema), { enforceTypes: false });
+                        }
                     }
-                }
-
-                if (worldSchema < SFRPGMigrationSchemas.THE_PROPERTIES_UPDATE) {
-                    console.log('hi', pack);
                 }
 
                 // Lock pack if it was locked.
@@ -127,6 +129,7 @@ const migrateItem = async function(item, schema) {
     if (schema < SFRPGMigrationSchemas.DAMAGE_TYPE_REFACTOR) _migrateDamageTypes(item, updateData);
     if (schema < SFRPGMigrationSchemas.THE_WEBP_UPDATE) _migrateDocumentIconToWebP(item, updateData);
     if (schema < SFRPGMigrationSchemas.THE_PROPERTIES_UPDATE) _migrateProperties(item, updateData);
+    console.log(updateData)
 
     return updateData;
 };
@@ -497,7 +500,7 @@ const _migrateDocumentIconToWebP = function(document, data) {
         }
 
         if (isDirty) {
-            data["data.combatTracker.visualization"] = newVisualization;
+            data["system.combatTracker.visualization"] = newVisualization;
         }
     }
 
