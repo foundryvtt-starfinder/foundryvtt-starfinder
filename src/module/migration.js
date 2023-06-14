@@ -13,15 +13,17 @@ const SFRPGMigrationSchemas = Object.freeze({
     THE_PROPERTIES_UPDATE: 0.010 // Updates the "properties" data for weapons to include nesting for variability such as in Explode (5ft)
 });
 
+// Allows for migration to be enabled and disabled while doing development
+const performMigrate = false;
+
 export default async function migrateWorld() {
     const systemVersion = game.system.version;
     const worldSchema = game.settings.get('sfrpg', 'worldSchemaVersion') ?? 0;
 
     ui.notifications.info(game.i18n.format("SFRPG.MigrationBeginingMigration", { systemVersion }), { permanent: true });
 
-    const performMigrate = false;
     if (!performMigrate) {
-        ui.notifications.info("Migration functions are currently disabled for testing. Remove this before release.", { permanent: true });
+        ui.notifications.warn("Migration functions are currently disabled for testing. Remove this before release.", { permanent: true });
     }
 
     if (performMigrate) {
@@ -129,7 +131,6 @@ const migrateItem = async function(item, schema) {
     if (schema < SFRPGMigrationSchemas.DAMAGE_TYPE_REFACTOR) _migrateDamageTypes(item, updateData);
     if (schema < SFRPGMigrationSchemas.THE_WEBP_UPDATE) _migrateDocumentIconToWebP(item, updateData);
     if (schema < SFRPGMigrationSchemas.THE_PROPERTIES_UPDATE) _migrateProperties(item, updateData);
-    console.log(updateData)
 
     return updateData;
 };

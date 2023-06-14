@@ -25,12 +25,27 @@
 
             {{!-- Weapon Properties --}}
             <div class="form-group stacked weapon-properties">
-                <label>{{ localize "SFRPG.Items.Weapon.Properties" }}</label>
-                {{#each config.weaponProperties as |name prop|}}
-                <label class="checkbox">
-                    <input type="checkbox" name="system.properties.{{prop}}" {{checked (lookup ../itemData.properties prop)}}/> {{ name }}
+                <label>
+                    {{ localize "SFRPG.Items.Weapon.Properties" }}&nbsp;
+                    <a class="trait-selector"
+                        data-tooltips="weaponPropertiesTooltips"
+                        data-choices="weaponProperties"
+                        data-format="itemProperties"
+                        data-location="system.properties"
+                        data-title="{{localize "SFRPG.Items.Weapon.Properties"}}">
+                        <i class="fas fa-edit"></i>
+                    </a>
                 </label>
-                {{/each}}
+                
+                <ul class="traits-list">
+                    {{#each itemData.properties as |property name|}}
+                        {{#if property.value}}
+                            <li class="tag {{name}}" data-tooltip='<strong>{{lookup ../config.weaponProperties name}}</strong><br/>{{lookup ../config.weaponPropertiesTooltips name}}'>
+                                {{lookup ../config.weaponProperties name}}
+                            </li>
+                        {{/if}}
+                    {{/each}}
+                </ul>
             </div>
 
             {{!-- Special Materials Template --}}
