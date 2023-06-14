@@ -19,9 +19,9 @@ export default async function migrateWorld() {
 
     ui.notifications.info(game.i18n.format("SFRPG.MigrationBeginingMigration", { systemVersion }), { permanent: true });
 
-    const continueMigrate = false;
+    const continueMigrate = true;
     if (!continueMigrate) {
-        ui.notifications.info("Migration functions are disabled for testing. Remove this before release.", { permanent: true });
+        ui.notifications.info("Migration functions are actually disabled for testing. Remove this before release.", { permanent: true });
     }
 
     if (continueMigrate) {
@@ -37,6 +37,7 @@ export default async function migrateWorld() {
             }
         }
 
+        /*
         for (const scene of game.scenes) {
             for (const token of scene.tokens) {
                 try {
@@ -49,7 +50,7 @@ export default async function migrateWorld() {
                     console.error(err);
                 }
             }
-        }
+        } */
 
         for (const item of game.items.contents) {
             try {
@@ -64,6 +65,7 @@ export default async function migrateWorld() {
             }
         }
 
+        /*
         for (const message of game.messages) {
             try {
                 const updateData = await migrateChatMessage(message, worldSchema);
@@ -88,7 +90,6 @@ export default async function migrateWorld() {
             }
         }
 
-        /*
         for (const pack of game.packs) {
             if (pack.collection.startsWith("world")) {
                 const wasLocked = pack.locked;
