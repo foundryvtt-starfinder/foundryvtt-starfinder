@@ -781,7 +781,7 @@ export class CombatSFRPG extends Combat {
             const worldTime = game.time.worldTime;
             const effectStart = duration.activationTime;
             const effectFinish = duration.activationEnd;
-            const expiryInit = duration.expiryInit;
+            const expiryInit = duration.expiryInit || 1000; // If anything goes wrong, expire at the start of the round
             const targetActorId = (() => {
                 if (effect.sourceActorId === "parent") return fromUuidSync(effect.actorUuid).id;
                 // Turn closest to initiative to expire on
