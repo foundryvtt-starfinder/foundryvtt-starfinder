@@ -259,25 +259,8 @@ Hooks.once('init', async function() {
     console.log(`Starfinder | [INIT] Done (operation took ${finishTime - initTime} ms)`);
 });
 
-Hooks.once("setup", function() {
-    console.log(`Starfinder | [SETUP] Setting up Starfinder System subsystems`);
-    const setupTime = (new Date()).getTime();
-
-    /**
-     * Manage counter classe feature from combat tracker
-     * Like Solarian Attenument / Vanguard Entropic Point and Soldat Ki Point
-    **/
-    console.log("Starfinder | [SETUP] Initializing counter management");
-    const counterManagement = new CounterManagement();
-    counterManagement.setup();
-
-    console.log("Starfinder | [SETUP] Initializing RPC system");
-    RPC.initialize();
-
-    console.log("Starfinder | [SETUP] Initializing remote inventory system");
-    initializeRemoteInventory();
-
-    console.log("Starfinder | [SETUP] Localizing global arrays");
+Hooks.once("i18nInit", () => {
+    console.log("Starfinder | [i18nInit] Localizing global arrays");
     const toLocalize = [
         "abilities",
         "abilityActivationTypes",
@@ -367,6 +350,25 @@ Hooks.once("setup", function() {
     }
 
     CONFIG.SFRPG.statusEffects.forEach(e => e.label = game.i18n.localize(e.label));
+});
+
+Hooks.once("setup", function() {
+    console.log(`Starfinder | [SETUP] Setting up Starfinder System subsystems`);
+    const setupTime = (new Date()).getTime();
+
+    /**
+     * Manage counter classe feature from combat tracker
+     * Like Solarian Attenument / Vanguard Entropic Point and Soldat Ki Point
+    **/
+    console.log("Starfinder | [SETUP] Initializing counter management");
+    const counterManagement = new CounterManagement();
+    counterManagement.setup();
+
+    console.log("Starfinder | [SETUP] Initializing RPC system");
+    RPC.initialize();
+
+    console.log("Starfinder | [SETUP] Initializing remote inventory system");
+    initializeRemoteInventory();
 
     console.log("Starfinder | [SETUP] Registering custom handlebars");
     setupHandlebars();

@@ -257,7 +257,7 @@ function sanitizeJSON(jsonInput) {
         delete item._stats;
         delete item.permission;
         delete item.ownership;
-        delete item.effects;
+        item.effects = [];
 
         delete item.flags?.exportSource;
         delete item.flags?.sourceId;
