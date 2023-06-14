@@ -200,7 +200,7 @@ export default class SFRPGTimedEffect {
         if (tokens.length === 0) return;
 
         const statusEffect = {
-            id: item.id,
+            id: item.name.slugify({replacement: "-", strict: true}),
             label: item.name,
             icon: item.img || 'icons/svg/item-bag.svg'
         };
