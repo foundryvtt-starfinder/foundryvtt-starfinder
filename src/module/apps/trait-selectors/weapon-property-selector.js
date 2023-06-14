@@ -48,21 +48,22 @@ export class WeaponPropertySelectorSFRPG extends TraitSelectorSFRPG {
      */
     _setTraitChoices(formData) {
 
+        // Expand the formData object
+        formData = foundry.utils.expandObject(formData);
+
         // get a list of valid choices and initialize array
         const validChoices = Object.keys(this.options.choices);
-        const selectedValues = {value: {}, extension: {}};
-        console.log(formData);
+        const selectedValues = duplicate(this.options.choices);
 
         // Ignoring options not in the list of choices
         // key is the specific language, proficiency, etc.
         // value is true or false, or the name of a custom trait
         for (const [key, value] of Object.entries(formData)) {
             if (validChoices.includes(key)) {
-                selectedValues[key] = {};
-                selectedValues[key].value = value;
-                selectedValues[key].extension = '';
+                selectedValues[key] = value;
             }
         }
+        console.log(selectedValues);
 
         // Build the updated data to pass back to the parent object
         const updateData = {

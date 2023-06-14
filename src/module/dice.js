@@ -640,7 +640,7 @@ export class DiceSFRPG {
                     try {
                         const props = [];
                         for (const [key, isEnabled] of Object.entries(itemContext.entity.system.properties)) {
-                            if (isEnabled) {
+                            if (isEnabled.value) {
                                 tags.push({tag: `weapon-properties ${key}`, text: SFRPG.weaponProperties[key]});
                                 props.push(key);
                             }

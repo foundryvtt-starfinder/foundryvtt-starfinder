@@ -46,7 +46,7 @@ export default async function migrateWorld() {
         }
     } */
 
-    console.log(game.items);
+    /* console.log(game.items);
     for (const item of game.items.contents) {
         try {
             const updateData = await migrateItem(item, worldSchema);
@@ -58,7 +58,7 @@ export default async function migrateWorld() {
         } catch (err) {
             console.error(err);
         }
-    }
+    } */
 
     /*
     for (const message of game.messages) {

@@ -10,12 +10,12 @@
             {{#if choice.isSelected}}
                 <li class="trait">
                     <label class="checkbox" {{#if choice.tooltip}}data-tooltip="<strong>{{choice.label}}</strong><br/>{{choice.tooltip}}"{{/if}}>
-                        <input type="checkbox" name="{{key}}" data-dtype="Boolean" {{#if choice.isLocked}}disabled=true{{/if}} {{checked choice.isSelected}}>
+                        <input type="checkbox" name="{{key}}.value" data-dtype="Boolean" {{#if choice.isLocked}}disabled=true{{/if}} {{checked choice.isSelected}}>
                         {{choice.label}}
                     </label>
 
                     {{#if ../needsTextExtension}}
-                        <input type="text">
+                        <input type="text" name="{{key}}.extension" value="{{choice.extension}}">
                     {{/if}}
                 </li>
             {{/if}}
@@ -52,7 +52,7 @@
             {{#unless choice.isSelected}}
                 <li class="trait">
                     <label class="checkbox" {{#if choice.tooltip}}data-tooltip="<strong>{{choice.label}}</strong><br/>{{choice.tooltip}}"{{/if}}>
-                        <input type="checkbox" name="{{key}}" data-dtype="Boolean" {{checked choice.isSelected}}>
+                        <input type="checkbox" name="{{key}}.value" data-dtype="Boolean" {{checked choice.isSelected}}>
                         {{choice.label}}
                     </label>
                 </li>
