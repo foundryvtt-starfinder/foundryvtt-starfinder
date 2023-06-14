@@ -302,6 +302,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         const item = this.document;
         const itemData = item.system;
 
+        // {!CHANGE!}
         if (item.type === "weapon") {
             props.push(...Object.entries(itemData.properties)
                 .filter(e => e[1] === true)

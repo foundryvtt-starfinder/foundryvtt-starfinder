@@ -24,11 +24,12 @@ export class WeaponPropertySelectorSFRPG extends TraitSelectorSFRPG {
         const choices = duplicate(this.options.choices);
         // console.log(this, choices, traitData);
 
-        for (const [key, value] of Object.entries(choices)) {
+        for (const [key, displayName] of Object.entries(choices)) {
             choices[key] = {
-                label: value,
+                label: displayName,
                 tooltip: this.options.tooltips[key],
-                isSelected: traitData[key]
+                isSelected: traitData[key]?.['value'],
+                extension: traitData[key]?.['extension']
             };
         }
 
@@ -49,14 +50,17 @@ export class WeaponPropertySelectorSFRPG extends TraitSelectorSFRPG {
 
         // get a list of valid choices and initialize array
         const validChoices = Object.keys(this.options.choices);
-        const selectedValues = {};
+        const selectedValues = {value: {}, extension: {}};
+        console.log(formData);
 
         // Ignoring options not in the list of choices
         // key is the specific language, proficiency, etc.
         // value is true or false, or the name of a custom trait
         for (const [key, value] of Object.entries(formData)) {
             if (validChoices.includes(key)) {
-                selectedValues[key] = value;
+                selectedValues[key] = {};
+                selectedValues[key].value = value;
+                selectedValues[key].extension = '';
             }
         }
 

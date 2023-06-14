@@ -63,10 +63,10 @@
                 </label>
                 
                 <ul class="traits-list">
-                    {{#each itemData.properties as |v k|}}
-                        {{#if v}}
-                            <li class="tag {{k}}" data-tooltip='<strong>{{lookup ../config.weaponProperties k}}</strong><br/>{{lookup ../config.weaponPropertiesTooltips k}}'>
-                                {{lookup ../config.weaponProperties k}}
+                    {{#each itemData.properties as |property name|}}
+                        {{#if property.value}}
+                            <li class="tag {{name}}" data-tooltip='<strong>{{lookup ../config.weaponProperties name}}</strong><br/>{{lookup ../config.weaponPropertiesTooltips name}}'>
+                                {{lookup ../config.weaponProperties name}}
                             </li>
                         {{/if}}
                     {{/each}}

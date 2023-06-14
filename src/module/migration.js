@@ -9,7 +9,8 @@ const SFRPGMigrationSchemas = Object.freeze({
     DAMAGE_TYPE_REFACTOR: 0.005,
     DAMAGE_REDUCTION_REFACTOR: 0.006,
     THE_WEBP_UPDATE: 0.008, // We changed all icons from .png to .webp
-    THE_GUNNERY_UPDATE: 0.009 // Since Gunnery is now a selectable skill for NPC starships, migrate an NPC gunner's ranks in Piloting (the previous hacky solution) to their modifier in Gunnery.
+    THE_GUNNERY_UPDATE: 0.009, // Since Gunnery is now a selectable skill for NPC starships, migrate an NPC gunner's ranks in Piloting (the previous hacky solution) to their modifier in Gunnery.
+    THE_PROPERTIES_UPDATE: 0.010 // Updates the "properties" data for weapons to include nesting for variability such as in Explode (5ft)
 });
 
 export default async function migrateWorld() {
@@ -18,6 +19,7 @@ export default async function migrateWorld() {
 
     ui.notifications.info(game.i18n.format("SFRPG.MigrationBeginingMigration", { systemVersion }), { permanent: true });
 
+    /*
     for (const actor of game.actors.contents) {
         try {
             const updateData = await migrateActor(actor, worldSchema);
@@ -42,20 +44,23 @@ export default async function migrateWorld() {
                 console.error(err);
             }
         }
-    }
+    } */
 
+    console.log(game.items);
     for (const item of game.items.contents) {
         try {
             const updateData = await migrateItem(item, worldSchema);
             if (!foundry.utils.isEmpty(updateData)) {
                 console.log(`Starfinder | Migrating Item entity ${item.name}`);
                 await item.update(updateData, { enforceTypes: false });
+                console.log(item);
             }
         } catch (err) {
             console.error(err);
         }
     }
 
+    /*
     for (const message of game.messages) {
         try {
             const updateData = await migrateChatMessage(message, worldSchema);
@@ -101,13 +106,13 @@ export default async function migrateWorld() {
                 pack.configure({locked: true});
             }
         }
-    }
+    } */
 
     const systemSchema = Number(game.system.data.flags.sfrpg.schema);
-    await game.settings.set('sfrpg', 'worldSchemaVersion', systemSchema);
+    // await game.settings.set('sfrpg', 'worldSchemaVersion', systemSchema);
     ui.notifications.info(game.i18n.format("SFRPG.MigrationEndMigration", { systemVersion }), { permanent: true });
 
-    if (worldSchema < SFRPGMigrationSchemas.THE_GUNNERY_UPDATE) {
+    if (worldSchema < SFRPGMigrationSchemas.THE_PROPERTIES_UPDATE) {
         return true;
     }
 
@@ -116,10 +121,17 @@ export default async function migrateWorld() {
 
 const migrateItem = async function(item, schema) {
     const updateData = {};
-    const itemData = item.data;
+    let itemData = {};
+
+    if (schema < SFRPGMigrationSchemas.THE_GUNNERY_UPDATE) {
+        itemData = item.data;
+    } else {
+        itemData = item;
+    }
 
     if (schema < SFRPGMigrationSchemas.DAMAGE_TYPE_REFACTOR) _migrateDamageTypes(itemData, updateData);
     if (schema < SFRPGMigrationSchemas.THE_WEBP_UPDATE) _migrateDocumentIconToWebP(itemData, updateData);
+    if (schema < SFRPGMigrationSchemas.THE_PROPERTIES_UPDATE) _migrateProperties(itemData, updateData);
 
     return updateData;
 };
@@ -534,6 +546,22 @@ const _migrateStarshipGunnerySkill = function(actorData, updateData) {
     if (pilRanks) {
         updateData['data.crew.npcData.gunner.skills.gun.mod'] = pilRanks;
         updateData['data.crew.npcData.gunner.skills.-=pil'] = null;
+    }
+
+    return updateData;
+};
+
+// ================== 0.010: Weapon Properties ==================
+const _migrateProperties = function(itemData, updateData) {
+    const properties = itemData.system.properties;
+    if (properties) {
+        console.log(`${itemData.name} has properties to migrate.`);
+        for (const [key, value] of Object.entries(properties)) {
+            updateData[`system.properties.${key}.value`] = value;
+            updateData[`system.properties.${key}.extension`] = '';
+        }
+    } else {
+        console.log(`${itemData.name} is fine.`);
     }
 
     return updateData;
