@@ -19,98 +19,111 @@ export default async function migrateWorld() {
 
     ui.notifications.info(game.i18n.format("SFRPG.MigrationBeginingMigration", { systemVersion }), { permanent: true });
 
-    /*
-    for (const actor of game.actors.contents) {
-        try {
-            const updateData = await migrateActor(actor, worldSchema);
-            if (!foundry.utils.isEmpty(updateData)) {
-                console.log(`Starfinder | Migrating Actor entity ${actor.name}`);
-                await actor.update(updateData, { enforceTypes: false });
-            }
-        } catch (err) {
-            console.error(err);
-        }
+    const continueMigrate = false;
+    if (!continueMigrate) {
+        ui.notifications.info("Migration functions are disabled for testing. Remove this before release.", { permanent: true });
     }
 
-    for (const scene of game.scenes) {
-        for (const token of scene.tokens) {
+    if (continueMigrate) {
+        for (const actor of game.actors.contents) {
             try {
-                const tokenUpdateData = await migrateToken(token, worldSchema);
-                if (!foundry.utils.isEmpty(tokenUpdateData)) {
-                    console.log(`Starfinder | Migrating Token entity ${token.name}`);
-                    await token.update(tokenUpdateData, { enforceTypes: false });
+                const updateData = await migrateActor(actor, worldSchema);
+                if (!foundry.utils.isEmpty(updateData)) {
+                    console.log(`Starfinder | Migrating Actor entity ${actor.name}`);
+                    await actor.update(updateData, { enforceTypes: false });
                 }
             } catch (err) {
                 console.error(err);
             }
         }
-    } */
 
-    /* console.log(game.items);
-    for (const item of game.items.contents) {
-        try {
-            const updateData = await migrateItem(item, worldSchema);
-            if (!foundry.utils.isEmpty(updateData)) {
-                console.log(`Starfinder | Migrating Item entity ${item.name}`);
-                await item.update(updateData, { enforceTypes: false });
-                console.log(item);
-            }
-        } catch (err) {
-            console.error(err);
-        }
-    } */
-
-    /*
-    for (const message of game.messages) {
-        try {
-            const updateData = await migrateChatMessage(message, worldSchema);
-            if (!foundry.utils.isEmpty(updateData)) {
-                console.log(`Starfinder | Migrating Chat message entity ${message.id}`);
-                await message.update(updateData, { enforceTypes: false });
-            }
-        } catch (err) {
-            console.error(err);
-        }
-    }
-
-    for (const macro of game.macros) {
-        try {
-            const updateData = await migrateMacro(macro, worldSchema);
-            if (!foundry.utils.isEmpty(updateData)) {
-                console.log(`Starfinder | Migrating Macro entity ${macro.name}`);
-                await macro.update(updateData, { enforceTypes: false });
-            }
-        } catch (err) {
-            console.error(err);
-        }
-    }
-
-    for (const pack of game.packs) {
-        if (pack.collection.startsWith("world")) {
-            const wasLocked = pack.locked;
-            // Unlock pack if needed
-            if (pack.locked) {
-                pack.configure({locked: false});
-            }
-
-            if (worldSchema < SFRPGMigrationSchemas.THE_WEBP_UPDATE) {
-                if (pack.documentName === "Actor") {
-                    await pack.updateAll(migrateCompendiumActorToWebP);
-                } else if (pack.documentName === "Item") {
-                    await pack.updateAll(migrateCompendiumItemToWebP);
+        for (const scene of game.scenes) {
+            for (const token of scene.tokens) {
+                try {
+                    const tokenUpdateData = await migrateToken(token, worldSchema);
+                    if (!foundry.utils.isEmpty(tokenUpdateData)) {
+                        console.log(`Starfinder | Migrating Token entity ${token.name}`);
+                        await token.update(tokenUpdateData, { enforceTypes: false });
+                    }
+                } catch (err) {
+                    console.error(err);
                 }
             }
+        }
 
-            // Lock pack if it was locked.
-            if (wasLocked) {
-                pack.configure({locked: true});
+        for (const item of game.items.contents) {
+            try {
+                const updateData = await migrateItem(item, worldSchema);
+                if (!foundry.utils.isEmpty(updateData)) {
+                    console.log(`Starfinder | Migrating Item entity ${item.name}`);
+                    await item.update(updateData, { enforceTypes: false });
+                    console.log(item);
+                }
+            } catch (err) {
+                console.error(err);
             }
         }
-    } */
 
-    const systemSchema = Number(game.system.data.flags.sfrpg.schema);
-    // await game.settings.set('sfrpg', 'worldSchemaVersion', systemSchema);
-    ui.notifications.info(game.i18n.format("SFRPG.MigrationEndMigration", { systemVersion }), { permanent: true });
+        for (const message of game.messages) {
+            try {
+                const updateData = await migrateChatMessage(message, worldSchema);
+                if (!foundry.utils.isEmpty(updateData)) {
+                    console.log(`Starfinder | Migrating Chat message entity ${message.id}`);
+                    await message.update(updateData, { enforceTypes: false });
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        for (const macro of game.macros) {
+            try {
+                const updateData = await migrateMacro(macro, worldSchema);
+                if (!foundry.utils.isEmpty(updateData)) {
+                    console.log(`Starfinder | Migrating Macro entity ${macro.name}`);
+                    await macro.update(updateData, { enforceTypes: false });
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        /*
+        for (const pack of game.packs) {
+            if (pack.collection.startsWith("world")) {
+                const wasLocked = pack.locked;
+                // Unlock pack if needed
+                if (pack.locked) {
+                    pack.configure({locked: false});
+                }
+
+                if (worldSchema < SFRPGMigrationSchemas.THE_WEBP_UPDATE) {
+                    if (pack.documentName === "Actor") {
+                        await pack.updateAll(migrateCompendiumActorToWebP);
+                    } else if (pack.documentName === "Item") {
+                        await pack.updateAll(migrateCompendiumItemToWebP);
+                    }
+                }
+
+                if (worldSchema < SFRPGMigrationSchemas.THE_PROPERTIES_UPDATE) {
+                    if (pack.documentName === "Actor") {
+                        await pack.updateAll(migrateCompendiumActorToWebP);
+                    } else if (pack.documentName === "Item") {
+                        await pack.updateAll(migrateCompendiumItemToWebP);
+                    }
+                }
+
+                // Lock pack if it was locked.
+                if (wasLocked) {
+                    pack.configure({locked: true});
+                }
+            }
+        } */
+
+        const systemSchema = Number(game.system.data.flags.sfrpg.schema);
+        await game.settings.set('sfrpg', 'worldSchemaVersion', systemSchema);
+        ui.notifications.info(game.i18n.format("SFRPG.MigrationEndMigration", { systemVersion }), { permanent: true });
+    }
 
     if (worldSchema < SFRPGMigrationSchemas.THE_PROPERTIES_UPDATE) {
         return true;
