@@ -306,6 +306,9 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         // Actor resource update
         html.find('.actor-resource-base-input').change(this._onActorResourceChanged.bind(this));
+
+        // Effect Toggling
+        html.find('.effect-toggle').on('click', this._onToggleEffect.bind(this));
     }
 
     /** @override */

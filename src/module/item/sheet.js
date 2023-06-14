@@ -64,13 +64,13 @@ export class ItemSheetSFRPG extends ItemSheet {
     }
 
     async render(force, options) {
-        if (this.item.type === "effect") game.combat.apps[this.appId] = this;
+        if (game.combat && this.item.type === "effect") game.combat.apps[this.appId] = this;
 
         await super.render(force, options);
     }
 
     async close(options) {
-        delete game.combat.apps[this.appId];
+        delete game.combat?.apps[this.appId];
 
         await super.close(options);
     }
@@ -228,9 +228,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         }
 
         if (data.item.type === "effect") {
-            const itemData = data.item.system;
 
-            data.sourceActorChoices = {};
             data.remainingDuration = (() => {
                 if (itemData.activeDuration.unit === "permanent") return CONFIG.SFRPG.effectDurationTypes[itemData.activeDuration.unit];
                 else return `${itemData.activeDuration.value} ${CONFIG.SFRPG.effectDurationTypes[itemData.activeDuration.unit]}`;
@@ -238,20 +236,20 @@ export class ItemSheetSFRPG extends ItemSheet {
 
             if (this.item.actor) {
                 const remaining = itemData.activeDuration.remaining;
+                const durFrom = SFRPG.effectDurationFrom;
+                const durTypes = SFRPG.effectDurationTypes;
 
-                if (remaining >= SFRPG.effectDurationFrom.day)
-                    data.remainingDuration = `${Math.floor(remaining / SFRPG.effectDurationFrom.day)} ${SFRPG.effectDurationTypes.day}`;
-                else if (remaining >= SFRPG.effectDurationFrom.hour)
-                    data.remainingDuration = `${Math.floor(remaining / SFRPG.effectDurationFrom.hour)} ${SFRPG.effectDurationTypes.hour}`;
-                else if (remaining >= SFRPG.effectDurationFrom.minute)
-                    data.remainingDuration = `${Math.floor(remaining / SFRPG.effectDurationFrom.minute)} ${SFRPG.effectDurationTypes.minute}`;
-                else if (remaining >= SFRPG.effectDurationFrom.round)
-                    data.remainingDuration = `${Math.floor(remaining / SFRPG.effectDurationFrom.round)} ${SFRPG.effectDurationTypes.round}`;
-                else if (itemData.activeDuration.unit === 'permanent')
-                    data.remainingDuration = 'Permanent';
+                if (remaining >= durFrom.day)
+                    data.remainingDuration = `${Math.floor(remaining / durFrom.day)} ${durTypes.day}`;
+                else if (remaining >= durFrom.hour)
+                    data.remainingDuration = `${Math.floor(remaining / durFrom.hour)} ${durTypes.hour}`;
+                else if (remaining >= durFrom.minute)
+                    data.remainingDuration = `${Math.floor(remaining / durFrom.minute)} ${durTypes.minute}`;
+                else if (remaining >= durFrom.round)
+                    data.remainingDuration = `${Math.floor(remaining / durFrom.round)} ${durTypes.round}`;
                 else if (remaining <= 0) {
                     if (itemData.enabled) {
-                        data.remainingDuration = `< 1 ${SFRPG.effectDurationTypes.round}`;
+                        data.remainingDuration = `< 1 ${durTypes.round}`;
                     } else {
                         data.remainingDuration = game.i18n.localize("SFRPG.Effect.Expired");
                         data.expired = true;
@@ -260,8 +258,10 @@ export class ItemSheetSFRPG extends ItemSheet {
                 }
             }
 
-            if (game.combat) {
+            data.sourceActorChoices = {};
+            if (game.combat?.started) {
                 for (const combatant of game.combat.combatants) {
+                    if (combatant.actorId === data.item?.actor?.id) continue;
                     data.sourceActorChoices[combatant.actorId] = combatant.name;
                 }
             } else {
@@ -278,22 +278,23 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.hasCapacity = this.item.hasCapacity();
 
         // Enrich text editors
-        const rollData = RollContext.createItemRollContext(this.item, this.actor).getRollData();
+        const async = true;
+        const rollData = RollContext.createItemRollContext(this.item, this.actor).getRollData() ?? {};
         const secrets = this.item.isOwner;
 
         data.enrichedDescription = await TextEditor.enrichHTML(this.item.system?.description?.value, {
-            async: true,
-            rollData: rollData ?? {},
+            async,
+            rollData,
             secrets
         });
         data.enrichedShortDescription = await TextEditor.enrichHTML(this.item.system?.description?.short, {
-            async: true,
-            rollData: rollData ?? {},
+            async,
+            rollData,
             secrets
         });
         data.enrichedGMNotes = await TextEditor.enrichHTML(this.item.system?.description?.gmNotes, {
-            async: true,
-            rollData: rollData ?? {},
+            async,
+            rollData,
             secrets
         });
 

@@ -172,12 +172,10 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
                 } else {
                     arr[1].push(item); // other
                 }
+            } else if (item.type === "effect") {
+                arr[2].push(item); // conditionItems
             } else if (item.type === "feat") {
-                if ((item.system.requirements?.toLowerCase() || "") === "condition") {
-                    arr[2].push(item); // conditionItems
-                } else {
-                    arr[1].push(item); // other
-                }
+                arr[1].push(item); // other
                 item.isFeat = true;
             } else if (item.type === "actorResource") arr[4].push(item); // actorResources
             else arr[1].push(item); // other

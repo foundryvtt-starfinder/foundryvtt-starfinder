@@ -279,7 +279,6 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         html.find('.modifier-edit').on('click', this._onModifierEdit.bind(this));
         html.find('.modifier-delete').on('click', this._onModifierDelete.bind(this));
         html.find('.modifier-toggle').on('click', this._onToggleModifierEnabled.bind(this));
-        html.find('.effect-toggle').on('click', this._onToggleEffect.bind(this));
         html.find('.player-class-level-up').on('click', this._onLevelUp.bind(this));
     }
 

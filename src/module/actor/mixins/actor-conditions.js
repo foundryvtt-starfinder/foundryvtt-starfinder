@@ -78,9 +78,9 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
             if (!conditionItem) {
                 const compendium = game.packs.find(element => element.title.includes("Conditions"));
                 if (compendium) {
-                    await compendium.getIndex();
+                    const index = await compendium.getIndex();
 
-                    const entry = compendium.index.find(e => e.name.toLowerCase() === conditionName.toLowerCase());
+                    const entry = index.find(e => e.name.toLowerCase() === conditionName.toLowerCase());
                     if (entry) {
                         const entity = await compendium.getDocument(entry._id);
                         const itemData = duplicate(entity);
@@ -89,7 +89,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
                         promise.then((createdItems) => {
                             if (createdItems && createdItems.length > 0) {
                                 this._updateActorCondition(conditionName, true).then(() => {
-                                    Hooks.callAll("onActorSetCondition", {actor: this, item: createdItems[0], conditionName: conditionName, enabled: enabled});
+                                    Hooks.callAll("onActorSetCondition", {actor: this, item: createdItems[0], conditionName, enabled});
                                 });
                             }
                         });

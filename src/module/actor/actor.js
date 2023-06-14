@@ -158,79 +158,6 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     }
 
     /**
-     * Apply some default for items on NPCs, and record the current world time of
-     */
-    _preCreateDescendantDocuments(parent, collection, data, options, userId) {
-        for (let item of data) {
-            const updates = {};
-            const t = item.type;
-
-            if (!this.hasPlayerOwner) {
-                if (t === "weapon") updates['system.proficient'] = true;
-                if (["weapon", "equipment"].includes(t)) updates['system.equipped'] = true;
-                if (t === "spell") updates['system.prepared'] = true;
-            }
-
-            if (item.effects instanceof Array) item.effects = null;
-            else if (item.effects instanceof Map) item.effects.clear();
-
-            if (t === 'effect' && item.system.enabled) {
-                updates['system.activeDuration.activationTime'] = game.time.worldTime;
-                if (game.combat) updates['system.activeDuration.expiryInit'] = game.combat.initiative;
-            }
-
-            item = mergeObject(item, updates);
-        }
-
-        super._preCreateDescendantDocuments(parent, collection, data, options, userId);
-
-    }
-
-    /**
-     * Toggle a status icon for created effects
-     */
-    async _onCreateDescendantDocuments(parent, collection, documents, data, options, userId) {
-        for (const item of documents) {
-            const itemData = item.system;
-
-            // Copy code from SFRPGTimedEffect.toggleIcon because the instance doesn't exist yet.
-            if (item.type === 'effect' && itemData.showOnToken && itemData.enabled) {
-                const tokens = item.actor.getActiveTokens(true);
-                if (tokens.length === 0) return;
-
-                const statusEffect = {
-                    id: item._id,
-                    label: item.name,
-                    icon: item.img || 'icons/svg/item-bag.svg'
-                };
-                for (const token of tokens) {
-                    token.toggleEffect(statusEffect, {active: itemData.enabled, overlay: false});
-                }
-
-            }
-        }
-
-        super._onCreateDescendantDocuments(parent, collection, documents, data, options, userId);
-    }
-
-    /**
-     * Delete item's corresponding timedEffect objects
-     */
-    _onDeleteDescendantDocuments(parent, collection, documents, data, options, userId) {
-
-        for (const item of documents) {
-            if (item.type === 'effect') {
-                const effect = game.sfrpg.timedEffects.get(item.uuid);
-                if (!effect) continue;
-
-                // Need to pass the item since the item has already been deleted from the server
-                effect.delete(item);
-            }
-        }
-        return super._onDeleteDescendantDocuments(parent, collection, documents, data, options, userId);
-    }
-
-    /**
      * Extend preCreate to apply some defaults to newly created characters
      * See the base Actor class for API documentation of this method
      *
@@ -304,6 +231,66 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     _onUpdate(data, options, userId) {
         super._onUpdate(data, options, userId);
         this.floatingHpOnUpdate(this, data, options, userId);
+    }
+
+    /**
+     * Delete any of corresponding timedEffect objects of the actor's items.
+     */
+    _onDelete(options, userId) {
+        for (const item of this.items) {
+            if (item.type === "effect") {
+                const effect = game.sfrpg.timedEffects.get(item.uuid);
+                if (!effect) continue;
+
+                // Need to pass the item since the item has already been deleted from the server
+                effect.delete(item);
+            }
+
+        }
+
+        return super._onDelete(options, userId);
+    }
+
+    /**
+     * Toggle a status icon for created effects
+     */
+    async _onCreateDescendantDocuments(parent, collection, documents, data, options, userId) {
+        for (const item of documents) {
+            const itemData = item.system;
+
+            if (item.type === "effect" && itemData.showOnToken) {
+                const tokens = this.getActiveTokens(true);
+                if (tokens.length === 0) return;
+
+                const statusEffect = {
+                    id: item.id,
+                    label: item.name,
+                    icon: item.img || 'icons/svg/item-bag.svg'
+                };
+                for (const token of tokens) {
+                    token.toggleEffect(statusEffect, {active: itemData.enabled, overlay: false});
+                }
+            }
+        }
+
+        super._onCreateDescendantDocuments(parent, collection, documents, data, options, userId);
+    }
+
+    /**
+     * Delete item's corresponding timedEffect objects
+     */
+    _onDeleteDescendantDocuments(parent, collection, documents, data, options, userId) {
+        for (const item of documents) {
+            if (item.type === 'effect') {
+                const effect = game.sfrpg.timedEffects.get(item.uuid);
+                if (!effect) continue;
+
+                // Need to pass the item since the item has already been deleted from the server
+                effect.delete(item);
+            }
+        }
+
+        return super._onDeleteDescendantDocuments(parent, collection, documents, data, options, userId);
     }
 
     async useSpell(item, { configureDialog = true } = {}) {

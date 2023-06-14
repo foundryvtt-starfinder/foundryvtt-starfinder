@@ -16,8 +16,8 @@ export default class SFRPGTimedEffect {
      * @param {Object}  data.activeDuration an object that contains the information on how long this effect lasts and when it was activated.
      */
     constructor({
-        itemId = '',
-        actorId = '',
+        itemUuid = '',
+        actorUuid = '',
         uuid = '',
         name = '',
         type = '', // this is for later use of different effect types
@@ -37,8 +37,8 @@ export default class SFRPGTimedEffect {
             endsOn: ''
         }
     }) {
-        this.itemId = itemId;
-        this.actorId = actorId;
+        this.itemUuid = itemUuid;
+        this.actorUuid = actorUuid;
         this.uuid = uuid;
         this.name = name;
         this.type = type;
@@ -51,16 +51,16 @@ export default class SFRPGTimedEffect {
     }
 
     get actor() {
-        return game.actors.get(this.actorId);
+        return fromUuidSync(this.actorUuid);
     }
 
     get item() {
-        return this.actor.items.get(this.itemId);
+        return fromUuidSync(this.itemUuid);
     }
 
     update({
-        itemId,
-        actorId,
+        itemUuid,
+        actorUuid,
         uuid,
         name,
         type,
@@ -71,8 +71,8 @@ export default class SFRPGTimedEffect {
         notes,
         activeDuration
     }) {
-        this.itemId = itemId ?? this.itemId;
-        this.actorId = actorId ?? this.actorId;
+        this.itemId = itemUuid ?? this.itemUuid;
+        this.actorId = actorUuid ?? this.actorUuid;
         this.uuid = uuid ?? this.uuid;
         this.name = name ?? this.name;
         this.type = type ?? this.type;
@@ -149,11 +149,11 @@ export default class SFRPGTimedEffect {
      * @param {ItemSFRPG} item An item to pass to toggleIcon, in case it is called during a delete workflow.
      */
     delete(item = null) {
-        const actor = game.actors.get(this.actorId);
+        const actor = this.actor;
 
         // Delete from Maps
         game.sfrpg.timedEffects.delete(this.uuid);
-        actor.system.timedEffects.delete(this.uuid);
+        if (actor) actor.system.timedEffects.delete(this.uuid);
 
         if (this.showOnToken) this.toggleIcon(false, item);
 
@@ -200,7 +200,7 @@ export default class SFRPGTimedEffect {
         if (tokens.length === 0) return;
 
         const statusEffect = {
-            id: item._id,
+            id: item.id,
             label: item.name,
             icon: item.img || 'icons/svg/item-bag.svg'
         };

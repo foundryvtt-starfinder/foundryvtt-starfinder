@@ -2,32 +2,33 @@ import SFRPGTimedEffect from "../../../timedEffect/timedEffect.js";
 
 export default function(engine) {
     engine.closures.add('calculateTimedEffects', (fact, context) => {
-        const item = fact.item;
+        const { item, itemData } = fact;
         const actor = fact.owner.actor;
         if (!actor || item.type !== "effect") return fact;
 
         const effectData = {
-            itemId: item.id,
-            actorId: item.actor.id,
+            itemUuid: item.uuid,
+            actorUuid: item.actor.uuid,
             uuid: item.uuid,
             name: item.name,
-            type: item.system.type,
-            enabled: item.system.enabled,
-            sourceActorId: item.system.sourceActorId,
-            showOnToken: item.system.showOnToken,
-            modifiers: item.system.modifiers,
-            notes: item.system.description.value,
-            activeDuration: item.system.activeDuration
+            type: itemData.type,
+            enabled: itemData.enabled,
+            sourceActorId: itemData.sourceActorId,
+            showOnToken: itemData.showOnToken,
+            modifiers: itemData.modifiers,
+            notes: itemData.description.value,
+            activeDuration: itemData.activeDuration
         };
 
-        effectData.activeDuration.activationEnd = effectData.activeDuration.activationTime + (effectData.activeDuration.value * CONFIG.SFRPG.effectDurationFrom[effectData.activeDuration.unit]);
-        effectData.activeDuration.remaining = effectData.activeDuration.activationEnd - game.time.worldTime;
+        const duration = effectData.activeDuration;
+        duration.activationEnd = duration.activationTime + (duration.value * CONFIG.SFRPG.effectDurationFrom[duration.unit]);
+        duration.remaining = duration.activationEnd - game.time.worldTime;
 
         const effect = new SFRPGTimedEffect(effectData);
 
-        // add to actor effects
+        // Add to actor effects
         actor.system.timedEffects.set(effect.uuid, effect);
-        // register effect to global effect map
+        // Register effect to global effect map
         game.sfrpg.timedEffects.set(effect.uuid, effect);
 
         return fact;

@@ -775,16 +775,17 @@ export class CombatSFRPG extends Combat {
         const forward = eventData.direction > 0;
 
         for (const effect of timedEffects.values()) {
-            if (effect.activeDuration.unit === 'permanent') continue;
+            const duration = effect.activeDuration;
+            if (duration.unit === 'permanent') continue;
 
             const worldTime = game.time.worldTime;
-            const effectStart = effect.activeDuration.activationTime;
-            const effectFinish = effect.activeDuration.activationEnd;
-            const expiryInit = effect.activeDuration.expiryInit;
+            const effectStart = duration.activationTime;
+            const effectFinish = duration.activationEnd;
+            const expiryInit = duration.expiryInit;
             const targetActorId = (() => {
-                if (effect.sourceActorId === "parent") return effect.actorId;
+                if (effect.sourceActorId === "parent") return fromUuidSync(effect.actorUuid).id;
                 // Turn closest to initiative to expire on
-                if (effect.sourceActorId === "init") return this.combatants.contents.sort(this._sortCombatants).find(c => c.initiative <= expiryInit).actorId;
+                else if (effect.sourceActorId === "init") return this.combatants.contents.sort(this._sortCombatants).find(c => c.initiative <= expiryInit).actorId;
                 else return effect.sourceActorId;
             })();
 
@@ -796,8 +797,8 @@ export class CombatSFRPG extends Combat {
                     continue;
                 }
 
-                if (effect.activeDuration.expiryMode === "turn") {
-                    if (effect.activeDuration.endsOn === 'onTurnEnd') {
+                if (duration.expiryMode === "turn") {
+                    if (duration.endsOn === 'onTurnEnd') {
                         if ((forward && eventData.oldCombatant.actorId === targetActorId) || (!forward && eventData.newCombatant.actorId === targetActorId)) {
                             effect.toggle(false);
                         }
