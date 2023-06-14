@@ -19,12 +19,12 @@ export default async function migrateWorld() {
 
     ui.notifications.info(game.i18n.format("SFRPG.MigrationBeginingMigration", { systemVersion }), { permanent: true });
 
-    const continueMigrate = true;
-    if (!continueMigrate) {
+    const performMigrate = false;
+    if (!performMigrate) {
         ui.notifications.info("Migration functions are currently disabled for testing. Remove this before release.", { permanent: true });
     }
 
-    if (continueMigrate) {
+    if (performMigrate) {
         for (const actor of game.actors) {
             try {
                 const updateData = await migrateActor(actor, worldSchema);
