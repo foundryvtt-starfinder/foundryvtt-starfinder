@@ -237,7 +237,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Events for when an item is created on an actor
         if (this.actor) {
-            if (!["npc", "npc2"].includes(this.actor.type)) {
+            if (["npc", "npc2"].includes(this.actor.type)) {
                 if (t === "weapon") updates['system.proficient'] = true;
                 if (["weapon", "equipment"].includes(t)) updates['system.equipped'] = true;
                 if (t === "spell") updates['system.prepared'] = true;
