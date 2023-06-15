@@ -56,7 +56,7 @@ export async function addItemToActorAsync(targetActor, itemToAdd, quantity, targ
     }
 
     if (desiredParent) {
-        let newContents = duplicate(desiredParent.system.container.contents || []);
+        const newContents = duplicate(desiredParent.system.container.contents || []);
         newContents.push({id: addedItem._id, index: targetItemStorageIndex || 0});
         await targetActor.updateItem(desiredParent._id, {"data.container.contents": newContents});
     }
@@ -133,7 +133,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
         if (quantity < itemQuantity) {
             await sourceActor.updateItem(itemToMove.id, {"quantity": itemQuantity - quantity});
 
-            let newItemData = duplicate(itemToMove);
+            const newItemData = duplicate(itemToMove);
             delete newItemData.id;
             newItemData.system.quantity = quantity;
 
@@ -164,7 +164,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
 
                 return targetItem;
             } else {
-                let targetsParent = targetActor.findItem(x => x.system.container?.contents && x.system.container.contents.find( y => y.id === targetItem.id));
+                const targetsParent = targetActor.findItem(x => x.system.container?.contents && x.system.container.contents.find( y => y.id === targetItem.id));
                 if (targetsParent) {
                     if (!wouldCreateParentCycle(itemToMove, targetsParent, targetActor)) {
                         if (acceptsItem(targetsParent, itemToMove, targetActor)) {
@@ -178,17 +178,17 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
             }
         }
 
-        let currentParent = targetActor.findItem(x => x.system.container?.contents && x.system.container.contents.find(y => y.id === itemToMove.id));
+        const currentParent = targetActor.findItem(x => x.system.container?.contents && x.system.container.contents.find(y => y.id === itemToMove.id));
 
         if (desiredParent !== currentParent) {
-            let bulkUpdates = [];
+            const bulkUpdates = [];
             if (currentParent) {
-                let newContents = currentParent.system.container.contents.filter(x => x.id !== itemToMove.id);
+                const newContents = currentParent.system.container.contents.filter(x => x.id !== itemToMove.id);
                 bulkUpdates.push({_id: currentParent.id, "system.container.contents": newContents});
             }
 
             if (desiredParent) {
-                let newContents = duplicate(desiredParent.system.container?.contents || []);
+                const newContents = duplicate(desiredParent.system.container?.contents || []);
                 newContents.push({id: itemToMove.id, index: desiredStorageIndex || 0});
                 bulkUpdates.push({_id: desiredParent.id, "system.container.contents": newContents});
             }
@@ -317,7 +317,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
                 desiredParent = targetItem;
                 desiredStorageIndex = targetItemStorageIndex;
             } else {
-                let targetsParent = targetActor.findItem(x => x.system.container?.contents && x.system.container.contents.find( y => y.id === targetItem._id));
+                const targetsParent = targetActor.findItem(x => x.system.container?.contents && x.system.container.contents.find( y => y.id === targetItem._id));
                 if (targetsParent) {
                     if (!wouldCreateParentCycle(itemToMove, targetsParent, targetActor)) {
                         desiredParent = targetsParent;
@@ -428,10 +428,10 @@ function canMerge(itemA, itemB) {
     }
 
     // Perform deep comparison on item data.
-    let itemDataA = duplicate(itemA.system);
+    const itemDataA = duplicate(itemA.system);
     delete itemDataA.quantity;
 
-    let itemDataB = duplicate(itemB.system);
+    const itemDataB = duplicate(itemB.system);
     delete itemDataB.quantity;
 
     // TODO: Remove all keys that are not template appropriate given the item type, remove all keys that are not shared?
@@ -513,7 +513,7 @@ function acceptsItem(containerItem, itemToAdd, actor) {
         return false;
     }
 
-    let storageFound = getFirstAcceptableStorageIndex(containerItem, itemToAdd);
+    const storageFound = getFirstAcceptableStorageIndex(containerItem, itemToAdd);
     if (storageFound === null) {
         console.log("Rejected because no suitable storage found");
         return false;
@@ -769,10 +769,10 @@ async function onItemCollectionItemDraggedToPlayer(message) {
     // Add any uncontained items into targetItem, if applicable
     if (targetContainer) {
         const acceptableItemIds = [];
-        for (let uncontainedItemId of uncontainedItemIds) {
+        for (const uncontainedItemId of uncontainedItemIds) {
             const uncontainedItem = target.getItem(uncontainedItemId);
             if (acceptsItem(targetContainer, uncontainedItem, target.actor)) {
-                let preferredStorageIndex = getFirstAcceptableStorageIndex(targetContainer, uncontainedItem) || 0;
+                const preferredStorageIndex = getFirstAcceptableStorageIndex(targetContainer, uncontainedItem) || 0;
                 acceptableItemIds.push({id: uncontainedItemId, index: preferredStorageIndex});
             }
         }
@@ -896,12 +896,12 @@ export class ActorItemHelper {
         const itemIdsToDelete = (itemId instanceof Array) ? itemId : [itemId];
 
         if (recursive) {
-            let idsToTest = [itemId];
+            const idsToTest = [itemId];
             while (idsToTest.length > 0) {
-                let idToTest = idsToTest.shift();
-                let item = this.getItem(idToTest);
+                const idToTest = idsToTest.shift();
+                const item = this.getItem(idToTest);
                 if (item && item.system.container?.contents) {
-                    for (let containedItem of item.system.container.contents) {
+                    for (const containedItem of item.system.container.contents) {
                         itemIdsToDelete.push(containedItem.id);
                         idsToTest.push(containedItem.id);
                     }
@@ -1040,7 +1040,7 @@ export class ActorItemHelper {
             }
 
             if (itemData.container?.storage && itemData.container.storage.length > 0) {
-                for (let storage of itemData.container.storage) {
+                for (const storage of itemData.container.storage) {
                     if (storage.hasOwnProperty("weightMultiplier")) {
                         storage["affectsEncumbrance"] = storage.weightMultiplier === 0 ? false : true;
                         delete storage.weightMultiplier;

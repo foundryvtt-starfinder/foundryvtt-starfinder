@@ -136,12 +136,10 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
                     this._prepareDamageString(item);
                 }
 
-                if (item.type === "feat") {
-                    if ((item.system.requirements?.toLowerCase() || "") === "condition") {
-                        arr[4].push(item); // conditionItems
-                    } else {
-                        arr[1].push(item); // feats
-                    }
+                if (item.type === "effect") {
+                    arr[4].push(item); // conditionItems
+                } else  if (item.type === "feat") {
+                    arr[1].push(item); // feats
                     item.isFeat = true;
                 } else if (item.type === "chassis") arr[2].push(item); // chassis
                 else if (item.type === "mod") arr[3].push(item); // mods

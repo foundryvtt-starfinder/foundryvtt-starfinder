@@ -69,15 +69,6 @@ export const registerSystemSettings = function() {
         type: Boolean
     });
 
-    game.settings.register("sfrpg", "useStarfinderAOETemplates", {
-        name: "SFRPG.Settings.UseStarfinderAOETemplates.Name",
-        hint: "SFRPG.Settings.UseStarfinderAOETemplates.Hint",
-        scope: "world",
-        config: true,
-        default: true,
-        type: Boolean
-    });
-
     game.settings.register("sfrpg", "autoAddUnarmedStrike", {
         name: "SFRPG.Settings.AutoAddUnarmedStrike.Name",
         hint: "SFRPG.Settings.AutoAddUnarmedStrike.Hint",

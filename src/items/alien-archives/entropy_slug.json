@@ -84,6 +84,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -114,6 +115,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -121,6 +123,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -142,25 +145,7 @@
       "_id": "K2iqZHK7oYdMhXTM",
       "name": "Corrosive Spittle (Ex)",
       "type": "weapon",
-      "ammunition": false,
-      "augmentation": false,
-      "consumable": false,
-      "container": false,
-      "equipment": false,
-      "fusion": true,
-      "goods": false,
-      "hybrid": false,
       "img": "icons/svg/item-bag.svg",
-      "magic": false,
-      "shield": false,
-      "spell": false,
-      "storage": {
-        "type": "slot",
-        "affectsEncumbrance": true,
-        "amount": 0,
-        "subtype": "fusion",
-        "weightProperty": "level"
-      },
       "system": {
         "type": "",
         "ability": "",
@@ -247,6 +232,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -367,6 +353,7 @@
           "units": "ft",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -374,6 +361,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -389,13 +377,7 @@
         },
         "weaponCategory": "uncategorized",
         "weaponType": "smallA"
-      },
-      "technological": false,
-      "upgrade": false,
-      "vehicleAttack": false,
-      "vehicleSystem": false,
-      "weapon": false,
-      "weaponAccessory": false
+      }
     },
     {
       "_id": "7icl4WzzEfPx567n",
@@ -405,6 +387,7 @@
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -426,6 +409,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -452,6 +436,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -477,6 +462,7 @@
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -498,6 +484,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -524,6 +511,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -549,6 +537,7 @@
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -570,6 +559,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -596,6 +586,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -624,6 +615,7 @@
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -652,11 +644,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -674,6 +663,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -724,12 +714,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -860,8 +856,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<h2>Description</h2>\n<p>Originating from Great Shadar, entropy slugs are large, terrestrial mollusks infused with the force of the gradual decline of order. They naturally congregate in abandoned industrial complexes, derelict slums, or junkyards where neglected sources of technology linger. However, draeliks and other species like to use them as guard animals, taking care to keep them away from any important electronic devices.</p>\n<p>A typical entropy slug is about 5 feet long from eyestalk to tail and weighs 300 pounds.</p>\n<h2>Entropy Slug Mucous Gland</h2>\n<p>An entropy slug’s mucous gland can be used to craft a special hybrid grenade known as a @UUID[Compendium.sfrpg.equipment.wUrzV0XhDSGAgnlp]{Drain Grenade}. The mucous gland of a slain entropy slug can be harvested with a successful DC 25 Life Science check that takes 1 minute, garnering raw materials worth 700 UPBs that can be used only to craft a drain grenade. If you fail this check by 5 or more, you suffer the effect of a drain grenade. This check can be attempted only once per entropy slug.</p>",
@@ -871,6 +870,10 @@
       "cr": 4,
       "environment": "underground or urban (Great Shadar)",
       "organization": "solitary, pair, or cornucopia (3-30)",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #9 pg. 58",
@@ -1174,6 +1177,9 @@
       },
       "senses": "blindsense (scent) 60 ft., darkvision 60 ft., low-light vision",
       "size": "medium",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

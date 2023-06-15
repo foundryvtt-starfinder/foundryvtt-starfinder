@@ -46,6 +46,14 @@ Vehicle has the following 3 phases: "Pilot Actions", "Chase Progress", and "Comb
 export class CombatSFRPG extends Combat {
     static HiddenTurn = 0;
 
+    /**
+     * The current initiative count of the encounter
+     */
+    get initiative() {
+        if (!this.started) return null;
+        return this.combatant?.initiative;
+    }
+
     _preCreate(data, options, user) {
         const update = {
             "flags.sfrpg.combatType": this.getCombatType(),
@@ -53,6 +61,7 @@ export class CombatSFRPG extends Combat {
         };
 
         this.updateSource(update);
+        return super._preCreate(data, options, user);
     }
 
     async begin() {
@@ -132,6 +141,7 @@ export class CombatSFRPG extends Combat {
         let nextPhase = this.flags.sfrpg.phase;
         let nextTurn = this.turn - 1;
 
+        const updateOptions = {};
         const currentPhase = this.getCurrentPhase();
         if (currentPhase.resetInitiative) {
             ui.notifications.error(game.i18n.format(CombatSFRPG.errors.historyLimitedResetInitiative), {permanent: false});
@@ -142,7 +152,7 @@ export class CombatSFRPG extends Combat {
             if (this.settings.skipDefeated) {
                 const turnEntries = Array.from(new Set(this.turns.entries())).reverse();
                 nextTurn = -1;
-                for (let [index, combatant] of turnEntries) {
+                for (const [index, combatant] of turnEntries) {
                     if (index >= this.turn) continue;
                     if (!combatant.defeated) {
                         nextTurn = index;
@@ -167,6 +177,12 @@ export class CombatSFRPG extends Combat {
                     return;
                 }
             }
+
+            const round = Math.max(this.round - 1, 0);
+            let advanceTime = -1 * (this.turn || 0) * CONFIG.time.turnTime;
+            if ( round > 0 ) advanceTime -= CONFIG.time.roundTime;
+            updateOptions.advanceTime = advanceTime;
+            updateOptions.direction = -1;
         }
 
         if (nextPhase !== this.flags.sfrpg.phase || nextRound !== this.round) {
@@ -180,7 +196,7 @@ export class CombatSFRPG extends Combat {
             }
         }
 
-        await this._handleUpdate(nextRound, nextPhase, nextTurn);
+        await this._handleUpdate(nextRound, nextPhase, nextTurn, updateOptions);
     }
 
     async nextTurn() {
@@ -192,6 +208,7 @@ export class CombatSFRPG extends Combat {
         let nextPhase = this.flags.sfrpg.phase;
         let nextTurn = this.turn + 1;
 
+        const updateOptions = {};
         const phases = this.getPhases();
         const currentPhase = phases[this.flags.sfrpg.phase];
         if (currentPhase.resetInitiative && this.hasCombatantsWithoutInitiative()) {
@@ -201,7 +218,7 @@ export class CombatSFRPG extends Combat {
 
         if (currentPhase.iterateTurns) {
             if (this.settings.skipDefeated) {
-                for (let [index, combatant] of this.turns.entries()) {
+                for (const [index, combatant] of this.turns.entries()) {
                     if (index < nextTurn) continue;
                     if (!combatant.defeated) {
                         nextTurn = index;
@@ -241,6 +258,10 @@ export class CombatSFRPG extends Combat {
             } else {
                 nextTurn = 0;
             }
+
+            const advanceTime = Math.max(this.turns.length - this.turn, 0) * CONFIG.time.turnTime;
+            updateOptions.advanceTime = advanceTime + CONFIG.time.roundTime;
+            updateOptions.direction = 1;
         }
 
         if (nextPhase !== this.flags.sfrpg.phase) {
@@ -254,7 +275,7 @@ export class CombatSFRPG extends Combat {
             }
         }
 
-        await this._handleUpdate(nextRound, nextPhase, nextTurn);
+        await this._handleUpdate(nextRound, nextPhase, nextTurn, updateOptions);
     }
 
     async previousRound() {
@@ -265,7 +286,7 @@ export class CombatSFRPG extends Combat {
         const indexOfFirstUndefeatedCombatant = this.getIndexOfFirstUndefeatedCombatant();
 
         let nextRound = this.round;
-        let nextPhase = 0;
+        const nextPhase = 0;
         let nextTurn = 0;
 
         if (this.flags.sfrpg.phase === 0 && this.turn <= indexOfFirstUndefeatedCombatant) {
@@ -280,7 +301,11 @@ export class CombatSFRPG extends Combat {
             }
         }
 
-        await this._handleUpdate(nextRound, nextPhase, nextTurn);
+        const round = Math.max(this.round - 1, 0);
+        let advanceTime = -1 * (this.turn || 0) * CONFIG.time.turnTime;
+        if ( round > 0 ) advanceTime -= CONFIG.time.roundTime;
+
+        await this._handleUpdate(nextRound, nextPhase, nextTurn, {advanceTime, direction: -1});
     }
 
     async nextRound() {
@@ -290,8 +315,8 @@ export class CombatSFRPG extends Combat {
 
         const indexOfFirstUndefeatedCombatant = this.getIndexOfFirstUndefeatedCombatant();
 
-        let nextRound = this.round + 1;
-        let nextPhase = 0;
+        const nextRound = this.round + 1;
+        const nextPhase = 0;
         let nextTurn = 0;
 
         const phases = this.getPhases();
@@ -302,25 +327,30 @@ export class CombatSFRPG extends Combat {
             }
         }
 
-        await this._handleUpdate(nextRound, nextPhase, nextTurn);
+        const advanceTime = Math.max(this.turns.length - this.turn, 0) * CONFIG.time.turnTime;
+
+        await this._handleUpdate(nextRound, nextPhase, nextTurn, {advanceTime: advanceTime + CONFIG.time.roundTime, direction: 1});
     }
 
-    async _handleUpdate(nextRound, nextPhase, nextTurn) {
+    async _handleUpdate(nextRound, nextPhase, nextTurn, updateOptions = {}) {
         const phases = this.getPhases();
         const currentPhase = phases[this.flags.sfrpg.phase];
         const newPhase = phases[nextPhase];
 
         const eventData = {
             combat: this,
-            isNewRound: nextRound != this.round,
-            isNewPhase: nextRound != this.round || nextPhase != this.flags.sfrpg.phase,
-            isNewTurn: (nextRound != this.round && phases[nextPhase].iterateTurns) || nextTurn != this.turn,
+            isNewRound: nextRound !== this.round,
+            isNewPhase: nextRound !== this.round || nextPhase !== this.flags.sfrpg.phase,
+            isNewTurn: (nextRound !== this.round && phases[nextPhase].iterateTurns) || nextTurn !== this.turn,
+            oldTurn: this.turn,
+            newTurn: nextTurn,
             oldRound: this.round,
             newRound: nextRound,
             oldPhase: currentPhase,
             newPhase: newPhase,
             oldCombatant: currentPhase.iterateTurns ? this.turns[this.turn] : null,
-            newCombatant: newPhase.iterateTurns ? this.turns[nextTurn] : null
+            newCombatant: newPhase.iterateTurns ? this.turns[nextTurn] : null,
+            direction: updateOptions.direction || nextRound - this.round || nextTurn - this.turn
         };
 
         if (!eventData.isNewRound && !eventData.isNewPhase && !eventData.isNewTurn) {
@@ -339,8 +369,7 @@ export class CombatSFRPG extends Combat {
             turn: nextTurn
         };
 
-        const advanceTime = CONFIG.time.turnTime;
-        await this.update(updateData, {advanceTime});
+        await this.update(updateData, updateOptions);
 
         if (eventData.isNewPhase) {
             if (newPhase.resetInitiative) {
@@ -355,6 +384,7 @@ export class CombatSFRPG extends Combat {
         }
 
         await this._notifyAfterUpdate(eventData);
+        this._handleTimedEffects(eventData);
     }
 
     async _notifyBeforeUpdate(eventData) {
@@ -535,7 +565,7 @@ export class CombatSFRPG extends Combat {
     }
 
     hasCombatantsWithoutInitiative() {
-        for (let [index, combatant] of this.turns.entries()) {
+        for (const [index, combatant] of this.turns.entries()) {
             if ((!this.settings.skipDefeated || !combatant.defeated) && !combatant.initiative) {
                 return true;
             }
@@ -544,7 +574,7 @@ export class CombatSFRPG extends Combat {
     }
 
     getIndexOfFirstUndefeatedCombatant() {
-        for (let [index, combatant] of this.turns.entries()) {
+        for (const [index, combatant] of this.turns.entries()) {
             if (!combatant.defeated) {
                 return index;
             }
@@ -554,7 +584,7 @@ export class CombatSFRPG extends Combat {
 
     getIndexOfLastUndefeatedCombatant() {
         const turnEntries = Array.from(new Set(this.turns.entries())).reverse();
-        for (let [index, combatant] of turnEntries) {
+        for (const [index, combatant] of turnEntries) {
             if (!combatant.defeated) {
                 return index;
             }
@@ -567,7 +597,7 @@ export class CombatSFRPG extends Combat {
     }
 
     renderCombatPhase(html) {
-        let phaseDisplay = document.createElement("h4");
+        const phaseDisplay = document.createElement("h4");
         phaseDisplay.classList.add("combat-type");
         phaseDisplay.innerHTML = game.i18n.format(this.getCurrentPhase().name);
         html.getElementsByClassName('combat-tracker-header')[0].appendChild(phaseDisplay);
@@ -577,7 +607,7 @@ export class CombatSFRPG extends Combat {
         const prevCombatTypeButton = `<a class="combat-type-prev" title="${game.i18n.format("SFRPG.Combat.EncounterTracker.SelectPrevType")}"><i class="fas fa-caret-left"></i></a>`;
         const nextCombatTypeButton = `<a class="combat-type-next" title="${game.i18n.format("SFRPG.Combat.EncounterTracker.SelectNextType")}"><i class="fas fa-caret-right"></i></a>`;
 
-        let combatTypeControls = document.createElement("div");
+        const combatTypeControls = document.createElement("div");
         combatTypeControls.classList.add("combat-type");
 
         if (game.user.isGM) {
@@ -593,10 +623,10 @@ export class CombatSFRPG extends Combat {
         const difficulty = diffObject.difficultyData.difficulty;
         const combatType = this.getCombatType();
 
-        let difficultyContainer = document.createElement("div");
+        const difficultyContainer = document.createElement("div");
         difficultyContainer.classList.add("combat-difficulty-container");
 
-        let difficultyHTML = document.createElement("a");
+        const difficultyHTML = document.createElement("a");
         difficultyHTML.classList.add("combat-difficulty", difficulty);
         if (combatType === 'normal') {
             difficultyHTML.title = `${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.ClickForDetails")}\n\n${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.PCs")}: ${diffObject.difficultyData.PCs.length} [${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.APL")} ${diffObject.difficultyData.APL}]\n${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.HostileNPCs")}: ${diffObject.difficultyData.enemies.length} [${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.CR")} ${diffObject.difficultyData.CR}]`;
@@ -667,7 +697,7 @@ export class CombatSFRPG extends Combat {
             updates.push({_id: id, initiative: roll.total});
 
             // Construct chat message data
-            let messageData = mergeObject({
+            const messageData = mergeObject({
                 speaker: {
                     scene: game.scenes.current?.id,
                     actor: combatant.actor ? combatant.actor.id : null,
@@ -732,12 +762,62 @@ export class CombatSFRPG extends Combat {
     _sortCombatantsAsc(a, b) {
         const ia = Number.isNumeric(a.initiative) ? a.initiative : -9999;
         const ib = Number.isNumeric(b.initiative) ? b.initiative : -9999;
-        let ci = ia - ib;
+        const ci = ia - ib;
         if ( ci !== 0 ) return ci;
-        let [an, bn] = [a.token?.name || "", b.token?.name || ""];
-        let cn = an.localeCompare(bn);
+        const [an, bn] = [a.token?.name || "", b.token?.name || ""];
+        const cn = an.localeCompare(bn);
         if ( cn !== 0 ) return cn;
         return a.tokenId - b.tokenId;
+    }
+
+    _handleTimedEffects(eventData) {
+        const timedEffects = game.sfrpg.timedEffects;
+        const forward = eventData.direction > 0;
+
+        for (const effect of timedEffects.values()) {
+            const duration = effect.activeDuration;
+            if (duration.unit === 'permanent') continue;
+
+            const worldTime = game.time.worldTime;
+            const effectStart = duration.activationTime;
+            const effectFinish = duration.activationEnd;
+            const expiryInit = duration.expiryInit || 1000; // If anything goes wrong, expire at the start of the round
+            const targetActorId = (() => {
+                if (effect.sourceActorId === "parent") return fromUuidSync(effect.actorUuid).id;
+                // Turn closest to initiative to expire on
+                else if (effect.sourceActorId === "init") return this.combatants.contents.sort(this._sortCombatants).find(c => c.initiative <= expiryInit).actorId;
+                else return effect.sourceActorId;
+            })();
+
+            if (((worldTime >= effectFinish) && effect.enabled) // If effect has expired
+                || ((effectStart <= worldTime) && (effectFinish >= worldTime) && !effect.enabled)) { // If the current turn has gone back, and the effect has un-expired.
+                if (!eventData.isNewTurn) continue;
+                if (!eventData.combat.combatants.find(combatant => combatant.actorId === targetActorId)) {
+                    effect.toggle(false);
+                    continue;
+                }
+
+                if (duration.expiryMode === "turn") {
+                    if (duration.endsOn === 'onTurnEnd') {
+                        if ((forward && eventData.oldCombatant.actorId === targetActorId) || (!forward && eventData.newCombatant.actorId === targetActorId)) {
+                            effect.toggle(false);
+                        }
+                    // On turn start
+                    } else {
+                        if ((forward && eventData.newCombatant.actorId === targetActorId) || (!forward && eventData.oldCombatant.actorId === targetActorId)) {
+                            effect.toggle(false);
+                        }
+                    }
+                // Expire by initiative
+                } else {
+                    if ((forward && eventData.oldCombatant.initiative >= expiryInit && eventData.newCombatant.initiative <= expiryInit) || (!forward && eventData.newCombatant.initiative >= expiryInit && eventData.oldCombatant.initiative <= expiryInit)) {
+                        effect.toggle(false);
+                    }
+                }
+
+            }
+
+        }
     }
 }
 

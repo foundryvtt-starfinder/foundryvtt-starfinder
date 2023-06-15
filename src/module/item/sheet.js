@@ -63,6 +63,18 @@ export class ItemSheetSFRPG extends ItemSheet {
         return `${path}/${this.item.type}.hbs`;
     }
 
+    async render(force, options) {
+        if (game.combat && this.item.type === "effect") game.combat.apps[this.appId] = this;
+
+        await super.render(force, options);
+    }
+
+    async close(options) {
+        delete game.combat?.apps[this.appId];
+
+        await super.close(options);
+    }
+
     /* -------------------------------------------- */
     parseNumber(value, defaultValue) {
         if (value === 0 || value instanceof Number) return value;
@@ -91,7 +103,7 @@ export class ItemSheetSFRPG extends ItemSheet {
     async getData() {
         const data = super.getData();
         // Ensure derived data is included
-        this.item.processData();
+        await this.item.processData();
 
         data.itemData = this.document.system;
         data.actor = this.document.parent;
@@ -101,7 +113,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.config = CONFIG.SFRPG;
 
         // Item Type, Status, and Details
-        data.itemType = game.i18n.format(`ITEM.Type${data.item.type.titleCase()}`);
+        data.itemType = game.i18n.format(`TYPES.Item.${data.item.type}`);
         data.itemStatus = this._getItemStatus();
         data.itemProperties = this._getItemProperties();
         data.isPhysical = data.itemData.hasOwnProperty("quantity");
@@ -215,28 +227,74 @@ export class ItemSheetSFRPG extends ItemSheet {
             data.placeholders.savingThrow.value = data.item.system.save.dc;
         }
 
+        if (data.item.type === "effect") {
+
+            data.remainingDuration = (() => {
+                if (itemData.activeDuration.unit === "permanent") return CONFIG.SFRPG.effectDurationTypes[itemData.activeDuration.unit];
+                else return `${itemData.activeDuration.value} ${CONFIG.SFRPG.effectDurationTypes[itemData.activeDuration.unit]}`;
+            })();
+
+            if (this.item.actor) {
+                const remaining = itemData.activeDuration.remaining;
+                const durFrom = SFRPG.effectDurationFrom;
+                const durTypes = SFRPG.effectDurationTypes;
+
+                if (remaining >= durFrom.day)
+                    data.remainingDuration = `${Math.floor(remaining / durFrom.day)} ${durTypes.day}`;
+                else if (remaining >= durFrom.hour)
+                    data.remainingDuration = `${Math.floor(remaining / durFrom.hour)} ${durTypes.hour}`;
+                else if (remaining >= durFrom.minute)
+                    data.remainingDuration = `${Math.floor(remaining / durFrom.minute)} ${durTypes.minute}`;
+                else if (remaining >= durFrom.round)
+                    data.remainingDuration = `${Math.floor(remaining / durFrom.round)} ${durTypes.round}`;
+                else if (remaining <= 0) {
+                    if (itemData.enabled) {
+                        data.remainingDuration = `< 1 ${durTypes.round}`;
+                    } else {
+                        data.remainingDuration = game.i18n.localize("SFRPG.Effect.Expired");
+                        data.expired = true;
+                    }
+
+                }
+            }
+
+            data.sourceActorChoices = {};
+            if (game.combat?.started) {
+                for (const combatant of game.combat.combatants) {
+                    if (combatant.actorId === data.item?.actor?.id) continue;
+                    data.sourceActorChoices[combatant.actorId] = combatant.name;
+                }
+            } else {
+                const PCs = game.actors.filter(i => i.type === "character");
+                for (const PC of PCs) {
+                    data.sourceActorChoices[PC.id] = PC.name;
+                }
+            }
+        }
+
         data.modifiers = this.item.system.modifiers;
 
         data.hasSpeed = this.item.system.weaponType === "tracking" || (this.item.system.special && this.item.system.special["limited"]);
         data.hasCapacity = this.item.hasCapacity();
 
         // Enrich text editors
-        const rollData = RollContext.createItemRollContext(this.item, this.actor).getRollData();
+        const async = true;
+        const rollData = RollContext.createItemRollContext(this.item, this.actor).getRollData() ?? {};
         const secrets = this.item.isOwner;
 
         data.enrichedDescription = await TextEditor.enrichHTML(this.item.system?.description?.value, {
-            async: true,
-            rollData: rollData ?? {},
+            async,
+            rollData,
             secrets
         });
         data.enrichedShortDescription = await TextEditor.enrichHTML(this.item.system?.description?.short, {
-            async: true,
-            rollData: rollData ?? {},
+            async,
+            rollData,
             secrets
         });
         data.enrichedGMNotes = await TextEditor.enrichHTML(this.item.system?.description?.gmNotes, {
-            async: true,
-            rollData: rollData ?? {},
+            async,
+            rollData,
             secrets
         });
 
@@ -272,9 +330,10 @@ export class ItemSheetSFRPG extends ItemSheet {
         const item = this.document;
         const itemData = item.system;
 
-        if (["weapon", "equipment", "shield"].includes(item.type)) return itemData.equipped ? "Equipped" : "Unequipped";
+        if (["weapon", "equipment", "shield"].includes(item.type)) return itemData.equipped ? game.i18n.localize("SFRPG.InventoryEquipped") : game.i18n.localize("SFRPG.InventoryNotEquipped");
         else if (item.type === "feat") return CONFIG.SFRPG.featureCategories[itemData.details.category]?.label || "";
-        else if (item.type === "starshipWeapon") return itemData.mount.mounted ? "Mounted" : "Not Mounted";
+        else if (item.type === "starshipWeapon") return game.i18n.localize(`SFRPG.Items.ShipWeapon.${itemData.mount.mounted ? "Mounted" : "NotMounded"}`);
+        else if (item.type === "effect") return game.i18n.localize(`SFRPG.${itemData.enabled ? "Enabled" : "Disabled"}`);
         else if (item.type === "augmentation") {
             return `${CONFIG.SFRPG.augmentationTypes[itemData.type]} (${CONFIG.SFRPG.augmentationSystems[itemData.system] || ""})`;
         } else if (item.type === "vehicleSystem") {
@@ -283,7 +342,7 @@ export class ItemSheetSFRPG extends ItemSheet {
                 return "";
             }
 
-            return this.document.isActive() ? "Activated" : "Not Activated";
+            return this.document.isActive() ? game.i18n.localize("SFRPG.VehicleSystemSheet.Activated") : game.i18n.localize("SFRPG.VehicleSystemSheet.NotActivated");
         }
     }
 
@@ -565,6 +624,10 @@ export class ItemSheetSFRPG extends ItemSheet {
         html.find('select[name="resource-mode"]').change(this._onChangeResourceVisualizationMode.bind(this));
         html.find('input[name="resource-value"]').change(this._onChangeResourceVisualizationValue.bind(this));
         html.find('input[name="resource-title"]').change(this._onChangeResourceVisualizationTitle.bind(this));
+
+        // toggle timedEffect
+        html.find('.effect-details-toggle').on('click', this._onToggleDetailsEffect.bind(this));
+        html.find('.effect-icon-toggle').on('click', this._onToggleIconEffect.bind(this));
     }
 
     /* -------------------------------------------- */
@@ -976,31 +1039,40 @@ export class ItemSheetSFRPG extends ItemSheet {
         });
     }
 
-    /** @override */
-    async _render(...args) {
-        await super._render(...args);
+    /**
+     * Toggle an effect and their modifiers to be enabled or disabled.
+     *
+     * @param {Event} event The originating click event
+     */
+    async _onToggleDetailsEffect(event) {
+        event.preventDefault();
+        const checked = event.currentTarget.checked;
 
-        if (this._tooltips === null) {
-            this._tooltips = tippy.delegate(`#${this.id}`, {
-                target: '[data-tippy-content]',
-                allowHTML: true,
-                arrow: false,
-                placement: 'top-start',
-                duration: [500, null],
-                delay: [800, null]
-            });
+        if (!this.item.actor) {
+            const updates = {
+                system: {
+                    enabled: checked,
+                    modifiers: this.item.system.modifiers
+                }
+            };
+
+            for (const modifier of updates.system.modifiers) {
+                modifier.enabled = checked;
+            }
+
+            this.item.update(updates);
+        } else {
+            this.item.timedEffect?.toggle();
         }
     }
 
-    async close(...args) {
-        if (this._tooltips !== null) {
-            for (const tooltip of this._tooltips) {
-                tooltip.destroy();
-            }
+    async _onToggleIconEffect(event) {
+        event.preventDefault();
+        const checked = event.currentTarget.checked;
 
-            this._tooltips = null;
-        }
+        this.item.update({"system.showOnToken": checked});
 
-        return super.close(...args);
+        if (this.item.actor && this.item.system.enabled) this.item.timedEffect?.toggleIcon(checked);
+
     }
 }
