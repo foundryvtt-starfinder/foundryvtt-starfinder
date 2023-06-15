@@ -151,6 +151,10 @@
           "piloting": "0",
           "usedAsPilot": false
         },
+        "senses": {
+          "senses": "",
+          "usedForSenses": false
+        },
         "source": "CRB pg. 218"
       }
     },
@@ -183,6 +187,10 @@
           "piloting": 0,
           "usedAsPilot": false
         },
+        "senses": {
+          "senses": "",
+          "usedForSenses": false
+        },
         "source": "CRB pg. 280"
       }
     }
@@ -190,12 +198,14 @@
   "prototypeToken": {
     "name": "Asteroid Borer",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": 0,
@@ -226,7 +236,6 @@
     "lockRotation": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -244,6 +253,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 3
@@ -251,6 +261,7 @@
   "system": {
     "attributes": {
       "type": "landTW",
+      "controlSkill": "pil",
       "cover": "total",
       "dimensions": {
         "height": "10",
@@ -273,10 +284,12 @@
         "value": 21
       },
       "modifiers": {
+        "athletics": 0,
         "attackFullSpeed": "-6",
         "attackMoving": "-3",
         "attackStopped": "0",
-        "piloting": "-2"
+        "piloting": "-2",
+        "survival": 0
       },
       "size": "huge",
       "special": [],

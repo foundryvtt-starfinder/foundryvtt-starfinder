@@ -5,23 +5,10 @@
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
+      "_id": "0PfufoaYhk4l3Fys",
       "name": "Sting",
       "type": "weapon",
-      "hasAttack": true,
-      "hasCapacity": false,
-      "hasUses": false,
       "img": "icons/svg/mystery-man.svg",
-      "isCharged": true,
-      "isStack": false,
-      "labels": {
-        "activation": "",
-        "area": "",
-        "damage": "",
-        "duration": "",
-        "range": "",
-        "save": "",
-        "target": ""
-      },
       "system": {
         "type": "",
         "ability": "",
@@ -43,6 +30,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -50,6 +38,24 @@
           "value": null
         },
         "attackBonus": 2,
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": true
+        },
         "attuned": false,
         "bulk": "L",
         "capacity": {
@@ -60,6 +66,8 @@
         "containedItemIds": [],
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
+          "isOpen": true,
           "storage": [
             {
               "type": "slot",
@@ -80,8 +88,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
@@ -90,22 +101,26 @@
           "units": "",
           "value": null
         },
+        "equippable": false,
         "equipped": false,
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
+        "isActive": null,
         "level": 1,
         "modifiers": [],
         "price": 0,
         "proficient": true,
         "properties": {},
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -113,6 +128,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -126,31 +142,19 @@
           "per": null,
           "value": 0
         },
+        "weaponCategory": "uncategorized",
         "weaponType": "basicM"
       }
     },
     {
+      "_id": "rGAxWtuI1GnpimPt",
       "name": "Symbiosis (Ex)",
       "type": "feat",
-      "hasAttack": false,
-      "hasUses": false,
       "img": "icons/svg/mystery-man.svg",
-      "isCharged": true,
-      "isOnCooldown": false,
-      "isStack": false,
-      "labels": {
-        "activation": "",
-        "area": "",
-        "damage": "",
-        "duration": "",
-        "featType": "Passive",
-        "range": "",
-        "save": "DC null undefined",
-        "target": ""
-      },
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -172,8 +176,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>As a full action, a symbiend that begins its turn attached to a living aberration, animal, dragon, humanoid, magical beast, or monstrous humanoid can connect to that creature’s nervous system, granting it the abilities of the symbiend’s template graft (see below). The two creatures effectively become one until the host is killed, the symbiend chooses to detach itself, or the symbiend is removed with a medical procedure (usually requiring a successful DC 25 Medicine check). An unwilling host can prevent this connection with a successful DC 15 Will save.</p>"
         },
@@ -183,6 +190,7 @@
           "value": null
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -195,6 +203,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -216,12 +225,14 @@
   "prototypeToken": {
     "name": "Symbiend",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -250,11 +261,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -272,6 +280,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -322,8 +331,14 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
+      "baseSpellDC": {
+        "base": 0
+      },
       "cmd": {
         "min": 0,
         "tooltip": [],
@@ -380,7 +395,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 15
@@ -389,7 +405,8 @@
         "special": "original base: 15 ft.",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -413,12 +430,26 @@
       "alignment": "N",
       "aura": "",
       "biography": {
+        "age": 0,
+        "dateOfBirth": "",
+        "deity": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
+        "height": "",
+        "homeWorld": "",
+        "otherVisuals": "",
         "public": "",
-        "value": "<section class=\"secret\">\n<h2>Description</h2>\n<p>While most examples of symbiosis are paired species that have slowly evolved a beneficial relationship, a narrow category of symbionts—referred to commonly as symbiends—have the ability to bond to and enhance nearly any other creature, feeding off and even influencing their hosts. Though spread across the galaxy, symbiends share a number of biological similarities that hint at common origins, or at least suggest some measure of engineering in the distant past.</p>\n<p>Despite the impressive abilities they grant to hosts, symbiends are almost helpless on their own. They communicate empathically with their hosts, while a rare few are also sentient and able to speak with—and even overwhelm—their hosts. Once a symbiend has been removed from a host, it refuses to rebond to the same host, preferring to find a new creature more invested in the partnership.</p>\n<p>Dozens of different symbiends exist, but those most commonly encountered in the Pact Worlds are listed below. The template grafts below can be used to create a creature bonded to a symbiend; at the GM’s discretion, a PC can also bond with a symbiend, ignoring the array requirements and suggested ability score modifiers. A symbiend counts as an augmentation that is “installed” in the listed systems, though a removed symbiend can be used by another creature (unlike normal augmentations). Symbiends can’t be purchased or sold (at least, not in reputable settlements).</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<h3>Organization</h3>\n<p>solitary</p>\n</section>"
+        "value": "<section class=\"secret\">\n<h2>Description</h2>\n<p>While most examples of symbiosis are paired species that have slowly evolved a beneficial relationship, a narrow category of symbionts—referred to commonly as symbiends—have the ability to bond to and enhance nearly any other creature, feeding off and even influencing their hosts. Though spread across the galaxy, symbiends share a number of biological similarities that hint at common origins, or at least suggest some measure of engineering in the distant past.</p>\n<p>Despite the impressive abilities they grant to hosts, symbiends are almost helpless on their own. They communicate empathically with their hosts, while a rare few are also sentient and able to speak with—and even overwhelm—their hosts. Once a symbiend has been removed from a host, it refuses to rebond to the same host, preferring to find a new creature more invested in the partnership.</p>\n<p>Dozens of different symbiends exist, but those most commonly encountered in the Pact Worlds are listed below. The template grafts below can be used to create a creature bonded to a symbiend; at the GM’s discretion, a PC can also bond with a symbiend, ignoring the array requirements and suggested ability score modifiers. A symbiend counts as an augmentation that is “installed” in the listed systems, though a removed symbiend can be used by another creature (unlike normal augmentations). Symbiends can’t be purchased or sold (at least, not in reputable settlements).</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<h3>Organization</h3>\n<p>solitary</p>\n</section>",
+        "weight": ""
       },
       "class": "",
       "cr": 0.3333333333333333,
       "environment": "",
+      "organization": "",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AA1 pg. 112",
@@ -433,6 +464,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -443,6 +475,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -453,6 +486,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -463,6 +497,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -473,6 +508,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -483,6 +519,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -493,6 +530,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -503,6 +541,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -513,6 +552,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -523,6 +563,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -533,6 +574,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -543,6 +585,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -553,6 +596,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 7,
         "ranks": 7,
@@ -563,6 +607,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -573,6 +618,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -583,6 +629,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -594,6 +641,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -604,6 +652,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -614,6 +663,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 7,
         "ranks": 7,
@@ -624,6 +674,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 7,
         "ranks": 7,
@@ -633,30 +684,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -687,6 +745,9 @@
       },
       "senses": "",
       "size": "diminutive",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

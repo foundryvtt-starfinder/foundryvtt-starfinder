@@ -264,7 +264,7 @@
                     "RangedAttackRolls": "Ranged Attack Rolls",
                     "Resolve": "Resolve",
                     "SP": "SP",
-                    "SkillRanks": "Skill ranks",
+                    "SkillRanks": "Skill Ranks",
                     "Skillpoints": "Skillpoints",
                     "SpecificSpeed": "Specific Speed",
                     "SpecificWeaponAttackDamage": "Specific Weapon Damage",
@@ -292,7 +292,9 @@
                     "SkillRank": "{type} Ranks: {mod} ({source})",
                     "Speed": "{speed}: {type} {mod} ({source})",
                     "ToggleModifier": "Toggle modifier",
-                    "ToggleModifierTooltip": "Toggle a modifier on and off. Disabled modifiers do not affect the character."
+                    "ToggleModifierTooltip": "Toggle this modifier on or off. Disabled modifiers do not affect the character.",
+                    "ToggleEffect": "Toggle effect",
+                    "ToggleEffectTooltip": "Toggle this effect on or off. Disabled effects do not affect the character."
                 },
                 "UI": {
                     "LongFormula": "Long Formula"
@@ -483,7 +485,9 @@
                 "Cost": "Cost: {cost}",
                 "Deactivates": "Deactivates",
                 "Duration": "Duration: {duration}",
-                "Reloads": "Reloads"
+                "NoCharges": "No Charges",
+                "Reloads": "Reloads",
+                "Use": "Use"
             },
             "PlaceAbilityTemplate": "Place {label}"
         },
@@ -705,7 +709,10 @@
         },
         "Cybernetic": "Cybernetic",
         "Damage": {
+            "DamageOperator": "Damage Operator",
+            "EnergyDamage": "Energy Damage",
             "Immunities": "Damage Immunities",
+            "KineticDamage": "Kinetic Damage",
             "MinimumDamage": "Minimum Damage",
             "PartIndex": "Part {partIndex} of {partCount}",
             "Reduction": "Damage Reduction",
@@ -736,6 +743,7 @@
             },
             "Vulnerabilities": "Damage Vulnerabilities"
         },
+        "SkillDelete": "Delete?",
         "Description": "Description",
         "DescriptionShort": "Short Description",
         "Descriptors": {
@@ -915,12 +923,31 @@
             }
         },
         "DurationTypesInstantaneous": "Instantaneous",
-        "EffectDurationTypesDays": "Days",
-        "EffectDurationTypesHours": "Hours",
-        "EffectDurationTypesMinutes": "Minutes",
-        "EffectDurationTypesRounds": "Rounds",
+        "Enabled": "Enabled",
+        "Disabled": "Disabled",
         "EnergyArmorClass": "Energy AC",
         "EnergyArmorClassShort": "EAC",
+        "Effect": {
+            "DetailsHeader": "Effect Details",
+            "DetailsEnabledLabel": "Enabled",
+            "DetailsShowOnToken": "Show On Token",
+            "DurationTypesLabel": "Duration",
+            "DurationTypesNone": "None",
+            "DurationTypesRounds": "Rounds",
+            "DurationTypesMinutes": "Minutes",
+            "DurationTypesHours": "Hours",
+            "DurationTypesDays": "Days",
+            "DurationTypesPermanent": "Permanent",
+            "EndTypesLabel": "Ends On",
+            "EndTypesOnTurnStart": "Turn start",
+            "EndTypesOnTurnEnd": "Turn end",
+            "Expired": "Expired",
+            "ExpiryModeLabel": "Expiry Mode",
+            "ExpiryModeTurn": "Combatant Turn",
+            "ExpiryModeInit": "Initiative Count",
+            "ExpiryModeTooltip": "<br><strong>Combatant Turn</strong><p>The effect will expire at the start/end of a specified turn.</p><strong>Initiative Count</strong><p>The effect will expire when the current combat reaches the specified initiative count.</p>",
+            "EndsOnTooltip": "<br><strong>Parent Actor's Turn</strong><p>The effect will expire at the start/end of the turn of the actor it belongs to.</p><strong>Nearest Initiative</strong><p>The effect will expire on the start/end of the turn with the closest initiative to the turn it was enabled.</p><strong>Combatant Turns</strong><p>The effect will expire on the start/end of the specified combatant's turn.</p>"
+        },
         "Enrichers": {
             "Icon": {
                 "Types": {
@@ -1421,6 +1448,7 @@
                 "Target": "Target"
             },
             "Ammunition": {
+                "Ammo": "Ammo",
                 "AmmunitionType": "Ammunition Type",
                 "Capacity": "Capacity Settings",
                 "Details": "Ammunition Details",
@@ -1506,7 +1534,8 @@
                 "VehicleSystems": "Vehicle Systems",
                 "WeaponAccessories": "Weapon Accessories",
                 "WeaponFusions": "Weapon Fusions",
-                "Weapons": "Weapons"
+                "Weapons": "Weapons",
+                "Effect": "Effect"
             },
             "Consumable": {
                 "Action": "Consumable Action",
@@ -1904,7 +1933,7 @@
         "ModifierValueAffectedLabel": "Specific Affected Value",
         "ModifierValueAffectedTooltip": "This identifies a specific value being affected if the general attribute has many possible values",
         "Modifiers": "Modifiers",
-        "ModifiersConditionsTabLabel": "Conditions",
+        "ModifiersConditionsTabLabel": "Effects",
         "ModifiersItemTabLabel": "Item",
         "ModifiersMiscTabLabel": "Miscellaneous",
         "ModifiersPermanentTabLabel": "Permanent",
@@ -2382,6 +2411,7 @@
                 "IrradiateH": "Irradiate (high)",
                 "IrradiateL": "Irradiate (low)",
                 "IrradiateM": "Irradiate (medium)",
+                "IrradiateS": "Irradiate (severe)",
                 "Jamming": "Jamming",
                 "Limited": "Limited Fire",
                 "Line": "Line",
@@ -2448,11 +2478,14 @@
         "SkillInt": "Intimidate",
         "SkillLsc": "Life Science",
         "SkillMed": "Medicine",
+        "SkillMiscModifiersLabel": "Misc. Modifiers",
         "SkillModifierTooltip": "{type} Bonus: {mod} ({source})",
         "SkillMys": "Mysticism",
+        "SkillNotes": "Skill Notes",
         "SkillPer": "Perception",
         "SkillPil": "Piloting",
         "SkillPro": "Profession",
+        "SkillProfessionName": "Profession Name",
         "SkillProficiencyLevelClassSkill": "Class Skill",
         "SkillPsc": "Physical Science",
         "SkillSen": "Sense Motive",
@@ -2592,6 +2625,7 @@
                 "NPCGunnerRanksMessage": "While ranks aren't relevant to an NPC's gunnery modifier, some statblocks may include the Gunner's level, which you can store here. You can otherwise safely leave this box blank.",
                 "Passengers": "Passengers",
                 "Pilot": "Pilot",
+                "RemoveCrewMember": "Remove Crew Member",
                 "ScienceOfficers": "Science Officers",
                 "SkillModifier": "Modifier",
                 "SkillRanks": "Ranks",
@@ -2892,8 +2926,10 @@
             }
         },
         "VehicleSystemSheet": {
+            "Activated": "Activated",
             "CanBeActivated": "Can be activated",
             "CanBeActivatedTooltip": "This system has an activated state.",
+            "NotActivated": "Not Activated",
             "Piloting": "Piloting",
             "PilotingTooltip": "The Piloting modifier to apply when using this system to pilot.",
             "Senses": "Senses",
@@ -3176,6 +3212,7 @@
             "class": "Class",
             "consumable": "Consumable",
             "container": "Container",
+            "effect": "Effect",
             "equipment": "Armor",
             "feat": "Feature",
             "fusion": "Weapon Fusion",
