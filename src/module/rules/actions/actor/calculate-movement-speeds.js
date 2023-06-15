@@ -53,12 +53,12 @@ export default function(engine) {
             let filteredModifiers = fact.modifiers.filter(mod => {
                 return (mod.enabled || mod.modifierType === "formula") && (mod.effectType === SFRPGEffectType.ALL_SPEEDS || (mod.effectType === SFRPGEffectType.SPECIFIC_SPEED && mod.valueAffected === speedKey));
             });
-            filteredModifiers = context.parameters.stackModifiers.process(filteredModifiers, context);
+            filteredModifiers = context.parameters.stackModifiers.process(filteredModifiers, context, {actor: fact.actor});
 
             let filteredMultiplyModifiers = fact.modifiers.filter(mod => {
                 return (mod.enabled || mod.modifierType === "formula") && mod.effectType === SFRPGEffectType.MULTIPLY_ALL_SPEEDS;
             });
-            filteredMultiplyModifiers = context.parameters.stackModifiers.process(filteredMultiplyModifiers, context);
+            filteredMultiplyModifiers = context.parameters.stackModifiers.process(filteredMultiplyModifiers, context, {actor: fact.actor});
 
             const bonus = Object.entries(filteredModifiers).reduce((sum, mod) => {
                 if (mod[1] === null || mod[1].length < 1) return sum;

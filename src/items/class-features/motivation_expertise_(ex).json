@@ -5,21 +5,23 @@
   "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
-    "actionType": "",
+    "actionTarget": "",
+    "actionType": "heal",
     "activation": {
-      "type": "",
+      "type": "none",
       "condition": "",
       "cost": 0
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
-      "units": "",
-      "value": null
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -28,48 +30,203 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "",
+          "formula": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+          "group": null,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": true,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.fqYiP2f9oSfcmrwC]{Envoy}</p>\n<p>You’re an expert at making people happy and high-spirited, allowing them to press forward when they might otherwise quit. You gain an expertise die of the same value as that granted to an envoy of your level by the expertise class feature. At 1st level, whenever you take an action that restores a creature’s Stamina Points or Hit Points, you can restore additional Stamina Points equal to the result of the roll of your expertise die. You can still use your expertise die on Sense Motive checks, but you always add the minimum possible result. This is also true for any skills you select with skill expertise.</p>\n<p><strong>This replaces expertise.</strong></p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.fqYiP2f9oSfcmrwC]{Envoy}</p>\n<p>You’re an expert at making people happy and high-spirited, allowing them to press forward when they might otherwise quit. You gain an expertise die of the same value as that granted to an envoy of your level by the expertise class feature. At 1st level, whenever you take an action that restores a creature’s Stamina Points or Hit Points, you can restore additional Stamina Points equal to the result of the roll of your [[/r 1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)]]{expertise die}. You can still use your expertise die on Sense Motive checks, but you always add the minimum possible result. This is also true for any skills you select with @UUID[Compendium.sfrpg.class-features.0HPp0nK0L1VawPYN]{skill expertise}.</p>\n<p><strong>This replaces expertise.</strong></p>\n<p><em>Select skill expertise in the Modifiers tab.</em></p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
     "details": {
       "category": "classFeature",
+      "combat": false,
       "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "",
-      "value": null
+      "units": "text",
+      "value": ""
     },
     "formula": "",
-    "modifiers": [],
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "d07b67b1-2c1b-4cc2-95fd-732f4e18085d",
+        "name": "Motivation Expertise (Ex) - Sense Motive",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 1,
+        "modifier": "1+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "sen"
+      },
+      {
+        "_id": "f9122022-a833-4255-b2dd-f099c9907f1a",
+        "name": "Motivation Expertise (Ex) - 1st Level",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 1,
+        "modifier": "1+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "9e32331a-44c8-47b4-b03c-aa974f22e2d6",
+        "name": "Motivation Expertise (Ex) - 5th Level",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 1,
+        "modifier": "1+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "1d5a7290-2d30-44f9-9241-93085f365111",
+        "name": "Motivation Expertise (Ex) - 9th Level",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 1,
+        "modifier": "1+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "ee04123d-b96e-402f-a422-0bc52a49f92e",
+        "name": "Motivation Expertise (Ex) - 13th Level",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 1,
+        "modifier": "1+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "dc202564-3106-49cb-90d0-ca0ba9adeb04",
+        "name": "Motivation Expertise (Ex) - 17th Level",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 1,
+        "modifier": "1+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
+      "units": "none",
       "value": null
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "1st Level",
+    "requirements": "1st Level (Envoy)",
+    "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
-    "source": "Envoy - Alternate Class Feature",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
+    "source": "COM, pg. 68",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

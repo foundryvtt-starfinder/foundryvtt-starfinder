@@ -8,25 +8,7 @@
       "_id": "BQ37sI7cReXEAvCc",
       "name": "Pseudopod (plus 1d10 F)",
       "type": "weapon",
-      "ammunition": false,
-      "augmentation": false,
-      "consumable": false,
-      "container": false,
-      "equipment": false,
-      "fusion": true,
-      "goods": false,
-      "hybrid": false,
       "img": "icons/svg/item-bag.svg",
-      "magic": false,
-      "shield": false,
-      "spell": false,
-      "storage": {
-        "type": "slot",
-        "affectsEncumbrance": true,
-        "amount": 0,
-        "subtype": "fusion",
-        "weightProperty": "level"
-      },
       "system": {
         "type": "",
         "ability": "",
@@ -128,6 +110,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -246,6 +229,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -253,6 +237,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -268,13 +253,7 @@
         },
         "weaponCategory": "uncategorized",
         "weaponType": "basicM"
-      },
-      "technological": false,
-      "upgrade": false,
-      "vehicleAttack": false,
-      "vehicleSystem": false,
-      "weapon": false,
-      "weaponAccessory": false
+      }
     },
     {
       "_id": "dh8HkkQuzPleBI3n",
@@ -287,6 +266,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "other",
@@ -324,6 +304,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -350,6 +331,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "reflex",
           "dc": "16",
@@ -378,6 +360,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "action",
@@ -415,6 +398,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -441,6 +425,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "reflex",
           "dc": "16",
@@ -466,6 +451,7 @@
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -487,6 +473,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -513,6 +500,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -541,6 +529,7 @@
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -569,11 +558,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -591,6 +577,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 2
@@ -641,12 +628,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -777,8 +770,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<h2>Description</h2>\n<p>Factories across the galaxy pump out thousands upon thousands of tons of industrial waste every day as they seek to fuel the rapid technological consumption of spacefaring worlds. The question of what to do with that waste remains a constant concern; more unscrupulous facilities simply dump the chemical remnants resulting from industrial processing. Sometimes, complex interactions within the runoff from munitions factories lead to the formation of a detonation ooze, a highly volatile slurry of industrial waste given its own strange semblance of life.</p>\n<p>When its chemical makeup is stable, a typical detonation ooze is about 12 feet across and weighs anywhere from 800 pounds to 2 tons, depending on the amount of the trace metallic compounds in its mass. The ooze’s weight remains the same even as it expands, leading to what some survivors have described as a runny consistency the larger the ooze gets. Accompanied by the occasional small explosion from within its amorphous body, a detonation ooze is an unmistakable danger.</p>\n<p>Detonation oozes have proven to be a deadly and consistent threat to industrial workers and waste cleanup crews near the factories where they spawn. When one is spotted, freelance hazard teams are often sent in to deal with the problem, hopefully with adequate protection.</p>",
@@ -788,6 +784,10 @@
       "cr": 9,
       "environment": "any urban (manufacturing plants)",
       "organization": "solitary",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #36 pg. 58",
@@ -1089,6 +1089,9 @@
       },
       "senses": "blindsight (vibration) 60 ft., sightless;",
       "size": "large",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }
