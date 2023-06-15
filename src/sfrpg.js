@@ -274,7 +274,7 @@ Hooks.once('init', async function() {
     console.log("Starfinder | [INIT] Setting up inline buttons");
     CONFIG.TextEditor.enrichers.push(new BrowserEnricher(), new IconEnricher(), new CheckEnricher());
 
-    console.log("Starfinder | Applying inline icons");
+    console.log("Starfinder | [INIT] Applying inline icons");
     CONFIG.Actor.typeIcons = {
         character: "fas fa-user",
         npc2: "fas fa-spaghetti-monster-flying",
@@ -294,6 +294,7 @@ Hooks.once('init', async function() {
         "actorResource": "fas fa-chart-pie",
         "feat": "fas fa-medal",
         "spell": "fas fa-wand-magic-sparkles",
+        "effect": "fas fa-stopwatch",
 
         "asi": "fas fa-person-arrow-up-from-line",
 
