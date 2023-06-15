@@ -76,8 +76,16 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         return !!skillData.type;
     }
 
+    /**
+     * The timedEffect object of this item, if any.
+     * @returns {SFRPGTimedEffect|undefined}
+     */
+    get timedEffect() {
+        return game.sfrpg.timedEffects.get(this.uuid);
+    }
+
     /* -------------------------------------------- */
-    /*	Data Preparation														*/
+    /*	Data Preparation                            */
     /* -------------------------------------------- */
 
     /**
@@ -208,9 +216,30 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      */
     async _preCreate(data, options, user) {
         const updates = {};
+        const t = this.type;
+        const itemData = this.system;
 
-        if (this.type === "class" && !this.system?.slug) {
+        if (t === "class" && !itemData?.slug) {
             updates["system.slug"] = this.name.slugify({replacement: "_", strict: true});
+        }
+
+        // Events for when an item is created on an actor
+        if (this.actor) {
+            if (!this.actor.hasPlayerOwner) {
+                if (t === "weapon") updates['system.proficient'] = true;
+                if (["weapon", "equipment"].includes(t)) updates['system.equipped'] = true;
+                if (t === "spell") updates['system.prepared'] = true;
+            }
+
+            if (this.effects instanceof Array) this.effects = null;
+            else if (this.effects instanceof Map) this.effects.clear();
+
+            // Record current world time and initiative on effects
+            if (t === "effect" && itemData.enabled) {
+                updates['system.activeDuration.activationTime'] = game.time.worldTime;
+                if (game.combat) updates['system.activeDuration.expiryInit'] = game.combat.initiative;
+            }
+
         }
 
         this.updateSource(updates);
@@ -1712,7 +1741,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         effectType = SFRPGEffectType.SKILL,
         subtab = "misc",
         valueAffected = "",
-        enabled = true,
+        enabled = this.system?.enabled ?? true, // New modifiers on effects should match enabled state.
         source = "",
         notes = "",
         condition = "",

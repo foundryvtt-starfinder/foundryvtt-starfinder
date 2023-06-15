@@ -292,7 +292,9 @@
                     "SkillRank": "{type} Ranks: {mod} ({source})",
                     "Speed": "{speed}: {type} {mod} ({source})",
                     "ToggleModifier": "Toggle modifier",
-                    "ToggleModifierTooltip": "Toggle a modifier on and off. Disabled modifiers do not affect the character."
+                    "ToggleModifierTooltip": "Toggle this modifier on or off. Disabled modifiers do not affect the character.",
+                    "ToggleEffect": "Toggle effect",
+                    "ToggleEffectTooltip": "Toggle this effect on or off. Disabled effects do not affect the character."
                 },
                 "UI": {
                     "LongFormula": "Long Formula"
@@ -920,12 +922,31 @@
             }
         },
         "DurationTypesInstantaneous": "Instantaneous",
-        "EffectDurationTypesDays": "Days",
-        "EffectDurationTypesHours": "Hours",
-        "EffectDurationTypesMinutes": "Minutes",
-        "EffectDurationTypesRounds": "Rounds",
+        "Enabled": "Enabled",
+        "Disabled": "Disabled",
         "EnergyArmorClass": "Energy AC",
         "EnergyArmorClassShort": "EAC",
+        "Effect": {
+            "DetailsHeader": "Effect Details",
+            "DetailsEnabledLabel": "Enabled",
+            "DetailsShowOnToken": "Show On Token",
+            "DurationTypesLabel": "Duration",
+            "DurationTypesNone": "None",
+            "DurationTypesRounds": "Rounds",
+            "DurationTypesMinutes": "Minutes",
+            "DurationTypesHours": "Hours",
+            "DurationTypesDays": "Days",
+            "DurationTypesPermanent": "Permanent",
+            "EndTypesLabel": "Ends On",
+            "EndTypesOnTurnStart": "Turn start",
+            "EndTypesOnTurnEnd": "Turn end",
+            "Expired": "Expired",
+            "ExpiryModeLabel": "Expiry Mode",
+            "ExpiryModeTurn": "Combatant Turn",
+            "ExpiryModeInit": "Initiative Count",
+            "ExpiryModeTooltip": "<br><strong>Combatant Turn</strong><p>The effect will expire at the start/end of a specified turn.</p><strong>Initiative Count</strong><p>The effect will expire when the current combat reaches the specified initiative count.</p>",
+            "EndsOnTooltip": "<br><strong>Parent Actor's Turn</strong><p>The effect will expire at the start/end of the turn of the actor it belongs to.</p><strong>Nearest Initiative</strong><p>The effect will expire on the start/end of the turn with the closest initiative to the turn it was enabled.</p><strong>Combatant Turns</strong><p>The effect will expire on the start/end of the specified combatant's turn.</p>"
+        },
         "Enrichers": {
             "Icon": {
                 "Types": {
@@ -1512,7 +1533,8 @@
                 "VehicleSystems": "Vehicle Systems",
                 "WeaponAccessories": "Weapon Accessories",
                 "WeaponFusions": "Weapon Fusions",
-                "Weapons": "Weapons"
+                "Weapons": "Weapons",
+                "Effect": "Effect"
             },
             "Consumable": {
                 "Action": "Consumable Action",
@@ -1910,7 +1932,7 @@
         "ModifierValueAffectedLabel": "Specific Affected Value",
         "ModifierValueAffectedTooltip": "This identifies a specific value being affected if the general attribute has many possible values",
         "Modifiers": "Modifiers",
-        "ModifiersConditionsTabLabel": "Conditions",
+        "ModifiersConditionsTabLabel": "Effects",
         "ModifiersItemTabLabel": "Item",
         "ModifiersMiscTabLabel": "Miscellaneous",
         "ModifiersPermanentTabLabel": "Permanent",
@@ -3189,6 +3211,7 @@
             "class": "Class",
             "consumable": "Consumable",
             "container": "Container",
+            "effect": "Effect",
             "equipment": "Armor",
             "feat": "Feature",
             "fusion": "Weapon Fusion",

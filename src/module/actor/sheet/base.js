@@ -63,7 +63,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         const isOwner = this.document.isOwner;
         const data = {
             actor: this.actor,
-            system: duplicate(this.actor.system),
+            system: deepClone(this.actor.system),
             isOwner: isOwner,
             isGM: game.user.isGM,
             limited: this.document.limited,
@@ -306,6 +306,9 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         // Actor resource update
         html.find('.actor-resource-base-input').change(this._onActorResourceChanged.bind(this));
+
+        // Effect Toggling
+        html.find('.effect-toggle').on('click', this._onToggleEffect.bind(this));
     }
 
     /** @override */
@@ -549,6 +552,19 @@ export class ActorSheetSFRPG extends ActorSheet {
         modifier.enabled = !modifier.enabled;
 
         await this.actor.update({'system.modifiers': modifiers});
+    }
+
+    /**
+     * Toggle an effect and their modifiers to be enabled or disabled.
+     *
+     * @param {Event} event The originating click event
+     */
+    async _onToggleEffect(event) {
+        event.preventDefault();
+        const target = $(event.currentTarget);
+        const effectUuid = target.closest('.item.effect').data('effectUuid');
+
+        this.actor.system.timedEffects.get(effectUuid)?.toggle();
     }
 
     /**
