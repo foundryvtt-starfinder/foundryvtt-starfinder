@@ -2,7 +2,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
 
     hasUses() {
         const itemData = this.system;
-        return itemData.uses && itemData.uses.max && itemData.uses.value;
+        return (itemData.uses?.max || itemData.uses?.total) && (itemData.uses?.value !== null && itemData.uses?.value !== undefined);
     }
 
     getRemainingUses() {
@@ -12,7 +12,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
 
     getMaxUses() {
         const itemData = this.system;
-        return itemData.uses?.max || 0;
+        return itemData.uses?.total || itemData.uses?.max || 0;
     }
 
     canBeUsed() {
@@ -24,7 +24,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
         if (this.type === "vehicleSystem") {
             return itemData.canBeActivated;
         } else {
-            return !!(itemData.activation.type);
+            return !!(itemData?.activation?.type) && itemData.activation.type !== "none";
         }
     }
 

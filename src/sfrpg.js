@@ -56,6 +56,7 @@ import IconEnricher from "./module/system/enrichers/icon.js";
 import TemplateEnricher from "./module/system/enrichers/template.js";
 
 import RollDialog from "./module/apps/roll-dialog.js";
+import { HotbarSFRPG } from "./module/apps/ui/hotbar.js";
 import AbilityTemplate from "./module/canvas/ability-template.js";
 import setupVision from "./module/canvas/vision.js";
 import { initializeBrowsers } from "./module/packs/browsers.js";
@@ -64,6 +65,7 @@ import RollContext from "./module/rolls/rollcontext.js";
 import RollNode from "./module/rolls/rollnode.js";
 import RollTree from "./module/rolls/rolltree.js";
 import registerCompendiumArt from "./module/system/compendium-art.js";
+import { connectToDocument, rollItemMacro } from "./module/system/item-macros.js";
 import { SFRPGTokenHUD } from "./module/token/token-hud.js";
 import SFRPGTokenDocument from "./module/token/tokendocument.js";
 
@@ -190,6 +192,8 @@ Hooks.once('init', async function() {
     CONFIG.Canvas.layers.templates.layerClass = TemplateLayerSFRPG;
     CONFIG.MeasuredTemplate.objectClass = MeasuredTemplateSFRPG;
     CONFIG.MeasuredTemplate.defaults.angle = 90; // SF uses 90 degree cones
+
+    CONFIG.ui.hotbar = HotbarSFRPG;
 
     CONFIG.fontDefinitions["Exo2"] = {
         editor: true,
@@ -501,6 +505,11 @@ Hooks.once("ready", async () => {
     BaseEnricher.addListeners();
     ItemSFRPG.chatListeners($("body"));
 
+    console.log("Starfinder | [READY] Connecting item macros to items");
+    for (const macro of game.macros) {
+        connectToDocument(macro);
+    }
+
     if (game.user.isGM) {
         const currentSchema = game.settings.get('sfrpg', 'worldSchemaVersion') ?? 0;
         const systemSchema = Number(game.system.flags.sfrpg.schema);
@@ -587,65 +596,38 @@ Hooks.on("renderChatMessage", (app, html, data) => {
 });
 Hooks.on("getChatLogEntryContext", addChatMessageContextOptions);
 
-Hooks.on("hotbarDrop", (bar, data, slot) => {
-    if (data.type !== "Item") return;
-    createItemMacro(data, slot);
-    return false;
-});
-
-/**
- * Create a Macro form an Item drop.
- * Get an existing item macro if one exists, otherwise create a new one.
- *
- * @param {Object} data The item data
- * @param {number} slot The hotbar slot to use
- * @returns {Promise}
- */
-async function createItemMacro(data, slot) {
-    const item = await Item.fromDropData(data);
-    if (!item) return;
-
-    let macroType = data?.macroType || "chatCard";
-    if (macroType.includes("feat")) macroType = "activate";
-
-    const command = `game.sfrpg.rollItemMacro("${item.name}", "${macroType}");`;
-    let macro = game.macros.contents.find(m => (m.name === item.name) && (m.command === command));
-    if (!macro) {
-        macro = await Macro.create({
-            name: item.name + (macroType !== "chatCard" ? ` (${game.i18n.localize(`SFRPG.ItemMacro.${macroType.capitalize()}`)})` : ""),
-            type: "script",
-            img: item.img,
-            command: command,
-            flags: {"sfrpg.itemMacro": true}
-        }, {displaySheet: false});
+function registerMathFunctions() {
+    function lookup(value) {
+        for (let i = 1; i < arguments.length - 1; i += 2) {
+            if (arguments[i] === value) {
+                return arguments[i + 1];
+            }
+        }
+        return 0;
     }
 
-    game.user.assignHotbarMacro(macro, slot);
-}
-
-function rollItemMacro(itemName, macroType) {
-    const speaker = ChatMessage.getSpeaker();
-    let actor;
-
-    if (speaker.token) actor = game.actors.tokens[speaker.token];
-    if (!actor) actor = game.actors.get(speaker.actor);
-    const item = actor ? actor.items.find(i => i.name === itemName) : null;
-    if (!item) return ui.notifications.warn(`Your controlled Actor does not have an item named ${itemName}`);
-
-    switch (macroType) {
-        case "attack":
-            return item.rollAttack();
-        case "damage":
-        case "healing":
-            return item.rollDamage();
-        case "activate":
-            return item.setActive(!item.isActive());
-        case "use":
-            return item.rollConsumable();
-        default:
-            return item.roll();
+    function lookupRange(value, lowestValue) {
+        let baseValue = lowestValue;
+        for (let i = 2; i < arguments.length - 1; i += 2) {
+            if (arguments[i] > value) {
+                return baseValue;
+            }
+            baseValue = arguments[i + 1];
+        }
+        return baseValue;
     }
 
+    Roll.MATH_PROXY = mergeObject(Roll.MATH_PROXY, {
+        eq: (a, b) => a === b,
+        gt: (a, b) => a > b,
+        gte: (a, b) => a >= b,
+        lt: (a, b) => a < b,
+        lte: (a, b) => a <= b,
+        ne: (a, b) => a !== b,
+        ternary: (condition, ifTrue, ifFalse) => (condition ? ifTrue : ifFalse),
+        lookup,
+        lookupRange
+    });
 }
 
 function setupHandlebars() {
