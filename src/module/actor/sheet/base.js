@@ -63,7 +63,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         const isOwner = this.document.isOwner;
         const data = {
             actor: this.actor,
-            system: duplicate(this.actor.system),
+            system: deepClone(this.actor.system),
             isOwner: isOwner,
             isGM: game.user.isGM,
             limited: this.document.limited,
@@ -306,6 +306,9 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         // Actor resource update
         html.find('.actor-resource-base-input').change(this._onActorResourceChanged.bind(this));
+
+        // Effect Toggling
+        html.find('.effect-toggle').on('click', this._onToggleEffect.bind(this));
     }
 
     /** @override */
@@ -315,38 +318,6 @@ export class ActorSheetSFRPG extends ActorSheet {
         }
 
         return super.render(force, options);
-    }
-
-    async _render(...args) {
-        await super._render(...args);
-
-        if (this._tooltips === null) {
-            this._tooltips = tippy.delegate(`#${this.id}`, {
-                target: '[data-tippy-content]',
-                allowHTML: true,
-                arrow: false,
-                placement: 'top-start',
-                duration: [500, null],
-                delay: [800, null],
-                maxWidth: 600
-            });
-        }
-    }
-
-    clearTooltips() {
-        this._tooltips = null;
-    }
-
-    async close(...args) {
-        if (this._tooltips !== null) {
-            for (const tooltip of this._tooltips) {
-                tooltip.destroy();
-            }
-
-            this._tooltips = null;
-        }
-
-        return super.close(...args);
     }
 
     /** @override */
@@ -454,7 +425,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             // Remove situational modifiers
             appropriateMods = appropriateMods.filter(mod => mod.modifierType !== SFRPGModifierType.FORMULA);
             const stackModifiers = new StackModifiers();
-            let modifiers = stackModifiers.process(appropriateMods, null);
+            let modifiers = stackModifiers.process(appropriateMods, null, {actor: actor});
 
             modifiers = Object.values(modifiers)
                 .flat()
@@ -487,7 +458,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             // Remove situational modifiers
             appropriateMods = appropriateMods.filter(mod => mod.modifierType !== SFRPGModifierType.FORMULA);
             const stackModifiers = new StackModifiers();
-            let modifiers = stackModifiers.process(appropriateMods, null);
+            let modifiers = stackModifiers.process(appropriateMods, null, {actor: item.actor});
 
             modifiers = Object.values(modifiers)
                 .flat()
@@ -581,6 +552,19 @@ export class ActorSheetSFRPG extends ActorSheet {
         modifier.enabled = !modifier.enabled;
 
         await this.actor.update({'system.modifiers': modifiers});
+    }
+
+    /**
+     * Toggle an effect and their modifiers to be enabled or disabled.
+     *
+     * @param {Event} event The originating click event
+     */
+    async _onToggleEffect(event) {
+        event.preventDefault();
+        const target = $(event.currentTarget);
+        const effectUuid = target.closest('.item.effect').data('effectUuid');
+
+        this.actor.system.timedEffects.get(effectUuid)?.toggle();
     }
 
     /**
@@ -1034,7 +1018,7 @@ export class ActorSheetSFRPG extends ActorSheet {
 
             const props = $(`<div class="item-properties"></div>`);
             chatData.properties.forEach(p => props.append(
-                `<span class="tag" data-tippy-content="${p.tooltip || p.title}"><strong>${p.title ? p.title + ":" : ""} </strong>${p.name}</span>`
+                `<span class="tag" data-tooltip="${p.tooltip || p.title}"><strong>${p.title ? p.title + ":" : ""} </strong>${p.name}</span>`
             ));
 
             div.append(props);

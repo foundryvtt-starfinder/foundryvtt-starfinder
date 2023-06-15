@@ -15,6 +15,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "move",
@@ -36,8 +37,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>As a move action, a green rageshkor can align portions of the flexible frill of its back armor to block attacks from one enemy the rageshkor is observing. Doing so increases the rageshkor’s AC by 2 against attacks from that enemy until the start of the rageshkor’s next turn.</p>"
         },
@@ -60,6 +64,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -92,6 +97,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -126,6 +132,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -163,8 +170,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
@@ -173,6 +183,7 @@
           "units": "",
           "value": null
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
@@ -183,12 +194,14 @@
         "proficient": true,
         "properties": {},
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -196,6 +209,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -231,6 +245,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -265,6 +280,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -294,8 +310,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>By whipping its tail, a green rageshkor can hurl a detachable spike from just below its spiked tail club as a ranged attack with a range increment of 20 feet and a maximum range of 100 feet. The creature can hurl only six such spikes in a 24-hour period.</p>"
         },
@@ -304,6 +323,7 @@
           "units": "",
           "value": ""
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
@@ -400,12 +420,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "ft",
           "value": 20
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -413,6 +435,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -438,6 +461,7 @@
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "action",
@@ -459,8 +483,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>You can strike two adjacent foes with a single swing.</p>\n<p><strong>Prerequisites</strong>: Str 13, base attack bonus +1.</p>\n<hr />\n<p><strong>Benefit</strong>: As a standard action, you can make a single melee attack against a foe within reach. If you hit, you deal damage normally and can make an additional melee attack (using your full base attack bonus) against a foe that is adjacent to the first and also within reach. You can make only one additional attack per round with this feat. When you use this feat, you take a –2 penalty to your Armor Class until your next turn.</p>"
         },
@@ -483,6 +510,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -504,12 +532,14 @@
   "prototypeToken": {
     "name": "Rageshkor, Green",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -538,11 +568,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -560,6 +587,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 2
@@ -610,12 +638,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -673,7 +707,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 30
@@ -682,7 +717,8 @@
         "special": "original base: 30 ft.",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -743,12 +779,26 @@
       "alignment": "N",
       "aura": "",
       "biography": {
+        "age": 0,
+        "dateOfBirth": "",
+        "deity": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
+        "height": "",
+        "homeWorld": "",
+        "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>Fierce, armored saurians, rageshkors are among Vesk Prime’s most famous fauna. These beasts evolved alongside the planet’s other aggressive wildlife, leading to deadly evolutions unknown to other thyreophorans, most notably movable armor plates, and tail spikes rageshkors can hurl at distant threats.</p>\n<p>Vesk have long seen rageshkors as worthy foes. Records from before the Gap show that hunting rageshkors is an age‑old tradition, with accomplished hunters regularly wearing the hard-won hide, plates, and spikes. These cultural values have survived into modern times, and vesk and non-vesk alike regularly travel to Vesk Prime specifically for the chance to hunt a rageshkor. The most dedicated hunters equip themselves with archaic weaponry in the spirit of tradition, but even modern armaments are no guarantee of an easy fight.</p>\n<p>The smaller green rageshkors are the most prolific species, still prevalent in Vesk Prime’s forests and plains. Adolescents typically break from their birth herd, roaming either alone or in small cohorts. These roving rageshkors are especially aggressive, and they often pick fights with passersby, land transports, and even small buildings.</p>\n<p>The might and ferocity of green rageshkors pale in comparison to those of their larger kin, rock rageshkors. These rare animals are typically solitary, and during less prosperous times, rock rageshkors hunker down into a form of hibernation. Combined with their camouflaged bodies and the accumulation of windblown debris, these animals often fade into the landscape, snapping to vicious alertness only to ambush prey that mistakes it for a boulder.</p>\n<h3>RAGESHKOR SHIELDS</h3>\n<p>Vesk have used rageshkor frill plates for shields since ancient times. In the post-Gap era, vesk have developed high-tech versions of these shields that incorporate synthetic padding, alloyed fittings, and more to augment the natural materials while maintaining the shields’ cultural value. Although these shields can be purchased, a carrier in vesk territory should expect to be asked whether the shield was truly won (harvested from a rageshkor the wielder defeated), where the clash occurred, and how the battle fared. An earned rageshkor shield is a prestige piece that can win a warrior much respect.</p>\n<p><strong>Green Rageshkor Shield</strong>: This round shield, made of overlapping green rageshkor frill plates and modern composites, allows you to make unarmed attacks that don’t count as archaic.</p>\n<p><strong>Rock Rageshkor Shield</strong>: This roughly ovular shield is made of big rock rageshkor frill plates. The shield can be used to make unarmed attacks that don’t count as archaic. It also functions as if it had a mk 1 thermal capacitor installed, and this “upgrade” can be enhanced to higher model numbers without occupying the shield’s other upgrade slot.</p>\n<table style=\"width: 682px;\" border=\"1\">\n<tbody>\n<tr>\n<td>SHIELD MODEL</td>\n<td style=\"text-align: center; vertical-align: middle;\">LEVEL</td>\n<td style=\"text-align: center; vertical-align: middle;\">PRICE</td>\n<td style=\"text-align: center; vertical-align: middle;\">SHIELD BONUS</td>\n<td style=\"text-align: center; vertical-align: middle;\">MAX DEX BONUS</td>\n<td style=\"text-align: center; vertical-align: middle;\">ACP</td>\n<td style=\"text-align: center; vertical-align: middle;\">BULK</td>\n<td style=\"text-align: center; vertical-align: middle;\">UPGRADES</td>\n</tr>\n<tr>\n<td>Rageshkor shield, green</td>\n<td style=\"text-align: center; vertical-align: middle;\">6</td>\n<td style=\"text-align: center; vertical-align: middle;\">4,250</td>\n<td style=\"text-align: center; vertical-align: middle;\"><span style=\"background-color: rgba(0, 0, 0, 0.05);\">+1/+2</span></td>\n<td style=\"text-align: center; vertical-align: middle;\">+3</td>\n<td style=\"text-align: center; vertical-align: middle;\">-1</td>\n<td style=\"text-align: center; vertical-align: middle;\">2</td>\n<td style=\"text-align: center; vertical-align: middle;\">1</td>\n</tr>\n<tr>\n<td><span style=\"background-color: rgba(255, 255, 255, 0.2);\">Rageshkor shield, rock</span></td>\n<td style=\"text-align: center; vertical-align: middle;\">12</td>\n<td style=\"text-align: center; vertical-align: middle;\">37,500</td>\n<td style=\"text-align: center; vertical-align: middle;\">+1/+2</td>\n<td style=\"text-align: center; vertical-align: middle;\">+4</td>\n<td style=\"text-align: center; vertical-align: middle;\">-1</td>\n<td style=\"text-align: center; vertical-align: middle;\">2</td>\n<td style=\"text-align: center; vertical-align: middle;\">1</td>\n</tr>\n</tbody>\n</table>\n<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any deserts or mountains</p>\n<h3>Organization</h3>\n<p>solitary or pair</p>\n</section>"
+        "value": "<h2>Description</h2>\n<p>Fierce, armored saurians, rageshkors are among Vesk Prime’s most famous fauna. These beasts evolved alongside the planet’s other aggressive wildlife, leading to deadly evolutions unknown to other thyreophorans, most notably movable armor plates, and tail spikes rageshkors can hurl at distant threats.</p>\n<p>Vesk have long seen rageshkors as worthy foes. Records from before the Gap show that hunting rageshkors is an age‑old tradition, with accomplished hunters regularly wearing the hard-won hide, plates, and spikes. These cultural values have survived into modern times, and vesk and non-vesk alike regularly travel to Vesk Prime specifically for the chance to hunt a rageshkor. The most dedicated hunters equip themselves with archaic weaponry in the spirit of tradition, but even modern armaments are no guarantee of an easy fight.</p>\n<p>The smaller green rageshkors are the most prolific species, still prevalent in Vesk Prime’s forests and plains. Adolescents typically break from their birth herd, roaming either alone or in small cohorts. These roving rageshkors are especially aggressive, and they often pick fights with passersby, land transports, and even small buildings.</p>\n<p>The might and ferocity of green rageshkors pale in comparison to those of their larger kin, rock rageshkors. These rare animals are typically solitary, and during less prosperous times, rock rageshkors hunker down into a form of hibernation. Combined with their camouflaged bodies and the accumulation of windblown debris, these animals often fade into the landscape, snapping to vicious alertness only to ambush prey that mistakes it for a boulder.</p>\n<h3>RAGESHKOR SHIELDS</h3>\n<p>Vesk have used rageshkor frill plates for shields since ancient times. In the post-Gap era, vesk have developed high-tech versions of these shields that incorporate synthetic padding, alloyed fittings, and more to augment the natural materials while maintaining the shields’ cultural value. Although these shields can be purchased, a carrier in vesk territory should expect to be asked whether the shield was truly won (harvested from a rageshkor the wielder defeated), where the clash occurred, and how the battle fared. An earned rageshkor shield is a prestige piece that can win a warrior much respect.</p>\n<p><strong>Green Rageshkor Shield</strong>: This round shield, made of overlapping green rageshkor frill plates and modern composites, allows you to make unarmed attacks that don’t count as archaic.</p>\n<p><strong>Rock Rageshkor Shield</strong>: This roughly ovular shield is made of big rock rageshkor frill plates. The shield can be used to make unarmed attacks that don’t count as archaic. It also functions as if it had a mk 1 thermal capacitor installed, and this “upgrade” can be enhanced to higher model numbers without occupying the shield’s other upgrade slot.</p>\n<table style=\"width: 682px;\" border=\"1\">\n<tbody>\n<tr>\n<td>SHIELD MODEL</td>\n<td style=\"text-align: center; vertical-align: middle;\">LEVEL</td>\n<td style=\"text-align: center; vertical-align: middle;\">PRICE</td>\n<td style=\"text-align: center; vertical-align: middle;\">SHIELD BONUS</td>\n<td style=\"text-align: center; vertical-align: middle;\">MAX DEX BONUS</td>\n<td style=\"text-align: center; vertical-align: middle;\">ACP</td>\n<td style=\"text-align: center; vertical-align: middle;\">BULK</td>\n<td style=\"text-align: center; vertical-align: middle;\">UPGRADES</td>\n</tr>\n<tr>\n<td>Rageshkor shield, green</td>\n<td style=\"text-align: center; vertical-align: middle;\">6</td>\n<td style=\"text-align: center; vertical-align: middle;\">4,250</td>\n<td style=\"text-align: center; vertical-align: middle;\"><span style=\"background-color: rgba(0, 0, 0, 0.05);\">+1/+2</span></td>\n<td style=\"text-align: center; vertical-align: middle;\">+3</td>\n<td style=\"text-align: center; vertical-align: middle;\">-1</td>\n<td style=\"text-align: center; vertical-align: middle;\">2</td>\n<td style=\"text-align: center; vertical-align: middle;\">1</td>\n</tr>\n<tr>\n<td><span style=\"background-color: rgba(255, 255, 255, 0.2);\">Rageshkor shield, rock</span></td>\n<td style=\"text-align: center; vertical-align: middle;\">12</td>\n<td style=\"text-align: center; vertical-align: middle;\">37,500</td>\n<td style=\"text-align: center; vertical-align: middle;\">+1/+2</td>\n<td style=\"text-align: center; vertical-align: middle;\">+4</td>\n<td style=\"text-align: center; vertical-align: middle;\">-1</td>\n<td style=\"text-align: center; vertical-align: middle;\">2</td>\n<td style=\"text-align: center; vertical-align: middle;\">1</td>\n</tr>\n</tbody>\n</table>\n<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any deserts or mountains</p>\n<h3>Organization</h3>\n<p>solitary or pair</p>\n</section>",
+        "weight": ""
       },
       "class": "",
       "cr": 6,
       "environment": "",
+      "organization": "",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AA4 pg. 96",
@@ -988,30 +1038,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -1042,6 +1099,9 @@
       },
       "senses": "blindsense (scent) 30 ft., low-light vision;",
       "size": "large",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

@@ -2,7 +2,7 @@
             <div class="form-group stacked item-descriptors">
                 <label>{{localize "SFRPG.Descriptors.Descriptors"}}</label>
                 {{#each config.descriptors as |name desc|}}
-                <label class="checkbox" {{#if (lookup ../config.descriptorsTooltips desc)}} data-tippy-content='<strong>{{ name }}</strong><br/>{{lookup ../config.descriptorsTooltips desc}}' {{/if}}>
+                <label class="checkbox" {{#if (lookup ../config.descriptorsTooltips desc)}} data-tooltip='<strong>{{ name }}</strong><br/>{{lookup ../config.descriptorsTooltips desc}}' {{/if}}>
                     <input type="checkbox" name="system.descriptors.{{desc}}" {{checked (lookup ../itemData.descriptors desc)}} /> {{ name }}
                 </label>
                 {{/each}}

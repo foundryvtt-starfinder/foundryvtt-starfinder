@@ -23,7 +23,7 @@
 
             <h4 class="section-header first">{{ localize "SFRPG.ItemSheet.StarshipShield.Header" }}</h4>
 
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipShield.ShieldType" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipShield.ShieldTypeTooltip" }}">
+            <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipShield.ShieldType" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipShield.ShieldTypeTooltip" }}">
                 <label>{{ localize "SFRPG.ItemSheet.StarshipShield.ShieldType" }}</label>
                 <div class="form-fields">
                     <label class="checkbox">
@@ -33,35 +33,35 @@
             </div>
 
             {{#if itemData.isDeflector}}
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipShield.DefenseValue" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipShield.DefenseValueTooltip" }}">
+            <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipShield.DefenseValue" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipShield.DefenseValueTooltip" }}">
                 <label>{{ localize "SFRPG.ItemSheet.StarshipShield.DefenseValue" }}</label>
                 <div class="form-fields">
                     <input type="text" name="system.defenseValue" value="{{itemData.defenseValue}}" data-dtype="Number" placeholder="0" />
                 </div>
             </div>
 
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipShield.ArmorBonus" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipShield.ArmorBonusTooltip" }}">
+            <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipShield.ArmorBonus" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipShield.ArmorBonusTooltip" }}">
                 <label>{{ localize "SFRPG.ItemSheet.StarshipShield.ArmorBonus" }}</label>
                 <div class="form-fields">
                     <input type="text" name="system.armorBonus" value="{{itemData.armorBonus}}" data-dtype="Number" placeholder="0" />
                 </div>
             </div>
 
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipShield.TargetLockBonus" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipShield.TargetLockBonusTooltip" }}">
+            <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipShield.TargetLockBonus" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipShield.TargetLockBonusTooltip" }}">
                 <label>{{ localize "SFRPG.ItemSheet.StarshipShield.TargetLockBonus" }}</label>
                 <div class="form-fields">
                     <input type="text" name="system.targetLockBonus" value="{{itemData.targetLockBonus}}" data-dtype="Number" placeholder="0" />
                 </div>
             </div>
             {{else}}
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipShield.ShieldPoints" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipShield.ShieldPointsTooltip" }}">
+            <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipShield.ShieldPoints" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipShield.ShieldPointsTooltip" }}">
                 <label>{{ localize "SFRPG.ItemSheet.StarshipShield.ShieldPoints" }}</label>
                 <div class="form-fields">
                     <input type="text" name="system.shieldPoints" value="{{itemData.shieldPoints}}" data-dtype="Number" placeholder="0" />
                 </div>
             </div>
 
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipShield.Regeneration" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipShield.RegenerationTooltip" }}">
+            <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipShield.Regeneration" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipShield.RegenerationTooltip" }}">
                 <label>{{ localize "SFRPG.ItemSheet.StarshipShield.Regeneration" }}</label>
                 <div class="form-fields">
                     <input type="text" name="system.regeneration" value="{{itemData.regeneration}}" data-dtype="Number" placeholder="0" />
