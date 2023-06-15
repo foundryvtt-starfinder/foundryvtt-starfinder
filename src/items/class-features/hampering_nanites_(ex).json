@@ -84,8 +84,8 @@
       "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "text",
-      "value": "A number of rounds equal to your Constitution modifier"
+      "units": "round",
+      "value": "@abilities.con.mod"
     },
     "formula": "",
     "isActive": null,
@@ -104,7 +104,7 @@
     "rollNotes": "",
     "save": {
       "type": "reflex",
-      "dc": "10 + floor(@classes.nanocyte.levels * 1.5) + @classes.nanocyte.keyAbilityMod",
+      "dc": "10 + floor(@classes.biohacker.levels / 2) + @classes.biohacker.keyAbilityMod",
       "descriptor": "negate"
     },
     "skillCheck": {
