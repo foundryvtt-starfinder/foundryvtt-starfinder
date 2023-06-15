@@ -49,8 +49,10 @@ export class HotbarSFRPG extends Hotbar {
                     ${game.i18n.localize("DOCUMENT.Actor")}: ${item.actor.name}
                     <br>
                 `;
-                if (itemMacroDetails.macroType === "activate" && item.macroConfig.hasUses) {
-                    slot.tooltip += `
+                if (itemMacroDetails.macroType === "activate") {
+                    slot.tooltip += item.macroConfig.isActive ? "Active" : "Inactive";
+                    slot.tooltip += "<br>";
+                    if (item.macroConfig.hasUses) slot.tooltip += `
                         ${game.i18n.localize("SFRPG.SpellBook.Uses")}: ${item.system.uses.value}/${item.system.uses.total}
                     `;
                 } else if (itemMacroDetails.macroType === "attack" && item.macroConfig.hasCapacity) {
