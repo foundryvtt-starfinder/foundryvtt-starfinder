@@ -54,15 +54,18 @@ export function rollItemMacro(itemUuid, macroType) {
 
         // For backward compatibility's sake, fallback to the old method of searching by name.
         /** @todo Remove this at some point */
-        logCompatibilityWarning("You are using an item macro which uses the item's name instead of its UUID. Support for these types of item macros will be removed in a future version of the SFRPG system. It is recommended to delete and re-create this item macro.", {since: "0.25"});
+
         const speaker = ChatMessage.getSpeaker();
         let actor;
 
         if (speaker.token) actor = game.actors.tokens[speaker.token];
         if (!actor) actor = game.actors.get(speaker.actor);
         const item = actor ? actor.items.find(i => i.name === itemUuid) : null;
-        if (!item)  return ui.notifications.warn(`Your controlled Actor does not have an item valid for this item macro.`);
-        else return item;
+        if (!item) return ui.notifications.error(`Cannot find the item associated with this item macro.`);
+        else {
+            logCompatibilityWarning("You are using an item macro which uses the item's name instead of its UUID. Support for these types of item macros will be removed in a future version of the SFRPG system. It is recommended to delete and re-create this item macro.", {since: "0.25"});
+            return item;
+        }
 
     })();
 
