@@ -34,10 +34,12 @@ import calculateInitiativeModifiers from './rules/actions/actor/calculate-initia
 import calculateMovementSpeeds from './rules/actions/actor/calculate-movement-speeds.js';
 import calculateSaveModifiers from './rules/actions/actor/calculate-save-modifiers.js';
 import calculateSkillModifiers from './rules/actions/actor/calculate-skill-modifiers.js';
+import calculateTimedEffects from "./rules/actions/actor/calculate-timed-effects.js";
 import clearTooltips from './rules/actions/actor/clear-tooltips.js';
 import logToConsole from './rules/actions/log.js';
 import stackModifiers from './rules/actions/modifiers/stack-modifiers.js';
 import isActorType from './rules/conditions/is-actor-type.js';
+import isItemType from './rules/conditions/is-item-type.js';
 import isModifierType from './rules/conditions/is-modifier-type.js';
 // Character rules
 import calculateBaseAttackBonus from './rules/actions/actor/character/calculate-bab.js';
@@ -131,6 +133,7 @@ export default function(engine) {
     calculateAbilityCheckModifiers(engine);
     calculateEncumbrance(engine);
     calculateMovementSpeeds(engine);
+    calculateTimedEffects(engine);
     // Character actions
     calculateBaseAttackBonus(engine);
     calculateCharacterLevel(engine);
@@ -199,6 +202,7 @@ export default function(engine) {
     // Custom rules
     logToConsole(engine);
     isActorType(engine);
+    isItemType(engine);
     isModifierType(engine);
     stackModifiers(engine);
 
@@ -362,7 +366,11 @@ export default function(engine) {
         rules: [
             "calculateSaveDC",
             "calculateSkillDC",
-            "calculateActivationDetails"
+            "calculateActivationDetails",
+            {
+                when: { closure: "isItemType", type: "effect" },
+                then: ["calculateTimedEffects"]
+            }
         ]
     });
 

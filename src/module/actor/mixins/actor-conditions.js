@@ -50,7 +50,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
      * @private
      */
     _isCondition(item) {
-        return item.type === "feat" && item.system.requirements?.toLowerCase() === "condition";
+        return item.type === "effect" && item.system.requirements?.toLowerCase() === "condition";
     }
 
     _isStatusEffect(name) {
@@ -71,15 +71,6 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
             return;
         }
 
-        // Try to get status effect object as a workaround for a poorly conceived check in foundry.js Token.toggleEffect(...)
-        const statusEffect = SFRPG.statusEffects.find(effect => effect.id === conditionName);
-
-        // Reflect state on tokens
-        const tokens = this.getActiveTokens(true);
-        for (const token of tokens) {
-            await token.toggleEffect(statusEffect, {active: enabled, overlay: overlay});
-        }
-
         // Update condition item
         const conditionItem = this.getCondition(conditionName);
 
@@ -87,9 +78,9 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
             if (!conditionItem) {
                 const compendium = game.packs.find(element => element.title.includes("Conditions"));
                 if (compendium) {
-                    await compendium.getIndex();
+                    const index = await compendium.getIndex();
 
-                    const entry = compendium.index.find(e => e.name.toLowerCase() === conditionName.toLowerCase());
+                    const entry = index.find(e => e.name.toLowerCase() === conditionName.toLowerCase());
                     if (entry) {
                         const entity = await compendium.getDocument(entry._id);
                         const itemData = duplicate(entity);
@@ -98,7 +89,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
                         promise.then((createdItems) => {
                             if (createdItems && createdItems.length > 0) {
                                 this._updateActorCondition(conditionName, true).then(() => {
-                                    Hooks.callAll("onActorSetCondition", {actor: this, item: createdItems[0], conditionName: conditionName, enabled: enabled});
+                                    Hooks.callAll("onActorSetCondition", {actor: this, item: createdItems[0], conditionName, enabled});
                                 });
                             }
                         });
@@ -109,6 +100,9 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
             }
         } else {
             if (conditionItem) {
+                const effect = this.system.timedEffects.get(conditionItem.uuid);
+                effect.delete();
+
                 const promise = this.deleteEmbeddedDocuments("Item", [conditionItem.id]);
                 promise.then(() => {
                     this._updateActorCondition(conditionName, false).then(() => {
@@ -145,19 +139,23 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
      */
     async _checkFlatFooted(conditionName, enabled) {
         const flatFooted = "flat-footed";
-        let shouldBeFlatfooted = (conditionName === flatFooted && enabled);
+        const hasFlatFooted =  this.hasCondition(flatFooted);
 
-        for (const ffCondition of SFRPG.conditionsCausingFlatFooted) {
-            if (this.hasCondition(ffCondition)) {
-                shouldBeFlatfooted = true;
+        let hasCausingCondition = false;
+        for (const condition of CONFIG.SFRPG.conditionsCausingFlatFooted) {
+            if (this.hasCondition(condition)) {
+                hasCausingCondition = true;
                 break;
             }
+
         }
 
-        if (shouldBeFlatfooted !== this.hasCondition(flatFooted)) {
-            return this.setCondition(flatFooted, shouldBeFlatfooted);
-        }
+        let shouldBeFlatFooted = (conditionName === flatFooted && enabled) || hasFlatFooted;
 
-        return null;
+        const causesFlatFooted = CONFIG.SFRPG.conditionsCausingFlatFooted.includes(conditionName);
+        if (causesFlatFooted) shouldBeFlatFooted = hasCausingCondition || enabled;
+
+        return this.setCondition(flatFooted, shouldBeFlatFooted);
+
     }
 };

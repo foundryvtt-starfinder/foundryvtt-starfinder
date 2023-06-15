@@ -1,6 +1,7 @@
 import BrowserEnricher from "./system/enrichers/browser.js";
 import CheckEnricher from "./system/enrichers/check.js";
 import IconEnricher from "./system/enrichers/icon.js";
+import TemplateEnricher from "./system/enrichers/template.js";
 
 // Namespace SFRPG Configuration Values
 export const SFRPG = {};
@@ -340,10 +341,23 @@ SFRPG.distanceUnits = {
  * @type {Object}
  */
 SFRPG.effectDurationTypes = {
-    "round": "SFRPG.EffectDurationTypesRounds",
-    "minute": "SFRPG.EffectDurationTypesMinutes",
-    "hour": "SFRPG.EffectDurationTypesHours",
-    "day": "SFRPG.EffectDurationTypesDays"
+    "round": "SFRPG.Effect.DurationTypesRounds",
+    "minute": "SFRPG.Effect.DurationTypesMinutes",
+    "hour": "SFRPG.Effect.DurationTypesHours",
+    "day": "SFRPG.Effect.DurationTypesDays",
+    "permanent": "SFRPG.Effect.DurationTypesPermanent"
+};
+
+SFRPG.effectEndTypes = {
+    "onTurnStart": "SFRPG.Effect.EndTypesOnTurnStart",
+    "onTurnEnd": "SFRPG.Effect.EndTypesOnTurnEnd"
+};
+
+SFRPG.effectDurationFrom = {
+    "round": 6,
+    "minute": 60,
+    "hour": 3600,
+    "day": 86400
 };
 
 /**
@@ -1956,6 +1970,7 @@ SFRPG.itemTypes = {
     "actorResource": "TYPES.Item.actorResource",
     "feat": "SFRPG.Items.Categories.Feats",
     "spell": "SFRPG.Items.Categories.Spells",
+    "effect": "SFRPG.Items.Categories.Effect",
 
     "asi": "SFRPG.Items.Categories.AbilityScoreIncrease",
 
@@ -2011,7 +2026,8 @@ SFRPG.characterDefinitionItemTypes = [
 SFRPG.sharedItemTypes = [
     "actorResource",
     "feat",
-    "spell"
+    "spell",
+    "effect"
 ];
 
 SFRPG.playerCharacterDefinitionItemTypes = [
@@ -2227,5 +2243,6 @@ SFRPG.floatingHPValues = {
 SFRPG.enricherTypes = {
     "Browser": BrowserEnricher,
     "Icon": IconEnricher,
-    "Check": CheckEnricher
+    "Check": CheckEnricher,
+    "Template": TemplateEnricher
 };

@@ -71,12 +71,9 @@ export default class CheckEnricher extends BaseEnricher {
      * @override to check using the 3-letter identifier for the type against the valid types (which are 3 letter identifiers).
      * Inputted types are full names.
      */
-    typeIsValid() {
+    isValid() {
         if (!this.args.type || !this.validTypes.includes(CheckNameHelper.shortFormName(this.args.type))) {
-            const strong = document.createElement("strong");
-            strong.innerText = `${this.match[1]} parsing failed! Type is invalid.`;
-            this.element = strong;
-            return false;
+            return this._failValidation("Type");
         }
 
         return true;
