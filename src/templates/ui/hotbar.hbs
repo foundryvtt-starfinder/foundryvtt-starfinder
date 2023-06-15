@@ -18,9 +18,9 @@
                 {{/if}}
                 {{#if this.macro.item}}
                     <i class="fas {{this.iconClass}} icon"></i>
-                    {{#if this.macro.item.macroConfig.hasCapacity}}
+                    {{#if this.hasCapacity}}
                     <footer class="macro-footer">{{this.macro.item.macroConfig.capacityCurrent}}/{{this.macro.item.macroConfig.capacityMaximum}}</footer>
-                    {{else if this.macro.item.macroConfig.hasUses}}
+                    {{else if this.hasUses}}
                     <footer class="macro-footer">{{this.macro.item.system.uses.value}}/{{this.macro.item.system.uses.total}}</footer>
                     {{/if}}
                 {{/if}}

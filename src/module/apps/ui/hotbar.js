@@ -18,7 +18,7 @@ export class HotbarSFRPG extends Hotbar {
             const itemMacroDetails = macro?.flags?.sfrpg?.itemMacro;
             if (itemMacroDetails?.itemUuid) {
                 const item = deepClone(fromUuidSync(itemMacroDetails?.itemUuid));
-                if (!item || !item.actor) return data;
+                if (!item || !item.actor) continue;
 
                 await item.processData();
 
@@ -40,7 +40,9 @@ export class HotbarSFRPG extends Hotbar {
 
                 slot.iconClass = this._getIcon(item.macroConfig, itemMacroDetails.macroType);
                 slot.greyscale = this._getGreyscaleStatus(item, itemMacroDetails.macroType);
+                slot.hasCapacity = itemMacroDetails.macroType === "attack" && item.macroConfig.hasCapacity;
                 slot.activeGlow = itemMacroDetails.macroType === "activate" && item.macroConfig.isActive;
+                slot.hasUses = itemMacroDetails.macroType === "activate" && item.macroConfig.hasUses;
 
                 slot.tooltip += `
                     <br>
