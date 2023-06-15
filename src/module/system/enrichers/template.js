@@ -54,7 +54,7 @@ export default class TemplateEnricher extends BaseEnricher {
 
         a.dataset.distance = parseInt(this.args.distance);
         if (this.args.color) {
-            this.args.color.startsWith("#") ? a.dataset.color = this.args.color : a.dataset.color = `#${this.args.color}`;
+            a.dataset.color = this.args.color.startsWith("#") ? this.args.color : `#${this.args.color}`;
         }
         if (this.args.texture) a.dataset.texture = this.args.texture;
 
