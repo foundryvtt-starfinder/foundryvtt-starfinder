@@ -74,7 +74,8 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                     hasDamage: this.hasDamage,
                     isVersatile: this.isVersatile,
                     hasSave: this.hasSave,
-                    hasSkill: this.hasSkill
+                    hasSkill: this.hasSkill,
+                    hasArea: this.hasArea
                 };
 
                 if (this.actor.token) {

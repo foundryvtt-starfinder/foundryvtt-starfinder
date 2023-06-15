@@ -25,8 +25,8 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     async getData() {
         const data = await super.getData();
 
-        let lvl = parseFloat(data.system.details.level || 0);
-        let levels = { 0: "0", 0.25: "1/4", [1 / 3]: "1/3", 0.5: "1/2" };
+        const lvl = parseFloat(data.system.details.level || 0);
+        const levels = { 0: "0", 0.25: "1/4", [1 / 3]: "1/3", 0.5: "1/2" };
         data.labels["level"] = lvl >= 1 ? String(lvl) : levels[lvl] || 1;
 
         this._getCrewData(data);
@@ -48,7 +48,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
      * @param {Object} data The data object to update with any crew data.
      */
     async _getCrewData(data) {
-        let crewData = this.actor.system.crew;
+        const crewData = this.actor.system.crew;
 
         const pilotActors = crewData.pilot.actorIds.map(crewId => game.actors.get(crewId));
         const complementActors = crewData.complement.actorIds.map(crewId => game.actors.get(crewId));
@@ -101,7 +101,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
      * @param {Object} data The data object to update with any hangar bay data.
      */
     async _getHangarBayData(data) {
-        let hangarBayData = this.actor.system.hangarBay;
+        const hangarBayData = this.actor.system.hangarBay;
         data.hasHangarBays = this.actor.system.hangarBay.limit > 0;
 
         const hangarBayActors = hangarBayData.actorIds.map(crewId => game.actors.get(crewId));
@@ -124,7 +124,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         };
 
         //   0        1               2              3
-        let [attacks, primarySystems, expansionBays, actorResources] = data.items.reduce((arr, item) => {
+        const [attacks, primarySystems, expansionBays, actorResources] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
             if (!item.config) item.config = {};
             const hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.system.actionType) && (!["weapon", "shield"].includes(item.type) || item.system.equipped);
@@ -188,7 +188,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         // Crew Tab
         html.find('.crew-delete').click(this._onRemoveFromCrew.bind(this));
 
-        let handler = ev => this._onDragCrewStart(ev);
+        const handler = ev => this._onDragCrewStart(ev);
         html.find('li.crew').each((i, li) => {
             li.setAttribute("draggable", true);
             li.addEventListener("dragstart", handler, false);
@@ -230,7 +230,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
      */
     _updateObject(event, formData) {
         const levels = { "1/4": 0.25, "1/3": 1 / 3, "1/2": 0.5 };
-        let v = "system.details.level";
+        const v = "system.details.level";
         let lvl = formData[v];
         lvl = levels[lvl] || parseFloat(lvl);
         if (lvl) formData[v] = lvl < 1 ? lvl : parseInt(lvl);
@@ -469,7 +469,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
         const actorId = $(event.currentTarget).parents('.crew')
             .data('actorId');
-        let actor = game.actors.get(actorId);
+        const actor = game.actors.get(actorId);
         actor.sheet.render(true);
     }
 
@@ -575,7 +575,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             hasDamage: item.hasDamage,
             isVersatile: item.isVersatile,
             hasSave: item.hasSave,
-            hasSkill: this.hasSkill
+            hasSkill: item.hasSkill
         };
 
         const template = `systems/sfrpg/templates/chat/item-action-card.hbs`;
