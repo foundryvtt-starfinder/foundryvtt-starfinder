@@ -54,6 +54,7 @@ export function rollItemMacro(itemUuid, macroType) {
 
         // For backward compatibility's sake, fallback to the old method of searching by name.
         /** @todo Remove this at some point */
+        logCompatibilityWarning("You are using an item macro which uses the item's name instead of its UUID. Support for these types of item macros will be removed in a future version of the SFRPG system. It is recommended to delete and re-create this item macro.", {since: "0.25"});
         const speaker = ChatMessage.getSpeaker();
         let actor;
 

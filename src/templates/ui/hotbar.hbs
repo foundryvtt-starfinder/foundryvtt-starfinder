@@ -1,4 +1,4 @@
-<div id="hotbar" class="flexrow sfrpg" data-tooltip-direction="UP">
+<div id="hotbar" class="flexrow sfrpg {{#if locked}}locked{{/if}}" data-tooltip-direction="UP">
     <div id="hotbar-directory-controls" class="bar-controls flexcol">
         <a id="bar-toggle" data-tooltip="MACRO.CollapseHotbar">
             <i class="fas fa-caret-down"></i>
@@ -14,7 +14,7 @@
                 {{#if this.macro}}data-macro-id="{{this.macro.id}}" data-tooltip="{{this.tooltip}}"{{/if}}>
                 <span class="macro-key">{{this.key}}</span>
                 {{#if this.icon}}
-                <img class="macro-icon {{#if this.greyscale}}greyscale{{/if}} {{#if this.macro.item.macroConfig.isActive}}active{{/if}}" src="{{this.icon}}" alt="{{this.tooltip}}" />
+                <img class="macro-icon {{#if this.greyscale}}greyscale{{/if}} {{#if this.activeGlow}}active{{/if}}" src="{{this.icon}}" alt="{{this.tooltip}}" />
                 {{/if}}
                 {{#if this.macro.item}}
                     <i class="fas {{this.iconClass}} icon"></i>
@@ -27,6 +27,11 @@
             </li>
             {{/each}}
         </ol>
+        <div id="hotbar-lock" class="bar-controls flexcol" data-tooltip-direction="UP">
+            <a class="page-control" data-action="lock" data-tooltip="MACRO.{{ifThen locked "Unlock" "Lock"}}Bar">
+                <i class="fas fa-lock{{#unless locked}}-open{{/unless}}"></i>
+            </a>
+        </div>
         <div id="hotbar-page-controls" class="bar-controls flexcol" data-tooltip-direction="UP">
             <a class="page-control" data-action="page-up" data-tooltip="MACRO.PageUp" alt="{{localize 'MACRO.PageUp'}}" >
                 <i class="fas fa-angle-up"></i></a>

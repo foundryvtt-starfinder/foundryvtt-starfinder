@@ -20,7 +20,7 @@ export class HotbarSFRPG extends Hotbar {
                 const item = deepClone(fromUuidSync(itemMacroDetails?.itemUuid));
                 if (!item || !item.actor) return data;
 
-                item.processData();
+                await item.processData();
 
                 item.macroConfig = {
                     isOnCooldown: item.system.recharge && !!item.system.recharge.value && (item.system.recharge.charged === false),
@@ -40,6 +40,7 @@ export class HotbarSFRPG extends Hotbar {
 
                 slot.iconClass = this._getIcon(item.macroConfig, itemMacroDetails.macroType);
                 slot.greyscale = this._getGreyscaleStatus(item, itemMacroDetails.macroType);
+                slot.activeGlow = itemMacroDetails.macroType === "activate" && item.macroConfig.isActive;
 
                 slot.tooltip += `
                     <br>
