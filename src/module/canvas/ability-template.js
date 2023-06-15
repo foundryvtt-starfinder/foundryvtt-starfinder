@@ -15,7 +15,6 @@ export default class AbilityTemplate extends MeasuredTemplateSFRPG {
    * @returns {AbilityTemplate|null}     The template object, or null if the data does not produce a template
    */
     static fromData({type, distance, color, texture}) {
-        if (!type) return null;
         if (!["cone", "circle", "rect", "ray"].includes(type)) return null;
 
         if (!distance) return null;
