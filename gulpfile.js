@@ -1,4 +1,4 @@
-const { AsyncNedb } = require('nedb-async');
+const { ClassicLevel } = require("classic-level");
 const archiver = require('archiver');
 const argv = require('yargs').argv;
 const chalk = require('chalk');
@@ -87,7 +87,7 @@ async function copyFiles() {
         'src/images/**/*',
         'src/images/*',
         'src/lang/*.json',
-        'src/packs/*.db',
+        'src/packs/**/*',
         'src/templates/**/*.hbs',
         "src/*.json"
     ])
@@ -237,7 +237,7 @@ function JSONstringifyOrder( obj, space, sortingMode = "default" ) {
 function sanitizeJSON(jsonInput) {
     const treeShake = (item) => {
         delete item.sort;
-        delete item.folder;
+        if (!item.folder) delete item.folder;
         delete item._stats;
         delete item.permission;
         delete item.ownership;
@@ -498,26 +498,73 @@ function sanitizeJSON(jsonInput) {
 /**
  * Unpack existing db files into json files.
  */
-async function unpack(sourceDatabase, outputDirectory, partOfCook = false) {
+async function unpack({packName, filePath, outputDirectory, partOfCook = false}) {
+    console.log(`> Starting unpack of ${packName} into ${outputDirectory}`);
     fs.mkdir(`${outputDirectory}`, { recursive: true }, (err) => {
         if (err)
             throw err;
     });
 
-    const db = new AsyncNedb({ filename: sourceDatabase, autoload: true });
-    const items = await db.asyncFind({});
+    const tempDataPath = path.resolve(process.cwd(), "packs-temp");
+
+    const db = new LevelDatabase(filePath, { packName });
+    const { items, folders } = await db.getEntries();
+
+    const promises = [];
+
+    if (folders.length) {
+        const folderMap = new Map();
+        const getFolderPath = (folder, parts = []) => {
+            if (parts.length > 3) {
+                throw (
+                    `Error: Maximum folder depth exceeded for "${folder.name}" in pack: ${packName}`
+                );
+            }
+
+            parts.unshift(
+                sanitize(folder.name)
+                    .replace(/[\s]/g, "_")
+                    .replace(/[,;]/g, "")
+                    .toLowerCase()
+            );
+            if (folder.folder) {
+                // This folder is inside another folder
+                const parent = folders.find((f) => f._id === folder.folder);
+                if (!parent) {
+                    throw (`Error: Unknown parent folder id [${folder.folder}] in pack: ${packName}`);
+                }
+                return getFolderPath(parent, parts);
+            }
+            parts.unshift(packName);
+            return path.join(...parts);
+        };
+
+        const sanitizeFolder = (folder) => {
+            delete folder._stats;
+        };
+
+        for (const folder of folders) {
+            folderMap.set(folder._id, getFolderPath(folder));
+            sanitizeFolder(folder);
+        }
+        const folderFilePath = path.resolve(outputDirectory, "_folders.json");
+        promises.push(fs.promises.writeFile(folderFilePath, JSONstringifyOrder(folders, 2), "utf-8"));
+    }
 
     for (const item of items) {
         const cleanItem = partOfCook ? item : sanitizeJSON(item);
         const jsonOutput = JSONstringifyOrder(cleanItem, 2, "item");
-        let filename = sanitize(item.name);
-        filename = filename.replace(/[\s]/g, "_");
-        filename = filename.replace(/[,;]/g, "");
-        filename = filename.toLowerCase();
+        const filename = sanitize(item.name)
+            .replace(/[\s]/g, "_")
+            .replace(/[,;]/g, "")
+            .toLowerCase();
 
         const targetFile = `${outputDirectory}/${filename}.json`;
-        fs.writeFileSync(targetFile, jsonOutput, { "flag": "w" });
+        promises.push(fs.promises.writeFile(targetFile, jsonOutput, { "flag": "w" }));
     }
+
+    await Promise.all(promises);
+    console.log(chalk.green(`${packName} unpack complete.`));
 }
 
 async function gulpUnpackPacks(done, partOfCook = false) {
@@ -528,29 +575,30 @@ async function unpackPacks(partOfCook = false) {
     const sourceDir = partOfCook ? "./src/packs" : `${getConfig().dataPath.replaceAll("\\", "/")}/data/systems/sfrpg/packs`;
     console.log(`Unpacking ${partOfCook ? "" : "and sanitizing "}all packs from ${sourceDir}`);
 
-    const files = fs.readdirSync(sourceDir);
-    for (const file of files) {
-        if (limitToPack && !file.includes(limitToPack)) {
+    const entries = fs.readdirSync(sourceDir, {withFileTypes: true});
+    const folders = entries.filter(f => !f.isFile());
+    const promises = [];
+    for (const folderEntry of folders) {
+        const folder = folderEntry.name;
+
+        if ((limitToPack
+            && !folder.includes(limitToPack))
+            || folder.endsWith(".db") // Skip NeDB!
+        ) {
             continue;
         }
 
-        if (file.endsWith(".db")) {
-            const fileWithoutExt = file.substr(0, file.length - 3);
-            const unpackDir = `./src/items/${fileWithoutExt}`;
-            const sourceFile = `${sourceDir}/${file}`;
+        const unpackDir = `./src/items/${folder}`;
+        const packDir = `${sourceDir}/${folder}`;
 
-            console.log(`Processing ${fileWithoutExt}`);
+        /* console.log(`> Cleaning up ${unpackDir}`);
+        fs.rmdirSync(unpackDir, { recursive: true }); */
 
-            console.log(`> Cleaning up ${unpackDir}`);
-            fs.rmdirSync(unpackDir, { recursive: true });
+        promises.push(unpack({packName: folder, filePath: packDir, outputDirectory: unpackDir, partOfCook}));
 
-            console.log(`> Unpacking ${sourceFile} into ${unpackDir}`);
-            await unpack(sourceFile, unpackDir, partOfCook);
-
-            console.log(chalk.greenBright(`> Done.`));
-        }
     }
 
+    await Promise.all(promises);
     console.log(`\nUnpack finished.\n`);
 
     return 0;
@@ -589,30 +637,64 @@ async function cookWithOptions(options = { formattingCheck: true }) {
 
     const sourceDir = "./src/items";
     const directories = fs.readdirSync(sourceDir);
+    const promises = [];
     for (const directory of directories) {
         const itemSourceDir = `${sourceDir}/${directory}`;
-        const outputFile = `./src/packs/${directory}.db`;
+        const outputDir = `./src/packs/${directory}`;
 
-        console.log(`Processing ${directory}`);
+        console.log(`Processing ${directory} (${itemSourceDir})`);
         compendiumMap[directory] = {};
 
-        let db = null;
         if (!limitToPack || directory === limitToPack) {
-            if (fs.existsSync(outputFile)) {
-                console.log(`> Removing ${outputFile}`);
-                fs.unlinkSync(outputFile);
+            if (fs.existsSync(outputDir)) {
+                console.log(`> Removing ${outputDir}`);
+                fs.rmdirSync(outputDir, { recursive: true });
             }
 
-            db = new AsyncNedb({ filename: outputFile, autoload: true });
         }
 
-        console.log(`> Reading and sanitizing files in ${itemSourceDir}`);
         const files = fs.readdirSync(itemSourceDir);
+        const parsedFiles = [];
         for (const file of files) {
+            if (file === "_folders.json") continue;
+
             const filePath = `${itemSourceDir}/${file}`;
             let jsonInput = fs.readFileSync(filePath);
             try {
                 jsonInput = JSON.parse(jsonInput);
+                parsedFiles.push(jsonInput);
+
+                // Cached conditions to be referenced later
+                if (directory === "conditions" && jsonInput.name !== "Invisible") {
+                    conditionsCache[jsonInput._id] = jsonInput;
+                }
+                // Cached setting to be referenced later
+                else if (directory === "setting") {
+                    settingCache[jsonInput._id] = jsonInput;
+                }
+
+                if (!limitToPack || directory === limitToPack) {
+                // sanitize the incoming JSON
+                    sanitizeJSON(jsonInput);
+
+                    // Fix missing images
+                    if (!jsonInput.img && !jsonInput.pages) {
+                    // Skip if a journal
+                        jsonInput.img = "icons/svg/mystery-man.svg";
+                    }
+
+                    const movingActorTypes = ["character", "drone", "npc"];
+                    if (movingActorTypes.includes(jsonInput.type)) {
+                        tryMigrateActorSpeed(jsonInput);
+                    }
+                }
+
+                compendiumMap[directory][jsonInput._id] = jsonInput;
+                allItems.push({ pack: directory, data: jsonInput, file });
+
+                if (limitToPack && directory !== limitToPack) {
+                    continue;
+                }
 
             } catch (err) {
                 if (!(directory in packErrors)) {
@@ -623,43 +705,42 @@ async function cookWithOptions(options = { formattingCheck: true }) {
                 continue;
             }
 
-            // Cached conditions to be referenced later
-            if (directory === "conditions" && jsonInput.name !== "Invisible") {
-                conditionsCache[jsonInput._id] = jsonInput;
-            }
-            // Cached setting to be referenced later
-            else if (directory === "setting") {
-                settingCache[jsonInput._id] = jsonInput;
-            }
-
-            if (!limitToPack || directory === limitToPack) {
-                // sanitize the incoming JSON
-                sanitizeJSON(jsonInput);
-
-                // Fix missing images
-                if (!jsonInput.img && !jsonInput.pages) {
-                    // Skip if a journal
-                    jsonInput.img = "icons/svg/mystery-man.svg";
-                }
-
-                const movingActorTypes = ["character", "drone", "npc"];
-                if (movingActorTypes.includes(jsonInput.type)) {
-                    tryMigrateActorSpeed(jsonInput);
-                }
-            }
-
-            compendiumMap[directory][jsonInput._id] = jsonInput;
-            allItems.push({ pack: directory, data: jsonInput, file: file });
-
-            if (limitToPack && directory !== limitToPack) {
-                continue;
-            }
-            await db.asyncInsert(jsonInput);
         }
+
+        const parsedFolders = (() => {
+            const foldersFile = path.resolve(itemSourceDir, "_folders.json");
+            if (fs.existsSync(foldersFile)) {
+                const jsonString = fs.readFileSync(foldersFile, "utf-8");
+                const foldersSource = (() => {
+                    try {
+                        return JSON.parse(jsonString);
+                    } catch (error) {
+                        if (!(directory in packErrors)) {
+                            packErrors[directory] = [];
+                        }
+                        packErrors[directory].push(`${chalk.bold(filePath)}: Error parsing folder: ${err}`);
+                        cookErrorCount++;
+                    }
+                })();
+
+                return foldersSource;
+            }
+            return [];
+        })();
+
+        const duplicate = (data) => {
+            return JSON.parse(JSON.stringify(data));
+        };
+
         if (!limitToPack || directory === limitToPack) {
-            console.log(chalk.greenBright(`> Finished processing data for ${directory}.`));
+            const packName = path.basename(outputDir);
+            const db = new LevelDatabase(outputDir, { packName });
+            promises.push(db.createPack(duplicate(parsedFiles), duplicate(parsedFolders), packName));
         }
     }
+
+    await Promise.all(promises);
+    console.log(chalk.greenBright("\nCook complete."));
 
     if (cookErrorCount > 0) {
         console.error(chalk.red(`\nCritical parsing errors occurred, aborting cook.`));
@@ -681,8 +762,7 @@ async function cookWithOptions(options = { formattingCheck: true }) {
     console.log(`\nStarting consistency check.`);
     consistencyCheck(allItems, compendiumMap);
 
-    console.log(`\nUpdating items with updated IDs.\n`);
-
+    console.log(`\nBeginning unpack \n`);
     await unpackPacks(true);
 
     console.log(`\nCook finished with ${cookErrorCount} errors.\n`);
@@ -1799,11 +1879,138 @@ function updateManifest(cb) {
         cb(err);
     }
 }
+class LevelDatabase extends ClassicLevel {
+    DB_KEYS = ["actors", "items", "journal", "macros", "tables"];
+    #dbkey;
+    #embeddedKey;
+
+    #documentDb;
+    #foldersDb;
+    #embeddedDb = null;
+
+    constructor(location, options) {
+        const dbOptions = options.dbOptions ?? { keyEncoding: "utf8", valueEncoding: "json" };
+        super(location, dbOptions);
+
+        const { dbKey, embeddedKey } = this.#getDBKeys(options.packName);
+
+        this.#dbkey = dbKey;
+        this.#embeddedKey = embeddedKey;
+
+        this.#documentDb = this.sublevel(dbKey, dbOptions);
+        this.#foldersDb = this.sublevel("folders", dbOptions);
+        if (this.#embeddedKey) {
+            this.#embeddedDb = this.sublevel(
+                `${this.#dbkey}.${this.#embeddedKey}`,
+                dbOptions
+            );
+        }
+    }
+
+    async createPack(docSources, folders, packName) {
+        const isDoc = (source) => {
+            return isObject(source) && "_id" in source;
+        };
+
+        const docBatch = this.#documentDb.batch();
+        const embeddedBatch = this.#embeddedDb?.batch();
+        for (const source of docSources) {
+            if (this.#embeddedKey) {
+                const embeddedDocs = source[this.#embeddedKey];
+                if (Array.isArray(embeddedDocs)) {
+                    for (let i = 0; i < embeddedDocs.length; i++) {
+                        const doc = embeddedDocs[i];
+                        if (isDoc(doc) && embeddedBatch) {
+                            embeddedBatch.put(`${source._id}.${doc._id}`, doc);
+                            embeddedDocs[i] = doc._id;
+                        }
+                    }
+                }
+            }
+
+            docBatch.put(source._id, source);
+        }
+        await docBatch.write();
+        if (embeddedBatch?.length) {
+            await embeddedBatch.write();
+        }
+        if (folders.length) {
+            const folderBatch = this.#foldersDb.batch();
+            for (const folder of folders) {
+                folderBatch.put(folder._id, folder);
+            }
+            await folderBatch.write();
+        }
+        await this.close();
+        console.log(chalk.greenBright(`> Finished processing data for ${packName}.`));
+    }
+
+    async getEntries() {
+        const items = [];
+        for await (const [docId, source] of this.#documentDb.iterator()) {
+            const embeddedKey = this.#embeddedKey;
+            if (embeddedKey && source[embeddedKey] && this.#embeddedDb) {
+                const embeddedDocs = await this.#embeddedDb.getMany(
+                    source[embeddedKey]?.map((embeddedId) => `${docId}.${embeddedId}`) ?? []
+                );
+                source[embeddedKey] = embeddedDocs.filter(i => !!i);
+            }
+            items.push(source);
+        }
+        const folders = [];
+        for await (const [_key, folder] of this.#foldersDb.iterator()) {
+            folders.push(folder);
+        }
+        await this.close();
+
+        return { items, folders };
+    }
+
+    #getDBKeys(packName) {
+        const DB_KEYS = ["actors", "items", "journal", "macros", "tables"];
+        const manifest = getManifest().file;
+        const metadata = manifest.packs.find((p) => p.path.endsWith(packName));
+        if (!metadata) {
+            throw (
+                `Error generating dbKeys: Compendium ${packName} has no metadata in the local system.json file.`
+            );
+        }
+
+        const dbKey = (() => {
+            switch (metadata.type) {
+                case "JournalEntry":
+                    return "journal";
+                case "RollTable":
+                    return "tables";
+                default: {
+                    const key = `${metadata.type.toLowerCase()}s`;
+                    if (DB_KEYS.includes(key)) {
+                        return key;
+                    }
+                    throw (`Unkown Document type: ${metadata.type}`);
+                }
+            }
+        })();
+        const embeddedKey = (() => {
+            switch (dbKey) {
+                case "actors":
+                    return "items";
+                case "journal":
+                    return "pages";
+                case "tables":
+                    return "results";
+                default:
+                    return null;
+            }
+        })();
+        return { dbKey, embeddedKey };
+    }
+}
 
 const execBuild = gulp.parallel(buildLess, copyFiles, copyLibs);
 
 exports.build = gulp.series(clean, execBuild);
-exports.watch = gulp.series(execBuild, buildWatch);
+exports.watch = buildWatch;
 exports.clean = clean;
 exports.link = linkUserData;
 exports.copyUser = copyUserData;
