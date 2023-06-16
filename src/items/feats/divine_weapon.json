@@ -1,0 +1,242 @@
+{
+  "_id": "Dwwvg0FEgA2PENHE",
+  "name": "Divine Weapon",
+  "type": "feat",
+  "img": "systems/sfrpg/icons/feats/weapon_focus.webp",
+  "system": {
+    "type": "",
+    "ability": "",
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "",
+    "actionType": "",
+    "activation": {
+      "type": "",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "",
+      "shapable": false,
+      "shape": "",
+      "units": null,
+      "value": null
+    },
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "effect": "",
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "damageNotes": "",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>You gain bonuses to your deity's favorite weapon.</p>\n<p><strong>Prerequisites:</strong> Worship a deity of an alignment within one step of your own alignment.</p>\n<p><strong>Benefit:</strong> You gain proficiency with all models of your deity’s favored weapon, such as all longswords (standard, sintered, microserrated, and so forth). If you are 3rd level or higher, you also gain @UUID[Compendium.sfrpg.feats.Item.9Us7Eg9cAoq3BcS5]{Weapon Specialization} as a bonus feat for your deity’s favored weapon. If you are 10th level or higher, when you score a critical hit with your deity’s favored weapon, you increase the DC to resist that weapon’s critical hit effect by 2; this does not stack with the @UUID[Compendium.sfrpg.feats.Item.8BuU1VMQgMbMsz0i]{Improved Critical} feat.</p>\n<p><strong>Special:</strong> If you change which deity you worship, this feat gives you no benefit until you next gain a character level. You then receive the benefit appropriate for the deity you now worship if your alignment is within one step of that deity’s.</p>\n<p><em>Enable the appropriate Weapon Specialisation modifier in the Modifiers tab.</em></p>"
+    },
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
+    "details": {
+      "category": "feat",
+      "combat": false,
+      "specialAbilityType": ""
+    },
+    "duration": {
+      "units": "",
+      "value": ""
+    },
+    "formula": "",
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "309e09f2-b155-4a7c-ac20-bee89333af65",
+        "name": "Divine Weapon - Small Arms",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-damage",
+        "enabled": false,
+        "max": 0,
+        "modifier": "floor(@details.level.value / 2)",
+        "modifierType": "formula",
+        "notes": "you also gain Weapon Specialization as a bonus feat for your deity’s favored weapon.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "smallA"
+      },
+      {
+        "_id": "6ba5c41c-af3b-4f17-a421-72e5440819dd",
+        "name": "Divine Weapon - Longarms",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-damage",
+        "enabled": false,
+        "max": 0,
+        "modifier": "@details.level.value",
+        "modifierType": "formula",
+        "notes": "you also gain Weapon Specialization as a bonus feat for your deity’s favored weapon.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "longA"
+      },
+      {
+        "_id": "02f9dd0d-0dc7-4e94-b030-ec215da60502",
+        "name": "Divine Weapon - Basic Melee",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-damage",
+        "enabled": false,
+        "max": 0,
+        "modifier": "@details.level.value",
+        "modifierType": "formula",
+        "notes": "you also gain Weapon Specialization as a bonus feat for your deity’s favored weapon.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "basicM"
+      },
+      {
+        "_id": "69129a34-99cd-470a-814a-d078ac4a58e4",
+        "name": "Divine Weapon - Adv Melee",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-damage",
+        "enabled": false,
+        "max": 0,
+        "modifier": "@details.level.value",
+        "modifierType": "formula",
+        "notes": "you also gain Weapon Specialization as a bonus feat for your deity’s favored weapon.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "advancedM"
+      },
+      {
+        "_id": "2e472393-946b-4979-951d-34426516be6d",
+        "name": "Divine Weapon - Heavy",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-damage",
+        "enabled": false,
+        "max": 0,
+        "modifier": "@details.level.value",
+        "modifierType": "formula",
+        "notes": "you also gain Weapon Specialization as a bonus feat for your deity’s favored weapon.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "heavy"
+      },
+      {
+        "_id": "c78a0e9d-c789-4603-820f-dd5759c35351",
+        "name": "Divine Weapon - Sniper",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-damage",
+        "enabled": false,
+        "max": 0,
+        "modifier": "@details.level.value",
+        "modifierType": "formula",
+        "notes": "you also gain Weapon Specialization as a bonus feat for your deity’s favored weapon.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "sniper"
+      },
+      {
+        "_id": "db177db7-a29e-4aa8-80ca-a7e27db8ba97",
+        "name": "Divine Weapon - Operative",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-property-damage",
+        "enabled": false,
+        "max": 0,
+        "modifier": "-ceil(@details.level.value/2)",
+        "modifierType": "formula",
+        "notes": "you also gain Weapon Specialization as a bonus feat for your deity’s favored weapon.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "operative"
+      },
+      {
+        "_id": "72732d84-7a2a-45de-9a5e-3bd04d4866c6",
+        "name": "Divine Weapon - Special",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-damage",
+        "enabled": false,
+        "max": 0,
+        "modifier": "@details.level.value",
+        "modifierType": "formula",
+        "notes": "you also gain Weapon Specialization as a bonus feat for your deity’s favored weapon.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "special"
+      }
+    ],
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": null,
+      "value": null
+    },
+    "recharge": {
+      "charged": false,
+      "value": null
+    },
+    "requirements": "Worship a deity of an alignment within one step of your own alignment.",
+    "rollNotes": "",
+    "save": {
+      "type": "",
+      "dc": null,
+      "descriptor": "negate"
+    },
+    "source": "GM pg. 99",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": 0,
+      "per": "",
+      "value": 0
+    }
+  }
+}

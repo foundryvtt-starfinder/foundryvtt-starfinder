@@ -9,6 +9,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "",
@@ -17,6 +18,7 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": null,
       "value": null
@@ -30,14 +32,55 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.GvubHqBOlV1CsWvz]{Hunter}</p>\n<p>You add Perception to your list of class skills, and you gain a free skill rank at each soldier level you can use only for Perception or Survival (this does not allow you to exceed the maximum number of skill ranks in a single skill). If you take the hunter fighting style as your secondary fighting style, you gain a free skill rank for these skills only at 9th level and at each soldier level gained thereafter.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.GvubHqBOlV1CsWvz]{Hunter}</p>\n<p>You add @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.gZlg2ZKze0erNLmP]{Perception} to your list of class skills, and you gain a free skill rank at each soldier level you can use only for Perception or @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.UDTsEIldhXTn0VJA]{Survival} (this does not allow you to exceed the maximum number of skill ranks in a single skill). If you take the hunter fighting style as your secondary fighting style, you gain a free skill rank for these skills only at 9th level and at each soldier level gained thereafter.</p>\n<p><em>Enable modifier for when Hunter fighting style was selected in the Modifiers tab.</em></p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
     "details": {
       "category": "classFeature",
+      "combat": false,
       "specialAbilityType": "ex"
     },
     "duration": {
@@ -45,7 +88,39 @@
       "value": ""
     },
     "formula": "",
-    "modifiers": [],
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "b45074c0-94f7-472e-8104-098e279262d0",
+        "name": "Hunter’s Expertise (Ex) - Primary fighting style",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "skill-points",
+        "enabled": false,
+        "max": 0,
+        "modifier": "@classes.soldier.levels",
+        "modifierType": "constant",
+        "notes": "You gain a free skill rank at each soldier level you can use only for Perception or Survival (this does not allow you to exceed the maximum number of skill ranks in a single skill).",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "a34f83bd-b6f4-4f5a-8255-af61fb8f6674",
+        "name": "Hunter’s Expertise (Ex) - Secondary fighting style",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "skill-points",
+        "enabled": false,
+        "max": -8,
+        "modifier": "(@classes.soldier.levels - 8)",
+        "modifierType": "constant",
+        "notes": "If you take the hunter fighting style as your secondary fighting style, from 9th onward you gain a free skill rank at each soldier level you can use only for Perception or Survival (this does not allow you to exceed the maximum number of skill ranks in a single skill).",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -57,6 +132,7 @@
       "value": null
     },
     "requirements": "1st Technique",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,

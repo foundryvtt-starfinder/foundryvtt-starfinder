@@ -30,7 +30,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
     async getData() {
         const sheetData = await super.getData();
 
-        let hp = sheetData.system.attributes.hp;
+        const hp = sheetData.system.attributes.hp;
         if (hp.temp === 0) delete hp.temp;
         if (hp.tempmax === 0) delete hp.tempmax;
 
@@ -69,14 +69,14 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         }
 
         //   0      1       2      3        4      5       6           7               8     9
-        let [items,
+        const [items,
             spells,
             feats,
             classes,
             races,
             themes,
             archetypes,
-            conditionItems,
+            conditionItems, // contains Conditions and other timedEffects
             asis,
             actorResources] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
@@ -115,12 +115,10 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
                 } else {
                     arr[0].push(item); // items
                 }
+            } else if (item.type === "effect") {
+                arr[7].push(item); // timedEffects & conditionItems
             } else if (item.type === "feat") {
-                if ((item.system.requirements?.toLowerCase() || "") === "condition") {
-                    arr[7].push(item); // conditionItems
-                } else {
-                    arr[2].push(item); // feats
-                }
+                arr[2].push(item); // feats
                 item.isFeat = true;
             } else if (item.type === "class") arr[3].push(item); // classes
             else if (item.type === "race") arr[4].push(item); // races
@@ -138,7 +136,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         this.processItemContainment(items, function(itemType, itemData) {
             let targetItemType = itemType;
             if (!(itemType in inventory)) {
-                for (let [key, entry] of Object.entries(inventory)) {
+                for (const [key, entry] of Object.entries(inventory)) {
                     if (entry.dataset.type.includes(itemType)) {
                         targetItemType = key;
                         break;
@@ -209,8 +207,8 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
 
         };
 
-        let otherFeatures = [];
-        for (let f of feats) {
+        const otherFeatures = [];
+        for (const f of feats) {
             if (f.system.activation.type) features.active.items.push(f);
             else {
                 try {
@@ -242,12 +240,12 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         data.features = Object.values(features);
 
         const modifiers = {
-            conditions: { label: "SFRPG.ModifiersConditionsTabLabel", modifiers: [], dataset: { subtab: "conditions" }, isConditions: true },
+            conditions: { label: "SFRPG.ModifiersConditionsTabLabel", modifiers: [], dataset: { subtab: "conditions", type: "effect" }, isConditions: true, allowAdd: true },
             permanent: { label: "SFRPG.ModifiersPermanentTabLabel", modifiers: [], dataset: { subtab: "permanent" } },
             temporary: { label: "SFRPG.ModifiersTemporaryTabLabel", modifiers: [], dataset: { subtab: "temporary" } }
         };
 
-        let [permanent, temporary, itemModifiers, conditions, misc] = actorData.modifiers.reduce((arr, modifier) => {
+        const [permanent, temporary, itemModifiers, conditions, misc] = actorData.modifiers.reduce((arr, modifier) => {
             if (modifier.subtab === "permanent") arr[0].push(modifier);
             else if (modifier.subtab === "conditions") arr[3].push(modifier);
             else arr[1].push(modifier); // Any unspecific categories go into temporary.

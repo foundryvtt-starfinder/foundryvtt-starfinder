@@ -15,6 +15,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -36,6 +37,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -62,6 +64,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -83,25 +86,7 @@
       "_id": "PP26TwUOlGOgfrZ2",
       "name": "Electrical Discharge (Su)",
       "type": "weapon",
-      "ammunition": false,
-      "augmentation": false,
-      "consumable": false,
-      "container": false,
-      "equipment": false,
-      "fusion": true,
-      "goods": false,
-      "hybrid": false,
       "img": "icons/svg/item-bag.svg",
-      "magic": false,
-      "shield": false,
-      "spell": false,
-      "storage": {
-        "type": "slot",
-        "affectsEncumbrance": true,
-        "amount": 0,
-        "subtype": "fusion",
-        "weightProperty": "level"
-      },
       "system": {
         "type": "",
         "ability": "",
@@ -188,6 +173,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -308,6 +294,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -315,6 +302,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -330,13 +318,7 @@
         },
         "weaponCategory": "uncategorized",
         "weaponType": "smallA"
-      },
-      "technological": false,
-      "upgrade": false,
-      "vehicleAttack": false,
-      "vehicleSystem": false,
-      "weapon": false,
-      "weaponAccessory": false
+      }
     },
     {
       "_id": "M3vYzPs6FDiPi17C",
@@ -349,6 +331,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "action",
@@ -386,6 +369,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -412,6 +396,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "reflex",
           "dc": "11",
@@ -437,6 +422,7 @@
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -458,6 +444,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -484,6 +471,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -512,6 +500,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "action",
@@ -520,6 +509,7 @@
         },
         "allowedClasses": {
           "myst": false,
+          "precog": false,
           "tech": true,
           "wysh": true
         },
@@ -539,6 +529,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -568,8 +559,12 @@
           "prepared": true
         },
         "range": {
-          "units": "medium"
+          "additional": "",
+          "per": "",
+          "units": "medium",
+          "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "fort",
           "dc": null,
@@ -600,6 +595,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "action",
@@ -608,6 +604,7 @@
         },
         "allowedClasses": {
           "myst": true,
+          "precog": false,
           "tech": true,
           "wysh": true
         },
@@ -627,6 +624,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -656,8 +654,12 @@
           "prepared": true
         },
         "range": {
-          "units": "close"
+          "additional": "",
+          "per": "",
+          "units": "close",
+          "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "will",
           "dc": "13",
@@ -688,6 +690,7 @@
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -716,11 +719,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -738,6 +738,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -788,12 +789,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -924,8 +931,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<h2>Description</h2>\n<p>Like the other natives of the strange hyperspace plane of the Drift, Drift motes aren’t well understood. Many planar scholars believe they were created when parts of the Plane of Air were pulled into the Drift and mutated by unknown energies. However, some religious sages proclaim that Drift motes are the stray, castoff thoughts of the goddess @UUID[Compendium.sfrpg.setting.FYV6RgTjPdg72RF0]{Triune} given some form of life by strange planar energies.</p>\n<p>Whatever their origin, Drift motes are tiny balls of electrical energy that flit aimlessly through the Drift until they sense passing starships. Instinctively attracted to the electrical currents within most vessels, a Drift mote enters a ship through its sensors or other technological components. Once inside a ship, a Drift mote moves haphazardly through the ship’s rooms and corridors, bouncing off walls, floors, and ceilings. As it travels, its random bursts of electrical energy often damage sensitive equipment or start fires. A Drift mote can be captured within a conductive cage surrounded by plastic, but most crews settle for destroying such a pest before it causes too much havoc. However, a Drift mote defends itself if attacked, unleashing a dangerous wave of jolting energy. Those familiar with Drift motes know to ground themselves as well as possible before confronting one to protect themselves from the electrical discharge.</p>\n<p>Travelers in the Drift have reported seeing Drift motes that are much bigger than the norm, some the size of small starships, but these stories have been dismissed as either tall tales, the consequences of drunkenness, or the result of simply spending too much time in the Drift.</p>",
@@ -935,6 +945,10 @@
       "cr": 0.5,
       "environment": "the Drift",
       "organization": "solitary or dance (3-5)",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #34 pg. 60",
@@ -1238,6 +1252,9 @@
       },
       "senses": "darkvision 60 ft.",
       "size": "tiny",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

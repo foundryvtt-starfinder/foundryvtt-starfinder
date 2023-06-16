@@ -73,6 +73,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         this._ensureHasModifiers(this.system);
         const modifiers = this.getAllModifiers();
 
+        // const timedEffects = SFRPGTimedEffect.getAllTimedEffects(this);
+        this.system.timedEffects = new Map();
+
         const items = this.items;
         const armors = items.filter(item => item.type === "equipment" && item.system.equipped);
         const shields = items.filter(item => item.type === "shield" && item.system.equipped);
@@ -100,6 +103,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             classes,
             chassis,
             modifiers,
+            // timedEffects,
             theme,
             mods,
             armorUpgrades,
@@ -151,33 +155,6 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         }
 
         return super.update(data, options);
-    }
-
-    /**
-     * Extend OwnedItem creation logic for the SFRPG system to make weapons proficient by default when dropped on a NPC sheet
-     * See the base Actor class for API documentation of this method
-     *
-     * @param {String} embeddedName The type of Entity being embedded.
-     * @param {Object} itemData The data object of the item
-     * @param {Object} options Any options passed in
-     * @returns {Promise}
-     */
-    async createEmbeddedDocuments(embeddedName, itemData, options) {
-        for (const item of itemData) {
-            if (!this.hasPlayerOwner) {
-                const t = item.type;
-                const initial = {};
-                if (t === "weapon") initial['system.proficient'] = true;
-                if (["weapon", "equipment"].includes(t)) initial['system.equipped'] = true;
-                if (t === "spell") initial['system.prepared'] = true;
-                mergeObject(item, initial);
-            }
-
-            if (item.effects instanceof Array) item.effects = null;
-            else if (item.effects instanceof Map) item.effects.clear();
-        }
-
-        return super.createEmbeddedDocuments(embeddedName, itemData, options);
     }
 
     /**
@@ -254,6 +231,66 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     _onUpdate(data, options, userId) {
         super._onUpdate(data, options, userId);
         this.floatingHpOnUpdate(this, data, options, userId);
+    }
+
+    /**
+     * Delete any of corresponding timedEffect objects of the actor's items.
+     */
+    _onDelete(options, userId) {
+        for (const item of this.items) {
+            if (item.type === "effect") {
+                const effect = game.sfrpg.timedEffects.get(item.uuid);
+                if (!effect) continue;
+
+                // Need to pass the item since the item has already been deleted from the server
+                effect.delete(item);
+            }
+
+        }
+
+        return super._onDelete(options, userId);
+    }
+
+    /**
+     * Toggle a status icon for created effects
+     */
+    async _onCreateDescendantDocuments(parent, collection, documents, data, options, userId) {
+        for (const item of documents) {
+            const itemData = item.system;
+
+            if (item.type === "effect" && itemData.showOnToken) {
+                const tokens = this.getActiveTokens(true);
+                if (tokens.length === 0) return;
+
+                const statusEffect = {
+                    id: item.name.slugify({replacement: "-", strict: true}),
+                    label: item.name,
+                    icon: item.img || 'icons/svg/item-bag.svg'
+                };
+                for (const token of tokens) {
+                    token.toggleEffect(statusEffect, {active: itemData.enabled, overlay: false});
+                }
+            }
+        }
+
+        super._onCreateDescendantDocuments(parent, collection, documents, data, options, userId);
+    }
+
+    /**
+     * Delete item's corresponding timedEffect objects
+     */
+    _onDeleteDescendantDocuments(parent, collection, documents, data, options, userId) {
+        for (const item of documents) {
+            if (item.type === 'effect') {
+                const effect = game.sfrpg.timedEffects.get(item.uuid);
+                if (!effect) continue;
+
+                // Need to pass the item since the item has already been deleted from the server
+                effect.delete(item);
+            }
+        }
+
+        return super._onDeleteDescendantDocuments(parent, collection, documents, data, options, userId);
     }
 
     async useSpell(item, { configureDialog = true } = {}) {
