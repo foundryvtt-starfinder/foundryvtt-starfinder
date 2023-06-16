@@ -1,6 +1,6 @@
 <form class="{{cssClass}}" id="add-edit-skill-form" autocomplete="off">
     <div class="form-group">
-        <label>Ability</label>
+        <label>{{localize "SFRPG.ModifierTypeAbility"}}</label>
         <div class="form-fields">
             <select name="ability">
                 {{#select skill.ability}}
@@ -12,26 +12,26 @@
         </div>
     </div>
     <div class="form-group">
-        <label>Ranks</label>
+        <label>{{localize "SFRPG.SkillsHeaderRanks"}}</label>
         <div class="form-fields">
             <input type="number" name="ranks" value="{{skill.ranks}}" data-dtype="Number" placeholder="0" />
         </div>
     </div>
     <div class="form-group">
-        <label>Misc. Modifiers</label>
+        <label>{{localize "SFRPG.SkillMiscModifiersLabel"}}</label>
         <div class="form-fields">
             <input type="number" name="misc" value="{{skill.misc}}" data-dtype="Number" placeholder="0" />
         </div>
     </div>
     <div class="form-group">
-        <label>Skill Notes</label>
+        <label>{{localize "SFRPG.SkillNotes"}}</label>
         <div class="form-fields">
             <textarea type="text" name="notes" value="{{skill.notes}}" data-dtype="text">{{skill.notes}}</textarea>
         </div>
     </div>
     {{#if hasSubName}}
     <div class="form-group">
-        <label>Profession Name</label>
+        <label>{{localize "SFRPG.SkillProfessionName"}}</label>
         <div class="form-fields">
             <input type="text" name="subname" value="{{skill.subname}}" placeholder="-" />
         </div>
@@ -40,22 +40,22 @@
     <div class="form-group stacked">
         <label>Skill Properties</label>
         <label class="checkbox">
-            <input type="checkbox" name="value" {{checked skill.value}}/> Class Skill
+            <input type="checkbox" name="value" {{checked skill.value}}/> {{localize "SFRPG.SkillProficiencyLevelClassSkill"}}
         </label>
         <label class="checkbox">
-            <input type="checkbox" name="isTrainedOnly" {{checked skill.isTrainedOnly}}/> Trained Only
+            <input type="checkbox" name="isTrainedOnly" {{checked skill.isTrainedOnly}}/> {{localize "SFRPG.SkillTrainedOnly"}}
         </label>
         <label class="checkbox">
-            <input type="checkbox" name="hasArmorCheckPenalty" {{checked skill.hasArmorCheckPenalty}}/> Armor Check Penalty
+            <input type="checkbox" name="hasArmorCheckPenalty" {{checked skill.hasArmorCheckPenalty}}/> {{localize "SFRPG.ArmorCheckPenalty"}}
         </label>
         {{#if isNpc}}
         <label class="checkbox">
-            <input type="checkbox" name="enabled" {{checked skill.enabled}}/> Enabled
+            <input type="checkbox" name="enabled" {{checked skill.enabled}}/> {{localize "SFRPG.ModifierEnabledLabel"}}
         </label>
         {{/if}}
         {{#if canDelete}}
         <label class="checkbox">
-            <input type="checkbox" name="remove" /> Delete?
+            <input type="checkbox" name="remove" /> {{localize "SFRPG.SkillDelete"}}
         </label>
         {{/if}}
     </div>

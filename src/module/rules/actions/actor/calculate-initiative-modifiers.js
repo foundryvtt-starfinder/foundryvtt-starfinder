@@ -39,7 +39,8 @@ export default function(engine) {
                 }
                 return false;
             }
-        }), context);
+            else return true;
+        }), context, {actor: fact.actor});
 
         const mod = Object.entries(mods).reduce((prev, curr) => {
             if (curr[1] === null || curr[1].length < 1) return prev;

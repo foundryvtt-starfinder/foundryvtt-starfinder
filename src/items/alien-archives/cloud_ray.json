@@ -8,6 +8,7 @@
       "_id": "mfueqW6CAD8wSrrb",
       "name": "Tail Lash (plus 2d6 E)",
       "type": "weapon",
+      "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -18,6 +19,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -52,6 +54,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -89,8 +92,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
@@ -99,6 +105,7 @@
           "units": "",
           "value": null
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
@@ -109,12 +116,14 @@
         "proficient": true,
         "properties": {},
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -122,6 +131,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -157,6 +167,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -191,6 +202,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -228,8 +240,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
@@ -238,6 +253,7 @@
           "units": "",
           "value": null
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
@@ -334,12 +350,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -347,6 +365,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -375,6 +394,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "action",
@@ -396,8 +416,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>Three times per day as a swift action, a cloud skate can gain a burst of speed until the&nbsp; beginning of its next turn. During this time, it doubles its fly speed, gains Spring Attack as a bonus feat, and deals an additional 1d8 damage with its tail lash attack.</p>"
         },
@@ -436,6 +459,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -464,6 +488,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "none",
@@ -485,8 +510,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>If a cloud skate is reduced to 0 Hit Points by fire or electricity damage, its internal reservoirs of explosive gases and combustible fluids detonate, dealing the listed fire damage to all targets in a 20-foot burst centered on itself (Reflex DC 14 half).</p>"
         },
@@ -509,6 +537,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "reflex",
           "dc": "14",
@@ -530,12 +559,14 @@
   "prototypeToken": {
     "name": "Cloud Ray",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -564,11 +595,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -586,6 +614,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 4
@@ -636,12 +665,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -699,7 +734,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 5
@@ -708,7 +744,8 @@
         "special": "original base: 5 ft.; original special: fly 70 ft. (Ex, perfect)",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -769,12 +806,26 @@
       "alignment": "N",
       "aura": "",
       "biography": {
+        "age": 0,
+        "dateOfBirth": "",
+        "deity": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
+        "height": "",
+        "homeWorld": "",
+        "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>Gliding dreamily through the cloudy ecosystems of @UUID[Compendium.sfrpg.setting.2K7muQyxlXW8wqb3]{Bretheda},&nbsp;@UUID[Compendium.sfrpg.setting.ac6z5Rqyx0oLzvVf]{Liavara}, and other gas giants, cloud rays move with fluid grace&nbsp;and terrifying speed. Their wide bodies consist of a single broad&nbsp;wing and three trailing tails, with two rows of yellow-green&nbsp;eyes and a wide maw set forward, roughly denoting a “head.”&nbsp;Mottled patterns of orange, red, and purple line their backs;&nbsp;their coloration grows brighter and more distinct as they age.&nbsp;Schools of these majestic predators periodically flock in the&nbsp;dozens, grazing on clouds of drift algae in the upper atmosphere&nbsp;for months before descending into the thick, lower atmosphere&nbsp;to actively hunt larger prey. Because of this cyclical behavior,&nbsp;many assume cloud rays are gentle giants emblematic of the&nbsp;Pact Worlds’ unspoiled wilds before getting caught by surprise&nbsp;and attacked during the rays’ aggressive cycle.</p>\n<p>Like many Brethedan creatures, a cloud ray almost&nbsp;constantly filter feeds. It ingests organic compounds from&nbsp;the gas giant’s atmosphere before breaking them down for&nbsp;energy and storing the lighter-than-air byproduct gases in float&nbsp;&nbsp;bladders to maintain its buoyancy at rest. When in distress&nbsp;or in pursuit, a cloud ray ejects a portion of this gas into its&nbsp;blast siphons, specialized organs located on either side of&nbsp;its body. A cloud ray’s body has evolved to withstand these&nbsp;blasts and high-G maneuvers—with its flexible cartilaginous&nbsp;skeleton, cushioned nervous system, and sharp tails that gain&nbsp;lethal momentum from the burst—yet the ray isn’t equipped to&nbsp;withstand explosive forces outside the blast siphon. Deadly&nbsp;heat can accidentally trigger the volatile gases, causing a cloud&nbsp;ray to detonate in a dangerous fireball.</p>\n<p>Smaller and more social cousins to cloud rays, cloud skates&nbsp;remain together in small hunting packs when they enter their&nbsp;aggression cycle. Cloud skates tend to act more skittish,&nbsp;however, and keep their distance from settlements.</p>\n<p>Though cloud rays travel in small groups during their passive&nbsp;cycles and when breeding, they hunt alone once they enter&nbsp;their aggression cycle. Mature males typically maintain their&nbsp;active cycles for longer periods, lurking in the soupy lower&nbsp;atmosphere, and they periodically jostle each other in finslapping&nbsp;dominance displays that echo hauntingly for miles.&nbsp;Like most Brethedan creatures, cloud rays can easily shift their&nbsp;sex to adapt to their social surroundings, but once an adult&nbsp;shifts to male, it generally remains too aggressive and isolated&nbsp;to shift to another sex. After rising to the upper atmosphere to&nbsp;mate, a female deposits her eggs in delicate wisps kept aloft by&nbsp;the wind. These eggs hatch several weeks later, and the tiny&nbsp;rays shelter within drifting plant habitats for a few months&nbsp;before growing large enough to set off in search of richer&nbsp;nutrition. Reaching adulthood takes roughly 15 years for a&nbsp;cloud ray or 9 years for a cloud skate, after which either species&nbsp;can live as long as a century—if not killed for food before then.</p>\n<p>Despite their fish-like appearance, the predominantly warmblooded&nbsp;cloud rays supplement their warmth by basking in&nbsp;sunlight and adjusting their coloration to absorb or reflect more&nbsp;&nbsp;solar energy. Their movements generate electrical charges that&nbsp;they store in an organic capacitor at the base of their tails and&nbsp;can discharge into prey. However, the smaller cloud skates&nbsp;possess only a rudimentary version of this organ that merely&nbsp;absorbs minor charges and gradually releases them as an&nbsp;underdeveloped form of electroreception.</p>\n<h2>CLOUD RAY COMPANIONS</h2>\n<p>Cloud rays can be tamed with patience and food, making them favorite mounts for gas prospectors and naturalists on gas giants. Raised to smaller sizes than their wild counterparts, they serve as ideal companions for groups or industrial use in aerial environments. Their ability to survive by grazing on floating algae and lichen makes them more reliable than many vehicles in isolated frontiers. Careful control over what and how much the beast eats helps keep them in their docile grazing cycle and suppresses their combustible death throes as well. Most cloud rays bond to a single master, becoming notoriously difficult with new riders. Cloud rays can flourish on almost any gas giant, and domesticated rays can even survive in the skies above terrestrial worlds with proper supplements.</p>\n<h3><strong>CLOUD RAY&nbsp; &nbsp; &nbsp;Levels 6-20</strong></h3>\n<p>Huge animal</p>\n<p><strong>Senses</strong>&nbsp;low-light vision</p>\n<p><strong>Good Save</strong>&nbsp;Ref;&nbsp;<strong>Poor Saves</strong>&nbsp;Fort, Will</p>\n<p><strong>Resistances</strong>&nbsp;electricity 10</p>\n<p><strong>Speed</strong>&nbsp;5 ft., fly 70 ft. (Ex, perfect)</p>\n<p><strong>Melee Attack</strong>&nbsp;tail lash&nbsp;(S)</p>\n<p><strong>Space</strong>&nbsp;15 ft.;&nbsp;<strong>Reach 1</strong> 5 ft.</p>\n<p><strong>Ability Modifiers</strong>&nbsp;Str, Dex</p>\n<p><span style=\"text-decoration: underline;\"><strong>SPECIAL ABILITIES</strong></span></p>\n<p><strong>Natural Thruster</strong>&nbsp;<strong>(Ex)&nbsp;</strong> Three times per day as a swift action, a cloud ray companion can gain a burst of speed until the beginning of its next turn. During this time, it doubles its fly speed, gains Spring Attack as a bonus feat, and deals additional damage with its tail lash equal to half its level.</p>\n<p><strong>Tail Taser (Ex)</strong>&nbsp;A cloud ray companion’s tail lash attacks gain the @UUID[Compendium.sfrpg.conditions.CvsDp0GvojxiF2jz]{Stunned} critical hit effect.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any sky (@UUID[Compendium.sfrpg.setting.2K7muQyxlXW8wqb3]{Bretheda}, @UUID[Compendium.sfrpg.setting.ac6z5Rqyx0oLzvVf]{Liavara})</p>\n<h3>Organization</h3>\n<p>solitary, pair, or school (3–24)</p>"
+        "value": "<h2>Description</h2>\n<p>Gliding dreamily through the cloudy ecosystems of @UUID[Compendium.sfrpg.setting.2K7muQyxlXW8wqb3]{Bretheda},&nbsp;@UUID[Compendium.sfrpg.setting.ac6z5Rqyx0oLzvVf]{Liavara}, and other gas giants, cloud rays move with fluid grace&nbsp;and terrifying speed. Their wide bodies consist of a single broad&nbsp;wing and three trailing tails, with two rows of yellow-green&nbsp;eyes and a wide maw set forward, roughly denoting a “head.”&nbsp;Mottled patterns of orange, red, and purple line their backs;&nbsp;their coloration grows brighter and more distinct as they age.&nbsp;Schools of these majestic predators periodically flock in the&nbsp;dozens, grazing on clouds of drift algae in the upper atmosphere&nbsp;for months before descending into the thick, lower atmosphere&nbsp;to actively hunt larger prey. Because of this cyclical behavior,&nbsp;many assume cloud rays are gentle giants emblematic of the&nbsp;Pact Worlds’ unspoiled wilds before getting caught by surprise&nbsp;and attacked during the rays’ aggressive cycle.</p>\n<p>Like many Brethedan creatures, a cloud ray almost&nbsp;constantly filter feeds. It ingests organic compounds from&nbsp;the gas giant’s atmosphere before breaking them down for&nbsp;energy and storing the lighter-than-air byproduct gases in float&nbsp;&nbsp;bladders to maintain its buoyancy at rest. When in distress&nbsp;or in pursuit, a cloud ray ejects a portion of this gas into its&nbsp;blast siphons, specialized organs located on either side of&nbsp;its body. A cloud ray’s body has evolved to withstand these&nbsp;blasts and high-G maneuvers—with its flexible cartilaginous&nbsp;skeleton, cushioned nervous system, and sharp tails that gain&nbsp;lethal momentum from the burst—yet the ray isn’t equipped to&nbsp;withstand explosive forces outside the blast siphon. Deadly&nbsp;heat can accidentally trigger the volatile gases, causing a cloud&nbsp;ray to detonate in a dangerous fireball.</p>\n<p>Smaller and more social cousins to cloud rays, cloud skates&nbsp;remain together in small hunting packs when they enter their&nbsp;aggression cycle. Cloud skates tend to act more skittish,&nbsp;however, and keep their distance from settlements.</p>\n<p>Though cloud rays travel in small groups during their passive&nbsp;cycles and when breeding, they hunt alone once they enter&nbsp;their aggression cycle. Mature males typically maintain their&nbsp;active cycles for longer periods, lurking in the soupy lower&nbsp;atmosphere, and they periodically jostle each other in finslapping&nbsp;dominance displays that echo hauntingly for miles.&nbsp;Like most Brethedan creatures, cloud rays can easily shift their&nbsp;sex to adapt to their social surroundings, but once an adult&nbsp;shifts to male, it generally remains too aggressive and isolated&nbsp;to shift to another sex. After rising to the upper atmosphere to&nbsp;mate, a female deposits her eggs in delicate wisps kept aloft by&nbsp;the wind. These eggs hatch several weeks later, and the tiny&nbsp;rays shelter within drifting plant habitats for a few months&nbsp;before growing large enough to set off in search of richer&nbsp;nutrition. Reaching adulthood takes roughly 15 years for a&nbsp;cloud ray or 9 years for a cloud skate, after which either species&nbsp;can live as long as a century—if not killed for food before then.</p>\n<p>Despite their fish-like appearance, the predominantly warmblooded&nbsp;cloud rays supplement their warmth by basking in&nbsp;sunlight and adjusting their coloration to absorb or reflect more&nbsp;&nbsp;solar energy. Their movements generate electrical charges that&nbsp;they store in an organic capacitor at the base of their tails and&nbsp;can discharge into prey. However, the smaller cloud skates&nbsp;possess only a rudimentary version of this organ that merely&nbsp;absorbs minor charges and gradually releases them as an&nbsp;underdeveloped form of electroreception.</p>\n<h2>CLOUD RAY COMPANIONS</h2>\n<p>Cloud rays can be tamed with patience and food, making them favorite mounts for gas prospectors and naturalists on gas giants. Raised to smaller sizes than their wild counterparts, they serve as ideal companions for groups or industrial use in aerial environments. Their ability to survive by grazing on floating algae and lichen makes them more reliable than many vehicles in isolated frontiers. Careful control over what and how much the beast eats helps keep them in their docile grazing cycle and suppresses their combustible death throes as well. Most cloud rays bond to a single master, becoming notoriously difficult with new riders. Cloud rays can flourish on almost any gas giant, and domesticated rays can even survive in the skies above terrestrial worlds with proper supplements.</p>\n<h3><strong>CLOUD RAY&nbsp; &nbsp; &nbsp;Levels 6-20</strong></h3>\n<p>Huge animal</p>\n<p><strong>Senses</strong>&nbsp;low-light vision</p>\n<p><strong>Good Save</strong>&nbsp;Ref;&nbsp;<strong>Poor Saves</strong>&nbsp;Fort, Will</p>\n<p><strong>Resistances</strong>&nbsp;electricity 10</p>\n<p><strong>Speed</strong>&nbsp;5 ft., fly 70 ft. (Ex, perfect)</p>\n<p><strong>Melee Attack</strong>&nbsp;tail lash&nbsp;(S)</p>\n<p><strong>Space</strong>&nbsp;15 ft.;&nbsp;<strong>Reach 1</strong> 5 ft.</p>\n<p><strong>Ability Modifiers</strong>&nbsp;Str, Dex</p>\n<p><span style=\"text-decoration: underline;\"><strong>SPECIAL ABILITIES</strong></span></p>\n<p><strong>Natural Thruster</strong>&nbsp;<strong>(Ex)&nbsp;</strong> Three times per day as a swift action, a cloud ray companion can gain a burst of speed until the beginning of its next turn. During this time, it doubles its fly speed, gains Spring Attack as a bonus feat, and deals additional damage with its tail lash equal to half its level.</p>\n<p><strong>Tail Taser (Ex)</strong>&nbsp;A cloud ray companion’s tail lash attacks gain the @UUID[Compendium.sfrpg.conditions.CvsDp0GvojxiF2jz]{Stunned} critical hit effect.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any sky (@UUID[Compendium.sfrpg.setting.2K7muQyxlXW8wqb3]{Bretheda}, @UUID[Compendium.sfrpg.setting.ac6z5Rqyx0oLzvVf]{Liavara})</p>\n<h3>Organization</h3>\n<p>solitary, pair, or school (3–24)</p>",
+        "weight": ""
       },
       "class": "",
       "cr": 13,
       "environment": "",
+      "organization": "",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AA4 pg. 20",
@@ -1014,30 +1065,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -1074,6 +1132,9 @@
       },
       "senses": "low-light vision",
       "size": "gargantuan",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

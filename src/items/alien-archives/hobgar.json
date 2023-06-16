@@ -5,6 +5,7 @@
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
+      "_id": "oOkZKzSmyZ1glmZ7",
       "name": "Evasion (Ex)",
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/evasion.webp",
@@ -14,6 +15,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -35,9 +37,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>This ability functions as the operative class feature of the same name.</p>"
         },
@@ -60,6 +64,7 @@
           "value": null
         },
         "requirements": "2nd Level",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -78,6 +83,7 @@
       }
     },
     {
+      "_id": "HopXhN1ZlrDmIXlS",
       "name": "Bite",
       "type": "weapon",
       "img": "icons/svg/mystery-man.svg",
@@ -91,6 +97,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -125,6 +132,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -146,9 +154,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
@@ -168,12 +178,14 @@
         "proficient": true,
         "properties": {},
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -181,6 +193,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -199,6 +212,7 @@
       }
     },
     {
+      "_id": "XtEfY2yYycbGH02I",
       "name": "Electricity Ray (Su)",
       "type": "weapon",
       "img": "icons/svg/mystery-man.svg",
@@ -212,6 +226,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -246,6 +261,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -267,9 +283,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>A hobgar can discharge a ray of electricity at a single target as a standard action. This attack has a maximum range of 20 feet.</p>"
         },
@@ -289,12 +307,14 @@
         "proficient": true,
         "properties": {},
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -302,6 +322,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -320,6 +341,7 @@
       }
     },
     {
+      "_id": "ipnOOm03DLx4kYaL",
       "name": "Compression",
       "type": "feat",
       "img": "icons/svg/mystery-man.svg",
@@ -329,6 +351,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -350,9 +373,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>(EX)</p>\n<p>The creature can move through an area as small as one-quarter of its space without squeezing or one-eighth its space when squeezing.</p>\n<hr />"
         },
@@ -375,6 +400,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -396,12 +422,14 @@
   "prototypeToken": {
     "name": "Hobgar",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -432,7 +460,6 @@
     "lockRotation": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -450,6 +477,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -500,12 +528,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -563,7 +597,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 30
@@ -572,7 +607,8 @@
         "special": "original base: 30 ft.; original special: climb 30 ft.",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -634,8 +670,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<h2>Description</h2>\n<p>Hobgars are small, simian pests native to the misty forests of the planet Nakondis. The arboreal creatures have large eyes, flat noses, and wide mouths. Most hobgars are covered with short tufts of blue and brown fur, which is thickest on the head, chest, and upper arms. They have long, dexterous fingers and toes, with opposable thumbs on both hands and feet. Hobgars are exceptionally skillful climbers, able to fold their bones—including their skulls—to fit into narrow spaces. Most hobgars are 2 feet long and weigh 8 pounds, although rumors of significantly larger hobgars persist despite a lack of solid substantiating evidence.</p>\n<p>Hobgars are immune to the electrified mist that pervades Nakondis. Instead, they store ambient electrical charge in specialized skin cells, communicating with each other by modulating this energy to silently wave their fur. Hobgars can also release bits of their stored energy in short-range jolts, but a hobgar removed from Nakondis loses the ability to discharge its electricity ray after 24 hours.</p>\n<p>Hobgars have no need to drink, as their wide, soft noses draw all the moisture they need from the misty air. They are omnivorous and can consume a startling variety of objects for nourishment. While hobgars generally subsist on insects and fruit, the creatures particularly relish the taste of conductive metals, which they gnaw with sawlike motions of their two rows of teeth.</p>\n<p>Social by nature, hobgars congregate in small packs that interact frequently. Packs coexisting in an area freely share information about food sources and potential dangers, and an adult hobgar will choose its mate from a neighboring pack, never from its own. Hobgar females bear live young, but infants are too frail to survive in the outside world for the first several hours after birth. To shelter her young, a hobgar in labor finds a source of protected warmth, such as a stout log or the corpse of a larger creature, and births her litter into the object. She then waits as the infants consume the object from within, quickly gaining size and strength until they burst out in an explosion of electrical energy.</p>\n<p>Hobgars are fearless and curious, so they are a persistent nuisance to explorers on Nakondis. They sneak into camps to take apart equipment, gnaw on cables and batteries, and steal small objects, and their social nature means one incursion will inevitably draw other hobgars to join the fun. Hobgars aren’t normally aggressive, preferring to flee from danger, but they attack if mistreated or encountered while tending to their young. A few of the colonists on Nakondis have attempted to domesticate hobgars, but the simians are very headstrong and reluctant to take to the training.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any forests (Nakondis)</p>\n<h3>Organization</h3>\n<p>solitary, pair, or pack (3–20)</p>\n</section>",
@@ -644,6 +683,11 @@
       "class": "",
       "cr": 0.3333333333333333,
       "environment": "",
+      "organization": "",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #7 pg. 57",
@@ -883,30 +927,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -939,6 +990,9 @@
       },
       "senses": "darkvision 60 ft., low-light vision",
       "size": "tiny",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

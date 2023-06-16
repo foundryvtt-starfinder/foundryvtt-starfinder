@@ -15,6 +15,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -36,8 +37,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>A wetzelt generates an electromagnetic field that disrupts technological devices and constructs, and interferes with electronic signals, such as those employed by comm units. Such signals do not function within this area. When a creature activates an item with charges within the area of effect, that object must succeed at a DC 13 Reflex save or is drained of the charge and the action is lost. A technological construct that begins its turn in this area must succeed at a DC 13 Reflex save or be @UUID[Compendium.sfrpg.conditions.aAQ6SW6iK0EVq8Ce]{Staggered} and unable to use energy-based attacks for 1d3 rounds. A creature or object that succeeds at its saving throw is immune to any wetzelt’s electromagnetic field for 24 hours. Equipment held, manufactured, or used by reptoids is unaffected by a wetzelt electromagnetic field.</p>"
         },
@@ -47,6 +51,7 @@
           "value": null
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -59,6 +64,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -105,6 +111,7 @@
           "condition": "",
           "cost": 1
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -112,6 +119,24 @@
           "value": null
         },
         "attackBonus": 12,
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": true
+        },
         "attuned": false,
         "bulk": "L",
         "capacity": {
@@ -122,6 +147,8 @@
         "containedItemIds": [],
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
+          "isOpen": true,
           "storage": [
             {
               "type": "slot",
@@ -150,8 +177,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>A wetzelt’s claw attacks have the penetrating weapon special property, ignoring hardness up to the wetzelt’s CR (usually 4).</p>"
         },
@@ -160,10 +190,12 @@
           "units": "",
           "value": ""
         },
+        "equippable": false,
         "equipped": true,
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
+        "isActive": null,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -253,12 +285,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "touch",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -266,6 +300,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -279,6 +314,7 @@
           "per": "",
           "value": 0
         },
+        "weaponCategory": "uncategorized",
         "weaponType": "basicM"
       }
     },
@@ -290,6 +326,7 @@
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -311,8 +348,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>A wetzelt’s claw attacks have the penetrating weapon special property, ignoring hardness up to the wetzelt’s CR (usually 4).</p>"
         },
@@ -322,6 +362,7 @@
           "value": null
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -334,6 +375,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -355,12 +397,14 @@
   "prototypeToken": {
     "name": "Wetzelt",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -389,11 +433,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -411,6 +452,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -461,8 +503,14 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
+      "baseSpellDC": {
+        "base": 0
+      },
       "cmd": {
         "min": 0,
         "tooltip": [],
@@ -519,7 +567,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": "40"
@@ -528,7 +577,8 @@
         "special": "",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -552,12 +602,26 @@
       "alignment": "CE",
       "aura": "Electromagnetic Field - 30 Ft. DC 13",
       "biography": {
+        "age": 0,
+        "dateOfBirth": "",
+        "deity": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
+        "height": "",
+        "homeWorld": "",
+        "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>Reptoids use their mastery of genetic engineering to create obedient, highly aggressive pets they call wetzelts. The wetzelt is a hunter and tracker, able to swiftly follow prey. The creature also generates an electromagnetic field that jams comm units and causes other powered items to fail on discharge.</p>\n<p>Wetzelts are strange in appearance. They possess four appendages like a humanoid, but they crawl on all fours, and their limbs project out from the side. As a result, the wetzelt looks like it is walking on four arms, elbows sticking out. The wetzelt has scaly skin, glowing eyes, and a bulbous head with a beak-like mouth and no visible ears or nose.</p>\n<p>The horrifying truth about the wetzelt is that they are not merely organisms grown in a lab. Each was once a reptoid, before being subjected to extensive biological manipulation. Although non-reptoid scholars theorize that this form is a punishment reserved for reptoids who have betrayed their kind-perhaps by revealing reptoid secrets or simply abandoning their assignment to live within their new society, as many reptoids have been known to do-no one in the Pact Worlds knows for sure why some reptoids are transformed. If reversing the transformation is possible, no one has yet discovered a reliable method.</p>\n<p>Wetzelts left on their own hunt whatever prey they can find. Their claws are engineered to shred through hard material, so they freely ambush both solitary victims and vehicles with potential prey inside.</p>\n<p>Site Owner: Blake DavisEmail Spam Checker: MX Guarddog</p>\n<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<h3>Organization</h3>\n<p>solitary or pair</p>\n</section>"
+        "value": "<h2>Description</h2>\n<p>Reptoids use their mastery of genetic engineering to create obedient, highly aggressive pets they call wetzelts. The wetzelt is a hunter and tracker, able to swiftly follow prey. The creature also generates an electromagnetic field that jams comm units and causes other powered items to fail on discharge.</p>\n<p>Wetzelts are strange in appearance. They possess four appendages like a humanoid, but they crawl on all fours, and their limbs project out from the side. As a result, the wetzelt looks like it is walking on four arms, elbows sticking out. The wetzelt has scaly skin, glowing eyes, and a bulbous head with a beak-like mouth and no visible ears or nose.</p>\n<p>The horrifying truth about the wetzelt is that they are not merely organisms grown in a lab. Each was once a reptoid, before being subjected to extensive biological manipulation. Although non-reptoid scholars theorize that this form is a punishment reserved for reptoids who have betrayed their kind-perhaps by revealing reptoid secrets or simply abandoning their assignment to live within their new society, as many reptoids have been known to do-no one in the Pact Worlds knows for sure why some reptoids are transformed. If reversing the transformation is possible, no one has yet discovered a reliable method.</p>\n<p>Wetzelts left on their own hunt whatever prey they can find. Their claws are engineered to shred through hard material, so they freely ambush both solitary victims and vehicles with potential prey inside.</p>\n<p>Site Owner: Blake DavisEmail Spam Checker: MX Guarddog</p>\n<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<h3>Organization</h3>\n<p>solitary or pair</p>\n</section>",
+        "weight": ""
       },
       "class": "",
       "cr": 4,
       "environment": "",
+      "organization": "",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #27 pg. 61",
@@ -573,6 +637,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -583,6 +648,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 15,
         "ranks": 15,
@@ -593,6 +659,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -603,6 +670,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -613,6 +681,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -623,6 +692,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -633,6 +703,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -643,6 +714,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -653,6 +725,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -663,6 +736,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -673,6 +747,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -683,6 +758,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -693,6 +769,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 10,
         "ranks": 10,
@@ -703,6 +780,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -713,6 +791,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -723,6 +802,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -734,6 +814,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -744,6 +825,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -754,6 +836,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 10,
         "ranks": 10,
@@ -764,6 +847,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 10,
         "ranks": 10,
@@ -773,30 +857,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -827,6 +918,9 @@
       },
       "senses": "darkvision 60 ft., low-light vision",
       "size": "medium",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

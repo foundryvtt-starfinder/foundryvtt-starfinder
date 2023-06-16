@@ -123,6 +123,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -374,6 +375,7 @@
         },
         "source": "CRB pg. 173",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -399,6 +401,7 @@
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -473,6 +476,7 @@
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -547,6 +551,7 @@
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -842,6 +847,7 @@
         },
         "source": "CRB pg. 173",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -1000,6 +1006,7 @@
         "quantity": 9,
         "quantityPerPack": 1,
         "source": "Core Rulebook",
+        "specialMaterials": {},
         "useCapacity": false
       }
     },
@@ -1059,6 +1066,7 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "source": "Core Rulebook",
+        "specialMaterials": {},
         "useCapacity": false
       }
     }
@@ -1073,6 +1081,7 @@
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -1101,11 +1110,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -1123,6 +1129,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -1173,12 +1180,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -1309,8 +1322,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<h2>Description</h2>\n<p>Formian workers are the backbone of hive labor and hatched in large clutches-many workers never gain a name beyond their number within the clutch. While strong, they typically flee combat unless ordered to fight. Formian warriors, by contrast, are fierce sterile females, each with a stronger individual identity to allow for more effective battle tactics. This individualism makes warriors more likely to chafe under strict hive hierarchies, and these are the formians most likely to set out on their own.</p>\n<h2>Formian</h2>\n<p>Formians resemble giant ants with humanoid upper bodies, and carve their chitinous plates with insignias reflecting their individual names and achievements. Members of a hive all share a telepathic link, allowing them to coordinate efficiently.</p>\n<p>Within a hive are castes specialized to particular tasks. The queen leads the hive and is its sole means of propagation, while castes like the aristocratic myrmarchs and mercantile taskmasters direct lower castes like warriors and workers.</p>\n<p>Formians are most common on @UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel}. For millennia they sought to eradicate the lashunta, their traditional foes, but their queens now instead focus on adopting other species’ technology to industrialize their traditional hive societies.</p>",
@@ -1320,6 +1336,10 @@
       "cr": 0.5,
       "environment": "any land or underground (Castrovel)",
       "organization": "solitary, work crew (6-12), or band (3-15 plus 5-8 formian warriors)",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AA1 pg. 50",
@@ -1627,6 +1647,9 @@
       },
       "senses": "blindsense (scent) 30 ft., darkvision 60 ft.",
       "size": "small",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }
