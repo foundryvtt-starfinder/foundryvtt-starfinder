@@ -1176,7 +1176,18 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         const rolledMods = [];
         const addModifier = (bonus, parts) => {
-            if (bonus.modifierType === "formula") {
+            if (bonus.modifierType === "damageSection") {
+                parts.push({
+                    isDamageSection: true,
+                    name: bonus.name,
+                    explanation: bonus.name,
+                    formula: bonus.modifier,
+                    types: bonus.damageTypes,
+                    group: bonus.damageGroup
+                });
+                return;
+            }
+            else if (bonus.modifierType === "formula") {
                 rolledMods.push(bonus);
                 return;
             }
@@ -1338,10 +1349,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         rollContext.setMainContext("");
 
         return DiceSFRPG.damageRoll({
-            event: event,
-            parts: parts,
-            rollContext: rollContext,
-            title: title,
+            event,
+            parts,
+            rollContext,
+            title,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             chatMessage: options.chatMessage,
             dialogOptions: {
