@@ -34,12 +34,15 @@ export default class SFRPGModifierApplication extends FormApplication {
     }
 
     /**
-     * A convience method for retrieving the modifier being edited.
+     * A convenience method for retrieving the modifier being edited.
      */
     get modifier() {
         return this.object;
     }
 
+    /**
+     * Effect types on which to show the Damage Section modifier type
+     */
     damageModifierTypes = [
         SFRPGEffectType.ALL_DAMAGE,
         SFRPGEffectType.MELEE_DAMAGE,
