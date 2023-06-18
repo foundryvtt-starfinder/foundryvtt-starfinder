@@ -112,6 +112,16 @@
             </select>
         {{/if}}
     </div>
+    <div class="form-group modifier-limit-to" style="display: none">
+        <label for="limitTo">{{localize "SFRPG.ModifierLimitToLabel"}}</label>
+        <select name="limitTo" data-tooltip="{{localize "SFRPG.ModifierLimitToTooltip"}}">
+            {{#select modifier.limitTo}}
+                <option value="">{{localize "SFRPG.None"}}</option>
+                <option value="parent">{{localize "SFRPG.ModifierLimitToParent"}}</option>
+                <option value="container">{{localize "SFRPG.ModifierLimitToContainer"}}</option>
+            {{/select}}
+        </select>
+    </div>
     <div class="form-group modifier-modifier-type">
         <label for="modifierType">{{localize "SFRPG.ModifierModifierTypeLabel"}}</label>
         <select name="modifierType" data-tooltip="{{localize "SFRPG.ModifierModifierTypeTooltip"}}">

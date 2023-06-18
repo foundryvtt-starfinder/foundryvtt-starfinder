@@ -43,13 +43,26 @@ export default class SFRPGModifierApplication extends FormApplication {
     /**
      * Effect types on which to show the Damage Section modifier type
      */
-    damageModifierTypes = [
+    damageEffectTypes = [
         SFRPGEffectType.ALL_DAMAGE,
         SFRPGEffectType.MELEE_DAMAGE,
         SFRPGEffectType.RANGED_DAMAGE,
         SFRPGEffectType.WEAPON_DAMAGE,
         SFRPGEffectType.WEAPON_PROPERTY_DAMAGE,
         SFRPGEffectType.WEAPON_CATEGORY_DAMAGE
+    ];
+
+    /**
+     * Effect types which affect the statistics of items, and therefore need a selector to determine whether they affect only that item, or that item's container.
+     */
+    limitToTypes = [
+        ...this.damageEffectTypes,
+        SFRPGEffectType.ALL_ATTACKS,
+        SFRPGEffectType.MELEE_ATTACKS,
+        SFRPGEffectType.RANGED_ATTACKS,
+        SFRPGEffectType.WEAPON_ATTACKS,
+        SFRPGEffectType.WEAPON_PROPERTY_ATTACKS,
+        SFRPGEffectType.WEAPON_CATEGORY_ATTACKS
     ];
 
     /**
@@ -96,12 +109,16 @@ export default class SFRPGModifierApplication extends FormApplication {
 
             const damageSectionType = $("option[value='damageSection']");
 
-            if (!(this.damageModifierTypes.includes(effectType))) {
+            if (!(this.damageEffectTypes.includes(effectType))) {
                 $("section.damage-section-details").hide(); // Damage section details
                 damageSectionType.hide(); // Damage section modifier type
             } else {
                 damageSectionType.show();
             }
+
+            // Hide limit to setting if modifier doesn't affect an item
+            if (!(this.limitToTypes.includes(effectType))) $("div.modifier-limit-to").hide();
+            else $("div.modifier-limit-to").show();
 
             if (oldValue === SFRPGEffectType.ACTOR_RESOURCE || effectType === SFRPGEffectType.ACTOR_RESOURCE) {
                 const modifierDialog = this;
@@ -235,7 +252,10 @@ export default class SFRPGModifierApplication extends FormApplication {
         const modifierTypeElement = this.element.find(".modifier-modifier-type select");
 
         if (modifierTypeElement.val() === "damageSection") $("section.damage-section-details").show();
-        if (this.damageModifierTypes.includes(effectType)) $("option[value='damageSection']").show();
+        if (this.damageEffectTypes.includes(effectType)) $("option[value='damageSection']").show();
+
+        if (!(this.limitToTypes.includes(effectType))) $("div.modifier-limit-to").hide();
+        else $("div.modifier-limit-to").show();
 
         switch (effectType) {
             case SFRPGEffectType.ABILITY_SKILLS:
