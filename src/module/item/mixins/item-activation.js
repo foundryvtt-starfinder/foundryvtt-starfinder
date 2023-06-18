@@ -24,13 +24,13 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
         if (this.type === "vehicleSystem") {
             return itemData.canBeActivated;
         } else {
-            return !!(itemData?.activation?.type) && itemData.activation.type !== "none";
+            return !!(itemData?.activation?.type);
         }
     }
 
     isActive() {
         const itemData = this.system;
-        return itemData.isActive;
+        return !!(itemData.isActive);
     }
 
     setActive(active) {
@@ -40,7 +40,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
             return;
         }
 
-        if (!this.canBeActivated() || this.isActive() == active) {
+        if (!this.canBeActivated() || this.isActive() === active) {
             return;
         }
 

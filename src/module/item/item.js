@@ -1,3 +1,4 @@
+import { getItemContainer } from "../actor/actor-inventory-utils.js";
 import SFRPGModifierApplication from "../apps/modifier-app.js";
 import AbilityTemplate from "../canvas/ability-template.js";
 import { SFRPG } from "../config.js";
@@ -938,8 +939,15 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         let modifiers = this.actor.getAllModifiers();
         modifiers = modifiers.filter(mod => {
-            // Remove inactive constant mods. Keep all situational mods, regardless of status.
+            // Remove inactive constant and damage section mods. Keep all situational mods, regardless of status.
             if (!mod.enabled && mod.modifierType !== SFRPGModifierType.FORMULA) return false;
+
+            if (mod.limitTo === "parent" && mod.container.itemId !== this.id) return false;
+            if (mod.limitTo === "container") {
+                const parentItem = getItemContainer(this.actor.items, this.actor.items.get(mod.container.itemId));
+                if (parentItem?.id !== this.id) return false;
+            }
+
             if (mod.effectType === SFRPGEffectType.WEAPON_ATTACKS) {
                 if (mod.valueAffected !== this.system?.weaponType) {
                     return false;
@@ -1301,6 +1309,12 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         modifiers = modifiers.filter(mod => {
             if (!acceptedModifiers.includes(mod.effectType)) {
                 return false;
+            }
+
+            if (mod.limitTo === "parent" && mod.container.itemId !== this.id) return false;
+            if (mod.limitTo === "container") {
+                const parentItem = getItemContainer(this.actor.items, this.actor.items.get(mod.container.itemId));
+                if (parentItem?.id !== this.id) return false;
             }
 
             if (mod.effectType === SFRPGEffectType.WEAPON_DAMAGE) {
