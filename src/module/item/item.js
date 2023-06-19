@@ -236,12 +236,23 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             updates["system.slug"] = this.name.slugify({replacement: "_", strict: true});
         }
 
-        // Events for when an item is created on an actor
+        // Events for when an item is created on an actor since pre/_onCreateDescendantDocuments lie >:(
         if (this.actor) {
             if (["npc", "npc2"].includes(this.actor.type)) {
-                if (t === "weapon") updates['system.proficient'] = true;
+                if (["weapon", "shield"].includes(t)) updates['system.proficient'] = true;
                 if (["weapon", "equipment"].includes(t)) updates['system.equipped'] = true;
                 if (t === "spell") updates['system.prepared'] = true;
+            }
+            else {
+                if (t === "weapon") {
+                    const proficiencyKey = SFRPG.weaponTypeProficiency[itemData.weaponType];
+                    const proficient = itemData.proficient || this.actor?.system?.traits?.weaponProf?.value?.includes(proficiencyKey);
+                    if (proficient) updates["system.proficient"] = true;
+                } else if (t === "shield") {
+                    const proficiencyKey = "shl";
+                    const proficient = itemData.proficient || this.actor?.system?.traits?.armorProf?.value?.includes(proficiencyKey);
+                    if (proficient) updates["system.proficient"] = true;
+                }
             }
 
             if (this.effects instanceof Array) this.effects = null;
@@ -808,8 +819,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         if (abl) parts.push(`@abilities.${abl}.mod`);
         if (["character", "drone"].includes(this.actor.type)) parts.push("@attributes.baseAttackBonus.value");
         if (isWeapon) {
-            const procifiencyKey = SFRPG.weaponTypeProficiency[this.system.weaponType];
-            const proficient = itemData.proficient || this.actor?.system?.traits?.weaponProf?.value?.includes(procifiencyKey);
+            const proficiencyKey = SFRPG.weaponTypeProficiency[this.system.weaponType];
+            const proficient = itemData.proficient || this.actor?.system?.traits?.weaponProf?.value?.includes(proficiencyKey);
             if (!proficient) {
                 parts.push(`-4[${game.i18n.localize("SFRPG.Items.NotProficient")}]`);
             }
