@@ -11,9 +11,9 @@
         <label for="type">{{localize "SFRPG.ModifierTypeLabel"}}</label>
         <select name="type" data-tooltip="{{localize "SFRPG.ModifierTypeTooltip"}}">
             {{#select modifier.type}}
-            {{#each config.modifierTypes as |type key|}}
-            <option value="{{key}}">{{type}}</option>
-            {{/each}}
+                {{#each config.modifierTypes as |type key|}}
+                    <option value="{{key}}">{{type}}</option>
+                {{/each}}
             {{/select}}
         </select>
     </div>
@@ -21,107 +21,154 @@
         <label for="effectType">{{localize "SFRPG.ModifierEffectTypeLabel"}}</label>
         <select name="effectType" data-tooltip="{{localize "SFRPG.ModifierEffectTypeTooltip"}}">
             {{#select modifier.effectType}}
-            {{#each config.modifierEffectTypes as |effect key|}}
-            <option value="{{key}}">{{effect}}</option>
-            {{/each}}
+                {{#each config.modifierEffectTypes as |effect key|}}
+                    <option value="{{key}}">{{effect}}</option>
+                {{/each}}
             {{/select}}
         </select>
-    </div>    
+    </div>
     <div class="form-group modifier-value-affected">
         <label for="valueAffected">{{localize "SFRPG.ModifierValueAffectedLabel"}}</label>
         {{#if (eq modifier.effectType "actor-resource")}}
-        <input type="text" name="valueAffected" value="{{modifier.valueAffected}}" data-tooltip="{{localize "SFRPG.ModifierValueAffectedTooltip"}}">
+            <input type="text" name="valueAffected" value="{{modifier.valueAffected}}" data-tooltip="{{localize "SFRPG.ModifierValueAffectedTooltip"}}">
         {{else}}
-        <select name="valueAffected" data-tooltip="{{localize "SFRPG.ModifierValueAffectedTooltip"}}">
-            {{#select modifier.valueAffected}}
-            {{#if (eq modifier.effectType "ac")}}
-            {{#each config.modifierArmorClassAffectedValues as |armorClass key|}}
-            <option value="{{key}}">{{armorClass}}</option>
-            {{/each}}
-            {{else if (eq modifier.effectType "ability-skills")}}
-            {{#each config.abilities as |ability abl|}}
-            <option value="{{abl}}">{{ability}}</option>
-            {{/each}}
-            {{else if (eq modifier.effectType "acp")}}
-            {{#each config.acpEffectingArmorType as |armorType key|}}
-            <option value="{{key}}">{{armorType}}</option>
-            {{/each}}
-            {{else if (eq modifier.effectType "save")}}
-            <option value="highest">{{localize "SFRPG.ModifierSaveHighest"}}</option>
-            <option value="lowest">{{localize "SFRPG.ModifierSaveLowest"}}</option>
-            {{#each config.saves as |save key|}}
-            <option value="{{key}}">{{save}}</option>
-            {{/each}}
-            {{else if (eq modifier.effectType "skill")}}
-            <option value="">-</option>
-            {{#each config.skills as |skill key|}}
-            <option value="{{key}}">{{skill}}</option>
-            {{/each}}
-            {{else if (eq modifier.effectType "skill-ranks")}}
-            {{#each config.skills as |skill key|}}
-            <option value="{{key}}">{{skill}}</option>
-            {{/each}}
-            {{else if (eq modifier.effectType "ability-check")}}
-            {{#each config.abilities as |ability abl|}}
-            <option value="{{abl}}">{{ability}}</option>
-            {{/each}}
-            {{else if (eq modifier.effectType "ability-score")}}
-            {{#each config.abilities as |ability abl|}}
-            <option value="{{abl}}">{{ability}}</option>
-            {{/each}}
-            {{else if (eq modifier.effectType "weapon-attacks")}}
-            {{#each config.weaponTypes as |name key|}}
-            <option value="{{key}}">{{name}}</option>
-            {{/each}}
-            {{else if (eq modifier.effectType "weapon-property-attacks")}}
-            {{#each config.weaponProperties as |name key|}}
-            <option value="{{key}}">{{name}}</option>
-            {{/each}}
-            {{else if (eq modifier.effectType "weapon-category-attacks")}}
-            {{#each config.weaponCategories as |name key|}}
-            <option value="{{key}}">{{name}}</option>
-            {{/each}}
-            {{else if (eq modifier.effectType "weapon-damage")}}
-            {{#each config.weaponTypes as |name key|}}
-            <option value="{{key}}">{{name}}</option>
-            {{/each}}
-            {{else if (eq modifier.effectType "weapon-property-damage")}}
-            {{#each config.weaponProperties as |name key|}}
-            <option value="{{key}}">{{name}}</option>
-            {{/each}}
-            {{else if (eq modifier.effectType "weapon-category-damage")}}
-            {{#each config.weaponCategories as |name key|}}
-            <option value="{{key}}">{{name}}</option>
-            {{/each}}
-            {{else if (eq modifier.effectType "specific-speed")}}
-            {{#each config.speeds as |speed key|}}
-            <option value="{{key}}">{{speed}}</option>
-            {{/each}}
-            {{else if (eq modifier.effectType "damage-reduction")}}
-            {{#each config.damageReductionTypes as |name key|}}
-            <option value="{{key}}">{{name}}</option>
-            {{/each}}
-            {{else if (eq modifier.effectType "energy-resistance")}}
-            {{#each config.energyResistanceTypes as |name key|}}
-            <option value="{{key}}">{{name}}</option>
-            {{/each}}
-            {{else}}
-            <option value=""></option>
-            {{/if}}
+            <select name="valueAffected" data-tooltip="{{localize "SFRPG.ModifierValueAffectedTooltip"}}">
+                {{#select modifier.valueAffected}}
+                    {{#if (eq modifier.effectType "ac")}}
+                        {{#each config.modifierArmorClassAffectedValues as |armorClass key|}}
+                            <option value="{{key}}">{{armorClass}}</option>
+                        {{/each}}
+                    {{else if (eq modifier.effectType "ability-skills")}}
+                        {{#each config.abilities as |ability abl|}}
+                            <option value="{{abl}}">{{ability}}</option>
+                        {{/each}}
+                    {{else if (eq modifier.effectType "acp")}}
+                        {{#each config.acpEffectingArmorType as |armorType key|}}
+                            <option value="{{key}}">{{armorType}}</option>
+                        {{/each}}
+                    {{else if (eq modifier.effectType "save")}}
+                        <option value="highest">{{localize "SFRPG.ModifierSaveHighest"}}</option>
+                        <option value="lowest">{{localize "SFRPG.ModifierSaveLowest"}}</option>
+                        {{#each config.saves as |save key|}}
+                            <option value="{{key}}">{{save}}</option>
+                        {{/each}}
+                    {{else if (eq modifier.effectType "skill")}}
+                        <option value="">-</option>
+                        {{#each config.skills as |skill key|}}
+                            <option value="{{key}}">{{skill}}</option>
+                        {{/each}}
+                    {{else if (eq modifier.effectType "skill-ranks")}}
+                        {{#each config.skills as |skill key|}}
+                            <option value="{{key}}">{{skill}}</option>
+                        {{/each}}
+                    {{else if (eq modifier.effectType "ability-check")}}
+                        {{#each config.abilities as |ability abl|}}
+                            <option value="{{abl}}">{{ability}}</option>
+                        {{/each}}
+                    {{else if (eq modifier.effectType "ability-score")}}
+                        {{#each config.abilities as |ability abl|}}
+                            <option value="{{abl}}">{{ability}}</option>
+                        {{/each}}
+                    {{else if (eq modifier.effectType "weapon-attacks")}}
+                        {{#each config.weaponTypes as |name key|}}
+                            <option value="{{key}}">{{name}}</option>
+                        {{/each}}
+                    {{else if (eq modifier.effectType "weapon-property-attacks")}}
+                        {{#each config.weaponProperties as |name key|}}
+                            <option value="{{key}}">{{name}}</option>
+                        {{/each}}
+                    {{else if (eq modifier.effectType "weapon-category-attacks")}}
+                        {{#each config.weaponCategories as |name key|}}
+                            <option value="{{key}}">{{name}}</option>
+                        {{/each}}
+                    {{else if (eq modifier.effectType "weapon-damage")}}
+                        {{#each config.weaponTypes as |name key|}}
+                            <option value="{{key}}">{{name}}</option>
+                        {{/each}}
+                    {{else if (eq modifier.effectType "weapon-property-damage")}}
+                        {{#each config.weaponProperties as |name key|}}
+                            <option value="{{key}}">{{name}}</option>
+                        {{/each}}
+                    {{else if (eq modifier.effectType "weapon-category-damage")}}
+                        {{#each config.weaponCategories as |name key|}}
+                            <option value="{{key}}">{{name}}</option>
+                        {{/each}}
+                    {{else if (eq modifier.effectType "specific-speed")}}
+                        {{#each config.speeds as |speed key|}}
+                            <option value="{{key}}">{{speed}}</option>
+                        {{/each}}
+                    {{else if (eq modifier.effectType "damage-reduction")}}
+                        {{#each config.damageReductionTypes as |name key|}}
+                            <option value="{{key}}">{{name}}</option>
+                        {{/each}}
+                    {{else if (eq modifier.effectType "energy-resistance")}}
+                        {{#each config.energyResistanceTypes as |name key|}}
+                            <option value="{{key}}">{{name}}</option>
+                        {{/each}}
+                    {{else}}
+                        <option value=""></option>
+                    {{/if}}
+                {{/select}}
+            </select>
+        {{/if}}
+    </div>
+    <div class="form-group modifier-limit-to" style="display: none">
+        <label for="limitTo">{{localize "SFRPG.ModifierLimitToLabel"}}</label>
+        <select name="limitTo" data-tooltip="{{localize "SFRPG.ModifierLimitToTooltip"}}">
+            {{#select modifier.limitTo}}
+                <option value="">{{localize "SFRPG.None"}}</option>
+                <option value="parent">{{localize "SFRPG.ModifierLimitToParent"}}</option>
+                <option value="container">{{localize "SFRPG.ModifierLimitToContainer"}}</option>
             {{/select}}
         </select>
-        {{/if}}
     </div>
     <div class="form-group modifier-modifier-type">
         <label for="modifierType">{{localize "SFRPG.ModifierModifierTypeLabel"}}</label>
         <select name="modifierType" data-tooltip="{{localize "SFRPG.ModifierModifierTypeTooltip"}}">
             {{#select modifier.modifierType}}
-            {{#each config.modifierType as |type key|}}
-            <option value="{{key}}">{{type}}</option>
-            {{/each}}
+                {{#each config.modifierType as |type key|}}
+                    <option value="{{key}}">{{type}}</option>
+                {{/each}}
+                    <option value="damageSection" style="display: none">{{localize "SFRPG.Items.Action.DamageSection" section=''}}</option>
             {{/select}}
         </select>
-    </div>    
+    </div>
+    <section class="damage-section-details" style="display: none">
+        <div class="damage-part-formula form-group">
+            <label>{{ localize "SFRPG.Damage.Types.DamageGroup" group=""}}</label>
+            <input type="number" name="damageGroup" value="{{lookup modifier "damageGroup"}}" data-dtype="Number" data-tooltip="
+                <strong>{{ localize 'SFRPG.Damage.Types.DamageGroup' group=''}}</strong>
+                <br>
+                <p>{{ localize 'SFRPG.Damage.Types.DamageGroupTooltip'}}</p>" />
+        </div>
+        <div class="damage-part-type form-group stacked">
+            <div class="form-group form-group-stacked">
+                <label>{{localize "SFRPG.Damage.EnergyDamage"}}</label>
+                {{#each config.energyDamageTypes as |name type|}}
+                    <label class="checkbox">
+                        <input type="checkbox" name="damageTypes.{{type}}" {{checked (lookup ../modifier.damageTypes
+                            type)}} />{{name}}
+                    </label>
+                {{/each}}
+            </div>
+            <div class="form-group form-group-stacked">
+                <label>{{localize "SFRPG.Damage.KineticDamage"}}</label>
+                {{#each config.kineticDamageTypes as |name type|}}
+                    <label class="checkbox">
+                        <input type="checkbox" name="damageTypes.{{type}}" {{checked (lookup ../modifier.damageTypes
+                            type)}} />{{name}}
+                    </label>
+                {{/each}}
+            </div>
+            <div class="form-group form-group-stacked">
+                <label>{{localize "SFRPG.HealingTypesHealing"}}</label>
+                <label class="checkbox">
+                    <input type="checkbox" name="damageTypes.healing" {{checked (lookup
+                        modifier.damageTypes "healing" )}} />{{localize "SFRPG.HealingTypesHealing"}}
+                </label>
+            </div>
+        </div>
+    </section>
     <div class="form-group modifier-source">
         <label for="source">{{localize "SFRPG.ModifierSourceLabel"}}</label>
         <input type="text" name="source" value="{{modifier.source}}" data-tooltip="{{localize "SFRPG.ModifierSourceTooltip"}}">

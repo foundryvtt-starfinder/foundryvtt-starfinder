@@ -465,6 +465,9 @@
       "conditions": {
         "conditions": {}
       },
+      "timedEffects": {
+        "timedEffects": []
+      },
       "counterClassesManagement": {
         "counterClasses": {
           "values": {}
@@ -477,6 +480,7 @@
         "commonBase",
         "modifiers",
         "conditions",
+        "timedEffects",
         "counterClassesManagement"
       ],
       "attributes": {
@@ -1201,6 +1205,7 @@
       "actorResource",
       "feat",
       "spell",
+      "effect",
       "asi",
       "chassis",
       "mod",
@@ -1370,6 +1375,16 @@
       },
       "specialMaterials": {
         "specialMaterials": {}
+      },
+      "itemDuration": {
+        "activeDuration": {
+          "unit": "round",
+          "value": 0,
+          "activationTime": 0,
+          "expiryMode": "turn",
+          "expiryInit": 0,
+          "endsOn": "onTurnStart"
+        }
       }
     },
     "asi": {
@@ -2601,6 +2616,13 @@
         "showOwnerAndGMOnly": false,
         "visualization": []
       }
+    },
+    "effect": {
+      "templates": ["itemDescription", "modifiers", "itemDuration"],
+      "type": "effect",
+      "enabled": true,
+      "sourceActorId": "",
+      "showOnToken": true
     }
   }
 }

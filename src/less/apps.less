@@ -159,6 +159,15 @@ img.icon-enricher {
 
     // Item Sheet form fields
     input[type="text"],
+    input[type="number"] {
+        height: calc(100% - 2px);
+        border: 1px solid @colorTan;
+        background: rgba(0, 0, 0, 0.05);
+        color: @colorDark;
+        width: calc(100% - 2px);
+        min-width: 20px;
+    }
+
     select {
         height: calc(100% - 2px);
         border: 1px solid @colorTan;
@@ -791,13 +800,71 @@ img.icon-enricher {
     }
 }
 
+// SFRPG Macro Bar
+
+#hotbar.sfrpg {
+    ol#macro-list {
+        border: none;
+
+        .macro {
+            img {
+                &.greyscale {
+                    filter: grayscale(1);
+                    cursor: not-allowed;
+                }
+
+                &.active {
+                    box-shadow: 0 0 10px 3px var(--color-shadow-highlight);
+                }
+            }
+
+            span.macro-key {
+                top: 0px;
+                right: 0px;
+                padding: 0 2px;
+                z-index: 1;
+            }
+
+            footer.macro-footer {
+                position: absolute;
+                bottom: 0px;
+                left: 0px;
+                font-size: var(--font-size-12);
+                padding: 0 2px;
+                background: #11111180;
+                color: var(--color-text-light-highlight);
+            }
+
+            i.fas.icon {
+                position: absolute;
+                top: 0px;
+                left: 1px;
+                color: white;
+                text-shadow: 1px 1px black;
+
+                &.fa-xmark {
+                    color: red;
+                }
+
+                &.fa-check {
+                    color: springgreen;
+                }
+
+                &.fa-redo {
+                    font-weight: 300;
+                }
+            }
+        }
+    }
+}
+
 aside#tooltip,
 .locked-tooltip {
     background: #262626;
     border: 1px solid;
     border-image: linear-gradient(180deg, #424242, #333333 25%, #333333 75%, #424242 100%) 1 1;
     font-size: var(--font-size-14);
-    
+
     // The tooltip always has text-center, so we make text-center left!
     &.text-center {
         text-align: left;

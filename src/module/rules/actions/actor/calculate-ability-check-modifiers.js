@@ -43,7 +43,7 @@ export default function(engine) {
                 if (mod.effectType === SFRPGEffectType.ABILITY_CHECKS) return true;
 
                 return false;
-            }), context);
+            }), context, {actor: fact.actor});
 
             // this is done because the normal tooltip will be changed later on and we need this one as a "base" for dice rolls.
             ability.rollTooltip = [ ...ability.tooltip ];
