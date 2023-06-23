@@ -283,12 +283,12 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         // console.log(['Applying damage', damage.toString(), damage]);
 
         switch (this.type) {
-        case 'starship':
-            return this._applyStarshipDamage(damage);
-        case 'vehicle':
-            return this._applyVehicleDamage(damage);
-        default:
-            return this._applyActorDamage(damage);
+            case 'starship':
+                return this._applyStarshipDamage(damage);
+            case 'vehicle':
+                return this._applyVehicleDamage(damage);
+            default:
+                return this._applyActorDamage(damage);
         }
     }
 
@@ -348,7 +348,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         remainingUndealtDamage += damage.modifier || 0;
 
         const originalTempHP = parseInt(actorData.attributes.hp.temp) || 0;
-        const originalSP = actorData.attributes.sp.value;
+        const originalSP = actorData.attributes?.sp?.value || 0;
         const originalHP = actorData.attributes.hp.value;
 
         if (!damage.isHealing) {
@@ -365,7 +365,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
             actorUpdate["system.attributes.hp.temp"] = newTempHP;
 
             /** Update stamina points */
-            const newSP = Math.clamped(originalSP - remainingUndealtDamage, 0, actorData.attributes.sp.max);
+            const newSP = Math.clamped(originalSP - remainingUndealtDamage, 0, actorData.attributes?.sp?.max || 0);
             remainingUndealtDamage -= (originalSP - newSP);
 
             actorUpdate["system.attributes.sp.value"] = newSP;
@@ -538,7 +538,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
             return null;
         }
 
-        let actorUpdate = {};
+        const actorUpdate = {};
         const newData = duplicate(originalData);
 
         let remainingUndealtDamage = damage.amount + damage.modifier;
