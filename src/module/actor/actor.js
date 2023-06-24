@@ -264,7 +264,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     /**
      * Toggle a status icon for created effects
      */
-    async _onCreateDescendantDocuments(parent, collection, documents, data, options, userId) {
+    _onCreateDescendantDocuments(parent, collection, documents, data, options, userId) {
         for (const item of documents) {
             const itemData = item.system;
 
@@ -279,7 +279,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     /**
      * Delete item's corresponding timedEffect objects
      */
-    async _onDeleteDescendantDocuments(parent, collection, documents, data, options, userId) {
+    _onDeleteDescendantDocuments(parent, collection, documents, data, options, userId) {
         for (const item of documents) {
             if (item.type === 'effect') {
                 const effect = game.sfrpg.timedEffects.get(item.uuid);
