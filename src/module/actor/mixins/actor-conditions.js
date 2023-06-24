@@ -76,7 +76,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
 
                 const entry = index.find(e => e.name.toLowerCase() === conditionName.toLowerCase());
                 if (entry) {
-                    const entity = await pack.getDocument(entry.id);
+                    const entity = await pack.getDocument(entry._id);
                     const itemData = entity.toObject();
 
                     const createdItems = await this.createEmbeddedDocuments("Item", [itemData]);
