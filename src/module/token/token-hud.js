@@ -33,7 +33,7 @@ export class SFRPGTokenHUD extends TokenHUD {
         const images = $("img.effect-control", effects);
 
         for (const img of images) {
-            const enabled = statuses[img.dataset.statusId] ?? {};
+            const enabled = statuses[img.dataset.statusId] ?? false;
 
             img.classList.toggle("active", enabled);
         }
