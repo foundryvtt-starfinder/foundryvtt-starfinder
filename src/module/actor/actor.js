@@ -5,6 +5,7 @@ import { SpellCastDialog } from "../apps/spell-cast-dialog.js";
 import { SFRPG } from "../config.js";
 import { DiceSFRPG } from "../dice.js";
 import RollContext from "../rolls/rollcontext.js";
+import { TokenEffect } from "../token/token-effect.js";
 import { Mix } from "../utils/custom-mixer.js";
 import { ActorConditionsMixin } from "./mixins/actor-conditions.js";
 import { ActorCrewMixin } from "./mixins/actor-crew.js";
@@ -16,6 +17,7 @@ import { ActorRestMixin } from "./mixins/actor-rest.js";
 
 import { ItemSFRPG } from "../item/item.js";
 import { ItemSheetSFRPG } from "../item/sheet.js";
+import SFRPGTimedEffect from "../timedEffect/timedEffect.js";
 import { } from "./crew-update.js";
 
 /**
@@ -52,6 +54,14 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         }
         super(data, context);
         // console.log(`Constructor for actor named ${data.name} of type ${data.type}`);
+    }
+
+    get temporaryEffects() {
+        const fromEffects = this.items
+            .filter((e) => e.type === "effect" && e.system.showOnToken && e.system.enabled)
+            .map((e) => new TokenEffect(e));
+
+        return [...super.temporaryEffects, ...fromEffects];
     }
 
     /** @override */
@@ -236,7 +246,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     /**
      * Delete any of corresponding timedEffect objects of the actor's items.
      */
-    _onDelete(options, userId) {
+    async _onDelete(options, userId) {
         for (const item of this.items) {
             if (item.type === "effect") {
                 const effect = game.sfrpg.timedEffects.get(item.uuid);
@@ -258,18 +268,8 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         for (const item of documents) {
             const itemData = item.system;
 
-            if (item.type === "effect" && itemData.showOnToken) {
-                const tokens = this.getActiveTokens(true);
-                if (tokens.length === 0) return;
-
-                const statusEffect = {
-                    id: item.name.slugify({replacement: "-", strict: true}),
-                    label: item.name,
-                    icon: item.img || 'icons/svg/item-bag.svg'
-                };
-                for (const token of tokens) {
-                    token.toggleEffect(statusEffect, {active: itemData.enabled, overlay: false});
-                }
+            if (item.type === "effect" && itemData.showOnToken && itemData.enabled) {
+                SFRPGTimedEffect.createScrollingText(item, true);
             }
         }
 
@@ -279,14 +279,13 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     /**
      * Delete item's corresponding timedEffect objects
      */
-    _onDeleteDescendantDocuments(parent, collection, documents, data, options, userId) {
+    async _onDeleteDescendantDocuments(parent, collection, documents, data, options, userId) {
         for (const item of documents) {
             if (item.type === 'effect') {
                 const effect = game.sfrpg.timedEffects.get(item.uuid);
                 if (!effect) continue;
 
-                // Need to pass the item since the item has already been deleted from the server
-                effect.delete(item);
+                effect.delete();
             }
         }
 
