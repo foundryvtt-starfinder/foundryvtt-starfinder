@@ -627,7 +627,6 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         // toggle timedEffect
         html.find('.effect-details-toggle').on('click', this._onToggleDetailsEffect.bind(this));
-        html.find('.effect-icon-toggle').on('click', this._onToggleIconEffect.bind(this));
     }
 
     /* -------------------------------------------- */
@@ -1060,19 +1059,9 @@ export class ItemSheetSFRPG extends ItemSheet {
                 modifier.enabled = checked;
             }
 
-            this.item.update(updates);
+            await this.item.update(updates);
         } else {
             this.item.timedEffect?.toggle();
         }
-    }
-
-    async _onToggleIconEffect(event) {
-        event.preventDefault();
-        const checked = event.currentTarget.checked;
-
-        this.item.update({"system.showOnToken": checked});
-
-        if (this.item.actor && this.item.system.enabled) this.item.timedEffect?.toggleIcon(checked);
-
     }
 }
