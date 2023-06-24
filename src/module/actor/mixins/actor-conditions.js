@@ -100,6 +100,12 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
             }
         }
 
+        // Since conditions sidestep Foundry status effects, simulate a status effect change.
+        const tokens = this.getActiveTokens(true);
+        for (const token of tokens) {
+            token._onApplyStatusEffect(conditionName.toLowerCase(), enabled);
+        }
+
         return enabled;
     }
 
