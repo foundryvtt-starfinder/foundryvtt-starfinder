@@ -4,6 +4,8 @@
 export class TokenEffect {
     #effect;
 
+    tint = null;
+
     isTemporary = true;
 
     constructor(effect) {
