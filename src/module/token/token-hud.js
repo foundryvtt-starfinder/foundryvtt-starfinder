@@ -14,7 +14,7 @@ export class SFRPGTokenHUD extends TokenHUD {
         const img = event.currentTarget;
         const isEnabled = $(img).hasClass('active');
 
-        if (img.dataset.statusId && this.object.actor) {
+        if (img.dataset.statusId && this.object?.actor) {
             const conditionId = img.dataset.statusId;
             await this.object.actor.setCondition(conditionId, !isEnabled);
         }
@@ -28,7 +28,8 @@ export class SFRPGTokenHUD extends TokenHUD {
      */
     refreshStatusIcons() {
         const effects = this.element.find(".status-effects")[0];
-        const statuses = this.object.actor.system.conditions;
+        const statuses = this.object.actor?.system.conditions;
+        if (!statuses) return;
 
         const images = $("img.effect-control", effects);
 
@@ -103,7 +104,8 @@ export class SFRPGTokenHUD extends TokenHUD {
      */
     static async onRemoveAllConditions(event) {
         event.preventDefault();
-        const statuses = this.object.actor.system.conditions;
+        const statuses = this.object.actor?.system.conditions;
+        if (!statuses) return;
 
         const promises = [];
 

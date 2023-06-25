@@ -56,6 +56,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         // console.log(`Constructor for actor named ${data.name} of type ${data.type}`);
     }
 
+    // Temporary effects are displayed on the token, so hijack it and include effects
     get temporaryEffects() {
         const fromEffects = this.items
             .filter((e) => e.type === "effect" && e.system.showOnToken && e.system.enabled)
