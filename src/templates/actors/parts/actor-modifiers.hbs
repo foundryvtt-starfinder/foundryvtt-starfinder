@@ -9,12 +9,11 @@
         {{#if section.isConditions}}
         <div class="form-group stacked conditions">
             {{#each ../config.conditionTypes as |condition name|}}
-            <label class="checkbox" data-tooltip="{{lookup (lookup ../../config.conditions name) "tooltip"}}">
-                <input type="checkbox" 
-                       class="condition {{name}}" 
-                       data-condition="{{name}}" 
-                       name="system.conditions.{{name}}" 
-                       {{checked (lookup ../../system.conditions name)}} /> {{condition}}
+            <label class="checkbox" data-tooltip="<strong>{{condition}}</strong><br><br>{{localize (lookup (lookup ../../config.conditions name) "tooltip")}}">
+                <input type="checkbox"
+                    class="condition {{name}}"
+                    data-condition="{{name}}"
+                    {{checked (lookup ../../system.conditions name)}} /> {{condition}}
             </label>
             {{/each}}
         </div>

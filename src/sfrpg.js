@@ -596,40 +596,6 @@ Hooks.on("renderChatMessage", (app, html, data) => {
 });
 Hooks.on("getChatLogEntryContext", addChatMessageContextOptions);
 
-function registerMathFunctions() {
-    function lookup(value) {
-        for (let i = 1; i < arguments.length - 1; i += 2) {
-            if (arguments[i] === value) {
-                return arguments[i + 1];
-            }
-        }
-        return 0;
-    }
-
-    function lookupRange(value, lowestValue) {
-        let baseValue = lowestValue;
-        for (let i = 2; i < arguments.length - 1; i += 2) {
-            if (arguments[i] > value) {
-                return baseValue;
-            }
-            baseValue = arguments[i + 1];
-        }
-        return baseValue;
-    }
-
-    Roll.MATH_PROXY = mergeObject(Roll.MATH_PROXY, {
-        eq: (a, b) => a === b,
-        gt: (a, b) => a > b,
-        gte: (a, b) => a >= b,
-        lt: (a, b) => a < b,
-        lte: (a, b) => a <= b,
-        ne: (a, b) => a !== b,
-        ternary: (condition, ifTrue, ifFalse) => (condition ? ifTrue : ifFalse),
-        lookup,
-        lookupRange
-    });
-}
-
 function setupHandlebars() {
     Handlebars.registerHelper("length", function(value) {
         if (value instanceof Array) {

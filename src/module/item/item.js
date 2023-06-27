@@ -1,3 +1,4 @@
+import { getItemContainer } from "../actor/actor-inventory-utils.js";
 import SFRPGModifierApplication from "../apps/modifier-app.js";
 import AbilityTemplate from "../canvas/ability-template.js";
 import { SFRPG } from "../config.js";
@@ -235,12 +236,23 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             updates["system.slug"] = this.name.slugify({replacement: "_", strict: true});
         }
 
-        // Events for when an item is created on an actor
+        // Events for when an item is created on an actor since pre/_onCreateDescendantDocuments lie >:(
         if (this.actor) {
             if (["npc", "npc2"].includes(this.actor.type)) {
-                if (t === "weapon") updates['system.proficient'] = true;
+                if (["weapon", "shield"].includes(t)) updates['system.proficient'] = true;
                 if (["weapon", "equipment"].includes(t)) updates['system.equipped'] = true;
                 if (t === "spell") updates['system.prepared'] = true;
+            }
+            else {
+                if (t === "weapon") {
+                    const proficiencyKey = SFRPG.weaponTypeProficiency[itemData.weaponType];
+                    const proficient = itemData.proficient || this.actor?.system?.traits?.weaponProf?.value?.includes(proficiencyKey);
+                    if (proficient) updates["system.proficient"] = true;
+                } else if (t === "shield") {
+                    const proficiencyKey = "shl";
+                    const proficient = itemData.proficient || this.actor?.system?.traits?.armorProf?.value?.includes(proficiencyKey);
+                    if (proficient) updates["system.proficient"] = true;
+                }
             }
 
             if (this.effects instanceof Array) this.effects = null;
@@ -807,8 +819,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         if (abl) parts.push(`@abilities.${abl}.mod`);
         if (["character", "drone"].includes(this.actor.type)) parts.push("@attributes.baseAttackBonus.value");
         if (isWeapon) {
-            const procifiencyKey = SFRPG.weaponTypeProficiency[this.system.weaponType];
-            const proficient = itemData.proficient || this.actor?.system?.traits?.weaponProf?.value?.includes(procifiencyKey);
+            const proficiencyKey = SFRPG.weaponTypeProficiency[this.system.weaponType];
+            const proficient = itemData.proficient || this.actor?.system?.traits?.weaponProf?.value?.includes(proficiencyKey);
             if (!proficient) {
                 parts.push(`-4[${game.i18n.localize("SFRPG.Items.NotProficient")}]`);
             }
@@ -938,8 +950,15 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         let modifiers = this.actor.getAllModifiers();
         modifiers = modifiers.filter(mod => {
-            // Remove inactive constant mods. Keep all situational mods, regardless of status.
+            // Remove inactive constant and damage section mods. Keep all situational mods, regardless of status.
             if (!mod.enabled && mod.modifierType !== SFRPGModifierType.FORMULA) return false;
+
+            if (mod.limitTo === "parent" && mod.container.itemId !== this.id) return false;
+            if (mod.limitTo === "container") {
+                const parentItem = getItemContainer(this.actor.items, this.actor.items.get(mod.container.itemId));
+                if (parentItem?.id !== this.id) return false;
+            }
+
             if (mod.effectType === SFRPGEffectType.WEAPON_ATTACKS) {
                 if (mod.valueAffected !== this.system?.weaponType) {
                     return false;
@@ -1301,6 +1320,12 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         modifiers = modifiers.filter(mod => {
             if (!acceptedModifiers.includes(mod.effectType)) {
                 return false;
+            }
+
+            if (mod.limitTo === "parent" && mod.container.itemId !== this.id) return false;
+            if (mod.limitTo === "container") {
+                const parentItem = getItemContainer(this.actor.items, this.actor.items.get(mod.container.itemId));
+                if (parentItem?.id !== this.id) return false;
             }
 
             if (mod.effectType === SFRPGEffectType.WEAPON_DAMAGE) {

@@ -184,7 +184,7 @@ export class ActorSheetSFRPG extends ActorSheet {
      *
      * @param {JQuery} html The prepared HTML object ready to be rendered into the DOM
      */
-    activateListeners(html) {
+    async activateListeners(html) {
         super.activateListeners(html);
 
         html.find('[data-wpad]').each((i, e) => {
@@ -302,7 +302,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         html.find('.item .item-equip').click(event => this._onItemEquippedChange(event));
 
         // Condition toggling
-        html.find('.conditions input[type="checkbox"]').change(this._onToggleConditions.bind(this));
+        html.find('.conditions input[type="checkbox"]').change(await this._onToggleConditions.bind(this));
 
         // Actor resource update
         html.find('.actor-resource-base-input').change(this._onActorResourceChanged.bind(this));
@@ -860,13 +860,16 @@ export class ActorSheetSFRPG extends ActorSheet {
      *
      * @param {Event} event The triggering event.
      */
-    _onToggleConditions(event) {
+    async _onToggleConditions(event) {
         event.preventDefault();
 
         const target = $(event.currentTarget);
         const conditionName = target.data('condition');
+        const enabled = target[0].checked;
 
-        this.actor.setCondition(conditionName, target[0].checked);
+        await this.actor.setCondition(conditionName, enabled);
+
+        return enabled;
     }
 
     _onActorResourceChanged(event) {

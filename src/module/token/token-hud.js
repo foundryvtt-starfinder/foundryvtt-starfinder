@@ -14,9 +14,9 @@ export class SFRPGTokenHUD extends TokenHUD {
         const img = event.currentTarget;
         const isEnabled = $(img).hasClass('active');
 
-        if (img.dataset.statusId && this.object.actor) {
+        if (img.dataset.statusId && this.object?.actor) {
             const conditionId = img.dataset.statusId;
-            await this.object.actor.setCondition(conditionId, !isEnabled, {overlay: overlay});
+            await this.object.actor.setCondition(conditionId, !isEnabled);
         }
 
         return !isEnabled;
@@ -28,13 +28,15 @@ export class SFRPGTokenHUD extends TokenHUD {
      */
     refreshStatusIcons() {
         const effects = this.element.find(".status-effects")[0];
-        const statuses = this._getStatusEffectChoices();
+        const statuses = this.object.actor?.system.conditions;
+        if (!statuses) return;
 
-        for (const img of $('[src]', effects)) {
-            const status = statuses[img.getAttribute("src")] || {};
+        const images = $("img.effect-control", effects);
 
-            img.classList.toggle("overlay", !!status.isOverlay);
-            img.classList.toggle("active", !!status.isActive);
+        for (const img of images) {
+            const enabled = statuses[img.dataset.statusId] ?? false;
+
+            img.classList.toggle("active", enabled);
         }
     }
 
@@ -43,11 +45,11 @@ export class SFRPGTokenHUD extends TokenHUD {
      * Calls super then adds a remove all button and optionally reformats the grid with text.
      */
     async _render(force, options) {
-        const result = super._render(force, options).then((success, fail) => {
-            SFRPGTokenHUD.modifyConditions.call(this, this.element);
-        });
+        const render = await super._render(force, options);
+        SFRPGTokenHUD.modifyConditions.call(this, this.element);
+        this.refreshStatusIcons();
 
-        return result;
+        return render;
     }
 
     // #endregion Overrides
@@ -102,12 +104,17 @@ export class SFRPGTokenHUD extends TokenHUD {
      */
     static async onRemoveAllConditions(event) {
         event.preventDefault();
-        const statuses = this._getStatusEffectChoices();
+        const statuses = this.object.actor?.system.conditions;
+        if (!statuses) return;
 
-        for (const [k, status] of Object.entries(statuses)) {
-            if (status.isActive) {
-                await this.object.actor.setCondition(status.id, false, {overlay: status.isOverlay});
+        const promises = [];
+
+        for (const [condition, enabled] of Object.entries(statuses)) {
+            if (enabled) {
+                promises.push(this.object.actor.setCondition(condition, false, {overlay: false}));
             }
         }
+
+        await Promise.all(promises);
     }
 }
