@@ -29,7 +29,7 @@ import { NpcSkillToggleDialog } from './module/apps/npc-skill-toggle-dialog.js';
 import { ShortRestDialog } from './module/apps/short-rest.js';
 import { SpellCastDialog } from './module/apps/spell-cast-dialog.js';
 import { TraitSelectorSFRPG } from './module/apps/trait-selector.js';
-import { canvasHandlerV10, measureDistances } from "./module/canvas/canvas.js";
+import { canvasHandler, measureDistances } from "./module/canvas/canvas.js";
 import { MeasuredTemplateSFRPG, TemplateLayerSFRPG } from "./module/canvas/template-overrides.js";
 import CounterManagement from "./module/classes/counter-management.js";
 import { addChatMessageContextOptions } from "./module/combat.js";
@@ -544,7 +544,7 @@ Hooks.once("ready", async () => {
 
     // If Item Piles is enabled, defer to creating its loot tokens instead of system ones.
     if (!(game.modules.get("item-piles")?.active)) {
-        Hooks.on("dropCanvasData", (canvas, data) => canvasHandlerV10(canvas, data));
+        Hooks.on("dropCanvasData", (canvas, data) => canvasHandler(canvas, data));
     } else {
         console.log("Starfinder | [READY] Item Piles detected, deferring to its loot token implementation.");
     }
