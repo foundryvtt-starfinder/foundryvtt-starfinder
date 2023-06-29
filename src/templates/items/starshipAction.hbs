@@ -6,13 +6,66 @@
     {{!-- Item Sheet Navigation --}}
     <nav class="sheet-navigation tabs" data-group="primary">
         <a class="item active" data-tab="description">{{ localize "SFRPG.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "SFRPG.Details" }}</a>
     </nav>
 
     {{!-- Item Sheet Body --}}
+    {{console this}}
     <section class="sheet-body">
 
         {{!-- Description Tab --}}
         {{> "systems/sfrpg/templates/items/parts/item-description.hbs"}}
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+            
+            <div class="bubble">
+                <h3 class="bubble-header">{{ localize "SFRPG.Items.Action.Details" }}</h3>
+
+                <div class="bubble-info">
+                    
+                    {{!-- Role --}}
+                    <div class="form-group">
+                        <label>{{ localize "SFRPG.ItemSheet.StarshipAction.CrewRole" }}</label>
+                        <select name="system.role">
+                            {{#select itemData.role}}
+                            {{#each config.starshipRoleNames as |name id|}}
+                            <option value="{{id}}">{{localize name}}</option>
+                            {{/each}}
+                            {{/select}}
+                        </select>
+                    </div>
+
+                    {{!-- Action DC --}}
+                    <div class="form-group">
+                        <label>{{ localize "SFRPG.ItemSheet.StarshipAction.ActionDC" }}</label>
+                        <div class="form-fields">
+                            <label class="checkbox">
+                                <input type="checkbox" name="system.dc.resolve" {{checked itemData.dc.resolve}}/> {{ localize "SFRPG.ItemSheet.StarshipAction.UsesResolve" }}
+                            </label>
+                            <label class="checkbox">
+                                <input type="checkbox" name="system.isPush" {{checked itemData.isPush}}/> {{ localize "SFRPG.ItemSheet.StarshipAction.IsPushAction" }}
+                            </label>
+                        </div>
+                        <div class="form-fields">
+                            <input type="text" name="system.dc.value" value="{{itemData.dc.value}}" data-dtype="String" placeholder="{{localize "SFRPG.ItemSheet.StarshipAction.DCPlaceholder"}}"/>
+                        </div>
+                    </div>
+
+                    {{!-- Action DC --}}
+                    <div class="form-group">
+                        <label>{{ localize "SFRPG.ItemSheet.StarshipAction.CheckFormula" }}</label>
+                        <div class="form-fields">
+                            {{!-- Needs to pass the data in an array with (name:___, formula:___) --}}
+                            {{!-- Maybe check damage sections for how to do this better? --}}
+                            <input type="text" name="system.formula.formula" value="{{#each itemData.formula as |formula|}}{{formula.formula}}{{/each}}" data-dtype="String"/>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
 
     </section>
 </form>
