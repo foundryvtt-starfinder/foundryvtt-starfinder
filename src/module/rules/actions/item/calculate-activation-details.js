@@ -27,6 +27,7 @@ export default function(engine) {
                 ui.notifications.error(
                     `Error calculating activation property on actor ${actor.name} (${actor.id}), item ${item.name} (${item.id}).`
                 );
+                console.log(`${item.name}:`, item);
                 total = 0;
             }
 
