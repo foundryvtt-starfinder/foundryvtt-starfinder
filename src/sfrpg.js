@@ -69,6 +69,7 @@ import { connectToDocument, rollItemMacro } from "./module/system/item-macros.js
 import { SFRPGTokenHUD } from "./module/token/token-hud.js";
 import SFRPGTokenDocument from "./module/token/tokendocument.js";
 
+import { extendDragData } from "./module/item/drag-data.js";
 import { getAlienArchiveBrowser } from "./module/packs/alien-archive-browser.js";
 import { getEquipmentBrowser } from "./module/packs/equipment-browser.js";
 import { getSpellBrowser } from "./module/packs/spell-browser.js";
@@ -504,6 +505,7 @@ Hooks.once("ready", async () => {
     console.log("Starfinder | [READY] Setting up event listeners");
     BaseEnricher.addListeners();
     ItemSFRPG.chatListeners($("body"));
+    extendDragData();
 
     console.log("Starfinder | [READY] Connecting item macros to items");
     for (const macro of game.macros) {

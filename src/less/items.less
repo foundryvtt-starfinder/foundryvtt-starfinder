@@ -140,6 +140,7 @@
             flex: 0 0 120px;
             margin-right: 5px;
             padding-right: 5px;
+            float: left;
             border-right: @borderGroove;
             top: 0;
             position: sticky;
@@ -610,5 +611,27 @@
     .error {
         color: #c00;
         text-align: left;
+    }
+
+    // Effects
+    .item-duration {
+        .item-properties {
+            img {
+                margin: 5px;
+                max-width: 80px;
+                align-self: center;
+                cursor: pointer;
+            }
+            li {
+                text-overflow: ellipsis;
+                overflow: hidden;
+                max-width: 150px;
+                cursor: pointer;
+            }
+        }
+
+        div.form-group > label {
+            flex: 1;
+        }
     }
 }

@@ -1380,7 +1380,10 @@
           "unit": "round",
           "value": 0,
           "activationTime": 0,
-          "expiryMode": "turn",
+          "expiryMode": {
+            "type": "turn",
+            "turn": "origin"
+          },
           "expiryInit": 0,
           "endsOn": "onTurnStart"
         }
@@ -2613,7 +2616,7 @@
       "templates": ["itemDescription", "modifiers", "itemDuration"],
       "type": "effect",
       "enabled": true,
-      "sourceActorId": "",
+      "context": {},
       "showOnToken": true
     }
   }
