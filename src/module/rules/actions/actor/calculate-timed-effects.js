@@ -36,6 +36,7 @@ export default function(engine) {
             activeDuration: itemData.activeDuration
         };
 
+        // Construct the roll context of the owning actor and the origin actor/item.
         const rollContext = new RollContext();
         rollContext.addContext("owner", actor);
         rollContext.setMainContext("owner");
@@ -52,9 +53,7 @@ export default function(engine) {
 
         const duration = effectData.activeDuration;
 
-        const calculatedDuration = calculateWithContext(duration.value);
-        duration.total = calculatedDuration;
-
+        duration.total = calculateWithContext(duration.value);
         duration.activationEnd = duration.activationTime + (duration.total * CONFIG.SFRPG.effectDurationFrom[duration.unit]);
 
         duration.remaining = {};

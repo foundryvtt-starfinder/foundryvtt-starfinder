@@ -388,8 +388,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Render the chat card template
         const templateType = ["tool", "consumable"].includes(this.type) ? this.type : "item";
         const template = `systems/sfrpg/templates/chat/${templateType}-card.hbs`;
-        const html = await renderTemplate(template, templateData);
         const rollMode = game.settings.get("core", "rollMode");
+        const html = await renderTemplate(template, templateData);
 
         // Basic chat message data
         const chatData = {
@@ -403,7 +403,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 },
                 sfrpg: {
                     item: this.uuid,
-                    actor: this.actor
+                    actor: this.actor.uuid
                 }
             },
             rollMode: rollMode,

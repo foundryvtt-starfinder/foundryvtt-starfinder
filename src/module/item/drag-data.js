@@ -5,7 +5,7 @@ export function extendDragData() {
 
         if (target.classList.contains("content-link")) {
             const data = JSON.parse(dataTransfer.getData("text/plain"));
-            if (data.type !== "Item") return;
+            if (data?.type !== "Item") return;
 
             // Add origin data to effects
             const messageId = target.closest("li.chat-message")?.dataset.messageId;
@@ -19,7 +19,7 @@ export function extendDragData() {
             data.context = {
                 origin: {
                     actorUuid: actor.uuid,
-                    itemUuid: message.flags.sfrpg?.item ?? null
+                    itemUuid: message.flags?.sfrpg?.item ?? null
                 },
                 roll: roll
                     ? {

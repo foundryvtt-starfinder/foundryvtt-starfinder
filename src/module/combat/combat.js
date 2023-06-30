@@ -785,16 +785,23 @@ export class CombatSFRPG extends Combat {
             const targetActorId = (() => {
                 /** @type {"parent"|"origin"|"init"|ActorID} */
                 const expiryModeTurn = duration.expiryMode.turn;
+
+                // Expire on the owner's turn
                 if (expiryModeTurn === "parent") {
                     const id = effect.actor?.id;
                     if (id) return id;
                 }
-                if (expiryModeTurn === "origin") {
-                    const id = effect.origin.id;
+
+                // Expire on the origin actor's turn; fall back to owner
+                else if (expiryModeTurn === "origin") {
+                    const id = effect.origin?.id || effect.actor?.id;
                     if (id) return id;
                 }
+
                 // Turn closest to initiative to expire on
                 else if (expiryModeTurn === "init") return this.combatants.contents.sort(this._sortCombatants).find(c => c.initiative <= expiryInit).actorId;
+
+                // Otherwise, an actor id of a specific combatant
                 else return expiryModeTurn;
             })();
 

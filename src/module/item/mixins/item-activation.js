@@ -100,7 +100,8 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                         rollMode: rollMode,
                         flags: {
                             sfrpg: {
-                                item: this.uuid
+                                item: this.uuid,
+                                actor: this.actor.uuid
                             }
                         }
                     };

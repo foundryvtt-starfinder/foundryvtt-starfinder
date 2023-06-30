@@ -1,4 +1,3 @@
-
 export default class SFRPGTimedEffect {
     /**
      * An object that holds information about a timedEffect
@@ -34,10 +33,15 @@ export default class SFRPGTimedEffect {
         notes = '',
         activeDuration = {
             unit: '',
-            value: 0,
+            value: "",
             activationTime: 0,
             activationEnd: 0,
-            expiryMode: "turn",
+            expiryMode: {
+                /** @type {"turn"|"init"} Expire on a combatant's turn, or a specific init count. */
+                type: "turn",
+                /** @type {"parent"|"origin"|"init"|ActorID} If type is `turn`, which turn to expire on. */
+                turn: "parent"
+            },
             expiryInit: 0,
             remaining: {
                 value: 0,
