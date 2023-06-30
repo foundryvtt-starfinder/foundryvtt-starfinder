@@ -783,10 +783,26 @@ export class CombatSFRPG extends Combat {
             const effectFinish = duration.activationEnd;
             const expiryInit = duration.expiryInit || 1000; // If anything goes wrong, expire at the start of the round
             const targetActorId = (() => {
-                if (effect.sourceActorId === "parent") return fromUuidSync(effect.actorUuid).id;
+                /** @type {"parent"|"origin"|"init"|ActorID} */
+                const expiryModeTurn = duration.expiryMode.turn;
+
+                // Expire on the owner's turn
+                if (expiryModeTurn === "parent") {
+                    const id = effect.actor?.id;
+                    if (id) return id;
+                }
+
+                // Expire on the origin actor's turn; fall back to owner
+                else if (expiryModeTurn === "origin") {
+                    const id = effect.origin?.id || effect.actor?.id;
+                    if (id) return id;
+                }
+
                 // Turn closest to initiative to expire on
-                else if (effect.sourceActorId === "init") return this.combatants.contents.sort(this._sortCombatants).find(c => c.initiative <= expiryInit).actorId;
-                else return effect.sourceActorId;
+                else if (expiryModeTurn === "init") return this.combatants.contents.sort(this._sortCombatants).find(c => c.initiative <= expiryInit).actorId;
+
+                // Otherwise, an actor id of a specific combatant
+                else return expiryModeTurn;
             })();
 
             if (((worldTime >= effectFinish) && effect.enabled) // If effect has expired
@@ -797,7 +813,7 @@ export class CombatSFRPG extends Combat {
                     continue;
                 }
 
-                if (duration.expiryMode === "turn") {
+                if (duration.expiryMode.type === "turn") {
                     if (duration.endsOn === 'onTurnEnd') {
                         if ((forward && eventData.oldCombatant.actorId === targetActorId) || (!forward && eventData.newCombatant.actorId === targetActorId)) {
                             effect.toggle(false);

@@ -31,8 +31,8 @@ import { SpellCastDialog } from './module/apps/spell-cast-dialog.js';
 import { TraitSelectorSFRPG } from './module/apps/trait-selector.js';
 import { canvasHandler, measureDistances } from "./module/canvas/canvas.js";
 import { MeasuredTemplateSFRPG, TemplateLayerSFRPG } from "./module/canvas/template-overrides.js";
+import { addChatMessageContextOptions } from "./module/chat/chat-message-options.js";
 import CounterManagement from "./module/classes/counter-management.js";
-import { addChatMessageContextOptions } from "./module/combat.js";
 import { CombatSFRPG } from "./module/combat/combat.js";
 import { SFRPG } from "./module/config.js";
 import { DiceSFRPG } from './module/dice.js';
@@ -69,6 +69,7 @@ import { connectToDocument, rollItemMacro } from "./module/system/item-macros.js
 import { SFRPGTokenHUD } from "./module/token/token-hud.js";
 import SFRPGTokenDocument from "./module/token/tokendocument.js";
 
+import { extendDragData } from "./module/item/drag-data.js";
 import { getAlienArchiveBrowser } from "./module/packs/alien-archive-browser.js";
 import { getEquipmentBrowser } from "./module/packs/equipment-browser.js";
 import { getSpellBrowser } from "./module/packs/spell-browser.js";
@@ -504,6 +505,7 @@ Hooks.once("ready", async () => {
     console.log("Starfinder | [READY] Setting up event listeners");
     BaseEnricher.addListeners();
     ItemSFRPG.chatListeners($("body"));
+    extendDragData();
 
     console.log("Starfinder | [READY] Connecting item macros to items");
     for (const macro of game.macros) {
@@ -542,12 +544,7 @@ Hooks.once("ready", async () => {
         }
     }
 
-    // If Item Piles is enabled, defer to creating its loot tokens instead of system ones.
-    if (!(game.modules.get("item-piles")?.active)) {
-        Hooks.on("dropCanvasData", (canvas, data) => canvasHandler(canvas, data));
-    } else {
-        console.log("Starfinder | [READY] Item Piles detected, deferring to its loot token implementation.");
-    }
+    Hooks.on("dropCanvasData", (canvas, data) => canvasHandler(canvas, data));
 
     const finishTime = (new Date()).getTime();
     console.log(`Starfinder | [READY] Done (operation took ${finishTime - readyTime} ms)`);
