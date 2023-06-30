@@ -190,15 +190,14 @@ async function handleCanvasDropAsync(canvas, data) {
         sourceActor = new ActorItemHelper(document.parent._id);
     }
 
-    // Potential targets:
-    // Canvas (floor), Token Actor (may be linked)
-    let targetActor = null;
-    for (const placeable of canvas.tokens.placeables) {
-        if (data.x < placeable.x + placeable.width && data.x > placeable.x && data.y < placeable.y + placeable.height && data.y > placeable.y && placeable instanceof Token) {
-            targetActor = placeable.actor;
-            break;
-        }
-    }
+    // If dropping onto a token, add the item to that token's actor. Otherwise create a loot token.
+    const targetActor = [...canvas.tokens.placeables]
+        .sort((a, b) => b.document.sort - a.document.sort)
+        .find((token) => {
+            const maximumX = token.x + (token.hitArea?.right ?? 0);
+            const maximumY = token.y + (token.hitArea?.bottom ?? 0);
+            return data.x >= token.x && data.y >= token.y && data.x <= maximumX && data.y <= maximumY;
+        })?.actor || null;
 
     // Create a placeable instead and do item transferral there.
     if (targetActor === null) {
@@ -234,16 +233,36 @@ async function handleCanvasDropAsync(canvas, data) {
         return;
     }
 
-    const target = new ActorItemHelper(targetActor.id, targetActor.token.id, targetActor.token.parent.id);
+    const tokenId = targetActor.isToken ? targetActor.token.id : null;
+    const sceneId = targetActor.isToken ? targetActor.token.parent.id : null;
+    const target = new ActorItemHelper(targetActor.id, tokenId, sceneId);
 
-    if (sourceItem) {
+    if (sourceActor) {
         moveItemBetweenActorsAsync(sourceActor, sourceItem, target);
     } else {
-        target.createItem(sourceItemData);
+        target.createItem(sourceItem);
+        if (sourceItem.type !== "effect") {
+            const tokens = target?.token || targetActor.getActiveTokens(true);
+            const text = `+(${sourceItem.name})`;
+
+            for (const token of tokens) {
+                const floaterData = {
+                    anchor: CONST.TEXT_ANCHOR_POINTS.CENTER,
+                    direction: CONST.TEXT_ANCHOR_POINTS.TOP,
+                    distance: (2 * token.h),
+                    fontSize: 32,
+                    stroke: 0x000000,
+                    strokeThickness: 4,
+                    jitter: 0.25
+                };
+                canvas.interface.createScrollingText(token.center, text, floaterData);
+            }
+
+        }
     }
 }
 
-export function canvasHandlerV10(canvas, data) {
+export function canvasHandler(canvas, data) {
     // We're only interested in overriding item drops.
     if (!data || (data.type !== "Item" && data.type !== "ItemCollection")) {
         return true;
