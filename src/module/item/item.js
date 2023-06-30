@@ -1898,6 +1898,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         let count = 0;
         let actorCount = 0;
 
+        const promises = [];
+
         for (const actor of game.actors.contents) {
             const isNPC = ['npc', 'npc2'].includes(actor.type);
 
@@ -1944,33 +1946,33 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                     delete currentValue.scaling;
                 }
 
-                await actor.updateEmbeddedDocuments("Item", updates);
+                promises.push(actor.updateEmbeddedDocuments("Item", updates));
                 count += params.length;
                 actorCount++;
             }
         }
+
+        await Promise.allSettled(promises);
         const message = `Starfinder | Updated ${count} spells to use ${(setting) ? "scaling" : "default"} formulas on ${actorCount} actors.`;
         ui.notifications.info(message);
     }
 
-    static async _onScalingCantripDrop(item, targetActor) {
-        const d3scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d(ternary(gte(@details.cl.value,7),4,3))+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
-        const d6scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
-        const npcd3scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d(ternary(gte(@details.cr,7),4,3))+ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
-        const npcd6scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
-
+    static _onScalingCantripDrop(item, targetActor) {
         const isNPC = ['npc', 'npc2'].includes(targetActor.actor.type);
+        const { parts } = item.system.damage;
 
         if (item.system.scaling?.d3) {
+            const d3scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d(ternary(gte(@details.cl.value,7),4,3))+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
+            const npcd3scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d(ternary(gte(@details.cr,7),4,3))+ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
 
-            const { parts } = item.system.damage;
             parts.forEach(i => i.formula = (isNPC) ? npcd3scaling : d3scaling);
 
             console.log(`Starfinder | Updated ${item.name} to use the ${ (isNPC) ? 'NPC ' : ""}d3 scaling formula.`);
 
         } else if (item.system.scaling?.d6) {
+            const d6scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
+            const npcd6scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
 
-            const { parts } = item.system.damage;
             parts.forEach(i => i.formula = (isNPC) ? npcd6scaling : d6scaling);
 
             console.log(`Starfinder | Updated ${item.name} to use the ${ (isNPC) ? "NPC " : ""}d6 scaling formula.`);
