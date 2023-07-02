@@ -107,27 +107,28 @@ export class CombatSFRPG extends Combat {
         super.delete(options);
     }
 
+    // Override to account for ascending or descending turn order.
     setupTurns() {
-        let sortMethod = "desc";
-        switch (this.getCombatType()) {
-            default:
-            case "normal":
-                sortMethod = CombatSFRPG.normalCombat.initiativeSorting;
-                break;
-            case "starship":
-                sortMethod = CombatSFRPG.starshipCombat.initiativeSorting;
-                break;
-            case "vehicleChase":
-                sortMethod = CombatSFRPG.vehicleChase.initiativeSorting;
-                break;
-        }
+        const sortMethod = {
+            "normal": CombatSFRPG.normalCombat.initiativeSorting,
+            "starship": CombatSFRPG.starshipCombat.initiativeSorting,
+            "vehicleChase": CombatSFRPG.vehicleChase.initiativeSorting
+        }[this.getCombatType()] || "desc";
 
-        const combatants = this.combatants;
-        const scene = game.scenes.get(this.scene);
-        const players = game.users.players;
-        const settings = game.settings.get("core", Combat.CONFIG_SETTING);
         const turns = this.combatants.contents.sort(sortMethod === "asc" ? this._sortCombatantsAsc : this._sortCombatants);
         this.turn = Math.clamped(this.turn, CombatSFRPG.HiddenTurn, turns.length - 1);
+
+        // Update state tracking
+        const c = turns[this.turn];
+        this.current = {
+            round: this.round,
+            turn: this.turn,
+            combatantId: c ? c.id : null,
+            tokenId: c ? c.tokenId : null
+        };
+
+        // One-time initialization of the previous state
+        if ( !this.previous ) this.previous = this.current;
 
         return this.turns = turns;
     }
