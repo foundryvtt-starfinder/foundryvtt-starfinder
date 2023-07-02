@@ -36,6 +36,31 @@
                         </select>
                     </div>
 
+                    {{#each itemData.formula as |formula id|}}
+                    {{!-- Action Skill --}}
+                    <div class="form-group">
+                        <label>{{ localize "SFRPG.ItemSheet.StarshipAction.SkillUsed" }}</label>
+                        <div class="form-fields">
+                            <select name="system.formula.{{id}}.name">
+                                {{#select formula.name}}
+                                    {{#each ../config.skills as |name id|}}
+                                        <option value="{{id}}">{{name}}</option>
+                                    {{/each}}
+                                {{/select}}
+                            </select>
+                        </div>
+                    </div>
+
+                    {{!-- Skill Check Formula --}}
+                    <div class="form-group">
+                        <label>{{ localize "SFRPG.ItemSheet.StarshipAction.CheckFormula" }}</label>
+                        <div class="form-fields">
+                            {{!-- This was stored in an array but it will get changed to an object on edit. This is fine --}}
+                            <input type="text" name="system.formula.{{id}}.formula" value="{{lookup this "formula"}}" data-dtype="String"/>
+                        </div>
+                    </div>
+                    {{/each}}
+
                     {{!-- Phase Information --}}
                     <div class="form-group">
                         <label>{{ localize "SFRPG.ItemSheet.StarshipAction.Phase" }}</label>
@@ -58,40 +83,20 @@
                         </div>
                     </div>
 
-                    
-                    {{#each itemData.formula as |formula id|}}
-                    {{!-- Action Skill --}}
+                    {{console this}}
+                    {{!-- Push and Resolve Information --}}
                     <div class="form-group">
-                        <label>{{ localize "SFRPG.ItemSheet.StarshipAction.SkillUsed" }}</label>
-                        {{console formula}}{{console id}}
+                        <label>{{localize "SFRPG.ItemSheet.StarshipAction.PushResolve"}}</label>
                         <div class="form-fields">
-                            <label class="checkbox">
-                                <input type="checkbox" name="system.dc.resolve" {{checked itemData.dc.resolve}}/> {{ localize "SFRPG.ItemSheet.StarshipAction.UsesResolve" }}
-                            </label>
                             <label class="checkbox">
                                 <input type="checkbox" name="system.isPush" {{checked itemData.isPush}}/> {{ localize "SFRPG.ItemSheet.StarshipAction.IsPushAction" }}
                             </label>
-                        </div>
-                        <div class="form-fields">
-                            <select name="system.formula.{{id}}.name">
-                                {{#select formula.name}}
-                                    {{#each ../config.skills as |name id|}}
-                                        <option value="{{id}}">{{name}}</option>
-                                    {{/each}}
-                                {{/select}}
-                            </select>
+                            <label class="checkbox">
+                                <input type="checkbox" name="system.dc.resolve" {{checked itemData.dc.resolve}}/> {{ localize "SFRPG.ItemSheet.StarshipAction.UsesResolve" }}
+                            </label>
+                            <input type="text" name="system.resolvePointCost" value="{{itemData.resolvePointCost}}" data-dtype="Number"/>
                         </div>
                     </div>
-
-                    {{!-- Action DC --}}
-                    <div class="form-group">
-                        <label>{{ localize "SFRPG.ItemSheet.StarshipAction.CheckFormula" }}</label>
-                        <div class="form-fields">
-                            {{!-- This was stored in an array but it will get changed to an object on edit. This is fine --}}
-                            <input type="text" name="system.formula.{{id}}.formula" value="{{lookup this "formula"}}" data-dtype="String"/>
-                        </div>
-                    </div>
-                    {{/each}}
 
                 </div>
             </div>
@@ -99,10 +104,11 @@
             <div class="bubble">
                 <h3 class="bubble-header">{{ localize "SFRPG.ItemSheet.StarshipAction.NormalEffect" }}</h3>
 
-                <div class="bubble-info">
+                {{!-- This is closer but still bad and not working --}}
+                <div class="bubble-info flexcol" style="height:100%;">
                     <div class="flexrow">
                         {{editor
-                            enrichedDescription
+                            enrichedEffectNormal
                             target="system.effectNormal"
                             button=true
                             editable=editable
@@ -116,9 +122,9 @@
             <div class="bubble">
                 <h3 class="bubble-header">{{ localize "SFRPG.ItemSheet.StarshipAction.CriticalEffect" }}</h3>
 
-                <div class="bubble-info">
+                <div class="bubble-info shipEffect">
                     {{editor
-                        enrichedDescription
+                        enrichedEffectCritical
                         target="system.effectCritical"
                         button=true
                         editable=editable

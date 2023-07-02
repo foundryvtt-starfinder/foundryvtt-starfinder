@@ -299,6 +299,19 @@ export class ItemSheetSFRPG extends ItemSheet {
             secrets
         });
 
+        if (data?.item?.type === "starshipAction") {
+            data.enrichedEffectNormal = await TextEditor.enrichHTML(this.item.system?.effectNormal, {
+                async,
+                rollData,
+                secrets
+            });
+            data.enrichedEffectCritical = await TextEditor.enrichHTML(this.item.system?.effectCritical, {
+                async,
+                rollData,
+                secrets
+            });
+        }
+
         return data;
     }
 
