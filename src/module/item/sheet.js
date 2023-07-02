@@ -228,35 +228,16 @@ export class ItemSheetSFRPG extends ItemSheet {
         }
 
         if (data.item.type === "effect") {
+            const duration = itemData.activeDuration;
 
-            data.remainingDuration = (() => {
-                if (itemData.activeDuration.unit === "permanent") return CONFIG.SFRPG.effectDurationTypes[itemData.activeDuration.unit];
-                else return `${itemData.activeDuration.value} ${CONFIG.SFRPG.effectDurationTypes[itemData.activeDuration.unit]}`;
+            data.duration = {};
+            data.duration.remaining = duration?.remaining?.string || (() => {
+                if (duration.unit === "permanent") return CONFIG.SFRPG.effectDurationTypes[duration.unit];
+                else return `${parseInt(duration.total || duration.value) || duration.value} ${CONFIG.SFRPG.effectDurationTypes[duration.unit]}`;
             })();
+            data.duration.showTotal = !!duration.total && (String(duration.value) !== String(duration.total));
 
-            if (this.item.actor) {
-                const remaining = itemData.activeDuration.remaining;
-                const durFrom = SFRPG.effectDurationFrom;
-                const durTypes = SFRPG.effectDurationTypes;
-
-                if (remaining >= durFrom.day)
-                    data.remainingDuration = `${Math.floor(remaining / durFrom.day)} ${durTypes.day}`;
-                else if (remaining >= durFrom.hour)
-                    data.remainingDuration = `${Math.floor(remaining / durFrom.hour)} ${durTypes.hour}`;
-                else if (remaining >= durFrom.minute)
-                    data.remainingDuration = `${Math.floor(remaining / durFrom.minute)} ${durTypes.minute}`;
-                else if (remaining >= durFrom.round)
-                    data.remainingDuration = `${Math.floor(remaining / durFrom.round)} ${durTypes.round}`;
-                else if (remaining <= 0) {
-                    if (itemData.enabled) {
-                        data.remainingDuration = `< 1 ${durTypes.round}`;
-                    } else {
-                        data.remainingDuration = game.i18n.localize("SFRPG.Effect.Expired");
-                        data.expired = true;
-                    }
-
-                }
-            }
+            data.expired = duration.remaining?.value <= 0 && !itemData.enabled;
 
             data.sourceActorChoices = {};
             if (game.combat?.started) {
@@ -627,6 +608,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         // toggle timedEffect
         html.find('.effect-details-toggle').on('click', this._onToggleDetailsEffect.bind(this));
+        html.find("div[data-origin-actor-uuid").on("click", this._onClickOriginActor.bind(this));
     }
 
     /* -------------------------------------------- */
@@ -1063,5 +1045,13 @@ export class ItemSheetSFRPG extends ItemSheet {
         } else {
             this.item.timedEffect?.toggle();
         }
+    }
+
+    async _onClickOriginActor(event) {
+        event.preventDefault();
+        const uuid = event.currentTarget.dataset.originActorUuid;
+        const actor = await fromUuid(uuid);
+
+        actor.sheet.render(true);
     }
 }

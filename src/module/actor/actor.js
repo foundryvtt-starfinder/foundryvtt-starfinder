@@ -263,7 +263,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     }
 
     /**
-     * Toggle a status icon for created effects
+     * Toggle scrolling text for created effects
      */
     _onCreateDescendantDocuments(parent, collection, documents, data, options, userId) {
         for (const item of documents) {

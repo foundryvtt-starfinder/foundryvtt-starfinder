@@ -97,6 +97,14 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         return game.sfrpg.timedEffects.get(this.uuid);
     }
 
+    get origin() {
+        return fromUuidSync(this.system?.context?.origin?.actorUuid) || null;
+    }
+
+    get originItem() {
+        return fromUuidSync(this.system?.context?.origin?.itemUuid) || null;
+    }
+
     /* -------------------------------------------- */
     /*	Data Preparation                             */
     /* -------------------------------------------- */
@@ -264,6 +272,12 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 if (game.combat) updates['system.activeDuration.expiryInit'] = game.combat.initiative;
             }
 
+        } else {
+            // Clear origin data if an effect is dragged from an actor to the sidebar.
+            if (t === "effect") {
+                updates["system.context.origin.actorUuid"] = "";
+                updates["system.context.origin.itemUuid"] = "";
+            }
         }
 
         this.updateSource(updates);
@@ -374,8 +388,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Render the chat card template
         const templateType = ["tool", "consumable"].includes(this.type) ? this.type : "item";
         const template = `systems/sfrpg/templates/chat/${templateType}-card.hbs`;
-        const html = await renderTemplate(template, templateData);
         const rollMode = game.settings.get("core", "rollMode");
+        const html = await renderTemplate(template, templateData);
 
         // Basic chat message data
         const chatData = {
@@ -386,6 +400,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 level: this.system.level,
                 core: {
                     canPopout: true
+                },
+                sfrpg: {
+                    item: this.uuid,
+                    actor: this.actor.uuid
                 }
             },
             rollMode: rollMode,
@@ -1880,6 +1898,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         let count = 0;
         let actorCount = 0;
 
+        const promises = [];
+
         for (const actor of game.actors.contents) {
             const isNPC = ['npc', 'npc2'].includes(actor.type);
 
@@ -1926,44 +1946,36 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                     delete currentValue.scaling;
                 }
 
-                await actor.updateEmbeddedDocuments("Item", updates);
+                promises.push(actor.updateEmbeddedDocuments("Item", updates));
                 count += params.length;
                 actorCount++;
             }
         }
+
+        await Promise.allSettled(promises);
         const message = `Starfinder | Updated ${count} spells to use ${(setting) ? "scaling" : "default"} formulas on ${actorCount} actors.`;
         ui.notifications.info(message);
     }
 
-    static async _onScalingCantripDrop(addedItem, targetActor) {
-        const d3scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d(ternary(gte(@details.cl.value,7),4,3))+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
-        const d6scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
-        const npcd3scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d(ternary(gte(@details.cr,7),4,3))+ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
-        const npcd6scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
-
+    static _onScalingCantripDrop(item, targetActor) {
         const isNPC = ['npc', 'npc2'].includes(targetActor.actor.type);
+        const { parts } = item.system.damage;
 
-        if (addedItem.system.scaling?.d3) {
+        if (item.system.scaling?.d3) {
+            const d3scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d(ternary(gte(@details.cl.value,7),4,3))+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
+            const npcd3scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d(ternary(gte(@details.cr,7),4,3))+ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
 
-            const updates = duplicate(addedItem.system.damage.parts);
-            updates.map(i => {
-                i.formula = (isNPC) ? npcd3scaling : d3scaling;
-                return i;
-            } );
+            parts.forEach(i => i.formula = (isNPC) ? npcd3scaling : d3scaling);
 
-            await addedItem.update({"system.damage.parts": updates});
-            console.log(`Starfinder | Updated ${addedItem.name} to use the ${ (isNPC) ? 'NPC ' : ""}d3 scaling formula.`);
+            console.log(`Starfinder | Updated ${item.name} to use the ${ (isNPC) ? 'NPC ' : ""}d3 scaling formula.`);
 
-        } else if (addedItem.system.scaling?.d6) {
+        } else if (item.system.scaling?.d6) {
+            const d6scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
+            const npcd6scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
 
-            const updates = duplicate(addedItem.system.damage.parts);
-            updates.map(i => {
-                i.formula = (isNPC) ? npcd6scaling : d6scaling;
-                return i;
-            } );
+            parts.forEach(i => i.formula = (isNPC) ? npcd6scaling : d6scaling);
 
-            await addedItem.update({"system.damage.parts": updates});
-            console.log(`Starfinder | Updated ${addedItem.name} to use the ${ (isNPC) ? "NPC " : ""}d6 scaling formula.`);
+            console.log(`Starfinder | Updated ${item.name} to use the ${ (isNPC) ? "NPC " : ""}d6 scaling formula.`);
         }
     }
 }

@@ -1,4 +1,4 @@
-import { ActorSFRPG } from "./actor/actor.js";
+import { ActorSFRPG } from "../actor/actor.js";
 
 export const addChatMessageContextOptions = function(html, options) {
     const canApply = li => canvas.tokens?.controlled?.length && li.find(".dice-roll").length;
