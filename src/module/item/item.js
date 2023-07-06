@@ -911,9 +911,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         /** Add Container Values to globalAttackRollModifiers */
         for (let addModsI = 0; addModsI < additionalModifiers.length; addModsI++) {
-            additionalModifiers[addModsI].container = {
+            additionalModifiers[addModsI].bonus.container = {
                 actorUuid: this.actor.uuid,
-                itemUuid: itemData.uuid
+                itemUuid: this.uuid
             };
         }
 

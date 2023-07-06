@@ -222,7 +222,7 @@ export default class RollDialog extends Dialog {
             const container = modifier.container;
             const actor = await fromUuid(container.actorUuid);
             if (container.itemUuid) {
-                const item = container.itemId ? actor.items.get(container.itemUuid) : null;
+                const item = container.itemUuid ? actor.items.get(fromUuidSync(container.itemUuid)._id) : null;
 
                 // Update modifier by ID in item
                 const containerModifiers = item.system.modifiers;
