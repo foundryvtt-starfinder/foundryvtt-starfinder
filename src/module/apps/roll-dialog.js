@@ -210,15 +210,6 @@ export default class RollDialog extends Dialog {
         this.rollMode = event.target.value;
     }
 
-    _getActorForContainer(container) {
-        if (container.tokenId) {
-            const scene = game.scenes.get(container.sceneId);
-            const token = scene.tokens.get(container.tokenId);
-            return token.actor;
-        }
-        return game.actors.get(container.actorId);
-    }
-
     async _toggleModifierEnabled(event) {
         const modifierIndex = $(event.currentTarget).data('modifierIndex');
         const modifier = this.availableModifiers[modifierIndex];
@@ -229,18 +220,18 @@ export default class RollDialog extends Dialog {
         if (modifier._id) {
             // Update container
             const container = modifier.container;
-            const actor = this._getActorForContainer(container);
-            if (container.itemId) {
-                const item = container.itemId ? await actor.items.get(container.itemId) : null;
+            const actor = await fromUuid(container.actorUuid);
+            if (container.itemUuid) {
+                const item = container.itemId ? actor.items.get(container.itemUuid) : null;
 
                 // Update modifier by ID in item
-                const containerModifiers = duplicate(item.system.modifiers);
+                const containerModifiers = item.system.modifiers;
                 const modifierToUpdate = containerModifiers.find(x => x._id === modifier._id);
                 modifierToUpdate.enabled = modifier.enabled;
                 await item.update({ "system.modifiers": containerModifiers });
             } else {
                 // Update modifier by ID in actor
-                const containerModifiers = duplicate(actor.system.modifiers);
+                const containerModifiers = actor.system.modifiers;
                 const modifierToUpdate = containerModifiers.find(x => x._id === modifier._id);
                 modifierToUpdate.enabled = modifier.enabled;
                 await actor.update({ "system.modifiers": containerModifiers });

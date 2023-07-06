@@ -912,8 +912,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         /** Add Container Values to globalAttackRollModifiers */
         for (let addModsI = 0; addModsI < additionalModifiers.length; addModsI++) {
             additionalModifiers[addModsI].container = {
-                actorId: this.actor.id,
-                itemId: itemData.id
+                actorUuid: this.actor.uuid,
+                itemUuid: itemData.uuid
             };
         }
 
@@ -971,9 +971,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             // Remove inactive constant and damage section mods. Keep all situational mods, regardless of status.
             if (!mod.enabled && mod.modifierType !== SFRPGModifierType.FORMULA) return false;
 
-            if (mod.limitTo === "parent" && mod.container.itemId !== this.id) return false;
+            if (mod.limitTo === "parent" && mod.container.itemUuid !== this.uuid) return false;
             if (mod.limitTo === "container") {
-                const parentItem = getItemContainer(this.actor.items, this.actor.items.get(mod.container.itemId));
+                const parentItem = getItemContainer(this.actor.items, fromUuidSync(mod.container.itemUuid));
                 if (parentItem?.id !== this.id) return false;
             }
 
@@ -1340,9 +1340,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 return false;
             }
 
-            if (mod.limitTo === "parent" && mod.container.itemId !== this.id) return false;
+            if (mod.limitTo === "parent" && mod.container.itemUuid !== this.uuid) return false;
             if (mod.limitTo === "container") {
-                const parentItem = getItemContainer(this.actor.items, this.actor.items.get(mod.container.itemId));
+                const parentItem = getItemContainer(this.actor.items, fromUuidSync(mod.container.itemUuid));
                 if (parentItem?.id !== this.id) return false;
             }
 
@@ -1840,7 +1840,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         source = "",
         notes = "",
         condition = "",
-        id = null
+        id = null,
+        limitTo = "",
+        damage = null
     } = {}) {
         const data = this._ensureHasModifiers(duplicate(this.system));
         const modifiers = data.modifiers;
@@ -1857,7 +1859,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             notes,
             subtab,
             condition,
-            id
+            id,
+            limitTo,
+            damage
         }));
 
         console.log("Adding a modifier to the item");
