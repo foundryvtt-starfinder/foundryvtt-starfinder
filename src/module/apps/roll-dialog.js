@@ -218,11 +218,11 @@ export default class RollDialog extends Dialog {
         this.render(false);
 
         if (modifier._id) {
-            // Update container
+            // Update owner
             const owner = modifier.primaryOwner;
             if (!owner) return; // Will be undefined if using a global attack modifier
 
-            // Update modifier by ID in actor
+            // Update modifier by ID in owner
             const ownerModifiers = owner.system.modifiers;
             const modifierToUpdate = ownerModifiers.find(x => x._id === modifier._id);
             if (!modifierToUpdate) return; // God help us!
