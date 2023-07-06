@@ -219,23 +219,16 @@ export default class RollDialog extends Dialog {
 
         if (modifier._id) {
             // Update container
-            const container = modifier.container;
-            const actor = await fromUuid(container.actorUuid);
-            if (container.itemUuid) {
-                const item = container.itemUuid ? actor.items.get(fromUuidSync(container.itemUuid)._id) : null;
+            const owner = modifier.primaryOwner;
+            if (!owner) return; // Will be undefined if using a global attack modifier
 
-                // Update modifier by ID in item
-                const containerModifiers = item.system.modifiers;
-                const modifierToUpdate = containerModifiers.find(x => x._id === modifier._id);
-                modifierToUpdate.enabled = modifier.enabled;
-                await item.update({ "system.modifiers": containerModifiers });
-            } else {
-                // Update modifier by ID in actor
-                const containerModifiers = actor.system.modifiers;
-                const modifierToUpdate = containerModifiers.find(x => x._id === modifier._id);
-                modifierToUpdate.enabled = modifier.enabled;
-                await actor.update({ "system.modifiers": containerModifiers });
-            }
+            // Update modifier by ID in actor
+            const ownerModifiers = owner.system.modifiers;
+            const modifierToUpdate = ownerModifiers.find(x => x._id === modifier._id);
+            if (!modifierToUpdate) return; // God help us!
+            modifierToUpdate.enabled = modifier.enabled;
+            await owner.update({ "system.modifiers": ownerModifiers });
+
         }
     }
 
