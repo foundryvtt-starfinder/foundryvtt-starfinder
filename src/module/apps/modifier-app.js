@@ -1,4 +1,3 @@
-import SFRPGModifier from "../modifiers/modifier.js";
 import { SFRPGEffectType } from "../modifiers/types.js";
 
 /**
@@ -313,7 +312,7 @@ export default class SFRPGModifierApplication extends FormApplication {
     }
 
     async _updateModifierData(formData) {
-        const modifiers = duplicate(this.target.system.modifiers);
+        const modifiers = this.target.system.modifiers;
         const index = modifiers.findIndex(mod => mod._id === this.modifier._id);
         const modifier = modifiers[index];
 
@@ -329,8 +328,9 @@ export default class SFRPGModifierApplication extends FormApplication {
             modifier.max = 0;
         }
 
-        const newModifier = new SFRPGModifier(mergeObject(modifier, formData));
-        modifiers[index] = newModifier;
+        const merged = mergeObject(modifier, formData);
+        modifier.updateSource(merged);
+        modifiers[index] = modifier;
 
         return this.target.update({ "system.modifiers": modifiers });
     }

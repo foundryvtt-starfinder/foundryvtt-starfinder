@@ -906,16 +906,12 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         const rollContext = RollContext.createItemRollContext(this, this.actor, {itemData: itemData});
 
-        /** Create additional modifiers. */
-        const additionalModifiers = deepClone(SFRPG.globalAttackRollModifiers);
-
-        /** Add Container Values to globalAttackRollModifiers */
-        for (let addModsI = 0; addModsI < additionalModifiers.length; addModsI++) {
-            additionalModifiers[addModsI].bonus.container = {
-                actorUuid: this.actor.uuid,
-                itemUuid: this.uuid
-            };
-        }
+        /** Create global attack modifiers. */
+        const additionalModifiers = deepClone(SFRPG.globalAttackRollModifiers).map(mod => {
+            const container = {actorUuid: this.actor.uuid, itemUuid: this.uuid};
+            const modInstance = {bonus: new SFRPGModifier({...mod.bonus, container})};
+            return modInstance;
+        });
 
         /** Apply bonus rolled mods from relevant attack roll formula modifiers. */
         for (const rolledMod of rolledMods) {

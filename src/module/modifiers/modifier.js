@@ -1,4 +1,4 @@
-import { generateUUID } from '../utils/utilities.js';
+import { generateUUID } from "../utils/utilities.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./types.js";
 
 /**
@@ -20,50 +20,113 @@ import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./types.
  * @param {Object|null}   data.container     The UUIDs of the actor and item, if applicable, the modifier is owned by.
  * @param {Object|null}   data.damage        If this modifier is a damage section modifier, the damage type and group
  * @param {String}        data.limitTo       If this modifier is on an item, should the modifier affect only that item?
- *
- * @param {Object}        options            Options to configure this modifier
- * @param {Boolean}       includeContainer   Whether the this modifier should include container information. True during data prep.
  */
-export default class SFRPGModifier {
-    constructor({
-        name = "",
-        modifier = 0,
-        type = SFRPGModifierTypes.UNTYPED,
-        modifierType = SFRPGModifierType.CONSTANT,
-        effectType = SFRPGEffectType.SKILL,
-        valueAffected = "",
-        enabled = true,
-        source = "",
-        notes = "",
-        subtab = "misc",
-        condition = "",
-        id = null,
-        container = null,
-        damage = null,
-        limitTo = ""
-    } = {}, {
-        includeContainer = false
-    } = {}) {
-        this.name = name;
-        this.modifier = modifier;
-        this.type = type;
-        this.effectType = effectType;
-        this.valueAffected = valueAffected;
-        this.enabled = enabled;
-        this.source = source;
-        this.notes = notes;
-        this.modifierType = modifierType;
-        this.condition = condition;
-        this.subtab = subtab;
+export default class SFRPGModifier extends foundry.abstract.DataModel {
+    constructor(data, options = {}) {
+        super(data, options);
+    }
 
-        if (damage) this.damage = damage;
-        if (limitTo) this.limitTo = limitTo;
-        if (includeContainer && container) this.container = container;
+    _configure(options) {
+        // Create a random id, or set the specific one if provided.
+        this._source._id ||= this._source.id || generateUUID();
 
-        const roll = Roll.create(modifier.toString()).evaluate({maximize: true});
-        this.max = roll.total;
+        return super._configure(options);
+    }
 
-        this._id = id ?? generateUUID();
+    // Slight hack to keep modifiers on the database or exported to JSON minimal and clean.
+    toObject(source = true) {
+        if (source) {
+            const obj = deepClone(this._source);
+            delete obj.container;
+            if (!this.constructor._hasDamageSection(obj)) delete obj.damage;
+            if (!obj.limitTo) delete obj.limitTo;
+            return obj;
+        }
+        return this.schema.toObject(this);
+    }
+
+    // Remove empty optional data
+    static cleanData(source = {}, options = {}) {
+        if (!this._hasDamageSection(source)) source.damage = null;
+        if (!source.limitTo) source.limitTo = null;
+
+        return super.cleanData(source, options);
+    }
+
+    _initialize(options = {}) {
+        super._initialize(options);
+
+        // _id is not a document ID, so we should be able to write to it.
+        Object.defineProperty(this, "_id", { value: this._id, writable: true, configurable: true });
+
+        // Calculate max, if not already
+        this.max ||= Roll.create(this.modifier.toString()).evaluate({ maximize: true }).total;
+    }
+
+    static defineSchema() {
+        const fields = foundry.data.fields;
+        return {
+            _id: new fields.StringField({ initial: "", required: true, readonly: false }),
+            name: new fields.StringField({ initial: "New Modifier", required: false, blank: false }),
+            modifier: new fields.StringField({ initial: "0", required: true }),
+            max: new fields.NumberField({ initial: 0, integer: true, required: false }),
+            type: new fields.StringField({
+                initial: SFRPGModifierTypes.UNTYPED,
+                required: false,
+                choices: Object.values(SFRPGModifierTypes)
+            }),
+            modifierType: new fields.StringField({
+                initial: SFRPGModifierType.CONSTANT,
+                required: true,
+                choices: Object.values(SFRPGModifierType).concat("damageSection")
+            }),
+            effectType: new fields.StringField({
+                initial: SFRPGEffectType.SKILL,
+                required: true,
+                choices: Object.values(SFRPGEffectType)
+            }),
+            valueAffected: new fields.StringField({ initial: "", required: false, blank: true }),
+            enabled: new fields.BooleanField({ initial: false, required: false }),
+            source: new fields.StringField({ initial: "", required: false }),
+            notes: new fields.HTMLField({ initial: "", required: false }),
+            subtab: new fields.StringField({
+                initial: "misc",
+                required: false,
+                choices: ["permanent", "temporary", "misc"]
+            }),
+            condition: new fields.StringField({ initial: "", required: false }),
+            container: new fields.SchemaField(
+                {
+                    actorUuid: new fields.StringField({ initial: null, required: true, nullable: true }),
+                    itemUuid: new fields.StringField({ initial: null, required: false, nullable: true }),
+                    tokenUuid: new fields.StringField({ initial: null, required: false, nullable: true })
+                },
+                { nullable: true, required: false }
+            ),
+            damage: new fields.SchemaField(
+                {
+                    damageGroup: new fields.NumberField({ initial: null, required: false, nullable: true, integer: true }),
+                    damageTypes: new fields.SchemaField(
+                        [
+                            ...Object.keys(CONFIG.SFRPG.energyDamageTypes),
+                            ...Object.keys(CONFIG.SFRPG.kineticDamageTypes)
+                        ].reduce((obj, type) => {
+                            obj[type] = new fields.BooleanField({ initial: false, required: false });
+                            return obj;
+                        }, {}),
+                        { required: false }
+                    )
+                },
+                { required: false, nullable: true }
+            ),
+            limitTo: new fields.StringField({
+                initial: "",
+                required: false,
+                nullable: true,
+                blank: true,
+                choices: ["", "parent", "container"]
+            })
+        };
     }
 
     get actor() {
@@ -83,7 +146,10 @@ export default class SFRPGModifier {
     }
 
     get hasDamageSection() {
-        return (this.damage && Object.values(this.damage.damageTypes).some(type => !!type)) || false;
+        return this.constructor._hasDamageSection(this);
     }
 
+    static _hasDamageSection(obj) {
+        return (obj.damage && Object.values(obj.damage.damageTypes).some(type => !!type)) || false;
+    }
 }
