@@ -36,29 +36,27 @@
                         </select>
                     </div>
 
+                    {{!-- Still need to fix this up so that the sub-actions can be edited (such as for the Stunt Action) --}}
                     {{#each itemData.formula as |formula id|}}
-                    {{!-- Action Skill --}}
-                    <div class="form-group">
-                        <label>{{ localize "SFRPG.ItemSheet.StarshipAction.SkillUsed" }}</label>
-                        <div class="form-fields">
-                            <select name="system.formula.{{id}}.name">
-                                {{#select formula.name}}
-                                    {{#each ../config.skills as |name id|}}
-                                        <option value="{{id}}">{{name}}</option>
-                                    {{/each}}
-                                {{/select}}
-                            </select>
-                        </div>
-                    </div>
 
-                    {{!-- Skill Check Formula --}}
-                    <div class="form-group">
-                        <label>{{ localize "SFRPG.ItemSheet.StarshipAction.CheckFormula" }}</label>
-                        <div class="form-fields">
-                            {{!-- This was stored in an array but it will get changed to an object on edit. This is fine --}}
-                            <input type="text" name="system.formula.{{id}}.formula" value="{{lookup this "formula"}}" data-dtype="String"/>
+                        {{!-- Action Skill --}}
+                        <div class="form-group">
+                            <label>{{ localize "SFRPG.ItemSheet.StarshipAction.SkillUsed" }}</label>
+                            <div class="form-fields">
+                                {{!-- This was stored in an array but it will get changed to an object on edit. This is fine (I think) --}}
+                                <input type="text" name="system.formula.{{id}}.name" value="{{lookup this "name"}}" data-dtype="String"/>
+                            </div>
                         </div>
-                    </div>
+
+                        {{!-- Skill Check Formula --}}
+                        <div class="form-group">
+                            <label>{{ localize "SFRPG.ItemSheet.StarshipAction.CheckFormula" }}</label>
+                            <div class="form-fields">
+                                {{!-- This was stored in an array but it will get changed to an object on edit. This is fine (I think) --}}
+                                <input type="text" name="system.formula.{{id}}.formula" value="{{lookup this "formula"}}" data-dtype="String"/>
+                            </div>
+                        </div>
+
                     {{/each}}
 
                     {{!-- Phase Information --}}
