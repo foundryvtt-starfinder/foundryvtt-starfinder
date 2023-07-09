@@ -104,25 +104,22 @@
             <div class="bubble">
                 <h3 class="bubble-header">{{ localize "SFRPG.ItemSheet.StarshipAction.NormalEffect" }}</h3>
 
-                {{!-- This is closer but still bad and not working --}}
-                <div class="bubble-info flexcol" style="height:100%;">
-                    <div class="flexrow">
-                        {{editor
-                            enrichedEffectNormal
-                            target="system.effectNormal"
-                            button=true
-                            editable=editable
-                            engine="prosemirror"
-                            collaborate="true"
-                        }}
-                    </div>
+                <div class="bubble-info bubble-editor">
+                    {{editor
+                        enrichedEffectNormal
+                        target="system.effectNormal"
+                        button=true
+                        editable=editable
+                        engine="prosemirror"
+                        collaborate="true"
+                    }}
                 </div>
             </div>
 
             <div class="bubble">
                 <h3 class="bubble-header">{{ localize "SFRPG.ItemSheet.StarshipAction.CriticalEffect" }}</h3>
 
-                <div class="bubble-info shipEffect">
+                <div class="bubble-info bubble-editor">
                     {{editor
                         enrichedEffectCritical
                         target="system.effectCritical"
