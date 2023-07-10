@@ -1176,6 +1176,7 @@ SFRPG.starshipWeaponProperties = {
     "bugging"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Bugging", // Near Space
     "burrowing" : "SFRPG.ShipSystems.StarshipWeaponProperties.Burrowing", // Pact Worlds
     "buster"    : "SFRPG.ShipSystems.StarshipWeaponProperties.Buster", // SOM
+    "cacophonous": "SFRPG.ShipSystems.StarshipWeaponProperties.Cacophonous", // PoC
     "connecting": "SFRPG.ShipSystems.StarshipWeaponProperties.Connecting", // The Last Refuge
     "deathField": "SFRPG.ShipSystems.StarshipWeaponProperties.DeathField", // AA 3
     "deployed"  : "SFRPG.ShipSystems.StarshipWeaponProperties.Deployed", // SOM
