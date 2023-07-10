@@ -1,0 +1,79 @@
+
+<div class="bubble">
+    <h3 class="bubble-header">Subactions</h3>
+    {{console this}}
+
+    <div class="bubble-info">
+        {{#each itemData.formula as |formula id|}}
+        {{console this}}
+        {{!-- These were stored in an array but will get changed to an object on edit. This is probably fine --}}
+
+        <div class="bubble">
+            <h3 class="bubble-header">{{lookup this "name"}}</h3>
+
+            <div class="bubble-info">
+                {{!-- Action Skill --}}
+                <div class="form-group">
+                    <label>{{ localize "SFRPG.ItemSheet.StarshipAction.SkillorSubaction" }}</label>
+                    <div class="form-fields">
+                        <input type="text" name="system.formula.{{id}}.name" value="{{lookup this "name"}}" data-dtype="String"/>
+                    </div>
+                </div>
+
+                {{!-- Skill Check Formula --}}
+                <div class="form-group">
+                    <label>{{ localize "SFRPG.ItemSheet.StarshipAction.CheckFormula" }}</label>
+                    <div class="form-fields">
+                        <input type="text" name="system.formula.{{id}}.formula" value="{{lookup this "formula"}}" data-dtype="String"/>
+                    </div>
+                </div>
+
+                {{!-- Resolve & DC Information --}}
+                <div class="form-group">
+                    <label>{{ localize "SFRPG.ItemSheet.StarshipAction.TargetDC" }}</label>
+                    <div class="form-fields">
+                        <input type="text" name="system.formula.{{id}}.dc.value" value="{{lookup dc "value"}}" data-dtype="String"/>
+                        <label class="checkbox">
+                            <input type="checkbox" name="system.formula.{{id}}.dc.resolve" {{checked dc.resolve}}/> {{ localize "SFRPG.ItemSheet.StarshipAction.UsesResolve" }}
+                        </label>
+                    </div>
+                </div>
+
+                {{!-- Subaction Effects --}}
+                <div class="bubble">
+                    <h3 class="bubble-header">{{ localize "SFRPG.ItemSheet.StarshipAction.NormalEffect" }}</h3>
+
+                    <div class="bubble-info bubble-editor">
+                        {{editor
+                            ../enrichedEffectNormal
+                            target="system.formula.{{id}}.effectNormal"
+                            button=true
+                            editable=editable
+                            engine="prosemirror"
+                            collaborate="true"
+                        }}
+                    </div>
+                </div>
+
+                <div class="bubble">
+                    <h3 class="bubble-header">{{ localize "SFRPG.ItemSheet.StarshipAction.CriticalEffect" }}</h3>
+
+                    <div class="bubble-info bubble-editor">
+                        {{editor
+                            ../enrichedEffectCritical
+                            target="system.formula.{{id}}.effectCritical"
+                            button=true
+                            editable=editable
+                            engine="prosemirror"
+                            collaborate="true"
+                        }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        {{/each}}
+
+    </div>
+</div>
