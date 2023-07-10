@@ -1169,6 +1169,7 @@ SFRPG.starshipWeaponClass = {
 
 SFRPG.starshipWeaponProperties = {
     "anchoring" : "SFRPG.ShipSystems.StarshipWeaponProperties.Anchoring", // SOM
+    "antimagic" : "SFRPG.ShipSystems.StarshipWeaponProperties.Antimagic", // PoC
     "array"     : "SFRPG.ShipSystems.StarshipWeaponProperties.Array", // CRB
     "automated" : "SFRPG.ShipSystems.StarshipWeaponProperties.Automated", // SOM
     "broad"     : "SFRPG.ShipSystems.StarshipWeaponProperties.Broad", // CRB
@@ -1217,6 +1218,7 @@ SFRPG.starshipWeaponProperties = {
     "teleportation": "SFRPG.ShipSystems.StarshipWeaponProperties.Teleportation", // SOM
     "tractor"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Tractor", // CRB
     "transposition": "SFRPG.ShipSystems.StarshipWeaponProperties.Transposition", // SOM
+    "unerring" : "SFRPG.ShipSystems.StarshipWeaponProperties.Unerring", // PoC
     "vandalDrones": "SFRPG.ShipSystems.StarshipWeaponProperties.VandalDrones", // AA 3
     "volatile": "SFRPG.ShipSystems.StarshipWeaponProperties.Volatile", // Empire of Bones
     "vortex"    : "SFRPG.ShipSystems.StarshipWeaponProperties.Vortex" // CRB
