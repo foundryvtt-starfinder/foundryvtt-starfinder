@@ -1,7 +1,7 @@
 <div class="item-duration" data-effect-uuid="{{item.timedEffect.uuid}}">
+        <div class="origin flexcol">
     {{#if item.origin}}
-        <div class="origin-actor" data-origin-actor-uuid="{{item.origin.uuid}}">
-            <div class="item-properties flexcol">
+            <div class="origin-actor item-properties flexcol" data-origin-uuid="{{item.origin.uuid}}">
                 <img src="{{item.origin.img}}">
                 <ol class="properties-list">
                     <li><strong>Origin Actor</strong>
@@ -9,8 +9,19 @@
                     </li>
                 </ol>
             </div>
-        </div>
     {{/if}}
+    {{#if item.originItem}}
+            <div class="origin-item item-properties flexcol" data-origin-uuid="{{item.originItem.uuid}}">
+                <img src="{{item.originItem.img}}">
+                <ol class="properties-list">
+                    <li><strong>Origin Item</strong>
+                        <hr>{{item.originItem.name}}
+                    </li>
+                </ol>
+            </div>
+    {{/if}}
+        </div>
+
 
 
     <div class="flexcol">
