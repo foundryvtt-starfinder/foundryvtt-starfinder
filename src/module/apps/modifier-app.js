@@ -316,7 +316,7 @@ export default class SFRPGModifierApplication extends FormApplication {
         const index = modifiers.findIndex(mod => mod._id === this.modifier._id);
         const modifier = modifiers[index];
 
-        const formula = formData["modifier"];
+        const formula = String(formData["modifier"] || "0");
         if (formula) {
             try {
                 const roll = Roll.create(formula, this.owningActor?.system || this.target.system);

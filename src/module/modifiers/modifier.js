@@ -26,11 +26,11 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
         super(data, options);
     }
 
-    _configure(options) {
+    _initializeSource(source, options = {}) {
         // Create a random id, or set the specific one if provided.
-        this._source._id ||= this._source.id || generateUUID();
+        source._id ||= source.id || generateUUID();
 
-        return super._configure(options);
+        return super._initializeSource(source, (options = {}));
     }
 
     // Slight hack to keep modifiers on the database or exported to JSON minimal and clean.
@@ -67,28 +67,66 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
         const fields = foundry.data.fields;
         return {
             _id: new fields.StringField({ initial: "", required: true, readonly: false }),
-            name: new fields.StringField({ initial: "New Modifier", required: false, blank: false }),
-            modifier: new fields.StringField({ initial: "0", required: true }),
+            name: new fields.StringField({
+                initial: "New Modifier",
+                required: false,
+                blank: false,
+                label: "SFRPG.ModifierNameLabel",
+                hint: "SFRPG.ModifierNameTooltip"
+            }),
+            modifier: new fields.StringField({
+                initial: "0",
+                required: true,
+                label: "SFRPG.ModifierModifierLabel",
+                hint: "SFRPG.ModifierModifierTooltip"
+            }),
             max: new fields.NumberField({ initial: 0, integer: true, required: false }),
             type: new fields.StringField({
                 initial: SFRPGModifierTypes.UNTYPED,
                 required: false,
-                choices: Object.values(SFRPGModifierTypes)
+                choices: Object.values(SFRPGModifierTypes),
+                label: "SFRPG.ModifierTypeLabel",
+                hint: "SFRPG.ModifierTypeTooltip"
             }),
             modifierType: new fields.StringField({
                 initial: SFRPGModifierType.CONSTANT,
                 required: true,
-                choices: Object.values(SFRPGModifierType).concat("damageSection")
+                choices: Object.values(SFRPGModifierType).concat("damageSection"),
+                label: "SFRPG.ModifierModifierTypeLabel",
+                hint: "SFRPG.ModifierModifierTypeTooltip"
             }),
             effectType: new fields.StringField({
                 initial: SFRPGEffectType.SKILL,
                 required: true,
-                choices: Object.values(SFRPGEffectType)
+                choices: Object.values(SFRPGEffectType),
+                label: "SFRPG.ModifierEffectTypeLabel",
+                hint: "SFRPG.ModifierEffectTypeTooltip"
             }),
-            valueAffected: new fields.StringField({ initial: "", required: false, blank: true }),
-            enabled: new fields.BooleanField({ initial: false, required: false }),
-            source: new fields.StringField({ initial: "", required: false }),
-            notes: new fields.HTMLField({ initial: "", required: false }),
+            valueAffected: new fields.StringField({
+                initial: "",
+                required: false,
+                blank: true,
+                label: "SFRPG.ModifierValueAffectedLabel",
+                hint: "SFRPG.ModifierValueAffectedTooltip"
+            }),
+            enabled: new fields.BooleanField({
+                initial: false,
+                required: false,
+                label: "SFRPG.ModifierEnabledLabel",
+                hint: "SFRPG.ModifierEnabledTooltip"
+            }),
+            source: new fields.StringField({
+                initial: "",
+                required: false,
+                label: "SFRPG.ModifierSourceLabel",
+                hint: "SFRPG.ModifierSourceTooltip"
+            }),
+            notes: new fields.HTMLField({
+                initial: "",
+                required: false,
+                label: "SFRPG.ModifierNotesLabel",
+                hint: "SFRPG.ModifierNotesTooltip"
+            }),
             subtab: new fields.StringField({
                 initial: "misc",
                 required: false,
@@ -105,7 +143,12 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
             ),
             damage: new fields.SchemaField(
                 {
-                    damageGroup: new fields.NumberField({ initial: null, required: false, nullable: true, integer: true }),
+                    damageGroup: new fields.NumberField({
+                        initial: null,
+                        required: false,
+                        nullable: true,
+                        integer: true
+                    }),
                     damageTypes: new fields.SchemaField(
                         [
                             ...Object.keys(CONFIG.SFRPG.energyDamageTypes),
@@ -124,7 +167,9 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
                 required: false,
                 nullable: true,
                 blank: true,
-                choices: ["", "parent", "container"]
+                choices: ["", "parent", "container"],
+                label: "SFRPG.ModifierLimitToLabel",
+                hint: "SFRPG.ModifierLimitToTooltip"
             })
         };
     }
