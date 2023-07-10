@@ -608,7 +608,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         // toggle timedEffect
         html.find('.effect-details-toggle').on('click', this._onToggleDetailsEffect.bind(this));
-        html.find("div[data-origin-actor-uuid").on("click", this._onClickOriginActor.bind(this));
+        html.find("div[data-origin-uuid]").on("click", this._onClickOrigin.bind(this));
     }
 
     /* -------------------------------------------- */
@@ -1047,11 +1047,11 @@ export class ItemSheetSFRPG extends ItemSheet {
         }
     }
 
-    async _onClickOriginActor(event) {
+    async _onClickOrigin(event) {
         event.preventDefault();
-        const uuid = event.currentTarget.dataset.originActorUuid;
-        const actor = await fromUuid(uuid);
+        const uuid = event.currentTarget.dataset.originUuid;
+        const doc = await fromUuid(uuid);
 
-        actor.sheet.render(true);
+        doc.sheet.render(true);
     }
 }
