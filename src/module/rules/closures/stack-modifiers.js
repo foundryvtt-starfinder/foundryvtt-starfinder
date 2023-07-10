@@ -20,7 +20,7 @@ export default class StackModifiers extends Closure {
         const modifiers = mods;
         for (let modifiersI = 0; modifiersI < modifiers.length; modifiersI++) {
             const modifier = modifiers[modifiersI];
-            const actor = game.actors.get(modifier.container?.actorId) || options.actor;
+            const actor = fromUuidSync(modifier.container?.actorUuid) || options.actor;
             const formula = String(modifier.modifier);
 
             if (formula && (modifier.modifierType === SFRPGModifierType.CONSTANT)) {
@@ -34,7 +34,7 @@ export default class StackModifiers extends Closure {
                         modifier.max = 0;
                     }
                 } catch (error) {
-                    console.warn(`Could not calculate modifier: ${modifier.name} for actor with ID: ${modifier.container.actorId}. Setting to zero. ${error}`);
+                    console.warn(`Could not calculate modifier: ${modifier.name} for actor with ID: ${modifier.container.actorUuid}. Setting to zero. ${error}`);
                     modifier.max = 0;
                 }
             } else {
@@ -59,7 +59,7 @@ export default class StackModifiers extends Closure {
         if (modifiers.length > 0) {
             for (let modifiersI = 0; modifiersI < modifiers.length; modifiersI++) {
                 const modifier = modifiers[modifiersI];
-                const actor = game.actors.get(modifier.container?.actorId) || options.actor;
+                const actor = await fromUuid(modifier.container?.actorUuid) || options.actor;
                 const formula = String(modifier.modifier);
 
                 if (formula) {

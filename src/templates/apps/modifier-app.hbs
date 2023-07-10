@@ -112,7 +112,7 @@
             </select>
         {{/if}}
     </div>
-    <div class="form-group modifier-limit-to" style="display: none">
+    <fieldset class="form-group modifier-limit-to" disabled=true>
         <label for="limitTo">{{localize "SFRPG.ModifierLimitToLabel"}}</label>
         <select name="limitTo" data-tooltip="{{localize "SFRPG.ModifierLimitToTooltip"}}">
             {{#select modifier.limitTo}}
@@ -121,7 +121,7 @@
                 <option value="container">{{localize "SFRPG.ModifierLimitToContainer"}}</option>
             {{/select}}
         </select>
-    </div>
+    </fieldset>
     <div class="form-group modifier-modifier-type">
         <label for="modifierType">{{localize "SFRPG.ModifierModifierTypeLabel"}}</label>
         <select name="modifierType" data-tooltip="{{localize "SFRPG.ModifierModifierTypeTooltip"}}">
@@ -133,10 +133,10 @@
             {{/select}}
         </select>
     </div>
-    <section class="damage-section-details" style="display: none">
+    <fieldset class="damage-section-details" disabled=true>
         <div class="damage-part-formula form-group">
             <label>{{ localize "SFRPG.Damage.Types.DamageGroup" group=""}}</label>
-            <input type="number" name="damageGroup" value="{{lookup modifier "damageGroup"}}" data-dtype="Number" data-tooltip="
+            <input type="number" name="damage.damageGroup" value="{{modifier.damage.damageGroup}}" data-dtype="Number" data-tooltip="
                 <strong>{{ localize 'SFRPG.Damage.Types.DamageGroup' group=''}}</strong>
                 <br>
                 <p>{{ localize 'SFRPG.Damage.Types.DamageGroupTooltip'}}</p>" />
@@ -146,7 +146,7 @@
                 <label>{{localize "SFRPG.Damage.EnergyDamage"}}</label>
                 {{#each config.energyDamageTypes as |name type|}}
                     <label class="checkbox">
-                        <input type="checkbox" name="damageTypes.{{type}}" {{checked (lookup ../modifier.damageTypes
+                        <input type="checkbox" name="damage.damageTypes.{{type}}" {{checked (lookup ../modifier.damage.damageTypes
                             type)}} />{{name}}
                     </label>
                 {{/each}}
@@ -155,7 +155,7 @@
                 <label>{{localize "SFRPG.Damage.KineticDamage"}}</label>
                 {{#each config.kineticDamageTypes as |name type|}}
                     <label class="checkbox">
-                        <input type="checkbox" name="damageTypes.{{type}}" {{checked (lookup ../modifier.damageTypes
+                        <input type="checkbox" name="damage.damageTypes.{{type}}" {{checked (lookup ../modifier.damage.damageTypes
                             type)}} />{{name}}
                     </label>
                 {{/each}}
@@ -163,12 +163,12 @@
             <div class="form-group form-group-stacked">
                 <label>{{localize "SFRPG.HealingTypesHealing"}}</label>
                 <label class="checkbox">
-                    <input type="checkbox" name="damageTypes.healing" {{checked (lookup
-                        modifier.damageTypes "healing" )}} />{{localize "SFRPG.HealingTypesHealing"}}
+                    <input type="checkbox" name="damage.damageTypes.healing" {{checked (lookup
+                        modifier.damage.damageTypes "healing" )}} />{{localize "SFRPG.HealingTypesHealing"}}
                 </label>
             </div>
         </div>
-    </section>
+    </fieldset>
     <div class="form-group modifier-source">
         <label for="source">{{localize "SFRPG.ModifierSourceLabel"}}</label>
         <input type="text" name="source" value="{{modifier.source}}" data-tooltip="{{localize "SFRPG.ModifierSourceTooltip"}}">

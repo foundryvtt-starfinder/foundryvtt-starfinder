@@ -1,6 +1,6 @@
 import { MeasuredTemplateSFRPG } from "./template-overrides.js";
 /**
- * A helper class to provide a preview interface for placable templates
+ * A helper class to provide a preview interface for placeable templates
  *
  * @augments MeasuredTemplateSFRPG
  */

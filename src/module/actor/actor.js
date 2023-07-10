@@ -82,7 +82,10 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         super.prepareData();
 
         this._ensureHasModifiers(this.system);
-        const modifiers = this.getAllModifiers();
+        const modifiers = this.getAllModifiers(false, false, true);
+
+        // Store all modifiers, from the actor and from items, on the actor in an instantiated state.
+        this.system.allModifiers = modifiers;
 
         // const timedEffects = SFRPGTimedEffect.getAllTimedEffects(this);
         this.system.timedEffects = new Map();

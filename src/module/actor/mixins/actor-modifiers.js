@@ -52,7 +52,9 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
         source = "",
         notes = "",
         condition = "",
-        id = null
+        id = null,
+        limitTo = "",
+        damage = null
     } = {}) {
         const data = this._ensureHasModifiers(duplicate(this.system));
         const modifiers = data.modifiers;
@@ -69,10 +71,12 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
             notes,
             subtab,
             condition,
-            id
+            id,
+            limitTo,
+            damage
         }));
 
-        await this.update({["system.modifiers"]: modifiers});
+        await this.update({"system.modifiers": modifiers});
     }
 
     /**
@@ -92,7 +96,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
      * @param {String} id The id for the modifier to edit
      */
     editModifier(id) {
-        const modifiers = duplicate(this.system.modifiers);
+        const modifiers = this.system.modifiers;
         const modifier = modifiers.find(mod => mod._id === id);
 
         new SFRPGModifierApplication(modifier, this).render(true);
@@ -103,21 +107,29 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
      *
      * @param {Boolean} ignoreTemporary Should we ignore temporary modifiers? Defaults to false.
      * @param {Boolean} ignoreEquipment Should we ignore equipment modifiers? Defaults to false.
+     * @param {Boolean} invalidate Whether to ignore `this.system.allModifiers` and generate all modifiers anew.
+     * @returns {SFRPGModifier[]}
      */
-    getAllModifiers(ignoreTemporary = false, ignoreEquipment = false) {
-        let allModifiers = this.system.modifiers.filter(mod => {
-            return (!ignoreTemporary || mod.subtab === "permanent");
-        });
+    getAllModifiers(ignoreTemporary = false, ignoreEquipment = false, invalidate = false) {
+        if (!invalidate && this.system.modifiers) return this.system.allModifiers;
 
-        for (const actorModifier of allModifiers) {
-            actorModifier.container = {actorId: this.id, itemId: null};
-        }
+        this.system.modifiers = this.system.modifiers.map(mod => {
+            const container = {actorUuid: this.uuid, itemUuid: null};
+            return new SFRPGModifier({...mod, container});
+        }, this);
+
+        const allModifiers = this.system.modifiers.filter(mod => (!ignoreTemporary || mod.subtab === "permanent"));
 
         for (const item of this.items) {
             const itemData = item.system;
-            const itemModifiers = itemData.modifiers;
 
-            let modifiersToConcat = [];
+            // Create each modifier as an SFRPGModifier instance first on the item data.
+            const itemModifiers = itemData.modifiers = itemData.modifiers.map(mod => {
+                const container = {actorUuid: this.uuid, itemUuid: item.uuid};
+                return new SFRPGModifier({...mod, container});
+            }, this);
+
+            let modifiersToPush = [];
             switch (item.type) {
             // Armor upgrades are only valid if they are slotted into an equipped armor
                 case "upgrade":
@@ -125,7 +137,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
                     if (!ignoreEquipment) {
                         const container = getItemContainer(this.items, item);
                         if (container && container.type === "equipment" && container.system.equipped) {
-                            modifiersToConcat = itemModifiers;
+                            modifiersToPush = itemModifiers;
                         }
                     }
                     break;
@@ -138,7 +150,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
                     if (!ignoreEquipment) {
                         const container = getItemContainer(this.items, item);
                         if (container && container.type === "weapon" && container.system.equipped) {
-                            modifiersToConcat = itemModifiers;
+                            modifiersToPush = itemModifiers;
                         }
                     }
                     break;
@@ -147,7 +159,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
                 // Feats are only active when they are passive, or activated
                 case "feat":
                     if (itemData.activation?.type === "" || itemData.isActive) {
-                        modifiersToConcat = itemModifiers;
+                        modifiersToPush = itemModifiers;
                     }
                     break;
 
@@ -156,34 +168,26 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
                 case "shield":
                 case "weapon":
                     if (!ignoreEquipment && itemData.equipped) {
-                        modifiersToConcat = itemModifiers;
+                        modifiersToPush = itemModifiers;
                     }
                     break;
 
                 case "actorResource":
                     if (itemData.enabled && itemData.type && itemData.subType && (itemData.base || itemData.base === 0)) {
-                        modifiersToConcat = itemModifiers;
+                        modifiersToPush = itemModifiers;
                     }
                     break;
 
                 // Everything else
                 default:
                     if (!itemData.equippable || itemData.equipped) {
-                        modifiersToConcat = itemModifiers;
+                        modifiersToPush = itemModifiers;
                     }
                     break;
             }
 
-            if (modifiersToConcat && modifiersToConcat.length > 0) {
-                for (const itemModifier of modifiersToConcat) {
-                    itemModifier.container = {actorId: this.id, itemId: item.id};
-                    if (this.token) {
-                        itemModifier.container.tokenId = this.token?.id;
-                        itemModifier.container.sceneId = this.token?.parent?.id;
-                    }
-                }
-
-                allModifiers = allModifiers.concat(modifiersToConcat);
+            if (modifiersToPush.length > 0) {
+                allModifiers.push(...modifiersToPush);
             }
         }
         return allModifiers;
