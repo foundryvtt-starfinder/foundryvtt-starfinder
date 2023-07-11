@@ -597,6 +597,21 @@ export class ItemSheetSFRPG extends ItemSheet {
             return arr;
         }, []);
 
+        // Handle Starship Action/Subaction Formulas
+        if (this.object.type === "starshipAction") {
+            const formula = Object.entries(formData).filter(e => e[0].startsWith("system.formula"));
+            const newFormula = {};
+
+            for (const item of formula) {
+                newFormula[item[0]] = item[1];
+                delete formData[item[0]];
+            }
+
+            const expanded = foundry.utils.expandObject(newFormula);
+            const final = Object.values(expanded.system.formula);
+            formData["system.formula"] = final;
+        }
+
         // Update the Item
         return super._updateObject(event, formData);
     }
