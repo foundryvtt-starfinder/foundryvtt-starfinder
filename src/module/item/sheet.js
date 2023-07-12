@@ -571,7 +571,6 @@ export class ItemSheetSFRPG extends ItemSheet {
      * @private
      */
     _updateObject(event, formData) {
-        console.log(foundry.utils.deepClone(formData));
         // Handle Damage Array
         const damage = Object.entries(formData).filter(e => e[0].startsWith("system.damage.parts"));
         formData["system.damage.parts"] = damage.reduce((arr, entry) => {
@@ -659,6 +658,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         html.find(".damage-control").click(this._onDamageControl.bind(this));
         html.find(".visualization-control").click(this._onActorResourceVisualizationControl.bind(this));
         html.find(".ability-adjustments-control").click(this._onAbilityAdjustmentsControl.bind(this));
+        html.find(".subaction-control").click(this._onSubactionControl.bind(this));
 
         html.find('.modifier-create').click(this._onModifierCreate.bind(this));
         html.find('.modifier-edit').click(this._onModifierEdit.bind(this));
@@ -687,6 +687,40 @@ export class ItemSheetSFRPG extends ItemSheet {
     }
 
     /* -------------------------------------------- */
+
+    /**
+     * Add or remove a subaction from a starship action
+     * @param {Event} event     The original click event
+     * @return {Promise}
+     * @private
+     */
+    async _onSubactionControl(event) {
+        event.preventDefault();
+        const a = event.currentTarget;
+
+        // Add a new subaction
+        if (a.classList.contains("add-subaction")) {
+            await this._onSubmit(event);
+            const formula = this.item.system.formula;
+            return await this.item.update({
+                "system.formula": formula.concat([
+                    { dc: {resolve:false, value:""}, formula: "", name:"", effectNormal:"", effectCritical:"" }
+                ])
+            });
+        }
+
+        // Remove a subaction
+        if (a.classList.contains("delete-subaction")) {
+            await this._onSubmit(event); // Submit any unsaved changes
+            const li = a.closest(".subaction-part");
+            const formula = duplicate(this.item.system.formula);
+            console.log(li, formula);
+            formula.splice(Number(li.dataset.subactionPart), 1);
+            return await this.item.update({
+                "system.formula": formula
+            });
+        }
+    }
 
     async _onAbilityAdjustmentsControl(event) {
         event.preventDefault();
