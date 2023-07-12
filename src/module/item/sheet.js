@@ -312,26 +312,27 @@ export class ItemSheetSFRPG extends ItemSheet {
             });
 
             // Manage Subactions
-            // This works to at least get the editor to display text, but puts information on itemData when I don't really want to
             if (data?.itemData?.formula?.length > 1) {
+                data.editorInfo = [];
                 let ct = 0;
                 for (const value of data.itemData.formula) {
+                    const effect = {};
 
-                    value.enrichedEffectNormal = await TextEditor.enrichHTML(value.effectNormal, {
+                    effect.enrichedEffectNormal = await TextEditor.enrichHTML(value.effectNormal, {
                         async,
                         rollData,
                         secrets
                     });
-                    value.targetNormal = `system.formula.${ct}.effectNormal`;
+                    effect.targetNormal = `system.formula.${ct}.effectNormal`;
 
-                    value.enrichedEffectCritical = await TextEditor.enrichHTML(value.effectCritical, {
+                    effect.enrichedEffectCritical = await TextEditor.enrichHTML(value.effectCritical, {
                         async,
                         rollData,
                         secrets
                     });
-                    value.targetCritical = `system.formula.${ct}.effectCritical`;
-
+                    effect.targetCritical = `system.formula.${ct}.effectCritical`;
                     ct += 1;
+                    data.editorInfo.push(effect);
                 }
             }
         }

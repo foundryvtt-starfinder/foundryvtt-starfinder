@@ -1,10 +1,9 @@
 
 <div class="bubble">
-    <h3 class="bubble-header">Subactions</h3>
+    <h3 class="bubble-header">{{ localize "SFRPG.ItemSheet.StarshipAction.Subactions" }}</h3>
 
     <div class="bubble-info">
         {{#each itemData.formula as |formula id|}}
-        {{console this}}
 
         <div class="bubble">
             <h3 class="bubble-header">{{lookup this "name"}}</h3>
@@ -12,7 +11,7 @@
             <div class="bubble-info">
                 {{!-- Action Skill --}}
                 <div class="form-group">
-                    <label>{{ localize "SFRPG.ItemSheet.StarshipAction.SkillorSubaction" }}</label>
+                    <label>{{ localize "SFRPG.ItemSheet.StarshipAction.SkillOrSubaction" }}</label>
                     <div class="form-fields">
                         <input type="text" name="system.formula.{{id}}.name" value="{{lookup this "name"}}" data-dtype="String"/>
                     </div>
@@ -38,35 +37,37 @@
                 </div>
 
                 {{!-- Subaction Effects --}}
-                <div class="bubble">
-                    <h3 class="bubble-header">{{ localize "SFRPG.ItemSheet.StarshipAction.NormalEffect" }}</h3>
+                {{#with (lookup ../editorInfo id) as |editorInfo|}}
+                    <div class="bubble">
+                        <h3 class="bubble-header">{{ localize "SFRPG.ItemSheet.StarshipAction.NormalEffect" }}</h3>
 
-                    <div class="bubble-info bubble-editor">
-                        {{editor
-                            enrichedEffectNormal
-                            target=targetNormal
-                            button=true
-                            editable=../editable
-                            engine="prosemirror"
-                            collaborate="true"
-                        }}
+                        <div class="bubble-info bubble-editor">
+                            {{editor
+                                editorInfo.enrichedEffectNormal
+                                target=editorInfo.targetNormal
+                                button=true
+                                editable=../../editable
+                                engine="prosemirror"
+                                collaborate="true"
+                            }}
+                        </div>
                     </div>
-                </div>
 
-                <div class="bubble">
-                    <h3 class="bubble-header">{{ localize "SFRPG.ItemSheet.StarshipAction.CriticalEffect" }}</h3>
+                    <div class="bubble">
+                        <h3 class="bubble-header">{{ localize "SFRPG.ItemSheet.StarshipAction.CriticalEffect" }}</h3>
 
-                    <div class="bubble-info bubble-editor">
-                        {{editor
-                            enrichedEffectCritical
-                            target=targetCritical
-                            button=true
-                            editable=../editable
-                            engine="prosemirror"
-                            collaborate="true"
-                        }}
+                        <div class="bubble-info bubble-editor">
+                            {{editor
+                                editorInfo.enrichedEffectCritical
+                                target=editorInfo.targetCritical
+                                button=true
+                                editable=../../editable
+                                engine="prosemirror"
+                                collaborate="true"
+                            }}
+                        </div>
                     </div>
-                </div>
+                {{/with}}
 
             </div>
         </div>
