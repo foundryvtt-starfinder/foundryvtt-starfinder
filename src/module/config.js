@@ -1071,7 +1071,8 @@ SFRPG.consumableTypes = {
     "drugs"    : "SFRPG.ConsumableTypes.Drugs",
     "medicne"  : "SFRPG.ConsumableTypes.Medicine",
     "poison"   : "SFRPG.ConsumableTypes.Poison",
-    "foodDrink": "SFRPG.ConsumableTypes.FoodDrink"
+    "foodDrink": "SFRPG.ConsumableTypes.FoodDrink",
+    "other": "SFRPG.ConsumableTypes.Other"
 };
 
 SFRPG.augmentationSystems = {
