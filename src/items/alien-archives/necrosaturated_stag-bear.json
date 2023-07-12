@@ -1,12 +1,12 @@
 {
-  "_id": "goCWrg2ex0AXhFK0",
-  "name": "Gremlin, Vaigruuk",
+  "_id": "yAlQ3meOXHFI0vIj",
+  "name": "Necrosaturated Stag-Bear",
   "type": "npc2",
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
-      "_id": "Sm8ilnQ7T33hwFfo",
-      "name": "Amplified Radiation Aura (Su)",
+      "_id": "7F06Pgz7VcxL1SsX",
+      "name": "Too Tough to Die (Ex)",
       "type": "feat",
       "img": "icons/svg/item-bag.svg",
       "system": {
@@ -18,7 +18,7 @@
         "actionTarget": "",
         "actionType": "",
         "activation": {
-          "type": "move",
+          "type": "reaction",
           "condition": "",
           "cost": 0
         },
@@ -44,7 +44,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>A vaigruuk’s long, dangling ears act as radiation amplifiers. It emits low @UUID[Compendium.sfrpg.rules.JournalEntry.SfkuzH5kxSAmG4nv.JournalEntryPage.n461i9lDXw303SiY#radiation]{radiation} within 20 feet, which it amplifies from harmless background radiation in the area. When within an area of low radiation, the vaigruuk emits medium radiation. In any environment where there is absolutely no radiation at all, such as certain shielded chambers, this aura doesn’t function. The vaigruuk can suppress its aura by wrapping its ears tightly around its body as a move action, but it is @UUID[Compendium.sfrpg.conditions.Item.MZ8OoH1GE9qDMyCD]{flat-footed} during this time. Unwrapping its ears is another move action.</p>"
+          "value": "<p>Twice per day, when a necrosaturated stag-bear would be reduced to 0 Hit Points, it can use its reaction to remain at 1 Hit Point instead. It can’t use this ability if a critical hit reduced it to 0 Hit Points. Each time it uses this ability, it gains a cumulative -2 penalty to attack rolls for 24 hours.</p>"
         },
         "descriptors": {
           "acid": false,
@@ -87,7 +87,7 @@
         "details": {
           "category": "feat",
           "combat": false,
-          "specialAbilityType": "su"
+          "specialAbilityType": ""
         },
         "duration": {
           "units": "text",
@@ -95,7 +95,38 @@
         },
         "formula": "",
         "isActive": null,
-        "modifiers": [],
+        "modifiers": [
+          {
+            "_id": "bb7b8709-7b03-42e2-887e-34508dd47b17",
+            "name": "Too Tough to Die (Ex)",
+            "type": "untyped",
+            "condition": "",
+            "effectType": "all-attacks",
+            "enabled": false,
+            "max": -2,
+            "modifier": "-2",
+            "modifierType": "formula",
+            "notes": "Each time it uses this ability, it gains a cumulative -2 penalty to attack rolls for 24 hours",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": ""
+          },
+          {
+            "_id": "eba89f12-2bd9-41da-899d-52176a3053af",
+            "name": "New Modifier",
+            "type": "untyped",
+            "condition": "",
+            "effectType": "skill",
+            "enabled": true,
+            "max": 0,
+            "modifier": "0",
+            "modifierType": "constant",
+            "notes": "",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": ""
+          }
+        ],
         "range": {
           "additional": "",
           "per": "",
@@ -119,21 +150,21 @@
           "value": ""
         },
         "uses": {
-          "max": "0",
-          "per": "",
-          "value": 0
+          "max": "2",
+          "per": "day",
+          "value": 2
         }
       }
     },
     {
-      "_id": "mcuZ7nCnft4tdYWY",
-      "name": "Claw",
+      "_id": "7wOV2JMyer1MjTde",
+      "name": "Antlers",
       "type": "weapon",
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
         "ability": "",
-        "actionTarget": "kac",
+        "actionTarget": "",
         "actionType": "mwak",
         "activation": {
           "type": "",
@@ -143,11 +174,12 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
         },
-        "attackBonus": 3,
+        "attackBonus": 11,
         "attributes": {
           "ac": {
             "value": ""
@@ -197,10 +229,10 @@
         "damage": {
           "parts": [
             {
-              "formula": "1d4 +1",
-              "operator": "",
+              "formula": "1d6 +6",
+              "operator": "and",
               "types": {
-                "slashing": true
+                "bludgeoning": true
               }
             }
           ]
@@ -215,7 +247,7 @@
         },
         "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "text",
           "value": null
         },
         "equippable": true,
@@ -263,20 +295,17 @@
       }
     },
     {
-      "_id": "a0ZgvZTNZTVpD2T4",
-      "name": "Caustic Glob (Ex)",
+      "_id": "IFO4ncU2pmPUvIQb",
+      "name": "Bite",
       "type": "weapon",
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "actionTarget": "eac",
-        "actionType": "rwak",
+        "actionTarget": "",
+        "actionType": "mwak",
         "activation": {
-          "type": "none",
+          "type": "",
           "condition": "",
           "cost": 0
         },
@@ -285,10 +314,10 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": "ft",
-          "value": ""
+          "units": "",
+          "value": 0
         },
-        "attackBonus": 5,
+        "attackBonus": 8,
         "attributes": {
           "ac": {
             "value": ""
@@ -316,7 +345,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": true,
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -338,19 +367,10 @@
         "damage": {
           "parts": [
             {
-              "name": "",
-              "formula": "1d4 +2",
-              "group": null,
+              "formula": "1d8 +4",
+              "operator": "and",
               "types": {
-                "acid": true,
-                "bludgeoning": false,
-                "cold": false,
-                "electricity": false,
-                "fire": false,
-                "healing": false,
-                "piercing": false,
-                "slashing": false,
-                "sonic": false
+                "piercing": true
               }
             }
           ]
@@ -361,12 +381,12 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>As a ranged attack that targets EAC, a vaigruuk can spit a glob of nauseating @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{poison} at a single creature within 30 feet. The acid damage from this glob results from vapors that eat away at a creature’s tissues and sinuses like a fast-acting toxin; creatures immune to @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{poison} take no damage from the vaigruuk’s caustic glob.</p>"
+          "value": ""
         },
         "descriptors": [],
         "duration": {
           "units": "text",
-          "value": ""
+          "value": null
         },
         "equippable": true,
         "equipped": true,
@@ -377,158 +397,44 @@
         "modifiers": [],
         "price": 0,
         "proficient": true,
-        "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": false,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "buttressing": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "gearArray": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "healing": false,
-          "holyWater": false,
-          "hybrid": false,
-          "hydrodynamic": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "instrumental": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": false,
-          "one": false,
-          "operative": false,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": false,
-          "professional": false,
-          "propel": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "recall": false,
-          "regrowth": false,
-          "relic": false,
-          "reposition": false,
-          "scramble": false,
-          "shape": false,
-          "shatter": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "thruster": false,
-          "trip": false,
-          "two": false,
-          "unbalancing": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
-        },
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
-          "units": "ft",
-          "value": "30"
+          "units": "",
+          "value": null
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": "",
-          "descriptor": "negate"
-        },
-        "skillCheck": {
-          "type": "",
-          "dc": ""
+          "dc": null,
+          "descriptor": ""
         },
         "source": "",
         "special": "",
-        "specialMaterials": {
-          "abysium": false,
-          "adamantine": false,
-          "coldiron": false,
-          "diatha": false,
-          "djezet": false,
-          "horacalcum": false,
-          "inubrix": false,
-          "khefak": false,
-          "noqual": false,
-          "nyblantine": false,
-          "purplecores": false,
-          "siccatite": false,
-          "silver": false,
-          "voidglass": false
-        },
+        "specialMaterials": {},
         "target": {
           "type": "",
-          "value": ""
+          "value": null
         },
         "usage": {
           "per": "",
           "value": 0
         },
         "uses": {
-          "max": "0",
-          "per": "",
+          "max": 0,
+          "per": null,
           "value": 0
         },
         "weaponCategory": "uncategorized",
-        "weaponType": "smallA"
+        "weaponType": "basicM"
       }
     },
     {
-      "_id": "NauKTxABZuPERKKa",
-      "name": "Despoiling Touch (Su)",
+      "_id": "xSCdNF3BipFBPOzS",
+      "name": "Determined Charge (Ex)",
       "type": "feat",
       "img": "icons/svg/item-bag.svg",
       "system": {
@@ -566,7 +472,128 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>When a vaigruuk touches ordinary food in a container no larger than itself, the food becomes rancid and loses all nutritional value.</p>"
+          "value": "<p>A stag-bear can charge without taking the normal charge penalties to its attack roll or AC. In addition, it can charge through difficult terrain.</p>"
+        },
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
+        "duration": {
+          "units": "text",
+          "value": null
+        },
+        "formula": "",
+        "isActive": null,
+        "modifiers": [],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "FsrSpf9IapIuD3fw",
+      "name": "Disruptive Susceptibility (Su)",
+      "type": "feat",
+      "img": "icons/svg/item-bag.svg",
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": 0
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>A necrosaturated creature takes half again as much damage (+50%) when it takes damage from a weapon with a @UUID[Compendium.sfrpg.equipment.Item.dTtjm4ZvLwD8OTqv]{disruptive} fusion.</p>"
         },
         "descriptors": {
           "acid": false,
@@ -612,7 +639,7 @@
           "specialAbilityType": "su"
         },
         "duration": {
-          "units": "",
+          "units": "text",
           "value": null
         },
         "formula": "",
@@ -644,521 +671,12 @@
           "max": 0,
           "per": null,
           "value": 0
-        }
-      }
-    },
-    {
-      "_id": "t5iMFRGa80jBy5uS",
-      "name": "Irradiating Lights (Su)",
-      "type": "feat",
-      "img": "icons/svg/item-bag.svg",
-      "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
-        "actionTarget": "",
-        "actionType": "",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shapable": false,
-          "shape": "",
-          "units": "",
-          "value": 0
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "damageNotes": "",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>The illumination a vaigruuk creates with its @UUID[Compendium.sfrpg.spells.Item.rSWg5JnN3mxzkatD]{dancing lights} spell-like ability emits low @UUID[Compendium.sfrpg.rules.JournalEntry.SfkuzH5kxSAmG4nv.JournalEntryPage.n461i9lDXw303SiY#radiation]{radiation} within the area of their illumination (which is 10 feet for dancing lights) and is always a sickly green color.</p>"
-        },
-        "descriptors": {
-          "acid": false,
-          "air": false,
-          "calling": false,
-          "chaotic": false,
-          "charm": false,
-          "cold": false,
-          "compulsion": false,
-          "creation": false,
-          "curse": false,
-          "darkness": false,
-          "death": false,
-          "disease": false,
-          "earth": false,
-          "electricity": false,
-          "emotion": false,
-          "evil": false,
-          "fear": false,
-          "fire": false,
-          "force": false,
-          "good": false,
-          "healing": false,
-          "language-dependent": false,
-          "lawful": false,
-          "light": false,
-          "mind-affecting": false,
-          "pain": false,
-          "poison": false,
-          "polymorph": false,
-          "radiation": false,
-          "scrying": false,
-          "sense-dependent": false,
-          "shadow": false,
-          "sonic": false,
-          "summoning": false,
-          "teleportation": false,
-          "water": false
-        },
-        "details": {
-          "category": "feat",
-          "combat": false,
-          "specialAbilityType": "su"
-        },
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "isActive": null,
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "rollNotes": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      }
-    },
-    {
-      "_id": "WEyrDt1mn2Vu0uHH",
-      "name": "Grease (DC 15)",
-      "type": "spell",
-      "img": "systems/sfrpg/icons/spells/grease.webp",
-      "system": {
-        "type": "",
-        "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "actionTarget": "",
-        "actionType": "save",
-        "activation": {
-          "type": "action",
-          "condition": "",
-          "cost": 1
-        },
-        "allowedClasses": {
-          "myst": false,
-          "precog": false,
-          "tech": true,
-          "wysh": true
-        },
-        "area": {
-          "effect": "",
-          "shape": "other",
-          "units": "ft",
-          "value": 10
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "concentration": false,
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "damageNotes": "",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>You cover a solid surface with a layer of slippery grease. Any creature in the area when the spell is cast must succeed at a Reflex save or fall @UUID[Compendium.sfrpg.conditions.XeRGqHVtcZ7vsgJ0]{Prone}. A creature can walk within or through the area of grease at half normal speed with a successful DC 10 Acrobatics check. Failure means the creature can’t move that round and must then succeed at a Reflex save or fall @UUID[Compendium.sfrpg.conditions.XeRGqHVtcZ7vsgJ0]{Prone}, while failure by 5 or more means it falls @UUID[Compendium.sfrpg.conditions.XeRGqHVtcZ7vsgJ0]{Prone} (see the Acrobatics skill on page 135 for details). A creature that doesn’t move on its turn doesn’t need to attempt this check and isn’t considered @UUID[Compendium.sfrpg.conditions.MZ8OoH1GE9qDMyCD]{Flat-footed}. The spell can also be used to create a greasy coating on an item. Unattended material objects are always affected by this spell. If you attempt to affect an object in a creature’s possession, the creature can attempt a Reflex save to negate the effect. If the creature fails the initial saving throw, it immediately drops the item and must attempt a new save each round it attempts to pick up, hold, or use the item. A creature wearing greased armor or clothing gains a +5 circumstance bonus to Acrobatics checks to escape a grapple and a +2 circumstance bonus to its AC against grapple combat maneuvers.</p>"
-        },
-        "descriptors": [],
-        "dismissible": true,
-        "duration": {
-          "units": "minute",
-          "value": "@details.cl.value"
-        },
-        "formula": "",
-        "isActive": null,
-        "isVariableLevel": false,
-        "level": 1,
-        "materials": {
-          "consumed": false,
-          "cost": 0,
-          "supply": 0,
-          "value": ""
-        },
-        "modifiers": [],
-        "preparation": {
-          "mode": "innate",
-          "prepared": true
-        },
-        "range": {
-          "additional": "5",
-          "per": "2 levels",
-          "units": "ft",
-          "value": 25
-        },
-        "rollNotes": "",
-        "save": {
-          "type": "reflex",
-          "dc": "15",
-          "descriptor": "partial"
-        },
-        "school": "con",
-        "source": "CRB pg. 357",
-        "sr": false,
-        "target": {
-          "type": "",
-          "value": "one 10 ft. square or one object"
-        },
-        "uses": {
-          "max": 1,
-          "per": "day",
-          "value": 1
-        }
-      }
-    },
-    {
-      "_id": "hpd8E14Z3ONVQm9U",
-      "name": "Overheat (DC 15)",
-      "type": "spell",
-      "img": "systems/sfrpg/icons/spells/overheat.webp",
-      "system": {
-        "type": "",
-        "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "actionTarget": "",
-        "actionType": "save",
-        "activation": {
-          "type": "action",
-          "condition": "",
-          "cost": 1
-        },
-        "allowedClasses": {
-          "myst": false,
-          "precog": false,
-          "tech": true,
-          "wysh": true
-        },
-        "area": {
-          "effect": "burst",
-          "shape": "cone",
-          "units": "ft",
-          "value": 15
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "concentration": false,
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": [
-            {
-              "formula": "2d8",
-              "operator": "",
-              "types": {
-                "fire": true
-              }
-            }
-          ]
-        },
-        "damageNotes": "",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>You collect the heat generated by nearby bodies and devices and vent it outward in a thermal wave, dealing 2d8 fire damage to creatures and objects in the area.</p>"
-        },
-        "descriptors": [],
-        "dismissible": false,
-        "duration": {
-          "units": "instantaneous",
-          "value": ""
-        },
-        "formula": "",
-        "isActive": null,
-        "isVariableLevel": false,
-        "level": 1,
-        "materials": {
-          "consumed": false,
-          "cost": 0,
-          "supply": 0,
-          "value": ""
-        },
-        "modifiers": [],
-        "preparation": {
-          "mode": "innate",
-          "prepared": true
-        },
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
-        },
-        "rollNotes": "",
-        "save": {
-          "type": "reflex",
-          "dc": "15",
-          "descriptor": "half"
-        },
-        "school": "evo",
-        "source": "CRB pg. 367",
-        "sr": true,
-        "target": {
-          "type": "",
-          "value": ""
-        },
-        "uses": {
-          "max": 1,
-          "per": "day",
-          "value": 1
-        }
-      }
-    },
-    {
-      "_id": "dYVbzb0G9w6rpArC",
-      "name": "Dancing Lights (At Will)",
-      "type": "spell",
-      "img": "systems/sfrpg/icons/spells/dancing_light.webp",
-      "system": {
-        "type": "",
-        "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "actionTarget": "",
-        "actionType": "",
-        "activation": {
-          "type": "action",
-          "condition": "",
-          "cost": 1
-        },
-        "allowedClasses": {
-          "myst": false,
-          "precog": false,
-          "tech": true,
-          "wysh": true
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": null,
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "concentration": false,
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "damageNotes": "",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>You create up to four lights that resemble small headlights or flashlights. The dancing lights must stay within a 10-foot-radius area in relation to each other but otherwise move as you desire: forward or back, up or down, straight or turning corners, or the like. The lights can move up to 100 feet per round. A light winks out if the distance between you and it exceeds the spell’s range.</p>\n<p>You can have only one <em>dancing lights</em> spell active at a time. If you cast this spell while another casting is still in effect, the previous casting is dispelled.</p>"
-        },
-        "descriptors": [],
-        "dismissible": true,
-        "duration": {
-          "units": "minute",
-          "value": "1"
-        },
-        "formula": "",
-        "isActive": null,
-        "isVariableLevel": false,
-        "level": 0,
-        "materials": {
-          "consumed": false,
-          "cost": 0,
-          "supply": 0,
-          "value": ""
-        },
-        "modifiers": [],
-        "preparation": {
-          "mode": "always",
-          "prepared": true
-        },
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "medium",
-          "value": null
-        },
-        "rollNotes": "",
-        "save": {
-          "type": "fort",
-          "dc": null,
-          "descriptor": "partial"
-        },
-        "school": "evo",
-        "source": "CRB pg. 347",
-        "sr": false,
-        "target": {
-          "type": "",
-          "value": ""
-        },
-        "uses": {
-          "max": null,
-          "per": "",
-          "value": null
-        }
-      }
-    },
-    {
-      "_id": "8ZtRP36KFLeRJZtP",
-      "name": "Detect Radiation (At Will)",
-      "type": "spell",
-      "img": "systems/sfrpg/icons/spells/detect_radiation.webp",
-      "system": {
-        "type": "",
-        "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "actionTarget": "",
-        "actionType": "",
-        "activation": {
-          "type": "action",
-          "condition": "",
-          "cost": 1
-        },
-        "allowedClasses": {
-          "myst": true,
-          "precog": false,
-          "tech": true,
-          "wysh": false
-        },
-        "area": {
-          "effect": "emanation",
-          "shape": "sphere",
-          "units": "ft",
-          "value": 120
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "concentration": false,
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "damageNotes": "",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>You detect radiation in the surrounding area, and you can determine the specific intensity of the radiation of one area or object within the spell’s area each round without taking an action (see Radiation on page 403 for more details). The spell can penetrate barriers, but 3 feet of dirt or wood, 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or any force field blocks it.</p>"
-        },
-        "descriptors": [],
-        "dismissible": false,
-        "duration": {
-          "units": "minute",
-          "value": "@details.cl.value*10"
-        },
-        "formula": "",
-        "isActive": null,
-        "isVariableLevel": false,
-        "level": 1,
-        "materials": {
-          "consumed": false,
-          "cost": 0,
-          "supply": 0,
-          "value": ""
-        },
-        "modifiers": [],
-        "preparation": {
-          "mode": "always",
-          "prepared": true
-        },
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "personal",
-          "value": null
-        },
-        "rollNotes": "",
-        "save": {
-          "type": "will",
-          "dc": null,
-          "descriptor": "negate"
-        },
-        "school": "div",
-        "source": "CRB pg. 348",
-        "sr": false,
-        "target": {
-          "type": "",
-          "value": ""
-        },
-        "uses": {
-          "max": null,
-          "per": "",
-          "value": null
         }
       }
     }
   ],
   "prototypeToken": {
-    "name": "Gremlin, Vaigruuk",
+    "name": "Necrosaturated Stag-Bear",
     "actorLink": false,
     "alpha": 1,
     "appendNumber": false,
@@ -1172,7 +690,7 @@
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
-    "height": 1,
+    "height": 2,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -1196,14 +714,14 @@
       "saturation": 0,
       "shadows": 0
     },
-    "lockRotation": false,
+    "lockRotation": true,
     "prependAdjective": false,
     "randomImg": false,
     "rotation": 0,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
-      "brightness": 1,
+      "brightness": 0,
       "color": null,
       "contrast": 0,
       "enabled": false,
@@ -1215,52 +733,52 @@
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
-      "scaleX": 0.8,
-      "scaleY": 0.8,
+      "scaleX": 1,
+      "scaleY": 1,
       "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
-    "width": 1
+    "width": 2
   },
   "system": {
     "abilities": {
       "cha": {
-        "base": -1,
+        "base": -2,
         "min": 3,
         "misc": 0,
-        "mod": -1,
+        "mod": 0,
         "value": 10
       },
       "con": {
         "base": 2,
         "min": 3,
         "misc": 0,
-        "mod": 2,
+        "mod": 0,
         "value": 10
       },
       "dex": {
-        "base": 4,
-        "min": 3,
-        "misc": 0,
-        "mod": 4,
-        "value": 10
-      },
-      "int": {
         "base": 1,
         "min": 3,
         "misc": 0,
-        "mod": 1,
+        "mod": 0,
+        "value": 10
+      },
+      "int": {
+        "base": -4,
+        "min": 3,
+        "misc": 0,
+        "mod": 0,
         "value": 10
       },
       "str": {
-        "base": -1,
+        "base": 4,
         "min": 3,
         "misc": 0,
-        "mod": -1,
+        "mod": 0,
         "value": 10
       },
       "wis": {
-        "base": 0,
+        "base": 1,
         "min": 3,
         "misc": 0,
         "mod": 0,
@@ -1272,12 +790,6 @@
         "base": "0"
       },
       "arms": "2",
-      "bab": 0,
-      "baseAttackBonus": {
-        "rolledMods": [],
-        "tooltip": [],
-        "value": 0
-      },
       "baseSpellDC": {
         "base": "0"
       },
@@ -1287,48 +799,48 @@
         "value": 10
       },
       "eac": {
-        "base": 12,
+        "base": 13,
         "min": 0,
         "tooltip": [],
-        "value": 12
+        "value": 10
       },
       "fort": {
-        "base": 3,
-        "bonus": 3,
+        "base": 6,
+        "bonus": 0,
         "misc": 0,
         "tooltip": [],
         "value": 0
       },
       "hp": {
-        "max": 21,
+        "max": 25,
         "min": 0,
         "temp": null,
         "tempmax": null,
         "tooltip": [],
-        "value": 21
+        "value": 25
       },
       "init": {
         "bonus": 0,
         "tooltip": [],
-        "total": 4,
-        "value": 4
+        "total": 0,
+        "value": 1
       },
       "kac": {
-        "base": 13,
+        "base": 15,
         "min": 0,
         "tooltip": [],
-        "value": 13
+        "value": 10
       },
       "keyability": "",
-      "reach": "",
+      "reach": "5 ft.",
       "reflex": {
-        "base": 3,
-        "bonus": 3,
+        "base": 6,
+        "bonus": 0,
         "misc": 0,
         "tooltip": [],
         "value": 0
       },
-      "space": "",
+      "space": "10 ft.",
       "speed": {
         "burrowing": {
           "base": 0
@@ -1341,61 +853,24 @@
           "baseManeuverability": 0
         },
         "land": {
-          "base": 30
+          "base": 40
         },
         "mainMovement": "land",
         "special": "",
         "swimming": {
           "base": 0
-        },
-        "value": null
+        }
       },
       "spellcasting": "",
       "will": {
-        "base": 5,
-        "bonus": 5,
+        "base": 1,
+        "bonus": 0,
         "misc": 0,
         "tooltip": [],
         "value": 0
       }
     },
-    "conditions": {
-      "asleep": false,
-      "bleeding": false,
-      "blinded": false,
-      "broken": false,
-      "burning": false,
-      "confused": false,
-      "cowering": false,
-      "dazed": false,
-      "dazzled": false,
-      "dead": false,
-      "deafened": false,
-      "dying": false,
-      "encumbered": false,
-      "entangled": false,
-      "exhausted": false,
-      "fascinated": false,
-      "fatigued": false,
-      "flat-footed": false,
-      "frightened": false,
-      "grappled": false,
-      "helpless": false,
-      "nauseated": false,
-      "off-kilter": false,
-      "off-target": false,
-      "overburdened": false,
-      "panicked": false,
-      "paralyzed": false,
-      "pinned": false,
-      "prone": false,
-      "shaken": false,
-      "sickened": false,
-      "stable": false,
-      "staggered": false,
-      "stunned": false,
-      "unconscious": false
-    },
+    "conditions": {},
     "counterClasses": {
       "values": {}
     },
@@ -1404,9 +879,9 @@
       "upb": 0
     },
     "details": {
-      "type": "Fey",
-      "alignment": "CE",
-      "aura": "Amplified Radiation - 20 Ft.",
+      "type": "Magical Beast",
+      "alignment": "NE",
+      "aura": "",
       "biography": {
         "age": 0,
         "dateOfBirth": "",
@@ -1417,32 +892,27 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>Vaigruuks are hunched, long-eared gremlins that love to skulk around and sicken creatures that don’t realize they’re there. Despite their affinity for @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{poison} and radioactivity, these gremlins don't wallow in toxic areas-they’re instead drawn to places where non-ill people congregate, such as fitness centers or athletic events. There, vaigruuks spoil food and inflict radiation sickness from a good hiding place. Vaigruuks don’t often work together, as they frequently devolve into bickering about the best way to undertake their sabotage, thus risking getting caught.</p>\n<p>Vaigruuks are singularly aberrant, with asymmetrical clusters of beady eyes above two slit-like nostrils and a drooling mouth. Their most prominent feature is fleshy, rabbitlike ears, which are so long they hang down to the ground. Vaigruuks are incredibly vain about their ears and take great care to groom them each day, brushing the clumps of hairy bristles on them. These ears function as radiation receivers and amplifiers, allowing the vaigruuk to sense the presence of nearby radiation and bolster its effects.</p>\n<h2>Gremlin</h2>\n<p>Gremlins are fey spirits intimately tied to technological malfunctions. One variety of gremlin, called glitch gremlins, is especially common (and feared) in societies with advanced technology. Both computer glitch gremlins and ship glitch gremlins demonstrate remarkable single-mindedness in their pursuit of mayhem as they find new and more frustrating ways to make technology break, glitch, or fail.</p>\n<p>A computer glitch gremlin’s appearance varies widely with the digital data it has eaten, but they average 1 foot in height and weigh around 4 pounds. Ship glitch gremlins have lamprey-like mouths and long, spidery arms and legs. They stand 2-1/2 feet tall and weigh approximately 20 pounds.</p>",
+        "value": "<p>Some animals, magical beasts, and vermin contaminated with lingering negative energy begin to rot while still alive, rather that succumbing to the mercy of a swift death. Their flesh withers, making them resemble undead, even though they remain terribly-and painfully-alive.</p>\n<p>The stag-bear is an omnivorous herd animal found throughout the plains across Weydana-4. The creatures resemble broad-shouldered bears with a wide rack of antlers. Stag-bears rarely pose a threat unless provoked.</p>",
         "weight": ""
       },
       "class": "",
       "combatRole": "combatant",
       "cr": 2,
-      "environment": "any",
-      "organization": "solitary",
+      "environment": "any (Weydana-4)",
+      "organization": "solitary, pair, or herd (3-18)",
       "organizationSize": {
         "max": null,
         "min": 1
       },
       "race": "",
       "raceAndGrafts": "",
-      "source": "AP #40 pg. 57",
+      "source": "AP #40 pg. 60",
       "subtype": "",
       "xp": {
         "value": 10
       }
     },
     "modifiers": [],
-    "skillpoints": {
-      "max": 0,
-      "tooltip": [],
-      "used": 0
-    },
     "skills": {
       "acr": {
         "ability": "dex",
@@ -1457,13 +927,13 @@
       },
       "ath": {
         "ability": "str",
-        "enabled": false,
+        "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
         "min": 0,
         "misc": 0,
         "mod": 0,
-        "ranks": 0,
+        "ranks": 7,
         "value": 0
       },
       "blu": {
@@ -1523,13 +993,13 @@
       },
       "eng": {
         "ability": "int",
-        "enabled": true,
+        "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
         "min": 0,
         "misc": 0,
-        "mod": 12,
-        "ranks": 12,
+        "mod": 0,
+        "ranks": 0,
         "value": 0
       },
       "int": {
@@ -1583,7 +1053,7 @@
         "isTrainedOnly": false,
         "min": 0,
         "misc": 0,
-        "mod": 7,
+        "mod": 0,
         "ranks": 7,
         "value": 0
       },
@@ -1645,24 +1115,24 @@
       },
       "ste": {
         "ability": "dex",
-        "enabled": true,
+        "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
         "min": 0,
         "misc": 0,
-        "mod": 12,
-        "ranks": 12,
+        "mod": 0,
+        "ranks": 0,
         "value": 0
       },
       "sur": {
         "ability": "wis",
-        "enabled": true,
+        "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
         "min": 0,
         "misc": 0,
-        "mod": 7,
-        "ranks": 7,
+        "mod": 0,
+        "ranks": 0,
         "value": 0
       }
     },
@@ -1705,7 +1175,7 @@
     },
     "traits": {
       "ci": {
-        "custom": "Poison",
+        "custom": "",
         "value": []
       },
       "damageReduction": {
@@ -1713,7 +1183,7 @@
         "value": 0
       },
       "di": {
-        "custom": "Poison",
+        "custom": "",
         "value": []
       },
       "dr": {
@@ -1726,17 +1196,14 @@
       },
       "languages": {
         "custom": "",
-        "value": [
-          "aklo",
-          "common"
-        ]
+        "value": []
       },
-      "senses": "low-light vision",
-      "size": "small",
+      "senses": "blindsense (life) 60 ft., darkvision 60 ft., low-light vision",
+      "size": "large",
       "spellResistance": {
         "base": 0
       },
-      "sr": 13
+      "sr": 0
     }
   }
 }
