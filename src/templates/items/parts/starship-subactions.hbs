@@ -4,6 +4,7 @@
 
     <div class="bubble-info">
         {{#each itemData.formula as |formula id|}}
+        {{console this}}
 
         <div class="bubble">
             <h3 class="bubble-header">{{lookup this "name"}}</h3>
@@ -42,10 +43,10 @@
 
                     <div class="bubble-info bubble-editor">
                         {{editor
-                            ../enrichedEffectNormal
-                            target="system.formula.{{id}}.effectNormal"
+                            enrichedEffectNormal
+                            target=targetNormal
                             button=true
-                            editable=editable
+                            editable=../editable
                             engine="prosemirror"
                             collaborate="true"
                         }}
@@ -57,10 +58,10 @@
 
                     <div class="bubble-info bubble-editor">
                         {{editor
-                            ../enrichedEffectCritical
-                            target="system.formula.{{id}}.effectCritical"
+                            enrichedEffectCritical
+                            target=targetCritical
                             button=true
-                            editable=editable
+                            editable=../editable
                             engine="prosemirror"
                             collaborate="true"
                         }}

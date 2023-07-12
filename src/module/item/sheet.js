@@ -310,6 +310,30 @@ export class ItemSheetSFRPG extends ItemSheet {
                 rollData,
                 secrets
             });
+
+            // Manage Subactions
+            // This works to at least get the editor to display text, but puts information on itemData when I don't really want to
+            if (data?.itemData?.formula?.length > 1) {
+                let ct = 0;
+                for (const value of data.itemData.formula) {
+
+                    value.enrichedEffectNormal = await TextEditor.enrichHTML(value.effectNormal, {
+                        async,
+                        rollData,
+                        secrets
+                    });
+                    value.targetNormal = `system.formula.${ct}.effectNormal`;
+
+                    value.enrichedEffectCritical = await TextEditor.enrichHTML(value.effectCritical, {
+                        async,
+                        rollData,
+                        secrets
+                    });
+                    value.targetCritical = `system.formula.${ct}.effectCritical`;
+
+                    ct += 1;
+                }
+            }
         }
 
         return data;
@@ -546,6 +570,7 @@ export class ItemSheetSFRPG extends ItemSheet {
      * @private
      */
     _updateObject(event, formData) {
+        console.log(foundry.utils.deepClone(formData));
         // Handle Damage Array
         const damage = Object.entries(formData).filter(e => e[0].startsWith("system.damage.parts"));
         formData["system.damage.parts"] = damage.reduce((arr, entry) => {
@@ -599,6 +624,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         // Handle Starship Action/Subaction Formulas
         if (this.object.type === "starshipAction") {
+            const currentFormula = {system: {formula: Object.assign({}, this.item.system.formula)}};
             const formula = Object.entries(formData).filter(e => e[0].startsWith("system.formula"));
             const newFormula = {};
 
@@ -608,7 +634,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             }
 
             const expanded = foundry.utils.expandObject(newFormula);
-            const final = Object.values(expanded.system.formula);
+            const final = Object.values(foundry.utils.mergeObject(currentFormula, expanded, {overwrite:true}).system.formula);
             formData["system.formula"] = final;
         }
 
