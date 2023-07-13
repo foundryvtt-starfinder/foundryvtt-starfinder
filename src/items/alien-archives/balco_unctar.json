@@ -95,22 +95,6 @@
                 "slashing": false,
                 "sonic": false
               }
-            },
-            {
-              "name": "",
-              "formula": "1d4",
-              "group": null,
-              "types": {
-                "acid": false,
-                "bludgeoning": false,
-                "cold": true,
-                "electricity": false,
-                "fire": false,
-                "healing": false,
-                "piercing": false,
-                "slashing": false,
-                "sonic": false
-              }
             }
           ]
         },
@@ -394,22 +378,6 @@
                 "bludgeoning": false,
                 "cold": false,
                 "electricity": true,
-                "fire": false,
-                "healing": false,
-                "piercing": false,
-                "slashing": false,
-                "sonic": false
-              }
-            },
-            {
-              "name": "",
-              "formula": "1d4",
-              "group": null,
-              "types": {
-                "acid": false,
-                "bludgeoning": false,
-                "cold": true,
-                "electricity": false,
                 "fire": false,
                 "healing": false,
                 "piercing": false,
@@ -907,24 +875,7 @@
           "parts": []
         },
         "damage": {
-          "parts": [
-            {
-              "name": "",
-              "formula": "1d4",
-              "group": null,
-              "types": {
-                "acid": false,
-                "bludgeoning": false,
-                "cold": true,
-                "electricity": false,
-                "fire": false,
-                "healing": false,
-                "piercing": false,
-                "slashing": false,
-                "sonic": false
-              }
-            }
-          ]
+          "parts": []
         },
         "damageNotes": "",
         "description": {
@@ -982,8 +933,37 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
-        "modifiers": [],
+        "isActive": false,
+        "modifiers": [
+          {
+            "_id": "ad6d022e-573f-491e-8bf6-d33aa386b970",
+            "name": "Absorb Corpse (Su)",
+            "type": "untyped",
+            "condition": "",
+            "damage": {
+              "damageGroup": null,
+              "damageTypes": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": true,
+                "electricity": false,
+                "fire": false,
+                "piercing": false,
+                "slashing": false,
+                "sonic": false
+              }
+            },
+            "effectType": "all-damage",
+            "enabled": true,
+            "max": 4,
+            "modifier": "1d4",
+            "modifierType": "damageSection",
+            "notes": "For 1 minute afterward using this feature, all of his attacks deal an additional 1d4 cold damage.",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": ""
+          }
+        ],
         "range": {
           "additional": "",
           "per": "",
