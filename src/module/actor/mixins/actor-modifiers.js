@@ -124,10 +124,12 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
             const itemData = item.system;
 
             // Create each modifier as an SFRPGModifier instance first on the item data.
-            const itemModifiers = itemData.modifiers = itemData.modifiers.map(mod => {
+            const itemModifiers = itemData.modifiers = itemData?.modifiers?.map(mod => {
                 const container = {actorUuid: this.uuid, itemUuid: item.uuid};
                 return new SFRPGModifier({...mod, container});
-            }, this);
+            }, this) || [];
+
+            if (!itemModifiers || itemModifiers.length === 0) continue;
 
             let modifiersToPush = [];
             switch (item.type) {
