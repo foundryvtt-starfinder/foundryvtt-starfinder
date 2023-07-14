@@ -1215,8 +1215,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                     name: bonus.name,
                     explanation: bonus.name,
                     formula: bonus.modifier,
-                    types: bonus.damageTypes,
-                    group: bonus.damageGroup
+                    types: bonus?.damage?.damageTypes,
+                    group: bonus?.damage?.damageGroup
                 });
                 return;
             }
