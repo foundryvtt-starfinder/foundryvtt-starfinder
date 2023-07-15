@@ -11,8 +11,6 @@
     "activeDuration": {
       "activationTime": 0,
       "endsOn": "onTurnStart",
-      "expiryInit": 0,
-      "expiryMode": "turn",
       "unit": "permanent",
       "value": 0
     },
@@ -25,10 +23,8 @@
     },
     "description": {
       "chat": "",
-      "gmnotes": "",
-      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.rules.0yJjfyvWg5pDLcVR]{Conditions}</p>\n<hr />\n<p>You take a –2 penalty to attack rolls, weapon damage rolls, saving throws, skill checks, and ability checks.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.rules.JournalEntry.0yJjfyvWg5pDLcVR]{Conditions}</p>\n<hr />\n<p>You take a –2 penalty to attack rolls, weapon damage rolls, saving throws, skill checks, and ability checks.</p>"
     },
     "enabled": true,
     "modifiers": [
@@ -48,29 +44,13 @@
         "valueAffected": "acr"
       },
       {
-        "_id": "d166bec9-923e-4f17-a003-c95bb250ab9f",
-        "name": "Sickened",
-        "type": "untyped",
-        "condition": "",
-        "effectType": "melee-damage",
-        "enabled": true,
-        "max": -2,
-        "modifier": "-2",
-        "modifierType": "constant",
-        "notes": "",
-        "source": "Sickened",
-        "subtab": "misc",
-        "valueAffected": ""
-      },
-      {
         "_id": "286f24d9-87a4-4f71-b5a5-24ad173dfff5",
         "name": "Sickened",
         "type": "untyped",
         "condition": "",
-        "effectType": "ranged-damage",
+        "effectType": "all-damage",
         "enabled": true,
-        "max": -2,
-        "modifier": "-2",
+        "modifier": -2,
         "modifierType": "constant",
         "notes": "",
         "source": "Condition",
@@ -122,7 +102,6 @@
       }
     ],
     "requirements": "Condition",
-    "showOnToken": true,
     "source": "CRB.277",
     "sourceActorId": null
   }
