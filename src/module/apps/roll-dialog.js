@@ -43,9 +43,11 @@ export default class RollDialog extends Dialog {
         // Sort parts by group. Parts with the same group will share a radio input.
         if (this.parts.length > 0) {
             this.damageGroups = this.parts.reduce((groups, item) => {
-                const group = (groups[item.group] || []);
+                // Coerce undefined to null
+                const itemGroup = item.group ?? null;
+                const group = (groups[itemGroup] || []);
                 group.push(item);
-                groups[item.group] = group;
+                groups[itemGroup] = group;
                 return groups;
             }, {});
         }
@@ -107,7 +109,7 @@ export default class RollDialog extends Dialog {
 
             if (modifier.modifier[0] === "+") modifier.modifier = modifier.modifier.slice(1);
 
-            /* If it actually was simplified, append the original modififer for use on the tooltip.
+            /* If it actually was simplified, append the original modifier for use on the tooltip.
             *
             * If the formulas are different with whitespace, that means the original likely has some weird whitespace, so let's correct that, bu we don't need to tell the user.
             */
@@ -210,41 +212,31 @@ export default class RollDialog extends Dialog {
         this.rollMode = event.target.value;
     }
 
-    _getActorForContainer(container) {
-        if (container.tokenId) {
-            const scene = game.scenes.get(container.sceneId);
-            const token = scene.tokens.get(container.tokenId);
-            return token.actor;
-        }
-        return game.actors.get(container.actorId);
-    }
-
     async _toggleModifierEnabled(event) {
         const modifierIndex = $(event.currentTarget).data('modifierIndex');
         const modifier = this.availableModifiers[modifierIndex];
 
+        // Non-SFRPGModifier objects
         modifier.enabled = !modifier.enabled;
         this.render(false);
 
+        // SFRPGModifier instances
         if (modifier._id) {
-            // Update container
-            const container = modifier.container;
-            const actor = this._getActorForContainer(container);
-            if (container.itemId) {
-                const item = container.itemId ? await actor.items.get(container.itemId) : null;
+            // Toggle modifier object itself
+            modifier.updateSource({"enabled": modifier.enabled});
 
-                // Update modifier by ID in item
-                const containerModifiers = duplicate(item.system.modifiers);
-                const modifierToUpdate = containerModifiers.find(x => x._id === modifier._id);
-                modifierToUpdate.enabled = modifier.enabled;
-                await item.update({ "system.modifiers": containerModifiers });
-            } else {
-                // Update modifier by ID in actor
-                const containerModifiers = duplicate(actor.system.modifiers);
-                const modifierToUpdate = containerModifiers.find(x => x._id === modifier._id);
-                modifierToUpdate.enabled = modifier.enabled;
-                await actor.update({ "system.modifiers": containerModifiers });
-            }
+            const owner = modifier.primaryOwner;
+            if (!owner) return;
+
+            // Find the modifier in the owner and set to the updated object
+            const ownerModifiers = owner.system.modifiers;
+            const index = ownerModifiers.findIndex(x => x._id === modifier._id);
+            if (!index < 0) return;  // Will be -1 if using a global attack modifier
+
+            ownerModifiers[index] = modifier;
+            await owner.update({ "system.modifiers": ownerModifiers });
+            this.render(false);
+
         }
     }
 

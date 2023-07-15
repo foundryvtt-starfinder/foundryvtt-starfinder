@@ -19,7 +19,7 @@ Please keep in mind the Starfinder system identifier changed with Starfinder sys
 
 ## Installation
 1. Download the current release that is compatible with your version of Foundry VTT from the [releases tab](https://github.com/wildj79/foundryvtt-starfinder/releases). Unzip the files and place them in the data folder for your installation. See [https://foundryvtt.com/article/configuration#where-user-data](https://foundryvtt.com/article/configuration#where-user-data) for more details about where your data is stored for Foundry. Make sure to put the files in a folder named `sfrpg` in the `systems` directory. _NOTE: This is no longer the perfered method of installing modules. Please use the module browser within foundry._
-2. Copy this link and use Foundry's Module manager to install it: `https://raw.githubusercontent.com/wildj79/foundryvtt-starfinder/master/src/system.json`
+2. Copy this link and use Foundry's Module manager to install it: `https://raw.githubusercontent.com/foundryvtt-starfinder/foundryvtt-starfinder/master/src/system.json`
 
 ## Use
 
