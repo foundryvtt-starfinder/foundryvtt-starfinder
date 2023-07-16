@@ -332,9 +332,10 @@ function sanitizeJSON(jsonInput) {
             fakeLink.each((index, el) => {
                 const element = $(el);
                 const compendium = element.data("pack");
+                const compendiumDocType = getManifest().file.packs.find(i => i.name === compendium).type;
                 const id = element.data("id");
                 const text = element.text().trim();
-                const uuid = `@UUID[Compendium.${compendium}.${id}]{${text}}`;
+                const uuid = `@UUID[Compendium.${compendium}.${compendiumDocType}.${id}]{${text}}`;
                 element.replaceWith(uuid);
             });
         }
@@ -344,6 +345,12 @@ function sanitizeJSON(jsonInput) {
             .append($description)
             .html()
             .replace(/@Compendium\[/g, "@UUID[Compendium.") // Replace @Compendium links with @UUID links
+            .replace(/(@UUID\[Compendium.sfrpg\.)([a-zA-Z-]+)\.([\d\w]{16})]/g, (match, signature, compendiumId, docId) => {
+                const compendiumDocType = getManifest().file.packs.find(i => i.name === compendiumId).type;
+
+                return `${signature}${compendiumId}.${compendiumDocType}.${docId}]`;
+
+            }) // Add the document type to the UUID.
             .replace(/(\w)(@UUID)/g, "$1 $2") // Add a space before the start of @UUID links if there is a word before.
             .replace(/<([hb]r)>/g, "<$1 />") // Prefer self-closing tags
             .replace(/ {2,}/g, " ") // Replace double or more spaces with a single space
@@ -363,6 +370,7 @@ function sanitizeJSON(jsonInput) {
             .replace(/(\n)+/g, "\n") // Replace any number of newlines with a single one
             .replace(/(窶・)/g, "—") // For some reason these two characters often appear in place of an em dash
             .trim();
+
     };
 
     const sanitizeDescription = (item) => {
@@ -1403,24 +1411,25 @@ function consistencyCheck(allItems, compendiumMap) {
 
                 const linkParts = link.split('.');
                 // Skip links to journal entry pages
-                // @UUID[Compendium.sfrpg.some-pack.abcxyz.JournalEntryPage.abcxyz]
-                if (linkParts.length === 6) {
+                // @UUID[Compendium.sfrpg.some-pack.JournalEntry.abcxyz.JournalEntryPage.abcxyz]
+                if (linkParts.includes("JournalEntryPage")) {
                     continue;
                 }
-                if (linkParts.length !== 4) {
+                if (linkParts.length !== 5) {
                     if (!(pack in packErrors)) {
                         packErrors[pack] = [];
                     }
-                    packErrors[pack].push(`${chalk.bold(item.file)}: Compendium link to '${chalk.bold(link)}' is not valid. It does not have enough segments in the link. Expected format is Compendium.sfrpg.compendiumName.itemId.`);
+                    packErrors[pack].push(`${chalk.bold(item.file)}: Compendium link to '${chalk.bold(link)}' is not valid. It does not have enough segments in the link. Expected format is Compendium.sfrpg.compendiumName.documentType.itemId.`);
                     cookErrorCount++;
                     continue;
                 }
 
-                // @UUID[Compendium.sfrpg.some-pack.abcxyz]
-                //      [0]         [1]   [2]       [3]
+                // @UUID[Compendium.sfrpg.some-pack.Item.abcxyz]
+                //      [0]         [1]   [2]       [3]  [4]
                 const system = linkParts[1];
                 const otherPack = linkParts[2];
-                const otherItemId = linkParts[3];
+                const docType = linkParts[3];
+                const otherItemId = linkParts[4];
 
                 // @UUID links must link to sfrpg compendiums.
                 if (system !== "sfrpg") {
@@ -1464,6 +1473,12 @@ function consistencyCheck(allItems, compendiumMap) {
                         packErrors[pack] = [];
                     }
                     packErrors[pack].push(`${chalk.bold(item.file)}: '${chalk.bold(otherItemName)}' (with id: ${chalk.bold(otherItemId)}) not found in '${chalk.bold(otherPack)}'.`);
+                    cookErrorCount++;
+                }
+
+                // Document Types must be real documents
+                if (!(["Actor", "Item", "JournalEntry", "Macro", "RollTable"].includes(docType))) {
+                    packErrors[pack].push(`${chalk.bold(item.file)}: '${chalk.bold(docType)}' is not a valid document type`);
                     cookErrorCount++;
                 }
             }
