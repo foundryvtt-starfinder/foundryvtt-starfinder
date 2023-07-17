@@ -1,8 +1,8 @@
 {
-  "_id": "eHei2ofag7prMslj",
-  "name": "Alternate Outcome (Su)",
+  "_id": "RLH0KzGwG4kiykO6",
+  "name": "Trap Spotter (Ex)",
   "type": "feat",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/feats/telepathic_spy.webp",
   "system": {
     "type": "",
     "ability": null,
@@ -12,16 +12,16 @@
     "actionTarget": "",
     "actionType": "",
     "activation": {
-      "type": "reaction",
+      "type": "",
       "condition": "",
-      "cost": 1
+      "cost": 0
     },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "ft",
-      "value": ""
+      "units": "",
+      "value": null
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -38,7 +38,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.kb6oH6VfAxc7irG4]{Witchwarper}</p>\n<p>You can use your grasp of other realities to swap an outcome in your current existence with that of a more favorable reality. As a reaction once per day, you can reroll one attack roll, saving throw, ability check, or skill check that you attempt. Alternatively, you can expend a use of this ability as a reaction to cause a critical hit against you or an ally within 100 feet to instead be a normal hit.</p>\n<p>You gain one additional daily use of this ability at 12th level and again at 18th level.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>You double your operative’s edge bonus to Perception checks to notice traps. Additionally, you automatically receive a Perception check to notice a trap when you pass within 10 feet of it.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -81,41 +81,57 @@
     "details": {
       "category": "classFeature",
       "combat": false,
-      "specialAbilityType": "su"
+      "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "text",
-      "value": ""
+      "units": "",
+      "value": null
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "27d89c50-e2ea-4240-a147-001b54166818",
+        "name": "Trap Spotter (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 2,
+        "modifier": "(1+floor((@classes.operative.levels + 1) / 4)) * 2",
+        "modifierType": "formula",
+        "notes": "You double your operative’s edge bonus to Perception checks to notice traps. Additionally, you automatically receive a Perception check to notice a trap when you pass within 10 feet of it.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "per"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
-      "units": "none",
+      "units": "",
       "value": null
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "6th Level - Witchwarper",
+    "requirements": "2nd Level -  Operative",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "COM pg. 63",
+    "source": "AR pg. 150",
     "target": {
       "type": "",
-      "value": ""
+      "value": null
     },
     "uses": {
-      "max": "lookupRange(@classes.witchwarper.levels, 0, 6, 1, 12, 2, 18, 3)",
-      "per": "day",
-      "value": 1
+      "max": 0,
+      "per": null,
+      "value": 0
     }
   }
 }
