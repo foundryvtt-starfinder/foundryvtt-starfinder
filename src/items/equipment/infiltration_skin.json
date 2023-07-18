@@ -1,6 +1,6 @@
 {
   "_id": "cxMdw27nMBMHL6gy",
-  "name": "Infiltration skin",
+  "name": "Infiltration Skin",
   "type": "equipment",
   "img": "icons/svg/mystery-man.svg",
   "system": {
@@ -9,15 +9,17 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
       "type": "",
       "condition": "",
       "cost": 0
     },
-    "ammunitionType": "",
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": 0
@@ -52,12 +54,13 @@
     "attuned": false,
     "bulk": "16",
     "capacity": {
-      "max": 0,
+      "max": 80,
       "value": 0
     },
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -80,6 +83,17 @@
           "amount": 1,
           "subtype": "weaponSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "ammunition"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "ammunitionSlot",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
@@ -88,30 +102,15 @@
       "parts": []
     },
     "damage": {
-      "parts": [
-        {
-          "formula": "1d8",
-          "operator": "",
-          "types": {
-            "acid": false,
-            "bludgeoning": true,
-            "cold": false,
-            "electricity": false,
-            "fire": false,
-            "healing": false,
-            "piercing": false,
-            "slashing": false,
-            "sonic": false
-          }
-        }
-      ]
+      "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p><strong>Speed&nbsp;</strong> 30 ft.</p>\n<p><strong>Strength&nbsp;</strong> 18 (+4);&nbsp;<strong>Damage&nbsp;</strong> 1d8 B;&nbsp;<strong>Size</strong>&nbsp;Medium</p>\n<p><strong>Capacity&nbsp;</strong> 80;&nbsp;<strong>Usage&nbsp;</strong> 1/hour</p>\n<p>Innovated by screedreep scam artists, an infiltration suit takes the form of a Medium humanoid or monstrous humanoid, with an Azlanti human being typical. Only Small or smaller creatures can wear and operate an infiltration suit, and when disguising themselves as the person the armor’s modeled after, the wearer reduces the DC modifier to Disguise checks to +1 each to assume a different creature type, size category, and race. An aftermarket modification costing 5% of the item’s price and a day of work can change the armor’s appearance to that of a different humanoid or monstrous humanoid.</p>\n<p>Unusually, a creature wearing an infiltration skin can wear an additional suit of armor over the powered armor, in which case they use the better of the two armors’ EAC bonuses, KAC bonuses, and armor upgrade slots. The wearer uses the worse of the armors’ maximum Dexterity, armor check penalty, and speed penalty values.</p>"
+      "value": "<p><strong>Speed&nbsp;</strong> 30 ft.</p>\n<p><strong>Strength&nbsp;</strong> 18 (+4);&nbsp;<strong>Damage&nbsp;</strong> 1d8 B;&nbsp;<strong>Size</strong>&nbsp;Medium</p>\n<p><strong>Capacity&nbsp;</strong> 80;&nbsp;<strong>Usage&nbsp;</strong> 1/hour</p>\n<p>Innovated by screedreep scam artists, an infiltration suit takes the form of a Medium humanoid or monstrous humanoid, with an Azlanti human being typical. Only Small or smaller creatures can wear and operate an infiltration suit, and when disguising themselves as the person the armor’s modeled after, the wearer reduces the DC modifier to @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.aayAhTaRzitONs5U]{Disguise} checks to +1 each to assume a different creature type, size category, and race. An aftermarket modification costing 5% of the item’s price and a day of work can change the armor’s appearance to that of a different humanoid or monstrous humanoid.</p>\n<p>Unusually, a creature wearing an infiltration skin can wear an additional suit of armor over the powered armor, in which case they use the better of the two armors’ EAC bonuses, KAC bonuses, and armor upgrade slots. The wearer uses the worse of the armors’ maximum Dexterity, armor check penalty, and speed penalty values.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -136,22 +135,43 @@
       "value": null
     },
     "reach": "",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": "",
       "descriptor": "negate"
     },
-    "size": "",
+    "size": "medium",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
     "source": "TR pg. 54",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "speed": "",
-    "strength": 0,
+    "strength": 18,
     "target": {
       "type": "",
       "value": null
     },
     "usage": {
-      "per": "",
-      "value": 0
+      "per": "hour",
+      "value": 1
     },
     "uses": {
       "max": 0,

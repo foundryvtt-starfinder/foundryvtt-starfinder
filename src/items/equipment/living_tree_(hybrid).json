@@ -1,6 +1,6 @@
 {
   "_id": "CoYOojjkdrglKxBM",
-  "name": "Living tree (hybrid)",
+  "name": "Living Tree (Hybrid)",
   "type": "equipment",
   "img": "icons/svg/mystery-man.svg",
   "system": {
@@ -9,14 +9,14 @@
     "abilityMods": {
       "parts": []
     },
-    "actionTarget": "",
+    "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
       "type": "",
       "condition": "",
       "cost": 0
     },
-    "ammunitionType": "",
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
       "shapable": false,
@@ -54,7 +54,7 @@
     "attuned": false,
     "bulk": "57",
     "capacity": {
-      "max": 0,
+      "max": 20,
       "value": 0
     },
     "chatFlavor": "",
@@ -83,6 +83,17 @@
           "amount": 1,
           "subtype": "weaponSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "ammunition"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "ammunitionSlot",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
@@ -94,7 +105,7 @@
       "parts": [
         {
           "name": "",
-          "formula": "2d10",
+          "formula": "2d10 +(@abilities.str.mod)",
           "group": null,
           "types": {
             "acid": false,
@@ -140,14 +151,14 @@
       "units": "",
       "value": null
     },
-    "reach": "",
+    "reach": "15 ft.",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": "",
       "descriptor": "negate"
     },
-    "size": "fine",
+    "size": "huge",
     "skillCheck": {
       "type": "",
       "dc": ""
@@ -169,15 +180,15 @@
       "silver": false,
       "voidglass": false
     },
-    "speed": "",
-    "strength": 0,
+    "speed": "15 ft.",
+    "strength": 24,
     "target": {
       "type": "",
       "value": null
     },
     "usage": {
-      "per": "",
-      "value": 0
+      "per": "hour",
+      "value": 1
     },
     "uses": {
       "max": 0,
