@@ -1,4 +1,4 @@
-import { ActorItemHelper, moveItemBetweenActorsAsync, onCreateItemCollection } from "../actor/actor-inventory-utils.js";
+import { ActorItemHelper, onCreateItemCollection } from "../actor/actor-inventory-utils.js";
 import { ItemCollectionSheet } from "../apps/item-collection-sheet.js";
 
 import { RPC } from "../rpc.js";
@@ -178,7 +178,7 @@ function openLootCollectionSheet(event) {
     lootCollectionSheet.render(true);
 }
 
-async function handleCanvasDropAsync(canvas, data) {
+async function handleCanvasDropAsync(canvas, data, targetActor) {
     const document = await Item.fromDropData(data);
     let sourceActor = null;
     const sourceItem = document;
@@ -188,16 +188,6 @@ async function handleCanvasDropAsync(canvas, data) {
         sourceActor = new ActorItemHelper(document.parent._id, document.parent.parent._id, document.parent.parent.parent._id);
     } else if (document?.parent ?? false) {
         sourceActor = new ActorItemHelper(document.parent._id);
-    }
-
-    // Potential targets:
-    // Canvas (floor), Token Actor (may be linked)
-    let targetActor = null;
-    for (const placeable of canvas.tokens.placeables) {
-        if (data.x < placeable.x + placeable.width && data.x > placeable.x && data.y < placeable.y + placeable.height && data.y > placeable.y && placeable instanceof Token) {
-            targetActor = placeable.actor;
-            break;
-        }
     }
 
     // Create a placeable instead and do item transferral there.
@@ -234,16 +224,9 @@ async function handleCanvasDropAsync(canvas, data) {
         return;
     }
 
-    const target = new ActorItemHelper(targetActor.id, targetActor.token.id, targetActor.token.parent.id);
-
-    if (sourceItem) {
-        moveItemBetweenActorsAsync(sourceActor, sourceItem, target);
-    } else {
-        target.createItem(sourceItemData);
-    }
 }
 
-export function canvasHandlerV10(canvas, data) {
+export function canvasHandler(canvas, data) {
     // We're only interested in overriding item drops.
     if (!data || (data.type !== "Item" && data.type !== "ItemCollection")) {
         return true;
@@ -253,8 +236,51 @@ export function canvasHandlerV10(canvas, data) {
         if (!canvas.initialized) { return true; }
         // console.log("Canvas::handleItemDrop()");
 
-        handleCanvasDropAsync(canvas, data).then(_ => {});
-        return false;
+        // If dropping onto a token, add the item to that token's actor. Otherwise create a loot token.
+        const targetActor = [...canvas.tokens.placeables]
+            .sort((a, b) => b.document.sort - a.document.sort)
+            .find((token) => {
+                const maximumX = token.x + (token.hitArea?.right ?? 0);
+                const maximumY = token.y + (token.hitArea?.bottom ?? 0);
+                return data.x >= token.x && data.y >= token.y && data.x <= maximumX && data.y <= maximumY;
+            })?.actor || null;
+
+        if (targetActor) {
+            const tokenId = targetActor.isToken ? targetActor.token.id : null;
+            const sceneId = targetActor.isToken ? targetActor.token.parent.id : null;
+            const target = new ActorItemHelper(targetActor.id, tokenId, sceneId);
+
+            // Simulate a drop to the sheet
+            targetActor.sheet.processDroppedData({ preventDefault() {} }, data);
+            const sourceItem = fromUuidSync(data.uuid);
+            if (sourceItem.type !== "effect") {
+                const tokens = target?.token || targetActor.getActiveTokens(true);
+                const text = `+(${sourceItem.name})`;
+
+                for (const token of tokens) {
+                    const floaterData = {
+                        anchor: CONST.TEXT_ANCHOR_POINTS.CENTER,
+                        direction: CONST.TEXT_ANCHOR_POINTS.TOP,
+                        distance: (2 * token.h),
+                        fontSize: 32,
+                        stroke: 0x000000,
+                        strokeThickness: 4,
+                        jitter: 0.25
+                    };
+                    canvas.interface.createScrollingText(token.center, text, floaterData);
+                }
+
+            }
+            return false;
+        } else {
+            // If there isn't a target actor, we're creating a loot token. If item piles is enabled, defer to that
+            if (game.modules.get("item-piles")?.active) return true;
+            else {
+                handleCanvasDropAsync(canvas, data, targetActor).then(_ => {});
+                return false;
+            }
+        }
+
     }
 
     return true;
