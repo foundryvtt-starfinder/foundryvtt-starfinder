@@ -19,9 +19,10 @@
     "ammunitionType": "",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -64,6 +65,7 @@
         {
           "name": "",
           "formula": "1d3 + @abilities.str.mod + lookupRange(@details.level.value, 0, 3, floor(@details.level.value / 2))",
+          "group": null,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -88,7 +90,7 @@
     },
     "descriptors": [],
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
     "equippable": false,
@@ -138,11 +140,14 @@
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
       "hybrid": false,
+      "hydrodynamic": false,
       "ignite": false,
       "indirect": false,
       "injection": false,
+      "instrumental": false,
       "integrated": false,
       "line": false,
       "living": false,
@@ -207,6 +212,10 @@
       "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
     "source": "Shimreen",
     "special": "",
     "specialMaterials": {
@@ -234,7 +243,7 @@
       "value": 0
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     },

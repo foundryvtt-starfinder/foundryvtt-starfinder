@@ -16,6 +16,7 @@
       "condition": "",
       "cost": null
     },
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
       "shape": "",
@@ -50,6 +51,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -65,7 +67,7 @@
         {
           "type": "slot",
           "acceptsType": [
-            "goods"
+            "weaponAccessory"
           ],
           "affectsEncumbrance": true,
           "amount": 1,
@@ -92,16 +94,28 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "3d4 + @abilities.str.mod",
-          "operator": "",
+          "group": null,
           "types": {
-            "cold": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": true,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>Cryospikes began as fire-extinguishing equipment, but they have since been weaponized and now serve a variety of roles. The weapon discharges a spike of hyper-cooled fluid that can be configured to put out a small fire or deal a burst of cold damage to its target. Most cryospike users integrate the apparatus’s maze of polymer tubing and coolant reservoirs into their armor to keep it always close at hand. The personal cryospike is based on a model originally designed for use in powered armor prototypes (as such early designs are prone to fires caused by engineering faults). Residential cryospikes are typically employed by firefighting crews, while industrial cryospikes is most often kept on hand in massive starship-engineering bays.</p>"
     },
@@ -110,6 +124,7 @@
       "units": "",
       "value": ""
     },
+    "equippable": false,
     "equipped": false,
     "formula": "",
     "identified": true,
@@ -132,6 +147,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -150,15 +166,19 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
       "hybrid": false,
+      "hydrodynamic": false,
       "ignite": false,
       "indirect": false,
       "injection": false,
+      "instrumental": false,
       "integrated": true,
       "line": false,
       "living": false,
@@ -176,6 +196,7 @@
       "polymorphic": false,
       "powered": true,
       "professional": false,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
@@ -184,7 +205,9 @@
       "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
+      "shatter": false,
       "shells": false,
       "shield": false,
       "sniper": false,
@@ -197,6 +220,7 @@
       "thought": false,
       "throttle": false,
       "thrown": false,
+      "thruster": false,
       "trip": false,
       "two": false,
       "unbalancing": false,
@@ -206,19 +230,41 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "touch",
       "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
     "source": "AR pg. 9",
     "special": "",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""

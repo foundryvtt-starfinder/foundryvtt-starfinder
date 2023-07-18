@@ -19,9 +19,10 @@
     "ammunitionType": "charge",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -37,7 +38,7 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": 27
       },
       "size": "medium",
       "sturdy": true
@@ -51,7 +52,7 @@
     "chatFlavor": "Polarize 1d4",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": 1,
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -73,6 +74,16 @@
           "amount": 1,
           "subtype": "ammunitionSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "weaponAccessory"
+          ],
+          "amount": 4,
+          "subtype": "",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
@@ -82,17 +93,36 @@
         {
           "formula": "",
           "operator": "",
-          "types": {}
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
         }
       ]
     },
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "1d8",
-          "operator": "",
+          "group": null,
           "types": {
-            "electricity": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": true,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
@@ -103,11 +133,11 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": ""
+      "value": "<p>The polarity rifle was designed by Vercite engineers using the conceptual model that underpins polarity gauntlets. This rifle’s prongs are separately polarized, and it alternates between them as it fires to create a circuit of lightning between the gun and target, causing subsequent attacks to deal additional damage. Static, aurora, storm, and tempest polarity rifles are favored by sharpshooters in many fields, though they are often scorned by kasathas who view them as a vulgarized appropriation of an honorable weapon.</p><h3>Shock Weapons</h3><p>Shock weapons emit powerful electrical blasts that can damage and potentially stun enemies. Ranged versions use a low-power laser to direct these weapons’ electrical arcs. Electrical blasts can also leap to adjacent targets, making the weapons well suited for stunning groups of enemies. In general, tempest shock weapons are the most powerful, followed in descending order by storm, aurora, and static shock weapons.</p>"
     },
     "descriptors": [],
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
     "equippable": false,
@@ -133,6 +163,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -151,14 +182,19 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
+      "hybrid": false,
+      "hydrodynamic": false,
       "ignite": false,
       "indirect": false,
       "injection": false,
+      "instrumental": false,
       "integrated": false,
       "line": false,
       "living": false,
@@ -176,14 +212,18 @@
       "polymorphic": false,
       "powered": false,
       "professional": false,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
       "reach": false,
       "recall": false,
+      "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
+      "shatter": false,
       "shells": false,
       "shield": false,
       "sniper": false,
@@ -196,8 +236,10 @@
       "thought": false,
       "throttle": false,
       "thrown": false,
+      "thruster": false,
       "trip": false,
       "two": true,
+      "unbalancing": false,
       "underwater": false,
       "unwieldy": false,
       "variantBoost": false,
@@ -209,17 +251,36 @@
       "additional": "",
       "per": "",
       "units": "ft",
-      "value": 60
+      "value": "60"
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
-    "source": "AR",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
+    "source": "AR pg. 48",
     "special": "",
-    "specialMaterials": {},
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
@@ -229,7 +290,7 @@
       "value": 2
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 2
     },

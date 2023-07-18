@@ -16,11 +16,13 @@
       "condition": "",
       "cost": 1
     },
+    "ammunitionType": "",
     "area": {
       "effect": "burst",
+      "shapable": false,
       "shape": "sphere",
       "units": "ft",
-      "value": 10
+      "value": "10"
     },
     "attackBonus": 0,
     "attributes": {
@@ -50,6 +52,7 @@
     "chatFlavor": "staggered 1 round",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -81,24 +84,37 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "1d8",
-          "operator": "",
+          "group": null,
           "types": {
-            "cold": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": true,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>Cryo grenades release a blast of supercooled chemicals on impact, which immediately coalesce into freezing particles.</p>"
     },
     "descriptors": [],
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
+    "equippable": false,
     "equipped": false,
     "formula": "",
     "identified": true,
@@ -121,6 +137,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -139,15 +156,19 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
       "hybrid": false,
+      "hydrodynamic": false,
       "ignite": false,
       "indirect": false,
       "injection": false,
+      "instrumental": false,
       "integrated": false,
       "line": false,
       "living": false,
@@ -165,6 +186,7 @@
       "polymorphic": false,
       "powered": false,
       "professional": false,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
@@ -173,7 +195,9 @@
       "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
+      "shatter": false,
       "shells": false,
       "shield": false,
       "sniper": false,
@@ -186,6 +210,7 @@
       "thought": false,
       "throttle": false,
       "thrown": true,
+      "thruster": false,
       "trip": false,
       "two": false,
       "unbalancing": false,
@@ -195,19 +220,41 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
-      "value": 20
+      "value": "20"
     },
+    "rollNotes": "",
     "save": {
       "type": "reflex",
       "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
       "descriptor": "partial"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
     "source": "CRB pg. 178",
     "special": "",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
@@ -217,7 +264,7 @@
       "value": 1
     },
     "uses": {
-      "max": 1,
+      "max": "1",
       "per": "charges",
       "value": 1
     },

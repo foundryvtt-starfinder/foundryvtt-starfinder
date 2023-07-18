@@ -16,13 +16,33 @@
       "condition": "",
       "cost": null
     },
+    "ammunitionType": "roundL",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
+    "attributes": {
+      "ac": {
+        "value": ""
+      },
+      "customBuilt": false,
+      "dex": {
+        "mod": ""
+      },
+      "hardness": {
+        "value": ""
+      },
+      "hp": {
+        "max": "",
+        "value": 102
+      },
+      "size": "medium",
+      "sturdy": true
+    },
     "attuned": false,
     "bulk": "2",
     "capacity": {
@@ -32,6 +52,8 @@
     "chatFlavor": "Sniper (750 ft.)",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
@@ -52,6 +74,17 @@
           "amount": 1,
           "subtype": "ammunitionSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "weaponAccessory"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 4,
+          "subtype": "",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
@@ -61,34 +94,58 @@
         {
           "formula": "4d6",
           "operator": "",
-          "types": {}
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
         }
       ]
     },
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "12d6",
-          "operator": "",
+          "group": null,
           "types": {
-            "piercing": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": true,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": ""
+      "value": "<p>A coil rifle is a long, slender firearm surrounded by a coil that generates carefully aligned magnetic fields that accelerate a single round with impressive power and accuracy. Precision coil rifles are the most affordable of these weapons, while specialist coil rifles have greater range and efficacy. Rangefinder, saboteur, and assassin coil rifles are especially deadly weapons that are appreciated by true connoisseurs, veteran mercenaries, and experienced firearm specialists.</p>"
     },
     "descriptors": [],
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
+    "equippable": false,
     "equipped": false,
     "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 19,
     "modifiers": [],
     "price": 590000,
@@ -107,6 +164,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -125,14 +183,19 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
+      "hybrid": false,
+      "hydrodynamic": false,
       "ignite": false,
       "indirect": false,
       "injection": false,
+      "instrumental": false,
       "integrated": false,
       "line": false,
       "living": false,
@@ -150,14 +213,18 @@
       "polymorphic": false,
       "powered": false,
       "professional": false,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
       "reach": false,
       "recall": false,
+      "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
+      "shatter": false,
       "shells": false,
       "shield": false,
       "sniper": true,
@@ -170,27 +237,51 @@
       "thought": false,
       "throttle": false,
       "thrown": false,
+      "thruster": false,
       "trip": false,
       "two": true,
+      "unbalancing": false,
       "underwater": false,
       "unwieldy": false,
       "variantBoost": false,
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
-      "value": 90
+      "value": "90"
     },
+    "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
-    "source": "AR",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
+    "source": "AR pg. 43",
     "special": "",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
@@ -200,9 +291,9 @@
       "value": 1
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
-      "value": 1
+      "value": null
     },
     "weaponCategory": "projectile",
     "weaponType": "sniper"
