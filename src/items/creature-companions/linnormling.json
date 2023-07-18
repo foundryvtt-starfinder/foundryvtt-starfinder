@@ -25,6 +25,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -280,6 +281,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -338,6 +340,11 @@
           "summoning": false,
           "teleportation": false,
           "water": false
+        },
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
         },
         "duration": {
           "units": "",
@@ -586,9 +593,10 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
-          "units": "none",
-          "value": null
+          "units": "ft",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -605,7 +613,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>When the linnormling takes damage from a creature’s spell or attack, they cast <em>@UUID[Compendium.sfrpg.spells.Jrx0dGgxtVkLcZd1]{Bestow Curse}</em> on that creature as a reaction with a range of 30 feet without having to touch the target (Will negates DC = 10 + half the linnormling’s level + the linnormling’s Charisma modifier).</p>"
+          "value": "<p>When the linnormling takes damage from a creature’s spell or attack, they cast <em>@UUID[Compendium.sfrpg.spells.Jrx0dGgxtVkLcZd1]{Bestow Curse}</em> on that creature as a reaction with a range of 30 feet without having to touch the target (Will negates DC = 10 + half the linnormling’s level + the linnormling’s Charisma modifier). The curse lasts until the end of that creature’s next turn. If the spell or attack reduced the linnormling to 0 Hit Points, the curse instead lasts a number of rounds equal to the linnormling’s Charisma modifier. Once they use this ability, they can’t do so again for [[/r 1d4]]{1d4 rounds}.</p>"
         },
         "descriptors": {
           "acid": false,
@@ -645,8 +653,13 @@
           "teleportation": false,
           "water": false
         },
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
-          "units": "",
+          "units": "text",
           "value": ""
         },
         "formula": "",
@@ -669,13 +682,17 @@
           "dc": "10+floor(@details.cr)+@abilities.cha.mod",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": ""
+        },
         "source": "",
         "target": {
           "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -701,6 +718,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -775,6 +793,11 @@
           "summoning": false,
           "teleportation": false,
           "water": false
+        },
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
         },
         "duration": {
           "units": "",
