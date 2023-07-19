@@ -1021,16 +1021,11 @@ export class ActorSheetSFRPG extends ActorSheet {
 
             const props = $(`<div class="item-properties"></div>`);
             chatData.properties.forEach(p => {
-                const tooltipValue = p.tooltip || p.title;
-                if (tooltipValue) {
-                    props.append(
-                        `<span class="tag" data-tooltip="${tooltipValue}"><strong>${p.title ? p.title + ":" : ""} </strong>${p.name}</span>`
-                    );
-                } else {
-                    props.append(
-                        `<span class="tag"><strong>${p.title ? p.title + ":" : ""} </strong>${p.name}</span>`
-                    );
-                }
+                let tooltipValue = p.tooltip || p.title || "";
+                if (tooltipValue) tooltipValue = `data-tooltip="${tooltipValue}"`;
+                props.append(
+                    `<span class="tag" ${tooltipValue}><strong>${p.title ? p.title + ":" : ""} </strong>${p.name}</span>`
+                );
             }
             );
 
