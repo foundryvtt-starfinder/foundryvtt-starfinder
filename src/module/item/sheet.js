@@ -599,7 +599,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         html.find('input[class="storage.acceptsType"]').change(this._onChangeStorageAcceptsItem.bind(this));
         html.find('input[name="storage.affectsEncumbrance"]').change(this._onChangeStorageAffectsEncumbrance.bind(this));
 
-        html.find('input[class="data.supportedSizes"]').change(this._onChangeSupportedStarshipSizes.bind(this));
+        html.find('input[class="system.supportedSizes"]').change(this._onChangeSupportedStarshipSizes.bind(this));
 
         html.find('img[name="resource-image"]').click(this._onClickResourceVisualizationImage.bind(this));
         html.find('select[name="resource-mode"]').change(this._onChangeResourceVisualizationMode.bind(this));
@@ -889,13 +889,15 @@ export class ItemSheetSFRPG extends ItemSheet {
         event.preventDefault();
         event.stopImmediatePropagation();
 
-        const toggleSize = event.currentTarget.name;
+        const toggleSize = event.currentTarget.dataset.size;
         const enabled = event.currentTarget.checked;
 
-        let supportedSizes = duplicate(this.item.system.supportedSizes);
-        if (enabled && !supportedSizes.includes(toggleSize)) {
+        let supportedSizes = this.item.system.supportedSizes;
+        const previouslyEnabled = supportedSizes.includes(toggleSize);
+
+        if (enabled && !previouslyEnabled) {
             supportedSizes.push(toggleSize);
-        } else if (!enabled && supportedSizes.includes(toggleSize)) {
+        } else if (!enabled && previouslyEnabled) {
             supportedSizes = supportedSizes.filter(x => x !== toggleSize);
         }
 
