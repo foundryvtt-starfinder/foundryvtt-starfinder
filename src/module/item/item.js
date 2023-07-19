@@ -655,18 +655,18 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      * @param {Object} props The items properties
      */
     _upgradeChatData(data, labels, props) {
-        let armorType = "";
+        let allowedArmorType = "";
 
-        if (data.armorType === 'any') {
-            armorType = "Any";
+        if (data.allowedArmorType === 'any') {
+            allowedArmorType = game.i18n.localize("SFRPG.Any");
         } else {
-            armorType = CONFIG.SFRPG.armorTypes[data.armorType];
+            allowedArmorType = CONFIG.SFRPG.allowedArmorTypes[data.allowedArmorType];
         }
 
         props.push(
             {name: game.i18n.localize("TYPES.Item.upgrade"), tooltip: null},
             data.slots ? {name: `${game.i18n.localize("SFRPG.Items.Upgrade.Slots")} ${data.slots}`, tooltip: null} : null,
-            {name: `${game.i18n.localize("SFRPG.Items.Upgrade.AllowedArmorType")}: ${armorType}`, tooltip: null}
+            {name: `${game.i18n.localize("SFRPG.Items.Upgrade.AllowedArmorType")}: ${allowedArmorType}`, tooltip: null}
         );
     }
 
