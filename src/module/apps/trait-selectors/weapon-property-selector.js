@@ -3,7 +3,7 @@ import { TraitSelectorSFRPG } from "../trait-selector.js";
 export class WeaponPropertySelectorSFRPG extends TraitSelectorSFRPG {
     constructor(item, options) {
         super(item, options);
-        super.getData();
+        // super.getData();
 
         // Add extra text fields if needed
         foundry.utils.mergeObject(this.options, {
@@ -53,14 +53,14 @@ export class WeaponPropertySelectorSFRPG extends TraitSelectorSFRPG {
 
         // get a list of valid choices and initialize array
         const validChoices = Object.keys(this.options.choices);
-        const selectedValues = duplicate(this.options.choices);
+        const selectedValues = {};
 
         // Ignoring options not in the list of choices
         // key is the specific language, proficiency, etc.
         // value is true or false, or the name of a custom trait
-        for (const [key, value] of Object.entries(formData)) {
-            if (validChoices.includes(key)) {
-                selectedValues[key] = value;
+        for (const [key, property] of Object.entries(formData)) {
+            if (validChoices.includes(key) && property.value) {
+                selectedValues[key] = property;
             }
         }
         console.log(selectedValues);

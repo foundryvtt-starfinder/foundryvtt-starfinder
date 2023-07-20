@@ -88,6 +88,9 @@ export class ActorTraitSelectorSFRPG extends TraitSelectorSFRPG {
      */
     _setTraitChoices(formData) {
 
+        // Expand the formData object
+        formData = foundry.utils.expandObject(formData);
+
         // get a list of valid choices and initialize array
         const validChoices = Object.keys(this.options.choices);
         const values = [];
@@ -95,11 +98,9 @@ export class ActorTraitSelectorSFRPG extends TraitSelectorSFRPG {
         // Ignoring options not in the list of choices, push values marked true to the updateData
         // key is the specific language, proficiency, etc.
         // value is true or false, or the name of a custom trait
-        for (const [key, value] of Object.entries(formData)) {
-            if (validChoices.includes(key)) {
-                if (value) {
-                    values.push(key);
-                }
+        for (const [key, trait] of Object.entries(formData)) {
+            if (validChoices.includes(key) && trait.value) {
+                values.push(key);
             }
         }
 
