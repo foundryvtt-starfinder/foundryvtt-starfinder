@@ -163,4 +163,4 @@ Don't use this, just run `npm ci` instead.
 
 ### Getting Foundry Intellisense in Visual Studio Code
 
-If you would like some basic Intellisense for the Foundry types when using Visual Studio Code, all you have to do is copy `foundry.js` into the projects root folder. Once you do this, restart VS Code, and you should now see proper Intellisense.
+If you would like some basic Intellisense for the Foundry types when using Visual Studio Code, all you have to do is copy `foundry.js` into the projects root folder. The `foundry.js` can be found in your Foundry installation folder e.g. '\Foundry Virtual Tabletop\resources\app\public\scripts'. Once you do this, restart VS Code, and you should now see proper Intellisense.
