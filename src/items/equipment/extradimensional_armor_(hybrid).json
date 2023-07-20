@@ -9,14 +9,17 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
       "type": "",
       "condition": "",
       "cost": 0
     },
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": null
@@ -43,10 +46,10 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": null
       },
       "size": "medium",
-      "sturdy": false
+      "sturdy": true
     },
     "attuned": false,
     "bulk": "20",
@@ -57,6 +60,8 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
@@ -78,6 +83,17 @@
           "amount": 3,
           "subtype": "weaponSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "ammunition"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "ammunitionSlot",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
@@ -88,18 +104,30 @@
     "damage": {
       "parts": [
         {
-          "formula": "2d10",
-          "operator": "",
+          "name": "",
+          "formula": "2d10 +(@abilities.str.mod)",
+          "group": null,
           "types": {
-            "piercing": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": true,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>Constructed with the aid of mad cultists who revere inhuman, unknowable entities from the most distant corners of reality, this metallic armor defies conventional geometry. Its flat planes appear strangely curved upon close inspection, and its contours bend and blur. Your opponents can’t keep a clear sight on the armor’s shape or position, even when looking directly at it. If you have concealment from an attacker from any source, increase the miss chance from concealment by 10% (normally to 30%). If you do not have concealment from an attacker, the armor’s warped shape grants you concealment but with only a 10% miss chance. This armor has no effect on attacks against you when you have total concealment. Wearing the armor has a deleterious effect on mortal sanity; when you remove the armor, you must succeed at a Will save (DC = 10 plus 1 per full hour spent wearing the extradimensional armor) or take a –2 penalty to Will saves and Wisdom-based ability checks and skill checks for 24 hours.</p>"
+      "value": "<p>Constructed with the aid of mad cultists who revere inhuman, unknowable entities from the most distant corners of reality, this metallic armor defies conventional geometry. Its flat planes appear strangely curved upon close inspection, and its contours bend and blur. Your opponents can’t keep a clear sight on the armor’s shape or position, even when looking directly at it. If you have @UUID[Compendium.sfrpg.rules.Kjba2E3Ad5oMJ7hV.JournalEntryPage.nyB6pt2dd6iVQGmS]{Concealment} from an attacker from any source, increase the miss chance from concealment by 10% (normally to 30%). If you do not have concealment from an attacker, the armor’s warped shape grants you concealment but with only a 10% miss chance. This armor has no effect on attacks against you when you have total concealment. Wearing the armor has a deleterious effect on mortal sanity; when you remove the armor, you must succeed at a Will save (DC = 10 plus 1 per full hour spent wearing the extradimensional armor) or take a –2 penalty to Will saves and Wisdom-based ability checks and skill checks for 24 hours.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -110,26 +138,49 @@
     "equipped": false,
     "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 17,
     "modifiers": [],
     "price": 278200,
     "proficient": false,
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "",
       "value": null
     },
-    "reach": "10 ft",
+    "reach": "10 ft.",
+    "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
     "size": "medium",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
     "source": "AR pg. 75",
-    "speed": "30 feet",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
+    "speed": "30 ft.",
     "strength": 26,
     "target": {
       "type": "",

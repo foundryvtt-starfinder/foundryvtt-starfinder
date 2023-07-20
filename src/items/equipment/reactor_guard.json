@@ -9,14 +9,17 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
       "type": "",
       "condition": "",
       "cost": 0
     },
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": null
@@ -43,10 +46,10 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": null
       },
-      "size": "medium",
-      "sturdy": false
+      "size": "large",
+      "sturdy": true
     },
     "attuned": false,
     "bulk": "35",
@@ -57,6 +60,8 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
@@ -78,6 +83,16 @@
           "amount": 3,
           "subtype": "weaponSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "ammunition"
+          ],
+          "amount": 1,
+          "subtype": "ammunitionSlot",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
@@ -88,18 +103,30 @@
     "damage": {
       "parts": [
         {
-          "formula": "4d6",
-          "operator": "",
+          "name": "",
+          "formula": "4d6 +(@abilities.str.mod)",
+          "group": null,
           "types": {
-            "bludgeoning": true
+            "acid": false,
+            "bludgeoning": true,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>This heavy, awkward armor is built with the highest levels of radiation shielding and anti-radiation materials known in the Pact Worlds. Primarily used to lift ultra-dense materials within reactor cores, reactor guard armor is useful for anyone fighting or working in areas with toxic levels of radiation. You and the armor are both immune to radiation (Core Rulebook 403) even when your @UUID[Compendium.sfrpg.rules.WP7hddXW4mLXXXOg]{Environmental protections} are not active, and you can’t contract radiation sickness while wearing the armor.</p>"
+      "value": "<p>This heavy, awkward armor is built with the highest levels of radiation shielding and anti-radiation materials known in the Pact Worlds. Primarily used to lift ultra-dense materials within reactor cores, reactor guard armor is useful for anyone fighting or working in areas with toxic levels of radiation. You and the armor are both immune to @UUID[Compendium.sfrpg.rules.SfkuzH5kxSAmG4nv.JournalEntryPage.n461i9lDXw303SiY#radiation]{Radiation} (Core Rulebook 403) even when your @UUID[Compendium.sfrpg.rules.WP7hddXW4mLXXXOg.JournalEntryPage.8bxhPYw9heXqKHYD#environmental-protections]{Environmental Protections} are not active, and you can’t contract radiation sickness while wearing the armor.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -110,26 +137,49 @@
     "equipped": false,
     "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 17,
     "modifiers": [],
     "price": 271000,
     "proficient": false,
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "",
       "value": null
     },
-    "reach": "5 ft",
+    "reach": "",
+    "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
     "size": "large",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
     "source": "AR pg. 78",
-    "speed": "25 feet",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
+    "speed": "25 ft.",
     "strength": 30,
     "target": {
       "type": "",
