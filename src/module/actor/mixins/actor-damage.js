@@ -265,12 +265,12 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
 
         if (multiplier < 0) {
             const healingSetting = {
-                hp: "defaultHealing",
-                sp: "staminaOnly",
-                both: "staminaAndHealth"
-            }[healingTarget] || "defaultHealing";
+                hp: SFRPGHealingSetting.defaultHealing,
+                sp: SFRPGHealingSetting.staminaOnly,
+                both: SFRPGHealingSetting.staminaAndHealth
+            }[healingTarget] || SFRPGHealingSetting.defaultHealing;
 
-            const heal = SFRPGDamage.createHeal(rolledAmount, SFRPGHealingSetting[healingSetting]);
+            const heal = SFRPGDamage.createHeal(rolledAmount, healingSetting);
             heal.modifier = modifier || 0;
             return this._applyToSelectedActors(heal);
         } else {
