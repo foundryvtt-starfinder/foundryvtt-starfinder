@@ -1057,7 +1057,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         const tokens = actor.getActiveTokens();
         if (!tokens) return;
 
-        this.renderFloaters(tokens, dhp);
+        this.renderFloatingHp(tokens, dhp);
     }
 
     /**
@@ -1082,11 +1082,13 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                 const delta = this.getDelta(k, newhp, oldhp);
                 if (delta !== 0) diff[k] = delta;
             });
-        } else if (stamina) {
+        }
+        if (stamina) {
             const oldStamina = old.attributes.sp;
             const delta = this.getDelta('value', stamina, oldStamina);
             if (delta !== 0) diff.stamina = delta;
-        } else if (shields) {
+        }
+        if (shields) {
             const oldShields = old.quadrants;
             SFRPG.floatingHPValues.shieldKeys.forEach(k => { // Check in all shield quadrants
                 const delta = this.getDelta('value', shields[k]?.shields, oldShields[k].shields);
@@ -1118,14 +1120,22 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      * @param {TokenSFRPG[]} tokens An array of tokens matching the updated actor
      * @param {Object} hpDiffs An object containing the key of the updated value, and the diff
      */
-    async renderFloaters(tokens, hpDiffs) {
+    async renderFloatingHp(tokens, hpDiffs) {
+        const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+        const getMaxPath = (key) => {
+            if (key === "stamina") return "attributes.sp.max";
+            else if (key.includes("shields")) return "attributes.shields.highest";
+            else return "attributes.hp.max";
+        };
+
         for (const t of tokens) {
             if (!this.testPermission(t)) continue;
 
             for (const [key, value] of Object.entries(hpDiffs)) {
                 if (value === 0) continue; // Skip deltas of 0
                 const cfg = SFRPG.floatingHPValues[key];
-                const percentMax = Math.clamped(Math.abs(value) / t.actor.system.attributes.hp.max, 0, 1);
+                const percentMax = Math.clamped(Math.abs(value) / getProperty(t.actor.system, getMaxPath(key)), 0, 1);
                 const sign = (value < 0) ? 'negative' : 'positive';
                 const floaterData = {
                     anchor: CONST.TEXT_ANCHOR_POINTS.CENTER,
@@ -1138,10 +1148,11 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                     jitter: 0.3
                 };
 
-                const localized = game.i18n.localize(game.settings.get("sfrpg", "verboseFloatyText")
-                    ? `SFRPG.FloatingHPVerbose.${cfg.label}`
-                    : `SFRPG.FloatingHP.${cfg.label}`);
+                const localized = game.i18n.localize(
+                    `SFRPG.FloatingHP${game.settings.get("sfrpg", "verboseFloatyText") ? "Verbose" : ""}.${cfg.label}`
+                );
                 canvas.interface.createScrollingText(t.center, `${localized} ${value.signedString()}`, floaterData);
+                if (Object.keys(hpDiffs).length > 1) await sleep(1500 * percentMax);
             }
         }
     }
