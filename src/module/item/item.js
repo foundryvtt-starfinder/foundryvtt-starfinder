@@ -193,6 +193,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Assign labels and return the Item
         this.labels = labels;
+
+        // There must always be one primary damage section, so if they're all disabled, set section 0 as primary.
+        const itemParts = data?.damage?.parts;
+        if (itemParts?.length > 0 && !(itemParts.some(part => part.isPrimarySection))) itemParts[0].isPrimarySection = true;
     }
 
     async processData() {
@@ -1212,6 +1216,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             if (bonus.modifierType === "damageSection") {
                 parts.push({
                     isDamageSection: true,
+                    enabled: true,
                     name: bonus.name,
                     explanation: bonus.name,
                     formula: bonus.modifier,
