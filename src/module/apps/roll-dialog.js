@@ -189,7 +189,7 @@ export default class RollDialog extends Dialog {
         super.activateListeners(html);
 
         const additionalBonusTextbox = html.find('input[name=bonus]');
-        additionalBonusTextbox.on('change', this._onAdditionalBonusChanged.bind(this));
+        additionalBonusTextbox.on('keyup', this._onAdditionalBonusChanged.bind(this));
 
         const rollModeCombobox = html.find('select[name=rollMode]');
         rollModeCombobox.on('change', this._onRollModeChanged.bind(this));
@@ -281,7 +281,7 @@ export default class RollDialog extends Dialog {
 
     submit(button) {
         try {
-            this.rolledButton = button.id ?? button.label;
+            this.rolledButton = button?.id ?? button?.label ?? "normal";
             this.close();
         } catch (err) {
             ui.notifications.error(err);
@@ -294,14 +294,6 @@ export default class RollDialog extends Dialog {
         if (this.data.close) {
             this.data.close(this.rolledButton, this.rollMode, this.additionalBonus, this.parts);
             delete this.data.close;
-        }
-
-        if (this._tooltips !== null) {
-            for (const tooltip of this._tooltips) {
-                tooltip.destroy();
-            }
-
-            this._tooltips = null;
         }
 
         return super.close(options);
