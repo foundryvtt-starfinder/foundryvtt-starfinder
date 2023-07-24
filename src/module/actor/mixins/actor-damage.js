@@ -425,7 +425,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
             }
 
             if (damage.healSettings.healsStamina) {
-                const newSP = Math.clamped(originalSP + remainingUndealtDamage, 0, actorData.attributes.sp.max);
+                const newSP = Math.clamped(originalSP + remainingUndealtDamage, 0, actorData.attributes?.sp?.max);
                 remainingUndealtDamage -= (newSP - originalSP);
 
                 actorUpdate["system.attributes.sp.value"] = newSP;
