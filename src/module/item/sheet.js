@@ -517,7 +517,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         const damage = Object.entries(formData).filter(e => e[0].startsWith("system.damage.parts"));
         formData["system.damage.parts"] = damage.reduce((arr, entry) => {
             const [i, key, type] = entry[0].split(".").slice(3);
-            if (!arr[i]) arr[i] = { name: "", formula: "", types: {}, group: null };
+            if (!arr[i]) arr[i] = { name: "", formula: "", types: {}, group: null, isPrimarySection: false };
 
             switch (key) {
                 case 'name':
@@ -531,6 +531,9 @@ export class ItemSheetSFRPG extends ItemSheet {
                     break;
                 case 'group':
                     arr[i].group = entry[1];
+                    break;
+                case 'isPrimarySection':
+                    arr[i].isPrimarySection = entry[1];
                     break;
             }
 
@@ -582,6 +585,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         // Modify damage formula
         html.find(".damage-control").click(this._onDamageControl.bind(this));
+        html.find("input.primary-section-checkbox").click(this._onTogglePrimaryDamageSection.bind(this));
         html.find(".visualization-control").click(this._onActorResourceVisualizationControl.bind(this));
         html.find(".ability-adjustments-control").click(this._onAbilityAdjustmentsControl.bind(this));
 
@@ -656,7 +660,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             const damage = this.item.system.damage;
             return await this.item.update({
                 "system.damage.parts": damage.parts.concat([
-                    { name: "", formula: "", types: {}, group: null }
+                    { name: "", formula: "", types: {}, group: null, isPrimarySection: false }
                 ])
             });
         }
@@ -693,6 +697,27 @@ export class ItemSheetSFRPG extends ItemSheet {
                 "system.critical.parts": criticalDamage.parts
             });
         }
+    }
+
+    async _onTogglePrimaryDamageSection(event) {
+        event.preventDefault();
+        const checked = event.currentTarget.checked;
+        const itemParts = this.item.system.damage.parts;
+        const idx = event.currentTarget.closest("li.damage-part").dataset.damagePart;
+        const part = itemParts[idx];
+
+        for (const p of itemParts) {
+            p.isPrimarySection = false;
+        }
+
+        part.isPrimarySection = checked;
+
+        // There must always be one primary damage section, so if they're all disabled, set section 0 as primary.
+        if (!(itemParts.some(part => part.isPrimarySection))) itemParts[0].isPrimarySection = true;
+
+        return this.item.update({
+            "system.damage.parts": itemParts
+        });
     }
 
     /**
