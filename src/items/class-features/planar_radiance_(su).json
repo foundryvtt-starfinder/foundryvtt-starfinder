@@ -18,9 +18,10 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -79,15 +80,32 @@
     },
     "details": {
       "category": "classFeature",
+      "combat": false,
       "specialAbilityType": "su"
     },
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "2c8d17b4-0888-4a91-90d2-804537898725",
+        "name": "Planar Radiance (Su)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-damage",
+        "enabled": false,
+        "max": 6,
+        "modifier": "1d6",
+        "modifierType": "formula",
+        "notes": "The weapon ignores the fire resistance of evil outsiders and lawful outsiders, and it deals an additional 1d6 damage against such creatures.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -98,20 +116,20 @@
       "charged": false,
       "value": null
     },
-    "requirements": "6th Level",
+    "requirements": "6th Level Solarian",
     "rollNotes": "",
     "save": {
       "type": "fort",
       "dc": "10+floor(@classes.solarian.levels/2) + @abilities.cha.mod",
       "descriptor": "negate"
     },
-    "source": "DC, pg 45",
+    "source": "DC pg. 45",
     "target": {
       "type": "",
       "value": ""
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     }
