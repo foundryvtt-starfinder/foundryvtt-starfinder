@@ -18,9 +18,10 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -37,7 +38,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.UVNOjH2ERlQjcGnU]{Zenith Revelation}</p>\n<p>When you’re fully graviton-attuned, you can pull a creature outside the normal confines of space and time. To use this ability, you must succeed at a melee attack against the target’s EAC. If you hit the target, it must succeed at a Will saving throw or be shunted out of reality for 1d4 rounds. The creature is in an extradimensional space that causes it no harm, but it effectively ceases to exist and it cannot be located or contacted by any mundane or magical means. When the duration expires, the creature reappears in the space it last occupied, or in the closest unoccupied space if its original space is now occupied. To the target creature, it seems as if no time has passed during its absence, and it returns exactly in the state it was when it disappeared, including having the same duration remaining on any spells or effects that were affecting it at the time of its departure. At 17th level, you can spend 1 Resolve Point as a reaction when you hit a creature with this ability to increase its duration to a number of rounds equal to half your solarian level.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.UVNOjH2ERlQjcGnU]{Zenith Revelation}</p>\n<p>When you’re fully graviton-attuned, you can pull a creature outside the normal confines of space and time. To use this ability, you must succeed at a melee attack against the target’s EAC. If you hit the target, it must succeed at a Will saving throw or be shunted out of reality for [[/r 1d4]]{1d4 rounds}. The creature is in an extradimensional space that causes it no harm, but it effectively ceases to exist and it cannot be located or contacted by any mundane or magical means. When the duration expires, the creature reappears in the space it last occupied, or in the closest unoccupied space if its original space is now occupied. To the target creature, it seems as if no time has passed during its absence, and it returns exactly in the state it was when it disappeared, including having the same duration remaining on any spells or effects that were affecting it at the time of its departure. At 17th level, you can spend 1 Resolve Point as a reaction when you hit a creature with this ability to increase its duration to a number of rounds equal to half your solarian level.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -67,20 +68,23 @@
       "mind-affecting": false,
       "pain": false,
       "poison": false,
+      "polymorph": false,
       "radiation": false,
       "scrying": false,
       "sense-dependent": false,
       "shadow": false,
+      "sonic": false,
       "summoning": false,
       "teleportation": false,
       "water": false
     },
     "details": {
       "category": "classFeature",
+      "combat": false,
       "specialAbilityType": "su"
     },
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
     "formula": "",
@@ -96,12 +100,16 @@
       "charged": false,
       "value": null
     },
-    "requirements": "Zenith Revelation",
+    "requirements": "9th Level Solarian",
     "rollNotes": "",
     "save": {
       "type": "will",
       "dc": "10+floor(@classes.solarian.levels/2)+@abilities.cha.mod",
       "descriptor": "negate"
+    },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
     },
     "source": "AR pg. 153",
     "target": {
@@ -109,7 +117,7 @@
       "value": ""
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     }
