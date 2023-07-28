@@ -18,9 +18,10 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -33,6 +34,8 @@
         {
           "name": "",
           "formula": "(floor(@classes.solarian.levels / 2))d6",
+          "group": null,
+          "isPrimarySection": true,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -55,13 +58,51 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.UVNOjH2ERlQjcGnU]{Zenith Revelation}</p>\n<p>@Icon[type:photon] Photon Revelation</p>\n<p>When you’re fully photon-attuned, you can create a simulacrum of a star as a standard action. The star is a 10-foot-radius sphere that fills your square (or one square of your space, if you’re larger than Medium) and all squares within 5 feet of that space. Any creature that starts its turn in the same space as the star takes 1d6 fire damage for every 2 solarian levels you have, and any creature that starts its turn outside the star but within 5 feet of it takes half that damage. At 17th level, you can create your star simulacrum as a 15-foot-radius sphere that affects your square and all squares within 10 feet of that space (a total of 21 squares).</p>\n<p>Creatures can move through the star, but it exerts a gravitational pull, and any creature inside it or within 5 feet of it must spend twice as much movement for each square of movement that takes it away from the center of the star. The star remains for 1d4+1 rounds, and stays in place even if you later move. You are immune to all effects of your own miniature star.</p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
     "details": {
       "category": "classFeature",
+      "combat": false,
       "specialAbilityType": "su"
     },
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
     "formula": "",
@@ -77,12 +118,16 @@
       "charged": false,
       "value": null
     },
-    "requirements": "Zenith Revelation",
+    "requirements": "9th Level Solarian",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": "",
       "descriptor": "negate"
+    },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
     },
     "source": "Solarian",
     "target": {
@@ -90,7 +135,7 @@
       "value": ""
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     }
