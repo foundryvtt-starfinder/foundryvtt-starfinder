@@ -1,8 +1,8 @@
 {
-  "_id": "VrjsWy9IfP3ywNWH",
-  "name": "Unarmed Mauler (Ex)",
+  "_id": "aC4Ww5LM4P60t2b2",
+  "name": "Twinned Threat (Ex)",
   "type": "feat",
-  "img": "systems/sfrpg/icons/feats/diehard.webp",
+  "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "",
     "ability": null,
@@ -14,14 +14,14 @@
     "activation": {
       "type": "",
       "condition": "",
-      "cost": 0
+      "cost": null
     },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "",
-      "value": 0
+      "units": null,
+      "value": null
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -38,7 +38,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.wFTC0sGqdpnZUib4]{Gear Boost}</p>\n<p>Your @UUID[Compendium.sfrpg.equipment.Item.AWo4DU0s18agsFtJ]{unarmed strikes} gain the @UUID[Compendium.sfrpg.rules.JournalEntry.O5GDQUKPCJ9Zbnfj.JournalEntryPage.zOJ86MDq6kNzAAbB#wound]{wound} critical hit effect and are treated as having an item level equal to your soldier level for the purpose of determining save DCs. You can take this gear boost twice. The second time you take it, your unarmed strikes instead gain the @UUID[Compendium.sfrpg.rules.JournalEntry.O5GDQUKPCJ9Zbnfj.JournalEntryPage.zOJ86MDq6kNzAAbB#severe-wound]{severe wound} critical hit effect, and the DC to resist this effect increases by 1. If your unarmed strikes already have a critical hit effect, when you score a critical hit, you apply either the unarmed strike’s normal critical hit effect or the wound (or severe wound) critical hit effect granted by this gear boost.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.wFTC0sGqdpnZUib4]{Gear Boost}</p>\n<p>While wielding at least two one-handed melee weapons, when you successfully attack and deal damage with one of those weapons, you gain a +2 insight bonus to damage with all other one-handed melee weapons you wield until the end of your turn. This bonus increases by 1 for every 4 soldier levels you have. Additionally, if you are wielding two identical one-handed melee weapons and make a full attack using both, increase the DC of those weapons’ critical hit effects by 1 until the end of your turn.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -85,15 +85,31 @@
     },
     "duration": {
       "units": "",
-      "value": null
+      "value": ""
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "7631cb74-994f-4869-b4a2-9599938309d2",
+        "name": "Twinned Threat (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "melee-damage",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2 + floor(@classes.soldier.levels / 4)",
+        "modifierType": "formula",
+        "notes": "While wielding at least two one-handed melee weapons, when you successfully attack and deal damage with one of those weapons, you gain a +2 insight bonus to damage with all other one-handed melee weapons you wield until the end of your turn. This bonus increases by 1 for every 4 soldier levels you have.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
+      "units": null,
       "value": null
     },
     "recharge": {
@@ -110,11 +126,11 @@
     "source": "AR pg. 154",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "uses": {
       "max": 0,
-      "per": null,
+      "per": "",
       "value": 0
     }
   }

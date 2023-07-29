@@ -1,8 +1,8 @@
 {
-  "_id": "VrjsWy9IfP3ywNWH",
-  "name": "Unarmed Mauler (Ex)",
+  "_id": "oj86FRPVPYmR8tA0",
+  "name": "Unyielding Bulwark (Ex)",
   "type": "feat",
-  "img": "systems/sfrpg/icons/feats/diehard.webp",
+  "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "",
     "ability": null,
@@ -12,16 +12,16 @@
     "actionTarget": "",
     "actionType": "",
     "activation": {
-      "type": "",
+      "type": "none",
       "condition": "",
-      "cost": 0
+      "cost": null
     },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "",
-      "value": 0
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -38,7 +38,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.wFTC0sGqdpnZUib4]{Gear Boost}</p>\n<p>Your @UUID[Compendium.sfrpg.equipment.Item.AWo4DU0s18agsFtJ]{unarmed strikes} gain the @UUID[Compendium.sfrpg.rules.JournalEntry.O5GDQUKPCJ9Zbnfj.JournalEntryPage.zOJ86MDq6kNzAAbB#wound]{wound} critical hit effect and are treated as having an item level equal to your soldier level for the purpose of determining save DCs. You can take this gear boost twice. The second time you take it, your unarmed strikes instead gain the @UUID[Compendium.sfrpg.rules.JournalEntry.O5GDQUKPCJ9Zbnfj.JournalEntryPage.zOJ86MDq6kNzAAbB#severe-wound]{severe wound} critical hit effect, and the DC to resist this effect increases by 1. If your unarmed strikes already have a critical hit effect, when you score a critical hit, you apply either the unarmed strike’s normal critical hit effect or the wound (or severe wound) critical hit effect granted by this gear boost.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.wFTC0sGqdpnZUib4]{Gear Boost}</p>\n<p>While wearing heavy armor or powered armor, you gain a +4 insight bonus to your AC against @UUID[Compendium.sfrpg.rules.JournalEntry.U37n5tY5hn1ctzQL.JournalEntryPage.R33uiOMesYP0ISWl#bull-rush]{bull rush}, @UUID[Compendium.sfrpg.rules.JournalEntry.U37n5tY5hn1ctzQL.JournalEntryPage.R33uiOMesYP0ISWl#reposition]{reposition}, and @UUID[Compendium.sfrpg.rules.JournalEntry.U37n5tY5hn1ctzQL.JournalEntryPage.R33uiOMesYP0ISWl#trip]{trip} combat maneuvers.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -84,17 +84,33 @@
       "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "",
-      "value": null
+      "units": "text",
+      "value": ""
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "72dd9e84-1ae0-4032-9cab-a44c6c5cf0ed",
+        "name": "Unyielding Bulwark (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": true,
+        "max": 4,
+        "modifier": "4",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "both"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
-      "value": null
+      "units": "none",
+      "value": ""
     },
     "recharge": {
       "charged": false,
@@ -107,14 +123,14 @@
       "dc": null,
       "descriptor": ""
     },
-    "source": "AR pg. 154",
+    "source": "AR pg. 155",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }
