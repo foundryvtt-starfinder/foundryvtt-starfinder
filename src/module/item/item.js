@@ -1248,7 +1248,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             if (bonus.modifierType === "damageSection") {
                 parts.push({
                     isDamageSection: true,
-                    enabled: true,
+                    enabled: bonus.enabled,
                     name: bonus.name,
                     explanation: bonus.name,
                     formula: bonus.modifier,
@@ -1392,7 +1392,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                     return false;
                 }
             }
-            return (mod.enabled || mod.modifierType === "formula");
+            return (mod.enabled || ["formula", "damageSection"].includes(mod.modifierType));
         });
 
         return modifiers;
