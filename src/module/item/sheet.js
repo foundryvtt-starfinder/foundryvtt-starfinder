@@ -229,35 +229,16 @@ export class ItemSheetSFRPG extends ItemSheet {
         }
 
         if (data.item.type === "effect") {
+            const duration = itemData.activeDuration;
 
-            data.remainingDuration = (() => {
-                if (itemData.activeDuration.unit === "permanent") return CONFIG.SFRPG.effectDurationTypes[itemData.activeDuration.unit];
-                else return `${itemData.activeDuration.value} ${CONFIG.SFRPG.effectDurationTypes[itemData.activeDuration.unit]}`;
+            data.duration = {};
+            data.duration.remaining = duration?.remaining?.string || (() => {
+                if (duration.unit === "permanent") return CONFIG.SFRPG.effectDurationTypes[duration.unit];
+                else return `${parseInt(duration.total || duration.value) || duration.value} ${CONFIG.SFRPG.effectDurationTypes[duration.unit]}`;
             })();
+            data.duration.showTotal = !!duration.total && (String(duration.value) !== String(duration.total));
 
-            if (this.item.actor) {
-                const remaining = itemData.activeDuration.remaining;
-                const durFrom = SFRPG.effectDurationFrom;
-                const durTypes = SFRPG.effectDurationTypes;
-
-                if (remaining >= durFrom.day)
-                    data.remainingDuration = `${Math.floor(remaining / durFrom.day)} ${durTypes.day}`;
-                else if (remaining >= durFrom.hour)
-                    data.remainingDuration = `${Math.floor(remaining / durFrom.hour)} ${durTypes.hour}`;
-                else if (remaining >= durFrom.minute)
-                    data.remainingDuration = `${Math.floor(remaining / durFrom.minute)} ${durTypes.minute}`;
-                else if (remaining >= durFrom.round)
-                    data.remainingDuration = `${Math.floor(remaining / durFrom.round)} ${durTypes.round}`;
-                else if (remaining <= 0) {
-                    if (itemData.enabled) {
-                        data.remainingDuration = `< 1 ${durTypes.round}`;
-                    } else {
-                        data.remainingDuration = game.i18n.localize("SFRPG.Effect.Expired");
-                        data.expired = true;
-                    }
-
-                }
-            }
+            data.expired = duration.remaining?.value <= 0 && !itemData.enabled;
 
             data.sourceActorChoices = {};
             if (game.combat?.started) {
@@ -575,7 +556,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         const damage = Object.entries(formData).filter(e => e[0].startsWith("system.damage.parts"));
         formData["system.damage.parts"] = damage.reduce((arr, entry) => {
             const [i, key, type] = entry[0].split(".").slice(3);
-            if (!arr[i]) arr[i] = { name: "", formula: "", types: {}, group: null };
+            if (!arr[i]) arr[i] = { name: "", formula: "", types: {}, group: null, isPrimarySection: false };
 
             switch (key) {
                 case 'name':
@@ -589,6 +570,9 @@ export class ItemSheetSFRPG extends ItemSheet {
                     break;
                 case 'group':
                     arr[i].group = entry[1];
+                    break;
+                case 'isPrimarySection':
+                    arr[i].isPrimarySection = entry[1];
                     break;
             }
 
@@ -656,6 +640,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         // Modify damage formula
         html.find(".damage-control").click(this._onDamageControl.bind(this));
+        html.find("input.primary-section-checkbox").click(this._onTogglePrimaryDamageSection.bind(this));
         html.find(".visualization-control").click(this._onActorResourceVisualizationControl.bind(this));
         html.find(".ability-adjustments-control").click(this._onAbilityAdjustmentsControl.bind(this));
         html.find(".subaction-control").click(this._onSubactionControl.bind(this));
@@ -674,7 +659,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         html.find('input[class="storage.acceptsType"]').change(this._onChangeStorageAcceptsItem.bind(this));
         html.find('input[name="storage.affectsEncumbrance"]').change(this._onChangeStorageAffectsEncumbrance.bind(this));
 
-        html.find('input[class="data.supportedSizes"]').change(this._onChangeSupportedStarshipSizes.bind(this));
+        html.find('input[class="system.supportedSizes"]').change(this._onChangeSupportedStarshipSizes.bind(this));
 
         html.find('img[name="resource-image"]').click(this._onClickResourceVisualizationImage.bind(this));
         html.find('select[name="resource-mode"]').change(this._onChangeResourceVisualizationMode.bind(this));
@@ -683,7 +668,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         // toggle timedEffect
         html.find('.effect-details-toggle').on('click', this._onToggleDetailsEffect.bind(this));
-        html.find('.effect-icon-toggle').on('click', this._onToggleIconEffect.bind(this));
+        html.find("div[data-origin-uuid]").on("click", this._onClickOrigin.bind(this));
     }
 
     /* -------------------------------------------- */
@@ -765,7 +750,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             const damage = this.item.system.damage;
             return await this.item.update({
                 "system.damage.parts": damage.parts.concat([
-                    { name: "", formula: "", types: {}, group: null }
+                    { name: "", formula: "", types: {}, group: null, isPrimarySection: false }
                 ])
             });
         }
@@ -802,6 +787,27 @@ export class ItemSheetSFRPG extends ItemSheet {
                 "system.critical.parts": criticalDamage.parts
             });
         }
+    }
+
+    async _onTogglePrimaryDamageSection(event) {
+        event.preventDefault();
+        const checked = event.currentTarget.checked;
+        const itemParts = this.item.system.damage.parts;
+        const idx = event.currentTarget.closest("li.damage-part").dataset.damagePart;
+        const part = itemParts[idx];
+
+        for (const p of itemParts) {
+            p.isPrimarySection = false;
+        }
+
+        part.isPrimarySection = checked;
+
+        // There must always be one primary damage section, so if they're all disabled, set section 0 as primary.
+        if (!(itemParts.some(part => part.isPrimarySection))) itemParts[0].isPrimarySection = true;
+
+        return this.item.update({
+            "system.damage.parts": itemParts
+        });
     }
 
     /**
@@ -998,13 +1004,15 @@ export class ItemSheetSFRPG extends ItemSheet {
         event.preventDefault();
         event.stopImmediatePropagation();
 
-        const toggleSize = event.currentTarget.name;
+        const toggleSize = event.currentTarget.dataset.size;
         const enabled = event.currentTarget.checked;
 
-        let supportedSizes = duplicate(this.item.system.supportedSizes);
-        if (enabled && !supportedSizes.includes(toggleSize)) {
+        let supportedSizes = this.item.system.supportedSizes;
+        const previouslyEnabled = supportedSizes.includes(toggleSize);
+
+        if (enabled && !previouslyEnabled) {
             supportedSizes.push(toggleSize);
-        } else if (!enabled && supportedSizes.includes(toggleSize)) {
+        } else if (!enabled && previouslyEnabled) {
             supportedSizes = supportedSizes.filter(x => x !== toggleSize);
         }
 
@@ -1150,19 +1158,17 @@ export class ItemSheetSFRPG extends ItemSheet {
                 modifier.enabled = checked;
             }
 
-            this.item.update(updates);
+            await this.item.update(updates);
         } else {
             this.item.timedEffect?.toggle();
         }
     }
 
-    async _onToggleIconEffect(event) {
+    async _onClickOrigin(event) {
         event.preventDefault();
-        const checked = event.currentTarget.checked;
+        const uuid = event.currentTarget.dataset.originUuid;
+        const doc = await fromUuid(uuid);
 
-        this.item.update({"system.showOnToken": checked});
-
-        if (this.item.actor && this.item.system.enabled) this.item.timedEffect?.toggleIcon(checked);
-
+        doc.sheet.render(true);
     }
 }

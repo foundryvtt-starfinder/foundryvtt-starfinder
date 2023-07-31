@@ -465,9 +465,6 @@
       "conditions": {
         "conditions": {}
       },
-      "timedEffects": {
-        "timedEffects": []
-      },
       "counterClassesManagement": {
         "counterClasses": {
           "values": {}
@@ -480,7 +477,6 @@
         "commonBase",
         "modifiers",
         "conditions",
-        "timedEffects",
         "counterClassesManagement"
       ],
       "attributes": {
@@ -1379,9 +1375,12 @@
       "itemDuration": {
         "activeDuration": {
           "unit": "round",
-          "value": 0,
+          "value": "0",
           "activationTime": 0,
-          "expiryMode": "turn",
+          "expiryMode": {
+            "type": "turn",
+            "turn": "parent"
+          },
           "expiryInit": 0,
           "endsOn": "onTurnStart"
         }
@@ -2171,7 +2170,7 @@
         "activatedEffect"
       ],
       "slots": 1,
-      "armorType": "any"
+      "allowedArmorType": "any"
     },
     "ammunition": {
       "templates": [
@@ -2621,7 +2620,7 @@
       "templates": ["itemDescription", "modifiers", "itemDuration"],
       "type": "effect",
       "enabled": true,
-      "sourceActorId": "",
+      "context": {},
       "showOnToken": true
     }
   }

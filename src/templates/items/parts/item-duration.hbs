@@ -7,12 +7,15 @@
     {{/if}}
 
     <div class="bubble-info">
+
         {{!-- Duration Types --}}
         <div class="form-group input-select">
             <label>{{localize "SFRPG.Effect.DurationTypesLabel"}}</label>
             <div class="form-fields">
                 {{#unless (eq itemData.activeDuration.unit "permanent")}}
-                <input type="text" name="system.activeDuration.value" value="{{itemData.activeDuration.value}}" data-dtype="Number" placeholder="-"/>
+                    {{#if duration.showTotal}}<p class="calculated-total"><strong>{{itemData.activeDuration.total}}</strong></p>{{/if}}
+                    <input type="text" name="system.activeDuration.value" value="{{itemData.activeDuration.value}}"
+                        data-dtype="String" placeholder="-" data-tooltip="<p>Use the <code>@owner</code> prefix to reference the parent actor.</p><p>Use <code>@origin.actor</code> or <code>@origin.item</code> to reference the origin actor or item respectively."/>
                 {{/unless}}
                 <select name="system.activeDuration.unit">
                     {{#select itemData.activeDuration.unit}}
@@ -29,16 +32,17 @@
         <div class="form-group input-select">
             <label>{{localize "SFRPG.Effect.EndTypesLabel"}}</label>
             <div class="form-fields">
-                <select name="system.activeDuration.expiryMode" {{createTippy title="SFRPG.Effect.ExpiryModeLabel" subtitle="SFRPG.Effect.ExpiryModeTooltip"}}>
-                    {{#select itemData.activeDuration.expiryMode}}
+                <select name="system.activeDuration.expiryMode.type" {{createTippy title="SFRPG.Effect.ExpiryModeLabel" subtitle="SFRPG.Effect.ExpiryModeTooltip"}}>
+                    {{#select itemData.activeDuration.expiryMode.type}}
                         <option value="turn">{{ localize "SFRPG.Effect.ExpiryModeTurn"}}</option>
                         <option value="init">{{ localize "SFRPG.Effect.ExpiryModeInit"}}</option>
                     {{/select}}
                 </select>
-                {{#if (eq itemData.activeDuration.expiryMode "turn")}}
-                <select name="system.sourceActorId" {{createTippy title="SFRPG.Effect.EndTypesLabel" subtitle="SFRPG.Effect.EndsOnTooltip"}}>
-                    {{#select itemData.sourceActorId}}
+                {{#if (eq itemData.activeDuration.expiryMode.type "turn")}}
+                <select name="system.activeDuration.expiryMode.turn" {{createTippy title="SFRPG.Effect.EndTypesLabel" subtitle="SFRPG.Effect.EndsOnTooltip"}}>
+                    {{#select itemData.activeDuration.expiryMode.turn}}
                         <option value="parent">Parent Actor's Turn</option>
+                        <option value="origin">Origin Actor's Turn</option>
                         <option value="init">Nearest Initiative</option>
                         <optgroup label="Combatant Turns">
                             {{#each this.sourceActorChoices as |name id|}}
@@ -54,7 +58,7 @@
                         {{/each}}
                     {{/select}}
                 </select>
-                {{else if (eq itemData.activeDuration.expiryMode "init")}}
+                {{else if (eq itemData.activeDuration.expiryMode.type "init")}}
                 <input name="system.activeDuration.expiryInit" type="number" data-dtype="Number" value="{{itemData.activeDuration.expiryInit}}">
                 {{/if}}
             </div>

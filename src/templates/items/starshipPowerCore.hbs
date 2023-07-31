@@ -35,15 +35,15 @@
                         </div>
                     </div>
 
-                    {{!-- Supported Sizes --}}
-                    <div class="form-group stacked weapon-properties" data-tooltip="<strong>{{ localize "SFRPG.ItemSheet.StarshipPowerCore.Sizes" }}</strong><br/>{{ localize "SFRPG.ItemSheet.StarshipPowerCore.SizesTooltip" }}">
-                        <label>{{ localize "SFRPG.ItemSheet.StarshipPowerCore.Sizes" }}</label>
-                        {{#each config.starshipSizes as |typeName typeKey|}}
-                        <label class="checkbox">
-                            <input type="checkbox" class="system.supportedSizes" name="{{typeKey}}" {{checked (contains ../itemData.supportedSizes typeKey)}}/>{{localize typeName}}
-                        </label>
-                        {{/each}}
-                    </div>
+            {{!-- Supported Sizes --}}
+            <div class="form-group stacked weapon-properties" data-tooltip="<strong>{{ localize "SFRPG.ItemSheet.StarshipPowerCore.Sizes" }}</strong><br/>{{ localize "SFRPG.ItemSheet.StarshipPowerCore.SizesTooltip" }}">
+                <label>{{ localize "SFRPG.ItemSheet.StarshipPowerCore.Sizes" }}</label>
+                {{#each config.starshipSizes as |typeName typeKey|}}
+                <label class="checkbox">
+                    <input type="checkbox" class="system.supportedSizes" data-size="{{typeKey}}" {{checked (contains ../itemData.supportedSizes typeKey)}}/>{{localize typeName}}
+                </label>
+                {{/each}}
+            </div>
 
                 </div>
             </div>

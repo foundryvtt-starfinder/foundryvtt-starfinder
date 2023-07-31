@@ -107,27 +107,28 @@ export class CombatSFRPG extends Combat {
         super.delete(options);
     }
 
+    // Override to account for ascending or descending turn order.
     setupTurns() {
-        let sortMethod = "desc";
-        switch (this.getCombatType()) {
-            default:
-            case "normal":
-                sortMethod = CombatSFRPG.normalCombat.initiativeSorting;
-                break;
-            case "starship":
-                sortMethod = CombatSFRPG.starshipCombat.initiativeSorting;
-                break;
-            case "vehicleChase":
-                sortMethod = CombatSFRPG.vehicleChase.initiativeSorting;
-                break;
-        }
+        const sortMethod = {
+            "normal": CombatSFRPG.normalCombat.initiativeSorting,
+            "starship": CombatSFRPG.starshipCombat.initiativeSorting,
+            "vehicleChase": CombatSFRPG.vehicleChase.initiativeSorting
+        }[this.getCombatType()] || "desc";
 
-        const combatants = this.combatants;
-        const scene = game.scenes.get(this.scene);
-        const players = game.users.players;
-        const settings = game.settings.get("core", Combat.CONFIG_SETTING);
         const turns = this.combatants.contents.sort(sortMethod === "asc" ? this._sortCombatantsAsc : this._sortCombatants);
         this.turn = Math.clamped(this.turn, CombatSFRPG.HiddenTurn, turns.length - 1);
+
+        // Update state tracking
+        const c = turns[this.turn];
+        this.current = {
+            round: this.round,
+            turn: this.turn,
+            combatantId: c ? c.id : null,
+            tokenId: c ? c.tokenId : null
+        };
+
+        // One-time initialization of the previous state
+        if ( !this.previous ) this.previous = this.current;
 
         return this.turns = turns;
     }
@@ -783,10 +784,26 @@ export class CombatSFRPG extends Combat {
             const effectFinish = duration.activationEnd;
             const expiryInit = duration.expiryInit || 1000; // If anything goes wrong, expire at the start of the round
             const targetActorId = (() => {
-                if (effect.sourceActorId === "parent") return fromUuidSync(effect.actorUuid).id;
+                /** @type {"parent"|"origin"|"init"|ActorID} */
+                const expiryModeTurn = duration.expiryMode.turn;
+
+                // Expire on the owner's turn
+                if (expiryModeTurn === "parent") {
+                    const id = effect.actor?.id;
+                    if (id) return id;
+                }
+
+                // Expire on the origin actor's turn; fall back to owner
+                else if (expiryModeTurn === "origin") {
+                    const id = effect.origin?.id || effect.actor?.id;
+                    if (id) return id;
+                }
+
                 // Turn closest to initiative to expire on
-                else if (effect.sourceActorId === "init") return this.combatants.contents.sort(this._sortCombatants).find(c => c.initiative <= expiryInit).actorId;
-                else return effect.sourceActorId;
+                else if (expiryModeTurn === "init") return this.combatants.contents.sort(this._sortCombatants).find(c => c.initiative <= expiryInit).actorId;
+
+                // Otherwise, an actor id of a specific combatant
+                else return expiryModeTurn;
             })();
 
             if (((worldTime >= effectFinish) && effect.enabled) // If effect has expired
@@ -797,7 +814,7 @@ export class CombatSFRPG extends Combat {
                     continue;
                 }
 
-                if (duration.expiryMode === "turn") {
+                if (duration.expiryMode.type === "turn") {
                     if (duration.endsOn === 'onTurnEnd') {
                         if ((forward && eventData.oldCombatant.actorId === targetActorId) || (!forward && eventData.newCombatant.actorId === targetActorId)) {
                             effect.toggle(false);

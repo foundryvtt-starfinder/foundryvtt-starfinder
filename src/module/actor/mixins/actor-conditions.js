@@ -1,5 +1,3 @@
-import { SFRPG } from "../../config.js";
-
 export const ActorConditionsMixin = (superclass) => class extends superclass {
     /**
      * Check if the Actor has the condition.
@@ -29,8 +27,8 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
             return undefined;
         }
 
-        const conditionItem = this.items.find(item => this._isCondition(item) && item.name.toLowerCase() === conditionName.toLowerCase());
-        return conditionItem;
+        return this.items.find(item => this._isCondition(item) && item.name.toLowerCase() === conditionName.toLowerCase());
+
     }
 
     /**
@@ -39,8 +37,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
      * @public
      */
     getActiveConditions() {
-        const activeConditions = this.items.filter(item => this._isCondition(item));
-        return activeConditions;
+        return this.items.filter(item => this._isCondition(item));
     }
 
     /**
@@ -54,18 +51,16 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
     }
 
     _isStatusEffect(name) {
-        return SFRPG.statusEffects.find(effect => effect.id === name) != undefined;
+        return CONFIG.SFRPG.statusEffects.find(effect => effect.id === name) != undefined;
     }
 
     /**
      * Updates the Actor's conditions. Either adds or removes a condition Item as necessary to match the enabled argument.
      * @param {String} conditionName The name of the condition. Must match any key from config.js SFRPG.statusEffects. Case sensitive.
      * @param {Boolean} enabled If this value is true it ensures the condition is present on the Actor.
-     * @param {Object} overlay If this value is true it indicates that the token icon should be added as a full-sized overlay. Default is false.
-     * @returns {Promise<*>} The Promise resulting from the create or delete Embedded Document call.
      * @public
      */
-    async setCondition(conditionName, enabled, { overlay = false } = {}) {
+    async setCondition(conditionName, enabled) {
         if (!this._isStatusEffect(conditionName)) {
             ui.notifications.warn(`Trying to set condition ${conditionName} on actor ${this.name} but the condition is not valid. See CONFIG.SFRPG.statusEffects for all valid conditions.`);
             return;
@@ -76,43 +71,42 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
 
         if (enabled) {
             if (!conditionItem) {
-                const compendium = game.packs.find(element => element.title.includes("Conditions"));
-                if (compendium) {
-                    const index = await compendium.getIndex();
+                const pack = game.packs.get("sfrpg.conditions");
+                const index = pack.indexed ? pack.index : await pack.getIndex();
 
-                    const entry = index.find(e => e.name.toLowerCase() === conditionName.toLowerCase());
-                    if (entry) {
-                        const entity = await compendium.getDocument(entry._id);
-                        const itemData = duplicate(entity);
+                const entry = index.find(e => e.name.toLowerCase() === conditionName.toLowerCase());
+                if (entry) {
+                    const entity = await pack.getDocument(entry._id);
+                    const itemData = entity.toObject();
 
-                        const promise = this.createEmbeddedDocuments("Item", [itemData]);
-                        promise.then((createdItems) => {
-                            if (createdItems && createdItems.length > 0) {
-                                this._updateActorCondition(conditionName, true).then(() => {
-                                    Hooks.callAll("onActorSetCondition", {actor: this, item: createdItems[0], conditionName, enabled});
-                                });
-                            }
-                        });
+                    const createdItems = await this.createEmbeddedDocuments("Item", [itemData]);
+                    if (createdItems && createdItems.length > 0) {
+                        await this._updateActorCondition(conditionName, true);
+                        Hooks.callAll("onActorSetCondition", {actor: this, item: createdItems[0], conditionName, enabled});
 
-                        return promise;
                     }
                 }
+
             }
         } else {
             if (conditionItem) {
-                const effect = this.system.timedEffects.get(conditionItem.uuid);
+                const effect = game.sfrpg.timedEffects.get(conditionItem.uuid);
                 effect.delete();
 
-                const promise = this.deleteEmbeddedDocuments("Item", [conditionItem.id]);
-                promise.then(() => {
-                    this._updateActorCondition(conditionName, false).then(() => {
-                        Hooks.callAll("onActorSetCondition", {actor: this, item: conditionItem, conditionName: conditionName, enabled: enabled});
-                    });
-                });
+                await this.deleteEmbeddedDocuments("Item", [conditionItem.id]);
+                await this._updateActorCondition(conditionName, false);
+                Hooks.callAll("onActorSetCondition", {actor: this, item: conditionItem, conditionName: conditionName, enabled: enabled});
 
-                return promise;
             }
         }
+
+        // Since conditions sidestep Foundry status effects, simulate a status effect change.
+        const tokens = this.getActiveTokens(true);
+        for (const token of tokens) {
+            token._onApplyStatusEffect(conditionName.toLowerCase(), enabled);
+        }
+
+        return enabled;
     }
 
     /**
@@ -126,9 +120,8 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
         const updateData = {};
         updateData[`system.conditions.${conditionName}`] = enabled;
 
-        return this.update(updateData).then(() => {
-            this._checkFlatFooted(conditionName, enabled);
-        });
+        await this.update(updateData);
+        this._checkFlatFooted(conditionName, enabled);
     }
 
     /**
@@ -137,7 +130,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
      * @param enabled True if the condition is being added
      * @private
      */
-    async _checkFlatFooted(conditionName, enabled) {
+    _checkFlatFooted(conditionName, enabled) {
         const flatFooted = "flat-footed";
         const hasFlatFooted =  this.hasCondition(flatFooted);
 

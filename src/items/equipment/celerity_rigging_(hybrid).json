@@ -9,14 +9,17 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
       "type": "",
       "condition": "",
       "cost": 0
     },
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": null
@@ -43,10 +46,10 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": null
       },
       "size": "medium",
-      "sturdy": false
+      "sturdy": true
     },
     "attuned": false,
     "bulk": "4",
@@ -57,6 +60,8 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
@@ -78,6 +83,17 @@
           "amount": 2,
           "subtype": "weaponSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "ammunition"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
@@ -88,16 +104,28 @@
     "damage": {
       "parts": [
         {
-          "formula": "2d6",
-          "operator": "",
+          "name": "",
+          "formula": "2d6 +(@abilities.str.mod)",
+          "group": null,
           "types": {
-            "bludgeoning": true
+            "acid": false,
+            "bludgeoning": true,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>Unlike most other suits of powered armor, which are cumbersome and slow, this armor was designed for magically amplified responsiveness and speed. The armor resembles a humanoid frame of narrow rods, providing you with superior visibility and maneuverability while worn. Instead of heavy plating to absorb blows, celerity rigging uses sophisticated planes of magical force to deflect attacks. Incorporeal creatures’ attacks target your KAC rather than your EAC when you are wearing this armor.</p>"
     },
@@ -110,26 +138,49 @@
     "equipped": false,
     "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 12,
     "modifiers": [],
     "price": 38500,
     "proficient": false,
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "",
       "value": null
     },
-    "reach": "5 ft",
+    "reach": "5 ft.",
+    "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
     "size": "medium",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
     "source": "AR pg. 75",
-    "speed": "50 feet",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
+    "speed": "50 ft.",
     "strength": 22,
     "target": {
       "type": "",

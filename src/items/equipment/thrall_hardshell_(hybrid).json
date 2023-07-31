@@ -9,14 +9,17 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "",
       "condition": "",
       "cost": 0
     },
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": 0
@@ -43,9 +46,9 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": null
       },
-      "size": "medium",
+      "size": "huge",
       "sturdy": true
     },
     "attuned": false,
@@ -57,8 +60,20 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
+        {
+          "type": "slot",
+          "acceptsType": [
+            "weapon",
+            "upgrade"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 4,
+          "subtype": "armorUpgrade",
+          "weightProperty": "slots"
+        },
         {
           "type": "slot",
           "acceptsType": [
@@ -72,12 +87,13 @@
         {
           "type": "slot",
           "acceptsType": [
-            "upgrade"
+            "ammunition"
           ],
           "affectsEncumbrance": true,
-          "amount": 4,
-          "subtype": "armorUpgrade",
-          "weightProperty": "slots"
+          "amount": 1,
+          "subtype": "ammunitionSlot",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
@@ -88,12 +104,13 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>This powered armor is shaped like a hemisphere with four sturdy legs and two blunt gripping claws. Its interior is filled primarily with a gel that accommodates any Large or smaller creature and resists impact damage. While wearing a thrall hardshell, you gain DR 10/magic and take no damage from falls of any height.</p>"
+      "value": "<p>This powered armor is shaped like a hemisphere with four sturdy legs and two blunt gripping claws. Its interior is filled primarily with a gel that accommodates any Large or smaller creature and resists impact damage. While wearing a thrall hardshell, you gain DR 10/magic and take no damage from @UUID[Compendium.sfrpg.rules.SfkuzH5kxSAmG4nv.JournalEntryPage.n461i9lDXw303SiY#falling]{Falls} of any height.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -110,13 +127,15 @@
     "price": 615500,
     "proficient": false,
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "",
       "value": null
     },
-    "reach": "10-ft.",
+    "reach": "10 ft.",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
@@ -124,15 +143,31 @@
     },
     "size": "huge",
     "source": "AP #33 pg. 28",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "speed": "25 ft.",
-    "strength": null,
+    "strength": 30,
     "target": {
       "type": "",
       "value": null
     },
     "usage": {
       "per": "hour",
-      "value": 10
+      "value": 1
     },
     "uses": {
       "max": 0,

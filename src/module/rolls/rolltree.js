@@ -66,8 +66,13 @@ export default class RollTree {
 
                     if (finalSectionFormula.finalRoll.includes("<damageSection>")) {
                         const damageSectionFormula = part?.formula ?? "0";
-                        finalSectionFormula.finalRoll = finalSectionFormula.finalRoll.replace("<damageSection>", damageSectionFormula);
-                        finalSectionFormula.formula = finalSectionFormula.formula.replace("<damageSection>", damageSectionFormula);
+                        if (part.isPrimarySection) {
+                            finalSectionFormula.finalRoll = finalSectionFormula.finalRoll.replace("<damageSection>", damageSectionFormula);
+                            finalSectionFormula.formula = finalSectionFormula.formula.replace("<damageSection>", damageSectionFormula);
+                        } else {
+                            finalSectionFormula.finalRoll = damageSectionFormula;
+                            finalSectionFormula.formula = damageSectionFormula;
+                        }
                     }
 
                     if (this.options.debug) {
@@ -118,8 +123,14 @@ export default class RollTree {
 
                 if (finalSectionFormula.finalRoll.includes("<damageSection>")) {
                     const damageSectionFormula = part?.formula ?? "0";
-                    finalSectionFormula.finalRoll = finalSectionFormula.finalRoll.replace("<damageSection>", damageSectionFormula);
-                    finalSectionFormula.formula = finalSectionFormula.formula.replace("<damageSection>", damageSectionFormula);
+                    if (part.isPrimarySection) {
+                        finalSectionFormula.finalRoll = finalSectionFormula.finalRoll.replace("<damageSection>", damageSectionFormula);
+                        finalSectionFormula.formula = finalSectionFormula.formula.replace("<damageSection>", damageSectionFormula);
+                    } else {
+                        finalSectionFormula.finalRoll = damageSectionFormula;
+                        finalSectionFormula.formula = damageSectionFormula;
+                    }
+
                 }
 
                 bonus = bonus.trim();

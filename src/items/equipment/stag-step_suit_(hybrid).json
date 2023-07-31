@@ -9,14 +9,17 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
       "type": "",
       "condition": "",
       "cost": 0
     },
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": null
@@ -43,13 +46,13 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": null
       },
-      "size": "medium",
-      "sturdy": false
+      "size": "large",
+      "sturdy": true
     },
     "attuned": false,
-    "bulk": "40",
+    "bulk": "30",
     "capacity": {
       "max": 40,
       "value": 40
@@ -57,6 +60,8 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
@@ -78,6 +83,17 @@
           "amount": 3,
           "subtype": "weaponSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "ammunition"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "ammunitionSlot",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
@@ -88,18 +104,30 @@
     "damage": {
       "parts": [
         {
-          "formula": "2d6",
-          "operator": "",
+          "name": "",
+          "formula": "2d6 +(@abilities.str.mod)",
+          "group": null,
           "types": {
-            "piercing": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": true,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>Forged and constructed from supernatural metals collected from the realms of the fey, this powered armor has long antlers atop its blank-faced helmet. If the armor has at least 10 charges remaining, you can spend 10 charges to create a fold in reality, per the dimension door spell. You can travel only 100 feet with this ability, and you can’t take other creatures with you. Once you have used this ability, the stag-step suit retains a charge of dimensional static that prevents you from using the armor’s ability again for 24 hours.</p>"
+      "value": "<p>Forged and constructed from supernatural metals collected from the realms of the fey, this powered armor has long antlers atop its blank-faced helmet. If the armor has at least 10 charges remaining, you can spend 10 charges to create a fold in reality, per the @UUID[Compendium.sfrpg.spells.mUIuCkFeMLKnOypt]{Dimension Door} spell. You can travel only 100 feet with this ability, and you can’t take other creatures with you. Once you have used this ability, the stag-step suit retains a charge of dimensional static that prevents you from using the armor’s ability again for 24 hours.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -110,26 +138,49 @@
     "equipped": false,
     "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 11,
     "modifiers": [],
     "price": 26400,
     "proficient": false,
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "",
       "value": null
     },
-    "reach": "10 ft",
+    "reach": "10 ft.",
+    "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
     "size": "large",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
     "source": "AR pg. 79",
-    "speed": "30 feet",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
+    "speed": "",
     "strength": 20,
     "target": {
       "type": "",

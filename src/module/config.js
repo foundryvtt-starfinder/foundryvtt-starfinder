@@ -1071,7 +1071,8 @@ SFRPG.consumableTypes = {
     "drugs"    : "SFRPG.ConsumableTypes.Drugs",
     "medicne"  : "SFRPG.ConsumableTypes.Medicine",
     "poison"   : "SFRPG.ConsumableTypes.Poison",
-    "foodDrink": "SFRPG.ConsumableTypes.FoodDrink"
+    "foodDrink": "SFRPG.ConsumableTypes.FoodDrink",
+    "other": "SFRPG.ConsumableTypes.Other"
 };
 
 SFRPG.augmentationSystems = {
@@ -1169,12 +1170,14 @@ SFRPG.starshipWeaponClass = {
 
 SFRPG.starshipWeaponProperties = {
     "anchoring" : "SFRPG.ShipSystems.StarshipWeaponProperties.Anchoring", // SOM
+    "antimagic" : "SFRPG.ShipSystems.StarshipWeaponProperties.Antimagic", // PoC
     "array"     : "SFRPG.ShipSystems.StarshipWeaponProperties.Array", // CRB
     "automated" : "SFRPG.ShipSystems.StarshipWeaponProperties.Automated", // SOM
     "broad"     : "SFRPG.ShipSystems.StarshipWeaponProperties.Broad", // CRB
     "bugging"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Bugging", // Near Space
     "burrowing" : "SFRPG.ShipSystems.StarshipWeaponProperties.Burrowing", // Pact Worlds
     "buster"    : "SFRPG.ShipSystems.StarshipWeaponProperties.Buster", // SOM
+    "cacophonous": "SFRPG.ShipSystems.StarshipWeaponProperties.Cacophonous", // PoC
     "connecting": "SFRPG.ShipSystems.StarshipWeaponProperties.Connecting", // The Last Refuge
     "deathField": "SFRPG.ShipSystems.StarshipWeaponProperties.DeathField", // AA 3
     "deployed"  : "SFRPG.ShipSystems.StarshipWeaponProperties.Deployed", // SOM
@@ -1217,6 +1220,7 @@ SFRPG.starshipWeaponProperties = {
     "teleportation": "SFRPG.ShipSystems.StarshipWeaponProperties.Teleportation", // SOM
     "tractor"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Tractor", // CRB
     "transposition": "SFRPG.ShipSystems.StarshipWeaponProperties.Transposition", // SOM
+    "unerring" : "SFRPG.ShipSystems.StarshipWeaponProperties.Unerring", // PoC
     "vandalDrones": "SFRPG.ShipSystems.StarshipWeaponProperties.VandalDrones", // AA 3
     "volatile": "SFRPG.ShipSystems.StarshipWeaponProperties.Volatile", // Empire of Bones
     "vortex"    : "SFRPG.ShipSystems.StarshipWeaponProperties.Vortex" // CRB
@@ -1763,147 +1767,146 @@ SFRPG.statusEffects = [
     }
 ];
 
-// TODO localize
 SFRPG.conditions = {
     "asleep": {
         modifiers: [],
-        tooltip: "<strong>Asleep</strong><br><br>You take a -10 penalty to Perception checks to notice things."
+        tooltip: "SFRPG.ConditionTooltips.Asleep"
     },
     "bleeding": {
         modifiers: [],
-        tooltip: "<strong>Bleeding</strong><br><br>You take the listed damage at the beginning of your turn."
+        tooltip: "SFRPG.ConditionTooltips.Bleeding"
     },
     "blinded": {
         modifiers: [],
-        tooltip: "<strong>Blinded</strong><br><br>You're flat-footed, you take a -4 penalty to most Str- and Dex-based skill checks and opposed Perception checks, you automatically fail Perception checks based on sight, opponents have total concealment against you, and you must succeed at a DC 10 Acrobatics check to move faster than half speed or else fall prone."
+        tooltip: "SFRPG.ConditionTooltips.Blinded"
     },
     "broken": {
         modifiers: [],
-        tooltip: "<strong>Broken</strong><br><br><strong>Weapon:</strong> attack and damage rolls take a -2 penalty and can't deal extra effects on a critical hit;<br> <strong>Armor:</strong> AC bonuses are halved and the armor check penalty is doubled;<br> <strong>Vehicle:</strong> -2 penalty to AC, collision DC, and Piloting modifier, and it halves its full speed and MPH;<br> <strong>Tool or tech that provides bonuses:</strong> bonuses are halved."
+        tooltip: "SFRPG.ConditionTooltips.Broken"
     },
     "burning": {
         modifiers: [],
-        tooltip: "<strong>Burning</strong><br><br>You take the listed fire damage each round, and you must be extinguished to end the condition."
+        tooltip: "SFRPG.ConditionTooltips.Burning"
     },
     "confused": {
         modifiers: [],
-        tooltip: "<strong>Confused</strong><br><br>You treat all creatures as enemies, and you must roll on the table to determine your actions."
+        tooltip: "SFRPG.ConditionTooltips.Confused"
     },
     "cowering": {
         modifiers: [],
-        tooltip: "<strong>Cowering</strong><br><br>You're flat-footed and can take no actions."
+        tooltip: "SFRPG.ConditionTooltips.Cowering"
     },
     "dazed": {
         modifiers: [],
-        tooltip: "<strong>Dazed</strong><br><br>You can take no actions."
+        tooltip: "SFRPG.ConditionTooltips.Dazed"
     },
     "dazzled": {
         modifiers: [],
-        tooltip: "<strong>Dazzled</strong><br><br>You take a -1 penalty to attack rolls and sight-based Perception checks."
+        tooltip: "SFRPG.ConditionTooltips.Dazzled"
     },
     "dead": {
         modifiers: [],
-        tooltip: "<strong>Dead</strong><br><br>Your soul leaves your body, you can't act in any way, and you can't benefit from normal or magical healing."
+        tooltip: "SFRPG.ConditionTooltips.Dead"
     },
     "deafened": {
         modifiers: [],
-        tooltip: "<strong>Deafened</strong><br><br>You take a -4 penalty to initiative checks and opposed Perception checks, and you automatically fail sound-based Perception checks."
+        tooltip: "SFRPG.ConditionTooltips.Deafened"
     },
     "dying": {
         modifiers: [],
-        tooltip: "<strong>Dying</strong><br><br>You're unconscious, you can take no actions, and you must stabilize or lose Resolve Points and potentially die."
+        tooltip: "SFRPG.ConditionTooltips.Dying"
     },
     "encumbered": {
         modifiers: [],
-        tooltip: "<strong>Encumbered</strong><br><br>Speeds are reduced by 10 feet, maximum Dex bonus to AC is reduced to +2, and you take a -5 penalty to Str- and Dex-based checks."
+        tooltip: "SFRPG.ConditionTooltips.Encumbered"
     },
     "entangled": {
         modifiers: [],
-        tooltip: "<strong>Entangled</strong><br><br>You move at half speed; you cannot run or charge; and you take a -2 penalty to AC, attack rolls, Reflex saves, initiative checks, and Dex-based skill and ability checks."
+        tooltip: "SFRPG.ConditionTooltips.Entangled"
     },
     "exhausted": {
         modifiers: [],
-        tooltip: "<strong>Exhausted</strong><br><br>You move at half speed; you cannot run or charge; you take a -3 penalty to AC, attack rolls, melee damage rolls, Reflex saves, initiative checks, and Str- and Dex-based skill and ability checks; and you reduce your encumbered limit by 3 bulk."
+        tooltip: "SFRPG.ConditionTooltips.Exhausted"
     },
     "fascinated": {
         modifiers: [],
-        tooltip: "<strong>Fascinated</strong><br><br>You must pay attention to the fascinating effect and take a -4 penalty to skill checks made as reactions."
+        tooltip: "SFRPG.ConditionTooltips.Fascinated"
     },
     "fatigued": {
         modifiers: [],
-        tooltip: "<strong>Fatigued</strong><br><br>You cannot run or charge; you take a -1 penalty to AC, attack rolls, melee damage rolls, Reflex saves, initiative checks, and Str- and Dex-based skill and ability checks; and you reduce your encumbered limit by 1 bulk."
+        tooltip: "SFRPG.ConditionTooltips.Fatigued"
     },
     "flat-footed": {
         modifiers: [],
-        tooltip: "<strong>Flat-Footed</strong><br><br>You take a -2 penalty to AC, and you cannot take reactions or make attacks of opportunity."
+        tooltip: "SFRPG.ConditionTooltips.FlatFooted"
     },
     "frightened": {
         modifiers: [],
-        tooltip: "<strong>Frightened</strong><br><br>You must flee or fight, and you take a -2 penalty to ability checks, attack rolls, saving throws, and skill checks."
+        tooltip: "SFRPG.ConditionTooltips.Frightened"
     },
     "grappled": {
         modifiers: [],
-        tooltip: "<strong>Grappled</strong><br><br>You cannot move or take two-handed actions; you take a -2 penalty to AC, most attack rolls, Reflex saves, initiative checks, and Dex-based skill and ability checks; and you cannot make attacks of opportunity."
+        tooltip: "SFRPG.ConditionTooltips.Grappled"
     },
     "helpless": {
         modifiers: [],
-        tooltip: "<strong>Helpless</strong><br><br>Your Dex modifier is -5, and melee attacks against you gain a +4 bonus."
+        tooltip: "SFRPG.ConditionTooltips.Helpless"
     },
     "nauseated": {
         modifiers: [],
-        tooltip: "<strong>Nauseated</strong><br><br>You're unable to attack, cast spells, or concentrate on spells, and the only action you can take is a single move action per turn."
+        tooltip: "SFRPG.ConditionTooltips.Nauseated"
     },
     "off-kilter": {
         modifiers: [],
-        tooltip: "<strong>Off-kilter</strong><br><br>You can't take move actions except to right yourself, you take a -2 penalty to attacks, and you're flat-footed."
+        tooltip: "SFRPG.ConditionTooltips.OffKilter"
     },
     "off-target": {
         modifiers: [],
-        tooltip: "<strong>Off-target</strong><br><br>You take a -2 penalty to attack rolls."
+        tooltip: "SFRPG.ConditionTooltips.OffTarget"
     },
     "overburdened": {
         modifiers: [],
-        tooltip: "<strong>Overburdened</strong><br><br>Speeds are reduced to 5 feet; maximum Dex bonus to AC is reduced to +0; and you take a -5 penalty to Str- and Dex-based checks."
+        tooltip: "SFRPG.ConditionTooltips.Overburdened"
     },
     "panicked": {
         modifiers: [],
-        tooltip: "<strong>Panicked</strong><br><br><ul><li>You drop all held items</li><li>You flee at top speed</li><li>You cannot take other actions</li><li>You take a -2 penalty to ability checks, saving throws, and skill checks</li><li>And you cower if cornered</li></ul>"
+        tooltip: "SFRPG.ConditionTooltips.Panicked"
     },
     "paralyzed": {
         modifiers: [],
-        tooltip: "<strong>Paralyzed</strong><br><br>Your Dex modifier is -5, and you cannot move but can take mental actions."
+        tooltip: "SFRPG.ConditionTooltips.Paralyzed"
     },
     "pinned": {
         modifiers: [],
-        tooltip: "<strong>Pinned</strong><br><br>You cannot move, you're flat-footed, and you take penalties to the same attributes as for grappled but the penalty is -4."
+        tooltip: "SFRPG.ConditionTooltips.Pinned"
     },
     "prone": {
         modifiers: [],
-        tooltip: "<strong>Prone</strong><br><br>You take a -4 penalty to melee attacks, a +4 bonus to AC against ranged attacks, and a -4 penalty to AC against melee attacks."
+        tooltip: "SFRPG.ConditionTooltips.Prone"
     },
     "shaken": {
         modifiers: [],
-        tooltip: "<strong>Shaken</strong><br><br>You take a -2 penalty to ability checks, attack rolls, saving throws, and skill checks."
+        tooltip: "SFRPG.ConditionTooltips.Shaken"
     },
     "sickened": {
         modifiers: [],
-        tooltip: "<strong>Sickened</strong><br><br>You take a -2 penalty to ability checks, attack rolls, weapon damage rolls, saving throws, and skill checks."
+        tooltip: "SFRPG.ConditionTooltips.Sickened"
     },
     "stable": {
         modifiers: [],
-        tooltip: "<strong>Stable</strong><br><br>You're no longer dying, but you are still unconscious."
+        tooltip: "SFRPG.ConditionTooltips.Stable"
     },
     "staggered": {
         modifiers: [],
-        tooltip: "<strong>Staggered</strong><br><br>You can take only a single move or standard action each round and can't take reactions, but you can take swift actions as normal."
+        tooltip: "SFRPG.ConditionTooltips.Staggered"
     },
     "stunned": {
         modifiers: [],
-        tooltip: "<strong>Stunned</strong><br><br>You drop everything held, you can't take actions, and you're flat-footed."
+        tooltip: "SFRPG.ConditionTooltips.Stunned"
     },
     "unconscious": {
         modifiers: [],
-        tooltip: "<strong>Unconscious</strong><br><br>You're knocked out and helpless."
+        tooltip: "SFRPG.ConditionTooltips.Unconscious"
     }
 };
 

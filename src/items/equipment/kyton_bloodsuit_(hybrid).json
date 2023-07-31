@@ -9,14 +9,17 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
       "type": "",
       "condition": "",
       "cost": 0
     },
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": null
@@ -43,10 +46,10 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": null
       },
       "size": "medium",
-      "sturdy": false
+      "sturdy": true
     },
     "attuned": false,
     "bulk": "30",
@@ -57,6 +60,8 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
@@ -78,6 +83,17 @@
           "amount": 2,
           "subtype": "weaponSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "ammunition"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "ammunitionSlot",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
@@ -88,16 +104,28 @@
     "damage": {
       "parts": [
         {
-          "formula": "3d6",
-          "operator": "",
+          "name": "",
+          "formula": "3d6 +(@abilities.str.mod)",
+          "group": null,
           "types": {
-            "piercing": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": true,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>This union of chains, metal plates, and magically solidified blood has a brutally functional appearance. Designed in cooperation with the pain-loving kytons of the Shadow Plane, kyton bloodsuits include clusters of blades and needles on the inside of the armor that shift about, seeking to pierce the wearer’s skin. The armor deals 1d4 damage to you each minute of operation (whenever the armor uses a charge). When you take this damage, you can spend 1 Resolve Point as a reaction to restore 5 charges to the kyton bloodsuit, but you can’t restore more charges than it actually holds.</p>"
     },
@@ -110,26 +138,49 @@
     "equipped": false,
     "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 16,
     "modifiers": [],
     "price": 187750,
     "proficient": false,
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "",
       "value": null
     },
-    "reach": "10 ft",
+    "reach": "10 ft.",
+    "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
     "size": "large",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
     "source": "AR pg. 78",
-    "speed": "30 feet",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
+    "speed": "30 ft.",
     "strength": 27,
     "target": {
       "type": "",
