@@ -43,32 +43,6 @@
         {{!-- Details Tab --}}
         <div class="tab flexrow details" data-group="primary" data-tab="details">
 
-            <div class="origin flexcol item-properties">
-
-                {{!-- Origin Information --}}
-                {{#if item.origin}}
-                    <div class="origin-actor flexcol" data-origin-uuid="{{item.origin.uuid}}">
-                        <img src="{{item.origin.img}}">
-                        <ol class="properties-list">
-                            <li><strong>Origin Actor</strong>
-                                <hr>{{item.origin.name}}
-                            </li>
-                        </ol>
-                    </div>
-                {{/if}}
-                {{#if item.originItem}}
-                    <div class="origin-item flexcol" data-origin-uuid="{{item.originItem.uuid}}">
-                        <img src="{{item.originItem.img}}">
-                        <ol class="properties-list">
-                            <li><strong>Origin Item</strong>
-                                <hr>{{item.originItem.name}}
-                            </li>
-                        </ol>
-                    </div>
-                {{/if}}
-
-            </div>
-
             {{!-- Duration Settings --}}
             {{> "systems/sfrpg/templates/items/parts/item-duration.hbs" message="SFRPG.Effect.DetailsHeader"}}
 
