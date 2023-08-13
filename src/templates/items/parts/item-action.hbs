@@ -74,6 +74,10 @@
     <h3 class="form-header noborder">{{ localize "SFRPG.Items.Action.DamageHeader" }}</h3>
 
     {{!-- Damage Formula --}}
+    <div class="form-group" {{ createTippy title="SFRPG.Damage.Types.PrimaryDamageGroup" subtitle="SFRPG.Damage.Types.PrimaryDamageGroupTooltip" }}>
+        <label>Primary Damage Group</label>
+        <input type="number" name="system.damage.primaryGroup" value="{{itemData.damage.primaryGroup}}" data-dtype="Number"/>
+    </div>
     <h4 class="damage-header">
         {{ localize "SFRPG.Items.Action.AddDamageSection" }}
         <a class="damage-control add-damage"><i class="fas fa-plus"></i></a>
