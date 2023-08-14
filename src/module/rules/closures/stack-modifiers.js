@@ -20,7 +20,7 @@ export default class StackModifiers extends Closure {
         const modifiers = mods;
         for (let modifiersI = 0; modifiersI < modifiers.length; modifiersI++) {
             const modifier = modifiers[modifiersI];
-            const actor = fromUuidSync(modifier.container?.actorUuid) || options.actor;
+            const actor = options.actor;
             const formula = String(modifier.modifier);
 
             if (formula && (modifier.modifierType === SFRPGModifierType.CONSTANT)) {
@@ -59,7 +59,7 @@ export default class StackModifiers extends Closure {
         if (modifiers.length > 0) {
             for (let modifiersI = 0; modifiersI < modifiers.length; modifiersI++) {
                 const modifier = modifiers[modifiersI];
-                const actor = await fromUuid(modifier.container?.actorUuid) || options.actor;
+                const actor = options.actor;
                 const formula = String(modifier.modifier);
 
                 if (formula) {
