@@ -19,9 +19,10 @@
     "ammunitionType": "charge",
     "area": {
       "effect": "",
-      "shape": "",
-      "units": "none",
-      "value": null
+      "shapable": false,
+      "shape": "sphere",
+      "units": "ft",
+      "value": "20"
     },
     "attackBonus": 0,
     "attributes": {
@@ -37,7 +38,7 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": 102
       },
       "size": "medium",
       "sturdy": true
@@ -48,10 +49,10 @@
       "max": 10,
       "value": 10
     },
-    "chatFlavor": "Explode (20 ft.), unwieldy",
+    "chatFlavor": "",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": 1,
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -73,17 +74,36 @@
           "amount": 1,
           "subtype": "ammunitionSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "weaponAccessory"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 4,
+          "subtype": "",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
     "critical": {
-      "effect": "Corrode",
+      "effect": "Corrode 3d6",
       "parts": [
         {
-          "formula": "3d6",
+          "formula": "",
           "operator": "",
           "types": {
-            "acid": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
@@ -91,13 +111,24 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "2d20",
-          "operator": "",
+          "group": null,
+          "isPrimarySection": true,
           "types": {
-            "acid": true
+            "acid": true,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -105,11 +136,11 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": ""
+      "value": "<p>While most disintegrator weapons produce a stream of energy that strikes a single target, a nanite decoupler programs nanites to replicate a disintegrator’s destructive energies over a set area. The integrated generators used to overcharge the nanites for the desired effect make a nanite decoupler a heavy, bulky weapon that requires a skilled user. The caustic nanite decoupler and the vitriolic nanite decoupler are both deadly, destructive weapons.</p>\n<p><strong>Special Property:</strong> explode (20 ft.)</p>"
     },
     "descriptors": [],
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
     "equippable": false,
@@ -135,6 +166,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -153,14 +185,19 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
+      "hybrid": false,
+      "hydrodynamic": false,
       "ignite": false,
       "indirect": false,
       "injection": false,
+      "instrumental": false,
       "integrated": false,
       "line": false,
       "living": false,
@@ -178,14 +215,18 @@
       "polymorphic": false,
       "powered": false,
       "professional": false,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
       "reach": false,
       "recall": false,
+      "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
+      "shatter": false,
       "shells": false,
       "shield": false,
       "sniper": false,
@@ -198,8 +239,10 @@
       "thought": false,
       "throttle": false,
       "thrown": false,
+      "thruster": false,
       "trip": false,
       "two": true,
+      "unbalancing": false,
       "underwater": false,
       "unwieldy": true,
       "variantBoost": false,
@@ -211,17 +254,36 @@
       "additional": "",
       "per": "",
       "units": "ft",
-      "value": 80
+      "value": "80"
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
-    "source": "AR",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
+    "source": "AR pg. 37",
     "special": "",
-    "specialMaterials": {},
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
@@ -231,9 +293,9 @@
       "value": 5
     },
     "uses": {
-      "max": 0,
+      "max": "",
       "per": "",
-      "value": 5
+      "value": null
     },
     "weaponCategory": "disintegrator",
     "weaponType": "heavy"
