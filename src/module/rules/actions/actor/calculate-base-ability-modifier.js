@@ -39,11 +39,7 @@ export default function(engine) {
 
         for (let [abl, ability] of Object.entries(data.abilities)) {
 
-            const abilityMods = context.parameters.stackModifiers.process(
-                filteredMods.filter(mod => mod.valueAffected === abl || mod.effectType === SFRPGEffectType.ABILITY_MODIFIERS),
-                context,
-                {actor: fact.actor}
-            );
+            const abilityMods = filteredMods.filter(mod => mod.valueAffected === abl || mod.effectType === SFRPGEffectType.ABILITY_MODIFIERS);
 
             let abilityValue = ability.value;
             if (Number.isNaN(Number.parseInt(abilityValue))) {

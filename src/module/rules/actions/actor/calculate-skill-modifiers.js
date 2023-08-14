@@ -30,28 +30,43 @@ export default function(engine) {
         });
 
         // Skills
+		const getFilteredSkills = (skl, skill, mod) => {
+			if (mod.modifierType === SFRPGModifierType.FORMULA 
+				&& (
+					mod.effectType === SFRPGEffectType.ALL_SKILLS
+                    || mod.effectType === SFRPGEffectType.SKILL && skl === mod.valueAffected
+                    || mod.effectType === SFRPGEffectType.ABILITY_SKILLS && skill.ability === mod.valueAffected
+				)
+			) 
+			{
+				if (skill.rolledMods) {
+					skill.rolledMods.push({mod: mod.modifier, bonus: mod});
+				} else {
+					skill.rolledMods = [{mod: mod.modifier, bonus: mod}];
+				}
+				return false;
+			}
+			
+			return (mod.effectType === SFRPGEffectType.ALL_SKILLS) 
+				|| (mod.effectType === SFRPGEffectType.SKILL && skl === mod.valueAffected) 
+				|| (mod.effectType === SFRPGEffectType.ABILITY_SKILLS && skill.ability === mod.valueAffected);
+		};
+		
+		
         for (let [skl, skill] of Object.entries(skills)) {
             skill.rolledMods = null;
-            const mods = context.parameters.stackModifiers.process(filteredMods.filter(mod => {
-                // temporary workaround to fix modifiers with mod "0" if the situational mod is higher.
-                if (mod.modifierType === SFRPGModifierType.FORMULA && ((mod.effectType === SFRPGEffectType.ALL_SKILLS)
-                    || (mod.effectType === SFRPGEffectType.SKILL && skl === mod.valueAffected)
-                    || (mod.effectType === SFRPGEffectType.ABILITY_SKILLS && skill.ability === mod.valueAffected))) {
-                    if (skill.rolledMods) {
-                        skill.rolledMods.push({mod: mod.modifier, bonus: mod});
-                    } else {
-                        skill.rolledMods = [{mod: mod.modifier, bonus: mod}];
-                    }
-                    return false;
-                }
-                if (mod.effectType === SFRPGEffectType.ALL_SKILLS) return true;
-                else if (mod.effectType === SFRPGEffectType.SKILL && skl === mod.valueAffected) return true;
-                else if (mod.effectType === SFRPGEffectType.ABILITY_SKILLS && skill.ability === mod.valueAffected) return true;
+			
+			//Imper1um 08/14/2023: 
+			//	I removed .process from this system.
+			//	What was happening is that the filter system was looping... infinitely. This is because
+			//  stackModifiers.process was calling calculate-skill-modifiers.
+			//  Please note you *CANNOT* call stackModifiers.process INSIDE of a processor, you will cause an infinite loop.
+			//  This has existed for years, but its been ignored by one problem or another.
+			//  Anyways, calling the .process from here is useless. By time it's gotten here, all of the mods have been
+			//  properly processed (at least in the correct order), so there's no reason to ask the system to call it again.
+			var skillFilteredMods = filteredMods.filter(mod => getFilteredSkills(skl, skill, mod));
 
-                return false;
-            }), context, {actor: fact.actor});
-
-            let accumulator = Object.entries(mods).reduce((sum, mod) => {
+            let accumulator = Object.entries(skillFilteredMods).reduce((sum, mod) => {
                 if (mod[1] === null || mod[1].length < 1) return sum;
 
                 if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {

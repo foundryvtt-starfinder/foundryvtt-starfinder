@@ -69,14 +69,13 @@ export default function(engine) {
                 }
             }
         }
+		
+		const filterMods = (abl, mod) => { return mod.valueAffected === abl; };
 
         for (let [abl, ability] of Object.entries(data.abilities)) {
 
-            const abilityMods = context.parameters.stackModifiers.process(
-                filteredMods.filter(mod => mod.valueAffected === abl),
-                context,
-                {actor: fact.actor}
-            );
+
+            const abilityMods = filteredMods.filter(mod => filterMods(abl, mod));
 
             let score = ability.base ? ability.base : 10;
             ability.tooltip.push(game.i18n.format("SFRPG.AbilityScoreBaseTooltip", { mod: score.signedString() }));
