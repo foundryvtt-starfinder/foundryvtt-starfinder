@@ -1368,8 +1368,12 @@ export class ActorSheetSFRPG extends ActorSheet {
 
                     const formula = modifier.modifier;
                     if (formula) {
-                        const roll = Roll.create(formula, targetActor.actor.system);
-                        modifier.max = await roll.evaluate({maximize: true}).total;
+                        try {
+                            const roll = Roll.create(formula, targetActor.actor.system);
+                            modifier.max = await roll.evaluate({maximize: true}).total;
+                        } catch {
+                            modifier.max = 0;
+                        }
                     } else {
                         modifier.max = 0;
                     }
