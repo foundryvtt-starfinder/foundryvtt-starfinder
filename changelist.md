@@ -1,3 +1,142 @@
+# v0.25.0 - The other one that got away
+The very cool features currently sat on the development branch are here! Hopefully they're well worth the wait.
+
+## Timed Effects
+Biohackers and Envoys rejoice, for the new Effect item type allows you to apply temporary modifiers to yourself and others with the drop of an item. These Effects are smart, and will expire after their duration has expired -- on exactly the turn you want, and can even reference the origin actor's stats. This also comes with a refactor of conditions and the status effect token HUD. Major thanks to Dosendusche for doing the majority of the heavy lifting for this.
+
+## Roll code fixes
+Dosendusche's other big contribution this update was a refactor of our roll code. The details are very technical, but this will result in far fewer modifier bugs, roll-time bugs, and miscalculations. 
+
+## Modifier improvements
+Modifiers also use Foundry's `DataModel` class, which basically means they will be more reliable and resistant to incorrect data. Additionally,
+you can now add damage sections (with damage types) to items with modifiers, and also modifiers to only apply to the item they are on, or the container of the item they are on.
+
+## LevelDB Migration
+The system now ships the new LevelDB databases, rather than the old NeDB databases, which has been deprecated. This allows us to utilize folders-in-compendiums, and should have no impact on existing games. We'll explore compendiums-in-folders soon.
+
+## Combat Difficulty Calculation
+The combat tracker will now show the difficulty for a given encounter based on the number of PCs, NPCs and the level/CR of both. A detailed breakdown of the difficulty and rewards, expected and actual, are also available. This is available for both regular and Starship combat.
+
+## Activation Detail Automation
+Range, area, duration, maximum uses, and actor resource minimum and maximum fields now all accept formulas, allowing them to scale based off of your character's stats. This allows for spells to scale by caster level, as well as some class features like Solarian Revelations.
+
+## Feature Categories
+Feats, or Features as they're now known, can know be designated a type, such as "Feat", "Class Feature", "Species Feature", and so on. This will allow for better organisation of sheets, making it clearer where features came from, and simply looking nicer.
+
+## Item Macros
+Dragging an item's attack, damage or activate button to the macro bar will create a smart action macro. It will display the remaining ammo or uses, and indicate whether an activation is active, inactive, or unable to be activated at all.
+
+## Iconics
+JonDemand went through and re-built all the iconics, bringing them up-to-date with the latest system automation. They've also received higher quality art from Paizo themselves, and fancy popout tokens. If only there was somewhere to get the empty token ring...
+
+## Two Template Tweaks
+A custom `@Template` enricher has been added, allowing you to place templates from items and journals. Additionally, when items with an area are printed to chat, there will no be a button to place a corresponding template.
+
+## Core system improvements
+- Add repost buttons to custom enrichers
+- Show total attack and damage values on sheet buttons
+- Add compendium art mapping to items
+- Add a Combat Role selection to NPCs (Expert, Spellcaster, Combatant)
+- Deprecate Tippy and Popper in favour of native Foundry tooltips, with fancy custom CSS.
+- Add inline icons for each document types to content links.
+- Localised various missing text strings.
+- Various improvements to the French and German localisations.
+- Apply hex background to journals
+- Make shift clicking roll all/NPCs on the Combat Tracker skip all dialogs
+- Wait for the Starfinder logo to load before switching the FVTT Anvil
+- Use Maps to load compendium browsers rather than Arrays
+- Migrate to Foundry `font-size` CSS variables
+- Allow `null` organisation size in the AA browser
+- Change shield chat card footers to use bold titles
+- Lazy load images in compendium browsers
+- Change tooltip on equipped box for augmentations
+- Added a blank modifier value for skill modifiers.
+- Added `Irradiate (severe)` as a Starship weapon special property.
+- Automatically set weapon and shield proficiency when adding an item to an actor.
+- Lazy load icon enrichers
+- Allow healing to bypass stamina, and for healing to affect only HP or SP, or both.
+- Implement primary damage sections and groups, which modifiers to damage will only apply to.
+- Add an SFRPG image to the system on the setup screen.
+- The spell cast dialog now defaults the selected level to the spell's level.
+- Alter the alignment of `@Icon` images.
+- Add transitions and hover effects to sheet nav buttons.
+- Updates to the README and OGL.
+
+## Bugfixes
+- Fix custom enrichers not working when a journal's header was hidden.
+- Ensure NPCs have no stamina.
+- Fix applying damage to NPCs.
+- Fix Drone containers not opening.
+- Fix some actor operations on actors in compendiums.
+- Fix double borders on NPC sheets and item sheets.
+- Fix various issues with filtering in compendium browsers.
+- Fix some crossed wires with the source and target in drag-and-drop processing.
+- Fix container wealth calculation.
+- Fix unowned actors being proficient at everything.
+- Fix conditions sometimes failing to toggle.
+- Fix dropping items onto tokens.
+- Update the `CombatSFRPG` class to match changes made during Foundry V11.
+- Fix supported sizes on power cores not saving.
+- Fix allowed armor types on armor upgrades lying.
+- Fix errors when submitting a roll dialog with the Enter key.
+- Fix undefined spell name on the spell cast dialog.
+- Fix HTML in the short or GM note descriptions breaking character sheets.
+- Fix some errors on feats with attack rolls.
+- Fix item hardness calculation
+
+## Data entry
+- Ensure all embedded items have IDs.
+- Fix medkit price and weight
+- Migrate Solarian revelation type and Envoy Improvisation descriptor icons to `@Icon`
+- Update the system's language list with latest languages, and correct various NPC's incorrect language listings.
+- Fix ammunition on disintegration lach
+- Add items from The Liberation of Locus-1
+- Update versatile specialisation and weapon focus
+- Add Plunderer of Worlds.
+- Add images to various class features
+- Fix formatting on various items
+- Fix various issues with excavation drills
+- Add the Pot-bellied Bullete Creature Companion
+- Added Archetypes, Downtime activities, species, spells, class features, feats, starship options, and magic and tech items from Ports of Call
+- Various fixes to the Evolutionist.
+- Add missing feats from AP-38
+- Add links to Entropy Shield
+- Add Teamwork feats
+- Add the Starsinger Archetype
+- Add icons to all universal creature rules
+- Add blank modifiers to Skill Expertise
+- Fix modifiers on the Sniper alternate class feature.
+- Update Speed Suspension bonus type.
+- Added the Divine Weapon feat.
+- Fix sickened applying to all damage rolls
+- Add sensor bonus to target action.
+- Fix missing condition description localisations
+- Use the correct starship frame in oliphaunt
+- Updated alternate outcome
+- Updated Reduction plating. 
+- Updated Bulkheads. 
+- Added Data Broker features. 
+- Set Nanite Patches as Consumables
+- Added Trap Spotter Exploit. 
+- Added Other to Consumable types. 
+- Added Ace Pilot features.
+- Re-organised the Tactical Rules journals with the help of folders-in-compendiums, and added more sections from the Tactical Rules chapter of the CRB.
+- Added all remaining power armor, and fixes to existing power armor
+- Fix Double Tap feat
+
+# v0.24.1 - V11 Compatibility
+This is a minor hotfix release for 0.24 to fix some issues labels on items not being localized properly.
+
+## Bugfixes
+- Perform global localization before documents are first prepared so labels can correctly be localised.
+
+# v0.24.1 - V11 Compatibility
+This is a minor hotfix release for 0.24 to fix some issues the LevelDB migration exposed.
+
+## Bugfixes
+- Ensure all embedded documents on Actors in compendiums have `_id`s, so they aren't discarded by the LevelDB migration.
+- Restructure `template.json` slightly to reduce redundant data on actors.
+
 # v0.24.0 - V11 Compatibility
 The very cool features currently sat on the development branch have been pushed to the side to allow for this small but important update. This update prepares the system for use on V11.
 

@@ -186,17 +186,49 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Item Actions
         if (data.hasOwnProperty("actionType")) {
             // Damage
-            const dam = data.damage || {};
-            if (dam.parts) labels.damage = dam.parts.map(d => d[0]).join(" + ")
-                .replace(/\+ -/g, "- ");
+            const damage = data.damage || {};
+            const itemParts = damage.parts;
+            if (itemParts.length > 0) {
+                labels.damage = damage.parts
+                    .map(d => d[0])
+                    .join(" + ")
+                    .replace(/\+ -/g, "- ");
+
+                // There must always be one primary damage group or section.
+                // If the primary damage group is set, mark all of the members of that group as primary.
+                const allGroups = itemParts.reduce((arr, part) => {
+                    if (!!part.group || part.group === 0) arr.push(part.group);
+                    return arr;
+                }, []);
+                if (Number.isInteger(data.damage.primaryGroup) && allGroups.length > 0) {
+                    // Set primary group to first group if no parts on the item are in the group
+                    if (!(allGroups.includes(data.damage.primaryGroup)))
+                        data.damage.primaryGroup = allGroups.sort()[0];
+
+                    for (const part of itemParts) {
+                        if (part.group === data.damage.primaryGroup) part.isPrimarySection = true;
+                        else part.isPrimarySection = false;
+                    }
+
+                // If the primary group is blank, set the 1st damage section, and any parts in the same group, as primary.
+                } else if (!(itemParts.some(part => part.isPrimarySection))) {
+                    itemParts[0].isPrimarySection = true;
+                    const primaryGroup = itemParts[0].group ?? null;
+
+                    if (primaryGroup !== null) {
+                        for (const part of itemParts) {
+                            if (part.group === primaryGroup) part.isPrimarySection = true;
+                            else part.isPrimarySection = false;
+                        }
+                    }
+                }
+
+            }
+
         }
 
         // Assign labels and return the Item
         this.labels = labels;
-
-        // There must always be one primary damage section, so if they're all disabled, set section 0 as primary.
-        const itemParts = data?.damage?.parts;
-        if (itemParts?.length > 0 && !(itemParts.some(part => part.isPrimarySection))) itemParts[0].isPrimarySection = true;
     }
 
     async processData() {
