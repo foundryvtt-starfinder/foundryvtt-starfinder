@@ -1,3 +1,15 @@
+# v0.25.1
+This hotfix addresses a few issues with unlinked actors, because of course they were the issue.
+
+# Core system improvements
+- Added a toggle for invalid roll formula warnings, defaulted to off.
+# Bugfixes
+- Fix modifiers on unlinked tokens causing a stack overflow
+- Fix importing NPCs failing
+- Fix hazards breaking the canvas
+- Fix XP wrapping at high levels
+- Make several modifier calculations fail more gracefully
+
 # v0.25.0 - The other one that got away
 The very cool features currently sat on the development branch are here! Hopefully they're well worth the wait.
 

@@ -20,14 +20,15 @@ export default class StackModifiers extends Closure {
         const modifiers = mods;
         for (let modifiersI = 0; modifiersI < modifiers.length; modifiersI++) {
             const modifier = modifiers[modifiersI];
-            const actor = fromUuidSync(modifier.container?.actorUuid) || options.actor;
+            const actor = options.actor;
             const formula = String(modifier.modifier);
 
             if (formula && (modifier.modifierType === SFRPGModifierType.CONSTANT)) {
                 try {
                     const roll = Roll.create(formula, actor?.system);
                     if (roll.isDeterministic) {
-                        const simplerFormula = Roll.replaceFormulaData(formula, actor?.system, {missing: 0, warn: true});
+                        const warn = game.settings.get("sfrpg", "warnInvalidRollData") || false;
+                        const simplerFormula = Roll.replaceFormulaData(formula, actor?.system, {missing: 0, warn});
                         modifier.max = Roll.safeEval(simplerFormula);
                     } else {
                         ui.notifications.error(`Error with modifier: ${modifier.name}. Dice are not available in constant formulas. Please use a situational modifier instead.`);
@@ -59,12 +60,20 @@ export default class StackModifiers extends Closure {
         if (modifiers.length > 0) {
             for (let modifiersI = 0; modifiersI < modifiers.length; modifiersI++) {
                 const modifier = modifiers[modifiersI];
-                const actor = await fromUuid(modifier.container?.actorUuid) || options.actor;
+                const actor = options.actor;
                 const formula = String(modifier.modifier);
 
                 if (formula) {
                     const roll = Roll.create(formula, actor?.system);
-                    const evaluatedRoll = await roll.evaluate({async: true});
+                    let evaluatedRoll = {};
+                    try {
+                        evaluatedRoll = await roll.evaluate({async: true});
+                    } catch {
+                        evaluatedRoll = {
+                            total: 0,
+                            dice: []
+                        };
+                    }
                     modifiers[modifiersI].max = evaluatedRoll.total;
                     modifiers[modifiersI].isDeterministic = roll.isDeterministic;
                     modifiers[modifiersI].dices = [];
@@ -72,6 +81,7 @@ export default class StackModifiers extends Closure {
                     if (!roll.isDeterministic) {
                         for (let allDiceI = 0; allDiceI < evaluatedRoll.dice.length; allDiceI++) {
                             const die = evaluatedRoll.dice[allDiceI];
+                            if (!die) continue;
                             modifiers[modifiersI].dices.push({
                                 formula: `${die.number}d${die.faces}`,
                                 faces: die.faces,
