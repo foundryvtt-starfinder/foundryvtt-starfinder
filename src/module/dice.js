@@ -164,7 +164,7 @@ export class DiceSFRPG {
     * @param {DialogOptions}        data.dialogOptions Modal dialog options
     */
     static async d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true, rollOptions = {},
-		critical = 20, fumble = 1, chatMessage = true, onClose, dialogOptions, tags = {} }) {
+		critical = 20, fumble = 1, chatMessage = true, onClose, dialogOptions, tags = new Array() }) {
 
         flavor = `${title}${(flavor ? " <br> " + flavor : "")}`;
 
@@ -213,7 +213,7 @@ export class DiceSFRPG {
         const formula = parts.map(partMapper).join(" + ");
 
         const tree = new RollTree(options);
-        return await tree.buildRoll(formula, rollContext, async (button, rollMode, unusedFinalFormula, node, rollMods, tags, bonus = null) => {
+        return await tree.buildRoll(formula, rollContext, async (button, rollMode, unusedFinalFormula, node, rollMods, bonus = null) => {
             if (button === "cancel") {
                 if (onClose) {
                     onClose(null, null, null);
@@ -252,16 +252,6 @@ export class DiceSFRPG {
                     d.options.fumble = fumble;
                 }
             }
-
-            // if (flavor) {
-            //     const chatData = {
-            //         type: CONST.CHAT_MESSAGE_TYPES.IC,
-            //         speaker: speaker,
-            //         content: flavor
-            //     };
-
-            //     ChatMessage.create(chatData, { chatBubble: true });
-            // }
 
             const itemContext = rollContext.allContexts['item'];
             const htmlData = [{ name: "rollNotes", value: itemContext?.system?.rollNotes }];

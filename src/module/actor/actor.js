@@ -622,15 +622,25 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             ? game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitleWithProfession", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)], profession: skill.subname })
             : game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitle", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)] });
 		
-		const tags = {};
+		const tags = new Array();
 		
 		if (skill.isTrainedOnly) {
-			tags.push({name: "isTrainedOnly", text: game.i18n.format("SFRPG.SkillTrainedOnly")});
+			var t = game.i18n.format("SFRPG.SkillTrainedOnly");
+			tags.push({name: "isTrainedOnly", text: t});
 		}
 		if (skill.ranks) {
-			tags.push({name: "hasRanks", text: game.i18n.format("SFRPG.Items.Proficient")});
+			var t = game.i18n.format("SFRPG.SkillTrained");
+			tags.push({name: "hasRanks", text: t});
 		} else {
-			tags.push({name: "hasRanks", text: game.i18n.format("SFRPG.Items.NotProficient")});
+			var t = game.i18n.format("SFRPG.SkillUntrained");
+			tags.push({name: "hasRanks", text: t});
+		}
+		if (skill.value) {
+			var t = game.i18n.format("SFRPG.Items.Proficient");
+			tags.push({name: "hasProficiency", text: t});
+		} else {
+			var t = game.i18n.format("SFRPG.Items.NotProficient");
+			tags.push({name: "hasProficiency", text: t});
 		}
 		
 
