@@ -615,10 +615,24 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     async rollSkillCheck(skillId, skill, options = {}) {
         const rollContext = RollContext.createActorRollContext(this);
         const parts = [`@skills.${skillId}.mod`];
-
+		
+		
+		
         const title = skillId.includes('pro')
             ? game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitleWithProfession", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)], profession: skill.subname })
             : game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitle", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)] });
+		
+		const tags = {};
+		
+		if (skill.isTrainedOnly) {
+			tags.push({name: "isTrainedOnly", text: game.il8n.format("SFRPG.SkillTrainedOnly")});
+		}
+		if (skill.ranks) {
+			tags.push({name: "hasRanks", text: game.il8n.format("SFRPG.Items.Proficient")});
+		} else {
+			tags.push({name: "hasRanks", text: game.il8n.format("SFRPG.Items.NotProficient")});
+		}
+		
 
         return await DiceSFRPG.d20Roll({
             event: options.event,
@@ -635,7 +649,8 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
-            }
+            },
+			tags: tags
         });
     }
 
