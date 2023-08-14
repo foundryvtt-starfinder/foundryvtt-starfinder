@@ -134,7 +134,7 @@
             </ul>
 
             {{!-- Skills --}}
-            <ul class="skills-list">
+            <ul class="skills-list {{#if actor.system.options.hideUntrained }} hide-untrained {{/if}}">
                 <h3 class="skill-ranks noborder {{#if (greaterThan system.skillpoints.used system.skillpoints.max)}}red{{/if}}" data-tooltip="<strong>{{localize "SFRPG.ActorSheet.Attributes.Skills.SkillRanks"}}</strong><br>@skillpoints.used<br>@skillpoints.total<br><br>{{#each system.skillpoints.tooltip as |tip|}}{{tip}}<br>{{/each}}">
                     {{localize "SFRPG.ActorSheet.Attributes.Skills.SkillRanks"}} ({{system.skillpoints.used}} / {{system.skillpoints.max}})
                 </h3>
@@ -146,7 +146,7 @@
                     <div class="skill-header-mod">{{localize "SFRPG.SkillsHeaderModifier"}}</div>
                 </li>
                 {{#each system.skills as |skill s|}}
-                <li class="skill flexrow {{#if skill.value}}proficient{{/if}}" data-tooltip="<strong>{{skill.label}}</strong>{{#if (or skill.isTrainedOnly skill.hasArmorCheckPenalty)}}<br>(<em>{{#if skill.hasArmorCheckPenalty}}Armor Check Penalty{{/if}}{{#if (and skill.isTrainedOnly skill.hasArmorCheckPenalty)}}; {{/if}}{{#if skill.isTrainedOnly}}Trained Only{{/if}}</em>){{/if}}<br/>Modifier: @skills.{{s}}.mod<br/>Ranks: @skills.{{s}}.ranks<br/><br/>{{#each skill.tooltip as |tip|}}{{tip}}<br>{{/each}}" data-skill="{{s}}">
+                <li class="skill flexrow {{#if skill.value}}proficient{{/if}} {{#if skill.ranks}}trained{{/if}} {{#if skill.isTrainedOnly}}trained-only{{/if}}" data-tooltip="<strong>{{skill.label}}</strong>{{#if (or skill.isTrainedOnly skill.hasArmorCheckPenalty)}}<br>(<em>{{#if skill.hasArmorCheckPenalty}}Armor Check Penalty{{/if}}{{#if (and skill.isTrainedOnly skill.hasArmorCheckPenalty)}}; {{/if}}{{#if skill.isTrainedOnly}}Trained Only{{/if}}</em>){{/if}}<br/>Modifier: @skills.{{s}}.mod<br/>Ranks: @skills.{{s}}.ranks<br/><br/>{{#each skill.tooltip as |tip|}}{{tip}}<br>{{/each}}" data-skill="{{s}}">
                     <input type="hidden" name="system.skills.{{s}}.value" value="{{skill.value}}" data-dtype="Number" />
                     <a class="proficiency-toggle skill-proficiency" title="{{skill.hover}}">{{{skill.icon}}}</a>
                     <a title="Compendium" class="compendium-link" data-skill-id="{{s}}">
@@ -163,6 +163,9 @@
                 </li>
                 {{/each}}
                 <li class="flexcol skills-footer">
+				    <div class="form-group">
+						<a class="option-toggle" data-option-key="hideUntrained">{{#if actor.system.options.hideUntrained}}<i class="far fa-check-square">{{else}}<i class="far fa-square">{{/if}}</i> Hide Untrained</a>
+					</div>
                     <div class="form-group">
                         <button id="add-profession" type="button"><i class="fas fa-plus"></i> {{localize "SFRPG.AddProfessionButtonText"}}</button>
                     </div>

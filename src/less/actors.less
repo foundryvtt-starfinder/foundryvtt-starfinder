@@ -427,6 +427,12 @@
     /* ----------------------------------------- */
     /*  Skills                                   */
     /* ----------------------------------------- */
+	
+	/* If hideUntrained is selected, only show skills that are allowed untrained,
+	 * or trained skills that have at least one rank in it. */
+	ul.skills-list.hide-untrained li.skill.trained-only:not(.trained) {
+		display: none;
+	}
 
     ul.skills-list {
         flex: 0 0 192px;
@@ -439,6 +445,7 @@
         div.centered {
             text-align: center;
         }
+		
 
         li.skill {
             height: 22px;
