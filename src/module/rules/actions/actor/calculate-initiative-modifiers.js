@@ -30,7 +30,7 @@ export default function(engine) {
             return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.INITIATIVE].includes(mod.effectType);
         });
 
-        const mods = context.parameters.stackModifiers.process(filteredMods.filter(mod => {
+        const mods = filteredMods.filter(mod => {
             if (mod.modifierType === SFRPGModifierType.FORMULA) {
                 if (init.rolledMods) {
                     init.rolledMods.push({mod: mod.modifier, bonus: mod});
@@ -40,7 +40,7 @@ export default function(engine) {
                 return false;
             }
             else return true;
-        }), context, {actor: fact.actor});
+        });
 
         const mod = Object.entries(mods).reduce((prev, curr) => {
             if (curr[1] === null || curr[1].length < 1) return prev;

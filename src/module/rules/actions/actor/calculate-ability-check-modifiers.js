@@ -28,27 +28,26 @@ export default function(engine) {
         const filteredMods = modifiers.filter(mod => {
             return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.ABILITY_CHECK, SFRPGEffectType.ABILITY_CHECKS].includes(mod.effectType);
         });
+		
+		const getFilteredAbilities = (abl, ability, mod) => {
+			if (mod.modifierType === SFRPGModifierType.FORMULA) {
+				if (ability.rolledMods) {
+					ability.rolledMods.push({mod: mod.modifier, bonus: mod});
+				} else {
+					ability.rolledMods = [{mod: mod.modifier, bonus: mod}];
+				}
+				return false;
+			}
+			return mod.valueAffected === abl || mod.effectType === SFRPGEffectType.ABILITY_CHECKS;
+		};
 
         for (let [abl, ability] of Object.entries(data.abilities)) {
-            const abilityCheckMods = context.parameters.stackModifiers.process(filteredMods.filter(mod => {
-                if (mod.modifierType === SFRPGModifierType.FORMULA) {
-                    if (ability.rolledMods) {
-                        ability.rolledMods.push({mod: mod.modifier, bonus: mod});
-                    } else {
-                        ability.rolledMods = [{mod: mod.modifier, bonus: mod}];
-                    }
-                    return false;
-                }
-                if (mod.valueAffected === abl) return true;
-                if (mod.effectType === SFRPGEffectType.ABILITY_CHECKS) return true;
-
-                return false;
-            }), context, {actor: fact.actor});
+			var filteredAbilityCheckMods = filteredMods.filter(mod => getFilteredAbilities(abl, ability, mod));
 
             // this is done because the normal tooltip will be changed later on and we need this one as a "base" for dice rolls.
             ability.rollTooltip = [ ...ability.tooltip ];
 
-            const abilityCheckBonus = Object.entries(abilityCheckMods).reduce((sum, mod) => {
+            const abilityCheckBonus = Object.entries(filteredAbilityCheckMods).reduce((sum, mod) => {
                 if (mod[1] === null || mod[1].length < 1) return sum;
 
                 if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {

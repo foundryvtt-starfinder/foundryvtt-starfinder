@@ -625,12 +625,12 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 		const tags = {};
 		
 		if (skill.isTrainedOnly) {
-			tags.push({name: "isTrainedOnly", text: game.il8n.format("SFRPG.SkillTrainedOnly")});
+			tags.push({name: "isTrainedOnly", text: game.i18n.format("SFRPG.SkillTrainedOnly")});
 		}
 		if (skill.ranks) {
-			tags.push({name: "hasRanks", text: game.il8n.format("SFRPG.Items.Proficient")});
+			tags.push({name: "hasRanks", text: game.i18n.format("SFRPG.Items.Proficient")});
 		} else {
-			tags.push({name: "hasRanks", text: game.il8n.format("SFRPG.Items.NotProficient")});
+			tags.push({name: "hasRanks", text: game.i18n.format("SFRPG.Items.NotProficient")});
 		}
 		
 

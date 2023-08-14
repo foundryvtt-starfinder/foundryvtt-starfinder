@@ -51,7 +51,6 @@ export default function(engine) {
 		let filteredModifiers = fact.modifiers.filter(mod => {
 			return (mod.enabled || mod.modifierType === "formula") && mod.effectType == SFRPGEffectType.BULK;
 		});
-		filteredModifiers = context.parameters.stackModifiers.process(filteredModifiers, context, {actor: fact.actor});
 		
 		let encumbrance = {
 			value: 0,
