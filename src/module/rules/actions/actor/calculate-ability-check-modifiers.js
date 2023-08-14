@@ -12,7 +12,7 @@ export default function(engine) {
                 item.calculatedMods = [{mod: bonus.modifier, bonus: bonus}];
             }
 
-            let computedBonus = bonus.max || 0;
+            const computedBonus = bonus.max || 0;
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
@@ -28,21 +28,21 @@ export default function(engine) {
         const filteredMods = modifiers.filter(mod => {
             return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.ABILITY_CHECK, SFRPGEffectType.ABILITY_CHECKS].includes(mod.effectType);
         });
-		
-		const getFilteredAbilities = (abl, ability, mod) => {
-			if (mod.modifierType === SFRPGModifierType.FORMULA) {
-				if (ability.rolledMods) {
-					ability.rolledMods.push({mod: mod.modifier, bonus: mod});
-				} else {
-					ability.rolledMods = [{mod: mod.modifier, bonus: mod}];
-				}
-				return false;
-			}
-			return mod.valueAffected === abl || mod.effectType === SFRPGEffectType.ABILITY_CHECKS;
-		};
 
-        for (let [abl, ability] of Object.entries(data.abilities)) {
-			var filteredAbilityCheckMods = filteredMods.filter(mod => getFilteredAbilities(abl, ability, mod));
+        const getFilteredAbilities = (abl, ability, mod) => {
+            if (mod.modifierType === SFRPGModifierType.FORMULA) {
+                if (ability.rolledMods) {
+                    ability.rolledMods.push({mod: mod.modifier, bonus: mod});
+                } else {
+                    ability.rolledMods = [{mod: mod.modifier, bonus: mod}];
+                }
+                return false;
+            }
+            return mod.valueAffected === abl || mod.effectType === SFRPGEffectType.ABILITY_CHECKS;
+        };
+
+        for (const [abl, ability] of Object.entries(data.abilities)) {
+            const filteredAbilityCheckMods = filteredMods.filter(mod => getFilteredAbilities(abl, ability, mod));
 
             // this is done because the normal tooltip will be changed later on and we need this one as a "base" for dice rolls.
             ability.rollTooltip = [ ...ability.tooltip ];

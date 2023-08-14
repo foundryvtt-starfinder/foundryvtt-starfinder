@@ -25,7 +25,7 @@ export default function(engine) {
         }
 
         if (data.abilities) {
-            for (let [abl, ability] of Object.entries(data.abilities)) {
+            for (const [abl, ability] of Object.entries(data.abilities)) {
                 ability.tooltip = [];
                 ability.modifierTooltip = [];
             }
@@ -64,7 +64,7 @@ export default function(engine) {
         }
 
         if (data.skills) {
-            for (let [skl, skill] of Object.entries(data.skills)) {
+            for (const [skl, skill] of Object.entries(data.skills)) {
                 skill.tooltip = [];
             }
         }

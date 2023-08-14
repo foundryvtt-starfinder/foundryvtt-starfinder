@@ -50,11 +50,11 @@ export default function(engine) {
 
             const baseValue = Number(data.attributes.speed[speedKey].base);
 
-            let filteredModifiers = fact.modifiers.filter(mod => {
+            const filteredModifiers = fact.modifiers.filter(mod => {
                 return (mod.enabled || mod.modifierType === "formula") && (mod.effectType === SFRPGEffectType.ALL_SPEEDS || (mod.effectType === SFRPGEffectType.SPECIFIC_SPEED && mod.valueAffected === speedKey));
             });
 
-            let filteredMultiplyModifiers = fact.modifiers.filter(mod => {
+            const filteredMultiplyModifiers = fact.modifiers.filter(mod => {
                 return (mod.enabled || mod.modifierType === "formula") && mod.effectType === SFRPGEffectType.MULTIPLY_ALL_SPEEDS;
             });
 

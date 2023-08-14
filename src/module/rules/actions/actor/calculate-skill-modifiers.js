@@ -12,7 +12,7 @@ export default function(engine) {
             } else {
                 item.calculatedMods = [{mod: bonus.modifier, bonus: bonus}];
             }
-            let computedBonus = bonus.max || 0;
+            const computedBonus = bonus.max || 0;
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
@@ -30,43 +30,42 @@ export default function(engine) {
         });
 
         // Skills
-		const getFilteredSkills = (skl, skill, mod) => {
-			if (mod.modifierType === SFRPGModifierType.FORMULA 
+        const getFilteredSkills = (skl, skill, mod) => {
+            if (mod.modifierType === SFRPGModifierType.FORMULA
 				&& (
-					mod.effectType === SFRPGEffectType.ALL_SKILLS
+				    mod.effectType === SFRPGEffectType.ALL_SKILLS
                     || mod.effectType === SFRPGEffectType.SKILL && skl === mod.valueAffected
                     || mod.effectType === SFRPGEffectType.ABILITY_SKILLS && skill.ability === mod.valueAffected
 				)
-			) 
-			{
-				if (skill.rolledMods) {
-					skill.rolledMods.push({mod: mod.modifier, bonus: mod});
-				} else {
-					skill.rolledMods = [{mod: mod.modifier, bonus: mod}];
-				}
-				return false;
-			}
-			
-			return (mod.effectType === SFRPGEffectType.ALL_SKILLS) 
-				|| (mod.effectType === SFRPGEffectType.SKILL && skl === mod.valueAffected) 
-				|| (mod.effectType === SFRPGEffectType.ABILITY_SKILLS && skill.ability === mod.valueAffected);
-		};
-		
-		
-        for (let [skl, skill] of Object.entries(skills)) {
-            skill.rolledMods = null;
-			
-			//Imper1um 08/14/2023: 
-			//	I removed .process from this system.
-			//	What was happening is that the filter system was looping... infinitely. This is because
-			//  stackModifiers.process was calling calculate-skill-modifiers.
-			//  Please note you *CANNOT* call stackModifiers.process INSIDE of a processor, you will cause an infinite loop.
-			//  This has existed for years, but its been ignored by one problem or another.
-			//  Anyways, calling the .process from here is useless. By time it's gotten here, all of the mods have been
-			//  properly processed (at least in the correct order), so there's no reason to ask the system to call it again.
-			var skillFilteredMods = filteredMods.filter(mod => getFilteredSkills(skl, skill, mod));
+            )
+            {
+                if (skill.rolledMods) {
+                    skill.rolledMods.push({mod: mod.modifier, bonus: mod});
+                } else {
+                    skill.rolledMods = [{mod: mod.modifier, bonus: mod}];
+                }
+                return false;
+            }
 
-            let accumulator = Object.entries(skillFilteredMods).reduce((sum, mod) => {
+            return (mod.effectType === SFRPGEffectType.ALL_SKILLS)
+				|| (mod.effectType === SFRPGEffectType.SKILL && skl === mod.valueAffected)
+				|| (mod.effectType === SFRPGEffectType.ABILITY_SKILLS && skill.ability === mod.valueAffected);
+        };
+
+        for (const [skl, skill] of Object.entries(skills)) {
+            skill.rolledMods = null;
+
+            // Imper1um 08/14/2023:
+            //	I removed .process from this system.
+            //	What was happening is that the filter system was looping... infinitely. This is because
+            //  stackModifiers.process was calling calculate-skill-modifiers.
+            //  Please note you *CANNOT* call stackModifiers.process INSIDE of a processor, you will cause an infinite loop.
+            //  This has existed for years, but its been ignored by one problem or another.
+            //  Anyways, calling the .process from here is useless. By time it's gotten here, all of the mods have been
+            //  properly processed (at least in the correct order), so there's no reason to ask the system to call it again.
+            const skillFilteredMods = filteredMods.filter(mod => getFilteredSkills(skl, skill, mod));
+
+            const accumulator = Object.entries(skillFilteredMods).reduce((sum, mod) => {
                 if (mod[1] === null || mod[1].length < 1) return sum;
 
                 if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {

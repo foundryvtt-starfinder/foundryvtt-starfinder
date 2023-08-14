@@ -24,19 +24,19 @@ export default function(engine) {
 
             let saveMod = 0;
             switch (bonus.valueAffected) {
-            case "highest":
-                if (item.bonus === highest.bonus) {
+                case "highest":
+                    if (item.bonus === highest.bonus) {
+                        saveMod = computedBonus;
+                    }
+                    break;
+                case "lowest":
+                    if (item.bonus === lowest.bonus) {
+                        saveMod = computedBonus;
+                    }
+                    break;
+                default:
                     saveMod = computedBonus;
-                }
-                break;
-            case "lowest":
-                if (item.bonus === lowest.bonus) {
-                    saveMod = computedBonus;
-                }
-                break;
-            default:
-                saveMod = computedBonus;
-                break;
+                    break;
             }
             computedBonus = saveMod;
 
@@ -100,7 +100,7 @@ export default function(engine) {
             return false;
         });
 
-        let fortMod = Object.entries(fortMods).reduce((sum, mod) => {
+        const fortMod = Object.entries(fortMods).reduce((sum, mod) => {
             if (mod[1] === null || mod[1].length < 1) return sum;
 
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
@@ -114,7 +114,7 @@ export default function(engine) {
             return sum;
         }, 0);
 
-        let reflexMod = Object.entries(reflexMods).reduce((sum, mod) => {
+        const reflexMod = Object.entries(reflexMods).reduce((sum, mod) => {
             if (mod[1] === null || mod[1].length < 1) return sum;
 
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
@@ -128,7 +128,7 @@ export default function(engine) {
             return sum;
         }, 0);
 
-        let willMod = Object.entries(willMods).reduce((sum, mod) => {
+        const willMod = Object.entries(willMods).reduce((sum, mod) => {
             if (mod[1] === null || mod[1].length < 1) return sum;
 
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
