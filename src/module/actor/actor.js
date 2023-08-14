@@ -1085,8 +1085,10 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         }
         if (stamina) {
             const oldStamina = old.attributes.sp;
-            const delta = this.getDelta('value', stamina, oldStamina);
-            if (delta !== 0) diff.stamina = delta;
+            if (oldStamina) { // NPCs may not have stamina
+                const delta = this.getDelta('value', stamina, oldStamina);
+                if (delta !== 0) diff.stamina = delta;
+            }
         }
         if (shields) {
             const oldShields = old.quadrants;
