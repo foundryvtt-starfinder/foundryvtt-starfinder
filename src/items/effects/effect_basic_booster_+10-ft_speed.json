@@ -1,0 +1,63 @@
+{
+  "_id": "voLFsMAZu7COY6qZ",
+  "name": "Effect: Basic Booster +10-ft speed",
+  "type": "effect",
+  "img": "systems/sfrpg/icons/equipment/technological%20items/sprayflesh.webp",
+  "system": {
+    "type": "effect",
+    "abilityMods": {
+      "parts": []
+    },
+    "activeDuration": {
+      "activationTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "origin"
+      },
+      "unit": "round",
+      "value": "@origin.actor.classes.biohacker.keyAbilityMod"
+    },
+    "context": {
+      "origin": {
+        "actorUuid": "",
+        "itemUuid": ""
+      }
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.2BjD4ocSE0BL5DcN]{Biohacks (Ex)}</p>\n<p>A basic booster biohack aids a creature in one manner or another. The effect lasts for a number of rounds equal to your key ability score modifier (minimum 1 round) unless it states otherwise. You begin play knowing this basic booster biohack; when you use it, select an effect:</p>\n<p>The target gains a +10-foot enhancement bonus to their speed. If the creature has more than one movement type, choose one to receive this bonus.</p>\n<p><em>Select speed type in the modifier's tab</em></p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "d0458ba3-d02d-43b7-8895-de93ad90db48",
+        "name": "Effect: Basic Booster +10-ft speed",
+        "type": "enhancement",
+        "condition": "",
+        "effectType": "specific-speed",
+        "enabled": true,
+        "max": 10,
+        "modifier": "10",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "land"
+      }
+    ],
+    "requirements": "1st Level Biohacker",
+    "showOnToken": true,
+    "source": "COM pg. 41"
+  }
+}

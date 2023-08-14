@@ -1,0 +1,63 @@
+{
+  "_id": "YAQumXbZgPpLjV5R",
+  "name": "Effect: Basic Inhibitor -2 AC",
+  "type": "effect",
+  "img": "systems/sfrpg/icons/equipment/technological%20items/sprayflesh.webp",
+  "system": {
+    "type": "effect",
+    "abilityMods": {
+      "parts": []
+    },
+    "activeDuration": {
+      "activationTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "origin"
+      },
+      "unit": "round",
+      "value": "(3 + @origin.actor.classes.biohacker.keyAbilityMod)"
+    },
+    "context": {
+      "origin": {
+        "actorUuid": "",
+        "itemUuid": ""
+      }
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.2BjD4ocSE0BL5DcN]{Biohacks (Ex)}</p>\n<p>A basic inhibitor biohack hinders a creature’s physiology or material function. The effect of an inhibitor lasts for a number of rounds equal to 3 + your key ability score modifier (minimum 1 round) unless it states otherwise. You begin play knowing this basic inhibitor biohack; when you use it, select an effect:</p>\n<p>The target takes a –2 penalty to AC.</p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "d0458ba3-d02d-43b7-8895-de93ad90db48",
+        "name": "Effect: Basic Inhibitor -2 AC",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": true,
+        "max": -2,
+        "modifier": "-2",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "both"
+      }
+    ],
+    "requirements": "1st Level Biohacker",
+    "showOnToken": true,
+    "source": "COM pg. 41"
+  }
+}
