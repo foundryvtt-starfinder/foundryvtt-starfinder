@@ -60,7 +60,14 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
         Object.defineProperty(this, "_id", { value: this._id, writable: true, configurable: true });
 
         // Calculate max, if not already
-        this.max ||= Roll.create(this.modifier.toString()).evaluate({ maximize: true }).total;
+        try {
+            if (!this.max) {
+                const roll = Roll.create(this.modifier.toString());
+                this.max = roll.evaluate({maximize: true}).total;
+            }
+        } catch {
+            this.max = 0;
+        }
     }
 
     static defineSchema() {

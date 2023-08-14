@@ -118,7 +118,7 @@ export const registerSystemSettings = function() {
         onChange: () => ui.combat.render(false)
     });
 
-    for (let combatType of SFRPG.combatTypes) {
+    for (const combatType of SFRPG.combatTypes) {
         const capitalizedCombatType = combatType[0].toUpperCase() + combatType.slice(1);
         game.settings.register("sfrpg", `${combatType}ChatCards`, {
             name: `SFRPG.Settings.CombatCards.${capitalizedCombatType}Name`,
@@ -194,6 +194,15 @@ export const registerSystemSettings = function() {
     game.settings.register("sfrpg", "alwaysShowQuantity", {
         name: "SFRPG.Settings.AlwaysShowQuantity.Name",
         hint: "SFRPG.Settings.AlwaysShowQuantity.Hint",
+        scope: "client",
+        config: true,
+        default: false,
+        type: Boolean
+    });
+
+    game.settings.register("sfrpg", "warnInvalidRollData", {
+        name: "SFRPG.Settings.WarnInvalidRollData.Name",
+        hint: "SFRPG.Settings.WarnInvalidRollData.Hint",
         scope: "client",
         config: true,
         default: false,
