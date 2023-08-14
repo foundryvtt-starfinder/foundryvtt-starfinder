@@ -164,7 +164,7 @@ export class DiceSFRPG {
     * @param {DialogOptions}        data.dialogOptions Modal dialog options
     */
     static async d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true, rollOptions = {},
-        critical = 20, fumble = 1, chatMessage = true, onClose, dialogOptions }) {
+		critical = 20, fumble = 1, chatMessage = true, onClose, dialogOptions, tags = new Array() }) {
 
         flavor = `${title}${(flavor ? " <br> " + flavor : "")}`;
 
@@ -237,7 +237,6 @@ export class DiceSFRPG {
             finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
             const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
 
-            const tags = [];
             if (rollOptions?.actionTarget) {
                 tags.push({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget: rollOptions.actionTargetSource[rollOptions.actionTarget]}) });
             }
@@ -253,16 +252,6 @@ export class DiceSFRPG {
                     d.options.fumble = fumble;
                 }
             }
-
-            // if (flavor) {
-            //     const chatData = {
-            //         type: CONST.CHAT_MESSAGE_TYPES.IC,
-            //         speaker: speaker,
-            //         content: flavor
-            //     };
-
-            //     ChatMessage.create(chatData, { chatBubble: true });
-            // }
 
             const itemContext = rollContext.allContexts['item'];
             const htmlData = [{ name: "rollNotes", value: itemContext?.system?.rollNotes }];
@@ -280,7 +269,8 @@ export class DiceSFRPG {
                     htmlData: htmlData,
                     rollType: "normal",
                     rollOptions: rollOptions,
-                    rollDices: finalFormula.rollDices
+                    rollDices: finalFormula.rollDices,
+					tags: tags
                 };
 
                 try {
@@ -299,7 +289,8 @@ export class DiceSFRPG {
                     roll: roll,
                     type: CONST.CHAT_MESSAGE_TYPES.ROLL,
                     sound: CONFIG.sounds.dice,
-                    flags: {rollOptions: rollOptions}
+                    flags: {rollOptions: rollOptions},
+					tags: tags
                 };
 
                 messageData.content = await roll.render({ htmlData: htmlData, customTooltip: finalFormula.rollDices });
