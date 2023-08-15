@@ -4,7 +4,7 @@ export class SFRPGTokenHUD extends TokenHUD {
      * @override
      * Calls setCondition from the SFRPG actor
      * @param {Event} event
-     * @param {any} param1 contains overlay boolean
+     * @param {object} options contains overlay boolean
      * @returns {Boolean} the new enabled state of the condition
      */
     async _onToggleEffect(event, { overlay = false } = {}) {
@@ -16,7 +16,14 @@ export class SFRPGTokenHUD extends TokenHUD {
 
         if (img.dataset.statusId && this.object?.actor) {
             const conditionId = img.dataset.statusId;
+
+            if (overlay) {
+                const name = CONFIG.statusEffects.find(i => i.id === conditionId).label || conditionId;
+                await this.object.toggleEffect({id: conditionId, name, icon: img.src}, {overlay, active: !isEnabled});
+            }
+
             await this.object.actor.setCondition(conditionId, !isEnabled);
+
         }
 
         return !isEnabled;
@@ -28,7 +35,7 @@ export class SFRPGTokenHUD extends TokenHUD {
      */
     refreshStatusIcons() {
         const effects = this.element.find(".status-effects")[0];
-        const statuses = this.object.actor?.system.conditions;
+        const statuses = this.object.actor?.system?.conditions;
         if (!statuses) return;
 
         const images = $("img.effect-control", effects);
@@ -104,7 +111,7 @@ export class SFRPGTokenHUD extends TokenHUD {
      */
     static async onRemoveAllConditions(event) {
         event.preventDefault();
-        const statuses = this.object.actor?.system.conditions;
+        const statuses = this.object.actor?.system?.conditions;
         if (!statuses) return;
 
         const promises = [];
@@ -113,6 +120,10 @@ export class SFRPGTokenHUD extends TokenHUD {
             if (enabled) {
                 promises.push(this.object.actor.setCondition(condition, false, {overlay: false}));
             }
+        }
+
+        for (const effect of this.object.actor.effects) {
+            promises.push(effect.delete());
         }
 
         await Promise.all(promises);
