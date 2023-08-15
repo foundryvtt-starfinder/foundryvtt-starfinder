@@ -89,7 +89,7 @@ export class SFRPGDamage {
     static createDamage(damageAmount, damageTypes = [], isCritical = false, properties = [], options = {}) {
         const parsedDamageTypes = [];
         if (damageTypes.constructor === String) {
-            const splitTypes = damageTypes.trim().split(/([^,;])+/gi);
+            const splitTypes = damageTypes.trim().split(/([,;])+/gi);
             for (const type of splitTypes) {
                 if (type === ',' || type === ';') {
                     continue;
