@@ -1343,8 +1343,8 @@ SFRPG.modifierTypes = {
     "insight": "SFRPG.ModifierTypeInsight",
     "luck": "SFRPG.ModifierTypeLuck",
     "morale": "SFRPG.ModifierTypeMorale",
-    "racial": "SFRPG.ModifierTypeRacial",
     "resistance": "SFRPG.ModifierTypeResistance",
+    "racial": "SFRPG.ModifierTypeRacial",
     "untyped": "SFRPG.ModifierTypeUntyped"
 };
 
