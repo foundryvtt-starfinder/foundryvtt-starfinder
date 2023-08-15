@@ -1020,9 +1020,14 @@ export class ActorSheetSFRPG extends ActorSheet {
             Hooks.callAll("renderItemSummary", this, div, {}); // Event listeners need to be added to this HTML.
 
             const props = $(`<div class="item-properties"></div>`);
-            chatData.properties.forEach(p => props.append(
-                `<span class="tag" data-tooltip="${p.tooltip || p.title}"><strong>${p.title ? p.title + ":" : ""} </strong>${p.name}</span>`
-            ));
+            chatData.properties.forEach(p => {
+                let tooltipValue = p.tooltip || p.title || "";
+                if (tooltipValue) tooltipValue = `data-tooltip="${tooltipValue}"`;
+                props.append(
+                    `<span class="tag" ${tooltipValue}><strong>${p.title ? p.title + ":" : ""} </strong>${p.name}</span>`
+                );
+            }
+            );
 
             div.append(props);
             li.append(div.hide());
@@ -1334,8 +1339,12 @@ export class ActorSheetSFRPG extends ActorSheet {
 
                     const formula = modifier.modifier;
                     if (formula) {
-                        const roll = Roll.create(formula, targetActor.actor.system);
-                        modifier.max = await roll.evaluate({maximize: true}).total;
+                        try {
+                            const roll = Roll.create(formula, targetActor.actor.system);
+                            modifier.max = await roll.evaluate({maximize: true}).total;
+                        } catch {
+                            modifier.max = 0;
+                        }
                     } else {
                         modifier.max = 0;
                     }

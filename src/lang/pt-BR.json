@@ -468,13 +468,18 @@
                 "Accept": "Accept",
                 "ApplyDamage": "Apply Damage",
                 "ApplyHealing": "Apply Healing",
+                "ApplyHealingTo": "Apply Healing To",
+                "BypassStamina": "BypassStamina",
                 "DamageAndAHalf": "1.5x Damage",
                 "DoubleDamage": "Double Damage",
+                "HP": "HP (default)",
+                "HPAndSP": "Both HP and SP",
                 "HalfDamage": "Half Damage",
                 "ModifyDamage": "Modify Damage",
                 "ModifyDamageText": "Input an number to modify the damage amount by. This is applied after any multiplication.",
                 "NoDamageModifier": "No damage modifier applied.",
-                "NoToken": "Cannot apply: No token selected!"
+                "NoToken": "Cannot apply: No token selected!",
+                "SP": "SP"
             },
             "ItemAction": {
                 "Check": "Check",
@@ -724,6 +729,7 @@
             "Drugs": "Drugas",
             "FoodDrink": "Comida e Bebida",
             "Medicine": "Medicinais",
+            "Other": "Other",
             "Poison": "Venenos",
             "Serum": "Soros",
             "SpellGem": "Gemas de Magia"
@@ -775,6 +781,10 @@
                     "Or": "or"
                 },
                 "Piercing": "Perfuração",
+                "PrimaryDamageGroup": "Primary Damage Group",
+                "PrimaryDamageGroupTooltip": "Damage sections that are a member of the primary damage group will all be marked as primary. You will still only be able to choose one damage section per group when making a damage roll, and as such modifiers will correctly only be applied once.",
+                "PrimaryDamageSection": "Primary Damage Section",
+                "PrimaryDamageSectionTooltip": "Modifiers that affect this weapon's damage will only apply to the primary damage section. Non-primary sections will simply roll their formula. A weapon must have exactly one primary damage section.",
                 "Radiation": "Radiação",
                 "Slashing": "Cortante",
                 "Sonic": "Sonico",
@@ -1948,6 +1958,10 @@
         "ModifierEffectTypeTooltip": "Isso identifica o atributo geral ou atributos que são afetados pelo modificador",
         "ModifierEnabledLabel": "Habilitado",
         "ModifierEnabledTooltip": "Determina se o modificador será considerado quando os modificadores de atributo forem calculados",
+        "ModifierLimitToContainer": "Parent Item's Container",
+        "ModifierLimitToLabel": "Limit To",
+        "ModifierLimitToParent": "Parent Item",
+        "ModifierLimitToTooltip": "<strong>Limit To</strong><br><br><strong>None</strong><p>The modifier will be applied to applicable items as normal.</p><strong>Parent Item</strong><p>The modifier will only apply to the item this modifier is on.</p><strong>Parent Item's Container</strong><p>The modifier will only apply to the container item that contains the item this modifier is on.</p>",
         "ModifierModifierLabel": "Modificador",
         "ModifierModifierTooltip": "O valor usado para modificar com.",
         "ModifierModifierTypeLabel": "Tipo Modificador",
@@ -2364,6 +2378,10 @@
                 "Hint": "Se deve usar o método de medição do Starfinder para modelos AOE versus o método padrão do Foundry VTT",
                 "Name": "Usar modelos Starfinder AOE"
             },
+            "WarnInvalidRollData": {
+                "Hint": "When checked, warnings will be displayed when modifiers contain invalid roll formulas. This can result in warning spam, if, for example, you have a class feature but not the corresponding class item itself.",
+                "Name": "Warn on invalid roll formulas"
+            },
             "WorldSchemaVersion": {
                 "Hint": "Registra a versão do esquema de dados para o sistema Starfinder. AVISO: não edite este valor a menos que você saiba o que está fazendo!",
                 "Name": "Versão do esquema de dados Starfinder"
@@ -2438,12 +2456,14 @@
             },
             "StarshipWeaponProperties": {
                 "Anchoring": "Ancoragem",
+                "Antimagic": "Antimagic",
                 "Array": "Array",
                 "Automated": "Automatizado",
                 "Broad": "Broad Arc",
                 "Bugging": "Bugging",
                 "Burrowing": "Burrowing",
                 "Buster": "Buster",
+                "Cacophonous": "Cacophonous",
                 "Connecting": "Conectando",
                 "DeathField": "Campo da morte",
                 "Deployed": "Implantado",
@@ -2486,6 +2506,7 @@
                 "Teleportation": "Teleportação",
                 "Tractor": "Raio Trator",
                 "Transposition": "Transposição",
+                "Unerring": "Unerring",
                 "VandalDrones": "Vandal Drones",
                 "Volatile": "Valatil",
                 "Vortex": "Vórtice"

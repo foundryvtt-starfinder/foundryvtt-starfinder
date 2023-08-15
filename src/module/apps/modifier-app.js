@@ -1,3 +1,4 @@
+import SFRPGModifier from "../modifiers/modifier.js";
 import { SFRPGEffectType } from "../modifiers/types.js";
 
 /**
@@ -314,7 +315,7 @@ export default class SFRPGModifierApplication extends FormApplication {
     async _updateModifierData(formData) {
         const modifiers = this.target.system.modifiers;
         const index = modifiers.findIndex(mod => mod._id === this.modifier._id);
-        const modifier = modifiers[index];
+        let modifier = modifiers[index];
 
         const formula = String(formData["modifier"] || "0");
         if (formula) {
@@ -322,13 +323,15 @@ export default class SFRPGModifierApplication extends FormApplication {
                 const roll = Roll.create(formula, this.owningActor?.system || this.target.system);
                 modifier.max = await roll.evaluate({ maximize: true }).total;
             } catch (err) {
-                ui.notifications.error(err);
+                ui.notifications.warn(err);
+                modifier.max = 0;
             }
         } else {
             modifier.max = 0;
         }
 
         const merged = mergeObject(modifier, formData);
+        if (!(modifier instanceof SFRPGModifier)) modifier = new SFRPGModifier(modifier);
         modifier.updateSource(merged);
         modifiers[index] = modifier;
 

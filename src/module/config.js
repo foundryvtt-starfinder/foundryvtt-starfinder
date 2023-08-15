@@ -1071,7 +1071,8 @@ SFRPG.consumableTypes = {
     "drugs"    : "SFRPG.ConsumableTypes.Drugs",
     "medicne"  : "SFRPG.ConsumableTypes.Medicine",
     "poison"   : "SFRPG.ConsumableTypes.Poison",
-    "foodDrink": "SFRPG.ConsumableTypes.FoodDrink"
+    "foodDrink": "SFRPG.ConsumableTypes.FoodDrink",
+    "other": "SFRPG.ConsumableTypes.Other"
 };
 
 SFRPG.augmentationSystems = {
@@ -1169,12 +1170,14 @@ SFRPG.starshipWeaponClass = {
 
 SFRPG.starshipWeaponProperties = {
     "anchoring" : "SFRPG.ShipSystems.StarshipWeaponProperties.Anchoring", // SOM
+    "antimagic" : "SFRPG.ShipSystems.StarshipWeaponProperties.Antimagic", // PoC
     "array"     : "SFRPG.ShipSystems.StarshipWeaponProperties.Array", // CRB
     "automated" : "SFRPG.ShipSystems.StarshipWeaponProperties.Automated", // SOM
     "broad"     : "SFRPG.ShipSystems.StarshipWeaponProperties.Broad", // CRB
     "bugging"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Bugging", // Near Space
     "burrowing" : "SFRPG.ShipSystems.StarshipWeaponProperties.Burrowing", // Pact Worlds
     "buster"    : "SFRPG.ShipSystems.StarshipWeaponProperties.Buster", // SOM
+    "cacophonous": "SFRPG.ShipSystems.StarshipWeaponProperties.Cacophonous", // PoC
     "connecting": "SFRPG.ShipSystems.StarshipWeaponProperties.Connecting", // The Last Refuge
     "deathField": "SFRPG.ShipSystems.StarshipWeaponProperties.DeathField", // AA 3
     "deployed"  : "SFRPG.ShipSystems.StarshipWeaponProperties.Deployed", // SOM
@@ -1217,6 +1220,7 @@ SFRPG.starshipWeaponProperties = {
     "teleportation": "SFRPG.ShipSystems.StarshipWeaponProperties.Teleportation", // SOM
     "tractor"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Tractor", // CRB
     "transposition": "SFRPG.ShipSystems.StarshipWeaponProperties.Transposition", // SOM
+    "unerring" : "SFRPG.ShipSystems.StarshipWeaponProperties.Unerring", // PoC
     "vandalDrones": "SFRPG.ShipSystems.StarshipWeaponProperties.VandalDrones", // AA 3
     "volatile": "SFRPG.ShipSystems.StarshipWeaponProperties.Volatile", // Empire of Bones
     "vortex"    : "SFRPG.ShipSystems.StarshipWeaponProperties.Vortex" // CRB
@@ -1339,8 +1343,8 @@ SFRPG.modifierTypes = {
     "insight": "SFRPG.ModifierTypeInsight",
     "luck": "SFRPG.ModifierTypeLuck",
     "morale": "SFRPG.ModifierTypeMorale",
-    "racial": "SFRPG.ModifierTypeRacial",
     "resistance": "SFRPG.ModifierTypeResistance",
+    "racial": "SFRPG.ModifierTypeRacial",
     "untyped": "SFRPG.ModifierTypeUntyped"
 };
 

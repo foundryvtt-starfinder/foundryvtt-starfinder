@@ -468,13 +468,18 @@
                 "Accept": "Accept",
                 "ApplyDamage": "Apply Damage",
                 "ApplyHealing": "Apply Healing",
+                "ApplyHealingTo": "Apply Healing To",
+                "BypassStamina": "BypassStamina",
                 "DamageAndAHalf": "1.5x Damage",
                 "DoubleDamage": "Double Damage",
+                "HP": "HP (default)",
+                "HPAndSP": "Both HP and SP",
                 "HalfDamage": "Half Damage",
                 "ModifyDamage": "Modify Damage",
                 "ModifyDamageText": "Input an number to modify the damage amount by. This is applied after any multiplication.",
                 "NoDamageModifier": "No damage modifier applied.",
-                "NoToken": "Cannot apply: No token selected!"
+                "NoToken": "Cannot apply: No token selected!",
+                "SP": "SP"
             },
             "ItemAction": {
                 "Check": "Check",
@@ -724,6 +729,7 @@
             "Drugs": "Drugs",
             "FoodDrink": "Food and drink",
             "Medicine": "Medicinals",
+            "Other": "Other",
             "Poison": "Poisons",
             "Serum": "Serums",
             "SpellGem": "Spell Gems"
@@ -775,6 +781,10 @@
                     "Or": "or"
                 },
                 "Piercing": "[刺突]",
+                "PrimaryDamageGroup": "Primary Damage Group",
+                "PrimaryDamageGroupTooltip": "Damage sections that are a member of the primary damage group will all be marked as primary. You will still only be able to choose one damage section per group when making a damage roll, and as such modifiers will correctly only be applied once.",
+                "PrimaryDamageSection": "Primary Damage Section",
+                "PrimaryDamageSectionTooltip": "Modifiers that affect this weapon's damage will only apply to the primary damage section. Non-primary sections will simply roll their formula. A weapon must have exactly one primary damage section.",
                 "Radiation": "Radiation",
                 "Slashing": "[斬撃]",
                 "Sonic": "[音波]",
@@ -1948,6 +1958,10 @@
         "ModifierEffectTypeTooltip": "修正値の影響を受ける一般的な特性を識別します",
         "ModifierEnabledLabel": "有効",
         "ModifierEnabledTooltip": "特性修正値が計算されるときに修正値が考慮されるかどうかを決定します",
+        "ModifierLimitToContainer": "Parent Item's Container",
+        "ModifierLimitToLabel": "Limit To",
+        "ModifierLimitToParent": "Parent Item",
+        "ModifierLimitToTooltip": "<strong>Limit To</strong><br><br><strong>None</strong><p>The modifier will be applied to applicable items as normal.</p><strong>Parent Item</strong><p>The modifier will only apply to the item this modifier is on.</p><strong>Parent Item's Container</strong><p>The modifier will only apply to the container item that contains the item this modifier is on.</p>",
         "ModifierModifierLabel": "修正値",
         "ModifierModifierTooltip": "変更に使用する値",
         "ModifierModifierTypeLabel": "修正値タイプ",
@@ -2364,6 +2378,10 @@
                 "Hint": "Starfinderの測定方法にAOEテンプレートを使用するか、オンセ工房 FoundryVTTのデフォルトの方法を使用するか",
                 "Name": "Starfinder AOEテンプレートを使用するs"
             },
+            "WarnInvalidRollData": {
+                "Hint": "When checked, warnings will be displayed when modifiers contain invalid roll formulas. This can result in warning spam, if, for example, you have a class feature but not the corresponding class item itself.",
+                "Name": "Warn on invalid roll formulas"
+            },
             "WorldSchemaVersion": {
                 "Hint": "Starfinderシステムのデータ･スキーマ･バージョンを記録します。警告：何をしているかわからない場合は、この値を編集しないでください。",
                 "Name": "Starfinderデータ･スキーマ･バージョン"
@@ -2438,12 +2456,14 @@
             },
             "StarshipWeaponProperties": {
                 "Anchoring": "Anchoring",
+                "Antimagic": "Antimagic",
                 "Array": "Array",
                 "Automated": "Automated",
                 "Broad": "Broad Arc",
                 "Bugging": "Bugging",
                 "Burrowing": "Burrowing",
                 "Buster": "Buster",
+                "Cacophonous": "Cacophonous",
                 "Connecting": "Connecting",
                 "DeathField": "Death Field",
                 "Deployed": "Deployed",
@@ -2486,6 +2506,7 @@
                 "Teleportation": "Teleportation",
                 "Tractor": "Tractor Beam",
                 "Transposition": "Transposition",
+                "Unerring": "Unerring",
                 "VandalDrones": "Vandal Drones",
                 "Volatile": "Volatile",
                 "Vortex": "Vortex"

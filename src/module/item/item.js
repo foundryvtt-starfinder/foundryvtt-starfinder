@@ -186,9 +186,45 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Item Actions
         if (data.hasOwnProperty("actionType")) {
             // Damage
-            const dam = data.damage || {};
-            if (dam.parts) labels.damage = dam.parts.map(d => d[0]).join(" + ")
-                .replace(/\+ -/g, "- ");
+            const damage = data.damage || {};
+            const itemParts = damage.parts;
+            if (itemParts.length > 0) {
+                labels.damage = damage.parts
+                    .map(d => d[0])
+                    .join(" + ")
+                    .replace(/\+ -/g, "- ");
+
+                // There must always be one primary damage group or section.
+                // If the primary damage group is set, mark all of the members of that group as primary.
+                const allGroups = itemParts.reduce((arr, part) => {
+                    if (!!part.group || part.group === 0) arr.push(part.group);
+                    return arr;
+                }, []);
+                if (Number.isInteger(data.damage.primaryGroup) && allGroups.length > 0) {
+                    // Set primary group to first group if no parts on the item are in the group
+                    if (!(allGroups.includes(data.damage.primaryGroup)))
+                        data.damage.primaryGroup = allGroups.sort()[0];
+
+                    for (const part of itemParts) {
+                        if (part.group === data.damage.primaryGroup) part.isPrimarySection = true;
+                        else part.isPrimarySection = false;
+                    }
+
+                // If the primary group is blank, set the 1st damage section, and any parts in the same group, as primary.
+                } else if (!(itemParts.some(part => part.isPrimarySection))) {
+                    itemParts[0].isPrimarySection = true;
+                    const primaryGroup = itemParts[0].group ?? null;
+
+                    if (primaryGroup !== null) {
+                        for (const part of itemParts) {
+                            if (part.group === primaryGroup) part.isPrimarySection = true;
+                            else part.isPrimarySection = false;
+                        }
+                    }
+                }
+
+            }
+
         }
 
         // Assign labels and return the Item
@@ -655,18 +691,18 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      * @param {Object} props The items properties
      */
     _upgradeChatData(data, labels, props) {
-        let armorType = "";
+        let allowedArmorType = "";
 
-        if (data.armorType === 'any') {
-            armorType = "Any";
+        if (data.allowedArmorType === 'any') {
+            allowedArmorType = game.i18n.localize("SFRPG.Any");
         } else {
-            armorType = CONFIG.SFRPG.armorTypes[data.armorType];
+            allowedArmorType = CONFIG.SFRPG.allowedArmorTypes[data.allowedArmorType];
         }
 
         props.push(
             {name: game.i18n.localize("TYPES.Item.upgrade"), tooltip: null},
             data.slots ? {name: `${game.i18n.localize("SFRPG.Items.Upgrade.Slots")} ${data.slots}`, tooltip: null} : null,
-            {name: `${game.i18n.localize("SFRPG.Items.Upgrade.AllowedArmorType")}: ${armorType}`, tooltip: null}
+            {name: `${game.i18n.localize("SFRPG.Items.Upgrade.AllowedArmorType")}: ${allowedArmorType}`, tooltip: null}
         );
     }
 
@@ -1212,6 +1248,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             if (bonus.modifierType === "damageSection") {
                 parts.push({
                     isDamageSection: true,
+                    enabled: bonus.enabled,
                     name: bonus.name,
                     explanation: bonus.name,
                     formula: bonus.modifier,
@@ -1355,7 +1392,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                     return false;
                 }
             }
-            return (mod.enabled || mod.modifierType === "formula");
+            return (mod.enabled || ["formula", "damageSection"].includes(mod.modifierType));
         });
 
         return modifiers;
