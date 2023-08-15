@@ -1,3 +1,27 @@
+# v0.25.2
+This is another quick hotfix to address some issues raised by the new stricter modifier schema, as well as a few other changes picked up in the mean time.
+
+# Bug fixes
+- Fully implement modifier type "Resistance" to stop DataModel errors
+- Re-implement right-click token HUD to overlay
+- Fix Sonic resistance not working
+- Remove redundant logic from encumbrance calculation
+
+# Data entry
+- Add effect for Get 'Em
+
+# v0.25.1
+This hotfix addresses a few issues with unlinked actors, because of course they were the issue.
+
+# Core system improvements
+- Added a toggle for invalid roll formula warnings, defaulted to off.
+# Bugfixes
+- Fix modifiers on unlinked tokens causing a stack overflow
+- Fix importing NPCs failing
+- Fix hazards breaking the canvas
+- Fix XP wrapping at high levels
+- Make several modifier calculations fail more gracefully
+
 # v0.25.0 - The other one that got away
 The very cool features currently sat on the development branch are here! Hopefully they're well worth the wait.
 
