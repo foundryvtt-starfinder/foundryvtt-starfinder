@@ -19,9 +19,10 @@
     "ammunitionType": "charge",
     "area": {
       "effect": "",
-      "shape": "",
-      "units": "none",
-      "value": null
+      "shapable": false,
+      "shape": "line",
+      "units": "ft",
+      "value": "75"
     },
     "attackBonus": 0,
     "attributes": {
@@ -37,7 +38,7 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": 105
       },
       "size": "medium",
       "sturdy": true
@@ -48,7 +49,7 @@
       "max": 40,
       "value": 40
     },
-    "chatFlavor": "Line, unwieldy",
+    "chatFlavor": "",
     "container": {
       "contents": [],
       "includeContentsInWealthCalculation": true,
@@ -73,6 +74,17 @@
           "amount": 1,
           "subtype": "ammunitionSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "weaponAccessory"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 4,
+          "subtype": "",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
@@ -85,19 +97,22 @@
         {
           "name": "",
           "formula": "10d10",
+          "group": null,
+          "isPrimarySection": true,
           "types": {
             "acid": false,
             "bludgeoning": false,
             "cold": false,
             "electricity": false,
-            "fire": false,
+            "fire": true,
             "healing": false,
             "piercing": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -105,11 +120,11 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": ""
+      "value": "<p>Indistinguishable from a flamethrower to the lay observer, a burner uses petrol as fuel to produce a strong jet of flame. However, the subtly narrower nozzle and recoil-suppressing gyros allow a burner to fire streams of petrol with more control and focus than its traditional cousin. Ifrit-, salamander-, hellhound-, firedrake-, and phoenix-class burners are all widely available.</p>"
     },
     "descriptors": [],
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
     "equippable": false,
@@ -159,11 +174,14 @@
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
       "hybrid": false,
+      "hydrodynamic": false,
       "ignite": false,
       "indirect": false,
       "injection": false,
+      "instrumental": false,
       "integrated": false,
       "line": true,
       "living": false,
@@ -220,7 +238,7 @@
       "additional": "",
       "per": "",
       "units": "ft",
-      "value": 75
+      "value": "75"
     },
     "rollNotes": "",
     "save": {
@@ -228,7 +246,11 @@
       "dc": "",
       "descriptor": "negate"
     },
-    "source": "AR",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
+    "source": "AR pg. 37",
     "special": "",
     "specialMaterials": {
       "abysium": false,
@@ -255,9 +277,9 @@
       "value": 4
     },
     "uses": {
-      "max": 0,
+      "max": "",
       "per": "",
-      "value": 4
+      "value": null
     },
     "weaponCategory": "flame",
     "weaponType": "heavy"
