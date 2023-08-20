@@ -42,7 +42,7 @@ Instead of the Active Effects, as introduced in FoundryVTT v0.7, Starfinder uses
 
 ## Bugs and Issues
 
-If you have any issues or concerns, please don't hesitate to open an issue on the tracker [https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/issues](https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/issues) or reach out to us on the Foundry discord server: #starfinder, where either the community can help out.
+If you have any issues or concerns, please don't hesitate to open an issue on the tracker [https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/issues](https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/issues) or reach out to us on the Foundry discord server: #starfinder, where the community can help out.
 
 ## Legal
 
