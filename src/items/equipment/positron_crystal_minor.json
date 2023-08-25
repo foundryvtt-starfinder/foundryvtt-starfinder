@@ -19,6 +19,7 @@
     "ammunitionType": "",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": 0
@@ -71,24 +72,8 @@
       "parts": []
     },
     "damage": {
-      "parts": [
-        {
-          "name": "",
-          "formula": "2d8",
-          "group": null,
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
-            "cold": false,
-            "electricity": false,
-            "fire": true,
-            "healing": false,
-            "piercing": false,
-            "slashing": false,
-            "sonic": false
-          }
-        }
-      ]
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -96,7 +81,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>A positron crystal’s interactions with matter release both heat and radiation, causing a solar weapon it enhances to roar with flame as it strikes enemies. This adds fire damage to the weapon’s strikes and adds the irradiate critical hit effect to critical hits scored with the weapon. Unlike many radioactive weapons, a solar weapon enhanced by a positron crystal does not pose any particular risk to its user, although the reason behind this remains unknown. Research into precisely how to preserve these crystals is ongoing; currently only least, minor, and lesser versions remain stable for more than a few seconds, though these are quite powerful.</p>"
+      "value": "<p>A positron crystal’s interactions with matter release both heat and radiation, causing a solar weapon it enhances to roar with flame as it strikes enemies. This adds fire damage to the weapon’s strikes and adds the irradiate critical hit effect to critical hits scored with the weapon. Unlike many radioactive weapons, a solar weapon enhanced by a positron crystal does not pose any particular risk to its user, although the reason behind this remains unknown. Research into precisely how to preserve these crystals is ongoing; currently only least, minor, and lesser versions remain stable for more than a few seconds, though these are quite powerful.</p>\n<p>Critical Effect: Irradiate</p>"
     },
     "descriptors": [],
     "duration": {
@@ -109,7 +94,37 @@
     "identified": true,
     "isActive": null,
     "level": 13,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "fa9c1c6a-d267-4e03-b33b-1c9925ed80de",
+        "name": "Positron Crystal, Minor",
+        "type": "untyped",
+        "condition": "",
+        "damage": {
+          "damageGroup": null,
+          "damageTypes": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        "effectType": "all-damage",
+        "enabled": true,
+        "limitTo": "container",
+        "max": 16,
+        "modifier": "2d8",
+        "modifierType": "damageSection",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "price": 47000,
     "proficient": true,
     "properties": {
@@ -150,6 +165,7 @@
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
       "hybrid": false,
       "hydrodynamic": false,
@@ -220,6 +236,10 @@
       "type": "",
       "dc": "",
       "descriptor": "negate"
+    },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
     },
     "source": "AR pg. 49",
     "special": "",
