@@ -19,6 +19,7 @@
     "ammunitionType": "",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": 0
@@ -76,6 +77,7 @@
           "name": "",
           "formula": "1d4",
           "group": null,
+          "isPrimarySection": true,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -88,7 +90,8 @@
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -96,7 +99,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>Gluon crystals create an entropic field along the weapon that creates traumatic wounds.</p>"
+      "value": "<p>Gluon crystals create an entropic field along the weapon that creates traumatic wounds.</p>\n<p><span>Critical Effect: </span>Wound</p>"
     },
     "descriptors": [],
     "duration": {
@@ -109,7 +112,24 @@
     "identified": true,
     "isActive": null,
     "level": 6,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "a0ae782f-6f88-4e7b-9675-f76eeb70a57d",
+        "name": "Gluon crystal, least",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-damage",
+        "enabled": true,
+        "limitTo": "container",
+        "max": 4,
+        "modifier": "1d4",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "price": 3900,
     "proficient": true,
     "properties": {
@@ -150,6 +170,7 @@
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
       "hybrid": false,
       "hydrodynamic": false,
@@ -220,6 +241,10 @@
       "type": "",
       "dc": "",
       "descriptor": "negate"
+    },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
     },
     "source": "CRB pg. 180",
     "special": "",
