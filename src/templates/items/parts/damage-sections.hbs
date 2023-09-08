@@ -1,3 +1,8 @@
+<div class="form-group" {{ createTippy title="SFRPG.Damage.Types.PrimaryDamageGroup" subtitle="SFRPG.Damage.Types.PrimaryDamageGroupTooltip" }}>
+    <label>Primary Damage Group</label>
+    <input type="number" name="system.damage.primaryGroup" value="{{itemData.damage.primaryGroup}}" data-dtype="Number"/>
+</div>
+
 <ol class="damage-parts form-group">
 
     {{#each itemData.damage.parts as |part i| }}
@@ -74,5 +79,5 @@
 
     </li>
     {{/each}}
-    
+
 </ol>
