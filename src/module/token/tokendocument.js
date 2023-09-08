@@ -53,7 +53,7 @@ export default class SFRPGTokenDocument extends TokenDocument {
      * @returns {boolean}           Does the Token have this status effect?
      */
     hasStatusEffect(statusId) {
-        if (this.actor?.system?.conditions[statusId]) return true;
+        if (this.actor?.system?.conditions?.[statusId]) return true;
 
         return super.hasStatusEffect(statusId);
     }

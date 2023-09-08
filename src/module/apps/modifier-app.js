@@ -323,7 +323,8 @@ export default class SFRPGModifierApplication extends FormApplication {
                 const roll = Roll.create(formula, this.owningActor?.system || this.target.system);
                 modifier.max = await roll.evaluate({ maximize: true }).total;
             } catch (err) {
-                ui.notifications.error(err);
+                ui.notifications.warn(err);
+                modifier.max = 0;
             }
         } else {
             modifier.max = 0;
