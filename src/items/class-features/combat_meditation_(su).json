@@ -1,6 +1,6 @@
 {
-  "_id": "uovQ0gfZy060ktw0",
-  "name": "Signature Support (Ex)",
+  "_id": "7gmhdPSZdiBZWb64",
+  "name": "Combat Meditation (Su)",
   "type": "feat",
   "img": "icons/svg/mystery-man.svg",
   "system": {
@@ -12,7 +12,7 @@
     "actionTarget": "",
     "actionType": "",
     "activation": {
-      "type": "none",
+      "type": "full",
       "condition": "",
       "cost": 0
     },
@@ -38,7 +38,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.uEsMXIfzQFhnx6ez]{Envoy, Enhanced}</p>\n<p>You’ve developed a knack for giving a specific type of midcombat encouragement. At 2nd level, choose one of the following envoy improvisations: @UUID[Compendium.sfrpg.class-features.Item.YMCpBDLSA6feLBen]{clever feint}, @UUID[Compendium.sfrpg.class-features.Item.spGhGxCjrJUQP9v8]{dispiriting taunt}, @UUID[Compendium.sfrpg.class-features.Item.bP820PAOJUQ1dcLP]{get ‘em}, or @UUID[Compendium.sfrpg.class-features.Item.4i1U9YQgb2tgN748]{inspiring boost}. If you do not have that improvisation already, you gain it. If you do have it, you can instead gain a different improvisation for which you qualify.</p>\n<p>At 6th level, you can use the chosen improvisation as though you had spent 1 Resolve Point without having to spend a Resolve Point. You can do this once per day for every 6 envoy levels you have.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.q0sZTVGHE77Di2VU]{Solarian, Enhanced}</p>\n<p>As a full action, you can concentrate and channel the cosmos to gather power more quickly. Attempt a DC 20 @Check[type:charisma]. You gain 1 attunement point for your current stellar mode if you fail the check, or 2 points if you succeed. This cannot increase your attunement points above 3. Once you use this ability, you cannot do so again until you spend 1 Resolve Point to regain Stamina Points after resting for 10 minutes.</p>\n<p>At 5th level, you can spend 1 Resolve Point to instead use this ability as a standard action. At 15th level, you can use combat meditation as a standard action, or you can spend 1 Resolve Point to use it as a move action.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -81,7 +81,7 @@
     "details": {
       "category": "classFeature",
       "combat": false,
-      "specialAbilityType": "ex"
+      "specialAbilityType": "su"
     },
     "duration": {
       "units": "text",
@@ -100,22 +100,22 @@
       "charged": false,
       "value": null
     },
-    "requirements": "2nd Level Envoy Enhanced",
+    "requirements": "3rd Level Solarian Enhanced",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "EN pg. 37",
+    "source": "EN pg. 67",
     "target": {
       "type": "",
       "value": ""
     },
     "uses": {
-      "max": "floor(@classes.envoy.levels / 6)",
-      "per": "day",
-      "value": 0
+      "max": "1",
+      "per": "sr",
+      "value": 1
     }
   }
 }

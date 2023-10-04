@@ -1,0 +1,227 @@
+{
+  "_id": "63xn1dV6ry0cZqlZ",
+  "name": "Attunement Surge (Su)",
+  "type": "feat",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "type": "",
+    "ability": null,
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "",
+    "actionType": "",
+    "activation": {
+      "type": "",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "",
+      "shapable": false,
+      "shape": "",
+      "units": "ft",
+      "value": ""
+    },
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "effect": "",
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "damageNotes": "",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.q0sZTVGHE77Di2VU]{Solarian, Enhanced}</p>\n<p>When you have made significant progress attuning yourself to your stellar mode, you can sacrifice that greater attunement in exchange for momentary benefits.</p>\n<p>While you have 2 attunement points in a stellar mode, you can expend 2 attunement points on your turn without spending an action to gain two effects until the beginning of your next turn. First, you gain benefits from that mode’s stellar revelations as though you were fully attuned, rather than attuned. Second, you gain a benefit based on which mode you are attuned to.</p>\n<p><strong>Energy:</strong> You temporarily gain the @UUID[Compendium.sfrpg.feats.Item.seWKgVZbtyOPhl6e]{Nimble Moves} feat.</p>\n<p><strong>Graviton:</strong> Your insight bonus to Reflex saves applies to all your saving throws.</p>\n<p><strong>Photon:</strong> The first time you deal damage to a creature, you can increase your insight bonus to damage from photon mode to 1d4, plus 1d4 for every 6 solarian levels you have. If your attack or effect damages multiple creatures, you apply this additional damage to only one target of your choice; the rest take the default photon mode damage (+1 insight bonus damage). At 12th level, you can apply this higher damage to up to two targets of your choice.</p>\n<p><strong>Resistance:</strong> In addition to granting you DR, resistance mode also grants you resistance 1 to acid, cold, electricity, fire, and sonic damage. This increases by 1 for every 6 solarian levels you have. This energy resistance stacks with one other source of energy resistance you have (such as from equipment).</p>\n<p><em>Enable/Disable Resistance modifiers in the Modifier tab.</em></p>"
+    },
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
+    "details": {
+      "category": "classFeature",
+      "combat": false,
+      "specialAbilityType": "su"
+    },
+    "duration": {
+      "units": "text",
+      "value": ""
+    },
+    "formula": "",
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "d057d3c4-70b0-4c22-847e-ef4a107f7a95",
+        "name": "Attunement Surge (Su) - Graviton",
+        "type": "insight",
+        "condition": "",
+        "effectType": "saves",
+        "enabled": false,
+        "max": 0,
+        "modifier": "(max(0, 0 - sign(@resources.solarian.stellarMode.value)) * (1 + floor(@classes.solarian.levels / 9)))",
+        "modifierType": "formula",
+        "notes": "Your insight bonus to Reflex saves applies to all your saving throws.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "330e9f69-5b6c-4720-8a52-5016c03e6a17",
+        "name": "Attunement Surge (Su) - Photon",
+        "type": "insight",
+        "condition": "",
+        "effectType": "all-damage",
+        "enabled": false,
+        "max": 0,
+        "modifier": "(max(0, sign(@resources.solarian.stellarMode.value)) * (1 + floor(@classes.solarian.levels / 6)))d4",
+        "modifierType": "formula",
+        "notes": "The first time you deal damage to a creature, you can increase your insight bonus to damage from photon mode to 1d4, plus 1d4 for every 6 solarian levels you have. If your attack or effect damages multiple creatures, you apply this additional damage to only one target of your choice; the rest take the default photon mode damage (+1 insight bonus damage). At 12th level, you can apply this higher damage to up to two targets of your choice.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "590d761c-92b4-45d1-8d2c-adc89ba2a021",
+        "name": "Attunement Surge (Su) - Resistance - Acid",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": false,
+        "max": 0,
+        "modifier": "(max(0, 0 - sign(@resources.solarian.stellarMode.value)) * (1 + floor(@classes.solarian.levels / 6)))",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "acid"
+      },
+      {
+        "_id": "477fc27a-c276-4779-b453-d3232fc4af7b",
+        "name": "Attunement Surge (Su) - Resistance - Cold",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": false,
+        "max": 0,
+        "modifier": "(max(0, 0 - sign(@resources.solarian.stellarMode.value)) * (1 + floor(@classes.solarian.levels / 6)))",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "cold"
+      },
+      {
+        "_id": "5cfece42-6744-4f32-aa61-e107cb0e6a71",
+        "name": "Attunement Surge (Su) - Resistance - Electricity",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": false,
+        "max": 0,
+        "modifier": "(max(0, 0 - sign(@resources.solarian.stellarMode.value)) * (1 + floor(@classes.solarian.levels / 6)))",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "electricity"
+      },
+      {
+        "_id": "dac7f57b-ea5b-486d-bd22-6901d10f46fc",
+        "name": "Attunement Surge (Su) - Resistance - Fire",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": false,
+        "max": 0,
+        "modifier": "(max(0, 0 - sign(@resources.solarian.stellarMode.value)) * (1 + floor(@classes.solarian.levels / 6)))",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "fire"
+      },
+      {
+        "_id": "68d40f44-15fd-45cf-b18a-2dac110de961",
+        "name": "Attunement Surge (Su) - Resistance - Sonic",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": false,
+        "max": 0,
+        "modifier": "(max(0, 0 - sign(@resources.solarian.stellarMode.value)) * (1 + floor(@classes.solarian.levels / 6)))",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "sonic"
+      }
+    ],
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "none",
+      "value": ""
+    },
+    "recharge": {
+      "charged": false,
+      "value": null
+    },
+    "requirements": "2nd Level Solarian Enhanced",
+    "rollNotes": "",
+    "save": {
+      "type": "",
+      "dc": null,
+      "descriptor": ""
+    },
+    "source": "EN pg. 67",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": "",
+      "per": "",
+      "value": null
+    }
+  }
+}

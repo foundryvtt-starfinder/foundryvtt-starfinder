@@ -1,0 +1,227 @@
+{
+  "_id": "h7bPYadt49R4T8JN",
+  "name": "Aftershock (Su)",
+  "type": "feat",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "type": "",
+    "ability": null,
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "",
+    "actionType": "",
+    "activation": {
+      "type": "none",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "",
+      "shapable": false,
+      "shape": "",
+      "units": "ft",
+      "value": ""
+    },
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "effect": "",
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "damageNotes": "",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.q0sZTVGHE77Di2VU]{Solarian, Enhanced}</p>\n<p>Your most powerful revelations briefly warp reality around you, granting you a momentary advantage before the cosmos restores equilibrium.</p>\n<p>When you use a zenith revelation (including the black hole or supernova revelations), you gain a special benefit until the end of your next turn. This benefit changes based on the mode that is associated with that zenith revelation (see below). If you spend 1 Resolve Point after resolving the zenith revelation, increase the effect’s duration by [[/r 1d6]]{1d6 rounds}.</p>\n<p><strong>Graviton:</strong> You choose to either gain a +1 bonus to AC or calculate your AC using your Charisma modifier instead of your Dexterity modifier.</p>\n<p><strong>Photon:</strong> You can calculate your attack and damage modifiers using your Charisma modifier instead of your Strength or Dexterity modifier (this does not stack with the soulfire weapon fusion). Alternatively, the next successful attack you make before the end of your next turn gains a damage bonus equal to your Charisma modifier.</p>\n<p><em>Enable/Disable AC modifiers in the Modifiers tab.</em></p>"
+    },
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
+    "details": {
+      "category": "classFeature",
+      "combat": false,
+      "specialAbilityType": "su"
+    },
+    "duration": {
+      "units": "text",
+      "value": ""
+    },
+    "formula": "",
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "2ada0f71-6b3c-494a-9dd1-7f6d7b090c65",
+        "name": "Aftershock (Su) - AC +1",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": false,
+        "max": 1,
+        "modifier": "+1",
+        "modifierType": "constant",
+        "notes": "You choose to gain a +1 bonus to AC.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "both"
+      },
+      {
+        "_id": "7256ab4d-c559-441b-a0a9-65568caf82b6",
+        "name": "Aftershock (Su) - Cha AC",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": false,
+        "max": 0,
+        "modifier": "- @abilities.dex.mod + @abilities.cha.mod",
+        "modifierType": "constant",
+        "notes": "You choose to calculate your AC using your Charisma modifier instead of your Dexterity modifier.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "both"
+      },
+      {
+        "_id": "f5afc50a-9139-4153-8728-63212686ab25",
+        "name": "Aftershock (Su) - Str to Cha Attack",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-attacks",
+        "enabled": false,
+        "max": 0,
+        "modifier": "- @abilities.str.mod + @abilities.cha.mod",
+        "modifierType": "formula",
+        "notes": "You can calculate your attack and damage modifiers using your Charisma modifier instead of your Strength or Dexterity modifier (this does not stack with the soulfire weapon fusion).",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "02390b80-8c1f-458f-bb18-c45a5c244acc",
+        "name": "Aftershock (Su) - Dex to Cha Attack",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-attacks",
+        "enabled": false,
+        "max": 0,
+        "modifier": "- @abilities.dex.mod + @abilities.cha.mod",
+        "modifierType": "formula",
+        "notes": "You can calculate your attack and damage modifiers using your Charisma modifier instead of your Strength or Dexterity modifier (this does not stack with the soulfire weapon fusion).",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "47efa980-4722-457c-865d-98f76cb3c0f8",
+        "name": "Aftershock (Su) - Str to Cha Damage",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-damage",
+        "enabled": false,
+        "max": 0,
+        "modifier": "- @abilities.str.mod + @abilities.cha.mod",
+        "modifierType": "formula",
+        "notes": "You can calculate your attack and damage modifiers using your Charisma modifier instead of your Strength or Dexterity modifier (this does not stack with the soulfire weapon fusion).",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "2450638e-72f0-4e70-9269-52475464f255",
+        "name": "Aftershock (Su) - Dex to Cha Damage",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-damage",
+        "enabled": false,
+        "max": 0,
+        "modifier": "- @abilities.dex.mod + @abilities.cha.mod",
+        "modifierType": "formula",
+        "notes": "You can calculate your attack and damage modifiers using your Charisma modifier instead of your Strength or Dexterity modifier (this does not stack with the soulfire weapon fusion).",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "719b8842-1161-4c97-bd9d-f3d68cd201c1",
+        "name": "Aftershock (Su) - Cha Damage bonus",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-damage",
+        "enabled": false,
+        "max": 0,
+        "modifier": "+ @abilities.cha.mod",
+        "modifierType": "formula",
+        "notes": "Alternatively, the next successful attack you make before the end of your next turn gains a damage bonus equal to your Charisma modifier.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "none",
+      "value": ""
+    },
+    "recharge": {
+      "charged": false,
+      "value": null
+    },
+    "requirements": "8th Level Solarian Enhanced",
+    "rollNotes": "",
+    "save": {
+      "type": "",
+      "dc": null,
+      "descriptor": ""
+    },
+    "source": "EN pg. 67",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": "",
+      "per": "",
+      "value": null
+    }
+  }
+}
