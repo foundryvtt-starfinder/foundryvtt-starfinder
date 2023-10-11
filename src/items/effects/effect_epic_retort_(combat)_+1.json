@@ -1,0 +1,78 @@
+{
+  "_id": "uGxeYfMidHEIqShC",
+  "name": "Effect: Epic Retort (Combat) +1",
+  "type": "effect",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "type": "effect",
+    "abilityMods": {
+      "parts": []
+    },
+    "activeDuration": {
+      "activationTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "origin"
+      },
+      "unit": "round",
+      "value": "1"
+    },
+    "context": {
+      "origin": {
+        "actorUuid": "",
+        "itemUuid": ""
+      }
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.feats.Item.rSwOqrxi6evUZLgB]{Epic Retort (Combat)}</p>\n<p>Your ability to overcome adversity is inspiring to your allies.</p><hr /><p><strong>Benefit:</strong> If you are affected by an effect that grants a negative penalty or miss chance to attack rolls and successfully hit the source of the effect with an attack, you can spend 1 Resolve Point to grant allies within 60 feet that are able to hear or see you a +1 morale bonus to attack and damage rolls against that enemy until the beginning of your next turn. If your attack was a critical hit, increase the morale bonus by 1.</p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "76e02aaa-a933-4f60-86fd-62d779040816",
+        "name": "Effect: Epic Retort - Attack bonus",
+        "type": "morale",
+        "condition": "",
+        "effectType": "all-attacks",
+        "enabled": false,
+        "max": 1,
+        "modifier": "1",
+        "modifierType": "formula",
+        "notes": "Grant allies within 60 feet that are able to hear or see you a +1 morale bonus to attack and damage rolls against that enemy until the beginning of your next turn. If your attack was a critical hit, increase the morale bonus by 1.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "c6c5d1e8-c237-49a2-bf36-be9f36fbe748",
+        "name": "Effect: Epic Retort - Damage bonus",
+        "type": "morale",
+        "condition": "",
+        "effectType": "all-damage",
+        "enabled": false,
+        "max": 1,
+        "modifier": "1",
+        "modifierType": "formula",
+        "notes": "Grant allies within 60 feet that are able to hear or see you a +1 morale bonus to attack and damage rolls against that enemy until the beginning of your next turn. If your attack was a critical hit, increase the morale bonus by 1.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
+    "requirements": "",
+    "showOnToken": false,
+    "source": "EN pg. 106"
+  }
+}
