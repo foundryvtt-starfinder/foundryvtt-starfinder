@@ -1,0 +1,93 @@
+{
+  "_id": "uyLbbMv6J65o9Ngu",
+  "name": "Effect: Grim Determination (Combat)",
+  "type": "effect",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "type": "effect",
+    "abilityMods": {
+      "parts": []
+    },
+    "activeDuration": {
+      "activationTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "origin"
+      },
+      "unit": "round",
+      "value": "@origin.actor.abilities.con.mod + 1"
+    },
+    "context": {
+      "origin": {
+        "actorUuid": "",
+        "itemUuid": ""
+      }
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.feats.Item.2JEgdbpI3C3mfgHn]{Grim Determination (Combat)}</p>\n<p>In your most dire moments, you summon a primal desire to survive that pushes you beyond your limits.</p>\n<p><strong>Prerequisites:</strong> Con 17</p><hr /><p>Once per day, when you spend Resolve Points to stay in the fight, you regain Hit Points equal to 1 + your Constitution modifier ([[/ max(0, floor(@abilities.con.mod + 1))]]), and you gain a +1 circumstance bonus to skill checks, attack rolls, and saving throws for a number of rounds equal to the Hit Points regained in this way.</p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "76e02aaa-a933-4f60-86fd-62d779040816",
+        "name": "Effect: Grim Determination (Combat)",
+        "type": "circumstance",
+        "condition": "",
+        "effectType": "all-skills",
+        "enabled": true,
+        "max": 1,
+        "modifier": "1",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "will"
+      },
+      {
+        "_id": "5f7b743d-9efd-4d8e-a2dd-7cecea15988c",
+        "name": "Effect: Grim Determination (Combat)",
+        "type": "circumstance",
+        "condition": "",
+        "effectType": "all-attacks",
+        "enabled": true,
+        "max": 1,
+        "modifier": "1",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "8eee7d0e-7dcb-43f8-a134-fed1d26d782d",
+        "name": "Effect: Grim Determination (Combat)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "saves",
+        "enabled": true,
+        "max": 1,
+        "modifier": "1",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
+    "requirements": "Con 17",
+    "showOnToken": false,
+    "source": "EN pg. 108"
+  }
+}
