@@ -1,6 +1,6 @@
 {
-  "_id": "2JEgdbpI3C3mfgHn",
-  "name": "Grim Determination (Combat)",
+  "_id": "pBe6z315BA37InsU",
+  "name": "Hidden Strike (Combat)",
   "type": "feat",
   "img": "icons/svg/mystery-man.svg",
   "system": {
@@ -12,7 +12,7 @@
     "actionTarget": "",
     "actionType": "",
     "activation": {
-      "type": "none",
+      "type": "",
       "condition": "",
       "cost": 0
     },
@@ -38,7 +38,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>In your most dire moments, you summon a primal desire to survive that pushes you beyond your limits.</p>\n<p><strong>Prerequisites:</strong> Con 17</p><hr /><p><strong>Benefit:</strong> Once per day, when you spend Resolve Points to stay in the fight, you regain Hit Points equal to 1 + your Constitution modifier ([[/ max(0, floor(@abilities.con.mod + 1))]]), and you gain a +1 circumstance bonus to skill checks, attack rolls, and saving throws for a number of rounds equal to the Hit Points regained in this way.</p>\n<p>@UUID[Compendium.sfrpg.effects.Item.uyLbbMv6J65o9Ngu]{Effect: Grim Determination (Combat)}</p>"
+      "value": "<p>When your target doesn’t know you’re armed, you can strike out before they even know what hit them.</p>\n<p><strong>Prerequisites:</strong> Sleight of Hand 5 ranks</p><hr /><p><strong>Benefit:</strong> When you draw a hidden one-handed melee weapon with light bulk, you can attempt to do so secretly with a @Check[type:sleight-of-hand] opposed by your target’s Perception. If you succeed, your target is @UUID[Compendium.sfrpg.conditions.Item.MZ8OoH1GE9qDMyCD]{flat-footed} against the next attack made with that weapon. If you do not attack immediately, your opponent receives an additional Perception check at the start of each of their turns against your original Sleight of Hand result with a +2 bonus. If they succeed, you lose any advantage granted by this feat.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -100,7 +100,7 @@
       "charged": false,
       "value": null
     },
-    "requirements": "Con 17",
+    "requirements": "Sleight of Hand 5 ranks",
     "rollNotes": "",
     "save": {
       "type": "",
@@ -113,9 +113,9 @@
       "value": ""
     },
     "uses": {
-      "max": "1",
-      "per": "day",
-      "value": 1
+      "max": "0",
+      "per": "",
+      "value": 0
     }
   }
 }
