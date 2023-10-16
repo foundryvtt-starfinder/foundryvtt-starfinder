@@ -1,6 +1,6 @@
 {
-  "_id": "zJ9ku3mJTKoIkzWo",
-  "name": "Professional Regard",
+  "_id": "UzMRvV8zLWnldpnT",
+  "name": "Read Foe",
   "type": "feat",
   "img": "icons/svg/mystery-man.svg",
   "system": {
@@ -12,7 +12,7 @@
     "actionTarget": "",
     "actionType": "",
     "activation": {
-      "type": "none",
+      "type": "move",
       "condition": "",
       "cost": 0
     },
@@ -38,7 +38,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>Your professionalism makes people happy to work with you, even outside of your professional capacity.</p><hr /><p><strong>Benefit:</strong> When you use a Profession skill in order to @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.bD4kmdFU7wwsenOf#earn-a-living]{earn a living} in a given settlement, you gain a +1 circumstance bonus to @Check[type:diplomacy] made within the settlement unless the targeted creature or the settlement has some reason to dislike or distrust your profession. At the GM’s discretion, you can use your Profession skill in place of Diplomacy when attempting to @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.1tzIBDaDAO4hmX5C#change-attitude]{change attitude} or @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.1tzIBDaDAO4hmX5C#gather-information]{gather information} if you have worked directly with the target of your check.</p>"
+      "value": "<p>You can exploit your opponent’s tells in the heat of battle to gain an edge in defeating them.</p>\n<p><strong>Prerequisites:</strong> Sense Motive 3 ranks</p><hr /><p><strong>Benefit:</strong> You can study your opponent using Sense Motive as a move action. The DC is 15 + 1-1/2 × the target’s CR and the creature must have an Intelligence score of 3 or higher. On a success you either gain a +2 insight bonus to your next attack of opportunity against that foe or gain a +1 insight bonus to AC against the next attack from that foe, whichever occurs first before the start of your next turn.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -91,19 +91,34 @@
     "isActive": null,
     "modifiers": [
       {
-        "_id": "d82fb68e-98d4-4d94-a299-990bb47d17f3",
-        "name": "Professional Regard",
-        "type": "circumstance",
+        "_id": "d1d06fc3-99e5-4473-ad5f-d37b9eb2b917",
+        "name": "Read Foe",
+        "type": "insight",
         "condition": "",
-        "effectType": "skill",
-        "enabled": false,
-        "max": 1,
-        "modifier": "1",
-        "modifierType": "formula",
-        "notes": "When you use a Profession skill in order to earn a living in a given settlement, you gain a +1 circumstance bonus to Diplomacy Check made within the settlement unless the targeted creature or the settlement has some reason to dislike or distrust your profession.",
+        "effectType": "all-attacks",
+        "enabled": true,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "",
         "source": "",
         "subtab": "misc",
-        "valueAffected": "dip"
+        "valueAffected": ""
+      },
+      {
+        "_id": "f552adb4-d125-45c1-a768-33b21bda1edd",
+        "name": "Read Foe",
+        "type": "insight",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": true,
+        "max": 1,
+        "modifier": "1",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "both"
       }
     ],
     "range": {
@@ -116,7 +131,7 @@
       "charged": false,
       "value": null
     },
-    "requirements": "",
+    "requirements": "Sense Motive 3 ranks",
     "rollNotes": "",
     "save": {
       "type": "",

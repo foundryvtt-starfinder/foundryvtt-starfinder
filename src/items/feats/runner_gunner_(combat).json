@@ -1,6 +1,6 @@
 {
-  "_id": "zJ9ku3mJTKoIkzWo",
-  "name": "Professional Regard",
+  "_id": "h9WBYxQYP1Qut7AA",
+  "name": "Runner Gunner (Combat)",
   "type": "feat",
   "img": "icons/svg/mystery-man.svg",
   "system": {
@@ -38,7 +38,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>Your professionalism makes people happy to work with you, even outside of your professional capacity.</p><hr /><p><strong>Benefit:</strong> When you use a Profession skill in order to @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.bD4kmdFU7wwsenOf#earn-a-living]{earn a living} in a given settlement, you gain a +1 circumstance bonus to @Check[type:diplomacy] made within the settlement unless the targeted creature or the settlement has some reason to dislike or distrust your profession. At the GM’s discretion, you can use your Profession skill in place of Diplomacy when attempting to @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.1tzIBDaDAO4hmX5C#change-attitude]{change attitude} or @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.1tzIBDaDAO4hmX5C#gather-information]{gather information} if you have worked directly with the target of your check.</p>"
+      "value": "<p>You are practiced in converting your momentum into deadly efficiency.</p>\n<p><strong>Prerequisites:</strong> Dex 17</p><hr /><p><strong>Benefit:</strong> Once per minute when you use a move action to move at least half your speed toward an enemy, you gain a +1 bonus to your next ranged attack against that enemy. If you move after using a standard action to make a ranged attack, your land speed increases by 5 feet until the end of your turn.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -80,7 +80,7 @@
     },
     "details": {
       "category": "feat",
-      "combat": false,
+      "combat": true,
       "specialAbilityType": ""
     },
     "duration": {
@@ -91,19 +91,34 @@
     "isActive": null,
     "modifiers": [
       {
-        "_id": "d82fb68e-98d4-4d94-a299-990bb47d17f3",
-        "name": "Professional Regard",
-        "type": "circumstance",
+        "_id": "6e22f55d-ceec-4d3e-948c-34a7d0b6bded",
+        "name": "Runner Gunner (Combat)",
+        "type": "untyped",
         "condition": "",
-        "effectType": "skill",
-        "enabled": false,
+        "effectType": "ranged-attacks",
+        "enabled": true,
         "max": 1,
         "modifier": "1",
-        "modifierType": "formula",
-        "notes": "When you use a Profession skill in order to earn a living in a given settlement, you gain a +1 circumstance bonus to Diplomacy Check made within the settlement unless the targeted creature or the settlement has some reason to dislike or distrust your profession.",
+        "modifierType": "constant",
+        "notes": "",
         "source": "",
         "subtab": "misc",
-        "valueAffected": "dip"
+        "valueAffected": ""
+      },
+      {
+        "_id": "98431e60-6b0b-46a5-b2f9-465e14029077",
+        "name": "Runner Gunner (Combat)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "specific-speed",
+        "enabled": true,
+        "max": 5,
+        "modifier": "5",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "land"
       }
     ],
     "range": {
@@ -116,7 +131,7 @@
       "charged": false,
       "value": null
     },
-    "requirements": "",
+    "requirements": "Dex 17",
     "rollNotes": "",
     "save": {
       "type": "",
