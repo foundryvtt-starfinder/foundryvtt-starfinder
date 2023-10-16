@@ -1,6 +1,6 @@
 {
-  "_id": "uFxAQZG2Pf40uFJn",
-  "name": "Opposition Research",
+  "_id": "zJ9ku3mJTKoIkzWo",
+  "name": "Professional Regard",
   "type": "feat",
   "img": "icons/svg/mystery-man.svg",
   "system": {
@@ -12,7 +12,7 @@
     "actionTarget": "",
     "actionType": "",
     "activation": {
-      "type": "",
+      "type": "none",
       "condition": "",
       "cost": 0
     },
@@ -38,7 +38,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>You’ve specialized your studies to focus on how to take down dangerous creatures you may encounter.</p>\n<p><strong>Prerequisites:</strong> Int 13</p><hr /><p><strong>Benefit:</strong> When you succeed on a check to @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.IdprCKGj66qptyN5]{identify a creature} that has any listed weaknesses, you learn one of its weaknesses in addition to any pieces of information your check qualifies you for. In addition, if any weakness you learn from this check would cause the creature to take additional damage, it takes extra damage from that weakness from sources you control (such as attacks or spells) equal to your ranks in the skill used to identify it.</p>"
+      "value": "<p>Your professionalism makes people happy to work with you, even outside of your professional capacity.</p><hr /><p><strong>Benefit:</strong> When you use a Profession skill in order to @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.bD4kmdFU7wwsenOf#earn-a-living]{earn a living} in a given settlement, you gain a +1 circumstance bonus to @Check[type:diplomacy] made within the settlement unless the targeted creature or the settlement has some reason to dislike or distrust your profession. At the GM’s discretion, you can use your Profession skill in place of Diplomacy when attempting to @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.1tzIBDaDAO4hmX5C#change-attitude]{change attitude} or @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.1tzIBDaDAO4hmX5C#gather-information]{gather information} if you have worked directly with the target of your check.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -89,7 +89,23 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "d82fb68e-98d4-4d94-a299-990bb47d17f3",
+        "name": "Professional Regard",
+        "type": "circumstance",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 1,
+        "modifier": "1",
+        "modifierType": "formula",
+        "notes": "When you use a Profession skill in order to earn a living in a given settlement, you gain a +1 circumstance bonus to Diplomacy Check made within the settlement unless the targeted creature or the settlement has some reason to dislike or distrust your profession.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "dip"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -100,22 +116,22 @@
       "charged": false,
       "value": null
     },
-    "requirements": "Int 13",
+    "requirements": "Profession 3 ranks",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "EN pg. 110",
+    "source": "EN pg. 111",
     "target": {
       "type": "",
       "value": ""
     },
     "uses": {
-      "max": "0",
-      "per": "",
-      "value": 0
+      "max": "",
+      "per": "day",
+      "value": null
     }
   }
 }

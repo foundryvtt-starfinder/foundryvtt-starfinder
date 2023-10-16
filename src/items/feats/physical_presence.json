@@ -1,6 +1,6 @@
 {
-  "_id": "uFxAQZG2Pf40uFJn",
-  "name": "Opposition Research",
+  "_id": "RPyHSxl52JznOmg5",
+  "name": "Physical Presence",
   "type": "feat",
   "img": "icons/svg/mystery-man.svg",
   "system": {
@@ -38,7 +38,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>You’ve specialized your studies to focus on how to take down dangerous creatures you may encounter.</p>\n<p><strong>Prerequisites:</strong> Int 13</p><hr /><p><strong>Benefit:</strong> When you succeed on a check to @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.IdprCKGj66qptyN5]{identify a creature} that has any listed weaknesses, you learn one of its weaknesses in addition to any pieces of information your check qualifies you for. In addition, if any weakness you learn from this check would cause the creature to take additional damage, it takes extra damage from that weakness from sources you control (such as attacks or spells) equal to your ranks in the skill used to identify it.</p>"
+      "value": "<p>Your natural physicality causes animals to react to you more deferentially.</p>\n<p><strong>Prerequisites:</strong> Con 11 or Str 11</p><hr /><p><strong>Benefit:</strong> Add your Constitution or Strength modifier (minimum +1) to Survival skill checks to @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.UDTsEIldhXTn0VJA#handle-an-animal]{handle} or @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.UDTsEIldhXTn0VJA#ride-a-creature]{ride} an animal or @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.UDTsEIldhXTn0VJA#rear-a-wild-animal-(trained-only)]{rear a wild animal} (in addition to your Wisdom modifier).</p>"
     },
     "descriptors": {
       "acid": false,
@@ -80,7 +80,7 @@
     },
     "details": {
       "category": "feat",
-      "combat": false,
+      "combat": true,
       "specialAbilityType": ""
     },
     "duration": {
@@ -89,7 +89,23 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "94232afb-6770-4a03-88da-9b1ec125b356",
+        "name": "Physical Presence",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 0,
+        "modifier": "max(@abilities.con.mod, @abilities.str.mod)",
+        "modifierType": "formula",
+        "notes": "Add your Constitution or Strength modifier (minimum +1) to Survival skill checks to handle or ride an animal or rear a wild animal (in addition to your Wisdom modifier).",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "sur"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -100,7 +116,7 @@
       "charged": false,
       "value": null
     },
-    "requirements": "Int 13",
+    "requirements": "Con 11 or Str 11",
     "rollNotes": "",
     "save": {
       "type": "",
