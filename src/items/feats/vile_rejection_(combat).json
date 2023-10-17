@@ -1,16 +1,16 @@
 {
-  "_id": "DNqAntTI9uIwz9c1",
-  "name": "Trusted Companion",
+  "_id": "uAChKghMcRkSgdV9",
+  "name": "Vile Rejection (Combat)",
   "type": "feat",
   "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
-    "actionTarget": "",
-    "actionType": "",
+    "actionTarget": "eac",
+    "actionType": "rwak",
     "activation": {
       "type": "reaction",
       "condition": "",
@@ -30,7 +30,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -38,7 +39,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>You have a boon companion that steels your courage and sharpens your mind with their mere presence.</p><hr /><p><strong>Benefit:</strong> Choose a willing ally when you select this feat. You gain a +1 morale bonus to saves while that ally is conscious and visible to you.</p>\n<p><strong>Special:</strong> If your ally also has this feat and has you selected as their companion, you can spend a reaction to shout encouragement to your trusted companion, allowing them to reroll a failed Will save. They must use the second result, even if it’s worse. You can’t use this ability again until you spend 1 Resolve Point to regain Stamina Points after a 10-minute rest.</p>"
+      "value": "<p>Your body rejects negative effects so violently that even your foes are disgusted.</p>\n<p><strong>Prerequisites:</strong> Con 15</p><hr /><p><strong>Benefit:</strong> Once per day, when you succeed at a Fortitude save against an effect originating from an enemy, you can use a reaction to immediately projectile vomit as a ranged attack that targets EAC and has a range of 10 feet. This attack does not provoke attacks of opportunity. If you hit, the hit creature is @UUID[Compendium.sfrpg.conditions.Item.ZacF0l6IwqBwToTJ]{sickened} for [[/r 1d4]]{1d4 rounds}. This is a mind-affecting effect.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -65,7 +66,7 @@
       "language-dependent": false,
       "lawful": false,
       "light": false,
-      "mind-affecting": false,
+      "mind-affecting": true,
       "pain": false,
       "poison": false,
       "polymorph": false,
@@ -80,7 +81,7 @@
     },
     "details": {
       "category": "feat",
-      "combat": false,
+      "combat": true,
       "specialAbilityType": ""
     },
     "duration": {
@@ -89,39 +90,27 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [
-      {
-        "_id": "82661132-90c9-48d2-b6f1-1597d3f7a95a",
-        "name": "Trusted Companion",
-        "type": "morale",
-        "condition": "",
-        "effectType": "saves",
-        "enabled": false,
-        "max": 1,
-        "modifier": "1",
-        "modifierType": "formula",
-        "notes": "Choose a willing ally when you select this feat. You gain a +1 morale bonus to saves while that ally is conscious and visible to you.",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": ""
-      }
-    ],
+    "modifiers": [],
     "range": {
       "additional": "",
       "per": "",
-      "units": "none",
-      "value": ""
+      "units": "ft",
+      "value": "10"
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "",
+    "requirements": "Con 15",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
+    },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
     },
     "source": "EN pg. 113",
     "target": {
@@ -130,7 +119,7 @@
     },
     "uses": {
       "max": "1",
-      "per": "sr",
+      "per": "day",
       "value": 1
     }
   }
