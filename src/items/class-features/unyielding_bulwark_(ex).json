@@ -1,27 +1,27 @@
 {
-  "_id": "eGjL8lYt4hQPFlBi",
-  "name": "Explosive Entrance (Ex) (9th)",
+  "_id": "oj86FRPVPYmR8tA0",
+  "name": "Unyielding Bulwark (Ex)",
   "type": "feat",
-  "img": "icons/magic/fire/barrier-wall-explosion-orange.webp",
+  "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "",
-    "ability": "",
+    "ability": null,
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "save",
+    "actionType": "",
     "activation": {
-      "type": "swift",
+      "type": "none",
       "condition": "",
-      "cost": 2
+      "cost": null
     },
     "area": {
       "effect": "",
       "shapable": false,
-      "shape": "sphere",
+      "shape": "",
       "units": "ft",
-      "value": "10"
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -38,7 +38,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.tniq6wm0fQSzLbB0]{Shock and Awe}</p>\n<p>As a swift action on your first turn of combat or as a reaction after being subject to a critical hit, you can spend 1 Resolve Point to cause your armor, weapons, and other devices’ displays to flash with brilliant lights, blare loudly, or both. This causes all creatures within 10 feet of you to gain your choice of the @UUID[Compendium.sfrpg.conditions.Item.MZ8OoH1GE9qDMyCD]{flat-footed} or @UUID[Compendium.sfrpg.conditions.Item.yUtkoIshf4dPruNd]{off-target} condition until the end of your next turn. A creature can negate this effect with a successful Fortitude save (DC = 10 + half your soldier level + your Strength modifier). At 15th level, you can affect all creatures within 15 feet of you.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.wFTC0sGqdpnZUib4]{Gear Boost}</p>\n<p>While wearing heavy armor or powered armor, you gain a +4 insight bonus to your AC against @UUID[Compendium.sfrpg.rules.JournalEntry.U37n5tY5hn1ctzQL.JournalEntryPage.R33uiOMesYP0ISWl#bull-rush]{bull rush}, @UUID[Compendium.sfrpg.rules.JournalEntry.U37n5tY5hn1ctzQL.JournalEntryPage.R33uiOMesYP0ISWl#reposition]{reposition}, and @UUID[Compendium.sfrpg.rules.JournalEntry.U37n5tY5hn1ctzQL.JournalEntryPage.R33uiOMesYP0ISWl#trip]{trip} combat maneuvers.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -89,27 +89,39 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "72dd9e84-1ae0-4032-9cab-a44c6c5cf0ed",
+        "name": "Unyielding Bulwark (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": true,
+        "max": 4,
+        "modifier": "4",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "both"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "9th Level Soldier",
+    "requirements": "3rd level Soldier",
     "rollNotes": "",
     "save": {
-      "type": "fort",
-      "dc": "10+floor(@classes.soldier.levels/2)+@abilities.str.mod",
-      "descriptor": "negate"
-    },
-    "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": null,
+      "descriptor": ""
     },
     "source": "AR pg. 155",
     "target": {
