@@ -1,20 +1,20 @@
 {
-  "_id": "Hnt13bHfBsqWgh3B",
-  "name": "Sudden Growth (Ex)",
+  "_id": "mJoMyZgp5nk98GF0",
+  "name": "Digital Disease",
   "type": "feat",
   "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "",
-    "ability": "",
+    "ability": null,
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "save",
+    "actionType": "",
     "activation": {
-      "type": "action",
+      "type": "",
       "condition": "",
-      "cost": 1
+      "cost": null
     },
     "area": {
       "effect": "",
@@ -30,8 +30,7 @@
       "parts": []
     },
     "damage": {
-      "parts": [],
-      "primaryGroup": null
+      "parts": []
     },
     "damageNotes": "",
     "description": {
@@ -39,7 +38,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.K1Oyu9VpHkaJunnC]{Hypermycology}</p>\n<p>As a standard action, you can create and deliver a potent fungal infection to a creature. When injected, the formula develops in one of three patterns: visual, mental, or physical, chosen as part of your standard action. Targets can attempt a Fortitude saving throw to negate the effects.</p><ul><li><p><strong>@UUID[Compendium.sfrpg.effects.Item.bOjsZFLklGr5hRb4]{Visual}:</strong> The targeted creature is silhouetted by a sudden growth of mushrooms. These mushrooms hinder the subject’s perception, causing a -2 penalty to Perception checks and negating invisibility for 1 minute.</p></li><li><p><strong>Mental:</strong> The targeted creature is @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{confused} until the end of your next turn.</p></li><li><p><strong>Physical:</strong> The targeted creature is surrounded in a surfeit of gigantic mushrooms that spring up around them, creating an impassible wall in any empty squares adjacent to the creature. The wall has hardness 0 and 5 Hit Points per Biohacker level. The mushrooms wilt and dissipate at the end of your next turn.</p></li></ul>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.rpaon3jF3nCe5eP9]{Theorem (Ex)}</p>\n<p>By combining your @UUID[Compendium.sfrpg.class-features.Item.lgdDuAM2I3s8PQsD]{Custom Microlab} and your @UUID[Compendium.sfrpg.class-features.Item.LlVZg2sfe3n2h2Dc]{Microlab Jack}, you have discovered a way to encode your biohacks into the stream of raw energy output from an energy weapon. You can treat one wielded weapon that deals energy damage as having the injection special property for the purposes of class abilities. This ability functions with the @UUID[Compendium.sfrpg.class-features.Item.IPDN3VDLTrrMFE2g]{Injection Expert} class feature, giving you proficiency, bonuses to attacks, and its other effects, despite the injection special property coming from a class feature.</p>\n<p>You must have the microlab jack theorem (Starfinder Tech Revolution 19) to choose this theorem.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -82,45 +81,57 @@
     "details": {
       "category": "classFeature",
       "combat": false,
-      "specialAbilityType": "ex"
+      "specialAbilityType": ""
     },
     "duration": {
-      "units": "minute",
-      "value": "1"
+      "units": "text",
+      "value": ""
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "bec59a70-e15e-42dc-aafc-992c9660f447",
+        "name": "Digital Disease",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-property-attacks",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@classes.biohacker.levels,0,2,1,9,2,18,3)",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "Digital Disease; Biohacker",
+        "subtab": "misc",
+        "valueAffected": "injection"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "5th Level (Biohacker)",
+    "requirements": "10th Level (Biohacker)",
     "rollNotes": "",
     "save": {
-      "type": "fort",
-      "dc": "10+floor(@classes.biohacker.levels/2) + (@classes.biohacker.keyAbilityMod)",
-      "descriptor": "negate"
-    },
-    "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": null,
+      "descriptor": ""
     },
-    "source": "EN pg. 32",
+    "source": "EN pg. 34",
     "target": {
       "type": "",
       "value": ""
     },
     "uses": {
-      "max": "0",
-      "per": "",
-      "value": 0
+      "max": "1",
+      "per": "day",
+      "value": 1
     }
   }
 }

@@ -1,6 +1,6 @@
 {
-  "_id": "bOjsZFLklGr5hRb4",
-  "name": "Effect: Sudden Growth - Visual",
+  "_id": "TVJUEOnspv1PmJIs",
+  "name": "Effect: Flashcap Luminescence",
   "type": "effect",
   "img": "icons/svg/mystery-man.svg",
   "system": {
@@ -16,8 +16,8 @@
         "type": "turn",
         "turn": "parent"
       },
-      "unit": "minute",
-      "value": "1"
+      "unit": "round",
+      "value": "@origin.actor.classes.biohacker.levels / 2"
     },
     "context": {
       "origin": {
@@ -36,28 +36,28 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>The targeted creature is silhouetted by a sudden growth of mushrooms. These mushrooms hinder the subject’s perception, causing a -2 penalty to Perception checks and negating invisibility for 1 minute.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.dRyb2qvFXyAvbqYD]{Flashcap Luminescence}</p>\n<p>Your @UUID[Compendium.sfrpg.class-features.Item.mtqIq18RjrgURd3g]{Flashcap} theorem now creates longer-lasting luminescent microbes that cause affected creatures to shed a pale glow. Creatures affected by flashcap take a –20 penalty to Stealth checks and are visible in darkness. This effect lasts for 1 round per 2 biohacker levels.</p>\n<p>You must have the flashcap theorem to choose this theorem.</p>"
     },
     "enabled": true,
     "modifiers": [
       {
         "_id": "fb1e5f14-9cd0-47c8-ba75-74eca9a821d7",
-        "name": "Effect: Sudden Growth - Visual",
+        "name": "Effect: Flashcap Luminescence",
         "type": "untyped",
         "condition": "",
         "effectType": "skill",
         "enabled": true,
-        "max": -2,
-        "modifier": "-2",
+        "max": -20,
+        "modifier": "-20",
         "modifierType": "constant",
         "notes": "",
         "source": "",
         "subtab": "misc",
-        "valueAffected": "per"
+        "valueAffected": "ste"
       }
     ],
-    "requirements": "5th Level Biohacker",
+    "requirements": "4th Level Biohacker",
     "showOnToken": true,
-    "source": ""
+    "source": "EN pg. 33"
   }
 }

@@ -1,6 +1,6 @@
 {
-  "_id": "Hnt13bHfBsqWgh3B",
-  "name": "Sudden Growth (Ex)",
+  "_id": "woHDAH8pWxxqUQT5",
+  "name": "Rising Cap",
   "type": "feat",
   "img": "icons/svg/mystery-man.svg",
   "system": {
@@ -12,19 +12,19 @@
     "actionTarget": "",
     "actionType": "save",
     "activation": {
-      "type": "action",
+      "type": "move",
       "condition": "",
       "cost": 1
     },
     "area": {
       "effect": "",
       "shapable": false,
-      "shape": "",
+      "shape": "cube",
       "units": "ft",
-      "value": ""
+      "value": "10"
     },
     "attackBonus": 0,
-    "chatFlavor": "",
+    "chatFlavor": "Reflex save to move into the nearest  empty space",
     "critical": {
       "effect": "",
       "parts": []
@@ -39,7 +39,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.K1Oyu9VpHkaJunnC]{Hypermycology}</p>\n<p>As a standard action, you can create and deliver a potent fungal infection to a creature. When injected, the formula develops in one of three patterns: visual, mental, or physical, chosen as part of your standard action. Targets can attempt a Fortitude saving throw to negate the effects.</p><ul><li><p><strong>@UUID[Compendium.sfrpg.effects.Item.bOjsZFLklGr5hRb4]{Visual}:</strong> The targeted creature is silhouetted by a sudden growth of mushrooms. These mushrooms hinder the subject’s perception, causing a -2 penalty to Perception checks and negating invisibility for 1 minute.</p></li><li><p><strong>Mental:</strong> The targeted creature is @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{confused} until the end of your next turn.</p></li><li><p><strong>Physical:</strong> The targeted creature is surrounded in a surfeit of gigantic mushrooms that spring up around them, creating an impassible wall in any empty squares adjacent to the creature. The wall has hardness 0 and 5 Hit Points per Biohacker level. The mushrooms wilt and dissipate at the end of your next turn.</p></li></ul>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.rpaon3jF3nCe5eP9]{Theorem (Ex)}</p>\n<p>As a move action, you can create a temporary rising platform in a 10-foot-square area within 10 feet, as a rapidly growing mushroom stalk lifts creatures in the area. Creatures in the area can attempt a Reflex save to move into the nearest empty space; this movement doesn’t provoke attacks of opportunity. The platform rises 30 feet vertically, stopping if it or any creature on it would hit an obstacle. The platform lasts 2d4 rounds before desiccating, causing any creatures remaining on the platform to fall. You can’t use this ability again until you spend 1 Resolve Point to regain Stamina Points after a 10-minute rest.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -82,11 +82,11 @@
     "details": {
       "category": "classFeature",
       "combat": false,
-      "specialAbilityType": "ex"
+      "specialAbilityType": ""
     },
     "duration": {
-      "units": "minute",
-      "value": "1"
+      "units": "round",
+      "value": "2d4"
     },
     "formula": "",
     "isActive": null,
@@ -95,16 +95,16 @@
       "additional": "",
       "per": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "5th Level (Biohacker)",
+    "requirements": "4th Level (Biohacker)",
     "rollNotes": "",
     "save": {
-      "type": "fort",
+      "type": "reflex",
       "dc": "10+floor(@classes.biohacker.levels/2) + (@classes.biohacker.keyAbilityMod)",
       "descriptor": "negate"
     },
@@ -112,15 +112,15 @@
       "type": "",
       "dc": ""
     },
-    "source": "EN pg. 32",
+    "source": "EN pg. 33",
     "target": {
       "type": "",
-      "value": ""
+      "value": "within 10 feet"
     },
     "uses": {
-      "max": "0",
-      "per": "",
-      "value": 0
+      "max": "1",
+      "per": "sr",
+      "value": 1
     }
   }
 }
