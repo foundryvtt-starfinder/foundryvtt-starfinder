@@ -1,0 +1,152 @@
+{
+  "_id": "zRa2NxRgVuSgWFgr",
+  "name": "Bolstering Aura (Divine Niche)",
+  "type": "feat",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "type": "",
+    "ability": null,
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "",
+    "actionType": "",
+    "activation": {
+      "type": "move",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "",
+      "shapable": false,
+      "shape": "",
+      "units": "ft",
+      "value": "30"
+    },
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "effect": "",
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "damageNotes": "",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.d7srQIGDe42MfrDw]{Divine (Niche)}</p>\n<p>You release a fraction of the divine energy contained within your body, radiating it out from you to bolster your spiritual allies. As a move action, you can generate a 30-foot-radius aura of divine energy. Creatures in the area that are of your associated alignment gain a +1 divine bonus to attack rolls and Will saving throws. This aura lasts for 3 rounds. When this aura would end, you can spend MP to prolong its duration by 1 additional round; this costs 1 MP plus an additional MP for each previous round you have extended this effect. At 10th level, the bonus increases to +2. Once you use this ability, you can’t use it again until you spend a Resolve Point to regain Stamina Points after a 10-minute rest.</p>"
+    },
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
+    "details": {
+      "category": "classFeature",
+      "combat": false,
+      "specialAbilityType": ""
+    },
+    "duration": {
+      "units": "round",
+      "value": "3"
+    },
+    "formula": "",
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "4e185bcc-55a2-492b-b1aa-1f30db7153c5",
+        "name": "Bolstering Aura (Divine Niche)  - Attack Rolls",
+        "type": "divine",
+        "condition": "",
+        "effectType": "all-attacks",
+        "enabled": true,
+        "max": 1,
+        "modifier": "lookupRange(@details.level.value, 1, 1, 10, 2)",
+        "modifierType": "formula",
+        "notes": "Creatures in \nthe area that are of your associated alignment gain a +1 divine \nbonus to attack rolls and Will saving throws.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "58da3cc3-f742-4326-b048-46d9aa993a71",
+        "name": "Bolstering Aura (Divine Niche) - Will",
+        "type": "divine",
+        "condition": "",
+        "effectType": "save",
+        "enabled": true,
+        "max": 1,
+        "modifier": "lookupRange(@details.level.value, 1, 1, 10, 2)",
+        "modifierType": "constant",
+        "notes": "Creatures in \nthe area that are of your associated alignment gain a +1 divine \nbonus to attack rolls and Will saving throws.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "will"
+      }
+    ],
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "none",
+      "value": ""
+    },
+    "recharge": {
+      "charged": false,
+      "value": null
+    },
+    "requirements": "1st Level (Evolutionist)",
+    "rollNotes": "",
+    "save": {
+      "type": "",
+      "dc": null,
+      "descriptor": ""
+    },
+    "source": "EN pg. 42",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": "1",
+      "per": "sr",
+      "value": 1
+    }
+  }
+}
