@@ -1,0 +1,78 @@
+{
+  "_id": "PmcjQqDnUFnkMIQr",
+  "name": "Effect: Mech Offensive Expert (Ex)",
+  "type": "effect",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "type": "effect",
+    "abilityMods": {
+      "parts": []
+    },
+    "activeDuration": {
+      "activationTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "parent"
+      },
+      "unit": "round",
+      "value": "0"
+    },
+    "context": {
+      "origin": {
+        "actorUuid": "",
+        "itemUuid": ""
+      }
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.RBImx3JLhGhbcyn9]{Mech Offensive Expert (Ex)}</p>\n<p>Your extensive experience working on mechs enables you to improve their offensive performance. You can spend 1 minute working on a mech to attempt an Engineering check with a DC of 10 +1-1/2 × the mech’s tier. If you succeed, you can add +1 to the base attack bonus and strength modifier. Only one attempt can be made per specific mech, though you can attempt similar checks on other models of the same mech. At 15th level, this bonus increases to +2.</p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "c6607952-8005-46d8-8ced-cdaf90da25a3",
+        "name": "Effect: Mech Offensive Expert (Ex) - Attack",
+        "type": "base",
+        "condition": "",
+        "effectType": "base-attack-bonus",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@origin.actor.details.level.value, 0, 4, 1, 15, 2)",
+        "modifierType": "constant",
+        "notes": "You can add +1 to the base attack bonus and strength modifier. Only one attempt \ncan be made per specific mech, though you can attempt similar checks on other models of the same mech. At 15th level, this \nbonus increases to +2.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "both"
+      },
+      {
+        "_id": "99338d7d-d5ab-4bc9-9630-6217965ca8a8",
+        "name": "Effect: Mech Offensive Expert (Ex) - Strength",
+        "type": "base",
+        "condition": "",
+        "effectType": "ability-score",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@origin.actor.details.level.value, 0, 4, 1, 15, 2)",
+        "modifierType": "constant",
+        "notes": "You can add +1 to the base attack bonus and strength modifier. Only one attempt \ncan be made per specific mech, though you can attempt similar checks on other models of the same mech. At 15th level, this \nbonus increases to +2.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "str"
+      }
+    ],
+    "requirements": "8th Level (Mechanic)",
+    "showOnToken": true,
+    "source": "EN pg. 47"
+  }
+}

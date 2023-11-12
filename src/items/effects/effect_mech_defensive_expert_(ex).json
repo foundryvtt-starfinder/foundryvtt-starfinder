@@ -1,0 +1,78 @@
+{
+  "_id": "Msc9EOgRcWivLGg1",
+  "name": "Effect: Mech Defensive Expert (Ex)",
+  "type": "effect",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "type": "effect",
+    "abilityMods": {
+      "parts": []
+    },
+    "activeDuration": {
+      "activationTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "parent"
+      },
+      "unit": "round",
+      "value": "0"
+    },
+    "context": {
+      "origin": {
+        "actorUuid": "",
+        "itemUuid": ""
+      }
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.jFRcwuVfCK6dj7ST]{Mech Defensive Expert (Ex)}</p>\n<p>Your extensive experience working on mechs enables you to improve their defensive performance. You can spend 1 minute working on a mech to attempt an Engineering check with a DC equal to 10 + 1-1/2 × the mech’s tier. If you succeed, you can add +1 to the base AC and base save of the mech you are working on. Only one attempt can be made per specific mech, though you can attempt similar checks on other models of the same mech. At 15th level, this bonus increases to +2.</p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "c6607952-8005-46d8-8ced-cdaf90da25a3",
+        "name": "Effect: Mech Defensive Expert (Ex) - AC",
+        "type": "base",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@origin.actor.details.level.value, 0, 4, 1, 15, 2)",
+        "modifierType": "constant",
+        "notes": "You can add +1 to the base AC and base save of the mech you are working on. Only one attempt can be made per specific mech, though you can attempt similar checks on other models of the same mech. At 15th level, this bonus increases to +2.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "both"
+      },
+      {
+        "_id": "99338d7d-d5ab-4bc9-9630-6217965ca8a8",
+        "name": "Effect: Mech Defensive Expert (Ex) - Saves",
+        "type": "base",
+        "condition": "",
+        "effectType": "saves",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@origin.actor.details.level.value, 0, 4, 1, 15, 2)",
+        "modifierType": "constant",
+        "notes": "You can add +1 to the base AC and base save of the mech you are working on. Only one attempt can be made per specific mech, though you can attempt similar checks on other models of the same mech. At 15th level, this bonus increases to +2.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
+    "requirements": "4th Level (Mechanic)",
+    "showOnToken": true,
+    "source": "EN pg. 47"
+  }
+}

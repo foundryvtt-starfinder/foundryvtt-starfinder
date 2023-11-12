@@ -1,0 +1,78 @@
+{
+  "_id": "nqg2LEWc7PgHMysM",
+  "name": "Effect: Vehicle Whisperer (Ex)",
+  "type": "effect",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "type": "effect",
+    "abilityMods": {
+      "parts": []
+    },
+    "activeDuration": {
+      "activationTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "parent"
+      },
+      "unit": "hour",
+      "value": "@abilities.int.mod"
+    },
+    "context": {
+      "origin": {
+        "actorUuid": "",
+        "itemUuid": ""
+      }
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.81JGPv0UP5kB8A56]{Vehicle Whisperer (Ex)}</p>\n<p>You can use your extensive mechanical expertise to improve the performance of any vehicle. You can spend 1 Resolve Point to affect a vehicle you can touch. The vehicle gains a +1 enhancement bonus to EAC and KAC, it deals an additional 1d4 damage with collision attacks, and its movement speeds increase by 5 feet. If you’re piloting this vehicle, its Piloting modifier increases by 2. These effects last for a number of hours equal to your Intelligence modifier before they revert back to their original values, whether or not you remain with the vehicle.</p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "b639fa2d-537e-4153-9a21-0fedc7c1f1d5",
+        "name": "Effect: Vehicle Whisperer (Ex) - Armor Bonus",
+        "type": "enhancement",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": true,
+        "max": 1,
+        "modifier": "1",
+        "modifierType": "constant",
+        "notes": "You can spend 1 Resolve Point to affect a vehicle you can touch. The vehicle gains a +1 enhancement bonus to EAC and KAC.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "both"
+      },
+      {
+        "_id": "a43463de-f63e-4850-b338-49a239b1f2c8",
+        "name": "Effect: Vehicle Whisperer (Ex) - Movement Speed",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-speeds",
+        "enabled": true,
+        "max": 5,
+        "modifier": "5",
+        "modifierType": "constant",
+        "notes": "You can spend 1 Resolve Point to affect a vehicle you can touch. The vehicle gains a +1 enhancement bonus to EAC and KAC, it deals an additional 1d4 \ndamage with collision attacks, and its movement speeds increase by 5 feet.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
+    "requirements": "4th Level (Mechanic)",
+    "showOnToken": true,
+    "source": "EN pg. 47"
+  }
+}
