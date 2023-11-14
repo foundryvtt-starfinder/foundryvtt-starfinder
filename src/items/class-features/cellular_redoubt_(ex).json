@@ -1,6 +1,6 @@
 {
-  "_id": "lJRqcU90rzQ9CT3w",
-  "name": "Nanite Faculties",
+  "_id": "x0Syx4BS2Sd7Rgvy",
+  "name": "Cellular Redoubt (Ex)",
   "type": "feat",
   "img": "icons/svg/mystery-man.svg",
   "system": {
@@ -14,7 +14,7 @@
     "activation": {
       "type": "",
       "condition": "",
-      "cost": 0
+      "cost": null
     },
     "area": {
       "effect": "",
@@ -38,7 +38,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.MMyeA7kL5Vhcio05]{Nanocyte}</p>\n<p>The following represent specialty paths that nanocytes commonly take while developing their nanite abilities. Each faculty lists the techniques you learn as you gain levels. For effects that require a saving throw, the DC is 10 + half your nanocyte level + your Constitution modifier.</p><h2>Faculties</h2><p>@UUID[Compendium.sfrpg.class-features.N5460NEe031AoP29]{Absorption}</p>\n<p>@UUID[Compendium.sfrpg.class-features.gnOlM0tNdmB7tj4B]{Discorporation}</p>\n<p>@UUID[Compendium.sfrpg.class-features.zg80xpKDcFM3p13P]{Infestation}</p>\n<p>@UUID[Compendium.sfrpg.class-features.fdBGqxDLdBa3mMza]{Obliteration}</p>\n<p>@UUID[Compendium.sfrpg.class-features.4r46S2T0VEim6OIJ]{Redirection}</p>\n<p>@UUID[Compendium.sfrpg.class-features.tLjIUYAquhySuyZQ]{Regeneration}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.Q2xyE1ba2vCOMJt6]{Transmutation}</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.Q2xyE1ba2vCOMJt6]{Transmutation}</p>\n<p>Your nanites make your body a bastion of density and stability. While your @UUID[Compendium.sfrpg.class-features.Item.58zPVi7ejjc6ggof]{Body Array (Ex)} is active, you gain a +1 bonus to EAC and KAC and an additional +2 bonus to KAC against bull rush and trip combat maneuvers. Additionally, while your body array is active, treat your level as 3 higher when calculating the bonus of your @UUID[Compendium.sfrpg.class-features.Item.7QqHaQgX7cW4ftdP]{Cyto-Conversion (Ex)} ability.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -81,15 +81,46 @@
     "details": {
       "category": "classFeature",
       "combat": false,
-      "specialAbilityType": ""
+      "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "",
+      "units": "text",
       "value": null
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "38a2904e-0af9-4327-a44c-5eb2aad5dbe1",
+        "name": "Cellular Redoubt (Ex) - Armor Bonus",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": true,
+        "max": 1,
+        "modifier": "1",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "both"
+      },
+      {
+        "_id": "18ef9195-c1c9-47d3-af3f-4b56f1422f02",
+        "name": "Cellular Redoubt (Ex) - Combat Maneuvers",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "cmd",
+        "enabled": true,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "Against bull rush and trip combat maneuvers",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -100,14 +131,14 @@
       "charged": false,
       "value": null
     },
-    "requirements": "1st Level",
+    "requirements": "13th Level (Nanocyte)",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "TR, p. 11",
+    "source": "EN pg. 54",
     "target": {
       "type": "",
       "value": null
