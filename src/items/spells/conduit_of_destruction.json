@@ -1,0 +1,173 @@
+{
+  "_id": "DdvgNLKdDFbgT9ba",
+  "name": "Conduit of Destruction",
+  "type": "spell",
+  "img": "systems/sfrpg/icons/spells/controle_atmosphere.webp",
+  "system": {
+    "type": "",
+    "ability": "",
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "",
+    "actionType": "save",
+    "activation": {
+      "type": "action",
+      "condition": "",
+      "cost": 0
+    },
+    "allowedClasses": {
+      "myst": true,
+      "precog": true,
+      "tech": true,
+      "wysh": true
+    },
+    "area": {
+      "effect": "emanation",
+      "shapable": false,
+      "shape": "sphere",
+      "units": "ft",
+      "value": "5"
+    },
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "concentration": true,
+    "critical": {
+      "effect": "",
+      "parts": []
+    },
+    "damage": {
+      "parts": [
+        {
+          "name": "Cast at Spell Level 2",
+          "formula": "2d4",
+          "group": null,
+          "isPrimarySection": true,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Cast at Spell Levels 3-6",
+          "formula": "lookupRange(@item.level, 3, 4, 5, 5, 7, 6, 10)d6",
+          "group": null,
+          "isPrimarySection": false,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ],
+      "primaryGroup": null
+    },
+    "damageNotes": "",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>Rather than shaping your magical power into a specific spell, you exude raw magic as a destructive aura. When you cast this spell, magical energy fills a 5-foot-radius emanation centered on you, dealing damage to creatures and objects that enter the area or begin their turn in the area (Reflex half); a creature or object doesn’t take this damage more than once per round, even if it enters the area multiple times during its turn. Each round that you concentrate on this spell, you can increase the emanation’s radius by 5 feet, to a maximum radius determined by the spell’s level.</p>\n<p>When you cast conduit of destruction, you choose which type of damage it deals based on your spellcasting class, after which you cannot change the damage type or types for the duration of the spell. Conduit of destruction deals piercing, sonic, or both piercing and sonic damage as a mystic spell; bludgeoning, cold, or both bludgeoning and cold damage as a precog spell; electricity, fire, or both electricity and fire damage as a technomancer spell; or acid, slashing, or both acid and slashing damage as a witchwarper spell.</p>\n<p>When you take damage that would cause you to lose concentration, you can attempt a DC 15 ability check using your spellcasting ability score. If you succeed, you maintain concentration despite taking damage. If you would lose concentration of this spell due to taking damage, the spell ends in an explosive burst of uncontrolled magic, dealing damage to all creatures and objects in a burst centered on you with a radius equal to your emanation’s current radius (Reflex half). Casting this spell doesn’t provoke attacks of opportunity. The ongoing damage dealt by this spell’s emanation and the damage dealt by the explosion when you lose concentration are identical. They and the spell’s maximum radius vary based on the spell’s level.</p>\n<p><strong>2nd:</strong> When cast as a 2nd-level spell, conduit of destruction deals 2d4 damage and has a maximum radius of 20 feet.</p>\n<p><strong>3rd:</strong> When cast as a 3rd-level spell, conduit of destruction deals 3d6 damage and has a maximum radius of 20 feet.</p>\n<p><strong>4th:</strong> When cast as a 4th-level spell, conduit of destruction deals 5d6 damage and has a maximum radius of 30 feet.</p>\n<p><strong>5th:</strong> When cast as a 5th-level spell, conduit of destruction deals 7d6 damage. Its starting radius is 10 feet, the radius increases by 10 feet each time you concentrate on the spell, and it has a maximum radius of 60 feet.</p>\n<p><strong>6th:</strong> When cast as a 6th-level spell, conduit of destruction deals 10d6 damage. Its starting radius is 10 feet, the radius increases by 10 feet each time you concentrate on the spell, and it has a maximum radius of 100 feet.</p>"
+    },
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
+    "dismissible": false,
+    "duration": {
+      "units": "round",
+      "value": "@details.cl.value"
+    },
+    "formula": "",
+    "isActive": null,
+    "isVariableLevel": true,
+    "level": 2,
+    "materials": {
+      "consumed": false,
+      "cost": 0,
+      "supply": 0,
+      "value": ""
+    },
+    "modifiers": [],
+    "preparation": {
+      "mode": "",
+      "prepared": false
+    },
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "personal",
+      "value": ""
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "descriptor": "half"
+    },
+    "school": "evo",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
+    "source": "EN pg. 121",
+    "sr": true,
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": "",
+      "per": "",
+      "value": null
+    }
+  }
+}
