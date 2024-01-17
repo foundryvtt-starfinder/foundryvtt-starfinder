@@ -70,7 +70,7 @@ async function buildLess() {
         .pipe(sourcemaps.init())
         .pipe(less())
         .pipe(cssClean())
-        .pipe(sourcemaps.write('./maps'))
+        .pipe(sourcemaps.write('./maps', {includeContent: false, sourceRoot: '/src/less'}))
         .pipe(gulp.dest('dist'));
 }
 
