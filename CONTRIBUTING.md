@@ -6,10 +6,10 @@ If you would like to contribute to the project then I welcome any contributions.
 
 1. You'll need `node` installed on your system. You will need a version of `node` that is at least 14.x or greater. To install it, go to [the Node.js downloads page](https://nodejs.org/en/download/) and choose an installer for your operating system. The current LTS is probably a good choice, though the current version works just as well.
 2. This system uses `gulp` to process `less` into usable `css` as well as some other utilities. You will need to install `gulp` for this purpose. To install, open up your preferred command line tool and enter the following command `npm install --global gulp-cli`. This will install the `gulp` command line utilities globally.
-3. You'll also need a `git` client installed; whether that is the [command line tool](https://cli.github.com) or something like [Sourcetree](https://www.sourcetreeapp.com) or [GitKraken](https://www.gitkraken.com) is up to you.  
+3. You'll also need a `git` client installed; whether that is the [command line tool](https://cli.github.com) or something like [Sourcetree](https://www.sourcetreeapp.com) or [GitKraken](https://www.gitkraken.com) is up to you.
 Your integrated development environment (IDE) may also include git integration; please refer to the documentation available for the IDE for how to set this up.
 
-With those things installed, we can work on getting the repository ready for development. The preferred method for contributing to the repository is through the typical ["Pull Request"](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork) methodology. To get started, you'll need to [fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/about-forks) the `foundryvtt-starfinder` repository. Once you've forked the repository, you can clone that repo to your local machine. When you are making changes, it is recommended that you [create a new branch](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-and-deleting-branches-within-your-repository) for this purpose, based off of the development branch. After your changes are pushed back to your forked repository, you can then create a pull request from there. 
+With those things installed, we can work on getting the repository ready for development. The preferred method for contributing to the repository is through the typical ["Pull Request"](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork) methodology. To get started, you'll need to [fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/about-forks) the `foundryvtt-starfinder` repository. Once you've forked the repository, you can clone that repo to your local machine. When you are making changes, it is recommended that you [create a new branch](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-and-deleting-branches-within-your-repository) for this purpose, based off of the development branch. After your changes are pushed back to your forked repository, you can then create a pull request from there.
 
 ## Follow these steps to get your development environment going after downloading your fork locally:
 
@@ -19,9 +19,9 @@ With those things installed, we can work on getting the repository ready for dev
 4. Run `npm run build`. This will compile all of the `less` and copy all the necessary files to a `dist` folder in the project root. It will also create a symbolic link to this new folder with your Foundry installs user data path.
 
 ```diff
-+ Note for Windows users: You may need to run your commandline with administrator privileges if your 
-+ dataPath folder is the default FoundryVTT setting of "C:\Users\Username\AppData\Local\FoundryVTT". 
-+ Additionally on Windows, you may need to use double back-slashes in your filepath. 
++ Note for Windows users: You may need to run your commandline with administrator privileges if your
++ dataPath folder is the default FoundryVTT setting of "C:\Users\Username\AppData\Local\FoundryVTT".
++ Additionally on Windows, you may need to use double back-slashes in your filepath.
 + (E.g "C:\\Users\\Username\\AppData\\Local\\FoundryVTT")
 ```
 
@@ -46,7 +46,7 @@ The easiest workflow is to work through Foundry, and follow the following steps:
 2. Fill out the details, modifiers, etc. Make sure the name closely matches the original name from the SRD.
 3. Add the item to the relevant compendium.
 
-```diff 
+```diff
 - IMPORTANT: Ensure links point to the item in the compendium, *not* to the item in the sidebar!
 ```
 4. Run `npm run unpack` to unpack the changes from your local system install's DB files into JSON files in your git repo.
@@ -55,8 +55,8 @@ The easiest workflow is to work through Foundry, and follow the following steps:
 7. Submit a pull request if everything looks good. :-)
 
 ```diff
-- Please don't include database files in your pull request as this can lead to merge conflicts. 
-- Obviously you can still cook in order to check everything is in order, 
+- Please don't include database files in your pull request as this can lead to merge conflicts.
+- Obviously you can still cook in order to check everything is in order,
 - but only submit your JSON files as a final cook is performed before every release.
 ```
 
@@ -116,7 +116,7 @@ Items have a source field, and this source field should be filled in. There is a
 | Alien Card Deck | ACD | ACD |
 
 # NPM Scripts
-The following are the various scripts used for the development of the system, which automate a lot of what would otherwise be manual work. 
+The following are the various scripts used for the development of the system, which automate a lot of what would otherwise be manual work.
 
 To run these, run `npm run SCRIPT_NAME` in your command promt while in your local repo's folder. Alternatively VSCode has a handy NPM Scripts toolbar you can enable that lets you run them all at a click of a button.
 
@@ -164,3 +164,8 @@ Don't use this, just run `npm ci` instead.
 ### Getting Foundry Intellisense in Visual Studio Code
 
 If you would like some basic Intellisense for the Foundry types when using Visual Studio Code, all you have to do is copy `foundry.js` into the projects root folder. The `foundry.js` can be found in your Foundry installation folder e.g. '\Foundry Virtual Tabletop\resources\app\public\scripts'. Once you do this, restart VS Code, and you should now see proper Intellisense.
+
+### Setting up Visual Studio Code to enable breakpoints
+You can set up Visual Studio Code to help with debugging by configuring it to launch a Chrome (or other browser) window in debug mode. To do this, create a folder called `.vscode` in the main `sfrpg` directory. Place the file `launch.example.json` in the folder, renaming it to `launch.json`. Configure the `url` field to ensure it's connecting to your foundry server at the correct address and port. By default, this file is set up for Chrome, but you can change this to Firefox or Microsoft Edge by modifying it appropriately (Firefox *may* also require an additional plugin).
+
+Once you've completed these steps, as long as your foundry server is running and the `url` is set correcly, you can launch a debug window using VS Code's **Run and Debug** tab. This will allow you to set breakpoints and inspect variables directly in VS Code.
