@@ -70,7 +70,7 @@ async function buildLess() {
         .pipe(sourcemaps.init())
         .pipe(less())
         .pipe(cssClean())
-        .pipe(sourcemaps.write('./maps', {includeContent: false, sourceRoot: '/src/less'}))
+        .pipe(sourcemaps.write('./maps'))
         .pipe(gulp.dest('dist'));
 }
 
@@ -93,12 +93,23 @@ async function copyFiles() {
     ])
         .pipe(gulp.dest((file) => file.base.replace("\\src", "\\dist")));
 
+    // Then pipe in js files to be minified
+    gulp.src('src/sfrpg.js')
+        .pipe(sourcemaps.init())
+        // Minify the JS
+        .pipe(terser({
+            ecma: 2022,
+            compress: {
+                module: true
+            }
+        }))
+        .pipe(sourcemaps.write('./maps'))
+        // Output
+        .pipe(gulp.dest('dist'));
+
     return gulp.src([
-        'src/**/*.js',
-        '!delme',
-        '!docs',
-        '!node_modules',
-        '!scripts'
+        'src/module/**/*.js',
+        'src/module/*.js'
     ])
         .pipe(sourcemaps.init())
         // Minify the JS
@@ -108,9 +119,15 @@ async function copyFiles() {
                 module: true
             }
         }))
-        .pipe(sourcemaps.write('./maps', {includeContent: false, sourceRoot: '/src'}))
+        .pipe(sourcemaps.mapSources(function(sourcePath, file) {
+            // Sets the `sources` property on sourcemap files to be just the filename
+            // This is needed since the sourcemap files are already placed in a non-flattened directory structure
+            const newPath = sourcePath.split('/');
+            return newPath.at(-1);
+        }))
+        .pipe(sourcemaps.write('.././maps/module'))
         // Output
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('dist/module'));
 
 }
 
@@ -134,24 +151,14 @@ async function copyWatchFiles() {
     ])
         .pipe(gulp.dest((file) => file.base.replace("\\src", "\\dist")));
 
-    return gulp.src([
-        'src/**/*.js',
-        '!delme',
-        '!docs',
-        '!node_modules',
-        '!scripts'
-    ])
-        .pipe(sourcemaps.init())
-        // Minify the JS
-        .pipe(terser({
-            ecma: 2022,
-            compress: {
-                module: true
-            }
-        }))
-        .pipe(sourcemaps.write('./maps', {includeContent: false, sourceRoot: '/src'}))
-        // Output
+    gulp.src(`src/${name}.js`)
         .pipe(gulp.dest('dist'));
+
+    return gulp.src([
+        'src/module/**/*.js',
+        'src/module/*.js'
+    ])
+        .pipe(gulp.dest('dist/module'));
 }
 
 /**
