@@ -134,14 +134,24 @@ async function copyWatchFiles() {
     ])
         .pipe(gulp.dest((file) => file.base.replace("\\src", "\\dist")));
 
-    gulp.src(`src/${name}.js`)
-        .pipe(gulp.dest('dist'));
-
     return gulp.src([
-        'src/module/**/*.js',
-        'src/module/*.js'
+        'src/**/*.js',
+        '!delme',
+        '!docs',
+        '!node_modules',
+        '!scripts'
     ])
-        .pipe(gulp.dest('dist/module'));
+        .pipe(sourcemaps.init())
+        // Minify the JS
+        .pipe(terser({
+            ecma: 2022,
+            compress: {
+                module: true
+            }
+        }))
+        .pipe(sourcemaps.write('./maps', {includeContent: false, sourceRoot: '/src'}))
+        // Output
+        .pipe(gulp.dest('dist'));
 }
 
 /**
