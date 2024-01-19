@@ -158,6 +158,21 @@ async function copyWatchFiles() {
         'src/module/**/*.js',
         'src/module/*.js'
     ])
+        .pipe(sourcemaps.init())
+        // Minify the JS
+        .pipe(terser({
+            ecma: 2022,
+            compress: {
+                module: true
+            }
+        }))
+        .pipe(sourcemaps.mapSources(function(sourcePath, file) {
+            // Sets the `sources` property on sourcemap files to be just the filename
+            // This is needed since the sourcemap files are already placed in a non-flattened directory structure
+            const newPath = sourcePath.split('/');
+            return newPath.at(-1);
+        }))
+        .pipe(sourcemaps.write('.././maps/module'))
         .pipe(gulp.dest('dist/module'));
 }
 
