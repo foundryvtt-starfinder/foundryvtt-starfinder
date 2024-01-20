@@ -816,7 +816,8 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         const rollResult = await DiceSFRPG.createRoll({
             rollContext: rollContext,
             rollFormula: selectedFormula.formula + systemBonus + " + @additional.modifiers.bonus",
-            title: game.i18n.format("SFRPG.Rolls.StarshipAction", {action: actionEntry.name})
+            title: game.i18n.format("SFRPG.Rolls.StarshipAction", {action: actionEntry.name}),
+            actorContextKey: actionEntry.system.role
         });
 
         if (!rollResult) {
@@ -861,7 +862,8 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                     rollFormula: dc.value,
                     mainDie: 'd0',
                     title: game.i18n.format("SFRPG.Rolls.StarshipAction", {action: actionEntry.name}),
-                    dialogOptions: { skipUI: true }
+                    dialogOptions: { skipUI: true },
+                    actorContextKey: actionEntry.system.role
                 });
 
                 flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${dcRoll.roll.total}</p>`;

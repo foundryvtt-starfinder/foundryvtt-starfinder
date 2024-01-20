@@ -185,7 +185,8 @@ export default class RollNode {
         // console.log(['Resolving', depth, this]);
         this.resolvedValue = {
             finalRoll: "",
-            formula: ""
+            formula: "",
+			usedMods: []
         };
 
         if (this.isVariable && !this.baseValue) {
@@ -196,6 +197,7 @@ export default class RollNode {
             if (this.baseValue !== "n/a") {
                 // TODO: find another way to do this, or find the correct spot for this as this will result in bugs.
                 const constantMods = rollMods.filter(mod => mod.modifierType === SFRPGModifierType.CONSTANT);
+				this.resolvedValue.usedMods = constantMods;
                 const modSum = constantMods.reduce((accumulator, value) => accumulator + value.max, 0);
                 this.baseValue = (Number(this.baseValue) - modSum).toString();
 
@@ -226,6 +228,8 @@ export default class RollNode {
                 }
                 this.resolvedValue.finalRoll += childResolution.finalRoll;
 
+                const idsToRemove = childResolution.usedMods.map(item => item._id);
+				rollMods = rollMods.filter(item => !idsToRemove.includes(item._id));				
                 if (this.resolvedValue.formula !== "") {
                     this.resolvedValue.formula += " + ";
                 }
@@ -248,11 +252,11 @@ export default class RollNode {
                 // console.log(["testing var", depth, this, fullVariable, variable, existingNode]);
                 if (existingNode) {
                     const childResolution = existingNode.resolveForRoll(depth + 1, rollMods);
+					const idsToRemove = childResolution.usedMods.map(item => item._id);
+					rollMods = rollMods.filter(item => !idsToRemove.includes(item._id));
                     valueString = valueString.replace(regexp, childResolution.finalRoll);
                     formulaString = formulaString.replace(regexp, childResolution.formula);
-                    // console.log(['Result', depth, childResolution, valueString, formulaString]);
                 } else {
-                    // console.log(['Result', depth, "0"]);
                     valueString = valueString.replace(regexp, "0");
                     formulaString = formulaString.replace(regexp, "0");
                 }

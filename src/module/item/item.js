@@ -1130,6 +1130,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             rollOptions.actionTargetSource = SFRPG.actionTargetsStarship;
         }
 
+        const quadrant = this.system.mount.arc.charAt(0).toUpperCase() + this.system.mount.arc.slice(1);
+        parts.push(` + @ship.attributes.systems.weaponsArray${quadrant}.mod`);
+        parts.push(` + @ship.attributes.systems.powerCore.modOther`);
+
         return await DiceSFRPG.d20Roll({
             event: options.event,
             parts: parts,
@@ -1143,6 +1147,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 top: options.event ? options.event.clientY - 80 : null
             },
             rollOptions: rollOptions,
+            actorContextKey: "gunner",
             onClose: (roll, formula, finalFormula) => {
                 if (roll) {
                     const rollDamageWithAttack = game.settings.get("sfrpg", "rollDamageWithAttack");
