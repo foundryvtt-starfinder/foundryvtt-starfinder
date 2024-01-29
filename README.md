@@ -4,7 +4,7 @@ This is a game system definition of the Starfinder RPG for the awesome [Foundry 
 
 ## Join the discussion
 
-If you have quesions or just want to chat about all things Starfinder, then join us on the official FoundryVTT discord server [here](https://discord.gg/QyAeMy4Dyu).
+If you have quesions or just want to chat about all things Starfinder, then join us on the official FoundryVTT discord server [here](https://discord.gg/foundryvtt).
 
 ## Version support table
 If you wish to use Starfinder with older versions of FoundryVTT, the following table will help:
