@@ -1,0 +1,63 @@
+{
+  "_id": "VbgKwEzQoTXGQS4G",
+  "name": "Effect: Basic Booster +1 AC",
+  "type": "effect",
+  "img": "systems/sfrpg/icons/equipment/technological%20items/sprayflesh.webp",
+  "system": {
+    "type": "effect",
+    "abilityMods": {
+      "parts": []
+    },
+    "activeDuration": {
+      "activationTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "origin"
+      },
+      "unit": "round",
+      "value": "@origin.actor.classes.biohacker.keyAbilityMod"
+    },
+    "context": {
+      "origin": {
+        "actorUuid": "",
+        "itemUuid": ""
+      }
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.2BjD4ocSE0BL5DcN]{Biohacks (Ex)}</p>\n<p>A basic booster biohack aids a creature in one manner or another. The effect lasts for a number of rounds equal to your key ability score modifier (minimum 1 round) unless it states otherwise. You begin play knowing this basic booster biohack; when you use it, select an effect:</p>\n<p>The target gains a +1 enhancement bonus to AC.</p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "d0458ba3-d02d-43b7-8895-de93ad90db48",
+        "name": "Effect: Basic Booster +1 AC",
+        "type": "enhancement",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": true,
+        "max": 1,
+        "modifier": "1",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "both"
+      }
+    ],
+    "requirements": "1st Level Biohacker",
+    "showOnToken": true,
+    "source": "COM pg. 41"
+  }
+}

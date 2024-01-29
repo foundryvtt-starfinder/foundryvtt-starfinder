@@ -1,0 +1,63 @@
+{
+  "_id": "2yhQgD5o54WUgLtG",
+  "name": "Effect: Minor Inhibitor",
+  "type": "effect",
+  "img": "systems/sfrpg/icons/equipment/technological%20items/sprayflesh.webp",
+  "system": {
+    "type": "effect",
+    "abilityMods": {
+      "parts": []
+    },
+    "activeDuration": {
+      "activationTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "origin"
+      },
+      "unit": "round",
+      "value": "(3 + @origin.actor.classes.biohacker.keyAbilityMod)"
+    },
+    "context": {
+      "origin": {
+        "actorUuid": "",
+        "itemUuid": ""
+      }
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.2BjD4ocSE0BL5DcN]{Biohacks (Ex)}</p>\n<p>A minor inhibitor biohack imposes a slight hindrance on a target: the target takes a –1 penalty to attack rolls for a number of rounds equal to 3 + your key ability score.</p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "d0458ba3-d02d-43b7-8895-de93ad90db48",
+        "name": "Minor Inhibitor",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-attacks",
+        "enabled": true,
+        "max": -1,
+        "modifier": "-1",
+        "modifierType": "constant",
+        "notes": "A minor inhibitor biohack imposes a slight hindrance on a target: the target takes a –1 penalty to attack rolls for a number of rounds equal to 3 + your key ability score.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "both"
+      }
+    ],
+    "requirements": "1st Level Biohacker",
+    "showOnToken": true,
+    "source": "COM pg. 41"
+  }
+}
