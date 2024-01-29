@@ -325,9 +325,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         if (configureDialog) {
             try {
                 const dialogResponse = await SpellCastDialog.create(this, item);
-                const slotIndex = parseInt(dialogResponse.formData.get("level"));
+                const slotLevel = parseInt(dialogResponse.formData.get("level"));
                 consumeSpellSlot = Boolean(dialogResponse.formData.get("consume"));
-                selectedSlot = dialogResponse.spellLevels[slotIndex];
+                selectedSlot = dialogResponse.spellLevels.find(x => parseInt(x.level) === slotLevel);
                 spellLevel = parseInt(selectedSlot?.level || item.system.level);
 
                 if (spellLevel !== item.system.level && item.system.level > spellLevel) {
