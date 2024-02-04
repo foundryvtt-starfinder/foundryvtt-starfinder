@@ -106,7 +106,12 @@ export default class RollNode {
                             this.resolvedValue.formula += ` title="${joinedTooltips}"`;
                         }
                         this.resolvedValue.formula += `>`;
-                        this.resolvedValue.formula += (this.referenceModifier?.name || "@" + this.formula);
+                        if (this.referenceModifier?.name) {
+                            this.resolvedValue.formula += this.referenceModifier?.name;
+                        } else {
+                            let words = this.formula.split('.');
+                            this.resolvedValue.formula += words.length > 1 ? words[words.length - 2] : this.formula;
+                        }
                         this.resolvedValue.formula += `</span>`;
                     }
                     this.resolvedValue.formula += "]";
@@ -212,8 +217,13 @@ export default class RollNode {
                     if (joinedTooltips) {
                         this.resolvedValue.formula += ` title="${joinedTooltips}"`;
                     }
-                    this.resolvedValue.formula += `>`;
-                    this.resolvedValue.formula += (this.referenceModifier?.name || "@" + this.formula);
+                    this.resolvedValue.formula += `>`;                        
+                    if (this.referenceModifier?.name) {
+                        this.resolvedValue.formula += this.referenceModifier?.name;
+                    } else {
+                        let words = this.formula.split('.');
+                        this.resolvedValue.formula += words.length > 1 ? words[words.length - 2] : this.formula;
+                    }
                     this.resolvedValue.formula += `</span>`;
                 }
                 this.resolvedValue.formula += "]";
