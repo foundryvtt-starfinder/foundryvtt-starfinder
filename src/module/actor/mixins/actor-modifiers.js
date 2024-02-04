@@ -111,7 +111,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
      * @returns {SFRPGModifier[]}
      */
     getAllModifiers(ignoreTemporary = false, ignoreEquipment = false, invalidate = false) {
-        if (!invalidate && this.system.modifiers) return this.system.allModifiers;
+        if (!invalidate && this.system.allModifiers) return this.system.allModifiers;
 
         this.system.modifiers = this.system.modifiers.map(mod => {
             const container = {actorUuid: this.uuid, itemUuid: null};

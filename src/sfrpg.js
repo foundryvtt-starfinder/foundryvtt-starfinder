@@ -1,10 +1,10 @@
 /**
  * The Starfinder game system for Foundry Virtual Tabletop
- * Author: wildj79
+ * Author: The Foundry Starfinder Development Team
  * Software License: MIT
  * Content License: OGL v1.0a
- * Repository: https://github.com/wildj79/foundryvtt-starfinder
- * Issue Tracker: https://github.com/wildj79/foundryvtt-starfinder/issues
+ * Repository: https://github.com/foundryvtt-starfinder/foundryvtt-starfinder
+ * Issue Tracker: https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/issues
  */
 import { ActorItemHelper, initializeRemoteInventory } from "./module/actor/actor-inventory-utils.js";
 import { ActorSFRPG } from "./module/actor/actor.js";

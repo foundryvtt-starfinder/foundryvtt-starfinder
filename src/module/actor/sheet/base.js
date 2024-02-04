@@ -432,7 +432,7 @@ export class ActorSheetSFRPG extends ActorSheet {
                 .filter(i => !!i);
             const modifiersTotal = modifiers.reduce((total, i) => total + i.max, 0);
 
-            const preparedFormula = `${formula} ${modifiersTotal > 0 ? "+" + String(modifiersTotal) : ""}`;
+            const preparedFormula = `${formula} + ${modifiersTotal}`;
 
             const rollData = RollContext.createItemRollContext(item, item.actor).getRollData();
 
@@ -465,12 +465,12 @@ export class ActorSheetSFRPG extends ActorSheet {
                 .filter(i => !!i);
             const modifiersTotal = modifiers.reduce((total, i) => total + i.max, 0);
 
-            const preparedFormula = `${formula} ${modifiersTotal > 0 ? "+" + String(modifiersTotal) : ""}`;
+            const preparedFormula = `${formula} + ${modifiersTotal}`;
 
             const rollData = RollContext.createItemRollContext(item, item.actor).getRollData();
 
             const roll = Roll.create(preparedFormula, rollData).simplifiedFormula;
-            if (!roll) throw ("Invaid roll, deferring to default string.");
+            if (!roll) throw ("Invalid roll, deferring to default string.");
 
             const damageTypes = Object.entries(item.system.damage.parts[0].types)
                 .map(([type, enabled]) => {
