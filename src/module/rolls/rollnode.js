@@ -29,15 +29,15 @@ export default class RollNode {
             this.rollTooltips = RollNode.getTooltips(remainingVariable, this.getContext(), ".rollTooltip");
 
             for (const mod of availableRolledMods) {
-                const modKey = mod.bonus._id;
+                const modKey = mod.bonus._id ?? (mod.bonus.modifier[0] === '@' ? mod.bonus.modifier.substring(1) : mod.bonus.name);
 
                 let existingNode = nodes[modKey];
                 if (!existingNode) {
                     const childNode = new RollNode(this.tree, mod.bonus.modifier, null, mod.bonus, false, mod.bonus.enabled, this, this.options);
                     nodes[modKey] = childNode;
                     existingNode = childNode;
+                    this.childNodes[modKey] = existingNode;
                 }
-                this.childNodes[modKey] = existingNode;
             }
         } else {
             const variableMatches = new Set(this.formula.match(/@([a-zA-Z.0-9_\-]+)/g));
@@ -58,8 +58,8 @@ export default class RollNode {
                     const childNode = new RollNode(this.tree, variable, variableValue, null, true, true, this, this.options);
                     nodes[variable] = childNode;
                     existingNode = childNode;
+                    this.childNodes[variable] = existingNode;
                 }
-                this.childNodes[variable] = existingNode;
             }
         }
 

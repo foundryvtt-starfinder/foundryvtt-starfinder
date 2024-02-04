@@ -1004,6 +1004,8 @@ export class DiceSFRPG {
             const childNode = node.childNodes[childKeys[nodeI]];
             if (modifier._id && (childNode.referenceModifier?._id === modifier._id)) {
                 delete node.childNodes[childKeys[nodeI]];
+            } else if (!modifier._id && modifier.name === childNode.referenceModifier?.name) {
+                delete node.childNodes[childKeys[nodeI]];
             } else if (Object.keys(childNode.childNodes).length > 0) {
                 node = this._removeModifierNodes(childNode, modifier).parentNode;
             }
@@ -1023,7 +1025,7 @@ export class DiceSFRPG {
 
         let stackModifiers = new StackModifiers();
         const stackedMods = await stackModifiers.processAsync(rollMods.filter(mod => {
-            if (mod.enabled) {
+            if (mod.enabled && mod.type) {
                 rootNode = this._removeModifierNodes(rootNode, mod);
                 return true;
             }
