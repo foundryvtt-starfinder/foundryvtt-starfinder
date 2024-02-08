@@ -1018,6 +1018,9 @@ export class DiceSFRPG {
      * @returns {Object} finalFormula Object: {finalRoll: String, formula: String}
      */
     static async _calcStackingFormula(node, rollMods, bonus = null, actor = null) {
+
+        // The rootNode is the parent node for all the child nodes. It contains the full formula for the roll,
+        // while child nodes only contain the formula segments of that roll that that need to be evaluated.
         let rootNode = node;
 
         const stackModifiers = new StackModifiers();
@@ -1032,6 +1035,8 @@ export class DiceSFRPG {
         let formulaString = '';
         const rollDices = [];
         const stackedModsArray = Object.keys(stackedMods);
+
+        // Generate the rollString and formulaString parts for each of the modifiers
         for (let stackModsI = 0; stackModsI < stackedModsArray.length; stackModsI++) {
             const stackModifier = stackedMods[stackedModsArray[stackModsI]];
             if (stackModifier === null || stackModifier === undefined) {
@@ -1071,15 +1076,20 @@ export class DiceSFRPG {
             }
         }
 
+        // Add the situational modifier to the formulaString and rollString, if present
         formulaString += bonus ? `${bonus.toString()}[<span>${game.i18n.localize("SFRPG.Rolls.Dialog.SituationalBonus")}</span>]` : '';
-
         rollString += bonus ? `${bonus}` : '';
+
+        // Clean up the rollString
         rollString = rollString.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
             .trim();
         rollString = rollString.endsWith("+") ? rollString.substring(0, rollString.length - 1).trim() : rollString;
+        // The code above this point generates the issue with the duplicate Shaken/Sickened penalty when added to finalFormula
 
+        // Resolve the formula for the rootNode.
         const finalFormula = rootNode.resolveForRoll(0, rollMods);
 
+        // Add the previously calculated formulaString and rollString to thhe parts calculated above
         finalFormula.finalRoll = rollString ? `${finalFormula.finalRoll} + ${rollString}` : finalFormula.finalRoll;
         finalFormula.formula = formulaString ? `${finalFormula.formula} + ${formulaString}` : finalFormula.formula;
 
