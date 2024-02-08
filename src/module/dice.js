@@ -279,7 +279,7 @@ export class DiceSFRPG {
                     htmlData: htmlData,
                     rollType: "normal",
                     rollOptions: rollOptions,
-                    rollDices: finalFormula.rollDices
+                    rollDice: finalFormula.rollDice
                 };
 
                 try {
@@ -301,7 +301,7 @@ export class DiceSFRPG {
                     flags: {rollOptions: rollOptions}
                 };
 
-                messageData.content = await roll.render({ htmlData: htmlData, customTooltip: finalFormula.rollDices });
+                messageData.content = await roll.render({ htmlData: htmlData, customTooltip: finalFormula.rollDice });
                 if (rollOptions?.actionTarget) {
                     messageData.content = DiceSFRPG.appendTextToRoll(messageData.content, game.i18n.format("SFRPG.Items.Action.ActionTarget.ChatMessage", {actionTarget: rollOptions.actionTargetSource[rollOptions.actionTarget]}));
                 }
@@ -1033,47 +1033,28 @@ export class DiceSFRPG {
 
         let rollString = '';
         let formulaString = '';
-        const rollDices = [];
-        const stackedModsArray = Object.keys(stackedMods);
+        const rollDice = [];
+        // Stack all the modifiers up into a flat array
+        const stackedModsArray = Object.keys(stackedMods).map((key) => stackedMods[key])
+            .filter(modArray => modArray) // discard null valued modifiers
+            .flat(); // flatten the remaining modifiers, discarding empty ones
 
         // Generate the rollString and formulaString parts for each of the modifiers
-        for (let stackModsI = 0; stackModsI < stackedModsArray.length; stackModsI++) {
-            const stackModifier = stackedMods[stackedModsArray[stackModsI]];
-            if (stackModifier === null || stackModifier === undefined) {
-                continue;
-            }
-            if (stackModifier instanceof Array) {
-                for (let stackModifierI = 0; stackModifierI < stackModifier.length; stackModifierI++) {
-                    const modifier = stackModifier[stackModifierI];
-                    rollString += `${modifier.max.toString()}+`;
-                    // TODO:
-                    /*
-                        add title to the span f.e.:
-                        title="${game.i18n.format(localizationKey, type: modifier.type.capitalize(),mod: modifier.max.signedString(),source: modifier.name)}"
-                        but in order to do that we will need the localization key for the current modifier which we do not have at this point. Maybe we will have to pass it down from the modifier calculation lol.
-                    */
-                    if (!modifier.isDeterministic) {
-                        rollDices.push(...modifier.dices);
-                        formulaString += `${modifier.max.toString()}(${modifier.modifier})[<span>${modifier.name}</span>] + `;
-                    } else {
-                        formulaString += `${modifier.max.toString()}[<span>${modifier.name}</span>] + `;
-                    }
-                }
+        for (const modifier of stackedModsArray) {
+            // Add the value to the rollString
+            rollString += `${modifier.max.toString()}+`;
+
+            // Add the value to the formulaString (formulaString gives a breakdown of the numbers in the rollString)
+            if (!modifier.isDeterministic) {
+                rollDice.push(...modifier.dices);
+                formulaString += `${modifier.max.toString()}(${modifier.modifier})[<span>${modifier.name}</span>] + `;
             } else {
-                rollString += `${stackModifier.max.toString()}+`;
-                // TODO:
-                /*
-                    add title to the span f.e.:
-                    title="${game.i18n.format(localizationKey, type: modifier.type.capitalize(),mod: modifier.max.signedString(),source: modifier.name)}"
-                    but in order to do that we will need the localization key for the current modifier which we do not have at this point. Maybe we will have to pass it down from the modifier calculation lol.
-                */
-                if (!stackModifier.isDeterministic) {
-                    rollDices.push(...stackModifier.dices);
-                    formulaString += `${stackModifier.max.toString()}(${stackModifier.modifier})[<span>${stackModifier.name}</span>] + `;
-                } else {
-                    formulaString += `${stackModifier.max.toString()}[<span>${stackModifier.name}</span>] + `;
-                }
+                formulaString += `${modifier.max.toString()}[<span>${modifier.name}</span>] + `;
             }
+
+            /* TODO: add title to the span, e.g.:
+            title="${game.i18n.format(localizationKey, type: modifier.type.capitalize(),mod: modifier.max.signedString(),source: modifier.name)}"
+            but in order to do that we will need the localization key for the current modifier which we do not have at this point. Maybe we will have to pass it down from the modifier calculation */
         }
 
         // Add the situational modifier to the formulaString and rollString, if present
@@ -1097,7 +1078,7 @@ export class DiceSFRPG {
             .trim();
         finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
 
-        finalFormula.rollDices = rollDices;
+        finalFormula.rollDice = rollDice;
 
         return finalFormula;
     }
