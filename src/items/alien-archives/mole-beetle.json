@@ -1,18 +1,18 @@
 {
-  "_id": "z7uS4l9X5ym6atgw",
-  "name": "Diatha",
+  "_id": "C5lKAxJwjIgnXNM3",
+  "name": "Mole-Beetle",
   "type": "npc2",
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
-      "_id": "UeOyR9YohRvXEyds",
-      "name": "Bite",
+      "_id": "0aQhzFIZNUljgajI",
+      "name": "Claw",
       "type": "weapon",
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
         "ability": "",
-        "actionTarget": "kac",
+        "actionTarget": "",
         "actionType": "mwak",
         "activation": {
           "type": "",
@@ -22,11 +22,12 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
         },
-        "attackBonus": 6,
+        "attackBonus": 4,
         "attributes": {
           "ac": {
             "value": ""
@@ -70,13 +71,13 @@
           ]
         },
         "critical": {
-          "effect": "Burn 1",
+          "effect": "",
           "parts": []
         },
         "damage": {
           "parts": [
             {
-              "formula": "1d4 +1",
+              "formula": "1d6 +1",
               "operator": "and",
               "types": {
                 "slashing": true
@@ -94,7 +95,7 @@
         },
         "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "text",
           "value": null
         },
         "equippable": true,
@@ -142,8 +143,8 @@
       }
     },
     {
-      "_id": "1FU7S4NH2dvlQ2qE",
-      "name": "Detonate (Ex)",
+      "_id": "Kp4nu8g6WPdwXWyb",
+      "name": "Eversion Feeding (Ex)",
       "type": "feat",
       "img": "icons/svg/item-bag.svg",
       "system": {
@@ -155,16 +156,16 @@
         "actionTarget": "",
         "actionType": "save",
         "activation": {
-          "type": "none",
+          "type": "action",
           "condition": "",
           "cost": 0
         },
         "area": {
-          "effect": "burst",
+          "effect": "",
           "shapable": false,
-          "shape": "sphere",
+          "shape": "",
           "units": "ft",
-          "value": "10"
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -173,24 +174,7 @@
           "parts": []
         },
         "damage": {
-          "parts": [
-            {
-              "name": "",
-              "formula": "1d6",
-              "group": null,
-              "types": {
-                "acid": false,
-                "bludgeoning": false,
-                "cold": false,
-                "electricity": false,
-                "fire": true,
-                "healing": false,
-                "piercing": false,
-                "slashing": false,
-                "sonic": false
-              }
-            }
-          ]
+          "parts": []
         },
         "damageNotes": "",
         "description": {
@@ -198,7 +182,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>While the diatha has 4 or fewer Hit Points, its energy-dense flesh becomes unstable. If, while in this state, the diatha takes acid, electricity, fire, piercing, slashing, or sonic damage, or uses its explosive charge ability, it dies, exploding in a 10-foot-radius burst, dealing 1d6 fire damage (Reflex DC 9 half).</p>"
+          "value": "<p>As a standard action, a mole-beetle can expel its lumpy stomach into an empty adjacent square. Several dozen hooked feeding filaments whip out from the stomach. Creatures other than the mole-beetle adjacent to the stomach must succeed at a DC 8 Reflex saving throw or gain the @UUID[Compendium.sfrpg.conditions.Item.v9RNVTqyTyaPchvd]{bleeding} condition ([[/r 1d4]]{1d4 damage}) from the hooks. The mole-beetle then reels its stomach back into its body. The stomach’s expulsion and retraction don’t provoke @UUID[Compendium.sfrpg.rules.JournalEntry.U37n5tY5hn1ctzQL.JournalEntryPage.GtSmojwt4d6rdEkm#attack-of-opportunity]{attacks of opportunity}, but a creature that has @UUID[Compendium.sfrpg.rules.JournalEntry.U37n5tY5hn1ctzQL.JournalEntryPage.PiWpd7yZ4sLOkphL#ready-an-action]{readied an action} to strike at the stomach can do so; its stomach has the same defenses as the mole-beetle, and damage dealt to the stomach is subtracted from the mole-beetle’s Hit Points.</p>"
         },
         "descriptors": {
           "acid": false,
@@ -248,13 +232,13 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "range": {
           "additional": "",
           "per": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "recharge": {
           "charged": false,
@@ -265,7 +249,7 @@
         "save": {
           "type": "reflex",
           "dc": "",
-          "descriptor": "half"
+          "descriptor": "negate"
         },
         "skillCheck": {
           "type": "",
@@ -284,10 +268,10 @@
       }
     },
     {
-      "_id": "cbc9W3mpzaDFFewY",
-      "name": "Explosive Charge (Ex)",
+      "_id": "uzMr0jgBZBFOe7vV",
+      "name": "Mindless (Ex)",
       "type": "feat",
-      "img": "icons/svg/item-bag.svg",
+      "img": "icons/creatures/slimes/slime-face-teeth-purple.webp",
       "system": {
         "type": "",
         "ability": null,
@@ -297,16 +281,16 @@
         "actionTarget": "",
         "actionType": "",
         "activation": {
-          "type": "full",
+          "type": "",
           "condition": "",
-          "cost": 1
+          "cost": 0
         },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": "ft",
-          "value": ""
+          "units": "",
+          "value": null
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -323,7 +307,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>While the diatha has 4 or fewer Hit Points, as a full action, the creature can move up to double its speed and make a bite attack. Its detonate ability then triggers.</p>"
+          "value": "<p>The creature has no Intelligence score or modifier and is immune to @UUID[Compendium.sfrpg.rules.PqV3OCbUTyk2upPD]{Mind-affecting effects}. Any DCs or other statistics that rely on an Intelligence score treat the creature as having a score of 10(+0).</p>\n<p><em>Format</em>: <strong>Other Abilities</strong> mindless.</p>\n<p><em>Guidelines</em>: Mindless creatures usually have fewer good skills and no master skills. Their skills should be based on inborn abilities, since they’re incapable of training.</p>"
         },
         "descriptors": {
           "acid": false,
@@ -364,89 +348,11 @@
           "water": false
         },
         "details": {
-          "category": "feat",
+          "category": "universalCreatureRule",
           "combat": false,
           "specialAbilityType": "ex"
         },
         "duration": {
-          "units": "text",
-          "value": ""
-        },
-        "formula": "",
-        "isActive": null,
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "rollNotes": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": ""
-        },
-        "uses": {
-          "max": "0",
-          "per": "",
-          "value": 0
-        }
-      }
-    },
-    {
-      "_id": "CQfOVxumxh21qF5M",
-      "name": "Compression",
-      "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
-      "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
-        "actionTarget": "",
-        "actionType": "",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "damageNotes": "",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>(EX)</p>\n<p>The creature can move through an area as small as one-quarter of its space without squeezing or one-eighth its space when squeezing.</p>\n<hr />"
-        },
-        "descriptors": [],
-        "duration": {
           "units": "",
           "value": null
         },
@@ -470,85 +376,7 @@
           "dc": null,
           "descriptor": ""
         },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      }
-    },
-    {
-      "_id": "k9pwt0gtHQrD37MY",
-      "name": "Mindless",
-      "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
-      "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
-        "actionTarget": "",
-        "actionType": "",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "damageNotes": "",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>(EX)</p>\n<p>The creature has no Intelligence score or modifier and is immune to @UUID[Compendium.sfrpg.rules.PqV3OCbUTyk2upPD]{Mind-affecting effects}. Any DCs or other statistics that rely on an Intelligence score treat the creature as having a score of 10 (+0).</p>\n<p>Guidelines: Mindless creatures usually have fewer good skills and no master skills. Their skills should be based on inborn abilities, since they’re incapable of training.</p>\n<hr />"
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "isActive": null,
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "rollNotes": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
+        "source": "AA1 pg. 155",
         "target": {
           "type": "",
           "value": null
@@ -562,7 +390,7 @@
     }
   ],
   "prototypeToken": {
-    "name": "Diatha",
+    "name": "Mole-Beetle",
     "actorLink": false,
     "alpha": 1,
     "appendNumber": false,
@@ -600,20 +428,20 @@
       "saturation": 0,
       "shadows": 0
     },
-    "lockRotation": false,
+    "lockRotation": true,
     "prependAdjective": false,
     "randomImg": false,
     "rotation": 0,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
-      "brightness": 0.75,
+      "brightness": 0,
       "color": null,
       "contrast": 0,
       "enabled": false,
-      "range": 60,
-      "saturation": -1,
-      "visionMode": "darkvision"
+      "range": 0,
+      "saturation": 0,
+      "visionMode": "basic"
     },
     "texture": {
       "offsetX": 0,
@@ -629,24 +457,24 @@
   "system": {
     "abilities": {
       "cha": {
-        "base": -3,
+        "base": -4,
         "min": 3,
         "misc": 0,
-        "mod": -3,
+        "mod": 0,
         "value": 10
       },
       "con": {
-        "base": 3,
+        "base": 1,
         "min": 3,
         "misc": 0,
-        "mod": 3,
+        "mod": 0,
         "value": 10
       },
       "dex": {
-        "base": 2,
+        "base": 3,
         "min": 3,
         "misc": 0,
-        "mod": 2,
+        "mod": 0,
         "value": 10
       },
       "int": {
@@ -660,7 +488,7 @@
         "base": 1,
         "min": 3,
         "misc": 0,
-        "mod": 1,
+        "mod": 0,
         "value": 10
       },
       "wis": {
@@ -673,15 +501,9 @@
     },
     "attributes": {
       "abilityDC": {
-        "base": "9"
+        "base": "8"
       },
       "arms": "2",
-      "bab": 0,
-      "baseAttackBonus": {
-        "rolledMods": [],
-        "tooltip": [],
-        "value": 0
-      },
       "baseSpellDC": {
         "base": "0"
       },
@@ -697,37 +519,37 @@
         "value": 10
       },
       "fort": {
-        "base": 4,
-        "bonus": 4,
+        "base": 3,
+        "bonus": 0,
         "misc": 0,
         "tooltip": [],
         "value": 0
       },
       "hp": {
-        "max": 13,
+        "max": 6,
         "min": 0,
         "temp": null,
         "tempmax": null,
         "tooltip": [],
-        "value": 13
+        "value": 6
       },
       "init": {
         "bonus": 0,
         "tooltip": [],
-        "total": 2,
-        "value": 2
+        "total": 0,
+        "value": 3
       },
       "kac": {
         "base": 12,
         "min": 0,
         "tooltip": [],
-        "value": 12
+        "value": 10
       },
       "keyability": "",
       "reach": "5",
       "reflex": {
-        "base": 2,
-        "bonus": 2,
+        "base": 1,
+        "bonus": 0,
         "misc": 0,
         "tooltip": [],
         "value": 0
@@ -735,7 +557,7 @@
       "space": "5",
       "speed": {
         "burrowing": {
-          "base": 10
+          "base": 20
         },
         "climbing": {
           "base": 0
@@ -745,14 +567,13 @@
           "baseManeuverability": 0
         },
         "land": {
-          "base": 30
+          "base": 20
         },
         "mainMovement": "land",
         "special": "",
         "swimming": {
           "base": 0
-        },
-        "value": null
+        }
       },
       "spellcasting": "",
       "will": {
@@ -763,43 +584,7 @@
         "value": 0
       }
     },
-    "conditions": {
-      "asleep": false,
-      "bleeding": false,
-      "blinded": false,
-      "broken": false,
-      "burning": false,
-      "confused": false,
-      "cowering": false,
-      "dazed": false,
-      "dazzled": false,
-      "dead": false,
-      "deafened": false,
-      "dying": false,
-      "encumbered": false,
-      "entangled": false,
-      "exhausted": false,
-      "fascinated": false,
-      "fatigued": false,
-      "flat-footed": false,
-      "frightened": false,
-      "grappled": false,
-      "helpless": false,
-      "nauseated": false,
-      "off-kilter": false,
-      "off-target": false,
-      "overburdened": false,
-      "panicked": false,
-      "paralyzed": false,
-      "pinned": false,
-      "prone": false,
-      "shaken": false,
-      "sickened": false,
-      "stable": false,
-      "staggered": false,
-      "stunned": false,
-      "unconscious": false
-    },
+    "conditions": {},
     "counterClasses": {
       "values": {}
     },
@@ -821,32 +606,27 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<h2>Diatha</h2>\n<p>Diathas are a common species of what are known as “explosive slugs.” Found throughout the galaxy, including on Vesk-2, diathas store energy in chemical chains, rather than in fat deposits, causing the slugs to smell like raw petroleum. When threatened, diathas bite. and they sometimes regurgitate volatile materials that ignite on contact with air into the wound. Diathas are cooperative creatures that organize themselves into hives. These hives live in warrens normal diathas slowly dig in the dirt, making distinctive mounds of churned soil with stable passages underneath. Diathas usually dig their warrens into gently rolling ground, but some can be found on hillsides or sheltered in ruins. The slugs have also adapted to maintenance tunnels and power conduits big enough to facilitate their movement. A single diatha hive claims a wide territory, building numerous communal mounds with extensive connecting tunnels. The diathas fiercely defend this territory, especially the hive mounds.</p>\n<p>Such an interconnected diatha hive can contain hundreds of normal diathas, which work to find food for larvae and for older, stronger diathas known as elders. Their ultimate defensive adaptation is the ability to detonate their energy-packed flesh while in an injured and excited state. If a foe manages to break into a diatha hive, each of the creatures within is a potential explosive deathtrap. The loss of several diathas does little harm to the hive as a whole. However, the explosions can destroy or drive away predators much larger and more powerful than the diathas.</p>\n<p>While diatha flesh is explosive, it is stable under in most circumstances. Like manufactured explosives, a diatha is difficult to set off unless “primed” first. Hurting a diatha initially has no effect. However, when a diatha is badly wounded, hormones released as a stress response destabilize its flesh. A diatha excited in this way launches itself into a suicide charge, slamming into a foe and detonating itself with an electrochemical spark from its brain. If the diatha’s body takes certain types of damage after it becomes unstable, the creature also explodes.</p>\n<p>As diathas age, they become more energy-rich and buoyant with stored internal gases, and their malleable bodies can extend winglike flaps. These floating diathas rise in prominence within the hive and enjoy less and less work. Such elders are expected to scout for food and potential territory in places only they can reach. They also guard the hive.</p>\n<p>Although all diathas can exchange sex cells at any time, they produce no young until they achieve elder status. Elder diathas produce larvae, with a birth rate based on how much food the hive has. Normal diathas then care for the offspring. A hive with a dearth of food may struggle to produce enough larvae to replace diathas that die defending the hive, while hives with plentiful forage can expand so rapidly that one hive breaks into multiple smaller hives, expanding diatha territory in the region.</p>\n<p>Diathas eat anything that won’t kill them, converting it into the fuel-like liquid they require. They spread through battlefields, settlements, and starships, seeking out and eating energy-rich material, such as flamer petrol. A lone diatha is little threat. However, if an elder can break into a food source in a potential lair, that diatha can birth offspring. This new colony might become dangerous as the diatha population grows and the creatures become more territorial.</p>\n<p>Diathas that burrow into the infrastructure of starships are often carried to new star systems. Being resilient creatures, they quickly adapt to their new environments. Xenobiologists believe this to be one reason they can be found throughout the galaxy. Diathas can dominate worlds in early stages of biological development, displacing or killing native species. The Pact Worlds and Veskarium have strict quarantine measures for vessels arriving from systems known to have diatha infestations, as do many other planets. However, these laws most often are passed in the wake of a diatha-related disaster. A typical diatha is 2 feet long and weighs 90 pounds. Elders can grow to nearly 4 feet, weighing up to 50 pounds.</p>",
+        "value": "<p>Mole-beetles have placidly burrowed beneath Weydana-4’s surface for untold millennia. About 3 feet in length, mole-beetles resemble a slender insect with a pinkish-yellow carapace, ridged, chitinous claws resemblant of those of burrowing rodents, and a narrow insectile face. They consume endless mouthfuls of soil containing biomatter while tunneling, and sharp barbs in their stomachs break up the soil so their stomach lining can absorb nutrients. Like other terrestrial vermin, mole-beetles fill the tunnels behind them with churned soil similar to compost, which enables plants to grow stronger and more quickly. Much of Weydana‑4’s verdant growth is due to these untiring tunnelers.</p>\n<p>Mole-beetles rarely bother attacking other creatures, but they're far from timid. If provoked, they slash at their foes with their sharp claws. Sudden, significant disturbances in the ground drive mole-beetles into a rage. They might be set off by the rumbling of a herd of large herbivores or even by the tremor from a falling tree. Earthquakes, in particular, drive broods of mole-beetles into days-long frenzies.</p>\n<p>Hungry or desperate mole-beetles can disgorge their stomach, attached to their innards by strong ligaments, allowing it to absorb nutrition directly and quickly. Several barbs lash out from the everted stomach and slice through the area, breaking apart soil and creatures alike into smaller bits that mole-beetles can consume. Mole-beetles don't leave their stomachs everted for long, tugging them back into place after few moments of feeding.</p>\n<p>Mole-beetles are communal creatures, often found in squirming broods. Moving in broods provides greater protection from predators and makes breaking up tough soil easier for the mole beetles. Each brood has a distinct hierarchy, with lead mole-beetles receiving the larger share of nutrients, and eventually the weaker mole-beetles break off on their own brood. Mole-beetles that have been brood leaders for a long time grow remarkably large and strong; these mole-beetle behemoths can grow to the size of a shuttlecraft.</p>",
         "weight": ""
       },
       "class": "",
-      "combatRole": "combatant",
-      "cr": 0.5,
-      "environment": "any land",
-      "organization": "solitary, pair, or rout (3-10)",
+      "combatRole": "",
+      "cr": 0.3333333333333333,
+      "environment": "any underground (Weydana-4)",
+      "organization": "solitary, pair, or brood (3-12)",
       "organizationSize": {
-        "max": 10,
+        "max": null,
         "min": 1
       },
       "race": "",
       "raceAndGrafts": "",
-      "source": "AA3 pg. 18",
+      "source": "AP #40 pg. 59",
       "subtype": "",
       "xp": {
         "value": 10
       }
     },
     "modifiers": [],
-    "skillpoints": {
-      "max": 0,
-      "tooltip": [],
-      "used": 0
-    },
     "skills": {
       "acr": {
         "ability": "dex",
@@ -861,13 +641,13 @@
       },
       "ath": {
         "ability": "str",
-        "enabled": true,
+        "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
         "min": 0,
         "misc": 0,
-        "mod": 9,
-        "ranks": 9,
+        "mod": 0,
+        "ranks": 0,
         "value": 0
       },
       "blu": {
@@ -987,8 +767,8 @@
         "isTrainedOnly": false,
         "min": 0,
         "misc": 0,
-        "mod": 4,
-        "ranks": 4,
+        "mod": 0,
+        "ranks": 3,
         "value": 0
       },
       "phs": {
@@ -1049,13 +829,13 @@
       },
       "ste": {
         "ability": "dex",
-        "enabled": false,
+        "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
         "min": 0,
         "misc": 0,
         "mod": 0,
-        "ranks": 0,
+        "ranks": 7,
         "value": 0
       },
       "sur": {
@@ -1109,7 +889,7 @@
     },
     "traits": {
       "ci": {
-        "custom": "Disease; Poison",
+        "custom": "",
         "value": []
       },
       "damageReduction": {
@@ -1117,7 +897,7 @@
         "value": 0
       },
       "di": {
-        "custom": "Disease; Poison",
+        "custom": "",
         "value": []
       },
       "dr": {
@@ -1132,7 +912,7 @@
         "custom": "",
         "value": []
       },
-      "senses": "darkvision 60 ft.",
+      "senses": "blindsense (vibration) 30 ft., darkvision 60 ft.",
       "size": "small",
       "spellResistance": {
         "base": 0
