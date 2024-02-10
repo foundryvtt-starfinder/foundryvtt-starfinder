@@ -800,8 +800,12 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         if (actionEntry.name !== "Patch" && actionEntry.name !== "Hold It Together") {
             // Gunners must select a quadrant.
             if (actionEntry.system.role === "gunner") {
-                systemBonus = ` + @ship.attributes.systems.weaponsArray${quadrant}.mod`;
-                systemBonus += ` + @ship.attributes.systems.powerCore.modOther`;
+                if (this.system?.attributes?.systems[`weaponsArray${quadrant}`]?.mod < 0) {
+                    systemBonus = ` + @ship.attributes.systems.weaponsArray${quadrant}.mod`;
+                }
+                if (this.system?.attributes?.systems?.powerCore?.modOther < 0) {
+                    systemBonus += ` + @ship.attributes.systems.powerCore.modOther`;
+                }
             } else {
                 for (const [key, value] of Object.entries(this.system.attributes.systems)) {
                     if (value.affectedRoles && value.affectedRoles[actionEntry.system.role]) {

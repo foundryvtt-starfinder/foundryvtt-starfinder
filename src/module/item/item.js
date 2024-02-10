@@ -1131,8 +1131,12 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         }
 
         const quadrant = this.system.mount.arc.charAt(0).toUpperCase() + this.system.mount.arc.slice(1);
-        parts.push(`@ship.attributes.systems.weaponsArray${quadrant}.mod`);
-        parts.push(`@ship.attributes.systems.powerCore.modOther`);
+        if (this.actor.system?.attributes?.systems[`weaponsArray${quadrant}`]?.mod < 0) {
+            parts.push(`@ship.attributes.systems.weaponsArray${quadrant}.mod`);
+        }
+        if (this.actor.system?.attributes?.systems?.powerCore?.modOther < 0) {
+            parts.push(`@ship.attributes.systems.powerCore.modOther`);
+        }
 
         return await DiceSFRPG.d20Roll({
             event: options.event,
