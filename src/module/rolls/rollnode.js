@@ -40,7 +40,7 @@ export default class RollNode {
                 this.childNodes[modKey] = existingNode;
             }
         } else {
-            const variableMatches = new Set(this.formula.match(/@([a-zA-Z.0-9_\-]+)/g));
+            const variableMatches = new Set(this.formula.match(/@([a-zA-Z.0-9_-]+)/g));
             for (const fullVariable of variableMatches) {
                 const variable = fullVariable.substring(1);
                 const [context, remainingVariable] = RollNode.getContextForVariable(variable, contexts);
@@ -109,7 +109,7 @@ export default class RollNode {
                         if (this.referenceModifier?.name) {
                             this.resolvedValue.formula += this.referenceModifier?.name;
                         } else {
-                            let words = this.formula.split('.');
+                            const words = this.formula.split('.');
                             this.resolvedValue.formula += words.length > 1 ? words[words.length - 2] : this.formula;
                         }
                         this.resolvedValue.formula += `</span>`;
@@ -139,7 +139,7 @@ export default class RollNode {
             } else {
                 let valueString = this.formula;
                 let formulaString = this.formula;
-                const variableMatches = new Set(formulaString.match(/@([a-zA-Z.0-9_\-]+)/g));
+                const variableMatches = new Set(formulaString.match(/@([a-zA-Z.0-9_-]+)/g));
                 for (const fullVariable of variableMatches) {
                     const regexp = new RegExp(fullVariable, "gi");
                     const variable = fullVariable.substring(1);
@@ -191,7 +191,7 @@ export default class RollNode {
         this.resolvedValue = {
             finalRoll: "",
             formula: "",
-			usedMods: []
+            usedMods: []
         };
 
         if (this.isVariable && !this.baseValue) {
@@ -202,9 +202,11 @@ export default class RollNode {
             if (this.baseValue !== "n/a") {
                 // TODO: find another way to do this, or find the correct spot for this as this will result in bugs.
                 const constantMods = rollMods.filter(mod => mod.modifierType === SFRPGModifierType.CONSTANT);
-				this.resolvedValue.usedMods = constantMods;
+                this.resolvedValue.usedMods = constantMods;
                 const modSum = constantMods.reduce((accumulator, value) => accumulator + value.max, 0);
-                this.baseValue = (Number(this.baseValue) - modSum).toString();
+                if (this.formula.indexOf("baseAttackBonus.value") === -1) {
+                    this.baseValue = (Number(this.baseValue) - modSum).toString();
+                }
 
                 const joinedTooltips = this.rollTooltips ? this.rollTooltips.join(',\n') : this.variableTooltips.join(',\n');
 
@@ -217,11 +219,11 @@ export default class RollNode {
                     if (joinedTooltips) {
                         this.resolvedValue.formula += ` title="${joinedTooltips}"`;
                     }
-                    this.resolvedValue.formula += `>`;                        
+                    this.resolvedValue.formula += `>`;
                     if (this.referenceModifier?.name) {
                         this.resolvedValue.formula += this.referenceModifier?.name;
                     } else {
-                        let words = this.formula.split('.');
+                        const words = this.formula.split('.');
                         this.resolvedValue.formula += words.length > 1 ? words[words.length - 2] : this.formula;
                     }
                     this.resolvedValue.formula += `</span>`;
@@ -239,7 +241,7 @@ export default class RollNode {
                 this.resolvedValue.finalRoll += childResolution.finalRoll;
 
                 const idsToRemove = childResolution.usedMods.map(item => item._id);
-				rollMods = rollMods.filter(item => !idsToRemove.includes(item._id));				
+                rollMods = rollMods.filter(item => !idsToRemove.includes(item._id));
                 if (this.resolvedValue.formula !== "") {
                     this.resolvedValue.formula += " + ";
                 }
@@ -253,7 +255,7 @@ export default class RollNode {
         } else {
             let valueString = this.formula;
             let formulaString = this.formula;
-            const variableMatches = new Set(formulaString.match(/@([a-zA-Z.0-9_\-]+)/g));
+            const variableMatches = new Set(formulaString.match(/@([a-zA-Z.0-9_-]+)/g));
 
             for (const fullVariable of variableMatches) {
                 const regexp = new RegExp(fullVariable, "gi");
@@ -262,8 +264,8 @@ export default class RollNode {
                 // console.log(["testing var", depth, this, fullVariable, variable, existingNode]);
                 if (existingNode) {
                     const childResolution = existingNode.resolveForRoll(depth + 1, rollMods);
-					const idsToRemove = childResolution.usedMods.map(item => item._id);
-					rollMods = rollMods.filter(item => !idsToRemove.includes(item._id));
+                    const idsToRemove = childResolution.usedMods.map(item => item._id);
+                    rollMods = rollMods.filter(item => !idsToRemove.includes(item._id));
                     valueString = valueString.replace(regexp, childResolution.finalRoll);
                     formulaString = formulaString.replace(regexp, childResolution.formula);
                 } else {
