@@ -190,8 +190,7 @@ export default class RollNode {
         // console.log(['Resolving', depth, this]);
         this.resolvedValue = {
             finalRoll: "",
-            formula: "",
-            usedMods: []
+            formula: ""
         };
 
         if (this.isVariable && !this.baseValue) {
@@ -200,15 +199,14 @@ export default class RollNode {
 
         if (this.baseValue) {
             if (this.baseValue !== "n/a") {
-                // TODO: find another way to do this, or find the correct spot for this as this will result in bugs.
-                const constantMods = rollMods.filter(mod => mod.modifierType === SFRPGModifierType.CONSTANT);
-                this.resolvedValue.usedMods = constantMods;
+                // Bound which rollmods we apply to the value by it's calculated mods.
+                // Potentially don't even need the rolled Mods and could just use the calculated mods but would require further testing.
+                const calcMods = this.calculatedMods.filter(mod => mod.bonus.enabled === true);
+                const constantMods = rollMods.filter(mod => calcMods.some(x => x.bonus._id === mod._id) && mod.modifierType === SFRPGModifierType.CONSTANT);
                 const modSum = constantMods.reduce((accumulator, value) => accumulator + value.max, 0);
-                if (this.formula.indexOf("baseAttackBonus.value") === -1) {
-                    this.baseValue = (Number(this.baseValue) - modSum).toString();
-                }
+                this.baseValue = (Number(this.baseValue) - modSum).toString();
 
-                const joinedTooltips = this.rollTooltips ? this.rollTooltips.join(',\n') : this.variableTooltips.join(',\n');
+                const joinedTooltips = this.rollTooltips?.length > 0 ? this.rollTooltips.join(',\n') : this.variableTooltips.join(',\n');
 
                 this.resolvedValue.finalRoll = this.baseValue;
                 this.resolvedValue.formula = this.baseValue + "[";
@@ -240,8 +238,6 @@ export default class RollNode {
                 }
                 this.resolvedValue.finalRoll += childResolution.finalRoll;
 
-                const idsToRemove = childResolution.usedMods.map(item => item._id);
-                rollMods = rollMods.filter(item => !idsToRemove.includes(item._id));
                 if (this.resolvedValue.formula !== "") {
                     this.resolvedValue.formula += " + ";
                 }
@@ -264,8 +260,6 @@ export default class RollNode {
                 // console.log(["testing var", depth, this, fullVariable, variable, existingNode]);
                 if (existingNode) {
                     const childResolution = existingNode.resolveForRoll(depth + 1, rollMods);
-                    const idsToRemove = childResolution.usedMods.map(item => item._id);
-                    rollMods = rollMods.filter(item => !idsToRemove.includes(item._id));
                     valueString = valueString.replace(regexp, childResolution.finalRoll);
                     formulaString = formulaString.replace(regexp, childResolution.formula);
                 } else {
@@ -333,7 +327,8 @@ export default class RollNode {
     static getCalculatedModifiers(variable, context) {
         let variableString = variable + ".calculatedMods";
         let variableCalculatedMods = RollNode._readValue(context.data, variableString);
-        if (!variableCalculatedMods) {
+        // we don't want to include the skill rolls calculated mods as those do not apply
+        if (!variableCalculatedMods && variable.substring(variable.lastIndexOf('.') + 1) !== "ranks") {
             variableString = variable.substring(0, variable.lastIndexOf('.')) + ".calculatedMods";
             variableCalculatedMods = RollNode._readValue(context.data, variableString);
         }
@@ -346,6 +341,10 @@ export default class RollNode {
         if (!variableRolledMods) {
             variableString = variable.substring(0, variable.lastIndexOf('.')) + tooltipPath;
             variableRolledMods = RollNode._readValue(context.data, variableString);
+        }
+        // if we are looking for ranks then don't include all the tooltips just the ones for ranks
+        if (variableRolledMods && variable.substring(variable.lastIndexOf('.') + 1) === "ranks") {
+            variableRolledMods = variableRolledMods.filter((x) => x.toLowerCase().includes("rank"));
         }
         // console.log(["getRolledModifiers", variable, context, variableString, variableRolledMods]);
         return variableRolledMods || [];
