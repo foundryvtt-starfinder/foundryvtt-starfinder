@@ -5,6 +5,7 @@ import { SpellCastDialog } from "../apps/spell-cast-dialog.js";
 import { SFRPG } from "../config.js";
 import { DiceSFRPG } from "../dice.js";
 import RollContext from "../rolls/rollcontext.js";
+import { TokenEffect } from "../token/token-effect.js";
 import { Mix } from "../utils/custom-mixer.js";
 import { ActorConditionsMixin } from "./mixins/actor-conditions.js";
 import { ActorCrewMixin } from "./mixins/actor-crew.js";
@@ -16,6 +17,7 @@ import { ActorRestMixin } from "./mixins/actor-rest.js";
 
 import { ItemSFRPG } from "../item/item.js";
 import { ItemSheetSFRPG } from "../item/sheet.js";
+import SFRPGTimedEffect from "../timedEffect/timedEffect.js";
 import { } from "./crew-update.js";
 
 /**
@@ -54,6 +56,15 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         // console.log(`Constructor for actor named ${data.name} of type ${data.type}`);
     }
 
+    // Temporary effects are displayed on the token, so hijack it and include effects
+    get temporaryEffects() {
+        const fromEffects = this.items
+            .filter((e) => e.type === "effect" && e.system.showOnToken && e.system.enabled)
+            .map((e) => new TokenEffect(e));
+
+        return [...super.temporaryEffects, ...fromEffects];
+    }
+
     /** @override */
     getRollData() {
         const data = super.getRollData();
@@ -71,7 +82,13 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         super.prepareData();
 
         this._ensureHasModifiers(this.system);
-        const modifiers = this.getAllModifiers();
+        const modifiers = this.getAllModifiers(false, false, true);
+
+        // Store all modifiers, from the actor and from items, on the actor in an instantiated state.
+        this.system.allModifiers = modifiers;
+
+        // const timedEffects = SFRPGTimedEffect.getAllTimedEffects(this);
+        this.system.timedEffects = new Map();
 
         const items = this.items;
         const armors = items.filter(item => item.type === "equipment" && item.system.equipped);
@@ -100,6 +117,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             classes,
             chassis,
             modifiers,
+            // timedEffects,
             theme,
             mods,
             armorUpgrades,
@@ -151,33 +169,6 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         }
 
         return super.update(data, options);
-    }
-
-    /**
-     * Extend OwnedItem creation logic for the SFRPG system to make weapons proficient by default when dropped on a NPC sheet
-     * See the base Actor class for API documentation of this method
-     *
-     * @param {String} embeddedName The type of Entity being embedded.
-     * @param {Object} itemData The data object of the item
-     * @param {Object} options Any options passed in
-     * @returns {Promise}
-     */
-    async createEmbeddedDocuments(embeddedName, itemData, options) {
-        for (const item of itemData) {
-            if (!this.hasPlayerOwner) {
-                const t = item.type;
-                const initial = {};
-                if (t === "weapon") initial['system.proficient'] = true;
-                if (["weapon", "equipment"].includes(t)) initial['system.equipped'] = true;
-                if (t === "spell") initial['system.prepared'] = true;
-                mergeObject(item, initial);
-            }
-
-            if (item.effects instanceof Array) item.effects = null;
-            else if (item.effects instanceof Map) item.effects.clear();
-        }
-
-        return super.createEmbeddedDocuments(embeddedName, itemData, options);
     }
 
     /**
@@ -256,6 +247,55 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         this.floatingHpOnUpdate(this, data, options, userId);
     }
 
+    /**
+     * Delete any of corresponding timedEffect objects of the actor's items.
+     */
+    async _onDelete(options, userId) {
+        for (const item of this.items) {
+            if (item.type === "effect") {
+                const effect = game.sfrpg.timedEffects.get(item.uuid);
+                if (!effect) continue;
+
+                // Need to pass the item since the item has already been deleted from the server
+                effect.delete(item);
+            }
+
+        }
+
+        return super._onDelete(options, userId);
+    }
+
+    /**
+     * Toggle scrolling text for created effects
+     */
+    _onCreateDescendantDocuments(parent, collection, documents, data, options, userId) {
+        for (const item of documents) {
+            const itemData = item.system;
+
+            if (item.type === "effect" && itemData.showOnToken && itemData.enabled) {
+                SFRPGTimedEffect.createScrollingText(item, true);
+            }
+        }
+
+        super._onCreateDescendantDocuments(parent, collection, documents, data, options, userId);
+    }
+
+    /**
+     * Delete item's corresponding timedEffect objects
+     */
+    _onDeleteDescendantDocuments(parent, collection, documents, data, options, userId) {
+        for (const item of documents) {
+            if (item.type === 'effect') {
+                const effect = game.sfrpg.timedEffects.get(item.uuid);
+                if (!effect) continue;
+
+                effect.delete();
+            }
+        }
+
+        return super._onDeleteDescendantDocuments(parent, collection, documents, data, options, userId);
+    }
+
     async useSpell(item, { configureDialog = true } = {}) {
         if (item.type !== "spell") throw new Error("Wrong item type");
 
@@ -285,9 +325,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         if (configureDialog) {
             try {
                 const dialogResponse = await SpellCastDialog.create(this, item);
-                const slotIndex = parseInt(dialogResponse.formData.get("level"));
+                const slotLevel = parseInt(dialogResponse.formData.get("level"));
                 consumeSpellSlot = Boolean(dialogResponse.formData.get("consume"));
-                selectedSlot = dialogResponse.spellLevels[slotIndex];
+                selectedSlot = dialogResponse.spellLevels.find(x => parseInt(x.level) === slotLevel);
                 spellLevel = parseInt(selectedSlot?.level || item.system.level);
 
                 if (spellLevel !== item.system.level && item.system.level > spellLevel) {
@@ -525,7 +565,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
         const rollContext = RollContext.createActorRollContext(this);
 
-        parts.push(`@abilities.${abilityId}.mod`);
+        parts.push(`@abilities.${abilityId}.abilityCheckBonus`);
 
         return await DiceSFRPG.d20Roll({
             event: options.event,
@@ -1017,7 +1057,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         const tokens = actor.getActiveTokens();
         if (!tokens) return;
 
-        this.renderFloaters(tokens, dhp);
+        this.renderFloatingHp(tokens, dhp);
     }
 
     /**
@@ -1042,11 +1082,15 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                 const delta = this.getDelta(k, newhp, oldhp);
                 if (delta !== 0) diff[k] = delta;
             });
-        } else if (stamina) {
+        }
+        if (stamina) {
             const oldStamina = old.attributes.sp;
-            const delta = this.getDelta('value', stamina, oldStamina);
-            if (delta !== 0) diff.stamina = delta;
-        } else if (shields) {
+            if (oldStamina) { // NPCs may not have stamina
+                const delta = this.getDelta('value', stamina, oldStamina);
+                if (delta !== 0) diff.stamina = delta;
+            }
+        }
+        if (shields) {
             const oldShields = old.quadrants;
             SFRPG.floatingHPValues.shieldKeys.forEach(k => { // Check in all shield quadrants
                 const delta = this.getDelta('value', shields[k]?.shields, oldShields[k].shields);
@@ -1078,14 +1122,22 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      * @param {TokenSFRPG[]} tokens An array of tokens matching the updated actor
      * @param {Object} hpDiffs An object containing the key of the updated value, and the diff
      */
-    async renderFloaters(tokens, hpDiffs) {
+    async renderFloatingHp(tokens, hpDiffs) {
+        const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+        const getMaxPath = (key) => {
+            if (key === "stamina") return "attributes.sp.max";
+            else if (key.includes("shields")) return "attributes.shields.highest";
+            else return "attributes.hp.max";
+        };
+
         for (const t of tokens) {
             if (!this.testPermission(t)) continue;
 
             for (const [key, value] of Object.entries(hpDiffs)) {
                 if (value === 0) continue; // Skip deltas of 0
                 const cfg = SFRPG.floatingHPValues[key];
-                const percentMax = Math.clamped(Math.abs(value) / t.actor.system.attributes.hp.max, 0, 1);
+                const percentMax = Math.clamped(Math.abs(value) / getProperty(t.actor.system, getMaxPath(key)), 0, 1);
                 const sign = (value < 0) ? 'negative' : 'positive';
                 const floaterData = {
                     anchor: CONST.TEXT_ANCHOR_POINTS.CENTER,
@@ -1098,10 +1150,11 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                     jitter: 0.3
                 };
 
-                const localized = game.i18n.localize(game.settings.get("sfrpg", "verboseFloatyText")
-                    ? `SFRPG.FloatingHPVerbose.${cfg.label}`
-                    : `SFRPG.FloatingHP.${cfg.label}`);
+                const localized = game.i18n.localize(
+                    `SFRPG.FloatingHP${game.settings.get("sfrpg", "verboseFloatyText") ? "Verbose" : ""}.${cfg.label}`
+                );
                 canvas.interface.createScrollingText(t.center, `${localized} ${value.signedString()}`, floaterData);
+                if (Object.keys(hpDiffs).length > 1) await sleep(1500 * percentMax);
             }
         }
     }

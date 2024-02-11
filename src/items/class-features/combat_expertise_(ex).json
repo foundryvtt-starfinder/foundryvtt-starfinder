@@ -9,6 +9,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "",
@@ -17,6 +18,7 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": null
@@ -30,14 +32,55 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.fqYiP2f9oSfcmrwC]{Envoy}</p>\n<p>You’re able to use your social skills and abilities to gain the upper hand during a confrontation, often depending on deception, misdirection, and pure confidence to defeat your foes instead of brute force. You gain an expertise die of the same value as that granted to an envoy of your level by the expertise class feature, but you do not add it to skill checks. Choose one of the following skills: Bluff, Computers, Culture, Diplomacy, Intimidate, or Sense Motive.</p>\n<p>As a standard action, you can make an expertise attack as an attack action. Prior to your attack roll, attempt a skill check using the chosen skill with a DC equal to 15 + 1-1/2 × your target’s CR. If you succeed at the check and your attack hits, you roll your expertise die and add the result to your damage roll, and the target is @UUID[Compendium.sfrpg.conditions.nywSVEeDvp1bk7L3]{Shaken} for 1 round.</p>\n<p>You can use this ability and other expertise abilities as long as you have at least 1 Resolve Point remaining. This ability counts as the expertise ability for purposes of other abilities and prerequisites. If an ability requires you to forgo your expertise die on a skill check to gain some other benefit (such as altered bearing), you can use that ability only in a round in which you did not use combat expertise.</p>\n<p>At 5th level, and every 4 levels thereafter, you can select another skill you can use with combat expertise. This counts as having expertise with that skill for purposes of expertise talents and other prerequisites, though you do not actually add your expertise die to any skill checks.</p>\n<p><strong>This replaces expertise and skill expertise.</strong></p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.fqYiP2f9oSfcmrwC]{Envoy}</p>\n<p>You’re able to use your social skills and abilities to gain the upper hand during a confrontation, often depending on deception, misdirection, and pure confidence to defeat your foes instead of brute force. You gain an expertise die of the same value as that granted to an envoy of your level by the expertise class feature, but you do not add it to skill checks. Choose one of the following skills: @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.GcVVfpQ79HdcMqBt]{Bluff (Cha)}, @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.IqOCYDKd9NgBwowp]{Computers (Int)}, @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.LeZmnFwnlB89ovBB]{Culture (Int)}, @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.1tzIBDaDAO4hmX5C]{Diplomacy (Cha)}, @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.6fqgiVqlA7u9jS4i]{Intimidate}, or @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.nBrYkGfNBJAHe0xJ]{Sense Motive}.</p>\n<p>As a standard action, you can make an expertise attack as an attack action. Prior to your attack roll, attempt a skill check using the chosen skill with a DC equal to 15 + 1-1/2 × your target’s CR. If you succeed at the check and your attack hits, you roll your expertise die and add the result to your damage roll, and the target is @UUID[Compendium.sfrpg.conditions.nywSVEeDvp1bk7L3]{Shaken} for 1 round.</p>\n<p>You can use this ability and other expertise abilities as long as you have at least 1 Resolve Point remaining. This ability counts as the expertise ability for purposes of other abilities and prerequisites. If an ability requires you to forgo your expertise die on a skill check to gain some other benefit (such as altered bearing), you can use that ability only in a round in which you did not use combat expertise.</p>\n<p>At 5th level, and every 4 levels thereafter, you can select another skill you can use with combat expertise. This counts as having expertise with that skill for purposes of expertise talents and other prerequisites, though you do not actually add your expertise die to any skill checks.</p>\n<p><strong>This replaces expertise and skill expertise.</strong></p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
     "details": {
       "category": "classFeature",
+      "combat": false,
       "specialAbilityType": "ex"
     },
     "duration": {
@@ -45,7 +88,24 @@
       "value": null
     },
     "formula": "",
-    "modifiers": [],
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "90f0bcf2-d2ae-4b67-8cd4-586c645c7095",
+        "name": "Combat Expertise (Ex)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-damage",
+        "enabled": false,
+        "max": 6,
+        "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+        "modifierType": "formula",
+        "notes": "As a standard action, you can make an expertise attack as an attack action. Prior to your attack roll, attempt a skill check using the chosen skill with a DC equal to 15 + 1-1/2 × your target’s CR. If you succeed at the check and your attack hits, you roll your expertise die and add the result to your damage roll, and the target is Shaken for 1 round.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -56,13 +116,14 @@
       "charged": false,
       "value": null
     },
-    "requirements": "1st Level",
+    "requirements": "1st Level (Envoy)",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "Envoy - Alternate Class Feature",
+    "source": "COM, pg. 68",
     "target": {
       "type": "",
       "value": null

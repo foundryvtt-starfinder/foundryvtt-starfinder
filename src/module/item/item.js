@@ -1,4 +1,6 @@
+import { getItemContainer } from "../actor/actor-inventory-utils.js";
 import SFRPGModifierApplication from "../apps/modifier-app.js";
+import AbilityTemplate from "../canvas/ability-template.js";
 import { SFRPG } from "../config.js";
 import { DiceSFRPG } from "../dice.js";
 import SFRPGModifier from "../modifiers/modifier.js";
@@ -76,8 +78,35 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         return !!skillData.type;
     }
 
+    /**
+     * Does the Item implement a saving throw as part of its usage
+     * @type {boolean}
+     */
+    get hasArea() {
+        const areaData = this.system?.area;
+        if (!areaData) return false;
+
+        return !!(areaData?.value || areaData?.total);
+    }
+
+    /**
+     * The timedEffect object of this item, if any.
+     * @returns {SFRPGTimedEffect|undefined}
+     */
+    get timedEffect() {
+        return game.sfrpg.timedEffects.get(this.uuid);
+    }
+
+    get origin() {
+        return fromUuidSync(this.system?.context?.origin?.actorUuid) || null;
+    }
+
+    get originItem() {
+        return fromUuidSync(this.system?.context?.origin?.itemUuid) || null;
+    }
+
     /* -------------------------------------------- */
-    /*	Data Preparation														*/
+    /*	Data Preparation                             */
     /* -------------------------------------------- */
 
     /**
@@ -157,9 +186,45 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Item Actions
         if (data.hasOwnProperty("actionType")) {
             // Damage
-            const dam = data.damage || {};
-            if (dam.parts) labels.damage = dam.parts.map(d => d[0]).join(" + ")
-                .replace(/\+ -/g, "- ");
+            const damage = data.damage || {};
+            const itemParts = damage.parts;
+            if (itemParts.length > 0) {
+                labels.damage = damage.parts
+                    .map(d => d[0])
+                    .join(" + ")
+                    .replace(/\+ -/g, "- ");
+
+                // There must always be one primary damage group or section.
+                // If the primary damage group is set, mark all of the members of that group as primary.
+                const allGroups = itemParts.reduce((arr, part) => {
+                    if (!!part.group || part.group === 0) arr.push(part.group);
+                    return arr;
+                }, []);
+                if (Number.isInteger(data.damage.primaryGroup) && allGroups.length > 0) {
+                    // Set primary group to first group if no parts on the item are in the group
+                    if (!(allGroups.includes(data.damage.primaryGroup)))
+                        data.damage.primaryGroup = allGroups.sort()[0];
+
+                    for (const part of itemParts) {
+                        if (part.group === data.damage.primaryGroup) part.isPrimarySection = true;
+                        else part.isPrimarySection = false;
+                    }
+
+                // If the primary group is blank, set the 1st damage section, and any parts in the same group, as primary.
+                } else if (!(itemParts.some(part => part.isPrimarySection))) {
+                    itemParts[0].isPrimarySection = true;
+                    const primaryGroup = itemParts[0].group ?? null;
+
+                    if (primaryGroup !== null) {
+                        for (const part of itemParts) {
+                            if (part.group === primaryGroup) part.isPrimarySection = true;
+                            else part.isPrimarySection = false;
+                        }
+                    }
+                }
+
+            }
+
         }
 
         // Assign labels and return the Item
@@ -208,9 +273,47 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      */
     async _preCreate(data, options, user) {
         const updates = {};
+        const t = this.type;
+        const itemData = this.system;
 
-        if (this.type === "class" && !this.system?.slug) {
+        if (t === "class" && !itemData?.slug) {
             updates["system.slug"] = this.name.slugify({replacement: "_", strict: true});
+        }
+
+        // Events for when an item is created on an actor since pre/_onCreateDescendantDocuments lie >:(
+        if (this.actor) {
+            if (["npc", "npc2"].includes(this.actor.type)) {
+                if (["weapon", "shield"].includes(t)) updates['system.proficient'] = true;
+                if (["weapon", "equipment"].includes(t)) updates['system.equipped'] = true;
+                if (t === "spell") updates['system.prepared'] = true;
+            }
+            else {
+                if (t === "weapon") {
+                    const proficiencyKey = SFRPG.weaponTypeProficiency[itemData.weaponType];
+                    const proficient = itemData.proficient || this.actor?.system?.traits?.weaponProf?.value?.includes(proficiencyKey);
+                    if (proficient) updates["system.proficient"] = true;
+                } else if (t === "shield") {
+                    const proficiencyKey = "shl";
+                    const proficient = itemData.proficient || this.actor?.system?.traits?.armorProf?.value?.includes(proficiencyKey);
+                    if (proficient) updates["system.proficient"] = true;
+                }
+            }
+
+            if (this.effects instanceof Array) this.effects = null;
+            else if (this.effects instanceof Map) this.effects.clear();
+
+            // Record current world time and initiative on effects
+            if (t === "effect" && itemData.enabled) {
+                updates['system.activeDuration.activationTime'] = game.time.worldTime;
+                if (game.combat) updates['system.activeDuration.expiryInit'] = game.combat.initiative;
+            }
+
+        } else {
+            // Clear origin data if an effect is dragged from an actor to the sidebar.
+            if (t === "effect") {
+                updates["system.context.origin.actorUuid"] = "";
+                updates["system.context.origin.itemUuid"] = "";
+            }
         }
 
         this.updateSource(updates);
@@ -238,6 +341,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             hasDamage: this.hasDamage,
             hasSave: this.hasSave,
             hasSkill: this.hasSkill,
+            hasArea: this.hasArea && ["ft", "meter"].includes(this.system.area.units) && !["", "other"].includes(this.system.area.shape),
             hasOtherFormula: this.hasOtherFormula
         };
 
@@ -320,8 +424,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Render the chat card template
         const templateType = ["tool", "consumable"].includes(this.type) ? this.type : "item";
         const template = `systems/sfrpg/templates/chat/${templateType}-card.hbs`;
-        const html = await renderTemplate(template, templateData);
         const rollMode = game.settings.get("core", "rollMode");
+        const html = await renderTemplate(template, templateData);
 
         // Basic chat message data
         const chatData = {
@@ -332,6 +436,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 level: this.system.level,
                 core: {
                     canPopout: true
+                },
+                sfrpg: {
+                    item: this.uuid,
+                    actor: this.actor.uuid
                 }
             },
             rollMode: rollMode,
@@ -584,18 +692,18 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      * @param {Object} props The items properties
      */
     _upgradeChatData(data, labels, props) {
-        let armorType = "";
+        let allowedArmorType = "";
 
-        if (data.armorType === 'any') {
-            armorType = "Any";
+        if (data.allowedArmorType === 'any') {
+            allowedArmorType = game.i18n.localize("SFRPG.Any");
         } else {
-            armorType = CONFIG.SFRPG.armorTypes[data.armorType];
+            allowedArmorType = CONFIG.SFRPG.allowedArmorTypes[data.allowedArmorType];
         }
 
         props.push(
             {name: game.i18n.localize("TYPES.Item.upgrade"), tooltip: null},
             data.slots ? {name: `${game.i18n.localize("SFRPG.Items.Upgrade.Slots")} ${data.slots}`, tooltip: null} : null,
-            {name: `${game.i18n.localize("SFRPG.Items.Upgrade.AllowedArmorType")}: ${armorType}`, tooltip: null}
+            {name: `${game.i18n.localize("SFRPG.Items.Upgrade.AllowedArmorType")}: ${allowedArmorType}`, tooltip: null}
         );
     }
 
@@ -766,8 +874,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         if (abl) parts.push(`@abilities.${abl}.mod`);
         if (["character", "drone"].includes(this.actor.type)) parts.push("@attributes.baseAttackBonus.value");
         if (isWeapon) {
-            const procifiencyKey = SFRPG.weaponTypeProficiency[this.system.weaponType];
-            const proficient = itemData.proficient || this.actor?.system?.traits?.weaponProf?.value?.includes(procifiencyKey);
+            const proficiencyKey = SFRPG.weaponTypeProficiency[this.system.weaponType];
+            const proficient = itemData.proficient || this.actor?.system?.traits?.weaponProf?.value?.includes(proficiencyKey);
             if (!proficient) {
                 parts.push(`-4[${game.i18n.localize("SFRPG.Items.NotProficient")}]`);
             }
@@ -776,7 +884,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         let modifiers = this.getAppropriateAttackModifiers(isWeapon);
 
         const stackModifiers = new StackModifiers();
-        modifiers = await stackModifiers.processAsync(modifiers, null);
+        modifiers = await stackModifiers.processAsync(modifiers, null, {actor: this.actor});
 
         const rolledMods = [];
         const addModifier = (bonus, parts) => {
@@ -819,6 +927,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Add hasSave to roll
         itemData.hasSave = this.hasSave;
         itemData.hasSkill = this.hasSkill;
+        itemData.hasArea = this.hasSkill;
         itemData.hasDamage = this.hasDamage;
         itemData.hasCapacity = this.hasCapacity();
 
@@ -834,16 +943,12 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         const rollContext = RollContext.createItemRollContext(this, this.actor, {itemData: itemData});
 
-        /** Create additional modifiers. */
-        const additionalModifiers = deepClone(SFRPG.globalAttackRollModifiers);
-
-        /** Add Container Values to globalAttackRollModifiers */
-        for (let addModsI = 0; addModsI < additionalModifiers.length; addModsI++) {
-            additionalModifiers[addModsI].container = {
-                actorId: this.actor.id,
-                itemId: itemData.id
-            };
-        }
+        /** Create global attack modifiers. */
+        const additionalModifiers = deepClone(SFRPG.globalAttackRollModifiers).map(mod => {
+            const container = {actorUuid: this.actor.uuid, itemUuid: this.uuid};
+            const modInstance = {bonus: new SFRPGModifier({...mod.bonus, container})};
+            return modInstance;
+        });
 
         /** Apply bonus rolled mods from relevant attack roll formula modifiers. */
         for (const rolledMod of rolledMods) {
@@ -896,8 +1001,15 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         let modifiers = this.actor.getAllModifiers();
         modifiers = modifiers.filter(mod => {
-            // Remove inactive constant mods. Keep all situational mods, regardless of status.
+            // Remove inactive constant and damage section mods. Keep all situational mods, regardless of status.
             if (!mod.enabled && mod.modifierType !== SFRPGModifierType.FORMULA) return false;
+
+            if (mod.limitTo === "parent" && mod.container.itemUuid !== this.uuid) return false;
+            if (mod.limitTo === "container") {
+                const parentItem = getItemContainer(this.actor.items, fromUuidSync(mod.container.itemUuid));
+                if (parentItem?.id !== this.id) return false;
+            }
+
             if (mod.effectType === SFRPGEffectType.WEAPON_ATTACKS) {
                 if (mod.valueAffected !== this.system?.weaponType) {
                     return false;
@@ -1131,11 +1243,23 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         let modifiers = this.getAppropriateDamageModifiers(isWeapon);
 
         const stackModifiers = new StackModifiers();
-        modifiers = await stackModifiers.processAsync(modifiers, null);
+        modifiers = await stackModifiers.processAsync(modifiers, null, {actor: this.actor});
 
         const rolledMods = [];
         const addModifier = (bonus, parts) => {
-            if (bonus.modifierType === "formula") {
+            if (bonus.modifierType === "damageSection") {
+                parts.push({
+                    isDamageSection: true,
+                    enabled: bonus.enabled,
+                    name: bonus.name,
+                    explanation: bonus.name,
+                    formula: bonus.modifier,
+                    types: bonus?.damage?.damageTypes,
+                    group: bonus?.damage?.damageGroup
+                });
+                return;
+            }
+            else if (bonus.modifierType === "formula") {
                 rolledMods.push(bonus);
                 return;
             }
@@ -1251,6 +1375,12 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 return false;
             }
 
+            if (mod.limitTo === "parent" && mod.container.itemUuid !== this.uuid) return false;
+            if (mod.limitTo === "container") {
+                const parentItem = getItemContainer(this.actor.items, fromUuidSync(mod.container.itemUuid));
+                if (parentItem?.id !== this.id) return false;
+            }
+
             if (mod.effectType === SFRPGEffectType.WEAPON_DAMAGE) {
                 if (mod.valueAffected !== this.system.weaponType) {
                     return false;
@@ -1264,7 +1394,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                     return false;
                 }
             }
-            return (mod.enabled || mod.modifierType === "formula");
+            return (mod.enabled || ["formula", "damageSection"].includes(mod.modifierType));
         });
 
         return modifiers;
@@ -1297,10 +1427,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         rollContext.setMainContext("");
 
         return DiceSFRPG.damageRoll({
-            event: event,
-            parts: parts,
-            rollContext: rollContext,
-            title: title,
+            event,
+            parts,
+            rollContext,
+            title,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             chatMessage: options.chatMessage,
             dialogOptions: {
@@ -1460,6 +1590,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 hasAttack: this.hasAttack,
                 hasDamage: this.hasDamage,
                 hasSave: this.hasSave,
+                hasArea: this.hasArea,
                 hasOtherFormula: this.hasOtherFormula
             };
 
@@ -1553,6 +1684,31 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         return Promise.all(promises);
     }
 
+    async placeAbilityTemplate(event) {
+        const itemData = this.system;
+
+        const type = {
+            "sphere": "circle",
+            "cone": "cone",
+            "cube": "rect",
+            "cylinder": "circle",
+            "line": "ray"
+        }[itemData?.area?.shape] || null;
+
+        if (!type) return;
+
+        const template = AbilityTemplate.fromData({
+            type: type || "circle",
+            distance: this.system?.area?.total || this.system?.area?.value || 0
+        });
+
+        if (!template) return;
+
+        const placed = await template.drawPreview();
+        if (placed) template.place(); // If placement is confirmed
+
+    }
+
     /* -------------------------------------------- */
 
     static chatListeners(html) {
@@ -1607,6 +1763,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         if (action === "attack") await item.rollAttack({ event });
         else if (action === "damage") await item.rollDamage({ event });
         else if (action === "formula") await item.rollFormula({ event });
+        else if (action === "template") await item.placeAbilityTemplate({ event });
 
         // Skill Check
         else if (action === "skill" && targetActor) await targetActor.rollSkill(button.dataset.type, { event });
@@ -1714,11 +1871,13 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         effectType = SFRPGEffectType.SKILL,
         subtab = "misc",
         valueAffected = "",
-        enabled = true,
+        enabled = this.system?.enabled ?? true, // New modifiers on effects should match enabled state.
         source = "",
         notes = "",
         condition = "",
-        id = null
+        id = null,
+        limitTo = "",
+        damage = null
     } = {}) {
         const data = this._ensureHasModifiers(duplicate(this.system));
         const modifiers = data.modifiers;
@@ -1735,7 +1894,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             notes,
             subtab,
             condition,
-            id
+            id,
+            limitTo,
+            damage
         }));
 
         console.log("Adding a modifier to the item");
@@ -1775,6 +1936,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const setting = game.settings.get("sfrpg", "scalingCantrips");
         let count = 0;
         let actorCount = 0;
+
+        const promises = [];
 
         for (const actor of game.actors.contents) {
             const isNPC = ['npc', 'npc2'].includes(actor.type);
@@ -1822,44 +1985,36 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                     delete currentValue.scaling;
                 }
 
-                await actor.updateEmbeddedDocuments("Item", updates);
+                promises.push(actor.updateEmbeddedDocuments("Item", updates));
                 count += params.length;
                 actorCount++;
             }
         }
+
+        await Promise.allSettled(promises);
         const message = `Starfinder | Updated ${count} spells to use ${(setting) ? "scaling" : "default"} formulas on ${actorCount} actors.`;
         ui.notifications.info(message);
     }
 
-    static async _onScalingCantripDrop(addedItem, targetActor) {
-        const d3scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d(ternary(gte(@details.cl.value,7),4,3))+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
-        const d6scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
-        const npcd3scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d(ternary(gte(@details.cr,7),4,3))+ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
-        const npcd6scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
-
+    static _onScalingCantripDrop(item, targetActor) {
         const isNPC = ['npc', 'npc2'].includes(targetActor.actor.type);
+        const { parts } = item.system.damage;
 
-        if (addedItem.system.scaling?.d3) {
+        if (item.system.scaling?.d3) {
+            const d3scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d(ternary(gte(@details.cl.value,7),4,3))+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
+            const npcd3scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d(ternary(gte(@details.cr,7),4,3))+ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
 
-            const updates = duplicate(addedItem.system.damage.parts);
-            updates.map(i => {
-                i.formula = (isNPC) ? npcd3scaling : d3scaling;
-                return i;
-            } );
+            parts.forEach(i => i.formula = (isNPC) ? npcd3scaling : d3scaling);
 
-            await addedItem.update({"system.damage.parts": updates});
-            console.log(`Starfinder | Updated ${addedItem.name} to use the ${ (isNPC) ? 'NPC ' : ""}d3 scaling formula.`);
+            console.log(`Starfinder | Updated ${item.name} to use the ${ (isNPC) ? 'NPC ' : ""}d3 scaling formula.`);
 
-        } else if (addedItem.system.scaling?.d6) {
+        } else if (item.system.scaling?.d6) {
+            const d6scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
+            const npcd6scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
 
-            const updates = duplicate(addedItem.system.damage.parts);
-            updates.map(i => {
-                i.formula = (isNPC) ? npcd6scaling : d6scaling;
-                return i;
-            } );
+            parts.forEach(i => i.formula = (isNPC) ? npcd6scaling : d6scaling);
 
-            await addedItem.update({"system.damage.parts": updates});
-            console.log(`Starfinder | Updated ${addedItem.name} to use the ${ (isNPC) ? "NPC " : ""}d6 scaling formula.`);
+            console.log(`Starfinder | Updated ${item.name} to use the ${ (isNPC) ? "NPC " : ""}d6 scaling formula.`);
         }
     }
 }

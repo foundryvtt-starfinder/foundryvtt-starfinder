@@ -1201,6 +1201,7 @@
       "actorResource",
       "feat",
       "spell",
+      "effect",
       "asi",
       "chassis",
       "mod",
@@ -1369,6 +1370,19 @@
       },
       "specialMaterials": {
         "specialMaterials": {}
+      },
+      "itemDuration": {
+        "activeDuration": {
+          "unit": "round",
+          "value": "0",
+          "activationTime": 0,
+          "expiryMode": {
+            "type": "turn",
+            "turn": "parent"
+          },
+          "expiryInit": 0,
+          "endsOn": "onTurnStart"
+        }
       }
     },
     "asi": {
@@ -2148,7 +2162,7 @@
         "container"
       ],
       "slots": 1,
-      "armorType": "any"
+      "allowedArmorType": "any"
     },
     "ammunition": {
       "templates": [
@@ -2595,6 +2609,13 @@
         "showOwnerAndGMOnly": false,
         "visualization": []
       }
+    },
+    "effect": {
+      "templates": ["itemDescription", "modifiers", "itemDuration"],
+      "type": "effect",
+      "enabled": true,
+      "context": {},
+      "showOnToken": true
     }
   }
 }

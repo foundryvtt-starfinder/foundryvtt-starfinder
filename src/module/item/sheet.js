@@ -64,6 +64,18 @@ export class ItemSheetSFRPG extends ItemSheet {
         return `${path}/${this.item.type}.hbs`;
     }
 
+    async render(force, options) {
+        if (game.combat && this.item.type === "effect") game.combat.apps[this.appId] = this;
+
+        await super.render(force, options);
+    }
+
+    async close(options) {
+        delete game.combat?.apps[this.appId];
+
+        await super.close(options);
+    }
+
     /* -------------------------------------------- */
     parseNumber(value, defaultValue) {
         if (value === 0 || value instanceof Number) return value;
@@ -92,7 +104,7 @@ export class ItemSheetSFRPG extends ItemSheet {
     async getData() {
         const data = super.getData();
         // Ensure derived data is included
-        this.item.processData();
+        await this.item.processData();
 
         data.itemData = this.document.system;
         data.actor = this.document.parent;
@@ -216,28 +228,55 @@ export class ItemSheetSFRPG extends ItemSheet {
             data.placeholders.savingThrow.value = data.item.system.save.dc;
         }
 
+        if (data.item.type === "effect") {
+            const duration = itemData.activeDuration;
+
+            data.duration = {};
+            data.duration.remaining = duration?.remaining?.string || (() => {
+                if (duration.unit === "permanent") return CONFIG.SFRPG.effectDurationTypes[duration.unit];
+                else return `${parseInt(duration.total || duration.value) || duration.value} ${CONFIG.SFRPG.effectDurationTypes[duration.unit]}`;
+            })();
+            data.duration.showTotal = !!duration.total && (String(duration.value) !== String(duration.total));
+
+            data.expired = duration.remaining?.value <= 0 && !itemData.enabled;
+
+            data.sourceActorChoices = {};
+            if (game.combat?.started) {
+                for (const combatant of game.combat.combatants) {
+                    if (combatant.actorId === data.item?.actor?.id) continue;
+                    data.sourceActorChoices[combatant.actorId] = combatant.name;
+                }
+            } else {
+                const PCs = game.actors.filter(i => i.type === "character");
+                for (const PC of PCs) {
+                    data.sourceActorChoices[PC.id] = PC.name;
+                }
+            }
+        }
+
         data.modifiers = this.item.system.modifiers;
 
         data.hasSpeed = this.item.system.weaponType === "tracking" || (this.item.system.special && this.item.system.special["limited"]);
         data.hasCapacity = this.item.hasCapacity();
 
         // Enrich text editors
-        const rollData = RollContext.createItemRollContext(this.item, this.actor).getRollData();
+        const async = true;
+        const rollData = RollContext.createItemRollContext(this.item, this.actor).getRollData() ?? {};
         const secrets = this.item.isOwner;
 
         data.enrichedDescription = await TextEditor.enrichHTML(this.item.system?.description?.value, {
-            async: true,
-            rollData: rollData ?? {},
+            async,
+            rollData,
             secrets
         });
         data.enrichedShortDescription = await TextEditor.enrichHTML(this.item.system?.description?.short, {
-            async: true,
-            rollData: rollData ?? {},
+            async,
+            rollData,
             secrets
         });
         data.enrichedGMNotes = await TextEditor.enrichHTML(this.item.system?.description?.gmNotes, {
-            async: true,
-            rollData: rollData ?? {},
+            async,
+            rollData,
             secrets
         });
 
@@ -273,9 +312,10 @@ export class ItemSheetSFRPG extends ItemSheet {
         const item = this.document;
         const itemData = item.system;
 
-        if (["weapon", "equipment", "shield"].includes(item.type)) return itemData.equipped ? "Equipped" : "Unequipped";
+        if (["weapon", "equipment", "shield"].includes(item.type)) return itemData.equipped ? game.i18n.localize("SFRPG.InventoryEquipped") : game.i18n.localize("SFRPG.InventoryNotEquipped");
         else if (item.type === "feat") return CONFIG.SFRPG.featureCategories[itemData.details.category]?.label || "";
-        else if (item.type === "starshipWeapon") return itemData.mount.mounted ? "Mounted" : "Not Mounted";
+        else if (item.type === "starshipWeapon") return game.i18n.localize(`SFRPG.Items.ShipWeapon.${itemData.mount.mounted ? "Mounted" : "NotMounded"}`);
+        else if (item.type === "effect") return game.i18n.localize(`SFRPG.${itemData.enabled ? "Enabled" : "Disabled"}`);
         else if (item.type === "augmentation") {
             return `${CONFIG.SFRPG.augmentationTypes[itemData.type]} (${CONFIG.SFRPG.augmentationSystems[itemData.system] || ""})`;
         } else if (item.type === "vehicleSystem") {
@@ -284,7 +324,7 @@ export class ItemSheetSFRPG extends ItemSheet {
                 return "";
             }
 
-            return this.document.isActive() ? "Activated" : "Not Activated";
+            return this.document.isActive() ? game.i18n.localize("SFRPG.VehicleSystemSheet.Activated") : game.i18n.localize("SFRPG.VehicleSystemSheet.NotActivated");
         }
     }
 
@@ -478,7 +518,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         const damage = Object.entries(formData).filter(e => e[0].startsWith("system.damage.parts"));
         formData["system.damage.parts"] = damage.reduce((arr, entry) => {
             const [i, key, type] = entry[0].split(".").slice(3);
-            if (!arr[i]) arr[i] = { name: "", formula: "", types: {}, group: null };
+            if (!arr[i]) arr[i] = { name: "", formula: "", types: {}, group: null, isPrimarySection: false };
 
             switch (key) {
                 case 'name':
@@ -492,6 +532,9 @@ export class ItemSheetSFRPG extends ItemSheet {
                     break;
                 case 'group':
                     arr[i].group = entry[1];
+                    break;
+                case 'isPrimarySection':
+                    arr[i].isPrimarySection = entry[1];
                     break;
             }
 
@@ -543,6 +586,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         // Modify damage formula
         html.find(".damage-control").click(this._onDamageControl.bind(this));
+        html.find("input.primary-section-checkbox").click(this._onTogglePrimaryDamageSection.bind(this));
         html.find(".visualization-control").click(this._onActorResourceVisualizationControl.bind(this));
         html.find(".ability-adjustments-control").click(this._onAbilityAdjustmentsControl.bind(this));
 
@@ -560,7 +604,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         html.find('input[class="storage.acceptsType"]').change(this._onChangeStorageAcceptsItem.bind(this));
         html.find('input[name="storage.affectsEncumbrance"]').change(this._onChangeStorageAffectsEncumbrance.bind(this));
 
-        html.find('input[class="data.supportedSizes"]').change(this._onChangeSupportedStarshipSizes.bind(this));
+        html.find('input[class="system.supportedSizes"]').change(this._onChangeSupportedStarshipSizes.bind(this));
 
         html.find('img[name="resource-image"]').click(this._onClickResourceVisualizationImage.bind(this));
         html.find('select[name="resource-mode"]').change(this._onChangeResourceVisualizationMode.bind(this));
@@ -568,6 +612,10 @@ export class ItemSheetSFRPG extends ItemSheet {
         html.find('input[name="resource-title"]').change(this._onChangeResourceVisualizationTitle.bind(this));
 
         html.find('.trait-selector').click(this._onTraitSelector.bind(this));
+
+        // toggle timedEffect
+        html.find('.effect-details-toggle').on('click', this._onToggleDetailsEffect.bind(this));
+        html.find("div[data-origin-uuid]").on("click", this._onClickOrigin.bind(this));
     }
 
     /* -------------------------------------------- */
@@ -615,7 +663,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             const damage = this.item.system.damage;
             return await this.item.update({
                 "system.damage.parts": damage.parts.concat([
-                    { name: "", formula: "", types: {}, group: null }
+                    { name: "", formula: "", types: {}, group: null, isPrimarySection: false }
                 ])
             });
         }
@@ -652,6 +700,27 @@ export class ItemSheetSFRPG extends ItemSheet {
                 "system.critical.parts": criticalDamage.parts
             });
         }
+    }
+
+    async _onTogglePrimaryDamageSection(event) {
+        event.preventDefault();
+        const checked = event.currentTarget.checked;
+        const itemParts = this.item.system.damage.parts;
+        const idx = event.currentTarget.closest("li.damage-part").dataset.damagePart;
+        const part = itemParts[idx];
+
+        for (const p of itemParts) {
+            p.isPrimarySection = false;
+        }
+
+        part.isPrimarySection = checked;
+
+        // There must always be one primary damage section, so if they're all disabled, set section 0 as primary.
+        if (!(itemParts.some(part => part.isPrimarySection))) itemParts[0].isPrimarySection = true;
+
+        return this.item.update({
+            "system.damage.parts": itemParts
+        });
     }
 
     /**
@@ -848,13 +917,15 @@ export class ItemSheetSFRPG extends ItemSheet {
         event.preventDefault();
         event.stopImmediatePropagation();
 
-        const toggleSize = event.currentTarget.name;
+        const toggleSize = event.currentTarget.dataset.size;
         const enabled = event.currentTarget.checked;
 
-        let supportedSizes = duplicate(this.item.system.supportedSizes);
-        if (enabled && !supportedSizes.includes(toggleSize)) {
+        let supportedSizes = this.item.system.supportedSizes;
+        const previouslyEnabled = supportedSizes.includes(toggleSize);
+
+        if (enabled && !previouslyEnabled) {
             supportedSizes.push(toggleSize);
-        } else if (!enabled && supportedSizes.includes(toggleSize)) {
+        } else if (!enabled && previouslyEnabled) {
             supportedSizes = supportedSizes.filter(x => x !== toggleSize);
         }
 
@@ -1002,4 +1073,38 @@ export class ItemSheetSFRPG extends ItemSheet {
         new cls(this.item, options).render(true);
     }
 
+    /**
+     * Toggle an effect and their modifiers to be enabled or disabled.
+     *
+     * @param {Event} event The originating click event
+     */
+    async _onToggleDetailsEffect(event) {
+        event.preventDefault();
+        const checked = event.currentTarget.checked;
+
+        if (!this.item.actor) {
+            const updates = {
+                system: {
+                    enabled: checked,
+                    modifiers: this.item.system.modifiers
+                }
+            };
+
+            for (const modifier of updates.system.modifiers) {
+                modifier.enabled = checked;
+            }
+
+            await this.item.update(updates);
+        } else {
+            this.item.timedEffect?.toggle();
+        }
+    }
+
+    async _onClickOrigin(event) {
+        event.preventDefault();
+        const uuid = event.currentTarget.dataset.originUuid;
+        const doc = await fromUuid(uuid);
+
+        doc.sheet.render(true);
+    }
 }
