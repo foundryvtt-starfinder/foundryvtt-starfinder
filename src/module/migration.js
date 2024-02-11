@@ -14,7 +14,8 @@ const SFRPGMigrationSchemas = Object.freeze({
 });
 
 // Allows for migration to be enabled and disabled while doing development
-const performMigrate = false;
+const performMigrate = true; // Don't perform any migration at all
+const softMigrate = true; // attempt to migrate but print data to the console instead of writing it to the server
 
 export default async function migrateWorld() {
     const systemVersion = game.system.version;
@@ -24,6 +25,10 @@ export default async function migrateWorld() {
 
     if (!performMigrate) {
         ui.notifications.warn("Migration functions are currently disabled for testing. Remove this before release.", { permanent: true });
+        return false;
+    }
+    if (softMigrate) {
+        ui.notifications.warn("Soft migration is enabled for testing. Remove this before release.", { permanent: true });
     }
 
     if (performMigrate) {
@@ -32,7 +37,7 @@ export default async function migrateWorld() {
                 const updateData = await migrateActor(actor, worldSchema);
                 if (!foundry.utils.isEmpty(updateData)) {
                     console.log(`Starfinder | Migrating Actor entity ${actor.name}`);
-                    await actor.update(updateData, { enforceTypes: false });
+                    softMigrate ? console.log(updateData) : await actor.update(updateData, { enforceTypes: false });
                 }
             } catch (err) {
                 console.error(err);
@@ -44,7 +49,7 @@ export default async function migrateWorld() {
                 const updateData = await migrateItem(item, worldSchema);
                 if (!foundry.utils.isEmpty(updateData)) {
                     console.log(`Starfinder | Migrating Item entity ${item.name}`);
-                    await item.update(updateData, { enforceTypes: false });
+                    softMigrate ? console.log(updateData) : await item.update(updateData, { enforceTypes: false });
                 }
             } catch (err) {
                 console.error(err);
@@ -56,7 +61,7 @@ export default async function migrateWorld() {
                 const updateData = await migrateChatMessage(message, worldSchema);
                 if (!foundry.utils.isEmpty(updateData)) {
                     console.log(`Starfinder | Migrating Chat message entity ${message.id}`);
-                    await message.update(updateData, { enforceTypes: false });
+                    softMigrate ? console.log(updateData) : await message.update(updateData, { enforceTypes: false });
                 }
             } catch (err) {
                 console.error(err);
@@ -68,7 +73,7 @@ export default async function migrateWorld() {
                 const updateData = await migrateMacro(macro, worldSchema);
                 if (!foundry.utils.isEmpty(updateData)) {
                     console.log(`Starfinder | Migrating Macro entity ${macro.name}`);
-                    await macro.update(updateData, { enforceTypes: false });
+                    softMigrate ? console.log(updateData) : await macro.update(updateData, { enforceTypes: false });
                 }
             } catch (err) {
                 console.error(err);
@@ -94,11 +99,13 @@ export default async function migrateWorld() {
 
                 if (worldSchema < SFRPGMigrationSchemas.THE_PROPERTIES_UPDATE) {
                     if (pack.metadata.type === "Actor") {
+                        console.log(`Starfinder | Migrating Compendium ${pack.name}`);
                         const documents = await pack.getDocuments();
                         for (const doc of documents) {
                             await doc.update(await migrateActor(doc, worldSchema), { enforceTypes: false });
                         }
                     } else if (pack.metadata.type === "Item") {
+                        console.log(`Starfinder | Migrating Compendium ${pack.name}`);
                         const documents = await pack.getDocuments();
                         for (const doc of documents) {
                             await doc.update(await migrateItem(doc, worldSchema), { enforceTypes: false });
@@ -114,7 +121,7 @@ export default async function migrateWorld() {
         }
 
         const systemSchema = Number(game.system.flags.sfrpg.schema);
-        await game.settings.set('sfrpg', 'worldSchemaVersion', systemSchema);
+        if (!softMigrate) await game.settings.set('sfrpg', 'worldSchemaVersion', systemSchema);
         ui.notifications.info(game.i18n.format("SFRPG.MigrationEndMigration", { systemVersion }), { permanent: true });
     }
 
@@ -154,8 +161,8 @@ const migrateActor = async function(actor, schema) {
     for (const item of actor.items) {
         const itemUpdateData = await migrateItem(item, schema);
         if (!foundry.utils.isEmpty(itemUpdateData)) {
-            console.log(`Starfinder | Migrating Actor Item ${item.name}`);
-            await item.update(itemUpdateData, { enforceTypes: false });
+            console.log(`Starfinder | Migrating Actor ${actor.name} Item ${item.name}`);
+            softMigrate ? console.log(itemUpdateData) : await item.update(itemUpdateData, { enforceTypes: false });
         }
     }
 
@@ -190,7 +197,7 @@ const migrateToken = async function(token, schema) {
         const actorUpdateData = await migrateActor(actor, schema);
         if (!foundry.utils.isEmpty(actorUpdateData)) {
             console.log(`Starfinder | Migrating Token Actor ${actor.name}`);
-            await actor.update(actorUpdateData, { enforceTypes: false });
+            softMigrate ? console.log(actorUpdateData) : await actor.update(actorUpdateData, { enforceTypes: false });
         }
     }
 
