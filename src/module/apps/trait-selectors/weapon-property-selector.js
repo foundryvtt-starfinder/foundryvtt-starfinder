@@ -57,7 +57,7 @@ export class WeaponPropertySelectorSFRPG extends TraitSelectorSFRPG {
 
         // Ignoring options not in the list of choices
         // key is the specific language, proficiency, etc.
-        // value is true or false, or the name of a custom trait
+        // property is the property object
         for (const [key, property] of Object.entries(formData)) {
             if (validChoices.includes(key) && property.value) {
                 selectedValues[key] = property;
