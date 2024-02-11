@@ -326,9 +326,10 @@ export default class RollNode {
 
     static getCalculatedModifiers(variable, context) {
         let variableString = variable + ".calculatedMods";
+        const words = variable.split('.');
         let variableCalculatedMods = RollNode._readValue(context.data, variableString);
         // we don't want to include the skill rolls calculated mods as those do not apply
-        if (!variableCalculatedMods && variable.substring(variable.lastIndexOf('.') + 1) !== "ranks") {
+        if (!variableCalculatedMods && !words.includes("ranks") && !(words.includes("abilities") && !words.includes("abilityCheckBonus"))) {
             variableString = variable.substring(0, variable.lastIndexOf('.')) + ".calculatedMods";
             variableCalculatedMods = RollNode._readValue(context.data, variableString);
         }
