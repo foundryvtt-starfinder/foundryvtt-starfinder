@@ -16,7 +16,7 @@ const SFRPGMigrationSchemas = Object.freeze({
 
 // Allows for migration to be enabled and disabled while doing development
 const performMigrate = true; // Don't perform any migration at all
-const softMigrate = false; // attempt to migrate but print data to the console instead of writing it to the server
+const softMigrate = true; // attempt to migrate but print data to the console instead of writing it to the server
 
 export default async function migrateWorld() {
     const systemVersion = game.system.version;
