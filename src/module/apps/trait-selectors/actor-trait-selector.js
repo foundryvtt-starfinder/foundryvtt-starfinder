@@ -3,7 +3,6 @@ import { TraitSelectorSFRPG } from "../trait-selector.js";
 export class ActorTraitSelectorSFRPG extends TraitSelectorSFRPG {
     constructor(actor, options) {
         super(actor, options);
-        super.getData();
 
         // Add extra text fields if needed
         foundry.utils.mergeObject(this.options, {
