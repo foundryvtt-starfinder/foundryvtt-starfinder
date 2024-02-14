@@ -63,32 +63,39 @@ export class TraitSelectorSFRPG extends FormApplication {
     searchMatch(trait) {
         const searchTerm = this.searchTerm;
 
-        if (this.attribute !== "system.traits.dr") {
-            for (let [k, v] of Object.entries(formData)) {
-                if ((k !== 'custom') && v) choices.push(k);
+        if (searchTerm !== '') {
+            const strings = this.searchTerm.split(',');
+
+            for (const string of strings) {
+                const textToSearch = $(trait).find('input')[0].nextSibling.data.toLowerCase().trim();
+                if (textToSearch.indexOf(string.toLowerCase().trim()) === -1) {
+                    return false;
+                }
             }
-        } else {
-            let resistances = Object.entries(formData).filter(e => e[0].startsWith("er"));
-            resistances = resistances.reduce((obj, entry) => {
-                let [type, i] = entry[0].split('.').slice(1);
-
-                if (!obj[type]) obj[type] = {};
-                obj[type][i] = entry[1];
-
-                return obj;
-            }, {});
-
-            choices = Object.entries(resistances).filter(e => e[1][0])
-                .reduce((arr, resistance) => {
-                    arr.push({[resistance[0]]: resistance[1][1]});
-
-                    return arr;
-                }, []);
         }
 
-        this.object.update({
-            [`${this.attribute}.value`]: choices,
-            [`${this.attribute}.custom`]: formData.custom
+        return true;
+    }
+
+    /**
+     * Act on inputs to the html
+     *
+     * @param {Object} html
+     */
+    activateListeners(html) {
+
+        // activating or deactivating filters
+        html.on('change keyup paste', 'input[name=textFilter]', ev => {
+            this.searchTerm = ev.target.value;
+            this.filterTraits(html.find('li'));
         });
+
+        // re-render the template with updated data if a trait is selected/unselected
+        html.on('change', 'input[type=checkbox]', async ev => {
+            const formData = this._getSubmitData();
+            await this._updateObject(ev, formData);
+            this.render();
+        });
+
     }
 }
