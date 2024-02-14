@@ -55,7 +55,7 @@ export const registerSystemSettings = function() {
         name: "SFRPG.Settings.WorldSchemaVersion.Name",
         hint: "SFRPG.Settings.WorldSchemaVersion.Hint",
         scope: "world",
-        config: true, // TODO: for testing, revert when finished
+        config: false,
         default: 0,
         type: Number
     });
