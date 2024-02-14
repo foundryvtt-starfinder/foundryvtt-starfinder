@@ -69,6 +69,7 @@ export class WeaponPropertySelectorSFRPG extends TraitSelectorSFRPG {
             if (validChoices.includes(key)) {
                 selectedValues[key] = property;
                 delete selectedValues[key].isObject;
+                delete selectedValues[key].needsTextExtension;
             }
         }
 

@@ -100,6 +100,10 @@ export class TraitSelectorSFRPG extends FormApplication {
             newList.appendChild(propertyElement);
 
             // TODO: if the box has been selected, append the text box and isObject data if needed
+            const formData = foundry.utils.expandObject(this._getSubmitData());
+            const key = ev.target.name.split('.')[0];
+            const needsExtension = true;
+            const extensionField = `<input type="text" name="${key}.extension" value="${formData[key].extension}">`;
 
             console.log('Hi');
         });
