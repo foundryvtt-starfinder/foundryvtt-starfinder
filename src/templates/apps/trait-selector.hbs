@@ -4,7 +4,7 @@
 
         {{!-- Selected Trait List --}}
         <h3 style="text-align:center" data-tooltip="Some options may be fixed by character class(es).">Selected Options</h3>
-        <ul class="trait-list selected">
+        <ul class="trait-list" id="selected">
             {{#each choices as |choice key|}}
                 {{#if choice.isSelected}}
                     <li class="trait">
@@ -41,14 +41,14 @@
 
         {{!-- Search Bar --}}
         <div class="sortcontainer" id="tagfilter">
-            <input class="" name="textFilter" type="text" value="" data-dtype="String" placeholder="{{localize "SFRPG.FeaturesFilter"}}"/>
+            <input class="search-bar" name="textFilter" type="text" value="" data-dtype="String" placeholder="{{localize "SFRPG.FeaturesFilter"}}"/>
         </div>
 
     </div>
 
     {{!-- Trait Options List --}}
     <div>
-        <ul class="trait-list not-selected">
+        <ul class="trait-list" id="unselected">
             {{#each choices as |choice key|}}
                 {{#unless choice.isSelected}}
                     <li class="trait">
@@ -56,6 +56,10 @@
                             <input type="checkbox" name="{{key}}.value" data-dtype="Boolean" {{checked choice.isSelected}}>
                             {{choice.label}}
                         </label>
+
+                        <!-- {{#if ../needsTextExtension}}
+                            <input class="extension" type="text" name="{{key}}.extension" value="{{choice.extension}}">
+                        {{/if}} -->
 
                         <input type="hidden" name="{{key}}.isObject" value="{{choice.isObject}}"></input>
                     </li>

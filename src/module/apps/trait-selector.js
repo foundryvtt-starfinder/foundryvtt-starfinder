@@ -90,12 +90,27 @@ export class TraitSelectorSFRPG extends FormApplication {
             this.filterTraits(html.find('li'));
         });
 
-        // re-render the template with updated data if a trait is selected/unselected
+        // Shuffle all checkboxes around based on whether or not they're checked
         html.on('change', 'input[type=checkbox]', async ev => {
+            // Get relevant information from the checkbox that was just changed
+            const selectedList = document.getElementById("selected");
+            const unselectedList = document.getElementById("unselected");
+            const propertyElement = ev.target.parentElement.parentElement;
+            const newList = ev.target.parentElement.parentElement.parentElement === selectedList ? unselectedList : selectedList;
+            newList.appendChild(propertyElement);
+
+            // TODO: if the box has been selected, append the text box and isObject data if needed
+
+            console.log('Hi');
+        });
+
+        // re-render the template with updated data if a trait is selected/unselected
+        /* html.on('change', 'input[type=checkbox]', async ev => {
             const formData = this._getSubmitData();
             await this._updateObject(ev, formData);
+            console.log('Hi');
             this.render();
-        });
+        }); */
 
     }
 }
