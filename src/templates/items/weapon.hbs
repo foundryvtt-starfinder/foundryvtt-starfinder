@@ -61,13 +61,21 @@
                         <i class="fas fa-edit"></i>
                     </a>
                 </label>
-                
+
                 <ul class="traits-list">
                     {{#each itemData.properties as |property name|}}
-                        {{#if property.value}}
-                            <li class="tag {{name}}" data-tooltip='<strong>{{lookup ../config.weaponProperties name}}</strong><br/>{{lookup ../config.weaponPropertiesTooltips name}}'>
-                                {{lookup ../config.weaponProperties name}}
-                            </li>
+                        {{#if (isObject property)}}
+                            {{#if property.value}}
+                                <li class="tag {{name}}" data-tooltip='<strong>{{lookup ../config.weaponProperties name}}</strong><br/>{{lookup ../config.weaponPropertiesTooltips name}}'>
+                                    {{lookup ../config.weaponProperties name}}
+                                </li>
+                            {{/if}}
+                        {{else}}
+                            {{#if property}}
+                                <li class="tag {{name}}" data-tooltip='<strong>{{lookup ../config.weaponProperties name}}</strong><br/>{{lookup ../config.weaponPropertiesTooltips name}}'>
+                                    {{lookup ../config.weaponProperties name}}
+                                </li>
+                            {{/if}}
                         {{/if}}
                     {{/each}}
                 </ul>
@@ -106,6 +114,6 @@
 
         {{!-- Modifiers Tab --}}
         {{> "systems/sfrpg/templates/items/parts/item-modifiers.hbs"}}
-        
+
     </section>
 </form>
