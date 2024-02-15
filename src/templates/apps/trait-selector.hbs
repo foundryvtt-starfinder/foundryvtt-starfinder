@@ -7,14 +7,14 @@
         <ul class="trait-list" id="selected">
             {{#each choices as |choice key|}}
                 {{#if choice.isSelected}}
-                    <li class="trait">
+                    <li class="trait" id="{{key}}">
                         <label class="checkbox" {{#if choice.tooltip}}data-tooltip="<strong>{{choice.label}}</strong><br/>{{choice.tooltip}}"{{/if}}>
                             <input type="checkbox" name="{{key}}.value" data-dtype="Boolean" {{#if choice.isLocked}}disabled=true{{/if}} {{checked choice.isSelected}}>
                             {{choice.label}}
                         </label>
 
                         {{#if ../needsTextExtension}}
-                            <input type="text" name="{{key}}.extension" value="{{choice.extension}}">
+                            <input class="extension" type="text" name="{{key}}.extension" value="{{choice.extension}}">
                         {{/if}}
 
                         <input type="hidden" name="{{key}}.isObject" value="{{choice.isObject}}"></input>
@@ -52,15 +52,11 @@
         <ul class="trait-list" id="unselected">
             {{#each choices as |choice key|}}
                 {{#unless choice.isSelected}}
-                    <li class="trait">
+                    <li class="trait" id="{{key}}">
                         <label class="checkbox" {{#if choice.tooltip}}data-tooltip="<strong>{{choice.label}}</strong><br/>{{choice.tooltip}}"{{/if}}>
                             <input type="checkbox" name="{{key}}.value" data-dtype="Boolean" {{checked choice.isSelected}}>
                             {{choice.label}}
                         </label>
-
-                        <!-- {{#if ../needsTextExtension}}
-                            <input class="extension" type="text" name="{{key}}.extension" value="{{choice.extension}}">
-                        {{/if}} -->
 
                         <input type="hidden" name="{{key}}.isObject" value="{{choice.isObject}}"></input>
                         <input type="hidden" name="{{key}}.needsExtension" value="{{../needsTextExtension}}"></input>

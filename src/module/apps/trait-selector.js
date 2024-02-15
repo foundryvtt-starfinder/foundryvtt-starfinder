@@ -92,29 +92,50 @@ export class TraitSelectorSFRPG extends FormApplication {
 
         // Shuffle all checkboxes around based on whether or not they're checked
         html.on('change', 'input[type=checkbox]', async ev => {
-            // Get relevant information from the checkbox that was just changed
+
+            // Get relevant data
+            const formData = foundry.utils.expandObject(this._getSubmitData());
+            const propertyElement = ev.target.parentElement.parentElement;
+            const key = propertyElement.id;
+            const label = propertyElement.innerText.trim();
             const selectedList = document.getElementById("selected");
             const unselectedList = document.getElementById("unselected");
-            const propertyElement = ev.target.parentElement.parentElement;
-            const newList = ev.target.parentElement.parentElement.parentElement === selectedList ? unselectedList : selectedList;
-            newList.appendChild(propertyElement);
 
-            // TODO: if the box has been selected, append the text box and isObject data if needed
-            const formData = foundry.utils.expandObject(this._getSubmitData());
-            const key = ev.target.name.split('.')[0];
-            const needsExtension = true;
-            const extensionField = `<input type="text" name="${key}.extension" value="${formData[key].extension}">`;
+            // The list which the changed list item is currently not in
+            const newList = propertyElement.parentElement === selectedList ? unselectedList : selectedList;
 
-            console.log('Hi');
+            // Sort the list items by their text labels (localized names)
+            let targetListItem = null;
+            for (const listItem of newList.children) {
+                const itemLabel = listItem.innerText.trim();
+                if (label.localeCompare(itemLabel) <= 0) {
+                    targetListItem = listItem;
+                    break;
+                }
+            }
+
+            // Move the list item to the correct location in the new list
+            newList.insertBefore(propertyElement, targetListItem);
+
+            // If the box has been newly checked, append the text box and isObject data if needed
+            if (formData[key].needsExtension === 'true' && newList === selectedList) {
+                const extensionTextBox = document.createElement("input");
+                extensionTextBox.type = "text";
+                extensionTextBox.className = "extension";
+                extensionTextBox.name = `${key}.extension`;
+                extensionTextBox.value = "";
+                propertyElement.appendChild(extensionTextBox);
+            }
+
+            // Remove the extension text box if it's being unchecked and it's needed
+            if (formData[key].needsExtension && newList === unselectedList) {
+                for (const child of propertyElement.children) {
+                    if (child.className === 'extension') {
+                        child.remove();
+                    }
+                }
+            }
         });
-
-        // re-render the template with updated data if a trait is selected/unselected
-        /* html.on('change', 'input[type=checkbox]', async ev => {
-            const formData = this._getSubmitData();
-            await this._updateObject(ev, formData);
-            console.log('Hi');
-            this.render();
-        }); */
 
     }
 }
