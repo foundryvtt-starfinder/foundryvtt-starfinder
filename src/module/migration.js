@@ -206,7 +206,10 @@ const migrateMacro = async function(macro, schema) {
 };
 
 const damageTypeMigrationCallback = function(arr, curr) {
-    if (!Array.isArray(curr)) return arr;
+    if (!Array.isArray(curr)) {
+        arr.push(curr);
+        return arr;
+    }
     let [formula, type] = curr;
 
     if (!type) {
