@@ -809,6 +809,14 @@ function setupHandlebars() {
         return formattedValue;
     });
 
+    Handlebars.registerHelper('isObject', function(item) {
+        if (typeof item === "object") {
+            return true;
+        } else {
+            return false;
+        }
+    });
+
 }
 
 Hooks.on("renderSidebarTab", async (app, html) => {

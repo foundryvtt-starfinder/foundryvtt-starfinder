@@ -1,5 +1,6 @@
 import { SFRPGModifierTypes, SFRPGEffectType, SFRPGModifierType } from "./modifiers/types.js";
 import SFRPGModifier from "./modifiers/modifier.js";
+import { ActorSFRPG } from "./actor/actor.js";
 
 const SFRPGMigrationSchemas = Object.freeze({
     NPC_DATA_UPATE: 0.001,
@@ -9,105 +10,146 @@ const SFRPGMigrationSchemas = Object.freeze({
     DAMAGE_TYPE_REFACTOR: 0.005,
     DAMAGE_REDUCTION_REFACTOR: 0.006,
     THE_WEBP_UPDATE: 0.008, // We changed all icons from .png to .webp
-    THE_GUNNERY_UPDATE: 0.009 // Since Gunnery is now a selectable skill for NPC starships, migrate an NPC gunner's ranks in Piloting (the previous hacky solution) to their modifier in Gunnery.
+    THE_GUNNERY_UPDATE: 0.009, // Since Gunnery is now a selectable skill for NPC starships, migrate an NPC gunner's ranks in Piloting (the previous hacky solution) to their modifier in Gunnery.
+    THE_PROPERTIES_UPDATE: 0.010 // Updates the "properties" data for weapons to include nesting for variability such as in Explode (5ft)
 });
 
+// Allows for migration to be enabled and disabled while doing development
+const performMigrate = true; // Don't perform any migration at all if false
+const softMigrate = true; // Attempt to migrate but print data to the console instead of writing it to the server if true
+
 export default async function migrateWorld() {
-    const systemVersion = game.system.data.version;
+    const systemVersion = game.system.version;
     const worldSchema = game.settings.get('sfrpg', 'worldSchemaVersion') ?? 0;
 
     ui.notifications.info(game.i18n.format("SFRPG.MigrationBeginingMigration", { systemVersion }), { permanent: true });
 
-    for (const actor of game.actors.contents) {
-        try {
-            const updateData = await migrateActor(actor, worldSchema);
-            if (!foundry.utils.isEmpty(updateData)) {
-                console.log(`Starfinder | Migrating Actor entity ${actor.name}`);
-                await actor.update(updateData, { enforceTypes: false });
-            }
-        } catch (err) {
-            console.error(err);
-        }
+    if (!performMigrate) {
+        ui.notifications.warn("Migration functions are currently disabled for testing. Remove this before release.", { permanent: true });
+        return false;
+    }
+    if (softMigrate) {
+        ui.notifications.warn("Soft migration is enabled for testing. Remove this before release.", { permanent: true });
     }
 
-    for (const scene of game.scenes) {
-        for (const token of scene.tokens) {
+    if (performMigrate) {
+        for (const actor of game.actors) {
             try {
-                const tokenUpdateData = await migrateToken(token, worldSchema);
-                if (!foundry.utils.isEmpty(tokenUpdateData)) {
-                    console.log(`Starfinder | Migrating Token entity ${token.name}`);
-                    await token.update(tokenUpdateData, { enforceTypes: false });
+                const updateData = await migrateActor(actor, worldSchema);
+                if (!foundry.utils.isEmpty(updateData)) {
+                    console.log(`Starfinder | Migrating Actor entity ${actor.name}`);
+                    softMigrate ? console.log(updateData) : await actor.update(updateData, { enforceTypes: false });
                 }
             } catch (err) {
                 console.error(err);
             }
         }
-    }
 
-    for (const item of game.items.contents) {
-        try {
-            const updateData = await migrateItem(item, worldSchema);
-            if (!foundry.utils.isEmpty(updateData)) {
-                console.log(`Starfinder | Migrating Item entity ${item.name}`);
-                await item.update(updateData, { enforceTypes: false });
+        for (const item of game.items) {
+            try {
+                const updateData = await migrateItem(item, worldSchema);
+                if (!foundry.utils.isEmpty(updateData)) {
+                    console.log(`Starfinder | Migrating Item entity ${item.name}`);
+                    softMigrate ? console.log(updateData) : await item.update(updateData, { enforceTypes: false });
+                }
+            } catch (err) {
+                console.error(err);
             }
-        } catch (err) {
-            console.error(err);
         }
-    }
 
-    for (const message of game.messages) {
-        try {
-            const updateData = await migrateChatMessage(message, worldSchema);
-            if (!foundry.utils.isEmpty(updateData)) {
-                console.log(`Starfinder | Migrating Chat message entity ${message.id}`);
-                await message.update(updateData, { enforceTypes: false });
+        for (const message of game.messages) {
+            try {
+                const updateData = await migrateChatMessage(message, worldSchema);
+                if (!foundry.utils.isEmpty(updateData)) {
+                    console.log(`Starfinder | Migrating Chat message entity ${message.id}`);
+                    softMigrate ? console.log(updateData) : await message.update(updateData, { enforceTypes: false });
+                }
+            } catch (err) {
+                console.error(err);
             }
-        } catch (err) {
-            console.error(err);
         }
-    }
 
-    for (const macro of game.macros) {
-        try {
-            const updateData = await migrateMacro(macro, worldSchema);
-            if (!foundry.utils.isEmpty(updateData)) {
-                console.log(`Starfinder | Migrating Macro entity ${macro.name}`);
-                await macro.update(updateData, { enforceTypes: false });
+        for (const macro of game.macros) {
+            try {
+                const updateData = await migrateMacro(macro, worldSchema);
+                if (!foundry.utils.isEmpty(updateData)) {
+                    console.log(`Starfinder | Migrating Macro entity ${macro.name}`);
+                    softMigrate ? console.log(updateData) : await macro.update(updateData, { enforceTypes: false });
+                }
+            } catch (err) {
+                console.error(err);
             }
-        } catch (err) {
-            console.error(err);
         }
-    }
 
-    for (const pack of game.packs) {
-        if (pack.collection.startsWith("world")) {
-            const wasLocked = pack.locked;
-            // Unlock pack if needed
-            if (pack.locked) {
-                pack.configure({locked: false});
-            }
+        // Migrate Actors and Items in compendiums
+        for (const pack of game.packs) {
+            if (pack.metadata.packageType === "world") {
+                const wasLocked = pack.locked;
+                // Unlock pack if needed
+                if (pack.locked) {
+                    pack.configure({locked: false});
+                }
 
-            if (worldSchema < SFRPGMigrationSchemas.THE_WEBP_UPDATE) {
-                if (pack.documentName === "Actor") {
-                    await pack.updateAll(migrateCompendiumActorToWebP);
-                } else if (pack.documentName === "Item") {
-                    await pack.updateAll(migrateCompendiumItemToWebP);
+                if (worldSchema < SFRPGMigrationSchemas.THE_WEBP_UPDATE) {
+                    if (pack.metadata.type === "Actor") {
+                        await pack.updateAll(migrateCompendiumActorToWebP);
+                    } else if (pack.metadata.type === "Item") {
+                        await pack.updateAll(migrateCompendiumItemToWebP);
+                    }
+                }
+
+                // Migrate compendium packs of actors, items, and adventures
+                if (worldSchema < SFRPGMigrationSchemas.THE_PROPERTIES_UPDATE) {
+                    if (pack.metadata.type === "Actor") {
+                        console.log(`Starfinder | Migrating Compendium ${pack.metadata.label}`);
+                        const documents = await pack.getDocuments();
+                        for (const doc of documents) {
+                            const updateData = await migrateActor(doc, worldSchema);
+                            softMigrate ? console.log(updateData) : await doc.update(updateData, { enforceTypes: false });
+                        }
+                    } else if (pack.metadata.type === "Item") {
+                        console.log(`Starfinder | Migrating Compendium ${pack.metadata.label}`);
+                        const documents = await pack.getDocuments();
+                        for (const doc of documents) {
+                            const updateData = await migrateItem(doc, worldSchema);
+                            softMigrate ? console.log(updateData) : await doc.update(updateData, { enforceTypes: false });
+                        }
+                    } else if (pack.metadata.type === "Adventure") {
+                        // Adventure actor/item migration is just a bit too complicated. Tell people to do it manually.
+                        ui.notifications.warn(`Documents in the adventure compendium ${pack.metadata.label} were not migrated. Please update it manually.`, { permanent: false });
+
+                        /* console.log(`Starfinder | Migrating Compendium ${pack.metadata.label}`);
+                        const documents = await pack.getDocuments();
+                        for (const doc of documents) {
+                            for (const baseActor of doc.actors) {
+                                const actor = await Actor.create(baseActor);
+                                console.log(`Starfinder | Migrating Actor entity ${actor.name}`);
+                                const updateData = await migrateActor(actor, worldSchema);
+                                softMigrate ? console.log(updateData) : await baseActor.update(updateData, { enforceTypes: false });
+                            }
+                            for (const baseItem of doc.items) {
+                                const item = await Item.create(baseItem);
+                                console.log(`Starfinder | Migrating Item entity ${item.name}`);
+                                const updateData = await migrateItem(item, worldSchema);
+                                softMigrate ? console.log(updateData) : await baseItem.update(updateData, { enforceTypes: false });
+                            }
+                        } */
+                    }
+                }
+
+                // Lock pack if it was locked.
+                if (wasLocked) {
+                    pack.configure({locked: true});
                 }
             }
-
-            // Lock pack if it was locked.
-            if (wasLocked) {
-                pack.configure({locked: true});
-            }
         }
+
+        const systemSchema = Number(game.system.flags.sfrpg.schema);
+        if (!softMigrate) await game.settings.set('sfrpg', 'worldSchemaVersion', systemSchema);
+        ui.notifications.info(game.i18n.format("SFRPG.MigrationEndMigration", { systemVersion }), { permanent: true });
     }
 
-    const systemSchema = Number(game.system.data.flags.sfrpg.schema);
-    await game.settings.set('sfrpg', 'worldSchemaVersion', systemSchema);
-    ui.notifications.info(game.i18n.format("SFRPG.MigrationEndMigration", { systemVersion }), { permanent: true });
-
-    if (worldSchema < SFRPGMigrationSchemas.THE_GUNNERY_UPDATE) {
+    if (worldSchema < SFRPGMigrationSchemas.THE_PROPERTIES_UPDATE) {
         return true;
     }
 
@@ -116,10 +158,10 @@ export default async function migrateWorld() {
 
 const migrateItem = async function(item, schema) {
     const updateData = {};
-    const itemData = item.data;
 
-    if (schema < SFRPGMigrationSchemas.DAMAGE_TYPE_REFACTOR) _migrateDamageTypes(itemData, updateData);
-    if (schema < SFRPGMigrationSchemas.THE_WEBP_UPDATE) _migrateDocumentIconToWebP(itemData, updateData);
+    if (schema < SFRPGMigrationSchemas.DAMAGE_TYPE_REFACTOR) _migrateDamageTypes(item, updateData);
+    if (schema < SFRPGMigrationSchemas.THE_WEBP_UPDATE) _migrateDocumentIconToWebP(item, updateData);
+    if (schema < SFRPGMigrationSchemas.THE_PROPERTIES_UPDATE) _migrateProperties(item, updateData);
 
     return updateData;
 };
@@ -131,21 +173,20 @@ const migrateCompendiumItemToWebP = async function(itemDocument) {
 const migrateActor = async function(actor, schema) {
     const updateData = {};
     const speedActorTypes = ['character', 'npc', 'npc2', 'drone'];
-    const actorData = actor.data;
 
-    if (schema < SFRPGMigrationSchemas.NPC_DATA_UPATE && actorData.type === 'npc') { _migrateNPCData(actorData, updateData); }
-    if (schema < SFRPGMigrationSchemas.THE_PAINFUL_UPDATE) { _resetActorFlags(actorData, updateData); }
-    if (schema < SFRPGMigrationSchemas.THE_HAPPY_UPDATE && actorData.type === 'character') { _migrateActorAbilityScores(actorData, updateData); }
-    if (schema < SFRPGMigrationSchemas.THE_ACTOR_SPEED_UPDATE && speedActorTypes.includes(actorData.type)) { _migrateActorSpeed(actorData, updateData); }
-    if (schema < SFRPGMigrationSchemas.DAMAGE_REDUCTION_REFACTOR) { _migrateActorDamageReductions(actorData, updateData); }
-    if (schema < SFRPGMigrationSchemas.THE_WEBP_UPDATE) { _migrateDocumentIconToWebP(actorData, updateData); }
-    if (schema < SFRPGMigrationSchemas.THE_GUNNERY_UPDATE && actorData.type === 'starship' && actorData.data.crew.useNPCCrew) { _migrateStarshipGunnerySkill(actorData, updateData); }
+    if (schema < SFRPGMigrationSchemas.NPC_DATA_UPATE && actor.type === 'npc') { _migrateNPCData(actor, updateData); }
+    if (schema < SFRPGMigrationSchemas.THE_PAINFUL_UPDATE) { _resetActorFlags(actor, updateData); }
+    if (schema < SFRPGMigrationSchemas.THE_HAPPY_UPDATE && actor.type === 'character') { _migrateActorAbilityScores(actor, updateData); }
+    if (schema < SFRPGMigrationSchemas.THE_ACTOR_SPEED_UPDATE && speedActorTypes.includes(actor.type)) { _migrateActorSpeed(actor, updateData); }
+    if (schema < SFRPGMigrationSchemas.DAMAGE_REDUCTION_REFACTOR) { _migrateActorDamageReductions(actor, updateData); }
+    if (schema < SFRPGMigrationSchemas.THE_WEBP_UPDATE) { _migrateDocumentIconToWebP(actor, updateData); }
+    if (schema < SFRPGMigrationSchemas.THE_GUNNERY_UPDATE && actor.type === 'starship' && actor.system.crew.useNPCCrew) { _migrateStarshipGunnerySkill(actor, updateData); }
 
     for (const item of actor.items) {
         const itemUpdateData = await migrateItem(item, schema);
         if (!foundry.utils.isEmpty(itemUpdateData)) {
-            console.log(`Starfinder | Migrating Actor Item ${item.name}`);
-            await item.update(itemUpdateData, { enforceTypes: false });
+            console.log(`Starfinder | Migrating Actor ${actor.name} Item ${item.name}`);
+            softMigrate ? console.log(itemUpdateData) : await item.update(itemUpdateData, { enforceTypes: false });
         }
     }
 
@@ -180,7 +221,7 @@ const migrateToken = async function(token, schema) {
         const actorUpdateData = await migrateActor(actor, schema);
         if (!foundry.utils.isEmpty(actorUpdateData)) {
             console.log(`Starfinder | Migrating Token Actor ${actor.name}`);
-            await actor.update(actorUpdateData, { enforceTypes: false });
+            softMigrate ? console.log(actorUpdateData) : await actor.update(actorUpdateData, { enforceTypes: false });
         }
     }
 
@@ -189,33 +230,31 @@ const migrateToken = async function(token, schema) {
 
 const migrateChatMessage = async function(message, schema) {
     const updateData = {};
-    const messageData = message.data;
 
-    if (schema < SFRPGMigrationSchemas.THE_WEBP_UPDATE) _migrateChatMessageContentToWebP(messageData, updateData);
+    if (schema < SFRPGMigrationSchemas.THE_WEBP_UPDATE) _migrateChatMessageContentToWebP(message, updateData);
 
     return updateData;
 };
 
 const migrateMacro = async function(macro, schema) {
     const updateData = {};
-    const macroData = macro.data;
 
-    if (schema < SFRPGMigrationSchemas.THE_WEBP_UPDATE) _migrateDocumentIconToWebP(macroData, updateData);
+    if (schema < SFRPGMigrationSchemas.THE_WEBP_UPDATE) _migrateDocumentIconToWebP(macro, updateData);
 
     return updateData;
 };
 
 const damageTypeMigrationCallback = function(arr, curr) {
     if (!Array.isArray(curr)) return arr;
-    let [formula, type] = curr;
+    const [formula, type] = curr;
 
     if (!type) {
         arr.push({ "formula": formula || "", "types": {}, "operator": "" });
     } else if (type.includes("+")) {
-        let types = type.split("+");
+        const types = type.split("+");
         arr.push({ "formula": formula, "types": { [types[0]]: true, [types[1]]: true }, "operator": "and" });
     } else if (type.includes("|")) {
-        let types = type.split("|");
+        const types = type.split("|");
         arr.push({ "formula": formula, "types": { [types[0]]: true, [types[1]]: true }, "operator": "or" });
     } else {
         arr.push({ "formula": formula, "types": { [type]: true }, "operator": "" });
@@ -225,18 +264,18 @@ const damageTypeMigrationCallback = function(arr, curr) {
 };
 
 const _migrateDamageTypes = function(item, data) {
-    const itemData = foundry.utils.duplicate(item.data);
+    const itemData = foundry.utils.duplicate(item);
     const damage = itemData.damage;
     const critical = itemData.critical;
 
     if (damage?.parts?.length > 0) {
-        let parts = damage.parts.reduce(damageTypeMigrationCallback, []);
+        const parts = damage.parts.reduce(damageTypeMigrationCallback, []);
 
         data['data.damage.parts'] = parts;
     }
 
     if (critical?.parts?.length > 0) {
-        let parts = critical.parts.reduce(damageTypeMigrationCallback, []);
+        const parts = critical.parts.reduce(damageTypeMigrationCallback, []);
 
         data['data.critical.parts'] = parts;
     }
@@ -245,7 +284,7 @@ const _migrateDamageTypes = function(item, data) {
 };
 
 const _migrateNPCData = function(actor, migratedData) {
-    const actorData = duplicate(actor.data);
+    const actorData = duplicate(actor);
     const abilities = actorData.abilities;
     const skills = actorData.skills;
 
@@ -268,7 +307,7 @@ const _migrateNPCData = function(actor, migratedData) {
 };
 
 const _resetActorFlags = function(actor, migratedData) {
-    const actorData = duplicate(actor.data);
+    const actorData = duplicate(actor);
     let sfFlags = null;
 
     if (actor.flags.starfinder) {
@@ -282,7 +321,7 @@ const _resetActorFlags = function(actor, migratedData) {
 };
 
 const _migrateActorAbilityScores = function(actor, migratedData) {
-    const actorData = duplicate(actor.data);
+    const actorData = duplicate(actor);
     const abilities = actorData.abilities;
 
     for (const ability of Object.values(abilities)) {
@@ -295,9 +334,8 @@ const _migrateActorAbilityScores = function(actor, migratedData) {
 };
 
 const _migrateActorSpeed = function(actor, migratedData) {
-    const actorData = actor.data;
 
-    const speedValue = actorData.attributes.speed?.value;
+    const speedValue = actor.attributes.speed?.value;
 
     let baseSpeed = duplicate(speedValue);
     if (baseSpeed && isNaN(baseSpeed)) {
@@ -316,7 +354,7 @@ const _migrateActorSpeed = function(actor, migratedData) {
         swimming: { base: 0 },
         burrowing: { base: 0 },
         climbing: { base: 0 },
-        special: actorData.attributes.speed.special,
+        special: actor.attributes.speed.special,
         mainMovement: "land"
     };
 
@@ -345,18 +383,17 @@ const _migrateActorSpeed = function(actor, migratedData) {
 
 // ================== 0.006: Damage Mitigation ==================
 const _migrateActorDamageReductions = function(actor, migratedData) {
-    const actorData = actor.data;
 
-    const modifiers = duplicate(migratedData.modifiers ?? actorData.modifiers ?? []);
+    const modifiers = duplicate(migratedData.modifiers ?? actor.modifiers ?? []);
     let isDirty = false;
 
     // Process old damage reduction
-    if (actorData.traits?.damageReduction) {
-        const oldDamageReduction = duplicate(actorData.traits.damageReduction);
+    if (actor.traits?.damageReduction) {
+        const oldDamageReduction = duplicate(actor.traits.damageReduction);
         const oldDamageReductionValue = Number(oldDamageReduction.value);
         if (!Number.isNaN(oldDamageReductionValue) && oldDamageReductionValue > 0) {
             let notes = "";
-            if (!oldDamageReduction.negatedBy || oldDamageReduction.negatedBy != "-") {
+            if (!oldDamageReduction.negatedBy || oldDamageReduction.negatedBy !== "-") {
                 notes = oldDamageReduction.negatedBy;
             }
 
@@ -384,8 +421,8 @@ const _migrateActorDamageReductions = function(actor, migratedData) {
     }
 
     // Process old energy resistances
-    const customEnergyResistances = actorData.traits?.dr?.custom;
-    const oldEnergyResistances = Object.entries(actorData.traits?.dr?.value ?? []);
+    const customEnergyResistances = actor.traits?.dr?.custom;
+    const oldEnergyResistances = Object.entries(actor.traits?.dr?.value ?? []);
     if (oldEnergyResistances.length > 0 || customEnergyResistances) {
         if (oldEnergyResistances.length > 0) {
             for (const [index, entries] of oldEnergyResistances) {
@@ -418,7 +455,7 @@ const _migrateActorDamageReductions = function(actor, migratedData) {
             const customResistances = customEnergyResistances.trim().split(';');
             for (const customResistance of customResistances) {
                 const customSplit = customResistance.trim().split(' ');
-                if (customSplit.length == 2) {
+                if (customSplit.length === 2) {
                     const notes = customSplit[0];
                     const resistanceValue = Number(customSplit[1]);
 
@@ -477,13 +514,13 @@ const _migrateDocumentIconToWebP = function(document, data) {
         data["img"] = document.img.replace(imageType, ".webp");
     }
 
-    const fullBodyImageType = _imageNeedsReplace(document.data?.details?.biography?.fullBodyImage);
+    const fullBodyImageType = _imageNeedsReplace(document.system?.details?.biography?.fullBodyImage);
     if (fullBodyImageType) {
-        data["data.details.biography.fullBodyImage"] = document.data?.details?.biography?.fullBodyImage.replace(fullBodyImageType, ".webp");
+        data["system.details.biography.fullBodyImage"] = document.system?.details?.biography?.fullBodyImage.replace(fullBodyImageType, ".webp");
     }
 
-    if (document.data?.combatTracker?.visualization?.length > 0) {
-        const newVisualization = duplicate(document.data.combatTracker.visualization);
+    if (document.system?.combatTracker?.visualization?.length > 0) {
+        const newVisualization = duplicate(document.system.combatTracker.visualization);
         let isDirty = false;
 
         for (const [key, visualization] of Object.entries(newVisualization)) {
@@ -495,14 +532,14 @@ const _migrateDocumentIconToWebP = function(document, data) {
         }
 
         if (isDirty) {
-            data["data.combatTracker.visualization"] = newVisualization;
+            data["system.combatTracker.visualization"] = newVisualization;
         }
     }
 
-    if (document.data?.description?.value) {
-        const description = _migrateStringContentToWebP(document.data.description.value);
-        if (document.data.description.value != description) {
-            data["data.description.value"] = description;
+    if (document.system?.description?.value) {
+        const description = _migrateStringContentToWebP(document.system.description.value);
+        if (document.system.description.value !== description) {
+            data["system.description.value"] = description;
         }
     }
 
@@ -513,7 +550,7 @@ const _migrateChatMessageContentToWebP = function(messageData, data) {
 
     if (messageData?.content) {
         const content = _migrateStringContentToWebP(messageData.content);
-        if (messageData.content != content) {
+        if (messageData.content !== content) {
             data["content"] = content;
         }
     }
@@ -529,12 +566,39 @@ const _migrateStringContentToWebP = function(string) {
 };
 
 // ================== 0.009: Starship Gunnery Conversion ==================
-const _migrateStarshipGunnerySkill = function(actorData, updateData) {
-    const pilRanks = actorData.data.crew.npcData.gunner.skills.pil.ranks;
+const _migrateStarshipGunnerySkill = function(actor, updateData) {
+    const pilRanks = actor.system.crew.npcData.gunner.skills.pil.ranks;
     if (pilRanks) {
-        updateData['data.crew.npcData.gunner.skills.gun.mod'] = pilRanks;
-        updateData['data.crew.npcData.gunner.skills.-=pil'] = null;
+        updateData['system.crew.npcData.gunner.skills.gun.mod'] = pilRanks;
+        updateData['system.crew.npcData.gunner.skills.-=pil'] = null;
     }
 
     return updateData;
+};
+
+// ================== 0.010: Weapon Properties ==================
+const _migrateProperties = function(itemData, updateData) {
+    const properties = itemData.system.properties;
+    if (properties) {
+        // console.log(`${itemData.name} has properties to migrate.`);
+        for (const [key, value] of Object.entries(properties)) {
+            if (typeof value !== 'object') {
+                updateData[`system.properties.${key}.value`] = value;
+                updateData[`system.properties.${key}.extension`] = '';
+            }
+        }
+    } else {
+        // console.log(`${itemData.name} is fine.`);
+    }
+
+    return updateData;
+};
+
+const migrateCompendiumItem = async function(itemDocument) {
+    // console.log(itemDocument);
+    return await migrateItem(itemDocument, SFRPGMigrationSchemas.THE_WEBP_UPDATE - 0.001);
+};
+
+const migrateCompendiumActor = async function(actorDocument) {
+    return await migrateActor(actorDocument, SFRPGMigrationSchemas.THE_WEBP_UPDATE - 0.001);
 };
