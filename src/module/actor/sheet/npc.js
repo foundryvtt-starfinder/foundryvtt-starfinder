@@ -242,6 +242,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
 
         features.resources.items = actorResources;
 
+        // Add appropriate items to inventory, exclude weapons that are not equipment, like unarmed strikes and natural weapons
         this.processItemContainment(itemsToProcess, function(itemType, itemData) {
             inventory.inventory.items.push(itemData);
         });
