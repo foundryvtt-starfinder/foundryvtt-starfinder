@@ -1,20 +1,20 @@
 {
-  "_id": "CyhANnSvaEl5whGW",
-  "name": "Sudden Shift (Ex)",
+  "_id": "IFDXGXUSgYsXdGvC",
+  "name": "Improved Brace Yourselves (Ex)",
   "type": "feat",
   "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
     "actionType": "",
     "activation": {
-      "type": "reaction",
+      "type": "move",
       "condition": "",
-      "cost": 1
+      "cost": 0
     },
     "area": {
       "effect": "",
@@ -38,7 +38,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.hIhgdXnqGHBm0A64]{Envoy Improvisation}</p>\n<p>@Icon[type:language-dependent] @Icon[type:mind-affecting] @Icon[type:sense-dependent]</p>\n<p>Whenever you or an ally deal damage to an opponent within 60 feet of you, you can take a reaction to allow all allies within 60 feet of the opponent to take a guarded step as a reaction. All of the characters who took a guarded step using this improvisation have their speed reduced by 5 feet until the end of their next turn.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.hIhgdXnqGHBm0A64]{Envoy Improvisation}</p>\n<p>&nbsp;@Icon[type:language-dependent] @Icon[type:mind-affecting] @Icon[type:sense-dependent]</p>\n<p>Your morale bonus from @UUID[Compendium.sfrpg.class-features.Item.USVA7QBAysCjopbL]{brace yourselves} increases to +2. When you use this ability, each ally within 60 feet may also drop @UUID[Compendium.sfrpg.conditions.Item.XeRGqHVtcZ7vsgJ0]{prone} as a reaction. You must have the Brace Yourselves envoy improvisation to choose this improvisation.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -89,7 +89,23 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "83e34c7f-cade-4ec1-9612-54b3a425a91f",
+        "name": "Improved Brace Yourselves (Ex)",
+        "type": "morale",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": true,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "If adjacent to at least one other ally",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "both"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -100,17 +116,17 @@
       "charged": false,
       "value": null
     },
-    "requirements": "4th Level Envoy",
+    "requirements": "8th Level Envoy",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
-    "source": "COM pg. 70",
+    "source": "AR pg. 145",
     "target": {
       "type": "",
-      "value": ""
+      "value": "One Enemy"
     },
     "uses": {
       "max": "0",
