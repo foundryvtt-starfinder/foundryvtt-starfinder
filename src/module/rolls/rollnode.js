@@ -29,7 +29,7 @@ export default class RollNode {
             this.rollTooltips = RollNode.getTooltips(remainingVariable, this.getContext(), ".rollTooltip");
 
             for (const mod of availableRolledMods) {
-                const modKey = mod.bonus._id;
+                const modKey = mod.bonus._id ?? (mod.bonus.modifier[0] === '@' ? mod.bonus.modifier.substring(1) : mod.bonus.name);
 
                 let existingNode = nodes[modKey];
                 if (!existingNode) {
@@ -40,7 +40,7 @@ export default class RollNode {
                 this.childNodes[modKey] = existingNode;
             }
         } else {
-            const variableMatches = new Set(this.formula.match(/@([a-zA-Z.0-9_\-]+)/g));
+            const variableMatches = new Set(this.formula.match(/@([a-zA-Z.0-9_-]+)/g));
             for (const fullVariable of variableMatches) {
                 const variable = fullVariable.substring(1);
                 const [context, remainingVariable] = RollNode.getContextForVariable(variable, contexts);
@@ -134,7 +134,7 @@ export default class RollNode {
             } else {
                 let valueString = this.formula;
                 let formulaString = this.formula;
-                const variableMatches = new Set(formulaString.match(/@([a-zA-Z.0-9_\-]+)/g));
+                const variableMatches = new Set(formulaString.match(/@([a-zA-Z.0-9_-]+)/g));
                 for (const fullVariable of variableMatches) {
                     const regexp = new RegExp(fullVariable, "gi");
                     const variable = fullVariable.substring(1);
@@ -194,12 +194,14 @@ export default class RollNode {
 
         if (this.baseValue) {
             if (this.baseValue !== "n/a") {
-                // TODO: find another way to do this, or find the correct spot for this as this will result in bugs.
-                const constantMods = rollMods.filter(mod => mod.modifierType === SFRPGModifierType.CONSTANT);
+                // Bound which rollmods we apply to the value by it's calculated mods.
+                // Potentially don't even need the rolled Mods and could just use the calculated mods but would require further testing.
+                const calcMods = this.calculatedMods.filter(mod => mod.bonus.enabled === true);
+                const constantMods = rollMods.filter(mod => calcMods.some(x => x.bonus._id === mod._id) && mod.modifierType === SFRPGModifierType.CONSTANT);
                 const modSum = constantMods.reduce((accumulator, value) => accumulator + value.max, 0);
                 this.baseValue = (Number(this.baseValue) - modSum).toString();
 
-                const joinedTooltips = this.rollTooltips ? this.rollTooltips.join(',\n') : this.variableTooltips.join(',\n');
+                const joinedTooltips = this.rollTooltips?.length > 0 ? this.rollTooltips.join(',\n') : this.variableTooltips.join(',\n');
 
                 this.resolvedValue.finalRoll = this.baseValue;
                 this.resolvedValue.formula = this.baseValue + "[";
@@ -239,7 +241,7 @@ export default class RollNode {
         } else {
             let valueString = this.formula;
             let formulaString = this.formula;
-            const variableMatches = new Set(formulaString.match(/@([a-zA-Z.0-9_\-]+)/g));
+            const variableMatches = new Set(formulaString.match(/@([a-zA-Z.0-9_-]+)/g));
 
             for (const fullVariable of variableMatches) {
                 const regexp = new RegExp(fullVariable, "gi");
@@ -250,9 +252,7 @@ export default class RollNode {
                     const childResolution = existingNode.resolveForRoll(depth + 1, rollMods);
                     valueString = valueString.replace(regexp, childResolution.finalRoll);
                     formulaString = formulaString.replace(regexp, childResolution.formula);
-                    // console.log(['Result', depth, childResolution, valueString, formulaString]);
                 } else {
-                    // console.log(['Result', depth, "0"]);
                     valueString = valueString.replace(regexp, "0");
                     formulaString = formulaString.replace(regexp, "0");
                 }
@@ -316,8 +316,10 @@ export default class RollNode {
 
     static getCalculatedModifiers(variable, context) {
         let variableString = variable + ".calculatedMods";
+        const words = variable.split('.');
         let variableCalculatedMods = RollNode._readValue(context.data, variableString);
-        if (!variableCalculatedMods) {
+        // we don't want to include mods for skill ranks or ability.mod as those are standalone values
+        if (!variableCalculatedMods && !words.includes("ranks") && !(words.includes("abilities") && !words.includes("abilityCheckBonus"))) {
             variableString = variable.substring(0, variable.lastIndexOf('.')) + ".calculatedMods";
             variableCalculatedMods = RollNode._readValue(context.data, variableString);
         }
@@ -330,6 +332,10 @@ export default class RollNode {
         if (!variableRolledMods) {
             variableString = variable.substring(0, variable.lastIndexOf('.')) + tooltipPath;
             variableRolledMods = RollNode._readValue(context.data, variableString);
+        }
+        // if we are looking for ranks then don't include all the tooltips just the ones for ranks
+        if (variableRolledMods && variable.substring(variable.lastIndexOf('.') + 1) === "ranks") {
+            variableRolledMods = variableRolledMods.filter((x) => x.toLowerCase().includes("rank"));
         }
         // console.log(["getRolledModifiers", variable, context, variableString, variableRolledMods]);
         return variableRolledMods || [];

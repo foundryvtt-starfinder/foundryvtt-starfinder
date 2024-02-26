@@ -200,6 +200,7 @@ export default class RollTree {
 
         this.rootNode = new RollNode(this, this.formula, null, null, false, true, null, this.options);
         this.nodes = {};
+        this.rollMods = [];
 
         this.nodes[this.formula] = this.rootNode;
         this.rootNode.populate(this.nodes, this.contexts);
@@ -212,7 +213,10 @@ export default class RollTree {
             }
             if (value.calculatedMods) {
                 for (let calcModsI = 0; calcModsI < value.calculatedMods.length; calcModsI++) {
-                    this.rollMods.push(value.calculatedMods[calcModsI].bonus);
+                    const mod = value.calculatedMods[calcModsI];
+                    if (this.rollMods.findIndex((x) => x.name === mod.bonus.name) === -1 && this.formula.indexOf(mod.bonus.name) === -1) {
+                        this.rollMods.push(mod.bonus);
+                    }
                 }
             }
         }
