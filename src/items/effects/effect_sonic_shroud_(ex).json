@@ -1,0 +1,63 @@
+{
+  "_id": "GqediShpi1SI1LJm",
+  "name": "Effect: Sonic Shroud (Ex)",
+  "type": "effect",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "type": "effect",
+    "abilityMods": {
+      "parts": []
+    },
+    "activeDuration": {
+      "activationTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "parent"
+      },
+      "unit": "round",
+      "value": ""
+    },
+    "context": {
+      "origin": {
+        "actorUuid": "",
+        "itemUuid": ""
+      }
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.YlsNaaMsLUuIZ3li]{Sonic Shroud (Ex)}</p>\n<p>As a standard action, you create a jarring noise affecting a 20-foot-radius emanation centered on you until the beginning of your next turn. This disrupts hearing, as well as blindsight and blindsense abilities based on hearing or vibration. While in the area, creatures take a penalty to hearing-based Perception checks equal to 1 + half your Charisma modifier. You can maintain the effect each round as a move action, extending its duration until the beginning of the following turn, to a maximum of 1 minute. In addition, creatures in the area with blindsight (hearing or vibration) instead receive the benefits of blindsense with the same range, and those with blindsense (hearing or vibration) are unable to use that ability. The blindsight and blindsense effects last as long as the creature remains in the area, and until the beginning of their next turn if they leave it. When exposed to your sonic shroud, a creature can attempt a Fortitude save to negate the effect and become immune to it for 10 minutes.</p>\n<p>After you use this improvisation, you cannot do so again for 1d10 minutes.</p>\n<p><strong>Special:</strong> If you have a voice amplifier augmentation or other effect that significantly increases your volume, you can increase this improvisation’s radius to 30 feet while that amplifying effect is activated</p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "cb83bf0b-a0f6-4678-8f6c-20ec84e52afa",
+        "name": "Effect: Sonic Shroud (Ex)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "max": 1,
+        "modifier": "1 + (@origin.actor.attributes.cha.mod / 2)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "Sonic Shroud (Ex), Envoy",
+        "subtab": "misc",
+        "valueAffected": "per"
+      }
+    ],
+    "requirements": "1st Level Biohacker",
+    "showOnToken": true,
+    "source": "EN pg. 38"
+  }
+}

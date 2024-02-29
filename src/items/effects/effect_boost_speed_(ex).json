@@ -1,0 +1,63 @@
+{
+  "_id": "nnMM7ircbv89pZov",
+  "name": "Effect: Boost Speed (Ex)",
+  "type": "effect",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "type": "effect",
+    "abilityMods": {
+      "parts": []
+    },
+    "activeDuration": {
+      "activationTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "parent"
+      },
+      "unit": "round",
+      "value": "@abilities.int.mod"
+    },
+    "context": {
+      "origin": {
+        "actorUuid": "",
+        "itemUuid": ""
+      }
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.zNb52ikw9OmsbPwy]{Boost Speed (Ex)}</p>\n<p>As a standard action, you can spend 1 Resolve Point to reconfigure the mechanical joints in a suit of armor (either your own or one worn by an adjacent willing ally) to increase the land speed of the wearer by 10 feet. This increases to 15 feet at 10th level, 20 feet at 14th level, and 25 feet at 18th level. This speed increase lasts a number of rounds equal to your Intelligence modifier.</p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "fe20b80d-c8d9-434f-a74c-4f2ef73d6096",
+        "name": "Effect: Boost Speed (Ex)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "specific-speed",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@origin.item.actor.details.level.value, 0, 8, 10, 10, 15, 14, 20, 18, 25)",
+        "modifierType": "constant",
+        "notes": "As a standard action, you can spend 1 Resolve Point to reconfigure the mechanical joints in a suit of armor (either your own or one worn by an adjacent willing ally) to increase \nthe land speed of the wearer.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "land"
+      }
+    ],
+    "requirements": "8th Level (Biohacker)",
+    "showOnToken": true,
+    "source": "EN pg. 47"
+  }
+}

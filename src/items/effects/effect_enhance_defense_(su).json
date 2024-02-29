@@ -1,0 +1,93 @@
+{
+  "_id": "15Ci2zHGlgSN9Dd4",
+  "name": "Effect: Enhance Defense (Su)",
+  "type": "effect",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "type": "effect",
+    "abilityMods": {
+      "parts": []
+    },
+    "activeDuration": {
+      "activationTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "origin"
+      },
+      "unit": "round",
+      "value": "0"
+    },
+    "context": {
+      "origin": {
+        "actorUuid": "",
+        "itemUuid": ""
+      }
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.CTXIrnH5mG7heHTK]{Enhance Defense (Su)}</p>\n<p>As a reaction, when you or an ally is targeted with a ranged energy attack originating within 100 feet, you can spend 1 Resolve Point to grant a +1 circumstance bonus to the target’s EAC against attacks from that source. This bonus lasts until the start of your next turn. Once you’ve enhanced a creature’s defense with this ability, you can’t use this ability on them again for 24 hours. At 8th level, the bonus increases to +2, and at 14th level, the bonus increases to +3.</p>\n<p><em>Select and enable the appropriate level modifier when applying this effect.</em></p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "9192a41b-4eff-46ad-875c-5ea415a69203",
+        "name": "Effect: Enhance Defense (Su) - 2nd Level",
+        "type": "circumstance",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": false,
+        "max": 1,
+        "modifier": "+1",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "eac"
+      },
+      {
+        "_id": "9910aa99-e639-413a-b236-170e6414abd0",
+        "name": "Effect: Enhance Defense (Su) - 8th Level",
+        "type": "circumstance",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": false,
+        "max": 2,
+        "modifier": "+2",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "eac"
+      },
+      {
+        "_id": "ffdd3501-3afc-41bc-85f1-43f6ad8ca990",
+        "name": "Effect: Enhance Defense (Su) - 14th Level",
+        "type": "circumstance",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": false,
+        "max": 3,
+        "modifier": "+3",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "eac"
+      }
+    ],
+    "requirements": "2nd Level (Technomancer)",
+    "showOnToken": true,
+    "source": "EN pg. 78"
+  }
+}
