@@ -1,0 +1,173 @@
+{
+  "_id": "kKiiGgBCRb8HIoLY",
+  "name": "Lava Floor",
+  "type": "spell",
+  "img": "systems/sfrpg/icons/spells/zone_of_thruth.webp",
+  "system": {
+    "type": "",
+    "ability": "",
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "",
+    "actionType": "save",
+    "activation": {
+      "type": "action",
+      "condition": "",
+      "cost": 0
+    },
+    "allowedClasses": {
+      "myst": true,
+      "precog": false,
+      "tech": false,
+      "wysh": true
+    },
+    "area": {
+      "effect": "spread",
+      "shapable": false,
+      "shape": "sphere",
+      "units": "ft",
+      "value": "30"
+    },
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "concentration": false,
+    "critical": {
+      "effect": "",
+      "parts": []
+    },
+    "damage": {
+      "parts": [
+        {
+          "name": "Creatures in contact with the ground when you cast the spell ",
+          "formula": "6d12",
+          "group": null,
+          "isPrimarySection": false,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Creatures that enter or start their turn in contact with the lava",
+          "formula": "4d12",
+          "group": null,
+          "isPrimarySection": true,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ],
+      "primaryGroup": null
+    },
+    "damageNotes": "",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>You transform the ground or floor into a pool of lava about one foot deep. Creatures in contact with the ground when you cast the spell take 6d12 fire damage (Reflex half), after which they are immune to additional fire damage from beginning their turn in the area for 1 round. For the duration of the spell, creatures that enter or start their turn in contact with the lava take 4d12 fire damage (Reflex half). Objects in the area are unharmed by the lava produced by this spell. When the spell ends, any creatures in contact with the lava become entangled as the ground solidifies around their feet; an entangled creature can break free as a move action with a successful DC 25 Acrobatics check or DC 15 Strength check.</p>"
+    },
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": true,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": true,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
+    "dismissible": true,
+    "duration": {
+      "units": "round",
+      "value": "@details.cl.value"
+    },
+    "formula": "",
+    "isActive": null,
+    "isVariableLevel": false,
+    "level": 6,
+    "materials": {
+      "consumed": false,
+      "cost": 0,
+      "supply": 0,
+      "value": ""
+    },
+    "modifiers": [],
+    "preparation": {
+      "mode": "",
+      "prepared": false
+    },
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "medium",
+      "value": ""
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "descriptor": "half"
+    },
+    "school": "con",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
+    "source": "EN pg. 123",
+    "sr": false,
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": "",
+      "per": "",
+      "value": null
+    }
+  }
+}
