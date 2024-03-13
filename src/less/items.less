@@ -133,6 +133,13 @@
         .tab {
             padding: 0 5px;
             // overflow: hidden;
+            
+            .details-navigation {
+                margin-bottom: 5px;
+                .item {
+                    font-size: var(--font-size-18);
+                }
+            }
         }
 
         .item-properties {
@@ -176,6 +183,109 @@
                         margin: 0;
                     }
                 }
+            }
+        }
+
+        // Bubbles
+        .bubble {
+            margin: 0.5em 0.5em 1em 0.5em;
+            border: 2px solid #235683;
+            background-color:rgba(128, 128, 128, 0.2);
+            border-radius: 13px;
+
+            .bubble-editor {
+                .editor-content {
+                    min-height: 32px;
+                }
+                .editor.prosemirror {
+                    min-height: 180px;
+                }
+            }
+
+            .bubble-info {
+                padding: 0.25em 1em 0.5em 1em;
+
+                .bubble {
+                    margin: 0.5em 0.5em 0.5em 0.5em;
+                    border: 2px solid #444444;
+                    background-color:rgba(128, 128, 128, 0.2);
+                    border-radius: 13px;
+
+                    .bubble-editor {
+                        .editor-content {
+                            min-height: 32px;
+                        }
+                        .editor.prosemirror {
+                            min-height: 180px;
+                        }
+                    }
+        
+                    .bubble-info {
+                        padding: 0.25em 1em 0.25em 1em;
+
+                        .bubble {
+                            margin: 0.5em 0.5em 0.5em 0.5em;
+                            border: 2px solid #7a1515;
+                            background-color:rgba(128, 128, 128, 0.2);
+                            border-radius: 13px;
+
+                            .bubble-editor {
+                                .editor-content {
+                                    min-height: 32px;
+                                }
+                                .editor.prosemirror {
+                                    min-height: 180px;
+                                }
+                            }
+                
+                            .bubble-info {
+                                padding: 0.25em 1em 0.25em 1em;
+                            }
+                
+                            .bubble-header {
+                                background-color: #7a1515;
+                                color: white;
+                                border-style: none;
+                                border-top-left-radius: 9px;
+                                border-top-right-radius: 9px;
+                                margin: 0 0 0 0;
+                                padding: 0 0 3px 0;
+                                text-align: center;
+                                .exo2();
+                                font-size: var(--font-size-16);
+                                font-weight: normal;
+                            }
+                        }
+                    }
+        
+                    .bubble-header {
+                        background-color: #444444;
+                        color: white;
+                        border-style: none;
+                        border-top-left-radius: 9px;
+                        border-top-right-radius: 9px;
+                        margin: 0 0 0 0;
+                        padding: 0 0 3px 0;
+                        text-align: center;
+                        .exo2();
+                        font-size: var(--font-size-16);
+                        font-weight: normal;
+                    }
+                }
+            }
+
+            .bubble-header {
+                background-color: #235683;
+                color: white;
+                border-style: none;
+                border-top-left-radius: 9px;
+                border-top-right-radius: 9px;
+                margin: 0 0 0 0;
+                padding: 0 0 3px 0;
+                text-align: center;
+                .exo2();
+                font-size: var(--font-size-24);
+                font-weight: normal;
             }
         }
     }
@@ -294,9 +404,10 @@
         color: @colorOlive;
     }
 
+    ol.storage-slots,
     ol.damage-parts,
+    ol.subaction-parts,
     ol.visualization-parts {
-        border-top: groove 2px #fff;
 
         img.part-image {
             flex: 0 0 50px;
@@ -304,19 +415,18 @@
         }
     }
 
-    li.damage-part,
-    li.visualization-part {
-        border-bottom: groove 2px #fff;
-    }
-
+    .storage-slots,
     .damage-parts,
+    .subaction-parts,
     .visualization-parts,
     .ability-adjustment-parts {
         list-style: none;
         margin: 0;
         padding: 0;
 
+        .storage-slot,
         .damage-part,
+        .subaction-part,
         .visualization-part,
         .ability-adjustment-part {
             flex: 0 0 100%;
@@ -362,30 +472,36 @@
                 flex: 0 0 30px;
             }
         }
-
-        .visualization-part {
-            padding-bottom: 4px;
-        }
     }
 
     .damage-control,
     .visualization-control,
+    .subaction-control,
     .ability-adjustments-control {
         line-height: 24px;
         color: @colorTan;
         text-align: right;
     }
 
+    .bubble-icon,
     .damage-control,
+    .subaction-control,
     .visualization-control {
         width: 18px;
         flex: 0 0 18px;
         float: right;
     }
 
-    .ability-adjustments-control {
-        width: 110px;
-        flex: 0 0 20px;
+    .bubble-icon,
+    .damage-control,
+    .subaction-control {
+        margin-right: 10px;
+        color: white;
+        padding-top: 2px;
+    }
+
+    .bubble-icon {
+        text-align: right;
     }
 
     .recharge {
@@ -622,7 +738,7 @@
         .origin {
             float: left;
 
-            .item-properties {
+            &.item-properties {
                 img {
                     margin: 5px;
                     max-width: 80px;
