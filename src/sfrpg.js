@@ -77,6 +77,95 @@ import { getStarshipBrowser } from "./module/packs/starship-browser.js";
 
 let initTime = null;
 
+/* -------------------------------------------- */
+/*  Define Module Structure                     */
+/* -------------------------------------------- */
+const moduleStructure = {
+    AbilityTemplate,
+    applications: {
+        // Actor Sheets
+        ActorSheetSFRPG,
+        ActorSheetSFRPGCharacter,
+        ActorSheetSFRPGDrone,
+        ActorSheetSFRPGHazard,
+        ActorSheetSFRPGNPC,
+        ActorSheetSFRPGStarship,
+        ActorSheetSFRPGVehicle,
+        // Item Sheets
+        ItemCollectionSheet,
+        ItemSheetSFRPG,
+        // Dialogs
+        ActorMovementConfig,
+        AddEditSkillDialog,
+        ChoiceDialog,
+        DroneRepairDialog,
+        InputDialog,
+        ItemDeletionDialog,
+        RollDialog,
+        NpcSkillToggleDialog,
+        SpellCastDialog,
+        ShortRestDialog,
+        // Misc
+        ActorSheetFlags,
+        SFRPGModifierApplication,
+        TraitSelectorSFRPG
+    },
+    compendiumArt: { map: new Map(), refresh: registerCompendiumArt },
+    config: SFRPG,
+    dice: DiceSFRPG,
+    documents: { ActorSFRPG, ItemSFRPG, CombatSFRPG },
+    entities: { ActorSFRPG, ItemSFRPG },
+    generateUUID,
+    // Document browsers
+    getSpellBrowser,
+    getEquipmentBrowser,
+    getAlienArchiveBrowser,
+    getStarshipBrowser,
+    migrateWorld,
+    rollItemMacro,
+    rolls: {
+        RollContext,
+        RollNode,
+        RollTree,
+        SFRPGRoll
+    },
+    RPC,
+    SFRPGEffectType,
+    SFRPGModifier,
+    SFRPGModifierType,
+    SFRPGModifierTypes,
+    timedEffects: new Map(),
+
+    // Namespace style
+    Actor: {
+        Damage: {
+            SFRPGHealingSetting,
+            SFRPGDamage
+        },
+        Modifiers: {
+            SFRPGEffectType,
+            SFRPGModifier,
+            SFRPGModifierType,
+            SFRPGModifierTypes
+        },
+        Sheet: {
+            Base: ActorSheetSFRPG,
+            Character: ActorSheetSFRPGCharacter,
+            Npc: ActorSheetSFRPGNPC,
+            Drone: ActorSheetSFRPGDrone,
+            Starship: ActorSheetSFRPGStarship,
+            Vehicle: ActorSheetSFRPGVehicle
+        },
+        Type: ActorSFRPG
+    }
+};
+
+globalThis.sfrpg = moduleStructure;
+
+/* -------------------------------------------- */
+/*  Init Hook                                   */
+/* -------------------------------------------- */
+
 Hooks.once('init', async function() {
     initTime = (new Date()).getTime();
     console.log(`Starfinder | [INIT] Initializing the Starfinder System`);
@@ -96,86 +185,8 @@ Hooks.once('init', async function() {
     console.log("Starfinder | [INIT] Initializing the rules engine");
     const engine = new Engine();
 
-    game.sfrpg = {
-        AbilityTemplate,
-        applications: {
-            // Actor Sheets
-            ActorSheetSFRPG,
-            ActorSheetSFRPGCharacter,
-            ActorSheetSFRPGDrone,
-            ActorSheetSFRPGHazard,
-            ActorSheetSFRPGNPC,
-            ActorSheetSFRPGStarship,
-            ActorSheetSFRPGVehicle,
-            // Item Sheets
-            ItemCollectionSheet,
-            ItemSheetSFRPG,
-            // Dialogs
-            ActorMovementConfig,
-            AddEditSkillDialog,
-            ChoiceDialog,
-            DroneRepairDialog,
-            InputDialog,
-            ItemDeletionDialog,
-            RollDialog,
-            NpcSkillToggleDialog,
-            SpellCastDialog,
-            ShortRestDialog,
-            // Misc
-            ActorSheetFlags,
-            SFRPGModifierApplication,
-            TraitSelectorSFRPG
-        },
-        compendiumArt: { map: new Map(), refresh: registerCompendiumArt },
-        config: SFRPG,
-        dice: DiceSFRPG,
-        documents: { ActorSFRPG, ItemSFRPG, CombatSFRPG },
-        engine,
-        entities: { ActorSFRPG, ItemSFRPG },
-        generateUUID,
-        // Document browsers
-        getSpellBrowser,
-        getEquipmentBrowser,
-        getAlienArchiveBrowser,
-        getStarshipBrowser,
-        migrateWorld,
-        rollItemMacro,
-        rolls: {
-            RollContext,
-            RollNode,
-            RollTree,
-            SFRPGRoll
-        },
-        RPC,
-        SFRPGEffectType,
-        SFRPGModifier,
-        SFRPGModifierType,
-        SFRPGModifierTypes,
-        timedEffects: new Map(),
-
-        // Namespace style
-        Actor: {
-            Damage: {
-                SFRPGHealingSetting,
-                SFRPGDamage
-            },
-            Modifiers: {
-                SFRPGEffectType,
-                SFRPGModifier,
-                SFRPGModifierType,
-                SFRPGModifierTypes
-            },
-            Sheet: {
-                Base: ActorSheetSFRPG,
-                Character: ActorSheetSFRPGCharacter,
-                Npc: ActorSheetSFRPGNPC,
-                Drone: ActorSheetSFRPGDrone,
-                Starship: ActorSheetSFRPGStarship,
-                Vehicle: ActorSheetSFRPGVehicle
-            },
-            Type: ActorSFRPG
-        }
-    };
+    moduleStructure.engine = engine;
+    game.sfrpg = moduleStructure;
 
     CONFIG.SFRPG = SFRPG;
     CONFIG.statusEffects = CONFIG.SFRPG.statusEffects;
