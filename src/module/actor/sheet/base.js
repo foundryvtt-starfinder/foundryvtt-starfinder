@@ -76,6 +76,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             isDrone: this.document.type === 'drone',
             isNPC: this.document.type === 'npc' || this.document.type === 'npc2',
             isHazard: this.document.type === 'hazard',
+            isMech: this.document.type === 'mech',
             config: CONFIG.SFRPG
         };
 
@@ -126,20 +127,20 @@ export class ActorSheetSFRPG extends ActorSheet {
             data.expandedSpeedBoxHeight = Math.max(36 + numberOfMovementTypes * 14, 70);
         }
 
-        if (data.system.skills) {
+        if (data.data.skills) {
             // Update skill labels
-            for (const [s, skl] of Object.entries(data.system.skills)) {
-                skl.ability = data.system.abilities[skl.ability].label.substring(0, 3);
+            for (let [s, skl] of Object.entries(data.data.skills)) {
+                skl.ability = data.data.abilities[skl.ability].label.substring(0, 3);
                 skl.icon = this._getClassSkillIcon(skl.value);
 
-                let skillLabel = CONFIG.SFRPG.skills[s.substring(0, 3)];
-                if (skl.subname) {
-                    skillLabel += ` (${skl.subname})`;
-                }
+                    let skillLabel = CONFIG.SFRPG.skills[s.substring(0, 3)];
+                    if (skl.subname) {
+                        skillLabel += ` (${skl.subname})`;
+                    }
 
-                skl.label = skillLabel;
-                skl.hover = CONFIG.SFRPG.skillProficiencyLevels[skl.value];
-            }
+                    skl.label = skillLabel;
+                    skl.hover = CONFIG.SFRPG.skillProficiencyLevels[skl.value];
+                }
 
             data.system.skills = Object.keys(data.system.skills).sort()
                 .reduce((skills, key) => {
