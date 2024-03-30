@@ -127,20 +127,20 @@ export class ActorSheetSFRPG extends ActorSheet {
             data.expandedSpeedBoxHeight = Math.max(36 + numberOfMovementTypes * 14, 70);
         }
 
-        if (data.data.skills) {
+        if (data.system.skills) {
             // Update skill labels
-            for (let [s, skl] of Object.entries(data.data.skills)) {
-                skl.ability = data.data.abilities[skl.ability].label.substring(0, 3);
+            for (const [s, skl] of Object.entries(data.system.skills)) {
+                skl.ability = data.system.abilities[skl.ability].label.substring(0, 3);
                 skl.icon = this._getClassSkillIcon(skl.value);
 
-                    let skillLabel = CONFIG.SFRPG.skills[s.substring(0, 3)];
-                    if (skl.subname) {
-                        skillLabel += ` (${skl.subname})`;
-                    }
-
-                    skl.label = skillLabel;
-                    skl.hover = CONFIG.SFRPG.skillProficiencyLevels[skl.value];
+                let skillLabel = CONFIG.SFRPG.skills[s.substring(0, 3)];
+                if (skl.subname) {
+                    skillLabel += ` (${skl.subname})`;
                 }
+
+                skl.label = skillLabel;
+                skl.hover = CONFIG.SFRPG.skillProficiencyLevels[skl.value];
+            }
 
             data.system.skills = Object.keys(data.system.skills).sort()
                 .reduce((skills, key) => {
