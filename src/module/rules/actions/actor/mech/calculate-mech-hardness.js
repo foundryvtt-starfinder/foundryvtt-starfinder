@@ -3,10 +3,10 @@ import { SFRPG } from "../../../../config.js";
 
 /**
  * Calculate the hardness for a mech.
- * 
+ *
  * @param {Engine} engine The SFRPG rules engine.
  */
-export default function (engine) {
+export default function(engine) {
     engine.closures.add('calculateMechHardness', (fact, context) => {
         const data = fact.data;
         const frame = fact.mechFrame;

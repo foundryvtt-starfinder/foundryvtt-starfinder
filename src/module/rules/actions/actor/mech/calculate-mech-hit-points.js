@@ -1,10 +1,10 @@
 import Engine from '../../../../engine/engine.js';
 /**
  * Calculates the hit points for mechs.
- * 
+ *
  * @param {Engine} engine The SFRPG rules engine
  */
-export default function (engine) {
+export default function(engine) {
     engine.closures.add('calculateMechHitPoints', (fact, context) => {
         const frame = fact.mechFrame;
         const upperLimbs = fact.mechUpperLimbs;
@@ -18,6 +18,6 @@ export default function (engine) {
         data.attributes.hp.max = baseHp + (advancement * tier);
 
         return fact;
-        
+
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] });
 }

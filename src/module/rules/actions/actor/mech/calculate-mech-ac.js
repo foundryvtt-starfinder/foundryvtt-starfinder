@@ -3,10 +3,10 @@ import { SFRPG } from "../../../../config.js";
 
 /**
  * Calculate a mechs EAC and KAC.
- * 
+ *
  * @param {Engine} engine The SFRPG rules engine.
  */
-export default function (engine) {
+export default function(engine) {
     engine.closures.add('calculateMechAc', (fact, context) => {
         const data = fact.data;
         const frame = fact.mechFrame;

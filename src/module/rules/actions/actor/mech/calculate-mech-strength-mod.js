@@ -3,10 +3,10 @@ import { SFRPG } from "../../../../config.js";
 
 /**
  * Calculate a mech's strength modifier.
- * 
+ *
  * @param {Engine} engine The SFRPG rules engine.
  */
-export default function (engine) {
+export default function(engine) {
     engine.closures.add('calculateMechStrengthMod', (fact, context) => {
         const data = fact.data;
         const frame = fact.mechFrame;
