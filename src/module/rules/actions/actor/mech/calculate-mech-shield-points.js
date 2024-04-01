@@ -9,7 +9,7 @@ import { SFRPG } from "../../../../config.js";
 export default function(engine) {
     engine.closures.add('calculateMechShieldPoints', (fact, context) => {
         const data = fact.data;
-        const tier = data?.details?.tier ?? 0;
+        const tier = data?.details?.tier || 0;
 
         data.attributes.sp.max = SFRPG.mechStatisticsByTier[tier].sp;
 

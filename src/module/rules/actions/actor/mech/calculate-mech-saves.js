@@ -11,7 +11,7 @@ export default function(engine) {
         const data = fact.data;
         const frame = fact.mechFrame;
         const lowerLimbs = fact.mechLowerLimbs;
-        const tier = data?.details?.tier ?? 0;
+        const tier = data?.details?.tier || 0;
         const baseSave = SFRPG.mechStatisticsByTier[tier].baseSave;
 
         data.attributes.saves.fort.mod = baseSave + (frame?.saves?.fort ?? 0) + (lowerLimbs?.saves?.fort ?? 0);

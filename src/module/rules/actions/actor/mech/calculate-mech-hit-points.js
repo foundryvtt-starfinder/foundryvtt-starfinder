@@ -10,7 +10,7 @@ export default function(engine) {
         const upperLimbs = fact.mechUpperLimbs;
         const lowerLimbs = fact.mechLowerLimbs;
         const data = fact.data;
-        const tier = data?.details?.tier ?? 0;
+        const tier = data?.details?.tier || 0;
 
         const baseHp = (frame?.hp?.base ?? 0) + (upperLimbs?.hp?.base ?? 0) + (lowerLimbs?.hp?.base ?? 0);
         const advancement = (frame?.hp?.advancement ?? 0) + (upperLimbs?.hp?.advancement ?? 0) + (lowerLimbs?.hp?.advancement ?? 0);

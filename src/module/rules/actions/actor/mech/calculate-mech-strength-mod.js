@@ -10,7 +10,7 @@ export default function(engine) {
     engine.closures.add('calculateMechStrengthMod', (fact, context) => {
         const data = fact.data;
         const frame = fact.mechFrame;
-        const tier = data?.details?.tier ?? 0;
+        const tier = data?.details?.tier || 0;
         const baseStrength = SFRPG.mechStatisticsByTier[tier].strength;
 
         data.attributes.strength.mod = baseStrength + (frame?.strength ?? 0);

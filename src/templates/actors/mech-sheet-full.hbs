@@ -1,4 +1,119 @@
 <form class="{{cssClass}} flexcol" autocomplete="off">
-    <p>This is the mech sheet!</p>
-    <input type="text" name="name" value="{{actor.name}}" />
+    {{!-- Sheet Header --}}
+    {{log this}}
+    <header class="sheet-header flexrow">
+        <div class="image-container">
+            <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img" height="180" width="180" />
+            <a class="hover-icon" data-action="show-image"><i class="fas fa-image fa-fw"></i></a>
+        </div>
+
+        <div class="header-details flexrow">
+            <div class="header-background flexrow">
+                <h1 class="charname" data-tooltip="{{localize "SFRPG.ShipNameLabel"}}">
+                    <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "SFRPG.ShipNameLabel"}}" />
+                </h1>
+
+                <div class="charlevel"  data-tooltip="{{localize "SFRPG.ShipTierLabel"}}<br />@details.tier" >
+                    <div class="level noxp">
+                        <label>{{localize "SFRPG.ShipTierLabel"}} </label>
+                        <input name="system.details.tier" type="text" value="{{labels.tier}}" placeholder="1" />
+                    </div>
+                </div>
+            </div>
+
+            <ul class="summary">
+                <li data-tooltip="{{localize "SFRPG.ShipModelLabel"}}<br />@details.model">
+                    <input type="text" name="system.details.model" value="{{system.details.model}}" placeholder="{{localize "SFRPG.ShipModelLabel"}}" />
+                </li>
+                <li data-tooltip="{{localize "SFRPG.ShipFrameLabel"}}<br />@details.frame">
+                    {{#if activeFrame}}<span>{{activeFrame.name}}</span>{{else}}<span class="no-frame">{{localize "SFRPG.StarshipSheet.Header.FrameMissing"}}</span>{{/if}}
+                </li>
+                <li data-tooltip="{{ localize "SFRPG.Size"}}<br />@traits.size">
+                    <span>{{localize "SFRPG.StarshipSheet.Header.Size" size=system.traits.size}}</span>
+                </li>
+            </ul>
+
+            <!--
+            <ul class="attributes flexrow">
+                <li class="attribute health" data-tooltip="{{ localize "SFRPG.HullPoints" }}<br />@attributes.hp.value<br />@attributes.hp.max">
+                    <h4 class="attribute-name box-title">{{ localize "SFRPG.HullPoints" }}</h4>
+                    <div class="attribute-value multiple">
+                        <input name="system.attributes.hp.value" type="text" value="{{system.attributes.hp.value}}"
+                            data-dtype="Number" placeholder="10" />
+                        <span class="sep"> / </span>
+                        <label>{{system.attributes.hp.max}}</label>
+                    </div>
+                    <footer class="attribute-footer">
+                        <span data-tooltip="{{localize "SFRPG.StarshipSheet.Header.HullPointIncrementTooltip"}}">{{system.attributes.hp.increment}}</span>
+                    </footer>
+                </li>
+                <li class="attribute">
+                    <h4 class="attribute-name box-title">{{localize "SFRPG.StarshipSheet.Header.Statistics"}}</h4>
+                    <ol class="attribute-multibox">
+                        <li class="box-header flexrow">
+                            <label></label>
+                            <label>{{localize "SFRPG.StarshipSheet.Header.Value"}}</label>
+                            <label>{{localize "SFRPG.StarshipSheet.Header.Max"}}</label>
+                        </li>
+                        <li class="flexrow" data-tooltip="{{ localize "SFRPG.StarshipSheet.Attributes.Power" }}<br/>@attributes.power.value<br/>@attributes.power.max<br/><br/>{{ localize "SFRPG.StarshipSheet.Attributes.PowerConsumption" }}:<br/>{{#each system.attributes.power.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                            {{#if hasPower}}
+                            <label>{{localize "SFRPG.StarshipSheet.Header.PCU"}}</label>
+                            <label>{{system.attributes.power.value}}</label>
+                            <label>{{system.attributes.power.max}}</label>
+                            {{else}}
+                            <label class="error" style="flex: 3; font-size: 12px;">{{localize "SFRPG.StarshipSheet.Attributes.PowerMissing"}}</label>
+                            {{/if}}
+                        </li>
+                        <li class="flexrow" data-tooltip="{{ localize "SFRPG.StarshipSheet.Attributes.BuildPoints" }}<br/>@attributes.bp.value<br/>@attributes.bp.max<br/><br/>{{ localize "SFRPG.StarshipSheet.Attributes.BuildPointsUsage" }}:<br/>{{#each system.attributes.bp.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                            <label>{{localize "SFRPG.StarshipSheet.Header.BP"}}</label>
+                            <label>{{system.attributes.bp.value}}</label>
+                            <label>{{system.attributes.bp.max}}</label>
+                        </li>
+                    </ol>
+                </li>
+                <li class="attribute">
+                    <h4 class="attribute-name box-title">{{localize "SFRPG.StarshipSheet.Header.Thresholds"}}</h4>
+                    <ol class="attribute-multibox">
+                        <li class="box-header flexrow">
+                            <label></label>
+                            <label>{{localize "SFRPG.StarshipSheet.Header.Value"}}</label>
+                        </li>
+                        <li class="flexrow" data-tooltip="{{localize "SFRPG.StarshipSheet.Header.DamageThreshold"}}<br/>@attributes.damageThreshold.value<br/><br/>{{#each system.attributes.damageThreshold.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                            <label>{{localize "SFRPG.StarshipSheet.Header.DT"}}</label>
+                            <label>{{system.attributes.damageThreshold.value}}</label>
+                        </li>
+                        <li class="flexrow" data-tooltip="{{localize "SFRPG.StarshipSheet.Header.CriticalThreshold"}}<br/>@attributes.criticalThreshold.value<br/><br/>{{#each system.attributes.criticalThreshold.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                            <label>{{localize "SFRPG.StarshipSheet.Header.CT"}}</label>
+                            <label>{{system.attributes.criticalThreshold.value}}</label>
+                        </li>
+                    </ol>
+                </li>
+                <li class="attribute">
+                    <h4 class="attribute-name box-title" data-tooltip="{{localize "SFRPG.StarshipSheet.Header.Movement.Maneuverability"}}<br/>@attributes.maneuverability<br/><br/>{{localize "SFRPG.StarshipSheet.Header.Movement.ManeuverabilityTooltip" maneuverability="0"}}">{{localize "SFRPG.StarshipSheet.Header.Movement.Title"}}</h4>
+                    <ol class="attribute-multibox">
+                        {{#if hasThrusters}}
+                        <li class="box-header flexrow">
+                            <label></label>
+                            <label>{{localize "SFRPG.StarshipSheet.Header.Value"}}</label>
+                        </li>
+                        <li class="flexrow" data-tooltip="{{localize "SFRPG.StarshipSheet.Header.Movement.Speed"}}<br/>@attributes.speed.value<br/><br/>{{#each system.attributes.speed.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                            <label>{{localize "SFRPG.StarshipSheet.Header.Movement.Speed"}}</label>
+                            <label>{{system.attributes.speed.value}}</label>
+                        </li>
+                        <li class="flexrow" data-tooltip="{{localize "SFRPG.StarshipSheet.Header.Movement.Turn"}}<br/>@attributes.turn.value<br/><br/>{{#each system.attributes.turn.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                            <label>{{localize "SFRPG.StarshipSheet.Header.Movement.Turn"}}</label>
+                            <label>{{system.attributes.turn.value}}</label>
+                        </li>
+                        {{else}}
+                        <li class="flexrow">
+                            <label class="error">{{ localize "SFRPG.StarshipSheet.Header.Movement.ThrustersMissing" }}</label>
+                        </li>
+                        {{/if}}
+                    </ol>
+                </li>
+            </ul>
+            -->
+
+        </div>
+    </header>
 </form>

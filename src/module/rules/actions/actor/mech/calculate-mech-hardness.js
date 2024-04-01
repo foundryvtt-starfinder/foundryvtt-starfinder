@@ -10,7 +10,7 @@ export default function(engine) {
     engine.closures.add('calculateMechHardness', (fact, context) => {
         const data = fact.data;
         const frame = fact.mechFrame;
-        const tier = data?.details?.tier ?? 0;
+        const tier = data?.details?.tier || 0;
 
         data.attributes.hardness.value = (frame?.hardness ?? 0) + SFRPG.mechStatisticsByTier[tier].hardness;
 

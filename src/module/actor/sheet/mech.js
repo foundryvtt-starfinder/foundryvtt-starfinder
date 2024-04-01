@@ -16,8 +16,11 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
         return 'systems/sfrpg/templates/actors/mech-sheet-full.hbs';
     }
 
-    getData() {
-        const data = super.getData();
+    async getData() {
+        const data = await super.getData();
+
+        const tier = parseFloat(data.system.details.tier || 0);
+        data.labels["tier"] = tier >= 1 ? String(tier) : "0";
 
         return data;
     }

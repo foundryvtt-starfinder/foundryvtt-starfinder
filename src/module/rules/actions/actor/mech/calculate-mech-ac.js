@@ -12,7 +12,7 @@ export default function(engine) {
         const frame = fact.mechFrame;
         const upperLimbs = fact.mechUpperLimbs;
         const lowerLimbs = fact.mechLowerLimbs;
-        const tier = data?.details?.tier ?? 0;
+        const tier = data?.details?.tier || 0;
         const baseAc = SFRPG.mechStatisticsByTier[tier].baseAc;
 
         data.attributes.eac.value = baseAc + (frame?.eac ?? 0) + (upperLimbs?.eac ?? 0) + (lowerLimbs?.eac ?? 0);
