@@ -1317,6 +1317,16 @@ SFRPG.vehicleCoverTypes = {
     "total"   : "SFRPG.Vehicles.VehicleCoverTypes.Total"
 };
 
+/* ---------------------------*
+ * Mech properties and values *
+ *----------------------------*/
+
+SFRPG.mechSizes = {
+    "huge": "SFRPG.SizeHuge",
+    "gargantuan": "SFRPG.SizeGargantuan",
+    "colossal": "SFRPG.SizeColossal"
+};
+
 /**
  * Base Attack Bonus Progression
  */
@@ -2143,7 +2153,7 @@ SFRPG.flightManeuverability = {
 
 /**
  * Mech stuff:
- * 
+ *
  * The following are various tables used for configuring mech statistics.
  */
 
@@ -2154,8 +2164,8 @@ SFRPG.mechSizes = {
     "colossal": "SFRPG.SizeColossal"
 }
 
-SFRPG.mechPointsPerPc = [ 
-    0, 15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, 195, 210, 225, 240, 255, 270, 285, 300 
+SFRPG.mechPointsPerPc = [
+    0, 15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, 195, 210, 225, 240, 255, 270, 285, 300
 ];
 
 SFRPG.minimumMechPoints = [
@@ -2313,7 +2323,7 @@ SFRPG.mechStatisticsByTier = {
         baseSave: 14,
         baseAttackBonus: 11,
         strength: 5
-    }, 
+    },
     18: {
         sp: 39,
         hardness: 9,
