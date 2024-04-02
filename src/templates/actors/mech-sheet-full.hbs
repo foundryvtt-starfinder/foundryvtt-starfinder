@@ -33,20 +33,51 @@
                 </li>
             </ul>
 
-            <!--
+
             <ul class="attributes flexrow">
-                <li class="attribute health" data-tooltip="{{ localize "SFRPG.HullPoints" }}<br />@attributes.hp.value<br />@attributes.hp.max">
-                    <h4 class="attribute-name box-title">{{ localize "SFRPG.HullPoints" }}</h4>
+                {{!-- Hit Points --}}
+                <li class="attribute health" data-tooltip="Hit Points<br />@attributes.hp.value<br />@attributes.hp.max">
+                    <h4 class="attribute-name box-title">Hit Points</h4>
                     <div class="attribute-value multiple">
                         <input name="system.attributes.hp.value" type="text" value="{{system.attributes.hp.value}}"
                             data-dtype="Number" placeholder="10" />
                         <span class="sep"> / </span>
                         <label>{{system.attributes.hp.max}}</label>
                     </div>
+                </li>
+
+                {{!-- Shield Points --}}
+                <li class="attribute health" data-tooltip="Shield Points<br />@attributes.sp.value<br />@attributes.sp.max<br><br>{{#each system.attributes.sp.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                    <h4 class="attribute-name box-title">Shield Points</h4>
+                    <div class="attribute-value multiple">
+                        <input name="system.attributes.sp.value" type="text" value="{{system.attributes.sp.value}}"
+                            data-dtype="Number" placeholder="10" />
+                        <span class="sep"> / </span>
+                        <label>{{system.attributes.sp.max}}</label>
+                    </div>
+                </li>
+
+                <li class="attribute" data-tooltip="<strong>{{ localize "SFRPG.EnergyArmorClass" }}</strong><br>@attributes.eac.value<br><br>{{#each system.attributes.eac.tooltip as |tip|}}{{tip}}<br>{{/each}}">
+                    <h4 class="attribute-name box-title">{{ localize "SFRPG.EnergyArmorClass" }}</h4>
+                    <div class="attribute-value">
+                        <span>{{system.attributes.eac.value}}</span>
+                    </div>
                     <footer class="attribute-footer">
-                        <span data-tooltip="{{localize "SFRPG.StarshipSheet.Header.HullPointIncrementTooltip"}}">{{system.attributes.hp.increment}}</span>
+                        <a class="rest short-rest">{{localize "SFRPG.Rest.Short.Title"}}</a>
                     </footer>
                 </li>
+
+                <li class="attribute" data-tooltip="<strong>{{ localize "SFRPG.KineticArmorClass" }}</strong><br>@attributes.kac.value<br><br>{{#each system.attributes.kac.tooltip as |tip|}}{{tip}}<br>{{/each}}">
+                    <h4 class="attribute-name box-title">{{ localize "SFRPG.KineticArmorClass" }}</h4>
+                    <div class="attribute-value">
+                        <span>{{system.attributes.kac.value}}</span>
+                    </div>
+                    <footer class="attribute-footer">
+                        <a class="rest long-rest">{{localize "SFRPG.Rest.Long.Title"}}</a>
+                    </footer>
+                </li>
+
+                <!--
                 <li class="attribute">
                     <h4 class="attribute-name box-title">{{localize "SFRPG.StarshipSheet.Header.Statistics"}}</h4>
                     <ol class="attribute-multibox">
@@ -68,23 +99,6 @@
                             <label>{{localize "SFRPG.StarshipSheet.Header.BP"}}</label>
                             <label>{{system.attributes.bp.value}}</label>
                             <label>{{system.attributes.bp.max}}</label>
-                        </li>
-                    </ol>
-                </li>
-                <li class="attribute">
-                    <h4 class="attribute-name box-title">{{localize "SFRPG.StarshipSheet.Header.Thresholds"}}</h4>
-                    <ol class="attribute-multibox">
-                        <li class="box-header flexrow">
-                            <label></label>
-                            <label>{{localize "SFRPG.StarshipSheet.Header.Value"}}</label>
-                        </li>
-                        <li class="flexrow" data-tooltip="{{localize "SFRPG.StarshipSheet.Header.DamageThreshold"}}<br/>@attributes.damageThreshold.value<br/><br/>{{#each system.attributes.damageThreshold.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
-                            <label>{{localize "SFRPG.StarshipSheet.Header.DT"}}</label>
-                            <label>{{system.attributes.damageThreshold.value}}</label>
-                        </li>
-                        <li class="flexrow" data-tooltip="{{localize "SFRPG.StarshipSheet.Header.CriticalThreshold"}}<br/>@attributes.criticalThreshold.value<br/><br/>{{#each system.attributes.criticalThreshold.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
-                            <label>{{localize "SFRPG.StarshipSheet.Header.CT"}}</label>
-                            <label>{{system.attributes.criticalThreshold.value}}</label>
                         </li>
                     </ol>
                 </li>
@@ -111,8 +125,8 @@
                         {{/if}}
                     </ol>
                 </li>
+                -->
             </ul>
-            -->
 
         </div>
     </header>
