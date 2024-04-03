@@ -1,5 +1,6 @@
 import { SFRPG } from "../config.js";
 import RollContext from "../rolls/rollcontext.js";
+import { ActorMovementConfig } from "../apps/movement-config.js";
 
 const itemSizeArmorClassModifier = {
     "fine": 8,
@@ -613,6 +614,9 @@ export class ItemSheetSFRPG extends ItemSheet {
         // toggle timedEffect
         html.find('.effect-details-toggle').on('click', this._onToggleDetailsEffect.bind(this));
         html.find("div[data-origin-uuid]").on("click", this._onClickOrigin.bind(this));
+
+        // Mech Item Speed Mods
+        html.find('.config-button').click(this._onConfigMenu.bind(this));
     }
 
     /* -------------------------------------------- */
@@ -1080,5 +1084,17 @@ export class ItemSheetSFRPG extends ItemSheet {
         const doc = await fromUuid(uuid);
 
         doc.sheet.render(true);
+    }
+
+    _onConfigMenu(event) {
+        event.preventDefault();
+        const button = event.currentTarget;
+        let app;
+        switch ( button.dataset.action ) {
+            case "movement":
+                app = new ActorMovementConfig(this.object);
+                break;
+        }
+        app?.render(true);
     }
 }

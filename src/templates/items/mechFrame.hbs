@@ -20,6 +20,14 @@
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
+            {{!-- Mech Points --}}
+            {{> "systems/sfrpg/templates/items/parts/mech-points.hbs"}}
+
+            {{!-- Mech Slots --}}
+            {{> "systems/sfrpg/templates/items/parts/mech-slots.hbs" slotsType="frame"}}
+
+            <h4 class="section-header first">{{ localize "SFRPG.MechSheet.Details.SizeAndShape" }}</h4>
+            {{!-- Size --}}
             <div class="form-group">
                 <label>{{ localize "SFRPG.MechSheet.Details.Size" }}</label>
                 <div class="form-fields">
@@ -33,8 +41,98 @@
                 </div>
             </div>
 
-            <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipDriftEngine.MaxSize" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipDriftEngine.MaxSizeTooltip" }}">
+            {{!-- Subtype --}}
+            <div class="form-group">
+                <label>{{localize "SFRPG.MechSheet.Frame.Type"}}</label>
+                <div class="form-fields">
+                    <select class="actor-size" name="system.type">
+                        {{#select itemData.type}}
+                        {{#each config.mechFrameTypes as |label size|}}
+                            <option value="{{size}}">{{localize label}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </div>
+            </div>
 
+            {{!-- Operators --}}
+            <h4 class="section-header first">{{localize "SFRPG.MechSheet.Frame.Operators.Operators"}}</h4>
+            <div class="form-group">
+                <label>{{localize "SFRPG.MechSheet.Frame.Operators.Minimum"}}</label>
+                <div class="form-fields">
+                    <input type="text" name="system.operators.min" value="{{itemData.operators.min}}" data-dtype="Number"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>{{localize "SFRPG.MechSheet.Frame.Operators.Maximum"}}</label>
+                <div class="form-fields">
+                    <input type="text" name="system.operators.max" value="{{itemData.operators.max}}" data-dtype="Number"/>
+                </div>
+            </div>
+
+            {{!-- Hit Points --}}
+            <h4 class="section-header first">{{localize "SFRPG.MechSheet.Frame.HP.HitPoints"}}</h4>
+            <div class="form-group">
+                <label>{{localize "SFRPG.MechSheet.Frame.HP.Base"}}</label>
+                <div class="form-fields">
+                    <input type="text" name="system.hp.base" value="{{itemData.hp.base}}" data-dtype="Number"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>{{localize "SFRPG.MechSheet.Frame.HP.Advancement"}}</label>
+                <div class="form-fields">
+                    <input type="text" name="system.hp.advancement" value="{{itemData.hp.advancement}}" data-dtype="Number"/>
+                </div>
+            </div>
+
+            {{!-- Defence --}}
+            <h4 class="section-header first">{{localize "SFRPG.MechSheet.Attributes.Defence"}}</h4>
+            <div class="form-group">
+                <label>{{localize "SFRPG.MechSheet.Attributes.EACBonus"}}</label>
+                <div class="form-fields">
+                    <input type="text" name="system.eac" value="{{itemData.eac}}" data-dtype="Number"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>{{localize "SFRPG.MechSheet.Attributes.KACBonus"}}</label>
+                <div class="form-fields">
+                    <input type="text" name="system.kac" value="{{itemData.kac}}" data-dtype="Number"/>
+                </div>
+            </div>
+
+            {{!-- Saves --}}
+            <div class="form-group">
+                <label>{{localize "SFRPG.MechSheet.Attributes.FortitudeBonus"}}</label>
+                <div class="form-fields">
+                    <input type="text" name="system.saves.fort" value="{{itemData.saves.fort}}" data-dtype="Number"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>{{localize "SFRPG.MechSheet.Attributes.ReflexBonus"}}</label>
+                <div class="form-fields">
+                    <input type="text" name="system.saves.reflex" value="{{itemData.saves.reflex}}" data-dtype="Number"/>
+                </div>
+            </div>
+
+            {{!-- Hardness --}}
+            <h4 class="section-header first">{{localize "SFRPG.MechSheet.Attributes.Hardness"}}</h4>
+            <div class="form-group">
+                <label>{{localize "SFRPG.MechSheet.Attributes.Hardness"}}</label>
+                <div class="form-fields">
+                    <input type="text" name="system.hardness" value="{{itemData.hardness}}" data-dtype="Number"/>
+                </div>
+            </div>
+
+            <h4 class="section-header first">{{localize "SFRPG.MechSheet.Attributes.Movement"}}</h4>
+            {{!-- Speeds --}}
+            {{> "systems/sfrpg/templates/actors/parts/actor-movement-element.hbs"}}
+
+            {{!-- Strength Bonus --}}
+            <div class="form-group">
+                <label>{{localize "SFRPG.MechSheet.Attributes.StrengthBonus"}}</label>
+                <div class="form-fields">
+                    <input type="text" name="system.strength" value="{{itemData.strength}}" data-dtype="Number"/>
+                </div>
             </div>
 
         </div>

@@ -1317,16 +1317,6 @@ SFRPG.vehicleCoverTypes = {
     "total"   : "SFRPG.Vehicles.VehicleCoverTypes.Total"
 };
 
-/* ---------------------------*
- * Mech properties and values *
- *----------------------------*/
-
-SFRPG.mechSizes = {
-    "huge": "SFRPG.SizeHuge",
-    "gargantuan": "SFRPG.SizeGargantuan",
-    "colossal": "SFRPG.SizeColossal"
-};
-
 /**
  * Base Attack Bonus Progression
  */
@@ -2162,7 +2152,16 @@ SFRPG.mechSizes = {
     "huge": "SFRPG.SizeHuge",
     "gargantuan": "SFRPG.SizeGargantuan",
     "colossal": "SFRPG.SizeColossal"
-}
+};
+
+SFRPG.mechFrameTypes = {
+    "amphibious": "SFRPG.Mech.FrameType.Amphibious",
+    "combat":     "SFRPG.Mech.FrameType.Combat",
+    "flight":     "SFRPG.Mech.FrameType.Flight",
+    "phase":      "SFRPG.Mech.FrameType.Phase",
+    "recon":      "SFRPG.Mech.FrameType.Recon",
+    "transport":  "SFRPG.Mech.FrameType.Transport"
+};
 
 SFRPG.mechPointsPerPc = [
     0, 15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, 195, 210, 225, 240, 255, 270, 285, 300
@@ -2177,7 +2176,7 @@ SFRPG.mechWeaponDamage = {
     "medium": { 1: "1d6", 2: "1d8", 3: "2d6", 4: "2d8", 5: "3d6", 6: "3d8", 7: "4d6", 8: "5d6", 9: "4d8", 10: "6d6", 11: "6d8", 12: "9d6", 13: "10d6", 14: "9d8", 15: "10d8", 16: "11d8", 17: "12d8", 18: "13d8", 19: "14d8", 20: "15d8" },
     "high": { 1: "1d10", 2: "2d6", 3: "2d8", 4: "2d10", 5: "3d8", 6: "3d10", 7: "4d8", 8: "4d10", 9: "5d8", 10: "5d10", 11: "6d10", 12: "7d10", 13: "8d10", 14: "9d10", 15: "10d10", 16: "11d10", 17: "12d10", 18: "13d10", 19: "14d10", 20: "15d10" },
     "extreme": { 1: "1d12", 2: "2d8", 3: "2d10", 4: "2d12", 5: "3d10", 6: "3d12", 7: "4d10", 8: "4d12", 9: "5d10", 10: "5d12", 11: "6d12", 12: "7d12", 13: "8d12", 14: "9d12", 15: "10d12", 16: "11d12", 17: "12d12", 18: "13d12", 19: "14d12", 20: "15d12" }
-}
+};
 
 SFRPG.mechStatisticsByTier = {
     0: {
@@ -2348,7 +2347,12 @@ SFRPG.mechStatisticsByTier = {
         baseAttackBonus: 12,
         strength: 6
     }
-}
+};
+
+/* ---------------------------*
+ * Action Targets             *
+ *----------------------------*/
+
 SFRPG.actionTargets = {
     "": "SFRPG.Items.Action.ActionTarget.None",
     "kac": "SFRPG.Items.Action.ActionTarget.KAC",
