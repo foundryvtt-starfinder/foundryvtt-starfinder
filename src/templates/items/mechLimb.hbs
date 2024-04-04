@@ -20,29 +20,15 @@
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
-            <h4 class="section-header first">{{ localize "SFRPG.MechSheet.Details.FrameInformation" }}</h4>
             {{!-- Type --}}
+            <h4 class="section-header first">{{ localize "SFRPG.MechSheet.Details.LimbType" }}</h4>
             <div class="form-group">
                 <label>{{localize "SFRPG.MechSheet.Type"}}</label>
                 <div class="form-fields">
                     <select class="actor-size" name="system.type">
                         {{#select itemData.type}}
-                            {{#each config.mechFrameTypes as |label size|}}
-                                <option value="{{size}}">{{localize label}}</option>
-                            {{/each}}
-                        {{/select}}
-                    </select>
-                </div>
-            </div>
-
-            {{!-- Size --}}
-            <div class="form-group">
-                <label>{{ localize "SFRPG.MechSheet.Details.Size" }}</label>
-                <div class="form-fields">
-                    <select class="actor-size" name="system.size">
-                        {{#select itemData.size}}
-                            {{#each config.mechSizes as |label size|}}
-                                <option value="{{size}}">{{label}}</option>
+                            {{#each config.mechLimbTypes as |label limbType|}}
+                                <option value="{{limbType}}">{{localize label}}</option>
                             {{/each}}
                         {{/select}}
                     </select>
@@ -53,31 +39,18 @@
             {{> "systems/sfrpg/templates/items/parts/mech-points.hbs"}}
 
             {{!-- Mech Slots --}}
-            {{> "systems/sfrpg/templates/items/parts/mech-slots.hbs" slotsType="frame"}}
-
-            {{!-- Operators --}}
-            <h4 class="section-header">{{localize "SFRPG.MechSheet.Frame.Operators.Operators"}}</h4>
-            <div class="form-group">
-                <label>{{localize "SFRPG.MechSheet.Frame.Operators.Minimum"}}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.operators.min" value="{{itemData.operators.min}}" data-dtype="Number"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>{{localize "SFRPG.MechSheet.Frame.Operators.Maximum"}}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.operators.max" value="{{itemData.operators.max}}" data-dtype="Number"/>
-                </div>
-            </div>
+            {{> "systems/sfrpg/templates/items/parts/mech-slots.hbs" slotsType="limb"}}
 
             {{!-- Hit Points --}}
             <h4 class="section-header">{{localize "SFRPG.MechSheet.Frame.HP.HitPoints"}}</h4>
-            <div class="form-group">
-                <label>{{localize "SFRPG.MechSheet.Frame.HP.Base"}}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.hp.base" value="{{itemData.hp.base}}" data-dtype="Number"/>
+            {{#if (eq itemData.type "lower")}}
+                <div class="form-group">
+                    <label>{{localize "SFRPG.MechSheet.Frame.HP.Base"}}</label>
+                    <div class="form-fields">
+                        <input type="text" name="system.hp.base" value="{{itemData.hp.base}}" data-dtype="Number"/>
+                    </div>
                 </div>
-            </div>
+            {{/if}}
             <div class="form-group">
                 <label>{{localize "SFRPG.MechSheet.Frame.HP.Advancement"}}</label>
                 <div class="form-fields">
@@ -114,26 +87,26 @@
                 </div>
             </div>
 
-            {{!-- Hardness --}}
-            <h4 class="section-header">{{localize "SFRPG.MechSheet.Attributes.Hardness"}}</h4>
+            {{!-- Attack Bonuses --}}
+            <h4 class="section-header">{{localize "SFRPG.MechSheet.AttackBonuses"}}</h4>
             <div class="form-group">
-                <label>{{localize "SFRPG.MechSheet.Attributes.Hardness"}}</label>
+                <label>{{localize "SFRPG.MechSheet.Attributes.MeleeAttackBonus"}}</label>
                 <div class="form-fields">
-                    <input type="text" name="system.hardness" value="{{itemData.hardness}}" data-dtype="Number"/>
+                    <input type="text" name="system.melee" value="{{itemData.melee}}" data-dtype="Number"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>{{localize "SFRPG.MechSheet.Attributes.RangedAttackBonus"}}</label>
+                <div class="form-fields">
+                    <input type="text" name="system.ranged" value="{{itemData.ranged}}" data-dtype="Number"/>
                 </div>
             </div>
 
-            <h4 class="section-header">{{localize "SFRPG.MechSheet.Attributes.Movement"}}</h4>
             {{!-- Speeds --}}
-            {{> "systems/sfrpg/templates/items/parts/mech-speed.hbs"}}
-
-            {{!-- Strength Bonus --}}
-            <div class="form-group">
-                <label>{{localize "SFRPG.MechSheet.Attributes.StrengthBonus"}}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.strength" value="{{itemData.strength}}" data-dtype="Number"/>
-                </div>
-            </div>
+            {{#if (eq itemData.type "lower")}}
+                <h4 class="section-header">{{localize "SFRPG.MechSheet.Attributes.Movement"}}</h4>
+                {{> "systems/sfrpg/templates/items/parts/mech-speed.hbs"}}
+            {{/if}}
 
         </div>
 

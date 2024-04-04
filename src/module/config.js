@@ -2163,6 +2163,21 @@ SFRPG.mechFrameTypes = {
     "transport":  "SFRPG.Mech.FrameType.Transport"
 };
 
+SFRPG.mechLimbTypes = {
+    "upper": "SFRPG.Mech.LimbType.Upper",
+    "lower": "SFRPG.Mech.LimbType.Lower"
+};
+
+SFRPG.mechSlotOptions = {
+    "any": "SFRPG.Mech.SlotType.Any",
+    "auxiliary": "SFRPG.Mech.SlotType.Auxiliary",
+    "frame": "SFRPG.Mech.SlotType.Frame",
+    "upperLimb": "SFRPG.Mech.SlotType.UpperLimb",
+    "lowerLimb": "SFRPG.Mech.SlotType.LowerLimb",
+    "anyLimb": "SFRPG.Mech.SlotType.AnyLimb",
+    "none": "SFRPG.Mech.SlotType.None"
+};
+
 SFRPG.mechPointsPerPc = [
     0, 15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, 195, 210, 225, 240, 255, 270, 285, 300
 ];
@@ -2170,6 +2185,13 @@ SFRPG.mechPointsPerPc = [
 SFRPG.minimumMechPoints = [
     0, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, 195, 210, 225, 240, 255, 270, 285, 300, 315
 ];
+
+SFRPG.mechWeaponDamageTypes = {
+    "low": "SFRPG.Mech.DamageLevels.Low",
+    "medium": "SFRPG.Mech.DamageLevels.Medium",
+    "high": "SFRPG.Mech.DamageLevels.High",
+    "extreme": "SFRPG.Mech.DamageLevels.Extreme"
+};
 
 SFRPG.mechWeaponDamage = {
     "low": { 1: "1d4", 2: "1d6", 3: "2d4", 4: "2d6", 5: "3d4", 6: "3d6", 7: "5d4", 8: "6d4", 9: "7d4", 10: "8d4", 11: "9d4", 12: "10d4", 13: "11d4", 14: "12d4", 15: "10d6", 16: "11d6", 17: "12d6", 18: "13d6", 19: "14d6", 20: "15d6" },

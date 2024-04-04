@@ -1,4 +1,9 @@
-<h4 class="section-header first">{{localize "SFRPG.MechSheet.Slots.Slots"}}</h4>
+{{#if first}}
+    <h4 class="section-header first">{{localize "SFRPG.MechSheet.Slots.Slots"}}</h4>
+{{else}}
+    <h4 class="section-header">{{localize "SFRPG.MechSheet.Slots.Slots"}}</h4>
+{{/if}}
+
 {{!-- Frame Slots--}}
 {{#if (eq slotsType "frame")}}
     <div class="form-group">
