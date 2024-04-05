@@ -2186,7 +2186,7 @@ SFRPG.minimumMechPoints = [
     0, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, 195, 210, 225, 240, 255, 270, 285, 300, 315
 ];
 
-SFRPG.mechWeaponDamageTypes = {
+SFRPG.mechWeaponDamageLevels = {
     "low": "SFRPG.Mech.DamageLevels.Low",
     "medium": "SFRPG.Mech.DamageLevels.Medium",
     "high": "SFRPG.Mech.DamageLevels.High",

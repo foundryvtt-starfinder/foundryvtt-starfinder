@@ -37,7 +37,6 @@ export const preloadHandlebarsTemplates = async function() {
         "systems/sfrpg/templates/items/parts/mech-points.hbs",
         "systems/sfrpg/templates/items/parts/mech-slots.hbs",
         "systems/sfrpg/templates/items/parts/mech-speed.hbs",
-        "systems/sfrpg/templates/items/parts/power-point-abilities.hbs",
         "systems/sfrpg/templates/items/parts/power-point-ability.hbs"
     ];
 

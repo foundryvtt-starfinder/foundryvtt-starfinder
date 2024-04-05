@@ -1528,10 +1528,24 @@
         "pcu": null,
         "isPowered": true
       },
-      "powerPointAbility": {
-        "powerPointAbility": {
-          "cost": null,
-          "ability": ""
+      "ppAbility": {
+        "ppAbility": {
+          "abilityType": "",
+          "activation": {
+            "requiresActivation": false,
+            "toggleable": false
+          },
+          "cost": {
+            "value": null,
+            "variable": false
+          },
+          "damage": "",
+          "damageTypes": {},
+          "description": "",
+          "save": {
+            "dc": "",
+            "type": ""
+          }
         }
       },
       "mechPoints": {
@@ -2786,7 +2800,12 @@
       }
     },
     "mechFrame": {
-      "templates": ["itemDescription", "modifiers", "mechPoints", "mechSlots"],
+      "templates": [
+        "itemDescription",
+        "modifiers",
+        "mechPoints",
+        "mechSlots"
+      ],
       "type": "amphibious",
       "size": "huge",
       "hp": {
@@ -2810,7 +2829,13 @@
       }
     },
     "mechLimb": {
-      "templates": ["itemDescription", "modifiers", "powerPointAbility", "mechPoints", "mechSlots"],
+      "templates": [
+        "itemDescription",
+        "modifiers",
+        "ppAbility",
+        "mechPoints",
+        "mechSlots"
+      ],
       "type": "upper",
       "hp": {
         "base": 0,
@@ -2845,7 +2870,7 @@
       "special": ""
     },
     "mechWeapon": {
-      "templates": ["itemDescription", "modifiers", "powerPointAbility", "mechPoints"],
+      "templates": ["itemDescription", "modifiers", "ppAbility", "mechPoints"],
       "range": {
         "value": 0,
         "uom": "ft"
@@ -2866,11 +2891,11 @@
       "capacity": 0
     },
     "mechAuxiliarySystem": {
-      "templates": ["itemDescription", "modifiers", "powerPointAbility", "mechPoints"],
+      "templates": ["itemDescription", "modifiers", "ppAbility", "mechPoints"],
       "prerequisite": ""
     },
     "mechUpgrade": {
-      "templates": ["itemDescription", "modifiers", "powerPointAbility", "mechPoints"],
+      "templates": ["itemDescription", "modifiers", "ppAbility", "mechPoints"],
       "special": "",
       "effect": ""
     },

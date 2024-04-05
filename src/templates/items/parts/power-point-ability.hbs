@@ -1,0 +1,97 @@
+{{!-- Ability Type --}}
+<h3 class="section-header">{{ localize "SFRPG.MechSheet.PPAbility.PPAbility" }}</h3>
+<div class="form-group">
+    <label>{{localize "SFRPG.MechSheet.PPAbility.AbilityType"}}</label>
+    <div class="form-fields">
+        <select class="actor-size" name="system.ppAbility.abilityType">
+            {{#select itemData.ppAbility.abilityType}}
+                <option value=""></option>
+                {{#each config.itemActionTypes as |label type|}}
+                    <option value="{{type}}">{{localize label}}</option>
+                {{/each}}
+            {{/select}}
+        </select>
+    </div>
+</div>
+
+{{#if itemData.ppAbility.abilityType}}
+
+    {{!-- Saving Throw --}}
+    <div class="form-group">
+        <label>{{localize "SFRPG.MechSheet.PPAbility.SavingThrow"}}</label>
+        <div class="form-fields">
+            <select class="actor-size" name="system.ppAbility.save.type">
+                {{#select itemData.ppAbility.save.type}}
+                    <option value=""></option>
+                    {{#each config.saves as |label saveType|}}
+                        <option value="{{saveType}}">{{localize label}}</option>
+                    {{/each}}
+                {{/select}}
+            </select>
+            {{localize "SFRPG.MechSheet.PPAbility.DC"}} <input type="text" name="system.ppAbility.save.dc" value="{{itemData.ppAbility.save.dc}}" data-dtype="Number"/>
+        </div>
+    </div>
+
+    {{!-- Activation --}}
+    <div class="form-group">
+        <label>{{localize "SFRPG.MechSheet.PPAbility.RequiresActivation"}}</label>
+        <div class="form-fields">
+            <label class="checkbox">
+                <input type="checkbox" name="system.ppAbility.activation.requiresActivation" {{checked itemData.ppAbility.activation.requiresActivation}}/>
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>{{localize "SFRPG.MechSheet.PPAbility.Toggleable"}}</label>
+        <div class="form-fields">
+            <label class="checkbox">
+                <input type="checkbox" name="system.ppAbility.activation.toggleable" {{checked itemData.ppAbility.activation.toggleable}}/>
+            </label>
+        </div>
+    </div>
+
+    {{!-- PP Cost --}}
+    <div class="form-group">
+        <label>{{localize "SFRPG.MechSheet.PPAbility.Cost"}}</label>
+        <div class="form-fields">
+            <div class="form-group">
+                <label>{{localize "SFRPG.MechSheet.PPAbility.IsVariable"}}</label>
+                <div class="form-fields">
+                    <label class="checkbox">
+                        <input type="checkbox" name="system.ppAbility.cost.variable" {{checked itemData.ppAbility.cost.variable}}/>
+                    </label>
+                </div>
+            </div>
+            <input type="text" name="system.ppAbility.cost.value" value="{{itemData.ppAbility.cost.value}}" data-dtype="Number"{{#if itemData.ppAbility.cost.variable}} disabled{{/if}}/> {{localize "SFRPG.MechSheet.PPAbility.PP"}}
+        </div>
+    </div>
+
+    {{!-- Damage --}}
+    <div class="form-group">
+        <label>{{localize "SFRPG.MechSheet.PPAbility.DamageLevel"}}</label>
+        <div class="form-fields">
+            <select class="actor-size" name="system.ppAbility.damage">
+                {{#select itemData.ppAbility.damage}}
+                    <option value=""></option>
+                    {{#each config.mechWeaponDamageLevels as |label damage|}}
+                        <option value="{{damage}}">{{localize label}}</option>
+                    {{/each}}
+                {{/select}}
+            </select>
+        </div>
+    </div>
+
+    {{!-- Description --}}
+    <h4 class="section-header">{{localize "SFRPG.MechSheet.PPAbility.Description"}}</h4>
+    <div class="tab flexrow">
+        {{editor
+            itemData.ppAbility.description
+            target="system.ppAbility.description"
+            button=true
+            editable=editable
+            engine="prosemirror"
+            collaborate="true"
+        }}
+    </div>
+
+{{/if}}
