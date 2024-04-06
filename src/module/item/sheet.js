@@ -568,6 +568,60 @@ export class ItemSheetSFRPG extends ItemSheet {
             return arr;
         }, []);
 
+        // Handle mech power point abilities
+        const ppAbilities = Object.entries(formData).filter(e => e[0].startsWith("system.ppAbilities"));
+        formData["system.ppAbilities"] = ppAbilities.reduce((arr, entry) => {
+            const [i, key, subKey] = entry[0].split(".").slice(2);
+            if (!arr[i]) arr[i] = {
+                abilityType: "",
+                activation: {
+                    requiresActivation: false,
+                    toggleable: false
+                },
+                cost: {
+                    value: null,
+                    variable: false
+                },
+                damage: "",
+                damageTypes: {},
+                description: "",
+                name: "",
+                save: {
+                    dc: "",
+                    type: ""
+                }
+            };
+
+            switch (key) {
+                case 'abilityType':
+                    arr[i].abilityType = entry[1];
+                    break;
+                case 'activation':
+                    if (subKey === "requiresActivation") arr[i].activation.requiresActivation = entry[1];
+                    if (subKey === "toggleable") arr[i].activation.toggleable = entry[1];
+                    break;
+                case 'cost':
+                    if (subKey === "value") arr[i].cost.value = entry[1];
+                    if (subKey === "variable") arr[i].cost.variable = entry[1];
+                    break;
+                case 'damage':
+                    arr[i].damage = entry[1];
+                    break;
+                case 'description':
+                    arr[i].description = entry[1];
+                    break;
+                case 'name':
+                    arr[i].name = entry[1];
+                    break;
+                case 'save':
+                    if (subKey === "dc") arr[i].save.dc = entry[1];
+                    if (subKey === "type") arr[i].save.type = entry[1];
+                    break;
+            }
+
+            return arr;
+        }, []);
+
         // Update the Item
         return super._updateObject(event, formData);
     }
