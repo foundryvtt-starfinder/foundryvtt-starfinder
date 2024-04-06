@@ -813,6 +813,16 @@ function setupHandlebars() {
         return formattedValue;
     });
 
+    Handlebars.registerHelper('concat', function() {
+        let outStr = '';
+        for (const arg in arguments) {
+            if (typeof arguments[arg] !== 'object') {
+                outStr += arguments[arg];
+            }
+        }
+        return outStr;
+    });
+
 }
 
 Hooks.on("renderSidebarTab", async (app, html) => {

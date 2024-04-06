@@ -280,6 +280,19 @@ export class ItemSheetSFRPG extends ItemSheet {
             secrets
         });
 
+        if (["mechLimb", "mechweapon", "mechAuxiliarySystem", "mechUpgrade"].includes(data?.item?.type)) {
+            // Manage abilities
+            if (data.itemData?.ppAbilities?.length >= 1) {
+                for (const ability of data.itemData.ppAbilities) {
+                    ability.enrichedDescription = await TextEditor.enrichHTML(ability.description, {
+                        async,
+                        rollData,
+                        secrets
+                    });
+                }
+            }
+        }
+
         return data;
     }
 
@@ -568,7 +581,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             return arr;
         }, []);
 
-        // Handle mech power point abilities
+        // Handle mech power point abilities, aside from descriptions (which will be separate)
         const ppAbilities = Object.entries(formData).filter(e => e[0].startsWith("system.ppAbilities"));
         formData["system.ppAbilities"] = ppAbilities.reduce((arr, entry) => {
             const [i, key, subKey] = entry[0].split(".").slice(2);
@@ -621,6 +634,20 @@ export class ItemSheetSFRPG extends ItemSheet {
 
             return arr;
         }, []);
+
+        // Handle Mech Power Point Ability Descriptions
+        if (ppAbilities.length > 0) {
+            const originalAbilities = this.object.system.ppAbilities;
+            const descriptionUpdates = Object.entries(formData).filter(e => e[0].startsWith("system.ppAbilities.") && e[0].endsWith(".description"));
+            for (let i = 0; i < originalAbilities.length; i++) {
+                formData["system.ppAbilities"][i].description = originalAbilities[i].description;
+            }
+            if (descriptionUpdates.length > 0) {
+                const ind = Number(descriptionUpdates[0][0].split(".").slice(2, 3));
+                formData["system.ppAbilities"][ind].description = descriptionUpdates[0][1];
+            }
+
+        }
 
         // Update the Item
         return super._updateObject(event, formData);

@@ -103,14 +103,14 @@
         {{!-- Description --}}
         <div class="form-group">
             <label>{{localize "SFRPG.MechSheet.PPAbility.Description"}}</label>
-            <div class="ability-description" data-group="descriptionTabs" data-tab="description">
+            <div class="ability-description">
                 {{editor
-                    part.description
-                    target="system.ppAbilities.{{i}}.description"
+                    part.enrichedDescription
+                    target=(concat "system.ppAbilities." i ".description")
                     button=true
-                    editable=editable
+                    editable=../editable
                     engine="prosemirror"
-                    collaborate="true"
+                    collaborate="false"
                 }}
             </div>
         </div>
