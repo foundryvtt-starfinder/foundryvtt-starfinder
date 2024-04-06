@@ -280,16 +280,14 @@ export class ItemSheetSFRPG extends ItemSheet {
             secrets
         });
 
-        if (["mechLimb", "mechweapon", "mechAuxiliarySystem", "mechUpgrade"].includes(data?.item?.type)) {
-            // Manage abilities
-            if (data.itemData?.ppAbilities?.length >= 1) {
-                for (const ability of data.itemData.ppAbilities) {
-                    ability.enrichedDescription = await TextEditor.enrichHTML(ability.description, {
-                        async,
-                        rollData,
-                        secrets
-                    });
-                }
+        // Manage abilities
+        if (data.itemData?.ppAbilities?.length >= 1) {
+            for (const ability of data.itemData.ppAbilities) {
+                ability.enrichedDescription = await TextEditor.enrichHTML(ability.description, {
+                    async,
+                    rollData,
+                    secrets
+                });
             }
         }
 
