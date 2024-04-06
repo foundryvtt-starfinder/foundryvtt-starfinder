@@ -671,6 +671,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         // Mech Item Speed Mods
         html.find('.config-button').click(this._onConfigMenu.bind(this));
+        html.find('.pp-ability-control').click(this._onPPAbilityControl.bind(this));
     }
 
     /* -------------------------------------------- */
@@ -1140,6 +1141,12 @@ export class ItemSheetSFRPG extends ItemSheet {
         doc.sheet.render(true);
     }
 
+    /**
+     * Open the speed configuration app for mech parts
+     * @param {Event} event     The original click event
+     * @return {Promise}
+     * @private
+     */
     _onConfigMenu(event) {
         event.preventDefault();
         const button = event.currentTarget;
@@ -1150,5 +1157,57 @@ export class ItemSheetSFRPG extends ItemSheet {
                 break;
         }
         app?.render(true);
+    }
+
+    /**
+     * Add or remove a power point ability to/from a mech item
+     * @param {Event} event     The original click event
+     * @return {Promise}
+     * @private
+     */
+    async _onPPAbilityControl(event) {
+        event.preventDefault();
+        const a = event.currentTarget;
+
+        // Add new power point ability
+        if (a.classList.contains("add-pp-ability")) {
+            await this._onSubmit(event); // Submit any unsaved changes
+            const abilities = this.item.system.ppAbilities;
+            return await this.item.update({
+                "system.ppAbilities": abilities.concat([
+                    {
+                        abilityType: "",
+                        activation: {
+                            requiresActivation: false,
+                            toggleable: false
+                        },
+                        cost: {
+                            value: null,
+                            variable: false
+                        },
+                        damage: "",
+                        damageTypes: {},
+                        description: "",
+                        name: "",
+                        save: {
+                            dc: "",
+                            type: ""
+                        }
+                    }
+                ])
+            });
+        }
+
+        // Remove a power point ability
+        if (a.classList.contains("delete-pp-ability")) {
+            await this._onSubmit(event); // Submit any unsaved changes
+            const li = a.closest(".pp-ability");
+            const ppAbilities = duplicate(this.item.system.ppAbilities);
+            ppAbilities.splice(Number(li.dataset.abilityNumber), 1);
+            return await this.item.update({
+                "system.ppAbilities": ppAbilities
+            });
+        }
+
     }
 }

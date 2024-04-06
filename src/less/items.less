@@ -247,6 +247,10 @@
                 flex: 0;
                 color: @colorOlive;
             }
+
+            .ability-description {
+                min-height: 4em;
+            }
         }
 
         span.sep {
@@ -285,6 +289,7 @@
     /* ----------------------------------------- */
 
     h4.damage-header,
+    h3.pp-ability-header,
     h4.visualization-header,
     h4.ability-adjustments-header {
         margin: 0;
@@ -295,6 +300,7 @@
     }
 
     ol.damage-parts,
+    ol.pp-abilities,
     ol.visualization-parts {
         border-top: groove 2px #fff;
 
@@ -305,11 +311,13 @@
     }
 
     li.damage-part,
+    li.pp-ability,
     li.visualization-part {
         border-bottom: groove 2px #fff;
     }
 
     .damage-parts,
+    .pp-abilities,
     .visualization-parts,
     .ability-adjustment-parts {
         list-style: none;
@@ -317,6 +325,7 @@
         padding: 0;
 
         .damage-part,
+        .pp-ability,
         .visualization-part,
         .ability-adjustment-part {
             flex: 0 0 100%;
@@ -369,6 +378,7 @@
     }
 
     .damage-control,
+    .pp-ability-control,
     .visualization-control,
     .ability-adjustments-control {
         line-height: 24px;
@@ -377,6 +387,7 @@
     }
 
     .damage-control,
+    .pp-ability-control,
     .visualization-control {
         width: 18px;
         flex: 0 0 18px;

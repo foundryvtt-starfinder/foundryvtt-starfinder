@@ -1,24 +1,39 @@
-{{#each itemData.ppAbilities as |part i|}}
-    {{log ../config}}
-    {{log part}}
-    {{log i}}
-    {{!-- Ability Type --}}
-    <h3 class="section-header">{{ localize "SFRPG.MechSheet.PPAbility.PPAbility" }}</h3>
-    <div class="form-group">
-        <label>{{localize "SFRPG.MechSheet.PPAbility.AbilityType"}}</label>
-        <div class="form-fields">
-            <select class="actor-size" name="system.ppAbilities.{{i}}.abilityType">
-                {{#select part.abilityType}}
-                    <option value=""></option>
-                    {{#each ../config.itemActionTypes as |label type|}}
-                        <option value="{{type}}">{{localize label}}</option>
-                    {{/each}}
-                {{/select}}
-            </select>
-        </div>
-    </div>
+<h3 class="pp-ability-header">
+    {{ localize "SFRPG.MechSheet.PPAbility.AddPPAbility" }}
+    <a class="pp-ability-control add-pp-ability"><i class="fas fa-plus"></i></a>
+</h3>
 
-    <!-- {{#if part.abilityType}} -->
+<ol class="pp-abilities form-group">
+{{#each itemData.ppAbilities as |part i|}}
+    <li class="pp-ability" style="border: 0;" data-ability-number="{{i}}">
+        <span>&nbsp;</span>
+        <h4 class="pp-ability-header" style="border-bottom: groove 2px #fff;">
+            {{#unless (lookup part "name") }}{{ localize "SFRPG.MechSheet.PPAbility.PPAbility"}}{{else}}{{lookup part "name"}}{{/unless}}:
+            <a class="pp-ability-control delete-pp-ability" ><i class="fas fa-minus"></i></a>
+        </h4>
+
+        {{!-- Name --}}
+        <div class="form-group">
+            <label>{{localize "SFRPG.MechSheet.PPAbility.Name"}}</label>
+            <div class="form-fields">
+                <input type="text" name="system.ppAbilities.{{i}}.name" value="{{part.name}}" data-dtype="String"/>
+            </div>
+        </div>
+
+        {{!-- Ability Type --}}
+        <div class="form-group">
+            <label>{{localize "SFRPG.MechSheet.PPAbility.AbilityType"}}</label>
+            <div class="form-fields">
+                <select class="actor-size" name="system.ppAbilities.{{i}}.abilityType">
+                    {{#select part.abilityType}}
+                        <option value=""></option>
+                        {{#each ../config.itemActionTypes as |label type|}}
+                            <option value="{{type}}">{{localize label}}</option>
+                        {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+        </div>
 
         {{!-- Saving Throw --}}
         <div class="form-group">
@@ -86,17 +101,19 @@
         </div>
 
         {{!-- Description --}}
-        <h4 class="section-header">{{localize "SFRPG.MechSheet.PPAbility.Description"}}</h4>
-        <div class="tab flexrow">
-            {{editor
-                part.description
-                target="system.ppAbility.description"
-                button=true
-                editable=editable
-                engine="prosemirror"
-                collaborate="true"
-            }}
+        <div class="form-group">
+            <label>{{localize "SFRPG.MechSheet.PPAbility.Description"}}</label>
+            <div class="ability-description" data-group="descriptionTabs" data-tab="description">
+                {{editor
+                    part.description
+                    target="system.ppAbilities.{{i}}.description"
+                    button=true
+                    editable=editable
+                    engine="prosemirror"
+                    collaborate="true"
+                }}
+            </div>
         </div>
-
-    <!-- {{/if}} -->
+    </li>
 {{/each}}
+</ol>
