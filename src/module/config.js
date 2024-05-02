@@ -2186,6 +2186,11 @@ SFRPG.minimumMechPoints = [
     0, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, 195, 210, 225, 240, 255, 270, 285, 300, 315
 ];
 
+SFRPG.mechWeaponTypes = {
+    "melee":  "SFRPG.Mech.WeaponType.Melee",
+    "ranged": "SFRPG.Mech.WeaponType.Ranged"
+};
+
 SFRPG.mechWeaponDamageLevels = {
     "low": "SFRPG.Mech.DamageLevels.Low",
     "medium": "SFRPG.Mech.DamageLevels.Medium",

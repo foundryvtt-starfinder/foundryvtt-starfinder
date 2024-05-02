@@ -402,7 +402,6 @@ Hooks.once("i18nInit", () => {
         "languages",
         "limitedUsePeriods",
         "maneuverability",
-        "mechSizes",
         "modifierArmorClassAffectedValues",
         "modifierEffectTypes",
         "modifierType",
