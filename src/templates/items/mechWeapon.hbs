@@ -64,6 +64,14 @@
             </div>
 
             {{!-- Weapon Range --}}
+            {{#if (eq itemData.weaponType "ranged")}}
+                <div class="form-group">
+                    <label>{{localize "SFRPG.MechSheet.Weapon.Range"}}</label>
+                    <div class="form-fields">
+                        <input type="text" name="system.range.value" value="{{itemData.range.value}}" data-dtype="Number"/>
+                    </div>
+                </div>
+            {{/if}}
 
             {{!-- Weapon Damage --}}
             <div class="form-group">
@@ -78,20 +86,67 @@
             </div>
 
             {{!-- Damage Type(s) --}}
-            <!--<div class="form-group">
-                <label>{{localize "SFRPG.MechSheet.Slots.Required"}}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.slots.number" value="{{itemData.slots.number}}" data-dtype="Number"/>
-                </div>
-            </div>-->
+            <div class="form-group">
+                <label>{{ localize "SFRPG.MechSheet.Weapon.DamageType" }}</label>
+                {{!-- Primary Damage Type --}}
+                <select name="system.damageType.primary">
+                    {{#select itemData.damageType.primary}}
+                    <option value="none">—</option>
+                    {{#each config.kineticDamageTypes as |name type|}}
+                        <option value="{{type}}">{{name}}</option>
+                    {{/each}}
+                    {{#each config.energyDamageTypes as |name type|}}
+                        <option value="{{type}}">{{name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+                {{!-- And/Or Selector --}}
+                <select name="system.damageType.andOr">
+                    {{#select itemData.damageType.andOr}}
+                    <option value="none">—</option>
+                    <option value="and">and</option>
+                    <option value="or">or</option>
+                    {{/select}}
+                </select>
+                {{!-- Secondary Damage Type --}}
+                {{#unless (eq itemData.damageType.andOr "none")}}
+                    <select name="system.damageType.secondary">
+                        {{#select itemData.damageType.secondary}}
+                        <option value="none">—</option>
+                        {{#each config.kineticDamageTypes as |name type|}}
+                            <option value="{{type}}">{{name}}</option>
+                        {{/each}}
+                        {{#each config.energyDamageTypes as |name type|}}
+                            <option value="{{type}}">{{name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                {{/unless}}
+            </div>
 
             {{!-- Special --}}
+            <!--<div class="form-group">
+                <label>{{localize "SFRPG.MechSheet.Weapon.Special"}}</label>
+                <div class="form-fields">
+                    <input type="text" name="system.special" value="{{itemData.special}}" data-dtype="String"/>
+                </div>
+            </div>
 
             {{!-- Critical Effect --}}
+            <div class="form-group">
+                <label>{{localize "SFRPG.MechSheet.Weapon.Critical"}}</label>
+                <div class="form-fields">
+                    <input type="text" name="system.critical" value="{{itemData.critical}}" data-dtype="String"/>
+                </div>
+            </div> -->
 
             {{!-- Capacity --}}
-
-            {{!-- Level --}}
+            <div class="form-group">
+                <label>{{localize "SFRPG.MechSheet.Weapon.Capacity"}}</label>
+                <div class="form-fields">
+                    <input type="text" name="system.capacity" value="{{itemData.capacity}}" data-dtype="Number"/>
+                </div>
+            </div>
 
             {{!-- Power Point Abilities --}}
             {{> "systems/sfrpg/templates/items/parts/power-point-ability.hbs" this}}
