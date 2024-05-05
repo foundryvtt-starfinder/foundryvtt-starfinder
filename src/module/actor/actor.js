@@ -304,107 +304,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         return super._onDeleteDescendantDocuments(parent, collection, documents, data, options, userId);
     }
 
-    async useSpell(item, { configureDialog = true } = {}) {
-        if (item.type !== "spell") throw new Error("Wrong item type");
-
-        let spellLevel = item.system.level;
-        const usesSlots = (spellLevel > 0) && item.system.preparation.mode === "";
-        if (!usesSlots) {
-            if (item.system.uses?.max > 0) {
-                if (item.system.uses.value <= 0) {
-                    ui.notifications.error(game.i18n.localize("SFRPG.Items.Spell.ErrorNoUses", {permanent: true}));
-                    return;
-                }
-
-                const itemUpdatePromise = item.update({
-                    [`system.uses.value`]: Math.max(item.system.uses.value - 1, 0)
-                });
-                itemUpdatePromise.then(() => {
-                    item.roll();
-                });
-                return itemUpdatePromise;
-            } else {
-                return item.roll();
-            }
-        }
-
-        let consumeSpellSlot = true;
-        let selectedSlot = null;
-        if (configureDialog) {
-            try {
-                const dialogResponse = await SpellCastDialog.create(this, item);
-                const slotLevel = parseInt(dialogResponse.formData.get("level"));
-                consumeSpellSlot = Boolean(dialogResponse.formData.get("consume"));
-                selectedSlot = dialogResponse.spellLevels.find(x => parseInt(x.level) === slotLevel);
-                spellLevel = parseInt(selectedSlot?.level || item.system.level);
-
-                if (spellLevel !== item.system.level && item.system.level > spellLevel) {
-                    const newItemData = duplicate(item);
-                    newItemData.system.level = spellLevel;
-
-                    if (this.type === "npc" || this.type === "npc2") {
-                        if (newItemData.system.save.dc && !Number.isNaN(newItemData.system.save.dc)) {
-                            newItemData.system.save.dc = newItemData.system.save.dc - item.system.level + spellLevel;
-                        }
-                    }
-
-                    item = new ItemSFRPG(newItemData, {parent: this});
-                }
-
-                // Run automation to ensure save DCs are correct.
-                item.prepareData();
-                if (item.system.actionType && item.system.save.type) {
-                    await item.processData();
-                }
-            } catch (error) {
-                console.error(error);
-                return null;
-            }
-        }
-
-        let processContext = null;
-        if (consumeSpellSlot && spellLevel > 0 && selectedSlot) {
-            const actor = this;
-            if (selectedSlot.source === "general") {
-                if (processContext) {
-                    processContext.then(function(result) {
-                        return actor.update({
-                            [`system.spells.spell${spellLevel}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].value) - 1, 0)
-                        });
-                    });
-                } else {
-                    processContext = actor.update({
-                        [`system.spells.spell${spellLevel}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].value) - 1, 0)
-                    });
-                }
-            } else {
-                const selectedLevel = selectedSlot.level;
-                const selectedClass = selectedSlot.source;
-
-                if (processContext) {
-                    processContext.then(function(result) {
-                        return actor.update({
-                            [`system.spells.spell${selectedLevel}.perClass.${selectedClass}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].perClass[selectedClass].value) - 1, 0)
-                        });
-                    });
-                } else {
-                    processContext = actor.update({
-                        [`system.spells.spell${selectedLevel}.perClass.${selectedClass}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].perClass[selectedClass].value) - 1, 0)
-                    });
-                }
-            }
-        }
-
-        if (processContext) {
-            processContext.then(function(result) {
-                return item.roll();
-            });
-
-            return processContext;
-        }
-
-        return item.roll();
-    }
+    /** ------------------------------------------------------------------------------------
+    * Edit Actor Attributes & Skills
+    * -------------------------------------------------------------------------------------- */
 
     /**
      * Edit a skill's fields
@@ -515,6 +417,119 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         };
 
         return this.update(newSkillData);
+    }
+
+    levelUp(actorClassId) {
+        const targetClass = this.items.get(actorClassId);
+        if (targetClass) {
+            targetClass.update({["system.levels"]: targetClass.system.levels + 1});
+        }
+    }
+
+    /** ------------------------------------------------------------------------------------
+    * Character/NPC/Drone Rolls
+    * -------------------------------------------------------------------------------------- */
+
+    async useSpell(item, { configureDialog = true } = {}) {
+        if (item.type !== "spell") throw new Error("Wrong item type");
+
+        let spellLevel = item.system.level;
+        const usesSlots = (spellLevel > 0) && item.system.preparation.mode === "";
+        if (!usesSlots) {
+            if (item.system.uses?.max > 0) {
+                if (item.system.uses.value <= 0) {
+                    ui.notifications.error(game.i18n.localize("SFRPG.Items.Spell.ErrorNoUses", {permanent: true}));
+                    return;
+                }
+
+                const itemUpdatePromise = item.update({
+                    [`system.uses.value`]: Math.max(item.system.uses.value - 1, 0)
+                });
+                itemUpdatePromise.then(() => {
+                    item.roll();
+                });
+                return itemUpdatePromise;
+            } else {
+                return item.roll();
+            }
+        }
+
+        let consumeSpellSlot = true;
+        let selectedSlot = null;
+        if (configureDialog) {
+            try {
+                const dialogResponse = await SpellCastDialog.create(this, item);
+                const slotLevel = parseInt(dialogResponse.formData.get("level"));
+                consumeSpellSlot = Boolean(dialogResponse.formData.get("consume"));
+                selectedSlot = dialogResponse.spellLevels.find(x => parseInt(x.level) === slotLevel);
+                spellLevel = parseInt(selectedSlot?.level || item.system.level);
+
+                if (spellLevel !== item.system.level && item.system.level > spellLevel) {
+                    const newItemData = duplicate(item);
+                    newItemData.system.level = spellLevel;
+
+                    if (this.type === "npc" || this.type === "npc2") {
+                        if (newItemData.system.save.dc && !Number.isNaN(newItemData.system.save.dc)) {
+                            newItemData.system.save.dc = newItemData.system.save.dc - item.system.level + spellLevel;
+                        }
+                    }
+
+                    item = new ItemSFRPG(newItemData, {parent: this});
+                }
+
+                // Run automation to ensure save DCs are correct.
+                item.prepareData();
+                if (item.system.actionType && item.system.save.type) {
+                    await item.processData();
+                }
+            } catch (error) {
+                console.error(error);
+                return null;
+            }
+        }
+
+        let processContext = null;
+        if (consumeSpellSlot && spellLevel > 0 && selectedSlot) {
+            const actor = this;
+            if (selectedSlot.source === "general") {
+                if (processContext) {
+                    processContext.then(function(result) {
+                        return actor.update({
+                            [`system.spells.spell${spellLevel}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].value) - 1, 0)
+                        });
+                    });
+                } else {
+                    processContext = actor.update({
+                        [`system.spells.spell${spellLevel}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].value) - 1, 0)
+                    });
+                }
+            } else {
+                const selectedLevel = selectedSlot.level;
+                const selectedClass = selectedSlot.source;
+
+                if (processContext) {
+                    processContext.then(function(result) {
+                        return actor.update({
+                            [`system.spells.spell${selectedLevel}.perClass.${selectedClass}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].perClass[selectedClass].value) - 1, 0)
+                        });
+                    });
+                } else {
+                    processContext = actor.update({
+                        [`system.spells.spell${selectedLevel}.perClass.${selectedClass}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].perClass[selectedClass].value) - 1, 0)
+                    });
+                }
+            }
+        }
+
+        if (processContext) {
+            processContext.then(function(result) {
+                return item.roll();
+            });
+
+            return processContext;
+        }
+
+        return item.roll();
     }
 
     /**
@@ -647,6 +662,10 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         });
     }
 
+    /** ------------------------------------------------------------------------------------
+    * Vehicle Actions
+    * -------------------------------------------------------------------------------------- */
+
     /**
      * Roll the Piloting skill of the pilot of a vehicle
      *
@@ -704,7 +723,10 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         });
     }
 
-    /** Starship code */
+    /** ------------------------------------------------------------------------------------
+    * Starship Actions
+    * -------------------------------------------------------------------------------------- */
+
     async useStarshipAction(actionId) {
         /** Bad entry; no action! */
         if (!actionId) {
@@ -917,14 +939,10 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         });
     }
 
-    levelUp(actorClassId) {
-        const targetClass = this.items.get(actorClassId);
-        if (targetClass) {
-            targetClass.update({["system.levels"]: targetClass.system.levels + 1});
-        }
-    }
+    /** ------------------------------------------------------------------------------------
+    * Roll Contexts
+    * -------------------------------------------------------------------------------------- */
 
-    /** Roll contexts */
     setupRollContexts(rollContext, desiredSelectors = []) {
         if (!this) {
             return;
@@ -1035,9 +1053,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         }
     }
 
-    /** -------------------
+    /** ------------------------------------------------------------------------------------
     * Floating HP functions
-    ---------------------- */
+    * -------------------------------------------------------------------------------------- */
 
     /** Calculate deltas in the pre-method in order to access the old value.
      * The delta is then passed onwards to the regular update method on the options object.
