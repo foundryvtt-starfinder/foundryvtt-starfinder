@@ -940,6 +940,20 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     }
 
     /** ------------------------------------------------------------------------------------
+    * Mech Actions
+    * -------------------------------------------------------------------------------------- */
+
+    async rollMechAbility() {}
+
+    async rollMechWeaponAttack() {}
+
+    async rollMechPPAbility() {}
+
+    async rollMechSave() {}
+
+    async rollMechSkillCheck() {}
+
+    /** ------------------------------------------------------------------------------------
     * Roll Contexts
     * -------------------------------------------------------------------------------------- */
 

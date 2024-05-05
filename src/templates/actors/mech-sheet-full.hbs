@@ -1,6 +1,8 @@
 <form class="{{cssClass}} flexcol" autocomplete="off">
-    {{!-- Sheet Header --}}
+
     {{log this}}
+
+    {{!-- Sheet Header --}}
     <header class="sheet-header flexrow">
         <div class="image-container">
             <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img" height="180" width="180" />
@@ -79,57 +81,45 @@
                     </footer>
                 </li>
 
-                <!--
-                <li class="attribute">
-                    <h4 class="attribute-name box-title">{{localize "SFRPG.StarshipSheet.Header.Statistics"}}</h4>
-                    <ol class="attribute-multibox">
-                        <li class="box-header flexrow">
-                            <label></label>
-                            <label>{{localize "SFRPG.StarshipSheet.Header.Value"}}</label>
-                            <label>{{localize "SFRPG.StarshipSheet.Header.Max"}}</label>
-                        </li>
-                        <li class="flexrow" data-tooltip="{{ localize "SFRPG.StarshipSheet.Attributes.Power" }}<br/>@attributes.power.value<br/>@attributes.power.max<br/><br/>{{ localize "SFRPG.StarshipSheet.Attributes.PowerConsumption" }}:<br/>{{#each system.attributes.power.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
-                            {{#if hasPower}}
-                            <label>{{localize "SFRPG.StarshipSheet.Header.PCU"}}</label>
-                            <label>{{system.attributes.power.value}}</label>
-                            <label>{{system.attributes.power.max}}</label>
-                            {{else}}
-                            <label class="error" style="flex: 3; font-size: 12px;">{{localize "SFRPG.StarshipSheet.Attributes.PowerMissing"}}</label>
-                            {{/if}}
-                        </li>
-                        <li class="flexrow" data-tooltip="{{ localize "SFRPG.StarshipSheet.Attributes.BuildPoints" }}<br/>@attributes.bp.value<br/>@attributes.bp.max<br/><br/>{{ localize "SFRPG.StarshipSheet.Attributes.BuildPointsUsage" }}:<br/>{{#each system.attributes.bp.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
-                            <label>{{localize "SFRPG.StarshipSheet.Header.BP"}}</label>
-                            <label>{{system.attributes.bp.value}}</label>
-                            <label>{{system.attributes.bp.max}}</label>
-                        </li>
-                    </ol>
-                </li>
-                <li class="attribute">
-                    <h4 class="attribute-name box-title" data-tooltip="{{localize "SFRPG.StarshipSheet.Header.Movement.Maneuverability"}}<br/>@attributes.maneuverability<br/><br/>{{localize "SFRPG.StarshipSheet.Header.Movement.ManeuverabilityTooltip" maneuverability="0"}}">{{localize "SFRPG.StarshipSheet.Header.Movement.Title"}}</h4>
-                    <ol class="attribute-multibox">
-                        {{#if hasThrusters}}
-                        <li class="box-header flexrow">
-                            <label></label>
-                            <label>{{localize "SFRPG.StarshipSheet.Header.Value"}}</label>
-                        </li>
-                        <li class="flexrow" data-tooltip="{{localize "SFRPG.StarshipSheet.Header.Movement.Speed"}}<br/>@attributes.speed.value<br/><br/>{{#each system.attributes.speed.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
-                            <label>{{localize "SFRPG.StarshipSheet.Header.Movement.Speed"}}</label>
-                            <label>{{system.attributes.speed.value}}</label>
-                        </li>
-                        <li class="flexrow" data-tooltip="{{localize "SFRPG.StarshipSheet.Header.Movement.Turn"}}<br/>@attributes.turn.value<br/><br/>{{#each system.attributes.turn.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
-                            <label>{{localize "SFRPG.StarshipSheet.Header.Movement.Turn"}}</label>
-                            <label>{{system.attributes.turn.value}}</label>
-                        </li>
-                        {{else}}
-                        <li class="flexrow">
-                            <label class="error">{{ localize "SFRPG.StarshipSheet.Header.Movement.ThrustersMissing" }}</label>
-                        </li>
-                        {{/if}}
-                    </ol>
-                </li>
-                -->
             </ul>
 
         </div>
     </header>
+
+    {{!-- Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="main">{{ localize "SFRPG.Main" }}</a>
+        <a class="item" data-tab="attributes">{{ localize "SFRPG.Attributes" }}</a>
+        <a class="item" data-tab="inventory">{{ localize "SFRPG.Inventory" }}</a>
+        <a class="item" data-tab="ppAbilities">{{ localize "SFRPG.MechSheet.PPAbility.PPAbilities" }}</a>
+        <a class="item" data-tab="modifiers">{{localize "SFRPG.Modifiers"}}</a>
+    </nav>
+
+    {{!-- PC Sheet Body --}}
+    <section class="sheet-body">
+        {{!-- Main Tab --}}
+        <div class="tab main" data-group="primary" data-tab="main">
+            <img class="silhouette" src="systems/sfrpg/images/backgrounds/noun-robot-37319.svg" title="Mech Silhouette" height="320"/>
+        </div>
+
+        {{!-- Attributes Tab --}}
+        <div class="tab attributes flexrow" data-group="primary" data-tab="attributes">
+            Attributes
+        </div>
+
+        {{!-- Inventory Tab --}}
+        <div class="tab inventory flexcol" data-group="primary" data-tab="inventory">
+            {{> "systems/sfrpg/templates/actors/parts/actor-inventory.hbs" sections=inventory}}
+        </div>
+
+        {{!-- PPAbilities Tab --}}
+        <div class="tab ppAbilities flexcol" data-group="primary" data-tab="ppAbilities">
+            Power Point Abilities
+        </div>
+
+        {{!-- Modifiers Tab --}}
+        <div class="tab modifers flexcol" data-group="primary" data-tab="modifiers">
+            {{> "systems/sfrpg/templates/actors/parts/actor-modifiers.hbs" sections=modifiers}}
+        </div>
+    </section>
 </form>
