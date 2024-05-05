@@ -1,0 +1,125 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{log this}}
+
+    {{!-- Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <div class="image-container">
+            <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img" height="180" width="180" />
+            <a class="hover-icon" data-action="show-image"><i class="fas fa-image fa-fw"></i></a>
+        </div>
+
+        <div class="header-details flexrow">
+            <div class="header-background flexrow">
+                <h1 class="charname" data-tooltip="{{localize "SFRPG.ShipNameLabel"}}">
+                    <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "SFRPG.ShipNameLabel"}}" />
+                </h1>
+
+                <div class="charlevel"  data-tooltip="{{localize "SFRPG.ShipTierLabel"}}<br />@details.tier" >
+                    <div class="level noxp">
+                        <label>{{localize "SFRPG.ShipTierLabel"}} </label>
+                        <input name="system.details.tier" type="text" value="{{labels.tier}}" placeholder="1" />
+                    </div>
+                </div>
+            </div>
+
+            <ul class="summary">
+                <li data-tooltip="{{localize "SFRPG.ShipModelLabel"}}<br />@details.model">
+                    <input type="text" name="system.details.model" value="{{system.details.model}}" placeholder="{{localize "SFRPG.ShipModelLabel"}}" />
+                </li>
+                <li data-tooltip="{{localize "SFRPG.ShipFrameLabel"}}<br />@details.frame">
+                    {{#if activeFrame}}<span>{{activeFrame.name}}</span>{{else}}<span class="no-frame">{{localize "SFRPG.StarshipSheet.Header.FrameMissing"}}</span>{{/if}}
+                </li>
+                <li data-tooltip="{{ localize "SFRPG.Size"}}<br />@traits.size">
+                    <span>{{localize "SFRPG.StarshipSheet.Header.Size" size=system.traits.size}}</span>
+                </li>
+            </ul>
+
+
+            <ul class="attributes flexrow">
+                {{!-- Hit Points --}}
+                <li class="attribute health" data-tooltip="Hit Points<br />@attributes.hp.value<br />@attributes.hp.max">
+                    <h4 class="attribute-name box-title">Hit Points</h4>
+                    <div class="attribute-value multiple">
+                        <input name="system.attributes.hp.value" type="text" value="{{system.attributes.hp.value}}"
+                            data-dtype="Number" placeholder="10" />
+                        <span class="sep"> / </span>
+                        <label>{{system.attributes.hp.max}}</label>
+                    </div>
+                </li>
+
+                {{!-- Shield Points --}}
+                <li class="attribute health" data-tooltip="Shield Points<br />@attributes.sp.value<br />@attributes.sp.max<br><br>{{#each system.attributes.sp.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                    <h4 class="attribute-name box-title">Shield Points</h4>
+                    <div class="attribute-value multiple">
+                        <input name="system.attributes.sp.value" type="text" value="{{system.attributes.sp.value}}"
+                            data-dtype="Number" placeholder="10" />
+                        <span class="sep"> / </span>
+                        <label>{{system.attributes.sp.max}}</label>
+                    </div>
+                </li>
+
+                {{!-- Energy Armor Class (EAC) --}}
+                <li class="attribute" data-tooltip="<strong>{{ localize "SFRPG.EnergyArmorClass" }}</strong><br>@attributes.eac.value<br><br>{{#each system.attributes.eac.tooltip as |tip|}}{{tip}}<br>{{/each}}">
+                    <h4 class="attribute-name box-title">{{ localize "SFRPG.EnergyArmorClass" }}</h4>
+                    <div class="attribute-value">
+                        <span>{{system.attributes.eac.value}}</span>
+                    </div>
+                    <footer class="attribute-footer">
+                        <a class="rest short-rest">{{localize "SFRPG.Rest.Short.Title"}}</a>
+                    </footer>
+                </li>
+
+                {{!-- Kinetic Armor Class (KAC) --}}
+                <li class="attribute" data-tooltip="<strong>{{ localize "SFRPG.KineticArmorClass" }}</strong><br>@attributes.kac.value<br><br>{{#each system.attributes.kac.tooltip as |tip|}}{{tip}}<br>{{/each}}">
+                    <h4 class="attribute-name box-title">{{ localize "SFRPG.KineticArmorClass" }}</h4>
+                    <div class="attribute-value">
+                        <span>{{system.attributes.kac.value}}</span>
+                    </div>
+                    <footer class="attribute-footer">
+                        <a class="rest long-rest">{{localize "SFRPG.Rest.Long.Title"}}</a>
+                    </footer>
+                </li>
+
+            </ul>
+
+        </div>
+    </header>
+
+    {{!-- Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="main">{{ localize "SFRPG.Main" }}</a>
+        <a class="item" data-tab="attributes">{{ localize "SFRPG.Attributes" }}</a>
+        <a class="item" data-tab="inventory">{{ localize "SFRPG.Inventory" }}</a>
+        <a class="item" data-tab="ppAbilities">{{ localize "SFRPG.MechSheet.PPAbility.PPAbilities" }}</a>
+        <a class="item" data-tab="modifiers">{{localize "SFRPG.Modifiers"}}</a>
+    </nav>
+
+    {{!-- PC Sheet Body --}}
+    <section class="sheet-body">
+        {{!-- Main Tab --}}
+        <div class="tab main" data-group="primary" data-tab="main">
+            <img class="silhouette" src="systems/sfrpg/images/backgrounds/noun-robot-37319.svg" title="Mech Silhouette" height="320"/>
+        </div>
+
+        {{!-- Attributes Tab --}}
+        <div class="tab attributes flexrow" data-group="primary" data-tab="attributes">
+            Attributes
+        </div>
+
+        {{!-- Inventory Tab --}}
+        <div class="tab inventory flexcol" data-group="primary" data-tab="inventory">
+            {{> "systems/sfrpg/templates/actors/parts/actor-inventory.hbs" sections=inventory}}
+        </div>
+
+        {{!-- PPAbilities Tab --}}
+        <div class="tab ppAbilities flexcol" data-group="primary" data-tab="ppAbilities">
+            Power Point Abilities
+        </div>
+
+        {{!-- Modifiers Tab --}}
+        <div class="tab modifers flexcol" data-group="primary" data-tab="modifiers">
+            {{> "systems/sfrpg/templates/actors/parts/actor-modifiers.hbs" sections=modifiers}}
+        </div>
+    </section>
+</form>
