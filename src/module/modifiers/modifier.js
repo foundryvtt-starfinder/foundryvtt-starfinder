@@ -137,7 +137,7 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
             subtab: new fields.StringField({
                 initial: "misc",
                 required: false,
-                choices: ["permanent", "temporary", "misc"]
+                choices: ["permanent", "temporary", "misc", "condition"]
             }),
             condition: new fields.StringField({ initial: "", required: false }),
             container: new fields.SchemaField(
