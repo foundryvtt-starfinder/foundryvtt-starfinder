@@ -628,7 +628,8 @@ export class CombatSFRPG extends Combat {
         difficultyContainer.classList.add("combat-difficulty-container");
 
         const difficultyHTML = document.createElement("a");
-        difficultyHTML.classList.add("combat-difficulty", difficulty);
+        difficultyHTML.classList.add("combat-difficulty");
+        if (difficulty) difficultyHTML.classList.add(difficulty);
         if (combatType === 'normal') {
             difficultyHTML.title = `${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.ClickForDetails")}\n\n${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.PCs")}: ${diffObject.difficultyData.PCs.length} [${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.APL")} ${diffObject.difficultyData.APL}]\n${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.HostileNPCs")}: ${diffObject.difficultyData.enemies.length} [${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.CR")} ${diffObject.difficultyData.CR}]`;
         } else if (combatType === 'starship') {

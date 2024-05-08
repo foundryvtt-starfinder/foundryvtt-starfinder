@@ -27,7 +27,7 @@
             <select name="level" {{#unless hasSlots}}disabled{{/unless}}>
                 {{#select item.system.level}}
                 {{#each spellLevels as |spellSlot|}}
-                <option value="{{add @key 1}}">{{spellSlot.label}}</option>
+                <option value="{{spellSlot.level}}">{{spellSlot.label}}</option>
                 {{/each}}
                 {{/select}}
             </select>
