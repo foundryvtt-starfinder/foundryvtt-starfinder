@@ -163,7 +163,7 @@ export class DiceSFRPG {
     * @param {DialogOptions}        data.dialogOptions Modal dialog options
     */
     static async d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true, rollOptions = {},
-        critical = 20, fumble = 1, chatMessage = true, onClose, dialogOptions }) {
+        critical = 20, fumble = 1, chatMessage = true, onClose, dialogOptions, actorContextKey = "actor" }) {
 
         flavor = `${title}${(flavor ? " <br> " + flavor : "")}`;
 
@@ -227,7 +227,7 @@ export class DiceSFRPG {
                 dieRoll = "2d20kh";
             }
 
-            const finalFormula = await this._calcStackingFormula(node, rollMods, bonus, rollContext.allContexts["actor"]?.entity);
+            const finalFormula = await this._calcStackingFormula(node, rollMods, bonus, rollContext.allContexts[actorContextKey]?.entity);
 
             finalFormula.finalRoll = `${dieRoll} + ${finalFormula.finalRoll}`;
             finalFormula.formula = `${dieRoll} + ${finalFormula.formula}`;
@@ -345,7 +345,7 @@ export class DiceSFRPG {
     * @param {DialogOptions}      data.dialogOptions Modal dialog options
     * @returns {Promise<RollResult>|Promise} Returns the roll's result or an empty promise.
     */
-    static async createRoll({ event = new Event(''), rollFormula = null, parts, rollContext, title, mainDie = "d20", advantage = true, critical = 20, fumble = 1, breakdown = "", tags = [], dialogOptions, useRawStrings = false }) {
+    static async createRoll({ event = new Event(''), rollFormula = null, parts, rollContext, title, mainDie = "d20", advantage = true, critical = 20, fumble = 1, breakdown = "", tags = [], dialogOptions, useRawStrings = false, actorContextKey = "actor" }) {
 
         if (!rollContext?.isValid()) {
             console.log(['Invalid rollContext', rollContext]);
@@ -380,7 +380,7 @@ export class DiceSFRPG {
             /** @type {RollResult|null} */
             let result = null;
             await tree.buildRoll(formula, rollContext, async (button, rollMode, unusedFinalFormula, node, rollMods, bonus = null) => {
-                const finalFormula = await this._calcStackingFormula(node, rollMods, bonus, rollContext.allContexts["actor"]?.entity);
+                const finalFormula = await this._calcStackingFormula(node, rollMods, bonus, rollContext.allContexts[actorContextKey]?.entity);
 
                 if (mainDie) {
                     let dieRoll = "1" + mainDie;
@@ -419,7 +419,7 @@ export class DiceSFRPG {
                         return;
                     }
 
-                    const finalFormula = await this._calcStackingFormula(node, rollMods, bonus, rollContext.allContexts["actor"]?.entity);
+                    const finalFormula = await this._calcStackingFormula(node, rollMods, bonus, rollContext.allContexts[actorContextKey]?.entity);
 
                     if (mainDie) {
                         let dieRoll = "1" + mainDie;
@@ -1022,7 +1022,7 @@ export class DiceSFRPG {
 
         const stackModifiers = new StackModifiers();
         const stackedMods = await stackModifiers.processAsync(rollMods.filter(mod => {
-            if (mod.enabled) {
+            if (mod.enabled && mod.type) {
                 rootNode = this._removeModifierNodes(rootNode, mod);
                 return true;
             }
