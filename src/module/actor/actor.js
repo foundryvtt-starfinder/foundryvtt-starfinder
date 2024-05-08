@@ -325,9 +325,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         if (configureDialog) {
             try {
                 const dialogResponse = await SpellCastDialog.create(this, item);
-                const slotIndex = parseInt(dialogResponse.formData.get("level"));
+                const slotLevel = parseInt(dialogResponse.formData.get("level"));
                 consumeSpellSlot = Boolean(dialogResponse.formData.get("consume"));
-                selectedSlot = dialogResponse.spellLevels[slotIndex];
+                selectedSlot = dialogResponse.spellLevels.find(x => parseInt(x.level) === slotLevel);
                 spellLevel = parseInt(selectedSlot?.level || item.system.level);
 
                 if (spellLevel !== item.system.level && item.system.level > spellLevel) {
@@ -565,7 +565,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
         const rollContext = RollContext.createActorRollContext(this);
 
-        parts.push(`@abilities.${abilityId}.mod`);
+        parts.push(`@abilities.${abilityId}.abilityCheckBonus`);
 
         return await DiceSFRPG.d20Roll({
             event: options.event,
@@ -786,11 +786,13 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
         /** Create additional modifiers. */
         const additionalModifiers = [
-            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.ComputerBonus"), modifier: "@ship.attributes.computer.value", enabled: false} },
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.ComputerBonus"), modifier: `${this.system?.attributes?.computer?.value ?? 0}`, enabled: false} },
             {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.CaptainDemand"), modifier: "4", enabled: false} },
-            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.CaptainEncouragement"), modifier: "2", enabled: false} },
-            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.ScienceOfficerLockOn"), modifier: "2", enabled: false} }
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.CaptainEncouragement"), modifier: "2", enabled: false} }
         ];
+        if (actionEntry.system.role === "gunner") {
+            additionalModifiers.push({bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.ScienceOfficerLockOn"), modifier: "2", enabled: false} });
+        }
         rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
 
         let systemBonus = "";
@@ -798,8 +800,12 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         if (actionEntry.name !== "Patch" && actionEntry.name !== "Hold It Together") {
             // Gunners must select a quadrant.
             if (actionEntry.system.role === "gunner") {
-                systemBonus = ` + @ship.attributes.systems.weaponsArray${quadrant}.mod`;
-                systemBonus += ` + @ship.attributes.systems.powerCore.modOther`;
+                if (this.system?.attributes?.systems[`weaponsArray${quadrant}`]?.mod < 0) {
+                    systemBonus = ` + @ship.attributes.systems.weaponsArray${quadrant}.mod`;
+                }
+                if (this.system?.attributes?.systems?.powerCore?.modOther < 0) {
+                    systemBonus += ` + @ship.attributes.systems.powerCore.modOther`;
+                }
             } else {
                 for (const [key, value] of Object.entries(this.system.attributes.systems)) {
                     if (value.affectedRoles && value.affectedRoles[actionEntry.system.role]) {
@@ -816,7 +822,8 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         const rollResult = await DiceSFRPG.createRoll({
             rollContext: rollContext,
             rollFormula: selectedFormula.formula + systemBonus + " + @additional.modifiers.bonus",
-            title: game.i18n.format("SFRPG.Rolls.StarshipAction", {action: actionEntry.name})
+            title: game.i18n.format("SFRPG.Rolls.StarshipAction", {action: actionEntry.name}),
+            actorContextKey: actionEntry.system.role
         });
 
         if (!rollResult) {
@@ -861,7 +868,8 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                     rollFormula: dc.value,
                     mainDie: 'd0',
                     title: game.i18n.format("SFRPG.Rolls.StarshipAction", {action: actionEntry.name}),
-                    dialogOptions: { skipUI: true }
+                    dialogOptions: { skipUI: true },
+                    actorContextKey: actionEntry.system.role
                 });
 
                 flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${dcRoll.roll.total}</p>`;
