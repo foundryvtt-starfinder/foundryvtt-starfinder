@@ -2,7 +2,7 @@
     "id": "sfrpg",
     "title": "Starfinder",
     "description": "A game system for running Starfinder in the Foundry VTT environment.",
-    "version": "0.25.3",
+    "version": "0.25.4",
     "manifestPlusVersion": "1.2.0",
     "authors": [
         {
@@ -249,14 +249,17 @@
     ],
     "socket": true,
     "initiative": "1d20 + @attributes.init.value",
-    "gridDistance": 5,
-    "gridUnits": "ft",
+    "grid": {
+      "distance": 5,
+      "units": "ft",
+      "diagonals": 4
+    },
     "primaryTokenAttribute": "attributes.hp",
     "secondaryTokenAttribute": "attributes.sp",
     "compatibility": {
-        "minimum": 11,
-        "verified": "11.315",
-        "maximum": 11
+        "minimum": 12,
+        "verified": "12.321",
+        "maximum": 12
     },
     "url": "https://github.com/foundryvtt-starfinder/foundryvtt-starfinder",
     "manifest": "https://raw.githubusercontent.com/foundryvtt-starfinder/foundryvtt-starfinder/master/src/system.json",

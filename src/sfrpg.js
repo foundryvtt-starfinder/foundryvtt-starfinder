@@ -29,7 +29,7 @@ import { NpcSkillToggleDialog } from './module/apps/npc-skill-toggle-dialog.js';
 import { ShortRestDialog } from './module/apps/short-rest.js';
 import { SpellCastDialog } from './module/apps/spell-cast-dialog.js';
 import { TraitSelectorSFRPG } from './module/apps/trait-selector.js';
-import { canvasHandler, measureDistances } from "./module/canvas/canvas.js";
+import { canvasHandler } from "./module/canvas/canvas.js";
 import { MeasuredTemplateSFRPG, TemplateLayerSFRPG } from "./module/canvas/template-overrides.js";
 import { addChatMessageContextOptions } from "./module/chat/chat-message-options.js";
 import CounterManagement from "./module/classes/counter-management.js";
@@ -591,17 +591,13 @@ async function migrateOldContainers() {
     }
 }
 
-Hooks.on("canvasInit", function() {
-    canvas.grid.diagonalRule = game.settings.get("sfrpg", "diagonalMovement");
-    SquareGrid.prototype.measureDistances = measureDistances;
-});
-
 Hooks.on("renderChatMessage", (app, html, data) => {
     DiceSFRPG.highlightCriticalSuccessFailure(app, html, data);
     DiceSFRPG.addDamageTypes(app, html, data);
 
     if (game.settings.get("sfrpg", "autoCollapseItemCards")) html.find('.card-content').hide();
 });
+
 Hooks.on("getChatLogEntryContext", addChatMessageContextOptions);
 
 function setupHandlebars() {

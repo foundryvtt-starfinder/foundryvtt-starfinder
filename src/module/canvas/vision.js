@@ -6,8 +6,6 @@ export default function setupVision() {
 }
 
 function setupVisionModes() {
-    // Set global illumination luminosity to dim light, so LLV will see it as bright
-    CONFIG.Canvas.globalLightConfig.luminosity = 0.5;
 
     // Override core darkvision
     CONFIG.Canvas.visionModes.darkvision = new VisionMode({
