@@ -243,7 +243,7 @@ export class DiceSFRPG {
 
             const rollObject = Roll.create(finalFormula.finalRoll, { breakdown: preparedRollExplanation, tags: tags });
             rollObject.options.rollOptions = rollOptions;
-            const roll = await rollObject.evaluate({async: true});
+            const roll = await rollObject.evaluate();
 
             // Flag critical thresholds
             for (const d of roll.dice) {
@@ -397,7 +397,7 @@ export class DiceSFRPG {
                 }
 
                 const rollObject = Roll.create(finalFormula.finalRoll, { breakdown, tags, skipUI: true });
-                const roll = await rollObject.evaluate({async: true});
+                const roll = await rollObject.evaluate();
                 roll.options.rollMode = rollMode;
 
                 // Flag critical thresholds
@@ -439,7 +439,7 @@ export class DiceSFRPG {
                     finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
 
                     const rollObject = Roll.create(finalFormula.finalRoll, { breakdown, tags });
-                    const roll = await rollObject.evaluate({async: true});
+                    const roll = await rollObject.evaluate();
                     roll.options.rollMode = rollMode;
 
                     // Flag critical thresholds
@@ -725,7 +725,7 @@ export class DiceSFRPG {
             const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
 
             const rollObject = Roll.create(finalFormula.finalRoll, { tags: tags, breakdown: preparedRollExplanation });
-            const roll = await rollObject.evaluate({async: true});
+            const roll = await rollObject.evaluate();
 
             // CRB pg. 240, < 1 damage returns 1 non-lethal damage.
             if (roll._total < 1) {
@@ -1125,7 +1125,7 @@ export class DiceSFRPG {
         if ( /[*/]/.test(roll.formula) ) {
             return ( roll.isDeterministic ) && ( !/\[/.test(roll.formula) || !preserveFlavor )
                 // TODO: Sync rolls may or may not be going away? Idfk man
-                ? roll.evaluate({ async: false }).total.toString()
+                ? roll.evaluateSync().total.toString()
                 : roll.constructor.getFormula(roll.terms);
         }
 

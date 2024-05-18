@@ -81,7 +81,8 @@ export class MeasuredTemplateSFRPG extends MeasuredTemplate {
             templateAngle = this.document.angle;
 
         // Parse rays as per Bresenham's algorithm
-        if (templateType === "ray") {
+        // FIXME: causes strange highlight behaviour on V12 for some reason? Deferring to core ray highlighting for now
+        /* if (templateType === "ray") {
             const result = [];
 
             const line = (x0, y0, x1, y1) => {
@@ -117,7 +118,7 @@ export class MeasuredTemplateSFRPG extends MeasuredTemplate {
             line(ray.A.x, ray.A.y, ray.B.x, ray.B.y);
 
             return result;
-        }
+        } */
 
         // Get number of rows and columns
         const nr = Math.ceil((this.document.distance * 1.5) / gridSizeUnits / (gridSizePx / grid.h)),
@@ -164,16 +165,16 @@ export class MeasuredTemplateSFRPG extends MeasuredTemplate {
 
                 // Determine point we're measuring the distance to - always in the center of a grid square
                 const destination = { x: cellCenterX, y: cellCenterY };
+                const ray = new Ray(origin, destination);
 
                 if (templateType === "cone") {
-                    const ray = new Ray(origin, destination);
                     const rayAngle = Math.normalizeDegrees(ray.angle / (Math.PI / 180));
                     if (ray.distance > 0 && !withinAngle(minAngle, maxAngle, rayAngle)) {
                         continue;
                     }
                 }
 
-                const distance = measureDistanceOnGrid(new Ray(destination, origin));
+                const distance = measureDistanceOnGrid(ray);
                 if (distance <= this.document.distance) {
                     result.push({ x: gx, y: gy });
                 }

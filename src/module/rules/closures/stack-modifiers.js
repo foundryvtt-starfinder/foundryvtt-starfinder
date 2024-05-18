@@ -67,7 +67,7 @@ export default class StackModifiers extends Closure {
                     const roll = Roll.create(formula, actor?.system);
                     let evaluatedRoll = {};
                     try {
-                        evaluatedRoll = await roll.evaluate({async: true});
+                        evaluatedRoll = await roll.evaluate();
                     } catch {
                         evaluatedRoll = {
                             total: 0,

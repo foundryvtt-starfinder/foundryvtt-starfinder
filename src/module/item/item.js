@@ -1667,7 +1667,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Roll the check
         const rollObject = Roll.create("1d6");
-        const roll = await rollObject.evaluate({async: true});
+        const roll = await rollObject.evaluate();
         const success = roll.total >= parseInt(data.recharge.value);
 
         // Display a Chat Message
