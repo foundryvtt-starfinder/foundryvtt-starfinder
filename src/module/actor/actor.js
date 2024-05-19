@@ -221,17 +221,17 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         const changedRP = changed.system?.attributes?.rp?.value;
 
         if (changedHP) {
-            const clampedHP = Math.clamped(changedHP, 0, this.system.attributes.hp.max);
+            const clampedHP = Math.clamp(changedHP, 0, this.system.attributes.hp.max);
             changed.system.attributes.hp.value = clampedHP;
         }
 
         if (changedSP) {
-            const clampedSP = Math.clamped(changedSP, 0, this.system.attributes.sp.max);
+            const clampedSP = Math.clamp(changedSP, 0, this.system.attributes.sp.max);
             changed.system.attributes.sp.value = clampedSP;
         }
 
         if (changedRP) {
-            const clampedRP = Math.clamped(changedRP, 0, this.system.attributes.rp.max);
+            const clampedRP = Math.clamp(changedRP, 0, this.system.attributes.rp.max);
             changed.system.attributes.rp.value = clampedRP;
         }
 
@@ -1145,7 +1145,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             for (const [key, value] of Object.entries(hpDiffs)) {
                 if (value === 0) continue; // Skip deltas of 0
                 const cfg = SFRPG.floatingHPValues[key];
-                const percentMax = Math.clamped(Math.abs(value) / getProperty(t.actor.system, getMaxPath(key)), 0, 1);
+                const percentMax = Math.clamp(Math.abs(value) / getProperty(t.actor.system, getMaxPath(key)), 0, 1);
                 const sign = (value < 0) ? 'negative' : 'positive';
                 const floaterData = {
                     anchor: CONST.TEXT_ANCHOR_POINTS.CENTER,

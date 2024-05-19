@@ -37,13 +37,12 @@ export default class FloatingNumberMenu extends FormApplication {
     }
 
     async _updateObject(event, formData) {
-        await Promise.all([
-            game.settings.set("sfrpg", "floatingHP", formData["floating-toggle"]),
-            game.settings.set("sfrpg", "verboseFloatyText", formData["verbose-floaty-text"]),
-            game.settings.set("sfrpg", "limitByCriteria", formData["limit-by-criteria"]),
-            game.settings.set("sfrpg", "minPerm", formData["min-perm"]),
-            game.settings.set("sfrpg", "canSeeName", formData["can-see-name"]),
-            game.settings.set("sfrpg", "canSeeBars", formData["can-see-bars"])
-        ]);
+        game.settings.set("sfrpg", "floatingHP", formData["floating-toggle"]),
+        game.settings.set("sfrpg", "verboseFloatyText", formData["verbose-floaty-text"]),
+        game.settings.set("sfrpg", "limitByCriteria", formData["limit-by-criteria"]),
+        game.settings.set("sfrpg", "minPerm", formData["min-perm"]),
+        game.settings.set("sfrpg", "canSeeName", formData["can-see-name"]),
+        game.settings.set("sfrpg", "canSeeBars", formData["can-see-bars"]);
+
     }
 }

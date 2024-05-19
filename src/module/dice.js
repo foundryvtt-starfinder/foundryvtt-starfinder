@@ -1259,7 +1259,7 @@ export class DiceSFRPG {
     static #groupTermsByType(terms) {
         const t = foundry.dice.terms;
         // Add an initial operator so that terms can be rearranged arbitrarily.
-        if ( !(terms[0] instanceof t.OperatorTerm) ) terms.unshift(new OperatorTerm({ operator: "+" }));
+        if ( !(terms[0] instanceof t.OperatorTerm) ) terms.unshift(new t.OperatorTerm({ operator: "+" }));
 
         return terms.reduce((obj, term, i) => {
             let type;

@@ -116,7 +116,7 @@ export class CombatSFRPG extends Combat {
         }[this.getCombatType()] || "desc";
 
         const turns = this.combatants.contents.sort(sortMethod === "asc" ? this._sortCombatantsAsc : this._sortCombatants);
-        this.turn = Math.clamped(this.turn, CombatSFRPG.HiddenTurn, turns.length - 1);
+        this.turn = Math.clamp(this.turn, CombatSFRPG.HiddenTurn, turns.length - 1);
 
         // Update state tracking
         const c = turns[this.turn];

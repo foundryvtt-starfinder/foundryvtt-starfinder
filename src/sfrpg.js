@@ -487,6 +487,9 @@ Hooks.once("setup", function() {
     console.log("Starfinder | [SETUP] Initializing remote inventory system");
     initializeRemoteInventory();
 
+    console.log("Starfinder | [SETUP] Caching starship actions");
+    ActorSheetSFRPGStarship.ensureStarshipActions();
+
     console.log("Starfinder | [SETUP] Registering custom handlebars");
     setupHandlebars();
 
@@ -500,9 +503,6 @@ Hooks.once("ready", async () => {
 
     console.log("Starfinder | [READY] Overriding token HUD");
     canvas.hud.token = new SFRPGTokenHUD();
-
-    console.log("Starfinder | [READY] Caching starship actions");
-    ActorSheetSFRPGStarship.ensureStarshipActions();
 
     console.log("Starfinder | [READY] Initializing compendium browsers");
     initializeBrowsers();

@@ -1016,34 +1016,29 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
         const starshipPackKey = game.settings.get("sfrpg", "starshipActionsSource");
         const starshipActions = game.packs.get(starshipPackKey);
-        return starshipActions.getIndex().then(async (indices) => {
-            for (const index of indices) {
-                const entry = await starshipActions.getDocument(index._id);
-                const role = entry.system.role;
+        const docs = await starshipActions.getDocuments();
+        for (const entry of docs) {
+            const role = entry.system.role;
 
-                if (!tempCache[role]) {
-                    tempCache[role] = {label: CONFIG.SFRPG.starshipRoleNames[role], actions: []};
-                }
+            if (!tempCache[role]) tempCache[role] = {label: CONFIG.SFRPG.starshipRoleNames[role], actions: []};
 
-                tempCache[role].actions.push(entry);
-            }
+            tempCache[role].actions.push(entry);
+        }
 
-            /** Sort them by order. */
-            for (const [roleKey, roleData] of Object.entries(tempCache)) {
-                roleData.actions.sort(function(a, b) {return a.order - b.order;});
-            }
+        /** Sort them by order. */
+        for (const roleData of Object.values(tempCache)) {
+            roleData.actions.sort((a, b) => a.order - b.order);
+        }
 
-            const desiredOrder = ["captain", "pilot", "gunner", "engineer", "scienceOfficer", "chiefMate", "magicOfficer", "openCrew", "minorCrew"];
-            /** Automatically append any missing elements to the list at the end, in case new roles are added in the future. */
-            for (const key of Object.keys(tempCache)) {
-                if (!desiredOrder.includes(key)) {
-                    desiredOrder.push(key);
-                }
-            }
+        const desiredOrder = ["captain", "pilot", "gunner", "engineer", "scienceOfficer", "chiefMate", "magicOfficer", "openCrew", "minorCrew"];
+        /** Automatically append any missing elements to the list at the end, in case new roles are added in the future. */
+        for (const key of Object.keys(tempCache)) {
+            if (!desiredOrder.includes(key)) desiredOrder.push(key);
+        }
 
-            for (const key of desiredOrder) {
-                ActorSheetSFRPGStarship.StarshipActionsCache[key] = tempCache[key];
-            }
-        });
+        for (const key of desiredOrder) {
+            ActorSheetSFRPGStarship.StarshipActionsCache[key] = tempCache[key];
+        }
     }
+
 }
