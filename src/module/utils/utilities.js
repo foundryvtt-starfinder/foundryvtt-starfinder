@@ -3,16 +3,3 @@ export function generateUUID() {
         c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
     );
 }
-
-/**
- * Determine if an array of terms contains a DiceTerm.
- *
- * @param {RollTerm[]} terms The terms to check
- */
-export function hasDiceTerms(terms) {
-    for (const term of terms) {
-        if (term instanceof DiceTerm) return true;
-    }
-
-    return false;
-}

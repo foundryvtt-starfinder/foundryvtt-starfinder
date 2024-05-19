@@ -49,9 +49,10 @@ export default class SFRPGRoll extends Roll {
      * @type {string}
      */
     get simplifiedFormula() {
+        const terms = foundry.dice.terms;
         if (this._evaluated) return this.formula;
         const newterms = this.terms.map(t => {
-            if (t instanceof OperatorTerm || t instanceof StringTerm) return t;
+            if (t instanceof terms.OperatorTerm || t instanceof terms.StringTerm) return t;
             if (t.isDeterministic) {
                 let total = 0;
                 try {
@@ -59,7 +60,7 @@ export default class SFRPGRoll extends Roll {
                 } catch {
                     total = Roll.safeEval(t.expression);
                 }
-                return new NumericTerm({number: total});
+                return new terms.NumericTerm({number: total});
             }
             return t;
         });
@@ -70,12 +71,6 @@ export default class SFRPGRoll extends Roll {
     static CHAT_TEMPLATE = "systems/sfrpg/templates/dice/roll.hbs";
     /** @inheritdoc */
     static TOOLTIP_TEMPLATE = "systems/sfrpg/templates/dice/tooltip.hbs";
-
-    static MATH_PROXY = new Proxy(Math, {
-        has: () => true, // Include everything
-        get: (t, k) => k === Symbol.unscopables ? undefined : t[k]
-        // set: () => console.error("You may not set properties of the Roll.MATH_PROXY environment") // No-op
-    });
 
     static registerMathFunctions() {
         function lookup(value) {
@@ -98,17 +93,21 @@ export default class SFRPGRoll extends Roll {
             return baseValue;
         }
 
-        this.MATH_PROXY = mergeObject(this.MATH_PROXY, {
+        const binaryOperations = {
             eq: (a, b) => a === b,
             gt: (a, b) => a > b,
             gte: (a, b) => a >= b,
             lt: (a, b) => a < b,
             lte: (a, b) => a <= b,
             ne: (a, b) => a !== b,
-            ternary: (condition, ifTrue, ifFalse) => (condition ? ifTrue : ifFalse),
+            ternary: (condition, ifTrue, ifFalse) => (condition ? ifTrue : ifFalse)
+        };
+
+        CONFIG.Dice.functions.push(
+            ...binaryOperations,
             lookup,
             lookupRange
-        });
+        );
     }
 
     /** @override */

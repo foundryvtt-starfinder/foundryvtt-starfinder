@@ -1152,6 +1152,7 @@ export class DiceSFRPG {
     * @returns {RollTerm[]}      A new array of roll terms with redundant operators removed.
     */
     static #simplifyOperatorTerms(terms) {
+        const t = foundry.dice.terms;
         return terms.reduce((acc, term) => {
             const prior = acc[acc.length - 1];
             const ops = new Set([prior?.operator, term.operator]);
@@ -1160,10 +1161,10 @@ export class DiceSFRPG {
             if ( ops.has(undefined) ) acc.push(term);
 
             // Replace consecutive "+ -" operators with a "-" operator.
-            else if ( (ops.has("+")) && (ops.has("-")) ) acc.splice(-1, 1, new OperatorTerm({ operator: "-" }));
+            else if ( (ops.has("+")) && (ops.has("-")) ) acc.splice(-1, 1, new t.OperatorTerm({ operator: "-" }));
 
             // Replace double "-" operators with a "+" operator.
-            else if ( (ops.has("-")) && (ops.size === 1) ) acc.splice(-1, 1, new OperatorTerm({ operator: "+" }));
+            else if ( (ops.has("-")) && (ops.size === 1) ) acc.splice(-1, 1, new t.OperatorTerm({ operator: "+" }));
 
             // Don't include "+" operators that directly follow "+", "*", or "/". Otherwise, add the term as is.
             else if ( !ops.has("+") ) acc.push(term);
@@ -1180,6 +1181,7 @@ export class DiceSFRPG {
     * @returns {object[]}      A new array of terms with unannotated numeric terms combined into one.
     */
     static #simplifyNumericTerms(terms) {
+        const t = foundry.dice.terms;
         const simplified = [];
         const { annotated, unannotated } = DiceSFRPG.#separateAnnotatedTerms(terms);
 
@@ -1189,8 +1191,8 @@ export class DiceSFRPG {
             if ( staticBonus === 0 ) return [...annotated];
 
             // If the staticBonus is greater than 0, add a "+" operator so the formula remains valid.
-            if ( staticBonus > 0 ) simplified.push(new OperatorTerm({ operator: "+"}));
-            simplified.push(new NumericTerm({ number: staticBonus }));
+            if ( staticBonus > 0 ) simplified.push(new t.OperatorTerm({ operator: "+"}));
+            simplified.push(new t.NumericTerm({ number: staticBonus }));
 
         }
         return [...simplified, ...annotated];
@@ -1204,11 +1206,12 @@ export class DiceSFRPG {
     * @returns {object[]}      A new array of simplified dice terms.
     */
     static #simplifyDiceTerms(terms) {
+        const t = foundry.dice.terms;
         const { annotated, unannotated } = DiceSFRPG.#separateAnnotatedTerms(terms);
 
         // Split the unannotated terms into different die sizes and signs
         const diceQuantities = unannotated.reduce((obj, term, i) => {
-            if ( term instanceof OperatorTerm ) return obj;
+            if ( term instanceof t.OperatorTerm ) return obj;
             const key = `${unannotated[i - 1].operator}${term.faces}`;
             obj[key] = (obj[key] ?? 0) + term.number;
             return obj;
@@ -1216,8 +1219,8 @@ export class DiceSFRPG {
 
         // Add new die and operator terms to simplified for each die size and sign
         const simplified = Object.entries(diceQuantities).flatMap(([key, number]) => ([
-            new OperatorTerm({ operator: key.charAt(0) }),
-            new Die({ number, faces: parseInt(key.slice(1)) })
+            new t.OperatorTerm({ operator: key.charAt(0) }),
+            new t.Die({ number, faces: parseInt(key.slice(1)) })
         ]));
         return [...simplified, ...annotated];
     }
@@ -1230,9 +1233,10 @@ export class DiceSFRPG {
     * @returns {object[]}      A new array of terms with no parenthetical terms.
     */
     static #expandParentheticalTerms(terms) {
+        const t = foundry.dice.terms;
         terms = terms.reduce((acc, term) => {
-            if ( term instanceof ParentheticalTerm ) {
-                if ( term.isDeterministic ) term = new NumericTerm({ number: Roll.safeEval(term.term) });
+            if ( term instanceof t.ParentheticalTerm ) {
+                if ( term.isDeterministic ) term = new t.NumericTerm({ number: Roll.safeEval(term.term) });
                 else {
                     const subterms = new Roll(term.term).terms;
                     term = DiceSFRPG.#expandParentheticalTerms(subterms);
@@ -1253,13 +1257,14 @@ export class DiceSFRPG {
     * @returns {object}          An object mapping term types to arrays containing roll terms of that type.
     */
     static #groupTermsByType(terms) {
+        const t = foundry.dice.terms;
         // Add an initial operator so that terms can be rearranged arbitrarily.
-        if ( !(terms[0] instanceof OperatorTerm) ) terms.unshift(new OperatorTerm({ operator: "+" }));
+        if ( !(terms[0] instanceof t.OperatorTerm) ) terms.unshift(new OperatorTerm({ operator: "+" }));
 
         return terms.reduce((obj, term, i) => {
             let type;
-            if ( term instanceof DiceTerm ) type = DiceTerm;
-            else if ( (term instanceof MathTerm) && (term.isDeterministic) ) type = NumericTerm;
+            if ( term instanceof t.DiceTerm ) type = DiceTerm;
+            else if ( (term instanceof t.MathTerm) && (term.isDeterministic) ) type = NumericTerm;
             else type = term.constructor;
             const key = `${type.name.charAt(0).toLowerCase()}${type.name.substring(1)}s`;
 
@@ -1277,8 +1282,9 @@ export class DiceSFRPG {
     * @returns {Array | Array[]}  A pair of term arrays, one containing annotated terms.
     */
     static #separateAnnotatedTerms(terms) {
+        const t = foundry.dice.terms;
         return terms.reduce((obj, curr, i) => {
-            if ( curr instanceof OperatorTerm ) return obj;
+            if ( curr instanceof t.OperatorTerm ) return obj;
             obj[curr.flavor ? "annotated" : "unannotated"].push(terms[i - 1], curr);
             return obj;
         }, { annotated: [], unannotated: [] });
