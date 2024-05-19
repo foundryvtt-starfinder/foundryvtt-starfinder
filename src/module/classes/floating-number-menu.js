@@ -4,7 +4,7 @@ export default class FloatingNumberMenu extends FormApplication {
     }
 
     getData() {
-        let data = super.getData();
+        const data = super.getData();
         data.perms = {
             "LIMITED": "OWNERSHIP.LIMITED",
             "OBSERVER": "OWNERSHIP.OBSERVER",
@@ -22,7 +22,7 @@ export default class FloatingNumberMenu extends FormApplication {
     }
 
     static get defaultOptions() {
-        return mergeObject(super.defaultOptions, {
+        return foundry.utils.mergeObject(super.defaultOptions, {
             classes: ['form'],
             popOut: true,
             template: `systems/sfrpg/templates/apps/floatinghp.hbs`,

@@ -40,7 +40,7 @@ export class ActorSheetSFRPG extends ActorSheet {
     }
 
     static get defaultOptions() {
-        return mergeObject(super.defaultOptions, {
+        return foundry.utils.mergeObject(super.defaultOptions, {
             scrollY: [
                 ".tab.attributes",
                 ".inventory .inventory-list",
@@ -63,7 +63,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         const isOwner = this.document.isOwner;
         const data = {
             actor: this.actor,
-            system: deepClone(this.actor.system),
+            system: foundry.utils.deepClone(this.actor.system),
             isOwner: isOwner,
             isGM: game.user.isGM,
             limited: this.document.limited,
@@ -85,7 +85,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         data.filters = this._filters;
 
         if (!data.system?.details?.biography?.fullBodyImage) {
-            this.actor.system = mergeObject(this.actor.system, {
+            this.actor.system = foundry.utils.mergeObject(this.actor.system, {
                 details: {
                     biography: {
                         fullBodyImage: "systems/sfrpg/images/mystery-body.webp"
@@ -538,7 +538,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         const target = $(event.currentTarget);
         const modifierId = target.closest('.item.modifier').data('modifierId');
 
-        const modifiers = duplicate(this.actor.system.modifiers);
+        const modifiers = foundry.utils.deepClone(this.actor.system.modifiers);
         const modifier = modifiers.find(mod => mod._id === modifierId);
 
         const formula = modifier.modifier;
@@ -622,7 +622,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         const header = event.currentTarget;
         const type = header.dataset.type;
         if (!type || type.includes(",")) {
-            const types = duplicate(SFRPG.itemTypes);
+            const types = foundry.utils.deepClone(SFRPG.itemTypes);
             if (type) {
                 const supportedTypes = type.split(',');
                 for (const key of Object.keys(types)) {
@@ -650,7 +650,7 @@ export class ActorSheetSFRPG extends ActorSheet {
                         callback: html => {
                             const form = html[0].querySelector("form");
                             const formDataExtended = new FormDataExtended(form);
-                            mergeObject(createData, formDataExtended.toObject());
+                            foundry.utils.mergeObject(createData, formDataExtended.toObject());
                             if (!createData.name) {
                                 createData.name = game.i18n.format("SFRPG.NPCSheet.Interface.CreateItem.Name");
                             }
@@ -669,7 +669,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         const itemData = {
             name: `New ${type.capitalize()}`,
             type: type,
-            system: duplicate(header.dataset)
+            system: foundry.utils.deepClone(header.dataset)
         };
         delete itemData.system['type'];
 
@@ -1060,7 +1060,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         const update = { "quantity": bigStack };
         await actorHelper.updateItem(item.id, update);
 
-        const itemData = duplicate(item);
+        const itemData = item.toObject();
         itemData.id = null;
         itemData.system.quantity = smallStack;
         itemData.effects = [];
@@ -1370,7 +1370,7 @@ export class ActorSheetSFRPG extends ActorSheet {
                 if (targetContainer) {
                     let newContents = [];
                     if (targetContainer.system.container?.contents) {
-                        newContents = duplicate(targetContainer.system.container?.contents || []);
+                        newContents = foundry.utils.deepClone(targetContainer.system.container?.contents || []);
                     }
 
                     const preferredStorageIndex = getFirstAcceptableStorageIndex(targetContainer, addedItem) || 0;

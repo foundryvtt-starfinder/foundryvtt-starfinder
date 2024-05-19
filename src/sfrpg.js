@@ -269,9 +269,6 @@ Hooks.once('init', async function() {
         r.style.setProperty("--sfrpg-theme-blue", "#235683");
     }
 
-    console.log("Starfinder | [INIT] Adding math functions");
-    SFRPGRoll.registerMathFunctions();
-
     console.log("Starfinder | [INIT] Overriding tooltips");
     Object.defineProperty(game, "tooltip", {value: new TooltipManagerSFRPG(), configurable: true, enumerable: true});
 
@@ -358,6 +355,9 @@ Hooks.once('init', async function() {
         "weapon": "fas fa-gun",
         "weaponAccessory": "fas fa-gears"
     };
+
+    console.log("Starfinder | [INIT] Adding math functions");
+    SFRPGRoll.registerMathFunctions();
 
     const finishTime = (new Date()).getTime();
     console.log(`Starfinder | [INIT] Done (operation took ${finishTime - initTime} ms)`);

@@ -255,7 +255,7 @@ export class DiceSFRPG {
 
             // if (flavor) {
             //     const chatData = {
-            //         type: CONST.CHAT_MESSAGE_TYPES.IC,
+            //         type: CONST.CHAT_MESSAGE_STYLES.IC,
             //         speaker: speaker,
             //         content: flavor
             //     };
@@ -296,7 +296,7 @@ export class DiceSFRPG {
                     speaker: speaker,
                     rollMode: rollMode,
                     roll: roll,
-                    type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+                    type: CONST.CHAT_MESSAGE_STYLES.ROLL,
                     sound: CONFIG.sounds.dice,
                     flags: {rollOptions: rollOptions}
                 };
@@ -540,7 +540,7 @@ export class DiceSFRPG {
                 if (part.isDamageSection) {
                     damageSections.push(part);
 
-                    const additionalOptions = duplicate(options);
+                    const additionalOptions = foundry.utils.deepClone(options);
                     additionalOptions.skipUI = true;
 
                     const tempTree = new RollTree(additionalOptions);
@@ -678,7 +678,7 @@ export class DiceSFRPG {
             }
 
             const isCritical = (button === "critical");
-            let finalFlavor = duplicate(flavor);
+            let finalFlavor = foundry.utils.deepClone(flavor);
             if (isCritical) {
                 htmlData.push({ name: "is-critical", value: "true" });
                 tags.push({tag: `critical`, text: game.i18n.localize("SFRPG.Rolls.Dice.CriticalHit")});
@@ -714,7 +714,7 @@ export class DiceSFRPG {
                 if (part.partIndex) {
                     finalFlavor += ` (${part.partIndex})`;
                 }
-                // const originalTypes = duplicate(damageTypes);
+                // const originalTypes = foundry.utils.deepClone(damageTypes);
                 // damageTypes = [getDamageTypeForPart(part)];
                 // console.log([originalTypes, damageTypes]);
             }
@@ -803,7 +803,7 @@ export class DiceSFRPG {
                     content: rollContent,
                     rollMode: rollMode,
                     roll: roll,
-                    type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+                    type: CONST.CHAT_MESSAGE_STYLES.ROLL,
                     sound: CONFIG.sounds.dice
                 };
 
@@ -1117,7 +1117,7 @@ export class DiceSFRPG {
         Roll.validate(roll.formula);
 
         // Optionally strip flavor annotations.
-        if ( !preserveFlavor ) roll.terms = Roll.parse(roll.formula.replace(RollTerm.FLAVOR_REGEXP, ""));
+        if ( !preserveFlavor ) roll.terms = Roll.parse(roll.formula.replace(foundry.dice.terms.RollTerm.FLAVOR_REGEXP, ""));
 
         // Perform arithmetic simplification on the existing roll terms.
         roll.terms = DiceSFRPG.#simplifyOperatorTerms(roll.terms);
@@ -1134,12 +1134,12 @@ export class DiceSFRPG {
         roll.terms = Roll.simplifyTerms(roll.terms);
 
         // Group terms by type and perform simplifications on various types of roll term.
-        let { poolTerms, diceTerms, mathTerms, numericTerms } = DiceSFRPG.#groupTermsByType(roll.terms);
+        let { poolTerms, diceTerms, functionTerms, numericTerms } = DiceSFRPG.#groupTermsByType(roll.terms);
         numericTerms = DiceSFRPG.#simplifyNumericTerms(numericTerms ?? []);
         diceTerms = DiceSFRPG.#simplifyDiceTerms(diceTerms ?? []);
 
         // Recombine the terms into a single term array and remove an initial + operator if present.
-        const simplifiedTerms = [diceTerms, poolTerms, mathTerms, numericTerms].flat().filter(Boolean);
+        const simplifiedTerms = [diceTerms, poolTerms, functionTerms, numericTerms].flat().filter(Boolean);
         if ( simplifiedTerms[0]?.operator === "+" ) simplifiedTerms.shift();
         return simplifiedTerms.map(t => t.formula).join(" ");
     }
@@ -1251,8 +1251,8 @@ export class DiceSFRPG {
     /* -------------------------------------------- */
 
     /**
-    * A helper function to group terms into PoolTerms, DiceTerms, MathTerms, and NumericTerms.
-    * MathTerms are included as NumericTerms if they are deterministic.
+    * A helper function to group terms into PoolTerms, DiceTerms, FunctionTerms, and NumericTerms.
+    * FunctionTerms are included as NumericTerms if they are deterministic.
     * @param {RollTerm[]} terms  An array of roll terms.
     * @returns {object}          An object mapping term types to arrays containing roll terms of that type.
     */
@@ -1264,7 +1264,7 @@ export class DiceSFRPG {
         return terms.reduce((obj, term, i) => {
             let type;
             if ( term instanceof t.DiceTerm ) type = DiceTerm;
-            else if ( (term instanceof t.MathTerm) && (term.isDeterministic) ) type = NumericTerm;
+            else if ( (term instanceof t.FunctionTerm) && (term.isDeterministic) ) type = NumericTerm;
             else type = term.constructor;
             const key = `${type.name.charAt(0).toLowerCase()}${type.name.substring(1)}s`;
 

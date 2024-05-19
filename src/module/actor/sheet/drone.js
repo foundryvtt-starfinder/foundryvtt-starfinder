@@ -11,7 +11,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
 
     static get defaultOptions() {
         const options = super.defaultOptions;
-        mergeObject(options, {
+        foundry.utils.mergeObject(options, {
             classes: ["sfrpg", "sheet", "actor", "drone"],
             width: 715
             // height: 830
@@ -225,8 +225,8 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
                 hasActions: false,
                 dataset: { type: "feat" }
             },
-            classFeature: duplicate(CONFIG.SFRPG.featureCategories.classFeature),
-            universalCreatureRule: duplicate(CONFIG.SFRPG.featureCategories.universalCreatureRule),
+            classFeature: foundry.utils.deepClone(CONFIG.SFRPG.featureCategories.classFeature),
+            universalCreatureRule: foundry.utils.deepClone(CONFIG.SFRPG.featureCategories.universalCreatureRule),
             resources: {
                 category: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"),
                 items: actorResources,
@@ -364,7 +364,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         const target = $(event.currentTarget);
         const modifierId = target.closest(".item.modifier").data("modifierId");
 
-        const modifiers = duplicate(this.actor.system.modifiers);
+        const modifiers = foundry.utils.deepClone(this.actor.system.modifiers);
         const modifier = modifiers.find((mod) => mod._id === modifierId);
 
         const formula = modifier.modifier;

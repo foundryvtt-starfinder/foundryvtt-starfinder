@@ -193,7 +193,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
                     content: `<form>
                         <p>${game.i18n.localize("SFRPG.ChatCard.ContextMenu.ModifyDamageText")}</p>
                         <div class="form-group">
-                            <input type="number" id="modifier" placeholder=0 autofocus /> 
+                            <input type="number" id="modifier" placeholder=0 autofocus />
                         </div>
                         ${(multiplier < 0) // Is healing
                         ? `
@@ -337,7 +337,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         }
 
         const actorUpdate = {};
-        const actorData = foundry.utils.duplicate(this.system);
+        const actorData = foundry.utils.deepClone(this.system);
 
         const damagesPerType = [];
         if (damage.damageTypes.length > 0) {
@@ -574,7 +574,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         }
 
         const actorUpdate = {};
-        const newData = duplicate(originalData);
+        const newData = foundry.utils.deepClone(originalData);
 
         let remainingUndealtDamage = damage.amount + damage.modifier;
 

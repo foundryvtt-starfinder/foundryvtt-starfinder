@@ -4,7 +4,7 @@ export default function(engine) {
         const classes = fact.classes;
 
         data.spells.classes = [];
-        const casterData = deepClone(data.spells);
+        const casterData = data.spells;
 
         const computeSpellsPerDay = (spellLevel, classData, spellAbilityMod) => {
             let totalSpells = 0;
@@ -76,7 +76,7 @@ export default function(engine) {
             long: 400 + 40 * cl
         };
 
-        data.spells = mergeObject(data.spells, casterData);
+        // data.spells = foundry.utils.mergeObject(data.spells, casterData);
 
         return fact;
     });

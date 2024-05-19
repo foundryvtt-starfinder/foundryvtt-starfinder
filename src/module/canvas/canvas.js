@@ -124,7 +124,7 @@ async function handleCanvasDropAsync(canvas, data, targetActor) {
     const document = await Item.fromDropData(data);
     let sourceActor = null;
     const sourceItem = document;
-    const sourceItemData = foundry.utils.duplicate(document.system);
+    const sourceItemData = foundry.utils.deepClone(document.system);
 
     if (document?.parent?.isToken ?? false) {
         sourceActor = new ActorItemHelper(document.parent._id, document.parent.parent._id, document.parent.parent.parent._id);

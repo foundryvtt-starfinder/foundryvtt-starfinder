@@ -2,7 +2,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
 
     hasUses() {
         const itemData = this.system;
-        return (itemData.uses?.max || itemData.uses?.total) && (itemData.uses?.value !== null && itemData.uses?.value !== undefined);
+        return (Number(itemData.uses?.max) || itemData.uses?.total) && (itemData.uses?.value !== null && itemData.uses?.value !== undefined);
     }
 
     getRemainingUses() {
@@ -94,7 +94,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                 htmlPromise.then((html) => {
                     // Create the chat message
                     const chatData = {
-                        type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+                        type: CONST.CHAT_MESSAGE_STYLES.OTHER,
                         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
                         content: html,
                         rollMode: rollMode,

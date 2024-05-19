@@ -254,7 +254,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      * @returns {Object}         The modified data object with the modifiers data object added.
      */
     _ensureHasModifiers(data, prop = null) {
-        if (!hasProperty(data, "modifiers")) {
+        if (!foundry.utils.hasProperty(data, "modifiers")) {
             console.log(`Starfinder | ${this.name} does not have the modifiers data object, attempting to create them...`);
             data.modifiers = [];
         }
@@ -346,7 +346,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         };
 
         if (this.type === "spell") {
-            let descriptionText = duplicate(templateData.system.description.short || templateData.system.description.value);
+            let descriptionText = foundry.utils.deepClone(templateData.system.description.short || templateData.system.description.value);
             if (descriptionText?.length > 0) {
                 // Alter description by removing non-eligble level tags.
                 const levelTags = [
@@ -430,7 +430,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Basic chat message data
         const chatData = {
             user: game.user.id,
-            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             content: html,
             flags: {
                 level: this.system.level,
@@ -470,7 +470,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      * @returns {Object} An object containing the item's rollData (including its owners), and chat message properties.
      */
     async getChatData() {
-        const data = duplicate(this.system);
+        const data = foundry.utils.deepClone(this.system);
         const labels = this.labels;
 
         const async = true;
@@ -922,7 +922,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         }
 
         // Define Roll Data
-        const rollData = duplicate(actorData);
+        const rollData = foundry.utils.deepClone(actorData);
         // Add hasSave to roll
         itemData.hasSave = this.hasSave;
         itemData.hasSkill = this.hasSkill;
@@ -943,7 +943,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const rollContext = RollContext.createItemRollContext(this, this.actor, {itemData: itemData});
 
         /** Create global attack modifiers. */
-        const additionalModifiers = deepClone(SFRPG.globalAttackRollModifiers).map(mod => {
+        const additionalModifiers = foundry.utils.deepClone(SFRPG.globalAttackRollModifiers).map(mod => {
             const container = {actorUuid: this.actor.uuid, itemUuid: this.uuid};
             const modInstance = {bonus: new SFRPGModifier({...mod.bonus, container})};
             return modInstance;
@@ -1045,7 +1045,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             return;
         }
 
-        const itemData = duplicate(this.system);
+        const itemData = foundry.utils.deepClone(this.system);
         if (itemData.hasOwnProperty("usage") && !options.disableDeductAmmo) {
             const usage = itemData.usage;
 
@@ -1242,7 +1242,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Define Roll parts
         /** @type {DamageParts[]} */
-        const parts = duplicate(itemData.damage.parts.map(part => part));
+        const parts = foundry.utils.deepClone(itemData.damage.parts.map(part => part));
         for (const part of parts) {
             part.isDamageSection = true;
         }
@@ -1292,7 +1292,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         }, 0);
 
         // Define Roll Data
-        const rollData = mergeObject(duplicate(actorData), {
+        const rollData = foundry.utils.mergeObject(foundry.utils.deepClone(actorData), {
             item: itemData,
             mod: actorData.abilities[abl].mod
         });
@@ -1461,7 +1461,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             throw new Error("you may not make a Damage Roll with this item");
         }
 
-        const parts = duplicate(itemData.damage.parts.map(part => part));
+        const parts = foundry.utils.deepClone(itemData.damage.parts.map(part => part));
         for (const part of parts) {
             part.isDamageSection = true;
         }
@@ -1555,7 +1555,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             content: content,
             rollMode: game.settings.get("core", "rollMode"),
             roll: rollResult.roll,
-            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+            type: CONST.CHAT_MESSAGE_STYLES.ROLL,
             sound: CONFIG.sounds.dice
         });
     }
@@ -1610,7 +1610,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             const chatData = {
                 user: game.user.id,
                 flavor: flavor,
-                type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+                type: CONST.CHAT_MESSAGE_STYLES.OTHER,
                 content: html,
                 flags: { level: this.system.level },
                 speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor})
@@ -1674,7 +1674,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const rollMode = game.settings.get("core", "rollMode");
         const chatData = {
             user: game.user.id,
-            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+            type: CONST.CHAT_MESSAGE_STYLES.ROLL,
             flavor: `${this.name} recharge check - ${success ? "success!" : "failure!"}`,
             whisper: (["gmroll", "blindroll"].includes(rollMode)) ? ChatMessage.getWhisperRecipients("GM") : null,
             blind: rollMode === "blindroll",
@@ -1750,7 +1750,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Adjust item to level, if required
         if (typeof (message.flags.level) !== 'undefined' && message.flags.level !== item.system.level) {
-            const newItemData = duplicate(item);
+            const newItemData = item.toObject;
             newItemData.system.level = message.flags.level;
 
             item = new ItemSFRPG(newItemData, {parent: item.parent});
@@ -1886,7 +1886,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         limitTo = "",
         damage = null
     } = {}) {
-        const data = this._ensureHasModifiers(duplicate(this.system));
+        const data = this._ensureHasModifiers(foundry.utils.deepClone(this.system));
         const modifiers = data.modifiers;
 
         modifiers.push(new SFRPGModifier({
@@ -1928,7 +1928,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      * @param {String} id The id for the modifier to edit
      */
     editModifier(id) {
-        const modifiers = duplicate(this.system.modifiers);
+        const modifiers = foundry.utils.deepClone(this.system.modifiers);
         const modifier = modifiers.find(mod => mod._id === id);
 
         new SFRPGModifierApplication(modifier, this, {}, this.actor).render(true);

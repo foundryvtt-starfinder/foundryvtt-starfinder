@@ -12,7 +12,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
 
     static get defaultOptions() {
         const options = super.defaultOptions;
-        mergeObject(options, {
+        foundry.utils.mergeObject(options, {
             classes: ['sfrpg', 'sheet', 'actor', 'character'],
             width: 715
             // height: 830
@@ -197,7 +197,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
                 hasActions: true,
                 dataset: { type: "feat", "activation.type": "action" }
             },
-            ...duplicate(CONFIG.SFRPG.featureCategories),
+            ...foundry.utils.deepClone(CONFIG.SFRPG.featureCategories),
             resources: {
                 category: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"),
                 items: [],

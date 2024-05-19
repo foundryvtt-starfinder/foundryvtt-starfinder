@@ -15,7 +15,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
      * @returns {Object}         The modified data object with the modifiers data object added.
      */
     _ensureHasModifiers(data, prop = null) {
-        if (!hasProperty(data, "modifiers")) {
+        if (!foundry.utils.hasProperty(data, "modifiers")) {
             // console.log(`Starfinder | ${this.name} does not have the modifiers data object, attempting to create them...`);
             data.modifiers = [];
         }
@@ -56,7 +56,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
         limitTo = "",
         damage = null
     } = {}) {
-        const data = this._ensureHasModifiers(duplicate(this.system));
+        const data = this._ensureHasModifiers(foundry.utils.deepClone(this.system));
         const modifiers = data.modifiers;
 
         modifiers.push(new SFRPGModifier({
