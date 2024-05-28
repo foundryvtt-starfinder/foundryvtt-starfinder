@@ -8,7 +8,7 @@ Hooks.on('createToken', onTokenCreated);
 Hooks.on('updateToken', onTokenUpdated);
 
 function onCanvasReady(...args) {
-    if (!canvas.initialized) { return; }
+    if (!canvas.initialized) return;
     for (const placeable of canvas.tokens.placeables) {
         if (placeable.document.getFlag("sfrpg", "itemCollection")) {
             setupLootCollectionTokenInteraction(placeable, false);
@@ -16,9 +16,9 @@ function onCanvasReady(...args) {
     }
 }
 
-function onTokenCreated(document, options, userId) {
-    if (!canvas.initialized) { return; }
-    if (getProperty(document, "flags.sfrpg.itemCollection")) {
+function onTokenCreated(document) {
+    if (!canvas.initialized) return;
+    if (foundry.utils.getProperty(document, "flags.sfrpg.itemCollection")) {
         const token = canvas.tokens.placeables.find(x => x.id === document.id);
         if (token) {
             trySetupLootToken(token);
@@ -26,9 +26,9 @@ function onTokenCreated(document, options, userId) {
     }
 }
 
-function onTokenUpdated(document, options, userId) {
-    if (!canvas.initialized) { return; }
-    if (getProperty(document, "flags.sfrpg.itemCollection")) {
+function onTokenUpdated(document) {
+    if (!canvas.initialized) return;
+    if (foundry.utils.getProperty(document, "flags.sfrpg.itemCollection")) {
         const token = canvas.tokens.placeables.find(x => x.id === document.id);
         if (token) {
             trySetupLootToken(token);
