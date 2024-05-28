@@ -1,0 +1,63 @@
+{
+  "_id": "CB83RmXswXwxfrxN",
+  "name": "Effect: Minor Booster",
+  "type": "effect",
+  "img": "systems/sfrpg/icons/equipment/technological%20items/sprayflesh.webp",
+  "system": {
+    "type": "effect",
+    "abilityMods": {
+      "parts": []
+    },
+    "activeDuration": {
+      "activationTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "origin"
+      },
+      "unit": "hour",
+      "value": "1"
+    },
+    "context": {
+      "origin": {
+        "actorUuid": "",
+        "itemUuid": ""
+      }
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.2BjD4ocSE0BL5DcN]{Biohacks (Ex)}</p>\n<p>Using a minor booster biohack allows you to attempt some Medicine checks on targets you affect so long as the target is within range of your custom microlab. This doesn’t require any additional time or action beyond making the attack. The tasks you can attempt with such a Medicine check depend on your level, and they don’t have the duration of normal booster biohacks.</p>\n<p>At 1st level, you can attempt a Medicine check to administer first aid. At 3rd level, you can attempt a Medicine check to treat @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Drugs} or @UUID[Compendium.sfrpg.rules.JournalEntry.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Poison}, though on a successful check, the target gains a +4 bonus only on the next saving throw it attempts against the drug or poison, and that saving throw must occur within the next hour. At 6th level you can attempt a Medicine check to treat @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.gBhZDjh30JEyh7DY]{Disease}, though on a successful check, the target gains a +4 bonus only to the next saving throw it attempts against the disease, and that saving throw must occur within the next hour.</p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "95d3af37-9898-4258-b883-a702aeceeaf2",
+        "name": "Minor Booster",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "saves",
+        "enabled": false,
+        "max": 4,
+        "modifier": "4",
+        "modifierType": "formula",
+        "notes": "The target gains a +4 bonus only on the next saving throw it attempts against the drug or poison. A 6th level, can also treat disease.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
+    "requirements": "1st Level Biohacker",
+    "showOnToken": true,
+    "source": "COM pg. 41"
+  }
+}
