@@ -1,38 +1,41 @@
-            <h4 class="form-header">{{ localize "SFRPG.ActorSheet.Inventory.Container.DetailsHeader" }}</h4>
-            {{#if message}}
-            <label>{{localize message}}</label>
-            {{/if}}
+<div class="bubble">
+    <h3 class="bubble-header">
+        {{ localize "SFRPG.ActorSheet.Inventory.Container.DetailsHeader" }}
 
-            {{!-- Storage capacity --}}
-            <div class="form-group" data-tooltip="<strong>{{ localize "SFRPG.ActorSheet.Inventory.Container.IncludeContentsInWealthCalculation" }}</strong><br/>{{ localize "SFRPG.ActorSheet.Inventory.Container.IncludeContentsInWealthCalculationTooltip" }}">
-                <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.IncludeContentsInWealthCalculation" }}</label>
-                <div class="form-fields">
-                    <label class="checkbox">
-                        <input type="checkbox" name="system.container.includeContentsInWealthCalculation" {{checked itemData.container.includeContentsInWealthCalculation}}/>{{ localize "SFRPG.ActorSheet.Inventory.Container.IncludeContentsInWealthCalculationCheckbox" }}
-                    </label>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageSections" }}</label>
-                <div class="form-fields">
-                    <a class="item-control add-storage">
-                        <i class="fas fa-plus"></i> {{ localize "SFRPG.ActorSheet.Inventory.Container.StorageSectionsAdd" }}
-                    </a>
-                </div>
-            </div>
+    </h3>
 
-            <ul>
-                {{#each itemData.container.storage as |storage|}}
-                <hr/>
-                <li class="storage-slot" data-slot-index="{{indexOf ../itemData.container.storage storage}}">
-                    <div class="form-group">
-                        <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageSection" index=(indexOf ../itemData.container.storage storage false) }}</label>
-                        <div class="form-fields">
-                            <a class="item-control remove-storage">
-                                <i class="fas fa-minus"></i> {{ localize "SFRPG.ActorSheet.Inventory.Container.StorageSectionsRemove" }}
-                            </a>
-                        </div>
-                    </div>
+    <div class="bubble-info">
+        {{#if message}}
+        <label>{{localize message}}</label>
+        {{/if}}
+
+        {{!-- Storage capacity --}}
+        <div class="form-group" data-tooltip="<strong>{{ localize "SFRPG.ActorSheet.Inventory.Container.IncludeContentsInWealthCalculation" }}</strong><br/>{{ localize "SFRPG.ActorSheet.Inventory.Container.IncludeContentsInWealthCalculationTooltip" }}">
+            <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.IncludeContentsInWealthCalculation" }}</label>
+            <div class="form-fields">
+                <label class="checkbox">
+                    <input type="checkbox" name="system.container.includeContentsInWealthCalculation" {{checked itemData.container.includeContentsInWealthCalculation}}/>{{ localize "SFRPG.ActorSheet.Inventory.Container.IncludeContentsInWealthCalculationCheckbox" }}
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageSections" }}</label>
+            <div class="form-fields">
+                <a class="item-control add-storage">
+                    <i class="fas fa-plus"></i> {{ localize "SFRPG.ActorSheet.Inventory.Container.StorageSectionsAdd" }}
+                </a>
+            </div>
+        </div>
+        <hr/>
+
+        <ol class="storage-slots form-group">
+            {{#each itemData.container.storage as |storage|}}
+            <li class="storage-slot bubble" data-slot-index="{{indexOf ../itemData.container.storage storage}}">
+                <h4 class="bubble-header">
+                    {{ localize "SFRPG.ActorSheet.Inventory.Container.StorageSection" index=(indexOf ../itemData.container.storage storage false) }}
+                    <a class="item-control bubble-icon remove-storage"> <i class="fas fa-minus"></i> </a>
+                </h4>
+                <div class="bubble-info">
                     <div class="form-group" data-tooltip="<strong>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageType" }}</strong><br/>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageTypeTooltip" }}">
                         <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageType" }}</label>
                         <div class="form-fields">
@@ -97,6 +100,9 @@
                             </label>
                         </div>
                     </div>
-                </li>
-                {{/each}}
-            </ul>
+                </div>
+            </li>
+            {{/each}}
+        </ol>
+    </div>
+</div>

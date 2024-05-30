@@ -41,11 +41,10 @@
         {{> "systems/sfrpg/templates/items/parts/item-description.hbs"}}
 
         {{!-- Details Tab --}}
-        <div class="tab details" data-group="primary" data-tab="details">
+        <div class="tab flexrow details" data-group="primary" data-tab="details">
 
-            <h3 class="form-header noborder">{{ localize "SFRPG.Effect.DetailsHeader" }}</h3>
-
-            {{> "systems/sfrpg/templates/items/parts/item-duration.hbs"}}
+            {{!-- Duration Settings --}}
+            {{> "systems/sfrpg/templates/items/parts/item-duration.hbs" message="SFRPG.Effect.DetailsHeader"}}
 
         </div>
 

@@ -1,0 +1,84 @@
+
+<div class="bubble">
+    <h3 class="bubble-header">
+        {{ localize "SFRPG.ItemSheet.StarshipAction.SkillFormulaOrSubactions" }}
+        <a class="subaction-control add-subaction" data-tooltip="{{ localize "SFRPG.ItemSheet.StarshipAction.AddSubactionTooltip" }}"><i class="fas fa-plus"></i></a>
+    </h3>
+
+    <ol class="subaction-parts bubble-info">
+        {{#each itemData.formula as |formula id|}}
+
+        <li class="bubble subaction-part" data-subaction-part="{{id}}">
+            <h3 class="bubble-header">
+                {{#unless (lookup this "name") }}{{ localize "SFRPG.ItemSheet.StarshipAction.SubactionPart" section=id}}{{else}}{{lookup this "name"}}{{/unless}}
+                <a class="subaction-control delete-subaction" data-tooltip="{{ localize "SFRPG.ItemSheet.StarshipAction.DeleteSubactionTooltip" }}"><i class="fas fa-minus"></i></a>
+            </h3>
+
+            <div class="bubble-info">
+                {{!-- Action Skill --}}
+                <div class="form-group">
+                    <label>{{ localize "SFRPG.ItemSheet.StarshipAction.SkillOrSubaction" }}</label>
+                    <div class="form-fields">
+                        <input type="text" name="system.formula.{{id}}.name" value="{{lookup this "name"}}" data-dtype="String"/>
+                    </div>
+                </div>
+
+                {{!-- Skill Check Formula --}}
+                <div class="form-group">
+                    <label>{{ localize "SFRPG.ItemSheet.StarshipAction.CheckFormula" }}</label>
+                    <div class="form-fields">
+                        <input type="text" name="system.formula.{{id}}.formula" value="{{lookup this "formula"}}" data-dtype="String"/>
+                    </div>
+                </div>
+
+                {{!-- Resolve & DC Information --}}
+                <div class="form-group">
+                    <label>{{ localize "SFRPG.ItemSheet.StarshipAction.TargetDC" }}</label>
+                    <div class="form-fields">
+                        <input type="text" name="system.formula.{{id}}.dc.value" value="{{lookup dc "value"}}" data-dtype="String"/>
+                        <label class="checkbox">
+                            <input type="checkbox" name="system.formula.{{id}}.dc.resolve" {{checked dc.resolve}}/> {{ localize "SFRPG.ItemSheet.StarshipAction.UsesResolve" }}
+                        </label>
+                    </div>
+                </div>
+
+                {{!-- Subaction Effects --}}
+                {{#with (lookup ../editorInfo id) as |editorInfo|}}
+                    <div class="bubble">
+                        <h3 class="bubble-header">{{ localize "SFRPG.ItemSheet.StarshipAction.NormalEffect" }}</h3>
+
+                        <div class="bubble-info bubble-editor">
+                            {{editor
+                                editorInfo.enrichedEffectNormal
+                                target=editorInfo.targetNormal
+                                button=true
+                                editable=../../editable
+                                engine="prosemirror"
+                                collaborate="true"
+                            }}
+                        </div>
+                    </div>
+
+                    <div class="bubble">
+                        <h3 class="bubble-header">{{ localize "SFRPG.ItemSheet.StarshipAction.CriticalEffect" }}</h3>
+
+                        <div class="bubble-info bubble-editor">
+                            {{editor
+                                editorInfo.enrichedEffectCritical
+                                target=editorInfo.targetCritical
+                                button=true
+                                editable=../../editable
+                                engine="prosemirror"
+                                collaborate="true"
+                            }}
+                        </div>
+                    </div>
+                {{/with}}
+
+            </div>
+        </li>
+
+        {{/each}}
+
+    </ol>
+</div>
