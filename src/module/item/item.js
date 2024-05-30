@@ -144,6 +144,13 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             labels.kac = data.armor.kac ? `${data.armor.kac} ${game.i18n.localize("SFRPG.KineticArmorClassShort")}` : "";
         }
 
+        // Apply a tag if the item is a weapon that's not equipment (unarmed strike, natural attack, etc.)
+        if (itemData.type === "weapon") {
+            itemData.system.transferrable = itemData.system.isEquipment;
+        } else {
+            itemData.system.transferrable = true;
+        }
+
         // Activated Items
         if (data.hasOwnProperty("activation")) {
 
