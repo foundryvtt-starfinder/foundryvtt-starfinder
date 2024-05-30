@@ -272,13 +272,13 @@ export class DiceSFRPG {
                 // Push the roll to the ChatBox
                 const customData = {
                     title: flavor,
-                    rollContext:  rollContext,
-                    speaker: speaker,
-                    rollMode: rollMode,
+                    rollContext,
+                    speaker,
+                    rollMode,
                     breakdown: preparedRollExplanation,
-                    htmlData: htmlData,
+                    htmlData,
                     rollType: "normal",
-                    rollOptions: rollOptions,
+                    rollOptions,
                     rollDices: finalFormula.rollDices
                 };
 
@@ -292,13 +292,12 @@ export class DiceSFRPG {
 
             if (!useCustomCard && chatMessage) {
                 const messageData = {
-                    flavor: flavor,
-                    speaker: speaker,
-                    rollMode: rollMode,
-                    roll: roll,
-                    type: CONST.CHAT_MESSAGE_STYLES.ROLL,
+                    flavor,
+                    speaker,
+                    rollMode,
+                    rolls: [roll],
                     sound: CONFIG.sounds.dice,
-                    flags: {rollOptions: rollOptions}
+                    flags: { rollOptions }
                 };
 
                 messageData.content = await roll.render({ htmlData: htmlData, customTooltip: finalFormula.rollDices });
@@ -799,11 +798,10 @@ export class DiceSFRPG {
 
                 const messageData = {
                     flavor: finalFlavor,
-                    speaker: speaker,
+                    speaker,
                     content: rollContent,
-                    rollMode: rollMode,
-                    roll: roll,
-                    type: CONST.CHAT_MESSAGE_STYLES.ROLL,
+                    rollMode,
+                    rolls: [roll],
                     sound: CONFIG.sounds.dice
                 };
 
@@ -1124,7 +1122,6 @@ export class DiceSFRPG {
 
         if ( /[*/]/.test(roll.formula) ) {
             return ( roll.isDeterministic ) && ( !/\[/.test(roll.formula) || !preserveFlavor )
-                // TODO: Sync rolls may or may not be going away? Idfk man
                 ? roll.evaluateSync().total.toString()
                 : roll.constructor.getFormula(roll.terms);
         }
@@ -1212,6 +1209,19 @@ export class DiceSFRPG {
         // Split the unannotated terms into different die sizes and signs
         const diceQuantities = unannotated.reduce((obj, term, i) => {
             if ( term instanceof t.OperatorTerm ) return obj;
+
+            if (term._number instanceof Roll) {
+                // Complex number term.
+                if ( !term._number.isDeterministic ) return obj;
+                if ( !term._number._evaluated ) term._number.evaluateSync();
+            }
+
+            if (term._number instanceof Roll) {
+                // Complex number term.
+                if ( !term._number.isDeterministic ) return obj;
+                if ( !term._number._evaluated ) term._number.evaluateSync();
+            }
+
             const key = `${unannotated[i - 1].operator}${term.faces}`;
             obj[key] = (obj[key] ?? 0) + term.number;
             return obj;
@@ -1263,7 +1273,7 @@ export class DiceSFRPG {
 
         return terms.reduce((obj, term, i) => {
             let type;
-            if ( term instanceof t.DiceTerm ) type = DiceTerm;
+            if ( term instanceof t.DiceTerm ) type = t.DiceTerm;
             else if ( (term instanceof t.FunctionTerm) && (term.isDeterministic) ) type = NumericTerm;
             else type = term.constructor;
             const key = `${type.name.charAt(0).toLowerCase()}${type.name.substring(1)}s`;

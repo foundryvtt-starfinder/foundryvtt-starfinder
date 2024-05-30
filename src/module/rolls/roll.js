@@ -72,6 +72,12 @@ export default class SFRPGRoll extends Roll {
     /** @inheritdoc */
     static TOOLTIP_TEMPLATE = "systems/sfrpg/templates/dice/tooltip.hbs";
 
+    static MATH_PROXY = new Proxy(Math, {
+        has: () => true, // Include everything
+        get: (t, k) => k === Symbol.unscopables ? undefined : t[k]
+        // set: () => console.error("You may not set properties of the Roll.MATH_PROXY environment") // Yes-op!
+    });
+
     static registerMathFunctions() {
         function lookup(value) {
             for (let i = 1; i < arguments.length - 1; i += 2) {
@@ -93,7 +99,7 @@ export default class SFRPGRoll extends Roll {
             return baseValue;
         }
 
-        const functions = {
+        this.MATH_PROXY = foundry.utils.mergeObject(this.MATH_PROXY, {
             eq: (a, b) => a === b,
             gt: (a, b) => a > b,
             gte: (a, b) => a >= b,
@@ -103,11 +109,7 @@ export default class SFRPGRoll extends Roll {
             ternary: (condition, ifTrue, ifFalse) => (condition ? ifTrue : ifFalse),
             lookup,
             lookupRange
-        };
-
-        for (const [name, func] of Object.entries(functions)) {
-            CONFIG.Dice.functions[name] = func;
-        }
+        });
 
     }
 
@@ -126,7 +128,7 @@ export default class SFRPGRoll extends Roll {
         if (chatOptions?.htmlData) this.htmlData = chatOptions.htmlData;
 
         // Execute the roll, if needed
-        if (!this._evaluated) this.evaluate();
+        if (!this._evaluated) await this.evaluate();
 
         // Define chat data
         const chatData = {
@@ -145,4 +147,37 @@ export default class SFRPGRoll extends Roll {
         // Render the roll display template
         return renderTemplate(chatOptions.template, chatData);
     }
+
+    /*
+     * Parse a formula expression using the compiled peggy grammar.
+     * @param {string} formula  The original string expression to parse.
+     * @param {object} data     A data object used to substitute for attributes in the formula.
+     * @returns {RollTerm[]}
+    static parse(formula, data) {
+        if ( !formula ) return [];
+
+        const functionTermRegex = Object.getOwnPropertyNames(this.MATH_PROXY).join("|");
+        const regex = new RegExp(`(?:((?:${functionTermRegex})\\([a-zA-Z0-9.,@\\s(\\)[\\]]*\\))d\\d+)`, "g");
+
+        const getBracketIdx = (formula) => {
+            if (formula.length === 0) return null;
+
+            let bracketCount = 0;
+            let firstBracketIdx = 0;
+            let lastBracketIdx = 0;
+            for (let i = 0; i <= formula.length; i++) {
+                if (formula[i] === "(") {
+                    if (bracketCount === 0 && firstBracketIdx === 0) firstBracketIdx = i;
+                    bracketCount++;
+                }
+                else if (formula[i] === ")") {
+                    bracketCount--;
+                    if (bracketCount === 0) lastBracketIdx = i;
+                }
+            }
+            return {first: firstBracketIdx, last: lastBracketIdx};
+        };
+
+        return super.parse(formula, data);
+    } */
 }

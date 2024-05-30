@@ -235,7 +235,11 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             changed.system.attributes.rp.value = clampedRP;
         }
 
-        this.floatingHpOnPreUpdate(this, changed, options, user);
+        try {
+            this.floatingHpOnPreUpdate(this, changed, options, user);
+        } catch {
+            console.warn("Starfinder | Floating HP preupdate failed!");
+        }
 
         return super._preUpdate(changed, options, user);
 
@@ -244,7 +248,11 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     /** @inheritdoc */
     _onUpdate(data, options, userId) {
         super._onUpdate(data, options, userId);
-        this.floatingHpOnUpdate(this, data, options, userId);
+        try {
+            this.floatingHpOnUpdate(this, data, options, userId);
+        } catch {
+            console.warn("Starfinder | Floating HP update failed!");
+        }
     }
 
     /**

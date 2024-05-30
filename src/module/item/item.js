@@ -1743,8 +1743,6 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const chatCardActor = this._getChatCardActor(card);
         if (!chatCardActor) return ui.notifications.error("SFRPG.ChatCard.ItemAction.NoActor");
 
-        button.disabled = true;
-
         // Get the Item
         let item = chatCardActor.items.get(card.dataset.itemId);
 
@@ -1780,9 +1778,6 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Consumable usage
         else if (action === "consume") await item.rollConsumable({ event });
-
-        // Re-enable the button
-        button.disabled = false;
     }
 
     /**
@@ -1935,10 +1930,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     }
 
     static async _onScalingCantripsSettingChanges() {
-        const d3scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d(ternary(gte(@details.cl.value,7),4,3))+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
-        const d6scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
-        const npcd3scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d(ternary(gte(@details.cr,7),4,3))+ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
-        const npcd6scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
+        const d3scaling = "(lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9))d(ternary(gte(@details.cl.value,7),4,3))+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
+        const d6scaling = "(lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9))d6+(ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
+        const npcd3scaling = "(lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9))d((ternary(gte(@details.cr,7),4,3)))+(ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
+        const npcd6scaling = "(lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9))d6+(ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
 
         const setting = game.settings.get("sfrpg", "scalingCantrips");
         let count = 0;
@@ -2008,16 +2003,16 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const { parts } = item.system.damage;
 
         if (item.system.scaling?.d3) {
-            const d3scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d(ternary(gte(@details.cl.value,7),4,3))+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
-            const npcd3scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d(ternary(gte(@details.cr,7),4,3))+ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
+            const d3scaling = "(lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9))d(ternary(gte(@details.cl.value,7),4,3))+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
+            const npcd3scaling = "(lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9))d((ternary(gte(@details.cr,7),4,3)))+(ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
 
             parts.forEach(i => i.formula = (isNPC) ? npcd3scaling : d3scaling);
 
             console.log(`Starfinder | Updated ${item.name} to use the ${ (isNPC) ? 'NPC ' : ""}d3 scaling formula.`);
 
         } else if (item.system.scaling?.d6) {
-            const d6scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
-            const npcd6scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
+            const d6scaling = "(lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9))d6+(ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
+            const npcd6scaling = "(lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9))d6+(ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
 
             parts.forEach(i => i.formula = (isNPC) ? npcd6scaling : d6scaling);
 
