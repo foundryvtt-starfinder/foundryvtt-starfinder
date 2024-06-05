@@ -153,21 +153,33 @@ export default class SFRPGRoll extends Roll {
      * @param {string} formula  The original string expression to parse.
      * @param {object} data     A data object used to substitute for attributes in the formula.
      * @returns {RollTerm[]}
+     *
     static parse(formula, data) {
         if ( !formula ) return [];
 
         const functionTermRegex = Object.getOwnPropertyNames(this.MATH_PROXY).join("|");
-        const regex = new RegExp(`(?:((?:${functionTermRegex})\\([a-zA-Z0-9.,@\\s(\\)[\\]]*\\))d\\d+)`, "g");
+        // const regex = new RegExp(`(?:((?:${functionTermRegex})\\([a-zA-Z0-9.,@\\s(\\)[\\]]*\\))d\\d+)`, "g");
 
-        const getBracketIdx = (formula) => {
+        const regex = new RegExp(`${functionTermRegex}\\(`, "g");
+        const matches = formula.matchAll(regex);
+
+        for (const match of matches) {
+            const start = match.index;
+            const end = end + match[0].length;
+
+            const lastBracketIdx = getLastBracketIdx(formula, end);
+
+            const substring = formula.substring(start, lastBracketIdx);
+            formula = formula.replace(substring, `(${substring})`);
+        }
+
+        const getLastBracketIdx = (formula, firstBracketIdx) => {
             if (formula.length === 0) return null;
 
-            let bracketCount = 0;
-            let firstBracketIdx = 0;
+            let bracketCount = 1;
             let lastBracketIdx = 0;
             for (let i = 0; i <= formula.length; i++) {
                 if (formula[i] === "(") {
-                    if (bracketCount === 0 && firstBracketIdx === 0) firstBracketIdx = i;
                     bracketCount++;
                 }
                 else if (formula[i] === ")") {
@@ -175,7 +187,7 @@ export default class SFRPGRoll extends Roll {
                     if (bracketCount === 0) lastBracketIdx = i;
                 }
             }
-            return {first: firstBracketIdx, last: lastBracketIdx};
+            return lastBracketIdx;
         };
 
         return super.parse(formula, data);
