@@ -18,9 +18,10 @@
     },
     "area": {
       "effect": "burst",
+      "shapable": false,
       "shape": "sphere",
       "units": "ft",
-      "value": 10
+      "value": "10"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -33,6 +34,8 @@
         {
           "name": "",
           "formula": "(lookupRange(@classes.solarian.levels, 0, 9, 3, 12, 4, 15, 5, 18, 6))d6",
+          "group": null,
+          "isPrimarySection": true,
           "types": {
             "acid": false,
             "bludgeoning": true,
@@ -55,13 +58,51 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.UVNOjH2ERlQjcGnU]{Zenith Revelation}</p>\n<p>@Icon[type:graviton] Graviton Revelation</p>\n<p>When you’re fully graviton-attuned, as a standard action, you can create areas of cosmic energy that make it difficult to maneuver. When you use this ability, you create three 10-foot-radius bursts within 60 feet of you, each of which cannot overlap and must be centered no more than 20 feet from the center of one other radius. These areas become difficult terrain for a number of rounds equal to your solarian level, and any creature that starts their turn within this difficult terrain takes 3d6 bludgeoning damage, plus 1d6 for every 3 solarian levels you have beyond 9th. An affected creature can attempt a Fortitude save to take half damage. At 17th level, you can create three, four, or five bursts when using this ability.</p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
     "details": {
       "category": "classFeature",
+      "combat": false,
       "specialAbilityType": "su"
     },
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
     "formula": "",
@@ -71,18 +112,22 @@
       "additional": "",
       "per": "",
       "units": "ft",
-      "value": 60
+      "value": "60"
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "Zenith Revelation",
+    "requirements": "9th Level Solarian",
     "rollNotes": "",
     "save": {
       "type": "fort",
       "dc": "10+floor(@classes.solarian.levels/2) + @abilities.cha.mod",
       "descriptor": "half"
+    },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
     },
     "source": "Solarian",
     "target": {
@@ -90,7 +135,7 @@
       "value": ""
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     }

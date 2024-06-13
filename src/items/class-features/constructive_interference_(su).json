@@ -18,9 +18,10 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -37,7 +38,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p>&nbsp;@Icon[type:graviton] Graviton Revelation</p>\n<p>Forces humming within your @UUID[Compendium.sfrpg.class-features.zM7oc1qiNLAPoH1J]{Solar Armor} make it more difficult for sound waves and electrical impulses to reach your body and harm you. You gain energy resistance 5 whenever your solar armor is active. You can choose either electricity resistance or sonic resistance when you activate the armor, and you can switch energy types as a move action.</p>\n<p>When you are attuned or fully attuned, you double the amount of resistance granted by this ability.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p>&nbsp;@Icon[type:graviton] Graviton Revelation</p>\n<p>Forces humming within your @UUID[Compendium.sfrpg.class-features.zM7oc1qiNLAPoH1J]{Solar Armor} make it more difficult for sound waves and electrical impulses to reach your body and harm you. You gain energy resistance 5 whenever your solar armor is active. You can choose either electricity resistance or sonic resistance when you activate the armor, and you can switch energy types as a move action.</p>\n<p>When you are attuned or fully attuned, you double the amount of resistance granted by this ability.</p>\n<p><em>Enable/Disable selected resistance in the Modifiers tab.</em></p>"
     },
     "descriptors": {
       "acid": false,
@@ -79,10 +80,11 @@
     },
     "details": {
       "category": "classFeature",
+      "combat": false,
       "specialAbilityType": "su"
     },
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
     "formula": "",
@@ -90,64 +92,30 @@
     "modifiers": [
       {
         "_id": "ce26fa0d-0555-49d2-b520-fbfea51290d8",
-        "name": "Constructive Interference (Su) - E Unattuned",
+        "name": "Constructive Interference (Su) - Electricity",
         "type": "untyped",
         "condition": "",
-        "container": {
-          "actorId": "Qs2gOWidvlhDWFVK",
-          "itemId": "fOJj3YoFinXgPBYV"
-        },
         "effectType": "energy-resistance",
-        "enabled": true,
+        "enabled": false,
         "max": 5,
-        "modifier": "5",
-        "modifierType": "formula",
-        "notes": "When Solar Armor active, Electicity selected, but not attuned",
+        "modifier": "lookupRange(@resources.solarian.stellarMode.value, 10, 0, 5, 1, 10)",
+        "modifierType": "constant",
+        "notes": "",
         "source": "",
         "subtab": "misc",
         "valueAffected": "electricity"
       },
       {
         "_id": "5c98fded-97e7-40f5-b640-4dd123eee60a",
-        "name": "Constructive Interference (Su) - So Unattuned",
+        "name": "Constructive Interference (Su) - Sonic",
         "type": "untyped",
         "condition": "",
         "effectType": "energy-resistance",
-        "enabled": true,
+        "enabled": false,
         "max": 5,
-        "modifier": "5",
-        "modifierType": "formula",
-        "notes": "When solar armor active, Sonic selected, but unattuned",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": "sonic"
-      },
-      {
-        "_id": "d27c6803-fa0d-4a97-a6b1-d4bd084c1e52",
-        "name": "Constructive Interference - E Attuned",
-        "type": "untyped",
-        "condition": "",
-        "effectType": "energy-resistance",
-        "enabled": true,
-        "max": 10,
-        "modifier": "10",
+        "modifier": "lookupRange(@resources.solarian.stellarMode.value, 10, 0, 5, 1, 10)",
         "modifierType": "constant",
-        "notes": "When Solar Armor active, Electricity selected and attuned",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": "electricity"
-      },
-      {
-        "_id": "90863e0f-2410-43ff-b121-561e93d24b73",
-        "name": "Constructive Interference - So Attuned",
-        "type": "untyped",
-        "condition": "",
-        "effectType": "energy-resistance",
-        "enabled": true,
-        "max": 10,
-        "modifier": "10",
-        "modifierType": "formula",
-        "notes": "When Solar Armor active, Sonic selected and Attuned",
+        "notes": "",
         "source": "",
         "subtab": "misc",
         "valueAffected": "sonic"
@@ -163,7 +131,7 @@
       "charged": false,
       "value": null
     },
-    "requirements": "2nd Level",
+    "requirements": "2nd Level Solarian",
     "rollNotes": "",
     "save": {
       "type": "",
@@ -176,7 +144,7 @@
       "value": ""
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     }
