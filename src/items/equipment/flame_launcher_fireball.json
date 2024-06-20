@@ -19,9 +19,10 @@
     "ammunitionType": "fuel",
     "area": {
       "effect": "",
-      "shape": "",
-      "units": "none",
-      "value": null
+      "shapable": false,
+      "shape": "sphere",
+      "units": "ft",
+      "value": "10"
     },
     "attackBonus": 0,
     "attributes": {
@@ -37,7 +38,7 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": 30
       },
       "size": "medium",
       "sturdy": true
@@ -48,10 +49,10 @@
       "max": 20,
       "value": 20
     },
-    "chatFlavor": "Explode (10 ft.), unwieldy",
+    "chatFlavor": "",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": 1,
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -73,31 +74,45 @@
           "amount": 1,
           "subtype": "ammunitionSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "weaponAccessory"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 4,
+          "subtype": "",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
     "critical": {
-      "effect": "Burn",
-      "parts": [
-        {
-          "formula": "1d6",
-          "operator": "",
-          "types": {
-            "fire": true
-          }
-        }
-      ]
+      "effect": "Burn 1d6",
+      "parts": []
     },
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "1d8",
-          "operator": "",
+          "group": null,
+          "isPrimarySection": true,
           "types": {
-            "fire": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -105,11 +120,11 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": ""
+      "value": "<p>Flame launchers sling large globules of aerated petrol with carefully timed ignition. The resulting explosion is usually well contained and can be placed with surprising precision. Although fed by the same sort of petrol tank found in burners and flamethrowers, the weapon is a complicated mess of air tanks, exposed circuitry, and tubing, all required to achieve the perfect mixture for controlled explosions. Fireball flame launchers are the weakest version of this weapon, outpowered by immolation flame launchers and the exceptionally powerful supernova flame launchers.</p>\n<p><strong>Special Properties:</strong> Explode (10 ft.)</p>"
     },
     "descriptors": [],
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
     "equippable": false,
@@ -135,6 +150,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -153,14 +169,19 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
+      "hybrid": false,
+      "hydrodynamic": false,
       "ignite": false,
       "indirect": false,
       "injection": false,
+      "instrumental": false,
       "integrated": false,
       "line": false,
       "living": false,
@@ -178,14 +199,18 @@
       "polymorphic": false,
       "powered": false,
       "professional": false,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
       "reach": false,
       "recall": false,
+      "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
+      "shatter": false,
       "shells": false,
       "shield": false,
       "sniper": false,
@@ -198,8 +223,10 @@
       "thought": false,
       "throttle": false,
       "thrown": false,
+      "thruster": false,
       "trip": false,
       "two": true,
+      "unbalancing": false,
       "underwater": false,
       "unwieldy": true,
       "variantBoost": false,
@@ -211,17 +238,36 @@
       "additional": "",
       "per": "",
       "units": "ft",
-      "value": 60
+      "value": "60"
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
-    "source": "AR",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
+    "source": "AR pg. 37",
     "special": "",
-    "specialMaterials": {},
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
@@ -231,9 +277,9 @@
       "value": 2
     },
     "uses": {
-      "max": 0,
+      "max": "",
       "per": "",
-      "value": 2
+      "value": null
     },
     "weaponCategory": "flame",
     "weaponType": "heavy"

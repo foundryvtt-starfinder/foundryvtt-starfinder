@@ -19,9 +19,10 @@
     "ammunitionType": "charge",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -37,7 +38,7 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": 48
       },
       "size": "medium",
       "sturdy": true
@@ -51,7 +52,7 @@
     "chatFlavor": "Antibiological",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": 1,
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -73,23 +74,45 @@
           "amount": 1,
           "subtype": "ammunitionSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "weaponAccessory"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 4,
+          "subtype": "",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
     "critical": {
-      "effect": "#Suffocate",
+      "effect": "Suffocate",
       "parts": []
     },
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "2d10",
-          "operator": "",
+          "group": null,
+          "isPrimarySection": true,
           "types": {
-            "Cryo": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": true,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -97,11 +120,11 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": ""
+      "value": "<p>A firearm designed with crystals from the Plane of Shadow, a void rifle is unique in that power flowing through those crystals allows the rifle to fire inky bolts of life-sapping cold. The rifle’s frigid energy can harm only the living, so it does nothing to constructs and undead. Regardless, the rifle remains a favorite of followers of Urgathoa. Grave- and crypt-class void rifles are an option for standard issue among rank-and-file marines of the Eoxian navy, while tomb-, ossuary-, and barrow-class void rifles are reserved for elite forces.</p>"
     },
     "descriptors": [],
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
     "equippable": false,
@@ -127,6 +150,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -145,14 +169,19 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
+      "hybrid": false,
+      "hydrodynamic": false,
       "ignite": false,
       "indirect": false,
       "injection": false,
+      "instrumental": false,
       "integrated": false,
       "line": false,
       "living": false,
@@ -170,14 +199,18 @@
       "polymorphic": false,
       "powered": false,
       "professional": false,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
       "reach": false,
       "recall": false,
+      "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
+      "shatter": false,
       "shells": false,
       "shield": false,
       "sniper": false,
@@ -190,8 +223,10 @@
       "thought": false,
       "throttle": false,
       "thrown": false,
+      "thruster": false,
       "trip": false,
       "two": true,
+      "unbalancing": false,
       "underwater": false,
       "unwieldy": false,
       "variantBoost": false,
@@ -203,29 +238,48 @@
       "additional": "",
       "per": "",
       "units": "ft",
-      "value": 80
+      "value": "80"
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
-    "source": "AR",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
+    "source": "AR pg. 36",
     "special": "",
-    "specialMaterials": {},
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
     },
     "usage": {
-      "per": "Battery charge",
+      "per": "shot",
       "value": 2
     },
     "uses": {
-      "max": 0,
+      "max": "",
       "per": "",
-      "value": 2
+      "value": null
     },
     "weaponCategory": "cryo",
     "weaponType": "longA"
