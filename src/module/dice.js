@@ -1216,10 +1216,10 @@ export class DiceSFRPG {
                 if ( !term._number._evaluated ) term._number.evaluateSync();
             }
 
-            if (term._number instanceof Roll) {
+            if (term._faces instanceof Roll) {
                 // Complex number term.
-                if ( !term._number.isDeterministic ) return obj;
-                if ( !term._number._evaluated ) term._number.evaluateSync();
+                if ( !term._faces.isDeterministic ) return obj;
+                if ( !term._faces._evaluated ) term._faces.evaluateSync();
             }
 
             const key = `${unannotated[i - 1].operator}${term.faces}`;

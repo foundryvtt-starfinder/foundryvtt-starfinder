@@ -148,48 +148,42 @@ export default class SFRPGRoll extends Roll {
         return renderTemplate(chatOptions.template, chatData);
     }
 
-    /*
-     * Parse a formula expression using the compiled peggy grammar.
+    /**
+     * @override
+     * Wrapper around Roll.parse to try and wrap loose function terms (e.g `floor(...)d6`) in parentheses to appease the roll parser.
+     * We try the core parser first (as to not create any unintended side effects), and if that fails, try again with our transformation.
      * @param {string} formula  The original string expression to parse.
      * @param {object} data     A data object used to substitute for attributes in the formula.
      * @returns {RollTerm[]}
-     *
+     */
     static parse(formula, data) {
-        if ( !formula ) return [];
+        if (!formula) return [];
 
-        const functionTermRegex = Object.getOwnPropertyNames(this.MATH_PROXY).join("|");
-        // const regex = new RegExp(`(?:((?:${functionTermRegex})\\([a-zA-Z0-9.,@\\s(\\)[\\]]*\\))d\\d+)`, "g");
+        try {
+            return super.parse(formula, data);
+        } catch (error) {
+            console.debug(`Starfinder | Parsing formula ${formula}, deferring to custom system parsing. ${error}`);
 
-        const regex = new RegExp(`${functionTermRegex}\\(`, "g");
-        const matches = formula.matchAll(regex);
+            const regex = new RegExp(`\\b\\w+\\(([^()]|\\([^()]*\\))*\\)d(\\d|\\()`, "g");
 
-        for (const match of matches) {
-            const start = match.index;
-            const end = end + match[0].length;
+            // Find all matches
+            const matches = [...formula.matchAll(regex)];
 
-            const lastBracketIdx = getLastBracketIdx(formula, end);
+            // Iterate over the matches and wrap them in parentheses
+            let wrappedFormula = formula;
 
-            const substring = formula.substring(start, lastBracketIdx);
-            formula = formula.replace(substring, `(${substring})`);
+            // Go in reverse to prevent the positions from changing
+            matches.reverse().forEach(match => {
+                const originalMatch = match[0];
+                const startPos = match.index;
+                const dPos = originalMatch.lastIndexOf('d'); // Find the position of 'd'
+                const wrappedMatch = `(${originalMatch.slice(0, dPos)})${originalMatch.slice(dPos)}`;
+
+                // Replace the match in the formula using the calculated positions
+                wrappedFormula = wrappedFormula.slice(0, startPos) + wrappedMatch + wrappedFormula.slice(startPos + originalMatch.length);
+            });
+
+            return super.parse(wrappedFormula, data);
         }
-
-        const getLastBracketIdx = (formula, firstBracketIdx) => {
-            if (formula.length === 0) return null;
-
-            let bracketCount = 1;
-            let lastBracketIdx = 0;
-            for (let i = 0; i <= formula.length; i++) {
-                if (formula[i] === "(") {
-                    bracketCount++;
-                }
-                else if (formula[i] === ")") {
-                    bracketCount--;
-                    if (bracketCount === 0) lastBracketIdx = i;
-                }
-            }
-            return lastBracketIdx;
-        };
-
-        return super.parse(formula, data);
-    } */
+    }
 }
