@@ -20,14 +20,29 @@
         <div class="tab details" data-group="primary" data-tab="details">
 
             <h4 class="section-header first">{{ localize "SFRPG.MechSheet.Details.FrameInformation" }}</h4>
-            {{!-- Type --}}
+            {{!-- Primary Frame Type --}}
             <div class="form-group">
-                <label>{{localize "SFRPG.MechSheet.Type"}}</label>
+                <label>{{localize "SFRPG.MechSheet.Type.Primary"}}</label>
                 <div class="form-fields">
-                    <select class="actor-size" name="system.type">
-                        {{#select itemData.type}}
-                            {{#each config.mechFrameTypes as |label size|}}
-                                <option value="{{size}}">{{localize label}}</option>
+                    <select class="actor-size" name="system.type.primary">
+                        {{#select itemData.type.primary}}
+                            {{#each config.mechFrameTypes as |label frameType|}}
+                                <option value="{{frameType}}">{{localize label}}</option>
+                            {{/each}}
+                        {{/select}}
+                    </select>
+                </div>
+            </div>
+
+            {{!-- Secondary Frame Type --}}
+            <div class="form-group">
+                <label>{{localize "SFRPG.MechSheet.Type.Secondary"}}</label>
+                <div class="form-fields">
+                    <select class="actor-size" name="system.type.secondary">
+                        {{#select itemData.type.secondary}}
+                            <option value=""></option>
+                            {{#each config.mechFrameTypes as |label frameType|}}
+                                <option value="{{frameType}}">{{localize label}}</option>
                             {{/each}}
                         {{/select}}
                     </select>
