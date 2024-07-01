@@ -940,6 +940,8 @@ SFRPG.conditionTypes = {
     "unconscious": "SFRPG.ConditionsUnconscious"
 };
 
+SFRPG.hiddenConditions = ["broken"];
+
 SFRPG.languages = {
     "aballonian": "SFRPG.LanguagesAballonian",
     "abyssal": "SFRPG.LanguagesAbyssal",

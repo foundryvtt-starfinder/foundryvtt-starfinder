@@ -60,10 +60,11 @@ export class SFRPGTokenHUD extends TokenHUD {
         for (const image of allStatusImages) {
             // Replace the img element with a picture element, which can display ::after content and allows child elements.
             const name = image.dataset.tooltip ?? "";
+            const statusId = image.dataset.statusId ?? "";
 
             const picture = document.createElement("picture");
             picture.classList.add("effect-control");
-            picture.dataset.statusId = image.dataset.statusId;
+            picture.dataset.statusId = statusId;
             picture.title = name;
             const iconSrc = image.getAttribute("src");
             picture.setAttribute("src", iconSrc);
@@ -71,6 +72,11 @@ export class SFRPGTokenHUD extends TokenHUD {
             newIcon.src = iconSrc;
             picture.append(newIcon);
             image.replaceWith(picture);
+
+            if (CONFIG.SFRPG.hiddenConditions.includes(statusId)) {
+                picture.style.display = "none";
+                continue;
+            }
 
             const nameLabel = document.createElement("a");
             nameLabel.classList.add("name-label");
@@ -81,6 +87,7 @@ export class SFRPGTokenHUD extends TokenHUD {
 
             picture.addEventListener("click", (event) => this._onClickEffect(event, picture, false));
             picture.addEventListener("contextmenu", (event) => this._onClickEffect(event, picture, true));
+
         }
     }
 
