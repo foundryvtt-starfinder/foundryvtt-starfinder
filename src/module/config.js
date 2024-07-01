@@ -940,8 +940,6 @@ SFRPG.conditionTypes = {
     "unconscious": "SFRPG.ConditionsUnconscious"
 };
 
-SFRPG.hiddenConditions = ["broken"];
-
 SFRPG.languages = {
     "aballonian": "SFRPG.LanguagesAballonian",
     "abyssal": "SFRPG.LanguagesAbyssal",
@@ -1605,7 +1603,8 @@ SFRPG.statusEffects = [
     {
         id: "broken",
         name: "SFRPG.ConditionsBroken",
-        img: "systems/sfrpg/icons/conditions/broken.webp"
+        img: "systems/sfrpg/icons/conditions/broken.webp",
+        hud: false
     },
     {
         id: "burning",

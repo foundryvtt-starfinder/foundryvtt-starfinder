@@ -73,11 +73,6 @@ export class SFRPGTokenHUD extends TokenHUD {
             picture.append(newIcon);
             image.replaceWith(picture);
 
-            if (CONFIG.SFRPG.hiddenConditions.includes(statusId)) {
-                picture.style.display = "none";
-                continue;
-            }
-
             const nameLabel = document.createElement("a");
             nameLabel.classList.add("name-label");
             nameLabel.setAttribute("title", name);
