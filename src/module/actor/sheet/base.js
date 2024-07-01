@@ -260,8 +260,6 @@ export class ActorSheetSFRPG extends ActorSheet {
         // Delete Inventory Item
         html.find('.item-delete').click(ev => this._onItemDelete(ev));
 
-        html.find("li.inventory-header").click(ev => this._onItemHeaderClick(ev));
-
         // Item Dragging
         const handler = ev => this._onDragStart(ev);
         html.find('li.item').each((i, li) => {
@@ -901,24 +899,6 @@ export class ActorSheetSFRPG extends ActorSheet {
         } else {
             document.sheet.render(true);
         }
-    }
-
-    /**
-     * Handle clicking inventory/features headers, allowing them to minimize
-     * @param {Event} event
-     */
-    async _onItemHeaderClick(event) {
-        event.preventDefault();
-        const target = $(event.currentTarget);
-
-        const items = target.next("ol.item-list");
-
-        if (!target.hasClass("collapsed")) {
-            items.slideUp(200, () => items.css("display", "none"));
-        } else {
-            items.slideDown(200, () => items.css("display", ""));
-        }
-        target.toggleClass('collapsed');
     }
 
     /**
