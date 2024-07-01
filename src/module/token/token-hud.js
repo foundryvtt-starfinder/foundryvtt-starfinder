@@ -2,6 +2,18 @@ export class SFRPGTokenHUD extends TokenHUD {
 
     /**
      * @override
+     * Calls super then adds a remove all button and optionally reformats the grid with text.
+     */
+    async _render(force, options) {
+        const render = await super._render(force, options);
+        this.modifyConditions(this.element);
+        this.refreshStatusIcons();
+
+        return render;
+    }
+
+    /**
+     * @override
      * Toggles active and overlay classes on the status images.
      */
     refreshStatusIcons() {
@@ -19,23 +31,9 @@ export class SFRPGTokenHUD extends TokenHUD {
     }
 
     /**
-     * @override
-     * Calls super then adds a remove all button and optionally reformats the grid with text.
-     */
-    async _render(force, options) {
-        const render = await super._render(force, options);
-        this.modifyConditions(this.element);
-        this.refreshStatusIcons();
-
-        return render;
-    }
-
-    // #endregion Overrides
-
-    /**
      * Modifies the status effects (conditions) formatting
      * Adds names, classes, and a button to remove all conditions
-     * @param {any} html - document element
+     * @param {HTMLFormElement} html - The form element of the Token HUD
      */
     modifyConditions([html]) {
         // Add a button to remove all conditions
@@ -51,16 +49,16 @@ export class SFRPGTokenHUD extends TokenHUD {
         const gridContainer = $(".status-effects", html);
         gridContainer.append(button);
 
-        // Reformat the grid
+        // Optionally reformat the grid
         if (!(game.settings.get('sfrpg', 'tokenConditionLabels'))) return;
 
-        // allow alternate styling
+        // Add a class for the alternate styling
         html.classList.add('modified');
 
         const allStatusImages = html.querySelectorAll(".status-effects > img");
 
         for (const image of allStatusImages) {
-            // Replace the img element with a picture element, which can display ::after content
+            // Replace the img element with a picture element, which can display ::after content and allows child elements.
             const name = image.dataset.tooltip ?? "";
 
             const picture = document.createElement("picture");
@@ -81,11 +79,18 @@ export class SFRPGTokenHUD extends TokenHUD {
 
             picture.append(nameLabel);
 
-            picture.addEventListener("click", event => this._onClickEffect(event, picture, false));
-            picture.addEventListener("contextmenu", event => this._onClickEffect(event, picture, true));
+            picture.addEventListener("click", (event) => this._onClickEffect(event, picture, false));
+            picture.addEventListener("contextmenu", (event) => this._onClickEffect(event, picture, true));
         }
     }
 
+    /**
+     * Handle creating the condition item, and optionally an overlay effect.
+     * @param {Event} event The event
+     * @param {HTMLPictureElement} pic The clicked Picture element
+     * @param {Boolean} overlay Whether to also create an overlay status effect as well as a condition item
+     * @returns {Boolean} Whether the effect is now enabled or not.
+     */
     async _onClickEffect(event, pic, overlay) {
         event.preventDefault();
         event.stopPropagation();
@@ -106,17 +111,19 @@ export class SFRPGTokenHUD extends TokenHUD {
     /**
      * @listens
      * Sets all conditions to false
-     * @param {Event} event - standard event interface
+     * @param {Event} event The event
      */
     async onRemoveAllConditions(event) {
         event.preventDefault();
+        event.stopPropagation();
+
         const statuses = this.object.actor?.system?.conditions;
         if (!statuses) return;
 
         const promises = [];
 
         for (const [condition, enabled] of Object.entries(statuses)) {
-            if (enabled) promises.push(this.object.actor.setCondition(condition, false, {overlay: false}));
+            if (enabled) promises.push(this.object.actor.setCondition(condition, false));
         }
 
         for (const effect of this.object.actor.effects) {

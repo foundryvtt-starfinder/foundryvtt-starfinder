@@ -105,7 +105,7 @@ export default class SFRPGRoll extends Roll {
             gte: (a, b) => a >= b,
             lt: (a, b) => a < b,
             lte: (a, b) => a <= b,
-            ne:(a, b) => a !== b,
+            ne: (a, b) => a !== b,
             ternary: (condition, ifTrue, ifFalse) => (condition ? ifTrue : ifFalse),
             lookup,
             lookupRange
