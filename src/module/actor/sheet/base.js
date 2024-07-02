@@ -645,10 +645,11 @@ export class ActorSheetSFRPG extends ActorSheet {
                     create: {
                         icon: '<i class="fas fa-check"></i>',
                         label: game.i18n.format("SFRPG.NPCSheet.Interface.CreateItem.Button"),
-                        callback: html => {
+                        callback: (html) => {
                             const form = html[0].querySelector("form");
                             const formDataExtended = new FormDataExtended(form);
-                            foundry.utils.mergeObject(createData, formDataExtended.toObject());
+                            foundry.utils.mergeObject(createData, formDataExtended.object);
+
                             if (!createData.name) {
                                 createData.name = game.i18n.format("SFRPG.NPCSheet.Interface.CreateItem.Name");
                             }
