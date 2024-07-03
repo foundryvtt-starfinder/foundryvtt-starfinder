@@ -39,17 +39,13 @@ function getManifest() {
         json.root = 'dist';
     }
 
-    const modulePath = path.join(json.root, 'module.json');
     const systemPath = path.join(json.root, 'system.json');
 
-    if (fs.existsSync(modulePath)) {
-        json.file = fs.readJSONSync(modulePath);
-        json.name = 'module.json';
-    } else if (fs.existsSync(systemPath)) {
+    if (fs.existsSync(systemPath)) {
         json.file = fs.readJSONSync(systemPath);
         json.name = 'system.json';
     } else {
-        return;
+        return null;
     }
 
     return json;
@@ -235,10 +231,18 @@ function JSONstringifyOrder( obj, space, sortingMode = "default" ) {
  * @returns {Object} A sanitized object
  */
 function sanitizeJSON(jsonInput) {
+    const manifest = getManifest().file;
+
     const treeShake = (item) => {
         delete item.sort;
         if (!item.folder) delete item.folder;
-        delete item._stats;
+
+        item._stats = {
+            coreVersion: manifest.compatibility.minimum,
+            systemId: "sfrpg",
+            systemVersion: manifest.version
+        };
+
         delete item.permission;
         delete item.ownership;
         delete item.effects;
@@ -545,7 +549,6 @@ async function unpack({packName, filePath, outputDirectory, partOfCook = false})
 
         for (const folder of folders) {
             folderMap.set(folder._id, getFolderPath(folder));
-            sanitizeFolder(folder);
         }
         const folderFilePath = path.resolve(outputDirectory, "_folders.json");
         promises.push(fs.promises.writeFile(folderFilePath, JSONstringifyOrder(folders, 2), "utf-8"));

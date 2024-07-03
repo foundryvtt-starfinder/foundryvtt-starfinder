@@ -1587,183 +1587,184 @@ SFRPG.difficultyLevels = {
 SFRPG.statusEffects = [
     {
         id: "asleep",
-        label: "SFRPG.ConditionsAsleep",
-        icon: "systems/sfrpg/icons/conditions/asleep.webp"
+        name: "SFRPG.ConditionsAsleep",
+        img: "systems/sfrpg/icons/conditions/asleep.webp"
     },
     {
         id: "bleeding",
-        label: "SFRPG.ConditionsBleeding",
-        icon: "systems/sfrpg/icons/conditions/bleeding.webp"
+        name: "SFRPG.ConditionsBleeding",
+        img: "systems/sfrpg/icons/conditions/bleeding.webp"
     },
     {
         id: "blinded",
-        label: "SFRPG.ConditionsBlinded",
-        icon: "systems/sfrpg/icons/conditions/blinded.webp"
+        name: "SFRPG.ConditionsBlinded",
+        img: "systems/sfrpg/icons/conditions/blinded.webp"
     },
     {
         id: "broken",
-        label: "SFRPG.ConditionsBroken",
-        icon: "systems/sfrpg/icons/conditions/broken.webp"
+        name: "SFRPG.ConditionsBroken",
+        img: "systems/sfrpg/icons/conditions/broken.webp",
+        hud: false
     },
     {
         id: "burning",
-        label: "SFRPG.ConditionsBurning",
-        icon: "systems/sfrpg/icons/conditions/burning.webp"
+        name: "SFRPG.ConditionsBurning",
+        img: "systems/sfrpg/icons/conditions/burning.webp"
     },
     {
         id: "confused",
-        label: "SFRPG.ConditionsConfused",
-        icon: "systems/sfrpg/icons/conditions/confused.webp"
+        name: "SFRPG.ConditionsConfused",
+        img: "systems/sfrpg/icons/conditions/confused.webp"
     },
     {
         id: "cowering",
-        label: "SFRPG.ConditionsCowering",
-        icon: "systems/sfrpg/icons/conditions/cowering.webp"
+        name: "SFRPG.ConditionsCowering",
+        img: "systems/sfrpg/icons/conditions/cowering.webp"
     },
     {
         id: "dazed",
-        label: "SFRPG.ConditionsDazed",
-        icon: "systems/sfrpg/icons/conditions/dazed.webp"
+        name: "SFRPG.ConditionsDazed",
+        img: "systems/sfrpg/icons/conditions/dazed.webp"
     },
     {
         id: "dazzled",
-        label: "SFRPG.ConditionsDazzled",
-        icon: "systems/sfrpg/icons/conditions/dazzled.webp"
+        name: "SFRPG.ConditionsDazzled",
+        img: "systems/sfrpg/icons/conditions/dazzled.webp"
     },
     {
         id: "dead",
-        label: "SFRPG.ConditionsDead",
-        icon: "systems/sfrpg/icons/conditions/dead.webp"
+        name: "SFRPG.ConditionsDead",
+        img: "systems/sfrpg/icons/conditions/dead.webp"
     },
     {
         id: "deafened",
-        label: "SFRPG.ConditionsDeafened",
-        icon: "systems/sfrpg/icons/conditions/deafened.webp"
+        name: "SFRPG.ConditionsDeafened",
+        img: "systems/sfrpg/icons/conditions/deafened.webp"
     },
     {
         id: "dying",
-        label: "SFRPG.ConditionsDying",
-        icon: "systems/sfrpg/icons/conditions/dying.webp"
+        name: "SFRPG.ConditionsDying",
+        img: "systems/sfrpg/icons/conditions/dying.webp"
     },
     {
         id: "encumbered",
-        label: "SFRPG.ConditionsEncumbered",
-        icon: "systems/sfrpg/icons/conditions/encumbered.webp"
+        name: "SFRPG.ConditionsEncumbered",
+        img: "systems/sfrpg/icons/conditions/encumbered.webp"
     },
     {
         id: "entangled",
-        label: "SFRPG.ConditionsEntangled",
-        icon: "systems/sfrpg/icons/conditions/entangled.webp"
+        name: "SFRPG.ConditionsEntangled",
+        img: "systems/sfrpg/icons/conditions/entangled.webp"
     },
     {
         id: "exhausted",
-        label: "SFRPG.ConditionsExhausted",
-        icon: "systems/sfrpg/icons/conditions/exhausted.webp"
+        name: "SFRPG.ConditionsExhausted",
+        img: "systems/sfrpg/icons/conditions/exhausted.webp"
     },
     {
         id: "fascinated",
-        label: "SFRPG.ConditionsFascinated",
-        icon: "systems/sfrpg/icons/conditions/fascinated.webp"
+        name: "SFRPG.ConditionsFascinated",
+        img: "systems/sfrpg/icons/conditions/fascinated.webp"
     },
     {
         id: "fatigued",
-        label: "SFRPG.ConditionsFatigued",
-        icon: "systems/sfrpg/icons/conditions/fatigued.webp"
+        name: "SFRPG.ConditionsFatigued",
+        img: "systems/sfrpg/icons/conditions/fatigued.webp"
     },
     {
         id: "flat-footed",
-        label: "SFRPG.ConditionsFlatFooted",
-        icon: "systems/sfrpg/icons/conditions/flatfooted.webp"
+        name: "SFRPG.ConditionsFlatFooted",
+        img: "systems/sfrpg/icons/conditions/flatfooted.webp"
     },
     {
         id: "frightened",
-        label: "SFRPG.ConditionsFrightened",
-        icon: "systems/sfrpg/icons/conditions/frightened.webp"
+        name: "SFRPG.ConditionsFrightened",
+        img: "systems/sfrpg/icons/conditions/frightened.webp"
     },
     {
         id: "grappled",
-        label: "SFRPG.ConditionsGrappled",
-        icon: "systems/sfrpg/icons/conditions/grappled.webp"
+        name: "SFRPG.ConditionsGrappled",
+        img: "systems/sfrpg/icons/conditions/grappled.webp"
     },
     {
         id: "helpless",
-        label: "SFRPG.ConditionsHelpless",
-        icon: "systems/sfrpg/icons/conditions/helpless.webp"
+        name: "SFRPG.ConditionsHelpless",
+        img: "systems/sfrpg/icons/conditions/helpless.webp"
     },
     {
         id: "invisible",
-        label: "SFRPG.ConditionsInvisible",
-        icon: "systems/sfrpg/icons/conditions/invisible.webp"
+        name: "SFRPG.ConditionsInvisible",
+        img: "systems/sfrpg/icons/conditions/invisible.webp"
     },
     {
         id: "nauseated",
-        label: "SFRPG.ConditionsNauseated",
-        icon: "systems/sfrpg/icons/conditions/nauseated.webp"
+        name: "SFRPG.ConditionsNauseated",
+        img: "systems/sfrpg/icons/conditions/nauseated.webp"
     },
     {
         id: "off-kilter",
-        label: "SFRPG.ConditionsOffKilter",
-        icon: "systems/sfrpg/icons/conditions/offkilter.webp"
+        name: "SFRPG.ConditionsOffKilter",
+        img: "systems/sfrpg/icons/conditions/offkilter.webp"
     },
     {
         id: "off-target",
-        label: "SFRPG.ConditionsOffTarget",
-        icon: "systems/sfrpg/icons/conditions/offtarget.webp"
+        name: "SFRPG.ConditionsOffTarget",
+        img: "systems/sfrpg/icons/conditions/offtarget.webp"
     },
     {
         id: "overburdened",
-        label: "SFRPG.ConditionsOverburdened",
-        icon: "systems/sfrpg/icons/conditions/overburdened.webp"
+        name: "SFRPG.ConditionsOverburdened",
+        img: "systems/sfrpg/icons/conditions/overburdened.webp"
     },
     {
         id: "panicked",
-        label: "SFRPG.ConditionsPanicked",
-        icon: "systems/sfrpg/icons/conditions/panicked.webp"
+        name: "SFRPG.ConditionsPanicked",
+        img: "systems/sfrpg/icons/conditions/panicked.webp"
     },
     {
         id: "paralyzed",
-        label: "SFRPG.ConditionsParalyzed",
-        icon: "systems/sfrpg/icons/conditions/paralyzed.webp"
+        name: "SFRPG.ConditionsParalyzed",
+        img: "systems/sfrpg/icons/conditions/paralyzed.webp"
     },
     {
         id: "pinned",
-        label: "SFRPG.ConditionsPinned",
-        icon: "systems/sfrpg/icons/conditions/pinned.webp"
+        name: "SFRPG.ConditionsPinned",
+        img: "systems/sfrpg/icons/conditions/pinned.webp"
     },
     {
         id: "prone",
-        label: "SFRPG.ConditionsProne",
-        icon: "systems/sfrpg/icons/conditions/prone.webp"
+        name: "SFRPG.ConditionsProne",
+        img: "systems/sfrpg/icons/conditions/prone.webp"
     },
     {
         id: "shaken",
-        label: "SFRPG.ConditionsShaken",
-        icon: "systems/sfrpg/icons/conditions/shaken.webp"
+        name: "SFRPG.ConditionsShaken",
+        img: "systems/sfrpg/icons/conditions/shaken.webp"
     },
     {
         id: "sickened",
-        label: "SFRPG.ConditionsSickened",
-        icon: "systems/sfrpg/icons/conditions/sickened.webp"
+        name: "SFRPG.ConditionsSickened",
+        img: "systems/sfrpg/icons/conditions/sickened.webp"
     },
     {
         id: "stable",
-        label: "SFRPG.ConditionsStable",
-        icon: "systems/sfrpg/icons/conditions/stable.webp"
+        name: "SFRPG.ConditionsStable",
+        img: "systems/sfrpg/icons/conditions/stable.webp"
     },
     {
         id: "staggered",
-        label: "SFRPG.ConditionsStaggered",
-        icon: "systems/sfrpg/icons/conditions/staggered.webp"
+        name: "SFRPG.ConditionsStaggered",
+        img: "systems/sfrpg/icons/conditions/staggered.webp"
     },
     {
         id: "stunned",
-        label: "SFRPG.ConditionsStunned",
-        icon: "systems/sfrpg/icons/conditions/stunned.webp"
+        name: "SFRPG.ConditionsStunned",
+        img: "systems/sfrpg/icons/conditions/stunned.webp"
     },
     {
         id: "unconscious",
-        label: "SFRPG.ConditionsUnconscious",
-        icon: "systems/sfrpg/icons/conditions/unconscious.webp"
+        name: "SFRPG.ConditionsUnconscious",
+        img: "systems/sfrpg/icons/conditions/unconscious.webp"
     }
 ];
 

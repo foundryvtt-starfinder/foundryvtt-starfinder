@@ -243,7 +243,7 @@ export class DiceSFRPG {
 
             const rollObject = Roll.create(finalFormula.finalRoll, { breakdown: preparedRollExplanation, tags: tags });
             rollObject.options.rollOptions = rollOptions;
-            const roll = await rollObject.evaluate({async: true});
+            const roll = await rollObject.evaluate();
 
             // Flag critical thresholds
             for (const d of roll.dice) {
@@ -255,7 +255,7 @@ export class DiceSFRPG {
 
             // if (flavor) {
             //     const chatData = {
-            //         type: CONST.CHAT_MESSAGE_TYPES.IC,
+            //         type: CONST.CHAT_MESSAGE_STYLES.IC,
             //         speaker: speaker,
             //         content: flavor
             //     };
@@ -272,13 +272,13 @@ export class DiceSFRPG {
                 // Push the roll to the ChatBox
                 const customData = {
                     title: flavor,
-                    rollContext:  rollContext,
-                    speaker: speaker,
-                    rollMode: rollMode,
+                    rollContext,
+                    speaker,
+                    rollMode,
                     breakdown: preparedRollExplanation,
-                    htmlData: htmlData,
+                    htmlData,
                     rollType: "normal",
-                    rollOptions: rollOptions,
+                    rollOptions,
                     rollDices: finalFormula.rollDices
                 };
 
@@ -292,13 +292,12 @@ export class DiceSFRPG {
 
             if (!useCustomCard && chatMessage) {
                 const messageData = {
-                    flavor: flavor,
-                    speaker: speaker,
-                    rollMode: rollMode,
-                    roll: roll,
-                    type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+                    flavor,
+                    speaker,
+                    rollMode,
+                    rolls: [roll],
                     sound: CONFIG.sounds.dice,
-                    flags: {rollOptions: rollOptions}
+                    flags: { rollOptions }
                 };
 
                 messageData.content = await roll.render({ htmlData: htmlData, customTooltip: finalFormula.rollDices });
@@ -397,7 +396,7 @@ export class DiceSFRPG {
                 }
 
                 const rollObject = Roll.create(finalFormula.finalRoll, { breakdown, tags, skipUI: true });
-                const roll = await rollObject.evaluate({async: true});
+                const roll = await rollObject.evaluate();
                 roll.options.rollMode = rollMode;
 
                 // Flag critical thresholds
@@ -439,7 +438,7 @@ export class DiceSFRPG {
                     finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
 
                     const rollObject = Roll.create(finalFormula.finalRoll, { breakdown, tags });
-                    const roll = await rollObject.evaluate({async: true});
+                    const roll = await rollObject.evaluate();
                     roll.options.rollMode = rollMode;
 
                     // Flag critical thresholds
@@ -540,7 +539,7 @@ export class DiceSFRPG {
                 if (part.isDamageSection) {
                     damageSections.push(part);
 
-                    const additionalOptions = duplicate(options);
+                    const additionalOptions = foundry.utils.deepClone(options);
                     additionalOptions.skipUI = true;
 
                     const tempTree = new RollTree(additionalOptions);
@@ -678,7 +677,7 @@ export class DiceSFRPG {
             }
 
             const isCritical = (button === "critical");
-            let finalFlavor = duplicate(flavor);
+            let finalFlavor = foundry.utils.deepClone(flavor);
             if (isCritical) {
                 htmlData.push({ name: "is-critical", value: "true" });
                 tags.push({tag: `critical`, text: game.i18n.localize("SFRPG.Rolls.Dice.CriticalHit")});
@@ -714,7 +713,7 @@ export class DiceSFRPG {
                 if (part.partIndex) {
                     finalFlavor += ` (${part.partIndex})`;
                 }
-                // const originalTypes = duplicate(damageTypes);
+                // const originalTypes = foundry.utils.deepClone(damageTypes);
                 // damageTypes = [getDamageTypeForPart(part)];
                 // console.log([originalTypes, damageTypes]);
             }
@@ -725,7 +724,7 @@ export class DiceSFRPG {
             const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
 
             const rollObject = Roll.create(finalFormula.finalRoll, { tags: tags, breakdown: preparedRollExplanation });
-            const roll = await rollObject.evaluate({async: true});
+            const roll = await rollObject.evaluate();
 
             // CRB pg. 240, < 1 damage returns 1 non-lethal damage.
             if (roll._total < 1) {
@@ -799,11 +798,10 @@ export class DiceSFRPG {
 
                 const messageData = {
                     flavor: finalFlavor,
-                    speaker: speaker,
+                    speaker,
                     content: rollContent,
-                    rollMode: rollMode,
-                    roll: roll,
-                    type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+                    rollMode,
+                    rolls: [roll],
                     sound: CONFIG.sounds.dice
                 };
 
@@ -1117,15 +1115,14 @@ export class DiceSFRPG {
         Roll.validate(roll.formula);
 
         // Optionally strip flavor annotations.
-        if ( !preserveFlavor ) roll.terms = Roll.parse(roll.formula.replace(RollTerm.FLAVOR_REGEXP, ""));
+        if ( !preserveFlavor ) roll.terms = Roll.parse(roll.formula.replace(foundry.dice.terms.RollTerm.FLAVOR_REGEXP, ""));
 
         // Perform arithmetic simplification on the existing roll terms.
         roll.terms = DiceSFRPG.#simplifyOperatorTerms(roll.terms);
 
         if ( /[*/]/.test(roll.formula) ) {
             return ( roll.isDeterministic ) && ( !/\[/.test(roll.formula) || !preserveFlavor )
-                // TODO: Sync rolls may or may not be going away? Idfk man
-                ? roll.evaluate({ async: false }).total.toString()
+                ? roll.evaluateSync().total.toString()
                 : roll.constructor.getFormula(roll.terms);
         }
 
@@ -1134,12 +1131,12 @@ export class DiceSFRPG {
         roll.terms = Roll.simplifyTerms(roll.terms);
 
         // Group terms by type and perform simplifications on various types of roll term.
-        let { poolTerms, diceTerms, mathTerms, numericTerms } = DiceSFRPG.#groupTermsByType(roll.terms);
+        let { poolTerms, diceTerms, functionTerms, numericTerms } = DiceSFRPG.#groupTermsByType(roll.terms);
         numericTerms = DiceSFRPG.#simplifyNumericTerms(numericTerms ?? []);
         diceTerms = DiceSFRPG.#simplifyDiceTerms(diceTerms ?? []);
 
         // Recombine the terms into a single term array and remove an initial + operator if present.
-        const simplifiedTerms = [diceTerms, poolTerms, mathTerms, numericTerms].flat().filter(Boolean);
+        const simplifiedTerms = [diceTerms, poolTerms, functionTerms, numericTerms].flat().filter(Boolean);
         if ( simplifiedTerms[0]?.operator === "+" ) simplifiedTerms.shift();
         return simplifiedTerms.map(t => t.formula).join(" ");
     }
@@ -1152,6 +1149,7 @@ export class DiceSFRPG {
     * @returns {RollTerm[]}      A new array of roll terms with redundant operators removed.
     */
     static #simplifyOperatorTerms(terms) {
+        const t = foundry.dice.terms;
         return terms.reduce((acc, term) => {
             const prior = acc[acc.length - 1];
             const ops = new Set([prior?.operator, term.operator]);
@@ -1160,10 +1158,10 @@ export class DiceSFRPG {
             if ( ops.has(undefined) ) acc.push(term);
 
             // Replace consecutive "+ -" operators with a "-" operator.
-            else if ( (ops.has("+")) && (ops.has("-")) ) acc.splice(-1, 1, new OperatorTerm({ operator: "-" }));
+            else if ( (ops.has("+")) && (ops.has("-")) ) acc.splice(-1, 1, new t.OperatorTerm({ operator: "-" }));
 
             // Replace double "-" operators with a "+" operator.
-            else if ( (ops.has("-")) && (ops.size === 1) ) acc.splice(-1, 1, new OperatorTerm({ operator: "+" }));
+            else if ( (ops.has("-")) && (ops.size === 1) ) acc.splice(-1, 1, new t.OperatorTerm({ operator: "+" }));
 
             // Don't include "+" operators that directly follow "+", "*", or "/". Otherwise, add the term as is.
             else if ( !ops.has("+") ) acc.push(term);
@@ -1180,6 +1178,7 @@ export class DiceSFRPG {
     * @returns {object[]}      A new array of terms with unannotated numeric terms combined into one.
     */
     static #simplifyNumericTerms(terms) {
+        const t = foundry.dice.terms;
         const simplified = [];
         const { annotated, unannotated } = DiceSFRPG.#separateAnnotatedTerms(terms);
 
@@ -1189,8 +1188,8 @@ export class DiceSFRPG {
             if ( staticBonus === 0 ) return [...annotated];
 
             // If the staticBonus is greater than 0, add a "+" operator so the formula remains valid.
-            if ( staticBonus > 0 ) simplified.push(new OperatorTerm({ operator: "+"}));
-            simplified.push(new NumericTerm({ number: staticBonus }));
+            if ( staticBonus > 0 ) simplified.push(new t.OperatorTerm({ operator: "+"}));
+            simplified.push(new t.NumericTerm({ number: staticBonus }));
 
         }
         return [...simplified, ...annotated];
@@ -1204,11 +1203,25 @@ export class DiceSFRPG {
     * @returns {object[]}      A new array of simplified dice terms.
     */
     static #simplifyDiceTerms(terms) {
+        const t = foundry.dice.terms;
         const { annotated, unannotated } = DiceSFRPG.#separateAnnotatedTerms(terms);
 
         // Split the unannotated terms into different die sizes and signs
         const diceQuantities = unannotated.reduce((obj, term, i) => {
-            if ( term instanceof OperatorTerm ) return obj;
+            if ( term instanceof t.OperatorTerm ) return obj;
+
+            if (term._number instanceof Roll) {
+                // Complex number term.
+                if ( !term._number.isDeterministic ) return obj;
+                if ( !term._number._evaluated ) term._number.evaluateSync();
+            }
+
+            if (term._faces instanceof Roll) {
+                // Complex number term.
+                if ( !term._faces.isDeterministic ) return obj;
+                if ( !term._faces._evaluated ) term._faces.evaluateSync();
+            }
+
             const key = `${unannotated[i - 1].operator}${term.faces}`;
             obj[key] = (obj[key] ?? 0) + term.number;
             return obj;
@@ -1216,8 +1229,8 @@ export class DiceSFRPG {
 
         // Add new die and operator terms to simplified for each die size and sign
         const simplified = Object.entries(diceQuantities).flatMap(([key, number]) => ([
-            new OperatorTerm({ operator: key.charAt(0) }),
-            new Die({ number, faces: parseInt(key.slice(1)) })
+            new t.OperatorTerm({ operator: key.charAt(0) }),
+            new t.Die({ number, faces: parseInt(key.slice(1)) })
         ]));
         return [...simplified, ...annotated];
     }
@@ -1230,9 +1243,10 @@ export class DiceSFRPG {
     * @returns {object[]}      A new array of terms with no parenthetical terms.
     */
     static #expandParentheticalTerms(terms) {
+        const t = foundry.dice.terms;
         terms = terms.reduce((acc, term) => {
-            if ( term instanceof ParentheticalTerm ) {
-                if ( term.isDeterministic ) term = new NumericTerm({ number: Roll.safeEval(term.term) });
+            if ( term instanceof t.ParentheticalTerm ) {
+                if ( term.isDeterministic ) term = new t.NumericTerm({ number: Roll.safeEval(term.term) });
                 else {
                     const subterms = new Roll(term.term).terms;
                     term = DiceSFRPG.#expandParentheticalTerms(subterms);
@@ -1247,19 +1261,20 @@ export class DiceSFRPG {
     /* -------------------------------------------- */
 
     /**
-    * A helper function to group terms into PoolTerms, DiceTerms, MathTerms, and NumericTerms.
-    * MathTerms are included as NumericTerms if they are deterministic.
+    * A helper function to group terms into PoolTerms, DiceTerms, FunctionTerms, and NumericTerms.
+    * FunctionTerms are included as NumericTerms if they are deterministic.
     * @param {RollTerm[]} terms  An array of roll terms.
     * @returns {object}          An object mapping term types to arrays containing roll terms of that type.
     */
     static #groupTermsByType(terms) {
+        const t = foundry.dice.terms;
         // Add an initial operator so that terms can be rearranged arbitrarily.
-        if ( !(terms[0] instanceof OperatorTerm) ) terms.unshift(new OperatorTerm({ operator: "+" }));
+        if ( !(terms[0] instanceof t.OperatorTerm) ) terms.unshift(new t.OperatorTerm({ operator: "+" }));
 
         return terms.reduce((obj, term, i) => {
             let type;
-            if ( term instanceof DiceTerm ) type = DiceTerm;
-            else if ( (term instanceof MathTerm) && (term.isDeterministic) ) type = NumericTerm;
+            if ( term instanceof t.DiceTerm ) type = t.DiceTerm;
+            else if ( (term instanceof t.FunctionTerm) && (term.isDeterministic) ) type = NumericTerm;
             else type = term.constructor;
             const key = `${type.name.charAt(0).toLowerCase()}${type.name.substring(1)}s`;
 
@@ -1277,8 +1292,9 @@ export class DiceSFRPG {
     * @returns {Array | Array[]}  A pair of term arrays, one containing annotated terms.
     */
     static #separateAnnotatedTerms(terms) {
+        const t = foundry.dice.terms;
         return terms.reduce((obj, curr, i) => {
-            if ( curr instanceof OperatorTerm ) return obj;
+            if ( curr instanceof t.OperatorTerm ) return obj;
             obj[curr.flavor ? "annotated" : "unannotated"].push(terms[i - 1], curr);
             return obj;
         }, { annotated: [], unannotated: [] });
