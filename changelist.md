@@ -16,6 +16,8 @@ Luckily it's been less time between updates than last time! This update brings V
 - Fix token effect icons not appearing
 - Fix spell slots not being updatable on the sheet
 - Fix item create dialogs not working on sheets
+- Fix some errors with dropping items to sheets
+- Fix deflector shields not applying to TL
 
 
 # v0.25.3
