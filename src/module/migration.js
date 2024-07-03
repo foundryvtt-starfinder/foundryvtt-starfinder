@@ -1,5 +1,5 @@
-import { SFRPGModifierTypes, SFRPGEffectType, SFRPGModifierType } from "./modifiers/types.js";
 import SFRPGModifier from "./modifiers/modifier.js";
+import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./modifiers/types.js";
 
 const SFRPGMigrationSchemas = Object.freeze({
     NPC_DATA_UPATE: 0.001,
@@ -206,16 +206,19 @@ const migrateMacro = async function(macro, schema) {
 };
 
 const damageTypeMigrationCallback = function(arr, curr) {
-    if (!Array.isArray(curr)) return arr;
-    let [formula, type] = curr;
+    if (!Array.isArray(curr)) {
+        arr.push(curr);
+        return arr;
+    }
+    const [formula, type] = curr;
 
     if (!type) {
         arr.push({ "formula": formula || "", "types": {}, "operator": "" });
     } else if (type.includes("+")) {
-        let types = type.split("+");
+        const types = type.split("+");
         arr.push({ "formula": formula, "types": { [types[0]]: true, [types[1]]: true }, "operator": "and" });
     } else if (type.includes("|")) {
-        let types = type.split("|");
+        const types = type.split("|");
         arr.push({ "formula": formula, "types": { [types[0]]: true, [types[1]]: true }, "operator": "or" });
     } else {
         arr.push({ "formula": formula, "types": { [type]: true }, "operator": "" });
@@ -230,13 +233,13 @@ const _migrateDamageTypes = function(item, data) {
     const critical = itemData.critical;
 
     if (damage?.parts?.length > 0) {
-        let parts = damage.parts.reduce(damageTypeMigrationCallback, []);
+        const parts = damage.parts.reduce(damageTypeMigrationCallback, []);
 
         data['data.damage.parts'] = parts;
     }
 
     if (critical?.parts?.length > 0) {
-        let parts = critical.parts.reduce(damageTypeMigrationCallback, []);
+        const parts = critical.parts.reduce(damageTypeMigrationCallback, []);
 
         data['data.critical.parts'] = parts;
     }
@@ -245,7 +248,7 @@ const _migrateDamageTypes = function(item, data) {
 };
 
 const _migrateNPCData = function(actor, migratedData) {
-    const actorData = duplicate(actor.data);
+    const actorData = foundry.utils.duplicate(actor.data);
     const abilities = actorData.abilities;
     const skills = actorData.skills;
 
@@ -268,11 +271,10 @@ const _migrateNPCData = function(actor, migratedData) {
 };
 
 const _resetActorFlags = function(actor, migratedData) {
-    const actorData = duplicate(actor.data);
     let sfFlags = null;
 
     if (actor.flags.starfinder) {
-        sfFlags = duplicate(actor.flags.starfinder);
+        sfFlags = foundry.utils.deepClone(actor.flags.starfinder);
     }
 
     migratedData["flags.-=starfinder"] = null;
@@ -282,7 +284,7 @@ const _resetActorFlags = function(actor, migratedData) {
 };
 
 const _migrateActorAbilityScores = function(actor, migratedData) {
-    const actorData = duplicate(actor.data);
+    const actorData = foundry.utils.duplicate(actor.data);
     const abilities = actorData.abilities;
 
     for (const ability of Object.values(abilities)) {
@@ -299,7 +301,7 @@ const _migrateActorSpeed = function(actor, migratedData) {
 
     const speedValue = actorData.attributes.speed?.value;
 
-    let baseSpeed = duplicate(speedValue);
+    let baseSpeed = foundry.utils.deepClone(speedValue);
     if (baseSpeed && isNaN(baseSpeed)) {
         baseSpeed = baseSpeed.replace(/\D/g, '');
         baseSpeed = Number(baseSpeed);
@@ -347,12 +349,12 @@ const _migrateActorSpeed = function(actor, migratedData) {
 const _migrateActorDamageReductions = function(actor, migratedData) {
     const actorData = actor.data;
 
-    const modifiers = duplicate(migratedData.modifiers ?? actorData.modifiers ?? []);
+    const modifiers = foundry.utils.deepClone(migratedData.modifiers ?? actorData.modifiers ?? []);
     let isDirty = false;
 
     // Process old damage reduction
     if (actorData.traits?.damageReduction) {
-        const oldDamageReduction = duplicate(actorData.traits.damageReduction);
+        const oldDamageReduction = foundry.utils.deepClone(actorData.traits.damageReduction);
         const oldDamageReductionValue = Number(oldDamageReduction.value);
         if (!Number.isNaN(oldDamageReductionValue) && oldDamageReductionValue > 0) {
             let notes = "";
@@ -483,7 +485,7 @@ const _migrateDocumentIconToWebP = function(document, data) {
     }
 
     if (document.data?.combatTracker?.visualization?.length > 0) {
-        const newVisualization = duplicate(document.data.combatTracker.visualization);
+        const newVisualization = foundry.utils.deepClone(document.data.combatTracker.visualization);
         let isDirty = false;
 
         for (const [key, visualization] of Object.entries(newVisualization)) {
@@ -522,7 +524,7 @@ const _migrateChatMessageContentToWebP = function(messageData, data) {
 };
 
 const _migrateStringContentToWebP = function(string) {
-    string = duplicate(string);
+    string = foundry.utils.deepClone(string);
     string = string.replace(/(systems\/sfrpg\/[^"]*).png/gi, "$1.webp");
     string = string.replace(/(systems\/sfrpg\/[^"]*).jpg/gi, "$1.webp");
     return string;

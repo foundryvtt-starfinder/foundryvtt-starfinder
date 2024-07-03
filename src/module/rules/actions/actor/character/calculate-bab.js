@@ -3,7 +3,7 @@ export default function(engine) {
         const data = fact.data;
         const classes = fact.classes;
 
-        data.attributes.baseAttackBonus = mergeObject(data.attributes.baseAttackBonus, {
+        data.attributes.baseAttackBonus = foundry.utils.mergeObject(data.attributes.baseAttackBonus, {
             value: 0,
             rolledMods: [],
             tooltip: []

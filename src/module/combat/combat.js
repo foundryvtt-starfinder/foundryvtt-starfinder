@@ -116,7 +116,7 @@ export class CombatSFRPG extends Combat {
         }[this.getCombatType()] || "desc";
 
         const turns = this.combatants.contents.sort(sortMethod === "asc" ? this._sortCombatantsAsc : this._sortCombatants);
-        this.turn = Math.clamped(this.turn, CombatSFRPG.HiddenTurn, turns.length - 1);
+        this.turn = Math.clamp(this.turn, CombatSFRPG.HiddenTurn, turns.length - 1);
 
         // Update state tracking
         const c = turns[this.turn];
@@ -448,7 +448,7 @@ export class CombatSFRPG extends Combat {
 
         // Create the chat message
         const chatData = {
-            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             speaker: ChatMessage.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
             content: html
         };
@@ -486,7 +486,7 @@ export class CombatSFRPG extends Combat {
 
         // Create the chat message
         const chatData = {
-            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             speaker: ChatMessage.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
             content: html
         };
@@ -524,7 +524,7 @@ export class CombatSFRPG extends Combat {
 
         // Create the chat message
         const chatData = {
-            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             speaker: ChatMessage.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
             whisper: eventData.newCombatant.hidden ? ChatMessage.getWhisperRecipients("GM") : [],
             content: html
@@ -628,7 +628,8 @@ export class CombatSFRPG extends Combat {
         difficultyContainer.classList.add("combat-difficulty-container");
 
         const difficultyHTML = document.createElement("a");
-        difficultyHTML.classList.add("combat-difficulty", difficulty);
+        difficultyHTML.classList.add("combat-difficulty");
+        if (difficulty) difficultyHTML.classList.add(difficulty);
         if (combatType === 'normal') {
             difficultyHTML.title = `${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.ClickForDetails")}\n\n${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.PCs")}: ${diffObject.difficultyData.PCs.length} [${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.APL")} ${diffObject.difficultyData.APL}]\n${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.HostileNPCs")}: ${diffObject.difficultyData.enemies.length} [${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.CR")} ${diffObject.difficultyData.CR}]`;
         } else if (combatType === 'starship') {
@@ -698,7 +699,7 @@ export class CombatSFRPG extends Combat {
             updates.push({_id: id, initiative: roll.total});
 
             // Construct chat message data
-            const messageData = mergeObject({
+            const messageData = foundry.utils.mergeObject({
                 speaker: {
                     scene: game.scenes.current?.id,
                     actor: combatant.actor ? combatant.actor.id : null,
@@ -723,7 +724,7 @@ export class CombatSFRPG extends Combat {
                 content: explainedRollContent,
                 rollMode: combatant.hidden && (rollMode === "roll") ? "gmroll" : rollMode,
                 roll: roll,
-                type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+                type: CONST.CHAT_MESSAGE_STYLES.ROLL,
                 sound: CONFIG.sounds.dice
             };
 

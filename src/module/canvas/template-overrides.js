@@ -1,85 +1,43 @@
-import { degtorad } from "../utils/utilities.js";
-import { measureDistance } from "./canvas.js";
-
-// Borrows quite heavily from the Pathfinder 1e system by Furyspark.
-const withinAngle = (min, max, value) => {
-    min = Math.normalizeDegrees(min);
-    max = Math.normalizeDegrees(max);
-    value = Math.normalizeDegrees(value);
-
-    if (min < max) return value >= min && value <= max;
-    return value >= min || value <= max;
-};
-
-const withinRect = (point, rect) => {
-    return point.x >= rect.x && point.x < rect.x + rect.width && point.y >= rect.y && point.y < rect.y + rect.height;
-};
 
 // Applies patches to core functions to integrate Starfinder specific measurements.
 export class TemplateLayerSFRPG extends TemplateLayer {
-    async _onDragLeftStart(event) {
-        if (canvas.grid.type !== CONST.GRID_TYPES.SQUARE) return super._onDragLeftStart(event);
+    _onDragLeftStart(event) {
 
-        // Call placeables layer super instead of templatelayer
-        const origin = duplicate(event.interactionData.origin);
-        await PlaceablesLayer.prototype._onDragLeftStart.call(this, event);
+        if ( !event.shiftKey ) {
+            const interaction = event.interactionData;
 
-        // Create the new preview template
-        const tool = game.activeTool;
-        const { originalEvent } = event;
-
-        // Snap to grid
-        if (!originalEvent.shiftKey) {
-            const pos = canvas.grid.getSnappedPosition(origin.x, origin.y, this.gridPrecision);
-            origin.x = pos.x;
-            origin.y = pos.y;
+            // Snap the origin to the grid as per the rules
+            const M = CONST.GRID_SNAPPING_MODES;
+            let mode = M.VERTEX;
+            switch (game.activeTool) {
+                case "circle": mode |= M.CENTER; break;
+                case "ray": mode |= M.SIDE_MIDPOINT; break; // RAW lines come from corners, but that creates 10ft lines
+            }
+            interaction.origin = canvas.grid.getSnappedPoint(interaction.origin, { mode });
         }
 
-        // Create the template
-        const data = {
-            user: game.user.id,
-            t: tool,
-            x: origin.x,
-            y: origin.y,
-            distance: 1,
-            direction: 0,
-            fillColor: game.user.color || "#FF0000",
-            hidden: event.altKey
-        };
-
-        // Apply some type-specific defaults
-        const defaults = CONFIG.MeasuredTemplate.defaults;
-        if (tool === "cone") data["angle"] = defaults.angle;
-        else if (tool === "ray") data["width"] = defaults.width * canvas.dimensions.distance;
-
-        // Create a preview template
-        const doc = new CONFIG.MeasuredTemplate.documentClass(data, { parent: canvas.scene });
-        const template = new CONFIG.MeasuredTemplate.objectClass(doc);
-        event.interactionData.preview = this.preview.addChild(template);
-        return template.draw();
+        return super._onDragLeftStart(event);
     }
 
     _onDragLeftMove(event) {
         if (canvas.grid.type !== CONST.GRID_TYPES.SQUARE) return super._onDragLeftMove(event);
 
-        const { destination, layerDragState, preview, origin } = event.interactionData;
-        if (layerDragState === 0) return;
-
-        const { originalEvent } = event;
+        const interaction = event.interactionData;
 
         // Snap the destination to the grid
-        const snapToGrid = !originalEvent.shiftKey;
-        if (snapToGrid) {
-            event.interactionData.destination = canvas.grid.getSnappedPosition(destination.x, destination.y, this.gridPrecision);
-        }
+        const snapToGrid = !event.shiftKey;
+        if (snapToGrid) interaction.destination = this.getSnappedPoint(interaction.destination);
+
+        const { destination, preview, origin } = interaction;
 
         // Compute the ray
         const ray = new Ray(origin, destination);
         const dist = canvas.dimensions.distance;
-        const ratio = canvas.dimensions.distancePixels;
+        const ratio = canvas.dimensions.size / canvas.dimensions.distance;
 
         // Update the preview object
         const type = preview.document.t;
+
         // Set direction
         const baseDirection = Math.normalizeDegrees(Math.toDegrees(ray.angle));
         if (snapToGrid && ["cone", "circle"].includes(type)) {
@@ -90,33 +48,41 @@ export class TemplateLayerSFRPG extends TemplateLayer {
         } else {
             preview.document.direction = baseDirection;
         }
+
         // Set distance
         const baseDistance = ray.distance / ratio;
         if (snapToGrid && ["cone", "circle", "ray"].includes(type)) {
-            preview.document.distance = Math.floor(baseDistance / dist) * dist;
+            const increment = Math.max(baseDistance, dist);
+            preview.document.distance = Math.ceil(increment / dist) * dist;
         } else {
             preview.document.distance = baseDistance;
         }
-        preview.renderFlags.set({refreshShape: true});
 
-        // Confirm the creation state
-        event.interactionData.layerDragState = 2;
+        preview.renderFlags.set({refreshShape: true});
     }
 }
 
 export class MeasuredTemplateSFRPG extends MeasuredTemplate {
-    getHighlightedSquares() {
+    /**
+   * Get an array of points which define top-left grid spaces to highlight for square or hexagonal grids.
+   * @returns {Point[]}
+   * @protected
+   */
+    _getGridHighlightPositions() {
+        // Only override circles and cones
+        const templateType = this.document.t;
+        if (["rect", "ray"].includes(templateType)) return super._getGridHighlightPositions();
 
         const grid = canvas.grid,
             gridSizePx = canvas.dimensions.size, // Size of each cell in pixels
             gridSizeUnits = canvas.dimensions.distance; // feet, meters, etc.
 
-        const templateType = this.document.t,
-            templateDirection = this.document.direction,
+        const templateDirection = this.document.direction,
             templateAngle = this.document.angle;
 
         // Parse rays as per Bresenham's algorithm
-        if (templateType === "ray") {
+        // FIXME: causes strange highlight behaviour on V12 for some reason? Deferring to core ray highlighting for now
+        /* if (templateType === "ray") {
             const result = [];
 
             const line = (x0, y0, x1, y1) => {
@@ -152,7 +118,7 @@ export class MeasuredTemplateSFRPG extends MeasuredTemplate {
             line(ray.A.x, ray.A.y, ray.B.x, ray.B.y);
 
             return result;
-        }
+        } */
 
         // Get number of rows and columns
         const nr = Math.ceil((this.document.distance * 1.5) / gridSizeUnits / (gridSizePx / grid.h)),
@@ -161,8 +127,8 @@ export class MeasuredTemplateSFRPG extends MeasuredTemplate {
         // Get the center of the grid position occupied by the template
         const { x, y } = this.document;
 
-        const [cx, cy] = grid.getCenter(x, y),
-            [col0, row0] = grid.grid.getGridPositionFromPixels(cx, cy),
+        const {x: cx, y: cy} = grid.getCenterPoint({x, y}),
+            {i: col0, j: row0} = grid.getOffset({x: cx, y: cy}),
             minAngle = Math.normalizeDegrees(templateDirection - templateAngle / 2),
             maxAngle = Math.normalizeDegrees(templateDirection + templateAngle / 2);
 
@@ -173,10 +139,10 @@ export class MeasuredTemplateSFRPG extends MeasuredTemplate {
             const dir = (templateDirection >= 0 ? 360 - templateDirection : -templateDirection) % 360;
             // If we're not on a border for X, offset by 0.5 or -0.5 to the border of the cell in the direction we're looking on X axis
             const xOffset = this.document.x % gridSizePx !== 0
-                ? Math.sign((1 * Math.round(Math.cos(degtorad(dir)) * 100)) / 100) / 2 // /2 turns from 1/0/-1 to 0.5/0/-0.5
+                ? Math.sign((1 * Math.round(Math.cos(Math.toRadians(dir)) * 100)) / 100) / 2 // /2 turns from 1/0/-1 to 0.5/0/-0.5
                 : 0;
             // Same for Y, but cos Y goes down on screens, we invert
-            const yOffset = this.document.y % gridSizePx !== 0 ? -Math.sign((1 * Math.round(Math.sin(degtorad(dir)) * 100)) / 100) / 2 : 0;
+            const yOffset = this.document.y % gridSizePx !== 0 ? -Math.sign((1 * Math.round(Math.sin(Math.toRadians(dir)) * 100)) / 100) / 2 : 0;
             originOffset.x = xOffset;
             originOffset.y = yOffset;
         }
@@ -185,9 +151,11 @@ export class MeasuredTemplateSFRPG extends MeasuredTemplate {
         for (let a = -nc; a < nc; a++) {
             for (let b = -nr; b < nr; b++) {
                 // Position of cell's top-left corner, in pixels
-                const [gx, gy] = canvas.grid.grid.getPixelsFromGridPosition(col0 + a, row0 + b);
+                const { x: gx, y: gy } = grid.getTopLeftPoint({i: col0 + a, j: row0 + b});
                 // Position of cell's center, in pixels
-                const [cellCenterX, cellCenterY] = [gx + gridSizePx * 0.5, gy + gridSizePx * 0.5];
+                const halfSize = grid.size / 2;
+                const cellCenterX = gx + halfSize;
+                const cellCenterY = gy + halfSize;
 
                 // Determine point of origin
                 const origin = {
@@ -197,16 +165,16 @@ export class MeasuredTemplateSFRPG extends MeasuredTemplate {
 
                 // Determine point we're measuring the distance to - always in the center of a grid square
                 const destination = { x: cellCenterX, y: cellCenterY };
+                const ray = new Ray(origin, destination);
 
                 if (templateType === "cone") {
-                    const ray = new Ray(origin, destination);
                     const rayAngle = Math.normalizeDegrees(ray.angle / (Math.PI / 180));
                     if (ray.distance > 0 && !withinAngle(minAngle, maxAngle, rayAngle)) {
                         continue;
                     }
                 }
 
-                const distance = measureDistance(destination, origin);
+                const distance = measureDistanceOnGrid(ray);
                 if (distance <= this.document.distance) {
                     result.push({ x: gx, y: gy });
                 }
@@ -272,7 +240,7 @@ export class MeasuredTemplateSFRPG extends MeasuredTemplate {
             return result;
         }
 
-        const highlightSquares = this.getHighlightedSquares();
+        const highlightSquares = this._getGridHighlightPositions();
 
         for (const s of highlightSquares) {
             for (const t of canvas.tokens.placeables) {
@@ -296,28 +264,40 @@ export class MeasuredTemplateSFRPG extends MeasuredTemplate {
         return result;
     }
 
-    // Highlight grid in SF style
-    highlightGrid() {
-        if (!["circle", "cone", "ray"].includes(this.document.t) || canvas.grid.type !== CONST.GRID_TYPES.SQUARE) {
-            return super.highlightGrid();
-        }
-
-        const grid = canvas.grid;
-        const { borderColor, fillColor } = this;
-
-        // Clear existing highlight
-        const hl = this.getHighlightLayer();
-        hl.clear();
-        if (!this.isVisible) return;
-
-        const positions = this.getHighlightedSquares();
-        for (const {x, y} of positions) {
-            grid.grid.highlightGridPosition(hl, {x, y, border: borderColor, color: fillColor});
-        }
-
-    }
-
-    getHighlightLayer() {
-        return canvas.grid.getHighlightLayer(this.highlightId);
-    }
 }
+
+/**
+ * Given the distance in each dimension, measure the distance in grid units. This is used to draw MeasuredTemplates according to SF rules, not for the Ruler.
+ * @param {Ray} ray  A ray representing the line segment between two points
+ */
+function measureDistanceOnGrid(ray) {
+
+    if (!canvas.dimensions) return NaN;
+
+    const gs = canvas.dimensions.size,
+        nx = Math.ceil(Math.abs(ray.dx / gs)),
+        ny = Math.ceil(Math.abs(ray.dy / gs));
+
+    // Get the number of straight and diagonal moves
+    const nDiagonal = Math.min(nx, ny),
+        nStraight = Math.abs(ny - nx);
+
+    const nd10 = Math.floor(nDiagonal / 2) - Math.floor((nDiagonal - nDiagonal) / 2);
+    const cells = nd10 * 2 + (nDiagonal - nd10) + nStraight;
+
+    return cells * canvas.dimensions.distance;
+}
+
+// Borrows quite heavily from the Pathfinder 1e system by Furyspark.
+const withinAngle = (min, max, value) => {
+    min = Math.normalizeDegrees(min);
+    max = Math.normalizeDegrees(max);
+    value = Math.normalizeDegrees(value);
+
+    if (min < max) return value >= min && value <= max;
+    return value >= min || value <= max;
+};
+
+const withinRect = (point, rect) => {
+    return point.x >= rect.x && point.x < rect.x + rect.width && point.y >= rect.y && point.y < rect.y + rect.height;
+};

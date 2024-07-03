@@ -1,16 +1,13 @@
 @import "variables.less";
 
-#token-hud.modified {
-    .status-effects {
-        width: 550px;
-        grid-template-columns: 25% 21% 24% 30%;
-        font-size: var(--font-size-16);
-        line-height: 24px;
-
-        .condition {
-            cursor: pointer;
-            position: relative;
-            padding: 1px;
+#token-hud {
+    &.modified {
+        .status-effects {
+            width: 550px;
+            grid-template-columns: auto;
+            grid-template-rows: repeat(9, auto);
+            grid-auto-flow: column;
+            font-size: var(--font-size-16);
 
             .effect-control {
                 width: 100%;
@@ -22,74 +19,57 @@
                 padding: 0;
                 opacity: 0.8;
                 padding-right: calc(100% - 24px);
-            }
+                cursor: pointer;
 
-            .effect-control.active {
-                border: 1px solid #ff6400;
-            }
+                .name-label {
+                    cursor: pointer;
+                    position: relative;
+                    padding: 1px;
+                    vertical-align: top;
+                    padding-left: 4px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    max-width: calc(100% - 24px);
+                    display: inline-block;
+                    position: absolute;
+                    color: white;
+                    line-height: 18px;
+                }
 
-            .effect-control.active + .condition-name {
-                color: @accentColor;
-            }
+                &.active {
+                    border: 1px solid #ff6400;
+                    opacity: 1;
+                }
 
-            .condition-name {
-                vertical-align: top;
-                padding-left: 4px;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                max-width: calc(100% - 24px);
-                display: inline-block;
-                pointer-events: none;
-                position: absolute;
-                top: 0px;
-                left: 24px;
-                opacity: 0.8;
-                color: #ccc;
-            }
-        }
-
-        .condition:hover {
-            //color: #d2d1d0;
-            text-shadow: 0 0 10px @sfrpgRed;
-
-            .effect-control {
-                opacity: 1;
-            }
-
-            .effect-control.active {
-                //color: #ffc163;
-                text-shadow: 0 0 10px @sfrpgRed;
-            }
-
-            .effect-control.active + .effect-name {
-                opacity: 1;
-            }
-
-            .condition-name {
-                opacity: 1;
+                &:hover {
+                    text-shadow: 0 0 3px @sfrpgRed;
+                    opacity: 1;
+                }
             }
         }
     }
-}
 
-#token-hud .remove-all {
-    position: absolute;
-    bottom: 100%;
-    right: 5px;
-    cursor: pointer;
-    border-top-right-radius: 4px;
-    border-top-left-radius: 4px;
-    background: rgba(0, 0, 0, 0.6);
-    padding: 4px 8px;
-    font-size: var(--font-size-16);
-    line-height: 24px;
-}
+    button.remove-all {
+        position: absolute;
+        bottom: 100%;
+        right: 5px;
+        cursor: pointer;
+        border-top-right-radius: 4px;
+        border-top-left-radius: 4px;
+        background: rgba(0, 0, 0, 0.6);
+        padding: 4px 8px;
+        font-size: var(--font-size-16);
+        line-height: 24px;
+        color: white;
+        width: 25%;
 
-#token-hud .remove-all:hover {
-    text-shadow: 0 0 10px @sfrpgRed;
+        &:hover {
+            text-shadow: 0 0 3px @sfrpgRed;
 
-    i {
-        text-shadow: none;
+            i {
+                text-shadow: none;
+            }
+        }
     }
 }

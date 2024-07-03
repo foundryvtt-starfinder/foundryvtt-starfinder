@@ -95,7 +95,7 @@ export default class RollDialog extends Dialog {
         data.rollMode = this.rollMode;
         data.rollModes = CONFIG.Dice.rollModes;
         data.additionalBonus = this.additionalBonus;
-        data.availableModifiers = duplicate(this.availableModifiers) || [];
+        data.availableModifiers = foundry.utils.deepClone(this.availableModifiers) || [];
         data.hasModifiers = data.availableModifiers.length > 0;
         data.hasSelectors = this.contexts.selectors && this.contexts.selectors.length > 0;
         data.selectors = this.selectors;
@@ -116,7 +116,7 @@ export default class RollDialog extends Dialog {
             if (modifier.modifier !== simplerRoll) {
                 modifier.originalFormula = modifier.modifier;
 
-                // If the formulas are still different without whitespace, then MathTerms must have been simplifed, so let's tell the user.
+                // If the formulas are still different without whitespace, then FunctionTerms must have been simplifed, so let's tell the user.
                 if (modifier.originalFormula.replace(/\s/g, "") !== simplerRoll.replace(/\s/g, "")) {
                     modifier.originalFormulaTooltip = true;
                 }
@@ -164,7 +164,7 @@ export default class RollDialog extends Dialog {
                     part.originalFormula = part.formula;
                     part.formula = simplerRoll;
 
-                    // If the formulas are still different without whitespace, then MathTerms must have been simplifed, so let's tell the user.
+                    // If the formulas are still different without whitespace, then FunctionTerms must have been simplifed, so let's tell the user.
                     if (part.originalFormula.replace(/\s/g, "") !== simplerRoll.replace(/\s/g, "")) {
                         part.originalFormulaTooltip = true;
                     }
