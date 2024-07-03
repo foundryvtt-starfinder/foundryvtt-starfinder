@@ -282,16 +282,6 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         html.find('.player-class-level-up').on('click', this._onLevelUp.bind(this));
     }
 
-    onBeforeCreateNewItem(itemData) {
-        super.onBeforeCreateNewItem(itemData);
-
-        if (itemData["type"] === "asi") {
-            const numASI = this.actor.items.filter(x => x.type === "asi").length;
-            const level = 5 + numASI * 5;
-            itemData.name = game.i18n.format("SFRPG.ItemSheet.AbilityScoreIncrease.ItemName", {level: level});
-        }
-    }
-
     /**
      * Handle toggling the prepared status of an Owned Itme within the Actor
      *

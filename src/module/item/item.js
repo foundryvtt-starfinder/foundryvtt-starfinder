@@ -308,6 +308,12 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 if (game.combat) updates['system.activeDuration.expiryInit'] = game.combat.initiative;
             }
 
+            if (t === "asi") {
+                const numASI = this.actor.items.filter(x => x.type === "asi").length;
+                const level = 5 + numASI * 5;
+                updates["name"] = game.i18n.format("SFRPG.ItemSheet.AbilityScoreIncrease.ItemName", {level: level});
+            }
+
         } else {
             // Clear origin data if an effect is dragged from an actor to the sidebar.
             if (t === "effect") {

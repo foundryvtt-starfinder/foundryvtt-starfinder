@@ -618,66 +618,14 @@ export class ActorSheetSFRPG extends ActorSheet {
     async _onItemCreate(event) {
         event.stopPropagation();
         const header = event.currentTarget;
-        const type = header.dataset.type;
-        if (!type || type.includes(",")) {
-            const types = foundry.utils.deepClone(SFRPG.itemTypes);
-            if (type) {
-                const supportedTypes = type.split(',');
-                for (const key of Object.keys(types)) {
-                    if (!supportedTypes.includes(key)) {
-                        delete types[key];
-                    }
-                }
-            }
+        const typeData = header.dataset.type;
+        if (!typeData) return;
 
-            const createData = {
-                name: game.i18n.format("SFRPG.NPCSheet.Interface.CreateItem.Name"),
-                type: type
-            };
+        const supportedTypes = typeData.split(',');
 
-            const templateData = {upper: "Item", lower: "item", types: types},
-                dlg = await renderTemplate(`systems/sfrpg/templates/apps/localized-entity-create.hbs`, templateData);
+        const types = Object.keys(game.model.Item).filter(k => supportedTypes.includes(k));
 
-            new Dialog({
-                title: game.i18n.format("SFRPG.NPCSheet.Interface.CreateItem.Title"),
-                content: dlg,
-                buttons: {
-                    create: {
-                        icon: '<i class="fas fa-check"></i>',
-                        label: game.i18n.format("SFRPG.NPCSheet.Interface.CreateItem.Button"),
-                        callback: (html) => {
-                            const form = html[0].querySelector("form");
-                            const formDataExtended = new FormDataExtended(form);
-                            foundry.utils.mergeObject(createData, formDataExtended.object);
-
-                            if (!createData.name) {
-                                createData.name = game.i18n.format("SFRPG.NPCSheet.Interface.CreateItem.Name");
-                            }
-
-                            this.onBeforeCreateNewItem(createData);
-
-                            this.actor.createEmbeddedDocuments("Item", [createData]);
-                        }
-                    }
-                },
-                default: "create"
-            }).render(true);
-            return null;
-        }
-
-        const itemData = {
-            name: `New ${type.capitalize()}`,
-            type: type,
-            system: foundry.utils.deepClone(header.dataset)
-        };
-        delete itemData.system['type'];
-
-        this.onBeforeCreateNewItem(itemData);
-
-        return this.actor.createEmbeddedDocuments("Item", [itemData]);
-    }
-
-    onBeforeCreateNewItem(itemData) {
+        ItemSFRPG.createDialog({}, {types, parent: this.actor});
 
     }
 
