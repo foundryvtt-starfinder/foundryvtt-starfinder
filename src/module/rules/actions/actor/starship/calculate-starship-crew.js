@@ -3,7 +3,7 @@ export default function(engine) {
         const data = fact.data;
         const actor = fact.actor;
 
-        data.crew = mergeObject(data.crew, {
+        data.crew = foundry.utils.mergeObject(data.crew, {
             captain: {
                 limit: 1,
                 actorIds: []
@@ -44,7 +44,7 @@ export default function(engine) {
         }
 
         /** Ensure NPC data is properly populated. */
-        data.crew.npcData = mergeObject(data.crew.npcData, {
+        data.crew.npcData = foundry.utils.mergeObject(data.crew.npcData, {
             captain: {
                 abilities: {},
                 numberOfUses: null,

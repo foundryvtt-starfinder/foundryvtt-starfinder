@@ -15,7 +15,7 @@ export default function(engine) {
             const chassisData = activeChassis.system;
 
             data.traits.size = SFRPG.actorSizes[chassisData.size];
-            data.attributes.speed = mergeObject(data.attributes.speed, chassisData.speed, {overwrite: true});
+            data.attributes.speed = foundry.utils.mergeObject(data.attributes.speed, chassisData.speed, {overwrite: true});
             data.attributes.speed.special = "";
 
             let droneLevel = chassisData.levels;
@@ -33,8 +33,8 @@ export default function(engine) {
                 })]
             };
 
-            let abilityIncreaseStats = [chassisData.abilityIncreaseStats.first, chassisData.abilityIncreaseStats.second];
-            let abilityIncreases = SFRPG.droneAbilityScoreIncreaseLevels.filter(x => x <= droneLevel).length;
+            const abilityIncreaseStats = [chassisData.abilityIncreaseStats.first, chassisData.abilityIncreaseStats.second];
+            const abilityIncreases = SFRPG.droneAbilityScoreIncreaseLevels.filter(x => x <= droneLevel).length;
 
             data.abilities.str.base = chassisData.abilityScores.str + (abilityIncreaseStats.includes("str") ? abilityIncreases : 0);
 
@@ -64,8 +64,8 @@ export default function(engine) {
         }
 
         // Clear out skills, this and future closures will enable them again
-        let skillkeys = Object.keys(SFRPG.skills);
-        for (let skill of skillkeys) {
+        const skillkeys = Object.keys(SFRPG.skills);
+        for (const skill of skillkeys) {
             data.skills[skill].enabled = false;
             data.skills[skill].value = 0;
             data.skills[skill].ranks = 0;

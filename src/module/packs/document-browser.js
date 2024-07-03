@@ -271,9 +271,8 @@ export class DocumentBrowserSFRPG extends Application {
                     type: item.type
                 };
 
-                if (this.allowedItem(item)) {
-                    items.set(itemData.uuid, itemData);
-                }
+                if (this.allowedItem(item)) items.set(itemData.uuid, itemData);
+
             }
         }
 
