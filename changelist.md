@@ -1,3 +1,23 @@
+# v0.26.0 - V12 Compatibility
+Luckily it's been less time between updates than last time! This update brings V12 compatibility to the system. None of these features are too flashy, but that's the point! Hopefully this update is as nondisruptive as possible.
+
+# Core system improvements
+- Reimplement grid measurement and templates to account for new core settings
+- Update lots of function and class paths to account for new namespaces
+- Migrate rolls to account for the split of synchronous roll evaluation
+- Speed up starship action cache generation
+- Update vision modes to account for vision changes in V12
+- Adjust cook process to account for new server side migrations
+- Implement a custom parser to account for stricter roll grammar
+- Reimplement Token condition HUD
+- Add `htmlField` and `filePathField` validation to `template.json`
+
+# Bug fixes
+- Fix token effect icons not appearing
+- Fix spell slots not being updatable on the sheet
+- Fix item create dialogs not working on sheets
+
+
 # v0.25.3
 I don't have a funny intro for this update, I'm just frankly embarrassed it took so long, but regardless, this update fixes some minor but annoying bugs. Enhanced is on the way, I promise.
 
