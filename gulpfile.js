@@ -231,7 +231,7 @@ function JSONstringifyOrder( obj, space, sortingMode = "default" ) {
  * @returns {Object} A sanitized object
  */
 function sanitizeJSON(jsonInput) {
-    const manifest = getManifest();
+    const manifest = getManifest().file;
 
     const treeShake = (item) => {
         delete item.sort;
