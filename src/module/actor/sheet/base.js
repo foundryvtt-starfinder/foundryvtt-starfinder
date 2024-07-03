@@ -1162,7 +1162,8 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         let item = null;
         if (parsedDragData.type !== 'ItemCollection') item = (await Item.fromDropData(parsedDragData)).toObject();
-        else item = parsedDragData.items[0].toObject();
+        else if (parsedDragData.items[0].toObject !== undefined) item = parsedDragData.items[0].toObject();
+        else item = parsedDragData.items[0];
 
         // Level up existing class item if dragging on an existing one.
         if (item.type === "class") {

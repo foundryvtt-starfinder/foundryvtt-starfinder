@@ -105,10 +105,10 @@ export default function(engine) {
         if (shieldItem) {
             const shieldData = shieldItem.system;
             if (shieldData.isDeflector) {
-                if (data.quadrants.forward.shields.value > 0) addScore(data.quadrants.forward.targetLock, shieldItem.name, shieldData.armorBonus, false);
-                if (data.quadrants.port.shields.value > 0) addScore(data.quadrants.port.targetLock, shieldItem.name, shieldData.armorBonus, false);
-                if (data.quadrants.starboard.shields.value > 0) addScore(data.quadrants.starboard.targetLock, shieldItem.name, shieldData.armorBonus, false);
-                if (data.quadrants.aft.shields.value > 0) addScore(data.quadrants.aft.targetLock, shieldItem.name, shieldData.armorBonus, false);
+                if (data.quadrants.forward.shields.value > 0) addScore(data.quadrants.forward.targetLock, shieldItem.name, shieldData.targetLockBonus, false);
+                if (data.quadrants.port.shields.value > 0) addScore(data.quadrants.port.targetLock, shieldItem.name, shieldData.targetLockBonus, false);
+                if (data.quadrants.starboard.shields.value > 0) addScore(data.quadrants.starboard.targetLock, shieldItem.name, shieldData.targetLockBonus, false);
+                if (data.quadrants.aft.shields.value > 0) addScore(data.quadrants.aft.targetLock, shieldItem.name, shieldData.targetLockBonus, false);
             }
         }
 
