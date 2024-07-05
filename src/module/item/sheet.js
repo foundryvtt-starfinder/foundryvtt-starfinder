@@ -687,7 +687,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("add-subaction")) {
             await this._onSubmit(event);
             const formula = this.item.system.formula;
-            return await this.item.update({
+            return this.item.update({
                 "system.formula": formula.concat([
                     { dc: {resolve:false, value:""}, formula: "", name:"", effectNormal:"", effectCritical:"" }
                 ])
@@ -701,7 +701,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             const formula = duplicate(this.item.system.formula);
             console.log(li, formula);
             formula.splice(Number(li.dataset.subactionPart), 1);
-            return await this.item.update({
+            return this.item.update({
                 "system.formula": formula
             });
         }
@@ -715,7 +715,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("add-ability-adjustment")) {
             await this._onSubmit(event);
             const abilityMods = this.item.system.abilityMods;
-            return await this.item.update({
+            return this.item.update({
                 "system.abilityMods.parts": abilityMods.parts.concat([
                     [0, ""]
                 ])
@@ -728,7 +728,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             const li = a.closest(".ability-adjustment-part");
             const abilityMods = foundry.utils.deepClone(this.item.system.abilityMods);
             abilityMods.parts.splice(Number(li.dataset.abilityAdjustment), 1);
-            return await this.item.update({
+            return this.item.update({
                 "system.abilityMods.parts": abilityMods.parts
             });
         }
@@ -748,7 +748,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("add-damage")) {
             await this._onSubmit(event); // Submit any unsaved changes
             const damage = this.item.system.damage;
-            return await this.item.update({
+            return this.item.update({
                 "system.damage.parts": damage.parts.concat([
                     { name: "", formula: "", types: {}, group: null, isPrimarySection: false }
                 ])
@@ -761,7 +761,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             const li = a.closest(".damage-part");
             const damage = foundry.utils.deepClone(this.item.system.damage);
             damage.parts.splice(Number(li.dataset.damagePart), 1);
-            return await this.item.update({
+            return this.item.update({
                 "system.damage.parts": damage.parts
             });
         }
@@ -770,7 +770,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("add-critical-damage")) {
             await this._onSubmit(event); // Submit any unsaved changes
             const criticalDamage = this.item.system.critical;
-            return await this.item.update({
+            return this.item.update({
                 "system.critical.parts": criticalDamage.parts.concat([
                     ["", ""]
                 ])
@@ -783,7 +783,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             const li = a.closest(".damage-part");
             const criticalDamage = foundry.utils.deepClone(this.item.system.critical);
             criticalDamage.parts.splice(Number(li.dataset.criticalPart), 1);
-            return await this.item.update({
+            return this.item.update({
                 "system.critical.parts": criticalDamage.parts
             });
         }
@@ -1044,7 +1044,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("add-visualization")) {
             await this._onSubmit(event); // Submit any unsaved changes
             const visualization = foundry.utils.deepClone(this.item.system.combatTracker.visualization);
-            return await this.item.update({
+            return this.item.update({
                 "system.combatTracker.visualization": visualization.concat([
                     { mode: "eq", value: 0, title: this.item.name, image: this.item.img }
                 ])
@@ -1057,7 +1057,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             const li = a.closest(".visualization-part");
             const visualization = foundry.utils.deepClone(this.item.system.combatTracker.visualization);
             visualization.splice(Number(li.dataset.index), 1);
-            return await this.item.update({
+            return this.item.update({
                 "system.combatTracker.visualization": visualization
             });
         }
