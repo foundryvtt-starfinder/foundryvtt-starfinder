@@ -31,13 +31,13 @@
                     </div>
                 </div>
 
-                {{!-- Resolve & DC Information --}}
+                {{!-- DC Information --}}
                 <div class="form-group">
                     <label>{{ localize "SFRPG.ItemSheet.StarshipAction.TargetDC" }}</label>
                     <div class="form-fields">
                         <input type="text" name="system.formula.{{id}}.dc.value" value="{{lookup dc "value"}}" data-dtype="String"/>
-                        <label class="checkbox">
-                            <input type="checkbox" name="system.formula.{{id}}.dc.resolve" {{checked dc.resolve}}/> {{ localize "SFRPG.ItemSheet.StarshipAction.UsesResolve" }}
+                        <label class="checkbox" data-tooltip="{{ localize "SFRPG.ItemSheet.StarshipAction.ResolveFormulaAutomaticallyTooltip" }}">
+                            <input type="checkbox" name="system.formula.{{id}}.dc.resolve" {{checked dc.resolve}}/> {{ localize "SFRPG.ItemSheet.StarshipAction.ResolveFormulaAutomatically" }}
                         </label>
                     </div>
                 </div>
