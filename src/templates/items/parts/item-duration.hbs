@@ -1,6 +1,7 @@
 <div class="item-duration flexrow" data-effect-uuid="{{item.timedEffect.uuid}}">
-    
+
     {{!-- Origin Information --}}
+    {{#if (or item.origin item.originItem)}}
     <div class="origin flexcol item-properties">
         {{#if item.origin}}
             <div class="origin-actor flexcol" data-origin-uuid="{{item.origin.uuid}}">
@@ -23,6 +24,7 @@
             </div>
         {{/if}}
     </div>
+    {{/if}}
 
     {{!-- Effect Details --}}
     <div class="bubble">
@@ -105,5 +107,5 @@
 
         </div>
     </div>
-    
+
 </div>

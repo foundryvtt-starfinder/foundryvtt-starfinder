@@ -682,11 +682,11 @@ export class ItemSheetSFRPG extends ItemSheet {
     async _onSubactionControl(event) {
         event.preventDefault();
         const a = event.currentTarget;
+        const formula = this.item.system.formula;
+        await this._onSubmit(event); // Submit any unsaved changes
 
         // Add a new subaction
         if (a.classList.contains("add-subaction")) {
-            await this._onSubmit(event);
-            const formula = this.item.system.formula;
             return this.item.update({
                 "system.formula": formula.concat([
                     { dc: {resolve:false, value:""}, formula: "", name:"", effectNormal:"", effectCritical:"" }
@@ -695,11 +695,8 @@ export class ItemSheetSFRPG extends ItemSheet {
         }
 
         // Remove a subaction
-        if (a.classList.contains("delete-subaction")) {
-            await this._onSubmit(event); // Submit any unsaved changes
+        else if (a.classList.contains("delete-subaction")) {
             const li = a.closest(".subaction-part");
-            const formula = duplicate(this.item.system.formula);
-            console.log(li, formula);
             formula.splice(Number(li.dataset.subactionPart), 1);
             return this.item.update({
                 "system.formula": formula
