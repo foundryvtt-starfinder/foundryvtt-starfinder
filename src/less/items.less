@@ -133,6 +133,13 @@
         .tab {
             padding: 0 5px;
             // overflow: hidden;
+
+            .details-navigation {
+                margin-bottom: 5px;
+                .item {
+                    font-size: var(--font-size-18);
+                }
+            }
         }
 
         .item-properties {
@@ -177,6 +184,10 @@
                     }
                 }
             }
+        }
+
+        .bubble {
+            .bubble-mixin();
         }
     }
 
@@ -294,29 +305,28 @@
         color: @colorOlive;
     }
 
+    ol.storage-slots,
     ol.damage-parts,
+    ol.subaction-parts,
     ol.visualization-parts {
-        border-top: groove 2px #fff;
-
         img.part-image {
             flex: 0 0 50px;
             height: 50px;
         }
     }
 
-    li.damage-part,
-    li.visualization-part {
-        border-bottom: groove 2px #fff;
-    }
-
+    .storage-slots,
     .damage-parts,
+    .subaction-parts,
     .visualization-parts,
     .ability-adjustment-parts {
         list-style: none;
         margin: 0;
         padding: 0;
 
+        .storage-slot,
         .damage-part,
+        .subaction-part,
         .visualization-part,
         .ability-adjustment-part {
             flex: 0 0 100%;
@@ -362,30 +372,6 @@
                 flex: 0 0 30px;
             }
         }
-
-        .visualization-part {
-            padding-bottom: 4px;
-        }
-    }
-
-    .damage-control,
-    .visualization-control,
-    .ability-adjustments-control {
-        line-height: 24px;
-        color: @colorTan;
-        text-align: right;
-    }
-
-    .damage-control,
-    .visualization-control {
-        width: 18px;
-        flex: 0 0 18px;
-        float: right;
-    }
-
-    .ability-adjustments-control {
-        width: 110px;
-        flex: 0 0 20px;
     }
 
     .recharge {
@@ -622,7 +608,7 @@
         .origin {
             float: left;
 
-            .item-properties {
+            &.item-properties {
                 img {
                     margin: 5px;
                     max-width: 80px;
@@ -640,6 +626,10 @@
 
         div.form-group > label {
             flex: 1;
+        }
+
+        .bubble {
+            height: fit-content;
         }
     }
 }

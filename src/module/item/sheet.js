@@ -40,13 +40,14 @@ export class ItemSheetSFRPG extends ItemSheet {
 
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
-            width: 715,
+            width: 770,
             height: 600,
             classes: ["sfrpg", "sheet", "item"],
             resizable: true,
             scrollY: [".tab.details"],
             tabs: [
                 {navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"},
+                {navSelector: ".subtabs", contentSelector: ".sheet-details", initial: "properties"},
                 {navSelector: ".descTabs", contentSelector: ".desc-body", initial: "description"}
             ]
         });
@@ -191,7 +192,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.isHealing = data.item.actionType === "heal";
 
         // Determine whether to show calculated totals for fields with formulas
-        if (itemData?.activation?.type) {
+        if (itemData?.activation?.type || data.item.type === "weapon") {
             data.range = {};
 
             data.range.hasInput = (() => {
@@ -278,6 +279,44 @@ export class ItemSheetSFRPG extends ItemSheet {
             rollData,
             secrets
         });
+
+        if (data?.item?.type === "starshipAction") {
+            data.enrichedEffectNormal = await TextEditor.enrichHTML(this.item.system?.effectNormal, {
+                async,
+                rollData,
+                secrets
+            });
+            data.enrichedEffectCritical = await TextEditor.enrichHTML(this.item.system?.effectCritical, {
+                async,
+                rollData,
+                secrets
+            });
+
+            // Manage Subactions
+            if (data?.itemData?.formula?.length > 1) {
+                data.editorInfo = [];
+                let ct = 0;
+                for (const value of data.itemData.formula) {
+                    const effect = {};
+
+                    effect.enrichedEffectNormal = await TextEditor.enrichHTML(value.effectNormal, {
+                        async,
+                        rollData,
+                        secrets
+                    });
+                    effect.targetNormal = `system.formula.${ct}.effectNormal`;
+
+                    effect.enrichedEffectCritical = await TextEditor.enrichHTML(value.effectCritical, {
+                        async,
+                        rollData,
+                        secrets
+                    });
+                    effect.targetCritical = `system.formula.${ct}.effectCritical`;
+                    ct += 1;
+                    data.editorInfo.push(effect);
+                }
+            }
+        }
 
         return data;
     }
@@ -567,6 +606,22 @@ export class ItemSheetSFRPG extends ItemSheet {
             return arr;
         }, []);
 
+        // Handle Starship Action/Subaction Formulas
+        if (this.object.type === "starshipAction") {
+            const currentFormula = {system: {formula: Object.assign({}, this.item.system.formula)}};
+            const formula = Object.entries(formData).filter(e => e[0].startsWith("system.formula"));
+            const newFormula = {};
+
+            for (const item of formula) {
+                newFormula[item[0]] = item[1];
+                delete formData[item[0]];
+            }
+
+            const expanded = foundry.utils.expandObject(newFormula);
+            const final = Object.values(foundry.utils.mergeObject(currentFormula, expanded, {overwrite:true}).system.formula);
+            formData["system.formula"] = final;
+        }
+
         // Update the Item
         return super._updateObject(event, formData);
     }
@@ -588,6 +643,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         html.find("input.primary-section-checkbox").click(this._onTogglePrimaryDamageSection.bind(this));
         html.find(".visualization-control").click(this._onActorResourceVisualizationControl.bind(this));
         html.find(".ability-adjustments-control").click(this._onAbilityAdjustmentsControl.bind(this));
+        html.find(".subaction-control").click(this._onSubactionControl.bind(this));
 
         html.find('.modifier-create').click(this._onModifierCreate.bind(this));
         html.find('.modifier-edit').click(this._onModifierEdit.bind(this));
@@ -617,6 +673,37 @@ export class ItemSheetSFRPG extends ItemSheet {
 
     /* -------------------------------------------- */
 
+    /**
+     * Add or remove a subaction from a starship action
+     * @param {Event} event     The original click event
+     * @return {Promise}
+     * @private
+     */
+    async _onSubactionControl(event) {
+        event.preventDefault();
+        const a = event.currentTarget;
+        const formula = this.item.system.formula;
+        await this._onSubmit(event); // Submit any unsaved changes
+
+        // Add a new subaction
+        if (a.classList.contains("add-subaction")) {
+            return this.item.update({
+                "system.formula": formula.concat([
+                    { dc: {resolve:false, value:""}, formula: "", name:"", effectNormal:"", effectCritical:"" }
+                ])
+            });
+        }
+
+        // Remove a subaction
+        else if (a.classList.contains("delete-subaction")) {
+            const li = a.closest(".subaction-part");
+            formula.splice(Number(li.dataset.subactionPart), 1);
+            return this.item.update({
+                "system.formula": formula
+            });
+        }
+    }
+
     async _onAbilityAdjustmentsControl(event) {
         event.preventDefault();
         const a = event.currentTarget;
@@ -625,7 +712,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("add-ability-adjustment")) {
             await this._onSubmit(event);
             const abilityMods = this.item.system.abilityMods;
-            return await this.item.update({
+            return this.item.update({
                 "system.abilityMods.parts": abilityMods.parts.concat([
                     [0, ""]
                 ])
@@ -638,7 +725,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             const li = a.closest(".ability-adjustment-part");
             const abilityMods = foundry.utils.deepClone(this.item.system.abilityMods);
             abilityMods.parts.splice(Number(li.dataset.abilityAdjustment), 1);
-            return await this.item.update({
+            return this.item.update({
                 "system.abilityMods.parts": abilityMods.parts
             });
         }
@@ -658,7 +745,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("add-damage")) {
             await this._onSubmit(event); // Submit any unsaved changes
             const damage = this.item.system.damage;
-            return await this.item.update({
+            return this.item.update({
                 "system.damage.parts": damage.parts.concat([
                     { name: "", formula: "", types: {}, group: null, isPrimarySection: false }
                 ])
@@ -671,7 +758,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             const li = a.closest(".damage-part");
             const damage = foundry.utils.deepClone(this.item.system.damage);
             damage.parts.splice(Number(li.dataset.damagePart), 1);
-            return await this.item.update({
+            return this.item.update({
                 "system.damage.parts": damage.parts
             });
         }
@@ -680,7 +767,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("add-critical-damage")) {
             await this._onSubmit(event); // Submit any unsaved changes
             const criticalDamage = this.item.system.critical;
-            return await this.item.update({
+            return this.item.update({
                 "system.critical.parts": criticalDamage.parts.concat([
                     ["", ""]
                 ])
@@ -693,7 +780,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             const li = a.closest(".damage-part");
             const criticalDamage = foundry.utils.deepClone(this.item.system.critical);
             criticalDamage.parts.splice(Number(li.dataset.criticalPart), 1);
-            return await this.item.update({
+            return this.item.update({
                 "system.critical.parts": criticalDamage.parts
             });
         }
@@ -954,7 +1041,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("add-visualization")) {
             await this._onSubmit(event); // Submit any unsaved changes
             const visualization = foundry.utils.deepClone(this.item.system.combatTracker.visualization);
-            return await this.item.update({
+            return this.item.update({
                 "system.combatTracker.visualization": visualization.concat([
                     { mode: "eq", value: 0, title: this.item.name, image: this.item.img }
                 ])
@@ -967,7 +1054,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             const li = a.closest(".visualization-part");
             const visualization = foundry.utils.deepClone(this.item.system.combatTracker.visualization);
             visualization.splice(Number(li.dataset.index), 1);
-            return await this.item.update({
+            return this.item.update({
                 "system.combatTracker.visualization": visualization
             });
         }
