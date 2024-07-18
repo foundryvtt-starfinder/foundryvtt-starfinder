@@ -1516,6 +1516,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      */
     async useSpell({ configureDialog = true } = {}) {
         if (this.type !== "spell") throw new Error("Item#UseSpell must be used on a spell item!");
+        if (!this.actor) throw new Error("The item must be on an actor to cast it!");
         return this.actor.useSpell(this, { configureDialog });
     }
 
