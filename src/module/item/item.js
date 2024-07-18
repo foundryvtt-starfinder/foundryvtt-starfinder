@@ -1512,17 +1512,12 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     /* -------------------------------------------- */
 
     /**
-     * Adjust a cantrip damage formula to scale it for higher level characters and monsters
-     * @private
+     * A helper method to call the useSpell method on the item's actor
      */
-    _scaleCantripDamage(parts, level, scale) {
-        const add = Math.floor((level + 1) / 6);
-        if (add === 0) return;
-        if (scale && (scale !== parts[0])) {
-            parts[0] = parts[0] + " + " + scale.replace(new RegExp(Roll.diceRgx, "g"), (match, nd, d) => `${add}d${d}`);
-        } else {
-            parts[0] = parts[0].replace(new RegExp(Roll.diceRgx, "g"), (match, nd, d) => `${parseInt(nd) + add}d${d}`);
-        }
+    async useSpell({ configureDialog = true } = {}) {
+        if (this.type !== "spell") throw new Error("Item#UseSpell must be used on a spell item!");
+        if (!this.actor) throw new Error("The item must be on an actor to cast it!");
+        return this.actor.useSpell(this, { configureDialog });
     }
 
     /* -------------------------------------------- */

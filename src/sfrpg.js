@@ -523,36 +523,32 @@ Hooks.once("ready", async () => {
         connectToDocument(macro);
     }
 
-    if (game.user.isGM) {
+    if (game.users.activeGM?.isSelf) {
         const currentSchema = game.settings.get('sfrpg', 'worldSchemaVersion') ?? 0;
         const systemSchema = Number(game.system.flags.sfrpg.schema);
         const needsMigration = currentSchema < systemSchema || currentSchema === 0;
 
-        let migrationPromise = null;
+        let migrationPerformed = false;
         if (needsMigration) {
             console.log("Starfinder | [READY] Performing world migration");
-            migrationPromise = migrateWorld()
-                .then((refreshRequired) => {
-                    if (refreshRequired) {
-                        ui.notifications.warn(game.i18n.localize("SFRPG.MigrationSuccessfulRefreshMessage"), {permanent: true});
-                    } else {
-                        ui.notifications.info(game.i18n.localize("SFRPG.MigrationSuccessfulMessage"), {permanent: true});
-                    }
-                })
-                .catch((error) => {
-                    ui.notifications.error(game.i18n.localize("SFRPG.MigrationErrorMessage"), {permanent: true});
-                    console.error(error);
-                });
+            try {
+                migrationPerformed = await migrateWorld();
+            } catch {
+                ui.notifications.error(game.i18n.localize("SFRPG.MigrationErrorMessage"), {permanent: true});
+                console.error(error);
+            }
+
+            if (migrationPerformed) {
+                ui.notifications.info(game.i18n.localize("SFRPG.MigrationSuccessfulRefreshMessage"), {permanent: true});
+            } else {
+                ui.notifications.info(game.i18n.localize("SFRPG.MigrationSuccessfulMessage"), {permanent: true});
+            }
+
         }
 
         console.log("Starfinder | [READY] Checking items for container updates");
-        if (migrationPromise) {
-            migrationPromise.then(async () => {
-                migrateOldContainers();
-            });
-        } else {
-            migrateOldContainers();
-        }
+        if (migrationPerformed) migrateOldContainers();
+
     }
 
     Hooks.on("dropCanvasData", (canvas, data) => canvasHandler(canvas, data));
