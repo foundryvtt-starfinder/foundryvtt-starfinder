@@ -1,7 +1,21 @@
+# v0.26.1
+This update addresses a few minor bugs in 0.26.0.
+
+## Core system improvements
+- Using spell item macros now prompts the spell cast dialog and correctly consumes a spell slot.
+- Add a helper method on the `Item` class to directly cast spells
+
+## Bug fixes
+- Fix migrations failing on new worlds
+- Fix server-side migrations warning about missing IDs
+
+## Data entry
+- Fix Avenging Burst's formula.
+
 # v0.26.0 - V12 Compatibility
 Luckily it's been less time between updates than last time! This update brings V12 compatibility to the system. None of these features are too flashy, but that's the point! Hopefully this update is as nondisruptive as possible.
 
-# Core system improvements
+## Core system improvements
 - Reimplement grid measurement and templates to account for new core settings
 - Update lots of function and class paths to account for new namespaces
 - Migrate rolls to account for the split of synchronous roll evaluation
@@ -12,7 +26,7 @@ Luckily it's been less time between updates than last time! This update brings V
 - Reimplement Token condition HUD
 - Add `htmlField` and `filePathField` validation to `template.json`
 
-# Bug fixes
+## Bug fixes
 - Fix token effect icons not appearing
 - Fix spell slots not being updatable on the sheet
 - Fix item create dialogs not working on sheets
@@ -23,11 +37,11 @@ Luckily it's been less time between updates than last time! This update brings V
 # v0.25.3
 I don't have a funny intro for this update, I'm just frankly embarrassed it took so long, but regardless, this update fixes some minor but annoying bugs. Enhanced is on the way, I promise.
 
-# Core system improvements
+## Core system improvements
 - New localisations and minor fixes to the German localisation.
 - Include SFRPG classes and methods in the `globalThis` for the convenience of modules
 
-# Bug fixes
+## Bug fixes
 - Fix some cases where the combat difficulty display throws errors.
 - Fix tooltips incorrectly truncating Enhanced class names.
 - Many fixes to starship rolls
@@ -41,27 +55,27 @@ I don't have a funny intro for this update, I'm just frankly embarrassed it took
 - Fix locked tooltips getting stuck.
 - Fix new spells having 0/0 uses by default.
 
-# Data entry
+## Data entry
 - Change Combat Tracker modifier to constant
 
 # v0.25.2
 This is another quick hotfix to address some issues raised by the new stricter modifier schema, as well as a few other changes picked up in the mean time.
 
-# Bug fixes
+## Bug fixes
 - Fully implement modifier type "Resistance" to stop DataModel errors
 - Re-implement right-click token HUD to overlay
 - Fix Sonic resistance not working
 - Remove redundant logic from encumbrance calculation
 
-# Data entry
+## Data entry
 - Add effect for Get 'Em
 
 # v0.25.1
 This hotfix addresses a few issues with unlinked actors, because of course they were the issue.
 
-# Core system improvements
+## Core system improvements
 - Added a toggle for invalid roll formula warnings, defaulted to off.
-# Bugfixes
+## Bugfixes
 - Fix modifiers on unlinked tokens causing a stack overflow
 - Fix importing NPCs failing
 - Fix hazards breaking the canvas
