@@ -4,10 +4,12 @@ This update addresses a few minor bugs in 0.26.0.
 ## Core system improvements
 - Using spell item macros now prompts the spell cast dialog and correctly consumes a spell slot.
 - Add a helper method on the `Item` class to directly cast spells
+- `@Check`s now show "Save" or "Check" as appropriate.
 
 ## Bug fixes
 - Fix migrations failing on new worlds
 - Fix server-side migrations warning about missing IDs
+- Fix the `Item` constructor signature creating errors for temporary items.
 
 ## Data entry
 - Fix Avenging Burst's formula.
