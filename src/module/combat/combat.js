@@ -386,6 +386,12 @@ export class CombatSFRPG extends Combat {
 
         await this._notifyAfterUpdate(eventData);
         this._handleTimedEffects(eventData);
+
+        const forward = eventData.direction > 0;
+        if (eventData.isNewTurn && forward) {
+            eventData.oldCombatant.actor?._onTurnEnd();
+            eventData.newCombatant.actor?._onTurnStart();
+        }
     }
 
     async _notifyBeforeUpdate(eventData) {

@@ -13,7 +13,7 @@ import { ItemCapacityMixin } from "./mixins/item-capacity.js";
 
 export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityMixin) {
 
-    constructor(data, context={}) {
+    constructor(data, context = {}) {
         // Set module art if available. This applies art to items viewed or created from compendiums.
         if (context.pack && data._id) {
             const art = game.sfrpg.compendiumArt.map.get(`Compendium.${context.pack}.${data._id}`);
@@ -2019,6 +2019,66 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
             console.log(`Starfinder | Updated ${item.name} to use the ${ (isNPC) ? "NPC " : ""}d6 scaling formula.`);
         }
+    }
+
+    _onTurnStart() {
+        if (this.type !== "effect" || !this.system.enabled) return;
+
+        for (const turnEvent of this.system.turnEvents) {
+            if (turnEvent.trigger !== "onTurnStart") continue;
+
+            this._handleTurnEvent(turnEvent);
+
+        }
+
+    }
+
+    _onTurnEnd() {
+        if (this.type !== "effect" || !this.system.enabled) return;
+
+        for (const turnEvent of this.system.turnEvents) {
+            if (turnEvent.trigger !== "onTurnEnd") continue;
+
+            this._handleTurnEvent(turnEvent);
+        }
+
+    }
+
+    _handleTurnEvent(turnEvent) {
+        switch (turnEvent.type) {
+            case "note":
+                this._handleEffectNoteEvent(turnEvent);
+                break;
+            case "roll":
+                this._handleEffectRollEvent(turnEvent);
+                break;
+        }
+    }
+
+    _handleEffectNoteEvent(turnEvent) {
+        ChatMessage.create({content: turnEvent.content});
+    }
+
+    async _handleEffectRollEvent(turnEvent) {
+        const parts = [{
+            isDamageSection: true,
+            enabled: true,
+            formula: turnEvent.formula,
+            types: turnEvent.damageTypes,
+            group: null
+        }];
+
+        const rollContext = RollContext.createItemRollContext(this, this.actor);
+
+        return DiceSFRPG.damageRoll({
+            parts,
+            rollContext,
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            dialogOptions: {
+                skipUI: true
+            },
+            title: turnEvent.name
+        });
     }
 }
 
