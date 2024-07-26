@@ -1206,7 +1206,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             return this.item.update({
                 "system.turnEvents": turnEvents.concat([
                     {
-                        trigger: "turnEnd",
+                        trigger: "onTurnEnd",
                         type: "roll",
                         formula: "",
                         damageTypes: {},
