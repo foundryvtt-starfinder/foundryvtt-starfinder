@@ -2077,7 +2077,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             dialogOptions: {
                 skipUI: true
             },
-            title: turnEvent.name
+            title: turnEvent.name || this.name
         });
     }
 }
