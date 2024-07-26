@@ -8,14 +8,14 @@
                     class="fas fa-minus"></i></a>
         </h4>
         <div class="bubble-info">
-            <div class="form-group">
+            <div class="form-group turn-event-name">
                 <label>{{localize "SFRPG.TurnEvent.Name"}}</label>
                 <div class="form-fields">
                     <input type="text" name="system.turnEvents.{{i}}.name" value="{{event.name}}"
-                        placeholder="{{ localize " SFRPG.Items.Action.DamageSection" section=i}}" />
+                        placeholder="{{ localize " SFRPG.TurnEvent.TurnEventI" section=i}}" />
                 </div>
             </div>
-            <div class="form-group" {{createTippy title="SFRPG.TurnEvent.Trigger"
+            <div class="form-group turn-event-trigger" {{createTippy title="SFRPG.TurnEvent.Trigger"
                 subtitle="SFRPG.TurnEvent.TriggerTooltip" }}>
                 <label>{{localize "SFRPG.TurnEvent.Trigger"}}</label>
                 <div class="form-fields">
@@ -24,8 +24,8 @@
                     </select>
                 </div>
             </div>
-            <div class="form-group" {{createTippy title="SFRPG.TurnEvent.Type" subtitle="SFRPG.TurnEvent.TypeTooltip"
-                }}>
+            <div class="form-group turn-event-trigger" {{createTippy title="SFRPG.TurnEvent.Type"
+                subtitle="SFRPG.TurnEvent.TypeTooltip" }}>
                 <label>{{localize "SFRPG.TurnEvent.Type"}}</label>
                 <div class="form-fields">
                     <select name="system.turnEvents.{{i}}.type">
@@ -44,7 +44,7 @@
                     </div>
                 </div>
 
-                <div class="turn-event-type form-group stacked">
+                <div class="turn-event-damage form-group stacked">
                     <div class="form-group form-group-stacked">
                         <label>{{localize "Energy Damage"}}</label>
                         {{#each ../config.energyDamageTypes as |name type|}}
@@ -73,7 +73,7 @@
                 </div>
 
             {{else if (eq event.type "note")}}
-                <div class="bubble">
+                <div class="bubble turn-event-note">
                     <h3 class="bubble-header">{{localize "SFRPG.TurnEvent.NoteContent"}}</h3>
 
                     <div class="bubble-info bubble-editor" {{createTippy title="SFRPG.TurnEvent.NoteContent"
