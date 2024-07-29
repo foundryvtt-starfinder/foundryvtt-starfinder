@@ -858,23 +858,10 @@ export class ItemSheetSFRPG extends ItemSheet {
         const target = $(event.currentTarget);
         const modifierId = target.closest('.item.modifier').data('modifierId');
 
-        const modifiers = foundry.utils.deepClone(this.item.system.modifiers);
+        const modifiers = this.item.system.modifiers;
         const modifier = modifiers.find(mod => mod._id === modifierId);
 
-        const formula = modifier.modifier;
-        if (formula) {
-            // TODO: test this this.item should be the actor if not try to get the actor here
-            const roll = Roll.create(formula, this.item.system);
-            modifier.max = await roll.evaluate({maximize: true}).total;
-        } else {
-            modifier.max = 0;
-        }
-
-        modifier.enabled = !modifier.enabled;
-
-        await this.item.update({
-            'system.modifiers': modifiers
-        });
+        return modifier.toggle();
     }
 
     async _onAddStorage(event) {

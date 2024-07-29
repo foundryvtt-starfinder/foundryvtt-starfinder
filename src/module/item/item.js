@@ -13,7 +13,7 @@ import { ItemCapacityMixin } from "./mixins/item-capacity.js";
 
 export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityMixin) {
 
-    constructor(data, context={}) {
+    constructor(data, context = {}) {
         // Set module art if available. This applies art to items viewed or created from compendiums.
         if (context.pack && data._id) {
             const art = game.sfrpg.compendiumArt.map.get(`Compendium.${context.pack}.${data._id}`);
@@ -950,8 +950,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         /** Create global attack modifiers. */
         const additionalModifiers = foundry.utils.deepClone(SFRPG.globalAttackRollModifiers).map(mod => {
-            const container = {actorUuid: this.actor.uuid, itemUuid: this.uuid};
-            const modInstance = {bonus: new SFRPGModifier({...mod.bonus, container})};
+            const modInstance = {bonus: new SFRPGModifier(mod.bonus, {parent: this, globalModifier: true})};
             return modInstance;
         });
 
@@ -1009,9 +1008,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             // Remove inactive constant and damage section mods. Keep all situational mods, regardless of status.
             if (!mod.enabled && mod.modifierType !== SFRPGModifierType.FORMULA) return false;
 
-            if (mod.limitTo === "parent" && mod.container.itemUuid !== this.uuid) return false;
+            if (mod.limitTo === "parent" && mod.item !== this) return false;
             if (mod.limitTo === "container") {
-                const parentItem = getItemContainer(this.actor.items, fromUuidSync(mod.container.itemUuid));
+                const parentItem = getItemContainer(this.actor.items, mod.item);
                 if (parentItem?.id !== this.id) return false;
             }
 
@@ -1388,9 +1387,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 return false;
             }
 
-            if (mod.limitTo === "parent" && mod.container.itemUuid !== this.uuid) return false;
+            if (mod.limitTo === "parent" && mod.item !== this) return false;
             if (mod.limitTo === "container") {
-                const parentItem = getItemContainer(this.actor.items, fromUuidSync(mod.container.itemUuid));
+                const parentItem = getItemContainer(this.actor.items, mod.item);
                 if (parentItem?.id !== this.id) return false;
             }
 

@@ -270,7 +270,6 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
 
         if (!this.options.editable) return;
 
-        // html.find('.toggle-prepared').click(this._onPrepareItem.bind(this));
         html.find('.reload').on('click', this._onReloadWeapon.bind(this));
 
         html.find('.short-rest').on('click', this._onShortRest.bind(this));
@@ -280,20 +279,6 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         html.find('.modifier-delete').on('click', this._onModifierDelete.bind(this));
         html.find('.modifier-toggle').on('click', this._onToggleModifierEnabled.bind(this));
         html.find('.player-class-level-up').on('click', this._onLevelUp.bind(this));
-    }
-
-    /**
-     * Handle toggling the prepared status of an Owned Itme within the Actor
-     *
-     * @param {Event} event The triggering click event
-     */
-    _onPrepareItem(event) {
-        event.preventDefault();
-
-        const itemId = event.currentTarget.closest('.item').dataset.itemId;
-        const item = this.actor.items.get(itemId);
-
-        return item.update({'system.preparation.prepared': !item.system.preparation.prepared});
     }
 
     /**
