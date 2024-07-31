@@ -1,0 +1,78 @@
+{
+  "_id": "AS4F545WFhrorYGB",
+  "name": "Effect: Gussy Up",
+  "type": "effect",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "type": "effect",
+    "abilityMods": {
+      "parts": []
+    },
+    "activeDuration": {
+      "activationTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "origin"
+      },
+      "unit": "hour",
+      "value": "1"
+    },
+    "context": {
+      "origin": {
+        "actorUuid": "",
+        "itemUuid": ""
+      }
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.feats.Item.3vzDi23pOCzaJbD6]{Gussy Up}</p>\n<p>By taking a moment to prepare before attempting to make an impression, you can help another creature look and feel more confident.</p><hr /><p><strong>Benefit:</strong> You can spend 1 minute before attempting a @Check[type:diplomacy] to @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.HWJ570MVgFoO5Reb#aid-another]{aid another} to make minute adjustments to your ally’s appearance and give quick elocution tips. If you succeed at the skill check, that ally gains a +2 circumstance bonus to their check, as long they attempt the check within the next hour. If you succeed at the Diplomacy check to aid by more than 10, increase the bonus granted by 1.</p>\n<p><strong>Normal:</strong> If you succeed at a DC 10 check to aid another, that creature gains a +2 bonus to their check, as long as they attempt the check before the end of their next turn.</p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "76e02aaa-a933-4f60-86fd-62d779040816",
+        "name": "Gussy Up +2",
+        "type": "circumstance",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "If you succeed at the skill check, that ally gains a +2 circumstance bonus to their check, as long they attempt the check within the next hour. If you succeed at the Diplomacy check to aid by more than 10, increase the bonus granted by 1.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "dip"
+      },
+      {
+        "_id": "2143e850-9bdc-430d-9059-616739ac4744",
+        "name": "Gussy Up +3",
+        "type": "circumstance",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 3,
+        "modifier": "3",
+        "modifierType": "formula",
+        "notes": "If you succeed at the skill check, that ally gains a +2 circumstance bonus to their check, as long they attempt the check within the next hour. If you succeed at the Diplomacy check to aid by more than 10, increase the bonus granted by 1.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "dip"
+      }
+    ],
+    "requirements": "",
+    "showOnToken": false,
+    "source": "EN pg. 108"
+  }
+}
