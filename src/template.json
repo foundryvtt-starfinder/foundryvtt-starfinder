@@ -10,6 +10,10 @@
       "vehicle",
       "npc"
     ],
+    "htmlFields": ["details.biography.value", "details.biography.gmNotes", "details.biography.value", "details.notes"],
+    "filePathFields": {
+      "details.biography.fullBodyImage": ["IMAGE"]
+    },
     "templates": {
       "common": {
         "abilities": {
@@ -1401,6 +1405,7 @@
       "mechAuxiliarySystem",
       "mechUpgrade"
     ],
+    "htmlFields": ["description.value", "description.gmnotes", "description.chat", "description.short", "description.unidentified"],
     "templates": {
       "container": {
         "container": {
@@ -1478,8 +1483,8 @@
           "per": ""
         },
         "uses": {
-          "value": 0,
-          "max": 0,
+          "value": null,
+          "max": null,
           "per": null
         },
         "isActive": null
@@ -1505,7 +1510,8 @@
           "dc": null,
           "descriptor": ""
         },
-        "descriptors": []
+        "descriptors": [],
+        "properties": {}
       },
       "descriptors": {},
       "itemUsage": {
@@ -1601,7 +1607,6 @@
       "weaponCategory": "uncategorized",
       "special": "",
       "ability": "str",
-      "properties": {},
       "proficient": true,
       "container": {
         "contents": [],
@@ -2313,7 +2318,9 @@
         "physicalItem",
         "itemUsage",
         "modifiers",
-        "container"
+        "container",
+        "action",
+        "activatedEffect"
       ],
       "hands": 0
     },
@@ -2323,7 +2330,9 @@
         "physicalItem",
         "itemUsage",
         "modifiers",
-        "container"
+        "container",
+        "action",
+        "activatedEffect"
       ],
       "hands": 0,
       "limitedWear": false
@@ -2334,7 +2343,9 @@
         "physicalItem",
         "itemUsage",
         "modifiers",
-        "container"
+        "container",
+        "action",
+        "activatedEffect"
       ],
       "hands": 0,
       "limitedWear": false
@@ -2354,7 +2365,9 @@
         "physicalItem",
         "itemUsage",
         "modifiers",
-        "container"
+        "container",
+        "action",
+        "activatedEffect"
       ],
       "slots": 1,
       "allowedArmorType": "any"

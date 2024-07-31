@@ -1,3 +1,5 @@
+import { ActorSFRPG } from "../actor/actor.js";
+import { ItemSFRPG } from "../item/item.js";
 import { generateUUID } from "../utils/utilities.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./types.js";
 
@@ -17,28 +19,28 @@ import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./types.
  * @param {String}        data.subtab        What subtab should this appear on in the character sheet?
  * @param {String}        data.condition     The condition, if any, that this modifier is associated with.
  * @param {String|null}   data.id            Override a random id with a specific one.
- * @param {Object|null}   data.container     The UUIDs of the actor and item, if applicable, the modifier is owned by.
  * @param {Object|null}   data.damage        If this modifier is a damage section modifier, the damage type and group
  * @param {String}        data.limitTo       If this modifier is on an item, should the modifier affect only that item?
  */
 export default class SFRPGModifier extends foundry.abstract.DataModel {
     constructor(data, options = {}) {
         super(data, options);
+        this.globalModifier = options.globalModifier || false;
     }
 
     _initializeSource(source, options = {}) {
         // Create a random id, or set the specific one if provided.
-        source._id ||= source.id || generateUUID();
+        source._id ||= (source.id || generateUUID());
 
-        return super._initializeSource(source, (options = {}));
+        return super._initializeSource(source, options);
     }
 
     // Slight hack to keep modifiers on the database or exported to JSON minimal and clean.
     toObject(source = true) {
         if (source) {
-            const obj = deepClone(this._source);
+            const obj = foundry.utils.deepClone(this._source);
             delete obj.container;
-            if (!this.constructor._hasDamageSection(obj)) delete obj.damage;
+            if (!this.hasDamageSection) delete obj.damage;
             if (!obj.limitTo) delete obj.limitTo;
             return obj;
         }
@@ -61,10 +63,8 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
 
         // Calculate max, if not already
         try {
-            if (!this.max) {
-                const roll = Roll.create(this.modifier.toString());
-                this.max = roll.evaluate({maximize: true}).total;
-            }
+            const roll = Roll.create(this.modifier.toString(), this.parent.system);
+            this.max = roll.evaluateSync({strict: false}).total;
         } catch {
             this.max = 0;
         }
@@ -118,7 +118,7 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
             }),
             enabled: new fields.BooleanField({
                 initial: false,
-                required: false,
+                required: true,
                 label: "SFRPG.ModifierEnabledLabel",
                 hint: "SFRPG.ModifierEnabledTooltip"
             }),
@@ -137,17 +137,9 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
             subtab: new fields.StringField({
                 initial: "misc",
                 required: false,
-                choices: ["permanent", "temporary", "misc"]
+                choices: ["permanent", "temporary", "misc", "condition"]
             }),
             condition: new fields.StringField({ initial: "", required: false }),
-            container: new fields.SchemaField(
-                {
-                    actorUuid: new fields.StringField({ initial: null, required: true, nullable: true }),
-                    itemUuid: new fields.StringField({ initial: null, required: false, nullable: true }),
-                    tokenUuid: new fields.StringField({ initial: null, required: false, nullable: true })
-                },
-                { nullable: true, required: false }
-            ),
             damage: new fields.SchemaField(
                 {
                     damageGroup: new fields.NumberField({
@@ -182,19 +174,15 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
     }
 
     get actor() {
-        return fromUuidSync(this.container.actorUuid);
+        return this.parent instanceof ActorSFRPG ? this.parent : this.parent.actor;
     }
 
     get item() {
-        return fromUuidSync(this.container.itemUuid);
+        return this.parent instanceof ItemSFRPG ? this.parent : null;
     }
 
     get token() {
-        return fromUuidSync(this.container.tokenUuid);
-    }
-
-    get primaryOwner() {
-        return this.item || this.actor;
+        return this.actor.isToken ? this.actor.token : this.actor.getActiveTokens(true, true);
     }
 
     get hasDamageSection() {
@@ -203,5 +191,15 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
 
     static _hasDamageSection(obj) {
         return (obj.damage && Object.values(obj.damage.damageTypes).some(type => !!type)) || false;
+    }
+
+    async toggle(active = null) {
+        const parentMods = this.parent.system.modifiers;
+
+        const modInParent = parentMods.find(mod => mod._id === this._id);
+        modInParent.updateSource({enabled: active ?? !modInParent.enabled});
+
+        return this.parent.update({"system.modifiers": parentMods});
+
     }
 }

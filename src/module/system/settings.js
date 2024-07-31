@@ -3,24 +3,6 @@ import { SFRPG } from "../config.js";
 import { ItemSFRPG } from "../item/item.js";
 
 export const registerSystemSettings = function() {
-    game.settings.register("sfrpg", "diagonalMovement", {
-        name: "SFRPG.Settings.DiagonalMovementRule.Name",
-        hint: "SFRPG.Settings.DiagonalMovementRule.Hint",
-        scope: "world",
-        config: true,
-        default: "5105",
-        type: String,
-        choices: {
-            "5105": "SFRPG.Settings.DiagonalMovementRule.Values.Core",
-            "555": "SFRPG.Settings.DiagonalMovementRule.Values.Optional"
-        },
-        onChange: rule => {
-            if (canvas.initialized) {
-                canvas.grid.diagonalRule = rule;
-            }
-        }
-    });
-
     game.settings.register("sfrpg", "disableExperienceTracking", {
         name: "SFRPG.Settings.ExperienceTracking.Name",
         hint: "SFRPG.Settings.ExperienceTracking.Hint",

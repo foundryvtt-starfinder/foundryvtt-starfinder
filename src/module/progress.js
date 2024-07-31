@@ -31,7 +31,7 @@ export default class Progress {
 
     _updateUI() {
         const loader = document.getElementById("loading");
-        const pct = Math.clamped(100 * this._counter / this._steps, 0, 100);
+        const pct = Math.clamp(100 * this._counter / this._steps, 0, 100);
         loader.querySelector("#context").textContent = this._label;
         loader.querySelector("#loading-bar").style.width = `${pct}%`;
         loader.querySelector("#progress").textContent = `${this._counter} / ${this._steps}`;

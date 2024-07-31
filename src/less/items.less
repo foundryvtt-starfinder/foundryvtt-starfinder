@@ -133,6 +133,13 @@
         .tab {
             padding: 0 5px;
             // overflow: hidden;
+
+            .details-navigation {
+                margin-bottom: 5px;
+                .item {
+                    font-size: var(--font-size-18);
+                }
+            }
         }
 
         .item-properties {
@@ -177,6 +184,10 @@
                     }
                 }
             }
+        }
+
+        .bubble {
+            .bubble-mixin();
         }
     }
 
@@ -304,11 +315,11 @@
         color: @colorOlive;
     }
 
+    ol.storage-slots,
     ol.damage-parts,
     ol.pp-abilities,
+    ol.subaction-parts,
     ol.visualization-parts {
-        border-top: groove 2px #fff;
-
         img.part-image {
             flex: 0 0 50px;
             height: 50px;
@@ -321,7 +332,9 @@
         border-bottom: groove 2px #fff;
     }
 
+    .storage-slots,
     .damage-parts,
+    .subaction-parts,
     .pp-abilities,
     .visualization-parts,
     .ability-adjustment-parts {
@@ -329,7 +342,9 @@
         margin: 0;
         padding: 0;
 
+        .storage-slot,
         .damage-part,
+        .subaction-part,
         .pp-ability,
         .visualization-part,
         .ability-adjustment-part {
@@ -638,7 +653,7 @@
         .origin {
             float: left;
 
-            .item-properties {
+            &.item-properties {
                 img {
                     margin: 5px;
                     max-width: 80px;
@@ -656,6 +671,10 @@
 
         div.form-group > label {
             flex: 1;
+        }
+
+        .bubble {
+            height: fit-content;
         }
     }
 }

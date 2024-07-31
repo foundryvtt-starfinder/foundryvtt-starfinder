@@ -30,7 +30,7 @@ import { NpcSkillToggleDialog } from './module/apps/npc-skill-toggle-dialog.js';
 import { ShortRestDialog } from './module/apps/short-rest.js';
 import { SpellCastDialog } from './module/apps/spell-cast-dialog.js';
 import { TraitSelectorSFRPG } from './module/apps/trait-selector.js';
-import { canvasHandler, measureDistances } from "./module/canvas/canvas.js";
+import { canvasHandler } from "./module/canvas/canvas.js";
 import { MeasuredTemplateSFRPG, TemplateLayerSFRPG } from "./module/canvas/template-overrides.js";
 import { addChatMessageContextOptions } from "./module/chat/chat-message-options.js";
 import CounterManagement from "./module/classes/counter-management.js";
@@ -78,6 +78,96 @@ import { getStarshipBrowser } from "./module/packs/starship-browser.js";
 
 let initTime = null;
 
+/* -------------------------------------------- */
+/*  Define Module Structure                     */
+/* -------------------------------------------- */
+const moduleStructure = {
+    AbilityTemplate,
+    applications: {
+        // Actor Sheets
+        ActorSheetSFRPG,
+        ActorSheetSFRPGCharacter,
+        ActorSheetSFRPGDrone,
+        ActorSheetSFRPGHazard,
+        ActorSheetSFRPGMech,
+        ActorSheetSFRPGNPC,
+        ActorSheetSFRPGStarship,
+        ActorSheetSFRPGVehicle,
+        // Item Sheets
+        ItemCollectionSheet,
+        ItemSheetSFRPG,
+        // Dialogs
+        ActorMovementConfig,
+        AddEditSkillDialog,
+        ChoiceDialog,
+        DroneRepairDialog,
+        InputDialog,
+        ItemDeletionDialog,
+        RollDialog,
+        NpcSkillToggleDialog,
+        SpellCastDialog,
+        ShortRestDialog,
+        // Misc
+        ActorSheetFlags,
+        SFRPGModifierApplication,
+        TraitSelectorSFRPG
+    },
+    compendiumArt: { map: new Map(), refresh: registerCompendiumArt },
+    config: SFRPG,
+    dice: DiceSFRPG,
+    documents: { ActorSFRPG, ItemSFRPG, CombatSFRPG },
+    entities: { ActorSFRPG, ItemSFRPG },
+    generateUUID,
+    // Document browsers
+    getSpellBrowser,
+    getEquipmentBrowser,
+    getAlienArchiveBrowser,
+    getStarshipBrowser,
+    migrateWorld,
+    rollItemMacro,
+    rolls: {
+        RollContext,
+        RollNode,
+        RollTree,
+        SFRPGRoll
+    },
+    RPC,
+    SFRPGEffectType,
+    SFRPGModifier,
+    SFRPGModifierType,
+    SFRPGModifierTypes,
+    timedEffects: new Map(),
+
+    // Namespace style
+    Actor: {
+        Damage: {
+            SFRPGHealingSetting,
+            SFRPGDamage
+        },
+        Modifiers: {
+            SFRPGEffectType,
+            SFRPGModifier,
+            SFRPGModifierType,
+            SFRPGModifierTypes
+        },
+        Sheet: {
+            Base: ActorSheetSFRPG,
+            Character: ActorSheetSFRPGCharacter,
+            Npc: ActorSheetSFRPGNPC,
+            Drone: ActorSheetSFRPGDrone,
+            Starship: ActorSheetSFRPGStarship,
+            Vehicle: ActorSheetSFRPGVehicle
+        },
+        Type: ActorSFRPG
+    }
+};
+
+globalThis.sfrpg = moduleStructure;
+
+/* -------------------------------------------- */
+/*  Init Hook                                   */
+/* -------------------------------------------- */
+
 Hooks.once('init', async function() {
     initTime = (new Date()).getTime();
     console.log(`Starfinder | [INIT] Initializing the Starfinder System`);
@@ -97,87 +187,8 @@ Hooks.once('init', async function() {
     console.log("Starfinder | [INIT] Initializing the rules engine");
     const engine = new Engine();
 
-    game.sfrpg = {
-        AbilityTemplate,
-        applications: {
-            // Actor Sheets
-            ActorSheetSFRPG,
-            ActorSheetSFRPGCharacter,
-            ActorSheetSFRPGDrone,
-            ActorSheetSFRPGHazard,
-            ActorSheetSFRPGNPC,
-            ActorSheetSFRPGStarship,
-            ActorSheetSFRPGVehicle,
-            ActorSheetSFRPGMech,
-            // Item Sheets
-            ItemCollectionSheet,
-            ItemSheetSFRPG,
-            // Dialogs
-            ActorMovementConfig,
-            AddEditSkillDialog,
-            ChoiceDialog,
-            DroneRepairDialog,
-            InputDialog,
-            ItemDeletionDialog,
-            RollDialog,
-            NpcSkillToggleDialog,
-            SpellCastDialog,
-            ShortRestDialog,
-            // Misc
-            ActorSheetFlags,
-            SFRPGModifierApplication,
-            TraitSelectorSFRPG
-        },
-        compendiumArt: { map: new Map(), refresh: registerCompendiumArt },
-        config: SFRPG,
-        dice: DiceSFRPG,
-        documents: { ActorSFRPG, ItemSFRPG, CombatSFRPG },
-        engine,
-        entities: { ActorSFRPG, ItemSFRPG },
-        generateUUID,
-        // Document browsers
-        getSpellBrowser,
-        getEquipmentBrowser,
-        getAlienArchiveBrowser,
-        getStarshipBrowser,
-        migrateWorld,
-        rollItemMacro,
-        rolls: {
-            RollContext,
-            RollNode,
-            RollTree,
-            SFRPGRoll
-        },
-        RPC,
-        SFRPGEffectType,
-        SFRPGModifier,
-        SFRPGModifierType,
-        SFRPGModifierTypes,
-        timedEffects: new Map(),
-
-        // Namespace style
-        Actor: {
-            Damage: {
-                SFRPGHealingSetting,
-                SFRPGDamage
-            },
-            Modifiers: {
-                SFRPGEffectType,
-                SFRPGModifier,
-                SFRPGModifierType,
-                SFRPGModifierTypes
-            },
-            Sheet: {
-                Base: ActorSheetSFRPG,
-                Character: ActorSheetSFRPGCharacter,
-                Npc: ActorSheetSFRPGNPC,
-                Drone: ActorSheetSFRPGDrone,
-                Starship: ActorSheetSFRPGStarship,
-                Vehicle: ActorSheetSFRPGVehicle
-            },
-            Type: ActorSFRPG
-        }
-    };
+    moduleStructure.engine = engine;
+    game.sfrpg = moduleStructure;
 
     CONFIG.SFRPG = SFRPG;
     CONFIG.statusEffects = CONFIG.SFRPG.statusEffects;
@@ -259,9 +270,6 @@ Hooks.once('init', async function() {
         r.style.setProperty("--color-shadow-highlight", "#00a0ff");
         r.style.setProperty("--sfrpg-theme-blue", "#235683");
     }
-
-    console.log("Starfinder | [INIT] Adding math functions");
-    SFRPGRoll.registerMathFunctions();
 
     console.log("Starfinder | [INIT] Overriding tooltips");
     Object.defineProperty(game, "tooltip", {value: new TooltipManagerSFRPG(), configurable: true, enumerable: true});
@@ -350,6 +358,9 @@ Hooks.once('init', async function() {
         "weapon": "fas fa-gun",
         "weaponAccessory": "fas fa-gears"
     };
+
+    console.log("Starfinder | [INIT] Adding math functions");
+    SFRPGRoll.registerMathFunctions();
 
     const finishTime = (new Date()).getTime();
     console.log(`Starfinder | [INIT] Done (operation took ${finishTime - initTime} ms)`);
@@ -479,6 +490,9 @@ Hooks.once("setup", function() {
     console.log("Starfinder | [SETUP] Initializing remote inventory system");
     initializeRemoteInventory();
 
+    console.log("Starfinder | [SETUP] Caching starship actions");
+    ActorSheetSFRPGStarship.ensureStarshipActions();
+
     console.log("Starfinder | [SETUP] Registering custom handlebars");
     setupHandlebars();
 
@@ -492,9 +506,6 @@ Hooks.once("ready", async () => {
 
     console.log("Starfinder | [READY] Overriding token HUD");
     canvas.hud.token = new SFRPGTokenHUD();
-
-    console.log("Starfinder | [READY] Caching starship actions");
-    ActorSheetSFRPGStarship.ensureStarshipActions();
 
     console.log("Starfinder | [READY] Initializing compendium browsers");
     initializeBrowsers();
@@ -515,36 +526,32 @@ Hooks.once("ready", async () => {
         connectToDocument(macro);
     }
 
-    if (game.user.isGM) {
+    if (game.users.activeGM?.isSelf) {
         const currentSchema = game.settings.get('sfrpg', 'worldSchemaVersion') ?? 0;
         const systemSchema = Number(game.system.flags.sfrpg.schema);
         const needsMigration = currentSchema < systemSchema || currentSchema === 0;
 
-        let migrationPromise = null;
+        let migrationPerformed = false;
         if (needsMigration) {
             console.log("Starfinder | [READY] Performing world migration");
-            migrationPromise = migrateWorld()
-                .then((refreshRequired) => {
-                    if (refreshRequired) {
-                        ui.notifications.warn(game.i18n.localize("SFRPG.MigrationSuccessfulRefreshMessage"), {permanent: true});
-                    } else {
-                        ui.notifications.info(game.i18n.localize("SFRPG.MigrationSuccessfulMessage"), {permanent: true});
-                    }
-                })
-                .catch((error) => {
-                    ui.notifications.error(game.i18n.localize("SFRPG.MigrationErrorMessage"), {permanent: true});
-                    console.error(error);
-                });
+            try {
+                migrationPerformed = await migrateWorld();
+            } catch {
+                ui.notifications.error(game.i18n.localize("SFRPG.MigrationErrorMessage"), {permanent: true});
+                console.error(error);
+            }
+
+            if (migrationPerformed) {
+                ui.notifications.info(game.i18n.localize("SFRPG.MigrationSuccessfulRefreshMessage"), {permanent: true});
+            } else {
+                ui.notifications.info(game.i18n.localize("SFRPG.MigrationSuccessfulMessage"), {permanent: true});
+            }
+
         }
 
         console.log("Starfinder | [READY] Checking items for container updates");
-        if (migrationPromise) {
-            migrationPromise.then(async () => {
-                migrateOldContainers();
-            });
-        } else {
-            migrateOldContainers();
-        }
+        if (migrationPerformed) migrateOldContainers();
+
     }
 
     Hooks.on("dropCanvasData", (canvas, data) => canvasHandler(canvas, data));
@@ -583,17 +590,13 @@ async function migrateOldContainers() {
     }
 }
 
-Hooks.on("canvasInit", function() {
-    canvas.grid.diagonalRule = game.settings.get("sfrpg", "diagonalMovement");
-    SquareGrid.prototype.measureDistances = measureDistances;
-});
-
 Hooks.on("renderChatMessage", (app, html, data) => {
     DiceSFRPG.highlightCriticalSuccessFailure(app, html, data);
     DiceSFRPG.addDamageTypes(app, html, data);
 
     if (game.settings.get("sfrpg", "autoCollapseItemCards")) html.find('.card-content').hide();
 });
+
 Hooks.on("getChatLogEntryContext", addChatMessageContextOptions);
 
 function setupHandlebars() {
