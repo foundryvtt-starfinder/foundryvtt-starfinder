@@ -24,6 +24,7 @@
     "ammunitionType": "",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": 0
@@ -76,24 +77,8 @@
       "parts": []
     },
     "damage": {
-      "parts": [
-        {
-          "name": "",
-          "formula": "1d6",
-          "group": null,
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
-            "cold": false,
-            "electricity": false,
-            "fire": false,
-            "healing": false,
-            "piercing": false,
-            "slashing": false,
-            "sonic": false
-          }
-        }
-      ]
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -114,7 +99,24 @@
     "identified": true,
     "isActive": null,
     "level": 8,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "30edcb0d-7974-44f9-a2c5-1e42569d210e",
+        "name": "Graviton crystal, minor",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-damage",
+        "enabled": true,
+        "limitTo": "container",
+        "max": 6,
+        "modifier": "1d6",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "price": 9200,
     "proficient": true,
     "properties": {
@@ -155,6 +157,7 @@
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
       "hybrid": false,
       "hydrodynamic": false,
@@ -225,6 +228,10 @@
       "type": "",
       "dc": "",
       "descriptor": "negate"
+    },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
     },
     "source": "CRB pg. 180",
     "special": "",

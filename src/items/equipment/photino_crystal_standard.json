@@ -24,6 +24,7 @@
     "ammunitionType": "",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": 0
@@ -76,40 +77,8 @@
       "parts": []
     },
     "damage": {
-      "parts": [
-        {
-          "name": "Base damage",
-          "formula": "3d4",
-          "group": null,
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
-            "cold": false,
-            "electricity": false,
-            "fire": true,
-            "healing": false,
-            "piercing": false,
-            "slashing": false,
-            "sonic": false
-          }
-        },
-        {
-          "name": "Burn",
-          "formula": "2d6",
-          "group": null,
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
-            "cold": false,
-            "electricity": false,
-            "fire": true,
-            "healing": false,
-            "piercing": false,
-            "slashing": false,
-            "sonic": false
-          }
-        }
-      ]
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -130,7 +99,37 @@
     "identified": true,
     "isActive": null,
     "level": 13,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "e5547dc9-7f38-404f-8e92-10cc6e29c7e5",
+        "name": "Photino crystal, standard",
+        "type": "untyped",
+        "condition": "",
+        "damage": {
+          "damageGroup": null,
+          "damageTypes": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        "effectType": "all-damage",
+        "enabled": true,
+        "limitTo": "container",
+        "max": 12,
+        "modifier": "3d4",
+        "modifierType": "damageSection",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "price": 46000,
     "proficient": true,
     "properties": {
@@ -171,6 +170,7 @@
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
       "hybrid": false,
       "hydrodynamic": false,
@@ -241,6 +241,10 @@
       "type": "",
       "dc": "",
       "descriptor": "negate"
+    },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
     },
     "source": "AA2 pg. 117",
     "special": "",

@@ -17,16 +17,17 @@
     "actionTarget": "",
     "actionType": "other",
     "activation": {
-      "type": "",
+      "type": "special",
       "condition": "",
       "cost": 0
     },
     "ammunitionType": "",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
-      "units": "",
-      "value": 0
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -76,40 +77,8 @@
       "parts": []
     },
     "damage": {
-      "parts": [
-        {
-          "name": "",
-          "formula": "3d6",
-          "group": null,
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
-            "cold": false,
-            "electricity": false,
-            "fire": false,
-            "healing": false,
-            "piercing": false,
-            "slashing": false,
-            "sonic": false
-          }
-        },
-        {
-          "name": "Variant boost",
-          "formula": "3d6",
-          "group": null,
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
-            "cold": false,
-            "electricity": false,
-            "fire": false,
-            "healing": false,
-            "piercing": false,
-            "slashing": false,
-            "sonic": false
-          }
-        }
-      ]
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -121,8 +90,8 @@
     },
     "descriptors": [],
     "duration": {
-      "units": "",
-      "value": null
+      "units": "text",
+      "value": ""
     },
     "equippable": true,
     "equipped": false,
@@ -130,7 +99,40 @@
     "identified": true,
     "isActive": null,
     "level": 16,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "8960af3e-91bc-4085-837d-389574a196e0",
+        "name": "T-Quark Crystal, Greater",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-damage",
+        "enabled": true,
+        "limitTo": "container",
+        "max": 18,
+        "modifier": "3d6",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "b53d025d-4f04-4912-9936-8452cdaf10fc",
+        "name": "Variant Boost (T-Quark Crystal, Greater)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-damage",
+        "enabled": false,
+        "limitTo": "container",
+        "max": 18,
+        "modifier": "3d6",
+        "modifierType": "formula",
+        "notes": "A weapon with the variant boost special property acts as a weapon with the boost special property, except boosting the weapon does not expend additional charges and the weapon can be boosted only the listed number of times per day.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "price": 175000,
     "proficient": true,
     "properties": {
@@ -171,6 +173,7 @@
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
       "hybrid": false,
       "hydrodynamic": false,
@@ -233,14 +236,18 @@
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
-      "value": null
+      "units": "none",
+      "value": ""
     },
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": "",
       "descriptor": "negate"
+    },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
     },
     "source": "AR pg. 49",
     "special": "",
@@ -262,16 +269,16 @@
     },
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "usage": {
       "per": "action",
       "value": 1
     },
     "uses": {
-      "max": 0,
-      "per": null,
-      "value": 0
+      "max": "5",
+      "per": "day",
+      "value": 5
     },
     "weaponCategory": "uncategorized",
     "weaponType": "solarian"
