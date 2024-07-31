@@ -49,7 +49,7 @@ export default function(engine) {
                 else if (mod.effectType === SFRPGEffectType.ABILITY_SKILLS && skill.ability === mod.valueAffected) return true;
 
                 return false;
-            }), context);
+            }), context, {actor: fact.actor});
 
             let accumulator = Object.entries(mods).reduce((sum, mod) => {
                 if (mod[1] === null || mod[1].length < 1) return sum;

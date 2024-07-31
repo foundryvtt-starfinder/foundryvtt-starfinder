@@ -3,7 +3,6 @@
 @navHeight: 30px;
 @headerHeight: 100px;
 @detailsHeight: 40px;
-@sheetNavTransition: background 0.2s, backdrop-filter 0.2s;
 
 // Global background style
 button {
@@ -107,6 +106,15 @@ img.icon-enricher {
 
     // Item Sheet form fields
     input[type="text"],
+    input[type="number"] {
+        height: calc(100% - 2px);
+        border: 1px solid @colorTan;
+        background: rgba(0, 0, 0, 0.05);
+        color: @colorDark;
+        width: calc(100% - 2px);
+        min-width: 20px;
+    }
+
     select {
         height: calc(100% - 2px);
         border: 1px solid @colorTan;
@@ -412,7 +420,6 @@ img.icon-enricher {
             color: #fff;
             // border-bottom: 3px solid @colorBeige;
             flex: 1;
-            transition: @sheetNavTransition;
 
             &.active {
                 // border-bottom: 3px solid @colorCrimson;
@@ -422,7 +429,7 @@ img.icon-enricher {
             &:hover:not(.active) {
                 backdrop-filter: brightness(0.5);
                 filter: drop-shadow(0px 2px 4px #00a0ff);
-                transition: @sheetNavTransition, filter 700ms;
+                transition: background 0.2s, backdrop-filter 0.2s, filter 700ms;
             }
         }
     }
@@ -614,5 +621,209 @@ img.icon-enricher {
         display: inline-block;
         width: 120px;
         font-weight: bold;
+    }
+}
+
+/* ------------------------------------------- */
+/* Combat Difficulty Calculator                */
+/* ------------------------------------------- */
+.encounter-stats-sheet {
+    .stats-header {
+        margin: 0;
+        padding: 0.25em;
+        font-size: var(--font-size-14);
+
+        .table-left {
+            flex: 3;
+            text-align: left;
+        }
+
+        .table-right {
+            flex: 1;
+            align-self: center;
+            text-align: right;
+            padding-right: 0.25em;
+            font-weight: bold;
+        }
+    }
+
+    .combatants-title {
+        display: flex;
+        flex-direction: row;
+        text-align: center;
+        border-bottom: @borderGroove;
+
+        .title-item {
+            flex: 1;
+            padding: 0.25em;
+            margin: 0;
+            font-size: var(--font-size-18);
+        }
+    }
+
+    .stats-body {
+        display: flex;
+        flex-direction: row;
+
+        .body-col {
+            flex: 1;
+        }
+
+        ul.combatant-list {
+            list-style-type: none; /* Remove bullets */
+            padding: 0; /* Remove padding */
+            margin: 0; /* Remove margins */
+        }
+
+        li.combatant-list {
+            border: black 1px solid;
+            border-radius: 0.25em;
+            padding: 0.5em;
+            margin: 0.25em;
+            display: flex;
+            max-width: 185px;
+            flex-direction: row;
+            cursor: pointer;
+            box-shadow: 0px 0px 2px black;
+            transition: box-shadow 0.2s, transform 0.2s;
+
+            img {
+                align-self: center;
+                border-style: none;
+                border-right: @borderGroove;
+                padding-right: 0.5em;
+                object-fit: cover;
+                object-position: 50% 0;
+            }
+
+            .combatant-info {
+                h4 {
+                    align-self: center;
+                    text-align: left;
+                    padding-left: 0.5em;
+                    font-size: var(--font-size-16);
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    width: 128px;
+                    display: block;
+                }
+
+                label.combatant-level {
+                    align-self: center;
+                    text-align: left;
+                    padding-left: 0.5em;
+                    display: block;
+                    cursor: inherit;
+                }
+            }
+
+            &.ally {
+                background: rgba(0, 0, 255, 0.2);
+
+                &:hover {
+                    box-shadow: 0px 0px 10px @sfrpgBlue;
+                    transition: box-shadow 0.2s, transform 0.2s;
+                    transform: scale(1.01);
+                }
+            }
+
+            &.enemy {
+                background: rgba(64, 64, 64, 0.2);
+
+                &:hover {
+                    box-shadow: 0px 0px 10px #771212;
+                    transition: box-shadow 0.2s, transform 0.2s;
+                    transform: scale(1.01);
+                }
+            }
+        }
+    }
+
+    .stats-footer {
+        padding: 0.25em;
+        margin: 0;
+        font-size: var(--font-size-16);
+    }
+}
+
+// SFRPG Macro Bar
+
+#hotbar.sfrpg {
+    ol#macro-list {
+        border: none;
+
+        .macro {
+            img {
+                &.greyscale {
+                    filter: grayscale(1);
+                    cursor: not-allowed;
+                }
+
+                &.active {
+                    box-shadow: 0 0 10px 3px var(--color-shadow-highlight);
+                }
+            }
+
+            span.macro-key {
+                top: 0px;
+                right: 0px;
+                padding: 0 2px;
+                z-index: 1;
+            }
+
+            footer.macro-footer {
+                position: absolute;
+                bottom: 0px;
+                left: 0px;
+                font-size: var(--font-size-12);
+                padding: 0 2px;
+                background: #11111180;
+                color: var(--color-text-light-highlight);
+            }
+
+            i.fas.icon {
+                position: absolute;
+                top: 0px;
+                left: 1px;
+                color: white;
+                text-shadow: 1px 1px black;
+
+                &.fa-xmark {
+                    color: red;
+                }
+
+                &.fa-check {
+                    color: springgreen;
+                }
+
+                &.fa-redo {
+                    font-weight: 300;
+                }
+            }
+        }
+    }
+}
+
+aside#tooltip,
+.locked-tooltip {
+    background: #262626;
+    border: 1px solid;
+    border-image: linear-gradient(180deg, #424242, #333333 25%, #333333 75%, #424242 100%) 1 1;
+    font-size: var(--font-size-14);
+
+    // The tooltip always has the class `text-center`, so we make `text-center` left!
+    &.text-center {
+        text-align: left;
+    }
+}
+
+div.modifier-app {
+    fieldset {
+        &:disabled {
+            display: none;
+        }
+
+        border-radius: 5px;
+        backdrop-filter: brightness(0.9);
     }
 }

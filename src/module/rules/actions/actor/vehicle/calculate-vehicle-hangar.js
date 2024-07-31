@@ -3,7 +3,7 @@ export default function(engine) {
         const data = fact.data;
 
         // Ensures that all vehicles have hangar bays
-        data.hangarBay = mergeObject(data.hangarBay ?? {}, {
+        data.hangarBay = foundry.utils.mergeObject(data.hangarBay ?? {}, {
             limit: 0,
             actorIds: []
         }, {overwrite: false});

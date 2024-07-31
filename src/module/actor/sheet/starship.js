@@ -19,7 +19,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
     static get defaultOptions() {
         const options = super.defaultOptions;
-        mergeObject(options, {
+        foundry.utils.mergeObject(options, {
             classes: ["sfrpg", "sheet", "actor", "starship"],
             width: 700
             // height: 800
@@ -156,7 +156,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             "system.crew": newCrew
         });
 
-        const cleanflags = duplicate(this.actor.flags);
+        const cleanflags = foundry.utils.deepClone(this.actor.flags);
         delete cleanflags.sfrpg.shipsCrew;
 
         await this.actor.update({
@@ -585,7 +585,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             const actor = await Actor.fromDropData(data);
             return this._onCrewDrop(event, actor.id);
         } else if (data.type === "Item") {
-            const rawItemData = await this._getItemDropData(event, data);
+            const rawItemData = (await Item.fromDropData(data)).toObject();
 
             if (SFRPG.starshipDefinitionItemTypes.includes(rawItemData.type)) {
                 return this.actor.createEmbeddedDocuments("Item", [rawItemData]);
@@ -614,7 +614,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             }
 
             if (acceptedItems.length > 0) {
-                const acceptedItemData = duplicate(data);
+                const acceptedItemData = foundry.utils.deepClone(data);
                 acceptedItemData.items = acceptedItems;
                 await this.processDroppedData(event, data);
             }
@@ -631,38 +631,6 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
     }
 
     /**
-    * Get an items data.
-    *
-    * @param {Event} event The originating drag event
-    * @param {object} data The data trasfer object
-    */
-    async _getItemDropData(event, data) {
-        let itemData = null;
-
-        const item = await Item.fromDropData(data);
-        itemData = item;
-
-        //    if (data.pack) {
-        //        const pack = game.packs.get(data.pack);
-        //        if (pack.documentName !== "Item") return;
-        //        itemData = await pack.getDocument(data.id);
-        //    } else if (data.data) {
-        //        let sameActor = data.actorId === actor.id;
-        //        if (sameActor && actor.isToken) sameActor = data.tokenId === actor.token.id;
-        //        if (sameActor) {
-        //            await this._onSortItem(event, data.data);
-        //        }
-        //        itemData = data.data;
-        //    } else {
-        //        let item = game.items.get(data.id);
-        //        if (!item) return;
-        //        itemData = item.data;
-        //    }
-
-        return duplicate(itemData);
-    }
-
-    /**
      * Handles drop events for the Crew list
      *
      * @param {Event}  event The originating drop event
@@ -676,7 +644,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         const targetRole = event.target.dataset.role;
         if (!targetRole || !actorId) return false;
 
-        const crew = duplicate(this.actor.system.crew);
+        const crew = foundry.utils.deepClone(this.actor.system.crew);
         const crewRole = crew[targetRole];
         const oldRole = this.actor.getCrewRoleForActor(actorId);
 
@@ -825,7 +793,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
         const roleId = $(event.currentTarget).closest('li')
             .data('role');
-        const skills = duplicate(CONFIG.SFRPG.skills);
+        const skills = foundry.utils.deepClone(CONFIG.SFRPG.skills);
         skills.gun = "Gunnery";
 
         const results = await ChoiceDialog.show(
@@ -856,7 +824,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             return;
         }
 
-        const crewData = duplicate(this.actor.system.crew);
+        const crewData = foundry.utils.deepClone(this.actor.system.crew);
         crewData.npcData[roleId].skills[skillId] = {
             isTrainedOnly: false,
             hasArmorCheckPenalty: false,
@@ -999,7 +967,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             }
         );
 
-        const currentSystem = duplicate(this.actor.system.attributes.systems[affectedSystem]);
+        const currentSystem = foundry.utils.deepClone(this.actor.system.attributes.systems[affectedSystem]);
         currentSystem.affectedRoles = {
             captain: results.result.captain === options[1],
             pilot: results.result.pilot === options[1],
@@ -1048,34 +1016,29 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
         const starshipPackKey = game.settings.get("sfrpg", "starshipActionsSource");
         const starshipActions = game.packs.get(starshipPackKey);
-        return starshipActions.getIndex().then(async (indices) => {
-            for (const index of indices) {
-                const entry = await starshipActions.getDocument(index._id);
-                const role = entry.system.role;
+        const docs = await starshipActions.getDocuments();
+        for (const entry of docs) {
+            const role = entry.system.role;
 
-                if (!tempCache[role]) {
-                    tempCache[role] = {label: CONFIG.SFRPG.starshipRoleNames[role], actions: []};
-                }
+            if (!tempCache[role]) tempCache[role] = {label: CONFIG.SFRPG.starshipRoleNames[role], actions: []};
 
-                tempCache[role].actions.push(entry);
-            }
+            tempCache[role].actions.push(entry);
+        }
 
-            /** Sort them by order. */
-            for (const [roleKey, roleData] of Object.entries(tempCache)) {
-                roleData.actions.sort(function(a, b) {return a.order - b.order;});
-            }
+        /** Sort them by order. */
+        for (const roleData of Object.values(tempCache)) {
+            roleData.actions.sort((a, b) => a.order - b.order);
+        }
 
-            const desiredOrder = ["captain", "pilot", "gunner", "engineer", "scienceOfficer", "chiefMate", "magicOfficer", "openCrew", "minorCrew"];
-            /** Automatically append any missing elements to the list at the end, in case new roles are added in the future. */
-            for (const key of Object.keys(tempCache)) {
-                if (!desiredOrder.includes(key)) {
-                    desiredOrder.push(key);
-                }
-            }
+        const desiredOrder = ["captain", "pilot", "gunner", "engineer", "scienceOfficer", "chiefMate", "magicOfficer", "openCrew", "minorCrew"];
+        /** Automatically append any missing elements to the list at the end, in case new roles are added in the future. */
+        for (const key of Object.keys(tempCache)) {
+            if (!desiredOrder.includes(key)) desiredOrder.push(key);
+        }
 
-            for (const key of desiredOrder) {
-                ActorSheetSFRPGStarship.StarshipActionsCache[key] = tempCache[key];
-            }
-        });
+        for (const key of desiredOrder) {
+            ActorSheetSFRPGStarship.StarshipActionsCache[key] = tempCache[key];
+        }
     }
+
 }

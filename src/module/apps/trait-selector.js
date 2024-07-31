@@ -32,20 +32,20 @@ export class TraitSelectorSFRPG extends FormApplication {
      * @returns {Object}
      */
     getData() {
-        let attr = getProperty(this.object, this.attribute);
+        const attr = getProperty(this.object, this.attribute);
         if (typeof attr.value === "string") attr.value = this.constructor._backCompat(attr.value, this.options.choices);
 
-        const choices = duplicate(this.options.choices);
-        const isEnergyResistance = this.attribute === "data.traits.dr";
+        const choices = foundry.utils.deepClone(this.options.choices);
+        const isEnergyResistance = this.attribute === "system.traits.dr";
         if (!isEnergyResistance) {
-            for (let [k, v] of Object.entries(choices)) {
+            for (const [k, v] of Object.entries(choices)) {
                 choices[k] = {
                     label: v,
                     chosen: attr.value.includes(k)
                 };
             }
         } else {
-            for (let [k, v] of Object.entries(choices)) {
+            for (const [k, v] of Object.entries(choices)) {
                 choices[k] = {
                     label: v,
                     chosen: false,
@@ -80,7 +80,7 @@ export class TraitSelectorSFRPG extends FormApplication {
         if (!current || current.length === 0) return [];
         current = current.split(/[\s,]/).filter(t => !!t);
         return current.map(val => {
-            for (let [k, v] of Object.entries(choices)) {
+            for (const [k, v] of Object.entries(choices)) {
                 if (val === v) return k;
             }
             return null;
@@ -98,13 +98,13 @@ export class TraitSelectorSFRPG extends FormApplication {
         let choices = [];
 
         if (this.attribute !== "system.traits.dr") {
-            for (let [k, v] of Object.entries(formData)) {
+            for (const [k, v] of Object.entries(formData)) {
                 if ((k !== 'custom') && v) choices.push(k);
             }
         } else {
             let resistances = Object.entries(formData).filter(e => e[0].startsWith("er"));
             resistances = resistances.reduce((obj, entry) => {
-                let [type, i] = entry[0].split('.').slice(1);
+                const [type, i] = entry[0].split('.').slice(1);
 
                 if (!obj[type]) obj[type] = {};
                 obj[type][i] = entry[1];
