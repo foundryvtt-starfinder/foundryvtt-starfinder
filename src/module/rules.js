@@ -99,6 +99,13 @@ import calculateVehiclePassengers from './rules/actions/actor/vehicle/calculate-
 import calculateActivationDetails from './rules/actions/item/calculate-activation-details.js';
 import calculateSaveDC from './rules/actions/item/calculate-save-dc.js';
 import calculateSkillDC from './rules/actions/item/calculate-skill-dc.js';
+// Mech rules
+import calculateMechHitPoints from './rules/actions/actor/mech/calculate-mech-hit-points.js';
+import calculateMechShieldPoints from './rules/actions/actor/mech/calculate-mech-shield-points.js';
+import calculateMechHardness from './rules/actions/actor/mech/calculate-mech-hardness.js';
+import calculateMechAc from './rules/actions/actor/mech/calculate-mech-ac.js';
+import calculateMechSaves from './rules/actions/actor/mech/calculate-mech-saves.js';
+import calculateMechStrengthMod from './rules/actions/actor/mech/calculate-mech-strength-mod.js';
 
 export default function(engine) {
     console.log("Starfinder | [INIT] Registering rules");
@@ -187,6 +194,13 @@ export default function(engine) {
     calculateSaveDC(engine);
     calculateSkillDC(engine);
     calculateActivationDetails(engine);
+    // Mech Actions
+    calculateMechAc(engine);
+    calculateMechHardness(engine);
+    calculateMechHitPoints(engine);
+    calculateMechSaves(engine);
+    calculateMechShieldPoints(engine);
+    calculateMechStrengthMod(engine);
 
     // Conditions
     always(engine);
@@ -355,6 +369,18 @@ export default function(engine) {
                     "identity",
                     { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" },
                     "calculateBulkAndWealth"
+                ]
+            },
+            {
+                when: { closure: "isActorType", type: "mech" },
+                then: [
+                    { closure: "calculateActorResources", stackModifiers: "stackModifiers" },
+                    "calculateMechAc",
+                    "calculateMechHardness",
+                    "calculateMechHitPoints",
+                    "calculateMechSaves",
+                    "calculateMechShieldPoints",
+                    "calculateMechStrengthMod"
                 ]
             }
         ]

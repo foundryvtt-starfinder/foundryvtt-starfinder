@@ -1,0 +1,72 @@
+<div class="form-group">
+    <label>{{ localize "SFRPG.Speed" }} <a class="config-button" data-action="movement" title="Movement speed"><i class="fas fa-cog"></i></a></label>
+
+    <div class="form-fields" style="display: inline-block">
+        {{!-- Main Movement --}}
+        {{#if (eq itemData.attributes.speed.mainMovement "land")}}
+            <b>{{localize "SFRPG.ActorSheet.Attributes.Speed.Types.Land"}}</b> - {{itemData.attributes.speed.land.base}} {{ localize "SFRPG.Units.Speed" }}
+        {{else if (eq itemData.attributes.speed.mainMovement "burrowing")}}
+            <b>{{localize "SFRPG.ActorSheet.Attributes.Speed.Types.Burrowing"}}</b> - {{itemData.attributes.speed.burrowing.base}} {{ localize "SFRPG.Units.Speed" }}
+        {{else if (eq itemData.attributes.speed.mainMovement "climbing")}}
+            <b>{{localize "SFRPG.ActorSheet.Attributes.Speed.Types.Climbing"}}</b> - {{itemData.attributes.speed.climbing.base}} {{ localize "SFRPG.Units.Speed" }}
+        {{else if (eq itemData.attributes.speed.mainMovement "flying")}}
+            <b>{{localize "SFRPG.ActorSheet.Attributes.Speed.Types.Flying"}}</b> - {{itemData.attributes.speed.flying.base}} {{ localize "SFRPG.Units.Speed" }}
+            {{#if (eq itemData.attributes.speed.flying.baseManeuverability "-1")}}
+                {{localize "SFRPG.ActorSheet.Attributes.Speed.Flight.Clumsy" }}
+            {{else if (eq itemData.attributes.speed.flying.baseManeuverability "0")}}
+                {{localize "SFRPG.ActorSheet.Attributes.Speed.Flight.Average" }}
+            {{else if (eq itemData.attributes.speed.flying.baseManeuverability "1")}}
+                {{localize "SFRPG.ActorSheet.Attributes.Speed.Flight.Perfect" }}
+            {{/if}}
+        {{else if (eq itemData.attributes.speed.mainMovement "swimming")}}
+            <b>{{localize "SFRPG.ActorSheet.Attributes.Speed.Types.Swimming"}}</b> - {{itemData.attributes.speed.swimming.base}} {{ localize "SFRPG.Units.Speed" }}
+        {{else if (eq itemData.attributes.speed.mainMovement "special")}}
+            <b>{{localize "SFRPG.ActorSheet.Attributes.Speed.Types.Special"}}</b> - {{itemData.attributes.speed.special}}
+        {{/if}}
+
+        {{!-- Secondary Movement --}}
+        {{#unless (eq itemData.attributes.speed.mainMovement "land")}}
+            {{#if itemData.attributes.speed.land.base}}
+                , <b>{{localize "SFRPG.ActorSheet.Attributes.Speed.Types.Land"}}</b> - {{itemData.attributes.speed.land.base}} {{ localize "SFRPG.Units.Speed" }}
+            {{/if}}
+        {{/unless}}
+
+        {{#unless (eq itemData.attributes.speed.mainMovement "burrowing")}}
+            {{#if itemData.attributes.speed.burrowing.base}}
+                , <b>{{localize "SFRPG.ActorSheet.Attributes.Speed.Types.Burrowing"}}</b> - {{itemData.attributes.speed.burrowing.base}} {{ localize "SFRPG.Units.Speed" }}
+            {{/if}}
+        {{/unless}}
+
+        {{#unless (eq itemData.attributes.speed.mainMovement "climbing")}}
+            {{#if itemData.attributes.speed.climbing.base}}
+                , <b>{{localize "SFRPG.ActorSheet.Attributes.Speed.Types.Climbing"}}</b> - {{itemData.attributes.speed.climbing.base}} {{ localize "SFRPG.Units.Speed" }}
+            {{/if}}
+        {{/unless}}
+
+        {{#unless (eq itemData.attributes.speed.mainMovement "flying")}}
+            {{#if itemData.attributes.speed.flying.base}}
+                , <b>{{localize "SFRPG.ActorSheet.Attributes.Speed.Types.Flying"}}</b> - {{itemData.attributes.speed.flying.base}} {{ localize "SFRPG.Units.Speed" }}
+                {{#if (eq itemData.attributes.speed.flying.baseManeuverability "-1")}}
+                    {{localize "SFRPG.ActorSheet.Attributes.Speed.Flight.Clumsy" }}
+                {{else if (eq itemData.attributes.speed.flying.baseManeuverability "0")}}
+                    {{localize "SFRPG.ActorSheet.Attributes.Speed.Flight.Average" }}
+                {{else if (eq itemData.attributes.speed.flying.baseManeuverability "1")}}
+                    {{localize "SFRPG.ActorSheet.Attributes.Speed.Flight.Perfect" }}
+                {{/if}}
+            {{/if}}
+        {{/unless}}
+
+        {{#unless (eq itemData.attributes.speed.mainMovement "swimming")}}
+            {{#if itemData.attributes.speed.swimming.base}}
+                , <b>{{localize "SFRPG.ActorSheet.Attributes.Speed.Types.Swimming"}}</b> - {{itemData.attributes.speed.swimming.base}} {{ localize "SFRPG.Units.Speed" }}
+            {{/if}}
+        {{/unless}}
+
+        {{#unless (eq itemData.attributes.speed.mainMovement "special")}}
+            {{#if itemData.attributes.speed.special}}
+                , <b>{{localize "SFRPG.ActorSheet.Attributes.Speed.Types.Special"}}</b> - {{itemData.attributes.speed.special}}
+            {{/if}}
+        {{/unless}}
+
+    </div>
+</div>

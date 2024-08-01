@@ -4,6 +4,7 @@
       "character",
       "drone",
       "hazard",
+      "mech",
       "npc2",
       "starship",
       "vehicle",
@@ -717,6 +718,158 @@
         }
       }
     },
+    "mech": {
+      "templates": [
+        "modifiers",
+        "conditions"
+      ],
+      "attributes": {
+        "eac": {
+          "value": 0,
+          "tooltip": []
+        },
+        "kac": {
+          "value": 0,
+          "tooltip": []
+        },
+        "saves": {
+          "fort": {
+            "base": 0,
+            "mod": 0
+          },
+          "reflex": {
+            "base": 0,
+            "mod": 0
+          }
+        },
+        "baseAttackBonus": {
+          "value": 0
+        },
+        "hp": {
+          "current": 0,
+          "max": 0
+        },
+        "sp": {
+          "current": 0,
+          "max": 0
+        },
+        "hardness": {
+          "value": 0,
+          "tooltip": []
+        },
+        "speed": {
+          "land": { "base": 30 },
+          "flying": { "base": 0, "baseManeuverability": 0 },
+          "swimming": { "base": 0 },
+          "burrowing": { "base": 0 },
+          "climbing": { "base": 0 },
+          "value": null,
+          "special": null,
+          "mainMovement": "land"
+        },
+        "strength": {
+          "mod": 0
+        }
+      },
+      "skills": {
+        "acr": {
+          "ability": "dex",
+          "min": 0,
+          "ranks": 0,
+          "value": 0,
+          "misc": 0,
+          "mod": 0,
+          "enabled": false,
+          "isTrainedOnly": false,
+          "hasArmorCheckPenalty": true
+        },
+        "ath": {
+          "ability": "str",
+          "min": 0,
+          "ranks": 0,
+          "value": 0,
+          "misc": 0,
+          "mod": 0,
+          "enabled": false,
+          "isTrainedOnly": false,
+          "hasArmorCheckPenalty": true
+        },
+        "per": {
+          "ability": "wis",
+          "min": 0,
+          "ranks": 0,
+          "value": 0,
+          "misc": 0,
+          "mod": 0,
+          "enabled": false,
+          "isTrainedOnly": false,
+          "hasArmorCheckPenalty": false
+        },
+        "int": {
+          "ability": "cha",
+          "min": 0,
+          "ranks": 0,
+          "value": 0,
+          "misc": 0,
+          "mod": 0,
+          "enabled": false,
+          "isTrainedOnly": false,
+          "hasArmorCheckPenalty": false
+        }
+      },
+      "traits": {
+        "senses": [],
+        "size": "huge",
+        "operators": {
+          "min": 0,
+          "max": 0
+        },
+        "immunities": [],
+        "space": "",
+        "reach": 15,
+        "carryingCapacity": {
+          "value": 0,
+          "encumberedAt": 0,
+          "overburdenedAt": 0
+        }
+      },
+      "details": {
+        "tier": 1,
+        "frame": "",
+        "lowerLimbs": "",
+        "upperLimbs": "",
+        "powerCore": "",
+        "notes": "",
+        "mechPoints": {
+          "min": 0,
+          "value": 0
+        }
+      },
+      "slots": {
+        "frame": {
+          "value": 0,
+          "max": 0
+        },
+        "upperLimb": {
+          "value": 0,
+          "max": 0
+        },
+        "lowerLimb": {
+          "value": 0,
+          "max": 0
+        },
+        "auxiliary": {
+          "value": 0,
+          "max": 0
+        }
+      },
+      "powerPoints": {
+        "initial": 0,
+        "perTurn": 0,
+        "current": 0,
+        "max": 0
+      }
+  },
     "npc": {
       "attributes": {
         "rp": {
@@ -1243,7 +1396,14 @@
       "technological",
       "upgrade",
       "weapon",
-      "weaponAccessory"
+      "weaponAccessory",
+      "mechFrame",
+      "mechLimb",
+      "mechPowerCore",
+      "mechPowerCoreTemplate",
+      "mechWeapon",
+      "mechAuxiliarySystem",
+      "mechUpgrade"
     ],
     "htmlFields": ["description.value", "description.gmnotes", "description.chat", "description.short", "description.unidentified"],
     "templates": {
@@ -1373,6 +1533,41 @@
         "costMultipliedBySize": false,
         "pcu": null,
         "isPowered": true
+      },
+      "ppAbilities": {
+        "ppAbilities": [
+          {
+            "abilityType": "",
+            "activation": {
+              "requiresActivation": false,
+              "toggleable": false
+            },
+            "cost": {
+              "value": null,
+              "variable": false
+            },
+            "damage": "",
+            "damageTypes": {},
+            "description": "",
+            "name": "",
+            "save": {
+              "dc": "",
+              "type": ""
+            }
+          }
+        ]
+      },
+      "mechCommon": {
+        "equipped": false,
+        "mechPointCost": 0
+      },
+      "mechSlots": {
+        "slots": {
+          "frame": 0,
+          "lowerLimb": 0,
+          "upperLimb": 0,
+          "auxiliary": 0
+        }
       },
       "specialMaterials": {
         "specialMaterials": {}
@@ -2621,6 +2816,124 @@
         "showOwnerAndGMOnly": false,
         "visualization": []
       }
+    },
+    "mechFrame": {
+      "templates": [
+        "itemDescription",
+        "modifiers",
+        "mechCommon",
+        "mechSlots"
+      ],
+      "type": {
+        "primary": "amphibious",
+        "secondary": ""
+      },
+      "size": "huge",
+      "hp": {
+        "base": 0,
+        "advancement": 0
+      },
+      "hardness": 0,
+      "eac": 0,
+      "kac": 0,
+      "saves": {
+        "fort": 0,
+        "reflex": 0
+      },
+      "attributes": {
+        "speed": {}
+      },
+      "strength": 0,
+      "operators": {
+        "min": 1,
+        "max": 1
+      }
+    },
+    "mechLimb": {
+      "templates": ["itemDescription", "modifiers", "ppAbilities", "mechCommon", "mechSlots"],
+      "type": "upper",
+      "hp": {
+        "base": 0,
+        "advancement": 0
+      },
+      "eac": 0,
+      "kac": 0,
+      "saves": {
+        "fort": 0,
+        "reflex": 0
+      },
+      "melee": 0,
+      "ranged": 0,
+      "attributes": {
+        "speed": {}
+      },
+      "special": ""
+    },
+    "mechPowerCore": {
+      "templates": ["itemDescription", "modifiers", "mechCommon"],
+      "rating": 0,
+      "rate": {
+        "base": 0,
+        "value": 0
+      },
+      "initial": {
+        "base": 0,
+        "value": 0
+      },
+      "maximum": {
+        "base": 0,
+        "value": 0
+      }
+    },
+    "mechPowerCoreTemplate": {
+      "templates": ["itemDescription", "modifiers", "mechCommon", "ppAbilities"],
+      "prerequisite": "",
+      "rate": {
+        "base": 0,
+        "value": 0
+      },
+      "initial": {
+        "base": 0,
+        "value": 0
+      },
+      "maximum": {
+        "base": 0,
+        "value": 0
+      }
+    },
+    "mechWeapon": {
+      "templates": ["itemDescription", "modifiers", "ppAbilities", "mechCommon"],
+      "range": {
+        "value": 0,
+        "unit": "ft"
+      },
+      "weaponType": "melee",
+      "specialEffect": "",
+      "damageLevel": "low",
+      "damageType": {
+        "primary": "",
+        "secondary": "",
+        "andOr": "none"
+      },
+      "criticalEffect": "",
+      "slots": {
+        "number": 1,
+        "allowed": {
+          "frame": false,
+          "upperLimb": false,
+          "lowerLimb": false
+        }
+      },
+      "level": 1,
+      "capacity": 0
+    },
+    "mechAuxiliarySystem": {
+      "templates": ["itemDescription", "modifiers", "ppAbilities", "mechCommon"],
+      "prerequisite": ""
+    },
+    "mechUpgrade": {
+      "templates": ["itemDescription", "modifiers", "ppAbilities", "mechCommon"],
+      "special": ""
     },
     "effect": {
       "templates": ["itemDescription", "modifiers", "itemDuration"],

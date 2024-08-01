@@ -36,7 +36,11 @@ export const preloadHandlebarsTemplates = async function() {
         "systems/sfrpg/templates/items/parts/container-details.hbs",
         "systems/sfrpg/templates/items/parts/weapon-properties.hbs",
         "systems/sfrpg/templates/items/parts/damage-sections.hbs",
-        "systems/sfrpg/templates/items/parts/item-duration.hbs"
+        "systems/sfrpg/templates/items/parts/item-duration.hbs",
+        "systems/sfrpg/templates/items/parts/mech-points.hbs",
+        "systems/sfrpg/templates/items/parts/mech-slots.hbs",
+        "systems/sfrpg/templates/items/parts/mech-speed.hbs",
+        "systems/sfrpg/templates/items/parts/power-point-ability.hbs"
     ];
 
     return loadTemplates(templatePaths);

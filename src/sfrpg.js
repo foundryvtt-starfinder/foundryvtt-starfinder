@@ -16,6 +16,7 @@ import { ActorSheetSFRPGHazard } from "./module/actor/sheet/hazard.js";
 import { ActorSheetSFRPGNPC } from "./module/actor/sheet/npc.js";
 import { ActorSheetSFRPGStarship } from "./module/actor/sheet/starship.js";
 import { ActorSheetSFRPGVehicle } from "./module/actor/sheet/vehicle.js";
+import { ActorSheetSFRPGMech } from "./module/actor/sheet/mech.js";
 import { ActorSheetFlags } from './module/apps/actor-flags.js';
 import { ChoiceDialog } from './module/apps/choice-dialog.js';
 import { DroneRepairDialog } from './module/apps/drone-repair-dialog.js';
@@ -88,6 +89,7 @@ const moduleStructure = {
         ActorSheetSFRPGCharacter,
         ActorSheetSFRPGDrone,
         ActorSheetSFRPGHazard,
+        ActorSheetSFRPGMech,
         ActorSheetSFRPGNPC,
         ActorSheetSFRPGStarship,
         ActorSheetSFRPGVehicle,
@@ -280,6 +282,7 @@ Hooks.once('init', async function() {
     Actors.registerSheet("sfrpg", ActorSheetSFRPGNPC,       { types: ["npc", "npc2"],   makeDefault: true });
     Actors.registerSheet("sfrpg", ActorSheetSFRPGStarship,  { types: ["starship"],      makeDefault: true });
     Actors.registerSheet("sfrpg", ActorSheetSFRPGVehicle,   { types: ["vehicle"],       makeDefault: true });
+    Actors.registerSheet("sfrpg", ActorSheetSFRPGMech,      { types: ["mech"],          makeDefault: true });
 
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("sfrpg", ItemSheetSFRPG, { makeDefault: true });
@@ -810,6 +813,16 @@ function setupHandlebars() {
         const formatter = new Intl.NumberFormat(game.i18n.lang);
         const formattedValue = formatter.format(value);
         return formattedValue;
+    });
+
+    Handlebars.registerHelper('concat', function() {
+        let outStr = '';
+        for (const arg in arguments) {
+            if (typeof arguments[arg] !== 'object') {
+                outStr += arguments[arg];
+            }
+        }
+        return outStr;
     });
 
 }

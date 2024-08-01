@@ -258,6 +258,15 @@
                 flex: 0;
                 color: @colorOlive;
             }
+
+            .ability-description {
+                .editor-content {
+                    min-height: 90px;
+                }
+                .editor.prosemirror {
+                    min-height: 180px;
+                }
+            }
         }
 
         span.sep {
@@ -296,6 +305,7 @@
     /* ----------------------------------------- */
 
     h4.damage-header,
+    h3.pp-ability-header,
     h4.visualization-header,
     h4.ability-adjustments-header {
         margin: 0;
@@ -307,6 +317,7 @@
 
     ol.storage-slots,
     ol.damage-parts,
+    ol.pp-abilities,
     ol.subaction-parts,
     ol.visualization-parts {
         img.part-image {
@@ -315,9 +326,16 @@
         }
     }
 
+    li.damage-part,
+    li.pp-ability,
+    li.visualization-part {
+        border-bottom: groove 2px #fff;
+    }
+
     .storage-slots,
     .damage-parts,
     .subaction-parts,
+    .pp-abilities,
     .visualization-parts,
     .ability-adjustment-parts {
         list-style: none;
@@ -327,6 +345,7 @@
         .storage-slot,
         .damage-part,
         .subaction-part,
+        .pp-ability,
         .visualization-part,
         .ability-adjustment-part {
             flex: 0 0 100%;
@@ -372,6 +391,32 @@
                 flex: 0 0 30px;
             }
         }
+
+        .visualization-part {
+            padding-bottom: 4px;
+        }
+    }
+
+    .damage-control,
+    .pp-ability-control,
+    .visualization-control,
+    .ability-adjustments-control {
+        line-height: 24px;
+        color: @colorTan;
+        text-align: right;
+    }
+
+    .damage-control,
+    .pp-ability-control,
+    .visualization-control {
+        width: 18px;
+        flex: 0 0 18px;
+        float: right;
+    }
+
+    .ability-adjustments-control {
+        width: 110px;
+        flex: 0 0 20px;
     }
 
     .recharge {
