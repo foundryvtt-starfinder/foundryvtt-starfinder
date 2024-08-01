@@ -2021,6 +2021,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         }
     }
 
+    /**
+     * Turn Events
+     * The following functions are run when appropriate by the GM.
+     */
+
     _onTurnStart() {
         if (this.type !== "effect" || !this.system.enabled) return;
 
@@ -2078,6 +2083,24 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 skipUI: true
             },
             title: turnEvent.name || this.name
+        });
+    }
+
+    /**
+     * Execute a macro with the context of this item
+     * @param {Macro} macro The macro to execute
+     * @param {Record<string, *>} scope Any additional arguments to pass to macro execution
+     * @returns {Promise<*>} The return value of the macro
+     */
+    async executeMacroWithContext(macro, scope = {}) {
+        if (!(macro instanceof Macro)) return ui.notifications.error("A macro was not provided!");
+
+        return macro.execute({
+            speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token }),
+            token: this.actor.token || null,
+            actor: this.actor || null,
+            item: this,
+            ...scope
         });
     }
 }
