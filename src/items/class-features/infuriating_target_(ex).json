@@ -1,13 +1,8 @@
 {
-  "_id": "jGnA4ghdifGGJwxe",
-  "name": "Shoo! (Ex)",
+  "_id": "H8rtssaUj55PEC9V",
+  "name": "Infuriating Target (Ex)",
   "type": "feat",
-  "_stats": {
-    "coreVersion": 12,
-    "systemId": "sfrpg",
-    "systemVersion": "0.26.1"
-  },
-  "img": "icons/skills/movement/ball-spinning-blue.webp",
+  "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "",
     "ability": "",
@@ -15,11 +10,11 @@
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "save",
+    "actionType": "",
     "activation": {
-      "type": "action",
+      "type": "move",
       "condition": "",
-      "cost": 1
+      "cost": null
     },
     "area": {
       "effect": "",
@@ -43,7 +38,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.hIhgdXnqGHBm0A64]{Envoy Improvisation}</p>\n<p>As a standard action, you can attempt an @Check[type:intimidate] to @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.6fqgiVqlA7u9jS4i#demoralize]{demoralize} a creature with the animal or vermin creature type within 60 feet of you. If you succeed, the target must also succeed at a Will saving throw (DC = 10 + 1/2 your envoy level + your Charisma modifier) or become @UUID[Compendium.sfrpg.conditions.Item.DtwiUWi8dpzkq4tM]{frightened} for 1 round or until it takes an action to move away from you. Once a creature has been affected by this ability, it’s immune for 24 hours.</p>\n<p>At 6th level, you can spend 1 Resolve Point to target multiple creatures with the animal or vermin creature type with this ability, up to a maximum number of creatures equal to half your envoy level. Attempt one Intimidate check against all your selected targets. The DC of the check is equal to the highest DC to demoralize any one of the foes, plus 1 for each additional target beyond the first.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.hIhgdXnqGHBm0A64]{Envoy Improvisation}</p>\n<p>You move with skill and grace in combat, using others as living shields. When you use @UUID[Compendium.sfrpg.class-features.Item.0yX0jTGt35mOkVdw]{Frustrating Target}, you also gain a +2 circumstance bonus to Reflex saving throws against area effects as long as you are still adjacent to the designated opponent. If your designated opponent is also within the same area of effect, it takes a –2 penalty to their Reflex save. You must have the frustrating target improvisation to choose this improvisation.</p>\n<p>At 8th level, you can spend 1 Resolve Point as a reaction whenever you attempt a Reflex save against an area effect to have that area expand to encompass your designated opponent, as long as you are adjacent to it. The opponent’s Reflex save takes a –2 penalty.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -76,7 +71,7 @@
       "polymorph": false,
       "radiation": false,
       "scrying": false,
-      "sense-dependent": true,
+      "sense-dependent": false,
       "shadow": false,
       "sonic": false,
       "summoning": false,
@@ -94,32 +89,44 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "83e34c7f-cade-4ec1-9612-54b3a425a91f",
+        "name": "Infuriating Target (Ex)",
+        "type": "circumstance",
+        "condition": "",
+        "effectType": "save",
+        "enabled": true,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "When you use frustrating target, you also gain a +2 circumstance bonus to Reflex saving throws against area effects as long as you are still adjacent to the designated opponent.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "reflex"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
-      "value": "60"
+      "value": "5"
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "2nd Level Envoy",
+    "requirements": "4th Level Envoy",
     "rollNotes": "",
     "save": {
-      "type": "will",
-      "dc": "10+floor(@classes.envoy.levels/2)+@abilities.cha.mod",
+      "type": "",
+      "dc": "",
       "descriptor": "negate"
     },
-    "skillCheck": {
-      "type": "",
-      "dc": ""
-    },
-    "source": "GEM pg. 16",
+    "source": "AP #25 pg. 47",
     "target": {
       "type": "",
-      "value": ""
+      "value": "One Enemy"
     },
     "uses": {
       "max": "0",

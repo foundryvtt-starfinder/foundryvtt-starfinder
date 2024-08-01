@@ -1,13 +1,8 @@
 {
-  "_id": "jGnA4ghdifGGJwxe",
-  "name": "Shoo! (Ex)",
+  "_id": "90VN9XNAAJkyPJDC",
+  "name": "Coordinated Reload (Ex)",
   "type": "feat",
-  "_stats": {
-    "coreVersion": 12,
-    "systemId": "sfrpg",
-    "systemVersion": "0.26.1"
-  },
-  "img": "icons/skills/movement/ball-spinning-blue.webp",
+  "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "",
     "ability": "",
@@ -15,11 +10,11 @@
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "save",
+    "actionType": "",
     "activation": {
-      "type": "action",
+      "type": "move",
       "condition": "",
-      "cost": 1
+      "cost": 0
     },
     "area": {
       "effect": "",
@@ -43,7 +38,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.hIhgdXnqGHBm0A64]{Envoy Improvisation}</p>\n<p>As a standard action, you can attempt an @Check[type:intimidate] to @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.6fqgiVqlA7u9jS4i#demoralize]{demoralize} a creature with the animal or vermin creature type within 60 feet of you. If you succeed, the target must also succeed at a Will saving throw (DC = 10 + 1/2 your envoy level + your Charisma modifier) or become @UUID[Compendium.sfrpg.conditions.Item.DtwiUWi8dpzkq4tM]{frightened} for 1 round or until it takes an action to move away from you. Once a creature has been affected by this ability, it’s immune for 24 hours.</p>\n<p>At 6th level, you can spend 1 Resolve Point to target multiple creatures with the animal or vermin creature type with this ability, up to a maximum number of creatures equal to half your envoy level. Attempt one Intimidate check against all your selected targets. The DC of the check is equal to the highest DC to demoralize any one of the foes, plus 1 for each additional target beyond the first.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.hIhgdXnqGHBm0A64]{Envoy Improvisation}</p>\n<p>@Icon[type:mind-affecting] @Icon[type:sense-dependent]</p>\n<p>As a move action, you can grant a single move action to an ally within 60 feet. The ally can use that move action during her next turn to reload or draw a weapon. As part of the move action to activate this ability, you can also reload or draw a weapon. If the ally is adjacent to you, she can draw weapons and use ammunition you are carrying as though she were carrying them herself. The ally can use her extra move action in between her other actions, as well as before or after a full action. A character can use no more than one bonus action from @UUID[Item.s1jStFmEs8PKda6m]{coordinated reload} or similar abilities (such as the @UUID[Compendium.sfrpg.class-features.Item.ar6XnaMfzL39Rhai]{quick quaff} and @UUID[Compendium.sfrpg.class-features.Item.GVqy1BqtYojohT9x]{hurry} envoy improvisations) in a single round.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -70,7 +65,7 @@
       "language-dependent": false,
       "lawful": false,
       "light": false,
-      "mind-affecting": false,
+      "mind-affecting": true,
       "pain": false,
       "poison": false,
       "polymorph": false,
@@ -105,21 +100,17 @@
       "charged": false,
       "value": null
     },
-    "requirements": "2nd Level Envoy",
+    "requirements": "1st Level Envoy",
     "rollNotes": "",
     "save": {
-      "type": "will",
-      "dc": "10+floor(@classes.envoy.levels/2)+@abilities.cha.mod",
+      "type": "",
+      "dc": "",
       "descriptor": "negate"
     },
-    "skillCheck": {
-      "type": "",
-      "dc": ""
-    },
-    "source": "GEM pg. 16",
+    "source": "AR pg. 144",
     "target": {
       "type": "",
-      "value": ""
+      "value": "Ally"
     },
     "uses": {
       "max": "0",
