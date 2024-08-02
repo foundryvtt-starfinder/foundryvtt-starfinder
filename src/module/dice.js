@@ -473,7 +473,7 @@ export class DiceSFRPG {
     * @param {Object}               data.dialogOptions Modal dialog options
     */
     static async damageRoll({ event = new Event(''), parts, criticalData, rollContext, title, speaker, flavor, chatMessage = true, onClose, dialogOptions }) {
-        flavor = `${title}${(flavor ? " - " + flavor : "")}`;
+        flavor = `${title || ""}${(flavor ? " - " + flavor : "")}`;
 
         if (!rollContext?.isValid()) {
             console.log(['Invalid rollContext', rollContext]);

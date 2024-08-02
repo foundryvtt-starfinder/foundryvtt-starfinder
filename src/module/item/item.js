@@ -2026,5 +2026,93 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             console.log(`Starfinder | Updated ${item.name} to use the ${ (isNPC) ? "NPC " : ""}d6 scaling formula.`);
         }
     }
+
+    /**
+     * Turn Events
+     * The following functions are run when appropriate by the GM.
+     */
+
+    _onTurnStart() {
+        if (this.type !== "effect" || !this.system.enabled) return;
+
+        for (const turnEvent of this.system.turnEvents) {
+            if (turnEvent.trigger !== "onTurnStart") continue;
+
+            this._handleTurnEvent(turnEvent);
+
+        }
+
+    }
+
+    _onTurnEnd() {
+        if (this.type !== "effect" || !this.system.enabled) return;
+
+        for (const turnEvent of this.system.turnEvents) {
+            if (turnEvent.trigger !== "onTurnEnd") continue;
+
+            this._handleTurnEvent(turnEvent);
+        }
+
+    }
+
+    _handleTurnEvent(turnEvent) {
+        switch (turnEvent.type) {
+            case "note":
+                this._handleEffectNoteEvent(turnEvent);
+                break;
+            case "roll":
+                this._handleEffectRollEvent(turnEvent);
+                break;
+        }
+    }
+
+    _handleEffectNoteEvent(turnEvent) {
+        ChatMessage.create({
+            content: turnEvent.content,
+            speaker: ChatMessage.getSpeaker({ actor: this.actor })
+        });
+    }
+
+    async _handleEffectRollEvent(turnEvent) {
+        if (!turnEvent.formula) return;
+
+        const parts = [{
+            isDamageSection: true,
+            enabled: true,
+            formula: turnEvent.formula,
+            types: turnEvent.damageTypes,
+            group: null
+        }];
+
+        const rollContext = RollContext.createItemRollContext(this, this.actor);
+
+        return DiceSFRPG.damageRoll({
+            parts,
+            rollContext,
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            dialogOptions: {
+                skipUI: true
+            },
+            title: turnEvent.name || this.name
+        });
+    }
+
+    /**
+     * Execute a macro with the context of this item
+     * @param {Macro} macro The macro to execute
+     * @param {Record<string, *>} scope Any additional arguments to pass to macro execution
+     * @returns {Promise<*>} The return value of the macro
+     */
+    async executeMacroWithContext(macro, scope = {}) {
+        if (!(macro instanceof Macro)) return ui.notifications.error("A macro was not provided!");
+
+        return macro.execute({
+            speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token }),
+            token: this.actor.token || null,
+            actor: this.actor || null,
+            item: this,
+            ...scope
+        });
+    }
 }
 

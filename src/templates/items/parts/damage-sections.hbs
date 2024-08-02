@@ -9,7 +9,7 @@
     <li class="damage-part bubble" data-damage-part="{{i}}">
         <h4 class="damage-header bubble-header">
             {{#unless (lookup this "name") }}{{ localize "SFRPG.Items.Action.DamageSection" section=i}}{{else}}{{lookup this "name"}}{{/unless}}
-            <a class="damage-control delete-damage" {{createTippy title="SFRPG.Items.Action.DeleteDamageSection" subtitle="SFRPG.Items.Action.DeleteDamageSectionTooltip"}}><i class="fas fa-minus"></i></a>
+            <a class="damage-control delete-damage" {{createTippy title="SFRPG.Items.Action.DeleteDamageSection"}}><i class="fas fa-minus"></i></a>
         </h4>
 
         <div class="bubble-info">
@@ -43,8 +43,8 @@
 
             {{!-- Primary Damage Group --}}
             <div class="primary-section form-group">
-                <label for="primary-section-{{i}}">{{ localize "SFRPG.Damage.Types.PrimaryDamageSection" }}</label>
-                <input type="checkbox" class="primary-section-checkbox" id="primary-section-{{i}}" name="system.damage.parts.{{i}}.isPrimarySection" {{checked this.isPrimarySection}} {{ createTippy title="SFRPG.Damage.Types.PrimaryDamageSection" subtitle="SFRPG.Damage.Types.PrimaryDamageSectionTooltip" }}>
+                <label>{{ localize "SFRPG.Damage.Types.PrimaryDamageSection" }}</label>
+                <input type="checkbox" class="primary-section-checkbox" name="system.damage.parts.{{i}}.isPrimarySection" {{checked this.isPrimarySection}} {{ createTippy title="SFRPG.Damage.Types.PrimaryDamageSection" subtitle="SFRPG.Damage.Types.PrimaryDamageSectionTooltip" }}>
             </div>
 
             {{!-- Damage Types --}}
