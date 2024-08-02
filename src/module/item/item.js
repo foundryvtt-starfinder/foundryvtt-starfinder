@@ -2061,10 +2061,15 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     }
 
     _handleEffectNoteEvent(turnEvent) {
-        ChatMessage.create({content: turnEvent.content});
+        ChatMessage.create({
+            content: turnEvent.content,
+            speaker: ChatMessage.getSpeaker({ actor: this.actor })
+        });
     }
 
     async _handleEffectRollEvent(turnEvent) {
+        if (!turnEvent.formula) return;
+
         const parts = [{
             isDamageSection: true,
             enabled: true,

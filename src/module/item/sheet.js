@@ -1156,7 +1156,6 @@ export class ItemSheetSFRPG extends ItemSheet {
 
     /**
      * Toggle an effect and their modifiers to be enabled or disabled.
-     *
      * @param {Event} event The originating click event
      */
     async _onToggleDetailsEffect(event) {
@@ -1192,7 +1191,7 @@ export class ItemSheetSFRPG extends ItemSheet {
     /**
      * Add or remove a turn event from an effect
      * @param {Event} event     The original click event
-     * @return {Promise}
+     * @return {Promise}        The update promise
      * @private
      */
     async _onTurnEventControl(event) {

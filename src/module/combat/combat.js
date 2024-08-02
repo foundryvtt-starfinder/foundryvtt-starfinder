@@ -393,7 +393,7 @@ export class CombatSFRPG extends Combat {
         super._onUpdate(changed, options, userId);
 
         // Get an active GM to run events players may not have permissions to do.
-        if (!game.user.activeGM?.isSelf) return;
+        if (!game.users.activeGM?.isSelf) return;
 
         this._handleTimedEffects(options.eventData);
     }
