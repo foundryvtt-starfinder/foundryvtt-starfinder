@@ -1407,7 +1407,7 @@ function consistencyCheck(allItems, compendiumMap) {
                 const linkParts = link.split('.');
                 // Skip links to journal entry pages
                 // @UUID[Compendium.sfrpg.some-pack.abcxyz.JournalEntryPage.abcxyz]
-                if (linkParts.length === 6) {
+                if (linkParts.includes('JournalEntryPage')) {
                     continue;
                 }
                 if (linkParts.length !== 4) {
