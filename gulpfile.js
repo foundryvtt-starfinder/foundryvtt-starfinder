@@ -87,7 +87,7 @@ async function copyFiles() {
         'src/templates/**/*.hbs',
         "src/*.json"
     ])
-        .pipe(gulp.dest((file) => file.base.replace("\\src", "\\dist")));
+        .pipe(gulp.dest((file) => file.base.replace("src", "dist")));
 
     // Then pipe in js files to be minified
     gulp.src('src/sfrpg.js')
@@ -139,7 +139,7 @@ async function copyWatchFiles() {
         'src/templates/**/*.hbs',
         "src/*.json"
     ])
-        .pipe(gulp.dest((file) => file.base.replace("\\src", "\\dist")));
+        .pipe(gulp.dest((file) => file.base.replace("src", "dist")));
 
     gulp.src(`src/${name}.js`)
         .pipe(gulp.dest('dist'));
