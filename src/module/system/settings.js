@@ -21,6 +21,16 @@ export const registerSystemSettings = function() {
         type: Boolean
     });
 
+    game.settings.register("sfrpg", "decimalSpeed", {
+        name: "SFRPG.Settings.DecimalSpeed.Name",
+        hint: "SFRPG.Settings.DecimalSpeed.Hint",
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean
+    });
+
+
     game.settings.register("sfrpg", "autoCollapseItemCards", {
         name: "SFRPG.Settings.AutoCollapseCard.Name",
         hint: "SFRPG.Settings.AutoCollapseCard.Hint",
@@ -223,13 +233,6 @@ export const registerSystemSettings = function() {
         config: false,
         type: Boolean,
         default: true
-    });
-
-    game.settings.register("sfrpg", "floatingSpeed", {
-        scope: "world",
-        config: false,
-        type: Boolean,
-        default: false
     });
 
     game.settings.register("sfrpg", "verboseFloatyText", {

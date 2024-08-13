@@ -108,7 +108,7 @@ export default function(engine) {
                 }
             }
 
-            if (!game.settings.get("sfrpg", "floatingSpeed")) {
+            if (!game.settings.get("sfrpg", "decimalSpeed")) {
                 data.attributes.speed[speedKey].value = Math.floor(data.attributes.speed[speedKey].value);
             }
 

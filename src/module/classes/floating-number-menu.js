@@ -17,7 +17,6 @@ export default class FloatingNumberMenu extends FormApplication {
         data.minPerm = game.settings.get("sfrpg", "minPerm");
         data.canSeeName = game.settings.get("sfrpg", "canSeeName");
         data.canSeeBars = game.settings.get("sfrpg", "canSeeBars");
-        data.floatingSpeed = game.settings.get("sfrpg", "floatingSpeed");
 
         return data;
     }
@@ -39,7 +38,6 @@ export default class FloatingNumberMenu extends FormApplication {
 
     async _updateObject(event, formData) {
         game.settings.set("sfrpg", "floatingHP", formData["floating-toggle"]),
-        game.settings.set("sfrpg", "floatingSpeed", formData["floating-speed"]),
         game.settings.set("sfrpg", "verboseFloatyText", formData["verbose-floaty-text"]),
         game.settings.set("sfrpg", "limitByCriteria", formData["limit-by-criteria"]),
         game.settings.set("sfrpg", "minPerm", formData["min-perm"]),
