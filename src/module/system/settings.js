@@ -225,6 +225,13 @@ export const registerSystemSettings = function() {
         default: true
     });
 
+    game.settings.register("sfrpg", "floatingSpeed", {
+        scope: "world",
+        config: false,
+        type: Boolean,
+        default: false
+    });
+
     game.settings.register("sfrpg", "verboseFloatyText", {
         scope: "world",
         config: false,
