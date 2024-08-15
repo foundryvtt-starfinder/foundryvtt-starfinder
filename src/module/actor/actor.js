@@ -932,6 +932,18 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         }
     }
 
+    _onTurnStart() {
+        for (const item of this.items) {
+            item._onTurnStart?.();
+        }
+    }
+
+    _onTurnEnd() {
+        for (const item of this.items) {
+            item._onTurnEnd?.();
+        }
+    }
+
     /** Roll contexts */
     setupRollContexts(rollContext, desiredSelectors = []) {
         if (!this) {

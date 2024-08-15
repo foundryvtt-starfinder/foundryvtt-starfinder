@@ -106,7 +106,11 @@ export class ItemSheetSFRPG extends ItemSheet {
         // Ensure derived data is included
         await this.item.processData();
 
-        data.itemData = this.document.system;
+        // Options for text enrichment, used later
+        const rollData = RollContext.createItemRollContext(this.item, this.actor).getRollData() ?? {};
+        const secrets = this.item.isOwner;
+
+        data.itemData = data.data.system;
         data.actor = this.document.parent;
         data.labels = this.item.labels;
 
@@ -253,6 +257,15 @@ export class ItemSheetSFRPG extends ItemSheet {
                     data.sourceActorChoices[PC.id] = PC.name;
                 }
             }
+
+            // Turn Events
+            for (const [i, turnEvent] of (data.itemData.turnEvents || []).entries()) {
+                turnEvent.enrichedNote = await TextEditor.enrichHTML(turnEvent.content, {
+                    rollData,
+                    secrets
+                });
+                turnEvent.noteI = `system.turnEvents.${i}.content`;
+            }
         }
 
         data.modifiers = this.item.system.modifiers;
@@ -261,60 +274,50 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.hasCapacity = this.item.hasCapacity();
 
         // Enrich text editors
-        const async = true;
-        const rollData = RollContext.createItemRollContext(this.item, this.actor).getRollData() ?? {};
-        const secrets = this.item.isOwner;
 
         data.enrichedDescription = await TextEditor.enrichHTML(this.item.system?.description?.value, {
-            async,
             rollData,
             secrets
         });
         data.enrichedShortDescription = await TextEditor.enrichHTML(this.item.system?.description?.short, {
-            async,
             rollData,
             secrets
         });
         data.enrichedGMNotes = await TextEditor.enrichHTML(this.item.system?.description?.gmNotes, {
-            async,
             rollData,
             secrets
         });
 
         if (data?.item?.type === "starshipAction") {
             data.enrichedEffectNormal = await TextEditor.enrichHTML(this.item.system?.effectNormal, {
-                async,
                 rollData,
                 secrets
             });
             data.enrichedEffectCritical = await TextEditor.enrichHTML(this.item.system?.effectCritical, {
-                async,
                 rollData,
                 secrets
             });
 
             // Manage Subactions
             if (data?.itemData?.formula?.length > 1) {
-                data.editorInfo = [];
+                data.subactionEditorInfo = [];
                 let ct = 0;
                 for (const value of data.itemData.formula) {
                     const effect = {};
 
                     effect.enrichedEffectNormal = await TextEditor.enrichHTML(value.effectNormal, {
-                        async,
                         rollData,
                         secrets
                     });
                     effect.targetNormal = `system.formula.${ct}.effectNormal`;
 
                     effect.enrichedEffectCritical = await TextEditor.enrichHTML(value.effectCritical, {
-                        async,
                         rollData,
                         secrets
                     });
                     effect.targetCritical = `system.formula.${ct}.effectCritical`;
                     ct += 1;
-                    data.editorInfo.push(effect);
+                    data.subactionEditorInfo.push(effect);
                 }
             }
         }
@@ -613,14 +616,30 @@ export class ItemSheetSFRPG extends ItemSheet {
             const formula = Object.entries(formData).filter(e => e[0].startsWith("system.formula"));
             const newFormula = {};
 
-            for (const item of formula) {
-                newFormula[item[0]] = item[1];
-                delete formData[item[0]];
+            for (const [k, v] of formula) {
+                newFormula[k] = v;
+                delete formData[k];
             }
 
             const expanded = foundry.utils.expandObject(newFormula);
             const final = Object.values(foundry.utils.mergeObject(currentFormula, expanded, {overwrite:true}).system.formula);
             formData["system.formula"] = final;
+        }
+
+        // Handle turn events
+        if (this.object.type === "effect") {
+            const currentEvents = {system: {turnEvents: Object.assign({}, this.item.system.turnEvents)}};
+            const formula = Object.entries(formData).filter(e => e[0].startsWith("system.turnEvents"));
+            const newEvents = {};
+
+            for (const [k, v] of formula) {
+                newEvents[k] = v;
+                delete formData[k];
+            }
+
+            const expanded = foundry.utils.expandObject(newEvents);
+            const final = Object.values(foundry.utils.mergeObject(currentEvents, expanded, {overwrite:true}).system.turnEvents);
+            formData["system.turnEvents"] = final;
         }
 
         // Update the Item
@@ -645,6 +664,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         html.find(".visualization-control").click(this._onActorResourceVisualizationControl.bind(this));
         html.find(".ability-adjustments-control").click(this._onAbilityAdjustmentsControl.bind(this));
         html.find(".subaction-control").click(this._onSubactionControl.bind(this));
+        html.find(".turn-event-control").click(this._onTurnEventControl.bind(this));
 
         html.find('.modifier-create').click(this._onModifierCreate.bind(this));
         html.find('.modifier-edit').click(this._onModifierEdit.bind(this));
@@ -1124,7 +1144,6 @@ export class ItemSheetSFRPG extends ItemSheet {
 
     /**
      * Toggle an effect and their modifiers to be enabled or disabled.
-     *
      * @param {Event} event The originating click event
      */
     async _onToggleDetailsEffect(event) {
@@ -1155,5 +1174,42 @@ export class ItemSheetSFRPG extends ItemSheet {
         const doc = await fromUuid(uuid);
 
         doc.sheet.render(true);
+    }
+
+    /**
+     * Add or remove a turn event from an effect
+     * @param {Event} event     The original click event
+     * @return {Promise}        The update promise
+     * @private
+     */
+    async _onTurnEventControl(event) {
+        event.preventDefault();
+        const a = event.currentTarget;
+        const turnEvents = this.item.system.turnEvents;
+        await this._onSubmit(event); // Submit any unsaved changes
+
+        // Add a new turn event
+        if (a.classList.contains("add-turn-event")) {
+            return this.item.update({
+                "system.turnEvents": turnEvents.concat([
+                    {
+                        trigger: "onTurnEnd",
+                        type: "roll",
+                        formula: "",
+                        damageTypes: {},
+                        name: ""
+                    }
+                ])
+            });
+        }
+
+        // Remove a turn event
+        else if (a.classList.contains("delete-turn-event")) {
+            const li = a.closest(".turn-event");
+            turnEvents.splice(Number(li.dataset.turnEventIdx), 1);
+            return this.item.update({
+                "system.turnEvents": turnEvents
+            });
+        }
     }
 }

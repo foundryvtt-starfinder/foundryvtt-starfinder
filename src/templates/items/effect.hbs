@@ -1,11 +1,12 @@
-<form class="{{cssClass}} flexcol" autocomplete="off">
+<form class="{{cssClass}} flexcol sfrpg-effect" autocomplete="off">
     {{!-- Item Sheet Header --}}
     <header class="sheet-header flexrow">
-        <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img"/>
+        <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img" />
 
         <div class="header-details flexrow">
             <h1 class="charname">
-                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.ItemName" }}"/>
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize "
+                    SFRPG.ItemSheet.Header.ItemName" }}" />
             </h1>
 
             <div class="item-subtitle">
@@ -14,14 +15,16 @@
             </div>
 
             <ul class="summary">
-                <li {{#if expired}}style="color: red;"{{/if}}>
+                <li {{#if expired}}style="color: red;" {{/if}}>
                     {{duration.remaining}}
                 </li>
                 <li>
-                    <input type="text" name="system.requirements" value="{{itemData.requirements}}" placeholder="{{ localize "SFRPG.Items.Feat.Requirements" }}"/>
+                    <input type="text" name="system.requirements" value="{{itemData.requirements}}"
+                        placeholder="{{ localize " SFRPG.Items.Feat.Requirements" }}" />
                 </li>
                 <li>
-                    <input type="text" name="system.source" value="{{itemData.source}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Source" }}"/>
+                    <input type="text" name="system.source" value="{{itemData.source}}" placeholder="{{ localize "
+                        SFRPG.ItemSheet.Header.Source" }}" />
                 </li>
             </ul>
         </div>
@@ -41,10 +44,46 @@
         {{> "systems/sfrpg/templates/items/parts/item-description.hbs" hideProperties=true}}
 
         {{!-- Details Tab --}}
-        <div class="tab flexrow details" data-group="primary" data-tab="details">
+        <div class="tab details flexrow" data-group="primary" data-tab="details">
+            {{!-- Origin Information --}}
+            {{#if (or item.origin item.originItem)}}
+                <div class="origin flexcol item-properties">
+                    {{#if item.origin}}
+                        <div class="origin-actor flexcol" data-origin-uuid="{{item.origin.uuid}}">
+                            <img src="{{item.origin.img}}">
+                            <ol class="properties-list">
+                                <li><strong>Origin Actor</strong>
+                                    <hr>{{item.origin.name}}
+                                </li>
+                            </ol>
+                        </div>
+                    {{/if}}
+                    {{#if item.originItem}}
+                        <div class="origin-item flexcol" data-origin-uuid="{{item.originItem.uuid}}">
+                            <img src="{{item.originItem.img}}">
+                            <ol class="properties-list">
+                                <li><strong>Origin Item</strong>
+                                    <hr>{{item.originItem.name}}
+                                </li>
+                            </ol>
+                        </div>
+                    {{/if}}
+                </div>
+            {{/if}}
 
             {{!-- Duration Settings --}}
-            {{> "systems/sfrpg/templates/items/parts/item-duration.hbs" message="SFRPG.Effect.DetailsHeader"}}
+            <div>
+                {{> "systems/sfrpg/templates/items/parts/item-duration.hbs" message="SFRPG.Effect.DetailsHeader"}}
+                <div class="bubble">
+                    <h3 class="bubble-header">Turn Events
+                        <a class="turn-event-control add-turn-event" {{createTippy
+                            title="SFRPG.TurnEvent.AddTurnEvent" }}><i class="fas fa-plus"></i></a>
+                    </h3>
+                    <div class="bubble-info">
+                        {{> "systems/sfrpg/templates/items/parts/effect-turn-events.hbs"}}
+                    </div>
+                </div>
+            </div>
 
         </div>
 
