@@ -5,15 +5,16 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.26.1"
+    "systemVersion": "0.27.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/equipment/weapons/artillery-laser-perihelion.webp",
   "system": {
     "type": "",
     "ability": null,
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "",
@@ -22,6 +23,7 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": 0
@@ -35,6 +37,7 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
@@ -42,9 +45,47 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.XrBOn1MueVB4u5sV]{Nanocyte Knack}</p>\n<p>You know how to deal damage with big weapons. You gain proficiency with heavy weapons, and you gain weapon specialization in heavy weapons just as if your class granted proficiency. When you gain this knack, you can replace one of your major forms known with that of a heavy weapon. You add your Constitution modifier to your Strength score for the purpose of wielding heavy weapons formed from your gear array without penalty.</p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
     "details": {
       "category": "classFeature",
+      "combat": false,
       "specialAbilityType": "ex"
     },
     "duration": {
@@ -53,7 +94,24 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "af50f5f3-43c7-45c4-b93b-b651566e662a",
+        "name": "Heavy Weapon Edge",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-damage",
+        "enabled": true,
+        "max": 0,
+        "modifier": "floor(@details.level.value / 2)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "heavy"
+      }
+    ],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
@@ -65,6 +123,7 @@
       "value": null
     },
     "requirements": "6th Level",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
