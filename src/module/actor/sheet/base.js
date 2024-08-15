@@ -536,20 +536,10 @@ export class ActorSheetSFRPG extends ActorSheet {
         const target = $(event.currentTarget);
         const modifierId = target.closest('.item.modifier').data('modifierId');
 
-        const modifiers = foundry.utils.deepClone(this.actor.system.modifiers);
+        const modifiers = this.actor.system.modifiers;
         const modifier = modifiers.find(mod => mod._id === modifierId);
 
-        const formula = modifier.modifier;
-        if (formula) {
-            const roll = Roll.create(formula, this.actor.system);
-            modifier.max = await roll.evaluate({maximize: true}).total;
-        } else {
-            modifier.max = 0;
-        }
-
-        modifier.enabled = !modifier.enabled;
-
-        await this.actor.update({'system.modifiers': modifiers});
+        return modifier.toggle();
     }
 
     /**

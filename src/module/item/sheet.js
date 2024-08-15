@@ -127,6 +127,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.hasProficiency = data.itemData.proficient === true || data.itemData.proficient === false;
         data.isFeat = data.item.type === "feat";
         data.isActorResource = data.item.type === "actorResource";
+        data.isWeapon = data.item.type === "weapon";
         data.isVehicleAttack = data.item.type === "vehicleAttack";
         data.isVehicleSystem = data.item.type === "vehicleSystem";
         data.isGM = game.user.isGM;
@@ -355,7 +356,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         if (["weapon", "equipment", "shield"].includes(item.type)) return itemData.equipped ? game.i18n.localize("SFRPG.InventoryEquipped") : game.i18n.localize("SFRPG.InventoryNotEquipped");
         else if (item.type === "feat") return CONFIG.SFRPG.featureCategories[itemData.details.category]?.label || "";
-        else if (item.type === "starshipWeapon") return game.i18n.localize(`SFRPG.Items.ShipWeapon.${itemData.mount.mounted ? "Mounted" : "NotMounded"}`);
+        else if (item.type === "starshipWeapon") return game.i18n.localize(`SFRPG.Items.ShipWeapon.${itemData.mount.mounted ? "Mounted" : "NotMounted"}`);
         else if (item.type === "effect") return game.i18n.localize(`SFRPG.${itemData.enabled ? "Enabled" : "Disabled"}`);
         else if (item.type === "augmentation") {
             return `${CONFIG.SFRPG.augmentationTypes[itemData.type]} (${CONFIG.SFRPG.augmentationSystems[itemData.system] || ""})`;
@@ -878,23 +879,10 @@ export class ItemSheetSFRPG extends ItemSheet {
         const target = $(event.currentTarget);
         const modifierId = target.closest('.item.modifier').data('modifierId');
 
-        const modifiers = foundry.utils.deepClone(this.item.system.modifiers);
+        const modifiers = this.item.system.modifiers;
         const modifier = modifiers.find(mod => mod._id === modifierId);
 
-        const formula = modifier.modifier;
-        if (formula) {
-            // TODO: test this this.item should be the actor if not try to get the actor here
-            const roll = Roll.create(formula, this.item.system);
-            modifier.max = await roll.evaluate({maximize: true}).total;
-        } else {
-            modifier.max = 0;
-        }
-
-        modifier.enabled = !modifier.enabled;
-
-        await this.item.update({
-            'system.modifiers': modifiers
-        });
+        return modifier.toggle();
     }
 
     async _onAddStorage(event) {

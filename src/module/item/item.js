@@ -144,6 +144,13 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             labels.kac = data.armor.kac ? `${data.armor.kac} ${game.i18n.localize("SFRPG.KineticArmorClassShort")}` : "";
         }
 
+        // Apply a tag if the item is a weapon that's not equipment (unarmed strike, natural attack, etc.)
+        if (itemData.type === "weapon") {
+            itemData.system.transferrable = itemData.system.isEquipment;
+        } else {
+            itemData.system.transferrable = true;
+        }
+
         // Activated Items
         if (data.hasOwnProperty("activation")) {
 
@@ -950,8 +957,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         /** Create global attack modifiers. */
         const additionalModifiers = foundry.utils.deepClone(SFRPG.globalAttackRollModifiers).map(mod => {
-            const container = {actorUuid: this.actor.uuid, itemUuid: this.uuid};
-            const modInstance = {bonus: new SFRPGModifier({...mod.bonus, container})};
+            const modInstance = {bonus: new SFRPGModifier(mod.bonus, {parent: this, globalModifier: true})};
             return modInstance;
         });
 
@@ -1009,9 +1015,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             // Remove inactive constant and damage section mods. Keep all situational mods, regardless of status.
             if (!mod.enabled && mod.modifierType !== SFRPGModifierType.FORMULA) return false;
 
-            if (mod.limitTo === "parent" && mod.container.itemUuid !== this.uuid) return false;
+            if (mod.limitTo === "parent" && mod.item !== this) return false;
             if (mod.limitTo === "container") {
-                const parentItem = getItemContainer(this.actor.items, fromUuidSync(mod.container.itemUuid));
+                const parentItem = getItemContainer(this.actor.items, mod.item);
                 if (parentItem?.id !== this.id) return false;
             }
 
@@ -1388,9 +1394,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 return false;
             }
 
-            if (mod.limitTo === "parent" && mod.container.itemUuid !== this.uuid) return false;
+            if (mod.limitTo === "parent" && mod.item !== this) return false;
             if (mod.limitTo === "container") {
-                const parentItem = getItemContainer(this.actor.items, fromUuidSync(mod.container.itemUuid));
+                const parentItem = getItemContainer(this.actor.items, mod.item);
                 if (parentItem?.id !== this.id) return false;
             }
 

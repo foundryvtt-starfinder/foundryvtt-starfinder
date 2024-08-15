@@ -114,8 +114,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
         if (!invalidate && this.system.allModifiers) return this.system.allModifiers;
 
         this.system.modifiers = this.system.modifiers.map(mod => {
-            const container = {actorUuid: this.uuid, itemUuid: null};
-            return new SFRPGModifier({...mod, container});
+            return new SFRPGModifier(mod, {parent: this});
         }, this);
 
         const allModifiers = this.system.modifiers.filter(mod => (!ignoreTemporary || mod.subtab === "permanent"));
@@ -125,8 +124,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
 
             // Create each modifier as an SFRPGModifier instance first on the item data.
             const itemModifiers = itemData.modifiers = itemData?.modifiers?.map(mod => {
-                const container = {actorUuid: this.uuid, itemUuid: item.uuid};
-                return new SFRPGModifier({...mod, container});
+                return new SFRPGModifier(mod, {parent: item});
             }, this) || [];
 
             if (!itemModifiers || itemModifiers.length === 0) continue;

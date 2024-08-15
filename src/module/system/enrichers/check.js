@@ -79,7 +79,7 @@ export default class CheckEnricher extends BaseEnricher {
 
     get localizedType() {
         const C = CONFIG.SFRPG;
-        const { type } = this.args;
+        const type = CheckNameHelper.shortFormName(this.args.type);
 
         switch (this.checkType) {
             case "skill": return C.skills[type];
@@ -102,7 +102,7 @@ export default class CheckEnricher extends BaseEnricher {
     }
 
     validateName() {
-        const i18nPath = this.checkType === save ? "SFRPG.Save" : "SFRPG.Check";
+        const i18nPath = this.checkType === "save" ? "SFRPG.Save" : "SFRPG.Check";
         const localizedCheck = game.i18n.localize(i18nPath);
 
         this.name ||= `${this.localizedType} ${localizedCheck}`;
@@ -115,8 +115,9 @@ export default class CheckEnricher extends BaseEnricher {
         const a = super.createElement();
 
         if (this.args.dc) a.dataset.dc = parseInt(this.args.dc);
+        const iconSlug = (this.checkType === "ability") ? CheckNameHelper.longFormNameAbilities(this.args.type) : CheckNameHelper.longFormName(this.args.type);
 
-        a.innerHTML = `<i class="fas ${this.icons[this.args.type]}"></i>${a.innerHTML}`;
+        a.innerHTML = `<i class="fas ${this.icons[iconSlug]}"></i>${a.innerHTML}`;
 
         return a;
 
@@ -132,9 +133,9 @@ export default class CheckEnricher extends BaseEnricher {
         if (!actor) return ui.notifications.error("You must have a token or an actor selected.");
         const id = CheckNameHelper.shortFormName(data.type);
 
-        if      (id in CONFIG.SFRPG.skills)    actor.rollSkill(id);
-        else if (id in CONFIG.SFRPG.saves)     actor.rollSave(id);
-        else if (id in CONFIG.SFRPG.abilities) actor.rollAbility(id);
+        if      (id in CONFIG.SFRPG.skills)    actor.rollSkill(id, { event });
+        else if (id in CONFIG.SFRPG.saves)     actor.rollSave(id, { event });
+        else if (id in CONFIG.SFRPG.abilities) actor.rollAbility(id, { event });
 
     }
 
