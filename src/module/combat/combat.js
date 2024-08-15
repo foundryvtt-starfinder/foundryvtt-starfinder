@@ -358,7 +358,7 @@ export class CombatSFRPG extends Combat {
             return;
         }
 
-        await this._notifyBeforeUpdate(eventData);
+        Hooks.callAll("onBeforeUpdateCombat", eventData);
 
         if (!newPhase.iterateTurns) {
             nextTurn = CombatSFRPG.HiddenTurn;
@@ -369,6 +369,8 @@ export class CombatSFRPG extends Combat {
             "flags.sfrpg.phase": nextPhase,
             turn: nextTurn
         };
+
+        updateOptions["eventData"] = eventData;
 
         await this.update(updateData, updateOptions);
 
@@ -385,37 +387,51 @@ export class CombatSFRPG extends Combat {
         }
 
         await this._notifyAfterUpdate(eventData);
-        this._handleTimedEffects(eventData);
     }
 
-    async _notifyBeforeUpdate(eventData) {
-        // console.log(["_notifyBeforeUpdate", eventData]);
-        // console.log([isNewRound, isNewPhase, isNewTurn]);
-        // console.log([this.round, this.flags.sfrpg.phase, this.turn]);
+    _onUpdate(changed, options, userId) {
+        super._onUpdate(changed, options, userId);
 
-        Hooks.callAll("onBeforeUpdateCombat", eventData);
+        // Get an active GM to run events players may not have permissions to do.
+        if (!game.users.activeGM?.isSelf) return;
+
+        this._handleTimedEffects(options.eventData);
+    }
+
+    /**
+     * Run turn start turn events. This runs only for an active GM. If there are no GMs, this isn't run.
+     * @param {Combatant} combatant The Combatant whose turn just started
+     */
+    async _onStartTurn(combatant) {
+        super._onStartTurn(combatant);
+
+        combatant.actor?._onTurnStart();
+    }
+
+    /**
+     * Run turn end turn events. This runs only for an active GM. If there are no GMs, this isn't run.
+     * @param {Combatant} combatant The Combatant whose turn just ended
+     */
+    async _onEndTurn(combatant) {
+        super._onEndTurn(combatant);
+
+        combatant.actor?._onTurnEnd();
     }
 
     async _notifyAfterUpdate(eventData) {
-        // console.log(["_notifyAfterUpdate", eventData]);
-        // console.log([isNewRound, isNewPhase, isNewTurn]);
-        // console.log([this.round, this.flags.sfrpg.phase, this.turn]);
 
         const combatType = this.getCombatType();
         const combatChatSetting = game.settings.get('sfrpg', `${combatType}ChatCards`);
 
         if (eventData.isNewRound && (combatChatSetting !== "disabled" || combatChatSetting === "roundsTurns")) {
-            // console.log(`Starting new round! New phase is ${eventData.newPhase.name}, it is now the turn of: ${eventData.newCombatant?.name || "the GM"}!`);
             await this._printNewRoundChatCard(eventData);
         }
 
         if (eventData.isNewPhase && (combatChatSetting === "enabled" || combatChatSetting === "roundsPhases")) {
-            // console.log(`Starting ${eventData.newPhase.name} phase! It is now the turn of: ${eventData.newCombatant?.name || "the GM"}!`);
             await this._printNewPhaseChatCard(eventData);
         }
 
         if (eventData.newCombatant && (combatChatSetting === "enabled" || combatChatSetting === "roundsTurns")) {
-            // console.log(`[${eventData.newPhase.name}] It is now the turn of: ${eventData.newCombatant?.name || "the GM"}!`);
             await this._printNewTurnChatCard(eventData);
         }
 

@@ -360,6 +360,11 @@ SFRPG.effectDurationFrom = {
     "day": 86400
 };
 
+SFRPG.turnEventTypes = {
+    "note": "SFRPG.TurnEvent.Types.Note",
+    "roll": "SFRPG.TurnEvent.Types.Roll"
+};
+
 /**
  * Durations for features/spells however can be.
  * @type {Object}
