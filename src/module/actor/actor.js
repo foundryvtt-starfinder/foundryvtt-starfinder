@@ -312,108 +312,6 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         return super._onDeleteDescendantDocuments(parent, collection, documents, data, options, userId);
     }
 
-    async useSpell(item, { configureDialog = true } = {}) {
-        if (item.type !== "spell") throw new Error("Wrong item type");
-
-        let spellLevel = item.system.level;
-        const usesSlots = (spellLevel > 0) && item.system.preparation.mode === "";
-        if (!usesSlots) {
-            if (item.system.uses?.max > 0) {
-                if (item.system.uses.value <= 0) {
-                    ui.notifications.error(game.i18n.localize("SFRPG.Items.Spell.ErrorNoUses", {permanent: true}));
-                    return;
-                }
-
-                const itemUpdatePromise = item.update({
-                    [`system.uses.value`]: Math.max(item.system.uses.value - 1, 0)
-                });
-                itemUpdatePromise.then(() => {
-                    item.roll();
-                });
-                return itemUpdatePromise;
-            } else {
-                return item.roll();
-            }
-        }
-
-        let consumeSpellSlot = true;
-        let selectedSlot = null;
-        if (configureDialog) {
-            try {
-                const dialogResponse = await SpellCastDialog.create(this, item);
-                const slotLevel = parseInt(dialogResponse.formData.get("level"));
-                consumeSpellSlot = Boolean(dialogResponse.formData.get("consume"));
-                selectedSlot = dialogResponse.spellLevels.find(x => parseInt(x.level) === slotLevel);
-                spellLevel = parseInt(selectedSlot?.level || item.system.level);
-
-                if (spellLevel !== item.system.level && item.system.level > spellLevel) {
-                    const newItemData = item.toObject();
-                    newItemData.system.level = spellLevel;
-
-                    if (this.type === "npc" || this.type === "npc2") {
-                        if (newItemData.system.save.dc && !Number.isNaN(newItemData.system.save.dc)) {
-                            newItemData.system.save.dc = newItemData.system.save.dc - item.system.level + spellLevel;
-                        }
-                    }
-
-                    item = new ItemSFRPG(newItemData, {parent: this});
-                }
-
-                // Run automation to ensure save DCs are correct.
-                item.prepareData();
-                if (item.system.actionType && item.system.save.type) {
-                    await item.processData();
-                }
-            } catch (error) {
-                console.error(error);
-                return null;
-            }
-        }
-
-        let processContext = null;
-        if (consumeSpellSlot && spellLevel > 0 && selectedSlot) {
-            const actor = this;
-            if (selectedSlot.source === "general") {
-                if (processContext) {
-                    processContext.then(function(result) {
-                        return actor.update({
-                            [`system.spells.spell${spellLevel}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].value) - 1, 0)
-                        });
-                    });
-                } else {
-                    processContext = actor.update({
-                        [`system.spells.spell${spellLevel}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].value) - 1, 0)
-                    });
-                }
-            } else {
-                const selectedLevel = selectedSlot.level;
-                const selectedClass = selectedSlot.source;
-
-                if (processContext) {
-                    processContext.then(function(result) {
-                        return actor.update({
-                            [`system.spells.spell${selectedLevel}.perClass.${selectedClass}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].perClass[selectedClass].value) - 1, 0)
-                        });
-                    });
-                } else {
-                    processContext = actor.update({
-                        [`system.spells.spell${selectedLevel}.perClass.${selectedClass}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].perClass[selectedClass].value) - 1, 0)
-                    });
-                }
-            }
-        }
-
-        if (processContext) {
-            processContext.then(function(result) {
-                return item.roll();
-            });
-
-            return processContext;
-        }
-
-        return item.roll();
-    }
-
     /**
      * Edit a skill's fields
      * @param {string} skillId The skill id (e.g. "ins")
@@ -475,7 +373,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
         enabledSkills = foundry.utils.mergeObject(enabledSkills, delta, {overwrite: false, inplace: false});
 
-        return await this.update(enabledSkills);
+        return this.update(enabledSkills);
     }
 
     /**
@@ -648,7 +546,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         const skl = this.system.skills[skillId];
 
         if (!this.hasPlayerOwner) {
-            return await this.rollSkillCheck(skillId, skl, options);
+            return this.rollSkillCheck(skillId, skl, options);
         }
 
         if (skl.isTrainedOnly && !(skl.ranks > 0)) {
@@ -675,7 +573,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                 }).render(true);
             });
         } else {
-            return await this.rollSkillCheck(skillId, skl, options);
+            return this.rollSkillCheck(skillId, skl, options);
         }
     }
 
@@ -696,7 +594,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
         parts.push(`@abilities.${abilityId}.abilityCheckBonus`);
 
-        return await DiceSFRPG.d20Roll({
+        return DiceSFRPG.d20Roll({
             event: options.event,
             rollContext: rollContext,
             parts: parts,
@@ -749,7 +647,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             ? game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitleWithProfession", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)], profession: skill.subname })
             : game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitle", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)] });
 
-        return await DiceSFRPG.d20Roll({
+        return DiceSFRPG.d20Roll({
             event: options.event,
             rollContext: rollContext,
             parts: parts,
@@ -813,7 +711,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
         this.setupRollContexts(rollContext);
 
-        return await DiceSFRPG.d20Roll({
+        return DiceSFRPG.d20Roll({
             event: options.event,
             rollContext: rollContext,
             parts: parts,
