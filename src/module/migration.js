@@ -1,5 +1,4 @@
 import SFRPGModifier from "./modifiers/modifier.js";
-import { ActorSFRPG } from "./actor/actor.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./modifiers/types.js";
 
 const SFRPGMigrationSchemas = Object.freeze({
