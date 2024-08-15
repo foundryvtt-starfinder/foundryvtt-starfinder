@@ -29,8 +29,6 @@ export const registerSystemSettings = function() {
         default: false,
         type: Boolean
     });
-
-
     game.settings.register("sfrpg", "autoCollapseItemCards", {
         name: "SFRPG.Settings.AutoCollapseCard.Name",
         hint: "SFRPG.Settings.AutoCollapseCard.Hint",
