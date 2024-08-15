@@ -21,6 +21,14 @@ export const registerSystemSettings = function() {
         type: Boolean
     });
 
+    game.settings.register("sfrpg", "decimalSpeed", {
+        name: "SFRPG.Settings.DecimalSpeed.Name",
+        hint: "SFRPG.Settings.DecimalSpeed.Hint",
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean
+    });
     game.settings.register("sfrpg", "autoCollapseItemCards", {
         name: "SFRPG.Settings.AutoCollapseCard.Name",
         hint: "SFRPG.Settings.AutoCollapseCard.Hint",
