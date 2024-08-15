@@ -1,5 +1,6 @@
 import { SFRPG } from "../config.js";
 import RollContext from "../rolls/rollcontext.js";
+import { ActorMovementConfig } from "../apps/movement-config.js";
 
 const itemSizeArmorClassModifier = {
     "fine": 8,
@@ -280,6 +281,17 @@ export class ItemSheetSFRPG extends ItemSheet {
             rollData,
             secrets
         });
+
+        // Manage abilities
+        if (data.itemData?.ppAbilities?.length >= 1) {
+            for (const ability of data.itemData.ppAbilities) {
+                ability.enrichedDescription = await TextEditor.enrichHTML(ability.description, {
+                    async,
+                    rollData,
+                    secrets
+                });
+            }
+        }
 
         if (data?.item?.type === "starshipAction") {
             data.enrichedEffectNormal = await TextEditor.enrichHTML(this.item.system?.effectNormal, {
@@ -607,6 +619,74 @@ export class ItemSheetSFRPG extends ItemSheet {
             return arr;
         }, []);
 
+        // Handle mech power point abilities, aside from descriptions (which will be separate)
+        const ppAbilities = Object.entries(formData).filter(e => e[0].startsWith("system.ppAbilities"));
+        formData["system.ppAbilities"] = ppAbilities.reduce((arr, entry) => {
+            const [i, key, subKey] = entry[0].split(".").slice(2);
+            if (!arr[i]) arr[i] = {
+                abilityType: "",
+                activation: {
+                    requiresActivation: false,
+                    toggleable: false
+                },
+                cost: {
+                    value: null,
+                    variable: false
+                },
+                damage: "",
+                damageTypes: {},
+                description: "",
+                name: "",
+                save: {
+                    dc: "",
+                    type: ""
+                }
+            };
+
+            switch (key) {
+                case 'abilityType':
+                    arr[i].abilityType = entry[1];
+                    break;
+                case 'activation':
+                    if (subKey === "requiresActivation") arr[i].activation.requiresActivation = entry[1];
+                    if (subKey === "toggleable") arr[i].activation.toggleable = entry[1];
+                    break;
+                case 'cost':
+                    if (subKey === "value") arr[i].cost.value = entry[1];
+                    if (subKey === "variable") arr[i].cost.variable = entry[1];
+                    break;
+                case 'damage':
+                    arr[i].damage = entry[1];
+                    break;
+                case 'description':
+                    arr[i].description = entry[1];
+                    break;
+                case 'name':
+                    arr[i].name = entry[1];
+                    break;
+                case 'save':
+                    if (subKey === "dc") arr[i].save.dc = entry[1];
+                    if (subKey === "type") arr[i].save.type = entry[1];
+                    break;
+            }
+
+            return arr;
+        }, []);
+
+        // Handle Mech Power Point Ability Descriptions
+        if (ppAbilities.length > 0) {
+            const originalAbilities = this.object.system.ppAbilities;
+            const descriptionUpdates = Object.entries(formData).filter(e => e[0].startsWith("system.ppAbilities.") && e[0].endsWith(".description"));
+            for (let i = 0; i < originalAbilities.length; i++) {
+                formData["system.ppAbilities"][i].description = originalAbilities[i].description;
+            }
+            if (descriptionUpdates.length > 0) {
+                const ind = Number(descriptionUpdates[0][0].split(".").slice(2, 3));
+                formData["system.ppAbilities"][ind].description = descriptionUpdates[0][1];
+            }
+
+        }
+
         // Handle Starship Action/Subaction Formulas
         if (this.object.type === "starshipAction") {
             const currentFormula = {system: {formula: Object.assign({}, this.item.system.formula)}};
@@ -670,6 +750,10 @@ export class ItemSheetSFRPG extends ItemSheet {
         // toggle timedEffect
         html.find('.effect-details-toggle').on('click', this._onToggleDetailsEffect.bind(this));
         html.find("div[data-origin-uuid]").on("click", this._onClickOrigin.bind(this));
+
+        // Mech Item Speed Mods
+        html.find('.config-button').click(this._onConfigMenu.bind(this));
+        html.find('.pp-ability-control').click(this._onPPAbilityControl.bind(this));
     }
 
     /* -------------------------------------------- */
@@ -1155,5 +1239,75 @@ export class ItemSheetSFRPG extends ItemSheet {
         const doc = await fromUuid(uuid);
 
         doc.sheet.render(true);
+    }
+
+    /**
+     * Open the speed configuration app for mech parts
+     * @param {Event} event     The original click event
+     * @return {Promise}
+     * @private
+     */
+    _onConfigMenu(event) {
+        event.preventDefault();
+        const button = event.currentTarget;
+        let app;
+        switch ( button.dataset.action ) {
+            case "movement":
+                app = new ActorMovementConfig(this.object);
+                break;
+        }
+        app?.render(true);
+    }
+
+    /**
+     * Add or remove a power point ability to/from a mech item
+     * @param {Event} event     The original click event
+     * @return {Promise}
+     * @private
+     */
+    async _onPPAbilityControl(event) {
+        event.preventDefault();
+        const a = event.currentTarget;
+
+        // Add new power point ability
+        if (a.classList.contains("add-pp-ability")) {
+            await this._onSubmit(event); // Submit any unsaved changes
+            const abilities = this.item.system.ppAbilities;
+            return await this.item.update({
+                "system.ppAbilities": abilities.concat([
+                    {
+                        abilityType: "",
+                        activation: {
+                            requiresActivation: false,
+                            toggleable: false
+                        },
+                        cost: {
+                            value: null,
+                            variable: false
+                        },
+                        damage: "",
+                        damageTypes: {},
+                        description: "",
+                        name: "",
+                        save: {
+                            dc: "",
+                            type: ""
+                        }
+                    }
+                ])
+            });
+        }
+
+        // Remove a power point ability
+        if (a.classList.contains("delete-pp-ability")) {
+            await this._onSubmit(event); // Submit any unsaved changes
+            const li = a.closest(".pp-ability");
+            const ppAbilities = duplicate(this.item.system.ppAbilities);
+            ppAbilities.splice(Number(li.dataset.abilityNumber), 1);
+            return await this.item.update({
+                "system.ppAbilities": ppAbilities
+            });
+        }
+
     }
 }

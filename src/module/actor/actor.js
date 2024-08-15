@@ -103,6 +103,10 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         const armorUpgrades = items.filter(item => item.type === "upgrade");
         const asis = items.filter(item => item.type === "asi");
         const actorResources = items.filter(item => item.type === "actorResource");
+        const mechFrame = items.filter(item => item.type === "mechFrame");
+        const mechUpperLimbs = items.filter(item => item.type === "mechLimb" && item.data.data.type === "upper");
+        const mechLowerLimbs = items.filter(item => item.type === "mechLimb" && item.data.data.type === "lower");
+        const mechPowerCore = items.filter(item => item.type === "mechPowerCore");
         return game.sfrpg.engine.process("process-actors", {
             actorId: this.id,
             actor: this,
@@ -123,7 +127,11 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             armorUpgrades,
             asis,
             frames,
-            actorResources
+            actorResources,
+            mechFrame,
+            mechUpperLimbs,
+            mechLowerLimbs,
+            mechPowerCore
         });
     }
 
@@ -304,6 +312,128 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         return super._onDeleteDescendantDocuments(parent, collection, documents, data, options, userId);
     }
 
+    /**
+     * Edit a skill's fields
+     * @param {string} skillId The skill id (e.g. "ins")
+     * @param {Object} options Options which configure how the skill is edited
+     */
+    async editSkill(skillId, options = {}) {
+        // Keeping this here for later
+        // this.update({"data.skills.-=skillId": null});
+        // use this to delete any unwanted skills.
+
+        const skill = foundry.utils.deepClone(this.system.skills[skillId]);
+        const isNpc = this.type === "npc" || this.type === "npc2";
+        const formData = await AddEditSkillDialog.create(skillId, skill, true, isNpc, this.isOwner),
+            isTrainedOnly = Boolean(formData.get('isTrainedOnly')),
+            hasArmorCheckPenalty = Boolean(formData.get('hasArmorCheckPenalty')),
+            value = formData.get('value') ? 3 : 0,
+            misc = Number(formData.get('misc')),
+            notes = String(formData.get('notes')),
+            ranks = Number(formData.get('ranks')),
+            ability = formData.get('ability'),
+            remove = Boolean(formData.get('remove'));
+
+        if (remove) return this.update({ [`system.skills.-=${skillId}`]: null });
+
+        const updateObject = {
+            [`system.skills.${skillId}.ability`]: ability,
+            [`system.skills.${skillId}.ranks`]: ranks,
+            [`system.skills.${skillId}.value`]: value,
+            [`system.skills.${skillId}.misc`]: misc,
+            [`system.skills.${skillId}.notes`]: notes,
+            [`system.skills.${skillId}.isTrainedOnly`]: isTrainedOnly,
+            [`system.skills.${skillId}.hasArmorCheckPenalty`]: hasArmorCheckPenalty
+        };
+
+        if (isNpc) updateObject[`system.skills.${skillId}.enabled`] = Boolean(formData.get('enabled'));
+
+        if ("subname" in skill) {
+            updateObject[`system.skills.${skillId}.subname`] = formData.get('subname');
+        }
+
+        return this.update(updateObject);
+    }
+
+    /**
+     * Toggles what NPC skills are shown on the sheet.
+     */
+    async toggleNpcSkills() {
+        const skills = foundry.utils.deepClone(this.system.skills);
+        const formData = await NpcSkillToggleDialog.create(skills);
+        let enabledSkills = {};
+        const delta = Object.entries(skills).reduce((obj, curr) => {
+            if (curr[1].enabled) obj[`system.skills.${curr[0]}.enabled`] = !curr[1].enabled;
+            return obj;
+        }, {});
+
+        for (const [key, value] of formData.entries()) {
+            enabledSkills[`system.${key}`] = Boolean(value);
+        }
+
+        enabledSkills = foundry.utils.mergeObject(enabledSkills, delta, {overwrite: false, inplace: false});
+
+        return this.update(enabledSkills);
+    }
+
+    /**
+     * Add a new skill
+     * @param {Object} options Options which configure how the skill is added
+     */
+    async addSkill(options = {}) {
+        const skill = {
+            ability: "int",
+            ranks: 0,
+            value: 0,
+            misc: 0,
+            isTrainedOnly: false,
+            hasArmorCheckPenalty: false,
+            subname: ""
+        };
+
+        let skillId = "pro";
+        let counter = 0;
+
+        while (this.system.skills[skillId]) {
+            skillId = `pro${++counter}`;
+        }
+
+        const formData = await AddEditSkillDialog.create(skillId, skill, false, this.hasPlayerOwner, this.isOwner),
+            isTrainedOnly = Boolean(formData.get('isTrainedOnly')),
+            hasArmorCheckPenalty = Boolean(formData.get('hasArmorCheckPenalty')),
+            value = formData.get('value') ? 3 : 0,
+            misc = Number(formData.get('misc')),
+            ranks = Number(formData.get('ranks')),
+            ability = formData.get('ability'),
+            subname = formData.get('subname');
+
+        const newSkillData = {
+            [`system.skills.${skillId}`]: {},
+            [`system.skills.${skillId}.isTrainedOnly`]: isTrainedOnly,
+            [`system.skills.${skillId}.hasArmorCheckPenalty`]: hasArmorCheckPenalty,
+            [`system.skills.${skillId}.value`]: value,
+            [`system.skills.${skillId}.misc`]: misc,
+            [`system.skills.${skillId}.ranks`]: ranks,
+            [`system.skills.${skillId}.ability`]: ability,
+            [`system.skills.${skillId}.subname`]: subname,
+            [`system.skills.${skillId}.mod`]: value + misc + ranks,
+            [`system.skills.${skillId}.enabled`]: true
+        };
+
+        return this.update(newSkillData);
+    }
+
+    levelUp(actorClassId) {
+        const targetClass = this.items.get(actorClassId);
+        if (targetClass) {
+            targetClass.update({["system.levels"]: targetClass.system.levels + 1});
+        }
+    }
+
+    /** ------------------------------------------------------------------------------------
+    * Character/NPC/Drone Rolls
+    * -------------------------------------------------------------------------------------- */
+
     async useSpell(item, { configureDialog = true } = {}) {
         if (item.type !== "spell") throw new Error("Wrong item type");
 
@@ -339,7 +469,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                 spellLevel = parseInt(selectedSlot?.level || item.system.level);
 
                 if (spellLevel !== item.system.level && item.system.level > spellLevel) {
-                    const newItemData = item.toObject();
+                    const newItemData = duplicate(item);
                     newItemData.system.level = spellLevel;
 
                     if (this.type === "npc" || this.type === "npc2") {
@@ -407,117 +537,6 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     }
 
     /**
-     * Edit a skill's fields
-     * @param {string} skillId The skill id (e.g. "ins")
-     * @param {Object} options Options which configure how the skill is edited
-     */
-    async editSkill(skillId, options = {}) {
-        // Keeping this here for later
-        // this.update({"data.skills.-=skillId": null});
-        // use this to delete any unwanted skills.
-
-        const skill = foundry.utils.deepClone(this.system.skills[skillId]);
-        const isNpc = this.type === "npc" || this.type === "npc2";
-        const formData = await AddEditSkillDialog.create(skillId, skill, true, isNpc, this.isOwner),
-            isTrainedOnly = Boolean(formData.get('isTrainedOnly')),
-            hasArmorCheckPenalty = Boolean(formData.get('hasArmorCheckPenalty')),
-            value = formData.get('value') ? 3 : 0,
-            misc = Number(formData.get('misc')),
-            notes = String(formData.get('notes')),
-            ranks = Number(formData.get('ranks')),
-            ability = formData.get('ability'),
-            remove = Boolean(formData.get('remove'));
-
-        if (remove) return this.update({ [`system.skills.-=${skillId}`]: null });
-
-        const updateObject = {
-            [`system.skills.${skillId}.ability`]: ability,
-            [`system.skills.${skillId}.ranks`]: ranks,
-            [`system.skills.${skillId}.value`]: value,
-            [`system.skills.${skillId}.misc`]: misc,
-            [`system.skills.${skillId}.notes`]: notes,
-            [`system.skills.${skillId}.isTrainedOnly`]: isTrainedOnly,
-            [`system.skills.${skillId}.hasArmorCheckPenalty`]: hasArmorCheckPenalty
-        };
-
-        if (isNpc) updateObject[`system.skills.${skillId}.enabled`] = Boolean(formData.get('enabled'));
-
-        if ("subname" in skill) {
-            updateObject[`system.skills.${skillId}.subname`] = formData.get('subname');
-        }
-
-        return this.update(updateObject);
-    }
-
-    /**
-     * Toggles what NPC skills are shown on the sheet.
-     */
-    async toggleNpcSkills() {
-        const skills = foundry.utils.deepClone(this.system.skills);
-        const formData = await NpcSkillToggleDialog.create(skills);
-        let enabledSkills = {};
-        const delta = Object.entries(skills).reduce((obj, curr) => {
-            if (curr[1].enabled) obj[`system.skills.${curr[0]}.enabled`] = !curr[1].enabled;
-            return obj;
-        }, {});
-
-        for (const [key, value] of formData.entries()) {
-            enabledSkills[`system.${key}`] = Boolean(value);
-        }
-
-        enabledSkills = foundry.utils.mergeObject(enabledSkills, delta, {overwrite: false, inplace: false});
-
-        return await this.update(enabledSkills);
-    }
-
-    /**
-     * Add a new skill
-     * @param {Object} options Options which configure how the skill is added
-     */
-    async addSkill(options = {}) {
-        const skill = {
-            ability: "int",
-            ranks: 0,
-            value: 0,
-            misc: 0,
-            isTrainedOnly: false,
-            hasArmorCheckPenalty: false,
-            subname: ""
-        };
-
-        let skillId = "pro";
-        let counter = 0;
-
-        while (this.system.skills[skillId]) {
-            skillId = `pro${++counter}`;
-        }
-
-        const formData = await AddEditSkillDialog.create(skillId, skill, false, this.hasPlayerOwner, this.isOwner),
-            isTrainedOnly = Boolean(formData.get('isTrainedOnly')),
-            hasArmorCheckPenalty = Boolean(formData.get('hasArmorCheckPenalty')),
-            value = formData.get('value') ? 3 : 0,
-            misc = Number(formData.get('misc')),
-            ranks = Number(formData.get('ranks')),
-            ability = formData.get('ability'),
-            subname = formData.get('subname');
-
-        const newSkillData = {
-            [`system.skills.${skillId}`]: {},
-            [`system.skills.${skillId}.isTrainedOnly`]: isTrainedOnly,
-            [`system.skills.${skillId}.hasArmorCheckPenalty`]: hasArmorCheckPenalty,
-            [`system.skills.${skillId}.value`]: value,
-            [`system.skills.${skillId}.misc`]: misc,
-            [`system.skills.${skillId}.ranks`]: ranks,
-            [`system.skills.${skillId}.ability`]: ability,
-            [`system.skills.${skillId}.subname`]: subname,
-            [`system.skills.${skillId}.mod`]: value + misc + ranks,
-            [`system.skills.${skillId}.enabled`]: true
-        };
-
-        return this.update(newSkillData);
-    }
-
-    /**
      * Roll a Skill Check
      * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
      * @param {string} skillId      The skill id (e.g. "ins")
@@ -527,7 +546,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         const skl = this.system.skills[skillId];
 
         if (!this.hasPlayerOwner) {
-            return await this.rollSkillCheck(skillId, skl, options);
+            return this.rollSkillCheck(skillId, skl, options);
         }
 
         if (skl.isTrainedOnly && !(skl.ranks > 0)) {
@@ -554,7 +573,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                 }).render(true);
             });
         } else {
-            return await this.rollSkillCheck(skillId, skl, options);
+            return this.rollSkillCheck(skillId, skl, options);
         }
     }
 
@@ -575,7 +594,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
         parts.push(`@abilities.${abilityId}.abilityCheckBonus`);
 
-        return await DiceSFRPG.d20Roll({
+        return DiceSFRPG.d20Roll({
             event: options.event,
             rollContext: rollContext,
             parts: parts,
@@ -628,7 +647,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             ? game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitleWithProfession", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)], profession: skill.subname })
             : game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitle", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)] });
 
-        return await DiceSFRPG.d20Roll({
+        return DiceSFRPG.d20Roll({
             event: options.event,
             rollContext: rollContext,
             parts: parts,
@@ -646,6 +665,10 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             }
         });
     }
+
+    /** ------------------------------------------------------------------------------------
+    * Vehicle Actions
+    * -------------------------------------------------------------------------------------- */
 
     /**
      * Roll the Piloting skill of the pilot of a vehicle
@@ -688,7 +711,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
         this.setupRollContexts(rollContext);
 
-        return await DiceSFRPG.d20Roll({
+        return DiceSFRPG.d20Roll({
             event: options.event,
             rollContext: rollContext,
             parts: parts,
@@ -704,7 +727,10 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         });
     }
 
-    /** Starship code */
+    /** ------------------------------------------------------------------------------------
+    * Starship Actions
+    * -------------------------------------------------------------------------------------- */
+
     async useStarshipAction(actionId) {
         /** Bad entry; no action! */
         if (!actionId) {
@@ -925,14 +951,24 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         });
     }
 
-    levelUp(actorClassId) {
-        const targetClass = this.items.get(actorClassId);
-        if (targetClass) {
-            targetClass.update({["system.levels"]: targetClass.system.levels + 1});
-        }
-    }
+    /** ------------------------------------------------------------------------------------
+    * Mech Actions
+    * -------------------------------------------------------------------------------------- */
 
-    /** Roll contexts */
+    async rollMechAbility() {}
+
+    async rollMechWeaponAttack() {}
+
+    async rollMechPPAbility() {}
+
+    async rollMechSave() {}
+
+    async rollMechSkillCheck() {}
+
+    /** ------------------------------------------------------------------------------------
+    * Roll Contexts
+    * -------------------------------------------------------------------------------------- */
+
     setupRollContexts(rollContext, desiredSelectors = []) {
         if (!this) {
             return;
@@ -1043,9 +1079,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         }
     }
 
-    /** -------------------
+    /** ------------------------------------------------------------------------------------
     * Floating HP functions
-    ---------------------- */
+    * -------------------------------------------------------------------------------------- */
 
     /** Calculate deltas in the pre-method in order to access the old value.
      * The delta is then passed onwards to the regular update method on the options object.
