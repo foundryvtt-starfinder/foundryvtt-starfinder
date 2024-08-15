@@ -1,7 +1,16 @@
 const fs = require('fs');
 
 const dataPaths = [
-    "./src/items/equipment"
+    "./src/items/equipment",
+    "./src/items/archetype-features",
+    "./src/items/class-features",
+    "./src/items/feats",
+    "./src/items/racial-features",
+    "./src/items/spells",
+    "./src/items/starship-components",
+    "./src/items/theme-features",
+    "./src/items/themes",
+    "./src/items/universal-creature-rules"
 ];
 
 try {
