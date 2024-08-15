@@ -556,7 +556,7 @@ const _migrateDocumentIconToWebP = function(document, data) {
 
     if (document.data?.description?.value) {
         const description = _migrateStringContentToWebP(document.system.description.value);
-        if (document.data.description.value != description) {
+        if (document.data.description.value !== description) {
             data["system.description.value"] = description;
         }
     }
