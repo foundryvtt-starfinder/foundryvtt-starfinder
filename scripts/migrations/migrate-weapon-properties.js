@@ -14,7 +14,7 @@ try {
                     encoding: 'utf8',
                     flag: 'r+'
                 });
-                const dirty = false;
+                let clean = false;
 
                 const item = JSON.parse(json);
 
@@ -22,13 +22,16 @@ try {
                 if (properties) {
                     const newProperties = {};
                     for (const property of Object.entries(properties)) {
-                        // Not sure why needsExtension is text?
-                        newProperties[property[0]] = {value: property[1], needsExtension: 'true'};
+                        newProperties[property[0]] = {value: property[1]};
+                        if (property[1]) {
+                            newProperties[property[0]].extension = '';
+                        }
                     }
-                    console.log(newProperties);
+                    item.system.properties = newProperties;
+                    clean = true;
                 }
 
-                if (dirty) {
+                if (clean) {
                     const output = JSON.stringify(item, null, 2);
 
                     fs.writeFileSync(`${path}/${file}`, output);
