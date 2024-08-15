@@ -1,13 +1,11 @@
 export default function setupVision() {
     setupVisionModes();
-    setDefautSceneSettings();
+    setDefaultSceneSettings();
     sceneConfigTooltips();
     setupConditions();
 }
 
 function setupVisionModes() {
-    // Set global illumination luminosity to dim light, so LLV will see it as bright
-    CONFIG.Canvas.globalLightConfig.luminosity = 0.5;
 
     // Override core darkvision
     CONFIG.Canvas.visionModes.darkvision = new VisionMode({
@@ -23,9 +21,9 @@ function setupVisionModes() {
             }
         },
         lighting: {
-            background: { visibility: VisionMode.LIGHTING_VISIBILITY.REQUIRED }
+            background: { visibility: VisionMode.LIGHTING_VISIBILITY.REQUIRED },
+            darkness: { visibility: VisionMode.LIGHTING_VISIBILITY.REQUIRED }
         },
-
         vision: {
             darkness: {
                 // The darker the scene, the more monochrome vision will become
@@ -87,6 +85,7 @@ function setupVisionModes() {
                 // LLV sees dim as bright
                 [VisionMode.LIGHTING_LEVELS.DIM]: VisionMode.LIGHTING_LEVELS.BRIGHT
             },
+            darkness: { visibility: VisionMode.LIGHTING_VISIBILITY.DISABLED },
             background: { visibility: VisionMode.LIGHTING_VISIBILITY.REQUIRED }
         },
         vision: {
@@ -101,16 +100,16 @@ function setupVisionModes() {
     });
 }
 
-function setDefautSceneSettings() {
+function setDefaultSceneSettings() {
     Hooks.on("preCreateScene", (scene) => {
-        scene.updateSource({ globalLightThreshold: 0.75, globalLight: true });
+        scene.updateSource({ "environment.globalLight.darkness.max": 0.75, "environment.globalLight.enabled": true });
     });
 }
 
 function sceneConfigTooltips() {
-    Hooks.on("renderSceneConfig", (config, html) => {
-        const darknessSlider = html[0].querySelector("input[name='globalLightThreshold']").nextElementSibling;
-        const globalIllumination = html[0].querySelector("input[name='globalLight']");
+    Hooks.on("renderSceneConfig", (app, [html]) => {
+        const darknessSlider = html.querySelector("range-picker[name='environment.globalLight.darkness.max']");
+        const globalIllumination = html.querySelector("input[name='environment.globalLight.enabled']");
 
         const tooltip = `
         <i data-tooltip="${ game.i18n.localize("SFRPG.SensesTypes.GlobalIlluminationThresholdMessage") }"
@@ -119,6 +118,8 @@ function sceneConfigTooltips() {
 
         globalIllumination?.insertAdjacentHTML("afterend", tooltip);
         darknessSlider?.insertAdjacentHTML("afterend", tooltip);
+
+        app.setPosition({height: "auto"});
     });
 }
 

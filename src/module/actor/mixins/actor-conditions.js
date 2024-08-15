@@ -151,4 +151,11 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
         return this.setCondition(flatFooted, shouldBeFlatFooted);
 
     }
+
+    /** Redirect to `setCondition` if possible. */
+    async toggleStatusEffect(statusId, options) {
+        return this._isStatusEffect(statusId) && !("overlay" in options)
+            ? this.setCondition(statusId, !this.hasCondition(statusId))
+            : super.toggleStatusEffect(statusId, options);
+    }
 };

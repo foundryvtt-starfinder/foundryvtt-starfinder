@@ -3,7 +3,6 @@
 @navHeight: 30px;
 @headerHeight: 100px;
 @detailsHeight: 40px;
-@sheetNavTransition: background 0.2s, backdrop-filter 0.2s;
 
 // Global background style
 button {
@@ -509,7 +508,6 @@ img.icon-enricher {
             color: #fff;
             // border-bottom: 3px solid @colorBeige;
             flex: 1;
-            transition: @sheetNavTransition;
 
             &.active {
                 // border-bottom: 3px solid @colorCrimson;
@@ -519,7 +517,7 @@ img.icon-enricher {
             &:hover:not(.active) {
                 backdrop-filter: brightness(0.5);
                 filter: drop-shadow(0px 2px 4px #00a0ff);
-                transition: @sheetNavTransition, filter 700ms;
+                transition: background 0.2s, backdrop-filter 0.2s, filter 700ms;
             }
         }
     }
@@ -913,7 +911,6 @@ div.modifier-app {
             display: none;
         }
 
-        border-color: @borderGroove;
         border-radius: 5px;
         backdrop-filter: brightness(0.9);
     }

@@ -13,7 +13,7 @@ export class NpcSkillToggleDialog extends Dialog {
 
     static get defaultOptions() {
         const defaultOptions = super.defaultOptions;
-        return mergeObject(defaultOptions, {
+        return foundry.utils.mergeObject(defaultOptions, {
             width: 560
         });
     }
@@ -26,8 +26,8 @@ export class NpcSkillToggleDialog extends Dialog {
      * the dialog FormData once the workflow has been completed.
      */
     static async create(skills = {}) {
-        let skillNames = {};
-        for (let skillId of Object.keys(skills)) {
+        const skillNames = {};
+        for (const skillId of Object.keys(skills)) {
             if (skillId in CONFIG.SFRPG.skills) {
                 skillNames[skillId] = CONFIG.SFRPG.skills[skillId];
             } else {

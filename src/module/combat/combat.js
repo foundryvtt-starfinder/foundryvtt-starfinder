@@ -116,7 +116,7 @@ export class CombatSFRPG extends Combat {
         }[this.getCombatType()] || "desc";
 
         const turns = this.combatants.contents.sort(sortMethod === "asc" ? this._sortCombatantsAsc : this._sortCombatants);
-        this.turn = Math.clamped(this.turn, CombatSFRPG.HiddenTurn, turns.length - 1);
+        this.turn = Math.clamp(this.turn, CombatSFRPG.HiddenTurn, turns.length - 1);
 
         // Update state tracking
         const c = turns[this.turn];
@@ -358,7 +358,7 @@ export class CombatSFRPG extends Combat {
             return;
         }
 
-        await this._notifyBeforeUpdate(eventData);
+        Hooks.callAll("onBeforeUpdateCombat", eventData);
 
         if (!newPhase.iterateTurns) {
             nextTurn = CombatSFRPG.HiddenTurn;
@@ -369,6 +369,8 @@ export class CombatSFRPG extends Combat {
             "flags.sfrpg.phase": nextPhase,
             turn: nextTurn
         };
+
+        updateOptions["eventData"] = eventData;
 
         await this.update(updateData, updateOptions);
 
@@ -385,37 +387,51 @@ export class CombatSFRPG extends Combat {
         }
 
         await this._notifyAfterUpdate(eventData);
-        this._handleTimedEffects(eventData);
     }
 
-    async _notifyBeforeUpdate(eventData) {
-        // console.log(["_notifyBeforeUpdate", eventData]);
-        // console.log([isNewRound, isNewPhase, isNewTurn]);
-        // console.log([this.round, this.flags.sfrpg.phase, this.turn]);
+    _onUpdate(changed, options, userId) {
+        super._onUpdate(changed, options, userId);
 
-        Hooks.callAll("onBeforeUpdateCombat", eventData);
+        // Get an active GM to run events players may not have permissions to do.
+        if (!game.users.activeGM?.isSelf) return;
+
+        this._handleTimedEffects(options.eventData);
+    }
+
+    /**
+     * Run turn start turn events. This runs only for an active GM. If there are no GMs, this isn't run.
+     * @param {Combatant} combatant The Combatant whose turn just started
+     */
+    async _onStartTurn(combatant) {
+        super._onStartTurn(combatant);
+
+        combatant.actor?._onTurnStart();
+    }
+
+    /**
+     * Run turn end turn events. This runs only for an active GM. If there are no GMs, this isn't run.
+     * @param {Combatant} combatant The Combatant whose turn just ended
+     */
+    async _onEndTurn(combatant) {
+        super._onEndTurn(combatant);
+
+        combatant.actor?._onTurnEnd();
     }
 
     async _notifyAfterUpdate(eventData) {
-        // console.log(["_notifyAfterUpdate", eventData]);
-        // console.log([isNewRound, isNewPhase, isNewTurn]);
-        // console.log([this.round, this.flags.sfrpg.phase, this.turn]);
 
         const combatType = this.getCombatType();
         const combatChatSetting = game.settings.get('sfrpg', `${combatType}ChatCards`);
 
         if (eventData.isNewRound && (combatChatSetting !== "disabled" || combatChatSetting === "roundsTurns")) {
-            // console.log(`Starting new round! New phase is ${eventData.newPhase.name}, it is now the turn of: ${eventData.newCombatant?.name || "the GM"}!`);
             await this._printNewRoundChatCard(eventData);
         }
 
         if (eventData.isNewPhase && (combatChatSetting === "enabled" || combatChatSetting === "roundsPhases")) {
-            // console.log(`Starting ${eventData.newPhase.name} phase! It is now the turn of: ${eventData.newCombatant?.name || "the GM"}!`);
             await this._printNewPhaseChatCard(eventData);
         }
 
         if (eventData.newCombatant && (combatChatSetting === "enabled" || combatChatSetting === "roundsTurns")) {
-            // console.log(`[${eventData.newPhase.name}] It is now the turn of: ${eventData.newCombatant?.name || "the GM"}!`);
             await this._printNewTurnChatCard(eventData);
         }
 
@@ -448,7 +464,7 @@ export class CombatSFRPG extends Combat {
 
         // Create the chat message
         const chatData = {
-            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             speaker: ChatMessage.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
             content: html
         };
@@ -486,7 +502,7 @@ export class CombatSFRPG extends Combat {
 
         // Create the chat message
         const chatData = {
-            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             speaker: ChatMessage.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
             content: html
         };
@@ -524,7 +540,7 @@ export class CombatSFRPG extends Combat {
 
         // Create the chat message
         const chatData = {
-            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             speaker: ChatMessage.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
             whisper: eventData.newCombatant.hidden ? ChatMessage.getWhisperRecipients("GM") : [],
             content: html
@@ -699,7 +715,7 @@ export class CombatSFRPG extends Combat {
             updates.push({_id: id, initiative: roll.total});
 
             // Construct chat message data
-            const messageData = mergeObject({
+            const messageData = foundry.utils.mergeObject({
                 speaker: {
                     scene: game.scenes.current?.id,
                     actor: combatant.actor ? combatant.actor.id : null,
@@ -724,7 +740,7 @@ export class CombatSFRPG extends Combat {
                 content: explainedRollContent,
                 rollMode: combatant.hidden && (rollMode === "roll") ? "gmroll" : rollMode,
                 roll: roll,
-                type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+                type: CONST.CHAT_MESSAGE_STYLES.ROLL,
                 sound: CONFIG.sounds.dice
             };
 
