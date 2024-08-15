@@ -118,7 +118,7 @@ export class TraitSelectorSFRPG extends FormApplication {
             newList.insertBefore(propertyElement, targetListItem);
 
             // If the box has been newly checked, append the text box and isObject data if needed
-            if (formData[key].needsExtension === 'true' && newList === selectedList) {
+            if (formData[key].needsTextExtension === 'true' && newList === selectedList) {
                 const extensionTextBox = document.createElement("input");
                 extensionTextBox.type = "text";
                 extensionTextBox.className = "extension";
@@ -128,7 +128,7 @@ export class TraitSelectorSFRPG extends FormApplication {
             }
 
             // Remove the extension text box if it's being unchecked and it's needed
-            if (formData[key].needsExtension && newList === unselectedList) {
+            if (formData[key].needsTextExtension && newList === unselectedList) {
                 for (const child of propertyElement.children) {
                     if (child.className === 'extension') {
                         child.remove();
