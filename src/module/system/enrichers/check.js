@@ -132,10 +132,11 @@ export default class CheckEnricher extends BaseEnricher {
         const actor = _token?.actor ?? game.user?.character;
         if (!actor) return ui.notifications.error("You must have a token or an actor selected.");
         const id = CheckNameHelper.shortFormName(data.type);
+        const dc = data.dc;
 
-        if      (id in CONFIG.SFRPG.skills)    actor.rollSkill(id, { event });
-        else if (id in CONFIG.SFRPG.saves)     actor.rollSave(id, { event });
-        else if (id in CONFIG.SFRPG.abilities) actor.rollAbility(id, { event });
+        if      (id in CONFIG.SFRPG.skills)    actor.rollSkill(id, { event, dc });
+        else if (id in CONFIG.SFRPG.saves)     actor.rollSave(id, { event, dc });
+        else if (id in CONFIG.SFRPG.abilities) actor.rollAbility(id, { event, dc });
 
     }
 

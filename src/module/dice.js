@@ -161,9 +161,10 @@ export class DiceSFRPG {
     * @param {Number}               [data.fumble]      The value of d20 result which represents a critical failure
     * @param {onD20DialogClosed}    data.onClose       Callback for actions to take when the dialog form is closed
     * @param {DialogOptions}        data.dialogOptions Modal dialog options
+    * @param {difficulty}           data.difficulty    Optional parameter for checks
     */
     static async d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true, rollOptions = {},
-        critical = 20, fumble = 1, chatMessage = true, onClose, dialogOptions, actorContextKey = "actor" }) {
+        critical = 20, fumble = 1, chatMessage = true, onClose, dialogOptions, actorContextKey = "actor", difficulty = undefined}) {
 
         flavor = `${title}${(flavor ? " <br> " + flavor : "")}`;
 
@@ -303,6 +304,11 @@ export class DiceSFRPG {
                 messageData.content = await roll.render({ htmlData: htmlData, customTooltip: finalFormula.rollDices });
                 if (rollOptions?.actionTarget) {
                     messageData.content = DiceSFRPG.appendTextToRoll(messageData.content, game.i18n.format("SFRPG.Items.Action.ActionTarget.ChatMessage", {actionTarget: rollOptions.actionTargetSource[rollOptions.actionTarget]}));
+                }
+
+                if (difficulty) {
+                    const successes = roll.terms[0].results.reduce((acc, r) => acc += r.result > difficulty ? 1 : 0, 0);
+                    messageData.flavor += successes > 0 ? '\nSUCCESS!' : '\nFAILURE!';
                 }
 
                 ChatMessage.create(messageData);
