@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-/* const itemDataPaths = [
+const itemDataPaths = [
     "./src/items/equipment",
     "./src/items/archetype-features",
     "./src/items/class-features",
@@ -11,18 +11,19 @@ const fs = require('fs');
     "./src/items/theme-features",
     "./src/items/themes",
     "./src/items/universal-creature-rules"
-]; */
-
-const itemDataPaths = [
-    "./src/items/equipment"
 ];
 
 const actorDataPaths = [
-    "./src/items/alien-archives"
+    "./src/items/alien-archives",
+    "./src/items/characters",
+    "./src/items/creature-companions",
+    "./src/items/hazards",
+    "./src/items/starships",
+    "./src/items/vehicles"
 ];
 
 try {
-    /* for (const path of actorDataPaths) {
+    for (const path of actorDataPaths) {
         fs.readdir(path, 'utf8', (err, files) => {
             if (err) throw err;
 
@@ -35,23 +36,26 @@ try {
 
                 const actor = JSON.parse(json);
                 const items = actor.items;
-
                 const newItems = [];
-                for (const item of actor.items) {
-                    if (item.properties) {
 
+                for (const item of items) {
+                    const propertyOuts = propertyReplace(item.system.properties);
+                    if (propertyOuts[0]) {
+                        item.system.properties = propertyOuts[1];
+                        clean = true;
                     }
+                    newItems.push(item);
                 }
 
                 if (clean) {
+                    actor.items = newItems;
                     const output = JSON.stringify(actor, null, 2);
-
                     fs.writeFileSync(`${path}/${file}`, output);
                     console.log(`Migrated ${actor.name}`);
                 }
             }
         });
-    } */
+    }
 
     for (const path of itemDataPaths) {
         fs.readdir(path, 'utf8', (err, files) => {
@@ -69,7 +73,6 @@ try {
                 if (propertyOuts[0]) {
                     item.system.properties = propertyOuts[1];
                     const output = JSON.stringify(item, null, 2);
-
                     fs.writeFileSync(`${path}/${file}`, output);
                     console.log(`Migrated ${item.name}`);
                 }
