@@ -308,8 +308,7 @@ export class DiceSFRPG {
                 }
 
                 if (difficulty) {
-                    const successes = roll.terms[0].results.reduce((acc, r) => acc += r.result > difficulty ? 1 : 0, 0);
-                    messageData.flavor = `<span style="color:${successes > 0 ? 'green' : 'red'}"><h2>${successes > 0 ? 'Success' : 'Failure'}</h2></span>${messageData.flavor}${displayDifficulty ? ` (DC ${difficulty})` : ''}`;
+                    messageData.flavor = `<span style="color:${roll.total > difficulty ? 'green' : 'red'}"><h2>${roll.total > difficulty ? 'Success' : 'Failure'}</h2></span>${messageData.flavor}${displayDifficulty ? ` (DC ${difficulty})` : ''}`;
                 }
 
                 ChatMessage.create(messageData);
