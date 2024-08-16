@@ -162,9 +162,10 @@ export class DiceSFRPG {
     * @param {onD20DialogClosed}    data.onClose       Callback for actions to take when the dialog form is closed
     * @param {DialogOptions}        data.dialogOptions Modal dialog options
     * @param {difficulty}           data.difficulty    Optional parameter for checks
+    * @param {displayDifficulty}    data.displayDifficulty    Optional parameter to display check difficulty
     */
     static async d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true, rollOptions = {},
-        critical = 20, fumble = 1, chatMessage = true, onClose, dialogOptions, actorContextKey = "actor", difficulty = undefined}) {
+        critical = 20, fumble = 1, chatMessage = true, onClose, dialogOptions, actorContextKey = "actor", difficulty = undefined, displayDifficulty = false}) {
 
         flavor = `${title}${(flavor ? " <br> " + flavor : "")}`;
 
@@ -308,7 +309,7 @@ export class DiceSFRPG {
 
                 if (difficulty) {
                     const successes = roll.terms[0].results.reduce((acc, r) => acc += r.result > difficulty ? 1 : 0, 0);
-                    messageData.flavor += successes > 0 ? '\nSUCCESS!' : '\nFAILURE!';
+                    messageData.flavor = `<span style="color:${successes > 0 ? 'green' : 'red'}"><h2>${successes > 0 ? 'Success' : 'Failure'}</h2></span>${messageData.flavor}${displayDifficulty ? ` (DC ${difficulty})` : ''}`;
                 }
 
                 ChatMessage.create(messageData);
