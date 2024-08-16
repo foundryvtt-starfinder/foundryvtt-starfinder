@@ -1,18 +1,18 @@
 <div class="bubble">
-    <h3 class="bubble-header">{{ localize "SFRPG.Items.Weapon.Properties" }}</h3>
-
-    <div class="form-group stacked weapon-properties">
+    <h3 class="bubble-header">
         <label>
-            {{ localize "SFRPG.Items.Weapon.Properties" }}&nbsp;
             <a class="trait-selector"
                 data-tooltips="weaponPropertiesTooltips"
                 data-choices="weaponProperties"
                 data-format="itemProperties"
                 data-location="system.properties"
                 data-title="{{localize "SFRPG.Items.Weapon.Properties"}}">
-                <i class="fas fa-edit"></i>
+                {{ localize "SFRPG.Items.Weapon.Properties" }}&nbsp;&nbsp;<i class="fas fa-edit"></i>
             </a>
         </label>
+    </h3>
+
+    <div class="form-group stacked weapon-properties">
 
         <ul class="traits-list">
             {{#each itemData.properties as |property name|}}
