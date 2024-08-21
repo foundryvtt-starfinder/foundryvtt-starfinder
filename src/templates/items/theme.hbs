@@ -46,12 +46,13 @@
                         <div class="form-fields">
                             <select name="system.abilityMod.ability">
                                 {{#select itemData.abilityMod.ability}}
+                                <option value=""></option>
                                 {{#each config.abilities as |ability key|}}
                                 <option value="{{key}}">{{ability}}</option>
                                 {{/each}}
                                 {{/select}}
                             </select>
-                            <input type="text" name="system.abilityMod.mod" value="{{itemData.abilityMod.mod}}" data-dtype="Number" />                    
+                            <input type="text" name="system.abilityMod.mod" value="{{itemData.abilityMod.mod}}" data-dtype="Number" />
                         </div>
                     </div>
 
@@ -59,6 +60,7 @@
                         <label>{{ localize "SFRPG.Items.Theme.Skill" }}</label>
                         <select name="system.skill">
                             {{#select itemData.skill}}
+                            <option value=""></option>
                             {{#each config.skills as |skill skl|}}
                             <option value="{{skl}}">{{skill}}</option>
                             {{/each}}
