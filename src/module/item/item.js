@@ -1561,7 +1561,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             chatMessage: options.chatMessage,
             content: content,
             rollMode: game.settings.get("core", "rollMode"),
-            roll: rollResult.roll,
+            rolls: [rollResult.roll],
             type: CONST.CHAT_MESSAGE_STYLES.ROLL,
             sound: CONFIG.sounds.dice
         });
@@ -1685,7 +1685,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             flavor: `${this.name} recharge check - ${success ? "success!" : "failure!"}`,
             whisper: (["gmroll", "blindroll"].includes(rollMode)) ? ChatMessage.getWhisperRecipients("GM") : null,
             blind: rollMode === "blindroll",
-            roll: roll,
+            rolls: [roll],
             speaker: ChatMessage.getSpeaker({
                 actor: this.actor,
                 alias: this.actor.name

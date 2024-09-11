@@ -919,7 +919,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             speaker: ChatMessage.getSpeaker({ actor: speakerActor }),
             content: rollContent,
             rollMode: rollMode,
-            roll: rollResult.roll,
+            rolls: [rollResult.roll],
             type: CONST.CHAT_MESSAGE_STYLES.ROLL,
             sound: CONFIG.sounds.dice
         });
