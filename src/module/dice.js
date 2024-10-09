@@ -195,17 +195,8 @@ export class DiceSFRPG {
 
         const partMapper = (part) => {
             if (part instanceof Object) {
-                if (part.explanation) {
-                    if (part.score) {
-                        return `${part.score}[${part.explanation}]`;
-                    }
-                    return `0[${part.explanation}]`;
-                } else {
-                    if (part.score) {
-                        return `${part.score}`;
-                    }
-                    return `0`;
-                }
+                const explanation = part.explanation? `[${part.explanation}]`: "";
+                return `${part.score || "0"}${explanation}`;
             }
             return part;
         };
@@ -461,6 +452,7 @@ export class DiceSFRPG {
     * @param {string}               data.flavor        Any flavor text associated with this roll
     * @param {onDamageDialogClosed} data.onClose       Callback for actions to take when the dialog form is closed
     * @param {Object}               data.dialogOptions Modal dialog options
+    * @returns {Promise<?Roll>}
     */
     static async damageRoll({ event = new Event(''), parts, criticalData, rollContext, title, speaker, flavor, chatMessage = true, onClose, dialogOptions }) {
         flavor = `${title || ""}${(flavor ? " - " + flavor : "")}`;
@@ -510,7 +502,36 @@ export class DiceSFRPG {
             return acc;
         }, []);
 
-        const options = {
+        const finalParts = [];
+        const damageSections = [];
+        for (const part of parts) {
+            if (part instanceof Object) {
+                if (part.isDamageSection) {
+                    damageSections.push(part);
+
+                    const tempTree = new RollTree({
+                        buttons: buttons,
+                        defaultButton: "normal",
+                        skipUI: true,
+                    });
+                    await tempTree.buildRoll(part.formula, rollContext, async (button, rollMode, finalFormula, na) => {
+                        part.formula = finalFormula.finalRoll;
+                    });
+                } else {
+                    let explanation = part.explanation ? `[${part.explanation}]` : "";
+                    finalParts.push(`${part.formula || "0"}${explanation}`);
+                }
+            } else {
+                finalParts.push(formula);
+            }
+        }
+
+        if (damageSections.length > 0) {
+            finalParts.unshift("<damageSection>");
+        }
+
+        const formula = finalParts.join(" + ");
+        const tree = new RollTree({
             debug: false,
             buttons: buttons,
             defaultButton: "normal",
@@ -519,50 +540,8 @@ export class DiceSFRPG {
             mainDie: "",
             dialogOptions: dialogOptions,
             parts,
-            useRawStrings: false
-        };
-
-        const finalParts = [];
-        const damageSections = [];
-        for (const part of parts) {
-            if (part instanceof Object) {
-                if (part.isDamageSection) {
-                    damageSections.push(part);
-
-                    const additionalOptions = foundry.utils.deepClone(options);
-                    additionalOptions.skipUI = true;
-
-                    const tempTree = new RollTree(additionalOptions);
-                    const evaluatedPartFormula = await tempTree.buildRoll(part.formula, rollContext, async (button, rollMode, finalFormula, na) => {
-                        part.formula = finalFormula.finalRoll;
-                    });
-                    continue;
-                }
-
-                if (part.explanation) {
-                    if (part.formula) {
-                        finalParts.push(`${part.formula}[${part.explanation}]`);
-                    } else {
-                        finalParts.push(`0[${part.explanation}]`);
-                    }
-                } else {
-                    if (part.formula) {
-                        finalParts.push(`${part.formula}`);
-                    } else {
-                        finalParts.push(`0`);
-                    }
-                }
-            } else {
-                finalParts.push(formula);
-            }
-        }
-
-        if (damageSections.length > 0) {
-            finalParts.splice(0, 0, "<damageSection>");
-        }
-
-        const formula = finalParts.join(" + ");
-        const tree = new RollTree(options);
+            useRawStrings: false,
+        });
         return await tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormula, part) => {
             if (button === 'cancel') {
                 if (onClose) {
