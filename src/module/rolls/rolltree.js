@@ -17,7 +17,7 @@ export default class RollTree {
      * @param {string} formula The formula for the Roll
      * @param {RollContext} contexts The data context for this roll
      * @param {onRollBuilt} callback Function called when the Roll is built.
-     * @returns Stuff
+     * @returns {Promise<bool>}  `true` if roll was performed, `false` if it was canceled
      */
     async buildRoll(formula, contexts, callback) {
         this.formula = formula;
@@ -41,7 +41,7 @@ export default class RollTree {
             if (!context) {
                 console.log(`Cannot find context for variable '${variable}', substituting with a 0.`);
                 const regexp = new RegExp(variable, "gi");
-                this.formula = this.formula.replace(regexp, "0");
+                formula = formula.replace(regexp, "0");
             }
         }
 
@@ -60,11 +60,10 @@ export default class RollTree {
             enabledParts = parts?.filter(x => x.enabled);
         }
 
-        let callbackResult = null;
         if (button === null) {
             console.log('Roll was cancelled');
             await callback('cancel', "none", null);
-            return;
+            return false;
         }
 
         for (const [key, value] of Object.entries(this.nodes)) {
@@ -109,7 +108,7 @@ export default class RollTree {
                     if (enabledParts.length > 1) {
                         part.partIndex = game.i18n.format("SFRPG.Damage.PartIndex", {partIndex: partIndex + 1, partCount: enabledParts.length});
                     }
-                    callbackResult = await callback(button, rollMode, finalSectionFormula, part, this.rootNode, this.rollMods, bonus);
+                    await callback(button, rollMode, finalSectionFormula, part, this.rootNode, this.rollMods, bonus);
                 }
             }
         } else {
@@ -133,16 +132,11 @@ export default class RollTree {
             }
 
             if (callback) {
-                callbackResult = await callback(button, rollMode, finalRollFormula, this.rootNode, this.rollMods, bonus);
+                await callback(button, rollMode, finalRollFormula, this.rootNode, this.rollMods, bonus);
             }
         }
 
-        if (this.options.skipUI) {
-            return {button, rollMode, finalRollFormula, callbackResult};
-        }
-        else {
-            return {button, rollMode, bonus, parts, callbackResult};
-        }
+        return true;
     }
 
     populate() {

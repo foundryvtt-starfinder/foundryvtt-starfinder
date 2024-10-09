@@ -161,6 +161,7 @@ export class DiceSFRPG {
     * @param {Number}               [data.fumble]      The value of d20 result which represents a critical failure
     * @param {onD20DialogClosed}    data.onClose       Callback for actions to take when the dialog form is closed
     * @param {DialogOptions}        data.dialogOptions Modal dialog options
+    * @Returns {Promise<void>}
     */
     static async d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true, rollOptions = {},
         critical = 20, fumble = 1, chatMessage = true, onClose, dialogOptions, actorContextKey = "actor" }) {
@@ -203,7 +204,7 @@ export class DiceSFRPG {
         const formula = parts.map(partMapper).join(" + ");
 
         const tree = new RollTree(options);
-        return await tree.buildRoll(formula, rollContext, async (button, rollMode, unusedFinalFormula, node, rollMods, bonus = null) => {
+        await tree.buildRoll(formula, rollContext, async (button, rollMode, unusedFinalFormula, node, rollMods, bonus = null) => {
             if (button === "cancel") {
                 if (onClose) {
                     onClose(null, null, null);
@@ -299,7 +300,6 @@ export class DiceSFRPG {
 
             return roll;
         });
-
     }
 
     /**
@@ -452,14 +452,14 @@ export class DiceSFRPG {
     * @param {string}               data.flavor        Any flavor text associated with this roll
     * @param {onDamageDialogClosed} data.onClose       Callback for actions to take when the dialog form is closed
     * @param {Object}               data.dialogOptions Modal dialog options
-    * @returns {Promise<?Roll>}
+    * @returns {Promise<bool>}                         `true` if roll was performed, `false` if it was canceled
     */
     static async damageRoll({ event = new Event(''), parts, criticalData, rollContext, title, speaker, flavor, chatMessage = true, onClose, dialogOptions }) {
         flavor = `${title || ""}${(flavor ? " - " + flavor : "")}`;
 
         if (!rollContext?.isValid()) {
             console.log(['Invalid rollContext', rollContext]);
-            return null;
+            return false;
         }
 
         /** New roll formula system */
