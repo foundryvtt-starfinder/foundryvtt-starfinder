@@ -287,9 +287,9 @@ export default class RollDialog extends Dialog {
      * @param {Modifier[]} availableModifiers
      * @param {string} mainDie
      * @param {DialogOptions} options
-     * @returns {RollDialog}
+     * @returns {Promise<{button: string, rollMode: string, bonus: string, parts: DamagePart[]}>}
      */
-    static async showRollDialog(rollTree, formula, contexts, availableModifiers = [], mainDie, options = {}) {
+    static showRollDialog(rollTree, formula, contexts, availableModifiers = [], mainDie, options = {}) {
         return new Promise(resolve => {
             const buttons = options.buttons || { roll: { id: "roll", label: game.i18n.localize("SFRPG.Rolls.Dice.Roll") } };
             const defaultButton = options.defaultButton || (Object.values(buttons)[0].id ?? Object.values(buttons)[0].label);
@@ -306,7 +306,7 @@ export default class RollDialog extends Dialog {
                     buttons: buttons,
                     default: defaultButton,
                     close: (button, rollMode, bonus, parts) => {
-                        resolve({button, rollMode, bonus, parts});
+                        resolve({button, rollMode, bonus: bonus?.trim(), parts});
                     }
                 },
                 options: options.dialogOptions || {}

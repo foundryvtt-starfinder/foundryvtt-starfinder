@@ -47,61 +47,19 @@ export default class RollTree {
 
         const allRolledMods = this.populate();
 
+        let button, rollMode, bonus, enabledParts;
         if (this.options.skipUI) {
-            const button = this.options.defaultButton || (this.options.buttons ? (Object.values(this.options.buttons)[0].id ?? Object.values(this.options.buttons)[0].label) : "roll");
-            const rollMode = game.settings.get("core", "rollMode");
-
-            for (const [key, value] of Object.entries(this.nodes)) {
-                if (value.referenceModifier) {
-                    value.isEnabled = value.referenceModifier.enabled;
-                }
-            }
-
-            const parts = this.options.parts?.filter(x => x.isDamageSection);
-            const finalRollFormula = this.rootNode.resolve(0, this.rollMods);
-            let callbackResult = null;
-            if (parts?.length > 0) {
-                for (const part of parts) {
-                    const finalSectionFormula = foundry.utils.deepClone(finalRollFormula);
-
-                    if (finalSectionFormula.finalRoll.includes("<damageSection>")) {
-                        const damageSectionFormula = part?.formula ?? "0";
-                        if (part.isPrimarySection) {
-                            finalSectionFormula.finalRoll = finalSectionFormula.finalRoll.replace("<damageSection>", damageSectionFormula);
-                            finalSectionFormula.formula = finalSectionFormula.formula.replace("<damageSection>", damageSectionFormula);
-                        } else {
-                            finalSectionFormula.finalRoll = damageSectionFormula;
-                            finalSectionFormula.formula = damageSectionFormula;
-                        }
-                    }
-
-                    if (this.options.debug) {
-                        console.log([`Final roll results outcome`, formula, allRolledMods, finalSectionFormula]);
-                    }
-
-                    if (callback) {
-                        if (parts.length > 1) {
-                            const partIndex = parts.indexOf(part);
-                            const partCount = parts.length;
-                            part.partIndex = game.i18n.format("SFRPG.Damage.PartIndex", {partIndex: partIndex + 1, partCount: partCount});
-                        }
-                        callbackResult = await callback(button, rollMode, finalSectionFormula, part, this.rootNode, this.rollMods);
-                    }
-                }
-            } else {
-                if (this.options.debug) {
-                    console.log([`Final roll results outcome`, formula, allRolledMods, finalRollFormula]);
-                }
-
-                if (callback) {
-                    callbackResult = await callback(button, rollMode, finalRollFormula, this.rootNode, this.rollMods);
-                }
-            }
-
-            return {button: button, rollMode: rollMode, finalRollFormula: finalRollFormula, callbackResult};
+            button = this.options.defaultButton || (this.options.buttons ? (Object.values(this.options.buttons)[0].id ?? Object.values(this.options.buttons)[0].label) : "roll");
+            rollMode = game.settings.get("core", "rollMode");
+            bonus = null;
+            // TODO(levirak): don't roll every part when skipping UI? (E.g., when holding SHIFT)
+            enabledParts = this.options.parts?.filter(x => x.isDamageSection);
+        } else {
+            let parts;
+            ({button, rollMode, bonus, parts} = await this.displayUI(formula, contexts, allRolledMods));
+            enabledParts = parts?.filter(x => x.enabled);
         }
 
-        let {button, rollMode, bonus, parts} = await this.displayUI(formula, contexts, allRolledMods);
         let callbackResult = null;
         if (button === null) {
             console.log('Roll was cancelled');
@@ -116,9 +74,8 @@ export default class RollTree {
         }
 
         const finalRollFormula = this.rootNode.resolve(0, this.rollMods);
-        const enabledParts = parts?.filter(x => x.enabled);
         if (enabledParts?.length > 0) {
-            for (const part of enabledParts) {
+            for (const [partIndex, part] of enabledParts.entries()) {
                 const finalSectionFormula = foundry.utils.deepClone(finalRollFormula);
 
                 if (finalSectionFormula.finalRoll.includes("<damageSection>")) {
@@ -133,8 +90,8 @@ export default class RollTree {
 
                 }
 
-                bonus = bonus.trim();
                 if (bonus) {
+                    // TODO(levirak): should the bonus be applied to every damage section?
                     const operators = ['+', '-', '*', '/'];
                     if (!operators.includes(bonus[0])) {
                         finalSectionFormula.finalRoll += " +";
@@ -150,21 +107,17 @@ export default class RollTree {
 
                 if (callback) {
                     if (enabledParts.length > 1) {
-                        const partIndex = enabledParts.indexOf(part);
-                        const partCount = enabledParts.length;
-                        part.partIndex = game.i18n.format("SFRPG.Damage.PartIndex", {partIndex: partIndex + 1, partCount: partCount});
+                        part.partIndex = game.i18n.format("SFRPG.Damage.PartIndex", {partIndex: partIndex + 1, partCount: enabledParts.length});
                     }
                     callbackResult = await callback(button, rollMode, finalSectionFormula, part, this.rootNode, this.rollMods, bonus);
                 }
             }
         } else {
             if (finalRollFormula.finalRoll.includes("<damageSection>")) {
-                const damageSectionFormula = part?.formula ?? "0";
-                finalRollFormula.finalRoll = finalRollFormula.finalRoll.replace("<damageSection>", damageSectionFormula);
-                finalRollFormula.formula = finalRollFormula.formula.replace("<damageSection>", damageSectionFormula);
+                finalRollFormula.finalRoll = finalRollFormula.finalRoll.replace("<damageSection>", "0");
+                finalRollFormula.formula = finalRollFormula.formula.replace("<damageSection>", "0");
             }
 
-            bonus = bonus.trim();
             if (bonus) {
                 const operators = ['+', '-', '*', '/'];
                 if (!operators.includes(bonus[0])) {
@@ -180,16 +133,16 @@ export default class RollTree {
             }
 
             if (callback) {
-                if (enabledParts.length > 1) {
-                    const partIndex = enabledParts.indexOf(part);
-                    const partCount = enabledParts.length;
-                    part.partIndex = game.i18n.format("SFRPG.Damage.PartIndex", {partIndex: partIndex + 1, partCount: partCount});
-                }
                 callbackResult = await callback(button, rollMode, finalRollFormula, this.rootNode, this.rollMods, bonus);
             }
         }
 
-        return {button, rollMode, bonus, parts, callbackResult};
+        if (this.options.skipUI) {
+            return {button, rollMode, finalRollFormula, callbackResult};
+        }
+        else {
+            return {button, rollMode, bonus, parts, callbackResult};
+        }
     }
 
     populate() {
@@ -225,14 +178,9 @@ export default class RollTree {
         return availableModifiers;
     }
 
-    async displayUI(formula, contexts, availableModifiers) {
+    displayUI(formula, contexts, availableModifiers) {
         if (this.options.debug) {
             console.log(["Available modifiers", availableModifiers]);
-        }
-        if (this.options.skipUI) {
-            const firstButton = this.options.defaultButton || (this.options.buttons ? Object.values(this.options.buttons)[0].id ?? Object.values(this.options.buttons)[0].label : "roll");
-            const defaultRollMode = game.settings.get("core", "rollMode");
-            return new Promise((resolve) => { resolve([firstButton, defaultRollMode, ""]); });
         }
         return RollDialog.showRollDialog(
             this,
