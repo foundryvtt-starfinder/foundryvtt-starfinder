@@ -42,8 +42,7 @@ export default class RollTree {
             const [context, remainingVariable] = RollNode.getContextForVariable(variable, contexts);
             if (!context) {
                 console.log(`Cannot find context for variable '${variable}', substituting with a 0.`);
-                const regexp = new RegExp(variable, "gi");
-                formula = formula.replace(regexp, "0");
+                formula = formula.replaceAll(variable, "0");
             }
         }
 

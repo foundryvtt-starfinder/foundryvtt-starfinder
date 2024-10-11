@@ -125,24 +125,23 @@ export default class RollDialog extends Dialog {
         if (this.parts?.length > 0) {
             data.hasDamageTypes = true;
 
-            for (const part of this.parts) {
-                const partIndex = this.parts.indexOf(part);
+            if (this.parts[0].enabled === undefined) {
+                this.parts[0].enabled = true;
+            }
 
+            for (const [partIndex, part] of this.parts.entries()) {
                 // If there is no name, create the placeholder name
                 if (!part.name && this.parts.length > 1) {
                     part.name = game.i18n.format("SFRPG.Items.Action.DamageSection", {section: partIndex});
                 }
 
-                if (partIndex === 0 && part.enabled === undefined) {
-                    part.enabled = true;
-                }
-
                 // Create type string out of localized parts
                 let typeString = "";
                 if (part.types && !foundry.utils.isEmpty(part.types)) {
-                    typeString = `${(Object.entries(part.types).filter(type => type[1])
-                        .map(type => SFRPG.damageTypes[type[0]])
-                        .join(` & `))}`;
+                    typeString = Object.entries(part.types)
+                        .filter(([key, value]) => value)
+                        .map(([key, value]) => SFRPG.damageTypes[key])
+                        .join(" & ");
                 }
                 part.type = typeString;
 

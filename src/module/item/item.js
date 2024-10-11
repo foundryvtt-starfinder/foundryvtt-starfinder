@@ -1250,7 +1250,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Define Roll parts
         /** @type {DamageParts[]} */
-        const parts = foundry.utils.deepClone(itemData.damage.parts.map(part => part));
+        const parts = foundry.utils.deepClone(itemData.damage.parts);
         for (const part of parts) {
             part.isDamageSection = true;
         }
@@ -1422,7 +1422,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             ui.notifications.error(game.i18n.localize("SFRPG.VehicleAttackSheet.Errors.NoDamage"));
         }
 
-        const parts = itemData.damage.parts.map(part => part);
+        const parts = foundry.utils.deepClone(itemData.damage.parts);
         for (const part of parts) {
             part.isDamageSection = true;
         }
@@ -1469,7 +1469,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             throw new Error("you may not make a Damage Roll with this item");
         }
 
-        const parts = foundry.utils.deepClone(itemData.damage.parts.map(part => part));
+        const parts = foundry.utils.deepClone(itemData.damage.parts);
         for (const part of parts) {
             part.isDamageSection = true;
         }

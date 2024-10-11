@@ -418,21 +418,6 @@ export class DiceSFRPG {
             Critical: { id: "critical", label: game.i18n.format("SFRPG.Rolls.Dice.CriticalDamage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.CriticalDamageTooltip") }
         };
 
-        const getDamageTypeForPart = (part) => {
-            if (part.types && !foundry.utils.isEmpty(part.types)) {
-                const filteredTypes = Object.entries(part.types).filter(type => type[1]);
-                const obj = { types: [], operator: "" };
-
-                for (const type of filteredTypes) {
-                    obj.types.push(type[0]);
-                }
-
-                obj.operator = "and";
-
-                return obj;
-            }
-        };
-
         /** @type {DamageType[]} */
         const damageTypes = parts.reduce((acc, cur) => {
             if (cur.types && !foundry.utils.isEmpty(cur.types)) {

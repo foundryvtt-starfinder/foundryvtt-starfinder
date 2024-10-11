@@ -18,8 +18,7 @@ export default class StackModifiers extends Closure {
      */
     process(mods, context, options = { actor: null }) {
         const modifiers = mods;
-        for (let modifiersI = 0; modifiersI < modifiers.length; modifiersI++) {
-            const modifier = modifiers[modifiersI];
+        for (let modifier of modifiers) {
             const actor = options.actor;
             const formula = String(modifier.modifier);
 
@@ -58,8 +57,7 @@ export default class StackModifiers extends Closure {
     async processAsync(mods, context, options = { actor: null }) {
         const modifiers = mods;
         if (modifiers.length > 0) {
-            for (let modifiersI = 0; modifiersI < modifiers.length; modifiersI++) {
-                const modifier = modifiers[modifiersI];
+            for (let modifier of modifiers) {
                 const actor = options.actor;
                 const formula = String(modifier.modifier);
 
@@ -74,15 +72,15 @@ export default class StackModifiers extends Closure {
                             dice: []
                         };
                     }
-                    modifiers[modifiersI].max = evaluatedRoll.total;
-                    modifiers[modifiersI].isDeterministic = roll.isDeterministic;
-                    modifiers[modifiersI].dices = [];
+                    modifier.max = evaluatedRoll.total;
+                    modifier.isDeterministic = roll.isDeterministic;
+                    modifier.dices = [];
 
                     if (!roll.isDeterministic) {
                         for (let allDiceI = 0; allDiceI < evaluatedRoll.dice.length; allDiceI++) {
                             const die = evaluatedRoll.dice[allDiceI];
                             if (!die) continue;
-                            modifiers[modifiersI].dices.push({
+                            modifier.dices.push({
                                 formula: `${die.number}d${die.faces}`,
                                 faces: die.faces,
                                 total: die.results.reduce((pv, cv) => pv + cv.result, 0)
@@ -90,7 +88,7 @@ export default class StackModifiers extends Closure {
                         }
                     }
                 } else {
-                    modifiers[modifiersI].max = 0;
+                    modifier.max = 0;
                 }
             }
         }

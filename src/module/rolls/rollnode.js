@@ -82,7 +82,7 @@ export default class RollNode {
                 let existingNode = nodes[variable];
                 if (!existingNode) {
                     const childNode = new RollNode(variable, this, this.options, {
-                        variableValue: RollNode._readValue(context.data, remainingVariable) ?? '0',
+                        variableValue: foundry.utils.getProperty(context.data, remainingVariable) ?? '0',
                     });
                     nodes[variable] = childNode;
                     existingNode = childNode;
@@ -187,10 +187,11 @@ export default class RollNode {
 
     static getRolledModifiers(variable, context) {
         let variableString = variable + ".rolledMods";
-        let variableRolledMods = RollNode._readValue(context.data, variableString);
+        let variableRolledMods = foundry.utils.getProperty(context.data, variableString);
+
         if (!variableRolledMods) {
             variableString = variable.substring(0, variable.lastIndexOf('.')) + ".rolledMods";
-            variableRolledMods = RollNode._readValue(context.data, variableString);
+            variableRolledMods = foundry.utils.getProperty(context.data, variableString);
         }
 
         return (variableRolledMods ?? []).reduce((map, mod) => {
@@ -202,11 +203,11 @@ export default class RollNode {
     static getCalculatedModifiers(variable, context) {
         let variableString = variable + ".calculatedMods";
         const words = variable.split('.');
-        let variableCalculatedMods = RollNode._readValue(context.data, variableString);
+        let variableCalculatedMods = foundry.utils.getProperty(context.data, variableString);
         // we don't want to include mods for skill ranks or ability.mod as those are standalone values
         if (!variableCalculatedMods && !words.includes("ranks") && !(words.includes("abilities") && !words.includes("abilityCheckBonus"))) {
             variableString = variable.substring(0, variable.lastIndexOf('.')) + ".calculatedMods";
-            variableCalculatedMods = RollNode._readValue(context.data, variableString);
+            variableCalculatedMods = foundry.utils.getProperty(context.data, variableString);
         }
 
         return (variableCalculatedMods ?? []).reduce((map, mod) => {
@@ -217,11 +218,11 @@ export default class RollNode {
 
     static getTooltips(variable, context, tooltipProp) {
         let variableString = `${variable}.${tooltipProp}`;
-        let tooltips = RollNode._readValue(context.data, variableString);
+        let tooltips = foundry.utils.getProperty(context.data, variableString);
 
         if (!tooltips) {
             variableString = `${variable.substring(0, variable.lastIndexOf('.'))}.${tooltipProp}`;
-            tooltips = RollNode._readValue(context.data, variableString);
+            tooltips = foundry.utils.getProperty(context.data, variableString);
         }
 
         // if we are looking for ranks then don't include all the tooltips just the ones for ranks
@@ -229,17 +230,5 @@ export default class RollNode {
             tooltips = tooltips?.filter((x) => x.toLowerCase().includes("rank"));
         }
         return tooltips ?? [];
-    }
-
-    static _readValue(object, key) {
-        if (!object || !key) return null;
-
-        const tokens = key.split('.');
-        for (const token of tokens) {
-            object = object[token];
-            if (!object) return null;
-        }
-
-        return object;
     }
 }
