@@ -53,7 +53,7 @@ export default class RollTree {
             rollMode = game.settings.get("core", "rollMode");
             bonus = null;
             // TODO(levirak): don't roll every part when skipping UI? (E.g., when holding SHIFT)
-            enabledParts = this.options.parts?.filter(x => x.isDamageSection);
+            enabledParts = this.options.parts;
         } else {
             let parts;
             ({button, rollMode, bonus, parts} = await this.displayUI(formula, contexts, allRolledMods));
@@ -193,7 +193,7 @@ export default class RollTree {
                 defaultButton: this.options.defaultButton,
                 title: this.options.title,
                 dialogOptions: this.options.dialogOptions,
-                parts: this.options.parts?.filter(x => x.isDamageSection)
+                parts: this.options.parts,
             });
     }
 

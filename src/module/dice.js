@@ -539,7 +539,7 @@ export class DiceSFRPG {
             skipUI: ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
             mainDie: "",
             dialogOptions: dialogOptions,
-            parts,
+            parts: damageSections,
             useRawStrings: false,
         });
         return await tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormula, part) => {
