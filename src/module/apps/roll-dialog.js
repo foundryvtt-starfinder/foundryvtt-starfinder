@@ -170,10 +170,10 @@ export default class RollDialog extends Dialog {
                 }
             }
 
-            data.formula = this.formula;
-            if (this.parts?.length === 1) {
-                data.formula = this.formula.replace("<damageSection>", this.parts[0].formula);
-            }
+            data.formula = [
+                (this.parts.length === 1) ? this.parts[0].formula : '<Primary Section>',
+                this.formula,
+            ].filter(Boolean).join(' + ') || '0';
         }
 
         return data;

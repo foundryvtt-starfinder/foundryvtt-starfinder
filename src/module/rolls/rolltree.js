@@ -74,20 +74,19 @@ export default class RollTree {
 
         const finalRollFormula = this.rootNode.resolve(0, this.rollMods);
         if (enabledParts?.length > 0) {
+            /* When the roll tree is passed parts, the primary formula & root node instead describes the bonuses that
+             * are added to the primary section */
             for (const [partIndex, part] of enabledParts.entries()) {
-                const finalSectionFormula = foundry.utils.deepClone(finalRollFormula);
-
-                if (finalSectionFormula.finalRoll.includes("<damageSection>")) {
-                    const damageSectionFormula = part?.formula ?? "0";
-                    if (part.isPrimarySection) {
-                        finalSectionFormula.finalRoll = finalSectionFormula.finalRoll.replace("<damageSection>", damageSectionFormula);
-                        finalSectionFormula.formula = finalSectionFormula.formula.replace("<damageSection>", damageSectionFormula);
-                    } else {
-                        finalSectionFormula.finalRoll = damageSectionFormula;
-                        finalSectionFormula.formula = damageSectionFormula;
-                    }
-
-                }
+                let finalSectionFormula = {
+                    finalRoll: [
+                        part.formula,
+                        part.isPrimarySection ? finalRollFormula.finalRoll : '',
+                    ].filter(Boolean).join(' + ') || '0',
+                    formula: [
+                        part.formula,
+                        part.isPrimarySection ? finalRollFormula.formula : '',
+                    ].filter(Boolean).join(' + ') || '0',
+                };
 
                 if (bonus) {
                     // TODO(levirak): should the bonus be applied to every damage section?
@@ -112,11 +111,6 @@ export default class RollTree {
                 }
             }
         } else {
-            if (finalRollFormula.finalRoll.includes("<damageSection>")) {
-                finalRollFormula.finalRoll = finalRollFormula.finalRoll.replace("<damageSection>", "0");
-                finalRollFormula.formula = finalRollFormula.formula.replace("<damageSection>", "0");
-            }
-
             if (bonus) {
                 const operators = ['+', '-', '*', '/'];
                 if (!operators.includes(bonus[0])) {
