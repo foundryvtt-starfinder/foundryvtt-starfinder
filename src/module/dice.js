@@ -183,17 +183,6 @@ export class DiceSFRPG {
             buttons["Normal"] = { id: "normal", label: game.i18n.format("SFRPG.Rolls.Dice.Roll") };
         }
 
-        const options = {
-            debug: false,
-            buttons: buttons,
-            defaultButton: "normal",
-            title: title,
-            skipUI: ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
-            mainDie: "1d20",
-            dialogOptions: dialogOptions,
-            useRawStrings: false
-        };
-
         const partMapper = (part) => {
             if (part instanceof Object) {
                 const explanation = part.explanation? `[${part.explanation}]`: "";
@@ -203,23 +192,31 @@ export class DiceSFRPG {
         };
         const formula = parts.map(partMapper).join(" + ");
 
-        const tree = new RollTree(options);
-        await tree.buildRoll(formula, rollContext, async (button, rollMode, unusedFinalFormula, node, rollMods, bonus = null) => {
-            if (button === "cancel") {
-                if (onClose) {
-                    onClose(null, null, null);
-                }
-                return null;
+        const tree = new RollTree({
+            debug: false,
+            buttons: buttons,
+            defaultButton: "normal",
+            title: title,
+            skipUI: ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
+            mainDie: "1d20",
+            dialogOptions: dialogOptions,
+            useRawStrings: false
+        });
+        let rollInfo = await tree.buildRoll(formula, rollContext);
+        if (rollInfo.button === "cancel") {
+            if (onClose) {
+                onClose(null, null, null);
             }
-
+        } else {
             let dieRoll = "1d20";
-            if (button === "disadvantage") {
+            if (rollInfo.button === "disadvantage") {
                 dieRoll = "2d20kl";
-            } else if (button === "advantage") {
+            } else if (rollInfo.button === "advantage") {
                 dieRoll = "2d20kh";
             }
 
-            const finalFormula = await this._calcStackingFormula(node, rollMods, bonus, rollContext.allContexts[actorContextKey]?.entity);
+            let node = rollInfo.rolls[0].node;
+            const finalFormula = await this._calcStackingFormula(node, rollInfo.modifiers, rollInfo.bonus, rollContext.allContexts[actorContextKey]?.entity);
 
             finalFormula.finalRoll = `${dieRoll} + ${finalFormula.finalRoll}`;
             finalFormula.formula = `${dieRoll} + ${finalFormula.formula}`;
@@ -256,7 +253,7 @@ export class DiceSFRPG {
                     title: flavor,
                     rollContext,
                     speaker,
-                    rollMode,
+                    rollMode: rollInfo.mode,
                     breakdown: preparedRollExplanation,
                     htmlData,
                     rollType: "normal",
@@ -287,7 +284,7 @@ export class DiceSFRPG {
                 }
 
                 // Create a chat message, applying the appropriate roll type (public, gmroll, etc.)
-                ChatMessage.create(messageData, { rollMode: rollMode });
+                ChatMessage.create(messageData, { rollMode: rollInfo.mode });
             }
 
             if (onClose) {
@@ -297,9 +294,7 @@ export class DiceSFRPG {
             if (errorToThrow) {
                 throw errorToThrow;
             }
-
-            return roll;
-        });
+        }
     }
 
     /**
@@ -342,7 +337,8 @@ export class DiceSFRPG {
             buttons["Normal"] = { id: "normal", label: game.i18n.format("SFRPG.Rolls.Dice.Roll") };
         }
 
-        const options = {
+        const formula = rollFormula || parts.join(" + ");
+        const tree = new RollTree({
             debug: false,
             buttons: buttons,
             defaultButton: "normal",
@@ -351,89 +347,45 @@ export class DiceSFRPG {
             mainDie: mainDie ? "1" + mainDie : null,
             dialogOptions: dialogOptions,
             useRawStrings: useRawStrings
-        };
+        });
+        let rollInfo = await tree.buildRoll(formula, rollContext);
 
-        const formula = rollFormula || parts.join(" + ");
-
-        const tree = new RollTree(options);
-        if (dialogOptions?.skipUI) {
-            /** @type {RollResult|null} */
-            let result = null;
-            await tree.buildRoll(formula, rollContext, async (button, rollMode, unusedFinalFormula, node, rollMods, bonus = null) => {
-                const finalFormula = await this._calcStackingFormula(node, rollMods, bonus, rollContext.allContexts[actorContextKey]?.entity);
-
-                if (mainDie) {
-                    let dieRoll = "1" + mainDie;
-                    if (mainDie === "d20") {
-                        if (button === "disadvantage") {
-                            dieRoll = "2d20kl";
-                        } else if (button === "advantage") {
-                            dieRoll = "2d20kh";
-                        }
-                    }
-
-                    finalFormula.finalRoll = `${dieRoll} + ${finalFormula.finalRoll}`;
-                    finalFormula.formula = `${dieRoll} + ${finalFormula.formula}`;
-                }
-
-                const rollObject = Roll.create(finalFormula.finalRoll, { breakdown, tags, skipUI: true });
-                const roll = await rollObject.evaluate();
-                roll.options.rollMode = rollMode;
-
-                // Flag critical thresholds
-                for (const d of roll.dice) {
-                    if (d.faces === 20) {
-                        d.options.critical = critical;
-                        d.options.fumble = fumble;
-                    }
-                }
-
-                result = {roll: roll, formula: finalFormula};
-            });
-            return result;
-        } else {
-            return new Promise((resolve) => {
-                tree.buildRoll(formula, rollContext, async (button, rollMode, unusedFinalFormula, node, rollMods, bonus = null) => {
-                    if (button === "cancel") {
-                        resolve(null);
-                        return;
-                    }
-
-                    const finalFormula = await this._calcStackingFormula(node, rollMods, bonus, rollContext.allContexts[actorContextKey]?.entity);
-
-                    if (mainDie) {
-                        let dieRoll = "1" + mainDie;
-                        if (mainDie === "d20") {
-                            if (button === "Disadvantage") {
-                                dieRoll = "2d20kl";
-                            } else if (button === "Advantage") {
-                                dieRoll = "2d20kh";
-                            }
-                        }
-                        finalFormula.finalRoll = `${dieRoll} + ${finalFormula.finalRoll}`;
-                        finalFormula.formula = `${dieRoll} + ${finalFormula.formula}`;
-                    }
-
-                    finalFormula.formula = finalFormula.formula.replace(/\+\s*-\s*/gi, "- ").replace(/\+\s*\+\s*/gi, "+ ")
-                        .trim();
-                    finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
-
-                    const rollObject = Roll.create(finalFormula.finalRoll, { breakdown, tags });
-                    const roll = await rollObject.evaluate();
-                    roll.options.rollMode = rollMode;
-
-                    // Flag critical thresholds
-                    for (const d of roll.dice) {
-                        if (d.faces === 20) {
-                            d.options.critical = critical;
-                            d.options.fumble = fumble;
-                        }
-                    }
-
-                    resolve({roll: roll, formula: finalFormula});
-                });
-            });
+        if (rollInfo.button === "cancel") {
+            return null;
         }
+
+        let node = rollInfo.rolls[0].node;
+        const finalFormula = await this._calcStackingFormula(node, rollInfo.modifiers, rollInfo.bonus, rollContext.allContexts[actorContextKey]?.entity);
+
+        if (mainDie) {
+            let dieRoll = "1" + mainDie;
+            if (mainDie === "d20") {
+                if (rollInfo.button === "Disadvantage") {
+                    dieRoll = "2d20kl";
+                } else if (rollInfo.button === "Advantage") {
+                    dieRoll = "2d20kh";
+                }
+            }
+            finalFormula.finalRoll = [dieRoll, finalFormula.finalRoll].filter(Boolean).join(' + ');
+            finalFormula.formula = [dieRoll, finalFormula.formula].filter(Boolean).join(' + ');
+        }
+
+        finalFormula.formula = finalFormula.formula.replace(/\+\s*-\s*/gi, "- ").replace(/\+\s*\+\s*/gi, "+ ").trim();
+        finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
+
+        const rollObject = Roll.create(finalFormula.finalRoll, { breakdown, tags });
+        const roll = await rollObject.evaluate();
+        roll.options.rollMode = rollInfo.mode;
+
+        // Flag critical thresholds
+        for (const d of roll.dice) {
+            if (d.faces === 20) {
+                d.options.critical = critical;
+                d.options.fumble = fumble;
+            }
+        }
+
+        return {roll: roll, formula: finalFormula};
     }
 
     /**
@@ -514,9 +466,8 @@ export class DiceSFRPG {
                         defaultButton: "normal",
                         skipUI: true,
                     });
-                    await tempTree.buildRoll(part.formula, rollContext, async (button, rollMode, finalFormula, na) => {
-                        part.formula = finalFormula.finalRoll;
-                    });
+                    let rollInfo = await tempTree.buildRoll(part.formula, rollContext);
+                    part.formula = rollInfo.rolls[0].formula.finalRoll;
                 } else {
                     let explanation = part.explanation ? `[${part.explanation}]` : "";
                     finalParts.push(`${part.formula || "0"}${explanation}`);
@@ -538,14 +489,12 @@ export class DiceSFRPG {
             parts: damageSections,
             useRawStrings: false,
         });
-        return await tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormula, part) => {
-            if (button === 'cancel') {
-                if (onClose) {
-                    onClose(null, null, null, false);
-                }
-                return null;
+        let rollInfo = await tree.buildRoll(formula, rollContext);
+        if (rollInfo.button === 'cancel') {
+            if (onClose) {
+                onClose(null, null, null, false);
             }
-
+        } else for (let { formula: finalFormula, node: part } of rollInfo.rolls) {
             /** @type {Tag[]} */
             const tags = [];
             /** @type {HtmlData[]} */
@@ -645,7 +594,7 @@ export class DiceSFRPG {
                 }
             }
 
-            const isCritical = (button === "critical");
+            const isCritical = (rollInfo.button === "critical");
             let finalFlavor = foundry.utils.deepClone(flavor);
             if (isCritical) {
                 htmlData.push({ name: "is-critical", value: "true" });
@@ -742,7 +691,7 @@ export class DiceSFRPG {
                     title: finalFlavor,
                     rollContext:  rollContext,
                     speaker: speaker,
-                    rollMode: rollMode,
+                    rollMode: rollInfo.mode,
                     breakdown: preparedRollExplanation,
                     tags: tags,
                     htmlData: htmlData,
@@ -788,7 +737,7 @@ export class DiceSFRPG {
                     }
                 }
 
-                ChatMessage.create(messageData, { rollMode: rollMode });
+                ChatMessage.create(messageData, { rollMode: rollInfo.mode });
             }
 
             if (onClose) {
@@ -798,9 +747,9 @@ export class DiceSFRPG {
             if (errorToThrow) {
                 throw errorToThrow;
             }
+        };
 
-            return roll;
-        });
+        return rollInfo.button !== 'cancel';
     }
 
     static appendTextToRoll(originalRollHTML, textToAppend) {
@@ -921,7 +870,11 @@ export class DiceSFRPG {
         let resultValue = 0;
 
         const tree = new RollTree({skipUI: true});
-        tree.buildRoll(sourceFormula, rollContext, async (button, rollMode, finalFormula) => {
+        tree.buildRoll(sourceFormula, rollContext).then(rollInfo => {
+            // TODO(levirak): latent race condition. This works because JS is single threaded and skipping the UI means
+            // this promise resolves immediately. Control flow completes this `then()` block before carrying on. If
+            // `buildRoll` ever awaits anything else, this could be an issue.
+            let finalFormula = rollInfo.rolls[0].formula;
             try {
                 const formula = Roll.replaceFormulaData(finalFormula.finalRoll, null);
                 resultValue = Roll.safeEval(formula);

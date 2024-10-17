@@ -1,6 +1,14 @@
 import { SFRPGModifierType } from "../modifiers/types.js";
 import RollTree from "./rolltree.js";
 
+/**
+ * A data structure for storing data about damage types
+ *
+ * @typedef {Object} ResolvedRoll
+ * @property {string} finalRoll
+ * @property {string} formula
+ */
+
 export default class RollNode {
     constructor(formula, parent, options, sparseOpts = {}) {
         this.formula = formula;
@@ -94,6 +102,7 @@ export default class RollNode {
         return this.nodeContext;
     }
 
+    /** @returns {ResolvedRoll} */
     resolve(depth = 0) {
         if (this.resolvedValue) {
             return this.resolvedValue;
