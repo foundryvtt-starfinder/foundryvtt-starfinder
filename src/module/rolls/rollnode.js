@@ -1,21 +1,31 @@
 import { SFRPGModifierType } from "../modifiers/types.js";
+import RollTree from "./rolltree.js";
 
 export default class RollNode {
-    constructor(tree, formula, baseValue, referenceModifier, isVariable, isEnabled, parentNode = null, options = {}) {
-        this.tree = tree;
+    constructor(formula, parent, options, sparseOpts = {}) {
         this.formula = formula;
-        this.baseValue = baseValue;
-        this.referenceModifier = referenceModifier;
-        this.isVariable = isVariable;
-        this.isEnabled = isEnabled;
+        this.options = options;
+        if (parent instanceof RollNode) {
+            this.parentNode = parent;
+            this.tree = parent.tree;
+        } else if (parent instanceof RollTree) {
+            this.parentNode = null;
+            this.tree = parent;
+        } else {
+            throw new Error('RollNode constructed with unsupported parent.');
+        }
+
+        this.baseValue = sparseOpts.baseValue ?? null;
+        this.referenceModifier = sparseOpts.referenceModifier ?? null;
+        this.isVariable = sparseOpts.isVariable ?? false;
+        this.isEnabled = sparseOpts.isEnabled ?? true;
+
         this.resolvedValue = undefined;
         this.childNodes = {};
-        this.parentNode = parentNode;
         this.nodeContext = null;
         this.variableTooltips = null;
         this.rollTooltips = null;
         this.calculatedMods = null;
-        this.options = options;
     }
 
     populate(nodes, contexts) {
@@ -33,7 +43,10 @@ export default class RollNode {
 
                 let existingNode = nodes[modKey];
                 if (!existingNode) {
-                    const childNode = new RollNode(this.tree, mod.bonus.modifier, null, mod.bonus, false, mod.bonus.enabled, this, this.options);
+                    const childNode = new RollNode(mod.bonus.modifier, this, this.options, {
+                        referenceModifier: mod.bonus,
+                        isEnabled: mod.bonus.enabled,
+                    });
                     nodes[modKey] = childNode;
                     existingNode = childNode;
                 }
@@ -55,7 +68,10 @@ export default class RollNode {
 
                 let existingNode = nodes[variable];
                 if (!existingNode) {
-                    const childNode = new RollNode(this.tree, variable, variableValue, null, true, true, this, this.options);
+                    const childNode = new RollNode(variable, this, this.options, {
+                        baseValue: variableValue,
+                        isVariable: true,
+                    });
                     nodes[variable] = childNode;
                     existingNode = childNode;
                 }
