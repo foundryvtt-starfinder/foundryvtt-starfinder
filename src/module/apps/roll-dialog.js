@@ -227,7 +227,8 @@ export default class RollDialog extends Dialog {
         this.contexts.allContexts[selectorName] = this.contexts.allContexts[selectedValue];
 
         /** Repopulate nodes, might change modifiers because of different selector. */
-        this.availableModifiers = await this.rollTree.populate();
+        this.rollTree.populate(this.contexts);
+        this.availableModifiers = this.rollTree.getRolledModifiers();
 
         this.position.height = "auto";
         this.render(false);

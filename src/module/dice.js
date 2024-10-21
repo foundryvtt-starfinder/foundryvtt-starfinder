@@ -192,7 +192,7 @@ export class DiceSFRPG {
         };
         const formula = parts.map(partMapper).join(" + ");
 
-        const tree = new RollTree({
+        let rollInfo = await RollTree.buildRoll(formula, rollContext, {
             debug: false,
             buttons: buttons,
             defaultButton: "normal",
@@ -202,7 +202,6 @@ export class DiceSFRPG {
             dialogOptions: dialogOptions,
             useRawStrings: false
         });
-        let rollInfo = await tree.buildRoll(formula, rollContext);
         if (rollInfo.button === "cancel") {
             if (onClose) {
                 onClose(null, null, null);
@@ -338,7 +337,7 @@ export class DiceSFRPG {
         }
 
         const formula = rollFormula || parts.join(" + ");
-        const tree = new RollTree({
+        let rollInfo = await RollTree.buildRoll(formula, rollContext, {
             debug: false,
             buttons: buttons,
             defaultButton: "normal",
@@ -348,7 +347,6 @@ export class DiceSFRPG {
             dialogOptions: dialogOptions,
             useRawStrings: useRawStrings
         });
-        let rollInfo = await tree.buildRoll(formula, rollContext);
 
         if (rollInfo.button === "cancel") {
             return null;
@@ -461,12 +459,11 @@ export class DiceSFRPG {
                 if (part.isDamageSection) {
                     damageSections.push(part);
 
-                    const tempTree = new RollTree({
+                    let rollInfo = await RollTree.buildRoll(part.formula, rollContext, {
                         buttons: buttons,
                         defaultButton: "normal",
                         skipUI: true,
                     });
-                    let rollInfo = await tempTree.buildRoll(part.formula, rollContext);
                     part.formula = rollInfo.rolls[0].formula.finalRoll;
                 } else {
                     let explanation = part.explanation ? `[${part.explanation}]` : "";
@@ -478,7 +475,7 @@ export class DiceSFRPG {
         }
 
         const formula = finalParts.join(" + ");
-        const tree = new RollTree({
+        let rollInfo = await RollTree.buildRoll(formula, rollContext, {
             debug: false,
             buttons: buttons,
             defaultButton: "normal",
@@ -489,7 +486,6 @@ export class DiceSFRPG {
             parts: damageSections,
             useRawStrings: false,
         });
-        let rollInfo = await tree.buildRoll(formula, rollContext);
         if (rollInfo.button === 'cancel') {
             if (onClose) {
                 onClose(null, null, null, false);
@@ -869,23 +865,18 @@ export class DiceSFRPG {
 
         let resultValue = 0;
 
-        const tree = new RollTree({skipUI: true});
-        tree.buildRoll(sourceFormula, rollContext).then(rollInfo => {
-            // TODO(levirak): latent race condition. This works because JS is single threaded and skipping the UI means
-            // this promise resolves immediately. Control flow completes this `then()` block before carrying on. If
-            // `buildRoll` ever awaits anything else, this could be an issue.
-            let finalFormula = rollInfo.rolls[0].formula;
-            try {
-                const formula = Roll.replaceFormulaData(finalFormula.finalRoll, null);
-                resultValue = Roll.safeEval(formula);
-                resolveResult.evaluatedFormula = formula;
-            } catch (error) {
-                if (options?.logErrors) {
-                    console.error(['Failed to evaluate diceless formula, are there dice terms in there?', sourceFormula, rollContext, finalFormula.finalRoll, error]);
-                }
-                resolveResult.hadError = true;
+        let rollInfo = RollTree.buildRollSync(sourceFormula, rollContext);
+        let finalFormula = rollInfo.rolls[0].formula;
+        try {
+            const formula = Roll.replaceFormulaData(finalFormula.finalRoll, null);
+            resultValue = Roll.safeEval(formula);
+            resolveResult.evaluatedFormula = formula;
+        } catch (error) {
+            if (options?.logErrors) {
+                console.error(['Failed to evaluate diceless formula, are there dice terms in there?', sourceFormula, rollContext, finalFormula.finalRoll, error]);
             }
-        });
+            resolveResult.hadError = true;
+        }
 
         if (!resolveResult.hadError) {
             try {
