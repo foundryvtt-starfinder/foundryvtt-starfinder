@@ -923,9 +923,9 @@ export class DiceSFRPG {
     /**
      * Calculates the final formula used for rolls with applied stacking of the modifiers
      * @param {RollNode} node - the Rootnode which is used for the roll
-     * @param {Array} rollMods - all modifiers applied to this roll (unstacked)
+     * @param {SFRPGModifier[]} rollMods - all modifiers applied to this roll (unstacked)
      * @param {Number} bonus - the situational bonus for this roll
-     * @returns {Object} finalFormula Object: {finalRoll: String, formula: String}
+     * @returns {ResolvedRoll}
      */
     static async _calcStackingFormula(node, rollMods, bonus = null, actor = null) {
         let rootNode = node;
@@ -988,7 +988,7 @@ export class DiceSFRPG {
             .trim();
         rollString = rollString.endsWith("+") ? rollString.substring(0, rollString.length - 1).trim() : rollString;
 
-        const finalFormula = rootNode.resolveForRoll(0, rollMods);
+        const finalFormula = rootNode.resolveForRoll(rollMods);
 
         finalFormula.finalRoll = rollString ? `${finalFormula.finalRoll} + ${rollString}` : finalFormula.finalRoll;
         finalFormula.formula = formulaString ? `${finalFormula.formula} + ${formulaString}` : finalFormula.formula;

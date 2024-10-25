@@ -75,7 +75,7 @@ export default class RollTree {
             /* When the roll tree is passed parts, the primary formula & root node instead describes the bonuses that
              * are added to the primary section */
 
-            const rootRollFormula = this.rootNode.resolve(); // TODO(levirak): pass modifiers?
+            const rootRollFormula = this.rootNode.resolveForRoll([]); // TODO(levirak): pass modifiers?
             for (const [partIndex, part] of request.enabledParts.entries()) {
                 let finalSectionFormula = {
                     finalRoll: [
@@ -110,7 +110,7 @@ export default class RollTree {
                 result.rolls.push({ formula: finalSectionFormula, node: part });
             }
         } else {
-            const finalRollFormula = this.rootNode.resolve(); // TODO(levirak): pass modifiers?
+            const finalRollFormula = this.rootNode.resolveForRoll([]); // TODO(levirak): pass modifiers?
             if (result.bonus) {
                 const operators = ['+', '-', '*', '/'];
                 if (!operators.includes(result.bonus[0])) {
@@ -242,9 +242,9 @@ export default class RollTree {
                 rollMods.push(value.referenceModifier);
             }
             if (value.calculatedMods) {
-                for (let mod of value.calculatedMods) {
-                    if (rollMods.findIndex((x) => x.name === mod.bonus.name) === -1 && this.formula.indexOf(mod.bonus.name) === -1) {
-                        rollMods.push(mod.bonus);
+                for (let bonus of value.calculatedMods.values()) {
+                    if (rollMods.findIndex((x) => x.name === bonus.name) === -1 && this.formula.indexOf(bonus.name) === -1) {
+                        rollMods.push(bonus);
                     }
                 }
             }
