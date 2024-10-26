@@ -969,6 +969,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         await DiceSFRPG.d20Roll({
             event: options.event,
             parts: parts,
+            actorContextKey: "owner",
             rollContext: rollContext,
             title: title,
             flavor: await TextEditor.enrichHTML(this.system?.chatFlavor, {
