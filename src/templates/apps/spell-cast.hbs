@@ -7,7 +7,7 @@
         <div class="form-fields stacked">
             {{#each item.system.allowedClasses as |isAllowed allowedClass|}}
                 {{#if isAllowed}}
-                    <label class="checkbox"><input type="checkbox" name="" {{checked isAllowed}} disabled /> {{lookup ../config.spellcastingClasses allowedClass}}</label>
+                    <label class="checkbox"><input type="checkbox" name="" {{checked isAllowed}} disabled /> {{lookup (config "spellcastingClasses") allowedClass}}</label>
                 {{/if}}
             {{/each}}
         </div>
@@ -25,15 +25,11 @@
         <label>{{localize "SFRPG.SpellCasting.SelectSpellSlot"}}</label>
         <div class="form-fields">
             <select name="level" {{#unless hasSlots}}disabled{{/unless}}>
-                {{#select item.system.level}}
-                {{#each spellLevels as |spellSlot|}}
-                <option value="{{spellSlot.level}}">{{spellSlot.label}}</option>
-                {{/each}}
-                {{/select}}
+                {{selectOptions spellLevels selected=item.system.level nameAttr="level" labelAttr="label"}}
             </select>
         </div>
     </div>
-    
+
     {{#unless hasSlots}}
     <p type="note" style="color: #c00;">{{localize "SFRPG.SpellCasting.ErrorNoSlot"}}</p>
     {{/unless}}

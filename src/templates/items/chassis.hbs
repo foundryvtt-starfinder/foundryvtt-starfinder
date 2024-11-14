@@ -52,11 +52,7 @@
                         <label>{{ localize "SFRPG.DroneSheet.Chassis.Details.BaseStatistics.Size" }}</label>
                         <div class="form-fields">
                             <select class="actor-size" name="system.size">
-                                {{#select itemData.size}}
-                                {{#each config.actorSizes as |label size|}}
-                                    <option value="{{size}}">{{label}}</option>
-                                {{/each}}
-                                {{/select}}
+                                {{selectOptions config.actorSizes selected=itemData.size}}
                             </select>
                         </div>
                     </div>
@@ -94,37 +90,25 @@
                                 <label>{{localize "SFRPG.DroneSheet.Chassis.Details.Saves.Fortitude"}}</label>
                                 <div class="form-fields">
                                     <select name="system.fort">
-                                        {{#select itemData.fort}}
-                                        {{#each config.saveProgression as |name val|}}
-                                        <option value="{{val}}">{{name}}</option>
-                                        {{/each}}
-                                        {{/select}}
+                                        {{selectOptions config.saveProgression selected=itemData.fort}}
                                     </select>
                                 </div>
                             </div>
-                
+
                             <div class="form-group">
                                 <label>{{localize "SFRPG.DroneSheet.Chassis.Details.Saves.Reflex"}}</label>
                                 <div class="form-fields">
                                     <select name="system.ref">
-                                        {{#select itemData.ref}}
-                                        {{#each config.saveProgression as |name val|}}
-                                        <option value="{{val}}">{{name}}</option>
-                                        {{/each}}
-                                        {{/select}}
+                                        {{selectOptions config.saveProgression selected=itemData.ref}}
                                     </select>
                                 </div>
                             </div>
-                
+
                             <div class="form-group">
                                 <label>{{localize "SFRPG.DroneSheet.Chassis.Details.Saves.Will"}}</label>
                                 <div class="form-fields">
                                     <select name="system.will">
-                                        {{#select itemData.will}}
-                                        {{#each config.saveProgression as |name val|}}
-                                        <option value="{{val}}">{{name}}</option>
-                                        {{/each}}
-                                        {{/select}}
+                                        {{selectOptions config.saveProgression selected=itemData.will}}
                                     </select>
                                 </div>
                             </div>
@@ -187,14 +171,7 @@
                         <label>{{ localize "SFRPG.ActorSheet.Attributes.Speed.MainMovementType" }}</label>
                         <div class="form-fields">
                             <select name="system.speed.mainMovement">
-                                {{#select itemData.speed.mainMovement}}
-                                <option value="land">{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Land" }}</option>
-                                <option value="burrowing">{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Burrowing" }}</option>
-                                <option value="climbing">{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Climbing" }}</option>
-                                <option value="flying">{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Flying" }}</option>
-                                <option value="swimming">{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Swimming" }}</option>
-                                <option value="special">{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Special" }}</option>
-                                {{/select}}
+                                {{selectOptions config.speeds selected=itemData.speed.mainMovement}}
                             </select>
                         </div>
                     </div>
@@ -251,19 +228,11 @@
                         <div class="form-group bubble-info">
                             <div class="form-fields">
                                 <select name="system.abilityIncreaseStats.first">
-                                    {{#select itemData.abilityIncreaseStats.first}}
-                                    {{#each config.abilities as |name val|}}
-                                    <option value="{{val}}">{{name}}</option>
-                                    {{/each}}
-                                    {{/select}}
+                                    {{selectedOptions config.abilities selected=itemData.abilityIncreaseStats.first}}
                                 </select>
-                                
+
                                 <select name="system.abilityIncreaseStats.second">
-                                    {{#select itemData.abilityIncreaseStats.second}}
-                                    {{#each config.abilities as |name val|}}
-                                    <option value="{{val}}">{{name}}</option>
-                                    {{/each}}
-                                    {{/select}}
+                                    {{selectOptions config.abilities selected=itemData.abilityIncreaseStats.second}}
                                 </select>
                             </div>
                         </div>

@@ -13,12 +13,8 @@
             <div class="form-fields">
                 <input type="text" name="system.activation.cost" value="{{itemData.activation.cost}}" data-dtype="Number" placeholder="-"/>
                 <select name="system.activation.type">
-                    {{#select itemData.activation.type}}
-                    <option value=""></option>
-                    {{#each config.abilityActivationTypes as |name key|}}
-                    <option value="{{key}}">{{name}}</option>
-                    {{/each}}
-                    {{/select}}
+                    {{selectOption "" "" selected=itemData.activation.type}}
+                    {{selectOptions config.abilityActivationTypes selected=itemData.activation.type}}
                 </select>
             </div>
         </div>
@@ -50,12 +46,8 @@
                 <input type="text" class="wide-form-field" name="system.duration.value" value="{{itemData.duration.value}}" data-dtype="String" placeholder="-"/>
                 {{/if}}
                 <select name="system.duration.units">
-                    {{#select itemData.duration.units}}
-                    <option value="text">{{localize "SFRPG.Text"}}</option>
-                    {{#each config.durationTypes as |unit key|}}
-                    <option value="{{key}}">{{unit}}</option>
-                    {{/each}}
-                    {{/select}}
+                    {{selectOption "text" "SFRPG.Text" selected=itemData.duration.units localize=true}}
+                    {{selectOptions config.durationTypes selected=itemData.duration.units}}
                 </select>
             </div>
         </div>
@@ -69,12 +61,8 @@
                 <input type="text" name="system.uses.max" value="{{itemData.uses.max}}" data-dtype="String"/>
                 {{#if this.uses.showTotal}}<p class="calculated-total"><strong>{{itemData.uses.total}}</strong></p>{{/if}}
                 <select name="system.uses.per">
-                    {{#select itemData.uses.per}}
-                    <option value=""></option>
-                    {{#each config.limitedUsePeriods as |name key|}}
-                    <option value="{{key}}">{{name}}</option>
-                    {{/each}}
-                    {{/select}}
+                    {{selectOption "" "" selected=itemData.uses.per}}
+                    {{selectOptions config.limitedUsePeriods selected=itemData.uses.per}}
                 </select>
             </div>
         </div>
@@ -92,11 +80,7 @@
                         <input class="wide-form-field" type="text" name="system.range.value" value="{{itemData.range.value}}" data-dtype="String" placeholder="Range"/>
                         {{/if}}
                         <select name="system.range.units">
-                            {{#select itemData.range.units}}
-                            {{#each config.distanceUnits as |unit key|}}
-                            <option value="{{key}}">{{unit}}</option>
-                            {{/each}}
-                            {{/select}}
+                            {{selectOptions config.distanceUnits selected=itemData.range.units}}
                         </select>
                     </div>
                 </div>
@@ -108,27 +92,15 @@
                         {{#if this.area.showTotal}}<p class="calculated-total"><strong>{{itemData.area.total}}</strong></p>{{/if}}
                         <input type="text" {{#if (eq itemData.area.units "text")}}class="wide-form-field"{{/if}} name="system.area.value" value="{{itemData.area.value}}" data-dtype="String" placeholder="Area" />
                         <select name="system.area.units" class="min-form-field">
-                            {{#select itemData.area.units}}
-                            {{#each config.variableDistanceUnits as |unit key|}}
-                            <option value="{{key}}">{{unit}}</option>
-                            {{/each}}
-                            <option value="text">{{localize "SFRPG.Text"}}</option>
-                            {{/select}}
+                            {{selectOptions config.variableDistanceUnits selected=itemData.area.units}}
+                            {{selectOption "text" "SFRPG.Text" selected=itemData.area.units localize=true}}
                         </select>
                         {{#unless (eq itemData.area.units "text")}}
                         <select name="system.area.shape" class="min-form-field">
-                            {{#select itemData.area.shape}}
-                            {{#each config.spellAreaShapes as |shape s|}}
-                            <option value="{{s}}">{{shape}}</option>
-                            {{/each}}
-                            {{/select}}
+                            {{selectOptions config.spellAreaShapes selected=itemData.area.shape}}
                         </select>
                         <select name="system.area.effect" class="min-form-field">
-                            {{#select itemData.area.effect}}
-                            {{#each config.spellAreaEffects as |effect e|}}
-                            <option value="{{e}}">{{effect}}</option>
-                            {{/each}}
-                            {{/select}}
+                            {{selectOptions config.spellAreaEffects selected=itemData.area.effect}}
                         </select>
                         <label class="checkbox">
                             <input type="checkbox" name="system.area.shapable" {{checked itemData.area.shapable}}>

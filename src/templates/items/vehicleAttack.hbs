@@ -68,19 +68,11 @@
                         <div class="form-fields">
                             <input type="text" name="system.save.dc" value="{{itemData.save.dc}}" data-dtype="String" placeholder="{{placeholders.saveDC.formula}}"/>
                             <select name="system.save.type">
-                                {{#select itemData.save.type}}
-                                <option value=""></option>
-                                {{#each config.saves as |save s|}}
-                                <option value="{{s}}">{{save}}</option>
-                                {{/each}}
-                                {{/select}}
+                                {{selectOption "" "" selected=itemData.save.type}}
+                                {{selectOptions config.saves selected=itemData.save.type}}
                             </select>
                             <select name="system.save.descriptor">
-                                {{#select itemData.save.descriptor}}
-                                {{#each config.saveDescriptors as |descriptor k|}}
-                                <option value="{{k}}">{{descriptor}}</option>
-                                {{/each}}
-                                {{/select}}
+                                {{selectOptions config.saveDescriptors selected=itemData.save.descriptor}}
                             </select>
                         </div>
                     </div>

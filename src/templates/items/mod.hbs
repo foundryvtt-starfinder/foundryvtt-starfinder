@@ -82,22 +82,18 @@
                                     <input type="text" name="system.arms.number" value="{{itemData.arms.number}}" data-dtype="Number"/>
                                 </div>
                             </div>
-                
+
                             <div class="form-group">
                                 <label>{{ localize "SFRPG.DroneSheet.Mod.Details.Arms.ArmType.Label" }}</label>
                                 <div class="form-fields">
                                     <select name="system.arms.armType">
-                                        {{#select itemData.arms.armType}}
-                                        <option value="general">{{ localize "SFRPG.DroneSheet.Mod.Details.Arms.ArmType.General" }}</option>
-                                        <option value="melee">{{ localize "SFRPG.DroneSheet.Mod.Details.Arms.ArmType.Melee" }}</option>
-                                        <option value="ranged">{{ localize "SFRPG.DroneSheet.Mod.Details.Arms.ArmType.Ranged" }}</option>
-                                        {{/select}}
+                                        {{selectOptions (config "droneArmTypes") selected=itemData.arms.armType}}
                                     </select>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+
                     {{!-- Other Effects --}}
                     <div class="bubble">
                         <h3 class="bubble-header">{{ localize "SFRPG.DroneSheet.Mod.Details.OtherEffects.Header" }}</h3>
@@ -115,12 +111,8 @@
                                 <label>{{ localize "SFRPG.DroneSheet.Mod.Details.OtherEffects.WeaponProficiency" }}</label>
                                 <div class="form-fields">
                                     <select name="system.weaponProficiency">
-                                        <option value="">{{ localize "SFRPG.None" }}</option>
-                                        {{#select itemData.weaponProficiency}}
-                                        {{#each config.weaponProficiencies as |name val|}}
-                                        <option value="{{val}}">{{name}}</option>
-                                        {{/each}}
-                                        {{/select}}
+                                        {{selectOption "" "SFRPG.None" selected=itemData.weaponProficiency localize=true}}
+                                        {{selectOptions config.weaponProficiencies selected=itemData.weaponProficiency}}
                                     </select>
                                 </div>
                             </div>
@@ -129,12 +121,8 @@
                                 <label>{{ localize "SFRPG.DroneSheet.Mod.Details.OtherEffects.BonusSkill" }}</label>
                                 <div class="form-fields">
                                     <select name="system.bonusSkill">
-                                        <option value="">{{ localize "SFRPG.None" }}</option>
-                                        {{#select itemData.bonusSkill}}
-                                        {{#each config.skills as |name val|}}
-                                        <option value="{{val}}">{{name}}</option>
-                                        {{/each}}
-                                        {{/select}}
+                                        {{selectOption "" "SFRPG.None" selected=itemData.bonusSkill}}
+                                        {{selectOptions config.skills selected=itemData.bonusSkill}}
                                     </select>
                                 </div>
                             </div>

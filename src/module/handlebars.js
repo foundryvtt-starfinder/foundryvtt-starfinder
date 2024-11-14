@@ -166,14 +166,15 @@ export function setupHandlebars() {
         return false;
     });
 
-    Handlebars.registerHelper('console', function(value) {
-        console.log(value);
+    Handlebars.registerHelper('console', function(...args) {
+        let options = args.pop();
+        console.log(...args);
     });
 
-    Handlebars.registerHelper('indexOf', function(array, value, zeroBased = true) {
+    Handlebars.registerHelper('indexOf', function(array, value, options) {
         const index = array.indexOf(value);
         if (index < 0) return index;
-        return index + (zeroBased ? 0 : 1);
+        return index + (Number(options.hash.firstIdx) || 0);
     });
 
     Handlebars.registerHelper('append', function(left, right) {
@@ -259,4 +260,22 @@ export function setupHandlebars() {
         return formattedValue;
     });
 
+    /**
+     * An API-similar supplement to Foundry's {@linkcode https://foundryvtt.com/api/classes/client.HandlebarsHelpers.html#selectOptions|selectOptions}.
+     * This helper is for adding one-off select options and is meant to be used alongside `selectOptions`.
+     */
+    Handlebars.registerHelper('selectOption', function(value, label, options) {
+        let tagParams = [
+            `value="${Handlebars.escapeExpression(value)}"`,
+            options.hash.hidden && 'hidden',
+            (value === options.hash.selected) && 'selected',
+        ].filter(Boolean).join(' ');
+        let safeLabel = Handlebars.escapeExpression(options.hash.localize? game.i18n.localize(label): label);
+        return new Handlebars.SafeString(`<option ${tagParams}>${safeLabel}</option>`);
+    });
+
+    /** Utility helper to get global config when it's not provided to the template */
+    Handlebars.registerHelper('config', function(key, options) {
+        return foundry.utils.getProperty(CONFIG.SFRPG, key);
+    });
 }

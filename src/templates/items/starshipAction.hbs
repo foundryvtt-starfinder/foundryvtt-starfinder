@@ -17,7 +17,7 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-            
+
             {{!-- Details Tab Navigation --}}
             <nav class="sheet-subnavigation subtabs" data-group="subdetails">
                 <a class="item active" data-tab="properties">{{ localize "SFRPG.ItemSheet.Details.Tab.Properties" }}</a>
@@ -34,16 +34,12 @@
                         <h3 class="bubble-header">{{ localize "SFRPG.Items.Action.Details" }}</h3>
 
                         <div class="bubble-info">
-                            
+
                             {{!-- Role --}}
                             <div class="form-group">
                                 <label>{{ localize "SFRPG.ItemSheet.StarshipAction.CrewRole" }}</label>
                                 <select name="system.role">
-                                    {{#select itemData.role}}
-                                        {{#each config.starshipRoleNames as |name id|}}
-                                            <option value="{{id}}">{{localize name}}</option>
-                                        {{/each}}
-                                    {{/select}}
+                                    {{selectOptions config.starshipRoleNames selected=itemData.role localize=true}}
                                 </select>
                             </div>
 

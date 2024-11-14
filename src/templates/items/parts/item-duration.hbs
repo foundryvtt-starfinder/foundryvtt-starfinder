@@ -24,11 +24,7 @@
                                 data-tooltip="<p>Use the <code>@owner</code> prefix to reference the parent actor.</p><p>Use <code>@origin.actor</code> or <code>@origin.item</code> to reference the origin actor or item respectively." />
                         {{/unless}}
                         <select name="system.activeDuration.unit">
-                            {{#select itemData.activeDuration.unit}}
-                                {{#each config.effectDurationTypes as |name key|}}
-                                    <option value="{{key}}">{{localize name}}</option>
-                                {{/each}}
-                            {{/select}}
+                            {{selectedOptions config.effectDurationTypes selected=itemData.activeDuration.unit}}
                         </select>
                     </div>
                 </div>
@@ -38,33 +34,21 @@
                     <div class="form-group input-select">
                         <label>{{localize "SFRPG.Effect.EndTypesLabel"}}</label>
                         <div class="form-fields">
-                            <select name="system.activeDuration.expiryMode.type" {{createTippy
-                                title="SFRPG.Effect.ExpiryModeLabel" subtitle="SFRPG.Effect.ExpiryModeTooltip" }}>
-                                {{#select itemData.activeDuration.expiryMode.type}}
-                                    <option value="turn">{{ localize "SFRPG.Effect.ExpiryModeTurn"}}</option>
-                                    <option value="init">{{ localize "SFRPG.Effect.ExpiryModeInit"}}</option>
-                                {{/select}}
+                            <select name="system.activeDuration.expiryMode.type" {{createTippy title="SFRPG.Effect.ExpiryModeLabel" subtitle="SFRPG.Effect.ExpiryModeTooltip" }}>
+                                {{selectOption "turn" "SFRPG.Effect.ExpiryModeTurn" selected=itemData.activeDuration.expiryMode.type localize=true}}
+                                {{selectOption "init" "SFRPG.Effect.ExpiryModeInit" selected=itemData.activeDuration.expiryMode.type localize=true}}
                             </select>
                             {{#if (eq itemData.activeDuration.expiryMode.type "turn")}}
-                                <select name="system.activeDuration.expiryMode.turn" {{createTippy
-                                    title="SFRPG.Effect.EndTypesLabel" subtitle="SFRPG.Effect.EndsOnTooltip" }}>
-                                    {{#select itemData.activeDuration.expiryMode.turn}}
-                                        <option value="parent">Parent Actor's Turn</option>
-                                        <option value="origin">Origin Actor's Turn</option>
-                                        <option value="init">Nearest Initiative</option>
-                                        <optgroup label="Combatant Turns">
-                                            {{#each this.sourceActorChoices as |name id|}}
-                                                <option value="{{id}}">{{name}}</option>
-                                            {{/each}}
-                                        </optgroup>
-                                    {{/select}}
+                                <select name="system.activeDuration.expiryMode.turn" {{createTippy title="SFRPG.Effect.EndTypesLabel" subtitle="SFRPG.Effect.EndsOnTooltip" }}>
+                                    {{selectOption "parent" "Parent Actor's Turn" selected=itemData.activeDuration.expiryMode.turn}}
+                                    {{selectOption "origin" "Origin Actor's Turn" selected=itemData.activeDuration.expiryMode.turn}}
+                                    {{selectOption "init"   "Nearest Initiative"  selected=itemData.activeDuration.expiryMode.turn}}
+                                    <optgroup label="Combatant Turns">
+                                        {{selectOptions sourceActorChoices selected=itemData.activeDuration.expiryMode.turn}}
+                                    </optgroup>
                                 </select>
                                 <select name="system.activeDuration.endsOn">
-                                    {{#select itemData.activeDuration.endsOn}}
-                                        {{#each config.effectEndTypes as |name key|}}
-                                            <option value="{{key}}">{{localize name}}</option>
-                                        {{/each}}
-                                    {{/select}}
+                                    {{selectOptions config.effectEndTypes selected=itemData.activeDuration.endsOn localize=true}}
                                 </select>
                             {{else if (eq itemData.activeDuration.expiryMode.type "init")}}
                                 <input name="system.activeDuration.expiryInit" type="number" data-dtype="Number"

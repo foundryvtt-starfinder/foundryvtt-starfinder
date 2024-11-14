@@ -143,12 +143,7 @@
                             <label>Control</label>
                             <div class="form-fields">
                                 <select name="system.attributes.controlSkill">
-                                    {{#select system.attributes.controlSkill}}
-                                    <option value="pil">{{ config.skills.pil }}</option>
-                                    <option value="ath">{{ config.skills.ath }}</option>
-                                    <option value="sur">{{ config.skills.sur }}</option>
-                                    <option value="none">None</option>
-                                    {{/select}}
+                                    {{selectOptions (config "controlSkills") selected=system.attributes.controlSkill}}
                                 </select>
                                 {{#if (eq system.attributes.controlSkill "pil")}}
                                 <input type="text" name="system.attributes.modifiers.piloting" value="{{system.attributes.modifiers.piloting}}" />
@@ -195,11 +190,7 @@
                             <label>{{ localize "SFRPG.VehicleSheet.Details.OtherAttributes.Size" }}</label>
                             <div class="form-fields">
                                 <select name="system.attributes.size">
-                                    {{#select system.attributes.size}}
-                                    {{#each config.vehicleSizes as |size s|}}
-                                    <option value="{{s}}">{{size}}</option>
-                                    {{/each}}
-                                    {{/select}}
+                                    {{selectOptions config.vehicleSizes selected=system.attributes.size}}
                                 </select>
                             </div>
                         </div>
@@ -207,11 +198,7 @@
                             <label>{{ localize "SFRPG.VehicleSheet.Details.OtherAttributes.Type" }}</label>
                             <div class="form-fields">
                                 <select name="system.attributes.type">
-                                    {{#select system.attributes.type}}
-                                    {{#each config.vehicleTypes as |type t|}}
-                                    <option value="{{t}}">{{type}}</option>
-                                    {{/each}}
-                                    {{/select}}
+                                    {{selectOptions config.vehicleTypes selected=system.attributes.type}}
                                 </select>
                             </div>
                         </div>
@@ -219,11 +206,7 @@
                             <label>{{ localize "SFRPG.VehicleSheet.Details.OtherAttributes.Cover" }}</label>
                             <div class="form-fields">
                                 <select name="system.attributes.cover">
-                                    {{#select system.attributes.cover}}
-                                    {{#each config.vehicleCoverTypes as |cover c|}}
-                                    <option value="{{c}}">{{cover}}</option>
-                                    {{/each}}
-                                    {{/select}}
+                                    {{selectOptions config.vehicleCoverTypes selected=system.attributes.cover}}
                                 </select>
                             </div>
                         </div>

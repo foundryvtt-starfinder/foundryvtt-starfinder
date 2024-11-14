@@ -16,7 +16,7 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-            
+
             {{!-- Details Tab Navigation --}}
             <nav class="sheet-subnavigation subtabs" data-group="subdetails">
                 <a class="item active" data-tab="properties">{{ localize "SFRPG.ItemSheet.Details.Tab.Properties" }}</a>
@@ -39,11 +39,7 @@
                                 <label>{{ localize "SFRPG.Items.Augmentation.Type" }}</label>
                                 <div class="form-fields">
                                     <select name="system.type">
-                                        {{#select itemData.type}}
-                                        {{#each config.augmentationTypes as |augmentation type|}}
-                                        <option value="{{type}}">{{augmentation}}</option>
-                                        {{/each}}
-                                        {{/select}}
+                                        {{selectOptions config.augmentationTypes selected=itemData.type}}
                                     </select>
                                 </div>
                             </div>
@@ -52,11 +48,7 @@
                                 <label>{{ localize "SFRPG.Items.Augmentation.System" }}</label>
                                 <div class="form-fields">
                                     <select name="system.system">
-                                        {{#select itemData.system}}
-                                        {{#each config.augmentationSystems as |system key|}}
-                                        <option value="{{key}}">{{system}}</option>
-                                        {{/each}}
-                                        {{/select}}
+                                        {{selectOptions config.augmentationSystems selected=itemData.system}}
                                     </select>
                                 </div>
                             </div>
@@ -74,10 +66,10 @@
 
                 {{!-- Usage and Action Tab --}}
                 <div class="tab usage" data-group="subdetails" data-tab="usage">
-                    
+
                     {{!-- Item Activation Template --}}
                     {{> "systems/sfrpg/templates/items/parts/item-activation.hbs" message="SFRPG.Items.Augmentation.Usage"}}
-                    
+
                     {{!-- Item Action Template --}}
                     {{> "systems/sfrpg/templates/items/parts/item-action.hbs" message="SFRPG.Items.Augmentation.Action"}}
 
