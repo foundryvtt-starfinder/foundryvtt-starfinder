@@ -395,7 +395,7 @@ export class CombatSFRPG extends Combat {
         // Get an active GM to run events players may not have permissions to do.
         if (!game.users.activeGM?.isSelf) return;
 
-        if (!changed.flags?.sfrpg?.combatType) {
+        if (!changed.flags?.sfrpg?.combatType && options.eventData) {
             this._handleTimedEffects(options.eventData);
         }
     }
