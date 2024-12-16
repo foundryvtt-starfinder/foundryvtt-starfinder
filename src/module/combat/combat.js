@@ -586,7 +586,7 @@ export class CombatSFRPG extends Combat {
 
     hasCombatantsWithoutInitiative() {
         for (const [index, combatant] of this.turns.entries()) {
-            if ((!this.settings.skipDefeated || !combatant.defeated) && !combatant.initiative) {
+            if ((!this.settings.skipDefeated || !combatant.defeated) && (combatant.initiative === undefined || combatant.initiative === null)) {
                 return true;
             }
         }
