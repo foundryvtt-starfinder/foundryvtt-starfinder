@@ -395,7 +395,10 @@ export class CombatSFRPG extends Combat {
         // Get an active GM to run events players may not have permissions to do.
         if (!game.users.activeGM?.isSelf) return;
 
-        this._handleTimedEffects(options.eventData);
+        // Handle timed events if the event that is occurring is phase/round/turn advance.
+        if (options.eventData) {
+            this._handleTimedEffects(options.eventData);
+        }
     }
 
     /**
