@@ -710,6 +710,12 @@ export class CombatSFRPG extends Combat {
             const combatant = this.combatants.get(id);
             if ( !combatant?.isOwner ) return results;
 
+            // If starship combat and no pilot set initiative to 0
+            if (this.getCombatType() === "starship" && !combatant.actor.system.crew.useNPCCrew && combatant.actor.system.crew.pilot.actorIds.length === 0) {
+                updates.push({_id: id, initiative: 0});
+                continue;
+            }
+
             // Roll initiative
             const roll = await this._getInitiativeRoll(combatant, "");
             if (!roll) {
