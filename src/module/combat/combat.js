@@ -662,6 +662,9 @@ export class CombatSFRPG extends Combat {
 
     _getInitiativeFormula(combatant) {
         if (this.getCombatType() === "starship") {
+            if (!combatant.actor.system.crew.useNPCCrew) {
+                return "1d20 + @pilot.skills.pil.mod + @ship.attributes.pilotingBonus.value";
+            }
             return "1d20 + @pilot.skills.pil.mod";
         } else {
             return "1d20 + @combatant.attributes.init.total";
@@ -675,6 +678,10 @@ export class CombatSFRPG extends Combat {
 
         if (this.getCombatType() === "starship") {
             parts.push("@pilot.skills.pil.mod");
+            if (!combatant.actor.system.crew.useNPCCrew) {
+                rollContext.addContext("ship", combatant.actor);
+                parts.push("@ship.attributes.pilotingBonus.value");
+            }
             rollContext.setMainContext("pilot");
         } else {
             parts.push("@combatant.attributes.init.total");
@@ -710,9 +717,12 @@ export class CombatSFRPG extends Combat {
             const combatant = this.combatants.get(id);
             if ( !combatant?.isOwner ) return results;
 
-            // If starship combat and no pilot set initiative to 0
-            if (this.getCombatType() === "starship" && !combatant.actor.system.crew.useNPCCrew && combatant.actor.system.crew.pilot.actorIds.length === 0) {
-                updates.push({_id: id, initiative: 0});
+            // If starship combat and no pilot initiative is just ship piloting bonuses
+            if (this.getCombatType() === "starship" && combatant.actor.type === "starship"
+                && ((!combatant.actor.system.crew.useNPCCrew && combatant.actor.system.crew.pilot.actorIds.length === 0)
+                    || (combatant.actor.system.crew.useNPCCrew && !combatant.actor.system.crew.npcData.pilot.skills.pil))
+            ) {
+                updates.push({_id: id, initiative: combatant.actor.system.attributes.pilotingBonus.value});
                 continue;
             }
 
