@@ -1,7 +1,12 @@
 {
-  "_id": "kgfgyMbISSB7SWWx",
-  "name": "Effect: Basic Booster (+2 Skill Checks)",
+  "_id": "YAQumXbZgPpLjV5R",
+  "name": "Effect: Basic Inhibitor (-2 AC)",
   "type": "effect",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "systems/sfrpg/icons/equipment/technological%20items/sprayflesh.webp",
   "system": {
     "type": "effect",
@@ -17,7 +22,7 @@
         "turn": "origin"
       },
       "unit": "round",
-      "value": "@origin.actor.classes.biohacker.keyAbilityMod"
+      "value": "(3 + @origin.actor.classes.biohacker.keyAbilityMod)"
     },
     "context": {
       "origin": {
@@ -36,19 +41,19 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.2BjD4ocSE0BL5DcN]{Biohacks (Ex)}</p>\n<p>A basic booster biohack aids a creature in one manner or another. The effect lasts for a number of rounds equal to your key ability score modifier (minimum 1 round) unless it states otherwise. You begin play knowing this basic booster biohack; when you use it, select an effect:</p>\n<p>The target gains a +2 enhancement bonus to skill checks.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.2BjD4ocSE0BL5DcN]{Biohacks (Ex)}</p>\n<p>A basic inhibitor biohack hinders a creature’s physiology or material function. The effect of an inhibitor lasts for a number of rounds equal to 3 + your key ability score modifier (minimum 1 round) unless it states otherwise. You begin play knowing this basic inhibitor biohack; when you use it, select an effect:</p>\n<p>The target takes a –2 penalty to AC.</p>"
     },
     "enabled": true,
     "modifiers": [
       {
         "_id": "d0458ba3-d02d-43b7-8895-de93ad90db48",
-        "name": "Effect: Basic Booster (+2 Skill Checks)",
-        "type": "enhancement",
+        "name": "Effect: Basic Inhibitor (-2 AC)",
+        "type": "untyped",
         "condition": "",
-        "effectType": "all-skills",
+        "effectType": "ac",
         "enabled": true,
-        "max": 2,
-        "modifier": "2",
+        "max": -2,
+        "modifier": "-2",
         "modifierType": "constant",
         "notes": "",
         "source": "",
