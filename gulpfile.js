@@ -86,8 +86,8 @@ async function copyFiles() {
         'src/packs/**/*',
         'src/templates/**/*.hbs',
         "src/*.json"
-    ])
-        .pipe(gulp.dest((file) => file.base.replace("src", "dist")));
+    ], { base: 'src' })
+        .pipe(gulp.dest('dist'));
 
     // Then pipe in js files to be minified
     gulp.src('src/sfrpg.js')
@@ -138,8 +138,8 @@ async function copyWatchFiles() {
         'src/lang/*.json',
         'src/templates/**/*.hbs',
         "src/*.json"
-    ])
-        .pipe(gulp.dest((file) => file.base.replace("src", "dist")));
+    ], { base: 'src' })
+        .pipe(gulp.dest('dist'));
 
     gulp.src(`src/${name}.js`)
         .pipe(gulp.dest('dist'));
@@ -575,7 +575,7 @@ async function gulpUnpackPacks(done, partOfCook = false) {
 }
 
 async function unpackPacks(partOfCook = false) {
-    const sourceDir = partOfCook ? "./src/packs" : `${getConfig().dataPath.replaceAll("\\", "/")}/data/systems/sfrpg/packs`;
+    const sourceDir = partOfCook ? "./src/packs" : path.join(getConfig().dataPath, 'Data/systems/sfrpg/packs');
     console.log(`Unpacking ${partOfCook ? "" : "and sanitizing "}all packs from ${sourceDir}`);
 
     const entries = fs.readdirSync(sourceDir, {withFileTypes: true});
