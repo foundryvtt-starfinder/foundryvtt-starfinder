@@ -32,6 +32,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -112,6 +113,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -177,6 +179,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -277,6 +280,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 2,
         "modifiers": [],
         "price": 475,
@@ -428,6 +432,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -528,6 +533,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 2,
         "modifiers": [],
         "price": 475,
@@ -730,10 +736,26 @@
       "img": "icons/creatures/magical/spirit-earth-stone-magma-yellow.webp",
       "system": {
         "type": "",
+        "ability": null,
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
         "ammunitionType": "",
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": 0
+        },
+        "attackBonus": 0,
         "attributes": {
           "ac": {
             "value": ""
@@ -758,6 +780,7 @@
           "max": 0,
           "value": 0
         },
+        "chatFlavor": "",
         "container": {
           "contents": [],
           "includeContentsInWealthCalculation": 1,
@@ -765,11 +788,13 @@
           "storage": []
         },
         "critical": {
+          "effect": "",
           "parts": []
         },
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -777,20 +802,49 @@
           "unidentified": "",
           "value": "<p>As a move action when wearing a hivemask, you can learn the location of each other worn hivemask within 100 feet and can use your vision to see through any one of those masks. You can see through another mask for as long as you’d like, but you must take a move action each round to do so. While extending your vision to another hivemask, you are blinded and flat-footed.</p>"
         },
+        "descriptors": [],
+        "duration": {
+          "units": "text",
+          "value": null
+        },
         "equippable": false,
         "equipped": false,
+        "formula": "",
         "hands": 0,
         "identified": true,
+        "isActive": null,
         "level": 3,
         "limitedWear": false,
         "modifiers": [],
         "price": 1400,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
         "source": "AA2, p. 49",
+        "target": {
+          "type": "",
+          "value": null
+        },
         "usage": {
           "per": "",
           "value": 0
+        },
+        "uses": {
+          "max": null,
+          "per": null,
+          "value": null
         }
       }
     },
@@ -816,6 +870,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -838,6 +893,11 @@
           "value": "<p>An embri loses its immunity to charm effects and its +2 species bonus to saving throws against enchantment spells and effects when it isn’t wearing a mask over its face. In addition, while unmasked, it must roll twice for any Sense Motive check it attempts and take the lower result.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -845,6 +905,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -973,6 +1034,7 @@
     "name": "Embri",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -984,6 +1046,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -1004,11 +1067,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -1022,13 +1103,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
       "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "tint": "#ffffff"
     },
     "width": 1
   },

@@ -16,9 +16,15 @@
     "activeDuration": {
       "activationTime": 0,
       "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "parent"
+      },
       "unit": "permanent",
       "value": 0
     },
+    "context": {},
     "critical": {
       "effect": "",
       "parts": []
@@ -28,6 +34,8 @@
     },
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.rules.Item.0yJjfyvWg5pDLcVR]{Conditions}</p>\n<hr />\n<p>You are sleeping and @UUID[Compendium.sfrpg.conditions.Item.RxvbSB9ZgSCBu2jw]{@UUID[Compendium.sfrpg.conditions.Item.RxvbSB9ZgSCBu2jw]{Helpless}.</p>\n<p>While asleep, you take a –10 penalty to Perception checks to notice anything.</p>\n<p>If you succeed at a Perception check to notice something despite the penalty, you automatically awaken.</p>\n<p>You are also awoken if you are slapped or wounded.</p>\n<p>An ally can wake you as a standard action.</p>"
     },
@@ -50,7 +58,9 @@
       }
     ],
     "requirements": "Condition",
+    "showOnToken": true,
     "source": "CRB pg. 273",
-    "sourceActorId": null
+    "sourceActorId": null,
+    "turnEvents": []
   }
 }
