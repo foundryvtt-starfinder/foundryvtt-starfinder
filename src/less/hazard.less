@@ -1,27 +1,30 @@
-@import './variables.less';
+@import "./variables.less";
 
 .sfrpg.sheet.actor.hazard {
-  min-width: 600px;
-  // min-height: 685px;
+    min-width: 600px;
+    // min-height: 685px;
 
-  .form-group {
-    padding: 0 5px;
-    align-items: baseline;
+    .form-group {
+        padding: 0 5px;
+        align-items: baseline;
 
-    label {
-      width: 80px;
-      flex: 1;
+        label {
+            width: 80px;
+            flex: 1;
+        }
+
+        .form-fields {
+            flex: 3;
+
+            input[type="text"],
+            textarea {
+                border: 1px solid @colorTan;
+                background: rgba(0, 0, 0, 0.05);
+            }
+
+            textarea {
+                resize: vertical;
+            }
+        }
     }
-
-    .form-fields {
-      flex: 3;
-
-      input[type="text"], textarea {
-        border: 1px solid @colorTan;
-        background: rgba(0, 0, 0, 0.05);
-      }
-
-      textarea { resize: vertical; }
-    }
-  }
 }

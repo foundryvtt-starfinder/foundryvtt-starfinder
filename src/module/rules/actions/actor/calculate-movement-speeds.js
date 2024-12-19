@@ -1,5 +1,5 @@
 import { SFRPG } from "../../../config.js";
-import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes} from "../../../modifiers/types.js";
+import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
 
 export default function(engine) {
     engine.closures.add( "calculateMovementSpeeds", (fact, context) => {
@@ -17,13 +17,13 @@ export default function(engine) {
                 return 0;
             }
 
-            const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+            const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
             const computedBonus = roll.total;
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
                     speed: SFRPG.speeds[speedKey],
-                    type: bonus.type.capitalize(),
+                    type: game.i18n.format(`SFRPG.ModifierType${bonus.type.capitalize()}`),
                     mod: computedBonus.signedString(),
                     source: bonus.name
                 }));
@@ -53,12 +53,12 @@ export default function(engine) {
             let filteredModifiers = fact.modifiers.filter(mod => {
                 return (mod.enabled || mod.modifierType === "formula") && (mod.effectType === SFRPGEffectType.ALL_SPEEDS || (mod.effectType === SFRPGEffectType.SPECIFIC_SPEED && mod.valueAffected === speedKey));
             });
-            filteredModifiers = context.parameters.stackModifiers.process(filteredModifiers, context);
+            filteredModifiers = context.parameters.stackModifiers.process(filteredModifiers, context, {actor: fact.actor});
 
             let filteredMultiplyModifiers = fact.modifiers.filter(mod => {
                 return (mod.enabled || mod.modifierType === "formula") && mod.effectType === SFRPGEffectType.MULTIPLY_ALL_SPEEDS;
             });
-            filteredMultiplyModifiers = context.parameters.stackModifiers.process(filteredMultiplyModifiers, context);
+            filteredMultiplyModifiers = context.parameters.stackModifiers.process(filteredMultiplyModifiers, context, {actor: fact.actor});
 
             const bonus = Object.entries(filteredModifiers).reduce((sum, mod) => {
                 if (mod[1] === null || mod[1].length < 1) return sum;
@@ -92,7 +92,7 @@ export default function(engine) {
                         return 0;
                     }
 
-                    const roll = Roll.create(modifierBonus.modifier.toString(), data).evaluate({maximize: true});
+                    const roll = Roll.create(modifierBonus.modifier.toString(), data).evaluateSync({strict: false});
                     const computedBonus = roll.total;
 
                     if (computedBonus !== 0) {
@@ -108,7 +108,9 @@ export default function(engine) {
                 }
             }
 
-            data.attributes.speed[speedKey].value = Math.floor(data.attributes.speed[speedKey].value);
+            if (!game.settings.get("sfrpg", "decimalSpeed")) {
+                data.attributes.speed[speedKey].value = Math.floor(data.attributes.speed[speedKey].value);
+            }
 
             if (speedKey === "flying") {
                 data.attributes.speed[speedKey].maneuverability = data.attributes.speed[speedKey].baseManeuverability;

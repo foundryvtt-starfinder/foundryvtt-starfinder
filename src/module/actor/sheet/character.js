@@ -12,7 +12,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
 
     static get defaultOptions() {
         const options = super.defaultOptions;
-        mergeObject(options, {
+        foundry.utils.mergeObject(options, {
             classes: ['sfrpg', 'sheet', 'actor', 'character'],
             width: 715
             // height: 830
@@ -30,7 +30,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
     async getData() {
         const sheetData = await super.getData();
 
-        let hp = sheetData.system.attributes.hp;
+        const hp = sheetData.system.attributes.hp;
         if (hp.temp === 0) delete hp.temp;
         if (hp.tempmax === 0) delete hp.tempmax;
 
@@ -69,14 +69,14 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         }
 
         //   0      1       2      3        4      5       6           7               8     9
-        let [items,
+        const [items,
             spells,
             feats,
             classes,
             races,
             themes,
             archetypes,
-            conditionItems,
+            conditionItems, // contains Conditions and other timedEffects
             asis,
             actorResources] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
@@ -96,6 +96,14 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
                 item.config.capacityMaximum = item.getMaxCapacity();
             }
 
+            if (item.config.hasAttack) {
+                this._prepareAttackString(item);
+            }
+
+            if (item.config.hasDamage) {
+                this._prepareDamageString(item);
+            }
+
             if (item.type === "actorResource") {
                 this._prepareActorResource(item, actorData);
             }
@@ -107,16 +115,12 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
                 } else {
                     arr[0].push(item); // items
                 }
-            }
-            else if (item.type === "feat") {
-                if ((item.system.requirements?.toLowerCase() || "") === "condition") {
-                    arr[7].push(item); // conditionItems
-                } else {
-                    arr[2].push(item); // feats
-                }
+            } else if (item.type === "effect") {
+                arr[7].push(item); // timedEffects & conditionItems
+            } else if (item.type === "feat") {
+                arr[2].push(item); // feats
                 item.isFeat = true;
-            }
-            else if (item.type === "class") arr[3].push(item); // classes
+            } else if (item.type === "class") arr[3].push(item); // classes
             else if (item.type === "race") arr[4].push(item); // races
             else if (item.type === "theme") arr[5].push(item); // themes
             else if (item.type === "archetypes") arr[6].push(item); // archetypes
@@ -132,7 +136,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         this.processItemContainment(items, function(itemType, itemData) {
             let targetItemType = itemType;
             if (!(itemType in inventory)) {
-                for (let [key, entry] of Object.entries(inventory)) {
+                for (const [key, entry] of Object.entries(inventory)) {
                     if (entry.dataset.type.includes(itemType)) {
                         targetItemType = key;
                         break;
@@ -153,19 +157,75 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         });
 
         const features = {
-            classes: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Classes"), items: [], hasActions: false, dataset: { type: "class" }, isClass: true },
-            race: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Race"), items: [], hasActions: false, dataset: { type: "race" }, isRace: true },
-            theme: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Theme"), items: [], hasActions: false, dataset: { type: "theme" }, isTheme: true },
-            asi: { label: game.i18n.format("SFRPG.Items.Categories.AbilityScoreIncrease"), items: asis, hasActions: false, dataset: { type: "asi" }, isASI: true },
-            archetypes: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Archetypes"), items: [], dataset: { type: "archetypes" }, isArchetype: true },
-            active: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActiveFeats"), items: [], hasActions: true, dataset: { type: "feat", "activation.type": "action" } },
-            passive: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.PassiveFeats"), items: [], hasActions: false, dataset: { type: "feat" } },
-            resources: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"), items: [], hasActions: false, dataset: { type: "actorResource" } }
+            classes: {
+                category: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Classes"),
+                items: [],
+                hasActions: false,
+                dataset: { type: "class" },
+                isClass: true
+            },
+            race: {
+                category: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Race"),
+                items: [],
+                hasActions: false,
+                dataset: { type: "race" },
+                isRace: true
+            },
+            theme: {
+                category: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Theme"),
+                items: [],
+                hasActions: false,
+                dataset: { type: "theme" },
+                isTheme: true
+            },
+            asi: {
+                category: game.i18n.format("SFRPG.Items.Categories.AbilityScoreIncrease"),
+                items: asis,
+                hasActions: false,
+                dataset: { type: "asi" },
+                isASI: true
+            },
+            archetypes: {
+                category: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Archetypes"),
+                items: [],
+                dataset: { type: "archetypes" },
+                isArchetype: true
+            },
+            active: {
+                category: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActiveFeats"),
+                items: [],
+                hasActions: true,
+                dataset: { type: "feat", "activation.type": "action" }
+            },
+            ...foundry.utils.deepClone(CONFIG.SFRPG.featureCategories),
+            resources: {
+                category: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"),
+                items: [],
+                hasActions: false,
+                dataset: { type: "actorResource" }
+            }
+
         };
 
-        for (let f of feats) {
+        const otherFeatures = [];
+        for (const f of feats) {
             if (f.system.activation.type) features.active.items.push(f);
-            else features.passive.items.push(f);
+            else {
+                try {
+                    features[f.system.details.category].items.push(f);
+                } catch {
+                    features.otherFeatures.items.push(f);
+                }
+            }
+        }
+
+        if (otherFeatures.length > 0) {
+            features.otherFeatures = {
+                category: game.i18n.format("SFRPG.ActorSheet.Features.Categories.OtherFeatures"),
+                items: otherFeatures,
+                hasActions: false,
+                allowAdd: false
+            };
         }
 
         classes.sort((a, b) => b.levels - a.levels);
@@ -180,12 +240,12 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         data.features = Object.values(features);
 
         const modifiers = {
-            conditions: { label: "SFRPG.ModifiersConditionsTabLabel", modifiers: [], dataset: { subtab: "conditions" }, isConditions: true },
+            conditions: { label: "SFRPG.ModifiersConditionsTabLabel", modifiers: [], dataset: { subtab: "conditions", type: "effect" }, isConditions: true, allowAdd: true },
             permanent: { label: "SFRPG.ModifiersPermanentTabLabel", modifiers: [], dataset: { subtab: "permanent" } },
             temporary: { label: "SFRPG.ModifiersTemporaryTabLabel", modifiers: [], dataset: { subtab: "temporary" } }
         };
 
-        let [permanent, temporary, itemModifiers, conditions, misc] = actorData.modifiers.reduce((arr, modifier) => {
+        const [permanent, temporary, itemModifiers, conditions, misc] = actorData.modifiers.reduce((arr, modifier) => {
             if (modifier.subtab === "permanent") arr[0].push(modifier);
             else if (modifier.subtab === "conditions") arr[3].push(modifier);
             else arr[1].push(modifier); // Any unspecific categories go into temporary.
@@ -210,7 +270,6 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
 
         if (!this.options.editable) return;
 
-        // html.find('.toggle-prepared').click(this._onPrepareItem.bind(this));
         html.find('.reload').on('click', this._onReloadWeapon.bind(this));
 
         html.find('.short-rest').on('click', this._onShortRest.bind(this));
@@ -220,30 +279,6 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         html.find('.modifier-delete').on('click', this._onModifierDelete.bind(this));
         html.find('.modifier-toggle').on('click', this._onToggleModifierEnabled.bind(this));
         html.find('.player-class-level-up').on('click', this._onLevelUp.bind(this));
-    }
-
-    onBeforeCreateNewItem(itemData) {
-        super.onBeforeCreateNewItem(itemData);
-
-        if (itemData["type"] === "asi") {
-            const numASI = this.actor.items.filter(x => x.type === "asi").length;
-            const level = 5 + numASI * 5;
-            itemData.name = game.i18n.format("SFRPG.ItemSheet.AbilityScoreIncrease.ItemName", {level: level});
-        }
-    }
-
-    /**
-     * Handle toggling the prepared status of an Owned Itme within the Actor
-     *
-     * @param {Event} event The triggering click event
-     */
-    _onPrepareItem(event) {
-        event.preventDefault();
-
-        const itemId = event.currentTarget.closest('.item').dataset.itemId;
-        const item = this.actor.items.get(itemId);
-
-        return item.update({'system.preparation.prepared': !item.system.preparation.prepared});
     }
 
     /**

@@ -2,6 +2,11 @@
   "_id": "2VtZobiK2fFROeRg",
   "name": "Harness Lightning",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "systems/sfrpg/icons/spells/chain_surge.webp",
   "system": {
     "type": "",
@@ -65,8 +70,8 @@
     "descriptors": [],
     "dismissible": false,
     "duration": {
-      "units": "",
-      "value": "1 round plus 1 round/level"
+      "units": "round",
+      "value": "1+@details.cl.value"
     },
     "formula": "",
     "isActive": null,
@@ -84,10 +89,7 @@
       "prepared": false
     },
     "range": {
-      "additional": "10 ft.",
-      "per": "level",
-      "units": "ft",
-      "value": 100
+      "units": "medium"
     },
     "rollNotes": "",
     "save": {

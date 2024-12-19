@@ -2,6 +2,11 @@
   "_id": "FAhSZ48k1UQjHOjO",
   "name": "Iceflame crystal, least",
   "type": "weapon",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "icons/commodities/gems/gem-faceted-rough-blue.webp",
   "system": {
     "type": "",
@@ -19,6 +24,7 @@
     "ammunitionType": "",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": 0
@@ -71,40 +77,8 @@
       "parts": []
     },
     "damage": {
-      "parts": [
-        {
-          "name": "Base damage",
-          "formula": "1d3",
-          "group": null,
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
-            "cold": true,
-            "electricity": false,
-            "fire": false,
-            "healing": false,
-            "piercing": false,
-            "slashing": false,
-            "sonic": false
-          }
-        },
-        {
-          "name": "Frostbite damage",
-          "formula": "1d4",
-          "group": null,
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
-            "cold": true,
-            "electricity": false,
-            "fire": false,
-            "healing": false,
-            "piercing": false,
-            "slashing": false,
-            "sonic": false
-          }
-        }
-      ]
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -112,7 +86,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>Creating an eternal, endothermic flame is a classic test for hanakan spellcasters. When applied to a solarian weapon crystal, this magic creates a relentlessly heat-leeching gem that often causes its imbued weapon to glow with azure flames. Iceflame crystals have the frostbite weapon critical hit effect.</p>"
+      "value": "<p>Creating an eternal, endothermic flame is a classic test for hanakan spellcasters. When applied to a solarian weapon crystal, this magic creates a relentlessly heat-leeching gem that often causes its imbued weapon to glow with azure flames. Iceflame crystals have the frostbite weapon critical hit effect.</p>\n<p><span>Critical Effect: </span>Frostbite 1d4</p>"
     },
     "descriptors": [],
     "duration": {
@@ -125,7 +99,37 @@
     "identified": true,
     "isActive": null,
     "level": 5,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "72c4b9d4-ab6d-47d4-a1dc-a886acf9a251",
+        "name": "Iceflame crystal, least",
+        "type": "untyped",
+        "condition": "",
+        "damage": {
+          "damageGroup": null,
+          "damageTypes": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": true,
+            "electricity": false,
+            "fire": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        "effectType": "all-damage",
+        "enabled": true,
+        "limitTo": "container",
+        "max": 3,
+        "modifier": "1d3",
+        "modifierType": "damageSection",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "price": 3100,
     "proficient": true,
     "properties": {
@@ -156,7 +160,7 @@
       "extinguish": false,
       "feint": false,
       "fiery": false,
-      "firstArc": false,
+      "firstArc": true,
       "flexibleLine": false,
       "force": false,
       "freeHands": false,
@@ -166,6 +170,7 @@
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
       "hybrid": false,
       "hydrodynamic": false,
@@ -236,6 +241,10 @@
       "type": "",
       "dc": "",
       "descriptor": "negate"
+    },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
     },
     "source": "IS, pg. 79",
     "special": "",

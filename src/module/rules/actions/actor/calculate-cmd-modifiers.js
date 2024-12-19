@@ -18,13 +18,13 @@ export default function(engine) {
 
             let computedBonus = 0;
             try {
-                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
                 computedBonus = roll.total;
             } catch {}
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
-                    type: bonus.type.capitalize(),
+                    type: game.i18n.format(`SFRPG.ModifierType${bonus.type.capitalize()}`),
                     mod: computedBonus.signedString(),
                     source: bonus.name
                 }));
@@ -37,7 +37,7 @@ export default function(engine) {
             return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.CMD].includes(mod.effectType);
         });
 
-        const mods = context.parameters.stackModifiers.process(filteredMods, context);
+        const mods = context.parameters.stackModifiers.process(filteredMods, context, {actor: fact.actor});
 
         const cmdMod = Object.entries(mods).reduce((prev, curr) => {
             if (curr[1] === null || curr[1].length < 1) return prev;
@@ -46,8 +46,7 @@ export default function(engine) {
                 for (const bonus of curr[1]) {
                     prev += addModifier(bonus, fact.data, cmd, "SFRPG.CMDModiferTooltip");
                 }
-            }
-            else {
+            } else {
                 prev += addModifier(curr[1], fact.data, cmd, "SFRPG.CMDModiferTooltip");
             }
 

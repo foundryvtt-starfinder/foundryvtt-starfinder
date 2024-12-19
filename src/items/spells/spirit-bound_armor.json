@@ -2,6 +2,11 @@
   "_id": "AmVCSTcRS3bainbG",
   "name": "Spirit-bound Armor",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "systems/sfrpg/icons/spells/spirit_bound_armor.webp",
   "system": {
     "type": "",
@@ -39,13 +44,13 @@
     "description": {
       "chat": "",
       "unidentified": "",
-      "value": "<p>You divert a benevolent spirit from the River of Souls to temporarily inhabit a suit of armor. The spirit steadies the nerves and balance of the creature wearing the armor. If the target becomes @UUID[Compendium.sfrpg.conditions.MZ8OoH1GE9qDMyCD]{Flat-footed} during the duration, it ignores the penalty to AC that condition imposes. Similarly, the off-kilter condition has no effect on the target while this spell is in effect.</p>"
+      "value": "<p>You divert a benevolent spirit from the River of Souls to temporarily inhabit a suit of armor. The spirit steadies the nerves and balance of the creature wearing the armor. If the target becomes @UUID[Compendium.sfrpg.conditions.Item.MZ8OoH1GE9qDMyCD]{Flat-footed} during the duration, it ignores the penalty to AC that condition imposes. Similarly, the off-kilter condition has no effect on the target while this spell is in effect.</p>"
     },
     "descriptors": [],
     "dismissible": false,
     "duration": {
-      "units": "",
-      "value": "1 round/level"
+      "units": "round",
+      "value": "@details.cl.value"
     },
     "formula": "",
     "level": 1,
@@ -61,10 +66,7 @@
       "prepared": false
     },
     "range": {
-      "additional": "5 ft.",
-      "per": "2 levels",
-      "units": "ft",
-      "value": 25
+      "units": "close"
     },
     "save": {
       "type": "will",

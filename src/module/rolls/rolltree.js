@@ -1,6 +1,5 @@
-import RollNode from "./rollnode.js";
-import RollContext from "./rollcontext.js";
 import RollDialog from "../apps/roll-dialog.js";
+import RollNode from "./rollnode.js";
 
 export default class RollTree {
     constructor(options = {}) {
@@ -9,6 +8,7 @@ export default class RollTree {
         /** @type {RollNode} */
         this.nodes = {};
         this.options = options;
+        this.rollMods = [];
     }
 
     /**
@@ -58,15 +58,21 @@ export default class RollTree {
             }
 
             const parts = this.options.parts?.filter(x => x.isDamageSection);
-            const finalRollFormula = this.rootNode.resolve();
+            const finalRollFormula = this.rootNode.resolve(0, this.rollMods);
+            let callbackResult = null;
             if (parts?.length > 0) {
                 for (const part of parts) {
-                    const finalSectionFormula = duplicate(finalRollFormula);
+                    const finalSectionFormula = foundry.utils.deepClone(finalRollFormula);
 
                     if (finalSectionFormula.finalRoll.includes("<damageSection>")) {
                         const damageSectionFormula = part?.formula ?? "0";
-                        finalSectionFormula.finalRoll = finalSectionFormula.finalRoll.replace("<damageSection>", damageSectionFormula);
-                        finalSectionFormula.formula = finalSectionFormula.formula.replace("<damageSection>", damageSectionFormula);
+                        if (part.isPrimarySection) {
+                            finalSectionFormula.finalRoll = finalSectionFormula.finalRoll.replace("<damageSection>", damageSectionFormula);
+                            finalSectionFormula.formula = finalSectionFormula.formula.replace("<damageSection>", damageSectionFormula);
+                        } else {
+                            finalSectionFormula.finalRoll = damageSectionFormula;
+                            finalSectionFormula.formula = damageSectionFormula;
+                        }
                     }
 
                     if (this.options.debug) {
@@ -79,7 +85,7 @@ export default class RollTree {
                             const partCount = parts.length;
                             part.partIndex = game.i18n.format("SFRPG.Damage.PartIndex", {partIndex: partIndex + 1, partCount: partCount});
                         }
-                        await callback(button, rollMode, finalSectionFormula, part);
+                        callbackResult = await callback(button, rollMode, finalSectionFormula, part, this.rootNode, this.rollMods);
                     }
                 }
             } else {
@@ -88,103 +94,133 @@ export default class RollTree {
                 }
 
                 if (callback) {
-                    await callback(button, rollMode, finalRollFormula);
+                    callbackResult = await callback(button, rollMode, finalRollFormula, this.rootNode, this.rollMods);
                 }
             }
 
-            return {button: button, rollMode: rollMode, finalRollFormula: finalRollFormula};
+            return {button: button, rollMode: rollMode, finalRollFormula: finalRollFormula, callbackResult};
         }
 
-        const uiPromise = this.displayUI(formula, contexts, allRolledMods);
-        uiPromise.then(async ([button, rollMode, bonus, parts]) => {
-            if (button === null) {
-                console.log('Roll was cancelled');
-                await callback('cancel', "none", null);
-                return;
+        let {button, rollMode, bonus, parts} = await this.displayUI(formula, contexts, allRolledMods);
+        let callbackResult = null;
+        if (button === null) {
+            console.log('Roll was cancelled');
+            await callback('cancel', "none", null);
+            return;
+        }
+
+        for (const [key, value] of Object.entries(this.nodes)) {
+            if (value.referenceModifier) {
+                value.isEnabled = value.referenceModifier.enabled;
             }
+        }
 
-            for (const [key, value] of Object.entries(this.nodes)) {
-                if (value.referenceModifier) {
-                    value.isEnabled = value.referenceModifier.enabled;
-                }
-            }
+        const finalRollFormula = this.rootNode.resolve(0, this.rollMods);
+        const enabledParts = parts?.filter(x => x.enabled);
+        if (enabledParts?.length > 0) {
+            for (const part of enabledParts) {
+                const finalSectionFormula = foundry.utils.deepClone(finalRollFormula);
 
-            const finalRollFormula = this.rootNode.resolve();
-            const enabledParts = parts?.filter(x => x.enabled);
-            if (enabledParts?.length > 0) {
-                for (const part of enabledParts) {
-                    const finalSectionFormula = duplicate(finalRollFormula);
-
-                    if (finalSectionFormula.finalRoll.includes("<damageSection>")) {
-                        const damageSectionFormula = part?.formula ?? "0";
+                if (finalSectionFormula.finalRoll.includes("<damageSection>")) {
+                    const damageSectionFormula = part?.formula ?? "0";
+                    if (part.isPrimarySection) {
                         finalSectionFormula.finalRoll = finalSectionFormula.finalRoll.replace("<damageSection>", damageSectionFormula);
                         finalSectionFormula.formula = finalSectionFormula.formula.replace("<damageSection>", damageSectionFormula);
+                    } else {
+                        finalSectionFormula.finalRoll = damageSectionFormula;
+                        finalSectionFormula.formula = damageSectionFormula;
                     }
 
-                    bonus = bonus.trim();
-                    if (bonus) {
-                        const operators = ['+', '-', '*', '/'];
-                        if (!operators.includes(bonus[0])) {
-                            finalSectionFormula.finalRoll += " +";
-                            finalSectionFormula.formula += " +";
-                        }
-                        finalSectionFormula.finalRoll += " " + bonus;
-                        finalSectionFormula.formula += game.i18n.format("SFRPG.Rolls.Dice.Formula.AdditionalBonus", { "bonus": bonus });
-                    }
-
-                    if (this.options.debug) {
-                        console.log([`Final roll results outcome`, formula, allRolledMods, finalSectionFormula]);
-                    }
-
-                    if (callback) {
-                        if (enabledParts.length > 1) {
-                            const partIndex = enabledParts.indexOf(part);
-                            const partCount = enabledParts.length;
-                            part.partIndex = game.i18n.format("SFRPG.Damage.PartIndex", {partIndex: partIndex + 1, partCount: partCount});
-                        }
-                        await callback(button, rollMode, finalSectionFormula, part);
-                    }
-                }
-            } else {
-                if (finalRollFormula.finalRoll.includes("<damageSection>")) {
-                    finalRollFormula.finalRoll = finalRollFormula.finalRoll.replace("<damageSection>", "0");
-                    finalRollFormula.formula = finalRollFormula.formula.replace("<damageSection>", "0");
                 }
 
                 bonus = bonus.trim();
                 if (bonus) {
                     const operators = ['+', '-', '*', '/'];
                     if (!operators.includes(bonus[0])) {
-                        finalRollFormula.finalRoll += " +";
-                        finalRollFormula.formula += " +";
+                        finalSectionFormula.finalRoll += " +";
+                        finalSectionFormula.formula += " +";
                     }
-                    finalRollFormula.finalRoll += " " + bonus;
-                    finalRollFormula.formula += game.i18n.format("SFRPG.Rolls.Dice.Formula.AdditionalBonus", { "bonus": bonus });
+                    finalSectionFormula.finalRoll += " " + bonus;
+                    finalSectionFormula.formula += game.i18n.format("SFRPG.Rolls.Dice.Formula.AdditionalBonus", { "bonus": bonus });
                 }
 
                 if (this.options.debug) {
-                    console.log([`Final roll results outcome`, formula, allRolledMods, finalRollFormula]);
+                    console.log([`Final roll results outcome`, formula, allRolledMods, finalSectionFormula]);
                 }
 
-                await callback(button, rollMode, finalRollFormula);
+                if (callback) {
+                    if (enabledParts.length > 1) {
+                        const partIndex = enabledParts.indexOf(part);
+                        const partCount = enabledParts.length;
+                        part.partIndex = game.i18n.format("SFRPG.Damage.PartIndex", {partIndex: partIndex + 1, partCount: partCount});
+                    }
+                    callbackResult = await callback(button, rollMode, finalSectionFormula, part, this.rootNode, this.rollMods, bonus);
+                }
             }
-        });
-        return uiPromise;
+        } else {
+            if (finalRollFormula.finalRoll.includes("<damageSection>")) {
+                const damageSectionFormula = part?.formula ?? "0";
+                finalRollFormula.finalRoll = finalRollFormula.finalRoll.replace("<damageSection>", damageSectionFormula);
+                finalRollFormula.formula = finalRollFormula.formula.replace("<damageSection>", damageSectionFormula);
+            }
+
+            bonus = bonus.trim();
+            if (bonus) {
+                const operators = ['+', '-', '*', '/'];
+                if (!operators.includes(bonus[0])) {
+                    finalRollFormula.finalRoll += " +";
+                    finalRollFormula.formula += " +";
+                }
+                finalRollFormula.finalRoll += " " + bonus;
+                finalRollFormula.formula += game.i18n.format("SFRPG.Rolls.Dice.Formula.AdditionalBonus", { "bonus": bonus });
+            }
+
+            if (this.options.debug) {
+                console.log([`Final roll results outcome`, formula, allRolledMods, finalRollFormula]);
+            }
+
+            if (callback) {
+                if (enabledParts.length > 1) {
+                    const partIndex = enabledParts.indexOf(part);
+                    const partCount = enabledParts.length;
+                    part.partIndex = game.i18n.format("SFRPG.Damage.PartIndex", {partIndex: partIndex + 1, partCount: partCount});
+                }
+                callbackResult = await callback(button, rollMode, finalRollFormula, this.rootNode, this.rollMods, bonus);
+            }
+        }
+
+        return {button, rollMode, bonus, parts, callbackResult};
     }
 
     populate() {
         if (this.options.debug) {
             console.log(`Resolving '${this.formula}'`);
-            console.log(duplicate(this.contexts));
+            console.log(this.contexts);
         }
 
         this.rootNode = new RollNode(this, this.formula, null, null, false, true, null, this.options);
         this.nodes = {};
+        this.rollMods = [];
 
         this.nodes[this.formula] = this.rootNode;
         this.rootNode.populate(this.nodes, this.contexts);
 
         const allRolledMods = RollTree.getAllRolledModifiers(this.nodes);
+
+        for (const [key, value] of Object.entries(this.nodes)) {
+            if (value.referenceModifier) {
+                this.rollMods.push(value.referenceModifier);
+            }
+            if (value.calculatedMods) {
+                for (let calcModsI = 0; calcModsI < value.calculatedMods.length; calcModsI++) {
+                    const mod = value.calculatedMods[calcModsI];
+                    if (this.rollMods.findIndex((x) => x.name === mod.bonus.name) === -1 && this.formula.indexOf(mod.bonus.name) === -1) {
+                        this.rollMods.push(mod.bonus);
+                    }
+                }
+            }
+        }
+
         const availableModifiers = [].concat(allRolledMods.map(x => x.referenceModifier));
         return availableModifiers;
     }

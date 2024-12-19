@@ -2,12 +2,22 @@
   "_id": "a6GnNgXGI16qsf4Z",
   "name": "Veolisk",
   "type": "npc2",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "_id": "5oePV6iFFiMKs1s1",
       "name": "Bite",
       "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -22,6 +32,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -56,6 +67,8 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
+          "isOpen": true,
           "storage": [
             {
               "type": "slot",
@@ -84,8 +97,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
@@ -94,9 +110,11 @@
           "units": "",
           "value": null
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
+        "isActive": null,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -186,12 +204,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -199,6 +219,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -220,6 +241,11 @@
       "_id": "UhDbr5dCFMYt3Rtz",
       "name": "Void Gaze (Ex) (DC 16)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -227,6 +253,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "",
@@ -248,8 +275,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>A veolisk embodies the claustrophobic, dark, and often maddening aspects of deep space, and it can project a sliver of the void into its enemies with its mere gaze. A creature that fails a DC 16 Will saving throw against this gaze ability is confused until the beginning of its next turn. This is a mind-affecting effect.</p>"
         },
@@ -259,6 +289,7 @@
           "value": null
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -271,6 +302,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "will",
           "dc": "16",
@@ -292,12 +324,14 @@
   "prototypeToken": {
     "name": "Veolisk",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -326,11 +360,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -348,6 +379,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -398,8 +430,14 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
+      "baseSpellDC": {
+        "base": 0
+      },
       "cmd": {
         "min": 0,
         "tooltip": [],
@@ -456,7 +494,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 20
@@ -465,7 +504,8 @@
         "special": "original base: 20 ft.",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -489,13 +529,26 @@
       "alignment": "CE",
       "aura": "",
       "biography": {
+        "age": 0,
+        "dateOfBirth": "",
+        "deity": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
+        "height": "",
+        "homeWorld": "",
+        "otherVisuals": "",
         "public": "",
-        "value": "<p>Veolisks are lumbering, reptilelike quadrupeds with bony exoskeletons. They are often compared to many planets’ prehistoric megafauna, despite being much smaller. Veolisks are typically found only on remote planets and planetoids in the Vast, as most xenobiologists believe their maddening gazes tend to drive off other species and make settling near veolisk territory very difficult. If veolisks are discovered near established communities, the creatures are usually hunted ruthlessly until there are none left.</p>\n<p>The veolisk’s signature void gaze ability has led to speculation that the creatures are descended from ancestors with similar gaze attacks that had far more severe effects, and they have earned the nickname “void basilisks” from those versed in the ancient folklore of Golarion. Some sages believe destruction-loving cultists of @UUID[Compendium.sfrpg.setting.JpQpQbdXNOX6aTVG]{The Devourer} bred the first veolisks millennia ago, well before the Gap. Whether or not this is true, the beasts have become popular as guardians of remote Devourer cult bases and as pets to those who believe themselves to be at one with the universe’s entropy. Curiously, though most cultures would never think to try domesticating veolisks, the beasts become quite docile and mostly harmless when wearing blinders, veils, or other methods of negating their gaze ability.</p>\n<p>These hulking beasts can survive on very little food, usually eating only one small meal-flesh, fruits, fungus, plant life, or anything it can find-a day. Scientists don’t agree on exactly what maintains a veolisk’s physiology; some believe the creatures simply have a hyperefficient metabolism, while others suggest that they feed on cosmic radiation like trees gathering sustenance through photosynthesis. A few experts theorize that veolisks don’t need to eat at all to survive and subsist solely on the background arcane energies that are present everywhere in the galaxy. Reputable xenobiologists tend to scoff at this hypothesis, but their opponents are quick to point out that universe is full of strange and unknowable wonders that defy scientific explanation.</p>\n<p>Veolisks lay fist-sized leathery eggs, usually six to eight at a time. These eggs are recognizable as belonging to a veolisk due to their ebony coloring and their tendency to give off faint wisps of odorless smoke. Once laid, the eggs don’t require any kind of incubation and usually hatch on their own after a few weeks. In most broods, the first veolisks to hatch tend to devour the unhatched eggs as their first meals. Veolisk young begin to hunt for themselves after this initial meal and are fully mature in less than a year. Adult veolisks usually mate whenever the opportunity presents itself, though neither parent takes any interest in their eggs or offspring.</p>\n<p>A typical veolisk is about 7 feet long from the tip of its snout to the end of its tail and weighs approximately 200 pounds.</p>"
+        "value": "<p>Veolisks are lumbering, reptilelike quadrupeds with bony exoskeletons. They are often compared to many planets’ prehistoric megafauna, despite being much smaller. Veolisks are typically found only on remote planets and planetoids in the Vast, as most xenobiologists believe their maddening gazes tend to drive off other species and make settling near veolisk territory very difficult. If veolisks are discovered near established communities, the creatures are usually hunted ruthlessly until there are none left.</p>\n<p>The veolisk’s signature void gaze ability has led to speculation that the creatures are descended from ancestors with similar gaze attacks that had far more severe effects, and they have earned the nickname “void basilisks” from those versed in the ancient folklore of Golarion. Some sages believe destruction-loving cultists of @UUID[Compendium.sfrpg.setting.Item.JpQpQbdXNOX6aTVG]{The Devourer} bred the first veolisks millennia ago, well before the Gap. Whether or not this is true, the beasts have become popular as guardians of remote Devourer cult bases and as pets to those who believe themselves to be at one with the universe’s entropy. Curiously, though most cultures would never think to try domesticating veolisks, the beasts become quite docile and mostly harmless when wearing blinders, veils, or other methods of negating their gaze ability.</p>\n<p>These hulking beasts can survive on very little food, usually eating only one small meal-flesh, fruits, fungus, plant life, or anything it can find-a day. Scientists don’t agree on exactly what maintains a veolisk’s physiology; some believe the creatures simply have a hyperefficient metabolism, while others suggest that they feed on cosmic radiation like trees gathering sustenance through photosynthesis. A few experts theorize that veolisks don’t need to eat at all to survive and subsist solely on the background arcane energies that are present everywhere in the galaxy. Reputable xenobiologists tend to scoff at this hypothesis, but their opponents are quick to point out that universe is full of strange and unknowable wonders that defy scientific explanation.</p>\n<p>Veolisks lay fist-sized leathery eggs, usually six to eight at a time. These eggs are recognizable as belonging to a veolisk due to their ebony coloring and their tendency to give off faint wisps of odorless smoke. Once laid, the eggs don’t require any kind of incubation and usually hatch on their own after a few weeks. In most broods, the first veolisks to hatch tend to devour the unhatched eggs as their first meals. Veolisk young begin to hunt for themselves after this initial meal and are fully mature in less than a year. Adult veolisks usually mate whenever the opportunity presents itself, though neither parent takes any interest in their eggs or offspring.</p>\n<p>A typical veolisk is about 7 feet long from the tip of its snout to the end of its tail and weighs approximately 200 pounds.</p>",
+        "weight": ""
       },
       "class": "",
       "cr": 6,
       "environment": "any",
       "organization": "solitary or pair",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #3 pg. 60",
@@ -510,6 +563,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 13,
         "ranks": 13,
@@ -520,6 +574,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -530,6 +585,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -540,6 +596,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -550,6 +607,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -560,6 +618,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -570,6 +629,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -580,6 +640,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -590,6 +651,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 13,
         "ranks": 13,
@@ -600,6 +662,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -610,6 +673,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -620,6 +684,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -630,6 +695,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 13,
         "ranks": 13,
@@ -640,6 +706,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -650,6 +717,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -660,6 +728,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -671,6 +740,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -681,6 +751,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -691,6 +762,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 18,
         "ranks": 18,
@@ -701,6 +773,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -710,30 +783,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -764,6 +844,9 @@
       },
       "senses": "darkvision 60 ft., low-light vision",
       "size": "medium",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

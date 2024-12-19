@@ -2,12 +2,22 @@
   "_id": "sq5VeUcFzLBWP1Qy",
   "name": "Threshwolf",
   "type": "npc2",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "_id": "veKjYNI7aCcSJLeJ",
       "name": "Quills (Ex)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -15,6 +25,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -36,8 +47,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>A threshwolf’s mane consists of sharp, glasslike hairs that protect its neck and shoulders. A creature attacking a threshwolf with a natural weapon, an unarmed strike, or melee weapon without reach must succeed at a DC 13 Reflex saving throw or take 1d4 piercing damage as several of these sharp quills break off in their flesh. The attacking creature also gains the off-target condition until the beginning of its next turn due to the pain and irritation.</p>"
         },
@@ -47,6 +61,7 @@
           "value": null
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -59,6 +74,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -77,8 +93,14 @@
       }
     },
     {
+      "_id": "ScmWadNL2DEOxUK7",
       "name": "Bite (plus Grab)",
       "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -93,6 +115,7 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -100,6 +123,24 @@
           "value": null
         },
         "attackBonus": 11,
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": true
+        },
         "attuned": false,
         "bulk": "L",
         "capacity": {
@@ -107,6 +148,23 @@
           "value": 0
         },
         "chatFlavor": "plus grab",
+        "container": {
+          "contents": [],
+          "includeContentsInWealthCalculation": 1,
+          "isOpen": true,
+          "storage": [
+            {
+              "type": "slot",
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 0,
+              "subtype": "fusion",
+              "weightProperty": "level"
+            }
+          ]
+        },
         "critical": {
           "effect": "",
           "parts": []
@@ -122,8 +180,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
@@ -132,10 +193,12 @@
           "units": "",
           "value": null
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "fusions": [],
         "identified": true,
+        "isActive": null,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -225,12 +288,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -238,6 +303,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -251,12 +317,19 @@
           "per": null,
           "value": 0
         },
+        "weaponCategory": "uncategorized",
         "weaponType": "basicM"
       }
     },
     {
+      "_id": "reJLmG4CwIZ0z9jU",
       "name": "Thresh (Ex)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -264,6 +337,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "other",
         "activation": {
           "type": "swift",
@@ -293,10 +367,13 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
-          "value": "<p>Whenever a threshwolf succeeds at a combat maneuver to grapple or maintain a grapple, it can immediately shake its mane as a swift action, raking a @UUID[Compendium.sfrpg.conditions.4AkWDHGM6gHDepHN]{Grappled} or @UUID[Compendium.sfrpg.conditions.XgK4EdO5D3Fj3iWz]{Pinned} victim with razor-sharp quills and inflicting 1d6+5 slashing damage.</p>"
+          "value": "<p>Whenever a threshwolf succeeds at a combat maneuver to grapple or maintain a grapple, it can immediately shake its mane as a swift action, raking a @UUID[Compendium.sfrpg.conditions.Item.4AkWDHGM6gHDepHN]{Grappled} or @UUID[Compendium.sfrpg.conditions.Item.XgK4EdO5D3Fj3iWz]{Pinned} victim with razor-sharp quills and inflicting 1d6+5 slashing damage.</p>"
         },
         "descriptors": [],
         "duration": {
@@ -304,6 +381,7 @@
           "value": ""
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -316,6 +394,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -337,12 +416,14 @@
   "prototypeToken": {
     "name": "Threshwolf",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -371,11 +452,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -393,6 +471,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -443,8 +522,14 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
+      "baseSpellDC": {
+        "base": 0
+      },
       "cmd": {
         "min": 0,
         "tooltip": [],
@@ -501,7 +586,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 40
@@ -510,7 +596,8 @@
         "special": "original base: 40 ft.",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -534,12 +621,26 @@
       "alignment": "N",
       "aura": "",
       "biography": {
+        "age": 0,
+        "dateOfBirth": "",
+        "deity": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
+        "height": "",
+        "homeWorld": "",
+        "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>Hailing from an unknown world of fierce natural selection (presumably in the Vast), threshwolves are vicious mammalian predators. Though also gifted with teeth and claws, these hunters’ most identifiable feature is a mane of glass-like fibers they use to gore prey and shred undergrowth. While predominantly carnivores, threshwolves also feed on fruit, vegetation, and fungus when available. When a pack claims territory, they spend time carving a labyrinthine den within the thick, thorny undergrowth they favor. They raise their young communally, with the largest female taking the lead in most hunts. Packs develop complex social hierarchies and delineate labor much like ant colonies or formians, with different members focused on hunting, patrolling territory, maintaining the lair, or rearing young.</p>\n<p>Social behavior and reasonable animal intelligence make threshwolves easy to train, though the aggressive predators will constantly test the resolve of their trainers with challenges for dominance. Vesk colonies in the Vast have experimented with truly domesticating the alien beasts, yielding mixed results. Threshwolves can be bred for obedience, and the same genes that control this behavior seem linked to their iconic mane; more approachable and malleable threshwolves develop finer quills that cause minor irritation rather than lacerations.</p>\n<p>Xenobiologists have determined that threshwolves originate from the same world as needlehawks (page 58), and the two likely shared biomes. Many believe needlehawks would scavenge what they could from threshwolf kills, provided that the small fliers could stay away from these larger predators’ jaws. Like needlehawks, threshwolves are sometimes employed by dycepskians as scouts connected to the fungal mass mind and as living containers to breed more of their mindless mycelium within.</p>\n<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>warm and temperate forests and mountains</p>\n<h3>Organization</h3>\n<p>solitary, pair, or pack (5-10)</p>\n</section>"
+        "value": "<h2>Description</h2>\n<p>Hailing from an unknown world of fierce natural selection (presumably in the Vast), threshwolves are vicious mammalian predators. Though also gifted with teeth and claws, these hunters’ most identifiable feature is a mane of glass-like fibers they use to gore prey and shred undergrowth. While predominantly carnivores, threshwolves also feed on fruit, vegetation, and fungus when available. When a pack claims territory, they spend time carving a labyrinthine den within the thick, thorny undergrowth they favor. They raise their young communally, with the largest female taking the lead in most hunts. Packs develop complex social hierarchies and delineate labor much like ant colonies or formians, with different members focused on hunting, patrolling territory, maintaining the lair, or rearing young.</p>\n<p>Social behavior and reasonable animal intelligence make threshwolves easy to train, though the aggressive predators will constantly test the resolve of their trainers with challenges for dominance. Vesk colonies in the Vast have experimented with truly domesticating the alien beasts, yielding mixed results. Threshwolves can be bred for obedience, and the same genes that control this behavior seem linked to their iconic mane; more approachable and malleable threshwolves develop finer quills that cause minor irritation rather than lacerations.</p>\n<p>Xenobiologists have determined that threshwolves originate from the same world as needlehawks (page 58), and the two likely shared biomes. Many believe needlehawks would scavenge what they could from threshwolf kills, provided that the small fliers could stay away from these larger predators’ jaws. Like needlehawks, threshwolves are sometimes employed by dycepskians as scouts connected to the fungal mass mind and as living containers to breed more of their mindless mycelium within.</p>\n<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>warm and temperate forests and mountains</p>\n<h3>Organization</h3>\n<p>solitary, pair, or pack (5-10)</p>\n</section>",
+        "weight": ""
       },
       "class": "",
       "cr": 5,
       "environment": "",
+      "organization": "",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #28 pg. 60",
@@ -554,6 +655,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -564,6 +666,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 11,
         "ranks": 11,
@@ -574,6 +677,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -584,6 +688,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -594,6 +699,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -604,6 +710,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -614,6 +721,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -624,6 +732,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -634,6 +743,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -644,6 +754,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -654,6 +765,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -664,6 +776,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -674,6 +787,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 11,
         "ranks": 11,
@@ -684,6 +798,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -694,6 +809,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -704,6 +820,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -715,6 +832,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -725,6 +843,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -735,6 +854,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 11,
         "ranks": 11,
@@ -745,6 +865,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 16,
         "ranks": 16,
@@ -754,30 +875,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -810,6 +938,9 @@
       },
       "senses": "blindsense (scent) 30 ft., low-light vision",
       "size": "medium",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

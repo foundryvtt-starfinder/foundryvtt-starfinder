@@ -138,7 +138,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
                 // Create actor item helper
                 const tokenId = this.actor.isToken ? this.actor.token.id : null;
                 const sceneId = this.actor.isToken ? this.actor.token.parent.id : null;
-                const itemHelper = new ActorItemHelper(this.actor.id, tokenId, sceneId);
+                const itemHelper = new ActorItemHelper(this.actor.id, tokenId, sceneId, { actor: this.actor });
 
                 const originalContainer = getItemContainer(this.actor.items, newAmmunition);
 
@@ -230,7 +230,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
         renderPromise.then((html) => {
             // Create the chat message
             const chatData = {
-                type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+                type: CONST.CHAT_MESSAGE_STYLES.OTHER,
                 speaker: ChatMessage.getSpeaker({ actor: this.actor }),
                 content: html
             };

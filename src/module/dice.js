@@ -2,6 +2,7 @@ import SFRPGCustomChatMessage from "./chat/chatbox.js";
 import { SFRPG } from "./config.js";
 import RollContext from "./rolls/rollcontext.js";
 import RollTree from "./rolls/rolltree.js";
+import StackModifiers from "./rules/closures/stack-modifiers.js";
 
 // Type definitions for documentation.
 /**
@@ -162,7 +163,7 @@ export class DiceSFRPG {
     * @param {DialogOptions}        data.dialogOptions Modal dialog options
     */
     static async d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true, rollOptions = {},
-        critical = 20, fumble = 1, chatMessage = true, onClose, dialogOptions }) {
+        critical = 20, fumble = 1, chatMessage = true, onClose, dialogOptions, actorContextKey = "actor" }) {
 
         flavor = `${title}${(flavor ? " <br> " + flavor : "")}`;
 
@@ -211,7 +212,7 @@ export class DiceSFRPG {
         const formula = parts.map(partMapper).join(" + ");
 
         const tree = new RollTree(options);
-        return tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormula) => {
+        return await tree.buildRoll(formula, rollContext, async (button, rollMode, unusedFinalFormula, node, rollMods, bonus = null) => {
             if (button === "cancel") {
                 if (onClose) {
                     onClose(null, null, null);
@@ -226,8 +227,10 @@ export class DiceSFRPG {
                 dieRoll = "2d20kh";
             }
 
-            finalFormula.finalRoll = dieRoll + " + " + finalFormula.finalRoll;
-            finalFormula.formula = dieRoll + " + " + finalFormula.formula;
+            const finalFormula = await this._calcStackingFormula(node, rollMods, bonus, rollContext.allContexts[actorContextKey]?.entity);
+
+            finalFormula.finalRoll = `${dieRoll} + ${finalFormula.finalRoll}`;
+            finalFormula.formula = `${dieRoll} + ${finalFormula.formula}`;
             finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
                 .trim();
             finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
@@ -240,10 +243,10 @@ export class DiceSFRPG {
 
             const rollObject = Roll.create(finalFormula.finalRoll, { breakdown: preparedRollExplanation, tags: tags });
             rollObject.options.rollOptions = rollOptions;
-            let roll = await rollObject.evaluate({async: true});
+            const roll = await rollObject.evaluate();
 
             // Flag critical thresholds
-            for (let d of roll.dice) {
+            for (const d of roll.dice) {
                 if (d.faces === 20) {
                     d.options.critical = critical;
                     d.options.fumble = fumble;
@@ -252,7 +255,7 @@ export class DiceSFRPG {
 
             // if (flavor) {
             //     const chatData = {
-            //         type: CONST.CHAT_MESSAGE_TYPES.IC,
+            //         type: CONST.CHAT_MESSAGE_STYLES.IC,
             //         speaker: speaker,
             //         content: flavor
             //     };
@@ -269,13 +272,14 @@ export class DiceSFRPG {
                 // Push the roll to the ChatBox
                 const customData = {
                     title: flavor,
-                    rollContext:  rollContext,
-                    speaker: speaker,
-                    rollMode: rollMode,
+                    rollContext,
+                    speaker,
+                    rollMode,
                     breakdown: preparedRollExplanation,
-                    htmlData: htmlData,
+                    htmlData,
                     rollType: "normal",
-                    rollOptions: rollOptions
+                    rollOptions,
+                    rollDices: finalFormula.rollDices
                 };
 
                 try {
@@ -288,16 +292,15 @@ export class DiceSFRPG {
 
             if (!useCustomCard && chatMessage) {
                 const messageData = {
-                    flavor: flavor,
-                    speaker: speaker,
-                    rollMode: rollMode,
-                    roll: roll,
-                    type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+                    flavor,
+                    speaker,
+                    rollMode,
+                    rolls: [roll],
                     sound: CONFIG.sounds.dice,
-                    flags: {rollOptions: rollOptions}
+                    flags: { rollOptions }
                 };
 
-                messageData.content = await roll.render({ htmlData: htmlData });
+                messageData.content = await roll.render({ htmlData: htmlData, customTooltip: finalFormula.rollDices });
                 if (rollOptions?.actionTarget) {
                     messageData.content = DiceSFRPG.appendTextToRoll(messageData.content, game.i18n.format("SFRPG.Items.Action.ActionTarget.ChatMessage", {actionTarget: rollOptions.actionTargetSource[rollOptions.actionTarget]}));
                 }
@@ -312,7 +315,10 @@ export class DiceSFRPG {
             if (errorToThrow) {
                 throw errorToThrow;
             }
+
+            return roll;
         });
+
     }
 
     /**
@@ -338,7 +344,7 @@ export class DiceSFRPG {
     * @param {DialogOptions}      data.dialogOptions Modal dialog options
     * @returns {Promise<RollResult>|Promise} Returns the roll's result or an empty promise.
     */
-    static async createRoll({ event = new Event(''), rollFormula = null, parts, rollContext, title, mainDie = "d20", advantage = true, critical = 20, fumble = 1, breakdown = "", tags = [], dialogOptions, useRawStrings = false }) {
+    static async createRoll({ event = new Event(''), rollFormula = null, parts, rollContext, title, mainDie = "d20", advantage = true, critical = 20, fumble = 1, breakdown = "", tags = [], dialogOptions, useRawStrings = false, actorContextKey = "actor" }) {
 
         if (!rollContext?.isValid()) {
             console.log(['Invalid rollContext', rollContext]);
@@ -372,7 +378,9 @@ export class DiceSFRPG {
         if (dialogOptions?.skipUI) {
             /** @type {RollResult|null} */
             let result = null;
-            await tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormula) => {
+            await tree.buildRoll(formula, rollContext, async (button, rollMode, unusedFinalFormula, node, rollMods, bonus = null) => {
+                const finalFormula = await this._calcStackingFormula(node, rollMods, bonus, rollContext.allContexts[actorContextKey]?.entity);
+
                 if (mainDie) {
                     let dieRoll = "1" + mainDie;
                     if (mainDie === "d20") {
@@ -383,16 +391,16 @@ export class DiceSFRPG {
                         }
                     }
 
-                    finalFormula.finalRoll = dieRoll + " + " + finalFormula.finalRoll;
-                    finalFormula.formula = dieRoll + " + " + finalFormula.formula;
+                    finalFormula.finalRoll = `${dieRoll} + ${finalFormula.finalRoll}`;
+                    finalFormula.formula = `${dieRoll} + ${finalFormula.formula}`;
                 }
 
                 const rollObject = Roll.create(finalFormula.finalRoll, { breakdown, tags, skipUI: true });
-                let roll = await rollObject.evaluate({async: true});
+                const roll = await rollObject.evaluate();
                 roll.options.rollMode = rollMode;
 
                 // Flag critical thresholds
-                for (let d of roll.dice) {
+                for (const d of roll.dice) {
                     if (d.faces === 20) {
                         d.options.critical = critical;
                         d.options.fumble = fumble;
@@ -404,11 +412,13 @@ export class DiceSFRPG {
             return result;
         } else {
             return new Promise((resolve) => {
-                tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormula) => {
+                tree.buildRoll(formula, rollContext, async (button, rollMode, unusedFinalFormula, node, rollMods, bonus = null) => {
                     if (button === "cancel") {
                         resolve(null);
                         return;
                     }
+
+                    const finalFormula = await this._calcStackingFormula(node, rollMods, bonus, rollContext.allContexts[actorContextKey]?.entity);
 
                     if (mainDie) {
                         let dieRoll = "1" + mainDie;
@@ -419,9 +429,8 @@ export class DiceSFRPG {
                                 dieRoll = "2d20kh";
                             }
                         }
-
-                        finalFormula.finalRoll = dieRoll + " + " + finalFormula.finalRoll;
-                        finalFormula.formula = dieRoll + " + " + finalFormula.formula;
+                        finalFormula.finalRoll = `${dieRoll} + ${finalFormula.finalRoll}`;
+                        finalFormula.formula = `${dieRoll} + ${finalFormula.formula}`;
                     }
 
                     finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
@@ -429,11 +438,11 @@ export class DiceSFRPG {
                     finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
 
                     const rollObject = Roll.create(finalFormula.finalRoll, { breakdown, tags });
-                    const roll = await rollObject.evaluate({async: true});
+                    const roll = await rollObject.evaluate();
                     roll.options.rollMode = rollMode;
 
                     // Flag critical thresholds
-                    for (let d of roll.dice) {
+                    for (const d of roll.dice) {
                         if (d.faces === 20) {
                             d.options.critical = critical;
                             d.options.fumble = fumble;
@@ -464,7 +473,7 @@ export class DiceSFRPG {
     * @param {Object}               data.dialogOptions Modal dialog options
     */
     static async damageRoll({ event = new Event(''), parts, criticalData, rollContext, title, speaker, flavor, chatMessage = true, onClose, dialogOptions }) {
-        flavor = `${title}${(flavor ? " - " + flavor : "")}`;
+        flavor = `${title || ""}${(flavor ? " - " + flavor : "")}`;
 
         if (!rollContext?.isValid()) {
             console.log(['Invalid rollContext', rollContext]);
@@ -493,7 +502,7 @@ export class DiceSFRPG {
         };
 
         /** @type {DamageType[]} */
-        let damageTypes = parts.reduce((acc, cur) => {
+        const damageTypes = parts.reduce((acc, cur) => {
             if (cur.types && !foundry.utils.isEmpty(cur.types)) {
                 const filteredTypes = Object.entries(cur.types).filter(type => type[1]);
                 const obj = { types: [], operator: "" };
@@ -530,7 +539,7 @@ export class DiceSFRPG {
                 if (part.isDamageSection) {
                     damageSections.push(part);
 
-                    const additionalOptions = duplicate(options);
+                    const additionalOptions = foundry.utils.deepClone(options);
                     additionalOptions.skipUI = true;
 
                     const tempTree = new RollTree(additionalOptions);
@@ -564,7 +573,7 @@ export class DiceSFRPG {
 
         const formula = finalParts.join(" + ");
         const tree = new RollTree(options);
-        return tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormula, part) => {
+        return await tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormula, part) => {
             if (button === 'cancel') {
                 if (onClose) {
                     onClose(null, null, null, false);
@@ -584,7 +593,7 @@ export class DiceSFRPG {
 
             let damageTypeString = "";
             const tempParts = usedParts.reduce((arr, curr) => {
-                let obj = { formula: curr.formula, damage: 0, types: [], operator: curr.operator };
+                const obj = { formula: curr.formula, damage: 0, types: [], operator: curr.operator };
                 if (curr.types && !foundry.utils.isEmpty(curr.types)) {
                     for (const [key, isEnabled] of Object.entries(curr.types)) {
                         if (isEnabled) {
@@ -668,7 +677,7 @@ export class DiceSFRPG {
             }
 
             const isCritical = (button === "critical");
-            let finalFlavor = duplicate(flavor);
+            let finalFlavor = foundry.utils.deepClone(flavor);
             if (isCritical) {
                 htmlData.push({ name: "is-critical", value: "true" });
                 tags.push({tag: `critical`, text: game.i18n.localize("SFRPG.Rolls.Dice.CriticalHit")});
@@ -686,7 +695,7 @@ export class DiceSFRPG {
                         tags.push({ tag: "critical-effect", text: game.i18n.format("SFRPG.Rolls.Dice.CriticalEffect", {"criticalEffect": criticalData.effect })});
                     }
 
-                    let critRoll = criticalData.parts?.filter(x => x.formula?.trim().length > 0).map(x => x.formula)
+                    const critRoll = criticalData.parts?.filter(x => x.formula?.trim().length > 0).map(x => x.formula)
                         .join("+") ?? "";
                     if (critRoll.length > 0) {
                         finalFormula.finalRoll = finalFormula.finalRoll + " + " + critRoll;
@@ -704,7 +713,7 @@ export class DiceSFRPG {
                 if (part.partIndex) {
                     finalFlavor += ` (${part.partIndex})`;
                 }
-                // const originalTypes = duplicate(damageTypes);
+                // const originalTypes = foundry.utils.deepClone(damageTypes);
                 // damageTypes = [getDamageTypeForPart(part)];
                 // console.log([originalTypes, damageTypes]);
             }
@@ -715,7 +724,7 @@ export class DiceSFRPG {
             const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
 
             const rollObject = Roll.create(finalFormula.finalRoll, { tags: tags, breakdown: preparedRollExplanation });
-            let roll = await rollObject.evaluate({async: true});
+            const roll = await rollObject.evaluate();
 
             // CRB pg. 240, < 1 damage returns 1 non-lethal damage.
             if (roll._total < 1) {
@@ -785,15 +794,14 @@ export class DiceSFRPG {
             }
 
             if (!useCustomCard && chatMessage) {
-                let rollContent = await roll.render({ htmlData: htmlData });
+                const rollContent = await roll.render({ htmlData: htmlData });
 
                 const messageData = {
                     flavor: finalFlavor,
-                    speaker: speaker,
+                    speaker,
                     content: rollContent,
-                    rollMode: rollMode,
-                    roll: roll,
-                    type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+                    rollMode,
+                    rolls: [roll],
                     sound: CONFIG.sounds.dice
                 };
 
@@ -822,6 +830,8 @@ export class DiceSFRPG {
             if (errorToThrow) {
                 throw errorToThrow;
             }
+
+            return roll;
         });
     }
 
@@ -858,9 +868,9 @@ export class DiceSFRPG {
     static highlightCriticalSuccessFailure(message, html, data) {
         if (!message.isRoll || !message.isContentVisible) return;
 
-        let roll = message.rolls[0];
+        const roll = message.rolls[0];
         if (!roll.dice.length) return;
-        for (let d of roll.dice) {
+        for (const d of roll.dice) {
             if (d.faces === 20 && d.results.length === 1) {
                 if (d.total >= (d.options.critical || 20)) html.find('.dice-total').addClass('success');
                 else if (d.total <= (d.options.fumble || 1)) html.find('.dice-total').addClass('failure');
@@ -980,6 +990,107 @@ export class DiceSFRPG {
     }
 
     /**
+     * returns the rootNode with removed childnodes that match the modifier.
+     * @param {RollNode} rootNode
+     * @param {Object} modifier
+     */
+    static _removeModifierNodes(rootNode, modifier) {
+        let node = rootNode;
+        const childKeys = Object.keys(node.childNodes);
+        for (let nodeI = 0; nodeI < childKeys.length; nodeI++) {
+            const childNode = node.childNodes[childKeys[nodeI]];
+            if (modifier._id && (childNode.referenceModifier?._id === modifier._id)) {
+                delete node.childNodes[childKeys[nodeI]];
+            } else if (Object.keys(childNode.childNodes).length > 0) {
+                node = this._removeModifierNodes(childNode, modifier).parentNode;
+            }
+        }
+        return node;
+    }
+
+    /**
+     * Calculates the final formula used for rolls with applied stacking of the modifiers
+     * @param {RollNode} node - the Rootnode which is used for the roll
+     * @param {Array} rollMods - all modifiers applied to this roll (unstacked)
+     * @param {Number} bonus - the situational bonus for this roll
+     * @returns {Object} finalFormula Object: {finalRoll: String, formula: String}
+     */
+    static async _calcStackingFormula(node, rollMods, bonus = null, actor = null) {
+        let rootNode = node;
+
+        const stackModifiers = new StackModifiers();
+        const stackedMods = await stackModifiers.processAsync(rollMods.filter(mod => {
+            if (mod.enabled && mod.type) {
+                rootNode = this._removeModifierNodes(rootNode, mod);
+                return true;
+            }
+        }), null, { actor: actor });
+
+        let rollString = '';
+        let formulaString = '';
+        const rollDices = [];
+        const stackedModsArray = Object.keys(stackedMods);
+        for (let stackModsI = 0; stackModsI < stackedModsArray.length; stackModsI++) {
+            const stackModifier = stackedMods[stackedModsArray[stackModsI]];
+            if (stackModifier === null || stackModifier === undefined) {
+                continue;
+            }
+            if (stackModifier instanceof Array) {
+                for (let stackModifierI = 0; stackModifierI < stackModifier.length; stackModifierI++) {
+                    const modifier = stackModifier[stackModifierI];
+                    rollString += `${modifier.max.toString()}+`;
+                    // TODO:
+                    /*
+                        add title to the span f.e.:
+                        title="${game.i18n.format(localizationKey, type: modifier.type.capitalize(),mod: modifier.max.signedString(),source: modifier.name)}"
+                        but in order to do that we will need the localization key for the current modifier which we do not have at this point. Maybe we will have to pass it down from the modifier calculation lol.
+                    */
+                    if (!modifier.isDeterministic) {
+                        rollDices.push(...modifier.dices);
+                        formulaString += `${modifier.max.toString()}(${modifier.modifier})[<span>${modifier.name}</span>] + `;
+                    } else {
+                        formulaString += `${modifier.max.toString()}[<span>${modifier.name}</span>] + `;
+                    }
+                }
+            } else {
+                rollString += `${stackModifier.max.toString()}+`;
+                // TODO:
+                /*
+                    add title to the span f.e.:
+                    title="${game.i18n.format(localizationKey, type: modifier.type.capitalize(),mod: modifier.max.signedString(),source: modifier.name)}"
+                    but in order to do that we will need the localization key for the current modifier which we do not have at this point. Maybe we will have to pass it down from the modifier calculation lol.
+                */
+                if (!stackModifier.isDeterministic) {
+                    rollDices.push(...stackModifier.dices);
+                    formulaString += `${stackModifier.max.toString()}(${stackModifier.modifier})[<span>${stackModifier.name}</span>] + `;
+                } else {
+                    formulaString += `${stackModifier.max.toString()}[<span>${stackModifier.name}</span>] + `;
+                }
+            }
+        }
+
+        formulaString += bonus ? `${bonus.toString()}[<span>${game.i18n.localize("SFRPG.Rolls.Dialog.SituationalBonus")}</span>]` : '';
+
+        rollString += bonus ? `${bonus}` : '';
+        rollString = rollString.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
+            .trim();
+        rollString = rollString.endsWith("+") ? rollString.substring(0, rollString.length - 1).trim() : rollString;
+
+        const finalFormula = rootNode.resolveForRoll(0, rollMods);
+
+        finalFormula.finalRoll = rollString ? `${finalFormula.finalRoll} + ${rollString}` : finalFormula.finalRoll;
+        finalFormula.formula = formulaString ? `${finalFormula.formula} + ${formulaString}` : finalFormula.formula;
+
+        finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
+            .trim();
+        finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
+
+        finalFormula.rollDices = rollDices;
+
+        return finalFormula;
+    }
+
+    /**
      * The below is copied from the DnD5e system on Foundry (https://github.com/foundryvtt/dnd5e/blob/master/module/dice/simplify-roll-formula.mjs) under the MIT License.
      *
      * Copyright 2021 Andrew Clayton
@@ -1004,15 +1115,14 @@ export class DiceSFRPG {
         Roll.validate(roll.formula);
 
         // Optionally strip flavor annotations.
-        if ( !preserveFlavor ) roll.terms = Roll.parse(roll.formula.replace(RollTerm.FLAVOR_REGEXP, ""));
+        if ( !preserveFlavor ) roll.terms = Roll.parse(roll.formula.replace(foundry.dice.terms.RollTerm.FLAVOR_REGEXP, ""));
 
         // Perform arithmetic simplification on the existing roll terms.
         roll.terms = DiceSFRPG.#simplifyOperatorTerms(roll.terms);
 
         if ( /[*/]/.test(roll.formula) ) {
             return ( roll.isDeterministic ) && ( !/\[/.test(roll.formula) || !preserveFlavor )
-                // TODO: Sync rolls may or may not be going away? Idfk man
-                ? roll.evaluate({ async: false }).total.toString()
+                ? roll.evaluateSync().total.toString()
                 : roll.constructor.getFormula(roll.terms);
         }
 
@@ -1021,14 +1131,14 @@ export class DiceSFRPG {
         roll.terms = Roll.simplifyTerms(roll.terms);
 
         // Group terms by type and perform simplifications on various types of roll term.
-        let { poolTerms, diceTerms, mathTerms, numericTerms } = DiceSFRPG.#groupTermsByType(roll.terms);
+        let { poolTerms, diceTerms, functionTerms, numericTerms } = DiceSFRPG.#groupTermsByType(roll.terms);
         numericTerms = DiceSFRPG.#simplifyNumericTerms(numericTerms ?? []);
         diceTerms = DiceSFRPG.#simplifyDiceTerms(diceTerms ?? []);
 
         // Recombine the terms into a single term array and remove an initial + operator if present.
-        const simplifiedTerms = [diceTerms, poolTerms, mathTerms, numericTerms].flat().filter(Boolean);
+        const simplifiedTerms = [diceTerms, poolTerms, functionTerms, numericTerms].flat().filter(Boolean);
         if ( simplifiedTerms[0]?.operator === "+" ) simplifiedTerms.shift();
-        return roll.constructor.getFormula(simplifiedTerms);
+        return simplifiedTerms.map(t => t.formula).join(" ");
     }
 
     /* -------------------------------------------- */
@@ -1039,6 +1149,7 @@ export class DiceSFRPG {
     * @returns {RollTerm[]}      A new array of roll terms with redundant operators removed.
     */
     static #simplifyOperatorTerms(terms) {
+        const t = foundry.dice.terms;
         return terms.reduce((acc, term) => {
             const prior = acc[acc.length - 1];
             const ops = new Set([prior?.operator, term.operator]);
@@ -1047,10 +1158,10 @@ export class DiceSFRPG {
             if ( ops.has(undefined) ) acc.push(term);
 
             // Replace consecutive "+ -" operators with a "-" operator.
-            else if ( (ops.has("+")) && (ops.has("-")) ) acc.splice(-1, 1, new OperatorTerm({ operator: "-" }));
+            else if ( (ops.has("+")) && (ops.has("-")) ) acc.splice(-1, 1, new t.OperatorTerm({ operator: "-" }));
 
             // Replace double "-" operators with a "+" operator.
-            else if ( (ops.has("-")) && (ops.size === 1) ) acc.splice(-1, 1, new OperatorTerm({ operator: "+" }));
+            else if ( (ops.has("-")) && (ops.size === 1) ) acc.splice(-1, 1, new t.OperatorTerm({ operator: "+" }));
 
             // Don't include "+" operators that directly follow "+", "*", or "/". Otherwise, add the term as is.
             else if ( !ops.has("+") ) acc.push(term);
@@ -1067,6 +1178,7 @@ export class DiceSFRPG {
     * @returns {object[]}      A new array of terms with unannotated numeric terms combined into one.
     */
     static #simplifyNumericTerms(terms) {
+        const t = foundry.dice.terms;
         const simplified = [];
         const { annotated, unannotated } = DiceSFRPG.#separateAnnotatedTerms(terms);
 
@@ -1076,8 +1188,8 @@ export class DiceSFRPG {
             if ( staticBonus === 0 ) return [...annotated];
 
             // If the staticBonus is greater than 0, add a "+" operator so the formula remains valid.
-            if ( staticBonus > 0 ) simplified.push(new OperatorTerm({ operator: "+"}));
-            simplified.push(new NumericTerm({ number: staticBonus }));
+            if ( staticBonus > 0 ) simplified.push(new t.OperatorTerm({ operator: "+"}));
+            simplified.push(new t.NumericTerm({ number: staticBonus }));
 
         }
         return [...simplified, ...annotated];
@@ -1091,11 +1203,25 @@ export class DiceSFRPG {
     * @returns {object[]}      A new array of simplified dice terms.
     */
     static #simplifyDiceTerms(terms) {
+        const t = foundry.dice.terms;
         const { annotated, unannotated } = DiceSFRPG.#separateAnnotatedTerms(terms);
 
         // Split the unannotated terms into different die sizes and signs
         const diceQuantities = unannotated.reduce((obj, term, i) => {
-            if ( term instanceof OperatorTerm ) return obj;
+            if ( term instanceof t.OperatorTerm ) return obj;
+
+            if (term._number instanceof Roll) {
+                // Complex number term.
+                if ( !term._number.isDeterministic ) return obj;
+                if ( !term._number._evaluated ) term._number.evaluateSync();
+            }
+
+            if (term._faces instanceof Roll) {
+                // Complex number term.
+                if ( !term._faces.isDeterministic ) return obj;
+                if ( !term._faces._evaluated ) term._faces.evaluateSync();
+            }
+
             const key = `${unannotated[i - 1].operator}${term.faces}`;
             obj[key] = (obj[key] ?? 0) + term.number;
             return obj;
@@ -1103,8 +1229,8 @@ export class DiceSFRPG {
 
         // Add new die and operator terms to simplified for each die size and sign
         const simplified = Object.entries(diceQuantities).flatMap(([key, number]) => ([
-            new OperatorTerm({ operator: key.charAt(0) }),
-            new Die({ number, faces: parseInt(key.slice(1)) })
+            new t.OperatorTerm({ operator: key.charAt(0) }),
+            new t.Die({ number, faces: parseInt(key.slice(1)) })
         ]));
         return [...simplified, ...annotated];
     }
@@ -1117,9 +1243,10 @@ export class DiceSFRPG {
     * @returns {object[]}      A new array of terms with no parenthetical terms.
     */
     static #expandParentheticalTerms(terms) {
+        const t = foundry.dice.terms;
         terms = terms.reduce((acc, term) => {
-            if ( term instanceof ParentheticalTerm ) {
-                if ( term.isDeterministic ) term = new NumericTerm({ number: Roll.safeEval(term.term) });
+            if ( term instanceof t.ParentheticalTerm ) {
+                if ( term.isDeterministic ) term = new t.NumericTerm({ number: Roll.safeEval(term.term) });
                 else {
                     const subterms = new Roll(term.term).terms;
                     term = DiceSFRPG.#expandParentheticalTerms(subterms);
@@ -1134,19 +1261,20 @@ export class DiceSFRPG {
     /* -------------------------------------------- */
 
     /**
-    * A helper function to group terms into PoolTerms, DiceTerms, MathTerms, and NumericTerms.
-    * MathTerms are included as NumericTerms if they are deterministic.
+    * A helper function to group terms into PoolTerms, DiceTerms, FunctionTerms, and NumericTerms.
+    * FunctionTerms are included as NumericTerms if they are deterministic.
     * @param {RollTerm[]} terms  An array of roll terms.
     * @returns {object}          An object mapping term types to arrays containing roll terms of that type.
     */
     static #groupTermsByType(terms) {
+        const t = foundry.dice.terms;
         // Add an initial operator so that terms can be rearranged arbitrarily.
-        if ( !(terms[0] instanceof OperatorTerm) ) terms.unshift(new OperatorTerm({ operator: "+" }));
+        if ( !(terms[0] instanceof t.OperatorTerm) ) terms.unshift(new t.OperatorTerm({ operator: "+" }));
 
         return terms.reduce((obj, term, i) => {
             let type;
-            if ( term instanceof DiceTerm ) type = DiceTerm;
-            else if ( (term instanceof MathTerm) && (term.isDeterministic) ) type = NumericTerm;
+            if ( term instanceof t.DiceTerm ) type = t.DiceTerm;
+            else if ( (term instanceof t.FunctionTerm) && (term.isDeterministic) ) type = NumericTerm;
             else type = term.constructor;
             const key = `${type.name.charAt(0).toLowerCase()}${type.name.substring(1)}s`;
 
@@ -1164,8 +1292,9 @@ export class DiceSFRPG {
     * @returns {Array | Array[]}  A pair of term arrays, one containing annotated terms.
     */
     static #separateAnnotatedTerms(terms) {
+        const t = foundry.dice.terms;
         return terms.reduce((obj, curr, i) => {
-            if ( curr instanceof OperatorTerm ) return obj;
+            if ( curr instanceof t.OperatorTerm ) return obj;
             obj[curr.flavor ? "annotated" : "unannotated"].push(terms[i - 1], curr);
             return obj;
         }, { annotated: [], unannotated: [] });

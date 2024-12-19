@@ -28,13 +28,13 @@ export default function(engine) {
 
             let computedBonus = 0;
             try {
-                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
                 computedBonus = roll.total;
             } catch {}
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
-                    type: bonus.type.capitalize(),
+                    type: game.i18n.format(`SFRPG.ModifierType${bonus.type.capitalize()}`),
                     mod: computedBonus.signedString(),
                     source: bonus.name
                 }));
@@ -50,7 +50,7 @@ export default function(engine) {
         let skillPointModifiers = fact.modifiers.filter(mod => {
             return (mod.enabled || mod.modifierType === "formula") && mod.effectType === SFRPGEffectType.SKILL_POINTS;
         });
-        skillPointModifiers = context.parameters.stackModifiers.process(skillPointModifiers, context);
+        skillPointModifiers = context.parameters.stackModifiers.process(skillPointModifiers, context, {actor: fact.actor});
 
         const skillPointModifierBonus = Object.entries(skillPointModifiers).reduce((sum, mod) => {
             if (mod[1] === null || mod[1].length < 1) return sum;
@@ -68,20 +68,20 @@ export default function(engine) {
 
         // Iterate through any modifiers that grant the character additional skillranks distributed for them
         // These always apply to a specific skill
-        let skillRankModifiers = fact.modifiers.filter(mod => {
+        const skillRankModifiers = fact.modifiers.filter(mod => {
             return (mod.enabled || mod.modifierType === "formula") && mod.effectType === SFRPGEffectType.SKILL_RANKS;
         });
 
-        for (let [key, skill] of Object.entries(skills)) {
+        for (const [key, skill] of Object.entries(skills)) {
             skill.rolledMods = null;
             const mods = context.parameters.stackModifiers.process(skillRankModifiers.filter(mod => {
                 if (mod.effectType !== SFRPGEffectType.SKILL_RANKS) return false;
                 else if (key !== mod.valueAffected) return false;
 
                 return true;
-            }), context);
+            }), context, {actor: fact.actor});
 
-            let accumulator = Object.entries(mods).reduce((sum, mod) => {
+            const accumulator = Object.entries(mods).reduce((sum, mod) => {
                 if (mod[1] === null || mod[1].length < 1) return sum;
 
                 if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {

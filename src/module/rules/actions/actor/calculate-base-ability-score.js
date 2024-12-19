@@ -22,13 +22,13 @@ export default function(engine) {
 
             let computedBonus = 0;
             try {
-                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
                 computedBonus = roll.total;
             } catch {}
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
-                    type: bonus.type.capitalize(),
+                    type: game.i18n.format(`SFRPG.ModifierType${bonus.type.capitalize()}`),
                     mod: computedBonus.signedString(),
                     source: bonus.name
                 }));
@@ -41,25 +41,25 @@ export default function(engine) {
             return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.ABILITY_SCORE].includes(mod.effectType);
         });
 
-        let themeMod = {};
+        const themeMod = {};
         if (themeData?.abilityMod) {
             themeMod[themeData.abilityMod.ability] = themeData.abilityMod.mod;
         }
 
-        let racesMod = {};
-        for (let race of races) {
+        const racesMod = {};
+        for (const race of races) {
             const raceData = race.system;
-            for (let raceMod of raceData.abilityMods.parts) {
+            for (const raceMod of raceData.abilityMods.parts) {
                 racesMod[raceMod[1]] = racesMod[raceMod[1]] !== undefined ? racesMod[raceMod[1]] + raceMod[0] : raceMod[0];
             }
         }
 
-        let abilityScoreIncreasesMod = {};
+        const abilityScoreIncreasesMod = {};
         const asis = fact.asis?.filter(x => x.type === "asi") || [];
-        for (let asi of asis) {
+        for (const asi of asis) {
             const asiData = asi.system;
 
-            for (let ability of Object.keys(SFRPG.abilities)) {
+            for (const ability of Object.keys(SFRPG.abilities)) {
                 if (asiData.abilities[ability]) {
                     if (!(ability in abilityScoreIncreasesMod)) {
                         abilityScoreIncreasesMod[ability] = 1;
@@ -70,11 +70,12 @@ export default function(engine) {
             }
         }
 
-        for (let [abl, ability] of Object.entries(data.abilities)) {
+        for (const [abl, ability] of Object.entries(data.abilities)) {
 
             const abilityMods = context.parameters.stackModifiers.process(
                 filteredMods.filter(mod => mod.valueAffected === abl),
-                context
+                context,
+                {actor: fact.actor}
             );
 
             let score = ability.base ? ability.base : 10;
@@ -107,18 +108,18 @@ export default function(engine) {
             }
 
             if (ability.userPenalty) {
-                let userPenalty = -Math.abs(ability.userPenalty);
+                const userPenalty = -Math.abs(ability.userPenalty);
                 score += userPenalty;
                 ability.tooltip.push(game.i18n.format("SFRPG.AbilityPenaltyTooltip", { mod: userPenalty.signedString() }));
             }
 
             if (ability.drain) {
-                let drain = -Math.abs(ability.drain);
+                const drain = -Math.abs(ability.drain);
                 score += drain;
                 ability.tooltip.push(game.i18n.format("SFRPG.AbilityDrainTooltip", { mod: drain.signedString() }));
             }
 
-            let bonus = Object.entries(abilityMods).reduce((sum, mod) => {
+            const bonus = Object.entries(abilityMods).reduce((sum, mod) => {
                 if (mod[1] === null || mod[1].length < 1) return sum;
 
                 if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {

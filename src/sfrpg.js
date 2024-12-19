@@ -1,38 +1,21 @@
 /**
  * The Starfinder game system for Foundry Virtual Tabletop
- * Author: wildj79
+ * Author: The Foundry Starfinder Development Team
  * Software License: MIT
  * Content License: OGL v1.0a
- * Repository: https://github.com/wildj79/foundryvtt-starfinder
- * Issue Tracker: https://github.com/wildj79/foundryvtt-starfinder/issues
+ * Repository: https://github.com/foundryvtt-starfinder/foundryvtt-starfinder
+ * Issue Tracker: https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/issues
  */
-import { SFRPG } from "./module/config.js";
-import { preloadHandlebarsTemplates } from "./module/templates.js";
-import { registerSystemSettings } from "./module/settings.js";
-import { measureDistances, canvasHandlerV10 } from "./module/canvas.js";
+import { ActorItemHelper, initializeRemoteInventory } from "./module/actor/actor-inventory-utils.js";
 import { ActorSFRPG } from "./module/actor/actor.js";
-import { initializeRemoteInventory, ActorItemHelper } from "./module/actor/actor-inventory-utils.js";
+import { SFRPGDamage, SFRPGHealingSetting } from "./module/actor/mixins/actor-damage.js";
+import { ActorSheetSFRPG } from "./module/actor/sheet/base.js";
 import { ActorSheetSFRPGCharacter } from "./module/actor/sheet/character.js";
 import { ActorSheetSFRPGDrone } from "./module/actor/sheet/drone.js";
 import { ActorSheetSFRPGHazard } from "./module/actor/sheet/hazard.js";
 import { ActorSheetSFRPGNPC } from "./module/actor/sheet/npc.js";
 import { ActorSheetSFRPGStarship } from "./module/actor/sheet/starship.js";
 import { ActorSheetSFRPGVehicle } from "./module/actor/sheet/vehicle.js";
-import { ActorSheetSFRPG } from "./module/actor/sheet/base.js";
-import { ItemSFRPG } from "./module/item/item.js";
-import { CombatSFRPG } from "./module/combat/combat.js";
-import { ItemSheetSFRPG } from "./module/item/sheet.js";
-import { addChatMessageContextOptions } from "./module/combat.js";
-import Engine from "./module/engine/engine.js";
-import registerSystemRules from "./module/rules.js";
-import { SFRPGModifierTypes, SFRPGModifierType, SFRPGEffectType } from "./module/modifiers/types.js";
-import SFRPGModifier from "./module/modifiers/modifier.js";
-import { generateUUID } from "./module/utilities.js";
-import migrateWorld from './module/migration.js';
-import CounterManagement from "./module/classes/counter-management.js";
-import templateOverrides from "./module/template-overrides.js";
-import { RPC } from "./module/rpc.js";
-import { DiceSFRPG } from './module/dice.js';
 import { ActorSheetFlags } from './module/apps/actor-flags.js';
 import { ChoiceDialog } from './module/apps/choice-dialog.js';
 import { DroneRepairDialog } from './module/apps/drone-repair-dialog.js';
@@ -46,20 +29,142 @@ import { NpcSkillToggleDialog } from './module/apps/npc-skill-toggle-dialog.js';
 import { ShortRestDialog } from './module/apps/short-rest.js';
 import { SpellCastDialog } from './module/apps/spell-cast-dialog.js';
 import { TraitSelectorSFRPG } from './module/apps/trait-selector.js';
-import { SFRPGHealingSetting, SFRPGDamage } from "./module/actor/mixins/actor-damage.js";
+import { canvasHandler } from "./module/canvas/canvas.js";
+import { MeasuredTemplateSFRPG, TemplateLayerSFRPG } from "./module/canvas/template-overrides.js";
+import { addChatMessageContextOptions } from "./module/chat/chat-message-options.js";
+import CounterManagement from "./module/classes/counter-management.js";
+import { CombatSFRPG } from "./module/combat/combat.js";
+import { SFRPG } from "./module/config.js";
+import { DiceSFRPG } from './module/dice.js';
+import Engine from "./module/engine/engine.js";
+import { preloadHandlebarsTemplates, setupHandlebars } from "./module/handlebars.js";
+import { ItemSFRPG } from "./module/item/item.js";
+import { ItemSheetSFRPG } from "./module/item/sheet.js";
+import migrateWorld from './module/migration.js';
+import SFRPGModifier from "./module/modifiers/modifier.js";
+import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./module/modifiers/types.js";
+import { RPC } from "./module/rpc.js";
+import registerSystemRules from "./module/rules.js";
+import { registerSystemSettings } from "./module/system/settings.js";
+import TooltipManagerSFRPG from "./module/tooltip.js";
+import { generateUUID } from "./module/utils/utilities.js";
 
+import BaseEnricher from "./module/system/enrichers/base.js";
+import BrowserEnricher from "./module/system/enrichers/browser.js";
+import CheckEnricher from "./module/system/enrichers/check.js";
+import IconEnricher from "./module/system/enrichers/icon.js";
+import TemplateEnricher from "./module/system/enrichers/template.js";
+
+import RollDialog from "./module/apps/roll-dialog.js";
+import { HotbarSFRPG } from "./module/apps/ui/hotbar.js";
+import AbilityTemplate from "./module/canvas/ability-template.js";
+import setupVision from "./module/canvas/vision.js";
 import { initializeBrowsers } from "./module/packs/browsers.js";
 import SFRPGRoll from "./module/rolls/roll.js";
-import SFRPGTokenDocument from "./module/token/tokendocument.js";
-import RollDialog from "./module/apps/roll-dialog.js";
-import RollNode from "./module/rolls/rollnode.js";
 import RollContext from "./module/rolls/rollcontext.js";
+import RollNode from "./module/rolls/rollnode.js";
 import RollTree from "./module/rolls/rolltree.js";
+import registerCompendiumArt from "./module/system/compendium-art.js";
+import { connectToDocument, rollItemMacro } from "./module/system/item-macros.js";
 import { SFRPGTokenHUD } from "./module/token/token-hud.js";
-import setupVision from "./module/vision.js";
-import registerCompendiumArt from "./module/utils/compendium-art.js";
+import SFRPGTokenDocument from "./module/token/tokendocument.js";
+
+import { extendDragData } from "./module/item/drag-data.js";
+import { getAlienArchiveBrowser } from "./module/packs/alien-archive-browser.js";
+import { getEquipmentBrowser } from "./module/packs/equipment-browser.js";
+import { getSpellBrowser } from "./module/packs/spell-browser.js";
+import { getStarshipBrowser } from "./module/packs/starship-browser.js";
 
 let initTime = null;
+
+/* -------------------------------------------- */
+/*  Define Module Structure                     */
+/* -------------------------------------------- */
+const moduleStructure = {
+    AbilityTemplate,
+    applications: {
+        // Actor Sheets
+        ActorSheetSFRPG,
+        ActorSheetSFRPGCharacter,
+        ActorSheetSFRPGDrone,
+        ActorSheetSFRPGHazard,
+        ActorSheetSFRPGNPC,
+        ActorSheetSFRPGStarship,
+        ActorSheetSFRPGVehicle,
+        // Item Sheets
+        ItemCollectionSheet,
+        ItemSheetSFRPG,
+        // Dialogs
+        ActorMovementConfig,
+        AddEditSkillDialog,
+        ChoiceDialog,
+        DroneRepairDialog,
+        InputDialog,
+        ItemDeletionDialog,
+        RollDialog,
+        NpcSkillToggleDialog,
+        SpellCastDialog,
+        ShortRestDialog,
+        // Misc
+        ActorSheetFlags,
+        SFRPGModifierApplication,
+        TraitSelectorSFRPG
+    },
+    compendiumArt: { map: new Map(), refresh: registerCompendiumArt },
+    config: SFRPG,
+    dice: DiceSFRPG,
+    documents: { ActorSFRPG, ItemSFRPG, CombatSFRPG },
+    entities: { ActorSFRPG, ItemSFRPG },
+    generateUUID,
+    // Document browsers
+    getSpellBrowser,
+    getEquipmentBrowser,
+    getAlienArchiveBrowser,
+    getStarshipBrowser,
+    migrateWorld,
+    rollItemMacro,
+    rolls: {
+        RollContext,
+        RollNode,
+        RollTree,
+        SFRPGRoll
+    },
+    RPC,
+    SFRPGEffectType,
+    SFRPGModifier,
+    SFRPGModifierType,
+    SFRPGModifierTypes,
+    timedEffects: new Map(),
+
+    // Namespace style
+    Actor: {
+        Damage: {
+            SFRPGHealingSetting,
+            SFRPGDamage
+        },
+        Modifiers: {
+            SFRPGEffectType,
+            SFRPGModifier,
+            SFRPGModifierType,
+            SFRPGModifierTypes
+        },
+        Sheet: {
+            Base: ActorSheetSFRPG,
+            Character: ActorSheetSFRPGCharacter,
+            Npc: ActorSheetSFRPGNPC,
+            Drone: ActorSheetSFRPGDrone,
+            Starship: ActorSheetSFRPGStarship,
+            Vehicle: ActorSheetSFRPGVehicle
+        },
+        Type: ActorSFRPG
+    }
+};
+
+globalThis.sfrpg = moduleStructure;
+
+/* -------------------------------------------- */
+/*  Init Hook                                   */
+/* -------------------------------------------- */
 
 Hooks.once('init', async function() {
     initTime = (new Date()).getTime();
@@ -80,79 +185,8 @@ Hooks.once('init', async function() {
     console.log("Starfinder | [INIT] Initializing the rules engine");
     const engine = new Engine();
 
-    game.sfrpg = {
-        applications: {
-            // Actor Sheets
-            ActorSheetSFRPG,
-            ActorSheetSFRPGCharacter,
-            ActorSheetSFRPGDrone,
-            ActorSheetSFRPGHazard,
-            ActorSheetSFRPGNPC,
-            ActorSheetSFRPGStarship,
-            ActorSheetSFRPGVehicle,
-            // Item Sheets
-            ItemCollectionSheet,
-            ItemSheetSFRPG,
-            // Dialogs
-            ActorMovementConfig,
-            AddEditSkillDialog,
-            ChoiceDialog,
-            DroneRepairDialog,
-            InputDialog,
-            ItemDeletionDialog,
-            RollDialog,
-            NpcSkillToggleDialog,
-            SpellCastDialog,
-            ShortRestDialog,
-            // Misc
-            ActorSheetFlags,
-            SFRPGModifierApplication,
-            TraitSelectorSFRPG
-        },
-        compendiumArt: { map: new Map(), refresh: registerCompendiumArt },
-        config: SFRPG,
-        dice: DiceSFRPG,
-        documents: { ActorSFRPG, ItemSFRPG, CombatSFRPG },
-        engine,
-        entities: { ActorSFRPG, ItemSFRPG },
-        generateUUID,
-        migrateWorld,
-        rollItemMacro,
-        rolls: {
-            RollContext,
-            RollNode,
-            RollTree,
-            SFRPGRoll
-        },
-        RPC,
-        SFRPGEffectType,
-        SFRPGModifier,
-        SFRPGModifierType,
-        SFRPGModifierTypes,
-
-        // Namespace style
-        Actor: {
-            Damage: {
-                SFRPGHealingSetting,
-                SFRPGDamage
-            },
-            Modifiers: {
-                SFRPGEffectType,
-                SFRPGModifier,
-                SFRPGModifierType,
-                SFRPGModifierTypes
-            },
-            Sheet: {
-                Base: ActorSheetSFRPG,
-                Character: ActorSheetSFRPGCharacter,
-                Npc: ActorSheetSFRPGNPC,
-                Drone: ActorSheetSFRPGDrone,
-                Starship: ActorSheetSFRPGStarship,
-                Vehicle: ActorSheetSFRPGVehicle
-            },
-            Type: ActorSFRPG
-        }
-    };
+    moduleStructure.engine = engine;
+    game.sfrpg = moduleStructure;
 
     CONFIG.SFRPG = SFRPG;
     CONFIG.statusEffects = CONFIG.SFRPG.statusEffects;
@@ -163,13 +197,28 @@ Hooks.once('init', async function() {
     CONFIG.Combat.documentClass = CombatSFRPG;
     CONFIG.Dice.rolls.unshift(SFRPGRoll);
 
+    CONFIG.time.roundTime = 6;
+
     CONFIG.Token.documentClass = SFRPGTokenDocument;
+
+    CONFIG.Canvas.layers.templates.layerClass = TemplateLayerSFRPG;
+    CONFIG.MeasuredTemplate.objectClass = MeasuredTemplateSFRPG;
+    CONFIG.MeasuredTemplate.defaults.angle = 90; // SF uses 90 degree cones
+
+    CONFIG.ui.hotbar = HotbarSFRPG;
 
     CONFIG.fontDefinitions["Exo2"] = {
         editor: true,
         fonts: [
-            {urls: ["../systems/sfrpg/fonts/Exo2-VariableFont_wght.ttf"]},
-            {urls: ["../systems/sfrpg/fonts/Exo2-Italic-VariableFont_wght.ttf"], weight: 700}
+            {urls: ["../systems/sfrpg/fonts/exo2-variablefont_wght.woff2"]},
+            {urls: ["../systems/sfrpg/fonts/exo2-italic-variablefont_wght.woff2"], weight: 700}
+        ]
+    };
+
+    CONFIG.fontDefinitions["Orbitron"] = {
+        editor: true,
+        fonts: [
+            {urls: ["../systems/sfrpg/fonts/orbitron-variablefont_wght.woff2"]}
         ]
     };
 
@@ -190,20 +239,28 @@ Hooks.once('init', async function() {
         wordWrap: false
     });
 
-    console.log("Starfinder | [INIT] Overriding Mathematics");
-    registerMathFunctions();
+    console.log("Starfinder | [INIT] Configuring rules engine");
+    registerSystemRules(game.sfrpg.engine);
 
     console.log("Starfinder | [INIT] Registering system settings");
     registerSystemSettings();
 
     if (game.settings.get("sfrpg", "sfrpgTheme")) {
-        const logo = document.querySelector("#logo");
-        logo.src = "systems/sfrpg/images/starfinder_icon.webp";
-        logo.style.width = "92px";
-        logo.style.height = "92px";
-        logo.style.margin = "0 0 0 9px";
+        const setAnvil = () => {
+            const logo = document.querySelector("#logo");
+            logo.loading = "eager";
+            logo.src = "systems/sfrpg/images/starfinder_icon.webp";
+            logo.style.width = "92px";
+            logo.style.height = "92px";
+            logo.style.margin = "0 0 0 9px";
+        };
 
-        let r = document.querySelector(':root');
+        const dummy = document.createElement("img");
+        dummy.addEventListener("load", setAnvil);
+        dummy.loading = "eager";
+        dummy.src = "systems/sfrpg/images/starfinder_icon.webp";
+
+        const r = document.querySelector(':root');
         r.style.setProperty("--color-border-highlight-alt", "#0080ff");
         r.style.setProperty("--color-border-highlight", "#00a0ff");
         r.style.setProperty("--color-text-hyperlink", "#38b5ff");
@@ -211,6 +268,9 @@ Hooks.once('init', async function() {
         r.style.setProperty("--color-shadow-highlight", "#00a0ff");
         r.style.setProperty("--sfrpg-theme-blue", "#235683");
     }
+
+    console.log("Starfinder | [INIT] Overriding tooltips");
+    Object.defineProperty(game, "tooltip", {value: new TooltipManagerSFRPG(), configurable: true, enumerable: true});
 
     console.log("Starfinder | [INIT] Registering sheets");
     Actors.unregisterSheet("core", ActorSheet);
@@ -224,32 +284,87 @@ Hooks.once('init', async function() {
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("sfrpg", ItemSheetSFRPG, { makeDefault: true });
 
-    console.log("Starfinder | [READY] Preloading handlebar templates");
+    console.log("Starfinder | [INIT] Preloading handlebar templates");
     preloadHandlebarsTemplates();
+
+    console.log("Starfinder | [INIT] Setting up inline buttons");
+    CONFIG.TextEditor.enrichers.push(new BrowserEnricher(), new IconEnricher(), new CheckEnricher(), new TemplateEnricher());
+
+    console.log("Starfinder | [INIT] Applying inline icons");
+    CONFIG.Actor.typeIcons = {
+        character: "fas fa-user",
+        npc2: "fas fa-spaghetti-monster-flying",
+        npc: "fas fa-spaghetti-monster-flying",
+        drone: "fas fa-robot",
+        starship: "fas fa-rocket",
+        vehicle: "fas fa-car",
+        hazard: "fas fa-skull-crossbones"
+    };
+
+    CONFIG.Item.typeIcons = {
+        "archetypes": "fas fa-id-badge",
+        "class": "fas fa-id-card",
+        "race": "fas fa-user-tag",
+        "theme": "fas fa-user-tie",
+
+        "actorResource": "fas fa-chart-pie",
+        "feat": "fas fa-medal",
+        "spell": "fas fa-wand-magic-sparkles",
+        "effect": "fas fa-stopwatch",
+
+        "asi": "fas fa-person-arrow-up-from-line",
+
+        "chassis": "fas fa-car-battery",
+        "mod": "fas fa-screwdriver-wrench",
+
+        "starshipAblativeArmor": "fas fa-shield-halved",
+        "starshipAction": "fas fa-crosshairs",
+        "starshipArmor": "fas fa-user-shield",
+        "starshipComputer": "fas fa-server",
+        "starshipCrewQuarter": "fas fa-house-user",
+        "starshipDefensiveCountermeasure": "fas fa-shield-heart",
+        "starshipDriftEngine": "fas fa-atom",
+        "starshipExpansionBay": "fas fa-boxes-packing",
+        "starshipFortifiedHull": "fas fa-house-lock",
+        "starshipFrame": "fas fa-gears",
+        "starshipOtherSystem": "fas fa-gear",
+        "starshipPowerCore": "fas fa-radiation",
+        "starshipReinforcedBulkhead": "fas fa-file-shield",
+        "starshipSecuritySystem": "fas fa-user-lock",
+        "starshipSensor": "fas fa-location-crosshairs",
+        "starshipShield": "fas fa-shield",
+        "starshipSpecialAbility": "fas fa-medal",
+        "starshipThruster": "fas fa-shuttle-space",
+        "starshipWeapon": "fas fa-explosion",
+
+        "vehicleAttack": "fas fa-gun",
+        "vehicleSystem": "fas fa-gear",
+
+        "ammunition": "fas fa-box-archive",
+        "augmentation": "fas fa-vr-cardboard",
+        "consumable": "fas fa-beer-mug-empty",
+        "container": "fas fa-briefcase",
+        "equipment": "fas fa-shirt",
+        "fusion": "fas fa-bolt",
+        "goods": "fas fa-boxes-stacked",
+        "hybrid": "fas fa-hat-wizard",
+        "magic": "fas fa-wand-magic",
+        "shield": "fas fa-shield",
+        "technological": "fas fa-microchip",
+        "upgrade": "fas fa-link",
+        "weapon": "fas fa-gun",
+        "weaponAccessory": "fas fa-gears"
+    };
+
+    console.log("Starfinder | [INIT] Adding math functions");
+    SFRPGRoll.registerMathFunctions();
 
     const finishTime = (new Date()).getTime();
     console.log(`Starfinder | [INIT] Done (operation took ${finishTime - initTime} ms)`);
 });
 
-Hooks.once("setup", function() {
-    console.log(`Starfinder | [SETUP] Setting up Starfinder System subsystems`);
-    const setupTime = (new Date()).getTime();
-
-    /**
-     * Manage counter classe feature from combat tracker
-     * Like Solarian Attenument / Vanguard Entropic Point and Soldat Ki Point
-    **/
-    console.log("Starfinder | [SETUP] Initializing counter management");
-    const counterManagement = new CounterManagement();
-    counterManagement.setup();
-
-    console.log("Starfinder | [SETUP] Initializing RPC system");
-    RPC.initialize();
-
-    console.log("Starfinder | [SETUP] Initializing remote inventory system");
-    initializeRemoteInventory();
-
-    console.log("Starfinder | [SETUP] Localizing global arrays");
+Hooks.once("i18nInit", () => {
+    console.log("Starfinder | [I18N] Localizing global arrays");
     const toLocalize = [
         "abilities",
         "abilityActivationTypes",
@@ -263,10 +378,12 @@ Hooks.once("setup", function() {
         "ammunitionTypes",
         "armorProficiencies",
         "armorTypes",
-        "augmentationSytems",
+        "augmentationSystems",
         "augmentationTypes",
         "babProgression",
         "capacityUsagePer",
+        "combatRoles",
+        "combatRolesDescriptions",
         "conditionTypes",
         "consumableTypes",
         "containableTypes",
@@ -274,7 +391,12 @@ Hooks.once("setup", function() {
         "damageReductionTypes",
         "damageTypeOperators",
         "damageTypes",
+        "difficultyLevels",
         "distanceUnits",
+        "constantDistanceUnits",
+        "variableDistanceUnits",
+        "durationTypes",
+        "effectDurationTypes",
         "descriptors",
         "descriptorsTooltips",
         "energyDamageTypes",
@@ -298,6 +420,7 @@ Hooks.once("setup", function() {
         "senses",
         "skillProficiencyLevels",
         "skills",
+        "specialAbilityTypes",
         "specialMaterials",
         "speeds",
         "spellAreaEffects",
@@ -313,6 +436,7 @@ Hooks.once("setup", function() {
         "starshipWeaponProperties",
         "starshipWeaponRanges",
         "starshipWeaponTypes",
+        "turnEventTypes",
         "vehicleCoverTypes",
         "vehicleSizes",
         "vehicleTypes",
@@ -325,7 +449,7 @@ Hooks.once("setup", function() {
         "weaponTypes"
     ];
 
-    for (let o of toLocalize) {
+    for (const o of toLocalize) {
         CONFIG.SFRPG[o] = Object.entries(CONFIG.SFRPG[o]).reduce((obj, e) => {
             obj[e[0]] = game.i18n.localize(e[1]);
 
@@ -338,10 +462,34 @@ Hooks.once("setup", function() {
         element.bonus.notes = game.i18n.localize(element.bonus.notes);
     }
 
-    CONFIG.SFRPG.statusEffects.forEach(e => e.label = game.i18n.localize(e.label));
+    for (const obj of Object.values(SFRPG.featureCategories)) {
+        obj.category = game.i18n.localize(obj.category);
+        obj.label = game.i18n.localize(obj.label);
+    }
 
-    console.log("Starfinder | [SETUP] Configuring rules engine");
-    registerSystemRules(game.sfrpg.engine);
+    CONFIG.SFRPG.statusEffects.forEach(e => e.label = game.i18n.localize(e.label));
+});
+
+Hooks.once("setup", function() {
+    console.log(`Starfinder | [SETUP] Setting up Starfinder System subsystems`);
+    const setupTime = (new Date()).getTime();
+
+    /**
+     * Manage counter classe feature from combat tracker
+     * Like Solarian Attenument / Vanguard Entropic Point and Soldat Ki Point
+    **/
+    console.log("Starfinder | [SETUP] Initializing counter management");
+    const counterManagement = new CounterManagement();
+    counterManagement.setup();
+
+    console.log("Starfinder | [SETUP] Initializing RPC system");
+    RPC.initialize();
+
+    console.log("Starfinder | [SETUP] Initializing remote inventory system");
+    initializeRemoteInventory();
+
+    console.log("Starfinder | [SETUP] Caching starship actions");
+    ActorSheetSFRPGStarship.ensureStarshipActions();
 
     console.log("Starfinder | [SETUP] Registering custom handlebars");
     setupHandlebars();
@@ -357,52 +505,54 @@ Hooks.once("ready", async () => {
     console.log("Starfinder | [READY] Overriding token HUD");
     canvas.hud.token = new SFRPGTokenHUD();
 
-    console.log("Starfinder | [READY] Setting up AOE template overrides");
-    templateOverrides();
-
-    console.log("Starfinder | [READY] Caching starship actions");
-    ActorSheetSFRPGStarship.ensureStarshipActions();
-
     console.log("Starfinder | [READY] Initializing compendium browsers");
     initializeBrowsers();
 
-    console.log("Starfinder | [SETUP] Setting up Vision Modes");
+    console.log("Starfinder | [READY] Setting up Vision Modes");
     setupVision();
 
     console.log("Starfinder | [READY] Applying artwork from modules to compendiums");
     registerCompendiumArt();
 
-    if (game.user.isGM) {
+    console.log("Starfinder | [READY] Setting up event listeners");
+    BaseEnricher.addListeners();
+    ItemSFRPG.chatListeners($("body"));
+    extendDragData();
+
+    console.log("Starfinder | [READY] Connecting item macros to items");
+    for (const macro of game.macros) {
+        connectToDocument(macro);
+    }
+
+    if (game.users.activeGM?.isSelf) {
         const currentSchema = game.settings.get('sfrpg', 'worldSchemaVersion') ?? 0;
         const systemSchema = Number(game.system.flags.sfrpg.schema);
         const needsMigration = currentSchema < systemSchema || currentSchema === 0;
 
-        let migrationPromise = null;
+        let migrationPerformed = false;
         if (needsMigration) {
             console.log("Starfinder | [READY] Performing world migration");
-            migrationPromise = migrateWorld()
-                .then((refreshRequired) => {
-                    if (refreshRequired) {
-                        ui.notifications.warn(game.i18n.localize("SFRPG.MigrationSuccessfulRefreshMessage"), {permanent: true});
-                    } else {
-                        ui.notifications.info(game.i18n.localize("SFRPG.MigrationSuccessfulMessage"), {permanent: true});
-                    }
-                })
-                .catch((error) => {
-                    ui.notifications.error(game.i18n.localize("SFRPG.MigrationErrorMessage"), {permanent: true});
-                    console.error(error);
-                });
+            try {
+                migrationPerformed = await migrateWorld();
+            } catch {
+                ui.notifications.error(game.i18n.localize("SFRPG.MigrationErrorMessage"), {permanent: true});
+                console.error(error);
+            }
+
+            if (migrationPerformed) {
+                ui.notifications.info(game.i18n.localize("SFRPG.MigrationSuccessfulRefreshMessage"), {permanent: true});
+            } else {
+                ui.notifications.info(game.i18n.localize("SFRPG.MigrationSuccessfulMessage"), {permanent: true});
+            }
+
         }
 
         console.log("Starfinder | [READY] Checking items for container updates");
-        if (migrationPromise) {
-            migrationPromise.then(async () => {
-                migrateOldContainers();
-            });
-        } else {
-            migrateOldContainers();
-        }
+        if (migrationPerformed) migrateOldContainers();
+
     }
+
+    Hooks.on("dropCanvasData", (canvas, data) => canvasHandler(canvas, data));
 
     const finishTime = (new Date()).getTime();
     console.log(`Starfinder | [READY] Done (operation took ${finishTime - readyTime} ms)`);
@@ -410,9 +560,6 @@ Hooks.once("ready", async () => {
     const startupDuration = finishTime - initTime;
     console.log(`Starfinder | [STARTUP] Total launch took ${Number(startupDuration / 1000).toFixed(2)} seconds.`);
 });
-
-Hooks.on("dropCanvasData", (canvas, data) => canvasHandlerV10(canvas, data));
-
 async function migrateOldContainers() {
     const promises = [];
     for (const actor of game.actors.contents) {
@@ -441,290 +588,23 @@ async function migrateOldContainers() {
     }
 }
 
-Hooks.on("canvasInit", function() {
-    canvas.grid.diagonalRule = game.settings.get("sfrpg", "diagonalMovement");
-    SquareGrid.prototype.measureDistances = measureDistances;
-});
-
 Hooks.on("renderChatMessage", (app, html, data) => {
     DiceSFRPG.highlightCriticalSuccessFailure(app, html, data);
     DiceSFRPG.addDamageTypes(app, html, data);
 
     if (game.settings.get("sfrpg", "autoCollapseItemCards")) html.find('.card-content').hide();
 });
+
 Hooks.on("getChatLogEntryContext", addChatMessageContextOptions);
-Hooks.on("renderChatLog", (app, html, data) => ItemSFRPG.chatListeners(html));
-
-Hooks.on("hotbarDrop", (bar, data, slot) => {
-    if (data.type !== "Item") return;
-    createItemMacro(data, slot);
-    return false;
-});
-
-function registerMathFunctions() {
-    Math.lookup = function(value) {
-        for (let i = 1; i < arguments.length - 1; i += 2) {
-            if (arguments[i] === value) {
-                return arguments[i + 1];
-            }
-        }
-        return 0;
-    };
-
-    Math.lookupRange = function(value, lowestValue) {
-        let baseValue = lowestValue;
-        for (let i = 2; i < arguments.length - 1; i += 2) {
-            if (arguments[i] > value) {
-                return baseValue;
-            }
-            baseValue = arguments[i + 1];
-        }
-        return baseValue;
-    };
-}
-
-/**
- * Create a Macro form an Item drop.
- * Get an existing item macro if one exists, otherwise create a new one.
- *
- * @param {Object} data The item data
- * @param {number} slot The hotbar slot to use
- * @returns {Promise}
- */
-async function createItemMacro(data, slot) {
-    const item = await Item.fromDropData(data);
-    const command = `game.sfrpg.rollItemMacro("${item.name}");`;
-    let macro = game.macros.contents.find(m => (m.name === item.name) && (m.command === command));
-    if (!macro) {
-        macro = await Macro.create({
-            name: item.name,
-            type: "script",
-            img: item.img,
-            command: command,
-            flags: {"sfrpg.itemMacro": true}
-        }, {displaySheet: false});
-    }
-
-    game.user.assignHotbarMacro(macro, slot);
-}
-
-function rollItemMacro(itemName) {
-    const speaker = ChatMessage.getSpeaker();
-    let actor;
-
-    if (speaker.token) actor = game.actors.tokens[speaker.token];
-    if (!actor) actor = game.actors.get(speaker.actor);
-    const item = actor ? actor.items.find(i => i.name === itemName) : null;
-    if (!item) return ui.notifications.warn(`Your controlled Actor does not have an item named ${itemName}`);
-
-    if (item.type === 'spell') return actor.useSpell(item);
-    return item.roll();
-}
-
-function setupHandlebars() {
-    Handlebars.registerHelper("length", function(value) {
-        if (value instanceof Array) {
-            return value.length;
-        } else if (value instanceof Object) {
-            return Object.entries(value).length;
-        }
-        return 0;
-    });
-
-    Handlebars.registerHelper("not", function(value) {
-        return !value;
-    });
-
-    Handlebars.registerHelper("add", function(v1, v2, options) {
-        'use strict';
-        return v1 + v2;
-    });
-
-    Handlebars.registerHelper("sub", function(v1, v2, options) {
-        'use strict';
-        return v1 - v2;
-    });
-
-    Handlebars.registerHelper("mult", function(v1, v2, options) {
-        'use strict';
-        return v1 * v2;
-    });
-
-    Handlebars.registerHelper("div", function(v1, v2, options) {
-        'use strict';
-        return v1 / v2;
-    });
-
-    Handlebars.registerHelper("isNull", function(value) {
-        if (value === 0) return false;
-        return !value;
-    });
-
-    Handlebars.registerHelper('greaterThan', function(v1, v2, options) {
-        'use strict';
-        if (v1 > v2) {
-            return true;
-        }
-        return false;
-    });
-
-    Handlebars.registerHelper("isNaN", function(value) {
-        const valueNumber = Number(value);
-        return Number.isNaN(valueNumber);
-    });
-
-    Handlebars.registerHelper('ellipsis', function(displayedValue, limit) {
-        let str = displayedValue.toString();
-        if (str.length <= limit) {
-            return str;
-        }
-        return str.substring(0, limit) + '…';
-    });
-
-    Handlebars.registerHelper('formatBulk', function(bulk) {
-        const reduced = bulk / 10;
-        if (reduced < 0.1) {
-            return "-";
-        } else if (reduced < 1) {
-            return "L";
-        } else return Math.floor(reduced);
-    });
-
-    Handlebars.registerHelper('getTotalStorageCapacity', function(item) {
-        let totalCapacity = 0;
-        if (item?.system?.container?.storage && item.system.container.storage.length > 0) {
-            for (let storage of item.system.container.storage) {
-                totalCapacity += storage.amount;
-            }
-        }
-        return totalCapacity;
-    });
-
-    Handlebars.registerHelper('getStarfinderBoolean', function(settingName) {
-        return game.settings.get('sfrpg', settingName);
-    });
-
-    Handlebars.registerHelper('capitalize', function(value) {
-        return value.capitalize();
-    });
-
-    Handlebars.registerHelper('contains', function(container, value) {
-        if (!container || !value) return false;
-
-        if (container instanceof Array) {
-            return container.includes(value);
-        }
-
-        if (container instanceof Object) {
-            return container.hasOwnProperty(value);
-        }
-
-        return false;
-    });
-
-    Handlebars.registerHelper('console', function(value) {
-        console.log(value);
-    });
-
-    Handlebars.registerHelper('indexOf', function(array, value, zeroBased = true) {
-        const index = array.indexOf(value);
-        if (index < 0) return index;
-        return index + (zeroBased ? 0 : 1);
-    });
-
-    Handlebars.registerHelper('append', function(left, right) {
-        return left + right;
-    });
-
-    /** Returns null if 0 is entered. */
-    Handlebars.registerHelper('modToScoreRange', function(value) {
-        const score = 10 + value * 2;
-        return `${score}-${score + 1}`;
-    });
-
-    /** Returns null if 0 is entered. */
-    Handlebars.registerHelper('nullOrNonZero', function(value) {
-        if (value === 0) return null;
-        return value;
-    });
-
-    /** Returns the value based on whether left is null or not. */
-    Handlebars.registerHelper('leftOrRight', function(left, right) {
-        return left || right;
-    });
-
-    Handlebars.registerHelper('createTippy', function(options) {
-        const title = options.hash['title'];
-        const subtitle = options.hash['subtitle'];
-        const attributes = options.hash['attributes'];
-        const tooltips = options.hash['tooltips'];
-        if ( !title ) {
-            console.stack();
-            throw new Error(game.i18n.localize("SFRPG.Tippy.ErrorNoTitle"));
-        }
-
-        let html = "data-tippy-content=\"<strong>" + game.i18n.localize(title) + "</strong>";
-        if (subtitle) {
-            html += "<br/>" + game.i18n.localize(subtitle);
-        }
-        if (attributes) {
-            const printableAttributes = [];
-            if (attributes instanceof Array) {
-                for (const attrib of attributes) {
-                    printableAttributes.push(attrib);
-                }
-            } else if (attributes instanceof Object) {
-                for (const key of Object.keys(attributes)) {
-                    printableAttributes.push(key);
-                }
-            } else {
-                printableAttributes.push(attributes);
-            }
-            if (printableAttributes.length > 0) {
-                html += "<br/><br/>" + game.i18n.localize("SFRPG.Tippy.Attributes");
-                for (const attrib of printableAttributes) {
-                    html += "<br/>" + attrib;
-                }
-            }
-        }
-        if (tooltips) {
-            const printabletooltips = [];
-            if (tooltips instanceof Array) {
-                for (const tooltip of tooltips) {
-                    printabletooltips.push(game.i18n.localize(tooltip));
-                }
-            } else {
-                printabletooltips.push(game.i18n.localize(tooltips));
-            }
-            if (printabletooltips.length > 0) {
-                html += "<br/>";
-                for (const attrib of printabletooltips) {
-                    html += "<br/>" + game.i18n.localize(attrib);
-                }
-            }
-        }
-
-        html += "\"";
-
-        return new Handlebars.SafeString(html);
-    });
-
-    Handlebars.registerHelper('currencyFormat', function(value) {
-        const currencyLocale = game.settings.get('sfrpg', 'currencyLocale');
-        const moneyFormatter  = new Intl.NumberFormat(currencyLocale);
-        const formattedValue = moneyFormatter.format(value);
-        return formattedValue;
-    });
-}
 
 Hooks.on("renderSidebarTab", async (app, html) => {
     if (app.options.id === "settings") {
-        const textToAdd = `<br/><a href="https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/blob/master/changelist.md">Starfinder Patch Notes</a>`;
+        const textToAdd = `<a href="https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/blob/master/changelist.md">Starfinder Patch Notes</a>`;
         const gameDetails = document.getElementById("game-details");
         if (gameDetails) {
             const systemSection = gameDetails.getElementsByClassName("system")[0];
             if (systemSection) {
-                systemSection.innerHTML += textToAdd;
+                systemSection.insertAdjacentHTML("afterend", textToAdd);
             }
         }
     }

@@ -23,13 +23,13 @@ export default function(engine) {
 
             let computedBonus = 0;
             try {
-                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
                 computedBonus = roll.total;
             } catch {}
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
-                    type: bonus.type.capitalize(),
+                    type: game.i18n.format(`SFRPG.ModifierType${bonus.type.capitalize()}`),
                     mod: computedBonus.signedString(),
                     source: bonus.name
                 }));
@@ -38,37 +38,35 @@ export default function(engine) {
             return computedBonus;
         };
 
-        let armorMods = modifiers.filter(mod => {
+        const armorMods = modifiers.filter(mod => {
             return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.AC].includes(mod.effectType);
         });
 
-        let eacMods = context.parameters.stackModifiers.process(armorMods.filter(mod => ["eac", "both"].includes(mod.valueAffected)), context);
-        let kacMods = context.parameters.stackModifiers.process(armorMods.filter(mod => ["kac", "both"].includes(mod.valueAffected)), context);
+        const eacMods = context.parameters.stackModifiers.process(armorMods.filter(mod => ["eac", "both"].includes(mod.valueAffected)), context, {actor: fact.actor});
+        const kacMods = context.parameters.stackModifiers.process(armorMods.filter(mod => ["kac", "both"].includes(mod.valueAffected)), context, {actor: fact.actor});
 
-        let eacMod = Object.entries(eacMods).reduce((sum, curr) => {
+        const eacMod = Object.entries(eacMods).reduce((sum, curr) => {
             if (curr[1] === null || curr[1].length < 1) return sum;
 
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(curr[0])) {
                 for (const bonus of curr[1]) {
                     sum += addModifier(bonus, data, eac, "SFRPG.ACTooltipBonus");
                 }
-            }
-            else {
+            } else {
                 sum += addModifier(curr[1], data, eac, "SFRPG.ACTooltipBonus");
             }
 
             return sum;
         }, 0);
 
-        let kacMod = Object.entries(kacMods).reduce((sum, curr) => {
+        const kacMod = Object.entries(kacMods).reduce((sum, curr) => {
             if (curr[1] === null || curr[1].length < 1) return sum;
 
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(curr[0])) {
                 for (const bonus of curr[1]) {
                     sum += addModifier(bonus, data, kac, "SFRPG.ACTooltipBonus");
                 }
-            }
-            else {
+            } else {
                 sum += addModifier(curr[1], data, kac, "SFRPG.ACTooltipBonus");
             }
 

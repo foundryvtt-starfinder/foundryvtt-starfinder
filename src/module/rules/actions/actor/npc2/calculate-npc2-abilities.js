@@ -1,4 +1,3 @@
-import { SFRPG } from "../../../../config.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../../modifiers/types.js";
 
 export default function(engine) {
@@ -23,7 +22,7 @@ export default function(engine) {
 
             let computedBonus = 0;
             try {
-                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
                 computedBonus = roll.total;
             } catch {}
 
@@ -32,7 +31,7 @@ export default function(engine) {
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
-                    type: bonus.type.capitalize(),
+                    type: game.i18n.format(`SFRPG.ModifierType${bonus.type.capitalize()}`),
                     mod: computedBonus.signedString(),
                     base: originalBonus.signedString(),
                     source: bonus.name
@@ -50,7 +49,8 @@ export default function(engine) {
 
             const abilityMods = context.parameters.stackModifiers.process(
                 filteredMods.filter(mod => mod.valueAffected === abl),
-                context
+                context,
+                {actor: fact.actor}
             );
 
             const bonus = Object.entries(abilityMods).reduce((sum, mod) => {

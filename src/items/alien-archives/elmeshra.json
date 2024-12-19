@@ -2,12 +2,22 @@
   "_id": "ZmYSCU336IOQJPOa",
   "name": "Elmeshra",
   "type": "npc2",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "_id": "2IBG4UPq2v6qLVpJ",
       "name": "Bite (plus Swallow Whole)",
       "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
@@ -84,6 +94,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -114,6 +125,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -121,6 +133,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -142,6 +155,11 @@
       "_id": "LY2I9tzEa1uRtU09",
       "name": "Claw",
       "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
@@ -218,6 +236,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -248,6 +267,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -255,6 +275,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -276,25 +297,12 @@
       "_id": "lx6EoDuUXe3aHnLX",
       "name": "[MultiATK] 4 Claws",
       "type": "weapon",
-      "ammunition": false,
-      "augmentation": false,
-      "consumable": false,
-      "container": false,
-      "equipment": false,
-      "fusion": true,
-      "goods": false,
-      "hybrid": false,
-      "img": "icons/svg/item-bag.svg",
-      "magic": false,
-      "shield": false,
-      "spell": false,
-      "storage": {
-        "type": "slot",
-        "affectsEncumbrance": true,
-        "amount": 0,
-        "subtype": "fusion",
-        "weightProperty": "level"
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
       },
+      "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -381,6 +389,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -501,6 +510,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -508,6 +518,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -523,18 +534,17 @@
         },
         "weaponCategory": "uncategorized",
         "weaponType": "basicM"
-      },
-      "technological": false,
-      "upgrade": false,
-      "vehicleAttack": false,
-      "vehicleSystem": false,
-      "weapon": false,
-      "weaponAccessory": false
+      }
     },
     {
       "_id": "nqKdbYKIo9z2TLOS",
       "name": "Swallow Whole",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -542,6 +552,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -563,12 +574,13 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>(EX)</p>\n<p>If the creature hits with the indicated attack (usually a bite attack), it deals the normal damage. If the creature’s attack roll successfully hits the target’s KAC + 4, the creature also automatically grapples the foe as part of the attack action. (If it hits the target’s KAC + 13, it instead pins the target). The creature doesn’t need to have a free limb to perform this grapple. Unless otherwise specified, a creature can swallow whole only targets that are at least one size category smaller than itself, and it has room for a single target of that size in its stomach (doubling the maximum number of creatures it can have swallowed for each additional size category by which these creatures are smaller).</p>\n<p>On the creature’s next turn after grappling or pinning the target, if the target has not escaped the grapple or pin, the target automatically takes the attack’s damage at the beginning of the creature’s turn. The creature can then make a new attack roll with the same attack. If it hits the target’s KAC, the grapple or @UUID[Compendium.sfrpg.conditions.XgK4EdO5D3Fj3iWz]{Pin} is maintained. If it hits the target’s KAC + 4, the target is swallowed whole (no damage is dealt).</p>\n<p>Once swallowed, the target takes the listed swallow whole damage automatically at the beginning its turn every round. The target is considered @UUID[Compendium.sfrpg.conditions.4AkWDHGM6gHDepHN]{Grappled} as long as it is swallowed. The target can attempt to cut its way out (the interior of a creature with swallow whole has the same EAC as its exterior and a KAC equal to that of its exterior – 4) by dealing an amount of damage equal to one-quarter the swallowing creature’s total Hit Points, though any attack that does not deal slashing damage deals only half its normal damage. If a target cuts its way out of the creature, the creature cannot use swallow whole again until that damage is healed.</p>\n<p>Alternatively, a target swallowed whole can attempt to climb out. The swallowed creature must succeed at both a grapple check against the creature’s internal KAC + 8 and an Athletics check to climb (DC = 10 + 1-1/2 × the creature’s CR). Each of these actions takes a full round. If both checks are successful, the target climbs back up to the creature’s mouth and can escape, ending up in an open square adjacent to the creature.</p>\n<hr />"
+          "value": "<p>(EX)</p>\n<p>If the creature hits with the indicated attack (usually a bite attack), it deals the normal damage. If the creature’s attack roll successfully hits the target’s KAC + 4, the creature also automatically grapples the foe as part of the attack action. (If it hits the target’s KAC + 13, it instead pins the target). The creature doesn’t need to have a free limb to perform this grapple. Unless otherwise specified, a creature can swallow whole only targets that are at least one size category smaller than itself, and it has room for a single target of that size in its stomach (doubling the maximum number of creatures it can have swallowed for each additional size category by which these creatures are smaller).</p>\n<p>On the creature’s next turn after grappling or pinning the target, if the target has not escaped the grapple or pin, the target automatically takes the attack’s damage at the beginning of the creature’s turn. The creature can then make a new attack roll with the same attack. If it hits the target’s KAC, the grapple or @UUID[Compendium.sfrpg.conditions.Item.XgK4EdO5D3Fj3iWz]{Pin} is maintained. If it hits the target’s KAC + 4, the target is swallowed whole (no damage is dealt).</p>\n<p>Once swallowed, the target takes the listed swallow whole damage automatically at the beginning its turn every round. The target is considered @UUID[Compendium.sfrpg.conditions.Item.4AkWDHGM6gHDepHN]{Grappled} as long as it is swallowed. The target can attempt to cut its way out (the interior of a creature with swallow whole has the same EAC as its exterior and a KAC equal to that of its exterior – 4) by dealing an amount of damage equal to one-quarter the swallowing creature’s total Hit Points, though any attack that does not deal slashing damage deals only half its normal damage. If a target cuts its way out of the creature, the creature cannot use swallow whole again until that damage is healed.</p>\n<p>Alternatively, a target swallowed whole can attempt to climb out. The swallowed creature must succeed at both a grapple check against the creature’s internal KAC + 8 and an Athletics check to climb (DC = 10 + 1-1/2 × the creature’s CR). Each of these actions takes a full round. If both checks are successful, the target climbs back up to the creature’s mouth and can escape, ending up in an open square adjacent to the creature.</p>\n<hr />"
         },
         "descriptors": [],
         "duration": {
@@ -589,6 +601,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -610,6 +623,11 @@
       "_id": "gHjfO8oF9XTosv7G",
       "name": "Amphibious",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -617,6 +635,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -638,6 +657,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -664,6 +684,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -685,10 +706,16 @@
       "_id": "ifaFKvdtlfvFgaVh",
       "name": "Hot-Blooded (Ex)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -710,6 +737,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -736,6 +764,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -764,6 +793,7 @@
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -792,11 +822,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -814,6 +841,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 2
@@ -864,12 +892,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -1000,17 +1034,24 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>Elmeshras are large six-legged amphibians native to @UUID[Compendium.sfrpg.setting.sRunEYMfbrHeHcl7]{Triaxus}. They are omnivorous, eating fish, smaller aquatic animals, and fruit in equal quantity. While elmeshras might seem lethargic, floating calmly with their eyes just above the surface, they are surprisingly quick to act, especially if provoked or when a tempting bit of prey swims too close. Elmeshras tend to eat close to their weight in food every day. They spawn in shallow pools and marshes during @UUID[Compendium.sfrpg.setting.sRunEYMfbrHeHcl7]{Triaxus}’s summer, and the handful that survive to reach the winter hibernate through it, storing fertilized eggs to release as the weather improves. A typical elmeshra is over 12 feet long and weighs 3,000 pounds.</p>\n<p>Before the Gap, it was common for dragons and rhyphorians to dig up the massive amphibians throughout the winter. Their carcasses provided meat for lean winter days, but also elmeshra oil-originally drained from the creature’s flesh and extracted chemically-which protected against fatal freezing. Triaxians no longer rely on elmeshras for survival, but elmeshra steaks are still considered a delicacy by certain long-lived dragons, and the oil is often used as an ingredient in high-end perfumes.</p>\n<p>On @UUID[Compendium.sfrpg.setting.sRunEYMfbrHeHcl7]{Triaxus}, hibernating elmeshras can occasionally be found buried in ice floes, but it’s more common to find living versions on other planets. The ease of shipping frozen elmeshras makes them a common animal attraction in zoos and a popular quarry in hunting expeditions across many systems. However, outside of their natural environment, elmeshras engage in frequent cycles of spawning that can rapidly cause ecological blight.</p>\n<p>Elmeshra eggs are found clustered in spheres up to 10 feet in diameter and hatch based on the weather. When they finally spring forth, hundreds of elmeshra spawn surge across land and sea alike. These spawn sometimes overwhelm larger animals, especially those still adjusting to the changing season.</p>",
+        "value": "<h2>Description</h2>\n<p>Elmeshras are large six-legged amphibians native to @UUID[Compendium.sfrpg.setting.Item.sRunEYMfbrHeHcl7]{Triaxus}. They are omnivorous, eating fish, smaller aquatic animals, and fruit in equal quantity. While elmeshras might seem lethargic, floating calmly with their eyes just above the surface, they are surprisingly quick to act, especially if provoked or when a tempting bit of prey swims too close. Elmeshras tend to eat close to their weight in food every day. They spawn in shallow pools and marshes during @UUID[Compendium.sfrpg.setting.Item.sRunEYMfbrHeHcl7]{Triaxus}’s summer, and the handful that survive to reach the winter hibernate through it, storing fertilized eggs to release as the weather improves. A typical elmeshra is over 12 feet long and weighs 3,000 pounds.</p>\n<p>Before the Gap, it was common for dragons and rhyphorians to dig up the massive amphibians throughout the winter. Their carcasses provided meat for lean winter days, but also elmeshra oil-originally drained from the creature’s flesh and extracted chemically-which protected against fatal freezing. Triaxians no longer rely on elmeshras for survival, but elmeshra steaks are still considered a delicacy by certain long-lived dragons, and the oil is often used as an ingredient in high-end perfumes.</p>\n<p>On @UUID[Compendium.sfrpg.setting.Item.sRunEYMfbrHeHcl7]{Triaxus}, hibernating elmeshras can occasionally be found buried in ice floes, but it’s more common to find living versions on other planets. The ease of shipping frozen elmeshras makes them a common animal attraction in zoos and a popular quarry in hunting expeditions across many systems. However, outside of their natural environment, elmeshras engage in frequent cycles of spawning that can rapidly cause ecological blight.</p>\n<p>Elmeshra eggs are found clustered in spheres up to 10 feet in diameter and hatch based on the weather. When they finally spring forth, hundreds of elmeshra spawn surge across land and sea alike. These spawn sometimes overwhelm larger animals, especially those still adjusting to the changing season.</p>",
         "weight": ""
       },
       "class": "",
       "cr": 7,
       "environment": "temperate aquatic and marsh (Triaxus)",
       "organization": "solitary or pair",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #30 pg. 56",
@@ -1316,6 +1357,9 @@
       },
       "senses": "blindsight (heat) 60 ft., low-light vision",
       "size": "large",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

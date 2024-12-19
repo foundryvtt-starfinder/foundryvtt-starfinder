@@ -2,6 +2,11 @@
   "_id": "6zESHpSb355jDyLS",
   "name": "Helping Hands, Mass",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "systems/sfrpg/icons/spells/comprehend_customs.webp",
   "system": {
     "type": "",
@@ -44,13 +49,13 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>This spell functions as @UUID[Compendium.sfrpg.spells.eq9xWWOQExT7g1v6]{Helping Hands}, except as noted above.</p>\n<h2>Helping Hands</h2>\n<p>First developed by resourceful skittermander technomancers, you or a targeted creature sprout two vestigial hands that can hold and manipulate objects. While this spell is active, the target gains a +2 circumstance bonus to Engineering and Sleight of Hand checks. Each round, this spell grants the target one additional move action that can be used to manipulate objects, such as to activate an item, draw a weapon, or reload a weapon. This spell doesn’t allow the target to attempt additional attacks.</p>"
+      "value": "<p>This spell functions as @UUID[Compendium.sfrpg.spells.Item.eq9xWWOQExT7g1v6]{Helping Hands}, except as noted above.</p>\n<h2>Helping Hands</h2>\n<p>First developed by resourceful skittermander technomancers, you or a targeted creature sprout two vestigial hands that can hold and manipulate objects. While this spell is active, the target gains a +2 circumstance bonus to Engineering and Sleight of Hand checks. Each round, this spell grants the target one additional move action that can be used to manipulate objects, such as to activate an item, draw a weapon, or reload a weapon. This spell doesn’t allow the target to attempt additional attacks.</p>"
     },
     "descriptors": [],
     "dismissible": false,
     "duration": {
-      "units": "",
-      "value": "1 minute/level"
+      "units": "minute",
+      "value": "@details.cl.value"
     },
     "formula": "",
     "isActive": null,
@@ -68,10 +73,7 @@
       "prepared": false
     },
     "range": {
-      "additional": "5 ft.",
-      "per": "2 levels",
-      "units": "ft",
-      "value": 25
+      "units": "close"
     },
     "rollNotes": "",
     "save": {

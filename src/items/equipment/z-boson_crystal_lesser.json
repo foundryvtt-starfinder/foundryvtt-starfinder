@@ -2,6 +2,11 @@
   "_id": "2nPTJdSkDfzsy7Pe",
   "name": "Z-boson crystal, lesser",
   "type": "weapon",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "icons/commodities/gems/gem-faceted-teardrop-blue.webp",
   "system": {
     "type": "",
@@ -19,6 +24,7 @@
     "ammunitionType": "",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": 0
@@ -71,24 +77,8 @@
       "parts": []
     },
     "damage": {
-      "parts": [
-        {
-          "name": "",
-          "formula": "1d8",
-          "group": null,
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
-            "cold": false,
-            "electricity": false,
-            "fire": false,
-            "healing": false,
-            "piercing": false,
-            "slashing": false,
-            "sonic": false
-          }
-        }
-      ]
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -109,7 +99,24 @@
     "identified": true,
     "isActive": null,
     "level": 10,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "798ab139-ed33-4f4a-8916-c0fcebd3101f",
+        "name": "Z-boson crystal, lesser",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-damage",
+        "enabled": true,
+        "limitTo": "container",
+        "max": 8,
+        "modifier": "1d8",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "price": 17500,
     "proficient": true,
     "properties": {
@@ -150,6 +157,7 @@
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
       "hybrid": false,
       "hydrodynamic": false,
@@ -221,7 +229,11 @@
       "dc": "",
       "descriptor": "negate"
     },
-    "source": "ARM pg. 49",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
+    "source": "AR pg. 49",
     "special": "",
     "specialMaterials": {
       "abysium": false,

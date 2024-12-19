@@ -1,60 +1,4 @@
 {
-    "ACTOR": {
-        "TypeCharacter": "PG",
-        "TypeDrone": "Drone",
-        "TypeHazard": "Trappola",
-        "TypeNpc": "Old Style PNG",
-        "TypeNpc2": "PNG",
-        "TypeStarship": "Astronave",
-        "TypeVehicle": "Veicolo"
-    },
-    "ITEM": {
-        "TypeActorresource": "Actor Resource",
-        "TypeAmmunition": "Ammunition",
-        "TypeArchetypes": "Archetipo",
-        "TypeAsi": "Aumento dei valori di caratteristica",
-        "TypeAugmentation": "Impianto",
-        "TypeChassis": "Telaio del Drone",
-        "TypeClass": "Classe",
-        "TypeConsumable": "Consumabile",
-        "TypeContainer": "Contenitore",
-        "TypeEquipment": "Armatura",
-        "TypeFeat": "Capacità",
-        "TypeFusion": "Fusione d'arma",
-        "TypeGoods": "Bene Commerciabile",
-        "TypeHybrid": "Ibrido",
-        "TypeMagic": "Magico",
-        "TypeMod": "Modifica del Drone",
-        "TypeRace": "Razza",
-        "TypeShield": "Scudo",
-        "TypeSpell": "Incantesimo",
-        "TypeStarshipablativearmor": "Armatura Ablativa",
-        "TypeStarshipaction": "Azione",
-        "TypeStarshiparmor": "Armatura",
-        "TypeStarshipcomputer": "Computer",
-        "TypeStarshipcrewquarter": "Quartiere dell'Equipaggio",
-        "TypeStarshipdefensivecountermeasure": "Contro-misura Difensiva",
-        "TypeStarshipdriftengine": "Motore Deriva",
-        "TypeStarshipexpansionbay": "Compartimento adattabile",
-        "TypeStarshipfortifiedhull": "Scafo Rinforzato",
-        "TypeStarshipframe": "Struttura Base",
-        "TypeStarshipothersystem": "Altro Sistema",
-        "TypeStarshippowercore": "Nucleo Energetico",
-        "TypeStarshipreinforcedbulkhead": "Reinforced Bulkhead",
-        "TypeStarshipsecuritysystem": "Sistema di Sicurezza",
-        "TypeStarshipsensor": "Sensore",
-        "TypeStarshipshield": "Scudo",
-        "TypeStarshipspecialability": "Starship Special Ability",
-        "TypeStarshipthruster": "Propulsore",
-        "TypeStarshipweapon": "Arma",
-        "TypeTechnological": "Tecnologico",
-        "TypeTheme": "Tema",
-        "TypeUpgrade": "Miglioramento dell'Armatura",
-        "TypeVehicleattack": "Attacco di un Veicolo",
-        "TypeVehiclesystem": "Sistema di un Veicolo",
-        "TypeWeapon": "Arma",
-        "TypeWeaponaccessory": "Accessorio d'arma"
-    },
     "SFRPG": {
         "ACPTooltip": "Penalità dell'Armatura: {mod} ({source})",
         "ACTooltipArmorACMod": "Modificatore dell'Armatura: {armor} ({name})",
@@ -113,6 +57,7 @@
         "ActionRSAK": "Attacco Incantesimo a distanza",
         "ActionRWAK": "Attacco Arma a distanza",
         "ActionSave": "Tiro Salvezza",
+        "ActionSkill": "Skill Check",
         "ActionUtil": "Util",
         "ActorSheet": {
             "Attributes": {
@@ -165,11 +110,18 @@
                 "Categories": {
                     "ActiveFeats": "Talenti Attivi",
                     "ActorResources": "Actor Resources",
+                    "ArchetypeFeatures": "Archetype Features",
                     "Archetypes": "Archetipo",
+                    "ClassFeatures": "Class Features",
                     "Classes": "Classi",
+                    "Feats": "Feats",
+                    "OtherFeatures": "Other Features",
                     "PassiveFeats": "Talenti Passivi",
                     "Race": "Razza",
-                    "Theme": "Tema"
+                    "SpeciesFeatures": "Species Features",
+                    "Theme": "Tema",
+                    "ThemeFeatures": "Theme Features",
+                    "UniversalCreatureRules": "Universal Creature Rules"
                 },
                 "Create": "Create new feature",
                 "Filters": {
@@ -269,8 +221,10 @@
                     "Delete": "Elimina",
                     "Edit": "Edita l'Oggetto",
                     "Equip": "Equipaggia",
+                    "Install": "Install Augmentation",
+                    "LevelUp": "Level up",
                     "Unequip": "Rimuovi dall'Equipaggiamento",
-                    "LevelUp": "Level up"
+                    "Uninstall": "Uninstall Augmentation"
                 },
                 "ItemValue": {
                     "Label": "Ricchezza:",
@@ -337,6 +291,8 @@
                     "EditModifierTooltip": "Open the modifier editor for this modifier.",
                     "SkillRank": "{type} Gradi: {mod} ({source})",
                     "Speed": "{speed}: {type} {mod} ({source})",
+                    "ToggleEffect": "Toggle effect",
+                    "ToggleEffectTooltip": "Toggle this effect on or off. Disabled effects do not affect the character.",
                     "ToggleModifier": "Toggle modifier",
                     "ToggleModifierTooltip": "Toggle a modifier on and off. Disabled modifiers do not affect the character."
                 },
@@ -396,6 +352,7 @@
         "AugBrain": "Cervello",
         "AugBrainAndEyes": "Cervello e Occhi",
         "AugBrainHeartLungs": "Cervello, Cuore, Polmoni",
+        "AugBrainThroat": "Brain and Throat",
         "AugEars": "Orecchie",
         "AugEarsAndThroat": "Orecchie e Gola",
         "AugEndocrine": "Endocrino",
@@ -511,22 +468,35 @@
                 "Accept": "Accept",
                 "ApplyDamage": "Apply Damage",
                 "ApplyHealing": "Apply Healing",
+                "ApplyHealingTo": "Apply Healing To",
+                "BypassStamina": "BypassStamina",
                 "DamageAndAHalf": "1.5x Damage",
                 "DoubleDamage": "Double Damage",
+                "HP": "HP (default)",
+                "HPAndSP": "Both HP and SP",
                 "HalfDamage": "Half Damage",
                 "ModifyDamage": "Modify Damage",
                 "ModifyDamageText": "Input an number to modify the damage amount by. This is applied after any multiplication.",
                 "NoDamageModifier": "No damage modifier applied.",
-                "NoToken": "Cannot apply: No token selected!"
+                "NoToken": "Cannot apply: No token selected!",
+                "SP": "SP"
+            },
+            "ItemAction": {
+                "Check": "Check",
+                "NoActor": "You must have an actor selected or assigned to your user."
             },
             "ItemActivation": {
                 "Activates": "Attiva",
                 "Cost": "Costo: {cost}",
                 "Deactivates": "Disattiva",
                 "Duration": "Durata: {duration}",
-                "Reloads": "Ricarica"
-            }
+                "NoCharges": "No Charges",
+                "Reloads": "Ricarica",
+                "Use": "Use"
+            },
+            "PlaceAbilityTemplate": "Place {label}"
         },
+        "Check": "Check",
         "ClassArmorProf": "Competenza nelle Armature",
         "ClassBABProgression": "Progressione del BAB",
         "ClassFortSaveProgression": "Progressione Tiro Salvezza Tempra",
@@ -560,6 +530,48 @@
                 },
                 "Turn": {
                     "Header": "Turno di {combatant}"
+                }
+            },
+            "Difficulty": {
+                "Levels": {
+                    "Average": "Average",
+                    "Challenging": "Challenging",
+                    "Easy": "Easy",
+                    "Epic": "Epic",
+                    "GreaterThanEpic": "Greater than Epic",
+                    "Hard": "Hard",
+                    "LessThanEasy": "Less than Easy",
+                    "NoEnemies": "No enemies",
+                    "NoEnemyShips": "No Enemy Ships",
+                    "NoPCShips": "No PC Ships",
+                    "NoPCs": "No PCs"
+                },
+                "Tooltip": {
+                    "APL": "APL: ",
+                    "APLFull": "Average Party Level",
+                    "CR": "CR: ",
+                    "CanBeAdded": "A creature of this CR can be added without increasing the encounter difficulty",
+                    "ClickForDetails": "Click for Encounter Details",
+                    "Details": "Details",
+                    "DifficultyEncounter": "Difficulty Encounter",
+                    "EncounterCR": "Encounter Challenge Rating",
+                    "EncounterTotalXP": "Encounter Total XP Value",
+                    "EncounterWealth": "Suggested Wealth Gain (credits)",
+                    "Enemies": "Enemies",
+                    "EnemyShipEffectiveTier": "Effective Tier, Enemy Ship(s)",
+                    "EnemyXP": "Enemy Total XP Value",
+                    "HostileNPCs": "Hostile NPCs: ",
+                    "PCs": "Number of PCs: ",
+                    "PlayerShipEffectiveTier": "Effective Tier, Player Ship(s) ",
+                    "PlayerXP": "Per Player XP",
+                    "Players": "Players",
+                    "XPBounds": "XP Bounds",
+                    "XPNext": "Add XP to increase CR: ",
+                    "XPPrevious": "Remove XP to reduce CR: "
+                },
+                "Units": {
+                    "Credits": "cr",
+                    "XP": "XP"
                 }
             },
             "EncounterTracker": {
@@ -627,8 +639,56 @@
                 }
             }
         },
+        "CombatRoles": {
+            "Combatant": "Combatant",
+            "Descriptions": {
+                "Combatant": "These creatures are best suited to physical fighting; they may be most effective at range, in melee, or both.",
+                "Expert": "These creatures tend to be most effective with various skills.",
+                "Spellcaster": "These creatures rely primarily on spells or spell-like abilities."
+            },
+            "Expert": "Expert",
+            "Label": "Combat Role",
+            "Spellcaster": "Spellcaster"
+        },
         "ComingSoon": "Coming Soon !",
         "ConImm": "Immune alle Condizioni",
+        "ConditionTooltips": {
+            "Asleep": "You take a -10 penalty to Perception checks to notice things.",
+            "Bleeding": "You take the listed damage at the beginning of your turn.",
+            "Blinded": "You're flat-footed, you take a -4 penalty to most Str- and Dex-based skill checks and opposed Perception checks, you automatically fail Perception checks based on sight, opponents have total concealment against you, and you must succeed at a DC 10 Acrobatics check to move faster than half speed or else fall prone.",
+            "Broken": "<strong>Weapon:</strong> attack and damage rolls take a -2 penalty and can't deal extra effects on a critical hit;<br> <strong>Armor:</strong> AC bonuses are halved and the armor check penalty is doubled;<br> <strong>Vehicle:</strong> -2 penalty to AC, collision DC, and Piloting modifier, and it halves its full speed and MPH;<br> <strong>Tool or tech that provides bonuses:</strong> bonuses are halved.",
+            "Burning": "You take the listed fire damage each round, and you must be extinguished to end the condition.",
+            "Confused": "You treat all creatures as enemies, and you must roll on the table to determine your actions.",
+            "Cowering": "You're flat-footed and can take no actions.",
+            "Dazed": "You can take no actions.",
+            "Dazzled": "You take a -1 penalty to attack rolls and sight-based Perception checks.",
+            "Dead": "Your soul leaves your body, you can't act in any way, and you can't benefit from normal or magical healing.",
+            "Deafened": "You take a -4 penalty to initiative checks and opposed Perception checks, and you automatically fail sound-based Perception checks.",
+            "Dying": "You're unconscious, you can take no actions, and you must stabilize or lose Resolve Points and potentially die.",
+            "Encumbered": "Speeds are reduced by 10 feet, maximum Dex bonus to AC is reduced to +2, and you take a -5 penalty to Str- and Dex-based checks.",
+            "Entangled": "You move at half speed; you cannot run or charge; and you take a -2 penalty to AC, attack rolls, Reflex saves, initiative checks, and Dex-based skill and ability checks.",
+            "Exhausted": "You move at half speed; you cannot run or charge; you take a -3 penalty to AC, attack rolls, melee damage rolls, Reflex saves, initiative checks, and Str- and Dex-based skill and ability checks; and you reduce your encumbered limit by 3 bulk.",
+            "Fascinated": "You must pay attention to the fascinating effect and take a -4 penalty to skill checks made as reactions.",
+            "Fatigued": "You cannot run or charge; you take a -1 penalty to AC, attack rolls, melee damage rolls, Reflex saves, initiative checks, and Str- and Dex-based skill and ability checks; and you reduce your encumbered limit by 1 bulk.",
+            "FlatFooted": "You take a -2 penalty to AC, and you cannot take reactions or make attacks of opportunity.",
+            "Frightened": "You must flee or fight, and you take a -2 penalty to ability checks, attack rolls, saving throws, and skill checks.",
+            "Grappled": "You cannot move or take two-handed actions; you take a -2 penalty to AC, most attack rolls, Reflex saves, initiative checks, and Dex-based skill and ability checks; and you cannot make attacks of opportunity.",
+            "Helpless": "Your Dex modifier is -5, and melee attacks against you gain a +4 bonus.",
+            "Nauseated": "You're unable to attack, cast spells, or concentrate on spells, and the only action you can take is a single move action per turn.",
+            "OffKilter": "You can't take move actions except to right yourself, you take a -2 penalty to attacks, and you're flat-footed.",
+            "OffTarget": "You take a -2 penalty to attack rolls.",
+            "Overburdened": "Speeds are reduced to 5 feet; maximum Dex bonus to AC is reduced to +0; and you take a -5 penalty to Str- and Dex-based checks.",
+            "Panicked": "<ul><li>You drop all held items</li><li>You flee at top speed</li><li>You cannot take other actions</li><li>You take a -2 penalty to ability checks, saving throws, and skill checks</li><li>And you cower if cornered</li></ul>",
+            "Paralyzed": "Your Dex modifier is -5, and you cannot move but can take mental actions.",
+            "Pinned": "You cannot move, you're flat-footed, and you take penalties to the same attributes as for grappled but the penalty is -4.",
+            "Prone": "You take a -4 penalty to melee attacks, a +4 bonus to AC against ranged attacks, and a -4 penalty to AC against melee attacks.",
+            "Shaken": "You take a -2 penalty to ability checks, attack rolls, saving throws, and skill checks.",
+            "Sickened": "You take a -2 penalty to ability checks, attack rolls, weapon damage rolls, saving throws, and skill checks.",
+            "Stable": "You're no longer dying, but you are still unconscious.",
+            "Staggered": "You can take only a single move or standard action each round and can't take reactions, but you can take swift actions as normal.",
+            "Stunned": "You drop everything held, you can't take actions, and you're flat-footed.",
+            "Unconscious": "You're knocked out and helpless."
+        },
         "ConditionsAsleep": "Addormentato",
         "ConditionsBleeding": "Sanguinante",
         "ConditionsBlinded": "Accecato",
@@ -670,6 +730,7 @@
             "Drugs": "Droghe",
             "FoodDrink": "Cibo e Bevande",
             "Medicine": "Medicine",
+            "Other": "Other",
             "Poison": "Veleni",
             "Serum": "Sieri",
             "SpellGem": "Gemme Incantesimo"
@@ -694,7 +755,10 @@
         },
         "Cybernetic": "Cibernetico",
         "Damage": {
+            "DamageOperator": "Damage Operator",
+            "EnergyDamage": "Energy Damage",
             "Immunities": "Immune ai Danni",
+            "KineticDamage": "Kinetic Damage",
             "MinimumDamage": "Minimum Damage",
             "PartIndex": "Part {partIndex} of {partCount}",
             "Reduction": "Riduzione Danni",
@@ -718,6 +782,10 @@
                     "Or": "o"
                 },
                 "Piercing": "Perforante",
+                "PrimaryDamageGroup": "Primary Damage Group",
+                "PrimaryDamageGroupTooltip": "Damage sections that are a member of the primary damage group will all be marked as primary. You will still only be able to choose one damage section per group when making a damage roll, and as such modifiers will correctly only be applied once.",
+                "PrimaryDamageSection": "Primary Damage Section",
+                "PrimaryDamageSectionTooltip": "Modifiers that affect this weapon's damage will only apply to the primary damage section. Non-primary sections will simply roll their formula. A weapon must have exactly one primary damage section.",
                 "Radiation": "Radiazione",
                 "Slashing": "Tagliente",
                 "Sonic": "Sonico",
@@ -786,6 +854,7 @@
                 "SingleFieldInvalid": "Dato invalido per {fieldName}."
             }
         },
+        "Disabled": "Disabled",
         "DistAny": "Tutti",
         "DroneSheet": {
             "Chassis": {
@@ -903,11 +972,61 @@
                 "RangedWeaponMounts": "Suporto per Armi a distanza"
             }
         },
+        "DurationTypesInstantaneous": "Instantaneous",
+        "Effect": {
+            "DetailsEnabledLabel": "Enabled",
+            "DetailsHeader": "Effect Details",
+            "DetailsShowOnToken": "Show On Token",
+            "DurationTypesDays": "Days",
+            "DurationTypesHours": "Hours",
+            "DurationTypesLabel": "Duration",
+            "DurationTypesMinutes": "Minutes",
+            "DurationTypesNone": "None",
+            "DurationTypesPermanent": "Permanent",
+            "DurationTypesRounds": "Rounds",
+            "EndTypesLabel": "Ends On",
+            "EndTypesOnTurnEnd": "Turn end",
+            "EndTypesOnTurnStart": "Turn start",
+            "EndsOnTooltip": "<br><strong>Parent Actor's Turn</strong><p>The effect will expire at the start/end of the turn of the actor it belongs to.</p><strong>Nearest Initiative</strong><p>The effect will expire on the start/end of the turn with the closest initiative to the turn it was enabled.</p><strong>Combatant Turns</strong><p>The effect will expire on the start/end of the specified combatant's turn.</p>",
+            "Expired": "Expired",
+            "ExpiryModeInit": "Initiative Count",
+            "ExpiryModeLabel": "Expiry Mode",
+            "ExpiryModeTooltip": "<br><strong>Combatant Turn</strong><p>The effect will expire at the start/end of a specified turn.</p><strong>Initiative Count</strong><p>The effect will expire when the current combat reaches the specified initiative count.</p>",
+            "ExpiryModeTurn": "Combatant Turn"
+        },
+        "EffectDurationTypesDays": "Days",
+        "EffectDurationTypesHours": "Hours",
+        "EffectDurationTypesMinutes": "Minutes",
+        "EffectDurationTypesRounds": "Rounds",
+        "Enabled": "Enabled",
         "EnergyArmorClass": "CAE",
+        "EnergyArmorClassShort": "EAC",
+        "Enrichers": {
+            "Icon": {
+                "Types": {
+                    "Graviton": "Graviton",
+                    "LanguageDependent": "Language Dependent",
+                    "MindAffecting": "Mind Affecting",
+                    "Photon": "Photon",
+                    "SenseDependent": "Sense Dependent"
+                }
+            },
+            "SendToChat": "Send to chat",
+            "TypeError": "{enricherType} parsing failed! Type is invalid."
+        },
         "Environment": "Environment",
         "FeatTypes": {
             "Combat": "Talenti di Combattimento",
             "General": "Talenti Generali"
+        },
+        "FeatureCategory": {
+            "ArchetypeFeature": "Archetype Feature",
+            "ClassFeature": "Class Feature",
+            "Feat": "Feat",
+            "OtherFeature": "Other Feature",
+            "SpeciesFeature": "Species Feature",
+            "ThemeFeature": "Theme Feature",
+            "UniversalCreatureRule": "Universal Creature Rule"
         },
         "Features": "Capacità",
         "FeaturesAdd": "Aggiungi",
@@ -1037,6 +1156,7 @@
         "InventoryCapacity": "Capacità",
         "InventoryCurrency": "Patrimonio",
         "InventoryEquipped": "Equipaggiato",
+        "InventoryNotEquipped": "Not Equipped",
         "InventoryUsage": "Utilizzi",
         "IronWillHint": "Aggiungi 2 al Tiro Salvezza di Volontà",
         "IronWillLabel": "Volontà di ferro",
@@ -1051,6 +1171,15 @@
                 "LockedTooltip": "<strong>Sigillato</strong><br/>Un Contenitore sigillato impedisce l'accesso da parte dei giocatori."
             }
         },
+        "ItemMacro": {
+            "Activate": "Activate",
+            "Attack": "Attack",
+            "Cast": "Cast",
+            "Damage": "Damage",
+            "Healing": "Healing",
+            "Reload": "Reload",
+            "Use": "Use"
+        },
         "ItemNoAmmo": "{name} ha finito le cariche!",
         "ItemSheet": {
             "AbilityScoreIncrease": {
@@ -1064,6 +1193,7 @@
                 "Base": "Base value",
                 "BaseTooltip": "(Required) The base value defines the base value of this resource. Modifiers may alter it.<br/>Attribute: @resources.type.subtype.base",
                 "CombatTracker": "Combat Tracker settings",
+                "CombatTrackerSettings": "Combat Tracker Settings",
                 "DisplayAbsoluteValue": "Display Absolute Value",
                 "DisplayAbsoluteValueTooltip": "Should the displayed value in the combat tracker be absolute? i.e. -1 is displayed as 1, -2 as 2, etc.",
                 "Enabled": "Enabled",
@@ -1105,6 +1235,7 @@
                 "VisualizationsModeLesserThan": "lesser than",
                 "VisualizationsModeLesserThanEqual": "lesser than or equal to",
                 "VisualizationsModeNotEqual": "not equal to",
+                "VisualizationsPart": "Visualization Part",
                 "VisualizationsThen": "Then:",
                 "VisualizationsTitle": "Title:"
             },
@@ -1127,6 +1258,27 @@
             },
             "Containers": {
                 "ContainerTooltip": "I contenitori possono contenere praticamente qualsiasi elemento. Aumenta la capacità di archiviazione per consentire l'aggiunta di contenuti. "
+            },
+            "Details": {
+                "Section": {
+                    "ArmorDetails": "Armor Details",
+                    "ClassBasics": "Class Basics",
+                    "ConsumableDetails": "Consumable Details",
+                    "Progressions": "Progressions",
+                    "SkillsAndProficiencies": "Skills and Proficiencies",
+                    "Title": "Section",
+                    "Usage": "Usage"
+                },
+                "Tab": {
+                    "AmmunitionContainer": "Ammunition & Container",
+                    "AttackDamage": "Attack & Damage",
+                    "ClassInformation": "Class Information",
+                    "ContainerDetails": "Container Details",
+                    "NPCSpecific": "NPC Specific",
+                    "Properties": "Properties",
+                    "Spellcasting": "Spellcasting",
+                    "UsageAction": "Usage & Action"
+                }
             },
             "Header": {
                 "ArmorClass": "Classe Armatura",
@@ -1176,6 +1328,29 @@
                 "TargetLockPenaltyTooltip": "Il malus applicato al punteggio di Aggancio Bersaglio dell'astronave.",
                 "TurnDistancePenalty": "Malus Distanza di Virata",
                 "TurnDistancePenaltyTooltip": "Il malus applicato alla distanza tra le virate dell'astronave."
+            },
+            "StarshipAction": {
+                "ActionDC": "Action DC",
+                "AddSubactionTooltip": "<strong>Add Subaction</strong><br />Add a new subaction",
+                "CheckFormula": "Skill Check Formula",
+                "CrewRole": "Crew Role",
+                "CriticalEffect": "Critical Effect",
+                "DCPlaceholder": "5 + 1-1/2 * Target Ship Tier",
+                "DeleteSubactionTooltip": "<strong>Delete Subaction</strong><br />Delete this subaction",
+                "IsPushAction": "Push Action?",
+                "NormalEffect": "Normal Effect",
+                "Phase": "Phase",
+                "PhaseTooltip": "Phase Tooltip",
+                "PushResolve": "Push and Resolve",
+                "ResolveFormulaAutomatically": "Resolve this Formula Automatically",
+                "ResolveFormulaAutomaticallyTooltip": "If this box is checked, Target DC will resolve automatically as a formula, and the result will display in the chat box when the action is triggered. Otherwise, the raw string will instead be displayed in the chatbox.",
+                "SkillFormulaAndSubactions": "Skill Formula and Subactions",
+                "SkillFormulaOrSubactions": "Skill Formula / Subactions",
+                "SkillOrSubaction": "Skill or Subaction Name",
+                "SubactionPart": "Subaction {section}",
+                "Subactions": "Subactions",
+                "TargetDC": "Target DC",
+                "UsesResolve": "Uses Resolve"
             },
             "StarshipArmor": {
                 "ArmorBonus": "Bonus Armatura",
@@ -1252,6 +1427,7 @@
                     "WeaponArcStarboard": "Arco di Tribordo",
                     "WeaponArcTooltip": "La quantità di supporti arma disponibili per gli archi della nave, suddivise in supporti leggeri, pesanti e capitali.",
                     "WeaponArcTurret": "Torrette",
+                    "WeaponMounts": "Weapon Mounts",
                     "WeaponTypeCapital": "Capitale",
                     "WeaponTypeHeavy": "Pesante",
                     "WeaponTypeLight": "Leggera",
@@ -1353,24 +1529,30 @@
                 "DamageNotes": "Damage Notes",
                 "DamageNotesTooltip": "The damage notes are displayed on the damage roll chat card. This is a great way to put helpful reminders, especially for GMs with complicated NPCs.",
                 "DamageSection": "Damage Section {section}",
+                "DeleteDamageSection": "Delete damage section",
+                "Details": "Action Details",
                 "HealingFormula": "Formula della Cura",
                 "OtherFormula": "Altre Formule",
                 "RollNotes": "Roll Notes",
                 "RollNotesTooltip": "The roll notes are displayed on the action roll chat card. This is a great way to put helpful reminders, especially for GMs with complicated NPCs.",
                 "SavingThrow": "Tiro Salvezza",
+                "SkillCheck": "Skill Check",
                 "TitleAction": "Action",
                 "TitleActivation": "Activation"
             },
             "Activation": {
+                "Activation": "Activation",
                 "ActivationCondition": "Condizioni di Attivazione",
                 "ActivationCost": "Costo di Attivazione",
                 "Area": "Area",
                 "Duration": "Durata",
                 "LimitedUses": "Utilizzi Limitati",
                 "Range": "Gittata",
+                "RangeIncrement": "Range Increment",
                 "Target": "Bersaglio"
             },
             "Ammunition": {
+                "Ammo": "Ammo",
                 "AmmunitionType": "Ammunition Type",
                 "Capacity": "Capacity Settings",
                 "Details": "Ammunition Details",
@@ -1400,9 +1582,11 @@
             },
             "Attuned": "Armonizzato",
             "Augmentation": {
+                "Action": "Augmentation Action",
                 "Details": "Dettaglio dell'Impianto",
                 "System": "Sistema",
-                "Type": "Tipo"
+                "Type": "Tipo",
+                "Usage": "Augmentation Usage"
             },
             "Capacity": {
                 "Capacity": "Capacità",
@@ -1425,6 +1609,7 @@
                 "Containers": "Contenitori",
                 "DroneChassis": "Telaio del Drone",
                 "DroneMods": "Moduli del Drone",
+                "Effect": "Effect",
                 "Equipment": "Equipaggiamento",
                 "Feats": "Talenti",
                 "Goods": "Beni Commerciabili",
@@ -1494,10 +1679,14 @@
             "Feat": {
                 "ActionRecharge": "Ricarica dell'Azione",
                 "Charged": "Carico",
+                "CombatFeat": "Combat Feat",
                 "FeatureAttack": "Attacco della Capacità",
+                "FeatureCategory": "Feature Category",
+                "FeatureDetails": "Feature Details",
                 "FeatureUsage": "Utilizzo della Capacità",
                 "RechargeOn": "Ricarica",
-                "Requirements": "Prerequisiti"
+                "Requirements": "Prerequisiti",
+                "SpecialAbilityType": "Special Ability Type"
             },
             "Goods": {
                 "Details": "Goods Details"
@@ -1515,12 +1704,15 @@
             "MaxDex": "Modificatore di Destrezza Massimo",
             "NotProficient": "Non Competente",
             "Proficient": "Competente",
+            "RangeInformation": "Range Information",
             "Shield": {
                 "ACP": "MAT: {acp}",
                 "AcMaxDex": "Bonus di Destrezza max : {maxDex}",
+                "AcMaxDexLabel": "Max Dex Bonus",
                 "Action": "Azione dello Scudo",
                 "Aligned": "Allineato",
                 "ArmorCheck": "Malus dell'Armatura alla Prova : {acp}",
+                "ArmorCheckLabel": "Armor Check Penalty",
                 "Bonus": "Bonus dello Scudo",
                 "Bonuses": "Bonus impugnato : {wielded} / Bonus allineato : {aligned}",
                 "Details": "Dettagli dello Scudo",
@@ -1595,6 +1787,10 @@
                 "Attack": "Attacco dell'arma",
                 "Category": "Categoria di arma",
                 "Details": "Dettagli sull'arma",
+                "IsEquipment": {
+                    "Title": "Weapon Is Equipment",
+                    "Tooltip": "This box is checked if the weapon is a piece of carried equipment, as opposed to an innate natural or supernatural weapon. For natural weapons, uncheck this box."
+                },
                 "Properties": "Proprietà dell'arma",
                 "Type": "Tipo di arma",
                 "Usage": "Utilizzi dell'arma"
@@ -1614,39 +1810,120 @@
         },
         "KeyAbility": "caratteristica Chiave",
         "KineticArmorClass": "CAC",
+        "KineticArmorClassShort": "KAC",
         "Languages": "Linguaggi",
+        "LanguagesAballonian": "Aballonian",
         "LanguagesAbyssal": "Abissale",
+        "LanguagesAglian": "Aglian",
+        "LanguagesAkan": "Akan",
         "LanguagesAkitonian": "Akitoniano",
         "LanguagesAklo": "Aklo",
+        "LanguagesAlkainish": "Alkainish",
+        "LanguagesAnassan": "Anassan",
+        "LanguagesAncientDaimalkan": "Ancient Daimalkan",
         "LanguagesAquan": "Acquatico",
         "LanguagesArkanen": "Arkanen",
+        "LanguagesAstriapi": "Astriapi",
         "LanguagesAuran": "Auran",
         "LanguagesAzlanti": "Azlant",
+        "LanguagesBantridi": "Bantridi",
+        "LanguagesBarathu": "Barathu",
+        "LanguagesBolidan": "Bolidan",
+        "LanguagesBrenneri": "Brenneri",
         "LanguagesBrethedan": "Brethedan",
         "LanguagesCastrovelian": "Castroveliano",
         "LanguagesCelestial": "Celestiale",
         "LanguagesCommon": "Comune",
+        "LanguagesCopaxi": "Copaxi",
+        "LanguagesCyrunian": "Cyrunian",
+        "LanguagesDaimalkan": "Daimalkan",
+        "LanguagesDirindi": "Dirindi",
         "LanguagesDraconic": "Draconico",
+        "LanguagesDromadan": "Dromadan",
         "LanguagesDrow": "Drow",
         "LanguagesDwarven": "Nanico",
         "LanguagesElven": "Elfico",
+        "LanguagesEmbri": "Embri",
+        "LanguagesEndiffian": "Endiffian",
         "LanguagesEoxian": "Eoxiano",
+        "LanguagesEspraksi": "Espraksi",
+        "LanguagesFerran": "Ferran",
+        "LanguagesFirstSpeech": "First Speech",
+        "LanguagesFrujai": "Frujai",
+        "LanguagesGaraggakal": "Garaggakal",
+        "LanguagesGhibran": "Ghibran",
+        "LanguagesGhoran": "Ghoran",
+        "LanguagesGiant": "Giant",
         "LanguagesGnome": "Gnomesco",
         "LanguagesGoblin": "Goblin",
+        "LanguagesGrioth": "Grioth",
+        "LanguagesGytchean": "Gytchean",
+        "LanguagesHadrogaan": "Hadrogaan",
         "LanguagesHalfling": "Halfling",
+        "LanguagesHallas": "Hallas",
+        "LanguagesHortaa": "Hortaa",
         "LanguagesIgnan": "Ignan",
+        "LanguagesIhonva": "Ihonva",
+        "LanguagesIji": "Iji",
+        "LanguagesIlthisarian": "Ilthisarian",
         "LanguagesInfernal": "Infernale",
+        "LanguagesIxtangi": "Ixtangi",
+        "LanguagesIzalguun": "Izalguun",
+        "LanguagesJinsul": "Jinsul",
         "LanguagesKalo": "Kalo",
         "LanguagesKasatha": "Kasatha",
+        "LanguagesKatholbi": "Katholbi",
+        "LanguagesKiirinta": "Kiirinta",
+        "LanguagesKoshorian": "Koshorian",
+        "LanguagesKothama": "Kothama",
+        "LanguagesLexonian": "Lexonian",
+        "LanguagesLumos": "Lumos",
+        "LanguagesMaraquoi": "Maraquoi",
+        "LanguagesMegalonic": "Megalonic",
+        "LanguagesMi-Go": "Mi-Go",
+        "LanguagesMorlamaw": "Morlamaw",
+        "LanguagesMulkaxi": "Mulkaxi",
         "LanguagesNchaki": "Nchaki",
+        "LanguagesNoma": "Noma",
+        "LanguagesOrbian": "Orbian",
         "LanguagesOrc": "Orchesco",
+        "LanguagesOrrian": "Orrian",
+        "LanguagesOsharu": "Osharu",
+        "LanguagesPahtra": "Pahtra",
+        "LanguagesParalithi": "Paralithi",
+        "LanguagesPerani": "Perani",
+        "LanguagesProtean": "Protean",
+        "LanguagesQuorlu": "Quorlu",
+        "LanguagesRaxi": "Raxi",
+        "LanguagesReptoid": "Reptoid",
+        "LanguagesRequian": "Requian",
         "LanguagesSarcesian": "Sarcesiano",
+        "LanguagesSazaron": "Sazaron",
+        "LanguagesScyphozoan": "Scyphozoan",
+        "LanguagesSelamidian": "Selamidian",
+        "LanguagesSeprevoi": "Seprevoi",
+        "LanguagesShadowtongue": "Shadowtongue",
+        "LanguagesShimreeni": "Shimreeni",
         "LanguagesShirren": "Shirren",
         "LanguagesShobhad": "Shobhad",
+        "LanguagesSivvian": "Sivvian",
+        "LanguagesSpathinae": "Spathinae",
+        "LanguagesStarsong": "Starsong",
+        "LanguagesStroxha": "Stroxha",
+        "LanguagesSylvan": "Sylvan",
+        "LanguagesTelian": "Telian",
         "LanguagesTerran": "Terrestre",
         "LanguagesTriaxian": "Triaxiano",
+        "LanguagesTrinir": "Trinir",
+        "LanguagesUrog": "Urog",
+        "LanguagesVarratana": "Varratana",
         "LanguagesVercite": "Vercite",
         "LanguagesVesk": "Vesk",
+        "LanguagesVlakan": "Vlakan (signed, spoken, and tactile)",
+        "LanguagesVulgarKishaleen": "Vulgar Kishaleen",
+        "LanguagesWoiokan": "Woiokan",
+        "LanguagesWrikreechee": "Wrikreechee",
+        "LanguagesXaarb": "Xaarb",
         "LanguagesYsoki": "Ysoki",
         "LevelLabel": "Liv.",
         "LevelLabelText": "Liv.",
@@ -1681,6 +1958,10 @@
         "LimitedUsePeriodsShort": "Riposo Corto",
         "LocalizationTerminator": "",
         "Long": "Lungo",
+        "Macro": {
+            "ViewActor": "View Actor",
+            "ViewItem": "View Item"
+        },
         "Magic": {
             "Levels": {
                 "0": "Livello 0",
@@ -1735,6 +2016,10 @@
         "ModifierEffectTypeTooltip": "Identifica gli attributi generali interessati dal Modificatore",
         "ModifierEnabledLabel": "Attivato",
         "ModifierEnabledTooltip": "Determina se si terrà conto del Modificatore nel calcolo degli Attributi Modificatori",
+        "ModifierLimitToContainer": "Parent Item's Container",
+        "ModifierLimitToLabel": "Limit To",
+        "ModifierLimitToParent": "Parent Item",
+        "ModifierLimitToTooltip": "<strong>Limit To</strong><br><br><strong>None</strong><p>The modifier will be applied to applicable items as normal.</p><strong>Parent Item</strong><p>The modifier will only apply to the item this modifier is on.</p><strong>Parent Item's Container</strong><p>The modifier will only apply to the container item that contains the item this modifier is on.</p>",
         "ModifierModifierLabel": "Modificatore",
         "ModifierModifierTooltip": "Il valore utilizzato per modificare con.",
         "ModifierModifierTypeLabel": "Tipo di Modificatore",
@@ -1834,6 +2119,7 @@
         "NpcToggleSkillsDialogTitle": "Aggiungi delle competenze al PNG",
         "NumberOfArms": "Numero di braccia",
         "Organization": "Organization",
+        "Passive": "Passive",
         "Personal": "Personale",
         "PersonalUpgrade": "Miglioramenti",
         "Plane": "Piano",
@@ -1845,6 +2131,10 @@
         "RacePlaceHolderText": "Razza",
         "RaceSize": "Taglia",
         "RacialTraits": "Tratti Razziali",
+        "RangeCalculated": "{rangeType} ({total} ft.)",
+        "RangeClose": "Close (25 ft. + 5 ft./2 levels)",
+        "RangeLong": "Long (400 ft. + 40 ft./level)",
+        "RangeMedium": "Medium (100 ft. + 10 ft./level)",
         "Reach": "Gittata",
         "ReflexSave": "Riflessi",
         "RepairDroneChatMessage": "{name} è stato riparato per {regainedHP} Punti Vita.",
@@ -2012,6 +2302,10 @@
                 "Hint": "Cambia i vantaggi o gli svantaggi sui tiri dei dadi.",
                 "Name": "Utilizzare i vantaggi e gli svantaggi?"
             },
+            "DecimalSpeed": {
+              "Hint": "Enable decimal numbers for actor speed configuration.",
+              "Name": "Decimal Speed values"
+            },
             "AlwaysShowQuantity": {
                 "Hint": "Indica sempre la quantità di articoli, anche se è 0 o 1. Sarà necessario aggiornare la finestra prima che questa modifica abbia effetto.",
                 "Name": "Mostra sempre le quantità"
@@ -2064,6 +2358,10 @@
                     "Core": "Manuale di gioco base (5/10/5)",
                     "Optional": "Opzionale (5/5/5)"
                 }
+            },
+            "DifficultyDisplay": {
+                "Hint": "Enables difficulty calculation and display on the combat tracker tab.  You will have to refresh your window before this change will take effect.",
+                "Name": "Enable Difficulty Display"
             },
             "ExperienceTracking": {
                 "Hint": "Rimuovi la barra dell'esperienza dal personaggio.",
@@ -2142,6 +2440,10 @@
                 "Hint": "Se utilizzare o meno il metodo di misurazione Starfinder per i modelli AOE rispetto al metodo predefinito di Foundry VTT",
                 "Name": "Usa i modelli AOE del sistema Starfinder"
             },
+            "WarnInvalidRollData": {
+                "Hint": "When checked, warnings will be displayed when modifiers contain invalid roll formulas. This can result in warning spam, if, for example, you have a class feature but not the corresponding class item itself.",
+                "Name": "Warn on invalid roll formulas"
+            },
             "WorldSchemaVersion": {
                 "Hint": "Salva la versione dello schema dei dati per il sistema ATTENZIONE: non modificare questo valore a meno che tu non sappia cosa stai facendo!",
                 "Name": "Versione dello schema dei dati SFRPG"
@@ -2216,12 +2518,14 @@
             },
             "StarshipWeaponProperties": {
                 "Anchoring": "Anchoring",
+                "Antimagic": "Antimagic",
                 "Array": "Matrice",
                 "Automated": "Automated",
                 "Broad": "Ampio arco",
                 "Bugging": "Bugging",
                 "Burrowing": "Burrowing",
                 "Buster": "Buster",
+                "Cacophonous": "Cacophonous",
                 "Connecting": "Connecting",
                 "DeathField": "Death Field",
                 "Deployed": "Deployed",
@@ -2237,6 +2541,7 @@
                 "IrradiateH": "Irradiante (alto)",
                 "IrradiateL": "Irradiante (basso)",
                 "IrradiateM": "Irradiante (medio)",
+                "IrradiateS": "Irradiate (severe)",
                 "Jamming": "Jamming",
                 "Limited": "Fuoco Limitato",
                 "Line": "Linea",
@@ -2263,6 +2568,7 @@
                 "Teleportation": "Teleportation",
                 "Tractor": "Raggio traente",
                 "Transposition": "Transposition",
+                "Unerring": "Unerring",
                 "VandalDrones": "Vandal Drones",
                 "Volatile": "Volatile",
                 "Vortex": "Vortice"
@@ -2296,6 +2602,7 @@
         "SkillBlu": "Raggirare",
         "SkillCom": "Computer",
         "SkillCul": "Cultura",
+        "SkillDelete": "Delete?",
         "SkillDip": "Diplomazia",
         "SkillDis": "Camuffare",
         "SkillEng": "Ingegneria",
@@ -2303,11 +2610,14 @@
         "SkillInt": "Intimidire",
         "SkillLsc": "Scienza Biologica",
         "SkillMed": "Medicina",
+        "SkillMiscModifiersLabel": "Misc. Modifiers",
         "SkillModifierTooltip": "{type} Bonus: {mod} ({source})",
         "SkillMys": "Misticismo",
+        "SkillNotes": "Skill Notes",
         "SkillPer": "Percezione",
         "SkillPil": "Pilotare",
         "SkillPro": "Professione",
+        "SkillProfessionName": "Profession Name",
         "SkillProficiencyLevelClassSkill": "competenze di Classe",
         "SkillPsc": "Scienza Fisica",
         "SkillSen": "Intuizione",
@@ -2320,6 +2630,10 @@
         "SkillTooltipThemeMod": "Modificatore del Tema: {mod}",
         "SkillTooltipTrainedClassSkill": "Modificatore di competenza di Classe Addestrata : {mod}",
         "SkillTrainedOnly": "Solo con Addestramento",
+        "SkillTrainedOnlyDialog": {
+            "Content": "{skill} is a trained only skill, but {name} is not trained in that skill. Would you like to roll anyway?",
+            "Title": "{skill} is trained only"
+        },
         "SkillsHeaderAbility": "Abilità",
         "SkillsHeaderModifier": "Mod",
         "SkillsHeaderName": "Nome",
@@ -2329,6 +2643,11 @@
         "SortByFilterName": "Name",
         "Space": "Spazio",
         "Special": "Speciale",
+        "SpecialAbilityTypes": {
+            "Extraordinary": "Extraordinary (Ex)",
+            "SpellLike": "Spell-like Ability (Sp)",
+            "Supernatural": "Supernatural (Su)"
+        },
         "SpecialMaterials": {
             "Abysium": "Abysium",
             "Adamantine": "Adamantine Alloy",
@@ -2346,6 +2665,7 @@
             "Voidglass": "Voidglass"
         },
         "SpecialTraits": "Tratti Speciali",
+        "SpeciesGraft": "Species Graft",
         "Speed": "Velocità",
         "SpeedSpecial": "Mov. Speciale",
         "SpellAreaEffects": {
@@ -2354,6 +2674,7 @@
             "Spread": "Diffusione"
         },
         "SpellAreaShapesCone": "Cono",
+        "SpellAreaShapesCube": "Cube",
         "SpellAreaShapesCylinder": "Cilindro",
         "SpellAreaShapesLine": "Linea",
         "SpellAreaShapesOther": "Altro",
@@ -2436,6 +2757,7 @@
                 "NPCGunnerRanksMessage": "While ranks aren't relevant to an NPC's gunnery modifier, some statblocks may include the Gunner's level, which you can store here. You can otherwise safely leave this box blank.",
                 "Passengers": "Passeggeri",
                 "Pilot": "Pilota",
+                "RemoveCrewMember": "Remove Crew Member",
                 "ScienceOfficers": "Ufficiali Scientifici",
                 "SkillModifier": "Modificatore di Abilità",
                 "SkillRanks": "Gradi Abilità",
@@ -2619,6 +2941,7 @@
         "SystemWide": "A livello di sistema",
         "TempHPMaxPlaceHolderText": "+Max",
         "TempHPPlaceHolderText": "+Temp",
+        "Text": "Text",
         "ThemePlaceHolderText": "Tema",
         "Tippy": {
             "Attributes": "Attributes:",
@@ -2628,6 +2951,24 @@
         "Touch": "Tocco",
         "TraitArmorProf": "Competenze nelle Armature",
         "TraitWeaponProf": "Competenze nelle Armi",
+        "TurnEvent": {
+            "AddTurnEvent": "Add Turn Event",
+            "DeleteTurnEvent": "Delete Turn Event",
+            "Formula": "Formula",
+            "FormulaTooltip": "A formula which will be rolled when the trigger is met.",
+            "Name": "Name",
+            "NoteContent": "Note Content",
+            "NoteTooltip": "Text which will be sent to chat as a chat message when the trigger is met.",
+            "Trigger": "Trigger",
+            "TriggerTooltip": "When during a combatant's turn to trigger the event.",
+            "TurnEventI": "Turn Event {number}",
+            "Type": "Type",
+            "TypeTooltip": "The type of behaviour to trigger for this turn event.",
+            "Types": {
+                "Note": "Note",
+                "Roll": "Roll"
+            }
+        },
         "UPBs": "PBU",
         "Units": {
             "Speed": "mt."
@@ -2735,8 +3076,10 @@
             }
         },
         "VehicleSystemSheet": {
+            "Activated": "Activated",
             "CanBeActivated": "Può essere attivato",
             "CanBeActivatedTooltip": "Questo sistema ha uno stato attivo.",
+            "NotActivated": "Not Activated",
             "Piloting": "Pilotare",
             "PilotingTooltip": "Il modificatore di Pilotare da aggiungere quando si usa questo sistema.",
             "Senses": "Senses",
@@ -2872,6 +3215,8 @@
         "WeaponPropertiesGuidedTooltip": "A guided weapon uses a signal along with wireless telemetry, magnetic guidance, or another means of guiding its payload after the weapon has been fired. When you take a move action to aim the weapon and then fire it on the same turn (including doing so with a sniper weapon), your target does not gain the bonus to AC provided by cover, partial cover, or soft cover. Improved cover and total cover still confer their bonuses normally.",
         "WeaponPropertiesHarrying": "Disturbo",
         "WeaponPropertiesHarryingTooltip": "A harrying weapon produces exceptionally distracting bursts of fire. When you take the harrying fire action with this weapon, you gain a +2 insight bonus to your attack roll.",
+        "WeaponPropertiesHealing": "Healing",
+        "WeaponPropertiesHealingTooltip": "A healing weapon, which must be an energy weapon, can deliver restorative energy. You can set the weapon to heal mode (or reset it to normal mode) as a move action. While in healing mode, if the healing weapon hits a creature, roll dice equal to the weapon’s damage; Weapon Specialization, an operative’s trick attack, and other effects that increase damage don’t apply. The creature recovers Hit Points equal to the amount rolled, minimum 1. Reduce healing by half for constructs and undead; objects are unaffected. A critical hit with a healing weapon doesn’t increase the healing or have a critical hit effect. A healing weapon used in healing mode expends twice the usual number of charges, and a battery used in a healing weapon can’t be recharged.",
         "WeaponPropertiesHolyWater": "Acqua Santa",
         "WeaponPropertiesHolyWaterTooltip": "A holy water weapon is infused with the blessings of one or more good-aligned deities (most commonly Hylax, Iomedae, or Sarenrae within the Pact Worlds, though devoted followers of any good-aligned deity could create such weapons). It damages only undead (regardless of alignment) and outsiders with the evil subtype, and even those creatures suffer no effect (and show no sign of their nature if it is not already obvious) with a successful saving throw. Crafting a holy water grenade requires the blessing of formally trained priests of a good deity, though a character of any alignment can do the actual crafting.",
         "WeaponPropertiesHybrid": "Ibrida",
@@ -2963,7 +3308,7 @@
         "WeaponPropertiesTeleportive": "Teleportive",
         "WeaponPropertiesTeleportiveTooltip": "This weapon’s fired ammunition teleports a short distance after being fired. You take only a –1 cumulative penalty when attacking outside the range of this weapon.",
         "WeaponPropertiesThought": "Pensiero",
-        "WeaponPropertiesThoughtTooltip": "A thought weapon can be fully or partially controlled via telepathy. If you have the telepathy or limited telepathy racial trait, are benefiting from a telepathy spell, are wearing a mindlink circlet, or have a similar ability, you ignore the weapon’s unwieldy weapon special property.",
+        "WeaponPropertiesThoughtTooltip": "A thought weapon can be fully or partially controlled via telepathy. If you have the telepathy or limited telepathy species trait, are benefiting from a telepathy spell, are wearing a mindlink circlet, or have a similar ability, you ignore the weapon’s unwieldy weapon special property.",
         "WeaponPropertiesThrottle": "Asfissiante",
         "WeaponPropertiesThrottleTooltip": "A throttle weapon deals damage only when it is used to grapple a foe, automatically dealing damage with every successful grapple combat maneuver. These are considered attacks for abilities that can increase a weapon’s damage (such as trick attack). All throttle weapons are also grapple weapons. While a target is successfully being grappled with a throttle weapon, it cannot use its airways to speak or make vocalizations of any kind (though other forms of making noise work normally).",
         "WeaponPropertiesThrown": "da Lancio",
@@ -2996,5 +3341,64 @@
         "WeaponsPropertiesConceal": "Occultare",
         "WeaponsPropertiesConcealTooltip": "A weapon with the conceal special property is considered especially small or easy to hide for purposes of Slight of Hand’s hide object task, granting you a +4 circumstance bonus to skill checks to hide object.",
         "WillSave": "Volontà"
+    },
+    "TYPES": {
+        "Actor": {
+            "character": "PG",
+            "drone": "Drone",
+            "hazard": "Trappola",
+            "npc": "Old Style PNG",
+            "npc2": "PNG",
+            "starship": "Astronave",
+            "vehicle": "Veicolo"
+        },
+        "Item": {
+            "actorResource": "Actor Resource",
+            "ammunition": "Ammunition",
+            "archetypes": "Archetipo",
+            "asi": "Aumento dei valori di caratteristica",
+            "augmentation": "Impianto",
+            "chassis": "Telaio del Drone",
+            "class": "Classe",
+            "consumable": "Consumabile",
+            "container": "Contenitore",
+            "effect": "Effect",
+            "equipment": "Armatura",
+            "feat": "Capacità",
+            "fusion": "Fusione d'arma",
+            "goods": "Bene Commerciabile",
+            "hybrid": "Ibrido",
+            "magic": "Magico",
+            "mod": "Modifica del Drone",
+            "race": "Razza",
+            "shield": "Scudo",
+            "spell": "Incantesimo",
+            "starshipAblativeArmor": "Armatura Ablativa",
+            "starshipAction": "Azione",
+            "starshipArmor": "Armatura",
+            "starshipComputer": "Computer",
+            "starshipCrewQuarter": "Quartiere dell'Equipaggio",
+            "starshipDefensiveCountermeasure": "Contro-misura Difensiva",
+            "starshipDriftEngine": "Motore Deriva",
+            "starshipExpansionBay": "Compartimento adattabile",
+            "starshipFortifiedHull": "Scafo Rinforzato",
+            "starshipFrame": "Struttura Base",
+            "starshipOtherSystem": "Altro Sistema",
+            "starshipPowerCore": "Nucleo Energetico",
+            "starshipReinforcedBulkhead": "Reinforced Bulkhead",
+            "starshipSecuritySystem": "Sistema di Sicurezza",
+            "starshipSensor": "Sensore",
+            "starshipShield": "Scudo",
+            "starshipSpecialAbility": "Starship Special Ability",
+            "starshipThruster": "Propulsore",
+            "starshipWeapon": "Arma",
+            "technological": "Tecnologico",
+            "theme": "Tema",
+            "upgrade": "Miglioramento dell'Armatura",
+            "vehicleAttack": "Attacco di un Veicolo",
+            "vehicleSystem": "Sistema di un Veicolo",
+            "weapon": "Arma",
+            "weaponAccessory": "Accessorio d'arma"
+        }
     }
 }

@@ -1,10 +1,19 @@
-<form class="{{cssClass}}" autocomplete="off">
+<form class="{{cssClass}} limited flexcol" autocomplete="off">
 
     <!-- HEADER -->
     <header class="sheet-header">
-        <h1 class="charname">
-            <input name="name" type="text" value="{{actor.name}}" placeholder="Character Name"/>
-        </h1>
+        <div class="image-container">
+            <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img" height="180" width="180"/>
+            <a class="hover-icon" data-action="show-image"><i class="fas fa-image fa-fw"></i></a>
+        </div>
+        <div class="header-background flexcol">
+            <div class="header-text flexcol">
+                <h1 class="charname">
+                    <input name="name" type="text" value="{{actor.name}}" data-tooltip="<strong>{{localize "SFRPG.CharacterNamePlaceHolderText"}}</strong>" placeholder="{{localize "SFRPG.CharacterNamePlaceHolderText"}}" />
+                </h1>
+                <span class="species-grafts">{{system.details.raceAndGrafts}}</span>
+            </div>
+        </div>
     </header>
 
     <!-- BODY -->
@@ -23,6 +32,6 @@
 
     <!-- SIDEBAR -->
     <section class="sheet-sidebar">
-        <img class="sheet-profile" src="{{actor.img}}" title="{{actor.name}}" height="220" width="220" data-edit="img"/>
+
     </section>
 </form>

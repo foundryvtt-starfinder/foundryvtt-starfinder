@@ -2,6 +2,11 @@
   "_id": "EC5ULfnX5QGNsTXw",
   "name": "T-Quark Crystal, True",
   "type": "weapon",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "icons/commodities/gems/gem-faceted-octagon-yellow.webp",
   "system": {
     "type": "",
@@ -12,16 +17,17 @@
     "actionTarget": "",
     "actionType": "other",
     "activation": {
-      "type": "",
+      "type": "special",
       "condition": "",
       "cost": 0
     },
     "ammunitionType": "",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
-      "units": "",
-      "value": 0
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -71,40 +77,8 @@
       "parts": []
     },
     "damage": {
-      "parts": [
-        {
-          "name": "",
-          "formula": "6d6",
-          "group": null,
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
-            "cold": false,
-            "electricity": false,
-            "fire": false,
-            "healing": false,
-            "piercing": false,
-            "slashing": false,
-            "sonic": false
-          }
-        },
-        {
-          "name": "Variant boost",
-          "formula": "6d6",
-          "group": null,
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
-            "cold": false,
-            "electricity": false,
-            "fire": false,
-            "healing": false,
-            "piercing": false,
-            "slashing": false,
-            "sonic": false
-          }
-        }
-      ]
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -116,8 +90,8 @@
     },
     "descriptors": [],
     "duration": {
-      "units": "",
-      "value": null
+      "units": "text",
+      "value": ""
     },
     "equippable": true,
     "equipped": false,
@@ -125,7 +99,40 @@
     "identified": true,
     "isActive": null,
     "level": 20,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "346df3e5-9d0f-4ca0-9ec9-707e38bef144",
+        "name": "T-Quark Crystal, True",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-damage",
+        "enabled": true,
+        "limitTo": "container",
+        "max": 36,
+        "modifier": "6d6",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "acf35bed-ae24-4d39-baff-a1ef9140b7cf",
+        "name": "Variant Boost (T-Quark Crystal, True)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-damage",
+        "enabled": false,
+        "limitTo": "container",
+        "max": 36,
+        "modifier": "6d6",
+        "modifierType": "formula",
+        "notes": "A weapon with the variant boost special property acts as a weapon with the boost special property, except boosting the weapon does not expend additional charges and the weapon can be boosted only the listed number of times per day.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "price": 750000,
     "proficient": true,
     "properties": {
@@ -166,6 +173,7 @@
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
       "hybrid": false,
       "hydrodynamic": false,
@@ -228,8 +236,8 @@
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
-      "value": null
+      "units": "none",
+      "value": ""
     },
     "rollNotes": "",
     "save": {
@@ -237,7 +245,11 @@
       "dc": "",
       "descriptor": "negate"
     },
-    "source": "ARM, p. 49",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
+    "source": "AR pg. 49",
     "special": "",
     "specialMaterials": {
       "abysium": false,
@@ -257,16 +269,16 @@
     },
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "usage": {
       "per": "action",
       "value": 1
     },
     "uses": {
-      "max": 0,
-      "per": null,
-      "value": 0
+      "max": "5",
+      "per": "day",
+      "value": 5
     },
     "weaponCategory": "uncategorized",
     "weaponType": "solarian"

@@ -2,6 +2,11 @@
   "_id": "bPtwG2bCOhmKrjFw",
   "name": "Change of Seasons",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "icons/magic/air/air-wave-gust-blue.webp",
   "system": {
     "type": "",
@@ -44,7 +49,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>You accelerate time for the target, making them experience the concentrated effects of a Triaxian season. This spell imbues a target with @UUID[Compendium.sfrpg.universal-creature-rules.WRcQIiGOEqXPVVtz]{Vulnerability} (as the universal creature rule) to cold or fire (chosen when cast); if the target has resistance to that type of damage, it instead reduces a target’s resistance to cold or fire damage by 5. If the target is immune, it’s instead treated as though it had fire or cold resistance 10 for the duration of the spell. A successful Will save reduces the duration to one round.</p>"
+      "value": "<p>You accelerate time for the target, making them experience the concentrated effects of a Triaxian season. This spell imbues a target with @UUID[Compendium.sfrpg.universal-creature-rules.Item.WRcQIiGOEqXPVVtz]{Vulnerability} (as the universal creature rule) to cold or fire (chosen when cast); if the target has resistance to that type of damage, it instead reduces a target’s resistance to cold or fire damage by 5. If the target is immune, it’s instead treated as though it had fire or cold resistance 10 for the duration of the spell. A successful Will save reduces the duration to one round.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -86,8 +91,8 @@
     },
     "dismissible": false,
     "duration": {
-      "units": "",
-      "value": "1 round/level"
+      "units": "round",
+      "value": "@details.cl.value"
     },
     "formula": "",
     "isActive": null,
@@ -105,10 +110,7 @@
       "prepared": false
     },
     "range": {
-      "additional": "5 ft.",
-      "per": "2 levels",
-      "units": "ft",
-      "value": 25
+      "units": "close"
     },
     "rollNotes": "",
     "save": {

@@ -224,7 +224,7 @@ export class DocumentBrowserSFRPG extends Application {
     }
 
     getSortingMethods() {
-        let sortingMethods = {
+        const sortingMethods = {
             name: {
                 name: game.i18n.format("SFRPG.Browsers.ItemBrowser.BrowserSortMethodName"),
                 selected: true,
@@ -257,12 +257,12 @@ export class DocumentBrowserSFRPG extends Application {
 
     async loadItems() {
         console.log('Starfinder | Compendium Browser | Started loading items');
-        const items = [];
+        const items = new Map();
 
         for await (const {pack, content} of packLoader.loadPacks(this.entityType, this._loadedPacks)) {
             console.log(`Starfinder | Compendium Browser | ${pack.metadata.label} - ${content.length} entries found`);
 
-            for (let item of content) {
+            for (const item of content) {
                 const itemData = {
                     uuid: `Compendium.${pack.collection}.${item._id}`,
                     img: item.img,
@@ -271,9 +271,8 @@ export class DocumentBrowserSFRPG extends Application {
                     type: item.type
                 };
 
-                if (this.allowedItem(item)) {
-                    items.push(itemData);
-                }
+                if (this.allowedItem(item)) items.set(itemData.uuid, itemData);
+
             }
         }
 
@@ -416,13 +415,69 @@ export class DocumentBrowserSFRPG extends Application {
         }
     }
 
+    /**
+     * @param {filterObjectEquipment|
+     *         filterObjectSpell    |
+     *         filterObjectAlien    |
+     *         filterObjectStarship} filterObject An object containing valid filters for one of the browser types.
+     */
+    async renderWithFilters(filterObject = {}) {
+
+        if (!this._element) {
+            this.render(true);
+        }
+
+        await this._waitForElem(`#app-${this.appId}`);
+        const html = this.element;
+        this.resetFilters(html);
+
+        if (filterObject.search !== undefined && filterObject.search !== null) {
+            this.sorters.text = String(filterObject.search).trim();
+            html.find("input[name='textFilter']").val(this.sorters.text);
+            delete filterObject.search;
+            this.onFiltersUpdated(html);
+        }
+
+        for (const [filterKey, currentFilter] of Object.entries(filterObject)) {
+            const browserFilter = this.filters[filterKey];
+            if (!browserFilter) {
+                return ui.notifications.error("Invalid filter.");
+            }
+
+            browserFilter.activeFilters = currentFilter instanceof Array ? currentFilter : [currentFilter];
+            this.refreshFilters = true;
+            this.onFiltersUpdated(html);
+        }
+
+    }
+
+    _waitForElem(selector) {
+        return new Promise(resolve => {
+            if (document.querySelector(selector)) {
+                return resolve(document.querySelector(selector));
+            }
+
+            const observer = new MutationObserver(mutations => {
+                if (document.querySelector(selector)) {
+                    resolve(document.querySelector(selector));
+                    observer.disconnect();
+                }
+            });
+
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+        });
+    }
+
     generateFilterHTML(filterKey, filter) {
         const header = `<div class="filtercontainer" id="classfilter">\n
             <h3>${filter.label}</h3>\n
             <dl>\n`;
 
         let body = "";
-        for (let settingKey of Object.keys(filter.content)) {
+        for (const settingKey of Object.keys(filter.content)) {
             const checked = filter.activeFilters ? filter.activeFilters.includes(settingKey) : false;
             body += `<dt><input type="checkbox" name="${filterKey}-${settingKey}" ${checked ? "checked" : ""} /></dt><dd>${game.i18n.format(filter.content[settingKey])}</dd>\n`;
         }

@@ -2,12 +2,22 @@
   "_id": "lUVHVxuhgvKAJPKA",
   "name": "Dimensional Shambler",
   "type": "npc2",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "_id": "5qXOSWiSk8f5Z9E4",
       "name": "Claw (plus Grab)",
       "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
@@ -84,6 +94,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -114,6 +125,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -121,6 +133,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -142,10 +155,16 @@
       "_id": "NUOYcAWREB3tNeca",
       "name": "Dimension Mastery (Ex)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -167,6 +186,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -193,6 +213,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -214,6 +235,11 @@
       "_id": "JPDyqIMdCj7JvDr4",
       "name": "Planar Mastery (Ex)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
@@ -221,6 +247,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "full",
@@ -242,6 +269,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -268,6 +296,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -289,10 +318,16 @@
       "_id": "qzSX2kw7GuEbLWBB",
       "name": "Resist Conjuration (Ex)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -314,6 +349,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -340,6 +376,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -361,6 +398,11 @@
       "_id": "XQoqbhElzXPrzpQ3",
       "name": "Displacement",
       "type": "spell",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "systems/sfrpg/icons/spells/displacement.webp",
       "system": {
         "type": "",
@@ -368,6 +410,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "action",
@@ -376,6 +419,7 @@
         },
         "allowedClasses": {
           "myst": false,
+          "precog": false,
           "tech": true,
           "wysh": true
         },
@@ -395,6 +439,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -403,10 +448,10 @@
           "value": "<p>The target of this spell appears to be about 2 feet away from its true location. The creature benefits from a 50% miss chance as if it had total concealment. Unlike actual total concealment,<em>displacement</em> doesn’t prevent enemies from targeting the creature normally. True seeing reveals the target’s true location and negates the miss chance. If a creature with blindsense can also see the displaced creature, the visual and blindsense information combined are enough for the creature with blindsense to attack the displaced creature without a miss chance, unlike normal for blindsense.</p>"
         },
         "descriptors": [],
-        "dismissible": false,
+        "dismissible": true,
         "duration": {
-          "units": "",
-          "value": "1 round/level (D)"
+          "units": "round",
+          "value": "@details.cl.value"
         },
         "formula": "",
         "isActive": null,
@@ -429,6 +474,7 @@
           "units": "touch",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "will",
           "dc": "",
@@ -452,6 +498,11 @@
       "_id": "eAX5zNE8U4zwAMOH",
       "name": "Dimensional Anchor",
       "type": "spell",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "systems/sfrpg/icons/spells/dimensional-anchor.webp",
       "system": {
         "type": "",
@@ -459,6 +510,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "rsak",
         "activation": {
           "type": "action",
@@ -467,6 +519,7 @@
         },
         "allowedClasses": {
           "myst": true,
+          "precog": false,
           "tech": true,
           "wysh": false
         },
@@ -486,6 +539,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -496,8 +550,8 @@
         "descriptors": [],
         "dismissible": false,
         "duration": {
-          "units": "",
-          "value": "1 minute/level"
+          "units": "minute",
+          "value": "@details.cl.value"
         },
         "formula": "",
         "isActive": null,
@@ -515,11 +569,12 @@
           "prepared": true
         },
         "range": {
-          "additional": "10 ft.",
-          "per": "level",
-          "units": "ft",
-          "value": 100
+          "additional": "",
+          "per": "",
+          "units": "medium",
+          "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -543,6 +598,11 @@
       "_id": "QzmHC5H8piInttDF",
       "name": "Plane Shift",
       "type": "spell",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "systems/sfrpg/icons/spells/plane_shift.webp",
       "system": {
         "type": "",
@@ -550,6 +610,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "action",
@@ -558,6 +619,7 @@
         },
         "allowedClasses": {
           "myst": true,
+          "precog": false,
           "tech": true,
           "wysh": true
         },
@@ -577,18 +639,19 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>You move yourself or some other creature to another plane of existence or alternate dimension. If several willing or unconscious creatures are linked by hand in a circle, as many as eight can be affected by a single casting of&nbsp;plane shift. Arriving at a precise location on the intended plane is nigh impossible. From the Material Plane, you can reach any other plane (except for @UUID[Compendium.sfrpg.setting.nb5A5e7HqTnvVjtX]{The Drift}), though you appear 5 to 500 miles (5d%) from the last place one of the targets (your choice) was located last time that target traveled to that plane. If it’s the first time traveling to a particular plane for all targets, you appear at a random location on the plane, though you can use other means of transit, such as&nbsp;interplanetary teleport, to travel on the new plane. Mystics must have an object attuned to a specific plane or native to that plane in order to use&nbsp;plane shift&nbsp;to travel to a plane. A technomancer requires a planar navigational program for a specific plane in order to travel to that plane with&nbsp;plane shift. Special rituals, jealously hoarded by powerful technomancers and mystics, can allow you to travel to specific locations on the chosen plane, or even to unknown worlds.</p>"
+          "value": "<p>You move yourself or some other creature to another plane of existence or alternate dimension. If several willing or unconscious creatures are linked by hand in a circle, as many as eight can be affected by a single casting of&nbsp;plane shift. Arriving at a precise location on the intended plane is nigh impossible. From the Material Plane, you can reach any other plane (except for @UUID[Compendium.sfrpg.setting.Item.nb5A5e7HqTnvVjtX]{The Drift}), though you appear 5 to 500 miles (5d%) from the last place one of the targets (your choice) was located last time that target traveled to that plane. If it’s the first time traveling to a particular plane for all targets, you appear at a random location on the plane, though you can use other means of transit, such as&nbsp;interplanetary teleport, to travel on the new plane. Mystics must have an object attuned to a specific plane or native to that plane in order to use&nbsp;plane shift&nbsp;to travel to a plane. A technomancer requires a planar navigational program for a specific plane in order to travel to that plane with&nbsp;plane shift. Special rituals, jealously hoarded by powerful technomancers and mystics, can allow you to travel to specific locations on the chosen plane, or even to unknown worlds.</p>"
         },
         "descriptors": [],
         "dismissible": false,
         "duration": {
-          "units": "",
-          "value": "instantaneous"
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
         "isActive": null,
@@ -611,6 +674,7 @@
           "units": "touch",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "will",
           "dc": "",
@@ -634,6 +698,11 @@
       "_id": "MJQ4gbvcUXoYe3Z8",
       "name": "Dimension Door (At Will)",
       "type": "spell",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "systems/sfrpg/icons/spells/dimension-door.webp",
       "system": {
         "type": "",
@@ -641,6 +710,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "action",
@@ -649,6 +719,7 @@
         },
         "allowedClasses": {
           "myst": false,
+          "precog": false,
           "tech": true,
           "wysh": true
         },
@@ -668,6 +739,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -678,8 +750,8 @@
         "descriptors": [],
         "dismissible": false,
         "duration": {
-          "units": "",
-          "value": "instantaneous"
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
         "isActive": null,
@@ -697,11 +769,12 @@
           "prepared": true
         },
         "range": {
-          "additional": "40 ft.",
-          "per": "level",
-          "units": "ft",
-          "value": 400
+          "additional": "",
+          "per": "",
+          "units": "long",
+          "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "will",
           "dc": "",
@@ -732,6 +805,7 @@
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -760,11 +834,8 @@
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -782,6 +853,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 1
@@ -832,12 +904,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -968,8 +1046,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<h2>Description</h2>\n<p>Dimensional shamblers are lean, humanoid-shaped beings that move as if intoxicated. They are relentless planar explorers. Violence and abduction define their interactions with other creatures.</p>",
@@ -979,6 +1060,10 @@
       "cr": 8,
       "environment": "any",
       "organization": "solitary, pair, or gang (3-8)",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #16 pg. 55",
@@ -987,7 +1072,22 @@
         "value": 10
       }
     },
-    "modifiers": [],
+    "modifiers": [
+      {
+        "name": "Damage Reduction",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "damage-reduction",
+        "enabled": true,
+        "max": 0,
+        "modifier": "5",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "permanent",
+        "valueAffected": "lawful"
+      }
+    ],
     "skillpoints": {
       "max": 0,
       "tooltip": [],
@@ -1282,6 +1382,9 @@
       },
       "senses": "darkvision 60 ft.",
       "size": "medium",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

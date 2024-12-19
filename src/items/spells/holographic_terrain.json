@@ -2,6 +2,11 @@
   "_id": "Lmm0u6noSlQYekSe",
   "name": "Holographic Terrain",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "systems/sfrpg/icons/spells/holographic_terrain.webp",
   "system": {
     "type": "",
@@ -22,9 +27,10 @@
     },
     "area": {
       "effect": "",
-      "shape": "shapable",
-      "units": "ft",
-      "value": 20
+      "shapable": true,
+      "shape": "cube",
+      "units": "text",
+      "value": "one 20-ft. cube/level (S)"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -44,8 +50,8 @@
     "descriptors": [],
     "dismissible": true,
     "duration": {
-      "units": "",
-      "value": "2 hour/level (D)"
+      "units": "hour",
+      "value": "@details.cl.value*2"
     },
     "formula": "",
     "level": 5,
@@ -61,10 +67,7 @@
       "prepared": false
     },
     "range": {
-      "additional": "40 ft",
-      "per": "level",
-      "units": "ft",
-      "value": 400
+      "units": "long"
     },
     "save": {
       "type": "will",

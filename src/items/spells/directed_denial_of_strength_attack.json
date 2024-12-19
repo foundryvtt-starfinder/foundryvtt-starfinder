@@ -2,6 +2,11 @@
   "_id": "mQc40A520HbqQ73C",
   "name": "Directed Denial Of Strength Attack",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "systems/sfrpg/icons/spells/directed_denial_of_strength.webp",
   "system": {
     "type": "",
@@ -39,13 +44,13 @@
     "description": {
       "chat": "",
       "unidentified": "",
-      "value": "<p>You flood targets’ minds with a magical effect similar to a computer virus that duplicates every sensation of lifting, carrying, and being burdened. Targets become @UUID[Compendium.sfrpg.conditions.OwZA6flUQPH0jPA0]{Encumbered}, or they become @UUID[Compendium.sfrpg.conditions.11k3ObUIXEYFGrg9]{Overburdened} if already @UUID[Compendium.sfrpg.conditions.OwZA6flUQPH0jPA0]{Encumbered}.</p>"
+      "value": "<p>You flood targets’ minds with a magical effect similar to a computer virus that duplicates every sensation of lifting, carrying, and being burdened. Targets become @UUID[Compendium.sfrpg.conditions.Item.OwZA6flUQPH0jPA0]{Encumbered}, or they become @UUID[Compendium.sfrpg.conditions.Item.11k3ObUIXEYFGrg9]{Overburdened} if already @UUID[Compendium.sfrpg.conditions.Item.OwZA6flUQPH0jPA0]{Encumbered}.</p>"
     },
     "descriptors": [],
     "dismissible": false,
     "duration": {
-      "units": "",
-      "value": "1 round/level"
+      "units": "round",
+      "value": "@details.cl.value"
     },
     "formula": "",
     "level": 2,
@@ -61,10 +66,7 @@
       "prepared": false
     },
     "range": {
-      "additional": "10 ft.",
-      "per": "level",
-      "units": "ft",
-      "value": 100
+      "units": "medium"
     },
     "save": {
       "type": "will",

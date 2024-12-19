@@ -2,11 +2,22 @@
   "_id": "5sZ7cBrPGQVEBzlD",
   "name": "Tactical Underminer",
   "type": "vehicle",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
+      "_id": "qkp7Xd946aB8VCQ2",
       "name": "Collision (Ram)",
       "type": "vehicleAttack",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -45,8 +56,14 @@
       }
     },
     {
+      "_id": "1jlLTxvzv7JCeL5G",
       "name": "Collision (Run Over)",
       "type": "vehicleAttack",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -85,8 +102,14 @@
       }
     },
     {
+      "_id": "fZi2aq7dM8WqDqA8",
       "name": "Enhanced sensors",
       "type": "vehicleSystem",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.webp",
       "system": {
         "type": "",
@@ -120,8 +143,14 @@
       }
     },
     {
+      "_id": "79tQ3iQI0stws6uw",
       "name": "Autopilot",
       "type": "vehicleSystem",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -147,12 +176,22 @@
           "piloting": "20",
           "usedAsPilot": true
         },
+        "senses": {
+          "senses": "",
+          "usedForSenses": false
+        },
         "source": "CRB pg. 280"
       }
     },
     {
+      "_id": "266CH6gvyU8KvBTv",
       "name": "System-wide comm unit",
       "type": "vehicleSystem",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.webp",
       "system": {
         "type": "",
@@ -178,6 +217,10 @@
           "piloting": "0",
           "usedAsPilot": false
         },
+        "senses": {
+          "senses": "",
+          "usedForSenses": false
+        },
         "source": "CRB pg. 218"
       }
     }
@@ -185,12 +228,14 @@
   "prototypeToken": {
     "name": "Tactical Underminer",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": 0,
@@ -221,7 +266,6 @@
     "lockRotation": false,
     "randomImg": false,
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -239,6 +283,7 @@
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
+      "src": "icons/svg/mystery-man.svg",
       "tint": null
     },
     "width": 3
@@ -246,6 +291,7 @@
   "system": {
     "attributes": {
       "type": "landTW",
+      "controlSkill": "pil",
       "cover": "total",
       "dimensions": {
         "height": "10",
@@ -268,10 +314,12 @@
         "value": 25
       },
       "modifiers": {
+        "athletics": 0,
         "attackFullSpeed": "-5",
         "attackMoving": "-3",
         "attackStopped": "0",
-        "piloting": "0"
+        "piloting": "0",
+        "survival": 0
       },
       "size": "huge",
       "special": [],

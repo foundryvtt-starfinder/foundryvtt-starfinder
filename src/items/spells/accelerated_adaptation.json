@@ -2,6 +2,11 @@
   "_id": "C44G2AwBOrxHuxHG",
   "name": "Accelerated Adaptation",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "systems/sfrpg/icons/spells/delay_countermeasures.webp",
   "system": {
     "type": "",
@@ -39,13 +44,13 @@
     "description": {
       "chat": "",
       "unidentified": "",
-      "value": "<p>You grant a barathu increased control over its own powers of adaptation. If the target has the early stage adaptation racial trait, it gains adaptation instead. If the target already has adaptation, it can have two adaptations in effect at a time, instead of only one.</p>"
+      "value": "<p>You grant a barathu increased control over its own powers of adaptation. If the target has the early stage adaptation species trait, it gains adaptation instead. If the target already has adaptation, it can have two adaptations in effect at a time, instead of only one.</p>"
     },
     "descriptors": [],
     "dismissible": true,
     "duration": {
-      "units": "",
-      "value": "1 round/level (D)"
+      "units": "round",
+      "value": "@details.cl.value"
     },
     "formula": "",
     "level": 3,
@@ -61,10 +66,7 @@
       "prepared": false
     },
     "range": {
-      "additional": "5 ft.",
-      "per": "2 levels",
-      "units": "ft",
-      "value": 25
+      "units": "close"
     },
     "save": {
       "type": "fort",

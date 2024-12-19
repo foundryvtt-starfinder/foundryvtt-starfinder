@@ -9,7 +9,7 @@ export default function(engine) {
             const classData = cls.system;
             const className = classData.slug || cls.name.slugify({replacement: "_", strict: true});
 
-            const classDC = 10 + Math.floor(classData.levels / 2) + data.abilities[classData.kas].mod;
+            const classDC = 10 + Math.floor(classData.levels / 2) + data.abilities[classData.kas || "str"].mod || data.abilities.str.mod;
 
             data.classes[className].classDC = classDC;
         }

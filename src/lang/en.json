@@ -1,60 +1,4 @@
 {
-    "ACTOR": {
-        "TypeCharacter": "Player Character",
-        "TypeDrone": "Drone",
-        "TypeHazard": "Hazard",
-        "TypeNpc": "Old Style NPC",
-        "TypeNpc2": "Non-player Character",
-        "TypeStarship": "Starship",
-        "TypeVehicle": "Vehicle"
-    },
-    "ITEM": {
-        "TypeActorresource": "Actor Resource",
-        "TypeAmmunition": "Ammunition",
-        "TypeArchetypes": "Archetype",
-        "TypeAsi": "Ability Score Increase",
-        "TypeAugmentation": "Augmentation",
-        "TypeChassis": "Drone Chassis",
-        "TypeClass": "Class",
-        "TypeConsumable": "Consumable",
-        "TypeContainer": "Container",
-        "TypeEquipment": "Armor",
-        "TypeFeat": "Feat",
-        "TypeFusion": "Weapon Fusion",
-        "TypeGoods": "Goods",
-        "TypeHybrid": "Hybrid",
-        "TypeMagic": "Magic",
-        "TypeMod": "Drone Mod",
-        "TypeRace": "Race",
-        "TypeShield": "Shield",
-        "TypeSpell": "Spell",
-        "TypeStarshipablativearmor": "Starship Ablative Armor",
-        "TypeStarshipaction": "Starship Action",
-        "TypeStarshiparmor": "Starship Armor",
-        "TypeStarshipcomputer": "Starship Computer",
-        "TypeStarshipcrewquarter": "Starship Crew Quarter",
-        "TypeStarshipdefensivecountermeasure": "Starship Defensive Countermeasure",
-        "TypeStarshipdriftengine": "Starship Drift Engine",
-        "TypeStarshipexpansionbay": "Starship Expansion Bay",
-        "TypeStarshipfortifiedhull": "Starship Fortified Hull",
-        "TypeStarshipframe": "Starship Frame",
-        "TypeStarshipothersystem": "Starship Other System",
-        "TypeStarshippowercore": "Starship Power Core",
-        "TypeStarshipreinforcedbulkhead": "Starship Reinforced Bulkhead",
-        "TypeStarshipsecuritysystem": "Starship Security System",
-        "TypeStarshipsensor": "Starship Sensor",
-        "TypeStarshipshield": "Starship Shield",
-        "TypeStarshipspecialability": "Starship Special Ability",
-        "TypeStarshipthruster": "Starship Thruster",
-        "TypeStarshipweapon": "Starship Weapon",
-        "TypeTechnological": "Technological",
-        "TypeTheme": "Theme",
-        "TypeUpgrade": "Armor Upgrade",
-        "TypeVehicleattack": "Vehicle Attack",
-        "TypeVehiclesystem": "Vehicle System",
-        "TypeWeapon": "Weapon",
-        "TypeWeaponaccessory": "Weapon Accessory"
-    },
     "SFRPG": {
         "ACPTooltip": "Armor Check Penalty: {mod} ({source})",
         "ACTooltipArmorACMod": "Armor Modifier: {armor} ({name})",
@@ -100,7 +44,7 @@
         "AbilityScoreBonusTooltip": "{type} bonus: {mod} ({source})",
         "AbilityScoreGenericTooltip": "{score} Ability Score: {value} ({source})",
         "AbilityScoreIncreaseTooltip": "Ability Score Increase: {mod}",
-        "AbilityScoreRaceTooltip": "Race: {mod}",
+        "AbilityScoreRaceTooltip": "Species: {mod}",
         "AbilityScoreThemeTooltip": "Theme: {mod}",
         "AbilityStr": "Strength",
         "AbilityWis": "Wisdom",
@@ -113,6 +57,7 @@
         "ActionRSAK": "Ranged Spell Attack",
         "ActionRWAK": "Ranged Weapon Attack",
         "ActionSave": "Saving Throw",
+        "ActionSkill": "Skill Check",
         "ActionUtil": "Utility",
         "ActorSheet": {
             "Attributes": {
@@ -163,13 +108,20 @@
             },
             "Features": {
                 "Categories": {
-                    "ActiveFeats": "Active Feats",
+                    "ActiveFeats": "Active Features",
                     "ActorResources": "Actor Resources",
+                    "ArchetypeFeatures": "Archetype Features",
                     "Archetypes": "Archetypes",
+                    "ClassFeatures": "Class Features",
                     "Classes": "Classes",
+                    "Feats": "Feats",
+                    "OtherFeatures": "Other Features",
                     "PassiveFeats": "Passive Feats",
-                    "Race": "Race",
-                    "Theme": "Theme"
+                    "Race": "Species",
+                    "SpeciesFeatures": "Species Features",
+                    "Theme": "Theme",
+                    "ThemeFeatures": "Theme Features",
+                    "UniversalCreatureRules": "Universal Creature Rules"
                 },
                 "Create": "Create new feature",
                 "Filters": {
@@ -182,7 +134,7 @@
                 "CL": "CL",
                 "Hitpoints": {
                     "ClassTooltip": "Class Base: {mod} ({source})",
-                    "RacialTooltip": "Racial Base: {mod} ({source})"
+                    "RacialTooltip": "Species Base: {mod} ({source})"
                 },
                 "Resolve": {
                     "KeyAbilityTooltip": "Key Ability Score Base: {mod} ({kas}, {source})",
@@ -214,7 +166,7 @@
                     "CapacityTooltip": "How many 'slots' that can be utilized within this container.",
                     "Close": "Close",
                     "CloseTooltip": "Close this container's fold-out listing.",
-                    "DetailsHeader": "Container details",
+                    "DetailsHeader": "Container Details",
                     "EquippedBulkMultiplier": "Equipped bulk multiplier",
                     "EquippedBulkMultiplierTooltip": "This multiplier is used for altering the bulk of the current item when it is equipped.<br/>Setting this to 0 will make the current item not count its own bulk towards the actor's encumbrance when equipped.",
                     "IncludeContentsInWealthCalculation": "Contents affect character wealth",
@@ -263,14 +215,16 @@
                 },
                 "Item": {
                     "Activate": "Activate",
-                    "Create": "Create new item",
-                    "CreateFromCompendium": "Add item from Compendium",
+                    "Create": "Create New Item",
+                    "CreateFromCompendium": "Add Item From Compendium",
                     "Deactivate": "Deactivate",
-                    "Delete": "Delete item",
-                    "Edit": "Edit item",
-                    "Equip": "Equip item",
-                    "Unequip": "Unequip item",
-                    "LevelUp": "Level up"
+                    "Delete": "Delete Item",
+                    "Edit": "Edit Item",
+                    "Equip": "Equip Item",
+                    "Install": "Install Augmentation",
+                    "LevelUp": "Level Up",
+                    "Unequip": "Unequip Item",
+                    "Uninstall": "Uninstall Augmentation"
                 },
                 "ItemValue": {
                     "Label": "Wealth:",
@@ -302,15 +256,15 @@
                     "EnergyResistance": "Energy Resistance",
                     "HP": "HP",
                     "Hitpoints": "Hitpoints",
-                    "MeleeAttackDamage": "Melee Damage",
+                    "MeleeAttackDamage": "Melee Weapon Damage",
                     "MeleeAttackRolls": "Melee Attack Rolls",
                     "MultiplyAllSpeeds": "All Speeds Multiplier",
                     "RP": "RP",
-                    "RangedAttackDamage": "Ranged Damage",
+                    "RangedAttackDamage": "Ranged Weapon Damage",
                     "RangedAttackRolls": "Ranged Attack Rolls",
                     "Resolve": "Resolve",
                     "SP": "SP",
-                    "SkillRanks": "Skill ranks",
+                    "SkillRanks": "Skill Ranks",
                     "Skillpoints": "Skillpoints",
                     "SpecificSpeed": "Specific Speed",
                     "SpecificWeaponAttackDamage": "Specific Weapon Damage",
@@ -326,7 +280,7 @@
                 },
                 "ModifierTypes": {
                     "Class": "Class",
-                    "Racial": "Racial"
+                    "Racial": "Species"
                 },
                 "Tooltips": {
                     "BonusSkillpoints": "{type} Bonus: {mod} ({source})",
@@ -337,8 +291,10 @@
                     "EditModifierTooltip": "Open the modifier editor for this modifier.",
                     "SkillRank": "{type} Ranks: {mod} ({source})",
                     "Speed": "{speed}: {type} {mod} ({source})",
+                    "ToggleEffect": "Toggle effect",
+                    "ToggleEffectTooltip": "Toggle this effect on or off. Disabled effects do not affect the character.",
                     "ToggleModifier": "Toggle modifier",
-                    "ToggleModifierTooltip": "Toggle a modifier on and off. Disabled modifiers do not affect the character."
+                    "ToggleModifierTooltip": "Toggle this modifier on or off. Disabled modifiers do not affect the character."
                 },
                 "UI": {
                     "LongFormula": "Long Formula"
@@ -396,6 +352,7 @@
         "AugBrain": "Brain",
         "AugBrainAndEyes": "Brain and Eyes",
         "AugBrainHeartLungs": "Brain, Heart, Lungs",
+        "AugBrainThroat": "Brain and Throat",
         "AugEars": "Ears",
         "AugEarsAndThroat": "Ears and Throat",
         "AugEndocrine": "Endocrine",
@@ -429,7 +386,7 @@
                 "BrowserFilterType": "Filter by Type",
                 "BrowserSortMethodCR": "CR",
                 "BrowserSortMethodHP": "HP",
-                "Button": "Alien Archive",
+                "Button": "Aliens",
                 "Title": "Browse Alien Archive"
             },
             "EquipmentBrowser": {
@@ -495,7 +452,7 @@
         "CapacityUsage": "Capacity & Usage",
         "CharacterFlagsSectionClassFeatures": "Class Features",
         "CharacterFlagsSectionFeats": "Feats",
-        "CharacterFlagsSectionRacialTraits": "Racial Traits",
+        "CharacterFlagsSectionRacialTraits": "Species Traits",
         "CharacterLevelsTooltip": "{class} Levels: {levels}",
         "CharacterNamePlaceHolderText": "Character Name",
         "CharacterSheet": {
@@ -503,7 +460,7 @@
                 "ContainedWealth": "Contained wealth: {wealth}"
             },
             "Warnings": {
-                "DeathByMassiveDamage": "{name} has died of Massive Damage!"
+                "DeathByMassiveDamage": "{name} has died of Massive Damage! ☠"
             }
         },
         "ChatCard": {
@@ -511,22 +468,35 @@
                 "Accept": "Accept",
                 "ApplyDamage": "Apply Damage",
                 "ApplyHealing": "Apply as Healing",
+                "ApplyHealingTo": "Apply Healing To",
+                "BypassStamina": "BypassStamina",
                 "DamageAndAHalf": "Apply 1.5x Damage",
                 "DoubleDamage": "Apply Double Damage",
+                "HP": "HP (default)",
+                "HPAndSP": "Both HP and SP",
                 "HalfDamage": "Apply Half Damage",
                 "ModifyDamage": "Modify Damage",
                 "ModifyDamageText": "Input a number to modify the damage amount by. This is applied after any multiplication.",
                 "NoDamageModifier": "No damage modifier applied.",
-                "NoToken": "Cannot apply: No token selected!"
+                "NoToken": "Cannot apply: No token selected!",
+                "SP": "SP"
+            },
+            "ItemAction": {
+                "Check": "Check",
+                "NoActor": "You must have an actor selected or assigned to your user."
             },
             "ItemActivation": {
                 "Activates": "Activates",
                 "Cost": "Cost: {cost}",
                 "Deactivates": "Deactivates",
                 "Duration": "Duration: {duration}",
-                "Reloads": "Reloads"
-            }
+                "NoCharges": "No Charges",
+                "Reloads": "Reloads",
+                "Use": "Use"
+            },
+            "PlaceAbilityTemplate": "Place {label}"
         },
+        "Check": "Check",
         "ClassArmorProf": "Armor Proficiencies",
         "ClassBABProgression": "BAB Progression",
         "ClassFortSaveProgression": "Fortitude Save Progression",
@@ -560,6 +530,46 @@
                 },
                 "Turn": {
                     "Header": "{combatant}'s Turn"
+                }
+            },
+            "Difficulty": {
+                "Levels": {
+                    "Average": "Average",
+                    "Challenging": "Challenging",
+                    "Easy": "Easy",
+                    "Epic": "Epic",
+                    "GreaterThanEpic": "Greater than Epic",
+                    "Hard": "Hard",
+                    "LessThanEasy": "Less than Easy",
+                    "NoEnemies": "No Enemies",
+                    "NoEnemyShips": "No Enemy Ships",
+                    "NoPCShips": "No PC Ships",
+                    "NoPCs": "No PCs"
+                },
+                "Tooltip": {
+                    "APL": "APL",
+                    "APLFull": "Average Party Level",
+                    "CR": "CR",
+                    "CanBeAdded": "A creature of this CR can be added without increasing the encounter difficulty",
+                    "ClickForDetails": "Click for Encounter Details",
+                    "Details": "Details",
+                    "DifficultyEncounter": "Difficulty Encounter",
+                    "EncounterCR": "Encounter Challenge Rating",
+                    "EncounterTotalXP": "Encounter Total XP Value",
+                    "EncounterWealth": "Suggested Wealth Gain (credit equivalent)",
+                    "Enemies": "Enemies",
+                    "EnemyShipEffectiveTier": "Effective Tier, Enemy Ship(s)",
+                    "EnemyXP": "Enemy Total XP Value",
+                    "HostileNPCs": "Hostile NPCs",
+                    "PCs": "Number of PCs",
+                    "PlayerShipEffectiveTier": "Effective Tier, Player Ship(s) ",
+                    "PlayerXP": "Per Player XP",
+                    "Players": "Players",
+                    "XPBounds": "Encounter XP Bounds"
+                },
+                "Units": {
+                    "Credits": "cr",
+                    "XP": "XP"
                 }
             },
             "EncounterTracker": {
@@ -627,8 +637,56 @@
                 }
             }
         },
+        "CombatRoles": {
+            "Combatant": "Combatant",
+            "Descriptions": {
+                "Combatant": "These creatures are best suited to physical fighting; they may be most effective at range, in melee, or both.",
+                "Expert": "These creatures tend to be most effective with various skills.",
+                "Spellcaster": "These creatures rely primarily on spells or spell-like abilities."
+            },
+            "Expert": "Expert",
+            "Label": "Combat Role",
+            "Spellcaster": "Spellcaster"
+        },
         "ComingSoon": "Coming soon!",
         "ConImm": "Condition Immunities",
+        "ConditionTooltips": {
+            "Asleep": "You take a -10 penalty to Perception checks to notice things.",
+            "Bleeding": "You take the listed damage at the beginning of your turn.",
+            "Blinded": "You're flat-footed, you take a -4 penalty to most Str- and Dex-based skill checks and opposed Perception checks, you automatically fail Perception checks based on sight, opponents have total concealment against you, and you must succeed at a DC 10 Acrobatics check to move faster than half speed or else fall prone.",
+            "Broken": "<strong>Weapon:</strong> attack and damage rolls take a -2 penalty and can't deal extra effects on a critical hit;<br> <strong>Armor:</strong> AC bonuses are halved and the armor check penalty is doubled;<br> <strong>Vehicle:</strong> -2 penalty to AC, collision DC, and Piloting modifier, and it halves its full speed and MPH;<br> <strong>Tool or tech that provides bonuses:</strong> bonuses are halved.",
+            "Burning": "You take the listed fire damage each round, and you must be extinguished to end the condition.",
+            "Confused": "You treat all creatures as enemies, and you must roll on the table to determine your actions.",
+            "Cowering": "You're flat-footed and can take no actions.",
+            "Dazed": "You can take no actions.",
+            "Dazzled": "You take a -1 penalty to attack rolls and sight-based Perception checks.",
+            "Dead": "Your soul leaves your body, you can't act in any way, and you can't benefit from normal or magical healing.",
+            "Deafened": "You take a -4 penalty to initiative checks and opposed Perception checks, and you automatically fail sound-based Perception checks.",
+            "Dying": "You're unconscious, you can take no actions, and you must stabilize or lose Resolve Points and potentially die.",
+            "Encumbered": "Speeds are reduced by 10 feet, maximum Dex bonus to AC is reduced to +2, and you take a -5 penalty to Str- and Dex-based checks.",
+            "Entangled": "You move at half speed; you cannot run or charge; and you take a -2 penalty to AC, attack rolls, Reflex saves, initiative checks, and Dex-based skill and ability checks.",
+            "Exhausted": "You move at half speed; you cannot run or charge; you take a -3 penalty to AC, attack rolls, melee damage rolls, Reflex saves, initiative checks, and Str- and Dex-based skill and ability checks; and you reduce your encumbered limit by 3 bulk.",
+            "Fascinated": "You must pay attention to the fascinating effect and take a -4 penalty to skill checks made as reactions.",
+            "Fatigued": "You cannot run or charge; you take a -1 penalty to AC, attack rolls, melee damage rolls, Reflex saves, initiative checks, and Str- and Dex-based skill and ability checks; and you reduce your encumbered limit by 1 bulk.",
+            "FlatFooted": "You take a -2 penalty to AC, and you cannot take reactions or make attacks of opportunity.",
+            "Frightened": "You must flee or fight, and you take a -2 penalty to ability checks, attack rolls, saving throws, and skill checks.",
+            "Grappled": "You cannot move or take two-handed actions; you take a -2 penalty to AC, most attack rolls, Reflex saves, initiative checks, and Dex-based skill and ability checks; and you cannot make attacks of opportunity.",
+            "Helpless": "Your Dex modifier is -5, and melee attacks against you gain a +4 bonus.",
+            "Nauseated": "You're unable to attack, cast spells, or concentrate on spells, and the only action you can take is a single move action per turn.",
+            "OffKilter": "You can't take move actions except to right yourself, you take a -2 penalty to attacks, and you're flat-footed.",
+            "OffTarget": "You take a -2 penalty to attack rolls.",
+            "Overburdened": "Speeds are reduced to 5 feet; maximum Dex bonus to AC is reduced to +0; and you take a -5 penalty to Str- and Dex-based checks.",
+            "Panicked": "<ul><li>You drop all held items</li><li>You flee at top speed</li><li>You cannot take other actions</li><li>You take a -2 penalty to ability checks, saving throws, and skill checks</li><li>And you cower if cornered</li></ul>",
+            "Paralyzed": "Your Dex modifier is -5, and you cannot move but can take mental actions.",
+            "Pinned": "You cannot move, you're flat-footed, and you take penalties to the same attributes as for grappled but the penalty is -4.",
+            "Prone": "You take a -4 penalty to melee attacks, a +4 bonus to AC against ranged attacks, and a -4 penalty to AC against melee attacks.",
+            "Shaken": "You take a -2 penalty to ability checks, attack rolls, saving throws, and skill checks.",
+            "Sickened": "You take a -2 penalty to ability checks, attack rolls, weapon damage rolls, saving throws, and skill checks.",
+            "Stable": "You're no longer dying, but you are still unconscious.",
+            "Staggered": "You can take only a single move or standard action each round and can't take reactions, but you can take swift actions as normal.",
+            "Stunned": "You drop everything held, you can't take actions, and you're flat-footed.",
+            "Unconscious": "You're knocked out and helpless."
+        },
         "ConditionsAsleep": "Asleep",
         "ConditionsBleeding": "Bleeding",
         "ConditionsBlinded": "Blinded",
@@ -670,6 +728,7 @@
             "Drugs": "Drugs",
             "FoodDrink": "Food and drink",
             "Medicine": "Medicinals",
+            "Other": "Other",
             "Poison": "Poisons",
             "Serum": "Serums",
             "SpellGem": "Spell Gems"
@@ -694,7 +753,10 @@
         },
         "Cybernetic": "Cybernetic",
         "Damage": {
+            "DamageOperator": "Damage Operator",
+            "EnergyDamage": "Energy Damage",
             "Immunities": "Damage Immunities",
+            "KineticDamage": "Kinetic Damage",
             "MinimumDamage": "Minimum Damage",
             "PartIndex": "Part {partIndex} of {partCount}",
             "Reduction": "Damage Reduction",
@@ -706,7 +768,7 @@
                 "Cold": "Cold",
                 "Custom": "Custom",
                 "DamageGroup": "Damage Group {group}",
-                "DamageGroupTooltip": "If damage sections share a group, you may only enable one from that group when making a damage roll. You may freely enable/disable damage sections that lack a group.",
+                "DamageGroupTooltip": "If damage sections share a group, you may only enable one from that group when making a damage roll. You may freely enable/disable damage sections that lack a group. Damage groups must be numerical.",
                 "Electricity": "Electricity",
                 "Fire": "Fire",
                 "Force": "Force",
@@ -718,6 +780,10 @@
                     "Or": "or"
                 },
                 "Piercing": "Piercing",
+                "PrimaryDamageGroup": "Primary Damage Group",
+                "PrimaryDamageGroupTooltip": "Damage sections that are a member of the primary damage group will all be marked as primary. You will still only be able to choose one damage section per group when making a damage roll, and as such modifiers will correctly only be applied once.",
+                "PrimaryDamageSection": "Primary Damage Section",
+                "PrimaryDamageSectionTooltip": "Modifiers that affect this item's damage will only apply to the primary damage section. Non-primary sections will simply roll their formula. A item must have exactly one primary damage section or damage group (see above).",
                 "Radiation": "Radiation",
                 "Slashing": "Slashing",
                 "Sonic": "Sonic",
@@ -786,6 +852,7 @@
                 "SingleFieldInvalid": "Invalid input for {fieldName}."
             }
         },
+        "Disabled": "Disabled",
         "DistAny": "Any",
         "DroneSheet": {
             "Chassis": {
@@ -869,7 +936,7 @@
                             "Melee": "Melee weapon mount",
                             "Ranged": "Ranged weapon mount"
                         },
-                        "Header": "Other effects"
+                        "Header": "Arms"
                     },
                     "BaseStatistics": {
                         "FreeInstall": "Free Module",
@@ -903,11 +970,57 @@
                 "RangedWeaponMounts": "Ranged Weapon Mounts"
             }
         },
+        "DurationTypesInstantaneous": "Instantaneous",
+        "Effect": {
+            "DetailsEnabledLabel": "Enabled",
+            "DetailsHeader": "Effect Details",
+            "DetailsShowOnToken": "Show On Token",
+            "DurationTypesDays": "Days",
+            "DurationTypesHours": "Hours",
+            "DurationTypesLabel": "Duration",
+            "DurationTypesMinutes": "Minutes",
+            "DurationTypesNone": "None",
+            "DurationTypesPermanent": "Permanent",
+            "DurationTypesRounds": "Rounds",
+            "EndTypesLabel": "Ends On",
+            "EndTypesOnTurnEnd": "Turn end",
+            "EndTypesOnTurnStart": "Turn start",
+            "EndsOnTooltip": "<br><strong>Parent Actor's Turn</strong><p>The effect will expire at the start/end of the turn of the actor it belongs to.</p><strong>Origin Actor's Turn</strong><p>The effect will expire at the start/end of the turn of the actor from which it was dragged from.</p><strong>Nearest Initiative</strong><p>The effect will expire on the start/end of the turn with the closest initiative to the turn it was enabled.</p><strong>Combatant Turns</strong><p>The effect will expire on the start/end of the specified combatant's turn.</p>",
+            "Expired": "Expired",
+            "ExpiryModeInit": "Initiative Count",
+            "ExpiryModeLabel": "Expiry Mode",
+            "ExpiryModeTooltip": "<br><strong>Combatant Turn</strong><p>The effect will expire at the start/end of a specified turn.</p><strong>Initiative Count</strong><p>The effect will expire when the current combat reaches the specified initiative count.</p>",
+            "ExpiryModeTurn": "Combatant Turn"
+        },
+        "Enabled": "Enabled",
         "EnergyArmorClass": "Energy AC",
+        "EnergyArmorClassShort": "EAC",
+        "Enrichers": {
+            "Icon": {
+                "Types": {
+                    "Graviton": "Graviton",
+                    "LanguageDependent": "Language Dependent",
+                    "MindAffecting": "Mind Affecting",
+                    "Photon": "Photon",
+                    "SenseDependent": "Sense Dependent"
+                }
+            },
+            "SendToChat": "Send to chat",
+            "TypeError": "{enricherType} parsing failed! Type is invalid."
+        },
         "Environment": "Environment",
         "FeatTypes": {
             "Combat": "Combat Feats",
             "General": "General Feats"
+        },
+        "FeatureCategory": {
+            "ArchetypeFeature": "Archetype Feature",
+            "ClassFeature": "Class Feature",
+            "Feat": "Feat",
+            "OtherFeature": "Other Feature",
+            "SpeciesFeature": "Species Feature",
+            "ThemeFeature": "Theme Feature",
+            "UniversalCreatureRule": "Universal Creature Rule"
         },
         "Features": "Features",
         "FeaturesAdd": "Add",
@@ -1037,6 +1150,7 @@
         "InventoryCapacity": "Capacity",
         "InventoryCurrency": "Currency",
         "InventoryEquipped": "Equipped",
+        "InventoryNotEquipped": "Not Equipped",
         "InventoryUsage": "Utilisation",
         "IronWillHint": "Character feat that adds 2 to will saving throws",
         "IronWillLabel": "Iron Will",
@@ -1051,6 +1165,15 @@
                 "LockedTooltip": "<strong>Locked</strong><br/>A locked container prevents player access."
             }
         },
+        "ItemMacro": {
+            "Activate": "Activate",
+            "Attack": "Attack",
+            "Cast": "Cast",
+            "Damage": "Damage",
+            "Healing": "Healing",
+            "Reload": "Reload",
+            "Use": "Use"
+        },
         "ItemNoAmmo": "{name} has no ammunition left!",
         "ItemSheet": {
             "AbilityScoreIncrease": {
@@ -1061,9 +1184,10 @@
                 "Label": "Abilities"
             },
             "ActorResource": {
-                "Base": "Base value",
+                "Base": "Base Value",
                 "BaseTooltip": "(Required) The base value defines the base value of this resource. Modifiers may alter it.<br/>Attribute: @resources.type.subtype.base",
-                "CombatTracker": "Combat Tracker settings",
+                "CombatTracker": "Combat Tracker",
+                "CombatTrackerSettings": "Combat Tracker Settings",
                 "DisplayAbsoluteValue": "Display Absolute Value",
                 "DisplayAbsoluteValueTooltip": "Should the displayed value in the combat tracker be absolute? i.e. -1 is displayed as 1, -2 as 2, etc.",
                 "Enabled": "Enabled",
@@ -1075,8 +1199,8 @@
                 "ErrorNoSubType": "Subtype is a required field.",
                 "ErrorNoType": "Type is a required field.",
                 "Header": "Resource Properties",
-                "Range": "Value range",
-                "RangeMode": "Range mode",
+                "Range": "Value Range",
+                "RangeMode": "Range Mode",
                 "RangeModeImmediate": "Immediate",
                 "RangeModePost": "Post",
                 "RangeModeTooltip": "(Advanced) Defines whether the range limitations are applied only after the modifiers are all processed, or for each modifier as they are being processed.<br/><br/>For example, if the range is set to maximum of 1, and the base value is 0, and you have a modifier of +2, and a modifier of -1, the different modes would work as follows:<br/><br/>Post: 0 + 2 - 1 would output 1, which does not exceed the range maximum.<br/><br/>Immediate: 0 + 2 - 1 would output 0. Because 0 + 2 is 2, which exceeds the range maximum of 1, so it gets clamped to 1. Then -1 is applied, producing 0.",
@@ -1093,9 +1217,9 @@
                 "SubTypeTooltip": "(Required) Subtype makes up the second half of the resource identifier.<br/>For example: @resources.type.subtype.value",
                 "Type": "Type",
                 "TypeTooltip": "(Required) Type makes up the first half of the resource identifier.<br/>For example: @resources.type.subtype.value",
-                "Usage": "Attribute usage",
-                "UsageBaseValue": "Base value",
-                "UsageComputedValue": "Computed value",
+                "Usage": "Attribute Usage",
+                "UsageBaseValue": "Base Value",
+                "UsageComputedValue": "Computed Value",
                 "UsageTooltip": "What follows are a couple of example attributes how you may be able to access this resource in formulas:",
                 "Visualizations": "Conditional Visualization",
                 "VisualizationsIntro": "If resource value is..",
@@ -1105,6 +1229,7 @@
                 "VisualizationsModeLesserThan": "lesser than",
                 "VisualizationsModeLesserThanEqual": "lesser than or equal to",
                 "VisualizationsModeNotEqual": "not equal to",
+                "VisualizationsPart": "Visualization Part",
                 "VisualizationsThen": "Then:",
                 "VisualizationsTitle": "Title:"
             },
@@ -1128,10 +1253,31 @@
             "Containers": {
                 "ContainerTooltip": "Containers can contain just about any item. Increase the storage capacity to allow adding content."
             },
+            "Details": {
+                "Section": {
+                    "ArmorDetails": "Armor Details",
+                    "ClassBasics": "Class Basics",
+                    "ConsumableDetails": "Consumable Details",
+                    "Progressions": "Progressions",
+                    "SkillsAndProficiencies": "Skills and Proficiencies",
+                    "Title": "Section",
+                    "Usage": "Usage"
+                },
+                "Tab": {
+                    "AmmunitionContainer": "Ammunition & Container",
+                    "AttackDamage": "Attack & Damage",
+                    "ClassInformation": "Class Information",
+                    "ContainerDetails": "Container Details",
+                    "NPCSpecific": "NPC Specific",
+                    "Properties": "Properties",
+                    "Spellcasting": "Spellcasting",
+                    "UsageAction": "Usage & Action"
+                }
+            },
             "Header": {
                 "ArmorClass": "Armor Class",
                 "ArmorClassTooltip": "<strong>Armor Class</strong><br/>The armor class of this item, if left unattended. Otherwise, the attendee's armor class should be used instead.<br/>An item is considered unattended if it is not currently under any influence of a character.",
-                "DetailsHeader": "Armor Details",
+                "DetailsHeader": "Details",
                 "Hardness": "Hardness",
                 "HardnessTooltip": "<strong>Hardness</strong><br/>When taking damage, subtract the item's hardness from the incoming damage before applying.",
                 "Hitpoints": "Hitpoints",
@@ -1169,7 +1315,7 @@
                 "SturdyTooltip": "Equipment, such as weapons and armors, are considered sturdy."
             },
             "StarshipAblativeArmor": {
-                "AblativeValue": "Total additional hitpoints",
+                "AblativeValue": "Total Additional Hitpoints",
                 "AblativeValueTooltip": "The total amount of ablative armor hitpoints to distribute over the four quadrants.",
                 "Header": "Ablative Armor Properties",
                 "TargetLockPenalty": "Target Lock Penalty",
@@ -1177,10 +1323,33 @@
                 "TurnDistancePenalty": "Turn Distance Penalty",
                 "TurnDistancePenaltyTooltip": "The penalty applied to the ship's turn distance score."
             },
+            "StarshipAction": {
+                "ActionDC": "Action DC",
+                "AddSubactionTooltip": "<strong>Add Subaction</strong><br />Add a new subaction",
+                "CheckFormula": "Skill Check Formula",
+                "CrewRole": "Crew Role",
+                "CriticalEffect": "Critical Effect",
+                "DCPlaceholder": "5 + 1-1/2 * Target Ship Tier",
+                "DeleteSubactionTooltip": "<strong>Delete Subaction</strong><br />Delete this subaction",
+                "IsPushAction": "Push Action?",
+                "NormalEffect": "Normal Effect",
+                "Phase": "Phase",
+                "PhaseTooltip": "Phase Tooltip",
+                "PushResolve": "Push and Resolve",
+                "ResolveFormulaAutomatically": "Resolve this Formula Automatically",
+                "ResolveFormulaAutomaticallyTooltip": "If this box is checked, Target DC will resolve automatically as a formula, and the result will display in the chat box when the action is triggered. Otherwise, the raw string will instead be displayed in the chatbox.",
+                "SkillFormulaAndSubactions": "Skill Formula and Subactions",
+                "SkillFormulaOrSubactions": "Skill Formula / Subactions",
+                "SkillOrSubaction": "Skill or Subaction Name",
+                "SubactionPart": "Subaction {section}",
+                "Subactions": "Subactions",
+                "TargetDC": "Target DC",
+                "UsesResolve": "Uses Resolve"
+            },
             "StarshipArmor": {
                 "ArmorBonus": "Armor Bonus",
                 "ArmorBonusTooltip": "The armor class bonus provided by this armor.",
-                "Header": "Ablative Armor Properties",
+                "Header": "Armor Properties",
                 "TargetLockPenalty": "Target Lock Penalty",
                 "TargetLockPenaltyTooltip": "The penalty applied to the ship's target lock score.",
                 "TurnDistancePenalty": "Turn Distance Penalty",
@@ -1196,7 +1365,7 @@
                 "IsPowered": "Is powered",
                 "PCU": "PCU Usage",
                 "PCUTooltip": "The amount of power this component requires to function.",
-                "PoweredState": "PoweredState",
+                "PoweredState": "Powered State",
                 "PoweredStateTooltip": "Is this starship component powered?"
             },
             "StarshipComputer": {
@@ -1215,7 +1384,7 @@
                 "EngineRating": "Engine Rating",
                 "EngineRatingTooltip": "The Engine Rating for this drift engine.",
                 "Header": "Drift Engine Properties",
-                "MaxSize": "Maximum ship size",
+                "MaxSize": "Maximum Ship Size",
                 "MaxSizeTooltip": "The maximum ship size this engine can be installed onto."
             },
             "StarshipFortifiedHull": {
@@ -1237,7 +1406,7 @@
                     "ExpansionBaysTooltip": "The number of expansion bays available for this frame.",
                     "HeaderDefense": "Defense",
                     "HeaderOffense": "Offense",
-                    "HeaderSpecs": "Specs",
+                    "HeaderSpecs": "Specifications",
                     "Hitpoints": "Hull Points",
                     "HitpointsIncrement": "Hull Point increment",
                     "HitpointsIncrementTooltip": "The number of Hull Points a starship with that frame automatically gains when its tier increases to 4 (and every 4 tiers thereafter; see page 294).",
@@ -1252,6 +1421,7 @@
                     "WeaponArcStarboard": "Starboard Arc",
                     "WeaponArcTooltip": "The amount of weapon mounts available for the ship arc, split into light, heavy, and capital mounts.",
                     "WeaponArcTurret": "Turret",
+                    "WeaponMounts": "Weapon Mounts",
                     "WeaponTypeCapital": "Capital",
                     "WeaponTypeHeavy": "Heavy",
                     "WeaponTypeLight": "Light",
@@ -1272,7 +1442,7 @@
             },
             "StarshipSensor": {
                 "Header": "Sensor Properties",
-                "Modifier": "Sensor scan modifier",
+                "Modifier": "Sensor Scan Modifier",
                 "ModifierTooltip": "An additional modifier when scanning planets outside of combat.",
                 "Range": "Range",
                 "RangeTooltip": "Range increment of the scanner, short is 5, medium is 10, and long is 15 hexes."
@@ -1284,7 +1454,7 @@
                 "DefenseValueTooltip": "The maximum defense value available with this deflector shield.",
                 "Header": "Shield Properties",
                 "IsDeflector": "Is Deflector Shield",
-                "Regeneration": "Regeneration per minute",
+                "Regeneration": "Regeneration Per Minute",
                 "RegenerationTooltip": "The amount of shield points regenerated per minute.",
                 "ShieldPoints": "Shield Points",
                 "ShieldPointsTooltip": "The total amount of shield points provided by this shield.",
@@ -1312,7 +1482,7 @@
                 "Unmounted": "Unmounted"
             },
             "WeaponAccessory": {
-                "SupportedTypes": "Supported weapon types"
+                "SupportedTypes": "Supported Weapon Types"
             },
             "Weapons": {
                 "Category": "Weapon Type",
@@ -1353,24 +1523,30 @@
                 "DamageNotes": "Damage Notes",
                 "DamageNotesTooltip": "The damage notes are displayed on the damage roll chat card. This is a great way to put helpful reminders, especially for GMs with complicated NPCs.",
                 "DamageSection": "Damage Section {section}",
+                "DeleteDamageSection": "Delete damage section",
+                "Details": "Action Details",
                 "HealingFormula": "Healing Formula",
                 "OtherFormula": "Other Formula",
                 "RollNotes": "Roll Notes",
                 "RollNotesTooltip": "The roll notes are displayed on the action roll chat card. This is a great way to put helpful reminders, especially for GMs with complicated NPCs.",
                 "SavingThrow": "Saving Throw",
+                "SkillCheck": "Skill Check",
                 "TitleAction": "Action",
                 "TitleActivation": "Activation"
             },
             "Activation": {
+                "Activation": "Activation",
                 "ActivationCondition": "Activation Condition",
                 "ActivationCost": "Activation Cost",
                 "Area": "Area",
                 "Duration": "Duration",
                 "LimitedUses": "Limited Uses",
                 "Range": "Range",
+                "RangeIncrement": "Range Increment",
                 "Target": "Target"
             },
             "Ammunition": {
+                "Ammo": "Ammo",
                 "AmmunitionType": "Ammunition Type",
                 "Capacity": "Capacity Settings",
                 "Details": "Ammunition Details",
@@ -1399,9 +1575,11 @@
             },
             "Attuned": "Attuned",
             "Augmentation": {
+                "Action": "Augmentation Action",
                 "Details": "Augmentation Details",
                 "System": "System",
-                "Type": "Type"
+                "Type": "Type",
+                "Usage": "Augmentation Usage"
             },
             "Capacity": {
                 "Capacity": "Capacity",
@@ -1424,13 +1602,14 @@
                 "Containers": "Containers",
                 "DroneChassis": "Drone Chassis",
                 "DroneMods": "Drone Mods",
+                "Effect": "Effect",
                 "Equipment": "Armor",
                 "Feats": "Feats",
                 "Goods": "Goods",
                 "HybridItems": "Hybrid Items",
                 "MagicItems": "Magic Items",
                 "MiscellaneousItems": "Miscellaneous Items",
-                "Races": "Races",
+                "Races": "Species",
                 "Shields": "Shields",
                 "Spells": "Spells",
                 "StarshipAblativeArmors": "Starship Ablative Armors",
@@ -1493,10 +1672,14 @@
             "Feat": {
                 "ActionRecharge": "Action Recharge",
                 "Charged": "Charged",
+                "CombatFeat": "Combat Feat",
                 "FeatureAttack": "Feature Attack",
+                "FeatureCategory": "Feature Category",
+                "FeatureDetails": "Feature Details",
                 "FeatureUsage": "Feature Usage",
                 "RechargeOn": "Recharge On",
-                "Requirements": "Requirements"
+                "Requirements": "Requirements",
+                "SpecialAbilityType": "Special Ability Type"
             },
             "Goods": {
                 "Details": "Goods Details"
@@ -1514,14 +1697,17 @@
             "MaxDex": "Max. Dexterity Modifier",
             "NotProficient": "Not Proficient",
             "Proficient": "Proficient",
+            "RangeInformation": "Range Information",
             "Shield": {
                 "ACP": "ACP: {acp}",
                 "AcMaxDex": "Max dex bonus: {maxDex}",
+                "AcMaxDexLabel": "Max Dex Bonus",
                 "Action": "Shield Action",
                 "Aligned": "Aligned",
                 "ArmorCheck": "Armor check penalty: {acp}",
+                "ArmorCheckLabel": "Armor Check Penalty",
                 "Bonus": "Shield Bonus",
-                "Bonuses": "Wielded bonus: {wielded} / Aligned bonus: {aligned}",
+                "Bonuses": "Wielded: {wielded} / Aligned: {aligned}",
                 "Details": "Shield Details",
                 "Dex": "Dex: {dex}",
                 "Shield": "Shield",
@@ -1594,6 +1780,10 @@
                 "Attack": "Weapon Attack",
                 "Category": "Weapon Category",
                 "Details": "Weapon Details",
+                "IsEquipment": {
+                    "Title": "Weapon Is Equipment",
+                    "Tooltip": "This box is checked if the weapon is a piece of carried equipment, as opposed to an innate natural or supernatural weapon. For natural weapons, uncheck this box."
+                },
                 "Properties": "Weapon Properties",
                 "Type": "Weapon Type",
                 "Usage": "Weapon Usage"
@@ -1603,49 +1793,130 @@
                     "Any": "Any",
                     "HeavyWeapon": "Heavy weapon",
                     "MeleeWeapon": "Melee weapon",
-                    "MeleeWeaponSA": "Melee weapon & Smallarm",
+                    "MeleeWeaponSA": "Melee weapon & Small Arm",
                     "Projectile": "Projectile",
                     "RailedWeapon": "Railed weapon",
-                    "RailedWeaponSA": "Railed weapon & Smallarm",
-                    "SmallArm": "Smallarm"
+                    "RailedWeaponSA": "Railed weapon & Small Arm",
+                    "SmallArm": "Small Arm"
                 }
             }
         },
         "KeyAbility": "Key Ability Score",
         "KineticArmorClass": "Kinetic AC",
+        "KineticArmorClassShort": "KAC",
         "Languages": "Languages",
+        "LanguagesAballonian": "Aballonian",
         "LanguagesAbyssal": "Abyssal",
+        "LanguagesAglian": "Aglian",
+        "LanguagesAkan": "Akan",
         "LanguagesAkitonian": "Akitonian",
         "LanguagesAklo": "Aklo",
+        "LanguagesAlkainish": "Alkainish",
+        "LanguagesAnassan": "Anassan",
+        "LanguagesAncientDaimalkan": "Ancient Daimalkan",
         "LanguagesAquan": "Aquan",
         "LanguagesArkanen": "Arkanen",
+        "LanguagesAstriapi": "Astriapi",
         "LanguagesAuran": "Auran",
         "LanguagesAzlanti": "Azlanti",
+        "LanguagesBantridi": "Bantridi",
+        "LanguagesBarathu": "Barathu",
+        "LanguagesBolidan": "Bolidan",
+        "LanguagesBrenneri": "Brenneri",
         "LanguagesBrethedan": "Brethedan",
         "LanguagesCastrovelian": "Castrovelian",
         "LanguagesCelestial": "Celestial",
         "LanguagesCommon": "Common",
+        "LanguagesCopaxi": "Copaxi",
+        "LanguagesCyrunian": "Cyrunian",
+        "LanguagesDaimalkan": "Daimalkan",
+        "LanguagesDirindi": "Dirindi",
         "LanguagesDraconic": "Draconic",
+        "LanguagesDromadan": "Dromadan",
         "LanguagesDrow": "Drow",
         "LanguagesDwarven": "Dwarven",
         "LanguagesElven": "Elven",
+        "LanguagesEmbri": "Embri",
+        "LanguagesEndiffian": "Endiffian",
         "LanguagesEoxian": "Eoxian",
+        "LanguagesEspraksi": "Espraksi",
+        "LanguagesFerran": "Ferran",
+        "LanguagesFirstSpeech": "First Speech",
+        "LanguagesFrujai": "Frujai",
+        "LanguagesGaraggakal": "Garaggakal",
+        "LanguagesGhibran": "Ghibran",
+        "LanguagesGhoran": "Ghoran",
+        "LanguagesGiant": "Giant",
         "LanguagesGnome": "Gnome",
         "LanguagesGoblin": "Goblin",
+        "LanguagesGrioth": "Grioth",
+        "LanguagesGytchean": "Gytchean",
+        "LanguagesHadrogaan": "Hadrogaan",
         "LanguagesHalfling": "Halfling",
+        "LanguagesHallas": "Hallas",
+        "LanguagesHortaa": "Hortaa",
         "LanguagesIgnan": "Ignan",
+        "LanguagesIhonva": "Ihonva",
+        "LanguagesIji": "Iji",
+        "LanguagesIlthisarian": "Ilthisarian",
         "LanguagesInfernal": "Infernal",
+        "LanguagesIxtangi": "Ixtangi",
+        "LanguagesIzalguun": "Izalguun",
+        "LanguagesJinsul": "Jinsul",
         "LanguagesKalo": "Kalo",
         "LanguagesKasatha": "Kasatha",
+        "LanguagesKatholbi": "Katholbi",
+        "LanguagesKiirinta": "Kiirinta",
+        "LanguagesKoshorian": "Koshorian",
+        "LanguagesKothama": "Kothama",
+        "LanguagesLexonian": "Lexonian",
+        "LanguagesLumos": "Lumos",
+        "LanguagesMaraquoi": "Maraquoi",
+        "LanguagesMegalonic": "Megalonic",
+        "LanguagesMi-Go": "Mi-Go",
+        "LanguagesMorlamaw": "Morlamaw",
+        "LanguagesMulkaxi": "Mulkaxi",
         "LanguagesNchaki": "Nchaki",
+        "LanguagesNoma": "Noma",
+        "LanguagesOrbian": "Orbian",
         "LanguagesOrc": "Orc",
+        "LanguagesOrrian": "Orrian",
+        "LanguagesOsharu": "Osharu",
+        "LanguagesPahtra": "Pahtra",
+        "LanguagesParalithi": "Paralithi",
+        "LanguagesPerani": "Perani",
+        "LanguagesProtean": "Protean",
+        "LanguagesQuorlu": "Quorlu",
+        "LanguagesRaxi": "Raxi",
+        "LanguagesReptoid": "Reptoid",
+        "LanguagesRequian": "Requian",
         "LanguagesSarcesian": "Sarcesian",
+        "LanguagesSazaron": "Sazaron",
+        "LanguagesScyphozoan": "Scyphozoan",
+        "LanguagesSelamidian": "Selamidian",
+        "LanguagesSeprevoi": "Seprevoi",
+        "LanguagesShadowtongue": "Shadowtongue",
+        "LanguagesShimreeni": "Shimreeni",
         "LanguagesShirren": "Shirren",
         "LanguagesShobhad": "Shobhad",
+        "LanguagesSivvian": "Sivvian",
+        "LanguagesSpathinae": "Spathinae",
+        "LanguagesStarsong": "Starsong",
+        "LanguagesStroxha": "Stroxha",
+        "LanguagesSylvan": "Sylvan",
+        "LanguagesTelian": "Telian",
         "LanguagesTerran": "Terran",
         "LanguagesTriaxian": "Triaxian",
+        "LanguagesTrinir": "Trinir",
+        "LanguagesUrog": "Urog",
+        "LanguagesVarratana": "Varratana",
         "LanguagesVercite": "Vercite",
         "LanguagesVesk": "Vesk",
+        "LanguagesVlakan": "Vlakan (signed, spoken, and tactile)",
+        "LanguagesVulgarKishaleen": "Vulgar Kishaleen",
+        "LanguagesWoiokan": "Woiokan",
+        "LanguagesWrikreechee": "Wrikreechee",
+        "LanguagesXaarb": "Xaarb",
         "LanguagesYsoki": "Ysoki",
         "LevelLabel": "Spell Level",
         "LevelLabelText": "Level",
@@ -1680,6 +1951,10 @@
         "LimitedUsePeriodsShort": "10-Minute Rest",
         "LocalizationTerminator": "",
         "Long": "Long",
+        "Macro": {
+            "ViewActor": "View Actor",
+            "ViewItem": "View Item"
+        },
         "Magic": {
             "Levels": {
                 "0": "0 Level",
@@ -1710,7 +1985,7 @@
         "MigrationEndMigration": "Starfinder system migration to version {systemVersion} was successful!",
         "MigrationErrorMessage": "There was an error migrating your Starfinder data, you made a backup, right?",
         "MigrationSuccessfulMessage": "Your Starfinder data was successfully migrated to the current version.",
-        "MigrationSuccessfulRefreshMessage": "Your Starfinder data was successfully migrated to the current version.<br/><br/>Please refresh your game to finalize migration.",
+        "MigrationSuccessfulRefreshMessage": "Your Starfinder data was successfully migrated to the current version. Please refresh your game to finalize migration.",
         "ModifierACPEffectingArmorTypeAll": "All Armor",
         "ModifierACPEffectingArmorTypeHeavy": "Only Heavy Armor",
         "ModifierACPEffectingArmorTypeLight": "Only Light Armor",
@@ -1734,18 +2009,22 @@
         "ModifierEffectTypeTooltip": "This identifies the general attribute or attributes that are affected by the modifier",
         "ModifierEnabledLabel": "Enabled",
         "ModifierEnabledTooltip": "Determines if the modifier will be considered when the attribute modifiers are calculated",
+        "ModifierLimitToContainer": "Parent Item's Container",
+        "ModifierLimitToLabel": "Limit To",
+        "ModifierLimitToParent": "Parent Item",
+        "ModifierLimitToTooltip": "<strong>Limit To</strong><br><br><strong>None</strong><p>The modifier will be applied to applicable items as normal.</p><strong>Parent Item</strong><p>The modifier will only apply to the item this modifier is on.</p><strong>Parent Item's Container</strong><p>The modifier will only apply to the container item that contains the item this modifier is on.</p>",
         "ModifierModifierLabel": "Modifier",
         "ModifierModifierTooltip": "The value used to modify with.",
         "ModifierModifierTypeLabel": "Modifier Type",
-        "ModifierModifierTypeTooltip": "A modifier can be a constant value that allways applies or a situational modifier that only applies in certian situations. This is used to identifiy the Modifier field as one or the other",
+        "ModifierModifierTypeTooltip": "A modifier can be a constant value that always applies or a situational modifier that only applies in certian situations.",
         "ModifierNameLabel": "Name",
         "ModifierNameTooltip": "The name of the modifier",
         "ModifierNotesLabel": "Notes",
-        "ModifierNotesTooltip": "Any specific notes about his modifier",
+        "ModifierNotesTooltip": "Any specific notes about this modifier",
         "ModifierSaveHighest": "Highest",
         "ModifierSaveLowest": "Lowest",
         "ModifierSourceLabel": "Source",
-        "ModifierSourceTooltip": "Where does this modifier come from? An item? A spell? Another character?",
+        "ModifierSourceTooltip": "Where does this modifier come from? E.g. An item, spell or another character",
         "ModifierTitle": "Modifier",
         "ModifierTypeAbility": "Ability",
         "ModifierTypeArmor": "Armor",
@@ -1759,15 +2038,15 @@
         "ModifierTypeLabel": "Type",
         "ModifierTypeLuck": "Luck",
         "ModifierTypeMorale": "Morale",
-        "ModifierTypeRacial": "Racial",
+        "ModifierTypeRacial": "Species",
         "ModifierTypeResistance": "Resistance",
-        "ModifierTypeTooltip": "The modifiers type. Used for figuring out which modifier to use when multiple modifiers are of the same type (usually the highest)",
+        "ModifierTypeTooltip": "The modifiers type. Used for calculating which modifier to use when multiple modifiers are of the same type (usually the highest)",
         "ModifierTypeUntyped": "Untyped",
         "ModifierValueAffectedHeaderLabel": "Affected Value",
         "ModifierValueAffectedLabel": "Specific Affected Value",
         "ModifierValueAffectedTooltip": "This identifies a specific value being affected if the general attribute has many possible values",
         "Modifiers": "Modifiers",
-        "ModifiersConditionsTabLabel": "Conditions",
+        "ModifiersConditionsTabLabel": "Effects",
         "ModifiersItemTabLabel": "Item",
         "ModifiersMiscTabLabel": "Miscellaneous",
         "ModifiersPermanentTabLabel": "Permanent",
@@ -1794,7 +2073,7 @@
                 "BaseSpellDC": "Base Spell DC",
                 "BaseSpellDCTooltip": "The base spell DC this NPC has. All of the NPCs spells that have a saving throw associated with them typically use this value, plus the spell level.",
                 "NamePlaceHolderText": "Character Name",
-                "RaceAndGraftsPlaceHolderText": "Gender, Race, and Class/Grafts",
+                "RaceAndGraftsPlaceHolderText": "Gender, Species, and Class/Grafts",
                 "SourcePlaceHolderText": "Source",
                 "SubtypePlaceHolderText": "Subtype",
                 "TypePlaceHolderText": "Type"
@@ -1833,6 +2112,7 @@
         "NpcToggleSkillsDialogTitle": "Toggle NPC Skills",
         "NumberOfArms": "Number of Arms",
         "Organization": "Organization",
+        "Passive": "Passive",
         "Personal": "Personal",
         "PersonalUpgrade": "Personal Upgrade",
         "Plane": "Plane",
@@ -1841,9 +2121,13 @@
         "RaceAbilityAdjustments": "Ability Adjustments",
         "RaceAddAbilityAdjustment": "Add Adjustment",
         "RaceHitPoints": "Hit Points",
-        "RacePlaceHolderText": "Race",
+        "RacePlaceHolderText": "Species",
         "RaceSize": "Size",
-        "RacialTraits": "Racial Traits",
+        "RacialTraits": "Species Traits",
+        "RangeCalculated": "{rangeType} ({total} ft.)",
+        "RangeClose": "Close (25 ft. + 5 ft./2 levels)",
+        "RangeLong": "Long (400 ft. + 40 ft./level)",
+        "RangeMedium": "Medium (100 ft. + 10 ft./level)",
         "Reach": "Reach",
         "ReflexSave": "Reflex",
         "RepairDroneChatMessage": "{name} was repaired for {regainedHP} hit points.",
@@ -2011,6 +2295,10 @@
                 "Hint": "Enables the ability to toggle advantage or disadvantage on dice rolls.",
                 "Name": "Use advantage and disadvantage?"
             },
+            "DecimalSpeed": {
+              "Hint": "Enable decimal numbers for actor speed configuration.",
+              "Name": "Decimal Speed values"
+            },
             "AlwaysShowQuantity": {
                 "Hint": "Always shows the quantity of items, even if it is 0 or 1. You will have to refresh your window before this change will take effect.",
                 "Name": "Always show item quantity"
@@ -2063,6 +2351,10 @@
                     "Core": "Core Rulebook (5/10/5)",
                     "Optional": "Optional (5/5/5)"
                 }
+            },
+            "DifficultyDisplay": {
+                "Hint": "Enables difficulty calculation and display on the combat tracker tab.",
+                "Name": "Enable Difficulty Display"
             },
             "ExperienceTracking": {
                 "Hint": "Remove experience bars from character sheets.",
@@ -2141,6 +2433,10 @@
                 "Hint": "Whether to use Starfinder's measurement method for AOE templates vs Foundry VTT's default method",
                 "Name": "Use Starfinder AOE templates"
             },
+            "WarnInvalidRollData": {
+                "Hint": "When checked, warnings will be displayed when modifiers contain invalid roll formulas. This can result in warning spam, if, for example, you have a class feature but not the corresponding class item itself.",
+                "Name": "Warn on invalid roll formulas"
+            },
             "WorldSchemaVersion": {
                 "Hint": "Records the data schema version for the Starfinder system. WARNING: Do not edit this value unless you know what you are doing!",
                 "Name": "Starfinder Data Schema Version"
@@ -2215,12 +2511,14 @@
             },
             "StarshipWeaponProperties": {
                 "Anchoring": "Anchoring",
+                "Antimagic": "Antimagic",
                 "Array": "Array",
                 "Automated": "Automated",
                 "Broad": "Broad Arc",
                 "Bugging": "Bugging",
                 "Burrowing": "Burrowing",
                 "Buster": "Buster",
+                "Cacophonous": "Cacophonous",
                 "Connecting": "Connecting",
                 "DeathField": "Death Field",
                 "Deployed": "Deployed",
@@ -2236,6 +2534,7 @@
                 "IrradiateH": "Irradiate (high)",
                 "IrradiateL": "Irradiate (low)",
                 "IrradiateM": "Irradiate (medium)",
+                "IrradiateS": "Irradiate (severe)",
                 "Jamming": "Jamming",
                 "Limited": "Limited Fire",
                 "Line": "Line",
@@ -2262,6 +2561,7 @@
                 "Teleportation": "Teleportation",
                 "Tractor": "Tractor Beam",
                 "Transposition": "Transposition",
+                "Unerring": "Unerring",
                 "VandalDrones": "Vandal Drones",
                 "Volatile": "Volatile",
                 "Vortex": "Vortex"
@@ -2295,6 +2595,7 @@
         "SkillBlu": "Bluff",
         "SkillCom": "Computers",
         "SkillCul": "Culture",
+        "SkillDelete": "Delete?",
         "SkillDip": "Diplomacy",
         "SkillDis": "Disguise",
         "SkillEng": "Engineering",
@@ -2302,11 +2603,14 @@
         "SkillInt": "Intimidate",
         "SkillLsc": "Life Science",
         "SkillMed": "Medicine",
+        "SkillMiscModifiersLabel": "Misc. Modifiers",
         "SkillModifierTooltip": "{type} Bonus: {mod} ({source})",
         "SkillMys": "Mysticism",
+        "SkillNotes": "Skill Notes",
         "SkillPer": "Perception",
         "SkillPil": "Piloting",
         "SkillPro": "Profession",
+        "SkillProfessionName": "Profession Name",
         "SkillProficiencyLevelClassSkill": "Class Skill",
         "SkillPsc": "Physical Science",
         "SkillSen": "Sense Motive",
@@ -2319,6 +2623,10 @@
         "SkillTooltipThemeMod": "Theme Modifier: {mod}",
         "SkillTooltipTrainedClassSkill": "Trained Class Skill Modifier: {mod}",
         "SkillTrainedOnly": "Trained Only",
+        "SkillTrainedOnlyDialog": {
+            "Content": "{skill} is a trained only skill, but {name} is not trained in that skill. Would you like to roll anyway?",
+            "Title": "{skill} is trained only"
+        },
         "SkillsHeaderAbility": "Abl",
         "SkillsHeaderModifier": "Mod",
         "SkillsHeaderName": "Name",
@@ -2328,6 +2636,11 @@
         "SortByFilterName": "Name",
         "Space": "Space",
         "Special": "Special",
+        "SpecialAbilityTypes": {
+            "Extraordinary": "Extraordinary (Ex)",
+            "SpellLike": "Spell-like Ability (Sp)",
+            "Supernatural": "Supernatural (Su)"
+        },
         "SpecialMaterials": {
             "Abysium": "Abysium",
             "Adamantine": "Adamantine Alloy",
@@ -2345,6 +2658,7 @@
             "Voidglass": "Voidglass"
         },
         "SpecialTraits": "Special Traits",
+        "SpeciesGraft": "Species Graft",
         "Speed": "Speed",
         "SpeedSpecial": "Special Movement",
         "SpellAreaEffects": {
@@ -2353,6 +2667,7 @@
             "Spread": "Spread"
         },
         "SpellAreaShapesCone": "Cone",
+        "SpellAreaShapesCube": "Cube",
         "SpellAreaShapesCylinder": "Cylinder",
         "SpellAreaShapesLine": "Line",
         "SpellAreaShapesOther": "Other",
@@ -2383,7 +2698,7 @@
             "ConsumeSlot": "Consume Spell Slot?",
             "ConsumeSlotYes": "Yes",
             "ErrorNoSlot": "You are not able to cast this spell using spell slots, as you have no available spell slots. You may opt to cast it without consuming any spell slots.",
-            "Header": "Configure how you would like to cast the {spellName} spell.",
+            "Header": "Configure how you would like to cast {spellName}.",
             "SelectSpellSlot": "Cast with Spell Slot",
             "SpellLabelClass": "{className} - {spellSlot} ({remainingSlots} Slots)",
             "SpellLabelGeneral": "{spellSlot} ({remainingSlots} Slots)",
@@ -2435,6 +2750,7 @@
                 "NPCGunnerRanksMessage": "While ranks aren't relevant to an NPC's gunnery modifier, some statblocks may include the Gunner's level, which you can store here. You can otherwise safely leave this box blank.",
                 "Passengers": "Passengers",
                 "Pilot": "Pilot",
+                "RemoveCrewMember": "Remove Crew Member",
                 "ScienceOfficers": "Science Officers",
                 "SkillModifier": "Modifier",
                 "SkillRanks": "Ranks",
@@ -2618,6 +2934,7 @@
         "SystemWide": "System-Wide",
         "TempHPMaxPlaceHolderText": "+Max",
         "TempHPPlaceHolderText": "+Temp",
+        "Text": "Text",
         "ThemePlaceHolderText": "Theme",
         "Tippy": {
             "Attributes": "Attributes:",
@@ -2627,6 +2944,24 @@
         "Touch": "Touch",
         "TraitArmorProf": "Armor Proficiencies",
         "TraitWeaponProf": "Weapon Proficiencies",
+        "TurnEvent": {
+            "AddTurnEvent": "Add Turn Event",
+            "DeleteTurnEvent": "Delete Turn Event",
+            "Formula": "Formula",
+            "FormulaTooltip": "A formula which will be rolled when the trigger is met.",
+            "Name": "Name",
+            "NoteContent": "Note Content",
+            "NoteTooltip": "Text which will be sent to chat as a chat message when the trigger is met.",
+            "Trigger": "Trigger",
+            "TriggerTooltip": "When during a combatant's turn to trigger the event.",
+            "TurnEventI": "Turn Event {number}",
+            "Type": "Type",
+            "TypeTooltip": "The type of behaviour to trigger for this turn event.",
+            "Types": {
+                "Note": "Note",
+                "Roll": "Roll"
+            }
+        },
         "UPBs": "UPB's",
         "Units": {
             "Speed": "ft."
@@ -2734,8 +3069,10 @@
             }
         },
         "VehicleSystemSheet": {
+            "Activated": "Activated",
             "CanBeActivated": "Can be activated",
             "CanBeActivatedTooltip": "This system has an activated state.",
+            "NotActivated": "Not Activated",
             "Piloting": "Piloting",
             "PilotingTooltip": "The Piloting modifier to apply when using this system to pilot.",
             "Senses": "Senses",
@@ -2871,6 +3208,8 @@
         "WeaponPropertiesGuidedTooltip": "A guided weapon uses a signal along with wireless telemetry, magnetic guidance, or another means of guiding its payload after the weapon has been fired. When you take a move action to aim the weapon and then fire it on the same turn (including doing so with a sniper weapon), your target does not gain the bonus to AC provided by cover, partial cover, or soft cover. Improved cover and total cover still confer their bonuses normally.",
         "WeaponPropertiesHarrying": "Harrying",
         "WeaponPropertiesHarryingTooltip": "A harrying weapon produces exceptionally distracting bursts of fire. When you take the harrying fire action with this weapon, you gain a +2 insight bonus to your attack roll.",
+        "WeaponPropertiesHealing": "Healing",
+        "WeaponPropertiesHealingTooltip": "A healing weapon, which must be an energy weapon, can deliver restorative energy. You can set the weapon to heal mode (or reset it to normal mode) as a move action. While in healing mode, if the healing weapon hits a creature, roll dice equal to the weapon’s damage; Weapon Specialization, an operative’s trick attack, and other effects that increase damage don’t apply. The creature recovers Hit Points equal to the amount rolled, minimum 1. Reduce healing by half for constructs and undead; objects are unaffected. A critical hit with a healing weapon doesn’t increase the healing or have a critical hit effect. A healing weapon used in healing mode expends twice the usual number of charges, and a battery used in a healing weapon can’t be recharged.",
         "WeaponPropertiesHolyWater": "Holy Water",
         "WeaponPropertiesHolyWaterTooltip": "A holy water weapon is infused with the blessings of one or more good-aligned deities (most commonly Hylax, Iomedae, or Sarenrae within the Pact Worlds, though devoted followers of any good-aligned deity could create such weapons). It damages only undead (regardless of alignment) and outsiders with the evil subtype, and even those creatures suffer no effect (and show no sign of their nature if it is not already obvious) with a successful saving throw. Crafting a holy water grenade requires the blessing of formally trained priests of a good deity, though a character of any alignment can do the actual crafting.",
         "WeaponPropertiesHybrid": "Hybrid",
@@ -2886,7 +3225,7 @@
         "WeaponPropertiesInstrumental": "Instrumental",
         "WeaponPropertiesInstrumentalTooltip": "A weapon with this property can also be used as a basic musical instrument (Armory 105). The size of this instrument’s battery is the same as that of the weapon’s, and it can be used as a weapon (with the charge usage indicated) or an instrument (where it uses 1 charge every 10 minutes). If the weapon is 8th level or higher, it also functions instead as a euphonic musical instrument (Armory 106).",
         "WeaponPropertiesIntegrated": "Integrated",
-        "WeaponPropertiesIntegratedTooltip": "An integrated weapon can be wielded normally or installed in an armor upgrade slot. When properly installed, the weapon is considered to be wielded without needing to assign a number of hands to wield it. An integrated weapon requires the listed number of armor slots for proper installation. An android or any other creature with the upgrade slot racial ability cannot combine its racial upgrade slot with armor upgrade slots to install an integrated weapon. Installing, removing, or replacing an integrated weapon in a suit of armor takes 10 minutes, as if it were an armor upgrade.",
+        "WeaponPropertiesIntegratedTooltip": "An integrated weapon can be wielded normally or installed in an armor upgrade slot. When properly installed, the weapon is considered to be wielded without needing to assign a number of hands to wield it. An integrated weapon requires the listed number of armor slots for proper installation. An android or any other creature with the upgrade slot species ability cannot combine its species upgrade slot with armor upgrade slots to install an integrated weapon. Installing, removing, or replacing an integrated weapon in a suit of armor takes 10 minutes, as if it were an armor upgrade.",
         "WeaponPropertiesLine": "Line",
         "WeaponPropertiesLineTooltip": "This weapon fires a projectile in a straight line that pierces through multiple creatures or obstacles. When attacking with such a weapon, make a single attack roll and compare it to the relevant Armor Class of all creatures and objects in a line extending to the weapon’s listed range increment. Roll damage only once. The weapon hits all targets with an AC equal to or lower than the attack roll. However, if an attack fails to damage a creature or obstacle hit in the line (typically due to damage reduction or hardness), the path is stopped and the attack doesn’t damage creatures farther away. A line weapon can’t damage targets beyond its listed range. If you score a critical hit, that effect applies only to the first target hit in the line, and you roll the critical damage separately. If multiple creatures are equally close, you choose which one takes the effects of the critical hit. A line weapon doesn’t benefit from feats or abilities that increase the damage of a single attack (such as the operative’s trick attack).",
         "WeaponPropertiesLiving": "Living",
@@ -2962,9 +3301,9 @@
         "WeaponPropertiesTeleportive": "Teleportive",
         "WeaponPropertiesTeleportiveTooltip": "This weapon’s fired ammunition teleports a short distance after being fired. You take only a –1 cumulative penalty when attacking outside the range of this weapon.",
         "WeaponPropertiesThought": "Thought",
-        "WeaponPropertiesThoughtTooltip": "A thought weapon can be fully or partially controlled via telepathy. If you have the telepathy or limited telepathy racial trait, are benefiting from a telepathy spell, are wearing a mindlink circlet, or have a similar ability, you ignore the weapon’s unwieldy weapon special property.",
+        "WeaponPropertiesThoughtTooltip": "A thought weapon can be fully or partially controlled via telepathy. If you have the telepathy or limited telepathy species trait, are benefiting from a telepathy spell, are wearing a mindlink circlet, or have a similar ability, you ignore the weapon’s unwieldy weapon special property.",
         "WeaponPropertiesThrottle": "Throttle",
-        "WeaponPropertiesThrottleTooltip": "A throttle weapon deals damage only when it is used to grapple a foe, automatically dealing damage with every successful grapple combat maneuver. These are considered attacks for abilities that can increase a weapon’s damage (such as trick attack). All throttle weapons are also grapple weapons. While a target is successfully being grappled with a throttle weapon, it cannot use its airways to speak or make vocalizations of any kind (though other forms of making noise work normally).",
+        "WeaponPropertiesThrottleTooltip": "A throttle weapon deals damage only when it is used to grapple a foe, automatically dealing damage with every successful grapple combat maneuver. All throttle weapons are also grapple weapons. While a target is successfully being grappled with a throttle weapon, it cannot use its airways to speak or make vocalizations of any kind (though other forms of making noise work normally).",
         "WeaponPropertiesThrown": "Thrown",
         "WeaponPropertiesThrownTooltip": "Ranged weapons that must be thrown and melee weapons that can be thrown as a ranged attack have the thrown special property and a listed range increment. You apply your Strength modifier to damage rolls for thrown attacks. After you throw a weapon, it lands near your target and you must recover it if you want to attack with it again.",
         "WeaponPropertiesThruster": "Thruster",
@@ -2995,5 +3334,64 @@
         "WeaponsPropertiesConceal": "Conceal",
         "WeaponsPropertiesConcealTooltip": "A weapon with the conceal special property is considered especially small or easy to hide for purposes of Slight of Hand’s hide object task, granting you a +4 circumstance bonus to skill checks to hide object.",
         "WillSave": "Will"
+    },
+    "TYPES": {
+        "Actor": {
+            "character": "Player Character",
+            "drone": "Drone",
+            "hazard": "Hazard",
+            "npc": "Old Style NPC",
+            "npc2": "Non-player Character",
+            "starship": "Starship",
+            "vehicle": "Vehicle"
+        },
+        "Item": {
+            "actorResource": "Actor Resource",
+            "ammunition": "Ammunition",
+            "archetypes": "Archetype",
+            "asi": "Ability Score Increase",
+            "augmentation": "Augmentation",
+            "chassis": "Drone Chassis",
+            "class": "Class",
+            "consumable": "Consumable",
+            "container": "Container",
+            "effect": "Effect",
+            "equipment": "Armor",
+            "feat": "Feature",
+            "fusion": "Weapon Fusion",
+            "goods": "Goods",
+            "hybrid": "Hybrid",
+            "magic": "Magic",
+            "mod": "Drone Mod",
+            "race": "Species",
+            "shield": "Shield",
+            "spell": "Spell",
+            "starshipAblativeArmor": "Starship Ablative Armor",
+            "starshipAction": "Starship Action",
+            "starshipArmor": "Starship Armor",
+            "starshipComputer": "Starship Computer",
+            "starshipCrewQuarter": "Starship Crew Quarter",
+            "starshipDefensiveCountermeasure": "Starship Defensive Countermeasure",
+            "starshipDriftEngine": "Starship Drift Engine",
+            "starshipExpansionBay": "Starship Expansion Bay",
+            "starshipFortifiedHull": "Starship Fortified Hull",
+            "starshipFrame": "Starship Frame",
+            "starshipOtherSystem": "Starship Other System",
+            "starshipPowerCore": "Starship Power Core",
+            "starshipReinforcedBulkhead": "Starship Reinforced Bulkhead",
+            "starshipSecuritySystem": "Starship Security System",
+            "starshipSensor": "Starship Sensor",
+            "starshipShield": "Starship Shield",
+            "starshipSpecialAbility": "Starship Special Ability",
+            "starshipThruster": "Starship Thruster",
+            "starshipWeapon": "Starship Weapon",
+            "technological": "Technological",
+            "theme": "Theme",
+            "upgrade": "Armor Upgrade",
+            "vehicleAttack": "Vehicle Attack",
+            "vehicleSystem": "Vehicle System",
+            "weapon": "Weapon",
+            "weaponAccessory": "Weapon Accessory"
+        }
     }
 }

@@ -2,6 +2,11 @@
   "_id": "epd9RUmCm20NBKBt",
   "name": "Combat Tracking (Ex)",
   "type": "feat",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "systems/sfrpg/icons/classes/combat_tracking.webp",
   "system": {
     "type": "",
@@ -9,6 +14,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "move",
@@ -17,9 +23,10 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -30,17 +37,63 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.cM54UpNXExgDSbq4]{Exocortex}</p>\n<p>Your exocortex provides you with enhanced combat ability, granting you proficiency with heavy armor and longarms. At 3rd level, you gain weapon specialization in longarms just as if your class granted proficiency. As a move action during combat, you can designate a foe for your exocortex to track. As long as that target is in sight, the exocortex feeds you telemetry, vulnerabilities, and combat tactics, allowing you to make attacks against that target as if your base attack bonus from your mechanic levels were equal to your mechanic level. Designating another target causes you to immediately lose this bonus against the previous target.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.cM54UpNXExgDSbq4]{Exocortex}</p>\n<p>Your exocortex provides you with enhanced combat ability, granting you proficiency with heavy armor and longarms. At 3rd level, you gain weapon specialization in longarms just as if your class granted proficiency. As a move action during combat, you can designate a foe for your exocortex to track. As long as that target is in sight, the exocortex feeds you telemetry, vulnerabilities, and combat tactics, allowing you to make attacks against that target as if your base attack bonus from your mechanic levels were equal to your mechanic level. Designating another target causes you to immediately lose this bonus against the previous target.</p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
+    "details": {
+      "category": "classFeature",
+      "combat": false,
+      "specialAbilityType": "ex"
+    },
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
     "formula": "",
+    "isActive": null,
     "modifiers": [
       {
         "_id": "2a7ac6e5-3cbd-4715-a59b-24e0cbc92450",
@@ -49,8 +102,9 @@
         "condition": "",
         "effectType": "base-attack-bonus",
         "enabled": true,
+        "max": 0,
         "modifier": "-floor(@classes.mechanic.levels * 0.75) + @classes.mechanic.levels",
-        "modifierType": "formula",
+        "modifierType": "constant",
         "notes": "",
         "source": "",
         "subtab": "misc",
@@ -67,19 +121,20 @@
       "charged": false,
       "value": null
     },
-    "requirements": "1st Level",
+    "requirements": "1st Level Mechanic",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "Exocortex",
+    "source": "CRB pg. 79",
     "target": {
       "type": "",
       "value": ""
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     }

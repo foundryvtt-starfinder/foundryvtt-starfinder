@@ -2,6 +2,11 @@
   "_id": "k472fuofunySUmiR",
   "name": "Time Loop, Mass",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "icons/magic/time/arrows-circling-green.webp",
   "system": {
     "type": "",
@@ -44,7 +49,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>This spell functions as @UUID[Compendium.sfrpg.spells.pylej6Cq7ZTHRTZS]{Time Loop}, except as noted above.</p><h2>Time Loop</h2><p>You immerse a creature in a time loop of your creation. The target sees and reacts to events that no longer coincide with the current timeline, becoming confused for 1 round and entangled for the duration. If the target succeeds at a Will saving throw to ignore the time loop, they’re instead off-target for the duration.</p>"
+      "value": "<p>This spell functions as @UUID[Compendium.sfrpg.spells.Item.pylej6Cq7ZTHRTZS]{Time Loop}, except as noted above.</p><h2>Time Loop</h2><p>You immerse a creature in a time loop of your creation. The target sees and reacts to events that no longer coincide with the current timeline, becoming confused for 1 round and entangled for the duration. If the target succeeds at a Will saving throw to ignore the time loop, they’re instead off-target for the duration.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -86,8 +91,8 @@
     },
     "dismissible": false,
     "duration": {
-      "units": "",
-      "value": "1 round/level"
+      "units": "round",
+      "value": "@details.cl.value"
     },
     "formula": "",
     "isActive": null,
@@ -105,10 +110,7 @@
       "prepared": false
     },
     "range": {
-      "additional": "5 ft.",
-      "per": "2 levels",
-      "units": "ft",
-      "value": 25
+      "units": "close"
     },
     "rollNotes": "",
     "save": {

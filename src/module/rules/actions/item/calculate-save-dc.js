@@ -8,6 +8,7 @@ export default function(engine) {
         const data = itemData.system;
 
         const actor = fact.owner.actor;
+        if (!actor) return fact;
         const actorData = fact.owner.actorData;
         const classes = actor.items.filter(item => item.type === "class");
 
@@ -56,7 +57,7 @@ export default function(engine) {
 
                     const rollResult = DiceSFRPG.resolveFormulaWithoutDice(dcFormula, rollContext, {logErrors: false});
                     if (!rollResult.hadError) {
-                        item.labels.save = `DC ${rollResult.total || ""} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}`;
+                        item.labels.save = `DC ${rollResult.total >= 0 ? rollResult.total : ""} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}`;
                         item.labels.saveFormula = dcFormula;
                         computedSave = true;
                     } else {

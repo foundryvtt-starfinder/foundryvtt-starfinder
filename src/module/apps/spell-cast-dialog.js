@@ -138,7 +138,7 @@ export class SpellCastDialog extends Dialog {
 
         // Render the Spell casting template
         const html = await renderTemplate("systems/sfrpg/templates/apps/spell-cast.hbs", {
-            item: item.system,
+            item: item,
             hasSlots: spellLevels.length > 0,
             consume: spellLevels.length > 0,
             spellLevels,

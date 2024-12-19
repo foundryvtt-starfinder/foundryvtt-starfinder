@@ -1,13 +1,34 @@
 {
   "_id": "tRuFQ9dp1Z0HzqSh",
   "name": "Nanite Patch, Mk 3",
-  "type": "technological",
+  "type": "consumable",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "",
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
+    "actionType": "heal",
+    "activation": {
+      "type": "action",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "",
+      "shapable": false,
+      "shape": "",
+      "units": "ft",
+      "value": ""
+    },
+    "attackBonus": 0,
     "attributes": {
       "ac": {
         "value": ""
@@ -32,28 +53,104 @@
       "max": 0,
       "value": 0
     },
+    "chatFlavor": "",
+    "consumableType": "other",
+    "container": {
+      "contents": [],
+      "includeContentsInWealthCalculation": 1,
+      "isOpen": true,
+      "storage": [
+        {
+          "type": "slot",
+          "acceptsType": [
+            "spell"
+          ],
+          "affectsEncumbrance": false,
+          "amount": 0,
+          "subtype": "spellSlot",
+          "weightProperty": "bulk"
+        }
+      ]
+    },
     "critical": {
+      "effect": "",
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "",
+          "formula": "6d6",
+          "group": null,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": true,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>As a standard action, you can place a nanite patch onto yourself (if you are a construct), an adjacent construct, or a piece of technological equipment you or an adjacent creature are carrying; this restores a number of Hit Points to you or that creature or object based on the patch’s model.</p>\n<p>Restores 6d6 hp</p>"
     },
+    "descriptors": [],
+    "duration": {
+      "units": "text",
+      "value": ""
+    },
+    "equippable": false,
     "equipped": false,
+    "formula": "",
     "hands": 0,
     "identified": false,
+    "isActive": null,
     "level": 9,
     "modifiers": [],
     "price": 1950,
     "quantity": 1,
+    "quantityPerPack": 1,
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "none",
+      "value": ""
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "",
+      "dc": "",
+      "descriptor": "negate"
+    },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
     "source": "AA3 pg. 89",
+    "target": {
+      "type": "",
+      "value": ""
+    },
     "usage": {
       "per": "",
       "value": 0
+    },
+    "uses": {
+      "autoDestroy": true,
+      "autoUse": true,
+      "max": "1",
+      "per": "charges",
+      "value": 1
     }
   }
 }

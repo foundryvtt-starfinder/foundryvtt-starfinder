@@ -2,6 +2,11 @@
   "_id": "GXYWlBuSrRRoLogX",
   "name": "Control Gravity",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "systems/sfrpg/icons/spells/control_gravity.webp",
   "system": {
     "type": "",
@@ -22,7 +27,8 @@
     },
     "area": {
       "effect": "",
-      "shape": "shapable",
+      "shapable": true,
+      "shape": "cube",
       "units": "ft",
       "value": 10
     },
@@ -44,8 +50,8 @@
     "descriptors": [],
     "dismissible": true,
     "duration": {
-      "units": "",
-      "value": "10 minute/level (D)"
+      "units": "minute",
+      "value": "@details.cl.value*10"
     },
     "formula": "",
     "level": 6,
@@ -61,10 +67,7 @@
       "prepared": false
     },
     "range": {
-      "additional": "10 ft.",
-      "per": "level",
-      "units": "ft",
-      "value": 100
+      "units": "medium"
     },
     "save": {
       "type": "fort",

@@ -2,6 +2,11 @@
   "_id": "THcYSxstPHfEBnbB",
   "name": "Electron Crystal, Greater",
   "type": "weapon",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "icons/commodities/gems/gem-faceted-cushion-teal.webp",
   "system": {
     "type": "",
@@ -19,6 +24,7 @@
     "ammunitionType": "",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": 0
@@ -71,23 +77,8 @@
       "parts": []
     },
     "damage": {
-      "parts": [
-        {
-          "name": "",
-          "formula": "4d4",
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
-            "cold": false,
-            "electricity": true,
-            "fire": false,
-            "healing": false,
-            "piercing": false,
-            "slashing": false,
-            "sonic": false
-          }
-        }
-      ]
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -108,7 +99,37 @@
     "identified": true,
     "isActive": null,
     "level": 15,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "b3d52b27-243b-43a4-ad94-fc872701eb60",
+        "name": "Electron Crystal, Greater",
+        "type": "untyped",
+        "condition": "",
+        "damage": {
+          "damageGroup": null,
+          "damageTypes": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": true,
+            "fire": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        "effectType": "all-damage",
+        "enabled": true,
+        "limitTo": "container",
+        "max": 16,
+        "modifier": "4d4",
+        "modifierType": "damageSection",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "price": 93000,
     "proficient": true,
     "properties": {
@@ -149,6 +170,7 @@
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
       "hybrid": false,
       "hydrodynamic": false,
@@ -220,7 +242,11 @@
       "dc": "",
       "descriptor": "negate"
     },
-    "source": "ARM, p. 49",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
+    "source": "AR pg. 49",
     "special": "",
     "specialMaterials": {
       "abysium": false,
