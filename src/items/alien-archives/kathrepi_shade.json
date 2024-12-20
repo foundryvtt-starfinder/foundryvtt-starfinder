@@ -31,6 +31,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -53,6 +54,11 @@
           "value": "<p>Kathrepi shades can freely move around in the fourth dimension, remaining only partially in three dimensions. When the kathrepi shade takes a guarded step or moves their speed as a move action, they can choose to gain or lose the incorporeal special quality at the end of that move action.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -60,6 +66,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -115,6 +122,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -204,6 +212,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -374,6 +383,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -396,6 +406,11 @@
           "value": "<p>When a kathrepi shade casts telekinetic projectile, they imbue the projectile with extra force by hurling it through the fourth dimension. The spell deals 2d6 bludgeoning damage instead of the usual 1d6 bludgeoning damage.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -403,6 +418,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -464,6 +480,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -508,6 +525,7 @@
           "prepared": true
         },
         "prepared": true,
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -566,6 +584,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -664,6 +683,7 @@
           "prepared": true
         },
         "prepared": true,
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -722,6 +742,7 @@
         },
         "area": {
           "effect": "burst",
+          "shapable": false,
           "shape": "cone",
           "units": "ft",
           "value": 60
@@ -766,6 +787,7 @@
           "prepared": true
         },
         "prepared": true,
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -824,6 +846,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -868,6 +891,7 @@
           "prepared": true
         },
         "prepared": true,
+        "properties": {},
         "range": {
           "additional": "5 ft.",
           "per": "2 levels",
@@ -926,6 +950,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -970,6 +995,7 @@
           "prepared": true
         },
         "prepared": true,
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -1028,6 +1054,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -1072,6 +1099,7 @@
           "prepared": true
         },
         "prepared": true,
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -1130,6 +1158,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -1228,6 +1257,7 @@
           "prepared": true
         },
         "prepared": true,
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -1267,6 +1297,7 @@
     "name": "Kathrepi Shade",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -1278,6 +1309,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -1298,11 +1330,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -1316,13 +1366,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
       "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "tint": "#ffffff"
     },
     "width": 1
   },

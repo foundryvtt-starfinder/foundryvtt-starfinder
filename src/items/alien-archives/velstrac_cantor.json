@@ -31,6 +31,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -53,6 +54,11 @@
           "value": ""
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -60,6 +66,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -115,6 +122,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -195,6 +203,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -342,6 +351,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -364,6 +374,11 @@
           "value": "<p>A cantor’s appearance causes shock and sympathetic pain. A creature that fails its save against this mind-affecting fear effect is shaken for 1 round.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": ""
@@ -371,6 +386,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -425,6 +441,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -447,6 +464,11 @@
           "value": "<p>Once per minute as a full action, a cantor can mouth a soundless scream to create an illusory double of itself that is Large and even more horrifying. Creatures within 30 feet of and able to see the cantor must succeed at a DC 18 Will saving throw or believe this illusory double to be real. At the same moment, the cantor becomes invisible (as per greater invisibility). These effects last as long as at least one creature believes the illusion, but no longer than 1 minute. Both effects also end if the cantor is ever more than 30 feet away from the illusion at the end of its turn. The illusion appears to attack each round on the cantor’s turn, and the cantor usually attacks the same target, gaining the benefits of both invisibility and stealth. After a creature attacks the illusion, the creature can attempt another save to disbelieve the effect. A creature exposed to this effect is immune to the same cantor’s waking nightmare for 24 hours.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": ""
@@ -454,6 +476,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -514,6 +537,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -557,6 +581,7 @@
           "mode": "innate",
           "prepared": true
         },
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -614,6 +639,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -657,6 +683,7 @@
           "mode": "innate",
           "prepared": true
         },
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -714,6 +741,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -757,6 +785,7 @@
           "mode": "innate",
           "prepared": true
         },
+        "properties": {},
         "range": {
           "additional": "5",
           "per": "2 levels",
@@ -814,6 +843,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -857,6 +887,7 @@
           "mode": "always",
           "prepared": true
         },
+        "properties": {},
         "range": {
           "additional": "5 ft",
           "per": "level",
@@ -888,6 +919,7 @@
     "name": "Velstrac, Cantor",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -899,6 +931,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -919,11 +952,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -937,13 +988,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
       "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "tint": "#ffffff"
     },
     "width": 1
   },

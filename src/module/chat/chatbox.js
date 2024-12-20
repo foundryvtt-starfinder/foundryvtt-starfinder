@@ -129,7 +129,7 @@ export default class SFRPGCustomChatMessage {
             speaker: data.speaker,
             content: cardContent, // + explainedRollContent + (options.additionalContent || ""),
             rollMode: rollMode,
-            roll: roll,
+            rolls: [roll],
             type: CONST.CHAT_MESSAGE_STYLES.ROLL,
             sound: CONFIG.sounds.dice,
             rollType: data.rollType,

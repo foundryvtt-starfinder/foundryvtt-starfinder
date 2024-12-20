@@ -21,8 +21,10 @@
       "condition": "",
       "cost": 1
     },
+    "ammunitionType": "",
     "area": {
       "effect": "burst",
+      "shapable": false,
       "shape": "sphere",
       "units": "ft",
       "value": 10
@@ -55,6 +57,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": 1,
       "isOpen": true,
       "storage": [
         {
@@ -86,8 +89,11 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>Though scientists understand little about how a vracinea’s paralyzing scent affects the brain, weapon designers across the galaxy have been inspired by its effects and have replicated them with custom hybrid grenades. When it bursts, a pheromone grenade deals no damage, instead dispersing a powerful cocktail of supercharged pheromones and magically modified mind-altering chemicals in the listed blast radius. Each creature in the radius that inhales the pheromones (which bypass even active @UUID[Compendium.sfrpg.rules.Item.WP7hddXW4mLXXXOg]{Environmental protections} from a suit of armor) must attempt a Will saving throw. A creature that fails its save is @UUID[Compendium.sfrpg.conditions.Item.7PPRS6krnvaTHbxh]{Fascinated} for a number of rounds equal to the grenade’s mark number as they gaze in wonder at sparkling trails that only they can see. A creature that succeeds at its save is immune to the effects of pheromone grenades for 24 hours. This is a mind-affecting effect.</p>"
     },
@@ -96,10 +102,12 @@
       "units": "",
       "value": ""
     },
+    "equippable": false,
     "equipped": false,
     "formula": "",
     "identified": true,
     "isActive": null,
+    "isEquipment": true,
     "level": 4,
     "modifiers": [],
     "price": 325,
@@ -192,12 +200,14 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
       "value": 20
     },
+    "rollNotes": "",
     "save": {
       "type": "will",
       "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
@@ -205,6 +215,7 @@
     },
     "source": "AA3 pg. 131",
     "special": "",
+    "specialMaterials": {},
     "target": {
       "type": "",
       "value": ""

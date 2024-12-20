@@ -21,8 +21,10 @@
       "condition": "",
       "cost": 1
     },
+    "ammunitionType": "",
     "area": {
       "effect": "burst",
+      "shapable": false,
       "shape": "sphere",
       "units": "ft",
       "value": 10
@@ -55,6 +57,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": 1,
       "isOpen": true,
       "storage": [
         {
@@ -84,8 +87,11 @@
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>Lumocantha dye can be weaponized easily. A creature that fails its Reflex saving throw against a dye grenade takes additional damage from laser weapons equal to half the dye grenade’s item level (minimum 1). This lasts until the dye is removed, usually by changing armor or clothing or by spending 1d4 hours cleaning off the stain.</p>"
     },
@@ -94,10 +100,12 @@
       "units": "",
       "value": ""
     },
+    "equippable": false,
     "equipped": false,
     "formula": "",
     "identified": true,
     "isActive": null,
+    "isEquipment": true,
     "level": 1,
     "modifiers": [],
     "price": 50,
@@ -190,12 +198,14 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
       "value": 20
     },
+    "rollNotes": "",
     "save": {
       "type": "reflex",
       "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
@@ -203,6 +213,7 @@
     },
     "source": "AA4 pg. 69",
     "special": "",
+    "specialMaterials": {},
     "target": {
       "type": "",
       "value": ""

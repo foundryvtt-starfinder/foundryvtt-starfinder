@@ -35,6 +35,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -115,6 +116,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -265,6 +267,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -287,6 +290,11 @@
           "value": "<p>Whenever a polyphonic plasm would take sonic damage, it absorbs that energy instead. The stored vibrations amplify the creature’s sonic waves, increasing damage dealt by the ooze’s next pseudopod attack before the end of its next turn by 2d6.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -310,6 +318,7 @@
             "valueAffected": ""
           }
         ],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -364,6 +373,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -386,6 +396,11 @@
           "value": "<p>(EX)</p>\n<p>As a standard action, the creature can move up to its speed, moving into or through the space of any creatures that are at least one size smaller than itself without penalty. Every creature in the engulfing creature’s path is automatically engulfed, with no attack roll needed. A targeted creature can attempt a Reflex saving throw to avoid being engulfed; if it attempts this save, it can’t make an attack of opportunity against the engulfing creature due to that creature’s movement. On a successful save, the target is pushed back or aside (target’s choice) as the engulfing creature continues to move. An engulfed creature gains the @UUID[Compendium.sfrpg.conditions.Item.XgK4EdO5D3Fj3iWz]{Pinned} condition, takes the listed damage at the beginning of each turn it is engulfed, is in danger of suffocating if it doesn’t have @UUID[Compendium.sfrpg.rules.Item.WP7hddXW4mLXXXOg]{Environmental protections}, and is trapped within the engulfing creature’s body until it is no longer @UUID[Compendium.sfrpg.conditions.Item.XgK4EdO5D3Fj3iWz]{Pinned}. An engulfed creature moves with the engulfing creature; this movement does not provoke attacks of opportunity against the engulfed creature. A creature can engulf one creature that is one size smaller than itself, up to two creatures that are two sizes smaller, or up to four creatures that are three sizes smaller.</p>\n<hr />"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": ""
@@ -393,6 +408,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -444,6 +460,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -466,6 +483,11 @@
           "value": "<p>When the polyphonic plasm deals sonic damage to the creature it has engulfed, it deals an equal amount of sonic damage to the creature’s armor as well. This damage ignores half of the armor’s hardness, rounded up.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -473,6 +495,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -507,6 +530,7 @@
     "name": "Polyphonic Plasm",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -518,6 +542,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 2,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -538,11 +563,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -556,13 +599,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
       "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "tint": "#ffffff"
     },
     "width": 2
   },

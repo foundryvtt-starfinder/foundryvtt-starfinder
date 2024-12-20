@@ -16,9 +16,15 @@
     "activeDuration": {
       "activationTime": 0,
       "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "parent"
+      },
       "unit": "permanent",
       "value": 0
     },
+    "context": {},
     "critical": {
       "effect": "",
       "parts": []
@@ -28,6 +34,8 @@
     },
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.rules.Item.0yJjfyvWg5pDLcVR]{Conditions}</p>\n<hr />\n<p>You are restrained by a creature, effect, or trap.</p>\n<p>You can’t move, and you take a –2 penalty to your Armor Class, attack rolls, Reflex saving throws, initiative checks, and Dexterity-based skill and ability checks, except those made to grapple your opponent in turn or to escape a grapple (see Grapple on page 246).</p>\n<p>In addition, you can’t take actions that require two hands (or other limbs) to perform.</p>\n<p>You can’t make attacks of opportunity.</p>\n<p>You can’t use Stealth to hide from the creature grappling you, even if a special ability allows you to hide when you normally couldn’t.</p>\n<p>If you become invisible, through a spell or other ability, you gain a +2 circumstance bonus to your check to escape being @UUID[Compendium.sfrpg.conditions.Item.4AkWDHGM6gHDepHN]{Grappled}, but you receive no other benefit.</p>"
     },
@@ -122,7 +130,9 @@
       }
     ],
     "requirements": "Condition",
+    "showOnToken": true,
     "source": "CRB.276",
-    "sourceActorId": null
+    "sourceActorId": null,
+    "turnEvents": []
   }
 }
