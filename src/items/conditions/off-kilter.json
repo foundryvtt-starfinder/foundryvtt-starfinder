@@ -16,9 +16,15 @@
     "activeDuration": {
       "activationTime": 0,
       "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "parent"
+      },
       "unit": "permanent",
       "value": 0
     },
+    "context": {},
     "critical": {
       "effect": "",
       "parts": []
@@ -28,6 +34,8 @@
     },
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.rules.Item.0yJjfyvWg5pDLcVR]{Conditions}</p>\n<hr />\n<p>You are disoriented and floating in zero gravity.</p>\n<p>You can’t take move actions to move your speed, crawl, or take a guarded step.</p>\n<p>You are @UUID[Compendium.sfrpg.conditions.Item.MZ8OoH1GE9qDMyCD]{Flat-Footed} and take a –2 penalty to attack rolls.</p>\n<p>You must use a method of propulsion to right yourself or grab a stabilizing object such as a wall or ladder (usually as a move action) in order to end this condition.</p>\n<p>See Zero Gravity on page 402 for more information.</p>"
     },
@@ -64,7 +72,9 @@
       }
     ],
     "requirements": "Condition",
+    "showOnToken": true,
     "source": "CRB.276",
-    "sourceActorId": null
+    "sourceActorId": null,
+    "turnEvents": []
   }
 }

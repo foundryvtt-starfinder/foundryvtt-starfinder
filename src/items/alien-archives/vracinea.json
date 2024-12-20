@@ -34,6 +34,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -56,6 +57,11 @@
           "value": "<p>A vracinea constantly exudes a sweet odor to a radius of 15 feet. Any living creature with a sense of smell that enters or starts its turn in this area of effect must succeed at a DC 13 Fortitude save or be paralyzed for 1 round. Once a creature successfully saves against this effect, it is immune to the same vracinea’s paralyzing scent for 24 hours. This is an inhaled @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Poison} effect.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": ""
@@ -63,6 +69,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -118,6 +125,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -199,6 +207,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -346,6 +355,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "other",
           "units": "ft",
           "value": 120
@@ -368,6 +378,11 @@
           "value": "<p>Each living creature within 120 feet of a vracinea that can see its violet blossoms must succeed at a DC 13 Will save each round at the beginning of its turn or be drawn toward the plant. An affected target must use 2 move actions each round to move directly toward the vracinea at its full speed, and it can’t move in such a way that it loses line of sight to the vracinea. If the only path to the vracinea passes through terrain that could harm the target (such as a river of lava or a bed of sharp thorns), the target can attempt an additional saving throw to shake off the effect before moving into the dangerous area. An affected creature within 5 feet of the vracinea can take no actions and offers no resistance to the vracinea’s attacks. Once a creature successfully saves against this effect, it is immune to the same vracinea’s lure ability for 24 hours. This is a mind-affecting, @UUID[Compendium.sfrpg.rules.Item.PqV3OCbUTyk2upPD]{Sense-dependent} effect.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": ""
@@ -375,6 +390,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -409,6 +425,7 @@
     "name": "Vracinea",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -420,6 +437,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 2,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -440,11 +458,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -458,13 +494,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
       "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "tint": "#ffffff"
     },
     "width": 2
   },

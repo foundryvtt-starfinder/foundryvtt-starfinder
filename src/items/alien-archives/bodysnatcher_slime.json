@@ -31,6 +31,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -53,6 +54,11 @@
           "value": "<p>Any damage dealt to a bodysnatcher slime’s host is split between the host and the slime. If a bodysnatcher slime takes 16 or more damage while in a host, the slime leaves the host, moving into an adjacent square, and cannot infest that host again for 24 hours.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -60,6 +66,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -115,6 +122,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -196,6 +204,7 @@
         "fusions": [],
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -340,6 +349,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -362,6 +372,11 @@
           "value": "<p>If a bodysnatcher slime starts its turn grappling a Small, Medium, or Large living creature, the slime can distribute itself throughout that creature’s body as a swift action (Fortitude DC 14 negates). While infesting a creature in this way, a bodysnatcher slime has total cover and can take no actions. However, it controls the infested creature’s (host’s) actions, including using equipment and weapons (using the slime’s attack bonus), using the slime’s or its host’s saving throw bonuses (whichever is higher), using the host’s extraordinary abilities, and using the slime’s or its host’s natural attacks. After 24 hours inside a body, a bodysnatcher slime must succeed at a DC 14 Fortitude save or be forced out of the body and be unable to infest that same creature for 24 hours. If it succeeds at the save, it can continue infesting that creature for another 24 hours. A creature adjacent to a @UUID[Compendium.sfrpg.conditions.Item.XgK4EdO5D3Fj3iWz]{Pinned} or helpless host can attempt a DC 15 Medicine check as a full action to force the slime to vacate the host and move into an adjacent square.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -369,6 +384,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -403,6 +419,7 @@
     "name": "Bodysnatcher Slime",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -414,6 +431,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -434,11 +452,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -452,13 +488,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
       "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "tint": "#ffffff"
     },
     "width": 1
   },

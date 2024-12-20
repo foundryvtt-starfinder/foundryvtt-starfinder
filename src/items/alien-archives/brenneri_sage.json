@@ -35,6 +35,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -116,6 +117,7 @@
         "fusions": [],
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 90,
@@ -261,6 +263,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -350,6 +353,7 @@
         "fusions": [],
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 350,
@@ -443,6 +447,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -465,6 +470,11 @@
           "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.Hj7rGHmzQGP8rEGB]{Empath}</p>\n<p>As a full action, you can attempt a Sense Motive check to read the emotions of a particular creature (DC = 20 or 10 + its Bluff modifier, whichever is higher). If you succeed, you learn its general disposition and attitude toward creatures within 30 feet of it, and you gain a +2 circumstance bonus to Bluff, Diplomacy, Intimidate, and Sense Motive checks against that creature for 1 hour. Whether you succeed or fail, after opening your mind to read emotions, you take a –2 penalty to saving throws against mind-affecting effects for 1 minute.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": ""
@@ -472,6 +482,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -526,6 +537,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -548,6 +560,11 @@
           "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.Hj7rGHmzQGP8rEGB]{Empath}</p>\n<p>You can use your mindlink ability on the same creature as many times per day as you wish, and the communication can be both ways, though the maximum of 10 minutes of communication per round still applies.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": ""
@@ -555,6 +572,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -610,6 +628,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -707,6 +726,7 @@
         "modifiers": [],
         "price": 1220,
         "proficient": true,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
@@ -827,6 +847,7 @@
         },
         "area": {
           "effect": "burst",
+          "shapable": false,
           "shape": "cone",
           "units": null,
           "value": null
@@ -870,6 +891,7 @@
           "mode": null,
           "prepared": true
         },
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -927,6 +949,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -976,6 +999,7 @@
           "mode": null,
           "prepared": true
         },
+        "properties": {},
         "range": {
           "additional": "5",
           "per": "2 levels",
@@ -1033,6 +1057,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -1076,6 +1101,7 @@
           "mode": "always",
           "prepared": true
         },
+        "properties": {},
         "range": {
           "additional": "5",
           "per": "2 levels",
@@ -1133,6 +1159,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -1176,6 +1203,7 @@
           "mode": "always",
           "prepared": true
         },
+        "properties": {},
         "range": {
           "additional": "10",
           "per": "level",
@@ -1233,6 +1261,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "touch",
           "value": null
@@ -1276,6 +1305,7 @@
           "mode": "",
           "prepared": false
         },
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -1307,6 +1337,7 @@
     "name": "Brenneri Sage",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -1318,6 +1349,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -1338,11 +1370,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -1356,13 +1406,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
       "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "tint": "#ffffff"
     },
     "width": 1
   },

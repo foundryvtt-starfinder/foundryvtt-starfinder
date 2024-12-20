@@ -39,6 +39,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -61,6 +62,11 @@
           "value": "<p>Swarms take damage from weapons differently depending on how the weapon targets them.</p>\n<p>A swarm is immune to attacks and effects that targets a single creature (including single-target spells), with the exception of @UUID[Compendium.sfrpg.rules.Item.PqV3OCbUTyk2upPD]{Mind-affecting effects} if the swarm has an Intelligence score and an ability similar to the formian’s hive mind (see page 50).</p>\n<p>A swarm takes half again as much damage (+50%) from effects that affect all targets in an area, such as grenades, blast and explode weapons, and many evocation spells. A swarm takes normal damage from an attack or effect that affects multiple targets (including lines and fully automatic mode attacks). For the purpose of automatic fire, the swarm counts as five targets. For example, if an automatic attack is made using 12 rounds of ammunition, it can attack a maximum of six targets, so it can damage a swarm normally. However, if two other targets are closer to the attacker than the swarm, they must be attacked first, leaving only four attacks to target the swarm, so it takes no damage.</p>\n<p><em>Format</em>: <strong>Defensive Abilities</strong> swarm defenses.<span id=\"ctl00_MainContent_DataListRulesAll_ctl57_LabelName\"></span></p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -68,6 +74,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -127,6 +134,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -149,6 +157,11 @@
           "value": "<p>The creature can nauseate targets that it damages. A living creature that takes damage from a creature with the distraction ability is @UUID[Compendium.sfrpg.conditions.Item.LoRydw1D4bqlbkA2]{Nauseated} for 1 round; the target can negate the effect with a successful Fortitude save at the listed DC.</p>\n<p><em>Format</em>:<strong>Offensive Abilities</strong> distraction (DC 15).</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -156,6 +169,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -215,6 +229,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -253,6 +268,11 @@
           "value": "<p>The creature deals automatic damage to any creature whose space it occupies at the end of its turn, with no attack roll needed. Swarm attacks are not subject to a miss chance for concealment or cover.</p>\n<p><em>Format</em>: <strong>Melee</strong> swarm attack (1d6+2 P).</p>\n<p><em>Guidelines</em>: To determine the amount of damage a creature of CR 6 or lower deals with swarm attack, use the value listed in the CR 6 Three Attacks entry on its appropriate array table, lowering the additional damage from that CR to match its actual CR. For all other creatures, use the Four Attacks entry for its CR in the corresponding array table.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -260,6 +280,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -314,6 +335,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -336,6 +358,11 @@
           "value": "<h3>Flying Viper Eel Venom</h3>\n<p><strong>Type</strong>@UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Poisons} (injury);<strong>Save</strong> Fortitude DC 17</p>\n<p><strong>Track</strong> Dexterity (special);<strong>Frequency</strong> 1/round for 6 rounds</p>\n<p><strong>Effect</strong> progression track is Sluggish–Stiffened–@UUID[Compendium.sfrpg.conditions.Item.aAQ6SW6iK0EVq8Ce]{Staggered}–@UUID[Compendium.sfrpg.conditions.Item.aAQ6SW6iK0EVq8Ce]{Staggered}; the second staggered functions as an end state.</p>\n<p><strong>Cure</strong> 2 consecutive saves</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -343,6 +370,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -377,6 +405,7 @@
     "name": "Flying Viper Eel",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -388,6 +417,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -408,11 +438,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -426,13 +474,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
       "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "tint": "#ffffff"
     },
     "width": 1
   },

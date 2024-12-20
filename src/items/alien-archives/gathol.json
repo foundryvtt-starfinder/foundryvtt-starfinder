@@ -106,6 +106,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -251,6 +252,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -520,6 +522,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -815,6 +818,7 @@
         "identified": true,
         "img": "systems/sfrpg/icons/equipment/weapons/incapacitator.webp",
         "isActive": null,
+        "isEquipment": true,
         "isOpen": true,
         "level": 3,
         "modifiers": [],
@@ -1067,6 +1071,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -1213,6 +1218,7 @@
             "valueAffected": ""
           }
         ],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -1339,6 +1345,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -1639,6 +1646,7 @@
         "modifiers": [],
         "price": 1450,
         "proficient": false,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
@@ -1706,12 +1714,28 @@
       "img": "icons/commodities/tech/smoke-spout-blue.webp",
       "system": {
         "type": "",
+        "ability": null,
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
         "allowedArmorType": "lightAndHeavy",
         "ammunitionType": "",
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": 0
+        },
         "armorType": "lightAndHeavy",
+        "attackBonus": 0,
         "attributes": {
           "ac": {
             "value": "5"
@@ -1736,6 +1760,7 @@
           "max": 20,
           "value": 20
         },
+        "chatFlavor": "",
         "container": {
           "contents": [],
           "includeContentsInWealthCalculation": true,
@@ -1743,11 +1768,13 @@
           "storage": []
         },
         "critical": {
+          "effect": "",
           "parts": []
         },
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -1755,19 +1782,48 @@
           "unidentified": "",
           "value": "<p>You can activate jump jets as part of a move action in order to fly during your movement. You can fly up to 30 feet (average maneuverability) with a maximum height of 10 feet, or you can fly up to 20 feet straight up. You must land at the end of your move action. Jump jets can’t lift you if you’re @UUID[Compendium.sfrpg.conditions.Item.OwZA6flUQPH0jPA0]{Encumbered}.</p>\n<p>This upgrade can be installed only in light or heavy armor.</p>"
         },
+        "descriptors": [],
+        "duration": {
+          "units": "text",
+          "value": null
+        },
         "equippable": false,
         "equipped": false,
+        "formula": "",
         "identified": true,
+        "isActive": null,
         "level": 2,
         "modifiers": [],
         "price": 1000,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
         "slots": 1,
         "source": "CRB pg. 205",
+        "target": {
+          "type": "",
+          "value": null
+        },
         "usage": {
           "per": "action",
           "value": 2
+        },
+        "uses": {
+          "max": null,
+          "per": null,
+          "value": null
         }
       }
     },
@@ -2329,6 +2385,7 @@
             "valueAffected": "sonic"
           }
         ],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -2476,6 +2533,7 @@
             "valueAffected": "int"
           }
         ],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -2675,6 +2733,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -2852,6 +2911,7 @@
         "identified": true,
         "img": "icons/weapons/misc/whip-red-yellow.webp",
         "isActive": null,
+        "isEquipment": true,
         "isOpen": true,
         "level": 3,
         "modifiers": [],
@@ -3014,6 +3074,7 @@
     "name": "Gathol",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -3030,6 +3091,7 @@
       }
     },
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -3050,11 +3112,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -3068,13 +3148,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
       "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "tint": "#ffffff"
     },
     "width": 1
   },
