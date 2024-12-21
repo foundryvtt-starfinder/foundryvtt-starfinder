@@ -264,12 +264,12 @@ export class DiceSFRPG {
                     title: flavor,
                     rollContext,
                     speaker,
+                    rollMode,
                     breakdown: preparedRollExplanation,
                     htmlData,
                     rollType: "normal",
                     rollOptions,
-                    rollDices: finalFormula.rollDices,
-                    rollMode: rollMode
+                    rollDices: finalFormula.rollDices
                 };
 
                 try {
