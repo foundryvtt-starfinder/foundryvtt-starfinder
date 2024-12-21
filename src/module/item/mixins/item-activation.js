@@ -60,7 +60,6 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
         updateData['system.isActive'] = active;
 
         const updatePromise = this.update(updateData);
-        const rollMode = game.settings.get("core", "rollMode");
 
         if (active || this.system.duration.value || this.system.uses.max > 0) {
             updatePromise.then(() => {
@@ -97,7 +96,6 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                         type: CONST.CHAT_MESSAGE_STYLES.OTHER,
                         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
                         content: html,
-                        rollMode: rollMode,
                         flags: {
                             sfrpg: {
                                 item: this.uuid,
@@ -107,17 +105,6 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                     };
 
                     if (!active) chatData.action = "SFRPG.ChatCard.ItemActivation.Deactivates";
-
-                    // Toggle default roll mode
-                    if (["gmroll", "blindroll"].includes(rollMode)) {
-                        chatData["whisper"] = ChatMessage.getWhisperRecipients("GM");
-                    }
-                    if (rollMode === "blindroll") {
-                        chatData["blind"] = true;
-                    }
-                    if (rollMode === "selfroll") {
-                        chatData["whisper"] = ChatMessage.getWhisperRecipients(game.user.name);
-                    }
 
                     ChatMessage.create(chatData, { displaySheet: false });
                 });

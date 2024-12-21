@@ -268,7 +268,8 @@ export class DiceSFRPG {
                     htmlData,
                     rollType: "normal",
                     rollOptions,
-                    rollDices: finalFormula.rollDices
+                    rollDices: finalFormula.rollDices,
+                    rollMode: rollMode
                 };
 
                 try {
@@ -770,6 +771,7 @@ export class DiceSFRPG {
                     tags: tags,
                     htmlData: htmlData,
                     rollType: "damage",
+                    rollMode: rollMode,
                     damageTypeString: damageTypeString
                 };
 
