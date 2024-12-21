@@ -1,23 +1,23 @@
 {
-  "_id": "vyMC9PXibwpv2TRW",
-  "name": "Lone Wolf",
+  "_id": "FSCLI7QpH84jIOiT",
+  "name": "Care For Others",
   "type": "feat",
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
     "systemVersion": "0.27.0"
   },
-  "img": "systems/sfrpg/icons/spells/vigilant_junkbot.webp",
+  "img": "systems/sfrpg/icons/feats/divine_blessing.webp",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "",
+    "actionType": "heal",
     "activation": {
-      "type": "",
+      "type": "action",
       "condition": "",
       "cost": 0
     },
@@ -25,8 +25,8 @@
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "",
-      "value": 0
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -35,7 +35,26 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "",
+          "formula": "3d8 + @abilities.wis.mod",
+          "group": null,
+          "isPrimarySection": true,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": true,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -43,7 +62,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>You know at least a little bit about handling every role on a starship, and you can sub in for certain tasks in a pinch. Whenever you need to attempt a skill check either during starship combat or to directly repair or otherwise maintain your starship, you can treat half your ranks in Piloting as your ranks in the appropriate skill for the check, if that would be better (since you effectively have ranks in the related skill, you are considered trained in the skill for the purposes of this check).</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.themes.Item.bmot9WYBrcTRDk9a]{Crisis Refugee}</p>\n<p>During your travels, you had to rely on others for safety and often returned the favor. You’ve learned the importance of caring for your fellow refugees and know how to knit their wounds when required. Once per day as a standard action, you can cast a 2nd-level @UUID[Compendium.sfrpg.spells.Item.nffP8Mq7rJ8Rskb9]{Mystic Cure} as a spell-like ability. At 16th level, this increases to twice per day.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -86,11 +105,11 @@
     "details": {
       "category": "themeFeature",
       "combat": false,
-      "specialAbilityType": ""
+      "specialAbilityType": "sp"
     },
     "duration": {
-      "units": "text",
-      "value": null
+      "units": "instantaneous",
+      "value": ""
     },
     "formula": "",
     "isActive": null,
@@ -99,29 +118,33 @@
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
+      "units": "touch",
       "value": null
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "6th Level - Ace Pilot",
+    "requirements": "12th Level (Crisis Refugee)",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
-    "source": "CRB pg. 29",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
+    "source": "DC pg. 38",
     "target": {
       "type": "",
-      "value": null
+      "value": "one living creature"
     },
     "uses": {
-      "max": 0,
-      "per": null,
-      "value": 0
+      "max": "1",
+      "per": "day",
+      "value": 1
     }
   }
 }

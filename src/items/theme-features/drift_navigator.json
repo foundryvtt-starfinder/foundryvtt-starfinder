@@ -1,13 +1,13 @@
 {
-  "_id": "vyMC9PXibwpv2TRW",
-  "name": "Lone Wolf",
+  "_id": "cBc0wGTrcAzJog5y",
+  "name": "Drift Navigator",
   "type": "feat",
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
     "systemVersion": "0.27.0"
   },
-  "img": "systems/sfrpg/icons/spells/vigilant_junkbot.webp",
+  "img": "systems/sfrpg/icons/classes/limited_ai.webp",
   "system": {
     "type": "",
     "ability": null,
@@ -25,8 +25,8 @@
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "",
-      "value": 0
+      "units": "none",
+      "value": null
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -43,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>You know at least a little bit about handling every role on a starship, and you can sub in for certain tasks in a pinch. Whenever you need to attempt a skill check either during starship combat or to directly repair or otherwise maintain your starship, you can treat half your ranks in Piloting as your ranks in the appropriate skill for the check, if that would be better (since you effectively have ranks in the related skill, you are considered trained in the skill for the purposes of this check).</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.themes.Item.hCftezts7oajma77]{Drift Crashed}</p>\n<p>You’ve seen more of the Drift than most people will in their entire lifetimes. Having spent so much time inside the transitive plane, you’ve developed an understanding of the mysterious and enigmatic ways of time and space. Although the realm is in a constant state of flux, your senses are attuned to the occasional landmark and biome that others would miss. Reduce the DC to skill checks to navigate while you’re in the Drift by 5. For all other Piloting skill checks undertaken in the Drift that don’t relate to navigation, you gain a +2 insight bonus or increase your existing insight bonus to Piloting checks by 1.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -86,42 +86,58 @@
     "details": {
       "category": "themeFeature",
       "combat": false,
-      "specialAbilityType": ""
+      "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "text",
-      "value": null
+      "units": "",
+      "value": ""
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "6bc41ca9-e97f-4020-93ed-9ba4e2813376",
+        "name": "Drift  Navigator",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "max": 0,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "Applies to all Piloting checks in the Drift unrelated to navigation.",
+        "source": "Drift Navigator",
+        "subtab": "misc",
+        "valueAffected": "pil"
+      }
+    ],
     "properties": {},
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
+      "units": "none",
       "value": null
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "6th Level - Ace Pilot",
+    "requirements": "12th Level (Drift Crashed)",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "CRB pg. 29",
+    "source": "DC pg. 39",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "uses": {
-      "max": 0,
-      "per": null,
-      "value": 0
+      "max": 1,
+      "per": "day",
+      "value": 1
     }
   }
 }

@@ -1,32 +1,32 @@
 {
-  "_id": "vyMC9PXibwpv2TRW",
-  "name": "Lone Wolf",
+  "_id": "n0OBLIbt36otgdZO",
+  "name": "Child of the Drift",
   "type": "feat",
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
     "systemVersion": "0.27.0"
   },
-  "img": "systems/sfrpg/icons/spells/vigilant_junkbot.webp",
+  "img": "systems/sfrpg/icons/feats/greater_shadow_infusion.webp",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
     "actionType": "",
     "activation": {
-      "type": "",
+      "type": "min",
       "condition": "",
-      "cost": 0
+      "cost": 10
     },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "",
-      "value": 0
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -35,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -43,7 +44,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>You know at least a little bit about handling every role on a starship, and you can sub in for certain tasks in a pinch. Whenever you need to attempt a skill check either during starship combat or to directly repair or otherwise maintain your starship, you can treat half your ranks in Piloting as your ranks in the appropriate skill for the check, if that would be better (since you effectively have ranks in the related skill, you are considered trained in the skill for the purposes of this check).</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.themes.Item.6G2ZAHPgD9t1MHiz]{Spectra Scion}</p>\n<p>You can draw considerable resolve from the Drift’s embrace. Up to twice per day, when you spend at least 10 minutes meditating in the vacuum of the Drift, you recover 1 Resolve Point. This doesn’t count as resting to regain Stamina Points.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -86,11 +87,11 @@
     "details": {
       "category": "themeFeature",
       "combat": false,
-      "specialAbilityType": ""
+      "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "text",
-      "value": null
+      "units": "instantaneous",
+      "value": ""
     },
     "formula": "",
     "isActive": null,
@@ -99,29 +100,33 @@
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
+      "units": "none",
       "value": null
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "6th Level - Ace Pilot",
+    "requirements": "18th Level (Spectra Scion)",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
-    "source": "CRB pg. 29",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
+    "source": "DC pg. 41",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "uses": {
-      "max": 0,
-      "per": null,
-      "value": 0
+      "max": "2",
+      "per": "day",
+      "value": 2
     }
   }
 }

@@ -1,13 +1,13 @@
 {
-  "_id": "vyMC9PXibwpv2TRW",
-  "name": "Lone Wolf",
+  "_id": "mUTcFl5z7lWe3zJj",
+  "name": "Live On",
   "type": "feat",
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
     "systemVersion": "0.27.0"
   },
-  "img": "systems/sfrpg/icons/spells/vigilant_junkbot.webp",
+  "img": "systems/sfrpg/icons/spells/control_gravity.webp",
   "system": {
     "type": "",
     "ability": null,
@@ -43,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>You know at least a little bit about handling every role on a starship, and you can sub in for certain tasks in a pinch. Whenever you need to attempt a skill check either during starship combat or to directly repair or otherwise maintain your starship, you can treat half your ranks in Piloting as your ranks in the appropriate skill for the check, if that would be better (since you effectively have ranks in the related skill, you are considered trained in the skill for the purposes of this check).</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.themes.Item.wwYMXd9g2OFoYJoB]{Void Nomad}</p>\n<p>You know that everything in the universe will eventually end; even the stars will burn out and die. You stubbornly insist on surviving long enough to see such wondrous sights, and though you know that might not be possible without achieving some form of immortality, you still hold on to your life-force dearly. You can’t gain negative levels, and you gain a +2 bonus to saving throws against death and negative energy effects.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -86,15 +86,31 @@
     "details": {
       "category": "themeFeature",
       "combat": false,
-      "specialAbilityType": ""
+      "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "text",
+      "units": "",
       "value": null
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "e639c4ef-d4f2-4478-8fe6-e35634be4f0b",
+        "name": "Live On (Death and Negative Energy)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "saves",
+        "enabled": true,
+        "max": 0,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "Live On (Theme Feature)",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "properties": {},
     "range": {
       "additional": "",
@@ -106,14 +122,14 @@
       "charged": false,
       "value": null
     },
-    "requirements": "6th Level - Ace Pilot",
+    "requirements": "6th Level (Void Nomad)",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "CRB pg. 29",
+    "source": "AP #45 pg. 53",
     "target": {
       "type": "",
       "value": null
