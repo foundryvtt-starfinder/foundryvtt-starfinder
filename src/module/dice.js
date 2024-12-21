@@ -767,11 +767,11 @@ export class DiceSFRPG {
                     title: finalFlavor,
                     rollContext:  rollContext,
                     speaker: speaker,
+                    rollMode: rollMode,
                     breakdown: preparedRollExplanation,
                     tags: tags,
                     htmlData: htmlData,
                     rollType: "damage",
-                    rollMode: rollMode,
                     damageTypeString: damageTypeString
                 };
 
