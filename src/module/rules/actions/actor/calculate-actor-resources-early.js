@@ -1,9 +1,9 @@
-import { SFRPGModifierType, SFRPGModifierTypes, SFRPGEffectType } from "../../../modifiers/types.js";
+import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
 
-export default function (engine) {
+export default function(engine) {
     engine.closures.add('calculateActorResources', (fact, context) => {
         const data = fact.data;
-        const actorResources = fact.actorResources.filter(x => x.data.data.stage !== "late");
+        const actorResources = fact.actorResources.filter(x => x.system.stage !== "late");
         const modifiers = fact.modifiers;
 
         const addModifier = (bonus, data, item, localizationKey) => {
@@ -19,7 +19,7 @@ export default function (engine) {
 
             let computedBonus = 0;
             try {
-                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
                 computedBonus = roll.total;
             } catch {
 
@@ -27,12 +27,12 @@ export default function (engine) {
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
-                    type: bonus.type.capitalize(),
+                    type: game.i18n.format(`SFRPG.ModifierType${bonus.type.capitalize()}`),
                     mod: computedBonus.signedString(),
                     source: bonus.name
                 }));
             }
-            
+
             return computedBonus;
         };
 
@@ -41,11 +41,11 @@ export default function (engine) {
         });
 
         for (const actorResource of actorResources) {
-            const resourceData = actorResource.data.data;
+            const resourceData = actorResource.system;
             if (resourceData.enabled && resourceData.type && resourceData.subType && (resourceData.base || resourceData.base === 0)) {
                 const modifierKey = `${resourceData.type}.${resourceData.subType}`;
                 const filteredMods = actorResourceMods.filter(mod => mod.valueAffected === modifierKey);
-                const processedMods = context.parameters.stackModifiers.process(filteredMods, context);
+                const processedMods = context.parameters.stackModifiers.process(filteredMods, context, {actor: fact.actor});
 
                 if (!data.resources) {
                     data.resources = {};
@@ -74,16 +74,15 @@ export default function (engine) {
                     // First apply all modifiers
                     const resourceMod = Object.entries(processedMods).reduce((sum, curr) => {
                         if (curr[1] === null || curr[1].length < 1) return sum;
-            
+
                         if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(curr[0])) {
                             for (const bonus of curr[1]) {
                                 sum += addModifier(bonus, data, finalActorResource, "SFRPG.ACTooltipBonus");
                             }
-                        }
-                        else {
+                        } else {
                             sum += addModifier(curr[1], data, finalActorResource, "SFRPG.ACTooltipBonus");
                         }
-            
+
                         return sum;
                     }, 0);
 
@@ -93,7 +92,7 @@ export default function (engine) {
                     if (resourceData.range.min || resourceData.range.min === 0) {
                         finalActorResource.value = Math.max(finalActorResource.value, resourceData.range.min);
                     }
-    
+
                     if (resourceData.range.max || resourceData.range.max === 0) {
                         finalActorResource.value = Math.min(finalActorResource.value, resourceData.range.max);
                     }
@@ -102,7 +101,7 @@ export default function (engine) {
                     if (resourceData.range.min || resourceData.range.min === 0) {
                         finalActorResource.value = Math.max(finalActorResource.value, resourceData.range.min);
                     }
-    
+
                     if (resourceData.range.max || resourceData.range.max === 0) {
                         finalActorResource.value = Math.min(finalActorResource.value, resourceData.range.max);
                     }
@@ -116,8 +115,7 @@ export default function (engine) {
                             for (const bonus of mod) {
                                 resourceMod = addModifier(bonus, data, finalActorResource, "SFRPG.ACTooltipBonus");
                             }
-                        }
-                        else {
+                        } else {
                             resourceMod = addModifier(mod, data, finalActorResource, "SFRPG.ACTooltipBonus");
                         }
 
@@ -125,7 +123,7 @@ export default function (engine) {
                         if (resourceData.range.min || resourceData.range.min === 0) {
                             finalActorResource.value = Math.max(finalActorResource.value, resourceData.range.min);
                         }
-        
+
                         if (resourceData.range.max || resourceData.range.max === 0) {
                             finalActorResource.value = Math.min(finalActorResource.value, resourceData.range.max);
                         }
@@ -133,7 +131,6 @@ export default function (engine) {
                 }
             }
         }
-
 
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] });

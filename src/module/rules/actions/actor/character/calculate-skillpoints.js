@@ -1,6 +1,6 @@
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../../modifiers/types.js";
 
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateSkillpoints", (fact, context) => {
         const data = fact.data;
         const skills = fact.data.skills;
@@ -28,29 +28,29 @@ export default function (engine) {
 
             let computedBonus = 0;
             try {
-                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
                 computedBonus = roll.total;
             } catch {}
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
-                    type: bonus.type.capitalize(),
+                    type: game.i18n.format(`SFRPG.ModifierType${bonus.type.capitalize()}`),
                     mod: computedBonus.signedString(),
                     source: bonus.name
                 }));
             }
-            
+
             return computedBonus;
         };
 
         const intModifier = data.abilities.int.mod;
-        
+
         // Iterate through any modifiers that grant the character additional skillpoints to distribute
         // These only count towards skillpoint max
         let skillPointModifiers = fact.modifiers.filter(mod => {
             return (mod.enabled || mod.modifierType === "formula") && mod.effectType === SFRPGEffectType.SKILL_POINTS;
         });
-        skillPointModifiers = context.parameters.stackModifiers.process(skillPointModifiers, context);
+        skillPointModifiers = context.parameters.stackModifiers.process(skillPointModifiers, context, {actor: fact.actor});
 
         const skillPointModifierBonus = Object.entries(skillPointModifiers).reduce((sum, mod) => {
             if (mod[1] === null || mod[1].length < 1) return sum;
@@ -68,20 +68,20 @@ export default function (engine) {
 
         // Iterate through any modifiers that grant the character additional skillranks distributed for them
         // These always apply to a specific skill
-        let skillRankModifiers = fact.modifiers.filter(mod => {
+        const skillRankModifiers = fact.modifiers.filter(mod => {
             return (mod.enabled || mod.modifierType === "formula") && mod.effectType === SFRPGEffectType.SKILL_RANKS;
         });
 
-        for (let [key, skill] of Object.entries(skills)) {
+        for (const [key, skill] of Object.entries(skills)) {
             skill.rolledMods = null;
             const mods = context.parameters.stackModifiers.process(skillRankModifiers.filter(mod => {
                 if (mod.effectType !== SFRPGEffectType.SKILL_RANKS) return false;
                 else if (key !== mod.valueAffected) return false;
-                
-                return true;
-            }), context);
 
-            let accumulator = Object.entries(mods).reduce((sum, mod) => {
+                return true;
+            }), context, {actor: fact.actor});
+
+            const accumulator = Object.entries(mods).reduce((sum, mod) => {
                 if (mod[1] === null || mod[1].length < 1) return sum;
 
                 if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
@@ -94,14 +94,14 @@ export default function (engine) {
 
                 return sum;
             }, 0);
-            
+
             skill.min = accumulator;
         }
-        
+
         let skillpointsMax = 0;
         let totalLevel = 0;
         for (const cls of classes) {
-            const classData = cls.data.data;
+            const classData = cls.system;
 
             const classBonus = classData.levels * (intModifier + classData.skillRanks.value);
             skillpointsMax += classBonus;
@@ -122,9 +122,9 @@ export default function (engine) {
             skill.ranks = Math.max(skill.min, Math.min(skill.ranks, totalLevel));
             skillpointsUsed += (skill.ranks - skill.min);
         }
-        
+
         skillpointsMax += skillPointModifierBonus;
-        
+
         data.skillpoints.used = skillpointsUsed;
         data.skillpoints.max = skillpointsMax;
 

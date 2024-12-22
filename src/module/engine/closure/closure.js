@@ -1,8 +1,8 @@
 /**
  * A closure that is identified by a name. All closures expose the method
- * process(fact, context) that allows them to operate as predicates or 
+ * process(fact, context) that allows them to operate as predicates or
  * transformers of a certain fact.
- * 
+ *
  * @type {Closure}
  */
 export class Closure {
@@ -19,12 +19,12 @@ export class Closure {
 
     /**
      * Evaluates the closure against a certain fact
-     * 
+     *
      * @param {Ojbect} fact               a fact
      * @param {Context} context           an execution context.
      * @param {Object} context.parameters the execution parameters, if any
      * @param {Engine} context.engine     the rules engine.
-     * 
+     *
      * @returns {Object|Promise}          the result or a promise of such a result
      */
     process(fact, context) {
@@ -35,11 +35,11 @@ export class Closure {
      * Binds this closure to a set of parameters, This will return a new Closure then
      * when invoked it will ALWAYS pass the given parameters as a fields inside the
      * context.parameters object.
-     * 
+     *
      * @param {String} name       The name, if specified, of the resulting bounded closure
      * @param {Object} parameters The parameters to bound to the closure
      * @param {Engine} engine     The rules engine instance
-     * 
+     *
      * @returns {Closure}         A new bounded closure
      */
     bind(name, parameters, engine) {
@@ -61,11 +61,11 @@ export class Closure {
 
 /**
  * A closure bound to a certain set of parameters
- * 
+ *
  * @param {String}  name       The name of the closure
  * @param {Closure} closure    The bounded closure
  * @param {Object}  parameters The parameters for the closure
- * 
+ *
  * @type {BoundClosure}
  */
 class BoundClosure extends Closure {

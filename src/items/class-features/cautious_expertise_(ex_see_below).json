@@ -2,12 +2,19 @@
   "_id": "pmia9rZKrX6Gs5dA",
   "name": "Cautious Expertise (Ex; see below)",
   "type": "feat",
-  "data": {
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
+  "img": "systems/sfrpg/icons/classes/cautious_expertise.webp",
+  "system": {
     "type": "",
     "ability": null,
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "",
@@ -16,6 +23,7 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": null
@@ -29,18 +37,65 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"DR8JvF0xiwsXggxj\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Expertise Talent</a></p>\n        <p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl06_LabelName\">Choose a skill you have selected with the skill expertise class feature. When you take 20 (see page 133) with this skill, you can roll your expertise die twice and take the better result.<br><br>You can choose this talent up to three times, choosing a different skill selected with the skill expertise class feature each time.</span></p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.DR8JvF0xiwsXggxj]{Expertise Talent}</p>\n<p>Choose a skill you have selected with the skill expertise class feature. When you take 20 (see page 133) with this skill, you can roll your expertise die twice and take the better result ([[/r 2d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)]]{Roll}).</p>\n<p>You can choose this talent up to three times, choosing a different skill selected with the skill expertise class feature each time.</p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
+    "details": {
+      "category": "classFeature",
+      "combat": false,
+      "specialAbilityType": "ex"
+    },
     "duration": {
       "units": "",
       "value": null
     },
     "formula": "",
+    "isActive": null,
     "modifiers": [],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
@@ -51,13 +106,14 @@
       "charged": false,
       "value": null
     },
-    "requirements": "3rd Level",
+    "requirements": "3rd Level (Envoy)",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "Expertise Talent",
+    "source": "CRB, pg. 64",
     "target": {
       "type": "",
       "value": null
@@ -67,11 +123,5 @@
       "per": null,
       "value": 0
     }
-  },
-  "flags": {},
-  "img": "systems/sfrpg/icons/classes/cautious_expertise.webp",
-  "permission": {
-    "QqVQDajn5ZN4kl25": 3,
-    "default": 0
   }
 }

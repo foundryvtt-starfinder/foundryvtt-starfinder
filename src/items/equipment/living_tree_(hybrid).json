@@ -1,22 +1,30 @@
 {
   "_id": "CoYOojjkdrglKxBM",
-  "name": "Living tree (hybrid)",
+  "name": "Living Tree (Hybrid)",
   "type": "equipment",
-  "data": {
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
     "type": "",
     "ability": "str",
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
       "type": "",
       "condition": "",
       "cost": 0
     },
-    "ammunitionType": "",
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": 0
@@ -51,12 +59,13 @@
     "attuned": false,
     "bulk": "57",
     "capacity": {
-      "max": 0,
+      "max": 20,
       "value": 0
     },
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -79,6 +88,17 @@
           "amount": 1,
           "subtype": "weaponSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "ammunition"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "ammunitionSlot",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
@@ -89,8 +109,9 @@
     "damage": {
       "parts": [
         {
-          "formula": "2d10",
-          "operator": "",
+          "name": "",
+          "formula": "2d10 +(@abilities.str.mod)",
+          "group": null,
           "types": {
             "acid": false,
             "bludgeoning": true,
@@ -105,12 +126,13 @@
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p><strong>Speed&nbsp;</strong>15 ft.<br /><strong>Strength&nbsp;</strong>24 (+7);&nbsp;<strong>Damage</strong>&nbsp;2d10 B;&nbsp;<strong>Size&nbsp;</strong>Huge (15-ft. reach)<br /><strong>Capacity&nbsp;</strong>20;&nbsp;<strong>Usage&nbsp;</strong>1/hour</p>\n<p>On Ghorus Prime, arcane botanists grow trees implanted with mystic engines to create this armor. The first time each day a living tree is activated, it grants its wearer 2d6 temporary Hit Points that disappear once the wearer leaves or deactivates the armor. They regain these temporary Hit Points whenever they rest for 10 minutes to regain Stamina Points so long as they wear the armor while exposed to soil, water, and sunlight. If the wearer is a plant, they add their Constitution modifier to these temporary Hit Points. While deactivated for 8 hours with access to soil, water, and sunlight, a living tree regains 1d8 charges.</p>"
+      "value": "<p><strong>Speed&nbsp;</strong> 15 ft.</p>\n<p><strong>Strength&nbsp;</strong> 24 (+7);&nbsp;<strong>Damage</strong>&nbsp;2d10 B;&nbsp;<strong>Size&nbsp;</strong> Huge (15-ft. reach)</p>\n<p><strong>Capacity&nbsp;</strong> 20;&nbsp;<strong>Usage&nbsp;</strong> 1/hour</p>\n<p>On Ghorus Prime, arcane botanists grow trees implanted with mystic engines to create this armor. The first time each day a living tree is activated, it grants its wearer 2d6 temporary Hit Points that disappear once the wearer leaves or deactivates the armor. They regain these temporary Hit Points whenever they rest for 10 minutes to regain Stamina Points so long as they wear the armor while exposed to soil, water, and sunlight. If the wearer is a plant, they add their Constitution modifier to these temporary Hit Points. While deactivated for 8 hours with access to soil, water, and sunlight, a living tree regains 1d8 charges.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -126,6 +148,7 @@
     "modifiers": [],
     "price": 11200,
     "proficient": false,
+    "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
@@ -134,29 +157,49 @@
       "units": "",
       "value": null
     },
-    "reach": "",
+    "reach": "15 ft.",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": "",
       "descriptor": "negate"
     },
-    "size": "",
+    "size": "huge",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
     "source": "TR pg. 54",
-    "speed": "",
-    "strength": 0,
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
+    "speed": "15 ft.",
+    "strength": 24,
     "target": {
       "type": "",
       "value": null
     },
     "usage": {
-      "per": "",
-      "value": 0
+      "per": "hour",
+      "value": 1
     },
     "uses": {
       "max": 0,
       "per": null,
       "value": 0
     }
-  },
-  "img": "icons/svg/mystery-man.svg"
+  }
 }

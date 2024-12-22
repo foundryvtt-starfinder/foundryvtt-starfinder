@@ -2,12 +2,19 @@
   "_id": "E0jpRauB3f1ihg8Y",
   "name": "Dark Matter (Su)",
   "type": "feat",
-  "data": {
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
+  "img": "systems/sfrpg/icons/classes/dark_matter.webp",
+  "system": {
     "type": "",
     "ability": null,
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "move",
@@ -16,6 +23,7 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "none",
       "value": null
@@ -29,18 +37,85 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@Compendium[sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl05_LabelName\">As a move action, you can draw on the properties of dark matter to increase your density, allowing you to resist physical damage. You gain damage reduction 1/—. This increases to DR 2/— at 6th level and increases by 1 again every 3 solarian levels thereafter. This benefit lasts for 1 round or until you leave graviton mode. When you are attuned or fully attuned, your DR from dark matter is equal to half your solarian level.</span></p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p>@Icon[type:graviton]&nbsp;Graviton Revelation</p>\n<p>As a move action, you can draw on the properties of dark matter to increase your density, allowing you to resist physical damage. You gain damage reduction 1/—. This increases to DR 2/— at 6th level and increases by 1 again every 3 solarian levels thereafter. This benefit lasts for 1 round or until you leave graviton mode. When you are attuned or fully attuned, your DR from dark matter is equal to half your solarian level.</p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
+    "details": {
+      "category": "classFeature",
+      "combat": false,
+      "specialAbilityType": "su"
+    },
     "duration": {
       "units": "",
       "value": ""
     },
     "formula": "",
-    "modifiers": [],
+    "isActive": false,
+    "modifiers": [
+      {
+        "_id": "ce26fa0d-0555-49d2-b520-fbfea51290d8",
+        "name": "Dark Matter (Su)",
+        "type": "untyped",
+        "condition": "",
+        "container": {
+          "actorId": "Qs2gOWidvlhDWFVK",
+          "itemId": "fOJj3YoFinXgPBYV"
+        },
+        "effectType": "damage-reduction",
+        "enabled": true,
+        "max": 0,
+        "modifier": "(lookupRange(@resources.solarian.stellarMode.value, floor(@classes.solarian.levels / 2), 0, (lookupRange(@classes.solarian.levels, 0, 2, 1, 6, 2, 9, 3, 12, 4, 15, 5, 18, 6))))",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
@@ -52,6 +127,7 @@
       "value": null
     },
     "requirements": "2nd Level",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
@@ -67,11 +143,5 @@
       "per": "",
       "value": 0
     }
-  },
-  "flags": {},
-  "img": "systems/sfrpg/icons/classes/dark_matter.webp",
-  "permission": {
-    "QqVQDajn5ZN4kl25": 3,
-    "default": 0
   }
 }

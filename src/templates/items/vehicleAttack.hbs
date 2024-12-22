@@ -1,0 +1,108 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Item Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img" />
+
+        <div class="header-details flexrow">
+            <h1 class="charname">
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.ItemName" }}" />
+            </h1>
+
+            <div class="item-subtitle">
+                <h4 class="item-type">{{ localize "SFRPG.Items.VehicleAttack.Type" }}</h4>
+                <span class="item-status">{{itemStatus}}</span>
+            </div>
+
+            {{!-- Item Summary --}}
+            <ul class="summary flexrow">
+                <li class="wide" data-tooltip="{{ localize "SFRPG.ItemSheet.Header.SourceTooltip" }}">
+                <input type="text" name="system.source" value="{{itemData.source}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Source" }}"/>
+                </li>
+            </ul>
+
+            {{!-- Header Attributes --}}
+            <ul class="attributes flexrow">
+                <li class="attribute" data-tooltip="{{ localize "SFRPG.VehicleAttackSheet.Header.SaveTooltip" }}">
+                <h4 class="attribute-name box-title">{{ localize "SFRPG.ItemSheet.Header.Save" }}</h4>
+                <div class="attribute-value">
+                    <label>{{placeholders.savingThrow.value}}</label>
+                </div>
+                </li>
+            </ul>
+
+        </div>
+
+    </header>
+
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "SFRPG.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "SFRPG.Details" }}</a>
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        {{> "systems/sfrpg/templates/items/parts/item-description.hbs"}}
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+
+            <div class="bubble">
+                <h3 class="bubble-header">{{localize "SFRPG.Items.Weapon.Attack"}}</h3>
+
+                <div class="bubble-info">
+                    {{!-- Ignores Hardnes --}}
+                    <div class="form-group input-select">
+                        <label>{{ localize "SFRPG.VehicleAttackSheet.Details.IgnoresHardness" }}</label>
+                        <div class="form-fields">
+                            <input type="text" name="system.ignoresHardness" value="{{itemData.ignoresHardness}}" data-dtype="String" placeholder="0"/>
+                        </div>
+                    </div>
+
+                    {{!-- Saving Throw --}}
+                    <div class="form-group input-select">
+                        <label>{{ localize "SFRPG.Items.Action.SavingThrow" }}</label>
+                        <div class="form-fields">
+                            <input type="text" name="system.save.dc" value="{{itemData.save.dc}}" data-dtype="String" placeholder="{{placeholders.saveDC.formula}}"/>
+                            <select name="system.save.type">
+                                {{#select itemData.save.type}}
+                                <option value=""></option>
+                                {{#each config.saves as |save s|}}
+                                <option value="{{s}}">{{save}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                            <select name="system.save.descriptor">
+                                {{#select itemData.save.descriptor}}
+                                {{#each config.saveDescriptors as |descriptor k|}}
+                                <option value="{{k}}">{{descriptor}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            {{!-- Damage Formula --}}
+            <div class="bubble">
+                <h4 class="damage-header bubble-header">
+                    {{ localize "SFRPG.Items.Action.DamageFormula" }}
+                    <a class="damage-control add-damage bubble-icon"><i class="fas fa-plus"></i></a>
+                </h4>
+
+                <div class="bubble-info">
+
+                    {{> "systems/sfrpg/templates/items/parts/damage-sections.hbs"}}
+
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+</form>

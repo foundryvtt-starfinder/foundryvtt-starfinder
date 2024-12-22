@@ -1,4 +1,4 @@
-export default function (engine) {
+export default function(engine) {
     engine.closures.add('calculateBaseSkills', (fact, context) => {
         const data = fact.data;
         const skills = data.skills;
@@ -6,18 +6,19 @@ export default function (engine) {
         const classes = fact.classes;
 
         const classSkills = classes.reduce((prev, cls) => {
-            const classData = cls.data.data;
+            const classData = cls.system;
 
-            Object.entries(classData.csk).filter(s => s[1]).forEach((skill) => {
-                prev[skill[0]] = 3;
-            });
+            Object.entries(classData.csk).filter(s => s[1])
+                .forEach((skill) => {
+                    prev[skill[0]] = 3;
+                });
 
             return prev;
         }, {});
 
-        let themeMod = {};
+        const themeMod = {};
 
-        const themeData = theme?.data?.data;
+        const themeData = theme?.system;
         if (themeData)
         {
             if (themeData.skill !== "" && !Object.keys(classSkills).includes(themeData.skill)) {
@@ -29,7 +30,7 @@ export default function (engine) {
         }
 
         // Skills
-        for (let [skl, skill] of Object.entries(skills)) {
+        for (const [skl, skill] of Object.entries(skills)) {
             skill.value = parseFloat(skill.value || 0);
             if (skill.value !== 3) skill.value = classSkills[skl] ?? 0;
             const classSkill = skill.value;
@@ -40,7 +41,7 @@ export default function (engine) {
 
             if (hasRanks) {
                 skill.tooltip.push(game.i18n.format("SFRPG.SkillTooltipSkillRanks", {ranks: (skill.ranks - skill.min).signedString()}));
-                
+
                 if (classSkill === 3) {
                     skill.tooltip.push(game.i18n.format("SFRPG.SkillTooltipTrainedClassSkill", {mod: classSkill.signedString()}));
                 }
@@ -53,8 +54,11 @@ export default function (engine) {
             skill.tooltip.push(game.i18n.format("SFRPG.SkillTooltipAbilityMod", {abilityMod: abilityMod.signedString(), abilityAbbr: skill.ability.capitalize()}));
 
             if (skill.misc !== 0) {
-                skill.tooltip.push(game.i18n.format("SFRPG.SkillTooltipMiscMod", {mod: skill.misc.signedString()}));
+                skill.tooltip.push(game.i18n.format("SFRPG.SkillTooltipMiscMod", {mod: skill?.misc?.signedString()}));
             }
+
+            // this is done because the normal tooltip will be changed later on and we need this one as a "base" for dice rolls.
+            skill.rollTooltip = [ ...skill.tooltip ];
         }
 
         return fact;

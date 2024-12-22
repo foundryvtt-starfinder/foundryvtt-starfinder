@@ -14,16 +14,16 @@ try {
                 encoding: 'utf8',
                 flag: 'r+'
             });
-            
+
             const itemData = JSON.parse(json);
-            
+
             if (itemData.type === itemType) {
                 const oldActionTarget = itemData.data.actionTarget;
-                
+
                 const hasForceProperty = itemData.data.properties?.force || false;
                 const isGrenade = itemData.data.weaponType === "grenade";
                 let hasKineticDamage = false;
-                
+
                 for (const damagePart of itemData.data.damage.parts) {
                     const isKineticDamage = (damagePart.types?.bludgeoning || damagePart.types?.piercing || damagePart.types?.slashing);
                     if (isKineticDamage) {
@@ -31,7 +31,7 @@ try {
                         break;
                     }
                 }
-                
+
                 if (isGrenade) {
                     itemData.data.actionTarget = "";
                 } else if (hasKineticDamage && !hasForceProperty) {
@@ -44,12 +44,12 @@ try {
                     const output = JSON.stringify(itemData, null, 2);
 
                     fs.writeFileSync(`${dataPath}/${file}`, output);
-                    
+
                     count += 1;
                 }
             }
         }
-        
+
         console.log(`Found, and migrated, ${count} ${itemType} entries.`);
     });
 } catch (err) {

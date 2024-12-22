@@ -2,12 +2,19 @@
   "_id": "muDgBqHYvCkPUEoZ",
   "name": "Daegoxian Spore Cloud",
   "type": "spell",
-  "data": {
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
+  "img": "systems/sfrpg/icons/spells/daegoxian_spore_cloud.webp",
+  "system": {
     "type": "",
     "ability": "",
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "action",
@@ -16,11 +23,13 @@
     },
     "allowedClasses": {
       "myst": true,
+      "precog": false,
       "tech": false,
       "wysh": false
     },
     "area": {
       "effect": "spread",
+      "shapable": false,
       "shape": "sphere",
       "units": "ft",
       "value": 20
@@ -41,13 +50,13 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>You summon a concentrated cloud of Daegoxian spores, which renders living creatures docile and agreeable. Any creature that enters the cloud or begins its turn within the cloud must succeed at a Will save or be @Compendium[sfrpg.conditions.7PPRS6krnvaTHbxh]{Fascinated} for [[/r 1d4]] rounds. A creature that succeeds at this save is immune to the effects of Daegoxian spore cloud for 24 hours.</p>"
+      "value": "<p>You summon a concentrated cloud of Daegoxian spores, which renders living creatures docile and agreeable. Any creature that enters the cloud or begins its turn within the cloud must succeed at a Will save or be @UUID[Compendium.sfrpg.conditions.Item.7PPRS6krnvaTHbxh]{Fascinated} for [[/r 1d4]] rounds. A creature that succeeds at this save is immune to the effects of Daegoxian spore cloud for 24 hours.</p>"
     },
     "descriptors": [],
     "dismissible": true,
     "duration": {
-      "units": "",
-      "value": "1 round/level (D)"
+      "units": "round",
+      "value": "@details.cl.value"
     },
     "formula": "",
     "isActive": null,
@@ -64,11 +73,12 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
-      "additional": "10 ft.",
-      "per": "level",
-      "units": "ft",
-      "value": 100
+      "additional": "",
+      "per": "",
+      "units": "medium",
+      "value": null
     },
     "rollNotes": "",
     "save": {
@@ -88,12 +98,5 @@
       "per": "",
       "value": null
     }
-  },
-  "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.sfrpg.spells.muDgBqHYvCkPUEoZ"
-    }
-  },
-  "img": "systems/sfrpg/icons/spells/daegoxian_spore_cloud.webp"
+  }
 }

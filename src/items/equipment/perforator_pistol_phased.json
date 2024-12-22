@@ -2,7 +2,13 @@
   "_id": "7IfXTZn3MmWeBEM4",
   "name": "Perforator pistol, phased",
   "type": "weapon",
-  "data": {
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
     "type": "",
     "ability": "dex",
     "abilityMods": {
@@ -15,8 +21,10 @@
       "condition": "",
       "cost": null
     },
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "none",
       "value": null
@@ -49,6 +57,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -91,28 +100,41 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "5d10",
-          "operator": "",
           "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
             "sonic": true
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>Focused sound waves from a perforator pistol punch through objects and bodies. Drow employ perforators because the dark elves enjoy the weapon&rsquo;s ability to inflict gruesome wounds, which are as effective against morale as against life and limb. Diffraction and refraction perforator pistols align and compound sound waves, while linear and phased perforator pistols are named for the internal matrices that focus wavelengths the&nbsp;pistols emitters generate.</p>"
+      "value": "<p>Focused sound waves from a perforator pistol punch through objects and bodies. Drow employ perforators because the dark elves enjoy the weapon’s ability to inflict gruesome wounds, which are as effective against morale as against life and limb. Diffraction and refraction perforator pistols align and compound sound waves, while linear and phased perforator pistols are named for the internal matrices that focus wavelengths the&nbsp;pistols emitters generate.</p>"
     },
     "descriptors": [],
     "duration": {
       "units": "",
       "value": ""
     },
+    "equippable": false,
     "equipped": false,
     "formula": "",
     "identified": true,
     "isActive": null,
+    "isEquipment": true,
     "level": 20,
     "modifiers": [],
     "price": 732000,
@@ -131,6 +153,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -149,6 +172,7 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
@@ -175,6 +199,7 @@
       "polymorphic": false,
       "powered": false,
       "professional": false,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
@@ -183,7 +208,9 @@
       "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
+      "shatter": false,
       "shells": false,
       "shield": false,
       "sniper": false,
@@ -196,6 +223,7 @@
       "thought": false,
       "throttle": false,
       "thrown": false,
+      "thruster": false,
       "trip": false,
       "two": false,
       "unbalancing": false,
@@ -205,12 +233,14 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
       "value": 40
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": "",
@@ -218,6 +248,22 @@
     },
     "source": "AR pg. 16",
     "special": "",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
@@ -233,8 +279,5 @@
     },
     "weaponCategory": "sonic",
     "weaponType": "smallA"
-  },
-  "effects": [],
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg"
+  }
 }

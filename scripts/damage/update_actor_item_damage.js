@@ -3,7 +3,7 @@ const equipmentPaths = ["src/items/characters", "src/items/alien-archives"];
 
 /**
  * The new data structure for how damage is stored on an item
- * 
+ *
  * @typedef DamagePart
  * @property {string}                   formula  The roll formula passed to the Foundry Roll API
  * @property {{[key: string]: boolean}} types    A set of key value pairs which determine if a damage type is being used
@@ -11,9 +11,9 @@ const equipmentPaths = ["src/items/characters", "src/items/alien-archives"];
  */
 
 /**
- * A function that takes an array of strings and converts them into the new 
+ * A function that takes an array of strings and converts them into the new
  * DamagePart type.
- * 
+ *
  * @param {DamagePart[]} acc  The accumulated array of updated damage parts
  * @param {string[]}     curr The current array of damage parts.
  * @returns An array of updated damage parts

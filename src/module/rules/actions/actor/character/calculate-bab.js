@@ -1,9 +1,9 @@
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateBaseAttackBonus", (fact, context) => {
         const data = fact.data;
         const classes = fact.classes;
-        
-        data.attributes.baseAttackBonus = mergeObject(data.attributes.baseAttackBonus, {
+
+        data.attributes.baseAttackBonus = foundry.utils.mergeObject(data.attributes.baseAttackBonus, {
             value: 0,
             rolledMods: [],
             tooltip: []
@@ -14,7 +14,7 @@ export default function (engine) {
         data.attributes.baseAttackBonus.rolledMods = [];
 
         for (const cls of classes) {
-            const classData = cls.data.data;
+            const classData = cls.system;
 
             let mod = 0;
             switch (classData.bab) {
@@ -31,8 +31,6 @@ export default function (engine) {
             data.attributes.baseAttackBonus.value += mod;
         }
 
-        data.attributes.bab = data.attributes.baseAttackBonus.value;
-        
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] });
 }

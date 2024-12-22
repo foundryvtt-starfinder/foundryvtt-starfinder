@@ -5,14 +5,14 @@ import { Rule } from "./rule.js";
 import { raise } from "../util.js";
 
 /**
- * ClosureRegistry is the main entry point for creating closure out of the 
+ * ClosureRegistry is the main entry point for creating closure out of the
  * closure definition json.
- * 
+ *
  * It also acts as a registry for name-closure implementations which need to
  * be provided before parsing any named-closures.
- * 
+ *
  * @param {Engine} engine The rules engine instance
- * 
+ *
  * @type {ClosureRegistry}
  */
 export class ClosureRegistry {
@@ -56,9 +56,9 @@ export class ClosureRegistry {
 
     /**
      * Get a closure by name.
-     * 
+     *
      * @param {String} name The name of the closure to get
-     * 
+     *
      * @returns {Closure}   The named closure
      */
     get(name) {
@@ -77,13 +77,13 @@ export class ClosureRegistry {
 	 * - an array then a ClosureReducer will be created and each item in the array will be parsed as a closure.
 	 * - an object with the property `rules` then it's interpreted as a rule flow (an special case of a ClosureReducer)
 	 * - an object has either `when` or `then` properties it is assumed to be a Rule and it is created parsing both `when` and `then` definition as closures.
-     * 
+     *
      * - if it is a string a parameterless implementation for it will be looked up in the implementations registry.
 	 * - if it is an object it will an implementation for `definition.closure` will be looked up in the implementation registry.
 	 *
 	 * @param  {Object|string|Object[]} definition The json defintion for the closure
      * @param  {Object}                 options    Options for the closure
-     * 
+     *
 	 * @returns {Object}            		       A closure object (it will understand the
 	 *                                             message process)
 	 */

@@ -2,7 +2,7 @@
  * Class to open the right windows to manage all counter classes
  */
 export class CounterManagementWindows extends Dialog {
-    constructor(dialogData={}, options={}) {
+    constructor(dialogData = {}, options = {}) {
         super(dialogData, options);
         this.options.classes = ["sfrpg", "dialog"];
         this.windows = null;
@@ -17,25 +17,25 @@ export class CounterManagementWindows extends Dialog {
         let counterClassesLabel = CONFIG.SFRPG.counterClassesLabel;
 
         const Actor = game.actors.get(actorId);
-        const htmlContent = await renderTemplate("systems/sfrpg/templates/classes/counter-management.html", {
-            counter: Actor.data.data.counterClasses.values[targetClasses].count,
+        const htmlContent = await renderTemplate("systems/sfrpg/templates/classes/counter-management.hbs", {
+            counter: Actor.system.counterClasses.values[targetClasses].count,
             labelClasses: game.i18n.localize(counterClassesLabel[targetClasses]),
-            currentPosition: Actor.data.data.counterClasses.values[targetClasses].position,
+            currentPosition: Actor.system.counterClasses.values[targetClasses].position,
             classes: targetClasses,
             actorId:actorId,
             combatantId:combatantId,
-            config: CONFIG.SFRPG,
+            config: CONFIG.SFRPG
         });
 
         return new Promise((resolve, reject) => {
             this.windows = new this({
-                    title: game.i18n.localize('SFRPG.CounterClassesManagementWindowsTitles'),
-                    content: htmlContent,
-                    buttons: {},
-                    default: 'save'
-                }, {
-                    title:game.i18n.localize('SFRPG.CounterClassesManagementWindowsTitles'),
-                    width:496
+                title: game.i18n.localize('SFRPG.CounterClassesManagementWindowsTitles'),
+                content: htmlContent,
+                buttons: {},
+                default: 'save'
+            }, {
+                title:game.i18n.localize('SFRPG.CounterClassesManagementWindowsTitles'),
+                width:496
             });
             this.windows.render(true);
         });
@@ -58,18 +58,18 @@ export class CounterManagementWindows extends Dialog {
 
             classesToUpdate['solarianAttunement'] = {
                 'count': 0,
-                'position': targetClasses,
+                'position': targetClasses
             };
 
             Actor.update({
-                "data.counterClasses.values": classesToUpdate
+                "system.counterClasses.values": classesToUpdate
             });
 
             $(".counter-management-position-input").val(targetClasses);
             $(".counter-management-counter-input").attr('value', 0);
         });
 
-        //Button to add 1 to counter
+        // Button to add 1 to counter
         let addButton = html.find('.counter-management-button button[name=counter-management-button-add]');
         addButton.click(event => {
             event.preventDefault();
@@ -77,23 +77,23 @@ export class CounterManagementWindows extends Dialog {
             const Actor = game.actors.get(dataset.actorId);
             const classesToUpdate = {};
 
-            if (Actor.data.data.counterClasses.values[dataset.managementClasses].count < 3 || !(dataset.managementClasses == 'solarianAttunement')) {
-                const newCounter = Actor.data.data.counterClasses.values[dataset.managementClasses].count +1;
+            if (Actor.system.counterClasses.values[dataset.managementClasses].count < 3 || !(dataset.managementClasses == 'solarianAttunement')) {
+                const newCounter = Actor.system.counterClasses.values[dataset.managementClasses].count + 1;
                 classesToUpdate[dataset.managementClasses] = {
                     'count': newCounter,
-                    'position': Actor.data.data.counterClasses.values[dataset.managementClasses].position
+                    'position': Actor.system.counterClasses.values[dataset.managementClasses].position
                 };
 
-                $(".counter-management-position-input").val(Actor.data.data.counterClasses.values[dataset.managementClasses].position);
-                $(".counter-management-counter-input").attr('value', Actor.data.data.counterClasses.values[dataset.managementClasses].count + 1);
+                $(".counter-management-position-input").val(Actor.system.counterClasses.values[dataset.managementClasses].position);
+                $(".counter-management-counter-input").attr('value', Actor.system.counterClasses.values[dataset.managementClasses].count + 1);
 
                 Actor.update({
-                    "data.counterClasses.values": classesToUpdate
+                    "system.counterClasses.values": classesToUpdate
                 });
             }
-        })
+        });
 
-        //Button to remove 1 to counter
+        // Button to remove 1 to counter
         let removeButton = html.find('.counter-management-button button[name=counter-management-button-remove]');
         removeButton.click(event => {
             event.preventDefault();
@@ -101,19 +101,19 @@ export class CounterManagementWindows extends Dialog {
             const Actor = game.actors.get(dataset.actorId);
             const classesToUpdate = {};
 
-            if (Actor.data.data.counterClasses.values[dataset.managementClasses].count > 0) {
-                 classesToUpdate[dataset.managementClasses] = {
-                    'count': Actor.data.data.counterClasses.values[dataset.managementClasses].count - 1,
-                    'position': Actor.data.data.counterClasses.values[dataset.managementClasses].position
+            if (Actor.system.counterClasses.values[dataset.managementClasses].count > 0) {
+                classesToUpdate[dataset.managementClasses] = {
+                    'count': Actor.system.counterClasses.values[dataset.managementClasses].count - 1,
+                    'position': Actor.system.counterClasses.values[dataset.managementClasses].position
                 };
 
-                $(".counter-management-position-input").val(Actor.data.data.counterClasses.values[dataset.managementClasses].position);
-                $(".counter-management-counter-input").attr('value', Actor.data.data.counterClasses.values[dataset.managementClasses].count - 1);
+                $(".counter-management-position-input").val(Actor.system.counterClasses.values[dataset.managementClasses].position);
+                $(".counter-management-counter-input").attr('value', Actor.system.counterClasses.values[dataset.managementClasses].count - 1);
 
                 Actor.update({
-                    "data.counterClasses.values": classesToUpdate
+                    "system.counterClasses.values": classesToUpdate
                 });
             }
-        })
+        });
     }
 }

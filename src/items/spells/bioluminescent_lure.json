@@ -2,12 +2,19 @@
   "_id": "ZFMImYHIWrO62gJC",
   "name": "Bioluminescent Lure",
   "type": "spell",
-  "data": {
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
+  "img": "systems/sfrpg/icons/classes/energize_spell.webp",
+  "system": {
     "type": "",
     "ability": "",
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "action",
@@ -16,11 +23,13 @@
     },
     "allowedClasses": {
       "myst": true,
+      "precog": false,
       "tech": false,
       "wysh": true
     },
     "area": {
       "effect": "burst",
+      "shapable": false,
       "shape": "sphere",
       "units": "ft",
       "value": 30
@@ -41,13 +50,13 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">You cause a 30-foot-diameter sphere of water or other liquid to fill with bioluminescent plankton, increasing the light level from dark to dim or from dim to normal. For the spell&rsquo;s duration, you can take a standard action to move this area up to 30 feet in any direction. You can also take a standard action to condense the plankton into a tight, brightly glowing ball at the center of the sphere. If you do so, each creature that starts its turn in or enters the spell&rsquo;s area must attempt a Will save or become fascinated until the beginning of its next turn. A creature that saves against this effect is immune to it for 24 hours. This spell has no effect above water.</span></p>"
+      "value": "<p>You cause a 30-foot-diameter sphere of water or other liquid to fill with bioluminescent plankton, increasing the light level from dark to dim or from dim to normal. For the spell’s duration, you can take a standard action to move this area up to 30 feet in any direction. You can also take a standard action to condense the plankton into a tight, brightly glowing ball at the center of the sphere. If you do so, each creature that starts its turn in or enters the spell’s area must attempt a Will save or become fascinated until the beginning of its next turn. A creature that saves against this effect is immune to it for 24 hours. This spell has no effect above water.</p>"
     },
     "descriptors": [],
     "dismissible": true,
     "duration": {
-      "units": "",
-      "value": "1 round/level (D)"
+      "units": "round",
+      "value": "@details.cl.value"
     },
     "formula": "",
     "isActive": null,
@@ -64,11 +73,12 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
-      "additional": "10 ft.",
-      "per": "level",
-      "units": "ft",
-      "value": 100
+      "additional": "",
+      "per": "",
+      "units": "medium",
+      "value": null
     },
     "rollNotes": "",
     "save": {
@@ -88,8 +98,5 @@
       "per": "",
       "value": null
     }
-  },
-  "effects": [],
-  "flags": {},
-  "img": "systems/sfrpg/icons/classes/energize_spell.webp"
+  }
 }

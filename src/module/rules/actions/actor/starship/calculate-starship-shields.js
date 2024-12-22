@@ -13,7 +13,7 @@ export default function(engine) {
             data.quadrants.aft.shields = { value: 0 };
         } else {
             const shieldItem = shieldItems[0];
-            const shieldData = shieldItem.data.data;
+            const shieldData = shieldItem.system;
 
             data.hasDeflectorShields = shieldData.isDeflector;
 

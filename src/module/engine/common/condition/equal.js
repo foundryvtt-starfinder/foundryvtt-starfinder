@@ -1,4 +1,4 @@
-export default function (engine) {
+export default function(engine) {
     // Matches only if certain fact field (specified by field) equals to some
     // other specified value
     const fn = (fact, context) => {

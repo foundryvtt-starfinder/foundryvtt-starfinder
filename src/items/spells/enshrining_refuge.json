@@ -2,12 +2,19 @@
   "_id": "fZJDLIZ0KDrfkZxv",
   "name": "Enshrining Refuge",
   "type": "spell",
-  "data": {
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
+  "img": "systems/sfrpg/icons/spells/enshrining_refuge.webp",
+  "system": {
     "type": "",
     "ability": "",
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "action",
@@ -16,11 +23,13 @@
     },
     "allowedClasses": {
       "myst": true,
+      "precog": false,
       "tech": false,
       "wysh": true
     },
     "area": {
       "effect": "burst",
+      "shapable": false,
       "shape": "sphere",
       "units": "ft",
       "value": 40
@@ -41,13 +50,13 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>All creatures within a 40-foot radius of the spell&rsquo;s point of origin are protected from violence. Any opponent attempting to directly attack a warded creature, even with a targeted spell, must attempt a Will saving throw. If the opponent succeeds, it can attack that creature normally, though it takes a &ndash;2 penalty to attacks against that creature for the duration of the spell. On a failed save, the opponent can&rsquo;t follow through with the attack, loses that action, and can&rsquo;t directly attack the warded creature for the duration of the spell. Those not attempting to attack a warded creature remain unaffected.</p>\n<p>This spell doesn&rsquo;t prevent warded creatures from being affected by an attack with an area of effect, though a warded creature receives a +2 bonus to saving throws against such attacks.</p>\n<p>Each warded creature can breathe normally, no matter the surrounding atmosphere, and it suffers no harm from being in a hot or cold environment. A warded creature can&rsquo;t attack without breaking the spell for itself, but it can use harmless spells and abilities that don&rsquo;t require attack rolls, and it can act otherwise.</p>"
+      "value": "<p>All creatures within a 40-foot radius of the spell’s point of origin are protected from violence. Any opponent attempting to directly attack a warded creature, even with a targeted spell, must attempt a Will saving throw. If the opponent succeeds, it can attack that creature normally, though it takes a –2 penalty to attacks against that creature for the duration of the spell. On a failed save, the opponent can’t follow through with the attack, loses that action, and can’t directly attack the warded creature for the duration of the spell. Those not attempting to attack a warded creature remain unaffected.</p>\n<p>This spell doesn’t prevent warded creatures from being affected by an attack with an area of effect, though a warded creature receives a +2 bonus to saving throws against such attacks.</p>\n<p>Each warded creature can breathe normally, no matter the surrounding atmosphere, and it suffers no harm from being in a hot or cold environment. A warded creature can’t attack without breaking the spell for itself, but it can use harmless spells and abilities that don’t require attack rolls, and it can act otherwise.</p>"
     },
     "descriptors": [],
     "dismissible": true,
     "duration": {
-      "units": "",
-      "value": "1 round/level (D)"
+      "units": "round",
+      "value": "@details.cl.value"
     },
     "formula": "",
     "isActive": null,
@@ -64,11 +73,12 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
-      "additional": "5 ft.",
-      "per": "2 levels",
-      "units": "ft",
-      "value": 25
+      "additional": "",
+      "per": "",
+      "units": "close",
+      "value": null
     },
     "rollNotes": "",
     "save": {
@@ -88,12 +98,5 @@
       "per": "",
       "value": null
     }
-  },
-  "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.sfrpg.spells.fZJDLIZ0KDrfkZxv"
-    }
-  },
-  "img": "systems/sfrpg/icons/spells/enshrining_refuge.webp"
+  }
 }

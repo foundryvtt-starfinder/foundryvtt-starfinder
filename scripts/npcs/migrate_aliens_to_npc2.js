@@ -13,9 +13,9 @@ try {
                 encoding: 'utf8',
                 flag: 'r+'
             });
-            
+
             const alienData = JSON.parse(json);
-            
+
             if (alienData.type === "npc") {
                 alienData.type = "npc2";
 
@@ -28,7 +28,7 @@ try {
                         skill.ranks = skill.mod;
                     }
                 }
-                
+
                 alienData.data.attributes.eac.base = alienData.data.attributes.eac.value;
                 alienData.data.attributes.kac.base = alienData.data.attributes.kac.value;
                 alienData.data.attributes.init.value = alienData.data.attributes.init.total;
@@ -40,11 +40,11 @@ try {
                 const output = JSON.stringify(alienData, null, 2);
 
                 fs.writeFileSync(`${dataPath}/${file}`, output);
-                
+
                 count += 1;
             }
         }
-        
+
         console.log(`Found, and migrated, ${count} alien archive entries.`);
     });
 } catch (err) {

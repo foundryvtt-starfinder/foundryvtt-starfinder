@@ -2,26 +2,52 @@
   "_id": "z8a7yG78YZsa62LI",
   "name": "Capture pole, enforcement-class",
   "type": "weapon",
-  "data": {
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
     "type": "",
     "ability": "str",
     "abilityMods": {
       "parts": []
     },
-    "actionTarget": "eac",
-    "actionType": "rwak",
+    "actionTarget": "kac",
+    "actionType": "mwak",
     "activation": {
       "type": "none",
       "condition": "",
       "cost": null
     },
+    "ammunitionType": "",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "none",
       "value": null
     },
     "attackBonus": 0,
+    "attributes": {
+      "ac": {
+        "value": ""
+      },
+      "customBuilt": false,
+      "dex": {
+        "mod": ""
+      },
+      "hardness": {
+        "value": ""
+      },
+      "hp": {
+        "max": "",
+        "value": 6
+      },
+      "size": "medium",
+      "sturdy": true
+    },
     "attuned": false,
     "bulk": "L",
     "capacity": {
@@ -31,6 +57,8 @@
     "chatFlavor": "Grapple, injection, reach",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": 1,
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
@@ -57,7 +85,7 @@
     "damage": {
       "parts": [
         {
-          "formula": "1d8 + @mod",
+          "formula": "1d8 + @abilities.str.mod",
           "operator": "",
           "types": {
             "Piercing": true
@@ -65,8 +93,11 @@
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": ""
     },
@@ -75,9 +106,12 @@
       "units": "",
       "value": ""
     },
+    "equippable": false,
     "equipped": false,
     "formula": "",
     "identified": true,
+    "isActive": null,
+    "isEquipment": true,
     "level": 2,
     "modifiers": [],
     "price": 550,
@@ -167,12 +201,14 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
       "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
@@ -180,6 +216,7 @@
     },
     "source": "COM",
     "special": "",
+    "specialMaterials": {},
     "target": {
       "type": "",
       "value": ""
@@ -193,9 +230,7 @@
       "per": "",
       "value": null
     },
+    "weaponCategory": "uncategorized",
     "weaponType": "advancedM"
-  },
-  "flags": {},
-  "folder": null,
-  "img": "icons/svg/mystery-man.svg"
+  }
 }

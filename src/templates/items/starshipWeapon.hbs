@@ -1,0 +1,224 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Item Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img" />
+
+        <div class="header-details flexrow">
+            <h1 class="charname">
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.ItemName" }}" />
+            </h1>
+
+            <div class="item-subtitle">
+                <h4 class="item-type">{{ localize "SFRPG.Items.ShipWeapon.ItemType" }}</h4>
+                <span class="item-status">{{itemStatus}}</span>
+            </div>
+
+            <ul class="summary">
+                <li>
+                    {{lookup config.starshipWeaponTypes itemData.weaponType }}
+                </li>
+                <li>
+                    {{lookup config.starshipWeaponClass itemData.class }}
+                </li>
+                <li>
+                    <input type="text" name="system.source" value="{{itemData.source}}" placeholder="{{ localize "SFRPG.Items.ShipWeapon.Source" }}" />
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "SFRPG.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "SFRPG.Details" }}</a>
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        {{> "systems/sfrpg/templates/items/parts/item-description.hbs"}}
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+
+            {{!-- Details Tab Navigation --}}
+            <nav class="sheet-subnavigation subtabs" data-group="subdetails">
+                <a class="item active" data-tab="properties">{{ localize "SFRPG.ItemSheet.Details.Tab.Properties" }}</a>
+                <a class="item" data-tab="attack">{{ localize "SFRPG.ItemSheet.Details.Tab.AttackDamage" }}</a>
+            </nav>
+
+            {{!-- Details Section --}}
+            <section class="sheet-details">
+
+                {{!-- Properties Tab --}}
+                <div class="tab properties" data-group="subdetails" data-tab="properties">
+
+                    {{!-- Common Component Data --}}
+                    {{> "systems/sfrpg/templates/items/parts/starship-component.hbs"}}
+
+                    {{!-- Weapon Properties --}}
+                    <div class="bubble">
+                        <h3 class="bubble-header">{{ localize "SFRPG.ItemSheet.StarshipWeapon.Header" }}</h3>
+
+                        <div class="bubble-info">
+
+                            {{!-- Weapon Type --}}
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.Items.Weapon.Type" }}</label>
+                                <div class="form-fields">
+                                    <select name="system.weaponType">
+                                        {{#select itemData.weaponType}}
+                                        {{#each config.starshipWeaponTypes as |name type|}}
+                                        <option value="{{type}}">{{name}}</option>
+                                        {{/each}}
+                                        {{/select}}
+                                    </select>
+                                </div>
+                            </div>
+
+                            {{!-- Weapon Class --}}
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.Items.ShipWeapon.WeaponClass" }}</label>
+                                <div class="form-fields">
+                                    <select name="system.class">
+                                        {{#select itemData.class}}
+                                        {{#each config.starshipWeaponClass as |name type|}}
+                                        <option value="{{type}}">{{name}}</option>
+                                        {{/each}}
+                                        {{/select}}
+                                    </select>
+                                </div>
+                            </div>
+
+                            {{!-- Weapon Status --}}
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.Items.ShipWeapon.WeaponStatus" }}</label>
+                                <div class="form-fields">
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="system.mount.mounted" {{checked itemData.mount.mounted}} /> {{ localize "SFRPG.Items.ShipWeapon.Mounted" }}
+                                    </label>
+                                    <span class="sep"> </span>
+                                    <select name="system.mount.arc">
+                                        {{#select itemData.mount.arc}}
+                                        <option value="">{{localize "SFRPG.ItemSheet.StarshipWeapon.Unmounted"}}</option>
+                                        {{#each config.starshipArcs as |arc a|}}
+                                        <option value="{{a}}">{{arc}}</option>
+                                        {{/each}}
+                                        {{/select}}
+                                    </select>
+                                </div>
+                            </div>
+
+                            {{!-- Weapon speed (only applies to tracking weapons) --}}
+                            {{#if hasSpeed}}
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.Speed" }}</label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.speed" value="{{itemData.speed}}" data-dtype="Number" placeholder="{{localize "SFRPG.ItemSheet.StarshipWeapon.Placeholder"}}" />
+                                </div>
+                            </div>
+                            {{/if}}
+
+                            {{#if hasCapacity}}
+                            <div class="form-group">
+                                <label data-tooltip="{{ localize "SFRPG.Items.Capacity.HeaderTooltip" }}">
+                                    {{ localize "SFRPG.Items.Capacity.Capacity" }}
+                                </label>
+                                <div class="form-fields">
+                                    <input type="text" data-tooltip="{{ localize "SFRPG.Items.Capacity.CapacityValueTooltip" }}" name="system.capacity.value" value="{{itemData.capacity.value}}" data-dtype="Number" placeholder="{{localize "SFRPG.ItemSheet.StarshipWeapon.Placeholder"}}" />
+                                    <span class="sep"> / </span>
+                                    <input type="text" data-tooltip="{{ localize "SFRPG.Items.Capacity.CapacityMaxTooltip" }}" name="system.capacity.max" value="{{itemData.capacity.max}}" data-dtype="Number" placeholder="{{localize "SFRPG.ItemSheet.StarshipWeapon.Placeholder"}}" />
+                                </div>
+                            </div>
+                            {{/if}}
+
+                            {{!-- Weapon Properties --}}
+                            <div class="bubble">
+                                <h3 class="bubble-header">{{ localize "SFRPG.Items.Weapon.Properties" }}</h3>
+
+                                <div class="form-group stacked weapon-properties bubble-info">
+                                    {{#each config.starshipWeaponProperties as |name prop|}}
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="system.special.{{prop}}" {{checked (lookup ../itemData.special prop)}} />
+                                        {{ name }}
+                                    </label>
+                                    {{/each}}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    {{!-- Special Materials Template --}}
+                    {{> "systems/sfrpg/templates/items/parts/item-special-materials.hbs"}}
+                
+                </div>
+
+                {{!-- Attack & Damage Tab --}}
+                <div class="tab attack" data-group="subdetails" data-tab="attack">
+
+                    {{!-- Attack --}}
+                    <div class="bubble">
+                        <h3 class="bubble-header">{{localize "SFRPG.Items.Weapon.Attack"}}</h3>
+
+                        <div class="bubble-info">
+                            
+                            {{!-- Action Target --}}
+                            <div class="form-group select" {{createTippy title="SFRPG.Items.Action.ActionTarget.Title" subtitle="SFRPG.Items.Action.ActionTarget.Tooltip"}}>
+                                <label>{{ localize "SFRPG.Items.Action.ActionTarget.Title" }}</label>
+                                <select name="system.actionTarget">
+                                    {{#select itemData.actionTarget}}
+                                    {{#each config.actionTargetsStarship as |name type|}}
+                                    <option value="{{type}}">{{name}}</option>
+                                    {{/each}}
+                                    {{/select}}
+                                </select>
+                            </div>
+
+                            {{!-- Range --}}
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.Items.ShipWeapon.Range" }}</label>
+                                <div class="form-fields">
+                                    <select name="system.range">
+                                        {{#select itemData.range}}
+                                        {{#each config.starshipWeaponRanges as |range r|}}
+                                        <option value="{{r}}">{{range}}</option>
+                                        {{/each}}
+                                        {{/select}}
+                                    </select>
+                                </div>
+                            </div>
+
+                            {{!-- Attack Bonus --}}
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.Items.ShipWeapon.AttackBonus" }}</label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.attackBonus" value="{{itemData.attackBonus}}" />
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    {{!-- Damage --}}
+                    <div class="bubble">
+                        <h4 class="bubble-header">
+                            {{ localize "SFRPG.Items.Action.DamageFormula" }}
+                            <a class="damage-control add-damage"><i class="fas fa-plus"></i></a>
+                        </h4>
+
+                        <div class="bubble-info">
+                            {{!-- Damage Formula --}}
+                            {{> "systems/sfrpg/templates/items/parts/damage-sections.hbs" starshipDamage=true}}
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+    </section>
+</form>

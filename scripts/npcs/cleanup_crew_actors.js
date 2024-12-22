@@ -16,17 +16,17 @@ try {
                     encoding: 'utf8',
                     flag: 'r+'
                 });
-                
+
                 const itemData = JSON.parse(json);
                 let isDirty = false;
-                
+
                 if (itemData.data.crew) {
                     for (const [key, crewData] of Object.entries(itemData.data.crew)) {
                         if (crewData.actorIds?.length > 0) {
                             crewData.actorIds = [];
                             isDirty = true;
                         }
-                        
+
                         if (crewData.actors?.length > 0) {
                             delete crewData.actors;
                             isDirty = true;
@@ -37,7 +37,7 @@ try {
                 if (isDirty) {
                     const output = JSON.stringify(itemData, null, 2);
                     fs.writeFileSync(`${dataPath}/${file}`, output);
-                    
+
                     count += 1;
                 }
             }

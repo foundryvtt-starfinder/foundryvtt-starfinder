@@ -1,15 +1,10 @@
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
 
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateEncumbrance", (fact, context) => {
         const data = fact.data;
         const actor = fact.actor;
-        const actorData = actor.data.data;
-
-        let tooltip = [];
-        if (data.encumbrance) {
-            tooltip = encumbrance.tooltip;
-        }
+        const actorData = actor.system;
 
         const addModifier = (bonus, data, item, localizationKey) => {
             if (bonus.modifierType === SFRPGModifierType.FORMULA) {
@@ -24,41 +19,43 @@ export default function (engine) {
 
             let computedBonus = 0;
             try {
-                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
                 computedBonus = roll.total;
             } catch {}
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
-                    type: bonus.type.capitalize(),
+                    type: game.i18n.format(`SFRPG.ModifierType${bonus.type.capitalize()}`),
                     mod: computedBonus.signedString(),
                     source: bonus.name
                 }));
             }
-            
+
             return computedBonus;
         };
 
-        let strength = Number(data.abilities.str.value);
-        let max = Number.isNaN(strength) ? 0 : strength;
+        const strength = Number(data.abilities.str.value);
+        const max = Number.isNaN(strength) ? 0 : strength;
+
+        const tooltip = [];
 
         tooltip.push(game.i18n.format("SFRPG.ActorSheet.Inventory.Encumbrance.EncumbranceBaseTooltip", {
             base: strength.signedString()
         }));
-        
+
         // Iterate through any modifiers that affect encumbrance
         let filteredModifiers = fact.modifiers.filter(mod => {
-            return (mod.enabled || mod.modifierType === "formula") && mod.effectType == SFRPGEffectType.BULK;
+            return (mod.enabled || mod.modifierType === "formula") && mod.effectType === SFRPGEffectType.BULK;
         });
-        filteredModifiers = context.parameters.stackModifiers.process(filteredModifiers, context);
+        filteredModifiers = context.parameters.stackModifiers.process(filteredModifiers, context, {actor: fact.actor});
 
-        let encumbrance = {
+        const encumbrance = {
             value: 0,
             tooltip: tooltip,
             rolledMods: []
         };
 
-        let bonus = Object.entries(filteredModifiers).reduce((sum, mod) => {
+        const bonus = Object.entries(filteredModifiers).reduce((sum, mod) => {
             if (mod[1] === null || mod[1].length < 1) return sum;
 
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
@@ -87,14 +84,14 @@ export default function (engine) {
                 tooltip: actorData.attributes.encumbrance.tooltip,
                 value: totalWeight
             };
-    
+
             enc.pct = Math.min(enc.value * 100 / enc.max, 99);
             enc.encumbered = enc.pct > 50;
             return enc;
         };
 
-        actor.data.encumbrance = _computeEncumbrance(actor.data.bulk, actorData);
-        data.encumbrance = actor.data.encumbrance;
+        actorData.encumbrance = _computeEncumbrance(actorData.bulk, actorData);
+        data.encumbrance = actorData.encumbrance;
 
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] });

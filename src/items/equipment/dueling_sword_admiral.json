@@ -2,7 +2,13 @@
   "_id": "mbyX1utVo9V84H60",
   "name": "Dueling sword, admiral",
   "type": "weapon",
-  "data": {
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
+  "img": "systems/sfrpg/icons/equipment/weapons/dueling-sword.webp",
+  "system": {
     "type": "",
     "ability": "str",
     "abilityMods": {
@@ -15,8 +21,10 @@
       "condition": "",
       "cost": null
     },
+    "ammunitionType": "",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "none",
       "value": null
@@ -49,6 +57,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": 1,
       "isOpen": true,
       "storage": [
         {
@@ -70,7 +79,7 @@
     "damage": {
       "parts": [
         {
-          "formula": "8d6 + @mod",
+          "formula": "8d6 + @abilities.str.mod",
           "operator": "",
           "types": {
             "slashing": true
@@ -78,20 +87,25 @@
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>Members of the Corpse Fleet earn their dueling swords through tallied kill counts, while officers receive their blades as part of the transition to the rank of commander. Corpse Fleet admirals&rsquo; blades are some of the keenest weapons in the known galaxy. Although the weapons are mainly used by the Corpse Fleet, the undead navy leaks some versions into the markets on @Compendium[sfrpg.setting.0VTtBYDJC5vUC434]{Eox}.</p>"
+      "value": "<p>Members of the Corpse Fleet earn their dueling swords through tallied kill counts, while officers receive their blades as part of the transition to the rank of commander. Corpse Fleet admirals’ blades are some of the keenest weapons in the known galaxy. Although the weapons are mainly used by the Corpse Fleet, the undead navy leaks some versions into the markets on @UUID[Compendium.sfrpg.setting.Item.0VTtBYDJC5vUC434]{Eox}.</p>"
     },
     "descriptors": [],
     "duration": {
       "units": "",
       "value": ""
     },
+    "equippable": false,
     "equipped": false,
     "formula": "",
     "identified": true,
     "isActive": null,
+    "isEquipment": true,
     "level": 17,
     "modifiers": [],
     "price": 225150,
@@ -184,12 +198,14 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "touch",
       "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": "",
@@ -197,6 +213,7 @@
     },
     "source": "AA2 pg. 23",
     "special": "",
+    "specialMaterials": {},
     "target": {
       "type": "",
       "value": ""
@@ -212,8 +229,5 @@
     },
     "weaponCategory": "uncategorized",
     "weaponType": "basicM"
-  },
-  "effects": [],
-  "flags": {},
-  "img": "systems/sfrpg/icons/equipment/weapons/dueling-sword.webp"
+  }
 }

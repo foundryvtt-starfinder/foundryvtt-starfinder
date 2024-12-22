@@ -2,12 +2,19 @@
   "_id": "dXYaeTjwjT4Yr4Rk",
   "name": "Channel Skill (Su)",
   "type": "feat",
-  "data": {
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
+  "img": "systems/sfrpg/icons/classes/channel_skill.webp",
+  "system": {
     "type": "",
     "ability": null,
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "",
@@ -16,6 +23,7 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": null
@@ -29,17 +37,26 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@Compendium[sfrpg.classes.bItuvukGHbObTApr]{Mystic}</p>\n<p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\">You draw strange feelings, instincts, knowledge, and urges from your connection, augmenting your prowess in certain tasks. Each connection has two skills associated with it. You gain a +1 insight bonus to skill checks with your connection&rsquo;s associated skills. This bonus increases by 1 at 5th level and every 3 levels thereafter.</span></p>\n<p><em>Within the Modifiers tab, change the two modifier's Specific Effect Value to the two associated skills</em></p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.bItuvukGHbObTApr]{Mystic}</p>\n<p>You draw strange feelings, instincts, knowledge, and urges from your connection, augmenting your prowess in certain tasks. Each connection has two skills associated with it. You gain a +1 insight bonus to skill checks with your connection’s associated skills. This bonus increases by 1 at 5th level and every 3 levels thereafter.</p>\n<p><em>Within the Modifiers tab, change the two modifier's Specific Effect Value to the two associated skills</em></p>"
     },
     "descriptors": [],
+    "details": {
+      "category": "classFeature",
+      "combat": false,
+      "specialAbilityType": "su"
+    },
     "duration": {
       "units": "",
       "value": null
     },
     "formula": "",
+    "isActive": null,
     "modifiers": [
       {
         "_id": "3d95111e-3c97-4999-b894-b83b7346f45b",
@@ -49,7 +66,7 @@
         "effectType": "skill",
         "enabled": true,
         "max": 0,
-        "modifier": "lookupRange(@classes.mystic.levels, 0, 3, 1, 5, 2, 8, 3, 11, 4, 14, 5, 17, 6, 20, 7)",
+        "modifier": "lookupRange(@classes.mystic.levels, 0, 2, 1, 5, 2, 8, 3, 11, 4, 14, 5, 17, 6, 20, 7)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
@@ -64,7 +81,7 @@
         "effectType": "skill",
         "enabled": true,
         "max": 0,
-        "modifier": "lookupRange(@classes.mystic.levels, 0, 3, 1, 5, 2, 8, 3, 11, 4, 14, 5, 17, 6, 20, 7)",
+        "modifier": "lookupRange(@classes.mystic.levels, 0, 2, 1, 5, 2, 8, 3, 11, 4, 14, 5, 17, 6, 20, 7)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
@@ -72,6 +89,7 @@
         "valueAffected": "ath"
       }
     ],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
@@ -83,6 +101,7 @@
       "value": null
     },
     "requirements": "2nd Level",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
@@ -98,11 +117,5 @@
       "per": null,
       "value": 0
     }
-  },
-  "flags": {},
-  "img": "systems/sfrpg/icons/classes/channel_skill.webp",
-  "permission": {
-    "QqVQDajn5ZN4kl25": 3,
-    "default": 0
   }
 }

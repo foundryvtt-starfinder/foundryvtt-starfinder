@@ -10,13 +10,13 @@ try {
                 encoding: 'utf8',
                 flag: 'r+'
             });
-            
+
             let equipment = JSON.parse(json);
 
             if (!["weapon"].includes(equipment?.type ?? "")) continue;
 
             // Weapons that have their activation type set to something
-            // other than none are causing display issues on an actor's 
+            // other than none are causing display issues on an actor's
             // inventory tab.
             equipment.data.activation.type = "none";
             equipment.data.activation.cost = null;
