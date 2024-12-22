@@ -10,12 +10,12 @@
   "img": "systems/sfrpg/icons/feats/telepathic_spy.webp",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "",
+    "actionType": "skill",
     "activation": {
       "type": "",
       "condition": "",
@@ -25,8 +25,8 @@
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "",
-      "value": null
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -35,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -43,7 +44,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>You double your operative’s edge bonus to Perception checks to notice traps. Additionally, you automatically receive a Perception check to notice a trap when you pass within 10 feet of it.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>You double your @UUID[Compendium.sfrpg.class-features.a65jtTCCb5kXCz5v]{operative’s edge} bonus to @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.gZlg2ZKze0erNLmP]{Perception} checks to notice traps. Additionally, you automatically receive a @Check[type:perception] to notice a trap when you pass within 10 feet of it.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -101,8 +102,8 @@
         "type": "insight",
         "condition": "",
         "effectType": "skill",
-        "enabled": false,
-        "max": 2,
+        "enabled": true,
+        "max": 0,
         "modifier": "(1+floor((@classes.operative.levels + 1) / 4)) * 2",
         "modifierType": "formula",
         "notes": "You double your operative’s edge bonus to Perception checks to notice traps. Additionally, you automatically receive a Perception check to notice a trap when you pass within 10 feet of it.",
@@ -115,7 +116,7 @@
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
+      "units": "none",
       "value": null
     },
     "recharge": {
@@ -126,8 +127,12 @@
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
+    },
+    "skillCheck": {
+      "type": "per",
+      "dc": ""
     },
     "source": "AR pg. 150",
     "target": {

@@ -1,13 +1,13 @@
 {
-  "_id": "FFhU2gNfYWtPm7oq",
-  "name": "Efficient Cloaking Field (Ex)",
+  "_id": "NB4ndrwjP4pYzOzB",
+  "name": "Concealed Weaponry (Ex)",
   "type": "feat",
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
     "systemVersion": "0.27.0"
   },
-  "img": "systems/sfrpg/icons/classes/efficient_cloaking_field.webp",
+  "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "",
     "ability": null,
@@ -17,16 +17,16 @@
     "actionTarget": "",
     "actionType": "",
     "activation": {
-      "type": "move",
+      "type": "",
       "condition": "",
-      "cost": null
+      "cost": 0
     },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "ft",
-      "value": ""
+      "units": "",
+      "value": 0
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -43,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>Your cloaking field lasts for up to 100 rounds (10 minutes), and it recharges at the rate of 2 rounds of cloaking per minute while inactive. You can spend 1 Resolve Point as a move action to recharge 20 rounds immediately, and you can do this even while the cloaking field is active. You must have the @UUID[Compendium.sfrpg.class-features.Item.WkZqCJUS19WvgeHA]{cloaking field} exploit to learn this exploit.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>You are adept at concealing your weapons and other items. Double your @UUID[Compendium.sfrpg.class-features.a65jtTCCb5kXCz5v]{operative’s edge} bonus to @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.qVEW9HjXQN0ok879]{Sleight of Hand} checks when attempting to hide a small object on your body. Additionally, you can draw a hidden weapon as quickly as a non-hidden weapon.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -89,39 +89,55 @@
       "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "text",
-      "value": "Up to 100 rounds (10 minutes)"
+      "units": "",
+      "value": null
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "b055efaf-2f7c-4332-94e1-7d0802847beb",
+        "name": "Concealed Weaponry (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "max": 2,
+        "modifier": "round((@classes.operative.levels + 3) / 4) * 2",
+        "modifierType": "formula",
+        "notes": "bonus to Sleight of Hand checks when attempting to hide a small object on your body.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "sle"
+      }
+    ],
     "properties": {},
     "range": {
       "additional": "",
       "per": "",
-      "units": "none",
+      "units": "",
       "value": null
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "14th Level",
+    "requirements": "2nd Level Operative",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "Operative Exploit",
+    "source": "AR pg. 150",
     "target": {
       "type": "",
-      "value": ""
+      "value": null
     },
     "uses": {
-      "max": "100",
-      "per": "charges",
-      "value": 100
+      "max": 0,
+      "per": null,
+      "value": 0
     }
   }
 }
