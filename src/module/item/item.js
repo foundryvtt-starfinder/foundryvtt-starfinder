@@ -437,12 +437,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Render the chat card template
         const templateType = ["tool", "consumable"].includes(this.type) ? this.type : "item";
         const template = `systems/sfrpg/templates/chat/${templateType}-card.hbs`;
-        const rollMode = game.settings.get("core", "rollMode");
         const html = await renderTemplate(template, templateData);
 
         // Basic chat message data
         const chatData = {
-            user: game.user.id,
+            author: game.user.id,
             type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             content: html,
             flags: {
@@ -455,20 +454,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                     actor: this.actor.uuid
                 }
             },
-            rollMode: rollMode,
             speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor})
         };
 
-        // Toggle default roll mode
-        if (["gmroll", "blindroll"].includes(rollMode)) {
-            chatData["whisper"] = ChatMessage.getWhisperRecipients("GM");
-        }
-        if (rollMode === "blindroll") {
-            chatData["blind"] = true;
-        }
-        if (rollMode === "selfroll") {
-            chatData["whisper"] = ChatMessage.getWhisperRecipients(game.user.name);
-        }
+        const rollMode = game.settings.get("core", "rollMode");
+        ChatMessage.applyRollMode(chatData, rollMode);
 
         // Create the chat message
         return ChatMessage.create(chatData, { displaySheet: false });
@@ -1560,9 +1550,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             chatMessage: options.chatMessage,
             content: content,
-            rollMode: game.settings.get("core", "rollMode"),
             rolls: [rollResult.roll],
-            type: CONST.CHAT_MESSAGE_STYLES.ROLL,
+            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             sound: CONFIG.sounds.dice
         });
     }
@@ -1615,7 +1604,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
             // Basic chat message data
             const chatData = {
-                user: game.user.id,
+                author: game.user.id,
                 flavor: flavor,
                 type: CONST.CHAT_MESSAGE_STYLES.OTHER,
                 content: html,
@@ -1623,14 +1612,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor})
             };
 
-            // Toggle default roll mode
             const rollMode = game.settings.get("core", "rollMode");
-            if (["gmroll", "blindroll"].includes(rollMode)) {
-                chatData["whisper"] = ChatMessage.getWhisperRecipients("GM");
-            }
-            if (rollMode === "blindroll") {
-                chatData["blind"] = true;
-            }
+            ChatMessage.applyRollMode(chatData, rollMode);
 
             // Create the chat message
             ChatMessage.create(chatData, { displaySheet: false });
@@ -1680,8 +1663,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Display a Chat Message
         const rollMode = game.settings.get("core", "rollMode");
         const chatData = {
-            user: game.user.id,
-            type: CONST.CHAT_MESSAGE_STYLES.ROLL,
+            author: game.user.id,
+            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             flavor: `${this.name} recharge check - ${success ? "success!" : "failure!"}`,
             whisper: (["gmroll", "blindroll"].includes(rollMode)) ? ChatMessage.getWhisperRecipients("GM") : null,
             blind: rollMode === "blindroll",

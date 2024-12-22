@@ -65,7 +65,7 @@ export const ActorRestMixin = (superclass) => class extends superclass {
             }
 
             ChatMessage.create({
-                user: game.user.id,
+                author: game.user.id,
                 speaker: ChatMessage.getSpeaker({actor: this}),
                 content: msg,
                 type: CONST.CHAT_MESSAGE_STYLES.OTHER
@@ -124,7 +124,7 @@ export const ActorRestMixin = (superclass) => class extends superclass {
             const msg = game.i18n.format("SFRPG.RepairDroneChatMessage", { name: this.name, regainedHP: dhp });
 
             ChatMessage.create({
-                user: game.user.id,
+                author: game.user.id,
                 speaker: ChatMessage.getSpeaker({actor: this}),
                 content: msg,
                 type: CONST.CHAT_MESSAGE_STYLES.OTHER
@@ -237,7 +237,7 @@ export const ActorRestMixin = (superclass) => class extends superclass {
             }
 
             ChatMessage.create({
-                user: game.user.id,
+                author: game.user.id,
                 speaker: ChatMessage.getSpeaker({actor: this}),
                 content: content
             });

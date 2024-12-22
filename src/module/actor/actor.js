@@ -910,7 +910,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             }
         }
 
-        const rollMode = game.settings.get("core", "rollMode");
+        const rollMode = rollResult.roll?.options?.rollMode ?? game.settings.get("core", "rollMode");
         const preparedRollExplanation = DiceSFRPG.formatFormula(rollResult.formula.formula);
         const rollContent = await rollResult.roll.render({ breakdown: preparedRollExplanation });
 
@@ -918,11 +918,10 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             flavor: flavor,
             speaker: ChatMessage.getSpeaker({ actor: speakerActor }),
             content: rollContent,
-            rollMode: rollMode,
             rolls: [rollResult.roll],
-            type: CONST.CHAT_MESSAGE_STYLES.ROLL,
+            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             sound: CONFIG.sounds.dice
-        });
+        }, { rollMode: rollMode});
     }
 
     levelUp(actorClassId) {
