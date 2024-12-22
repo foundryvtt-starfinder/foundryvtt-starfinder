@@ -457,6 +457,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor})
         };
 
+        const rollMode = game.settings.get("core", "rollMode");
+        ChatMessage.applyRollMode(chatData, rollMode);
+
         // Create the chat message
         return ChatMessage.create(chatData, { displaySheet: false });
     }

@@ -105,7 +105,8 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                     };
 
                     if (!active) chatData.action = "SFRPG.ChatCard.ItemActivation.Deactivates";
-
+                    const rollMode = game.settings.get("core", "rollMode");
+                    ChatMessage.applyRollMode(chatData, rollMode);
                     ChatMessage.create(chatData, { displaySheet: false });
                 });
 
