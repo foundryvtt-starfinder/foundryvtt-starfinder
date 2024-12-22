@@ -65,7 +65,7 @@ export class SFRPGDamage {
     }
 
     get isHealing() {
-        return this.healSettings != null;
+        return this.healSettings !== null;
     }
 
     negatesDamageReduction(damageReductionNegation) {
