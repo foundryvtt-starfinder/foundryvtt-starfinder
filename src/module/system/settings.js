@@ -98,6 +98,15 @@ export const registerSystemSettings = function() {
         }
     });
 
+    game.settings.register("sfrpg", "autoRollCritEffect", {
+        name: "SFRPG.Settings.AutoRollCritEffect.Name",
+        hint: "SFRPG.Settings.AutoRollCritEffect.Hint",
+        scope: "world",
+        config: true,
+        default: true,
+        type: Boolean
+    });
+
     game.settings.register("sfrpg", "difficultyDisplay", {
         name: "SFRPG.Settings.DifficultyDisplay.Name",
         hint: "SFRPG.Settings.DifficultyDisplay.Hint",
