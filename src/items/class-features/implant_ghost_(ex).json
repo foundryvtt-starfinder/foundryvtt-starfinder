@@ -1,6 +1,6 @@
 {
-  "_id": "VqhO0GNfqlEyXEoB",
-  "name": "Debug Curse (Su)",
+  "_id": "GrIfyyQ41a9t5ENY",
+  "name": "Implant Ghost (Ex)",
   "type": "feat",
   "_stats": {
     "coreVersion": 12,
@@ -10,23 +10,23 @@
   "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "",
+    "actionType": "skill",
     "activation": {
-      "type": "",
+      "type": "action",
       "condition": "",
-      "cost": 0
+      "cost": 1
     },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "",
-      "value": 0
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -35,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -43,7 +44,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>Your custom rig is able to analyze and disable curses’ underlying magic. While in possession of your custom rig, you gain a +3 resistance bonus to saving throws against curses. Once per day, you can use your custom rig to remove a curse from a creature or object, per the spell @UUID[Compendium.sfrpg.spells.Item.YGkyMwEE6SLfZc4r]{remove affliction}, using your mechanic level as your caster level.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>As a standard action, you can attempt to hack into the cybernetics installed in a creature you can see within 60 feet with a Computers check (DC = 15 + 1-1/2 × the target’s CR). If you succeed, choose one of the target’s cybernetic implants; your exocortex forms a secret wireless link to that augmentation, allowing you to record what it experiences. You can see what a cybernetic eye sees, hear what a cybernetic ear hears, copy the data a datajack downloads, or track the movement of a cybernetic hand (potentially learning combinations or keystrokes). You can maintain this link until your target moves more than 500 feet from you, you fall @UUID[Compendium.sfrpg.conditions.lf8pbezocjYIvR9y]{Unconscious} or @UUID[Compendium.sfrpg.conditions.3iTdt2NRgIyrychR]{Asleep}, or you choose to end it (this takes no action). You must have an @UUID[Compendium.sfrpg.class-features.cM54UpNXExgDSbq4]{Exocortex} to learn this trick.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -86,57 +87,45 @@
     "details": {
       "category": "classFeature",
       "combat": false,
-      "specialAbilityType": "su"
+      "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "",
-      "value": null
+      "units": "text",
+      "value": ""
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [
-      {
-        "_id": "ec143d13-4d50-4342-b228-b1110526f6f6",
-        "name": "Debug Curse (Su)",
-        "type": "resistance",
-        "condition": "",
-        "effectType": "saves",
-        "enabled": false,
-        "max": 3,
-        "modifier": "3",
-        "modifierType": "formula",
-        "notes": "While in possession of your custom rig, you gain a +3 resistance bonus to saving throws against curses.",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": ""
-      }
-    ],
+    "modifiers": [],
     "properties": {},
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
-      "value": null
+      "units": "ft",
+      "value": "60"
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "8th Level",
+    "requirements": "2nd Level (Mechanic)",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
-    "source": "GM pg. 23",
+    "skillCheck": {
+      "type": "com",
+      "dc": ""
+    },
+    "source": "AP#25 pg. 48",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }
