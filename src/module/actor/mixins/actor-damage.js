@@ -629,6 +629,9 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
 
                 // TODO: ..whereas vortex weapons that deal Hull Point damage reduce the target’s deflector shields’ defense value in each quadrant by 1d4.
                 else if (damage.properties.includes('vortex')) {
+                    if (this.options.debug) {
+                        console.log("Vortex Extra Deflector Damage Not Implemented");
+                    }
                 }
             }
 
@@ -661,7 +664,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
 
         if (damage.isCritical && newHullPoints !== originalHullPoints) {
             timesToRoll++;
-            const warningMessage = (newCT > originalCT) ?  "SFRPG.StarshipSheet.Damage.Nat20WithThreshold" : "SFRPG.StarshipSheet.Damage.Nat20"
+            const warningMessage = (newCT > originalCT) ?  "SFRPG.StarshipSheet.Damage.Nat20WithThreshold" : "SFRPG.StarshipSheet.Damage.Nat20";
             ui.notifications.warn(game.i18n.format(warningMessage));
         }
 
