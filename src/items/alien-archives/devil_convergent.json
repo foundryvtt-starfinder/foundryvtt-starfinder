@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.26.1"
+    "systemVersion": "0.27.0"
   },
   "img": "icons/svg/mystery-man.svg",
   "items": [
@@ -16,7 +16,7 @@
       "_stats": {
         "coreVersion": 12,
         "systemId": "sfrpg",
-        "systemVersion": "0.26.1"
+        "systemVersion": "0.27.0"
       },
       "img": "icons/svg/item-bag.svg",
       "system": {
@@ -35,6 +35,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -124,6 +125,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -279,7 +281,7 @@
       "_stats": {
         "coreVersion": 12,
         "systemId": "sfrpg",
-        "systemVersion": "0.26.1"
+        "systemVersion": "0.27.0"
       },
       "img": "icons/svg/item-bag.svg",
       "system": {
@@ -297,6 +299,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -316,7 +319,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>When a convergent devil uses their instant upgrade spell-like ability, they can choose to create a biotech augmentation instead of a cybernetic augmentation, subject to the same restrictions. If they do so, the target must attempt a DC 17 Fortitude save. On a failure, the target is @UUID[Compendium.sfrpg.conditions.ZacF0l6IwqBwToTJ]{Sickened} for the duration of the spell.</p>"
+          "value": "<p>When a convergent devil uses their instant upgrade spell-like ability, they can choose to create a biotech augmentation instead of a cybernetic augmentation, subject to the same restrictions. If they do so, the target must attempt a DC 17 Fortitude save. On a failure, the target is @UUID[Compendium.sfrpg.conditions.Item.ZacF0l6IwqBwToTJ]{Sickened} for the duration of the spell.</p>"
         },
         "descriptors": {
           "acid": false,
@@ -356,6 +359,11 @@
           "teleportation": false,
           "water": false
         },
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -363,6 +371,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -403,7 +412,7 @@
       "_stats": {
         "coreVersion": 12,
         "systemId": "sfrpg",
-        "systemVersion": "0.26.1"
+        "systemVersion": "0.27.0"
       },
       "flags": {
         "core": {
@@ -432,6 +441,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -513,6 +523,7 @@
           "prepared": true
         },
         "prepared": true,
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -544,6 +555,7 @@
     "name": "Devil, Convergent",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -555,6 +567,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -575,11 +588,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -593,13 +624,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
       "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "tint": "#ffffff"
     },
     "width": 1
   },

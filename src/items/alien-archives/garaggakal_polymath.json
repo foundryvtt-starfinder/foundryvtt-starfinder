@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.26.1"
+    "systemVersion": "0.27.0"
   },
   "img": "icons/svg/mystery-man.svg",
   "items": [
@@ -16,7 +16,7 @@
       "_stats": {
         "coreVersion": 12,
         "systemId": "sfrpg",
-        "systemVersion": "0.26.1"
+        "systemVersion": "0.27.0"
       },
       "img": "icons/svg/mystery-man.svg",
       "system": {
@@ -35,6 +35,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -115,6 +116,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -248,7 +250,7 @@
       "_stats": {
         "coreVersion": 12,
         "systemId": "sfrpg",
-        "systemVersion": "0.26.1"
+        "systemVersion": "0.27.0"
       },
       "img": "icons/svg/mystery-man.svg",
       "system": {
@@ -266,6 +268,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -294,6 +297,11 @@
           "value": "<p>As a standard action, a garaggakal polymath can spend 1 Resolve Point to leech the life from one target within 30 feet. This deals 14d6 damage (Fortitude DC 20 half), and the garaggakal gains temporary Hit Points equal to the amount of damage dealt.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": ""
@@ -301,6 +309,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -337,7 +346,7 @@
       "_stats": {
         "coreVersion": 12,
         "systemId": "sfrpg",
-        "systemVersion": "0.26.1"
+        "systemVersion": "0.27.0"
       },
       "img": "icons/svg/mystery-man.svg",
       "system": {
@@ -355,6 +364,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -377,6 +387,11 @@
           "value": "<p>(EX)</p>\n<p>The creature doesn’t breathe, and it is immune to effects that require breathing (such as inhaled&nbsp;poison&nbsp;). This does not give it immunity to cloud or gas attacks that don’t require breathing.</p>\n<hr />"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -384,6 +399,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -420,7 +436,7 @@
       "_stats": {
         "coreVersion": 12,
         "systemId": "sfrpg",
-        "systemVersion": "0.26.1"
+        "systemVersion": "0.27.0"
       },
       "img": "icons/svg/mystery-man.svg",
       "system": {
@@ -438,6 +454,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -460,6 +477,11 @@
           "value": "<p>A garaggakal can momentarily shift out of phase with reality. As a full action, a garaggakal can spend 1 Resolve Point to phase through up to 15 feet of solid matter. If it attempts to phase through something that is more than 15 feet thick, the attempt fails, but the action and Resolve Points are still expended. A garaggakal cannot phase through force effects, such as force fields.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": ""
@@ -467,6 +489,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -503,7 +526,7 @@
       "_stats": {
         "coreVersion": 12,
         "systemId": "sfrpg",
-        "systemVersion": "0.26.1"
+        "systemVersion": "0.27.0"
       },
       "img": "icons/svg/mystery-man.svg",
       "system": {
@@ -521,6 +544,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -543,6 +567,11 @@
           "value": "<p>A garaggakal polymath has spent centuries analyzing the species it has encountered in the Drift, and it uses this knowledge to target its prey’s most sensitive and vulnerable areas. Any creature that takes damage from the garaggakal’s bite attack must succeed at a DC 20 Fortitude save or become off-kilter (in zero gravity) or off-target for 1 round (in gravity).</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -550,6 +579,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -584,6 +614,7 @@
     "name": "Garaggakal Polymath",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -595,6 +626,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 2,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -615,11 +647,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -633,13 +683,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
       "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "tint": "#ffffff"
     },
     "width": 2
   },
@@ -844,7 +898,7 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>@UUID[Compendium.sfrpg.setting.nb5A5e7HqTnvVjtX]{The Drift} remains very much a mystery to explorers and scholars in the Pact Worlds, and scientists have only recently discovered life-forms native to it. The garaggakal, sometimes called a “Drift wraith” by those spacefarers fortunate enough to have survived an encounter with these predators, is one such species. A garaggakal is mostly humanoid in form, with rubbery, yellowish skin, translucent wings, and a long reptilian tail. A garaggakal’s head is little more than a gaping, lamprey-like mouth filled with curved teeth. An average garaggakal has a 20-foot wingspan and stands around 8 feet tall, though its tail can more than double that length, and it weighs approximately 400 pounds. A garaggakal polymath can be 15 feet tall or more, weighing as much as 1,000 pounds.</p>\n<p>Garaggakals freely roam the Drift on their diaphanous wings, hunting whatever living prey they can find. Garaggakals seem to divide all life into two categories: predators (such as themselves) and prey (everything else). To a garaggakal, the best way to learn more about a newly discovered species is to kill, dissect, and eat it—and not necessarily in that order.</p>\n<p>Garaggakals are ambush predators. When a garaggakal encounters a living creature in the Drift, it stalks its prey, using stealth and its innate ability to phase through solid matter to approach undetected, before draining its victim’s life force from a distance. Garaggakals have been known to stalk entire starships, phasing through a vessel’s hull to hunt and feed on the crew inside.</p>\n<p>When it comes time to reproduce, a garaggakal seeks out an area of intense radiation somewhere in the Drift, where it absorbs enough energy to undergo cytogenesis, literally creating new cells from the Drift’s planar energies to “build” its offspring. Upon completion, the process results in a fully grown adult garaggakal.</p>\n<p>Garaggakals increase in size and strength as they age. A garaggakal can live for centuries, growing to more than twice its normal adult size. Called garaggakal polymaths, these elder creatures have a burning curiosity that drives them on ever-longer journeys through the Drift.</p>",
+        "value": "<h2>Description</h2>\n<p>@UUID[Compendium.sfrpg.setting.Item.nb5A5e7HqTnvVjtX]{The Drift} remains very much a mystery to explorers and scholars in the Pact Worlds, and scientists have only recently discovered life-forms native to it. The garaggakal, sometimes called a “Drift wraith” by those spacefarers fortunate enough to have survived an encounter with these predators, is one such species. A garaggakal is mostly humanoid in form, with rubbery, yellowish skin, translucent wings, and a long reptilian tail. A garaggakal’s head is little more than a gaping, lamprey-like mouth filled with curved teeth. An average garaggakal has a 20-foot wingspan and stands around 8 feet tall, though its tail can more than double that length, and it weighs approximately 400 pounds. A garaggakal polymath can be 15 feet tall or more, weighing as much as 1,000 pounds.</p>\n<p>Garaggakals freely roam the Drift on their diaphanous wings, hunting whatever living prey they can find. Garaggakals seem to divide all life into two categories: predators (such as themselves) and prey (everything else). To a garaggakal, the best way to learn more about a newly discovered species is to kill, dissect, and eat it—and not necessarily in that order.</p>\n<p>Garaggakals are ambush predators. When a garaggakal encounters a living creature in the Drift, it stalks its prey, using stealth and its innate ability to phase through solid matter to approach undetected, before draining its victim’s life force from a distance. Garaggakals have been known to stalk entire starships, phasing through a vessel’s hull to hunt and feed on the crew inside.</p>\n<p>When it comes time to reproduce, a garaggakal seeks out an area of intense radiation somewhere in the Drift, where it absorbs enough energy to undergo cytogenesis, literally creating new cells from the Drift’s planar energies to “build” its offspring. Upon completion, the process results in a fully grown adult garaggakal.</p>\n<p>Garaggakals increase in size and strength as they age. A garaggakal can live for centuries, growing to more than twice its normal adult size. Called garaggakal polymaths, these elder creatures have a burning curiosity that drives them on ever-longer journeys through the Drift.</p>",
         "weight": ""
       },
       "class": "",

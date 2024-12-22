@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.26.1"
+    "systemVersion": "0.27.0"
   },
   "img": "icons/svg/mystery-man.svg",
   "items": [
@@ -16,7 +16,7 @@
       "_stats": {
         "coreVersion": 12,
         "systemId": "sfrpg",
-        "systemVersion": "0.26.1"
+        "systemVersion": "0.27.0"
       },
       "img": "icons/svg/item-bag.svg",
       "system": {
@@ -31,6 +31,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -53,6 +54,11 @@
           "value": ""
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -60,6 +66,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -96,7 +103,7 @@
       "_stats": {
         "coreVersion": 12,
         "systemId": "sfrpg",
-        "systemVersion": "0.26.1"
+        "systemVersion": "0.27.0"
       },
       "img": "icons/svg/item-bag.svg",
       "system": {
@@ -115,6 +122,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -203,6 +211,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -335,7 +344,7 @@
       "_stats": {
         "coreVersion": 12,
         "systemId": "sfrpg",
-        "systemVersion": "0.26.1"
+        "systemVersion": "0.27.0"
       },
       "img": "icons/svg/item-bag.svg",
       "system": {
@@ -353,6 +362,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -375,6 +385,11 @@
           "value": "<p>A living humanoid creature killed by an oblivion shade’s incorporeal touch must attempt a DC 18 Will saving throw just before it is killed. If it fails, it becomes an oblivion shade spawn under the control of the original oblivion shade in 1d4 rounds. An oblivion shade spawn usually has a CR that is 3 lower than that of the original oblivion shade.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -382,6 +397,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -418,7 +434,7 @@
       "_stats": {
         "coreVersion": 12,
         "systemId": "sfrpg",
-        "systemVersion": "0.26.1"
+        "systemVersion": "0.27.0"
       },
       "img": "icons/svg/mystery-man.svg",
       "system": {
@@ -436,6 +452,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -458,6 +475,11 @@
           "value": "<p>(EX)</p>\n<p>The creature has no Constitution score or modifier. Any DCs or other statistics that rely on a Constitution score treat the creature as having a score of 10 (+0). The creature is immediately destroyed when it reaches 0 Hit Points. An unliving creature doesn’t heal damage naturally, but a construct can be repaired with the right tools. Spells such as make whole can heal constructs, and magic effects can heal undead. An unliving creature with fast healing (see page 154) still benefits from that ability. Unliving creatures don’t breathe, eat, or sleep. They can’t be raised or resurrected, except through the use of miracle, wish, or a similar effect that specifically works on unliving creatures.</p>\n<hr />"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -465,6 +487,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -501,7 +524,7 @@
       "_stats": {
         "coreVersion": 12,
         "systemId": "sfrpg",
-        "systemVersion": "0.26.1"
+        "systemVersion": "0.27.0"
       },
       "img": "icons/svg/item-bag.svg",
       "system": {
@@ -519,6 +542,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -541,6 +565,11 @@
           "value": "<p>An oblivion shade can pass incorporeally through the center of a solid object whose space is larger than its own, but not an object whose space is larger than the distance an oblivion shade can move with a single move action (40 feet for most oblivion shades).</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -548,6 +577,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -582,6 +612,7 @@
     "name": "Oblivion Shade",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -593,6 +624,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -613,11 +645,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -631,13 +681,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
       "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "tint": "#ffffff"
     },
     "width": 1
   },
@@ -831,7 +885,7 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>A kind of incorporeal undead, an oblivion shade comes into existence when an evil being dies in the throes of utter nihilism. With that negativity burning in its heart, the miserable soul rises again as an oblivion shade.</p>\n<p>Oblivion shades are animate expressions of entropy, able to disintegrate matter with a touch. Though their bodies melt away to nearly nothing, victims killed by oblivion shades often find their souls twisted, becoming oblivion shade spawn under the thrall of the original undead.</p>\n<p>Most oblivion shades embrace devotion to @UUID[Compendium.sfrpg.setting.JpQpQbdXNOX6aTVG]{The Devourer}. Some function as soldiers of the Star-Eater’s cults, while others act as revered mystics and sages of the most faithful choirs. A few create their own sects by slaughtering innocents to create spawn. These “invisible choirs” are looked upon with fear and awe even by other cultists of @UUID[Compendium.sfrpg.setting.JpQpQbdXNOX6aTVG]{The Devourer}.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<h3>Organization</h3>\n<p>solitary or cabal (1-2 with 4-20 oblivion shade spawn)</p>\n</section>",
+        "value": "<h2>Description</h2>\n<p>A kind of incorporeal undead, an oblivion shade comes into existence when an evil being dies in the throes of utter nihilism. With that negativity burning in its heart, the miserable soul rises again as an oblivion shade.</p>\n<p>Oblivion shades are animate expressions of entropy, able to disintegrate matter with a touch. Though their bodies melt away to nearly nothing, victims killed by oblivion shades often find their souls twisted, becoming oblivion shade spawn under the thrall of the original undead.</p>\n<p>Most oblivion shades embrace devotion to @UUID[Compendium.sfrpg.setting.Item.JpQpQbdXNOX6aTVG]{The Devourer}. Some function as soldiers of the Star-Eater’s cults, while others act as revered mystics and sages of the most faithful choirs. A few create their own sects by slaughtering innocents to create spawn. These “invisible choirs” are looked upon with fear and awe even by other cultists of @UUID[Compendium.sfrpg.setting.Item.JpQpQbdXNOX6aTVG]{The Devourer}.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<h3>Organization</h3>\n<p>solitary or cabal (1-2 with 4-20 oblivion shade spawn)</p>\n</section>",
         "weight": ""
       },
       "class": "",

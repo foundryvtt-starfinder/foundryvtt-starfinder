@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.26.1"
+    "systemVersion": "0.27.0"
   },
   "img": "icons/svg/mystery-man.svg",
   "items": [
@@ -16,7 +16,7 @@
       "_stats": {
         "coreVersion": 12,
         "systemId": "sfrpg",
-        "systemVersion": "0.26.1"
+        "systemVersion": "0.27.0"
       },
       "img": "icons/svg/mystery-man.svg",
       "system": {
@@ -34,6 +34,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -53,9 +54,14 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>A wetzelt generates an electromagnetic field that disrupts technological devices and constructs, and interferes with electronic signals, such as those employed by comm units. Such signals do not function within this area. When a creature activates an item with charges within the area of effect, that object must succeed at a DC 13 Reflex save or is drained of the charge and the action is lost. A technological construct that begins its turn in this area must succeed at a DC 13 Reflex save or be @UUID[Compendium.sfrpg.conditions.aAQ6SW6iK0EVq8Ce]{Staggered} and unable to use energy-based attacks for 1d3 rounds. A creature or object that succeeds at its saving throw is immune to any wetzelt’s electromagnetic field for 24 hours. Equipment held, manufactured, or used by reptoids is unaffected by a wetzelt electromagnetic field.</p>"
+          "value": "<p>A wetzelt generates an electromagnetic field that disrupts technological devices and constructs, and interferes with electronic signals, such as those employed by comm units. Such signals do not function within this area. When a creature activates an item with charges within the area of effect, that object must succeed at a DC 13 Reflex save or is drained of the charge and the action is lost. A technological construct that begins its turn in this area must succeed at a DC 13 Reflex save or be @UUID[Compendium.sfrpg.conditions.Item.aAQ6SW6iK0EVq8Ce]{Staggered} and unable to use energy-based attacks for 1d3 rounds. A creature or object that succeeds at its saving throw is immune to any wetzelt’s electromagnetic field for 24 hours. Equipment held, manufactured, or used by reptoids is unaffected by a wetzelt electromagnetic field.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -63,6 +69,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -99,7 +106,7 @@
       "_stats": {
         "coreVersion": 12,
         "systemId": "sfrpg",
-        "systemVersion": "0.26.1"
+        "systemVersion": "0.27.0"
       },
       "img": "icons/svg/mystery-man.svg",
       "system": {
@@ -129,6 +136,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -211,6 +219,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -340,7 +349,7 @@
       "_stats": {
         "coreVersion": 12,
         "systemId": "sfrpg",
-        "systemVersion": "0.26.1"
+        "systemVersion": "0.27.0"
       },
       "img": "icons/svg/mystery-man.svg",
       "system": {
@@ -355,6 +364,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -377,6 +387,11 @@
           "value": "<p>A wetzelt’s claw attacks have the penetrating weapon special property, ignoring hardness up to the wetzelt’s CR (usually 4).</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -384,6 +399,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -418,6 +434,7 @@
     "name": "Wetzelt",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -429,6 +446,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -449,11 +467,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -467,13 +503,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
       "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "tint": "#ffffff"
     },
     "width": 1
   },

@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.26.1"
+    "systemVersion": "0.27.0"
   },
   "img": "icons/svg/mystery-man.svg",
   "items": [
@@ -16,7 +16,7 @@
       "_stats": {
         "coreVersion": 12,
         "systemId": "sfrpg",
-        "systemVersion": "0.26.1"
+        "systemVersion": "0.27.0"
       },
       "img": "icons/svg/item-bag.svg",
       "system": {
@@ -35,6 +35,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -115,6 +116,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -247,7 +249,7 @@
       "_stats": {
         "coreVersion": 12,
         "systemId": "sfrpg",
-        "systemVersion": "0.26.1"
+        "systemVersion": "0.27.0"
       },
       "img": "icons/svg/item-bag.svg",
       "system": {
@@ -266,6 +268,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "burst",
+          "shapable": false,
           "shape": "sphere",
           "units": "ft",
           "value": 15
@@ -335,6 +338,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -467,7 +471,7 @@
       "_stats": {
         "coreVersion": 12,
         "systemId": "sfrpg",
-        "systemVersion": "0.26.1"
+        "systemVersion": "0.27.0"
       },
       "img": "icons/svg/mystery-man.svg",
       "system": {
@@ -485,6 +489,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -507,6 +512,11 @@
           "value": "<p>(EX)</p>\n<p>The creature has no Constitution score or modifier. Any DCs or other statistics that rely on a Constitution score treat the creature as having a score of 10 (+0). The creature is immediately destroyed when it reaches 0 Hit Points. An unliving creature doesn’t heal damage naturally, but a construct can be repaired with the right tools. Spells such as make whole can heal constructs, and magic effects can heal undead. An unliving creature with fast healing (see page 154) still benefits from that ability. Unliving creatures don’t breathe, eat, or sleep. They can’t be raised or resurrected, except through the use of miracle, wish, or a similar effect that specifically works on unliving creatures.</p>\n<hr />"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -514,6 +524,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -550,7 +561,7 @@
       "_stats": {
         "coreVersion": 12,
         "systemId": "sfrpg",
-        "systemVersion": "0.26.1"
+        "systemVersion": "0.27.0"
       },
       "img": "icons/svg/item-bag.svg",
       "system": {
@@ -568,6 +579,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -598,6 +610,11 @@
           "value": "<p>A reclaimer’s grinding mouthparts can tear any material to shreds. If a reclaimer starts its turn grappling a creature, it can use a full action to grind into the creature, dealing 6d6 slashing damage (Fortitude DC 12 half) and applying the wound critical hit effect (save DC 12).</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -605,6 +622,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -641,7 +659,7 @@
       "_stats": {
         "coreVersion": 12,
         "systemId": "sfrpg",
-        "systemVersion": "0.26.1"
+        "systemVersion": "0.27.0"
       },
       "img": "icons/svg/item-bag.svg",
       "system": {
@@ -659,6 +677,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -678,9 +697,14 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>Protocites are solar-powered constructs, although they can function at reduced capacity away from light. In areas of darkness, protocites gain the @UUID[Compendium.sfrpg.conditions.ZacF0l6IwqBwToTJ]{Sickened} condition.</p>"
+          "value": "<p>Protocites are solar-powered constructs, although they can function at reduced capacity away from light. In areas of darkness, protocites gain the @UUID[Compendium.sfrpg.conditions.Item.ZacF0l6IwqBwToTJ]{Sickened} condition.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -688,6 +712,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -722,6 +747,7 @@
     "name": "Protocite Reclaimer",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -733,6 +759,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -753,11 +780,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -771,13 +816,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
       "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "tint": "#ffffff"
     },
     "width": 1
   },
@@ -971,7 +1020,7 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>Noma’s so-called protocites are as numerous and varied as their distant cousins, the anacites of @UUID[Compendium.sfrpg.setting.Gxsy07AQwteFkPhh]{Aballon}. It’s probable that the enigmatic First Ones created both. However, anacites were designed to harvest resources and have proliferated from that origin, while protocites were designed as experiments in form and function. Several models have the ability to iterate upon their own forms, while others serve specialized roles. Despite different origins and purposes, similar types of protocites and anacites have developed in parallel, while others are distinct.</p>\n<p>Protocite reclaimers form one such unique model line. These scorpion-like constructs serve as the backbone of their home’s ceaseless creativity. Noma’s AI can conceive of endless possibilities for creatures and contraptions, and the surrounding star provides the energy for its experiments. The material resource required for this is polyfluid, a UPB-like liquid that can form any number of molecule chains, allowing the creation of any substance. Reclaimers provide a vital service as mobile recycling centers, capable of scaling any structure in Noma and gradually devouring it. They turn what they consume back into polyfluid via a complex internal system of enzymatic machinery and filters. Reclaimers then use their extruders to deposit the polyfluid in receptacles so the material can be reused.</p>\n<p>Most of the time, reclaimers keep busy recycling materials from Noma’s completed experiments. However, they also serve as a frontline immune system, attacking and recycling protocites that operate outside acceptable parameters. With recent incursions into Noma, reclaimers have adapted to recognize and process hostile visitors.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any (Noma)</p>\n<h3>Organization</h3>\n<p>solitary, pair, or crew (3-6)</p>\n</section>",
+        "value": "<h2>Description</h2>\n<p>Noma’s so-called protocites are as numerous and varied as their distant cousins, the anacites of @UUID[Compendium.sfrpg.setting.Item.Gxsy07AQwteFkPhh]{Aballon}. It’s probable that the enigmatic First Ones created both. However, anacites were designed to harvest resources and have proliferated from that origin, while protocites were designed as experiments in form and function. Several models have the ability to iterate upon their own forms, while others serve specialized roles. Despite different origins and purposes, similar types of protocites and anacites have developed in parallel, while others are distinct.</p>\n<p>Protocite reclaimers form one such unique model line. These scorpion-like constructs serve as the backbone of their home’s ceaseless creativity. Noma’s AI can conceive of endless possibilities for creatures and contraptions, and the surrounding star provides the energy for its experiments. The material resource required for this is polyfluid, a UPB-like liquid that can form any number of molecule chains, allowing the creation of any substance. Reclaimers provide a vital service as mobile recycling centers, capable of scaling any structure in Noma and gradually devouring it. They turn what they consume back into polyfluid via a complex internal system of enzymatic machinery and filters. Reclaimers then use their extruders to deposit the polyfluid in receptacles so the material can be reused.</p>\n<p>Most of the time, reclaimers keep busy recycling materials from Noma’s completed experiments. However, they also serve as a frontline immune system, attacking and recycling protocites that operate outside acceptable parameters. With recent incursions into Noma, reclaimers have adapted to recognize and process hostile visitors.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any (Noma)</p>\n<h3>Organization</h3>\n<p>solitary, pair, or crew (3-6)</p>\n</section>",
         "weight": ""
       },
       "class": "",

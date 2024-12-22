@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.26.1"
+    "systemVersion": "0.27.0"
   },
   "img": "systems/sfrpg/icons/spells/mental_silence.webp",
   "system": {
@@ -14,6 +14,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "action",
@@ -22,11 +23,13 @@
     },
     "allowedClasses": {
       "myst": false,
+      "precog": false,
       "tech": true,
       "wysh": true
     },
     "area": {
       "effect": "spread",
+      "shapable": false,
       "shape": "sphere",
       "units": "ft",
       "value": 30
@@ -41,8 +44,11 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>You create an anti-telepathic field around yourself. A creature within the area attempting to communicate or gain information using telepathy or limited telepathy, or attempting to cast the spells&nbsp;detect thoughts,&nbsp;mind link,&nbsp;mind probe,&nbsp;telepathic bond,&nbsp;telepathic message, or&nbsp;telepathy—or abilities that work as those spells, such as the mindlink and telepathic bond mystic class features—must succeed at a caster level check (DC = 15 + your caster level). On a failure, the effect targeting you fails.</p>"
     },
@@ -53,6 +59,8 @@
       "value": "@details.cl.value"
     },
     "formula": "",
+    "isActive": null,
+    "isVariableLevel": false,
     "level": 1,
     "materials": {
       "consumed": false,
@@ -65,12 +73,14 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
       "units": "personal",
       "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,

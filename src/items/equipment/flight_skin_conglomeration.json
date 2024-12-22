@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.26.1"
+    "systemVersion": "0.27.0"
   },
   "img": "icons/svg/mystery-man.svg",
   "system": {
@@ -14,14 +14,17 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "",
       "condition": "",
       "cost": 0
     },
+    "ammunitionType": "",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": null
@@ -55,9 +58,15 @@
     },
     "attuned": false,
     "bulk": "L",
+    "capacity": {
+      "max": 0,
+      "value": 0
+    },
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": 1,
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
@@ -89,10 +98,13 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>Barathus designed flight skins to help them move comfortably in the cramped spaces favored by many terrestrial species, but the modular design proved easy to adapt to other species. A flight skin comprises redundant layers of light, airy material that lie nearly flat and resemble rubber or soft cloth but, buttressed by bio-psychic force fields, briefly inflate to reduce sudden impact. Flight skin @UUID[Compendium.sfrpg.rules.WP7hddXW4mLXXXOg]{Environmental protections} take the form of a thin membrane that, when activated, envelops exposed skin.</p>\n<p>When you fall or are hit by a falling object while you’re wearing your flight skin, calculate the damage as if the fall were 20 feet shorter.</p>\n<p>The armors was developed by and designed for barathus; as such, they are highly adjustable, easily accommodating barathus’ ever-changing physiology. Reduce the DC for Engineering checks to adjust these armors by 5; if you pay a professional to adjust the armor instead of doing so yourself, the cost is 5% of the armor’s purchase price.</p>"
+      "value": "<p>Barathus designed flight skins to help them move comfortably in the cramped spaces favored by many terrestrial species, but the modular design proved easy to adapt to other species. A flight skin comprises redundant layers of light, airy material that lie nearly flat and resemble rubber or soft cloth but, buttressed by bio-psychic force fields, briefly inflate to reduce sudden impact. Flight skin @UUID[Compendium.sfrpg.rules.Item.WP7hddXW4mLXXXOg]{Environmental protections} take the form of a thin membrane that, when activated, envelops exposed skin.</p>\n<p>When you fall or are hit by a falling object while you’re wearing your flight skin, calculate the damage as if the fall were 20 feet shorter.</p>\n<p>The armors was developed by and designed for barathus; as such, they are highly adjustable, easily accommodating barathus’ ever-changing physiology. Reduce the DC for Engineering checks to adjust these armors by 5; if you pay a professional to adjust the armor instead of doing so yourself, the cost is 5% of the armor’s purchase price.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -103,11 +115,14 @@
     "equipped": false,
     "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 18,
     "modifiers": [],
     "price": 400000,
     "proficient": false,
+    "properties": {},
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
@@ -115,6 +130,7 @@
       "value": null
     },
     "reach": "",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
@@ -122,11 +138,16 @@
     },
     "size": "",
     "source": "AP #29 pg. 49",
+    "specialMaterials": {},
     "speed": "",
     "strength": 0,
     "target": {
       "type": "",
       "value": null
+    },
+    "usage": {
+      "per": "",
+      "value": 0
     },
     "uses": {
       "max": 0,

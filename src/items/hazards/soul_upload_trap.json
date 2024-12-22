@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.26.1"
+    "systemVersion": "0.27.0"
   },
   "img": "icons/svg/mystery-man.svg",
   "items": [],
@@ -13,16 +13,19 @@
     "name": "Soul Upload Trap",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -43,15 +46,30 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -64,12 +82,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "tint": null
+      "src": "icons/svg/mystery-man.svg",
+      "tint": "#ffffff"
     },
     "width": 1
   },
@@ -136,7 +159,7 @@
         "value": "17"
       },
       "description": {
-        "value": "<p>One minute after living creatures enter the trapped room, they are bombarded with energy that digitizes and removes their souls, leaving their bodies lifeless husks. The digitized souls are uploaded into data modules linked to the room’s computer system. Hacking the system via a successful Computers check can release trapped souls, but it usually has a wipe module—a failed attempt might purge the souls. Casting @UUID[Compendium.sfrpg.spells.IRUPIVT101SvIK6l]{Raise Dead} on an affected body requires a successful DC 32 caster level check or the spell fails.</p>"
+        "value": "<p>One minute after living creatures enter the trapped room, they are bombarded with energy that digitizes and removes their souls, leaving their bodies lifeless husks. The digitized souls are uploaded into data modules linked to the room’s computer system. Hacking the system via a successful Computers check can release trapped souls, but it usually has a wipe module—a failed attempt might purge the souls. Casting @UUID[Compendium.sfrpg.spells.Item.IRUPIVT101SvIK6l]{Raise Dead} on an affected body requires a successful DC 32 caster level check or the spell fails.</p>"
       },
       "source": "Hybrid",
       "xp": {

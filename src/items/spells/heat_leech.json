@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.26.1"
+    "systemVersion": "0.27.0"
   },
   "img": "systems/sfrpg/icons/spells/heat_leech.webp",
   "system": {
@@ -14,6 +14,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "action",
@@ -22,11 +23,13 @@
     },
     "allowedClasses": {
       "myst": false,
+      "precog": false,
       "tech": true,
       "wysh": false
     },
     "area": {
       "effect": "burst",
+      "shapable": false,
       "shape": "cone",
       "units": "ft",
       "value": 60
@@ -49,8 +52,11 @@
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>You drain the heat from all creatures and objects in the area, dealing 13d8 cold damage. You can store the gathered heat energy in a used battery. If you do so and use that battery when casting&nbsp;explosive blast&nbsp;within 1 minute, that spell deals 2d6 additional fire damage, destroying the used battery. Otherwise, the energy dissipates normally.</p>"
     },
@@ -61,6 +67,8 @@
       "value": "instantaneous; see text"
     },
     "formula": "",
+    "isActive": null,
+    "isVariableLevel": false,
     "level": 5,
     "materials": {
       "consumed": false,
@@ -73,12 +81,14 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
       "units": null,
       "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "reflex",
       "dc": "",
