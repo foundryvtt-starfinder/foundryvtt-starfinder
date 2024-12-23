@@ -662,25 +662,39 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         const newCT = Math.floor((this.system.attributes.hp.max - newHullPoints) / this.system.attributes.criticalThreshold.value);
         let timesToRoll = 0;
 
-        if (damage.isCritical && newHullPoints !== originalHullPoints) {
-            timesToRoll++;
-            const warningMessage = (newCT > originalCT) ?  "SFRPG.StarshipSheet.Damage.Nat20WithThreshold" : "SFRPG.StarshipSheet.Damage.Nat20";
-            ui.notifications.warn(game.i18n.format(warningMessage));
-        }
-
         if (newCT > originalCT) {
             const crossedThresholds = newCT - originalCT;
             const warningMessage = game.i18n.format("SFRPG.StarshipSheet.Damage.CrossedCriticalThreshold", {name: this.name, crossedThresholds: crossedThresholds});
             timesToRoll += crossedThresholds;
             ui.notifications.warn(warningMessage);
+            ChatMessage.create({
+                user: game.user.id,
+                speaker: ChatMessage.getSpeaker({actor: this}),
+                content: warningMessage,
+                type: CONST.CHAT_MESSAGE_STYLES.OTHER
+            });
         }
 
-        if (timesToRoll > 0 && game.settings.get("sfrpg", "autoRollCritEffect")) {
-            const pack = await game.packs.get('sfrpg.tables');
-            const index = pack.index ?? await pack.getIndex();
-            const obj = index.getName("Starship Critical Damage Effects");
-            const doc = await pack.getDocument(obj._id);
-            doc.drawMany(timesToRoll);
+        if (damage.isCritical && newHullPoints !== originalHullPoints) {
+            timesToRoll++;
+            const warningMessage = game.i18n.format((newCT > originalCT) ?  "SFRPG.StarshipSheet.Damage.Nat20WithThreshold" : "SFRPG.StarshipSheet.Damage.Nat20", {name: this.name});
+            ui.notifications.warn(warningMessage);
+            ChatMessage.create({
+                user: game.user.id,
+                speaker: ChatMessage.getSpeaker({actor: this}),
+                content: warningMessage,
+                type: CONST.CHAT_MESSAGE_STYLES.OTHER
+            });
+        }
+
+        if (timesToRoll > 0) {
+            if (game.settings.get("sfrpg", "autoRollCritEffect")) {
+                const pack = await game.packs.get('sfrpg.tables');
+                const index = pack.index ?? await pack.getIndex();
+                const obj = index.getName("Starship Critical Damage Effects");
+                const doc = await pack.getDocument(obj._id);
+                doc.drawMany(timesToRoll);
+            }
         }
 
         const promise = this.update(actorUpdate);
