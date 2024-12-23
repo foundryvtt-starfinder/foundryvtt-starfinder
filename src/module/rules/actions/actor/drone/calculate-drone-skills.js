@@ -1,6 +1,6 @@
 import { SFRPG } from "../../../../config.js";
 
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateDroneSkills", (fact, context) => {
         const data = fact.data;
 

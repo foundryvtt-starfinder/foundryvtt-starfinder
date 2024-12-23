@@ -1,14 +1,14 @@
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../../modifiers/types.js";
 
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateSkillArmorCheckPenalty", (fact, context) => {
         const armors = fact.armors?.length > 0 ? fact.armors : null;
         const shields = fact.shields;
         const skills = fact.data.skills;
         const modifiers = fact.modifiers;
 
-        const worstArmor = armors?.reduce((armor, worstArmor) => (armor.data?.data?.armor?.acp || 0) < (worstArmor.data?.data?.armor?.acp || 0) ? armor : worstArmor);
-        const armorData = worstArmor?.data?.data;
+        const worstArmor = armors?.reduce((armor, worstArmor) => (armor.system?.armor?.acp || 0) < (worstArmor.system?.armor?.acp || 0) ? armor : worstArmor);
+        const armorData = worstArmor?.system;
         const hasLightArmor = armorData?.armor?.type === "light";
         const hasHeavyArmor = armorData?.armor?.type === "heavy";
 
@@ -25,7 +25,7 @@ export default function (engine) {
 
             let computedBonus = 0;
             try {
-                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
                 computedBonus = roll.total;
             } catch {}
 
@@ -41,12 +41,12 @@ export default function (engine) {
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
-                    type: bonus.type.capitalize(),
+                    type: game.i18n.format(`SFRPG.ModifierType${bonus.type.capitalize()}`),
                     mod: computedBonus.signedString(),
                     source: bonus.name
                 }));
             }
-            
+
             return computedBonus;
         };
 
@@ -54,22 +54,21 @@ export default function (engine) {
             return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.ACP].includes(mod.effectType);
         });
 
-        let skillModifier = {
+        const skillModifier = {
             value: 0,
             tooltip: [],
             rolledMods: []
         };
 
-        const mods = context.parameters.stackModifiers.process(acpMods, context);
-        let mod = Object.entries(mods).reduce((sum, mod) => {
+        const mods = context.parameters.stackModifiers.process(acpMods, context, {actor: fact.actor});
+        const mod = Object.entries(mods).reduce((sum, mod) => {
             if (mod[1] === null || mod[1].length < 1) return sum;
 
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
                 for (const bonus of mod[1]) {
                     sum += addModifier(bonus, fact.data, skillModifier, "SFRPG.ACPTooltip");
                 }
-            }
-            else {
+            } else {
                 sum += addModifier(mod[1], fact.data, skillModifier, "SFRPG.ACPTooltip");
             }
 
@@ -82,7 +81,7 @@ export default function (engine) {
             }
 
             if (armorData?.armor?.acp) {
-                let acp = parseInt(armorData.armor.acp);
+                const acp = parseInt(armorData.armor.acp);
                 if (!Number.isNaN(acp)) {
                     skill.mod += acp;
 
@@ -96,10 +95,10 @@ export default function (engine) {
 
             if (shields) {
                 shields.forEach(shield => {
-                    const shieldData = shield.data.data;
+                    const shieldData = shield.system;
 
                     if (shieldData?.acp) {
-                        let acp = parseInt(shieldData.acp);
+                        const acp = parseInt(shieldData.acp);
                         if (!Number.isNaN(acp)) {
                             skill.mod += acp;
 

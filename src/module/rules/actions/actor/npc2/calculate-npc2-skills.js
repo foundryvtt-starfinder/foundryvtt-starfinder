@@ -1,4 +1,4 @@
-export default function (engine) {
+export default function(engine) {
     engine.closures.add('calculateNPC2BaseSkills', (fact, context) => {
         const data = fact.data;
         const skills = data.skills;

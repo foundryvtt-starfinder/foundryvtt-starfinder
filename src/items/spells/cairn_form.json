@@ -2,12 +2,19 @@
   "_id": "9VoJHbyJVWHVeaRY",
   "name": "Cairn Form",
   "type": "spell",
-  "data": {
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
+  "img": "systems/sfrpg/icons/feats/enchanced_resistance.webp",
+  "system": {
     "type": "",
     "ability": "str",
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "mwak",
     "activation": {
       "type": "action",
@@ -16,11 +23,13 @@
     },
     "allowedClasses": {
       "myst": true,
+      "precog": false,
       "tech": false,
       "wysh": true
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "none",
       "value": null
@@ -57,13 +66,13 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">You transform your outer layer into solid rock, amplifying your offense and defense. You gain a special unarmed strike that deals lethal damage, doesn&rsquo;t count as archaic, and threatens squares. You also add 1-1/2 &times; your character level to damage dealt with this attack (instead of the normal Weapon Specialization damage). You also gain DR 2/&mdash;. Finally, you gain a +2 circumstance bonus to your AC against bull rush, reposition, and trip combat maneuvers.</span></p>"
+      "value": "<p>You transform your outer layer into solid rock, amplifying your offense and defense. You gain a special unarmed strike that deals lethal damage, doesn’t count as archaic, and threatens squares. You also add 1-1/2 × your character level to damage dealt with this attack (instead of the normal Weapon Specialization damage). You also gain DR 2/—. Finally, you gain a +2 circumstance bonus to your AC against bull rush, reposition, and trip combat maneuvers.</p>"
     },
     "descriptors": [],
     "dismissible": false,
     "duration": {
-      "units": "",
-      "value": "1 round/level"
+      "units": "round",
+      "value": "@details.cl.value"
     },
     "formula": "",
     "isActive": null,
@@ -80,6 +89,7 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
@@ -104,8 +114,5 @@
       "per": "",
       "value": null
     }
-  },
-  "effects": [],
-  "flags": {},
-  "img": "systems/sfrpg/icons/feats/enchanced_resistance.webp"
+  }
 }

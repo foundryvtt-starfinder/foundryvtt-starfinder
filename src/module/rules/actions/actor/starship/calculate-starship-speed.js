@@ -1,4 +1,4 @@
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateStarshipSpeed", (fact, context) => {
         const data = fact.data;
 
@@ -6,7 +6,7 @@ export default function (engine) {
 
         const thrusters = fact.items.filter(x => x.type === "starshipThruster");
         for (const thruster of thrusters) {
-            const thrusterData = thruster.data.data;
+            const thrusterData = thruster.system;
 
             if (!thrusterData.isBooster) {
                 data.attributes.speed.value += thrusterData.speed;

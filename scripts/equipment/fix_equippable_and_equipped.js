@@ -14,17 +14,17 @@ try {
                 encoding: 'utf8',
                 flag: 'r+'
             });
-            
+
             const itemData = JSON.parse(json);
-            
+
             if (equippableItems.includes(itemData.type)) {
                 let isDirty = false;
-                
+
                 if (!itemData.data.equippable) {
                     itemData.data.equippable = true;
                     isDirty = true;
                 }
-                
+
                 if (itemData.data.proficient) {
                     itemData.data.proficient = false;
                     isDirty = true;
@@ -35,12 +35,12 @@ try {
                     const output = JSON.stringify(itemData, null, 2);
 
                     fs.writeFileSync(`${dataPath}/${file}`, output);
-                    
+
                     count += 1;
                 }
             }
         }
-        
+
         console.log(`\nFound, and migrated, ${count} equipment entries.`);
     });
 } catch (err) {

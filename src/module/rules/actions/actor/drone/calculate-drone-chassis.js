@@ -1,6 +1,6 @@
 import { SFRPG } from "../../../../config.js";
 
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateDroneChassis", (fact, context) => {
         const data = fact.data;
 
@@ -12,10 +12,10 @@ export default function (engine) {
         }
 
         if (activeChassis) {
-            const chassisData = activeChassis.data.data;
+            const chassisData = activeChassis.system;
 
             data.traits.size = SFRPG.actorSizes[chassisData.size];
-            data.attributes.speed = mergeObject(data.attributes.speed, chassisData.speed, {overwrite: true});
+            data.attributes.speed = foundry.utils.mergeObject(data.attributes.speed, chassisData.speed, {overwrite: true});
             data.attributes.speed.special = "";
 
             let droneLevel = chassisData.levels;
@@ -33,8 +33,8 @@ export default function (engine) {
                 })]
             };
 
-            let abilityIncreaseStats = [chassisData.abilityIncreaseStats.first, chassisData.abilityIncreaseStats.second];
-            let abilityIncreases = SFRPG.droneAbilityScoreIncreaseLevels.filter(x => x <= droneLevel).length;
+            const abilityIncreaseStats = [chassisData.abilityIncreaseStats.first, chassisData.abilityIncreaseStats.second];
+            const abilityIncreases = SFRPG.droneAbilityScoreIncreaseLevels.filter(x => x <= droneLevel).length;
 
             data.abilities.str.base = chassisData.abilityScores.str + (abilityIncreaseStats.includes("str") ? abilityIncreases : 0);
 
@@ -46,7 +46,7 @@ export default function (engine) {
             data.abilities.int.base = chassisData.abilityScores.int + (abilityIncreaseStats.includes("int") ? abilityIncreases : 0);
 
             data.abilities.wis.base = chassisData.abilityScores.wis + (abilityIncreaseStats.includes("wis") ? abilityIncreases : 0);
-            
+
             data.abilities.cha.base = chassisData.abilityScores.cha + (abilityIncreaseStats.includes("cha") ? abilityIncreases : 0);
         } else {
             data.abilities.str.tooltip.push(game.i18n.format("SFRPG.DroneSheet.Chassis.NotInstalled"));
@@ -64,8 +64,8 @@ export default function (engine) {
         }
 
         // Clear out skills, this and future closures will enable them again
-        let skillkeys = Object.keys(SFRPG.skills);
-        for (let skill of skillkeys) {
+        const skillkeys = Object.keys(SFRPG.skills);
+        for (const skill of skillkeys) {
             data.skills[skill].enabled = false;
             data.skills[skill].value = 0;
             data.skills[skill].ranks = 0;

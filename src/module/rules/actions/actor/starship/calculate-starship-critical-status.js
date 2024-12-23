@@ -1,6 +1,5 @@
-import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes} from "../../../../modifiers/types.js";
 
-export default function (engine) {
+export default function(engine) {
     engine.closures.add( "calculateStarshipCriticalStatus", (fact, context) => {
         const data = fact.data;
 
@@ -22,8 +21,8 @@ export default function (engine) {
         if (!data.attributes.systems) {
             data.attributes.systems = {};
         }
-        
-        data.attributes.systems = mergeObject(data.attributes.systems, {
+
+        data.attributes.systems = foundry.utils.mergeObject(data.attributes.systems, {
             lifeSupport: {
                 value: "nominal",
                 affectedRoles: {
@@ -95,7 +94,7 @@ export default function (engine) {
             systemData.mod = modifier;
             systemData.modOther = (key === "powerCore") ? critModsOther[systemData.value] : 0;
         }
-        
+
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] } );
 }

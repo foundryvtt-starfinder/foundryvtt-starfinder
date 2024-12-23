@@ -1,5 +1,5 @@
 /**
- * A specialized Dialog for toggling which skills are 
+ * A specialized Dialog for toggling which skills are
  * visible on the NPC sheet.
  * @type {Dialog}
  * @param {Object} data The data used by the dialog
@@ -13,21 +13,21 @@ export class NpcSkillToggleDialog extends Dialog {
 
     static get defaultOptions() {
         const defaultOptions = super.defaultOptions;
-        return mergeObject(defaultOptions, {
+        return foundry.utils.mergeObject(defaultOptions, {
             width: 560
         });
     }
 
     /**
      * Factory method used to create the dialog.
-     * 
+     *
      * @param {Object} skills The list of skills for an NPC Actor
-     * @returns {Promis<FormData>} Returns a Promise which resolves to 
+     * @returns {Promis<FormData>} Returns a Promise which resolves to
      * the dialog FormData once the workflow has been completed.
      */
     static async create(skills = {}) {
-        let skillNames = {};
-        for (let skillId of Object.keys(skills)) {
+        const skillNames = {};
+        for (const skillId of Object.keys(skills)) {
             if (skillId in CONFIG.SFRPG.skills) {
                 skillNames[skillId] = CONFIG.SFRPG.skills[skillId];
             } else {
@@ -35,7 +35,7 @@ export class NpcSkillToggleDialog extends Dialog {
             }
         }
 
-        const html = await renderTemplate("systems/sfrpg/templates/apps/npc-skill-toggle.html", {
+        const html = await renderTemplate("systems/sfrpg/templates/apps/npc-skill-toggle.hbs", {
             config: CONFIG.SFRPG,
             skillNames,
             skills

@@ -2,12 +2,19 @@
   "_id": "OeK8OwBb15R7ibs7",
   "name": "Benevolent Synesthesia",
   "type": "spell",
-  "data": {
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
+  "img": "systems/sfrpg/icons/spells/detect_thoughts.webp",
+  "system": {
     "type": "",
     "ability": "",
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "action",
@@ -16,11 +23,13 @@
     },
     "allowedClasses": {
       "myst": true,
+      "precog": false,
       "tech": false,
       "wysh": true
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "none",
       "value": null
@@ -41,13 +50,13 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>You transform the target&rsquo;s brain, allowing them to see sounds, hear scents, and otherwise perceive sensory input using multiple sensory organs. Even unusual senses, such as a @Compendium[sfrpg.races.VIJ6pdOVTJle3vJx]{Shirren}&rsquo;s vibration sense, are affected. For the duration of the spell, the target is immune to the @Compendium[sfrpg.conditions.tOpF6qjnlnKc10t7]{Blinded}, @Compendium[sfrpg.conditions.YjE6UGzwOTfO9p4g]{Dazzled}, and @Compendium[sfrpg.conditions.D8JvCEmOiWKe2UDx]{Deafened} conditions and gains a +2 enhancement bonus to Perception checks.</p>"
+      "value": "<p>You transform the target’s brain, allowing them to see sounds, hear scents, and otherwise perceive sensory input using multiple sensory organs. Even unusual senses, such as a @UUID[Compendium.sfrpg.races.Item.VIJ6pdOVTJle3vJx]{Shirren}’s vibration sense, are affected. For the duration of the spell, the target is immune to the @UUID[Compendium.sfrpg.conditions.Item.tOpF6qjnlnKc10t7]{Blinded}, @UUID[Compendium.sfrpg.conditions.Item.YjE6UGzwOTfO9p4g]{Dazzled}, and @UUID[Compendium.sfrpg.conditions.Item.D8JvCEmOiWKe2UDx]{Deafened} conditions and gains a +2 enhancement bonus to Perception checks.</p>"
     },
     "descriptors": [],
     "dismissible": true,
     "duration": {
-      "units": "",
-      "value": "1 round/level (D)"
+      "units": "round",
+      "value": "@details.cl.value"
     },
     "formula": "",
     "isActive": null,
@@ -64,11 +73,12 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
-      "additional": "10 ft.",
-      "per": "level",
-      "units": "ft",
-      "value": 100
+      "additional": "",
+      "per": "",
+      "units": "medium",
+      "value": null
     },
     "rollNotes": "",
     "save": {
@@ -88,12 +98,5 @@
       "per": "",
       "value": null
     }
-  },
-  "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.sfrpg.spells.OeK8OwBb15R7ibs7"
-    }
-  },
-  "img": "systems/sfrpg/icons/spells/detect_thoughts.webp"
+  }
 }

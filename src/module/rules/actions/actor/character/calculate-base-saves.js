@@ -1,4 +1,4 @@
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateBaseSaves", (fact, context) => {
         const data = fact.data;
         const classes = fact.classes;
@@ -12,9 +12,9 @@ export default function (engine) {
         const will = data.attributes.will;
 
         for (const cls of classes) {
-            const classData = cls.data.data;
+            const classData = cls.system;
 
-            let slowSave = Math.floor(classData.levels * (1/3));
+            let slowSave = Math.floor(classData.levels * (1 / 3));
             let fastSave = Math.floor(classData.levels * 0.5) + 2;
 
             fortSave += classData.fort === "slow" ? slowSave : fastSave;
@@ -42,16 +42,22 @@ export default function (engine) {
             ability: "Con",
             mod: data.abilities.con.mod.signedString()
         }));
+        // this is done because the normal tooltip will be changed later on and we need this one as a "base" for dice rolls.
+        fort.rollTooltip = [ ...fort.tooltip ];
 
         reflex.tooltip.push(game.i18n.format("SFRPG.SaveAbilityModTooltip", {
             ability: "Dex",
             mod: data.abilities.dex.mod.signedString()
         }));
+        // this is done because the normal tooltip will be changed later on and we need this one as a "base" for dice rolls.
+        reflex.rollTooltip = [ ...reflex.tooltip ];
 
         will.tooltip.push(game.i18n.format("SFRPG.SaveAbilityModTooltip", {
             ability: "Wis",
             mod: data.abilities.wis.mod.signedString()
         }));
+        // this is done because the normal tooltip will be changed later on and we need this one as a "base" for dice rolls.
+        will.rollTooltip = [ ...will.tooltip ];
 
         return fact;
     });

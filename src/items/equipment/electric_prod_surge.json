@@ -2,7 +2,13 @@
   "_id": "2tFkeg7fTQqdX5wC",
   "name": "Electric prod, surge",
   "type": "weapon",
-  "data": {
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
+  "img": "systems/sfrpg/icons/equipment/weapons/club.webp",
+  "system": {
     "type": "",
     "ability": "str",
     "abilityMods": {
@@ -15,8 +21,10 @@
       "condition": "",
       "cost": null
     },
+    "ammunitionType": "",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": null,
       "value": null
@@ -49,6 +57,7 @@
     "chatFlavor": "Powered, nonlethal, professional (farmer)",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": 1,
       "isOpen": true,
       "storage": [
         {
@@ -80,7 +89,7 @@
     "damage": {
       "parts": [
         {
-          "formula": "4d6 + @mod",
+          "formula": "4d6 + @abilities.str.mod",
           "operator": "",
           "types": {
             "electricity": true
@@ -88,8 +97,11 @@
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": ""
     },
@@ -98,10 +110,12 @@
       "units": "",
       "value": ""
     },
+    "equippable": false,
     "equipped": true,
     "formula": "",
     "identified": true,
     "isActive": null,
+    "isEquipment": true,
     "level": 14,
     "modifiers": [],
     "price": 75000,
@@ -194,12 +208,14 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": null,
       "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": "",
@@ -207,6 +223,7 @@
     },
     "source": "AP #34 pg. 44",
     "special": "",
+    "specialMaterials": {},
     "target": {
       "type": "",
       "value": ""
@@ -222,8 +239,5 @@
     },
     "weaponCategory": "uncategorized",
     "weaponType": "advancedM"
-  },
-  "effects": [],
-  "flags": {},
-  "img": "systems/sfrpg/icons/equipment/weapons/club.webp"
+  }
 }

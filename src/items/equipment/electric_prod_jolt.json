@@ -2,10 +2,13 @@
   "_id": "lbMcZKMyFKRYMf69",
   "name": "Electric prod, jolt",
   "type": "weapon",
-  "augmentation": false,
-  "consumable": false,
-  "container": false,
-  "data": {
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
+  "img": "systems/sfrpg/icons/equipment/weapons/club.webp",
+  "system": {
     "type": "",
     "ability": "str",
     "abilityMods": {
@@ -18,8 +21,10 @@
       "condition": "",
       "cost": null
     },
+    "ammunitionType": "",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "none",
       "value": null
@@ -52,6 +57,7 @@
     "chatFlavor": "Powered, nonlethal, professional (farmer)",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": 1,
       "isOpen": true,
       "storage": [
         {
@@ -83,7 +89,7 @@
     "damage": {
       "parts": [
         {
-          "formula": "1d4 + @mod",
+          "formula": "1d4 + @abilities.str.mod",
           "operator": "",
           "types": {
             "electricity": true
@@ -91,8 +97,11 @@
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": ""
     },
@@ -101,10 +110,12 @@
       "units": "",
       "value": ""
     },
+    "equippable": false,
     "equipped": true,
     "formula": "",
     "identified": true,
     "isActive": null,
+    "isEquipment": true,
     "level": 2,
     "modifiers": [],
     "price": 900,
@@ -197,12 +208,14 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "none",
       "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": "",
@@ -210,6 +223,7 @@
     },
     "source": "AP #34 pg. 44",
     "special": "",
+    "specialMaterials": {},
     "target": {
       "type": "",
       "value": ""
@@ -225,26 +239,5 @@
     },
     "weaponCategory": "uncategorized",
     "weaponType": "advancedM"
-  },
-  "effects": [],
-  "equipment": false,
-  "flags": {},
-  "fusion": true,
-  "goods": false,
-  "hybrid": false,
-  "img": "systems/sfrpg/icons/equipment/weapons/club.webp",
-  "magic": false,
-  "shield": false,
-  "spell": false,
-  "storage": {
-    "type": "slot",
-    "affectsEncumbrance": true,
-    "amount": 2,
-    "subtype": "fusion",
-    "weightProperty": "level"
-  },
-  "technological": false,
-  "upgrade": false,
-  "weapon": false,
-  "weaponAccessory": false
+  }
 }

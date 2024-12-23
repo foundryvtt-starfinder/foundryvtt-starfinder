@@ -1,46 +1,46 @@
 export const ItemActivationMixin = (superclass) => class extends superclass {
 
     hasUses() {
-        const itemData = this.data.data;
-        return itemData.uses && itemData.uses.max && itemData.uses.value;
+        const itemData = this.system;
+        return (Number(itemData.uses?.max) || itemData.uses?.total) && (itemData.uses?.value !== null && itemData.uses?.value !== undefined);
     }
 
     getRemainingUses() {
-        const itemData = this.data.data;
+        const itemData = this.system;
         return itemData.uses?.value || 0;
     }
 
     getMaxUses() {
-        const itemData = this.data.data;
-        return itemData.uses?.max || 0;
+        const itemData = this.system;
+        return itemData.uses?.total || itemData.uses?.max || 0;
     }
 
     canBeUsed() {
         return this.getRemainingUses() > 0 && this.getMaxUses() > 0;
     }
-    
+
     canBeActivated() {
-        const itemData = this.data.data;
+        const itemData = this.system;
         if (this.type === "vehicleSystem") {
             return itemData.canBeActivated;
         } else {
-            return !!(itemData.activation.type);
+            return !!(itemData?.activation?.type);
         }
     }
 
     isActive() {
-        const itemData = this.data.data;
-        return itemData.isActive;
+        const itemData = this.system;
+        return !!(itemData.isActive);
     }
-    
+
     setActive(active) {
         // Only true and false are accepted.
         if (active !== true && active !== false) {
-            console.log(`Entering an invalid value ${active} for item.setActive()! Only true or false are allowed.`)
+            console.log(`Entering an invalid value ${active} for item.setActive()! Only true or false are allowed.`);
             return;
         }
 
-        if (!this.canBeActivated() || this.isActive() == active) {
+        if (!this.canBeActivated() || this.isActive() === active) {
             return;
         }
 
@@ -54,106 +54,66 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                 return false;
             }
 
-            updateData['data.uses.value'] = Math.max(0, remainingUses - 1);
+            updateData['system.uses.value'] = Math.max(0, remainingUses - 1);
         }
 
-        updateData['data.isActive'] = active;
+        updateData['system.isActive'] = active;
 
         const updatePromise = this.update(updateData);
-        const rollMode = game.settings.get("core", "rollMode");
-        
-        if (active) {
+
+        if (active || this.system.duration.value || this.system.uses.max > 0) {
             updatePromise.then(() => {
                 // Render the chat card template
-                const templateData = {
-                    actor: this.actor,
-                    item: this,
-                    action: "SFRPG.ChatCard.ItemActivation.Activates",
-                    labels: this.labels,
-                    hasAttack: this.hasAttack,
-                    hasDamage: this.hasDamage,
-                    isVersatile: this.isVersatile,
-                    hasSave: this.hasSave
-                };
+                const templateData = active
+                    ? {
+                        actor: this.actor,
+                        item: this,
+                        action: "SFRPG.ChatCard.ItemActivation.Activates",
+                        labels: this.labels,
+                        hasAttack: this.hasAttack,
+                        hasDamage: this.hasDamage,
+                        isVersatile: this.isVersatile,
+                        hasSave: this.hasSave,
+                        hasSkill: this.hasSkill,
+                        hasArea: this.hasArea
+                    }
+                    : {
+                        actor: this.actor,
+                        item: this,
+                        action: "SFRPG.ChatCard.ItemActivation.Deactivates"
+                    };
 
                 if (this.actor.token) {
                     templateData.tokenId = this.actor.token.id;
                     templateData.sceneId = this.actor.token.parent.id;
                 }
 
-                const template = `systems/sfrpg/templates/chat/item-action-card.html`;
+                const template = `systems/sfrpg/templates/chat/item-action-card.hbs`;
                 const htmlPromise = renderTemplate(template, templateData);
                 htmlPromise.then((html) => {
                     // Create the chat message
                     const chatData = {
-                        type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+                        type: CONST.CHAT_MESSAGE_STYLES.OTHER,
                         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
                         content: html,
-                        rollMode: rollMode
+                        flags: {
+                            sfrpg: {
+                                item: this.uuid,
+                                actor: this.actor.uuid
+                            }
+                        }
                     };
 
-                    // Toggle default roll mode
-                    if (["gmroll", "blindroll"].includes(rollMode)) {
-                        chatData["whisper"] = ChatMessage.getWhisperRecipients("GM");
-                    }
-                    if (rollMode === "blindroll") {
-                        chatData["blind"] = true;
-                    }
-                    if (rollMode === "selfroll") {
-                        chatData["whisper"] = ChatMessage.getWhisperRecipients(game.user.name);
-                    }
-
+                    if (!active) chatData.action = "SFRPG.ChatCard.ItemActivation.Deactivates";
+                    const rollMode = game.settings.get("core", "rollMode");
+                    ChatMessage.applyRollMode(chatData, rollMode);
                     ChatMessage.create(chatData, { displaySheet: false });
                 });
 
                 Hooks.callAll("itemActivationChanged", {actor: this.actor, item: this, isActive: active});
             });
-        } else {
-            if (this.data.data.duration.value || this.data.data.uses.max > 0) {
-               updatePromise.then(() => {
-                    // Render the chat card template
-                    const templateData = {
-                        actor: this.actor,
-                        item: this,
-                        action: "SFRPG.ChatCard.ItemActivation.Deactivates"
-                    };
-
-                    if (this.actor.token) {
-                        templateData.tokenId = this.actor.token.id;
-                        templateData.sceneId = this.actor.token.parent.id;
-                    }
-        
-                    const template = `systems/sfrpg/templates/chat/item-action-card.html`;
-                    const htmlPromise = renderTemplate(template, templateData);
-        
-                    htmlPromise.then((html) => {
-                        // Create the chat message
-                        const chatData = {
-                            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
-                            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                            content: html,
-                            rollMode: rollMode
-                        };
-
-                        // Toggle default roll mode
-                        if (["gmroll", "blindroll"].includes(rollMode)) {
-                            chatData["whisper"] = ChatMessage.getWhisperRecipients("GM");
-                        }
-                        if (rollMode === "blindroll") {
-                            chatData["blind"] = true;
-                        }
-                        if (rollMode === "selfroll") {
-                            chatData["whisper"] = ChatMessage.getWhisperRecipients(game.user.name);
-                        }
-            
-                        ChatMessage.create(chatData, { displaySheet: false });
-                    });
-
-                    Hooks.callAll("itemActivationChanged", {actor: this.actor, item: this, isActive: active});
-                });
-            }
         }
 
         return updatePromise;
     }
-}
+};

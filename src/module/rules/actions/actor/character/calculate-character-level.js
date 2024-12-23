@@ -1,4 +1,4 @@
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateCharacterLevel", (fact, context) => {
         const data = fact.data;
         const classes = fact.classes;
@@ -16,12 +16,12 @@ export default function (engine) {
         }
 
         for (const cls of classes) {
-            const classData = cls.data.data;
+            const classData = cls.system;
 
             const classLevel = classData.levels;
             const tooltip = game.i18n.format("SFRPG.CharacterLevelsTooltip", {
-                class: cls.name,
-                levels: classLevel + ` (@classes.${cls.name.toLowerCase()}.levels)`
+                class: cls.name.split(',')[0].trim(),
+                levels: classLevel + ` (@classes.${cls.name.toLowerCase().split(',')[0].trim()}.levels)`
             });
 
             data.details.level.value += classLevel;

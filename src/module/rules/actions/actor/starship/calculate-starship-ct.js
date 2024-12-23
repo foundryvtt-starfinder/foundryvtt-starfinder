@@ -1,4 +1,4 @@
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateStarshipCritThreshold", (fact, context) => {
         const data = fact.data;
 
@@ -30,7 +30,7 @@ export default function (engine) {
         const fortifiedHullItems = fact.items.filter(x => x.type === "starshipFortifiedHull");
         if (fortifiedHullItems && fortifiedHullItems.length > 0) {
             const fortifiedHull = fortifiedHullItems[0];
-            const fortifiedHullData = fortifiedHull.data.data;
+            const fortifiedHullData = fortifiedHull.system;
 
             const sizeMultiplier = sizeMultiplierMap[data.details.size] || 0;
 

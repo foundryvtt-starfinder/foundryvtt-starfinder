@@ -16,11 +16,11 @@ Extend SFRPGEffectType with the new type.
 
 If the modifier has to have options, add them to activateListener and render() here
 
-## templates/apps/modifier-app.html
+## templates/apps/modifier-app.hbs
 
 If the modifier has to have options, make sure to reflect that in the select.
 
-## templates/actors/parts/actor-modifiers.html
+## templates/actors/parts/actor-modifiers.hbs
 
 If the modifier has an effected value, double-check it properly represents here
 
@@ -36,4 +36,4 @@ In the console, execute "npm run copyLocalization", this will ensure it gets cop
 
 ## Test
 
-Verify your modifier works as intended and did not break any other modifiers that you might have affected inside modifier-app.js or modifier-app.html.
+Verify your modifier works as intended and did not break any other modifiers that you might have affected inside modifier-app.js or modifier-app.hbs.

@@ -3,37 +3,37 @@ export default function(engine) {
         const data = fact.data;
         const actor = fact.actor;
 
-        const pilot = (actor.data.crew?.pilot?.actors) ? actor.data.crew?.pilot?.actors[0] : null;
+        const pilot = (actor.crew?.pilot?.actors) ? actor.crew?.pilot?.actors[0] : null;
         const sizeMod = CONFIG.SFRPG.starshipSizeMod[data.details.size] || 0;
 
-        let pilotingRanks = pilot?.data?.data?.skills?.pil?.ranks || 0;
+        let pilotingRanks = pilot?.system?.skills?.pil?.ranks || 0;
         if (data.crew.useNPCCrew) {
             pilotingRanks = data.crew.npcData?.pilot?.skills?.pil?.ranks || 0;
         }
 
         /** Set up base values. */
-        const forwardAC = duplicate(data.quadrants.forward.ac);
+        const forwardAC = foundry.utils.deepClone(data.quadrants.forward.ac);
         data.quadrants.forward.ac = {
             value: 10,
             misc: (forwardAC?.misc || 0),
             tooltip: [game?.i18n ? game.i18n.localize("SFRPG.StarshipSheet.Modifiers.Base") : 'Base: 10']
         };
 
-        const portAC = duplicate(data.quadrants.port.ac);
+        const portAC = foundry.utils.deepClone(data.quadrants.port.ac);
         data.quadrants.port.ac = {
             value: 10,
             misc: (portAC?.misc || 0),
             tooltip: [game?.i18n ? game.i18n.localize("SFRPG.StarshipSheet.Modifiers.Base") : 'Base: 10']
         };
 
-        const starboardAC = duplicate(data.quadrants.starboard.ac);
+        const starboardAC = foundry.utils.deepClone(data.quadrants.starboard.ac);
         data.quadrants.starboard.ac = {
             value: 10,
             misc: (starboardAC?.misc || 0),
             tooltip: [game?.i18n ? game.i18n.localize("SFRPG.StarshipSheet.Modifiers.Base") : 'Base: 10']
         };
 
-        const aftAC = duplicate(data.quadrants.aft.ac);
+        const aftAC = foundry.utils.deepClone(data.quadrants.aft.ac);
         data.quadrants.aft.ac = {
             value: 10,
             misc: (aftAC?.misc || 0),
@@ -46,15 +46,15 @@ export default function(engine) {
         let armorItemData = null;
         if (armorItems && armorItems.length > 0) {
             armorItem = armorItems[0];
-            armorItemData = armorItem.data.data;
+            armorItemData = armorItem.system;
         }
 
         const shieldItems = fact.items.filter(x => x.type === "starshipShield");
         let shieldItem = null;
         let shieldItemData = null;
-        if (shieldItems && shieldItems.length > 0 && shieldItems[0].data.data.isDeflector) {
+        if (shieldItems && shieldItems.length > 0 && shieldItems[0].system.isDeflector) {
             shieldItem = shieldItems[0];
-            shieldItemData = shieldItem.data.data;
+            shieldItemData = shieldItem.system;
         }
 
         /** Apply bonuses. */
@@ -65,7 +65,7 @@ export default function(engine) {
             } else {
                 target.tooltip.push(`${title}: ${value}`);
             }
-        }
+        };
 
         if (pilotingRanks > 0) {
             addScore(data.quadrants.forward.ac, "SFRPG.StarshipSheet.Modifiers.PilotSkillBonus", pilotingRanks);
@@ -99,9 +99,9 @@ export default function(engine) {
             if (data.quadrants.port.shields.value > 0) addScore(data.quadrants.port.ac, shieldItem.name, shieldItemData.armorBonus, false);
             if (data.quadrants.starboard.shields.value > 0) addScore(data.quadrants.starboard.ac, shieldItem.name, shieldItemData.armorBonus, false);
             if (data.quadrants.aft.shields.value > 0) addScore(data.quadrants.aft.ac, shieldItem.name, shieldItemData.armorBonus, false);
-            
+
         }
-        
+
         return fact;
     });
 }

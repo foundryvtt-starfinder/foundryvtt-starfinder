@@ -2,12 +2,19 @@
   "_id": "fXapzj3vy4N9zpuD",
   "name": "Akashic Tutor",
   "type": "spell",
-  "data": {
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
+  "img": "systems/sfrpg/icons/spells/commune_with_planet.webp",
+  "system": {
     "type": "",
     "ability": null,
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "full",
@@ -16,11 +23,13 @@
     },
     "allowedClasses": {
       "myst": true,
+      "precog": false,
       "tech": true,
       "wysh": true
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "none",
       "value": null
@@ -41,13 +50,13 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">You communicate with the Akashic Record of one of your classmates or former instructors, asking them to assist you in a task. When you cast this spell, select two skills; if you cast Akashic tutor more than once a day, you must select different skills each time. The tutor can provide you with aid another benefits for the two skills you have selected, and always succeeds at the check to aid you. Alternatively, you can instead choose to let the Akashic tutor instruct you on how the task should be performed, substituting the tutor&rsquo;s skill modifier for your own.</span></p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\"><strong>1st:</strong> When you cast <em>Akashic tutor</em> as a 1st-level spell, your Akashic tutor has a total skill modifier equal to your level + 2.</span></p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\"><strong>2nd:</strong> When you cast <em>Akashic tutor</em> as a 2nd-level spell, your Akashic tutor has a total skill modifier equal to your level + 4.</span></p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\"><strong>3rd:</strong> When you cast <em>Akashic tutor</em> as a 3rd-level spell, your Akashic tutor has a total skill modifier equal to your level + 6.</span></p>"
+      "value": "<p>You communicate with the Akashic Record of one of your classmates or former instructors, asking them to assist you in a task. When you cast this spell, select two skills; if you cast Akashic tutor more than once a day, you must select different skills each time. The tutor can provide you with aid another benefits for the two skills you have selected, and always succeeds at the check to aid you. Alternatively, you can instead choose to let the Akashic tutor instruct you on how the task should be performed, substituting the tutor’s skill modifier for your own.</p>\n<p><strong>1st:</strong> When you cast <em>Akashic tutor</em> as a 1st-level spell, your Akashic tutor has a total skill modifier equal to your level + 2.</p>\n<p><strong>2nd:</strong> When you cast <em>Akashic tutor</em> as a 2nd-level spell, your Akashic tutor has a total skill modifier equal to your level + 4.</p>\n<p><strong>3rd:</strong> When you cast <em>Akashic tutor</em> as a 3rd-level spell, your Akashic tutor has a total skill modifier equal to your level + 6.</p>"
     },
     "descriptors": [],
     "dismissible": false,
     "duration": {
-      "units": "",
-      "value": "1 minute/level"
+      "units": "minute",
+      "value": "@details.cl.value"
     },
     "formula": "",
     "isActive": null,
@@ -64,6 +73,7 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
@@ -88,8 +98,5 @@
       "per": "",
       "value": null
     }
-  },
-  "effects": [],
-  "flags": {},
-  "img": "systems/sfrpg/icons/spells/commune_with_planet.webp"
+  }
 }

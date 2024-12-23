@@ -2,7 +2,13 @@
   "_id": "NPZpkUqccH4K1jL2",
   "name": "Autopilot",
   "type": "spell",
-  "data": {
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
+  "img": "systems/sfrpg/icons/spells/battle_junkbot.webp",
+  "system": {
     "type": "",
     "ability": null,
     "abilityMods": {
@@ -23,6 +29,7 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "none",
       "value": null
@@ -43,13 +50,13 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>You install an AI into a vehicle that can control the vehicle in place of an actual pilot. During the spell&rsquo;s duration, you can engage or disengage the autopilot AI as a swift action. You can input a destination into the autopilot AI as a move action, and the autopilot AI attempts to reach that location if doing so is possible.</p>\n<p>The vehicle is considered controlled when the autopilot AI is engaged. The autopilot AI&rsquo;s actions are dictated by the GM, and the autopilot AI can take any of the actions to pilot a vehicle that an actual pilot can. The autopilot AI has a Piloting modifier of +14.</p>"
+      "value": "<p>You install an AI into a vehicle that can control the vehicle in place of an actual pilot. During the spell’s duration, you can engage or disengage the autopilot AI as a swift action. You can input a destination into the autopilot AI as a move action, and the autopilot AI attempts to reach that location if doing so is possible.</p>\n<p>The vehicle is considered controlled when the autopilot AI is engaged. The autopilot AI’s actions are dictated by the GM, and the autopilot AI can take any of the actions to pilot a vehicle that an actual pilot can. The autopilot AI has a Piloting modifier of +14.</p>"
     },
     "descriptors": [],
     "dismissible": false,
     "duration": {
-      "units": "",
-      "value": "1 hour/level"
+      "units": "hour",
+      "value": "@details.cl.value"
     },
     "formula": "",
     "isActive": null,
@@ -66,11 +73,12 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
-      "additional": "5 ft.",
-      "per": "2 levels",
-      "units": "ft",
-      "value": 25
+      "additional": "",
+      "per": "",
+      "units": "close",
+      "value": null
     },
     "rollNotes": "",
     "save": {
@@ -90,8 +98,5 @@
       "per": "",
       "value": null
     }
-  },
-  "effects": [],
-  "flags": {},
-  "img": "systems/sfrpg/icons/spells/battle_junkbot.webp"
+  }
 }

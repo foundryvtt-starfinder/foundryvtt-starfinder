@@ -1,5 +1,5 @@
+import { SFRPG } from "../config.js";
 import { DocumentBrowserSFRPG } from './document-browser.js';
-import { SFRPG } from "../config.js"
 
 class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
     static get defaultOptions() {
@@ -10,8 +10,8 @@ class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
 
     getConfigurationProperties() {
         return {
-          label: game.i18n.format("SFRPG.Browsers.SpellBrowser.Title"),
-          settings: "spellBrowser"
+            label: game.i18n.format("SFRPG.Browsers.SpellBrowser.Title"),
+            settings: "spellBrowser"
         };
     }
 
@@ -24,7 +24,7 @@ class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     getSortingMethods() {
-        let sortingMethods = super.getSortingMethods();
+        const sortingMethods = super.getSortingMethods();
         sortingMethods["level"] = {
             name: game.i18n.format("SFRPG.Browsers.SpellBrowser.BrowserSortMethodLevel"),
             method: this._sortByLevel
@@ -33,8 +33,10 @@ class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     _sortByLevel(elementA, elementB) {
-        const aVal = parseInt($(elementA).find('input[name=level]').val());
-        const bVal = parseInt($(elementB).find('input[name=level]').val());
+        const aVal = parseInt($(elementA).find('input[name=level]')
+            .val());
+        const bVal = parseInt($(elementB).find('input[name=level]')
+            .val());
         if (aVal < bVal) return -1;
         if (aVal > bVal) return 1;
 
@@ -48,23 +50,26 @@ class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     getFilters() {
-        let filters = {
+        const filters = {
             levels: {
                 label: game.i18n.format("SFRPG.Browsers.SpellBrowser.BrowserFilterLevel"),
                 content: SFRPG.spellLevels,
                 filter: (element, filters) => { return this._filterLevels(element, filters); },
+                activeFilters: this.filters?.levels?.activeFilters || [],
                 type: "multi-select"
             },
             classes: {
                 label: game.i18n.format("SFRPG.Browsers.SpellBrowser.BrowserFilterClass"),
                 content: SFRPG.spellcastingClasses,
                 filter: (element, filters) => { return this._filterClasses(element, filters); },
+                activeFilters: this.filters?.classes?.activeFilters || [],
                 type: "multi-select"
             },
             schools: {
                 label: game.i18n.format("SFRPG.Browsers.SpellBrowser.BrowserFilterSchool"),
                 content: SFRPG.spellSchools,
                 filter: (element, filters) => { return this._filterSchools(element, filters); },
+                activeFilters: this.filters?.schools?.activeFilters || [],
                 type: "multi-select"
             }
         };
@@ -82,21 +87,19 @@ class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     _filterLevels(element, filters) {
-        let compendium = element.dataset.entryCompendium;
-        let itemId = element.dataset.entryId;
-        let item = this.items.find(x => x.compendium === compendium && x._id === itemId);
-        let itemLevel = item ? JSON.stringify(item.data.level) : "null";
+        const itemUuid = element.dataset.entryUuid;
+        const item = this.items.get(itemUuid);
+        const itemLevel = item ? item?.system?.level.toString() : null;
         return item && filters.includes(itemLevel);
     }
 
     _filterClasses(element, filters) {
-        let compendium = element.dataset.entryCompendium;
-        let itemId = element.dataset.entryId;
-        let item = this.items.find(x => x.compendium === compendium && x._id === itemId);
+        const itemUuid = element.dataset.entryUuid;
+        const item = this.items.get(itemUuid);
         if (!item) return false;
 
-        for (let allowedClass of filters) {
-            if (item.data.allowedClasses[allowedClass]) {
+        for (const allowedClass of filters) {
+            if (item.system?.allowedClasses[allowedClass]) {
                 return true;
             }
         }
@@ -104,10 +107,60 @@ class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     _filterSchools(element, filters) {
-        let compendium = element.dataset.entryCompendium;
-        let itemId = element.dataset.entryId;
-        let item = this.items.find(x => x.compendium === compendium && x._id === itemId);
-        return item && filters.includes(item.data.school);
+        const itemUuid = element.dataset.entryUuid;
+        const item = this.items.get(itemUuid);
+        return item && filters.includes(item.system?.school);
+    }
+
+    /**
+     * @typedef  {object} FilterObjectSpell
+     * @property {string[]} levels Drawn from SFRPG.spellLevels
+     * @property {string[]} classes Drawn from SFRPG.spellcastingClasses
+     * @property {string[]} schools Drawn from SFRPG.spellSchools
+     * @see {config.js}
+     */
+    /**
+     * Prepare the filter object before calling the parent method
+     * @param {FilterObjectSpell} filters A filter object
+     */
+    renderWithFilters(filters = {}) {
+        const filterObject = filters;
+
+        if (filters.classes) {
+            const classesToFilters = {
+                'mystic': 'myst',
+                'precog': 'precog',
+                'technomancer': 'tech',
+                'witchwarper': 'wysh'
+            };
+
+            filters.classes = filters.classes instanceof Array ? filters.classes : [filters.classes];
+            filters.classes = filters.classes.map(i => classesToFilters[i] || i);
+        }
+
+        if (filters.levels) {
+            filters.levels = filters.levels instanceof Array ? filters.levels : [filters.levels];
+            filters.levels = filters.levels.map(i => String(i));
+        }
+
+        if (filters.schools) {
+            const schoolsToFilters = {
+                "abjuration": "abj",
+                "conjuration": "con",
+                "divination": "div",
+                "enchantment": "enc",
+                "evocation": "evo",
+                "illusion": "ill",
+                "necromancy": "nec",
+                "transmutation": "trs",
+                "universal": "uni"
+            };
+
+            filters.schools = filters.schools instanceof Array ? filters.schools : [filters.schools];
+            filters.schools = filters.schools.map(i => schoolsToFilters[i] || i);
+        }
+
+        return super.renderWithFilters(filterObject);
     }
 }
 

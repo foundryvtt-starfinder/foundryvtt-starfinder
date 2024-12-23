@@ -6,7 +6,7 @@ import { packLoader } from './pack-loader.js';
 export class DocumentBrowserSFRPG extends Application {
     static get defaultOptions() {
         const options = super.defaultOptions;
-        options.template = 'systems/sfrpg/templates/packs/document-browser.html';
+        options.template = 'systems/sfrpg/templates/packs/document-browser.hbs';
         options.classes = options.classes.concat(['sfrpg', 'document-browser-window']);
         options.title = game.i18n.format("SFRPG.Browsers.ItemBrowser.Title");
         options.width = 800;
@@ -30,7 +30,7 @@ export class DocumentBrowserSFRPG extends Application {
                 }
             ].concat(buttons);
         }
-        return buttons
+        return buttons;
     }
 
     activateListeners(html) {
@@ -38,30 +38,25 @@ export class DocumentBrowserSFRPG extends Application {
         html.on('click', '.clear-filters', ev => {
             this.resetFilters(html);
             this.filterItems(html.find('li'));
-        }); // show item card
+        });
 
-        html.on('click', '.item-edit', ev => {
-            const itemId = $(ev.currentTarget).parents('.item').attr('data-entry-id');
-            const itemCategory = $(ev.currentTarget).parents('.item').attr('data-item-category');
-            const items = this[itemCategory];
-            let item = items.find(x => x._id === itemId);
-            const pack = game.packs.find(p => p.collection === item.compendium);
-            item = pack.getDocument(itemId).then(item => {
-                item.sheet.render(true);
-            });
-        }); //show actor card
+        // show item card
+        html.on('click', '.item-edit', async (ev) => {
+            const itemUuid = $(ev.currentTarget).parents('.item')
+                .attr('data-entry-uuid');
+            const doc = await fromUuid(itemUuid);
+            doc.sheet.render(true);
+        });
 
-        html.on('click', '.actor-edit', ev => {
-            const actorId = $(ev.currentTarget).parents('.item').attr('data-entry-id');
-            const actorCategory = $(ev.currentTarget).parents('.item').attr('data-actor-category');
-            const actors = this[actorCategory];
-            let actor = actors[actorId];
-            const pack = game.packs.find(p => p.collection === actor.compendium);
-            actor = pack.getDocument(actorId).then(npc => {
-                npc.sheet.render(true);
-            });
-        }); // make draggable
+        // show actor card
+        html.on('click', '.actor-edit', async (ev) => {
+            const actorId = $(ev.currentTarget).parents('.item')
+                .attr('data-entry-uuid');
+            const doc = await fromUuid(actorId);
+            doc.sheet.render(true);
+        });
 
+        // make draggable
         html.on('click', '.item-sort-link', ev => {
             const sortKey = $(ev.currentTarget).attr('data-key');
             const sortingControl = $(".sortingControl");
@@ -72,35 +67,23 @@ export class DocumentBrowserSFRPG extends Application {
         html.find('.draggable').each((i, li) => {
             li.setAttribute('draggable', true);
             li.addEventListener('dragstart', event => {
-                const packName = li.getAttribute('data-entry-compendium');
-                const pack = game.packs.find(p => p.collection === packName);
-
-                if (!pack) {
-                    event.preventDefault();
-                    return false;
-                }
-
-                const rawData = {
-                    type: pack.documentName,
-                    pack: pack.collection,
-                    id: li.getAttribute('data-entry-id')
-                };
-                const data = JSON.stringify(rawData);
-
-                event.dataTransfer.setData('text/plain', data);
+                this._onDragStart(event, li);
             }, false);
-        }); // toggle visibility of filter containers
+        });
 
+        // toggle visibility of filter containers
         html.on('click', '.filtercontainer h3', ev => {
             $(ev.target.nextElementSibling).toggle(100);
-        }); // toggle hints
+        });
 
+        // toggle hints
         html.on('mousedown', 'input[name=textFilter]', ev => {
             if (event.which == 3) {
                 $(html.find('.hint')).toggle(100);
             }
-        }); // sort item list
+        });
 
+        // sort item list
         html.on('change', 'select[name=sortorder]', ev => {
             const itemList = html.find('li');
             const sortedList = this.sortItems(itemList, ev.target.value);
@@ -110,8 +93,9 @@ export class DocumentBrowserSFRPG extends Application {
             for (const element of sortedList) {
                 ol[0].append(element);
             }
-        }); // activating or deactivating filters
+        });
 
+        // activating or deactivating filters
         html.on('change paste', 'input[name=textFilter]', ev => {
             this.sorters.text = ev.target.value;
             this.filterItems(html.find('li'));
@@ -145,7 +129,14 @@ export class DocumentBrowserSFRPG extends Application {
             const filterSplit = ev.target.name.split(/-/);
             const filterType = filterSplit[0];
             const filterTarget = filterSplit[1];
-            let filterValue = Number(ev.target.value);
+            let filterValue = ev.target.value;
+            if (filterValue.includes("/")) {
+                const slashSplit = filterValue.split("/");
+                filterValue = Number(slashSplit[0] / slashSplit[1]);
+            } else {
+                filterValue = Number(filterValue);
+            }
+
             if (Number.isNaN(filterValue)) {
                 filterValue = 0;
             }
@@ -163,7 +154,10 @@ export class DocumentBrowserSFRPG extends Application {
         html.on('change paste', 'input[class=valueFilter]', ev => {
             const filterSplit = ev.target.name.split(/-/);
             const filterType = filterSplit[0];
-            let filterValue = Number(ev.target.value);
+            let filterValue = ev.target.value;
+            if (!filterValue.includes("/")) {
+                filterValue = Number(filterValue);
+            }
             if (Number.isNaN(filterValue)) {
                 filterValue = 0;
             }
@@ -188,6 +182,19 @@ export class DocumentBrowserSFRPG extends Application {
 
             this.onFiltersUpdated(html);
         });
+    }
+
+    _onDragStart(event, li) {
+        const itemUuid = $(event.currentTarget).attr('data-entry-uuid');
+
+        const rawData = {
+            type: this.entityType,
+            uuid: itemUuid
+        };
+
+        const data = JSON.stringify(rawData);
+
+        event.dataTransfer.setData('text/plain', data);
     }
 
     async getData() {
@@ -217,7 +224,7 @@ export class DocumentBrowserSFRPG extends Application {
     }
 
     getSortingMethods() {
-        let sortingMethods = {
+        const sortingMethods = {
             name: {
                 name: game.i18n.format("SFRPG.Browsers.ItemBrowser.BrowserSortMethodName"),
                 selected: true,
@@ -250,18 +257,22 @@ export class DocumentBrowserSFRPG extends Application {
 
     async loadItems() {
         console.log('Starfinder | Compendium Browser | Started loading items');
-        const items = [];
+        const items = new Map();
 
         for await (const {pack, content} of packLoader.loadPacks(this.entityType, this._loadedPacks)) {
             console.log(`Starfinder | Compendium Browser | ${pack.metadata.label} - ${content.length} entries found`);
 
-            for (let item of content) {
-                item = item.data;
-                item.compendium = pack.collection;
+            for (const item of content) {
+                const itemData = {
+                    uuid: `Compendium.${pack.collection}.${item._id}`,
+                    img: item.img,
+                    name: item.name,
+                    system: item.system,
+                    type: item.type
+                };
 
-                if (this.allowedItem(item)) {
-                    items.push(item);
-                }
+                if (this.allowedItem(item)) items.set(itemData.uuid, itemData);
+
             }
         }
 
@@ -303,7 +314,10 @@ export class DocumentBrowserSFRPG extends Application {
                     const targetValue = string.split(':')[1].trim();
                     const targetStat = string.split(':')[0].trim();
 
-                    if ($(element).find(`input[name=${targetStat}]`).val().toLowerCase().indexOf(targetValue) == -1) {
+                    if ($(element).find(`input[name=${targetStat}]`)
+                        .val()
+                        .toLowerCase()
+                        .indexOf(targetValue) == -1) {
                         return false;
                     }
                 }
@@ -311,7 +325,9 @@ export class DocumentBrowserSFRPG extends Application {
         }
 
         if (this.sorters.castingtime != 'null') {
-            const castingtime = $(element).find('input[name=time]').val().toLowerCase();
+            const castingtime = $(element).find('input[name=time]')
+                .val()
+                .toLowerCase();
 
             if (castingtime != this.sorters.castingtime) {
                 return false;
@@ -381,22 +397,78 @@ export class DocumentBrowserSFRPG extends Application {
 
     onFiltersUpdated(html) {
         if (this.refreshFilters) {
-          const filterContainers = html.find('.filtercontainer');
-          const filterParent = filterContainers[0]?.parentElement;
+            const filterContainers = html.find('.filtercontainer');
+            const filterParent = filterContainers[0]?.parentElement;
 
-          for (const filterContainer of filterContainers) {
-              filterContainer.remove();
-          }
+            for (const filterContainer of filterContainers) {
+                filterContainer.remove();
+            }
 
-          this.filters = this.getFilters();
-          for (const filterKey of Object.keys(this.filters)) {
-              const filter = this.filters[filterKey];
-              const generatedHTML = this.generateFilterHTML(filterKey, filter);
-              filterParent.insertAdjacentHTML('beforeend', generatedHTML);
-          }
+            this.filters = this.getFilters();
+            for (const filterKey of Object.keys(this.filters)) {
+                const filter = this.filters[filterKey];
+                const generatedHTML = this.generateFilterHTML(filterKey, filter);
+                filterParent.insertAdjacentHTML('beforeend', generatedHTML);
+            }
 
-          this.filterItems(html.find('li'));
+            this.filterItems(html.find('li'));
         }
+    }
+
+    /**
+     * @param {filterObjectEquipment|
+     *         filterObjectSpell    |
+     *         filterObjectAlien    |
+     *         filterObjectStarship} filterObject An object containing valid filters for one of the browser types.
+     */
+    async renderWithFilters(filterObject = {}) {
+
+        if (!this._element) {
+            this.render(true);
+        }
+
+        await this._waitForElem(`#app-${this.appId}`);
+        const html = this.element;
+        this.resetFilters(html);
+
+        if (filterObject.search !== undefined && filterObject.search !== null) {
+            this.sorters.text = String(filterObject.search).trim();
+            html.find("input[name='textFilter']").val(this.sorters.text);
+            delete filterObject.search;
+            this.onFiltersUpdated(html);
+        }
+
+        for (const [filterKey, currentFilter] of Object.entries(filterObject)) {
+            const browserFilter = this.filters[filterKey];
+            if (!browserFilter) {
+                return ui.notifications.error("Invalid filter.");
+            }
+
+            browserFilter.activeFilters = currentFilter instanceof Array ? currentFilter : [currentFilter];
+            this.refreshFilters = true;
+            this.onFiltersUpdated(html);
+        }
+
+    }
+
+    _waitForElem(selector) {
+        return new Promise(resolve => {
+            if (document.querySelector(selector)) {
+                return resolve(document.querySelector(selector));
+            }
+
+            const observer = new MutationObserver(mutations => {
+                if (document.querySelector(selector)) {
+                    resolve(document.querySelector(selector));
+                    observer.disconnect();
+                }
+            });
+
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+        });
     }
 
     generateFilterHTML(filterKey, filter) {
@@ -405,7 +477,7 @@ export class DocumentBrowserSFRPG extends Application {
             <dl>\n`;
 
         let body = "";
-        for (let settingKey of Object.keys(filter.content)) {
+        for (const settingKey of Object.keys(filter.content)) {
             const checked = filter.activeFilters ? filter.activeFilters.includes(settingKey) : false;
             body += `<dt><input type="checkbox" name="${filterKey}-${settingKey}" ${checked ? "checked" : ""} /></dt><dd>${game.i18n.format(filter.content[settingKey])}</dd>\n`;
         }
@@ -424,7 +496,7 @@ export class DocumentBrowserSFRPG extends Application {
     }
 
     initializeSettings(defaultAllowedCompendiums = null) {
-    const configuration = this.getConfigurationProperties();
+        const configuration = this.getConfigurationProperties();
         const entityType = this.entityType;
 
         game.settings.register('sfrpg', configuration.settings, {

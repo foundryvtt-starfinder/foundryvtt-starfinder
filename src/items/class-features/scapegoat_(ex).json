@@ -2,12 +2,19 @@
   "_id": "TumaOjCjpNEtbvCD",
   "name": "Scapegoat (Ex)",
   "type": "feat",
-  "data": {
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
+  "img": "systems/sfrpg/icons/classes/distant_spell.webp",
+  "system": {
     "type": "",
     "ability": "",
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "action",
@@ -16,6 +23,7 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "none",
       "value": null
@@ -29,14 +37,57 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@Compendium[sfrpg.class-features.hIhgdXnqGHBm0A64]{Envoy Improvisation}</p>\n<div class=\"page\" title=\"Page 53\">\n<div class=\"layoutArea\">\n<div class=\"column\">\n<p>&nbsp;</p>\n<div title=\"Page 53\">\n<div>\n<div>\n<p>Through a mix of complex manipulation and other cues, you focus enemies&rsquo; fire on an ally. As a standard action, you can spend 1 Resolve Point and select a willing ally within 30 feet. Until the end of your next turn, enemies within 100 feet of that ally who can sense both you and that ally take a &ndash;4 penalty to all ranged attacks they make that don&rsquo;t target that ally. This ability otherwise acts as if that ally used the @Compendium[sfrpg.class-features.cDTGl7g2ZvJfrccz]{Draw Fire (Ex) (Envoy)} improvisation. You must have the @Compendium[sfrpg.class-features.cDTGl7g2ZvJfrccz]{Draw Fire (Ex) (Envoy)} improvisation to choose this improvisation.&nbsp;</p>\n</div>\n</div>\n</div>\n<p>&nbsp;</p>\n</div>\n</div>\n</div>\n<p><span style=\"color: #191813; font-family: 'Exo 2', sans-serif; font-size: 13px; background-color: #f2f2f2;\">&nbsp;</span><sub style=\"box-sizing: border-box; user-select: text; color: #191813; font-family: 'Exo 2', sans-serif; background-color: #f2f2f2;\"><img style=\"user-select: text;\" src=\"systems/sfrpg/images/cup/gameplay/sense.webp\" alt=\"\" width=\"25\" height=\"25\" /></sub></p>\n<p><sub>From AP #35 pg. 51</sub></p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.hIhgdXnqGHBm0A64]{Envoy Improvisation}</p>\n<p>@Icon[type:sense-dependent]</p><div><p>Through a mix of complex manipulation and other cues, you focus enemies’ fire on an ally. As a standard action, you can spend 1 Resolve Point and select a willing ally within 30 feet. Until the end of your next turn, enemies within 100 feet of that ally who can sense both you and that ally take a –4 penalty to all ranged attacks they make that don’t target that ally. This ability otherwise acts as if that ally used the @UUID[Compendium.sfrpg.class-features.Item.cDTGl7g2ZvJfrccz]{Draw Fire (Ex) (Envoy)} improvisation. You must have the @UUID[Compendium.sfrpg.class-features.Item.cDTGl7g2ZvJfrccz]{Draw Fire (Ex) (Envoy)} improvisation to choose this improvisation.</p></div>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
+    "details": {
+      "category": "classFeature",
+      "combat": false,
+      "specialAbilityType": "ex"
+    },
     "duration": {
       "units": "",
       "value": ""
@@ -44,6 +95,7 @@
     "formula": "",
     "isActive": null,
     "modifiers": [],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
@@ -55,12 +107,13 @@
       "value": null
     },
     "requirements": "8th Level",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": "",
       "descriptor": "negate"
     },
-    "source": "Improvisation",
+    "source": "AP #35 pg. 51",
     "target": {
       "type": "",
       "value": "1 willing ally"
@@ -70,16 +123,5 @@
       "per": "",
       "value": 0
     }
-  },
-  "effects": [],
-  "flags": {
-    "exportSource": {
-      "coreVersion": "0.7.9",
-      "system": "sfrpg",
-      "systemVersion": "0.8.3.0",
-      "world": "development"
-    }
-  },
-  "img": "systems/sfrpg/icons/classes/distant_spell.webp",
-  "sort": 300001
+  }
 }

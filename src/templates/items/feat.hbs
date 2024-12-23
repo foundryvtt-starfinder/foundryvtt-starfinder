@@ -1,0 +1,141 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Item Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img"/>
+
+        <div class="header-details flexrow">
+            <h1 class="charname">
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.ItemName" }}"/>
+            </h1>
+
+            <div class="item-subtitle">
+                <h4 class="item-type">{{itemType}}</h4>
+                <span class="item-status">{{itemStatus}}</span>
+            </div>
+
+            <ul class="summary">
+                <li>
+                    {{labels.featType}}
+                </li>
+                <li>
+                    <input type="text" name="system.requirements" value="{{itemData.requirements}}" placeholder="{{ localize "SFRPG.Items.Feat.Requirements" }}"/>
+                </li>
+                <li>
+                    <input type="text" name="system.source" value="{{itemData.source}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Source" }}"/>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "SFRPG.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "SFRPG.Details" }}</a>
+        <a class="item" data-tab="modifiers">{{ localize "SFRPG.Modifiers" }}</a>
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        {{> "systems/sfrpg/templates/items/parts/item-description.hbs"}}
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+
+            {{!-- Details Tab Navigation --}}
+            <nav class="sheet-subnavigation subtabs" data-group="subdetails">
+                <a class="item active" data-tab="properties">{{ localize "SFRPG.ItemSheet.Details.Tab.Properties" }}</a>
+                <a class="item" data-tab="usage">{{ localize "SFRPG.ItemSheet.Details.Tab.UsageAction" }}</a>
+            </nav>
+
+            {{!-- Details Section --}}
+            <section class="sheet-details">
+
+                {{!-- Properties Tab --}}
+                <div class="tab properties" data-group="subdetails" data-tab="properties">
+
+                    {{!-- Feature Details --}}
+                    <div class="bubble">
+                        <h3 class="bubble-header">{{ localize "SFRPG.Items.Feat.FeatureDetails" }}</h3>
+
+                        <div class="bubble-info">
+
+                            <div class="form-group select">
+                                <label for="category">{{ localize "SFRPG.Items.Feat.FeatureCategory" }}</label>
+                                <select name="system.details.category" id="category">
+                                {{#select itemData.details.category}}
+                                    {{#each config.featureCategories as |category c|}}
+                                        <option value="{{c}}">{{category.label}}</option>
+                                    {{/each}}
+                                {{/select}}
+                                </select>
+                            </div>
+
+                            {{#if (eq itemData.details.category "feat")}}
+                                <div class="form-group">
+                                    <label for="combat">{{ localize "SFRPG.Items.Feat.CombatFeat" }}</label>
+                                    <input type="checkbox" name="system.details.combat" id="combat" {{checked itemData.details.combat}}>
+                                </div>
+                            {{/if}}
+
+                            <div class="form-group select">
+                                <label for="category">{{ localize "SFRPG.Items.Feat.SpecialAbilityType" }}</label>
+                                <select name="system.details.specialAbilityType" id="specialAbilityType">
+                                {{#select itemData.details.specialAbilityType}}
+                                    {{#each config.specialAbilityTypes as |type t|}}
+                                        <option value="{{t}}">{{type}}</option>
+                                    {{/each}}
+                                {{/select}}
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    {{!-- Descriptors Selector --}}
+                    {{> "systems/sfrpg/templates/items/parts/item-descriptors.hbs"}}
+
+                </div>
+
+                {{!-- Usage and Action Tab --}}
+                <div class="tab usage" data-group="subdetails" data-tab="usage">
+
+                    {{!-- Item Activation Template --}}
+                    {{> "systems/sfrpg/templates/items/parts/item-activation.hbs" message="SFRPG.Items.Feat.FeatureUsage"}}
+
+                    {{!-- Recharge Requirement --}}
+                    {{#if itemData.activation.type}}
+                    <div class="bubble">
+                        <h3 class="bubble-header">{{ localize "SFRPG.Items.Feat.ActionRecharge" }}</h3>
+
+                        <div class="bubble-info">
+                            <div class="form-group recharge">
+                                <div class="form-fields">
+                                    <span>{{ localize "SFRPG.Items.Feat.RechargeOn" }}</span>
+                                    <input type="text" name="system.recharge.value" value="{{itemData.recharge.value}}"
+                                        data-dtype="Number" placeholder="1d6 Result"/>
+                                    <label class="checkbox">
+                                        {{ localize "SFRPG.Items.Feat.Charged" }}
+                                        <input type="checkbox" name="system.recharge.charged" {{checked itemData.recharge.charged}}/>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/if}}
+
+                    {{!-- Item Action Template --}}
+                    {{> "systems/sfrpg/templates/items/parts/item-action.hbs" message="SFRPG.Items.Feat.FeatureAttack"}}
+
+                </div>
+            
+            </section>
+
+        </div>
+
+        {{!-- Modifiers Tab --}}
+        {{> "systems/sfrpg/templates/items/parts/item-modifiers.hbs"}}
+    </section>
+</form>

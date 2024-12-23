@@ -1,3 +1,3 @@
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("never", () => false);
 }

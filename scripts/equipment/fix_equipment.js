@@ -10,16 +10,16 @@ try {
                 encoding: 'utf8',
                 flag: 'r+'
             });
-            
+
             let equipment = JSON.parse(json);
             let isDirty = false;
-            
-            // Create container framework            
+
+            // Create container framework
             let container = {
                 contents: [],
                 storage: []
             };
-            
+
             if (equipment?.type === "equipment") {
                 // Armor slots are now to be removed and replaced with container settings.
                 if (equipment.data?.armor && equipment.data?.armor.hasOwnProperty("upgradeSlots")) {
@@ -27,7 +27,7 @@ try {
                     delete equipment.data.armor.upgradeSlots;
                     delete equipment.data.armor.upgrades;
                     isDirty = true;
-                    
+
                     container.storage.push({
                         type: "slot",
                         subtype: "armorUpgrade",
@@ -37,13 +37,13 @@ try {
                         weightProperty: "slots"
                     });
                 }
-                
+
                 // Weapon slots are now to be removed and replaced with container settings.
                 if (equipment.data.hasOwnProperty("weaponSlots")) {
                     let numberWeaponSlots = equipment.data.weaponSlots;
                     delete equipment.data.weaponSlots;
                     isDirty = true;
-                    
+
                     container.storage.push({
                         type: "slot",
                         subtype: "weaponSlot",
@@ -53,13 +53,13 @@ try {
                         weightProperty: ""
                     });
                 }
-                                
+
                 isDirty = !equipment.data.hasOwnProperty("container");
             }
-            
+
             if (equipment?.type === "weapon") {
                 delete equipment.data.fusions;
-                
+
                 container.storage.push({
                     type: "slot",
                     subtype: "fusion",
@@ -68,10 +68,10 @@ try {
                     affectsEncumbrance: true,
                     weightProperty: "level"
                 });
-                
+
                 isDirty = !equipment.data.hasOwnProperty("container");
             }
-            
+
             if (equipment?.type === "container") {
                 container.storage.push({
                     type: "bulk",
@@ -81,7 +81,7 @@ try {
                     affectsEncumbrance: equipment.data.contentBulkMultiplier === 0 ? false : true,
                     weightProperty: "bulk"
                 });
-                
+
                 isDirty = !equipment.data.hasOwnProperty("container");
             }
 
@@ -97,7 +97,7 @@ try {
 
             if (isDirty) {
                 equipment.data["container"] = container;
-                
+
                 json = JSON.stringify(equipment, null, 2);
                 fs.writeFileSync(`${equipmentPath}/${file}`, json);
             }

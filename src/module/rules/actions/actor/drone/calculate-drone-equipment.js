@@ -1,4 +1,4 @@
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateDroneEquipment", (fact, context) => {
         const data = fact.data;
 
@@ -11,7 +11,7 @@ export default function (engine) {
         data.attributes.weaponMounts.ranged.current = 0;
         if (fact.weapons) {
             for (let weapon of fact.weapons) {
-                const weaponData = weapon.data.data;
+                const weaponData = weapon.system;
 
                 let mountCost = 1;
                 if (weaponData.properties.two) {
@@ -19,14 +19,14 @@ export default function (engine) {
                 }
 
                 switch (weaponData.actionType) {
-                    default:
-                        break;
-                    case "mwak":
-                        data.attributes.weaponMounts.melee.current += mountCost;
-                        break;
-                    case "rwak":
-                        data.attributes.weaponMounts.ranged.current += mountCost;
-                        break;
+                default:
+                    break;
+                case "mwak":
+                    data.attributes.weaponMounts.melee.current += mountCost;
+                    break;
+                case "rwak":
+                    data.attributes.weaponMounts.ranged.current += mountCost;
+                    break;
                 }
             }
         }

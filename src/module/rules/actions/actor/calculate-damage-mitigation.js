@@ -13,10 +13,10 @@ function tryResolveModifier(modifier, rollContext) {
     if (result.hadError) {
         return 0;
     }
-    return result.result;
+    return result.total;
 }
 
-export default function (engine) {
+export default function(engine) {
     engine.closures.add("calculateDamageMitigation", (fact, context) => {
         const data = fact.data;
         const actor = fact.actor;
@@ -80,7 +80,7 @@ export default function (engine) {
             if (modifierInfo.negatedBy === "custom") {
                 modifierInfo.damageType = erModifier.notes;
             }
-            
+
             if (!data.traits.damageMitigation.energyResistance[modifierInfo.damageType] || data.traits.damageMitigation.energyResistance[modifierInfo.damageType].value < modifierInfo.value) {
                 data.traits.damageMitigation.energyResistance[modifierInfo.damageType] = modifierInfo;
             }
