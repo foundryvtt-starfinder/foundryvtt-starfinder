@@ -329,6 +329,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             }
         }
 
+        // Apply a default icon to the actor based on its type, if one has been chosen
+        if (Object.keys(SFRPG.defaultItemIcons).includes(this.type)) {
+            updates.img = ["systems/sfrpg/icons/default/", SFRPG.defaultItemIcons[this.type]].join("");
+        }
+
         this.updateSource(updates);
 
         return super._preCreate(data, options, user);
@@ -2115,4 +2120,3 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         });
     }
 }
-
