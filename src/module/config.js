@@ -2263,7 +2263,7 @@ SFRPG.defaultActorIcons = {
     "npc": "alien-stare.svg",
     "npc2": "alien-stare.svg",
     "starship": "starfighter.svg",
-    "vehicle": "walking-scout.svg"
+    "vehicle": "bus.svg"
 };
 
 SFRPG.defaultItemIcons = {
@@ -2302,7 +2302,7 @@ SFRPG.defaultItemIcons = {
     "starshipThruster": "rocket-thruster.svg",
     "starshipWeapon": "strafe.svg",
 
-    "vehicleAttack": "autogun.svg",
+    "vehicleAttack": "reticule.svg",
     "vehicleSystem": "gear-stick.svg",
 
     "ammunition": "bullets.svg",
