@@ -2,6 +2,11 @@
   "_id": "DCnNeXdKsR7pE6lL",
   "name": "Gluon crystal, true",
   "type": "weapon",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "icons/commodities/gems/gem-rough-oval-teal.webp",
   "system": {
     "type": "",
@@ -19,6 +24,7 @@
     "ammunitionType": "",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": 0
@@ -71,24 +77,8 @@
       "parts": []
     },
     "damage": {
-      "parts": [
-        {
-          "name": "",
-          "formula": "6d6",
-          "group": null,
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
-            "cold": false,
-            "electricity": false,
-            "fire": false,
-            "healing": false,
-            "piercing": false,
-            "slashing": false,
-            "sonic": false
-          }
-        }
-      ]
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -108,8 +98,26 @@
     "formula": "",
     "identified": true,
     "isActive": null,
+    "isEquipment": true,
     "level": 20,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "127f6228-34ae-4d1b-8f41-e3bf2330eb24",
+        "name": "Gluon crystal, true",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-damage",
+        "enabled": true,
+        "limitTo": "container",
+        "max": 36,
+        "modifier": "6d6",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "price": 916200,
     "proficient": true,
     "properties": {
@@ -150,6 +158,7 @@
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
       "hybrid": false,
       "hydrodynamic": false,
@@ -220,6 +229,10 @@
       "type": "",
       "dc": "",
       "descriptor": "negate"
+    },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
     },
     "source": "CRB pg. 180",
     "special": "",

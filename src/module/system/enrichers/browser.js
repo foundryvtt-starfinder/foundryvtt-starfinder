@@ -9,9 +9,9 @@ import BaseEnricher from "./base.js";
  * @class
  */
 export default class BrowserEnricher extends BaseEnricher {
-    // E.g @Browser<type:equipment|filters:{"equipmentTypes":"weapon","weaponTypes":"smallA","weaponCategories":"cryo","search":"Big Gun"}>
-    // @Browser<type:spell|filters:{"classes":["mystic","technomancer"],"levels":[0,1,2],"schools":"conjuration"}>{Some cool spells}
-    // @Browser<type:starship|filters:{"starshipComponentTypes":["starshipWeapon"], "starshipWeaponTypes":"ecm","starshipWeaponClass":"heavy"}>
+    // E.g @Browser(type:equipment|filters:{"equipmentTypes":"weapon","weaponTypes":"smallA","weaponCategories":"cryo","search":"Big Gun"})
+    // @Browser(type:spell|filters:{"classes":["mystic","technomancer"],"levels":[0,1,2],"schools":"conjuration"}>{Some cool spells})
+    // @Browser(type:starship|filters:{"starshipComponentTypes":["starshipWeapon"], "starshipWeaponTypes":"ecm","starshipWeaponClass":"heavy"})
 
     constructor() {
         super();
@@ -19,10 +19,10 @@ export default class BrowserEnricher extends BaseEnricher {
 
     /**
      * @override
-     * Override to use angle brackets so any JSON doesn't interfere with closing brackets
+     * Override to use normal brackets so any JSON doesn't interfere with closing brackets
      */
     get regex() {
-        return new RegExp(`(@${this.enricherType})<([^>]+)>(?:{([^}]+)})?`, "gm");
+        return new RegExp(`(@${this.enricherType})\\(([^>]+)\\)(?:{([^}]+)})?`, "gm");
     }
 
     /** @inheritdoc */
@@ -53,7 +53,7 @@ export default class BrowserEnricher extends BaseEnricher {
 
         if (this.args.filters) a.dataset.filters = JSON.stringify(this.args.filters);
 
-        a.innerHTML = `<i class="fas ${this.icons[this.args.type]}"></i>${this.name}`;
+        a.innerHTML = `<i class="fas ${this.icons[this.args.type]}"></i>${a.innerHTML}`;
 
         return a;
 

@@ -36,12 +36,12 @@ class EquipmentBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     allowedItem(item) {
-        let keys = Object.keys(equipmentTypes);
+        const keys = Object.keys(equipmentTypes);
         return (keys.includes(item.type));
     }
 
     getSortingMethods() {
-        let sortingMethods = super.getSortingMethods();
+        const sortingMethods = super.getSortingMethods();
         sortingMethods["level"] = {
             name: game.i18n.format("SFRPG.Browsers.EquipmentBrowser.BrowserSortMethodLevel"),
             method: this._sortByLevel
@@ -67,7 +67,7 @@ class EquipmentBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     getFilters() {
-        let filters = {
+        const filters = {
             equipmentTypes: {
                 label: game.i18n.format("SFRPG.Browsers.EquipmentBrowser.ItemType"),
                 content: equipmentTypes,
@@ -134,32 +134,32 @@ class EquipmentBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     _filterItemType(element, filters) {
-        let itemUuid = element.dataset.entryUuid;
-        let item = this.items.find(x => x.uuid === itemUuid);
+        const itemUuid = element.dataset.entryUuid;
+        const item = this.items.get(itemUuid);
         return item && filters.includes(item.type);
     }
 
     _filterWeaponType(element, filters) {
-        let itemUuid = element.dataset.entryUuid;
-        let item = this.items.find(x => x.uuid === itemUuid);
+        const itemUuid = element.dataset.entryUuid;
+        const item = this.items.get(itemUuid);
         return item && (item.type !== "weapon" || filters.includes(item.system.weaponType));
     }
 
     _filterWeaponCategory(element, filters) {
-        let itemUuid = element.dataset.entryUuid;
-        let item = this.items.find(x => x.uuid === itemUuid);
+        const itemUuid = element.dataset.entryUuid;
+        const item = this.items.get(itemUuid);
         return item && (item.type !== "weapon" || filters.includes(item.system.weaponCategory || "uncategorized"));
     }
 
     _filterArmorType(element, filters) {
-        let itemUuid = element.dataset.entryUuid;
-        let item = this.items.find(x => x.uuid === itemUuid);
+        const itemUuid = element.dataset.entryUuid;
+        const item = this.items.get(itemUuid);
         return item && (item.type !== "equipment" || filters.includes(item.system.armor?.type));
     }
 
     _filterAugmentationType(element, filters) {
-        let itemUuid = element.dataset.entryUuid;
-        let item = this.items.find(x => x.uuid === itemUuid);
+        const itemUuid = element.dataset.entryUuid;
+        const item = this.items.get(itemUuid);
         return item && (item.type !== "augmentation" || filters.includes(item.system?.type));
     }
 
@@ -215,7 +215,7 @@ class EquipmentBrowserSFRPG extends DocumentBrowserSFRPG {
      * @param {FilterObjectEquipment} filters A filter object
      */
     renderWithFilters(filters = {}) {
-        let filterObject = filters;
+        const filterObject = filters;
 
         if (Array.isArray(filterObject.equipmentTypes)) {
             filterObject.equipmentTypes = filterObject.equipmentTypes.map(i => i === "armor" ? "equipment" : i);

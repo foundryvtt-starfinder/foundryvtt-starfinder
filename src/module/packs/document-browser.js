@@ -224,7 +224,7 @@ export class DocumentBrowserSFRPG extends Application {
     }
 
     getSortingMethods() {
-        let sortingMethods = {
+        const sortingMethods = {
             name: {
                 name: game.i18n.format("SFRPG.Browsers.ItemBrowser.BrowserSortMethodName"),
                 selected: true,
@@ -257,12 +257,12 @@ export class DocumentBrowserSFRPG extends Application {
 
     async loadItems() {
         console.log('Starfinder | Compendium Browser | Started loading items');
-        const items = [];
+        const items = new Map();
 
         for await (const {pack, content} of packLoader.loadPacks(this.entityType, this._loadedPacks)) {
             console.log(`Starfinder | Compendium Browser | ${pack.metadata.label} - ${content.length} entries found`);
 
-            for (let item of content) {
+            for (const item of content) {
                 const itemData = {
                     uuid: `Compendium.${pack.collection}.${item._id}`,
                     img: item.img,
@@ -271,9 +271,8 @@ export class DocumentBrowserSFRPG extends Application {
                     type: item.type
                 };
 
-                if (this.allowedItem(item)) {
-                    items.push(itemData);
-                }
+                if (this.allowedItem(item)) items.set(itemData.uuid, itemData);
+
             }
         }
 
@@ -440,7 +439,7 @@ export class DocumentBrowserSFRPG extends Application {
         }
 
         for (const [filterKey, currentFilter] of Object.entries(filterObject)) {
-            let browserFilter = this.filters[filterKey];
+            const browserFilter = this.filters[filterKey];
             if (!browserFilter) {
                 return ui.notifications.error("Invalid filter.");
             }
@@ -478,7 +477,7 @@ export class DocumentBrowserSFRPG extends Application {
             <dl>\n`;
 
         let body = "";
-        for (let settingKey of Object.keys(filter.content)) {
+        for (const settingKey of Object.keys(filter.content)) {
             const checked = filter.activeFilters ? filter.activeFilters.includes(settingKey) : false;
             body += `<dt><input type="checkbox" name="${filterKey}-${settingKey}" ${checked ? "checked" : ""} /></dt><dd>${game.i18n.format(filter.content[settingKey])}</dd>\n`;
         }

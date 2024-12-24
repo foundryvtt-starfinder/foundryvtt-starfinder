@@ -1,13 +1,18 @@
-<form class="{{cssClass}} flexcol" autocomplete="off">
+<form class="{{cssClass}} flexcol limited" autocomplete="off">
     <header class="sheet-header flexrow">
-        <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img" height="200" width="200" style="border: none;" />
-        <div class="flexcol" style="margin-left: -2px;">
-            <h1 class="charname">
-                <input name="name" type="text" value="{{actor.name}}" data-tippy-content="<strong>{{localize "SFRPG.CharacterNamePlaceHolderText"}}</strong>" placeholder="{{localize "SFRPG.CharacterNamePlaceHolderText"}}" />
-            </h1>
+        <div class="image-container">
+            <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img" height="180" width="180" />
+            <a class="hover-icon" data-action="show-image"><i class="fas fa-image fa-fw"></i></a>
+        </div>
+            <div class="header-background flexcol">
+                <div class="header-text flexcol">
+                    <h1 class="charname">
+                        <input name="name" type="text" value="{{actor.name}}" data-tooltip="<strong>{{localize "SFRPG.CharacterNamePlaceHolderText"}}</strong>" placeholder="{{localize "SFRPG.CharacterNamePlaceHolderText"}}" />
+                    </h1>
+                    <span class="species-grafts">{{system.details.alignment}} {{system.details.raceAndGrafts}}</span>
+                </div>
         </div>
     </header>
-    <span style="flex: 0 0 5px;"></span>
     <section class="sheet-body">
         <div class="tab biography flexrow">
 {{!-- This must be de-indented so it doesn't break text area for Other Visuals. --}}

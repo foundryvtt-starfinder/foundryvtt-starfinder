@@ -10,12 +10,9 @@ Hooks.on('afterClosureProcessed', (closure, fact) => {
                 const role = actor.getCrewRoleForActor(fact.actorId);
                 if (role) {
                     actor.prepareData();
-                    try {
-                        if (actor.sheet?.rendered) {
-                            actor.sheet?.clearTooltips();
-                            actor.sheet?.render(false);
-                        }
-                    } catch {}
+                    if (actor.sheet?.rendered) {
+                        actor.sheet?.render(false);
+                    }
                 }
             }
         }
@@ -32,7 +29,6 @@ Hooks.on('deleteActor', async (entity, options, userId) => {
                     actor.prepareData();
                     try {
                         if (actor.sheet?.rendered) {
-                            actor.sheet?.clearTooltips();
                             actor.sheet?.render(false);
                         }
                     } catch {}

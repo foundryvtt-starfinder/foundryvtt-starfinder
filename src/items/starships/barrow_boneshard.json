@@ -2,12 +2,22 @@
   "_id": "bf6UetgQMgv5GBip",
   "name": "Barrow Boneshard",
   "type": "starship",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "_id": "Vau1utCVENBRi4TP",
       "name": "New StarshipFrame",
       "type": "starshipFrame",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -85,6 +95,11 @@
       "_id": "N5yAxptbOIKRs6Yu",
       "name": "T14 thrusters",
       "type": "starshipThruster",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -113,6 +128,7 @@
         "pcu": 40,
         "pilotingModifier": -2,
         "source": "CRB pg. 296",
+        "specialMaterials": {},
         "speed": 14,
         "supportedSize": "tiny"
       }
@@ -121,6 +137,11 @@
       "_id": "vp5UswYJLTtO7BTl",
       "name": "Micron Heavy",
       "type": "starshipPowerCore",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -146,6 +167,7 @@
         "modifiers": [],
         "pcu": 70,
         "source": "CRB pg. 296",
+        "specialMaterials": {},
         "supportedSizes": [
           "tiny"
         ]
@@ -155,6 +177,11 @@
       "_id": "s4Tyj8xDAcnHwCIV",
       "name": "Basic computer",
       "type": "starshipComputer",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -188,6 +215,11 @@
       "_id": "La6HyynIdWw7pNPU",
       "name": "Budget short-range sensors",
       "type": "starshipSensor",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -214,13 +246,19 @@
         "modifiers": [],
         "pcu": null,
         "range": "short",
-        "source": "CRB pg. 301"
+        "source": "CRB pg. 301",
+        "specialMaterials": {}
       }
     },
     {
       "_id": "47i7D8WhJd9mrtM8",
       "name": "Mk 3 armor",
       "type": "starshipArmor",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -247,6 +285,7 @@
         "modifiers": [],
         "pcu": null,
         "source": "CRB pg. 297",
+        "specialMaterials": {},
         "targetLockPenalty": 0,
         "turnDistancePenalty": 0
       }
@@ -255,6 +294,11 @@
       "_id": "zMG78voBuJ49VLVs",
       "name": "Flak thrower (+8)",
       "type": "starshipWeapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -352,6 +396,7 @@
           "volatile": false,
           "vortex": false
         },
+        "specialMaterials": {},
         "speed": 0,
         "weaponType": "direct"
       }
@@ -360,6 +405,11 @@
       "_id": "fKZfAYhQceqpvkao",
       "name": "Flak thrower (+8)",
       "type": "starshipWeapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -457,6 +507,7 @@
           "volatile": false,
           "vortex": false
         },
+        "specialMaterials": {},
         "speed": 0,
         "weaponType": "direct"
       }
@@ -465,16 +516,20 @@
   "prototypeToken": {
     "name": "Barrow Boneshard",
     "actorLink": false,
+    "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": "attributes.shields"
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": 0,
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -495,15 +550,30 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -516,12 +586,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "tint": null
+      "src": "icons/svg/mystery-man.svg",
+      "tint": "#ffffff"
     },
     "width": 1
   },

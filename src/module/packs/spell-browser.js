@@ -24,7 +24,7 @@ class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     getSortingMethods() {
-        let sortingMethods = super.getSortingMethods();
+        const sortingMethods = super.getSortingMethods();
         sortingMethods["level"] = {
             name: game.i18n.format("SFRPG.Browsers.SpellBrowser.BrowserSortMethodLevel"),
             method: this._sortByLevel
@@ -50,7 +50,7 @@ class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     getFilters() {
-        let filters = {
+        const filters = {
             levels: {
                 label: game.i18n.format("SFRPG.Browsers.SpellBrowser.BrowserFilterLevel"),
                 content: SFRPG.spellLevels,
@@ -87,18 +87,18 @@ class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     _filterLevels(element, filters) {
-        let itemUuid = element.dataset.entryUuid;
-        let item = this.items.find(x => x.uuid === itemUuid);
-        let itemLevel = item ? item?.system?.level.toString() : null;
+        const itemUuid = element.dataset.entryUuid;
+        const item = this.items.get(itemUuid);
+        const itemLevel = item ? item?.system?.level.toString() : null;
         return item && filters.includes(itemLevel);
     }
 
     _filterClasses(element, filters) {
-        let itemUuid = element.dataset.entryUuid;
-        let item = this.items.find(x => x.uuid === itemUuid);
+        const itemUuid = element.dataset.entryUuid;
+        const item = this.items.get(itemUuid);
         if (!item) return false;
 
-        for (let allowedClass of filters) {
+        for (const allowedClass of filters) {
             if (item.system?.allowedClasses[allowedClass]) {
                 return true;
             }
@@ -107,8 +107,8 @@ class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     _filterSchools(element, filters) {
-        let itemUuid = element.dataset.entryUuid;
-        let item = this.items.find(x => x.uuid === itemUuid);
+        const itemUuid = element.dataset.entryUuid;
+        const item = this.items.get(itemUuid);
         return item && filters.includes(item.system?.school);
     }
 
@@ -124,7 +124,7 @@ class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
      * @param {FilterObjectSpell} filters A filter object
      */
     renderWithFilters(filters = {}) {
-        let filterObject = filters;
+        const filterObject = filters;
 
         if (filters.classes) {
             const classesToFilters = {

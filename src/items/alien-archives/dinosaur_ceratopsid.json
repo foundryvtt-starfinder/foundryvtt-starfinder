@@ -2,31 +2,23 @@
   "_id": "dtFrFkDY7zX1heyc",
   "name": "Dinosaur, Ceratopsid",
   "type": "npc2",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "_id": "WQWkhgLPujhFVUvs",
       "name": "Gore",
       "type": "weapon",
-      "ammunition": false,
-      "augmentation": false,
-      "consumable": false,
-      "container": false,
-      "equipment": false,
-      "fusion": true,
-      "goods": false,
-      "hybrid": false,
-      "img": "icons/svg/item-bag.svg",
-      "magic": false,
-      "shield": false,
-      "spell": false,
-      "storage": {
-        "type": "slot",
-        "affectsEncumbrance": true,
-        "amount": 0,
-        "subtype": "fusion",
-        "weightProperty": "level"
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
       },
+      "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -43,6 +35,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -113,6 +106,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -130,6 +124,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -231,6 +226,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -238,6 +234,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -253,18 +250,17 @@
         },
         "weaponCategory": "uncategorized",
         "weaponType": "basicM"
-      },
-      "technological": false,
-      "upgrade": false,
-      "vehicleAttack": false,
-      "vehicleSystem": false,
-      "weapon": false,
-      "weaponAccessory": false
+      }
     },
     {
       "_id": "xtnpo8xfDqxHdHAA",
       "name": "Trample",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -272,6 +268,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "mwak",
         "activation": {
           "type": "full",
@@ -280,6 +277,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -309,6 +307,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -317,6 +316,11 @@
           "value": "<p>(EX)</p>\n<p>As a full action, the creature can move up to its speed and through the space of any creatures that are at least one size smaller than itself. The creature does not need to make an attack roll; each creature whose space it moves through takes damage. A target of a trample can attempt a Reflex save with the listed DC to take half damage; if it attempts the save, it can’t make an attack of opportunity against the trampling creature due to the creature’s movement. A creature can deal trample damage to a given target only once per round.</p>\n<p>Guidelines: The amount of damage the trample deals should be the same as the creature’s standard melee damage.</p>\n<hr />"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": ""
@@ -324,6 +328,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -335,6 +340,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "reflex",
           "dc": "16",
@@ -357,16 +363,19 @@
     "name": "Dinosaur, Ceratopsid",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
     "height": 3,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -387,15 +396,30 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -408,12 +432,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "tint": null
+      "src": "icons/svg/mystery-man.svg",
+      "tint": "#ffffff"
     },
     "width": 3
   },
@@ -463,12 +492,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -599,8 +634,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<h2>Dinosaur</h2>\n<p>The term “dinosaur” refers to a category of reptilelike fauna associated with a planet’s prehistoric evolutionary scale. Dinosaurs vary in size, although many are quite large, and they come in a variety of forms. A ceratopsid is a quadruped that has bony frills extending from its head back over its shoulders, as well as horns that adorn its face; one example is the herbivorous triceratops. Dromaeosaurids are bipedal, feathered carnivores, like the pack-hunting deinonychus (also called a raptor). Plesiosaurs are marine reptiles with long necks and toothy mouths that dwell and hunt near the water’s surface. Pterosaurs are flying reptilian beasts with membranous wings and long, sharp, triangular beaks. Sauropods are immense, lumbering quadrupeds with long necks and tails and towering stature, such as brachiosaurus and diplodocus. Theropods are bipedal dinosaurs, generally carnivorous, with fearsome, fanged jaws and clawed digits, like the tyrannosaurus. Thyreophorans are quadrupedal dinosaurs with armor-plated backs and tails weaponized with bludgeoning bone or piercing spikes, including the ankylosaurus and the stegosaurus.</p>\n<h2>Creating Dinosaurs</h2>\n<p>The dinosaurs in this entry serve a couple of purposes. Employ them as written when you need statistics for this sort of creature. To create a unique dinosaur, use the stat blocks here and your concept as starting points. Decide what type of natural weapon the animal has, altering the damage type to suit the weapon. Then add elements from Appendix 2: Environmental Grafts. Tailor anything you want to fit your concept.</p>",
@@ -610,6 +648,10 @@
       "cr": 8,
       "environment": "any",
       "organization": "solitary, pair, or herd (3-8)",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AA2 pg. 39",
@@ -911,6 +953,9 @@
       },
       "senses": "low-light vision",
       "size": "huge",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

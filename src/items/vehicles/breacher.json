@@ -2,12 +2,22 @@
   "_id": "IRNOljA4865Ss6RT",
   "name": "Breacher",
   "type": "vehicle",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "_id": "IFQG4V1jH9iw8fZK",
       "name": "Collision (Ram)",
       "type": "vehicleAttack",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -49,6 +59,11 @@
       "_id": "ZNQw4yfixdMSttws",
       "name": "Collision (Run Over)",
       "type": "vehicleAttack",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -90,6 +105,11 @@
       "_id": "Y132g0jIjQzCBcad",
       "name": "Autopilot",
       "type": "vehicleSystem",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -115,6 +135,10 @@
           "piloting": "23",
           "usedAsPilot": true
         },
+        "senses": {
+          "senses": "",
+          "usedForSenses": false
+        },
         "source": "CRB pg. 280"
       }
     },
@@ -122,6 +146,11 @@
       "_id": "bQH3PoHCTObqnuj3",
       "name": "Enhanced sensors",
       "type": "vehicleSystem",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.webp",
       "system": {
         "type": "",
@@ -158,6 +187,11 @@
       "_id": "1NmB8xv1BU5ZMuHM",
       "name": "Planetary comm unit",
       "type": "vehicleSystem",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.webp",
       "system": {
         "type": "",
@@ -183,6 +217,10 @@
           "piloting": "0",
           "usedAsPilot": false
         },
+        "senses": {
+          "senses": "",
+          "usedForSenses": false
+        },
         "source": "CRB pg. 218"
       }
     },
@@ -190,6 +228,11 @@
       "_id": "tZKOSdsleNdEe1L7",
       "name": "Breach (Ex)",
       "type": "vehicleSystem",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -215,6 +258,10 @@
           "piloting": 0,
           "usedAsPilot": false
         },
+        "senses": {
+          "senses": "",
+          "usedForSenses": false
+        },
         "source": ""
       }
     },
@@ -222,6 +269,11 @@
       "_id": "Inetl9LXeamzFOAo",
       "name": "Ramming Attack (Ex)",
       "type": "vehicleSystem",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -247,6 +299,10 @@
           "piloting": 0,
           "usedAsPilot": false
         },
+        "senses": {
+          "senses": "",
+          "usedForSenses": false
+        },
         "source": ""
       }
     }
@@ -254,16 +310,20 @@
   "prototypeToken": {
     "name": "Breacher",
     "actorLink": false,
+    "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": 0,
     "height": 4,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -284,13 +344,30 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -303,12 +380,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "tint": null
+      "src": "icons/svg/mystery-man.svg",
+      "tint": "#ffffff"
     },
     "width": 4
   },

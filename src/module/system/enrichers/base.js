@@ -20,6 +20,12 @@ export default class BaseEnricher {
         this.enricher = this.enricherFunc.bind(this);
     }
 
+    /** --------
+    |           |
+    |  Getters  |
+    |           |
+    ----------*/
+
     /**
      * The RegExp to capture the text.
      * @returns {RegExp}
@@ -52,6 +58,12 @@ export default class BaseEnricher {
         throw new Error("This method must be implemented on subclasses of BaseEnricher.");
     }
 
+    /** -------------------
+    |                      |
+    |  Element Generation  |
+    |                      |
+    ----------------------*/
+
     /**
      * Transform the Regex match array into an enriched element, performing validation.
      * @callback EnricherFunction
@@ -68,7 +80,7 @@ export default class BaseEnricher {
         this.parseArgs();
 
         // Early return an error element if invalid
-        if (!this.typeIsValid()) return this.element;
+        if (!this.isValid()) return this.element;
 
         this.validateName();
 
@@ -86,9 +98,9 @@ export default class BaseEnricher {
 
         this.args = args.reduce((obj, i) => {
             // Split each arg into a key and a value
-            // Matches a colon with a letter before, and either a letter or JSON after.
+            // Matches a colon with a letter before, and either a JSON or character after.
             // Set up as to not split colons in JSONs
-            const split = i.match(/(\w*):({.*}?|[\w-]+)/);
+            const split = i.match(/(\w*):({.*}?|.+)/);
             if (split?.length > 0) obj[split[1]] = split[2];
 
             return obj;
@@ -100,15 +112,24 @@ export default class BaseEnricher {
      * Sets this.element if invalid for an early return.
      * @returns {Boolean}
      */
-    typeIsValid() {
+    isValid() {
         if (!this.args.type || !this.validTypes.includes(this.args.type)) {
-            const strong = document.createElement("strong");
-            strong.innerText = game.i18n.format("SFRPG.Enrichers.TypeError", {enricherType: this.match[1]});
-            this.element = strong;
-            return false;
+            return this._failValidation("Type");
         }
 
         return true;
+    }
+
+    /**
+     * Create an error element after isValid() fails
+     * @param {String} failedArg The argument that failed validation, to be used in the error element
+     * @returns {false}
+     */
+    _failValidation(failedArg) {
+        const strong = document.createElement("strong");
+        strong.innerText = `${this.enricherType} parsing failed! ${failedArg} is invalid.`;
+        this.element = strong;
+        return false;
     }
 
     /**
@@ -124,7 +145,7 @@ export default class BaseEnricher {
      * @returns {HTMLAnchorElement}
      */
     createElement() {
-        const a = document.createElement("a");
+        let a = document.createElement("a");
 
         a.dataset.action = this.enricherType;
         a.dataset.type = this.args.type;
@@ -134,8 +155,57 @@ export default class BaseEnricher {
 
         a.innerText = this.name;
 
+        if (this.#_hasRepost) a = this.addRepost(a);
+
         return a;
     }
+
+    /** -------
+    |          |
+    |  Repost  |
+    |          |
+    -----------*/
+
+    /**
+     * Should this enricher have a repost button appended to created elements?
+     * Create both a publicly accessible static variable and an internal instance one.
+     * @type {Boolean}
+     */
+    static hasRepost = false;
+    /** @type {Boolean} */
+    #_hasRepost = this.constructor.hasRepost;
+
+    /**
+     * Take an anchor element and append a repost button
+     * @param {HTMLAnchorElement} a The original anchor
+     * @returns The inputted Anchor, with a repost button appended
+     */
+    addRepost(a) {
+        const repost = document.createElement("i");
+        repost.classList.add("fas", "fa-comment-alt", "repost");
+        repost.dataset.tooltip = "SFRPG.Enrichers.SendToChat";
+
+        a.append(repost);
+
+        return a;
+    }
+
+    /**
+     * Handle repost button click, sending a chat message of the current target to chat.
+     * @param {Event} event
+     * @returns Create a chat message
+     */
+    static repostListener(event) {
+        event.stopPropagation();
+
+        return ChatMessage.create({content: event.currentTarget.parentElement.outerHTML});
+    }
+
+    /** ---------
+    |            |
+    |  Listener  |
+    |            |
+    ------------*/
 
     /**
      * Whether the enricher has an event listener.
@@ -146,17 +216,18 @@ export default class BaseEnricher {
     /**
      * A callback function to run when the element is clicked.
      * @param {Event} event The DOM event that triggers the listener
-     * @returns {*}
+     * @returns {void}
      */
     static listener(event) {}
 
+    /**
+     * Add Event listeners to the DOM body at startup.
+     */
     static addListeners() {
         const body = $("body");
+        body.on("click", `i.repost`, this.repostListener);
         for (const [action, cls] of Object.entries(CONFIG.SFRPG.enricherTypes)) {
-            if (!cls.hasListener) continue;
-            const enricherListener = cls.listener;
-
-            body.on("click", `a[data-action="${action}"]`, enricherListener);
+            if (cls.hasListener) body.on("click", `a[data-action="${action}"]`, cls.listener);
         }
     }
 }

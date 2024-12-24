@@ -9,6 +9,7 @@
 
 :root {
     --sfrpg-theme-blue: #782e22; //This is overriden to @sfrpgBlue if the custom theme is enabled
+    --font-primary: "Exo 2", sans-serif;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -27,13 +28,13 @@
 
 .orbitron {
     font-family: "Orbitron", sans-serif;
-    font-size: 18px;
+    font-size: var(--font-size-18);
     color: #444;
 }
 
 .exo2 {
     font-family: "Exo 2", sans-serif;
-    // font-size: 18px;
+    // font-size: var(--font-size-18);
     // color: #444;
 }
 
@@ -111,4 +112,95 @@
 
 .flexnowrap {
     flex-wrap: nowrap;
+}
+
+/** Bubbles
+*   Example usage
+*   .bubble {
+*        .bubble-mixin();
+*   }
+*   This is so that you can neatly define any necessary changes to the mixin in the outer .bubble class.
+*/
+.bubble-mixin() {
+    margin: 0.5em 0.1em 0.1em;
+    border: 2px solid #235683;
+    background-color: rgba(128, 128, 128, 0.2);
+    border-radius: 13px;
+
+    .bubble-header {
+        background-color: #235683;
+        color: white;
+        border-style: none;
+        border-top-left-radius: 9px;
+        border-top-right-radius: 9px;
+        margin: 0;
+        padding-bottom: 3px;
+        text-align: center;
+        .exo2();
+        font-size: var(--font-size-18);
+        font-weight: normal;
+
+        .damage-control,
+        .visualization-control,
+        .subaction-control,
+        .ability-adjustments-control {
+            font-size: var(--font-size-16);
+            line-height: var(--font-size-16);
+            color: @colorTan;
+            text-align: right;
+        }
+
+        .bubble-icon,
+        .damage-control,
+        .subaction-control,
+        .visualization-control {
+            width: 18px;
+            flex: 0 0 18px;
+            float: right;
+        }
+
+        .bubble-icon,
+        .damage-control,
+        .subaction-control {
+            margin-right: 10px;
+            color: white;
+            padding-top: 2px;
+        }
+
+        .bubble-icon {
+            text-align: right;
+        }
+    }
+
+    .bubble-editor {
+        .editor-content {
+            min-height: 32px;
+        }
+        .editor.prosemirror {
+            min-height: 180px;
+        }
+    }
+
+    .bubble-info {
+        padding: 0.25em 1em 0.5em;
+
+        // Nested bubbles
+        .bubble {
+            border: 2px solid #444444;
+
+            .bubble-header {
+                background-color: #444444;
+                font-size: var(--font-size-16);
+            }
+
+            // 2nd nested bubble
+            .bubble {
+                border: 2px solid #7a1515;
+
+                .bubble-header {
+                    background-color: #7a1515;
+                }
+            }
+        }
+    }
 }

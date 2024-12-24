@@ -2,6 +2,11 @@
   "_id": "SZEVoUHw52S4EFlZ",
   "name": "Proximity Alert",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "systems/sfrpg/icons/classes/blue_20.webp",
   "system": {
     "type": "",
@@ -24,6 +29,7 @@
     },
     "area": {
       "effect": "emanation",
+      "shapable": false,
       "shape": "sphere",
       "units": "ft",
       "value": 30
@@ -49,8 +55,8 @@
     "descriptors": [],
     "dismissible": false,
     "duration": {
-      "units": "",
-      "value": "2 hours/level"
+      "units": "hour",
+      "value": "@details.cl.value*2"
     },
     "formula": "",
     "isActive": null,
@@ -67,11 +73,12 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
-      "additional": "5 ft.",
-      "per": "2 levels",
-      "units": "ft",
-      "value": 25
+      "additional": "",
+      "per": "",
+      "units": "close",
+      "value": null
     },
     "rollNotes": "",
     "save": {

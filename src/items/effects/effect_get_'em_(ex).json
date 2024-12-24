@@ -1,0 +1,69 @@
+{
+  "_id": "YeLWwjc6KjiBdddc",
+  "name": "Effect: Get 'Em (Ex)",
+  "type": "effect",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
+  "img": "systems/sfrpg/icons/classes/getem.webp",
+  "system": {
+    "type": "effect",
+    "abilityMods": {
+      "parts": []
+    },
+    "activeDuration": {
+      "activationTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "origin"
+      },
+      "unit": "round",
+      "value": "1"
+    },
+    "context": {
+      "origin": {
+        "actorUuid": "",
+        "itemUuid": ""
+      }
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.bP820PAOJUQ1dcLP]{Get 'Em (Ex)}</p>\n<p>@Icon[type:language-dependent] @Icon[type:mind-affecting] @Icon[type:sense-dependent]</p>\n<p>As a move action, you can choose one enemy within 60 feet. Until the start of your next turn, you and your allies gain a +1 morale bonus to attack rolls made against that enemy. The bonus persists even if the enemy moves beyond 60 feet or out of line of sight or hearing.</p>\n<p>At 6th level, you can spend 1 Resolve Point to grant this bonus to attack rolls and damage rolls against all enemies who are within 60 feet.</p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "76e02aaa-a933-4f60-86fd-62d779040816",
+        "name": "Get 'Em (Ex)",
+        "type": "morale",
+        "condition": "",
+        "effectType": "all-attacks",
+        "enabled": false,
+        "max": 1,
+        "modifier": "1",
+        "modifierType": "formula",
+        "notes": "Gain a +1 morale bonus to attack rolls made against specified enemy.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
+    "requirements": "1st Level Envoy",
+    "showOnToken": true,
+    "source": "CRB pg. 62",
+    "turnEvents": []
+  }
+}

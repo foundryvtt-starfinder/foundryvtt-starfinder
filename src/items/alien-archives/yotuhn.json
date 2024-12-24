@@ -2,34 +2,30 @@
   "_id": "3vyaJda3EBmpbqaB",
   "name": "Yotuhn",
   "type": "npc2",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "_id": "XUCD9UcvTxB0yQmh",
       "name": "Magic Disruption (Ex)",
       "type": "feat",
-      "hasAttack": false,
-      "hasUses": false,
-      "img": "icons/svg/mystery-man.svg",
-      "isCharged": true,
-      "isOnCooldown": false,
-      "isStack": false,
-      "labels": {
-        "activation": "",
-        "area": "",
-        "damage": "",
-        "duration": "",
-        "featType": "Passive",
-        "range": "",
-        "save": "",
-        "target": ""
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
       },
+      "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
         "ability": "",
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -38,6 +34,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -51,18 +48,28 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>This aura twists magic around the yotuhn. Any creature that casts a spell or uses a spell-like ability within 30 feet of the yotuhn must succeed at a DC 22 caster level check or the effect warps to become the result of a random roll on the table associated with the wonder grenade. If the spell comes from an item, the check is 1d20 + the item’s level. This randomized magical effect also occurs if a spell targets the yotuhn from any range and fails to overcome the creature’s spell resistance.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -74,6 +81,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -95,21 +103,12 @@
       "_id": "EuUa56wnrEuko4JP",
       "name": "Handheld Debris (Ex)",
       "type": "weapon",
-      "hasAttack": true,
-      "hasCapacity": false,
-      "hasUses": false,
-      "img": "icons/svg/mystery-man.svg",
-      "isCharged": true,
-      "isStack": false,
-      "labels": {
-        "activation": "1 S. Action",
-        "area": "",
-        "damage": "4d6+16",
-        "duration": "",
-        "range": "10 Feet",
-        "save": "",
-        "target": ""
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
       },
+      "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -123,13 +122,33 @@
           "condition": "",
           "cost": 1
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
         },
         "attackBonus": 23,
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": true
+        },
         "attuned": false,
         "bulk": "L",
         "capacity": {
@@ -139,6 +158,8 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
+          "isOpen": true,
           "storage": [
             {
               "type": "slot",
@@ -167,19 +188,25 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
-          "value": "<p>A yotuhn can turn nearly any debris in reach into a melee weapon. Such debris is available (either loose or readily torn from the environment without requiring an extra action) to the yotuhn unless the GM rules otherwise. A yotuhn takes no penalty to attack rolls with such improvised weapons, which are never considered to be archaic in the yotuhn’s hands. Whenever a yotuhn uses an improvised melee weapon, it gains the @UUID[Compendium.sfrpg.rules.O5GDQUKPCJ9Zbnfj]{Knockdown} critical hit effect.</p>"
+          "value": "<p>A yotuhn can turn nearly any debris in reach into a melee weapon. Such debris is available (either loose or readily torn from the environment without requiring an extra action) to the yotuhn unless the GM rules otherwise. A yotuhn takes no penalty to attack rolls with such improvised weapons, which are never considered to be archaic in the yotuhn’s hands. Whenever a yotuhn uses an improvised melee weapon, it gains the @UUID[Compendium.sfrpg.rules.Item.O5GDQUKPCJ9Zbnfj]{Knockdown} critical hit effect.</p>"
         },
         "descriptors": [],
         "duration": {
           "units": "",
           "value": ""
         },
+        "equippable": false,
         "equipped": false,
         "formula": "",
         "identified": true,
+        "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -269,12 +296,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "ft",
           "value": 10
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -282,6 +311,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -295,6 +325,7 @@
           "per": "",
           "value": 0
         },
+        "weaponCategory": "uncategorized",
         "weaponType": "basicM"
       }
     },
@@ -302,21 +333,12 @@
       "_id": "OFO7LgXgUtitFBjt",
       "name": "Slam",
       "type": "weapon",
-      "hasAttack": true,
-      "hasCapacity": false,
-      "hasUses": false,
-      "img": "icons/svg/mystery-man.svg",
-      "isCharged": true,
-      "isStack": false,
-      "labels": {
-        "activation": "1 S. Action",
-        "area": "",
-        "damage": "4d4+16",
-        "duration": "",
-        "range": "10 Feet",
-        "save": "",
-        "target": ""
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
       },
+      "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -330,13 +352,33 @@
           "condition": "",
           "cost": 1
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
         },
         "attackBonus": 23,
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": true
+        },
         "attuned": false,
         "bulk": "L",
         "capacity": {
@@ -346,6 +388,8 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
+          "isOpen": true,
           "storage": [
             {
               "type": "slot",
@@ -374,8 +418,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
@@ -384,9 +431,12 @@
           "units": "",
           "value": ""
         },
+        "equippable": false,
         "equipped": false,
         "formula": "",
         "identified": true,
+        "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -476,12 +526,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "ft",
           "value": 10
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -489,6 +541,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -502,6 +555,7 @@
           "per": "",
           "value": 0
         },
+        "weaponCategory": "uncategorized",
         "weaponType": "basicM"
       }
     },
@@ -509,21 +563,12 @@
       "_id": "5htvEdZ1cUe5rMcy",
       "name": "Hurled Debris (Ex)",
       "type": "weapon",
-      "hasAttack": true,
-      "hasCapacity": false,
-      "hasUses": false,
-      "img": "icons/svg/mystery-man.svg",
-      "isCharged": true,
-      "isStack": false,
-      "labels": {
-        "activation": "1 S. Action",
-        "area": "5 Feet Other",
-        "damage": "3d10+11",
-        "duration": "",
-        "range": "25 Feet",
-        "save": "",
-        "target": ""
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
       },
+      "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -537,13 +582,33 @@
           "condition": "",
           "cost": 1
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "other",
           "units": "ft",
           "value": 5
         },
         "attackBonus": 23,
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": true
+        },
         "attuned": false,
         "bulk": "L",
         "capacity": {
@@ -553,6 +618,8 @@
         "chatFlavor": "Creates difficult terrain in a 5 ft radius around the target",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
+          "isOpen": true,
           "storage": [
             {
               "type": "slot",
@@ -581,8 +648,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>Much as with handheld debris, a yotuhn can turn nearly any debris in reach into a ranged weapon. A yotuhn’s hurled debris has a range increment of 25 feet. Such attacks also create difficult terrain in a 5-foot-radius area around the target.</p>"
         },
@@ -591,9 +661,12 @@
           "units": "",
           "value": ""
         },
+        "equippable": false,
         "equipped": false,
         "formula": "",
         "identified": true,
+        "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -683,12 +756,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "ft",
           "value": 25
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -696,6 +771,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -709,6 +785,7 @@
           "per": "",
           "value": 0
         },
+        "weaponCategory": "uncategorized",
         "weaponType": "smallA"
       }
     }
@@ -716,16 +793,20 @@
   "prototypeToken": {
     "name": "Yotuhn",
     "actorLink": false,
+    "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
     "height": 2,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -746,15 +827,30 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -767,12 +863,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "tint": null
+      "src": "icons/svg/mystery-man.svg",
+      "tint": "#ffffff"
     },
     "width": 2
   },
@@ -822,8 +923,14 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
+      "baseSpellDC": {
+        "base": 0
+      },
       "cmd": {
         "min": 0,
         "tooltip": [],
@@ -880,7 +987,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": "40"
@@ -889,7 +997,8 @@
         "special": "",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -913,12 +1022,26 @@
       "alignment": "CN",
       "aura": "Magic Disruption (30 Ft.)",
       "biography": {
+        "age": 0,
+        "dateOfBirth": "",
+        "deity": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
+        "height": "",
+        "homeWorld": "",
+        "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<h3>Description</h3>\n<p>Yotuhns are among the most adaptable and bellicose species to plague Chonax . Territorial and @UUID[Compendium.sfrpg.conditions.XeRGqHVtcZ7vsgJ0]{Prone} to violent outbursts, these horrors clash with all creatures they encounter. A yotuhn stands 13 feet tall and weighs 1,800 pounds.</p>\n<p>When provoked, yotuhns attack wildly, grabbing debris from their lairs or slamming about with furious kicks and fists. These giants also have an inherent aura that warps magic, causing it to behave in a random and chaotic manner, even changing that magic’s fundamental properties.</p>\n<p>These giants lair most frequently in caves or ruined structures. Some scientists theorize their nature might somehow be connected to the intense storms that were pervasive on Chonax until 30 years ago. Unfortunately for those researchers, not only are yotuhns incapable of speaking, but they are also aggressive toward anyone other than other yotuhns.</p>\n<p>Site Owner: Blake DavisEmail Spam Checker: MX Guarddog</p>\n<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any (Chonax)</p>\n<h3>Organization</h3>\n<p>solitary, pair, or band (3-8)</p>\n</section>"
+        "value": "<h2>Description</h2>\n<h3>Description</h3>\n<p>Yotuhns are among the most adaptable and bellicose species to plague Chonax . Territorial and @UUID[Compendium.sfrpg.conditions.Item.XeRGqHVtcZ7vsgJ0]{Prone} to violent outbursts, these horrors clash with all creatures they encounter. A yotuhn stands 13 feet tall and weighs 1,800 pounds.</p>\n<p>When provoked, yotuhns attack wildly, grabbing debris from their lairs or slamming about with furious kicks and fists. These giants also have an inherent aura that warps magic, causing it to behave in a random and chaotic manner, even changing that magic’s fundamental properties.</p>\n<p>These giants lair most frequently in caves or ruined structures. Some scientists theorize their nature might somehow be connected to the intense storms that were pervasive on Chonax until 30 years ago. Unfortunately for those researchers, not only are yotuhns incapable of speaking, but they are also aggressive toward anyone other than other yotuhns.</p>\n<p>Site Owner: Blake DavisEmail Spam Checker: MX Guarddog</p>\n<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any (Chonax)</p>\n<h3>Organization</h3>\n<p>solitary, pair, or band (3-8)</p>\n</section>",
+        "weight": ""
       },
       "class": "",
       "cr": 11,
       "environment": "",
+      "organization": "",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #23 pg. 61",
@@ -934,6 +1057,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -944,6 +1068,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 25,
         "ranks": 25,
@@ -954,6 +1079,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -964,6 +1090,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -974,6 +1101,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -984,6 +1112,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -994,6 +1123,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1004,6 +1134,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1014,6 +1145,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 20,
         "ranks": 20,
@@ -1024,6 +1156,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1034,6 +1167,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1044,6 +1178,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1054,6 +1189,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 20,
         "ranks": 20,
@@ -1064,6 +1200,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1074,6 +1211,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1084,6 +1222,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1095,6 +1234,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1105,6 +1245,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1115,6 +1256,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1125,6 +1267,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -1134,30 +1277,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -1188,6 +1338,9 @@
       },
       "senses": "darkvision 60 ft., low-light vi",
       "size": "large",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 22
     }
   }

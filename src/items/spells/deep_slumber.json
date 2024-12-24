@@ -2,6 +2,11 @@
   "_id": "Q6ca5NajAWAgZp5S",
   "name": "Deep Slumber",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "systems/sfrpg/icons/spells/deep_slumber.webp",
   "system": {
     "type": "",
@@ -9,6 +14,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "full",
@@ -17,11 +23,13 @@
     },
     "allowedClasses": {
       "myst": true,
+      "precog": false,
       "tech": false,
       "wysh": false
     },
     "area": {
       "effect": "burst",
+      "shapable": false,
       "shape": "sphere",
       "units": "ft",
       "value": 10
@@ -36,18 +44,23 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>This spell causes living creatures in the area to fall into a magical sleep, gaining the @UUID[Compendium.sfrpg.conditions.3iTdt2NRgIyrychR]{Asleep} condition (except normal noise doesn’t wake up the sleeping creatures). Creatures with the lowest CR are affected first. Among creatures of equal CR, those who are closest to the spell’s point of origin are affected first.<em>Deep slumber</em> doesn’t affect unconscious creatures, constructs, or undead creatures.</p>"
+      "value": "<p>This spell causes living creatures in the area to fall into a magical sleep, gaining the @UUID[Compendium.sfrpg.conditions.Item.3iTdt2NRgIyrychR]{Asleep} condition (except normal noise doesn’t wake up the sleeping creatures). Creatures with the lowest CR are affected first. Among creatures of equal CR, those who are closest to the spell’s point of origin are affected first.<em>Deep slumber</em> doesn’t affect unconscious creatures, constructs, or undead creatures.</p>"
     },
     "descriptors": [],
     "dismissible": false,
     "duration": {
-      "units": "",
-      "value": "1 minute/level"
+      "units": "minute",
+      "value": "@details.cl.value"
     },
     "formula": "",
+    "isActive": null,
+    "isVariableLevel": false,
     "level": 3,
     "materials": {
       "consumed": false,
@@ -60,12 +73,14 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
-      "additional": "5 ft.",
-      "per": "2 levels",
-      "units": "ft",
-      "value": 25
+      "additional": "",
+      "per": "",
+      "units": "close",
+      "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "will",
       "dc": "",

@@ -28,7 +28,6 @@ export const ActorInventoryMixin = (superclass) => class extends superclass {
                 .then(() => {
                     Hooks.callAll("afterItemsProcessed", {actor: actor});
                     if (actor.sheet?.rendered) {
-                        actor.sheet?.clearTooltips();
                         actor.sheet?.render(false);
                     }
                 });

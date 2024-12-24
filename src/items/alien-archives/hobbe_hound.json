@@ -2,12 +2,22 @@
   "_id": "zXrRjET69NDbY7D3",
   "name": "Hobbe Hound",
   "type": "npc2",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "_id": "0r5ZCzwXaQqDrKly",
       "name": "Bite (plus Grab)",
       "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
@@ -22,6 +32,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -110,6 +121,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -153,6 +165,11 @@
       "_id": "6lPreO0MqnYyZAf0",
       "name": "Worry (Ex)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -169,6 +186,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -188,9 +206,14 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>As a reaction, when a hobbe hound successfully grabs a Medium or smaller creature with its bite attack, it can violently shake the grabbed creature. A creature shaken in this way gains the @UUID[Compendium.sfrpg.conditions.yUtkoIshf4dPruNd]{Off-Target} condition for 1d3+1 rounds. The creature can reduce this time to 1 round by succeeding at a DC 11 Fortitude saving throw.</p>"
+          "value": "<p>As a reaction, when a hobbe hound successfully grabs a Medium or smaller creature with its bite attack, it can violently shake the grabbed creature. A creature shaken in this way gains the @UUID[Compendium.sfrpg.conditions.Item.yUtkoIshf4dPruNd]{Off-Target} condition for 1d3+1 rounds. The creature can reduce this time to 1 round by succeeding at a DC 11 Fortitude saving throw.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": ""
@@ -198,6 +221,7 @@
         "formula": "",
         "isActive": true,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -231,6 +255,11 @@
       "_id": "OoSeVFMDZIPx9fEs",
       "name": "Skin Secretions (Ex)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -247,6 +276,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -269,6 +299,11 @@
           "value": "<p>A hobbe hound’s skin releases an oily residue that makes it difficult to keep hold of or trap. A hobbe hound gains a +4 circumstance bonus to Acrobatics checks to escape.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -276,6 +311,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -309,6 +345,11 @@
       "_id": "RQA1ZYo53wZmn7Mb",
       "name": "Chemical Intolerance (Ex)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -325,6 +366,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -347,6 +389,11 @@
           "value": "<p>Due to generations of experimentation, a hobbe hound’s blood is a cocktail of unstable chemicals that reacts unpredictably to certain pharmaceuticals. When a hobbe hound is injected with a medicinal (usually requiring a successful melee attack against its KAC by a foe), it immediately takes an amount of damage equal to 1d6 × the medicinal’s tier, in addition to the medicinal’s usual effects.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -354,6 +401,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -388,16 +436,19 @@
     "name": "Hobbe Hound",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -418,15 +469,30 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -439,12 +505,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "tint": null
+      "src": "icons/svg/mystery-man.svg",
+      "tint": "#ffffff"
     },
     "width": 1
   },
@@ -658,11 +729,14 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<p>Though hobbe hounds vaguely resemble canines, they are actually a species of large, blunt-nosed rodents descended from creatures known as “@UUID[Compendium.sfrpg.races.SvZm3xijwqis2qDS]{Goblin} dogs” on lost Golarion. Long ago, hobgoblins used alchemy and selective breeding to fashion their smaller cousins’ pets into sturdier and more ferocious stock for their warbands. The modern hobbe hound stands 4 feet tall at the shoulder and is 200 pounds of solid muscle. Most hobbe hounds are bred and trained to have vicious temperaments and to be loyal to only their hobgoblin keepers.</p>\n<p>While many hobgoblin societies-including the Gideron Authority)-rely more on electronic means of surveillance and protection, hobbe hounds continue to be used in fighting rings and as recreational hunting animals. In addition, these fiercely loyal beasts have found roles in certain hobgoblin military units, guarding posts and tracking down deserters in places where technology is unreliable. Some hobgoblin researchers have tried to apply various cybernetic enhancements to hobbe hounds, but the creatures’ physiology often rejects such implants. This has led to a counterculture movement among fringe hobgoblins who believe that hobgoblins should return to their pure roots and reject all forms of artificial enhancements.</p>",
+        "value": "<p>Though hobbe hounds vaguely resemble canines, they are actually a species of large, blunt-nosed rodents descended from creatures known as “@UUID[Compendium.sfrpg.races.Item.SvZm3xijwqis2qDS]{Goblin} dogs” on lost Golarion. Long ago, hobgoblins used alchemy and selective breeding to fashion their smaller cousins’ pets into sturdier and more ferocious stock for their warbands. The modern hobbe hound stands 4 feet tall at the shoulder and is 200 pounds of solid muscle. Most hobbe hounds are bred and trained to have vicious temperaments and to be loyal to only their hobgoblin keepers.</p>\n<p>While many hobgoblin societies-including the Gideron Authority)-rely more on electronic means of surveillance and protection, hobbe hounds continue to be used in fighting rings and as recreational hunting animals. In addition, these fiercely loyal beasts have found roles in certain hobgoblin military units, guarding posts and tracking down deserters in places where technology is unreliable. Some hobgoblin researchers have tried to apply various cybernetic enhancements to hobbe hounds, but the creatures’ physiology often rejects such implants. This has led to a counterculture movement among fringe hobgoblins who believe that hobgoblins should return to their pure roots and reject all forms of artificial enhancements.</p>",
         "weight": ""
       },
       "class": "",

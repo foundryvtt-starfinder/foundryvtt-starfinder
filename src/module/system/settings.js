@@ -3,24 +3,6 @@ import { SFRPG } from "../config.js";
 import { ItemSFRPG } from "../item/item.js";
 
 export const registerSystemSettings = function() {
-    game.settings.register("sfrpg", "diagonalMovement", {
-        name: "SFRPG.Settings.DiagonalMovementRule.Name",
-        hint: "SFRPG.Settings.DiagonalMovementRule.Hint",
-        scope: "world",
-        config: true,
-        default: "5105",
-        type: String,
-        choices: {
-            "5105": "SFRPG.Settings.DiagonalMovementRule.Values.Core",
-            "555": "SFRPG.Settings.DiagonalMovementRule.Values.Optional"
-        },
-        onChange: rule => {
-            if (canvas.initialized) {
-                canvas.grid.diagonalRule = rule;
-            }
-        }
-    });
-
     game.settings.register("sfrpg", "disableExperienceTracking", {
         name: "SFRPG.Settings.ExperienceTracking.Name",
         hint: "SFRPG.Settings.ExperienceTracking.Hint",
@@ -39,6 +21,14 @@ export const registerSystemSettings = function() {
         type: Boolean
     });
 
+    game.settings.register("sfrpg", "decimalSpeed", {
+        name: "SFRPG.Settings.DecimalSpeed.Name",
+        hint: "SFRPG.Settings.DecimalSpeed.Hint",
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean
+    });
     game.settings.register("sfrpg", "autoCollapseItemCards", {
         name: "SFRPG.Settings.AutoCollapseCard.Name",
         hint: "SFRPG.Settings.AutoCollapseCard.Hint",
@@ -46,7 +36,7 @@ export const registerSystemSettings = function() {
         config: true,
         default: false,
         type: Boolean,
-        onChange: s => {
+        onChange: () => {
             ui.chat.render();
         }
     });
@@ -66,15 +56,6 @@ export const registerSystemSettings = function() {
         scope: "world",
         config: true,
         default: false,
-        type: Boolean
-    });
-
-    game.settings.register("sfrpg", "useStarfinderAOETemplates", {
-        name: "SFRPG.Settings.UseStarfinderAOETemplates.Name",
-        hint: "SFRPG.Settings.UseStarfinderAOETemplates.Hint",
-        scope: "world",
-        config: true,
-        default: true,
         type: Boolean
     });
 
@@ -117,7 +98,35 @@ export const registerSystemSettings = function() {
         }
     });
 
-    for (let combatType of SFRPG.combatTypes) {
+    game.settings.register("sfrpg", "autoRollCritEffect", {
+        name: "SFRPG.Settings.AutoRollCritEffect.Name",
+        hint: "SFRPG.Settings.AutoRollCritEffect.Hint",
+        scope: "world",
+        config: true,
+        default: true,
+        type: Boolean
+    });
+
+    game.settings.register("sfrpg", "hideHostileStarshipCrit", {
+        name: "SFRPG.Settings.HideHostileStarshipCrit.Name",
+        hint: "SFRPG.Settings.HideHostileStarshipCrit.Hint",
+        scope: "world",
+        config: true,
+        default: true,
+        type: Boolean
+    });
+
+    game.settings.register("sfrpg", "difficultyDisplay", {
+        name: "SFRPG.Settings.DifficultyDisplay.Name",
+        hint: "SFRPG.Settings.DifficultyDisplay.Hint",
+        scope: "world",
+        config: true,
+        default: true,
+        type: Boolean,
+        onChange: () => ui.combat.render(false)
+    });
+
+    for (const combatType of SFRPG.combatTypes) {
         const capitalizedCombatType = combatType[0].toUpperCase() + combatType.slice(1);
         game.settings.register("sfrpg", `${combatType}ChatCards`, {
             name: `SFRPG.Settings.CombatCards.${capitalizedCombatType}Name`,
@@ -193,6 +202,15 @@ export const registerSystemSettings = function() {
     game.settings.register("sfrpg", "alwaysShowQuantity", {
         name: "SFRPG.Settings.AlwaysShowQuantity.Name",
         hint: "SFRPG.Settings.AlwaysShowQuantity.Hint",
+        scope: "client",
+        config: true,
+        default: false,
+        type: Boolean
+    });
+
+    game.settings.register("sfrpg", "warnInvalidRollData", {
+        name: "SFRPG.Settings.WarnInvalidRollData.Name",
+        hint: "SFRPG.Settings.WarnInvalidRollData.Hint",
         scope: "client",
         config: true,
         default: false,

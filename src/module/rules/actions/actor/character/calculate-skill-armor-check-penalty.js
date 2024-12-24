@@ -25,7 +25,7 @@ export default function(engine) {
 
             let computedBonus = 0;
             try {
-                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
                 computedBonus = roll.total;
             } catch {}
 
@@ -54,14 +54,14 @@ export default function(engine) {
             return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.ACP].includes(mod.effectType);
         });
 
-        let skillModifier = {
+        const skillModifier = {
             value: 0,
             tooltip: [],
             rolledMods: []
         };
 
-        const mods = context.parameters.stackModifiers.process(acpMods, context);
-        let mod = Object.entries(mods).reduce((sum, mod) => {
+        const mods = context.parameters.stackModifiers.process(acpMods, context, {actor: fact.actor});
+        const mod = Object.entries(mods).reduce((sum, mod) => {
             if (mod[1] === null || mod[1].length < 1) return sum;
 
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
@@ -81,7 +81,7 @@ export default function(engine) {
             }
 
             if (armorData?.armor?.acp) {
-                let acp = parseInt(armorData.armor.acp);
+                const acp = parseInt(armorData.armor.acp);
                 if (!Number.isNaN(acp)) {
                     skill.mod += acp;
 
@@ -98,7 +98,7 @@ export default function(engine) {
                     const shieldData = shield.system;
 
                     if (shieldData?.acp) {
-                        let acp = parseInt(shieldData.acp);
+                        const acp = parseInt(shieldData.acp);
                         if (!Number.isNaN(acp)) {
                             skill.mod += acp;
 

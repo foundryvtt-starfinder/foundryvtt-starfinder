@@ -2,6 +2,11 @@
   "_id": "rGR9lLmVNHHu0zVZ",
   "name": "Shifting Shadows",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "systems/sfrpg/icons/spells/shadow_walk.webp",
   "system": {
     "type": "",
@@ -9,6 +14,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "action",
@@ -17,11 +23,13 @@
     },
     "allowedClasses": {
       "myst": true,
+      "precog": false,
       "tech": false,
       "wysh": true
     },
     "area": {
       "effect": "emanation",
+      "shapable": false,
       "shape": "",
       "units": "ft",
       "value": 20
@@ -36,21 +44,23 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>Waves of shifting shadows obscure the appearance of creatures caught within the emanation, making it harder to tell friends from foes.</p>\n<div>\n<p>This spell doesn’t cause affected creatures to risk accidentally attacking their allies, but it does require them to concentrate harder to keep track of their allies and foes. While this spell is in effect, every creature in the area can treat any other creature in the area as an allied threatening creature for the purpose of flanking. Additionally, creatures in the area can’t attempt attacks of opportunity. These shadows don’t hinder precision-based attacks or create areas of dim light. Creatures with blindsight or blindsense, or those under the effect of @UUID[Compendium.sfrpg.spells.VvCP8MdSZtXREp2x]{True Seeing}, are not affected by this spell.</p>\n</div>"
+      "value": "<p>Waves of shifting shadows obscure the appearance of creatures caught within the emanation, making it harder to tell friends from foes.</p>\n<div>\n<p>This spell doesn’t cause affected creatures to risk accidentally attacking their allies, but it does require them to concentrate harder to keep track of their allies and foes. While this spell is in effect, every creature in the area can treat any other creature in the area as an allied threatening creature for the purpose of flanking. Additionally, creatures in the area can’t attempt attacks of opportunity. These shadows don’t hinder precision-based attacks or create areas of dim light. Creatures with blindsight or blindsense, or those under the effect of @UUID[Compendium.sfrpg.spells.Item.VvCP8MdSZtXREp2x]{True Seeing}, are not affected by this spell.</p>\n</div>"
     },
     "descriptors": [],
     "dismissible": true,
     "duration": {
-      "units": "",
-      "value": "1 round/level (D)"
+      "units": "round",
+      "value": "@details.cl.value"
     },
     "formula": "",
     "isActive": null,
+    "isVariableLevel": false,
     "level": 3,
     "materials": {
       "consumed": false,
@@ -63,12 +73,14 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
       "additional": "10 ft.",
       "per": "level",
       "units": "medium",
       "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "will",
       "dc": "",

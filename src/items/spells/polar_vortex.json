@@ -2,6 +2,11 @@
   "_id": "wB957SDHp5jkTR4F",
   "name": "Polar Vortex",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "systems/sfrpg/icons/spells/polar_vortex.webp",
   "system": {
     "type": "",
@@ -18,11 +23,13 @@
     },
     "allowedClasses": {
       "myst": true,
+      "precog": false,
       "tech": false,
       "wysh": true
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "cylinder",
       "units": "ft",
       "value": 20
@@ -79,8 +86,8 @@
     "descriptors": [],
     "dismissible": false,
     "duration": {
-      "units": "",
-      "value": "1 round + 1 round/level"
+      "units": "round",
+      "value": "1 + @details.cl.value"
     },
     "formula": "",
     "isActive": null,
@@ -97,11 +104,12 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
-      "additional": "10 ft.",
-      "per": "level",
-      "units": "ft",
-      "value": 100
+      "additional": "",
+      "per": "",
+      "units": "medium",
+      "value": null
     },
     "rollNotes": "",
     "save": {

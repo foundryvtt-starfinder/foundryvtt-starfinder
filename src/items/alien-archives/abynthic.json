@@ -2,12 +2,22 @@
   "_id": "74I5mQmMMiZWJ7jf",
   "name": "Abynthic",
   "type": "npc2",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "_id": "gi75BUBMBXRqMWwu",
       "name": "[MultiATK] Bite (plus Swallow Whole)",
       "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -22,8 +32,10 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -56,6 +68,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -85,6 +98,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -102,6 +116,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -195,12 +210,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -208,6 +225,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -229,6 +247,11 @@
       "_id": "Ar6L1tMpurWFNY3N",
       "name": "[MultiATK] 3 Tail Swipes",
       "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -240,8 +263,10 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -274,6 +299,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -303,6 +329,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -320,18 +347,21 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
         "proficient": true,
         "properties": {},
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -339,6 +369,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -360,6 +391,11 @@
       "_id": "BtTWBIoHL3X3VYA6",
       "name": "Swallow Whole",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -367,6 +403,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -375,6 +412,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -388,14 +426,20 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>(EX)</p>\n<p>If the creature hits with the indicated attack (usually a bite attack), it deals the normal damage. If the creature’s attack roll successfully hits the target’s KAC + 4, the creature also automatically grapples the foe as part of the attack action. (If it hits the target’s KAC + 13, it instead pins the target). The creature doesn’t need to have a free limb to perform this grapple. Unless otherwise specified, a creature can swallow whole only targets that are at least one size category smaller than itself, and it has room for a single target of that size in its stomach (doubling the maximum number of creatures it can have swallowed for each additional size category by which these creatures are smaller).</p>\n<p>On the creature’s next turn after grappling or pinning the target, if the target has not escaped the grapple or pin, the target automatically takes the attack’s damage at the beginning of the creature’s turn. The creature can then make a new attack roll with the same attack. If it hits the target’s KAC, the grapple or @UUID[Compendium.sfrpg.conditions.XgK4EdO5D3Fj3iWz]{Pin} is maintained. If it hits the target’s KAC + 4, the target is swallowed whole (no damage is dealt).</p>\n<p>Once swallowed, the target takes the listed swallow whole damage automatically at the beginning its turn every round. The target is considered @UUID[Compendium.sfrpg.conditions.4AkWDHGM6gHDepHN]{Grappled} as long as it is swallowed. The target can attempt to cut its way out (the interior of a creature with swallow whole has the same EAC as its exterior and a KAC equal to that of its exterior – 4) by dealing an amount of damage equal to one-quarter the swallowing creature’s total Hit Points, though any attack that does not deal slashing damage deals only half its normal damage. If a target cuts its way out of the creature, the creature cannot use swallow whole again until that damage is healed.</p>\n<p>Alternatively, a target swallowed whole can attempt to climb out. The swallowed creature must succeed at both a grapple check against the creature’s internal KAC + 8 and an Athletics check to climb (DC = 10 + 1-1/2 × the creature’s CR). Each of these actions takes a full round. If both checks are successful, the target climbs back up to the creature’s mouth and can escape, ending up in an open square adjacent to the creature.</p>\n<hr />"
+          "value": "<p>(EX)</p>\n<p>If the creature hits with the indicated attack (usually a bite attack), it deals the normal damage. If the creature’s attack roll successfully hits the target’s KAC + 4, the creature also automatically grapples the foe as part of the attack action. (If it hits the target’s KAC + 13, it instead pins the target). The creature doesn’t need to have a free limb to perform this grapple. Unless otherwise specified, a creature can swallow whole only targets that are at least one size category smaller than itself, and it has room for a single target of that size in its stomach (doubling the maximum number of creatures it can have swallowed for each additional size category by which these creatures are smaller).</p>\n<p>On the creature’s next turn after grappling or pinning the target, if the target has not escaped the grapple or pin, the target automatically takes the attack’s damage at the beginning of the creature’s turn. The creature can then make a new attack roll with the same attack. If it hits the target’s KAC, the grapple or @UUID[Compendium.sfrpg.conditions.Item.XgK4EdO5D3Fj3iWz]{Pin} is maintained. If it hits the target’s KAC + 4, the target is swallowed whole (no damage is dealt).</p>\n<p>Once swallowed, the target takes the listed swallow whole damage automatically at the beginning its turn every round. The target is considered @UUID[Compendium.sfrpg.conditions.Item.4AkWDHGM6gHDepHN]{Grappled} as long as it is swallowed. The target can attempt to cut its way out (the interior of a creature with swallow whole has the same EAC as its exterior and a KAC equal to that of its exterior – 4) by dealing an amount of damage equal to one-quarter the swallowing creature’s total Hit Points, though any attack that does not deal slashing damage deals only half its normal damage. If a target cuts its way out of the creature, the creature cannot use swallow whole again until that damage is healed.</p>\n<p>Alternatively, a target swallowed whole can attempt to climb out. The swallowed creature must succeed at both a grapple check against the creature’s internal KAC + 8 and an Athletics check to climb (DC = 10 + 1-1/2 × the creature’s CR). Each of these actions takes a full round. If both checks are successful, the target climbs back up to the creature’s mouth and can escape, ending up in an open square adjacent to the creature.</p>\n<hr />"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -403,6 +447,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -414,6 +459,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -435,6 +481,11 @@
       "_id": "dGAiuAQ7Q0U19YCb",
       "name": "Flexible (Ex)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -442,6 +493,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -450,6 +502,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -463,6 +516,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -471,6 +525,11 @@
           "value": "<div>\n<p>An abynthic can contort itself surprisingly well for its enormous size. An abynthic gains a +4 bonus to its AC against attacks of opportunity.</p>\n</div>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -478,6 +537,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -489,6 +549,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -510,6 +571,11 @@
       "_id": "44MU8JWRbgk5NUBg",
       "name": "+ 4 vs. attacks of opportunity",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -517,6 +583,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -525,6 +592,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -538,6 +606,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -546,6 +615,11 @@
           "value": ""
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -553,6 +627,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -564,6 +639,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -585,6 +661,11 @@
       "_id": "rHCOm1xEnuPkvp7w",
       "name": "Water Breathing",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -592,6 +673,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -600,6 +682,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -613,6 +696,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -621,6 +705,11 @@
           "value": "<p>&nbsp;(EX)</p>\n<p>The creature can breathe water. It can’t breathe air unless it has the amphibious special ability (see page 152).</p>\n<hr />"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -628,6 +717,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -639,6 +729,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -660,6 +751,11 @@
       "_id": "nXGbZnCixGYGqGgm",
       "name": "Slam",
       "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -674,8 +770,10 @@
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -708,6 +806,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -737,6 +836,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -754,6 +854,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -847,12 +948,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -860,6 +963,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -881,16 +985,20 @@
   "prototypeToken": {
     "name": "Abynthic",
     "actorLink": false,
+    "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
     "height": 6,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -911,13 +1019,30 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -930,12 +1055,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "tint": null
+      "src": "icons/svg/mystery-man.svg",
+      "tint": "#ffffff"
     },
     "width": 6
   },
@@ -985,12 +1115,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -1048,7 +1184,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 0
@@ -1057,7 +1194,8 @@
         "special": "original base: swim 60 ft.",
         "swimming": {
           "base": 60
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -1119,17 +1257,24 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<p>Measuring up to 100 feet from their eel-like jaws to their four-part tails and weighing hundreds of tons, abynthics are among the largest and most formidable creatures found in the seas of @UUID[Compendium.sfrpg.setting.tvbcahAbnqDGepHf]{Entha}. While they’re swimming on long migratory patterns that circumnavigate the planet’s full circumference twice a year, their segmented tails cleave together and function as one powerful limb that propels them through the depths. Abynthics are incredibly flflexible for their size and can use their tails individually to attack with devastating effffect when they happen across a worthy meal.</p>\n<p>These carnivorous giants attack their prey by fifirst ramming into it with their massive jaws, then clamping down with enormous pressure and bringing their flflexible tails to bear. When they’ve appropriately subdued and tenderized a creature, they swallow it whole.</p>\n<p>Abynthics are constantly on the move and have no established hunting grounds. Often, their travel takes them through smaller ecosystems, where their voracious appetites can leave devastation in their wake, upsetting an area’s fragile balance. On @UUID[Compendium.sfrpg.setting.tvbcahAbnqDGepHf]{Entha}, the only refuges from these massive creatures are the magical reefs that supernaturally decrease the surrounding water pressure; abynthics are adapted to the high pressure of the deep sea and fare poorly in shallow and low-pressure environments.</p>\n<p>Many other worlds contain creatures that closely resemble abynthics, though most have notable differences in their number of tails or diet; some are even herbivorous. Sapient species study, fear, or even worship these mysterious beings wherever they appear—but nothing is known about their reproductive cycle. Some posit that the massive creatures are effectively immortal, dropped fully formed into the seas by some divine entity, as no abynthic young, eggs, or decaying remains have ever been found. The leviathans can be killed, however, and powerful mercenaries regularly mount expeditions to hunt abynthics. These poachers primarily want the creatures’ uniquely strong jaws, which are sometimes incorporated into deep-sea submersibles to help them withstand enormous pressure.</p>",
+        "value": "<p>Measuring up to 100 feet from their eel-like jaws to their four-part tails and weighing hundreds of tons, abynthics are among the largest and most formidable creatures found in the seas of @UUID[Compendium.sfrpg.setting.Item.tvbcahAbnqDGepHf]{Entha}. While they’re swimming on long migratory patterns that circumnavigate the planet’s full circumference twice a year, their segmented tails cleave together and function as one powerful limb that propels them through the depths. Abynthics are incredibly flflexible for their size and can use their tails individually to attack with devastating effffect when they happen across a worthy meal.</p>\n<p>These carnivorous giants attack their prey by fifirst ramming into it with their massive jaws, then clamping down with enormous pressure and bringing their flflexible tails to bear. When they’ve appropriately subdued and tenderized a creature, they swallow it whole.</p>\n<p>Abynthics are constantly on the move and have no established hunting grounds. Often, their travel takes them through smaller ecosystems, where their voracious appetites can leave devastation in their wake, upsetting an area’s fragile balance. On @UUID[Compendium.sfrpg.setting.Item.tvbcahAbnqDGepHf]{Entha}, the only refuges from these massive creatures are the magical reefs that supernaturally decrease the surrounding water pressure; abynthics are adapted to the high pressure of the deep sea and fare poorly in shallow and low-pressure environments.</p>\n<p>Many other worlds contain creatures that closely resemble abynthics, though most have notable differences in their number of tails or diet; some are even herbivorous. Sapient species study, fear, or even worship these mysterious beings wherever they appear—but nothing is known about their reproductive cycle. Some posit that the massive creatures are effectively immortal, dropped fully formed into the seas by some divine entity, as no abynthic young, eggs, or decaying remains have ever been found. The leviathans can be killed, however, and powerful mercenaries regularly mount expeditions to hunt abynthics. These poachers primarily want the creatures’ uniquely strong jaws, which are sometimes incorporated into deep-sea submersibles to help them withstand enormous pressure.</p>",
         "weight": ""
       },
       "class": "",
       "cr": 7,
       "environment": "any water (Entha)",
       "organization": "solitary",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #36 pg. 55",
@@ -1137,7 +1282,22 @@
         "value": 10
       }
     },
-    "modifiers": [],
+    "modifiers": [
+      {
+        "name": "Damage Reduction",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "damage-reduction",
+        "enabled": true,
+        "max": 0,
+        "modifier": "5",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "permanent",
+        "valueAffected": "piercing"
+      }
+    ],
     "skillpoints": {
       "max": 0,
       "tooltip": [],
@@ -1369,30 +1529,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -1427,6 +1594,9 @@
       },
       "senses": "darkvision 60 ft., low-light vision;",
       "size": "colossal",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

@@ -1,0 +1,95 @@
+<div class="item-duration flexrow" data-effect-uuid="{{item.timedEffect.uuid}}">
+
+    {{!-- Effect Details --}}
+    <div class="bubble">
+        {{#if message}}
+            <h3 class="bubble-header">{{ localize message }}</h3>
+        {{else}}
+            <h3 class="bubble-header">{{ localize "SFRPG.Effect.DetailsHeader" }}</h3>
+        {{/if}}
+
+        <div class="bubble-info flexrow">
+
+            {{!-- Duration Types --}}
+            <div>
+                <div class="form-group input-select">
+                    <label>{{localize "SFRPG.Effect.DurationTypesLabel"}}</label>
+                    <div class="form-fields">
+                        {{#unless (eq itemData.activeDuration.unit "permanent")}}
+                            {{#if duration.showTotal}}
+                                <p class="calculated-total"><strong>{{itemData.activeDuration.total}}</strong></p>
+                            {{/if}}
+                            <input type="text" name="system.activeDuration.value"
+                                value="{{itemData.activeDuration.value}}" data-dtype="String" placeholder="-"
+                                data-tooltip="<p>Use the <code>@owner</code> prefix to reference the parent actor.</p><p>Use <code>@origin.actor</code> or <code>@origin.item</code> to reference the origin actor or item respectively." />
+                        {{/unless}}
+                        <select name="system.activeDuration.unit">
+                            {{#select itemData.activeDuration.unit}}
+                                {{#each config.effectDurationTypes as |name key|}}
+                                    <option value="{{key}}">{{localize name}}</option>
+                                {{/each}}
+                            {{/select}}
+                        </select>
+                    </div>
+                </div>
+
+                {{!-- Expiry Information --}}
+                {{#unless (eq itemData.activeDuration.unit "permanent")}}
+                    <div class="form-group input-select">
+                        <label>{{localize "SFRPG.Effect.EndTypesLabel"}}</label>
+                        <div class="form-fields">
+                            <select name="system.activeDuration.expiryMode.type" {{createTippy
+                                title="SFRPG.Effect.ExpiryModeLabel" subtitle="SFRPG.Effect.ExpiryModeTooltip" }}>
+                                {{#select itemData.activeDuration.expiryMode.type}}
+                                    <option value="turn">{{ localize "SFRPG.Effect.ExpiryModeTurn"}}</option>
+                                    <option value="init">{{ localize "SFRPG.Effect.ExpiryModeInit"}}</option>
+                                {{/select}}
+                            </select>
+                            {{#if (eq itemData.activeDuration.expiryMode.type "turn")}}
+                                <select name="system.activeDuration.expiryMode.turn" {{createTippy
+                                    title="SFRPG.Effect.EndTypesLabel" subtitle="SFRPG.Effect.EndsOnTooltip" }}>
+                                    {{#select itemData.activeDuration.expiryMode.turn}}
+                                        <option value="parent">Parent Actor's Turn</option>
+                                        <option value="origin">Origin Actor's Turn</option>
+                                        <option value="init">Nearest Initiative</option>
+                                        <optgroup label="Combatant Turns">
+                                            {{#each this.sourceActorChoices as |name id|}}
+                                                <option value="{{id}}">{{name}}</option>
+                                            {{/each}}
+                                        </optgroup>
+                                    {{/select}}
+                                </select>
+                                <select name="system.activeDuration.endsOn">
+                                    {{#select itemData.activeDuration.endsOn}}
+                                        {{#each config.effectEndTypes as |name key|}}
+                                            <option value="{{key}}">{{localize name}}</option>
+                                        {{/each}}
+                                    {{/select}}
+                                </select>
+                            {{else if (eq itemData.activeDuration.expiryMode.type "init")}}
+                                <input name="system.activeDuration.expiryInit" type="number" data-dtype="Number"
+                                    value="{{itemData.activeDuration.expiryInit}}">
+                            {{/if}}
+                        </div>
+                    </div>
+                {{/unless}}
+
+                {{!-- Enabled/Disabled --}}
+                <div class="form-group">
+                    <label for="effectEnabled">{{ localize "SFRPG.Effect.DetailsEnabledLabel" }}</label>
+                    <input type="checkbox" id="effectEnabled" class="effect-details-toggle" name="system.enabled"
+                        {{checked itemData.enabled}}>
+                </div>
+
+                {{!-- Show on Token --}}
+                <div class="form-group">
+                    <label for="showOnToken">{{ localize "SFRPG.Effect.DetailsShowOnToken" }}</label>
+                    <input type="checkbox" id="showOnToken" class="effect-icon-toggle" name="system.showOnToken"
+                        {{checked itemData.showOnToken}}>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

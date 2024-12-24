@@ -48,10 +48,10 @@ export default class IconEnricher extends BaseEnricher {
         img.dataset.type = this.args.type;
         img.dataset.tooltip = `SFRPG.Enrichers.Icon.Types.${name}`;
 
-        img.width = 20;
-        img.height = 20;
+        img.classList.add("icon-enricher");
         img.alt = name;
         img.src = this.icons[this.args.type];
+        img.loading = "lazy";
 
         return img;
     }

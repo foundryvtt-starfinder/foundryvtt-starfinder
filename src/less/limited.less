@@ -1,0 +1,53 @@
+@import "./variables.less";
+
+.sfrpg.sheet.actor .limited {
+    .sheet-header {
+        border-bottom: @borderGroove;
+
+        .header-background {
+            height: 180px;
+
+            .header-text {
+                padding-left: calc(2% + 5px);
+
+                .charname {
+                    display: flex;
+                    flex: 1 0 90px;
+                    align-items: flex-end;
+                    padding: 0;
+                    margin: 0;
+
+                    input {
+                        padding: 0;
+                        margin: 0;
+                    }
+                }
+
+                .species-grafts {
+                    flex: 1 0 65px;
+                    display: flex;
+                    font-size: var(--font-size-14);
+                    color: #fff;
+
+                    &:empty {
+                        flex-basis: 30px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.sfrpg.sheet.actor:is(.npc, .hazard, .vehicle) .limited {
+    .header-background {
+        height: 140px;
+
+        .header-text .species-grafts {
+            flex: 1 0 50px;
+
+            &:empty {
+                flex-grow: 0;
+            }
+        }
+    }
+}

@@ -17,7 +17,7 @@ export default function(engine) {
 
             let computedBonus = 0;
             try {
-                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
                 computedBonus = roll.total;
             } catch {}
 
@@ -36,9 +36,9 @@ export default function(engine) {
         let filteredModifiers = fact.modifiers.filter(mod => {
             return (mod.enabled || mod.modifierType === "formula") && mod.effectType == SFRPGEffectType.BASE_ATTACK_BONUS;
         });
-        filteredModifiers = context.parameters.stackModifiers.process(filteredModifiers, context);
+        filteredModifiers = context.parameters.stackModifiers.process(filteredModifiers, context, {actor: fact.actor});
 
-        let bonus = Object.entries(filteredModifiers).reduce((sum, mod) => {
+        const bonus = Object.entries(filteredModifiers).reduce((sum, mod) => {
             if (mod[1] === null || mod[1].length < 1) return sum;
 
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
@@ -52,7 +52,6 @@ export default function(engine) {
             return sum;
         }, 0);
 
-        data.attributes.bab = data.attributes.baseAttackBonus.value + bonus;
         data.attributes.baseAttackBonus.value += bonus;
 
         return fact;

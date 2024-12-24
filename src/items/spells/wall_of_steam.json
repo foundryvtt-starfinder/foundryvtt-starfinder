@@ -2,6 +2,11 @@
   "_id": "mQNtODLxYY3gMdwl",
   "name": "Wall Of Steam",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "icons/magic/air/fog-gas-smoke-swirling-white.webp",
   "system": {
     "type": "",
@@ -24,7 +29,8 @@
     },
     "area": {
       "effect": "emanation",
-      "shape": "shapable",
+      "shapable": true,
+      "shape": "cube",
       "units": "ft",
       "value": 20
     },
@@ -75,7 +81,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>This spell functions as @UUID[Compendium.sfrpg.spells.RXSW72w5lzUFpaCq]{Wall of Fog}, except you can select one side of the wall to give off searing steam. Creatures within 5 feet of this side of the wall take 2d4 fire damage, and those beyond 5 feet but within 10 feet take 1d4 fire damage. The wall deals this damage when it appears and on your turn each subsequent round. In addition, the wall deals 3d4 fire damage to any creature passing through it. If you conjure the wall&nbsp;so that it appears where creatures are, each creature takes damage as if passing through the wall.</p>\n<p>The steam can be dispersed as awall of fogcan. Also, if any 5-foot length of wall takes 10 or more cold damage in 1 round, that length crystallizes and melts away, disappearing.</p>"
+      "value": "<p>This spell functions as @UUID[Compendium.sfrpg.spells.Item.RXSW72w5lzUFpaCq]{Wall of Fog}, except you can select one side of the wall to give off searing steam. Creatures within 5 feet of this side of the wall take 2d4 fire damage, and those beyond 5 feet but within 10 feet take 1d4 fire damage. The wall deals this damage when it appears and on your turn each subsequent round. In addition, the wall deals 3d4 fire damage to any creature passing through it. If you conjure the wall&nbsp;so that it appears where creatures are, each creature takes damage as if passing through the wall.</p>\n<p>The steam can be dispersed as awall of fogcan. Also, if any 5-foot length of wall takes 10 or more cold damage in 1 round, that length crystallizes and melts away, disappearing.</p>"
     },
     "descriptors": [],
     "dismissible": false,
@@ -98,11 +104,12 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
-      "additional": "5 ft.",
-      "per": "2 levels",
-      "units": "ft",
-      "value": 25
+      "additional": "",
+      "per": "",
+      "units": "close",
+      "value": null
     },
     "rollNotes": "",
     "save": {

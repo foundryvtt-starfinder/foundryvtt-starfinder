@@ -9,6 +9,10 @@
       "vehicle",
       "npc"
     ],
+    "htmlFields": ["details.biography.value", "details.biography.gmNotes", "details.biography.value", "details.notes"],
+    "filePathFields": {
+      "details.biography.fullBodyImage": ["IMAGE"]
+    },
     "templates": {
       "common": {
         "abilities": {
@@ -73,18 +77,6 @@
             "tempmax": null,
             "tooltip": []
           },
-          "sp": {
-            "min": 0,
-            "max": 10,
-            "value": 0,
-            "tooltip": []
-          },
-          "rp": {
-            "min": 0,
-            "max": 10,
-            "value": 0,
-            "tooltip": []
-          },
           "init": {
             "value": 0,
             "bonus": 0,
@@ -109,12 +101,6 @@
             "misc": 0,
             "tooltip": []
           },
-          "baseAttackBonus": {
-            "value": 0,
-            "rolledMods": [],
-            "tooltip": []
-          },
-          "bab": 0,
           "arms": 2,
           "space": 5,
           "reach": 5,
@@ -135,7 +121,6 @@
             "climbing": {
               "base": 0
             },
-            "value": null,
             "special": null,
             "mainMovement": "land"
           },
@@ -158,11 +143,6 @@
             "genderPronouns": "",
             "homeWorld": ""
           }
-        },
-        "skillpoints": {
-          "used": 0,
-          "max": 0,
-          "tooltip": []
         },
         "skills": {
           "acr": {
@@ -503,6 +483,25 @@
         "conditions",
         "counterClassesManagement"
       ],
+      "attributes": {
+        "sp": {
+          "min": 0,
+          "max": 10,
+          "value": 0,
+          "tooltip": []
+        },
+        "rp": {
+          "min": 0,
+          "max": 10,
+          "value": 0,
+          "tooltip": []
+        },
+        "baseAttackBonus": {
+          "value": 0,
+          "rolledMods": [],
+          "tooltip": []
+        }
+      },
       "details": {
         "deity": "",
         "level": {
@@ -519,6 +518,11 @@
           "max": 1300
         },
         "theme": ""
+      },
+      "skillpoints": {
+        "used": 0,
+        "max": 0,
+        "tooltip": []
       },
       "traits": {
         "weaponProf": {
@@ -598,6 +602,17 @@
         "armorSlots": {
           "current": 0,
           "max": 0
+        },
+        "baseAttackBonus": {
+          "value": 0,
+          "rolledMods": [],
+          "tooltip": []
+        },
+        "rp": {
+          "min": 0,
+          "max": 0,
+          "value": 0,
+          "tooltip": []
         },
         "weaponMounts": {
           "melee": {
@@ -704,6 +719,12 @@
     },
     "npc": {
       "attributes": {
+        "rp": {
+          "min": 0,
+          "max": 0,
+          "value": 0,
+          "tooltip": []
+        },
         "abilityDC": {
           "base": 0
         },
@@ -718,6 +739,7 @@
         "counterClassesManagement"
       ],
       "details": {
+        "combatRole": "",
         "type": "",
         "environment": "",
         "organization": "",
@@ -735,29 +757,33 @@
         "conditions",
         "counterClassesManagement"
       ],
-      "common": {
-        "abilities": {
-          "str": {
-            "base": 0
-          },
-          "dex": {
-            "base": 0
-          },
-          "con": {
-            "base": 0
-          },
-          "int": {
-            "base": 0
-          },
-          "wis": {
-            "base": 0
-          },
-          "cha": {
-            "base": 0
-          }
+      "abilities": {
+        "str": {
+          "base": 0
+        },
+        "dex": {
+          "base": 0
+        },
+        "con": {
+          "base": 0
+        },
+        "int": {
+          "base": 0
+        },
+        "wis": {
+          "base": 0
+        },
+        "cha": {
+          "base": 0
         }
       },
       "attributes": {
+        "rp": {
+          "min": 0,
+          "max": 0,
+          "value": 0,
+          "tooltip": []
+        },
         "eac": {
           "base": 0
         },
@@ -772,9 +798,6 @@
         },
         "will": {
           "base": 0
-        },
-        "sp": {
-          "max": 0
         },
         "abilityDC": {
           "base": 0
@@ -1182,6 +1205,7 @@
       "actorResource",
       "feat",
       "spell",
+      "effect",
       "asi",
       "chassis",
       "mod",
@@ -1221,6 +1245,7 @@
       "weapon",
       "weaponAccessory"
     ],
+    "htmlFields": ["description.value", "description.gmnotes", "description.chat", "description.short", "description.unidentified"],
     "templates": {
       "container": {
         "container": {
@@ -1278,7 +1303,7 @@
         },
         "duration": {
           "value": null,
-          "units": ""
+          "units": "text"
         },
         "target": {
           "value": null,
@@ -1288,7 +1313,8 @@
           "value": 0,
           "units": "",
           "shape": "",
-          "effect": ""
+          "effect": "",
+          "shapable": false
         },
         "range": {
           "value": null,
@@ -1297,8 +1323,8 @@
           "per": ""
         },
         "uses": {
-          "value": 0,
-          "max": 0,
+          "value": null,
+          "max": null,
           "per": null
         },
         "isActive": null
@@ -1324,7 +1350,8 @@
           "dc": null,
           "descriptor": ""
         },
-        "descriptors": []
+        "descriptors": [],
+        "properties": {}
       },
       "descriptors": {},
       "itemUsage": {
@@ -1349,6 +1376,19 @@
       },
       "specialMaterials": {
         "specialMaterials": {}
+      },
+      "itemDuration": {
+        "activeDuration": {
+          "unit": "round",
+          "value": "0",
+          "activationTime": 0,
+          "expiryMode": {
+            "type": "turn",
+            "turn": "parent"
+          },
+          "expiryInit": 0,
+          "endsOn": "onTurnStart"
+        }
       }
     },
     "asi": {
@@ -1368,11 +1408,11 @@
       "attributes": {
         "sturdy": true
       },
+      "isEquipment": true,
       "weaponType": "basicM",
       "weaponCategory": "uncategorized",
       "special": "",
       "ability": "str",
-      "properties": {},
       "proficient": true,
       "container": {
         "contents": [],
@@ -2064,7 +2104,7 @@
         "modifiers"
       ],
       "abilityMod": {
-        "ability": "cha",
+        "ability": "",
         "mod": 1
       },
       "skill": ""
@@ -2084,7 +2124,9 @@
         "physicalItem",
         "itemUsage",
         "modifiers",
-        "container"
+        "container",
+        "action",
+        "activatedEffect"
       ],
       "hands": 0
     },
@@ -2094,7 +2136,9 @@
         "physicalItem",
         "itemUsage",
         "modifiers",
-        "container"
+        "container",
+        "action",
+        "activatedEffect"
       ],
       "hands": 0,
       "limitedWear": false
@@ -2105,7 +2149,9 @@
         "physicalItem",
         "itemUsage",
         "modifiers",
-        "container"
+        "container",
+        "action",
+        "activatedEffect"
       ],
       "hands": 0,
       "limitedWear": false
@@ -2125,10 +2171,12 @@
         "physicalItem",
         "itemUsage",
         "modifiers",
-        "container"
+        "container",
+        "action",
+        "activatedEffect"
       ],
       "slots": 1,
-      "armorType": "any"
+      "allowedArmorType": "any"
     },
     "ammunition": {
       "templates": [
@@ -2573,6 +2621,14 @@
         "showOwnerAndGMOnly": false,
         "visualization": []
       }
+    },
+    "effect": {
+      "templates": ["itemDescription", "modifiers", "itemDuration"],
+      "type": "effect",
+      "enabled": true,
+      "context": {},
+      "showOnToken": true,
+      "turnEvents": []
     }
   }
 }

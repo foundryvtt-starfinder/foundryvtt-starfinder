@@ -1,28 +1,30 @@
 {
   "_id": "MZ8OoH1GE9qDMyCD",
   "name": "Flat-Footed",
-  "type": "feat",
+  "type": "effect",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "systems/sfrpg/icons/conditions/flatfooted.webp",
   "system": {
-    "type": "",
-    "ability": "int",
+    "type": "condition",
     "abilityMods": {
       "parts": []
     },
-    "actionType": "",
-    "activation": {
-      "type": "",
-      "condition": "",
-      "cost": 0
+    "activeDuration": {
+      "activationTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "parent"
+      },
+      "unit": "permanent",
+      "value": 0
     },
-    "area": {
-      "effect": "",
-      "shape": "",
-      "units": null,
-      "value": null
-    },
-    "attackBonus": 0,
-    "chatFlavor": "",
+    "context": {},
     "critical": {
       "effect": "",
       "parts": []
@@ -32,16 +34,12 @@
     },
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.rules.0yJjfyvWg5pDLcVR]{Conditions}</p>\n<hr />\n<p>At the start of a combat, if you are surprised, you are @UUID[Compendium.sfrpg.conditions.MZ8OoH1GE9qDMyCD]{Flat-Footed} until you become aware of combat and have had a chance to act.</p>\n<p>Many other effects can cause you to become @UUID[Compendium.sfrpg.conditions.MZ8OoH1GE9qDMyCD]{Flat-Footed}.</p>\n<p>You take a –2 penalty to your AC and cannot take reactions while @UUID[Compendium.sfrpg.conditions.MZ8OoH1GE9qDMyCD]{Flat-Footed}.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.rules.Item.0yJjfyvWg5pDLcVR]{Conditions}</p>\n<hr />\n<p>At the start of a combat, if you are surprised, you are @UUID[Compendium.sfrpg.conditions.Item.MZ8OoH1GE9qDMyCD]{Flat-Footed} until you become aware of combat and have had a chance to act.</p>\n<p>Many other effects can cause you to become @UUID[Compendium.sfrpg.conditions.Item.MZ8OoH1GE9qDMyCD]{Flat-Footed}.</p>\n<p>You take a –2 penalty to your AC and cannot take reactions while @UUID[Compendium.sfrpg.conditions.Item.MZ8OoH1GE9qDMyCD]{Flat-Footed}.</p>"
     },
-    "descriptors": [],
-    "duration": {
-      "units": "",
-      "value": ""
-    },
-    "formula": "",
-    "isActive": null,
+    "enabled": true,
     "modifiers": [
       {
         "_id": "34ea6bbe-b405-4412-a31a-5a3e279ace48",
@@ -58,31 +56,10 @@
         "valueAffected": "both"
       }
     ],
-    "range": {
-      "additional": "",
-      "per": "",
-      "units": null,
-      "value": null
-    },
-    "recharge": {
-      "charged": false,
-      "value": null
-    },
     "requirements": "Condition",
-    "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": "negate"
-    },
+    "showOnToken": true,
     "source": "CRB.276",
-    "target": {
-      "type": "",
-      "value": ""
-    },
-    "uses": {
-      "max": 0,
-      "per": "",
-      "value": 0
-    }
+    "sourceActorId": null,
+    "turnEvents": []
   }
 }

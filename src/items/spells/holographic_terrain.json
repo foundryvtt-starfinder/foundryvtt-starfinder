@@ -2,6 +2,11 @@
   "_id": "Lmm0u6noSlQYekSe",
   "name": "Holographic Terrain",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "systems/sfrpg/icons/spells/holographic_terrain.webp",
   "system": {
     "type": "",
@@ -9,6 +14,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "action",
@@ -17,14 +23,16 @@
     },
     "allowedClasses": {
       "myst": false,
+      "precog": false,
       "tech": true,
       "wysh": false
     },
     "area": {
       "effect": "",
-      "shape": "shapable",
-      "units": "ft",
-      "value": 20
+      "shapable": true,
+      "shape": "cube",
+      "units": "text",
+      "value": "one 20-ft. cube/level (S)"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -36,18 +44,23 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>You make terrain look, sound, and smell like some other sort of terrain. Equipment, structures, and vehicles within the area can be hidden or changed in appearance. The illusion includes audible, olfactory, tactile, and visual elements and is effective against cameras, living creatures, robots, and scrying spells. This spell can’t disguise or add creatures nor can it make them invisible (though creatures within the area might hide themselves within the illusion just as they can hide themselves within a real location).</p>"
     },
     "descriptors": [],
     "dismissible": true,
     "duration": {
-      "units": "",
-      "value": "2 hour/level (D)"
+      "units": "hour",
+      "value": "@details.cl.value*2"
     },
     "formula": "",
+    "isActive": null,
+    "isVariableLevel": false,
     "level": 5,
     "materials": {
       "consumed": false,
@@ -60,12 +73,14 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
-      "additional": "40 ft",
-      "per": "level",
-      "units": "ft",
-      "value": 400
+      "additional": "",
+      "per": "",
+      "units": "long",
+      "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "will",
       "dc": "",
