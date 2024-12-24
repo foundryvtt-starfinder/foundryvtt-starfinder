@@ -231,7 +231,7 @@ export class DiceSFRPG {
 
             finalFormula.finalRoll = `${dieRoll} + ${finalFormula.finalRoll}`;
             finalFormula.formula = `${dieRoll} + ${finalFormula.formula}`;
-            finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
+            finalFormula.formula = finalFormula.formula.replace(/\+\s*-\s*/gi, "- ").replace(/\+\s*\+\s*/gi, "+ ")
                 .trim();
             finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
             const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
@@ -252,16 +252,6 @@ export class DiceSFRPG {
                     d.options.fumble = fumble;
                 }
             }
-
-            // if (flavor) {
-            //     const chatData = {
-            //         type: CONST.CHAT_MESSAGE_STYLES.IC,
-            //         speaker: speaker,
-            //         content: flavor
-            //     };
-
-            //     ChatMessage.create(chatData, { chatBubble: true });
-            // }
 
             const itemContext = rollContext.allContexts['item'];
             const htmlData = [{ name: "rollNotes", value: itemContext?.system?.rollNotes }];
@@ -294,7 +284,6 @@ export class DiceSFRPG {
                 const messageData = {
                     flavor,
                     speaker,
-                    rollMode,
                     rolls: [roll],
                     sound: CONFIG.sounds.dice,
                     flags: { rollOptions }
@@ -305,7 +294,8 @@ export class DiceSFRPG {
                     messageData.content = DiceSFRPG.appendTextToRoll(messageData.content, game.i18n.format("SFRPG.Items.Action.ActionTarget.ChatMessage", {actionTarget: rollOptions.actionTargetSource[rollOptions.actionTarget]}));
                 }
 
-                ChatMessage.create(messageData);
+                // Create a chat message, applying the appropriate roll type (public, gmroll, etc.)
+                ChatMessage.create(messageData, { rollMode: rollMode });
             }
 
             if (onClose) {
@@ -433,7 +423,7 @@ export class DiceSFRPG {
                         finalFormula.formula = `${dieRoll} + ${finalFormula.formula}`;
                     }
 
-                    finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
+                    finalFormula.formula = finalFormula.formula.replace(/\+\s*-\s*/gi, "- ").replace(/\+\s*\+\s*/gi, "+ ")
                         .trim();
                     finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
 
@@ -644,7 +634,9 @@ export class DiceSFRPG {
                             }
                         }
                         htmlData.push({ name: "weapon-properties", value: JSON.stringify(props) });
-                    } catch { }
+                    } catch {
+                        // pass
+                    }
                 }
 
                 /** Starship Weapons use data.special for their properties */
@@ -662,7 +654,9 @@ export class DiceSFRPG {
                                 }
                             }
                             htmlData.push({ name: "starship-weapon-properties", value: JSON.stringify(props) });
-                        } catch { }
+                        } catch {
+                            // pass
+                        }
                     }
                 }
 
@@ -718,7 +712,7 @@ export class DiceSFRPG {
                 // console.log([originalTypes, damageTypes]);
             }
 
-            finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
+            finalFormula.formula = finalFormula.formula.replace(/\+\s*-\s*/gi, "- ").replace(/\+\s*\+\s*/gi, "+ ")
                 .trim();
             finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
             const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
@@ -800,7 +794,6 @@ export class DiceSFRPG {
                     flavor: finalFlavor,
                     speaker,
                     content: rollContent,
-                    rollMode,
                     rolls: [roll],
                     sound: CONFIG.sounds.dice
                 };
@@ -820,7 +813,7 @@ export class DiceSFRPG {
                     }
                 }
 
-                ChatMessage.create(messageData);
+                ChatMessage.create(messageData, { rollMode: rollMode });
             }
 
             if (onClose) {
@@ -1072,7 +1065,7 @@ export class DiceSFRPG {
         formulaString += bonus ? `${bonus.toString()}[<span>${game.i18n.localize("SFRPG.Rolls.Dialog.SituationalBonus")}</span>]` : '';
 
         rollString += bonus ? `${bonus}` : '';
-        rollString = rollString.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
+        rollString = rollString.replace(/\+\s*-\s*/gi, "- ").replace(/\+\s*\+\s*/gi, "+ ")
             .trim();
         rollString = rollString.endsWith("+") ? rollString.substring(0, rollString.length - 1).trim() : rollString;
 
@@ -1081,7 +1074,7 @@ export class DiceSFRPG {
         finalFormula.finalRoll = rollString ? `${finalFormula.finalRoll} + ${rollString}` : finalFormula.finalRoll;
         finalFormula.formula = formulaString ? `${finalFormula.formula} + ${formulaString}` : finalFormula.formula;
 
-        finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ")
+        finalFormula.formula = finalFormula.formula.replace(/\+\s*-\s*/gi, "- ").replace(/\+\s*\+\s*/gi, "+ ")
             .trim();
         finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
 

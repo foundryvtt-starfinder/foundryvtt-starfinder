@@ -116,7 +116,7 @@ export default class SFRPGRoll extends Roll {
     /** @override */
     async render(chatOptions = {}) {
         chatOptions = foundry.utils.mergeObject({
-            user: game.user.id,
+            author: game.user.id,
             flavor: null,
             template: this.constructor.CHAT_TEMPLATE,
             blind: false
@@ -134,7 +134,7 @@ export default class SFRPGRoll extends Roll {
         const chatData = {
             formula: isPrivate ? "???" : this.formula,
             flavor: isPrivate ? null : chatOptions.flavor,
-            user: chatOptions.user,
+            author: chatOptions.user,
             tooltip: isPrivate ? "" : await this.getTooltip(),
             customTooltip: chatOptions.customTooltip,
             total: isPrivate ? "?" : Math.round(this.total * 100) / 100,
