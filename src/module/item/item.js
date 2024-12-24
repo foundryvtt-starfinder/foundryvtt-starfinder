@@ -558,8 +558,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             }
         }
 
-        // Filter properties and return
-        data.properties = props.filter(p => !!p && !!p.name);
+        // Filter properties and return {!CHANGED!}
+        data.properties = props.filter(p => !!p.value && !!p.name);
+        console.log(data);
         return data;
     }
 
@@ -606,13 +607,13 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     /* -------------------------------------------- */
 
     /**
-     * Prepare chat card data for weapon type items
+     * Prepare chat card data for weapon type items {!CHANGED!}
      * @private
      */
     _weaponChatData(data, labels, props) {
         props.push(
             {name: CONFIG.SFRPG.weaponTypes[data.weaponType], tooltip: null},
-            ...Object.entries(data.properties).filter(e => e[1] === true)
+            ...Object.entries(data.properties).filter(e => e[1].value === true)
                 .map(e => ({name: CONFIG.SFRPG.weaponProperties[e[0]], tooltip: CONFIG.SFRPG.weaponPropertiesTooltips[e[0]]})
                 )
         );
@@ -866,7 +867,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         let abl = itemData.ability;
         if (!abl && (this.actor.type === "npc" || this.actor.type === "npc2")) abl = "";
         else if (!abl && (this.type === "spell")) abl = actorData.attributes.spellcasting || "int";
-        else if (itemData.properties?.operative && actorData.abilities.dex.value > actorData.abilities.str.value) abl = "dex";
+        else if (itemData.properties?.operative.value && actorData.abilities.dex.value > actorData.abilities.str.value) abl = "dex"; // {!CHANGED!}
         else if (!abl) abl = "str";
 
         // Define Roll parts
@@ -1016,7 +1017,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                     return false;
                 }
             } else if (mod.effectType === SFRPGEffectType.WEAPON_PROPERTY_ATTACKS) {
-                if (!this.system?.properties?.[mod.valueAffected]) {
+                console.log(this, mod);
+                if (!this.system?.properties?.[mod.valueAffected].value) { // {!CHANGED!}
                     return false;
                 }
             } else if (mod.effectType === SFRPGEffectType.WEAPON_CATEGORY_ATTACKS) {
@@ -1319,7 +1321,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         /** Create additional modifiers. */
         const additionalModifiers = [];
 
-        if (itemData.properties?.archaic && isWeapon) {
+        if (itemData.properties?.archaic.value && isWeapon) { // {!CHANGED!}
             additionalModifiers.push({bonus: { name: game.i18n.format("SFRPG.WeaponPropertiesArchaic"), modifier: "-5", enabled: true, notes: game.i18n.format("SFRPG.WeaponPropertiesArchaicTooltip") } });
         }
 
@@ -1395,7 +1397,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                     return false;
                 }
             } else if (mod.effectType === SFRPGEffectType.WEAPON_PROPERTY_DAMAGE) {
-                if (!this.system.properties[mod.valueAffected]) {
+                if (!this.system.properties[mod.valueAffected].value) { // {!CHANGED!}
                     return false;
                 }
             } else if (mod.effectType === SFRPGEffectType.WEAPON_CATEGORY_DAMAGE) {
