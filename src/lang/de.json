@@ -2318,6 +2318,14 @@
                 "Hint": "Klappt die Beschreibungen der Objektkarten im Chat-Protokoll automatisch zusammen",
                 "Name": "Objektkarten im Chat zusammenklappen"
             },
+            "AutoRollCritEffect": {
+                "Hint": "When applying damage to a starship from a chat card, if the damage crossses a Critical Threshold, the Critical Damage Effects (CRB pg. 320) table will automatically be rolled.",
+                "Name": "Automatically roll starship critical damage effects"
+            },
+            "HideHostileStarshipCrit": {
+                "Hint": "When posting notifications about starship criticals or thresholds, only post to GM if the ship is a Hostile Token.",
+                "Name": "Hide Hostile Starship Critical Message"
+            },            
             "CombatCards": {
                 "NormalHint": "Lege fest, welche Chatkarten für Kämpfe im normalen Kampf angezeigt werden.",
                 "NormalName": "Normale Kämpfe",
@@ -2788,6 +2796,8 @@
             "Damage": {
                 "CrossedCriticalThreshold": "{name} hat die {crossedThresholds} kritische Schadensschwelle überschritten!",
                 "Message": "Der Schaden an einem Raumschiff kommt immer aus einer bestimmten Richtung, bitte wähle den Quadranten den der Schaden betrifft.",
+                "Nat20": "Critical damage! {name} takes a critical damage effect.",
+                "Nat20WithThreshold": "Critical damage! {name} takes an additional critical damage effect.",
                 "Quadrant": {
                     "Aft": "Achtern",
                     "Forward": "Bug",
@@ -2898,6 +2908,10 @@
                 "QuadrantLimit": "Quadrantenmaximum",
                 "ShieldHeader": "Schilde",
                 "TargetLock": "Zielerfassung"
+            },
+            "RandomQuadrantMacro": {
+                "NoToken": "Select the recipient of the critical effect before proceeding.",
+                "NotStarship": "The selected token must be a starship."
             },
             "Role": {
                 "Captain": "Kapitän",
