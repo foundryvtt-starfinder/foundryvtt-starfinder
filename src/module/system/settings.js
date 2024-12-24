@@ -107,6 +107,15 @@ export const registerSystemSettings = function() {
         type: Boolean
     });
 
+    game.settings.register("sfrpg", "hideHostileStarshipCrit", {
+        name: "SFRPG.Settings.HideHostileStarshipCrit.Name",
+        hint: "SFRPG.Settings.HideHostileStarshipCrit.Hint",
+        scope: "world",
+        config: true,
+        default: true,
+        type: Boolean
+    });
+
     game.settings.register("sfrpg", "difficultyDisplay", {
         name: "SFRPG.Settings.DifficultyDisplay.Name",
         hint: "SFRPG.Settings.DifficultyDisplay.Hint",

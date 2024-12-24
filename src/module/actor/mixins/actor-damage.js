@@ -661,30 +661,37 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         const originalCT = Math.floor((this.system.attributes.hp.max - originalHullPoints) / this.system.attributes.criticalThreshold.value);
         const newCT = Math.floor((this.system.attributes.hp.max - newHullPoints) / this.system.attributes.criticalThreshold.value);
         let timesToRoll = 0;
+        const rollMode = this.token?.disposition === -1 && game.settings.get("sfrpg", "hideHostileStarshipCrit")
+            ? CONST.DICE_ROLL_MODES.PRIVATE
+            : game.settings.get("core", "rollMode");
 
         if (newCT > originalCT) {
             const crossedThresholds = newCT - originalCT;
             const warningMessage = game.i18n.format("SFRPG.StarshipSheet.Damage.CrossedCriticalThreshold", {name: this.name, crossedThresholds: crossedThresholds});
             timesToRoll += crossedThresholds;
             ui.notifications.warn(warningMessage);
-            ChatMessage.create({
+            const chatData = {
                 user: game.user.id,
                 speaker: ChatMessage.getSpeaker({actor: this}),
                 content: warningMessage,
                 type: CONST.CHAT_MESSAGE_STYLES.OTHER
-            });
+            };
+            ChatMessage.applyRollMode(chatData, rollMode);
+            ChatMessage.create(chatData);
         }
 
         if (damage.isCritical && newHullPoints !== originalHullPoints) {
             timesToRoll++;
             const warningMessage = game.i18n.format((newCT > originalCT) ?  "SFRPG.StarshipSheet.Damage.Nat20WithThreshold" : "SFRPG.StarshipSheet.Damage.Nat20", {name: this.name});
             ui.notifications.warn(warningMessage);
-            ChatMessage.create({
+            const chatData = {
                 user: game.user.id,
                 speaker: ChatMessage.getSpeaker({actor: this}),
                 content: warningMessage,
                 type: CONST.CHAT_MESSAGE_STYLES.OTHER
-            });
+            };
+            ChatMessage.applyRollMode(chatData, rollMode);
+            ChatMessage.create(chatData);
         }
 
         if (timesToRoll > 0) {
@@ -693,7 +700,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
                 const index = pack.index ?? await pack.getIndex();
                 const obj = index.getName("Starship Critical Damage Effects");
                 const doc = await pack.getDocument(obj._id);
-                doc.drawMany(timesToRoll);
+                doc.drawMany(timesToRoll, { rollMode: rollMode });
             }
         }
 
