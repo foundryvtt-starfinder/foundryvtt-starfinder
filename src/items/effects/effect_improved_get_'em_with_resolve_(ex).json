@@ -1,0 +1,114 @@
+{
+  "_id": "HIAqDw4xCSXprefj",
+  "name": "Effect: Improved Get 'Em with Resolve (Ex)",
+  "type": "effect",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
+  "img": "systems/sfrpg/icons/classes/improved_getem.webp",
+  "system": {
+    "type": "effect",
+    "abilityMods": {
+      "parts": []
+    },
+    "activeDuration": {
+      "activationTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "origin"
+      },
+      "unit": "round",
+      "value": "1"
+    },
+    "context": {
+      "origin": {
+        "actorUuid": "",
+        "itemUuid": ""
+      }
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.hIhgdXnqGHBm0A64]{Envoy Improvisation}</p>\n<p>Your morale bonus from @UUID[Compendium.sfrpg.class-features.bP820PAOJUQ1dcLP]{Get 'Em (Ex)} increases to +2. As a standard action, you can make a single attack against a target within 60 feet. You and your allies within 60 feet gain the benefits of get ’em against that target (applying these effects before making the attack roll). If you spend 1 Resolve Point when using this ability, you grant a +2 morale bonus to attack and damage rolls against all enemies who are within 60 feet. You must have the get ’em envoy improvisation to choose this improvisation.</p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "266a6163-4496-402b-83c2-914cee974e21",
+        "name": "Improved Get 'Em (Ex)",
+        "type": "morale",
+        "condition": "",
+        "effectType": "all-attacks",
+        "enabled": true,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "Gain a +2 morale bonus to attack rolls made against specified enemy.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "92149725-f6fe-465d-838a-4ccfc2ceb8ed",
+        "name": "Improved Get 'Em (Ex)",
+        "type": "morale",
+        "condition": "",
+        "effectType": "ranged-damage",
+        "enabled": true,
+        "max": 0,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "0268fc1c-a781-46b1-bff0-158f3caf1033",
+        "name": "Improved Get 'Em (Ex)",
+        "type": "morale",
+        "condition": "",
+        "effectType": "melee-damage",
+        "enabled": true,
+        "max": 0,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "9fa9c77b-267e-4992-abe1-eccc9a88815e",
+        "name": "Improved Get 'Em (Ex)",
+        "type": "morale",
+        "condition": "",
+        "effectType": "spell-damage",
+        "enabled": true,
+        "max": 0,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
+    "requirements": "6th Level",
+    "showOnToken": true,
+    "source": "CRB pg 63",
+    "turnEvents": []
+  }
+}

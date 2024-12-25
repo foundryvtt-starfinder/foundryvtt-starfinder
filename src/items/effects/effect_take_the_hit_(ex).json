@@ -1,0 +1,114 @@
+{
+  "_id": "ws6vs3mekUtLZ1Ny",
+  "name": "Effect: Take the Hit (Ex)",
+  "type": "effect",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "type": "effect",
+    "abilityMods": {
+      "parts": []
+    },
+    "activeDuration": {
+      "activationTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "parent"
+      },
+      "unit": "round",
+      "value": "@origin.actor.abilities.cha.mod"
+    },
+    "context": {
+      "origin": {
+        "actorUuid": "",
+        "itemUuid": ""
+      }
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>If you use In Harm’s Way to intercept an attack that then reduces you to 0 Hit Points, you grant the attack’s original target a +1 morale bonus to AC, attack rolls, saving throws, and skill checks.</p>\n<p><em>((You'll need to manually add the temporary Hit Points.))</em></p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "25743e92-43c6-49ec-88b5-f0699ac36f6b",
+        "name": "Take the Hit (Ex)",
+        "type": "morale",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": true,
+        "max": 0,
+        "modifier": "1",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "both"
+      },
+      {
+        "_id": "aa4f2a3c-df1e-4086-9304-165a86ec88a5",
+        "name": "Take the Hit (Ex)",
+        "type": "morale",
+        "condition": "",
+        "effectType": "all-attacks",
+        "enabled": true,
+        "max": 0,
+        "modifier": "1",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "0c1ecb0c-c109-4e93-83b0-d34a8765a0c2",
+        "name": "Take the Hit (Ex)",
+        "type": "morale",
+        "condition": "",
+        "effectType": "saves",
+        "enabled": true,
+        "max": 0,
+        "modifier": "1",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "0c4307c5-86b1-465c-8086-f19e7898431b",
+        "name": "Take the Hit (Ex)",
+        "type": "morale",
+        "condition": "",
+        "effectType": "all-skills",
+        "enabled": true,
+        "max": 0,
+        "modifier": "1",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
+    "requirements": "Take the Hit (Ex)",
+    "showOnToken": true,
+    "source": "",
+    "turnEvents": []
+  }
+}
