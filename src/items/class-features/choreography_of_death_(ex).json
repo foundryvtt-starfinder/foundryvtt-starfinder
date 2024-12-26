@@ -1,6 +1,6 @@
 {
-  "_id": "KHrNYCXRxMf53rxf",
-  "name": "Arcane Arsenal (Su)",
+  "_id": "jbnntfIyM64vH6ow",
+  "name": "Choreography of Death (Ex)",
   "type": "feat",
   "_stats": {
     "coreVersion": 12,
@@ -17,16 +17,16 @@
     "actionTarget": "",
     "actionType": "",
     "activation": {
-      "type": "action",
+      "type": "",
       "condition": "",
-      "cost": 1
+      "cost": 0
     },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "ft",
-      "value": ""
+      "units": "",
+      "value": 0
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -43,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@@UUID[Compendium.sfrpg.class-features.SRkvq0GXYm3Wi6ze]{Spellbrawler}</p>\n<p>You gain Mysticism as a class skill. As a standard action, you can conjure an @UUID[Compendium.sfrpg.rules.JournalEntry.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#analog]{analog} weapon whose item level is no greater than your soldier level – 2 (minimum 1st level) [[max(1,-2+@classes.soldier.levels)]]. This weapon appears in your hand(s) fully loaded with the appropriate type of basic ammunition. The weapon and any remaining ammunition dissipate after 1 minute. Once you use this ability, you can’t use it again until you have regained Stamina Points following a 10-minute rest.</p>\n<p><em>((You will need to manually edit the details of the Soldier class feature to add Mysticism as a class skill))</em></p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.63q7sFrEiOS4UMQ2]{Pistol Dancer}</p>\n<p>You gain a cumulative +2 insight bonus to damage rolls for every previous successful ranged or melee attack with a small arm in the same combat, to a maximum bonus equal to half your soldier level [[floor(@classes.soldier.levels/2)]]. The bonus doesn’t reset if you miss with an attack, but it does if you didn’t spend the previous round attacking with a small arm.</p>\n<p><em>((You will need to manually increase the damage beyond the 1st application))</em></p>"
     },
     "descriptors": {
       "acid": false,
@@ -86,42 +86,58 @@
     "details": {
       "category": "classFeature",
       "combat": false,
-      "specialAbilityType": "su"
+      "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "minute",
-      "value": "1"
+      "units": "text",
+      "value": null
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "e0451947-8af4-46bd-bcdc-3ca198cf0657",
+        "name": "Choreography of Death (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "weapon-attacks",
+        "enabled": true,
+        "max": 0,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "cumulative +2 insight bonus to damage rolls for every previous successful ranged or melee attack with a small arm in the same combat, to a maximum bonus equal to half your soldier level",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "smallA"
+      }
+    ],
     "properties": {},
     "range": {
       "additional": "",
       "per": "",
-      "units": "none",
+      "units": "",
       "value": null
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "1st Technique",
+    "requirements": "17th Level (Soldier)",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "GM pg. 32",
+    "source": "AP#25, pg. 50",
     "target": {
       "type": "",
-      "value": ""
+      "value": null
     },
     "uses": {
-      "max": "1",
-      "per": "sr",
-      "value": 1
+      "max": null,
+      "per": null,
+      "value": null
     }
   }
 }

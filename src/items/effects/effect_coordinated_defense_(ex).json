@@ -1,0 +1,84 @@
+{
+  "_id": "nADp5i9zrQL0z1Ar",
+  "name": "Effect: Coordinated Defense (Ex)",
+  "type": "effect",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "type": "effect",
+    "abilityMods": {
+      "parts": []
+    },
+    "activeDuration": {
+      "activationTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "origin"
+      },
+      "unit": "round",
+      "value": "1"
+    },
+    "context": {
+      "origin": {
+        "actorUuid": "",
+        "itemUuid": ""
+      }
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p><span>Gain a +1 insight bonus to Reflex saves and AC until the start of your next turn.</span></p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "2271945a-aa49-4b6c-ae6c-b3a12f565ea1",
+        "name": "Coordinated Defense (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "save",
+        "enabled": true,
+        "max": 0,
+        "modifier": "1",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "reflex"
+      },
+      {
+        "_id": "ca7592a8-ceb8-4be5-a649-4fc435ae11d2",
+        "name": "Coordinated Defense (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": true,
+        "max": 0,
+        "modifier": "1",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "both"
+      }
+    ],
+    "requirements": "Coordinated Defense (Ex)",
+    "showOnToken": true,
+    "source": "AP#44, pg. 47",
+    "turnEvents": []
+  }
+}
