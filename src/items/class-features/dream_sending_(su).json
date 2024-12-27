@@ -17,15 +17,16 @@
     "actionTarget": "",
     "actionType": "save",
     "activation": {
-      "type": "",
+      "type": "special",
       "condition": "",
       "cost": 0
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
-      "units": "",
-      "value": null
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -34,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -42,7 +44,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.udtZxolGt5mMq9SM]{Dreamer}</p>\n<p>Once per day while inside dreamspace, you can briefly communicate with creatures at great distances. This creature can be anywhere in the universe, including on another plane, as long as you’re familiar with them. You can speak freely with any ally linked by your @UUID[Compendium.sfrpg.class-features.Item.ox6Am16XZqBXJNT9]{Telepathic Bond (Sp)} class feature when creating a dream sending. Creatures that aren’t linked to you by a telepathic bond can attempt a @Check[type:will save] with a DC equal to 15 + one-half your class level to resist the dream sending. A creature can choose to fail this save. On a failure, the creature experiences a dream containing a brief message of 25 words or less the next time it rests. The message can be verbal or nonverbal, and you control the aesthetic, imagery, and events of this dream. The creature wakes remembering your message, though you can’t influence a creature’s actions or attitude toward you using this ability.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.udtZxolGt5mMq9SM]{Dreamer}</p>\n<p>Once per day while inside dreamspace, you can briefly communicate with creatures at great distances. This creature can be anywhere in the universe, including on another plane, as long as you’re familiar with them. You can speak freely with any ally linked by your @UUID[Compendium.sfrpg.class-features.Item.ox6Am16XZqBXJNT9]{Telepathic Bond (Sp)} class feature when creating a dream sending. Creatures that aren’t linked to you by a telepathic bond can attempt a will save with a DC equal to 15 + one-half your class level [[15+floor(@classes.mystic.levels/2)]] to resist the dream sending. A creature can choose to fail this save. On a failure, the creature experiences a dream containing a brief message of 25 words or less the next time it rests. The message can be verbal or nonverbal, and you control the aesthetic, imagery, and events of this dream. The creature wakes remembering your message, though you can’t influence a creature’s actions or attitude toward you using this ability.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -88,16 +90,17 @@
       "specialAbilityType": "su"
     },
     "duration": {
-      "units": "",
-      "value": null
+      "units": "text",
+      "value": ""
     },
     "formula": "",
     "isActive": null,
     "modifiers": [],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
+      "units": "none",
       "value": null
     },
     "recharge": {
@@ -118,12 +121,12 @@
     "source": "AP#47 pg. 47",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "uses": {
-      "max": 0,
-      "per": null,
-      "value": 0
+      "max": "1",
+      "per": "day",
+      "value": 1
     }
   }
 }
