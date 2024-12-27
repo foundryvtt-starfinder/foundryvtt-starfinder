@@ -25,7 +25,7 @@
         <label>{{localize "SFRPG.SpellCasting.SelectSpellSlot"}}</label>
         <div class="form-fields">
             <select name="level" {{#unless hasSlots}}disabled{{/unless}}>
-                {{selectOptions spellLevels selected=item.system.level nameAttr="level" labelAttr="label"}}
+                {{selectOptions spellLevels selected=item.system.level valueAttr="level" labelAttr="label"}}
             </select>
         </div>
     </div>
