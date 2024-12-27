@@ -43,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.udtZxolGt5mMq9SM]{Dreamer}</p>\n<p>Once per day, you can spend 1 Resolve Point as a full action to physically travel to the location of a specific dreamer through dreamspace. The target dreamer can be anywhere in the universe, including on another plane, as long as you’re familiar with them. The visitation lasts for a number of minutes equal to one-half your character level [[floor( @details.level.value / 2 )]].</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.udtZxolGt5mMq9SM]{Dreamer}</p>\n<p>Once per day, you can spend 1 Resolve Point as a full action to physically travel to the location of a specific dreamer through dreamspace. The target dreamer can be anywhere in the universe, including on another plane, as long as you’re familiar with them. The visitation lasts for a number of minutes equal to one-half your character level.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -90,7 +90,7 @@
     },
     "duration": {
       "units": "minute",
-      "value": "1/2 Character Level"
+      "value": "floor(@details.level.value / 2)"
     },
     "formula": "",
     "isActive": null,
@@ -119,9 +119,9 @@
       "value": ""
     },
     "uses": {
-      "max": "0",
-      "per": "",
-      "value": 0
+      "max": "1",
+      "per": "day",
+      "value": 1
     }
   }
 }
