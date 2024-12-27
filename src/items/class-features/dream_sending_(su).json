@@ -1,32 +1,32 @@
 {
-  "_id": "0uRrPeGV84fu4cQ7",
-  "name": "Against the Odds (Ex) (5th)",
+  "_id": "y6r1wbn3T0hAG4e0",
+  "name": "Dream Sending (Su)",
   "type": "feat",
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
     "systemVersion": "0.27.0"
   },
-  "img": "systems/sfrpg/icons/classes/againts_the_odds.webp",
+  "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "",
+    "actionType": "save",
     "activation": {
-      "type": "",
+      "type": "special",
       "condition": "",
-      "cost": null
+      "cost": 0
     },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": null,
-      "value": null
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -35,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -43,7 +44,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;&gt;@UUID[Compendium.sfrpg.class-features.Item.AKI0TQ3pSwmU5twg]{Blitz}</p>\n<p>You gain a bonus to melee damage rolls equal to double the number of enemies within 10 feet of you. Enemies who don’t constitute a significant threat (those with a CR equal to your level – 4 or less, or as determined by the GM) don’t count when calculating this bonus.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.udtZxolGt5mMq9SM]{Dreamer}</p>\n<p>Once per day while inside dreamspace, you can briefly communicate with creatures at great distances. This creature can be anywhere in the universe, including on another plane, as long as you’re familiar with them. You can speak freely with any ally linked by your @UUID[Compendium.sfrpg.class-features.Item.ox6Am16XZqBXJNT9]{Telepathic Bond (Sp)} class feature when creating a dream sending. Creatures that aren’t linked to you by a telepathic bond can attempt a Will save with a DC equal to 15 + one-half your class level [[15+floor(@classes.mystic.levels/2)]] to resist the dream sending. A creature can choose to fail this save. On a failure, the creature experiences a dream containing a brief message of 25 words or less the next time it rests. The message can be verbal or nonverbal, and you control the aesthetic, imagery, and events of this dream. The creature wakes remembering your message, though you can’t influence a creature’s actions or attitude toward you using this ability.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -86,10 +87,10 @@
     "details": {
       "category": "classFeature",
       "combat": false,
-      "specialAbilityType": "ex"
+      "specialAbilityType": "su"
     },
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
     "formula": "",
@@ -99,28 +100,32 @@
     "range": {
       "additional": "",
       "per": "",
-      "units": null,
+      "units": "none",
       "value": null
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "5th Technique",
+    "requirements": "12th Level (Mystic)",
     "rollNotes": "",
     "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": ""
+      "type": "will",
+      "dc": "15+floor( @classes.mystic.levels / 2 )",
+      "descriptor": "negate"
     },
-    "source": "Blitz",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
+    "source": "AP#47 pg. 47",
     "target": {
       "type": "",
       "value": ""
     },
     "uses": {
-      "max": null,
-      "per": "",
+      "max": "1",
+      "per": "day",
       "value": 1
     }
   }
