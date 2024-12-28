@@ -143,7 +143,7 @@
                             <label>Control</label>
                             <div class="form-fields">
                                 <select name="system.attributes.controlSkill">
-                                    {{selectOptions (config "controlSkills") selected=system.attributes.controlSkill}}
+                                    {{selectOptions config.controlSkills selected=system.attributes.controlSkill}}
                                 </select>
                                 {{#if (eq system.attributes.controlSkill "pil")}}
                                 <input type="text" name="system.attributes.modifiers.piloting" value="{{system.attributes.modifiers.piloting}}" />

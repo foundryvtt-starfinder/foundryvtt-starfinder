@@ -265,12 +265,12 @@ export function setupHandlebars() {
      * This helper is for adding one-off select options and is meant to be used alongside `selectOptions`.
      */
     Handlebars.registerHelper('selectOption', function(value, label, options) {
-        let tagParams = [
+        const tagParams = [
             `value="${Handlebars.escapeExpression(value)}"`,
             options.hash.hidden && 'hidden',
             (value === options.hash.selected) && 'selected',
         ].filter(Boolean).join(' ');
-        let safeLabel = Handlebars.escapeExpression(options.hash.localize? game.i18n.localize(label): label);
+        const safeLabel = Handlebars.escapeExpression(options.hash.localize? game.i18n.localize(label): label);
         return new Handlebars.SafeString(`<option ${tagParams}>${safeLabel}</option>`);
     });
 
