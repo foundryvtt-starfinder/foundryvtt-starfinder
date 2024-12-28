@@ -44,12 +44,8 @@
                             <div class="form-group">
                                 <label>{{ localize "SFRPG.Items.Upgrade.AllowedArmorType" }}</label>
                                 <select name="system.allowedArmorType">
-                                    {{#select itemData.allowedArmorType}}
-                                    <option value="any">{{ localize "SFRPG.Items.Upgrade.Any" }}</option>
-                                    {{#each config.allowedArmorTypes as |allowedArmorType k|}}
-                                    <option value="{{k}}">{{allowedArmorType}}</option>
-                                    {{/each}}
-                                    {{/select}}
+                                    {{selectOption "any" "SFRPG.Items.Upgrade.Any" selected=itemData.allowedArmorType localize=true}}
+                                    {{selectOptions config.allowedArmorTypes selected=itemData.allowedArmorType}}
                                 </select>
                             </div>
                         </div>
@@ -81,7 +77,7 @@
                     {{> "systems/sfrpg/templates/items/parts/container-details.hbs" message="SFRPG.Items.Equipment.ContainerTooltip"}}
 
                 </div>
-                
+
             </section>
         </div>
 

@@ -40,11 +40,7 @@
                             <div class="form-group">
                                 <label>{{ localize "SFRPG.Items.Weapon.Type" }}</label>
                                 <select name="system.weaponType">
-                                    {{#select itemData.weaponType}}
-                                    {{#each config.weaponTypes as |name type|}}
-                                    <option value="{{type}}">{{name}}</option>
-                                    {{/each}}
-                                    {{/select}}
+                                    {{selectOptions config.weaponTypes selected=itemData.weaponType}}
                                 </select>
                             </div>
 
@@ -52,12 +48,8 @@
                             <div class="form-group">
                                 <label>{{ localize "SFRPG.Items.Weapon.Category" }}</label>
                                 <select name="system.weaponCategory">
-                                    {{#select itemData.weaponCategory}}
-                                    <option value="">Unspecified</option>
-                                    {{#each config.weaponCategories as |name type|}}
-                                    <option value="{{type}}">{{name}}</option>
-                                    {{/each}}
-                                    {{/select}}
+                                    {{selectOption "" "Unspecified" selected=itemData.weaponCategory}}
+                                    {{selectOptions config.weaponCategories selected=itemData.weaponCategory}}
                                 </select>
                             </div>
 

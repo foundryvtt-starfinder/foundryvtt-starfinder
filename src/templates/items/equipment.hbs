@@ -42,12 +42,8 @@
                             <div class="form-group">
                                 <label>{{ localize "SFRPG.Items.Equipment.Category" }}</label>
                                 <select name="system.armor.type">
-                                    {{#select itemData.armor.type}}
-                                    <option value=""></option>
-                                    {{#each config.armorTypes as |name type|}}
-                                    <option value="{{type}}">{{name}}</option>
-                                    {{/each}}
-                                    {{/select}}
+                                    {{selectOption "" "" selected=itemData.armor.type}}
+                                    {{selectOptions config.armorTypes selected=itemData.armor.type}}
                                 </select>
                             </div>
 
@@ -95,7 +91,7 @@
 
                             {{!-- Equipment Status --}}
                             {{> "systems/sfrpg/templates/items/parts/item-status.hbs"}}
-                            
+
                         </div>
                     </div>
 
@@ -124,11 +120,7 @@
                                 <label>{{ localize "SFRPG.Size" }}</label>
                                 <div class="form-fields">
                                     <select name="system.size">
-                                        {{#select itemData.size}}
-                                        {{#each config.actorSizes as |size s|}}
-                                        <option value="{{s}}">{{size}}</option>
-                                        {{/each}}
-                                        {{/select}}
+                                        {{selectOptions config.actorSizes selected=itemData.size}}
                                     </select>
                                 </div>
                             </div>

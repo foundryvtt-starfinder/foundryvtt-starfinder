@@ -36,11 +36,7 @@
                             <div class="form-group">
                                 <div class="form-fields">
                                     <select name="system.weaponType">
-                                        {{#select itemData.weaponType}}
-                                        {{#each config.weaponAccessoriesSupportedTypes as |name type|}}
-                                        <option value="{{type}}">{{localize name}}</option>
-                                        {{/each}}
-                                        {{/select}}
+                                        {{selectOptions config.weaponAccessoriesSupportedTypes selected=itemData.weaponType}}
                                     </select>
                                 </div>
                             </div>

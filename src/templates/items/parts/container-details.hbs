@@ -32,7 +32,7 @@
             {{#each itemData.container.storage as |storage|}}
             <li class="storage-slot bubble" data-slot-index="{{indexOf ../itemData.container.storage storage}}">
                 <h4 class="bubble-header">
-                    {{ localize "SFRPG.ActorSheet.Inventory.Container.StorageSection" index=(indexOf ../itemData.container.storage storage false) }}
+                    {{ localize "SFRPG.ActorSheet.Inventory.Container.StorageSection" index=(indexOf ../itemData.container.storage storage firstIdx=1) }}
                     <a class="item-control bubble-icon remove-storage"> <i class="fas fa-minus"></i> </a>
                 </h4>
                 <div class="bubble-info">
@@ -40,10 +40,8 @@
                         <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageType" }}</label>
                         <div class="form-fields">
                             <select name="storage.type">
-                                {{#select storage.type}}
-                                <option value="slot">{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageTypeSlot" }}</option>
-                                <option value="bulk">{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageTypeBulk" }}</option>
-                                {{/select}}
+                                {{selectOption "slot" "SFRPG.ActorSheet.Inventory.Container.StorageTypeSlot" selected=storage.type localize=true}}
+                                {{selectOption "bulk" "SFRPG.ActorSheet.Inventory.Container.StorageTypeBulk" selected=storage.type localize=true}}
                             </select>
                         </div>
                     </div>
@@ -52,14 +50,12 @@
                         <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageIdentifier" }}</label>
                         <div class="form-fields">
                             <select name="storage.subtype">
-                                {{#select storage.subtype}}
-                                <option value="">{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierItem" }}</option>
-                                <option value="armorUpgrade">{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierArmorUpgrade" }}</option>
-                                <option value="weaponSlot">{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierWeaponSlot" }}</option>
-                                <option value="fusion">{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierFusion" }}</option>
-                                <option value="spellSlot">{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierSpellSlot" }}</option>
-                                <option value="ammunitionSlot">{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierAmmunitionSlot" }}</option>
-                                {{/select}}
+                                {{selectOption ""               "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierItem"           selected=storage.subtype localize=true}}
+                                {{selectOption "armorUpgrade"   "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierArmorUpgrade"   selected=storage.subtype localize=true}}
+                                {{selectOption "weaponSlot"     "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierWeaponSlot"     selected=storage.subtype localize=true}}
+                                {{selectOption "fusion"         "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierFusion"         selected=storage.subtype localize=true}}
+                                {{selectOption "spellSlot"      "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierSpellSlot"      selected=storage.subtype localize=true}}
+                                {{selectOption "ammunitionSlot" "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierAmmunitionSlot" selected=storage.subtype localize=true}}
                             </select>
                         </div>
                     </div>
@@ -68,11 +64,9 @@
                         <div class="form-fields">
                             <input type="text" name="storage.amount" value="{{storage.amount}}" data-dtype="Number" placeholder="0" />
                             <select name="storage.weightProperty" data-tooltip="<strong>{{ localize "SFRPG.ActorSheet.Inventory.Container.CapacityPropertyItems" }}</strong><br/>{{ localize "SFRPG.ActorSheet.Inventory.Container.CapacityPropertyItemsTooltip" }}<br/><br/><strong>{{ localize "SFRPG.ActorSheet.Inventory.Container.CapacityPropertySlots" }}</strong><br/>{{ localize "SFRPG.ActorSheet.Inventory.Container.CapacityPropertySlotsTooltip" }}<br/><br/><strong>{{ localize "SFRPG.ActorSheet.Inventory.Container.CapacityPropertyLevel" }}</strong><br/>{{ localize "SFRPG.ActorSheet.Inventory.Container.CapacityPropertyLevelTooltip" }}">
-                                {{#select storage.weightProperty}}
-                                <option value="">{{ localize "SFRPG.ActorSheet.Inventory.Container.CapacityPropertyItems" }}</option>
-                                <option value="slots">{{ localize "SFRPG.ActorSheet.Inventory.Container.CapacityPropertySlots" }}</option>
-                                <option value="level">{{ localize "SFRPG.ActorSheet.Inventory.Container.CapacityPropertyLevel" }}</option>
-                                {{/select}}
+                                {{selectOption "" "SFRPG.ActorSheet.Inventory.Container.CapacityPropertyItems" selected=storage.weightProperty localize=true}}
+                                {{selectOption "slots" "SFRPG.ActorSheet.Inventory.Container.CapacityPropertySlots" selected=storage.weightProperty localize=true}}
+                                {{selectOption "level" "SFRPG.ActorSheet.Inventory.Container.CapacityPropertyLevel" selected=storage.weightProperty localize=true}}
                             </select>
                         </div>
                     </div>

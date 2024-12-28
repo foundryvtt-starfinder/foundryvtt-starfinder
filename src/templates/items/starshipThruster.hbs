@@ -26,16 +26,12 @@
                 <h3 class="bubble-header">{{ localize "SFRPG.ItemSheet.StarshipThruster.Header" }}</h3>
 
                 <div class="bubble-info">
-                    
+
                     {{!-- Supported Size --}}
                     <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipThruster.Size" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipThruster.SizeTooltip" }}">
                         <label>{{ localize "SFRPG.ItemSheet.StarshipThruster.Size" }}</label>
                         <select name="system.supportedSize">
-                            {{#select itemData.supportedSize}}
-                            {{#each config.starshipSizes as |name type|}}
-                            <option value="{{type}}">{{localize name}}</option>
-                            {{/each}}
-                            {{/select}}
+                            {{selectOptions config.starshipSizes selected=itemData.supportedSize localize=true}}
                         </select>
                     </div>
 
@@ -67,7 +63,7 @@
                             </label>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
 
@@ -76,7 +72,7 @@
 
             <h4 class="section-header first"></h4>
 
-            
+
 
         </div>
 

@@ -25,15 +25,11 @@
         <label>{{localize "SFRPG.SpellCasting.SelectSpellSlot"}}</label>
         <div class="form-fields">
             <select name="level" {{#unless hasSlots}}disabled{{/unless}}>
-                {{#select item.system.level}}
-                {{#each spellLevels as |spellSlot|}}
-                <option value="{{spellSlot.level}}">{{spellSlot.label}}</option>
-                {{/each}}
-                {{/select}}
+                {{selectOptions spellLevels selected=item.system.level valueAttr="level" labelAttr="label"}}
             </select>
         </div>
     </div>
-    
+
     {{#unless hasSlots}}
     <p type="note" style="color: #c00;">{{localize "SFRPG.SpellCasting.ErrorNoSlot"}}</p>
     {{/unless}}
