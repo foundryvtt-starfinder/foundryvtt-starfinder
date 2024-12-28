@@ -2256,6 +2256,11 @@ SFRPG.enricherTypes = {
     "Template": TemplateEnricher
 };
 
+SFRPG.foundryDefaultIcons = {
+    "actor": "icons/svg/mystery-man.svg",
+    "item": "icons/svg/item-bag.svg"
+};
+
 SFRPG.defaultActorIcons = {
     "character": "astronaut-helmet.svg",
     "drone": "delivery-drone.svg",
