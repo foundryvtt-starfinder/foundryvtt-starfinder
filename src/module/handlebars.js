@@ -273,9 +273,4 @@ export function setupHandlebars() {
         const safeLabel = Handlebars.escapeExpression(options.hash.localize? game.i18n.localize(label): label);
         return new Handlebars.SafeString(`<option ${tagParams}>${safeLabel}</option>`);
     });
-
-    /** Utility helper to get global config when it's not provided to the template */
-    Handlebars.registerHelper('config', function(key, options) {
-        return foundry.utils.getProperty(CONFIG.SFRPG, key);
-    });
 }
