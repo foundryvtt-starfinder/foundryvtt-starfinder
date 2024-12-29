@@ -5,7 +5,7 @@
         <label>{{capitalize choice.name}}{{#if choice.label}}: {{choice.label}}{{/if}}</label>
         <div class="form-fields">
             <select id="{{id}}">
-                {{selectOptions choice.options selected=choice.default localize=true}}
+                {{selectOptions choice.options selected=choice.default valueAttr="label" localize=true}}
             </select>
         </div>
     </div>
