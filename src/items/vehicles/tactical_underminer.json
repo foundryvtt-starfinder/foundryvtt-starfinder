@@ -2,11 +2,22 @@
   "_id": "5sZ7cBrPGQVEBzlD",
   "name": "Tactical Underminer",
   "type": "vehicle",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
+      "_id": "qkp7Xd946aB8VCQ2",
       "name": "Collision (Ram)",
       "type": "vehicleAttack",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -45,8 +56,14 @@
       }
     },
     {
+      "_id": "1jlLTxvzv7JCeL5G",
       "name": "Collision (Run Over)",
       "type": "vehicleAttack",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -85,8 +102,14 @@
       }
     },
     {
+      "_id": "fZi2aq7dM8WqDqA8",
       "name": "Enhanced sensors",
       "type": "vehicleSystem",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.webp",
       "system": {
         "type": "",
@@ -120,8 +143,14 @@
       }
     },
     {
+      "_id": "79tQ3iQI0stws6uw",
       "name": "Autopilot",
       "type": "vehicleSystem",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -147,12 +176,22 @@
           "piloting": "20",
           "usedAsPilot": true
         },
+        "senses": {
+          "senses": "",
+          "usedForSenses": false
+        },
         "source": "CRB pg. 280"
       }
     },
     {
+      "_id": "266CH6gvyU8KvBTv",
       "name": "System-wide comm unit",
       "type": "vehicleSystem",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.webp",
       "system": {
         "type": "",
@@ -178,6 +217,10 @@
           "piloting": "0",
           "usedAsPilot": false
         },
+        "senses": {
+          "senses": "",
+          "usedForSenses": false
+        },
         "source": "CRB pg. 218"
       }
     }
@@ -185,16 +228,20 @@
   "prototypeToken": {
     "name": "Tactical Underminer",
     "actorLink": false,
+    "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": 0,
     "height": 3,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -215,13 +262,30 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -234,18 +298,24 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "tint": null
+      "src": "icons/svg/mystery-man.svg",
+      "tint": "#ffffff"
     },
     "width": 3
   },
   "system": {
     "attributes": {
       "type": "landTW",
+      "controlSkill": "pil",
       "cover": "total",
       "dimensions": {
         "height": "10",
@@ -268,10 +338,12 @@
         "value": 25
       },
       "modifiers": {
+        "athletics": 0,
         "attackFullSpeed": "-5",
         "attackMoving": "-3",
         "attackStopped": "0",
-        "piloting": "0"
+        "piloting": "0",
+        "survival": 0
       },
       "size": "huge",
       "special": [],

@@ -2,6 +2,11 @@
   "_id": "jLc4wi4vROIHvT7C",
   "name": "Constellation Blast (Su)",
   "type": "feat",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "systems/sfrpg/images/cup/gameplay/photon.webp",
   "system": {
     "type": "",
@@ -18,9 +23,10 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "sphere",
       "units": "ft",
-      "value": 10
+      "value": "10"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -34,6 +40,7 @@
           "name": "",
           "formula": "(lookupRange(@classes.solarian.levels, 0, 9, 5, 11, 6, 13, 7, 15, 8, 17, 9, 19, 10))d6",
           "group": null,
+          "isPrimarySection": true,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -54,7 +61,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.UVNOjH2ERlQjcGnU]{Zenith Revelation}</p>\n<p>@Icon[type:photon] Photon Revelation</p>\n<p>When you’re fully photon-attuned, as a standard action, you can create a momentary chain of bursting energy that burns through the terrain. When you use this ability, you create three 10-foot-radius bursts within 60 feet of you, each of which cannot overlap and must be centered no more than 20 feet from the center of one other radius. You deal 5d6 fire damage, plus 1d6 for every 2 solarian levels you have beyond 9th, to each creature in each radius. An affected creature can attempt a Reflex save to take half damage. At 17th level, you can create three, four, or five bursts when using this ability.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.UVNOjH2ERlQjcGnU]{Zenith Revelation}</p>\n<p>@Icon[type:photon] Photon Revelation</p>\n<p>When you’re fully photon-attuned, as a standard action, you can create a momentary chain of bursting energy that burns through the terrain. When you use this ability, you create three 10-foot-radius bursts within 60 feet of you, each of which cannot overlap and must be centered no more than 20 feet from the center of one other radius. You deal 5d6 fire damage, plus 1d6 for every 2 solarian levels you have beyond 9th, to each creature in each radius. An affected creature can attempt a Reflex save to take half damage. At 17th level, you can create three, four, or five bursts when using this ability.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -96,31 +103,37 @@
     },
     "details": {
       "category": "classFeature",
+      "combat": false,
       "specialAbilityType": "su"
     },
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
     "formula": "",
     "isActive": null,
     "modifiers": [],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
-      "value": 60
+      "value": "60"
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "Zenith Revelation",
+    "requirements": "9th Level Solarian",
     "rollNotes": "",
     "save": {
       "type": "reflex",
       "dc": "10+floor(@classes.solarian.levels/2) + @abilities.cha.mod",
       "descriptor": "negate"
+    },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
     },
     "source": "Solarian",
     "target": {
@@ -128,7 +141,7 @@
       "value": ""
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     }

@@ -2,6 +2,11 @@
   "_id": "cmD9XPyg0Cud1xYO",
   "name": "Daze",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "systems/sfrpg/icons/spells/daze.webp",
   "system": {
     "type": "",
@@ -9,6 +14,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "action",
@@ -17,11 +23,13 @@
     },
     "allowedClasses": {
       "myst": true,
+      "precog": false,
       "tech": true,
       "wysh": true
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": null,
       "value": null
@@ -36,18 +44,23 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>This spell short-circuits the mind of a humanoid creature with a CR of 3 or lower so that it is @UUID[Compendium.sfrpg.conditions.2XWEujYSyryB4oHm]{Dazed} (unable to take actions, but taking no penalty to AC). Humanoids of CR 4 or higher are not affected. After a creature has been @UUID[Compendium.sfrpg.conditions.2XWEujYSyryB4oHm]{Dazed} by this spell, it is immune to it for 1 minute.</p>"
+      "value": "<p>This spell short-circuits the mind of a humanoid creature with a CR of 3 or lower so that it is @UUID[Compendium.sfrpg.conditions.Item.2XWEujYSyryB4oHm]{Dazed} (unable to take actions, but taking no penalty to AC). Humanoids of CR 4 or higher are not affected. After a creature has been @UUID[Compendium.sfrpg.conditions.Item.2XWEujYSyryB4oHm]{Dazed} by this spell, it is immune to it for 1 minute.</p>"
     },
     "descriptors": [],
     "dismissible": false,
     "duration": {
-      "units": "",
-      "value": "1 round"
+      "units": "round",
+      "value": "1"
     },
     "formula": "",
+    "isActive": null,
+    "isVariableLevel": false,
     "level": 0,
     "materials": {
       "consumed": false,
@@ -60,12 +73,14 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
-      "additional": "5 ft.",
-      "per": "2 levels",
-      "units": "ft",
-      "value": 25
+      "additional": "",
+      "per": "",
+      "units": "close",
+      "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "will",
       "dc": "",

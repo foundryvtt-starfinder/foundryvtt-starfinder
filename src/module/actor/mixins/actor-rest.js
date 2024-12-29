@@ -14,9 +14,9 @@ export const ActorRestMixin = (superclass) => class extends superclass {
         const data = this.system;
 
         // Ask user to confirm if they want to rest, and if they want to restore stamina points
-        let sp = data.attributes.sp;
-        let rp = data.attributes.rp;
-        let canRestoreStaminaPoints = rp.value > 0 && sp.value < sp.max;
+        const sp = data.attributes.sp;
+        const rp = data.attributes.rp;
+        const canRestoreStaminaPoints = rp.value > 0 && sp.value < sp.max;
 
         let restoreStaminaPoints = false;
 
@@ -30,7 +30,7 @@ export const ActorRestMixin = (superclass) => class extends superclass {
         let dsp = 0;
         if (restoreStaminaPoints && canRestoreStaminaPoints) {
             drp = 1;
-            let updatedRP = Math.max(rp.value - drp, 0);
+            const updatedRP = Math.max(rp.value - drp, 0);
             dsp = Math.min(sp.max - sp.value, sp.max);
 
             this.update({ "system.attributes.sp.value": sp.max, "system.attributes.rp.value": updatedRP });
@@ -38,7 +38,7 @@ export const ActorRestMixin = (superclass) => class extends superclass {
 
         // Restore resources that reset on short rests
         const updateData = {};
-        for (let [k, r] of Object.entries(data.resources)) {
+        for (const [k, r] of Object.entries(data.resources)) {
             if (r.max && r.sr) {
                 updateData[`system.resources.${k}.value`] = r.max;
             }
@@ -65,10 +65,10 @@ export const ActorRestMixin = (superclass) => class extends superclass {
             }
 
             ChatMessage.create({
-                user: game.user.id,
+                author: game.user.id,
                 speaker: ChatMessage.getSpeaker({actor: this}),
                 content: msg,
-                type: CONST.CHAT_MESSAGE_TYPES.OTHER
+                type: CONST.CHAT_MESSAGE_STYLES.OTHER
             });
         }
 
@@ -96,9 +96,9 @@ export const ActorRestMixin = (superclass) => class extends superclass {
     async repairDrone({ dialog = true, chat = true } = {}) {
         const data = this.system;
 
-        let hp = data.attributes.hp;
+        const hp = data.attributes.hp;
         if (hp.value >= hp.max) {
-            let message = game.i18n.format("SFRPG.RepairDroneUnnecessary", { name: this.name });
+            const message = game.i18n.format("SFRPG.RepairDroneUnnecessary", { name: this.name });
             ui.notifications.info(message);
             return;
         }
@@ -110,10 +110,10 @@ export const ActorRestMixin = (superclass) => class extends superclass {
             improvedRepairFeat = dialogResults.improvedRepairFeat;
         }
 
-        let oldHP = hp.value;
-        let maxRepairAmount = Math.floor(improvedRepairFeat ? hp.max * 0.25 : hp.max * 0.1);
-        let newHP = Math.min(hp.max, hp.value + maxRepairAmount);
-        let dhp = newHP - oldHP;
+        const oldHP = hp.value;
+        const maxRepairAmount = Math.floor(improvedRepairFeat ? hp.max * 0.25 : hp.max * 0.1);
+        const newHP = Math.min(hp.max, hp.value + maxRepairAmount);
+        const dhp = newHP - oldHP;
 
         const updateData = {};
         updateData["system.attributes.hp.value"] = newHP;
@@ -121,13 +121,13 @@ export const ActorRestMixin = (superclass) => class extends superclass {
 
         // Notify chat what happened
         if (chat) {
-            let msg = game.i18n.format("SFRPG.RepairDroneChatMessage", { name: this.name, regainedHP: dhp });
+            const msg = game.i18n.format("SFRPG.RepairDroneChatMessage", { name: this.name, regainedHP: dhp });
 
             ChatMessage.create({
-                user: game.user.id,
+                author: game.user.id,
                 speaker: ChatMessage.getSpeaker({actor: this}),
                 content: msg,
-                type: CONST.CHAT_MESSAGE_TYPES.OTHER
+                type: CONST.CHAT_MESSAGE_STYLES.OTHER
             });
         }
 
@@ -150,7 +150,7 @@ export const ActorRestMixin = (superclass) => class extends superclass {
      * @return {Promise}        A Promise which resolves once the long rest workflow has completed
      */
     async longRest({ dialog = true, chat = true } = {}) {
-        const data = deepClone(this.system);
+        const data = foundry.utils.deepClone(this.system);
         const updateData = {};
 
         if (dialog) {
@@ -162,27 +162,27 @@ export const ActorRestMixin = (superclass) => class extends superclass {
         }
 
         // Recover HP, SP, and RP
-        let dhp = data.attributes.hp.max === data.attributes.hp.value
+        const dhp = data.attributes.hp.max === data.attributes.hp.value
             ? 0
             : data.details.level.value > (data.attributes.hp.max - data.attributes.hp.value)
                 ? data.attributes.hp.max - data.attributes.hp.value
                 : data.details.level.value;
-        let dsp = data.attributes.sp.max - data.attributes.sp.value;
-        let drp = data.attributes.rp.max - data.attributes.rp.value;
+        const dsp = data.attributes.sp.max - data.attributes.sp.value;
+        const drp = data.attributes.rp.max - data.attributes.rp.value;
         updateData['system.attributes.hp.value'] = Math.min(data.attributes.hp.value + data.details.level.value, data.attributes.hp.max);
         updateData['system.attributes.sp.value'] = data.attributes.sp.max;
         updateData['system.attributes.rp.value'] = data.attributes.rp.max;
 
         // Heal Ability damage
         const restoredAbilityDamages = [];
-        for (let [abl, ability] of Object.entries(data.abilities)) {
+        for (const [abl, ability] of Object.entries(data.abilities)) {
             if (ability.damage && ability.damage > 0) {
                 updateData[`system.abilities.${abl}.damage`] = --ability.damage;
                 restoredAbilityDamages.push({ability: abl, amount: 1});
             }
         }
 
-        for (let [k, r] of Object.entries(data.resources)) {
+        for (const [k, r] of Object.entries(data.resources)) {
             if (r.max && (r.sr || r.lr)) {
                 updateData[`system.resources.${k}.value`] = r.max;
             }
@@ -237,7 +237,7 @@ export const ActorRestMixin = (superclass) => class extends superclass {
             }
 
             ChatMessage.create({
-                user: game.user.id,
+                author: game.user.id,
                 speaker: ChatMessage.getSpeaker({actor: this}),
                 content: content
             });

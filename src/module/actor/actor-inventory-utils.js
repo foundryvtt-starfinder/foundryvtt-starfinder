@@ -28,7 +28,7 @@ export async function addItemToActorAsync(targetActor, itemToAdd, quantity, targ
         return itemToAdd;
     }
 
-    const newItemData = deepClone(itemToAdd);
+    const newItemData = itemToAdd.toObject();
     newItemData.system.quantity = quantity;
 
     let desiredParent = null;
@@ -47,7 +47,7 @@ export async function addItemToActorAsync(targetActor, itemToAdd, quantity, targ
     let addedItem = null;
     if (targetActor.isToken) {
         const created = await Entity.prototype.createEmbeddedDocuments.call(targetActor.actor, "Item", [newItemData], {temporary: true});
-        const items = deepClone(targetActor.actor.items).concat(created instanceof Array ? created : [created]);
+        const items = foundry.utils.duplicate(targetActor.actor.items).concat(created instanceof Array ? created : [created]);
         await targetActor.token.update({"actorData.items": items}, {});
         addedItem = targetActor.getItem(created._id);
     } else {
@@ -56,7 +56,7 @@ export async function addItemToActorAsync(targetActor, itemToAdd, quantity, targ
     }
 
     if (desiredParent) {
-        let newContents = deepClone(desiredParent.system.container.contents || []);
+        const newContents = foundry.utils.deepClone(desiredParent.system.container.contents || []);
         newContents.push({id: addedItem._id, index: targetItemStorageIndex || 0});
         await targetActor.updateItem(desiredParent._id, {"data.container.contents": newContents});
     }
@@ -133,7 +133,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
         if (quantity < itemQuantity) {
             await sourceActor.updateItem(itemToMove.id, {"quantity": itemQuantity - quantity});
 
-            let newItemData = deepClone(itemToMove);
+            const newItemData = itemToMove.toObject();
             delete newItemData.id;
             newItemData.system.quantity = quantity;
 
@@ -164,7 +164,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
 
                 return targetItem;
             } else {
-                let targetsParent = targetActor.findItem(x => x.system.container?.contents && x.system.container.contents.find( y => y.id === targetItem.id));
+                const targetsParent = targetActor.findItem(x => x.system.container?.contents && x.system.container.contents.find( y => y.id === targetItem.id));
                 if (targetsParent) {
                     if (!wouldCreateParentCycle(itemToMove, targetsParent, targetActor)) {
                         if (acceptsItem(targetsParent, itemToMove, targetActor)) {
@@ -178,17 +178,17 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
             }
         }
 
-        let currentParent = targetActor.findItem(x => x.system.container?.contents && x.system.container.contents.find(y => y.id === itemToMove.id));
+        const currentParent = targetActor.findItem(x => x.system.container?.contents && x.system.container.contents.find(y => y.id === itemToMove.id));
 
         if (desiredParent !== currentParent) {
-            let bulkUpdates = [];
+            const bulkUpdates = [];
             if (currentParent) {
-                let newContents = currentParent.system.container.contents.filter(x => x.id !== itemToMove.id);
+                const newContents = currentParent.system.container.contents.filter(x => x.id !== itemToMove.id);
                 bulkUpdates.push({_id: currentParent.id, "system.container.contents": newContents});
             }
 
             if (desiredParent) {
-                let newContents = deepClone(desiredParent.system.container?.contents || []);
+                const newContents = foundry.utils.deepClone(desiredParent.system.container?.contents || []);
                 newContents.push({id: itemToMove.id, index: desiredStorageIndex || 0});
                 bulkUpdates.push({_id: desiredParent.id, "system.container.contents": newContents});
             }
@@ -214,7 +214,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
                 }
             }
 
-            const duplicatedData = deepClone(itemToCreate.item);
+            const duplicatedData = itemToCreate.item.toObject();
             duplicatedData.system.equipped = false;
 
             items.push({item: duplicatedData, children: contents, parent: itemToCreate.parent});
@@ -279,7 +279,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
                     return foundItemIndex;
                 });
 
-                let newContents = deepClone(itemToUpdate.system.container.contents);
+                let newContents = foundry.utils.deepClone(itemToUpdate.system.container.contents);
                 for (let j = 0; j < indexMap.length; j++) {
                     const index = indexMap[j];
                     if (index === -1) {
@@ -317,7 +317,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
                 desiredParent = targetItem;
                 desiredStorageIndex = targetItemStorageIndex;
             } else {
-                let targetsParent = targetActor.findItem(x => x.system.container?.contents && x.system.container.contents.find( y => y.id === targetItem._id));
+                const targetsParent = targetActor.findItem(x => x.system.container?.contents && x.system.container.contents.find( y => y.id === targetItem._id));
                 if (targetsParent) {
                     if (!wouldCreateParentCycle(itemToMove, targetsParent, targetActor)) {
                         desiredParent = targetsParent;
@@ -328,7 +328,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
         }
 
         if (desiredParent) {
-            const newContents = deepClone(desiredParent.system.container?.contents || []);
+            const newContents = foundry.utils.deepClone(desiredParent.system.container?.contents || []);
             newContents.push({id: createResult[0].id, index: desiredStorageIndex || 0});
             updatesToPerform.push({_id: desiredParent.id, "system.container.contents": newContents});
         }
@@ -428,10 +428,10 @@ function canMerge(itemA, itemB) {
     }
 
     // Perform deep comparison on item data.
-    let itemDataA = deepClone(itemA.system);
+    const itemDataA = itemA.system.toObject();
     delete itemDataA.quantity;
 
-    let itemDataB = deepClone(itemB.system);
+    const itemDataB = itemB.system.toObject();
     delete itemDataB.quantity;
 
     // TODO: Remove all keys that are not template appropriate given the item type, remove all keys that are not shared?
@@ -513,7 +513,7 @@ function acceptsItem(containerItem, itemToAdd, actor) {
         return false;
     }
 
-    let storageFound = getFirstAcceptableStorageIndex(containerItem, itemToAdd);
+    const storageFound = getFirstAcceptableStorageIndex(containerItem, itemToAdd);
     if (storageFound === null) {
         console.log("Rejected because no suitable storage found");
         return false;
@@ -542,7 +542,7 @@ function wouldCreateParentCycle(item, container, actor) {
 
     if (item.system.container.contents.find(y => y.id === container.id)) return true;
 
-    let itemsToTest = deepClone(item.system.container.contents || []);
+    let itemsToTest = foundry.utils.deepClone(item.system.container.contents || []);
     while (itemsToTest.length > 0) {
         const content = itemsToTest.shift();
         const child = actor.actor.items.get(content.id);
@@ -611,7 +611,7 @@ async function onItemDraggedToCollection(message) {
     if (data.pack) {
         const pack = game.packs.get(data.pack);
         const itemData = await pack.getDocument(data.draggedItemId);
-        newItems.push(deepClone(itemData));
+        newItems.push(itemData.toObject());
     } else if (data.source.tokenId || data.source.actorId) {
         // from another token
         const source = ActorItemHelper.FromObject(data.source);
@@ -646,8 +646,8 @@ async function onItemDraggedToCollection(message) {
     } else {
         const sidebarItem = game.items.get(data.draggedItemId);
         if (sidebarItem) {
-            const itemData = deepClone(sidebarItem);
-            newItems.push(deepClone(itemData));
+            const itemData = sidebarItem.toObject();
+            newItems.push(itemData);
         }
     }
 
@@ -698,7 +698,7 @@ async function onItemCollectionItemDraggedToPlayer(message) {
     const itemToItemMapping = {};
 
     // Get child items as well
-    const itemsToTest = deepClone(data.draggedItems);
+    const itemsToTest = foundry.utils.deepClone(data.draggedItems);
     while (itemsToTest.length > 0) {
         const draggedItem = itemsToTest.shift();
         if (draggedItem.system?.container?.contents?.length > 0) {
@@ -758,7 +758,7 @@ async function onItemCollectionItemDraggedToPlayer(message) {
     }
 
     // Remove items from source token
-    let sourceItems = deepClone(source.token.document.flags.sfrpg.itemCollection.items);
+    let sourceItems = foundry.utils.deepClone(source.token.document.flags.sfrpg.itemCollection.items);
     sourceItems = sourceItems.filter(x => !copiedItemIds.includes(x._id));
     await source.token.document.update({"flags.sfrpg.itemCollection.items": sourceItems});
 
@@ -769,10 +769,10 @@ async function onItemCollectionItemDraggedToPlayer(message) {
     // Add any uncontained items into targetItem, if applicable
     if (targetContainer) {
         const acceptableItemIds = [];
-        for (let uncontainedItemId of uncontainedItemIds) {
+        for (const uncontainedItemId of uncontainedItemIds) {
             const uncontainedItem = target.getItem(uncontainedItemId);
             if (acceptsItem(targetContainer, uncontainedItem, target.actor)) {
-                let preferredStorageIndex = getFirstAcceptableStorageIndex(targetContainer, uncontainedItem) || 0;
+                const preferredStorageIndex = getFirstAcceptableStorageIndex(targetContainer, uncontainedItem) || 0;
                 acceptableItemIds.push({id: uncontainedItemId, index: preferredStorageIndex});
             }
         }
@@ -896,12 +896,12 @@ export class ActorItemHelper {
         const itemIdsToDelete = (itemId instanceof Array) ? itemId : [itemId];
 
         if (recursive) {
-            let idsToTest = [itemId];
+            const idsToTest = [itemId];
             while (idsToTest.length > 0) {
-                let idToTest = idsToTest.shift();
-                let item = this.getItem(idToTest);
+                const idToTest = idsToTest.shift();
+                const item = this.getItem(idToTest);
                 if (item && item.system.container?.contents) {
-                    for (let containedItem of item.system.container.contents) {
+                    for (const containedItem of item.system.container.contents) {
                         itemIdsToDelete.push(containedItem.id);
                         idsToTest.push(containedItem.id);
                     }
@@ -956,7 +956,7 @@ export class ActorItemHelper {
         const propertiesToTest = ["contents", "storageCapacity", "contentBulkMultiplier", "acceptedItemTypes", "fusions", "armor.upgradeSlots", "armor.upgrades"];
         const migrations = [];
         for (const item of this.actor.items) {
-            const itemData = deepClone(item.system);
+            const itemData = foundry.utils.deepClone(item.system);
             let isDirty = false;
 
             // Migrate original format
@@ -1040,7 +1040,7 @@ export class ActorItemHelper {
             }
 
             if (itemData.container?.storage && itemData.container.storage.length > 0) {
-                for (let storage of itemData.container.storage) {
+                for (const storage of itemData.container.storage) {
                     if (storage.hasOwnProperty("weightMultiplier")) {
                         storage["affectsEncumbrance"] = storage.weightMultiplier === 0 ? false : true;
                         delete storage.weightMultiplier;

@@ -3,16 +3,16 @@ export default class SFRPGTokenDocument extends TokenDocument {
      * Hijack Token health bar rendering to include temporary and temp-max health in the bar display
      *
      * @param {string} barName The name of the bar attribute to target.
-     * @param {object} [optional] Optional parameters that can be passed into the mehtod.
+     * @param {object} [optional] Optional parameters that can be passed into the method.
      * @param {string} [optional.alternative] An alternative attribute path to get instead of the default one
      * @returns
      */
     getBarAttribute(barName, {alternative} = {}) {
         const attr = alternative || (barName ? this[barName].attribute : null);
         if ( !attr || !this.actor ) return null;
-        let data = getProperty(this.actor.system, attr);
+        const data = foundry.utils.getProperty(this.actor.system, attr);
         if ( (data === null) || (data === undefined) ) return null;
-        const model = game.system.model.Actor[this.actor.type];
+        const model = game.model.Actor[this.actor.type];
 
         // Single values
         if ( Number.isNumeric(data) ) {
@@ -20,7 +20,7 @@ export default class SFRPGTokenDocument extends TokenDocument {
                 type: "value",
                 attribute: attr,
                 value: Number(data),
-                editable: hasProperty(model, attr)
+                editable: foundry.utils.hasProperty(model, attr)
             };
         }
 
@@ -39,11 +39,22 @@ export default class SFRPGTokenDocument extends TokenDocument {
                 attribute: attr,
                 value: value,
                 max: max,
-                editable: hasProperty(model, `${attr}.value`)
+                editable: foundry.utils.hasProperty(model, `${attr}.value`)
             };
         }
 
         // Otherwise null
         return null;
+    }
+
+    /**
+     * @override to test against actor conditions too
+     * @param {string} statusId     The status effect ID as defined in CONFIG.statusEffects
+     * @returns {boolean}           Does the Token have this status effect?
+     */
+    hasStatusEffect(statusId) {
+        if (this.actor?.system?.conditions?.[statusId]) return true;
+
+        return super.hasStatusEffect(statusId);
     }
 }

@@ -2,6 +2,11 @@
   "_id": "PwoT5OAWjzkXh2PK",
   "name": "Sustaining Shelter",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "systems/sfrpg/icons/feats/melt_defenses.webp",
   "system": {
     "type": "",
@@ -18,11 +23,13 @@
     },
     "allowedClasses": {
       "myst": false,
+      "precog": false,
       "tech": true,
       "wysh": true
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "cone",
       "units": "ft",
       "value": 10
@@ -48,8 +55,8 @@
     "descriptors": [],
     "dismissible": false,
     "duration": {
-      "units": "",
-      "value": "1 day/level"
+      "units": "day",
+      "value": "@details.cl.value"
     },
     "formula": "",
     "isActive": null,
@@ -66,11 +73,12 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
-      "additional": "5 ft.",
-      "per": "2 levels",
-      "units": "ft",
-      "value": 25
+      "additional": "",
+      "per": "",
+      "units": "close",
+      "value": null
     },
     "rollNotes": "",
     "save": {

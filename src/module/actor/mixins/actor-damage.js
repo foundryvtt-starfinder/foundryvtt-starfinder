@@ -1,10 +1,10 @@
 import { ChoiceDialog } from "../../apps/choice-dialog.js";
 
 export class SFRPGHealingSetting {
-    constructor() {
-        this.healsStamina = false;
-        this.healsHitpoints = true;
-        this.healsTemporaryHitpoints = false;
+    constructor({stamina = false, hitpoints = true, temp = false} = {}) {
+        this.healsStamina = stamina;
+        this.healsHitpoints = hitpoints;
+        this.healsTemporaryHitpoints = temp;
     }
 
     toString() {
@@ -65,7 +65,7 @@ export class SFRPGDamage {
     }
 
     get isHealing() {
-        return this.healSettings != null;
+        return this.healSettings !== null;
     }
 
     negatesDamageReduction(damageReductionNegation) {
@@ -86,10 +86,10 @@ export class SFRPGDamage {
      * @param {Bool} isCritical (Optional, default false) A boolean value indicating if this damage was critical damage.
      * @param {Array} properties (Optional, default empty) An array containing any additional damage properties, e.g.: ["adamantine", "line", "ripper"]; See SFRPG.specialMaterials, SFRPG.weaponProperties, and SFRPG.starshipWeaponProperties
      */
-    static createDamage(damageAmount, damageTypes = [], isCritical = false, properties = []) {
+    static createDamage(damageAmount, damageTypes = [], isCritical = false, properties = [], options = {}) {
         const parsedDamageTypes = [];
         if (damageTypes.constructor === String) {
-            const splitTypes = damageTypes.trim().split(/([^,;])+/gi);
+            const splitTypes = damageTypes.trim().split(/([,;])+/gi);
             for (const type of splitTypes) {
                 if (type === ',' || type === ';') {
                     continue;
@@ -116,6 +116,7 @@ export class SFRPGDamage {
         damageObject.damageTypes = parsedDamageTypes;
         damageObject.bIsCritical = isCritical;
         damageObject.properties = properties;
+        damageObject.options = options;
         return damageObject;
     }
 
@@ -179,25 +180,50 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
 
         const shiftKey = game.keyboard.downKeys.has("ShiftLeft") || game.keyboard.downKeys.has("ShiftRight");
         let modifier = 0;
+        let healingTarget = null;
+        let bypassStamina = false;
 
         // Allow for modification of damage if shift key is held while context button is clicked
         if (shiftKey) {
             // Clicking the close button throws an error, so catch it if it does
             try {
                 await Dialog.wait({
-                    title: `${game.i18n.localize("SFRPG.ChatCard.ContextMenu.ModifyDamage")}`,
-                    content: `
+                    title: game.i18n.localize("SFRPG.ChatCard.ContextMenu.ModifyDamage"),
+                    /* eslint-disable indent */
+                    content: `<form>
                         <p>${game.i18n.localize("SFRPG.ChatCard.ContextMenu.ModifyDamageText")}</p>
-                        <input type="number" id="modifier" placeholder=0 autofocus />
-                    `,
+                        <div class="form-group">
+                            <input type="number" id="modifier" placeholder=0 autofocus />
+                        </div>
+                        ${(multiplier < 0) // Is healing
+                        ? `
+                            <div class="form-group">
+                                <label for="apply-healing">${game.i18n.localize("SFRPG.ChatCard.ContextMenu.ApplyHealingTo")}</label>
+                                <select name="apply-healing" id="apply-healing">
+                                    <option value="hp">${game.i18n.localize("SFRPG.ChatCard.ContextMenu.HP")}</option>
+                                    <option value="sp">${game.i18n.localize("SFRPG.ChatCard.ContextMenu.SP")}</option>
+                                    <option value="both">${game.i18n.localize("SFRPG.ChatCard.ContextMenu.HPAndSP")}</option>
+                                </select>
+                            </div>
+                        `
+                        : `
+                            <div class="form-group">
+                                <label for="bypass-stamina">${game.i18n.localize("SFRPG.ChatCard.ContextMenu.BypassStamina")}</label>
+                                <input type=checkbox name="bypass-stamina" id="bypass-stamina" />
+                            </div>
+                            `}
+                    </form>`,
+                    /* eslint-enable indent */
                     default: "yes",
                     buttons: {
                         yes: {
                             icon: "<i class='fas fa-check'></i>",
-                            label: `${game.i18n.localize("SFRPG.ChatCard.ContextMenu.Accept")}`,
+                            label: game.i18n.localize("SFRPG.ChatCard.ContextMenu.Accept"),
                             callback: (html) => {
                                 modifier = parseInt(html[0].querySelector("#modifier").value) || 0;
-                                if (!modifier) ui.notifications.warn(game.i18n.localize("SFRPG.ChatCard.ContextMenu.NoDamageModifier"));
+                                healingTarget = html[0].querySelector("#apply-healing")?.value || "hp";
+                                bypassStamina = html[0].querySelector("#bypass-stamina")?.checked;
+                                if (!modifier && (healingTarget === "hp" || bypassStamina === false)) ui.notifications.warn(game.i18n.localize("SFRPG.ChatCard.ContextMenu.NoDamageModifier"));
                             }
                         }
                     }
@@ -238,7 +264,13 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         }
 
         if (multiplier < 0) {
-            const heal = SFRPGDamage.createHeal(rolledAmount, SFRPGHealingSetting.defaultHealing);
+            const healingSetting = {
+                hp: SFRPGHealingSetting.defaultHealing,
+                sp: SFRPGHealingSetting.staminaOnly,
+                both: SFRPGHealingSetting.staminaAndHealth
+            }[healingTarget] || SFRPGHealingSetting.defaultHealing;
+
+            const heal = SFRPGDamage.createHeal(rolledAmount, healingSetting);
             heal.modifier = modifier || 0;
             return this._applyToSelectedActors(heal);
         } else {
@@ -246,7 +278,8 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
                 rolledAmount,
                 damageTypes,
                 isCritical,
-                properties
+                properties,
+                { bypassStamina }
             );
 
             damage.multiplier = multiplier;
@@ -258,8 +291,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
 
     static _applyToSelectedActors(damage) {
         const promises = [];
-        if (canvas.tokens?.controlled.length < 1) return;
-        for (const controlledToken of canvas.tokens.controlled) {
+        for (const controlledToken of (canvas.tokens?.controlled || [])) {
             const actor = controlledToken.actor;
             const promise = actor.applyDamage(damage);
 
@@ -305,7 +337,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         }
 
         const actorUpdate = {};
-        const actorData = deepClone(this.system);
+        const actorData = foundry.utils.deepClone(this.system);
 
         const damagesPerType = [];
         if (damage.damageTypes.length > 0) {
@@ -349,12 +381,12 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         remainingUndealtDamage += damage.modifier || 0;
 
         const originalTempHP = parseInt(actorData.attributes.hp.temp) || 0;
-        const originalSP = actorData.attributes.sp.value;
+        const originalSP = actorData.attributes?.sp?.value || 0;
         const originalHP = actorData.attributes.hp.value;
 
         if (!damage.isHealing) {
             /** Update temp hitpoints */
-            let newTempHP = Math.clamped(originalTempHP - remainingUndealtDamage, 0,
+            let newTempHP = Math.clamp(originalTempHP - remainingUndealtDamage, 0,
                 actorData.attributes.hp.tempmax || actorData.attributes.hp.temp);
             remainingUndealtDamage -= (originalTempHP - newTempHP);
 
@@ -365,14 +397,16 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
 
             actorUpdate["system.attributes.hp.temp"] = newTempHP;
 
+            if (!damage?.options?.bypassStamina) {
             /** Update stamina points */
-            const newSP = Math.clamped(originalSP - remainingUndealtDamage, 0, actorData.attributes.sp.max);
-            remainingUndealtDamage -= (originalSP - newSP);
+                const newSP = Math.clamp(originalSP - remainingUndealtDamage, 0, actorData.attributes?.sp?.max || 0);
+                remainingUndealtDamage -= (originalSP - newSP);
 
-            actorUpdate["system.attributes.sp.value"] = newSP;
+                actorUpdate["system.attributes.sp.value"] = newSP;
+            }
 
             /** Update hitpoints */
-            const newHP = Math.clamped(originalHP - remainingUndealtDamage, 0, actorData.attributes.hp.max);
+            const newHP = Math.clamp(originalHP - remainingUndealtDamage, 0, actorData.attributes.hp.max);
             remainingUndealtDamage -= (originalHP - newHP);
 
             actorUpdate["system.attributes.hp.value"] = newHP;
@@ -384,21 +418,21 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
             }
         } else {
             if (damage.healSettings.healsHitpoints) {
-                const newHP = Math.clamped(originalHP + remainingUndealtDamage, 0, actorData.attributes.hp.max);
+                const newHP = Math.clamp(originalHP + remainingUndealtDamage, 0, actorData.attributes.hp.max);
                 remainingUndealtDamage -= (newHP - originalHP);
 
                 actorUpdate["system.attributes.hp.value"] = newHP;
             }
 
             if (damage.healSettings.healsStamina) {
-                const newSP = Math.clamped(originalSP + remainingUndealtDamage, 0, actorData.attributes.sp.max);
+                const newSP = Math.clamp(originalSP + remainingUndealtDamage, 0, actorData.attributes?.sp?.max);
                 remainingUndealtDamage -= (newSP - originalSP);
 
                 actorUpdate["system.attributes.sp.value"] = newSP;
             }
 
             if (damage.healSettings.healsTemporaryHitpoints) {
-                const newTempHP = Math.clamped(originalTempHP + remainingUndealtDamage, 0, actorData.attributes.hp.tempmax);
+                const newTempHP = Math.clamp(originalTempHP + remainingUndealtDamage, 0, actorData.attributes.hp.tempmax);
                 remainingUndealtDamage -= (newTempHP - originalTempHP);
 
                 actorUpdate["system.attributes.hp.temp"] = newTempHP;
@@ -539,8 +573,8 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
             return null;
         }
 
-        let actorUpdate = {};
-        const newData = deepClone(originalData);
+        const actorUpdate = {};
+        const newData = foundry.utils.deepClone(originalData);
 
         let remainingUndealtDamage = damage.amount + damage.modifier;
 
@@ -578,7 +612,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         }
 
         const originalHullPoints = this.system.attributes.hp.value;
-        const newHullPoints = Math.clamped(originalHullPoints - remainingUndealtDamage, 0, this.system.attributes.hp.max);
+        const newHullPoints = Math.clamp(originalHullPoints - remainingUndealtDamage, 0, this.system.attributes.hp.max);
         remainingUndealtDamage -= (originalHullPoints - newHullPoints);
 
         /** Deflector shields only drop in efficiency when the ship takes hull point damage. */
@@ -595,6 +629,9 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
 
                 // TODO: ..whereas vortex weapons that deal Hull Point damage reduce the target’s deflector shields’ defense value in each quadrant by 1d4.
                 else if (damage.properties.includes('vortex')) {
+                    if (this.options.debug) {
+                        console.log("Vortex Extra Deflector Damage Not Implemented");
+                    }
                 }
             }
 
@@ -623,10 +660,48 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
 
         const originalCT = Math.floor((this.system.attributes.hp.max - originalHullPoints) / this.system.attributes.criticalThreshold.value);
         const newCT = Math.floor((this.system.attributes.hp.max - newHullPoints) / this.system.attributes.criticalThreshold.value);
+        let timesToRoll = 0;
+        const rollMode = this.token?.disposition === -1 && game.settings.get("sfrpg", "hideHostileStarshipCrit")
+            ? CONST.DICE_ROLL_MODES.PRIVATE
+            : game.settings.get("core", "rollMode");
+
         if (newCT > originalCT) {
             const crossedThresholds = newCT - originalCT;
             const warningMessage = game.i18n.format("SFRPG.StarshipSheet.Damage.CrossedCriticalThreshold", {name: this.name, crossedThresholds: crossedThresholds});
+            timesToRoll += crossedThresholds;
             ui.notifications.warn(warningMessage);
+            const chatData = {
+                user: game.user.id,
+                speaker: ChatMessage.getSpeaker({actor: this}),
+                content: warningMessage,
+                type: CONST.CHAT_MESSAGE_STYLES.OTHER
+            };
+            ChatMessage.applyRollMode(chatData, rollMode);
+            ChatMessage.create(chatData);
+        }
+
+        if (damage.isCritical && newHullPoints !== originalHullPoints) {
+            timesToRoll++;
+            const warningMessage = game.i18n.format((newCT > originalCT) ?  "SFRPG.StarshipSheet.Damage.Nat20WithThreshold" : "SFRPG.StarshipSheet.Damage.Nat20", {name: this.name});
+            ui.notifications.warn(warningMessage);
+            const chatData = {
+                user: game.user.id,
+                speaker: ChatMessage.getSpeaker({actor: this}),
+                content: warningMessage,
+                type: CONST.CHAT_MESSAGE_STYLES.OTHER
+            };
+            ChatMessage.applyRollMode(chatData, rollMode);
+            ChatMessage.create(chatData);
+        }
+
+        if (timesToRoll > 0) {
+            if (game.settings.get("sfrpg", "autoRollCritEffect")) {
+                const pack = await game.packs.get('sfrpg.tables');
+                const index = pack.index ?? await pack.getIndex();
+                const obj = index.getName("Starship Critical Damage Effects");
+                const doc = await pack.getDocument(obj._id);
+                doc.drawMany(timesToRoll, { rollMode: rollMode });
+            }
         }
 
         const promise = this.update(actorUpdate);

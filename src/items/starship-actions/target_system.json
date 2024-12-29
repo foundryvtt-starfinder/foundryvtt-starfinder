@@ -2,6 +2,11 @@
   "_id": "CGOK99xDHW47gA3M",
   "name": "Target System",
   "type": "starshipAction",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "",
@@ -11,6 +16,8 @@
     },
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<h2>Normal effect</h2><p>You can use your starship’s sensors to target a specific system on an enemy starship. This action requires your starship to have sensors. You must attempt a Computers check, applying any modifiers from the starship’s sensors. The DC equals 5 + 1-1/2 × the tier of the enemy starship + its bonus from defensive countermeasures (see page 298). If you succeed, choose one system (core, engines, life support, sensors, or weapons). The next attack made by your starship that hits the enemy ship scores a critical hit on a natural roll of 19 or 20. If that attack deals critical damage, it affects the chosen system. For any further critical damage resulting from the attack, determine which system is affected randomly as normal. Your starship’s sensors can target only one system on a specific enemy starship at a time, though this action can be used to concurrently target systems on multiple starships.</p><h2>Critical effect</h2><p>Your sensors keep a continuous lock on the enemy starship. The effects of target system last until the start of the next round.</p>"
     },
@@ -19,7 +26,7 @@
     "formula": [
       {
         "name": "Computers",
-        "formula": "@scienceOfficer.skills.com.mod"
+        "formula": "@scienceOfficer.skills.com.mod + @ship.attributes.sensors.mod"
       }
     ],
     "isPush": true,

@@ -2,6 +2,11 @@
   "_id": "RYG74aLPmpJOSsFS",
   "name": "Shadowy Fleet",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "systems/sfrpg/icons/spells/shadowy_fleet.webp",
   "system": {
     "type": "",
@@ -18,11 +23,13 @@
     },
     "allowedClasses": {
       "myst": false,
+      "precog": false,
       "tech": true,
       "wysh": false
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "sphere",
       "units": "ft",
       "value": 60
@@ -48,8 +55,8 @@
     "descriptors": [],
     "dismissible": false,
     "duration": {
-      "units": "",
-      "value": "1 round/level"
+      "units": "round",
+      "value": "@details.cl.value"
     },
     "formula": "",
     "isActive": null,
@@ -66,11 +73,12 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
-      "additional": "40 ft.",
-      "per": "level",
-      "units": "ft",
-      "value": 400
+      "additional": "",
+      "per": "",
+      "units": "long",
+      "value": null
     },
     "rollNotes": "",
     "save": {

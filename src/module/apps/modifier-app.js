@@ -1,3 +1,4 @@
+import SFRPGModifier from "../modifiers/modifier.js";
 import { SFRPGEffectType } from "../modifiers/types.js";
 
 /**
@@ -12,47 +13,70 @@ export default class SFRPGModifierApplication extends FormApplication {
     constructor(modifier, target, options = {}, owningActor = null) {
         super(modifier, options);
 
-        this.actor = target;
+        this.target = target;
         this.owningActor = owningActor;
-        this._tooltips = null;
     }
 
     static get defaultOptions() {
-        let options = super.defaultOptions;
+        const options = super.defaultOptions;
 
-        return mergeObject(options, {
-            id: 'modifier-app',
-            classes: ['sfrpg', 'modifier-app'],
+        return foundry.utils.mergeObject(options, {
+            classes: ["sfrpg", "modifier-app"],
             template: "systems/sfrpg/templates/apps/modifier-app.hbs",
             width: 400,
-            height: 'auto',
+            height: "auto",
             closeOnSubmit: true
         });
     }
 
     /** @override */
     get title() {
-        return game.i18n.format("SFRPG.ModifierAppTitle", {name: this.modifier.name});
+        return game.i18n.format("SFRPG.ModifierAppTitle", { name: this.modifier.name });
     }
 
     /**
-     * A convience method for retrieving the modifier being edited.
+     * A convenience method for retrieving the modifier being edited.
      */
     get modifier() {
         return this.object;
     }
 
     /**
+     * Effect types on which to show the Damage Section modifier type
+     */
+    damageEffectTypes = [
+        SFRPGEffectType.ALL_DAMAGE,
+        SFRPGEffectType.MELEE_DAMAGE,
+        SFRPGEffectType.RANGED_DAMAGE,
+        SFRPGEffectType.WEAPON_DAMAGE,
+        SFRPGEffectType.WEAPON_PROPERTY_DAMAGE,
+        SFRPGEffectType.WEAPON_CATEGORY_DAMAGE
+    ];
+
+    /**
+     * Effect types which affect the statistics of items, and therefore need a selector to determine whether they affect only that item, or that item's container.
+     */
+    limitToTypes = [
+        ...this.damageEffectTypes,
+        SFRPGEffectType.ALL_ATTACKS,
+        SFRPGEffectType.MELEE_ATTACKS,
+        SFRPGEffectType.RANGED_ATTACKS,
+        SFRPGEffectType.WEAPON_ATTACKS,
+        SFRPGEffectType.WEAPON_PROPERTY_ATTACKS,
+        SFRPGEffectType.WEAPON_CATEGORY_ATTACKS
+    ];
+
+    /**
      * @override
      */
     getData() {
         const data = {
-            isOwner: this.actor.isOwner,
+            isOwner: this.target.isOwner,
             modifier: this.modifier,
-            limited: this.actor.limited,
+            limited: this.target.limited,
             options: this.options,
             editable: this.isEditable,
-            cssClass: this.actor.isOwner ? "editable" : "locked",
+            cssClass: this.target.isOwner ? "editable" : "locked",
             config: CONFIG.SFRPG
         };
 
@@ -66,18 +90,42 @@ export default class SFRPGModifierApplication extends FormApplication {
     activateListeners(html) {
         super.activateListeners(html);
 
-        html.find('.modifier-effect-type select').change(event => {
+        html.find(".modifier-modifier-type select").change(event => {
+            const modifierType = event.currentTarget.value;
+
+            const damageSectionDetails = $("fieldset.damage-section-details");
+
+            if (modifierType !== "damageSection") damageSectionDetails.prop("disabled", true);
+            else damageSectionDetails.prop("disabled", false);
+
+            this.setPosition({ height: "auto" });
+        });
+
+        html.find(".modifier-effect-type select").change(event => {
             const current = $(event.currentTarget);
-            const affectedValue = $('.modifier-value-affected select');
-            const modifierType = $('.modifier-modifier-type select');
+            const affectedValue = $(".modifier-value-affected select");
+            const modifierType = $(".modifier-modifier-type select");
             const effectType = current.val();
             const oldValue = this.object.effectType;
+
+            const damageSectionType = $("option[value='damageSection']");
+
+            if (!(this.damageEffectTypes.includes(effectType))) {
+                $("fieldset.damage-section-details").prop("disabled", true); // Damage section details
+                damageSectionType.hide(); // Damage section modifier type
+            } else {
+                damageSectionType.show();
+            }
+
+            // Hide limit to setting if modifier doesn't affect an item
+            if (!(this.limitToTypes.includes(effectType))) $("fieldset.modifier-limit-to").prop("disabled", true);
+            else $("fieldset.modifier-limit-to").prop("disabled", false);
 
             if (oldValue === SFRPGEffectType.ACTOR_RESOURCE || effectType === SFRPGEffectType.ACTOR_RESOURCE) {
                 const modifierDialog = this;
                 modifierDialog.object.effectType = effectType;
 
-                affectedValue.prop('value', "");
+                affectedValue.prop("value", "");
 
                 this._updateModifierData(modifierDialog.object).then(() => {
                     modifierDialog.render();
@@ -191,6 +239,8 @@ export default class SFRPGModifierApplication extends FormApplication {
                     modifierType.prop('disabled', false);
                     break;
             }
+
+            this.setPosition({ height: "auto" });
         });
     }
 
@@ -198,33 +248,39 @@ export default class SFRPGModifierApplication extends FormApplication {
     async _render(...args) {
         await super._render(...args);
 
-        const effectType = this.element.find('.modifier-effect-type select').val();
-        const valueAffectedElement = this.element.find('.modifier-value-affected select');
-        const modifierTypeElement = this.element.find('.modifier-modifier-type select');
+        const effectType = this.element.find(".modifier-effect-type select").val();
+        const valueAffectedElement = this.element.find(".modifier-value-affected select");
+        const modifierTypeElement = this.element.find(".modifier-modifier-type select");
+
+        if (modifierTypeElement.val() === "damageSection") $("fieldset.damage-section-details").prop("disabled", false);
+        if (this.damageEffectTypes.includes(effectType)) $("option[value='damageSection']").show();
+
+        if (!(this.limitToTypes.includes(effectType))) $("fieldset.modifier-limit-to").prop("disabled", true);
+        else $("fieldset.modifier-limit-to").prop("disabled", false);
 
         switch (effectType) {
             case SFRPGEffectType.ABILITY_SKILLS:
-                valueAffectedElement.prop('disabled', false);
+                valueAffectedElement.prop("disabled", false);
                 break;
             case SFRPGEffectType.ABILITY_SCORE:
-                valueAffectedElement.prop('disabled', false);
+                valueAffectedElement.prop("disabled", false);
                 break;
             case SFRPGEffectType.AC:
-                valueAffectedElement.prop('disabled', false);
+                valueAffectedElement.prop("disabled", false);
                 break;
             case SFRPGEffectType.ACP:
-                valueAffectedElement.prop('disabled', false);
+                valueAffectedElement.prop("disabled", false);
                 break;
             case SFRPGEffectType.SAVE:
-                valueAffectedElement.prop('disabled', false);
+                valueAffectedElement.prop("disabled", false);
                 break;
             case SFRPGEffectType.SKILL:
             case SFRPGEffectType.SKILL_RANKS:
-                valueAffectedElement.prop('disabled', false);
+                valueAffectedElement.prop("disabled", false);
                 break;
             case SFRPGEffectType.SPELL_SAVE_DC:
-                modifierTypeElement.prop('disabled', true);
-                modifierTypeElement.prop('value', "constant");
+                modifierTypeElement.prop("disabled", true);
+                modifierTypeElement.prop("value", "constant");
                 break;
             case SFRPGEffectType.WEAPON_ATTACKS:
             case SFRPGEffectType.WEAPON_PROPERTY_ATTACKS:
@@ -236,35 +292,14 @@ export default class SFRPGModifierApplication extends FormApplication {
             case SFRPGEffectType.DAMAGE_REDUCTION:
             case SFRPGEffectType.ENERGY_RESISTANCE:
             case SFRPGEffectType.ACTOR_RESOURCE:
-                valueAffectedElement.prop('disabled', false);
+                valueAffectedElement.prop("disabled", false);
                 break;
             default:
-                valueAffectedElement.prop('disabled', true);
+                valueAffectedElement.prop("disabled", true);
                 break;
         }
 
-        if (this._tooltips === null) {
-            this._tooltips = tippy.delegate(`#${this.id}`, {
-                target: '[data-tippy-content]',
-                allowHTML: true,
-                arrow: false,
-                placement: 'top-start',
-                duration: [500, null],
-                delay: [800, null]
-            });
-        }
-    }
-
-    async close(...args) {
-        if (this._tooltips !== null) {
-            for (const tooltip of this._tooltips) {
-                tooltip.destroy();
-            }
-
-            this._tooltips = null;
-        }
-
-        return super.close(...args);
+        this.setPosition({ height: "auto" });
     }
 
     /**
@@ -278,19 +313,28 @@ export default class SFRPGModifierApplication extends FormApplication {
     }
 
     async _updateModifierData(formData) {
-        const modifiers = deepClone(this.actor.system.modifiers);
-        const modifier = modifiers.find(mod => mod._id === this.modifier._id);
+        const modifiers = this.target.system.modifiers;
+        const index = modifiers.findIndex(mod => mod._id === this.modifier._id);
+        let modifier = modifiers[index];
 
-        const formula = formData['modifier'];
+        const formula = String(formData["modifier"] || "0");
         if (formula) {
-            const roll = Roll.create(formula, this.owningActor?.system || this.actor.system);
-            modifier.max = await roll.evaluate({maximize: true}).total;
+            try {
+                const roll = Roll.create(formula, this.owningActor?.system || this.target.system);
+                modifier.max = await roll.evaluate({ maximize: true }).total;
+            } catch (err) {
+                ui.notifications.warn(err);
+                modifier.max = 0;
+            }
         } else {
             modifier.max = 0;
         }
 
-        mergeObject(modifier, formData);
+        const merged = foundry.utils.mergeObject(modifier, formData);
+        if (!(modifier instanceof SFRPGModifier)) modifier = new SFRPGModifier(modifier);
+        modifier.updateSource(merged);
+        modifiers[index] = modifier;
 
-        return this.actor.update({'system.modifiers': modifiers});
+        return this.target.update({ "system.modifiers": modifiers });
     }
 }

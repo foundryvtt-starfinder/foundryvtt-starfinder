@@ -11,6 +11,7 @@
         img.profile {
             flex: 0 0 150px;
             height: 150px;
+            border-right: @borderGroove;
         }
 
         .charname {
@@ -34,13 +35,13 @@
             flex: 1;
 
             .item-type {
-                font-size: 24px;
+                font-size: var(--font-size-24);
                 line-height: 26px;
                 margin: 0;
             }
 
             .item-status {
-                font-size: 16px;
+                font-size: var(--font-size-16);
                 line-height: 24px;
             }
         }
@@ -64,6 +65,10 @@
                 flex: 2 3;
                 margin-left: 8px;
                 padding-right: 8px;
+            }
+
+            :first-child {
+                border-left: none;
             }
         }
 
@@ -91,17 +96,17 @@
                     input {
                         display: inline;
                         max-width: 80%;
-                        font-size: 16px;
+                        font-size: var(--font-size-16);
                     }
 
                     span {
-                        font-size: 20px;
+                        font-size: var(--font-size-20);
                     }
 
                     span.sep {
                         display: inline;
                         position: relative;
-                        font-size: 16px;
+                        font-size: var(--font-size-16);
                         color: @colorTan;
                     }
 
@@ -118,7 +123,7 @@
     .sheet-navigation {
         margin-bottom: 5px;
         .item {
-            font-size: 18px;
+            font-size: var(--font-size-18);
         }
     }
 
@@ -128,6 +133,13 @@
         .tab {
             padding: 0 5px;
             // overflow: hidden;
+
+            .details-navigation {
+                margin-bottom: 5px;
+                .item {
+                    font-size: var(--font-size-18);
+                }
+            }
         }
 
         .item-properties {
@@ -135,7 +147,10 @@
             flex: 0 0 120px;
             margin-right: 5px;
             padding-right: 5px;
+            float: left;
             border-right: @borderGroove;
+            top: 0;
+            position: sticky;
 
             .form-group {
                 margin: 0;
@@ -157,14 +172,22 @@
 
                 li {
                     margin: 3px 0;
-                    padding: 0 2px;
+                    padding: 0 1px;
                     background: rgba(0, 0, 0, 0.05);
                     border: @borderGroove;
                     text-align: center;
-                    font-size: 12px;
-                    line-height: 18px;
+                    font-size: var(--font-size-12);
+                    line-height: 16px;
+
+                    hr {
+                        margin: 0;
+                    }
                 }
             }
+        }
+
+        .bubble {
+            .bubble-mixin();
         }
     }
 
@@ -177,7 +200,7 @@
             margin: 15px 0 0.25em 0;
             padding: 0 2px;
             .exo2();
-            font-size: 18px;
+            font-size: var(--font-size-18);
             border-bottom: @borderGroove;
         }
 
@@ -192,37 +215,48 @@
                 flex: 3;
             }
 
+            &.min-form-field {
+                flex: 0;
+            }
+
             border: 1px solid @colorTan;
             background: rgba(0, 0, 0, 0.05);
         }
 
-        .form-group.input-select {
-            select {
-                flex: 1;
+        .form-group {
+            &.input-select {
+                select {
+                    flex: 1;
+                }
+
+                select[multiple] {
+                    height: 200px;
+                }
             }
 
-            select[multiple] {
-                height: 200px;
+            &.input-select-select {
+                select {
+                    flex: 1.5;
+                }
             }
-        }
 
-        .form-group.input-select-select {
-            select {
-                flex: 1.5;
+            &.uses-per {
+                input {
+                    flex: 1;
+                }
+                span {
+                    text-align: center;
+                    flex: 0 0 16px;
+                    line-height: 24px;
+                }
+                select {
+                    flex: 0;
+                }
             }
-        }
 
-        .form-group.uses-per {
-            input {
-                flex: 1;
-            }
-            span {
-                text-align: center;
-                flex: 0 0 16px;
-                line-height: 24px;
-            }
-            select {
-                flex: 3;
+            .calculated-total {
+                flex: 0;
+                color: @colorOlive;
             }
         }
 
@@ -247,7 +281,7 @@
                 flex: 0 0 64px;
                 text-align: right;
                 margin-right: 5px;
-                font-size: 12px;
+                font-size: var(--font-size-12);
                 line-height: 24px;
             }
             input[type="text"] {
@@ -271,34 +305,36 @@
         color: @colorOlive;
     }
 
+    ol.storage-slots,
     ol.damage-parts,
+    ol.subaction-parts,
     ol.visualization-parts {
-        border-top: groove 2px #fff;
-
         img.part-image {
             flex: 0 0 50px;
             height: 50px;
         }
     }
 
-    li.damage-part,
-    li.visualization-part {
-        border-bottom: groove 2px #fff;
-    }
-
+    .storage-slots,
     .damage-parts,
+    .subaction-parts,
     .visualization-parts,
     .ability-adjustment-parts {
         list-style: none;
         margin: 0;
         padding: 0;
 
+        .storage-slot,
         .damage-part,
+        .subaction-part,
         .visualization-part,
         .ability-adjustment-part {
             flex: 0 0 100%;
             padding: 0;
             input {
+                &.primary-section-checkbox {
+                    flex: 0 0 20px;
+                }
                 flex: 3;
             }
             select {
@@ -336,30 +372,6 @@
                 flex: 0 0 30px;
             }
         }
-
-        .visualization-part {
-            padding-bottom: 4px;
-        }
-    }
-
-    .damage-control,
-    .visualization-control,
-    .ability-adjustments-control {
-        line-height: 24px;
-        color: @colorTan;
-        text-align: right;
-    }
-
-    .damage-control,
-    .visualization-control {
-        width: 18px;
-        flex: 0 0 18px;
-        float: right;
-    }
-
-    .ability-adjustments-control {
-        width: 110px;
-        flex: 0 0 20px;
     }
 
     .recharge {
@@ -379,6 +391,7 @@
     .item-descriptors label.checkbox,
     .weapon-properties label.checkbox {
         flex: 0 0 130px;
+        white-space: nowrap;
     }
 
     /* ----------------------------------------- */
@@ -481,7 +494,7 @@
             .item-recharge {
                 flex: 0 0 80px;
                 text-align: right;
-                font-size: 11px;
+                font-size: var(--font-size-11);
                 color: @colorTan;
             }
         }
@@ -498,7 +511,7 @@
             h3 {
                 margin: 0 -5px 0 0;
                 padding-left: 5px;
-                font-size: 13px;
+                font-size: var(--font-size-13);
                 font-weight: bold;
             }
 
@@ -520,7 +533,7 @@
             }
 
             flex: 0 0 80px;
-            font-size: 12px;
+            font-size: var(--font-size-12);
             color: @colorTan;
             text-align: center;
             border-right: 1px solid @colorFaint;
@@ -550,7 +563,7 @@
 
             a {
                 flex: 0 0 22px;
-                font-size: 10px;
+                font-size: var(--font-size-11);
                 text-align: center;
                 color: #666;
 
@@ -564,7 +577,7 @@
         // Item Dropdown Summary
         .item-summary {
             flex: 0 0 100%;
-            font-size: 12px;
+            font-size: var(--font-size-12);
             line-height: 16px;
             padding: 0.25em 0.5em;
             border-top: 1px solid @colorFaint;
@@ -588,5 +601,30 @@
     .error {
         color: #c00;
         text-align: left;
+    }
+
+    // Effects
+    .sfrpg-effect {
+        .origin {
+            &.item-properties {
+                .origin-actor,
+                .origin-item {
+                    flex: 0;
+
+                    img {
+                        margin: 5px;
+                        max-width: 80px;
+                        align-self: center;
+                        cursor: pointer;
+                    }
+                    li {
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        max-width: 120px;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
     }
 }

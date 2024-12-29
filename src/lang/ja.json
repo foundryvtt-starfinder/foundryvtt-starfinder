@@ -1,60 +1,4 @@
 {
-    "ACTOR": {
-        "TypeCharacter": "Player Character",
-        "TypeDrone": "Drone",
-        "TypeHazard": "Hazard",
-        "TypeNpc": "Old Style NPC",
-        "TypeNpc2": "Non-player Character",
-        "TypeStarship": "Starship",
-        "TypeVehicle": "Vehicle"
-    },
-    "ITEM": {
-        "TypeActorresource": "Actor Resource",
-        "TypeAmmunition": "Ammunition",
-        "TypeArchetypes": "Archetype",
-        "TypeAsi": "Ability Score Increase",
-        "TypeAugmentation": "Augmentation",
-        "TypeChassis": "Drone Chassis",
-        "TypeClass": "Class",
-        "TypeConsumable": "Consumable",
-        "TypeContainer": "Container",
-        "TypeEquipment": "Armor",
-        "TypeFeat": "Feat",
-        "TypeFusion": "Weapon Fusion",
-        "TypeGoods": "Goods",
-        "TypeHybrid": "Hybrid",
-        "TypeMagic": "Magic",
-        "TypeMod": "Drone Mod",
-        "TypeRace": "Race",
-        "TypeShield": "Shield",
-        "TypeSpell": "Spell",
-        "TypeStarshipablativearmor": "Starship Ablative Armor",
-        "TypeStarshipaction": "Starship Action",
-        "TypeStarshiparmor": "Starship Armor",
-        "TypeStarshipcomputer": "Starship Computer",
-        "TypeStarshipcrewquarter": "Starship Crew Quarter",
-        "TypeStarshipdefensivecountermeasure": "Starship Defensive Countermeasure",
-        "TypeStarshipdriftengine": "Starship Drift Engine",
-        "TypeStarshipexpansionbay": "Starship Expansion Bay",
-        "TypeStarshipfortifiedhull": "Starship Fortified Hull",
-        "TypeStarshipframe": "Starship Frame",
-        "TypeStarshipothersystem": "Starship Other System",
-        "TypeStarshippowercore": "Starship Power Core",
-        "TypeStarshipreinforcedbulkhead": "Starship Reinforced Bulkhead",
-        "TypeStarshipsecuritysystem": "Starship Security System",
-        "TypeStarshipsensor": "Starship Sensor",
-        "TypeStarshipshield": "Starship Shield",
-        "TypeStarshipspecialability": "Starship Special Ability",
-        "TypeStarshipthruster": "Starship Thruster",
-        "TypeStarshipweapon": "Starship Weapon",
-        "TypeTechnological": "Technological",
-        "TypeTheme": "Theme",
-        "TypeUpgrade": "Armor Upgrade",
-        "TypeVehicleattack": "Vehicle Attack",
-        "TypeVehiclesystem": "Vehicle System",
-        "TypeWeapon": "Weapon",
-        "TypeWeaponaccessory": "Weapon Accessory"
-    },
     "SFRPG": {
         "ACPTooltip": "ＡＣペナルティ: {mod} ({source})",
         "ACTooltipArmorACMod": "ＡＣ修正値: {armor} ({name})",
@@ -347,6 +291,8 @@
                     "EditModifierTooltip": "Open the modifier editor for this modifier.",
                     "SkillRank": "{type} Ranks: {mod} ({source})",
                     "Speed": "{speed}: {type} {mod} ({source})",
+                    "ToggleEffect": "Toggle effect",
+                    "ToggleEffectTooltip": "Toggle this effect on or off. Disabled effects do not affect the character.",
                     "ToggleModifier": "Toggle modifier",
                     "ToggleModifierTooltip": "Toggle a modifier on and off. Disabled modifiers do not affect the character."
                 },
@@ -522,25 +468,35 @@
                 "Accept": "Accept",
                 "ApplyDamage": "Apply Damage",
                 "ApplyHealing": "Apply Healing",
+                "ApplyHealingTo": "Apply Healing To",
+                "BypassStamina": "BypassStamina",
                 "DamageAndAHalf": "1.5x Damage",
                 "DoubleDamage": "Double Damage",
+                "HP": "HP (default)",
+                "HPAndSP": "Both HP and SP",
                 "HalfDamage": "Half Damage",
                 "ModifyDamage": "Modify Damage",
                 "ModifyDamageText": "Input an number to modify the damage amount by. This is applied after any multiplication.",
                 "NoDamageModifier": "No damage modifier applied.",
-                "NoToken": "Cannot apply: No token selected!"
+                "NoToken": "Cannot apply: No token selected!",
+                "SP": "SP"
             },
             "ItemAction": {
-                "Check": "Check"
+                "Check": "Check",
+                "NoActor": "You must have an actor selected or assigned to your user."
             },
             "ItemActivation": {
                 "Activates": "Activates",
                 "Cost": "Cost: {cost}",
                 "Deactivates": "Deactivates",
                 "Duration": "Duration: {duration}",
-                "Reloads": "Reloads"
-            }
+                "NoCharges": "No Charges",
+                "Reloads": "Reloads",
+                "Use": "Use"
+            },
+            "PlaceAbilityTemplate": "Place {label}"
         },
+        "Check": "Check",
         "ClassArmorProf": "アーマー習熟",
         "ClassBABProgression": "基本攻撃ボーナスの成長度",
         "ClassFortSaveProgression": "頑健セーヴの成長度",
@@ -574,6 +530,48 @@
                 },
                 "Turn": {
                     "Header": "{combatant}'s Turn"
+                }
+            },
+            "Difficulty": {
+                "Levels": {
+                    "Average": "Average",
+                    "Challenging": "Challenging",
+                    "Easy": "Easy",
+                    "Epic": "Epic",
+                    "GreaterThanEpic": "Greater than Epic",
+                    "Hard": "Hard",
+                    "LessThanEasy": "Less than Easy",
+                    "NoEnemies": "No enemies",
+                    "NoEnemyShips": "No Enemy Ships",
+                    "NoPCShips": "No PC Ships",
+                    "NoPCs": "No PCs"
+                },
+                "Tooltip": {
+                    "APL": "APL: ",
+                    "APLFull": "Average Party Level",
+                    "CR": "CR: ",
+                    "CanBeAdded": "A creature of this CR can be added without increasing the encounter difficulty",
+                    "ClickForDetails": "Click for Encounter Details",
+                    "Details": "Details",
+                    "DifficultyEncounter": "Difficulty Encounter",
+                    "EncounterCR": "Encounter Challenge Rating",
+                    "EncounterTotalXP": "Encounter Total XP Value",
+                    "EncounterWealth": "Suggested Wealth Gain (credits)",
+                    "Enemies": "Enemies",
+                    "EnemyShipEffectiveTier": "Effective Tier, Enemy Ship(s)",
+                    "EnemyXP": "Enemy Total XP Value",
+                    "HostileNPCs": "Hostile NPCs: ",
+                    "PCs": "Number of PCs: ",
+                    "PlayerShipEffectiveTier": "Effective Tier, Player Ship(s) ",
+                    "PlayerXP": "Per Player XP",
+                    "Players": "Players",
+                    "XPBounds": "XP Bounds",
+                    "XPNext": "Add XP to increase CR: ",
+                    "XPPrevious": "Remove XP to reduce CR: "
+                },
+                "Units": {
+                    "Credits": "cr",
+                    "XP": "XP"
                 }
             },
             "EncounterTracker": {
@@ -641,8 +639,56 @@
                 }
             }
         },
+        "CombatRoles": {
+            "Combatant": "Combatant",
+            "Descriptions": {
+                "Combatant": "These creatures are best suited to physical fighting; they may be most effective at range, in melee, or both.",
+                "Expert": "These creatures tend to be most effective with various skills.",
+                "Spellcaster": "These creatures rely primarily on spells or spell-like abilities."
+            },
+            "Expert": "Expert",
+            "Label": "Combat Role",
+            "Spellcaster": "Spellcaster"
+        },
         "ComingSoon": "Coming soon!",
         "ConImm": "状態異常完全耐性",
+        "ConditionTooltips": {
+            "Asleep": "You take a -10 penalty to Perception checks to notice things.",
+            "Bleeding": "You take the listed damage at the beginning of your turn.",
+            "Blinded": "You're flat-footed, you take a -4 penalty to most Str- and Dex-based skill checks and opposed Perception checks, you automatically fail Perception checks based on sight, opponents have total concealment against you, and you must succeed at a DC 10 Acrobatics check to move faster than half speed or else fall prone.",
+            "Broken": "<strong>Weapon:</strong> attack and damage rolls take a -2 penalty and can't deal extra effects on a critical hit;<br> <strong>Armor:</strong> AC bonuses are halved and the armor check penalty is doubled;<br> <strong>Vehicle:</strong> -2 penalty to AC, collision DC, and Piloting modifier, and it halves its full speed and MPH;<br> <strong>Tool or tech that provides bonuses:</strong> bonuses are halved.",
+            "Burning": "You take the listed fire damage each round, and you must be extinguished to end the condition.",
+            "Confused": "You treat all creatures as enemies, and you must roll on the table to determine your actions.",
+            "Cowering": "You're flat-footed and can take no actions.",
+            "Dazed": "You can take no actions.",
+            "Dazzled": "You take a -1 penalty to attack rolls and sight-based Perception checks.",
+            "Dead": "Your soul leaves your body, you can't act in any way, and you can't benefit from normal or magical healing.",
+            "Deafened": "You take a -4 penalty to initiative checks and opposed Perception checks, and you automatically fail sound-based Perception checks.",
+            "Dying": "You're unconscious, you can take no actions, and you must stabilize or lose Resolve Points and potentially die.",
+            "Encumbered": "Speeds are reduced by 10 feet, maximum Dex bonus to AC is reduced to +2, and you take a -5 penalty to Str- and Dex-based checks.",
+            "Entangled": "You move at half speed; you cannot run or charge; and you take a -2 penalty to AC, attack rolls, Reflex saves, initiative checks, and Dex-based skill and ability checks.",
+            "Exhausted": "You move at half speed; you cannot run or charge; you take a -3 penalty to AC, attack rolls, melee damage rolls, Reflex saves, initiative checks, and Str- and Dex-based skill and ability checks; and you reduce your encumbered limit by 3 bulk.",
+            "Fascinated": "You must pay attention to the fascinating effect and take a -4 penalty to skill checks made as reactions.",
+            "Fatigued": "You cannot run or charge; you take a -1 penalty to AC, attack rolls, melee damage rolls, Reflex saves, initiative checks, and Str- and Dex-based skill and ability checks; and you reduce your encumbered limit by 1 bulk.",
+            "FlatFooted": "You take a -2 penalty to AC, and you cannot take reactions or make attacks of opportunity.",
+            "Frightened": "You must flee or fight, and you take a -2 penalty to ability checks, attack rolls, saving throws, and skill checks.",
+            "Grappled": "You cannot move or take two-handed actions; you take a -2 penalty to AC, most attack rolls, Reflex saves, initiative checks, and Dex-based skill and ability checks; and you cannot make attacks of opportunity.",
+            "Helpless": "Your Dex modifier is -5, and melee attacks against you gain a +4 bonus.",
+            "Nauseated": "You're unable to attack, cast spells, or concentrate on spells, and the only action you can take is a single move action per turn.",
+            "OffKilter": "You can't take move actions except to right yourself, you take a -2 penalty to attacks, and you're flat-footed.",
+            "OffTarget": "You take a -2 penalty to attack rolls.",
+            "Overburdened": "Speeds are reduced to 5 feet; maximum Dex bonus to AC is reduced to +0; and you take a -5 penalty to Str- and Dex-based checks.",
+            "Panicked": "<ul><li>You drop all held items</li><li>You flee at top speed</li><li>You cannot take other actions</li><li>You take a -2 penalty to ability checks, saving throws, and skill checks</li><li>And you cower if cornered</li></ul>",
+            "Paralyzed": "Your Dex modifier is -5, and you cannot move but can take mental actions.",
+            "Pinned": "You cannot move, you're flat-footed, and you take penalties to the same attributes as for grappled but the penalty is -4.",
+            "Prone": "You take a -4 penalty to melee attacks, a +4 bonus to AC against ranged attacks, and a -4 penalty to AC against melee attacks.",
+            "Shaken": "You take a -2 penalty to ability checks, attack rolls, saving throws, and skill checks.",
+            "Sickened": "You take a -2 penalty to ability checks, attack rolls, weapon damage rolls, saving throws, and skill checks.",
+            "Stable": "You're no longer dying, but you are still unconscious.",
+            "Staggered": "You can take only a single move or standard action each round and can't take reactions, but you can take swift actions as normal.",
+            "Stunned": "You drop everything held, you can't take actions, and you're flat-footed.",
+            "Unconscious": "You're knocked out and helpless."
+        },
         "ConditionsAsleep": "睡眠状態 [Asleep]",
         "ConditionsBleeding": "出血状態 [Bleeding]",
         "ConditionsBlinded": "盲目状態 [Blinded]",
@@ -684,6 +730,7 @@
             "Drugs": "Drugs",
             "FoodDrink": "Food and drink",
             "Medicine": "Medicinals",
+            "Other": "Other",
             "Poison": "Poisons",
             "Serum": "Serums",
             "SpellGem": "Spell Gems"
@@ -708,7 +755,10 @@
         },
         "Cybernetic": "サイバー化",
         "Damage": {
+            "DamageOperator": "Damage Operator",
+            "EnergyDamage": "Energy Damage",
             "Immunities": "ダメージ完全耐性",
+            "KineticDamage": "Kinetic Damage",
             "MinimumDamage": "Minimum Damage",
             "PartIndex": "Part {partIndex} of {partCount}",
             "Reduction": "ダメージ抵抗",
@@ -732,6 +782,10 @@
                     "Or": "or"
                 },
                 "Piercing": "[刺突]",
+                "PrimaryDamageGroup": "Primary Damage Group",
+                "PrimaryDamageGroupTooltip": "Damage sections that are a member of the primary damage group will all be marked as primary. You will still only be able to choose one damage section per group when making a damage roll, and as such modifiers will correctly only be applied once.",
+                "PrimaryDamageSection": "Primary Damage Section",
+                "PrimaryDamageSectionTooltip": "Modifiers that affect this weapon's damage will only apply to the primary damage section. Non-primary sections will simply roll their formula. A weapon must have exactly one primary damage section.",
                 "Radiation": "Radiation",
                 "Slashing": "[斬撃]",
                 "Sonic": "[音波]",
@@ -800,6 +854,7 @@
                 "SingleFieldInvalid": "Invalid input for {fieldName}."
             }
         },
+        "Disabled": "Disabled",
         "DistAny": "任意",
         "DroneSheet": {
             "Chassis": {
@@ -917,6 +972,33 @@
                 "RangedWeaponMounts": "遠隔武器マウント"
             }
         },
+        "DurationTypesInstantaneous": "Instantaneous",
+        "Effect": {
+            "DetailsEnabledLabel": "Enabled",
+            "DetailsHeader": "Effect Details",
+            "DetailsShowOnToken": "Show On Token",
+            "DurationTypesDays": "Days",
+            "DurationTypesHours": "Hours",
+            "DurationTypesLabel": "Duration",
+            "DurationTypesMinutes": "Minutes",
+            "DurationTypesNone": "None",
+            "DurationTypesPermanent": "Permanent",
+            "DurationTypesRounds": "Rounds",
+            "EndTypesLabel": "Ends On",
+            "EndTypesOnTurnEnd": "Turn end",
+            "EndTypesOnTurnStart": "Turn start",
+            "EndsOnTooltip": "<br><strong>Parent Actor's Turn</strong><p>The effect will expire at the start/end of the turn of the actor it belongs to.</p><strong>Nearest Initiative</strong><p>The effect will expire on the start/end of the turn with the closest initiative to the turn it was enabled.</p><strong>Combatant Turns</strong><p>The effect will expire on the start/end of the specified combatant's turn.</p>",
+            "Expired": "Expired",
+            "ExpiryModeInit": "Initiative Count",
+            "ExpiryModeLabel": "Expiry Mode",
+            "ExpiryModeTooltip": "<br><strong>Combatant Turn</strong><p>The effect will expire at the start/end of a specified turn.</p><strong>Initiative Count</strong><p>The effect will expire when the current combat reaches the specified initiative count.</p>",
+            "ExpiryModeTurn": "Combatant Turn"
+        },
+        "EffectDurationTypesDays": "Days",
+        "EffectDurationTypesHours": "Hours",
+        "EffectDurationTypesMinutes": "Minutes",
+        "EffectDurationTypesRounds": "Rounds",
+        "Enabled": "Enabled",
         "EnergyArmorClass": "ｴﾈﾙｷﾞｰAC",
         "EnergyArmorClassShort": "EAC",
         "Enrichers": {
@@ -1092,8 +1174,10 @@
         "ItemMacro": {
             "Activate": "Activate",
             "Attack": "Attack",
+            "Cast": "Cast",
             "Damage": "Damage",
             "Healing": "Healing",
+            "Reload": "Reload",
             "Use": "Use"
         },
         "ItemNoAmmo": "{name} は全弾､撃ち尽くしました！",
@@ -1109,6 +1193,7 @@
                 "Base": "Base value",
                 "BaseTooltip": "(Required) The base value defines the base value of this resource. Modifiers may alter it.<br/>Attribute: @resources.type.subtype.base",
                 "CombatTracker": "Combat Tracker settings",
+                "CombatTrackerSettings": "Combat Tracker Settings",
                 "DisplayAbsoluteValue": "Display Absolute Value",
                 "DisplayAbsoluteValueTooltip": "Should the displayed value in the combat tracker be absolute? i.e. -1 is displayed as 1, -2 as 2, etc.",
                 "Enabled": "Enabled",
@@ -1150,6 +1235,7 @@
                 "VisualizationsModeLesserThan": "lesser than",
                 "VisualizationsModeLesserThanEqual": "lesser than or equal to",
                 "VisualizationsModeNotEqual": "not equal to",
+                "VisualizationsPart": "Visualization Part",
                 "VisualizationsThen": "Then:",
                 "VisualizationsTitle": "Title:"
             },
@@ -1172,6 +1258,27 @@
             },
             "Containers": {
                 "ContainerTooltip": "Containers can contain just about any item. Increase the storage capacity to allow adding content."
+            },
+            "Details": {
+                "Section": {
+                    "ArmorDetails": "Armor Details",
+                    "ClassBasics": "Class Basics",
+                    "ConsumableDetails": "Consumable Details",
+                    "Progressions": "Progressions",
+                    "SkillsAndProficiencies": "Skills and Proficiencies",
+                    "Title": "Section",
+                    "Usage": "Usage"
+                },
+                "Tab": {
+                    "AmmunitionContainer": "Ammunition & Container",
+                    "AttackDamage": "Attack & Damage",
+                    "ClassInformation": "Class Information",
+                    "ContainerDetails": "Container Details",
+                    "NPCSpecific": "NPC Specific",
+                    "Properties": "Properties",
+                    "Spellcasting": "Spellcasting",
+                    "UsageAction": "Usage & Action"
+                }
             },
             "Header": {
                 "ArmorClass": "Armor Class",
@@ -1221,6 +1328,29 @@
                 "TargetLockPenaltyTooltip": "The penalty applied to the ship's target lock score.",
                 "TurnDistancePenalty": "Turn Distance Penalty",
                 "TurnDistancePenaltyTooltip": "The penalty applied to the ship's turn distance score."
+            },
+            "StarshipAction": {
+                "ActionDC": "Action DC",
+                "AddSubactionTooltip": "<strong>Add Subaction</strong><br />Add a new subaction",
+                "CheckFormula": "Skill Check Formula",
+                "CrewRole": "Crew Role",
+                "CriticalEffect": "Critical Effect",
+                "DCPlaceholder": "5 + 1-1/2 * Target Ship Tier",
+                "DeleteSubactionTooltip": "<strong>Delete Subaction</strong><br />Delete this subaction",
+                "IsPushAction": "Push Action?",
+                "NormalEffect": "Normal Effect",
+                "Phase": "Phase",
+                "PhaseTooltip": "Phase Tooltip",
+                "PushResolve": "Push and Resolve",
+                "ResolveFormulaAutomatically": "Resolve this Formula Automatically",
+                "ResolveFormulaAutomaticallyTooltip": "If this box is checked, Target DC will resolve automatically as a formula, and the result will display in the chat box when the action is triggered. Otherwise, the raw string will instead be displayed in the chatbox.",
+                "SkillFormulaAndSubactions": "Skill Formula and Subactions",
+                "SkillFormulaOrSubactions": "Skill Formula / Subactions",
+                "SkillOrSubaction": "Skill or Subaction Name",
+                "SubactionPart": "Subaction {section}",
+                "Subactions": "Subactions",
+                "TargetDC": "Target DC",
+                "UsesResolve": "Uses Resolve"
             },
             "StarshipArmor": {
                 "ArmorBonus": "Armor Bonus",
@@ -1297,6 +1427,7 @@
                     "WeaponArcStarboard": "Starboard Arc",
                     "WeaponArcTooltip": "The amount of weapon mounts available for the ship arc, split into light, heavy, and capital mounts.",
                     "WeaponArcTurret": "Turret",
+                    "WeaponMounts": "Weapon Mounts",
                     "WeaponTypeCapital": "Capital",
                     "WeaponTypeHeavy": "Heavy",
                     "WeaponTypeLight": "Light",
@@ -1398,6 +1529,8 @@
                 "DamageNotes": "Damage Notes",
                 "DamageNotesTooltip": "The damage notes are displayed on the damage roll chat card. This is a great way to put helpful reminders, especially for GMs with complicated NPCs.",
                 "DamageSection": "Damage Section {section}",
+                "DeleteDamageSection": "Delete damage section",
+                "Details": "Action Details",
                 "HealingFormula": "Healing Formula",
                 "OtherFormula": "Other Formula",
                 "RollNotes": "Roll Notes",
@@ -1408,15 +1541,18 @@
                 "TitleActivation": "Activation"
             },
             "Activation": {
+                "Activation": "Activation",
                 "ActivationCondition": "Activation Condition",
                 "ActivationCost": "Activation Cost",
                 "Area": "Area",
                 "Duration": "Duration",
                 "LimitedUses": "Limited Uses",
                 "Range": "Range",
+                "RangeIncrement": "Range Increment",
                 "Target": "Target"
             },
             "Ammunition": {
+                "Ammo": "Ammo",
                 "AmmunitionType": "Ammunition Type",
                 "Capacity": "Capacity Settings",
                 "Details": "Ammunition Details",
@@ -1446,9 +1582,11 @@
             },
             "Attuned": "Attuned",
             "Augmentation": {
+                "Action": "Augmentation Action",
                 "Details": "Augmentation Details",
                 "System": "System",
-                "Type": "Type"
+                "Type": "Type",
+                "Usage": "Augmentation Usage"
             },
             "Capacity": {
                 "Capacity": "Capacity",
@@ -1471,6 +1609,7 @@
                 "Containers": "Containers",
                 "DroneChassis": "Drone Chassis",
                 "DroneMods": "Drone Mods",
+                "Effect": "Effect",
                 "Equipment": "Equipment",
                 "Feats": "Feats",
                 "Goods": "Goods",
@@ -1565,12 +1704,15 @@
             "MaxDex": "Max. Dexterity Modifier",
             "NotProficient": "Not Proficient",
             "Proficient": "Proficient",
+            "RangeInformation": "Range Information",
             "Shield": {
                 "ACP": "ACP: {acp}",
                 "AcMaxDex": "Max dex bonus: {maxDex}",
+                "AcMaxDexLabel": "Max Dex Bonus",
                 "Action": "Shield Action",
                 "Aligned": "Aligned",
                 "ArmorCheck": "Armor check penalty: {acp}",
+                "ArmorCheckLabel": "Armor Check Penalty",
                 "Bonus": "Shield Bonus",
                 "Bonuses": "Wielded bonus: {wielded} / Aligned bonus: {aligned}",
                 "Details": "Shield Details",
@@ -1645,6 +1787,10 @@
                 "Attack": "Weapon Attack",
                 "Category": "Weapon Category",
                 "Details": "Weapon Details",
+                "IsEquipment": {
+                    "Title": "Weapon Is Equipment",
+                    "Tooltip": "This box is checked if the weapon is a piece of carried equipment, as opposed to an innate natural or supernatural weapon. For natural weapons, uncheck this box."
+                },
                 "Properties": "Weapon Properties",
                 "Type": "Weapon Type",
                 "Usage": "Weapon Usage"
@@ -1812,6 +1958,10 @@
         "LimitedUsePeriodsShort": "小休憩",
         "LocalizationTerminator": "",
         "Long": "長距離",
+        "Macro": {
+            "ViewActor": "View Actor",
+            "ViewItem": "View Item"
+        },
         "Magic": {
             "Levels": {
                 "0": "0 Level",
@@ -1866,6 +2016,10 @@
         "ModifierEffectTypeTooltip": "修正値の影響を受ける一般的な特性を識別します",
         "ModifierEnabledLabel": "有効",
         "ModifierEnabledTooltip": "特性修正値が計算されるときに修正値が考慮されるかどうかを決定します",
+        "ModifierLimitToContainer": "Parent Item's Container",
+        "ModifierLimitToLabel": "Limit To",
+        "ModifierLimitToParent": "Parent Item",
+        "ModifierLimitToTooltip": "<strong>Limit To</strong><br><br><strong>None</strong><p>The modifier will be applied to applicable items as normal.</p><strong>Parent Item</strong><p>The modifier will only apply to the item this modifier is on.</p><strong>Parent Item's Container</strong><p>The modifier will only apply to the container item that contains the item this modifier is on.</p>",
         "ModifierModifierLabel": "修正値",
         "ModifierModifierTooltip": "変更に使用する値",
         "ModifierModifierTypeLabel": "修正値タイプ",
@@ -1977,6 +2131,10 @@
         "RacePlaceHolderText": "種族",
         "RaceSize": "サイズ",
         "RacialTraits": "種族特徴",
+        "RangeCalculated": "{rangeType} ({total} ft.)",
+        "RangeClose": "Close (25 ft. + 5 ft./2 levels)",
+        "RangeLong": "Long (400 ft. + 40 ft./level)",
+        "RangeMedium": "Medium (100 ft. + 10 ft./level)",
         "Reach": "間合い",
         "ReflexSave": "反応",
         "RepairDroneChatMessage": "{name} は {regainedHP} HPまで修理されました。",
@@ -2144,6 +2302,10 @@
                 "Hint": "ダイスロールする際に､有利か不利かを表示する機能を有効にします。",
                 "Name": "有利と不利を採用しますか？"
             },
+            "DecimalSpeed": {
+              "Hint": "Enable decimal numbers for actor speed configuration.",
+              "Name": "Decimal Speed values"
+            },
             "AlwaysShowQuantity": {
                 "Hint": "Always shows the quantity of items, even if it is 0 or 1. You will have to refresh your window before this change will take effect.",
                 "Name": "Always show item quantity"
@@ -2156,6 +2318,14 @@
                 "Hint": "チャットログのアイテムカードの説明を自動的に折りたたみます。",
                 "Name": "チャット上のアイテムを最小化"
             },
+            "AutoRollCritEffect": {
+                "Hint": "When applying damage to a starship from a chat card, if the damage crossses a Critical Threshold, the Critical Damage Effects (CRB pg. 320) table will automatically be rolled.",
+                "Name": "Automatically roll starship critical damage effects"
+            },
+            "HideHostileStarshipCrit": {
+                "Hint": "When posting notifications about starship criticals or thresholds, only post to GM if the ship is a Hostile Token.",
+                "Name": "Hide Hostile Starship Critical Message"
+            },            
             "CombatCards": {
                 "NormalHint": "Change which combat chat cards should be displayed during normal combat.",
                 "NormalName": "Normal combat",
@@ -2196,6 +2366,10 @@
                     "Core": "コアルールブック (5/10/5)",
                     "Optional": "オプション (5/5/5)"
                 }
+            },
+            "DifficultyDisplay": {
+                "Hint": "Enables difficulty calculation and display on the combat tracker tab.  You will have to refresh your window before this change will take effect.",
+                "Name": "Enable Difficulty Display"
             },
             "ExperienceTracking": {
                 "Hint": "キャラクターシートから経験値バーを削除する。",
@@ -2274,6 +2448,10 @@
                 "Hint": "Starfinderの測定方法にAOEテンプレートを使用するか、オンセ工房 FoundryVTTのデフォルトの方法を使用するか",
                 "Name": "Starfinder AOEテンプレートを使用するs"
             },
+            "WarnInvalidRollData": {
+                "Hint": "When checked, warnings will be displayed when modifiers contain invalid roll formulas. This can result in warning spam, if, for example, you have a class feature but not the corresponding class item itself.",
+                "Name": "Warn on invalid roll formulas"
+            },
             "WorldSchemaVersion": {
                 "Hint": "Starfinderシステムのデータ･スキーマ･バージョンを記録します。警告：何をしているかわからない場合は、この値を編集しないでください。",
                 "Name": "Starfinderデータ･スキーマ･バージョン"
@@ -2348,12 +2526,14 @@
             },
             "StarshipWeaponProperties": {
                 "Anchoring": "Anchoring",
+                "Antimagic": "Antimagic",
                 "Array": "Array",
                 "Automated": "Automated",
                 "Broad": "Broad Arc",
                 "Bugging": "Bugging",
                 "Burrowing": "Burrowing",
                 "Buster": "Buster",
+                "Cacophonous": "Cacophonous",
                 "Connecting": "Connecting",
                 "DeathField": "Death Field",
                 "Deployed": "Deployed",
@@ -2369,6 +2549,7 @@
                 "IrradiateH": "Irradiate (high)",
                 "IrradiateL": "Irradiate (low)",
                 "IrradiateM": "Irradiate (medium)",
+                "IrradiateS": "Irradiate (severe)",
                 "Jamming": "Jamming",
                 "Limited": "Limited Fire",
                 "Line": "Line",
@@ -2395,6 +2576,7 @@
                 "Teleportation": "Teleportation",
                 "Tractor": "Tractor Beam",
                 "Transposition": "Transposition",
+                "Unerring": "Unerring",
                 "VandalDrones": "Vandal Drones",
                 "Volatile": "Volatile",
                 "Vortex": "Vortex"
@@ -2428,6 +2610,7 @@
         "SkillBlu": "＜はったり＞",
         "SkillCom": "＜コンピュータ＞",
         "SkillCul": "＜カルチャー＞",
+        "SkillDelete": "Delete?",
         "SkillDip": "＜外交＞",
         "SkillDis": "＜変装＞",
         "SkillEng": "＜エンジニアリング＞",
@@ -2435,11 +2618,14 @@
         "SkillInt": "＜威圧＞",
         "SkillLsc": "＜生命科学＞",
         "SkillMed": "＜医学＞",
+        "SkillMiscModifiersLabel": "Misc. Modifiers",
         "SkillModifierTooltip": "{type} ボーナス: {mod} ({source})",
         "SkillMys": "＜神秘学＞",
+        "SkillNotes": "Skill Notes",
         "SkillPer": "＜知覚＞",
         "SkillPil": "＜操縦＞",
         "SkillPro": "＜職能＞",
+        "SkillProfessionName": "Profession Name",
         "SkillProficiencyLevelClassSkill": "クラス技能",
         "SkillPsc": "＜物理科学＞",
         "SkillSen": "＜真意看破＞",
@@ -2496,6 +2682,7 @@
             "Spread": "Spread"
         },
         "SpellAreaShapesCone": "円錐 (Cone)",
+        "SpellAreaShapesCube": "Cube",
         "SpellAreaShapesCylinder": "円柱 (Cylinder)",
         "SpellAreaShapesLine": "直線 (Line)",
         "SpellAreaShapesOther": "その他 (Other)",
@@ -2578,6 +2765,7 @@
                 "NPCGunnerRanksMessage": "While ranks aren't relevant to an NPC's gunnery modifier, some statblocks may include the Gunner's level, which you can store here. You can otherwise safely leave this box blank.",
                 "Passengers": "Passengers",
                 "Pilot": "Pilot",
+                "RemoveCrewMember": "Remove Crew Member",
                 "ScienceOfficers": "Science Officers",
                 "SkillModifier": "Modifier",
                 "SkillRanks": "Ranks",
@@ -2608,6 +2796,8 @@
             "Damage": {
                 "CrossedCriticalThreshold": "{name} crossed {crossedThresholds} critical thresholds!",
                 "Message": "Damage to a starship always originates from a specific direction, please select the quadrant the incoming damage should be applied to.",
+                "Nat20": "Critical damage! {name} takes a critical damage effect.",
+                "Nat20WithThreshold": "Critical damage! {name} takes an additional critical damage effect.",
                 "Quadrant": {
                     "Aft": "Aft",
                     "Forward": "Forward",
@@ -2719,6 +2909,10 @@
                 "ShieldHeader": "Shields",
                 "TargetLock": "Target Lock"
             },
+            "RandomQuadrantMacro": {
+                "NoToken": "Select the recipient of the critical effect before proceeding.",
+                "NotStarship": "The selected token must be a starship."
+            },
             "Role": {
                 "Captain": "Captain",
                 "ChiefMate": "Chief Mate",
@@ -2761,6 +2955,7 @@
         "SystemWide": "星系間",
         "TempHPMaxPlaceHolderText": "最大",
         "TempHPPlaceHolderText": "一時",
+        "Text": "Text",
         "ThemePlaceHolderText": "テーマ",
         "Tippy": {
             "Attributes": "Attributes:",
@@ -2770,6 +2965,24 @@
         "Touch": "接触",
         "TraitArmorProf": "アーマー習熟",
         "TraitWeaponProf": "武器習熟",
+        "TurnEvent": {
+            "AddTurnEvent": "Add Turn Event",
+            "DeleteTurnEvent": "Delete Turn Event",
+            "Formula": "Formula",
+            "FormulaTooltip": "A formula which will be rolled when the trigger is met.",
+            "Name": "Name",
+            "NoteContent": "Note Content",
+            "NoteTooltip": "Text which will be sent to chat as a chat message when the trigger is met.",
+            "Trigger": "Trigger",
+            "TriggerTooltip": "When during a combatant's turn to trigger the event.",
+            "TurnEventI": "Turn Event {number}",
+            "Type": "Type",
+            "TypeTooltip": "The type of behaviour to trigger for this turn event.",
+            "Types": {
+                "Note": "Note",
+                "Roll": "Roll"
+            }
+        },
         "UPBs": "UPB",
         "Units": {
             "Speed": "ft."
@@ -2877,8 +3090,10 @@
             }
         },
         "VehicleSystemSheet": {
+            "Activated": "Activated",
             "CanBeActivated": "Can be activated",
             "CanBeActivatedTooltip": "This system has an activated state.",
+            "NotActivated": "Not Activated",
             "Piloting": "Piloting",
             "PilotingTooltip": "The Piloting modifier to apply when using this system to pilot.",
             "Senses": "Senses",
@@ -3014,6 +3229,8 @@
         "WeaponPropertiesGuidedTooltip": "A guided weapon uses a signal along with wireless telemetry, magnetic guidance, or another means of guiding its payload after the weapon has been fired. When you take a move action to aim the weapon and then fire it on the same turn (including doing so with a sniper weapon), your target does not gain the bonus to AC provided by cover, partial cover, or soft cover. Improved cover and total cover still confer their bonuses normally.",
         "WeaponPropertiesHarrying": "攪乱 [Harrying]",
         "WeaponPropertiesHarryingTooltip": "A harrying weapon produces exceptionally distracting bursts of fire. When you take the harrying fire action with this weapon, you gain a +2 insight bonus to your attack roll.",
+        "WeaponPropertiesHealing": "Healing",
+        "WeaponPropertiesHealingTooltip": "A healing weapon, which must be an energy weapon, can deliver restorative energy. You can set the weapon to heal mode (or reset it to normal mode) as a move action. While in healing mode, if the healing weapon hits a creature, roll dice equal to the weapon’s damage; Weapon Specialization, an operative’s trick attack, and other effects that increase damage don’t apply. The creature recovers Hit Points equal to the amount rolled, minimum 1. Reduce healing by half for constructs and undead; objects are unaffected. A critical hit with a healing weapon doesn’t increase the healing or have a critical hit effect. A healing weapon used in healing mode expends twice the usual number of charges, and a battery used in a healing weapon can’t be recharged.",
         "WeaponPropertiesHolyWater": "聖水 [Holy Water]",
         "WeaponPropertiesHolyWaterTooltip": "A holy water weapon is infused with the blessings of one or more good-aligned deities (most commonly Hylax, Iomedae, or Sarenrae within the Pact Worlds, though devoted followers of any good-aligned deity could create such weapons). It damages only undead (regardless of alignment) and outsiders with the evil subtype, and even those creatures suffer no effect (and show no sign of their nature if it is not already obvious) with a successful saving throw. Crafting a holy water grenade requires the blessing of formally trained priests of a good deity, though a character of any alignment can do the actual crafting.",
         "WeaponPropertiesHybrid": "Hybrid",
@@ -3138,5 +3355,64 @@
         "WeaponsPropertiesConceal": "秘匿 [Conceal]",
         "WeaponsPropertiesConcealTooltip": "A weapon with the conceal special property is considered especially small or easy to hide for purposes of Slight of Hand’s hide object task, granting you a +4 circumstance bonus to skill checks to hide object.",
         "WillSave": "意志"
+    },
+    "TYPES": {
+        "Actor": {
+            "character": "Player Character",
+            "drone": "Drone",
+            "hazard": "Hazard",
+            "npc": "Old Style NPC",
+            "npc2": "Non-player Character",
+            "starship": "Starship",
+            "vehicle": "Vehicle"
+        },
+        "Item": {
+            "actorResource": "Actor Resource",
+            "ammunition": "Ammunition",
+            "archetypes": "Archetype",
+            "asi": "Ability Score Increase",
+            "augmentation": "Augmentation",
+            "chassis": "Drone Chassis",
+            "class": "Class",
+            "consumable": "Consumable",
+            "container": "Container",
+            "effect": "Effect",
+            "equipment": "Armor",
+            "feat": "Feat",
+            "fusion": "Weapon Fusion",
+            "goods": "Goods",
+            "hybrid": "Hybrid",
+            "magic": "Magic",
+            "mod": "Drone Mod",
+            "race": "Race",
+            "shield": "Shield",
+            "spell": "Spell",
+            "starshipAblativeArmor": "Starship Ablative Armor",
+            "starshipAction": "Starship Action",
+            "starshipArmor": "Starship Armor",
+            "starshipComputer": "Starship Computer",
+            "starshipCrewQuarter": "Starship Crew Quarter",
+            "starshipDefensiveCountermeasure": "Starship Defensive Countermeasure",
+            "starshipDriftEngine": "Starship Drift Engine",
+            "starshipExpansionBay": "Starship Expansion Bay",
+            "starshipFortifiedHull": "Starship Fortified Hull",
+            "starshipFrame": "Starship Frame",
+            "starshipOtherSystem": "Starship Other System",
+            "starshipPowerCore": "Starship Power Core",
+            "starshipReinforcedBulkhead": "Starship Reinforced Bulkhead",
+            "starshipSecuritySystem": "Starship Security System",
+            "starshipSensor": "Starship Sensor",
+            "starshipShield": "Starship Shield",
+            "starshipSpecialAbility": "Starship Special Ability",
+            "starshipThruster": "Starship Thruster",
+            "starshipWeapon": "Starship Weapon",
+            "technological": "Technological",
+            "theme": "Theme",
+            "upgrade": "Armor Upgrade",
+            "vehicleAttack": "Vehicle Attack",
+            "vehicleSystem": "Vehicle System",
+            "weapon": "Weapon",
+            "weaponAccessory": "Weapon Accessory"
+        }
     }
 }

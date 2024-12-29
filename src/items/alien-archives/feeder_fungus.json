@@ -2,12 +2,22 @@
   "_id": "C8ekr2einz30yViY",
   "name": "Feeder Fungus",
   "type": "npc2",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "_id": "RAKUTCiKOXxQxNFW",
       "name": "Narcotic Spores (Ex)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
@@ -15,6 +25,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "",
@@ -23,6 +34,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -45,6 +57,11 @@
           "value": "<p>A feeder fungus constantly emits a cloud of nearly invisible narcotic spores. A living creature that breathes in this aura must succeed at a DC 15 Fortitude save or be staggered for 1 round. This is a @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Poisons} effect. Environmental protections, such as those found in most armor, negate this effect.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -52,6 +69,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -85,6 +103,11 @@
       "_id": "SMMShlTsmvE32Lnj",
       "name": "Tendril (plus Grab)",
       "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
@@ -99,6 +122,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -179,6 +203,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -200,6 +225,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -221,25 +247,12 @@
       "_id": "sNgMIwuiGSIBmWa4",
       "name": "Fungal Pod (Ex)",
       "type": "weapon",
-      "ammunition": false,
-      "augmentation": false,
-      "consumable": false,
-      "container": false,
-      "equipment": false,
-      "fusion": true,
-      "goods": false,
-      "hybrid": false,
-      "img": "icons/svg/item-bag.svg",
-      "magic": false,
-      "shield": false,
-      "spell": false,
-      "storage": {
-        "type": "slot",
-        "affectsEncumbrance": true,
-        "amount": 0,
-        "subtype": "fusion",
-        "weightProperty": "level"
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
       },
+      "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -256,6 +269,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -344,6 +358,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -455,6 +470,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -470,29 +486,26 @@
         },
         "weaponCategory": "uncategorized",
         "weaponType": "smallA"
-      },
-      "technological": false,
-      "upgrade": false,
-      "vehicleAttack": false,
-      "vehicleSystem": false,
-      "weapon": false,
-      "weaponAccessory": false
+      }
     }
   ],
   "prototypeToken": {
     "name": "Feeder Fungus",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -513,15 +526,30 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -534,12 +562,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "tint": null
+      "src": "icons/svg/mystery-man.svg",
+      "tint": "#ffffff"
     },
     "width": 1
   },
@@ -589,12 +622,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -725,8 +764,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<h2>Description</h2>\n<p>This ambulatory fungus resembles a very thick lichen, with shoots of long, coiled, fernlike tendrils at the center of its mass. Shorter stalks end in hand-sized pods, which dispense clouds of fine spores. While the feeder fungus has limited mobility, it is nonetheless an effective ambush predator. The spores it releases have a narcotic effect on most creatures, and once a victim is affected, the fungus extends tendrils to grab and throttle its prey. The corpses of its prey provide the fungus with food as well as their means of propagation: once a feeder fungus has accumulated more than it needs to subsist, it produces a special pod it implants in a hollowed-out corpse, which develops into a new feeder fungus. Feeder fungi are repelled by the spores of other feeder fungi, a biological mechanism that encourages a younger fungus to disperse. Newly spawned fungi are smaller than mature specimens and have shorter tendrils, which they use for more rapid movement; such fungi are usually CR 2 and Small with a 30-foot speed and a 5-foot reach. These mobility tendrils grow into grasping tendrils after the fungus has made its first kill, using its prey to fuel its growth into adult size.</p>\n<p>The feeder fungus’s narcotic spores can be used to synthesize medical-grade tier 2 sedatives. A character can harvest a single spore pod from a helpless or dead feeder fungus with a successful DC 22 Medicine or DC 27 Survival check. This pod is worth 3,000 credits and contains enough material (treat as virtual UPBs that can be used only to craft sedatives) to create 5 doses of sedative.</p>",
@@ -736,6 +778,10 @@
       "cr": 4,
       "environment": "any temperate and warm land",
       "organization": "solitary or clutch (1 adult and 1-4 juveniles)",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #20 pg. 55",
@@ -1039,6 +1085,9 @@
       },
       "senses": "blindsense (vibration) 30 ft., low-light vision",
       "size": "medium",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

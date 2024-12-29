@@ -2,6 +2,11 @@
   "_id": "qbeQtgCtP8avY2ny",
   "name": "Shield Other",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "systems/sfrpg/icons/spells/shield_other.webp",
   "system": {
     "type": "",
@@ -18,11 +23,13 @@
     },
     "allowedClasses": {
       "myst": true,
+      "precog": false,
       "tech": false,
       "wysh": false
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "none",
       "value": null
@@ -43,13 +50,13 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>This spell wards the target and creates a mystic connection between you and the target so that some of its wounds are transferred to you. Casting this spell requires you to spend 1 Resolve Point. The target takes only half damage from all wounds and attacks (including those dealt by special abilities) that deal Hit Point damage, and you take the amount of damage not taken by the target. Only Hit Point damage is transferred in this manner; the target’s Stamina Points are damaged as normal. If you still have Stamina Points, you take the damage to your Stamina Points before Hit Points, as with normal damage.</p>\n<p>Forms of harm that do not involve Hit Points, such as @UUID[Compendium.sfrpg.rules.PqV3OCbUTyk2upPD]{Charm effects}, temporary ability damage, ability drain, permanent negative levels, and death effects, are not affected. When the spell ends, subsequent damage is no longer divided between the target and you, but damage already split is not reassigned to the target. If you and the target of the spell move out of range of each other, the spell ends.</p>"
+      "value": "<p>This spell wards the target and creates a mystic connection between you and the target so that some of its wounds are transferred to you. Casting this spell requires you to spend 1 Resolve Point. The target takes only half damage from all wounds and attacks (including those dealt by special abilities) that deal Hit Point damage, and you take the amount of damage not taken by the target. Only Hit Point damage is transferred in this manner; the target’s Stamina Points are damaged as normal. If you still have Stamina Points, you take the damage to your Stamina Points before Hit Points, as with normal damage.</p>\n<p>Forms of harm that do not involve Hit Points, such as @UUID[Compendium.sfrpg.rules.Item.PqV3OCbUTyk2upPD]{Charm effects}, temporary ability damage, ability drain, permanent negative levels, and death effects, are not affected. When the spell ends, subsequent damage is no longer divided between the target and you, but damage already split is not reassigned to the target. If you and the target of the spell move out of range of each other, the spell ends.</p>"
     },
     "descriptors": [],
     "dismissible": true,
     "duration": {
-      "units": "",
-      "value": "1 hour/level (D)"
+      "units": "hour",
+      "value": "@details.cl.value"
     },
     "formula": "",
     "isActive": null,
@@ -66,11 +73,12 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
-      "additional": "5 ft.",
-      "per": "2 levels",
-      "units": "ft",
-      "value": 25
+      "additional": "",
+      "per": "",
+      "units": "close",
+      "value": null
     },
     "rollNotes": "",
     "save": {

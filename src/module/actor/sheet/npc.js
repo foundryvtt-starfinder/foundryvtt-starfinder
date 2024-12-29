@@ -17,7 +17,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
 
     static get defaultOptions() {
         const options = super.defaultOptions;
-        mergeObject(options, {
+        foundry.utils.mergeObject(options, {
             classes: options.classes.concat(['sfrpg', 'actor', 'sheet', 'npc']),
             width: 720
             // height: 765
@@ -55,9 +55,11 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
     async getData() {
         const data = await super.getData();
 
-        let cr = parseFloat(data.system.details.cr || 0);
-        let crs = { 0: "0", 0.125: "1/8", [1 / 6]: "1/6", 0.25: "1/4", [1 / 3]: "1/3", 0.5: "1/2" };
+        const cr = parseFloat(data.system.details.cr || 0);
+        const crs = { 0: "0", 0.125: "1/8", [1 / 6]: "1/6", 0.25: "1/4", [1 / 3]: "1/3", 0.5: "1/2" };
         data.labels["cr"] = cr >= 1 ? String(cr) : crs[cr] || 1;
+
+        data.combatRoleImage = CONFIG.SFRPG.combatRoleImages[this.actor.system?.details?.combatRole];
 
         return data;
     }
@@ -108,10 +110,10 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
                 dataset: {},
                 allowAdd: false
             }, */
-            feat: deepClone(CONFIG.SFRPG.featureCategories.feat),
-            classFeature: deepClone(CONFIG.SFRPG.featureCategories.classFeature),
-            speciesFeature: deepClone(CONFIG.SFRPG.featureCategories.speciesFeature),
-            universalCreatureRule: deepClone(CONFIG.SFRPG.featureCategories.universalCreatureRule),
+            feat: foundry.utils.deepClone(CONFIG.SFRPG.featureCategories.feat),
+            classFeature: foundry.utils.deepClone(CONFIG.SFRPG.featureCategories.classFeature),
+            speciesFeature: foundry.utils.deepClone(CONFIG.SFRPG.featureCategories.speciesFeature),
+            universalCreatureRule: foundry.utils.deepClone(CONFIG.SFRPG.featureCategories.universalCreatureRule),
             resources: {
                 category: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"),
                 items: [],
@@ -153,6 +155,14 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
                 this._prepareActorResource(item, actorData);
             }
 
+            if (item.config.hasAttack) {
+                this._prepareAttackString(item);
+            }
+
+            if (item.config.hasDamage) {
+                this._prepareDamageString(item);
+            }
+
             if (droneItemTypes.includes(item.type)) {
                 arr[3].push(item); // droneItems
             } else if (item.type === "spell") {
@@ -162,12 +172,10 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
                 } else {
                     arr[1].push(item); // other
                 }
+            } else if (item.type === "effect") {
+                arr[2].push(item); // conditionItems
             } else if (item.type === "feat") {
-                if ((item.system.requirements?.toLowerCase() || "") === "condition") {
-                    arr[2].push(item); // conditionItems
-                } else {
-                    arr[1].push(item); // other
-                }
+                arr[1].push(item); // other
                 item.isFeat = true;
             } else if (item.type === "actorResource") arr[4].push(item); // actorResources
             else arr[1].push(item); // other
@@ -234,6 +242,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
 
         features.resources.items = actorResources;
 
+        // Add appropriate items to inventory, exclude weapons that are not equipment, like unarmed strikes and natural weapons
         this.processItemContainment(itemsToProcess, function(itemType, itemData) {
             inventory.inventory.items.push(itemData);
         });
@@ -247,7 +256,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         };
 
         if (this.actor.type === "npc2") {
-            let [permanent, temporary, itemModifiers, conditions, misc] = actorData.modifiers.reduce((arr, modifier) => {
+            const [permanent, temporary, itemModifiers, conditions, misc] = actorData.modifiers.reduce((arr, modifier) => {
                 if (modifier.subtab === "permanent") arr[0].push(modifier);
                 else if (modifier.subtab === "conditions") arr[3].push(modifier);
                 else arr[1].push(modifier); // Any unspecific categories go into temporary.
@@ -275,7 +284,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
      */
     _updateObject(event, formData) {
         const crs = { "1/8": 0.125, "1/6": 1 / 6, "1/4": 0.25, "1/3": 1 / 3, "1/2": 0.5 };
-        let crv = "system.details.cr";
+        const crv = "system.details.cr";
         let cr = formData[crv];
         cr = crs[cr] || parseFloat(cr);
         if (cr) formData[crv] = cr < 1 ? cr : parseInt(cr);
@@ -326,7 +335,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
     }
 
     async _duplicateAsNewStyleNPC(event) {
-        let actorData = deepClone(this.actor);
+        let actorData = this.actor.toObject();
 
         if (this.token && !this.token.actorLink) {
             // If it is an unlinked actor, ask if the user wants to duplicate the original actor, or use the unlinked actor data instead
@@ -348,7 +357,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
             if (useOriginalActor === true) {
                 const originalActor = game.actors.get(this.token.actor.id);
                 if (originalActor) {
-                    actorData = deepClone(originalActor);
+                    actorData = originalActor.toObject();
                 }
             }
         }

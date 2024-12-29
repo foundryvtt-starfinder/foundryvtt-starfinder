@@ -2,7 +2,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
 
     hasUses() {
         const itemData = this.system;
-        return itemData.uses && itemData.uses.max && itemData.uses.value;
+        return (Number(itemData.uses?.max) || itemData.uses?.total) && (itemData.uses?.value !== null && itemData.uses?.value !== undefined);
     }
 
     getRemainingUses() {
@@ -12,7 +12,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
 
     getMaxUses() {
         const itemData = this.system;
-        return itemData.uses?.max || 0;
+        return itemData.uses?.total || itemData.uses?.max || 0;
     }
 
     canBeUsed() {
@@ -24,13 +24,13 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
         if (this.type === "vehicleSystem") {
             return itemData.canBeActivated;
         } else {
-            return !!(itemData.activation.type);
+            return !!(itemData?.activation?.type);
         }
     }
 
     isActive() {
         const itemData = this.system;
-        return itemData.isActive;
+        return !!(itemData.isActive);
     }
 
     setActive(active) {
@@ -40,7 +40,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
             return;
         }
 
-        if (!this.canBeActivated() || this.isActive() == active) {
+        if (!this.canBeActivated() || this.isActive() === active) {
             return;
         }
 
@@ -60,22 +60,28 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
         updateData['system.isActive'] = active;
 
         const updatePromise = this.update(updateData);
-        const rollMode = game.settings.get("core", "rollMode");
 
-        if (active) {
+        if (active || this.system.duration.value || this.system.uses.max > 0) {
             updatePromise.then(() => {
                 // Render the chat card template
-                const templateData = {
-                    actor: this.actor,
-                    item: this,
-                    action: "SFRPG.ChatCard.ItemActivation.Activates",
-                    labels: this.labels,
-                    hasAttack: this.hasAttack,
-                    hasDamage: this.hasDamage,
-                    isVersatile: this.isVersatile,
-                    hasSave: this.hasSave,
-                    hasSkill: this.hasSkill
-                };
+                const templateData = active
+                    ? {
+                        actor: this.actor,
+                        item: this,
+                        action: "SFRPG.ChatCard.ItemActivation.Activates",
+                        labels: this.labels,
+                        hasAttack: this.hasAttack,
+                        hasDamage: this.hasDamage,
+                        isVersatile: this.isVersatile,
+                        hasSave: this.hasSave,
+                        hasSkill: this.hasSkill,
+                        hasArea: this.hasArea
+                    }
+                    : {
+                        actor: this.actor,
+                        item: this,
+                        action: "SFRPG.ChatCard.ItemActivation.Deactivates"
+                    };
 
                 if (this.actor.token) {
                     templateData.tokenId = this.actor.token.id;
@@ -87,72 +93,25 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                 htmlPromise.then((html) => {
                     // Create the chat message
                     const chatData = {
-                        type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+                        type: CONST.CHAT_MESSAGE_STYLES.OTHER,
                         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
                         content: html,
-                        rollMode: rollMode
+                        flags: {
+                            sfrpg: {
+                                item: this.uuid,
+                                actor: this.actor.uuid
+                            }
+                        }
                     };
 
-                    // Toggle default roll mode
-                    if (["gmroll", "blindroll"].includes(rollMode)) {
-                        chatData["whisper"] = ChatMessage.getWhisperRecipients("GM");
-                    }
-                    if (rollMode === "blindroll") {
-                        chatData["blind"] = true;
-                    }
-                    if (rollMode === "selfroll") {
-                        chatData["whisper"] = ChatMessage.getWhisperRecipients(game.user.name);
-                    }
-
+                    if (!active) chatData.action = "SFRPG.ChatCard.ItemActivation.Deactivates";
+                    const rollMode = game.settings.get("core", "rollMode");
+                    ChatMessage.applyRollMode(chatData, rollMode);
                     ChatMessage.create(chatData, { displaySheet: false });
                 });
 
                 Hooks.callAll("itemActivationChanged", {actor: this.actor, item: this, isActive: active});
             });
-        } else {
-            if (this.system.duration.value || this.system.uses.max > 0) {
-                updatePromise.then(() => {
-                    // Render the chat card template
-                    const templateData = {
-                        actor: this.actor,
-                        item: this,
-                        action: "SFRPG.ChatCard.ItemActivation.Deactivates"
-                    };
-
-                    if (this.actor.token) {
-                        templateData.tokenId = this.actor.token.id;
-                        templateData.sceneId = this.actor.token.parent.id;
-                    }
-
-                    const template = `systems/sfrpg/templates/chat/item-action-card.hbs`;
-                    const htmlPromise = renderTemplate(template, templateData);
-
-                    htmlPromise.then((html) => {
-                        // Create the chat message
-                        const chatData = {
-                            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
-                            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                            content: html,
-                            rollMode: rollMode
-                        };
-
-                        // Toggle default roll mode
-                        if (["gmroll", "blindroll"].includes(rollMode)) {
-                            chatData["whisper"] = ChatMessage.getWhisperRecipients("GM");
-                        }
-                        if (rollMode === "blindroll") {
-                            chatData["blind"] = true;
-                        }
-                        if (rollMode === "selfroll") {
-                            chatData["whisper"] = ChatMessage.getWhisperRecipients(game.user.name);
-                        }
-
-                        ChatMessage.create(chatData, { displaySheet: false });
-                    });
-
-                    Hooks.callAll("itemActivationChanged", {actor: this.actor, item: this, isActive: active});
-                });
-            }
         }
 
         return updatePromise;

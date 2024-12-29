@@ -2,6 +2,11 @@
   "_id": "fd635J8PEBfOt3Lx",
   "name": "Puncture Veil",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "systems/sfrpg/icons/spells/puncture_veil.webp",
   "system": {
     "type": "",
@@ -9,6 +14,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "action",
@@ -17,11 +23,13 @@
     },
     "allowedClasses": {
       "myst": false,
+      "precog": false,
       "tech": false,
       "wysh": true
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": null,
       "value": null
@@ -44,18 +52,23 @@
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>You grasp onto a space-time filled with microscopic needles and use them to pierce into your reality. One creature takes 1d4 piercing damage and gains @UUID[Compendium.sfrpg.conditions.v9RNVTqyTyaPchvd]{Bleeding} 1 for 3 rounds.</p>\n<p>You can cast this spell as a full action. If you do, you have two options. You can target two creatures within 20 feet of each other with the effect described above, or target only one creature, who takes 2d4 piercing damage and gains @UUID[Compendium.sfrpg.conditions.v9RNVTqyTyaPchvd]{Bleeding} 2 for 3 rounds.</p>"
+      "value": "<p>You grasp onto a space-time filled with microscopic needles and use them to pierce into your reality. One creature takes 1d4 piercing damage and gains @UUID[Compendium.sfrpg.conditions.Item.v9RNVTqyTyaPchvd]{Bleeding} 1 for 3 rounds.</p>\n<p>You can cast this spell as a full action. If you do, you have two options. You can target two creatures within 20 feet of each other with the effect described above, or target only one creature, who takes 2d4 piercing damage and gains @UUID[Compendium.sfrpg.conditions.Item.v9RNVTqyTyaPchvd]{Bleeding} 2 for 3 rounds.</p>"
     },
     "descriptors": [],
     "dismissible": false,
     "duration": {
-      "units": "",
-      "value": "instantaneous"
+      "units": "instantaneous",
+      "value": ""
     },
     "formula": "",
+    "isActive": null,
+    "isVariableLevel": false,
     "level": 1,
     "materials": {
       "consumed": false,
@@ -68,12 +81,14 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
-      "additional": "10 ft.",
-      "per": "level",
-      "units": "ft",
-      "value": 100
+      "additional": "",
+      "per": "",
+      "units": "medium",
+      "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,

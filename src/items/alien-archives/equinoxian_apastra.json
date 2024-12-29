@@ -2,31 +2,23 @@
   "_id": "NrKZ0nm8i4hjhPZE",
   "name": "Equinoxian Apastra",
   "type": "npc2",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "_id": "uKT1BzUpEPPAdA6j",
       "name": "Solar Weapon",
       "type": "weapon",
-      "ammunition": false,
-      "augmentation": false,
-      "consumable": false,
-      "container": false,
-      "equipment": false,
-      "fusion": true,
-      "goods": false,
-      "hybrid": false,
-      "img": "icons/svg/item-bag.svg",
-      "magic": false,
-      "shield": false,
-      "spell": false,
-      "storage": {
-        "type": "slot",
-        "affectsEncumbrance": true,
-        "amount": 0,
-        "subtype": "fusion",
-        "weightProperty": "level"
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
       },
+      "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -43,6 +35,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -113,6 +106,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -130,6 +124,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -233,6 +228,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -240,6 +236,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -255,37 +252,18 @@
         },
         "weaponCategory": "uncategorized",
         "weaponType": "basicM"
-      },
-      "technological": false,
-      "upgrade": false,
-      "vehicleAttack": false,
-      "vehicleSystem": false,
-      "weapon": false,
-      "weaponAccessory": false
+      }
     },
     {
       "_id": "BSAehq8QFwATuqRr",
       "name": "Thrown Solar Weapon",
       "type": "weapon",
-      "ammunition": false,
-      "augmentation": false,
-      "consumable": false,
-      "container": false,
-      "equipment": false,
-      "fusion": true,
-      "goods": false,
-      "hybrid": false,
-      "img": "icons/svg/item-bag.svg",
-      "magic": false,
-      "shield": false,
-      "spell": false,
-      "storage": {
-        "type": "slot",
-        "affectsEncumbrance": true,
-        "amount": 0,
-        "subtype": "fusion",
-        "weightProperty": "level"
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
       },
+      "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -302,6 +280,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -372,6 +351,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -389,6 +369,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -492,6 +473,7 @@
           "units": "ft",
           "value": 40
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -499,6 +481,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -514,18 +497,17 @@
         },
         "weaponCategory": "uncategorized",
         "weaponType": "smallA"
-      },
-      "technological": false,
-      "upgrade": false,
-      "vehicleAttack": false,
-      "vehicleSystem": false,
-      "weapon": false,
-      "weaponAccessory": false
+      }
     },
     {
       "_id": "ZvgqVrZvsnQjT0ze",
       "name": "Solar Storm (Su)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
@@ -533,6 +515,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "action",
@@ -541,6 +524,7 @@
         },
         "area": {
           "effect": "burst",
+          "shapable": false,
           "shape": "sphere",
           "units": "ft",
           "value": 15
@@ -570,6 +554,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -578,6 +563,11 @@
           "value": "<p>Once a day, an apastra can give in to the gravitonic and photonic forces that rage within it, expelling this energy in a cataclysmic storm. The solar storm has a range of 60 feet and a 15-foot radius. Creatures that enter the storm or that begin their turns in it take 8d6 fire damage (Fortitude DC 21 half) and must succeed at a DC 21 Reflex save or be hurled 1d6×10 feet in a random direction and fall prone (creatures that hit a wall or other barrier take no additional damage). The storm is difficult terrain and obscures all sight beyond 5 feet. Creatures within 5 feet of an attacker while in the storm have concealment. When the apastra uses solar storm, it can maintain the storm for up to an additional 1d3 rounds. An apastra must take a full action each round to maintain the storm, and it can move the storm up to 30 feet as part of that full action. An apastra is immune to the effects of its own or any other apastra’s solar storm.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": ""
@@ -585,6 +575,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -596,6 +587,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "fort",
           "dc": "21",
@@ -617,10 +609,16 @@
       "_id": "SCCIaAMTWf66oirU",
       "name": "Stellar Revelations (Su)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -629,6 +627,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -642,6 +641,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -650,6 +650,11 @@
           "value": "<p>An apastra can use the black hole and supernova solarian stellar revelations. It can use either stellar revelation once before that revelation needs to recharge. Once it has used each stellar revelation once, they both recharge in 1d4 rounds.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -657,6 +662,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -668,6 +674,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -689,10 +696,16 @@
       "_id": "SmfaKbdtnKwKUyeR",
       "name": "Perfect Alignment (Su)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -701,6 +714,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -714,6 +728,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -722,6 +737,11 @@
           "value": "<p>An apastra is always both fully graviton attuned and fully photon attuned.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -729,6 +749,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -740,6 +761,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -761,6 +783,11 @@
       "_id": "TY13vysM2xce2qU1",
       "name": "Solar Manifestation (Su)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "systems/sfrpg/icons/classes/solar_manifestation.webp",
       "system": {
         "type": "",
@@ -768,6 +795,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -776,6 +804,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -789,6 +818,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -797,6 +827,11 @@
           "value": "<p>This functions as the solar manifestation solarian class feature.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -804,6 +839,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -815,6 +851,7 @@
           "value": null
         },
         "requirements": "1st Level",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -836,6 +873,11 @@
       "_id": "027qgyUhiBa1etne",
       "name": "Flashing Strikes (Ex) (Solarian)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "systems/sfrpg/icons/classes/flashing_strikes.webp",
       "system": {
         "type": "",
@@ -843,6 +885,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -851,6 +894,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -864,14 +908,20 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.kuEdVbzv5zXIO4wk]{Solarian}</p>\n<p>Your mastery of melee combat allows you to make multiple attacks more accurately. When making a full attack entirely with melee weapons, you take a –3 penalty to each attack roll instead of the normal –4 penalty.</p>"
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.kuEdVbzv5zXIO4wk]{Solarian}</p>\n<p>Your mastery of melee combat allows you to make multiple attacks more accurately. When making a full attack entirely with melee weapons, you take a –3 penalty to each attack roll instead of the normal –4 penalty.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -879,6 +929,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -890,6 +941,7 @@
           "value": null
         },
         "requirements": "7th Level",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -911,6 +963,11 @@
       "_id": "I2HWDF8c0nuup02t",
       "name": "Supernova (15 ft., 16d6 F, DC 21)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "systems/sfrpg/icons/classes/supernova.webp",
       "system": {
         "type": "",
@@ -918,6 +975,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "action",
@@ -926,6 +984,7 @@
         },
         "area": {
           "effect": "burst",
+          "shapable": false,
           "shape": "sphere",
           "units": "ft",
           "value": 15
@@ -955,14 +1014,20 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p>When you’re fully photon-attuned, as a standard action, you can deal 1d6 fire damage plus 1d6 additional fire damage per solarian level to all creatures within 10 feet of you. A creature that succeeds at a Reflex save takes half damage. At 9th level, you can increase the radius to 15 feet, and at 17th level, you can increase the radius to 20 feet. After you use this revelation, you immediately become unattuned. Supernova functions as a zenith revelation for the purposes of abilities that reference them.</p>"
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p>When you’re fully photon-attuned, as a standard action, you can deal 1d6 fire damage plus 1d6 additional fire damage per solarian level to all creatures within 10 feet of you. A creature that succeeds at a Reflex save takes half damage. At 9th level, you can increase the radius to 15 feet, and at 17th level, you can increase the radius to 20 feet. After you use this revelation, you immediately become unattuned. Supernova functions as a zenith revelation for the purposes of abilities that reference them.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": ""
@@ -970,6 +1035,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -981,6 +1047,7 @@
           "value": null
         },
         "requirements": "1st Level",
+        "rollNotes": "",
         "save": {
           "type": "reflex",
           "dc": "21",
@@ -1002,6 +1069,11 @@
       "_id": "qBStP1yL1g6relbP",
       "name": "Black Hole (35 ft., pull 25 ft., DC 21)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "systems/sfrpg/icons/classes/blackhole.webp",
       "system": {
         "type": "",
@@ -1009,6 +1081,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "action",
@@ -1017,6 +1090,7 @@
         },
         "area": {
           "effect": "burst",
+          "shapable": false,
           "shape": "sphere",
           "units": "ft",
           "value": 35
@@ -1030,14 +1104,20 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p>When you’re fully graviton-attuned, as a standard action, you can pull any number of creatures within 20 feet of you closer. You choose which creatures are affected and which ones aren’t. Each target must succeed at a Fortitude save or be pulled 10 feet toward you. The range of this revelation and the distance pulled increase by 5 feet at 5th level and every 4 levels thereafter. Solid objects do not block this ability, but any creature that runs into a solid object ceases moving closer to you. Creatures moved by this ability do not provoke attacks of opportunity from this movement. After you use this revelation, you immediately become unattuned. Black hole functions as a zenith revelation for the purposes of abilities that reference them.</p>"
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p>When you’re fully graviton-attuned, as a standard action, you can pull any number of creatures within 20 feet of you closer. You choose which creatures are affected and which ones aren’t. Each target must succeed at a Fortitude save or be pulled 10 feet toward you. The range of this revelation and the distance pulled increase by 5 feet at 5th level and every 4 levels thereafter. Solid objects do not block this ability, but any creature that runs into a solid object ceases moving closer to you. Creatures moved by this ability do not provoke attacks of opportunity from this movement. After you use this revelation, you immediately become unattuned. Black hole functions as a zenith revelation for the purposes of abilities that reference them.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": ""
@@ -1045,6 +1125,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -1056,6 +1137,7 @@
           "value": null
         },
         "requirements": "1st Level",
+        "rollNotes": "",
         "save": {
           "type": "reflex",
           "dc": "21",
@@ -1077,6 +1159,11 @@
       "_id": "AtWUjAtx0qPiaYZu",
       "name": "Solarian's Onslaught (Ex)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "systems/sfrpg/icons/classes/solarian_onslaught.webp",
       "system": {
         "type": "",
@@ -1084,6 +1171,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -1092,6 +1180,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -1105,14 +1194,20 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.kuEdVbzv5zXIO4wk]{Solarian}</p>\n<p>When making a full attack, you can make up to three attacks instead of two attacks. You take a –6 penalty to these attacks instead of a –4 penalty. If you have the flashing strikes class feature, you instead take a –5 penalty to these attacks as long as they are all melee attacks.</p>"
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.kuEdVbzv5zXIO4wk]{Solarian}</p>\n<p>When making a full attack, you can make up to three attacks instead of two attacks. You take a –6 penalty to these attacks instead of a –4 penalty. If you have the flashing strikes class feature, you instead take a –5 penalty to these attacks as long as they are all melee attacks.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -1120,6 +1215,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -1131,6 +1227,7 @@
           "value": null
         },
         "requirements": "13th Level",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -1153,16 +1250,19 @@
     "name": "Equinoxian Apastra",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -1183,15 +1283,30 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -1204,12 +1319,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "tint": null
+      "src": "icons/svg/mystery-man.svg",
+      "tint": "#ffffff"
     },
     "width": 1
   },
@@ -1259,12 +1379,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -1395,8 +1521,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<h2>Equinoxian</h2>\n<p>Equinoxians are rare and unusual native outsiders who simultaneously embody the power of both black holes and blazing suns. Alternating waves of photons and gravitons constantly travel along their roughly humanoid‑shaped bodies. An equinoxian’s head and legs might shine with light while its torso and arms remain as black as the void, and a few seconds later, the opposite may be true, as waves of energy ripple through the equinoxian’s body. As equinoxians age and their connection to the Cycle grows, they must learn to master the perfect balance of the contradictory powers within themselves, lest they lose control of those forces.</p>\n<p>Equinoxian periastras are masters of the Cycle, perpetually balancing the gravitonic and photonic forces comprising their bodies, and they are legendary for their fighting prowess. They oppose forces of chaos and guard sites holy to solarians, allowing visitors to enter only after they have proven their mastery of the Cycle in combat.</p>\n<p>Those equinoxians who cannot maintain balance are driven mad, becoming the tragic and powerful figures known as apastras. Apastras seek to cause imbalance and collapse wherever they can, and solarians justly fear the enraged creatures.</p>",
@@ -1406,6 +1535,10 @@
       "cr": 15,
       "environment": "any",
       "organization": "solitary, cluster (2-4), or constellation (5-8)",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AA3 pg. 30",
@@ -1710,6 +1843,9 @@
       },
       "senses": "darkvision 60 ft.",
       "size": "medium",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

@@ -2,12 +2,457 @@
   "_id": "B6wIE92BgcY7ZdLY",
   "name": "Scout L8",
   "type": "drone",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
+  "img": "systems/sfrpg/images/cup/iconics/portrait/mechanicdrone.webp",
   "items": [
     {
-      "_id": "sXGo7LbSlwQWfyic",
+      "_id": "7bEYp5uTcDQsQkmW",
+      "name": "Weapon Focus (Combat)",
+      "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.sfrpg.feats.Item.bMZTC3m95OSPFlTG"
+        }
+      },
+      "img": "systems/sfrpg/icons/feats/weapon_focus.webp",
+      "system": {
+        "type": "",
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": null,
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>You have increased training in a particular weapon type, making it easier to hit your target.</p>\n<p><strong>Prerequisites</strong>: Proficiency with selected weapon type.</p><hr /><p><strong>Benefit</strong>: Chose one weapon type (small arms, longarms, heavy weapons, etc.). You gain a +1 bonus to attack rolls with that weapon type. If your base attack bonus is at least 3 lower than your character level (or your mechanic’s class level, if you are a drone), you gain a +2 bonus instead.</p>\n<p><em>Select weapon type in the Modifiers tab.</em></p>"
+        },
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "feat",
+          "combat": true,
+          "specialAbilityType": ""
+        },
+        "duration": {
+          "units": "",
+          "value": ""
+        },
+        "formula": "",
+        "isActive": null,
+        "modifiers": [
+          {
+            "_id": "d647bc9f-f4a8-405b-b65d-9bd57647bfeb",
+            "name": "Weapon Focus (Combat)",
+            "type": "untyped",
+            "condition": "",
+            "effectType": "weapon-attacks",
+            "enabled": true,
+            "max": 1,
+            "modifier": "ternary(gte((@details.level.value - @attributes.baseAttackBonus.value),3),2,1)",
+            "modifierType": "constant",
+            "notes": "",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": "smallA"
+          }
+        ],
+        "properties": {},
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": null,
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": "negate"
+        },
+        "source": "Core Rulebook",
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "uses": {
+          "max": 0,
+          "per": "",
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "wM0VFVeje0lTpAJd",
+      "name": "Mobility (Combat)",
+      "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.sfrpg.feats.Item.K1DuZQv4CKQHxnIk"
+        }
+      },
+      "img": "systems/sfrpg/icons/feats/mobility.webp",
+      "system": {
+        "type": "",
+        "ability": "",
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": null,
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>You can easily move past dangerous foes.</p>\n<p><strong>Prerequisites</strong>: Dex 13.</p>\n<hr />\n<p><strong>Benefit</strong>: You gain a +4 bonus to your Armor Class against attacks of opportunity that you provoke by leaving a threatened square.</p>"
+        },
+        "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": true,
+          "specialAbilityType": ""
+        },
+        "duration": {
+          "units": "",
+          "value": ""
+        },
+        "formula": "",
+        "isActive": null,
+        "modifiers": [],
+        "properties": {},
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": null,
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": "negate"
+        },
+        "source": "Core Rulebook",
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "uses": {
+          "max": 0,
+          "per": "",
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "Eq27rPwW9RAaQuXb",
+      "name": "Shot on the Run (Combat)",
+      "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.sfrpg.feats.Item.ACti4nBLewJMvG8R"
+        }
+      },
+      "img": "systems/sfrpg/icons/feats/shot_on_the_run.webp",
+      "system": {
+        "type": "",
+        "ability": "",
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "full",
+          "condition": "",
+          "cost": 1
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": null,
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>You can move, make a ranged attack, and move again before your foes can react.</p>\n<p><strong>Prerequisites</strong>: Dex 15, @UUID[Compendium.sfrpg.feats.Item.K1DuZQv4CKQHxnIk]{Mobility (Combat)}, base attack bonus +4.</p>\n<hr />\n<p><strong>Benefit</strong>: As a full action, you can move up to your speed and make a single ranged attack at any point during your movement. If you have the @UUID[Compendium.sfrpg.class-features.Item.MBNI94tbMoqizPUk]{Trick Attack (Ex)} class feature, you can take your movement from trick attack at any time during a trick attack (see page 93) with a ranged weapon (instead of only before).</p>\n<p><strong>Normal</strong>: You can move only before or after making a ranged attack, not both.</p>"
+        },
+        "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": true,
+          "specialAbilityType": ""
+        },
+        "duration": {
+          "units": "",
+          "value": ""
+        },
+        "formula": "",
+        "isActive": null,
+        "modifiers": [],
+        "properties": {},
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": null,
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": "negate"
+        },
+        "source": "Core Rulebook",
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "uses": {
+          "max": 0,
+          "per": "",
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "0DZlhcIsKWef9FD3",
+      "name": "Skill Unit (Ex)",
+      "type": "mod",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.sfrpg.class-features.Item.6cm9UHSlmWPU9QQe"
+        }
+      },
+      "img": "systems/sfrpg/icons/classes/skill_unit.webp",
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "additionalMovement": "",
+        "additionalSenses": "",
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": 0
+        },
+        "arms": {
+          "armType": "general",
+          "number": 0
+        },
+        "attackBonus": 0,
+        "bonusSkill": "acr",
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.cA0NuGh484BwlDjX]{Drone}</p>\n<p>Choose one of the following skills: Acrobatics, Athletics, Computers, Engineering, Perception, or Stealth. This is a class skill for your drone, and it gains a number of ranks in the chosen skill equal to your class level. Your drone can use this skill when not under your direct control. You can change your drone’s skill unit whenever you rebuild your drone from scratch. Additionally, whenever you are directly controlling your drone, it can use any of your skill ranks if you wish, assuming it has the appropriate tools to do so (a drone without manipulator arms cannot use Engineering to disable a device, for example).</p>\n<p><em>On Details page, select one of the skills listed above as the Bonus Skill</em></p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "text",
+          "value": null
+        },
+        "formula": "",
+        "isActive": null,
+        "isArmorSlot": false,
+        "isFree": true,
+        "maxInstalls": 1,
+        "modifiers": [],
+        "properties": {},
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "shieldProficiency": "",
+        "source": "",
+        "spellResistance": 0,
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        },
+        "weaponProficiency": ""
+      }
+    },
+    {
+      "_id": "wh5A765RDYaBl76y",
       "name": "Hover Drone",
       "type": "chassis",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.sfrpg.class-features.Item.tp8RpPeUbTgly8xZ"
+        }
+      },
       "img": "systems/sfrpg/icons/classes/hover_drone.webp",
       "system": {
         "type": "",
@@ -37,7 +482,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Y4ajp13ACVnzaS5s]{Drone Chassis}</p>\n<p>The smallest of the chassis options, the hover drone is made from a lightweight frame equipped with miniature hoverjets, rotors, turbofans, or a similar form of aerial propulsion (small legs or wheels provide propulsion on land). This drone can fly at a good pace and avoid obstacles, but it is not very stealthy.</p>\n<h2>Initial Mods</h2>\n<p>@UUID[Compendium.sfrpg.class-features.KiseyOPy3VaVldlw]{Flight System (Ex)}(x2, included in its speed),@UUID[Compendium.sfrpg.class-features.dDZLj7L4psee7UZc]{Weapon Mount (Ex)}</p>\n<h2>Bonus Skill Unit</h2>\n<p>Acrobatics @UUID[Compendium.sfrpg.class-features.6cm9UHSlmWPU9QQe]{Skill Unit (Ex)}</p>"
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.Y4ajp13ACVnzaS5s]{Drone Chassis}</p>\n<p>The smallest of the chassis options, the hover drone is made from a lightweight frame equipped with miniature hoverjets, rotors, turbofans, or a similar form of aerial propulsion (small legs or wheels provide propulsion on land). This drone can fly at a good pace and avoid obstacles, but it is not very stealthy. A hover drone with melee weapon arms or weapon mounts can use weapons designed for Small or Medium creatures without penalty.</p>\n<h2>Initial Mods</h2>\n<p>@UUID[Compendium.sfrpg.class-features.Item.KiseyOPy3VaVldlw]{Flight System (Ex)} (x2, included in its speed), @UUID[Compendium.sfrpg.class-features.Item.dDZLj7L4psee7UZc]{Weapon Mount (Ex)}</p>\n<h2>Bonus Skill Unit</h2>\n<p>Acrobatics @UUID[Compendium.sfrpg.class-features.Item.6cm9UHSlmWPU9QQe]{Skill Unit (Ex)}</p>"
         },
         "eac": 11,
         "fort": "slow",
@@ -48,33 +493,72 @@
         "size": "tiny",
         "source": "",
         "speed": {
-          "special": "fly 30 ft. (average)",
-          "value": 30
+          "burrowing": {
+            "base": 0
+          },
+          "climbing": {
+            "base": 0
+          },
+          "flying": {
+            "base": 0
+          },
+          "land": {
+            "base": 30
+          },
+          "mainMovement": "land",
+          "movementType": "flying",
+          "special": "",
+          "swimming": {
+            "base": 0
+          },
+          "value": null
         },
         "will": "slow"
       }
     },
     {
-      "_id": "8oFyX6T9kexGZDYR",
-      "name": "Weapon Focus (Combat)",
-      "type": "feat",
-      "img": "systems/sfrpg/icons/feats/weapon_focus.webp",
+      "_id": "0QvrmK6PVjGAzLEo",
+      "name": "Weapon Mount (Ex)",
+      "type": "mod",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.sfrpg.class-features.Item.dDZLj7L4psee7UZc"
+        }
+      },
+      "img": "systems/sfrpg/icons/classes/weapon_mount.webp",
       "system": {
         "type": "",
-        "ability": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
           "cost": 0
         },
+        "additionalMovement": "",
+        "additionalSenses": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": 0
+        },
+        "arms": {
+          "armType": "ranged",
+          "number": 1
         },
         "attackBonus": 0,
+        "bonusSkill": "",
         "chatFlavor": "",
         "critical": {
           "effect": "",
@@ -83,85 +567,214 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>You have increased training in a particular weapon type, making it easier to hit your target.</p>\n<p><strong>Prerequisites</strong>: Proficiency with selected weapon type.</p>\n<hr />\n<p><strong>Benefit</strong>: Chose one weapon type (small arms, longarms, heavy weapons, etc.). You gain a +1 bonus to attack rolls with that weapon type. If your base attack bonus is at least 3 lower than your character level (or your mechanic’s class level, if you are a drone), you gain a +2 bonus instead.</p>"
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.QsCRXffpsDoMvPnT]{Basic Mods}</p>\n<p>You can affix a small arm or another one-handed ranged weapon on your drone, allowing it to wield that weapon and attack with it. This weapon cannot be disarmed. Mounting a longarm, a heavy weapon, or another two-handed ranged weapon requires two weapon mounts. A weapon mount can hold up to two batteries, two magazines, or two of another type of ammunition for the affixed weapon, provided this ammunition is of light bulk or less. Multiple weapon mounts used to affix a single two-handed weapon count as a single weapon mount for the purpose of how much ammunition it can hold. The drone reloads these batteries or magazines automatically, which takes the usual amount of time for the weapon. Spent batteries or magazines are stored within the drone. You can replace all of a weapon mount’s batteries or magazines as a move action. You must purchase separately or already have the weapon and ammunition for use with a weapon mount. You can replace the weapon with any other weapon that meets the criteria for your mount (for example, if you have two weapon mounts, you could replace a longarm with a heavy weapon). Swapping out a weapon in a weapon mount requires use of your custom rig and 1 hour of work. You can select this mod multiple times, each time adding an additional weapon mount to the drone.</p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "text",
+          "value": null
+        },
+        "formula": "",
+        "isActive": null,
+        "isArmorSlot": false,
+        "isFree": true,
+        "maxInstalls": 1,
+        "modifiers": [],
+        "properties": {},
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "shieldProficiency": "",
+        "source": "",
+        "spellResistance": 0,
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        },
+        "weaponProficiency": ""
+      }
+    },
+    {
+      "_id": "Srl0KkkLHi3ocJeo",
+      "name": "Flight System (Ex; Drone) x 2",
+      "type": "mod",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.sfrpg.class-features.Item.KiseyOPy3VaVldlw"
+        }
+      },
+      "img": "systems/sfrpg/icons/classes/flight_system.webp",
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "additionalMovement": "flight=land speed; average) Unlimited Time",
+        "additionalSenses": "",
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": 0
+        },
+        "arms": {
+          "armType": "general",
+          "number": null
+        },
+        "attackBonus": 0,
+        "bonusSkill": "",
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.cQtmz297P5g6g5xv]{Advanced Mods}</p>\n<p>Your drone gains a fly speed equal to half its land speed with average maneuverability for up to 10 minutes per day. This duration need not be continuous, but it must be used in 1-minute increments. You can select this mod a second time; in this case, the drone’s fly speed increases to its full land speed, its maneuverability increases to perfect, and there is no limit on the amount of time it can fly.</p>\n<p><em>If selected a second time, edit the modifier to reflect full speed.</em></p>"
         },
         "descriptors": [],
         "duration": {
           "units": "",
-          "value": ""
+          "value": null
         },
         "formula": "",
         "isActive": null,
+        "isArmorSlot": false,
+        "isFree": true,
+        "maxInstalls": 1,
         "modifiers": [
           {
-            "_id": "d647bc9f-f4a8-405b-b65d-9bd57647bfeb",
-            "name": "Weapon Focus (Combat)",
+            "_id": "25bb440a-6918-45f8-9697-d131e70ce4c7",
+            "name": "Flight System (Ex)",
             "type": "untyped",
             "condition": "",
-            "effectType": "weapon-attacks",
+            "container": {
+              "actorId": "FMgL3IvelpWN9FLl",
+              "itemId": "Srl0KkkLHi3ocJeo"
+            },
+            "effectType": "specific-speed",
             "enabled": true,
-            "modifier": "1",
+            "max": 30,
+            "modifier": "@attributes.speed.land.value",
             "modifierType": "constant",
             "notes": "",
             "source": "",
             "subtab": "misc",
-            "valueAffected": "smallA"
+            "valueAffected": "flying"
           }
         ],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
-          "units": null,
+          "units": "",
           "value": null
         },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
-          "descriptor": "negate"
+          "descriptor": ""
         },
-        "source": "Core Rulebook",
+        "shieldProficiency": "",
+        "source": "CRB, pg. 78",
+        "spellResistance": 0,
         "target": {
           "type": "",
-          "value": ""
+          "value": null
         },
         "uses": {
           "max": 0,
-          "per": "",
+          "per": null,
           "value": 0
-        }
+        },
+        "weaponProficiency": ""
       }
     },
     {
-      "_id": "yVqPs8pYraQtifTT",
-      "name": "Mobility (Combat)",
-      "type": "feat",
-      "img": "systems/sfrpg/icons/feats/mobility.webp",
+      "_id": "VjEDEMJYRtBj4Ue5",
+      "name": "Skill Unit (Ex)",
+      "type": "mod",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.sfrpg.class-features.Item.6cm9UHSlmWPU9QQe"
+        }
+      },
+      "img": "systems/sfrpg/icons/classes/skill_unit.webp",
       "system": {
         "type": "",
-        "ability": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
           "cost": 0
         },
+        "additionalMovement": "",
+        "additionalSenses": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": 0
+        },
+        "arms": {
+          "armType": "general",
+          "number": 0
         },
         "attackBonus": 0,
+        "bonusSkill": "per",
         "chatFlavor": "",
         "critical": {
           "effect": "",
@@ -170,53 +783,511 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>You can easily move past dangerous foes.</p>\n<p><strong>Prerequisites</strong>: Dex 13.</p>\n<hr />\n<p><strong>Benefit</strong>: You gain a +4 bonus to your Armor Class against attacks of opportunity that you provoke by leaving a threatened square.</p>"
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.cA0NuGh484BwlDjX]{Drone}</p>\n<p>Choose one of the following skills: Acrobatics, Athletics, Computers, Engineering, Perception, or Stealth. This is a class skill for your drone, and it gains a number of ranks in the chosen skill equal to your class level. Your drone can use this skill when not under your direct control. You can change your drone’s skill unit whenever you rebuild your drone from scratch. Additionally, whenever you are directly controlling your drone, it can use any of your skill ranks if you wish, assuming it has the appropriate tools to do so (a drone without manipulator arms cannot use Engineering to disable a device, for example).</p>\n<p><em>On Details page, select one of the skills listed above as the Bonus Skill</em></p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "text",
+          "value": null
+        },
+        "formula": "",
+        "isActive": null,
+        "isArmorSlot": false,
+        "isFree": true,
+        "maxInstalls": 1,
+        "modifiers": [],
+        "properties": {},
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "shieldProficiency": "",
+        "source": "",
+        "spellResistance": 0,
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        },
+        "weaponProficiency": ""
+      }
+    },
+    {
+      "_id": "jhXU02cnVvgNOKKj",
+      "name": "Enhanced Armor (Ex)",
+      "type": "mod",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.sfrpg.class-features.Item.Id4X4THLTQmxr4A5"
+        }
+      },
+      "img": "systems/sfrpg/icons/classes/enhanced_armor.webp",
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "additionalMovement": "",
+        "additionalSenses": "",
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": 0
+        },
+        "arms": {
+          "armType": "general",
+          "number": 0
+        },
+        "attackBonus": 0,
+        "bonusSkill": "",
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.QsCRXffpsDoMvPnT]{Basic Mods}</p>\n<p>Your drone gains a +2 bonus to its AC. At 11th level, you can choose this mod a second time as an advanced mod.</p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "text",
+          "value": null
+        },
+        "formula": "",
+        "isActive": null,
+        "isArmorSlot": false,
+        "isFree": false,
+        "maxInstalls": 2,
+        "modifiers": [
+          {
+            "_id": "87f207d1-4425-4617-9be2-a38cf360a4a0",
+            "name": "AC Bonus",
+            "type": "untyped",
+            "condition": "",
+            "effectType": "ac",
+            "enabled": true,
+            "modifier": 2,
+            "modifierType": "constant",
+            "notes": "",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": "both"
+          }
+        ],
+        "properties": {},
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "shieldProficiency": "",
+        "source": "",
+        "spellResistance": 0,
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        },
+        "weaponProficiency": ""
+      }
+    },
+    {
+      "_id": "PDss41dj4WTCqd4p",
+      "name": "Enhanced Senses (Ex; Drone)",
+      "type": "mod",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.sfrpg.class-features.Item.rDCdrOBeaaeFLjmg"
+        }
+      },
+      "img": "systems/sfrpg/icons/classes/enhanced_senses_drone.webp",
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "additionalMovement": "",
+        "additionalSenses": "low-light vision 60; darkvision 60",
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": 0
+        },
+        "arms": {
+          "armType": "general",
+          "number": 0
+        },
+        "attackBonus": 0,
+        "bonusSkill": "",
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.QsCRXffpsDoMvPnT]{Basic Mods}</p>\n<p>Your drone gains low-light vision, darkvision to 60 feet, and a +2 insight bonus to Perception skill checks. If your drone has the camera mod, the camera gains these senses as well.</p>"
         },
         "descriptors": [],
         "duration": {
           "units": "",
-          "value": ""
+          "value": null
         },
         "formula": "",
         "isActive": null,
-        "modifiers": [],
+        "isArmorSlot": false,
+        "isFree": false,
+        "maxInstalls": 1,
+        "modifiers": [
+          {
+            "_id": "8cfd3643-78d0-4e68-9d47-f113eea04f2a",
+            "name": "New Modifier",
+            "type": "insight",
+            "condition": "",
+            "effectType": "skill",
+            "enabled": true,
+            "modifier": 2,
+            "modifierType": "constant",
+            "notes": "",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": "per"
+          }
+        ],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
-          "units": null,
+          "units": "",
           "value": null
         },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
-          "descriptor": "negate"
+          "descriptor": ""
         },
-        "source": "Core Rulebook",
+        "shieldProficiency": "",
+        "source": "CRB, pg. 77",
+        "spellResistance": 0,
         "target": {
           "type": "",
-          "value": ""
+          "value": null
         },
         "uses": {
           "max": 0,
-          "per": "",
+          "per": null,
           "value": 0
-        }
+        },
+        "weaponProficiency": ""
       }
     },
     {
-      "_id": "8IS4yKSerGEio9iS",
+      "_id": "OSQvIhBKLuNMq97s",
+      "name": "Hardened AI (Ex)",
+      "type": "mod",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.sfrpg.class-features.Item.42s76v4oGQeHMe0P"
+        }
+      },
+      "img": "systems/sfrpg/icons/classes/hardened_ai.webp",
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "additionalMovement": "",
+        "additionalSenses": "",
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": 0
+        },
+        "arms": {
+          "armType": "general",
+          "number": 0
+        },
+        "attackBonus": 0,
+        "bonusSkill": "",
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.QsCRXffpsDoMvPnT]{Basic Mods}</p>\n<p>Your drone’s AI is secured against outside influence. Any attempt to hack your drone takes a –4 penalty, and your drone receives a +4 insight bonus to saving throws against spells or effects that attempt to take control of the drone or otherwise dictate its actions.</p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "text",
+          "value": null
+        },
+        "formula": "",
+        "id": "OSQvIhBKLuNMq97s",
+        "isActive": null,
+        "isArmorSlot": false,
+        "isFree": false,
+        "maxInstalls": 1,
+        "modifiers": [],
+        "properties": {},
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "shieldProficiency": "",
+        "source": "",
+        "spellResistance": 0,
+        "system": {
+          "container": {
+            "contents": [
+              {
+                "id": "NE1UZBpqCCvamRZc",
+                "index": 0
+              }
+            ]
+          }
+        },
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        },
+        "weaponProficiency": ""
+      }
+    },
+    {
+      "_id": "UtMWymzsgeI5fmGs",
+      "name": "Camera (Ex)",
+      "type": "mod",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.sfrpg.class-features.Item.uf8ByNvudMSltp51"
+        }
+      },
+      "img": "systems/sfrpg/icons/classes/camera.webp",
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "additionalMovement": "",
+        "additionalSenses": "",
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": 0
+        },
+        "arms": {
+          "armType": "general",
+          "number": 0
+        },
+        "attackBonus": 0,
+        "bonusSkill": "",
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.QsCRXffpsDoMvPnT]{Basic Mods}</p>\n<p>Your drone has a camera that you can see through using your custom rig as long as your drone is within range. The camera has ordinary sight, and is capable of seeing whatever an ordinary @UUID[Compendium.sfrpg.races.Item.AMBcyDZDtJ1OOzh3]{Human} could see. The camera can also record up to 1 hour of footage, which can be downloaded and viewed using your custom rig.</p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "text",
+          "value": null
+        },
+        "formula": "",
+        "id": "UtMWymzsgeI5fmGs",
+        "isActive": null,
+        "isArmorSlot": false,
+        "isFree": false,
+        "maxInstalls": 1,
+        "modifiers": [],
+        "properties": {},
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "shieldProficiency": "",
+        "source": "",
+        "spellResistance": 0,
+        "system": {
+          "container": {
+            "contents": [
+              {
+                "id": "XcMbUs7TxRst3MhX",
+                "index": 0
+              }
+            ]
+          }
+        },
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        },
+        "weaponProficiency": ""
+      }
+    },
+    {
+      "_id": "dds3gdpNa7bgzsLD",
       "name": "Laser pistol, corona",
       "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.sfrpg.equipment.Item.cUon85lUsWQlOsha"
+        }
+      },
       "img": "systems/sfrpg/icons/equipment/weapons/laser-pistol-azimuth.webp",
       "system": {
         "type": "",
@@ -224,16 +1295,19 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
           "type": "none",
           "condition": "",
           "cost": null
         },
+        "ammunitionType": "charge",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
-          "units": null,
+          "units": "none",
           "value": null
         },
         "attackBonus": 0,
@@ -263,7 +1337,13 @@
         },
         "chatFlavor": "",
         "container": {
-          "contents": [],
+          "contents": [
+            {
+              "id": "kRyUI2YZA0k1ac2w",
+              "index": 2
+            }
+          ],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -285,6 +1365,16 @@
               "amount": 1,
               "subtype": "",
               "weightProperty": ""
+            },
+            {
+              "type": "slot",
+              "acceptsType": [
+                "ammunition"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 1,
+              "subtype": "ammunitionSlot",
+              "weightProperty": ""
             }
           ]
         },
@@ -303,6 +1393,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -312,14 +1403,19 @@
         },
         "descriptors": [],
         "duration": {
+          "total": 0,
           "units": "",
           "value": ""
         },
         "equippable": false,
         "equipped": true,
         "formula": "",
+        "id": "dds3gdpNa7bgzsLD",
         "identified": true,
+        "img": "systems/sfrpg/icons/equipment/weapons/laser-pistol-azimuth.webp",
         "isActive": null,
+        "isEquipment": true,
+        "isOpen": true,
         "level": 6,
         "modifiers": [],
         "price": 4270,
@@ -412,12 +1508,15 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
+          "total": 90,
           "units": "ft",
           "value": 90
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -425,10 +1524,22 @@
         },
         "source": "CRB pg. 173",
         "special": "",
+        "specialMaterials": {},
+        "system": {
+          "container": {
+            "contents": [
+              {
+                "id": "kRyUI2YZA0k1ac2w",
+                "index": 2
+              }
+            ]
+          }
+        },
         "target": {
           "type": "",
           "value": ""
         },
+        "totalWeight": "L",
         "usage": {
           "per": "shot",
           "value": 1
@@ -436,6 +1547,7 @@
         "uses": {
           "max": null,
           "per": "",
+          "total": 0,
           "value": null
         },
         "weaponCategory": "laser",
@@ -443,23 +1555,99 @@
       }
     },
     {
-      "_id": "HmyZJzetIcn6L9O3",
-      "name": "Shot on the Run (Combat)",
-      "type": "feat",
-      "img": "systems/sfrpg/icons/feats/shot_on_the_run.webp",
+      "_id": "kRyUI2YZA0k1ac2w",
+      "name": "Battery",
+      "type": "ammunition",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.sfrpg.equipment.Item.GcFU8g4cqpZlU1dG"
+        }
+      },
+      "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
       "system": {
         "type": "",
-        "ability": "",
+        "ammunitionType": "charge",
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": false
+        },
+        "attuned": false,
+        "bulk": "-",
+        "capacity": {
+          "max": 20,
+          "value": 20
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 20</p>"
+        },
+        "equippable": false,
+        "equipped": false,
+        "identified": true,
+        "level": 1,
+        "price": 60,
+        "quantity": 1,
+        "quantityPerPack": 1,
+        "source": "Core Rulebook",
+        "specialMaterials": {},
+        "useCapacity": true
+      }
+    },
+    {
+      "_id": "pHBTluYrh9tIFmZt",
+      "name": "Weapon Specialization (Ex) (Mechanic)",
+      "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.sfrpg.class-features.Item.lOqPFn93aueiBQst"
+        }
+      },
+      "img": "systems/sfrpg/images/cup/gameplay/mechanic.webp",
+      "system": {
+        "type": "",
+        "ability": null,
+        "actionTarget": "",
         "actionType": "",
         "activation": {
-          "type": "full",
+          "type": "",
           "condition": "",
-          "cost": 1
+          "cost": 0
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
-          "units": null,
+          "units": "",
           "value": null
         },
         "attackBonus": 0,
@@ -471,130 +1659,216 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>You can move, fire a ranged weapon, and move again before your foes can react.</p>\n<p><strong>Prerequisites</strong>: Dex 15, Mobility, base attack bonus +4.</p>\n<hr />\n<p><strong>Benefit</strong>: As a full action, you can move up to your speed and make a single ranged attack at any point during your movement. If you have the trick attack class feature, you can take your movement from trick attack at any time during a trick attack (see page 93) with a ranged weapon (instead of only before).</p>\n<p><strong>Normal</strong>: You can move only before or after an attack with a ranged weapon, not both.</p>"
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.HNCQFSPw4DVTATHv]{Mechanic}</p>\n<p>You gain the Weapon Specialization feat as a bonus feat for each weapon type this class grants you proficiency with.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "classFeature",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
         "duration": {
           "units": "",
-          "value": ""
+          "value": null
         },
         "formula": "",
         "isActive": null,
-        "modifiers": [],
+        "modifiers": [
+          {
+            "_id": "309e09f2-b155-4a7c-ac20-bee89333af65",
+            "name": "Weapon Specialization Mechanic",
+            "type": "untyped",
+            "condition": "",
+            "effectType": "weapon-damage",
+            "enabled": true,
+            "modifier": "floor(@details.level.value / 2)",
+            "modifierType": "constant",
+            "notes": "",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": "smallA"
+          },
+          {
+            "_id": "e9fd3a0e-d5eb-4338-b43e-6e9d90f25b8f",
+            "name": "Weapon Specialization Mech.",
+            "type": "untyped",
+            "condition": "",
+            "effectType": "weapon-damage",
+            "enabled": true,
+            "modifier": "@details.level.value",
+            "modifierType": "constant",
+            "notes": "",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": "basicM"
+          },
+          {
+            "_id": "73455d1d-1f74-43b9-9068-3ceb77462dc4",
+            "name": "Weapon Specialization Mech.",
+            "type": "untyped",
+            "condition": "",
+            "effectType": "weapon-property-damage",
+            "enabled": true,
+            "modifier": "-ceil(@details.level.value / 2)",
+            "modifierType": "constant",
+            "notes": "",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": "operative"
+          }
+        ],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
-          "units": null,
+          "units": "",
           "value": null
         },
         "recharge": {
           "charged": false,
           "value": null
         },
-        "requirements": "",
+        "requirements": "3rd Level",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
-          "descriptor": "negate"
+          "descriptor": ""
         },
-        "source": "Core Rulebook",
+        "source": "Mechanic",
         "target": {
           "type": "",
-          "value": ""
+          "value": null
         },
         "uses": {
           "max": 0,
-          "per": "",
+          "per": null,
           "value": 0
         }
       }
     },
     {
-      "_id": "pHTIIELa0UbcCrHM",
-      "name": "Camera (Ex)",
-      "type": "mod",
-      "img": "systems/sfrpg/icons/classes/camera.webp",
+      "_id": "NE1UZBpqCCvamRZc",
+      "name": "Iconic Pregen Fixes",
+      "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Actor.1Z6IKujG4PKAxTWg.Item.tsgtTidCoHa66FFQ"
+        }
+      },
+      "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
+        "ability": null,
         "abilityMods": {
           "parts": []
         },
-        "additionalMovement": "",
-        "additionalSenses": "",
-        "arms": {
-          "armType": "general",
-          "number": 0
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
         },
-        "bonusSkill": "",
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": 0
+        },
+        "attackBonus": 0,
+        "category": "feat",
+        "chatFlavor": "",
         "critical": {
+          "effect": "",
           "parts": []
         },
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.QsCRXffpsDoMvPnT]{Basic Mods}</p>\n<p>Your drone has a camera that you can see through using your custom rig as long as your drone is within range. The camera has ordinary sight, and is capable of seeing whatever an ordinary @UUID[Compendium.sfrpg.races.AMBcyDZDtJ1OOzh3]{Human} could see. The camera can also record up to 1 hour of footage, which can be downloaded and viewed using your custom rig.</p>"
+          "value": ""
         },
-        "isArmorSlot": false,
-        "isFree": false,
-        "maxInstalls": 1,
-        "modifiers": [],
-        "shieldProficiency": "",
-        "source": "",
-        "weaponProficiency": ""
-      }
-    },
-    {
-      "_id": "hGa0aBb9bNIkbV0V",
-      "name": "Enhanced Armor (Ex)",
-      "type": "mod",
-      "img": "systems/sfrpg/icons/classes/enhanced_armor.webp",
-      "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
         },
-        "additionalMovement": "",
-        "additionalSenses": "",
-        "arms": {
-          "armType": "general",
-          "number": 0
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
         },
-        "bonusSkill": "",
-        "critical": {
-          "parts": []
+        "duration": {
+          "units": "text",
+          "value": null
         },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.QsCRXffpsDoMvPnT]{Basic Mods}</p>\n<p>Your drone gains a +2 bonus to its AC. At 11th level, you can choose this mod a second time as an advanced mod.</p>"
-        },
-        "isArmorSlot": false,
-        "isFree": false,
-        "maxInstalls": 2,
+        "formula": "",
+        "isActive": null,
         "modifiers": [
           {
-            "_id": "87f207d1-4425-4617-9be2-a38cf360a4a0",
-            "name": "AC Bonus",
+            "_id": "60814e81-ecf3-4cce-9bd2-e129ae06142b",
+            "name": "Pregen AC Fix",
             "type": "untyped",
             "condition": "",
+            "container": {
+              "actorId": "FMgL3IvelpWN9FLl",
+              "itemId": "NE1UZBpqCCvamRZc"
+            },
             "effectType": "ac",
             "enabled": true,
-            "modifier": 2,
+            "max": -1,
+            "modifier": "-1",
             "modifierType": "constant",
             "notes": "",
             "source": "",
@@ -602,196 +1876,54 @@
             "valueAffected": "both"
           }
         ],
-        "shieldProficiency": "",
+        "properties": {},
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
         "source": "",
-        "weaponProficiency": ""
-      }
-    },
-    {
-      "_id": "ibTrrIaEuEPcvMi0",
-      "name": "Enhanced Senses (Ex; Drone)",
-      "type": "mod",
-      "img": "systems/sfrpg/icons/classes/enhanced_senses_drone.webp",
-      "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
+        "target": {
+          "type": "",
+          "value": null
         },
-        "additionalMovement": "",
-        "additionalSenses": "low-light vision 60; darkvision 60",
-        "arms": {
-          "armType": "general",
-          "number": 0
-        },
-        "bonusSkill": "acr",
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.QsCRXffpsDoMvPnT]{Basic Mods}</p>\n<p>Your drone gains low-light vision, darkvision to 60 feet, and a +2 insight bonus to Perception skill checks. If your drone has the camera mod, the camera gains these senses as well.</p>"
-        },
-        "isArmorSlot": false,
-        "isFree": false,
-        "maxInstalls": 1,
-        "modifiers": [
-          {
-            "_id": "8cfd3643-78d0-4e68-9d47-f113eea04f2a",
-            "name": "New Modifier",
-            "type": "insight",
-            "condition": "",
-            "effectType": "skill",
-            "enabled": true,
-            "modifier": 2,
-            "modifierType": "constant",
-            "notes": "",
-            "source": "",
-            "subtab": "misc",
-            "valueAffected": "per"
-          }
-        ],
-        "shieldProficiency": "",
-        "source": "",
-        "weaponProficiency": "sarms"
-      }
-    },
-    {
-      "_id": "7BOUK3W9WT9TNZf7",
-      "name": "Flight System (Ex)",
-      "type": "mod",
-      "img": "systems/sfrpg/icons/classes/flight_system.webp",
-      "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "additionalMovement": "flight (1/2 land speed; average) 10 min/day",
-        "additionalSenses": "",
-        "arms": {
-          "armType": "general",
-          "number": null
-        },
-        "bonusSkill": "",
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.cQtmz297P5g6g5xv]{Advanced Mods}</p>\n<p>Your drone gains a fly speed equal to half its land speed with average maneuverability for up to 10 minutes per day. This duration need not be continuous, but it must be used in 1-minute increments. You can select this mod a second time; in this case, the drone’s fly speed increases to its full land speed, and there is no limit on the amount of time it can fly.</p>"
-        },
-        "isArmorSlot": false,
-        "isFree": false,
-        "maxInstalls": 1,
-        "modifiers": [],
-        "shieldProficiency": "",
-        "source": "",
-        "weaponProficiency": ""
-      }
-    },
-    {
-      "_id": "3GsPBdqPFOLP1trO",
-      "name": "Hardened AI (Ex)",
-      "type": "mod",
-      "img": "systems/sfrpg/icons/classes/hardened_ai.webp",
-      "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "additionalMovement": "",
-        "additionalSenses": "",
-        "arms": {
-          "armType": "general",
-          "number": 0
-        },
-        "bonusSkill": "",
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.QsCRXffpsDoMvPnT]{Basic Mods}</p>\n<p>Your drone’s AI is secured against outside influence. Any attempt to hack your drone takes a –4 penalty, and your drone receives a +4 insight bonus to saving throws against spells or effects that attempt to take control of the drone or otherwise dictate its actions.</p>"
-        },
-        "isArmorSlot": false,
-        "isFree": false,
-        "maxInstalls": 1,
-        "modifiers": [],
-        "shieldProficiency": "",
-        "source": "",
-        "weaponProficiency": ""
-      }
-    },
-    {
-      "_id": "fEhUIdkoBLqaTTPJ",
-      "name": "Weapon Mount (Ex)",
-      "type": "mod",
-      "img": "systems/sfrpg/icons/classes/weapon_mount.webp",
-      "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "additionalMovement": "",
-        "additionalSenses": "",
-        "arms": {
-          "armType": "ranged",
-          "number": 1
-        },
-        "bonusSkill": "per",
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.QsCRXffpsDoMvPnT]{Basic Mods}</p>\n<p>You can affix a small arm or another one-handed ranged weapon on your drone, allowing it to wield that weapon and attack with it. This weapon cannot be disarmed. Mounting a longarm, a heavy weapon, or another two-handed ranged weapon requires two weapon mounts. A weapon mount can hold up to two batteries, two magazines, or two of another type of ammunition for the affixed weapon, provided this ammunition is of light bulk or less. Multiple weapon mounts used to affix a single two-handed weapon count as a single weapon mount for the purpose of how much ammunition it can hold. The drone reloads these batteries or magazines automatically, which takes the usual amount of time for the weapon. Spent batteries or magazines are stored within the drone. You can replace all of a weapon mount’s batteries or magazines as a move action. You must purchase separately or already have the weapon and ammunition for use with a weapon mount. You can replace the weapon with any other weapon that meets the criteria for your mount (for example, if you have two weapon mounts, you could replace a longarm with a heavy weapon). Swapping out a weapon in a weapon mount requires use of your custom rig and 1 hour of work. You can select this mod multiple times, each time adding an additional weapon mount to the drone.</p>"
-        },
-        "isArmorSlot": false,
-        "isFree": false,
-        "maxInstalls": 1,
-        "modifiers": [],
-        "shieldProficiency": "",
-        "source": "",
-        "weaponProficiency": "sarms"
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
       }
     }
   ],
   "prototypeToken": {
-    "name": "Scout L8",
-    "actorLink": false,
+    "name": "Scout",
+    "actorLink": true,
+    "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
-    "height": 1,
+    "height": 0.5,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -812,33 +1944,55 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
-      "brightness": 1,
+      "brightness": 0.75,
       "color": null,
       "contrast": 0,
       "enabled": false,
       "range": 0,
-      "saturation": 0,
-      "visionMode": "basic"
+      "saturation": -1,
+      "visionMode": "lowLightVisionDarkvision"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "tint": null
+      "src": "systems/sfrpg/images/cup/iconics/token/mechanicdrone_token.webp",
+      "tint": "#ffffff"
     },
-    "width": 1
+    "width": 0.5
   },
   "system": {
     "abilities": {
@@ -961,7 +2115,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 30
@@ -970,7 +2125,8 @@
         "special": "",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "weaponMounts": {
         "melee": {
@@ -1011,6 +2167,7 @@
       "frightened": false,
       "grappled": false,
       "helpless": false,
+      "invisible": false,
       "nauseated": false,
       "off-kilter": false,
       "off-target": false,
@@ -1038,9 +2195,12 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
-        "fullBodyImage": "",
+        "deity": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "gmNotes": null,
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<h2>SPECIAL ABILITIES</h2>\n<p><strong>Mobility</strong> Scout gains a +4 bonus to its AC against attacks of opportunity it provokes by leaving a threatened square.</p>\n<hr />\n<p><strong>Shot on the Run</strong> As a full action, Scout can move up to its speed, making one ranged attack at any point during its movement.</p>\n<h2>DRONE MODS</h2>\n<p><strong>Camera</strong> As long as Scout is within range of Quig’s expert rig (5 miles), Quig can see through Scout’s senses (in addition to whatever a typical human can see).</p>\n<hr />\n<p><strong>Enhanced Armor</strong> Scout gains +2 to its AC (this has been added to its EAC and KAC above).</p>\n<hr />\n<p><strong>Enhanced Senses</strong> Scout gains low-light vision and darkvision, which also operate through its camera.</p>\n<hr />\n<p><strong>Flight System Scout</strong> has a flight system included in its chassis. This grants it the flight listed with its speed.</p>\n<hr />\n<p><strong>Hardened AI</strong> Checks to hack Scout take a –4 penalty.</p>\n<hr />\n<p><strong>Weapon Mount</strong> Scout has a corona laser pistol, which can be fired 20 times before Quig must recharge or replace its battery</p>",
@@ -1056,7 +2216,11 @@
         "value": 1
       },
       "organization": "",
-      "owner": "Quig L4",
+      "organizationSize": {
+        "max": null,
+        "min": null
+      },
+      "owner": "Quig L8",
       "race": ""
     },
     "modifiers": [],
@@ -1095,7 +2259,7 @@
         "misc": 0,
         "mod": 0,
         "ranks": 0,
-        "value": 0
+        "value": 3
       },
       "ath": {
         "ability": "str",
@@ -1227,7 +2391,7 @@
         "misc": 0,
         "mod": 0,
         "ranks": 0,
-        "value": 0
+        "value": 3
       },
       "phs": {
         "ability": "int",
@@ -1311,30 +2475,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -1365,6 +2536,9 @@
       },
       "senses": "",
       "size": "Medium",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0,
       "weaponProf": {
         "custom": "",

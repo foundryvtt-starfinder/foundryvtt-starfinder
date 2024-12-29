@@ -2,6 +2,11 @@
   "_id": "rHscFpMmXkZOOkgV",
   "name": "Synaptic Pulse",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "systems/sfrpg/icons/spells/synaptic_pulse.webp",
   "system": {
     "type": "",
@@ -9,6 +14,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "action",
@@ -17,11 +23,13 @@
     },
     "allowedClasses": {
       "myst": true,
+      "precog": false,
       "tech": false,
       "wysh": false
     },
     "area": {
       "effect": "spread",
+      "shapable": false,
       "shape": "sphere",
       "units": "ft",
       "value": 20
@@ -36,18 +44,23 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>You stun all creatures in range for 1 round.</p>"
     },
     "descriptors": [],
     "dismissible": false,
     "duration": {
-      "units": "",
-      "value": "1 round"
+      "units": "round",
+      "value": "1"
     },
     "formula": "",
+    "isActive": null,
+    "isVariableLevel": false,
     "level": 3,
     "materials": {
       "consumed": false,
@@ -60,12 +73,14 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
       "units": "personal",
       "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "will",
       "dc": "",

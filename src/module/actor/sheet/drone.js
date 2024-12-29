@@ -11,7 +11,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
 
     static get defaultOptions() {
         const options = super.defaultOptions;
-        mergeObject(options, {
+        foundry.utils.mergeObject(options, {
             classes: ["sfrpg", "sheet", "actor", "drone"],
             width: 715
             // height: 830
@@ -63,12 +63,12 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
             weaponLabel = game.i18n.format("SFRPG.DroneSheet.Inventory.Weapons.None");
         }
 
-        let armorUpgradesLabel = game.i18n.format("SFRPG.DroneSheet.Inventory.ArmorUpgrades", {
+        const armorUpgradesLabel = game.i18n.format("SFRPG.DroneSheet.Inventory.ArmorUpgrades", {
             current: data.system.attributes.armorSlots.current,
             max: data.system.attributes.armorSlots.max
         });
 
-        let cargoLabel = game.i18n.format("SFRPG.DroneSheet.Inventory.CarriedItems");
+        const cargoLabel = game.i18n.format("SFRPG.DroneSheet.Inventory.CarriedItems");
 
         const inventory = {
             weapon: {
@@ -92,7 +92,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
             cargo: { label: cargoLabel, items: [], dataset: { type: "goods" } }
         };
 
-        let [
+        const [
             items, // 0
             feats, // 1
             chassis, // 2
@@ -128,12 +128,18 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
                     this._prepareActorResource(item, actorData);
                 }
 
-                if (item.type === "feat") {
-                    if ((item.system.requirements?.toLowerCase() || "") === "condition") {
-                        arr[4].push(item); // conditionItems
-                    } else {
-                        arr[1].push(item); // feats
-                    }
+                if (item.config.hasAttack) {
+                    this._prepareAttackString(item);
+                }
+
+                if (item.config.hasDamage) {
+                    this._prepareDamageString(item);
+                }
+
+                if (item.type === "effect") {
+                    arr[4].push(item); // conditionItems
+                } else  if (item.type === "feat") {
+                    arr[1].push(item); // feats
                     item.isFeat = true;
                 } else if (item.type === "chassis") arr[2].push(item); // chassis
                 else if (item.type === "mod") arr[3].push(item); // mods
@@ -158,15 +164,15 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
             }
         });
 
-        let droneLevelIndex = data.system.details.level.value - 1;
-        let maxMods = SFRPG.droneModsPerLevel[droneLevelIndex];
+        const droneLevelIndex = data.system.details.level.value - 1;
+        const maxMods = SFRPG.droneModsPerLevel[droneLevelIndex];
 
-        let activeFeats = [];
-        let passiveFeats = [];
-        let classFeatures = [];
-        let universalCreatureRule = [];
-        let otherFeatures = [];
-        for (let f of feats) {
+        const activeFeats = [];
+        const passiveFeats = [];
+        const classFeatures = [];
+        const universalCreatureRule = [];
+        const otherFeatures = [];
+        for (const f of feats) {
             if (f.system.activation.type) activeFeats.push(f);
             else if (f.system.details.category === "feat") passiveFeats.push(f);
             else if (f.system.details.category === "classFeature") classFeatures.push(f);
@@ -174,18 +180,18 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
             else otherFeatures.push(f);
         }
 
-        let maxFeats = SFRPG.droneFeatsPerLevel[droneLevelIndex];
+        const maxFeats = SFRPG.droneFeatsPerLevel[droneLevelIndex];
 
-        let chassisLabel = game.i18n.format("SFRPG.DroneSheet.Features.Chassis");
-        let modsLabel = game.i18n.format("SFRPG.DroneSheet.Features.Mods", {
+        const chassisLabel = game.i18n.format("SFRPG.DroneSheet.Features.Chassis");
+        const modsLabel = game.i18n.format("SFRPG.DroneSheet.Features.Mods", {
             current: mods.filter((x) => !x.system.isFree).length,
             max: maxMods
         });
-        let featsLabel = game.i18n.format("SFRPG.DroneSheet.Features.Feats.Header", {
+        const featsLabel = game.i18n.format("SFRPG.DroneSheet.Features.Feats.Header", {
             current: activeFeats.length + passiveFeats.length,
             max: maxFeats
         });
-        let activeFeatsLabel = game.i18n.format("SFRPG.DroneSheet.Features.Feats.Active");
+        const activeFeatsLabel = game.i18n.format("SFRPG.DroneSheet.Features.Feats.Active");
 
         const features = {
             chassis: {
@@ -219,8 +225,8 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
                 hasActions: false,
                 dataset: { type: "feat" }
             },
-            classFeature: deepClone(CONFIG.SFRPG.featureCategories.classFeature),
-            universalCreatureRule: deepClone(CONFIG.SFRPG.featureCategories.universalCreatureRule),
+            classFeature: foundry.utils.deepClone(CONFIG.SFRPG.featureCategories.classFeature),
+            universalCreatureRule: foundry.utils.deepClone(CONFIG.SFRPG.featureCategories.universalCreatureRule),
             resources: {
                 category: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"),
                 items: actorResources,
@@ -263,7 +269,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
             }
         };
 
-        let [permanent, temporary, conditions] = data.system.modifiers.reduce(
+        const [permanent, temporary, conditions] = data.system.modifiers.reduce(
             (arr, modifier) => {
                 if (modifier.subtab === "permanent") arr[0].push(modifier);
                 else if (modifier.subtab === "conditions") arr[2].push(modifier);
@@ -296,7 +302,6 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
 
         if (!this.options.editable) return;
 
-        // html.find('.toggle-prepared').click(this._onPrepareItem.bind(this));
         html.find(".reload").click(this._onReloadWeapon.bind(this));
 
         html.find(".repair").click(this._onRepair.bind(this));
@@ -346,39 +351,6 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         const modifierId = target.closest(".item.modifier").data("modifierId");
 
         this.actor.editModifier(modifierId);
-    }
-
-    /**
-     * Toggle a modifier to be enabled or disabled.
-     *
-     * @param {Event} event The originating click event
-     */
-    async _onToggleModifierEnabled(event) {
-        event.preventDefault();
-        const target = $(event.currentTarget);
-        const modifierId = target.closest(".item.modifier").data("modifierId");
-
-        const modifiers = deepClone(this.actor.system.modifiers);
-        const modifier = modifiers.find((mod) => mod._id === modifierId);
-        modifier.enabled = !modifier.enabled;
-
-        await this.actor.update({ "system.modifiers": modifiers });
-    }
-
-    /**
-     * Handle toggling the prepared status of an Owned Itme within the Actor
-     *
-     * @param {Event} event The triggering click event
-     */
-    _onPrepareItem(event) {
-        event.preventDefault();
-
-        const itemId = event.currentTarget.closest(".item").dataset.itemId;
-        const item = this.actor.items.get(itemId);
-
-        return item.update({
-            "system.preparation.prepared": !item.system.preparation.prepared
-        });
     }
 
     /**

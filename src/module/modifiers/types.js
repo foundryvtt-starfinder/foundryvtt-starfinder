@@ -8,6 +8,7 @@ export const SFRPGModifierTypes = Object.freeze({
     INSIGHT: "insight",
     LUCK: "luck",
     MORALE: "morale",
+    RESISTANCE: "resistance",
     RACIAL: "racial",
     UNTYPED: "untyped"
 });

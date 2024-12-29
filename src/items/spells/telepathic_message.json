@@ -2,6 +2,11 @@
   "_id": "R6MvvYVPDf21fE8Y",
   "name": "Telepathic Message",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "systems/sfrpg/icons/spells/telepathic_message.webp",
   "system": {
     "type": "",
@@ -24,6 +29,7 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "none",
       "value": null
@@ -84,8 +90,8 @@
     },
     "dismissible": false,
     "duration": {
-      "units": "",
-      "value": "10 minutes/level"
+      "units": "minute",
+      "value": "@details.cl.value*10"
     },
     "formula": "",
     "isActive": null,
@@ -102,11 +108,12 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
-      "additional": "10 ft.",
-      "per": "level",
-      "units": "ft",
-      "value": 100
+      "additional": "",
+      "per": "",
+      "units": "medium",
+      "value": null
     },
     "rollNotes": "",
     "save": {

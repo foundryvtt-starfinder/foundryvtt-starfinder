@@ -2,31 +2,23 @@
   "_id": "OkJFf1ErWW0ZQTer",
   "name": "Pyric Revenant",
   "type": "npc2",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "_id": "iAWXzYENiJYitKak",
       "name": "Slam (plus Pyric Curse)",
       "type": "weapon",
-      "ammunition": false,
-      "augmentation": false,
-      "consumable": false,
-      "container": false,
-      "equipment": false,
-      "fusion": true,
-      "goods": false,
-      "hybrid": false,
-      "img": "icons/svg/item-bag.svg",
-      "magic": false,
-      "shield": false,
-      "spell": false,
-      "storage": {
-        "type": "slot",
-        "affectsEncumbrance": true,
-        "amount": 0,
-        "subtype": "fusion",
-        "weightProperty": "level"
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
       },
+      "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -43,9 +35,10 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
-          "units": "",
-          "value": 0
+          "units": "ft",
+          "value": "0"
         },
         "attackBonus": 12,
         "attributes": {
@@ -113,8 +106,10 @@
         "damage": {
           "parts": [
             {
-              "name": "",
+              "name": "Slam",
               "formula": "1d6+9",
+              "group": null,
+              "isPrimarySection": true,
               "types": {
                 "acid": false,
                 "bludgeoning": true,
@@ -126,8 +121,26 @@
                 "slashing": false,
                 "sonic": false
               }
+            },
+            {
+              "name": "Pyric Curse",
+              "formula": "1d4",
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": true,
+                "healing": false,
+                "piercing": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -135,7 +148,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<h2>PYRIC CURSE</h2>\n<p><strong>Type</strong>&nbsp;curse;&nbsp;<strong>Save</strong>&nbsp;Fortitude DC 18</p>\n<p><strong>Effect</strong>&nbsp;A creature that fails the save gains the burning 1d8 condition. This flame is pyric fire (see special ability). While affected, the creature succeeds at saving throws against other pyric curses of the same or weaker potency.</p>\n<p><strong>Cure</strong> 1 save; successful saves against the burning condition are successful saves against the curse.</p>"
+          "value": "<h2>PYRIC CURSE</h2><p><strong>Type</strong>&nbsp;curse;&nbsp;<strong>Save</strong>&nbsp;Fortitude DC 13</p>\n<p><strong>Effect</strong>&nbsp;A creature that fails the save gains the burning 1d4 condition. This flame is pyric fire (see special ability). While affected, the creature succeeds at saving throws against other pyric curses of the same or weaker potency.</p>\n<p><strong>Cure</strong> 1 save; successful saves against the burning condition are successful saves against the curse.</p>"
         },
         "descriptors": [],
         "duration": {
@@ -147,6 +160,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -189,11 +203,14 @@
           "gravitation": false,
           "guided": false,
           "harrying": false,
+          "healing": false,
           "holyWater": false,
           "hybrid": false,
+          "hydrodynamic": false,
           "ignite": false,
           "indirect": false,
           "injection": false,
+          "instrumental": false,
           "integrated": false,
           "line": false,
           "living": false,
@@ -211,6 +228,7 @@
           "polymorphic": false,
           "powered": false,
           "professional": false,
+          "propel": false,
           "punchGun": false,
           "qreload": false,
           "radioactive": false,
@@ -219,6 +237,7 @@
           "regrowth": false,
           "relic": false,
           "reposition": false,
+          "scramble": false,
           "shape": false,
           "shatter": false,
           "shells": false,
@@ -247,14 +266,18 @@
         "range": {
           "additional": "",
           "per": "",
-          "units": "",
-          "value": null
+          "units": "none",
+          "value": ""
         },
         "rollNotes": "",
         "save": {
-          "type": "",
-          "dc": "",
+          "type": "fort",
+          "dc": "13",
           "descriptor": "negate"
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": ""
         },
         "source": "",
         "special": "",
@@ -268,6 +291,7 @@
           "inubrix": false,
           "khefak": false,
           "noqual": false,
+          "nyblantine": false,
           "purplecores": false,
           "siccatite": false,
           "silver": false,
@@ -288,37 +312,18 @@
         },
         "weaponCategory": "uncategorized",
         "weaponType": "basicM"
-      },
-      "technological": false,
-      "upgrade": false,
-      "vehicleAttack": false,
-      "vehicleSystem": false,
-      "weapon": false,
-      "weaponAccessory": false
+      }
     },
     {
       "_id": "FH1NEpSw36dVYLQR",
-      "name": "Pyric Bolt (Su)",
+      "name": "Pyric Bolt (Su) (plus Pyric Curse)",
       "type": "weapon",
-      "ammunition": false,
-      "augmentation": false,
-      "consumable": false,
-      "container": false,
-      "equipment": false,
-      "fusion": true,
-      "goods": false,
-      "hybrid": false,
-      "img": "icons/svg/item-bag.svg",
-      "magic": false,
-      "shield": false,
-      "spell": false,
-      "storage": {
-        "type": "slot",
-        "affectsEncumbrance": true,
-        "amount": 0,
-        "subtype": "fusion",
-        "weightProperty": "level"
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
       },
+      "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -335,9 +340,10 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
-          "units": "none",
-          "value": null
+          "units": "ft",
+          "value": ""
         },
         "attackBonus": 10,
         "attributes": {
@@ -405,8 +411,27 @@
         "damage": {
           "parts": [
             {
-              "name": "",
+              "name": "Pyric Bolt",
               "formula": "1d4+4",
+              "group": null,
+              "isPrimarySection": true,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": true,
+                "healing": false,
+                "piercing": false,
+                "slashing": false,
+                "sonic": false
+              }
+            },
+            {
+              "name": "Pyric Curse",
+              "formula": "1d4",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -419,7 +444,8 @@
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -427,11 +453,11 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>A pyric revenant can launch a bolt of pyric fire with a range increment of 20 feet and a maximum range of 100 feet.</p>"
+          "value": "<p>A pyric revenant can launch a bolt of pyric fire with a range increment of 20 feet and a maximum range of 100 feet.</p><h2>PYRIC CURSE</h2><p><strong>Type</strong>&nbsp;curse;&nbsp;<strong>Save</strong>&nbsp;Fortitude DC 13</p>\n<p><strong>Effect</strong>&nbsp;A creature that fails the save gains the @UUID[Compendium.sfrpg.conditions.Item.8LdyXZl9PeXXFE8O]{burning} 1d4 condition. This flame is @UUID[Compendium.sfrpg.alien-archives.Actor.OkJFf1ErWW0ZQTer.Item.ixe2FgybHRut3IFU]{pyric fire} (see special ability). While affected, the creature succeeds at saving throws against other pyric curses of the same or weaker potency.</p>\n<p><strong>Cure</strong>&nbsp;1 save; successful saves against the burning condition are successful saves against the curse.</p>"
         },
         "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "text",
           "value": ""
         },
         "equippable": false,
@@ -439,6 +465,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -481,11 +508,14 @@
           "gravitation": false,
           "guided": false,
           "harrying": false,
+          "healing": false,
           "holyWater": false,
           "hybrid": false,
+          "hydrodynamic": false,
           "ignite": false,
           "indirect": false,
           "injection": false,
+          "instrumental": false,
           "integrated": false,
           "line": false,
           "living": false,
@@ -503,6 +533,7 @@
           "polymorphic": false,
           "powered": false,
           "professional": false,
+          "propel": false,
           "punchGun": false,
           "qreload": false,
           "radioactive": false,
@@ -511,6 +542,7 @@
           "regrowth": false,
           "relic": false,
           "reposition": false,
+          "scramble": false,
           "shape": false,
           "shatter": false,
           "shells": false,
@@ -540,13 +572,17 @@
           "additional": "",
           "per": "",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "rollNotes": "",
         "save": {
-          "type": "",
-          "dc": "",
+          "type": "fort",
+          "dc": "13",
           "descriptor": "negate"
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": ""
         },
         "source": "",
         "special": "",
@@ -560,6 +596,7 @@
           "inubrix": false,
           "khefak": false,
           "noqual": false,
+          "nyblantine": false,
           "purplecores": false,
           "siccatite": false,
           "silver": false,
@@ -574,30 +611,32 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
         "weaponType": "smallA"
-      },
-      "technological": false,
-      "upgrade": false,
-      "vehicleAttack": false,
-      "vehicleSystem": false,
-      "weapon": false,
-      "weaponAccessory": false
+      }
     },
     {
       "_id": "ixe2FgybHRut3IFU",
       "name": "Pyric Fire (Su)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
         "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
@@ -605,6 +644,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -626,7 +666,49 @@
           "unidentified": "",
           "value": "<p>The fire damage of a pyric revenant burns body and spirit, ignoring fire resistance and dealing half damage even to creatures with fire immunity. A creature burning due to this fire can gain no bonuses to end that condition. A creature that dies due to pyric fire damage becomes a pyric revenant 1d4 hours later.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -634,6 +716,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -667,6 +750,11 @@
       "_id": "gjw4dDtBTFd36OHn",
       "name": "Dimly Illuminated (Su)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
@@ -680,6 +768,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -702,6 +791,11 @@
           "value": "<p>Light within 10 feet of a pyric revenant increases by one step. Magical darkness decreases this light only if it’s from a source with a CR or level higher than the revenant’s CR.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -709,6 +803,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -742,6 +837,11 @@
       "_id": "aKU1WTV12kXACzWd",
       "name": "Unliving",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -758,6 +858,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -780,6 +881,11 @@
           "value": "<p>(EX)</p>\n<p>The creature has no Constitution score or modifier. Any DCs or other statistics that rely on a Constitution score treat the creature as having a score of 10 (+0). The creature is immediately destroyed when it reaches 0 Hit Points. An unliving creature doesn’t heal damage naturally, but a construct can be repaired with the right tools. Spells such as make whole can heal constructs, and magic effects can heal undead. An unliving creature with fast healing (see page 154) still benefits from that ability. Unliving creatures don’t breathe, eat, or sleep. They can’t be raised or resurrected, except through the use of miracle, wish, or a similar effect that specifically works on unliving creatures.</p>\n<hr />"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -787,6 +893,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -820,6 +927,11 @@
       "_id": "LKf9mhwJqz4ppXwF",
       "name": "Susceptible to Water (Su)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
@@ -836,6 +948,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -858,6 +971,11 @@
           "value": "<p>A splash of water deals 1d4 acid damage to a pyric revenant, while a large amount, such as heavy rain, deals 2d4 acid damage. Full immersion in water deals 4d4 acid damage per round to a pyric revenant. However, water can’t reduce a pyric revenant to fewer than one-fifth of its Hit Points (typically 10). Ice does not trigger a pyric revenant’s water susceptibility.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -865,6 +983,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -893,22 +1012,175 @@
           "value": 0
         }
       }
+    },
+    {
+      "_id": "uJfX5w1h33zCYSBM",
+      "name": "Pyric Curse",
+      "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "img": "icons/svg/item-bag.svg",
+      "system": {
+        "type": "",
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "save",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "ft",
+          "value": "0"
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "name": "",
+              "formula": "1d4",
+              "group": null,
+              "isPrimarySection": true,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": true,
+                "healing": false,
+                "piercing": false,
+                "slashing": false,
+                "sonic": false
+              }
+            }
+          ],
+          "primaryGroup": null
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p><strong>Type</strong>&nbsp;curse;&nbsp;<strong>Save</strong>&nbsp;Fortitude DC 13</p>\n<p><strong>Effect</strong>&nbsp;A creature that fails the save gains the @UUID[Compendium.sfrpg.conditions.Item.8LdyXZl9PeXXFE8O]{burning} 1d4 condition. This flame is @UUID[Compendium.sfrpg.alien-archives.Actor.OkJFf1ErWW0ZQTer.Item.ixe2FgybHRut3IFU]{pyric fire} (see special ability). While affected, the creature succeeds at saving throws against other pyric curses of the same or weaker potency.</p>\n<p><strong>Cure</strong>&nbsp;1 save; successful saves against the burning condition are successful saves against the curse.</p>"
+        },
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
+        "duration": {
+          "units": "text",
+          "value": null
+        },
+        "formula": "",
+        "isActive": null,
+        "modifiers": [],
+        "properties": {},
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "none",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "rollNotes": "",
+        "save": {
+          "type": "fort",
+          "dc": "13",
+          "descriptor": "negate"
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": ""
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": null,
+          "per": null,
+          "value": null
+        }
+      }
     }
   ],
   "prototypeToken": {
     "name": "Pyric Revenant",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -929,15 +1201,30 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -950,12 +1237,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "tint": null
+      "src": "icons/svg/mystery-man.svg",
+      "tint": "#ffffff"
     },
     "width": 1
   },
@@ -1172,14 +1464,18 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<h2>Description</h2>\n<p>When pyric fire kills, it roasts flesh while kindling the spirit. Left unchecked, this otherworldly flame awakens a slain creature as an undead of ash, embers, and fire. Some pyric revenants smell of charred meat, which can be the first indication one is nearby.</p>\n<p>A pyric revenant retains negative traits, such as low cunning or the desire to seek out and torment previous adversaries. The revenant might remember unfinished business and important people, and attempt to destroy such vestiges of its former life. If undirected, however, the creature is straightforward in its malice. It carries out no long-term schemes.</p>\n<section>\n<h2>PYRIC CURSE</h2>\n<p><strong>Type</strong>&nbsp;curse;&nbsp;<strong>Save</strong>&nbsp;Fortitude DC 18</p>\n<p><strong>Effect</strong>&nbsp;A creature that fails the save gains the burning 1d8 condition. This flame is pyric fire (see special ability). While affected, the creature succeeds at saving throws against other pyric curses of the same or weaker potency.</p>\n<p><strong>Cure</strong> 1 save; successful saves against the burning condition are successful saves against the curse.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<h3>Organization</h3>\n<p>solitary, pair, or horde (3-10)</p>\n</section>",
         "weight": ""
       },
       "class": "",
+      "combatRole": "",
       "cr": 4,
       "environment": "",
       "organization": "",

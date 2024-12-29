@@ -12,28 +12,28 @@ export default function(engine) {
         }
 
         /** Set up base values. */
-        const forwardTL = deepClone(data.quadrants.forward.targetLock);
+        const forwardTL = foundry.utils.deepClone(data.quadrants.forward.targetLock);
         data.quadrants.forward.targetLock = {
             value: 10,
             misc: (forwardTL?.misc || 0),
             tooltip: [game?.i18n ? game.i18n.localize("SFRPG.StarshipSheet.Modifiers.Base") : 'Base: 10']
         };
 
-        const portTL = deepClone(data.quadrants.port.targetLock);
+        const portTL = foundry.utils.deepClone(data.quadrants.port.targetLock);
         data.quadrants.port.targetLock = {
             value: 10,
             misc: (portTL?.misc || 0),
             tooltip: [game?.i18n ? game.i18n.localize("SFRPG.StarshipSheet.Modifiers.Base") : 'Base: 10']
         };
 
-        const starboardTL = deepClone(data.quadrants.starboard.targetLock);
+        const starboardTL = foundry.utils.deepClone(data.quadrants.starboard.targetLock);
         data.quadrants.starboard.targetLock = {
             value: 10,
             misc: (starboardTL?.misc || 0),
             tooltip: [game?.i18n ? game.i18n.localize("SFRPG.StarshipSheet.Modifiers.Base") : 'Base: 10']
         };
 
-        const aftTL = deepClone(data.quadrants.aft.targetLock);
+        const aftTL = foundry.utils.deepClone(data.quadrants.aft.targetLock);
         data.quadrants.aft.targetLock = {
             value: 10,
             misc: (aftTL?.misc || 0),
@@ -105,10 +105,10 @@ export default function(engine) {
         if (shieldItem) {
             const shieldData = shieldItem.system;
             if (shieldData.isDeflector) {
-                if (data.quadrants.forward.shields.value > 0) addScore(data.quadrants.forward.targetLock, shieldItem.name, shieldData.armorBonus, false);
-                if (data.quadrants.port.shields.value > 0) addScore(data.quadrants.port.targetLock, shieldItem.name, shieldData.armorBonus, false);
-                if (data.quadrants.starboard.shields.value > 0) addScore(data.quadrants.starboard.targetLock, shieldItem.name, shieldData.armorBonus, false);
-                if (data.quadrants.aft.shields.value > 0) addScore(data.quadrants.aft.targetLock, shieldItem.name, shieldData.armorBonus, false);
+                if (data.quadrants.forward.shields.value > 0) addScore(data.quadrants.forward.targetLock, shieldItem.name, shieldData.targetLockBonus, false);
+                if (data.quadrants.port.shields.value > 0) addScore(data.quadrants.port.targetLock, shieldItem.name, shieldData.targetLockBonus, false);
+                if (data.quadrants.starboard.shields.value > 0) addScore(data.quadrants.starboard.targetLock, shieldItem.name, shieldData.targetLockBonus, false);
+                if (data.quadrants.aft.shields.value > 0) addScore(data.quadrants.aft.targetLock, shieldItem.name, shieldData.targetLockBonus, false);
             }
         }
 

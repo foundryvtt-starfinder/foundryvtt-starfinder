@@ -2,6 +2,11 @@
   "_id": "jA6eTWFaULIpjXAx",
   "name": "Spider Climb",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "systems/sfrpg/icons/spells/spider_climb.webp",
   "system": {
     "type": "",
@@ -9,6 +14,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "action",
@@ -17,11 +23,13 @@
     },
     "allowedClasses": {
       "myst": true,
+      "precog": false,
       "tech": true,
       "wysh": false
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": null,
       "value": null
@@ -36,18 +44,23 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>The target can climb and travel on vertical surfaces or even traverse ceilings as well as a spider does. An affected creature with four limbs must have three limbs free (not holding equipment or being used to perform skills and so on) to climb in this manner. A creature with six limbs needs only four available. In general, other creatures must have 75% of their limbs available to benefit from this spell. The target gains a climb speed of 20 feet (and the +8 species bonus to Athletics checks to climb granted by that climb speed); furthermore, it doesn’t need to attempt Athletics checks to climb to traverse a vertical or horizontal surface (even upside down). An affected creature climbing in this way is not @UUID[Compendium.sfrpg.conditions.MZ8OoH1GE9qDMyCD]{Flat-footed} while climbing, and opponents get no special bonus to their attacks against it. The creature, however, can’t use the run action while climbing.</p>"
+      "value": "<p>The target can climb and travel on vertical surfaces or even traverse ceilings as well as a spider does. An affected creature with four limbs must have three limbs free (not holding equipment or being used to perform skills and so on) to climb in this manner. A creature with six limbs needs only four available. In general, other creatures must have 75% of their limbs available to benefit from this spell. The target gains a climb speed of 20 feet (and the +8 species bonus to Athletics checks to climb granted by that climb speed); furthermore, it doesn’t need to attempt Athletics checks to climb to traverse a vertical or horizontal surface (even upside down). An affected creature climbing in this way is not @UUID[Compendium.sfrpg.conditions.Item.MZ8OoH1GE9qDMyCD]{Flat-footed} while climbing, and opponents get no special bonus to their attacks against it. The creature, however, can’t use the run action while climbing.</p>"
     },
     "descriptors": [],
     "dismissible": false,
     "duration": {
-      "units": "",
-      "value": "10 minutes/level"
+      "units": "minute",
+      "value": "@details.cl.value*10"
     },
     "formula": "",
+    "isActive": null,
+    "isVariableLevel": false,
     "level": 2,
     "materials": {
       "consumed": false,
@@ -60,12 +73,14 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
       "units": "touch",
       "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "will",
       "dc": "",

@@ -2,12 +2,22 @@
   "_id": "WFiEIF0ZRbexdcsN",
   "name": "Dinosaur, Pterosaur",
   "type": "npc2",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "_id": "XnGjW0oQLwA0vko1",
       "name": "Bite",
       "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
@@ -22,6 +32,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -84,6 +95,7 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -101,6 +113,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -114,6 +127,7 @@
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -121,6 +135,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -142,10 +157,16 @@
       "_id": "x1Tf5unTU3qT7nvH",
       "name": "Spring Attack (Combat)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "systems/sfrpg/icons/feats/spring_attack.webp",
       "system": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "full",
@@ -154,6 +175,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -167,6 +189,7 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -175,6 +198,11 @@
           "value": "<p>You can deftly move up to a foe, strike, and withdraw before it can react.</p>\n<p><strong>Prerequisites</strong>: Dex 15, Mobility, base attack bonus +4.</p>\n<hr />\n<p><strong>Benefit</strong>: As a full action, you can move up to your speed and make a single melee attack or combat maneuver without provoking any attacks of opportunity from the target of your attack. You can move both before and after the attack, but you must move at least 10 feet before the attack, and the total distance that you move cannot be greater than your speed. You cannot use this ability to attack a foe that is adjacent to you at the start of your turn. If you have the trick attack class feature, you can take your movement from trick attack at any time during a trick attack with a melee weapon (instead of only before), without provoking any attacks of opportunity from the target of your attack.</p>\n<p><strong>Normal</strong>: You can move only before or after an attack, not both.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -213,6 +241,7 @@
             "valueAffected": "blu"
           }
         ],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -224,6 +253,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -246,16 +276,19 @@
     "name": "Dinosaur, Pterosaur",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
     "height": 2,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -276,15 +309,30 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -297,12 +345,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "tint": null
+      "src": "icons/svg/mystery-man.svg",
+      "tint": "#ffffff"
     },
     "width": 2
   },
@@ -352,12 +405,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -488,8 +547,11 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
+        "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
         "height": "",
+        "homeWorld": "",
         "otherVisuals": "",
         "public": "",
         "value": "<h2>Dinosaur</h2>\n<p>The term “dinosaur” refers to a category of reptilelike fauna associated with a planet’s prehistoric evolutionary scale. Dinosaurs vary in size, although many are quite large, and they come in a variety of forms. A ceratopsid is a quadruped that has bony frills extending from its head back over its shoulders, as well as horns that adorn its face; one example is the herbivorous triceratops. Dromaeosaurids are bipedal, feathered carnivores, like the pack-hunting deinonychus (also called a raptor). Plesiosaurs are marine reptiles with long necks and toothy mouths that dwell and hunt near the water’s surface. Pterosaurs are flying reptilian beasts with membranous wings and long, sharp, triangular beaks. Sauropods are immense, lumbering quadrupeds with long necks and tails and towering stature, such as brachiosaurus and diplodocus. Theropods are bipedal dinosaurs, generally carnivorous, with fearsome, fanged jaws and clawed digits, like the tyrannosaurus. Thyreophorans are quadrupedal dinosaurs with armor-plated backs and tails weaponized with bludgeoning bone or piercing spikes, including the ankylosaurus and the stegosaurus.</p>\n<h2>Creating Dinosaurs</h2>\n<p>The dinosaurs in this entry serve a couple of purposes. Employ them as written when you need statistics for this sort of creature. To create a unique dinosaur, use the stat blocks here and your concept as starting points. Decide what type of natural weapon the animal has, altering the damage type to suit the weapon. Then add elements from Appendix 2: Environmental Grafts. Tailor anything you want to fit your concept.</p>",
@@ -499,6 +561,10 @@
       "cr": 3,
       "environment": "any",
       "organization": "solitary, pair, or flock (3-8)",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AA2 pg. 38",
@@ -811,6 +877,9 @@
       },
       "senses": "low-light vision",
       "size": "large",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   }

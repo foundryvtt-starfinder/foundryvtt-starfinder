@@ -2,6 +2,11 @@
   "_id": "MC4TrLHbVXqiBpYZ",
   "name": "Screamer grenade I",
   "type": "weapon",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "icons/weapons/thrown/bomb-gas-grey-purple.webp",
   "system": {
     "type": "",
@@ -16,8 +21,10 @@
       "condition": "",
       "cost": 1
     },
+    "ammunitionType": "",
     "area": {
       "effect": "burst",
+      "shapable": false,
       "shape": "sphere",
       "units": "ft",
       "value": 15
@@ -50,6 +57,7 @@
     "chatFlavor": "deafened [[1d4]] minutes",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": 1,
       "isOpen": true,
       "storage": [
         {
@@ -89,8 +97,11 @@
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>When detonated, a screamer grenade releases a piercing shriek of sonic energy</p>"
     },
@@ -99,10 +110,12 @@
       "units": "",
       "value": ""
     },
+    "equippable": false,
     "equipped": false,
     "formula": "",
     "identified": true,
     "isActive": null,
+    "isEquipment": true,
     "level": 4,
     "modifiers": [],
     "price": 320,
@@ -195,12 +208,14 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
       "value": 20
     },
+    "rollNotes": "",
     "save": {
       "type": "reflex",
       "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
@@ -208,6 +223,7 @@
     },
     "source": "CRB pg. 178",
     "special": "",
+    "specialMaterials": {},
     "target": {
       "type": "",
       "value": ""

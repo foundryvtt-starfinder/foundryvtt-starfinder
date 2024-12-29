@@ -2,6 +2,11 @@
   "_id": "PVzsrE1TxBBjDLCa",
   "name": "Command",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "systems/sfrpg/icons/spells/command.webp",
   "system": {
     "type": "",
@@ -9,6 +14,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "action",
@@ -17,11 +23,13 @@
     },
     "allowedClasses": {
       "myst": true,
+      "precog": false,
       "tech": false,
       "wysh": false
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": null,
       "value": null
@@ -36,18 +44,23 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>You give the target one of the following commands, which it obeys to the best of its ability at its earliest opportunity. If the target can’t carry out your command on its next turn, the spell automatically fails.</p>\n<p><strong>Approach</strong>: The target moves toward you as quickly and directly as possible for 1 round, taking no other actions and triggering reactions (such as attacks of opportunity) for this movement as normal.</p>\n<p><strong>Drop</strong>: The target drops whatever it is holding. It can’t pick up any dropped item until its next turn.</p>\n<p><strong>Fall</strong>: The target falls to the ground and remains @UUID[Compendium.sfrpg.conditions.XeRGqHVtcZ7vsgJ0]{Prone} for 1 round. It can otherwise act normally.</p>\n<p><strong>Flee</strong>: The target moves away from you as quickly and directly as possible for 1 round, taking no other actions and provoking reactions (such as attacks of opportunity) for this movement as normal.</p>\n<p><strong>Halt</strong>: The target is @UUID[Compendium.sfrpg.conditions.2XWEujYSyryB4oHm]{Dazed} for 1 round.</p>"
+      "value": "<p>You give the target one of the following commands, which it obeys to the best of its ability at its earliest opportunity. If the target can’t carry out your command on its next turn, the spell automatically fails.</p>\n<p><strong>Approach</strong>: The target moves toward you as quickly and directly as possible for 1 round, taking no other actions and triggering reactions (such as attacks of opportunity) for this movement as normal.</p>\n<p><strong>Drop</strong>: The target drops whatever it is holding. It can’t pick up any dropped item until its next turn.</p>\n<p><strong>Fall</strong>: The target falls to the ground and remains @UUID[Compendium.sfrpg.conditions.Item.XeRGqHVtcZ7vsgJ0]{Prone} for 1 round. It can otherwise act normally.</p>\n<p><strong>Flee</strong>: The target moves away from you as quickly and directly as possible for 1 round, taking no other actions and provoking reactions (such as attacks of opportunity) for this movement as normal.</p>\n<p><strong>Halt</strong>: The target is @UUID[Compendium.sfrpg.conditions.Item.2XWEujYSyryB4oHm]{Dazed} for 1 round.</p>"
     },
     "descriptors": [],
     "dismissible": false,
     "duration": {
-      "units": "",
-      "value": "1 round"
+      "units": "round",
+      "value": "1"
     },
     "formula": "",
+    "isActive": null,
+    "isVariableLevel": false,
     "level": 1,
     "materials": {
       "consumed": false,
@@ -60,12 +73,14 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
-      "additional": "5 ft.",
-      "per": "2 levels",
-      "units": "ft",
-      "value": 25
+      "additional": "",
+      "per": "",
+      "units": "close",
+      "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "will",
       "dc": "",

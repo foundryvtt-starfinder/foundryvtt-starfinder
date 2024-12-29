@@ -1,6 +1,9 @@
 <form class="{{cssClass}} flexcol" autocomplete="off">
     <header class="sheet-header flexrow">
-        <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img" />
+        <div class="image-container">
+            <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img" height="140" width="140" />
+            <a class="hover-icon" data-action="show-image"><i class="fas fa-image fa-fw"></i></a>
+        </div>
 
         <div class="header-details flexcol">
             <div class="header-background flexrow" style="flex: 0 0 60px;">
@@ -45,7 +48,7 @@
         <div class="tab details" data-group="primary" data-tab="details">
             <div class="flexrow">
                 <ul class="attributes flexrow">
-                    <li data-tippy-content="{{localize 'SFRPG.VehicleSheet.Details.HealthTooltip'}}" class="attribute health">
+                    <li data-tooltip="{{localize 'SFRPG.VehicleSheet.Details.HealthTooltip'}}" class="attribute health">
                         <h4 class="attribute-name box-title">{{ localize "SFRPG.Health" }}</h4>
                         <div class="attribute-value multiple">
                             <input name="system.attributes.hp.value" type="text" value="{{system.attributes.hp.value}}" data-dtype="Number" placeholder="10" />
@@ -140,12 +143,7 @@
                             <label>Control</label>
                             <div class="form-fields">
                                 <select name="system.attributes.controlSkill">
-                                    {{#select system.attributes.controlSkill}}
-                                    <option value="pil">{{ config.skills.pil }}</option>
-                                    <option value="ath">{{ config.skills.ath }}</option>
-                                    <option value="sur">{{ config.skills.sur }}</option>
-                                    <option value="none">None</option>
-                                    {{/select}}
+                                    {{selectOptions config.controlSkills selected=system.attributes.controlSkill}}
                                 </select>
                                 {{#if (eq system.attributes.controlSkill "pil")}}
                                 <input type="text" name="system.attributes.modifiers.piloting" value="{{system.attributes.modifiers.piloting}}" />
@@ -164,21 +162,21 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label data-tippy-content="{{localize 'SFRPG.VehicleSheet.Details.Modifiers.AttackTooltip'}}">{{ localize "SFRPG.VehicleSheet.Details.Modifiers.AttackStopped" }}</label>
+                            <label data-tooltip="{{localize 'SFRPG.VehicleSheet.Details.Modifiers.AttackTooltip'}}">{{ localize "SFRPG.VehicleSheet.Details.Modifiers.AttackStopped" }}</label>
                             <div class="form-fields">
-                                <input data-tippy-content="{{localize 'SFRPG.VehicleSheet.Details.Modifiers.AttackTooltip'}}" type="text" name="system.attributes.modifiers.attackStopped" value="{{system.attributes.modifiers.attackStopped}}" />
+                                <input data-tooltip="{{localize 'SFRPG.VehicleSheet.Details.Modifiers.AttackTooltip'}}" type="text" name="system.attributes.modifiers.attackStopped" value="{{system.attributes.modifiers.attackStopped}}" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label data-tippy-content="{{localize 'SFRPG.VehicleSheet.Details.Modifiers.AttackTooltip'}}">{{ localize "SFRPG.VehicleSheet.Details.Modifiers.AttackMoving" }}</label>
+                            <label data-tooltip="{{localize 'SFRPG.VehicleSheet.Details.Modifiers.AttackTooltip'}}">{{ localize "SFRPG.VehicleSheet.Details.Modifiers.AttackMoving" }}</label>
                             <div class="form-fields">
-                                <input data-tippy-content="{{localize 'SFRPG.VehicleSheet.Details.Modifiers.AttackTooltip'}}" type="text" name="system.attributes.modifiers.attackMoving" value="{{system.attributes.modifiers.attackMoving}}" />
+                                <input data-tooltip="{{localize 'SFRPG.VehicleSheet.Details.Modifiers.AttackTooltip'}}" type="text" name="system.attributes.modifiers.attackMoving" value="{{system.attributes.modifiers.attackMoving}}" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label data-tippy-content="{{localize 'SFRPG.VehicleSheet.Details.Modifiers.AttackTooltip'}}">{{ localize "SFRPG.VehicleSheet.Details.Modifiers.AttackFullSpeed" }}</label>
+                            <label data-tooltip="{{localize 'SFRPG.VehicleSheet.Details.Modifiers.AttackTooltip'}}">{{ localize "SFRPG.VehicleSheet.Details.Modifiers.AttackFullSpeed" }}</label>
                             <div class="form-fields">
-                                <input data-tippy-content="{{localize 'SFRPG.VehicleSheet.Details.Modifiers.AttackTooltip'}}" type="text" name="system.attributes.modifiers.attackFullSpeed" value="{{system.attributes.modifiers.attackFullSpeed}}" />
+                                <input data-tooltip="{{localize 'SFRPG.VehicleSheet.Details.Modifiers.AttackTooltip'}}" type="text" name="system.attributes.modifiers.attackFullSpeed" value="{{system.attributes.modifiers.attackFullSpeed}}" />
                             </div>
                         </div>
                     </div>
@@ -192,11 +190,7 @@
                             <label>{{ localize "SFRPG.VehicleSheet.Details.OtherAttributes.Size" }}</label>
                             <div class="form-fields">
                                 <select name="system.attributes.size">
-                                    {{#select system.attributes.size}}
-                                    {{#each config.vehicleSizes as |size s|}}
-                                    <option value="{{s}}">{{size}}</option>
-                                    {{/each}}
-                                    {{/select}}
+                                    {{selectOptions config.vehicleSizes selected=system.attributes.size}}
                                 </select>
                             </div>
                         </div>
@@ -204,11 +198,7 @@
                             <label>{{ localize "SFRPG.VehicleSheet.Details.OtherAttributes.Type" }}</label>
                             <div class="form-fields">
                                 <select name="system.attributes.type">
-                                    {{#select system.attributes.type}}
-                                    {{#each config.vehicleTypes as |type t|}}
-                                    <option value="{{t}}">{{type}}</option>
-                                    {{/each}}
-                                    {{/select}}
+                                    {{selectOptions config.vehicleTypes selected=system.attributes.type}}
                                 </select>
                             </div>
                         </div>
@@ -216,11 +206,7 @@
                             <label>{{ localize "SFRPG.VehicleSheet.Details.OtherAttributes.Cover" }}</label>
                             <div class="form-fields">
                                 <select name="system.attributes.cover">
-                                    {{#select system.attributes.cover}}
-                                    {{#each config.vehicleCoverTypes as |cover c|}}
-                                    <option value="{{c}}">{{cover}}</option>
-                                    {{/each}}
-                                    {{/select}}
+                                    {{selectOptions config.vehicleCoverTypes selected=system.attributes.cover}}
                                 </select>
                             </div>
                         </div>

@@ -2,6 +2,11 @@
   "_id": "8Uv0VEIs6PAuZVf6",
   "name": "Hailstorm",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "systems/sfrpg/icons/feats/focused_sense.webp",
   "system": {
     "type": "",
@@ -9,6 +14,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "action",
@@ -17,11 +23,13 @@
     },
     "allowedClasses": {
       "myst": true,
+      "precog": false,
       "tech": false,
       "wysh": true
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "cylinder",
       "units": "ft",
       "value": 20
@@ -78,8 +86,8 @@
     "descriptors": [],
     "dismissible": true,
     "duration": {
-      "units": "",
-      "value": "1 round/level (D)"
+      "units": "round",
+      "value": "@details.cl.value"
     },
     "formula": "",
     "isActive": null,
@@ -96,11 +104,12 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
-      "additional": "40 ft.",
-      "per": "level",
-      "units": "ft",
-      "value": 400
+      "additional": "",
+      "per": "",
+      "units": "long",
+      "value": null
     },
     "rollNotes": "",
     "save": {

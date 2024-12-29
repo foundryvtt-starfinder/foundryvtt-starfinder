@@ -2,6 +2,11 @@
   "_id": "GQeKJki7ErOP4qUi",
   "name": "Venomous Weapon",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "systems/sfrpg/icons/spells/venomous_weapon.webp",
   "system": {
     "type": "",
@@ -9,6 +14,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "action",
@@ -17,11 +23,13 @@
     },
     "allowedClasses": {
       "myst": true,
+      "precog": false,
       "tech": false,
       "wysh": true
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": null,
       "value": null
@@ -36,18 +44,23 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>You touch a weapon that deals bludgeoning, piercing, or slashing damage and imbue it with @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Poison}. The next five attacks made using the weapon are poisoned. Each creature damaged by these attacks must succeed at a Fortitude save or be sickened for 2d4 rounds.</p>"
     },
     "descriptors": [],
     "dismissible": false,
     "duration": {
-      "units": "",
-      "value": "1 minute/level"
+      "units": "minute",
+      "value": "@details.cl.value"
     },
     "formula": "",
+    "isActive": null,
+    "isVariableLevel": false,
     "level": 2,
     "materials": {
       "consumed": false,
@@ -60,12 +73,14 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
       "units": "touch",
       "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,

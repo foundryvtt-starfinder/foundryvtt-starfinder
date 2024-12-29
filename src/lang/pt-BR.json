@@ -1,60 +1,4 @@
 {
-    "ACTOR": {
-        "TypeCharacter": "Personagem Jogador",
-        "TypeDrone": "Drone",
-        "TypeHazard": "Perigo",
-        "TypeNpc": "Old Style NPC",
-        "TypeNpc2": "NPC",
-        "TypeStarship": "Espaçonave",
-        "TypeVehicle": "Veículo"
-    },
-    "ITEM": {
-        "TypeActorresource": "Actor Resource",
-        "TypeAmmunition": "Ammunition",
-        "TypeArchetypes": "Arquetipo",
-        "TypeAsi": "Incremento Valor Habilidade",
-        "TypeAugmentation": "Acréscimo",
-        "TypeChassis": "Drone Chassis",
-        "TypeClass": "Classe",
-        "TypeConsumable": "Consumível",
-        "TypeContainer": "Container",
-        "TypeEquipment": "Armadura",
-        "TypeFeat": "Talento",
-        "TypeFusion": "Fusão de Arma",
-        "TypeGoods": "Bons",
-        "TypeHybrid": "Hibrido",
-        "TypeMagic": "Magico",
-        "TypeMod": "Drone Mod",
-        "TypeRace": "Raça",
-        "TypeShield": "Escudo",
-        "TypeSpell": "Magia",
-        "TypeStarshipablativearmor": "Espaçonave Placas Ablativas",
-        "TypeStarshipaction": "Espaçonave Ação",
-        "TypeStarshiparmor": "Espaçonave Armadura",
-        "TypeStarshipcomputer": "Espaçonave Computador",
-        "TypeStarshipcrewquarter": "Espaçonave Alojamentos da Tripulação",
-        "TypeStarshipdefensivecountermeasure": "Espaçonave Contramedida Defensiva",
-        "TypeStarshipdriftengine": "Espaçonave Motor de Deriva",
-        "TypeStarshipexpansionbay": "Espaçonave Compartimentos de Expansão",
-        "TypeStarshipfortifiedhull": "Espaçonave Casco Foritficado",
-        "TypeStarshipframe": "Espaçonave Plataforma",
-        "TypeStarshipothersystem": "Espaçonave Outros Sistemas",
-        "TypeStarshippowercore": "Espaçonave Núcleo de Energia",
-        "TypeStarshipreinforcedbulkhead": "Espaçonave Anteparas Reforçadas",
-        "TypeStarshipsecuritysystem": "Espaçonave Sistemas de Segurança",
-        "TypeStarshipsensor": "Espaçonave Sensor",
-        "TypeStarshipshield": "Espaçonave Escudos",
-        "TypeStarshipspecialability": "Starship Special Ability",
-        "TypeStarshipthruster": "Espaçonave Propulsor",
-        "TypeStarshipweapon": "Espaçonave Armas",
-        "TypeTechnological": "Tecnologica",
-        "TypeTheme": "Tema",
-        "TypeUpgrade": "Atualização Armadura",
-        "TypeVehicleattack": "Veículo Ataque",
-        "TypeVehiclesystem": "Veículo Sistema",
-        "TypeWeapon": "Armas",
-        "TypeWeaponaccessory": "Acessório de Armas"
-    },
     "SFRPG": {
         "ACPTooltip": "Penalidade Armadura: {mod} ({source})",
         "ACTooltipArmorACMod": "Modificador de Armadura: {armor} ({name})",
@@ -347,6 +291,8 @@
                     "EditModifierTooltip": "Open the modifier editor for this modifier.",
                     "SkillRank": "{type} graduação: {mod} ({source})",
                     "Speed": "{speed}: {type} {mod} ({source})",
+                    "ToggleEffect": "Toggle effect",
+                    "ToggleEffectTooltip": "Toggle this effect on or off. Disabled effects do not affect the character.",
                     "ToggleModifier": "Toggle modifier",
                     "ToggleModifierTooltip": "Toggle a modifier on and off. Disabled modifiers do not affect the character."
                 },
@@ -522,25 +468,35 @@
                 "Accept": "Accept",
                 "ApplyDamage": "Apply Damage",
                 "ApplyHealing": "Apply Healing",
+                "ApplyHealingTo": "Apply Healing To",
+                "BypassStamina": "BypassStamina",
                 "DamageAndAHalf": "1.5x Damage",
                 "DoubleDamage": "Double Damage",
+                "HP": "HP (default)",
+                "HPAndSP": "Both HP and SP",
                 "HalfDamage": "Half Damage",
                 "ModifyDamage": "Modify Damage",
                 "ModifyDamageText": "Input an number to modify the damage amount by. This is applied after any multiplication.",
                 "NoDamageModifier": "No damage modifier applied.",
-                "NoToken": "Cannot apply: No token selected!"
+                "NoToken": "Cannot apply: No token selected!",
+                "SP": "SP"
             },
             "ItemAction": {
-                "Check": "Check"
+                "Check": "Check",
+                "NoActor": "You must have an actor selected or assigned to your user."
             },
             "ItemActivation": {
                 "Activates": "Activados",
                 "Cost": "Custo: {cost}",
                 "Deactivates": "Desativados",
                 "Duration": "Duração: {duration}",
-                "Reloads": "Recarregados"
-            }
+                "NoCharges": "No Charges",
+                "Reloads": "Recarregados",
+                "Use": "Use"
+            },
+            "PlaceAbilityTemplate": "Place {label}"
         },
+        "Check": "Check",
         "ClassArmorProf": "Proficiencias Armadura",
         "ClassBABProgression": "Progressão BBA",
         "ClassFortSaveProgression": "Progressão Save Fortitude",
@@ -574,6 +530,48 @@
                 },
                 "Turn": {
                     "Header": "Turno de {combatant}"
+                }
+            },
+            "Difficulty": {
+                "Levels": {
+                    "Average": "Average",
+                    "Challenging": "Challenging",
+                    "Easy": "Easy",
+                    "Epic": "Epic",
+                    "GreaterThanEpic": "Greater than Epic",
+                    "Hard": "Hard",
+                    "LessThanEasy": "Less than Easy",
+                    "NoEnemies": "No enemies",
+                    "NoEnemyShips": "No Enemy Ships",
+                    "NoPCShips": "No PC Ships",
+                    "NoPCs": "No PCs"
+                },
+                "Tooltip": {
+                    "APL": "APL: ",
+                    "APLFull": "Average Party Level",
+                    "CR": "CR: ",
+                    "CanBeAdded": "A creature of this CR can be added without increasing the encounter difficulty",
+                    "ClickForDetails": "Click for Encounter Details",
+                    "Details": "Details",
+                    "DifficultyEncounter": "Difficulty Encounter",
+                    "EncounterCR": "Encounter Challenge Rating",
+                    "EncounterTotalXP": "Encounter Total XP Value",
+                    "EncounterWealth": "Suggested Wealth Gain (credits)",
+                    "Enemies": "Enemies",
+                    "EnemyShipEffectiveTier": "Effective Tier, Enemy Ship(s)",
+                    "EnemyXP": "Enemy Total XP Value",
+                    "HostileNPCs": "Hostile NPCs: ",
+                    "PCs": "Number of PCs: ",
+                    "PlayerShipEffectiveTier": "Effective Tier, Player Ship(s) ",
+                    "PlayerXP": "Per Player XP",
+                    "Players": "Players",
+                    "XPBounds": "XP Bounds",
+                    "XPNext": "Add XP to increase CR: ",
+                    "XPPrevious": "Remove XP to reduce CR: "
+                },
+                "Units": {
+                    "Credits": "cr",
+                    "XP": "XP"
                 }
             },
             "EncounterTracker": {
@@ -641,8 +639,56 @@
                 }
             }
         },
+        "CombatRoles": {
+            "Combatant": "Combatant",
+            "Descriptions": {
+                "Combatant": "These creatures are best suited to physical fighting; they may be most effective at range, in melee, or both.",
+                "Expert": "These creatures tend to be most effective with various skills.",
+                "Spellcaster": "These creatures rely primarily on spells or spell-like abilities."
+            },
+            "Expert": "Expert",
+            "Label": "Combat Role",
+            "Spellcaster": "Spellcaster"
+        },
         "ComingSoon": "Em breve!",
         "ConImm": "Condições de Imunidades",
+        "ConditionTooltips": {
+            "Asleep": "You take a -10 penalty to Perception checks to notice things.",
+            "Bleeding": "You take the listed damage at the beginning of your turn.",
+            "Blinded": "You're flat-footed, you take a -4 penalty to most Str- and Dex-based skill checks and opposed Perception checks, you automatically fail Perception checks based on sight, opponents have total concealment against you, and you must succeed at a DC 10 Acrobatics check to move faster than half speed or else fall prone.",
+            "Broken": "<strong>Weapon:</strong> attack and damage rolls take a -2 penalty and can't deal extra effects on a critical hit;<br> <strong>Armor:</strong> AC bonuses are halved and the armor check penalty is doubled;<br> <strong>Vehicle:</strong> -2 penalty to AC, collision DC, and Piloting modifier, and it halves its full speed and MPH;<br> <strong>Tool or tech that provides bonuses:</strong> bonuses are halved.",
+            "Burning": "You take the listed fire damage each round, and you must be extinguished to end the condition.",
+            "Confused": "You treat all creatures as enemies, and you must roll on the table to determine your actions.",
+            "Cowering": "You're flat-footed and can take no actions.",
+            "Dazed": "You can take no actions.",
+            "Dazzled": "You take a -1 penalty to attack rolls and sight-based Perception checks.",
+            "Dead": "Your soul leaves your body, you can't act in any way, and you can't benefit from normal or magical healing.",
+            "Deafened": "You take a -4 penalty to initiative checks and opposed Perception checks, and you automatically fail sound-based Perception checks.",
+            "Dying": "You're unconscious, you can take no actions, and you must stabilize or lose Resolve Points and potentially die.",
+            "Encumbered": "Speeds are reduced by 10 feet, maximum Dex bonus to AC is reduced to +2, and you take a -5 penalty to Str- and Dex-based checks.",
+            "Entangled": "You move at half speed; you cannot run or charge; and you take a -2 penalty to AC, attack rolls, Reflex saves, initiative checks, and Dex-based skill and ability checks.",
+            "Exhausted": "You move at half speed; you cannot run or charge; you take a -3 penalty to AC, attack rolls, melee damage rolls, Reflex saves, initiative checks, and Str- and Dex-based skill and ability checks; and you reduce your encumbered limit by 3 bulk.",
+            "Fascinated": "You must pay attention to the fascinating effect and take a -4 penalty to skill checks made as reactions.",
+            "Fatigued": "You cannot run or charge; you take a -1 penalty to AC, attack rolls, melee damage rolls, Reflex saves, initiative checks, and Str- and Dex-based skill and ability checks; and you reduce your encumbered limit by 1 bulk.",
+            "FlatFooted": "You take a -2 penalty to AC, and you cannot take reactions or make attacks of opportunity.",
+            "Frightened": "You must flee or fight, and you take a -2 penalty to ability checks, attack rolls, saving throws, and skill checks.",
+            "Grappled": "You cannot move or take two-handed actions; you take a -2 penalty to AC, most attack rolls, Reflex saves, initiative checks, and Dex-based skill and ability checks; and you cannot make attacks of opportunity.",
+            "Helpless": "Your Dex modifier is -5, and melee attacks against you gain a +4 bonus.",
+            "Nauseated": "You're unable to attack, cast spells, or concentrate on spells, and the only action you can take is a single move action per turn.",
+            "OffKilter": "You can't take move actions except to right yourself, you take a -2 penalty to attacks, and you're flat-footed.",
+            "OffTarget": "You take a -2 penalty to attack rolls.",
+            "Overburdened": "Speeds are reduced to 5 feet; maximum Dex bonus to AC is reduced to +0; and you take a -5 penalty to Str- and Dex-based checks.",
+            "Panicked": "<ul><li>You drop all held items</li><li>You flee at top speed</li><li>You cannot take other actions</li><li>You take a -2 penalty to ability checks, saving throws, and skill checks</li><li>And you cower if cornered</li></ul>",
+            "Paralyzed": "Your Dex modifier is -5, and you cannot move but can take mental actions.",
+            "Pinned": "You cannot move, you're flat-footed, and you take penalties to the same attributes as for grappled but the penalty is -4.",
+            "Prone": "You take a -4 penalty to melee attacks, a +4 bonus to AC against ranged attacks, and a -4 penalty to AC against melee attacks.",
+            "Shaken": "You take a -2 penalty to ability checks, attack rolls, saving throws, and skill checks.",
+            "Sickened": "You take a -2 penalty to ability checks, attack rolls, weapon damage rolls, saving throws, and skill checks.",
+            "Stable": "You're no longer dying, but you are still unconscious.",
+            "Staggered": "You can take only a single move or standard action each round and can't take reactions, but you can take swift actions as normal.",
+            "Stunned": "You drop everything held, you can't take actions, and you're flat-footed.",
+            "Unconscious": "You're knocked out and helpless."
+        },
         "ConditionsAsleep": "Adormecido",
         "ConditionsBleeding": "Sangrando",
         "ConditionsBlinded": "Cego",
@@ -684,6 +730,7 @@
             "Drugs": "Drugas",
             "FoodDrink": "Comida e Bebida",
             "Medicine": "Medicinais",
+            "Other": "Other",
             "Poison": "Venenos",
             "Serum": "Soros",
             "SpellGem": "Gemas de Magia"
@@ -708,7 +755,10 @@
         },
         "Cybernetic": "Cybernetico",
         "Damage": {
+            "DamageOperator": "Damage Operator",
+            "EnergyDamage": "Energy Damage",
             "Immunities": "Imudades a dano",
+            "KineticDamage": "Kinetic Damage",
             "MinimumDamage": "Minimum Damage",
             "PartIndex": "Part {partIndex} of {partCount}",
             "Reduction": "Redução Dano",
@@ -732,6 +782,10 @@
                     "Or": "or"
                 },
                 "Piercing": "Perfuração",
+                "PrimaryDamageGroup": "Primary Damage Group",
+                "PrimaryDamageGroupTooltip": "Damage sections that are a member of the primary damage group will all be marked as primary. You will still only be able to choose one damage section per group when making a damage roll, and as such modifiers will correctly only be applied once.",
+                "PrimaryDamageSection": "Primary Damage Section",
+                "PrimaryDamageSectionTooltip": "Modifiers that affect this weapon's damage will only apply to the primary damage section. Non-primary sections will simply roll their formula. A weapon must have exactly one primary damage section.",
                 "Radiation": "Radiação",
                 "Slashing": "Cortante",
                 "Sonic": "Sonico",
@@ -800,6 +854,7 @@
                 "SingleFieldInvalid": "Entrada inválida para {fieldName}."
             }
         },
+        "Disabled": "Disabled",
         "DistAny": "Qualquer",
         "DroneSheet": {
             "Chassis": {
@@ -917,6 +972,33 @@
                 "RangedWeaponMounts": "Montagens armas a Distancia"
             }
         },
+        "DurationTypesInstantaneous": "Instantaneous",
+        "Effect": {
+            "DetailsEnabledLabel": "Enabled",
+            "DetailsHeader": "Effect Details",
+            "DetailsShowOnToken": "Show On Token",
+            "DurationTypesDays": "Days",
+            "DurationTypesHours": "Hours",
+            "DurationTypesLabel": "Duration",
+            "DurationTypesMinutes": "Minutes",
+            "DurationTypesNone": "None",
+            "DurationTypesPermanent": "Permanent",
+            "DurationTypesRounds": "Rounds",
+            "EndTypesLabel": "Ends On",
+            "EndTypesOnTurnEnd": "Turn end",
+            "EndTypesOnTurnStart": "Turn start",
+            "EndsOnTooltip": "<br><strong>Parent Actor's Turn</strong><p>The effect will expire at the start/end of the turn of the actor it belongs to.</p><strong>Nearest Initiative</strong><p>The effect will expire on the start/end of the turn with the closest initiative to the turn it was enabled.</p><strong>Combatant Turns</strong><p>The effect will expire on the start/end of the specified combatant's turn.</p>",
+            "Expired": "Expired",
+            "ExpiryModeInit": "Initiative Count",
+            "ExpiryModeLabel": "Expiry Mode",
+            "ExpiryModeTooltip": "<br><strong>Combatant Turn</strong><p>The effect will expire at the start/end of a specified turn.</p><strong>Initiative Count</strong><p>The effect will expire when the current combat reaches the specified initiative count.</p>",
+            "ExpiryModeTurn": "Combatant Turn"
+        },
+        "EffectDurationTypesDays": "Days",
+        "EffectDurationTypesHours": "Hours",
+        "EffectDurationTypesMinutes": "Minutes",
+        "EffectDurationTypesRounds": "Rounds",
+        "Enabled": "Enabled",
         "EnergyArmorClass": "CA Energia",
         "EnergyArmorClassShort": "EAC",
         "Enrichers": {
@@ -1092,8 +1174,10 @@
         "ItemMacro": {
             "Activate": "Activate",
             "Attack": "Attack",
+            "Cast": "Cast",
             "Damage": "Damage",
             "Healing": "Healing",
+            "Reload": "Reload",
             "Use": "Use"
         },
         "ItemNoAmmo": "{name} não tem munição sobrando!",
@@ -1109,6 +1193,7 @@
                 "Base": "Base value",
                 "BaseTooltip": "(Required) The base value defines the base value of this resource. Modifiers may alter it.<br/>Attribute: @resources.type.subtype.base",
                 "CombatTracker": "Combat Tracker settings",
+                "CombatTrackerSettings": "Combat Tracker Settings",
                 "DisplayAbsoluteValue": "Display Absolute Value",
                 "DisplayAbsoluteValueTooltip": "Should the displayed value in the combat tracker be absolute? i.e. -1 is displayed as 1, -2 as 2, etc.",
                 "Enabled": "Enabled",
@@ -1150,6 +1235,7 @@
                 "VisualizationsModeLesserThan": "lesser than",
                 "VisualizationsModeLesserThanEqual": "lesser than or equal to",
                 "VisualizationsModeNotEqual": "not equal to",
+                "VisualizationsPart": "Visualization Part",
                 "VisualizationsThen": "Then:",
                 "VisualizationsTitle": "Title:"
             },
@@ -1172,6 +1258,27 @@
             },
             "Containers": {
                 "ContainerTooltip": "Os recipientes podem conter praticamente qualquer item. Aumente a capacidade de armazenamento para permitir a adição de conteúdo."
+            },
+            "Details": {
+                "Section": {
+                    "ArmorDetails": "Armor Details",
+                    "ClassBasics": "Class Basics",
+                    "ConsumableDetails": "Consumable Details",
+                    "Progressions": "Progressions",
+                    "SkillsAndProficiencies": "Skills and Proficiencies",
+                    "Title": "Section",
+                    "Usage": "Usage"
+                },
+                "Tab": {
+                    "AmmunitionContainer": "Ammunition & Container",
+                    "AttackDamage": "Attack & Damage",
+                    "ClassInformation": "Class Information",
+                    "ContainerDetails": "Container Details",
+                    "NPCSpecific": "NPC Specific",
+                    "Properties": "Properties",
+                    "Spellcasting": "Spellcasting",
+                    "UsageAction": "Usage & Action"
+                }
             },
             "Header": {
                 "ArmorClass": "CA",
@@ -1221,6 +1328,29 @@
                 "TargetLockPenaltyTooltip": "A penalidade aplicada à pontuação de alvos travados da espaçonave.",
                 "TurnDistancePenalty": "Penalidade de distância turno",
                 "TurnDistancePenaltyTooltip": "A penalidade aplicada à pontuação da distância da espaçonave no turno."
+            },
+            "StarshipAction": {
+                "ActionDC": "Action DC",
+                "AddSubactionTooltip": "<strong>Add Subaction</strong><br />Add a new subaction",
+                "CheckFormula": "Skill Check Formula",
+                "CrewRole": "Crew Role",
+                "CriticalEffect": "Critical Effect",
+                "DCPlaceholder": "5 + 1-1/2 * Target Ship Tier",
+                "DeleteSubactionTooltip": "<strong>Delete Subaction</strong><br />Delete this subaction",
+                "IsPushAction": "Push Action?",
+                "NormalEffect": "Normal Effect",
+                "Phase": "Phase",
+                "PhaseTooltip": "Phase Tooltip",
+                "PushResolve": "Push and Resolve",
+                "ResolveFormulaAutomatically": "Resolve this Formula Automatically",
+                "ResolveFormulaAutomaticallyTooltip": "If this box is checked, Target DC will resolve automatically as a formula, and the result will display in the chat box when the action is triggered. Otherwise, the raw string will instead be displayed in the chatbox.",
+                "SkillFormulaAndSubactions": "Skill Formula and Subactions",
+                "SkillFormulaOrSubactions": "Skill Formula / Subactions",
+                "SkillOrSubaction": "Skill or Subaction Name",
+                "SubactionPart": "Subaction {section}",
+                "Subactions": "Subactions",
+                "TargetDC": "Target DC",
+                "UsesResolve": "Uses Resolve"
             },
             "StarshipArmor": {
                 "ArmorBonus": "Bonus Armadura",
@@ -1297,6 +1427,7 @@
                     "WeaponArcStarboard": "Arco Estibordo",
                     "WeaponArcTooltip": "A quantidade de suportes de arma disponíveis para o arco da nave, divididos em suportes leves, pesados ​​e capitais.",
                     "WeaponArcTurret": "Torreta",
+                    "WeaponMounts": "Weapon Mounts",
                     "WeaponTypeCapital": "Capital",
                     "WeaponTypeHeavy": "Pesado",
                     "WeaponTypeLight": "Leve",
@@ -1398,6 +1529,8 @@
                 "DamageNotes": "Damage Notes",
                 "DamageNotesTooltip": "The damage notes are displayed on the damage roll chat card. This is a great way to put helpful reminders, especially for GMs with complicated NPCs.",
                 "DamageSection": "Damage Section {section}",
+                "DeleteDamageSection": "Delete damage section",
+                "Details": "Action Details",
                 "HealingFormula": "Formula Cura",
                 "OtherFormula": "Outra Formula",
                 "RollNotes": "Roll Notes",
@@ -1408,15 +1541,18 @@
                 "TitleActivation": "Activation"
             },
             "Activation": {
+                "Activation": "Activation",
                 "ActivationCondition": "Condição de Ativação",
                 "ActivationCost": "Custo de Ativação",
                 "Area": "Area",
                 "Duration": "Duração",
                 "LimitedUses": "Limites de Uso",
                 "Range": "Alcance",
+                "RangeIncrement": "Range Increment",
                 "Target": "Alvo"
             },
             "Ammunition": {
+                "Ammo": "Ammo",
                 "AmmunitionType": "Ammunition Type",
                 "Capacity": "Capacity Settings",
                 "Details": "Ammunition Details",
@@ -1446,9 +1582,11 @@
             },
             "Attuned": "Sintonizar",
             "Augmentation": {
+                "Action": "Augmentation Action",
                 "Details": "Detalhes Acrescimo",
                 "System": "Sistema",
-                "Type": "Tipo"
+                "Type": "Tipo",
+                "Usage": "Augmentation Usage"
             },
             "Capacity": {
                 "Capacity": "Capacidade",
@@ -1471,6 +1609,7 @@
                 "Containers": "Containers",
                 "DroneChassis": "Chassis Drone",
                 "DroneMods": "Mods Drone",
+                "Effect": "Effect",
                 "Equipment": "Equipamento",
                 "Feats": "Talentos",
                 "Goods": "Bons",
@@ -1565,12 +1704,15 @@
             "MaxDex": "Modificador Max. Destreza",
             "NotProficient": "Sem Proeficiencia",
             "Proficient": "Proficiente",
+            "RangeInformation": "Range Information",
             "Shield": {
                 "ACP": "PVA: {acp}",
                 "AcMaxDex": "Bonus Max Des: {maxDex}",
+                "AcMaxDexLabel": "Max Dex Bonus",
                 "Action": "Ação Escudo",
                 "Aligned": "Ajustada",
                 "ArmorCheck": "Penaliade Verificação Armadura: {acp}",
+                "ArmorCheckLabel": "Armor Check Penalty",
                 "Bonus": "Bônus Escudo",
                 "Bonuses": "Bônus empunhado: {wielded} / Bônus Ajustada: {aligned}",
                 "Details": "Detalhes Escudo",
@@ -1645,6 +1787,10 @@
                 "Attack": "Ataque Arma",
                 "Category": "Categoria Arma",
                 "Details": "Detalhes Arma",
+                "IsEquipment": {
+                    "Title": "Weapon Is Equipment",
+                    "Tooltip": "This box is checked if the weapon is a piece of carried equipment, as opposed to an innate natural or supernatural weapon. For natural weapons, uncheck this box."
+                },
                 "Properties": "Propriedades Arma",
                 "Type": "Tipo Arma",
                 "Usage": "Uso Arma"
@@ -1812,6 +1958,10 @@
         "LimitedUsePeriodsShort": "Descanso Curto",
         "LocalizationTerminator": "",
         "Long": "Longo",
+        "Macro": {
+            "ViewActor": "View Actor",
+            "ViewItem": "View Item"
+        },
         "Magic": {
             "Levels": {
                 "0": "0 Nível",
@@ -1866,6 +2016,10 @@
         "ModifierEffectTypeTooltip": "Isso identifica o atributo geral ou atributos que são afetados pelo modificador",
         "ModifierEnabledLabel": "Habilitado",
         "ModifierEnabledTooltip": "Determina se o modificador será considerado quando os modificadores de atributo forem calculados",
+        "ModifierLimitToContainer": "Parent Item's Container",
+        "ModifierLimitToLabel": "Limit To",
+        "ModifierLimitToParent": "Parent Item",
+        "ModifierLimitToTooltip": "<strong>Limit To</strong><br><br><strong>None</strong><p>The modifier will be applied to applicable items as normal.</p><strong>Parent Item</strong><p>The modifier will only apply to the item this modifier is on.</p><strong>Parent Item's Container</strong><p>The modifier will only apply to the container item that contains the item this modifier is on.</p>",
         "ModifierModifierLabel": "Modificador",
         "ModifierModifierTooltip": "O valor usado para modificar com.",
         "ModifierModifierTypeLabel": "Tipo Modificador",
@@ -1977,6 +2131,10 @@
         "RacePlaceHolderText": "Raça",
         "RaceSize": "Tamanho",
         "RacialTraits": "Traços Raciais",
+        "RangeCalculated": "{rangeType} ({total} ft.)",
+        "RangeClose": "Close (25 ft. + 5 ft./2 levels)",
+        "RangeLong": "Long (400 ft. + 40 ft./level)",
+        "RangeMedium": "Medium (100 ft. + 10 ft./level)",
         "Reach": "Alcance",
         "ReflexSave": "Reflexo",
         "RepairDroneChatMessage": "{name} foi reparado para {regainedHP} pontos de vida.",
@@ -2144,6 +2302,10 @@
                 "Hint": "Habilita a habilidade de alternar vantagem ou desvantagem nas jogadas de dados.",
                 "Name": "Usar vantagens e desvantagens?"
             },
+            "DecimalSpeed": {
+              "Hint": "Enable decimal numbers for actor speed configuration.",
+              "Name": "Decimal Speed values"
+            },
             "AlwaysShowQuantity": {
                 "Hint": "Mostra sempre a quantidade de itens, mesmo que seja 0 ou 1. Você terá que atualizar sua janela antes que esta alteração tenha efeito.",
                 "Name": "Sempre mostrar a quantidade de itens"
@@ -2156,6 +2318,14 @@
                 "Hint": "Recolher automaticamente as descrições do cartão de item no registro de bate-papo",
                 "Name": "Recolher cartões de itens no bate-papo"
             },
+            "AutoRollCritEffect": {
+                "Hint": "When applying damage to a starship from a chat card, if the damage crossses a Critical Threshold, the Critical Damage Effects (CRB pg. 320) table will automatically be rolled.",
+                "Name": "Automatically roll starship critical damage effects"
+            },
+            "HideHostileStarshipCrit": {
+                "Hint": "When posting notifications about starship criticals or thresholds, only post to GM if the ship is a Hostile Token.",
+                "Name": "Hide Hostile Starship Critical Message"
+            },            
             "CombatCards": {
                 "NormalHint": "Alterar quais cartões de bate-papo de combate devem ser exibidos durante o combate normal.",
                 "NormalName": "Combare Normal",
@@ -2196,6 +2366,10 @@
                     "Core": "Regra Base (5/10/5)",
                     "Optional": "Optional (5/5/5)"
                 }
+            },
+            "DifficultyDisplay": {
+                "Hint": "Enables difficulty calculation and display on the combat tracker tab.  You will have to refresh your window before this change will take effect.",
+                "Name": "Enable Difficulty Display"
             },
             "ExperienceTracking": {
                 "Hint": "Remova as barras de experiência das fichas de personagem.",
@@ -2274,6 +2448,10 @@
                 "Hint": "Se deve usar o método de medição do Starfinder para modelos AOE versus o método padrão do Foundry VTT",
                 "Name": "Usar modelos Starfinder AOE"
             },
+            "WarnInvalidRollData": {
+                "Hint": "When checked, warnings will be displayed when modifiers contain invalid roll formulas. This can result in warning spam, if, for example, you have a class feature but not the corresponding class item itself.",
+                "Name": "Warn on invalid roll formulas"
+            },
             "WorldSchemaVersion": {
                 "Hint": "Registra a versão do esquema de dados para o sistema Starfinder. AVISO: não edite este valor a menos que você saiba o que está fazendo!",
                 "Name": "Versão do esquema de dados Starfinder"
@@ -2348,12 +2526,14 @@
             },
             "StarshipWeaponProperties": {
                 "Anchoring": "Ancoragem",
+                "Antimagic": "Antimagic",
                 "Array": "Array",
                 "Automated": "Automatizado",
                 "Broad": "Broad Arc",
                 "Bugging": "Bugging",
                 "Burrowing": "Burrowing",
                 "Buster": "Buster",
+                "Cacophonous": "Cacophonous",
                 "Connecting": "Conectando",
                 "DeathField": "Campo da morte",
                 "Deployed": "Implantado",
@@ -2369,6 +2549,7 @@
                 "IrradiateH": "Irradiação (alta)",
                 "IrradiateL": "Irradiação (baixa)",
                 "IrradiateM": "Irradiação (média)",
+                "IrradiateS": "Irradiate (severe)",
                 "Jamming": "Escavador",
                 "Limited": "Fogo Limitado",
                 "Line": "Linha",
@@ -2395,6 +2576,7 @@
                 "Teleportation": "Teleportação",
                 "Tractor": "Raio Trator",
                 "Transposition": "Transposição",
+                "Unerring": "Unerring",
                 "VandalDrones": "Vandal Drones",
                 "Volatile": "Valatil",
                 "Vortex": "Vórtice"
@@ -2428,6 +2610,7 @@
         "SkillBlu": "Blefe",
         "SkillCom": "Computação",
         "SkillCul": "Cultura",
+        "SkillDelete": "Delete?",
         "SkillDip": "Diplomacia",
         "SkillDis": "Disfarce",
         "SkillEng": "Engenharia",
@@ -2435,11 +2618,14 @@
         "SkillInt": "Intimidação",
         "SkillLsc": "Ciências Biológicas",
         "SkillMed": "Medicina",
+        "SkillMiscModifiersLabel": "Misc. Modifiers",
         "SkillModifierTooltip": "{type} Bônus: {mod} ({source})",
         "SkillMys": "Misticismo",
+        "SkillNotes": "Skill Notes",
         "SkillPer": "Percepção",
         "SkillPil": "Pilotagem",
         "SkillPro": "Profissão",
+        "SkillProfessionName": "Profession Name",
         "SkillProficiencyLevelClassSkill": "Perícia Classe",
         "SkillPsc": "Ciências Naturais",
         "SkillSen": "Sentir Motivação",
@@ -2496,6 +2682,7 @@
             "Spread": "Propagação"
         },
         "SpellAreaShapesCone": "Cone",
+        "SpellAreaShapesCube": "Cube",
         "SpellAreaShapesCylinder": "Cilíndro",
         "SpellAreaShapesLine": "Linha",
         "SpellAreaShapesOther": "Outro",
@@ -2578,6 +2765,7 @@
                 "NPCGunnerRanksMessage": "While ranks aren't relevant to an NPC's gunnery modifier, some statblocks may include the Gunner's level, which you can store here. You can otherwise safely leave this box blank.",
                 "Passengers": "Passageiros",
                 "Pilot": "Piloto",
+                "RemoveCrewMember": "Remove Crew Member",
                 "ScienceOfficers": "Oficial Ciências",
                 "SkillModifier": "Modificador",
                 "SkillRanks": "Ranques",
@@ -2608,6 +2796,8 @@
             "Damage": {
                 "CrossedCriticalThreshold": "{name} ultrapassou {crossedThresholds} limiares críticos!",
                 "Message": "Danos a uma espaçonave sempre se originam de uma direção específica, selecione o quadrante em que o dano recebido deve ser aplicado.",
+                "Nat20": "Critical damage! {name} takes a critical damage effect.",
+                "Nat20WithThreshold": "Critical damage! {name} takes an additional critical damage effect.",
                 "Quadrant": {
                     "Aft": "Popa",
                     "Forward": "Proa",
@@ -2719,6 +2909,10 @@
                 "ShieldHeader": "Escudos",
                 "TargetLock": "Travar Mira"
             },
+            "RandomQuadrantMacro": {
+                "NoToken": "Select the recipient of the critical effect before proceeding.",
+                "NotStarship": "The selected token must be a starship."
+            },
             "Role": {
                 "Captain": "Captião",
                 "ChiefMate": "Companheiro do Chefe",
@@ -2761,6 +2955,7 @@
         "SystemWide": "System-Wide",
         "TempHPMaxPlaceHolderText": "+Max",
         "TempHPPlaceHolderText": "+Temp",
+        "Text": "Text",
         "ThemePlaceHolderText": "Tema",
         "Tippy": {
             "Attributes": "Attributes:",
@@ -2770,6 +2965,24 @@
         "Touch": "Toque",
         "TraitArmorProf": "Proficiencia Armadura",
         "TraitWeaponProf": "Proficiencia Arma",
+        "TurnEvent": {
+            "AddTurnEvent": "Add Turn Event",
+            "DeleteTurnEvent": "Delete Turn Event",
+            "Formula": "Formula",
+            "FormulaTooltip": "A formula which will be rolled when the trigger is met.",
+            "Name": "Name",
+            "NoteContent": "Note Content",
+            "NoteTooltip": "Text which will be sent to chat as a chat message when the trigger is met.",
+            "Trigger": "Trigger",
+            "TriggerTooltip": "When during a combatant's turn to trigger the event.",
+            "TurnEventI": "Turn Event {number}",
+            "Type": "Type",
+            "TypeTooltip": "The type of behaviour to trigger for this turn event.",
+            "Types": {
+                "Note": "Note",
+                "Roll": "Roll"
+            }
+        },
         "UPBs": "BPU's",
         "Units": {
             "Speed": "mt."
@@ -2877,8 +3090,10 @@
             }
         },
         "VehicleSystemSheet": {
+            "Activated": "Activated",
             "CanBeActivated": "Pode ser Ativado",
             "CanBeActivatedTooltip": "Este sistema tem um estado ativado.",
+            "NotActivated": "Not Activated",
             "Piloting": "Pilotagem",
             "PilotingTooltip": "O modificador de Pilotagem a ser aplicado ao usar este sistema para pilotar.",
             "Senses": "Sentidos",
@@ -3014,6 +3229,8 @@
         "WeaponPropertiesGuidedTooltip": "Uma arma guiada usa um sinal junto com telemetria sem fio, orientação magnética ou outro meio de guiar sua carga após o disparo da arma. Quando você realiza uma ação de movimento para mirar a arma e, em seguida, dispara no mesmo turno (incluindo uma arma de franco-atirador), seu alvo não ganha o bônus de CA fornecido por cobertura, cobertura parcial ou cobertura mole. A cobertura aprimorada e a cobertura total ainda conferem seus bônus normalmente. ",
         "WeaponPropertiesHarrying": "Harrying",
         "WeaponPropertiesHarryingTooltip": "Uma arma de ataque produz explosões de fogo excepcionalmente perturbadoras. Quando você executa a ação de fogo violento com esta arma, você ganha um bônus de percepção de +2 em sua jogada de ataque. ",
+        "WeaponPropertiesHealing": "Healing",
+        "WeaponPropertiesHealingTooltip": "A healing weapon, which must be an energy weapon, can deliver restorative energy. You can set the weapon to heal mode (or reset it to normal mode) as a move action. While in healing mode, if the healing weapon hits a creature, roll dice equal to the weapon’s damage; Weapon Specialization, an operative’s trick attack, and other effects that increase damage don’t apply. The creature recovers Hit Points equal to the amount rolled, minimum 1. Reduce healing by half for constructs and undead; objects are unaffected. A critical hit with a healing weapon doesn’t increase the healing or have a critical hit effect. A healing weapon used in healing mode expends twice the usual number of charges, and a battery used in a healing weapon can’t be recharged.",
         "WeaponPropertiesHolyWater": "Água benta",
         "WeaponPropertiesHolyWaterTooltip": "Uma arma de água benta é infundida com as bênçãos de uma ou mais divindades alinhadas com o bem (mais comumente Hylax, Iomedae ou Sarenrae dentro dos Mundos do Pacto, embora seguidores devotos de qualquer divindade alinhada com o bem possam criar tais armas). Ela causa danos apenas mortos-vivos (independentemente da tendência) e forasteiros com o subtipo do mal, e mesmo essas criaturas não sofrem nenhum efeito (e não mostram nenhum sinal de sua natureza se já não for óbvio) com um teste de resistência bem-sucedido. Criar uma granada de água benta requer a bênção de sacerdotes formalmente treinados de uma boa divindade, embora um personagem de qualquer tendência possa fazer a criação real. ",
         "WeaponPropertiesHybrid": "Híbrido",
@@ -3138,5 +3355,64 @@
         "WeaponsPropertiesConceal": "Esconder",
         "WeaponsPropertiesConcealTooltip": "Uma arma com a propriedade especial de ocultar é considerada especialmente pequena ou fácil de esconder para o propósito da tarefa de ocultar objeto de Slight of Hand, concedendo a você um bônus de circunstância +4 para testes de habilidade para ocultar o objeto. ",
         "WillSave": "Vontade"
+    },
+    "TYPES": {
+        "Actor": {
+            "character": "Personagem Jogador",
+            "drone": "Drone",
+            "hazard": "Perigo",
+            "npc": "Old Style NPC",
+            "npc2": "NPC",
+            "starship": "Espaçonave",
+            "vehicle": "Veículo"
+        },
+        "Item": {
+            "actorResource": "Actor Resource",
+            "ammunition": "Ammunition",
+            "archetypes": "Arquetipo",
+            "asi": "Incremento Valor Habilidade",
+            "augmentation": "Acréscimo",
+            "chassis": "Drone Chassis",
+            "class": "Classe",
+            "consumable": "Consumível",
+            "container": "Container",
+            "effect": "Effect",
+            "equipment": "Armadura",
+            "feat": "Talento",
+            "fusion": "Fusão de Arma",
+            "goods": "Bons",
+            "hybrid": "Hibrido",
+            "magic": "Magico",
+            "mod": "Drone Mod",
+            "race": "Raça",
+            "shield": "Escudo",
+            "spell": "Magia",
+            "starshipAblativeArmor": "Espaçonave Placas Ablativas",
+            "starshipAction": "Espaçonave Ação",
+            "starshipArmor": "Espaçonave Armadura",
+            "starshipComputer": "Espaçonave Computador",
+            "starshipCrewQuarter": "Espaçonave Alojamentos da Tripulação",
+            "starshipDefensiveCountermeasure": "Espaçonave Contramedida Defensiva",
+            "starshipDriftEngine": "Espaçonave Motor de Deriva",
+            "starshipExpansionBay": "Espaçonave Compartimentos de Expansão",
+            "starshipFortifiedHull": "Espaçonave Casco Foritficado",
+            "starshipFrame": "Espaçonave Plataforma",
+            "starshipOtherSystem": "Espaçonave Outros Sistemas",
+            "starshipPowerCore": "Espaçonave Núcleo de Energia",
+            "starshipReinforcedBulkhead": "Espaçonave Anteparas Reforçadas",
+            "starshipSecuritySystem": "Espaçonave Sistemas de Segurança",
+            "starshipSensor": "Espaçonave Sensor",
+            "starshipShield": "Espaçonave Escudos",
+            "starshipSpecialAbility": "Starship Special Ability",
+            "starshipThruster": "Espaçonave Propulsor",
+            "starshipWeapon": "Espaçonave Armas",
+            "technological": "Tecnologica",
+            "theme": "Tema",
+            "upgrade": "Atualização Armadura",
+            "vehicleAttack": "Veículo Ataque",
+            "vehicleSystem": "Veículo Sistema",
+            "weapon": "Armas",
+            "weaponAccessory": "Acessório de Armas"
+        }
     }
 }

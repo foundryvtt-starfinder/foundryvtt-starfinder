@@ -2,6 +2,11 @@
   "_id": "QtZHSuJf0hcryYtR",
   "name": "Death Ward",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "systems/sfrpg/icons/spells/death_ward.webp",
   "system": {
     "type": "",
@@ -9,6 +14,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "action",
@@ -17,11 +23,13 @@
     },
     "allowedClasses": {
       "myst": true,
+      "precog": false,
       "tech": false,
       "wysh": false
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": null,
       "value": null
@@ -36,18 +44,23 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>The target gains a +4 morale bonus to saving throws against all spells and effects with the death descriptor. The target can attempt a save to negate such effects even if one is not normally allowed. The target can’t gain negative levels and is immune to any negative energy effects. This spell does not remove negative levels the target has already gained, but it does remove the penalties from negative levels for the duration of its effect.</p>\n<p><em>Death ward</em> does not protect against other sorts of attacks, even if those attacks might be lethal.</p>"
     },
     "descriptors": [],
     "dismissible": false,
     "duration": {
-      "units": "",
-      "value": "1 minute/level"
+      "units": "minute",
+      "value": "@details.cl.value"
     },
     "formula": "",
+    "isActive": null,
+    "isVariableLevel": false,
     "level": 4,
     "materials": {
       "consumed": false,
@@ -60,12 +73,14 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
       "units": "touch",
       "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "will",
       "dc": "",

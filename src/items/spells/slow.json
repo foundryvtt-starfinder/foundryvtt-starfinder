@@ -2,6 +2,11 @@
   "_id": "4prroV3z26u1cy5y",
   "name": "Slow",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "systems/sfrpg/icons/spells/slow.webp",
   "system": {
     "type": "",
@@ -9,6 +14,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "action",
@@ -17,11 +23,13 @@
     },
     "allowedClasses": {
       "myst": true,
+      "precog": false,
       "tech": true,
       "wysh": true
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": null,
       "value": null
@@ -36,18 +44,23 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>An affected creature moves and attacks at a drastically slowed rate. Creatures affected by this spell are @UUID[Compendium.sfrpg.conditions.aAQ6SW6iK0EVq8Ce]{Staggered} (see page 277) and can take only a single move action or standard action each turn, but not both, and it can’t take full actions. A slowed creature moves at half its normal speed (round down to the next 5-foot increment). Multiple slow effects don’t stack.&nbsp;Slow&nbsp;counters and negates&nbsp;haste.</p>"
+      "value": "<p>An affected creature moves and attacks at a drastically slowed rate. Creatures affected by this spell are @UUID[Compendium.sfrpg.conditions.Item.aAQ6SW6iK0EVq8Ce]{Staggered} (see page 277) and can take only a single move action or standard action each turn, but not both, and it can’t take full actions. A slowed creature moves at half its normal speed (round down to the next 5-foot increment). Multiple slow effects don’t stack.&nbsp;Slow&nbsp;counters and negates&nbsp;haste.</p>"
     },
     "descriptors": [],
     "dismissible": false,
     "duration": {
-      "units": "",
-      "value": "1 round/level"
+      "units": "round",
+      "value": "@details.cl.value"
     },
     "formula": "",
+    "isActive": null,
+    "isVariableLevel": false,
     "level": 3,
     "materials": {
       "consumed": false,
@@ -60,12 +73,14 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
-      "additional": "5 ft.",
-      "per": "2 levels",
-      "units": "ft",
-      "value": 25
+      "additional": "",
+      "per": "",
+      "units": "close",
+      "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "will",
       "dc": "",
