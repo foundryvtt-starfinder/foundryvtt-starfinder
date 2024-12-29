@@ -110,12 +110,12 @@ for (const currentPath of itemPaths) {
     const files = fs.readdirSync(folderPath);
     for (const file of files) {
         const fname = folderPath + '/' + file;
-        console.log(`Opening up the ${fname} file.`);
+        // console.log(`Opening up the ${fname} file.`);
         const json = fs.readFileSync(fname);
         const data = JSON.parse(json);
         const newData = iconReplace(defaultItemIcons, data);
         if (newData[0]) {
-            fs.writeFileSync(fname, JSON.stringify(newData[1]));
+            fs.writeFileSync(fname, JSON.stringify(newData[1], null, 2));
         }
     }
 }
@@ -125,7 +125,7 @@ function iconReplace(defaultIconsObject, data) {
     if (Object.keys(defaultIconsObject).includes(data.type)) {
         if (Object.values(foundryDefaultIcons).includes(data.img)) {
             const newImg = 'systems/sfrpg/icons/default/' + defaultIconsObject[data.type];
-            console.log(`Original image ${data.img}, new image ${newImg}`);
+            // console.log(`Original image ${data.img}, new image ${newImg}`);
             data.img = newImg;
             return [true, data];
         }
