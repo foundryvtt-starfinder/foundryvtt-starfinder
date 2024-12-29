@@ -145,8 +145,8 @@ function iconReplace(defaultIconsObject, data, docType = "", iconType = "") {
         // If a prototype token, use one image path
         if (iconType === "prototypeToken") {
             if (Object.values(foundryDefaultIcons).includes(data.texture.src)) {
-                const newImg = 'systems/sfrpg/icons/default/' + defaultIconsObject[data.type];
-                // console.log(`Original image ${data.texture.src}, new image ${newImg}`);
+                const newImg = 'systems/sfrpg/icons/default/' + defaultIconsObject[docType];
+                console.log(`Original image ${data.texture.src}, new image ${newImg}`);
                 data.texture.src = newImg;
                 return [true, data];
             }
@@ -168,7 +168,7 @@ function actorIconReplace(defaultIconsObject, actorData) {
     let changed = false;
 
     // Check the actor's prototype token image
-    const newPrototypeTokenData = iconReplace(defaultIconsObject, actorData.prototypeToken, actorData.type);
+    const newPrototypeTokenData = iconReplace(defaultIconsObject, actorData.prototypeToken, actorData.type, 'prototypeToken');
     if (newPrototypeTokenData[0]) {
         actorData.prototypeToken = newPrototypeTokenData[1];
         changed = true;
