@@ -105,7 +105,7 @@ console.log(`Starting script`);
 
 for (const currentPath of itemPaths) {
     const folderPath = pathPrefix + currentPath;
-    // console.log(folderPath);
+    console.log(`Checking itmes in folder: ${folderPath}`);
 
     const files = fs.readdirSync(folderPath);
     for (const file of files) {
