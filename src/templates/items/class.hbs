@@ -69,11 +69,7 @@
                                 <label>{{localize "SFRPG.ClassKeyAbilityScore"}}</label>
                                 <div class="form-fields">
                                     <select name="system.kas">
-                                        {{#select itemData.kas}}
-                                        {{#each config.abilities as |name val|}}
-                                        <option value="{{val}}">{{name}}</option>
-                                        {{/each}}
-                                        {{/select}}
+                                        {{selectOptions config.abilities selected=itemData.kas}}
                                     </select>
                                 </div>
                             </div>
@@ -113,11 +109,7 @@
                                         <label>{{localize "SFRPG.ClassBABProgression"}}</label>
                                         <div class="form-fields">
                                             <select name="system.bab">
-                                                {{#select itemData.bab}}
-                                                {{#each config.babProgression as |name val|}}
-                                                <option value="{{val}}">{{name}}</option>
-                                                {{/each}}
-                                                {{/select}}
+                                                {{selectOptions config.babProgression selected=itemData.bab}}
                                             </select>
                                         </div>
                                     </div>
@@ -126,11 +118,7 @@
                                         <label>{{localize "SFRPG.ClassFortSaveProgression"}}</label>
                                         <div class="form-fields">
                                             <select name="system.fort">
-                                                {{#select itemData.fort}}
-                                                {{#each config.saveProgression as |name val|}}
-                                                <option value="{{val}}">{{name}}</option>
-                                                {{/each}}
-                                                {{/select}}
+                                                {{selectOptions config.saveProgression selected=itemData.fort}}
                                             </select>
                                         </div>
                                     </div>
@@ -139,11 +127,7 @@
                                         <label>{{localize "SFRPG.ClassReflexSaveProgression"}}</label>
                                         <div class="form-fields">
                                             <select name="system.ref">
-                                                {{#select itemData.ref}}
-                                                {{#each config.saveProgression as |name val|}}
-                                                <option value="{{val}}">{{name}}</option>
-                                                {{/each}}
-                                                {{/select}}
+                                                {{selectOptions config.saveProgression selected=itemData.ref}}
                                             </select>
                                         </div>
                                     </div>
@@ -152,11 +136,7 @@
                                         <label>{{localize "SFRPG.ClassWillSaveProgression"}}</label>
                                         <div class="form-fields">
                                             <select name="system.will">
-                                                {{#select itemData.will}}
-                                                {{#each config.saveProgression as |name val|}}
-                                                <option value="{{val}}">{{name}}</option>
-                                                {{/each}}
-                                                {{/select}}
+                                                {{selectOptions config.saveProgression selected=itemData.will}}
                                             </select>
                                         </div>
                                     </div>
@@ -166,7 +146,7 @@
 
                         </div>
                     </div>
-                    
+
                     {{!-- Skills and Proficiencies --}}
                     <div class="bubble">
                         <h3 class="bubble-header">{{localize "SFRPG.ItemSheet.Details.Section.SkillsAndProficiencies"}}</h3>
@@ -236,12 +216,8 @@
                         <div class="form-group bubble-info">
                             <div class="form-fields">
                                 <select name="system.spellAbility">
-                                    <option value=""></option>
-                                    {{#select itemData.spellAbility}}
-                                    {{#each config.abilities as |name val|}}
-                                    <option value="{{val}}">{{name}}</option>
-                                    {{/each}}
-                                    {{/select}}
+                                    {{selectOption "" "" selected=itemData.spellAbility}}
+                                    {{selectOptions config.abilities selected=itemData.spellAbility}}
                                 </select>
                             </div>
                         </div>
@@ -364,7 +340,7 @@
 
                 </div>
                 {{/if}}
-            
+
             </section>
 
         </div>

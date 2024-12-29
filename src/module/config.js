@@ -426,6 +426,13 @@ SFRPG.skills = {
     "sur": "SFRPG.SkillSur"
 };
 
+SFRPG.controlSkills = {
+    "pil": "SFRPG.SkillPil",
+    "ath": "SFRPG.SkillAth",
+    "sur": "SFRPG.SkillSur",
+    "none": "SFRPG.None"
+};
+
 // Weapon Types
 SFRPG.weaponTypes = {
     "basicM": "SFRPG.WeaponTypesBasicMelee",
@@ -1958,6 +1965,12 @@ SFRPG.droneBadSaveBonusPerLevel = [0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 
 SFRPG.droneFeatsPerLevel = [1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 8, 8];
 SFRPG.droneModsPerLevel = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10];
 SFRPG.droneAbilityScoreIncreaseLevels = [4, 7, 10, 13, 16, 19];
+
+SFRPG.droneArmTypes = {
+    "general": "SFRPG.DroneSheet.Mod.Details.Arms.ArmType.General",
+    "melee": "SFRPG.DroneSheet.Mod.Details.Arms.ArmType.Melee",
+    "ranged": "SFRPG.DroneSheet.Mod.Details.Arms.ArmType.Ranged"
+};
 
 SFRPG.capacityUsagePer = {
     "action": "SFRPG.Capacity.UsagePer.Action",

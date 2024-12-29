@@ -41,11 +41,7 @@
                             <div class="form-group">
                                 <label>{{ localize "SFRPG.Items.Consumable.Type" }}</label>
                                 <select name="system.consumableType">
-                                    {{#select itemData.consumableType}}
-                                    {{#each config.consumableTypes as |name type|}}
-                                    <option value="{{type}}">{{name}}</option>
-                                    {{/each}}
-                                    {{/select}}
+                                    {{selectOptions config.consumableTypes selected=itemData.consumableType}}
                                 </select>
                             </div>
 
@@ -54,7 +50,7 @@
 
                     {{!-- Physical Properties --}}
                     {{> "systems/sfrpg/templates/items/parts/physical-item-details.hbs"}}
-                    
+
                 </div>
 
                 {{!-- Usage & Action Tab --}}
@@ -78,6 +74,6 @@
 
         {{!-- Modifiers Tab --}}
         {{> "systems/sfrpg/templates/items/parts/item-modifiers.hbs"}}
-        
+
     </section>
 </form>

@@ -11,12 +11,8 @@
         <div class="form-group select">
             <label>{{ localize "SFRPG.Items.Action.ActionType" }}</label>
             <select name="system.actionType">
-                {{#select itemData.actionType}}
-                <option value=""></option>
-                {{#each config.itemActionTypes as |name type|}}
-                <option value="{{type}}">{{name}}</option>
-                {{/each}}
-                {{/select}}
+                {{selectOption "" "" selected=itemData.actionType}}
+                {{selectOptions config.itemActionTypes selected=itemData.actionType}}
             </select>
         </div>
 
@@ -25,11 +21,7 @@
             <div class="form-group select" {{createTippy title="SFRPG.Items.Action.ActionTarget.Title" subtitle="SFRPG.Items.Action.ActionTarget.Tooltip"}}>
                 <label>{{ localize "SFRPG.Items.Action.ActionTarget.Title" }}</label>
                 <select name="system.actionTarget">
-                    {{#select itemData.actionTarget}}
-                    {{#each config.actionTargets as |name type|}}
-                    <option value="{{type}}">{{name}}</option>
-                    {{/each}}
-                    {{/select}}
+                    {{selectOptions config.actionTargets selected=itemData.actionTarget}}
                 </select>
             </div>
 
@@ -37,12 +29,8 @@
             <div class="form-group select">
                 <label>{{ localize "SFRPG.Items.Action.AbilityModifier" }}</label>
                 <select name="system.ability">
-                    {{#select itemData.ability}}
-                    <option value=""></option>
-                    {{#each config.abilities as |ability a|}}
-                    <option value="{{a}}">{{ability}}</option>
-                    {{/each}}
-                    {{/select}}
+                    {{selectOption "" "" selected=itemData.ability}}
+                    {{selectOptions config.abilities selected=itemData.ability}}
                 </select>
             </div>
 
@@ -62,19 +50,11 @@
                 <div class="form-fields">
                     <input type="text" class="wide-form-field" name="system.save.dc" value="{{itemData.save.dc}}" data-dtype="String" placeholder="{{placeholders.saveDC.formula}}"/>
                     <select name="system.save.type">
-                        {{#select itemData.save.type}}
-                        <option value=""></option>
-                        {{#each config.saves as |save s|}}
-                        <option value="{{s}}">{{save}}</option>
-                        {{/each}}
-                        {{/select}}
+                        {{selectOption "" "" selected=itemData.save.type}}
+                        {{selectOptions config.saves selected=itemData.save.type}}
                     </select>
                     <select name="system.save.descriptor">
-                        {{#select itemData.save.descriptor}}
-                        {{#each config.saveDescriptors as |descriptor k|}}
-                        <option value="{{k}}">{{descriptor}}</option>
-                        {{/each}}
-                        {{/select}}
+                        {{selectOptions config.saveDescriptors selected=itemData.save.descriptor}}
                     </select>
                 </div>
             </div>
@@ -85,12 +65,8 @@
                 <div class="form-fields">
                     <input type="text" class="wide-form-field" name="system.skillCheck.dc" value="{{itemData.skillCheck.dc}}" data-dtype="String" placeholder="{{placeholders.saveDC.formula}}"/>
                     <select name="system.skillCheck.type">
-                        {{#select itemData.skillCheck.type}}
-                        <option value=""></option>
-                        {{#each config.skills as |skill s|}}
-                        <option value="{{s}}">{{skill}}</option>
-                        {{/each}}
-                        {{/select}}
+                        {{selectOption "" "" selected=itemData.skillCheck.type}}
+                        {{selectOptions config.skills selected=itemData.skillCheck.type}}
                     </select>
                 </div>
             </div>
@@ -119,11 +95,7 @@
                                 <input class="wide-form-field" type="text" name="system.range.value" value="{{itemData.range.value}}" data-dtype="String" placeholder="Range"/>
                                 {{/if}}
                                 <select name="system.range.units">
-                                    {{#select itemData.range.units}}
-                                    {{#each config.distanceUnits as |unit key|}}
-                                    <option value="{{key}}">{{unit}}</option>
-                                    {{/each}}
-                                    {{/select}}
+                                    {{selectOptions config.distanceUnits selected=itemData.range.units}}
                                 </select>
                             </div>
                         </div>
@@ -135,27 +107,15 @@
                                 {{#if this.area.showTotal}}<p class="calculated-total"><strong>{{itemData.area.total}}</strong></p>{{/if}}
                                 <input type="text" {{#if (eq itemData.area.units "text")}}class="wide-form-field"{{/if}} name="system.area.value" value="{{itemData.area.value}}" data-dtype="String" placeholder="Area" />
                                 <select name="system.area.units" class="min-form-field">
-                                    {{#select itemData.area.units}}
-                                    {{#each config.variableDistanceUnits as |unit key|}}
-                                    <option value="{{key}}">{{unit}}</option>
-                                    {{/each}}
-                                    <option value="text">{{localize "SFRPG.Text"}}</option>
-                                    {{/select}}
+                                    {{selectOptions config.variableDistanceUnits selected=itemData.area.units}}
+                                    {{selectOption "text" "SFRPG.Text" selected=itemData.area.units localize=true}}
                                 </select>
                                 {{#unless (eq itemData.area.units "text")}}
                                 <select name="system.area.shape" class="min-form-field">
-                                    {{#select itemData.area.shape}}
-                                    {{#each config.spellAreaShapes as |shape s|}}
-                                    <option value="{{s}}">{{shape}}</option>
-                                    {{/each}}
-                                    {{/select}}
+                                    {{selectOptions config.spellAreaShapes selected=itemData.area.shape}}
                                 </select>
                                 <select name="system.area.effect" class="min-form-field">
-                                    {{#select itemData.area.effect}}
-                                    {{#each config.spellAreaEffects as |effect e|}}
-                                    <option value="{{e}}">{{effect}}</option>
-                                    {{/each}}
-                                    {{/select}}
+                                    {{selectOptions config.spellAreaEffects selected=itemData.area.effect}}
                                 </select>
                                 <label class="checkbox">
                                     <input type="checkbox" name="system.area.shapable" {{checked itemData.area.shapable}}>
@@ -246,11 +206,9 @@
                             <div class="damage-part-operator form-group flexrow" data-tooltip="When an item or ablity does multiple types of damage, this will determine if both damage types apply, or if only one or the other apply.">
                                 <label>{{localize "Damage Operator"}}</label>
                                 <select name="system.critical.parts.{{i}}.operator">
-                                    {{#select (lookup this "operator")}}
-                                    <option value=""></option>
-                                    <option value="and">{{localize "And"}}</option>
-                                    <option value="or">{{localize "Or"}}</option>
-                                    {{/select}}
+                                    {{selectOption "" "" selected=part.operator}}
+                                    {{selectOption "and" "And" selected=part.operator localize=true}}
+                                    {{selectOption "or" "Or" selected=part.operator localize=true}}
                                 </select>
                             </div>
                         </div>

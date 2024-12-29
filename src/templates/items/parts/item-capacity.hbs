@@ -6,12 +6,8 @@
             <label>{{ localize "SFRPG.Items.Ammunition.AmmunitionType" }}</label>
             <div class="form-fields">
                 <select name="system.ammunitionType">
-                    {{#select itemData.ammunitionType}}
-                    <option value="">{{ localize "SFRPG.Items.Ammunition.Type.None" }}</option>
-                    {{#each config.ammunitionTypes as |ammunition type|}}
-                    <option value="{{type}}">{{ammunition}}</option>
-                    {{/each}}
-                    {{/select}}
+                    {{selectOption "" "SFRPG.Items.Ammunition.Type.None" selected=itemData.ammunitionType localize=true}}
+                    {{selectOptions config.ammunitionTypes selected=itemData.ammunitionType}}
                 </select>
             </div>
         </div>
@@ -37,12 +33,8 @@
                 <input type="text" data-tooltip="{{ localize "SFRPG.Items.Capacity.UsageTooltip" }}" name="system.usage.value" value="{{itemData.usage.value}}" data-dtype="Number" />
                 <span class="sep"> / </span>
                 <select name="system.usage.per" data-tooltip="{{ localize "SFRPG.Items.Capacity.UsageValueTooltip" }}">
-                {{#select itemData.usage.per}}
-                    <option value=""></option>
-                    {{#each config.capacityUsagePer as |usage u|}}
-                    <option value="{{u}}">{{usage}}</option>
-                    {{/each}}
-                {{/select}}
+                    {{selectOption "" "" selected=itemData.usage.per}}
+                    {{selectOptions config.capacityUsagePer selected=itemData.usage.per}}
                 </select>
             </div>
         </div>

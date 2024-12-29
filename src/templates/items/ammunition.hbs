@@ -24,12 +24,8 @@
                         <label>{{ localize "SFRPG.Items.Ammunition.AmmunitionType" }}</label>
                         <div class="form-fields">
                             <select name="system.ammunitionType">
-                                {{#select itemData.ammunitionType}}
-                                <option value="">{{ localize "SFRPG.Items.Ammunition.Type.None" }}</option>
-                                {{#each config.ammunitionTypes as |ammunition type|}}
-                                <option value="{{type}}">{{ammunition}}</option>
-                                {{/each}}
-                                {{/select}}
+                                {{selectOption "" "SFRPG.Items.Ammunition.Type.None" selected=itemData.ammunitionType localize=true}}
+                                {{selectOptions config.ammunitionTypes selected=itemData.ammunitionType}}
                             </select>
                         </div>
                     </div>
@@ -57,6 +53,6 @@
             {{> "systems/sfrpg/templates/items/parts/physical-item-details.hbs"}}
 
         </div>
-        
+
     </section>
 </form>
