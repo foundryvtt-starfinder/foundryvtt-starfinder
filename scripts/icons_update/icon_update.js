@@ -33,7 +33,8 @@ const itemPaths = [
 
 const foundryDefaultIcons = {
     "actor": "icons/svg/mystery-man.svg",
-    "item": "icons/svg/item-bag.svg"
+    "item": "icons/svg/item-bag.svg",
+    "old": "icons/svg/cowled.svg"
 };
 
 const defaultActorIcons = {
