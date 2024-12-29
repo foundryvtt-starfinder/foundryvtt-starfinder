@@ -105,30 +105,90 @@ console.log(`Starting script`);
 
 for (const currentPath of itemPaths) {
     const folderPath = pathPrefix + currentPath;
-    console.log(`Checking itmes in folder: ${folderPath}`);
+    console.log(`Checking items in folder: ${folderPath}`);
 
     const files = fs.readdirSync(folderPath);
     for (const file of files) {
         const fname = folderPath + '/' + file;
         // console.log(`Opening up the ${fname} file.`);
         const json = fs.readFileSync(fname);
-        const data = JSON.parse(json);
-        const newData = iconReplace(defaultItemIcons, data);
-        if (newData[0]) {
-            fs.writeFileSync(fname, JSON.stringify(newData[1], null, 2));
+        const itemData = JSON.parse(json);
+        const newItemData = iconReplace(defaultItemIcons, itemData);
+        if (newItemData[0]) {
+            fs.writeFileSync(fname, JSON.stringify(newItemData[1], null, 2));
         }
     }
 }
 
-function iconReplace(defaultIconsObject, data) {
+for (const currentPath of actorPaths) {
+    const folderPath = pathPrefix + currentPath;
+    console.log(`Checking items in folder: ${folderPath}`);
+
+    const files = fs.readdirSync(folderPath);
+    for (const file of files) {
+        const fname = folderPath + '/' + file;
+        console.log(`Opening up the ${fname} file.`);
+        const json = fs.readFileSync(fname);
+        const actorData = JSON.parse(json);
+        const newActorData = actorIconReplace(defaultActorIcons, actorData);
+        if (newActorData[0]) {
+            fs.writeFileSync(fname, JSON.stringify(newActorData[1], null, 2));
+        }
+    }
+}
+
+function iconReplace(defaultIconsObject, data, docType = "", iconType = "") {
     // If the item has a type that's found in the icon list and it's icon is an old default icon, update it
-    if (Object.keys(defaultIconsObject).includes(data.type)) {
-        if (Object.values(foundryDefaultIcons).includes(data.img)) {
-            const newImg = 'systems/sfrpg/icons/default/' + defaultIconsObject[data.type];
-            // console.log(`Original image ${data.img}, new image ${newImg}`);
-            data.img = newImg;
-            return [true, data];
+    // console.log(data.img);
+    if (Object.keys(defaultIconsObject).includes(data.type) || Object.keys(defaultIconsObject).includes(docType)) {
+        // If a prototype token, use one image path
+        if (iconType === "prototypeToken") {
+            if (Object.values(foundryDefaultIcons).includes(data.texture.src)) {
+                const newImg = 'systems/sfrpg/icons/default/' + defaultIconsObject[data.type];
+                console.log(`Original image ${data.texture.src}, new image ${newImg}`);
+                data.texture.src = newImg;
+                return [true, data];
+            }
+        }
+        // If anything else, use another image path
+        else {
+            if (Object.values(foundryDefaultIcons).includes(data.img)) {
+                const newImg = 'systems/sfrpg/icons/default/' + defaultIconsObject[data.type];
+                console.log(`Original image ${data.img}, new image ${newImg}`);
+                data.img = newImg;
+                return [true, data];
+            }
         }
     }
     return [false, data];
+}
+
+function actorIconReplace(defaultIconsObject, actorData) {
+    let changed = false;
+
+    // Check the actor's prototype token image
+    const newPrototypeTokenData = iconReplace(defaultIconsObject, actorData.prototypeToken, actorData.type);
+    if (newPrototypeTokenData[0]) {
+        actorData.prototypeToken = newPrototypeTokenData[1];
+        changed = true;
+    }
+
+    // Re-icon all of the actor's items
+    for (itemData of actorData.items) {
+        const newItemData = iconReplace(defaultItemIcons, itemData);
+        if (newItemData[0]) {
+            itemData = newItemData[1];
+            changed = true;
+        }
+    }
+
+    // Check the actor's image itself
+    const newActorData = iconReplace(defaultIconsObject, actorData);
+    if (newActorData[0]) {
+        actorData = newActorData[1];
+        changed = true;
+    }
+
+    // Return the new actor data
+    return [changed, actorData];
 }
