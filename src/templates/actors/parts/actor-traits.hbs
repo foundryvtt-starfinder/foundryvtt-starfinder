@@ -3,12 +3,8 @@
         <div class="form-group">
         <label>{{localize "SFRPG.CombatRoles.Label"}}</label>
         <select class="npc-combat-role" name="system.details.combatRole">
-            {{#select system.details.combatRole}}
-                <option value=""></option>
-            {{#each config.combatRoles as |label role|}}
-                <option value="{{role}}">{{label}}</option>
-            {{/each}}
-            {{/select}}
+            {{selectOption "" "" selected=system.details.combatRole}}
+            {{selectOptions config.combatRoles selected=system.details.combatRole}}
         </select>
     </div>
     {{/if}}
@@ -16,11 +12,7 @@
         <label>{{localize "SFRPG.Size"}}</label>
         {{#if (not isDrone)}}
         <select class="actor-size" name="system.traits.size">
-            {{#select system.traits.size}}
-            {{#each config.actorSizes as |label size|}}
-                <option value="{{size}}">{{label}}</option>
-            {{/each}}
-            {{/select}}
+            {{selectOptions config.actorSizes selected=system.traits.size}}
         </select>
         {{else}}
         <span class="value">{{system.traits.size}}</span>
@@ -31,12 +23,8 @@
     <div class="form-group" data-tooltip="<strong>{{localize "SFRPG.KeyAbility"}}</strong><br/>@system.attributes.keyability">
         <label>{{localize "SFRPG.KeyAbility"}}</label>
         <select class="actor-keyability" name="system.attributes.keyability">
-            {{#select system.attributes.keyability}}
-            <option value="">Choose One</option>
-            {{#each config.abilities as |label abl|}}
-                <option value="{{abl}}">{{label}}</option>
-            {{/each}}
-            {{/select}}
+            {{selectOption "" "Choose One" selected=system.attributes.keyability}}
+            {{selectOptions config.abilities selected=system.attributes.keyability}}
         </select>
     </div>
     {{/if}}

@@ -63,7 +63,7 @@ export default class SFRPGCustomChatMessage {
             dataRoll: roll,
             rollType: data.rollType,
             rollNotes: data.htmlData?.find(x => x.name === "rollNotes")?.value,
-            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             config: CONFIG.SFRPG,
             tokenImg: actor.token?.img || actor.img,
             actorId: actor.id,
@@ -116,7 +116,7 @@ export default class SFRPGCustomChatMessage {
 
         options = foundry.utils.mergeObject(options, { rollContent });
         const cardContent = await renderTemplate(templateName, options);
-        const rollMode = data.rollMode ? data.rollMode : game.settings.get('core', 'rollMode');
+        const rollMode = data.rollMode ?? game.settings.get('core', 'rollMode');
 
         // let explainedRollContent = rollContent;
         // if (options.breakdown) {
@@ -128,9 +128,8 @@ export default class SFRPGCustomChatMessage {
             flavor: data.title,
             speaker: data.speaker,
             content: cardContent, // + explainedRollContent + (options.additionalContent || ""),
-            rollMode: rollMode,
-            roll: roll,
-            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+            rolls: [roll],
+            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             sound: CONFIG.sounds.dice,
             rollType: data.rollType,
             flags: {}
@@ -151,6 +150,6 @@ export default class SFRPGCustomChatMessage {
             messageData.flags.rollOptions = options.rollOptions;
         }
 
-        ChatMessage.create(messageData);
+        ChatMessage.create(messageData, { rollMode: rollMode });
     }
 }

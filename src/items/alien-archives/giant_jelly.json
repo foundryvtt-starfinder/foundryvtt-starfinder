@@ -2,12 +2,22 @@
   "_id": "uI1lPcdWTFz5LApb",
   "name": "Giant Jelly",
   "type": "npc2",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "_id": "0PDnlniAVOofnfTC",
       "name": "Slam",
       "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -25,6 +35,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -113,6 +124,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -243,6 +255,11 @@
       "_id": "PdWFuOEV73mVmKq5",
       "name": "Sonic Pulse (Ex)",
       "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -260,6 +277,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -348,6 +366,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -478,6 +497,11 @@
       "_id": "kkb5gxJKkV9JLhqf",
       "name": "Water Breathing",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -494,6 +518,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -516,6 +541,11 @@
           "value": "<p>&nbsp;(EX)</p>\n<p>The creature can breathe water. It can’t breathe air unless it has the amphibious special ability (see page 152).</p>\n<hr />"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -523,6 +553,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -556,6 +587,11 @@
       "_id": "rJL4l4NqRJUTtlX8",
       "name": "Amorphous",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -572,6 +608,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -594,6 +631,11 @@
           "value": "<p>(EX)</p>\n<p>The creature’s body is malleable and shapeless. It does not take double damage from critical hits, but it is affected by critical hit effects normally.</p>\n<hr />"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -601,6 +643,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -634,6 +677,11 @@
       "_id": "iB0FEeVQhXGnL9rO",
       "name": "Lenticular lattice (Ex)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -650,6 +698,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -672,6 +721,11 @@
           "value": "<p>A giant jelly can supernaturally manipulate its hexagonal lattice to reflect light in confusing ways. It has concealment against all attacks originating within 30 feet.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -679,6 +733,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -713,6 +768,7 @@
     "name": "Giant Jelly",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -724,6 +780,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 3,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -744,11 +801,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -762,13 +837,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
       "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "tint": "#ffffff"
     },
     "width": 3
   },
@@ -967,7 +1046,7 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any water (@UUID[Compendium.sfrpg.setting.tvbcahAbnqDGepHf]{Entha})</p>\n<h3>Organization</h3>\n<p>solitary SPECIAL ABILITIES Lenticular Lattice (Ex) A giant jelly can supernaturally manipulate its hexagonal lattice to reflect light in confusing ways. It has concealment against all attacks originating within 30 feet. Sonic Pulse (Ex) As a standard action, a giant jelly can form itself into a large concave disc and emit sudden, violent vibrations as a ranged attack with a range increment of 60 feet that targets EAC. This attack doesn't provoke attacks of opportunity.</p>\n</section>",
+        "value": "<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any water (@UUID[Compendium.sfrpg.setting.Item.tvbcahAbnqDGepHf]{Entha})</p>\n<h3>Organization</h3>\n<p>solitary SPECIAL ABILITIES Lenticular Lattice (Ex) A giant jelly can supernaturally manipulate its hexagonal lattice to reflect light in confusing ways. It has concealment against all attacks originating within 30 feet. Sonic Pulse (Ex) As a standard action, a giant jelly can form itself into a large concave disc and emit sudden, violent vibrations as a ranged attack with a range increment of 60 feet that targets EAC. This attack doesn't provoke attacks of opportunity.</p>\n</section>",
         "weight": ""
       },
       "class": "",

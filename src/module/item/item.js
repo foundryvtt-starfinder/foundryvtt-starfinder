@@ -13,7 +13,7 @@ import { ItemCapacityMixin } from "./mixins/item-capacity.js";
 
 export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityMixin) {
 
-    constructor(data, context) {
+    constructor(data, context = {}) {
         // Set module art if available. This applies art to items viewed or created from compendiums.
         if (context.pack && data._id) {
             const art = game.sfrpg.compendiumArt.map.get(`Compendium.${context.pack}.${data._id}`);
@@ -144,6 +144,13 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             labels.kac = data.armor.kac ? `${data.armor.kac} ${game.i18n.localize("SFRPG.KineticArmorClassShort")}` : "";
         }
 
+        // Apply a tag if the item is a weapon that's not equipment (unarmed strike, natural attack, etc.)
+        if (itemData.type === "weapon") {
+            itemData.system.transferrable = itemData.system.isEquipment;
+        } else {
+            itemData.system.transferrable = true;
+        }
+
         // Activated Items
         if (data.hasOwnProperty("activation")) {
 
@@ -254,7 +261,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      * @returns {Object}         The modified data object with the modifiers data object added.
      */
     _ensureHasModifiers(data, prop = null) {
-        if (!hasProperty(data, "modifiers")) {
+        if (!foundry.utils.hasProperty(data, "modifiers")) {
             console.log(`Starfinder | ${this.name} does not have the modifiers data object, attempting to create them...`);
             data.modifiers = [];
         }
@@ -308,12 +315,23 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 if (game.combat) updates['system.activeDuration.expiryInit'] = game.combat.initiative;
             }
 
+            if (t === "asi") {
+                const numASI = this.actor.items.filter(x => x.type === "asi").length;
+                const level = 5 + numASI * 5;
+                updates["name"] = game.i18n.format("SFRPG.ItemSheet.AbilityScoreIncrease.ItemName", {level: level});
+            }
+
         } else {
             // Clear origin data if an effect is dragged from an actor to the sidebar.
             if (t === "effect") {
                 updates["system.context.origin.actorUuid"] = "";
                 updates["system.context.origin.itemUuid"] = "";
             }
+        }
+
+        // Apply a default icon to the actor based on its type, if one has been chosen
+        if (Object.keys(SFRPG.defaultItemIcons).includes(this.type)) {
+            updates.img = ["systems/sfrpg/icons/default/", SFRPG.defaultItemIcons[this.type]].join("");
         }
 
         this.updateSource(updates);
@@ -346,7 +364,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         };
 
         if (this.type === "spell") {
-            let descriptionText = duplicate(templateData.system.description.short || templateData.system.description.value);
+            let descriptionText = foundry.utils.deepClone(templateData.system.description.short || templateData.system.description.value);
             if (descriptionText?.length > 0) {
                 // Alter description by removing non-eligble level tags.
                 const levelTags = [
@@ -424,13 +442,12 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Render the chat card template
         const templateType = ["tool", "consumable"].includes(this.type) ? this.type : "item";
         const template = `systems/sfrpg/templates/chat/${templateType}-card.hbs`;
-        const rollMode = game.settings.get("core", "rollMode");
         const html = await renderTemplate(template, templateData);
 
         // Basic chat message data
         const chatData = {
-            user: game.user.id,
-            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+            author: game.user.id,
+            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             content: html,
             flags: {
                 level: this.system.level,
@@ -442,20 +459,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                     actor: this.actor.uuid
                 }
             },
-            rollMode: rollMode,
             speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor})
         };
 
-        // Toggle default roll mode
-        if (["gmroll", "blindroll"].includes(rollMode)) {
-            chatData["whisper"] = ChatMessage.getWhisperRecipients("GM");
-        }
-        if (rollMode === "blindroll") {
-            chatData["blind"] = true;
-        }
-        if (rollMode === "selfroll") {
-            chatData["whisper"] = ChatMessage.getWhisperRecipients(game.user.name);
-        }
+        const rollMode = game.settings.get("core", "rollMode");
+        ChatMessage.applyRollMode(chatData, rollMode);
 
         // Create the chat message
         return ChatMessage.create(chatData, { displaySheet: false });
@@ -470,7 +478,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      * @returns {Object} An object containing the item's rollData (including its owners), and chat message properties.
      */
     async getChatData() {
-        const data = duplicate(this.system);
+        const data = foundry.utils.deepClone(this.system);
         const labels = this.labels;
 
         const async = true;
@@ -922,7 +930,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         }
 
         // Define Roll Data
-        const rollData = duplicate(actorData);
+        const rollData = foundry.utils.deepClone(actorData);
         // Add hasSave to roll
         itemData.hasSave = this.hasSave;
         itemData.hasSkill = this.hasSkill;
@@ -943,9 +951,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const rollContext = RollContext.createItemRollContext(this, this.actor, {itemData: itemData});
 
         /** Create global attack modifiers. */
-        const additionalModifiers = deepClone(SFRPG.globalAttackRollModifiers).map(mod => {
-            const container = {actorUuid: this.actor.uuid, itemUuid: this.uuid};
-            const modInstance = {bonus: new SFRPGModifier({...mod.bonus, container})};
+        const additionalModifiers = foundry.utils.deepClone(SFRPG.globalAttackRollModifiers).map(mod => {
+            const modInstance = {bonus: new SFRPGModifier(mod.bonus, {parent: this, globalModifier: true})};
             return modInstance;
         });
 
@@ -1003,9 +1010,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             // Remove inactive constant and damage section mods. Keep all situational mods, regardless of status.
             if (!mod.enabled && mod.modifierType !== SFRPGModifierType.FORMULA) return false;
 
-            if (mod.limitTo === "parent" && mod.container.itemUuid !== this.uuid) return false;
+            if (mod.limitTo === "parent" && mod.item !== this) return false;
             if (mod.limitTo === "container") {
-                const parentItem = getItemContainer(this.actor.items, fromUuidSync(mod.container.itemUuid));
+                const parentItem = getItemContainer(this.actor.items, mod.item);
                 if (parentItem?.id !== this.id) return false;
             }
 
@@ -1045,7 +1052,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             return;
         }
 
-        const itemData = duplicate(this.system);
+        const itemData = foundry.utils.deepClone(this.system);
         if (itemData.hasOwnProperty("usage") && !options.disableDeductAmmo) {
             const usage = itemData.usage;
 
@@ -1108,10 +1115,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         /** Create additional modifiers. */
         const additionalModifiers = [
-            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.ComputerBonus"), modifier: "@ship.attributes.computer.value", enabled: false} },
-            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.CaptainDemand"), modifier: "+4", enabled: false} },
-            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.CaptainEncouragement"), modifier: "+2", enabled: false} },
-            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.ScienceOfficerLockOn"), modifier: "+2", enabled: false} },
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.ComputerBonus"), modifier: `${this.actor.system?.attributes?.computer?.value ?? 0}`, enabled: false} },
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.CaptainDemand"), modifier: "4", enabled: false} },
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.CaptainEncouragement"), modifier: "2", enabled: false} },
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.ScienceOfficerLockOn"), modifier: "2", enabled: false} },
             {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.SnapShot"), modifier: "-2", enabled: false} },
             {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.FireAtWill"), modifier: "-4", enabled: false} },
             {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.Broadside"), modifier: "-2", enabled: false} }
@@ -1130,6 +1137,14 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             rollOptions.actionTargetSource = SFRPG.actionTargetsStarship;
         }
 
+        const quadrant = this.system.mount.arc.charAt(0).toUpperCase() + this.system.mount.arc.slice(1);
+        if (this.actor.system?.attributes?.systems[`weaponsArray${quadrant}`]?.mod < 0) {
+            parts.push(`@ship.attributes.systems.weaponsArray${quadrant}.mod`);
+        }
+        if (this.actor.system?.attributes?.systems?.powerCore?.modOther < 0) {
+            parts.push(`@ship.attributes.systems.powerCore.modOther`);
+        }
+
         return await DiceSFRPG.d20Roll({
             event: options.event,
             parts: parts,
@@ -1143,6 +1158,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 top: options.event ? options.event.clientY - 80 : null
             },
             rollOptions: rollOptions,
+            actorContextKey: "gunner",
             onClose: (roll, formula, finalFormula) => {
                 if (roll) {
                     const rollDamageWithAttack = game.settings.get("sfrpg", "rollDamageWithAttack");
@@ -1233,7 +1249,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Define Roll parts
         /** @type {DamageParts[]} */
-        const parts = duplicate(itemData.damage.parts.map(part => part));
+        const parts = foundry.utils.deepClone(itemData.damage.parts.map(part => part));
         for (const part of parts) {
             part.isDamageSection = true;
         }
@@ -1283,7 +1299,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         }, 0);
 
         // Define Roll Data
-        const rollData = mergeObject(duplicate(actorData), {
+        const rollData = foundry.utils.mergeObject(foundry.utils.deepClone(actorData), {
             item: itemData,
             mod: actorData.abilities[abl].mod
         });
@@ -1373,9 +1389,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 return false;
             }
 
-            if (mod.limitTo === "parent" && mod.container.itemUuid !== this.uuid) return false;
+            if (mod.limitTo === "parent" && mod.item !== this) return false;
             if (mod.limitTo === "container") {
-                const parentItem = getItemContainer(this.actor.items, fromUuidSync(mod.container.itemUuid));
+                const parentItem = getItemContainer(this.actor.items, mod.item);
                 if (parentItem?.id !== this.id) return false;
             }
 
@@ -1452,7 +1468,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             throw new Error("you may not make a Damage Roll with this item");
         }
 
-        const parts = duplicate(itemData.damage.parts.map(part => part));
+        const parts = foundry.utils.deepClone(itemData.damage.parts.map(part => part));
         for (const part of parts) {
             part.isDamageSection = true;
         }
@@ -1497,17 +1513,12 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     /* -------------------------------------------- */
 
     /**
-     * Adjust a cantrip damage formula to scale it for higher level characters and monsters
-     * @private
+     * A helper method to call the useSpell method on the item's actor
      */
-    _scaleCantripDamage(parts, level, scale) {
-        const add = Math.floor((level + 1) / 6);
-        if (add === 0) return;
-        if (scale && (scale !== parts[0])) {
-            parts[0] = parts[0] + " + " + scale.replace(new RegExp(Roll.diceRgx, "g"), (match, nd, d) => `${add}d${d}`);
-        } else {
-            parts[0] = parts[0].replace(new RegExp(Roll.diceRgx, "g"), (match, nd, d) => `${parseInt(nd) + add}d${d}`);
-        }
+    async useSpell({ configureDialog = true } = {}) {
+        if (this.type !== "spell") throw new Error("Item#UseSpell must be used on a spell item!");
+        if (!this.actor) throw new Error("The item must be on an actor to cast it!");
+        return this.actor.useSpell(this, { configureDialog });
     }
 
     /* -------------------------------------------- */
@@ -1544,9 +1555,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             chatMessage: options.chatMessage,
             content: content,
-            rollMode: game.settings.get("core", "rollMode"),
-            roll: rollResult.roll,
-            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+            rolls: [rollResult.roll],
+            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             sound: CONFIG.sounds.dice
         });
     }
@@ -1599,22 +1609,16 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
             // Basic chat message data
             const chatData = {
-                user: game.user.id,
+                author: game.user.id,
                 flavor: flavor,
-                type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+                type: CONST.CHAT_MESSAGE_STYLES.OTHER,
                 content: html,
                 flags: { level: this.system.level },
                 speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor})
             };
 
-            // Toggle default roll mode
             const rollMode = game.settings.get("core", "rollMode");
-            if (["gmroll", "blindroll"].includes(rollMode)) {
-                chatData["whisper"] = ChatMessage.getWhisperRecipients("GM");
-            }
-            if (rollMode === "blindroll") {
-                chatData["blind"] = true;
-            }
+            ChatMessage.applyRollMode(chatData, rollMode);
 
             // Create the chat message
             ChatMessage.create(chatData, { displaySheet: false });
@@ -1658,18 +1662,18 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Roll the check
         const rollObject = Roll.create("1d6");
-        const roll = await rollObject.evaluate({async: true});
+        const roll = await rollObject.evaluate();
         const success = roll.total >= parseInt(data.recharge.value);
 
         // Display a Chat Message
         const rollMode = game.settings.get("core", "rollMode");
         const chatData = {
-            user: game.user.id,
-            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+            author: game.user.id,
+            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             flavor: `${this.name} recharge check - ${success ? "success!" : "failure!"}`,
             whisper: (["gmroll", "blindroll"].includes(rollMode)) ? ChatMessage.getWhisperRecipients("GM") : null,
             blind: rollMode === "blindroll",
-            roll: roll,
+            rolls: [roll],
             speaker: ChatMessage.getSpeaker({
                 actor: this.actor,
                 alias: this.actor.name
@@ -1734,14 +1738,12 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const chatCardActor = this._getChatCardActor(card);
         if (!chatCardActor) return ui.notifications.error("SFRPG.ChatCard.ItemAction.NoActor");
 
-        button.disabled = true;
-
         // Get the Item
         let item = chatCardActor.items.get(card.dataset.itemId);
 
         // Adjust item to level, if required
         if (typeof (message.flags.level) !== 'undefined' && message.flags.level !== item.system.level) {
-            const newItemData = duplicate(item);
+            const newItemData = item.toObject;
             newItemData.system.level = message.flags.level;
 
             item = new ItemSFRPG(newItemData, {parent: item.parent});
@@ -1771,9 +1773,6 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Consumable usage
         else if (action === "consume") await item.rollConsumable({ event });
-
-        // Re-enable the button
-        button.disabled = false;
     }
 
     /**
@@ -1877,7 +1876,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         limitTo = "",
         damage = null
     } = {}) {
-        const data = this._ensureHasModifiers(duplicate(this.system));
+        const data = this._ensureHasModifiers(foundry.utils.deepClone(this.system));
         const modifiers = data.modifiers;
 
         modifiers.push(new SFRPGModifier({
@@ -1919,17 +1918,17 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      * @param {String} id The id for the modifier to edit
      */
     editModifier(id) {
-        const modifiers = duplicate(this.system.modifiers);
+        const modifiers = foundry.utils.deepClone(this.system.modifiers);
         const modifier = modifiers.find(mod => mod._id === id);
 
         new SFRPGModifierApplication(modifier, this, {}, this.actor).render(true);
     }
 
     static async _onScalingCantripsSettingChanges() {
-        const d3scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d(ternary(gte(@details.cl.value,7),4,3))+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
-        const d6scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
-        const npcd3scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d(ternary(gte(@details.cr,7),4,3))+ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
-        const npcd6scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
+        const d3scaling = "(lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9))d(ternary(gte(@details.cl.value,7),4,3))+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
+        const d6scaling = "(lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9))d6+(ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
+        const npcd3scaling = "(lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9))d((ternary(gte(@details.cr,7),4,3)))+(ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
+        const npcd6scaling = "(lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9))d6+(ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
 
         const setting = game.settings.get("sfrpg", "scalingCantrips");
         let count = 0;
@@ -1999,21 +1998,108 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const { parts } = item.system.damage;
 
         if (item.system.scaling?.d3) {
-            const d3scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d(ternary(gte(@details.cl.value,7),4,3))+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
-            const npcd3scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d(ternary(gte(@details.cr,7),4,3))+ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
+            const d3scaling = "(lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9))d(ternary(gte(@details.cl.value,7),4,3))+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
+            const npcd3scaling = "(lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9))d((ternary(gte(@details.cr,7),4,3)))+(ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
 
             parts.forEach(i => i.formula = (isNPC) ? npcd3scaling : d3scaling);
 
             console.log(`Starfinder | Updated ${item.name} to use the ${ (isNPC) ? 'NPC ' : ""}d3 scaling formula.`);
 
         } else if (item.system.scaling?.d6) {
-            const d6scaling = "lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
-            const npcd6scaling = "lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9)d6+ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
+            const d6scaling = "(lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9))d6+(ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
+            const npcd6scaling = "(lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9))d6+(ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
 
             parts.forEach(i => i.formula = (isNPC) ? npcd6scaling : d6scaling);
 
             console.log(`Starfinder | Updated ${item.name} to use the ${ (isNPC) ? "NPC " : ""}d6 scaling formula.`);
         }
     }
-}
 
+    /**
+     * Turn Events
+     * The following functions are run when appropriate by the GM.
+     */
+
+    _onTurnStart() {
+        if (this.type !== "effect" || !this.system.enabled) return;
+
+        for (const turnEvent of this.system.turnEvents) {
+            if (turnEvent.trigger !== "onTurnStart") continue;
+
+            this._handleTurnEvent(turnEvent);
+
+        }
+
+    }
+
+    _onTurnEnd() {
+        if (this.type !== "effect" || !this.system.enabled) return;
+
+        for (const turnEvent of this.system.turnEvents) {
+            if (turnEvent.trigger !== "onTurnEnd") continue;
+
+            this._handleTurnEvent(turnEvent);
+        }
+
+    }
+
+    _handleTurnEvent(turnEvent) {
+        switch (turnEvent.type) {
+            case "note":
+                this._handleEffectNoteEvent(turnEvent);
+                break;
+            case "roll":
+                this._handleEffectRollEvent(turnEvent);
+                break;
+        }
+    }
+
+    _handleEffectNoteEvent(turnEvent) {
+        ChatMessage.create({
+            content: turnEvent.content,
+            speaker: ChatMessage.getSpeaker({ actor: this.actor })
+        });
+    }
+
+    async _handleEffectRollEvent(turnEvent) {
+        if (!turnEvent.formula) return;
+
+        const parts = [{
+            isDamageSection: true,
+            enabled: true,
+            formula: turnEvent.formula,
+            types: turnEvent.damageTypes,
+            group: null
+        }];
+
+        const rollContext = RollContext.createItemRollContext(this, this.actor);
+
+        return DiceSFRPG.damageRoll({
+            parts,
+            rollContext,
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            dialogOptions: {
+                skipUI: true
+            },
+            title: turnEvent.name || this.name
+        });
+    }
+
+    /**
+     * Execute a macro with the context of this item
+     * @param {Macro} macro The macro to execute
+     * @param {Record<string, *>} scope Any additional arguments to pass to macro execution
+     * @returns {Promise<*>} The return value of the macro
+     */
+    async executeMacroWithContext(macro, scope = {}) {
+        if (!(macro instanceof Macro)) return ui.notifications.error("A macro was not provided!");
+
+        return macro.execute({
+            speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token }),
+            token: this.actor.token || null,
+            actor: this.actor || null,
+            item: this,
+            ...scope
+        });
+    }
+}

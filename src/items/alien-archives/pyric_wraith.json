@@ -2,12 +2,22 @@
   "_id": "BcMyHsHoHpermnv1",
   "name": "Pyric Wraith",
   "type": "npc2",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "_id": "X0uMCVE4OnHjbuCU",
       "name": "Ash Consumption (Su)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
@@ -21,6 +31,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -43,6 +54,11 @@
           "value": "<p>When a creature within 30 feet takes fire damage, a pyric wraith regains a number of Hit Points equal to the damage the creature took, up to a maximum equal to the wraith’s CR per round.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -50,6 +66,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -83,6 +100,11 @@
       "_id": "lWkiAsQUpV9OVfl8",
       "name": "Touch (plus Pyric Curse)",
       "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
@@ -100,9 +122,10 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
-          "units": "",
-          "value": 0
+          "units": "ft",
+          "value": "0"
         },
         "attackBonus": 16,
         "attributes": {
@@ -170,8 +193,27 @@
         "damage": {
           "parts": [
             {
-              "name": "",
+              "name": "Touch",
               "formula": "2d4+6",
+              "group": null,
+              "isPrimarySection": true,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": true,
+                "healing": false,
+                "piercing": false,
+                "slashing": false,
+                "sonic": false
+              }
+            },
+            {
+              "name": "Pyric Curse",
+              "formula": "2d4",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -184,7 +226,8 @@
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -192,7 +235,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<h2>PYRIC CURSE</h2>\n<p><strong>Type</strong>&nbsp;curse;&nbsp;<strong>Save</strong>&nbsp;Fortitude DC 18</p>\n<p><strong>Effect</strong>&nbsp;A creature that fails the save gains the burning 1d8 condition. This flame is pyric fire (see special ability). While affected, the creature succeeds at saving throws against other pyric curses of the same or weaker potency.</p>\n<p><strong>Cure</strong>&nbsp;1 save; successful saves against the burning condition are successful saves against the curse.</p>"
+          "value": "<h2>PYRIC CURSE</h2><p><strong>Type</strong> curse; <strong>Save</strong> Fortitude DC 14</p>\n<p><strong>Effect</strong> A creature that fails the save gains the burning 2d4 condition. This flame is pyric fire (see special ability). While affected, the creature succeeds at saving throws against other pyric curses of the same or weaker potency.</p>\n<p><strong>Cure</strong> 1 save; successful saves against the burning condition are successful saves against the curse.</p>"
         },
         "descriptors": [],
         "duration": {
@@ -204,6 +247,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -246,11 +290,14 @@
           "gravitation": false,
           "guided": false,
           "harrying": false,
+          "healing": false,
           "holyWater": false,
           "hybrid": false,
+          "hydrodynamic": false,
           "ignite": false,
           "indirect": false,
           "injection": false,
+          "instrumental": false,
           "integrated": false,
           "line": false,
           "living": false,
@@ -268,6 +315,7 @@
           "polymorphic": false,
           "powered": false,
           "professional": false,
+          "propel": false,
           "punchGun": false,
           "qreload": false,
           "radioactive": false,
@@ -276,6 +324,7 @@
           "regrowth": false,
           "relic": false,
           "reposition": false,
+          "scramble": false,
           "shape": false,
           "shatter": false,
           "shells": false,
@@ -304,14 +353,18 @@
         "range": {
           "additional": "",
           "per": "",
-          "units": "",
-          "value": null
+          "units": "none",
+          "value": ""
         },
         "rollNotes": "",
         "save": {
-          "type": "",
-          "dc": "",
+          "type": "fort",
+          "dc": "14",
           "descriptor": "negate"
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": ""
         },
         "source": "",
         "special": "",
@@ -325,6 +378,7 @@
           "inubrix": false,
           "khefak": false,
           "noqual": false,
+          "nyblantine": false,
           "purplecores": false,
           "siccatite": false,
           "silver": false,
@@ -351,6 +405,11 @@
       "_id": "ghmwIl2yiieQB779",
       "name": "Pyric Ray (Su) (plus Pyric Curse)",
       "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
@@ -368,9 +427,10 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
-          "units": "none",
-          "value": null
+          "units": "ft",
+          "value": ""
         },
         "attackBonus": 16,
         "attributes": {
@@ -417,29 +477,32 @@
         },
         "critical": {
           "effect": "Burn 2d4",
-          "parts": [
-            {
-              "formula": "2d4",
-              "operator": "",
-              "types": {
-                "acid": false,
-                "bludgeoning": false,
-                "cold": false,
-                "electricity": false,
-                "fire": true,
-                "healing": false,
-                "piercing": false,
-                "slashing": false,
-                "sonic": false
-              }
-            }
-          ]
+          "parts": []
         },
         "damage": {
           "parts": [
             {
-              "name": "",
+              "name": "Pyric Ray",
               "formula": "1d10+6",
+              "group": null,
+              "isPrimarySection": true,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": true,
+                "healing": false,
+                "piercing": false,
+                "slashing": false,
+                "sonic": false
+              }
+            },
+            {
+              "name": "Pyric Curse",
+              "formula": "2d4",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -452,7 +515,8 @@
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -460,11 +524,11 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>A pyric wraith can launch a ray of pyric fire with a range increment of 30 feet and a maximum range of 150 feet.</p>\n<h2>PYRIC CURSE</h2>\n<p><strong>Type</strong> curse; <strong>Save</strong> Fortitude DC 14 <strong>Effect</strong> A creature that fails the save gains the burning 2d4 condition. This flame is pyric fire (see special ability). While affected, the creature succeeds at saving throws against other pyric curses of the same or weaker potency. <strong>Cure</strong> 1 save; successful saves against the burning condition are successful saves against the curse.</p>"
+          "value": "<p>A pyric wraith can launch a ray of pyric fire with a range increment of 30 feet and a maximum range of 150 feet.</p><h2>PYRIC CURSE</h2><p><strong>Type</strong> curse; <strong>Save</strong> Fortitude DC 14</p>\n<p><strong>Effect</strong> A creature that fails the save gains the burning 2d4 condition. This flame is pyric fire (see special ability). While affected, the creature succeeds at saving throws against other pyric curses of the same or weaker potency.</p>\n<p><strong>Cure</strong> 1 save; successful saves against the burning condition are successful saves against the curse.</p>"
         },
         "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "text",
           "value": ""
         },
         "equippable": false,
@@ -472,6 +536,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -514,11 +579,14 @@
           "gravitation": false,
           "guided": false,
           "harrying": false,
+          "healing": false,
           "holyWater": false,
           "hybrid": false,
+          "hydrodynamic": false,
           "ignite": false,
           "indirect": false,
           "injection": false,
+          "instrumental": false,
           "integrated": false,
           "line": false,
           "living": false,
@@ -536,6 +604,7 @@
           "polymorphic": false,
           "powered": false,
           "professional": false,
+          "propel": false,
           "punchGun": false,
           "qreload": false,
           "radioactive": false,
@@ -544,6 +613,7 @@
           "regrowth": false,
           "relic": false,
           "reposition": false,
+          "scramble": false,
           "shape": false,
           "shatter": false,
           "shells": false,
@@ -573,13 +643,17 @@
           "additional": "",
           "per": "",
           "units": "ft",
-          "value": 30
+          "value": "30"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": "",
+          "dc": "14",
           "descriptor": "negate"
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": ""
         },
         "source": "",
         "special": "",
@@ -593,6 +667,7 @@
           "inubrix": false,
           "khefak": false,
           "noqual": false,
+          "nyblantine": false,
           "purplecores": false,
           "siccatite": false,
           "silver": false,
@@ -607,7 +682,7 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         },
@@ -619,6 +694,11 @@
       "_id": "8azI2zIReKyQbRTX",
       "name": "Pyric Fire (Su)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
@@ -632,6 +712,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -654,6 +735,11 @@
           "value": "<p>The fire damage of a pyric wraith burns body and spirit, ignoring fire resistance and dealing half damage even to creatures with fire immunity. A creature burning due to this fire can gain no bonuses to end that condition. A creature that dies due to pyric fire damage becomes a pyric revenant 1d4 hours later.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -661,6 +747,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -694,6 +781,11 @@
       "_id": "wqunNaLCBUglKe8c",
       "name": "Illuminated (Su)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
@@ -707,6 +799,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -729,6 +822,11 @@
           "value": "<p>Light within 10 feet of a pyric wraith increases by two steps. Light for 10 more feet beyond that increases by one step. Magical darkness decreases this light only if from a source with a CR or level higher than the wraith’s CR.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -736,6 +834,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -769,6 +868,11 @@
       "_id": "AeyNG48WldwD0LTP",
       "name": "Unliving",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/mystery-man.svg",
       "system": {
         "type": "",
@@ -785,6 +889,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -807,6 +912,11 @@
           "value": "<p>(EX)</p>\n<p>The creature has no Constitution score or modifier. Any DCs or other statistics that rely on a Constitution score treat the creature as having a score of 10 (+0). The creature is immediately destroyed when it reaches 0 Hit Points. An unliving creature doesn’t heal damage naturally, but a construct can be repaired with the right tools. Spells such as make whole can heal constructs, and magic effects can heal undead. An unliving creature with fast healing (see page 154) still benefits from that ability. Unliving creatures don’t breathe, eat, or sleep. They can’t be raised or resurrected, except through the use of miracle, wish, or a similar effect that specifically works on unliving creatures.</p>\n<hr />"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -814,6 +924,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -847,6 +958,11 @@
       "_id": "YV3FICaMEPc3se9w",
       "name": "Incorporeal",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "icons/svg/item-bag.svg",
       "system": {
         "type": "",
@@ -863,6 +979,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -882,9 +999,14 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>An incorporeal creature doesn’t have a physical body. It is immune to all nonmagical kinetic attacks. All energy attacks and magical kinetic attacks deal half damage (50%) to it. An incorporeal creature takes full damage from other incorporeal creatures and effects, as well as from all force effects. Corporeal spells and effects that do not cause damage have only a 50% chance of affecting an incorporeal creature. An incorporeal creature is immune to critical hits.</p>\n<p>Incorporeal creatures’ attacks always target their enemies’ Energy Armor Class. Incorporeal creatures cannot take any physical actions that would move or manipulate an opponent or its equipment, including combat maneuvers, nor are they subject to any such actions.</p>\n<p>An incorporeal creature can enter or pass through solid objects but must remain adjacent to such an object’s exterior, and so it cannot pass through the center of an object whose space is larger than its own. It can sense the presence of creatures or objects within squares adjacent to its current location (see page 260), but enemies have total concealment (50% miss chance; see Concealment on page 253) from an incorporeal creature that is inside an object. An incorporeal creature inside an object has total cover, but when it attacks a creature outside the object it has only cover (see Cover starting on page 253). An incorporeal creature cannot pass through a force effect. Incorporeal creatures pass through and operate in vacuum, water, and zero gravity as easily as they do in air. Incorporeal creatures cannot fall or take falling damage. They have no weight and do not set off traps that are triggered only by weight.</p>\n<p>Incorporeal creatures move silently and cannot be heard with Perception checks unless they wish to be. Any sense (including @UUID[Compendium.sfrpg.universal-creature-rules.c6EuAEYG1qEIv82D]{Blindsense (Ex)} or @UUID[Compendium.sfrpg.universal-creature-rules.4HvnYWLhFBiuvDxD]{Blindsight (Ex)}) based on scent, sound, or touch is ineffective at perceiving incorporeal creatures. These creatures have an innate sense of direction and can move at full speed even when they cannot see.</p>"
+          "value": "<p>An incorporeal creature doesn’t have a physical body. It is immune to all nonmagical kinetic attacks. All energy attacks and magical kinetic attacks deal half damage (50%) to it. An incorporeal creature takes full damage from other incorporeal creatures and effects, as well as from all force effects. Corporeal spells and effects that do not cause damage have only a 50% chance of affecting an incorporeal creature. An incorporeal creature is immune to critical hits.</p>\n<p>Incorporeal creatures’ attacks always target their enemies’ Energy Armor Class. Incorporeal creatures cannot take any physical actions that would move or manipulate an opponent or its equipment, including combat maneuvers, nor are they subject to any such actions.</p>\n<p>An incorporeal creature can enter or pass through solid objects but must remain adjacent to such an object’s exterior, and so it cannot pass through the center of an object whose space is larger than its own. It can sense the presence of creatures or objects within squares adjacent to its current location (see page 260), but enemies have total concealment (50% miss chance; see Concealment on page 253) from an incorporeal creature that is inside an object. An incorporeal creature inside an object has total cover, but when it attacks a creature outside the object it has only cover (see Cover starting on page 253). An incorporeal creature cannot pass through a force effect. Incorporeal creatures pass through and operate in vacuum, water, and zero gravity as easily as they do in air. Incorporeal creatures cannot fall or take falling damage. They have no weight and do not set off traps that are triggered only by weight.</p>\n<p>Incorporeal creatures move silently and cannot be heard with Perception checks unless they wish to be. Any sense (including @UUID[Compendium.sfrpg.universal-creature-rules.Item.c6EuAEYG1qEIv82D]{Blindsense (Ex)} or @UUID[Compendium.sfrpg.universal-creature-rules.Item.4HvnYWLhFBiuvDxD]{Blindsight (Ex)}) based on scent, sound, or touch is ineffective at perceiving incorporeal creatures. These creatures have an innate sense of direction and can move at full speed even when they cannot see.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -892,6 +1014,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -920,12 +1043,163 @@
           "value": 0
         }
       }
+    },
+    {
+      "_id": "mM0AI3PeB6S1rHch",
+      "name": "Pyric Curse",
+      "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "img": "icons/svg/item-bag.svg",
+      "system": {
+        "type": "",
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "save",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "ft",
+          "value": "0"
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "name": "",
+              "formula": "2d4",
+              "group": null,
+              "isPrimarySection": true,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": true,
+                "healing": false,
+                "piercing": false,
+                "slashing": false,
+                "sonic": false
+              }
+            }
+          ],
+          "primaryGroup": null
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p><strong>Type</strong> curse; <strong>Save</strong> Fortitude DC 14</p>\n<p><strong>Effect</strong> A creature that fails the save gains the burning 2d4 condition. This flame is pyric fire (see special ability). While affected, the creature succeeds at saving throws against other pyric curses of the same or weaker potency.</p>\n<p><strong>Cure</strong> 1 save; successful saves against the burning condition are successful saves against the curse.</p>"
+        },
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
+        "duration": {
+          "units": "text",
+          "value": ""
+        },
+        "formula": "",
+        "isActive": null,
+        "modifiers": [],
+        "properties": {},
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "none",
+          "value": ""
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "rollNotes": "",
+        "save": {
+          "type": "fort",
+          "dc": "14",
+          "descriptor": "negate"
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": ""
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "uses": {
+          "max": "",
+          "per": "",
+          "value": null
+        }
+      }
     }
   ],
   "prototypeToken": {
     "name": "Pyric Wraith",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -937,6 +1211,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -957,11 +1232,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -975,13 +1268,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
       "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "tint": "#ffffff"
     },
     "width": 1
   },
@@ -1205,10 +1502,11 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>Over centuries, pyric fire consumes a pyric revenant’s flesh, leaving behind an apparition of ash and embers. This pyric wraith is made of swirling cinders rippling around a heart of brighter flame. The smell of ash and smoke often precedes a pyric wraith.</p>\n<p>A pyric wraith retains only a desire to @UUID[Compendium.sfrpg.rules.O5GDQUKPCJ9Zbnfj]{Burn} living things and consume the energy released. These beings rarely make full use of their incorporeality. Overwhelming malice compels them to kill without stealth, inspiring horror as they do so. Further, pyric wraiths hate passing through the darkness within objects.</p>\n<section>\n<h2>PYRIC CURSE</h2>\n<p><strong>Type</strong>&nbsp;curse;&nbsp;<strong>Save</strong>&nbsp;Fortitude DC 18</p>\n<p><strong>Effect</strong>&nbsp;A creature that fails the save gains the burning 1d8 condition. This flame is pyric fire (see special ability). While affected, the creature succeeds at saving throws against other pyric curses of the same or weaker potency.</p>\n<p><strong>Cure</strong>&nbsp;1 save; successful saves against the burning condition are successful saves against the curse.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<h3>Organization</h3>\n<p>solitary or pair</p>\n</section>",
+        "value": "<h2>Description</h2>\n<p>Over centuries, pyric fire consumes a pyric revenant’s flesh, leaving behind an apparition of ash and embers. This pyric wraith is made of swirling cinders rippling around a heart of brighter flame. The smell of ash and smoke often precedes a pyric wraith.</p>\n<p>A pyric wraith retains only a desire to @UUID[Compendium.sfrpg.rules.Item.O5GDQUKPCJ9Zbnfj]{Burn} living things and consume the energy released. These beings rarely make full use of their incorporeality. Overwhelming malice compels them to kill without stealth, inspiring horror as they do so. Further, pyric wraiths hate passing through the darkness within objects.</p>\n<section>\n<h2>PYRIC CURSE</h2>\n<p><strong>Type</strong>&nbsp;curse;&nbsp;<strong>Save</strong>&nbsp;Fortitude DC 18</p>\n<p><strong>Effect</strong>&nbsp;A creature that fails the save gains the burning 1d8 condition. This flame is pyric fire (see special ability). While affected, the creature succeeds at saving throws against other pyric curses of the same or weaker potency.</p>\n<p><strong>Cure</strong>&nbsp;1 save; successful saves against the burning condition are successful saves against the curse.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<h3>Organization</h3>\n<p>solitary or pair</p>\n</section>",
         "weight": ""
       },
       "class": "",
+      "combatRole": "",
       "cr": 6,
       "environment": "",
       "organization": "",

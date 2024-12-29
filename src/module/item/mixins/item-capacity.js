@@ -142,7 +142,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
 
                 const originalContainer = getItemContainer(this.actor.items, newAmmunition);
 
-                if (newAmmunition.system.useCapacity || capacityItem == null) {
+                if (newAmmunition.system.useCapacity || capacityItem === null) {
                     if (capacityItem) {
                         updatePromise = setItemContainer(itemHelper, capacityItem, null, 1);
                     }
@@ -230,11 +230,13 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
         renderPromise.then((html) => {
             // Create the chat message
             const chatData = {
-                type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+                type: CONST.CHAT_MESSAGE_STYLES.OTHER,
                 speaker: ChatMessage.getSpeaker({ actor: this.actor }),
                 content: html
             };
 
+            const rollMode = game.settings.get("core", "rollMode");
+            ChatMessage.applyRollMode(chatData, rollMode);
             ChatMessage.create(chatData, { displaySheet: false });
         });
 

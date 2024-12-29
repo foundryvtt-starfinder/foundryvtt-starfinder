@@ -496,6 +496,7 @@
             },
             "PlaceAbilityTemplate": "Plazieren {label}"
         },
+        "Check": "Check",
         "ClassArmorProf": "Umgang mit Rüstungen",
         "ClassBABProgression": "Progression des Grundangriffsbonus",
         "ClassFortSaveProgression": "Progression der Zähigkeitsrettungswürfe",
@@ -512,7 +513,7 @@
         "Classes": {
             "IsCasterClass": "Handelt es sich bei der Klasse um einen Zauberwirker?"
         },
-        "Close": "Nee",
+        "Close": "Nah",
         "Combat": {
             "ChatCards": {
                 "Footer": "{combatType} - {combatPhase} Phase",
@@ -781,10 +782,10 @@
                     "Or": "oder"
                 },
                 "Piercing": "Stich",
-                "PrimaryDamageGroup": "Primary Damage Group",
-                "PrimaryDamageGroupTooltip": "Damage sections that are a member of the primary damage group will all be marked as primary. You will still only be able to choose one damage section per group when making a damage roll, and as such modifiers will correctly only be applied once.",
-                "PrimaryDamageSection": "Primary Damage Section",
-                "PrimaryDamageSectionTooltip": "Modifiers that affect this weapon's damage will only apply to the primary damage section. Non-primary sections will simply roll their formula. A weapon must have exactly one primary damage section.",
+                "PrimaryDamageGroup": "Primäre Schadensgruppe",
+                "PrimaryDamageGroupTooltip": "Schadensabschnitte die ein Teil der Primären Schadengruppe sind, werden alle als primär gekennzeichnet. Dennoch ist es nicht möglich mehr als einen Schadensabschnitt pro Schadenswurf auszuwählen. Dementsprechend werden Boni und Mali nur einmal korrekt angewendet.",
+                "PrimaryDamageSection": "Primärer Schadensabschnitt",
+                "PrimaryDamageSectionTooltip": "Boni und Mali die den Schaden dieser Waffe betreffen, werden nur auf den primären Schadensabschnitt angewendet. Nicht primäre Abschnitte werden die unmodifizierte Formel für ihren Wurf benutzen. Eine Waffe hat genau einen primären Schadensabschnitt.",
                 "Radiation": "Strahlung",
                 "Slashing": "Hieb",
                 "Sonic": "Schall",
@@ -1173,6 +1174,7 @@
         "ItemMacro": {
             "Activate": "Aktivieren",
             "Attack": "Angriff",
+            "Cast": "Cast",
             "Damage": "Schaden",
             "Healing": "Heilung",
             "Reload": "Nachladen",
@@ -1191,6 +1193,7 @@
                 "Base": "Grundwert",
                 "BaseTooltip": "(Erforderlich) Der Grundwert definiert einen Basiswert für diese Ressource. Modifikatoren können diesen verändern.<br/>Attribute: @resources.type.subtype.base",
                 "CombatTracker": "Begegnungstrackereinstellungen",
+                "CombatTrackerSettings": "Combat Tracker Settings",
                 "DisplayAbsoluteValue": "Absoluten Wert anzeigen",
                 "DisplayAbsoluteValueTooltip": "Soll der Wert im Begegnungstracker absolut dargestellt werden? z.B. -1 wird gezeigt als 1, -2 als 2, etc.",
                 "Enabled": "Aktiviert",
@@ -1232,6 +1235,7 @@
                 "VisualizationsModeLesserThan": "kleiner ist als",
                 "VisualizationsModeLesserThanEqual": "kleiner oder gleich ist wie",
                 "VisualizationsModeNotEqual": "nicht gleich ist wie",
+                "VisualizationsPart": "Visualization Part",
                 "VisualizationsThen": "Dann:",
                 "VisualizationsTitle": "Titel:"
             },
@@ -1254,6 +1258,27 @@
             },
             "Containers": {
                 "ContainerTooltip": "Behälter können so gut wie jeden Gegenstand enthalten. Erhöhe die Lagerkapazität, um das Hinzufügen von Objekten zu ermöglichen."
+            },
+            "Details": {
+                "Section": {
+                    "ArmorDetails": "Armor Details",
+                    "ClassBasics": "Class Basics",
+                    "ConsumableDetails": "Consumable Details",
+                    "Progressions": "Progressions",
+                    "SkillsAndProficiencies": "Skills and Proficiencies",
+                    "Title": "Section",
+                    "Usage": "Usage"
+                },
+                "Tab": {
+                    "AmmunitionContainer": "Ammunition & Container",
+                    "AttackDamage": "Attack & Damage",
+                    "ClassInformation": "Class Information",
+                    "ContainerDetails": "Container Details",
+                    "NPCSpecific": "NPC Specific",
+                    "Properties": "Properties",
+                    "Spellcasting": "Spellcasting",
+                    "UsageAction": "Usage & Action"
+                }
             },
             "Header": {
                 "ArmorClass": "Rüstungsklasse",
@@ -1303,6 +1328,29 @@
                 "TargetLockPenaltyTooltip": "Der Malus der auf den Wert der Zielerfassung angerechnet wird.",
                 "TurnDistancePenalty": "Wendeentfernungsmalus",
                 "TurnDistancePenaltyTooltip": "Der Malus der auf den Wert der Wendeentfernung angerechnet wird."
+            },
+            "StarshipAction": {
+                "ActionDC": "Action DC",
+                "AddSubactionTooltip": "<strong>Add Subaction</strong><br />Add a new subaction",
+                "CheckFormula": "Skill Check Formula",
+                "CrewRole": "Crew Role",
+                "CriticalEffect": "Critical Effect",
+                "DCPlaceholder": "5 + 1-1/2 * Target Ship Tier",
+                "DeleteSubactionTooltip": "<strong>Delete Subaction</strong><br />Delete this subaction",
+                "IsPushAction": "Push Action?",
+                "NormalEffect": "Normal Effect",
+                "Phase": "Phase",
+                "PhaseTooltip": "Phase Tooltip",
+                "PushResolve": "Push and Resolve",
+                "ResolveFormulaAutomatically": "Resolve this Formula Automatically",
+                "ResolveFormulaAutomaticallyTooltip": "If this box is checked, Target DC will resolve automatically as a formula, and the result will display in the chat box when the action is triggered. Otherwise, the raw string will instead be displayed in the chatbox.",
+                "SkillFormulaAndSubactions": "Skill Formula and Subactions",
+                "SkillFormulaOrSubactions": "Skill Formula / Subactions",
+                "SkillOrSubaction": "Skill or Subaction Name",
+                "SubactionPart": "Subaction {section}",
+                "Subactions": "Subactions",
+                "TargetDC": "Target DC",
+                "UsesResolve": "Uses Resolve"
             },
             "StarshipArmor": {
                 "ArmorBonus": "Rüstungsbonus",
@@ -1379,6 +1427,7 @@
                     "WeaponArcStarboard": "Steuerbordbereich",
                     "WeaponArcTooltip": "Die Anzahl der verfügbaren Waffenmontageplätze pro Feuerbereich, aufgeteilt nach Montageplätzen für Leicht, Schwer und Schiffsartillerie.",
                     "WeaponArcTurret": "Geschütztürme",
+                    "WeaponMounts": "Weapon Mounts",
                     "WeaponTypeCapital": "Schiffsartillerie",
                     "WeaponTypeHeavy": "Schwer",
                     "WeaponTypeLight": "Leicht",
@@ -1480,6 +1529,8 @@
                 "DamageNotes": "Notizen zum Schaden",
                 "DamageNotesTooltip": "Die Notizen des Schadens werden auf der Schadensnachricht des Wurfes angezeigt. So können Erinnerungen und Notizen angezeigt werden, besonders nützlich bei kompliziereten NSCs.",
                 "DamageSection": "Schadensabschnitt {section}",
+                "DeleteDamageSection": "Delete damage section",
+                "Details": "Action Details",
                 "HealingFormula": "Heilungsformel",
                 "OtherFormula": "Andere Formel",
                 "RollNotes": "Notizen für den Wurf",
@@ -1531,9 +1582,11 @@
             },
             "Attuned": "Verbunden",
             "Augmentation": {
+                "Action": "Augmentation Action",
                 "Details": "Aufwertungsdetails",
                 "System": "Körperbereich",
-                "Type": "Typ"
+                "Type": "Typ",
+                "Usage": "Augmentation Usage"
             },
             "Capacity": {
                 "Capacity": "Magazin",
@@ -1557,7 +1610,7 @@
                 "DroneChassis": "Drohnenchassis",
                 "DroneMods": "Drohnenmodifikationen",
                 "Effect": "Effekt",
-                "Equipment": "Ausrüstung",
+                "Equipment": "Rüstungen",
                 "Feats": "Talente",
                 "Goods": "Waren",
                 "HybridItems": "Hybride Gegenstände",
@@ -1651,6 +1704,7 @@
             "MaxDex": "Max. Geschicklichkeitsmodifikator",
             "NotProficient": "Nicht geübt",
             "Proficient": "Im Umgang geübt",
+            "RangeInformation": "Range Information",
             "Shield": {
                 "ACP": "RM: {acp}",
                 "AcMaxDex": "Max Dex Bonus: {maxDex}",
@@ -1733,6 +1787,10 @@
                 "Attack": "Waffenangriff",
                 "Category": "Waffenkategorie",
                 "Details": "Waffendetails",
+                "IsEquipment": {
+                    "Title": "Weapon Is Equipment",
+                    "Tooltip": "This box is checked if the weapon is a piece of carried equipment, as opposed to an innate natural or supernatural weapon. For natural weapons, uncheck this box."
+                },
                 "Properties": "Waffeneigenschaften",
                 "Type": "Waffenart",
                 "Usage": "Waffenverwendung"
@@ -2244,6 +2302,10 @@
                 "Hint": "Erlaubt es, beim Würfeln die Vor- oder Nachteile umzuschalten.",
                 "Name": "Vor- und Nachteile nutzen?"
             },
+            "DecimalSpeed": {
+              "Hint": "Enable decimal numbers for actor speed configuration.",
+              "Name": "Decimal Speed values"
+            },
             "AlwaysShowQuantity": {
                 "Hint": "Zeigt immer die Anzahl der Gegenstände, selbst wenn die Anzahl 1 oder 0 ist. Das Fenster muss refreshed werden, damit die Änderung wirksam wird.",
                 "Name": "Anzahl der Gegenstände immer anzeigen"
@@ -2256,6 +2318,14 @@
                 "Hint": "Klappt die Beschreibungen der Objektkarten im Chat-Protokoll automatisch zusammen",
                 "Name": "Objektkarten im Chat zusammenklappen"
             },
+            "AutoRollCritEffect": {
+                "Hint": "When applying damage to a starship from a chat card, if the damage crossses a Critical Threshold, the Critical Damage Effects (CRB pg. 320) table will automatically be rolled.",
+                "Name": "Automatically roll starship critical damage effects"
+            },
+            "HideHostileStarshipCrit": {
+                "Hint": "When posting notifications about starship criticals or thresholds, only post to GM if the ship is a Hostile Token.",
+                "Name": "Hide Hostile Starship Critical Message"
+            },            
             "CombatCards": {
                 "NormalHint": "Lege fest, welche Chatkarten für Kämpfe im normalen Kampf angezeigt werden.",
                 "NormalName": "Normale Kämpfe",
@@ -2379,8 +2449,8 @@
                 "Name": "AOE-Vorlagen von Starfinder verwenden"
             },
             "WarnInvalidRollData": {
-                "Hint": "When checked, warnings will be displayed when modifiers contain invalid roll formulas. This can result in warning spam, if, for example, you have a class feature but not the corresponding class item itself.",
-                "Name": "Warn on invalid roll formulas"
+                "Hint": "Wenn diese Option aktiviert ist, werden Warnungen angezeigt, wenn Modifikatoren ungültige Würfelformeln enthalten. Dies kann zu Warnspam führen, wenn z.B. ein Klassenmerkmal zu einem Akteur hinzugefügt wurde, aber nicht der entsprechenden Klassengegenstand selbst.",
+                "Name": "Warnung bei ungültigen Wurfformeln"
             },
             "WorldSchemaVersion": {
                 "Hint": "Zeichnet die Datenschemaversion für das Starfinder-System auf. WARNUNG: Bearbeite diesen Wert nicht, wenn du nicht weißt, was du tust!",
@@ -2726,6 +2796,8 @@
             "Damage": {
                 "CrossedCriticalThreshold": "{name} hat die {crossedThresholds} kritische Schadensschwelle überschritten!",
                 "Message": "Der Schaden an einem Raumschiff kommt immer aus einer bestimmten Richtung, bitte wähle den Quadranten den der Schaden betrifft.",
+                "Nat20": "Critical damage! {name} takes a critical damage effect.",
+                "Nat20WithThreshold": "Critical damage! {name} takes an additional critical damage effect.",
                 "Quadrant": {
                     "Aft": "Achtern",
                     "Forward": "Bug",
@@ -2837,6 +2909,10 @@
                 "ShieldHeader": "Schilde",
                 "TargetLock": "Zielerfassung"
             },
+            "RandomQuadrantMacro": {
+                "NoToken": "Select the recipient of the critical effect before proceeding.",
+                "NotStarship": "The selected token must be a starship."
+            },
             "Role": {
                 "Captain": "Kapitän",
                 "ChiefMate": "Erster Offizier",
@@ -2889,6 +2965,24 @@
         "Touch": "Berührung",
         "TraitArmorProf": "Umgang mit Rüstungen",
         "TraitWeaponProf": "Umgang mit Waffen",
+        "TurnEvent": {
+            "AddTurnEvent": "Add Turn Event",
+            "DeleteTurnEvent": "Delete Turn Event",
+            "Formula": "Formula",
+            "FormulaTooltip": "A formula which will be rolled when the trigger is met.",
+            "Name": "Name",
+            "NoteContent": "Note Content",
+            "NoteTooltip": "Text which will be sent to chat as a chat message when the trigger is met.",
+            "Trigger": "Trigger",
+            "TriggerTooltip": "When during a combatant's turn to trigger the event.",
+            "TurnEventI": "Turn Event {number}",
+            "Type": "Type",
+            "TypeTooltip": "The type of behaviour to trigger for this turn event.",
+            "Types": {
+                "Note": "Note",
+                "Roll": "Roll"
+            }
+        },
         "UPBs": "UPBs",
         "Units": {
             "Speed": "ft."

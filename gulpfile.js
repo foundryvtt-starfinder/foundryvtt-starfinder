@@ -39,17 +39,13 @@ function getManifest() {
         json.root = 'dist';
     }
 
-    const modulePath = path.join(json.root, 'module.json');
     const systemPath = path.join(json.root, 'system.json');
 
-    if (fs.existsSync(modulePath)) {
-        json.file = fs.readJSONSync(modulePath);
-        json.name = 'module.json';
-    } else if (fs.existsSync(systemPath)) {
+    if (fs.existsSync(systemPath)) {
         json.file = fs.readJSONSync(systemPath);
         json.name = 'system.json';
     } else {
-        return;
+        return null;
     }
 
     return json;
@@ -90,8 +86,8 @@ async function copyFiles() {
         'src/packs/**/*',
         'src/templates/**/*.hbs',
         "src/*.json"
-    ])
-        .pipe(gulp.dest((file) => file.base.replace("\\src", "\\dist")));
+    ], { base: 'src' })
+        .pipe(gulp.dest('dist'));
 
     // Then pipe in js files to be minified
     gulp.src('src/sfrpg.js')
@@ -142,8 +138,8 @@ async function copyWatchFiles() {
         'src/lang/*.json',
         'src/templates/**/*.hbs',
         "src/*.json"
-    ])
-        .pipe(gulp.dest((file) => file.base.replace("\\src", "\\dist")));
+    ], { base: 'src' })
+        .pipe(gulp.dest('dist'));
 
     gulp.src(`src/${name}.js`)
         .pipe(gulp.dest('dist'));
@@ -235,10 +231,18 @@ function JSONstringifyOrder( obj, space, sortingMode = "default" ) {
  * @returns {Object} A sanitized object
  */
 function sanitizeJSON(jsonInput) {
+    const manifest = getManifest().file;
+
     const treeShake = (item) => {
         delete item.sort;
         if (!item.folder) delete item.folder;
-        delete item._stats;
+
+        item._stats = {
+            coreVersion: manifest.compatibility.minimum,
+            systemId: "sfrpg",
+            systemVersion: manifest.version
+        };
+
         delete item.permission;
         delete item.ownership;
         delete item.effects;
@@ -545,7 +549,6 @@ async function unpack({packName, filePath, outputDirectory, partOfCook = false})
 
         for (const folder of folders) {
             folderMap.set(folder._id, getFolderPath(folder));
-            sanitizeFolder(folder);
         }
         const folderFilePath = path.resolve(outputDirectory, "_folders.json");
         promises.push(fs.promises.writeFile(folderFilePath, JSONstringifyOrder(folders, 2), "utf-8"));
@@ -572,7 +575,7 @@ async function gulpUnpackPacks(done, partOfCook = false) {
 }
 
 async function unpackPacks(partOfCook = false) {
-    const sourceDir = partOfCook ? "./src/packs" : `${getConfig().dataPath.replaceAll("\\", "/")}/data/systems/sfrpg/packs`;
+    const sourceDir = partOfCook ? "./src/packs" : path.join(getConfig().dataPath, 'Data/systems/sfrpg/packs');
     console.log(`Unpacking ${partOfCook ? "" : "and sanitizing "}all packs from ${sourceDir}`);
 
     const entries = fs.readdirSync(sourceDir, {withFileTypes: true});
@@ -1369,13 +1372,13 @@ function consistencyCheck(allItems, compendiumMap) {
         if (itemMatch && itemMatch.length > 0) {
             for (const localItem of itemMatch) {
                 const localItemId = localItem[1];
-                const localItemName = localItem[2] || localItemId;
+                const localItemName = localItem[3] || localItemId;
 
                 // @Item links cannot exist in compendiums.
                 if (!(pack in packErrors)) {
                     packErrors[pack] = [];
                 }
-                packErrors[pack].push(`${chalk.bold(item.file)}: Using @Item to reference to '${chalk.bold(localItemName)}' (with id: ${chalk.bold(localItemId)}), @Item is not allowed in compendiums. Please use '${chalk.bold('@UUID[Compendium.sfrpg.' + pack + "." + localItemId + "]")}' instead.`);
+                packErrors[pack].push(`${chalk.bold(item.file)}: Using @Item to reference to '${chalk.bold(localItemName)}' (with id: ${chalk.bold(localItemId)}), @Item is not allowed in compendiums. Please use '${chalk.bold('@UUID[Compendium.sfrpg.' + pack + ".Item." + localItemId + "]")}' instead.`);
                 cookErrorCount++;
             }
         }
@@ -1404,23 +1407,23 @@ function consistencyCheck(allItems, compendiumMap) {
                 const linkParts = link.split('.');
                 // Skip links to journal entry pages
                 // @UUID[Compendium.sfrpg.some-pack.abcxyz.JournalEntryPage.abcxyz]
-                if (linkParts.length === 6) {
+                if (linkParts.includes('JournalEntryPage')) {
                     continue;
                 }
-                if (linkParts.length !== 4) {
+                if (linkParts.length !== 5) {
                     if (!(pack in packErrors)) {
                         packErrors[pack] = [];
                     }
-                    packErrors[pack].push(`${chalk.bold(item.file)}: Compendium link to '${chalk.bold(link)}' is not valid. It does not have enough segments in the link. Expected format is Compendium.sfrpg.compendiumName.itemId.`);
+                    packErrors[pack].push(`${chalk.bold(item.file)}: Compendium link to '${chalk.bold(link)}' is not valid. It does not have enough segments in the link. Expected format is Compendium.sfrpg.compendiumName.itemType.itemId.`);
                     cookErrorCount++;
                     continue;
                 }
 
-                // @UUID[Compendium.sfrpg.some-pack.abcxyz]
-                //      [0]         [1]   [2]       [3]
+                // @UUID[Compendium.sfrpg.some-pack.Item.abcxyz]
+                //      [0]         [1]   [2]       [3]  [4]
                 const system = linkParts[1];
                 const otherPack = linkParts[2];
-                const otherItemId = linkParts[3];
+                const otherItemId = linkParts[4];
 
                 // @UUID links must link to sfrpg compendiums.
                 if (system !== "sfrpg") {

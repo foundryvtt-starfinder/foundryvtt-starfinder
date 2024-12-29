@@ -67,6 +67,28 @@ export default class CheckEnricher extends BaseEnricher {
         };
     }
 
+    get checkType() {
+        const shortName = CheckNameHelper.shortFormName(this.args.type);
+        const C = CONFIG.SFRPG;
+
+        if (shortName in C.skills) return "skill";
+        else if (shortName in C.saves) return "save";
+        else if (shortName in C.abilities) return "ability";
+        else return null;
+    }
+
+    get localizedType() {
+        const C = CONFIG.SFRPG;
+        const type = CheckNameHelper.shortFormName(this.args.type);
+
+        switch (this.checkType) {
+            case "skill": return C.skills[type];
+            case "save": return C.saves[type];
+            case "ability": return C.abilities[type];
+            default: return "";
+        }
+    }
+
     /**
      * @override to check using the 3-letter identifier for the type against the valid types (which are 3 letter identifiers).
      * Inputted types are full names.
@@ -79,6 +101,13 @@ export default class CheckEnricher extends BaseEnricher {
         return true;
     }
 
+    validateName() {
+        const i18nPath = this.checkType === "save" ? "SFRPG.Save" : "SFRPG.Check";
+        const localizedCheck = game.i18n.localize(i18nPath);
+
+        this.name ||= `${this.localizedType} ${localizedCheck}`;
+    }
+
     /**
      * @extends BaseEnricher
      * @returns {HTMLAnchorElement} */
@@ -86,8 +115,9 @@ export default class CheckEnricher extends BaseEnricher {
         const a = super.createElement();
 
         if (this.args.dc) a.dataset.dc = parseInt(this.args.dc);
+        const iconSlug = (this.checkType === "ability") ? CheckNameHelper.longFormNameAbilities(this.args.type) : CheckNameHelper.longFormName(this.args.type);
 
-        a.innerHTML = `<i class="fas ${this.icons[this.args.type]}"></i>${a.innerHTML}`;
+        a.innerHTML = `<i class="fas ${this.icons[iconSlug]}"></i>${a.innerHTML}`;
 
         return a;
 
@@ -103,9 +133,9 @@ export default class CheckEnricher extends BaseEnricher {
         if (!actor) return ui.notifications.error("You must have a token or an actor selected.");
         const id = CheckNameHelper.shortFormName(data.type);
 
-        if      (id in CONFIG.SFRPG.skills)    actor.rollSkill(CheckNameHelper.shortFormName(data.type));
-        else if (id in CONFIG.SFRPG.saves)     actor.rollSave(CheckNameHelper.shortFormName(data.type));
-        else if (id in CONFIG.SFRPG.abilities) actor.rollAbility(CheckNameHelper.shortFormName(data.type));
+        if      (id in CONFIG.SFRPG.skills)    actor.rollSkill(id, { event });
+        else if (id in CONFIG.SFRPG.saves)     actor.rollSave(id, { event });
+        else if (id in CONFIG.SFRPG.abilities) actor.rollAbility(id, { event });
 
     }
 

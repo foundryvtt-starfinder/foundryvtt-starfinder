@@ -25,9 +25,9 @@ export class ActorMovementConfig extends DocumentSheet {
 
     /** @override */
     getData(options) {
-        const sourceMovement = foundry.utils.getProperty(this.document._source, "system.attributes.speed") || {};
-        const data = {
-            speed: foundry.utils.deepClone(sourceMovement)
+        this.document.config = {
+            speeds: CONFIG.SFRPG.speeds,
+            flightManeuverability: CONFIG.SFRPG.flightManeuverability
         };
         return this.document;
     }
