@@ -127,7 +127,7 @@ for (const currentPath of actorPaths) {
     const files = fs.readdirSync(folderPath);
     for (const file of files) {
         const fname = folderPath + '/' + file;
-        console.log(`Opening up the ${fname} file.`);
+        // console.log(`Opening up the ${fname} file.`);
         const json = fs.readFileSync(fname);
         const actorData = JSON.parse(json);
         const newActorData = actorIconReplace(defaultActorIcons, actorData);
@@ -145,7 +145,7 @@ function iconReplace(defaultIconsObject, data, docType = "", iconType = "") {
         if (iconType === "prototypeToken") {
             if (Object.values(foundryDefaultIcons).includes(data.texture.src)) {
                 const newImg = 'systems/sfrpg/icons/default/' + defaultIconsObject[data.type];
-                console.log(`Original image ${data.texture.src}, new image ${newImg}`);
+                // console.log(`Original image ${data.texture.src}, new image ${newImg}`);
                 data.texture.src = newImg;
                 return [true, data];
             }
@@ -154,7 +154,7 @@ function iconReplace(defaultIconsObject, data, docType = "", iconType = "") {
         else {
             if (Object.values(foundryDefaultIcons).includes(data.img)) {
                 const newImg = 'systems/sfrpg/icons/default/' + defaultIconsObject[data.type];
-                console.log(`Original image ${data.img}, new image ${newImg}`);
+                // console.log(`Original image ${data.img}, new image ${newImg}`);
                 data.img = newImg;
                 return [true, data];
             }
