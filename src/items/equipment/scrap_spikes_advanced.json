@@ -1,25 +1,25 @@
 {
-  "_id": "qjYkJ8HEhVrLvAs4",
-  "name": "Scrap Spikes",
+  "_id": "XcFJLbtLLy5hxeG1",
+  "name": "Scrap Spikes, advanced",
   "type": "upgrade",
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
     "systemVersion": "0.27.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "icons/environment/traps/trap-jaw-steel.webp",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": null,
+    "actionType": "other",
     "activation": {
-      "type": "",
-      "condition": "",
-      "cost": 0
+      "type": "none",
+      "condition": "When you successfully grapple or renew a grapple on a target OR if you are grappled, pinned, or swallowed whole by a creature",
+      "cost": null
     },
     "allowedArmorType": "any",
     "ammunitionType": "",
@@ -27,9 +27,10 @@
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "",
-      "value": 0
+      "units": "ft",
+      "value": ""
     },
+    "armorType": "any",
     "attackBonus": 0,
     "attributes": {
       "ac": {
@@ -44,7 +45,7 @@
       },
       "hp": {
         "max": "",
-        "value": null
+        "value": 7
       },
       "size": "medium",
       "sturdy": false
@@ -67,57 +68,80 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "Scrap Spike Damage",
+          "formula": "2d4",
+          "group": null,
+          "isPrimarySection": true,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": true,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
-      "short": "<p>Scrap spikes are fashioned from sharp metal debris. Attached to armor at key points, they inflict wounds on anyone who gets too close.</p>",
+      "short": "",
       "unidentified": "",
-      "value": "<p>Scrap spikes don’t require power or an action to activate. When you successfully grapple or renew a grapple on a target, that target takes the listed amount of damage. In addition, if you are grappled, pinned, or swallowed whole by a creature, that creature takes the listed amount of damage at the beginning of your turn.</p>\n<p><strong>Tactical Scrap Spikes (Level 1, 100 credits)</strong>: The spikes deal 1d4 piercing damage.</p>\n<p><strong>Advanced Scrap Spikes (Level 5, 2,640 credits)</strong>: The spikes deal 2d4 piercing damage.</p>\n<p><strong>Ultrathin Scrap Spikes (Level 10, 16,800 credits)</strong>: The spikes deal 3d4 piercing damage.</p>\n<p><strong>Zero-Edge Scrap Spikes (Level 15, 93,600 credits)</strong>: The spikes deal 6d4 piercing damage.</p>"
+      "value": "<p>Scrap spikes don’t require power or an action to activate. When you successfully grapple or renew a grapple on a target, that target takes the listed amount of damage. In addition, if you are grappled, pinned, or swallowed whole by a creature, that creature takes the listed amount of damage at the beginning of your turn.</p>"
     },
     "descriptors": [],
     "duration": {
-      "units": "text",
-      "value": null
+      "units": "instantaneous",
+      "value": ""
     },
     "equippable": false,
     "equipped": false,
     "formula": "",
     "identified": true,
     "isActive": null,
-    "level": 1,
+    "level": 2,
     "modifiers": [],
-    "price": 100,
+    "price": 2640,
     "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
-      "value": null
+      "units": "touch",
+      "value": ""
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
+    },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
     },
     "slots": 1,
-    "source": "",
+    "source": "SA:JD pg. 57",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "usage": {
       "per": "",
       "value": 0
     },
     "uses": {
-      "max": null,
-      "per": null,
+      "max": "",
+      "per": "",
       "value": null
     }
   }
