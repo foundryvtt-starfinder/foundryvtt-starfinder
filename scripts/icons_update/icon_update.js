@@ -112,9 +112,11 @@ for (const currentPath of itemPaths) {
         const fname = folderPath + '/' + file;
         console.log(`Opening up the ${fname} file.`);
         const json = fs.readFileSync(fname);
-        let data = JSON.parse(json);
-        data = iconReplace(defaultItemIcons, data);
-        fs.writeFileSync(fname, JSON.stringify(data));
+        const data = JSON.parse(json);
+        const newData = iconReplace(defaultItemIcons, data);
+        if (newData[0]) {
+            fs.writeFileSync(fname, JSON.stringify(newData[1]));
+        }
     }
 }
 
@@ -122,10 +124,11 @@ function iconReplace(defaultIconsObject, data) {
     // If the item has a type that's found in the icon list and it's icon is an old default icon, update it
     if (Object.keys(defaultIconsObject).includes(data.type)) {
         if (Object.values(foundryDefaultIcons).includes(data.img)) {
-            const newImg = 'src/icons/default/' + defaultIconsObject[data.type];
+            const newImg = 'systems/sfrpg/icons/default/' + defaultIconsObject[data.type];
             console.log(`Original image ${data.img}, new image ${newImg}`);
             data.img = newImg;
+            return [true, data];
         }
     }
-    return data;
+    return [false, data];
 }
