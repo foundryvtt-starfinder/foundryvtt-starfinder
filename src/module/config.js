@@ -2131,6 +2131,19 @@ SFRPG.combatTypes = [
     "vehicleChase"
 ];
 
+SFRPG.phaseIcons = {
+    "SFRPG.Combat.Normal.Phases.1.Name": "systems/sfrpg/icons/cards/light-sabers.svg", // Combat
+    "SFRPG.Combat.Starship.Phases.1.Name": "systems/sfrpg/icons/cards/cycle.svg", // Switch Roles
+    "SFRPG.Combat.Starship.Phases.2.Name": "systems/sfrpg/icons/cards/tinker.svg", // Engineering
+    "SFRPG.Combat.Starship.Phases.3.Name": "systems/sfrpg/icons/cards/air-force.svg", // Piloting Check
+    "SFRPG.Combat.Starship.Phases.4.Name": "systems/sfrpg/icons/cards/ship-wheel.svg", // Helm
+    "SFRPG.Combat.Starship.Phases.5.Name": "systems/sfrpg/icons/cards/gunshot.svg", // Gunnery
+    "SFRPG.Combat.Starship.Phases.6.Name": "systems/sfrpg/icons/cards/bullet-impacts.svg", // Damage
+    "SFRPG.Combat.VehicleChase.Phases.1.Name": "systems/sfrpg/icons/cards/air-force.svg", // Pilot Actions
+    "SFRPG.Combat.VehicleChase.Phases.2.Name": "systems/sfrpg/icons/cards/police-car.svg", // Chase Progress
+    "SFRPG.Combat.VehicleChase.Phases.3.Name": "systems/sfrpg/icons/cards/light-sabers.svg" // Combat
+};
+
 /**
  * The supported weapon types for weapon accessories
  */
