@@ -449,7 +449,7 @@ export class CombatSFRPG extends Combat {
         const speakerName = game.i18n.format(CombatSFRPG.chatCardsText.speaker.GM);
         const templateData = {
             header: {
-                image: "icons/svg/mystery-man.svg",
+                image: "systems/sfrpg/icons/cards/rolling-dices.svg",
                 name: game.i18n.format(CombatSFRPG.chatCardsText.round.headerName, {round: this.round})
             },
             body: {
@@ -478,12 +478,13 @@ export class CombatSFRPG extends Combat {
     async _printNewPhaseChatCard(eventData) {
         const localizedCombatName = this.getCombatName();
         const localizedPhaseName = game.i18n.format(eventData.newPhase.name);
+        const phaseIcon = CONFIG.SFRPG.phaseIcons[eventData.newPhase.name];
 
         // Basic template rendering data
         const speakerName = game.i18n.format(CombatSFRPG.chatCardsText.speaker.GM);
         const templateData = {
             header: {
-                image: "icons/svg/mystery-man.svg",
+                image: phaseIcon,
                 name: game.i18n.format(CombatSFRPG.chatCardsText.phase.headerName, {phase: localizedPhaseName})
             },
             body: {
