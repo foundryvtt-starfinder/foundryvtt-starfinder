@@ -1,6 +1,6 @@
 {
-  "_id": "xpokQs2qgphGIqPz",
-  "name": "Accelerated Metabolism (Ex)",
+  "_id": "fmwRT8WhzOj2TrDR",
+  "name": "Seek the Breach (Ex)",
   "type": "feat",
   "_stats": {
     "coreVersion": 12,
@@ -10,16 +10,16 @@
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
-    "ability": "",
+    "ability": null,
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "save",
+    "actionType": "",
     "activation": {
-      "type": "move",
+      "type": "action",
       "condition": "",
-      "cost": 0
+      "cost": 1
     },
     "area": {
       "effect": "",
@@ -35,8 +35,7 @@
       "parts": []
     },
     "damage": {
-      "parts": [],
-      "primaryGroup": null
+      "parts": []
     },
     "damageNotes": "",
     "description": {
@@ -44,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.rpaon3jF3nCe5eP9]{Theorem (Ex)}</p>\n<p>Once per day, you can target a living creature with a special @UUID[Compendium.sfrpg.class-features.Item.2BjD4ocSE0BL5DcN]{biohack} as a move action. This doesn’t deal any damage and doesn’t count against your total uses of biohacks, but it otherwise functions as a biohack. If you hit the target, it must succeed at a Fortitude saving throw or suffer a dramatic increase in the speed at which its system metabolizes drugs and poisons. For the next 10 minutes, the onset time and maximum duration of any contact, ingested, inhaled, or injury drugs and poisons affecting the target are halved, and the victim must attempt two saves each round against the effects, progressing to the next stage on the appropriate track with each failed save.</p>"
+      "value": "<p>@UUID[Compendium.sfrpg.classes.Item.e04BZ3GT2QcIktxT]{Witchwarper, Enhanced}</p>\n<p>You have a knack for spotting where realities intersect. Twice per day, you can activate your @UUID[Compendium.sfrpg.class-features.Item.ZUF0h42es9Hu1x5B]{Infinite Worlds} ability as if you had expended a spell slot of the highest level that you can cast, after which you cannot activate seek the breach again until you spend 1 Resolve Point to regain Stamina Points after a 10-minute rest. You gain an additional daily use of seek the breach at 4th level, 10th level, and 16th level (to a maximum of 5 times per day).</p>"
     },
     "descriptors": {
       "acid": false,
@@ -90,8 +89,8 @@
       "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "minute",
-      "value": "10"
+      "units": "instantaneous",
+      "value": ""
     },
     "formula": "",
     "isActive": null,
@@ -107,26 +106,22 @@
       "charged": false,
       "value": null
     },
-    "requirements": "8th Level - Biohacker",
+    "requirements": "1st Level Witchwarper Enhanced",
     "rollNotes": "",
     "save": {
-      "type": "fort",
-      "dc": "10 + floor(@classes.biohacker.levels / 2) + @classes.biohacker.keyAbilityMod",
-      "descriptor": "negate"
-    },
-    "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": null,
+      "descriptor": ""
     },
-    "source": "PoC pg. 53",
+    "source": "EN pg. 87",
     "target": {
       "type": "",
       "value": ""
     },
     "uses": {
-      "max": "1",
+      "max": "lookupRange(@classes.witchwarper.levels, 0, 1, 2, 4, 3, 10, 4, 16, 5)",
       "per": "day",
-      "value": 1
+      "value": 2
     }
   }
 }

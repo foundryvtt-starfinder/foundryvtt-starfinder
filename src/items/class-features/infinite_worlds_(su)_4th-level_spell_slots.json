@@ -1,13 +1,13 @@
 {
-  "_id": "xpokQs2qgphGIqPz",
-  "name": "Accelerated Metabolism (Ex)",
-  "type": "feat",
+  "_id": "zglWegBIngUW7rHL",
+  "name": "Infinite Worlds (Su) 4th-level Spell Slots",
+  "type": "spell",
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
     "systemVersion": "0.27.0"
   },
-  "img": "systems/sfrpg/icons/default/achievement.svg",
+  "img": "systems/sfrpg/icons/default/spell-book.svg",
   "system": {
     "type": "",
     "ability": "",
@@ -15,11 +15,17 @@
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "save",
+    "actionType": "other",
     "activation": {
-      "type": "move",
+      "type": "action",
       "condition": "",
-      "cost": 0
+      "cost": 1
+    },
+    "allowedClasses": {
+      "myst": false,
+      "precog": false,
+      "tech": false,
+      "wysh": true
     },
     "area": {
       "effect": "",
@@ -30,6 +36,7 @@
     },
     "attackBonus": 0,
     "chatFlavor": "",
+    "concentration": false,
     "critical": {
       "effect": "",
       "parts": []
@@ -44,7 +51,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.rpaon3jF3nCe5eP9]{Theorem (Ex)}</p>\n<p>Once per day, you can target a living creature with a special @UUID[Compendium.sfrpg.class-features.Item.2BjD4ocSE0BL5DcN]{biohack} as a move action. This doesn’t deal any damage and doesn’t count against your total uses of biohacks, but it otherwise functions as a biohack. If you hit the target, it must succeed at a Fortitude saving throw or suffer a dramatic increase in the speed at which its system metabolizes drugs and poisons. For the next 10 minutes, the onset time and maximum duration of any contact, ingested, inhaled, or injury drugs and poisons affecting the target are halved, and the victim must attempt two saves each round against the effects, progressing to the next stage on the appropriate track with each failed save.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.ZUF0h42es9Hu1x5B]{Infinite Worlds (Su), Enhanced}</p>\n<p>Each day you gain additional spell slots equal to those you would gain normally, but these additional spell slots can only be used for your infinite worlds ability. For example, a 5th-level witchwarper with 16 Charisma gains an additional 5 1st-level spell slots and 3 2nd-level spell slots, each usable only for their infinite worlds ability.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -84,18 +91,27 @@
       "teleportation": false,
       "water": false
     },
-    "details": {
-      "category": "classFeature",
-      "combat": false,
-      "specialAbilityType": "ex"
-    },
+    "dismissible": false,
     "duration": {
-      "units": "minute",
-      "value": "10"
+      "units": "text",
+      "value": "Witchwarper Level Rounds OR Instantaneous"
     },
     "formula": "",
     "isActive": null,
+    "isVariableLevel": false,
+    "level": 1,
+    "materials": {
+      "consumed": false,
+      "cost": 0,
+      "supply": 0,
+      "value": ""
+    },
     "modifiers": [],
+    "preparation": {
+      "mode": "always",
+      "prepared": false
+    },
+    "prepared": true,
     "properties": {},
     "range": {
       "additional": "",
@@ -103,30 +119,27 @@
       "units": "none",
       "value": ""
     },
-    "recharge": {
-      "charged": false,
-      "value": null
-    },
-    "requirements": "8th Level - Biohacker",
     "rollNotes": "",
     "save": {
       "type": "fort",
-      "dc": "10 + floor(@classes.biohacker.levels / 2) + @classes.biohacker.keyAbilityMod",
-      "descriptor": "negate"
+      "dc": "10 + @item.level + @abilities.cha.mod",
+      "descriptor": "partial"
     },
+    "school": "uni",
     "skillCheck": {
       "type": "",
       "dc": ""
     },
-    "source": "PoC pg. 53",
+    "source": "EN pg. 87",
+    "sr": false,
     "target": {
       "type": "",
       "value": ""
     },
     "uses": {
-      "max": "1",
+      "max": "lookupRange(@classes.witchwarper.levels, 0, 10, 2, 12, 3, 14, 4, 18, 5) + ternary(gte(@classes.witchwarper.levels, 10), lookupRange(@abilities.cha.base, 0, 18, 1, 26, 2), 0)",
       "per": "day",
-      "value": 1
+      "value": null
     }
   }
 }

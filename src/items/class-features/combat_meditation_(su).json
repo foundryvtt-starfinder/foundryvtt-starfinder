@@ -1,6 +1,6 @@
 {
-  "_id": "xpokQs2qgphGIqPz",
-  "name": "Accelerated Metabolism (Ex)",
+  "_id": "7gmhdPSZdiBZWb64",
+  "name": "Combat Meditation (Su)",
   "type": "feat",
   "_stats": {
     "coreVersion": 12,
@@ -10,16 +10,16 @@
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
-    "ability": "",
+    "ability": null,
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "save",
+    "actionType": "",
     "activation": {
-      "type": "move",
+      "type": "full",
       "condition": "",
-      "cost": 0
+      "cost": 1
     },
     "area": {
       "effect": "",
@@ -35,8 +35,7 @@
       "parts": []
     },
     "damage": {
-      "parts": [],
-      "primaryGroup": null
+      "parts": []
     },
     "damageNotes": "",
     "description": {
@@ -44,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.rpaon3jF3nCe5eP9]{Theorem (Ex)}</p>\n<p>Once per day, you can target a living creature with a special @UUID[Compendium.sfrpg.class-features.Item.2BjD4ocSE0BL5DcN]{biohack} as a move action. This doesn’t deal any damage and doesn’t count against your total uses of biohacks, but it otherwise functions as a biohack. If you hit the target, it must succeed at a Fortitude saving throw or suffer a dramatic increase in the speed at which its system metabolizes drugs and poisons. For the next 10 minutes, the onset time and maximum duration of any contact, ingested, inhaled, or injury drugs and poisons affecting the target are halved, and the victim must attempt two saves each round against the effects, progressing to the next stage on the appropriate track with each failed save.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.q0sZTVGHE77Di2VU]{Solarian, Enhanced}</p>\n<p>As a full action, you can concentrate and channel the cosmos to gather power more quickly. Attempt a DC 20 @Check[type:charisma]. You gain 1 attunement point for your current stellar mode if you fail the check, or 2 points if you succeed. This cannot increase your attunement points above 3. Once you use this ability, you cannot do so again until you spend 1 Resolve Point to regain Stamina Points after resting for 10 minutes.</p>\n<p>At 5th level, you can spend 1 Resolve Point to instead use this ability as a standard action. At 15th level, you can use combat meditation as a standard action, or you can spend 1 Resolve Point to use it as a move action.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -87,11 +86,11 @@
     "details": {
       "category": "classFeature",
       "combat": false,
-      "specialAbilityType": "ex"
+      "specialAbilityType": "su"
     },
     "duration": {
-      "units": "minute",
-      "value": "10"
+      "units": "text",
+      "value": ""
     },
     "formula": "",
     "isActive": null,
@@ -107,25 +106,21 @@
       "charged": false,
       "value": null
     },
-    "requirements": "8th Level - Biohacker",
+    "requirements": "3rd Level Solarian Enhanced",
     "rollNotes": "",
     "save": {
-      "type": "fort",
-      "dc": "10 + floor(@classes.biohacker.levels / 2) + @classes.biohacker.keyAbilityMod",
-      "descriptor": "negate"
-    },
-    "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": null,
+      "descriptor": ""
     },
-    "source": "PoC pg. 53",
+    "source": "EN pg. 67",
     "target": {
       "type": "",
       "value": ""
     },
     "uses": {
       "max": "1",
-      "per": "day",
+      "per": "sr",
       "value": 1
     }
   }
