@@ -1,4 +1,5 @@
 import { SFRPG } from "../config.js";
+import SFRPGModifier from "../modifiers/modifier.js";
 import RollContext from "../rolls/rollcontext.js";
 
 const itemSizeArmorClassModifier = {
@@ -879,7 +880,10 @@ export class ItemSheetSFRPG extends ItemSheet {
         const target = $(event.currentTarget);
         const modifierId = target.closest('.item.modifier').data('modifierId');
 
-        const modifiers = this.item.system.modifiers;
+        const modifiers = this.item.system.modifiers.map(mod => {
+            return new SFRPGModifier(mod, {parent: this.item});
+        });
+
         const modifier = modifiers.find(mod => mod._id === modifierId);
 
         return modifier.toggle();
