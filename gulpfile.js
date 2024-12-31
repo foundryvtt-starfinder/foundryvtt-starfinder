@@ -1316,9 +1316,9 @@ function searchDescriptionForUnlinkedReference(description, regularExpression) {
 function isSourceValid(source) {
 
     // NOTE: One day this should be changed if they publish further Core books (Galaxy Exploration Manual included for posterity)
-    const CoreBooksSourceMatch = [...source.matchAll(/(CRB|AR|PW|COM|SOM|NS|GEM|TR|GM|DC|IS|PoC) pg\. [\d]+/g)];
+    const CoreBooksSourceMatch = [...source.matchAll(/(CRB|PW|AR|COM|NS|SOM|GEM|TR|GM|DC|IS|PoC|EN|DS|SS|MG) pg\. [\d]+/g)];
     // NOTE: One day this should be increased when they publish further Alien Archives (Alien Archive 5 included for posterity)
-    const AlienArchiveSourceMatch = [...source.matchAll(/AA([1-5]) pg\. [\d]+/g)];
+    const AlienArchiveSourceMatch = [...source.matchAll(/AA([1-4]) pg\. [\d]+/g)];
     const AdventurePathSourceMatch = [...source.matchAll(/AP #[\d]+ pg\. [\d]+/g)];
     const StarfinderSocietySourceMatch =  [...source.matchAll(/SFS #[\d]+-[\d]+ pg\. [\d]+/g)];
     const StarfinderAdventureSourceMatch =  [...source.matchAll(/SA:\S+ pg\. [\d]+/g)];
