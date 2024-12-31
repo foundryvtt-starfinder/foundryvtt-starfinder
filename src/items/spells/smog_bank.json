@@ -2,6 +2,11 @@
   "_id": "7Kb9dOioGX80ZCer",
   "name": "Smog Bank",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "systems/sfrpg/icons/spells/smog_bank.webp",
   "system": {
     "type": "",
@@ -9,6 +14,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "action",
@@ -17,11 +23,13 @@
     },
     "allowedClasses": {
       "myst": false,
+      "precog": false,
       "tech": true,
       "wysh": false
     },
     "area": {
       "effect": "spread",
+      "shapable": false,
       "shape": "sphere",
       "units": "ft",
       "value": 20
@@ -36,10 +44,13 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>You create a noxious cloud similar to&nbsp;fog cloud&nbsp;that is harmful to living creatures.&nbsp;Smog bank&nbsp;obscures sight just as&nbsp;fog cloud&nbsp;does. Living creatures without @UUID[Compendium.sfrpg.rules.WP7hddXW4mLXXXOg]{Environmental protections} that are in the area when the spell is cast or who enter the area must attempt a Fortitude save or be sickened for as long as they remain in the cloud and for 1d4+1 rounds thereafter.</p>"
+      "value": "<p>You create a noxious cloud similar to&nbsp;fog cloud&nbsp;that is harmful to living creatures.&nbsp;Smog bank&nbsp;obscures sight just as&nbsp;fog cloud&nbsp;does. Living creatures without @UUID[Compendium.sfrpg.rules.Item.WP7hddXW4mLXXXOg]{Environmental protections} that are in the area when the spell is cast or who enter the area must attempt a Fortitude save or be sickened for as long as they remain in the cloud and for 1d4+1 rounds thereafter.</p>"
     },
     "descriptors": [],
     "dismissible": false,
@@ -48,6 +59,8 @@
       "value": "@details.cl.value*10"
     },
     "formula": "",
+    "isActive": null,
+    "isVariableLevel": false,
     "level": 3,
     "materials": {
       "consumed": false,
@@ -60,9 +73,14 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
-      "units": "medium"
+      "additional": "",
+      "per": "",
+      "units": "medium",
+      "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "fort",
       "dc": "",

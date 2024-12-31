@@ -2,6 +2,11 @@
   "_id": "CRekZbOlcVcmHP9v",
   "name": "Remote Operation",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "systems/sfrpg/icons/spells/remote_operation.webp",
   "system": {
     "type": "",
@@ -9,6 +14,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "action",
@@ -17,11 +23,13 @@
     },
     "allowedClasses": {
       "myst": false,
+      "precog": false,
       "tech": true,
       "wysh": false
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": null,
       "value": null
@@ -36,8 +44,11 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>A holographic duplicate of the target’s controls appears within your reach. If the target has no controls, the spell fails. As part of concentrating on this spell, you (and only you) can use these holocontrols to operate the target as if you were able to touch its actual controls. The spell ends if the target moves out of range.</p>"
     },
@@ -48,6 +59,8 @@
       "value": "concentration + 1 round/level"
     },
     "formula": "",
+    "isActive": null,
+    "isVariableLevel": false,
     "level": 1,
     "materials": {
       "consumed": false,
@@ -60,12 +73,14 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
       "value": 60
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,

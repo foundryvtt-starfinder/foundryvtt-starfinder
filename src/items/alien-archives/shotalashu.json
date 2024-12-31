@@ -2,13 +2,23 @@
   "_id": "FNcgeQQwTzapzs87",
   "name": "Shotalashu",
   "type": "npc2",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
+  "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
       "_id": "hswd6zrhVc2McwkD",
       "name": "Claws",
       "type": "weapon",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -33,6 +43,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -115,6 +126,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -158,7 +170,12 @@
       "_id": "wtcyX1SZLTtF71ym",
       "name": "Jungle Strider (Ex)",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
@@ -171,6 +188,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -193,6 +211,11 @@
           "value": "<p>Shotalashus are adept at traversing all forms of forest terrain. While in forest terrain, a shotalashu’s speed is not impeded by natural difficult terrain such as undergrowth.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -200,6 +223,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -233,7 +257,12 @@
       "_id": "lbSU3lO8OrVnj4YN",
       "name": "Telepathic Link (Su)",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
@@ -246,6 +275,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -265,9 +295,14 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>A lashunta can spend 1 hour and attempt a Survival check (DC 15 + 1-1/2 the shotalashu’s CR) to form a telepathic bond with an unbound shotalashu. If the lashunta is successful, the rider’s link functions as telepathic bond with a permanent duration. A bonded shotalashu is considered trained in battle when carrying or fighting alongside the bonded lashunta. A lashunta can’t be linked to more than one shotalashu at a time, but she can break her link with one shotalashu in favor of another at any time. If either of the linked beings dies while bonded, the surviving creature suffers telepathic backlash, becoming @UUID[Compendium.sfrpg.conditions.2XWEujYSyryB4oHm]{Dazed} for 1 round and taking 3d6 damage. Creatures that have limited telepathy or telepathy other than lashuntas and that speak a common language with a shotalashu can also attempt to forge this telepathic bond, but they take a -5 penalty to their Survival checks to do so.</p>"
+          "value": "<p>A lashunta can spend 1 hour and attempt a Survival check (DC 15 + 1-1/2 the shotalashu’s CR) to form a telepathic bond with an unbound shotalashu. If the lashunta is successful, the rider’s link functions as telepathic bond with a permanent duration. A bonded shotalashu is considered trained in battle when carrying or fighting alongside the bonded lashunta. A lashunta can’t be linked to more than one shotalashu at a time, but she can break her link with one shotalashu in favor of another at any time. If either of the linked beings dies while bonded, the surviving creature suffers telepathic backlash, becoming @UUID[Compendium.sfrpg.conditions.Item.2XWEujYSyryB4oHm]{Dazed} for 1 round and taking 3d6 damage. Creatures that have limited telepathy or telepathy other than lashuntas and that speak a common language with a shotalashu can also attempt to forge this telepathic bond, but they take a -5 penalty to their Survival checks to do so.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -275,6 +310,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -309,6 +345,7 @@
     "name": "Shotalashu",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -320,6 +357,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 2,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -340,11 +378,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -358,13 +414,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "src": "systems/sfrpg/icons/default/alien-stare.svg",
+      "tint": "#ffffff"
     },
     "width": 2
   },
@@ -522,7 +582,7 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<section class=\"secret\">\n<h2>Description</h2>\n<p>For as long as lashuntas have been among the dominant species on @UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel}, shotalashus—the lashuntas’ traditional telepathic reptilian mounts—have served at their sides. Millennia of domestication and parallel evolution have strengthened the symbiotic bond between the two species, allowing lashuntas to form a close mental link with a chosen mount.</p>\n<p>Shotalashus have rudimentary telepathic abilities similar to those of the lashuntas themselves, a fact that has contributed to their use as close pets and trusted mounts even in the modern day, when much more sophisticated and technologically advanced forms of both transportation and companionship exist. This tradition has lasted so long in part because of the kinship the lashuntas feel with their bonded shotalashus, but also because the symbiotic bond between the two species is deeply ingrained into lashunta culture. Shotalashu-mounted cavalry still serve as ceremonial honor guards for lashunta dignitaries, and members of all social stations regard their bonded mounts as occupying a cherished place in the family. Though shotalashus are seen less often in teeming metropolises than they are in smaller settlements, no city on @UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel} is devoid of at least basic amenities for the honored beasts, from training facilities to boarding services.</p>\n<p>While it’s common for a lashunta to switch between shotalashus throughout her life, some bonds between beast and rider deepen over time, and it is not unheard of for a warrior to bond with a single shotalashu mount until death. Lashunta whose mounts die suffer psychic trauma and often require time to recover before they can bond with another mount, and shotalashus who lose their bonded riders have been known to grieve for months, or even years.</p>\n<p>Though rare, some shotalashus still live in the wild, forming feral packs that use their telepathy to bond not with a rider, but with one another, forming a highly effective collective mind that makes them efficient and deadly hunters. Particularly adventurous lashuntas set out on solo quests into the most remote of @UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel}’s wilds in search of a potentially stronger mount from among untamed stock. These brave souls must first break an individual shotalashu away from its pack before attempting the long and arduous task of taming and eventually bonding with the creature.</p>\n<p>A typical domesticated shotalashu is over 10 feet long from snout to tail-tip, and weighs more than 1,000 pounds, while wild specimens can grow as large as 12 feet in length and weigh a staggering 1,500 pounds.</p>\n<h2>Shotalashu Equipment</h2>\n<p>&nbsp;As technology has advanced, telepathic bonding with shotalashus has become possible for those who aren’t lashunta. The lashuntas have also maintained traditional gear for shotalashu riding: the shotalashu link cortex and the shotalashu saddle.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>warm forests (@UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel})</p>\n<h3>Organization</h3>\n<p>solitary, bonded mount (1 plus 1 lashunta), or pack (3-5)</p>\n</section>",
+        "value": "<section class=\"secret\">\n<h2>Description</h2>\n<p>For as long as lashuntas have been among the dominant species on @UUID[Compendium.sfrpg.setting.Item.mkJGLfpJkvAKLZz3]{Castrovel}, shotalashus—the lashuntas’ traditional telepathic reptilian mounts—have served at their sides. Millennia of domestication and parallel evolution have strengthened the symbiotic bond between the two species, allowing lashuntas to form a close mental link with a chosen mount.</p>\n<p>Shotalashus have rudimentary telepathic abilities similar to those of the lashuntas themselves, a fact that has contributed to their use as close pets and trusted mounts even in the modern day, when much more sophisticated and technologically advanced forms of both transportation and companionship exist. This tradition has lasted so long in part because of the kinship the lashuntas feel with their bonded shotalashus, but also because the symbiotic bond between the two species is deeply ingrained into lashunta culture. Shotalashu-mounted cavalry still serve as ceremonial honor guards for lashunta dignitaries, and members of all social stations regard their bonded mounts as occupying a cherished place in the family. Though shotalashus are seen less often in teeming metropolises than they are in smaller settlements, no city on @UUID[Compendium.sfrpg.setting.Item.mkJGLfpJkvAKLZz3]{Castrovel} is devoid of at least basic amenities for the honored beasts, from training facilities to boarding services.</p>\n<p>While it’s common for a lashunta to switch between shotalashus throughout her life, some bonds between beast and rider deepen over time, and it is not unheard of for a warrior to bond with a single shotalashu mount until death. Lashunta whose mounts die suffer psychic trauma and often require time to recover before they can bond with another mount, and shotalashus who lose their bonded riders have been known to grieve for months, or even years.</p>\n<p>Though rare, some shotalashus still live in the wild, forming feral packs that use their telepathy to bond not with a rider, but with one another, forming a highly effective collective mind that makes them efficient and deadly hunters. Particularly adventurous lashuntas set out on solo quests into the most remote of @UUID[Compendium.sfrpg.setting.Item.mkJGLfpJkvAKLZz3]{Castrovel}’s wilds in search of a potentially stronger mount from among untamed stock. These brave souls must first break an individual shotalashu away from its pack before attempting the long and arduous task of taming and eventually bonding with the creature.</p>\n<p>A typical domesticated shotalashu is over 10 feet long from snout to tail-tip, and weighs more than 1,000 pounds, while wild specimens can grow as large as 12 feet in length and weigh a staggering 1,500 pounds.</p>\n<h2>Shotalashu Equipment</h2>\n<p>&nbsp;As technology has advanced, telepathic bonding with shotalashus has become possible for those who aren’t lashunta. The lashuntas have also maintained traditional gear for shotalashu riding: the shotalashu link cortex and the shotalashu saddle.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>warm forests (@UUID[Compendium.sfrpg.setting.Item.mkJGLfpJkvAKLZz3]{Castrovel})</p>\n<h3>Organization</h3>\n<p>solitary, bonded mount (1 plus 1 lashunta), or pack (3-5)</p>\n</section>",
         "weight": ""
       },
       "class": "",

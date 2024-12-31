@@ -2,22 +2,30 @@
   "_id": "GkPlqnqE14RrxEJF",
   "name": "Obedience Implant Trap",
   "type": "hazard",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
+  "img": "systems/sfrpg/icons/default/mantrap.svg",
   "items": [],
   "prototypeToken": {
     "name": "Obedience Implant Trap",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -38,15 +46,30 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -59,12 +82,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "tint": null
+      "src": "systems/sfrpg/icons/default/mantrap.svg",
+      "tint": "#ffffff"
     },
     "width": 1
   },
@@ -131,7 +159,7 @@
         "value": "12"
       },
       "description": {
-        "value": "<p>When the trap sees a creature within 10 feet, a lancet implants a magic microchip in the triggering creature, which falls under the telepathic control of the trap’s creator, as per @UUID[Compendium.sfrpg.spells.J14mFZezYHIGHVhO]{Dominate Person} (but affecting any creature). Removing the chip safely requires a 1-minute surgical procedure and a successful Medicine DC 28 check. Failure deals 3d6 slashing damage and leaves the implant in place. An implanted chip prevents magical means of ending the spell effect. Any later successful save (such as to resist a command) renders the spell effect dormant for 1 round rather than ending it.</p>"
+        "value": "<p>When the trap sees a creature within 10 feet, a lancet implants a magic microchip in the triggering creature, which falls under the telepathic control of the trap’s creator, as per @UUID[Compendium.sfrpg.spells.Item.J14mFZezYHIGHVhO]{Dominate Person} (but affecting any creature). Removing the chip safely requires a 1-minute surgical procedure and a successful Medicine DC 28 check. Failure deals 3d6 slashing damage and leaves the implant in place. An implanted chip prevents magical means of ending the spell effect. Any later successful save (such as to resist a command) renders the spell effect dormant for 1 round rather than ending it.</p>"
       },
       "source": "Hybrid",
       "xp": {

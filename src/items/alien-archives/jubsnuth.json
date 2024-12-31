@@ -2,13 +2,23 @@
   "_id": "agPr6lbmSqXfUOIT",
   "name": "Jubsnuth",
   "type": "npc2",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
+  "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
       "_id": "wYQGYfp4fIZbnz87",
       "name": "Bite (plus Swallow Whole)",
       "type": "weapon",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -22,6 +32,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -102,6 +113,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -145,7 +157,12 @@
       "_id": "PQ650ukyBN8AOA02",
       "name": "Double Bite (Ex)",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
@@ -158,6 +175,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -180,6 +198,11 @@
           "value": "<p>If a jubsnuth misses with its bite attack, it can make another bite attack with its other mouth as a move action, though it takes a -4 penalty to this attack roll.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -187,6 +210,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -220,7 +244,12 @@
       "_id": "fzyeQOZ9nMmwYZiM",
       "name": "Swallow Whole (2d10 + 15 A, EAC 22, KAC 20,36 HP)",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
@@ -236,6 +265,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -255,9 +285,14 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>(EX)</p>\n<p>If the creature hits with the indicated attack (usually a bite attack), it deals the normal damage. If the creature’s attack roll successfully hits the target’s KAC + 4, the creature also automatically grapples the foe as part of the attack action. (If it hits the target’s KAC + 13, it instead pins the target). The creature doesn’t need to have a free limb to perform this grapple. Unless otherwise specified, a creature can swallow whole only targets that are at least one size category smaller than itself, and it has room for a single target of that size in its stomach (doubling the maximum number of creatures it can have swallowed for each additional size category by which these creatures are smaller).</p>\n<p>On the creature’s next turn after grappling or pinning the target, if the target has not escaped the grapple or pin, the target automatically takes the attack’s damage at the beginning of the creature’s turn. The creature can then make a new attack roll with the same attack. If it hits the target’s KAC, the grapple or @UUID[Compendium.sfrpg.conditions.XgK4EdO5D3Fj3iWz]{Pin} is maintained. If it hits the target’s KAC + 4, the target is swallowed whole (no damage is dealt).</p>\n<p>Once swallowed, the target takes the listed swallow whole damage automatically at the beginning its turn every round. The target is considered @UUID[Compendium.sfrpg.conditions.4AkWDHGM6gHDepHN]{Grappled} as long as it is swallowed. The target can attempt to cut its way out (the interior of a creature with swallow whole has the same EAC as its exterior and a KAC equal to that of its exterior – 4) by dealing an amount of damage equal to one-quarter the swallowing creature’s total Hit Points, though any attack that does not deal slashing damage deals only half its normal damage. If a target cuts its way out of the creature, the creature cannot use swallow whole again until that damage is healed.</p>\n<p>Alternatively, a target swallowed whole can attempt to climb out. The swallowed creature must succeed at both a grapple check against the creature’s internal KAC + 8 and an Athletics check to climb (DC = 10 + 1-1/2 × the creature’s CR). Each of these actions takes a full round. If both checks are successful, the target climbs back up to the creature’s mouth and can escape, ending up in an open square adjacent to the creature.</p>\n<hr />"
+          "value": "<p>(EX)</p>\n<p>If the creature hits with the indicated attack (usually a bite attack), it deals the normal damage. If the creature’s attack roll successfully hits the target’s KAC + 4, the creature also automatically grapples the foe as part of the attack action. (If it hits the target’s KAC + 13, it instead pins the target). The creature doesn’t need to have a free limb to perform this grapple. Unless otherwise specified, a creature can swallow whole only targets that are at least one size category smaller than itself, and it has room for a single target of that size in its stomach (doubling the maximum number of creatures it can have swallowed for each additional size category by which these creatures are smaller).</p>\n<p>On the creature’s next turn after grappling or pinning the target, if the target has not escaped the grapple or pin, the target automatically takes the attack’s damage at the beginning of the creature’s turn. The creature can then make a new attack roll with the same attack. If it hits the target’s KAC, the grapple or @UUID[Compendium.sfrpg.conditions.Item.XgK4EdO5D3Fj3iWz]{Pin} is maintained. If it hits the target’s KAC + 4, the target is swallowed whole (no damage is dealt).</p>\n<p>Once swallowed, the target takes the listed swallow whole damage automatically at the beginning its turn every round. The target is considered @UUID[Compendium.sfrpg.conditions.Item.4AkWDHGM6gHDepHN]{Grappled} as long as it is swallowed. The target can attempt to cut its way out (the interior of a creature with swallow whole has the same EAC as its exterior and a KAC equal to that of its exterior – 4) by dealing an amount of damage equal to one-quarter the swallowing creature’s total Hit Points, though any attack that does not deal slashing damage deals only half its normal damage. If a target cuts its way out of the creature, the creature cannot use swallow whole again until that damage is healed.</p>\n<p>Alternatively, a target swallowed whole can attempt to climb out. The swallowed creature must succeed at both a grapple check against the creature’s internal KAC + 8 and an Athletics check to climb (DC = 10 + 1-1/2 × the creature’s CR). Each of these actions takes a full round. If both checks are successful, the target climbs back up to the creature’s mouth and can escape, ending up in an open square adjacent to the creature.</p>\n<hr />"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -265,6 +300,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -298,7 +334,12 @@
       "_id": "867DmqUSpPtctYnG",
       "name": "Trample (2d10 + 15 B, DC 16)",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
@@ -314,6 +355,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -336,6 +378,11 @@
           "value": "<p>(EX)</p>\n<p>As a full action, the creature can move up to its speed and through the space of any creatures that are at least one size smaller than itself. The creature does not need to make an attack roll; each creature whose space it moves through takes damage. A target of a trample can attempt a Reflex save with the listed DC to take half damage; if it attempts the save, it can’t make an attack of opportunity against the trampling creature due to the creature’s movement. A creature can deal trample damage to a given target only once per round.</p>\n<p>Guidelines: The amount of damage the trample deals should be the same as the creature’s standard melee damage.</p>\n<hr />"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -343,6 +390,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -377,6 +425,7 @@
     "name": "Jubsnuth",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -388,6 +437,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 3,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -408,11 +458,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -426,13 +494,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "src": "systems/sfrpg/icons/default/alien-stare.svg",
+      "tint": "#ffffff"
     },
     "width": 3
   },

@@ -2,6 +2,11 @@
   "_id": "AmVCSTcRS3bainbG",
   "name": "Spirit-bound Armor",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "systems/sfrpg/icons/spells/spirit_bound_armor.webp",
   "system": {
     "type": "",
@@ -9,6 +14,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "action",
@@ -17,11 +23,13 @@
     },
     "allowedClasses": {
       "myst": true,
+      "precog": false,
       "tech": false,
       "wysh": false
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": null,
       "value": null
@@ -36,10 +44,13 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>You divert a benevolent spirit from the River of Souls to temporarily inhabit a suit of armor. The spirit steadies the nerves and balance of the creature wearing the armor. If the target becomes @UUID[Compendium.sfrpg.conditions.MZ8OoH1GE9qDMyCD]{Flat-footed} during the duration, it ignores the penalty to AC that condition imposes. Similarly, the off-kilter condition has no effect on the target while this spell is in effect.</p>"
+      "value": "<p>You divert a benevolent spirit from the River of Souls to temporarily inhabit a suit of armor. The spirit steadies the nerves and balance of the creature wearing the armor. If the target becomes @UUID[Compendium.sfrpg.conditions.Item.MZ8OoH1GE9qDMyCD]{Flat-footed} during the duration, it ignores the penalty to AC that condition imposes. Similarly, the off-kilter condition has no effect on the target while this spell is in effect.</p>"
     },
     "descriptors": [],
     "dismissible": false,
@@ -48,6 +59,8 @@
       "value": "@details.cl.value"
     },
     "formula": "",
+    "isActive": null,
+    "isVariableLevel": false,
     "level": 1,
     "materials": {
       "consumed": false,
@@ -60,9 +73,14 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
-      "units": "close"
+      "additional": "",
+      "per": "",
+      "units": "close",
+      "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "will",
       "dc": "",

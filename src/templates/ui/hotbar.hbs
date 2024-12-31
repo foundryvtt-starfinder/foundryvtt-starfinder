@@ -16,12 +16,12 @@
                 {{#if this.icon}}
                 <img class="macro-icon {{#if this.greyscale}}greyscale{{/if}} {{#if this.activeGlow}}active{{/if}}" src="{{this.icon}}" alt="{{this.tooltip}}" />
                 {{/if}}
-                {{#if this.macro.item}}
+                {{#if this.macro.macroConfig.item}}
                     <i class="fas {{this.iconClass}} icon"></i>
-                    {{#if this.hasCapacity}}
-                    <footer class="macro-footer">{{this.macro.item.macroConfig.capacityCurrent}}/{{this.macro.item.macroConfig.capacityMaximum}}</footer>
-                    {{else if this.hasUses}}
-                    <footer class="macro-footer">{{this.macro.item.system.uses.value}}/{{this.macro.item.system.uses.total}}</footer>
+                    {{#if this.macro.macroConfig.hasCapacity}}
+                    <footer class="macro-footer">{{this.macro.macroConfig.capacityCurrent}}/{{this.macro.macroConfig.capacityMaximum}}</footer>
+                    {{else if this.macro.macroConfig.hasUses}}
+                    <footer class="macro-footer">{{this.macro.macroConfig.item.system.uses.value}}/{{this.macro.macroConfig.item.system.uses.total}}</footer>
                     {{/if}}
                 {{/if}}
             </li>

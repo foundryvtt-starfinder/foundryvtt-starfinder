@@ -11,11 +11,7 @@
         <div class="form-group" data-tooltip="<b>{{localize "SFRPG.Rolls.Dialog.RollMode"}}</b><br/>{{localize "SFRPG.Rolls.Dialog.RollModeTooltip"}}">
             <label>{{localize "SFRPG.Rolls.Dialog.RollMode"}}:</label>
             <select name="rollMode">
-            {{#select rollMode}}
-            {{#each rollModes as |label mode|}}
-                <option value="{{mode}}">{{localize label}}</option>
-            {{/each}}
-            {{/select}}
+                {{selectOptions rollModes selected=rollMode localize=true}}
             </select>
         </div>
         {{#if hasSelectors}}
@@ -23,11 +19,7 @@
         <div class="form-group" data-tooltip="<b>{{localize "SFRPG.Rolls.Dialog.Selector" name=target}}</b><br/>{{localize "SFRPG.Rolls.Dialog.SelectorTooltip" name=target}}">
             <label>{{localize "SFRPG.Rolls.Dialog.Selector" name=target}}:</label>
             <select class="selector" name="{{target}}">
-            {{#select selector.value}}
-            {{#each selector.entries as |selectorName selectorKey|}}
-                <option value="{{selectorKey}}">{{selectorName}}</option>
-            {{/each}}
-            {{/select}}
+                {{selectOptions selector.entries selected=selector.value}}
             </select>
         </div>
         {{/each}}

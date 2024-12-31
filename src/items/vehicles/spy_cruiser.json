@@ -2,13 +2,23 @@
   "_id": "lroZwBvW4KawAUl5",
   "name": "Spy Cruiser",
   "type": "vehicle",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
+  "img": "systems/sfrpg/icons/default/bus.svg",
   "items": [
     {
       "_id": "eABweQcB2xFNUtjA",
       "name": "Collision (Ram)",
       "type": "vehicleAttack",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "img": "systems/sfrpg/icons/default/reticule.svg",
       "system": {
         "type": "",
         "abilityMods": {
@@ -49,7 +59,12 @@
       "_id": "jXZ0k7hcjcJ6ayIo",
       "name": "Collision (Run Over)",
       "type": "vehicleAttack",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "img": "systems/sfrpg/icons/default/reticule.svg",
       "system": {
         "type": "",
         "abilityMods": {
@@ -90,6 +105,11 @@
       "_id": "qQ5SOQzuzo5u4g6A",
       "name": "Unlimited comm unit",
       "type": "vehicleSystem",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.webp",
       "system": {
         "type": "",
@@ -126,7 +146,12 @@
       "_id": "prna0tDsDWaioY6G",
       "name": "Autopilot",
       "type": "vehicleSystem",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "img": "systems/sfrpg/icons/default/gear-stick.svg",
       "system": {
         "type": "",
         "abilityMods": {
@@ -162,7 +187,12 @@
       "_id": "sEhEHfD25R1xOesX",
       "name": "Stealth (-2)",
       "type": "vehicleSystem",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "img": "systems/sfrpg/icons/default/gear-stick.svg",
       "system": {
         "type": "",
         "abilityMods": {
@@ -198,6 +228,11 @@
       "_id": "GU2Glc6ITq4exuRK",
       "name": "Enhanced sensors",
       "type": "vehicleSystem",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.webp",
       "system": {
         "type": "",
@@ -234,6 +269,11 @@
       "_id": "ZJ8cJSEElV0AeHVO",
       "name": "Zero cannon, advanced",
       "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "systems/sfrpg/icons/equipment/weapons/advanced_zero_cannon.webp",
       "system": {
         "type": "",
@@ -251,6 +291,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "line",
           "units": "ft",
           "value": 60
@@ -341,6 +382,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 14,
         "modifiers": [],
         "price": 81400,
@@ -472,6 +514,7 @@
     "name": "Spy Cruiser",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -483,6 +526,7 @@
     "displayName": 20,
     "disposition": 0,
     "height": 3,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -503,11 +547,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -521,13 +583,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "src": "systems/sfrpg/icons/default/bus.svg",
+      "tint": "#ffffff"
     },
     "width": 3
   },

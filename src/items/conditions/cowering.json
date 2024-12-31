@@ -2,6 +2,11 @@
   "_id": "4WXJOFZ4s7TJUW6D",
   "name": "Cowering",
   "type": "effect",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "systems/sfrpg/icons/conditions/cowering.webp",
   "system": {
     "type": "condition",
@@ -11,9 +16,15 @@
     "activeDuration": {
       "activationTime": 0,
       "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "parent"
+      },
       "unit": "permanent",
       "value": 0
     },
+    "context": {},
     "critical": {
       "effect": "",
       "parts": []
@@ -23,13 +34,17 @@
     },
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.rules.0yJjfyvWg5pDLcVR]{Conditions}</p>\n<hr />\n<p>You’re frozen with fear.</p>\n<p>You’re @UUID[Compendium.sfrpg.conditions.MZ8OoH1GE9qDMyCD]{Flat-Footed} and can take no actions.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.rules.Item.0yJjfyvWg5pDLcVR]{Conditions}</p>\n<hr />\n<p>You’re frozen with fear.</p>\n<p>You’re @UUID[Compendium.sfrpg.conditions.Item.MZ8OoH1GE9qDMyCD]{Flat-Footed} and can take no actions.</p>"
     },
     "enabled": true,
     "modifiers": [],
     "requirements": "Condition",
+    "showOnToken": true,
     "source": "CRB.274",
-    "sourceActorId": null
+    "sourceActorId": null,
+    "turnEvents": []
   }
 }

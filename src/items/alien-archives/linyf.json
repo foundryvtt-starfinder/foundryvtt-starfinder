@@ -2,13 +2,23 @@
   "_id": "r1kS6F6HcUHAfQIg",
   "name": "Linyf",
   "type": "npc2",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
+  "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
       "_id": "0kqRqC45mgJqWqOV",
       "name": "Fiber Lash (plus Fibrous Growth And Grab)",
       "type": "weapon",
-      "img": "icons/svg/item-bag.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -25,6 +35,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -105,6 +116,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -234,7 +246,12 @@
       "_id": "OCVsXPGSM3dOazdN",
       "name": "Silken Snare (Ex)",
       "type": "feat",
-      "img": "icons/svg/item-bag.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
@@ -250,6 +267,7 @@
         },
         "area": {
           "effect": "burst",
+          "shapable": false,
           "shape": "sphere",
           "units": "ft",
           "value": 10
@@ -272,6 +290,11 @@
           "value": "<p>As a move action, a linyf can secrete sticky, threadlike fibers in a 10-foot-radius burst. This area counts as difficult terrain for all creatures except for the linyf, and the linyf gains a +4 circumstance bonus to attack rolls to grab or maintain a grapple on a creature in the area of the silken snare. Creatures exposed to a linyf’s silken snare who aren’t wearing protective gear (such as armor) must attempt a DC 12 Fortitude save to avoid contracting fibrous growth. A linyf’s silken snares remain until it moves. Fibrous Growth Type @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.gBhZDjh30JEyh7DY]{Disease} (injury); Save Fortitude DC 12 Track physical; Frequency 1/day Effect no latent state Cure 2 consecutive saves</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": ""
@@ -279,6 +302,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -312,7 +336,12 @@
       "_id": "PvFo3ciY4EG1DrX4",
       "name": "Fibrous Growth (Poison)",
       "type": "feat",
-      "img": "icons/svg/item-bag.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
@@ -328,6 +357,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -350,6 +380,11 @@
           "value": "<h2>Fiberous Growth</h2>\n<p><strong>Type</strong>&nbsp;@UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.gBhZDjh30JEyh7DY]{Disease} (injury);&nbsp;<strong>Save</strong>&nbsp;Fortitude DC 12</p>\n<p><strong>Track</strong>&nbsp;physical;&nbsp;<strong>Frequency</strong>&nbsp;1/day</p>\n<p><strong>Effect</strong>&nbsp;no latent state</p>\n<p><strong>Cure</strong> 2 consecutive saves</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -357,6 +392,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -391,6 +427,7 @@
     "name": "Linyf",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -402,6 +439,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 2,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -422,11 +460,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -440,13 +496,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "src": "systems/sfrpg/icons/default/alien-stare.svg",
+      "tint": "#ffffff"
     },
     "width": 2
   },

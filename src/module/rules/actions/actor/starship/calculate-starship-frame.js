@@ -1,4 +1,3 @@
-import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes} from "../../../../modifiers/types.js";
 
 export default function(engine) {
     engine.closures.add( "calculateStarshipFrame", (fact, context) => {
@@ -63,14 +62,14 @@ export default function(engine) {
             };
         }
 
-        data.currency = mergeObject(data.currency || {}, {
+        data.currency = foundry.utils.mergeObject(data.currency || {}, {
             upb: 0
         }, {overwrite: false});
 
         /** If galactic trade is enabled, allow starship sheets to track unspent BPs. */
         const isGalacticTradeEnabled = game.settings.get('sfrpg', 'enableGalacticTrade');
         if (isGalacticTradeEnabled) {
-            data.currency = mergeObject(data.currency, {
+            data.currency = foundry.utils.mergeObject(data.currency, {
                 bp: 0
             }, {overwrite: false});
         } else if (data.currency?.bp !== null) {

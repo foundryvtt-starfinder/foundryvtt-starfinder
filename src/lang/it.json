@@ -496,6 +496,7 @@
             },
             "PlaceAbilityTemplate": "Place {label}"
         },
+        "Check": "Check",
         "ClassArmorProf": "Competenza nelle Armature",
         "ClassBABProgression": "Progressione del BAB",
         "ClassFortSaveProgression": "Progressione Tiro Salvezza Tempra",
@@ -1173,6 +1174,7 @@
         "ItemMacro": {
             "Activate": "Activate",
             "Attack": "Attack",
+            "Cast": "Cast",
             "Damage": "Damage",
             "Healing": "Healing",
             "Reload": "Reload",
@@ -1191,6 +1193,7 @@
                 "Base": "Base value",
                 "BaseTooltip": "(Required) The base value defines the base value of this resource. Modifiers may alter it.<br/>Attribute: @resources.type.subtype.base",
                 "CombatTracker": "Combat Tracker settings",
+                "CombatTrackerSettings": "Combat Tracker Settings",
                 "DisplayAbsoluteValue": "Display Absolute Value",
                 "DisplayAbsoluteValueTooltip": "Should the displayed value in the combat tracker be absolute? i.e. -1 is displayed as 1, -2 as 2, etc.",
                 "Enabled": "Enabled",
@@ -1232,6 +1235,7 @@
                 "VisualizationsModeLesserThan": "lesser than",
                 "VisualizationsModeLesserThanEqual": "lesser than or equal to",
                 "VisualizationsModeNotEqual": "not equal to",
+                "VisualizationsPart": "Visualization Part",
                 "VisualizationsThen": "Then:",
                 "VisualizationsTitle": "Title:"
             },
@@ -1254,6 +1258,27 @@
             },
             "Containers": {
                 "ContainerTooltip": "I contenitori possono contenere praticamente qualsiasi elemento. Aumenta la capacità di archiviazione per consentire l'aggiunta di contenuti. "
+            },
+            "Details": {
+                "Section": {
+                    "ArmorDetails": "Armor Details",
+                    "ClassBasics": "Class Basics",
+                    "ConsumableDetails": "Consumable Details",
+                    "Progressions": "Progressions",
+                    "SkillsAndProficiencies": "Skills and Proficiencies",
+                    "Title": "Section",
+                    "Usage": "Usage"
+                },
+                "Tab": {
+                    "AmmunitionContainer": "Ammunition & Container",
+                    "AttackDamage": "Attack & Damage",
+                    "ClassInformation": "Class Information",
+                    "ContainerDetails": "Container Details",
+                    "NPCSpecific": "NPC Specific",
+                    "Properties": "Properties",
+                    "Spellcasting": "Spellcasting",
+                    "UsageAction": "Usage & Action"
+                }
             },
             "Header": {
                 "ArmorClass": "Classe Armatura",
@@ -1303,6 +1328,29 @@
                 "TargetLockPenaltyTooltip": "Il malus applicato al punteggio di Aggancio Bersaglio dell'astronave.",
                 "TurnDistancePenalty": "Malus Distanza di Virata",
                 "TurnDistancePenaltyTooltip": "Il malus applicato alla distanza tra le virate dell'astronave."
+            },
+            "StarshipAction": {
+                "ActionDC": "Action DC",
+                "AddSubactionTooltip": "<strong>Add Subaction</strong><br />Add a new subaction",
+                "CheckFormula": "Skill Check Formula",
+                "CrewRole": "Crew Role",
+                "CriticalEffect": "Critical Effect",
+                "DCPlaceholder": "5 + 1-1/2 * Target Ship Tier",
+                "DeleteSubactionTooltip": "<strong>Delete Subaction</strong><br />Delete this subaction",
+                "IsPushAction": "Push Action?",
+                "NormalEffect": "Normal Effect",
+                "Phase": "Phase",
+                "PhaseTooltip": "Phase Tooltip",
+                "PushResolve": "Push and Resolve",
+                "ResolveFormulaAutomatically": "Resolve this Formula Automatically",
+                "ResolveFormulaAutomaticallyTooltip": "If this box is checked, Target DC will resolve automatically as a formula, and the result will display in the chat box when the action is triggered. Otherwise, the raw string will instead be displayed in the chatbox.",
+                "SkillFormulaAndSubactions": "Skill Formula and Subactions",
+                "SkillFormulaOrSubactions": "Skill Formula / Subactions",
+                "SkillOrSubaction": "Skill or Subaction Name",
+                "SubactionPart": "Subaction {section}",
+                "Subactions": "Subactions",
+                "TargetDC": "Target DC",
+                "UsesResolve": "Uses Resolve"
             },
             "StarshipArmor": {
                 "ArmorBonus": "Bonus Armatura",
@@ -1379,6 +1427,7 @@
                     "WeaponArcStarboard": "Arco di Tribordo",
                     "WeaponArcTooltip": "La quantità di supporti arma disponibili per gli archi della nave, suddivise in supporti leggeri, pesanti e capitali.",
                     "WeaponArcTurret": "Torrette",
+                    "WeaponMounts": "Weapon Mounts",
                     "WeaponTypeCapital": "Capitale",
                     "WeaponTypeHeavy": "Pesante",
                     "WeaponTypeLight": "Leggera",
@@ -1480,6 +1529,8 @@
                 "DamageNotes": "Damage Notes",
                 "DamageNotesTooltip": "The damage notes are displayed on the damage roll chat card. This is a great way to put helpful reminders, especially for GMs with complicated NPCs.",
                 "DamageSection": "Damage Section {section}",
+                "DeleteDamageSection": "Delete damage section",
+                "Details": "Action Details",
                 "HealingFormula": "Formula della Cura",
                 "OtherFormula": "Altre Formule",
                 "RollNotes": "Roll Notes",
@@ -1531,9 +1582,11 @@
             },
             "Attuned": "Armonizzato",
             "Augmentation": {
+                "Action": "Augmentation Action",
                 "Details": "Dettaglio dell'Impianto",
                 "System": "Sistema",
-                "Type": "Tipo"
+                "Type": "Tipo",
+                "Usage": "Augmentation Usage"
             },
             "Capacity": {
                 "Capacity": "Capacità",
@@ -1651,6 +1704,7 @@
             "MaxDex": "Modificatore di Destrezza Massimo",
             "NotProficient": "Non Competente",
             "Proficient": "Competente",
+            "RangeInformation": "Range Information",
             "Shield": {
                 "ACP": "MAT: {acp}",
                 "AcMaxDex": "Bonus di Destrezza max : {maxDex}",
@@ -1733,6 +1787,10 @@
                 "Attack": "Attacco dell'arma",
                 "Category": "Categoria di arma",
                 "Details": "Dettagli sull'arma",
+                "IsEquipment": {
+                    "Title": "Weapon Is Equipment",
+                    "Tooltip": "This box is checked if the weapon is a piece of carried equipment, as opposed to an innate natural or supernatural weapon. For natural weapons, uncheck this box."
+                },
                 "Properties": "Proprietà dell'arma",
                 "Type": "Tipo di arma",
                 "Usage": "Utilizzi dell'arma"
@@ -2244,6 +2302,10 @@
                 "Hint": "Cambia i vantaggi o gli svantaggi sui tiri dei dadi.",
                 "Name": "Utilizzare i vantaggi e gli svantaggi?"
             },
+            "DecimalSpeed": {
+              "Hint": "Enable decimal numbers for actor speed configuration.",
+              "Name": "Decimal Speed values"
+            },
             "AlwaysShowQuantity": {
                 "Hint": "Indica sempre la quantità di articoli, anche se è 0 o 1. Sarà necessario aggiornare la finestra prima che questa modifica abbia effetto.",
                 "Name": "Mostra sempre le quantità"
@@ -2256,6 +2318,14 @@
                 "Hint": "Comprimi automaticamente le descrizioni delle schede degli articoli nel registro delle discussioni",
                 "Name": "Comprimi le carte oggetto nella chat"
             },
+            "AutoRollCritEffect": {
+                "Hint": "When applying damage to a starship from a chat card, if the damage crossses a Critical Threshold, the Critical Damage Effects (CRB pg. 320) table will automatically be rolled.",
+                "Name": "Automatically roll starship critical damage effects"
+            },
+            "HideHostileStarshipCrit": {
+                "Hint": "When posting notifications about starship criticals or thresholds, only post to GM if the ship is a Hostile Token.",
+                "Name": "Hide Hostile Starship Critical Message"
+            },            
             "CombatCards": {
                 "NormalHint": "Modifica le schede di chat di battaglia che dovrebbero essere visualizzate durante le normali battaglie.",
                 "NormalName": "Combattimento Normale",
@@ -2726,6 +2796,8 @@
             "Damage": {
                 "CrossedCriticalThreshold": "{name} supera {crossedThresholds} soglia di danno Critica!",
                 "Message": "I danni a un'astronave provengono sempre da una direzione specifica, seleziona l'arco a cui deve essere applicato il danno in arrivo.",
+                "Nat20": "Critical damage! {name} takes a critical damage effect.",
+                "Nat20WithThreshold": "Critical damage! {name} takes an additional critical damage effect.",
                 "Quadrant": {
                     "Aft": "Poppa",
                     "Forward": "Prua",
@@ -2837,6 +2909,10 @@
                 "ShieldHeader": "Scudi",
                 "TargetLock": "Aggianciare il bersaglio"
             },
+            "RandomQuadrantMacro": {
+                "NoToken": "Select the recipient of the critical effect before proceeding.",
+                "NotStarship": "The selected token must be a starship."
+            },
             "Role": {
                 "Captain": "Capitano",
                 "ChiefMate": "Primo Ufficiale",
@@ -2889,6 +2965,24 @@
         "Touch": "Tocco",
         "TraitArmorProf": "Competenze nelle Armature",
         "TraitWeaponProf": "Competenze nelle Armi",
+        "TurnEvent": {
+            "AddTurnEvent": "Add Turn Event",
+            "DeleteTurnEvent": "Delete Turn Event",
+            "Formula": "Formula",
+            "FormulaTooltip": "A formula which will be rolled when the trigger is met.",
+            "Name": "Name",
+            "NoteContent": "Note Content",
+            "NoteTooltip": "Text which will be sent to chat as a chat message when the trigger is met.",
+            "Trigger": "Trigger",
+            "TriggerTooltip": "When during a combatant's turn to trigger the event.",
+            "TurnEventI": "Turn Event {number}",
+            "Type": "Type",
+            "TypeTooltip": "The type of behaviour to trigger for this turn event.",
+            "Types": {
+                "Note": "Note",
+                "Roll": "Roll"
+            }
+        },
         "UPBs": "PBU",
         "Units": {
             "Speed": "mt."

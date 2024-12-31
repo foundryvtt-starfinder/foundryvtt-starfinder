@@ -2,6 +2,11 @@
   "_id": "GZxOsmUztVmw2m1d",
   "name": "Gravity grenade I",
   "type": "weapon",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "icons/weapons/thrown/grenade-round.webp",
   "system": {
     "type": "",
@@ -16,8 +21,10 @@
       "condition": "",
       "cost": 1
     },
+    "ammunitionType": "",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "sphere",
       "units": "ft",
       "value": 10
@@ -50,6 +57,7 @@
     "chatFlavor": "pull 5 ft.",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": 1,
       "isOpen": true,
       "storage": [
         {
@@ -81,8 +89,11 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>While shipkiller bulbs popularly represent death and destruction, the creatures’ gravity-controlling organs have contributed to major theoretical breakthroughs in gravity drives and particle physics. Yet the most practical technology developed from the bulb corpse is smaller: a grenade whose gravity net sustains and isolates a tiny singularity that implodes when released.</p>\n<h3>GRAVITY GRENADE</h3>\n<p>Derived from the gravitational organs of shipkiller bulbs, gravity grenades generate a micro-singularity that pulls affected targets towards the detonation point. Creatures in the area move the listed distance toward the blast’s center if they fail a Fortitude saving throw. Unsecured, unattended items of 1 bulk or less automatically fail this save. The force is not powerful enough to move bigger objects, such as Large vehicles.</p>"
     },
@@ -91,10 +102,12 @@
       "units": "",
       "value": ""
     },
+    "equippable": false,
     "equipped": false,
     "formula": "",
     "identified": true,
     "isActive": null,
+    "isEquipment": true,
     "level": 2,
     "modifiers": [],
     "price": 135,
@@ -187,12 +200,14 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
       "value": 20
     },
+    "rollNotes": "",
     "save": {
       "type": "fort",
       "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
@@ -200,6 +215,7 @@
     },
     "source": "AA4 pg. 109",
     "special": "",
+    "specialMaterials": {},
     "target": {
       "type": "",
       "value": ""

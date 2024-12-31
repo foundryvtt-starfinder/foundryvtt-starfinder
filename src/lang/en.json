@@ -166,7 +166,7 @@
                     "CapacityTooltip": "How many 'slots' that can be utilized within this container.",
                     "Close": "Close",
                     "CloseTooltip": "Close this container's fold-out listing.",
-                    "DetailsHeader": "Container details",
+                    "DetailsHeader": "Container Details",
                     "EquippedBulkMultiplier": "Equipped bulk multiplier",
                     "EquippedBulkMultiplierTooltip": "This multiplier is used for altering the bulk of the current item when it is equipped.<br/>Setting this to 0 will make the current item not count its own bulk towards the actor's encumbrance when equipped.",
                     "IncludeContentsInWealthCalculation": "Contents affect character wealth",
@@ -496,6 +496,7 @@
             },
             "PlaceAbilityTemplate": "Place {label}"
         },
+        "Check": "Check",
         "ClassArmorProf": "Armor Proficiencies",
         "ClassBABProgression": "BAB Progression",
         "ClassFortSaveProgression": "Fortitude Save Progression",
@@ -767,7 +768,7 @@
                 "Cold": "Cold",
                 "Custom": "Custom",
                 "DamageGroup": "Damage Group {group}",
-                "DamageGroupTooltip": "If damage sections share a group, you may only enable one from that group when making a damage roll. You may freely enable/disable damage sections that lack a group.",
+                "DamageGroupTooltip": "If damage sections share a group, you may only enable one from that group when making a damage roll. You may freely enable/disable damage sections that lack a group. Damage groups must be numerical.",
                 "Electricity": "Electricity",
                 "Fire": "Fire",
                 "Force": "Force",
@@ -935,7 +936,7 @@
                             "Melee": "Melee weapon mount",
                             "Ranged": "Ranged weapon mount"
                         },
-                        "Header": "Other effects"
+                        "Header": "Arms"
                     },
                     "BaseStatistics": {
                         "FreeInstall": "Free Module",
@@ -1167,6 +1168,7 @@
         "ItemMacro": {
             "Activate": "Activate",
             "Attack": "Attack",
+            "Cast": "Cast",
             "Damage": "Damage",
             "Healing": "Healing",
             "Reload": "Reload",
@@ -1182,9 +1184,10 @@
                 "Label": "Abilities"
             },
             "ActorResource": {
-                "Base": "Base value",
+                "Base": "Base Value",
                 "BaseTooltip": "(Required) The base value defines the base value of this resource. Modifiers may alter it.<br/>Attribute: @resources.type.subtype.base",
-                "CombatTracker": "Combat Tracker settings",
+                "CombatTracker": "Combat Tracker",
+                "CombatTrackerSettings": "Combat Tracker Settings",
                 "DisplayAbsoluteValue": "Display Absolute Value",
                 "DisplayAbsoluteValueTooltip": "Should the displayed value in the combat tracker be absolute? i.e. -1 is displayed as 1, -2 as 2, etc.",
                 "Enabled": "Enabled",
@@ -1196,8 +1199,8 @@
                 "ErrorNoSubType": "Subtype is a required field.",
                 "ErrorNoType": "Type is a required field.",
                 "Header": "Resource Properties",
-                "Range": "Value range",
-                "RangeMode": "Range mode",
+                "Range": "Value Range",
+                "RangeMode": "Range Mode",
                 "RangeModeImmediate": "Immediate",
                 "RangeModePost": "Post",
                 "RangeModeTooltip": "(Advanced) Defines whether the range limitations are applied only after the modifiers are all processed, or for each modifier as they are being processed.<br/><br/>For example, if the range is set to maximum of 1, and the base value is 0, and you have a modifier of +2, and a modifier of -1, the different modes would work as follows:<br/><br/>Post: 0 + 2 - 1 would output 1, which does not exceed the range maximum.<br/><br/>Immediate: 0 + 2 - 1 would output 0. Because 0 + 2 is 2, which exceeds the range maximum of 1, so it gets clamped to 1. Then -1 is applied, producing 0.",
@@ -1214,9 +1217,9 @@
                 "SubTypeTooltip": "(Required) Subtype makes up the second half of the resource identifier.<br/>For example: @resources.type.subtype.value",
                 "Type": "Type",
                 "TypeTooltip": "(Required) Type makes up the first half of the resource identifier.<br/>For example: @resources.type.subtype.value",
-                "Usage": "Attribute usage",
-                "UsageBaseValue": "Base value",
-                "UsageComputedValue": "Computed value",
+                "Usage": "Attribute Usage",
+                "UsageBaseValue": "Base Value",
+                "UsageComputedValue": "Computed Value",
                 "UsageTooltip": "What follows are a couple of example attributes how you may be able to access this resource in formulas:",
                 "Visualizations": "Conditional Visualization",
                 "VisualizationsIntro": "If resource value is..",
@@ -1226,6 +1229,7 @@
                 "VisualizationsModeLesserThan": "lesser than",
                 "VisualizationsModeLesserThanEqual": "lesser than or equal to",
                 "VisualizationsModeNotEqual": "not equal to",
+                "VisualizationsPart": "Visualization Part",
                 "VisualizationsThen": "Then:",
                 "VisualizationsTitle": "Title:"
             },
@@ -1249,10 +1253,31 @@
             "Containers": {
                 "ContainerTooltip": "Containers can contain just about any item. Increase the storage capacity to allow adding content."
             },
+            "Details": {
+                "Section": {
+                    "ArmorDetails": "Armor Details",
+                    "ClassBasics": "Class Basics",
+                    "ConsumableDetails": "Consumable Details",
+                    "Progressions": "Progressions",
+                    "SkillsAndProficiencies": "Skills and Proficiencies",
+                    "Title": "Section",
+                    "Usage": "Usage"
+                },
+                "Tab": {
+                    "AmmunitionContainer": "Ammunition & Container",
+                    "AttackDamage": "Attack & Damage",
+                    "ClassInformation": "Class Information",
+                    "ContainerDetails": "Container Details",
+                    "NPCSpecific": "NPC Specific",
+                    "Properties": "Properties",
+                    "Spellcasting": "Spellcasting",
+                    "UsageAction": "Usage & Action"
+                }
+            },
             "Header": {
                 "ArmorClass": "Armor Class",
                 "ArmorClassTooltip": "<strong>Armor Class</strong><br/>The armor class of this item, if left unattended. Otherwise, the attendee's armor class should be used instead.<br/>An item is considered unattended if it is not currently under any influence of a character.",
-                "DetailsHeader": "Armor Details",
+                "DetailsHeader": "Details",
                 "Hardness": "Hardness",
                 "HardnessTooltip": "<strong>Hardness</strong><br/>When taking damage, subtract the item's hardness from the incoming damage before applying.",
                 "Hitpoints": "Hitpoints",
@@ -1290,7 +1315,7 @@
                 "SturdyTooltip": "Equipment, such as weapons and armors, are considered sturdy."
             },
             "StarshipAblativeArmor": {
-                "AblativeValue": "Total additional hitpoints",
+                "AblativeValue": "Total Additional Hitpoints",
                 "AblativeValueTooltip": "The total amount of ablative armor hitpoints to distribute over the four quadrants.",
                 "Header": "Ablative Armor Properties",
                 "TargetLockPenalty": "Target Lock Penalty",
@@ -1298,10 +1323,33 @@
                 "TurnDistancePenalty": "Turn Distance Penalty",
                 "TurnDistancePenaltyTooltip": "The penalty applied to the ship's turn distance score."
             },
+            "StarshipAction": {
+                "ActionDC": "Action DC",
+                "AddSubactionTooltip": "<strong>Add Subaction</strong><br />Add a new subaction",
+                "CheckFormula": "Skill Check Formula",
+                "CrewRole": "Crew Role",
+                "CriticalEffect": "Critical Effect",
+                "DCPlaceholder": "5 + 1-1/2 * Target Ship Tier",
+                "DeleteSubactionTooltip": "<strong>Delete Subaction</strong><br />Delete this subaction",
+                "IsPushAction": "Push Action?",
+                "NormalEffect": "Normal Effect",
+                "Phase": "Phase",
+                "PhaseTooltip": "Phase Tooltip",
+                "PushResolve": "Push and Resolve",
+                "ResolveFormulaAutomatically": "Resolve this Formula Automatically",
+                "ResolveFormulaAutomaticallyTooltip": "If this box is checked, Target DC will resolve automatically as a formula, and the result will display in the chat box when the action is triggered. Otherwise, the raw string will instead be displayed in the chatbox.",
+                "SkillFormulaAndSubactions": "Skill Formula and Subactions",
+                "SkillFormulaOrSubactions": "Skill Formula / Subactions",
+                "SkillOrSubaction": "Skill or Subaction Name",
+                "SubactionPart": "Subaction {section}",
+                "Subactions": "Subactions",
+                "TargetDC": "Target DC",
+                "UsesResolve": "Uses Resolve"
+            },
             "StarshipArmor": {
                 "ArmorBonus": "Armor Bonus",
                 "ArmorBonusTooltip": "The armor class bonus provided by this armor.",
-                "Header": "Ablative Armor Properties",
+                "Header": "Armor Properties",
                 "TargetLockPenalty": "Target Lock Penalty",
                 "TargetLockPenaltyTooltip": "The penalty applied to the ship's target lock score.",
                 "TurnDistancePenalty": "Turn Distance Penalty",
@@ -1317,7 +1365,7 @@
                 "IsPowered": "Is powered",
                 "PCU": "PCU Usage",
                 "PCUTooltip": "The amount of power this component requires to function.",
-                "PoweredState": "PoweredState",
+                "PoweredState": "Powered State",
                 "PoweredStateTooltip": "Is this starship component powered?"
             },
             "StarshipComputer": {
@@ -1336,7 +1384,7 @@
                 "EngineRating": "Engine Rating",
                 "EngineRatingTooltip": "The Engine Rating for this drift engine.",
                 "Header": "Drift Engine Properties",
-                "MaxSize": "Maximum ship size",
+                "MaxSize": "Maximum Ship Size",
                 "MaxSizeTooltip": "The maximum ship size this engine can be installed onto."
             },
             "StarshipFortifiedHull": {
@@ -1358,7 +1406,7 @@
                     "ExpansionBaysTooltip": "The number of expansion bays available for this frame.",
                     "HeaderDefense": "Defense",
                     "HeaderOffense": "Offense",
-                    "HeaderSpecs": "Specs",
+                    "HeaderSpecs": "Specifications",
                     "Hitpoints": "Hull Points",
                     "HitpointsIncrement": "Hull Point increment",
                     "HitpointsIncrementTooltip": "The number of Hull Points a starship with that frame automatically gains when its tier increases to 4 (and every 4 tiers thereafter; see page 294).",
@@ -1373,6 +1421,7 @@
                     "WeaponArcStarboard": "Starboard Arc",
                     "WeaponArcTooltip": "The amount of weapon mounts available for the ship arc, split into light, heavy, and capital mounts.",
                     "WeaponArcTurret": "Turret",
+                    "WeaponMounts": "Weapon Mounts",
                     "WeaponTypeCapital": "Capital",
                     "WeaponTypeHeavy": "Heavy",
                     "WeaponTypeLight": "Light",
@@ -1393,7 +1442,7 @@
             },
             "StarshipSensor": {
                 "Header": "Sensor Properties",
-                "Modifier": "Sensor scan modifier",
+                "Modifier": "Sensor Scan Modifier",
                 "ModifierTooltip": "An additional modifier when scanning planets outside of combat.",
                 "Range": "Range",
                 "RangeTooltip": "Range increment of the scanner, short is 5, medium is 10, and long is 15 hexes."
@@ -1405,7 +1454,7 @@
                 "DefenseValueTooltip": "The maximum defense value available with this deflector shield.",
                 "Header": "Shield Properties",
                 "IsDeflector": "Is Deflector Shield",
-                "Regeneration": "Regeneration per minute",
+                "Regeneration": "Regeneration Per Minute",
                 "RegenerationTooltip": "The amount of shield points regenerated per minute.",
                 "ShieldPoints": "Shield Points",
                 "ShieldPointsTooltip": "The total amount of shield points provided by this shield.",
@@ -1433,7 +1482,7 @@
                 "Unmounted": "Unmounted"
             },
             "WeaponAccessory": {
-                "SupportedTypes": "Supported weapon types"
+                "SupportedTypes": "Supported Weapon Types"
             },
             "Weapons": {
                 "Category": "Weapon Type",
@@ -1474,6 +1523,8 @@
                 "DamageNotes": "Damage Notes",
                 "DamageNotesTooltip": "The damage notes are displayed on the damage roll chat card. This is a great way to put helpful reminders, especially for GMs with complicated NPCs.",
                 "DamageSection": "Damage Section {section}",
+                "DeleteDamageSection": "Delete damage section",
+                "Details": "Action Details",
                 "HealingFormula": "Healing Formula",
                 "OtherFormula": "Other Formula",
                 "RollNotes": "Roll Notes",
@@ -1524,9 +1575,11 @@
             },
             "Attuned": "Attuned",
             "Augmentation": {
+                "Action": "Augmentation Action",
                 "Details": "Augmentation Details",
                 "System": "System",
-                "Type": "Type"
+                "Type": "Type",
+                "Usage": "Augmentation Usage"
             },
             "Capacity": {
                 "Capacity": "Capacity",
@@ -1644,6 +1697,7 @@
             "MaxDex": "Max. Dexterity Modifier",
             "NotProficient": "Not Proficient",
             "Proficient": "Proficient",
+            "RangeInformation": "Range Information",
             "Shield": {
                 "ACP": "ACP: {acp}",
                 "AcMaxDex": "Max dex bonus: {maxDex}",
@@ -1726,6 +1780,10 @@
                 "Attack": "Weapon Attack",
                 "Category": "Weapon Category",
                 "Details": "Weapon Details",
+                "IsEquipment": {
+                    "Title": "Weapon Is Equipment",
+                    "Tooltip": "This box is checked if the weapon is a piece of carried equipment, as opposed to an innate natural or supernatural weapon. For natural weapons, uncheck this box."
+                },
                 "Properties": "Weapon Properties",
                 "Type": "Weapon Type",
                 "Usage": "Weapon Usage"
@@ -1735,11 +1793,11 @@
                     "Any": "Any",
                     "HeavyWeapon": "Heavy weapon",
                     "MeleeWeapon": "Melee weapon",
-                    "MeleeWeaponSA": "Melee weapon & Smallarm",
+                    "MeleeWeaponSA": "Melee weapon & Small Arm",
                     "Projectile": "Projectile",
                     "RailedWeapon": "Railed weapon",
-                    "RailedWeaponSA": "Railed weapon & Smallarm",
-                    "SmallArm": "Smallarm"
+                    "RailedWeaponSA": "Railed weapon & Small Arm",
+                    "SmallArm": "Small Arm"
                 }
             }
         },
@@ -1927,7 +1985,7 @@
         "MigrationEndMigration": "Starfinder system migration to version {systemVersion} was successful!",
         "MigrationErrorMessage": "There was an error migrating your Starfinder data, you made a backup, right?",
         "MigrationSuccessfulMessage": "Your Starfinder data was successfully migrated to the current version.",
-        "MigrationSuccessfulRefreshMessage": "Your Starfinder data was successfully migrated to the current version.<br/><br/>Please refresh your game to finalize migration.",
+        "MigrationSuccessfulRefreshMessage": "Your Starfinder data was successfully migrated to the current version. Please refresh your game to finalize migration.",
         "ModifierACPEffectingArmorTypeAll": "All Armor",
         "ModifierACPEffectingArmorTypeHeavy": "Only Heavy Armor",
         "ModifierACPEffectingArmorTypeLight": "Only Light Armor",
@@ -2237,6 +2295,10 @@
                 "Hint": "Enables the ability to toggle advantage or disadvantage on dice rolls.",
                 "Name": "Use advantage and disadvantage?"
             },
+            "DecimalSpeed": {
+              "Hint": "Enable decimal numbers for actor speed configuration.",
+              "Name": "Decimal Speed values"
+            },
             "AlwaysShowQuantity": {
                 "Hint": "Always shows the quantity of items, even if it is 0 or 1. You will have to refresh your window before this change will take effect.",
                 "Name": "Always show item quantity"
@@ -2249,6 +2311,14 @@
                 "Hint": "Automatically collapse Item Card descriptions in the Chat Log",
                 "Name": "Collapse Item Cards in Chat"
             },
+            "AutoRollCritEffect": {
+                "Hint": "When applying damage to a starship from a chat card, if the damage crossses a Critical Threshold, the Critical Damage Effects (CRB pg. 320) table will automatically be rolled.",
+                "Name": "Automatically roll starship critical damage effects"
+            },
+            "HideHostileStarshipCrit": {
+                "Hint": "When posting notifications about starship criticals or thresholds, only post to GM if the ship is a Hostile Token.",
+                "Name": "Hide Hostile Starship Critical Message"
+            },            
             "CombatCards": {
                 "NormalHint": "Change which combat chat cards should be displayed during normal combat.",
                 "NormalName": "Normal combat",
@@ -2719,6 +2789,8 @@
             "Damage": {
                 "CrossedCriticalThreshold": "{name} crossed {crossedThresholds} critical thresholds!",
                 "Message": "Damage to a starship always originates from a specific direction, please select the quadrant the incoming damage should be applied to.",
+                "Nat20": "Critical damage! {name} takes a critical damage effect.",
+                "Nat20WithThreshold": "Critical damage! {name} takes an additional critical damage effect.",
                 "Quadrant": {
                     "Aft": "Aft",
                     "Forward": "Forward",
@@ -2830,6 +2902,10 @@
                 "ShieldHeader": "Shields",
                 "TargetLock": "Target Lock"
             },
+            "RandomQuadrantMacro": {
+                "NoToken": "Select the recipient of the critical effect before proceeding.",
+                "NotStarship": "The selected token must be a starship."
+            },
             "Role": {
                 "Captain": "Captain",
                 "ChiefMate": "Chief Mate",
@@ -2882,6 +2958,24 @@
         "Touch": "Touch",
         "TraitArmorProf": "Armor Proficiencies",
         "TraitWeaponProf": "Weapon Proficiencies",
+        "TurnEvent": {
+            "AddTurnEvent": "Add Turn Event",
+            "DeleteTurnEvent": "Delete Turn Event",
+            "Formula": "Formula",
+            "FormulaTooltip": "A formula which will be rolled when the trigger is met.",
+            "Name": "Name",
+            "NoteContent": "Note Content",
+            "NoteTooltip": "Text which will be sent to chat as a chat message when the trigger is met.",
+            "Trigger": "Trigger",
+            "TriggerTooltip": "When during a combatant's turn to trigger the event.",
+            "TurnEventI": "Turn Event {number}",
+            "Type": "Type",
+            "TypeTooltip": "The type of behaviour to trigger for this turn event.",
+            "Types": {
+                "Note": "Note",
+                "Roll": "Roll"
+            }
+        },
         "UPBs": "UPB's",
         "Units": {
             "Speed": "ft."
