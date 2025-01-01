@@ -269,6 +269,12 @@ export class ItemSheetSFRPG extends ItemSheet {
             }
         }
 
+        // Similar to actor-modifiers.getAllModifiers() 
+        // we need to enforce the type of the modifiers to be SFRPGModifier
+        this.item.system.modifiers = this.item.system.modifiers.map(mod => {
+            return new SFRPGModifier(mod, {parent: this.item});
+        });
+
         data.modifiers = this.item.system.modifiers;
 
         data.hasSpeed = this.item.system.weaponType === "tracking" || (this.item.system.special && this.item.system.special["limited"]);
@@ -880,10 +886,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         const target = $(event.currentTarget);
         const modifierId = target.closest('.item.modifier').data('modifierId');
 
-        const modifiers = this.item.system.modifiers.map(mod => {
-            return new SFRPGModifier(mod, {parent: this.item});
-        });
-
+        const modifiers = this.item.system.modifiers;
         const modifier = modifiers.find(mod => mod._id === modifierId);
 
         return modifier.toggle();
