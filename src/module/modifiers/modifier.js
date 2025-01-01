@@ -194,9 +194,7 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
     }
 
     async toggle(active = null) {
-        const parentMods = this.parent.system.modifiers.map(mod => {
-            return new SFRPGModifier(mod, {parent: this.parent});
-        });
+        const parentMods = this.parent.system.modifiers;
 
         const modInParent = parentMods.find(mod => mod._id === this._id);
         modInParent.updateSource({enabled: active ?? !modInParent.enabled});
