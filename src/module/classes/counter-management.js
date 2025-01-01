@@ -36,42 +36,42 @@ export default class CounterManagement {
                     if (displayedResource.system.combatTracker.visualization) {
                         for (const visualizationEntry of displayedResource.system.combatTracker.visualization) {
                             switch (visualizationEntry.mode) {
-                            case 'eq':
-                                if (resourceValue === visualizationEntry.value) {
-                                    title = visualizationEntry.title || title;
-                                    image = visualizationEntry.image || image;
-                                }
-                                break;
-                            case 'neq':
-                                if (resourceValue !== visualizationEntry.value) {
-                                    title = visualizationEntry.title || title;
-                                    image = visualizationEntry.image || image;
-                                }
-                                break;
-                            case 'gt':
-                                if (resourceValue > visualizationEntry.value) {
-                                    title = visualizationEntry.title || title;
-                                    image = visualizationEntry.image || image;
-                                }
-                                break;
-                            case 'gte':
-                                if (resourceValue >= visualizationEntry.value) {
-                                    title = visualizationEntry.title || title;
-                                    image = visualizationEntry.image || image;
-                                }
-                                break;
-                            case 'lt':
-                                if (resourceValue < visualizationEntry.value) {
-                                    title = visualizationEntry.title || title;
-                                    image = visualizationEntry.image || image;
-                                }
-                                break;
-                            case 'lte':
-                                if (resourceValue <= visualizationEntry.value) {
-                                    title = visualizationEntry.title || title;
-                                    image = visualizationEntry.image || image;
-                                }
-                                break;
+                                case 'eq':
+                                    if (resourceValue === visualizationEntry.value) {
+                                        title = visualizationEntry.title || title;
+                                        image = visualizationEntry.image || image;
+                                    }
+                                    break;
+                                case 'neq':
+                                    if (resourceValue !== visualizationEntry.value) {
+                                        title = visualizationEntry.title || title;
+                                        image = visualizationEntry.image || image;
+                                    }
+                                    break;
+                                case 'gt':
+                                    if (resourceValue > visualizationEntry.value) {
+                                        title = visualizationEntry.title || title;
+                                        image = visualizationEntry.image || image;
+                                    }
+                                    break;
+                                case 'gte':
+                                    if (resourceValue >= visualizationEntry.value) {
+                                        title = visualizationEntry.title || title;
+                                        image = visualizationEntry.image || image;
+                                    }
+                                    break;
+                                case 'lt':
+                                    if (resourceValue < visualizationEntry.value) {
+                                        title = visualizationEntry.title || title;
+                                        image = visualizationEntry.image || image;
+                                    }
+                                    break;
+                                case 'lte':
+                                    if (resourceValue <= visualizationEntry.value) {
+                                        title = visualizationEntry.title || title;
+                                        image = visualizationEntry.image || image;
+                                    }
+                                    break;
                             }
                         }
                     }
