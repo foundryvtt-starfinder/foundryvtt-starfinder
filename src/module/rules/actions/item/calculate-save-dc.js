@@ -28,14 +28,6 @@ export default function(engine) {
                     if (abilityKey) {
                         if (itemData.type === "spell") {
                             dcFormula = `10 + @item.level + @owner.abilities.${abilityKey}.mod`;
-
-                            // Get owner spell save dc modifiers and append to roll
-                            const allModifiers = actor?.getAllModifiers();
-                            if (allModifiers) {
-                                for (const modifier of allModifiers.filter(x => x.enabled && x.effectType === "spell-save-dc")) {
-                                    dcFormula += ` + ${modifier.modifier}[${modifier.name}]`;
-                                }
-                            }
                         } else if (itemData.type === "feat") {
                             dcFormula = `10 + floor(@owner.details.level.value / 2) + @owner.abilities.${abilityKey}.mod`;
                         } else {
@@ -46,6 +38,16 @@ export default function(engine) {
                             dcFormula = `@owner.attributes.baseSpellDC.value + @item.level`;
                         } else {
                             dcFormula = `@owner.attributes.abilityDC.value`;
+                        }
+                    }
+                }
+
+                if (itemData.type === "spell") {
+                    // Get owner spell save dc modifiers and append to roll
+                    const allModifiers = actor?.getAllModifiers();
+                    if (allModifiers) {
+                        for (const modifier of allModifiers.filter(x => x.enabled && x.effectType === "spell-save-dc")) {
+                            dcFormula += ` + ${modifier.modifier}[${modifier.name}]`;
                         }
                     }
                 }
