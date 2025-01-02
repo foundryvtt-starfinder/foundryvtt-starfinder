@@ -76,7 +76,7 @@ export default class CounterManagement {
                         }
                     }
 
-                    additionalHtml += `<a class='combatant-control-counter counter-token flex1' data-combatant-id='${combatant.id}' data-actor-resource-id='${displayedResource.id}' title='${title}'>`;
+                    additionalHtml += `<a class='combatant-control-counter counter-token' data-combatant-id='${combatant.id}' data-actor-resource-id='${displayedResource.id}' title='${title}'>`;
                     additionalHtml += `<img class='counter-token-image' src='${image}' />`;
                     additionalHtml += `<p>${displayValue}</p>`;
                     additionalHtml += "</a>";
@@ -104,9 +104,7 @@ export default class CounterManagement {
                 $combatantHtml.find('.token-initiative').detach()
                     .appendTo($div);
 
-                // $combatantHtml.find('.token-resource').addClass('flexcol');
-
-                $div.after('<div id="counter-tokens" class="flexrow"></div>');
+                $div.after('<div id="counter-tokens" class=""></div>');
                 const $counterTokens = $combatantHtml.find('#counter-tokens');
                 $counterTokens.append(additionalHtml);
 
