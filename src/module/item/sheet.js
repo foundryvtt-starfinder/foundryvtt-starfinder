@@ -269,9 +269,9 @@ export class ItemSheetSFRPG extends ItemSheet {
             }
         }
 
-        // Similar to actor-modifiers.getAllModifiers() 
+        // Similar to actor-modifiers.getAllModifiers()
         // we need to enforce the type of the modifiers to be SFRPGModifier
-        this.item.system.modifiers = this.item.system.modifiers.map(mod => {
+        this.item.system.modifiers = this.item.system.modifiers?.map(mod => {
             return new SFRPGModifier(mod, {parent: this.item});
         });
 
