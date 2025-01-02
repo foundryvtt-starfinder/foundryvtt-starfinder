@@ -104,9 +104,7 @@ export default class CounterManagement {
                 $combatantHtml.find('.token-initiative').detach()
                     .appendTo($div);
 
-                // $combatantHtml.find('.token-resource').addClass('flexcol');
-
-                $div.after('<div id="counter-tokens" class="flexrow"></div>');
+                $div.after('<div id="counter-tokens" class=""></div>');
                 const $counterTokens = $combatantHtml.find('#counter-tokens');
                 $counterTokens.append(additionalHtml);
 
