@@ -87,12 +87,11 @@ export default class CounterManagement {
                     continue;
                 }
 
+                // Rearrange the items in the combat tracker so they appear in the right places
                 const $combatantHtml = html.find(`.combatant[data-combatant-id="${combatant.id}"]`);
                 $combatantHtml.addClass('counter-image-relative');
-                $combatantHtml.addClass('flexcol');
-                $combatantHtml.removeClass('flexrow');
 
-                $combatantHtml.find('.token-image').before('<div id="foundry-elements" class="flexrow"></div>');
+                $combatantHtml.find('.token-image').before('<div id="initiative-wrapper" class="flexcol"><div id="foundry-elements" class="flexrow"></div></div>');
                 const $div = $combatantHtml.find('#foundry-elements');
 
                 $combatantHtml.find('.token-image').detach()
@@ -100,10 +99,17 @@ export default class CounterManagement {
                 $combatantHtml.find('.token-name').detach()
                     .appendTo($div);
                 $combatantHtml.find('.token-resource').detach()
-                    .appendTo($div);
+                    .appendTo($combatantHtml);
                 $combatantHtml.find('.token-initiative').detach()
-                    .appendTo($div);
+                    .appendTo($combatantHtml);
 
+                // Add classes to the token resource and initiative divs so they are vertically centered
+                $combatantHtml.find('.token-resource').addClass('flexcol');
+                $combatantHtml.find('.token-initiative').addClass('flexcol');
+                $combatantHtml.find('.resource').addClass('flex0');
+                $combatantHtml.find('.initiative').addClass('flex0');
+
+                // Add the resource displays
                 $div.after('<div id="counter-tokens" class=""></div>');
                 const $counterTokens = $combatantHtml.find('#counter-tokens');
                 $counterTokens.append(additionalHtml);
