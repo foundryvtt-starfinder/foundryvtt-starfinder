@@ -82,16 +82,11 @@ export default class CounterManagement {
                     additionalHtml += "</a>";
                 }
 
-                // If no additional HTML needs to be added, we can exit early. This can happen when the resources are all set to only show for owner and GM, and local user is neither.
-                if (additionalHtml.length === 0) {
-                    continue;
-                }
-
                 // Rearrange the items in the combat tracker so they appear in the right places
                 const $combatantHtml = html.find(`.combatant[data-combatant-id="${combatant.id}"]`);
                 $combatantHtml.addClass('counter-image-relative');
 
-                $combatantHtml.find('.token-image').before('<div id="initiative-wrapper" class="flexcol"><div id="foundry-elements" class="flexrow"></div></div>');
+                $combatantHtml.find('.token-image').before('<div id="foundry-elements-wrapper" class="flexcol"><div id="foundry-elements" class="flexrow"></div></div>');
                 const $div = $combatantHtml.find('#foundry-elements');
 
                 $combatantHtml.find('.token-image').detach()
@@ -109,26 +104,28 @@ export default class CounterManagement {
                 $combatantHtml.find('.resource').addClass('flex0');
                 $combatantHtml.find('.initiative').addClass('flex0');
 
-                // Add the resource displays
-                $div.after('<div id="counter-tokens" class=""></div>');
-                const $counterTokens = $combatantHtml.find('#counter-tokens');
-                $counterTokens.append(additionalHtml);
+                // Add the resource displays if they're needed
+                if (additionalHtml.length !== 0) {
+                    $div.after('<div id="counter-tokens" class=""></div>');
+                    const $counterTokens = $combatantHtml.find('#counter-tokens');
+                    $counterTokens.append(additionalHtml);
 
-                html.on('click', '.counter-token', function(event) {
-                    event.preventDefault();
+                    html.on('click', '.counter-token', function(event) {
+                        event.preventDefault();
 
-                    const counterToken = event.currentTarget;
-                    const combatantId = counterToken.dataset.combatantId;
+                        const counterToken = event.currentTarget;
+                        const combatantId = counterToken.dataset.combatantId;
 
-                    const combatant = game.combat.combatants.get(combatantId);
-                    if (combatant) {
-                        const actorResourceId = counterToken.dataset.actorResourceId;
-                        const actorResource = combatant.actor.items.get(actorResourceId);
-                        if (actorResource) {
-                            actorResource.sheet.render(true);
+                        const combatant = game.combat.combatants.get(combatantId);
+                        if (combatant) {
+                            const actorResourceId = counterToken.dataset.actorResourceId;
+                            const actorResource = combatant.actor.items.get(actorResourceId);
+                            if (actorResource) {
+                                actorResource.sheet.render(true);
+                            }
                         }
-                    }
-                });
+                    });
+                }
             }
         });
     }
