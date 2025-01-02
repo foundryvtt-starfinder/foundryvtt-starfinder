@@ -69,11 +69,7 @@
                                 <label>{{ localize "SFRPG.Items.Weapon.Type" }}</label>
                                 <div class="form-fields">
                                     <select name="system.weaponType">
-                                        {{#select itemData.weaponType}}
-                                        {{#each config.starshipWeaponTypes as |name type|}}
-                                        <option value="{{type}}">{{name}}</option>
-                                        {{/each}}
-                                        {{/select}}
+                                        {{selectOptions config.starshipWeaponTypes selected=itemData.weaponType}}
                                     </select>
                                 </div>
                             </div>
@@ -83,11 +79,7 @@
                                 <label>{{ localize "SFRPG.Items.ShipWeapon.WeaponClass" }}</label>
                                 <div class="form-fields">
                                     <select name="system.class">
-                                        {{#select itemData.class}}
-                                        {{#each config.starshipWeaponClass as |name type|}}
-                                        <option value="{{type}}">{{name}}</option>
-                                        {{/each}}
-                                        {{/select}}
+                                        {{selectOptions config.starshipWeaponClass selected=itemData.class}}
                                     </select>
                                 </div>
                             </div>
@@ -101,12 +93,8 @@
                                     </label>
                                     <span class="sep"> </span>
                                     <select name="system.mount.arc">
-                                        {{#select itemData.mount.arc}}
-                                        <option value="">{{localize "SFRPG.ItemSheet.StarshipWeapon.Unmounted"}}</option>
-                                        {{#each config.starshipArcs as |arc a|}}
-                                        <option value="{{a}}">{{arc}}</option>
-                                        {{/each}}
-                                        {{/select}}
+                                        {{selectOption "" "SFRPG.ItemSheet.StarshipWeapon.Unmounted" selected=itemData.mount.arc localize=true}}
+                                        {{selectOptions config.starshipArcs selected=itemData.mount.arc}}
                                     </select>
                                 </div>
                             </div>
@@ -153,7 +141,7 @@
 
                     {{!-- Special Materials Template --}}
                     {{> "systems/sfrpg/templates/items/parts/item-special-materials.hbs"}}
-                
+
                 </div>
 
                 {{!-- Attack & Damage Tab --}}
@@ -164,16 +152,12 @@
                         <h3 class="bubble-header">{{localize "SFRPG.Items.Weapon.Attack"}}</h3>
 
                         <div class="bubble-info">
-                            
+
                             {{!-- Action Target --}}
                             <div class="form-group select" {{createTippy title="SFRPG.Items.Action.ActionTarget.Title" subtitle="SFRPG.Items.Action.ActionTarget.Tooltip"}}>
                                 <label>{{ localize "SFRPG.Items.Action.ActionTarget.Title" }}</label>
                                 <select name="system.actionTarget">
-                                    {{#select itemData.actionTarget}}
-                                    {{#each config.actionTargetsStarship as |name type|}}
-                                    <option value="{{type}}">{{name}}</option>
-                                    {{/each}}
-                                    {{/select}}
+                                    {{selectOptions config.actionTargetsStarship selected=itemData.actionTarget}}
                                 </select>
                             </div>
 
@@ -182,11 +166,7 @@
                                 <label>{{ localize "SFRPG.Items.ShipWeapon.Range" }}</label>
                                 <div class="form-fields">
                                     <select name="system.range">
-                                        {{#select itemData.range}}
-                                        {{#each config.starshipWeaponRanges as |range r|}}
-                                        <option value="{{r}}">{{range}}</option>
-                                        {{/each}}
-                                        {{/select}}
+                                        {{selectOptions config.starshipWeaponRanges selected=itemData.range}}
                                     </select>
                                 </div>
                             </div>
@@ -198,7 +178,7 @@
                                     <input type="text" name="system.attackBonus" value="{{itemData.attackBonus}}" />
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
 

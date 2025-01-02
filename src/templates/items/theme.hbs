@@ -45,24 +45,16 @@
                         <label>{{ localize "SFRPG.Items.Theme.AbilityAdjustment" }}</label>
                         <div class="form-fields">
                             <select name="system.abilityMod.ability">
-                                {{#select itemData.abilityMod.ability}}
-                                {{#each config.abilities as |ability key|}}
-                                <option value="{{key}}">{{ability}}</option>
-                                {{/each}}
-                                {{/select}}
+                                {{selectOptions config.abilities selected=itemData.abilityMod.ability}}
                             </select>
-                            <input type="text" name="system.abilityMod.mod" value="{{itemData.abilityMod.mod}}" data-dtype="Number" />                    
+                            <input type="text" name="system.abilityMod.mod" value="{{itemData.abilityMod.mod}}" data-dtype="Number" />
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label>{{ localize "SFRPG.Items.Theme.Skill" }}</label>
                         <select name="system.skill">
-                            {{#select itemData.skill}}
-                            {{#each config.skills as |skill skl|}}
-                            <option value="{{skl}}">{{skill}}</option>
-                            {{/each}}
-                            {{/select}}
+                            {{selectOptions config.skills selected=itemData.skill}}
                         </select>
                     </div>
                 </div>

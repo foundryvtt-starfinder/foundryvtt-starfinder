@@ -426,6 +426,13 @@ SFRPG.skills = {
     "sur": "SFRPG.SkillSur"
 };
 
+SFRPG.controlSkills = {
+    "pil": "SFRPG.SkillPil",
+    "ath": "SFRPG.SkillAth",
+    "sur": "SFRPG.SkillSur",
+    "none": "SFRPG.None"
+};
+
 // Weapon Types
 SFRPG.weaponTypes = {
     "basicM": "SFRPG.WeaponTypesBasicMelee",
@@ -1959,6 +1966,12 @@ SFRPG.droneFeatsPerLevel = [1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7
 SFRPG.droneModsPerLevel = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10];
 SFRPG.droneAbilityScoreIncreaseLevels = [4, 7, 10, 13, 16, 19];
 
+SFRPG.droneArmTypes = {
+    "general": "SFRPG.DroneSheet.Mod.Details.Arms.ArmType.General",
+    "melee": "SFRPG.DroneSheet.Mod.Details.Arms.ArmType.Melee",
+    "ranged": "SFRPG.DroneSheet.Mod.Details.Arms.ArmType.Ranged"
+};
+
 SFRPG.capacityUsagePer = {
     "action": "SFRPG.Capacity.UsagePer.Action",
     "shot": "SFRPG.Capacity.UsagePer.Shot",
@@ -2118,6 +2131,19 @@ SFRPG.combatTypes = [
     "vehicleChase"
 ];
 
+SFRPG.phaseIcons = {
+    "SFRPG.Combat.Normal.Phases.1.Name": "systems/sfrpg/icons/cards/light-sabers.svg", // Combat
+    "SFRPG.Combat.Starship.Phases.1.Name": "systems/sfrpg/icons/cards/cycle.svg", // Switch Roles
+    "SFRPG.Combat.Starship.Phases.2.Name": "systems/sfrpg/icons/cards/tinker.svg", // Engineering
+    "SFRPG.Combat.Starship.Phases.3.Name": "systems/sfrpg/icons/cards/air-force.svg", // Piloting Check
+    "SFRPG.Combat.Starship.Phases.4.Name": "systems/sfrpg/icons/cards/ship-wheel.svg", // Helm
+    "SFRPG.Combat.Starship.Phases.5.Name": "systems/sfrpg/icons/cards/gunshot.svg", // Gunnery
+    "SFRPG.Combat.Starship.Phases.6.Name": "systems/sfrpg/icons/cards/bullet-impacts.svg", // Damage
+    "SFRPG.Combat.VehicleChase.Phases.1.Name": "systems/sfrpg/icons/cards/air-force.svg", // Pilot Actions
+    "SFRPG.Combat.VehicleChase.Phases.2.Name": "systems/sfrpg/icons/cards/police-car.svg", // Chase Progress
+    "SFRPG.Combat.VehicleChase.Phases.3.Name": "systems/sfrpg/icons/cards/light-sabers.svg" // Combat
+};
+
 /**
  * The supported weapon types for weapon accessories
  */
@@ -2254,4 +2280,74 @@ SFRPG.enricherTypes = {
     "Icon": IconEnricher,
     "Check": CheckEnricher,
     "Template": TemplateEnricher
+};
+
+SFRPG.foundryDefaultIcons = {
+    "actor": "icons/svg/mystery-man.svg",
+    "item": "icons/svg/item-bag.svg"
+};
+
+SFRPG.defaultActorIcons = {
+    "character": "astronaut-helmet.svg",
+    "drone": "delivery-drone.svg",
+    "hazard": "mantrap.svg",
+    "npc": "alien-stare.svg",
+    "npc2": "alien-stare.svg",
+    "starship": "starfighter.svg",
+    "vehicle": "bus.svg"
+};
+
+SFRPG.defaultItemIcons = {
+    "archetypes": "toggles.svg",
+    "class": "id-card.svg",
+    "race": "dna2.svg",
+    "theme": "plane-pilot.svg",
+
+    "actorResource": "pie-chart.svg",
+    "feat": "achievement.svg",
+    "spell": "spell-book.svg",
+    "effect": "stopwatch.svg",
+
+    "asi": "upgrade.svg",
+
+    "chassis": "robot-golem.svg",
+    "mod": "auto-repair.svg",
+
+    "starshipAblativeArmor": "metal-plate.svg",
+    "starshipAction": "crosshair.svg",
+    "starshipArmor": "metal-scales.svg",
+    "starshipComputer": "server-rack.svg",
+    "starshipCrewQuarter": "bunk-beds.svg",
+    "starshipDefensiveCountermeasure": "bubble-field.svg",
+    "starshipDriftEngine": "star-gate.svg",
+    "starshipExpansionBay": "cardboard-box-closed.svg",
+    "starshipFortifiedHull": "steel-door.svg",
+    "starshipFrame": "hexagonal-nut.svg",
+    "starshipOtherSystem": "gears.svg",
+    "starshipPowerCore": "power-generator.svg",
+    "starshipReinforcedBulkhead": "metal-scales-plus.svg",
+    "starshipSecuritySystem": "cctv-camera.svg",
+    "starshipSensor": "radar-dish.svg",
+    "starshipShield": "forward-field.svg",
+    "starshipSpecialAbility": "cpu.svg",
+    "starshipThruster": "rocket-thruster.svg",
+    "starshipWeapon": "strafe.svg",
+
+    "vehicleAttack": "reticule.svg",
+    "vehicleSystem": "gear-stick.svg",
+
+    "ammunition": "bullets.svg",
+    "augmentation": "vr-headset.svg",
+    "consumable": "beer-bottle.svg",
+    "container": "briefcase.svg",
+    "equipment": "kevlar-vest.svg",
+    "fusion": "lightning-spanner.svg",
+    "goods": "hand-truck.svg",
+    "hybrid": "energise.svg",
+    "magic": "magick-trick.svg",
+    "shield": "energy-shield.svg",
+    "technological": "processor.svg",
+    "upgrade": "armor-upgrade.svg",
+    "weapon": "bolter-gun.svg",
+    "weaponAccessory": "gun-stock.svg"
 };

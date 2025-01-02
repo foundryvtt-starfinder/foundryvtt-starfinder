@@ -2318,6 +2318,14 @@
                 "Hint": "チャットログのアイテムカードの説明を自動的に折りたたみます。",
                 "Name": "チャット上のアイテムを最小化"
             },
+            "AutoRollCritEffect": {
+                "Hint": "When applying damage to a starship from a chat card, if the damage crossses a Critical Threshold, the Critical Damage Effects (CRB pg. 320) table will automatically be rolled.",
+                "Name": "Automatically roll starship critical damage effects"
+            },
+            "HideHostileStarshipCrit": {
+                "Hint": "When posting notifications about starship criticals or thresholds, only post to GM if the ship is a Hostile Token.",
+                "Name": "Hide Hostile Starship Critical Message"
+            },            
             "CombatCards": {
                 "NormalHint": "Change which combat chat cards should be displayed during normal combat.",
                 "NormalName": "Normal combat",
@@ -2788,6 +2796,8 @@
             "Damage": {
                 "CrossedCriticalThreshold": "{name} crossed {crossedThresholds} critical thresholds!",
                 "Message": "Damage to a starship always originates from a specific direction, please select the quadrant the incoming damage should be applied to.",
+                "Nat20": "Critical damage! {name} takes a critical damage effect.",
+                "Nat20WithThreshold": "Critical damage! {name} takes an additional critical damage effect.",
                 "Quadrant": {
                     "Aft": "Aft",
                     "Forward": "Forward",
@@ -2898,6 +2908,10 @@
                 "QuadrantLimit": "Quadrant limit",
                 "ShieldHeader": "Shields",
                 "TargetLock": "Target Lock"
+            },
+            "RandomQuadrantMacro": {
+                "NoToken": "Select the recipient of the critical effect before proceeding.",
+                "NotStarship": "The selected token must be a starship."
             },
             "Role": {
                 "Captain": "Captain",
