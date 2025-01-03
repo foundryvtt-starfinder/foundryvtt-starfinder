@@ -184,21 +184,20 @@ export default function(engine) {
             /** Get modifying armour. */
             const ablativeArmorItems = fact.items.filter(x => x.type === "starshipAblativeArmor");
             const armorItems = fact.items.filter(x => x.type === "starshipArmor");
-            let armorTurnPenalty = 0;
+            const armorTurnPenalty = armorItems[0]?.system?.turnDistancePenalty ?? 0;
+            const ablativeArmorTurnPenalty = ablativeArmorItems[0]?.system?.turnDistancePenalty ?? 0;
             const turnManeuverability = maneuverabilityMap[maneuverability].turn;
+            data.attributes.turn.tooltip.push(`${maneuverability} maneuverability: ${turnManeuverability.signedString()}`);
 
-            if (armorItems?.length > 0) {
-                data.attributes.turn.tooltip.push(`${armorItems[0].name}: ${armorItems[0]?.system?.turnDistancePenalty.signedString()}`);
-                armorTurnPenalty += armorItems[0]?.system?.turnDistancePenalty;
+            if (armorTurnPenalty !== 0) {
+                data.attributes.turn.tooltip.push(`${armorItems[0].name}: ${armorTurnPenalty.signedString()}`);
             }
 
-            if (ablativeArmorItems?.length > 0) {
-                data.attributes.turn.tooltip.push(`${ablativeArmorItems[0].name}: ${ablativeArmorItems[0]?.system?.turnDistancePenalty.signedString()}`);
-                armorTurnPenalty += ablativeArmorItems[0]?.system?.turnDistancePenalty;
+            if (ablativeArmorTurnPenalty !== 0) {
+                data.attributes.turn.tooltip.push(`${ablativeArmorItems[0].name}: ${ablativeArmorTurnPenalty.signedString()}`);
             }
 
-            data.attributes.turn.value = turnManeuverability + armorTurnPenalty;
-            data.attributes.turn.tooltip.push(`${data.details.frame}: ${turnManeuverability.signedString()}`);
+            data.attributes.turn.value = Math.max(0, turnManeuverability + armorTurnPenalty + ablativeArmorTurnPenalty);
         }
 
         /** Ensure pilotingBonus exists. */
