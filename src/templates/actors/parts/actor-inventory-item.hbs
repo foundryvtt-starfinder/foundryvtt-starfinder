@@ -37,6 +37,7 @@
             </div>
             {{/if}}
 
+            {{log item}}
             <div class="item-detail item-uses">
                 {{#if item.config.hasCapacity}}
                     {{item.config.capacityCurrent}} / {{item.config.capacityMaximum}}
@@ -46,7 +47,7 @@
                     {{/if}}
                 {{else if children}}
                     {{#if (eq item.type "container")}}
-                        {{formatBulk item.itemBulk.contentBulk}} / {{getTotalStorageCapacity item}} {{localize "SFRPG.ActorSheet.Inventory.Container.CapacityLabelBulk"}}
+                        {{formatBulk item.itemBulk.calculatedContentBulk}} / {{getTotalStorageCapacity item}} {{localize "SFRPG.ActorSheet.Inventory.Container.CapacityLabelBulk"}}
                     {{else}}
                         {{children.length}} / {{getTotalStorageCapacity item}} {{localize "SFRPG.ActorSheet.Inventory.Container.CapacityLabelItems"}}
                     {{/if}}
