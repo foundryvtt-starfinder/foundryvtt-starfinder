@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.26.1"
+    "systemVersion": "0.27.0"
   },
   "img": "systems/sfrpg/icons/spells/hateful_visage.webp",
   "system": {
@@ -14,6 +14,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "action",
@@ -22,11 +23,13 @@
     },
     "allowedClasses": {
       "myst": false,
+      "precog": false,
       "tech": false,
       "wysh": true
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "none",
       "value": null
@@ -47,7 +50,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>You pull alternate forms from horrifying realities and drape them upon the target, causing the target to exhibit almost any type of body horror imaginable. Your allies can tell this effect results from your layering of alternate realities onto this one and are unaffected. Against others, the target gains a +10 insight bonus to Intimidate checks. If the target successfully uses Intimidate to demoralize a foe, the foe is @UUID[Compendium.sfrpg.conditions.DtwiUWi8dpzkq4tM]{Frightened} instead of @UUID[Compendium.sfrpg.conditions.nywSVEeDvp1bk7L3]{Shaken}. This bonus and change in condition are fear and mind-affecting effects.</p>"
+      "value": "<p>You pull alternate forms from horrifying realities and drape them upon the target, causing the target to exhibit almost any type of body horror imaginable. Your allies can tell this effect results from your layering of alternate realities onto this one and are unaffected. Against others, the target gains a +10 insight bonus to Intimidate checks. If the target successfully uses Intimidate to demoralize a foe, the foe is @UUID[Compendium.sfrpg.conditions.Item.DtwiUWi8dpzkq4tM]{Frightened} instead of @UUID[Compendium.sfrpg.conditions.Item.nywSVEeDvp1bk7L3]{Shaken}. This bonus and change in condition are fear and mind-affecting effects.</p>"
     },
     "descriptors": [],
     "dismissible": false,
@@ -70,8 +73,12 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
-      "units": "medium"
+      "additional": "",
+      "per": "",
+      "units": "medium",
+      "value": null
     },
     "rollNotes": "",
     "save": {

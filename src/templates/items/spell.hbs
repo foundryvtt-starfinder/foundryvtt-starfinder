@@ -14,7 +14,7 @@
                     <span data-tooltip="Item Status" class="item-status">{{itemStatus}}</span>
                 </div>
             </div>
-    
+
             {{!-- Item Summary --}}
             <ul class="summary flexrow">
                 {{#if category.enabled}}
@@ -26,7 +26,7 @@
                     <input type="text" name="system.source" value="{{itemData.source}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Source" }}"/>
                 </li>
             </ul>
-    
+
             {{!-- Header Attributes --}}
             <ul class="summary flexrow">
                 <li>
@@ -88,11 +88,7 @@
                                 <label>{{ localize "SFRPG.Items.Spell.Level" }}</label>
                                 <div class="form-fields">
                                     <select name="system.level" data-dtype="Number">
-                                        {{#select itemData.level}}
-                                        {{#each config.spellLevels as |name lvl|}}
-                                        <option value="{{lvl}}">{{localize name}}</option>
-                                        {{/each}}
-                                        {{/select}}
+                                        {{selectOptions config.spellLevels selected=itemData.level localize=true}}
                                     </select>
                                     <span>&nbsp;</span>
                                     <label class="checkbox">
@@ -106,11 +102,7 @@
                                 <label>{{ localize "SFRPG.Items.Spell.School" }}</label>
                                 <div class="form-fields">
                                     <select name="system.school">
-                                        {{#select itemData.school}}
-                                        {{#each config.spellSchools as |name sch|}}
-                                        <option value="{{sch}}">{{localize name}}</option>
-                                        {{/each}}
-                                        {{/select}}
+                                        {{selectOptions config.spellSchools selected=itemData.school localize=true}}
                                     </select>
                                 </div>
                             </div>
@@ -140,12 +132,8 @@
                                     </label>
                                     <span>&nbsp;</span>
                                     <select name="system.preparation.mode">
-                                        {{#select itemData.preparation.mode}}
-                                        <option value=""></option>
-                                        {{#each config.spellPreparationModes as |name key|}}
-                                        <option value="{{key}}">{{name}}</option>
-                                        {{/each}}
-                                        {{/select}}
+                                        {{selectOption "" "" selected=itemData.preparation.mode}}
+                                        {{selectOptions config.spellPreparationModes selected=itemData.preparation.mode}}
                                     </select>
                                 </div>
                             </div>
@@ -167,13 +155,13 @@
                                     {{/if}}
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
 
                     {{!-- Descriptors Selector --}}
                     {{> "systems/sfrpg/templates/items/parts/item-descriptors.hbs"}}
-                
+
                 </div>
 
                 {{!-- Usage Tab --}}
@@ -184,7 +172,7 @@
 
                     {{!-- Item Action Template --}}
                     {{> "systems/sfrpg/templates/items/parts/item-action.hbs" message="SFRPG.Items.Spell.Effects"}}
-                    
+
                 </div>
 
             </section>

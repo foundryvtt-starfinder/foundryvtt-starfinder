@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.26.1"
+    "systemVersion": "0.27.0"
   },
   "img": "systems/sfrpg/icons/conditions/helpless.webp",
   "system": {
@@ -16,9 +16,15 @@
     "activeDuration": {
       "activationTime": 0,
       "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "parent"
+      },
       "unit": "permanent",
       "value": 0
     },
+    "context": {},
     "critical": {
       "effect": "",
       "parts": []
@@ -28,13 +34,17 @@
     },
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.rules.0yJjfyvWg5pDLcVR]{Conditions}</p>\n<hr />\n<p>You are bound, sleeping, @UUID[Compendium.sfrpg.conditions.lf8pbezocjYIvR9y]{Unconscious}, or otherwise completely at an opponent’s mercy.</p>\n<p>You are treated as having a Dexterity of 0 (making your Dexterity modifier –5), and melee attacks against you gain an additional +4 bonus (equivalent to attacking a @UUID[Compendium.sfrpg.conditions.XeRGqHVtcZ7vsgJ0]{Prone} target).</p>\n<p>Ranged attacks get no special bonus against you.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.rules.Item.0yJjfyvWg5pDLcVR]{Conditions}</p>\n<hr />\n<p>You are bound, sleeping, @UUID[Compendium.sfrpg.conditions.Item.lf8pbezocjYIvR9y]{Unconscious}, or otherwise completely at an opponent’s mercy.</p>\n<p>You are treated as having a Dexterity of 0 (making your Dexterity modifier –5), and melee attacks against you gain an additional +4 bonus (equivalent to attacking a @UUID[Compendium.sfrpg.conditions.Item.XeRGqHVtcZ7vsgJ0]{Prone} target).</p>\n<p>Ranged attacks get no special bonus against you.</p>"
     },
     "enabled": true,
     "modifiers": [],
     "requirements": "Condition",
+    "showOnToken": true,
     "source": "CRB.276",
-    "sourceActorId": null
+    "sourceActorId": null,
+    "turnEvents": []
   }
 }
