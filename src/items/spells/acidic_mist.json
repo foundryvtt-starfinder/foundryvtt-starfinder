@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.26.1"
+    "systemVersion": "0.27.0"
   },
   "img": "systems/sfrpg/icons/spells/caustic_conversion.webp",
   "system": {
@@ -14,6 +14,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "action",
@@ -22,11 +23,13 @@
     },
     "allowedClasses": {
       "myst": true,
+      "precog": false,
       "tech": false,
       "wysh": true
     },
     "area": {
       "effect": "spread",
+      "shapable": false,
       "shape": "sphere",
       "units": "ft",
       "value": 10
@@ -49,8 +52,11 @@
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>You call forth the corrosive atmosphere of a gas giant to damage your opponents. A creature that starts its turn in the area takes 2d6 acid damage. The corrosive mist does not obscure vision.</p>"
     },
@@ -61,6 +67,8 @@
       "value": "@details.cl.value"
     },
     "formula": "",
+    "isActive": null,
+    "isVariableLevel": false,
     "level": 1,
     "materials": {
       "consumed": false,
@@ -73,9 +81,14 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
-      "units": "close"
+      "additional": "",
+      "per": "",
+      "units": "close",
+      "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "fort",
       "dc": "",

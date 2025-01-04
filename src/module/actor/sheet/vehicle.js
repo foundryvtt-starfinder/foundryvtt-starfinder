@@ -512,6 +512,8 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             content: html
         };
 
+        const rollMode = game.settings.get("core", "rollMode");
+        ChatMessage.applyRollMode(chatData, rollMode);
         await ChatMessage.create(chatData, { displaySheet: false });
     }
 
@@ -555,6 +557,8 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             content: html
         };
 
+        const rollMode = game.settings.get("core", "rollMode");
+        ChatMessage.applyRollMode(chatData, rollMode);
         await ChatMessage.create(chatData, { displaySheet: false });
     }
 }

@@ -211,9 +211,9 @@ export class DocumentBrowserSFRPG extends Application {
         }
 
         const data = {};
-        data.defaultSortMethod = this.getDefaultSortMethod();
         data.tags = this.getTags();
         data.items = this.items;
+        data.sortingMethod = this.getDefaultSortMethod();
         data.sortingMethods = this.sortingMethods;
         data.filters = this.filters;
         return data;
@@ -227,7 +227,6 @@ export class DocumentBrowserSFRPG extends Application {
         const sortingMethods = {
             name: {
                 name: game.i18n.format("SFRPG.Browsers.ItemBrowser.BrowserSortMethodName"),
-                selected: true,
                 method: this._sortByName
             }
         };

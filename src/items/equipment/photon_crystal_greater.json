@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.26.1"
+    "systemVersion": "0.27.0"
   },
   "img": "icons/commodities/gems/gem-rough-rectangular-red.webp",
   "system": {
@@ -24,6 +24,7 @@
     "ammunitionType": "",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": 0
@@ -76,40 +77,8 @@
       "parts": []
     },
     "damage": {
-      "parts": [
-        {
-          "name": "Base damage",
-          "formula": "4d6",
-          "group": null,
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
-            "cold": false,
-            "electricity": false,
-            "fire": true,
-            "healing": false,
-            "piercing": false,
-            "slashing": false,
-            "sonic": false
-          }
-        },
-        {
-          "name": "Burn",
-          "formula": "3d6",
-          "group": null,
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
-            "cold": false,
-            "electricity": false,
-            "fire": true,
-            "healing": false,
-            "piercing": false,
-            "slashing": false,
-            "sonic": false
-          }
-        }
-      ]
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -117,7 +86,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>Photon crystals add compressed photonic energy to a weapon strike, adding fire damage and the potential to @UUID[Compendium.sfrpg.conditions.8LdyXZl9PeXXFE8O]{Burn} the target.</p>"
+      "value": "<p>Photon crystals add compressed photonic energy to a weapon strike, adding fire damage and the potential to @UUID[Compendium.sfrpg.conditions.Item.8LdyXZl9PeXXFE8O]{Burn} the target.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -129,8 +98,39 @@
     "formula": "",
     "identified": true,
     "isActive": null,
+    "isEquipment": true,
     "level": 17,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "fb7b9f52-132f-4126-9d35-490da96a33c9",
+        "name": "Photon crystal, greater",
+        "type": "untyped",
+        "condition": "",
+        "damage": {
+          "damageGroup": null,
+          "damageTypes": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        "effectType": "all-damage",
+        "enabled": true,
+        "limitTo": "container",
+        "max": 24,
+        "modifier": "4d6",
+        "modifierType": "damageSection",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "price": 246200,
     "proficient": true,
     "properties": {
@@ -171,6 +171,7 @@
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
       "hybrid": false,
       "hydrodynamic": false,
@@ -241,6 +242,10 @@
       "type": "",
       "dc": "",
       "descriptor": "negate"
+    },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
     },
     "source": "CRB pg. 180",
     "special": "",

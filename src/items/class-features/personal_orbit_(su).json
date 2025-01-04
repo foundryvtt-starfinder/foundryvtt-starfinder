@@ -5,17 +5,17 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.26.1"
+    "systemVersion": "0.27.0"
   },
   "img": "systems/sfrpg/images/cup/gameplay/graviton.webp",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "",
+    "actionType": "save",
     "activation": {
       "type": "move",
       "condition": "",
@@ -23,9 +23,10 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -42,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p>&nbsp;@Icon[type:graviton] Graviton Revelation</p>\n<p>As a move action, you cause your body to act as a carefully controlled gravity well. Unattended objects of bulk L or less within 5 feet of you (as well as up to 3 items of bulk L or less stowed on your body) drift toward you and begin gently orbiting your body. The total bulk of objects orbiting you in this way can’t exceed half your solarian level, and the objects don’t provide you cover, concealment, or similar defensive advantages. You can retrieve any single item currently orbiting you as a swift action. Allies can pick up items orbiting you as if they were unattended, whereas other creatures must succeed at a Reflex save when attempting to grab one of the items. On a failed save, the action fails and is wasted. When you’re fully attuned, you can give one of your orbiting items to an adjacent creature as a swift action.</p>\n<p>This effect lasts for a number of rounds equal to your Charisma modifier or until you leave graviton mode, whichever occurs first. As a move action, you can sustain the effect, resetting its duration to its maximum. When the effect ends, all orbiting objects immediately drop to the ground in your space.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p>&nbsp;@Icon[type:graviton] Graviton Revelation</p>\n<p>As a move action, you cause your body to act as a carefully controlled gravity well. Unattended objects of bulk L or less within 5 feet of you (as well as up to 3 items of bulk L or less stowed on your body) drift toward you and begin gently orbiting your body. The total bulk of objects orbiting you in this way can’t exceed half your solarian level, and the objects don’t provide you cover, concealment, or similar defensive advantages. You can retrieve any single item currently orbiting you as a swift action. Allies can pick up items orbiting you as if they were unattended, whereas other creatures must succeed at a Reflex save when attempting to grab one of the items. On a failed save, the action fails and is wasted. When you’re fully attuned, you can give one of your orbiting items to an adjacent creature as a swift action.</p>\n<p>This effect lasts for a number of rounds equal to your Charisma modifier or until you leave graviton mode, whichever occurs first. As a move action, you can sustain the effect, resetting its duration to its maximum. When the effect ends, all orbiting objects immediately drop to the ground in your space.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -84,15 +85,17 @@
     },
     "details": {
       "category": "classFeature",
+      "combat": false,
       "specialAbilityType": "su"
     },
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
     "formula": "",
     "isActive": false,
     "modifiers": [],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
@@ -103,12 +106,16 @@
       "charged": false,
       "value": null
     },
-    "requirements": "2nd Level",
+    "requirements": "2nd Level Solarian",
     "rollNotes": "",
     "save": {
+      "type": "reflex",
+      "dc": "10+floor(@classes.solarian.levels/2) + @abilities.cha.mod",
+      "descriptor": "negate"
+    },
+    "skillCheck": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": ""
     },
     "source": "DC pg. 45",
     "target": {
@@ -116,7 +123,7 @@
       "value": ""
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     }

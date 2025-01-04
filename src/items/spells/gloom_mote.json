@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.26.1"
+    "systemVersion": "0.27.0"
   },
   "img": "systems/sfrpg/icons/spells/gloom_mote.webp",
   "system": {
@@ -14,6 +14,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "action",
@@ -22,11 +23,13 @@
     },
     "allowedClasses": {
       "myst": true,
+      "precog": false,
       "tech": true,
       "wysh": false
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": null,
       "value": null
@@ -41,8 +44,11 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>You draw forth the energy of the Shadow Plane and form it into a floating mote of gloom. The mote creates dim light in a 5-foot radius. It also lowers the light level within 20 feet of it by one step, down to dim. As a move action, you can move the mote up to 60 feet in any direction. The mote winks out if the distance between you and it exceeds the spell’s range. You can have only one&nbsp;gloom mote&nbsp;spell active at a time. If you cast this spell while another&nbsp;gloom mote&nbsp;of yours is still in effect, the previous casting is dispelled.</p>"
     },
@@ -53,6 +59,8 @@
       "value": "@details.cl.value"
     },
     "formula": "",
+    "isActive": null,
+    "isVariableLevel": false,
     "level": 1,
     "materials": {
       "consumed": false,
@@ -65,12 +73,14 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
       "additional": "10",
       "per": "level",
       "units": "ft",
       "value": 100
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,

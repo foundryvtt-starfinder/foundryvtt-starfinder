@@ -2,6 +2,8 @@
 
 {{#unless hideProperties}}
     <div class="item-properties">
+
+        {{!-- Physical Item Properties --}}
         {{#if isPhysical}}
         <div class="form-group">
             <label>{{ localize "SFRPG.Items.Description.Quantity" }}</label>
@@ -24,6 +26,7 @@
         </div>
         {{/if}}
 
+        {{!-- Item Level --}}
         {{#if hasLevel}}
         <div class="form-group">
             <label>{{ localize "SFRPG.Items.Description.Level" }}</label>
@@ -31,6 +34,7 @@
         </div>
         {{/if}}
 
+        {{!-- Hands --}}
         {{#if hasHands}}
         <div class="form-group">
             <label>{{ localize "SFRPG.Items.Description.Hands" }}</label>
@@ -38,11 +42,13 @@
         </div>
         {{/if}}
 
+        {{!-- Item Properties --}}
         <ol class="properties-list">
             {{#each itemProperties}}
             <li {{#if this.tooltip}} data-tooltip="{{ this.tooltip }}"{{/if}}>{{#if this.title}}<strong>{{this.title}}</strong><hr>{{/if}}{{ this.name }}</li>
             {{/each}}
         </ol>
+
     </div>
 {{/unless}}
 

@@ -216,28 +216,8 @@ export default class RollDialog extends Dialog {
         const modifierIndex = $(event.currentTarget).data('modifierIndex');
         const modifier = this.availableModifiers[modifierIndex];
 
-        // Non-SFRPGModifier objects
         modifier.enabled = !modifier.enabled;
         this.render(false);
-
-        // SFRPGModifier instances
-        if (modifier._id) {
-            // Toggle modifier object itself
-            modifier.updateSource({"enabled": modifier.enabled});
-
-            const owner = modifier.primaryOwner;
-            if (!owner) return;
-
-            // Find the modifier in the owner and set to the updated object
-            const ownerModifiers = owner.system.modifiers;
-            const index = ownerModifiers.findIndex(x => x._id === modifier._id);
-            if (!index < 0) return;  // Will be -1 if using a global attack modifier
-
-            ownerModifiers[index] = modifier;
-            await owner.update({ "system.modifiers": ownerModifiers });
-            this.render(false);
-
-        }
     }
 
     async _onSelectorChanged(event) {

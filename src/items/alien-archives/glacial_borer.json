@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.26.1"
+    "systemVersion": "0.27.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
       "_id": "Oy4DvH4elQHwGVBg",
@@ -16,9 +16,9 @@
       "_stats": {
         "coreVersion": 12,
         "systemId": "sfrpg",
-        "systemVersion": "0.26.1"
+        "systemVersion": "0.27.0"
       },
-      "img": "icons/svg/item-bag.svg",
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
@@ -34,6 +34,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -56,6 +57,11 @@
           "value": "<p>As a move action, a glacier borer can wreathe its body in flames from its horns until the start of its next turn. During this time, the glacial borer gains immunity to fire, but it can’t use its flame jet ability.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": ""
@@ -63,6 +69,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -99,9 +106,9 @@
       "_stats": {
         "coreVersion": 12,
         "systemId": "sfrpg",
-        "systemVersion": "0.26.1"
+        "systemVersion": "0.27.0"
       },
-      "img": "icons/svg/item-bag.svg",
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -115,6 +122,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -195,6 +203,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -241,9 +250,9 @@
       "_stats": {
         "coreVersion": 12,
         "systemId": "sfrpg",
-        "systemVersion": "0.26.1"
+        "systemVersion": "0.27.0"
       },
-      "img": "icons/svg/item-bag.svg",
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -260,6 +269,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "burst",
+          "shapable": false,
           "shape": "cone",
           "units": "ft",
           "value": 20
@@ -340,6 +350,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -471,6 +482,7 @@
     "name": "Glacial Borer",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -482,6 +494,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -502,11 +515,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -520,13 +551,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "src": "systems/sfrpg/icons/default/alien-stare.svg",
+      "tint": "#ffffff"
     },
     "width": 1
   },
@@ -725,7 +760,7 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>This quadruped hails from the Darkside of the tidally locked world of @UUID[Compendium.sfrpg.setting.f24qKgU5Wh5LLJyh]{Verces}. A typical glacial borer is about 5-1/2 feet long and weighs around 225 pounds. The creature is covered in white or gray fur and has two beady eyes spaced far apart on its face; its most striking feature is a set of fiery tusks, glowing with heat. Though as strong as steel, each tusk is hollow and has numerous holes along its length that are the endpoints of ducts leading from a fleshy sac within the beast’s forehead. This bladder contains naturally produced chemicals that, when mixed together, can produce intense heat.</p>\n<p>Glacial borers get their name from how they use their heated horns to burrow through ice and snow, leaving behind smooth tunnels. The beasts gain sustenance from slurping up the melted material, which usually contains frozen strands of plant life and nutritional microscopic organisms; the borers tend to leave behind whatever doesn’t liquefy. Enterprising individuals explore these passageways to search for valuable detritus, but must be careful not to anger the glacial borers living there.</p>\n<p>For centuries, glacial borers were limited to the Darkside of @UUID[Compendium.sfrpg.setting.f24qKgU5Wh5LLJyh]{Verces} and mostly spoken of in rumors. In recent years, though, its existence was officially confirmed by the Xenowardens, and enterprising Vercites have taken to domesticating glacial borers and exporting them to other worlds as organic mining machines. Unfortunately, while the creatures remain largely docile in their natively cold climate, warmer conditions cause the creatures to become extremely ornery and volatile. Its powerful flames and horns have caused massive damage to space stations and planetary habitats in which the temperature wasn’t kept below freezing. Nevertheless, there is a burgeoning industry on @UUID[Compendium.sfrpg.setting.f24qKgU5Wh5LLJyh]{Verces} for capturing, taming, and breeding glacial borers. Many of these small companies have agreed to be regulated by the Xenowardens to maintain ethical and humane practices for securing the beasts, but more conservative ecological preservation groups are concerned that displacing too many glacial borers could lead to an imbalance in the Darkside’s ecosystem.</p>",
+        "value": "<h2>Description</h2>\n<p>This quadruped hails from the Darkside of the tidally locked world of @UUID[Compendium.sfrpg.setting.Item.f24qKgU5Wh5LLJyh]{Verces}. A typical glacial borer is about 5-1/2 feet long and weighs around 225 pounds. The creature is covered in white or gray fur and has two beady eyes spaced far apart on its face; its most striking feature is a set of fiery tusks, glowing with heat. Though as strong as steel, each tusk is hollow and has numerous holes along its length that are the endpoints of ducts leading from a fleshy sac within the beast’s forehead. This bladder contains naturally produced chemicals that, when mixed together, can produce intense heat.</p>\n<p>Glacial borers get their name from how they use their heated horns to burrow through ice and snow, leaving behind smooth tunnels. The beasts gain sustenance from slurping up the melted material, which usually contains frozen strands of plant life and nutritional microscopic organisms; the borers tend to leave behind whatever doesn’t liquefy. Enterprising individuals explore these passageways to search for valuable detritus, but must be careful not to anger the glacial borers living there.</p>\n<p>For centuries, glacial borers were limited to the Darkside of @UUID[Compendium.sfrpg.setting.Item.f24qKgU5Wh5LLJyh]{Verces} and mostly spoken of in rumors. In recent years, though, its existence was officially confirmed by the Xenowardens, and enterprising Vercites have taken to domesticating glacial borers and exporting them to other worlds as organic mining machines. Unfortunately, while the creatures remain largely docile in their natively cold climate, warmer conditions cause the creatures to become extremely ornery and volatile. Its powerful flames and horns have caused massive damage to space stations and planetary habitats in which the temperature wasn’t kept below freezing. Nevertheless, there is a burgeoning industry on @UUID[Compendium.sfrpg.setting.Item.f24qKgU5Wh5LLJyh]{Verces} for capturing, taming, and breeding glacial borers. Many of these small companies have agreed to be regulated by the Xenowardens to maintain ethical and humane practices for securing the beasts, but more conservative ecological preservation groups are concerned that displacing too many glacial borers could lead to an imbalance in the Darkside’s ecosystem.</p>",
         "weight": ""
       },
       "class": "",

@@ -21,6 +21,14 @@ export const registerSystemSettings = function() {
         type: Boolean
     });
 
+    game.settings.register("sfrpg", "decimalSpeed", {
+        name: "SFRPG.Settings.DecimalSpeed.Name",
+        hint: "SFRPG.Settings.DecimalSpeed.Hint",
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean
+    });
     game.settings.register("sfrpg", "autoCollapseItemCards", {
         name: "SFRPG.Settings.AutoCollapseCard.Name",
         hint: "SFRPG.Settings.AutoCollapseCard.Hint",
@@ -88,6 +96,24 @@ export const registerSystemSettings = function() {
         onChange: () => {
             ItemSFRPG._onScalingCantripsSettingChanges();
         }
+    });
+
+    game.settings.register("sfrpg", "autoRollCritEffect", {
+        name: "SFRPG.Settings.AutoRollCritEffect.Name",
+        hint: "SFRPG.Settings.AutoRollCritEffect.Hint",
+        scope: "world",
+        config: true,
+        default: true,
+        type: Boolean
+    });
+
+    game.settings.register("sfrpg", "hideHostileStarshipCrit", {
+        name: "SFRPG.Settings.HideHostileStarshipCrit.Name",
+        hint: "SFRPG.Settings.HideHostileStarshipCrit.Hint",
+        scope: "world",
+        config: true,
+        default: true,
+        type: Boolean
     });
 
     game.settings.register("sfrpg", "difficultyDisplay", {

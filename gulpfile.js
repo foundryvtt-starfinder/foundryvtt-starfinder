@@ -86,8 +86,8 @@ async function copyFiles() {
         'src/packs/**/*',
         'src/templates/**/*.hbs',
         "src/*.json"
-    ])
-        .pipe(gulp.dest((file) => file.base.replace("\\src", "\\dist")));
+    ], { base: 'src' })
+        .pipe(gulp.dest('dist'));
 
     // Then pipe in js files to be minified
     gulp.src('src/sfrpg.js')
@@ -138,8 +138,8 @@ async function copyWatchFiles() {
         'src/lang/*.json',
         'src/templates/**/*.hbs',
         "src/*.json"
-    ])
-        .pipe(gulp.dest((file) => file.base.replace("\\src", "\\dist")));
+    ], { base: 'src' })
+        .pipe(gulp.dest('dist'));
 
     gulp.src(`src/${name}.js`)
         .pipe(gulp.dest('dist'));
@@ -575,7 +575,7 @@ async function gulpUnpackPacks(done, partOfCook = false) {
 }
 
 async function unpackPacks(partOfCook = false) {
-    const sourceDir = partOfCook ? "./src/packs" : `${getConfig().dataPath.replaceAll("\\", "/")}/data/systems/sfrpg/packs`;
+    const sourceDir = partOfCook ? "./src/packs" : path.join(getConfig().dataPath, 'Data/systems/sfrpg/packs');
     console.log(`Unpacking ${partOfCook ? "" : "and sanitizing "}all packs from ${sourceDir}`);
 
     const entries = fs.readdirSync(sourceDir, {withFileTypes: true});
@@ -1316,9 +1316,9 @@ function searchDescriptionForUnlinkedReference(description, regularExpression) {
 function isSourceValid(source) {
 
     // NOTE: One day this should be changed if they publish further Core books (Galaxy Exploration Manual included for posterity)
-    const CoreBooksSourceMatch = [...source.matchAll(/(CRB|AR|PW|COM|SOM|NS|GEM|TR|GM|DC|IS|PoC) pg\. [\d]+/g)];
+    const CoreBooksSourceMatch = [...source.matchAll(/(CRB|PW|AR|COM|NS|SOM|GEM|TR|GM|DC|IS|PoC|EN|DS|SS|MG) pg\. [\d]+/g)];
     // NOTE: One day this should be increased when they publish further Alien Archives (Alien Archive 5 included for posterity)
-    const AlienArchiveSourceMatch = [...source.matchAll(/AA([1-5]) pg\. [\d]+/g)];
+    const AlienArchiveSourceMatch = [...source.matchAll(/AA([1-4]) pg\. [\d]+/g)];
     const AdventurePathSourceMatch = [...source.matchAll(/AP #[\d]+ pg\. [\d]+/g)];
     const StarfinderSocietySourceMatch =  [...source.matchAll(/SFS #[\d]+-[\d]+ pg\. [\d]+/g)];
     const StarfinderAdventureSourceMatch =  [...source.matchAll(/SA:\S+ pg\. [\d]+/g)];
@@ -1372,13 +1372,13 @@ function consistencyCheck(allItems, compendiumMap) {
         if (itemMatch && itemMatch.length > 0) {
             for (const localItem of itemMatch) {
                 const localItemId = localItem[1];
-                const localItemName = localItem[2] || localItemId;
+                const localItemName = localItem[3] || localItemId;
 
                 // @Item links cannot exist in compendiums.
                 if (!(pack in packErrors)) {
                     packErrors[pack] = [];
                 }
-                packErrors[pack].push(`${chalk.bold(item.file)}: Using @Item to reference to '${chalk.bold(localItemName)}' (with id: ${chalk.bold(localItemId)}), @Item is not allowed in compendiums. Please use '${chalk.bold('@UUID[Compendium.sfrpg.' + pack + "." + localItemId + "]")}' instead.`);
+                packErrors[pack].push(`${chalk.bold(item.file)}: Using @Item to reference to '${chalk.bold(localItemName)}' (with id: ${chalk.bold(localItemId)}), @Item is not allowed in compendiums. Please use '${chalk.bold('@UUID[Compendium.sfrpg.' + pack + ".Item." + localItemId + "]")}' instead.`);
                 cookErrorCount++;
             }
         }
@@ -1407,23 +1407,23 @@ function consistencyCheck(allItems, compendiumMap) {
                 const linkParts = link.split('.');
                 // Skip links to journal entry pages
                 // @UUID[Compendium.sfrpg.some-pack.abcxyz.JournalEntryPage.abcxyz]
-                if (linkParts.length === 6) {
+                if (linkParts.includes('JournalEntryPage')) {
                     continue;
                 }
-                if (linkParts.length !== 4) {
+                if (linkParts.length !== 5) {
                     if (!(pack in packErrors)) {
                         packErrors[pack] = [];
                     }
-                    packErrors[pack].push(`${chalk.bold(item.file)}: Compendium link to '${chalk.bold(link)}' is not valid. It does not have enough segments in the link. Expected format is Compendium.sfrpg.compendiumName.itemId.`);
+                    packErrors[pack].push(`${chalk.bold(item.file)}: Compendium link to '${chalk.bold(link)}' is not valid. It does not have enough segments in the link. Expected format is Compendium.sfrpg.compendiumName.itemType.itemId.`);
                     cookErrorCount++;
                     continue;
                 }
 
-                // @UUID[Compendium.sfrpg.some-pack.abcxyz]
-                //      [0]         [1]   [2]       [3]
+                // @UUID[Compendium.sfrpg.some-pack.Item.abcxyz]
+                //      [0]         [1]   [2]       [3]  [4]
                 const system = linkParts[1];
                 const otherPack = linkParts[2];
-                const otherItemId = linkParts[3];
+                const otherItemId = linkParts[4];
 
                 // @UUID links must link to sfrpg compendiums.
                 if (system !== "sfrpg") {

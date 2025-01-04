@@ -1,4 +1,5 @@
 import { SFRPG } from "../config.js";
+import SFRPGModifier from "../modifiers/modifier.js";
 import RollContext from "../rolls/rollcontext.js";
 
 const itemSizeArmorClassModifier = {
@@ -40,13 +41,14 @@ export class ItemSheetSFRPG extends ItemSheet {
 
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
-            width: 715,
+            width: 770,
             height: 600,
             classes: ["sfrpg", "sheet", "item"],
             resizable: true,
             scrollY: [".tab.details"],
             tabs: [
                 {navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"},
+                {navSelector: ".subtabs", contentSelector: ".sheet-details", initial: "properties"},
                 {navSelector: ".descTabs", contentSelector: ".desc-body", initial: "description"}
             ]
         });
@@ -105,7 +107,11 @@ export class ItemSheetSFRPG extends ItemSheet {
         // Ensure derived data is included
         await this.item.processData();
 
-        data.itemData = this.document.system;
+        // Options for text enrichment, used later
+        const rollData = RollContext.createItemRollContext(this.item, this.actor).getRollData() ?? {};
+        const secrets = this.item.isOwner;
+
+        data.itemData = data.data.system;
         data.actor = this.document.parent;
         data.labels = this.item.labels;
 
@@ -122,6 +128,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.hasProficiency = data.itemData.proficient === true || data.itemData.proficient === false;
         data.isFeat = data.item.type === "feat";
         data.isActorResource = data.item.type === "actorResource";
+        data.isWeapon = data.item.type === "weapon";
         data.isVehicleAttack = data.item.type === "vehicleAttack";
         data.isVehicleSystem = data.item.type === "vehicleSystem";
         data.isGM = game.user.isGM;
@@ -191,7 +198,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.isHealing = data.item.actionType === "heal";
 
         // Determine whether to show calculated totals for fields with formulas
-        if (itemData?.activation?.type) {
+        if (itemData?.activation?.type || data.item.type === "weapon") {
             data.range = {};
 
             data.range.hasInput = (() => {
@@ -251,7 +258,22 @@ export class ItemSheetSFRPG extends ItemSheet {
                     data.sourceActorChoices[PC.id] = PC.name;
                 }
             }
+
+            // Turn Events
+            for (const [i, turnEvent] of (data.itemData.turnEvents || []).entries()) {
+                turnEvent.enrichedNote = await TextEditor.enrichHTML(turnEvent.content, {
+                    rollData,
+                    secrets
+                });
+                turnEvent.noteI = `system.turnEvents.${i}.content`;
+            }
         }
+
+        // Similar to actor-modifiers.getAllModifiers()
+        // we need to enforce the type of the modifiers to be SFRPGModifier
+        this.item.system.modifiers = this.item.system.modifiers?.map(mod => {
+            return new SFRPGModifier(mod, {parent: this.item});
+        });
 
         data.modifiers = this.item.system.modifiers;
 
@@ -259,25 +281,53 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.hasCapacity = this.item.hasCapacity();
 
         // Enrich text editors
-        const async = true;
-        const rollData = RollContext.createItemRollContext(this.item, this.actor).getRollData() ?? {};
-        const secrets = this.item.isOwner;
 
         data.enrichedDescription = await TextEditor.enrichHTML(this.item.system?.description?.value, {
-            async,
             rollData,
             secrets
         });
         data.enrichedShortDescription = await TextEditor.enrichHTML(this.item.system?.description?.short, {
-            async,
             rollData,
             secrets
         });
         data.enrichedGMNotes = await TextEditor.enrichHTML(this.item.system?.description?.gmNotes, {
-            async,
             rollData,
             secrets
         });
+
+        if (data?.item?.type === "starshipAction") {
+            data.enrichedEffectNormal = await TextEditor.enrichHTML(this.item.system?.effectNormal, {
+                rollData,
+                secrets
+            });
+            data.enrichedEffectCritical = await TextEditor.enrichHTML(this.item.system?.effectCritical, {
+                rollData,
+                secrets
+            });
+
+            // Manage Subactions
+            if (data?.itemData?.formula?.length > 1) {
+                data.subactionEditorInfo = [];
+                let ct = 0;
+                for (const value of data.itemData.formula) {
+                    const effect = {};
+
+                    effect.enrichedEffectNormal = await TextEditor.enrichHTML(value.effectNormal, {
+                        rollData,
+                        secrets
+                    });
+                    effect.targetNormal = `system.formula.${ct}.effectNormal`;
+
+                    effect.enrichedEffectCritical = await TextEditor.enrichHTML(value.effectCritical, {
+                        rollData,
+                        secrets
+                    });
+                    effect.targetCritical = `system.formula.${ct}.effectCritical`;
+                    ct += 1;
+                    data.subactionEditorInfo.push(effect);
+                }
+            }
+        }
 
         return data;
     }
@@ -313,7 +363,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         if (["weapon", "equipment", "shield"].includes(item.type)) return itemData.equipped ? game.i18n.localize("SFRPG.InventoryEquipped") : game.i18n.localize("SFRPG.InventoryNotEquipped");
         else if (item.type === "feat") return CONFIG.SFRPG.featureCategories[itemData.details.category]?.label || "";
-        else if (item.type === "starshipWeapon") return game.i18n.localize(`SFRPG.Items.ShipWeapon.${itemData.mount.mounted ? "Mounted" : "NotMounded"}`);
+        else if (item.type === "starshipWeapon") return game.i18n.localize(`SFRPG.Items.ShipWeapon.${itemData.mount.mounted ? "Mounted" : "NotMounted"}`);
         else if (item.type === "effect") return game.i18n.localize(`SFRPG.${itemData.enabled ? "Enabled" : "Disabled"}`);
         else if (item.type === "augmentation") {
             return `${CONFIG.SFRPG.augmentationTypes[itemData.type]} (${CONFIG.SFRPG.augmentationSystems[itemData.system] || ""})`;
@@ -567,6 +617,38 @@ export class ItemSheetSFRPG extends ItemSheet {
             return arr;
         }, []);
 
+        // Handle Starship Action/Subaction Formulas
+        if (this.object.type === "starshipAction") {
+            const currentFormula = {system: {formula: Object.assign({}, this.item.system.formula)}};
+            const formula = Object.entries(formData).filter(e => e[0].startsWith("system.formula"));
+            const newFormula = {};
+
+            for (const [k, v] of formula) {
+                newFormula[k] = v;
+                delete formData[k];
+            }
+
+            const expanded = foundry.utils.expandObject(newFormula);
+            const final = Object.values(foundry.utils.mergeObject(currentFormula, expanded, {overwrite:true}).system.formula);
+            formData["system.formula"] = final;
+        }
+
+        // Handle turn events
+        if (this.object.type === "effect") {
+            const currentEvents = {system: {turnEvents: Object.assign({}, this.item.system.turnEvents)}};
+            const formula = Object.entries(formData).filter(e => e[0].startsWith("system.turnEvents"));
+            const newEvents = {};
+
+            for (const [k, v] of formula) {
+                newEvents[k] = v;
+                delete formData[k];
+            }
+
+            const expanded = foundry.utils.expandObject(newEvents);
+            const final = Object.values(foundry.utils.mergeObject(currentEvents, expanded, {overwrite:true}).system.turnEvents);
+            formData["system.turnEvents"] = final;
+        }
+
         // Update the Item
         return super._updateObject(event, formData);
     }
@@ -588,6 +670,8 @@ export class ItemSheetSFRPG extends ItemSheet {
         html.find("input.primary-section-checkbox").click(this._onTogglePrimaryDamageSection.bind(this));
         html.find(".visualization-control").click(this._onActorResourceVisualizationControl.bind(this));
         html.find(".ability-adjustments-control").click(this._onAbilityAdjustmentsControl.bind(this));
+        html.find(".subaction-control").click(this._onSubactionControl.bind(this));
+        html.find(".turn-event-control").click(this._onTurnEventControl.bind(this));
 
         html.find('.modifier-create').click(this._onModifierCreate.bind(this));
         html.find('.modifier-edit').click(this._onModifierEdit.bind(this));
@@ -617,6 +701,37 @@ export class ItemSheetSFRPG extends ItemSheet {
 
     /* -------------------------------------------- */
 
+    /**
+     * Add or remove a subaction from a starship action
+     * @param {Event} event     The original click event
+     * @return {Promise}
+     * @private
+     */
+    async _onSubactionControl(event) {
+        event.preventDefault();
+        const a = event.currentTarget;
+        const formula = this.item.system.formula;
+        await this._onSubmit(event); // Submit any unsaved changes
+
+        // Add a new subaction
+        if (a.classList.contains("add-subaction")) {
+            return this.item.update({
+                "system.formula": formula.concat([
+                    { dc: {resolve:false, value:""}, formula: "", name:"", effectNormal:"", effectCritical:"" }
+                ])
+            });
+        }
+
+        // Remove a subaction
+        else if (a.classList.contains("delete-subaction")) {
+            const li = a.closest(".subaction-part");
+            formula.splice(Number(li.dataset.subactionPart), 1);
+            return this.item.update({
+                "system.formula": formula
+            });
+        }
+    }
+
     async _onAbilityAdjustmentsControl(event) {
         event.preventDefault();
         const a = event.currentTarget;
@@ -625,7 +740,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("add-ability-adjustment")) {
             await this._onSubmit(event);
             const abilityMods = this.item.system.abilityMods;
-            return await this.item.update({
+            return this.item.update({
                 "system.abilityMods.parts": abilityMods.parts.concat([
                     [0, ""]
                 ])
@@ -638,7 +753,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             const li = a.closest(".ability-adjustment-part");
             const abilityMods = foundry.utils.deepClone(this.item.system.abilityMods);
             abilityMods.parts.splice(Number(li.dataset.abilityAdjustment), 1);
-            return await this.item.update({
+            return this.item.update({
                 "system.abilityMods.parts": abilityMods.parts
             });
         }
@@ -658,7 +773,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("add-damage")) {
             await this._onSubmit(event); // Submit any unsaved changes
             const damage = this.item.system.damage;
-            return await this.item.update({
+            return this.item.update({
                 "system.damage.parts": damage.parts.concat([
                     { name: "", formula: "", types: {}, group: null, isPrimarySection: false }
                 ])
@@ -671,7 +786,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             const li = a.closest(".damage-part");
             const damage = foundry.utils.deepClone(this.item.system.damage);
             damage.parts.splice(Number(li.dataset.damagePart), 1);
-            return await this.item.update({
+            return this.item.update({
                 "system.damage.parts": damage.parts
             });
         }
@@ -680,7 +795,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("add-critical-damage")) {
             await this._onSubmit(event); // Submit any unsaved changes
             const criticalDamage = this.item.system.critical;
-            return await this.item.update({
+            return this.item.update({
                 "system.critical.parts": criticalDamage.parts.concat([
                     ["", ""]
                 ])
@@ -693,7 +808,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             const li = a.closest(".damage-part");
             const criticalDamage = foundry.utils.deepClone(this.item.system.critical);
             criticalDamage.parts.splice(Number(li.dataset.criticalPart), 1);
-            return await this.item.update({
+            return this.item.update({
                 "system.critical.parts": criticalDamage.parts
             });
         }
@@ -771,23 +886,10 @@ export class ItemSheetSFRPG extends ItemSheet {
         const target = $(event.currentTarget);
         const modifierId = target.closest('.item.modifier').data('modifierId');
 
-        const modifiers = foundry.utils.deepClone(this.item.system.modifiers);
+        const modifiers = this.item.system.modifiers;
         const modifier = modifiers.find(mod => mod._id === modifierId);
 
-        const formula = modifier.modifier;
-        if (formula) {
-            // TODO: test this this.item should be the actor if not try to get the actor here
-            const roll = Roll.create(formula, this.item.system);
-            modifier.max = await roll.evaluate({maximize: true}).total;
-        } else {
-            modifier.max = 0;
-        }
-
-        modifier.enabled = !modifier.enabled;
-
-        await this.item.update({
-            'system.modifiers': modifiers
-        });
+        return modifier.toggle();
     }
 
     async _onAddStorage(event) {
@@ -954,7 +1056,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("add-visualization")) {
             await this._onSubmit(event); // Submit any unsaved changes
             const visualization = foundry.utils.deepClone(this.item.system.combatTracker.visualization);
-            return await this.item.update({
+            return this.item.update({
                 "system.combatTracker.visualization": visualization.concat([
                     { mode: "eq", value: 0, title: this.item.name, image: this.item.img }
                 ])
@@ -967,7 +1069,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             const li = a.closest(".visualization-part");
             const visualization = foundry.utils.deepClone(this.item.system.combatTracker.visualization);
             visualization.splice(Number(li.dataset.index), 1);
-            return await this.item.update({
+            return this.item.update({
                 "system.combatTracker.visualization": visualization
             });
         }
@@ -1049,7 +1151,6 @@ export class ItemSheetSFRPG extends ItemSheet {
 
     /**
      * Toggle an effect and their modifiers to be enabled or disabled.
-     *
      * @param {Event} event The originating click event
      */
     async _onToggleDetailsEffect(event) {
@@ -1080,5 +1181,42 @@ export class ItemSheetSFRPG extends ItemSheet {
         const doc = await fromUuid(uuid);
 
         doc.sheet.render(true);
+    }
+
+    /**
+     * Add or remove a turn event from an effect
+     * @param {Event} event     The original click event
+     * @return {Promise}        The update promise
+     * @private
+     */
+    async _onTurnEventControl(event) {
+        event.preventDefault();
+        const a = event.currentTarget;
+        const turnEvents = this.item.system.turnEvents;
+        await this._onSubmit(event); // Submit any unsaved changes
+
+        // Add a new turn event
+        if (a.classList.contains("add-turn-event")) {
+            return this.item.update({
+                "system.turnEvents": turnEvents.concat([
+                    {
+                        trigger: "onTurnEnd",
+                        type: "roll",
+                        formula: "",
+                        damageTypes: {},
+                        name: ""
+                    }
+                ])
+            });
+        }
+
+        // Remove a turn event
+        else if (a.classList.contains("delete-turn-event")) {
+            const li = a.closest(".turn-event");
+            turnEvents.splice(Number(li.dataset.turnEventIdx), 1);
+            return this.item.update({
+                "system.turnEvents": turnEvents
+            });
+        }
     }
 }

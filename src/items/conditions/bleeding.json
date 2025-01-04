@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.26.1"
+    "systemVersion": "0.27.0"
   },
   "img": "systems/sfrpg/icons/conditions/bleeding.webp",
   "system": {
@@ -16,9 +16,15 @@
     "activeDuration": {
       "activationTime": 0,
       "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "parent"
+      },
       "unit": "permanent",
       "value": 0
     },
+    "context": {},
     "critical": {
       "effect": "",
       "parts": []
@@ -28,13 +34,17 @@
     },
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.rules.0yJjfyvWg5pDLcVR]</p>\n<hr />\n<p>You take the listed amount of damage at the beginning of your turn each round until this condition ends.</p>\n<p>Your bleeding can be stopped with a successful DC 15 Medicine check as a standard action, or through the application of any ability that restores Hit Points.</p>\n<p>If you take two or more bleed effects, you take only the damage from the worst effect.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.rules.Item.0yJjfyvWg5pDLcVR]</p>\n<hr />\n<p>You take the listed amount of damage at the beginning of your turn each round until this condition ends.</p>\n<p>Your bleeding can be stopped with a successful DC 15 Medicine check as a standard action, or through the application of any ability that restores Hit Points.</p>\n<p>If you take two or more bleed effects, you take only the damage from the worst effect.</p>"
     },
     "enabled": true,
     "modifiers": [],
     "requirements": "Condition",
+    "showOnToken": true,
     "source": "CRB pg. 273",
-    "sourceActorId": null
+    "sourceActorId": null,
+    "turnEvents": []
   }
 }

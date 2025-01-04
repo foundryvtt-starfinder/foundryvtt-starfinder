@@ -302,7 +302,6 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
 
         if (!this.options.editable) return;
 
-        // html.find('.toggle-prepared').click(this._onPrepareItem.bind(this));
         html.find(".reload").click(this._onReloadWeapon.bind(this));
 
         html.find(".repair").click(this._onRepair.bind(this));
@@ -352,48 +351,6 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         const modifierId = target.closest(".item.modifier").data("modifierId");
 
         this.actor.editModifier(modifierId);
-    }
-
-    /**
-     * Toggle a modifier to be enabled or disabled.
-     *
-     * @param {Event} event The originating click event
-     */
-    async _onToggleModifierEnabled(event) {
-        event.preventDefault();
-        const target = $(event.currentTarget);
-        const modifierId = target.closest(".item.modifier").data("modifierId");
-
-        const modifiers = foundry.utils.deepClone(this.actor.system.modifiers);
-        const modifier = modifiers.find((mod) => mod._id === modifierId);
-
-        const formula = modifier.modifier;
-        if (formula) {
-            const roll = Roll.create(formula, this.actor.system);
-            modifier.max = await roll.evaluate({maximize: true}).total;
-        } else {
-            modifier.max = 0;
-        }
-
-        modifier.enabled = !modifier.enabled;
-
-        await this.actor.update({ "system.modifiers": modifiers });
-    }
-
-    /**
-     * Handle toggling the prepared status of an Owned Itme within the Actor
-     *
-     * @param {Event} event The triggering click event
-     */
-    _onPrepareItem(event) {
-        event.preventDefault();
-
-        const itemId = event.currentTarget.closest(".item").dataset.itemId;
-        const item = this.actor.items.get(itemId);
-
-        return item.update({
-            "system.preparation.prepared": !item.system.preparation.prepared
-        });
     }
 
     /**

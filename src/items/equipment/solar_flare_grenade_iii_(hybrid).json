@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.26.1"
+    "systemVersion": "0.27.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
     "type": "",
     "ability": "str",
@@ -21,8 +21,10 @@
       "condition": "",
       "cost": 1
     },
+    "ammunitionType": "",
     "area": {
       "effect": "burst",
+      "shapable": false,
       "shape": "",
       "units": "ft",
       "value": 20
@@ -55,6 +57,8 @@
     "chatFlavor": "see text",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": 1,
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
@@ -94,8 +98,11 @@
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>Crafted using strange metals ejected by the sun and infused with magic from the Plane of Fire, solar flare grenades unleash the power of a star. When a solar flare grenade explodes, it sends out a lash of plasma. Creatures within the grenade’s area take the listed electricity and fire damage; each creature that succeeds at a Reflex save takes half damage. In addition, a solar flare grenade also sends out an electromagnetic pulse following the plasma wave. Within the same area, all technological objects that use charges, technological objects that do not use charges but are powered by electricity, and constructs with the technological subtype must each attempt a Fortitude saving throw. If a technological object with charges fails the save, it loses a number of charges equal to the grenade’s mark. If a technological object that is powered by electrical means other than charge fails the save, its functions are suppressed for a number of rounds according to the grenade’s type (see below). If a construct with the technological subtype fails the save, it is staggered for a number of rounds according to the grenade’s type (see below); such a construct can attempt an additional Fortitude save at the end of each round to shrug off the effect.</p>\n<ul>\n<li><strong>Solar Flare Grenade I:</strong>&nbsp;1 round.</li>\n<li><strong>Solar Flare Grenade II:</strong>&nbsp;1 round.</li>\n<li><strong>Solar Flare Grenade III:</strong>&nbsp;2 rounds.</li>\n<li><strong>Solar Flare Grenade IV:</strong>&nbsp;2 rounds.</li>\n<li><strong>Solar Flare Grenade V:</strong>&nbsp;3 rounds.</li>\n</ul>"
     },
@@ -104,9 +111,12 @@
       "units": "",
       "value": ""
     },
+    "equippable": false,
     "equipped": false,
     "formula": "",
     "identified": true,
+    "isActive": null,
+    "isEquipment": true,
     "level": 9,
     "modifiers": [],
     "price": 2450,
@@ -199,12 +209,14 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
       "value": 20
     },
+    "rollNotes": "",
     "save": {
       "type": "reflex",
       "dc": "14+@abilities.dex.mod",
@@ -212,6 +224,7 @@
     },
     "source": "",
     "special": "",
+    "specialMaterials": {},
     "target": {
       "type": "",
       "value": ""

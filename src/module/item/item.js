@@ -13,7 +13,7 @@ import { ItemCapacityMixin } from "./mixins/item-capacity.js";
 
 export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityMixin) {
 
-    constructor(data, context={}) {
+    constructor(data, context = {}) {
         // Set module art if available. This applies art to items viewed or created from compendiums.
         if (context.pack && data._id) {
             const art = game.sfrpg.compendiumArt.map.get(`Compendium.${context.pack}.${data._id}`);
@@ -142,6 +142,13 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         else if (itemData.type === "equipment") {
             labels.eac = data.armor.eac ? `${data.armor.eac} ${game.i18n.localize("SFRPG.EnergyArmorClassShort")}` : "";
             labels.kac = data.armor.kac ? `${data.armor.kac} ${game.i18n.localize("SFRPG.KineticArmorClassShort")}` : "";
+        }
+
+        // Apply a tag if the item is a weapon that's not equipment (unarmed strike, natural attack, etc.)
+        if (itemData.type === "weapon") {
+            itemData.system.transferrable = itemData.system.isEquipment;
+        } else {
+            itemData.system.transferrable = true;
         }
 
         // Activated Items
@@ -322,6 +329,13 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             }
         }
 
+        // Apply a default icon to the item based on its type if it doesn't already have an icon selected
+        if (Object.values(SFRPG.foundryDefaultIcons).includes(this.img)) {
+            if (Object.keys(SFRPG.defaultItemIcons).includes(this.type)) {
+                updates.img = ["systems/sfrpg/icons/default/", SFRPG.defaultItemIcons[this.type]].join("");
+            }
+        }
+
         this.updateSource(updates);
 
         return super._preCreate(data, options, user);
@@ -430,12 +444,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Render the chat card template
         const templateType = ["tool", "consumable"].includes(this.type) ? this.type : "item";
         const template = `systems/sfrpg/templates/chat/${templateType}-card.hbs`;
-        const rollMode = game.settings.get("core", "rollMode");
         const html = await renderTemplate(template, templateData);
 
         // Basic chat message data
         const chatData = {
-            user: game.user.id,
+            author: game.user.id,
             type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             content: html,
             flags: {
@@ -448,20 +461,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                     actor: this.actor.uuid
                 }
             },
-            rollMode: rollMode,
             speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor})
         };
 
-        // Toggle default roll mode
-        if (["gmroll", "blindroll"].includes(rollMode)) {
-            chatData["whisper"] = ChatMessage.getWhisperRecipients("GM");
-        }
-        if (rollMode === "blindroll") {
-            chatData["blind"] = true;
-        }
-        if (rollMode === "selfroll") {
-            chatData["whisper"] = ChatMessage.getWhisperRecipients(game.user.name);
-        }
+        const rollMode = game.settings.get("core", "rollMode");
+        ChatMessage.applyRollMode(chatData, rollMode);
 
         // Create the chat message
         return ChatMessage.create(chatData, { displaySheet: false });
@@ -950,8 +954,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         /** Create global attack modifiers. */
         const additionalModifiers = foundry.utils.deepClone(SFRPG.globalAttackRollModifiers).map(mod => {
-            const container = {actorUuid: this.actor.uuid, itemUuid: this.uuid};
-            const modInstance = {bonus: new SFRPGModifier({...mod.bonus, container})};
+            const modInstance = {bonus: new SFRPGModifier(mod.bonus, {parent: this, globalModifier: true})};
             return modInstance;
         });
 
@@ -1009,9 +1012,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             // Remove inactive constant and damage section mods. Keep all situational mods, regardless of status.
             if (!mod.enabled && mod.modifierType !== SFRPGModifierType.FORMULA) return false;
 
-            if (mod.limitTo === "parent" && mod.container.itemUuid !== this.uuid) return false;
+            if (mod.limitTo === "parent" && mod.item !== this) return false;
             if (mod.limitTo === "container") {
-                const parentItem = getItemContainer(this.actor.items, fromUuidSync(mod.container.itemUuid));
+                const parentItem = getItemContainer(this.actor.items, mod.item);
                 if (parentItem?.id !== this.id) return false;
             }
 
@@ -1388,9 +1391,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 return false;
             }
 
-            if (mod.limitTo === "parent" && mod.container.itemUuid !== this.uuid) return false;
+            if (mod.limitTo === "parent" && mod.item !== this) return false;
             if (mod.limitTo === "container") {
-                const parentItem = getItemContainer(this.actor.items, fromUuidSync(mod.container.itemUuid));
+                const parentItem = getItemContainer(this.actor.items, mod.item);
                 if (parentItem?.id !== this.id) return false;
             }
 
@@ -1554,9 +1557,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             chatMessage: options.chatMessage,
             content: content,
-            rollMode: game.settings.get("core", "rollMode"),
-            roll: rollResult.roll,
-            type: CONST.CHAT_MESSAGE_STYLES.ROLL,
+            rolls: [rollResult.roll],
+            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             sound: CONFIG.sounds.dice
         });
     }
@@ -1609,7 +1611,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
             // Basic chat message data
             const chatData = {
-                user: game.user.id,
+                author: game.user.id,
                 flavor: flavor,
                 type: CONST.CHAT_MESSAGE_STYLES.OTHER,
                 content: html,
@@ -1617,14 +1619,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor})
             };
 
-            // Toggle default roll mode
             const rollMode = game.settings.get("core", "rollMode");
-            if (["gmroll", "blindroll"].includes(rollMode)) {
-                chatData["whisper"] = ChatMessage.getWhisperRecipients("GM");
-            }
-            if (rollMode === "blindroll") {
-                chatData["blind"] = true;
-            }
+            ChatMessage.applyRollMode(chatData, rollMode);
 
             // Create the chat message
             ChatMessage.create(chatData, { displaySheet: false });
@@ -1674,12 +1670,12 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Display a Chat Message
         const rollMode = game.settings.get("core", "rollMode");
         const chatData = {
-            user: game.user.id,
-            type: CONST.CHAT_MESSAGE_STYLES.ROLL,
+            author: game.user.id,
+            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             flavor: `${this.name} recharge check - ${success ? "success!" : "failure!"}`,
             whisper: (["gmroll", "blindroll"].includes(rollMode)) ? ChatMessage.getWhisperRecipients("GM") : null,
             blind: rollMode === "blindroll",
-            roll: roll,
+            rolls: [roll],
             speaker: ChatMessage.getSpeaker({
                 actor: this.actor,
                 alias: this.actor.name
@@ -2020,5 +2016,92 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             console.log(`Starfinder | Updated ${item.name} to use the ${ (isNPC) ? "NPC " : ""}d6 scaling formula.`);
         }
     }
-}
 
+    /**
+     * Turn Events
+     * The following functions are run when appropriate by the GM.
+     */
+
+    _onTurnStart() {
+        if (this.type !== "effect" || !this.system.enabled) return;
+
+        for (const turnEvent of this.system.turnEvents) {
+            if (turnEvent.trigger !== "onTurnStart") continue;
+
+            this._handleTurnEvent(turnEvent);
+
+        }
+
+    }
+
+    _onTurnEnd() {
+        if (this.type !== "effect" || !this.system.enabled) return;
+
+        for (const turnEvent of this.system.turnEvents) {
+            if (turnEvent.trigger !== "onTurnEnd") continue;
+
+            this._handleTurnEvent(turnEvent);
+        }
+
+    }
+
+    _handleTurnEvent(turnEvent) {
+        switch (turnEvent.type) {
+            case "note":
+                this._handleEffectNoteEvent(turnEvent);
+                break;
+            case "roll":
+                this._handleEffectRollEvent(turnEvent);
+                break;
+        }
+    }
+
+    _handleEffectNoteEvent(turnEvent) {
+        ChatMessage.create({
+            content: turnEvent.content,
+            speaker: ChatMessage.getSpeaker({ actor: this.actor })
+        });
+    }
+
+    async _handleEffectRollEvent(turnEvent) {
+        if (!turnEvent.formula) return;
+
+        const parts = [{
+            isDamageSection: true,
+            enabled: true,
+            formula: turnEvent.formula,
+            types: turnEvent.damageTypes,
+            group: null
+        }];
+
+        const rollContext = RollContext.createItemRollContext(this, this.actor);
+
+        return DiceSFRPG.damageRoll({
+            parts,
+            rollContext,
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            dialogOptions: {
+                skipUI: true
+            },
+            title: turnEvent.name || this.name
+        });
+    }
+
+    /**
+     * Execute a macro with the context of this item
+     * @param {Macro} macro The macro to execute
+     * @param {Record<string, *>} scope Any additional arguments to pass to macro execution
+     * @returns {Promise<*>} The return value of the macro
+     */
+    async executeMacroWithContext(macro, scope = {}) {
+        if (!(macro instanceof Macro)) return ui.notifications.error("A macro was not provided!");
+
+        return macro.execute({
+            speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token }),
+            token: this.actor.token || null,
+            actor: this.actor || null,
+            item: this,
+            ...scope
+        });
+    }
+}

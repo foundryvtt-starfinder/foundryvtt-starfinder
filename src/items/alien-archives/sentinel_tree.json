@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.26.1"
+    "systemVersion": "0.27.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
       "_id": "C5J9KsoXYDyIwc6f",
@@ -16,9 +16,9 @@
       "_stats": {
         "coreVersion": 12,
         "systemId": "sfrpg",
-        "systemVersion": "0.26.1"
+        "systemVersion": "0.27.0"
       },
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -46,6 +46,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -128,6 +129,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -257,9 +259,9 @@
       "_stats": {
         "coreVersion": 12,
         "systemId": "sfrpg",
-        "systemVersion": "0.26.1"
+        "systemVersion": "0.27.0"
       },
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -287,6 +289,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -369,6 +372,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -498,9 +502,9 @@
       "_stats": {
         "coreVersion": 12,
         "systemId": "sfrpg",
-        "systemVersion": "0.26.1"
+        "systemVersion": "0.27.0"
       },
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
@@ -513,6 +517,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -535,6 +540,11 @@
           "value": "<p>A sentinel tree can remain so still that it appears to be a normal tree. A sentinel tree that uses freeze can take 20 on its Stealth check to hide in plain sight as a normal tree.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -542,6 +552,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -578,9 +589,9 @@
       "_stats": {
         "coreVersion": 12,
         "systemId": "sfrpg",
-        "systemVersion": "0.26.1"
+        "systemVersion": "0.27.0"
       },
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
@@ -593,6 +604,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -615,6 +627,11 @@
           "value": "<p>The creature can use the Perception skill to perform the follow tracks task of the Survival skill with the listed sense. The sense is usually related to a type of signature that most creatures leave behind, such as a scent or heat trail. The creature might gain a bonus or penalty to its Perception check to follow tracks depending on the strength of the quarry’s signature, at the GM’s discretion. It is possible for stronger signatures to completely mask other signatures, making following tracks with a weaker signature very difficult.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -622,6 +639,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -656,6 +674,7 @@
     "name": "Sentinel Tree",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -667,6 +686,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 2,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -687,11 +707,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -705,13 +743,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "src": "systems/sfrpg/icons/default/alien-stare.svg",
+      "tint": "#ffffff"
     },
     "width": 2
   },

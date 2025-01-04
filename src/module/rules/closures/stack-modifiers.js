@@ -35,7 +35,7 @@ export default class StackModifiers extends Closure {
                         modifier.max = 0;
                     }
                 } catch (error) {
-                    console.warn(`Could not calculate modifier: ${modifier.name} for actor with ID: ${modifier.container.actorUuid}. Setting to zero. ${error}`);
+                    console.warn(`Could not calculate modifier: ${modifier.name} for actor: ${modifier.actor.name}. Setting to zero. ${error}`);
                     modifier.max = 0;
                 }
             } else {

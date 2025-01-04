@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.26.1"
+    "systemVersion": "0.27.0"
   },
   "img": "systems/sfrpg/icons/spells/supercharge_armor.webp",
   "system": {
@@ -14,6 +14,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "action",
@@ -22,11 +23,13 @@
     },
     "allowedClasses": {
       "myst": false,
+      "precog": false,
       "tech": true,
       "wysh": false
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": null,
       "value": null
@@ -41,8 +44,11 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>You supercharge the target armor. The armor’s hardness doubles; the armor sheds light in a 20-foot radius, increasing the light level 1 step to a maximum of normal light; and the creature wearing the armor gains temporary Hit Points equal to 5 + your caster level as long as it wears the armor.</p>"
     },
@@ -53,6 +59,8 @@
       "value": "@details.cl.value"
     },
     "formula": "",
+    "isActive": null,
+    "isVariableLevel": false,
     "level": 2,
     "materials": {
       "consumed": false,
@@ -65,12 +73,14 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
       "units": "touch",
       "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
