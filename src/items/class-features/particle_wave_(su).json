@@ -2,6 +2,11 @@
   "_id": "Jlti9Xr47sVhjheN",
   "name": "Particle Wave (Su)",
   "type": "feat",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "systems/sfrpg/images/cup/gameplay/photon.webp",
   "system": {
     "type": "",
@@ -18,9 +23,10 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "sphere",
       "units": "ft",
-      "value": 10
+      "value": "10"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -32,8 +38,9 @@
       "parts": [
         {
           "name": "",
-          "formula": "(lookupRange(@classes.solarian.levels, 0, 9, 5, 11, 6, 13, 7, 15, 8, 17, 9, 19, 10))d6",
+          "formula": "(lookupRange(@classes.solarian.levels, 0, 9, 4, 10, 5, 13, 6, 16, 7, 19, 8))d6",
           "group": null,
+          "isPrimarySection": true,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -54,7 +61,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.UVNOjH2ERlQjcGnU]{Zenith Revelation}</p>\n<p>&nbsp;@Icon[type:photon] Photon Revelation</p>\n<p>When you’re fully photon-attuned, you can dissolve into a Large cloud composed of thousands of flaming pinpoints of brilliance as a standard action. While in this form, you gain a swarm attack that deals 4d6 fire damage, swarm defenses, swarm immunities (Starfinder Alien Archive 157), and a fly speed equal to your land speed. You lose all normal modes of attack and movement, all abilities that depend on your physical form, and any bonus to your KAC and EAC granted by your armor. You can maintain this form for a number of rounds equal to your solarian level. Returning to your normal form before the duration expires requires a standard action. The damage of your swarm attack increases by 1d6 for every 3 solarian levels you have beyond 7th. At 17th level, targets damaged by your swarm attack must succeed at a Reflex saving throw or be @UUID[Compendium.sfrpg.conditions.tOpF6qjnlnKc10t7]{Blinded} for 1 round.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.UVNOjH2ERlQjcGnU]{Zenith Revelation}</p>\n<p>&nbsp;@Icon[type:photon] Photon Revelation</p>\n<p>When you’re fully photon-attuned, you can dissolve into a Large cloud composed of thousands of flaming pinpoints of brilliance as a standard action. While in this form, you gain a swarm attack that deals 4d6 fire damage, @UUID[Compendium.sfrpg.universal-creature-rules.Item.aLJuzmdGypXmboQG]{swarm defenses}, @UUID[Compendium.sfrpg.universal-creature-rules.Item.Gcl9gMc6JfItdTeX]{swarm immunities} (Starfinder Alien Archive 157), and a fly speed equal to your land speed. You lose all normal modes of attack and movement, all abilities that depend on your physical form, and any bonus to your KAC and EAC granted by your armor. You can maintain this form for a number of rounds equal to your solarian level. Returning to your normal form before the duration expires requires a standard action. The damage of your swarm attack increases by 1d6 for every 3 solarian levels you have beyond 7th. At 17th level, targets damaged by your swarm attack must succeed at a Reflex saving throw or be @UUID[Compendium.sfrpg.conditions.Item.tOpF6qjnlnKc10t7]{Blinded} for 1 round.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -96,10 +103,11 @@
     },
     "details": {
       "category": "classFeature",
+      "combat": false,
       "specialAbilityType": "su"
     },
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
     "formula": "",
@@ -121,6 +129,7 @@
         "valueAffected": "flying"
       }
     ],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
@@ -131,20 +140,24 @@
       "charged": false,
       "value": null
     },
-    "requirements": "Zenith Revelation",
+    "requirements": "9th Level Solarian",
     "rollNotes": "",
     "save": {
       "type": "reflex",
       "dc": "10+floor(@classes.solarian.levels/2) + @abilities.cha.mod",
       "descriptor": "negate"
     },
-    "source": "Solarian",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
+    "source": "AR pg. 153",
     "target": {
       "type": "",
       "value": ""
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     }

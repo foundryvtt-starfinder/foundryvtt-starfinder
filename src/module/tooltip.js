@@ -149,4 +149,50 @@ export default class TooltipManagerSFRPG extends TooltipManager {
         const buffer = this.#locked.boundingBox.clone().pad(this.constructor.LOCKED_TOOLTIP_BUFFER_PX);
         if ( !buffer.contains(x, y) ) this.dismissLockedTooltips();
     }
+
+    /**
+   * Compute the unified bounding box from the set of locked tooltip elements.
+   */
+    #computeLockedBoundingBox() {
+        let bb = null;
+        for ( const element of this.#locked.elements.values() ) {
+            const {x, y, width, height} = element.getBoundingClientRect();
+            const rect = new PIXI.Rectangle(x, y, width, height);
+            if ( bb ) bb.enlarge(rect);
+            else bb = rect;
+        }
+        this.#locked.boundingBox = bb;
+    }
+
+    /**
+   * Lock the current tooltip.
+   * @returns {HTMLElement}
+   */
+    lockTooltip() {
+        const clone = this.tooltip.cloneNode(false);
+        // Steal the content from the original tooltip rather than cloning it, so that listeners are preserved.
+        while ( this.tooltip.firstChild ) clone.appendChild(this.tooltip.firstChild);
+        clone.removeAttribute("id");
+        clone.classList.add("locked-tooltip", "active");
+        document.body.appendChild(clone);
+        this.deactivate();
+        clone.addEventListener("contextmenu", this._onLockedTooltipDismiss.bind(this));
+        this.#locked.elements.add(clone);
+
+        // If the tooltip's contents were injected via setting innerHTML, then immediately requesting the bounding box will
+        // return incorrect values as the browser has not had a chance to reflow yet. For that reason we defer computing the
+        // bounding box until the next frame.
+        requestAnimationFrame(() => this.#computeLockedBoundingBox());
+        return clone;
+    }
+
+    /**
+   * Dismiss the set of active locked tooltips.
+   */
+    dismissLockedTooltips() {
+        for ( const element of this.#locked.elements.values() ) {
+            element.remove();
+        }
+        this.#locked.elements = new Set();
+    }
 }

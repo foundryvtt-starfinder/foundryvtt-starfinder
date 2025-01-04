@@ -2,13 +2,23 @@
   "_id": "CUY4U3QEeFIz9pS3",
   "name": "Hobgoblin Trooper",
   "type": "npc2",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
+  "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
       "_id": "qe3woaf8hhru76ym",
       "name": "Battle Hardened (Ex)",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
@@ -24,6 +34,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -46,6 +57,11 @@
           "value": "<p>Hobgoblins are trained for combat from an early age, and they quickly learn that a foe can do much more than just hurt you. Hobgoblins gain a +1 species bonus to AC against combat maneuvers.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -53,6 +69,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -86,7 +103,12 @@
       "_id": "jxcyym92iogksdz9",
       "name": "Taclash, standard",
       "type": "weapon",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -103,6 +125,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -191,6 +214,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 240,
@@ -338,6 +362,11 @@
       "_id": "hn6l633b62l6vqy6",
       "name": "Laser rifle, azimuth",
       "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "systems/sfrpg/icons/equipment/weapons/laser-rifle-azimuth.webp",
       "system": {
         "type": "",
@@ -355,6 +384,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -459,6 +489,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 425,
@@ -607,6 +638,11 @@
       "_id": "tl9fg5av5qk9f03g",
       "name": "Stickybomb Grenade I",
       "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "systems/sfrpg/icons/equipment/weapons/stickybomb-grenade.webp",
       "system": {
         "type": "",
@@ -624,6 +660,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "ft",
           "value": 10
@@ -696,6 +733,7 @@
         "formula": "2d4",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 170,
@@ -822,6 +860,11 @@
       "_id": "bszfyq5wzw8gi2kg",
       "name": "Lashunta Ringwear I",
       "type": "equipment",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "systems/sfrpg/icons/equipment/armor/lashunta-ringwear-1.webp",
       "system": {
         "type": "",
@@ -839,6 +882,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -934,6 +978,7 @@
         "modifiers": [],
         "price": 415,
         "proficient": true,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
@@ -973,6 +1018,11 @@
       "_id": "gv2x1u82o1scwhim",
       "name": "Battery, Standard",
       "type": "goods",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
       "system": {
         "type": "",
@@ -1028,6 +1078,7 @@
     "name": "Hobgoblin Trooper",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -1039,6 +1090,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -1059,11 +1111,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -1077,13 +1147,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "src": "systems/sfrpg/icons/default/alien-stare.svg",
+      "tint": "#ffffff"
     },
     "width": 1
   },
@@ -1322,7 +1396,7 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>Hobgoblins are a militant and merciless species that organizes quickly, reproduces rapidly, and adapts well to changing conditions. They are similar in appearance to goblins but are significantly taller and more muscled. While goblins are anarchic and gleefully destructive, though, hobgoblins are highly ordered and do nothing without a purpose.</p>\n<p>Most hobgoblin societies are paramilitary states, with no distinction between the government and the chain of command. They can be as small as a single starship crew or as large as a conquered world. However, these governments grant nothing unearned to any hobgoblin, and only those who show an aptitude for more advanced knowledge are given access to it. The young are considered fully trained junior soldiers as young as 14 years old, while some receive secondary education to become technicians, spies, or engineers at 16 years old.</p>\n<p>Hobgoblins are believed to have originated on lost Golarion. When the Gap ended, though, hobgoblins already dwelled in numerous solar systems, which suggests that they might have engaged in dangerous generation-ship or suspendedanimation expeditions of expansion, or that they had access to powerful interstellar transportation magic.</p>\n<p>While many societies were confused and shaken by the Gap, the disparate and widespread hobgoblin nations were almost entirely unaffected by it, and in some cases grew even stronger due to its amnesic effects. When the Gap ended, all hobgoblins still knew their own names and those of their superiors, their military rank and position, that they had earned those ranks through merit, and that their superiors had similarly earned their positions. This formed a strong common attitude that allowed many hobgoblin groups to work together, taking advantage of the confusion and consternation of their neighbors to wage quick, brutal wars of expansion against regions still coming to grips with the Gap.</p>\n<p>Additionally, most hobgoblin societies and groups immediately analyzed such things as their religions and social codes, and discarded anything that did not immediately make sense. For example, many hobgoblin societies found they had strict rules forbidding the pursuit of spellcasting knowledge and the use of magic, but this prohibition seemed needlessly limiting after the Gap. Similarly, many hobgoblin groups saw no advantage in worshiping their old gods. For example, many hobgoblin mercenary companies who work for the Veskarium have adopted the worship of @UUID[Compendium.sfrpg.setting.pq08s1mZZyi97PBA]{Damoritosh}.</p>\n<p>However, other ancient prohibitions remain to this day, though their origins are lost to the Gap. Whenever hobgoblins and elves first encountered one another in the years after the Gap, violence invariably ensued. Individual hobgoblins sometimes have no special hatred of elves, but for most of the race, elves are reviled and mistrusted creatures not even fit for use as slave labor.</p>\n<p>A typical hobgoblin is 5 feet tall and weighs 160 pounds.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<h3>Organization</h3>\n<p>solitary, pair, advance unit (3–6 plus 1 kanabo commando), squad (3–12), warband (4–16 plus 1 hobgoblin lieutenant)</p>\n</section>",
+        "value": "<h2>Description</h2>\n<p>Hobgoblins are a militant and merciless species that organizes quickly, reproduces rapidly, and adapts well to changing conditions. They are similar in appearance to goblins but are significantly taller and more muscled. While goblins are anarchic and gleefully destructive, though, hobgoblins are highly ordered and do nothing without a purpose.</p>\n<p>Most hobgoblin societies are paramilitary states, with no distinction between the government and the chain of command. They can be as small as a single starship crew or as large as a conquered world. However, these governments grant nothing unearned to any hobgoblin, and only those who show an aptitude for more advanced knowledge are given access to it. The young are considered fully trained junior soldiers as young as 14 years old, while some receive secondary education to become technicians, spies, or engineers at 16 years old.</p>\n<p>Hobgoblins are believed to have originated on lost Golarion. When the Gap ended, though, hobgoblins already dwelled in numerous solar systems, which suggests that they might have engaged in dangerous generation-ship or suspendedanimation expeditions of expansion, or that they had access to powerful interstellar transportation magic.</p>\n<p>While many societies were confused and shaken by the Gap, the disparate and widespread hobgoblin nations were almost entirely unaffected by it, and in some cases grew even stronger due to its amnesic effects. When the Gap ended, all hobgoblins still knew their own names and those of their superiors, their military rank and position, that they had earned those ranks through merit, and that their superiors had similarly earned their positions. This formed a strong common attitude that allowed many hobgoblin groups to work together, taking advantage of the confusion and consternation of their neighbors to wage quick, brutal wars of expansion against regions still coming to grips with the Gap.</p>\n<p>Additionally, most hobgoblin societies and groups immediately analyzed such things as their religions and social codes, and discarded anything that did not immediately make sense. For example, many hobgoblin societies found they had strict rules forbidding the pursuit of spellcasting knowledge and the use of magic, but this prohibition seemed needlessly limiting after the Gap. Similarly, many hobgoblin groups saw no advantage in worshiping their old gods. For example, many hobgoblin mercenary companies who work for the Veskarium have adopted the worship of @UUID[Compendium.sfrpg.setting.Item.pq08s1mZZyi97PBA]{Damoritosh}.</p>\n<p>However, other ancient prohibitions remain to this day, though their origins are lost to the Gap. Whenever hobgoblins and elves first encountered one another in the years after the Gap, violence invariably ensued. Individual hobgoblins sometimes have no special hatred of elves, but for most of the race, elves are reviled and mistrusted creatures not even fit for use as slave labor.</p>\n<p>A typical hobgoblin is 5 feet tall and weighs 160 pounds.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<h3>Organization</h3>\n<p>solitary, pair, advance unit (3–6 plus 1 kanabo commando), squad (3–12), warband (4–16 plus 1 hobgoblin lieutenant)</p>\n</section>",
         "weight": ""
       },
       "cl": {

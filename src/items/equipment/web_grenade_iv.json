@@ -2,7 +2,12 @@
   "_id": "f6Trt77gYgrJdGBO",
   "name": "Web Grenade IV",
   "type": "weapon",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
+  "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
     "type": "",
     "ability": "str",
@@ -16,8 +21,10 @@
       "condition": "",
       "cost": 1
     },
+    "ammunitionType": "",
     "area": {
       "effect": "burst",
+      "shapable": false,
       "shape": "",
       "units": "ft",
       "value": 25
@@ -50,6 +57,8 @@
     "chatFlavor": "mire 1 minute",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": 1,
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
@@ -80,8 +89,11 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>Developed using samples of haans’ biological webbing, a web grenade explodes to cover the area in sticky strands of hightensile fibers, making the affected area difficult terrain.</p>"
     },
@@ -90,9 +102,12 @@
       "units": "",
       "value": "mire 1 minute"
     },
+    "equippable": false,
     "equipped": false,
     "formula": "",
     "identified": true,
+    "isActive": null,
+    "isEquipment": true,
     "level": 19,
     "modifiers": [],
     "price": 163000,
@@ -185,12 +200,14 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
       "value": 20
     },
+    "rollNotes": "",
     "save": {
       "type": "reflex",
       "dc": "19+@abilities.dex.mod",
@@ -198,6 +215,7 @@
     },
     "source": "",
     "special": "",
+    "specialMaterials": {},
     "target": {
       "type": "",
       "value": ""

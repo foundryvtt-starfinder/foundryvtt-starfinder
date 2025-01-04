@@ -2,7 +2,12 @@
   "_id": "ULKDqF3h4k2Zb7Hr",
   "name": "Riot Grenade IV",
   "type": "weapon",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
+  "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
     "type": "",
     "ability": "str",
@@ -16,8 +21,10 @@
       "condition": "",
       "cost": 1
     },
+    "ammunitionType": "",
     "area": {
       "effect": "burst",
+      "shapable": false,
       "shape": "",
       "units": "ft",
       "value": 20
@@ -50,6 +57,8 @@
     "chatFlavor": "staggered",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": 1,
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
@@ -88,8 +97,11 @@
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>Riot grenades are standard issue among police forces, as they deal nonlethal damage and slow the movements of creatures affected by the blast.</p>"
     },
@@ -98,9 +110,12 @@
       "units": "",
       "value": "staggered"
     },
+    "equippable": false,
     "equipped": false,
     "formula": "",
     "identified": true,
+    "isActive": null,
+    "isEquipment": true,
     "level": 11,
     "modifiers": [],
     "price": 6910,
@@ -193,12 +208,14 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
       "value": 20
     },
+    "rollNotes": "",
     "save": {
       "type": "reflex",
       "dc": "15+@abilities.dex.mod",
@@ -206,6 +223,7 @@
     },
     "source": "",
     "special": "",
+    "specialMaterials": {},
     "target": {
       "type": "",
       "value": ""

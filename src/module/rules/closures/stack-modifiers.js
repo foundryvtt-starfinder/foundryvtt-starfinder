@@ -20,21 +20,22 @@ export default class StackModifiers extends Closure {
         const modifiers = mods;
         for (let modifiersI = 0; modifiersI < modifiers.length; modifiersI++) {
             const modifier = modifiers[modifiersI];
-            const actor = fromUuidSync(modifier.container?.actorUuid) || options.actor;
+            const actor = options.actor;
             const formula = String(modifier.modifier);
 
             if (formula && (modifier.modifierType === SFRPGModifierType.CONSTANT)) {
                 try {
                     const roll = Roll.create(formula, actor?.system);
                     if (roll.isDeterministic) {
-                        const simplerFormula = Roll.replaceFormulaData(formula, actor?.system, {missing: 0, warn: true});
+                        const warn = game.settings.get("sfrpg", "warnInvalidRollData") || false;
+                        const simplerFormula = Roll.replaceFormulaData(formula, actor?.system, {missing: 0, warn});
                         modifier.max = Roll.safeEval(simplerFormula);
                     } else {
                         ui.notifications.error(`Error with modifier: ${modifier.name}. Dice are not available in constant formulas. Please use a situational modifier instead.`);
                         modifier.max = 0;
                     }
                 } catch (error) {
-                    console.warn(`Could not calculate modifier: ${modifier.name} for actor with ID: ${modifier.container.actorUuid}. Setting to zero. ${error}`);
+                    console.warn(`Could not calculate modifier: ${modifier.name} for actor: ${modifier.actor.name}. Setting to zero. ${error}`);
                     modifier.max = 0;
                 }
             } else {
@@ -59,12 +60,20 @@ export default class StackModifiers extends Closure {
         if (modifiers.length > 0) {
             for (let modifiersI = 0; modifiersI < modifiers.length; modifiersI++) {
                 const modifier = modifiers[modifiersI];
-                const actor = await fromUuid(modifier.container?.actorUuid) || options.actor;
+                const actor = options.actor;
                 const formula = String(modifier.modifier);
 
                 if (formula) {
                     const roll = Roll.create(formula, actor?.system);
-                    const evaluatedRoll = await roll.evaluate({async: true});
+                    let evaluatedRoll = {};
+                    try {
+                        evaluatedRoll = await roll.evaluate();
+                    } catch {
+                        evaluatedRoll = {
+                            total: 0,
+                            dice: []
+                        };
+                    }
                     modifiers[modifiersI].max = evaluatedRoll.total;
                     modifiers[modifiersI].isDeterministic = roll.isDeterministic;
                     modifiers[modifiersI].dices = [];
@@ -72,6 +81,7 @@ export default class StackModifiers extends Closure {
                     if (!roll.isDeterministic) {
                         for (let allDiceI = 0; allDiceI < evaluatedRoll.dice.length; allDiceI++) {
                             const die = evaluatedRoll.dice[allDiceI];
+                            if (!die) continue;
                             modifiers[modifiersI].dices.push({
                                 formula: `${die.number}d${die.faces}`,
                                 faces: die.faces,
@@ -98,7 +108,8 @@ export default class StackModifiers extends Closure {
             luckMods,
             moraleMods,
             racialMods,
-            untypedMods] = modifiers.reduce((prev, curr) => {
+            untypedMods,
+            resistanceMods] = modifiers.reduce((prev, curr) => {
             switch (curr.type) {
                 case SFRPGModifierTypes.ABILITY:
                     prev[0].push(curr);
@@ -130,6 +141,9 @@ export default class StackModifiers extends Closure {
                 case SFRPGModifierTypes.RACIAL:
                     prev[9].push(curr);
                     break;
+                case SFRPGModifierTypes.RESISTANCE:
+                    prev[11].push(curr);
+                    break;
                 case SFRPGModifierTypes.UNTYPED:
                 default:
                     prev[10].push(curr);
@@ -137,7 +151,7 @@ export default class StackModifiers extends Closure {
             }
 
             return prev;
-        }, [[], [], [], [], [], [], [], [], [], [], []]);
+        }, [[], [], [], [], [], [], [], [], [], [], [], []]);
 
         const ability = abilityMods?.filter(mod => mod.max > 0)?.sort((a, b) => b.max - a.max)
             ?.shift() ?? null;
@@ -150,6 +164,7 @@ export default class StackModifiers extends Closure {
         const luck = luckMods?.sort((a, b) => b.max - a.max)?.shift() ?? null;
         const morale = moraleMods?.sort((a, b) => b.max - a.max)?.shift() ?? null;
         const racial = racialMods?.sort((a, b) => b.max - a.max)?.shift() ?? null;
+        const resistance = resistanceMods?.sort((a, b) => b.max - a.max)?.shift() ?? null;
         const untyped = untypedMods?.sort((a, b) => b.max - a.max);
 
         return {
@@ -163,6 +178,7 @@ export default class StackModifiers extends Closure {
             luck,
             morale,
             racial,
+            resistance,
             untyped
         };
     }

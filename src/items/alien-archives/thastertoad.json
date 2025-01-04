@@ -2,13 +2,23 @@
   "_id": "BiR8MaV8yySTFcsn",
   "name": "Thastertoad",
   "type": "npc2",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
+  "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
       "_id": "x094xAsAIuhnJwOO",
       "name": "Thasteron Fortification (Ex)",
       "type": "feat",
-      "img": "icons/svg/item-bag.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
@@ -21,6 +31,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -43,6 +54,11 @@
           "value": "<p>Plates of impure thasteron cover a thastertoad’s back, protecting it from some devastating injuries. There is a 20% chance that a critical hit against a thastertoad is treated as a normal attack, dealing normal damage instead and not applying any critical effect. Roll this percentage chance before critical hit damage is rolled.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -50,6 +66,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -83,7 +100,12 @@
       "_id": "Hkuvq9uHeEuwAvXo",
       "name": "Tongue (plus Grab)",
       "type": "weapon",
-      "img": "icons/svg/item-bag.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -100,6 +122,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -189,6 +212,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -341,7 +365,12 @@
       "_id": "tUJyN93AddbMIUBO",
       "name": "Constrict (Ex)",
       "type": "feat",
-      "img": "icons/svg/item-bag.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -357,6 +386,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -433,6 +463,11 @@
           "teleportation": false,
           "water": false
         },
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -440,6 +475,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -473,7 +509,12 @@
       "_id": "8TnM542DFZk8C0xv",
       "name": "Grab (Ex)",
       "type": "feat",
-      "img": "icons/svg/item-bag.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
@@ -486,6 +527,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -508,6 +550,11 @@
           "value": "<p>If a thastertoad hits with its tongue attack, it deals the listed damage. If the thastertoad’s attack roll successfully hits the target’s KAC + 4, the thastertoad automatically grapples the target (this takes no action); if it hits the target’s KAC + 13, it instead pins the target. The thastertoad doesn’t need to have a limb free to perform this grapple as long as it can make a tongue attack. If the thastertoad moves farther than 10 feet from the grappled target or makes a tongue attack against a different target, the grappled condition ends immediately. The thastertoad can attempt to renew the condition on the target by attempting a grapple combat maneuver check, using its melee attack die roll modifier of +9.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -515,6 +562,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -549,6 +597,7 @@
     "name": "Thastertoad",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -560,6 +609,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -580,11 +630,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -598,13 +666,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "src": "systems/sfrpg/icons/default/alien-stare.svg",
+      "tint": "#ffffff"
     },
     "width": 1
   },
@@ -838,7 +910,7 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<p>Long ago, the red planet of @UUID[Compendium.sfrpg.setting.gzXT0xwsj8kQAoj0]{Akiton} enjoyed prosperity as the major source of thasteron, a volatile mineral that could be refined into starship fuel. When vessels around the galaxy switched to Drift engines for long-distance travel, Akiton’s economy collapsed, and the thasteron mines and refineries were abandoned. But thasteron was always an infamously dirty fuel with a history of causing environmental damage. Even after the abandonment, large quantities of the mineral remained within the planet’s crust, and this raw substance spurred the mutation that created thastertoads from simple tailless lizards.</p>\n<p>Over many generations, the beasts grew in size, and their skin began to exude an impure form of thasteron that formed plates along their backs. They graduated from feeding on insects to larger animals, such as rats and other vermin, catching prey with their long tongues. Unlike other toads, thastertoads aren’t amphibious; they were named by space goblins, who cared little about scientific taxonomy and endured the grumpy personalities of these creatures to (partially) domesticate them. Space goblins who reside in and near Akiton’s fields of crashed starships often keep thastertoads as pets and guard animals.</p>",
+        "value": "<p>Long ago, the red planet of @UUID[Compendium.sfrpg.setting.Item.gzXT0xwsj8kQAoj0]{Akiton} enjoyed prosperity as the major source of thasteron, a volatile mineral that could be refined into starship fuel. When vessels around the galaxy switched to Drift engines for long-distance travel, Akiton’s economy collapsed, and the thasteron mines and refineries were abandoned. But thasteron was always an infamously dirty fuel with a history of causing environmental damage. Even after the abandonment, large quantities of the mineral remained within the planet’s crust, and this raw substance spurred the mutation that created thastertoads from simple tailless lizards.</p>\n<p>Over many generations, the beasts grew in size, and their skin began to exude an impure form of thasteron that formed plates along their backs. They graduated from feeding on insects to larger animals, such as rats and other vermin, catching prey with their long tongues. Unlike other toads, thastertoads aren’t amphibious; they were named by space goblins, who cared little about scientific taxonomy and endured the grumpy personalities of these creatures to (partially) domesticate them. Space goblins who reside in and near Akiton’s fields of crashed starships often keep thastertoads as pets and guard animals.</p>",
         "weight": ""
       },
       "class": "",

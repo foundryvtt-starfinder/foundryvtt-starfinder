@@ -2,12 +2,8 @@
     <div class="form-group spellcasting-ability">
         <label><h4 class="attribute-name box-title">{{localize "SFRPG.SpellBook.SpellCastingAbility"}}</h4></label>
         <select name="system.attributes.spellcasting" data-type="String">
-            {{#select system.attributes.spellcasting}}
-            <option value="">{{localize "SFRPG.SpellBook.AttributesNone"}}</option>
-            {{#each system.abilities as |abl a|}}
-            <option value="{{a}}">{{abl.label}}</option>
-            {{/each}}
-            {{/select}}
+            {{selectOption "" "SFRPG.SpellBook.AttributesNone" selected=system.attributes.spellcasting localize=true}}
+            {{selectOptions config.abilities selected=system.attributes.spellcasting}}
         </select>
     </div>
 </div>
@@ -26,15 +22,15 @@
                         {{#each section.classes as |spellsPerClass|}}
                             <span class="spell-class">
                                 <span class="sep">{{spellsPerClass.name}}: </span>
-                                <input type="text" name="system.spells.spell{{section.level}}.perClass.{{spellsPerClass.key}}.value" value="{{spellsPerClass.value}}"/>
+                                <input type="number" name="system.spells.spell{{section.level}}.perClass.{{spellsPerClass.key}}.value" value="{{spellsPerClass.value}}" data-dtype="Number" min="0" max="{{spellsPerClass.max}}"/>
                                 <span class="sep"> / {{spellsPerClass.max}}</span>
                             </span>
                         {{/each}}
                     </div>
                 {{else}}
-                    <input type="text" name="system.spells.spell{{section.level}}.value" value="{{section.uses}}" placeholder="0"/>
+                    <input type="number" name="system.spells.spell{{section.level}}.value" value="{{section.uses}}" placeholder="0"  data-dtype="Number" min="0" max="{{section.slots}}"/>
                     <span class="sep"> / </span>
-                    <input type="text" name="system.spells.spell{{section.level}}.max" value="{{section.slots}}" placeholder="0"/>
+                    <input type="number" name="system.spells.spell{{section.level}}.max" value="{{section.slots}}" placeholder="0"  data-dtype="Number" min="0"/>
                 {{/if}}
             {{ else }}
                 <span>{{{section.uses}}}</span>

@@ -2,12 +2,22 @@
   "_id": "qorX15hHEV5fnEmR",
   "name": "Ikeshti Brood-Minder",
   "type": "npc2",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
+  "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
       "_id": "psdtlXKjMcCQngo8",
       "name": "Knife, survival",
       "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "systems/sfrpg/icons/equipment/weapons/survival-knife.webp",
       "system": {
         "type": "",
@@ -25,6 +35,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -105,6 +116,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 95,
@@ -234,6 +246,11 @@
       "_id": "BDluvgw4Xlcm5aFx",
       "name": "Semi-auto pistol, tactical",
       "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "systems/sfrpg/icons/equipment/weapons/semi-auto-pistol-tactical.webp",
       "system": {
         "type": "",
@@ -251,6 +268,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -341,6 +359,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 260,
@@ -470,7 +489,12 @@
       "_id": "5T3AbXupzk2Ifqc2",
       "name": "Squirt Blood (Ex)",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -486,6 +510,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -508,6 +533,11 @@
           "value": "<p>Once per day as a move action, an ikeshti brood-minder can squirt blood from one of his eyes at a foe within 30 feet, making a ranged attack (+6 for most ikeshti brood-minders) against the target’s KAC. A successful hit grants the next ally who hits that foe the benefit of harrying fire against it (Starfinder Core Rulebook 247).</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": ""
@@ -515,6 +545,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -548,6 +579,11 @@
       "_id": "PLFCJHn6hZiZpj0R",
       "name": "Spell Penetration",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "systems/sfrpg/icons/feats/spell_penetration.webp",
       "system": {
         "type": "",
@@ -561,6 +597,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -583,6 +620,11 @@
           "value": "<p>Your spells break through spell resistance more easily than those of other spellcasters.</p>\n<hr />\n<p><strong>Benefit</strong>: You gain a +2 bonus to caster level checks to overcome a creature’s spell resistance (see page 265).</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": ""
@@ -590,6 +632,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -623,6 +666,11 @@
       "_id": "ezXFWc06elrW3adj",
       "name": "Spell Cache (Su)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "systems/sfrpg/icons/classes/spell_cache.webp",
       "system": {
         "type": "",
@@ -639,6 +687,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -658,9 +707,14 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.IvLuq2pxKkHJJpae]{Technomancer}</p>\n<p>As the culmination of your early study of the fundamental forces of the galaxy, you have created a spell cache that allows you to store and access spells. Your spell cache could be a device such as a handheld computer or technological implant; an item such as a ring or staff; or a symbol such as a brand, tattoo, or other permanent modification to your body. While you don’t need your spell cache to cast your spells, once per day, you can activate your spell cache to cast any one spell you know and are capable of casting, even if you’ve expended all your spell slots for that spell’s level.</p>\n<p>If your spell cache is damaged, it is restored to full Hit Points the next time you prepare spells. If the spell cache is lost or destroyed, you can replace it after 1 week with a special ritual that takes 8 hours to complete.</p>"
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.IvLuq2pxKkHJJpae]{Technomancer}</p>\n<p>As the culmination of your early study of the fundamental forces of the galaxy, you have created a spell cache that allows you to store and access spells. Your spell cache could be a device such as a handheld computer or technological implant; an item such as a ring or staff; or a symbol such as a brand, tattoo, or other permanent modification to your body. While you don’t need your spell cache to cast your spells, once per day, you can activate your spell cache to cast any one spell you know and are capable of casting, even if you’ve expended all your spell slots for that spell’s level.</p>\n<p>If your spell cache is damaged, it is restored to full Hit Points the next time you prepare spells. If the spell cache is lost or destroyed, you can replace it after 1 week with a special ritual that takes 8 hours to complete.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -668,6 +722,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -701,6 +756,11 @@
       "_id": "uolDmU7lIB0Rb38A",
       "name": "Freebooter armor I",
       "type": "equipment",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "systems/sfrpg/icons/equipment/armor/freebooter-armor-1.webp",
       "system": {
         "type": "",
@@ -718,6 +778,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -787,7 +848,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>Popularized by the Free Captains of @UUID[Compendium.sfrpg.setting.Yt2xT4Iy6lHjCzso]{The Diaspora}, freebooter armor features an armored jacket or breastplate, heavy boots and gloves, numerous straps and hidden weapons, and a helmet. Novice explorers and mercenaries beginning their career sometimes choose freebooter armor for the air of rakish experience this light armor lends its wearer.</p>"
+          "value": "<p>Popularized by the Free Captains of @UUID[Compendium.sfrpg.setting.Item.Yt2xT4Iy6lHjCzso]{The Diaspora}, freebooter armor features an armored jacket or breastplate, heavy boots and gloves, numerous straps and hidden weapons, and a helmet. Novice explorers and mercenaries beginning their career sometimes choose freebooter armor for the air of rakish experience this light armor lends its wearer.</p>"
         },
         "descriptors": [],
         "duration": {
@@ -803,6 +864,7 @@
         "modifiers": [],
         "price": 750,
         "proficient": true,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
@@ -842,6 +904,11 @@
       "_id": "wqEKAF3i8wwTROx1",
       "name": "Rounds, Small Arm",
       "type": "goods",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "systems/sfrpg/icons/equipment/weapons/rounds-small-arm.webp",
       "system": {
         "type": "",
@@ -896,6 +963,11 @@
       "_id": "OerJWxaXGqOwxAcd",
       "name": "Detect Tech",
       "type": "spell",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "systems/sfrpg/icons/spells/detect_tech.webp",
       "system": {
         "type": "",
@@ -918,6 +990,7 @@
         },
         "area": {
           "effect": "burst",
+          "shapable": false,
           "shape": "cone",
           "units": "ft",
           "value": 60
@@ -961,6 +1034,7 @@
           "mode": null,
           "prepared": true
         },
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -991,6 +1065,11 @@
       "_id": "gAzic465D9rnlTwe",
       "name": "Jolting Surge",
       "type": "spell",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "systems/sfrpg/icons/spells/jolting_surge.webp",
       "system": {
         "type": "",
@@ -1013,6 +1092,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -1064,6 +1144,7 @@
           "mode": "",
           "prepared": true
         },
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -1094,6 +1175,11 @@
       "_id": "aaHfMAZ97LA1mBNx",
       "name": "Detect Magic",
       "type": "spell",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "systems/sfrpg/icons/spells/detect_magic.webp",
       "system": {
         "type": "",
@@ -1116,6 +1202,7 @@
         },
         "area": {
           "effect": "emanation",
+          "shapable": false,
           "shape": "cone",
           "units": "ft",
           "value": 60
@@ -1159,6 +1246,7 @@
           "mode": "always",
           "prepared": true
         },
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -1189,6 +1277,11 @@
       "_id": "B1R9ePVlVzq2RYXn",
       "name": "Energy Ray",
       "type": "spell",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.0"
+      },
       "img": "systems/sfrpg/icons/spells/energy_ray.webp",
       "system": {
         "type": "",
@@ -1211,6 +1304,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -1260,6 +1354,7 @@
           "mode": "always",
           "prepared": true
         },
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -1291,6 +1386,7 @@
     "name": "Ikeshti Brood-Minder",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -1302,6 +1398,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -1322,11 +1419,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -1340,13 +1455,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "src": "systems/sfrpg/icons/default/alien-stare.svg",
+      "tint": "#ffffff"
     },
     "width": 1
   },
@@ -1545,7 +1664,7 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<section>\n<h2>Description</h2>\n<p>Ikeshtis are a hardy race of lizardfolk native to the deserts and hills of @UUID[Compendium.sfrpg.setting.gzXT0xwsj8kQAoj0]{Akiton}, and their convoluted life cycle provides the blueprint for their civilization. The physiology and psychology of ikeshtis shift drastically as they go through childhood, adolescence, mating, and one of three adult paths.</p>\n<p>When they are hatched, ikeshtis are little more than gaping mouths attached to tiny, emaciated versions of their adult forms. A brood of ikeshti young will eat any organic matter they come across. As they grow larger, their brains become more developed, and they learn the rudiments of speech and other skills from their brood-minders, who guide them in their feeding habits. Such broods sometimes operate as living garbage disposals for large settlements, while others are taught to perform nomadic grazing that leaves the local biosphere intact. However, ikeshti broods left to their own devices seek out areas rich in organic matter and devour it all, much like a swarm of locusts.</p>\n<p>After 5 years and 3 feet of growth, ikeshtis leave their broodminders and settle down into a more civilized mode, banding together with other adolescents of various ages. These ikeshtis collaborate to advance their economic, social, and technological skills, typically working around the fringes of civilization as junk traders, mechanics, and scavengers.</p>\n<p>After 10 to 20 years of adolescence, ikeshtis begin to rut. They become violent and single-minded, their intelligence overcome by urges to fight and mate. Rutting ikeshtis once again eat voraciously, gaining new spurs and claws as well as hardened scales. If they find a willing partner, they mate, laying and fertilizing a large clutch of eggs. The two mates then fight each other to the death. If the male survives the combat, he becomes a brood-minder. If the female is victorious, she becomes a congregant. Rutting ikeshtis who never find mating partners continue to grow ever larger and more aggressive, eventually losing their mental faculties altogether and becoming riveners.</p>\n<p>Brood-minders quickly regain their prior knowledge and personalities, but their temperaments become somewhat phlegmatic and standoffish. They are driven by strong urges to manage a brood of young ikeshtis. They have no instinctive preference for their own young and seek to add newborn ikeshtis to their broods to the limit of their ability to control and guide them, even killing off the weakest young to open up space for candidates who show more promise. Brood-minders live a solitary life, focused on leading their broods to food sources and keeping them alive.</p>\n<p>Congregants instinctively feel the need to ensure the success of ikeshti society as a whole. Some form groupings much like adolescent nests, living collaboratively, but individual congregants often become adventurers off-planet to bring wealth and fame back to their people.</p>\n<p>Riveners are ikeshtis who were unable to find a mate while rutting and lost their personalities to the brew of hormones swirling inside them. They are bestial and irrational, remembering only the rudiments of language and unable to engage in more than low cunning. Riveners care only about killing, eating, and the thrill of battle. Ikeshtis who come across a rivener go to almost any lengths to put it down, as they believe the existence of these terrors brings shame to their race.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any deserts, hills, or mountains (@UUID[Compendium.sfrpg.setting.gzXT0xwsj8kQAoj0]{Akiton})</p>\n<h3>Organization</h3>\n<p>solitary, team (2-4), or nest (5-12)</p>\n</section>",
+        "value": "<section>\n<h2>Description</h2>\n<p>Ikeshtis are a hardy race of lizardfolk native to the deserts and hills of @UUID[Compendium.sfrpg.setting.Item.gzXT0xwsj8kQAoj0]{Akiton}, and their convoluted life cycle provides the blueprint for their civilization. The physiology and psychology of ikeshtis shift drastically as they go through childhood, adolescence, mating, and one of three adult paths.</p>\n<p>When they are hatched, ikeshtis are little more than gaping mouths attached to tiny, emaciated versions of their adult forms. A brood of ikeshti young will eat any organic matter they come across. As they grow larger, their brains become more developed, and they learn the rudiments of speech and other skills from their brood-minders, who guide them in their feeding habits. Such broods sometimes operate as living garbage disposals for large settlements, while others are taught to perform nomadic grazing that leaves the local biosphere intact. However, ikeshti broods left to their own devices seek out areas rich in organic matter and devour it all, much like a swarm of locusts.</p>\n<p>After 5 years and 3 feet of growth, ikeshtis leave their broodminders and settle down into a more civilized mode, banding together with other adolescents of various ages. These ikeshtis collaborate to advance their economic, social, and technological skills, typically working around the fringes of civilization as junk traders, mechanics, and scavengers.</p>\n<p>After 10 to 20 years of adolescence, ikeshtis begin to rut. They become violent and single-minded, their intelligence overcome by urges to fight and mate. Rutting ikeshtis once again eat voraciously, gaining new spurs and claws as well as hardened scales. If they find a willing partner, they mate, laying and fertilizing a large clutch of eggs. The two mates then fight each other to the death. If the male survives the combat, he becomes a brood-minder. If the female is victorious, she becomes a congregant. Rutting ikeshtis who never find mating partners continue to grow ever larger and more aggressive, eventually losing their mental faculties altogether and becoming riveners.</p>\n<p>Brood-minders quickly regain their prior knowledge and personalities, but their temperaments become somewhat phlegmatic and standoffish. They are driven by strong urges to manage a brood of young ikeshtis. They have no instinctive preference for their own young and seek to add newborn ikeshtis to their broods to the limit of their ability to control and guide them, even killing off the weakest young to open up space for candidates who show more promise. Brood-minders live a solitary life, focused on leading their broods to food sources and keeping them alive.</p>\n<p>Congregants instinctively feel the need to ensure the success of ikeshti society as a whole. Some form groupings much like adolescent nests, living collaboratively, but individual congregants often become adventurers off-planet to bring wealth and fame back to their people.</p>\n<p>Riveners are ikeshtis who were unable to find a mate while rutting and lost their personalities to the brew of hormones swirling inside them. They are bestial and irrational, remembering only the rudiments of language and unable to engage in more than low cunning. Riveners care only about killing, eating, and the thrill of battle. Ikeshtis who come across a rivener go to almost any lengths to put it down, as they believe the existence of these terrors brings shame to their race.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any deserts, hills, or mountains (@UUID[Compendium.sfrpg.setting.Item.gzXT0xwsj8kQAoj0]{Akiton})</p>\n<h3>Organization</h3>\n<p>solitary, team (2-4), or nest (5-12)</p>\n</section>",
         "weight": ""
       },
       "class": "",

@@ -3,11 +3,7 @@
         <label>{{localize "SFRPG.ModifierTypeAbility"}}</label>
         <div class="form-fields">
             <select name="ability">
-                {{#select skill.ability}}
-                {{#each config.abilities as |ability a|}}
-                <option value="{{a}}">{{ability}}</option>
-                {{/each}}
-                {{/select}}
+                {{selectOptions config.abilities selected=skill.ability}}
             </select>
         </div>
     </div>

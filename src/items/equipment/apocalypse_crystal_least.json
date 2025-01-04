@@ -2,6 +2,11 @@
   "_id": "CEvkwfCtW9aTPFLz",
   "name": "Apocalypse crystal, least",
   "type": "weapon",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.0"
+  },
   "img": "icons/commodities/gems/gem-rough-cushion-red-white.webp",
   "system": {
     "type": "",
@@ -19,6 +24,7 @@
     "ammunitionType": "",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": 0
@@ -71,40 +77,8 @@
       "parts": []
     },
     "damage": {
-      "parts": [
-        {
-          "name": "Base damage",
-          "formula": "1d4",
-          "group": null,
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
-            "cold": false,
-            "electricity": false,
-            "fire": false,
-            "healing": false,
-            "piercing": false,
-            "slashing": false,
-            "sonic": false
-          }
-        },
-        {
-          "name": "Corrode",
-          "formula": "1d6",
-          "group": null,
-          "types": {
-            "acid": true,
-            "bludgeoning": false,
-            "cold": false,
-            "electricity": false,
-            "fire": false,
-            "healing": false,
-            "piercing": false,
-            "slashing": false,
-            "sonic": false
-          }
-        }
-      ]
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -112,7 +86,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>Regions ravaged by a living apocalypse’s radioactivity sometimes develop a form of natural solarian weapon crystal known as an apocalypse crystal. While no one is foolish enough to oppose a living apocalypse to search its environs for these crystals, when a living apocalypse moves away from a devastated area it dwelt in for a long period, there is often a “crystal rush.” Representatives of solarian academies and other prospectors in environmental suits risk exposure to lingering radiation in hopes of finding any apocalypse crystals before anyone else—and before the malevolent nuclear ooze returns.</p>\n<p>An apocalypse crystal causes the damage dealt by your solarian weapon to function as a force effect. On a critical hit, your target’s molecules begin to lose cohesion, inflicting terrible damage.</p>"
+      "value": "<p>Regions ravaged by a living apocalypse’s radioactivity sometimes develop a form of natural solarian weapon crystal known as an apocalypse crystal. While no one is foolish enough to oppose a living apocalypse to search its environs for these crystals, when a living apocalypse moves away from a devastated area it dwelt in for a long period, there is often a “crystal rush.” Representatives of solarian academies and other prospectors in environmental suits risk exposure to lingering radiation in hopes of finding any apocalypse crystals before anyone else—and before the malevolent nuclear ooze returns.</p>\n<p>An apocalypse crystal causes the damage dealt by your solarian weapon to function as a force effect. On a critical hit, your target’s molecules begin to lose cohesion, inflicting terrible damage.</p>\n<p><span>Critical Effect: </span>Corrode 1d6</p>"
     },
     "descriptors": [],
     "duration": {
@@ -124,8 +98,26 @@
     "formula": "",
     "identified": true,
     "isActive": null,
+    "isEquipment": true,
     "level": 5,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "a925e027-ad9f-414f-83c6-f0b34baff2cd",
+        "name": "Apocalypse crystal, least",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-damage",
+        "enabled": true,
+        "limitTo": "container",
+        "max": 4,
+        "modifier": "1d4",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "price": 3050,
     "proficient": true,
     "properties": {
@@ -166,6 +158,7 @@
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
       "hybrid": false,
       "hydrodynamic": false,
@@ -236,6 +229,10 @@
       "type": "",
       "dc": "",
       "descriptor": "negate"
+    },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
     },
     "source": "AA2 pg. 81",
     "special": "",

@@ -15,10 +15,10 @@ export default function(engine) {
             const ablativeData = ablativeItem.system;
 
             const evenDistributionValue = ablativeData.ablativeValue / 4;
-            if (data.quadrants.forward.ablative.max != evenDistributionValue
-                || data.quadrants.port.ablative.max != evenDistributionValue
-                || data.quadrants.starboard.ablative.max != evenDistributionValue
-                || data.quadrants.aft.ablative.max != evenDistributionValue) {
+            if (data.quadrants.forward.ablative.max !== evenDistributionValue
+                || data.quadrants.port.ablative.max !== evenDistributionValue
+                || data.quadrants.starboard.ablative.max !== evenDistributionValue
+                || data.quadrants.aft.ablative.max !== evenDistributionValue) {
                 data.attributes.pilotingBonus.value = Math.max(data.attributes.pilotingBonus.value - 1, -3);
                 data.attributes.pilotingBonus.tooltip.push(game?.i18n ? game.i18n.format("SFRPG.StarshipSheet.Modifiers.UnevenAblative", {mod: -1}) : `Ablative armor unbalance: -1`);
             }
