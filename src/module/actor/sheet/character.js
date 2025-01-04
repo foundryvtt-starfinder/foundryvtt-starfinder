@@ -12,7 +12,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
 
     static get defaultOptions() {
         const options = super.defaultOptions;
-        mergeObject(options, {
+        foundry.utils.mergeObject(options, {
             classes: ['sfrpg', 'sheet', 'actor', 'character'],
             width: 715
             // height: 830
@@ -197,7 +197,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
                 hasActions: true,
                 dataset: { type: "feat", "activation.type": "action" }
             },
-            ...duplicate(CONFIG.SFRPG.featureCategories),
+            ...foundry.utils.deepClone(CONFIG.SFRPG.featureCategories),
             resources: {
                 category: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"),
                 items: [],
@@ -280,16 +280,6 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         html.find('.modifier-delete').on('click', this._onModifierDelete.bind(this));
         html.find('.modifier-toggle').on('click', this._onToggleModifierEnabled.bind(this));
         html.find('.player-class-level-up').on('click', this._onLevelUp.bind(this));
-    }
-
-    onBeforeCreateNewItem(itemData) {
-        super.onBeforeCreateNewItem(itemData);
-
-        if (itemData["type"] === "asi") {
-            const numASI = this.actor.items.filter(x => x.type === "asi").length;
-            const level = 5 + numASI * 5;
-            itemData.name = game.i18n.format("SFRPG.ItemSheet.AbilityScoreIncrease.ItemName", {level: level});
-        }
     }
 
     /**

@@ -2,6 +2,11 @@
   "_id": "BhqOY4vd6cpDVrKI",
   "name": "Avenging Burst (Mechanized Niche)",
   "type": "feat",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.26.1"
+  },
   "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "",
@@ -32,7 +37,7 @@
       "parts": [
         {
           "name": "D4",
-          "formula": "(floor(@classes.evolutionist.levels / 2))d4",
+          "formula": "(max(1,floor(@classes.evolutionist.levels / 2)))d4",
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -47,7 +52,7 @@
         },
         {
           "name": "D6",
-          "formula": "(floor(@classes.evolutionist.levels / 2))d6",
+          "formula": "(max(1,floor(@classes.evolutionist.levels / 2)))d6",
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -62,7 +67,7 @@
         },
         {
           "name": "D8",
-          "formula": "(floor(@classes.evolutionist.levels / 2))d8",
+          "formula": "(max(1,floor(@classes.evolutionist.levels / 2)))d8",
           "types": {
             "acid": false,
             "bludgeoning": false,

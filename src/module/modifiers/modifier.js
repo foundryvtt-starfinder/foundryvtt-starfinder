@@ -28,17 +28,17 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
 
     _initializeSource(source, options = {}) {
         // Create a random id, or set the specific one if provided.
-        source._id ||= source.id || generateUUID();
+        source._id ||= (source.id || generateUUID());
 
-        return super._initializeSource(source, (options = {}));
+        return super._initializeSource(source, options);
     }
 
     // Slight hack to keep modifiers on the database or exported to JSON minimal and clean.
     toObject(source = true) {
         if (source) {
-            const obj = deepClone(this._source);
+            const obj = foundry.utils.deepClone(this._source);
             delete obj.container;
-            if (!this.constructor._hasDamageSection(obj)) delete obj.damage;
+            if (!this.hasDamageSection) delete obj.damage;
             if (!obj.limitTo) delete obj.limitTo;
             return obj;
         }
@@ -63,7 +63,7 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
         try {
             if (!this.max) {
                 const roll = Roll.create(this.modifier.toString());
-                this.max = roll.evaluate({maximize: true}).total;
+                this.max = roll.evaluateSync({strict: false}).total;
             }
         } catch {
             this.max = 0;

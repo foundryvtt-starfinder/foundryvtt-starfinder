@@ -17,7 +17,7 @@ export default function(engine) {
 
             let computedBonus = 0;
             try {
-                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
                 computedBonus = roll.total;
             } catch {}
 
@@ -35,7 +35,7 @@ export default function(engine) {
         let spMax = 0; // Max(Constitution Modifier * Character level + Class' SP per level * Class Level, 0)
 
         // Constitution bonus
-        let constitutionBonus = data.abilities.con.mod * data.details.level.value;
+        const constitutionBonus = data.abilities.con.mod * data.details.level.value;
         spMax += constitutionBonus;
 
         data.attributes.sp.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Header.Stamina.ConstitutionTooltip", {
@@ -47,7 +47,7 @@ export default function(engine) {
             for (const cls of fact.classes) {
                 const classData = cls.system;
 
-                let classBonus = Math.floor(classData.levels * classData.sp.value);
+                const classBonus = Math.floor(classData.levels * classData.sp.value);
                 spMax += classBonus;
 
                 data.attributes.sp.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Header.Stamina.ClassTooltip", {
@@ -65,7 +65,7 @@ export default function(engine) {
         });
         filteredModifiers = context.parameters.stackModifiers.process(filteredModifiers, context, {actor: fact.actor});
 
-        let bonus = Object.entries(filteredModifiers).reduce((sum, mod) => {
+        const bonus = Object.entries(filteredModifiers).reduce((sum, mod) => {
             if (mod[1] === null || mod[1].length < 1) return sum;
 
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
