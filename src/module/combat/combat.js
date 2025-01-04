@@ -67,7 +67,8 @@ export class CombatSFRPG extends Combat {
     async begin() {
         const update = {
             "flags.sfrpg.combatType": this.getCombatType(),
-            "flags.sfrpg.phase": 0
+            "flags.sfrpg.phase": 0,
+            "round": 1
         };
 
         await this.update(update);
@@ -341,7 +342,7 @@ export class CombatSFRPG extends Combat {
         const eventData = {
             combat: this,
             isNewRound: nextRound !== this.round,
-            isNewPhase: nextRound !== this.round || nextPhase !== this.flags.sfrpg.phase,
+            isNewPhase: nextPhase !== this.flags.sfrpg.phase,
             isNewTurn: (nextRound !== this.round && phases[nextPhase].iterateTurns) || nextTurn !== this.turn,
             oldTurn: this.turn,
             newTurn: nextTurn,
