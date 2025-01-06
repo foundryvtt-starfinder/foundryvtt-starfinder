@@ -4,7 +4,7 @@
         <label>{{localize "SFRPG.CombatRoles.Label"}}</label>
         <select class="npc-combat-role" name="system.details.combatRole">
             {{selectOption "" "" selected=system.details.combatRole}}
-            {{selectOptions config.combatRoles selected=system.details.combatRole}}
+            {{selectOptions (sfrpg "combatRoles") selected=system.details.combatRole}}
         </select>
     </div>
     {{/if}}
@@ -12,7 +12,7 @@
         <label>{{localize "SFRPG.Size"}}</label>
         {{#if (not isDrone)}}
         <select class="actor-size" name="system.traits.size">
-            {{selectOptions config.actorSizes selected=system.traits.size}}
+            {{selectOptions (sfrpg "actorSizes") selected=system.traits.size}}
         </select>
         {{else}}
         <span class="value">{{system.traits.size}}</span>
@@ -24,7 +24,7 @@
         <label>{{localize "SFRPG.KeyAbility"}}</label>
         <select class="actor-keyability" name="system.attributes.keyability">
             {{selectOption "" "Choose One" selected=system.attributes.keyability}}
-            {{selectOptions config.abilities selected=system.attributes.keyability}}
+            {{selectOptions (sfrpg "abilities") selected=system.attributes.keyability}}
         </select>
     </div>
     {{/if}}
@@ -119,8 +119,8 @@
                 {{#if (eq negatedBy "")}}
                     -
                 {{else}}
-                    {{#if (lookup ../config.damageReductionTypes negatedBy)}}
-                        {{lookup ../config.damageReductionTypes negatedBy}}
+                    {{#if (sfrpg "damageReductionTypes" negatedBy)}}
+                        {{sfrpg "damageReductionTypes" negatedBy}}
                     {{else}}
                         {{negatedBy}}
                     {{/if}}
@@ -141,7 +141,7 @@
             {{#if (eq damageType "custom")}}
             <li class="tag {{damageType}}">{{erModifier.source.notes}} {{erModifier.value}}</li>
             {{else}}
-                <li class="tag {{damageType}}">{{lookup ../config.energyResistanceTypes damageType}} {{erModifier.value}}</li>
+                <li class="tag {{damageType}}">{{sfrpg "energyResistanceTypes" damageType}} {{erModifier.value}}</li>
             {{/if}}
         {{/each}}
         </ul>

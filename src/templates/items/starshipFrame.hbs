@@ -42,7 +42,7 @@
                                 <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.Size" }}</label>
                                 <div class="form-fields">
                                     <select class="actor-size" name="system.size">
-                                        {{selectOptions config.starshipSizes selected=itemData.size}}
+                                        {{selectOptions (sfrpg "starshipSizes") selected=itemData.size}}
                                     </select>
                                 </div>
                             </div>
@@ -52,7 +52,7 @@
                                 <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.Maneuverability" }}</label>
                                 <div class="form-fields">
                                     <select class="actor-size" name="system.maneuverability">
-                                        {{selectOptions config.maneuverability selected=itemData.maneuverability}}
+                                        {{selectOptions (sfrpg "maneuverability") selected=itemData.maneuverability}}
                                     </select>
                                 </div>
                             </div>

@@ -52,7 +52,7 @@
                         <label>{{ localize "SFRPG.DroneSheet.Chassis.Details.BaseStatistics.Size" }}</label>
                         <div class="form-fields">
                             <select class="actor-size" name="system.size">
-                                {{selectOptions config.actorSizes selected=itemData.size}}
+                                {{selectOptions (sfrpg "actorSizes") selected=itemData.size}}
                             </select>
                         </div>
                     </div>
@@ -90,7 +90,7 @@
                                 <label>{{localize "SFRPG.DroneSheet.Chassis.Details.Saves.Fortitude"}}</label>
                                 <div class="form-fields">
                                     <select name="system.fort">
-                                        {{selectOptions config.saveProgression selected=itemData.fort}}
+                                        {{selectOptions (sfrpg "saveProgression") selected=itemData.fort}}
                                     </select>
                                 </div>
                             </div>
@@ -99,7 +99,7 @@
                                 <label>{{localize "SFRPG.DroneSheet.Chassis.Details.Saves.Reflex"}}</label>
                                 <div class="form-fields">
                                     <select name="system.ref">
-                                        {{selectOptions config.saveProgression selected=itemData.ref}}
+                                        {{selectOptions (sfrpg "saveProgression") selected=itemData.ref}}
                                     </select>
                                 </div>
                             </div>
@@ -108,7 +108,7 @@
                                 <label>{{localize "SFRPG.DroneSheet.Chassis.Details.Saves.Will"}}</label>
                                 <div class="form-fields">
                                     <select name="system.will">
-                                        {{selectOptions config.saveProgression selected=itemData.will}}
+                                        {{selectOptions (sfrpg "saveProgression") selected=itemData.will}}
                                     </select>
                                 </div>
                             </div>
@@ -171,7 +171,7 @@
                         <label>{{ localize "SFRPG.ActorSheet.Attributes.Speed.MainMovementType" }}</label>
                         <div class="form-fields">
                             <select name="system.speed.mainMovement">
-                                {{selectOptions config.speeds selected=itemData.speed.mainMovement}}
+                                {{selectOptions (sfrpg "speeds") selected=itemData.speed.mainMovement}}
                             </select>
                         </div>
                     </div>
@@ -228,11 +228,11 @@
                         <div class="form-group bubble-info">
                             <div class="form-fields">
                                 <select name="system.abilityIncreaseStats.first">
-                                    {{selectOptions config.abilities selected=itemData.abilityIncreaseStats.first}}
+                                    {{selectOptions (sfrpg "abilities") selected=itemData.abilityIncreaseStats.first}}
                                 </select>
 
                                 <select name="system.abilityIncreaseStats.second">
-                                    {{selectOptions config.abilities selected=itemData.abilityIncreaseStats.second}}
+                                    {{selectOptions (sfrpg "abilities") selected=itemData.abilityIncreaseStats.second}}
                                 </select>
                             </div>
                         </div>

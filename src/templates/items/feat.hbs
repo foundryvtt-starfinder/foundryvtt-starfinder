@@ -65,7 +65,7 @@
                             <div class="form-group select">
                                 <label for="category">{{ localize "SFRPG.Items.Feat.FeatureCategory" }}</label>
                                 <select name="system.details.category" id="category">
-                                    {{selectOptions config.featureCategories selected=itemData.details.category labelAttr="label"}}
+                                    {{selectOptions (sfrpg "featureCategories") selected=itemData.details.category labelAttr="label"}}
                                 </select>
                             </div>
 
@@ -79,7 +79,7 @@
                             <div class="form-group select">
                                 <label for="category">{{ localize "SFRPG.Items.Feat.SpecialAbilityType" }}</label>
                                 <select name="system.details.specialAbilityType" id="specialAbilityType">
-                                    {{selectOptions config.specialAbilityTypes selected=itemData.details.specialAbilityType}}
+                                    {{selectOptions (sfrpg "specialAbilityTypes") selected=itemData.details.specialAbilityType}}
                                 </select>
                             </div>
 

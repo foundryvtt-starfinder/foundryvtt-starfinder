@@ -40,7 +40,7 @@
                             <div class="form-group">
                                 <label>{{ localize "SFRPG.Items.Weapon.Type" }}</label>
                                 <select name="system.weaponType">
-                                    {{selectOptions config.weaponTypes selected=itemData.weaponType}}
+                                    {{selectOptions (sfrpg "weaponTypes") selected=itemData.weaponType}}
                                 </select>
                             </div>
 
@@ -49,7 +49,7 @@
                                 <label>{{ localize "SFRPG.Items.Weapon.Category" }}</label>
                                 <select name="system.weaponCategory">
                                     {{selectOption "" "Unspecified" selected=itemData.weaponCategory}}
-                                    {{selectOptions config.weaponCategories selected=itemData.weaponCategory}}
+                                    {{selectOptions (sfrpg "weaponCategories") selected=itemData.weaponCategory}}
                                 </select>
                             </div>
 
