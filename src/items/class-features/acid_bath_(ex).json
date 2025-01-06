@@ -17,29 +17,63 @@
     "actionTarget": "",
     "actionType": "other",
     "activation": {
-      "type": "",
-      "condition": "",
+      "type": "none",
+      "condition": "Make a weapon attack",
       "cost": null
     },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "",
-      "value": 0
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
-      "effect": "corrode",
+      "effect": "Corrode",
       "parts": []
     },
     "damage": {
       "parts": [
         {
-          "name": "",
+          "name": "Base Corrode",
           "formula": "1d6",
-          "group": null,
+          "group": 0,
+          "isPrimarySection": true,
+          "types": {
+            "acid": true,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Weapon Item Level 15-18 Corrode",
+          "formula": "",
+          "group": 0,
+          "isPrimarySection": true,
+          "types": {
+            "acid": true,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Weapon Item Level 19+ Corrode",
+          "formula": "3d6",
+          "group": 0,
           "isPrimarySection": true,
           "types": {
             "acid": true,
@@ -54,7 +88,7 @@
           }
         }
       ],
-      "primaryGroup": null
+      "primaryGroup": 0
     },
     "damageNotes": "",
     "description": {
@@ -108,8 +142,8 @@
       "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "text",
-      "value": null
+      "units": "instantaneous",
+      "value": ""
     },
     "formula": "",
     "isActive": null,
@@ -121,19 +155,115 @@
         "condition": "",
         "effectType": "all-attacks",
         "enabled": true,
-        "max": -1,
+        "max": 0,
         "modifier": "-1",
-        "modifierType": "constant",
+        "modifierType": "formula",
         "notes": "",
         "source": "",
         "subtab": "misc",
         "valueAffected": ""
       }
     ],
+    "properties": {
+      "aeon": false,
+      "amm": false,
+      "analog": false,
+      "antibiological": false,
+      "archaic": false,
+      "aurora": false,
+      "automatic": false,
+      "blast": false,
+      "block": false,
+      "boost": false,
+      "breach": false,
+      "breakdown": false,
+      "bright": false,
+      "buttressing": false,
+      "cluster": false,
+      "conceal": false,
+      "deconstruct": false,
+      "deflect": false,
+      "disarm": false,
+      "double": false,
+      "drainCharge": false,
+      "echo": false,
+      "entangle": false,
+      "explode": false,
+      "extinguish": false,
+      "feint": false,
+      "fiery": false,
+      "firstArc": false,
+      "flexibleLine": false,
+      "force": false,
+      "freeHands": false,
+      "fueled": false,
+      "gearArray": false,
+      "grapple": false,
+      "gravitation": false,
+      "guided": false,
+      "harrying": false,
+      "healing": false,
+      "holyWater": false,
+      "hybrid": false,
+      "hydrodynamic": false,
+      "ignite": false,
+      "indirect": false,
+      "injection": false,
+      "instrumental": false,
+      "integrated": false,
+      "line": false,
+      "living": false,
+      "lockdown": false,
+      "mind-affecting": false,
+      "mine": false,
+      "mire": false,
+      "modal": false,
+      "necrotic": false,
+      "nonlethal": false,
+      "one": false,
+      "operative": false,
+      "penetrating": false,
+      "polarize": false,
+      "polymorphic": false,
+      "powered": false,
+      "professional": false,
+      "propel": false,
+      "punchGun": false,
+      "qreload": false,
+      "radioactive": false,
+      "reach": false,
+      "recall": false,
+      "regrowth": false,
+      "relic": false,
+      "reposition": false,
+      "scramble": false,
+      "shape": false,
+      "shatter": false,
+      "shells": false,
+      "shield": false,
+      "sniper": false,
+      "stun": false,
+      "subtle": false,
+      "sunder": false,
+      "swarm": false,
+      "tail": false,
+      "teleportive": false,
+      "thought": false,
+      "throttle": false,
+      "thrown": false,
+      "thruster": false,
+      "trip": false,
+      "two": false,
+      "unbalancing": false,
+      "underwater": false,
+      "unwieldy": false,
+      "variantBoost": false,
+      "wideLine": false
+    },
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
+      "units": "none",
       "value": null
     },
     "recharge": {
@@ -154,12 +284,12 @@
     "source": "EN pg. 75",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "uses": {
-      "max": 0,
-      "per": null,
-      "value": 0
+      "max": "",
+      "per": "",
+      "value": null
     }
   }
 }

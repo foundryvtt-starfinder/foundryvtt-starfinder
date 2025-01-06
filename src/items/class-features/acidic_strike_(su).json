@@ -15,11 +15,11 @@
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "other",
+    "actionType": "",
     "activation": {
-      "type": "other",
-      "condition": "When you land a heavy blow",
-      "cost": 1
+      "type": "",
+      "condition": "Critical Hit with a weapon or Entropic Strike",
+      "cost": null
     },
     "area": {
       "effect": "",
@@ -35,25 +35,7 @@
       "parts": []
     },
     "damage": {
-      "parts": [
-        {
-          "name": "",
-          "formula": "@details.level.value",
-          "group": null,
-          "isPrimarySection": true,
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
-            "cold": false,
-            "electricity": false,
-            "fire": false,
-            "healing": false,
-            "piercing": false,
-            "slashing": false,
-            "sonic": false
-          }
-        }
-      ],
+      "parts": [],
       "primaryGroup": null
     },
     "damageNotes": "",
@@ -108,12 +90,44 @@
       "specialAbilityType": "su"
     },
     "duration": {
-      "units": "text",
+      "units": "instantaneous",
       "value": ""
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "17027992-20a0-4bbb-94f4-a24826bdac8e",
+        "name": "Acidic Strike Critical Damage",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "ranged-damage",
+        "enabled": false,
+        "max": 0,
+        "modifier": "@details.level.value",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "Acidic Strike",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "d138dbed-962f-4405-82cf-569e4842eb52",
+        "name": "Acidic Strike Critical Damage",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "melee-damage",
+        "enabled": false,
+        "max": 0,
+        "modifier": "@details.level.value",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
@@ -141,9 +155,9 @@
       "value": ""
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     }
   }
 }
