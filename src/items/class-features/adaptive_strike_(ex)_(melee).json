@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.27.1"
   },
   "img": "icons/creatures/claws/claw-curved-jagged-gray.webp",
   "system": {
@@ -82,6 +82,7 @@
           "name": "EAC Damage",
           "formula": "(lookupRange(@classes.evolutionist.levels, 0, 1, 1, 9, 2, 13, 3, 15, 4, 17, 5, 18, 6, 19, 7, 20, 8))d(lookupRange(@classes.evolutionist.levels, 0, 1, 6, 6, 10, 9, 8, 11, 10))  + (lookupRange(@classes.evolutionist.levels, 0, 3, (ceil((@classes.evolutionist.levels - @details.level.value) / 2)))) + @abilities.str.mod",
           "group": null,
+          "isPrimarySection": true,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -98,6 +99,7 @@
           "name": "KAC Damage",
           "formula": "(lookupRange(@classes.evolutionist.levels, 0, 1, 1, 9, 2, 13, 3, 15, 4, 17, 5, 18, 6, 19, 7, 20, 8))d(lookupRange(@classes.evolutionist.levels, 0, 1, 6, 6, 10, 9, 8, 11, 10))  + (lookupRange(@classes.evolutionist.levels, 0, 3, floor((@classes.evolutionist.levels) / 2))) + @abilities.str.mod",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -110,7 +112,8 @@
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -276,7 +279,7 @@
       "value": 0
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     },

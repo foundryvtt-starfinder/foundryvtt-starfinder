@@ -1,4 +1,5 @@
 import { SFRPG } from "../config.js";
+import SFRPGModifier from "../modifiers/modifier.js";
 import RollContext from "../rolls/rollcontext.js";
 
 const itemSizeArmorClassModifier = {
@@ -267,6 +268,12 @@ export class ItemSheetSFRPG extends ItemSheet {
                 turnEvent.noteI = `system.turnEvents.${i}.content`;
             }
         }
+
+        // Similar to actor-modifiers.getAllModifiers()
+        // we need to enforce the type of the modifiers to be SFRPGModifier
+        this.item.system.modifiers = this.item.system.modifiers?.map(mod => {
+            return new SFRPGModifier(mod, {parent: this.item});
+        });
 
         data.modifiers = this.item.system.modifiers;
 
