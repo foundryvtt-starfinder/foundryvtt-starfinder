@@ -5,7 +5,7 @@ Thanks to all the contributors who helped get this update out the door!
 
 ## Core System Improvements
 - Complete overhaul of item sheets, splitting the Details tab into subtabs and reorganizing all fields to improve usability by ian612
-- Tech, Magic, Hybrid, and Goods items can now include option to add actions
+- Tech, Magic, Hybrid, and Augmentation items now include the option to add actions
 - Refactor of Modifier toggling and method for propagation to parent objects by LebombJames
 - Update readme version table and to indicate the system is for Starfinder 1st Edition
 - Weapon items now have a toggle to indicate if they are equipment or natural weapons
