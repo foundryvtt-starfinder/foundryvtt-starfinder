@@ -25,10 +25,6 @@ export class ActorMovementConfig extends DocumentSheet {
 
     /** @override */
     getData(options) {
-        this.document.config = {
-            speeds: CONFIG.SFRPG.speeds,
-            flightManeuverability: CONFIG.SFRPG.flightManeuverability
-        };
         return this.document;
     }
 }

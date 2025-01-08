@@ -396,25 +396,25 @@
                         <div class="form-group">
                             <label for="system.attributes.systems.lifeSupport.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.LifeSupport"}} <a class="critical-edit" data-system="lifeSupport" title="{{localize "SFRPG.StarshipSheet.Critical.Edit"}}"><i class="fas fa-edit"></i></a></label>
                             <select name="system.attributes.systems.lifeSupport.value">
-                                {{selectOptions config.starshipSystemStatus selected=system.attributes.systems.lifeSupport.value}}
+                                {{selectOptions (sfrpg "starshipSystemStatus") selected=system.attributes.systems.lifeSupport.value}}
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="system.attributes.systems.sensors.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.Sensors"}} <a class="critical-edit" data-system="sensors" title="{{localize "SFRPG.StarshipSheet.Critical.Edit"}}"><i class="fas fa-edit"></i></a></label>
                             <select name="system.attributes.systems.sensors.value">
-                                {{selectOptions config.starshipSystemStatus selected=system.attributes.systems.sensors.value}}
+                                {{selectOptions (sfrpg "starshipSystemStatus") selected=system.attributes.systems.sensors.value}}
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="system.attributes.systems.engines.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.Engines"}} <a class="critical-edit" data-system="engines" title="{{localize "SFRPG.StarshipSheet.Critical.Edit"}}"><i class="fas fa-edit"></i></a></label>
                             <select name="system.attributes.systems.engines.value">
-                                {{selectOptions config.starshipSystemStatus selected=system.attributes.systems.engines.value}}
+                                {{selectOptions (sfrpg "starshipSystemStatus") selected=system.attributes.systems.engines.value}}
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="system.attributes.systems.powerCore.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.PowerCore"}} <a class="critical-edit" data-system="powerCore" title="{{localize "SFRPG.StarshipSheet.Critical.Edit"}}"><i class="fas fa-edit"></i></a></label>
                             <select name="system.attributes.systems.powerCore.value">
-                                {{selectOptions config.starshipSystemStatus selected=system.attributes.systems.powerCore.value}}
+                                {{selectOptions (sfrpg "starshipSystemStatus") selected=system.attributes.systems.powerCore.value}}
                             </select>
                         </div>
                     </div>
@@ -422,25 +422,25 @@
                         <div class="form-group">
                             <label for="system.attributes.systems.weaponsArrayForward.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.WeaponsArrayForward"}} <a class="critical-edit" data-system="weaponsArrayForward" title="{{localize "SFRPG.StarshipSheet.Critical.Edit"}}"><i class="fas fa-edit"></i></a></label>
                             <select name="system.attributes.systems.weaponsArrayForward.value">
-                                {{selectOptions config.starshipSystemStatus selected=system.attributes.systems.weaponsArrayForward.value}}
+                                {{selectOptions (sfrpg "starshipSystemStatus") selected=system.attributes.systems.weaponsArrayForward.value}}
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="system.attributes.systems.weaponsArrayPort.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.WeaponsArrayPort"}} <a class="critical-edit" data-system="weaponsArrayPort" title="{{localize "SFRPG.StarshipSheet.Critical.Edit"}}"><i class="fas fa-edit"></i></a></label>
                             <select name="system.attributes.systems.weaponsArrayPort.value">
-                                {{selectOptions config.starshipSystemStatus selected=system.attributes.systems.weaponsArrayPort.value}}
+                                {{selectOptions (sfrpg "starshipSystemStatus") selected=system.attributes.systems.weaponsArrayPort.value}}
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="system.attributes.systems.weaponsArrayStarboard.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.WeaponsArrayStarboard"}} <a class="critical-edit" data-system="weaponsArrayStarboard" title="{{localize "SFRPG.StarshipSheet.Critical.Edit"}}"><i class="fas fa-edit"></i></a></label>
                             <select name="system.attributes.systems.weaponsArrayStarboard.value">
-                                {{selectOptions config.starshipSystemStatus selected=system.attributes.systems.weaponsArrayStarboard.value}}
+                                {{selectOptions (sfrpg "starshipSystemStatus") selected=system.attributes.systems.weaponsArrayStarboard.value}}
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="system.attributes.systems.weaponsArrayAft.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.WeaponsArrayAft"}} <a class="critical-edit" data-system="WeaponsArrayAft" title="{{localize "SFRPG.StarshipSheet.Critical.Edit"}}"><i class="fas fa-edit"></i></a></label>
                             <select name="system.attributes.systems.weaponsArrayAft.value">
-                                {{selectOptions config.starshipSystemStatus selected=system.attributes.systems.weaponsArrayAft.value}}
+                                {{selectOptions (sfrpg "starshipSystemStatus") selected=system.attributes.systems.weaponsArrayAft.value}}
                             </select>
                         </div>
                     </div>
@@ -549,7 +549,7 @@
             <ol class="crew-list">
                 {{#each system.crew.npcData as |role roleId|}}
                 <li class="flexrow crew-header" data-role="{{roleId}}">
-                    <h3 class="crew-name noborder flexrow">{{ localize (lookup ../config.starshipRoleNames roleId) }}</h3>
+                    <h3 class="crew-name noborder flexrow">{{localize (sfrpg "starshipRoleNames" roleId)}}</h3>
                     <div class="flexrow">
                         <label>{{localize "SFRPG.StarshipSheet.Crew.ActionsPerRound"}}</label>
                         <input type="text" class="crew-role-numberOfUses" value="{{role.numberOfUses}}" data-dtype="Number" placeholder="0" />
@@ -579,7 +579,7 @@
                     <li class="crew small flexrow crew-list-npc" data-role="{{roleId}}" data-skill="{{skillId}}">
                         <div class="crew-name flexrow crew-list-npc">
                         {{#unless (eq (skillId) "gun")}}
-                            <h4>{{ lookup ../../config.skills skillId }}</h4>
+                            <h4>{{sfrpg "skills" skillId}}</h4>
                         {{else}}
                             <h4>{{ localize "SFRPG.SkillGun" }}</h4>
                         {{/unless}}

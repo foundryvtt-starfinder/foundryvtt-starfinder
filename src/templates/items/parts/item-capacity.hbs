@@ -7,7 +7,7 @@
             <div class="form-fields">
                 <select name="system.ammunitionType">
                     {{selectOption "" "SFRPG.Items.Ammunition.Type.None" selected=itemData.ammunitionType localize=true}}
-                    {{selectOptions config.ammunitionTypes selected=itemData.ammunitionType}}
+                    {{selectOptions (sfrpg "ammunitionTypes") selected=itemData.ammunitionType}}
                 </select>
             </div>
         </div>
@@ -34,7 +34,7 @@
                 <span class="sep"> / </span>
                 <select name="system.usage.per" data-tooltip="{{ localize "SFRPG.Items.Capacity.UsageValueTooltip" }}">
                     {{selectOption "" "" selected=itemData.usage.per}}
-                    {{selectOptions config.capacityUsagePer selected=itemData.usage.per}}
+                    {{selectOptions (sfrpg "capacityUsagePer") selected=itemData.usage.per}}
                 </select>
             </div>
         </div>

@@ -18,7 +18,7 @@
             <label>{{ localize "SFRPG.ItemSheet.PhysicalProperties.Size" }}</label>
             <div class="form-fields">
                 <select class="actor-size" name="system.attributes.size">
-                    {{selectOptions config.actorSizes selected=selectedSize}}
+                    {{selectOptions (sfrpg "actorSizes") selected=selectedSize}}
                 </select>
             </div>
         </div>

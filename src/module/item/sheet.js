@@ -115,9 +115,6 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.actor = this.document.parent;
         data.labels = this.item.labels;
 
-        // Include CONFIG values
-        data.config = CONFIG.SFRPG;
-
         // Item Type, Status, and Details
         data.itemType = game.i18n.format(`TYPES.Item.${data.item.type}`);
         data.itemStatus = this._getItemStatus();

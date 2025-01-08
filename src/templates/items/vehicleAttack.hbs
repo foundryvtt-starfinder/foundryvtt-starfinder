@@ -69,10 +69,10 @@
                             <input type="text" name="system.save.dc" value="{{itemData.save.dc}}" data-dtype="String" placeholder="{{placeholders.saveDC.formula}}"/>
                             <select name="system.save.type">
                                 {{selectOption "" "" selected=itemData.save.type}}
-                                {{selectOptions config.saves selected=itemData.save.type}}
+                                {{selectOptions (sfrpg "saves") selected=itemData.save.type}}
                             </select>
                             <select name="system.save.descriptor">
-                                {{selectOptions config.saveDescriptors selected=itemData.save.descriptor}}
+                                {{selectOptions (sfrpg "saveDescriptors") selected=itemData.save.descriptor}}
                             </select>
                         </div>
                     </div>
