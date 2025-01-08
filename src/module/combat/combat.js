@@ -67,7 +67,8 @@ export class CombatSFRPG extends Combat {
     async begin() {
         const update = {
             "flags.sfrpg.combatType": this.getCombatType(),
-            "flags.sfrpg.phase": 0
+            "flags.sfrpg.phase": 0,
+            "round": 1
         };
 
         await this.update(update);
@@ -341,7 +342,7 @@ export class CombatSFRPG extends Combat {
         const eventData = {
             combat: this,
             isNewRound: nextRound !== this.round,
-            isNewPhase: nextRound !== this.round || nextPhase !== this.flags.sfrpg.phase,
+            isNewPhase: nextPhase !== this.flags.sfrpg.phase,
             isNewTurn: (nextRound !== this.round && phases[nextPhase].iterateTurns) || nextTurn !== this.turn,
             oldTurn: this.turn,
             newTurn: nextTurn,
@@ -449,7 +450,7 @@ export class CombatSFRPG extends Combat {
         const speakerName = game.i18n.format(CombatSFRPG.chatCardsText.speaker.GM);
         const templateData = {
             header: {
-                image: "icons/svg/mystery-man.svg",
+                image: "systems/sfrpg/icons/cards/rolling-dices.svg",
                 name: game.i18n.format(CombatSFRPG.chatCardsText.round.headerName, {round: this.round})
             },
             body: {
@@ -478,12 +479,13 @@ export class CombatSFRPG extends Combat {
     async _printNewPhaseChatCard(eventData) {
         const localizedCombatName = this.getCombatName();
         const localizedPhaseName = game.i18n.format(eventData.newPhase.name);
+        const phaseIcon = CONFIG.SFRPG.phaseIcons[eventData.newPhase.name];
 
         // Basic template rendering data
         const speakerName = game.i18n.format(CombatSFRPG.chatCardsText.speaker.GM);
         const templateData = {
             header: {
-                image: "icons/svg/mystery-man.svg",
+                image: phaseIcon,
                 name: game.i18n.format(CombatSFRPG.chatCardsText.phase.headerName, {phase: localizedPhaseName})
             },
             body: {
@@ -706,7 +708,8 @@ export class CombatSFRPG extends Combat {
         // Structure input data
         ids = typeof ids === "string" ? [ids] : ids;
         const currentId = this.combatant?.id;
-        let rollMode = messageOptions.rollMode || game.settings.get("core", "rollMode");
+        const defaultRollMode = game.settings.get("core", "rollMode");
+        let rollMode = messageOptions.rollMode ?? defaultRollMode;
 
         // Iterate over Combatants, performing an initiative roll for each
         const updates = [];
@@ -757,9 +760,9 @@ export class CombatSFRPG extends Combat {
                 speaker: messageData.speaker,
                 flags: messageData.flags,
                 content: explainedRollContent,
-                rollMode: combatant.hidden && (rollMode === "roll") ? "gmroll" : rollMode,
-                roll: roll,
-                type: CONST.CHAT_MESSAGE_STYLES.ROLL,
+                rollMode: combatant.hidden && rollMode === CONST.DICE_ROLL_MODES.PUBLIC && defaultRollMode === CONST.DICE_ROLL_MODES.PUBLIC ? "gmroll" : rollMode,
+                rolls: [roll],
+                type: CONST.CHAT_MESSAGE_STYLES.OTHER,
                 sound: CONFIG.sounds.dice
             };
 
@@ -781,7 +784,9 @@ export class CombatSFRPG extends Combat {
         }
 
         // Create multiple chat messages
-        await CONFIG.ChatMessage.documentClass.create(messages);
+        await messages.forEach(message => {
+            ChatMessage.create(message, { rollMode: message.rollMode });
+        });
 
         // Return the updated Combat
         return this;

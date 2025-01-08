@@ -2302,10 +2302,6 @@
                 "Hint": "Habilita a habilidade de alternar vantagem ou desvantagem nas jogadas de dados.",
                 "Name": "Usar vantagens e desvantagens?"
             },
-            "DecimalSpeed": {
-              "Hint": "Enable decimal numbers for actor speed configuration.",
-              "Name": "Decimal Speed values"
-            },
             "AlwaysShowQuantity": {
                 "Hint": "Mostra sempre a quantidade de itens, mesmo que seja 0 ou 1. Você terá que atualizar sua janela antes que esta alteração tenha efeito.",
                 "Name": "Sempre mostrar a quantidade de itens"
@@ -2317,6 +2313,10 @@
             "AutoCollapseCard": {
                 "Hint": "Recolher automaticamente as descrições do cartão de item no registro de bate-papo",
                 "Name": "Recolher cartões de itens no bate-papo"
+            },
+            "AutoRollCritEffect": {
+                "Hint": "When applying damage to a starship from a chat card, if the damage crossses a Critical Threshold, the Critical Damage Effects (CRB pg. 320) table will automatically be rolled.",
+                "Name": "Automatically roll starship critical damage effects"
             },
             "CombatCards": {
                 "NormalHint": "Alterar quais cartões de bate-papo de combate devem ser exibidos durante o combate normal.",
@@ -2350,6 +2350,10 @@
             "DamageWithAttack": {
                 "Hint": "Acompanha automaticamente uma jogada de ataque com uma jogada de dano.",
                 "Name": "Rolar Dano com Ataque"
+            },
+            "DecimalSpeed": {
+                "Hint": "Enable decimal numbers for actor speed configuration.",
+                "Name": "Decimal Speed values"
             },
             "DiagonalMovementRule": {
                 "Hint": "Configure qual regra de movimento diagonal deve ser usada para jogos dentro deste sistema.",
@@ -2402,6 +2406,10 @@
             "GalacticTrade": {
                 "Hint": "Habilita o subsistema de Comércio Galáctico, permitindo que o PF máximo em uma espaçonave seja 5% maior do que o normal, e adiciona PFs ao estoque da espaçonave como créditos.",
                 "Name": "Habilitar Comércio Galáctico"
+            },
+            "HideHostileStarshipCrit": {
+                "Hint": "When posting notifications about starship criticals or thresholds, only post to GM if the ship is a Hostile Token.",
+                "Name": "Hide Hostile Starship Critical Message"
             },
             "SFRPGTheme": {
                 "Hint": "When enabled, a few minor tweaks to Foundry's colours will be made to match Starfinder's colour scheme.",
@@ -2788,6 +2796,8 @@
             "Damage": {
                 "CrossedCriticalThreshold": "{name} ultrapassou {crossedThresholds} limiares críticos!",
                 "Message": "Danos a uma espaçonave sempre se originam de uma direção específica, selecione o quadrante em que o dano recebido deve ser aplicado.",
+                "Nat20": "Critical damage! {name} takes a critical damage effect.",
+                "Nat20WithThreshold": "Critical damage! {name} takes an additional critical damage effect.",
                 "Quadrant": {
                     "Aft": "Popa",
                     "Forward": "Proa",
@@ -2898,6 +2908,10 @@
                 "QuadrantLimit": "Limite Quadrante",
                 "ShieldHeader": "Escudos",
                 "TargetLock": "Travar Mira"
+            },
+            "RandomQuadrantMacro": {
+                "NoToken": "Select the recipient of the critical effect before proceeding.",
+                "NotStarship": "The selected token must be a starship."
             },
             "Role": {
                 "Captain": "Captião",

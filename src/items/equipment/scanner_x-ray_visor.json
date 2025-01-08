@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.27.1"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/processor.svg",
   "system": {
     "type": "",
     "ability": null,
@@ -15,19 +15,19 @@
       "parts": []
     },
     "actionTarget": "",
-    "actionType": null,
+    "actionType": "",
     "activation": {
-      "type": "",
+      "type": "move",
       "condition": "",
-      "cost": 0
+      "cost": 1
     },
-    "ammunitionType": "",
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "",
-      "value": 0
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -59,7 +59,18 @@
       "contents": [],
       "includeContentsInWealthCalculation": true,
       "isOpen": true,
-      "storage": []
+      "storage": [
+        {
+          "type": "slot",
+          "acceptsType": [
+            "ammunition"
+          ],
+          "amount": 1,
+          "subtype": "ammunitionSlot",
+          "weightMultiplier": 1,
+          "weightProperty": ""
+        }
+      ]
     },
     "critical": {
       "effect": "",
@@ -74,18 +85,18 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<h1>Scanner</h1>\n<p>Scanners are common items that allow you to extend your senses and record your experiences. Some specialized scanners can also provide other senses, such as blindsense or sense through, but these often require ongoing monitoring or impose other restrictions. Common examples include laser microphones, motion detectors, and x-ray visors.</p>\n<p>This sensor is worn as an adjustable viewer resting over the eyes, like goggles or thick glasses. It sends out X-rays and interprets the information gathered as an image it imposes over your normal vision. This grants&nbsp;<a href=\"http://aonsrd.com/UniversalMonsterRules.aspx?ItemName=Sense%20Through\">sense through</a>&nbsp;(vision) with a range of 60 feet, though it is blocked by materials one-fifth as dense as those that block normal sense through (2 feet of wood or plastic, 1 foot of stone, 2 inches of common metal, or 1 inch of lead or any starmetal) and limits you to black-and-white vision while in use. You don’t gain the benefit of any other special visual senses (such as lowlight vision) while the visor is active, and you can’t attempt sight-based Perception checks beyond 60 feet. Activating or deactivating the sensor is a move action.</p>\n<p><strong>Capacity&nbsp;</strong> 40; <strong>Usage&nbsp;</strong> 2/round</p>"
+      "value": "<p>Scanners are common items that allow you to extend your senses and record your experiences. Some specialized scanners can also provide other senses, such as blindsense or sense through, but these often require ongoing monitoring or impose other restrictions. Common examples include laser microphones, motion detectors, and x-ray visors.</p>\n<p>This sensor is worn as an adjustable viewer resting over the eyes, like goggles or thick glasses. It sends out X-rays and interprets the information gathered as an image it imposes over your normal vision. This grants&nbsp;@UUID[Compendium.sfrpg.universal-creature-rules.Item.Tal0kby35vyhC83i]{Sense Through (Su)} (vision) with a range of 60 feet, though it is blocked by materials one-fifth as dense as those that block normal sense through (2 feet of wood or plastic, 1 foot of stone, 2 inches of common metal, or 1 inch of lead or any starmetal) and limits you to black-and-white vision while in use. You don’t gain the benefit of any other special visual senses (such as lowlight vision) while the visor is active, and you can’t attempt sight-based Perception checks beyond 60 feet. Activating or deactivating the sensor is a move action.</p>\n<p><strong>Capacity&nbsp;</strong> 40; <strong>Usage&nbsp;</strong> 2/round</p>"
     },
     "descriptors": [],
     "duration": {
       "units": "text",
-      "value": null
+      "value": ""
     },
-    "equippable": false,
+    "equippable": true,
     "equipped": false,
     "formula": "",
     "hands": 0,
-    "identified": false,
+    "identified": true,
     "isActive": null,
     "level": 9,
     "modifiers": [],
@@ -96,8 +107,8 @@
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
-      "value": null
+      "units": "ft",
+      "value": "60"
     },
     "rollNotes": "",
     "save": {
@@ -108,15 +119,15 @@
     "source": "CRB pg. 219",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "usage": {
       "per": "round",
       "value": 2
     },
     "uses": {
-      "max": null,
-      "per": null,
+      "max": "",
+      "per": "",
       "value": null
     }
   }

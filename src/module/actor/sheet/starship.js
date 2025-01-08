@@ -545,7 +545,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
         const handler = ev => this._onDragCrewStart(ev);
         html.find('li.crew').each((i, li) => {
-            li.setAttribute("draggable", true);
+            li.setAttribute("draggable", !this.actor.system.crew.useNPCCrew);
             li.addEventListener("dragstart", handler, false);
         });
 
@@ -688,6 +688,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
      * @param {Event} event Originating dragstart event
      */
     _onDragCrewStart(event) {
+        if (this.actor.system.crew.useNPCCrew) return;
         const actorId = event.currentTarget.dataset.actorId;
         const actor = game.actors.get(actorId);
 

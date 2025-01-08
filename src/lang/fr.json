@@ -425,7 +425,6 @@
                 "WeaponType": "Type d'arme"
             }
         },
-        "Check": "Jet",
         "CMDBaseTooltip": "Base: 8",
         "CMDKACModTooltip": "CAC: {kac}",
         "CMDModiferTooltip": "{type} Rebonds: {mod} ({source})",
@@ -1169,11 +1168,11 @@
         "ItemMacro": {
             "Activate": "Activer",
             "Attack": "Attaquer",
+            "Cast": "Lancer",
             "Damage": "Dégâts",
             "Healing": "Soigner",
             "Reload": "Recharger",
-            "Use": "Utiliser",
-            "Cast": "Lancer"
+            "Use": "Utiliser"
         },
         "ItemNoAmmo": "{name} n'a plus de munitions !",
         "ItemSheet": {
@@ -1327,10 +1326,10 @@
             "StarshipAction": {
                 "ActionDC": "DD Action",
                 "AddSubactionTooltip": "<strong>Ajouter une Sous-Action</strong><br />Ajouter une nouvelle sous-action",
-                "CrewRole": "Rôle équipage",
-                "DCPlaceholder": "5 + 1,5 x Niveau du vaisseau cible",
                 "CheckFormula": "Formule du Test de Compétence",
+                "CrewRole": "Rôle équipage",
                 "CriticalEffect": "Effet Critique",
+                "DCPlaceholder": "5 + 1,5 x Niveau du vaisseau cible",
                 "DeleteSubactionTooltip": "<strong>Effacer la Sous-Action</strong><br />Effacer cette sous-action",
                 "IsPushAction": "Action Pousser?",
                 "NormalEffect": "Effet Normal",
@@ -1339,9 +1338,9 @@
                 "PushResolve": "Pousser et résoudre",
                 "ResolveFormulaAutomatically": "Résoudre cette formule automatiquement",
                 "ResolveFormulaAutomaticallyTooltip": "Si cette case est cochée, Target DC sera résolu automatiquement sous forme de formule et le résultat s'affichera dans la boîte de dialogue lorsque l'action sera déclenchée. Dans le cas contraire, c'est la chaîne brute qui s'affichera dans la boîte de dialogue.",
-                "SkillOrSubaction": "Nom de la compétence ou de la sous-action",
-                "SkillFormulaOrSubactions": "Formule de compétence / Sous-actions",
                 "SkillFormulaAndSubactions": "Formule de compétence et sous-actions",
+                "SkillFormulaOrSubactions": "Formule de compétence / Sous-actions",
+                "SkillOrSubaction": "Nom de la compétence ou de la sous-action",
                 "SubactionPart": "Sous-action {section}",
                 "Subactions": "Sous-actions",
                 "TargetDC": "DD de la Cilbe",
@@ -1525,9 +1524,8 @@
                 "DamageNotesTooltip": "Les notes de dégâts sont affichées sur la carte de dégâts dans le Chat. C'est un bon moyen d'y mettre des rappels utiles, particulièrement pour les MJ pour des PNJ compliqués.",
                 "DamageSection": "Section de dégâts {section}",
                 "DeleteDamageSection": "Delete damage section",
-                "Details": "Action Details",
-                "HealingFormula": "Formule de soin",
                 "Details": "Détails de l'Action",
+                "HealingFormula": "Formule de soin",
                 "OtherFormula": "Autre Formule",
                 "RollNotes": "Notes sur le jet de dés",
                 "RollNotesTooltip": "Les notes de jet de dés sont affichées sur le jet d'action dans la carte dans le Chat. C'est un bon moyen d'y mettre des rappels utiles, particulièrement pour les MJ pour des PNJ compliqués.",
@@ -2297,10 +2295,6 @@
                 "Hint": "Basculer les avantages ou désavantages sur les lancers de dés.",
                 "Name": "Utilisez les avantages et désavantages?"
             },
-            "DecimalSpeed": {
-              "Hint": "Enable decimal numbers for actor speed configuration.",
-              "Name": "Decimal Speed values"
-            },
             "AlwaysShowQuantity": {
                 "Hint": "Indique toujours la quantité des éléments, même si c'est 0 ou 1. Vous devrez rafraîchir votre fenêtre avant que ce changement ne prenne effet.",
                 "Name": "Toujours montrer les quantités"
@@ -2312,6 +2306,10 @@
             "AutoCollapseCard": {
                 "Hint": "Plier automatiquement les descriptions des fiches d'articles dans le journal de discussion",
                 "Name": "Plier les fiches d'objets dans le chat"
+            },
+            "AutoRollCritEffect": {
+                "Hint": "When applying damage to a starship from a chat card, if the damage crossses a Critical Threshold, the Critical Damage Effects (CRB pg. 320) table will automatically be rolled.",
+                "Name": "Automatically roll starship critical damage effects"
             },
             "CombatCards": {
                 "NormalHint": "Modifier les cartes de chat de combat qui doivent être affichées pendant les combat normaux.",
@@ -2345,6 +2343,10 @@
             "DamageWithAttack": {
                 "Hint": "Faites suivre automatiquement un jet d'attaque par un jet de dégâts.",
                 "Name": "Lancer les dégâts avec l'attaque"
+            },
+            "DecimalSpeed": {
+                "Hint": "Enable decimal numbers for actor speed configuration.",
+                "Name": "Decimal Speed values"
             },
             "DiagonalMovementRule": {
                 "Hint": "Configurer la règle de déplacement diagonal à utiliser pour les jeux de ce système.",
@@ -2397,6 +2399,10 @@
             "GalacticTrade": {
                 "Hint": "Active le sous-système de commerce galactique, ce qui permet d'augmenter de 5 % le nombre maximal de BP d'un navire et d'ajouter des BP à l'inventaire du navire sous forme de crédits.",
                 "Name": "Activer le commerce galactique"
+            },
+            "HideHostileStarshipCrit": {
+                "Hint": "When posting notifications about starship criticals or thresholds, only post to GM if the ship is a Hostile Token.",
+                "Name": "Hide Hostile Starship Critical Message"
             },
             "SFRPGTheme": {
                 "Hint": "Lorsqu'il est activé, quelques ajustements mineurs aux couleurs de Foundry seront apportés pour correspondre au schéma de couleurs de Starfinder.",
@@ -2783,6 +2789,8 @@
             "Damage": {
                 "CrossedCriticalThreshold": "{name} croise {crossedThresholds} dégâts critiques !",
                 "Message": "Les dégâts à un vaisseau spatial proviennent toujours d'une direction spécifique, veuillez sélectionner le quadrant auquel les dégâts entrants doivent être appliqués.",
+                "Nat20": "Critical damage! {name} takes a critical damage effect.",
+                "Nat20WithThreshold": "Critical damage! {name} takes an additional critical damage effect.",
                 "Quadrant": {
                     "Aft": "Poupe",
                     "Forward": "Proue",
@@ -2893,6 +2901,10 @@
                 "QuadrantLimit": "Limite de Quadrant",
                 "ShieldHeader": "Boucliers",
                 "TargetLock": "Verrouillage de cible"
+            },
+            "RandomQuadrantMacro": {
+                "NoToken": "Select the recipient of the critical effect before proceeding.",
+                "NotStarship": "The selected token must be a starship."
             },
             "Role": {
                 "Captain": "Capitaine",

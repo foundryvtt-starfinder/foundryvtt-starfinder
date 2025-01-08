@@ -1,3 +1,89 @@
+# v0.27.0
+Apologies for the delay in getting this release out, but the team has added a few new maintainers and made some **big** updates and addressed a number of long-standing issues in this one! This includes the first of the Starfinder Enhanced data: enhanced classes and resolve point usage journals. The rest of the endhanced data will follow in the next few updates. Check out the full list of changes below, and remember to please report any bugs or issues you find.
+
+Thanks to all the contributors who helped get this update out the door!
+
+## Core System Improvements
+- Complete overhaul of item sheets, splitting the Details tab into subtabs and reorganizing all fields to improve usability by ian612
+- Tech, Magic, Hybrid, and Augmentation items now include the option to add actions
+- Refactor of Modifier toggling and method for propagation to parent objects by LebombJames
+- Update readme version table and to indicate the system is for Starfinder 1st Edition
+- Weapon items now have a toggle to indicate if they are equipment or natural weapons
+- Addition of a `globalThis` property to define the system structure and allow easier extension by modules
+- New system setting added to allow decimal values in actor speeds
+- Addition of missing French translation keys by aldarion-jdr
+- Turn events are implemented on effect items to allow automation for fast healing, burning, etc. by LebombJames
+- The build script was updated to support contributors running Linux or MacOS by levirak
+- Addition of starship combat QoL features automating rolling of critical damage by LebombJames and danimrath
+- Replacement of generic mystery man and item bag default icons for all item and actor types with bespoke ones from game-icons.net
+
+## Bug Fixes
+- Inline check buttons in journals and descriptions fixed
+- Journals have been updated to Foundry v12 formatting
+- Containers on item sheets with a lot of items in them now support scrolling
+- Various fixes to typos and missing localization strings
+- Starship combat initiative updated to include piloting bonus correctly and allow for rolls with no pilot by danimrath
+- Disable dragging of NPC starship crew skills to prevent errors by LebombJames
+- Convert `roll` (deprecated in v12) to `rolls` to trigger `isRoll()` by danimrath
+- Starship roll regex cleanup
+- Starship NPC crew no longer adds additional piloting bonus, since this is baked into statblock by LebombJames and danimrath
+- Migration of `{{#select}}` to `{{#selectOptions}}` handlebars helpers on all sheets by levirak
+- Roll privacy settings chosen in dialog boxes should now be properly applied to chat cards by danimrath and ian612
+- Spell DC modifiers correctly applied to spells regardless of if DC is specified or calculated automatically by danimrath
+- Combat tracker tracked resources (HP, SP, etc.) no longer bleed onto next line when an actor resource is displayed
+- Allow Themes to have blank skill and attribrute
+- Include armor turn modifier on starships
+- The bulk of items contained in weightless containers (like null-space chambers) is now displayed properly
+
+## Data Entry
+A HUGE number of fixes and new data additions have been made to the system compendiums.
+
+### New Data
+- Add Biohack effects by Iankid
+- Miracle Worker Ship Repair, Recalibrate Engine, and Vent Engines starship actions
+- Holographic Mantle and Consciousness Uplink Drive starship components
+- Alkanian species
+- Silent Slayer fighting style and associated features
+- Swarm Dreadlancer starship added
+- Data source codes in contributing.md updated to include recent book releases, full list of AP, One-Shot, and SFS titles added to `data-sources.md` by ian612
+- Crisis Refugee theme added along with theme features for Crisis Refugee, Drift Crashed, Opportunist, Planar Traveler, Spectra Scion, and Void Nomad themes by TerallianHub
+- Dreamer Mystic connection and features by rmorgens
+- Starfinder Enhanced Classes have arrived! New versions of the technomancer, solarian, witchwarper, and envoy have been added along with their class features by Iankid
+
+### Corrections and Updates
+Major heavy lifting on these fixes was done by Iankid and ilya-vasiuk!
+- Various fixes for typos and source string formatting
+- Small fix to how Get 'em works
+- Plasma Guide ammo type fixed
+- Analgesic prices and item levels corrected
+- Skipshot pistol descriptions and properties added
+- Starship combat rules journals updated to add Squadron Combat, Chases, and Narrative Starship Combat by rmorgens
+- Polymorphic weapons updated with new attributes
+- Updates to almost all solarian class features by Iankid
+- Transition all solarian weapon crystals from having damage to applying damage as a modifier by Iankid
+- Add species features and DR/ER to Planar Scion, Ifrit
+- Phentomite token is resized to 1x1 for a medium creature
+- Unleash Magic feature saving throw formula correction
+- Add descriptions for polyplate
+- Migrate DR to the new format for all compendium aliens/npcs by ilya-vasiuk
+- Correction to Fiery Curse ability for Pyric undead creatures
+- Spidersatchel set to have 0 bulk when equipped
+- Fix power armor ammo containers to use modern settings
+- Update mystic connection index to include all connections
+- Change scrap spikes into 4 separate items for different level versions
+- Swoop Hammer damage corrected
+- Heavy Weapon Edge Nanocyte knack adds included Heavy Weapon Specialization
+- Planar Scion, Tiefling features and ER/DR added
+- Snapshot Sphere storage added
+- Sonic Dampener and Filtered Rebreather energy resistance added
+- Shock Pad ammo types corrected
+- Links to Archives of Nethys on Cybernetic Golem and X-Ray Visor Scanner have been replaced with foundry links
+- Colour Out of Space *Susceptible to Force* ability added
+- Cybernetic Zombie self-destruct DC and electricity damage type added
+- Kalo Deepspeaker weapon and ammunition type corrected and bonuses corrected
+- Flechette updated from Goods to Ammunition type
+- Kalo Shredder weapons using Flechette updated to correct ammunition settings
+
 # v0.26.1
 This update addresses a few minor bugs in 0.26.0.
 

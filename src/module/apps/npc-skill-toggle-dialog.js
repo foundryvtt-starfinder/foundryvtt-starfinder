@@ -36,7 +36,6 @@ export class NpcSkillToggleDialog extends Dialog {
         }
 
         const html = await renderTemplate("systems/sfrpg/templates/apps/npc-skill-toggle.hbs", {
-            config: CONFIG.SFRPG,
             skillNames,
             skills
         });

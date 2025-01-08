@@ -2302,10 +2302,6 @@
                 "Hint": "Erlaubt es, beim Würfeln die Vor- oder Nachteile umzuschalten.",
                 "Name": "Vor- und Nachteile nutzen?"
             },
-            "DecimalSpeed": {
-              "Hint": "Enable decimal numbers for actor speed configuration.",
-              "Name": "Decimal Speed values"
-            },
             "AlwaysShowQuantity": {
                 "Hint": "Zeigt immer die Anzahl der Gegenstände, selbst wenn die Anzahl 1 oder 0 ist. Das Fenster muss refreshed werden, damit die Änderung wirksam wird.",
                 "Name": "Anzahl der Gegenstände immer anzeigen"
@@ -2317,6 +2313,10 @@
             "AutoCollapseCard": {
                 "Hint": "Klappt die Beschreibungen der Objektkarten im Chat-Protokoll automatisch zusammen",
                 "Name": "Objektkarten im Chat zusammenklappen"
+            },
+            "AutoRollCritEffect": {
+                "Hint": "When applying damage to a starship from a chat card, if the damage crossses a Critical Threshold, the Critical Damage Effects (CRB pg. 320) table will automatically be rolled.",
+                "Name": "Automatically roll starship critical damage effects"
             },
             "CombatCards": {
                 "NormalHint": "Lege fest, welche Chatkarten für Kämpfe im normalen Kampf angezeigt werden.",
@@ -2350,6 +2350,10 @@
             "DamageWithAttack": {
                 "Hint": "Würfelt nach einem Angriffswurf automatisch auch den Schaden.",
                 "Name": "Schaden zusammen mit Angriff würfeln"
+            },
+            "DecimalSpeed": {
+                "Hint": "Enable decimal numbers for actor speed configuration.",
+                "Name": "Decimal Speed values"
             },
             "DiagonalMovementRule": {
                 "Hint": "Lege fest, welche Regel für diagonale Bewegung bei Spielen innerhalb dieses Systems verwendet werden soll.",
@@ -2402,6 +2406,10 @@
             "GalacticTrade": {
                 "Hint": "Aktiviert das galaktische Handelssystem. Die Maximalen BP können 5% mehr betragen als normal und fügt überzählige BP ind Inventar des Schiffes als Credits.",
                 "Name": "Galaktischen Handel aktivieren"
+            },
+            "HideHostileStarshipCrit": {
+                "Hint": "When posting notifications about starship criticals or thresholds, only post to GM if the ship is a Hostile Token.",
+                "Name": "Hide Hostile Starship Critical Message"
             },
             "SFRPGTheme": {
                 "Hint": "Wenn ausgewählt werden einige kleinere Anpassungen an den Foundryfarben vorgenommen, um besser zur Starfinder Farbpalette zu passen.",
@@ -2788,6 +2796,8 @@
             "Damage": {
                 "CrossedCriticalThreshold": "{name} hat die {crossedThresholds} kritische Schadensschwelle überschritten!",
                 "Message": "Der Schaden an einem Raumschiff kommt immer aus einer bestimmten Richtung, bitte wähle den Quadranten den der Schaden betrifft.",
+                "Nat20": "Critical damage! {name} takes a critical damage effect.",
+                "Nat20WithThreshold": "Critical damage! {name} takes an additional critical damage effect.",
                 "Quadrant": {
                     "Aft": "Achtern",
                     "Forward": "Bug",
@@ -2898,6 +2908,10 @@
                 "QuadrantLimit": "Quadrantenmaximum",
                 "ShieldHeader": "Schilde",
                 "TargetLock": "Zielerfassung"
+            },
+            "RandomQuadrantMacro": {
+                "NoToken": "Select the recipient of the critical effect before proceeding.",
+                "NotStarship": "The selected token must be a starship."
             },
             "Role": {
                 "Captain": "Kapitän",
