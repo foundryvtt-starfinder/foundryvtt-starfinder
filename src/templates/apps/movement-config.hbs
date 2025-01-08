@@ -23,7 +23,7 @@
         <div class="form-fields">
             <input name="system.attributes.speed.flying.base" type="number" step="0.1" value="{{system.attributes.speed.flying.base}}"/>
             <select name="system.attributes.speed.flying.baseManeuverability">
-                {{selectOptions config.flightManeuverability selected=system.attributes.speed.flying.baseManeuverability}}
+                {{selectOptions (sfrpg "flightManeuverability") selected=system.attributes.speed.flying.baseManeuverability}}
             </select>
         </div>
     </div>
@@ -43,7 +43,7 @@
         <label>{{ localize "SFRPG.ActorSheet.Attributes.Speed.MainMovementType" }}</label>
         <div class="form-fields">
             <select name="system.attributes.speed.mainMovement">
-                {{selectOptions config.speeds selected=system.attributes.speed.mainMovement}}
+                {{selectOptions (sfrpg "speeds") selected=system.attributes.speed.mainMovement}}
             </select>
         </div>
     </div>

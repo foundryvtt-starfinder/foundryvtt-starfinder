@@ -77,7 +77,6 @@ export default class SFRPGModifierApplication extends FormApplication {
             options: this.options,
             editable: this.isEditable,
             cssClass: this.target.isOwner ? "editable" : "locked",
-            config: CONFIG.SFRPG
         };
 
         return data;

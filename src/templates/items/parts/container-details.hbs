@@ -80,7 +80,7 @@
                     {{/if}}
                     <div class="form-group stacked weapon-properties" data-tooltip="<strong>{{ localize "SFRPG.ActorSheet.Inventory.Container.AcceptedItemTypes" }}</strong><br/>{{ localize "SFRPG.ActorSheet.Inventory.Container.AcceptedItemTypesTooltip" }}">
                         <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.AcceptedItemTypes" }}</label>
-                        {{#each ../config.containableTypes as |typeName typeKey|}}
+                        {{#each (sfrpg "containableTypes") as |typeName typeKey|}}
                         <label class="checkbox">
                             <input type="checkbox" class="storage.acceptsType" name="{{typeKey}}" {{checked (contains storage.acceptsType typeKey)}}/>{{localize typeName}}
                         </label>

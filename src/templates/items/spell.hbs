@@ -75,7 +75,7 @@
                             <div class="form-group">
                                 <label>{{ localize "SFRPG.Items.Spell.AllowedClasses" }}</label>
                                 <div class="form-fields">
-                                    {{#each config.spellcastingClasses as |name key|}}
+                                    {{#each (sfrpg "spellcastingClasses") as |name key|}}
                                     <label class="checkbox">
                                         <input type="checkbox" name="system.allowedClasses.{{key}}" {{checked (lookup ../itemData.allowedClasses key)}} /> {{name}}
                                     </label>
@@ -88,7 +88,7 @@
                                 <label>{{ localize "SFRPG.Items.Spell.Level" }}</label>
                                 <div class="form-fields">
                                     <select name="system.level" data-dtype="Number">
-                                        {{selectOptions config.spellLevels selected=itemData.level localize=true}}
+                                        {{selectOptions (sfrpg "spellLevels") selected=itemData.level localize=true}}
                                     </select>
                                     <span>&nbsp;</span>
                                     <label class="checkbox">
@@ -102,7 +102,7 @@
                                 <label>{{ localize "SFRPG.Items.Spell.School" }}</label>
                                 <div class="form-fields">
                                     <select name="system.school">
-                                        {{selectOptions config.spellSchools selected=itemData.school localize=true}}
+                                        {{selectOptions (sfrpg "spellSchools") selected=itemData.school localize=true}}
                                     </select>
                                 </div>
                             </div>
@@ -133,7 +133,7 @@
                                     <span>&nbsp;</span>
                                     <select name="system.preparation.mode">
                                         {{selectOption "" "" selected=itemData.preparation.mode}}
-                                        {{selectOptions config.spellPreparationModes selected=itemData.preparation.mode}}
+                                        {{selectOptions (sfrpg "spellPreparationModes") selected=itemData.preparation.mode}}
                                     </select>
                                 </div>
                             </div>

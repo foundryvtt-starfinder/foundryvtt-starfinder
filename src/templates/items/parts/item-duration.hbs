@@ -24,7 +24,7 @@
                                 data-tooltip="<p>Use the <code>@owner</code> prefix to reference the parent actor.</p><p>Use <code>@origin.actor</code> or <code>@origin.item</code> to reference the origin actor or item respectively." />
                         {{/unless}}
                         <select name="system.activeDuration.unit">
-                            {{selectOptions config.effectDurationTypes selected=itemData.activeDuration.unit}}
+                            {{selectOptions (sfrpg "effectDurationTypes") selected=itemData.activeDuration.unit}}
                         </select>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                                     </optgroup>
                                 </select>
                                 <select name="system.activeDuration.endsOn">
-                                    {{selectOptions config.effectEndTypes selected=itemData.activeDuration.endsOn localize=true}}
+                                    {{selectOptions (sfrpg "effectEndTypes") selected=itemData.activeDuration.endsOn localize=true}}
                                 </select>
                             {{else if (eq itemData.activeDuration.expiryMode.type "init")}}
                                 <input name="system.activeDuration.expiryInit" type="number" data-dtype="Number"

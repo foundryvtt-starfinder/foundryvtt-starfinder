@@ -3,7 +3,7 @@
         <label><h4 class="attribute-name box-title">{{localize "SFRPG.SpellBook.SpellCastingAbility"}}</h4></label>
         <select name="system.attributes.spellcasting" data-type="String">
             {{selectOption "" "SFRPG.SpellBook.AttributesNone" selected=system.attributes.spellcasting localize=true}}
-            {{selectOptions config.abilities selected=system.attributes.spellcasting}}
+            {{selectOptions (sfrpg "abilities") selected=system.attributes.spellcasting}}
         </select>
     </div>
 </div>

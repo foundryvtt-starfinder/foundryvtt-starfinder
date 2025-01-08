@@ -43,7 +43,7 @@
                                 <label>{{ localize "SFRPG.Items.Equipment.Category" }}</label>
                                 <select name="system.armor.type">
                                     {{selectOption "" "" selected=itemData.armor.type}}
-                                    {{selectOptions config.armorTypes selected=itemData.armor.type}}
+                                    {{selectOptions (sfrpg "armorTypes") selected=itemData.armor.type}}
                                 </select>
                             </div>
 
@@ -120,7 +120,7 @@
                                 <label>{{ localize "SFRPG.Size" }}</label>
                                 <div class="form-fields">
                                     <select name="system.size">
-                                        {{selectOptions config.actorSizes selected=itemData.size}}
+                                        {{selectOptions (sfrpg "actorSizes") selected=itemData.size}}
                                     </select>
                                 </div>
                             </div>
