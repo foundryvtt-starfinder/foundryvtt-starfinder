@@ -43,9 +43,46 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>You further improve the response time of your AI. If you have a drone, your drone gains a +1 insight bonus to AC. In addition, if your drone is subjected to an attack that normally allows a Reflex save for half damage, it takes no damage if it succeeds at its saving throw. If you have an exocortex, you gain a +1 insight bonus to AC. In addition, whenever you fail a Reflex saving throw, you can spend 1 Resolve Point to reroll the saving throw (see page 243) and take the higher result. You must have the overclocking mechanic trick to learn this trick.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>You further improve the response time of your AI. If you have a @UUID[Compendium.sfrpg.class-features.Item.cA0NuGh484BwlDjX]{drone}, your drone gains a +1 insight bonus to AC. In addition, if your drone is subjected to an attack that normally allows a Reflex save for half damage, it takes no damage if it succeeds at its saving throw.</p>\n<p>If you have an @UUID[Compendium.sfrpg.class-features.Item.cM54UpNXExgDSbq4]{exocortex}, you gain a +1 insight bonus to AC. In addition, whenever you fail a Reflex saving throw, you can spend 1 Resolve Point to reroll the saving throw (see page 243) and take the higher result. You must have the @UUID[Compendium.sfrpg.class-features.Item.s8QuUMHbPDfYEJ1k]{overclocking} mechanic trick to learn this trick.</p>\n<p><em>(Modifiers for drones will need to be manually applied to the drone - Exocortex will need to enable the modifier here)</em></p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
     "details": {
       "category": "classFeature",
       "combat": false,
@@ -57,7 +94,23 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "06a468a1-4c69-4c5e-bf13-6a70b00422ca",
+        "name": "Hyperclocking",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": false,
+        "max": 0,
+        "modifier": "1",
+        "modifierType": "constant",
+        "notes": "If Exocortex - Disable if Drone",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "both"
+      }
+    ],
     "properties": {},
     "range": {
       "additional": "",
@@ -69,14 +122,14 @@
       "charged": false,
       "value": null
     },
-    "requirements": "8th Level",
+    "requirements": "8th Level (Mechanic)",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "Mechanic",
+    "source": "CRB, p. 73",
     "target": {
       "type": "",
       "value": null
