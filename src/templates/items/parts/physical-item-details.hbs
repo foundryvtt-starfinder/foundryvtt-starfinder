@@ -30,12 +30,14 @@
             </div>
         </div>
 
-        <div class="form-group" data-tooltip="{{ localize "SFRPG.ItemSheet.Containers.EquippedBulkMultiplierTooltip" }}">
-            <label>{{ localize "SFRPG.ItemSheet.Containers.EquippedBulkMultiplier" }}</label>
-            <div class="form-fields">
-                <input type="text" name="system.equippedBulkMultiplier" value="{{itemData.equippedBulkMultiplier}}" data-dtype="Number" placeholder="1"/>
+        {{#unless isPowerArmor}}
+            <div class="form-group" data-tooltip="{{ localize "SFRPG.ItemSheet.Containers.EquippedBulkMultiplierTooltip" }}">
+                <label>{{ localize "SFRPG.ItemSheet.Containers.EquippedBulkMultiplier" }}</label>
+                <div class="form-fields">
+                    <input type="text" name="system.equippedBulkMultiplier" value="{{itemData.equippedBulkMultiplier}}" data-dtype="Number" placeholder="1" disabled/>
+                </div>
             </div>
-        </div>
+        {{/unless}}
 
         {{#if includeMaterials}}
             {{!-- Special Materials Template --}}

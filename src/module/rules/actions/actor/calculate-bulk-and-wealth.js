@@ -56,7 +56,10 @@ function computeCompoundBulkForItem(item, contents) {
         }
 
         if (itemData.equipped) {
-            const bulkMultiplier = Number.parseInt(itemData.equippedBulkMultiplier);
+            let bulkMultiplier = Number.parseInt(itemData.equippedBulkMultiplier);
+            if (itemData.armor?.type === 'power') {
+                item.getCurrentCapacity() ? bulkMultiplier = 0 : console.log(`Item ${item.name} has no capacity remaining.`);
+            }
             if (itemData.equippedBulkMultiplier !== undefined && !Number.isNaN(bulkMultiplier)) {
                 personalBulk *= bulkMultiplier;
             }
