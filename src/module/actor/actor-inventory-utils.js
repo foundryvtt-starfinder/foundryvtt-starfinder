@@ -572,7 +572,11 @@ export async function onCreateItemCollection(message) {
         name: payload.itemData[0].name,
         x: payload.position.x,
         y: payload.position.y,
-        img: payload.itemData[0].img,
+        // We can make this payload.itemData[0].img to have the image be of the item
+        // If so we should make it also update when you add or remove more items to make it a bag
+        texture: {
+            src: "icons/svg/item-bag.svg"
+        },
         hidden: false,
         locked: true,
         disposition: 0,
@@ -631,11 +635,11 @@ async function onItemDraggedToCollection(message) {
                 const children = source.filterItems(x => container.system.container.contents.find(y => y.id === x.id));
                 if (children) {
                     for (const child of children) {
-                        newItems.push(child.data);
+                        newItems.push(child);
                         itemIdsToDelete.push(child.id);
 
                         if (child.system.container?.contents && child.system.container.contents.length > 0) {
-                            containersToTest.push(child.data);
+                            containersToTest.push(child);
                         }
                     }
                 }
@@ -651,9 +655,10 @@ async function onItemDraggedToCollection(message) {
         }
     }
 
-    for (const item of newItems) {
-        item._id = generateUUID();
-    }
+    // Seems to be broken you cannot edit a readonly field?
+    // for (const item of newItems) {
+    //     item._id = generateUUID();
+    // }
 
     if (newItems.length > 0) {
         if (targetContainer && targetContainer.system.container?.contents) {
@@ -663,6 +668,7 @@ async function onItemDraggedToCollection(message) {
             }
         }
         newItems = items.concat(newItems);
+        // can force updates to the image here potentially. texture.src = "icons/svg/item-bag.svg";
         const update = {
             "flags.sfrpg.itemCollection.items": newItems
         };
