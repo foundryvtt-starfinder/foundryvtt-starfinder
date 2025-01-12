@@ -136,16 +136,16 @@ async function handleCanvasDropAsync(canvas, data, targetActor) {
     if (targetActor === null) {
         const transferringItems = [sourceItem];
         if (sourceActor !== null && sourceItemData.container?.contents && sourceItemData.container.contents.length > 0) {
-            const containersToTest = [sourceItemData];
+            const containersToTest = [sourceItemData.container];
             while (containersToTest.length > 0) {
                 const container = containersToTest.shift();
-                const children = sourceActor.filterItems(x => container.container?.contents.find(y => y.id === x.id));
+                const children = sourceActor.filterItems(x => container.contents?.find(y => y.id === x.id));
                 if (children) {
                     for (const child of children) {
                         transferringItems.push(child);
 
                         if (child.system.container?.contents && child.system.container.contents.length > 0) {
-                            containersToTest.push(child);
+                            containersToTest.push(child.system.container);
                         }
                     }
                 }
