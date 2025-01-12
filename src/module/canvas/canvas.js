@@ -139,7 +139,7 @@ async function handleCanvasDropAsync(canvas, data, targetActor) {
             const containersToTest = [sourceItemData];
             while (containersToTest.length > 0) {
                 const container = containersToTest.shift();
-                const children = sourceActor.filterItems(x => container.container.contents.find(y => y.id === x.id));
+                const children = sourceActor.filterItems(x => container.container?.contents.find(y => y.id === x.id));
                 if (children) {
                     for (const child of children) {
                         transferringItems.push(child);
