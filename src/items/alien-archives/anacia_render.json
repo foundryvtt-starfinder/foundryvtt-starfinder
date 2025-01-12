@@ -2,13 +2,23 @@
   "_id": "beJt2L6w5CuPIk5k",
   "name": "Anacia Render",
   "type": "npc2",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
   "folder": "YqjCxaR0MqQ6GNLs",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
       "_id": "cS48Ls5xQLomsNeH",
       "name": "Switchblade, tactical",
       "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/equipment/weapons/survival-knife.webp",
       "system": {
         "type": "",
@@ -107,6 +117,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 3,
         "modifiers": [],
         "price": 1300,
@@ -233,94 +244,21 @@
       }
     },
     {
-      "_id": "LHBPPynNq86OiY1r",
-      "name": "Trick Attack 1d4",
-      "type": "feat",
-      "img": "icons/svg/item-bag.svg",
-      "system": {
-        "type": "",
-        "ability": null,
-        "actionTarget": "",
-        "actionType": null,
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shapable": false,
-          "shape": "",
-          "units": "",
-          "value": 0
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "damageNotes": "",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": ""
-        },
-        "descriptors": [],
-        "details": {
-          "category": "feat",
-          "combat": false,
-          "specialAbilityType": ""
-        },
-        "duration": {
-          "units": "text",
-          "value": null
-        },
-        "formula": "",
-        "isActive": null,
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "rollNotes": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      }
-    },
-    {
       "_id": "1HXTVRgAGyDt6PMH",
-      "name": "Mobility (Combat)",
+      "name": "Mobility",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/feats/mobility.webp",
       "system": {
         "type": "",
         "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -352,7 +290,44 @@
           "unidentified": "",
           "value": "<p>You can easily move past dangerous foes.</p>\n<p><strong>Prerequisites</strong>: Dex 13.</p>\n<hr />\n<p><strong>Benefit</strong>: You gain a +4 bonus to your Armor Class against attacks of opportunity that you provoke by leaving a threatened square.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
         "details": {
           "category": "feat",
           "combat": true,
@@ -364,7 +339,24 @@
         },
         "formula": "",
         "isActive": null,
-        "modifiers": [],
+        "modifiers": [
+          {
+            "_id": "385a48f0-4ddf-4115-a881-6bf6908175e8",
+            "name": "Attack of Opportunity AC Bonus",
+            "type": "untyped",
+            "condition": "",
+            "effectType": "ac",
+            "enabled": true,
+            "max": 0,
+            "modifier": "4",
+            "modifierType": "formula",
+            "notes": "Only applies to attacks of opportunity from leaving a threatened square",
+            "source": "Mobility",
+            "subtab": "misc",
+            "valueAffected": "both"
+          }
+        ],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -395,90 +387,14 @@
       }
     },
     {
-      "_id": "kBfeMEom7Mbd9llp",
-      "name": "Operative Specialization - Thief",
-      "type": "feat",
-      "img": "icons/svg/item-bag.svg",
-      "system": {
-        "type": "",
-        "ability": null,
-        "actionTarget": "",
-        "actionType": null,
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shapable": false,
-          "shape": "",
-          "units": "",
-          "value": 0
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "damageNotes": "",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": ""
-        },
-        "descriptors": [],
-        "details": {
-          "category": "feat",
-          "combat": false,
-          "specialAbilityType": ""
-        },
-        "duration": {
-          "units": "text",
-          "value": null
-        },
-        "formula": "",
-        "isActive": null,
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "rollNotes": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      }
-    },
-    {
       "_id": "T6I146O0uIjroQjj",
       "name": "Second skin",
       "type": "equipment",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/equipment/armor/second-skin.webp",
       "system": {
         "type": "",
@@ -582,6 +498,7 @@
         "modifiers": [],
         "price": 250,
         "proficient": false,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
@@ -621,7 +538,12 @@
       "_id": "UgWj8Iu1vjDS6ruU",
       "name": "Tactical SwitchbladeAR",
       "type": "goods",
-      "img": "icons/svg/item-bag.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/hand-truck.svg",
       "system": {
         "type": "",
         "attributes": {
@@ -666,6 +588,11 @@
       "_id": "VKc3mWJau1S8UIjl",
       "name": "Backpack, Consumer",
       "type": "container",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/equipment/goods/backpack-consumer.webp",
       "system": {
         "type": "",
@@ -756,6 +683,11 @@
       "_id": "1pDwgT5OOnu1jyBC",
       "name": "Clothing, Environmental",
       "type": "goods",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "icons/equipment/chest/breastplate-sculpted-blue.webp",
       "system": {
         "type": "",
@@ -810,7 +742,12 @@
       "_id": "0y0watcLcjb5yJrK",
       "name": "Flashlight",
       "type": "goods",
-      "img": "icons/svg/item-bag.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/hand-truck.svg",
       "system": {
         "type": "",
         "attributes": {
@@ -855,7 +792,12 @@
       "_id": "UEuzGNNH3oDPjZu4",
       "name": "Loot",
       "type": "container",
-      "img": "icons/svg/item-bag.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/briefcase.svg",
       "system": {
         "type": "",
         "attributes": {
@@ -947,6 +889,306 @@
         "quantityPerPack": 1,
         "source": ""
       }
+    },
+    {
+      "_id": "gNeaehz3d2HdHPAd",
+      "name": "Trick Attack (Ex)",
+      "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/classes/trick_attack.webp",
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "full",
+          "condition": "",
+          "cost": 1
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "ft",
+          "value": ""
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>&gt; @UUID[Compendium.sfrpg.classes.Item.uf8ADOAeBrtUkPVl]{Operative}</p>\n<p>You can trick or startle a foe and then attack when she drops her guard. As a full action, you can move up to your speed. Whether or not you moved, you can then make an attack with a melee weapon with the operative special property or with any small arm. Just before making your attack, attempt a Bluff, Intimidate, or Stealth check (or a check associated with your specialization; see page 94) with a DC equal to 20 + your target’s CR. If you succeed at the check, you deal 1d4 additional damage and the target is @UUID[Compendium.sfrpg.conditions.Item.MZ8OoH1GE9qDMyCD]{Flat-Footed} against your attack. This damage increases to 1d8 at 3rd level, to 3d8 at 5th level, and by an additional 1d8 every 2 levels thereafter. You can’t use this ability with a weapon that has the unwieldy special property or that requires a full action to make a single attack.</p>\n<p><em>In the Modifiers tab, change the skill bonus to match your Specialization's skill check bonus.</em></p>"
+        },
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "classFeature",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
+        "duration": {
+          "units": "text",
+          "value": ""
+        },
+        "formula": "",
+        "isActive": false,
+        "modifiers": [
+          {
+            "_id": "be46a457-9a64-459c-bd3d-acf79ede8393",
+            "name": "Trick Attack skill bonus",
+            "type": "untyped",
+            "condition": "",
+            "effectType": "skill",
+            "enabled": true,
+            "max": 0,
+            "modifier": "4",
+            "modifierType": "constant",
+            "notes": "Skill Bonus for Trick Attack. Change the values to match your specialization",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": "acr"
+          },
+          {
+            "_id": "81c0dc16-b076-48be-b097-14a63a88cfe4",
+            "name": "Trick Attack damage",
+            "type": "untyped",
+            "condition": "",
+            "effectType": "weapon-property-damage",
+            "enabled": true,
+            "max": 0,
+            "modifier": "1d4",
+            "modifierType": "formula",
+            "notes": "Apply if Trick Attack skill check was succesful.",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": "operative"
+          },
+          {
+            "_id": "f4f7a085-b5ab-4b5f-bebd-cf6ce33d7024",
+            "name": "Trick Attack damage",
+            "type": "untyped",
+            "condition": "",
+            "effectType": "weapon-damage",
+            "enabled": true,
+            "max": 0,
+            "modifier": "1d4",
+            "modifierType": "formula",
+            "notes": "Apply if Trick Attack skill check was succesful.",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": "smallA"
+          }
+        ],
+        "properties": {},
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "none",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "1st Level",
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "Operative",
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "uses": {
+          "max": "0",
+          "per": "",
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "J1xjNSOs1n8vfnH4",
+      "name": "Thief",
+      "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/classes/thief.webp",
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.PU3uwrAcmGXMGo2n]{Specialization}</p>\n<p>You specialize in acquisition, from quick swipes to complex heists.</p>\n<p><strong>Associated Skills</strong>: @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.gZlg2ZKze0erNLmP]{Perception} and @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.qVEW9HjXQN0ok879]{Sleight of Hand}. You can use Sleight of Hand to make a trick attack by concealing your weapons and motions.</p>"
+        },
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "classFeature",
+          "combat": false,
+          "specialAbilityType": ""
+        },
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "isActive": null,
+        "modifiers": [],
+        "properties": {},
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "1st Level",
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "Specialization",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      }
     }
   ],
   "prototypeToken": {
@@ -965,6 +1207,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -985,12 +1228,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
     "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -1004,13 +1264,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "src": "systems/sfrpg/icons/default/alien-stare.svg",
+      "tint": "#ffffff"
     },
     "width": 1
   },
