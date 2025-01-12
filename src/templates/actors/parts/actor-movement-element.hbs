@@ -31,7 +31,7 @@
         {{else if (eq system.attributes.speed.mainMovement "climbing")}}
             {{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Climbing" }}
         {{else if (eq system.attributes.speed.mainMovement "flying")}}
-            {{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Flying" }} ({{lookup config.flightManeuverability system.attributes.speed.flying.maneuverability}})
+            {{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Flying" }} ({{sfrpg "flightManeuverability" system.attributes.speed.flying.maneuverability}})
         {{else if (eq system.attributes.speed.mainMovement "swimming")}}
             {{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Swimming" }}
         {{else if (eq system.attributes.speed.mainMovement "special")}}
@@ -52,7 +52,7 @@
             <li>{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Climbing" }}: <span>{{system.attributes.speed.climbing.value}}</span> {{ localize "SFRPG.Units.Speed" }}</li>
         {{/if}}
         {{#if (gt system.attributes.speed.flying.value 0)}}
-            <li>{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Flying" }} ({{lookup config.flightManeuverability system.attributes.speed.flying.maneuverability}}): <span>{{system.attributes.speed.flying.value}}</span> {{ localize "SFRPG.Units.Speed" }}</li>
+            <li>{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Flying" }} ({{sfrpg "flightManeuverability" system.attributes.speed.flying.maneuverability}}): <span>{{system.attributes.speed.flying.value}}</span> {{ localize "SFRPG.Units.Speed" }}</li>
         {{/if}}
         {{#if (gt system.attributes.speed.swimming.value 0)}}
             <li>{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Swimming" }}: <span>{{system.attributes.speed.swimming.value}}</span> {{ localize "SFRPG.Units.Speed" }}</li>

@@ -2,6 +2,11 @@
   "_id": "KL9i4EcfCezDPbCw",
   "name": "Graviton crystal, least",
   "type": "weapon",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
   "img": "icons/commodities/gems/gem-faceted-round-black.webp",
   "system": {
     "type": "",
@@ -19,6 +24,7 @@
     "ammunitionType": "",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": 0
@@ -76,6 +82,7 @@
           "name": "",
           "formula": "1d3",
           "group": null,
+          "isPrimarySection": true,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -88,7 +95,8 @@
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -96,7 +104,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>Graviton crystals accelerate the impact of a weapon, dealing extra damage and potentially knocking down targets.</p>"
+      "value": "<p>Graviton crystals accelerate the impact of a weapon, dealing extra damage and potentially knocking down targets.</p>\n<p><span>Critical Effect: </span>Knockdown</p>"
     },
     "descriptors": [],
     "duration": {
@@ -108,8 +116,26 @@
     "formula": "",
     "identified": true,
     "isActive": null,
+    "isEquipment": true,
     "level": 5,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "2229713b-eca3-4e21-a550-c62fffbc25db",
+        "name": "Graviton crystal, least",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-damage",
+        "enabled": true,
+        "limitTo": "container",
+        "max": 3,
+        "modifier": "1d3",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "price": 2900,
     "proficient": true,
     "properties": {
@@ -150,6 +176,7 @@
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
       "hybrid": false,
       "hydrodynamic": false,
@@ -220,6 +247,10 @@
       "type": "",
       "dc": "",
       "descriptor": "negate"
+    },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
     },
     "source": "CRB pg. 180",
     "special": "",

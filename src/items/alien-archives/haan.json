@@ -2,13 +2,23 @@
   "_id": "JGy9KPW4TDCVGVRm",
   "name": "Haan",
   "type": "npc2",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
+  "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
       "_id": "HRpz7blwrs1bAYOY",
       "name": "Balloon (Ex)",
       "type": "weapon",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -22,6 +32,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -94,6 +105,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -137,7 +149,12 @@
       "_id": "Su9WgHD78SVttFpM",
       "name": "Claw",
       "type": "weapon",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -151,6 +168,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -231,6 +249,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -274,7 +293,12 @@
       "_id": "HXF2if31Jh305Zht",
       "name": "Firespray (Ex)",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
@@ -287,6 +311,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -309,6 +334,11 @@
           "value": "<p>As a standard action, a haan can spray its flammable lifting gases and light them with sparks, creating a 30-foot cone of flame. All creatures within the cone take 3d6 fire damage (Reflex DC 14 half).</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -316,6 +346,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -350,6 +381,7 @@
     "name": "Haan",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -361,6 +393,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 2,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -381,11 +414,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -399,13 +450,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "src": "systems/sfrpg/icons/default/alien-stare.svg",
+      "tint": "#ffffff"
     },
     "width": 2
   },
@@ -604,7 +659,7 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>The slender arthropodan haans are native to @UUID[Compendium.sfrpg.setting.2K7muQyxlXW8wqb3]{Bretheda}, where they soar through the endless skies in search of prey. Haans fly not via wings but by deftly weaving their silken webbing into balloons, which they then inflate with buoyant gases expelled from tubes in their shells. Combining this upward lift with web sails and occasional blasts from their gas tubes, haans are able to ride the winds of their home world with terrifying speed and precision, often bobbing along just at the leading edge of a storm front. Once they locate prey, haans ignite their jets of flammable gas using sparks from specially evolved strike plates in their leg chitin, creating biological flamethrowers. The roasted prey is then quickly caught and secured to a balloon of its own before it can fall away into the planet’s depths.</p>\n<p>Though haans are intelligent, their society is highly traditional and forbids all but the simplest tools. Those rare haans who leave their kin to travel the stars often become starship and aircraft pilots, finding that their experience in flying organically on @UUID[Compendium.sfrpg.setting.2K7muQyxlXW8wqb3]{Bretheda} gives them a natural aptitude for the physics involved. Sadly, these individuals are inevitably mourned as @UUID[Compendium.sfrpg.conditions.nEJIWMKbPjqKuelo]{Dead} by their families and never allowed to return home—a fact that leads many haan starfarers to join up with crime families, megacorporations, military organizations, adventuring groups such as the Starfinder Society, or an other social organizations that promise a senses of belonging. Of late, a group of haan expatriates have begun making plans for a technology-friendly haan colony on a gas giant in Near Space, which they’ve named Haanara. Without the need for ordinary humanoid gas-mining platforms, they hope to create a highly lucrative refuge for haan workers tired of being held back by tradition, though many fear that attempts to actively recruit on @UUID[Compendium.sfrpg.setting.2K7muQyxlXW8wqb3]{Bretheda} will lead to ugly sectarian violence.</p>\n<p>The average haan is 8 feet long and weighs 180 pounds. Their chitin tends toward a pinkish purple, and they have barbed limbs and spiky pedipalps, which stretch wide on either side of their faces. Though the mottled colors on their shells can be quite beautiful, haan vanity is focused almost exclusively on the large, hairlike spikes extending from the tips of their abdomen. Haans never cover these unless they absolutely have to, and they frequently carve, cut, and decorate them with the same care humans reserve for head hair. Indeed, even traditionalist haans on @UUID[Compendium.sfrpg.setting.2K7muQyxlXW8wqb3]{Bretheda} often sneak onto mining settlements in search of offworlder barbers and other artisans offering “file and style” services to help them establish unique and identifiable looks.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any sky (@UUID[Compendium.sfrpg.setting.2K7muQyxlXW8wqb3]{Bretheda})</p>\n<h3>Organization</h3>\n<p>solitary, pair, or flotilla (3–10)</p>\n</section>",
+        "value": "<h2>Description</h2>\n<p>The slender arthropodan haans are native to @UUID[Compendium.sfrpg.setting.Item.2K7muQyxlXW8wqb3]{Bretheda}, where they soar through the endless skies in search of prey. Haans fly not via wings but by deftly weaving their silken webbing into balloons, which they then inflate with buoyant gases expelled from tubes in their shells. Combining this upward lift with web sails and occasional blasts from their gas tubes, haans are able to ride the winds of their home world with terrifying speed and precision, often bobbing along just at the leading edge of a storm front. Once they locate prey, haans ignite their jets of flammable gas using sparks from specially evolved strike plates in their leg chitin, creating biological flamethrowers. The roasted prey is then quickly caught and secured to a balloon of its own before it can fall away into the planet’s depths.</p>\n<p>Though haans are intelligent, their society is highly traditional and forbids all but the simplest tools. Those rare haans who leave their kin to travel the stars often become starship and aircraft pilots, finding that their experience in flying organically on @UUID[Compendium.sfrpg.setting.Item.2K7muQyxlXW8wqb3]{Bretheda} gives them a natural aptitude for the physics involved. Sadly, these individuals are inevitably mourned as @UUID[Compendium.sfrpg.conditions.Item.nEJIWMKbPjqKuelo]{Dead} by their families and never allowed to return home—a fact that leads many haan starfarers to join up with crime families, megacorporations, military organizations, adventuring groups such as the Starfinder Society, or an other social organizations that promise a senses of belonging. Of late, a group of haan expatriates have begun making plans for a technology-friendly haan colony on a gas giant in Near Space, which they’ve named Haanara. Without the need for ordinary humanoid gas-mining platforms, they hope to create a highly lucrative refuge for haan workers tired of being held back by tradition, though many fear that attempts to actively recruit on @UUID[Compendium.sfrpg.setting.Item.2K7muQyxlXW8wqb3]{Bretheda} will lead to ugly sectarian violence.</p>\n<p>The average haan is 8 feet long and weighs 180 pounds. Their chitin tends toward a pinkish purple, and they have barbed limbs and spiky pedipalps, which stretch wide on either side of their faces. Though the mottled colors on their shells can be quite beautiful, haan vanity is focused almost exclusively on the large, hairlike spikes extending from the tips of their abdomen. Haans never cover these unless they absolutely have to, and they frequently carve, cut, and decorate them with the same care humans reserve for head hair. Indeed, even traditionalist haans on @UUID[Compendium.sfrpg.setting.Item.2K7muQyxlXW8wqb3]{Bretheda} often sneak onto mining settlements in search of offworlder barbers and other artisans offering “file and style” services to help them establish unique and identifiable looks.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any sky (@UUID[Compendium.sfrpg.setting.Item.2K7muQyxlXW8wqb3]{Bretheda})</p>\n<h3>Organization</h3>\n<p>solitary, pair, or flotilla (3–10)</p>\n</section>",
         "weight": ""
       },
       "class": "",

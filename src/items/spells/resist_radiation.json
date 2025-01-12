@@ -2,6 +2,11 @@
   "_id": "svfCmxHfEGE6wAMc",
   "name": "Resist Radiation",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
   "img": "systems/sfrpg/icons/spells/resist_radiation.webp",
   "system": {
     "type": "",
@@ -9,6 +14,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "action",
@@ -17,11 +23,13 @@
     },
     "allowedClasses": {
       "myst": true,
+      "precog": false,
       "tech": false,
       "wysh": false
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": null,
       "value": null
@@ -36,8 +44,11 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>You protect targets from radiation. They succeed at saving throws against low radiation and radiation sickness with a DC of 13 or lower. If the target has radiation sickness with a saving throw DC of 13 or lower, the sickness’s effects are suppressed for the duration. Against radiation and radiation sickness with higher save DCs, this spell instead grants targets a +2 circumstance bonus to the saving throws.</p>"
     },
@@ -48,6 +59,8 @@
       "value": "@details.cl.value"
     },
     "formula": "",
+    "isActive": null,
+    "isVariableLevel": false,
     "level": 2,
     "materials": {
       "consumed": false,
@@ -60,9 +73,14 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
-      "units": "medium"
+      "additional": "",
+      "per": "",
+      "units": "medium",
+      "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,

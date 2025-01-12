@@ -2,6 +2,11 @@
   "_id": "oViI34Oo08wy593d",
   "name": "Corrosive Haze",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
   "img": "systems/sfrpg/icons/spells/corrosive_hase.webp",
   "system": {
     "type": "",
@@ -9,6 +14,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "action",
@@ -17,11 +23,13 @@
     },
     "allowedClasses": {
       "myst": false,
+      "precog": false,
       "tech": true,
       "wysh": false
     },
     "area": {
       "effect": "emanation",
+      "shapable": false,
       "shape": "sphere",
       "units": "ft",
       "value": 5
@@ -44,8 +52,11 @@
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>A 5-foot cloud of acid-resistant nanites continually converts nearby water vapor into deadly acid. You can create the cloud in the same square as a creature and move it up to 30 feet in any direction as a move action on your turn. If the cloud enters (or is created in) a square containing a creature, it can’t move any farther that round and deals 4d6 acid damage to that creature (Reflex negates). The acidic cloud also corrodes any unattended objects along its path, dealing them 4d8 acid damage.</p>\n<p>If you don’t move the cloud, it remains where it is; if it shares its square with any creature at the beginning of your turn, that creature must succeed at a Reflex save or take 4d8 acid damage. Any creature that takes damage from the cloud takes 10 additional acid damage at the end of its next turn.</p>"
     },
@@ -56,6 +67,8 @@
       "value": "@details.cl.value"
     },
     "formula": "",
+    "isActive": null,
+    "isVariableLevel": false,
     "level": 4,
     "materials": {
       "consumed": false,
@@ -68,9 +81,14 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
-      "units": "medium"
+      "additional": "",
+      "per": "",
+      "units": "medium",
+      "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "reflex",
       "dc": "",

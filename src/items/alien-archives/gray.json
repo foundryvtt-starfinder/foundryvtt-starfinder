@@ -2,13 +2,23 @@
   "_id": "iGyssnNyuKkLUoe3",
   "name": "Gray",
   "type": "npc2",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
+  "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
       "_id": "u5IwLIThTi8FMxKk",
       "name": "Phase (Su)",
       "type": "feat",
-      "img": "icons/svg/item-bag.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
@@ -21,6 +31,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -43,6 +54,11 @@
           "value": "<p>Grays exist slightly out of phase with the Material Plane. A gray can pass through walls or material objects (but not corporeal creatures) as long as it begins and ends its turn outside of any wall or obstacle. In addition, a gray always benefits from a 20% miss chance against attacks and effects targeting it directly and takes only half damage from area effects. Force effects, however, function normally against a gray.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -50,6 +66,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -83,7 +100,12 @@
       "_id": "PHBesuvkPwJYTmLX",
       "name": "Touch (probe)",
       "type": "weapon",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -100,6 +122,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -172,6 +195,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -302,6 +326,11 @@
       "_id": "DYtKQpOQyZoCbXP8",
       "name": "Needler pistol (plus Blue Whinnis)",
       "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/equipment/weapons/needler-pistol-tactical.webp",
       "system": {
         "type": "",
@@ -319,6 +348,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -419,6 +449,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 105,
@@ -549,7 +580,12 @@
       "_id": "iJlC7lhzEM0r0Nxi",
       "name": "Sleep Paralysis (Su)",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -565,6 +601,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -587,6 +624,11 @@
           "value": "<p>As a standard action, a gray can paralyze a sleeping creature within 30 feet that it can see. A target that succeeds at a DC 15 Will save remains asleep and is immune to the same gray’s sleep paralysis ability for 24 hours. A creature that fails the save awakens but is paralyzed for 1d6 minutes. Any attack or hostile action other than a gray’s ability to probe for information ends this paralysis. If the paralysis is not interrupted and its duration ends, the victim falls back asleep and has no memory of the event, as if its memory were eliminated by modify memory. The victim can attempt a DC 15 Will save against the memory erasure; if it succeeds, it remembers the paralysis and probing but with imperfect clarity.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": ""
@@ -594,6 +636,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -627,6 +670,11 @@
       "_id": "PQOIwyPzi7vlriKh",
       "name": "Deep Slumber (DC 18)",
       "type": "spell",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/spells/deep_slumber.webp",
       "system": {
         "type": "",
@@ -649,6 +697,7 @@
         },
         "area": {
           "effect": "burst",
+          "shapable": false,
           "shape": "sphere",
           "units": "ft",
           "value": 10
@@ -669,7 +718,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>This spell causes living creatures in the area to fall into a magical sleep, gaining the @UUID[Compendium.sfrpg.conditions.3iTdt2NRgIyrychR]{Asleep} condition (except normal noise doesn’t wake up the sleeping creatures). Creatures with the lowest CR are affected first. Among creatures of equal CR, those who are closest to the spell’s point of origin are affected first.<em>Deep slumber</em> doesn’t affect @UUID[Compendium.sfrpg.conditions.lf8pbezocjYIvR9y]{unconscious} creatures, constructs, or undead creatures.</p>"
+          "value": "<p>This spell causes living creatures in the area to fall into a magical sleep, gaining the @UUID[Compendium.sfrpg.conditions.Item.3iTdt2NRgIyrychR]{Asleep} condition (except normal noise doesn’t wake up the sleeping creatures). Creatures with the lowest CR are affected first. Among creatures of equal CR, those who are closest to the spell’s point of origin are affected first.<em>Deep slumber</em> doesn’t affect @UUID[Compendium.sfrpg.conditions.Item.lf8pbezocjYIvR9y]{unconscious} creatures, constructs, or undead creatures.</p>"
         },
         "descriptors": [],
         "dismissible": false,
@@ -692,6 +741,7 @@
           "mode": "innate",
           "prepared": true
         },
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -722,6 +772,11 @@
       "_id": "dJxHNF2Cd0CliSQO",
       "name": "Hold Person (DC 17)",
       "type": "spell",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/spells/hold_person.webp",
       "system": {
         "type": "",
@@ -744,6 +799,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -764,7 +820,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>The target becomes @UUID[Compendium.sfrpg.conditions.NV4qXRDgb7zTNkW2]{Paralyzed} and freezes in place. It is aware and breathes normally but can’t take any physical actions, even speech. A held creature can’t cast spells. Each round on its turn, the target can spend a full action to attempt a new saving throw to end the effect. This does not provoke attacks of opportunity. A winged creature that is @UUID[Compendium.sfrpg.conditions.NV4qXRDgb7zTNkW2]{Paralyzed} can’t flap its wings and falls. A swimmer can’t swim and may drown.</p>"
+          "value": "<p>The target becomes @UUID[Compendium.sfrpg.conditions.Item.NV4qXRDgb7zTNkW2]{Paralyzed} and freezes in place. It is aware and breathes normally but can’t take any physical actions, even speech. A held creature can’t cast spells. Each round on its turn, the target can spend a full action to attempt a new saving throw to end the effect. This does not provoke attacks of opportunity. A winged creature that is @UUID[Compendium.sfrpg.conditions.Item.NV4qXRDgb7zTNkW2]{Paralyzed} can’t flap its wings and falls. A swimmer can’t swim and may drown.</p>"
         },
         "descriptors": [],
         "dismissible": true,
@@ -787,6 +843,7 @@
           "mode": "innate",
           "prepared": true
         },
+        "properties": {},
         "range": {
           "additional": "ft.10",
           "per": "level",
@@ -817,6 +874,11 @@
       "_id": "GiQSqD810hYPWphE",
       "name": "Detect Thoughts (DC 16)",
       "type": "spell",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/spells/detect_thoughts.webp",
       "system": {
         "type": "",
@@ -839,6 +901,7 @@
         },
         "area": {
           "effect": "burst",
+          "shapable": false,
           "shape": "cone",
           "units": "ft",
           "value": 60
@@ -859,7 +922,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>You detect the surface thoughts of intelligent creatures around you. The amount of information revealed depends on how long you study a particular area or target.</p>\n<ul>\n<li><strong>1st Round:</strong> You detect the presence or absence of thoughts from conscious creatures that have Intelligence scores of at least 1 (or an Intelligence modifier of –5) or higher.</li>\n<li><strong>2nd Round</strong>: You detect the number of thinking minds and the Intelligence score (or modifier) of each. If the highest Intelligence score is 26 (or a modifier of +8) or higher and at least 10 points higher than your own Intelligence score (or 5 points higher than your own Intelligence modifier), you are @UUID[Compendium.sfrpg.conditions.CvsDp0GvojxiF2jz]{Stunned} for 1 round and the spell ends. This spell doesn’t let you determine the location of the thinking minds if you can’t see the creatures whose thoughts you are detecting.</li>\n<li><strong>3rd Round</strong>: You can read the surface thoughts of any mind in the area. A target who succeeds at its Will save prevents you from reading its thoughts, and you must cast <em>detect thoughts</em> again to have another chance. Creatures of animal intelligence (an Intelligence score of 1 or 2 or an Intelligence modifier of –4 or lower) have simple, instinctual thoughts.</li>\n</ul>\n<p>Each round, you can turn to detect thoughts in a new area. The spell can penetrate barriers, but 3 feet of dirt or wood, 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or any force field blocks it.</p>"
+          "value": "<p>You detect the surface thoughts of intelligent creatures around you. The amount of information revealed depends on how long you study a particular area or target.</p>\n<ul>\n<li><strong>1st Round:</strong> You detect the presence or absence of thoughts from conscious creatures that have Intelligence scores of at least 1 (or an Intelligence modifier of –5) or higher.</li>\n<li><strong>2nd Round</strong>: You detect the number of thinking minds and the Intelligence score (or modifier) of each. If the highest Intelligence score is 26 (or a modifier of +8) or higher and at least 10 points higher than your own Intelligence score (or 5 points higher than your own Intelligence modifier), you are @UUID[Compendium.sfrpg.conditions.Item.CvsDp0GvojxiF2jz]{Stunned} for 1 round and the spell ends. This spell doesn’t let you determine the location of the thinking minds if you can’t see the creatures whose thoughts you are detecting.</li>\n<li><strong>3rd Round</strong>: You can read the surface thoughts of any mind in the area. A target who succeeds at its Will save prevents you from reading its thoughts, and you must cast <em>detect thoughts</em> again to have another chance. Creatures of animal intelligence (an Intelligence score of 1 or 2 or an Intelligence modifier of –4 or lower) have simple, instinctual thoughts.</li>\n</ul>\n<p>Each round, you can turn to detect thoughts in a new area. The spell can penetrate barriers, but 3 feet of dirt or wood, 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or any force field blocks it.</p>"
         },
         "descriptors": [],
         "dismissible": false,
@@ -882,6 +945,7 @@
           "mode": "innate",
           "prepared": true
         },
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -912,6 +976,11 @@
       "_id": "NiEMTUYwyhpHrPRJ",
       "name": "Mind Thrust (1st-Level, DC 16)",
       "type": "spell",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/spells/mind_thrust.webp",
       "system": {
         "type": "",
@@ -934,6 +1003,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -960,7 +1030,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>You divine the most vulnerable portion of your opponent’s mind and overload it with a glut of psychic information. The target can attempt a Will saving throw to halve the damage dealt by this spell. This spell has no effect on creatures without an Intelligence score.</p>\n<ul>\n<li><strong>1st:</strong> When you cast mind thrust as a 1st-level spell, it deals 2d10 damage to the target.</li>\n<li><strong>2nd:</strong> When you cast mind thrust as a 2nd-level spell, it deals 4d10 damage to the target.</li>\n<li><strong>3rd:</strong> When you cast mind thrust as a 3rd-level spell, it deals 7d10 damage to the target.</li>\n<li><strong>4th:</strong> When you cast mind thrust as a 4th-level spell, it deals 10d10 damage to the target and the target is fatigued for 1 round if it fails its saving throw.</li>\n<li><strong>5th:</strong> When you cast mind thrust as a 5th-level spell, it deals 15d10 damage to the target. The target is @UUID[Compendium.sfrpg.conditions.33ynSbmexuxC3cAQ]{Exhausted} for 1 round if it fails its save and it is fatigued for 1 round if it succeeds at its saving throw.</li>\n<li><strong>6th:</strong> When you cast&nbsp;mind thrust&nbsp;as a 6th-level spell, it deals 17d10 damage to the target. The target is @UUID[Compendium.sfrpg.conditions.33ynSbmexuxC3cAQ]{Exhausted} and @UUID[Compendium.sfrpg.conditions.CvsDp0GvojxiF2jz]{Stunned} for 1 round if it fails its save, and it is fatigued for 1 round if it succeeds at its saving throw.</li>\n</ul>"
+          "value": "<p>You divine the most vulnerable portion of your opponent’s mind and overload it with a glut of psychic information. The target can attempt a Will saving throw to halve the damage dealt by this spell. This spell has no effect on creatures without an Intelligence score.</p>\n<ul>\n<li><strong>1st:</strong> When you cast mind thrust as a 1st-level spell, it deals 2d10 damage to the target.</li>\n<li><strong>2nd:</strong> When you cast mind thrust as a 2nd-level spell, it deals 4d10 damage to the target.</li>\n<li><strong>3rd:</strong> When you cast mind thrust as a 3rd-level spell, it deals 7d10 damage to the target.</li>\n<li><strong>4th:</strong> When you cast mind thrust as a 4th-level spell, it deals 10d10 damage to the target and the target is fatigued for 1 round if it fails its saving throw.</li>\n<li><strong>5th:</strong> When you cast mind thrust as a 5th-level spell, it deals 15d10 damage to the target. The target is @UUID[Compendium.sfrpg.conditions.Item.33ynSbmexuxC3cAQ]{Exhausted} for 1 round if it fails its save and it is fatigued for 1 round if it succeeds at its saving throw.</li>\n<li><strong>6th:</strong> When you cast&nbsp;mind thrust&nbsp;as a 6th-level spell, it deals 17d10 damage to the target. The target is @UUID[Compendium.sfrpg.conditions.Item.33ynSbmexuxC3cAQ]{Exhausted} and @UUID[Compendium.sfrpg.conditions.Item.CvsDp0GvojxiF2jz]{Stunned} for 1 round if it fails its save, and it is fatigued for 1 round if it succeeds at its saving throw.</li>\n</ul>"
         },
         "descriptors": [],
         "dismissible": false,
@@ -983,6 +1053,7 @@
           "mode": "innate",
           "prepared": true
         },
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -1013,6 +1084,11 @@
       "_id": "StINYA5Tz1LssqxF",
       "name": "Daze (DC 15) (At Will)",
       "type": "spell",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/spells/daze.webp",
       "system": {
         "type": "",
@@ -1035,6 +1111,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -1055,7 +1132,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>This spell short-circuits the mind of a humanoid creature with a CR of 3 or lower so that it is @UUID[Compendium.sfrpg.conditions.2XWEujYSyryB4oHm]{Dazed} (unable to take actions, but taking no penalty to AC). Humanoids of CR 4 or higher are not affected. After a creature has been @UUID[Compendium.sfrpg.conditions.2XWEujYSyryB4oHm]{Dazed} by this spell, it is immune to it for 1 minute.</p>"
+          "value": "<p>This spell short-circuits the mind of a humanoid creature with a CR of 3 or lower so that it is @UUID[Compendium.sfrpg.conditions.Item.2XWEujYSyryB4oHm]{Dazed} (unable to take actions, but taking no penalty to AC). Humanoids of CR 4 or higher are not affected. After a creature has been @UUID[Compendium.sfrpg.conditions.Item.2XWEujYSyryB4oHm]{Dazed} by this spell, it is immune to it for 1 minute.</p>"
         },
         "descriptors": [],
         "dismissible": false,
@@ -1078,6 +1155,7 @@
           "mode": "always",
           "prepared": true
         },
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -1108,7 +1186,12 @@
       "_id": "RIrEQVoCH9EBD0gR",
       "name": "Probe (Su)",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -1124,6 +1207,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -1146,6 +1230,11 @@
           "value": "<p>A gray creates powerful psychic connections to creatures it touches, transferring information and sensations at terrifying speeds. A creature struck by a gray’s touch (a melee attack targeting KAC) is staggered by sensory overload for 1d4 rounds unless it succeeds at a DC 15 Will save.</p>\n<p>Alternatively, if the creature it touches is conscious, intelligent, and paralyzed, a gray can instead use a standard action to probe the creature’s mind. It can search for the answer to a simple question (such as, “What is your starship’s point of origin?”) or seek information on one general topic known to the subject. The target can resist this probing with a successful DC 15 Will save. The gray can probe a single creature in this way only once per minute, but if it remains in contact with the subject for at least 1 minute, it can choose one Intelligence-based skill the subject has at least 1 rank in and attempt checks using the subject’s skill modifier instead of its own for the next 24 hours.</p>\n<p>A gray can’t employ this ability in both ways simultaneously, and using this ability to overload a target’s senses interrupts its efforts to probe for information.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -1153,6 +1242,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -1186,6 +1276,11 @@
       "_id": "VvsEPlWKrAZPWHeI",
       "name": "Mindlink (DC 16)",
       "type": "spell",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/spells/mindlink.webp",
       "system": {
         "type": "",
@@ -1208,6 +1303,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -1228,7 +1324,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>You link your mind to that of a touched creature to swiftly communicate a large amount of complex information in an instant. You decide what the target learns, limited to any amount of information that otherwise could be communicated in 10 minutes. This information comes in a series of visual images and emotional sensations, and it isn’t @UUID[Compendium.sfrpg.rules.PqV3OCbUTyk2upPD]{Language-dependent}.</p>"
+          "value": "<p>You link your mind to that of a touched creature to swiftly communicate a large amount of complex information in an instant. You decide what the target learns, limited to any amount of information that otherwise could be communicated in 10 minutes. This information comes in a series of visual images and emotional sensations, and it isn’t @UUID[Compendium.sfrpg.rules.Item.PqV3OCbUTyk2upPD]{Language-dependent}.</p>"
         },
         "descriptors": [],
         "dismissible": false,
@@ -1251,6 +1347,7 @@
           "mode": "innate",
           "prepared": false
         },
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -1281,6 +1378,11 @@
       "_id": "g0S8S06uz6sfBs25",
       "name": "Detect Affliction",
       "type": "spell",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/spells/detect_affliction.webp",
       "system": {
         "type": "",
@@ -1303,6 +1405,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -1346,6 +1449,7 @@
           "mode": "always",
           "prepared": false
         },
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -1376,6 +1480,11 @@
       "_id": "PbkCbhLYChNM1DIQ",
       "name": "Gray skinsuit (Functions as basic Lashunta tempweave)",
       "type": "equipment",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/equipment/armor/lashunta-tempweave-basic.webp",
       "system": {
         "type": "",
@@ -1393,6 +1502,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -1478,6 +1588,7 @@
         "modifiers": [],
         "price": 1950,
         "proficient": true,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
@@ -1517,6 +1628,11 @@
       "_id": "7dSEn3PyDKLKOh73",
       "name": "Darts",
       "type": "goods",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/equipment/weapons/darts.webp",
       "system": {
         "type": "",
@@ -1571,7 +1687,12 @@
       "_id": "GPWn5YEYnFqsc9b5",
       "name": "Dose of Blue Whinnis",
       "type": "consumable",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/beer-bottle.svg",
       "system": {
         "type": "",
         "ability": null,
@@ -1587,6 +1708,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -1644,7 +1766,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<h2>BLUE WHINNIS</h2>\n<p><strong>Type</strong>@UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{poison} (injury); <strong>Save</strong> Fortitude DC 17</p>\n<p><strong>Track</strong> Constitution (special); <strong>Frequency</strong> 1/round for 2 rounds</p>\n<p><strong>Effect</strong> progression track is Healthy—Weakened—@UUID[Compendium.sfrpg.conditions.lf8pbezocjYIvR9y]{Unconscious}; no end state.</p>\n<p><strong>Cure</strong> 1 save</p>"
+          "value": "<h2>BLUE WHINNIS</h2>\n<p><strong>Type</strong>@UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{poison} (injury); <strong>Save</strong> Fortitude DC 17</p>\n<p><strong>Track</strong> Constitution (special); <strong>Frequency</strong> 1/round for 2 rounds</p>\n<p><strong>Effect</strong> progression track is Healthy—Weakened—@UUID[Compendium.sfrpg.conditions.Item.lf8pbezocjYIvR9y]{Unconscious}; no end state.</p>\n<p><strong>Cure</strong> 1 save</p>"
         },
         "descriptors": [],
         "duration": {
@@ -1659,6 +1781,7 @@
         "level": 7,
         "modifiers": [],
         "price": 1000,
+        "properties": {},
         "quantity": 5,
         "quantityPerPack": 1,
         "range": {
@@ -1692,6 +1815,7 @@
     "name": "Gray",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -1703,6 +1827,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -1723,11 +1848,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -1741,13 +1884,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "src": "systems/sfrpg/icons/default/alien-stare.svg",
+      "tint": "#ffffff"
     },
     "width": 1
   },

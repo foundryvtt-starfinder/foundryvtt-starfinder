@@ -2,13 +2,23 @@
   "_id": "DbFI89GAbdOSOCTv",
   "name": "Assault Enercopter",
   "type": "vehicle",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
+  "img": "systems/sfrpg/icons/default/bus.svg",
   "items": [
     {
       "_id": "6hYEGXGbezExRSQD",
       "name": "Collision (Ram)",
       "type": "vehicleAttack",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/reticule.svg",
       "system": {
         "type": "",
         "abilityMods": {
@@ -49,7 +59,12 @@
       "_id": "LS40UB61zorcVeSs",
       "name": "Collision (Run Over)",
       "type": "vehicleAttack",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/reticule.svg",
       "system": {
         "type": "",
         "abilityMods": {
@@ -90,7 +105,12 @@
       "_id": "3pejrjd3MI9vjwny",
       "name": "Autopilot",
       "type": "vehicleSystem",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/gear-stick.svg",
       "system": {
         "type": "",
         "abilityMods": {
@@ -126,6 +146,11 @@
       "_id": "dMyHKmb92FcWYXSl",
       "name": "Enhanced sensors",
       "type": "vehicleSystem",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.webp",
       "system": {
         "type": "",
@@ -162,6 +187,11 @@
       "_id": "Yf0iNUwcZhOqHnzn",
       "name": "Planetary comm unit",
       "type": "vehicleSystem",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.webp",
       "system": {
         "type": "",
@@ -198,6 +228,11 @@
       "_id": "799tPGgqdsh6mees",
       "name": "Shock caster, aurora",
       "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/equipment/weapons/aurora_shock_caster.webp",
       "system": {
         "type": "",
@@ -215,6 +250,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "burst",
+          "shapable": false,
           "shape": "sphere",
           "units": "ft",
           "value": 15
@@ -305,6 +341,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 10,
         "modifiers": [],
         "price": 19100,
@@ -435,6 +472,11 @@
       "_id": "IbEwfhyI1GSB44P4",
       "name": "Machine gun, medium",
       "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/equipment/weapons/artillery-laser-aphelion.webp",
       "system": {
         "type": "",
@@ -452,6 +494,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -542,6 +585,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 11,
         "modifiers": [],
         "price": 23100,
@@ -673,6 +717,7 @@
     "name": "Assault Enercopter",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -684,6 +729,7 @@
     "displayName": 20,
     "disposition": 0,
     "height": 4,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -704,11 +750,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -722,13 +786,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "src": "systems/sfrpg/icons/default/bus.svg",
+      "tint": "#ffffff"
     },
     "width": 4
   },

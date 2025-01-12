@@ -2,6 +2,11 @@
   "_id": "EYHidioFop7ygDoW",
   "name": "Create Ammunition",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
   "img": "systems/sfrpg/icons/spells/create_ammunition.webp",
   "system": {
     "type": "",
@@ -9,6 +14,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "action",
@@ -17,11 +23,13 @@
     },
     "allowedClasses": {
       "myst": false,
+      "precog": false,
       "tech": true,
       "wysh": false
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": null,
       "value": null
@@ -36,8 +44,11 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>You create a specific type of ammunition, such as arrows or a battery, and conjure it in hand or a place within range. You can create ammunition with an item level of 1 or 2, and you create a number of charges or pieces of ammunition as if you had purchased the ammunition (for example, 20 arrows or a battery with 20 charges). If you use this spell to create a battery, the battery can be used for any function a battery performs. This spell cannot create ammunition made from special materials or with any special quality, and it cannot create grenades, rockets, missiles, or the like. The ammunition disappears when the duration ends.</p>"
     },
@@ -48,6 +59,8 @@
       "value": "@details.cl.value"
     },
     "formula": "",
+    "isActive": null,
+    "isVariableLevel": false,
     "level": 1,
     "materials": {
       "consumed": false,
@@ -60,9 +73,14 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
-      "units": "close"
+      "additional": "",
+      "per": "",
+      "units": "close",
+      "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "reflex",
       "dc": "",

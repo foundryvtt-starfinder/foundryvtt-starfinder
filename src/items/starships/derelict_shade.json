@@ -2,13 +2,23 @@
   "_id": "ayVH8MPoicDA2qhQ",
   "name": "Derelict Shade",
   "type": "starship",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
+  "img": "systems/sfrpg/icons/default/starfighter.svg",
   "items": [
     {
       "_id": "preAsv3Lqg4GjQO0",
       "name": "New StarshipFrame",
       "type": "starshipFrame",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/hexagonal-nut.svg",
       "system": {
         "type": "",
         "abilityMods": {
@@ -85,7 +95,12 @@
       "_id": "lX1JEVLfoX9LCehH",
       "name": "Basic Shields 60",
       "type": "starshipShield",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/forward-field.svg",
       "system": {
         "type": "",
         "abilityMods": {
@@ -122,6 +137,12 @@
       "_id": "NQPyIuxpmUElM7NZ",
       "name": "New StarshipPowerCore",
       "type": "starshipPowerCore",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/power-generator.svg",
       "system": {
         "type": "",
         "cost": null,
@@ -137,6 +158,7 @@
         "modifiers": [],
         "pcu": null,
         "source": "",
+        "specialMaterials": {},
         "supportedSizes": []
       }
     },
@@ -144,7 +166,12 @@
       "_id": "bSv9phxFOHpYzjjC",
       "name": "Speed 8",
       "type": "starshipThruster",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/rocket-thruster.svg",
       "system": {
         "type": "",
         "abilityMods": {
@@ -172,6 +199,7 @@
         "pcu": null,
         "pilotingModifier": 0,
         "source": "",
+        "specialMaterials": {},
         "speed": 8,
         "supportedSize": "small"
       }
@@ -180,7 +208,12 @@
       "_id": "AB6EwdrARw4lKuON",
       "name": "Howling Souls",
       "type": "starshipWeapon",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/strafe.svg",
       "system": {
         "type": "",
         "abilityMods": {
@@ -277,6 +310,7 @@
           "volatile": false,
           "vortex": false
         },
+        "specialMaterials": {},
         "speed": 0,
         "weaponType": "direct"
       }
@@ -285,7 +319,12 @@
       "_id": "ppGHNAC6vyVA115u",
       "name": "Soul Fragments",
       "type": "starshipWeapon",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/strafe.svg",
       "system": {
         "type": "",
         "abilityMods": {
@@ -382,6 +421,7 @@
           "volatile": false,
           "vortex": false
         },
+        "specialMaterials": {},
         "speed": 0,
         "weaponType": "direct"
       }
@@ -390,7 +430,12 @@
       "_id": "NgEW6UkQJWqTcyWa",
       "name": "Soul Fragments",
       "type": "starshipWeapon",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/strafe.svg",
       "system": {
         "type": "",
         "abilityMods": {
@@ -487,6 +532,7 @@
           "volatile": false,
           "vortex": false
         },
+        "specialMaterials": {},
         "speed": 0,
         "weaponType": "direct"
       }
@@ -495,16 +541,20 @@
   "prototypeToken": {
     "name": "Derelict Shade",
     "actorLink": false,
+    "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": "attributes.shields"
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": 0,
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -525,15 +575,30 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -546,12 +611,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "tint": null
+      "src": "systems/sfrpg/icons/default/starfighter.svg",
+      "tint": "#ffffff"
     },
     "width": 1
   },

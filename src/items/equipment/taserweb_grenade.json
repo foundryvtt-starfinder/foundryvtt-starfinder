@@ -2,7 +2,12 @@
   "_id": "BpvmCjynQShbZe71",
   "name": "Taserweb Grenade",
   "type": "weapon",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
+  "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
     "type": "",
     "ability": "str",
@@ -16,8 +21,10 @@
       "condition": "",
       "cost": 1
     },
+    "ammunitionType": "",
     "area": {
       "effect": "burst",
+      "shapable": false,
       "shape": "",
       "units": "ft",
       "value": 10
@@ -50,6 +57,8 @@
     "chatFlavor": "see text",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": 1,
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
@@ -80,8 +89,11 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>A taserweb grenade is a 4th-level grenade ranged weapon with an explode radius of 10 feet. Creatures caught in its radius must succeed at a Reflex save (DC = 10 + half the weapon’s item level + your Dexterity bonus) or get caught in the filaments. The electric discharge of the filaments causes a creature that fails the save to become staggered for 1 round. The electric charge dissipates quickly, leaving the area covered in sticky strands of high-tensile fibers, making the affected area difficult terrain for 1d4 rounds as though the grenade also has the mire weapon special property (Starfinder Armory 29). Each grenade has light bulk and costs 720 credits.</p>"
     },
@@ -90,9 +102,12 @@
       "units": "",
       "value": ""
     },
+    "equippable": false,
     "equipped": false,
     "formula": "",
     "identified": true,
+    "isActive": null,
+    "isEquipment": true,
     "level": 4,
     "modifiers": [],
     "price": 720,
@@ -185,12 +200,14 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
       "value": 20
     },
+    "rollNotes": "",
     "save": {
       "type": "reflex",
       "dc": "12+@abilities.dex.mod",
@@ -198,6 +215,7 @@
     },
     "source": "",
     "special": "",
+    "specialMaterials": {},
     "target": {
       "type": "",
       "value": ""

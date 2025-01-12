@@ -496,6 +496,7 @@
             },
             "PlaceAbilityTemplate": "Place {label}"
         },
+        "Check": "Check",
         "ClassArmorProf": "Proficiencias Armadura",
         "ClassBABProgression": "Progressão BBA",
         "ClassFortSaveProgression": "Progressão Save Fortitude",
@@ -1173,6 +1174,7 @@
         "ItemMacro": {
             "Activate": "Activate",
             "Attack": "Attack",
+            "Cast": "Cast",
             "Damage": "Damage",
             "Healing": "Healing",
             "Reload": "Reload",
@@ -1191,6 +1193,7 @@
                 "Base": "Base value",
                 "BaseTooltip": "(Required) The base value defines the base value of this resource. Modifiers may alter it.<br/>Attribute: @resources.type.subtype.base",
                 "CombatTracker": "Combat Tracker settings",
+                "CombatTrackerSettings": "Combat Tracker Settings",
                 "DisplayAbsoluteValue": "Display Absolute Value",
                 "DisplayAbsoluteValueTooltip": "Should the displayed value in the combat tracker be absolute? i.e. -1 is displayed as 1, -2 as 2, etc.",
                 "Enabled": "Enabled",
@@ -1232,6 +1235,7 @@
                 "VisualizationsModeLesserThan": "lesser than",
                 "VisualizationsModeLesserThanEqual": "lesser than or equal to",
                 "VisualizationsModeNotEqual": "not equal to",
+                "VisualizationsPart": "Visualization Part",
                 "VisualizationsThen": "Then:",
                 "VisualizationsTitle": "Title:"
             },
@@ -1254,6 +1258,27 @@
             },
             "Containers": {
                 "ContainerTooltip": "Os recipientes podem conter praticamente qualquer item. Aumente a capacidade de armazenamento para permitir a adição de conteúdo."
+            },
+            "Details": {
+                "Section": {
+                    "ArmorDetails": "Armor Details",
+                    "ClassBasics": "Class Basics",
+                    "ConsumableDetails": "Consumable Details",
+                    "Progressions": "Progressions",
+                    "SkillsAndProficiencies": "Skills and Proficiencies",
+                    "Title": "Section",
+                    "Usage": "Usage"
+                },
+                "Tab": {
+                    "AmmunitionContainer": "Ammunition & Container",
+                    "AttackDamage": "Attack & Damage",
+                    "ClassInformation": "Class Information",
+                    "ContainerDetails": "Container Details",
+                    "NPCSpecific": "NPC Specific",
+                    "Properties": "Properties",
+                    "Spellcasting": "Spellcasting",
+                    "UsageAction": "Usage & Action"
+                }
             },
             "Header": {
                 "ArmorClass": "CA",
@@ -1303,6 +1328,29 @@
                 "TargetLockPenaltyTooltip": "A penalidade aplicada à pontuação de alvos travados da espaçonave.",
                 "TurnDistancePenalty": "Penalidade de distância turno",
                 "TurnDistancePenaltyTooltip": "A penalidade aplicada à pontuação da distância da espaçonave no turno."
+            },
+            "StarshipAction": {
+                "ActionDC": "Action DC",
+                "AddSubactionTooltip": "<strong>Add Subaction</strong><br />Add a new subaction",
+                "CheckFormula": "Skill Check Formula",
+                "CrewRole": "Crew Role",
+                "CriticalEffect": "Critical Effect",
+                "DCPlaceholder": "5 + 1-1/2 * Target Ship Tier",
+                "DeleteSubactionTooltip": "<strong>Delete Subaction</strong><br />Delete this subaction",
+                "IsPushAction": "Push Action?",
+                "NormalEffect": "Normal Effect",
+                "Phase": "Phase",
+                "PhaseTooltip": "Phase Tooltip",
+                "PushResolve": "Push and Resolve",
+                "ResolveFormulaAutomatically": "Resolve this Formula Automatically",
+                "ResolveFormulaAutomaticallyTooltip": "If this box is checked, Target DC will resolve automatically as a formula, and the result will display in the chat box when the action is triggered. Otherwise, the raw string will instead be displayed in the chatbox.",
+                "SkillFormulaAndSubactions": "Skill Formula and Subactions",
+                "SkillFormulaOrSubactions": "Skill Formula / Subactions",
+                "SkillOrSubaction": "Skill or Subaction Name",
+                "SubactionPart": "Subaction {section}",
+                "Subactions": "Subactions",
+                "TargetDC": "Target DC",
+                "UsesResolve": "Uses Resolve"
             },
             "StarshipArmor": {
                 "ArmorBonus": "Bonus Armadura",
@@ -1379,6 +1427,7 @@
                     "WeaponArcStarboard": "Arco Estibordo",
                     "WeaponArcTooltip": "A quantidade de suportes de arma disponíveis para o arco da nave, divididos em suportes leves, pesados ​​e capitais.",
                     "WeaponArcTurret": "Torreta",
+                    "WeaponMounts": "Weapon Mounts",
                     "WeaponTypeCapital": "Capital",
                     "WeaponTypeHeavy": "Pesado",
                     "WeaponTypeLight": "Leve",
@@ -1480,6 +1529,8 @@
                 "DamageNotes": "Damage Notes",
                 "DamageNotesTooltip": "The damage notes are displayed on the damage roll chat card. This is a great way to put helpful reminders, especially for GMs with complicated NPCs.",
                 "DamageSection": "Damage Section {section}",
+                "DeleteDamageSection": "Delete damage section",
+                "Details": "Action Details",
                 "HealingFormula": "Formula Cura",
                 "OtherFormula": "Outra Formula",
                 "RollNotes": "Roll Notes",
@@ -1531,9 +1582,11 @@
             },
             "Attuned": "Sintonizar",
             "Augmentation": {
+                "Action": "Augmentation Action",
                 "Details": "Detalhes Acrescimo",
                 "System": "Sistema",
-                "Type": "Tipo"
+                "Type": "Tipo",
+                "Usage": "Augmentation Usage"
             },
             "Capacity": {
                 "Capacity": "Capacidade",
@@ -1651,6 +1704,7 @@
             "MaxDex": "Modificador Max. Destreza",
             "NotProficient": "Sem Proeficiencia",
             "Proficient": "Proficiente",
+            "RangeInformation": "Range Information",
             "Shield": {
                 "ACP": "PVA: {acp}",
                 "AcMaxDex": "Bonus Max Des: {maxDex}",
@@ -1733,6 +1787,10 @@
                 "Attack": "Ataque Arma",
                 "Category": "Categoria Arma",
                 "Details": "Detalhes Arma",
+                "IsEquipment": {
+                    "Title": "Weapon Is Equipment",
+                    "Tooltip": "This box is checked if the weapon is a piece of carried equipment, as opposed to an innate natural or supernatural weapon. For natural weapons, uncheck this box."
+                },
                 "Properties": "Propriedades Arma",
                 "Type": "Tipo Arma",
                 "Usage": "Uso Arma"
@@ -2256,6 +2314,10 @@
                 "Hint": "Recolher automaticamente as descrições do cartão de item no registro de bate-papo",
                 "Name": "Recolher cartões de itens no bate-papo"
             },
+            "AutoRollCritEffect": {
+                "Hint": "When applying damage to a starship from a chat card, if the damage crossses a Critical Threshold, the Critical Damage Effects (CRB pg. 320) table will automatically be rolled.",
+                "Name": "Automatically roll starship critical damage effects"
+            },
             "CombatCards": {
                 "NormalHint": "Alterar quais cartões de bate-papo de combate devem ser exibidos durante o combate normal.",
                 "NormalName": "Combare Normal",
@@ -2288,6 +2350,10 @@
             "DamageWithAttack": {
                 "Hint": "Acompanha automaticamente uma jogada de ataque com uma jogada de dano.",
                 "Name": "Rolar Dano com Ataque"
+            },
+            "DecimalSpeed": {
+                "Hint": "Enable decimal numbers for actor speed configuration.",
+                "Name": "Decimal Speed values"
             },
             "DiagonalMovementRule": {
                 "Hint": "Configure qual regra de movimento diagonal deve ser usada para jogos dentro deste sistema.",
@@ -2340,6 +2406,10 @@
             "GalacticTrade": {
                 "Hint": "Habilita o subsistema de Comércio Galáctico, permitindo que o PF máximo em uma espaçonave seja 5% maior do que o normal, e adiciona PFs ao estoque da espaçonave como créditos.",
                 "Name": "Habilitar Comércio Galáctico"
+            },
+            "HideHostileStarshipCrit": {
+                "Hint": "When posting notifications about starship criticals or thresholds, only post to GM if the ship is a Hostile Token.",
+                "Name": "Hide Hostile Starship Critical Message"
             },
             "SFRPGTheme": {
                 "Hint": "When enabled, a few minor tweaks to Foundry's colours will be made to match Starfinder's colour scheme.",
@@ -2726,6 +2796,8 @@
             "Damage": {
                 "CrossedCriticalThreshold": "{name} ultrapassou {crossedThresholds} limiares críticos!",
                 "Message": "Danos a uma espaçonave sempre se originam de uma direção específica, selecione o quadrante em que o dano recebido deve ser aplicado.",
+                "Nat20": "Critical damage! {name} takes a critical damage effect.",
+                "Nat20WithThreshold": "Critical damage! {name} takes an additional critical damage effect.",
                 "Quadrant": {
                     "Aft": "Popa",
                     "Forward": "Proa",
@@ -2837,6 +2909,10 @@
                 "ShieldHeader": "Escudos",
                 "TargetLock": "Travar Mira"
             },
+            "RandomQuadrantMacro": {
+                "NoToken": "Select the recipient of the critical effect before proceeding.",
+                "NotStarship": "The selected token must be a starship."
+            },
             "Role": {
                 "Captain": "Captião",
                 "ChiefMate": "Companheiro do Chefe",
@@ -2889,6 +2965,24 @@
         "Touch": "Toque",
         "TraitArmorProf": "Proficiencia Armadura",
         "TraitWeaponProf": "Proficiencia Arma",
+        "TurnEvent": {
+            "AddTurnEvent": "Add Turn Event",
+            "DeleteTurnEvent": "Delete Turn Event",
+            "Formula": "Formula",
+            "FormulaTooltip": "A formula which will be rolled when the trigger is met.",
+            "Name": "Name",
+            "NoteContent": "Note Content",
+            "NoteTooltip": "Text which will be sent to chat as a chat message when the trigger is met.",
+            "Trigger": "Trigger",
+            "TriggerTooltip": "When during a combatant's turn to trigger the event.",
+            "TurnEventI": "Turn Event {number}",
+            "Type": "Type",
+            "TypeTooltip": "The type of behaviour to trigger for this turn event.",
+            "Types": {
+                "Note": "Note",
+                "Roll": "Roll"
+            }
+        },
         "UPBs": "BPU's",
         "Units": {
             "Speed": "mt."

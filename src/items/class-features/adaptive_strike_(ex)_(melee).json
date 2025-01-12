@@ -2,6 +2,11 @@
   "_id": "tQOADIIm98aXeYfw",
   "name": "Adaptive Strike (Ex) (Melee)",
   "type": "weapon",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
   "img": "icons/creatures/claws/claw-curved-jagged-gray.webp",
   "system": {
     "type": "",
@@ -77,6 +82,7 @@
           "name": "EAC Damage",
           "formula": "(lookupRange(@classes.evolutionist.levels, 0, 1, 1, 9, 2, 13, 3, 15, 4, 17, 5, 18, 6, 19, 7, 20, 8))d(lookupRange(@classes.evolutionist.levels, 0, 1, 6, 6, 10, 9, 8, 11, 10))  + (lookupRange(@classes.evolutionist.levels, 0, 3, (ceil((@classes.evolutionist.levels - @details.level.value) / 2)))) + @abilities.str.mod",
           "group": null,
+          "isPrimarySection": true,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -93,6 +99,7 @@
           "name": "KAC Damage",
           "formula": "(lookupRange(@classes.evolutionist.levels, 0, 1, 1, 9, 2, 13, 3, 15, 4, 17, 5, 18, 6, 19, 7, 20, 8))d(lookupRange(@classes.evolutionist.levels, 0, 1, 6, 6, 10, 9, 8, 11, 10))  + (lookupRange(@classes.evolutionist.levels, 0, 3, floor((@classes.evolutionist.levels) / 2))) + @abilities.str.mod",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -105,7 +112,8 @@
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -113,7 +121,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.I0pUeDcBsRz6jA7v]{Adaptive Strike (Ex)}</p>\n<p>You can transform one or more parts of your body into a deadly weapon. This adaptive strike can take almost any form, such as curved claws, sharp teeth, a club-like tail, fiery wings, porcupine-like quills you can launch as projectiles, or throat glands that let you spit acid. Whatever its nature, your adaptive strike has a physical form that’s apparent to a casual observer.</p>\n<p>Your adaptive strike can’t be disarmed, dropped, or sundered. It doesn’t interfere with your ability to wield equipment and doesn’t require hands to wield. Melee adaptive strikes are treated as basic melee weapons and threaten squares within your reach. Ranged adaptive strikes are treated as small arms. Manifesting or dismissing your adaptive strike is a move action that takes the same amount of effort as drawing or sheathing a weapon (and can be combined with a move as a single move action or used with the @UUID[Compendium.sfrpg.feats.Yw2BRG4gk46kyCL6]{Quick Draw} feat).</p>\n<p>At 1st level, choose whether your adaptive strike is melee or ranged; a ranged adaptive strike has a range increment of 30 feet. Also choose one of the following damage types for your adaptive strike: acid, bludgeoning, cold, electricity, fire, piercing, or slashing. As normal, an adaptive strike that deals energy damage targets EAC and an adaptive strike that deals kinetic damage targets KAC. Once made, these choices can’t be changed.</p>\n<p>Your melee adaptive strike deals damage equal to 1d6 + your Strength modifier. Your ranged adaptive strike deals 1d6 damage. This damage increases to 1d10 at 6th level, 2d8 at 9th level, and 2d10 at 11th level. This damage then increases by 1d10 at 13th level, 15th level, 17th level, and every level thereafter.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.I0pUeDcBsRz6jA7v]{Adaptive Strike (Ex)}</p>\n<p>You can transform one or more parts of your body into a deadly weapon. This adaptive strike can take almost any form, such as curved claws, sharp teeth, a club-like tail, fiery wings, porcupine-like quills you can launch as projectiles, or throat glands that let you spit acid. Whatever its nature, your adaptive strike has a physical form that’s apparent to a casual observer.</p>\n<p>Your adaptive strike can’t be disarmed, dropped, or sundered. It doesn’t interfere with your ability to wield equipment and doesn’t require hands to wield. Melee adaptive strikes are treated as basic melee weapons and threaten squares within your reach. Ranged adaptive strikes are treated as small arms. Manifesting or dismissing your adaptive strike is a move action that takes the same amount of effort as drawing or sheathing a weapon (and can be combined with a move as a single move action or used with the @UUID[Compendium.sfrpg.feats.Item.Yw2BRG4gk46kyCL6]{Quick Draw} feat).</p>\n<p>At 1st level, choose whether your adaptive strike is melee or ranged; a ranged adaptive strike has a range increment of 30 feet. Also choose one of the following damage types for your adaptive strike: acid, bludgeoning, cold, electricity, fire, piercing, or slashing. As normal, an adaptive strike that deals energy damage targets EAC and an adaptive strike that deals kinetic damage targets KAC. Once made, these choices can’t be changed.</p>\n<p>Your melee adaptive strike deals damage equal to 1d6 + your Strength modifier. Your ranged adaptive strike deals 1d6 damage. This damage increases to 1d10 at 6th level, 2d8 at 9th level, and 2d10 at 11th level. This damage then increases by 1d10 at 13th level, 15th level, 17th level, and every level thereafter.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -125,6 +133,7 @@
     "formula": "",
     "identified": true,
     "isActive": null,
+    "isEquipment": true,
     "level": 0,
     "modifiers": [],
     "price": 0,
@@ -270,7 +279,7 @@
       "value": 0
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     },

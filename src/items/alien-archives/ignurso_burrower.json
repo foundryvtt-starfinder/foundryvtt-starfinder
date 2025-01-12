@@ -2,25 +2,39 @@
   "_id": "Ic38FZE4rOeDnwCH",
   "name": "Ignurso Burrower",
   "type": "npc2",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
+  "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
       "_id": "CqWoaB3EumrXXjXv",
       "name": "Lavaproof (Ex)",
       "type": "feat",
-      "img": "icons/svg/item-bag.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
-          "cost": 0
+          "cost": null
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -42,7 +56,49 @@
           "unidentified": "",
           "value": "<p>An ignurso is immune to fire damage from lava and similar effects.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "speciesFeature",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
         "duration": {
           "units": "",
           "value": null
@@ -50,6 +106,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -83,10 +140,18 @@
       "_id": "iiFXWbYhqYGVqPNU",
       "name": "Bite",
       "type": "weapon",
-      "img": "icons/svg/item-bag.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
         "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -97,9 +162,10 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
-          "units": "",
-          "value": 0
+          "units": "ft",
+          "value": "0"
         },
         "attackBonus": 15,
         "attributes": {
@@ -129,7 +195,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -151,13 +217,24 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d6+10",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": true,
               "types": {
-                "piercing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "piercing": true,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -177,28 +254,143 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 0,
         "proficient": true,
-        "properties": {},
+        "properties": {
+          "aeon": false,
+          "amm": false,
+          "analog": false,
+          "antibiological": false,
+          "archaic": false,
+          "aurora": false,
+          "automatic": false,
+          "blast": false,
+          "block": false,
+          "boost": false,
+          "breach": false,
+          "breakdown": false,
+          "bright": false,
+          "buttressing": false,
+          "cluster": false,
+          "conceal": false,
+          "deconstruct": false,
+          "deflect": false,
+          "disarm": false,
+          "double": false,
+          "drainCharge": false,
+          "echo": false,
+          "entangle": false,
+          "explode": false,
+          "extinguish": false,
+          "feint": false,
+          "fiery": false,
+          "firstArc": false,
+          "flexibleLine": false,
+          "force": false,
+          "freeHands": false,
+          "fueled": false,
+          "gearArray": false,
+          "grapple": false,
+          "gravitation": false,
+          "guided": false,
+          "harrying": false,
+          "healing": false,
+          "holyWater": false,
+          "hybrid": false,
+          "hydrodynamic": false,
+          "ignite": false,
+          "indirect": false,
+          "injection": false,
+          "instrumental": false,
+          "integrated": false,
+          "line": false,
+          "living": false,
+          "lockdown": false,
+          "mind-affecting": false,
+          "mine": false,
+          "mire": false,
+          "modal": false,
+          "necrotic": false,
+          "nonlethal": false,
+          "one": false,
+          "operative": false,
+          "penetrating": false,
+          "polarize": false,
+          "polymorphic": false,
+          "powered": false,
+          "professional": false,
+          "propel": false,
+          "punchGun": false,
+          "qreload": false,
+          "radioactive": false,
+          "reach": false,
+          "recall": false,
+          "regrowth": false,
+          "relic": false,
+          "reposition": false,
+          "scramble": false,
+          "shape": false,
+          "shatter": false,
+          "shells": false,
+          "shield": false,
+          "sniper": false,
+          "stun": false,
+          "subtle": false,
+          "sunder": false,
+          "swarm": false,
+          "tail": false,
+          "teleportive": false,
+          "thought": false,
+          "throttle": false,
+          "thrown": false,
+          "thruster": false,
+          "trip": false,
+          "two": false,
+          "unbalancing": false,
+          "underwater": false,
+          "unwieldy": false,
+          "variantBoost": false,
+          "wideLine": false
+        },
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
-          "units": "",
-          "value": null
+          "units": "none",
+          "value": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
-          "descriptor": ""
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": ""
         },
         "source": "",
         "special": "",
-        "specialMaterials": {},
+        "specialMaterials": {
+          "abysium": false,
+          "adamantine": false,
+          "coldiron": false,
+          "diatha": false,
+          "djezet": false,
+          "horacalcum": false,
+          "inubrix": false,
+          "khefak": false,
+          "noqual": false,
+          "nyblantine": false,
+          "purplecores": false,
+          "siccatite": false,
+          "silver": false,
+          "voidglass": false
+        },
         "target": {
           "type": "",
           "value": null
@@ -220,7 +412,12 @@
       "_id": "W7C0L7EKxTygROKs",
       "name": "Claw (plus Grab)",
       "type": "weapon",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -232,14 +429,15 @@
         "activation": {
           "type": "",
           "condition": "",
-          "cost": 0
+          "cost": null
         },
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
-          "units": "",
-          "value": 0
+          "units": "ft",
+          "value": ""
         },
         "attackBonus": 15,
         "attributes": {
@@ -255,7 +453,7 @@
           },
           "hp": {
             "max": "",
-            "value": 6
+            "value": 18
           },
           "size": "medium",
           "sturdy": true
@@ -269,7 +467,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -291,13 +489,24 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d6+10",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": true,
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "piercing": false,
+                "slashing": true,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -317,6 +526,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -335,6 +545,7 @@
           "breach": false,
           "breakdown": false,
           "bright": false,
+          "buttressing": false,
           "cluster": false,
           "conceal": false,
           "deconstruct": false,
@@ -353,15 +564,19 @@
           "force": false,
           "freeHands": false,
           "fueled": false,
+          "gearArray": false,
           "grapple": false,
           "gravitation": false,
           "guided": false,
           "harrying": false,
+          "healing": false,
           "holyWater": false,
           "hybrid": false,
+          "hydrodynamic": false,
           "ignite": false,
           "indirect": false,
           "injection": false,
+          "instrumental": false,
           "integrated": false,
           "line": false,
           "living": false,
@@ -379,6 +594,7 @@
           "polymorphic": false,
           "powered": false,
           "professional": false,
+          "propel": false,
           "punchGun": false,
           "qreload": false,
           "radioactive": false,
@@ -387,7 +603,9 @@
           "regrowth": false,
           "relic": false,
           "reposition": false,
+          "scramble": false,
           "shape": false,
+          "shatter": false,
           "shells": false,
           "shield": false,
           "sniper": false,
@@ -400,6 +618,7 @@
           "thought": false,
           "throttle": false,
           "thrown": false,
+          "thruster": false,
           "trip": false,
           "two": false,
           "unbalancing": false,
@@ -413,8 +632,8 @@
         "range": {
           "additional": "",
           "per": "",
-          "units": "",
-          "value": null
+          "units": "none",
+          "value": ""
         },
         "rollNotes": "",
         "save": {
@@ -422,9 +641,28 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": ""
+        },
         "source": "",
         "special": "",
-        "specialMaterials": {},
+        "specialMaterials": {
+          "abysium": false,
+          "adamantine": false,
+          "coldiron": false,
+          "diatha": false,
+          "djezet": false,
+          "horacalcum": false,
+          "inubrix": false,
+          "khefak": false,
+          "noqual": false,
+          "nyblantine": false,
+          "purplecores": false,
+          "siccatite": false,
+          "silver": false,
+          "voidglass": false
+        },
         "target": {
           "type": "",
           "value": null
@@ -446,10 +684,18 @@
       "_id": "GSPCCuSuNtjVh4px",
       "name": "[MultiATK] Bite",
       "type": "weapon",
-      "img": "icons/svg/item-bag.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
         "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -460,9 +706,10 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
-          "units": "",
-          "value": 0
+          "units": "ft",
+          "value": "0"
         },
         "attackBonus": 9,
         "attributes": {
@@ -492,7 +739,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -514,13 +761,24 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d6+10",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": true,
               "types": {
-                "piercing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "piercing": true,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -540,28 +798,143 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 0,
         "proficient": true,
-        "properties": {},
+        "properties": {
+          "aeon": false,
+          "amm": false,
+          "analog": false,
+          "antibiological": false,
+          "archaic": false,
+          "aurora": false,
+          "automatic": false,
+          "blast": false,
+          "block": false,
+          "boost": false,
+          "breach": false,
+          "breakdown": false,
+          "bright": false,
+          "buttressing": false,
+          "cluster": false,
+          "conceal": false,
+          "deconstruct": false,
+          "deflect": false,
+          "disarm": false,
+          "double": false,
+          "drainCharge": false,
+          "echo": false,
+          "entangle": false,
+          "explode": false,
+          "extinguish": false,
+          "feint": false,
+          "fiery": false,
+          "firstArc": false,
+          "flexibleLine": false,
+          "force": false,
+          "freeHands": false,
+          "fueled": false,
+          "gearArray": false,
+          "grapple": false,
+          "gravitation": false,
+          "guided": false,
+          "harrying": false,
+          "healing": false,
+          "holyWater": false,
+          "hybrid": false,
+          "hydrodynamic": false,
+          "ignite": false,
+          "indirect": false,
+          "injection": false,
+          "instrumental": false,
+          "integrated": false,
+          "line": false,
+          "living": false,
+          "lockdown": false,
+          "mind-affecting": false,
+          "mine": false,
+          "mire": false,
+          "modal": false,
+          "necrotic": false,
+          "nonlethal": false,
+          "one": false,
+          "operative": false,
+          "penetrating": false,
+          "polarize": false,
+          "polymorphic": false,
+          "powered": false,
+          "professional": false,
+          "propel": false,
+          "punchGun": false,
+          "qreload": false,
+          "radioactive": false,
+          "reach": false,
+          "recall": false,
+          "regrowth": false,
+          "relic": false,
+          "reposition": false,
+          "scramble": false,
+          "shape": false,
+          "shatter": false,
+          "shells": false,
+          "shield": false,
+          "sniper": false,
+          "stun": false,
+          "subtle": false,
+          "sunder": false,
+          "swarm": false,
+          "tail": false,
+          "teleportive": false,
+          "thought": false,
+          "throttle": false,
+          "thrown": false,
+          "thruster": false,
+          "trip": false,
+          "two": false,
+          "unbalancing": false,
+          "underwater": false,
+          "unwieldy": false,
+          "variantBoost": false,
+          "wideLine": false
+        },
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
-          "units": "",
-          "value": null
+          "units": "none",
+          "value": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
-          "descriptor": ""
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": ""
         },
         "source": "",
         "special": "",
-        "specialMaterials": {},
+        "specialMaterials": {
+          "abysium": false,
+          "adamantine": false,
+          "coldiron": false,
+          "diatha": false,
+          "djezet": false,
+          "horacalcum": false,
+          "inubrix": false,
+          "khefak": false,
+          "noqual": false,
+          "nyblantine": false,
+          "purplecores": false,
+          "siccatite": false,
+          "silver": false,
+          "voidglass": false
+        },
         "target": {
           "type": "",
           "value": null
@@ -583,7 +956,12 @@
       "_id": "fmZ3DLKOVzbWKOip",
       "name": "[MultiATK] 2 Claws (plus Grab)",
       "type": "weapon",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -600,9 +978,10 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
-          "units": "",
-          "value": 0
+          "units": "ft",
+          "value": "0"
         },
         "attackBonus": 9,
         "attributes": {
@@ -632,7 +1011,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -654,13 +1033,24 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d6+10",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": true,
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "piercing": false,
+                "slashing": true,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -680,6 +1070,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -698,6 +1089,7 @@
           "breach": false,
           "breakdown": false,
           "bright": false,
+          "buttressing": false,
           "cluster": false,
           "conceal": false,
           "deconstruct": false,
@@ -716,15 +1108,19 @@
           "force": false,
           "freeHands": false,
           "fueled": false,
+          "gearArray": false,
           "grapple": false,
           "gravitation": false,
           "guided": false,
           "harrying": false,
+          "healing": false,
           "holyWater": false,
           "hybrid": false,
+          "hydrodynamic": false,
           "ignite": false,
           "indirect": false,
           "injection": false,
+          "instrumental": false,
           "integrated": false,
           "line": false,
           "living": false,
@@ -742,6 +1138,7 @@
           "polymorphic": false,
           "powered": false,
           "professional": false,
+          "propel": false,
           "punchGun": false,
           "qreload": false,
           "radioactive": false,
@@ -750,7 +1147,9 @@
           "regrowth": false,
           "relic": false,
           "reposition": false,
+          "scramble": false,
           "shape": false,
+          "shatter": false,
           "shells": false,
           "shield": false,
           "sniper": false,
@@ -763,6 +1162,7 @@
           "thought": false,
           "throttle": false,
           "thrown": false,
+          "thruster": false,
           "trip": false,
           "two": false,
           "unbalancing": false,
@@ -776,8 +1176,8 @@
         "range": {
           "additional": "",
           "per": "",
-          "units": "",
-          "value": null
+          "units": "none",
+          "value": ""
         },
         "rollNotes": "",
         "save": {
@@ -785,9 +1185,28 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": ""
+        },
         "source": "",
         "special": "",
-        "specialMaterials": {},
+        "specialMaterials": {
+          "abysium": false,
+          "adamantine": false,
+          "coldiron": false,
+          "diatha": false,
+          "djezet": false,
+          "horacalcum": false,
+          "inubrix": false,
+          "khefak": false,
+          "noqual": false,
+          "nyblantine": false,
+          "purplecores": false,
+          "siccatite": false,
+          "silver": false,
+          "voidglass": false
+        },
         "target": {
           "type": "",
           "value": null
@@ -809,7 +1228,12 @@
       "_id": "mTSK6hQaIgAkov0x",
       "name": "Vent (Su)",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -824,10 +1248,11 @@
           "cost": 1
         },
         "area": {
-          "effect": "",
+          "effect": "spread",
+          "shapable": false,
           "shape": "sphere",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -836,7 +1261,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -846,14 +1272,57 @@
           "unidentified": "",
           "value": "<p>As a move action, or in place of making a bite attack when using multiattack, an ignurso can forcefully exhale a 20-foot-radius cloud of choking smoke centered on itself. Non-ignursos in or entering the area are sickened for 1 round (Fortitude DC 13 negates), and the cloud otherwise functions as fog cloud with a duration of 1d6 rounds.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": "su"
+        },
         "duration": {
-          "units": "",
+          "units": "text",
           "value": "[[/r 1d6]] rounds"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -871,13 +1340,17 @@
           "dc": "13",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": ""
+        },
         "source": "",
         "target": {
           "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -887,7 +1360,12 @@
       "_id": "KHM7rV9fNRIo33oo",
       "name": "Breath Weapon",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -903,9 +1381,10 @@
         },
         "area": {
           "effect": "burst",
+          "shapable": false,
           "shape": "cone",
           "units": "ft",
-          "value": 30
+          "value": "30"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -916,13 +1395,24 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "6d6",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": true,
               "types": {
-                "fire": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": true,
+                "healing": false,
+                "piercing": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -932,14 +1422,57 @@
           "unidentified": "",
           "value": "<p>30-ft. cone, 6d6 F, DC 13 Reflex, usable every 1d4 rounds</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
-          "units": "",
+          "units": "text",
           "value": ""
         },
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -957,13 +1490,17 @@
           "dc": "13",
           "descriptor": "half"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": ""
+        },
         "source": "",
         "target": {
           "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -974,6 +1511,7 @@
     "name": "Ignurso Burrower",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -985,6 +1523,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 2,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -1005,11 +1544,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -1023,13 +1580,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "src": "systems/sfrpg/icons/default/alien-stare.svg",
+      "tint": "#ffffff"
     },
     "width": 2
   },
@@ -1080,7 +1641,7 @@
     },
     "attributes": {
       "abilityDC": {
-        "base": 0
+        "base": "0"
       },
       "arms": "2",
       "bab": 0,
@@ -1090,7 +1651,7 @@
         "value": 0
       },
       "baseSpellDC": {
-        "base": 0
+        "base": "0"
       },
       "cmd": {
         "min": 0,
@@ -1125,7 +1686,7 @@
         "value": 3
       },
       "kac": {
-        "base": null,
+        "base": 15,
         "min": 0,
         "tooltip": [],
         "value": null
@@ -1142,20 +1703,20 @@
       "space": "10 ft.",
       "speed": {
         "burrowing": {
-          "base": 0
+          "base": 10
         },
         "climbing": {
-          "base": 0
+          "base": 20
         },
         "flying": {
           "base": 0,
-          "baseManeuverability": 0
+          "baseManeuverability": "0"
         },
         "land": {
           "base": 30
         },
         "mainMovement": "land",
-        "special": "original base: 30 ft.; original special: burrow 10 ft., climb 20 ft.",
+        "special": "",
         "swimming": {
           "base": 0
         },
@@ -1233,6 +1794,7 @@
         "weight": ""
       },
       "class": "",
+      "combatRole": "combatant",
       "cr": 5,
       "environment": "",
       "organization": "",
@@ -1243,11 +1805,28 @@
       "race": "",
       "raceAndGrafts": "",
       "source": "AA4 pg. 50",
+      "subtype": "",
       "xp": {
         "value": 1600
       }
     },
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "f6b2a3d2-9229-47e4-8b16-0bce2e2bf826",
+        "name": "Fire Resistance",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": true,
+        "max": 0,
+        "modifier": "10",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "Innate",
+        "subtab": "permanent",
+        "valueAffected": "fire"
+      }
+    ],
     "skillpoints": {
       "max": 0,
       "tooltip": [],

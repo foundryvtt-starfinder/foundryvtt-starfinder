@@ -49,9 +49,10 @@ export default class SFRPGRoll extends Roll {
      * @type {string}
      */
     get simplifiedFormula() {
+        const terms = foundry.dice.terms;
         if (this._evaluated) return this.formula;
         const newterms = this.terms.map(t => {
-            if (t instanceof OperatorTerm || t instanceof StringTerm) return t;
+            if (t instanceof terms.OperatorTerm || t instanceof terms.StringTerm) return t;
             if (t.isDeterministic) {
                 let total = 0;
                 try {
@@ -59,7 +60,7 @@ export default class SFRPGRoll extends Roll {
                 } catch {
                     total = Roll.safeEval(t.expression);
                 }
-                return new NumericTerm({number: total});
+                return new terms.NumericTerm({number: total});
             }
             return t;
         });
@@ -74,7 +75,7 @@ export default class SFRPGRoll extends Roll {
     static MATH_PROXY = new Proxy(Math, {
         has: () => true, // Include everything
         get: (t, k) => k === Symbol.unscopables ? undefined : t[k]
-        // set: () => console.error("You may not set properties of the Roll.MATH_PROXY environment") // No-op
+        // set: () => console.error("You may not set properties of the Roll.MATH_PROXY environment") // Yes-op!
     });
 
     static registerMathFunctions() {
@@ -98,7 +99,7 @@ export default class SFRPGRoll extends Roll {
             return baseValue;
         }
 
-        this.MATH_PROXY = mergeObject(this.MATH_PROXY, {
+        this.MATH_PROXY = foundry.utils.mergeObject(this.MATH_PROXY, {
             eq: (a, b) => a === b,
             gt: (a, b) => a > b,
             gte: (a, b) => a >= b,
@@ -109,12 +110,13 @@ export default class SFRPGRoll extends Roll {
             lookup,
             lookupRange
         });
+
     }
 
     /** @override */
     async render(chatOptions = {}) {
         chatOptions = foundry.utils.mergeObject({
-            user: game.user.id,
+            author: game.user.id,
             flavor: null,
             template: this.constructor.CHAT_TEMPLATE,
             blind: false
@@ -126,13 +128,13 @@ export default class SFRPGRoll extends Roll {
         if (chatOptions?.htmlData) this.htmlData = chatOptions.htmlData;
 
         // Execute the roll, if needed
-        if (!this._evaluated) this.evaluate();
+        if (!this._evaluated) await this.evaluate();
 
         // Define chat data
         const chatData = {
             formula: isPrivate ? "???" : this.formula,
             flavor: isPrivate ? null : chatOptions.flavor,
-            user: chatOptions.user,
+            author: chatOptions.user,
             tooltip: isPrivate ? "" : await this.getTooltip(),
             customTooltip: chatOptions.customTooltip,
             total: isPrivate ? "?" : Math.round(this.total * 100) / 100,
@@ -144,5 +146,44 @@ export default class SFRPGRoll extends Roll {
 
         // Render the roll display template
         return renderTemplate(chatOptions.template, chatData);
+    }
+
+    /**
+     * @override
+     * Wrapper around Roll.parse to try and wrap loose function terms (e.g `floor(...)d6`) in parentheses to appease the roll parser.
+     * We try the core parser first (as to not create any unintended side effects), and if that fails, try again with our transformation.
+     * @param {string} formula  The original string expression to parse.
+     * @param {object} data     A data object used to substitute for attributes in the formula.
+     * @returns {RollTerm[]}
+     */
+    static parse(formula, data) {
+        if (!formula) return [];
+
+        try {
+            return super.parse(formula, data);
+        } catch (error) {
+            console.debug(`Starfinder | Parsing formula ${formula}, deferring to custom system parsing. ${error}`);
+
+            const regex = new RegExp(`\\b\\w+\\(([^()]|\\([^()]*\\))*\\)d(\\d|\\()`, "g");
+
+            // Find all matches
+            const matches = [...formula.matchAll(regex)];
+
+            // Iterate over the matches and wrap them in parentheses
+            let wrappedFormula = formula;
+
+            // Go in reverse to prevent the positions from changing
+            matches.reverse().forEach(match => {
+                const originalMatch = match[0];
+                const startPos = match.index;
+                const dPos = originalMatch.lastIndexOf('d'); // Find the position of 'd'
+                const wrappedMatch = `(${originalMatch.slice(0, dPos)})${originalMatch.slice(dPos)}`;
+
+                // Replace the match in the formula using the calculated positions
+                wrappedFormula = wrappedFormula.slice(0, startPos) + wrappedMatch + wrappedFormula.slice(startPos + originalMatch.length);
+            });
+
+            return super.parse(wrappedFormula, data);
+        }
     }
 }

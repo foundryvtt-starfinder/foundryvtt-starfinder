@@ -2,6 +2,11 @@
   "_id": "9KWX29ki05u94pOR",
   "name": "Flash grenade I",
   "type": "weapon",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
   "img": "icons/weapons/thrown/grenade-round.webp",
   "system": {
     "type": "",
@@ -16,8 +21,10 @@
       "condition": "",
       "cost": 1
     },
+    "ammunitionType": "",
     "area": {
       "effect": "burst",
+      "shapable": false,
       "shape": "sphere",
       "units": "ft",
       "value": 5
@@ -50,6 +57,7 @@
     "chatFlavor": "blinded [[1d4]] rounds",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": 1,
       "isOpen": true,
       "storage": [
         {
@@ -81,8 +89,11 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>When detonated, a flash grenade releases a pulse of intense radiance.</p>"
     },
@@ -91,10 +102,12 @@
       "units": "",
       "value": ""
     },
+    "equippable": false,
     "equipped": false,
     "formula": "",
     "identified": true,
     "isActive": null,
+    "isEquipment": true,
     "level": 2,
     "modifiers": [],
     "price": 120,
@@ -187,12 +200,14 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
       "value": 20
     },
+    "rollNotes": "",
     "save": {
       "type": "reflex",
       "dc": "11+@abilities.dex.mod",
@@ -200,6 +215,7 @@
     },
     "source": "CRB pg. 178",
     "special": "",
+    "specialMaterials": {},
     "target": {
       "type": "",
       "value": ""

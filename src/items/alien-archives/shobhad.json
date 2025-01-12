@@ -2,13 +2,23 @@
   "_id": "WBwkX9oEraWtEQzs",
   "name": "Shobhad",
   "type": "npc2",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
+  "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
       "_id": "4EdnbRDSHa0Vnx2A",
       "name": "Ferocity",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
@@ -24,6 +34,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -46,6 +57,11 @@
           "value": "<h3>(EX)</h3>\n<h3>When the creature is brought to 0 Hit Points, it can fight on for 1 more round. It can act normally until the end of its next turn; if it has 0 HP at that point, it dies. If it would lose further Hit Points before this, it ceases to be able to act and dies.</h3>\n<hr />\n<h3>&nbsp;</h3>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -53,6 +69,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -86,6 +103,11 @@
       "_id": "3nPjeSMxsXFicmo2",
       "name": "Curve blade, carbon steel",
       "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/equipment/weapons/curveblade.webp",
       "system": {
         "type": "",
@@ -114,6 +136,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -204,6 +227,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 4,
         "modifiers": [],
         "price": 2230,
@@ -330,6 +354,11 @@
       "_id": "Dc3z5vSeYKylOHsp",
       "name": "Rounds, Heavy",
       "type": "goods",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/equipment/weapons/rounds-heavy.webp",
       "system": {
         "type": "",
@@ -384,7 +413,12 @@
       "_id": "ivA2W4RUmOSeqHwk",
       "name": "Tactical War Harness",
       "type": "equipment",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/kevlar-vest.svg",
       "system": {
         "type": "",
         "ability": null,
@@ -412,6 +446,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -509,6 +544,7 @@
         "modifiers": [],
         "price": 2250,
         "proficient": true,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
@@ -549,6 +585,7 @@
     "name": "Shobhad",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -560,6 +597,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 2,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -580,11 +618,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -598,13 +654,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "src": "systems/sfrpg/icons/default/alien-stare.svg",
+      "tint": "#ffffff"
     },
     "width": 2
   },
@@ -762,7 +822,7 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<section class=\"secret\">\n<h2>Description</h2>\n<p>Collectively called the “shobhad-neh,” the four-armed giants of @UUID[Compendium.sfrpg.setting.gzXT0xwsj8kQAoj0]{Akiton} live as nomads, much as they have for millennia. Self-sufficient and able to construct their own weapons, they traditionally avoided large cities and the smaller races of the planet, except to engage in trade. As such, when @UUID[Compendium.sfrpg.setting.gzXT0xwsj8kQAoj0]{Akiton} suffered economic collapse, shobhads were largely spared the turmoil. In the aftermath, shobhads began to offer their services as guides, hunters, and mercenaries, often in trade for more advanced armor and weapons. Today, shobhads are highly sought after for their martial expertise, unparalleled knowledge of @UUID[Compendium.sfrpg.setting.gzXT0xwsj8kQAoj0]{Akiton}’s wilds, and unbreakable codes of honor. These warriors may operate independently, in their traditional clans, or in modern mercenary companies that blend ancestral traditions with the needs of modern military freelancers. While more shobhads can be spotted in @UUID[Compendium.sfrpg.setting.gzXT0xwsj8kQAoj0]{Akiton}’s new metropolises these days, the majority continue to live in the planet’s harsh hills and canyons.</p>\n<p>Shobhads tend to wear their armor most of the time, usually with a traditional rope or leather weapon harness. Life among the shobhad-neh is hard, and young shobhads are trained from preadolescence to fight. By the age of 20, a shobhad is considered a full adult, capable of defending both her clan and her own honor against even the most experienced warriors. A typical shobhad warrior stands 12 feet tall and weighs 500 pounds, and most shobhads who do not die in battle live to between 90 and 120 years of age.</p>\n<p>Most clans hunt, gather, and raid neighboring clans and corporate convoys for supplies. Shobhads believe that overt aggression isn’t a fault, but rather a fact of life and that everyone should be strong enough to protect themselves. However, honor is paramount to a shobhad, and breaking one’s word or clan law means a fate worse than death. The laws of city folk, on the other hand, mean little unless they’ve been agreed to.</p>\n<p>Shobhads only rarely establish permanent settlements. A single clan may wander thousands of miles of open desert, their territory overlapping with that of other clans or species with very few disputes. While most clans remain on @UUID[Compendium.sfrpg.setting.gzXT0xwsj8kQAoj0]{Akiton}, their expertise in warfare means there’s always steady mercenary work for shobhad iconoclasts willing to travel, and a few clans have traded their caravans for starships. Such adventurers can often be found working for corporations or groups such as the Starfinder Society, usually as hired muscle. Some shobhads find themselves overtaken by nearly insatiable wanderlust, even after just a single off-planet job, and rarely set foot on @UUID[Compendium.sfrpg.setting.gzXT0xwsj8kQAoj0]{Akiton} again.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>cold deserts or mountains (@UUID[Compendium.sfrpg.setting.gzXT0xwsj8kQAoj0]{Akiton})</p>\n<h3>Organization</h3>\n<p>solitary, pair, raiding party (3-19), or clan (20+ plus 1 warleader)</p>\n</section>",
+        "value": "<section class=\"secret\">\n<h2>Description</h2>\n<p>Collectively called the “shobhad-neh,” the four-armed giants of @UUID[Compendium.sfrpg.setting.Item.gzXT0xwsj8kQAoj0]{Akiton} live as nomads, much as they have for millennia. Self-sufficient and able to construct their own weapons, they traditionally avoided large cities and the smaller races of the planet, except to engage in trade. As such, when @UUID[Compendium.sfrpg.setting.Item.gzXT0xwsj8kQAoj0]{Akiton} suffered economic collapse, shobhads were largely spared the turmoil. In the aftermath, shobhads began to offer their services as guides, hunters, and mercenaries, often in trade for more advanced armor and weapons. Today, shobhads are highly sought after for their martial expertise, unparalleled knowledge of @UUID[Compendium.sfrpg.setting.Item.gzXT0xwsj8kQAoj0]{Akiton}’s wilds, and unbreakable codes of honor. These warriors may operate independently, in their traditional clans, or in modern mercenary companies that blend ancestral traditions with the needs of modern military freelancers. While more shobhads can be spotted in @UUID[Compendium.sfrpg.setting.Item.gzXT0xwsj8kQAoj0]{Akiton}’s new metropolises these days, the majority continue to live in the planet’s harsh hills and canyons.</p>\n<p>Shobhads tend to wear their armor most of the time, usually with a traditional rope or leather weapon harness. Life among the shobhad-neh is hard, and young shobhads are trained from preadolescence to fight. By the age of 20, a shobhad is considered a full adult, capable of defending both her clan and her own honor against even the most experienced warriors. A typical shobhad warrior stands 12 feet tall and weighs 500 pounds, and most shobhads who do not die in battle live to between 90 and 120 years of age.</p>\n<p>Most clans hunt, gather, and raid neighboring clans and corporate convoys for supplies. Shobhads believe that overt aggression isn’t a fault, but rather a fact of life and that everyone should be strong enough to protect themselves. However, honor is paramount to a shobhad, and breaking one’s word or clan law means a fate worse than death. The laws of city folk, on the other hand, mean little unless they’ve been agreed to.</p>\n<p>Shobhads only rarely establish permanent settlements. A single clan may wander thousands of miles of open desert, their territory overlapping with that of other clans or species with very few disputes. While most clans remain on @UUID[Compendium.sfrpg.setting.Item.gzXT0xwsj8kQAoj0]{Akiton}, their expertise in warfare means there’s always steady mercenary work for shobhad iconoclasts willing to travel, and a few clans have traded their caravans for starships. Such adventurers can often be found working for corporations or groups such as the Starfinder Society, usually as hired muscle. Some shobhads find themselves overtaken by nearly insatiable wanderlust, even after just a single off-planet job, and rarely set foot on @UUID[Compendium.sfrpg.setting.Item.gzXT0xwsj8kQAoj0]{Akiton} again.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>cold deserts or mountains (@UUID[Compendium.sfrpg.setting.Item.gzXT0xwsj8kQAoj0]{Akiton})</p>\n<h3>Organization</h3>\n<p>solitary, pair, raiding party (3-19), or clan (20+ plus 1 warleader)</p>\n</section>",
         "weight": ""
       },
       "class": "",
