@@ -569,7 +569,7 @@ export async function onCreateItemCollection(message) {
     }
 
     const createdTokenPromise = canvas.scene.createEmbeddedDocuments("Token", [{
-        name: payload.itemData[0].name,
+        name: "Item Collection",
         x: payload.position.x,
         y: payload.position.y,
         // We can make this payload.itemData[0].img to have the image be of the item
