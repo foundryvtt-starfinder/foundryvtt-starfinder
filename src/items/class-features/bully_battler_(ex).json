@@ -15,10 +15,10 @@
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "other",
+    "actionType": "",
     "activation": {
-      "type": "other",
-      "condition": "Against any foe you’ve witnessed deal damage to an ally or to a  creature whose level is at least 4 lower than the foe’s CR",
+      "type": "",
+      "condition": "",
       "cost": null
     },
     "area": {
@@ -35,25 +35,7 @@
       "parts": []
     },
     "damage": {
-      "parts": [
-        {
-          "name": "",
-          "formula": "1d4 + floor(@classes.soldier.levels / 2)",
-          "group": null,
-          "isPrimarySection": true,
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
-            "cold": false,
-            "electricity": false,
-            "fire": false,
-            "healing": false,
-            "piercing": false,
-            "slashing": false,
-            "sonic": false
-          }
-        }
-      ],
+      "parts": [],
       "primaryGroup": null
     },
     "damageNotes": "",
@@ -113,7 +95,23 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "166ab969-8396-4293-a66d-d37c7ff56d65",
+        "name": "Bully Battler Damage",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "melee-damage",
+        "enabled": false,
+        "max": 0,
+        "modifier": "1d4 + floor(@classes.soldier.levels / 2)",
+        "modifierType": "damageSection",
+        "notes": "Only active against any foe you’ve witnessed deal damage to an ally or to a creature whose level is at least 4 lower than the foe’s CR",
+        "source": "Bully Battler",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "properties": {},
     "range": {
       "additional": "",
@@ -142,9 +140,9 @@
       "value": ""
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     }
   }
 }
