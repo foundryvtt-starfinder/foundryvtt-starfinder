@@ -575,7 +575,7 @@ export async function onCreateItemCollection(message) {
         // We can make this payload.itemData[0].img to have the image be of the item
         // If so we should make it also update when you add or remove more items to make it a bag
         texture: {
-            src: "icons/svg/item-bag.svg"
+            src: "systems/sfrpg/icons/default/" + SFRPG.defaultItemIcons.container
         },
         hidden: false,
         locked: true,
@@ -632,7 +632,7 @@ async function onItemDraggedToCollection(message) {
             const containersToTest = [sourceItemData];
             while (containersToTest.length > 0) {
                 const container = containersToTest.shift();
-                const children = source.filterItems(x => container.system.container.contents.find(y => y.id === x.id));
+                const children = source.filterItems(x => container.system.container?.contents.find(y => y.id === x.id));
                 if (children) {
                     for (const child of children) {
                         newItems.push(child);
