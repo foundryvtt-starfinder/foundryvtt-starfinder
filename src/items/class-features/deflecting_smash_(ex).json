@@ -1,6 +1,6 @@
 {
-  "_id": "SZVvKBmR2eHjKWAm",
-  "name": "Blazing Strike (Ex)",
+  "_id": "EV7tzE7SriRFwEyu",
+  "name": "Deflecting Smash (Ex)",
   "type": "feat",
   "_stats": {
     "coreVersion": 12,
@@ -17,16 +17,16 @@
     "actionTarget": "",
     "actionType": "",
     "activation": {
-      "type": "",
+      "type": "none",
       "condition": "",
-      "cost": null
+      "cost": 1
     },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": null,
-      "value": null
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -43,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.wFTC0sGqdpnZUib4]{Gear Boost}</p>\n<p>When you hit a creature within 30 feet of you while using a weapon with the @UUID[Compendium.sfrpg.rules.JournalEntry.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#bright]{Bright} weapon special property, the radiance partially blinds the target, giving it the @UUID[Compendium.sfrpg.conditions.Item.YjE6UGzwOTfO9p4g]{Dazzled} condition for 1 round. If you hit multiple creatures at the same time (such as with an @UUID[Compendium.sfrpg.rules.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#automatic]{Automatic}, @UUID[Compendium.sfrpg.rules.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#blast]{Blast}, or @UUID[Compendium.sfrpg.rules.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#explode]{Explode} weapon), only the creature nearest to you or at the center of the explosion (your choice if multiple creatures are equidistant) is affected.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.wFTC0sGqdpnZUib4]{Gear Boost}</p>\n<p>Your weapon’s energy deflects incoming attacks. When you make an attack with a melee weapon that has the @UUID[Compendium.sfrpg.rules.JournalEntry.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#powered]{Powered} weapon special property, you gain a +1 insight bonus to your EAC until the beginning of your next turn. If your attack is a critical hit, the insight bonus increases to +2.</p>\n<p><em>Enable/Disable +2 bonus in the Modifiers tab.</em></p>"
     },
     "descriptors": {
       "acid": false,
@@ -89,18 +89,49 @@
       "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "51d6046b-afb8-45c2-9cbb-d37e9d0b4b2f",
+        "name": "Deflecting Smash (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": true,
+        "max": 1,
+        "modifier": "1",
+        "modifierType": "constant",
+        "notes": "When you make an attack with a melee weapon that has the powered weapon special property, you gain a +1 insight bonus to your EAC until the beginning of your next turn.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "eac"
+      },
+      {
+        "_id": "fda59721-d263-4b3a-b474-c461fb1c6230",
+        "name": "Deflecting Smash (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "If your attack is a critical hit, the insight bonus increases to +2.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "eac"
+      }
+    ],
     "properties": {},
     "range": {
       "additional": "",
       "per": "",
-      "units": null,
-      "value": null
+      "units": "none",
+      "value": ""
     },
     "recharge": {
       "charged": false,
@@ -119,9 +150,9 @@
       "value": ""
     },
     "uses": {
-      "max": 0,
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     }
   }
 }

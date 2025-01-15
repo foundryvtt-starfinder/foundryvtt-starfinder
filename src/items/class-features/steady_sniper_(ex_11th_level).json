@@ -1,6 +1,6 @@
 {
-  "_id": "SZVvKBmR2eHjKWAm",
-  "name": "Blazing Strike (Ex)",
+  "_id": "7fIGbBkrBuBtztYk",
+  "name": "Steady Sniper (Ex; 11th Level)",
   "type": "feat",
   "_stats": {
     "coreVersion": 12,
@@ -43,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.wFTC0sGqdpnZUib4]{Gear Boost}</p>\n<p>When you hit a creature within 30 feet of you while using a weapon with the @UUID[Compendium.sfrpg.rules.JournalEntry.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#bright]{Bright} weapon special property, the radiance partially blinds the target, giving it the @UUID[Compendium.sfrpg.conditions.Item.YjE6UGzwOTfO9p4g]{Dazzled} condition for 1 round. If you hit multiple creatures at the same time (such as with an @UUID[Compendium.sfrpg.rules.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#automatic]{Automatic}, @UUID[Compendium.sfrpg.rules.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#blast]{Blast}, or @UUID[Compendium.sfrpg.rules.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#explode]{Explode} weapon), only the creature nearest to you or at the center of the explosion (your choice if multiple creatures are equidistant) is affected.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.wFTC0sGqdpnZUib4]{Gear Boost}</p>\n<p>When you use a move action to aim a weapon with the @UUID[Compendium.sfrpg.rules.JournalEntry.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#sniper]{Sniper} weapon special property, you can make two attacks with that weapon as a standard action before the end of your turn; you take a –6 penalty to each of these attacks and must attempt both attacks against the same target. This counts as a @UUID[Compendium.sfrpg.rules.JournalEntry.U37n5tY5hn1ctzQL.JournalEntryPage.Fu5eDR99bGo9WdUU#full-attack]{Full Attack} for the purpose of any abilities that reduce your penalties to attacks.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -94,7 +94,23 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "796cba57-2127-4a97-a562-ab9af6396531",
+        "name": "Steady Sniper (Ex; 11th Level)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-property-attacks",
+        "enabled": false,
+        "max": -6,
+        "modifier": "-6",
+        "modifierType": "formula",
+        "notes": "When you use a move action to aim a weapon with the sniper weapon special property, you can make two attacks with that weapon as a standard action before the end of your turn; you take a –6 penalty to each of these attacks and must attempt both attacks against the same target. This counts as a full attack for the purpose of any abilities that reduce your penalties to attacks.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "sniper"
+      }
+    ],
     "properties": {},
     "range": {
       "additional": "",
@@ -106,7 +122,7 @@
       "charged": false,
       "value": null
     },
-    "requirements": "3rd level Soldier",
+    "requirements": "11th level Soldier",
     "rollNotes": "",
     "save": {
       "type": "",

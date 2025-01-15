@@ -1,6 +1,6 @@
 {
-  "_id": "SZVvKBmR2eHjKWAm",
-  "name": "Blazing Strike (Ex)",
+  "_id": "aC4Ww5LM4P60t2b2",
+  "name": "Twinned Threat (Ex)",
   "type": "feat",
   "_stats": {
     "coreVersion": 12,
@@ -43,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.wFTC0sGqdpnZUib4]{Gear Boost}</p>\n<p>When you hit a creature within 30 feet of you while using a weapon with the @UUID[Compendium.sfrpg.rules.JournalEntry.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#bright]{Bright} weapon special property, the radiance partially blinds the target, giving it the @UUID[Compendium.sfrpg.conditions.Item.YjE6UGzwOTfO9p4g]{Dazzled} condition for 1 round. If you hit multiple creatures at the same time (such as with an @UUID[Compendium.sfrpg.rules.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#automatic]{Automatic}, @UUID[Compendium.sfrpg.rules.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#blast]{Blast}, or @UUID[Compendium.sfrpg.rules.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#explode]{Explode} weapon), only the creature nearest to you or at the center of the explosion (your choice if multiple creatures are equidistant) is affected.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.wFTC0sGqdpnZUib4]{Gear Boost}</p>\n<p>While wielding at least two one-handed melee weapons, when you successfully attack and deal damage with one of those weapons, you gain a +2 insight bonus to damage with all other one-handed melee weapons you wield until the end of your turn. This bonus increases by 1 for every 4 soldier levels you have. Additionally, if you are wielding two identical one-handed melee weapons and make a full attack using both, increase the DC of those weapons’ critical hit effects by 1 until the end of your turn.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -94,7 +94,23 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "7631cb74-994f-4869-b4a2-9599938309d2",
+        "name": "Twinned Threat (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "melee-damage",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2 + floor(@classes.soldier.levels / 4)",
+        "modifierType": "formula",
+        "notes": "While wielding at least two one-handed melee weapons, when you successfully attack and deal damage with one of those weapons, you gain a +2 insight bonus to damage with all other one-handed melee weapons you wield until the end of your turn. This bonus increases by 1 for every 4 soldier levels you have.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "properties": {},
     "range": {
       "additional": "",
