@@ -2,6 +2,11 @@
   "_id": "nywSVEeDvp1bk7L3",
   "name": "Shaken",
   "type": "effect",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
   "img": "systems/sfrpg/icons/conditions/shaken.webp",
   "system": {
     "type": "condition",
@@ -11,9 +16,15 @@
     "activeDuration": {
       "activationTime": 0,
       "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "parent"
+      },
       "unit": "permanent",
       "value": 0
     },
+    "context": {},
     "critical": {
       "effect": "",
       "parts": []
@@ -23,8 +34,10 @@
     },
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.rules.0yJjfyvWg5pDLcVR]{Conditions}</p>\n<hr />\n<p>You take a –2 penalty to attack rolls, saving throws, skill checks, and ability checks while you have the shaken condition.</p>\n<p>If you are already shaken and then become subject to an additional effect that would cause you to be shaken, the duration of the shaken condition increases by the duration of the second effect.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.rules.Item.0yJjfyvWg5pDLcVR]{Conditions}</p>\n<hr />\n<p>You take a –2 penalty to attack rolls, saving throws, skill checks, and ability checks while you have the shaken condition.</p>\n<p>If you are already shaken and then become subject to an additional effect that would cause you to be shaken, the duration of the shaken condition increases by the duration of the second effect.</p>"
     },
     "enabled": true,
     "modifiers": [
@@ -87,7 +100,9 @@
       }
     ],
     "requirements": "Condition",
+    "showOnToken": true,
     "source": "CRB.277",
-    "sourceActorId": null
+    "sourceActorId": null,
+    "turnEvents": []
   }
 }

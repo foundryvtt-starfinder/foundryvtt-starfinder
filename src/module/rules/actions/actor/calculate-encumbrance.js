@@ -6,11 +6,6 @@ export default function(engine) {
         const actor = fact.actor;
         const actorData = actor.system;
 
-        let tooltip = [];
-        if (data.encumbrance) {
-            tooltip = encumbrance.tooltip;
-        }
-
         const addModifier = (bonus, data, item, localizationKey) => {
             if (bonus.modifierType === SFRPGModifierType.FORMULA) {
                 if (item.rolledMods) {
@@ -24,7 +19,7 @@ export default function(engine) {
 
             let computedBonus = 0;
             try {
-                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
                 computedBonus = roll.total;
             } catch {}
 
@@ -39,8 +34,10 @@ export default function(engine) {
             return computedBonus;
         };
 
-        let strength = Number(data.abilities.str.value);
-        let max = Number.isNaN(strength) ? 0 : strength;
+        const strength = Number(data.abilities.str.value);
+        const max = Number.isNaN(strength) ? 0 : strength;
+
+        const tooltip = [];
 
         tooltip.push(game.i18n.format("SFRPG.ActorSheet.Inventory.Encumbrance.EncumbranceBaseTooltip", {
             base: strength.signedString()
@@ -48,17 +45,17 @@ export default function(engine) {
 
         // Iterate through any modifiers that affect encumbrance
         let filteredModifiers = fact.modifiers.filter(mod => {
-            return (mod.enabled || mod.modifierType === "formula") && mod.effectType == SFRPGEffectType.BULK;
+            return (mod.enabled || mod.modifierType === "formula") && mod.effectType === SFRPGEffectType.BULK;
         });
         filteredModifiers = context.parameters.stackModifiers.process(filteredModifiers, context, {actor: fact.actor});
 
-        let encumbrance = {
+        const encumbrance = {
             value: 0,
             tooltip: tooltip,
             rolledMods: []
         };
 
-        let bonus = Object.entries(filteredModifiers).reduce((sum, mod) => {
+        const bonus = Object.entries(filteredModifiers).reduce((sum, mod) => {
             if (mod[1] === null || mod[1].length < 1) return sum;
 
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {

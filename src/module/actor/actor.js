@@ -49,7 +49,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                             scaleY: art.token.scale
                         }
                     };
-                data.prototypeToken = mergeObject(data.prototypeToken ?? {}, tokenArt);
+                data.prototypeToken = foundry.utils.mergeObject(data.prototypeToken ?? {}, tokenArt);
             }
         }
         super(data, context);
@@ -159,12 +159,12 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      */
     async update(data, options = {}) {
         const newSize = data['system.traits.size'];
-        if (newSize && (newSize !== getProperty(this.system, "traits.size"))) {
+        if (newSize && (newSize !== foundry.utils.getProperty(this.system, "traits.size"))) {
             const size = CONFIG.SFRPG.tokenSizes[data['system.traits.size']];
             if (this.isToken) this.token.update({ height: size, width: size });
-            else if (!data["token.width"] && !hasProperty(data, "token.width")) {
-                setProperty(data, 'token.height', size);
-                setProperty(data, 'token.width', size);
+            else if (!data["token.width"] && !foundry.utils.hasProperty(data, "token.width")) {
+                foundry.utils.setProperty(data, 'token.height', size);
+                foundry.utils.setProperty(data, 'token.width', size);
             }
         }
 
@@ -193,9 +193,16 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         if (this.type === "character" && game.settings.get("sfrpg", "autoAddUnarmedStrike")) {
             const ITEM_UUID = "Compendium.sfrpg.equipment.AWo4DU0s18agsFtJ"; // Unarmed strike
             const source = (await fromUuid(ITEM_UUID)).toObject();
-            source.flags = mergeObject(source.flags ?? {}, { core: { sourceId: ITEM_UUID } });
+            source.flags = foundry.utils.mergeObject(source.flags ?? {}, { core: { sourceId: ITEM_UUID } });
 
             updates.items = [source];
+        }
+
+        // Apply a default icon to the actor based on its type if it doesn't already have an icon selected
+        if (Object.values(SFRPG.foundryDefaultIcons).includes(this.img)) {
+            if (Object.keys(SFRPG.defaultActorIcons).includes(this.type)) {
+                updates.img = ["systems/sfrpg/icons/default/", SFRPG.defaultActorIcons[this.type]].join("");
+            }
         }
 
         this.updateSource(updates);
@@ -221,21 +228,25 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         const changedRP = changed.system?.attributes?.rp?.value;
 
         if (changedHP) {
-            const clampedHP = Math.clamped(changedHP, 0, this.system.attributes.hp.max);
+            const clampedHP = Math.clamp(changedHP, 0, this.system.attributes.hp.max);
             changed.system.attributes.hp.value = clampedHP;
         }
 
         if (changedSP) {
-            const clampedSP = Math.clamped(changedSP, 0, this.system.attributes.sp.max);
+            const clampedSP = Math.clamp(changedSP, 0, this.system.attributes.sp.max);
             changed.system.attributes.sp.value = clampedSP;
         }
 
         if (changedRP) {
-            const clampedRP = Math.clamped(changedRP, 0, this.system.attributes.rp.max);
+            const clampedRP = Math.clamp(changedRP, 0, this.system.attributes.rp.max);
             changed.system.attributes.rp.value = clampedRP;
         }
 
-        this.floatingHpOnPreUpdate(this, changed, options, user);
+        try {
+            this.floatingHpOnPreUpdate(this, changed, options, user);
+        } catch {
+            console.warn("Starfinder | Floating HP preupdate failed!");
+        }
 
         return super._preUpdate(changed, options, user);
 
@@ -244,7 +255,11 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     /** @inheritdoc */
     _onUpdate(data, options, userId) {
         super._onUpdate(data, options, userId);
-        this.floatingHpOnUpdate(this, data, options, userId);
+        try {
+            this.floatingHpOnUpdate(this, data, options, userId);
+        } catch {
+            console.warn("Starfinder | Floating HP update failed!");
+        }
     }
 
     /**
@@ -325,13 +340,13 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         if (configureDialog) {
             try {
                 const dialogResponse = await SpellCastDialog.create(this, item);
-                const slotIndex = parseInt(dialogResponse.formData.get("level"));
+                const slotLevel = parseInt(dialogResponse.formData.get("level"));
                 consumeSpellSlot = Boolean(dialogResponse.formData.get("consume"));
-                selectedSlot = dialogResponse.spellLevels[slotIndex];
+                selectedSlot = dialogResponse.spellLevels.find(x => parseInt(x.level) === slotLevel);
                 spellLevel = parseInt(selectedSlot?.level || item.system.level);
 
                 if (spellLevel !== item.system.level && item.system.level > spellLevel) {
-                    const newItemData = duplicate(item);
+                    const newItemData = item.toObject();
                     newItemData.system.level = spellLevel;
 
                     if (this.type === "npc" || this.type === "npc2") {
@@ -408,7 +423,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         // this.update({"data.skills.-=skillId": null});
         // use this to delete any unwanted skills.
 
-        const skill = duplicate(this.system.skills[skillId]);
+        const skill = foundry.utils.deepClone(this.system.skills[skillId]);
         const isNpc = this.type === "npc" || this.type === "npc2";
         const formData = await AddEditSkillDialog.create(skillId, skill, true, isNpc, this.isOwner),
             isTrainedOnly = Boolean(formData.get('isTrainedOnly')),
@@ -445,7 +460,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      * Toggles what NPC skills are shown on the sheet.
      */
     async toggleNpcSkills() {
-        const skills = duplicate(this.system.skills);
+        const skills = foundry.utils.deepClone(this.system.skills);
         const formData = await NpcSkillToggleDialog.create(skills);
         let enabledSkills = {};
         const delta = Object.entries(skills).reduce((obj, curr) => {
@@ -457,7 +472,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             enabledSkills[`system.${key}`] = Boolean(value);
         }
 
-        enabledSkills = mergeObject(enabledSkills, delta, {overwrite: false, inplace: false});
+        enabledSkills = foundry.utils.mergeObject(enabledSkills, delta, {overwrite: false, inplace: false});
 
         return await this.update(enabledSkills);
     }
@@ -565,7 +580,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
         const rollContext = RollContext.createActorRollContext(this);
 
-        parts.push(`@abilities.${abilityId}.mod`);
+        parts.push(`@abilities.${abilityId}.abilityCheckBonus`);
 
         return await DiceSFRPG.d20Roll({
             event: options.event,
@@ -704,6 +719,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             return;
         }
 
+        const useNPCCrew = this.system.crew.useNPCCrew;
         const starshipPackKey = game.settings.get("sfrpg", "starshipActionsSource");
         const starshipActions = game.packs.get(starshipPackKey);
         const actionEntryDocument = await starshipActions.getDocument(actionId);
@@ -778,6 +794,12 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             selectedFormula = actionEntry.system.formula.find(x => x.name === results.result.roll);
         }
 
+        // If it is an NPC crew the bonuses are baked into the modifier already
+        // Remove any piloting bonus from the starship
+        if (useNPCCrew) {
+            selectedFormula.formula = selectedFormula.formula.replace(/\s*\+\s*@ship\.attributes\.pilotingBonus\.value/, "");
+        }
+
         const rollContext = new RollContext();
         rollContext.addContext("ship", this);
         rollContext.setMainContext("ship");
@@ -786,26 +808,34 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
         /** Create additional modifiers. */
         const additionalModifiers = [
-            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.ComputerBonus"), modifier: "@ship.attributes.computer.value", enabled: false} },
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.ComputerBonus"), modifier: `${this.system?.attributes?.computer?.value ?? 0}`, enabled: false} },
             {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.CaptainDemand"), modifier: "4", enabled: false} },
-            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.CaptainEncouragement"), modifier: "2", enabled: false} },
-            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.ScienceOfficerLockOn"), modifier: "2", enabled: false} }
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.CaptainEncouragement"), modifier: "2", enabled: false} }
         ];
+        if (actionEntry.system.role === "gunner") {
+            additionalModifiers.push({bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.ScienceOfficerLockOn"), modifier: "2", enabled: false} });
+        }
         rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
 
         let systemBonus = "";
         // Patch and Hold It Together are not affected by critical damage.
-        if (actionEntry.name !== "Patch" && actionEntry.name !== "Hold It Together") {
+        if (!["Patch", "Hold It Together"].includes(actionEntry.name)) {
             // Gunners must select a quadrant.
             if (actionEntry.system.role === "gunner") {
-                systemBonus = ` + @ship.attributes.systems.weaponsArray${quadrant}.mod`;
-                systemBonus += ` + @ship.attributes.systems.powerCore.modOther`;
+                if (this.system?.attributes?.systems[`weaponsArray${quadrant}`]?.mod < 0) {
+                    systemBonus = ` + @ship.attributes.systems.weaponsArray${quadrant}.mod`;
+                }
+                if (this.system?.attributes?.systems?.powerCore?.modOther < 0) {
+                    systemBonus += ` + @ship.attributes.systems.powerCore.modOther`;
+                }
             } else {
                 for (const [key, value] of Object.entries(this.system.attributes.systems)) {
                     if (value.affectedRoles && value.affectedRoles[actionEntry.system.role]) {
                         if (key === "powerCore" && actionEntry.system.role !== "engineer") {
-                            systemBonus += ` + @ship.attributes.systems.${key}.modOther`;
-                        } else {
+                            if (this.system.attributes.systems[key].modOther !== 0) {
+                                systemBonus += ` + @ship.attributes.systems.${key}.modOther`;
+                            }
+                        } else if (this.system.attributes.systems[key].mod !== 0) {
                             systemBonus += ` + @ship.attributes.systems.${key}.mod`;
                         }
                     }
@@ -816,7 +846,8 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         const rollResult = await DiceSFRPG.createRoll({
             rollContext: rollContext,
             rollFormula: selectedFormula.formula + systemBonus + " + @additional.modifiers.bonus",
-            title: game.i18n.format("SFRPG.Rolls.StarshipAction", {action: actionEntry.name})
+            title: game.i18n.format("SFRPG.Rolls.StarshipAction", {action: actionEntry.name}),
+            actorContextKey: actionEntry.system.role
         });
 
         if (!rollResult) {
@@ -861,7 +892,8 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                     rollFormula: dc.value,
                     mainDie: 'd0',
                     title: game.i18n.format("SFRPG.Rolls.StarshipAction", {action: actionEntry.name}),
-                    dialogOptions: { skipUI: true }
+                    dialogOptions: { skipUI: true },
+                    actorContextKey: actionEntry.system.role
                 });
 
                 flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${dcRoll.roll.total}</p>`;
@@ -894,7 +926,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             }
         }
 
-        const rollMode = game.settings.get("core", "rollMode");
+        const rollMode = rollResult.roll?.options?.rollMode ?? game.settings.get("core", "rollMode");
         const preparedRollExplanation = DiceSFRPG.formatFormula(rollResult.formula.formula);
         const rollContent = await rollResult.roll.render({ breakdown: preparedRollExplanation });
 
@@ -902,17 +934,28 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             flavor: flavor,
             speaker: ChatMessage.getSpeaker({ actor: speakerActor }),
             content: rollContent,
-            rollMode: rollMode,
-            roll: rollResult.roll,
-            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+            rolls: [rollResult.roll],
+            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             sound: CONFIG.sounds.dice
-        });
+        }, { rollMode: rollMode});
     }
 
     levelUp(actorClassId) {
         const targetClass = this.items.get(actorClassId);
         if (targetClass) {
             targetClass.update({["system.levels"]: targetClass.system.levels + 1});
+        }
+    }
+
+    _onTurnStart() {
+        for (const item of this.items) {
+            item._onTurnStart?.();
+        }
+    }
+
+    _onTurnEnd() {
+        for (const item of this.items) {
+            item._onTurnEnd?.();
         }
     }
 
@@ -1085,8 +1128,10 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         }
         if (stamina) {
             const oldStamina = old.attributes.sp;
-            const delta = this.getDelta('value', stamina, oldStamina);
-            if (delta !== 0) diff.stamina = delta;
+            if (oldStamina) { // NPCs may not have stamina
+                const delta = this.getDelta('value', stamina, oldStamina);
+                if (delta !== 0) diff.stamina = delta;
+            }
         }
         if (shields) {
             const oldShields = old.quadrants;
@@ -1135,7 +1180,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             for (const [key, value] of Object.entries(hpDiffs)) {
                 if (value === 0) continue; // Skip deltas of 0
                 const cfg = SFRPG.floatingHPValues[key];
-                const percentMax = Math.clamped(Math.abs(value) / getProperty(t.actor.system, getMaxPath(key)), 0, 1);
+                const percentMax = Math.clamp(Math.abs(value) / getProperty(t.actor.system, getMaxPath(key)), 0, 1);
                 const sign = (value < 0) ? 'negative' : 'positive';
                 const floaterData = {
                     anchor: CONST.TEXT_ANCHOR_POINTS.CENTER,

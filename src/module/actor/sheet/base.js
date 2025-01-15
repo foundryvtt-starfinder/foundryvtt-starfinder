@@ -40,7 +40,7 @@ export class ActorSheetSFRPG extends ActorSheet {
     }
 
     static get defaultOptions() {
-        return mergeObject(super.defaultOptions, {
+        return foundry.utils.mergeObject(super.defaultOptions, {
             scrollY: [
                 ".tab.attributes",
                 ".inventory .inventory-list",
@@ -63,7 +63,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         const isOwner = this.document.isOwner;
         const data = {
             actor: this.actor,
-            system: deepClone(this.actor.system),
+            system: foundry.utils.deepClone(this.actor.system),
             isOwner: isOwner,
             isGM: game.user.isGM,
             limited: this.document.limited,
@@ -76,7 +76,6 @@ export class ActorSheetSFRPG extends ActorSheet {
             isDrone: this.document.type === 'drone',
             isNPC: this.document.type === 'npc' || this.document.type === 'npc2',
             isHazard: this.document.type === 'hazard',
-            config: CONFIG.SFRPG
         };
 
         data.items = [...this.actor.items.values()];
@@ -85,7 +84,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         data.filters = this._filters;
 
         if (!data.system?.details?.biography?.fullBodyImage) {
-            this.actor.system = mergeObject(this.actor.system, {
+            this.actor.system = foundry.utils.mergeObject(this.actor.system, {
                 details: {
                     biography: {
                         fullBodyImage: "systems/sfrpg/images/mystery-body.webp"
@@ -260,8 +259,6 @@ export class ActorSheetSFRPG extends ActorSheet {
         // Delete Inventory Item
         html.find('.item-delete').click(ev => this._onItemDelete(ev));
 
-        html.find("li.inventory-header").click(ev => this._onItemHeaderClick(ev));
-
         // Item Dragging
         const handler = ev => this._onDragStart(ev);
         html.find('li.item').each((i, li) => {
@@ -432,7 +429,7 @@ export class ActorSheetSFRPG extends ActorSheet {
                 .filter(i => !!i);
             const modifiersTotal = modifiers.reduce((total, i) => total + i.max, 0);
 
-            const preparedFormula = `${formula} ${modifiersTotal > 0 ? "+" + String(modifiersTotal) : ""}`;
+            const preparedFormula = `${formula} + ${modifiersTotal}`;
 
             const rollData = RollContext.createItemRollContext(item, item.actor).getRollData();
 
@@ -465,12 +462,12 @@ export class ActorSheetSFRPG extends ActorSheet {
                 .filter(i => !!i);
             const modifiersTotal = modifiers.reduce((total, i) => total + i.max, 0);
 
-            const preparedFormula = `${formula} ${modifiersTotal > 0 ? "+" + String(modifiersTotal) : ""}`;
+            const preparedFormula = `${formula} + ${modifiersTotal}`;
 
             const rollData = RollContext.createItemRollContext(item, item.actor).getRollData();
 
             const roll = Roll.create(preparedFormula, rollData).simplifiedFormula;
-            if (!roll) throw ("Invaid roll, deferring to default string.");
+            if (!roll) throw ("Invalid roll, deferring to default string.");
 
             const damageTypes = Object.entries(item.system.damage.parts[0].types)
                 .map(([type, enabled]) => {
@@ -538,20 +535,10 @@ export class ActorSheetSFRPG extends ActorSheet {
         const target = $(event.currentTarget);
         const modifierId = target.closest('.item.modifier').data('modifierId');
 
-        const modifiers = duplicate(this.actor.system.modifiers);
+        const modifiers = this.actor.system.modifiers;
         const modifier = modifiers.find(mod => mod._id === modifierId);
 
-        const formula = modifier.modifier;
-        if (formula) {
-            const roll = Roll.create(formula, this.actor.system);
-            modifier.max = await roll.evaluate({maximize: true}).total;
-        } else {
-            modifier.max = 0;
-        }
-
-        modifier.enabled = !modifier.enabled;
-
-        await this.actor.update({'system.modifiers': modifiers});
+        return modifier.toggle();
     }
 
     /**
@@ -620,65 +607,14 @@ export class ActorSheetSFRPG extends ActorSheet {
     async _onItemCreate(event) {
         event.stopPropagation();
         const header = event.currentTarget;
-        const type = header.dataset.type;
-        if (!type || type.includes(",")) {
-            const types = duplicate(SFRPG.itemTypes);
-            if (type) {
-                const supportedTypes = type.split(',');
-                for (const key of Object.keys(types)) {
-                    if (!supportedTypes.includes(key)) {
-                        delete types[key];
-                    }
-                }
-            }
+        const typeData = header.dataset.type;
+        if (!typeData) return;
 
-            const createData = {
-                name: game.i18n.format("SFRPG.NPCSheet.Interface.CreateItem.Name"),
-                type: type
-            };
+        const supportedTypes = typeData.split(',');
 
-            const templateData = {upper: "Item", lower: "item", types: types},
-                dlg = await renderTemplate(`systems/sfrpg/templates/apps/localized-entity-create.hbs`, templateData);
+        const types = Object.keys(game.model.Item).filter(k => supportedTypes.includes(k));
 
-            new Dialog({
-                title: game.i18n.format("SFRPG.NPCSheet.Interface.CreateItem.Title"),
-                content: dlg,
-                buttons: {
-                    create: {
-                        icon: '<i class="fas fa-check"></i>',
-                        label: game.i18n.format("SFRPG.NPCSheet.Interface.CreateItem.Button"),
-                        callback: html => {
-                            const form = html[0].querySelector("form");
-                            const formDataExtended = new FormDataExtended(form);
-                            mergeObject(createData, formDataExtended.toObject());
-                            if (!createData.name) {
-                                createData.name = game.i18n.format("SFRPG.NPCSheet.Interface.CreateItem.Name");
-                            }
-
-                            this.onBeforeCreateNewItem(createData);
-
-                            this.actor.createEmbeddedDocuments("Item", [createData]);
-                        }
-                    }
-                },
-                default: "create"
-            }).render(true);
-            return null;
-        }
-
-        const itemData = {
-            name: `New ${type.capitalize()}`,
-            type: type,
-            system: duplicate(header.dataset)
-        };
-        delete itemData.system['type'];
-
-        this.onBeforeCreateNewItem(itemData);
-
-        return this.actor.createEmbeddedDocuments("Item", [itemData]);
-    }
-
-    onBeforeCreateNewItem(itemData) {
+        ItemSFRPG.createDialog({}, {types, parent: this.actor});
 
     }
 
@@ -904,24 +840,6 @@ export class ActorSheetSFRPG extends ActorSheet {
     }
 
     /**
-     * Handle clicking inventory/features headers, allowing them to minimize
-     * @param {Event} event
-     */
-    async _onItemHeaderClick(event) {
-        event.preventDefault();
-        const target = $(event.currentTarget);
-
-        const items = target.next("ol.item-list");
-
-        if (!target.hasClass("collapsed")) {
-            items.slideUp(200, () => items.css("display", "none"));
-        } else {
-            items.slideDown(200, () => items.css("display", ""));
-        }
-        target.toggleClass('collapsed');
-    }
-
-    /**
      * Handle rolling a Save
      * @param {Event} event   The originating click event
      * @private
@@ -1060,7 +978,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         const update = { "quantity": bigStack };
         await actorHelper.updateItem(item.id, update);
 
-        const itemData = duplicate(item);
+        const itemData = item.toObject();
         itemData.id = null;
         itemData.system.quantity = smallStack;
         itemData.effects = [];
@@ -1233,7 +1151,8 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         let item = null;
         if (parsedDragData.type !== 'ItemCollection') item = (await Item.fromDropData(parsedDragData)).toObject();
-        else item = parsedDragData.items[0].toObject();
+        else if (parsedDragData.items[0].toObject !== undefined) item = parsedDragData.items[0].toObject();
+        else item = parsedDragData.items[0];
 
         // Level up existing class item if dragging on an existing one.
         if (item.type === "class") {
@@ -1339,8 +1258,12 @@ export class ActorSheetSFRPG extends ActorSheet {
 
                     const formula = modifier.modifier;
                     if (formula) {
-                        const roll = Roll.create(formula, targetActor.actor.system);
-                        modifier.max = await roll.evaluate({maximize: true}).total;
+                        try {
+                            const roll = Roll.create(formula, targetActor.actor.system);
+                            modifier.max = await roll.evaluate({maximize: true}).total;
+                        } catch {
+                            modifier.max = 0;
+                        }
                     } else {
                         modifier.max = 0;
                     }
@@ -1366,7 +1289,7 @@ export class ActorSheetSFRPG extends ActorSheet {
                 if (targetContainer) {
                     let newContents = [];
                     if (targetContainer.system.container?.contents) {
-                        newContents = duplicate(targetContainer.system.container?.contents || []);
+                        newContents = foundry.utils.deepClone(targetContainer.system.container?.contents || []);
                     }
 
                     const preferredStorageIndex = getFirstAcceptableStorageIndex(targetContainer, addedItem) || 0;

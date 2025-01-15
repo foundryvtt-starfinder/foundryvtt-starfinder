@@ -2,6 +2,11 @@
   "_id": "Fmg9VBDj51dyZs5Q",
   "name": "Muon Crystal, Standard",
   "type": "weapon",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
   "img": "icons/commodities/gems/gem-faceted-diamond-blue.webp",
   "system": {
     "type": "",
@@ -19,6 +24,7 @@
     "ammunitionType": "",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": 0
@@ -71,24 +77,8 @@
       "parts": []
     },
     "damage": {
-      "parts": [
-        {
-          "name": "",
-          "formula": "6d4",
-          "group": null,
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
-            "cold": false,
-            "electricity": false,
-            "fire": false,
-            "healing": false,
-            "piercing": false,
-            "slashing": false,
-            "sonic": false
-          }
-        }
-      ]
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -108,8 +98,26 @@
     "formula": "",
     "identified": true,
     "isActive": null,
+    "isEquipment": true,
     "level": 16,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "5d47099b-eec6-439d-b4eb-bf7a69f749c5",
+        "name": "Muon Crystal, Standard",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-damage",
+        "enabled": true,
+        "limitTo": "container",
+        "max": 24,
+        "modifier": "6d4",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "price": 16600,
     "proficient": true,
     "properties": {
@@ -150,6 +158,7 @@
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
       "hybrid": false,
       "hydrodynamic": false,
@@ -220,6 +229,10 @@
       "type": "",
       "dc": "",
       "descriptor": "negate"
+    },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
     },
     "source": "AR pg. 49",
     "special": "",

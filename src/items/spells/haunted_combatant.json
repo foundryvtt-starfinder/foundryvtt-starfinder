@@ -2,6 +2,11 @@
   "_id": "9BxigRaK0y4IpHph",
   "name": "Haunted Combatant",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
   "img": "systems/sfrpg/icons/spells/haunted_combatant.webp",
   "system": {
     "type": "",
@@ -9,6 +14,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "action",
@@ -17,11 +23,13 @@
     },
     "allowedClasses": {
       "myst": true,
+      "precog": false,
       "tech": false,
       "wysh": false
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": null,
       "value": null
@@ -36,8 +44,11 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>You divert a malevolent spirit from the River of Souls to temporarily haunt and interfere with an opponent’s weapons. The spirit writhes and rattles around in the target’s manufactured weapons, imposing a –1 penalty on the target’s attack rolls with weapons other than natural weapons. The weapons on a target’s body continue to be haunted while the spell lasts, even if the original target dies. Anyone who picks up the haunted weapons during this time must attempt to save against this spell at a –1 penalty or be affected by it.</p>"
     },
@@ -48,6 +59,8 @@
       "value": "@details.cl.value"
     },
     "formula": "",
+    "isActive": null,
+    "isVariableLevel": false,
     "level": 2,
     "materials": {
       "consumed": false,
@@ -60,9 +73,14 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
-      "units": "close"
+      "additional": "",
+      "per": "",
+      "units": "close",
+      "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "will",
       "dc": "",

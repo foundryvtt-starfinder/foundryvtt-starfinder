@@ -2,6 +2,11 @@
   "_id": "yUtkoIshf4dPruNd",
   "name": "Off-Target",
   "type": "effect",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
   "img": "systems/sfrpg/icons/conditions/offtarget.webp",
   "system": {
     "type": "condition",
@@ -11,9 +16,15 @@
     "activeDuration": {
       "activationTime": 0,
       "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "parent"
+      },
       "unit": "permanent",
       "value": 0
     },
+    "context": {},
     "critical": {
       "effect": "",
       "parts": []
@@ -23,8 +34,10 @@
     },
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.rules.0yJjfyvWg5pDLcVR]{Conditions}</p>\n<hr />\n<p>Your battle concentration is thrown off.</p>\n<p>You take a –2 penalty to attack rolls while off-target.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.rules.Item.0yJjfyvWg5pDLcVR]{Conditions}</p>\n<hr />\n<p>Your battle concentration is thrown off.</p>\n<p>You take a –2 penalty to attack rolls while off-target.</p>"
     },
     "enabled": true,
     "modifiers": [
@@ -44,7 +57,9 @@
       }
     ],
     "requirements": "Condition",
+    "showOnToken": true,
     "source": "CRB.276",
-    "sourceActorId": null
+    "sourceActorId": null,
+    "turnEvents": []
   }
 }

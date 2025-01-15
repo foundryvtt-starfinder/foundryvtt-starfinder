@@ -1,252 +1,247 @@
-{{!-- Action Type --}}
-<div class="form-group select">
-    <label>{{ localize "SFRPG.Items.Action.ActionType" }}</label>
-    <select name="system.actionType">
-        {{#select itemData.actionType}}
-        <option value=""></option>
-        {{#each config.itemActionTypes as |name type|}}
-        <option value="{{type}}">{{name}}</option>
-        {{/each}}
-        {{/select}}
-    </select>
-</div>
-{{#if itemData.actionType}}
-
-    {{!-- Action Target --}}
-    <div class="form-group select" {{createTippy title="SFRPG.Items.Action.ActionTarget.Title" subtitle="SFRPG.Items.Action.ActionTarget.Tooltip"}}>
-        <label>{{ localize "SFRPG.Items.Action.ActionTarget.Title" }}</label>
-        <select name="system.actionTarget">
-            {{#select itemData.actionTarget}}
-            {{#each config.actionTargets as |name type|}}
-            <option value="{{type}}">{{name}}</option>
-            {{/each}}
-            {{/select}}
-        </select>
-    </div>
-
-    {{!-- Ability Modifier --}}
-    <div class="form-group select">
-        <label>{{ localize "SFRPG.Items.Action.AbilityModifier" }}</label>
-        <select name="system.ability">
-            {{#select itemData.ability}}
-            <option value=""></option>
-            {{#each config.abilities as |ability a|}}
-            <option value="{{a}}">{{ability}}</option>
-            {{/each}}
-            {{/select}}
-        </select>
-    </div>
-
-    {{!-- Attack Roll Bonus --}}
-    {{#if hasAttackRoll }}
-        <div class="form-group">
-            <label>{{ localize "SFRPG.Items.Action.AttackRollBonus" }}</label>
-            <div class="form-fields">
-                <input type="text" name="system.attackBonus" value="{{itemData.attackBonus}}" data-dtype="Number"/>
-            </div>
-        </div>
+{{!-- Action Details --}}
+<div class="bubble">
+    {{#if message}}
+        <h3 class="bubble-header">{{localize message}}</h3>
+    {{else}}
+        <h3 class="bubble-header">{{localize "SFRPG.Items.Action.Details"}}</h3>
     {{/if}}
 
-    <span>&nbsp;</span>
-
-    <h3 class="form-header noborder">{{ localize "SFRPG.Items.Action.DamageNotes" }}</h3>
-
-    {{!-- Chat Message Flavor --}}
-    <div class="form-group stacked">
-        <label>{{ localize "SFRPG.Items.Action.ChatMessageFlavor" }}</label>
-        <input type="text" name="system.chatFlavor" value="{{itemData.chatFlavor}}"/>
-    </div>
-
-    {{!-- Roll Notes --}}
-    <div class="form-group stacked" {{createTippy title="SFRPG.Items.Action.RollNotes" subtitle="SFRPG.Items.Action.RollNotesTooltip"}}>
-        <label>{{ localize "SFRPG.Items.Action.RollNotes" }}</label>
-        <input type="text" name="system.rollNotes" value="{{itemData.rollNotes}}"/>
-    </div>
-
-    {{!-- Damage Notes --}}
-    <div class="form-group stacked" {{createTippy title="SFRPG.Items.Action.DamageNotes" subtitle="SFRPG.Items.Action.DamageNotesTooltip"}}>
-        <label>{{ localize "SFRPG.Items.Action.DamageNotes" }}</label>
-        <input type="text" name="system.damageNotes" value="{{itemData.damageNotes}}"/>
-    </div>
-
-    <span>&nbsp;</span>
-
-    <h3 class="form-header noborder">{{ localize "SFRPG.Items.Action.DamageHeader" }}</h3>
-
-    {{!-- Damage Formula --}}
-    <h4 class="damage-header">
-        {{ localize "SFRPG.Items.Action.AddDamageSection" }}
-        <a class="damage-control add-damage"><i class="fas fa-plus"></i></a>
-    </h4>
-    <ol class="damage-parts form-group">
-        {{#each itemData.damage.parts as |part i| }}
-        <li class="damage-part flexcol" style="border: 0;" data-damage-part="{{i}}">
-            <span>&nbsp;</span>
-            <h4 class="damage-header" style="border-bottom: groove 2px #fff;">
-                {{#unless (lookup this "name") }}{{ localize "SFRPG.Items.Action.DamageSection" section=i}}{{else}}{{lookup this "name"}}{{/unless}}:
-                <a class="damage-control delete-damage" {{createTippy title="SFRPG.Items.Action.DeleteDamageSection" subtitle="SFRPG.Items.Action.DeleteDamageSectionTooltip"}}><i class="fas fa-minus"></i></a>
-            </h4>
-            <div class="form-group" {{createTippy title="SFRPG.Items.Action.DamageName" subtitle="SFRPG.Items.Action.DamageNameTooltip"}}>
-                <label>{{ localize "SFRPG.Items.Action.DamageName" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.damage.parts.{{i}}.name" value="{{lookup this "name"}}" placeholder="{{ localize "SFRPG.Items.Action.DamageSection" section=i}}"/>
-                </div>
-            </div>
-            <div class="damage-part-formula form-group" {{createTippy title="SFRPG.Items.Action.DamageFormula" subtitle="SFRPG.Items.Action.DamageFormulaTooltip"}}>
-                <label>{{ localize "SFRPG.Items.Action.DamageFormula" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.damage.parts.{{i}}.formula" value="{{lookup this "formula"}}"/>
-                </div>
-            </div>
-            <div class="damage-part-formula form-group">
-                <label>{{ localize "SFRPG.Damage.Types.DamageGroup" group=""}}</label>
-                <div class="form-fields">
-                    <input type="number" name="system.damage.parts.{{i}}.group" value="{{lookup this "group"}}" data-dtype="Number" data-tooltip="
-                    <strong>{{ localize 'SFRPG.Damage.Types.DamageGroup' group=''}}</strong>
-                    <br>
-                    <p>{{ localize 'SFRPG.Damage.Types.DamageGroupTooltip' group=''}}</p>"/>
-                </div>
-            </div>
-            <div class="primary-section form-group">
-                <label for="primary-section-{{i}}">{{ localize "SFRPG.Damage.Types.PrimaryDamageSection" }}</label>
-                <input type="checkbox" class="primary-section-checkbox" id="primary-section-{{i}}" name="system.damage.parts.{{i}}.isPrimarySection" {{checked this.isPrimarySection}} {{ createTippy title="SFRPG.Damage.Types.PrimaryDamageSection" subtitle="SFRPG.Damage.Types.PrimaryDamageSectionTooltip" }}>
-                </div>
-            <div class="damage-part-type form-group stacked">
-                <div class="form-group form-group-stacked">
-                    <label>{{localize "SFRPG.Damage.EnergyDamage"}}</label>
-                    {{#each ../config.energyDamageTypes as |name type|}}
-                    <label class="checkbox">
-                        <input type="checkbox" name="system.damage.parts.{{i}}.types.{{type}}" {{checked (lookup (lookup (lookup ../../itemData.damage.parts i) "types") type)}} />{{name}}
-                    </label>
-                    {{/each}}
-                </div>
-                <div class="form-group form-group-stacked">
-                    <label>{{localize "SFRPG.Damage.KineticDamage"}}</label>
-                    {{#each ../config.kineticDamageTypes as |name type|}}
-                    <label class="checkbox">
-                        <input type="checkbox" name="system.damage.parts.{{i}}.types.{{type}}" {{checked (lookup (lookup (lookup ../../itemData.damage.parts i) "types") type)}} />{{name}}
-                    </label>
-                    {{/each}}
-                </div>
-                <div class="form-group form-group-stacked">
-                    <label>{{localize "SFRPG.HealingTypesHealing"}}</label>
-                    <label class="checkbox">
-                        <input type="checkbox" name="system.damage.parts.{{i}}.types.healing" {{checked (lookup (lookup (lookup ../itemData.damage.parts i) "types") "healing")}} />{{localize "SFRPG.HealingTypesHealing"}}
-                    </label>
-                </div>
-            </div>
-        </li>
-        {{/each}}
-    </ol>
-
-    {{#if (ne itemData.actionType "heal")}}
-
-        <span>&nbsp;</span>
-
-        <h4 class="form-header">{{ localize "SFRPG.Items.Action.CriticalDamageHeader" }}</h4>
-
-        <div class="form-group">
-            <label>{{ localize "SFRPG.Items.Action.CriticalEffect" }}</label>
-            <div class="form-fields">
-                <input type="text" name="system.critical.effect" value="{{itemData.critical.effect}}"/>
-            </div>
+    <div class="bubble-info">
+        {{!-- Action Type --}}
+        <div class="form-group select">
+            <label>{{ localize "SFRPG.Items.Action.ActionType" }}</label>
+            <select name="system.actionType">
+                {{selectOption "" "" selected=itemData.actionType}}
+                {{selectOptions (sfrpg "itemActionTypes") selected=itemData.actionType}}
+            </select>
         </div>
-        <h4 class="damage-header">
-            {{#unless isHealing }}{{ localize "SFRPG.Items.Action.CriticalDamageFormula" }}{{ else }}{{ localize "SFRPG.Items.Action.CriticalHealingFormula" }}{{/unless}}
-            <a class="damage-control add-critical-damage"><i class="fas fa-plus"></i></a>
-        </h4>
-        <ol class="damage-parts form-group">
-            {{#each itemData.critical.parts as |part i| }}
-            <li class="damage-part flexcol" data-critical-part="{{i}}">
-                <div class="damage-part-formula form-group flexrow">
-                    <input type="text" name="system.critical.parts.{{i}}.formula" value="{{lookup this "formula"}}"/>
-                    <a class="damage-control delete-critical-damage"><i class="fas fa-minus"></i></a>
-                </div>
-                <div class="damage-part-type form-group stacked">
-                    <div class="form-group form-group-stacked">
-                        <label>{{localize "Energy Damage"}}</label>
-                        {{#each ../config.energyDamageTypes as |name type|}}
-                        <label class="checkbox">
-                            <input type="checkbox" name="system.critical.parts.{{i}}.types.{{type}}" {{checked (lookup (lookup (lookup ../../itemData.critical.parts i) "types") type)}} />{{name}}
-                        </label>
-                        {{/each}}
-                    </div>
-                    <div class="form-group form-group-stacked">
-                        <label>{{localize "Kinetic Damage"}}</label>
-                        {{#each ../config.kineticDamageTypes as |name type|}}
-                        <label class="checkbox">
-                            <input type="checkbox" name="system.critical.parts.{{i}}.types.{{type}}" {{checked (lookup (lookup (lookup ../../itemData.critical.parts i) "types") type)}} />{{name}}
-                        </label>
-                        {{/each}}
-                    </div>
-                    <div class="form-group form-group-stacked">
-                        <label>{{localize "SFRPG.HealingTypesHealing"}}</label>
-                        <label class="checkbox">
-                            <input type="checkbox" name="system.critical.parts.{{i}}.types.healing" {{checked (lookup (lookup (lookup ../../itemData.critical.parts i) "types") "healing")}} />{{localize "SFRPG.HealingTypesHealing"}}
-                        </label>
+
+        {{#if itemData.actionType}}
+            {{!-- Action Target --}}
+            <div class="form-group select" {{createTippy title="SFRPG.Items.Action.ActionTarget.Title" subtitle="SFRPG.Items.Action.ActionTarget.Tooltip"}}>
+                <label>{{ localize "SFRPG.Items.Action.ActionTarget.Title" }}</label>
+                <select name="system.actionTarget">
+                    {{selectOptions (sfrpg "actionTargets") selected=itemData.actionTarget}}
+                </select>
+            </div>
+
+            {{!-- Ability Modifier --}}
+            <div class="form-group select">
+                <label>{{ localize "SFRPG.Items.Action.AbilityModifier" }}</label>
+                <select name="system.ability">
+                    {{selectOption "" "" selected=itemData.ability}}
+                    {{selectOptions (sfrpg "abilities") selected=itemData.ability}}
+                </select>
+            </div>
+
+            {{!-- Attack Roll Bonus --}}
+            {{#if hasAttackRoll }}
+                <div class="form-group">
+                    <label>{{ localize "SFRPG.Items.Action.AttackRollBonus" }}</label>
+                    <div class="form-fields">
+                        <input type="text" name="system.attackBonus" value="{{itemData.attackBonus}}" data-dtype="Number"/>
                     </div>
                 </div>
-                <div class="damage-part-operator form-group flexrow" data-tooltip="When an item or ablity does multiple types of damage, this will determine if both damage types apply, or if only one or the other apply.">
-                    <label>{{localize "Damage Operator"}}</label>
-                    <select name="system.critical.parts.{{i}}.operator">
-                        {{#select (lookup this "operator")}}
-                        <option value=""></option>
-                        <option value="and">{{localize "And"}}</option>
-                        <option value="or">{{localize "Or"}}</option>
-                        {{/select}}
+            {{/if}}
+
+            {{!-- Saving Throw --}}
+            <div class="form-group input-select">
+                <label>{{ localize "SFRPG.Items.Action.SavingThrow" }}</label>
+                <div class="form-fields">
+                    <input type="text" class="wide-form-field" name="system.save.dc" value="{{itemData.save.dc}}" data-dtype="String" placeholder="{{placeholders.saveDC.formula}}"/>
+                    <select name="system.save.type">
+                        {{selectOption "" "" selected=itemData.save.type}}
+                        {{selectOptions (sfrpg "saves") selected=itemData.save.type}}
+                    </select>
+                    <select name="system.save.descriptor">
+                        {{selectOptions (sfrpg "saveDescriptors") selected=itemData.save.descriptor}}
                     </select>
                 </div>
-            </li>
-            {{/each}}
-        </ol>
+            </div>
 
-        {{!-- Other Formula --}}
-        <div class="form-group">
-            <label>{{ localize "SFRPG.Items.Action.OtherFormula" }}</label>
-            <div class="form-fields">
-                <input type="text" name="system.formula" value="{{itemData.formula}}" placeholder="Formula"/>
+            {{!-- Skill Check --}}
+            <div class="form-group input-select">
+                <label>{{localize "SFRPG.Items.Action.SkillCheck"}}</label>
+                <div class="form-fields">
+                    <input type="text" class="wide-form-field" name="system.skillCheck.dc" value="{{itemData.skillCheck.dc}}" data-dtype="String" placeholder="{{placeholders.saveDC.formula}}"/>
+                    <select name="system.skillCheck.type">
+                        {{selectOption "" "" selected=itemData.skillCheck.type}}
+                        {{selectOptions (sfrpg "skills") selected=itemData.skillCheck.type}}
+                    </select>
+                </div>
+            </div>
+
+            {{!-- Other Formula --}}
+            <div class="form-group">
+                <label>{{ localize "SFRPG.Items.Action.OtherFormula" }}</label>
+                <div class="form-fields">
+                    <input type="text" name="system.formula" value="{{itemData.formula}}" placeholder="Formula"/>
+                </div>
+            </div>
+
+            {{!-- Range and Area if it's got no activation cost --}}
+            {{#unless itemData.activation.type}}
+
+                {{!-- Range Information --}}
+                <div class="bubble">
+                    <div class="bubble-header">{{ localize "SFRPG.Items.RangeInformation" }}</div>
+                    <div class="bubble-info">
+                        {{!-- Range Increment --}}
+                        <div class="form-group input-select">
+                            <label>{{#if (eq this.data.type "weapon")}}{{ localize "SFRPG.Items.Activation.RangeIncrement" }}{{else}}{{ localize "SFRPG.Items.Activation.Range" }}{{/if}}</label>
+                            <div class="form-fields">
+                                {{#if this.range.showTotal}}<p class="calculated-total"><strong>{{itemData.range.total}}</strong></p>{{/if}}
+                                {{#if this.range.hasInput}}
+                                <input class="wide-form-field" type="text" name="system.range.value" value="{{itemData.range.value}}" data-dtype="String" placeholder="Range"/>
+                                {{/if}}
+                                <select name="system.range.units">
+                                    {{selectOptions (sfrpg "distanceUnits") selected=itemData.range.units}}
+                                </select>
+                            </div>
+                        </div>
+
+                        {{!-- Area --}}
+                        <div class="form-group input-select-select-select">
+                            <label>{{ localize "SFRPG.Items.Activation.Area" }}</label>
+                            <div class="form-fields">
+                                {{#if this.area.showTotal}}<p class="calculated-total"><strong>{{itemData.area.total}}</strong></p>{{/if}}
+                                <input type="text" {{#if (eq itemData.area.units "text")}}class="wide-form-field"{{/if}} name="system.area.value" value="{{itemData.area.value}}" data-dtype="String" placeholder="Area" />
+                                <select name="system.area.units" class="min-form-field">
+                                    {{selectOptions (sfrpg "variableDistanceUnits") selected=itemData.area.units}}
+                                    {{selectOption "text" "SFRPG.Text" selected=itemData.area.units localize=true}}
+                                </select>
+                                {{#unless (eq itemData.area.units "text")}}
+                                <select name="system.area.shape" class="min-form-field">
+                                    {{selectOptions (sfrpg "spellAreaShapes") selected=itemData.area.shape}}
+                                </select>
+                                <select name="system.area.effect" class="min-form-field">
+                                    {{selectOptions (sfrpg "spellAreaEffects") selected=itemData.area.effect}}
+                                </select>
+                                <label class="checkbox">
+                                    <input type="checkbox" name="system.area.shapable" {{checked itemData.area.shapable}}>
+                                    {{ localize "SFRPG.SpellAreaShapesShapable" }}
+                                </label>
+                                {{/unless}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{/unless}}
+
+            {{!-- Conditional Weapon Properties --}}
+            {{#unless (leftOrRight (eq item.type "weapon") (eq item.type "shield"))}}
+                {{#if (leftOrRight (eq itemData.actionType "mwak") (eq itemData.actionType "rwak"))}}
+                    {{> "systems/sfrpg/templates/items/parts/weapon-properties.hbs"}}
+                {{/if}}
+            {{/unless}}
+        {{/if}}
+    </div>
+</div>
+
+{{#if itemData.actionType}}
+    {{!-- Damage Sections --}}
+    <div class="bubble">
+        <h3 class="bubble-header">
+            {{ localize "SFRPG.Items.Action.DamageHeader" }}
+            <a class="damage-control add-damage"><i class="fas fa-plus"></i></a>
+        </h3>
+
+        <div class="bubble-info">
+            {{!-- Damage Sections --}}
+            {{> "systems/sfrpg/templates/items/parts/damage-sections.hbs" starshipDamage=false}}
+        </div>
+    </div>
+
+
+    {{#if (ne itemData.actionType "heal")}}
+        {{!-- Critical Damage Sections --}}
+        <div class="bubble">
+            <h4 class="bubble-header">
+                {{ localize "SFRPG.Items.Action.CriticalDamageHeader" }}
+                <a class="damage-control add-critical-damage"><i class="fas fa-plus"></i></a>
+            </h4>
+
+            <div class="bubble-info">
+                <div class="form-group">
+                    <label>{{ localize "SFRPG.Items.Action.CriticalEffect" }}</label>
+                    <div class="form-fields">
+                        <input type="text" name="system.critical.effect" value="{{itemData.critical.effect}}"/>
+                    </div>
+                </div>
+                <ol class="damage-parts form-group">
+                    {{#each itemData.critical.parts as |part i| }}
+                    <li class="damage-part bubble" data-critical-part="{{i}}">
+                        <h4 class="damage-header bubble-header">
+                            {{#unless isHealing }}{{ localize "SFRPG.Items.Action.CriticalDamageFormula" }}{{ else }}{{ localize "SFRPG.Items.Action.CriticalHealingFormula" }}{{/unless}}
+                            <a class="damage-control delete-critical-damage"><i class="fas fa-minus"></i></a>
+                        </h4>
+                        <div class="bubble-info">
+                            <div class="damage-part-formula form-group flexrow">
+                                <input type="text" name="system.critical.parts.{{i}}.formula" value="{{lookup this "formula"}}"/>
+                            </div>
+                            <div class="damage-part-type form-group stacked">
+                                <div class="form-group form-group-stacked">
+                                    <label>{{localize "SFRPG.Damage.EnergyDamage"}}</label>
+                                    {{#each (sfrpg "energyDamageTypes") as |name type|}}
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="system.critical.parts.{{i}}.types.{{type}}" {{checked (lookup (lookup (lookup ../../itemData.critical.parts i) "types") type)}} />{{name}}
+                                    </label>
+                                    {{/each}}
+                                </div>
+                                <div class="form-group form-group-stacked">
+                                    <label>{{localize "SFRPG.Damage.KineticDamage"}}</label>
+                                    {{#each (sfrpg "kineticDamageTypes") as |name type|}}
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="system.critical.parts.{{i}}.types.{{type}}" {{checked (lookup (lookup (lookup ../../itemData.critical.parts i) "types") type)}} />{{name}}
+                                    </label>
+                                    {{/each}}
+                                </div>
+                                <div class="form-group form-group-stacked">
+                                    <label>{{localize "SFRPG.HealingTypesHealing"}}</label>
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="system.critical.parts.{{i}}.types.healing" {{checked (lookup (lookup (lookup ../../itemData.critical.parts i) "types") "healing")}} />{{localize "SFRPG.HealingTypesHealing"}}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="damage-part-operator form-group flexrow" data-tooltip="When an item or ablity does multiple types of damage, this will determine if both damage types apply, or if only one or the other apply.">
+                                <label>{{localize "Damage Operator"}}</label>
+                                <select name="system.critical.parts.{{i}}.operator">
+                                    {{selectOption "" "" selected=part.operator}}
+                                    {{selectOption "and" "And" selected=part.operator localize=true}}
+                                    {{selectOption "or" "Or" selected=part.operator localize=true}}
+                                </select>
+                            </div>
+                        </div>
+                    </li>
+                    {{/each}}
+                </ol>
             </div>
         </div>
 
     {{/if}}
 
-    {{!-- Saving Throw --}}
-    <div class="form-group input-select">
-        <label>{{ localize "SFRPG.Items.Action.SavingThrow" }}</label>
-        <div class="form-fields">
-            <input type="text" class="wide-form-field" name="system.save.dc" value="{{itemData.save.dc}}" data-dtype="String" placeholder="{{placeholders.saveDC.formula}}"/>
-            <select name="system.save.type">
-                {{#select itemData.save.type}}
-                <option value=""></option>
-                {{#each config.saves as |save s|}}
-                <option value="{{s}}">{{save}}</option>
-                {{/each}}
-                {{/select}}
-            </select>
-            <select name="system.save.descriptor">
-                {{#select itemData.save.descriptor}}
-                {{#each config.saveDescriptors as |descriptor k|}}
-                <option value="{{k}}">{{descriptor}}</option>
-                {{/each}}
-                {{/select}}
-            </select>
+    {{!-- Damage Notes --}}
+    <div class="bubble">
+        <h3 class="bubble-header">{{ localize "SFRPG.Items.Action.DamageNotes" }}</h3>
+
+        <div class="bubble-info">
+            {{!-- Chat Message Flavor --}}
+            <div class="form-group stacked">
+                <label>{{ localize "SFRPG.Items.Action.ChatMessageFlavor" }}</label>
+                <input type="text" name="system.chatFlavor" value="{{itemData.chatFlavor}}"/>
+            </div>
+
+            {{!-- Roll Notes --}}
+            <div class="form-group stacked" {{createTippy title="SFRPG.Items.Action.RollNotes" subtitle="SFRPG.Items.Action.RollNotesTooltip"}}>
+                <label>{{ localize "SFRPG.Items.Action.RollNotes" }}</label>
+                <input type="text" name="system.rollNotes" value="{{itemData.rollNotes}}"/>
+            </div>
+
+            {{!-- Damage Notes --}}
+            <div class="form-group stacked" {{createTippy title="SFRPG.Items.Action.DamageNotes" subtitle="SFRPG.Items.Action.DamageNotesTooltip"}}>
+                <label>{{ localize "SFRPG.Items.Action.DamageNotes" }}</label>
+                <input type="text" name="system.damageNotes" value="{{itemData.damageNotes}}"/>
+            </div>
         </div>
     </div>
-
-    {{!-- Skill Check --}}
-    <div class="form-group input-select">
-        <label>{{localize "SFRPG.Items.Action.SkillCheck"}}</label>
-        <div class="form-fields">
-            <input type="text" class="wide-form-field" name="system.skillCheck.dc" value="{{itemData.skillCheck.dc}}" data-dtype="String" placeholder="{{placeholders.saveDC.formula}}"/>
-            <select name="system.skillCheck.type">
-                {{#select itemData.skillCheck.type}}
-                <option value=""></option>
-                {{#each config.skills as |skill s|}}
-                <option value="{{s}}">{{skill}}</option>
-                {{/each}}
-                {{/select}}
-            </select>
-        </div>
-    </div>
-
 {{/if}}

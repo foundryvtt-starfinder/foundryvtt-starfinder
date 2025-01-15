@@ -167,8 +167,6 @@
                     "Close": "Close",
                     "CloseTooltip": "Close this container's fold-out listing.",
                     "DetailsHeader": "Container details",
-                    "EquippedBulkMultiplier": "Equipped bulk multiplier",
-                    "EquippedBulkMultiplierTooltip": "This multiplier is used for altering the bulk of the current item when it is equipped.<br/>Setting this to 0 will make the current item not count its own bulk towards the actor's encumbrance when equipped.",
                     "IncludeContentsInWealthCalculation": "Contents affect character wealth",
                     "IncludeContentsInWealthCalculationCheckbox": "Contained items are counted towards character wealth.",
                     "IncludeContentsInWealthCalculationTooltip": "If disabled, contained items no longer affect character wealth.",
@@ -496,6 +494,7 @@
             },
             "PlaceAbilityTemplate": "Place {label}"
         },
+        "Check": "Check",
         "ClassArmorProf": "アーマー習熟",
         "ClassBABProgression": "基本攻撃ボーナスの成長度",
         "ClassFortSaveProgression": "頑健セーヴの成長度",
@@ -781,6 +780,8 @@
                     "Or": "or"
                 },
                 "Piercing": "[刺突]",
+                "PrimaryDamageGroup": "Primary Damage Group",
+                "PrimaryDamageGroupTooltip": "Damage sections that are a member of the primary damage group will all be marked as primary. You will still only be able to choose one damage section per group when making a damage roll, and as such modifiers will correctly only be applied once.",
                 "PrimaryDamageSection": "Primary Damage Section",
                 "PrimaryDamageSectionTooltip": "Modifiers that affect this weapon's damage will only apply to the primary damage section. Non-primary sections will simply roll their formula. A weapon must have exactly one primary damage section.",
                 "Radiation": "Radiation",
@@ -1171,6 +1172,7 @@
         "ItemMacro": {
             "Activate": "Activate",
             "Attack": "Attack",
+            "Cast": "Cast",
             "Damage": "Damage",
             "Healing": "Healing",
             "Reload": "Reload",
@@ -1189,6 +1191,7 @@
                 "Base": "Base value",
                 "BaseTooltip": "(Required) The base value defines the base value of this resource. Modifiers may alter it.<br/>Attribute: @resources.type.subtype.base",
                 "CombatTracker": "Combat Tracker settings",
+                "CombatTrackerSettings": "Combat Tracker Settings",
                 "DisplayAbsoluteValue": "Display Absolute Value",
                 "DisplayAbsoluteValueTooltip": "Should the displayed value in the combat tracker be absolute? i.e. -1 is displayed as 1, -2 as 2, etc.",
                 "Enabled": "Enabled",
@@ -1230,6 +1233,7 @@
                 "VisualizationsModeLesserThan": "lesser than",
                 "VisualizationsModeLesserThanEqual": "lesser than or equal to",
                 "VisualizationsModeNotEqual": "not equal to",
+                "VisualizationsPart": "Visualization Part",
                 "VisualizationsThen": "Then:",
                 "VisualizationsTitle": "Title:"
             },
@@ -1252,6 +1256,27 @@
             },
             "Containers": {
                 "ContainerTooltip": "Containers can contain just about any item. Increase the storage capacity to allow adding content."
+            },
+            "Details": {
+                "Section": {
+                    "ArmorDetails": "Armor Details",
+                    "ClassBasics": "Class Basics",
+                    "ConsumableDetails": "Consumable Details",
+                    "Progressions": "Progressions",
+                    "SkillsAndProficiencies": "Skills and Proficiencies",
+                    "Title": "Section",
+                    "Usage": "Usage"
+                },
+                "Tab": {
+                    "AmmunitionContainer": "Ammunition & Container",
+                    "AttackDamage": "Attack & Damage",
+                    "ClassInformation": "Class Information",
+                    "ContainerDetails": "Container Details",
+                    "NPCSpecific": "NPC Specific",
+                    "Properties": "Properties",
+                    "Spellcasting": "Spellcasting",
+                    "UsageAction": "Usage & Action"
+                }
             },
             "Header": {
                 "ArmorClass": "Armor Class",
@@ -1278,6 +1303,8 @@
                 "CustomBuiltTooltip": "Was this item crafted by a character, or mass-produced?",
                 "DexterityModifier": "Dexterity Modifier",
                 "DexterityModifierTooltip": "If inanimate, an item's dexterity modifier is -5.",
+                "EquippedBulkMultiplier": "Equipped Bulk Multiplier",
+                "EquippedBulkMultiplierTooltip": "This multiplier is used for altering the bulk of the current item when it is equipped.<br/>Setting this to 0 will make the current item not count its own bulk towards the actor's encumbrance when equipped.",
                 "Hardness": "Hardness",
                 "HardnessTooltip": "<strong>Hardness</strong><br/>When taking damage, subtract the item's hardness from the incoming damage before applying.",
                 "Header": "Physical Properties",
@@ -1301,6 +1328,29 @@
                 "TargetLockPenaltyTooltip": "The penalty applied to the ship's target lock score.",
                 "TurnDistancePenalty": "Turn Distance Penalty",
                 "TurnDistancePenaltyTooltip": "The penalty applied to the ship's turn distance score."
+            },
+            "StarshipAction": {
+                "ActionDC": "Action DC",
+                "AddSubactionTooltip": "<strong>Add Subaction</strong><br />Add a new subaction",
+                "CheckFormula": "Skill Check Formula",
+                "CrewRole": "Crew Role",
+                "CriticalEffect": "Critical Effect",
+                "DCPlaceholder": "5 + 1-1/2 * Target Ship Tier",
+                "DeleteSubactionTooltip": "<strong>Delete Subaction</strong><br />Delete this subaction",
+                "IsPushAction": "Push Action?",
+                "NormalEffect": "Normal Effect",
+                "Phase": "Phase",
+                "PhaseTooltip": "Phase Tooltip",
+                "PushResolve": "Push and Resolve",
+                "ResolveFormulaAutomatically": "Resolve this Formula Automatically",
+                "ResolveFormulaAutomaticallyTooltip": "If this box is checked, Target DC will resolve automatically as a formula, and the result will display in the chat box when the action is triggered. Otherwise, the raw string will instead be displayed in the chatbox.",
+                "SkillFormulaAndSubactions": "Skill Formula and Subactions",
+                "SkillFormulaOrSubactions": "Skill Formula / Subactions",
+                "SkillOrSubaction": "Skill or Subaction Name",
+                "SubactionPart": "Subaction {section}",
+                "Subactions": "Subactions",
+                "TargetDC": "Target DC",
+                "UsesResolve": "Uses Resolve"
             },
             "StarshipArmor": {
                 "ArmorBonus": "Armor Bonus",
@@ -1377,6 +1427,7 @@
                     "WeaponArcStarboard": "Starboard Arc",
                     "WeaponArcTooltip": "The amount of weapon mounts available for the ship arc, split into light, heavy, and capital mounts.",
                     "WeaponArcTurret": "Turret",
+                    "WeaponMounts": "Weapon Mounts",
                     "WeaponTypeCapital": "Capital",
                     "WeaponTypeHeavy": "Heavy",
                     "WeaponTypeLight": "Light",
@@ -1478,6 +1529,8 @@
                 "DamageNotes": "Damage Notes",
                 "DamageNotesTooltip": "The damage notes are displayed on the damage roll chat card. This is a great way to put helpful reminders, especially for GMs with complicated NPCs.",
                 "DamageSection": "Damage Section {section}",
+                "DeleteDamageSection": "Delete damage section",
+                "Details": "Action Details",
                 "HealingFormula": "Healing Formula",
                 "OtherFormula": "Other Formula",
                 "RollNotes": "Roll Notes",
@@ -1529,9 +1582,11 @@
             },
             "Attuned": "Attuned",
             "Augmentation": {
+                "Action": "Augmentation Action",
                 "Details": "Augmentation Details",
                 "System": "System",
-                "Type": "Type"
+                "Type": "Type",
+                "Usage": "Augmentation Usage"
             },
             "Capacity": {
                 "Capacity": "Capacity",
@@ -1649,6 +1704,7 @@
             "MaxDex": "Max. Dexterity Modifier",
             "NotProficient": "Not Proficient",
             "Proficient": "Proficient",
+            "RangeInformation": "Range Information",
             "Shield": {
                 "ACP": "ACP: {acp}",
                 "AcMaxDex": "Max dex bonus: {maxDex}",
@@ -1731,6 +1787,10 @@
                 "Attack": "Weapon Attack",
                 "Category": "Weapon Category",
                 "Details": "Weapon Details",
+                "IsEquipment": {
+                    "Title": "Weapon Is Equipment",
+                    "Tooltip": "This box is checked if the weapon is a piece of carried equipment, as opposed to an innate natural or supernatural weapon. For natural weapons, uncheck this box."
+                },
                 "Properties": "Weapon Properties",
                 "Type": "Weapon Type",
                 "Usage": "Weapon Usage"
@@ -2254,6 +2314,10 @@
                 "Hint": "チャットログのアイテムカードの説明を自動的に折りたたみます。",
                 "Name": "チャット上のアイテムを最小化"
             },
+            "AutoRollCritEffect": {
+                "Hint": "When applying damage to a starship from a chat card, if the damage crossses a Critical Threshold, the Critical Damage Effects (CRB pg. 320) table will automatically be rolled.",
+                "Name": "Automatically roll starship critical damage effects"
+            },
             "CombatCards": {
                 "NormalHint": "Change which combat chat cards should be displayed during normal combat.",
                 "NormalName": "Normal combat",
@@ -2286,6 +2350,10 @@
             "DamageWithAttack": {
                 "Hint": "Automatically follow up an attack roll with a damage roll.",
                 "Name": "Roll damage with attack"
+            },
+            "DecimalSpeed": {
+                "Hint": "Enable decimal numbers for actor speed configuration.",
+                "Name": "Decimal Speed values"
             },
             "DiagonalMovementRule": {
                 "Hint": "このシステム上でゲームに使用する斜め移動ルールを設定する。",
@@ -2339,6 +2407,10 @@
                 "Hint": "Enables the Galactic Trade subsystem, allowing the maximum BP on a ship to be 5% higher than normal, and adds BPs to the ship inventory as credits.",
                 "Name": "Enable Galactic Trade"
             },
+            "HideHostileStarshipCrit": {
+                "Hint": "When posting notifications about starship criticals or thresholds, only post to GM if the ship is a Hostile Token.",
+                "Name": "Hide Hostile Starship Critical Message"
+            },
             "SFRPGTheme": {
                 "Hint": "When enabled, a few minor tweaks to Foundry's colours will be made to match Starfinder's colour scheme.",
                 "Name": "Custom SFRPG theme"
@@ -2375,6 +2447,10 @@
             "UseStarfinderAOETemplates": {
                 "Hint": "Starfinderの測定方法にAOEテンプレートを使用するか、オンセ工房 FoundryVTTのデフォルトの方法を使用するか",
                 "Name": "Starfinder AOEテンプレートを使用するs"
+            },
+            "WarnInvalidRollData": {
+                "Hint": "When checked, warnings will be displayed when modifiers contain invalid roll formulas. This can result in warning spam, if, for example, you have a class feature but not the corresponding class item itself.",
+                "Name": "Warn on invalid roll formulas"
             },
             "WorldSchemaVersion": {
                 "Hint": "Starfinderシステムのデータ･スキーマ･バージョンを記録します。警告：何をしているかわからない場合は、この値を編集しないでください。",
@@ -2720,6 +2796,8 @@
             "Damage": {
                 "CrossedCriticalThreshold": "{name} crossed {crossedThresholds} critical thresholds!",
                 "Message": "Damage to a starship always originates from a specific direction, please select the quadrant the incoming damage should be applied to.",
+                "Nat20": "Critical damage! {name} takes a critical damage effect.",
+                "Nat20WithThreshold": "Critical damage! {name} takes an additional critical damage effect.",
                 "Quadrant": {
                     "Aft": "Aft",
                     "Forward": "Forward",
@@ -2831,6 +2909,10 @@
                 "ShieldHeader": "Shields",
                 "TargetLock": "Target Lock"
             },
+            "RandomQuadrantMacro": {
+                "NoToken": "Select the recipient of the critical effect before proceeding.",
+                "NotStarship": "The selected token must be a starship."
+            },
             "Role": {
                 "Captain": "Captain",
                 "ChiefMate": "Chief Mate",
@@ -2883,6 +2965,24 @@
         "Touch": "接触",
         "TraitArmorProf": "アーマー習熟",
         "TraitWeaponProf": "武器習熟",
+        "TurnEvent": {
+            "AddTurnEvent": "Add Turn Event",
+            "DeleteTurnEvent": "Delete Turn Event",
+            "Formula": "Formula",
+            "FormulaTooltip": "A formula which will be rolled when the trigger is met.",
+            "Name": "Name",
+            "NoteContent": "Note Content",
+            "NoteTooltip": "Text which will be sent to chat as a chat message when the trigger is met.",
+            "Trigger": "Trigger",
+            "TriggerTooltip": "When during a combatant's turn to trigger the event.",
+            "TurnEventI": "Turn Event {number}",
+            "Type": "Type",
+            "TypeTooltip": "The type of behaviour to trigger for this turn event.",
+            "Types": {
+                "Note": "Note",
+                "Roll": "Roll"
+            }
+        },
         "UPBs": "UPB",
         "Units": {
             "Speed": "ft."

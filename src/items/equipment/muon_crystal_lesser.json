@@ -2,6 +2,11 @@
   "_id": "S4xSa6GidQufy1GU",
   "name": "Muon Crystal, Lesser",
   "type": "weapon",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
   "img": "icons/commodities/gems/gem-faceted-diamond-blue.webp",
   "system": {
     "type": "",
@@ -19,6 +24,7 @@
     "ammunitionType": "",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": 0
@@ -71,24 +77,8 @@
       "parts": []
     },
     "damage": {
-      "parts": [
-        {
-          "name": "",
-          "formula": "2d4",
-          "group": null,
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
-            "cold": false,
-            "electricity": false,
-            "fire": false,
-            "healing": false,
-            "piercing": false,
-            "slashing": false,
-            "sonic": false
-          }
-        }
-      ]
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -108,8 +98,26 @@
     "formula": "",
     "identified": true,
     "isActive": null,
+    "isEquipment": true,
     "level": 10,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "db6e0888-f0f3-4e22-a9d1-8a145fc05509",
+        "name": "Muon Crystal, Lesser",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-damage",
+        "enabled": true,
+        "limitTo": "container",
+        "max": 8,
+        "modifier": "2d4",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "price": 18100,
     "proficient": true,
     "properties": {
@@ -150,6 +158,7 @@
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
       "hybrid": false,
       "hydrodynamic": false,
@@ -220,6 +229,10 @@
       "type": "",
       "dc": "",
       "descriptor": "negate"
+    },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
     },
     "source": "AR pg. 49",
     "special": "",

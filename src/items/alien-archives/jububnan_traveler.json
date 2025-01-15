@@ -2,12 +2,22 @@
   "_id": "bYBgJjuS53e0q7nG",
   "name": "Jububnan Traveler",
   "type": "npc2",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
+  "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
       "_id": "YZbe5iJqSaOnNXV6",
       "name": "Evasion (Ex) (Operative)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/classes/evasion.webp",
       "system": {
         "type": "",
@@ -24,6 +34,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -43,9 +54,51 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.uf8ADOAeBrtUkPVl]{Operative}</p>\n<p>If you succeed at a Reflex save against an effect that normally has a partial effect on a successful save, you instead suffer no effect. You gain this benefit only when unencumbered and wearing light armor or no armor, and you lose the benefit when you are helpless or otherwise unable to move.</p>"
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.uf8ADOAeBrtUkPVl]{Operative}</p>\n<p>If you succeed at a Reflex save against an effect that normally has a partial effect on a successful save, you instead suffer no effect. You gain this benefit only when unencumbered and wearing light armor or no armor, and you lose the benefit when you are helpless or otherwise unable to move.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "classFeature",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
         "duration": {
           "units": "",
           "value": null
@@ -53,6 +106,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -86,6 +140,11 @@
       "_id": "A7EZrjSzPkW8CuG2",
       "name": "Knife, survival",
       "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/equipment/weapons/survival-knife.webp",
       "system": {
         "type": "",
@@ -103,6 +162,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -179,10 +239,11 @@
           "value": ""
         },
         "equippable": false,
-        "equipped": true,
+        "equipped": false,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 95,
@@ -309,355 +370,23 @@
       }
     },
     {
-      "_id": "sU20DpzLd50Zjz7L",
-      "name": "Arc pistol, static",
-      "type": "weapon",
-      "img": "systems/sfrpg/icons/equipment/weapons/arc-pistol.webp",
-      "system": {
-        "type": "",
-        "ability": "",
-        "actionTarget": "eac",
-        "actionType": "rwak",
-        "activation": {
-          "type": "none",
-          "condition": "",
-          "cost": null
-        },
-        "ammunitionType": "",
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "none",
-          "value": null
-        },
-        "attackBonus": 9,
-        "attributes": {
-          "ac": {
-            "value": ""
-          },
-          "customBuilt": false,
-          "dex": {
-            "mod": ""
-          },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
-          "size": "medium",
-          "sturdy": true
-        },
-        "attuned": false,
-        "bulk": "L",
-        "capacity": {
-          "max": 20,
-          "value": 20
-        },
-        "chatFlavor": "",
-        "container": {
-          "contents": [],
-          "includeContentsInWealthCalculation": 1,
-          "isOpen": true,
-          "storage": [
-            {
-              "type": "slot",
-              "acceptsType": [
-                "fusion"
-              ],
-              "affectsEncumbrance": true,
-              "amount": 2,
-              "subtype": "fusion",
-              "weightProperty": "level"
-            }
-          ]
-        },
-        "critical": {
-          "effect": "Arc",
-          "parts": [
-            {
-              "formula": "2",
-              "operator": "",
-              "types": {
-                "electricity": true
-              }
-            }
-          ]
-        },
-        "damage": {
-          "parts": [
-            {
-              "formula": "1d6+2",
-              "operator": "",
-              "types": {
-                "electricity": true
-              }
-            }
-          ]
-        },
-        "damageNotes": "",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>Arc pistols fire deadly, stunning blasts of electricity at ranged targets. They have a two-pronged emitter that directs the electrical blast and a bulky chamber that holds the capacitor.</p>"
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": ""
-        },
-        "equippable": false,
-        "equipped": true,
-        "formula": "",
-        "identified": true,
-        "isActive": null,
-        "level": 2,
-        "modifiers": [],
-        "price": 750,
-        "proficient": true,
-        "properties": {
-          "amm": false,
-          "analog": false,
-          "archaic": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "bright": false,
-          "disarm": false,
-          "entangle": false,
-          "explode": false,
-          "injection": false,
-          "line": false,
-          "nonlethal": false,
-          "one": true,
-          "operative": false,
-          "penetrating": false,
-          "powered": false,
-          "qreload": false,
-          "reach": false,
-          "sniper": false,
-          "stun": true,
-          "thrown": false,
-          "trip": false,
-          "two": false,
-          "unwieldy": false
-        },
-        "quantity": null,
-        "quantityPerPack": 1,
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "ft",
-          "value": 50
-        },
-        "rollNotes": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": "negate"
-        },
-        "source": "Core Rulebook, P. 173",
-        "special": "",
-        "specialMaterials": {},
-        "target": {
-          "type": "",
-          "value": ""
-        },
-        "usage": {
-          "per": "round",
-          "value": 2
-        },
-        "uses": {
-          "max": 0,
-          "per": "",
-          "value": 0
-        },
-        "weaponCategory": "shock",
-        "weaponType": "smallA"
-      }
-    },
-    {
-      "_id": "rC8tBHc0U22AyW6Z",
-      "name": "Shirren-Eye Rifle, Tactical",
-      "type": "weapon",
-      "img": "systems/sfrpg/icons/equipment/weapons/shirren-eye-rifle-tactical.webp",
-      "system": {
-        "type": "",
-        "ability": "",
-        "actionTarget": "kac",
-        "actionType": "rwak",
-        "activation": {
-          "type": "none",
-          "condition": "",
-          "cost": null
-        },
-        "ammunitionType": "",
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "none",
-          "value": null
-        },
-        "attackBonus": 9,
-        "attributes": {
-          "ac": {
-            "value": ""
-          },
-          "customBuilt": false,
-          "dex": {
-            "mod": ""
-          },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
-          "size": "medium",
-          "sturdy": true
-        },
-        "attuned": false,
-        "bulk": "1",
-        "capacity": {
-          "max": 1,
-          "value": 1
-        },
-        "chatFlavor": "",
-        "container": {
-          "contents": [],
-          "includeContentsInWealthCalculation": 1,
-          "isOpen": true,
-          "storage": [
-            {
-              "type": "slot",
-              "acceptsType": [
-                "fusion"
-              ],
-              "affectsEncumbrance": true,
-              "amount": 2,
-              "subtype": "fusion",
-              "weightProperty": "level"
-            }
-          ]
-        },
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": [
-            {
-              "formula": "1d10+2",
-              "operator": "",
-              "types": {
-                "piercing": true
-              }
-            }
-          ]
-        },
-        "damageNotes": "",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>Shirren-eye rifles are named for their compound sights, which resemble the eyes of the insectile race, but are rarely manufactured by shirren companies. Shirren-eye rifles are extremely accurate and favored by snipers and sharpshooters.</p>\n<h3 class=\"framing\"><strong>Projectile Weapons</strong></h3>\n<hr />\n<p>Projectile weapons fire solid rounds, such as bullets or rockets. While projectile weapons are relatively antiquated, they provide serviceable firepower at a reasonable price to many travelers and traders.</p>"
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": ""
-        },
-        "equippable": false,
-        "equipped": true,
-        "formula": "",
-        "identified": true,
-        "isActive": null,
-        "level": 2,
-        "modifiers": [],
-        "price": 755,
-        "proficient": true,
-        "properties": {
-          "amm": false,
-          "analog": true,
-          "archaic": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "bright": false,
-          "disarm": false,
-          "entangle": false,
-          "explode": false,
-          "injection": false,
-          "line": false,
-          "living": false,
-          "mind-affecting": false,
-          "nonlethal": false,
-          "one": false,
-          "operative": false,
-          "penetrating": true,
-          "powered": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "thrown": false,
-          "trip": false,
-          "two": true,
-          "unwieldy": true
-        },
-        "quantity": null,
-        "quantityPerPack": 1,
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "ft",
-          "value": 70
-        },
-        "rollNotes": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": "negate"
-        },
-        "source": "Core Rulebook",
-        "special": "",
-        "specialMaterials": {},
-        "target": {
-          "type": "",
-          "value": ""
-        },
-        "usage": {
-          "per": "round",
-          "value": 1
-        },
-        "uses": {
-          "max": 0,
-          "per": "",
-          "value": 0
-        },
-        "weaponCategory": "projectile",
-        "weaponType": "sniper"
-      }
-    },
-    {
       "_id": "laIvmLzDBayLTuBJ",
       "name": "Astonishing Balance (Ex)",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
@@ -665,6 +394,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -686,7 +416,49 @@
           "unidentified": "",
           "value": "<p>A jububnan can move 10 feet instead of 5 when taking a crawl action. A jububnan also gains a +4 species bonus to AC against bull rush and trip combat maneuvers.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "speciesFeature",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
         "duration": {
           "units": "",
           "value": null
@@ -694,81 +466,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "rollNotes": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      }
-    },
-    {
-      "_id": "u3FDTpbNEmFfvLvL",
-      "name": "Puff Up (Ex)",
-      "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
-      "system": {
-        "type": "",
-        "ability": null,
-        "actionTarget": "",
-        "actionType": null,
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": 0
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "damageNotes": "",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>As a move action, a jububnan can increase to Large size and gain a reach of 10 feet. If the physical space the jububnan is in can't accommodate their new size, the ability fails. The jububnan can maintain this size for up to 10 minutes before they must revert to their normal size; this does not take an action. The jububnan can't use this ability again until they take a 10-minute rest to regain Stamina Points.</p>"
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "isActive": null,
-        "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -802,6 +500,11 @@
       "_id": "uxWXlOOzJktWFwe6",
       "name": "Specialization",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/classes/specialization.webp",
       "system": {
         "type": "",
@@ -814,10 +517,11 @@
         "activation": {
           "type": "",
           "condition": "",
-          "cost": 0
+          "cost": null
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -837,16 +541,60 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.uf8ADOAeBrtUkPVl]{Operative}</p>\n<p>Your specialization represents your primary area of expertise. Pick one specialization upon taking your 1st level of the operative class. Once made, this choice cannot be changed. Descriptions of the specializations appear on page 94 <em>(Below).</em> Your specialization grants you the Skill Focus feat (see page 161) in your specialization's associated skills, and you gain a free skill rank in each of those skills at each operative level (this does not allow you to exceed the maximum number of skill ranks in a single skill).</p>\n <h2>Specialization Exploit - 5th Level</h2>\n <p>You gain your specialization's listed exploit as a bonus operative exploit, even if you don't meet the prerequisites.</p>\n <h2>Specialization Skill Mastery - 7th Level</h2>\n <p>You become so confident in certain skills that you can use them reliably even under adverse conditions. When attempting a skill check with a skill in which you have the Skill Focus feat, you can take 10 even if stress or distractions would normally prevent you from doing so.</p>\n <h2>Specialization Power - 11th Level</h2>\n <p>&nbsp;You gain a special power depending on the specialization you chose at 1st level.</p>\n <h2>Specializations</h2>\n <p>@UUID[Compendium.sfrpg.class-features.3zkJILkaP6Ua3YWe]{Daredevil}</p>\n<p>@UUID[Compendium.sfrpg.class-features.zKnRX8ZuVhyvC29H]{Detective}</p>\n<p>@UUID[Compendium.sfrpg.class-features.M8fM2cZz8pTEN6wP]{Explorer}</p>\n<p>@UUID[Compendium.sfrpg.class-features.nJxXUlTGdZ7Lc5ms]{Ghost}</p>\n<p>@UUID[Compendium.sfrpg.class-features.SWNQ1uqSQbAJlVng]{Hacker}</p>\n<p>@UUID[Compendium.sfrpg.class-features.RmU5en0JokeQXJyP]{Spy}</p>\n<p>@UUID[Compendium.sfrpg.class-features.7jvvARPoLgBv3xBA]{Thief}</p>"
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.uf8ADOAeBrtUkPVl]{Operative}</p>\n<p>Your specialization represents your primary area of expertise. Pick one specialization upon taking your 1st level of the operative class. Once made, this choice cannot be changed. Descriptions of the specializations appear on page 94 <em>(Below).</em> Your specialization grants you the Skill Focus feat (see page 161) in your specialization's associated skills, and you gain a free skill rank in each of those skills at each operative level (this does not allow you to exceed the maximum number of skill ranks in a single skill).</p><h2>Specializations</h2><p>@UUID[Compendium.sfrpg.class-features.Item.3zkJILkaP6Ua3YWe]{Daredevil}</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "classFeature",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
         },
         "formula": "",
+        "id": "uxWXlOOzJktWFwe6",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -865,81 +613,16 @@
           "descriptor": ""
         },
         "source": "Operative",
-        "target": {
-          "type": "",
-          "value": null
+        "system": {
+          "container": {
+            "contents": [
+              {
+                "id": "98PLMZZhDRtTuS9l",
+                "index": 0
+              }
+            ]
+          }
         },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      }
-    },
-    {
-      "_id": "9Zkc7JWqfImWoVhH",
-      "name": "Wanderer's Pluck (Ex)",
-      "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
-      "system": {
-        "type": "",
-        "ability": null,
-        "actionTarget": "",
-        "actionType": null,
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": 0
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "damageNotes": "",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>Jububnans have tenacious spirits that allow them to thrive while alone. When an effect allows a jububnan to reroll an attack roll, saving throw, or skill check, they gain a +2 species bonus to that reroll.</p>"
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "isActive": null,
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "rollNotes": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
         "target": {
           "type": "",
           "value": null
@@ -955,6 +638,11 @@
       "_id": "CiKjYVflXRgSsXB5",
       "name": "Second Skin",
       "type": "equipment",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/equipment/armor/second-skin.webp",
       "system": {
         "type": "",
@@ -969,6 +657,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -1064,6 +753,7 @@
         "modifiers": [],
         "price": 250,
         "proficient": true,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
@@ -1100,54 +790,14 @@
       }
     },
     {
-      "_id": "VTjT40mD1KBqwdIY",
-      "name": "10 Sniper Rounds",
-      "type": "goods",
-      "img": "icons/svg/mystery-man.svg",
-      "system": {
-        "type": "",
-        "attributes": {
-          "ac": {
-            "value": ""
-          },
-          "customBuilt": false,
-          "dex": {
-            "mod": ""
-          },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
-          "size": "medium",
-          "sturdy": false
-        },
-        "attuned": false,
-        "bulk": "L",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": ""
-        },
-        "equippable": false,
-        "equipped": false,
-        "identified": true,
-        "level": 1,
-        "modifiers": [],
-        "price": 0,
-        "quantity": "10",
-        "quantityPerPack": 1,
-        "source": ""
-      }
-    },
-    {
       "_id": "nCdvWzSpL635OR7k",
       "name": "Uncanny Mobility (Ex)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/classes/uncanny_mobility.webp",
       "system": {
         "type": "",
@@ -1164,6 +814,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -1183,9 +834,51 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>When you make a trick attack, if you choose the target of your attack before you move, your movement doesn't provoke attacks of opportunity from that target. When you use your standard action to move, you can choose one creature; you don't provoke attacks of opportunity from that creature for this movement.</p>"
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>When you make a trick attack, if you choose the target of your attack before you move, your movement doesn't provoke attacks of opportunity from that target. When you use your standard action to move, you can choose one creature; you don't provoke attacks of opportunity from that creature for this movement.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "classFeature",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
         "duration": {
           "units": "",
           "value": null
@@ -1193,6 +886,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -1223,57 +917,14 @@
       }
     },
     {
-      "_id": "lDuTlcpueoITmVKR",
-      "name": "Battery",
-      "type": "goods",
-      "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
-      "system": {
-        "type": "",
-        "attributes": {
-          "ac": {
-            "value": ""
-          },
-          "customBuilt": false,
-          "dex": {
-            "mod": ""
-          },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
-          "size": "medium",
-          "sturdy": false
-        },
-        "attuned": false,
-        "bulk": "-",
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 20</p>"
-        },
-        "equippable": false,
-        "equipped": false,
-        "identified": true,
-        "level": 1,
-        "modifiers": [],
-        "price": 60,
-        "quantity": 2,
-        "quantityPerPack": 1,
-        "source": "Core Rulebook"
-      }
-    },
-    {
       "_id": "O5AAZEYDcN4xfeaP",
       "name": "Trick Attack (Ex)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/classes/trick_attack.webp",
       "system": {
         "type": "",
@@ -1290,9 +941,10 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
-          "units": "none",
-          "value": null
+          "units": "ft",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1309,11 +961,53 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.uf8ADOAeBrtUkPVl]{Operative}</p>\n<p>You can trick or startle a foe and then attack when she drops her guard. As a full action, you can move up to your speed. Whether or not you moved, you can then make an attack with a melee weapon with the operative special property or with any small arm. Just before making your attack, attempt a Bluff, Intimidate, or Stealth check (or a check associated with your specialization; see page 94) with a DC equal to 20 + your target’s CR. If you succeed at the check, you deal 1d4 additional damage and the target is @UUID[Compendium.sfrpg.conditions.MZ8OoH1GE9qDMyCD]{Flat-Footed}. This damage increases to 1d8 at 3rd level, to 3d8 at 5th level, and by an additional 1d8 every 2 levels thereafter. You can’t use this ability with a weapon that has the unwieldy special property or that requires a full action to make a single attack.</p>"
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.uf8ADOAeBrtUkPVl]{Operative}</p>\n<p>You can trick or startle a foe and then attack when she drops her guard. As a full action, you can move up to your speed. Whether or not you moved, you can then make an attack with a melee weapon with the operative special property or with any small arm. Just before making your attack, attempt a Bluff, Intimidate, or Stealth check (or a check associated with your specialization; see page 94) with a DC equal to 20 + your target’s CR. If you succeed at the check, you deal 1d4 additional damage and the target is @UUID[Compendium.sfrpg.conditions.Item.MZ8OoH1GE9qDMyCD]{Flat-Footed}. This damage increases to 1d8 at 3rd level, to 3d8 at 5th level, and by an additional 1d8 every 2 levels thereafter. You can’t use this ability with a weapon that has the unwieldy special property or that requires a full action to make a single attack.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "classFeature",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
         "duration": {
-          "units": "",
+          "units": "text",
           "value": ""
         },
         "formula": "",
@@ -1335,6 +1029,7 @@
             "valueAffected": ""
           }
         ],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -1358,8 +1053,1260 @@
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "BWtarTNXtsKBXIm3",
+      "name": "Shirren-eye rifle, tactical",
+      "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/equipment/weapons/shirren-eye-rifle-tactical.webp",
+      "system": {
+        "type": "",
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "kac",
+        "actionType": "rwak",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": null
+        },
+        "ammunitionType": "roundL",
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "ft",
+          "value": ""
+        },
+        "attackBonus": 9,
+        "attributes": {
+          "ac": {
+            "value": "5"
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": "9"
+          },
+          "hp": {
+            "max": "21",
+            "value": 21
+          },
+          "size": "medium",
+          "sturdy": true
+        },
+        "attuned": false,
+        "bulk": "1",
+        "capacity": {
+          "max": 1,
+          "value": 1
+        },
+        "chatFlavor": "",
+        "container": {
+          "contents": [],
+          "includeContentsInWealthCalculation": true,
+          "isOpen": true,
+          "storage": [
+            {
+              "type": "slot",
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 2,
+              "subtype": "fusion",
+              "weightProperty": "level"
+            },
+            {
+              "type": "slot",
+              "acceptsType": [
+                "ammunition"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 1,
+              "subtype": "ammunitionSlot",
+              "weightProperty": ""
+            }
+          ]
+        },
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "name": "",
+              "formula": "1d10+2",
+              "group": null,
+              "isPrimarySection": true,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "piercing": true,
+                "slashing": false,
+                "sonic": false
+              }
+            }
+          ],
+          "primaryGroup": null
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>Shirren-eye rifles are named for their compound sights, which resemble the eyes of the insectile race, but are rarely manufactured by @UUID[Compendium.sfrpg.races.Item.VIJ6pdOVTJle3vJx]{Shirren} companies. Shirren-eye rifles are extremely accurate and favored by snipers and sharpshooters.</p>\n<p>Sniper (250 ft.)</p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "text",
+          "value": ""
+        },
+        "equippable": true,
+        "equipped": true,
+        "formula": "",
+        "identified": true,
+        "isActive": null,
+        "isEquipment": true,
+        "level": 2,
+        "modifiers": [],
+        "price": 755,
+        "proficient": true,
+        "properties": {
+          "aeon": false,
+          "amm": false,
+          "analog": true,
+          "antibiological": false,
+          "archaic": false,
+          "aurora": false,
+          "automatic": false,
+          "blast": false,
+          "block": false,
+          "boost": false,
+          "breach": false,
+          "breakdown": false,
+          "bright": false,
+          "buttressing": false,
+          "cluster": false,
+          "conceal": false,
+          "deconstruct": false,
+          "deflect": false,
+          "disarm": false,
+          "double": false,
+          "drainCharge": false,
+          "echo": false,
+          "entangle": false,
+          "explode": false,
+          "extinguish": false,
+          "feint": false,
+          "fiery": false,
+          "firstArc": false,
+          "flexibleLine": false,
+          "force": false,
+          "freeHands": false,
+          "fueled": false,
+          "gearArray": false,
+          "grapple": false,
+          "gravitation": false,
+          "guided": false,
+          "harrying": false,
+          "healing": false,
+          "holyWater": false,
+          "hybrid": false,
+          "hydrodynamic": false,
+          "ignite": false,
+          "indirect": false,
+          "injection": false,
+          "instrumental": false,
+          "integrated": false,
+          "line": false,
+          "living": false,
+          "lockdown": false,
+          "mind-affecting": false,
+          "mine": false,
+          "mire": false,
+          "modal": false,
+          "necrotic": false,
+          "nonlethal": false,
+          "one": false,
+          "operative": false,
+          "penetrating": false,
+          "polarize": false,
+          "polymorphic": false,
+          "powered": false,
+          "professional": false,
+          "propel": false,
+          "punchGun": false,
+          "qreload": false,
+          "radioactive": false,
+          "reach": false,
+          "recall": false,
+          "regrowth": false,
+          "relic": false,
+          "reposition": false,
+          "scramble": false,
+          "shape": false,
+          "shatter": false,
+          "shells": false,
+          "shield": false,
+          "sniper": true,
+          "stun": false,
+          "subtle": false,
+          "sunder": false,
+          "swarm": false,
+          "tail": false,
+          "teleportive": false,
+          "thought": false,
+          "throttle": false,
+          "thrown": false,
+          "thruster": false,
+          "trip": false,
+          "two": true,
+          "unbalancing": false,
+          "underwater": false,
+          "unwieldy": true,
+          "variantBoost": false,
+          "wideLine": false
+        },
+        "quantity": 1,
+        "quantityPerPack": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "ft",
+          "value": "70"
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": ""
+        },
+        "source": "CRB pg. 178",
+        "special": "",
+        "specialMaterials": {
+          "abysium": false,
+          "adamantine": false,
+          "coldiron": false,
+          "diatha": false,
+          "djezet": false,
+          "horacalcum": false,
+          "inubrix": false,
+          "khefak": false,
+          "noqual": false,
+          "nyblantine": false,
+          "purplecores": false,
+          "siccatite": false,
+          "silver": false,
+          "voidglass": false
+        },
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "usage": {
+          "per": "shot",
+          "value": 1
+        },
+        "uses": {
+          "max": "",
+          "per": "",
+          "value": null
+        },
+        "weaponCategory": "projectile",
+        "weaponType": "sniper"
+      }
+    },
+    {
+      "_id": "LPFXNCqDLfi3q3wb",
+      "name": "Rounds, Longarm and Sniper",
+      "type": "ammunition",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/equipment/weapons/rounds-longarm-and-sniper.webp",
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "ammunitionType": "roundL",
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": false
+        },
+        "attuned": false,
+        "bulk": "L",
+        "capacity": {
+          "max": 0,
+          "value": 0
+        },
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>Cased rounds are housed in magazines, which can be fitted into the appropriate weapon.</p>\n<p><strong>Capacity:</strong> 25</p>"
+        },
+        "equippable": false,
+        "equipped": false,
+        "identified": true,
+        "level": 1,
+        "price": 75,
+        "quantity": 10,
+        "quantityPerPack": 25,
+        "source": "Core Rulebook",
+        "specialMaterials": {
+          "abysium": false,
+          "adamantine": false,
+          "coldiron": false,
+          "diatha": false,
+          "djezet": false,
+          "horacalcum": false,
+          "inubrix": false,
+          "khefak": false,
+          "noqual": false,
+          "nyblantine": false,
+          "purplecores": false,
+          "siccatite": false,
+          "silver": false,
+          "voidglass": false
+        },
+        "useCapacity": false
+      }
+    },
+    {
+      "_id": "OrAE8jksoVn3erMi",
+      "name": "Arc pistol, static",
+      "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/equipment/weapons/arc-pistol.webp",
+      "system": {
+        "type": "",
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "eac",
+        "actionType": "rwak",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": null
+        },
+        "ammunitionType": "charge",
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "ft",
+          "value": ""
+        },
+        "attackBonus": 9,
+        "attributes": {
+          "ac": {
+            "value": "5"
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": "9"
+          },
+          "hp": {
+            "max": "21",
+            "value": 21
+          },
+          "size": "medium",
+          "sturdy": true
+        },
+        "attuned": false,
+        "bulk": "L",
+        "capacity": {
+          "max": 20,
+          "value": 20
+        },
+        "chatFlavor": "",
+        "container": {
+          "contents": [
+            {
+              "id": "t9z3AMf6p3uV3154",
+              "index": 1
+            }
+          ],
+          "includeContentsInWealthCalculation": true,
+          "isOpen": true,
+          "storage": [
+            {
+              "type": "slot",
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 2,
+              "subtype": "fusion",
+              "weightProperty": "level"
+            },
+            {
+              "type": "slot",
+              "acceptsType": [
+                "ammunition"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 1,
+              "subtype": "ammunitionSlot",
+              "weightProperty": ""
+            }
+          ]
+        },
+        "critical": {
+          "effect": "Arc 2",
+          "parts": [
+            {
+              "formula": "2",
+              "operator": "",
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": true,
+                "fire": false,
+                "healing": false,
+                "piercing": false,
+                "slashing": false,
+                "sonic": false
+              }
+            }
+          ]
+        },
+        "damage": {
+          "parts": [
+            {
+              "name": "",
+              "formula": "1d6+2",
+              "group": null,
+              "isPrimarySection": true,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": true,
+                "fire": false,
+                "healing": false,
+                "piercing": false,
+                "slashing": false,
+                "sonic": false
+              }
+            }
+          ],
+          "primaryGroup": null
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>Arc pistols fire deadly, stunning blasts of electricity at ranged targets. They have a two-pronged emitter that directs the electrical blast and a bulky chamber that holds the capacitor.</p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "text",
+          "value": ""
+        },
+        "equippable": true,
+        "equipped": false,
+        "formula": "",
+        "identified": true,
+        "isActive": null,
+        "isEquipment": true,
+        "level": 2,
+        "modifiers": [],
+        "price": 750,
+        "proficient": true,
+        "properties": {
+          "aeon": false,
+          "amm": false,
+          "analog": false,
+          "antibiological": false,
+          "archaic": false,
+          "aurora": false,
+          "automatic": false,
+          "blast": false,
+          "block": false,
+          "boost": false,
+          "breach": false,
+          "breakdown": false,
+          "bright": false,
+          "buttressing": false,
+          "cluster": false,
+          "conceal": false,
+          "deconstruct": false,
+          "deflect": false,
+          "disarm": false,
+          "double": false,
+          "drainCharge": false,
+          "echo": false,
+          "entangle": false,
+          "explode": false,
+          "extinguish": false,
+          "feint": false,
+          "fiery": false,
+          "firstArc": false,
+          "flexibleLine": false,
+          "force": false,
+          "freeHands": false,
+          "fueled": false,
+          "gearArray": false,
+          "grapple": false,
+          "gravitation": false,
+          "guided": false,
+          "harrying": false,
+          "healing": false,
+          "holyWater": false,
+          "hybrid": false,
+          "hydrodynamic": false,
+          "ignite": false,
+          "indirect": false,
+          "injection": false,
+          "instrumental": false,
+          "integrated": false,
+          "line": false,
+          "living": false,
+          "lockdown": false,
+          "mind-affecting": false,
+          "mine": false,
+          "mire": false,
+          "modal": false,
+          "necrotic": false,
+          "nonlethal": false,
+          "one": true,
+          "operative": false,
+          "penetrating": false,
+          "polarize": false,
+          "polymorphic": false,
+          "powered": false,
+          "professional": false,
+          "propel": false,
+          "punchGun": false,
+          "qreload": false,
+          "radioactive": false,
+          "reach": false,
+          "recall": false,
+          "regrowth": false,
+          "relic": false,
+          "reposition": false,
+          "scramble": false,
+          "shape": false,
+          "shatter": false,
+          "shells": false,
+          "shield": false,
+          "sniper": false,
+          "stun": true,
+          "subtle": false,
+          "sunder": false,
+          "swarm": false,
+          "tail": false,
+          "teleportive": false,
+          "thought": false,
+          "throttle": false,
+          "thrown": false,
+          "thruster": false,
+          "trip": false,
+          "two": false,
+          "unbalancing": false,
+          "underwater": false,
+          "unwieldy": false,
+          "variantBoost": false,
+          "wideLine": false
+        },
+        "quantity": 1,
+        "quantityPerPack": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "ft",
+          "value": "50"
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": ""
+        },
+        "source": "CRB pg. 173",
+        "special": "",
+        "specialMaterials": {
+          "abysium": false,
+          "adamantine": false,
+          "coldiron": false,
+          "diatha": false,
+          "djezet": false,
+          "horacalcum": false,
+          "inubrix": false,
+          "khefak": false,
+          "noqual": false,
+          "nyblantine": false,
+          "purplecores": false,
+          "siccatite": false,
+          "silver": false,
+          "voidglass": false
+        },
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "usage": {
+          "per": "shot",
+          "value": 2
+        },
+        "uses": {
+          "max": "",
+          "per": "",
+          "value": null
+        },
+        "weaponCategory": "shock",
+        "weaponType": "smallA"
+      }
+    },
+    {
+      "_id": "1EdQ355l0EaoP2yp",
+      "name": "Battery",
+      "type": "ammunition",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "ammunitionType": "charge",
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": false
+        },
+        "attuned": false,
+        "bulk": "-",
+        "capacity": {
+          "max": 20,
+          "value": 20
+        },
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 20</p>"
+        },
+        "equippable": false,
+        "equipped": false,
+        "identified": true,
+        "level": 1,
+        "price": 60,
+        "quantity": 1,
+        "quantityPerPack": 1,
+        "source": "Core Rulebook",
+        "specialMaterials": {
+          "abysium": false,
+          "adamantine": false,
+          "coldiron": false,
+          "diatha": false,
+          "djezet": false,
+          "horacalcum": false,
+          "inubrix": false,
+          "khefak": false,
+          "noqual": false,
+          "nyblantine": false,
+          "purplecores": false,
+          "siccatite": false,
+          "silver": false,
+          "voidglass": false
+        },
+        "useCapacity": true
+      }
+    },
+    {
+      "_id": "t9z3AMf6p3uV3154",
+      "name": "Battery",
+      "type": "ammunition",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "ammunitionType": "charge",
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": false
+        },
+        "attuned": false,
+        "bulk": "-",
+        "capacity": {
+          "max": 20,
+          "value": 20
+        },
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 20</p>"
+        },
+        "equippable": false,
+        "equipped": false,
+        "identified": true,
+        "level": 1,
+        "price": 60,
+        "quantity": 1,
+        "quantityPerPack": 1,
+        "source": "Core Rulebook",
+        "specialMaterials": {
+          "abysium": false,
+          "adamantine": false,
+          "coldiron": false,
+          "diatha": false,
+          "djezet": false,
+          "horacalcum": false,
+          "inubrix": false,
+          "khefak": false,
+          "noqual": false,
+          "nyblantine": false,
+          "purplecores": false,
+          "siccatite": false,
+          "silver": false,
+          "voidglass": false
+        },
+        "useCapacity": true
+      }
+    },
+    {
+      "_id": "oLSTwOWSiupuXtPW",
+      "name": "Puff Up (Ex)",
+      "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "move",
+          "condition": "",
+          "cost": 1
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "ft",
+          "value": ""
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>As a move action, a jububnan can increase to Large size and gain a reach of 10 feet. If the physical space the jububnan is in can't accommodate their new size, the ability fails. The jububnan can maintain this size for up to 10 minutes before they must revert to their normal size; this does not take an action. The jububnan can't use this ability again until they take a 10-minute rest to regain Stamina Points.</p>"
+        },
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
+        "duration": {
+          "units": "minute",
+          "value": "10"
+        },
+        "formula": "",
+        "isActive": null,
+        "modifiers": [],
+        "properties": {},
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "none",
+          "value": ""
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "uses": {
+          "max": "1",
+          "per": "sr",
+          "value": 1
+        }
+      }
+    },
+    {
+      "_id": "oGFJBfPZIfZc3dQ7",
+      "name": "Wanderer's Pluck (Ex)",
+      "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": null
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": 0
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>Jububnans have tenacious spirits that allow them to thrive while alone. When an effect allows a jububnan to reroll an attack roll, saving throw, or skill check, they gain a +2 species bonus to that reroll.</p>"
+        },
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "speciesFeature",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "isActive": null,
+        "modifiers": [
+          {
+            "_id": "49befe50-7cd5-438b-9b56-a1c9ba0c26aa",
+            "name": "Reroll Bonus",
+            "type": "racial",
+            "condition": "",
+            "effectType": "all-attacks",
+            "enabled": false,
+            "modifier": "2",
+            "modifierType": "formula",
+            "notes": "Applies when an effect allows a Jububnan to reroll an attack roll",
+            "source": "Wanderer's Pluck",
+            "subtab": "misc",
+            "valueAffected": ""
+          },
+          {
+            "_id": "521a7755-6fdf-4ffa-951a-c41db59e2f15",
+            "name": "Reroll Bonus",
+            "type": "racial",
+            "condition": "",
+            "effectType": "saves",
+            "enabled": false,
+            "modifier": "2",
+            "modifierType": "formula",
+            "notes": "Applies when an effect allows a Jububnan to reroll a saving throw",
+            "source": "Wanderer's Pluck",
+            "subtab": "misc",
+            "valueAffected": ""
+          },
+          {
+            "_id": "b300affb-a3e3-4fc4-96a8-e0af32803560",
+            "name": "Reroll Bonus",
+            "type": "racial",
+            "condition": "",
+            "effectType": "all-skills",
+            "enabled": false,
+            "modifier": "2",
+            "modifierType": "formula",
+            "notes": "Applies when an effect allows a Jububnan to reroll a skill check",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": ""
+          }
+        ],
+        "properties": {},
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "98PLMZZhDRtTuS9l",
+      "name": "Daredevil",
+      "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/classes/daredevil.webp",
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.PU3uwrAcmGXMGo2n]{Specialization}</p>\n<p>You specialize in missions requiring courage and athleticism.</p>\n<p><strong>Associated Skills</strong>: @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.3QdtsfnVJsHEdrt0]{Acrobatics} and @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.iLlBAZBfHJMZQRQx]{Athletics}. You can attempt an Acrobatics check to make a trick attack.</p>\n<p><strong>Specialization Exploit</strong>: @UUID[Compendium.sfrpg.class-features.Item.qfdLaLl6DqIG0oyC]{Versatile Movement (Ex)}</p>\n<p><strong>@UUID[Compendium.sfrpg.class-features.Item.puRaIZt8mJ4irzRL]{Terrain Attack (Ex)}:</strong> At 11th level, when you and a foe are both balancing, climbing, flying, or swimming, you automatically succeed at any Bluff check required to make a trick attack against that foe.</p>\n<p><em>Free Skill Ranks from Specialization's associated skills are auto applied in the modifiers tab</em></p>"
+        },
+        "descriptors": [],
+        "details": {
+          "category": "classFeature",
+          "combat": false,
+          "specialAbilityType": ""
+        },
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "id": "98PLMZZhDRtTuS9l",
+        "isActive": null,
+        "modifiers": [
+          {
+            "_id": "2085727b-8787-47e2-ab0b-2df80f70d6d6",
+            "name": "Specialization",
+            "type": "untyped",
+            "condition": "",
+            "effectType": "skill-ranks",
+            "enabled": true,
+            "modifier": "@classes.operative.levels",
+            "modifierType": "constant",
+            "notes": "",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": "acr"
+          },
+          {
+            "_id": "8aa8f005-22fe-4aee-bca6-c0cacd959336",
+            "name": "Specialization",
+            "type": "untyped",
+            "condition": "",
+            "effectType": "skill-ranks",
+            "enabled": true,
+            "modifier": "@classes.operative.levels",
+            "modifierType": "constant",
+            "notes": "",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": "ath"
+          }
+        ],
+        "properties": {},
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "1st Level",
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "Specialization",
+        "system": {
+          "container": {
+            "contents": [
+              {
+                "id": "1nVDj3vhqkbLwpQr",
+                "index": 0
+              }
+            ]
+          }
+        },
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
           "value": 0
         }
       }
@@ -1369,6 +2316,7 @@
     "name": "Jububnan Traveler",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -1380,6 +2328,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -1400,11 +2349,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -1418,13 +2385,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "src": "systems/sfrpg/icons/default/alien-stare.svg",
+      "tint": "#ffffff"
     },
     "width": 1
   },
@@ -1475,7 +2446,7 @@
     },
     "attributes": {
       "abilityDC": {
-        "base": 0
+        "base": "0"
       },
       "arms": "2",
       "bab": 0,
@@ -1485,7 +2456,7 @@
         "value": 0
       },
       "baseSpellDC": {
-        "base": 0
+        "base": "0"
       },
       "cmd": {
         "min": 0,
@@ -1520,7 +2491,7 @@
         "value": 8
       },
       "kac": {
-        "base": null,
+        "base": 14,
         "min": 0,
         "tooltip": [],
         "value": null
@@ -1544,15 +2515,15 @@
         },
         "flying": {
           "base": 0,
-          "baseManeuverability": 0
+          "baseManeuverability": "0"
         },
         "land": {
           "base": 30
         },
         "mainMovement": "land",
-        "special": "original base: 30 ft.; original special: swim 30 ft.",
+        "special": "",
         "swimming": {
-          "base": 0
+          "base": 30
         },
         "value": null
       },
@@ -1624,10 +2595,11 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>Jububnans resemble human-sized toads that stand on a single stout leg. Their coloration varies widely, often with neon splashes and splotches of darker colors. They maneuver by deftly hopping at the speed at which many humanoids walk, and they rarely remain motionless, instead preferring to gently sway when they must stay in a single spot for prolonged periods. Jububnans can inhale deeply, expanding their bodies to almost three times their normal size. Most jububnans stand between 5 and 6 feet tall and weigh about 200 pounds, though puffed jububnans can be as tall as 10 feet.</p>\n<p>The jububnan homeworld, if it still exists, remains a mystery to the broader galaxy. Though many jububnans have visited both the Pact Worlds and Veskarium, none have been known to disclose details about a homeworld. When directly confronted about their history, most simply state that their ancestors were starfaring wanderers. Since jububnans live only an average of 60 years, they’ve had several generations since the end of the Gap, and it’s widely believed that the truth of their origin is shrouded by that mysterious lost age.</p>\n<p>Today, jububnans travel as solitary wanderers, rarely meeting others of their kind. Luckily for their species, a jububnan can reproduce via parthenogenesis, allowing them to spawn dozens of eggs several times during their lifespan. During the periods leading up to their egg-laying, a jububnan remains in its larger puffed-up state for weeks; scientists believe that this is to properly gestate the necessary egg clutches, as well as a remnant behavior from less sapient times, when jububnans likely intimidated would-be predators with their increased size.</p>\n<p>Many followers of @UUID[Compendium.sfrpg.setting.KZvxBU9KGbqRCKkv]{Weydan} believe jububnans to be a species blessed by The Endless Horizon, seeing the species’ innate pluck and ability to persevere in solitary wandering as exemplars of their deity. For their part, jububnans as a whole don’t share any particular affinity to @UUID[Compendium.sfrpg.setting.KZvxBU9KGbqRCKkv]{Weydan}, and in fact, display an exceptionally wide variety of deific and philosophical allegiances. Since most jububnans have no societal cohesion, the beliefs and moral outlooks of these toad-like beings are more varied than those of many species. Likely as a result of their nomadic lifestyles, jububnans often veer away from exceptionally lawful institutions, though those who grow up under the dominion of larger civilizations tend to embrace order and authority.</p>\n<p>Thanks to jububnans’ ability to reproduce rapidly, their normally solitary species can sometimes form tight-knit familial communities. Some pirate outfits in Near Space and the Vast consist of jububnan outlaws who bred multiple generations of offspring with the sole goal of staffing starships and creating a larger enterprise with trusted family allies. In other cases, jububnan explorers who come across sites of extreme value or danger may birth a new generational line whose existence is based on protecting such locations from outside interference. However, even when these larger groups of jububnans—known as tangles—form, the elders commonly encourage some of their offspring to depart and travel the galaxy, spreading their species throughout the reaches of space. As a result, members of jububnan tangles can often be found across several different planets, watching over specific sites of interest.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<h3>Organization</h3>\n<p>solitary, pair, or knot (3–6)</p>\n</section>",
+        "value": "<h2>Description</h2>\n<p>Jububnans resemble human-sized toads that stand on a single stout leg. Their coloration varies widely, often with neon splashes and splotches of darker colors. They maneuver by deftly hopping at the speed at which many humanoids walk, and they rarely remain motionless, instead preferring to gently sway when they must stay in a single spot for prolonged periods. Jububnans can inhale deeply, expanding their bodies to almost three times their normal size. Most jububnans stand between 5 and 6 feet tall and weigh about 200 pounds, though puffed jububnans can be as tall as 10 feet.</p>\n<p>The jububnan homeworld, if it still exists, remains a mystery to the broader galaxy. Though many jububnans have visited both the Pact Worlds and Veskarium, none have been known to disclose details about a homeworld. When directly confronted about their history, most simply state that their ancestors were starfaring wanderers. Since jububnans live only an average of 60 years, they’ve had several generations since the end of the Gap, and it’s widely believed that the truth of their origin is shrouded by that mysterious lost age.</p>\n<p>Today, jububnans travel as solitary wanderers, rarely meeting others of their kind. Luckily for their species, a jububnan can reproduce via parthenogenesis, allowing them to spawn dozens of eggs several times during their lifespan. During the periods leading up to their egg-laying, a jububnan remains in its larger puffed-up state for weeks; scientists believe that this is to properly gestate the necessary egg clutches, as well as a remnant behavior from less sapient times, when jububnans likely intimidated would-be predators with their increased size.</p>\n<p>Many followers of @UUID[Compendium.sfrpg.setting.Item.KZvxBU9KGbqRCKkv]{Weydan} believe jububnans to be a species blessed by The Endless Horizon, seeing the species’ innate pluck and ability to persevere in solitary wandering as exemplars of their deity. For their part, jububnans as a whole don’t share any particular affinity to @UUID[Compendium.sfrpg.setting.Item.KZvxBU9KGbqRCKkv]{Weydan}, and in fact, display an exceptionally wide variety of deific and philosophical allegiances. Since most jububnans have no societal cohesion, the beliefs and moral outlooks of these toad-like beings are more varied than those of many species. Likely as a result of their nomadic lifestyles, jububnans often veer away from exceptionally lawful institutions, though those who grow up under the dominion of larger civilizations tend to embrace order and authority.</p>\n<p>Thanks to jububnans’ ability to reproduce rapidly, their normally solitary species can sometimes form tight-knit familial communities. Some pirate outfits in Near Space and the Vast consist of jububnan outlaws who bred multiple generations of offspring with the sole goal of staffing starships and creating a larger enterprise with trusted family allies. In other cases, jububnan explorers who come across sites of extreme value or danger may birth a new generational line whose existence is based on protecting such locations from outside interference. However, even when these larger groups of jububnans—known as tangles—form, the elders commonly encourage some of their offspring to depart and travel the galaxy, spreading their species throughout the reaches of space. As a result, members of jububnan tangles can often be found across several different planets, watching over specific sites of interest.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<h3>Organization</h3>\n<p>solitary, pair, or knot (3–6)</p>\n</section>",
         "weight": ""
       },
       "class": "",
+      "combatRole": "expert",
       "cr": 2,
       "environment": "",
       "organization": "",
@@ -1638,6 +2610,7 @@
       "race": "",
       "raceAndGrafts": "Jububnan operative",
       "source": "AA4 pg. 56",
+      "subtype": "",
       "xp": {
         "value": 600
       }

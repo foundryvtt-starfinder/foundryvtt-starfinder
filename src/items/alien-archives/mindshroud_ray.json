@@ -2,12 +2,22 @@
   "_id": "mFjGCyw54B7JkyTg",
   "name": "Mindshroud Ray",
   "type": "npc2",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
+  "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
       "_id": "5uUImsJs9ZEHouKT",
       "name": "Attached Pain (Su)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "icons/skills/wounds/injury-stapled-flesh-tan.webp",
       "system": {
         "type": "",
@@ -96,6 +106,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -129,6 +140,11 @@
       "_id": "SEYeyqsKe2hYW29C",
       "name": "Claws (plus Attach)",
       "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "icons/creatures/claws/claw-hooked-curved.webp",
       "system": {
         "type": "",
@@ -236,6 +252,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -393,6 +410,11 @@
       "_id": "EM0RlbrtoiUr5GMW",
       "name": "Ego Crush (Su)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "icons/magic/control/fear-fright-shadow-monster-red.webp",
       "system": {
         "type": "",
@@ -446,7 +468,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>As a standard action, a ray deals 2d6 nonlethal damage to a visible target within 30 feet. The target also takes a -1 penalty to Intelligence-, Wisdom-, and Charisma-based checks; spell save DCs; and Will saving throws for 1 round (DC 13 Will negates). Targets the ray touches have a -2 penalty to this saving throw; the ray can touch an unwilling target by succeeding at a melee attack against the target’s EAC. A target that fails this saving throw by 5 or more is also @UUID[Compendium.sfrpg.conditions.aAQ6SW6iK0EVq8Ce]{staggered} for 1 round.</p>"
+          "value": "<p>As a standard action, a ray deals 2d6 nonlethal damage to a visible target within 30 feet. The target also takes a -1 penalty to Intelligence-, Wisdom-, and Charisma-based checks; spell save DCs; and Will saving throws for 1 round (DC 13 Will negates). Targets the ray touches have a -2 penalty to this saving throw; the ray can touch an unwilling target by succeeding at a melee attack against the target’s EAC. A target that fails this saving throw by 5 or more is also @UUID[Compendium.sfrpg.conditions.Item.aAQ6SW6iK0EVq8Ce]{staggered} for 1 round.</p>"
         },
         "descriptors": {
           "acid": false,
@@ -498,6 +520,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -535,6 +558,11 @@
       "_id": "6R5apEzgCnWhuWcI",
       "name": "Ego Meld (Su)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "icons/magic/control/fear-fright-monster-red.webp",
       "system": {
         "type": "",
@@ -640,6 +668,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -677,6 +706,11 @@
       "_id": "JaXMvZGCS7WDP50A",
       "name": "Compression (Ex)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "icons/creatures/slimes/slime-giant-face-eyes.webp",
       "system": {
         "type": "",
@@ -765,6 +799,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -798,6 +833,11 @@
       "_id": "dcQhQ2b1pvsH29mT",
       "name": "Shroud Sense (Su)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "icons/magic/defensive/illusion-evasion-echo-purple.webp",
       "system": {
         "type": "",
@@ -886,6 +926,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -920,6 +961,7 @@
     "name": "Mindshroud Ray",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -936,6 +978,7 @@
       }
     },
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -956,11 +999,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -974,13 +1035,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "src": "systems/sfrpg/icons/default/alien-stare.svg",
+      "tint": "#ffffff"
     },
     "width": 1
   },

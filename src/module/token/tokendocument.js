@@ -12,7 +12,7 @@ export default class SFRPGTokenDocument extends TokenDocument {
         if ( !attr || !this.actor ) return null;
         const data = foundry.utils.getProperty(this.actor.system, attr);
         if ( (data === null) || (data === undefined) ) return null;
-        const model = game.system.model.Actor[this.actor.type];
+        const model = game.model.Actor[this.actor.type];
 
         // Single values
         if ( Number.isNumeric(data) ) {
@@ -53,7 +53,7 @@ export default class SFRPGTokenDocument extends TokenDocument {
      * @returns {boolean}           Does the Token have this status effect?
      */
     hasStatusEffect(statusId) {
-        if (this.actor?.system?.conditions[statusId]) return true;
+        if (this.actor?.system?.conditions?.[statusId]) return true;
 
         return super.hasStatusEffect(statusId);
     }
