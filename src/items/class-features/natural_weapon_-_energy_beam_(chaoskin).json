@@ -19,17 +19,17 @@
     "activation": {
       "type": "",
       "condition": "",
-      "cost": 0
+      "cost": null
     },
     "ammunitionType": "",
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "",
-      "value": 0
+      "units": "ft",
+      "value": ""
     },
-    "attackBonus": 0,
+    "attackBonus": null,
     "attributes": {
       "ac": {
         "value": ""
@@ -68,10 +68,78 @@
     "damage": {
       "parts": [
         {
-          "name": "",
+          "name": "Acid Damage (1-2)",
           "formula": "max(1, floor(lookupRange(@classes.witchwarper.levels, 0, 8, 1, 11, 2, 14, 3, 17, 4, 20, 5)))d6",
-          "group": null,
+          "group": 0,
           "isPrimarySection": true,
+          "types": {
+            "acid": true,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Cold Damage (3-4)",
+          "formula": "max(1, floor(lookupRange(@classes.witchwarper.levels, 0, 8, 1, 11, 2, 14, 3, 17, 4, 20, 5)))d6",
+          "group": 0,
+          "isPrimarySection": false,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": true,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Electricity Damage (5-6)",
+          "formula": "max(1, floor(lookupRange(@classes.witchwarper.levels, 0, 8, 1, 11, 2, 14, 3, 17, 4, 20, 5)))d6",
+          "group": 0,
+          "isPrimarySection": false,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": true,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Fire Damage (7-8)",
+          "formula": "max(1, floor(lookupRange(@classes.witchwarper.levels, 0, 8, 1, 11, 2, 14, 3, 17, 4, 20, 5)))d6",
+          "group": 0,
+          "isPrimarySection": false,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Sonic Damage (9-10)",
+          "formula": "max(1, floor(lookupRange(@classes.witchwarper.levels, 0, 8, 1, 11, 2, 14, 3, 17, 4, 20, 5)))d6",
+          "group": 0,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -81,7 +149,7 @@
             "healing": false,
             "piercing": false,
             "slashing": false,
-            "sonic": false
+            "sonic": true
           }
         }
       ],
@@ -93,7 +161,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;</p>\n<p>Energy bolt (1d6, 40-foot range increment); roll 1d10 to determine the energy bolt’s damage type when you assume this form: acid (1–2), cold (3–4), electricity (5–6), fire (7–8), or sonic (9–10).</p>\n<p><em>Damage type must be modified manually under the Details tab.</em></p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.NWphw9C290AbJBm7]{Chaoskin}</p>\n<p>Energy bolt (1d6, 40-foot range increment); roll 1d10 to determine the energy bolt’s damage type when you assume this form: acid (1–2), cold (3–4), electricity (5–6), fire (7–8), or sonic (9–10).</p>"
     },
     "descriptors": [],
     "duration": {
@@ -211,8 +279,8 @@
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
-      "value": null
+      "units": "ft",
+      "value": "40"
     },
     "rollNotes": "",
     "save": {
