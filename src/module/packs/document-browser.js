@@ -257,21 +257,29 @@ export class DocumentBrowserSFRPG extends Application {
     async loadItems() {
         console.log('Starfinder | Compendium Browser | Started loading items');
         const items = new Map();
+        const user = game.user;
+        const userPermission = user.isGM ? "GAMEMASTER" : (user.isTrusted ? "TRUSTED" : "PLAYER");
 
         for await (const {pack, content} of packLoader.loadPacks(this.entityType, this._loadedPacks)) {
-            console.log(`Starfinder | Compendium Browser | ${pack.metadata.label} - ${content.length} entries found`);
+            const packPermission = pack.ownership;
+            if (!packPermission.TRUSTED) {
+                packPermission.TRUSTED = packPermission["PLAYER"];
+            }
+            if (["OWNER", "OBSERVER", "LIMITED"].includes(packPermission[userPermission]) || user.isGM) {
+                console.log(`Starfinder | Compendium Browser | ${pack.metadata.label} - ${content.length} entries found`);
 
-            for (const item of content) {
-                const itemData = {
-                    uuid: `Compendium.${pack.collection}.${item._id}`,
-                    img: item.img,
-                    name: item.name,
-                    system: item.system,
-                    type: item.type
-                };
+                for (const item of content) {
+                    const itemData = {
+                        uuid: `Compendium.${pack.collection}.${item._id}`,
+                        img: item.img,
+                        name: item.name,
+                        system: item.system,
+                        type: item.type
+                    };
 
-                if (this.allowedItem(item)) items.set(itemData.uuid, itemData);
+                    if (this.allowedItem(item)) items.set(itemData.uuid, itemData);
 
+                }
             }
         }
 
