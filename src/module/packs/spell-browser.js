@@ -40,7 +40,7 @@ class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
         if (aVal < bVal) return -1;
         if (aVal > bVal) return 1;
 
-        if (aVal == bVal) {
+        if (aVal === bVal) {
             const aName = $(elementA).find('.item-name a')[0].innerHTML;
             const bName = $(elementB).find('.item-name a')[0].innerHTML;
             if (aName < bName) return -1;

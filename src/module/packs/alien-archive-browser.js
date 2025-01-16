@@ -51,9 +51,9 @@ class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
                 itemData.system.hp = itemData.system.attributes?.hp.max;
 
                 // 1/3 and 1/2 CR aliens have special strings used to describe their CR rather than using the float value
-                if (itemData.system.details?.cr == (1 / 3)) {
+                if (itemData.system.details?.cr === (1 / 3)) {
                     itemData.system.crDisplay = "1/3";
-                } else if (itemData.system.details?.cr == (1 / 2)) {
+                } else if (itemData.system.details?.cr === (1 / 2)) {
                     itemData.system.crDisplay = "1/2";
                 } else {
                     itemData.system.crDisplay = itemData.system.details?.cr;
@@ -104,7 +104,7 @@ class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
         if (aVal < bVal) return -1;
         if (aVal > bVal) return 1;
 
-        if (aVal == bVal) {
+        if (aVal === bVal) {
             const aName = $(elementA).find('.item-name a')[0].innerHTML;
             const bName = $(elementB).find('.item-name a')[0].innerHTML;
             if (aName < bName) return -1;
@@ -121,7 +121,7 @@ class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
         if (aVal < bVal) return -1;
         if (aVal > bVal) return 1;
 
-        if (aVal == bVal) {
+        if (aVal === bVal) {
             const aName = $(elementA).find('.item-name a')[0].innerHTML;
             const bName = $(elementB).find('.item-name a')[0].innerHTML;
             if (aName < bName) return -1;

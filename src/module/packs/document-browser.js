@@ -78,7 +78,7 @@ export class DocumentBrowserSFRPG extends Application {
 
         // toggle hints
         html.on('mousedown', 'input[name=textFilter]', ev => {
-            if (event.which == 3) {
+            if (event.which === 3) {
                 $(html.find('.hint')).toggle(100);
             }
         });
@@ -174,7 +174,7 @@ export class DocumentBrowserSFRPG extends Application {
                 filter.content.value = filterValue;
             }
 
-            if (filterValue != originalValue) {
+            if (filterValue !== originalValue) {
                 html.find(`input[name=${filterType}-value]`).val(filterValue);
             }
 
@@ -198,7 +198,7 @@ export class DocumentBrowserSFRPG extends Application {
     }
 
     async getData() {
-        if (this.items == undefined || this.forceReload == true) {
+        if (this.items === undefined || this.forceReload === true) {
             // spells will be stored locally to not require full loading each time the browser is opened
             this.items = await this.loadItems();
             this.forceReload = false;
@@ -301,12 +301,12 @@ export class DocumentBrowserSFRPG extends Application {
     }
 
     getFilterResult(element) {
-        if (this.sorters.text != '') {
+        if (this.sorters.text !== '') {
             const strings = this.sorters.text.split(',');
 
             for (const string of strings) {
-                if (string.indexOf(':') == -1) {
-                    if ($(element).find('.item-name a')[0].innerHTML.toLowerCase().indexOf(string.toLowerCase().trim()) == -1) {
+                if (string.indexOf(':') === -1) {
+                    if ($(element).find('.item-name a')[0].innerHTML.toLowerCase().indexOf(string.toLowerCase().trim()) === -1) {
                         return false;
                     }
                 } else {
@@ -316,19 +316,19 @@ export class DocumentBrowserSFRPG extends Application {
                     if ($(element).find(`input[name=${targetStat}]`)
                         .val()
                         .toLowerCase()
-                        .indexOf(targetValue) == -1) {
+                        .indexOf(targetValue) === -1) {
                         return false;
                     }
                 }
             }
         }
 
-        if (this.sorters.castingtime != 'null') {
+        if (this.sorters.castingtime !== 'null') {
             const castingtime = $(element).find('input[name=time]')
                 .val()
                 .toLowerCase();
 
-            if (castingtime != this.sorters.castingtime) {
+            if (castingtime !== this.sorters.castingtime) {
                 return false;
             }
         }
@@ -358,7 +358,7 @@ export class DocumentBrowserSFRPG extends Application {
         const newObj = {};
 
         for (const key in obj) {
-            if (obj[key] == true) {
+            if (obj[key] === true) {
                 newObj[key] = true;
             }
         }
@@ -510,7 +510,7 @@ export class DocumentBrowserSFRPG extends Application {
         }); // load settings from container
 
         let settings = game.settings.get('sfrpg', configuration.settings);
-        if (settings == '') {
+        if (settings === '') {
             // if settings are empty create the settings data
             console.log(`Starfinder | [READY] ${configuration.label} | Creating settings`);
             settings = {};
@@ -535,7 +535,7 @@ export class DocumentBrowserSFRPG extends Application {
                 if (compendium.documentName === entityType) {
                     settings[compendium.collection] = {
                         // add entry for each item compendium, that is turned on if no settings for it exist already
-                        load: loadedSettings[compendium.collection] == undefined ? true : loadedSettings[compendium.collection].load,
+                        load: loadedSettings[compendium.collection] === undefined ? true : loadedSettings[compendium.collection].load,
                         name: compendium.metadata.label
                     };
                 }
