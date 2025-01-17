@@ -19,7 +19,7 @@
     "activation": {
       "type": "",
       "condition": "",
-      "cost": 0
+      "cost": null
     },
     "area": {
       "effect": "",
@@ -67,16 +67,16 @@
       "force": false,
       "good": false,
       "healing": false,
-      "language-dependent": false,
+      "language-dependent": true,
       "lawful": false,
       "light": false,
-      "mind-affecting": false,
+      "mind-affecting": true,
       "pain": false,
       "poison": false,
       "polymorph": false,
       "radiation": false,
       "scrying": false,
-      "sense-dependent": false,
+      "sense-dependent": true,
       "shadow": false,
       "sonic": false,
       "summoning": false,
@@ -84,9 +84,9 @@
       "water": false
     },
     "details": {
-      "category": "feat",
+      "category": "classFeature",
       "combat": false,
-      "specialAbilityType": ""
+      "specialAbilityType": "ex"
     },
     "duration": {
       "units": "text",
@@ -94,7 +94,38 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "e2e728d9-556e-43d1-ba25-d35f2c35c2a6",
+        "name": "Improved Vexation (Melee)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "melee-damage",
+        "enabled": false,
+        "max": 0,
+        "modifier": "@abilities.cha.mod - @abilities.str.mod",
+        "modifierType": "formula",
+        "notes": "Can be applied the first time each round that you succeed at a weapon attack against a creature affected by your Vexing Style.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "e248f3e4-5059-4a11-b2b3-a66a7c14b655",
+        "name": "Improved Vexation (Ranged)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "ranged-damage",
+        "enabled": false,
+        "max": 0,
+        "modifier": "floor(@abilities.cha.mod/2)",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "properties": {},
     "range": {
       "additional": "",
