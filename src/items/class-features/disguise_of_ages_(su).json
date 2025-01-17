@@ -10,12 +10,12 @@
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "",
+    "actionType": "save",
     "activation": {
       "type": "action",
       "condition": "",
@@ -35,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -94,7 +95,23 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "2ce601b1-6aa1-44cf-a26e-f2a79ee77027",
+        "name": "Disguise of Ages",
+        "type": "circumstance",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 0,
+        "modifier": "10",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "dis"
+      }
+    ],
     "properties": {},
     "range": {
       "additional": "",
@@ -109,9 +126,13 @@
     "requirements": "2nd Level (Precog)",
     "rollNotes": "",
     "save": {
+      "type": "will",
+      "dc": "",
+      "descriptor": "negate"
+    },
+    "skillCheck": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": ""
     },
     "source": "EN pg. 62",
     "target": {
@@ -119,9 +140,9 @@
       "value": ""
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     }
   }
 }
