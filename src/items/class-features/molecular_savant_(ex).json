@@ -91,11 +91,27 @@
     },
     "duration": {
       "units": "text",
-      "value": ""
+      "value": "Until your next unarmed strike"
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "dc24f739-a44a-4287-bd54-629c6811520e",
+        "name": "Molecular Savant",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "max": 0,
+        "modifier": "@abilities.con.mod - @abilities.int.mod",
+        "modifierType": "formula",
+        "notes": "You can use your Constitution modifier in place of your Intelligence modifier when attempting Physical Science checks.",
+        "source": "Molecular Savant",
+        "subtab": "misc",
+        "valueAffected": "phs"
+      }
+    ],
     "properties": {},
     "range": {
       "additional": "",
@@ -124,9 +140,9 @@
       "value": ""
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     }
   }
 }

@@ -44,7 +44,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.unJ8E4IikZUxT7x3]{Temporal Anomalies (Su)}</p>\n<p>You can trap others in a moment, leaving them frozen in time. Once per day as a full action, you can force a creature within 60 feet of you to pause, freezing them in time. The creature must succeed at a Will saving throw or gain the paralyzed condition for a number of rounds equal to your Dexterity modifier. Each round, that creature can retry this saving throw as a full action; if they succeed, they break free and re-enter the timestream, and the temporal backlash deals you 10 damage per round that the target was paralyzed. This damage can’t be reduced in any way.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.unJ8E4IikZUxT7x3]{Temporal Anomalies (Su)}</p>\n<p>You can trap others in a moment, leaving them frozen in time. Once per day as a full action, you can force a creature within 60 feet of you to pause, freezing them in time. The creature must succeed at a Will saving throw or gain the @UUID[Compendium.sfrpg.conditions.Item.NV4qXRDgb7zTNkW2]{Paralyzed} condition for a number of rounds equal to your Dexterity modifier. Each round, that creature can retry this saving throw as a full action; if they succeed, they break free and re-enter the timestream, and the temporal backlash deals you 10 damage per round that the target was paralyzed. This damage can’t be reduced in any way.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -90,8 +90,8 @@
       "specialAbilityType": "su"
     },
     "duration": {
-      "units": "text",
-      "value": "A number of rounds equal to your Dexterity modifier"
+      "units": "round",
+      "value": "@abilities.dex.mod"
     },
     "formula": "",
     "isActive": null,
@@ -100,8 +100,8 @@
     "range": {
       "additional": "",
       "per": "",
-      "units": "none",
-      "value": ""
+      "units": "ft",
+      "value": "60"
     },
     "recharge": {
       "charged": false,
@@ -121,7 +121,7 @@
     "source": "EN pg. 65",
     "target": {
       "type": "",
-      "value": "A creature within 60 feet"
+      "value": "One creature"
     },
     "uses": {
       "max": "1",

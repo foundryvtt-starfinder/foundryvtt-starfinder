@@ -10,16 +10,16 @@
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "",
+    "actionType": "other",
     "activation": {
-      "type": "other",
+      "type": "none",
       "condition": "When you use a photon zenith revelation",
-      "cost": 1
+      "cost": null
     },
     "area": {
       "effect": "",
@@ -35,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -43,7 +44,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p>@Icon[type:photon] Photon Revelation</p>\n<p>Your photon powers align less with conventional suns and more with metastars, whose cores roil with supernatural energy. When you use a photon @UUID[Compendium.sfrpg.class-features.Item.UVNOjH2ERlQjcGnU]{Zenith Revelation}, you can either fuel or burn away one spell that is either affecting one of the revelation’s targets or that is in the revelation’s area of effect. If you choose to fuel the spell, attempt a dispel check (1d20 + your solarian level) with a DC equal to 11 + the spell’s caster level. If you succeed, you can increase the spell’s duration by 100% or by a number of rounds equal to your Charisma modifier, whichever is less. If you choose to burn the spell, you attempt to dispel the spell as dispel magic, using your solarian level as your caster level.</p>\n<p>You can attempt to burn a spell and fuel a spell once each per day. You must spend 1 Resolve Point each additional time you use this revelation.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p>@Icon[type:photon] Photon Revelation</p>\n<p>Your photon powers align less with conventional suns and more with metastars, whose cores roil with supernatural energy. When you use a photon @UUID[Compendium.sfrpg.class-features.Item.UVNOjH2ERlQjcGnU]{Zenith Revelation}, you can either fuel or burn away one spell that is either affecting one of the revelation’s targets or that is in the revelation’s area of effect. If you choose to fuel the spell, attempt a dispel check (1d20 + your solarian level) with a DC equal to 11 + the spell’s caster level. If you succeed, you can increase the spell’s duration by 100% or by a number of rounds equal to your Charisma modifier, whichever is less. If you choose to burn the spell, you attempt to dispel the spell as @UUID[Compendium.sfrpg.spells.KQ4vSfG9tq8EJxir]{Dispel Magic}, using your solarian level as your caster level.</p>\n<p>You can attempt to burn a spell and fuel a spell once each per day. You must spend 1 Resolve Point each additional time you use this revelation.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -86,13 +87,13 @@
     "details": {
       "category": "classFeature",
       "combat": false,
-      "specialAbilityType": ""
+      "specialAbilityType": "su"
     },
     "duration": {
-      "units": "text",
+      "units": "instantaneous",
       "value": ""
     },
-    "formula": "",
+    "formula": "1d20 + @classes.solarian.levels",
     "isActive": null,
     "modifiers": [],
     "properties": {},
@@ -110,8 +111,12 @@
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
+    },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
     },
     "source": "EN pg. 69",
     "target": {
@@ -119,9 +124,9 @@
       "value": ""
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     }
   }
 }

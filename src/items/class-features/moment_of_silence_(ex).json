@@ -17,8 +17,8 @@
     "actionTarget": "",
     "actionType": "save",
     "activation": {
-      "type": "other",
-      "condition": "When you are not in your Silent State (Ex) but end your turn while not within the melee reach of any other creature",
+      "type": "none",
+      "condition": "End a turn while not within the melee reach of any other creature and not in Silent State",
       "cost": null
     },
     "area": {
@@ -44,7 +44,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.pjhjTVwvrN4Ly9BR]{Isolation}</p>\n<p>When you are not in your @UUID[Compendium.sfrpg.class-features.Item.q5GZ1Oo5U3VODBpf]{Silent State (Ex)} but end your turn while not within the melee reach of any other creature, you can attempt a Will saving throw (DC = 20 + 1/2 your character level). If you succeed, you enter your silent state at the end of your turn. Once you enter your silent state using this ability, you cannot do so again for 1 minute.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.pjhjTVwvrN4Ly9BR]{Isolation}</p>\n<p>When you are not in your @UUID[Compendium.sfrpg.class-features.Item.q5GZ1Oo5U3VODBpf]{Silent State (Ex)} and end your turn while not within the melee reach of any other creature, you can attempt a Will saving throw (DC = 20 + 1/2 your character level). If you succeed, you enter your silent state at the end of your turn. Once you enter your silent state using this ability, you cannot do so again for 1 minute.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -90,7 +90,7 @@
       "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "text",
+      "units": "instantaneous",
       "value": ""
     },
     "formula": "",
@@ -124,9 +124,9 @@
       "value": ""
     },
     "uses": {
-      "max": "0",
-      "per": "",
-      "value": 0
+      "max": "1",
+      "per": "charges",
+      "value": 1
     }
   }
 }
