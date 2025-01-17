@@ -10,23 +10,23 @@
   "img": "icons/magic/perception/eye-ringed-glow-angry-small-red.webp",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "",
+    "actionType": "other",
     "activation": {
       "type": "",
       "condition": "",
-      "cost": 0
+      "cost": null
     },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "",
-      "value": 0
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -35,7 +35,43 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "Blind critical hit",
+          "formula": "4d6",
+          "group": 0,
+          "isPrimarySection": true,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Deafened critical hit",
+          "formula": "4d6",
+          "group": 0,
+          "isPrimarySection": false,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": true
+          }
+        }
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -43,9 +79,46 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.tniq6wm0fQSzLbB0]{Shock and Awe}</p>\n<p>When you make a full attack using a weapon that deals sonic damage or has the bright special property, your targets take a cumulative –1 penalty to saving throws against your critical hit effects for each of your previous attacks that hit that target since the beginning of your turn. When a target fails its save against your blind critical hit effect, it also takes 4d6 fire damage. When a target fails its save against your deafened critical hit effect, it also takes 4d6 sonic damage.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.tniq6wm0fQSzLbB0]{Shock and Awe}</p>\n<p>When you make a full attack using a weapon that deals sonic damage or has the @UUID[Compendium.sfrpg.rules.JournalEntry.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#bright]{Bright} special property, your targets take a cumulative –1 penalty to saving throws against your critical hit effects for each of your previous attacks that hit that target since the beginning of your turn. When a target fails its save against your @UUID[Compendium.sfrpg.rules.JournalEntry.O5GDQUKPCJ9Zbnfj.JournalEntryPage.zOJ86MDq6kNzAAbB#blind]{Blind} critical hit effect, it also takes 4d6 fire damage. When a target fails its save against your @UUID[Compendium.sfrpg.rules.JournalEntry.O5GDQUKPCJ9Zbnfj.JournalEntryPage.zOJ86MDq6kNzAAbB#deafen]{Deafened} critical hit effect, it also takes 4d6 sonic damage.</p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
     "details": {
       "category": "classFeature",
       "combat": false,
@@ -62,19 +135,23 @@
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
+      "units": "none",
       "value": null
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "13th Level",
+    "requirements": "13th Level Soldier",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
+    },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
     },
     "source": "AR pg. 155",
     "target": {

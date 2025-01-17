@@ -3,8 +3,8 @@
     <h3 class="bubble-header">{{localize "SFRPG.Descriptors.Descriptors"}}</h3>
 
     <div class="bubble-info form-group stacked item-descriptors">
-        {{#each config.descriptors as |name desc|}}
-        <label class="checkbox" {{#if (lookup ../config.descriptorsTooltips desc)}} data-tooltip='<strong>{{ name }}</strong><br/>{{lookup ../config.descriptorsTooltips desc}}' {{/if}}>
+        {{#each (sfrpg "descriptors") as |name desc|}}
+        <label class="checkbox" {{#if (sfrpg "descriptorsTooltips" desc)}} data-tooltip='<strong>{{ name }}</strong><br/>{{sfrpg "descriptorsTooltips" desc}}' {{/if}}>
             <input type="checkbox" name="system.descriptors.{{desc}}" {{checked (lookup ../itemData.descriptors desc)}} /> {{ name }}
         </label>
         {{/each}}

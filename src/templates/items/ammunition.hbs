@@ -25,7 +25,7 @@
                         <div class="form-fields">
                             <select name="system.ammunitionType">
                                 {{selectOption "" "SFRPG.Items.Ammunition.Type.None" selected=itemData.ammunitionType localize=true}}
-                                {{selectOptions config.ammunitionTypes selected=itemData.ammunitionType}}
+                                {{selectOptions (sfrpg "ammunitionTypes") selected=itemData.ammunitionType}}
                             </select>
                         </div>
                     </div>

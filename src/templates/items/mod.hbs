@@ -87,7 +87,7 @@
                                 <label>{{ localize "SFRPG.DroneSheet.Mod.Details.Arms.ArmType.Label" }}</label>
                                 <div class="form-fields">
                                     <select name="system.arms.armType">
-                                        {{selectOptions config.droneArmTypes selected=itemData.arms.armType}}
+                                        {{selectOptions (sfrpg "droneArmTypes") selected=itemData.arms.armType}}
                                     </select>
                                 </div>
                             </div>
@@ -112,7 +112,7 @@
                                 <div class="form-fields">
                                     <select name="system.weaponProficiency">
                                         {{selectOption "" "SFRPG.None" selected=itemData.weaponProficiency localize=true}}
-                                        {{selectOptions config.weaponProficiencies selected=itemData.weaponProficiency}}
+                                        {{selectOptions (sfrpg "weaponProficiencies") selected=itemData.weaponProficiency}}
                                     </select>
                                 </div>
                             </div>
@@ -122,7 +122,7 @@
                                 <div class="form-fields">
                                     <select name="system.bonusSkill">
                                         {{selectOption "" "SFRPG.None" selected=itemData.bonusSkill}}
-                                        {{selectOptions config.skills selected=itemData.bonusSkill}}
+                                        {{selectOptions (sfrpg "skills") selected=itemData.bonusSkill}}
                                     </select>
                                 </div>
                             </div>

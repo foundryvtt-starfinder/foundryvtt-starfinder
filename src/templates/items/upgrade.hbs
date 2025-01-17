@@ -45,7 +45,7 @@
                                 <label>{{ localize "SFRPG.Items.Upgrade.AllowedArmorType" }}</label>
                                 <select name="system.allowedArmorType">
                                     {{selectOption "any" "SFRPG.Items.Upgrade.Any" selected=itemData.allowedArmorType localize=true}}
-                                    {{selectOptions config.allowedArmorTypes selected=itemData.allowedArmorType}}
+                                    {{selectOptions (sfrpg "allowedArmorTypes") selected=itemData.allowedArmorType}}
                                 </select>
                             </div>
                         </div>

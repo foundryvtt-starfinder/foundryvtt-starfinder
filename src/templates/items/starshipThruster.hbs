@@ -31,7 +31,7 @@
                     <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipThruster.Size" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipThruster.SizeTooltip" }}">
                         <label>{{ localize "SFRPG.ItemSheet.StarshipThruster.Size" }}</label>
                         <select name="system.supportedSize">
-                            {{selectOptions config.starshipSizes selected=itemData.supportedSize localize=true}}
+                            {{selectOptions (sfrpg "starshipSizes") selected=itemData.supportedSize localize=true}}
                         </select>
                     </div>
 

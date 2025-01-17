@@ -93,7 +93,6 @@ export default class RollDialog extends Dialog {
         const data = await super.getData();
         data.formula = this.formula;
         data.rollMode = this.rollMode;
-        data.rollModes = CONFIG.Dice.rollModes;
         data.additionalBonus = this.additionalBonus;
         data.availableModifiers = foundry.utils.deepClone(this.availableModifiers) || [];
         data.hasModifiers = data.availableModifiers.length > 0;

@@ -22,8 +22,11 @@
       "system": {
         "type": "",
         "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
@@ -53,11 +56,48 @@
           "unidentified": "",
           "value": "<p>Hobgoblins are trained for combat from an early age, and they quickly learn that a foe can do much more than just hurt you. Hobgoblins gain a +1 species bonus to AC against combat maneuvers.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
         "details": {
-          "category": "feat",
+          "category": "speciesFeature",
           "combat": false,
-          "specialAbilityType": ""
+          "specialAbilityType": "ex"
         },
         "duration": {
           "units": "",
@@ -65,7 +105,23 @@
         },
         "formula": "",
         "isActive": null,
-        "modifiers": [],
+        "modifiers": [
+          {
+            "_id": "3e4a4e5b-d249-46a9-83f0-e03a714e97d0",
+            "name": "Battle Hardened",
+            "type": "racial",
+            "condition": "",
+            "effectType": "cmd",
+            "enabled": true,
+            "max": 0,
+            "modifier": "1",
+            "modifierType": "constant",
+            "notes": "",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": ""
+          }
+        ],
         "properties": {},
         "range": {
           "additional": "",
@@ -208,6 +264,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
@@ -494,6 +551,7 @@
         },
         "equippable": false,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
@@ -671,7 +729,7 @@
           "shapable": false,
           "shape": "sphere",
           "units": "ft",
-          "value": 15
+          "value": "15"
         },
         "attackBonus": 17,
         "attributes": {
@@ -701,7 +759,7 @@
         "chatFlavor": "entangled [[2d4]] rounds",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -721,7 +779,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -733,11 +792,12 @@
         },
         "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "text",
           "value": ""
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
@@ -760,6 +820,7 @@
           "breach": false,
           "breakdown": false,
           "bright": false,
+          "buttressing": false,
           "cluster": false,
           "conceal": false,
           "deconstruct": false,
@@ -778,15 +839,19 @@
           "force": false,
           "freeHands": false,
           "fueled": false,
+          "gearArray": false,
           "grapple": false,
           "gravitation": false,
           "guided": false,
           "harrying": false,
+          "healing": false,
           "holyWater": false,
           "hybrid": false,
+          "hydrodynamic": false,
           "ignite": false,
           "indirect": false,
           "injection": false,
+          "instrumental": false,
           "integrated": false,
           "line": false,
           "living": false,
@@ -804,6 +869,7 @@
           "polymorphic": false,
           "powered": false,
           "professional": false,
+          "propel": false,
           "punchGun": false,
           "qreload": false,
           "radioactive": false,
@@ -812,7 +878,9 @@
           "regrowth": false,
           "relic": false,
           "reposition": false,
+          "scramble": false,
           "shape": false,
+          "shatter": false,
           "shells": false,
           "shield": false,
           "sniper": false,
@@ -825,6 +893,7 @@
           "thought": false,
           "throttle": false,
           "thrown": true,
+          "thruster": false,
           "trip": false,
           "two": false,
           "unbalancing": false,
@@ -833,13 +902,13 @@
           "variantBoost": false,
           "wideLine": false
         },
-        "quantity": null,
+        "quantity": 0,
         "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "rollNotes": "",
         "save": {
@@ -847,9 +916,28 @@
           "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": ""
+        },
         "source": "CRB pg. 178",
         "special": "",
-        "specialMaterials": {},
+        "specialMaterials": {
+          "abysium": false,
+          "adamantine": false,
+          "coldiron": false,
+          "diatha": false,
+          "djezet": false,
+          "horacalcum": false,
+          "inubrix": false,
+          "khefak": false,
+          "noqual": false,
+          "nyblantine": false,
+          "purplecores": false,
+          "siccatite": false,
+          "silver": false,
+          "voidglass": false
+        },
         "target": {
           "type": "",
           "value": ""
@@ -859,7 +947,7 @@
           "value": 1
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "charges",
           "value": 1
         },
@@ -879,7 +967,7 @@
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
-        "ability": null,
+        "ability": "",
         "abilityMods": {
           "parts": []
         },
@@ -894,8 +982,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": "none",
-          "value": null
+          "units": "ft",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -904,7 +992,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -912,20 +1001,57 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>When a hobgoblin lieutenant scores a critical hit against a foe, the hobgoblin can attempt an Intimidate check to demoralize that foe as a reaction.</p>"
+          "value": "<p>When a hobgoblin lieutenant scores a critical hit against a foe, the hobgoblin can attempt an @Check[type:intimidate] to demoralize that foe as a reaction.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
         "details": {
-          "category": "feat",
+          "category": "speciesFeature",
           "combat": false,
-          "specialAbilityType": ""
+          "specialAbilityType": "ex"
         },
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
@@ -942,8 +1068,12 @@
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
-          "descriptor": ""
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "skillCheck": {
+          "type": "int",
+          "dc": ""
         },
         "source": "",
         "target": {
@@ -951,9 +1081,9 @@
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "",
           "per": "",
-          "value": 0
+          "value": null
         }
       }
     },
@@ -1068,7 +1198,7 @@
         "activation": {
           "type": "",
           "condition": "",
-          "cost": 0
+          "cost": null
         },
         "ammunitionType": "",
         "area": {
@@ -1114,7 +1244,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -1150,8 +1280,9 @@
           "units": "",
           "value": null
         },
-        "equippable": false,
-        "equipped": false,
+        "equippable": true,
+        "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
@@ -1177,7 +1308,22 @@
         },
         "size": "",
         "source": "CRB pg. 198",
-        "specialMaterials": {},
+        "specialMaterials": {
+          "abysium": false,
+          "adamantine": false,
+          "coldiron": false,
+          "diatha": false,
+          "djezet": false,
+          "horacalcum": false,
+          "inubrix": false,
+          "khefak": false,
+          "noqual": false,
+          "nyblantine": false,
+          "purplecores": false,
+          "siccatite": false,
+          "silver": false,
+          "voidglass": false
+        },
         "speed": "",
         "strength": 0,
         "target": {
@@ -1239,6 +1385,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 4,
         "modifiers": [],
@@ -1269,7 +1416,7 @@
         "activation": {
           "type": "",
           "condition": "",
-          "cost": 0
+          "cost": null
         },
         "area": {
           "effect": "",
@@ -1293,9 +1440,46 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.oKlwvc1HcIsg7Q7a]{Fighting Style}</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl01_LabelName\"></span>The hit-and-run fighting style focuses on tactical movement as you move in and out of combat. You use ranged weapons but fight close up, and you can even mix ranged and melee attacks. Your abilities allow you to move even when you make full attacks and to avoid getting locked down by your enemies.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.MjdqehkkqcLHUKOb]{Opening Volley (Ex) (1st)}</h2>\n<p>You gain Opening Volley as a bonus feat. If you already have this feat, choose a bonus combat feat instead. At 9th level, you can use Opening Volley on both your first and second turns in combat.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.FCZRkTVJsURxIZ8f]{Nimble Fusillade (Ex) (2nd)}</h2>\n<p>When you make a full attack, you can also either take a guarded step or move up to half your speed. This movement can come before, between, or after your attacks, but it can’t be split up.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.ZcGKsH2zDFkLJPeY]{Duck and Weave (Ex) (3rd)}</h2>\n<p>When you move or make a ranged attack, you can spend 1 Resolve Point to avoid provoking attacks of opportunity from that movement or ranged attack.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.0IXriaVqmSfrmYNb]{Elusive Target (Ex) (4th)}</h2>\n<p>On any turn in which you move, you gain a +1 insight bonus to your AC until the start of your next turn.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.4ZWW1sHsYvhZ06Hi]{Harrying Shot (Ex) (5th)}</h2>\n<p>As a full action, you can make one attack and give the benefit of harrying fire (see page 247) against any creature you hit with that attack. If you use a blast weapon or automatic weapon, the benefit applies against all targets hit. You can also take your nimble fusillade movement before or after this attack.</p>"
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.oKlwvc1HcIsg7Q7a]{Fighting Style}</p>\n<p>The hit-and-run fighting style focuses on tactical movement as you move in and out of combat. You use ranged weapons but fight close up, and you can even mix ranged and melee attacks. Your abilities allow you to move even when you make full attacks and to avoid getting locked down by your enemies.</p><h2>@UUID[Compendium.sfrpg.class-features.Item.MjdqehkkqcLHUKOb]{Opening Volley (Ex) (1st)}</h2><p>You gain Opening Volley as a bonus feat. If you already have this feat, choose a bonus combat feat instead. At 9th level, you can use Opening Volley on both your first and second turns in combat.</p><h2>@UUID[Compendium.sfrpg.class-features.Item.FCZRkTVJsURxIZ8f]{Nimble Fusillade (Ex) (2nd)}</h2><p>When you make a full attack, you can also either take a guarded step or move up to half your speed. This movement can come before, between, or after your attacks, but it can’t be split up.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
         "details": {
           "category": "feat",
           "combat": false,
@@ -1624,7 +1808,7 @@
         "value": 5
       },
       "kac": {
-        "base": null,
+        "base": 21,
         "min": 0,
         "tooltip": [],
         "value": null
@@ -1648,13 +1832,13 @@
         },
         "flying": {
           "base": 0,
-          "baseManeuverability": 0
+          "baseManeuverability": "0"
         },
         "land": {
           "base": 30
         },
         "mainMovement": "land",
-        "special": "25 ft. in armor",
+        "special": "",
         "swimming": {
           "base": 0
         },
@@ -1753,6 +1937,7 @@
         "weight": ""
       },
       "class": "",
+      "combatRole": "combatant",
       "cr": 7,
       "environment": "",
       "organization": "",

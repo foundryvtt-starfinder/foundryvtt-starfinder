@@ -24,7 +24,6 @@ export class CounterManagementWindows extends Dialog {
             classes: targetClasses,
             actorId:actorId,
             combatantId:combatantId,
-            config: CONFIG.SFRPG
         });
 
         return new Promise((resolve, reject) => {

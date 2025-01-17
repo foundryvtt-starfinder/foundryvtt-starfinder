@@ -69,7 +69,7 @@
                                 <label>{{localize "SFRPG.ClassKeyAbilityScore"}}</label>
                                 <div class="form-fields">
                                     <select name="system.kas">
-                                        {{selectOptions config.abilities selected=itemData.kas}}
+                                        {{selectOptions (sfrpg "abilities") selected=itemData.kas}}
                                     </select>
                                 </div>
                             </div>
@@ -109,7 +109,7 @@
                                         <label>{{localize "SFRPG.ClassBABProgression"}}</label>
                                         <div class="form-fields">
                                             <select name="system.bab">
-                                                {{selectOptions config.babProgression selected=itemData.bab}}
+                                                {{selectOptions (sfrpg "babProgression") selected=itemData.bab}}
                                             </select>
                                         </div>
                                     </div>
@@ -118,7 +118,7 @@
                                         <label>{{localize "SFRPG.ClassFortSaveProgression"}}</label>
                                         <div class="form-fields">
                                             <select name="system.fort">
-                                                {{selectOptions config.saveProgression selected=itemData.fort}}
+                                                {{selectOptions (sfrpg "saveProgression") selected=itemData.fort}}
                                             </select>
                                         </div>
                                     </div>
@@ -127,7 +127,7 @@
                                         <label>{{localize "SFRPG.ClassReflexSaveProgression"}}</label>
                                         <div class="form-fields">
                                             <select name="system.ref">
-                                                {{selectOptions config.saveProgression selected=itemData.ref}}
+                                                {{selectOptions (sfrpg "saveProgression") selected=itemData.ref}}
                                             </select>
                                         </div>
                                     </div>
@@ -136,7 +136,7 @@
                                         <label>{{localize "SFRPG.ClassWillSaveProgression"}}</label>
                                         <div class="form-fields">
                                             <select name="system.will">
-                                                {{selectOptions config.saveProgression selected=itemData.will}}
+                                                {{selectOptions (sfrpg "saveProgression") selected=itemData.will}}
                                             </select>
                                         </div>
                                     </div>
@@ -166,7 +166,7 @@
                                 <h3 class="bubble-header">{{localize "SFRPG.ClassSkills"}}</h3>
 
                                 <div class="form-group stacked weapon-properties bubble-info">
-                                    {{#each config.skills as |name val|}}
+                                    {{#each (sfrpg "skills") as |name val|}}
                                     <label class="checkbox">
                                         <input type="checkbox" name="system.csk.{{val}}" {{checked (lookup ../itemData.csk val)}}/> {{ name }}
                                     </label>
@@ -179,7 +179,7 @@
                                 <h3 class="bubble-header">{{localize "SFRPG.ClassWeaponProf"}}</h3>
 
                                 <div class="form-group stacked weapon-properties bubble-info">
-                                    {{#each config.weaponProficiencies as |name val|}}
+                                    {{#each (sfrpg "weaponProficiencies") as |name val|}}
                                     <label class="checkbox">
                                         <input type="checkbox" name="system.proficiencies.weapon.{{val}}" {{checked (lookup ../itemData.proficiencies.weapon val)}}/> {{ name }}
                                     </label>
@@ -192,7 +192,7 @@
                                 <h3 class="bubble-header">{{localize "SFRPG.ClassArmorProf"}}</h3>
 
                                 <div class="form-group stacked weapon-properties bubble-info">
-                                    {{#each config.armorProficiencies as |name val|}}
+                                    {{#each (sfrpg "armorProficiencies") as |name val|}}
                                     <label class="checkbox">
                                         <input type="checkbox" name="system.proficiencies.armor.{{val}}" {{checked (lookup ../itemData.proficiencies.armor val)}}/> {{ name }}
                                     </label>
@@ -217,7 +217,7 @@
                             <div class="form-fields">
                                 <select name="system.spellAbility">
                                     {{selectOption "" "" selected=itemData.spellAbility}}
-                                    {{selectOptions config.abilities selected=itemData.spellAbility}}
+                                    {{selectOptions (sfrpg "abilities") selected=itemData.spellAbility}}
                                 </select>
                             </div>
                         </div>

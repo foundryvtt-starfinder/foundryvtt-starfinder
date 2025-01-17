@@ -12,7 +12,7 @@
             <label>{{ localize "SFRPG.Items.Action.ActionType" }}</label>
             <select name="system.actionType">
                 {{selectOption "" "" selected=itemData.actionType}}
-                {{selectOptions config.itemActionTypes selected=itemData.actionType}}
+                {{selectOptions (sfrpg "itemActionTypes") selected=itemData.actionType}}
             </select>
         </div>
 
@@ -21,7 +21,7 @@
             <div class="form-group select" {{createTippy title="SFRPG.Items.Action.ActionTarget.Title" subtitle="SFRPG.Items.Action.ActionTarget.Tooltip"}}>
                 <label>{{ localize "SFRPG.Items.Action.ActionTarget.Title" }}</label>
                 <select name="system.actionTarget">
-                    {{selectOptions config.actionTargets selected=itemData.actionTarget}}
+                    {{selectOptions (sfrpg "actionTargets") selected=itemData.actionTarget}}
                 </select>
             </div>
 
@@ -30,7 +30,7 @@
                 <label>{{ localize "SFRPG.Items.Action.AbilityModifier" }}</label>
                 <select name="system.ability">
                     {{selectOption "" "" selected=itemData.ability}}
-                    {{selectOptions config.abilities selected=itemData.ability}}
+                    {{selectOptions (sfrpg "abilities") selected=itemData.ability}}
                 </select>
             </div>
 
@@ -51,10 +51,10 @@
                     <input type="text" class="wide-form-field" name="system.save.dc" value="{{itemData.save.dc}}" data-dtype="String" placeholder="{{placeholders.saveDC.formula}}"/>
                     <select name="system.save.type">
                         {{selectOption "" "" selected=itemData.save.type}}
-                        {{selectOptions config.saves selected=itemData.save.type}}
+                        {{selectOptions (sfrpg "saves") selected=itemData.save.type}}
                     </select>
                     <select name="system.save.descriptor">
-                        {{selectOptions config.saveDescriptors selected=itemData.save.descriptor}}
+                        {{selectOptions (sfrpg "saveDescriptors") selected=itemData.save.descriptor}}
                     </select>
                 </div>
             </div>
@@ -66,7 +66,7 @@
                     <input type="text" class="wide-form-field" name="system.skillCheck.dc" value="{{itemData.skillCheck.dc}}" data-dtype="String" placeholder="{{placeholders.saveDC.formula}}"/>
                     <select name="system.skillCheck.type">
                         {{selectOption "" "" selected=itemData.skillCheck.type}}
-                        {{selectOptions config.skills selected=itemData.skillCheck.type}}
+                        {{selectOptions (sfrpg "skills") selected=itemData.skillCheck.type}}
                     </select>
                 </div>
             </div>
@@ -95,7 +95,7 @@
                                 <input class="wide-form-field" type="text" name="system.range.value" value="{{itemData.range.value}}" data-dtype="String" placeholder="Range"/>
                                 {{/if}}
                                 <select name="system.range.units">
-                                    {{selectOptions config.distanceUnits selected=itemData.range.units}}
+                                    {{selectOptions (sfrpg "distanceUnits") selected=itemData.range.units}}
                                 </select>
                             </div>
                         </div>
@@ -107,15 +107,15 @@
                                 {{#if this.area.showTotal}}<p class="calculated-total"><strong>{{itemData.area.total}}</strong></p>{{/if}}
                                 <input type="text" {{#if (eq itemData.area.units "text")}}class="wide-form-field"{{/if}} name="system.area.value" value="{{itemData.area.value}}" data-dtype="String" placeholder="Area" />
                                 <select name="system.area.units" class="min-form-field">
-                                    {{selectOptions config.variableDistanceUnits selected=itemData.area.units}}
+                                    {{selectOptions (sfrpg "variableDistanceUnits") selected=itemData.area.units}}
                                     {{selectOption "text" "SFRPG.Text" selected=itemData.area.units localize=true}}
                                 </select>
                                 {{#unless (eq itemData.area.units "text")}}
                                 <select name="system.area.shape" class="min-form-field">
-                                    {{selectOptions config.spellAreaShapes selected=itemData.area.shape}}
+                                    {{selectOptions (sfrpg "spellAreaShapes") selected=itemData.area.shape}}
                                 </select>
                                 <select name="system.area.effect" class="min-form-field">
-                                    {{selectOptions config.spellAreaEffects selected=itemData.area.effect}}
+                                    {{selectOptions (sfrpg "spellAreaEffects") selected=itemData.area.effect}}
                                 </select>
                                 <label class="checkbox">
                                     <input type="checkbox" name="system.area.shapable" {{checked itemData.area.shapable}}>
@@ -182,7 +182,7 @@
                             <div class="damage-part-type form-group stacked">
                                 <div class="form-group form-group-stacked">
                                     <label>{{localize "SFRPG.Damage.EnergyDamage"}}</label>
-                                    {{#each ../config.energyDamageTypes as |name type|}}
+                                    {{#each (sfrpg "energyDamageTypes") as |name type|}}
                                     <label class="checkbox">
                                         <input type="checkbox" name="system.critical.parts.{{i}}.types.{{type}}" {{checked (lookup (lookup (lookup ../../itemData.critical.parts i) "types") type)}} />{{name}}
                                     </label>
@@ -190,7 +190,7 @@
                                 </div>
                                 <div class="form-group form-group-stacked">
                                     <label>{{localize "SFRPG.Damage.KineticDamage"}}</label>
-                                    {{#each ../config.kineticDamageTypes as |name type|}}
+                                    {{#each (sfrpg "kineticDamageTypes") as |name type|}}
                                     <label class="checkbox">
                                         <input type="checkbox" name="system.critical.parts.{{i}}.types.{{type}}" {{checked (lookup (lookup (lookup ../../itemData.critical.parts i) "types") type)}} />{{name}}
                                     </label>

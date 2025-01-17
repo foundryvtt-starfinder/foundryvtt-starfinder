@@ -22,20 +22,23 @@
       "system": {
         "type": "",
         "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
           "type": "",
           "condition": "",
-          "cost": 0
+          "cost": null
         },
         "ammunitionType": "",
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": "",
-          "value": 0
+          "units": "ft",
+          "value": "0"
         },
         "attackBonus": 14,
         "attributes": {
@@ -65,29 +68,26 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
-          "storage": [
-            {
-              "type": "slot",
-              "acceptsType": [
-                "fusion"
-              ],
-              "affectsEncumbrance": true,
-              "amount": 0,
-              "subtype": "fusion",
-              "weightProperty": "level"
-            }
-          ]
+          "storage": []
         },
         "critical": {
           "effect": "",
           "parts": [
             {
-              "formula": null,
+              "formula": "",
               "operator": "",
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "piercing": false,
+                "slashing": false,
+                "sonic": false
               }
             }
           ]
@@ -95,13 +95,24 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d6+7",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": true,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "piercing": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -118,32 +129,147 @@
         },
         "equippable": false,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
-        "isEquipment": true,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 0,
         "proficient": true,
-        "properties": {},
+        "properties": {
+          "aeon": false,
+          "amm": false,
+          "analog": false,
+          "antibiological": false,
+          "archaic": false,
+          "aurora": false,
+          "automatic": false,
+          "blast": false,
+          "block": false,
+          "boost": false,
+          "breach": false,
+          "breakdown": false,
+          "bright": false,
+          "buttressing": false,
+          "cluster": false,
+          "conceal": false,
+          "deconstruct": false,
+          "deflect": false,
+          "disarm": false,
+          "double": false,
+          "drainCharge": false,
+          "echo": false,
+          "entangle": false,
+          "explode": false,
+          "extinguish": false,
+          "feint": false,
+          "fiery": false,
+          "firstArc": false,
+          "flexibleLine": false,
+          "force": false,
+          "freeHands": false,
+          "fueled": false,
+          "gearArray": false,
+          "grapple": false,
+          "gravitation": false,
+          "guided": false,
+          "harrying": false,
+          "healing": false,
+          "holyWater": false,
+          "hybrid": false,
+          "hydrodynamic": false,
+          "ignite": false,
+          "indirect": false,
+          "injection": false,
+          "instrumental": false,
+          "integrated": false,
+          "line": false,
+          "living": false,
+          "lockdown": false,
+          "mind-affecting": false,
+          "mine": false,
+          "mire": false,
+          "modal": false,
+          "necrotic": false,
+          "nonlethal": false,
+          "one": false,
+          "operative": false,
+          "penetrating": false,
+          "polarize": false,
+          "polymorphic": false,
+          "powered": false,
+          "professional": false,
+          "propel": false,
+          "punchGun": false,
+          "qreload": false,
+          "radioactive": false,
+          "reach": false,
+          "recall": false,
+          "regrowth": false,
+          "relic": false,
+          "reposition": false,
+          "scramble": false,
+          "shape": false,
+          "shatter": false,
+          "shells": false,
+          "shield": false,
+          "sniper": false,
+          "stun": false,
+          "subtle": false,
+          "sunder": false,
+          "swarm": false,
+          "tail": false,
+          "teleportive": false,
+          "thought": false,
+          "throttle": false,
+          "thrown": false,
+          "thruster": false,
+          "trip": false,
+          "two": false,
+          "unbalancing": false,
+          "underwater": false,
+          "unwieldy": false,
+          "variantBoost": false,
+          "wideLine": false
+        },
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
-          "units": "",
-          "value": null
+          "units": "none",
+          "value": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
-          "descriptor": ""
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": ""
         },
         "source": "",
         "special": "",
-        "specialMaterials": {},
+        "specialMaterials": {
+          "abysium": false,
+          "adamantine": false,
+          "coldiron": false,
+          "diatha": false,
+          "djezet": false,
+          "horacalcum": false,
+          "inubrix": false,
+          "khefak": false,
+          "noqual": false,
+          "nyblantine": false,
+          "purplecores": false,
+          "siccatite": false,
+          "silver": false,
+          "voidglass": false
+        },
         "target": {
           "type": "",
           "value": null
@@ -182,15 +308,15 @@
         "activation": {
           "type": "",
           "condition": "",
-          "cost": 0
+          "cost": null
         },
         "ammunitionType": "",
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": "",
-          "value": 0
+          "units": "ft",
+          "value": ""
         },
         "attackBonus": 13,
         "attributes": {
@@ -206,7 +332,7 @@
           },
           "hp": {
             "max": "",
-            "value": 6
+            "value": 18
           },
           "size": "medium",
           "sturdy": true
@@ -220,7 +346,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -242,7 +368,15 @@
               "formula": "1d6",
               "operator": "",
               "types": {
-                "piercing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "piercing": true,
+                "slashing": false,
+                "sonic": false
               }
             }
           ]
@@ -250,13 +384,24 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "3d6+6",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": true,
               "types": {
-                "piercing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "piercing": true,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -273,10 +418,11 @@
         },
         "equippable": false,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
-        "isEquipment": true,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -295,6 +441,7 @@
           "breach": false,
           "breakdown": false,
           "bright": false,
+          "buttressing": false,
           "cluster": false,
           "conceal": false,
           "deconstruct": false,
@@ -313,15 +460,19 @@
           "force": false,
           "freeHands": false,
           "fueled": false,
+          "gearArray": false,
           "grapple": false,
           "gravitation": false,
           "guided": false,
           "harrying": false,
+          "healing": false,
           "holyWater": false,
           "hybrid": false,
+          "hydrodynamic": false,
           "ignite": false,
           "indirect": false,
           "injection": false,
+          "instrumental": false,
           "integrated": false,
           "line": false,
           "living": false,
@@ -339,6 +490,7 @@
           "polymorphic": false,
           "powered": false,
           "professional": false,
+          "propel": false,
           "punchGun": false,
           "qreload": false,
           "radioactive": false,
@@ -347,6 +499,7 @@
           "regrowth": false,
           "relic": false,
           "reposition": false,
+          "scramble": false,
           "shape": false,
           "shatter": false,
           "shells": false,
@@ -361,6 +514,7 @@
           "thought": false,
           "throttle": false,
           "thrown": false,
+          "thruster": false,
           "trip": false,
           "two": false,
           "unbalancing": false,
@@ -374,8 +528,8 @@
         "range": {
           "additional": "",
           "per": "",
-          "units": "",
-          "value": null
+          "units": "none",
+          "value": ""
         },
         "rollNotes": "",
         "save": {
@@ -383,9 +537,28 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": ""
+        },
         "source": "",
         "special": "",
-        "specialMaterials": {},
+        "specialMaterials": {
+          "abysium": false,
+          "adamantine": false,
+          "coldiron": false,
+          "diatha": false,
+          "djezet": false,
+          "horacalcum": false,
+          "inubrix": false,
+          "khefak": false,
+          "noqual": false,
+          "nyblantine": false,
+          "purplecores": false,
+          "siccatite": false,
+          "silver": false,
+          "voidglass": false
+        },
         "target": {
           "type": "",
           "value": null
@@ -401,96 +574,6 @@
         },
         "weaponCategory": "uncategorized",
         "weaponType": "basicM"
-      }
-    },
-    {
-      "_id": "Iz5DCvIdXRVtZZGc",
-      "name": "Trample",
-      "type": "feat",
-      "_stats": {
-        "coreVersion": 12,
-        "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
-      },
-      "img": "systems/sfrpg/icons/default/achievement.svg",
-      "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
-        "actionTarget": "",
-        "actionType": "",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shapable": false,
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "damageNotes": "",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>(EX)</p>\n<p>As a full action, the creature can move up to its speed and through the space of any creatures that are at least one size smaller than itself. The creature does not need to make an attack roll; each creature whose space it moves through takes damage. A target of a trample can attempt a Reflex save with the listed DC to take half damage; if it attempts the save, it can’t make an attack of opportunity against the trampling creature due to the creature’s movement. A creature can deal trample damage to a given target only once per round.</p>\n<p>Guidelines: The amount of damage the trample deals should be the same as the creature’s standard melee damage.</p>"
-        },
-        "descriptors": [],
-        "details": {
-          "category": "feat",
-          "combat": false,
-          "specialAbilityType": ""
-        },
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "isActive": null,
-        "modifiers": [],
-        "properties": {},
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "rollNotes": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
       }
     },
     {
@@ -538,9 +621,46 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>Male and female hashukayaks manifest different physical traits during adolescence, and an adult gains several additional abilities that modify the statistics above.</p>\n<p>Males develop a voluminous ruff of fur along their necks, front shoulder joints, and humps. They are also heavier, with stout horns growing from their heads and front shoulders. These adaptations grant a male hashukayak a gore attack (included in the statistics above), a +1 bonus to KAC, and a +15 bonus to Intimidate checks.</p>\n<p>Female hashukayaks are less massive, more adaptable, and far swifter. Their fur ruffs extend only across their necks but connect to dense arrays of nerve cells that help detect smells, wind, and movement. These adaptations grant a female hashukayak a +1 bonus to EAC, a 40-foot land speed, blindsense (vibration) with a range of 30 feet, and a +10 bonus to Survival checks.</p>"
+          "value": "<p>Male and female hashukayaks manifest different physical traits during adolescence, and an adult gains several additional abilities that modify the statistics above.</p>\n<p>Males develop a voluminous ruff of fur along their necks, front shoulder joints, and humps. They are also heavier, with stout horns growing from their heads and front shoulders. These adaptations grant a male hashukayak a gore attack (included in the statistics above), a +1 bonus to KAC, and a +15 bonus to Intimidate checks.</p>\n<p>Female hashukayaks are less massive, more adaptable, and far swifter. Their fur ruffs extend only across their necks but connect to dense arrays of nerve cells that help detect smells, wind, and movement. These adaptations grant a female hashukayak a +1 bonus to EAC, a 40-foot land speed, blindsense (vibration) with a range of 30 feet, and a +10 bonus to Survival checks.</p>\n<p><em>Enable these modifiers manually in thhe Modifiers tab.</em></p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
         "details": {
           "category": "feat",
           "combat": false,
@@ -552,7 +672,83 @@
         },
         "formula": "",
         "isActive": null,
-        "modifiers": [],
+        "modifiers": [
+          {
+            "_id": "6e4f5225-8e06-49b7-84f3-415eef2fb22a",
+            "name": "Male - KAC Bonus",
+            "type": "untyped",
+            "condition": "",
+            "effectType": "ac",
+            "enabled": false,
+            "max": 0,
+            "modifier": "1",
+            "modifierType": "constant",
+            "notes": "",
+            "source": "Sexual Dimorphism (Male)",
+            "subtab": "misc",
+            "valueAffected": "kac"
+          },
+          {
+            "_id": "af583564-3ccb-4956-b26b-485a8c8f1809",
+            "name": "Male - Intimidate Checks",
+            "type": "untyped",
+            "condition": "",
+            "effectType": "skill",
+            "enabled": false,
+            "max": 0,
+            "modifier": "15",
+            "modifierType": "constant",
+            "notes": "",
+            "source": "Sexual Dimorphism (Male)",
+            "subtab": "misc",
+            "valueAffected": "int"
+          },
+          {
+            "_id": "792d9680-a343-4118-9430-4275fdf498c1",
+            "name": "Female - EAC Bonus",
+            "type": "untyped",
+            "condition": "",
+            "effectType": "ac",
+            "enabled": false,
+            "max": 0,
+            "modifier": "1",
+            "modifierType": "constant",
+            "notes": "",
+            "source": "Sexual Dimorphism (Female)",
+            "subtab": "misc",
+            "valueAffected": "eac"
+          },
+          {
+            "_id": "c29fbca6-3e30-4837-8846-f18444f82f8f",
+            "name": "Female - Land Speed Bonus",
+            "type": "untyped",
+            "condition": "",
+            "effectType": "specific-speed",
+            "enabled": false,
+            "max": 0,
+            "modifier": "10",
+            "modifierType": "constant",
+            "notes": "",
+            "source": "Sexual Dimorphism (Female)",
+            "subtab": "misc",
+            "valueAffected": "land"
+          },
+          {
+            "_id": "1ae5c29f-54d2-4de7-a2fe-2cda223e002c",
+            "name": "Female - Survival Bonus",
+            "type": "untyped",
+            "condition": "",
+            "effectType": "skill",
+            "enabled": false,
+            "max": 0,
+            "modifier": "10",
+            "modifierType": "constant",
+            "notes": "",
+            "source": "Sexual Dimorphism (Female)",
+            "subtab": "misc",
+            "valueAffected": "sur"
+          }
+        ],
         "properties": {},
         "range": {
           "additional": "",
@@ -580,6 +776,156 @@
           "max": 0,
           "per": null,
           "value": 0
+        }
+      }
+    },
+    {
+      "_id": "V2rClTnjnzi02KAr",
+      "name": "Trample (Ex)",
+      "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "icons/creatures/mammals/ox-bull-horned-glowing-orange.webp",
+      "system": {
+        "type": "",
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "save",
+        "activation": {
+          "type": "full",
+          "condition": "",
+          "cost": 1
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "ft",
+          "value": ""
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "name": "",
+              "formula": "2d6+7",
+              "group": null,
+              "isPrimarySection": true,
+              "types": {
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "piercing": false,
+                "slashing": false,
+                "sonic": false
+              }
+            }
+          ],
+          "primaryGroup": null
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>As a full action, the creature can move up to its speed and through the space of any creatures that are at least one size smaller than itself. The creature does not need to make an attack roll; each creature whose space it moves through takes damage. A target of a trample can attempt a Reflex save with the listed DC to take half damage; if it attempts the save, it can’t make an attack of opportunity against the trampling creature due to the creature’s movement. A creature can deal trample damage to a given target only once per round.</p>\n<p><em>Format</em>:<strong>Offensive Abilities</strong> trample (3d4+14 B, DC 16).</p>\n<p><em>Guidelines</em>: The amount of damage the trample deals should be the same as the creature’s standard melee damage.</p>"
+        },
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "universalCreatureRule",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
+        "duration": {
+          "units": "text",
+          "value": ""
+        },
+        "formula": "",
+        "isActive": null,
+        "modifiers": [],
+        "properties": {},
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "none",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "rollNotes": "",
+        "save": {
+          "type": "reflex",
+          "dc": "13",
+          "descriptor": "half"
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": ""
+        },
+        "source": "AA1 pg. 157",
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "uses": {
+          "max": "",
+          "per": "",
+          "value": null
         }
       }
     }
@@ -718,7 +1064,7 @@
     },
     "attributes": {
       "abilityDC": {
-        "base": 0
+        "base": "0"
       },
       "arms": "2",
       "bab": 0,
@@ -728,7 +1074,7 @@
         "value": 0
       },
       "baseSpellDC": {
-        "base": 0
+        "base": "0"
       },
       "cmd": {
         "min": 0,
@@ -763,7 +1109,7 @@
         "value": 0
       },
       "kac": {
-        "base": null,
+        "base": 19,
         "min": 0,
         "tooltip": [],
         "value": null
@@ -870,6 +1216,7 @@
         "weight": ""
       },
       "class": "",
+      "combatRole": "combatant",
       "cr": 5,
       "environment": "",
       "organization": "",
@@ -880,6 +1227,7 @@
       "race": "",
       "raceAndGrafts": "",
       "source": "AA2 pg. 72",
+      "subtype": "",
       "xp": {
         "value": 10
       }

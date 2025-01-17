@@ -39,7 +39,7 @@
                     <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipSensor.Range" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipSensor.RangeTooltip" }}">
                         <label>{{ localize "SFRPG.ItemSheet.StarshipSensor.Range" }}</label>
                         <select name="system.range">
-                            {{selectOptions config.starshipWeaponRanges selected=itemData.range localize=true}}
+                            {{selectOptions (sfrpg "starshipWeaponRanges") selected=itemData.range localize=true}}
                         </select>
                     </div>
 

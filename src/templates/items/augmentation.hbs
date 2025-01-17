@@ -39,7 +39,7 @@
                                 <label>{{ localize "SFRPG.Items.Augmentation.Type" }}</label>
                                 <div class="form-fields">
                                     <select name="system.type">
-                                        {{selectOptions config.augmentationTypes selected=itemData.type}}
+                                        {{selectOptions (sfrpg "augmentationTypes") selected=itemData.type}}
                                     </select>
                                 </div>
                             </div>
@@ -48,7 +48,7 @@
                                 <label>{{ localize "SFRPG.Items.Augmentation.System" }}</label>
                                 <div class="form-fields">
                                     <select name="system.system">
-                                        {{selectOptions config.augmentationSystems selected=itemData.system}}
+                                        {{selectOptions (sfrpg "augmentationSystems") selected=itemData.system}}
                                     </select>
                                 </div>
                             </div>
