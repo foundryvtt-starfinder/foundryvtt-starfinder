@@ -43,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p>@Icon[type:photon] Photon Revelation</p>\n<p>When your focus shatters, you receive a burst of energy and insight. When the effects of your @UUID[Compendium.sfrpg.class-features.Item.gXYVzmz2P3WRP9vZ]{Sidereal Influence (Su)} class ability end because combat begins, you gain the following benefits for a number of rounds equal to half your Charisma modifier (minimum 1 round). First, you gain a +3 insight bonus to the graviton or photon skills to which your sidereal influence applied. Second, you can apply your Charisma modifier to your initiative check in place of your Dexterity modifier. Third, you can add your Charisma modifier as a bonus to the damage dealt by one weapon attack or stellar revelation per round; this does not stack with other effects that add your Charisma bonus to damage. Finally, you gain a temporary Hit Points equal to your Charisma modifier.</p>\n<p><em>Enable the proper graviton or photon skill bonuses in the Modifiers tab.</em></p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p>@Icon[type:photon] Photon Revelation</p>\n<p>When your focus shatters, you receive a burst of energy and insight. When the effects of your @UUID[Compendium.sfrpg.class-features.Item.gXYVzmz2P3WRP9vZ]{Sidereal Influence (Su)} class ability end because combat begins, you gain the following benefits for a number of rounds equal to half your Charisma modifier (minimum 1 round).</p>\n<p>First, you gain a +3 insight bonus to the graviton or photon skills to which your sidereal influence applied.</p>\n<p>Second, you can apply your Charisma modifier to your initiative check in place of your Dexterity modifier.</p>\n<p>Third, you can add your Charisma modifier as a bonus to the damage dealt by one weapon attack or stellar revelation per round; this does not stack with other effects that add your Charisma bonus to damage.</p>\n<p>Finally, you gain a temporary Hit Points equal to your Charisma modifier.</p>\n<p><em>Enable the proper graviton or photon skill bonuses in the Modifiers tab.</em></p>"
     },
     "descriptors": {
       "acid": false,
@@ -86,7 +86,7 @@
     "details": {
       "category": "classFeature",
       "combat": false,
-      "specialAbilityType": ""
+      "specialAbilityType": "su"
     },
     "duration": {
       "units": "round",
@@ -112,12 +112,12 @@
       },
       {
         "_id": "bfa73ace-e242-45b9-b1b3-18458b2722da",
-        "name": "Explosive Meditation - Disguise (Graiton)",
+        "name": "Explosive Meditation - Disguise (Graviton)",
         "type": "insight",
         "condition": "",
         "effectType": "skill",
         "enabled": false,
-        "max": 3,
+        "max": 0,
         "modifier": "+3",
         "modifierType": "constant",
         "notes": "When the effects of your sidereal influence class ability end because combat begins, you gain the following benefits for a \nnumber of rounds equal to half your Charisma modifier (minimum 1 round). First, you gain a +3 insight bonus to the graviton or photon \nskills to which your sidereal influence applied.",
@@ -251,7 +251,7 @@
         "type": "untyped",
         "condition": "",
         "effectType": "all-damage",
-        "enabled": true,
+        "enabled": false,
         "max": 4,
         "modifier": "@abilities.cha.mod",
         "modifierType": "formula",
@@ -272,6 +272,21 @@
         "modifierType": "constant",
         "notes": "When the effects of your sidereal influence class ability end because combat begins, you gain the following benefits for a \nnumber of rounds equal to half your Charisma modifier (minimum 1 round). First, you gain a +3 insight bonus to the graviton or photon \nskills to which your sidereal influence applied.\n\nFinally, you gain a temporary Hit Points equal to your Charisma modifier",
         "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "5fbedede-e476-4882-8ff7-4a6c11d7f3f0",
+        "name": "Explosive Meditation - Initiative Bonus",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "initiative",
+        "enabled": true,
+        "max": 0,
+        "modifier": "+@abilities.cha.mod - @abilities.dex.mod",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "Explosive Meditation",
         "subtab": "misc",
         "valueAffected": ""
       }
@@ -300,9 +315,9 @@
       "value": ""
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     }
   }
 }

@@ -37,10 +37,27 @@
     "damage": {
       "parts": [
         {
-          "name": "",
+          "name": "Base Damage",
           "formula": "2d6",
           "group": null,
           "isPrimarySection": true,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Spend Resolve Point (Level 8+)",
+          "formula": "@classes.biohacker.levels",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -105,7 +122,7 @@
     "details": {
       "category": "classFeature",
       "combat": false,
-      "specialAbilityType": ""
+      "specialAbilityType": "ex"
     },
     "duration": {
       "units": "text",
