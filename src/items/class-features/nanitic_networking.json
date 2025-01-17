@@ -18,7 +18,7 @@
     "actionType": "skill",
     "activation": {
       "type": "other",
-      "condition": "Spend a nanite surge to attempt Computers skill checks",
+      "condition": "Spend a nanite surge",
       "cost": null
     },
     "area": {
@@ -44,7 +44,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.XrBOn1MueVB4u5sV]{Nanocyte Knack}</p>\n<p>Being microscopic robots themselves, your nanites allow you an unparalleled knowledge of how computers work on the smallest level. You get a +1 insight check to Computers checks. At 10th level and every 4 levels thereafter, this bonus increases by 1. You can spend a nanite surge to attempt Computers skill checks at a range of 20 feet or against targets within or adjacent to your cloud array. A target of this ability (or a creature attending or observing your target) can attempt a Perception or Sense Motive check (DC = 5 + 1-1/2 × your nanocyte level) to determine that you are the origin of this activity.</p>\n<p><em>Choose between Perception or Sense Motive when applying the check.</em></p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.XrBOn1MueVB4u5sV]{Nanocyte Knack}</p>\n<p>Being microscopic robots themselves, your nanites allow you an unparalleled knowledge of how computers work on the smallest level. You get a +1 insight check to Computers checks. At 10th level and every 4 levels thereafter, this bonus increases by 1. You can spend a nanite surge to attempt Computers skill checks at a range of 20 feet or against targets within or adjacent to your cloud array. A target of this ability (or a creature attending or observing your target) can attempt a @Check[type:perception] or @Check[type:sense-motive] (DC = 5 + 1-1/2 × your nanocyte level) to determine that you are the origin of this activity.</p>\n<p><em>Choose between Perception or Sense Motive when applying the check.</em></p>"
     },
     "descriptors": {
       "acid": false,
@@ -87,10 +87,10 @@
     "details": {
       "category": "classFeature",
       "combat": false,
-      "specialAbilityType": ""
+      "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "text",
+      "units": "instantaneous",
       "value": ""
     },
     "formula": "",
@@ -123,7 +123,7 @@
       "charged": false,
       "value": null
     },
-    "requirements": " Level (Nanocyte)",
+    "requirements": "6th Level (Nanocyte)",
     "rollNotes": "",
     "save": {
       "type": "",
@@ -134,15 +134,15 @@
       "type": "",
       "dc": "5 + (floor(@classes.nanocyte.levels * 1.5))"
     },
-    "source": "EN pg. ",
+    "source": "EN pg. 56",
     "target": {
       "type": "",
-      "value": "20 feet or against targets within or adjacent to  your cloud array"
+      "value": "One target within 20 feet or within or adjacent to your cloud array"
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     }
   }
 }

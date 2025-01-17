@@ -43,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.XrBOn1MueVB4u5sV]{Nanocyte Knack}</p>\n<p>Your nanites form an enhancing lattice in your brain, making you capable of mental leaps of staggering brilliance. When you use the @UUID[Compendium.sfrpg.class-features.Item.0pxZbFTgxivIgUnh]{Intelligent Nanites} knack, you can treat the chosen skill as though it were a class skill. If it is already a class skill, you can use half your Constitution modifier instead of your normal modifier to use that skill.</p>\n<p>You must have the intelligent nanites knack to select this knack.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.XrBOn1MueVB4u5sV]{Nanocyte Knack}</p>\n<p>Your nanites form an enhancing lattice in your brain, making you capable of mental leaps of staggering brilliance. When you use the @UUID[Compendium.sfrpg.class-features.Item.0pxZbFTgxivIgUnh]{Intelligent Nanites} knack, you can treat the chosen skill as though it were a class skill. If it is already a class skill, you can use half your Constitution modifier instead of your normal modifier to use that skill.</p>\n<p>You must have the intelligent nanites knack to select this knack.</p>\n<p><em>If the skill is already a class skill, you must edit the modifier on the Modifiers tab to select the skill, and replace @abilities.int.mod with the appropriate normal ability modifier for that skill.</em></p>"
     },
     "descriptors": {
       "acid": false,
@@ -86,7 +86,7 @@
     "details": {
       "category": "classFeature",
       "combat": false,
-      "specialAbilityType": ""
+      "specialAbilityType": "ex"
     },
     "duration": {
       "units": "text",
@@ -94,7 +94,23 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "07f1c8a4-ac7a-4e00-924d-97b4010d83e3",
+        "name": "Nanitic Genius",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 0,
+        "modifier": "floor(@abilities.con.mod/2) - @abilities.int.mod",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "properties": {},
     "range": {
       "additional": "",
