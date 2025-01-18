@@ -18,7 +18,7 @@
     "actionType": "other",
     "activation": {
       "type": "reaction",
-      "condition": "",
+      "condition": "When you damage a creature using a melee technological weapon",
       "cost": 1
     },
     "area": {
@@ -90,10 +90,10 @@
       "specialAbilityType": "su"
     },
     "duration": {
-      "units": "text",
+      "units": "instantaneous",
       "value": ""
     },
-    "formula": "1d10 + @atribtues.int.mod",
+    "formula": "1d10 + @attributes.int.mod",
     "isActive": null,
     "modifiers": [],
     "properties": {},
@@ -111,7 +111,7 @@
     "rollNotes": "",
     "save": {
       "type": "fort",
-      "dc": "10+floor(@classes.technomancer.levels/2) + (@classes.technomancer.keyAbilityMod)",
+      "dc": "10+floor(@classes.technomancer.levels/2) + @classes.technomancer.keyAbilityMod",
       "descriptor": "negate"
     },
     "skillCheck": {
@@ -121,12 +121,12 @@
     "source": "EN pg. 80",
     "target": {
       "type": "",
-      "value": ""
+      "value": "One item in the target’s possession that uses charges"
     },
     "uses": {
-      "max": "0",
-      "per": "",
-      "value": 0
+      "max": "@abilities.int.mod",
+      "per": "day",
+      "value": null
     }
   }
 }

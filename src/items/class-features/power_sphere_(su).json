@@ -22,9 +22,9 @@
       "cost": 1
     },
     "area": {
-      "effect": "",
+      "effect": "burst",
       "shapable": false,
-      "shape": "",
+      "shape": "sphere",
       "units": "ft",
       "value": "30"
     },
@@ -37,10 +37,44 @@
     "damage": {
       "parts": [
         {
-          "name": "",
+          "name": "Electricity",
           "formula": "10d6",
-          "group": null,
+          "group": 0,
           "isPrimarySection": true,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": true,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Fire",
+          "formula": "10d6",
+          "group": 0,
+          "isPrimarySection": false,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Sonic",
+          "formula": "10d6",
+          "group": 0,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -50,7 +84,7 @@
             "healing": false,
             "piercing": false,
             "slashing": false,
-            "sonic": false
+            "sonic": true
           }
         }
       ],
@@ -108,7 +142,7 @@
       "specialAbilityType": "su"
     },
     "duration": {
-      "units": "text",
+      "units": "instantaneous",
       "value": ""
     },
     "formula": "",
@@ -118,7 +152,7 @@
     "range": {
       "additional": "",
       "per": "",
-      "units": "none",
+      "units": "personal",
       "value": ""
     },
     "recharge": {

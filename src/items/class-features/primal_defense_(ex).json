@@ -17,16 +17,16 @@
     "actionTarget": "",
     "actionType": "",
     "activation": {
-      "type": "",
-      "condition": "",
+      "type": "none",
+      "condition": "Optionally, spend 1 Resolve Point",
       "cost": null
     },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "",
-      "value": 0
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -43,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.LqBFTmcuRlPfmRmM]{Shifter}</p>\n<p>When you cast a mystic spell, your body develops defensive features like scales, osteoderms, blubber, or fur until the beginning of your next turn. This grants you damage reduction against all kinetic damage, as well as energy resistance against acid, cold, electricity, fire, and sonic damage until the beginning of your next turn. The value of the DR and energy resistance is equal to the spell’s level. You can spend 1 Resolve Point when you cast a mystic spell to increase the duration of this ability to 1 minute.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.LqBFTmcuRlPfmRmM]{Shifter}</p>\n<p>When you cast a mystic spell, your body develops defensive features like scales, osteoderms, blubber, or fur until the beginning of your next turn. This grants you damage reduction against all kinetic damage, as well as energy resistance against acid, cold, electricity, fire, and sonic damage until the beginning of your next turn. The value of the DR and energy resistance is equal to the spell’s level. You can spend 1 Resolve Point when you cast a mystic spell to increase the duration of this ability to 1 minute.</p>\n<p><em>The DR and ER values must be added to the Modifiers tab based on the spell level used.</em></p>"
     },
     "descriptors": {
       "acid": false,
@@ -90,17 +90,108 @@
     },
     "duration": {
       "units": "text",
-      "value": null
+      "value": "Until the beginning of your next turn"
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "00dbafb1-e92f-41b5-899e-6fbe1e930291",
+        "name": "Damage Reduction",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "damage-reduction",
+        "enabled": true,
+        "max": 0,
+        "modifier": "0",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "a12a99af-2a07-4520-905e-6640c3d6c5c6",
+        "name": "Energy Reduction - Acid",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": true,
+        "max": 0,
+        "modifier": "0",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "acid"
+      },
+      {
+        "_id": "94e67b5d-674c-474d-b2c7-e2a25ddf32f0",
+        "name": "Energy Reduction - Cold",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": true,
+        "max": 0,
+        "modifier": "0",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "cold"
+      },
+      {
+        "_id": "5d964cb0-5925-4da9-b655-2aa19086b7e2",
+        "name": "Energy Reduction - Electricity",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": true,
+        "max": 0,
+        "modifier": "0",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "electricity"
+      },
+      {
+        "_id": "5bda4cd5-53d8-484b-a5aa-10722b132e46",
+        "name": "Energy Reduction - Fire",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": true,
+        "max": 0,
+        "modifier": "0",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "fire"
+      },
+      {
+        "_id": "799b3de9-7494-4ab9-ac58-277db1133bbe",
+        "name": "Energy Reduction - Sonic",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": true,
+        "max": 0,
+        "modifier": "0",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "sonic"
+      }
+    ],
     "properties": {},
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
-      "value": null
+      "units": "none",
+      "value": ""
     },
     "recharge": {
       "charged": false,
@@ -116,12 +207,12 @@
     "source": "EN pg. 52",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "uses": {
-      "max": 0,
-      "per": null,
-      "value": 0
+      "max": "",
+      "per": "",
+      "value": null
     }
   }
 }
