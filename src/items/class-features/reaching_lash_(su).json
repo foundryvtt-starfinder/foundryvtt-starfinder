@@ -17,9 +17,9 @@
     "actionTarget": "",
     "actionType": "",
     "activation": {
-      "type": "other",
-      "condition": "When you expend a witchwarper spell slot to empower your infinity lash",
-      "cost": 1
+      "type": "none",
+      "condition": "Make an attack with the infinity lash",
+      "cost": null
     },
     "area": {
       "effect": "",
@@ -43,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.0JZU0FVnvAJ08fVR]{Paradigm Shift}</p>\n<p>When you expend a witchwarper spell slot to empower your @UUID[Compendium.sfrpg.class-features.Item.s9yQSGGO40x7tEM1]{Infinity Lash (Su)}, you also increase the infinity lash’s reach by 5 feet, plus an additional 5 feet for every two levels of the expended spell slot. Each time you make an attack with the infinity lash, reduce this additional reach by 5 feet. You must have the infinity lash<sup>GM</sup> alternate class feature to take this paradigm shift.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.0JZU0FVnvAJ08fVR]{Paradigm Shift}</p>\n<p>When you expend a witchwarper spell slot to empower your @UUID[Compendium.sfrpg.class-features.Item.s9yQSGGO40x7tEM1]{Infinity Lash (Su)}, you also increase the infinity lash’s reach by 5 feet, plus an additional 5 feet for every two levels of the expended spell slot. Each time you make an attack with the infinity lash, reduce this additional reach by 5 feet. You must have the infinity lash<sup>GM</sup> alternate class feature to take this paradigm shift.</p>\n<p><em>You must manually edit the Limited Uses on this feature to the correct value based on the expended spell slot.</em></p>"
     },
     "descriptors": {
       "acid": false,
@@ -99,8 +99,8 @@
     "range": {
       "additional": "",
       "per": "",
-      "units": "none",
-      "value": ""
+      "units": "ft",
+      "value": "@uses.value * 5"
     },
     "recharge": {
       "charged": false,
@@ -119,9 +119,9 @@
       "value": ""
     },
     "uses": {
-      "max": "0",
-      "per": "",
-      "value": 0
+      "max": "1",
+      "per": "charges",
+      "value": 1
     }
   }
 }
