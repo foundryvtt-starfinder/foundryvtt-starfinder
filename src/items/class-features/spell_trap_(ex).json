@@ -15,11 +15,11 @@
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "other",
+    "actionType": "save",
     "activation": {
       "type": "reaction",
-      "condition": "After you deal damage to a creature within 30 feet with an attack,  spend 2 Resolve Points",
-      "cost": null
+      "condition": "After you deal damage to a creature within 30 feet with an attack, spend 2 Resolve Points",
+      "cost": 1
     },
     "area": {
       "effect": "",
@@ -91,17 +91,33 @@
     },
     "duration": {
       "units": "text",
-      "value": ""
+      "value": "Until the end of your next turn"
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "82bcf7bf-5975-49c4-a49b-3ff651a0b19d",
+        "name": "Spell Trap - AC Bonus",
+        "type": "enhancement",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": true,
+        "max": 0,
+        "modifier": "1",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "Spell Trap",
+        "subtab": "misc",
+        "valueAffected": "both"
+      }
+    ],
     "properties": {},
     "range": {
       "additional": "",
       "per": "",
-      "units": "none",
-      "value": ""
+      "units": "ft",
+      "value": "30"
     },
     "recharge": {
       "charged": false,
@@ -121,7 +137,7 @@
     "source": "EN pg. 49",
     "target": {
       "type": "",
-      "value": "Creature within 30 feet"
+      "value": ""
     },
     "uses": {
       "max": "",

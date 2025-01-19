@@ -37,10 +37,27 @@
     "damage": {
       "parts": [
         {
-          "name": "",
-          "formula": "1d6 + (1d6 * @classes.evolutionist.levels/2)",
-          "group": null,
+          "name": "Slashing Damage",
+          "formula": "1d6 * floor(@classes.evolutionist.levels/2)",
+          "group": 0,
           "isPrimarySection": true,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": true,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Fire Damage",
+          "formula": "1d6",
+          "group": 1,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -49,8 +66,76 @@
             "fire": true,
             "healing": false,
             "piercing": false,
-            "slashing": true,
+            "slashing": false,
             "sonic": false
+          }
+        },
+        {
+          "name": "Acid Damage (2 MP)",
+          "formula": "1d6",
+          "group": 1,
+          "isPrimarySection": false,
+          "types": {
+            "acid": true,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Cold Damage (2 MP)",
+          "formula": "1d6",
+          "group": 1,
+          "isPrimarySection": false,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": true,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Electricity Damage (2 MP)",
+          "formula": "1d6",
+          "group": 1,
+          "isPrimarySection": false,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": true,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Sonic Damage (2 MP)",
+          "formula": "1d6",
+          "group": 1,
+          "isPrimarySection": false,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": true
           }
         }
       ],
@@ -62,7 +147,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.d7srQIGDe42MfrDw]{Divine (Niche)}</p>\n<p>As a standard action, you can inundate an area with divine energy, scouring away all those opposing your values. This area is a 20-foot radius burst that originates at a point within 100 feet of you. The divine energy deals 1d6 fire damage plus 1d6 slashing damage for every 2 evolutionist levels you have (Reflex saving throw for half damage). This damage has the descriptor appropriate for your associated alignment. Creatures of your associated alignment are immune to the damage dealt by this ability. You can spend 2 MP to change the fire damage to another one of the following damage types of your choice: acid, cold, electricity, or sonic.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.d7srQIGDe42MfrDw]{Divine (Niche)}</p>\n<p>As a standard action, you can inundate an area with divine energy, scouring away all those opposing your values. This area is a 20-foot radius burst that originates at a point within 100 feet of you. The divine energy deals 1d6 fire damage plus 1d6 slashing damage for every 2 evolutionist levels you have (Reflex saving throw for half damage). This damage has the descriptor appropriate for your associated alignment. Creatures of your associated alignment are immune to the damage dealt by this ability. You can spend 2 MP to change the fire damage to another one of the following damage types of your choice: acid, cold, electricity, or sonic.</p>\n<p><em>You must add the damage descriptors manually.</em></p>"
     },
     "descriptors": {
       "acid": false,
@@ -118,8 +203,8 @@
     "range": {
       "additional": "",
       "per": "",
-      "units": "none",
-      "value": ""
+      "units": "ft",
+      "value": "100"
     },
     "recharge": {
       "charged": false,
@@ -139,7 +224,7 @@
     "source": "EN pg. 42",
     "target": {
       "type": "",
-      "value": "A point within 100 feet of you"
+      "value": ""
     },
     "uses": {
       "max": "",

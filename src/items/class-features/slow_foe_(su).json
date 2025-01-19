@@ -18,7 +18,7 @@
     "actionType": "",
     "activation": {
       "type": "action",
-      "condition": "You can use a paradox  as part of a standard action to cast slow",
+      "condition": "Use a paradox",
       "cost": 1
     },
     "area": {
@@ -89,8 +89,8 @@
       "specialAbilityType": "su"
     },
     "duration": {
-      "units": "text",
-      "value": ""
+      "units": "round",
+      "value": "@details.cl.value"
     },
     "formula": "",
     "isActive": null,
@@ -116,7 +116,7 @@
     "source": "EN pg. 64",
     "target": {
       "type": "",
-      "value": "A maximum number of targets equal to your Dexterity modifier"
+      "value": "@abilities.dex.mod targets"
     },
     "uses": {
       "max": "lookupRange(@details.level.value, 0, 8, 1, 14, 2)",

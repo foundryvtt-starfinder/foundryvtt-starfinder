@@ -90,11 +90,57 @@
     },
     "duration": {
       "units": "text",
-      "value": "This lasts until you end it as a swift action, take damage that causes you to lose Hit Points, or fail a Will saving throw."
+      "value": "Until you end it as a swift action, take damage that causes you to lose Hit Points, or fail a Will saving throw"
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "c899329e-4f23-486a-b85c-3bbc960864ca",
+        "name": "Covering & Harrying Fire Penalty",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "ranged-attacks",
+        "enabled": false,
+        "max": 0,
+        "modifier": "-2",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "Silent State",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "3e89b6c4-5192-48fb-8648-254f2de1f946",
+        "name": "Aid Another Penalty",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-skills",
+        "enabled": false,
+        "max": 0,
+        "modifier": "-2",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "Silent State",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "342d4e03-026c-4285-bf36-0ad6b0108c31",
+        "name": "Silent State Save Bonus",
+        "type": "circumstance",
+        "condition": "",
+        "effectType": "saves",
+        "enabled": false,
+        "max": 0,
+        "modifier": "lookupRange(@classes.mystic.levels, 2, 9, 3, 15, 4)",
+        "modifierType": "formula",
+        "notes": "Applies to saving throws against emotion, fear, mind-affecting, pain, sense-dependent, and sonic effects",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "properties": {},
     "range": {
       "additional": "",
@@ -119,9 +165,9 @@
       "value": ""
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     }
   }
 }

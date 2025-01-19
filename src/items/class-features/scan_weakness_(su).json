@@ -44,7 +44,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.sobLlAGQkmWcFBFx]{Magic Hack}</p>\n<p>You can scan a creature to find its weakness. As a move action, you can select a creature within 60 feet and attempt a Computers skill check; you can’t take 10 or take 20 on this check, even if an ability would allow you to do so in combat. The DC for this check is equal to 15 + 1-1/2 × the creature’s CR. If you succeed, you gain a +1 circumstance bonus to attack rolls against that creature, and any attacks you make against the target ignore 10 points of the target’s DR and energy resistances; both of these effects last until the beginning of your next turn. A creature you’ve targeted with scan weakness is immune to further uses of this magic hack for 24 hours.</p>\n<p><em>DC must be manually set by the GM.</em></p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.sobLlAGQkmWcFBFx]{Magic Hack}</p>\n<p>You can scan a creature to find its weakness. As a move action, you can select a creature within 60 feet and attempt a Computers skill check; you can’t take 10 or take 20 on this check, even if an ability would allow you to do so in combat. The DC for this check is equal to 15 + 1-1/2 × the creature’s CR. If you succeed, you gain a +1 circumstance bonus to attack rolls against that creature, and any attacks you make against the target ignore 10 points of the target’s DR and energy resistances; both of these effects last until the beginning of your next turn. A creature you’ve targeted with scan weakness is immune to further uses of this magic hack for 24 hours.</p>\n<p><em>DC must be manually set by the GM.</em></p>\n<p><em>Ignoring DR/ER must be done manually.</em></p>"
     },
     "descriptors": {
       "acid": false,
@@ -91,17 +91,33 @@
     },
     "duration": {
       "units": "text",
-      "value": ""
+      "value": "Until the beginning of your next turn"
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "a508bbbb-6fbd-4987-b590-631e9db8aca5",
+        "name": "Weakness Scanned",
+        "type": "circumstance",
+        "condition": "",
+        "effectType": "all-attacks",
+        "enabled": false,
+        "max": 0,
+        "modifier": "1",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "Scan Weakness",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "properties": {},
     "range": {
       "additional": "",
       "per": "",
-      "units": "none",
-      "value": ""
+      "units": "ft",
+      "value": "60"
     },
     "recharge": {
       "charged": false,
@@ -124,9 +140,9 @@
       "value": ""
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     }
   }
 }

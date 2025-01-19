@@ -17,7 +17,7 @@
     "actionTarget": "",
     "actionType": "",
     "activation": {
-      "type": "",
+      "type": "none",
       "condition": "",
       "cost": null
     },
@@ -25,8 +25,8 @@
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "",
-      "value": 0
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -43,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.pjhjTVwvrN4Ly9BR]{Isolation}</p>\n<p>As you detach from reality, you ignore some of its limitations and threats. When you enter your silent state, you gain temporary Hit Points equal to your mystic level. These last until your silent state ends. While in your silent state, if your Wisdom modifier is at least 2 higher than the ability score modifier you apply to an attack roll, you gain a +1 insight bonus to the attack roll. Finally, while in your silent state, creatures take a –1 penalty to initial saving throws against your mystic spells when those creatures are not within melee reach of any of their allies; this does not apply to spells of the highest spell level that you can cast.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.pjhjTVwvrN4Ly9BR]{Isolation}</p>\n<p>As you detach from reality, you ignore some of its limitations and threats. When you enter your @UUID[Compendium.sfrpg.class-features.Item.q5GZ1Oo5U3VODBpf]{Silent State}, you gain temporary Hit Points equal to your mystic level. These last until your silent state ends. While in your silent state, if your Wisdom modifier is at least 2 higher than the ability score modifier you apply to an attack roll, you gain a +1 insight bonus to the attack roll. Finally, while in your silent state, creatures take a –1 penalty to initial saving throws against your mystic spells when those creatures are not within melee reach of any of their allies; this does not apply to spells of the highest spell level that you can cast.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -90,17 +90,33 @@
     },
     "duration": {
       "units": "text",
-      "value": null
+      "value": "Until your Silent State ends"
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "7180fd17-917c-4f16-8ae9-207108b3d284",
+        "name": "Strength in Silence",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "max": 0,
+        "modifier": "1",
+        "modifierType": "formula",
+        "notes": "Applies if your Wisdom modifier is at least 2 higher than the ability score modifier you apply to an attack roll",
+        "source": "Strength in Silence",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "properties": {},
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
-      "value": null
+      "units": "personal",
+      "value": ""
     },
     "recharge": {
       "charged": false,
@@ -116,12 +132,12 @@
     "source": "EN pg. 52",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "uses": {
-      "max": 0,
-      "per": null,
-      "value": 0
+      "max": "",
+      "per": "",
+      "value": null
     }
   }
 }
