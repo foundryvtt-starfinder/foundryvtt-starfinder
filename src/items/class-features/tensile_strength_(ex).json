@@ -43,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.Q2xyE1ba2vCOMJt6]{Transmutation}</p>\n<p>Your transmuted body is stronger and heavier, making you a force to be reckoned with. While your @UUID[Compendium.sfrpg.class-features.Item.58zPVi7ejjc6ggof]{Body Array (Ex)} is active, double your Strength bonus to damage on melee attacks; if you have an ability that allows you to use Constitution in place of Strength to determine melee damage, double your Constitution bonus instead. While your body array is active, whenever you successfully deal damage to a creature with a melee attack, you can immediately attempt a bull rush combat maneuver against that target (this takes no actions and does not provoke attacks of opportunity).</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.Q2xyE1ba2vCOMJt6]{Transmutation}</p>\n<p>Your transmuted body is stronger and heavier, making you a force to be reckoned with. While your @UUID[Compendium.sfrpg.class-features.Item.58zPVi7ejjc6ggof]{Body Array (Ex)} is active, double your Strength bonus to damage on melee attacks; if you have an ability that allows you to use Constitution in place of Strength to determine melee damage, double your Constitution bonus instead. While your body array is active, whenever you successfully deal damage to a creature with a melee attack, you can immediately attempt a bull rush combat maneuver against that target (this takes no actions and does not provoke attacks of opportunity).</p>\n<p><em>Select and enable the correct damage bonus in the Modifiers tab.</em></p>"
     },
     "descriptors": {
       "acid": false,
@@ -94,7 +94,38 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "88b108e2-8e45-4bc5-ab7e-056981000f88",
+        "name": "Double Strength Bonus to Melee Damage",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "melee-damage",
+        "enabled": false,
+        "max": 0,
+        "modifier": "@abilities.str.mod",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "Tensile Strength",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "cf002429-0f6d-4738-be2e-fa3ec4093be1",
+        "name": "Double Constitution Bonus to Melee Damage",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "melee-damage",
+        "enabled": false,
+        "max": 0,
+        "modifier": "@abilities.con.mod",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "Tensile Strength",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "properties": {},
     "range": {
       "additional": "",

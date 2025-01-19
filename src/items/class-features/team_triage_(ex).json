@@ -19,7 +19,7 @@
     "activation": {
       "type": "",
       "condition": "",
-      "cost": 0
+      "cost": null
     },
     "area": {
       "effect": "",
@@ -94,7 +94,23 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "097ece81-b31d-4506-8876-17f9a650d61e",
+        "name": "Team Triage - Treat Deadly Wounds or Disease",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "max": 0,
+        "modifier": "- @skills.med.mod + @skills.com.mod",
+        "modifierType": "formula",
+        "notes": "You can use your Computers modifier instead of your Medicine modifier when treating deadly wounds or treating disease",
+        "source": "Team Triage",
+        "subtab": "misc",
+        "valueAffected": "med"
+      }
+    ],
     "properties": {},
     "range": {
       "additional": "",
