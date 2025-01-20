@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.27.1"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
     "ability": null,
@@ -25,8 +25,8 @@
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -43,16 +43,53 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>As a standard action, you can use your custom rig to modify a touched suit of light armor, heavy armor, or powered armor, granting it a number of temporary Hit Points equal to half your mechanic level. Any damage to the armor or its wearer is subtracted from these temporary Hit Points first. These temporary Hit Points last 1 minute or until reduced to 0. Once you use this ability, you can’t do so again unless you expend a Resolve Point to regain Stamina Points following a 10-minute rest.</p>\n<p>Additionally, when acting in the engineer role during starship combat, instead of taking any other action, you can spend 1 Resolve Point to modify a single quadrant of your starship. You bolster that section of the ship’s armor or defensive countermeasures, increasing the ship’s Armor Class or Target Lock (respectively) in that quadrant by 2 for a number of rounds equal to your mechanic level; alternatively, you can restore a number of Shield Points in that quadrant equal to your mechanic level.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>As a standard action, you can use your custom rig to modify a touched suit of light armor, heavy armor, or powered armor, granting it a number of temporary Hit Points equal to half your mechanic level [[floor(@classes.mechanic.levels/2)]]. Any damage to the armor or its wearer is subtracted from these temporary Hit Points first. These temporary Hit Points last 1 minute or until reduced to 0. Once you use this ability, you can’t do so again unless you expend a Resolve Point to regain Stamina Points following a 10-minute rest.</p>\n<p>Additionally, when acting in the engineer role during starship combat, instead of taking any other action, you can spend 1 Resolve Point to modify a single quadrant of your starship. You bolster that section of the ship’s armor or defensive countermeasures, increasing the ship’s Armor Class or Target Lock (respectively) in that quadrant by 2 for a number of rounds equal to your mechanic level; alternatively, you can restore a number of Shield Points in that quadrant equal to your mechanic level.</p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
     "details": {
       "category": "classFeature",
       "combat": false,
       "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
     "formula": "",
@@ -69,22 +106,22 @@
       "charged": false,
       "value": null
     },
-    "requirements": "8th Level",
+    "requirements": "8th Level (Mechanic)",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "Mechanic",
+    "source": "COM, p. 75",
     "target": {
       "type": "",
       "value": ""
     },
     "uses": {
-      "max": 0,
-      "per": "",
-      "value": 0
+      "max": "1",
+      "per": "sr",
+      "value": 1
     }
   }
 }
