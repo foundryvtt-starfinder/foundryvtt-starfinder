@@ -1097,8 +1097,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         if (this.hasCapacity()) {
             if (this.getCurrentCapacity() <= 0) {
-                ui.notifications.warn(game.i18n.format("SFRPG.StarshipSheet.Weapons.NoCapacity"));
-                return false;
+                // If max capacity is 0, assume the item doesn't have limited fire property
+                if (this.getMaxCapacity() > 0) {
+                    ui.notifications.warn(game.i18n.format("SFRPG.StarshipSheet.Weapons.NoCapacity"));
+                    return false;
+                }
             }
         }
 
@@ -1165,7 +1168,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                     }
 
                     if (this.hasCapacity() && !options.disableDeductAmmo) {
-                        this.consumeCapacity(1);
+                        if (this.getMaxCapacity() > 0) {
+                            this.consumeCapacity(1);
+                        }
                     }
 
                     Hooks.callAll("attackRolled", {actor: this.actor, item: this, roll: roll, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
