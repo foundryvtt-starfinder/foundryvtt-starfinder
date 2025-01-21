@@ -17,7 +17,7 @@ export default function(engine) {
                 return 0;
             }
 
-            const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+            const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
             const computedBonus = roll.total;
 
             if (computedBonus !== 0 && localizationKey) {
@@ -92,7 +92,7 @@ export default function(engine) {
                         return 0;
                     }
 
-                    const roll = Roll.create(modifierBonus.modifier.toString(), data).evaluate({maximize: true});
+                    const roll = Roll.create(modifierBonus.modifier.toString(), data).evaluateSync({strict: false});
                     const computedBonus = roll.total;
 
                     if (computedBonus !== 0) {
@@ -108,7 +108,9 @@ export default function(engine) {
                 }
             }
 
-            data.attributes.speed[speedKey].value = Math.floor(data.attributes.speed[speedKey].value);
+            if (!game.settings.get("sfrpg", "decimalSpeed")) {
+                data.attributes.speed[speedKey].value = Math.floor(data.attributes.speed[speedKey].value);
+            }
 
             if (speedKey === "flying") {
                 data.attributes.speed[speedKey].maneuverability = data.attributes.speed[speedKey].baseManeuverability;

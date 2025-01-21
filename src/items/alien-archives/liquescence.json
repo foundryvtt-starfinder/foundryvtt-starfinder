@@ -2,18 +2,28 @@
   "_id": "qh59JsVlMhg3GawU",
   "name": "Liquescence",
   "type": "npc2",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
+  "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
       "_id": "Ce2HvPeMmIgJ6l4p",
       "name": "Amorphous (Ex)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "flags": {
         "core": {
           "sourceId": "Compendium.sfrpg.universal-creature-rules.WYinJZZxKYueyaY1"
         }
       },
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
@@ -29,6 +39,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -51,6 +62,11 @@
           "value": "<p>The creature’s body is malleable and shapeless. It does not take double damage from critical hits, but it is affected by critical hit effects normally.</p>\n<p><em>Format</em>:<strong>Defensive Abilities</strong> amorphous.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -58,6 +74,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -91,7 +108,12 @@
       "_id": "5ip21M4ZA0IOEfVx",
       "name": "Slam",
       "type": "weapon",
-      "img": "icons/svg/item-bag.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -108,6 +130,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -194,9 +217,11 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -349,12 +374,17 @@
       "_id": "az7Hjk7ZMh5Fz99t",
       "name": "Engulf (Ex)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "flags": {
         "core": {
           "sourceId": "Compendium.sfrpg.universal-creature-rules.u8AzFGnzGkKnTdwZ"
         }
       },
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -370,6 +400,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -406,7 +437,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>As a standard action, the creature can move up to its speed, moving into or through the space of any creatures that are at least one size smaller than itself without penalty. Every creature in the engulfing creature’s path is automatically engulfed, with no attack roll needed. A targeted creature can attempt a Reflex saving throw to avoid being engulfed; if it attempts this save, it can’t make an attack of opportunity against the engulfing creature due to that creature’s movement. On a successful save, the target is pushed back or aside (target’s choice) as the engulfing creature continues to move. An engulfed creature gains the @UUID[Compendium.sfrpg.conditions.XgK4EdO5D3Fj3iWz]{Pinned} condition, takes the listed damage at the beginning of each turn it is engulfed, is in danger of suffocating if it doesn’t have @UUID[Compendium.sfrpg.rules.WP7hddXW4mLXXXOg]{Environmental protections}, and is trapped within the engulfing creature’s body until it is no longer pinned. An engulfed creature moves with the engulfing creature; this movement does not provoke attacks of opportunity against the engulfed creature. A creature can engulf one creature that is one size smaller than itself, up to two creatures that are two sizes smaller, or up to four creatures that are three sizes smaller.</p>\n<p><em>Format</em>:<strong>Offensive Abilities</strong> engulf (1d6+8 F, DC 13).</p>"
+          "value": "<p>As a standard action, the creature can move up to its speed, moving into or through the space of any creatures that are at least one size smaller than itself without penalty. Every creature in the engulfing creature’s path is automatically engulfed, with no attack roll needed. A targeted creature can attempt a Reflex saving throw to avoid being engulfed; if it attempts this save, it can’t make an attack of opportunity against the engulfing creature due to that creature’s movement. On a successful save, the target is pushed back or aside (target’s choice) as the engulfing creature continues to move. An engulfed creature gains the @UUID[Compendium.sfrpg.conditions.Item.XgK4EdO5D3Fj3iWz]{Pinned} condition, takes the listed damage at the beginning of each turn it is engulfed, is in danger of suffocating if it doesn’t have @UUID[Compendium.sfrpg.rules.Item.WP7hddXW4mLXXXOg]{Environmental protections}, and is trapped within the engulfing creature’s body until it is no longer pinned. An engulfed creature moves with the engulfing creature; this movement does not provoke attacks of opportunity against the engulfed creature. A creature can engulf one creature that is one size smaller than itself, up to two creatures that are two sizes smaller, or up to four creatures that are three sizes smaller.</p>\n<p><em>Format</em>:<strong>Offensive Abilities</strong> engulf (1d6+8 F, DC 13).</p>"
         },
         "descriptors": {
           "acid": false,
@@ -446,6 +477,11 @@
           "teleportation": false,
           "water": false
         },
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": ""
@@ -453,6 +489,7 @@
         "formula": "",
         "isActive": false,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -486,12 +523,17 @@
       "_id": "pTKEU1qLEEbqOLaB",
       "name": "Mindless (Ex)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "flags": {
         "core": {
           "sourceId": "Compendium.sfrpg.universal-creature-rules.jj2e3S5XJT1cw5dQ"
         }
       },
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
@@ -507,6 +549,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -526,9 +569,14 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>The creature has no Intelligence score or modifier and is immune to @UUID[Compendium.sfrpg.rules.PqV3OCbUTyk2upPD]{Mind-affecting effects}. Any DCs or other statistics that rely on an Intelligence score treat the creature as having a score of 10(+0).</p>\n<p><em>Format</em>: <strong>Other Abilities</strong> mindless.</p>\n<p><em>Guidelines</em>: Mindless creatures usually have fewer good skills and no master skills. Their skills should be based on inborn abilities, since they’re incapable of training.</p>"
+          "value": "<p>The creature has no Intelligence score or modifier and is immune to @UUID[Compendium.sfrpg.rules.Item.PqV3OCbUTyk2upPD]{Mind-affecting effects}. Any DCs or other statistics that rely on an Intelligence score treat the creature as having a score of 10(+0).</p>\n<p><em>Format</em>: <strong>Other Abilities</strong> mindless.</p>\n<p><em>Guidelines</em>: Mindless creatures usually have fewer good skills and no master skills. Their skills should be based on inborn abilities, since they’re incapable of training.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -536,6 +584,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -569,7 +618,12 @@
       "_id": "nNLHkk0lSK8o88vt",
       "name": "Deteriorate (Su)",
       "type": "feat",
-      "img": "icons/svg/item-bag.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -585,6 +639,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -644,6 +699,11 @@
           "teleportation": false,
           "water": false
         },
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -651,6 +711,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -688,12 +749,17 @@
       "_id": "1iavTR9x1EO2hR6j",
       "name": "Ooze Immunities (Ex)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "flags": {
         "core": {
           "sourceId": "Compendium.sfrpg.universal-creature-rules.MPFlOxUgAIzixex0"
         }
       },
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
@@ -709,6 +775,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -728,9 +795,14 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>Oozes are immune to the following effects, unless the effect specifies that it works against oozes.</p>\n<ul>\n<li>Critical hits, @UUID[Compendium.sfrpg.conditions.NV4qXRDgb7zTNkW2]{Paralysis}, @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Poison}, polymorph, @UUID[Compendium.sfrpg.conditions.3iTdt2NRgIyrychR]{Sleep}, and @UUID[Compendium.sfrpg.conditions.CvsDp0GvojxiF2jz]{Stunning}.</li>\n<li>Gaze abilities, illusions, visual effects, and other attacks that rely on sight.</li>\n<li>Flanking—oozes are unflankable.</li>\n</ul>\n<p><em>Format</em>:<em>Immunities</em> ooze immunities.</p>"
+          "value": "<p>Oozes are immune to the following effects, unless the effect specifies that it works against oozes.</p>\n<ul>\n<li>Critical hits, @UUID[Compendium.sfrpg.conditions.Item.NV4qXRDgb7zTNkW2]{Paralysis}, @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Poison}, polymorph, @UUID[Compendium.sfrpg.conditions.Item.3iTdt2NRgIyrychR]{Sleep}, and @UUID[Compendium.sfrpg.conditions.Item.CvsDp0GvojxiF2jz]{Stunning}.</li>\n<li>Gaze abilities, illusions, visual effects, and other attacks that rely on sight.</li>\n<li>Flanking—oozes are unflankable.</li>\n</ul>\n<p><em>Format</em>:<em>Immunities</em> ooze immunities.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -738,6 +810,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -772,6 +845,7 @@
     "name": "Liquescence",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -783,6 +857,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -803,11 +878,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -821,13 +914,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "src": "systems/sfrpg/icons/default/alien-stare.svg",
+      "tint": "#ffffff"
     },
     "width": 1
   },

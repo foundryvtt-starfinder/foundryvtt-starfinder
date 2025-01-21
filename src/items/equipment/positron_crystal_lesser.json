@@ -2,6 +2,11 @@
   "_id": "RCM5w0qISEqXoMyK",
   "name": "Positron Crystal, Lesser",
   "type": "weapon",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
   "img": "icons/commodities/gems/gem-faceted-round-white.webp",
   "system": {
     "type": "",
@@ -19,6 +24,7 @@
     "ammunitionType": "",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": 0
@@ -71,24 +77,8 @@
       "parts": []
     },
     "damage": {
-      "parts": [
-        {
-          "name": "",
-          "formula": "5d6",
-          "group": null,
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
-            "cold": false,
-            "electricity": false,
-            "fire": true,
-            "healing": false,
-            "piercing": false,
-            "slashing": false,
-            "sonic": false
-          }
-        }
-      ]
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -105,11 +95,43 @@
     },
     "equippable": true,
     "equipped": false,
+    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
     "isActive": null,
+    "isEquipment": true,
     "level": 19,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "461133e0-5b20-4762-bffd-622199b54905",
+        "name": "Positron Crystal, Lesser",
+        "type": "untyped",
+        "condition": "",
+        "damage": {
+          "damageGroup": null,
+          "damageTypes": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        "effectType": "all-damage",
+        "enabled": true,
+        "limitTo": "container",
+        "max": 30,
+        "modifier": "5d6",
+        "modifierType": "damageSection",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "price": 528000,
     "proficient": true,
     "properties": {
@@ -150,6 +172,7 @@
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
       "hybrid": false,
       "hydrodynamic": false,
@@ -220,6 +243,10 @@
       "type": "",
       "dc": "",
       "descriptor": "negate"
+    },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
     },
     "source": "AR pg. 49",
     "special": "",

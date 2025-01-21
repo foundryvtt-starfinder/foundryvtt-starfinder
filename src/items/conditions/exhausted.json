@@ -2,6 +2,11 @@
   "_id": "33ynSbmexuxC3cAQ",
   "name": "Exhausted",
   "type": "effect",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
   "img": "systems/sfrpg/icons/conditions/exhausted.webp",
   "system": {
     "type": "condition",
@@ -11,9 +16,15 @@
     "activeDuration": {
       "activationTime": 0,
       "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "parent"
+      },
       "unit": "permanent",
       "value": 0
     },
+    "context": {},
     "critical": {
       "effect": "",
       "parts": []
@@ -23,8 +34,10 @@
     },
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.rules.0yJjfyvWg5pDLcVR]{Conditions}</p>\n<hr />\n<p>You move at half speed, you can’t run or charge, and you take a –3 penalty to your Armor Class, attack rolls, melee damage rolls, thrown weapon damage rolls that add Strength to damage, Reflex saving throws, initiative checks, and Strength- and Dexterity-based skill and ability checks.</p>\n<p>The amount of bulk you can carry without becoming @UUID[Compendium.sfrpg.conditions.OwZA6flUQPH0jPA0]{Encumbered} is reduced by 3.</p>\n<p>After 1 hour of complete rest, you instead become @UUID[Compendium.sfrpg.conditions.JGFn4MrDZ6X5vrzU]{Fatigued}.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.rules.Item.0yJjfyvWg5pDLcVR]{Conditions}</p>\n<hr />\n<p>You move at half speed, you can’t run or charge, and you take a –3 penalty to your Armor Class, attack rolls, melee damage rolls, thrown weapon damage rolls that add Strength to damage, Reflex saving throws, initiative checks, and Strength- and Dexterity-based skill and ability checks.</p>\n<p>The amount of bulk you can carry without becoming @UUID[Compendium.sfrpg.conditions.Item.OwZA6flUQPH0jPA0]{Encumbered} is reduced by 3.</p>\n<p>After 1 hour of complete rest, you instead become @UUID[Compendium.sfrpg.conditions.Item.JGFn4MrDZ6X5vrzU]{Fatigued}.</p>"
     },
     "enabled": true,
     "modifiers": [
@@ -158,7 +171,9 @@
       }
     ],
     "requirements": "Condition",
+    "showOnToken": true,
     "source": "CRB.276",
-    "sourceActorId": null
+    "sourceActorId": null,
+    "turnEvents": []
   }
 }

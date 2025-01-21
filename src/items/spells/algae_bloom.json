@@ -2,6 +2,11 @@
   "_id": "y63iunABJsV4Ey7k",
   "name": "Algae Bloom",
   "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
   "img": "systems/sfrpg/icons/spells/grease.webp",
   "system": {
     "type": "",
@@ -9,6 +14,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "action",
@@ -17,11 +23,13 @@
     },
     "allowedClasses": {
       "myst": false,
+      "precog": false,
       "tech": false,
       "wysh": true
     },
     "area": {
       "effect": "burst",
+      "shapable": false,
       "shape": "sphere",
       "units": "ft",
       "value": 20
@@ -42,7 +50,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>You conjure a toxic algae bloom composed of particles that are sufficiently tiny to bypass standard environmental protections. Creatures that breathe (whether water or air) that start their turn in or enter the area must attempt a Fortitude save or become @UUID[Compendium.sfrpg.conditions.ZacF0l6IwqBwToTJ]{Sickened} for [[/r 1d4+1]] rounds.</p>\n<p>If the entire area of this spell is underwater, its duration increases to 1 minute per level.</p>"
+      "value": "<p>You conjure a toxic algae bloom composed of particles that are sufficiently tiny to bypass standard environmental protections. Creatures that breathe (whether water or air) that start their turn in or enter the area must attempt a Fortitude save or become @UUID[Compendium.sfrpg.conditions.Item.ZacF0l6IwqBwToTJ]{Sickened} for [[/r 1d4+1]] rounds.</p>\n<p>If the entire area of this spell is underwater, its duration increases to 1 minute per level.</p>"
     },
     "descriptors": [],
     "dismissible": true,
@@ -65,8 +73,12 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
-      "units": "medium"
+      "additional": "",
+      "per": "",
+      "units": "medium",
+      "value": null
     },
     "rollNotes": "",
     "save": {

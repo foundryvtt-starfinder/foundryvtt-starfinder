@@ -2,13 +2,23 @@
   "_id": "NurY9J0nHBlhuIoF",
   "name": "Void Palm",
   "type": "npc2",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
+  "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
       "_id": "0fD99wf4LZ5YPqMj",
       "name": "Void Fronds (Su)",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
@@ -24,6 +34,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -46,6 +57,11 @@
           "value": "<p>When seen in black and white, such as with darkvision in darkness, the pattern on a void palm fronds resembles a dim and distant field of stars. The effect is disorienting. As long as the void palm is in an area of darkness, it has concealment against creatures observing it with darkvision, and such creatures are flat-footed against the palm's attacks.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -53,6 +69,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -86,7 +103,12 @@
       "_id": "Mo5BocjjByaLdh4n",
       "name": "Lash",
       "type": "weapon",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -103,6 +125,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -169,9 +192,11 @@
         },
         "equippable": false,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -298,7 +323,12 @@
       "_id": "DmHhZn2Myc74QLyf",
       "name": "[MultiATK] 3 Lashes",
       "type": "weapon",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -315,6 +345,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -381,9 +412,11 @@
         },
         "equippable": false,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -510,7 +543,12 @@
       "_id": "0Uk4bvwecCzVAyPd",
       "name": "Gravity Void (Su)",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -526,6 +564,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "sphere",
           "units": "ft",
           "value": 20
@@ -548,6 +587,11 @@
           "value": "<p>Once per day as a full action, a void palm can create a dark, zero-gravity area in a 20-foot-radius sphere centered on itself, negating the effects of gravity and nonmagical light sources in that area. Magical light sources in the area work normally. When the void palm uses this ability, each other creature in the area must succeed at a DC 17 Reflex saving throw or become off-kilter. The effect doesn’t move with the void palm and lasts for 10 minutes.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": ""
@@ -555,6 +599,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -589,6 +634,7 @@
     "name": "Void Palm",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -600,6 +646,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 2,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -620,11 +667,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -638,13 +703,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "src": "systems/sfrpg/icons/default/alien-stare.svg",
+      "tint": "#ffffff"
     },
     "width": 2
   },

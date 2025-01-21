@@ -35,7 +35,7 @@ export class TraitSelectorSFRPG extends FormApplication {
         const attr = getProperty(this.object, this.attribute);
         if (typeof attr.value === "string") attr.value = this.constructor._backCompat(attr.value, this.options.choices);
 
-        const choices = duplicate(this.options.choices);
+        const choices = foundry.utils.deepClone(this.options.choices);
         const isEnergyResistance = this.attribute === "system.traits.dr";
         if (!isEnergyResistance) {
             for (const [k, v] of Object.entries(choices)) {

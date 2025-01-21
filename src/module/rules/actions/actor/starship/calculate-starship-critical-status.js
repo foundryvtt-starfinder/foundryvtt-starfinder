@@ -1,4 +1,3 @@
-import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes} from "../../../../modifiers/types.js";
 
 export default function(engine) {
     engine.closures.add( "calculateStarshipCriticalStatus", (fact, context) => {
@@ -23,7 +22,7 @@ export default function(engine) {
             data.attributes.systems = {};
         }
 
-        data.attributes.systems = mergeObject(data.attributes.systems, {
+        data.attributes.systems = foundry.utils.mergeObject(data.attributes.systems, {
             lifeSupport: {
                 value: "nominal",
                 affectedRoles: {

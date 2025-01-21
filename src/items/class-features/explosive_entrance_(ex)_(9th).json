@@ -2,6 +2,11 @@
   "_id": "eGjL8lYt4hQPFlBi",
   "name": "Explosive Entrance (Ex) (9th)",
   "type": "feat",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
   "img": "icons/magic/fire/barrier-wall-explosion-orange.webp",
   "system": {
     "type": "",
@@ -12,15 +17,16 @@
     "actionTarget": "",
     "actionType": "save",
     "activation": {
-      "type": "swift",
-      "condition": "",
-      "cost": 2
+      "type": "action",
+      "condition": "a swift action on your first turn of combat or as a reaction after being subject to a critical hit",
+      "cost": 1
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "sphere",
       "units": "ft",
-      "value": 10
+      "value": "10"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -29,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -37,20 +44,59 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.tniq6wm0fQSzLbB0]{Shock and Awe}</p>\n<p>As a swift action on your first turn of combat or as a reaction after being subject to a critical hit, you can spend 1 Resolve Point to cause your armor, weapons, and other devices’ displays to flash with brilliant lights, blare loudly, or both. This causes all creatures within 10 feet of you to gain your choice of the flat-footed or off-target condition until the end of your next turn. A creature can negate this effect with a successful Fortitude save (DC = 10 + half your soldier level + your Strength modifier). At 15th level, you can affect all creatures within 15 feet of you.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.tniq6wm0fQSzLbB0]{Shock and Awe}</p>\n<p>As a swift action on your first turn of combat or as a reaction after being subject to a critical hit, you can spend 1 Resolve Point to cause your armor, weapons, and other devices’ displays to flash with brilliant lights, blare loudly, or both. This causes all creatures within 10 feet of you to gain your choice of the @UUID[Compendium.sfrpg.conditions.Item.MZ8OoH1GE9qDMyCD]{Flat-Footed} or @UUID[Compendium.sfrpg.conditions.Item.yUtkoIshf4dPruNd]{Off-Target} condition until the end of your next turn. A creature can negate this effect with a successful Fortitude save (DC = 10 + half your soldier level + your Strength modifier). At 15th level, you can affect all creatures within 15 feet of you.</p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
     "details": {
       "category": "classFeature",
+      "combat": false,
       "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
     "formula": "",
     "isActive": null,
     "modifiers": [],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
@@ -61,12 +107,16 @@
       "charged": false,
       "value": null
     },
-    "requirements": "9th Level",
+    "requirements": "9th Level Soldier",
     "rollNotes": "",
     "save": {
       "type": "fort",
       "dc": "10+floor(@classes.soldier.levels/2)+@abilities.str.mod",
       "descriptor": "negate"
+    },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
     },
     "source": "AR pg. 155",
     "target": {
@@ -74,9 +124,9 @@
       "value": ""
     },
     "uses": {
-      "max": 0,
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     }
   }
 }

@@ -2,14 +2,20 @@
   "_id": "SWU8kc6giwSN38PS",
   "name": "Improved Overcharge (Ex)",
   "type": "feat",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
   "img": "systems/sfrpg/icons/classes/improved_overcharge.webp",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
-    "actionType": "",
+    "actionTarget": "",
+    "actionType": "other",
     "activation": {
       "type": "",
       "condition": "",
@@ -17,9 +23,10 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
-      "units": "",
-      "value": null
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -28,16 +35,76 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "",
+          "formula": "2d6",
+          "group": null,
+          "isPrimarySection": true,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ],
+      "primaryGroup": null
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>The additional damage of the overcharge mechanic trick increases to 2d6. You must have the overcharge mechanic trick to learn this trick.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>The additional damage of the overcharge mechanic trick increases to 2d6. You must have the @UUID[Compendium.sfrpg.class-features.Item.cHiFkhnxdxD5CXCD]{overcharge} mechanic trick to learn this trick.</p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
     "details": {
       "category": "classFeature",
+      "combat": false,
       "specialAbilityType": "ex"
     },
     "duration": {
@@ -45,24 +112,31 @@
       "value": null
     },
     "formula": "",
+    "isActive": null,
     "modifiers": [],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
+      "units": "none",
       "value": null
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "8th Level",
+    "requirements": "8th Level (Mechanic)",
+    "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
-    "source": "Mechanic",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
+    "source": "CRB, p. 73",
     "target": {
       "type": "",
       "value": null

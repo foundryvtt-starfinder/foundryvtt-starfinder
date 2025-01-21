@@ -2,13 +2,19 @@
   "_id": "nSgy8368vpbFbI8H",
   "name": "Vehicular Miracle (Ex)",
   "type": "feat",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
     "ability": null,
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "",
@@ -17,6 +23,7 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": null
@@ -36,11 +43,49 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>You can use your miracle worker mechanic class ability one additional time per day, and you can also affect non-starship vehicles with that ability. If the vehicle isn’t wrecked, you restore a number of the vehicle’s Hit Points equal to twice your class level. If the vehicle’s new Hit Points aren’t high enough to remove its broken status, the vehicle functions as if it weren’t broken until the end of your next turn. If you also spend 1 Resolve Point, you can use this ability on a wrecked vehicle, though the vehicle only functions for a number of minutes equal to your Intelligence modifier before being reduced to 0 Hit Points and becoming wrecked again. You can only restore function to a specific wrecked vehicle in this way once, after which that vehicle becomes immune to subsequent uses of the ability. You must have the miracle worker mechanic class ability to choose this trick.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>You can use your miracle worker mechanic class ability one additional time per day, and you can also affect non-starship vehicles with that ability. If the vehicle isn’t wrecked, you restore a number of the vehicle’s Hit Points equal to twice your class level [[2*@classes.mechanic.levels]]. If the vehicle’s new Hit Points aren’t high enough to remove its broken status, the vehicle functions as if it weren’t broken until the end of your next turn. If you also spend 1 Resolve Point, you can use this ability on a wrecked vehicle, though the vehicle only functions for a number of minutes equal to your Intelligence modifier before being reduced to 0 Hit Points and becoming wrecked again. You can only restore function to a specific wrecked vehicle in this way once, after which that vehicle becomes immune to subsequent uses of the ability. You must have the @UUID[Compendium.sfrpg.class-features.Item.D5vkMjJh78XE6KkS]{miracle worker} mechanic class ability to choose this trick.</p>\n<p><em>(You will have to manually increase the uses/day for Miracle Worker)</em></p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
     "details": {
       "category": "classFeature",
+      "combat": false,
       "specialAbilityType": "ex"
     },
     "duration": {
@@ -50,6 +95,7 @@
     "formula": "",
     "isActive": null,
     "modifiers": [],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
@@ -60,7 +106,7 @@
       "charged": false,
       "value": null
     },
-    "requirements": "8th Level",
+    "requirements": "8th Level (Mechanic)",
     "rollNotes": "",
     "save": {
       "type": "",

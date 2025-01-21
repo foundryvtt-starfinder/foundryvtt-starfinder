@@ -93,9 +93,8 @@ export default class RollDialog extends Dialog {
         const data = await super.getData();
         data.formula = this.formula;
         data.rollMode = this.rollMode;
-        data.rollModes = CONFIG.Dice.rollModes;
         data.additionalBonus = this.additionalBonus;
-        data.availableModifiers = duplicate(this.availableModifiers) || [];
+        data.availableModifiers = foundry.utils.deepClone(this.availableModifiers) || [];
         data.hasModifiers = data.availableModifiers.length > 0;
         data.hasSelectors = this.contexts.selectors && this.contexts.selectors.length > 0;
         data.selectors = this.selectors;
@@ -116,7 +115,7 @@ export default class RollDialog extends Dialog {
             if (modifier.modifier !== simplerRoll) {
                 modifier.originalFormula = modifier.modifier;
 
-                // If the formulas are still different without whitespace, then MathTerms must have been simplifed, so let's tell the user.
+                // If the formulas are still different without whitespace, then FunctionTerms must have been simplifed, so let's tell the user.
                 if (modifier.originalFormula.replace(/\s/g, "") !== simplerRoll.replace(/\s/g, "")) {
                     modifier.originalFormulaTooltip = true;
                 }
@@ -164,7 +163,7 @@ export default class RollDialog extends Dialog {
                     part.originalFormula = part.formula;
                     part.formula = simplerRoll;
 
-                    // If the formulas are still different without whitespace, then MathTerms must have been simplifed, so let's tell the user.
+                    // If the formulas are still different without whitespace, then FunctionTerms must have been simplifed, so let's tell the user.
                     if (part.originalFormula.replace(/\s/g, "") !== simplerRoll.replace(/\s/g, "")) {
                         part.originalFormulaTooltip = true;
                     }
@@ -216,28 +215,8 @@ export default class RollDialog extends Dialog {
         const modifierIndex = $(event.currentTarget).data('modifierIndex');
         const modifier = this.availableModifiers[modifierIndex];
 
-        // Non-SFRPGModifier objects
         modifier.enabled = !modifier.enabled;
         this.render(false);
-
-        // SFRPGModifier instances
-        if (modifier._id) {
-            // Toggle modifier object itself
-            modifier.updateSource({"enabled": modifier.enabled});
-
-            const owner = modifier.primaryOwner;
-            if (!owner) return;
-
-            // Find the modifier in the owner and set to the updated object
-            const ownerModifiers = owner.system.modifiers;
-            const index = ownerModifiers.findIndex(x => x._id === modifier._id);
-            if (!index < 0) return;  // Will be -1 if using a global attack modifier
-
-            ownerModifiers[index] = modifier;
-            await owner.update({ "system.modifiers": ownerModifiers });
-            this.render(false);
-
-        }
     }
 
     async _onSelectorChanged(event) {

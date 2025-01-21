@@ -18,7 +18,7 @@ export class ItemCollectionSheet extends DocumentSheet {
 
     static get defaultOptions() {
         const defaultOptions = super.defaultOptions;
-        return mergeObject(defaultOptions, {
+        return foundry.utils.mergeObject(defaultOptions, {
             classes: defaultOptions.classes.concat(['sfrpg', 'actor', 'sheet', 'npc']),
             height: 720,
             width: 720,
@@ -81,14 +81,13 @@ export class ItemCollectionSheet extends DocumentSheet {
      */
     getData() {
         const data = super.getData();
-        data.config = CONFIG.SFRPG;
         data.isCharacter = true;
         data.isOwner = game.user.isGM;
         data.isGM = game.user.isGM;
 
         const tokenData = this.document.getFlag("sfrpg", "itemCollection");
 
-        const items = duplicate(tokenData.items);
+        const items = foundry.utils.deepClone(tokenData.items);
         for (const item of items) {
             item.img = item.img || CONST.DEFAULT_TOKEN;
 
@@ -277,7 +276,7 @@ export class ItemCollectionSheet extends DocumentSheet {
 
     async getChatData(itemData, htmlOptions) {
         console.log(itemData);
-        const data = duplicate(itemData);
+        const data = foundry.utils.deepClone(itemData);
         const labels = itemData.labels || {};
 
         htmlOptions.async = true;
