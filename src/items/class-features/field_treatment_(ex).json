@@ -10,15 +10,15 @@
   "img": "systems/sfrpg/icons/classes/field_treatment.webp",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "",
+    "actionType": "heal",
     "activation": {
       "type": "min",
-      "condition": "",
+      "condition": "Spend a Resolve Point",
       "cost": 1
     },
     "area": {
@@ -35,7 +35,26 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "Field Treatment Healing",
+          "formula": "3*@classes.operative.levels",
+          "group": null,
+          "isPrimarySection": true,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": true,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -43,7 +62,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>You can take 1 minute to tend your wounds and spend 1 Resolve Point to recover a number of Hit Points equal to three times your operative level [[3*@classes.operative.levels]].</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>You can take 1 minute to tend your wounds and spend 1 Resolve Point to recover a number of Hit Points equal to three times your operative level.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -89,7 +108,7 @@
       "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "text",
+      "units": "instantaneous",
       "value": ""
     },
     "formula": "",
@@ -99,7 +118,7 @@
     "range": {
       "additional": "",
       "per": "",
-      "units": "none",
+      "units": "personal",
       "value": null
     },
     "recharge": {
@@ -110,8 +129,12 @@
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
+    },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
     },
     "source": "Operative Exploit",
     "target": {
@@ -119,9 +142,9 @@
       "value": ""
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     }
   }
 }
