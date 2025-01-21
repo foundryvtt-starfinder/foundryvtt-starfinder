@@ -26,7 +26,7 @@
                 <h3 class="bubble-header">{{ localize "SFRPG.ItemSheet.StarshipPowerCore.Header" }}</h3>
 
                 <div class="bubble-info">
-                    
+
                     {{!-- Power Provided --}}
                     <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipPowerCore.ProvidedPower" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipPowerCore.ProvidedPowerTooltip" }}">
                         <label>{{ localize "SFRPG.ItemSheet.StarshipPowerCore.ProvidedPower" }}</label>
@@ -38,7 +38,7 @@
             {{!-- Supported Sizes --}}
             <div class="form-group stacked weapon-properties" data-tooltip="<strong>{{ localize "SFRPG.ItemSheet.StarshipPowerCore.Sizes" }}</strong><br/>{{ localize "SFRPG.ItemSheet.StarshipPowerCore.SizesTooltip" }}">
                 <label>{{ localize "SFRPG.ItemSheet.StarshipPowerCore.Sizes" }}</label>
-                {{#each config.starshipSizes as |typeName typeKey|}}
+                {{#each (sfrpg "starshipSizes") as |typeName typeKey|}}
                 <label class="checkbox">
                     <input type="checkbox" class="system.supportedSizes" data-size="{{typeKey}}" {{checked (contains ../itemData.supportedSizes typeKey)}}/>{{localize typeName}}
                 </label>

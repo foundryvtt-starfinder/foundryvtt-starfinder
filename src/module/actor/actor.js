@@ -198,6 +198,13 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             updates.items = [source];
         }
 
+        // Apply a default icon to the actor based on its type if it doesn't already have an icon selected
+        if (Object.values(SFRPG.foundryDefaultIcons).includes(this.img)) {
+            if (Object.keys(SFRPG.defaultActorIcons).includes(this.type)) {
+                updates.img = ["systems/sfrpg/icons/default/", SFRPG.defaultActorIcons[this.type]].join("");
+            }
+        }
+
         this.updateSource(updates);
 
         return super._preCreate(data, options, user);
@@ -712,6 +719,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             return;
         }
 
+        const useNPCCrew = this.system.crew.useNPCCrew;
         const starshipPackKey = game.settings.get("sfrpg", "starshipActionsSource");
         const starshipActions = game.packs.get(starshipPackKey);
         const actionEntryDocument = await starshipActions.getDocument(actionId);
@@ -786,6 +794,12 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             selectedFormula = actionEntry.system.formula.find(x => x.name === results.result.roll);
         }
 
+        // If it is an NPC crew the bonuses are baked into the modifier already
+        // Remove any piloting bonus from the starship
+        if (useNPCCrew) {
+            selectedFormula.formula = selectedFormula.formula.replace(/\s*\+\s*@ship\.attributes\.pilotingBonus\.value/, "");
+        }
+
         const rollContext = new RollContext();
         rollContext.addContext("ship", this);
         rollContext.setMainContext("ship");
@@ -805,7 +819,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
         let systemBonus = "";
         // Patch and Hold It Together are not affected by critical damage.
-        if (actionEntry.name !== "Patch" && actionEntry.name !== "Hold It Together") {
+        if (!["Patch", "Hold It Together"].includes(actionEntry.name)) {
             // Gunners must select a quadrant.
             if (actionEntry.system.role === "gunner") {
                 if (this.system?.attributes?.systems[`weaponsArray${quadrant}`]?.mod < 0) {
@@ -818,8 +832,10 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                 for (const [key, value] of Object.entries(this.system.attributes.systems)) {
                     if (value.affectedRoles && value.affectedRoles[actionEntry.system.role]) {
                         if (key === "powerCore" && actionEntry.system.role !== "engineer") {
-                            systemBonus += ` + @ship.attributes.systems.${key}.modOther`;
-                        } else {
+                            if (this.system.attributes.systems[key].modOther !== 0) {
+                                systemBonus += ` + @ship.attributes.systems.${key}.modOther`;
+                            }
+                        } else if (this.system.attributes.systems[key].mod !== 0) {
                             systemBonus += ` + @ship.attributes.systems.${key}.mod`;
                         }
                     }
@@ -910,7 +926,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             }
         }
 
-        const rollMode = game.settings.get("core", "rollMode");
+        const rollMode = rollResult.roll?.options?.rollMode ?? game.settings.get("core", "rollMode");
         const preparedRollExplanation = DiceSFRPG.formatFormula(rollResult.formula.formula);
         const rollContent = await rollResult.roll.render({ breakdown: preparedRollExplanation });
 
@@ -918,11 +934,10 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             flavor: flavor,
             speaker: ChatMessage.getSpeaker({ actor: speakerActor }),
             content: rollContent,
-            rollMode: rollMode,
             rolls: [rollResult.roll],
-            type: CONST.CHAT_MESSAGE_STYLES.ROLL,
+            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             sound: CONFIG.sounds.dice
-        });
+        }, { rollMode: rollMode});
     }
 
     levelUp(actorClassId) {

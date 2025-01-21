@@ -131,10 +131,8 @@
                                 <label>{{ localize "SFRPG.ItemSheet.ActorResource.RangeMode" }}</label>
                                 <div class="form-fields">
                                     <select name="system.range.mode">
-                                        {{#select itemData.range.mode}}
-                                        <option value="post">{{ localize "SFRPG.ItemSheet.ActorResource.RangeModePost" }}</option>
-                                        <option value="immediate">{{ localize "SFRPG.ItemSheet.ActorResource.RangeModeImmediate" }}</option>
-                                        {{/select}}
+                                        {{selectOption "post" "SFRPG.ItemSheet.ActorResource.RangeModePost" selected=itemData.range.mode localize=true}}
+                                        {{selectOption "immediate" "SFRPG.ItemSheet.ActorResource.RangeModeImmediate" selected=itemData.range.mode localize=true}}
                                     </select>
                                 </div>
                             </div>
@@ -144,10 +142,8 @@
                                 <label>{{ localize "SFRPG.ItemSheet.ActorResource.Stage" }}</label>
                                 <div class="form-fields">
                                     <select name="system.stage">
-                                        {{#select itemData.stage}}
-                                        <option value="early">{{ localize "SFRPG.ItemSheet.ActorResource.StageEarly" }}</option>
-                                        <option value="late">{{ localize "SFRPG.ItemSheet.ActorResource.StageLate" }}</option>
-                                        {{/select}}
+                                        {{selectOption "early" "SFRPG.ItemSheet.ActorResource.StageEarly" selected=itemData.stage localize=true}}
+                                        {{selectOption "late" "SFRPG.ItemSheet.ActorResource.StageLate" selected=itemData.stage localize=true}}
                                     </select>
                                 </div>
                             </div>
@@ -240,14 +236,12 @@
                                             <div class="visualization-part-mode flexcol">
                                                 <span>{{ localize "SFRPG.ItemSheet.ActorResource.VisualizationsIntro" }}</span>
                                                 <select name="resource-mode">
-                                                    {{#select part.mode}}
-                                                    <option value="eq">{{ localize "SFRPG.ItemSheet.ActorResource.VisualizationsModeEqual" }}</option>
-                                                    <option value="neq">{{ localize "SFRPG.ItemSheet.ActorResource.VisualizationsModeNotEqual" }}</option>
-                                                    <option value="lt">{{ localize "SFRPG.ItemSheet.ActorResource.VisualizationsModeLesserThan" }}</option>
-                                                    <option value="lte">{{ localize "SFRPG.ItemSheet.ActorResource.VisualizationsModeLesserThanEqual" }}</option>
-                                                    <option value="gt">{{ localize "SFRPG.ItemSheet.ActorResource.VisualizationsModeGreaterThan" }}</option>
-                                                    <option value="gte">{{ localize "SFRPG.ItemSheet.ActorResource.VisualizationsModeGreaterThanEqual" }}</option>
-                                                    {{/select}}
+                                                    {{selectOption "eq" "SFRPG.ItemSheet.ActorResource.VisualizationsModeEqual" selected=part.mode localize=true}}
+                                                    {{selectOption "neq" "SFRPG.ItemSheet.ActorResource.VisualizationsModeNotEqual" selected=part.mode localize=true}}
+                                                    {{selectOption "lt" "SFRPG.ItemSheet.ActorResource.VisualizationsModeLesserThan" selected=part.mode localize=true}}
+                                                    {{selectOption "lte" "SFRPG.ItemSheet.ActorResource.VisualizationsModeLesserThanEqual" selected=part.mode localize=true}}
+                                                    {{selectOption "gt" "SFRPG.ItemSheet.ActorResource.VisualizationsModeGreaterThan" selected=part.mode localize=true}}
+                                                    {{selectOption "gte" "SFRPG.ItemSheet.ActorResource.VisualizationsModeGreaterThanEqual" selected=part.mode localize=true}}
                                                 </select>
                                                 <input type="text" name="resource-value" value="{{part.value}}"/>
                                             </div>
@@ -278,7 +272,7 @@
                 {{/if}}
 
             </section>
-            
+
         </div>
 
         {{!-- Modifiers Tab --}}

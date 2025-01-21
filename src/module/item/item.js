@@ -129,13 +129,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Feat Items
         else if (itemData.type === "feat") {
             const act = data.activation;
-            if (act && ["mwak", "rwak", "msak", "rsak"].includes(act.type)) {
-                labels.featType = data?.damage?.parts?.length
-                    ? game.i18n.localize("SFRPG.Attack")
-                    : game.i18n.localize("SFRPG.Items.Actions.TitleAction");
-            } else {
-                labels.featType = game.i18n.localize("SFRPG.Passive");
-            }
+            labels.featType = data?.damage?.parts?.length && ["mwak", "rwak", "msak", "rsak"].includes(data.actionType)
+                ? game.i18n.localize("SFRPG.Attack")
+                : CONFIG.SFRPG.abilityActivationTypes[act.type] ? game.i18n.localize("SFRPG.Items.Action.TitleAction") : game.i18n.localize("SFRPG.Passive");
         }
 
         // Equipment Items
@@ -329,6 +325,13 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             }
         }
 
+        // Apply a default icon to the item based on its type if it doesn't already have an icon selected
+        if (Object.values(SFRPG.foundryDefaultIcons).includes(this.img)) {
+            if (Object.keys(SFRPG.defaultItemIcons).includes(this.type)) {
+                updates.img = ["systems/sfrpg/icons/default/", SFRPG.defaultItemIcons[this.type]].join("");
+            }
+        }
+
         this.updateSource(updates);
 
         return super._preCreate(data, options, user);
@@ -437,12 +440,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Render the chat card template
         const templateType = ["tool", "consumable"].includes(this.type) ? this.type : "item";
         const template = `systems/sfrpg/templates/chat/${templateType}-card.hbs`;
-        const rollMode = game.settings.get("core", "rollMode");
         const html = await renderTemplate(template, templateData);
 
         // Basic chat message data
         const chatData = {
-            user: game.user.id,
+            author: game.user.id,
             type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             content: html,
             flags: {
@@ -455,20 +457,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                     actor: this.actor.uuid
                 }
             },
-            rollMode: rollMode,
             speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor})
         };
 
-        // Toggle default roll mode
-        if (["gmroll", "blindroll"].includes(rollMode)) {
-            chatData["whisper"] = ChatMessage.getWhisperRecipients("GM");
-        }
-        if (rollMode === "blindroll") {
-            chatData["blind"] = true;
-        }
-        if (rollMode === "selfroll") {
-            chatData["whisper"] = ChatMessage.getWhisperRecipients(game.user.name);
-        }
+        const rollMode = game.settings.get("core", "rollMode");
+        ChatMessage.applyRollMode(chatData, rollMode);
 
         // Create the chat message
         return ChatMessage.create(chatData, { displaySheet: false });
@@ -1102,11 +1095,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         }
         const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
 
-        if (this.hasCapacity()) {
-            if (this.getCurrentCapacity() <= 0) {
-                ui.notifications.warn(game.i18n.format("SFRPG.StarshipSheet.Weapons.NoCapacity"));
-                return false;
-            }
+        // If max capacity is 0, assume the item doesn't have limited fire property
+        if (this.hasCapacity() && this.getCurrentCapacity() <= 0 && this.getMaxCapacity() > 0) {
+            ui.notifications.warn(game.i18n.format("SFRPG.StarshipSheet.Weapons.NoCapacity"));
+            return false;
         }
 
         /** Build the roll context */
@@ -1171,7 +1163,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                         this.rollDamage({});
                     }
 
-                    if (this.hasCapacity() && !options.disableDeductAmmo) {
+                    if (this.hasCapacity() && !options.disableDeductAmmo && this.getMaxCapacity() > 0) {
                         this.consumeCapacity(1);
                     }
 
@@ -1560,9 +1552,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             chatMessage: options.chatMessage,
             content: content,
-            rollMode: game.settings.get("core", "rollMode"),
             rolls: [rollResult.roll],
-            type: CONST.CHAT_MESSAGE_STYLES.ROLL,
+            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             sound: CONFIG.sounds.dice
         });
     }
@@ -1615,7 +1606,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
             // Basic chat message data
             const chatData = {
-                user: game.user.id,
+                author: game.user.id,
                 flavor: flavor,
                 type: CONST.CHAT_MESSAGE_STYLES.OTHER,
                 content: html,
@@ -1623,14 +1614,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor})
             };
 
-            // Toggle default roll mode
             const rollMode = game.settings.get("core", "rollMode");
-            if (["gmroll", "blindroll"].includes(rollMode)) {
-                chatData["whisper"] = ChatMessage.getWhisperRecipients("GM");
-            }
-            if (rollMode === "blindroll") {
-                chatData["blind"] = true;
-            }
+            ChatMessage.applyRollMode(chatData, rollMode);
 
             // Create the chat message
             ChatMessage.create(chatData, { displaySheet: false });
@@ -1680,8 +1665,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Display a Chat Message
         const rollMode = game.settings.get("core", "rollMode");
         const chatData = {
-            user: game.user.id,
-            type: CONST.CHAT_MESSAGE_STYLES.ROLL,
+            author: game.user.id,
+            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             flavor: `${this.name} recharge check - ${success ? "success!" : "failure!"}`,
             whisper: (["gmroll", "blindroll"].includes(rollMode)) ? ChatMessage.getWhisperRecipients("GM") : null,
             blind: rollMode === "blindroll",
@@ -2115,4 +2100,3 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         });
     }
 }
-

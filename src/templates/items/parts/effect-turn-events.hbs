@@ -20,7 +20,7 @@
                 <label>{{localize "SFRPG.TurnEvent.Trigger"}}</label>
                 <div class="form-fields">
                     <select name="system.turnEvents.{{i}}.trigger">
-                        {{selectOptions ../config.effectEndTypes selected=event.trigger localize=true}}
+                        {{selectOptions (sfrpg "effectEndTypes") selected=event.trigger localize=true}}
                     </select>
                 </div>
             </div>
@@ -29,7 +29,7 @@
                 <label>{{localize "SFRPG.TurnEvent.Type"}}</label>
                 <div class="form-fields">
                     <select name="system.turnEvents.{{i}}.type">
-                        {{selectOptions ../config.turnEventTypes selected=event.type localize=true}}
+                        {{selectOptions (sfrpg "turnEventTypes") selected=event.type localize=true}}
                     </select>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                 <div class="turn-event-damage form-group stacked">
                     <div class="form-group form-group-stacked">
                         <label>{{localize "Energy Damage"}}</label>
-                        {{#each ../config.energyDamageTypes as |name type|}}
+                        {{#each (sfrpg "energyDamageTypes") as |name type|}}
                             <label class="checkbox">
                                 <input type="checkbox" name="system.turnEvents.{{i}}.damageTypes.{{type}}" {{checked
                                     (lookup event.damageTypes type)}} />{{name}}
@@ -56,7 +56,7 @@
                     </div>
                     <div class="form-group form-group-stacked">
                         <label>{{localize "Kinetic Damage"}}</label>
-                        {{#each ../config.kineticDamageTypes as |name type|}}
+                        {{#each (sfrpg "kineticDamageTypes") as |name type|}}
                             <label class="checkbox">
                                 <input type="checkbox" name="system.turnEvents.{{i}}.damageTypes.{{type}}" {{checked
                                     (lookup event.damageTypes type)}} />{{name}}

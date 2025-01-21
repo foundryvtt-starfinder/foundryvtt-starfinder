@@ -18,11 +18,7 @@
             <label>{{ localize "SFRPG.ItemSheet.PhysicalProperties.Size" }}</label>
             <div class="form-fields">
                 <select class="actor-size" name="system.attributes.size">
-                    {{#select selectedSize}}
-                    {{#each config.actorSizes as |label size|}}
-                        <option value="{{size}}">{{label}}</option>
-                    {{/each}}
-                    {{/select}}
+                    {{selectOptions (sfrpg "actorSizes") selected=selectedSize}}
                 </select>
             </div>
         </div>
@@ -33,6 +29,17 @@
                 <input type="text" name="system.attributes.dex.mod" value="{{itemData.attributes.dex.mod}}" data-dtype="String" placeholder="{{placeholders.dexterityModifier}}"/>
             </div>
         </div>
+
+        {{#unless isPowerArmor}}
+            {{#if itemData.equippable}}
+                <div class="form-group" data-tooltip="{{ localize "SFRPG.ItemSheet.PhysicalProperties.EquippedBulkMultiplierTooltip" }}">
+                    <label>{{ localize "SFRPG.ItemSheet.PhysicalProperties.EquippedBulkMultiplier" }}</label>
+                    <div class="form-fields">
+                        <input type="text" name="system.equippedBulkMultiplier" value="{{itemData.equippedBulkMultiplier}}" data-dtype="Number" placeholder="1"/>
+                    </div>
+                </div>
+            {{/if}}
+        {{/unless}}
 
         {{#if includeMaterials}}
             {{!-- Special Materials Template --}}

@@ -52,7 +52,7 @@
                 <div class="damage-part-type form-group stacked">
                     <div class="form-group form-group-stacked">
                         <label>{{localize "Energy Damage"}}</label>
-                        {{#each ../config.energyDamageTypes as |name type|}}
+                        {{#each (sfrpg "energyDamageTypes") as |name type|}}
                         <label class="checkbox">
                             <input type="checkbox" name="system.damage.parts.{{i}}.types.{{type}}" {{checked (lookup (lookup (lookup ../../itemData.damage.parts i) "types") type)}} />{{name}}
                         </label>
@@ -60,7 +60,7 @@
                     </div>
                     <div class="form-group form-group-stacked">
                         <label>{{localize "Kinetic Damage"}}</label>
-                        {{#each ../config.kineticDamageTypes as |name type|}}
+                        {{#each (sfrpg "kineticDamageTypes") as |name type|}}
                         <label class="checkbox">
                             <input type="checkbox" name="system.damage.parts.{{i}}.types.{{type}}" {{checked (lookup (lookup (lookup ../../itemData.damage.parts i) "types") type)}} />{{name}}
                         </label>
