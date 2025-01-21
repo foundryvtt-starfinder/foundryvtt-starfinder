@@ -1,27 +1,26 @@
 {
-  "_id": "AWo4DU0s18agsFtJ",
-  "name": "Unarmed strike",
-  "type": "weapon",
+  "_id": "AyjGVA4A6vQwNKEW",
+  "name": "Ricochet Shot (Ex)",
+  "type": "feat",
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
     "systemVersion": "0.27.1"
   },
-  "img": "icons/equipment/hand/gauntlet-simple-leather-brown-gold.webp",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
-    "ability": "str",
+    "ability": "dex",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "kac",
-    "actionType": "mwak",
+    "actionType": "",
     "activation": {
       "type": "none",
       "condition": "",
       "cost": null
     },
-    "ammunitionType": "",
     "area": {
       "effect": "",
       "shapable": false,
@@ -29,62 +28,14 @@
       "units": "ft",
       "value": ""
     },
-    "attackBonus": 0,
-    "attributes": {
-      "ac": {
-        "value": "5"
-      },
-      "customBuilt": false,
-      "dex": {
-        "mod": ""
-      },
-      "hardness": {
-        "value": "0"
-      },
-      "hp": {
-        "max": "15",
-        "value": 15
-      },
-      "size": "medium",
-      "sturdy": true
-    },
-    "attuned": false,
-    "bulk": "-",
-    "capacity": {
-      "max": null,
-      "value": null
-    },
+    "attackBonus": null,
     "chatFlavor": "",
-    "container": {
-      "contents": [],
-      "includeContentsInWealthCalculation": true,
-      "isOpen": true,
-      "storage": []
-    },
     "critical": {
       "effect": "",
       "parts": []
     },
     "damage": {
-      "parts": [
-        {
-          "name": "",
-          "formula": "1d3 + @abilities.str.mod",
-          "group": null,
-          "isPrimarySection": true,
-          "types": {
-            "acid": false,
-            "bludgeoning": true,
-            "cold": false,
-            "electricity": false,
-            "fire": false,
-            "healing": false,
-            "piercing": false,
-            "slashing": false,
-            "sonic": false
-          }
-        }
-      ],
+      "parts": [],
       "primaryGroup": null
     },
     "damageNotes": "",
@@ -93,30 +44,80 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>An unarmed strike can be dealt with any limb or appendage. Unarmed strikes deal nonlethal damage, and the damage from an unarmed strike is considered weapon damage for the purposes of effects that give you a bonus to weapon damage rolls.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>When you hit an enemy with a @UUID[Compendium.sfrpg.class-features.Item.MBNI94tbMoqizPUk]{Trick Attack} using a ranged weapon that targets KAC, you can forgo the effects of your @UUID[Compendium.sfrpg.class-features.Item.bhSrjkuWxz2DQHXC]{Debilitating Trick} to instead ricochet the projectile to a second target. Make a ranged attack at –6 against the second target and deal normal damage (without trick attack benefits) if the attack hits. You must have line of effect and line of sight both from you to the second target, and from the first target to the second target. When determining your attack penalties from range against the second target, count the full distance from you to the first target, and then the second target.</p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
+    "details": {
+      "category": "classFeature",
+      "combat": false,
+      "specialAbilityType": "ex"
+    },
     "duration": {
-      "units": "text",
+      "units": "instantaneous",
       "value": ""
     },
-    "equippable": false,
-    "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
-    "identified": true,
     "isActive": null,
-    "isEquipment": true,
-    "level": 0,
-    "modifiers": [],
-    "price": 0,
-    "proficient": false,
+    "modifiers": [
+      {
+        "_id": "25dd483c-eb61-42da-8736-08cdc7ba0a83",
+        "name": "Ricochet Shot (Second Shot)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "ranged-attacks",
+        "enabled": true,
+        "max": 0,
+        "modifier": "-6",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "Ricochet Shot",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "properties": {
       "aeon": false,
       "amm": false,
       "analog": false,
       "antibiological": false,
-      "archaic": true,
+      "archaic": false,
       "aurora": false,
       "automatic": false,
       "blast": false,
@@ -166,8 +167,8 @@
       "mire": false,
       "modal": false,
       "necrotic": false,
-      "nonlethal": true,
-      "one": true,
+      "nonlethal": false,
+      "one": false,
       "operative": false,
       "penetrating": false,
       "polarize": false,
@@ -207,14 +208,17 @@
       "variantBoost": false,
       "wideLine": false
     },
-    "quantity": 1,
-    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
-      "units": "touch",
+      "units": "none",
+      "value": ""
+    },
+    "recharge": {
+      "charged": false,
       "value": null
     },
+    "requirements": "6th Level Operative",
     "rollNotes": "",
     "save": {
       "type": "",
@@ -225,38 +229,15 @@
       "type": "",
       "dc": ""
     },
-    "source": "CRB pg. 171",
-    "special": "",
-    "specialMaterials": {
-      "abysium": false,
-      "adamantine": false,
-      "coldiron": false,
-      "diatha": false,
-      "djezet": false,
-      "horacalcum": false,
-      "inubrix": false,
-      "khefak": false,
-      "noqual": false,
-      "nyblantine": false,
-      "purplecores": false,
-      "siccatite": false,
-      "silver": false,
-      "voidglass": false
-    },
+    "source": "AR pg. 151",
     "target": {
       "type": "",
-      "value": ""
-    },
-    "usage": {
-      "per": "",
-      "value": null
+      "value": "Within line of sight of the first target"
     },
     "uses": {
       "max": "",
       "per": "",
       "value": null
-    },
-    "weaponCategory": "uncategorized",
-    "weaponType": "basicM"
+    }
   }
 }

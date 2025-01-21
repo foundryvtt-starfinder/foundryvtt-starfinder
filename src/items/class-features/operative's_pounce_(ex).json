@@ -1,25 +1,25 @@
 {
-  "_id": "o2GDNS1g87yquIMS",
-  "name": "Staggering Shot (Ex)",
+  "_id": "oAnp71toNIPSNhwm",
+  "name": "Operative's Pounce (Ex)",
   "type": "feat",
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
     "systemVersion": "0.27.1"
   },
-  "img": "systems/sfrpg/icons/classes/staggering_shot.webp",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
-    "ability": "",
+    "ability": null,
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "save",
+    "actionType": "",
     "activation": {
-      "type": "none",
+      "type": "full",
       "condition": "",
-      "cost": null
+      "cost": 1
     },
     "area": {
       "effect": "",
@@ -35,8 +35,7 @@
       "parts": []
     },
     "damage": {
-      "parts": [],
-      "primaryGroup": null
+      "parts": []
     },
     "damageNotes": "",
     "description": {
@@ -44,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>For your @UUID[Compendium.sfrpg.class-features.Item.bhSrjkuWxz2DQHXC]{Debilitating Trick}, you can attempt to stagger your target. The target must succeed at a Fortitude save or be @UUID[Compendium.sfrpg.conditions.Item.aAQ6SW6iK0EVq8Ce]{Staggered} until the beginning of your next turn. Once you’ve used this ability to attempt to stagger a creature, that creature is immune to your staggering shot for 24 hours.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>As a standard action, you can make a @UUID[Compendium.sfrpg.rules.JournalEntry.U37n5tY5hn1ctzQL.JournalEntryPage.Fu5eDR99bGo9WdUU#charge]{Charge} without the normal penalty to attack rolls when attacking on a charge, provided that you use an @UUID[Compendium.sfrpg.rules.JournalEntry.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#operative]{Operative} melee weapon to make the attack at the end of the charge. If the attack hits, you can substitute a @UUID[Compendium.sfrpg.class-features.Item.bhSrjkuWxz2DQHXC]{Debilitating Trick} effect for the damage the attack would deal.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -90,8 +89,8 @@
       "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "text",
-      "value": "Until the beginning of your next turn"
+      "units": "instantaneous",
+      "value": ""
     },
     "formula": "",
     "isActive": null,
@@ -107,18 +106,14 @@
       "charged": false,
       "value": null
     },
-    "requirements": "6th Level",
+    "requirements": "6th Level Operative",
     "rollNotes": "",
     "save": {
-      "type": "fort",
-      "dc": "10+floor(@classes.operative.levels/2) + @abilities.dex.mod",
-      "descriptor": "negate"
-    },
-    "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": null,
+      "descriptor": ""
     },
-    "source": "Operative Exploit",
+    "source": "AR pg. 150",
     "target": {
       "type": "",
       "value": ""

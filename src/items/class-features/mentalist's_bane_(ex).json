@@ -1,13 +1,13 @@
 {
-  "_id": "o2GDNS1g87yquIMS",
-  "name": "Staggering Shot (Ex)",
+  "_id": "76pPNAgYq34lJGJz",
+  "name": "Mentalist's Bane (Ex)",
   "type": "feat",
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
     "systemVersion": "0.27.1"
   },
-  "img": "systems/sfrpg/icons/classes/staggering_shot.webp",
+  "img": "systems/sfrpg/icons/classes/mentalist_bane.webp",
   "system": {
     "type": "",
     "ability": "",
@@ -15,9 +15,9 @@
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "save",
+    "actionType": "skill",
     "activation": {
-      "type": "none",
+      "type": "",
       "condition": "",
       "cost": null
     },
@@ -44,7 +44,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>For your @UUID[Compendium.sfrpg.class-features.Item.bhSrjkuWxz2DQHXC]{Debilitating Trick}, you can attempt to stagger your target. The target must succeed at a Fortitude save or be @UUID[Compendium.sfrpg.conditions.Item.aAQ6SW6iK0EVq8Ce]{Staggered} until the beginning of your next turn. Once you’ve used this ability to attempt to stagger a creature, that creature is immune to your staggering shot for 24 hours.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>If you fail your Will saving throw against a mind-affecting effect with a duration of 1 round or more, you can attempt another saving throw against the effect 1 round later at the same DC. You get only one extra chance to save per effect.</p>\n<p>If you succeed at a saving throw against a charm or compulsion effect, you can prevent the effect’s originator from knowing you succeeded. You gain basic knowledge of what the mental effect would have made you do or feel, and you can attempt a Bluff check to pretend you are under that effect. If the mental effect would provide a link between you and the originator (like the @UUID[Compendium.sfrpg.spells.Item.J14mFZezYHIGHVhO]{Dominate Person}&nbsp;spell), you can choose to allow the link without the control.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -90,8 +90,8 @@
       "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "text",
-      "value": "Until the beginning of your next turn"
+      "units": "",
+      "value": null
     },
     "formula": "",
     "isActive": null,
@@ -110,23 +110,23 @@
     "requirements": "6th Level",
     "rollNotes": "",
     "save": {
-      "type": "fort",
-      "dc": "10+floor(@classes.operative.levels/2) + @abilities.dex.mod",
+      "type": "",
+      "dc": "",
       "descriptor": "negate"
     },
     "skillCheck": {
-      "type": "",
+      "type": "blu",
       "dc": ""
     },
     "source": "Operative Exploit",
     "target": {
       "type": "",
-      "value": ""
+      "value": null
     },
     "uses": {
-      "max": "",
-      "per": "",
-      "value": null
+      "max": 0,
+      "per": null,
+      "value": 0
     }
   }
 }

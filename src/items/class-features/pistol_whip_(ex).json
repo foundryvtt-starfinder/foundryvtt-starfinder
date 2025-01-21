@@ -1,27 +1,26 @@
 {
-  "_id": "AWo4DU0s18agsFtJ",
-  "name": "Unarmed strike",
-  "type": "weapon",
+  "_id": "SR1RnSniGneV4Dbj",
+  "name": "Pistol Whip (Ex)",
+  "type": "feat",
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
     "systemVersion": "0.27.1"
   },
-  "img": "icons/equipment/hand/gauntlet-simple-leather-brown-gold.webp",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
-    "ability": "str",
+    "ability": "dex",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
-      "type": "none",
+      "type": "action",
       "condition": "",
-      "cost": null
+      "cost": 1
     },
-    "ammunitionType": "",
     "area": {
       "effect": "",
       "shapable": false,
@@ -29,38 +28,8 @@
       "units": "ft",
       "value": ""
     },
-    "attackBonus": 0,
-    "attributes": {
-      "ac": {
-        "value": "5"
-      },
-      "customBuilt": false,
-      "dex": {
-        "mod": ""
-      },
-      "hardness": {
-        "value": "0"
-      },
-      "hp": {
-        "max": "15",
-        "value": 15
-      },
-      "size": "medium",
-      "sturdy": true
-    },
-    "attuned": false,
-    "bulk": "-",
-    "capacity": {
-      "max": null,
-      "value": null
-    },
+    "attackBonus": null,
     "chatFlavor": "",
-    "container": {
-      "contents": [],
-      "includeContentsInWealthCalculation": true,
-      "isOpen": true,
-      "storage": []
-    },
     "critical": {
       "effect": "",
       "parts": []
@@ -69,7 +38,7 @@
       "parts": [
         {
           "name": "",
-          "formula": "1d3 + @abilities.str.mod",
+          "formula": "lookupRange(@details.cl.value, 1, 4, 0)d3 + lookupRange(@details.cl.value, 0, 4, 1, 8, 2, 12, 3, 15, 5, 20, 7)d6 + @abilities.str.mod",
           "group": null,
           "isPrimarySection": true,
           "types": {
@@ -93,30 +62,64 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>An unarmed strike can be dealt with any limb or appendage. Unarmed strikes deal nonlethal damage, and the damage from an unarmed strike is considered weapon damage for the purposes of effects that give you a bonus to weapon damage rolls.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>You can use a small arm to make a melee attack. Treat this as an attack using @UUID[Compendium.sfrpg.feats.Item.B45QyyepcPHcjYtr]{Improved Unarmed Strike} (whether or not you have that feat), but the attack is not @UUID[Compendium.sfrpg.rules.JournalEntry.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#archaic]{Archaic}, deals lethal damage, and has the @UUID[Compendium.sfrpg.rules.JournalEntry.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#operative]{Operative} weapon special property. If you have an ability that gives you a special version of @UUID[Compendium.sfrpg.feats.Item.9Us7Eg9cAoq3BcS5]{Weapon Specialization} that allows you to add 1-1/2 × your level to natural or unarmed attacks as damage (such as vesk @UUID[Compendium.sfrpg.racial-features.Item.KfEzPksDco3HYSjz]{Natural Weapons}), you add your level to pistol whip unarmed strikes; otherwise you add half your level as normal for an operative weapon. When you make an unarmed attack, you must decide before making the attack roll whether you are making a normal unarmed attack or using pistol whip to attack with a small arm.</p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
+    "details": {
+      "category": "classFeature",
+      "combat": false,
+      "specialAbilityType": "ex"
+    },
     "duration": {
-      "units": "text",
+      "units": "instantaneous",
       "value": ""
     },
-    "equippable": false,
-    "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
-    "identified": true,
     "isActive": null,
-    "isEquipment": true,
-    "level": 0,
     "modifiers": [],
-    "price": 0,
-    "proficient": false,
     "properties": {
       "aeon": false,
       "amm": false,
-      "analog": false,
+      "analog": true,
       "antibiological": false,
-      "archaic": true,
+      "archaic": false,
       "aurora": false,
       "automatic": false,
       "blast": false,
@@ -166,9 +169,9 @@
       "mire": false,
       "modal": false,
       "necrotic": false,
-      "nonlethal": true,
+      "nonlethal": false,
       "one": true,
-      "operative": false,
+      "operative": true,
       "penetrating": false,
       "polarize": false,
       "polymorphic": false,
@@ -207,14 +210,17 @@
       "variantBoost": false,
       "wideLine": false
     },
-    "quantity": 1,
-    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "touch",
+      "value": ""
+    },
+    "recharge": {
+      "charged": false,
       "value": null
     },
+    "requirements": "2nd Level Operative",
     "rollNotes": "",
     "save": {
       "type": "",
@@ -225,38 +231,15 @@
       "type": "",
       "dc": ""
     },
-    "source": "CRB pg. 171",
-    "special": "",
-    "specialMaterials": {
-      "abysium": false,
-      "adamantine": false,
-      "coldiron": false,
-      "diatha": false,
-      "djezet": false,
-      "horacalcum": false,
-      "inubrix": false,
-      "khefak": false,
-      "noqual": false,
-      "nyblantine": false,
-      "purplecores": false,
-      "siccatite": false,
-      "silver": false,
-      "voidglass": false
-    },
+    "source": "AR pg. 150",
     "target": {
       "type": "",
       "value": ""
-    },
-    "usage": {
-      "per": "",
-      "value": null
     },
     "uses": {
       "max": "",
       "per": "",
       "value": null
-    },
-    "weaponCategory": "uncategorized",
-    "weaponType": "basicM"
+    }
   }
 }
