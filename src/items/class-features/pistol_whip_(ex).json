@@ -28,14 +28,32 @@
       "units": "ft",
       "value": ""
     },
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "effect": "",
       "parts": []
     },
     "damage": {
-      "parts": [],
+      "parts": [
+        {
+          "name": "",
+          "formula": "lookupRange(@details.cl.value, 1, 4, 0)d3 + lookupRange(@details.cl.value, 0, 4, 1, 8, 2, 12, 3, 15, 5, 20, 7)d6 + @abilities.str.mod",
+          "group": null,
+          "isPrimarySection": true,
+          "types": {
+            "acid": false,
+            "bludgeoning": true,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ],
       "primaryGroup": null
     },
     "damageNotes": "",
@@ -44,7 +62,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>You can use a small arm to make a melee attack. Treat this as an attack using @UUID[Compendium.sfrpg.feats.Item.B45QyyepcPHcjYtr]{Improved Unarmed Strike} (whether or not you have that feat), but the attack is not @UUID[Compendium.sfrpg.rules.JournalEntry.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#archaic]{archaic}, deals lethal damage, and has the @UUID[Compendium.sfrpg.rules.JournalEntry.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#operative]{operative} weapon special property. If you have an ability that gives you a special version of @UUID[Compendium.sfrpg.feats.Item.9Us7Eg9cAoq3BcS5]{Weapon Specialization} that allows you to add 1-1/2 × your level to natural or unarmed attacks as damage (such as vesk @UUID[Compendium.sfrpg.racial-features.Item.KfEzPksDco3HYSjz]{natural weapons}), you add your level to pistol whip unarmed strikes; otherwise you add half your level as normal for an operative weapon. When you make an unarmed attack, you must decide before making the attack roll whether you are making a normal unarmed attack or using pistol whip to attack with a small arm.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>You can use a small arm to make a melee attack. Treat this as an attack using @UUID[Compendium.sfrpg.feats.Item.B45QyyepcPHcjYtr]{Improved Unarmed Strike} (whether or not you have that feat), but the attack is not @UUID[Compendium.sfrpg.rules.JournalEntry.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#archaic]{Archaic}, deals lethal damage, and has the @UUID[Compendium.sfrpg.rules.JournalEntry.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#operative]{Operative} weapon special property. If you have an ability that gives you a special version of @UUID[Compendium.sfrpg.feats.Item.9Us7Eg9cAoq3BcS5]{Weapon Specialization} that allows you to add 1-1/2 × your level to natural or unarmed attacks as damage (such as vesk @UUID[Compendium.sfrpg.racial-features.Item.KfEzPksDco3HYSjz]{Natural Weapons}), you add your level to pistol whip unarmed strikes; otherwise you add half your level as normal for an operative weapon. When you make an unarmed attack, you must decide before making the attack roll whether you are making a normal unarmed attack or using pistol whip to attack with a small arm.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -90,7 +108,7 @@
       "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "text",
+      "units": "instantaneous",
       "value": ""
     },
     "formula": "",
@@ -219,9 +237,9 @@
       "value": ""
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     }
   }
 }

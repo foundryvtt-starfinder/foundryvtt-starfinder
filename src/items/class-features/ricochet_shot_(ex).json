@@ -15,11 +15,11 @@
       "parts": []
     },
     "actionTarget": "kac",
-    "actionType": "rwak",
+    "actionType": "",
     "activation": {
-      "type": "special",
+      "type": "none",
       "condition": "",
-      "cost": 0
+      "cost": null
     },
     "area": {
       "effect": "",
@@ -28,7 +28,7 @@
       "units": "ft",
       "value": ""
     },
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "effect": "",
@@ -44,7 +44,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>When you hit an enemy with a @UUID[Compendium.sfrpg.class-features.Item.MBNI94tbMoqizPUk]{trick attack} using a ranged weapon that targets KAC, you can forgo the effects of your @UUID[Compendium.sfrpg.class-features.Item.bhSrjkuWxz2DQHXC]{debilitating trick} to instead ricochet the projectile to a second target. Make a ranged attack at –6 against the second target and deal normal damage (without trick attack benefits) if the attack hits. You must have line of effect and line of sight both from you to the second target, and from the first target to the second target. When determining your attack penalties from range against the second target, count the full distance from you to the first target, and then the second target.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>When you hit an enemy with a @UUID[Compendium.sfrpg.class-features.Item.MBNI94tbMoqizPUk]{Trick Attack} using a ranged weapon that targets KAC, you can forgo the effects of your @UUID[Compendium.sfrpg.class-features.Item.bhSrjkuWxz2DQHXC]{Debilitating Trick} to instead ricochet the projectile to a second target. Make a ranged attack at –6 against the second target and deal normal damage (without trick attack benefits) if the attack hits. You must have line of effect and line of sight both from you to the second target, and from the first target to the second target. When determining your attack penalties from range against the second target, count the full distance from you to the first target, and then the second target.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -95,7 +95,23 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "25dd483c-eb61-42da-8736-08cdc7ba0a83",
+        "name": "Ricochet Shot (Second Shot)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "ranged-attacks",
+        "enabled": true,
+        "max": 0,
+        "modifier": "-6",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "Ricochet Shot",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "properties": {
       "aeon": false,
       "amm": false,
@@ -216,12 +232,12 @@
     "source": "AR pg. 151",
     "target": {
       "type": "",
-      "value": "Have Line of Sight"
+      "value": "Within line of sight of the first target"
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     }
   }
 }

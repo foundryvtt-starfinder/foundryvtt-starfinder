@@ -18,7 +18,7 @@
     "actionType": "",
     "activation": {
       "type": "reaction",
-      "condition": "",
+      "condition": "Optionally spend 1 Resolve Point when hit by an attack or failing a reflex save",
       "cost": 1
     },
     "area": {
@@ -43,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>When you perform a @UUID[Compendium.sfrpg.class-features.Item.MBNI94tbMoqizPUk]{Trick Attack (Ex)}, you make exceptional use of nearby @UUID[Compendium.sfrpg.rules.JournalEntry.Kjba2E3Ad5oMJ7hV.JournalEntryPage.1jkwbVTGQihSpCrL]{cover} and @UUID[Compendium.sfrpg.rules.JournalEntry.Kjba2E3Ad5oMJ7hV.JournalEntryPage.nyB6pt2dd6iVQGmS]{concealment} until the beginning of your next turn. If you have @UUID[Compendium.sfrpg.rules.JournalEntry.Kjba2E3Ad5oMJ7hV.JournalEntryPage.1jkwbVTGQihSpCrL#partial-cover]{partial cover} or cover and would be hit by an attack or fail a Reflex save, you can spend 1 Resolve Point as a @UUID[Compendium.sfrpg.rules.JournalEntry.U37n5tY5hn1ctzQL.JournalEntryPage.GtSmojwt4d6rdEkm]{reaction} to increase the cover’s bonus to your AC and Reflex saves by 2 against that effect; this ability can cause the attack to miss or cause your saving throw to succeed. If an attack would hit you while you have concealment, but the miss chance for concealment hasn’t yet been rolled, you can spend 1 Resolve Point as a reaction to increase the miss chance for concealment by 10% (maximum 35% miss chance). If the triggering attack misses, you can immediately take a @UUID[Compendium.sfrpg.rules.JournalEntry.U37n5tY5hn1ctzQL.JournalEntryPage.SKgwxeMd2gB1g2W8#guarded-step]{guarded step}.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>When you perform a @UUID[Compendium.sfrpg.class-features.Item.MBNI94tbMoqizPUk]{Trick Attack (Ex)}, you make exceptional use of nearby @UUID[Compendium.sfrpg.rules.JournalEntry.Kjba2E3Ad5oMJ7hV.JournalEntryPage.1jkwbVTGQihSpCrL]{Cover} and @UUID[Compendium.sfrpg.rules.JournalEntry.Kjba2E3Ad5oMJ7hV.JournalEntryPage.nyB6pt2dd6iVQGmS]{Concealment} until the beginning of your next turn. If you have @UUID[Compendium.sfrpg.rules.JournalEntry.Kjba2E3Ad5oMJ7hV.JournalEntryPage.1jkwbVTGQihSpCrL#partial-cover]{Partial Cover} or cover and would be hit by an attack or fail a Reflex save, you can spend 1 Resolve Point as a @UUID[Compendium.sfrpg.rules.JournalEntry.U37n5tY5hn1ctzQL.JournalEntryPage.GtSmojwt4d6rdEkm]{Reaction} to increase the cover’s bonus to your AC and Reflex saves by 2 against that effect; this ability can cause the attack to miss or cause your saving throw to succeed. If an attack would hit you while you have concealment, but the miss chance for concealment hasn’t yet been rolled, you can spend 1 Resolve Point as a reaction to increase the miss chance for concealment by 10% (maximum 35% miss chance). If the triggering attack misses, you can immediately take a @UUID[Compendium.sfrpg.rules.JournalEntry.U37n5tY5hn1ctzQL.JournalEntryPage.SKgwxeMd2gB1g2W8#guarded-step]{Guarded Step}.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -90,11 +90,42 @@
     },
     "duration": {
       "units": "text",
-      "value": ""
+      "value": "Until the beginning of your next turn"
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "f6c694b5-5c3c-4eb7-9eb4-2d23c9c6fb9d",
+        "name": "Terrain Concealment - AC Bonus",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": true,
+        "max": 0,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "Only increases the bonus to AC due to cover",
+        "source": "Terrain Concealment",
+        "subtab": "misc",
+        "valueAffected": "both"
+      },
+      {
+        "_id": "67a180af-e09b-4990-8d09-75ef6e1db6bd",
+        "name": "Terrain Concealment - Reflex Saves",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "save",
+        "enabled": true,
+        "max": 0,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "Adds to the reflex saving throw bonus due to cover.",
+        "source": "Terrain Concealment",
+        "subtab": "misc",
+        "valueAffected": "reflex"
+      }
+    ],
     "properties": {},
     "range": {
       "additional": "",
@@ -119,9 +150,9 @@
       "value": ""
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     }
   }
 }
