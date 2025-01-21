@@ -1095,14 +1095,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         }
         const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
 
-        if (this.hasCapacity()) {
-            if (this.getCurrentCapacity() <= 0) {
-                // If max capacity is 0, assume the item doesn't have limited fire property
-                if (this.getMaxCapacity() > 0) {
-                    ui.notifications.warn(game.i18n.format("SFRPG.StarshipSheet.Weapons.NoCapacity"));
-                    return false;
-                }
-            }
+        // If max capacity is 0, assume the item doesn't have limited fire property
+        if (this.hasCapacity() && this.getCurrentCapacity() <= 0 && this.getMaxCapacity() > 0) {
+            ui.notifications.warn(game.i18n.format("SFRPG.StarshipSheet.Weapons.NoCapacity"));
+            return false;
         }
 
         /** Build the roll context */
@@ -1167,10 +1163,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                         this.rollDamage({});
                     }
 
-                    if (this.hasCapacity() && !options.disableDeductAmmo) {
-                        if (this.getMaxCapacity() > 0) {
-                            this.consumeCapacity(1);
-                        }
+                    if (this.hasCapacity() && !options.disableDeductAmmo && this.getMaxCapacity() > 0) {
+                        this.consumeCapacity(1);
                     }
 
                     Hooks.callAll("attackRolled", {actor: this.actor, item: this, roll: roll, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
