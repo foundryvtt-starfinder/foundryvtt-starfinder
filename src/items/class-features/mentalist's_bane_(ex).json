@@ -10,23 +10,23 @@
   "img": "systems/sfrpg/icons/classes/mentalist_bane.webp",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "",
+    "actionType": "skill",
     "activation": {
       "type": "",
       "condition": "",
-      "cost": 0
+      "cost": null
     },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "",
-      "value": null
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -35,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -43,7 +44,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>If you fail your Will saving throw against a mind-affecting effect with a duration of 1 round or more, you can attempt another saving throw against the effect 1 round later at the same DC. You get only one extra chance to save per effect.</p>\n<p>If you succeed at a saving throw against a Charm or compulsion effect, you can prevent the effect’s originator from knowing you succeeded. You gain basic knowledge of what the mental effect would have made you do or feel, and you can attempt a Bluff check to pretend you are under that effect. If the mental effect would provide a link between you and the originator (like the @UUID[Compendium.sfrpg.spells.Item.J14mFZezYHIGHVhO]{Dominate Person}&nbsp;spell), you can choose to allow the link without the control.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>If you fail your Will saving throw against a mind-affecting effect with a duration of 1 round or more, you can attempt another saving throw against the effect 1 round later at the same DC. You get only one extra chance to save per effect.</p>\n<p>If you succeed at a saving throw against a charm or compulsion effect, you can prevent the effect’s originator from knowing you succeeded. You gain basic knowledge of what the mental effect would have made you do or feel, and you can attempt a Bluff check to pretend you are under that effect. If the mental effect would provide a link between you and the originator (like the @UUID[Compendium.sfrpg.spells.Item.J14mFZezYHIGHVhO]{Dominate Person}&nbsp;spell), you can choose to allow the link without the control.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -99,7 +100,7 @@
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
+      "units": "none",
       "value": null
     },
     "recharge": {
@@ -110,8 +111,12 @@
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
+    },
+    "skillCheck": {
+      "type": "blu",
+      "dc": ""
     },
     "source": "Operative Exploit",
     "target": {
