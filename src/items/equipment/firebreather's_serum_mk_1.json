@@ -10,12 +10,12 @@
   "img": "icons/consumables/potions/bottle-corked-red.webp",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "",
+    "actionType": "save",
     "activation": {
       "type": "action",
       "condition": "",
@@ -24,9 +24,9 @@
     "area": {
       "effect": "",
       "shapable": false,
-      "shape": "",
+      "shape": "cone",
       "units": "ft",
-      "value": ""
+      "value": "15"
     },
     "attackBonus": 0,
     "attributes": {
@@ -42,7 +42,7 @@
       },
       "hp": {
         "max": "",
-        "value": 116
+        "value": 11
       },
       "size": "medium",
       "sturdy": false
@@ -73,7 +73,26 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "",
+          "formula": "2d8",
+          "group": null,
+          "isPrimarySection": true,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -81,7 +100,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>This bright red potion is spicy and warm to the touch. When you drink this potion, you gain a magical reserve of power that you can expend to breathe fire. This magical reserve lasts for 1 hour. Twice during the serum’s duration, you can breathe fire in a cone-shaped burst as a standard action. A creature damaged by this fire can succeed at a Reflex saving throw to take half damage. The range of this cone, the damage dealt, and the DC of the Reflex saving throw is determined by the serum’s mark. After breathing fire, you can’t breathe fire again for 1 minute.</p>\n<p>Mk 1 (Level 6; 675 credits): A mk 1 firebreather’s serum deals [[/r 2d8]] fire damage in a 15-foot cone-shaped burst. The DC of Reflex saves for half damage is 15.</p>\n<p>Mk 2 (Level 12; 5,600 credits): A mk 2 firebreather’s serum deals [[/r 6d8]] fire damage in a 30-foot cone-shaped burst. The DC of Reflex saves for half damage is 19.</p>\n<p>Mk 3 (Level 18; 55,000 credits): A mk 3 firebreather’s serum deals [[/r 12d8]] fire damage in a 60-foot cone-shaped burst. The DC of Reflex saves for half damage is 23.</p>"
+      "value": "<p>This bright red potion is spicy and warm to the touch. When you drink this potion, you gain a magical reserve of power that you can expend to breathe fire. This magical reserve lasts for 1 hour. Twice during the serum’s duration, you can breathe fire in a cone-shaped burst as a standard action. A creature damaged by this fire can succeed at a Reflex saving throw to take half damage. The range of this cone, the damage dealt, and the DC of the Reflex saving throw is determined by the serum’s mark. After breathing fire, you can’t breathe fire again for 1 minute.</p>\n<p>Mk 1 (Level 6; 675 credits): A mk 1 firebreather’s serum deals 2d8 fire damage in a 15-foot cone-shaped burst. The DC of Reflex saves for half damage is 15.</p>\n<p>Mk 2 (Level 12; 5,600 credits): A mk 2 firebreather’s serum deals 6d8 fire damage in a 30-foot cone-shaped burst. The DC of Reflex saves for half damage is 19.</p>\n<p>Mk 3 (Level 18; 55,000 credits): A mk 3 firebreather’s serum deals 12d8 fire damage in a 60-foot cone-shaped burst. The DC of Reflex saves for half damage is 23.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -107,9 +126,13 @@
     },
     "rollNotes": "",
     "save": {
+      "type": "reflex",
+      "dc": "15",
+      "descriptor": "half"
+    },
+    "skillCheck": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": ""
     },
     "source": "EN pg. 168",
     "target": {

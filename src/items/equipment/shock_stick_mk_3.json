@@ -10,24 +10,24 @@
   "img": "systems/sfrpg/icons/equipment/goods/credstick.webp",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": null,
+    "actionType": "save",
     "activation": {
-      "type": "",
+      "type": "action",
       "condition": "",
-      "cost": 0
+      "cost": 1
     },
     "ammunitionType": "",
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "",
-      "value": 0
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -66,7 +66,26 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "",
+          "formula": "2d6",
+          "group": null,
+          "isPrimarySection": true,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": true,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -74,12 +93,12 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>This item appears to be a simple credstick but is actually a charged capacitor ready to shock whoever picks it up. Though it was originally created as a prank item, engineers have devised much more dangerous models whose shocks can even be lethal. A character must be actively searching to be able to distinguish a shock stick from a real credstick and must succeed at a Perception check with a DC of 20 + the shock stick’s item level. Once a shock stick is activated as a standard action, it is safe to handle or deactivate (another standard action) for 1 minute, until it reaches full charge. After that, the first creature or metal object to touch it takes electricity damage based on the model (Reflex save for half). Rolling a natural 20 on the Reflex save negates all damage. The shock stick is destroyed upon discharge.</p>\n<p><strong>Mk 1 (Level 1)</strong>: [[2]]{2 electricity damage; DC 12}</p>\n<p><strong>Mk 2 (Level 3)</strong>: [[/r 1d6]]{1d6 electricity damage; DC 14}</p>\n<p><strong>Mk 3 (Level 6)</strong>: [[/r 2d6]]{2d6 electricity damage; DC 16}</p>\n<p><strong>Mk 4 (Level 9)</strong>: [[/r 3d6]]{3d6 electricity damage; DC 20}</p>\n<p><strong>Mk 5 (Level 12)</strong>: [[/r 6d6]]{6d6 electricity damage; DC 22}</p>"
+      "value": "<p>This item appears to be a simple credstick but is actually a charged capacitor ready to shock whoever picks it up. Though it was originally created as a prank item, engineers have devised much more dangerous models whose shocks can even be lethal. A character must be actively searching to be able to distinguish a shock stick from a real credstick and must succeed at a Perception check with a DC of 20 + the shock stick’s item level. Once a shock stick is activated as a standard action, it is safe to handle or deactivate (another standard action) for 1 minute, until it reaches full charge. After that, the first creature or metal object to touch it takes electricity damage based on the model (Reflex save for half). Rolling a natural 20 on the Reflex save negates all damage. The shock stick is destroyed upon discharge.</p>\n<p><strong>Mk 1 (Level 1)</strong>: 2 electricity damage; DC 12</p>\n<p><strong>Mk 2 (Level 3)</strong>: 1d6 electricity damage; DC 14</p>\n<p><strong>Mk 3 (Level 6)</strong>: 2d6 electricity damage; DC 16</p>\n<p><strong>Mk 4 (Level 9)</strong>: 3d6 electricity damage; DC 20</p>\n<p><strong>Mk 5 (Level 12)</strong>: 6d6 electricity damage; DC 22</p>"
     },
     "descriptors": [],
     "duration": {
       "units": "text",
-      "value": null
+      "value": ""
     },
     "equippable": false,
     "equipped": false,
@@ -96,27 +115,31 @@
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
-      "value": null
+      "units": "none",
+      "value": ""
     },
     "rollNotes": "",
     "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": ""
+      "type": "reflex",
+      "dc": "16",
+      "descriptor": "half"
+    },
+    "skillCheck": {
+      "type": "per",
+      "dc": "26"
     },
     "source": "EN pg. 158",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "usage": {
       "per": "",
       "value": 0
     },
     "uses": {
-      "max": null,
-      "per": null,
+      "max": "",
+      "per": "",
       "value": null
     }
   }

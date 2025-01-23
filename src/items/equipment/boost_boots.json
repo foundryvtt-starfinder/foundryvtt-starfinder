@@ -15,19 +15,19 @@
       "parts": []
     },
     "actionTarget": "",
-    "actionType": null,
+    "actionType": "",
     "activation": {
-      "type": "",
-      "condition": "",
-      "cost": 0
+      "type": "swift",
+      "condition": "when you take a move action to move up to your speed",
+      "cost": 1
     },
     "ammunitionType": "",
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "",
-      "value": 0
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -79,9 +79,9 @@
     "descriptors": [],
     "duration": {
       "units": "text",
-      "value": null
+      "value": "Single Move Action"
     },
-    "equippable": false,
+    "equippable": true,
     "equipped": false,
     "formula": "",
     "hands": 0,
@@ -89,7 +89,23 @@
     "isActive": null,
     "level": 6,
     "limitedWear": true,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "b610dcde-6bda-4e93-9d60-2f9b37a08e96",
+        "name": "Boost Boots",
+        "type": "enhancement",
+        "condition": "",
+        "effectType": "specific-speed",
+        "enabled": true,
+        "max": 0,
+        "modifier": "20",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "land"
+      }
+    ],
     "price": 4500,
     "properties": {},
     "quantity": 1,
@@ -97,8 +113,8 @@
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
-      "value": null
+      "units": "none",
+      "value": ""
     },
     "rollNotes": "",
     "save": {
@@ -109,16 +125,16 @@
     "source": "EN pg. 152",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "usage": {
       "per": "action",
       "value": 1
     },
     "uses": {
-      "max": null,
-      "per": null,
-      "value": null
+      "max": "3",
+      "per": "day",
+      "value": 3
     }
   }
 }

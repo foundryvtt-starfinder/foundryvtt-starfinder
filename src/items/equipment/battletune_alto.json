@@ -26,8 +26,8 @@
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -66,9 +66,20 @@
             "fusion"
           ],
           "affectsEncumbrance": true,
-          "amount": 0,
+          "amount": 8,
           "subtype": "fusion",
           "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "ammunition"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "ammunitionSlot",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
@@ -79,10 +90,27 @@
     "damage": {
       "parts": [
         {
-          "name": "",
+          "name": "Powered",
           "formula": "2d4",
           "group": null,
           "isPrimarySection": true,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": true
+          }
+        },
+        {
+          "name": "Unpowered",
+          "formula": "2d4",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": true,
@@ -92,7 +120,7 @@
             "healing": false,
             "piercing": false,
             "slashing": false,
-            "sonic": true
+            "sonic": false
           }
         }
       ],
@@ -235,7 +263,7 @@
       "type": "",
       "dc": ""
     },
-    "source": "AP#46, p. 44",
+    "source": "AP#46, pg. 44",
     "special": "",
     "specialMaterials": {
       "abysium": false,
@@ -259,7 +287,7 @@
     },
     "usage": {
       "per": "shot",
-      "value": 1
+      "value": 2
     },
     "uses": {
       "max": 0,

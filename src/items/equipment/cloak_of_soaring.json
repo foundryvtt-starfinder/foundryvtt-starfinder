@@ -7,7 +7,7 @@
     "systemId": "sfrpg",
     "systemVersion": "0.27.0"
   },
-  "img": "icons/svg/item-bag.svg",
+  "img": "icons/equipment/back/cloak-plain-blue.webp",
   "system": {
     "type": "",
     "ability": null,
@@ -15,19 +15,19 @@
       "parts": []
     },
     "actionTarget": "",
-    "actionType": null,
+    "actionType": "",
     "activation": {
-      "type": "",
-      "condition": "",
-      "cost": 0
+      "type": "reaction",
+      "condition": "when you fall more than 5 feet",
+      "cost": 1
     },
     "ammunitionType": "",
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "",
-      "value": 0
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -79,9 +79,9 @@
     "descriptors": [],
     "duration": {
       "units": "text",
-      "value": null
+      "value": ""
     },
-    "equippable": false,
+    "equippable": true,
     "equipped": false,
     "formula": "",
     "hands": 0,
@@ -89,7 +89,23 @@
     "isActive": null,
     "level": 5,
     "limitedWear": true,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "6d438237-de50-4087-b357-06c4bd541d1e",
+        "name": "Cloak of Soaring",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "specific-speed",
+        "enabled": true,
+        "max": 0,
+        "modifier": "30",
+        "modifierType": "constant",
+        "notes": "Clumsy Maneuverability",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "flying"
+      }
+    ],
     "price": 3300,
     "properties": {},
     "quantity": 1,
@@ -97,8 +113,8 @@
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
-      "value": null
+      "units": "none",
+      "value": ""
     },
     "rollNotes": "",
     "save": {
@@ -106,18 +122,18 @@
       "dc": null,
       "descriptor": ""
     },
-    "source": "EN p. 152",
+    "source": "EN pg. 152",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "usage": {
       "per": "",
       "value": 0
     },
     "uses": {
-      "max": null,
-      "per": null,
+      "max": "",
+      "per": "",
       "value": null
     }
   }

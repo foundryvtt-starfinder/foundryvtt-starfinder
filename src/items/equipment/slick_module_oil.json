@@ -10,24 +10,24 @@
   "img": "icons/svg/item-bag.svg",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": null,
+    "actionType": "save",
     "activation": {
-      "type": "",
+      "type": "special",
       "condition": "",
-      "cost": 0
+      "cost": 1
     },
     "ammunitionType": "",
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "",
-      "value": 0
+      "units": "ft",
+      "value": "10"
     },
     "attackBonus": 0,
     "attributes": {
@@ -66,7 +66,26 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "",
+          "formula": "2d6",
+          "group": null,
+          "isPrimarySection": true,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -79,7 +98,7 @@
     "descriptors": [],
     "duration": {
       "units": "text",
-      "value": null
+      "value": ""
     },
     "equippable": false,
     "equipped": false,
@@ -96,27 +115,31 @@
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
-      "value": null
+      "units": "none",
+      "value": ""
     },
     "rollNotes": "",
     "save": {
+      "type": "reflex",
+      "dc": "10+floor(@details.level.value/2)+@abilities.dex.mod",
+      "descriptor": "half"
+    },
+    "skillCheck": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": ""
     },
     "source": "EN pg. 158 + Errata",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "usage": {
       "per": "",
       "value": 0
     },
     "uses": {
-      "max": null,
-      "per": null,
+      "max": "",
+      "per": "",
       "value": null
     }
   }

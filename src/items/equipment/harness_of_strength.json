@@ -7,7 +7,7 @@
     "systemId": "sfrpg",
     "systemVersion": "0.27.0"
   },
-  "img": "icons/svg/item-bag.svg",
+  "img": "icons/equipment/chest/vest-leather-brown.webp",
   "system": {
     "type": "",
     "ability": null,
@@ -15,19 +15,19 @@
       "parts": []
     },
     "actionTarget": "",
-    "actionType": null,
+    "actionType": "",
     "activation": {
-      "type": "",
+      "type": "move",
       "condition": "",
-      "cost": 0
+      "cost": 1
     },
     "ammunitionType": "",
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "",
-      "value": 0
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -78,10 +78,10 @@
     },
     "descriptors": [],
     "duration": {
-      "units": "text",
-      "value": null
+      "units": "hour",
+      "value": "1"
     },
-    "equippable": false,
+    "equippable": true,
     "equipped": false,
     "formula": "",
     "hands": 0,
@@ -89,7 +89,38 @@
     "isActive": null,
     "level": 2,
     "limitedWear": true,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "b7a60120-c053-4a28-8f64-128b7a531c00",
+        "name": "Harness of Strength",
+        "type": "circumstance",
+        "condition": "",
+        "effectType": "saves",
+        "enabled": true,
+        "max": 0,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "against effects that would cause you to become fatigued or exhausted",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "7660c2c5-839f-47cf-ae36-5dd839d12a80",
+        "name": "Harness of Strength",
+        "type": "circumstance",
+        "condition": "",
+        "effectType": "ability-check",
+        "enabled": true,
+        "max": 0,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "str"
+      }
+    ],
     "price": 700,
     "properties": {},
     "quantity": 1,
@@ -97,8 +128,8 @@
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
-      "value": null
+      "units": "none",
+      "value": ""
     },
     "rollNotes": "",
     "save": {
@@ -109,15 +140,15 @@
     "source": "EN pg. 154",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "usage": {
       "per": "",
       "value": 0
     },
     "uses": {
-      "max": null,
-      "per": null,
+      "max": "",
+      "per": "",
       "value": null
     }
   }
