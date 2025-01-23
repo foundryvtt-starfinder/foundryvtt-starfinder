@@ -184,7 +184,7 @@ The steps below indicate step-by-step what to do to release a new version of the
     4. Run `npm run package` to generate the files to attach to the github release.
     5. Commit all changes, including the compendium files, to master.
 4. On github:
-    1. Create a new release with the version number as the tag (don't include a `v` in front of the version number).
+    1. Create a new release with the version number as the tag (don't include a `v` in front of the version number). Include the changelist for this version in the release notes.
     2. Attach the files in the `package` folder to the release. This should be `system.json` and `sfrpg-x.xx.x.zip`
 5. On the Foundry package admin website, add the new system version and the appropriate links.
 6. On the `development` branch:
