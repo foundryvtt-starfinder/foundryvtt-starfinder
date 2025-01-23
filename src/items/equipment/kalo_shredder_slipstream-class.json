@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.27.1"
   },
   "img": "systems/sfrpg/icons/equipment/weapons/diasporan-rifle-tactical.webp",
   "system": {
@@ -17,19 +17,19 @@
     "actionTarget": "kac",
     "actionType": "rwak",
     "activation": {
-      "type": "none",
+      "type": "",
       "condition": "",
-      "cost": 0
+      "cost": null
     },
     "ammunitionType": "flechettes",
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": ""
     },
-    "attackBonus": 0,
+    "attackBonus": null,
     "attributes": {
       "ac": {
         "value": "5"
@@ -57,7 +57,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": 1,
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -69,17 +69,6 @@
           "amount": 3,
           "subtype": "fusion",
           "weightProperty": "level"
-        },
-        {
-          "type": "slot",
-          "acceptsType": [
-            "goods"
-          ],
-          "affectsEncumbrance": true,
-          "amount": 1,
-          "subtype": "",
-          "weightMultiplier": 1,
-          "weightProperty": ""
         },
         {
           "type": "slot",
@@ -100,13 +89,24 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "1d6",
-          "operator": "",
+          "group": null,
+          "isPrimarySection": true,
           "types": {
-            "slashing": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": true,
+            "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -118,17 +118,34 @@
     },
     "descriptors": [],
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
-    "equippable": false,
+    "equippable": true,
     "equipped": false,
+    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
     "isActive": null,
     "isEquipment": true,
     "level": 3,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "fd5a06e0-18b7-4279-a7be-b7455af1d4ac",
+        "name": "KAC bonus against Disarm",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "cmd",
+        "enabled": true,
+        "max": 0,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "Kalo Shredder",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "price": 1610,
     "proficient": false,
     "properties": {
@@ -145,6 +162,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -163,15 +181,19 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
       "hybrid": false,
+      "hydrodynamic": false,
       "ignite": false,
       "indirect": false,
       "injection": false,
+      "instrumental": false,
       "integrated": false,
       "line": false,
       "living": false,
@@ -189,6 +211,7 @@
       "polymorphic": false,
       "powered": false,
       "professional": false,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
@@ -197,7 +220,9 @@
       "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
+      "shatter": false,
       "shells": false,
       "shield": false,
       "sniper": false,
@@ -210,6 +235,7 @@
       "thought": false,
       "throttle": false,
       "thrown": false,
+      "thruster": false,
       "trip": false,
       "two": true,
       "unbalancing": false,
@@ -224,7 +250,7 @@
       "additional": "",
       "per": "",
       "units": "ft",
-      "value": 30
+      "value": "30"
     },
     "rollNotes": "",
     "save": {
@@ -232,9 +258,28 @@
       "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
     "source": "PW pg. 192",
     "special": "",
-    "specialMaterials": {},
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
@@ -244,7 +289,7 @@
       "value": 1
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     },

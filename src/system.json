@@ -2,12 +2,46 @@
     "id": "sfrpg",
     "title": "Starfinder",
     "description": "A game system for running Starfinder in the Foundry VTT environment.",
-    "version": "0.27.0",
+    "version": "0.27.1",
     "authors": [
         {
             "name": "The Starfinder System Developers"
         }
     ],
+    "compatibility": {
+        "minimum": 12,
+        "verified": "12.331",
+        "maximum": 12
+    },
+    "url": "https://github.com/foundryvtt-starfinder/foundryvtt-starfinder",
+    "manifest": "https://raw.githubusercontent.com/foundryvtt-starfinder/foundryvtt-starfinder/master/src/system.json",
+    "download": "https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/releases/download/0.27.1/sfrpg-0.27.1.zip",
+    "flags": {
+        "sfrpg": {
+            "schema": 0.009
+        },
+        "hotReload": {
+            "extensions": [
+                "css",
+                "hbs",
+                "json"
+            ],
+            "paths": [
+                "templates",
+                "sfrpg.css",
+                "lang"
+            ]
+        }
+    },
+    "socket": true,
+    "initiative": "1d20 + @attributes.init.value",
+    "grid": {
+        "distance": 5,
+        "units": "ft",
+        "diagonals": 4
+    },
+    "primaryTokenAttribute": "attributes.hp",
+    "secondaryTokenAttribute": "attributes.sp",
     "media": [
         {
             "type": "cover",
@@ -25,11 +59,6 @@
             "name": "Starfinder"
         }
     ],
-    "flags": {
-        "sfrpg": {
-            "schema": 0.009
-        }
-    },
     "esmodules": [
         "sfrpg.js"
     ],
@@ -37,7 +66,7 @@
         "sfrpg.css"
     ],
     "packs": [
-		    {
+        {
             "name": "archetypes",
             "label": "Archetypes",
             "system": "sfrpg",
@@ -191,7 +220,7 @@
             "path": "./packs/alien-archives",
             "system": "sfrpg"
         },
-		    {
+        {
             "label": "Hazards",
             "type": "Actor",
             "name": "hazards",
@@ -251,22 +280,5 @@
             "name": "Português (Brasil)",
             "path": "lang/pt-BR.json"
         }
-    ],
-    "socket": true,
-    "initiative": "1d20 + @attributes.init.value",
-    "grid": {
-      "distance": 5,
-      "units": "ft",
-      "diagonals": 4
-    },
-    "primaryTokenAttribute": "attributes.hp",
-    "secondaryTokenAttribute": "attributes.sp",
-    "compatibility": {
-        "minimum": 12,
-        "verified": "12.328",
-        "maximum": 12
-    },
-    "url": "https://github.com/foundryvtt-starfinder/foundryvtt-starfinder",
-    "manifest": "https://raw.githubusercontent.com/foundryvtt-starfinder/foundryvtt-starfinder/master/src/system.json",
-    "download": "https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/releases/download/v0.27.0/sfrpg-v0.27.0.zip"
+    ]
 }

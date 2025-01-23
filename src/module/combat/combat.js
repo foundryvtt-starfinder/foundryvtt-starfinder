@@ -67,7 +67,8 @@ export class CombatSFRPG extends Combat {
     async begin() {
         const update = {
             "flags.sfrpg.combatType": this.getCombatType(),
-            "flags.sfrpg.phase": 0
+            "flags.sfrpg.phase": 0,
+            "round": 1
         };
 
         await this.update(update);
@@ -341,7 +342,7 @@ export class CombatSFRPG extends Combat {
         const eventData = {
             combat: this,
             isNewRound: nextRound !== this.round,
-            isNewPhase: nextRound !== this.round || nextPhase !== this.flags.sfrpg.phase,
+            isNewPhase: nextPhase !== this.flags.sfrpg.phase,
             isNewTurn: (nextRound !== this.round && phases[nextPhase].iterateTurns) || nextTurn !== this.turn,
             oldTurn: this.turn,
             newTurn: nextTurn,
@@ -449,7 +450,7 @@ export class CombatSFRPG extends Combat {
         const speakerName = game.i18n.format(CombatSFRPG.chatCardsText.speaker.GM);
         const templateData = {
             header: {
-                image: "icons/svg/mystery-man.svg",
+                image: "systems/sfrpg/icons/cards/rolling-dices.svg",
                 name: game.i18n.format(CombatSFRPG.chatCardsText.round.headerName, {round: this.round})
             },
             body: {
@@ -478,12 +479,13 @@ export class CombatSFRPG extends Combat {
     async _printNewPhaseChatCard(eventData) {
         const localizedCombatName = this.getCombatName();
         const localizedPhaseName = game.i18n.format(eventData.newPhase.name);
+        const phaseIcon = CONFIG.SFRPG.phaseIcons[eventData.newPhase.name];
 
         // Basic template rendering data
         const speakerName = game.i18n.format(CombatSFRPG.chatCardsText.speaker.GM);
         const templateData = {
             header: {
-                image: "icons/svg/mystery-man.svg",
+                image: phaseIcon,
                 name: game.i18n.format(CombatSFRPG.chatCardsText.phase.headerName, {phase: localizedPhaseName})
             },
             body: {

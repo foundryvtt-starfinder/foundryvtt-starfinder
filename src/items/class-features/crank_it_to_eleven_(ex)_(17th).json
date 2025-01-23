@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.27.1"
   },
   "img": "icons/magic/sonic/bell-alarm-red-purple.webp",
   "system": {
@@ -43,9 +43,46 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.tniq6wm0fQSzLbB0]{Shock and Awe}</p>\n<p>When attacking with a weapon that deals sonic damage or has the bright special property, you deal an amount of additional damage equal to your Strength modifier to targets with the blinded, deafened, or shaken condition.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.tniq6wm0fQSzLbB0]{Shock and Awe}</p>\n<p>When attacking with a weapon that deals sonic damage or has the @UUID[Compendium.sfrpg.rules.JournalEntry.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#bright]{Bright} special property, you deal an amount of additional damage equal to your Strength modifier to targets with the @UUID[Compendium.sfrpg.conditions.Item.tOpF6qjnlnKc10t7]{Blinded}, @UUID[Compendium.sfrpg.conditions.Item.D8JvCEmOiWKe2UDx]{Deafened}, or @UUID[Compendium.sfrpg.conditions.Item.nywSVEeDvp1bk7L3]{Shaken} condition.</p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
     "details": {
       "category": "classFeature",
       "combat": false,
@@ -57,7 +94,23 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "82c8c1a0-4f77-4062-8879-92340839d453",
+        "name": "Crank It to Eleven (Ex) (17th)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-damage",
+        "enabled": false,
+        "max": 0,
+        "modifier": "@abilities.str.mod",
+        "modifierType": "formula",
+        "notes": "When attacking with a weapon that deals sonic damage or has the bright special property, you deal an amount of additional damage equal to your Strength modifier to targets with the blinded, deafened, or shaken condition.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "properties": {},
     "range": {
       "additional": "",
@@ -69,7 +122,7 @@
       "charged": false,
       "value": null
     },
-    "requirements": "17th Level",
+    "requirements": "17th Level Soldier",
     "rollNotes": "",
     "save": {
       "type": "",

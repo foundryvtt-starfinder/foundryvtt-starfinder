@@ -76,7 +76,6 @@ export class ActorSheetSFRPG extends ActorSheet {
             isDrone: this.document.type === 'drone',
             isNPC: this.document.type === 'npc' || this.document.type === 'npc2',
             isHazard: this.document.type === 'hazard',
-            config: CONFIG.SFRPG
         };
 
         data.items = [...this.actor.items.values()];
@@ -1137,13 +1136,12 @@ export class ActorSheetSFRPG extends ActorSheet {
         const parsedDragData = TextEditor.getDragEventData(event);
         if (!parsedDragData) {
             console.log("Unknown item data");
-            return;
+        } else if (parsedDragData.type === 'Item' || parsedDragData.type === 'ItemCollection') {
+            await this.processDroppedItems(event, parsedDragData);
         }
-
-        return this.processDroppedData(event, parsedDragData);
     }
 
-    async processDroppedData(event, parsedDragData) {
+    async processDroppedItems(event, parsedDragData) {
         const targetActor = new ActorItemHelper(this.actor.id, this.token?.id, this.token?.parent?.id, { actor: this.actor });
         if (!ActorItemHelper.IsValidHelper(targetActor)) {
             ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragToExternalTokenError"));

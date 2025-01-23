@@ -64,7 +64,6 @@ export default class SFRPGCustomChatMessage {
             rollType: data.rollType,
             rollNotes: data.htmlData?.find(x => x.name === "rollNotes")?.value,
             type: CONST.CHAT_MESSAGE_STYLES.OTHER,
-            config: CONFIG.SFRPG,
             tokenImg: actor.token?.img || actor.img,
             actorId: actor.id,
             tokenId: this.getToken(actor),

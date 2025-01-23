@@ -2,28 +2,32 @@ import { SFRPG } from "../../../config.js";
 
 function computeCompoundBulkForItem(item, contents) {
     let contentBulk = 0;
+    let calculatedContentBulk = 0;
     const itemData = item.system;
-    // console.log(["computeCompoundBulk", item?.name, contents]);
-    if (itemData?.container?.storage && itemData.container.storage.length > 0) {
-        for (const storage of itemData.container.storage) {
-            const storageIndex = itemData.container.storage.indexOf(storage);
+
+    // If an item has storage
+    if (itemData.container?.storage?.length > 0) {
+        const storageFields = itemData.container.storage;
+        for (const storage of storageFields) {
+            const storageIndex = storageFields.indexOf(storage);
             let storageBulk = 0;
 
             const storedItems = contents.filter(x => itemData.container.contents.find(y => y.id === x.id && y.index === storageIndex));
-            if (storage.affectsEncumbrance) {
-                for (const child of storedItems) {
-                    const childBulk = computeCompoundBulkForItem(child, child.contents);
-                    storageBulk += childBulk.totalBulk;
-                }
+            for (const child of storedItems) {
+                const childBulk = computeCompoundBulkForItem(child, child.contents);
+                storageBulk += childBulk.totalBulk;
             }
 
-            contentBulk += storageBulk;
-            // console.log(`${item.name}, storage ${storageIndex}, contentBulk: ${contentBulk}`);
+            if (storage.affectsEncumbrance) {
+                contentBulk += storageBulk;
+            }
+            calculatedContentBulk += storageBulk;
         }
     } else if (contents?.length > 0) {
         for (const child of contents) {
             const childBulk = computeCompoundBulkForItem(child, child.contents);
             contentBulk += childBulk.totalBulk;
+            calculatedContentBulk += childBulk.totalBulk;
         }
     }
 
@@ -52,7 +56,10 @@ function computeCompoundBulkForItem(item, contents) {
         }
 
         if (itemData.equipped) {
-            const bulkMultiplier = Number.parseInt(itemData.equippedBulkMultiplier);
+            let bulkMultiplier = Number.parseInt(itemData.equippedBulkMultiplier);
+            if (itemData.armor?.type === 'power') {
+                item.getCurrentCapacity() ? bulkMultiplier = 0 : "";
+            }
             if (itemData.equippedBulkMultiplier !== undefined && !Number.isNaN(bulkMultiplier)) {
                 personalBulk *= bulkMultiplier;
             }
@@ -62,6 +69,7 @@ function computeCompoundBulkForItem(item, contents) {
     const itemBulk = {
         personalBulk: personalBulk,
         contentBulk: contentBulk,
+        calculatedContentBulk: calculatedContentBulk,
         totalBulk: personalBulk + contentBulk
     };
 

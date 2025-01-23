@@ -590,7 +590,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             if (SFRPG.starshipDefinitionItemTypes.includes(rawItemData.type)) {
                 return this.actor.createEmbeddedDocuments("Item", [rawItemData]);
             } else if (this.acceptedItemTypes.includes(rawItemData.type)) {
-                return this.processDroppedData(event, data);
+                return this.processDroppedItems(event, data);
             } else {
                 ui.notifications.error(game.i18n.format("SFRPG.InvalidStarshipItem", { name: rawItemData.name }));
                 return false;
@@ -616,7 +616,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             if (acceptedItems.length > 0) {
                 const acceptedItemData = foundry.utils.deepClone(data);
                 acceptedItemData.items = acceptedItems;
-                await this.processDroppedData(event, data);
+                await this.processDroppedItems(event, data);
             }
 
             if (rejectedItems.length > 0) {

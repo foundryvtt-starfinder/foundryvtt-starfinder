@@ -167,8 +167,6 @@
                     "Close": "Fermé",
                     "CloseTooltip": "Ferme la liste dépliante de ce conteneur.",
                     "DetailsHeader": "Détails du contenant",
-                    "EquippedBulkMultiplier": "Multiplicateur de volume équipé",
-                    "EquippedBulkMultiplierTooltip": "Ce multiplicateur est utilisé pour modifier la masse de l'objet lorsqu'il est équipé.<br/>Définir cette valeur à 0 fait en sorte que la masse de l'objet ne compte pas dans les charges de l'acteur lorsqu'il est équipé.",
                     "IncludeContentsInWealthCalculation": "Le contenu affecte la richesse du personnage",
                     "IncludeContentsInWealthCalculationCheckbox": "Les objets contenus sont décomptés de la richesse du personnage",
                     "IncludeContentsInWealthCalculationTooltip": "Si désactivé, les objets contenus n'affectent plus la richesse du personnage.",
@@ -425,7 +423,6 @@
                 "WeaponType": "Type d'arme"
             }
         },
-        "Check": "Jet",
         "CMDBaseTooltip": "Base: 8",
         "CMDKACModTooltip": "CAC: {kac}",
         "CMDModiferTooltip": "{type} Rebonds: {mod} ({source})",
@@ -1169,11 +1166,11 @@
         "ItemMacro": {
             "Activate": "Activer",
             "Attack": "Attaquer",
+            "Cast": "Lancer",
             "Damage": "Dégâts",
             "Healing": "Soigner",
             "Reload": "Recharger",
-            "Use": "Utiliser",
-            "Cast": "Lancer"
+            "Use": "Utiliser"
         },
         "ItemNoAmmo": "{name} n'a plus de munitions !",
         "ItemSheet": {
@@ -1300,6 +1297,8 @@
                 "CustomBuiltTooltip": "Cet objet a-t-il été créé par un personnage ou produit en série ?",
                 "DexterityModifier": "Modificateur de Dextérité",
                 "DexterityModifierTooltip": "S'il est inanimé, le modificateur de dextérité d'un objet est de -5.",
+                "EquippedBulkMultiplier": "Multiplicateur de volume équipé",
+                "EquippedBulkMultiplierTooltip": "Ce multiplicateur est utilisé pour modifier la masse de l'objet lorsqu'il est équipé.<br/>Définir cette valeur à 0 fait en sorte que la masse de l'objet ne compte pas dans les charges de l'acteur lorsqu'il est équipé.",
                 "Hardness": "Solidité",
                 "HardnessTooltip": "<strong>Solidité</strong><br/>Lorsque vous faites des dégâts, soustrayez la dureté de l'article des dégâts à venir avant de les appliquer.",
                 "Header": "Propriétés physiques",
@@ -1327,10 +1326,10 @@
             "StarshipAction": {
                 "ActionDC": "DD Action",
                 "AddSubactionTooltip": "<strong>Ajouter une Sous-Action</strong><br />Ajouter une nouvelle sous-action",
-                "CrewRole": "Rôle équipage",
-                "DCPlaceholder": "5 + 1,5 x Niveau du vaisseau cible",
                 "CheckFormula": "Formule du Test de Compétence",
+                "CrewRole": "Rôle équipage",
                 "CriticalEffect": "Effet Critique",
+                "DCPlaceholder": "5 + 1,5 x Niveau du vaisseau cible",
                 "DeleteSubactionTooltip": "<strong>Effacer la Sous-Action</strong><br />Effacer cette sous-action",
                 "IsPushAction": "Action Pousser?",
                 "NormalEffect": "Effet Normal",
@@ -1339,9 +1338,9 @@
                 "PushResolve": "Pousser et résoudre",
                 "ResolveFormulaAutomatically": "Résoudre cette formule automatiquement",
                 "ResolveFormulaAutomaticallyTooltip": "Si cette case est cochée, Target DC sera résolu automatiquement sous forme de formule et le résultat s'affichera dans la boîte de dialogue lorsque l'action sera déclenchée. Dans le cas contraire, c'est la chaîne brute qui s'affichera dans la boîte de dialogue.",
-                "SkillOrSubaction": "Nom de la compétence ou de la sous-action",
-                "SkillFormulaOrSubactions": "Formule de compétence / Sous-actions",
                 "SkillFormulaAndSubactions": "Formule de compétence et sous-actions",
+                "SkillFormulaOrSubactions": "Formule de compétence / Sous-actions",
+                "SkillOrSubaction": "Nom de la compétence ou de la sous-action",
                 "SubactionPart": "Sous-action {section}",
                 "Subactions": "Sous-actions",
                 "TargetDC": "DD de la Cilbe",
@@ -1525,9 +1524,8 @@
                 "DamageNotesTooltip": "Les notes de dégâts sont affichées sur la carte de dégâts dans le Chat. C'est un bon moyen d'y mettre des rappels utiles, particulièrement pour les MJ pour des PNJ compliqués.",
                 "DamageSection": "Section de dégâts {section}",
                 "DeleteDamageSection": "Delete damage section",
-                "Details": "Action Details",
-                "HealingFormula": "Formule de soin",
                 "Details": "Détails de l'Action",
+                "HealingFormula": "Formule de soin",
                 "OtherFormula": "Autre Formule",
                 "RollNotes": "Notes sur le jet de dés",
                 "RollNotesTooltip": "Les notes de jet de dés sont affichées sur le jet d'action dans la carte dans le Chat. C'est un bon moyen d'y mettre des rappels utiles, particulièrement pour les MJ pour des PNJ compliqués.",
@@ -2297,10 +2295,6 @@
                 "Hint": "Basculer les avantages ou désavantages sur les lancers de dés.",
                 "Name": "Utilisez les avantages et désavantages?"
             },
-            "DecimalSpeed": {
-              "Hint": "Enable decimal numbers for actor speed configuration.",
-              "Name": "Decimal Speed values"
-            },
             "AlwaysShowQuantity": {
                 "Hint": "Indique toujours la quantité des éléments, même si c'est 0 ou 1. Vous devrez rafraîchir votre fenêtre avant que ce changement ne prenne effet.",
                 "Name": "Toujours montrer les quantités"
@@ -2317,10 +2311,6 @@
                 "Hint": "When applying damage to a starship from a chat card, if the damage crossses a Critical Threshold, the Critical Damage Effects (CRB pg. 320) table will automatically be rolled.",
                 "Name": "Automatically roll starship critical damage effects"
             },
-            "HideHostileStarshipCrit": {
-                "Hint": "When posting notifications about starship criticals or thresholds, only post to GM if the ship is a Hostile Token.",
-                "Name": "Hide Hostile Starship Critical Message"
-            },            
             "CombatCards": {
                 "NormalHint": "Modifier les cartes de chat de combat qui doivent être affichées pendant les combat normaux.",
                 "NormalName": "Combat normal",
@@ -2353,6 +2343,10 @@
             "DamageWithAttack": {
                 "Hint": "Faites suivre automatiquement un jet d'attaque par un jet de dégâts.",
                 "Name": "Lancer les dégâts avec l'attaque"
+            },
+            "DecimalSpeed": {
+                "Hint": "Enable decimal numbers for actor speed configuration.",
+                "Name": "Decimal Speed values"
             },
             "DiagonalMovementRule": {
                 "Hint": "Configurer la règle de déplacement diagonal à utiliser pour les jeux de ce système.",
@@ -2405,6 +2399,10 @@
             "GalacticTrade": {
                 "Hint": "Active le sous-système de commerce galactique, ce qui permet d'augmenter de 5 % le nombre maximal de BP d'un navire et d'ajouter des BP à l'inventaire du navire sous forme de crédits.",
                 "Name": "Activer le commerce galactique"
+            },
+            "HideHostileStarshipCrit": {
+                "Hint": "When posting notifications about starship criticals or thresholds, only post to GM if the ship is a Hostile Token.",
+                "Name": "Hide Hostile Starship Critical Message"
             },
             "SFRPGTheme": {
                 "Hint": "Lorsqu'il est activé, quelques ajustements mineurs aux couleurs de Foundry seront apportés pour correspondre au schéma de couleurs de Starfinder.",
