@@ -1,3 +1,21 @@
+# 0.27.1
+This update primarily adds some new data (including more Starfinder Enhanced material) and addresses some bugs that popped up in 0.27.0 and before.
+
+## Core System Improvements
+-
+
+## Bug Fixes
+-
+
+## Data Entry
+
+
+### New Data
+-
+
+### Corrections and Updates
+-
+
 # v0.27.0
 Apologies for the delay in getting this release out, but the team has added a few new maintainers and made some **big** updates and addressed a number of long-standing issues in this one! This includes the first of the Starfinder Enhanced data: enhanced classes and resolve point usage journals. The rest of the endhanced data will follow in the next few updates. Check out the full list of changes below, and remember to please report any bugs or issues you find.
 
