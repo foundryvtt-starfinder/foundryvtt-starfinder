@@ -2,6 +2,11 @@
   "_id": "lifIIsntTbhN09EJ",
   "name": "Frag grenade VII",
   "type": "weapon",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
   "img": "systems/sfrpg/icons/equipment/weapons/frag-grenade.webp",
   "system": {
     "type": "",
@@ -16,8 +21,10 @@
       "condition": "",
       "cost": 1
     },
+    "ammunitionType": "",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "none",
       "value": null
@@ -50,6 +57,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": 1,
       "isOpen": true,
       "storage": [
         {
@@ -89,8 +97,11 @@
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>A fragmentary, or frag, grenade explodes in a cloud of shrapnel.</p>"
     },
@@ -99,10 +110,13 @@
       "units": "",
       "value": ""
     },
+    "equippable": false,
     "equipped": false,
+    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
     "isActive": null,
+    "isEquipment": true,
     "level": 18,
     "modifiers": [],
     "price": 48400,
@@ -195,12 +209,14 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
       "value": 20
     },
+    "rollNotes": "",
     "save": {
       "type": "reflex",
       "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
@@ -208,6 +224,7 @@
     },
     "source": "CRB pg. 179",
     "special": "",
+    "specialMaterials": {},
     "target": {
       "type": "",
       "value": ""

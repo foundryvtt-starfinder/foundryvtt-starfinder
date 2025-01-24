@@ -1,21 +1,169 @@
+# v0.27.0
+Apologies for the delay in getting this release out, but the team has added a few new maintainers and made some **big** updates and addressed a number of long-standing issues in this one! This includes the first of the Starfinder Enhanced data: enhanced classes and resolve point usage journals. The rest of the endhanced data will follow in the next few updates. Check out the full list of changes below, and remember to please report any bugs or issues you find.
+
+Thanks to all the contributors who helped get this update out the door!
+
+## Core System Improvements
+- Complete overhaul of item sheets, splitting the Details tab into subtabs and reorganizing all fields to improve usability by ian612
+- Tech, Magic, Hybrid, and Augmentation items now include the option to add actions
+- Refactor of Modifier toggling and method for propagation to parent objects by LebombJames
+- Update readme version table and to indicate the system is for Starfinder 1st Edition
+- Weapon items now have a toggle to indicate if they are equipment or natural weapons
+- Addition of a `globalThis` property to define the system structure and allow easier extension by modules
+- New system setting added to allow decimal values in actor speeds
+- Addition of missing French translation keys by aldarion-jdr
+- Turn events are implemented on effect items to allow automation for fast healing, burning, etc. by LebombJames
+- The build script was updated to support contributors running Linux or MacOS by levirak
+- Addition of starship combat QoL features automating rolling of critical damage by LebombJames and danimrath
+- Replacement of generic mystery man and item bag default icons for all item and actor types with bespoke ones from game-icons.net
+
+## Bug Fixes
+- Inline check buttons in journals and descriptions fixed
+- Journals have been updated to Foundry v12 formatting
+- Containers on item sheets with a lot of items in them now support scrolling
+- Various fixes to typos and missing localization strings
+- Starship combat initiative updated to include piloting bonus correctly and allow for rolls with no pilot by danimrath
+- Disable dragging of NPC starship crew skills to prevent errors by LebombJames
+- Convert `roll` (deprecated in v12) to `rolls` to trigger `isRoll()` by danimrath
+- Starship roll regex cleanup
+- Starship NPC crew no longer adds additional piloting bonus, since this is baked into statblock by LebombJames and danimrath
+- Migration of `{{#select}}` to `{{#selectOptions}}` handlebars helpers on all sheets by levirak
+- Roll privacy settings chosen in dialog boxes should now be properly applied to chat cards by danimrath and ian612
+- Spell DC modifiers correctly applied to spells regardless of if DC is specified or calculated automatically by danimrath
+- Combat tracker tracked resources (HP, SP, etc.) no longer bleed onto next line when an actor resource is displayed
+- Allow Themes to have blank skill and attribrute
+- Include armor turn modifier on starships
+- The bulk of items contained in weightless containers (like null-space chambers) is now displayed properly
+
+## Data Entry
+A HUGE number of fixes and new data additions have been made to the system compendiums.
+
+### New Data
+- Add Biohack effects by Iankid
+- Miracle Worker Ship Repair, Recalibrate Engine, and Vent Engines starship actions
+- Holographic Mantle and Consciousness Uplink Drive starship components
+- Alkanian species
+- Silent Slayer fighting style and associated features
+- Swarm Dreadlancer starship added
+- Data source codes in contributing.md updated to include recent book releases, full list of AP, One-Shot, and SFS titles added to `data-sources.md` by ian612
+- Crisis Refugee theme added along with theme features for Crisis Refugee, Drift Crashed, Opportunist, Planar Traveler, Spectra Scion, and Void Nomad themes by TerallianHub
+- Dreamer Mystic connection and features by rmorgens
+- Starfinder Enhanced Classes have arrived! New versions of the technomancer, solarian, witchwarper, and envoy have been added along with their class features by Iankid
+
+### Corrections and Updates
+Major heavy lifting on these fixes was done by Iankid and ilya-vasiuk!
+- Various fixes for typos and source string formatting
+- Small fix to how Get 'em works
+- Plasma Guide ammo type fixed
+- Analgesic prices and item levels corrected
+- Skipshot pistol descriptions and properties added
+- Starship combat rules journals updated to add Squadron Combat, Chases, and Narrative Starship Combat by rmorgens
+- Polymorphic weapons updated with new attributes
+- Updates to almost all solarian class features by Iankid
+- Transition all solarian weapon crystals from having damage to applying damage as a modifier by Iankid
+- Add species features and DR/ER to Planar Scion, Ifrit
+- Phentomite token is resized to 1x1 for a medium creature
+- Unleash Magic feature saving throw formula correction
+- Add descriptions for polyplate
+- Migrate DR to the new format for all compendium aliens/npcs by ilya-vasiuk
+- Correction to Fiery Curse ability for Pyric undead creatures
+- Spidersatchel set to have 0 bulk when equipped
+- Fix power armor ammo containers to use modern settings
+- Update mystic connection index to include all connections
+- Change scrap spikes into 4 separate items for different level versions
+- Swoop Hammer damage corrected
+- Heavy Weapon Edge Nanocyte knack adds included Heavy Weapon Specialization
+- Planar Scion, Tiefling features and ER/DR added
+- Snapshot Sphere storage added
+- Sonic Dampener and Filtered Rebreather energy resistance added
+- Shock Pad ammo types corrected
+- Links to Archives of Nethys on Cybernetic Golem and X-Ray Visor Scanner have been replaced with foundry links
+- Colour Out of Space *Susceptible to Force* ability added
+- Cybernetic Zombie self-destruct DC and electricity damage type added
+- Kalo Deepspeaker weapon and ammunition type corrected and bonuses corrected
+- Flechette updated from Goods to Ammunition type
+- Kalo Shredder weapons using Flechette updated to correct ammunition settings
+
+# v0.26.1
+This update addresses a few minor bugs in 0.26.0.
+
+## Core system improvements
+- Using spell item macros now prompts the spell cast dialog and correctly consumes a spell slot.
+- Add a helper method on the `Item` class to directly cast spells
+- `@Check`s now show "Save" or "Check" as appropriate.
+
+## Bug fixes
+- Fix migrations failing on new worlds
+- Fix server-side migrations warning about missing IDs
+- Fix the `Item` constructor signature creating errors for temporary items.
+
+## Data entry
+- Fix Avenging Burst's formula.
+
+# v0.26.0 - V12 Compatibility
+Luckily it's been less time between updates than last time! This update brings V12 compatibility to the system. None of these features are too flashy, but that's the point! Hopefully this update is as nondisruptive as possible.
+
+## Core system improvements
+- Reimplement grid measurement and templates to account for new core settings
+- Update lots of function and class paths to account for new namespaces
+- Migrate rolls to account for the split of synchronous roll evaluation
+- Speed up starship action cache generation
+- Update vision modes to account for vision changes in V12
+- Adjust cook process to account for new server side migrations
+- Implement a custom parser to account for stricter roll grammar
+- Reimplement Token condition HUD
+- Add `htmlField` and `filePathField` validation to `template.json`
+
+## Bug fixes
+- Fix token effect icons not appearing
+- Fix spell slots not being updatable on the sheet
+- Fix item create dialogs not working on sheets
+- Fix some errors with dropping items to sheets
+- Fix deflector shields not applying to TL
+
+
+# v0.25.3
+I don't have a funny intro for this update, I'm just frankly embarrassed it took so long, but regardless, this update fixes some minor but annoying bugs. Enhanced is on the way, I promise.
+
+## Core system improvements
+- New localisations and minor fixes to the German localisation.
+- Include SFRPG classes and methods in the `globalThis` for the convenience of modules
+
+## Bug fixes
+- Fix some cases where the combat difficulty display throws errors.
+- Fix tooltips incorrectly truncating Enhanced class names.
+- Many fixes to starship rolls
+- Fix spell casting using the incorrect spell levels.
+- Fix timed effects not toggling correctly
+- Fix text wrapping on properties/descriptors on item sheets
+- Fix penalties not applying to attack/damage totals on character sheets.
+- Fix modifiers to ability modifiers applying incorrectly, affecting conditions like Sickened
+- Ensure the idempotency of the damage type migration
+- Include `condition` as a valid modifier `subtab` value to solve failed data prep in some cases.
+- Fix locked tooltips getting stuck.
+- Fix new spells having 0/0 uses by default.
+
+## Data entry
+- Change Combat Tracker modifier to constant
+
 # v0.25.2
 This is another quick hotfix to address some issues raised by the new stricter modifier schema, as well as a few other changes picked up in the mean time.
 
-# Bug fixes
+## Bug fixes
 - Fully implement modifier type "Resistance" to stop DataModel errors
 - Re-implement right-click token HUD to overlay
 - Fix Sonic resistance not working
 - Remove redundant logic from encumbrance calculation
 
-# Data entry
+## Data entry
 - Add effect for Get 'Em
 
 # v0.25.1
 This hotfix addresses a few issues with unlinked actors, because of course they were the issue.
 
-# Core system improvements
+## Core system improvements
 - Added a toggle for invalid roll formula warnings, defaulted to off.
-# Bugfixes
+## Bugfixes
 - Fix modifiers on unlinked tokens causing a stack overflow
 - Fix importing NPCs failing
 - Fix hazards breaking the canvas
@@ -29,7 +177,7 @@ The very cool features currently sat on the development branch are here! Hopeful
 Biohackers and Envoys rejoice, for the new Effect item type allows you to apply temporary modifiers to yourself and others with the drop of an item. These Effects are smart, and will expire after their duration has expired -- on exactly the turn you want, and can even reference the origin actor's stats. This also comes with a refactor of conditions and the status effect token HUD. Major thanks to Dosendusche for doing the majority of the heavy lifting for this.
 
 ## Roll code fixes
-Dosendusche's other big contribution this update was a refactor of our roll code. The details are very technical, but this will result in far fewer modifier bugs, roll-time bugs, and miscalculations. 
+Dosendusche's other big contribution this update was a refactor of our roll code. The details are very technical, but this will result in far fewer modifier bugs, roll-time bugs, and miscalculations.
 
 ## Modifier improvements
 Modifiers also use Foundry's `DataModel` class, which basically means they will be more reliable and resistant to incorrect data. Additionally,
@@ -137,12 +285,12 @@ A custom `@Template` enricher has been added, allowing you to place templates fr
 - Fix missing condition description localisations
 - Use the correct starship frame in oliphaunt
 - Updated alternate outcome
-- Updated Reduction plating. 
-- Updated Bulkheads. 
-- Added Data Broker features. 
+- Updated Reduction plating.
+- Updated Bulkheads.
+- Added Data Broker features.
 - Set Nanite Patches as Consumables
-- Added Trap Spotter Exploit. 
-- Added Other to Consumable types. 
+- Added Trap Spotter Exploit.
+- Added Other to Consumable types.
 - Added Ace Pilot features.
 - Re-organised the Tactical Rules journals with the help of folders-in-compendiums, and added more sections from the Tactical Rules chapter of the CRB.
 - Added all remaining power armor, and fixes to existing power armor

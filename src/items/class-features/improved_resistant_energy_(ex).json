@@ -2,6 +2,11 @@
   "_id": "SGi1n3O5ZURJ4iic",
   "name": "Improved Resistant Energy (Ex)",
   "type": "feat",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
   "img": "systems/sfrpg/icons/classes/improved_resistant_energy.webp",
   "system": {
     "type": "",
@@ -9,6 +14,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "",
@@ -17,6 +23,7 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": null
@@ -30,14 +37,55 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>Choose an additional energy type from resistant energy. You gain resistance 15 against both this and your original energy type. You must have the energy shield and resistant energy mechanic tricks to learn this trick.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>Choose an additional energy type from resistant energy. You gain resistance 15 against both this and your original energy type. You must have the @UUID[Compendium.sfrpg.class-features.Item.xcIBsW8VL3DD9rVU]{energy shield} and @UUID[Compendium.sfrpg.class-features.Item.vKizgDpw42XO6BQm]{resistant energy} mechanic tricks to learn this trick.</p>\n<p><em>(You will need to select the appropriate resist types in the modifiers)</em></p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
     "details": {
       "category": "classFeature",
+      "combat": false,
       "specialAbilityType": "ex"
     },
     "duration": {
@@ -45,7 +93,40 @@
       "value": null
     },
     "formula": "",
-    "modifiers": [],
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "30e63fb2-9884-45cb-9c96-e6d75468a712",
+        "name": "Improved Resistant Energy",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": true,
+        "max": 0,
+        "modifier": "15",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "acid"
+      },
+      {
+        "_id": "27a2c572-0ee7-441c-8300-3bcb13364710",
+        "name": "Improved Resistant Energy",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": true,
+        "max": 0,
+        "modifier": "15",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "fire"
+      }
+    ],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
@@ -56,13 +137,14 @@
       "charged": false,
       "value": null
     },
-    "requirements": "14th Level",
+    "requirements": "14th Level (Mechanic)",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "Mechanic",
+    "source": "CRB, p. 73",
     "target": {
       "type": "",
       "value": null

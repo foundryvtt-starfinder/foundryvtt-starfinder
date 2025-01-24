@@ -20,6 +20,7 @@ export async function createItemMacro(data, slot) {
 
     let macroType = data?.macroType || "chatCard";
     if (macroType.includes("feat")) macroType = "activate";
+    if (item.type === "spell") macroType = "cast";
 
     const command = `game.sfrpg.rollItemMacro("${item.uuid}", "${macroType}");`;
     let macro = game.macros.contents.find(m => (m.name === item.name) && (m.command === command));
@@ -63,7 +64,7 @@ export function rollItemMacro(itemUuid, macroType) {
         const item = actor ? actor.items.find(i => i.name === itemUuid) : null;
         if (!item) return ui.notifications.error(`Cannot find the item associated with this item macro.`);
         else {
-            logCompatibilityWarning("You are using an item macro which uses the item's name instead of its UUID. Support for these types of item macros will be removed in a future version of the SFRPG system. It is recommended to delete and re-create this item macro.", {since: "0.25"});
+            foundry.utils.logCompatibilityWarning("You are using an item macro which uses the item's name instead of its UUID. Support for these types of item macros will be removed in a future version of the SFRPG system. It is recommended to delete and re-create this item macro.", {since: "0.25"});
             return item;
         }
 
@@ -81,6 +82,8 @@ export function rollItemMacro(itemUuid, macroType) {
             return item.setActive(!item.isActive());
         case "reload":
             return item.reload();
+        case "cast":
+            return item.useSpell();
         case "use":
             return item.rollConsumable({ event });
         default:

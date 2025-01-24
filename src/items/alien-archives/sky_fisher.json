@@ -2,13 +2,23 @@
   "_id": "GNuUufi0H5BsSvZl",
   "name": "Sky Fisher",
   "type": "npc2",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
+  "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
       "_id": "XyLHzAVMLWGPl66V",
       "name": "Aerial Camouflage (Su)",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
@@ -21,6 +31,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -40,9 +51,14 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>As a swift action, a sky fisher can cause its body to become transparent. While airborne and using this ability, the sky fisher gains the @UUID[Compendium.sfrpg.conditions.aAQ6SW6iK0EVq8Ce]{Staggered} condition, but it also gains a +10 species bonus to Stealth checks and can attempt Stealth checks without cover or concealment.</p>"
+          "value": "<p>As a swift action, a sky fisher can cause its body to become transparent. While airborne and using this ability, the sky fisher gains the @UUID[Compendium.sfrpg.conditions.Item.aAQ6SW6iK0EVq8Ce]{Staggered} condition, but it also gains a +10 species bonus to Stealth checks and can attempt Stealth checks without cover or concealment.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -50,6 +66,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -83,7 +100,12 @@
       "_id": "mPEoBCRoTPDUUmUT",
       "name": "Bite (plus Fisher Poison)",
       "type": "weapon",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -108,6 +130,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -190,6 +213,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -233,7 +257,12 @@
       "_id": "uQmUXyDzek0sxOrR",
       "name": "Tentacle",
       "type": "weapon",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -258,6 +287,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -340,6 +370,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -383,7 +414,12 @@
       "_id": "jiPV9PigZMOY8NwE",
       "name": "Lasso (plus Entangled)",
       "type": "weapon",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -408,6 +444,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -490,6 +527,7 @@
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -533,7 +571,12 @@
       "_id": "MxW126VZIe3iVmFZ",
       "name": "Lasso (Ex)",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
@@ -549,6 +592,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -571,6 +615,11 @@
           "value": "<p>A sky fisher is capable of spinning and casting gooey filaments that target KAC and have a range increment of 50 feet (maximum 250 feet). A target struck by one of these filaments takes the listed amount of nonlethal bludgeoning damage and gains the entangled condition for 1 minute. While entangled, the target can’t move farther from the sky fisher than where it began its turn. As a move action, a sky fisher can attempt a combat maneuver check with a +8 bonus to reposition the target, though only to move the target closer; a sky fisher can lift a Medium or smaller target into the air in this way. A creature can end the entangled condition early with a successful DC 23 Acrobatics check to escape or by dealing at least 10 fire or slashing damage to the filament, severing it (the filament has the same AC as the sky fisher). A sky fisher can detach or remove slack in a filament as a swift action and can maintain up to three filaments at a time.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -578,6 +627,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -611,7 +661,12 @@
       "_id": "pg5e6tFJUYScUHAb",
       "name": "Fisher Poison",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
@@ -627,6 +682,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -649,6 +705,11 @@
           "value": "<ul>\n<li><strong>Type</strong>@UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Poison} (injury)</li>\n<li><strong>Save</strong> Fortitude DC 13</li>\n<li><strong>Track</strong> Strength</li>\n<li><strong>Frequency</strong> 1/round for 6 rounds</li>\n<li><strong>Cure</strong> 1 save</li>\n</ul>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -656,6 +717,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -690,6 +752,7 @@
     "name": "Sky Fisher",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -701,6 +764,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 3,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -721,11 +785,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -739,13 +821,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "src": "systems/sfrpg/icons/default/alien-stare.svg",
+      "tint": "#ffffff"
     },
     "width": 3
   },
@@ -903,7 +989,7 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<section class=\"secret\">\n<h2>Description</h2>\n<p>Sky fishers are aerial ambush predators notorious for casting sticky, anesthetizing filaments with which they reel in their quarry. A sky fisher’s blood contains hemocyanin, which gives the creature a bluish tone. However, it can deoxygenate its blood to turn its body colorless, making the sky fisher sluggish but rendering it mostly translucent as it watches for prey.</p>\n<p>The aberrations have remarkably complex brains that allow them to analyze patterns and even learn speech, which they observe by using their rounded bodies to magnify sounds emanating from the ground below. This predatory intelligence makes sky fishers a major threat to @UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel}ian cities, most of which employ automated defenses to scare off the creatures.</p>\n<p>Though they spend the entirety of their adult lives in the air, sky fishers lay their eggs in saltwater. Their amphibious young spend 7–8 months in the seas before clambering onto nearby rocks—losing the ability to breathe underwater—and then catching the seasonal winds to become airborne.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any sky (@UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel})</p>\n<h3>Organization</h3>\n<p>solitary</p>\n</section>",
+        "value": "<section class=\"secret\">\n<h2>Description</h2>\n<p>Sky fishers are aerial ambush predators notorious for casting sticky, anesthetizing filaments with which they reel in their quarry. A sky fisher’s blood contains hemocyanin, which gives the creature a bluish tone. However, it can deoxygenate its blood to turn its body colorless, making the sky fisher sluggish but rendering it mostly translucent as it watches for prey.</p>\n<p>The aberrations have remarkably complex brains that allow them to analyze patterns and even learn speech, which they observe by using their rounded bodies to magnify sounds emanating from the ground below. This predatory intelligence makes sky fishers a major threat to @UUID[Compendium.sfrpg.setting.Item.mkJGLfpJkvAKLZz3]{Castrovel}ian cities, most of which employ automated defenses to scare off the creatures.</p>\n<p>Though they spend the entirety of their adult lives in the air, sky fishers lay their eggs in saltwater. Their amphibious young spend 7–8 months in the seas before clambering onto nearby rocks—losing the ability to breathe underwater—and then catching the seasonal winds to become airborne.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any sky (@UUID[Compendium.sfrpg.setting.Item.mkJGLfpJkvAKLZz3]{Castrovel})</p>\n<h3>Organization</h3>\n<p>solitary</p>\n</section>",
         "weight": ""
       },
       "class": "",

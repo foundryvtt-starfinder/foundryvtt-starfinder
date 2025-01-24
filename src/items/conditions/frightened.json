@@ -2,6 +2,11 @@
   "_id": "DtwiUWi8dpzkq4tM",
   "name": "Frightened",
   "type": "effect",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
   "img": "systems/sfrpg/icons/conditions/frightened.webp",
   "system": {
     "type": "condition",
@@ -11,9 +16,15 @@
     "activeDuration": {
       "activationTime": 0,
       "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "parent"
+      },
       "unit": "permanent",
       "value": 0
     },
+    "context": {},
     "critical": {
       "effect": "",
       "parts": []
@@ -23,8 +34,10 @@
     },
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.rules.0yJjfyvWg5pDLcVR]{Conditions}</p>\n<hr />\n<p>You flee from the source of your fear as best you can.</p>\n<p>If you are unable to flee, you can instead fight.</p>\n<p>You take a –2 penalty to ability checks, attack rolls, saving throws, and skill checks.</p>\n<p>You can use special abilities, including spells, to flee; indeed, you must use such means if they are the only way you have to escape while you are @UUID[Compendium.sfrpg.conditions.DtwiUWi8dpzkq4tM]{Frightened}.</p>\n<p>If you are already @UUID[Compendium.sfrpg.conditions.DtwiUWi8dpzkq4tM]{Frightened} and become subject to an additional effect that would cause you to be @UUID[Compendium.sfrpg.conditions.DtwiUWi8dpzkq4tM]{Frightened}, the duration of the @UUID[Compendium.sfrpg.conditions.DtwiUWi8dpzkq4tM]{Frightened} condition increases by the duration of the second effect.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.rules.Item.0yJjfyvWg5pDLcVR]{Conditions}</p>\n<hr />\n<p>You flee from the source of your fear as best you can.</p>\n<p>If you are unable to flee, you can instead fight.</p>\n<p>You take a –2 penalty to ability checks, attack rolls, saving throws, and skill checks.</p>\n<p>You can use special abilities, including spells, to flee; indeed, you must use such means if they are the only way you have to escape while you are @UUID[Compendium.sfrpg.conditions.Item.DtwiUWi8dpzkq4tM]{Frightened}.</p>\n<p>If you are already @UUID[Compendium.sfrpg.conditions.Item.DtwiUWi8dpzkq4tM]{Frightened} and become subject to an additional effect that would cause you to be @UUID[Compendium.sfrpg.conditions.Item.DtwiUWi8dpzkq4tM]{Frightened}, the duration of the @UUID[Compendium.sfrpg.conditions.Item.DtwiUWi8dpzkq4tM]{Frightened} condition increases by the duration of the second effect.</p>"
     },
     "enabled": true,
     "modifiers": [
@@ -72,7 +85,9 @@
       }
     ],
     "requirements": "Condition",
+    "showOnToken": true,
     "source": "CRB.276",
-    "sourceActorId": null
+    "sourceActorId": null,
+    "turnEvents": []
   }
 }

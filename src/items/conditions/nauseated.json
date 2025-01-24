@@ -2,6 +2,11 @@
   "_id": "LoRydw1D4bqlbkA2",
   "name": "Nauseated",
   "type": "effect",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
   "img": "systems/sfrpg/icons/conditions/nauseated.webp",
   "system": {
     "type": "condition",
@@ -11,9 +16,15 @@
     "activeDuration": {
       "activationTime": 0,
       "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "parent"
+      },
       "unit": "permanent",
       "value": 0
     },
+    "context": {},
     "critical": {
       "effect": "",
       "parts": []
@@ -23,13 +34,17 @@
     },
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.rules.0yJjfyvWg5pDLcVR]{Conditions}</p>\n<hr />\n<p>You are experiencing stomach distress.</p>\n<p>You can’t attack, cast spells, concentrate on spells, or do anything else requiring attention.</p>\n<p>The only action you can take is a single move action per turn.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.rules.Item.0yJjfyvWg5pDLcVR]{Conditions}</p>\n<hr />\n<p>You are experiencing stomach distress.</p>\n<p>You can’t attack, cast spells, concentrate on spells, or do anything else requiring attention.</p>\n<p>The only action you can take is a single move action per turn.</p>"
     },
     "enabled": true,
     "modifiers": [],
     "requirements": "Condition",
+    "showOnToken": true,
     "source": "CRB.276",
-    "sourceActorId": null
+    "sourceActorId": null,
+    "turnEvents": []
   }
 }

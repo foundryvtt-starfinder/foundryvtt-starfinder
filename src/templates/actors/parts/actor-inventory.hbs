@@ -8,7 +8,7 @@
         <label class="denomination" data-tooltip="{{localize "SFRPG.ActorSheet.Inventory.ItemValue.Tooltip"}}">{{localize "SFRPG.ActorSheet.Inventory.ItemValue.Label"}}</label>
         <label class="denomination currency-value" {{createTippy title="SFRPG.ActorSheet.Inventory.ItemValue.Label" subtitle="SFRPG.ActorSheet.Inventory.ItemValue.Tooltip" tooltips=system.wealth.tooltip}}>{{i18nNumberFormat system.wealth.total}}</label>
         {{#each system.currency as |v k|}}
-        <label class="denomination {{k}}">{{ lookup ../config.currencies k }}</label>
+        <label class="denomination {{k}}">{{sfrpg "currencies" k}}</label>
         <input type="text" name="system.currency.{{k}}" value="{{v}}" data-dtype="Number"/>
         {{/each}}
     </ol>
@@ -43,7 +43,13 @@
 
     <ol class="item-list">
     {{#each section.items as |item iid|}}
-        {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.hbs" ../../this bigItem=true item=item.item children=item.contents}}
+        {{#if ../../isNPC}}
+            {{#if item.item.system.transferrable}}
+                {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.hbs" ../../this bigItem=true item=item.item children=item.contents}}
+            {{/if}}
+        {{else}}
+            {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.hbs" ../../this bigItem=true item=item.item children=item.contents}}
+        {{/if}}
     {{/each}}
     </ol>
 {{/each}}
