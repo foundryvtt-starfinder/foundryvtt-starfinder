@@ -427,12 +427,22 @@
     /* ----------------------------------------- */
     /*  Skills                                   */
     /* ----------------------------------------- */
-	
+
 	/* If hideUntrained is selected, only show skills that are allowed untrained,
 	 * or trained skills that have at least one rank in it. */
 	ul.skills-list.hide-untrained li.skill.trained-only:not(.trained) {
 		display: none;
 	}
+
+    a.option-toggle {
+        width: 18px;
+        flex: 0 0 18px;
+        float: right;
+    }
+
+    a.selected {
+        color: @colorTan;
+    }
 
     ul.skills-list {
         flex: 0 0 192px;
@@ -445,7 +455,6 @@
         div.centered {
             text-align: center;
         }
-		
 
         li.skill {
             height: 22px;
@@ -627,7 +636,7 @@
         .inactive {
             color: @colorTan;
         }
-        
+
         &.crew-list-npc { //Disable mouse-over hover with npc skills as they aren't draggable.
             cursor: default;
         }

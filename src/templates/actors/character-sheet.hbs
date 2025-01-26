@@ -136,7 +136,8 @@
             {{!-- Skills --}}
             <ul class="skills-list {{#if actor.system.options.hideUntrained }} hide-untrained {{/if}}">
                 <h3 class="skill-ranks noborder {{#if (greaterThan system.skillpoints.used system.skillpoints.max)}}red{{/if}}" data-tooltip="<strong>{{localize "SFRPG.ActorSheet.Attributes.Skills.SkillRanks"}}</strong><br>@skillpoints.used<br>@skillpoints.total<br><br>{{#each system.skillpoints.tooltip as |tip|}}{{tip}}<br>{{/each}}">
-                    {{localize "SFRPG.ActorSheet.Attributes.Skills.SkillRanks"}} ({{system.skillpoints.used}} / {{system.skillpoints.max}})
+                    {{localize "SFRPG.ActorSheet.Attributes.Skills.SkillRanks"}} ({{system.skillpoints.used}} / {{system.skillpoints.max}})&nbsp;
+                    <a class="option-toggle {{#unless actor.system.options.hideUntrained}}selected{{/unless}}" data-option-key="hideUntrained" data-tooltip="{{#if actor.system.options.hideUntrained}}{{localize "SFRPG.ActorSheet.Skills.ShowUntrained"}}{{else}}{{localize "SFRPG.ActorSheet.Skills.HideUntrained"}}{{/if}}"><i class="fas fa-filter"></i></a>
                 </h3>
                 <li class="skills-header flexrow">
                     <div class="skill-header-prof"></div>
@@ -163,9 +164,6 @@
                 </li>
                 {{/each}}
                 <li class="flexcol skills-footer">
-				    <div class="form-group">
-						<a class="option-toggle" data-option-key="hideUntrained">{{#if actor.system.options.hideUntrained}}<i class="far fa-check-square">{{else}}<i class="far fa-square">{{/if}}</i> Hide Untrained</a>
-					</div>
                     <div class="form-group">
                         <button id="add-profession" type="button"><i class="fas fa-plus"></i> {{localize "SFRPG.AddProfessionButtonText"}}</button>
                     </div>
